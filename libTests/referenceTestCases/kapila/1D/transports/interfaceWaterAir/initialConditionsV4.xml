@@ -1,0 +1,46 @@
+<?xml version = "1.0" encoding = "UTF-8" standalone = "yes"?>
+<CI>
+    <!-- LIST OF GEOMETRICAL DOMAINS  -->
+    <physicalDomains> 
+        <domain name="left" state="water" type="entireDomain"/>
+        <domain name="right"  state="air" type="halfSpace">
+            <dataHalfSpace axe="x" origin="0.3" direction="positive"/>
+        </domain>
+    </physicalDomains>
+
+    <!-- LIST OF BOUNDARY CONDITIONS -->
+    <boundaryConditions>
+        <boundCond name="CLXm" type="abs" number="1"/>
+        <boundCond name="CLXp" type="abs" number="2"/>
+    </boundaryConditions>
+    
+    <!--  LIST OF STATES  -->
+    <state name="air">
+        <material type="fluide" EOS="IG_air.xml">
+            <dataFluid alpha="0.999999" density="1.0"/>
+        </material>
+        <material type="fluide" EOS="SG_water.xml">
+            <dataFluid alpha="0.000001" density="1000.0"/>
+        </material>
+        <mixture>
+            <dataMix pressure = "1.e5"/>
+            <velocity x="1000." y="0." z="0."/>
+        </mixture>
+        <transport name="color" value="2."/>
+    </state>
+
+    <state name="water">
+        <material type="fluide" EOS="IG_air.xml">
+            <dataFluid alpha="0.000001" density="1.0"/>
+        </material>
+        <material type="fluide" EOS="SG_water.xml">
+            <dataFluid alpha="0.999999" density="1000.0"/>
+        </material>
+        <mixture>
+            <dataMix pressure = "1.e5"/>
+            <velocity x="1000." y="0." z="0."/>
+        </mixture>
+        <transport name="color" value="1."/>
+    </state>
+
+</CI>

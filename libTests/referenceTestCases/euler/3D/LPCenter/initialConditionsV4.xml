@@ -1,0 +1,40 @@
+<?xml version = "1.0" encoding = "UTF-8" standalone = "yes"?>
+<CI>
+    <!-- LIST OF GEOMETRICAL DOMAINS  -->
+    <physicalDomains> 
+        <domain name="base" state="air" type="entireDomain"/>
+        <domain name="zoneLP"  state="sphere" type="Sphere">
+            <dataSphere radius="0.2">
+                <center x="0." y="0." z="0."/>
+            </dataSphere>
+        </domain>
+    </physicalDomains>
+
+    <!-- LIST OF BOUNDARY CONDITIONS -->
+    <boundaryConditions>
+        <boundCond name="CLXm" type="symmetry" number="1" />
+        <boundCond name="CLXp" type="abs" number="2" />
+        <boundCond name="CLYm" type="symmetry" number="3" />
+        <boundCond name="CLYp" type="abs" number="4" />
+        <boundCond name="CLZm" type="symmetry" number="5" />
+        <boundCond name="CLZp" type="abs" number="6" />
+    </boundaryConditions>
+    
+    <!--  LIST OF STATES  -->
+    <state name="air">
+        <material type="fluide" EOS="IG_air.xml">
+            <dataFluid density="1.2" pressure="1.e6">
+                <velocity x="0." y="0." z="0."/>
+            </dataFluid>
+        </material>
+    </state>
+
+    <state name="sphere">
+        <material type="fluide" EOS="IG_air.xml">
+            <dataFluid density="1.2" pressure="1.e5">
+                <velocity x="0." y="0." z="0."/>
+            </dataFluid>
+        </material>
+    </state>
+
+</CI>

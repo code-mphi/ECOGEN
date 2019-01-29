@@ -1,0 +1,13 @@
+<?xml version = "1.0" encoding = "UTF-8" standalone = "yes"?>
+<computationParam>
+	<run>euler3DLPCenter</run>
+	<outputMode format="XML" binary="false"/>
+	<timeControlMode iterations="false">
+		<iterations number="1" iterFreq="1"/>
+		<physicalTime totalTime="1.2e-3" timeFreq="1.2e-5"/>
+	</timeControlMode>
+	<computationControl CFL="0.3"/>
+	<secondOrder>
+		<globalLimiter>vanleer</globalLimiter>
+	</secondOrder>
+</computationParam>

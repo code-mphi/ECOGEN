@@ -1,0 +1,54 @@
+<?xml version = "1.0" encoding = "UTF-8" standalone = "yes"?>
+<ecogen>
+
+  <!-- Euler reference test cases -->
+  <!-- -------------------------- -->
+  <testCase>./libTests/referenceTestCases/euler/1D/transport/positiveVelocity/</testCase>
+  <!-- <testCase>./libTests/referenceTestCases/euler/1D/transport/negativeVelocity/</testCase> -->
+  <!-- <testCase>./libTests/referenceTestCases/euler/1D/shockTubes/HPLeft/</testCase> -->
+  <!-- <testCase>./libTests/referenceTestCases/euler/1D/shockTubes/HPRight/</testCase> -->
+  <!-- <testCase>./libTests/referenceTestCases/euler/2D/transports/rectangleDiagonal/</testCase> -->
+  <!-- <testCase>./libTests/referenceTestCases/euler/2D/HPCenter/</testCase> -->
+  <!-- <testCase>./libTests/referenceTestCases/euler/2D/HPUnstructured/</testCase> -->
+  <!-- <testCase>./libTests/referenceTestCases/euler/2D/nozzles/tankWithShock/</testCase> -->
+  <!-- <testCase>./libTests/referenceTestCases/euler/3D/LPCenter/</testCase> -->
+
+  <!-- Kapila reference test cases -->
+  <!-- --------------------------- -->
+  <!-- <testCase>./libTests/referenceTestCases/kapila/1D/transports/interfaceWaterAir/</testCase> -->
+  <!-- <testCase>./libTests/referenceTestCases/kapila/1D/shockTubes/interfaceWaterAir/</testCase> -->
+  <!-- <testCase>./libTests/referenceTestCases/kapila/1D/shockTubes/epoxySpinel/</testCase> -->
+  <!-- <testCase>./libTests/referenceTestCases/kapila/1D/cavitation/</testCase> -->
+  <!-- <testCase>./libTests/referenceTestCases/kapila/2D/transportWaterSquareInAir/</testCase> -->
+  <!-- <testCase>./libTests/referenceTestCases/kapila/2D/squareWaterExplosion/</testCase> -->
+  <!-- <testCase>./libTests/referenceTestCases/kapila/2D/shockBubble/heliumAir/</testCase> -->
+  <!-- <testCase>./libTests/referenceTestCases/kapila/2D/richtmyerMeshkov/</testCase> -->
+  <!-- <testCase>./libTests/referenceTestCases/kapila/2D/testUnstructured/</testCase> -->
+  <!-- <testCase>./libTests/referenceTestCases/Kapila/AddPhysicalEffects/evap/evapShockTube/</testCase> -->
+  <!-- <testCase>./libTests/referenceTestCases/kapila/AddPhysicalEffects/surfaceTension/squareToCircle/</testCase> -->
+  <!-- <testCase>./libTests/referenceTestCases/kapila/AddPhysicalEffects/surfaceTension/squareToCircleSymmetry/</testCase> -->
+  <!-- <testCase>./libTests/referenceTestCases/kapila/AddPhysicalEffects/surfaceTension/waterCylinderInAir/</testCase> -->
+  <!-- <testCase>./libTests/referenceTestCases/kapila/AddPhysicalEffects/surfaceTension/waterDropletInAir/</testCase> -->
+  <!-- <testCase>./libTests/referenceTestCases/kapila/AddPhysicalEffects/surfaceTension/dropletImpact/</testCase> -->
+  <!-- <testCase>./libTests/referenceTestCases/kapila/AddPhysicalEffects/gravity/</testCase> -->
+  <!-- <testCase>./libTests/referenceTestCases/kapila/3D/unstructured/</testCase> -->
+  <!-- <testCase>./libTests/referenceTestCases/kapila/3D/shockBubble/heliumAir/</testCase> -->
+    
+  <!-- Thermal and Mechanical equilibrium reference test cases -->
+  <!-- ------------------------------------------------------- -->
+  <!-- <testCase>./libTests/referenceTestCases/thermalEq/transports/interfaceAirHelium/</testCase> -->
+  <!-- <testCase>./libTests/referenceTestCases/thermalEq/shockTubes/interfaceWaterAir/</testCase> -->
+  <!-- <testCase>./libTests/referenceTestCases/thermalEq/shockTubes/interfaceDodecane/</testCase> -->
+	
+  <!-- Homogeneous Euler reference test cases -->
+  <!-- -------------------------------------- -->
+  <!-- <testCase>./libTests/referenceTestCases/eulerHomogeneous/shockTubes/</testCase> -->
+
+  <!-- Pressure disequilibrium model reference test cases -->
+  <!-- -------------------------------------------------- -->
+  <!-- <testCase>./libTests/referenceTestCases/multiP/1D/transports/interfaceWaterAir/</testCase> -->
+  <!-- <testCase>./libTests/referenceTestCases/multiP/1D/shockTubes/interfaceWaterAir/</testCase> -->
+  <!-- <testCase>./libTests/referenceTestCases/multiP/1D/shockTubes/epoxySpinel/</testCase> -->
+  <!-- <testCase>./libTests/referenceTestCases/multiP/1D/cavitation/</testCase> -->
+
+</ecogen>

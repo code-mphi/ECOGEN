@@ -1,0 +1,14 @@
+<?xml version = "1.0" encoding = "UTF-8" standalone = "yes"?>
+<computationParam>
+	<run>euler1DTransportPositiveVelocity</run>
+	<outputMode format="XML" binary="false" precision="10"/>
+	<timeControlMode iterations="true">
+		<iterations number="100" iterFreq="10"/>
+		<physicalTime totalTime="3.6e-4" timeFreq="3.6e-5"/>
+	</timeControlMode>
+	<computationControl CFL="0.8"/>
+	<secondOrder>
+		<globalLimiter>superbee</globalLimiter>
+	</secondOrder>
+	<resumeSimulation fileNumber="0"/>
+</computationParam>

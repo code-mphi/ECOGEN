@@ -1,0 +1,6 @@
+<?xml version = "1.0" encoding = "UTF-8" standalone = "yes"?>
+<model>
+	<flowModel name="ThermalEq" numberPhases="2"/>
+	<EOS name="IG_air.xml"/>
+	<EOS name="SG_water300K.xml"/>
+</model>

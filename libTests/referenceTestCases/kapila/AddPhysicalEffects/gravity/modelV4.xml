@@ -1,0 +1,9 @@
+<?xml version = "1.0" encoding = "UTF-8" standalone = "yes"?>
+<model>
+	<flowModel name="Kapila" numberPhases="2" alphaNull="false"/>
+	<EOS name="IG_air.xml"/>
+	<EOS name="SG_water.xml"/>
+	<sourceTerms type="gravity">
+		<gravity x="0." y="-9.81" z="0."/>
+	</sourceTerms>
+</model>

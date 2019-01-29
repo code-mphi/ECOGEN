@@ -1,0 +1,21 @@
+<?xml version = "1.0" encoding = "UTF-8" standalone = "yes"?>
+<computationParam>
+	<run>kapila3DsurfaceTensionWaterDropletInAir</run>
+	<outputMode format="XML" binary="false"/>
+	<!-- <cut1D>
+	    <vertex x="0.37501" y="0." z="0.375"/>
+		<vecDir x="0." y="1" z="0."/>
+	</cut1D>
+	<cut2D>
+	    <vertex x="0.37501" y="0." z="0.375"/>
+		<vecNormal x="0." y="1" z="0."/>
+	</cut2D> -->
+	<timeControlMode iterations="false">
+		<iterations number="10" iterFreq="1"/>
+		<physicalTime totalTime="8.e0" timeFreq="1.e-4"/>
+	</timeControlMode>
+	<computationControl CFL="0.5"/>
+	<secondOrder>
+    	<globalLimiter>minmod</globalLimiter>
+  </secondOrder>
+</computationParam>

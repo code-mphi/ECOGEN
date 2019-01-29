@@ -1,0 +1,11 @@
+<?xml version = "1.0" encoding = "UTF-8" standalone = "yes"?>
+<parametersEOS>
+	<EOS fichier="SG_spinel.xml" type="SG"/>
+	<parameters
+		gamma="1.62"
+		pInf="141.e9"
+		cv="1800.0"
+		energyRef="0."
+		entropyRef="0.">
+	</parameters>
+</parametersEOS>

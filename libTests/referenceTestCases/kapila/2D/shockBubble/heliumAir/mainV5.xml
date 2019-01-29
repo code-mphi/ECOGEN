@@ -1,0 +1,16 @@
+<?xml version = "1.0" encoding = "UTF-8" standalone = "yes"?>
+<computationParam>
+	<run>kapila2DairShockHeliumBubble</run>
+	<outputMode format="XML" binary="false" precision="10"/>
+	<timeControlMode iterations="false">
+		<iterations number="300" iterFreq="30"/>
+		<physicalTime totalTime="700.e-6" timeFreq="700.e-7"/>
+	</timeControlMode>
+	<computationControl CFL="0.8"/>
+	<secondOrder>
+		<globalLimiter>mc</globalLimiter>
+		<globalVolumeFractionLimiter>thinc</globalVolumeFractionLimiter>
+    	<interfaceVolumeFractionLimiter>thinc</interfaceVolumeFractionLimiter>
+	</secondOrder>
+	<!-- <resumeSimulation fileNumber="5"/> -->
+</computationParam>

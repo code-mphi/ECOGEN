@@ -1,0 +1,17 @@
+<?xml version = "1.0" encoding = "UTF-8" standalone = "yes"?>
+<parametersEOS>
+	<EOS fichier="IG_air2.xml" type="IG"/>
+	<parameters
+		gamma="1.4"
+		cv="800" cv_save="717.46"
+		energyRef="0."
+		entropyRef="0.">
+	</parameters>
+	<physicalParameters
+		mu="1.85e-5"     
+		lambda="200.62">
+	</physicalParameters>	
+</parametersEOS>
+
+
+<!-- lambda="0.0262" -->

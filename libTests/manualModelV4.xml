@@ -1,0 +1,132 @@
+---------------------------------------------------
+Typical example for model input file version 4
+---------------------------------------------------
+
+<?xml version = "1.0" encoding = "UTF-8" standalone = "yes"?>
+<model>
+  <flowModel name="Kapila" numberPhases="2" alphaNull="false"/>
+  <EOS name="IG_air.xml"/>
+  <EOS name="SG_water.xml"/>
+</model>
+
+---------------------------------
+REQUIRED computational parameters
+---------------------------------
+
+1) Hydrodynamic flow model
+**************************
+Contains model name and phase number for multiphase models.
+For Kapila's model, the volume fraction can either be null or not and this choice is determined by the parameter alphaNull.
+For single phase model (example : Euler), numberPhases is optionnal and is 1 as default.
+Attribute numberTransports is optionnal and is set to 0 as default.
+Available models are : Euler, Kapila, ThermalEq, EulerHomogeneous.
+%%%%%%%%%%%%%%%%%% << copy between these lines
+<flowModel name="Kapila" numberPhases="2" numberTransports="1" alphaNull="false"/>
+%%%%%%%%%%%%%%%%%% << copy between these lines
+
+2) Equations of states
+**********************
+<EOS> node's number depend on the phase number. Each node contains the name of an EOS file that must be present in the "ECOGEN/libEOS/" folder.
+%%%%%%%%%%%%%%%%%% << copy between these lines
+<EOS name="IG_air.xml"/>
+%%%%%%%%%%%%%%%%%% << copy between these lines
+
+--------------------
+MODELS SPECIFICITIES
+--------------------
+Caution : for EulerHomogeneous, the two attributes for phase number of liquid and vapor phasesmust be added.
+%%%%%%%%%%%%%%%%%% << copy between these lines
+<flowModel name="EulerHomogeneous" liquid="0" vapor="1"/>
+<EOS name="SG_waterLiq.xml"/>
+<EOS name="IG_waterVap.xml"/>
+%%%%%%%%%%%%%%%%%% << copy between these lines
+
+--------------------------
+OPTIONNAL model parameters
+--------------------------
+
+*) Advected variable names
+**************************
+<transport> additionnal node's number depend on the transported variable number. Each node specify the advected variable name. These variables may be used for additionnal physics.
+%%%%%%%%%%%%%%%%%% << copy between these lines
+<transport name="color"/>
+%%%%%%%%%%%%%%%%%% << copy between these lines
+
+*) Additionnal physics (in dev)
+*******************************
+Flow model can be augmented by additionnal physical effects as surface tension, viscosity and conductive heat transfer.
+a) Surface tension
+------------------
+this physical effect needs the name of advected variable used as color function for surface-tension terms as well as surface-tension coefficient in N/m.
+%%%%%%%%%%%%%%%%%% << copy between these lines
+<additionalPhysic type="surfaceTension" >
+  <dataSurfaceTension transport="color" sigma="72.e-3"/>
+</additionalPhysic>
+%%%%%%%%%%%%%%%%%% << copy between these lines
+b) Others : in dev...
+
+*) Symmetry terms
+*****************
+Cylindrical (2D) or spherical (1D) symmetries are implemented.
+a) Cylindrical symmetry (2D)
+----------------------------
+%%%%%%%%%%%%%%%%%% << copy between these lines
+<symmetryTerm type="cylindrical">
+  <dataSymCyl radialAxe="X"/>
+</symmetryTerm>
+%%%%%%%%%%%%%%%%%% << copy between these lines
+b) Spherical symmetry (1D)
+--------------------------
+%%%%%%%%%%%%%%%%%% << copy between these lines
+<symmetryTerm type="spherical">
+  <dataSymSpher radialAxe="X"/>
+</symmetryTerm>
+%%%%%%%%%%%%%%%%%% << copy between these lines
+
+*) Source terms
+***************
+Few source terms are already implemented, it is the case to take into account the gravity effects.
+a) Gravity
+----------
+%%%%%%%%%%%%%%%%%% << copy between these lines
+<sourceTerms type="gravity">
+  <gravity x="0." y="-9.81" z="0."/>
+</sourceTerms>
+%%%%%%%%%%%%%%%%%% << copy between these lines
+b) Heating
+----------
+%%%%%%%%%%%%%%%%%% << copy between these lines
+<sourceTerms type="heating">
+  <dataHeating volumeHeatPower="1.e6"/>
+</sourceTerms>
+%%%%%%%%%%%%%%%%%% << copy between these lines
+b) Moving Reference Frame
+-------------------------
+%%%%%%%%%%%%%%%%%% << copy between these lines
+<sourceTerms type="MRF">
+  <omega x="0." y="0." z="1."/>
+  <timeToOmega tf="1.e-3"/>  <!-- Optional : if activated, the angular velocity increase linearly to omega in during tf -->
+</sourceTerms>
+%%%%%%%%%%%%%%%%%% << copy between these lines
+
+*) Relaxation terms
+*******************
+Some models can be used coupled to relaxation procedure to impose phases equilibriums.
+a) pressures
+--------------------------------------------------
+%%%%%%%%%%%%%%%%%% << copy between these lines
+<relaxation type="P"/>
+%%%%%%%%%%%%%%%%%% << copy between these lines
+b) pressures and temperatures
+--------------------------------------------------
+%%%%%%%%%%%%%%%%%% << copy between these lines
+<relaxation type="PT"/>
+%%%%%%%%%%%%%%%%%% << copy between these lines
+c) pressures, temperatures and chemical potentials
+--------------------------------------------------
+%%%%%%%%%%%%%%%%%% << copy between these lines
+<relaxation type="PTMu">
+  <dataPTMu liquid="SG_waterLiq.xml" vapor="IG_waterVap.xml"/>
+</relaxation>
+%%%%%%%%%%%%%%%%%% << copy between these lines
+c) Others : in dev...

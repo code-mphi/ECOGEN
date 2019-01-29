@@ -1,0 +1,48 @@
+<?xml version = "1.0" encoding = "UTF-8" standalone = "yes"?>
+<CI>
+	<!-- LIST OF GEOMETRICAL DOMAINS  -->
+    <physicalDomains> 
+		<domain name="base" state="leftChamber" type="entireDomain"/>
+		<domain name="HP"  state="rightChamber" type="rectangle">
+			<!-- <dataHalfSpace axe="x" origin="0.5" direction="positive"/> -->
+			<dataRectangle axe1="x" axe2="y" lAxe1="0.3" lAxe2="0.2">
+				<posInferiorVertex x="0.2" y="0." z="0."/>
+			</dataRectangle>
+		</domain>
+	</physicalDomains>
+
+    <!-- LIST OF BOUNDARY CONDITIONS -->
+    <boundaryConditions>
+		<boundCond name="around" type="wall" number="1"/>
+    </boundaryConditions>
+
+	<!--  LIST OF STATES  -->
+	<state name="leftChamber">
+		<material type="fluide" EOS="IG_air.xml">
+			<dataFluid alpha="0.5" density="1.0"/>	
+		</material>
+		<material type="fluide" EOS="SG_water.xml">
+			<dataFluid alpha="0.5" density="1000.0"/>
+		</material>
+		<mixture>
+			<dataMix pressure = "1.e5"/>
+            <velocity x="0." y="0." z="0."/>
+        </mixture>
+		<transport name="color" value="32."/>
+	</state>
+
+	<state name="rightChamber">
+		<material type="fluide" EOS="IG_air.xml">
+			<dataFluid alpha="1.0" density="100.0"/>
+		</material>
+		<material type="fluide" EOS="SG_water.xml">
+			<dataFluid alpha="0.5" density="1000.0"/>	
+		</material>
+		<mixture>
+			<dataMix pressure = "1.e8"/>
+            <velocity x="0." y="0." z="0."/>
+        </mixture>
+		<transport name="color" value="1."/>
+	</state>
+
+</CI>

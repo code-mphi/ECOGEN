@@ -1,0 +1,20 @@
+// Gmsh project created on Mon Sep 08 14:58:00 2014
+k = 0.05;
+Point(1) = {0, 0.8, 0, k};
+Point(2) = {0.1, -1, 0, k};
+Point(3) = {2.3, -0.9, 0, k};
+Point(4) = {0.6, 0, 0, k};
+Point(5) = {1.6, 1.1, 0, k};
+//Line(1) = {4, 3};
+//Line(2) = {2, 3};
+//Line(3) = {1, 2};
+//Line(4) = {4, 5};
+//Line(5) = {5, 1};
+//Line Loop(6) = {1, -2, -3, -4, -5};
+Spline(6) = {5, 4, 3, 2, 1, 5};
+Line Loop(6) = {6};
+Plane Surface(6) = {6};
+//Physical Line(7) = {1, 2, 3, 4, 5};
+Physical Line(1) = {6};
+Physical Surface(2) = {6};
+//Recombine Surface {6};

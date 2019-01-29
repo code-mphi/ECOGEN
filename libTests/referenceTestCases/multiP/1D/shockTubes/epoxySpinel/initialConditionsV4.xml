@@ -1,0 +1,42 @@
+<?xml version = "1.0" encoding = "UTF-8" standalone = "yes"?>
+<CI>
+    <!-- LIST OF GEOMETRICAL DOMAINS  -->
+    <physicalDomains> 
+        <domain name="base" state="chamberLP" type="entireDomain"/>
+        <domain name="HP"  state="chamberHP" type="halfSpace">
+            <dataHalfSpace axe="x" origin="0.6" direction="negative"/>
+        </domain>
+    </physicalDomains>
+
+    <!-- LIST OF BOUNDARY CONDITIONS -->
+    <boundaryConditions>
+        <boundCond name="CLXm" type="abs" number="1"/>
+        <boundCond name="CLXp" type="abs" number="2"/>
+    </boundaryConditions>
+    
+    <!--  LIST OF STATES  -->
+    <state name="chamberLP">
+        <material type="fluide" EOS="SG_epoxy.xml">
+            <dataFluid alpha="0.5954" density="1185.0" pressure="1.e5"/>
+        </material>
+        <material type="fluide" EOS="SG_spinel.xml">
+            <dataFluid alpha="0.4046" density="3622.0" pressure="1.e5"/>
+        </material>
+        <mixture>
+            <velocity x="0." y="0." z="0."/>
+        </mixture>
+    </state>
+
+    <state name="chamberHP">
+        <material type="fluide" EOS="SG_epoxy.xml">
+            <dataFluid alpha="0.5954" density="1185.0" pressure="1.e10"/>
+        </material>
+        <material type="fluide" EOS="SG_spinel.xml">
+            <dataFluid alpha="0.4046" density="3622.0" pressure="1.e10"/>
+        </material>
+        <mixture>
+            <velocity x="0." y="0." z="0."/>
+        </mixture>
+    </state>
+
+</CI>

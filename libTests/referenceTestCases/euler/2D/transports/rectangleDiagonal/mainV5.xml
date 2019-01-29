@@ -1,0 +1,17 @@
+<?xml version = "1.0" encoding = "UTF-8" standalone = "yes"?>
+<computationParam>
+	<run>euler2DTransportRectangleDiagonal</run>
+	<outputMode format="XML" binary="false"/>
+	<cut1D>
+	    <vertex x="0" y="0.0001" z="0.5"/>
+		<vecDir x="1" y="1" z="0"/>
+	</cut1D>
+	<timeControlMode iterations="false">
+		<iterations number="100" iterFreq="10"/>
+		<physicalTime totalTime="3.6e-4" timeFreq="3.6e-5"/>
+	</timeControlMode>
+	<computationControl CFL="0.8"/>
+	<secondOrder>
+		<globalLimiter>superbee</globalLimiter>
+	</secondOrder>
+</computationParam>

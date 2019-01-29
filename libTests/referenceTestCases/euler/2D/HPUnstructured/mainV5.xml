@@ -1,0 +1,17 @@
+<?xml version = "1.0" encoding = "UTF-8" standalone = "yes"?>
+<computationParam>
+	<run>euler2DHPUnstructured</run>
+	<outputMode format="XML" binary="false" precision="15"/>
+	<timeControlMode iterations="true">
+		<iterations number="1000" iterFreq="50"/>
+		<physicalTime totalTime="1e-3" timeFreq="5.e-5"/>
+	</timeControlMode>
+	<computationControl CFL="0.8"/>
+
+	<probe name="capteur">
+		<vertex x="0.7" y="0.75" z="0.05"/>
+		<timeControl acqFreq="1e-5."/>       <!-- if negative or nul, recording at each time step -->
+	</probe>
+	<!-- <resumeSimulation fileNumber="10"/> -->
+
+</computationParam>

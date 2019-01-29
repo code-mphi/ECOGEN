@@ -1,0 +1,51 @@
+<?xml version = "1.0" encoding = "UTF-8" standalone = "yes"?>
+<CI>
+    <!-- LIST OF GEOMETRICAL DOMAINS  -->
+    <physicalDomains> 
+        <domain name="base" state="liquid" type="entireDomain"/>
+        <domain name="zoneGaz"  state="gaz" type="disc">
+            <dataDisc axe1="x" axe2="y" radius="0.6">
+                <center x="1.2" y="0." z="0."/>
+            </dataDisc>
+        </domain>
+        <domain name="zoneGaz2" state="gaz" type="halfSpace">
+            <dataHalfSpace axe="x" origin="1.5" direction="positive"/>
+        </domain>
+    </physicalDomains>
+
+    <!-- LIST OF BOUNDARY CONDITIONS -->
+    <boundaryConditions>
+        <boundCond name="CLXm" type="wall" number="1"/>
+        <boundCond name="CLXp" type="abs" number="2"/>
+        <boundCond name="CLYm" type="wall" number="3"/>
+        <boundCond name="CLYp" type="wall" number="4"/>
+    </boundaryConditions>
+    
+    <!--  LIST OF STATES  -->
+    <state name="liquid">
+        <material type="fluide" EOS="SG_water.xml">
+            <dataFluid alpha="0.999999" density="1000."/>
+        </material>
+        <material type="fluide" EOS="IG_gaz1.xml">
+            <dataFluid alpha="0.000001" density="100."/>
+        </material>
+        <mixture>
+            <dataMix pressure = "1.e5"/>
+            <velocity x="-200." y="0." z="0."/>
+        </mixture>
+    </state>
+
+    <state name="gaz">
+        <material type="fluide" EOS="SG_water.xml">
+            <dataFluid alpha="0.000001" density="1000."/>
+        </material>
+        <material type="fluide" EOS="IG_gaz1.xml">
+            <dataFluid alpha="0.999999" density="100."/>
+        </material>
+        <mixture>
+            <dataMix pressure = "1.e5"/>
+            <velocity x="-200." y="0." z="0."/>
+        </mixture>
+    </state>
+
+</CI>

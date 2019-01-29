@@ -1,0 +1,114 @@
+-------------------------------------------------
+Typical example for main input file version 5
+-------------------------------------------------
+
+<?xml version = "1.0" encoding = "UTF-8" standalone = "yes"?>
+<computationParam>
+  <run>example</run>
+  <outputMode format="XML" binary="false" precision="10"/>
+  <timeControlMode iterations="false">
+    <iterations number="3" iterFreq="1"/>
+    <physicalTime totalTime="8.e-3" timeFreq="8.e-4"/>
+  </timeControlMode>
+  <computationControl CFL="0.8"/>
+</computationParam>
+
+----------------------------------
+REQUIRED computational parameters
+----------------------------------
+
+1) Run name
+***********
+the run name correspond to the created folder name with results (in folder ECOGEN/results/)
+%%%%%%%%%%%%%%%%%% << copy between these lines
+<run>example</run>    
+%%%%%%%%%%%%%%%%%% << copy between these lines
+
+2) Output mode
+**************
+Allow choice for output format
+Implemented format : XML ou GNU
+Binary mode : false (ASCII) or true (binary)
+(Optional) precision of output files (number of digits). If not precised, set as default.
+%%%%%%%%%%%%%%%%%% << copy between these lines
+<outputMode format="XML" binary="false" precision="10"/>
+%%%%%%%%%%%%%%%%%% << copy between these lines
+
+3) Time control mode
+********************
+Choice for simuation time control, two possibilities :
+a) iterations="true" : control the simulation time using iteration number. Output printing frequency is set in iteration number.
+b) iterations="false" : control the simulation time using a physical time in seconds. Output frequency printing is set in physical time in seconds
+%%%%%%%%%%%%%%%%%% << copy between these lines
+<timeControlMode iterations="false">
+  <iterations number="3" iterFreq="1"/>
+  <physicalTime totalTime="8.e-3" timeFreq="8.e-4"/>
+</timeControlMode>
+%%%%%%%%%%%%%%%%%% << copy between these lines
+
+4) CFL criteria (Courant number ratio)
+**************************************
+set a security marge accordingly to numerical scheme stability (real lower than 1.)
+%%%%%%%%%%%%%%%%%% << copy between these lines
+<computationControl CFL="0.8"/>
+%%%%%%%%%%%%%%%%%% << copy between these lines
+
+----------------------------------
+OPTIONNAL computationnal parameters
+----------------------------------
+
+*) Scheme precision order
+*************************
+default (without this xml node), the scheme is first order in time and space. Possible using of a second order scheme in time and space using MUSCL method with TVD limiters.
+Available limiters are : minmod, vanleer, vanalbada, mc, superbee, thinc (only for volume-fraction limiter).
+The choice of the limiters is divided into four parts:
+- global limiter: applied everywhere and on all variables unless it is overwrite by the following optional limiters.
+- interface limiter: applied on all variables but only at the interface location. By default is equal to the global limiter.
+- global volume-fraction limiter: applied everywhere but only on the volume-fraction and transport equations (THINC is only applied on the volume fractions) unless it is overwrite by the interface volume-fraction limiter. By default is equal to the global limiter.
+- interface volume-fraction limiter: applied only at the interface location and on the volume-fraction and transport equations (THINC is only applied on the volume fractions). By default is equal to the interface limiter.
+%%%%%%%%%%%%%%%%%% << copy between these lines
+<secondOrder>
+  <globalLimiter>minmod</globalLimiter>
+  <interfaceLimiter>superbee</interfaceLimiter>                            <!-- optionnal node -->
+  <globalVolumeFractionLimiter>minmod</globalVolumeFractionLimiter>        <!-- optionnal node -->
+  <interfaceVolumeFractionLimiter>thinc</interfaceVolumeFractionLimiter>   <!-- optionnal node -->
+</secondOrder>
+%%%%%%%%%%%%%%%%%% << copy between these lines
+
+*) Resume a simulation
+**********************
+resume a finished computation from the result file number
+%%%%%%%%%%%%%%%%%% << copy between these lines
+<resumeSimulation fileNumber="15"/>
+%%%%%%%%%%%%%%%%%% << copy between these lines
+
+*) 1D output Cut
+****************
+Possibility to extract 1D output cuts from multiD computations. Define a line using a vertex and direction vector.
+Cut results will be placed in the corresponding results folder under GNU format.
+%%%%%%%%%%%%%%%%%% << copy between these lines
+<cut1D>
+  <vertex x="0" y="0.0001" z="0.5"/>
+  <vecDir x="1" y="1" z="0"/>
+</cut1D>
+%%%%%%%%%%%%%%%%%% << copy between these lines
+
+*) 2D output cut
+****************
+Possibility to extract 2D output cuts from 3D computations. Define a plane using a vertex and normal vector.
+Cut results will be placed in the corresponding results folder under GNU format.
+%%%%%%%%%%%%%%%%%% << copy between these lines
+<cut2D>
+  <vertex x="0.51" y="0.51" z="0.51"/>
+  <vecNormal x="1" y="0" z="0"/>
+</cut2D>
+%%%%%%%%%%%%%%%%%% << copy between these lines
+
+*) Probes
+*********
+Adding probes at chosen location in the physical domain. Define a name, a vertex and time recording parameters
+<probe name="capteur1">
+  <vertex x="0.51" y="0.51" z="0.51"/>
+  <timeControl acqFreq="-1."/>       <!-- if negative or nul, recording at each time step -->
+</probe>
+
