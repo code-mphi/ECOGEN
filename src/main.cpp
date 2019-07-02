@@ -32,6 +32,13 @@
 //! \version   1.0
 //! \date      December 7 2017
 
+/*! \mainpage ECOGEN API documentation
+ *
+ * This official API documentation for ECOGEN.
+ *
+ * To begin with ECOGEN, visit the official webSite : https://code-mphi.github.io/ECOGEN/
+ */
+
 #include "Run.h"
 #include "Errors.h"
 #include "libTierces/tinyxml2.h"
