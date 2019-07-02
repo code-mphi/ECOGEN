@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <meta charset="utf-8" />
+  <meta http-equiv="x-ua-compatible" content="ie=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <title>Gallery</title>
+
+  <link rel="stylesheet" href="/ECOGEN/assets/css/styles.css">
+  <link rel="shortcut icon" type="image/png" href="/ECOGEN/assets/images/favicon.png">
+  <link
+    rel="canonical"
+    href="https://code-mphi.github.io/ECOGEN/gallery/"
+  />
+  <link
+    href="https://fonts.googleapis.com/css?family=Open+Sans:400,300,700,800,600"
+    rel="stylesheet"
+    type="text/css"
+  />
+  <link
+    href="https://fonts.googleapis.com/css?family=Muli:400,300"
+    rel="stylesheet"
+    type="text/css"
+  />
+
+</head>
+
+  <body>
+    <header>
+	<div id="bandeau">
+		<div id="logo">
+			<a href="/ECOGEN/" >  
+				<img src="/ECOGEN/assets/images/favicon.png" alt="logo ECOGEN" />
+			</a>
+		</div>
+		<nav>
+	<ul>
+	  
+	  	<li><a href="/ECOGEN/overview/">Overview</a></li>
+	  
+	  	<li><a href="/ECOGEN/gallery/">Gallery</a></li>
+	  
+	  	<li><a href="/ECOGEN/start/">Start</a></li>
+	  
+	  	<li><a href="/ECOGEN/research/">Research</a></li>
+	  
+	  	<li><a href="/ECOGEN/partners/">Partners</a></li>
+	  
+	  	<li><a href="/ECOGEN/services/">Services</a></li>
+	  
+	  	<li><a href="/ECOGEN/help/">Help</a></li>
+	  
+	  <!-- <li><a href="/ECOGEN/blog">Blog</a></li> -->
+	</ul>
+</nav>
+	</div>
+</header>
+
+
+
+    <main>
+		<h1>Gallery</h1>
+		<div>
+	<p>
+		There is a multiple way to use ECOGEN for simulating single or multiphase flows. Herafter are presented some recent applications involving different physical effects. 
+	</p>
+	<article>
+		<h2> Physics of Shock </h2>
+		<p> Shock waves can propagate in matter whatever its physical state :  gaseous, liquid or even solid. They can travel through interfaces or  into a multiphase mixture of materials. Because ECOGEN is devoted to compressible hyperbolic systems of equations, shock dynamics is included whatever the problem is.</p>
+		<div class="gallery">
+			<div class="galleryVideo">
+				Shock wave propagation in ducts is a challenging problem for safety issues. Such studies are performed to improve the safety in confined installation thanks to a better knowledge of the pressure wave characteristics. In this movie,the shock wave propagation in a "Y" bifurcation channel is shown: because of the bifurcation, the amplitude of the incident pressure jumps is expected to decrease in the secondary ducts.
+			</div>
+			<div class="galleryVideo">
+				<video src="/ECOGEN/assets/videos/chocs.webm" controls="" preload="">Sorry, your browser does not support webm video format or video HTML element.	</video>
+				<figcaption>Shock wave propagation in a channel junction (A.Marty courtesy).</figcaption>
+			</div>
+		</div>		
+		<div class="gallery">
+			<div class="galleryVideo">
+				<video src="/ECOGEN/assets/videos/shockHeliumBubble_forFun_highResolution_2.webm" controls="" preload="">Sorry, your browser does not support webm video format or video HTML element.</video>
+				<figcaption>Interaction shockwave  / Helium bubble<br />
+				Top video: Volume fraction <br />
+				Bottom video: Interface position </figcaption>
+			</div>
+			<div class="galleryVideo">
+				This video illustrates the shock/bubble interaction: The bubble contains lighter fluid (He) than the surrounding gas (Air). Richmyer-Meshkov instabilities deforms the interface where the pressure gradients and density gradients generate vorticity. Main parameters of the flow pattern are the acoustic impedance, the speed of sound of both fluids.
+			</div>
+		</div>
+	</article>
+	<hr /> 
+	<article>
+		<h2> Cavitation </h2>
+		<p> The ability to treat cavitation problems is definitely one of the major asset of diffuse interface formulation. Now, thanks to consistent thermodymamic consideration, it is possible to simulate automatially interface appearance / disappearance between a liquid and its vapor without any specific algorithm for interface tracking.</p>
+		<div class="gallery">
+			<div class="galleryVideo">
+				<video src="/ECOGEN/assets/videos/bubbleCollapse.webm" controls="" preload="">Sorry, your browser does not support webm video format or video HTML element.</video>
+				<figcaption>Bubble collapse near a wall. Courtesy of Caltech MEC. </figcaption>
+			</div>
+			<div class="galleryVideo">
+				Collapse of an ellipsoidal microbubble attached to a flat rigid surface for studying minimally invasive treatment of urinary stones. The simulation is 2D axisymmetric. Left panel shows pressure in color overlaid by the volume fraction of gas (upper half) and numerical schlieren of mixture-density gradients (lower half). Right panel shows maximum pressure at the rigid wall.
+			</div>
+		</div>		
+		<div class="gallery">
+			<div class="galleryVideo">
+				This very complex flow shows two majors phenomena due to an high speed bubble of water that impacts a wall (on the left) : a right-moving shock wave is created. One can then observe the typical interaction of a bubble that contains heavy fluid (water) in a lighter fluid (air) with Rychtmyer-Meshkov instabilities. The impact on the wall also creates left-moving expansion waves that leads to  the appearence of cavitation pockets due to the pressure decreasing.
+			</div>				
+			<div class="galleryVideo">
+				<video src="/ECOGEN/assets/videos/rycht.webm" controls="" preload="">Sorry, your browser does not support webm video format or video HTML element.</video>
+				<figcaption>Water/air Rychtmeyer Meshkov instability</figcaption>
+			</div>
+		</div>
+	</article>
+	<hr /> 
+	<article>
+		<h2> Droplet fragmentation </h2>
+		<p> The simulation of droplet fragmentation is of prime interest considering various industrial applications as well as for academic knowledge. The deformation of the droplet is a competition between surface tension and inertial forces (measured by the Weber number) that can lead to the creation of smaller droplets. Surface tension then decides for the resulting droplets sizes. </p>
+		<div class="gallery">
+			<div class="galleryVideo">
+				<video src="/ECOGEN/assets/videos/atomization3D.webm" controls="" preload="">Sorry, your browser does not support webm video format or video HTML element.</video>
+				<figcaption>Fragmentation of a droplet in a high speed flow</figcaption>
+			</div>
+			<div class="galleryVideo">
+				The movie shows a water droplet atomization by the high-speed flow produced by a shock wave at Mach 1.3. Contours, using water volume fraction equal to 10-3 and mixture-velocity-norm colormap (dark red shows strong mixture velocity norms and dark blue shows small ones), are shown to observe filaments and potential reduced-size droplets.
+			</div>	
+		</div>
+		<div class="gallery">
+			<div class="galleryVideo">
+				In this movie, a liquid droplet is moving in a box with perfect solid walls. At the impact on the upper wall the bubble is sliding, deforming then dividing in smaller droplets. Due to the the gravity some small droplets fall down while a droplet is sliding down along the vertical wall. One can observe the rebounds of the droplets as well as the various droplet/droplet interactions leading to coalescence phenomena. 
+			</div>	
+			<div class="galleryVideo">
+				<video src="/ECOGEN/assets/videos/movie_V1.webm" controls="" preload="">Sorry, your browser does not support webm video format or video HTML element.</video>
+				<figcaption>Motion and fragmentation of a droplet in a box with solid walls.<br />
+				Simulation including surface tension effects and gravity.</figcaption>
+			</div>
+		</div>
+	</article>
+
+</div>
+
+    </main>
+    <footer>
+	<div> ECOGEN is developped by  <a  href="https://code-mphi.fr/" target="_blank" > Code-m&Phi; </a> members </div>
+	
+	<div><span class="copy-left">©</span> ECOGEN</div>
+</footer>
+  </body>
+</html>
+

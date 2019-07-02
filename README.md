@@ -1,2 +1,2 @@
-# ECOGEN
-A CFD open source code dedicated to multiphase compressible flows
+# ECOGEN gh-pages
+This is the gh-pages branch files for ECOGEN webSite. SHOULD NOT BE EDITED.
