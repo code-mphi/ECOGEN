@@ -1,0 +1,329 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>MeshV5.xml &mdash; ECOGEN b1.0 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script type="text/javascript" src="_static/jquery.js"></script>
+        <script type="text/javascript" src="_static/underscore.js"></script>
+        <script type="text/javascript" src="_static/doctools.js"></script>
+        <script type="text/javascript" src="_static/language_data.js"></script>
+        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="InitialConditionsV4.xml" href="InitialConditions.html" />
+    <link rel="prev" title="ModelV4.xml" href="Model.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="index.html" class="icon icon-home"> ECOGEN
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                1.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="Introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Start_Chapter.html">Start with ECOGEN</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="UserGuide_Chapter.html">User’s Guide</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="InputFiles_Chapter.html">Input Files</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="Main.html">MainV5.xml</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Model.html">ModelV4.xml</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">MeshV5.xml</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#cartesian-mesh">Cartesian mesh</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#unstructured-mesh">Unstructured mesh</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="InitialConditions.html">InitialConditionsV4.xml</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="Materials.html">Materials</a></li>
+<li class="toctree-l2"><a class="reference internal" href="OutputFiles_Chapter.html">Output Files</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Tutorials_Chapter.html">Tutorials</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="DeveloppersGuide_Chapter.html">Developper’s Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="License.html">License</a></li>
+<li class="toctree-l1"><a class="reference internal" href="zBibliography.html">Bibliography</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">ECOGEN</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="UserGuide_Chapter.html">User’s Guide</a> &raquo;</li>
+        
+          <li><a href="InputFiles_Chapter.html">Input Files</a> &raquo;</li>
+        
+      <li>MeshV5.xml</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/Mesh.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="meshv5-xml">
+<h1>MeshV5.xml<a class="headerlink" href="#meshv5-xml" title="Permalink to this headline">¶</a></h1>
+<p>Input file <em>meshV5.xml</em> is necessary to specify the geometrical characteristics of the computational domain and the kind of mesh used. This file is <strong>mandatory</strong> and must be present in the folder of the current case. The minimalist content of this file is:</p>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; standalone = &quot;yes&quot;?&gt;</span>
+<span class="nt">&lt;mesh&gt;</span>
+  <span class="nt">&lt;type</span> <span class="na">structure=</span><span class="s">&quot;cartesian&quot;</span><span class="nt">/&gt;</span>
+  <span class="nt">&lt;cartesianMesh&gt;</span>
+    <span class="nt">&lt;dimensions</span> <span class="na">x=</span><span class="s">&quot;1.e-1&quot;</span> <span class="na">y=</span><span class="s">&quot;5.e-2&quot;</span> <span class="na">z=</span><span class="s">&quot;1.&quot;</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;numberCells</span> <span class="na">x=</span><span class="s">&quot;50&quot;</span> <span class="na">y =</span><span class="s">&quot;25&quot;</span> <span class="na">z=</span><span class="s">&quot;1&quot;</span><span class="nt">/&gt;</span>
+  <span class="nt">&lt;/cartesianMesh&gt;</span>
+<span class="nt">&lt;/mesh&gt;</span>
+</pre></div>
+</div>
+<p>The  <code class="code xml docutils literal notranslate"><span class="name tag"><span class="pre">&lt;type&gt;</span></span></code> markup is mandatory and specifies via the attribute <code class="code xml docutils literal notranslate"><span class="pre">structure</span></code> the kind of mesh used in the current computation:</p>
+<ul class="simple">
+<li><p><em>cartesian</em>: ECOGEN automatically generates its own Cartesian mesh. See section <a class="reference internal" href="#sec-input-cartesian"><span class="std std-ref">Cartesian mesh</span></a> for details.</p></li>
+<li><p><em>unstructured</em>: a specific external mesh generator (not provide with ECOGEN) must be used to generate the mesh.  See section <a class="reference internal" href="#sec-input-unstructured"><span class="std std-ref">Unstructured mesh</span></a> for details.</p></li>
+</ul>
+<div class="section" id="cartesian-mesh">
+<span id="sec-input-cartesian"></span><h2>Cartesian mesh<a class="headerlink" href="#cartesian-mesh" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;cartesianMesh&gt;</span>
+  <span class="nt">&lt;dimensions</span> <span class="na">x=</span><span class="s">&quot;1.e-1&quot;</span> <span class="na">y=</span><span class="s">&quot;5.e-2&quot;</span> <span class="na">z=</span><span class="s">&quot;1.&quot;</span><span class="nt">/&gt;</span>
+  <span class="nt">&lt;numberCells</span> <span class="na">x=</span><span class="s">&quot;50&quot;</span> <span class="na">y =</span><span class="s">&quot;25&quot;</span> <span class="na">z=</span><span class="s">&quot;1&quot;</span><span class="nt">/&gt;</span>
+<span class="nt">&lt;/cartesianMesh&gt;</span>
+</pre></div>
+</div>
+<p>ECOGEN is able to automatically generate a cartesian mesh according the markup <code class="code xml docutils literal notranslate"><span class="name tag"><span class="pre">&lt;cartesianMesh&gt;</span></span></code> which must contain the two following nodes:</p>
+<ul class="simple">
+<li><p><code class="code xml docutils literal notranslate"><span class="name tag"><span class="pre">&lt;dimensions&gt;</span></span></code>: Specifies the physical dimensions of the computational domain in each physical direction corresponding to the attributes: <code class="code xml docutils literal notranslate"><span class="pre">x</span></code>, <code class="code xml docutils literal notranslate"><span class="pre">y</span></code> and <code class="code xml docutils literal notranslate"><span class="pre">z</span></code> (unit: m (SI)). Values must be real numbers.</p></li>
+<li><p><code class="code xml docutils literal notranslate"><span class="name tag"><span class="pre">&lt;numberCells&gt;</span></span></code>: Specify the number of cells in each direction corresponding to the <code class="code xml docutils literal notranslate"><span class="pre">x</span></code>, <code class="code xml docutils literal notranslate"><span class="pre">y</span></code> and <code class="code xml docutils literal notranslate"><span class="pre">z</span></code> attributes. The values are integer numbers.</p></li>
+</ul>
+<div class="section" id="optional-stretching">
+<h3>Optional Stretching<a class="headerlink" href="#optional-stretching" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;meshStretching&gt;</span>    <span class="c">&lt;!-- Optionnal node --&gt;</span>
+  <span class="nt">&lt;XStretching&gt;</span>
+    <span class="nt">&lt;stretch</span> <span class="na">startAt=</span><span class="s">&quot;0.&quot;</span> <span class="na">endAt=</span><span class="s">&quot;0.5&quot;</span> <span class="na">factor=</span><span class="s">&quot;0.9&quot;</span> <span class="na">numberCells=</span><span class="s">&quot;20&quot;</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;stretch</span> <span class="na">startAt=</span><span class="s">&quot;0.5&quot;</span> <span class="na">endAt=</span><span class="s">&quot;1.&quot;</span> <span class="na">factor=</span><span class="s">&quot;1.1&quot;</span> <span class="na">numberCells=</span><span class="s">&quot;10&quot;</span><span class="nt">/&gt;</span>
+  <span class="nt">&lt;/XStretching&gt;</span>
+<span class="nt">&lt;/meshStretching&gt;</span>
+</pre></div>
+</div>
+<p>Stretching can be set optionally adding the <code class="code xml docutils literal notranslate"><span class="name tag"><span class="pre">&lt;XStretching&gt;</span></span></code> node to the <code class="code xml docutils literal notranslate"><span class="name tag"><span class="pre">&lt;cartesianMesh&gt;</span></span></code> parent markup for X stretching. It should contain one or more <code class="code xml docutils literal notranslate"><span class="name tag"><span class="pre">&lt;stretch&gt;</span></span></code> node(s) equipped with the following attributes:</p>
+<ul class="simple">
+<li><p><code class="code xml docutils literal notranslate"><span class="pre">startAt</span></code>: real number giving the beginning position of the stretched zone.</p></li>
+<li><p><code class="code xml docutils literal notranslate"><span class="pre">endAt</span></code>: real number giving the ending position of the stretched zone.</p></li>
+<li><p><code class="code xml docutils literal notranslate"><span class="pre">factor</span></code>: real number for the stretch factor (lower than 1 for shrinking, greater than 1 for stretching).</p></li>
+<li><p><code class="code xml docutils literal notranslate"><span class="pre">numberCells</span></code>: integer for the cell number attributed to the stretched zone.</p></li>
+</ul>
+<p><strong>Remark:</strong></p>
+<ol class="arabic simple">
+<li><p>Stretching can be set in each directions using <code class="code xml docutils literal notranslate"><span class="name tag"><span class="pre">&lt;YStretching&gt;</span></span></code> and <code class="code xml docutils literal notranslate"><span class="name tag"><span class="pre">&lt;ZStretching&gt;</span></span></code>.</p></li>
+<li><p>For each stretched direction, the sum of stretched zones should exactly recover the entire domain without overlaping, but the number of cell can differ than those precised in the <code class="code xml docutils literal notranslate"><span class="name tag"><span class="pre">&lt;numberCells&gt;</span></span></code> initial markup.</p></li>
+<li><p>A particular attention should be paid to the linking between zones that possibily present a bad quality.</p></li>
+</ol>
+</div>
+<div class="section" id="optional-amr">
+<h3>Optional AMR<a class="headerlink" href="#optional-amr" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;AMR</span> <span class="na">lvlMax=</span><span class="s">&quot;2&quot;</span> <span class="na">criteriaVar=</span><span class="s">&quot;0.2&quot;</span> <span class="na">varRho=</span><span class="s">&quot;true&quot;</span> <span class="na">varP=</span><span class="s">&quot;true&quot;</span> <span class="na">varU=</span><span class="s">&quot;false&quot;</span> <span class="na">varAlpha=</span><span class="s">&quot;false&quot;</span> <span class="na">xiSplit=</span><span class="s">&quot;0.11&quot;</span> <span class="na">xiJoin=</span><span class="s">&quot;0.11&quot;</span><span class="nt">/&gt;</span> <span class="c">&lt;!-- Optionnal node --&gt;</span>
+</pre></div>
+</div>
+<p>An efficient Adaptive Mesh refinement (AMR) technology  is embedded in ECOGEN. To do that <em>meshV5.xml</em> file must content the optional node <code class="code xml docutils literal notranslate"><span class="name tag"><span class="pre">&lt;AMR&gt;</span></span></code> of the <code class="code xml docutils literal notranslate"><span class="name tag"><span class="pre">&lt;cartesianMesh&gt;</span></span></code> markup to define the following attributes:</p>
+<ul class="simple">
+<li><p><code class="code xml docutils literal notranslate"><span class="pre">lvlMax</span></code>: integer to define the maximal number of refinements.</p></li>
+<li><p><code class="code xml docutils literal notranslate"><span class="pre">criteriaVar</span></code>: real number that controls the detection of gradients for the location of the refinement.</p></li>
+<li><p><code class="code xml docutils literal notranslate"><span class="pre">varRho</span></code>, <code class="code xml docutils literal notranslate"><span class="pre">varP</span></code>, <code class="code xml docutils literal notranslate"><span class="pre">varU</span></code>, <code class="code xml docutils literal notranslate"><span class="pre">varAlpha</span></code>: boolean (<em>true</em> or <em>false</em>) to select the flow quantity on which the gradient operator is applied to detect large gradient.</p></li>
+<li><p><code class="code xml docutils literal notranslate"><span class="pre">xiSplit</span></code>, <code class="code xml docutils literal notranslate"><span class="pre">xiJoin</span></code>: normalized real numbers to control if a computational cell, selected by its high gradient value, must be refined or un-refined (values are in the range <em>0-1</em>.).</p></li>
+</ul>
+<p><strong>Remark:</strong></p>
+<p>The global efficiency of the method is greatly depending on the chosen values for the <code class="code xml docutils literal notranslate"><span class="pre">criteriaVar</span></code>, <code class="code xml docutils literal notranslate"><span class="pre">xiSplit</span></code> and <code class="code xml docutils literal notranslate"><span class="pre">xiJoin</span></code> attributes. These values depend on the physical problem and required a real <em>know-how</em>. More details about these criterion values can be found in <a class="reference internal" href="zBibliography.html#schmidmayer2019adaptive" id="id1">[SPD19]</a>.</p>
+</div>
+</div>
+<div class="section" id="unstructured-mesh">
+<span id="sec-input-unstructured"></span><h2>Unstructured mesh<a class="headerlink" href="#unstructured-mesh" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;unstructuredMesh&gt;</span>
+  <span class="nt">&lt;file</span> <span class="na">name=</span><span class="s">&quot;unstructured2D/testUS.msh&quot;</span><span class="nt">/&gt;</span>
+  <span class="nt">&lt;parallel</span> <span class="na">GMSHPretraitement=</span><span class="s">&quot;true&quot;</span><span class="nt">/&gt;</span>  <span class="c">&lt;!-- Optionnal node if multiCPU --&gt;</span>
+<span class="nt">&lt;/unstructuredMesh&gt;</span>
+</pre></div>
+</div>
+<p>When dealing with unstructured meshes, the <code class="code xml docutils literal notranslate"><span class="name tag"><span class="pre">&lt;unstructuredMesh&gt;</span></span></code> markup <strong>must be</strong> present in the <em>meshV5.xml</em> input file and contains the following nodes:</p>
+<ul class="simple">
+<li><p><code class="code xml docutils literal notranslate"><span class="name tag"><span class="pre">&lt;file&gt;</span></span></code>: this <strong>mandatory</strong> node specifies the path of the mesh file via the attribute <code class="code xml docutils literal notranslate"><span class="pre">name</span></code>. The file must be located in the folder <strong>ECOGEN/libMeshes/</strong>.</p></li>
+<li><dl class="simple">
+<dt><code class="code xml docutils literal notranslate"><span class="name tag"><span class="pre">&lt;modeParallele&gt;</span></span></code>: This node is required only if the file mesh is a multi-CPU file. The attribute <code class="code xml docutils literal notranslate"><span class="pre">GMSHPretraitement</span></code> can take the following values:</dt><dd><ul>
+<li><p><em>true</em>: ECOGEN automatically splits the given mesh file in as many as necessary files according to the number of available CPUs.</p></li>
+<li><p><em>false</em>: do not redo the split of the given mesh (which has already been split in a precedent simulation).</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+<p><strong>Remark:</strong></p>
+<ol class="arabic simple">
+<li><p>The attribute <code class="code xml docutils literal notranslate"><span class="pre">GMSHPretraitement</span></code> must be set as true if it is the first run with the given mesh file.</p></li>
+<li><p>In the current version of ECOGEN, only mesh files generated with the opensource <a class="reference external" href="http://gmsh.info/">Gmsh</a>  software under file format <em>version 2</em> can be used.</p></li>
+</ol>
+<p>Please refer to the section <a class="reference internal" href="GeneratingMeshes.html#sec-tuto-generatingmeshes"><span class="std std-ref">Generating Meshes</span></a> for learning how to generate a mesh adapted to ECOGEN.</p>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="InitialConditions.html" class="btn btn-neutral float-right" title="InitialConditionsV4.xml" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="Model.html" class="btn btn-neutral float-left" title="ModelV4.xml" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019, code-mphi
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

@@ -1,0 +1,265 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Input Files &mdash; ECOGEN b1.0 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script type="text/javascript" src="_static/jquery.js"></script>
+        <script type="text/javascript" src="_static/underscore.js"></script>
+        <script type="text/javascript" src="_static/doctools.js"></script>
+        <script type="text/javascript" src="_static/language_data.js"></script>
+        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="MainV5.xml" href="Main.html" />
+    <link rel="prev" title="User’s Guide" href="UserGuide_Chapter.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="index.html" class="icon icon-home"> ECOGEN
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                1.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="Introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Start_Chapter.html">Start with ECOGEN</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="UserGuide_Chapter.html">User’s Guide</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Input Files</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="Main.html">MainV5.xml</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Model.html">ModelV4.xml</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Mesh.html">MeshV5.xml</a></li>
+<li class="toctree-l3"><a class="reference internal" href="InitialConditions.html">InitialConditionsV4.xml</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="Materials.html">Materials</a></li>
+<li class="toctree-l2"><a class="reference internal" href="OutputFiles_Chapter.html">Output Files</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Tutorials_Chapter.html">Tutorials</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="DeveloppersGuide_Chapter.html">Developper’s Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="License.html">License</a></li>
+<li class="toctree-l1"><a class="reference internal" href="zBibliography.html">Bibliography</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">ECOGEN</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="UserGuide_Chapter.html">User’s Guide</a> &raquo;</li>
+        
+      <li>Input Files</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/InputFiles_Chapter.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="input-files">
+<h1>Input Files<a class="headerlink" href="#input-files" title="Permalink to this headline">¶</a></h1>
+<p>The standard XML format is used for ECOGEN input files. This data format is using markups that gives to the input files some interesting flexibility. ECOGEN is using the <a class="reference external" href="http://www.grinninglizard.com/tinyxml2/">TinyXML-2</a>  parser to read/write xml files.</p>
+<p>More information about XML format can be found at: <a class="reference external" href="https://www.w3schools.com/xml/">https://www.w3schools.com/xml/</a></p>
+<p>ECOGEN package includes a sample of test cases. Each of them is independent, ready to use and can also be adapted and enriched to develop a new configuration. The test case to be run is chosen in the main input file: <em>ECOGEN.xml</em>. The minima structure of this file is:</p>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="cp">&lt;?xml version = &quot;1.0&quot; encoding = &quot;UTF-8&quot; standalone = &quot;yes&quot;?&gt;</span>
+<span class="nt">&lt;ecogen&gt;</span>
+  <span class="nt">&lt;testCase&gt;</span>./libTests/referenceTestCases/euler/1D/transport/positiveVelocity/<span class="nt">&lt;/testCase&gt;</span>
+<span class="nt">&lt;/ecogen&gt;</span>
+</pre></div>
+</div>
+<p>In this file, the <code class="code xml docutils literal notranslate"><span class="name tag"><span class="pre">&lt;testCase&gt;</span></span></code> markup indicates the folder containing the test case to be run. It is then possible to run successively several cases by adding as many <code class="code xml docutils literal notranslate"><span class="name tag"><span class="pre">&lt;testCase&gt;</span></span></code> markup as necessary.
+Each folder indicated in a <code class="code xml docutils literal notranslate"><span class="name tag"><span class="pre">&lt;testCase&gt;</span></span></code> markup must contain 4 input files:</p>
+<ul class="simple">
+<li><p><em>mainV5.xml</em></p></li>
+<li><p><em>meshV5.xml</em></p></li>
+<li><p><em>modelV4.xml</em></p></li>
+<li><p><em>initialConditionsV4.xml</em></p></li>
+</ul>
+<p>Additional input files depending on the test case are necessary. They are placed in the following folders:</p>
+<ul class="simple">
+<li><p><strong>ECOGEN/libEOS/</strong>: contains the files defining the material used in the test case.</p></li>
+<li><p><strong>ECOGEN/libMeshes/</strong>: contains the files defining the mesh used in the test case.</p></li>
+</ul>
+<p>In this section the structure of each input file is detailed. This information is also provided in a condensed form in the “handbook” files at the root folder of test cases library <strong>ECOGEN/libTests/</strong>. These files are named and constitute quick-reference manuals:</p>
+<ul class="simple">
+<li><p><em>manualMainV5.xml</em></p></li>
+<li><p><em>manualMeshV5.xml</em></p></li>
+<li><p><em>manualModelV4.xml</em></p></li>
+<li><p><em>manualInitialConditionsV4.xml</em></p></li>
+</ul>
+<div class="toctree-wrapper compound">
+<p class="caption"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="Main.html">MainV5.xml</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Model.html">ModelV4.xml</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Mesh.html">MeshV5.xml</a></li>
+<li class="toctree-l1"><a class="reference internal" href="InitialConditions.html">InitialConditionsV4.xml</a></li>
+</ul>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="Main.html" class="btn btn-neutral float-right" title="MainV5.xml" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="UserGuide_Chapter.html" class="btn btn-neutral float-left" title="User’s Guide" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019, code-mphi
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

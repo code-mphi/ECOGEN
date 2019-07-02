@@ -1,0 +1,292 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Prerequisities &mdash; ECOGEN b1.0 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script type="text/javascript" src="_static/jquery.js"></script>
+        <script type="text/javascript" src="_static/underscore.js"></script>
+        <script type="text/javascript" src="_static/doctools.js"></script>
+        <script type="text/javascript" src="_static/language_data.js"></script>
+        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="User’s Guide" href="UserGuide_Chapter.html" />
+    <link rel="prev" title="Start with ECOGEN" href="Start_Chapter.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="index.html" class="icon icon-home"> ECOGEN
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                1.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="Introduction.html">Introduction</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="Start_Chapter.html">Start with ECOGEN</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Prerequisities</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#installing-prerequisities-on-ubuntu-system">Installing prerequisities on Ubuntu system</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#installing-c-compiler">Installing C++ compiler</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#installing-openmpi">Installing openMPI</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#download">Download</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#compilation-execution-on-bash">Compilation/Execution on bash</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="UserGuide_Chapter.html">User’s Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="DeveloppersGuide_Chapter.html">Developper’s Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="License.html">License</a></li>
+<li class="toctree-l1"><a class="reference internal" href="zBibliography.html">Bibliography</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">ECOGEN</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="Start_Chapter.html">Start with ECOGEN</a> &raquo;</li>
+        
+      <li>Prerequisities</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/Start.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="prerequisities">
+<h1>Prerequisities<a class="headerlink" href="#prerequisities" title="Permalink to this headline">¶</a></h1>
+<p>ECOGEN must be compiled with C++. It also requires a functional system implementation of MPI library (not provided in this package). Depending on your operating system, you can follow the instructions below to set a full open source installation:</p>
+<div class="section" id="installing-prerequisities-on-ubuntu-system">
+<h2>Installing prerequisities on Ubuntu system<a class="headerlink" href="#installing-prerequisities-on-ubuntu-system" title="Permalink to this headline">¶</a></h2>
+<p>ECOGEN required two mandatory components to be installed on your Ubuntu system : a C++ compiler and an effective implementation of MPI.</p>
+<div class="section" id="installing-c-compiler">
+<h3>Installing C++ compiler<a class="headerlink" href="#installing-c-compiler" title="Permalink to this headline">¶</a></h3>
+<p>Nothing is more easy than installing C and C++ compiler on Ubuntu. In your temrminal just enter the following commands:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">sudo apt-get update</span>
+<span class="go">sudo apt-get upgrade</span>
+<span class="go">sudo apt-get install gcc</span>
+<span class="go">sudo apt-get install g++</span>
+<span class="go">sudo apt-get install build-essential</span>
+</pre></div>
+</div>
+<p>More information on the ubuntu doc page <a class="reference external" href="https://doc.ubuntu-fr.org/gcc">https://doc.ubuntu-fr.org/gcc</a></p>
+</div>
+<div class="section" id="installing-openmpi">
+<h3>Installing openMPI<a class="headerlink" href="#installing-openmpi" title="Permalink to this headline">¶</a></h3>
+<p>Dowload the latest stable version of <a class="reference external" href="https://www.open-mpi.org/">openMPI</a> under compressed format. At the time this page is written, it corresponds to the compressed file : openmpi-4.0.1.tar.gz. Uncompresse and move into the directory:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">tar -xvf openmpi-4.0.1.tar.gz</span>
+<span class="go">cd openmpi-4.0.1/</span>
+</pre></div>
+</div>
+<p>Prepare the environnement for using your favorite compiler:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">export CC=gcc</span>
+<span class="go">export CXX=g++</span>
+</pre></div>
+</div>
+<p>Configure and proceed to the installation (you can choose a different directory):
+.. highlight:: console</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">./configure --prefix=/opt/openmpi</span>
+<span class="go">make</span>
+<span class="go">sudo make install</span>
+</pre></div>
+</div>
+<p>Cleaning</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">cd ..</span>
+<span class="go">rm -rf openmpi-4.0.1/</span>
+</pre></div>
+</div>
+<p>Modify the /etc/bash.bashrc by adding the line:</p>
+<p><em>export PATH=/opt/openmpi/bin:$PATH</em></p>
+<p>Then source the file to take into consideration the modifications:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">source /etc/bash.bashrc</span>
+</pre></div>
+</div>
+<p>If the installation succeed you should use the mpicxx command in your terminal. Then proceed to the download step below.</p>
+</div>
+</div>
+</div>
+<div class="section" id="download">
+<h1>Download<a class="headerlink" href="#download" title="Permalink to this headline">¶</a></h1>
+<p>The last ECOGEN version can be downloaded from Git-hub. The source files are available at the following address: <a class="reference external" href="https://github.com/code-mphi/ECOGEN">https://github.com/code-mphi/ECOGEN</a></p>
+</div>
+<div class="section" id="compilation-execution-on-bash">
+<h1>Compilation/Execution on bash<a class="headerlink" href="#compilation-execution-on-bash" title="Permalink to this headline">¶</a></h1>
+<p>Use the Makefile (can be adapted if necessary) to compile ECOGEN sources directly on bash (XX is the number of CPU required for compilation):</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">make -j XX</span>
+</pre></div>
+</div>
+<p>Executing ECOGEN is really easy on bash (XX is the number of CPU required for execution):</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">mpirun -np XX ECOGEN</span>
+</pre></div>
+</div>
+<p>ECOGEN is including a given number of simple prebuild test cases. Each test can be used as a basis for a new one. In the downloaded version, when executing ECOGEN, a simple default test case is running and you should see informations about the test output appering in the terminal output.</p>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="UserGuide_Chapter.html" class="btn btn-neutral float-right" title="User’s Guide" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="Start_Chapter.html" class="btn btn-neutral float-left" title="Start with ECOGEN" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019, code-mphi
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

@@ -1,0 +1,28 @@
+var classFluxEulerHomogeneous =
+[
+    [ "FluxEulerHomogeneous", "classFluxEulerHomogeneous.html#ab243ce410b41307d25c8475e56e77cb8", null ],
+    [ "FluxEulerHomogeneous", "classFluxEulerHomogeneous.html#aea82521b129f507666531bd0f3432c1d", null ],
+    [ "~FluxEulerHomogeneous", "classFluxEulerHomogeneous.html#a3b780b53e15da9957daabe9f071d20f9", null ],
+    [ "addFlux", "classFluxEulerHomogeneous.html#ad96ad38766fad1fa61b3d02d66413215", null ],
+    [ "addNonCons", "classFluxEulerHomogeneous.html#abc90b3c08186ff08f5dfba0346cd0d5c", null ],
+    [ "addTuyere1D", "classFluxEulerHomogeneous.html#ad9e7b0845ea6544a8838436f733fd3ac", null ],
+    [ "buildCons", "classFluxEulerHomogeneous.html#a63b7a290709ebf80b73b388cb5b2eb45", null ],
+    [ "buildPrim", "classFluxEulerHomogeneous.html#a647ff5ae8e54e3da74b5ff8875657b75", null ],
+    [ "correctionEnergy", "classFluxEulerHomogeneous.html#ae0f4235a3a4abba5aa8f29fe082f0762", null ],
+    [ "getEnergyMix", "classFluxEulerHomogeneous.html#a30b1537024a7e7923c3541f7f246fe1f", null ],
+    [ "getMasseMix", "classFluxEulerHomogeneous.html#aafba1f3c9913ce032db2fa9d46182399", null ],
+    [ "getQdm", "classFluxEulerHomogeneous.html#a77cf2d4553b93d7c0190f23a51ac6342", null ],
+    [ "multiply", "classFluxEulerHomogeneous.html#abee8a4966d7c8a25e124c8006d9a5bed", null ],
+    [ "printFlux", "classFluxEulerHomogeneous.html#acf2d78f20a8c588b81c39dd08bfe3dc6", null ],
+    [ "setBufferFlux", "classFluxEulerHomogeneous.html#ae2a861db9633be36cba0eab87a95665f", null ],
+    [ "setCons", "classFluxEulerHomogeneous.html#a9694a199213ee5a27318820c1a168454", null ],
+    [ "setToZero", "classFluxEulerHomogeneous.html#a5e8191318abb9843cb29de8004cd466f", null ],
+    [ "subtractFlux", "classFluxEulerHomogeneous.html#a78b6ffa56d49b9188e349e647deea31e", null ],
+    [ "subtractNonCons", "classFluxEulerHomogeneous.html#af6133ad70574b66d028eba35890e67cf", null ],
+    [ "subtractTuyere1D", "classFluxEulerHomogeneous.html#a75dba6ce7f6fe7587cdec556b1aba39b", null ],
+    [ "ModEulerHomogeneous", "classFluxEulerHomogeneous.html#a261f816364ec6d5b183606afbea0ed7c", null ],
+    [ "m_energ", "classFluxEulerHomogeneous.html#acbcb96a32f1b4666bf3af03d0be7ce2d", null ],
+    [ "m_masse", "classFluxEulerHomogeneous.html#a01adf492e07f2fe1b8cd5d66549afa26", null ],
+    [ "m_model", "classFluxEulerHomogeneous.html#a34542a881ef4f05901ff326441387942", null ],
+    [ "m_qdm", "classFluxEulerHomogeneous.html#ace3ac707ffb1ba963c137342c9de06e4", null ]
+];

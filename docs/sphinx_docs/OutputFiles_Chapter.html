@@ -1,0 +1,272 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Output Files &mdash; ECOGEN b1.0 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script type="text/javascript" src="_static/jquery.js"></script>
+        <script type="text/javascript" src="_static/underscore.js"></script>
+        <script type="text/javascript" src="_static/doctools.js"></script>
+        <script type="text/javascript" src="_static/language_data.js"></script>
+        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Tutorials" href="Tutorials_Chapter.html" />
+    <link rel="prev" title="Materials" href="Materials.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="index.html" class="icon icon-home"> ECOGEN
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                1.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="Introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Start_Chapter.html">Start with ECOGEN</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="UserGuide_Chapter.html">User’s Guide</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="InputFiles_Chapter.html">Input Files</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Materials.html">Materials</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Output Files</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#using-gnu-format">Using GNU format</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#xml-vtk-file-format">XML VTK file format</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#saving-input-files">Saving input files</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#screen-output">Screen output</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="Tutorials_Chapter.html">Tutorials</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="DeveloppersGuide_Chapter.html">Developper’s Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="License.html">License</a></li>
+<li class="toctree-l1"><a class="reference internal" href="zBibliography.html">Bibliography</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">ECOGEN</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="UserGuide_Chapter.html">User’s Guide</a> &raquo;</li>
+        
+      <li>Output Files</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/OutputFiles_Chapter.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="output-files">
+<h1>Output Files<a class="headerlink" href="#output-files" title="Permalink to this headline">¶</a></h1>
+<p>Writing the result files is done according the user’s choice in <em>mainV5.xml</em> INPUT FILE of the current test (see section <a class="reference internal" href="Main.html#sec-input-main"><span class="std std-ref">MainV5.xml</span></a>). For each run, the results are recorded in the specified folder in <strong>ECOGEN/results/XXX/</strong> where XX is the test case <em>name</em>.
+One can select the following format:</p>
+<ul class="simple">
+<li><p><em>GNU</em>: Format in ASCII, results are given in column.</p></li>
+<li><p><em>XML</em>: VTK file format (ASCII or binary).</p></li>
+</ul>
+<p>The name of the results files follows the rules:</p>
+<p>result(format)_CPU(proc)_AMR(niveau)_TIME(instant). (ext)</p>
+<p>that can select results files according:</p>
+<ul class="simple">
+<li><p>(format)      : data format (empty for ASCII, B64 for binary).</p></li>
+<li><p>(instant)     : time of writing results (depends on the selected frequency for writing.</p></li>
+<li><p>(niveau)      : AMR level (in the case of an AMR simulation).</p></li>
+<li><p>(proc)        : the number of the processor where the results are from (in the case of a parallel simulation).</p></li>
+<li><p>(ext)         : kind of mesh.</p></li>
+</ul>
+<div class="section" id="using-gnu-format">
+<h2>Using GNU format<a class="headerlink" href="#using-gnu-format" title="Permalink to this headline">¶</a></h2>
+<p>This format lead to results files with the (ext)=out extension. This format in colon is very useful for a quick visualization of the results when the freeware gnuplot  or any other tool. When this format is selected, ECOGEN automatically creates a script file visualisation.gnu at the root of the result folder. This allows a very quick and efficient use for 1D runs.</p>
+</div>
+<div class="section" id="xml-vtk-file-format">
+<h2>XML VTK file format<a class="headerlink" href="#xml-vtk-file-format" title="Permalink to this headline">¶</a></h2>
+<p>ECOGEN can provide output using XML files in VTK file format (ASCII or BINARY). Writing files according VTK file format leads to files with the extension:</p>
+<ul class="simple">
+<li><p>(ext)=vtr     : cartesian mesh.</p></li>
+<li><p>(ext)=vtu     : unstructured mesh.</p></li>
+</ul>
+<p>ECOGEN also produces a file named <em>collection.pvd</em> in order to load only one pack of files when the software PARAVIEW is used.</p>
+</div>
+<div class="section" id="saving-input-files">
+<h2>Saving input files<a class="headerlink" href="#saving-input-files" title="Permalink to this headline">¶</a></h2>
+<p>In addition to the results, a copy of the INPUT FILES of the current simulation is done in the subfolder <strong>ECOGEN/results/dossierResExemple/savesEntrees/</strong> to ensure a safe reproduction of the results.</p>
+</div>
+<div class="section" id="screen-output">
+<h2>Screen output<a class="headerlink" href="#screen-output" title="Permalink to this headline">¶</a></h2>
+<p>In real time, some data are available during the simulation directly at the terminal screen as soon as ECOGEN starts. hereafter an example of a screenshot:</p>
+<p>One reads:</p>
+<ul class="simple">
+<li><p>number of the results files.</p></li>
+<li><p>number of the last timestep.</p></li>
+<li><p>Real time in the simulation.</p></li>
+<li><p>Value of the last timestep.</p></li>
+<li><p>CPU time since the beginning of the simulation.</p></li>
+</ul>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="Tutorials_Chapter.html" class="btn btn-neutral float-right" title="Tutorials" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="Materials.html" class="btn btn-neutral float-left" title="Materials" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019, code-mphi
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

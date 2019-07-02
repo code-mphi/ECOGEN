@@ -1,0 +1,274 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>User’s Guide &mdash; ECOGEN b1.0 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script type="text/javascript" src="_static/jquery.js"></script>
+        <script type="text/javascript" src="_static/underscore.js"></script>
+        <script type="text/javascript" src="_static/doctools.js"></script>
+        <script type="text/javascript" src="_static/language_data.js"></script>
+        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Input Files" href="InputFiles_Chapter.html" />
+    <link rel="prev" title="Prerequisities" href="Start.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="index.html" class="icon icon-home"> ECOGEN
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                1.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="Introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Start_Chapter.html">Start with ECOGEN</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">User’s Guide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="InputFiles_Chapter.html">Input Files</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Materials.html">Materials</a></li>
+<li class="toctree-l2"><a class="reference internal" href="OutputFiles_Chapter.html">Output Files</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Tutorials_Chapter.html">Tutorials</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="DeveloppersGuide_Chapter.html">Developper’s Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="License.html">License</a></li>
+<li class="toctree-l1"><a class="reference internal" href="zBibliography.html">Bibliography</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">ECOGEN</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html">Docs</a> &raquo;</li>
+        
+      <li>User’s Guide</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/UserGuide_Chapter.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="user-s-guide">
+<span id="chap-userguide"></span><h1>User’s Guide<a class="headerlink" href="#user-s-guide" title="Permalink to this headline">¶</a></h1>
+<p>This user’s guide is for the version 1.0 of ECOGEN package: ECOGEN_V1.0.zip. The package is available on the permanent link: <a class="reference external" href="https://github.com/code-mphi/ECOGEN">https://github.com/code-mphi/ECOGEN</a>.</p>
+<p>The package includes several files or folders organized as described below:</p>
+<ul class="simple">
+<li><p>ECOGEN/src/ folder including 254 C++ source files in 23 subfolders.</p></li>
+<li><p>ECOGEN/libMeshes/ folder including examples of unstructured meshes in <em>.geo</em> format (gmsh files version 2).</p></li>
+<li><p>ECOGEN/libEOS/ folder including some possible parameters for Ideal Gas or Stiffened Gas Equation of State in XML files.</p></li>
+<li><dl class="simple">
+<dt>ECOGEN/libTests folder including:</dt><dd><ul>
+<li><p>ECOGEN/libTests/referenceTestCases/ folder organized in a test cases library according the flow model (Euler Equations ECOGEN solver, Kapila’s model for multiphase flow ECOGEN solver, Homogeneous Euler Equation ECOGEN solver, etc.)</p></li>
+<li><p>4 quick-manual XML files to create a new flow calculation with ECOGEN.</p></li>
+<li><p>1 reporting file for test cases.</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><p>ECOGEN.xml main entry file to select running cases.</p></li>
+<li><p>Makefile: for compilation in Unix environment. This file may require some adaptation to the user’s environment.</p></li>
+<li><p>LICENSE, COPYRIGHT and AUTHORS: Information files about authors and licensing.</p></li>
+<li><p>README_Developer: Information files for developers.</p></li>
+<li><p>ECOGEN_V1.0_userGuide.pdf: The present user’s guide for ECOGEN. Include full description of input and output files to proceed to a run using ECOGEN.</p></li>
+</ul>
+<p>ECOGEN should be compiled using a C++ compiler. It also required a functional system implementation of MPI library (not provided in this package). For prerequisities and installation, see the corresponding chapter <a class="reference internal" href="Start_Chapter.html#chap-start"><span class="std std-ref">Start with ECOGEN</span></a></p>
+<p>ECOGEN settings are managed via INPUT FILES only. The global INPUT FILES and OUTPUT FILES structure is depicted in <a class="reference internal" href="#fig-userguide-overview"><span class="std std-numref">Fig. 2</span></a>.</p>
+<div class="figure align-default" id="id1">
+<span id="fig-userguide-overview"></span><img alt="_images/overview.png" src="_images/overview.png" />
+<p class="caption"><span class="caption-number">Fig. 2 </span><span class="caption-text">Structure of input and output files in ECOGEN</span><a class="headerlink" href="#id1" title="Permalink to this image">¶</a></p>
+</div>
+<div class="toctree-wrapper compound">
+<p class="caption"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="InputFiles_Chapter.html">Input Files</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="Main.html">MainV5.xml</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Model.html">ModelV4.xml</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Mesh.html">MeshV5.xml</a></li>
+<li class="toctree-l2"><a class="reference internal" href="InitialConditions.html">InitialConditionsV4.xml</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="Materials.html">Materials</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="Materials.html#ideal-gas">Ideal Gas</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Materials.html#stiffened-gas">Stiffened Gas</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="OutputFiles_Chapter.html">Output Files</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="OutputFiles_Chapter.html#using-gnu-format">Using GNU format</a></li>
+<li class="toctree-l2"><a class="reference internal" href="OutputFiles_Chapter.html#xml-vtk-file-format">XML VTK file format</a></li>
+<li class="toctree-l2"><a class="reference internal" href="OutputFiles_Chapter.html#saving-input-files">Saving input files</a></li>
+<li class="toctree-l2"><a class="reference internal" href="OutputFiles_Chapter.html#screen-output">Screen output</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="Tutorials_Chapter.html">Tutorials</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="GeneratingMeshes.html">Generating Meshes</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="InputFiles_Chapter.html" class="btn btn-neutral float-right" title="Input Files" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="Start.html" class="btn btn-neutral float-left" title="Prerequisities" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019, code-mphi
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

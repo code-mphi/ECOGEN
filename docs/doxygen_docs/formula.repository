@@ -1,0 +1,84 @@
+\form#0:$\rho $
+\form#1:$H_{total} = \epsilon (\rho, p) + \frac{p}{\rho} +\frac{1}{2}u^2 $
+\form#2:$ \mu $
+\form#3:$ \lambda $
+\form#4:$\alpha = 0 $
+\form#5:$ \gamma, \; c_v, \; e_{ref}, s_{ref}$
+\form#6:$ \neq 4$
+\form#7:$ T(\rho, p) = \frac{p}{\rho c_v (\gamma-1)}$
+\form#8:$\rho$
+\form#9:$ \epsilon (\rho, p) = \frac{p}{\rho \ (\gamma-1)} \ + \ \epsilon_{ref}$
+\form#10:$\epsilon$
+\form#11:$ p(\rho, \epsilon) = (\gamma-1)\rho(\epsilon - \epsilon_{ref}) $
+\form#12:$ \rho(p, T) = \frac{p}{T \ c_v \ (\gamma-1)}\ $
+\form#13:$ c(p, \rho) = \sqrt{ \frac{\gamma \ p}{\rho}} $
+\form#14:$ s(T, p) = c_v \ ln \left( \frac{T^\gamma} { p^\frac{\gamma}{(\gamma-1)} } \right)+s_{ref} $
+\form#15:$ p_i $
+\form#16:$ \rho_i $
+\form#17:$ p_f = p_i \left( \frac{\rho_f}{\rho_i} \right) ^\gamma $
+\form#18:$ \rho_f $
+\form#19:$ p_f = p_i \frac{ (\gamma+1)*\rho_f - (\gamma-1)*\rho_i }{ (\gamma+1)*\rho_i-(\gamma-1)*\rho_f } $
+\form#20:$ (p_i) $
+\form#21:$ (\rho_i ) $
+\form#22:$ \rho_f = \rho_i \left( \frac{p_f}{ p_i}\right) ^\frac{1}{\gamma} $
+\form#23:$ \left. \frac{\partial \rho}{\partial p} \right)_s = \frac{\rho_f}{ \gamma \ p_f} $
+\form#24:$ p_f $
+\form#25:$ \rho_f =\rho_i\frac{ (\gamma + 1)*p_f + (\gamma - 1)*p_i}{(\gamma - 1)p_f +(\gamma + 1)p_i) }$
+\form#26:$ \left. \frac{\partial \rho}{\partial p} \right)_Hug = \frac{4\gamma \rho_i \ p_i}{ \left( (\gamma - 1)p_f +(\gamma + 1)p_i \right) ^2} $
+\form#27:$ h(p_f,{\rho_f})= \frac{\gamma}{(\gamma-1)}\frac{p_f}{\rho_f} +e_{ref} $
+\form#28:$ \frac{dh}{dp}=\frac{\gamma}{(\gamma-1)}\frac{ \rho_f - p_f \frac{d\rho}{dp} }{\rho_f^2} $
+\form#29:$\frac{d\rho}{dp}$
+\form#30:$T_{sat}$
+\form#31:$\frac{d T_{sat}}{d p}$
+\form#32:$ \rho(p, T_{sat}) = \frac{p}{T_{sat} \ c_v \ (\gamma-1)}\ $
+\form#33:$\frac{d \rho}{d p} = \left. \frac{\partial \rho}{\partial p} \right)_{T_{sat}} + \left. \frac{\partial \rho}{\partial T_{sat} } \right)_p \frac{d T_{sat}}{d p} =\frac{(\gamma-1)c_v\left(T_{sat} - p\frac{d T_{sat}}{d p}\right) }{\left((\gamma-1)c_vT_{sat}\right)^2 }$
+\form#34:$ \rho $
+\form#35:$\frac{d \rho}{d p}$
+\form#36:$ \rho\epsilon(p, \rho) = \frac{p}{(\gamma-1)} +\rho\epsilon_{ref}$
+\form#37:$ \frac{d \rho\epsilon}{d p} =\left. \frac{\partial \rho\epsilon}{\partial p} \right)_{\rho} + \left. \frac{\partial \rho\epsilon}{\partial\rho } \right)_p \frac{d \rho}{d p} = \frac{1}{(\gamma-1)} +\frac{d \rho}{d p}\epsilon_{ref} $
+\form#38:$ \frac{\gamma p_{\infty}}{(\gamma-1)} = 0 \;for\; Ideal\; Gas$
+\form#39:$ \epsilon_{ref} $
+\form#40:$ \frac{1}{(\gamma-1)}$
+\form#41:$ v= (h - \epsilon_{ref})\frac{(\gamma-1)}{\gamma p} $
+\form#42:$ h=\epsilon +pv $
+\form#43:$ \left. \frac{\partial v}{\partial p} \right)_h = - \frac{(\gamma-1)(h-\epsilon_{ref})}{\gamma p^2} $
+\form#44:$ \left. \frac{\partial v}{\partial h} \right)_p = \frac{(\gamma-1)}{\gamma p} $
+\form#45:$ 10^{-15} $
+\form#46:$ errors $
+\form#47:$ " :\;too\;low\;pressure \;in\; EosIG\;"$
+\form#48:$ if \; p < 10^{-15} \; then \; p= 10^{-15} $
+\form#49:$ \gamma $
+\form#50:$ c_v $
+\form#51:$ \ s_{ref} $
+\form#52:$ \ "IG" $
+\form#53:$ \gamma, \; p_{infty}, \; c_v, \; e_{ref}, s_{ref}$
+\form#54:$ \neq 5$
+\form#55:$ T(\rho, p) = \frac{p+p_{\infty}}{\rho c_v (\gamma-1)}$
+\form#56:$ \epsilon (\rho, p) = \frac{p + \gamma p_{\infty}}{\rho \ (\gamma-1)} \ + \ \epsilon_{ref} $
+\form#57:$ p(\rho, \epsilon) = (\gamma-1)\rho(\epsilon - \epsilon_{ref}) - \gamma p_{\infty}$
+\form#58:$ \rho(p, T) = \frac{p + \gamma p_{\infty} }{T \ c_v \ (\gamma-1)}\ $
+\form#59:$ c(p, \rho) = \sqrt{ \frac{\gamma \ (p+p_{\infty})}{\rho}} $
+\form#60:$ s(T, p) = c_v \ ln \left( \frac{T^\gamma} { (p+p_{\infty})^\frac{\gamma}{(\gamma-1)} } \right)+s_{ref} $
+\form#61:$ p_f = (p_i+p_{\infty}) \left( \frac{\rho_f}{\rho_i} \right) ^\gamma -p_{\infty} $
+\form#62:$ p_f = (p_i+p_{\infty}) \frac{ (\gamma+1)*\rho_f - (\gamma-1)*\rho_i }{ (\gamma+1)*\rho_i-(\gamma-1)*\rho_f } -p_{\infty} $
+\form#63:$ \rho_f = \rho_i \left( \frac{p_f+p_{\infty}}{ p_i+p_{\infty}}\right) ^\frac{1}{\gamma} $
+\form#64:$ \left. \frac{\partial \rho}{\partial p} \right)_s = \frac{\rho_f}{ \gamma \ (p_f+p_{\infty})} $
+\form#65:$ \rho_f =\rho_i\frac{ (\gamma + 1)*(p_f+p_{\infty}) + (\gamma - 1)*(p_i+p_{\infty})}{(\gamma - 1)(p_f+p_{\infty}) +(\gamma + 1)(p_i+p_{\infty})) }$
+\form#66:$ \left. \frac{\partial \rho}{\partial p} \right)_Hug = \frac{4\gamma \rho_i \ (p_i+p_{\infty})}{ \left( (\gamma - 1)(p_f+p_{\infty}) +(\gamma + 1)(p_i+p_{\infty}) \right) ^2} $
+\form#67:$ h(p_f,{\rho_f})= \frac{\gamma}{(\gamma-1)}\frac{p_f+p_{\infty}}{\rho_f} +e_{ref} $
+\form#68:$ \frac{dh}{dp}=\frac{\gamma}{(\gamma-1)}\frac{ \rho_f - (p_f+p_{\infty}) \frac{d\rho}{dp} }{\rho_f^2} $
+\form#69:$ \rho(p, T_{sat}) = \frac{p+p_{\infty}}{T_{sat} \ c_v \ (\gamma-1)}\ $
+\form#70:$\frac{d \rho}{d p} = \left. \frac{\partial \rho}{\partial p} \right)_{T_{sat}} + \left. \frac{\partial \rho}{\partial T_{sat} } \right)_p \frac{d T_{sat}}{d p} =\frac{(\gamma-1)c_v\left(T_{sat} - (p+p_{\infty})\frac{d T_{sat}}{d p}\right) }{\left((\gamma-1)c_vT_{sat}\right)^2 }$
+\form#71:$ \rho\epsilon(p, \rho) = \frac{p+p_{\infty}}{(\gamma-1)} +\rho\epsilon_{ref}$
+\form#72:$ \frac{d \rho\epsilon}{d p} =\left. \frac{\partial \rho\epsilon}{\partial p} \right)_{\rho} + \left. \frac{\partial \rho\epsilon}{\partial\rho } \right)_p = \frac{1}{(\gamma-1)} +\frac{d \rho}{d p}\epsilon_{ref} $
+\form#73:$ \frac{\gamma p_{\infty}}{(\gamma-1)} $
+\form#74:$ v= (h - \epsilon_{ref})\frac{(\gamma-1)}{\gamma (p+p_{\infty})} $
+\form#75:$ \left. \frac{\partial v}{\partial p} \right)_h = - \frac{(\gamma-1)(h-\epsilon_{ref})}{\gamma (p+p_{\infty})^2} $
+\form#76:$ \left. \frac{\partial v}{\partial h} \right)_p = \frac{(\gamma-1)}{\gamma (p+p_{\infty})} $
+\form#77:$ -(1. - 10^{-15})*p_{\infty} + 10^{-15} $
+\form#78:$ " :\;too\;low\;pressure \;in\; EosSG\;"$
+\form#79:$ if \; p < -(1. - 10^{-15})*p_{\infty} + 10^{-15} \; then \; p= -(1. - 10^{-15})*p_{\infty} + 10^{-15} $
+\form#80:$ p_{\infty}$
+\form#81:$ p_{\infty} $
+\form#82:$ \ "SG" $
+\form#83:\[ \frac{U^{n+1}_i-U^{n}_i}{\Delta t} = -\sum_{faces} \vec{F}^*_f \cdot \vec{n}_f \]
