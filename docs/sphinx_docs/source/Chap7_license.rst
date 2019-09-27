@@ -1,3 +1,5 @@
+.. _Sec:Licence:
+
 License
 =======
 

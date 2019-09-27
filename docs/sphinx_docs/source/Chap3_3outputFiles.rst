@@ -1,3 +1,5 @@
+.. _Sec:IO:output:
+
 Output Files
 ============
 
@@ -9,13 +11,13 @@ One can select the following format:
 
 The name of the results files follows the rules:
 
-result(format)_CPU(proc)_AMR(niveau)_TIME(instant). (ext)
+result(format)_CPU(proc)_AMR(level)_TIME(instant). (ext)
 
 that can select results files according:
 
 - (format)	: data format (empty for ASCII, B64 for binary).
 - (instant)	: time of writing results (depends on the selected frequency for writing.
-- (niveau) 	: AMR level (in the case of an AMR simulation).
+- (level) 	: AMR level (in the case of an AMR simulation).
 - (proc) 	: the number of the processor where the results are from (in the case of a parallel simulation).
 - (ext) 	: kind of mesh.
 

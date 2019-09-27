@@ -6,7 +6,7 @@
 InitialConditionsV4.xml
 =======================
 
- The *initialConditionsV4.xml* input file includes the initial conditions and the boundary conditions of the flow simulation. It is *mandatory* located in the folder of the current case. The typical structure of this file is:
+ The *initialConditionsV4.xml* input file includes the initial conditions and the boundary conditions of the flow simulation. It is **mandatory** located in the folder of the current case. The typical structure of this file is:
 
  .. code-block:: xml
 
@@ -264,7 +264,7 @@ This last node :xml:`<dataFluid>` as well as the :xml:`<mixture>` node are depen
 
 .. _Sec:input:euler:
 
-euler
+Euler
 ~~~~~
 Single phase flow. In this case, the :xml:`<mixture>` node is absent and the :xml:`<dataFluid>` node contains the following attributes or nodes:
 

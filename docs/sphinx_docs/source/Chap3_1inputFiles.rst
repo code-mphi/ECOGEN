@@ -1,6 +1,8 @@
 .. role:: xml(code)
 	:language: xml
 
+.. _Chap:input:
+
 Input Files
 ===========
 
@@ -44,9 +46,9 @@ In this section the structure of each input file is detailed. This information i
    :maxdepth: 1
    :caption: Contents:
 
-   Main
-   Model
-   Mesh
-   InitialConditions
+   Chap3_1_1main
+   Chap3_1_2model
+   Chap3_1_3mesh
+   Chap3_1_4initialConditions
 
 

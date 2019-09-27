@@ -8,7 +8,7 @@ ECOGEN is a CFD plateform written in C++ object oriented programming langage. It
 - multi-meshes (Cartesian, unstructured, AMR)
 - multi-CPU
 
-ECOGEN is for:
+ECOGEN stands for:
 
 - **E**\ volutive: makes easier future developpements
 - **C**\ ompressible: dedicated to compressible flows
@@ -37,9 +37,9 @@ What is a diffuse interface? In DIM theory, the interfaces between pure phases a
 
 .. _Fig:introduction:diffInterface:
 
-.. figure:: ./img/diffInterface.png
+.. figure:: ./_static/intro/diffInterface.png
 
-	1D extraction of the diffuse interface zone of a water droplet.
+  1D extraction of the diffuse interface zone of a water droplet.
 
 This way is possible thanks to a thermodynamical consistency. Then, the flow solution does no longer requires interface tracking algorithms: It became easy to simulate complex topological shape evolutions between miscible or non miscible fluid. Moreover, pressure waves (shock waves, acoustic waves) can propagate and interact properly in the whole flow.
 

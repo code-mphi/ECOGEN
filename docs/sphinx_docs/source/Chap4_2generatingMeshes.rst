@@ -8,7 +8,7 @@ ECOGEN is able to generate its own Cartesian meshes (see section :ref:`Sec:input
 Mesh files with Gmsh
 --------------------
 
-ECOGEN can use mesh files for mono- or multiprocessors computations generated with the opensource Gmsh_ software with some specific precaution when editing the geometry file (.geo). Only the `MSH file format version 2`_ can be used in the current released version of ECOGEN. 
+ECOGEN can use mesh files for mono- or multiprocessors computations generated with the opensource Gmsh_ software :cite:`geuzaine2009gmsh` with some specific precaution when editing the geometry file (.geo). Only the `MSH file format version 2`_ can be used in the current released version of ECOGEN. 
 
 Download binaries of Gmsh in version 3.0.6 or lower : http://gmsh.info/bin/.
 
@@ -26,7 +26,7 @@ Consider the geometry file of a simple nozzle depicted below:
 
 .. _Fig:tutorials:nozzle_simple:
 
-.. figure:: ./img/simpleNozzle.png
+.. figure:: ./_static/tutos/gmsh/simpleNozzle.png
 
 	Example of geometrical data file - nozzle2D_simple2.geo – for generating a mesh file at .msh format using Gmsh software and usable with ECOGEN.
 

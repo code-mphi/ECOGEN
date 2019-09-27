@@ -18,6 +18,8 @@
 
 import sphinx_rtd_theme
 
+from sphinx.builders.html import StandaloneHTMLBuilder
+
 # -- Project information -----------------------------------------------------
 
 project = 'ECOGEN'
@@ -44,6 +46,13 @@ extensions = [
     'sphinx.ext.mathjax',
     'sphinx.ext.githubpages',
     'sphinxcontrib.bibtex',
+]
+
+StandaloneHTMLBuilder.supported_image_types = [
+    'image/svg+xml',
+    'image/gif',
+    'image/png',
+    'image/jpeg'
 ]
 
 # numfig:

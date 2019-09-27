@@ -97,11 +97,11 @@ Unstructured mesh
 When dealing with unstructured meshes, the :xml:`<unstructuredMesh>` markup **must be** present in the *meshV5.xml* input file and contains the following nodes:
 
 - :xml:`<file>`: this **mandatory** node specifies the path of the mesh file via the attribute :xml:`name`. The file must be located in the folder **ECOGEN/libMeshes/**.
-- :xml:`<modeParallele>`: This node is required only if the file mesh is a multi-CPU file. The attribute :xml:`GMSHPretraitement` can take the following values:
+- :xml:`<modeParallele>` : This node is required only if the file mesh is a multi-CPU file. The attribute :xml:`GMSHPretraitement` can take the following values:
 	- *true*: ECOGEN automatically splits the given mesh file in as many as necessary files according to the number of available CPUs.
 	- *false*: do not redo the split of the given mesh (which has already been split in a precedent simulation).
 
-**Remark:**
+**Remarks:**
 
 1. The attribute :xml:`GMSHPretraitement` must be set as true if it is the first run with the given mesh file.
 2. In the current version of ECOGEN, only mesh files generated with the opensource Gmsh_  software under file format *version 2* can be used.

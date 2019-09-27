@@ -85,7 +85,7 @@ Source terms
 
 The additional :xml:`<sourceTerms>` markup can be used to numerically integrate some source terms in the equations. The attribute :xml:`type` selects the source term:
 
-- *heating*: related to a thermal energy heating/cooling. This attribute requires the :xml:`<dataHeating>` node with the attribute :xml:`volumeHeatPower`: a real number corresponding to the power by volume unit added to the flow (unit :W/m3 (SI)).
+- *heating*: related to a thermal energy heating/cooling. This attribute requires the :xml:`<dataHeating>` node with the attribute :xml:`volumeHeatPower`: a real number corresponding to the power by volume unit added to the flow (unit: W/m3 (SI)).
 
 .. code-block:: xml
 
