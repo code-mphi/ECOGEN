@@ -1,0 +1,245 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Test cases &mdash; ECOGEN b1.0 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script type="text/javascript" src="_static/jquery.js"></script>
+        <script type="text/javascript" src="_static/underscore.js"></script>
+        <script type="text/javascript" src="_static/doctools.js"></script>
+        <script type="text/javascript" src="_static/language_data.js"></script>
+        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Single phase test cases" href="Chap5_1Euler.html" />
+    <link rel="prev" title="Generating Meshes" href="Chap4_2generatingMeshes.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="index.html" class="icon icon-home"> ECOGEN
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                1.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="Chap1_introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Chap2_installation_Chapter.html">Installation instructions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Chap3_IO_Chapter.html">I/O descriptions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Chap4_tutorials_Chapter.html">Tutorials</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Test cases</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="Chap5_1Euler.html">Single phase test cases</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Chap5_2Kapila.html">Multiphase mechanical equilibrium flows</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="Chap6_developpersGuide_Chapter.html">Developers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Chap7_license.html">License</a></li>
+<li class="toctree-l1"><a class="reference internal" href="zBibliography.html">Bibliography</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">ECOGEN</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html">Docs</a> &raquo;</li>
+        
+      <li>Test cases</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/Chap5_testCases_Chapter.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="test-cases">
+<span id="chap-testcases"></span><h1>Test cases<a class="headerlink" href="#test-cases" title="Permalink to this headline">¶</a></h1>
+<p>ECOGEN is provided including several test cases. Major part of these tests can be found in companion papers. The full list of available test cases in the package are listed in the conductor input file <em>ECOGEN.xml</em>. Description of some provided test cases is presented in this section. We will refer to the test case following the line format to uncomment in <em>ECOGEN.xml</em> input file.</p>
+<div class="admonition-example admonition">
+<p class="admonition-title">Example</p>
+<p>For example, the following line in <em>ECOGEN.xml</em> input file corresponds to the default test:</p>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;testCase&gt;</span>./libTests/referenceTestCases/euler/1D/transport/positiveVelocity/<span class="nt">&lt;/testCase&gt;</span>
+</pre></div>
+</div>
+<p>It is presented in details in the tutorial section <a class="reference internal" href="Chap4_1startWithECOGEN.html#sec-tuto-default"><span class="std std-ref">Running the default test case</span></a> :</p>
+</div>
+<div class="toctree-wrapper compound">
+<p class="caption"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="Chap5_1Euler.html">Single phase test cases</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="Chap5_1Euler.html#advection-test-cases">Advection test cases</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Chap5_1Euler.html#shock-tubes">Shock tubes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Chap5_1Euler.html#other-test-cases">Other test cases</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="Chap5_2Kapila.html">Multiphase mechanical equilibrium flows</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="Chap5_2Kapila.html#advection-test-cases">Advection test cases</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Chap5_2Kapila.html#shock-tubes">Shock tubes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Chap5_2Kapila.html#other-tests-cases">Other tests cases</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="Chap5_1Euler.html" class="btn btn-neutral float-right" title="Single phase test cases" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="Chap4_2generatingMeshes.html" class="btn btn-neutral float-left" title="Generating Meshes" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019, code-mphi
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

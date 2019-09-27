@@ -1,0 +1,328 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Contribute to ECOGEN &mdash; ECOGEN b1.0 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script type="text/javascript" src="_static/jquery.js"></script>
+        <script type="text/javascript" src="_static/underscore.js"></script>
+        <script type="text/javascript" src="_static/doctools.js"></script>
+        <script type="text/javascript" src="_static/language_data.js"></script>
+        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Building Sphinx Doc" href="Chap6_1buildingSphinxDoc.html" />
+    <link rel="prev" title="Developers" href="Chap6_developpersGuide_Chapter.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="index.html" class="icon icon-home"> ECOGEN
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                1.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="Chap1_introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Chap2_installation_Chapter.html">Installation instructions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Chap3_IO_Chapter.html">I/O descriptions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Chap4_tutorials_Chapter.html">Tutorials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Chap5_testCases_Chapter.html">Test cases</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="Chap6_developpersGuide_Chapter.html">Developers</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Contribute to ECOGEN</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#api-documentation">API documentation</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#at-the-head-of-files">At the head of files</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#before-class-definition">Before class definition</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#before-function-and-method-prototypes">Before function and method prototypes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#class-member-descrption">Class member descrption</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#coding-constraints">Coding constraints</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#variable-and-classe-names">Variable and Classe names</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#developer-personnal-comments-flags">Developer personnal comments - flags</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#git-hub-submit">Git-hub submit</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="Chap6_1buildingSphinxDoc.html">Building Sphinx Doc</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="Chap7_license.html">License</a></li>
+<li class="toctree-l1"><a class="reference internal" href="zBibliography.html">Bibliography</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">ECOGEN</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="Chap6_developpersGuide_Chapter.html">Developers</a> &raquo;</li>
+        
+      <li>Contribute to ECOGEN</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/Chap6_2improvingECOGEN.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="contribute-to-ecogen">
+<h1>Contribute to ECOGEN<a class="headerlink" href="#contribute-to-ecogen" title="Permalink to this headline">¶</a></h1>
+<p>Before contributing, please read the section <a class="reference internal" href="Chap7_license.html#sec-licence"><span class="std std-ref">License</span></a> informations.</p>
+<div class="section" id="api-documentation">
+<h2>API documentation<a class="headerlink" href="#api-documentation" title="Permalink to this headline">¶</a></h2>
+<p>An <a class="reference external" href="https://code-mphi.github.io/ECOGEN/docs/doxygen_docs/index.html">API</a> documentation is available. It is generated thanks to <a class="reference external" href="http://www.doxygen.nl/">Doxygen</a> and special comments in the source code. Interested developer will find informations on the different classes and functions used in ECOGEN.</p>
+<p>When contributing to the project and to automatise code documentation using Doxygen, comments should be insert as follow in header files.</p>
+<div class="section" id="at-the-head-of-files">
+<h3>At the head of files<a class="headerlink" href="#at-the-head-of-files" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="c1">//! \file      file name</span>
+<span class="c1">//! \author    authors names</span>
+<span class="c1">//! \version   1.0</span>
+<span class="c1">//! \date      12 Novembre 2009</span>
+<span class="c1">//! \brief     brief description</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="before-class-definition">
+<h3>Before class definition<a class="headerlink" href="#before-class-definition" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="c1">//! \class     class name</span>
+<span class="c1">//! \brief     brief descritption</span>
+<span class="c1">//! \details    Detailed description</span>
+<span class="c1">//!                  continue description</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="before-function-and-method-prototypes">
+<h3>Before function and method prototypes<a class="headerlink" href="#before-function-and-method-prototypes" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="c1">//! \brief      brief description</span>
+<span class="c1">//! \details    Detailed description</span>
+<span class="c1">//!                  continue description</span>
+<span class="c1">//! \param      parameter name         description</span>
+<span class="c1">//! \param      parameter name         description</span>
+<span class="c1">//! \return     return description</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="class-member-descrption">
+<h3>Class member descrption<a class="headerlink" href="#class-member-descrption" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="n">type</span> <span class="n">m_variable</span><span class="p">;</span> <span class="c1">//!&lt; member description</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="coding-constraints">
+<h2>Coding constraints<a class="headerlink" href="#coding-constraints" title="Permalink to this headline">¶</a></h2>
+<p>Developers are thanks to respect some constraints when contributing to the project.</p>
+<div class="section" id="variable-and-classe-names">
+<h3>Variable and Classe names<a class="headerlink" href="#variable-and-classe-names" title="Permalink to this headline">¶</a></h3>
+<blockquote>
+<div><ol class="arabic simple">
+<li><p>Variable name should began with lowercase letter and be self-understandable. Each new word began with a uppercase letter.</p></li>
+</ol>
+<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="kt">int</span> <span class="n">myInteger</span><span class="p">;</span> <span class="n">vector</span><span class="o">&lt;</span><span class="kt">double</span> <span class="o">*&gt;</span> <span class="n">vectorOfDoublePointer</span><span class="p">;</span> <span class="n">etc</span><span class="p">.</span>
+</pre></div>
+</div>
+<ol class="arabic simple" start="2">
+<li><p>Class attribute should began by “m_”.</p></li>
+</ol>
+<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="kt">int</span> <span class="n">m_myInteger</span><span class="p">;</span> <span class="kt">double</span> <span class="o">*</span> <span class="n">m_doublePointer</span><span class="p">;</span> <span class="n">etc</span><span class="p">.</span>
+</pre></div>
+</div>
+<ol class="arabic simple" start="3">
+<li><p>Class name should began with an uppercase Letter.</p></li>
+</ol>
+<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">MyClass</span><span class="p">;</span>
+</pre></div>
+</div>
+</div></blockquote>
+</div>
+<div class="section" id="developer-personnal-comments-flags">
+<h3>Developer personnal comments - flags<a class="headerlink" href="#developer-personnal-comments-flags" title="Permalink to this headline">¶</a></h3>
+<p>Developer personnal comments should be included using the following template:</p>
+<p>//Developer//KeyWord// comments</p>
+<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="c1">//FP//DEV// comment, description</span>
+</pre></div>
+</div>
+<p>Here is the list of keyword to use :</p>
+<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="c1">//DEV//    in developement</span>
+<span class="c1">//Q//      question to dig</span>
+<span class="c1">//TODO//   should be done in the future</span>
+<span class="c1">//ERR//    error : to correct ASAP</span>
+<span class="c1">//ID//     idea</span>
+<span class="c1">//ICI//    Stop developement position</span>
+<span class="c1">//VERIF//  to verify : is it needed ?</span>
+<span class="c1">//TEST//   test : To delete ASAP</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="git-hub-submit">
+<h2>Git-hub submit<a class="headerlink" href="#git-hub-submit" title="Permalink to this headline">¶</a></h2>
+<p>For each modification, a comment should be prepared to be included to the commit message for Git.</p>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="Chap6_1buildingSphinxDoc.html" class="btn btn-neutral float-right" title="Building Sphinx Doc" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="Chap6_developpersGuide_Chapter.html" class="btn btn-neutral float-left" title="Developers" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019, code-mphi
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

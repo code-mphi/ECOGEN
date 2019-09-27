@@ -1,0 +1,349 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>MainV5.xml &mdash; ECOGEN b1.0 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script type="text/javascript" src="_static/jquery.js"></script>
+        <script type="text/javascript" src="_static/underscore.js"></script>
+        <script type="text/javascript" src="_static/doctools.js"></script>
+        <script type="text/javascript" src="_static/language_data.js"></script>
+        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="ModelV4.xml" href="Chap3_1_2model.html" />
+    <link rel="prev" title="Input Files" href="Chap3_1inputFiles.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="index.html" class="icon icon-home"> ECOGEN
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                1.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="Chap1_introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Chap2_installation_Chapter.html">Installation instructions</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="Chap3_IO_Chapter.html">I/O descriptions</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="Chap3_1inputFiles.html">Input Files</a><ul class="current">
+<li class="toctree-l3 current"><a class="current reference internal" href="#">MainV5.xml</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#run-name">Run name</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#output-format">Output format</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#time-evolution-control">Time evolution control</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#cfl-criterion">CFL criterion</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#global-accuracy-order-of-the-numerical-scheme">Global accuracy order of the numerical scheme</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#probes">Probes</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="Chap3_1_2model.html">ModelV4.xml</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Chap3_1_3mesh.html">MeshV5.xml</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Chap3_1_4initialConditions.html">InitialConditionsV4.xml</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="Chap3_2materials.html">Materials</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Chap3_3outputFiles.html">Output Files</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="Chap4_tutorials_Chapter.html">Tutorials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Chap5_testCases_Chapter.html">Test cases</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Chap6_developpersGuide_Chapter.html">Developers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Chap7_license.html">License</a></li>
+<li class="toctree-l1"><a class="reference internal" href="zBibliography.html">Bibliography</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">ECOGEN</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="Chap3_IO_Chapter.html">I/O descriptions</a> &raquo;</li>
+        
+          <li><a href="Chap3_1inputFiles.html">Input Files</a> &raquo;</li>
+        
+      <li>MainV5.xml</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/Chap3_1_1main.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="mainv5-xml">
+<span id="sec-input-main"></span><h1>MainV5.xml<a class="headerlink" href="#mainv5-xml" title="Permalink to this headline">¶</a></h1>
+<p><em>mainV5.xml</em> is the main input file needed to define the test case. It <strong>must be</strong> in the current test case folder. Its minimal structure is:</p>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="cp">&lt;?xml version = &quot;1.0&quot; encoding = &quot;UTF-8&quot; standalone = &quot;yes&quot;?&gt;</span>
+<span class="nt">&lt;computationParam&gt;</span>
+  <span class="nt">&lt;run&gt;</span>example<span class="nt">&lt;/run&gt;</span>
+  <span class="nt">&lt;outputMode</span> <span class="na">format=</span><span class="s">&quot;XML&quot;</span> <span class="na">binary=</span><span class="s">&quot;false&quot;</span> <span class="na">precision=</span><span class="s">&quot;10&quot;</span><span class="nt">/&gt;</span>
+  <span class="nt">&lt;timeControlMode</span> <span class="na">iterations=</span><span class="s">&quot;false&quot;</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;iterations</span> <span class="na">number=</span><span class="s">&quot;3&quot;</span> <span class="na">iterFreq=</span><span class="s">&quot;1&quot;</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;physicalTime</span> <span class="na">totalTime=</span><span class="s">&quot;8.e-3&quot;</span> <span class="na">timeFreq=</span><span class="s">&quot;8.e-4&quot;</span><span class="nt">/&gt;</span>
+  <span class="nt">&lt;/timeControlMode&gt;</span>
+  <span class="nt">&lt;computationControl</span> <span class="na">CFL=</span><span class="s">&quot;0.8&quot;</span><span class="nt">/&gt;</span>
+<span class="nt">&lt;/computationParam&gt;</span>
+</pre></div>
+</div>
+<p>It contains general parameters for the computation listed below. Some are mandatory, others are optional.</p>
+<div class="section" id="run-name">
+<h2>Run name<a class="headerlink" href="#run-name" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;run&gt;</span>example<span class="nt">&lt;/run&gt;</span>
+</pre></div>
+</div>
+<p>The <code class="code xml docutils literal notranslate"><span class="name tag"><span class="pre">&lt;run&gt;</span></span></code> markup is mandatory. It will be used to create the folder containing the test case results in <strong>ECOGEN/results/</strong>.</p>
+</div>
+<div class="section" id="output-format">
+<h2>Output format<a class="headerlink" href="#output-format" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;outputMode</span> <span class="na">format=</span><span class="s">&quot;XML&quot;</span> <span class="na">binary=</span><span class="s">&quot;false&quot;</span> <span class="na">precision=</span><span class="s">&quot;10&quot;</span><span class="nt">/&gt;</span>
+</pre></div>
+</div>
+<p>The <code class="code xml docutils literal notranslate"><span class="name tag"><span class="pre">&lt;outputMode&gt;</span></span></code> markup is mandatory. The user can choose the writing output format. Attributes are:</p>
+<ul class="simple">
+<li><p><code class="code xml docutils literal notranslate"><span class="pre">format</span></code>: can take the value <em>GNU</em> (standard writing in column) or <em>XML</em> (XML VTK format ).</p></li>
+<li><p><code class="code xml docutils literal notranslate"><span class="pre">binary</span></code>: can take the value true or false. <em>Binary</em> (true) or <em>ASCII</em> (false) format can be chosen.</p></li>
+</ul>
+<p>Output results files will be placed in the folder <strong>ECOGEN/results/</strong> into a specific subfolder with the name of the run.</p>
+</div>
+<div class="section" id="time-evolution-control">
+<h2>Time evolution control<a class="headerlink" href="#time-evolution-control" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;timeControlMode</span> <span class="na">iterations=</span><span class="s">&quot;false&quot;</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;iterations</span> <span class="na">number=</span><span class="s">&quot;3&quot;</span> <span class="na">iterFreq=</span><span class="s">&quot;1&quot;</span><span class="nt">/&gt;</span>
+  <span class="nt">&lt;physicalTime</span> <span class="na">totalTime=</span><span class="s">&quot;8.e-3&quot;</span> <span class="na">timeFreq=</span><span class="s">&quot;8.e-4&quot;</span><span class="nt">/&gt;</span>
+<span class="nt">&lt;/timeControlMode&gt;</span>
+</pre></div>
+</div>
+<p>ECOGEN is a CFD tool based on an explicit integration scheme in time. The <code class="code xml docutils literal notranslate"><span class="name tag"><span class="pre">&lt;timeControlMode&gt;</span></span></code> markup is mandatory and defines the temporal evolution of the current simulation. it contains the
+<code class="code xml docutils literal notranslate"><span class="pre">iterations</span></code> attribute that can take the two values:</p>
+<ul class="simple">
+<li><p><em>true</em>: the time control is done thanks to the total number of timesteps and the &lt;iterations&gt; node must be present.</p></li>
+<li><p><em>false</em>: the time control is done thanks to the physical final time and the &lt;physicalTime&gt; node must be present.</p></li>
+</ul>
+<p>The <code class="code xml docutils literal notranslate"><span class="name tag"><span class="pre">&lt;iterations&gt;</span></span></code> markup:</p>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;iterations</span> <span class="na">number=</span><span class="s">&quot;3&quot;</span> <span class="na">iterFreq=</span><span class="s">&quot;1&quot;</span><span class="nt">/&gt;</span>
+</pre></div>
+</div>
+<p>ECOGEN automatically computes the timestep value thanks to a numerical stability criterion (CFL  criterion). This markup is defined with following attributes:</p>
+<ul class="simple">
+<li><p><code class="code xml docutils literal notranslate"><span class="pre">number</span></code>: Integer equals to the total number of temporal timesteps.</p></li>
+<li><p><code class="code xml docutils literal notranslate"><span class="pre">iterFreq</span></code>: Integer equal to the frequency of results writing (results are written every iterFeq timestep)</p></li>
+</ul>
+<p>The <code class="code xml docutils literal notranslate"><span class="name tag"><span class="pre">&lt;physicalTime&gt;</span></span></code> markup:</p>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;physicalTime</span> <span class="na">totalTime=</span><span class="s">&quot;8.e-3&quot;</span> <span class="na">timeFreq=</span><span class="s">&quot;8.e-4&quot;</span><span class="nt">/&gt;</span>
+</pre></div>
+</div>
+<p>If this markup is used ECOGEN automatically determines the total amount of timestep to compute to reach the chosen physical time. Attributes are:</p>
+<ul class="simple">
+<li><p><code class="code xml docutils literal notranslate"><span class="pre">totalTime</span></code>: Real number equals to the physical final time of the simulation. (unit: s (SI)).</p></li>
+<li><p><code class="code xml docutils literal notranslate"><span class="pre">timeFreq</span></code>: Real number equals to the frequency of results writing (results are written every timeFreq seconds).</p></li>
+</ul>
+</div>
+<div class="section" id="cfl-criterion">
+<h2>CFL criterion<a class="headerlink" href="#cfl-criterion" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;computationControl</span> <span class="na">CFL=</span><span class="s">&quot;0.8&quot;</span><span class="nt">/&gt;</span>
+</pre></div>
+</div>
+<p>The <code class="code xml docutils literal notranslate"><span class="name tag"><span class="pre">&lt;computationControl&gt;</span></span></code> markup is mandatory. It specifies the value of the attribute <code class="code xml docutils literal notranslate"><span class="pre">CFL</span></code> which ensures the stability of the temporal integration scheme: the value (real number) must be less than 1.</p>
+</div>
+<div class="section" id="global-accuracy-order-of-the-numerical-scheme">
+<h2>Global accuracy order of the numerical scheme<a class="headerlink" href="#global-accuracy-order-of-the-numerical-scheme" title="Permalink to this headline">¶</a></h2>
+<p>When it is possible (according to the mesh or to the flow model) ECOGEN can use a second-order scheme (based on MUSCL approach with a TVD slope limiter). In this case the optional markup <code class="code xml docutils literal notranslate"><span class="name tag"><span class="pre">&lt;secondOrder&gt;</span></span></code> can be inserted in the <em>mainV5.xml</em> input file as in the following example:</p>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;secondOrder&gt;</span>
+  <span class="nt">&lt;globalLimiter&gt;</span>minmod<span class="nt">&lt;/globalLimiter&gt;</span>
+  <span class="nt">&lt;interfaceLimiter&gt;</span>superbee<span class="nt">&lt;/interfaceLimiter&gt;</span>                            <span class="c">&lt;!-- optionnal node --&gt;</span>
+  <span class="nt">&lt;globalVolumeFractionLimiter&gt;</span>minmod<span class="nt">&lt;/globalVolumeFractionLimiter&gt;</span>        <span class="c">&lt;!-- optionnal node --&gt;</span>
+  <span class="nt">&lt;interfaceVolumeFractionLimiter&gt;</span>thinc<span class="nt">&lt;/interfaceVolumeFractionLimiter&gt;</span>   <span class="c">&lt;!-- optionnal node --&gt;</span>
+<span class="nt">&lt;/secondOrder&gt;</span>
+</pre></div>
+</div>
+<p>The <code class="code xml docutils literal notranslate"><span class="name tag"><span class="pre">&lt;secondOrder&gt;</span></span></code> markup must contain the node <code class="code xml docutils literal notranslate"><span class="name tag"><span class="pre">&lt;globalLimiter&gt;</span></span></code>. The other nodes are optional. The slope limiters available in ECOGEN are the following: minmod <a class="bibtex reference internal" href="zBibliography.html#roe1986superbee" id="id1">[Roe86]</a>, vanleer <a class="bibtex reference internal" href="zBibliography.html#vanleer1974" id="id2">[VL74]</a>, vanalbada <a class="bibtex reference internal" href="zBibliography.html#vanalbada1997" id="id3">[VAVLR97]</a>, mc <a class="bibtex reference internal" href="zBibliography.html#van1977towards" id="id4">[VL77]</a>, superbee <a class="bibtex reference internal" href="zBibliography.html#roe1986superbee" id="id5">[Roe86]</a>. Markups significations are:</p>
+<ul class="simple">
+<li><p><code class="code xml docutils literal notranslate"><span class="name tag"><span class="pre">&lt;globalLimiter&gt;</span></span></code>: applied everywhere and on all variables unless it is overwrite by the following optional limiters.</p></li>
+<li><p><code class="code xml docutils literal notranslate"><span class="name tag"><span class="pre">&lt;interfaceLimiter&gt;</span></span></code>: applied on all variables but only at the interface location. By default is equal to the global limiter.</p></li>
+<li><p><code class="code xml docutils literal notranslate"><span class="name tag"><span class="pre">&lt;globalVolumeFractionLimiter&gt;</span></span></code>: applied everywhere but only on the volume-fraction and transport equations (THINC is only applied on the volume fractions) unless it is overwrite by the interface volume-fraction limiter. By default is equal to the global limiter.</p></li>
+<li><p><code class="code xml docutils literal notranslate"><span class="name tag"><span class="pre">&lt;interfaceVolumeFractionLimiter&gt;</span></span></code>: applied only at the interface location and on the volume-fraction and transport equations (THINC <a class="bibtex reference internal" href="zBibliography.html#shyue2014thinc" id="id6">[SX14]</a> is only applied on the volume fractions). By default is equal to the interface limiter.</p></li>
+</ul>
+</div>
+<div class="section" id="probes">
+<h2>Probes<a class="headerlink" href="#probes" title="Permalink to this headline">¶</a></h2>
+<p>It is possible to record flow variables at given locations in the computational domain against time. This is done by including to the <em>mainV5.xml</em> input file the optional <code class="code xml docutils literal notranslate"><span class="name tag"><span class="pre">&lt;probe&gt;</span></span></code> markup.</p>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;probe</span> <span class="na">name=</span><span class="s">&quot;capteur1&quot;</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;vertex</span> <span class="na">x=</span><span class="s">&quot;0.51&quot;</span> <span class="na">y=</span><span class="s">&quot;0.51&quot;</span> <span class="na">z=</span><span class="s">&quot;0.51&quot;</span><span class="nt">/&gt;</span>
+  <span class="nt">&lt;timeControl</span> <span class="na">acqFreq=</span><span class="s">&quot;-1.&quot;</span><span class="nt">/&gt;</span>       <span class="c">&lt;!-- if negative or nul, recording at each time step --&gt;</span>
+<span class="nt">&lt;/probe&gt;</span>
+</pre></div>
+</div>
+<p>The two following nodes must be included in the <code class="code xml docutils literal notranslate"><span class="name tag"><span class="pre">&lt;probe&gt;</span></span></code> markup:
+-       <code class="code xml docutils literal notranslate"><span class="name tag"><span class="pre">&lt;vertex&gt;</span></span></code>: Specifies the location of the probe into the computational domain in each physical direction corresponding to the attributes: <code class="code xml docutils literal notranslate"><span class="pre">x</span></code>, <code class="code xml docutils literal notranslate"><span class="pre">y</span></code> and <code class="code xml docutils literal notranslate"><span class="pre">z</span></code> (unit: m (SI)). Values must be real numbers.
+-       <code class="code xml docutils literal notranslate"><span class="name tag"><span class="pre">&lt;timeControl&gt;</span></span></code>: permits to specify the probe acquisition frequency (unit: s (SI)). If the value is set to zero or negative, flow values at the probe location are recorded at each time step.</p>
+<p>Probes output results files will be placed in the specific subfolder <strong>ECOGEN/results/XXX/probes/</strong> where <em>XXX</em> represent the name of the run specified in <code class="code xml docutils literal notranslate"><span class="name tag"><span class="pre">&lt;run&gt;</span></span></code> markup.</p>
+<p><strong>Remarks:</strong></p>
+<ol class="arabic simple">
+<li><p>Recording probe with a high frequency could have a significant impact on computation performances due to the computer memory time access. To prevent that, one should fix a reasonable acquisition frequency.</p></li>
+<li><p>Several probes can be added simultaneously. For that, place as many as wanted <code class="code xml docutils literal notranslate"><span class="name tag"><span class="pre">&lt;probe&gt;</span></span></code> markups in the <em>mainV5.xml</em> input files.</p></li>
+</ol>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="Chap3_1_2model.html" class="btn btn-neutral float-right" title="ModelV4.xml" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="Chap3_1inputFiles.html" class="btn btn-neutral float-left" title="Input Files" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019, code-mphi
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>
