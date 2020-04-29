@@ -1,8 +1,8 @@
 #!/bin/bash
 set -e # Exit with nonzero exit code if anything fails
 
-# deploy only under travis request for devel branch
-if [ "$TRAVIS_PULL_REQUEST" != "false" -o "$TRAVIS_BRANCH" != "$SOURCE_BRANCH" ]; then
+# deploy only under travis request
+if [ "$TRAVIS_PULL_REQUEST" != "false" ]; then
     echo "Skipping deploy."
     exit 0
 fi

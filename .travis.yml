@@ -2,6 +2,11 @@ dist: xenial
 
 sudo: false
 
+# safelist (buil & deploy only for tagged version)
+branches:
+  only:
+  - /^v\d+\.\d+(\.\d+)?(-\S*)?$/
+
 language: python
 
 install:
@@ -11,7 +16,6 @@ env:
   global:
     - ECOGEN_ENV=production
     - GIT_DEPLOY_REPO=https://$GITHUB_TOKEN@github.com/code-mphi/ECOGEN.git
-    - SOURCE_BRANCH="devel"
     - TARGET_BRANCH="gh-pages"
 
 addons:
