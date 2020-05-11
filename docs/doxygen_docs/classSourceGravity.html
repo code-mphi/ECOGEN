@@ -128,34 +128,50 @@ $(document).ready(function(){initNavTree('classSourceGravity.html','');});
 Public Member Functions</h2></td></tr>
 <tr class="memitem:a0e331b0e10a62bcc2d18124a3be5d2b6"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSourceGravity.html#a0e331b0e10a62bcc2d18124a3be5d2b6">SourceGravity</a> ()</td></tr>
 <tr class="separator:a0e331b0e10a62bcc2d18124a3be5d2b6"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a369878ac805f2aedd9df25bab8e25ff4"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSourceGravity.html#a369878ac805f2aedd9df25bab8e25ff4">SourceGravity</a> (<a class="el" href="classtinyxml2_1_1XMLElement.html">tinyxml2::XMLElement</a> *element, std::string fileName=&quot;Unknown file&quot;)</td></tr>
-<tr class="memdesc:a369878ac805f2aedd9df25bab8e25ff4"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classSource.html" title="Abstract class for source terms. ">Source</a> constructor from a XML format reading.  <a href="#a369878ac805f2aedd9df25bab8e25ff4">More...</a><br /></td></tr>
-<tr class="separator:a369878ac805f2aedd9df25bab8e25ff4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:add626701263f8ae61dee85801bd39835"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSourceGravity.html#add626701263f8ae61dee85801bd39835">SourceGravity</a> (<a class="el" href="classtinyxml2_1_1XMLElement.html">tinyxml2::XMLElement</a> *element, int order, std::string fileName=&quot;Unknown file&quot;)</td></tr>
+<tr class="memdesc:add626701263f8ae61dee85801bd39835"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classSource.html" title="Abstract class for source terms. ">Source</a> constructor from a XML format reading.  <a href="#add626701263f8ae61dee85801bd39835">More...</a><br /></td></tr>
+<tr class="separator:add626701263f8ae61dee85801bd39835"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a98dbb78b48ee380d73c4eedf8e37c2b2"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSourceGravity.html#a98dbb78b48ee380d73c4eedf8e37c2b2">~SourceGravity</a> ()</td></tr>
 <tr class="separator:a98dbb78b48ee380d73c4eedf8e37c2b2"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa52868855cb06132dc98d04fa27d43eb"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSourceGravity.html#aa52868855cb06132dc98d04fa27d43eb">integrateSourceTerms</a> (<a class="el" href="classCell.html">Cell</a> *cell, const int &amp;numberPhases, const double &amp;dt)</td></tr>
-<tr class="memdesc:aa52868855cb06132dc98d04fa27d43eb"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classSource.html" title="Abstract class for source terms. ">Source</a> terms integration on conservative quantities.  <a href="#aa52868855cb06132dc98d04fa27d43eb">More...</a><br /></td></tr>
-<tr class="separator:aa52868855cb06132dc98d04fa27d43eb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4dc69c23df70612b0d38a64421df8a23"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSourceGravity.html#a4dc69c23df70612b0d38a64421df8a23">prepSourceTerms</a> (<a class="el" href="classCell.html">Cell</a> *cell, const int &amp;numberPhases, const double &amp;dt, const int i=0)</td></tr>
+<tr class="memdesc:a4dc69c23df70612b0d38a64421df8a23"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classSource.html" title="Abstract class for source terms. ">Source</a> terms preparation for integration.  <a href="#a4dc69c23df70612b0d38a64421df8a23">More...</a><br /></td></tr>
+<tr class="separator:a4dc69c23df70612b0d38a64421df8a23"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_methods_classSource"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classSource')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classSource.html">Source</a></td></tr>
 <tr class="memitem:a660c0a4b8b8f8402568bef86f2cb2fbb inherit pub_methods_classSource"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSource.html#a660c0a4b8b8f8402568bef86f2cb2fbb">Source</a> ()</td></tr>
 <tr class="separator:a660c0a4b8b8f8402568bef86f2cb2fbb inherit pub_methods_classSource"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a209991899a7d82118da654b61416ef0a inherit pub_methods_classSource"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSource.html#a209991899a7d82118da654b61416ef0a">Source</a> (int order)</td></tr>
+<tr class="separator:a209991899a7d82118da654b61416ef0a inherit pub_methods_classSource"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac5104a4d66641ae529419b47da4a1473 inherit pub_methods_classSource"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSource.html#ac5104a4d66641ae529419b47da4a1473">~Source</a> ()</td></tr>
 <tr class="separator:ac5104a4d66641ae529419b47da4a1473 inherit pub_methods_classSource"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a87caea31bcde39a08cc476ea0ef6e792 inherit pub_methods_classSource"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSource.html#a87caea31bcde39a08cc476ea0ef6e792">integrateSourceTerms</a> (<a class="el" href="classCell.html">Cell</a> *cell, const int &amp;numberPhases, const double &amp;dt)</td></tr>
+<tr class="memdesc:a87caea31bcde39a08cc476ea0ef6e792 inherit pub_methods_classSource"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classSource.html" title="Abstract class for source terms. ">Source</a> terms integration on conservative quantities.  <a href="#a87caea31bcde39a08cc476ea0ef6e792">More...</a><br /></td></tr>
+<tr class="separator:a87caea31bcde39a08cc476ea0ef6e792 inherit pub_methods_classSource"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab54dcc1d2e807917dd5791d5485fc596 inherit pub_methods_classSource"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSource.html#ab54dcc1d2e807917dd5791d5485fc596">integrationEuler</a> (<a class="el" href="classCell.html">Cell</a> *cell, const int &amp;numberPhases, const double &amp;dt)</td></tr>
+<tr class="memdesc:ab54dcc1d2e807917dd5791d5485fc596 inherit pub_methods_classSource"><td class="mdescLeft">&#160;</td><td class="mdescRight">Euler explicite integration (order 1)  <a href="#ab54dcc1d2e807917dd5791d5485fc596">More...</a><br /></td></tr>
+<tr class="separator:ab54dcc1d2e807917dd5791d5485fc596 inherit pub_methods_classSource"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a897aa4c420e5fd61ff692e405b45be5f inherit pub_methods_classSource"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSource.html#a897aa4c420e5fd61ff692e405b45be5f">integrationRK2</a> (<a class="el" href="classCell.html">Cell</a> *cell, const int &amp;numberPhases, const double &amp;dt)</td></tr>
+<tr class="memdesc:a897aa4c420e5fd61ff692e405b45be5f inherit pub_methods_classSource"><td class="mdescLeft">&#160;</td><td class="mdescRight">Runge-Kutta integration (order 2)  <a href="#a897aa4c420e5fd61ff692e405b45be5f">More...</a><br /></td></tr>
+<tr class="separator:a897aa4c420e5fd61ff692e405b45be5f inherit pub_methods_classSource"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a911163cdfa7f32b697c02533f56ab838 inherit pub_methods_classSource"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSource.html#a911163cdfa7f32b697c02533f56ab838">integrationRK4</a> (<a class="el" href="classCell.html">Cell</a> *cell, const int &amp;numberPhases, const double &amp;dt)</td></tr>
+<tr class="memdesc:a911163cdfa7f32b697c02533f56ab838 inherit pub_methods_classSource"><td class="mdescLeft">&#160;</td><td class="mdescRight">Runge-Kutta integration (order 4)  <a href="#a911163cdfa7f32b697c02533f56ab838">More...</a><br /></td></tr>
+<tr class="separator:a911163cdfa7f32b697c02533f56ab838 inherit pub_methods_classSource"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a664c2810f78acadcef35f1786b24c126 inherit pub_methods_classSource"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSource.html#a664c2810f78acadcef35f1786b24c126">sourceEvolution</a> (const double &amp;time)</td></tr>
+<tr class="memdesc:a664c2810f78acadcef35f1786b24c126 inherit pub_methods_classSource"><td class="mdescLeft">&#160;</td><td class="mdescRight">Allows to modifiy the source term along time.  <a href="#a664c2810f78acadcef35f1786b24c126">More...</a><br /></td></tr>
 <tr class="separator:a664c2810f78acadcef35f1786b24c126 inherit pub_methods_classSource"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aabed587afb2c56487f9602c111e2cc9b inherit pub_methods_classSource"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classCoord.html">Coord</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSource.html#aabed587afb2c56487f9602c111e2cc9b">computeAbsVelocity</a> (const <a class="el" href="classCoord.html">Coord</a> relVelocity, const <a class="el" href="classCoord.html">Coord</a> position)</td></tr>
+<tr class="memdesc:aabed587afb2c56487f9602c111e2cc9b inherit pub_methods_classSource"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute the absolute velocity in the fixed coordinate system.  <a href="#aabed587afb2c56487f9602c111e2cc9b">More...</a><br /></td></tr>
 <tr class="separator:aabed587afb2c56487f9602c111e2cc9b inherit pub_methods_classSource"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-attribs"></a>
 Private Attributes</h2></td></tr>
 <tr class="memitem:a40f1bd018c6ff0d2233a2d11993b72c1"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classCoord.html">Coord</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSourceGravity.html#a40f1bd018c6ff0d2233a2d11993b72c1">m_g</a></td></tr>
 <tr class="separator:a40f1bd018c6ff0d2233a2d11993b72c1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a047d5b89ad4d357ec1894482e4cd96d5"><td class="memItemLeft" align="right" valign="top"><a class="el" href="Tools_8h.html#a8b7a26aefee5b4a459d8a50eb8abf573">Axe</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSourceGravity.html#a047d5b89ad4d357ec1894482e4cd96d5">m_axe</a></td></tr>
-<tr class="memdesc:a047d5b89ad4d357ec1894482e4cd96d5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gravity acceleration vector.  <a href="#a047d5b89ad4d357ec1894482e4cd96d5">More...</a><br /></td></tr>
-<tr class="separator:a047d5b89ad4d357ec1894482e4cd96d5"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad32036e863ac70d32e0d6cae0b106560"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSourceGravity.html#ad32036e863ac70d32e0d6cae0b106560">m_direction</a></td></tr>
-<tr class="memdesc:ad32036e863ac70d32e0d6cae0b106560"><td class="mdescLeft">&#160;</td><td class="mdescRight">Applicated axe.  <a href="#ad32036e863ac70d32e0d6cae0b106560">More...</a><br /></td></tr>
-<tr class="separator:ad32036e863ac70d32e0d6cae0b106560"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="inherited"></a>
+Additional Inherited Members</h2></td></tr>
+<tr class="inherit_header pro_attribs_classSource"><td colspan="2" onclick="javascript:toggleInherit('pro_attribs_classSource')"><img src="closed.png" alt="-"/>&#160;Protected Attributes inherited from <a class="el" href="classSource.html">Source</a></td></tr>
+<tr class="memitem:aa379ff4f29c02d0cd6f02258e34e4ace inherit pro_attribs_classSource"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSource.html#aa379ff4f29c02d0cd6f02258e34e4ace">m_order</a></td></tr>
+<tr class="separator:aa379ff4f29c02d0cd6f02258e34e4ace inherit pro_attribs_classSource"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Class for gravity source terms. </p>
@@ -175,7 +191,7 @@ Private Attributes</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="a369878ac805f2aedd9df25bab8e25ff4"></a>
+<a class="anchor" id="add626701263f8ae61dee85801bd39835"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
@@ -184,6 +200,12 @@ Private Attributes</h2></td></tr>
           <td>(</td>
           <td class="paramtype"><a class="el" href="classtinyxml2_1_1XMLElement.html">tinyxml2::XMLElement</a> *&#160;</td>
           <td class="paramname"><em>element</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>order</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -234,7 +256,7 @@ Private Attributes</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a class="anchor" id="aa52868855cb06132dc98d04fa27d43eb"></a>
+<a class="anchor" id="a4dc69c23df70612b0d38a64421df8a23"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="mlabels">
@@ -242,7 +264,7 @@ Private Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void SourceGravity::integrateSourceTerms </td>
+          <td class="memname">void SourceGravity::prepSourceTerms </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="classCell.html">Cell</a> *&#160;</td>
           <td class="paramname"><em>cell</em>, </td>
@@ -257,7 +279,13 @@ Private Attributes</h2></td></tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">const double &amp;&#160;</td>
-          <td class="paramname"><em>dt</em>&#160;</td>
+          <td class="paramname"><em>dt</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const int&#160;</td>
+          <td class="paramname"><em>i</em> = <code>0</code>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -272,65 +300,21 @@ Private Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p><a class="el" href="classSource.html" title="Abstract class for source terms. ">Source</a> terms integration on conservative quantities. </p>
+<p><a class="el" href="classSource.html" title="Abstract class for source terms. ">Source</a> terms preparation for integration. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">cell</td><td>cell for source term integration </td></tr>
     <tr><td class="paramname">numberPhases</td><td>number of phases </td></tr>
-    <tr><td class="paramname">dt</td><td>explicit integration time step </td></tr>
+    <tr><td class="paramname">dt</td><td>integration time step </td></tr>
   </table>
   </dd>
 </dl>
 
-<p>Reimplemented from <a class="el" href="classSource.html#a32cf671cb9b3f32ba2f69b781e86a3a2">Source</a>.</p>
+<p>Reimplemented from <a class="el" href="classSource.html#a9e398537f46f77d13b8bb4c5072d3ce3">Source</a>.</p>
 
 </div>
 </div>
 <h2 class="groupheader">Member Data Documentation</h2>
-<a class="anchor" id="a047d5b89ad4d357ec1894482e4cd96d5"></a>
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="Tools_8h.html#a8b7a26aefee5b4a459d8a50eb8abf573">Axe</a> SourceGravity::m_axe</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">private</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Gravity acceleration vector. </p>
-
-</div>
-</div>
-<a class="anchor" id="ad32036e863ac70d32e0d6cae0b106560"></a>
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">int SourceGravity::m_direction</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">private</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Applicated axe. </p>
-
-</div>
-</div>
 <a class="anchor" id="a40f1bd018c6ff0d2233a2d11993b72c1"></a>
 <div class="memitem">
 <div class="memproto">
@@ -361,7 +345,7 @@ Private Attributes</h2></td></tr>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="classSourceGravity.html">SourceGravity</a></li>
-    <li class="footer">Generated on Wed Apr 29 2020 10:31:12 for ECOGEN by
+    <li class="footer">Generated on Mon May 11 2020 16:03:19 for ECOGEN by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.11 </li>
   </ul>

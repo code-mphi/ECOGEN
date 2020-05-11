@@ -132,14 +132,17 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:ad786ad12b8d050bc1830b223204f2a80"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5bf1ba83f649d2c39157916df3b78607"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classFlux.html#a5bf1ba83f649d2c39157916df3b78607">printFlux</a> () const </td></tr>
 <tr class="separator:a5bf1ba83f649d2c39157916df3b78607"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a63e88f96ef7936579b8dcbde4241e471"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classFlux.html#a63e88f96ef7936579b8dcbde4241e471">addFlux</a> (<a class="el" href="classFlux.html">Flux</a> *flux, const int &amp;numberPhases)</td></tr>
+<tr class="memdesc:a63e88f96ef7936579b8dcbde4241e471"><td class="mdescLeft">&#160;</td><td class="mdescRight">Add flux passed in parameter to the correspond model flux.  <a href="#a63e88f96ef7936579b8dcbde4241e471">More...</a><br /></td></tr>
+<tr class="separator:a63e88f96ef7936579b8dcbde4241e471"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a293e2178f9f34fbf87969ef4821739fc"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classFlux.html#a293e2178f9f34fbf87969ef4821739fc">addFlux</a> (double coefA, const int &amp;numberPhases)</td></tr>
-<tr class="memdesc:a293e2178f9f34fbf87969ef4821739fc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Add flux to the corresponding model buffer flux.  <a href="#a293e2178f9f34fbf87969ef4821739fc">More...</a><br /></td></tr>
+<tr class="memdesc:a293e2178f9f34fbf87969ef4821739fc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Add flux to the corresponding model flux.  <a href="#a293e2178f9f34fbf87969ef4821739fc">More...</a><br /></td></tr>
 <tr class="separator:a293e2178f9f34fbf87969ef4821739fc"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a352e927f9937bcba983a8d21e404e6a9"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classFlux.html#a352e927f9937bcba983a8d21e404e6a9">subtractFlux</a> (double coefA, const int &amp;numberPhases)</td></tr>
 <tr class="memdesc:a352e927f9937bcba983a8d21e404e6a9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Subtract flux to the corresponding model buffer flux.  <a href="#a352e927f9937bcba983a8d21e404e6a9">More...</a><br /></td></tr>
 <tr class="separator:a352e927f9937bcba983a8d21e404e6a9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3ec05a78877f430d2413da05071270fe"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classFlux.html#a3ec05a78877f430d2413da05071270fe">multiply</a> (double scalar, const int &amp;numberPhases)</td></tr>
-<tr class="memdesc:a3ec05a78877f430d2413da05071270fe"><td class="mdescLeft">&#160;</td><td class="mdescRight">multiply flux by a constant  <a href="#a3ec05a78877f430d2413da05071270fe">More...</a><br /></td></tr>
+<tr class="memdesc:a3ec05a78877f430d2413da05071270fe"><td class="mdescLeft">&#160;</td><td class="mdescRight">multiply the flux of the corresponding model by a constant  <a href="#a3ec05a78877f430d2413da05071270fe">More...</a><br /></td></tr>
 <tr class="separator:a3ec05a78877f430d2413da05071270fe"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8214193f4b3881c479a0826dcd6ec8c7"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classFlux.html#a8214193f4b3881c479a0826dcd6ec8c7">setBufferFlux</a> (<a class="el" href="classCell.html">Cell</a> &amp;cell, const int &amp;numberPhases)</td></tr>
 <tr class="memdesc:a8214193f4b3881c479a0826dcd6ec8c7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Temporary store the conservative variables of a given cell.  <a href="#a8214193f4b3881c479a0826dcd6ec8c7">More...</a><br /></td></tr>
@@ -170,38 +173,38 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a576bb0da678c1acb416d24a04beace32"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classFlux.html#a576bb0da678c1acb416d24a04beace32">addSymmetricTerms</a> (<a class="el" href="classPhase.html">Phase</a> **phases, <a class="el" href="classMixture.html">Mixture</a> *mixture, const int &amp;numberPhases, const double &amp;r, const double &amp;v)</td></tr>
 <tr class="memdesc:a576bb0da678c1acb416d24a04beace32"><td class="mdescLeft">&#160;</td><td class="mdescRight">Add symetric terms.  <a href="#a576bb0da678c1acb416d24a04beace32">More...</a><br /></td></tr>
 <tr class="separator:a576bb0da678c1acb416d24a04beace32"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a892e8f95ff2cf7daaf665a3cde06d61c"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classFlux.html#a892e8f95ff2cf7daaf665a3cde06d61c">integrateSourceTermsGravity</a> (<a class="el" href="classCell.html">Cell</a> *cell, const double &amp;dt, const int &amp;numberPhases, const int &amp;axe, const int &amp;direction, const <a class="el" href="classCoord.html">Coord</a> &amp;g)</td></tr>
-<tr class="memdesc:a892e8f95ff2cf7daaf665a3cde06d61c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gravity source term.  <a href="#a892e8f95ff2cf7daaf665a3cde06d61c">More...</a><br /></td></tr>
-<tr class="separator:a892e8f95ff2cf7daaf665a3cde06d61c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a13bd56b523946ef6ae112b6d7b918209"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classFlux.html#a13bd56b523946ef6ae112b6d7b918209">integrateSourceTermsHeating</a> (<a class="el" href="classCell.html">Cell</a> *cell, const double &amp;dt, const int &amp;numberPhases, const double &amp;q)</td></tr>
-<tr class="memdesc:a13bd56b523946ef6ae112b6d7b918209"><td class="mdescLeft">&#160;</td><td class="mdescRight">Heating source term.  <a href="#a13bd56b523946ef6ae112b6d7b918209">More...</a><br /></td></tr>
-<tr class="separator:a13bd56b523946ef6ae112b6d7b918209"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a094fc96de5094ebef7883d2241b02aa5"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classFlux.html#a094fc96de5094ebef7883d2241b02aa5">integrateSourceTermsMRF</a> (<a class="el" href="classCell.html">Cell</a> *cell, const double &amp;dt, const int &amp;numberPhases, const <a class="el" href="classCoord.html">Coord</a> &amp;omega)</td></tr>
-<tr class="memdesc:a094fc96de5094ebef7883d2241b02aa5"><td class="mdescLeft">&#160;</td><td class="mdescRight">MRF source term.  <a href="#a094fc96de5094ebef7883d2241b02aa5">More...</a><br /></td></tr>
-<tr class="separator:a094fc96de5094ebef7883d2241b02aa5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a61fa6b64216db767920ece6c50abe0b1"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classFlux.html#a61fa6b64216db767920ece6c50abe0b1">prepSourceTermsGravity</a> (<a class="el" href="classCell.html">Cell</a> *cell, const double &amp;dt, const int &amp;numberPhases, const <a class="el" href="classCoord.html">Coord</a> &amp;g)</td></tr>
+<tr class="memdesc:a61fa6b64216db767920ece6c50abe0b1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gravity source term.  <a href="#a61fa6b64216db767920ece6c50abe0b1">More...</a><br /></td></tr>
+<tr class="separator:a61fa6b64216db767920ece6c50abe0b1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:affd32e250b7176b5a0e6b8c0995bfa95"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classFlux.html#affd32e250b7176b5a0e6b8c0995bfa95">prepSourceTermsHeating</a> (<a class="el" href="classCell.html">Cell</a> *cell, const double &amp;dt, const int &amp;numberPhases, const double &amp;q)</td></tr>
+<tr class="memdesc:affd32e250b7176b5a0e6b8c0995bfa95"><td class="mdescLeft">&#160;</td><td class="mdescRight">Heating source term.  <a href="#affd32e250b7176b5a0e6b8c0995bfa95">More...</a><br /></td></tr>
+<tr class="separator:affd32e250b7176b5a0e6b8c0995bfa95"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adbc43272ba14e0cba75f76e88575be17"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classFlux.html#adbc43272ba14e0cba75f76e88575be17">prepSourceTermsMRF</a> (<a class="el" href="classCell.html">Cell</a> *cell, const double &amp;dt, const int &amp;numberPhases, const <a class="el" href="classCoord.html">Coord</a> &amp;omega)</td></tr>
+<tr class="memdesc:adbc43272ba14e0cba75f76e88575be17"><td class="mdescLeft">&#160;</td><td class="mdescRight">MRF source term.  <a href="#adbc43272ba14e0cba75f76e88575be17">More...</a><br /></td></tr>
+<tr class="separator:adbc43272ba14e0cba75f76e88575be17"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aba08b5897fbd7396d652808fda7c8bfc"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classFlux.html#aba08b5897fbd7396d652808fda7c8bfc">addTuyere1D</a> (const <a class="el" href="classCoord.html">Coord</a> normal, const double surface, <a class="el" href="classCell.html">Cell</a> *cell, const int &amp;numberPhases)</td></tr>
 <tr class="separator:aba08b5897fbd7396d652808fda7c8bfc"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0b1b19dd2d422ccdb4274edd7eb9363c"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classFlux.html#a0b1b19dd2d422ccdb4274edd7eb9363c">subtractTuyere1D</a> (const <a class="el" href="classCoord.html">Coord</a> normal, const double surface, <a class="el" href="classCell.html">Cell</a> *cell, const int &amp;numberPhases)</td></tr>
 <tr class="separator:a0b1b19dd2d422ccdb4274edd7eb9363c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac80ed2fa3407205ed45643d92f269508"><td class="memItemLeft" align="right" valign="top">virtual double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classFlux.html#ac80ed2fa3407205ed45643d92f269508">getAlpha</a> (const int &amp;numPhase) const </td></tr>
-<tr class="separator:ac80ed2fa3407205ed45643d92f269508"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a16df413e2c7e4ded70c78bd4300c0634"><td class="memItemLeft" align="right" valign="top">virtual double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classFlux.html#a16df413e2c7e4ded70c78bd4300c0634">getMasse</a> (const int &amp;numPhase) const </td></tr>
-<tr class="separator:a16df413e2c7e4ded70c78bd4300c0634"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4965509f4b6ac8dded87cd22116d32fd"><td class="memItemLeft" align="right" valign="top">virtual double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classFlux.html#a4965509f4b6ac8dded87cd22116d32fd">getEnergy</a> (const int &amp;numPhase) const </td></tr>
-<tr class="separator:a4965509f4b6ac8dded87cd22116d32fd"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae9f86626d91d02ea0c9b8678a9a4bd2c"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classCoord.html">Coord</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classFlux.html#ae9f86626d91d02ea0c9b8678a9a4bd2c">getQdm</a> () const </td></tr>
-<tr class="separator:ae9f86626d91d02ea0c9b8678a9a4bd2c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a89ea70ad15df1c83e05e09239de49f9a"><td class="memItemLeft" align="right" valign="top">virtual double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classFlux.html#a89ea70ad15df1c83e05e09239de49f9a">getMasseMix</a> () const </td></tr>
-<tr class="separator:a89ea70ad15df1c83e05e09239de49f9a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4a7d34da1b07fcfe99a023064e53ab37"><td class="memItemLeft" align="right" valign="top">virtual double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classFlux.html#a4a7d34da1b07fcfe99a023064e53ab37">getEnergyMix</a> () const </td></tr>
-<tr class="separator:a4a7d34da1b07fcfe99a023064e53ab37"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad7e05753dc81037dd786180384512f9c"><td class="memItemLeft" align="right" valign="top">virtual const double &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classFlux.html#ad7e05753dc81037dd786180384512f9c">getAlpha</a> (const int &amp;numPhase) const </td></tr>
+<tr class="separator:ad7e05753dc81037dd786180384512f9c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a378b4fadb0d56aabe67ff6c325f4b217"><td class="memItemLeft" align="right" valign="top">virtual const double &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classFlux.html#a378b4fadb0d56aabe67ff6c325f4b217">getMasse</a> (const int &amp;numPhase) const </td></tr>
+<tr class="separator:a378b4fadb0d56aabe67ff6c325f4b217"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0c6b10e0d110305adb7275d96d4d8d3a"><td class="memItemLeft" align="right" valign="top">virtual const double &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classFlux.html#a0c6b10e0d110305adb7275d96d4d8d3a">getEnergy</a> (const int &amp;numPhase) const </td></tr>
+<tr class="separator:a0c6b10e0d110305adb7275d96d4d8d3a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afb2e817b3fada488b9abe91363d0b4f7"><td class="memItemLeft" align="right" valign="top">virtual const <a class="el" href="classCoord.html">Coord</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classFlux.html#afb2e817b3fada488b9abe91363d0b4f7">getQdm</a> () const </td></tr>
+<tr class="separator:afb2e817b3fada488b9abe91363d0b4f7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9ca4d9351882370dacd845d005f2431e"><td class="memItemLeft" align="right" valign="top">virtual const double &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classFlux.html#a9ca4d9351882370dacd845d005f2431e">getMasseMix</a> () const </td></tr>
+<tr class="separator:a9ca4d9351882370dacd845d005f2431e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afac1e19269cbf730dbeaedf7d4a23b2c"><td class="memItemLeft" align="right" valign="top">virtual const double &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classFlux.html#afac1e19269cbf730dbeaedf7d4a23b2c">getEnergyMix</a> () const </td></tr>
+<tr class="separator:afac1e19269cbf730dbeaedf7d4a23b2c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6211783f0fb3ad0d452856024658c622"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classFlux.html#a6211783f0fb3ad0d452856024658c622">setCons</a> (const <a class="el" href="classFlux.html">Flux</a> *cons, const int &amp;numberPhases)</td></tr>
 <tr class="separator:a6211783f0fb3ad0d452856024658c622"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
 <tr class="memitem:ad0fca662bb69f02a1a061b4c9958c68f"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classFlux.html#ad0fca662bb69f02a1a061b4c9958c68f">m_sM</a></td></tr>
-<tr class="memdesc:ad0fca662bb69f02a1a061b4c9958c68f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Fluid velocity for intercell boundaries.  <a href="#ad0fca662bb69f02a1a061b4c9958c68f">More...</a><br /></td></tr>
+<tr class="memdesc:ad0fca662bb69f02a1a061b4c9958c68f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Fluid velocity for intercell interfaces.  <a href="#ad0fca662bb69f02a1a061b4c9958c68f">More...</a><br /></td></tr>
 <tr class="separator:ad0fca662bb69f02a1a061b4c9958c68f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
@@ -246,6 +249,51 @@ Protected Attributes</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
+<a class="anchor" id="a63e88f96ef7936579b8dcbde4241e471"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual void Flux::addFlux </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classFlux.html">Flux</a> *&#160;</td>
+          <td class="paramname"><em>flux</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const int &amp;&#160;</td>
+          <td class="paramname"><em>numberPhases</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Add flux passed in parameter to the correspond model flux. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">flux</td><td>flux to add to the current one </td></tr>
+    <tr><td class="paramname">numberPhases</td><td>number of phases </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>Reimplemented in <a class="el" href="classFluxKapila.html#a2a13e8022a0811e4d07abeeaeb88e302">FluxKapila</a>, <a class="el" href="classFluxMultiP.html#a2304f5c2ced757056b3557c22d38d07f">FluxMultiP</a>, <a class="el" href="classFluxThermalEq.html#a4fda82e5e806e673809d885991180ec5">FluxThermalEq</a>, and <a class="el" href="classFluxEuler.html#aff550d1f08b21baa5aee4a03916c4436">FluxEuler</a>.</p>
+
+</div>
+</div>
 <a class="anchor" id="a293e2178f9f34fbf87969ef4821739fc"></a>
 <div class="memitem">
 <div class="memproto">
@@ -278,7 +326,7 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Add flux to the corresponding model buffer flux. </p>
+<p>Add flux to the corresponding model flux. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">coefA</td><td>possibility to multiply the flux before adding (set 1.d0 if not needed) </td></tr>
@@ -394,8 +442,15 @@ Protected Attributes</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Add symetric terms. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">r</td><td>radial distance of the cell from the axis of symmetry </td></tr>
+    <tr><td class="paramname">v</td><td>velocity in the radial direction </td></tr>
+  </table>
+  </dd>
+</dl>
 
-<p>Reimplemented in <a class="el" href="classFluxKapila.html#a85f40f53d8edf972d4500babcd623154">FluxKapila</a>.</p>
+<p>Reimplemented in <a class="el" href="classFluxKapila.html#a85f40f53d8edf972d4500babcd623154">FluxKapila</a>, and <a class="el" href="classFluxEuler.html#a304b43695015e1f94c1504b083567661">FluxEuler</a>.</p>
 
 </div>
 </div>
@@ -495,7 +550,7 @@ Protected Attributes</h2></td></tr>
   </dd>
 </dl>
 
-<p>Reimplemented in <a class="el" href="classFluxEulerHomogeneous.html#a63b7a290709ebf80b73b388cb5b2eb45">FluxEulerHomogeneous</a>, <a class="el" href="classFluxKapila.html#af7f683877a8e95587fc88160baec2e7f">FluxKapila</a>, <a class="el" href="classFluxMultiP.html#a2209f87cd3fe760996e2bfd8b84a3b43">FluxMultiP</a>, <a class="el" href="classFluxThermalEq.html#a35ba0ce9cc83ea64017535c849b397e8">FluxThermalEq</a>, and <a class="el" href="classFluxEuler.html#a0cd24a2f5d8f8496a4cecee891cde962">FluxEuler</a>.</p>
+<p>Reimplemented in <a class="el" href="classFluxKapila.html#af7f683877a8e95587fc88160baec2e7f">FluxKapila</a>, <a class="el" href="classFluxMultiP.html#a2209f87cd3fe760996e2bfd8b84a3b43">FluxMultiP</a>, <a class="el" href="classFluxEulerHomogeneous.html#a63b7a290709ebf80b73b388cb5b2eb45">FluxEulerHomogeneous</a>, <a class="el" href="classFluxThermalEq.html#a35ba0ce9cc83ea64017535c849b397e8">FluxThermalEq</a>, and <a class="el" href="classFluxEuler.html#a0cd24a2f5d8f8496a4cecee891cde962">FluxEuler</a>.</p>
 
 </div>
 </div>
@@ -547,7 +602,7 @@ Protected Attributes</h2></td></tr>
   </dd>
 </dl>
 
-<p>Reimplemented in <a class="el" href="classFluxEulerHomogeneous.html#a647ff5ae8e54e3da74b5ff8875657b75">FluxEulerHomogeneous</a>, <a class="el" href="classFluxKapila.html#a541a818902ca45adddca1201368982f3">FluxKapila</a>, <a class="el" href="classFluxMultiP.html#af146084178833ba4ea57809b6843b992">FluxMultiP</a>, <a class="el" href="classFluxThermalEq.html#a2371ba29c4d3c30b69a3069f574c59fd">FluxThermalEq</a>, and <a class="el" href="classFluxEuler.html#a295051afc35ee7d37b7443e7620511b1">FluxEuler</a>.</p>
+<p>Reimplemented in <a class="el" href="classFluxKapila.html#a541a818902ca45adddca1201368982f3">FluxKapila</a>, <a class="el" href="classFluxMultiP.html#af146084178833ba4ea57809b6843b992">FluxMultiP</a>, <a class="el" href="classFluxEulerHomogeneous.html#a647ff5ae8e54e3da74b5ff8875657b75">FluxEulerHomogeneous</a>, <a class="el" href="classFluxThermalEq.html#a2371ba29c4d3c30b69a3069f574c59fd">FluxThermalEq</a>, and <a class="el" href="classFluxEuler.html#a295051afc35ee7d37b7443e7620511b1">FluxEuler</a>.</p>
 
 </div>
 </div>
@@ -599,11 +654,11 @@ Protected Attributes</h2></td></tr>
   </dd>
 </dl>
 
-<p>Reimplemented in <a class="el" href="classFluxKapila.html#ae1266e0ae266880964342ae3e2c42576">FluxKapila</a>, <a class="el" href="classFluxEulerHomogeneous.html#ae0f4235a3a4abba5aa8f29fe082f0762">FluxEulerHomogeneous</a>, <a class="el" href="classFluxThermalEq.html#a0f0f1cefa9aa0d1c28e51a78b81ffc3d">FluxThermalEq</a>, and <a class="el" href="classFluxEuler.html#aef2d7871f95e2031ea864f31f55b59db">FluxEuler</a>.</p>
+<p>Reimplemented in <a class="el" href="classFluxKapila.html#ae1266e0ae266880964342ae3e2c42576">FluxKapila</a>, <a class="el" href="classFluxMultiP.html#abcf0f662335c24a9774038dc40477bf6">FluxMultiP</a>, <a class="el" href="classFluxEulerHomogeneous.html#ae0f4235a3a4abba5aa8f29fe082f0762">FluxEulerHomogeneous</a>, <a class="el" href="classFluxThermalEq.html#a0f0f1cefa9aa0d1c28e51a78b81ffc3d">FluxThermalEq</a>, and <a class="el" href="classFluxEuler.html#aef2d7871f95e2031ea864f31f55b59db">FluxEuler</a>.</p>
 
 </div>
 </div>
-<a class="anchor" id="ac80ed2fa3407205ed45643d92f269508"></a>
+<a class="anchor" id="ad7e05753dc81037dd786180384512f9c"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="mlabels">
@@ -611,7 +666,7 @@ Protected Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">virtual double Flux::getAlpha </td>
+          <td class="memname">virtual const double&amp; Flux::getAlpha </td>
           <td>(</td>
           <td class="paramtype">const int &amp;&#160;</td>
           <td class="paramname"><em>numPhase</em></td><td>)</td>
@@ -625,11 +680,11 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Reimplemented in <a class="el" href="classFluxKapila.html#a5e30d35a9804bc487f854e94a9d8eef3">FluxKapila</a>, and <a class="el" href="classFluxMultiP.html#a3f957770e06a98658e592350e0e5785e">FluxMultiP</a>.</p>
+<p>Reimplemented in <a class="el" href="classFluxMultiP.html#a3a0101d06221857e1e2f9f4c8dc0608e">FluxMultiP</a>, and <a class="el" href="classFluxKapila.html#af064452d21e9f96d020001f1a134337b">FluxKapila</a>.</p>
 
 </div>
 </div>
-<a class="anchor" id="a4965509f4b6ac8dded87cd22116d32fd"></a>
+<a class="anchor" id="a0c6b10e0d110305adb7275d96d4d8d3a"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="mlabels">
@@ -637,7 +692,7 @@ Protected Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">virtual double Flux::getEnergy </td>
+          <td class="memname">virtual const double&amp; Flux::getEnergy </td>
           <td>(</td>
           <td class="paramtype">const int &amp;&#160;</td>
           <td class="paramname"><em>numPhase</em></td><td>)</td>
@@ -651,11 +706,11 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Reimplemented in <a class="el" href="classFluxKapila.html#a4a03d0df83c5e81f716cdaac6f9bcc77">FluxKapila</a>, and <a class="el" href="classFluxMultiP.html#aeb94908e719bcbe586bffc1573552f15">FluxMultiP</a>.</p>
+<p>Reimplemented in <a class="el" href="classFluxMultiP.html#a3f2741195dc417b135c47db3960323a5">FluxMultiP</a>, and <a class="el" href="classFluxKapila.html#adbaed5a5708af2a5be4f408c2e15d96f">FluxKapila</a>.</p>
 
 </div>
 </div>
-<a class="anchor" id="a4a7d34da1b07fcfe99a023064e53ab37"></a>
+<a class="anchor" id="afac1e19269cbf730dbeaedf7d4a23b2c"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="mlabels">
@@ -663,7 +718,7 @@ Protected Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">virtual double Flux::getEnergyMix </td>
+          <td class="memname">virtual const double&amp; Flux::getEnergyMix </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td> const</td>
@@ -676,11 +731,11 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Reimplemented in <a class="el" href="classFluxKapila.html#a01de57db640d82ec3c657280696384d2">FluxKapila</a>, <a class="el" href="classFluxMultiP.html#ab4a0d7170f5009dfa8ef77bfbad9c026">FluxMultiP</a>, <a class="el" href="classFluxEulerHomogeneous.html#a30b1537024a7e7923c3541f7f246fe1f">FluxEulerHomogeneous</a>, <a class="el" href="classFluxThermalEq.html#a6999e476b1393a47c37b9c1c9573ffdb">FluxThermalEq</a>, and <a class="el" href="classFluxEuler.html#a2dd469cfc479b46066f74c6e86454ea8">FluxEuler</a>.</p>
+<p>Reimplemented in <a class="el" href="classFluxMultiP.html#af310c4c363a247128b4f8678c304cc28">FluxMultiP</a>, <a class="el" href="classFluxKapila.html#aee8e48bdd0b79a3cc270d9ed2fc983ac">FluxKapila</a>, <a class="el" href="classFluxEuler.html#a26195275d76238894b0f2e3bca1d4404">FluxEuler</a>, <a class="el" href="classFluxEulerHomogeneous.html#a6ba6c9a4a071a833b6182a00b5310326">FluxEulerHomogeneous</a>, and <a class="el" href="classFluxThermalEq.html#aa62d228b2ed29ddc3677e45f5434042e">FluxThermalEq</a>.</p>
 
 </div>
 </div>
-<a class="anchor" id="a16df413e2c7e4ded70c78bd4300c0634"></a>
+<a class="anchor" id="a378b4fadb0d56aabe67ff6c325f4b217"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="mlabels">
@@ -688,7 +743,7 @@ Protected Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">virtual double Flux::getMasse </td>
+          <td class="memname">virtual const double&amp; Flux::getMasse </td>
           <td>(</td>
           <td class="paramtype">const int &amp;&#160;</td>
           <td class="paramname"><em>numPhase</em></td><td>)</td>
@@ -702,11 +757,11 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Reimplemented in <a class="el" href="classFluxKapila.html#a96c793581849067281c4abe4976643db">FluxKapila</a>, <a class="el" href="classFluxMultiP.html#aec62f50ec7255dbc420a1a82f794aa06">FluxMultiP</a>, and <a class="el" href="classFluxThermalEq.html#a314cfe6af6825f725f8b9c0975f31fa4">FluxThermalEq</a>.</p>
+<p>Reimplemented in <a class="el" href="classFluxMultiP.html#a90272cd3f1ed50f48fb407165de75edc">FluxMultiP</a>, <a class="el" href="classFluxKapila.html#a18ffce37e86075dfa0c137ccd07a82d9">FluxKapila</a>, and <a class="el" href="classFluxThermalEq.html#a24f82560f37465e779dbee0c66205614">FluxThermalEq</a>.</p>
 
 </div>
 </div>
-<a class="anchor" id="a89ea70ad15df1c83e05e09239de49f9a"></a>
+<a class="anchor" id="a9ca4d9351882370dacd845d005f2431e"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="mlabels">
@@ -714,7 +769,7 @@ Protected Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">virtual double Flux::getMasseMix </td>
+          <td class="memname">virtual const double&amp; Flux::getMasseMix </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td> const</td>
@@ -727,11 +782,11 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Reimplemented in <a class="el" href="classFluxEulerHomogeneous.html#aafba1f3c9913ce032db2fa9d46182399">FluxEulerHomogeneous</a>, and <a class="el" href="classFluxEuler.html#afb5ab89e08517516d7599568699fec72">FluxEuler</a>.</p>
+<p>Reimplemented in <a class="el" href="classFluxEuler.html#abea24729d43211e67e9ec0e6ab4a90f0">FluxEuler</a>, and <a class="el" href="classFluxEulerHomogeneous.html#ae1f2af4791089b29090e9ce4149eaed4">FluxEulerHomogeneous</a>.</p>
 
 </div>
 </div>
-<a class="anchor" id="ae9f86626d91d02ea0c9b8678a9a4bd2c"></a>
+<a class="anchor" id="afb2e817b3fada488b9abe91363d0b4f7"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="mlabels">
@@ -739,7 +794,7 @@ Protected Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">virtual <a class="el" href="classCoord.html">Coord</a> Flux::getQdm </td>
+          <td class="memname">virtual const <a class="el" href="classCoord.html">Coord</a>&amp; Flux::getQdm </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td> const</td>
@@ -752,11 +807,11 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Reimplemented in <a class="el" href="classFluxKapila.html#adecd7d90fec3ec655e0f11dce4bd3691">FluxKapila</a>, <a class="el" href="classFluxMultiP.html#ab23b9d597f84596ebaadf46497ce53ba">FluxMultiP</a>, <a class="el" href="classFluxEulerHomogeneous.html#a77cf2d4553b93d7c0190f23a51ac6342">FluxEulerHomogeneous</a>, <a class="el" href="classFluxThermalEq.html#a413689989cfc231b7fec268d25bda3f1">FluxThermalEq</a>, and <a class="el" href="classFluxEuler.html#abebb18e4d1cd5f8b9dbcfa8941637a77">FluxEuler</a>.</p>
+<p>Reimplemented in <a class="el" href="classFluxMultiP.html#affb2c2c8aac12b0a1335f1c215e52bea">FluxMultiP</a>, <a class="el" href="classFluxKapila.html#a9c486a698347d88f3edba3d74a2f4cb2">FluxKapila</a>, <a class="el" href="classFluxThermalEq.html#a0daa24166abbbeeb3053b98e51b415fc">FluxThermalEq</a>, <a class="el" href="classFluxEuler.html#a34f6ea6ae0dea17f59622da960d77849">FluxEuler</a>, and <a class="el" href="classFluxEulerHomogeneous.html#ab9d2cfa0d933891a0ad6d10bb20d7bb9">FluxEulerHomogeneous</a>.</p>
 
 </div>
 </div>
-<a class="anchor" id="a892e8f95ff2cf7daaf665a3cde06d61c"></a>
+<a class="anchor" id="a3ec05a78877f430d2413da05071270fe"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="mlabels">
@@ -764,7 +819,52 @@ Protected Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">virtual void Flux::integrateSourceTermsGravity </td>
+          <td class="memname">virtual void Flux::multiply </td>
+          <td>(</td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>scalar</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const int &amp;&#160;</td>
+          <td class="paramname"><em>numberPhases</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>multiply the flux of the corresponding model by a constant </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">scalar</td><td>constant </td></tr>
+    <tr><td class="paramname">numberPhases</td><td>number of phases </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>Reimplemented in <a class="el" href="classFluxKapila.html#aec9050208ad6e2b278137445b16cd3e5">FluxKapila</a>, <a class="el" href="classFluxMultiP.html#a37d5aae7920166d2401a583d428b2250">FluxMultiP</a>, <a class="el" href="classFluxEulerHomogeneous.html#abee8a4966d7c8a25e124c8006d9a5bed">FluxEulerHomogeneous</a>, <a class="el" href="classFluxThermalEq.html#a82c788d8a6ec6effb3aa679cd4a7b247">FluxThermalEq</a>, and <a class="el" href="classFluxEuler.html#a7e15075517cbeb95acf09c5dc3979d7d">FluxEuler</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a61fa6b64216db767920ece6c50abe0b1"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual void Flux::prepSourceTermsGravity </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="classCell.html">Cell</a> *&#160;</td>
           <td class="paramname"><em>cell</em>, </td>
@@ -780,18 +880,6 @@ Protected Attributes</h2></td></tr>
           <td></td>
           <td class="paramtype">const int &amp;&#160;</td>
           <td class="paramname"><em>numberPhases</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const int &amp;&#160;</td>
-          <td class="paramname"><em>axe</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const int &amp;&#160;</td>
-          <td class="paramname"><em>direction</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -814,11 +902,11 @@ Protected Attributes</h2></td></tr>
 
 <p>Gravity source term. </p>
 
-<p>Reimplemented in <a class="el" href="classFluxKapila.html#ac4e4f9438740717a72fbb68508bbffee">FluxKapila</a>, and <a class="el" href="classFluxMultiP.html#ab188e92f4ce84b982a2f75d1fd00991f">FluxMultiP</a>.</p>
+<p>Reimplemented in <a class="el" href="classFluxKapila.html#ad8fa0b1533998352c0836b96b9e258f6">FluxKapila</a>.</p>
 
 </div>
 </div>
-<a class="anchor" id="a13bd56b523946ef6ae112b6d7b918209"></a>
+<a class="anchor" id="affd32e250b7176b5a0e6b8c0995bfa95"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="mlabels">
@@ -826,7 +914,7 @@ Protected Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">virtual void Flux::integrateSourceTermsHeating </td>
+          <td class="memname">virtual void Flux::prepSourceTermsHeating </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="classCell.html">Cell</a> *&#160;</td>
           <td class="paramname"><em>cell</em>, </td>
@@ -864,11 +952,11 @@ Protected Attributes</h2></td></tr>
 
 <p>Heating source term. </p>
 
-<p>Reimplemented in <a class="el" href="classFluxKapila.html#a3f27440b73240593f9596f58a0b349f7">FluxKapila</a>, <a class="el" href="classFluxMultiP.html#aec69723e46b076ce0ce2475f4a7518fa">FluxMultiP</a>, <a class="el" href="classFluxEuler.html#ac4227c726dab4dfe4438e8b15f8f69b7">FluxEuler</a>, and <a class="el" href="classFluxThermalEq.html#af433ed257d6e6c3e4c5c9d874ac0bcce">FluxThermalEq</a>.</p>
+<p>Reimplemented in <a class="el" href="classFluxMultiP.html#a1dfd466b3b677e5adadc72c27412398e">FluxMultiP</a>, <a class="el" href="classFluxKapila.html#ae8eaec0516ce8e2c1f4baca36d3c5d86">FluxKapila</a>, <a class="el" href="classFluxEuler.html#a62a34b62b7ba40380e823a5f993f0752">FluxEuler</a>, and <a class="el" href="classFluxThermalEq.html#aa1d92c58fb8015306978ce3efa569466">FluxThermalEq</a>.</p>
 
 </div>
 </div>
-<a class="anchor" id="a094fc96de5094ebef7883d2241b02aa5"></a>
+<a class="anchor" id="adbc43272ba14e0cba75f76e88575be17"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="mlabels">
@@ -876,7 +964,7 @@ Protected Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">virtual void Flux::integrateSourceTermsMRF </td>
+          <td class="memname">virtual void Flux::prepSourceTermsMRF </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="classCell.html">Cell</a> *&#160;</td>
           <td class="paramname"><em>cell</em>, </td>
@@ -914,52 +1002,7 @@ Protected Attributes</h2></td></tr>
 
 <p>MRF source term. </p>
 
-<p>Reimplemented in <a class="el" href="classFluxKapila.html#a0e0cf9ab7cd9dabe602de1dbb4fe9cac">FluxKapila</a>, and <a class="el" href="classFluxEuler.html#a287032718f76e5811bbd11e3f8f261eb">FluxEuler</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="a3ec05a78877f430d2413da05071270fe"></a>
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">virtual void Flux::multiply </td>
-          <td>(</td>
-          <td class="paramtype">double&#160;</td>
-          <td class="paramname"><em>scalar</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const int &amp;&#160;</td>
-          <td class="paramname"><em>numberPhases</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>multiply flux by a constant </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">scalar</td><td>constant </td></tr>
-    <tr><td class="paramname">numberPhases</td><td>number of phases </td></tr>
-  </table>
-  </dd>
-</dl>
-
-<p>Reimplemented in <a class="el" href="classFluxEulerHomogeneous.html#abee8a4966d7c8a25e124c8006d9a5bed">FluxEulerHomogeneous</a>, <a class="el" href="classFluxKapila.html#aec9050208ad6e2b278137445b16cd3e5">FluxKapila</a>, <a class="el" href="classFluxMultiP.html#a37d5aae7920166d2401a583d428b2250">FluxMultiP</a>, <a class="el" href="classFluxThermalEq.html#a82c788d8a6ec6effb3aa679cd4a7b247">FluxThermalEq</a>, and <a class="el" href="classFluxEuler.html#a7e15075517cbeb95acf09c5dc3979d7d">FluxEuler</a>.</p>
+<p>Reimplemented in <a class="el" href="classFluxMultiP.html#a568045ffff2f5658e58208adfa6667ae">FluxMultiP</a>, <a class="el" href="classFluxKapila.html#a7fafc41fde8b24c7ad52a9c1ef5bdce5">FluxKapila</a>, and <a class="el" href="classFluxEuler.html#a79c464e28e221f9f4ed7438c53f79f1d">FluxEuler</a>.</p>
 
 </div>
 </div>
@@ -1071,7 +1114,7 @@ Protected Attributes</h2></td></tr>
   </dd>
 </dl>
 
-<p>Reimplemented in <a class="el" href="classFluxEulerHomogeneous.html#ae2a861db9633be36cba0eab87a95665f">FluxEulerHomogeneous</a>, <a class="el" href="classFluxKapila.html#a12b99f3e690ab2702386d35fa3146348">FluxKapila</a>, <a class="el" href="classFluxMultiP.html#a8b12cfc48de0374d5a14ae863a6aa01f">FluxMultiP</a>, <a class="el" href="classFluxThermalEq.html#a92cc4da96d14562126d10bcb32d2890a">FluxThermalEq</a>, and <a class="el" href="classFluxEuler.html#a5bdea11cefb9b0ade42642d8648d04dd">FluxEuler</a>.</p>
+<p>Reimplemented in <a class="el" href="classFluxKapila.html#a12b99f3e690ab2702386d35fa3146348">FluxKapila</a>, <a class="el" href="classFluxMultiP.html#a8b12cfc48de0374d5a14ae863a6aa01f">FluxMultiP</a>, <a class="el" href="classFluxEulerHomogeneous.html#ae2a861db9633be36cba0eab87a95665f">FluxEulerHomogeneous</a>, <a class="el" href="classFluxThermalEq.html#a92cc4da96d14562126d10bcb32d2890a">FluxThermalEq</a>, and <a class="el" href="classFluxEuler.html#a5bdea11cefb9b0ade42642d8648d04dd">FluxEuler</a>.</p>
 
 </div>
 </div>
@@ -1107,7 +1150,7 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Reimplemented in <a class="el" href="classFluxKapila.html#a9864e1c54088f5cdff2731ab1bad2140">FluxKapila</a>, <a class="el" href="classFluxMultiP.html#a5daeda32cee71304e00a6a5c4f6b4b3e">FluxMultiP</a>, <a class="el" href="classFluxEulerHomogeneous.html#a9694a199213ee5a27318820c1a168454">FluxEulerHomogeneous</a>, <a class="el" href="classFluxThermalEq.html#ab70e183809784b14a18775918b13ad1f">FluxThermalEq</a>, and <a class="el" href="classFluxEuler.html#a8dac567a97760be580b0601189a05c3c">FluxEuler</a>.</p>
+<p>Reimplemented in <a class="el" href="classFluxMultiP.html#a5daeda32cee71304e00a6a5c4f6b4b3e">FluxMultiP</a>, <a class="el" href="classFluxKapila.html#a9864e1c54088f5cdff2731ab1bad2140">FluxKapila</a>, <a class="el" href="classFluxEuler.html#a8dac567a97760be580b0601189a05c3c">FluxEuler</a>, <a class="el" href="classFluxEulerHomogeneous.html#a9694a199213ee5a27318820c1a168454">FluxEulerHomogeneous</a>, and <a class="el" href="classFluxThermalEq.html#ab70e183809784b14a18775918b13ad1f">FluxThermalEq</a>.</p>
 
 </div>
 </div>
@@ -1141,7 +1184,7 @@ Protected Attributes</h2></td></tr>
   </dd>
 </dl>
 
-<p>Reimplemented in <a class="el" href="classFluxEulerHomogeneous.html#a5e8191318abb9843cb29de8004cd466f">FluxEulerHomogeneous</a>, <a class="el" href="classFluxKapila.html#a29013a366c315e6528f29715b2805384">FluxKapila</a>, <a class="el" href="classFluxMultiP.html#a3c87b1f7a54bf01ac7d58b962758a157">FluxMultiP</a>, <a class="el" href="classFluxThermalEq.html#a88be20872812234185fc75fab00f90ea">FluxThermalEq</a>, and <a class="el" href="classFluxEuler.html#aa91252beddeff0e2834b8d56be8484cc">FluxEuler</a>.</p>
+<p>Reimplemented in <a class="el" href="classFluxKapila.html#a29013a366c315e6528f29715b2805384">FluxKapila</a>, <a class="el" href="classFluxMultiP.html#a3c87b1f7a54bf01ac7d58b962758a157">FluxMultiP</a>, <a class="el" href="classFluxEulerHomogeneous.html#a5e8191318abb9843cb29de8004cd466f">FluxEulerHomogeneous</a>, <a class="el" href="classFluxThermalEq.html#a88be20872812234185fc75fab00f90ea">FluxThermalEq</a>, and <a class="el" href="classFluxEuler.html#aa91252beddeff0e2834b8d56be8484cc">FluxEuler</a>.</p>
 
 </div>
 </div>
@@ -1220,7 +1263,7 @@ Protected Attributes</h2></td></tr>
   </dd>
 </dl>
 
-<p>Reimplemented in <a class="el" href="classFluxEulerHomogeneous.html#a78b6ffa56d49b9188e349e647deea31e">FluxEulerHomogeneous</a>, <a class="el" href="classFluxKapila.html#a85042ffda4d4de40d5fdac12f4535f62">FluxKapila</a>, <a class="el" href="classFluxMultiP.html#add1d9abf969e2e0aa265129c7a8257a5">FluxMultiP</a>, <a class="el" href="classFluxThermalEq.html#a4a9b9c9e111bd842c0473e0e43686b4c">FluxThermalEq</a>, and <a class="el" href="classFluxEuler.html#ab5ff7a1f370ebf4220f1101ed31da3d1">FluxEuler</a>.</p>
+<p>Reimplemented in <a class="el" href="classFluxKapila.html#a85042ffda4d4de40d5fdac12f4535f62">FluxKapila</a>, <a class="el" href="classFluxMultiP.html#add1d9abf969e2e0aa265129c7a8257a5">FluxMultiP</a>, <a class="el" href="classFluxEulerHomogeneous.html#a78b6ffa56d49b9188e349e647deea31e">FluxEulerHomogeneous</a>, <a class="el" href="classFluxThermalEq.html#a4a9b9c9e111bd842c0473e0e43686b4c">FluxThermalEq</a>, and <a class="el" href="classFluxEuler.html#ab5ff7a1f370ebf4220f1101ed31da3d1">FluxEuler</a>.</p>
 
 </div>
 </div>
@@ -1343,7 +1386,7 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Fluid velocity for intercell boundaries. </p>
+<p>Fluid velocity for intercell interfaces. </p>
 
 </div>
 </div>
@@ -1357,7 +1400,7 @@ Protected Attributes</h2></td></tr>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="classFlux.html">Flux</a></li>
-    <li class="footer">Generated on Wed Apr 29 2020 10:31:12 for ECOGEN by
+    <li class="footer">Generated on Mon May 11 2020 16:03:19 for ECOGEN by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.11 </li>
   </ul>

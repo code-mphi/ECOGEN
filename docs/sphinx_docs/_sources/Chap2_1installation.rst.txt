@@ -1,15 +1,15 @@
-Prerequisities
-==============
+Prerequisites
+=============
 
-ECOGEN must be compiled with C++. It also requires a functional system implementation of MPI library (not provided in this package). Depending on your operating system, you can follow the instructions below to set a full open source installation:
+ECOGEN must be compiled with C++. It also requires a functional system implementation of MPI library (not provided in this package). Depending on your operating system, you can follow the instructions below to set a full open-source installation.
 
-Installing prerequisities on Ubuntu system
-------------------------------------------
-ECOGEN required two mandatory components to be installed on your Ubuntu system : a C++ compiler and an effective implementation of MPI.
+Installing prerequisites on Ubuntu system
+-----------------------------------------
+ECOGEN requires two mandatory components to be installed on your Ubuntu system: A C++ compiler and an effective implementation of MPI.
 
 Installing C++ compiler
 ~~~~~~~~~~~~~~~~~~~~~~~
-Nothing is more easy than installing C and C++ compiler on Ubuntu. In your terminal just enter the following commands:
+Nothing is easier than installing C and C++ compiler on Ubuntu. In your terminal, just enter the following commands:
 
 .. highlight:: console
 
@@ -20,13 +20,14 @@ Nothing is more easy than installing C and C++ compiler on Ubuntu. In your termi
 	sudo apt-get install gcc
 	sudo apt-get install g++
 	sudo apt-get install build-essential
+	sudo apt-get install make
 
-More information on the ubuntu doc page https://doc.ubuntu-fr.org/gcc
+More information on the Ubuntu doc page https://doc.ubuntu-fr.org/gcc.
 
 Installing openMPI
 ~~~~~~~~~~~~~~~~~~
 
-Dowload the latest stable version of openMPI_ under compressed format. At the time this page is written, it corresponds to the compressed file : openmpi-4.0.1.tar.gz. Uncompresse and move into the directory:
+Download the latest stable version of openMPI_ under compressed format. At the time this page was written, it corresponded to the compressed file: openmpi-4.0.1.tar.gz. Uncompresse and move it into the directory:
 
 .. highlight:: console
 
@@ -35,7 +36,7 @@ Dowload the latest stable version of openMPI_ under compressed format. At the ti
 	tar -xvf openmpi-4.0.1.tar.gz 
 	cd openmpi-4.0.1/
 
-Prepare the environnement for using your favorite compiler:
+Prepare the environment to use your favorite compiler:
 
 .. highlight:: console
 
@@ -44,7 +45,7 @@ Prepare the environnement for using your favorite compiler:
 	export CC=gcc 
 	export CXX=g++ 
 
-Configure and proceed to the installation (you can choose a different directory). The "make" step should take some times (coffee time ?):
+Configure and proceed to the installation (you can choose a different directory). The "make" step should take some time (coffee time?):
 
 .. highlight:: console
 
@@ -63,9 +64,13 @@ Cleaning
 	cd .. 
 	rm -rf openmpi-4.0.1/ 
 
-Modify the /etc/bash.bashrc by adding the line:
+Add openMPI library to the environment variable PATH (might be required to be root):
 
-*export PATH=/opt/openmpi/bin:$PATH*
+.. highlight:: console
+
+:: 
+
+	sudo echo 'export PATH=/opt/openmpi/bin:$PATH' >> /etc/bash.bashrc
 
 Then source the file to take into consideration the modifications:
 
@@ -75,32 +80,34 @@ Then source the file to take into consideration the modifications:
 
 	source /etc/bash.bashrc
 
-If the installation succeed you should use the mpicxx command in your terminal. Then proceed to the download step below.
+If the installation succeeds you should be able to use the "mpicxx" command in your terminal. Then proceed to the download step below.
 
 Download
 ========
 
-The last ECOGEN version can be downloaded from Git-hub. The source files are available at the following address: https://github.com/code-mphi/ECOGEN. 
+The last ECOGEN version |version| can be downloaded from GitHub. The source files are available at the following address: https://github.com/code-mphi/ECOGEN/releases. 
 
 The package includes:
 
 * ECOGEN/src/ folder including C++ source files.
 * ECOGEN/libMeshes/ folder including examples of unstructured meshes in *.geo* format (gmsh files version 2). See section :ref:`Sec:tuto:generatingMeshes` for details.
-* ECOGEN/libEOS/ folder including some possible parameters for Equation of State in XML files. See section :ref:`Sec:IO:materials` for details.
+* ECOGEN/libEOS/ folder including some possible parameters for the equation-of-states in XML files. See section :ref:`Sec:IO:materials` for details.
 * ECOGEN/libTests folder including:
 
-	- ECOGEN/libTests/referenceTestCases/ folder organized in a test cases library according the flow model (Euler Equations ECOGEN solver, Kapila's model for multiphase flow ECOGEN solver, Homogeneous Euler Equation ECOGEN solver, etc.). A detailed list of available test cases is proposed in section :ref:`Chap:TestCases`.
-	- 4 quick-manual XML files to create a new flow calculation with ECOGEN.
-* *ECOGEN.xml* main entry file to select running cases.
-* *Makefile*: for compilation in Unix environment. This file may require some adaptation to the user's environment.
+	- ECOGEN/libTests/referenceTestCases/ folder organized as a test-case library according to the flow model (Euler-equation ECOGEN solver, Kapila's model for multiphase flow ECOGEN solver, homogeneous Euler-equation ECOGEN solver, etc.). A detailed list of available test cases is proposed in section :ref:`Chap:TestCases`.
+	- 4 quick-manual XML files to create a new flow computation with ECOGEN.
+* *ECOGEN.xml*: Main entry file to select running cases.
+* *Makefile*: For compilation in Unix environment. This file may require some adaptation to the user's environment.
 * *LICENSE*, *COPYRIGHT* and *AUTHORS*: Information files about authors and licensing.
 * *README.md*: Information file.
-* *ECOGEN_documentation.pdf*: The full documentation for ECOGEN.
+* *ECOGEN_V1.0_documentation.pdf*: The full documentation for ECOGEN.
+
+.. _Sec:installation:compileAndExecute:
 
 Compilation/Execution on bash
 =============================
 
-Use the Makefile (can be adapted if necessary) to compile ECOGEN sources directly on bash (XX is the number of CPU required for compilation):
+Use the Makefile (can be adapted if necessary) to compile ECOGEN sources directly on bash (XX is the number of cores required for compilation):
 
 .. highlight:: console
 
@@ -108,7 +115,7 @@ Use the Makefile (can be adapted if necessary) to compile ECOGEN sources directl
 
 	make -j XX
 
-Executing ECOGEN is really easy on bash (XX is the number of CPU required for execution):
+Executing ECOGEN is really easy on bash (XX is the number of cores required for execution):
 
 .. highlight:: console
 
@@ -119,7 +126,7 @@ Executing ECOGEN is really easy on bash (XX is the number of CPU required for ex
 Testing
 =======
 
-Once preceding compiling of the code succeed, the better way to test ECOGEN's installation is to run successively the two simple following commands:
+Once ECOGEN has been successfully compiled, the best way to test ECOGEN's installation is to run successively the two simple following commands:
 
 .. highlight:: console
 
@@ -128,13 +135,13 @@ Once preceding compiling of the code succeed, the better way to test ECOGEN's in
 	./ECOGEN
 	mpirun -np 2 ECOGEN
 
-This will run the default test case included in the package two times:
+These will run the default test case included in the package two times:
 
-* In sequential (single CPU). 
-* In parallele using 2 CPU.
+* Once in sequential (single core). 
+* Once in parallel using 2 cores.
 
-This should print informations in the terminal on the running default test case. If no error message appears, then your installation should be OK. You should use ECOGEN for your own applications.
+These should print information in the terminal on the running default test case. If no error message appears, then your installation should be OK and you should be able to use ECOGEN for your own applications.
 
-ECOGEN is including a given number of simple prebuild test cases. Each test can be used as a basis for a new one. Visit the tutorial section :ref:`Chap:Tutorials` for more informations.
+ECOGEN is including a given number of simple prebuild test cases. Each test can be used as a basis for a new one. Visit the tutorial section :ref:`Chap:Tutorials` for more information.
 
 .. _openMPI: https://www.open-mpi.org/

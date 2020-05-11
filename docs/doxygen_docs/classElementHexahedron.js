@@ -3,7 +3,7 @@ var classElementHexahedron =
     [ "ElementHexahedron", "classElementHexahedron.html#ac48db377bb484cc5d0c3c14babfed621", null ],
     [ "~ElementHexahedron", "classElementHexahedron.html#a112c958f7202b359ec3edb7840dc6673", null ],
     [ "attributFaceCommunicante", "classElementHexahedron.html#a70ee0f92050112442d6fe670a973113f", null ],
-    [ "compteFaceCommunicante", "classElementHexahedron.html#a81612182d10e46aadd3c7fc89e3d6773", null ],
+    [ "compteFaceCommunicante", "classElementHexahedron.html#a52ee9ce1f0eeceecefe8776a78decce2", null ],
     [ "compteFaceCommunicante", "classElementHexahedron.html#a5b4f4f8121f8b3dca2e3178f467bfe9f", null ],
     [ "computeLCFL", "classElementHexahedron.html#a6e0f49d02c465aa9d2ce61356834736d", null ],
     [ "computeVolume", "classElementHexahedron.html#a02672e8b337baf472b260b6892bba7a1", null ],

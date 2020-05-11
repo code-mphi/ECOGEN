@@ -158,14 +158,16 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a91826592f663cafde83c372d003c5e68"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classModThermalEq.html#a91826592f663cafde83c372d003c5e68">reverseProjection</a> (const <a class="el" href="classCoord.html">Coord</a> normal, const <a class="el" href="classCoord.html">Coord</a> tangent, const <a class="el" href="classCoord.html">Coord</a> binormal) const </td></tr>
 <tr class="memdesc:a91826592f663cafde83c372d003c5e68"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classFlux.html" title="Abstract class for conservative variables and fluxes. ">Flux</a> reverse projection in the absolute cartesian coordinate system.  <a href="#a91826592f663cafde83c372d003c5e68">More...</a><br /></td></tr>
 <tr class="separator:a91826592f663cafde83c372d003c5e68"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a25d93117808692d9f2922c479b9663cb"><td class="memItemLeft" align="right" valign="top">virtual double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classModThermalEq.html#a25d93117808692d9f2922c479b9663cb">getSM</a> ()</td></tr>
-<tr class="memdesc:a25d93117808692d9f2922c479b9663cb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return the local fluid velocity.  <a href="#a25d93117808692d9f2922c479b9663cb">More...</a><br /></td></tr>
-<tr class="separator:a25d93117808692d9f2922c479b9663cb"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a567c7002057392964ea6d9e8cbb14d86"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classCoord.html">Coord</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classModThermalEq.html#a567c7002057392964ea6d9e8cbb14d86">getVelocity</a> (<a class="el" href="classCell.html">Cell</a> *cell) const </td></tr>
-<tr class="memdesc:a567c7002057392964ea6d9e8cbb14d86"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return the fluid velocity of the corresponding cell.  <a href="#a567c7002057392964ea6d9e8cbb14d86">More...</a><br /></td></tr>
-<tr class="separator:a567c7002057392964ea6d9e8cbb14d86"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aafa4157320a8988c18cfdd48ae5bd8c5"><td class="memItemLeft" align="right" valign="top">virtual std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classModThermalEq.html#aafa4157320a8988c18cfdd48ae5bd8c5">whoAmI</a> () const </td></tr>
-<tr class="separator:aafa4157320a8988c18cfdd48ae5bd8c5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5c512311d42e25fbbe7e24e5ccd32553"><td class="memItemLeft" align="right" valign="top">virtual const double &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classModThermalEq.html#a5c512311d42e25fbbe7e24e5ccd32553">getSM</a> ()</td></tr>
+<tr class="memdesc:a5c512311d42e25fbbe7e24e5ccd32553"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return the local fluid velocity.  <a href="#a5c512311d42e25fbbe7e24e5ccd32553">More...</a><br /></td></tr>
+<tr class="separator:a5c512311d42e25fbbe7e24e5ccd32553"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5d077d2a1f72c0d5f2df76d3ca718979"><td class="memItemLeft" align="right" valign="top">virtual const <a class="el" href="classCoord.html">Coord</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classModThermalEq.html#a5d077d2a1f72c0d5f2df76d3ca718979">getVelocity</a> (const <a class="el" href="classCell.html">Cell</a> *cell) const </td></tr>
+<tr class="memdesc:a5d077d2a1f72c0d5f2df76d3ca718979"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return the fluid velocity of the corresponding cell.  <a href="#a5d077d2a1f72c0d5f2df76d3ca718979">More...</a><br /></td></tr>
+<tr class="separator:a5d077d2a1f72c0d5f2df76d3ca718979"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5e50227d602ff9a8629903e1f5444e52"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classCoord.html">Coord</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classModThermalEq.html#a5e50227d602ff9a8629903e1f5444e52">getVelocity</a> (<a class="el" href="classCell.html">Cell</a> *cell)</td></tr>
+<tr class="separator:a5e50227d602ff9a8629903e1f5444e52"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a937c15d3f8f11e2e4b87a9b9dd42ce04"><td class="memItemLeft" align="right" valign="top">virtual const std::string &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classModThermalEq.html#a937c15d3f8f11e2e4b87a9b9dd42ce04">whoAmI</a> () const </td></tr>
+<tr class="separator:a937c15d3f8f11e2e4b87a9b9dd42ce04"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_methods_classModel"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classModel')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classModel.html">Model</a></td></tr>
 <tr class="memitem:ae3b375de5f6df4faf74a95d64748e048 inherit pub_methods_classModel"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classModel.html#ae3b375de5f6df4faf74a95d64748e048">Model</a> ()</td></tr>
 <tr class="separator:ae3b375de5f6df4faf74a95d64748e048 inherit pub_methods_classModel"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -450,7 +452,7 @@ Additional Inherited Members</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="a25d93117808692d9f2922c479b9663cb"></a>
+<a class="anchor" id="a5c512311d42e25fbbe7e24e5ccd32553"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="mlabels">
@@ -458,7 +460,7 @@ Additional Inherited Members</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">double ModThermalEq::getSM </td>
+          <td class="memname">const double &amp; ModThermalEq::getSM </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -474,11 +476,11 @@ Additional Inherited Members</h2></td></tr>
 <p>Return the local fluid velocity. </p>
 <dl class="section return"><dt>Returns</dt><dd>the velocity solution of the local Riemann problem </dd></dl>
 
-<p>Reimplemented from <a class="el" href="classModel.html#ae1cf5948f243eff67949d799223fc309">Model</a>.</p>
+<p>Reimplemented from <a class="el" href="classModel.html#aa89e06b3682a488d2d131a368c405231">Model</a>.</p>
 
 </div>
 </div>
-<a class="anchor" id="a567c7002057392964ea6d9e8cbb14d86"></a>
+<a class="anchor" id="a5d077d2a1f72c0d5f2df76d3ca718979"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="mlabels">
@@ -486,16 +488,16 @@ Additional Inherited Members</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classCoord.html">Coord</a> ModThermalEq::getVelocity </td>
+          <td class="memname">virtual const <a class="el" href="classCoord.html">Coord</a>&amp; ModThermalEq::getVelocity </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="classCell.html">Cell</a> *&#160;</td>
+          <td class="paramtype">const <a class="el" href="classCell.html">Cell</a> *&#160;</td>
           <td class="paramname"><em>cell</em></td><td>)</td>
           <td> const</td>
         </tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -509,7 +511,33 @@ Additional Inherited Members</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>velocity </dd></dl>
 
-<p>Reimplemented from <a class="el" href="classModel.html#afed45633f78d68bd0116fd85ab57e297">Model</a>.</p>
+<p>Reimplemented from <a class="el" href="classModel.html#ab0d2d4f5248d13ad94b1f42f5753e898">Model</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a5e50227d602ff9a8629903e1f5444e52"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual <a class="el" href="classCoord.html">Coord</a>&amp; ModThermalEq::getVelocity </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classCell.html">Cell</a> *&#160;</td>
+          <td class="paramname"><em>cell</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Reimplemented from <a class="el" href="classModel.html#aced38882902d5b606e2075c64b74f037">Model</a>.</p>
 
 </div>
 </div>
@@ -554,9 +582,9 @@ Additional Inherited Members</h2></td></tr>
 <p><a class="el" href="classFlux.html" title="Abstract class for conservative variables and fluxes. ">Flux</a> reverse projection in the absolute cartesian coordinate system. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">normal</td><td>normal vector associated to the cell boundary </td></tr>
-    <tr><td class="paramname">tangent</td><td>tangent vector associated to the cell boundary </td></tr>
-    <tr><td class="paramname">binormal</td><td>binormal vector associated to the cell boundary </td></tr>
+    <tr><td class="paramname">normal</td><td>normal vector associated to the cell interface </td></tr>
+    <tr><td class="paramname">tangent</td><td>tangent vector associated to the cell interface </td></tr>
+    <tr><td class="paramname">binormal</td><td>binormal vector associated to the cell interface </td></tr>
   </table>
   </dd>
 </dl>
@@ -855,7 +883,7 @@ Additional Inherited Members</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="aafa4157320a8988c18cfdd48ae5bd8c5"></a>
+<a class="anchor" id="a937c15d3f8f11e2e4b87a9b9dd42ce04"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="mlabels">
@@ -863,7 +891,7 @@ Additional Inherited Members</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">string ModThermalEq::whoAmI </td>
+          <td class="memname">virtual const std::string&amp; ModThermalEq::whoAmI </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td> const</td>
@@ -871,12 +899,12 @@ Additional Inherited Members</h2></td></tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
-<p>Reimplemented from <a class="el" href="classModel.html#aee478c84efea07d76dfc4c16213f9472">Model</a>.</p>
+<p>Reimplemented from <a class="el" href="classModel.html#a9b6438b9b9beb4f9cfbcb0501f511930">Model</a>.</p>
 
 </div>
 </div>
@@ -911,7 +939,7 @@ Additional Inherited Members</h2></td></tr>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="classModThermalEq.html">ModThermalEq</a></li>
-    <li class="footer">Generated on Wed Apr 29 2020 10:31:12 for ECOGEN by
+    <li class="footer">Generated on Mon May 11 2020 16:03:19 for ECOGEN by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.11 </li>
   </ul>

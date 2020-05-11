@@ -4,7 +4,7 @@ var classGeometricalDomain =
     [ "~GeometricalDomain", "classGeometricalDomain.html#a928ecfc1e199e182a1a89328e37dba0d", null ],
     [ "belong", "classGeometricalDomain.html#ae50006cb2e26fc2c8bd21a296982cb23", null ],
     [ "fillIn", "classGeometricalDomain.html#a47edc9fd88c5bd151182c748c097d71b", null ],
-    [ "getName", "classGeometricalDomain.html#a5cb055469d5262577cfe0f7e1efaa0c2", null ],
+    [ "getName", "classGeometricalDomain.html#a5a8d58e8516f6668209cb0d3110b4c22", null ],
     [ "m_mixture", "classGeometricalDomain.html#a7360ee105c8bb8fe63fc6c77223b383b", null ],
     [ "m_name", "classGeometricalDomain.html#af32c0b1507d67b6c17e9510287e98fbc", null ],
     [ "m_numberPhases", "classGeometricalDomain.html#aabc600345ef3b3b2c8bd8f713add400a", null ],

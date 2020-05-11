@@ -83,6 +83,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
       <li><a href="functions.html"><span>All</span></a></li>
       <li class="current"><a href="functions_func.html"><span>Functions</span></a></li>
       <li><a href="functions_vars.html"><span>Variables</span></a></li>
+      <li><a href="functions_type.html"><span>Typedefs</span></a></li>
       <li><a href="functions_eval.html"><span>Enumerator</span></a></li>
       <li><a href="functions_rela.html"><span>Related&#160;Functions</span></a></li>
     </ul>
@@ -98,6 +99,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
       <li><a href="functions_func_g.html#index_g"><span>g</span></a></li>
       <li><a href="functions_func_h.html#index_h"><span>h</span></a></li>
       <li><a href="functions_func_i.html#index_i"><span>i</span></a></li>
+      <li><a href="functions_func_k.html#index_k"><span>k</span></a></li>
       <li><a href="functions_func_l.html#index_l"><span>l</span></a></li>
       <li><a href="functions_func_m.html#index_m"><span>m</span></a></li>
       <li><a href="functions_func_n.html#index_n"><span>n</span></a></li>
@@ -111,6 +113,8 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
       <li><a href="functions_func_v.html#index_v"><span>v</span></a></li>
       <li><a href="functions_func_w.html#index_w"><span>w</span></a></li>
       <li><a href="functions_func_x.html#index_x"><span>x</span></a></li>
+      <li><a href="functions_func_y.html#index_y"><span>y</span></a></li>
+      <li><a href="functions_func_z.html#index_z"><span>z</span></a></li>
       <li><a href="functions_func_0x7e.html#index_0x7e"><span>~</span></a></li>
     </ul>
   </div>
@@ -147,6 +151,9 @@ $(document).ready(function(){initNavTree('functions_func.html','');});
 &#160;
 
 <h3><a class="anchor" id="index_a"></a>- a -</h3><ul>
+<li>abs()
+: <a class="el" href="classCoord.html#aafdd2e4afe35ef103d25aa0b85ae0c79">Coord</a>
+</li>
 <li>Accept()
 : <a class="el" href="classtinyxml2_1_1XMLComment.html#aa382b1be6a8b0650c16a2d88bb499335">tinyxml2::XMLComment</a>
 , <a class="el" href="classtinyxml2_1_1XMLDeclaration.html#a953a7359cc312d15218eb5843a4ca108">tinyxml2::XMLDeclaration</a>
@@ -159,13 +166,19 @@ $(document).ready(function(){initNavTree('functions_func.html','');});
 <li>add()
 : <a class="el" href="classTransport.html#ab86e6529e386bb2bd5dc6df6154840f8">Transport</a>
 </li>
-<li>addBoundary()
-: <a class="el" href="classCell.html#acde7cbecae9033c0c78aa2c8311ff89b">Cell</a>
+<li>addCellInterface()
+: <a class="el" href="classCell.html#a082f4dcbaccddfe61c51b50b98ad5dec">Cell</a>
+</li>
+<li>addElementToReceive()
+: <a class="el" href="classParallel.html#a453da74cd929de00d5db6b85e8796ba8">Parallel</a>
+</li>
+<li>addElementToSend()
+: <a class="el" href="classParallel.html#a8665c1b12e706dc73c5db6827343f105">Parallel</a>
 </li>
 <li>addFlux()
 : <a class="el" href="classBoundCond.html#a4fa0c1eb86c8e3074778bc93155fdc83">BoundCond</a>
 , <a class="el" href="classCellInterface.html#a92e9b2b836e7715169056f68b8413d56">CellInterface</a>
-, <a class="el" href="classFlux.html#a293e2178f9f34fbf87969ef4821739fc">Flux</a>
+, <a class="el" href="classFlux.html#a63e88f96ef7936579b8dcbde4241e471">Flux</a>
 , <a class="el" href="classFluxEuler.html#a0cb6e4808efee36c4532418503462141">FluxEuler</a>
 , <a class="el" href="classFluxEulerHomogeneous.html#ad96ad38766fad1fa61b3d02d66413215">FluxEulerHomogeneous</a>
 , <a class="el" href="classFluxKapila.html#acf6fac88d4856e25e0257118e50a4122">FluxKapila</a>
@@ -174,7 +187,7 @@ $(document).ready(function(){initNavTree('functions_func.html','');});
 , <a class="el" href="classTransport.html#a812b73deac22cd0da43050ec3abcef95">Transport</a>
 </li>
 <li>addFluxAddPhys()
-: <a class="el" href="classAddPhys.html#ad6f5216eebb5d3f45bcaa7a3f3ba2c9b">AddPhys</a>
+: <a class="el" href="classAddPhys.html#aa1525469e246ddcc0d0ed92f7f51b943">AddPhys</a>
 </li>
 <li>addFluxXi()
 : <a class="el" href="classCell.html#a0995f84b16bda4fbbd5ffe57cc8d9a2d">Cell</a>
@@ -205,8 +218,15 @@ $(document).ready(function(){initNavTree('functions_func.html','');});
 , <a class="el" href="classAPKSurfaceTension.html#a7502937f8200df2f9ba4163b7fd8bc5a">APKSurfaceTension</a>
 , <a class="el" href="classAPKViscosity.html#a115a4a1f859137813d3397b26946d3a1">APKViscosity</a>
 </li>
+<li>addSlopesToReceive()
+: <a class="el" href="classParallel.html#a308829576a2f46b2b8f7ef71597171bd">Parallel</a>
+</li>
+<li>addSlopesToSend()
+: <a class="el" href="classParallel.html#ac52e3eb9d42614ec61683f1fa205774c">Parallel</a>
+</li>
 <li>addSymmetricTerms()
 : <a class="el" href="classFlux.html#a576bb0da678c1acb416d24a04beace32">Flux</a>
+, <a class="el" href="classFluxEuler.html#a304b43695015e1f94c1504b083567661">FluxEuler</a>
 , <a class="el" href="classFluxKapila.html#a85f40f53d8edf972d4500babcd623154">FluxKapila</a>
 , <a class="el" href="classFluxMultiP.html#a2a2d80c46753502b73224aa9327db521">FluxMultiP</a>
 , <a class="el" href="classSymCylindrical.html#af6d7556c8ca7955abaed131e87498f4b">SymCylindrical</a>
@@ -216,14 +236,17 @@ $(document).ready(function(){initNavTree('functions_func.html','');});
 <li>addSymmetricTermsAddPhys()
 : <a class="el" href="classSymCylindrical.html#a070b2f2ae596c7c309007b5fa2faf918">SymCylindrical</a>
 , <a class="el" href="classSymmetry.html#afe6298dc51e51789d375191f1cc66d59">Symmetry</a>
+, <a class="el" href="classSymSpherical.html#a85cfa0a9d92d3b75205d43b904b88ffc">SymSpherical</a>
 </li>
-<li>addSymmetricTermsRadialAxeOnX()
-: <a class="el" href="classAddPhys.html#abf85023b51d654b39c89e1801f835d3f">AddPhys</a>
-, <a class="el" href="classAPKSurfaceTension.html#ae64d60047528f43df3856e2874f1039e">APKSurfaceTension</a>
+<li>addSymmetricTermsRadialAxisOnX()
+: <a class="el" href="classAddPhys.html#a0c885e7c819a295fd0dfaf97a28ea6b2">AddPhys</a>
+, <a class="el" href="classAPKSurfaceTension.html#a55ae8a0d56e55d767d4dbac611a08981">APKSurfaceTension</a>
+, <a class="el" href="classAPKViscosity.html#ae4726f916e05c0e8f7fb021fde5946e5">APKViscosity</a>
 </li>
-<li>addSymmetricTermsRadialAxeOnY()
-: <a class="el" href="classAddPhys.html#a777bc5bc07c3ec246cdb153a1380b385">AddPhys</a>
-, <a class="el" href="classAPKSurfaceTension.html#a0aa7a96493abef207c2ee3ca33e26ecf">APKSurfaceTension</a>
+<li>addSymmetricTermsRadialAxisOnY()
+: <a class="el" href="classAddPhys.html#a22db1e392ced49690bd26c431d25f4cd">AddPhys</a>
+, <a class="el" href="classAPKSurfaceTension.html#a00a34fd98bea8765e78a541d2a64f0cc">APKSurfaceTension</a>
+, <a class="el" href="classAPKViscosity.html#a254cbfc93b374b00d0b8f8a5db1e809c">APKViscosity</a>
 </li>
 <li>addTuyere1D()
 : <a class="el" href="classFlux.html#aba08b5897fbd7396d652808fda7c8bfc">Flux</a>
@@ -232,7 +255,7 @@ $(document).ready(function(){initNavTree('functions_func.html','');});
 , <a class="el" href="classFluxThermalEq.html#a29aecf05efe1613b7241d2f7933a01de">FluxThermalEq</a>
 </li>
 <li>advancingProcedure()
-: <a class="el" href="classRun.html#a35595deef36cfb675d7b8e8bae1df631">Run</a>
+: <a class="el" href="classRun.html#a32d9760f6588777cc067f3c718646332">Run</a>
 </li>
 <li>afficheError()
 : <a class="el" href="classErrors.html#ad3da617497f78e8fc6641486b4ec6154">Errors</a>
@@ -337,8 +360,14 @@ $(document).ready(function(){initNavTree('functions_func.html','');});
 <li>APKViscosity()
 : <a class="el" href="classAPKViscosity.html#a5bf9edaf0a83325a5143aa07beb11f3a">APKViscosity</a>
 </li>
+<li>areConsecutive()
+: <a class="el" href="classdecomposition_1_1Decomposition.html#a77ae0f55b52fe8e523cc4a9b02b44261">decomposition::Decomposition</a>
+</li>
 <li>arretCodeApresError()
 : <a class="el" href="classErrors.html#aa887515bbe9d359fbca408ea3793967f">Errors</a>
+</li>
+<li>assignElementProperties()
+: <a class="el" href="classMeshCartesianAMR.html#a0a40f690c919539bf9447e59cede934f">MeshCartesianAMR</a>
 </li>
 <li>assignEpsilonForAlphaNull()
 : <a class="el" href="classEos.html#a30fea2303ddf2b50f7dfd0089aa12f5f">Eos</a>
@@ -346,6 +375,7 @@ $(document).ready(function(){initNavTree('functions_func.html','');});
 <li>assignParametersEos()
 : <a class="el" href="classEos.html#a50401dbd8e6538f303f76b80a980cdc0">Eos</a>
 , <a class="el" href="classEosIG.html#ac2a5260f78fdbab4226deed6ca6e0bb5">EosIG</a>
+, <a class="el" href="classEosNASG.html#ab469d7782a6635ca4bc400e16a2dd52e">EosNASG</a>
 , <a class="el" href="classEosSG.html#a931a8b657f75e30743bdb0d209278384">EosSG</a>
 </li>
 <li>associeModel()
@@ -387,7 +417,7 @@ $(document).ready(function(){initNavTree('functions_func.html','');});
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Wed Apr 29 2020 10:31:20 for ECOGEN by
+    <li class="footer">Generated on Mon May 11 2020 16:03:30 for ECOGEN by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.11 </li>
   </ul>

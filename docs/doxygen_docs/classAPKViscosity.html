@@ -135,33 +135,36 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a115a4a1f859137813d3397b26946d3a1"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classAPKViscosity.html#a115a4a1f859137813d3397b26946d3a1">addQuantityAddPhys</a> (<a class="el" href="classCell.html">Cell</a> *cell)</td></tr>
 <tr class="memdesc:a115a4a1f859137813d3397b26946d3a1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Add the quantities for the additional physic.  <a href="#a115a4a1f859137813d3397b26946d3a1">More...</a><br /></td></tr>
 <tr class="separator:a115a4a1f859137813d3397b26946d3a1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a96ee9840eeeedf82d350da50cd7cf13b"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classAPKViscosity.html#a96ee9840eeeedf82d350da50cd7cf13b">solveFluxAddPhys</a> (<a class="el" href="classCellInterface.html">CellInterface</a> *cellBound, const int &amp;numberPhases)</td></tr>
-<tr class="memdesc:a96ee9840eeeedf82d350da50cd7cf13b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Solve the additional physic flux between two cells.  <a href="#a96ee9840eeeedf82d350da50cd7cf13b">More...</a><br /></td></tr>
-<tr class="separator:a96ee9840eeeedf82d350da50cd7cf13b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac04a235419636cc860f5bd004488dac0"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classAPKViscosity.html#ac04a235419636cc860f5bd004488dac0">solveFluxAddPhysBoundary</a> (<a class="el" href="classCellInterface.html">CellInterface</a> *cellBound, const int &amp;numberPhases)</td></tr>
-<tr class="memdesc:ac04a235419636cc860f5bd004488dac0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Solve the additional physic flux at a domain boundary.  <a href="#ac04a235419636cc860f5bd004488dac0">More...</a><br /></td></tr>
-<tr class="separator:ac04a235419636cc860f5bd004488dac0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2388fe041db4f85484e0ea341427c4f1"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classAPKViscosity.html#a2388fe041db4f85484e0ea341427c4f1">solveFluxViscosityInner</a> (<a class="el" href="classCoord.html">Coord</a> &amp;velocityLeft, <a class="el" href="classCoord.html">Coord</a> &amp;velocityRight, <a class="el" href="classCoord.html">Coord</a> &amp;gradULeft, <a class="el" href="classCoord.html">Coord</a> &amp;gradURight, <a class="el" href="classCoord.html">Coord</a> &amp;gradVLeft, <a class="el" href="classCoord.html">Coord</a> &amp;gradVRight, <a class="el" href="classCoord.html">Coord</a> &amp;gradWLeft, <a class="el" href="classCoord.html">Coord</a> &amp;gradWRight, double &amp;muMixLeft, double &amp;muMixRight, double &amp;distLeft, double &amp;distRight, int numberPhases) const </td></tr>
-<tr class="memdesc:a2388fe041db4f85484e0ea341427c4f1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Solve the viscosity flux between two cells.  <a href="#a2388fe041db4f85484e0ea341427c4f1">More...</a><br /></td></tr>
-<tr class="separator:a2388fe041db4f85484e0ea341427c4f1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6ee8fef83edc7c0f94efa4e944f83406"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classAPKViscosity.html#a6ee8fef83edc7c0f94efa4e944f83406">solveFluxViscosityAbs</a> (<a class="el" href="classCoord.html">Coord</a> &amp;velocityLeft, <a class="el" href="classCoord.html">Coord</a> &amp;gradULeft, <a class="el" href="classCoord.html">Coord</a> &amp;gradVLeft, <a class="el" href="classCoord.html">Coord</a> &amp;gradWLeft, double &amp;muMixLeft, double &amp;distLeft, int numberPhases) const </td></tr>
-<tr class="memdesc:a6ee8fef83edc7c0f94efa4e944f83406"><td class="mdescLeft">&#160;</td><td class="mdescRight">Solve the viscosity flux at a boundary with an absorption type.  <a href="#a6ee8fef83edc7c0f94efa4e944f83406">More...</a><br /></td></tr>
-<tr class="separator:a6ee8fef83edc7c0f94efa4e944f83406"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a45e221eb7742efbbcaaef9efb4daf34c"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classAPKViscosity.html#a45e221eb7742efbbcaaef9efb4daf34c">solveFluxAddPhys</a> (<a class="el" href="classCellInterface.html">CellInterface</a> *cellInterface, const int &amp;numberPhases)</td></tr>
+<tr class="memdesc:a45e221eb7742efbbcaaef9efb4daf34c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Solve the additional physic flux between two cells.  <a href="#a45e221eb7742efbbcaaef9efb4daf34c">More...</a><br /></td></tr>
+<tr class="separator:a45e221eb7742efbbcaaef9efb4daf34c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac2e8e4c2839d22f0b37887373019a229"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classAPKViscosity.html#ac2e8e4c2839d22f0b37887373019a229">solveFluxAddPhysBoundary</a> (<a class="el" href="classCellInterface.html">CellInterface</a> *cellInterface, const int &amp;numberPhases)</td></tr>
+<tr class="memdesc:ac2e8e4c2839d22f0b37887373019a229"><td class="mdescLeft">&#160;</td><td class="mdescRight">Solve the additional physic flux at a domain boundary.  <a href="#ac2e8e4c2839d22f0b37887373019a229">More...</a><br /></td></tr>
+<tr class="separator:ac2e8e4c2839d22f0b37887373019a229"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af5c4e46042702d611f0df2472c48db34"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classAPKViscosity.html#af5c4e46042702d611f0df2472c48db34">solveFluxViscosityInner</a> (<a class="el" href="classCoord.html">Coord</a> &amp;velocityLeft, <a class="el" href="classCoord.html">Coord</a> &amp;velocityRight, <a class="el" href="classCoord.html">Coord</a> &amp;gradULeft, <a class="el" href="classCoord.html">Coord</a> &amp;gradURight, <a class="el" href="classCoord.html">Coord</a> &amp;gradVLeft, <a class="el" href="classCoord.html">Coord</a> &amp;gradVRight, <a class="el" href="classCoord.html">Coord</a> &amp;gradWLeft, <a class="el" href="classCoord.html">Coord</a> &amp;gradWRight, double &amp;muMixLeft, double &amp;muMixRight, int numberPhases) const </td></tr>
+<tr class="memdesc:af5c4e46042702d611f0df2472c48db34"><td class="mdescLeft">&#160;</td><td class="mdescRight">Solve the viscosity flux between two cells.  <a href="#af5c4e46042702d611f0df2472c48db34">More...</a><br /></td></tr>
+<tr class="separator:af5c4e46042702d611f0df2472c48db34"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a22d860b7fea4b0353338dc24903338c2"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classAPKViscosity.html#a22d860b7fea4b0353338dc24903338c2">solveFluxViscosityNonReflecting</a> (<a class="el" href="classCoord.html">Coord</a> &amp;velocityLeft, <a class="el" href="classCoord.html">Coord</a> &amp;gradULeft, <a class="el" href="classCoord.html">Coord</a> &amp;gradVLeft, <a class="el" href="classCoord.html">Coord</a> &amp;gradWLeft, double &amp;muMixLeft, int numberPhases) const </td></tr>
+<tr class="memdesc:a22d860b7fea4b0353338dc24903338c2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Solve the viscosity flux at a boundary with an non-reflecting type.  <a href="#a22d860b7fea4b0353338dc24903338c2">More...</a><br /></td></tr>
+<tr class="separator:a22d860b7fea4b0353338dc24903338c2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2bdbc92d009c0346d46f66264ea04cbe"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classAPKViscosity.html#a2bdbc92d009c0346d46f66264ea04cbe">solveFluxViscosityWall</a> (<a class="el" href="classCoord.html">Coord</a> &amp;velocityLeft, double &amp;muMixLeft, double &amp;distLeft, int numberPhases) const </td></tr>
 <tr class="memdesc:a2bdbc92d009c0346d46f66264ea04cbe"><td class="mdescLeft">&#160;</td><td class="mdescRight">Solve the viscosity flux at a boundary with an wall type.  <a href="#a2bdbc92d009c0346d46f66264ea04cbe">More...</a><br /></td></tr>
 <tr class="separator:a2bdbc92d009c0346d46f66264ea04cbe"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aecc9e6a2c232a1314a1bbe338e756ec1"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classAPKViscosity.html#aecc9e6a2c232a1314a1bbe338e756ec1">solveFluxViscosityOther</a> (<a class="el" href="classCoord.html">Coord</a> &amp;velocityLeft, <a class="el" href="classCoord.html">Coord</a> &amp;gradULeft, <a class="el" href="classCoord.html">Coord</a> &amp;gradVLeft, <a class="el" href="classCoord.html">Coord</a> &amp;gradWLeft, double &amp;muMixLeft, double &amp;distLeft, int numberPhases) const </td></tr>
-<tr class="memdesc:aecc9e6a2c232a1314a1bbe338e756ec1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Solve the viscosity flux at a boundary with non-defined type yet.  <a href="#aecc9e6a2c232a1314a1bbe338e756ec1">More...</a><br /></td></tr>
-<tr class="separator:aecc9e6a2c232a1314a1bbe338e756ec1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6462171506286479ac7190f8fecc505d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classAPKViscosity.html#a6462171506286479ac7190f8fecc505d">solveFluxViscosityOther</a> (<a class="el" href="classCoord.html">Coord</a> &amp;velocityLeft, <a class="el" href="classCoord.html">Coord</a> &amp;gradULeft, <a class="el" href="classCoord.html">Coord</a> &amp;gradVLeft, <a class="el" href="classCoord.html">Coord</a> &amp;gradWLeft, double &amp;muMixLeft, int numberPhases) const </td></tr>
+<tr class="memdesc:a6462171506286479ac7190f8fecc505d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Solve the viscosity flux at a boundary with non-defined type yet.  <a href="#a6462171506286479ac7190f8fecc505d">More...</a><br /></td></tr>
+<tr class="separator:a6462171506286479ac7190f8fecc505d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a643d888fe099f18fcbb3f3aa0e92ef27"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classAPKViscosity.html#a643d888fe099f18fcbb3f3aa0e92ef27">addNonCons</a> (<a class="el" href="classCell.html">Cell</a> *cell, const int &amp;numberPhases)</td></tr>
 <tr class="memdesc:a643d888fe099f18fcbb3f3aa0e92ef27"><td class="mdescLeft">&#160;</td><td class="mdescRight">Add the non-conservative terms of the corresponding additional physic in a cell.  <a href="#a643d888fe099f18fcbb3f3aa0e92ef27">More...</a><br /></td></tr>
 <tr class="separator:a643d888fe099f18fcbb3f3aa0e92ef27"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a99f19b5aa8fbb16e03fe1c1cb845790c"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classAPKViscosity.html#a99f19b5aa8fbb16e03fe1c1cb845790c">communicationsAddPhys</a> (<a class="el" href="classCell.html">Cell</a> **cells, const int &amp;dim)</td></tr>
-<tr class="memdesc:a99f19b5aa8fbb16e03fe1c1cb845790c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Communication of the additional physics quantities for parallel purposes.  <a href="#a99f19b5aa8fbb16e03fe1c1cb845790c">More...</a><br /></td></tr>
-<tr class="separator:a99f19b5aa8fbb16e03fe1c1cb845790c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2194bf6350e6d2a81251c06f13d8740d"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classAPKViscosity.html#a2194bf6350e6d2a81251c06f13d8740d">communicationsAddPhysAMR</a> (<a class="el" href="classCell.html">Cell</a> **cells, const int &amp;dim, const int &amp;lvl)</td></tr>
-<tr class="memdesc:a2194bf6350e6d2a81251c06f13d8740d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Communication of the additional physics quantities for parallel purposes with Adaptive <a class="el" href="classMesh.html" title="Abstract class for a mesh. ">Mesh</a> Refinement.  <a href="#a2194bf6350e6d2a81251c06f13d8740d">More...</a><br /></td></tr>
-<tr class="separator:a2194bf6350e6d2a81251c06f13d8740d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae4726f916e05c0e8f7fb021fde5946e5"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classAPKViscosity.html#ae4726f916e05c0e8f7fb021fde5946e5">addSymmetricTermsRadialAxisOnX</a> (<a class="el" href="classCell.html">Cell</a> *cell, const int &amp;numberPhases)</td></tr>
+<tr class="memdesc:ae4726f916e05c0e8f7fb021fde5946e5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Add the symmetrical terms of the corresponding additional physic in a cell (when radial axis is on X)  <a href="#ae4726f916e05c0e8f7fb021fde5946e5">More...</a><br /></td></tr>
+<tr class="separator:ae4726f916e05c0e8f7fb021fde5946e5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a254cbfc93b374b00d0b8f8a5db1e809c"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classAPKViscosity.html#a254cbfc93b374b00d0b8f8a5db1e809c">addSymmetricTermsRadialAxisOnY</a> (<a class="el" href="classCell.html">Cell</a> *cell, const int &amp;numberPhases)</td></tr>
+<tr class="memdesc:a254cbfc93b374b00d0b8f8a5db1e809c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Add the symmetrical terms of the corresponding additional physic in a cell (when radial axis is on Y)  <a href="#a254cbfc93b374b00d0b8f8a5db1e809c">More...</a><br /></td></tr>
+<tr class="separator:a254cbfc93b374b00d0b8f8a5db1e809c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2308c6a5f4c0e292b5ff9d1398b54b15"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classAPKViscosity.html#a2308c6a5f4c0e292b5ff9d1398b54b15">communicationsAddPhys</a> (int numberPhases, const int &amp;dim, const int &amp;lvl)</td></tr>
+<tr class="memdesc:a2308c6a5f4c0e292b5ff9d1398b54b15"><td class="mdescLeft">&#160;</td><td class="mdescRight">Communication of the additional physics quantities for parallel purposes with Adaptive <a class="el" href="classMesh.html" title="Abstract class for a mesh. ">Mesh</a> Refinement.  <a href="#a2308c6a5f4c0e292b5ff9d1398b54b15">More...</a><br /></td></tr>
+<tr class="separator:a2308c6a5f4c0e292b5ff9d1398b54b15"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_methods_classAPKapila"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classAPKapila')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classAPKapila.html">APKapila</a></td></tr>
 <tr class="memitem:a9a765158baa9845b2091d2132a5c793d inherit pub_methods_classAPKapila"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classAPKapila.html#a9a765158baa9845b2091d2132a5c793d">APKapila</a> ()</td></tr>
 <tr class="separator:a9a765158baa9845b2091d2132a5c793d inherit pub_methods_classAPKapila"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -174,36 +177,33 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:ac75a0e1b5489b230c62777977d3ce2fa inherit pub_methods_classAddPhys"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7513ff053dd46ab841d84b141f605a4c inherit pub_methods_classAddPhys"><td class="memItemLeft" align="right" valign="top">virtual std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classAddPhys.html#a7513ff053dd46ab841d84b141f605a4c">whoAmI</a> () const </td></tr>
 <tr class="separator:a7513ff053dd46ab841d84b141f605a4c inherit pub_methods_classAddPhys"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1fefcc175d77c2257a64980c4eb14278 inherit pub_methods_classAddPhys"><td class="memItemLeft" align="right" valign="top">virtual double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classAddPhys.html#a1fefcc175d77c2257a64980c4eb14278">computeEnergyAddPhys</a> (<a class="el" href="classQuantitiesAddPhys.html">QuantitiesAddPhys</a> *QPA)</td></tr>
+<tr class="memitem:a1fefcc175d77c2257a64980c4eb14278 inherit pub_methods_classAddPhys"><td class="memItemLeft" align="right" valign="top">virtual double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classAddPhys.html#a1fefcc175d77c2257a64980c4eb14278">computeEnergyAddPhys</a> (<a class="el" href="classQuantitiesAddPhys.html">QuantitiesAddPhys</a> *<a class="el" href="Cell_8h.html#acca207de98b59d1c41e3975008706d61a20446aa548ede84c8005c3d211a8da23">QPA</a>)</td></tr>
 <tr class="memdesc:a1fefcc175d77c2257a64980c4eb14278 inherit pub_methods_classAddPhys"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute and send back mass energie linked to the physic (0 if no linked energy)  <a href="#a1fefcc175d77c2257a64980c4eb14278">More...</a><br /></td></tr>
 <tr class="separator:a1fefcc175d77c2257a64980c4eb14278 inherit pub_methods_classAddPhys"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a85bd00cd677b8421b5544d1edba17ec5 inherit pub_methods_classAddPhys"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classAddPhys.html#a85bd00cd677b8421b5544d1edba17ec5">computeFluxAddPhys</a> (<a class="el" href="classCellInterface.html">CellInterface</a> *cellBound, const int &amp;numberPhases)</td></tr>
-<tr class="memdesc:a85bd00cd677b8421b5544d1edba17ec5 inherit pub_methods_classAddPhys"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute the additional physic flux between two cells.  <a href="#a85bd00cd677b8421b5544d1edba17ec5">More...</a><br /></td></tr>
-<tr class="separator:a85bd00cd677b8421b5544d1edba17ec5 inherit pub_methods_classAddPhys"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aec85501967b67dc8e32b6b7902ef3371 inherit pub_methods_classAddPhys"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classAddPhys.html#aec85501967b67dc8e32b6b7902ef3371">computeFluxAddPhysBoundary</a> (<a class="el" href="classCellInterface.html">CellInterface</a> *cellBound, const int &amp;numberPhases)</td></tr>
-<tr class="memdesc:aec85501967b67dc8e32b6b7902ef3371 inherit pub_methods_classAddPhys"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute the additional physic flux at a domain boundary.  <a href="#aec85501967b67dc8e32b6b7902ef3371">More...</a><br /></td></tr>
-<tr class="separator:aec85501967b67dc8e32b6b7902ef3371 inherit pub_methods_classAddPhys"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a16ab13df036cd800a20d5553f543f740 inherit pub_methods_classAddPhys"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classAddPhys.html#a16ab13df036cd800a20d5553f543f740">computeFluxAddPhys</a> (<a class="el" href="classCellInterface.html">CellInterface</a> *cellInterface, const int &amp;numberPhases)</td></tr>
+<tr class="memdesc:a16ab13df036cd800a20d5553f543f740 inherit pub_methods_classAddPhys"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute the additional physic flux between two cells.  <a href="#a16ab13df036cd800a20d5553f543f740">More...</a><br /></td></tr>
+<tr class="separator:a16ab13df036cd800a20d5553f543f740 inherit pub_methods_classAddPhys"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8d5c40065b563e01b83769fa833c8e38 inherit pub_methods_classAddPhys"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classAddPhys.html#a8d5c40065b563e01b83769fa833c8e38">computeFluxAddPhysBoundary</a> (<a class="el" href="classCellInterface.html">CellInterface</a> *cellInterface, const int &amp;numberPhases)</td></tr>
+<tr class="memdesc:a8d5c40065b563e01b83769fa833c8e38 inherit pub_methods_classAddPhys"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute the additional physic flux at a domain boundary.  <a href="#a8d5c40065b563e01b83769fa833c8e38">More...</a><br /></td></tr>
+<tr class="separator:a8d5c40065b563e01b83769fa833c8e38 inherit pub_methods_classAddPhys"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1968e07bc1d8295158111b4aa0ebaaba inherit pub_methods_classAddPhys"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classAddPhys.html#a1968e07bc1d8295158111b4aa0ebaaba">addNonConsAddPhys</a> (<a class="el" href="classCell.html">Cell</a> *cell, const int &amp;numberPhases)</td></tr>
 <tr class="memdesc:a1968e07bc1d8295158111b4aa0ebaaba inherit pub_methods_classAddPhys"><td class="mdescLeft">&#160;</td><td class="mdescRight">Add the non-conservative terms of the additional physic in a cell.  <a href="#a1968e07bc1d8295158111b4aa0ebaaba">More...</a><br /></td></tr>
 <tr class="separator:a1968e07bc1d8295158111b4aa0ebaaba inherit pub_methods_classAddPhys"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad6f5216eebb5d3f45bcaa7a3f3ba2c9b inherit pub_methods_classAddPhys"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classAddPhys.html#ad6f5216eebb5d3f45bcaa7a3f3ba2c9b">addFluxAddPhys</a> (<a class="el" href="classCellInterface.html">CellInterface</a> *cellBound, const int &amp;numberPhases, const double &amp;coefAMR)</td></tr>
-<tr class="memdesc:ad6f5216eebb5d3f45bcaa7a3f3ba2c9b inherit pub_methods_classAddPhys"><td class="mdescLeft">&#160;</td><td class="mdescRight">Add the additional physic flux between two cells at the corresponding cell.  <a href="#ad6f5216eebb5d3f45bcaa7a3f3ba2c9b">More...</a><br /></td></tr>
-<tr class="separator:ad6f5216eebb5d3f45bcaa7a3f3ba2c9b inherit pub_methods_classAddPhys"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:abfe88887bd68dd23366c2df20e89da3e inherit pub_methods_classAddPhys"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classAddPhys.html#abfe88887bd68dd23366c2df20e89da3e">subtractFluxAddPhys</a> (<a class="el" href="classCellInterface.html">CellInterface</a> *cellBound, const int &amp;numberPhases, const double &amp;coefAMR)</td></tr>
-<tr class="memdesc:abfe88887bd68dd23366c2df20e89da3e inherit pub_methods_classAddPhys"><td class="mdescLeft">&#160;</td><td class="mdescRight">Subtract the additional physic flux between two cells at the corresponding cell.  <a href="#abfe88887bd68dd23366c2df20e89da3e">More...</a><br /></td></tr>
-<tr class="separator:abfe88887bd68dd23366c2df20e89da3e inherit pub_methods_classAddPhys"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:abf85023b51d654b39c89e1801f835d3f inherit pub_methods_classAddPhys"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classAddPhys.html#abf85023b51d654b39c89e1801f835d3f">addSymmetricTermsRadialAxeOnX</a> (<a class="el" href="classCell.html">Cell</a> *cell, const int &amp;numberPhases)</td></tr>
-<tr class="memdesc:abf85023b51d654b39c89e1801f835d3f inherit pub_methods_classAddPhys"><td class="mdescLeft">&#160;</td><td class="mdescRight">Add the symmetrical terms of the corresponding additional physic in a cell (when radial axe is on X)  <a href="#abf85023b51d654b39c89e1801f835d3f">More...</a><br /></td></tr>
-<tr class="separator:abf85023b51d654b39c89e1801f835d3f inherit pub_methods_classAddPhys"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a777bc5bc07c3ec246cdb153a1380b385 inherit pub_methods_classAddPhys"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classAddPhys.html#a777bc5bc07c3ec246cdb153a1380b385">addSymmetricTermsRadialAxeOnY</a> (<a class="el" href="classCell.html">Cell</a> *cell, const int &amp;numberPhases)</td></tr>
-<tr class="memdesc:a777bc5bc07c3ec246cdb153a1380b385 inherit pub_methods_classAddPhys"><td class="mdescLeft">&#160;</td><td class="mdescRight">Add the symmetrical terms of the corresponding additional physic in a cell (when radial axe is on Y)  <a href="#a777bc5bc07c3ec246cdb153a1380b385">More...</a><br /></td></tr>
-<tr class="separator:a777bc5bc07c3ec246cdb153a1380b385 inherit pub_methods_classAddPhys"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa1525469e246ddcc0d0ed92f7f51b943 inherit pub_methods_classAddPhys"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classAddPhys.html#aa1525469e246ddcc0d0ed92f7f51b943">addFluxAddPhys</a> (<a class="el" href="classCellInterface.html">CellInterface</a> *cellInterface, const int &amp;numberPhases, const double &amp;coefAMR)</td></tr>
+<tr class="memdesc:aa1525469e246ddcc0d0ed92f7f51b943 inherit pub_methods_classAddPhys"><td class="mdescLeft">&#160;</td><td class="mdescRight">Add the additional physic flux between two cells at the corresponding cell.  <a href="#aa1525469e246ddcc0d0ed92f7f51b943">More...</a><br /></td></tr>
+<tr class="separator:aa1525469e246ddcc0d0ed92f7f51b943 inherit pub_methods_classAddPhys"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ace3d2c93706cc17a53f7a6cb630ae7c7 inherit pub_methods_classAddPhys"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classAddPhys.html#ace3d2c93706cc17a53f7a6cb630ae7c7">subtractFluxAddPhys</a> (<a class="el" href="classCellInterface.html">CellInterface</a> *cellInterface, const int &amp;numberPhases, const double &amp;coefAMR)</td></tr>
+<tr class="memdesc:ace3d2c93706cc17a53f7a6cb630ae7c7 inherit pub_methods_classAddPhys"><td class="mdescLeft">&#160;</td><td class="mdescRight">Subtract the additional physic flux between two cells at the corresponding cell.  <a href="#ace3d2c93706cc17a53f7a6cb630ae7c7">More...</a><br /></td></tr>
+<tr class="separator:ace3d2c93706cc17a53f7a6cb630ae7c7 inherit pub_methods_classAddPhys"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:acfa8ae98a496a90c65993f8ca0e0b699 inherit pub_methods_classAddPhys"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classAddPhys.html#acfa8ae98a496a90c65993f8ca0e0b699">reinitializeColorFunction</a> (std::vector&lt; <a class="el" href="classCell.html">Cell</a> * &gt; *cellsLvl, int &amp;lvl)</td></tr>
 <tr class="memdesc:acfa8ae98a496a90c65993f8ca0e0b699 inherit pub_methods_classAddPhys"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reinitialize the color function for the surface-tension terms with the volume fraction equation.  <a href="#acfa8ae98a496a90c65993f8ca0e0b699">More...</a><br /></td></tr>
 <tr class="separator:acfa8ae98a496a90c65993f8ca0e0b699 inherit pub_methods_classAddPhys"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2d847abde1f2ba779660022701dcf595 inherit pub_methods_classAddPhys"><td class="memItemLeft" align="right" valign="top">virtual int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classAddPhys.html#a2d847abde1f2ba779660022701dcf595">getNumTransportAssociated</a> () const </td></tr>
-<tr class="memdesc:a2d847abde1f2ba779660022701dcf595 inherit pub_methods_classAddPhys"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return the associated number of the transport equation (only used for surface tension)  <a href="#a2d847abde1f2ba779660022701dcf595">More...</a><br /></td></tr>
-<tr class="separator:a2d847abde1f2ba779660022701dcf595 inherit pub_methods_classAddPhys"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aabb79ab430a4f8830870d37e31536bb6 inherit pub_methods_classAddPhys"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classAddPhys.html#aabb79ab430a4f8830870d37e31536bb6">reinitializationActivated</a> ()</td></tr>
+<tr class="memdesc:aabb79ab430a4f8830870d37e31536bb6 inherit pub_methods_classAddPhys"><td class="mdescLeft">&#160;</td><td class="mdescRight">Send back true if the reinitialization of the color function is activated.  <a href="#aabb79ab430a4f8830870d37e31536bb6">More...</a><br /></td></tr>
+<tr class="separator:aabb79ab430a4f8830870d37e31536bb6 inherit pub_methods_classAddPhys"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acdf374e4b8f611d910e99290a3c467b3 inherit pub_methods_classAddPhys"><td class="memItemLeft" align="right" valign="top">virtual const int &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classAddPhys.html#acdf374e4b8f611d910e99290a3c467b3">getNumTransportAssociated</a> () const </td></tr>
+<tr class="memdesc:acdf374e4b8f611d910e99290a3c467b3 inherit pub_methods_classAddPhys"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return the associated number of the transport equation (only used for surface tension)  <a href="#acdf374e4b8f611d910e99290a3c467b3">More...</a><br /></td></tr>
+<tr class="separator:acdf374e4b8f611d910e99290a3c467b3 inherit pub_methods_classAddPhys"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-attribs"></a>
 Private Attributes</h2></td></tr>
@@ -406,7 +406,7 @@ Private Attributes</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="a99f19b5aa8fbb16e03fe1c1cb845790c"></a>
+<a class="anchor" id="ae4726f916e05c0e8f7fb021fde5946e5"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="mlabels">
@@ -414,16 +414,16 @@ Private Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void APKViscosity::communicationsAddPhys </td>
+          <td class="memname">void APKViscosity::addSymmetricTermsRadialAxisOnX </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="classCell.html">Cell</a> **&#160;</td>
-          <td class="paramname"><em>cells</em>, </td>
+          <td class="paramtype"><a class="el" href="classCell.html">Cell</a> *&#160;</td>
+          <td class="paramname"><em>cell</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">const int &amp;&#160;</td>
-          <td class="paramname"><em>dim</em>&#160;</td>
+          <td class="paramname"><em>numberPhases</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -438,20 +438,20 @@ Private Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Communication of the additional physics quantities for parallel purposes. </p>
+<p>Add the symmetrical terms of the corresponding additional physic in a cell (when radial axis is on X) </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">cells</td><td>cells vector </td></tr>
-    <tr><td class="paramname">dim</td><td>dimension </td></tr>
+    <tr><td class="paramname">cell</td><td>cell </td></tr>
+    <tr><td class="paramname">numberPhases</td><td>number of phases </td></tr>
   </table>
   </dd>
 </dl>
 
-<p>Reimplemented from <a class="el" href="classAddPhys.html#ad3bb33b26ec499f2cc690bb259d3f2e2">AddPhys</a>.</p>
+<p>Reimplemented from <a class="el" href="classAddPhys.html#a0c885e7c819a295fd0dfaf97a28ea6b2">AddPhys</a>.</p>
 
 </div>
 </div>
-<a class="anchor" id="a2194bf6350e6d2a81251c06f13d8740d"></a>
+<a class="anchor" id="a254cbfc93b374b00d0b8f8a5db1e809c"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="mlabels">
@@ -459,10 +459,55 @@ Private Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void APKViscosity::communicationsAddPhysAMR </td>
+          <td class="memname">void APKViscosity::addSymmetricTermsRadialAxisOnY </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="classCell.html">Cell</a> **&#160;</td>
-          <td class="paramname"><em>cells</em>, </td>
+          <td class="paramtype"><a class="el" href="classCell.html">Cell</a> *&#160;</td>
+          <td class="paramname"><em>cell</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const int &amp;&#160;</td>
+          <td class="paramname"><em>numberPhases</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Add the symmetrical terms of the corresponding additional physic in a cell (when radial axis is on Y) </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">cell</td><td>cell </td></tr>
+    <tr><td class="paramname">numberPhases</td><td>number of phases </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>Reimplemented from <a class="el" href="classAddPhys.html#a22db1e392ced49690bd26c431d25f4cd">AddPhys</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a2308c6a5f4c0e292b5ff9d1398b54b15"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void APKViscosity::communicationsAddPhys </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>numberPhases</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -492,18 +537,18 @@ Private Attributes</h2></td></tr>
 <p>Communication of the additional physics quantities for parallel purposes with Adaptive <a class="el" href="classMesh.html" title="Abstract class for a mesh. ">Mesh</a> Refinement. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">cells</td><td>cells vector </td></tr>
+    <tr><td class="paramname">numberPhases</td><td>number of phases </td></tr>
     <tr><td class="paramname">dim</td><td>dimension </td></tr>
     <tr><td class="paramname">lvl</td><td>level </td></tr>
   </table>
   </dd>
 </dl>
 
-<p>Reimplemented from <a class="el" href="classAddPhys.html#aee9452345d13ca66d1234b3d8cebc918">AddPhys</a>.</p>
+<p>Reimplemented from <a class="el" href="classAddPhys.html#a9ea6fa244b74dc5c9658a3f951353d91">AddPhys</a>.</p>
 
 </div>
 </div>
-<a class="anchor" id="a96ee9840eeeedf82d350da50cd7cf13b"></a>
+<a class="anchor" id="a45e221eb7742efbbcaaef9efb4daf34c"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="mlabels">
@@ -514,7 +559,7 @@ Private Attributes</h2></td></tr>
           <td class="memname">void APKViscosity::solveFluxAddPhys </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="classCellInterface.html">CellInterface</a> *&#160;</td>
-          <td class="paramname"><em>cellBound</em>, </td>
+          <td class="paramname"><em>cellInterface</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -538,17 +583,17 @@ Private Attributes</h2></td></tr>
 <p>Solve the additional physic flux between two cells. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">cellBound</td><td>cell boundary </td></tr>
+    <tr><td class="paramname">cellInterface</td><td>cell interface </td></tr>
     <tr><td class="paramname">numberPhases</td><td>number of phases </td></tr>
   </table>
   </dd>
 </dl>
 
-<p>Reimplemented from <a class="el" href="classAddPhys.html#accb77263f2eba2a3605e7c6a504b1215">AddPhys</a>.</p>
+<p>Reimplemented from <a class="el" href="classAddPhys.html#a4715e3450653165faaa5e291012eb5d4">AddPhys</a>.</p>
 
 </div>
 </div>
-<a class="anchor" id="ac04a235419636cc860f5bd004488dac0"></a>
+<a class="anchor" id="ac2e8e4c2839d22f0b37887373019a229"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="mlabels">
@@ -559,7 +604,7 @@ Private Attributes</h2></td></tr>
           <td class="memname">void APKViscosity::solveFluxAddPhysBoundary </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="classCellInterface.html">CellInterface</a> *&#160;</td>
-          <td class="paramname"><em>cellBound</em>, </td>
+          <td class="paramname"><em>cellInterface</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -583,87 +628,17 @@ Private Attributes</h2></td></tr>
 <p>Solve the additional physic flux at a domain boundary. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">cellBound</td><td>cell boundary </td></tr>
+    <tr><td class="paramname">cellInterface</td><td>cell interface </td></tr>
     <tr><td class="paramname">numberPhases</td><td>number of phases </td></tr>
   </table>
   </dd>
 </dl>
 
-<p>Reimplemented from <a class="el" href="classAddPhys.html#a4ca545cf1440706f3a0ff1e06c2cd5fb">AddPhys</a>.</p>
+<p>Reimplemented from <a class="el" href="classAddPhys.html#a9de74c4b8b78e33d35b476a33854eb07">AddPhys</a>.</p>
 
 </div>
 </div>
-<a class="anchor" id="a6ee8fef83edc7c0f94efa4e944f83406"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void APKViscosity::solveFluxViscosityAbs </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="classCoord.html">Coord</a> &amp;&#160;</td>
-          <td class="paramname"><em>velocityLeft</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="classCoord.html">Coord</a> &amp;&#160;</td>
-          <td class="paramname"><em>gradULeft</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="classCoord.html">Coord</a> &amp;&#160;</td>
-          <td class="paramname"><em>gradVLeft</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="classCoord.html">Coord</a> &amp;&#160;</td>
-          <td class="paramname"><em>gradWLeft</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">double &amp;&#160;</td>
-          <td class="paramname"><em>muMixLeft</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">double &amp;&#160;</td>
-          <td class="paramname"><em>distLeft</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>numberPhases</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td> const</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Solve the viscosity flux at a boundary with an absorption type. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">velocityLeft</td><td>velocity of the left cell </td></tr>
-    <tr><td class="paramname">gradULeft</td><td>gradient of the velocity in the x-direction of the left cell </td></tr>
-    <tr><td class="paramname">gradVLeft</td><td>gradient of the velocity in the y-direction of the left cell </td></tr>
-    <tr><td class="paramname">gradWLeft</td><td>gradient of the velocity in the z-direction of the left cell </td></tr>
-    <tr><td class="paramname">muMixLeft</td><td>dynamic viscosity of the mixture of the left cell </td></tr>
-    <tr><td class="paramname">distLeft</td><td>distance between the center of the left cell and its corresponding edge </td></tr>
-    <tr><td class="paramname">numberPhases</td><td>number of phases </td></tr>
-  </table>
-  </dd>
-</dl>
-
-</div>
-</div>
-<a class="anchor" id="a2388fe041db4f85484e0ea341427c4f1"></a>
+<a class="anchor" id="af5c4e46042702d611f0df2472c48db34"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
@@ -730,18 +705,6 @@ Private Attributes</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">double &amp;&#160;</td>
-          <td class="paramname"><em>distLeft</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">double &amp;&#160;</td>
-          <td class="paramname"><em>distRight</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
           <td class="paramtype">int&#160;</td>
           <td class="paramname"><em>numberPhases</em>&#160;</td>
         </tr>
@@ -766,8 +729,6 @@ Private Attributes</h2></td></tr>
     <tr><td class="paramname">gradWRight</td><td>gradient of the velocity in the z-direction of the right cell </td></tr>
     <tr><td class="paramname">muMixLeft</td><td>dynamic viscosity of the mixture of the left cell </td></tr>
     <tr><td class="paramname">muMixRight</td><td>dynamic viscosity of the mixture of the right cell </td></tr>
-    <tr><td class="paramname">distLeft</td><td>distance between the center of the left cell and its corresponding edge </td></tr>
-    <tr><td class="paramname">distRight</td><td>distance between the center of the right cell and its corresponding edge </td></tr>
     <tr><td class="paramname">numberPhases</td><td>number of phases </td></tr>
   </table>
   </dd>
@@ -775,7 +736,70 @@ Private Attributes</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="aecc9e6a2c232a1314a1bbe338e756ec1"></a>
+<a class="anchor" id="a22d860b7fea4b0353338dc24903338c2"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void APKViscosity::solveFluxViscosityNonReflecting </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classCoord.html">Coord</a> &amp;&#160;</td>
+          <td class="paramname"><em>velocityLeft</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classCoord.html">Coord</a> &amp;&#160;</td>
+          <td class="paramname"><em>gradULeft</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classCoord.html">Coord</a> &amp;&#160;</td>
+          <td class="paramname"><em>gradVLeft</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classCoord.html">Coord</a> &amp;&#160;</td>
+          <td class="paramname"><em>gradWLeft</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double &amp;&#160;</td>
+          <td class="paramname"><em>muMixLeft</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>numberPhases</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Solve the viscosity flux at a boundary with an non-reflecting type. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">velocityLeft</td><td>velocity of the left cell </td></tr>
+    <tr><td class="paramname">gradULeft</td><td>gradient of the velocity in the x-direction of the left cell </td></tr>
+    <tr><td class="paramname">gradVLeft</td><td>gradient of the velocity in the y-direction of the left cell </td></tr>
+    <tr><td class="paramname">gradWLeft</td><td>gradient of the velocity in the z-direction of the left cell </td></tr>
+    <tr><td class="paramname">muMixLeft</td><td>dynamic viscosity of the mixture of the left cell </td></tr>
+    <tr><td class="paramname">numberPhases</td><td>number of phases </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a class="anchor" id="a6462171506286479ac7190f8fecc505d"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
@@ -812,12 +836,6 @@ Private Attributes</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">double &amp;&#160;</td>
-          <td class="paramname"><em>distLeft</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
           <td class="paramtype">int&#160;</td>
           <td class="paramname"><em>numberPhases</em>&#160;</td>
         </tr>
@@ -837,7 +855,6 @@ Private Attributes</h2></td></tr>
     <tr><td class="paramname">gradVLeft</td><td>gradient of the velocity in the y-direction of the left cell </td></tr>
     <tr><td class="paramname">gradWLeft</td><td>gradient of the velocity in the z-direction of the left cell </td></tr>
     <tr><td class="paramname">muMixLeft</td><td>dynamic viscosity of the mixture of the left cell </td></tr>
-    <tr><td class="paramname">distLeft</td><td>distance between the center of the left cell and its corresponding edge </td></tr>
     <tr><td class="paramname">numberPhases</td><td>number of phases </td></tr>
   </table>
   </dd>
@@ -1191,7 +1208,7 @@ Private Attributes</h2></td></tr>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="classAPKViscosity.html">APKViscosity</a></li>
-    <li class="footer">Generated on Wed Apr 29 2020 10:31:12 for ECOGEN by
+    <li class="footer">Generated on Mon May 11 2020 16:03:18 for ECOGEN by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.11 </li>
   </ul>

@@ -1,0 +1,434 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Overview &mdash; ECOGEN 2.0 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/language_data.js"></script>
+        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Bibliography" href="zBibliography.html" />
+    <link rel="prev" title="Graphical User Interface" href="Chap8_GUI.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="index.html" class="icon icon-home"> ECOGEN
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                2.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="Chap1_introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Chap2_installation_Chapter.html">Installation instructions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Chap3_IO_Chapter.html">I/O descriptions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Chap4_tutorials_Chapter.html">Tutorials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Chap5_testCases_Chapter.html">Test cases</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Chap6_developersGuide_Chapter.html">Developers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Chap7_license.html">License</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="Chap8_GUI.html">Graphical User Interface</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#installation">Installation</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#from-self-extracting-files">From self-extracting files</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#source-compilation">Source compilation</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#general-presentation">General presentation</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#first-time-running">First-time running</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#main-window">Main window</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#a-first-example">A first example</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#multiple-test-case-downloads-and-preparation-of-ecogen">Multiple test case downloads and preparation of ECOGEN</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#reloading-a-test-case">Reloading a test case</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#desription-of-docks">Desription of docks</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#run-controls-dock"><strong>Run Controls</strong> dock</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#models-dock"><strong>Models</strong> dock</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#mesh-properties-dock"><strong>Mesh properties</strong> dock</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#cartesian-mesh">Cartesian mesh</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#unstructured-mesh">Unstructured mesh</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#boundary-conditions-dock"><strong>Boundary conditions</strong> dock</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#physical-domains-dock"><strong>Physical domains</strong> dock</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#equations-of-state-dock"><strong>Equations of state</strong> dock</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#modify-ecogen-gui-s-configuration">Modify ECOGEN_GUI’s configuration</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#ecogen-s-working-directory">ECOGEN’s working directory</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#links-to-external-tools">Links to external tools</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="zBibliography.html">Bibliography</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">ECOGEN</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="Chap8_GUI.html">Graphical User Interface</a> &raquo;</li>
+        
+      <li>Overview</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/Chap8_1Overview.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="overview">
+<span id="sec-gui-overview"></span><h1>Overview<a class="headerlink" href="#overview" title="Permalink to this headline">¶</a></h1>
+<p>Editing a test case requires deep understanding of input-file structure. To simplify this editing, a beta version of graphical user interface ECOGEN_GUI is proposed.</p>
+<p>Possible actions are:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Open, edit and save existing test cases.</p></li>
+<li><p>Create new test cases.</p></li>
+<li><p>Generate the main input file <em>ECOGEN.xml</em> to prepare runs.</p></li>
+<li><p>Edit essential settings for one or several test cases: Output format, flow model, fluid models, mesh dimensions (or mesh file choice), initial conditions and boundary conditions.</p></li>
+<li><p>Visualize equation-of-state parameter library (editing these parameters is possible directely through the interface).</p></li>
+</ul>
+</div></blockquote>
+<div class="admonition-limitations admonition">
+<p class="admonition-title">Limitations</p>
+<p>Since this is a beta version of ECOGEN_GUI, only essential computation settings appear. Specific settings are thus not available but can be edited directly via the input files. Please refer to section <a class="reference internal" href="Chap3_1inputFiles.html#chap-input"><span class="std std-ref">Input Files</span></a> for details.</p>
+</div>
+</div>
+<div class="section" id="installation">
+<h1>Installation<a class="headerlink" href="#installation" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="from-self-extracting-files">
+<h2>From self-extracting files<a class="headerlink" href="#from-self-extracting-files" title="Permalink to this headline">¶</a></h2>
+<p>ECOGEN_GUI can be installed automatically under Windows 10 (64 bits) from the precompiled binary installer <em>ECOGEN_GUI_Setup.exe</em>.</p>
+<p>To install the application, simply follow the installer’s instructions (figure <a class="reference internal" href="#fig-gui-install"><span class="std std-numref">Fig. 28</span></a>).</p>
+<div class="figure align-center" id="id1">
+<span id="fig-gui-install"></span><a class="reference internal image-reference" href="_images/install.png"><img alt="_images/install.png" src="_images/install.png" style="width: 349.29999999999995px; height: 272.29999999999995px;" /></a>
+<p class="caption"><span class="caption-number">Fig. 28 </span><span class="caption-text">ECOGEN_GUI installation window under Windows 10.</span><a class="headerlink" href="#id1" title="Permalink to this image">¶</a></p>
+</div>
+<p>It is preferable to install ECOGEN_GUI in a user folder (by default) so that the application can save its configuration files.</p>
+</div>
+<div class="section" id="source-compilation">
+<h2>Source compilation<a class="headerlink" href="#source-compilation" title="Permalink to this headline">¶</a></h2>
+<p>The source files of the ECOGEN_GUI application can also be compiled. The compilation nevertheless requires an environment able to compile C++ code using the <a class="reference external" href="https://www.qt.io/">Qt</a> library.</p>
+</div>
+</div>
+<div class="section" id="general-presentation">
+<h1>General presentation<a class="headerlink" href="#general-presentation" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="first-time-running">
+<h2>First-time running<a class="headerlink" href="#first-time-running" title="Permalink to this headline">¶</a></h2>
+<p>The first time you run ECOGEN_GUI, the configuration window appears (figure <a class="reference internal" href="#fig-gui-config"><span class="std std-numref">Fig. 29</span></a>.)). Afterwards, this window will be accessible via the menu bar of the main application window.</p>
+<div class="figure align-center" id="id2">
+<span id="fig-gui-config"></span><a class="reference internal image-reference" href="_images/config.png"><img alt="_images/config.png" src="_images/config.png" style="width: 436.79999999999995px; height: 140.7px;" /></a>
+<p class="caption"><span class="caption-number">Fig. 29 </span><span class="caption-text">Configuration window of the ECOGEN_GUI application.</span><a class="headerlink" href="#id2" title="Permalink to this image">¶</a></p>
+</div>
+<p>Before being able to use ECOGEN_GUI, it is necessary to specify the directory in which the ECOGEN code is located, in order to make the association between the application and the code input files.</p>
+<div class="admonition caution">
+<p class="admonition-title">Caution</p>
+<p>The ECOGEN simulation tool must be installed independently. Please refer to the corresponding section <a class="reference internal" href="Chap2_installation_Chapter.html#chap-start"><span class="std std-ref">Installation instructions</span></a> for detailed instructions on ECOGEN installation.</p>
+</div>
+<p>The other fields (<em>Mesh software</em>, <em>Text editor software</em>, etc.) can be filled in optionally. They will then allow the launching of these applications directly from the ECOGEN_GUI interface.</p>
+</div>
+<div class="section" id="main-window">
+<h2>Main window<a class="headerlink" href="#main-window" title="Permalink to this headline">¶</a></h2>
+<p>The main window of ECOGEN_GUI is presented, as visible at the launch of the application, on the figure <a class="reference internal" href="#fig-gui-mainwindow"><span class="std std-numref">Fig. 30</span></a>.</p>
+<div class="figure align-center" id="id3">
+<span id="fig-gui-mainwindow"></span><a class="reference internal image-reference" href="_images/mainWindow.png"><img alt="_images/mainWindow.png" src="_images/mainWindow.png" style="width: 666.3px; height: 395.09999999999997px;" /></a>
+<p class="caption"><span class="caption-number">Fig. 30 </span><span class="caption-text">ECOGEN_GUI application main window.</span><a class="headerlink" href="#id3" title="Permalink to this image">¶</a></p>
+</div>
+<p>It consists of several areas:</p>
+<blockquote>
+<div><ol class="arabic simple">
+<li><p>Menu bar,</p></li>
+<li><p><strong>Run controls</strong> dock,</p></li>
+<li><p><strong>Models</strong> dock,</p></li>
+<li><p><strong>Mesh properties</strong> dock,</p></li>
+<li><p><strong>Boundary conditions</strong> dock,</p></li>
+<li><p><strong>Physical domains</strong> dock,</p></li>
+<li><p><strong>Equations of state</strong> dock.</p></li>
+</ol>
+</div></blockquote>
+<p>Apart from the <strong>Boundary conditions</strong> dock, the other docks are greyed out when the application is launched and will only be activated when a test case is opened. To start editing a test case, choose <em>File</em> <span class="math notranslate nohighlight">\(\rightarrow\)</span> <em>Open test case</em> (Ctrl+O) or <em>File</em> <span class="math notranslate nohighlight">\(\rightarrow\)</span> <em>New test case</em> (Ctrl+N) from the menu bar (1).</p>
+<div class="section" id="a-first-example">
+<h3>A first example<a class="headerlink" href="#a-first-example" title="Permalink to this headline">¶</a></h3>
+<p>As an example, open the reference test case located in <em>./libTests/referenceTestCases/euler/1D/transport/positiveVelocity</em>. The application then loads the parameters from the ECOGEN input files corresponding to the requested test case (figure <a class="reference internal" href="#fig-gui-castestref"><span class="std std-numref">Fig. 31</span></a>).</p>
+<div class="figure align-center" id="id4">
+<span id="fig-gui-castestref"></span><a class="reference internal image-reference" href="_images/casTestRef.png"><img alt="_images/casTestRef.png" src="_images/casTestRef.png" style="width: 685.5px; height: 424.5px;" /></a>
+<p class="caption"><span class="caption-number">Fig. 31 </span><span class="caption-text">Opening the reference test case located in <em>./libTests/referenceTestCases/euler/1D/transport/positiveVelocity</em>.</span><a class="headerlink" href="#id4" title="Permalink to this image">¶</a></p>
+</div>
+<p>Loading the test case causes a new tab to appear in the central part of the window (8):</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>The tab title corresponds to the name of the test case being edited. It is also the name of the folder that will contain the results of the corresponding ECOGEN simulation (see section <a class="reference internal" href="Chap3_1_1main.html#sec-input-main-runname"><span class="std std-ref">Run name</span></a> for more details).</p></li>
+<li><p>The white zone of the tab will record all the operations performed on this test case (log).</p></li>
+<li><p>If the test case parameters are modified, the tab title will be followed by a star which means that the modifications must be recorded to be applied to the ECOGEN code input files. To do this, select <em>File</em> <span class="math notranslate nohighlight">\(\rightarrow\)</span> <em>Save test case</em> (Ctrl+S).</p></li>
+</ul>
+</div></blockquote>
+</div>
+<div class="section" id="multiple-test-case-downloads-and-preparation-of-ecogen">
+<h3>Multiple test case downloads and preparation of ECOGEN<a class="headerlink" href="#multiple-test-case-downloads-and-preparation-of-ecogen" title="Permalink to this headline">¶</a></h3>
+<p>It is possible to open multiple test cases simultaneously. In this case, as many tabs will be present in the central area (figure <a class="reference internal" href="#fig-gui-zoomonglets"><span class="std std-numref">Fig. 32</span></a>).</p>
+<div class="figure align-center" id="id5">
+<span id="fig-gui-zoomonglets"></span><a class="reference internal image-reference" href="_images/zoomOnglets.png"><img alt="_images/zoomOnglets.png" src="_images/zoomOnglets.png" style="width: 544.5999999999999px; height: 118.3px;" /></a>
+<p class="caption"><span class="caption-number">Fig. 32 </span><span class="caption-text">Here, 3 test cases are opened simultaneously. The test case being edited <em>kapila2DrichtmyerMeshkov</em> has been modified and not saved.</span><a class="headerlink" href="#id5" title="Permalink to this image">¶</a></p>
+</div>
+<p>Once the test cases have been loaded into ECOGEN_GUI and all saved, it is possible to generate the main input file of the ECOGEN code from the menu bar (<em>Run</em> <span class="math notranslate nohighlight">\(\rightarrow\)</span> <em>Prepare</em> or Ctrl+E). The simulations are ready to run (refer to section <a class="reference internal" href="Chap2_1installation.html#sec-installation-compileandexecute"><span class="std std-ref">Compilation/Execution on bash</span></a>).</p>
+</div>
+<div class="section" id="reloading-a-test-case">
+<h3>Reloading a test case<a class="headerlink" href="#reloading-a-test-case" title="Permalink to this headline">¶</a></h3>
+<p>At any time, the input files can be reloaded again within the ECOGEN_GUI interface via the menu command (<em>View</em> <span class="math notranslate nohighlight">\(\rightarrow\)</span> <em>Refresh</em> or Ctrl+R). This command is particularly useful to cancel unsaved modifications of the parameters of a test case or during a “manual” modification of the input files.</p>
+</div>
+</div>
+</div>
+<div class="section" id="desription-of-docks">
+<h1>Desription of docks<a class="headerlink" href="#desription-of-docks" title="Permalink to this headline">¶</a></h1>
+<p>The main window of ECOGEN_GUI consists of docks that can be arranged according to the user’s preferences. These different docks gather the settings of a test case by “family”. A help on each parameter can be obtained via the appearance of a tooltip on mouse over.</p>
+<p>Any change to a setting of a test case is accompanied by a line in the <em>log</em> field (central white area (8)) of the corresponding tab. This allows you to keep a history of the work performed on each test case.</p>
+<div class="admonition caution">
+<p class="admonition-title">Caution</p>
+<p>Some parameters are not yet implemented within ECOGEN_GUI. The specific requirements for these parameters can nevertheless be edited manually within the input files. In this case, refer to section <a class="reference internal" href="Chap3_IO_Chapter.html#chap-userguide"><span class="std std-ref">I/O descriptions</span></a>.</p>
+</div>
+<div class="section" id="run-controls-dock">
+<h2><strong>Run Controls</strong> dock<a class="headerlink" href="#run-controls-dock" title="Permalink to this headline">¶</a></h2>
+<p>The dock <strong>Run controls</strong> (2) gathers all the computation settings initially contained in the input file <em>mainV5.xml</em> of the considered test case.
+The details of the parameters are presented in section <a class="reference internal" href="Chap3_1_1main.html#sec-input-main"><span class="std std-ref">MainV5.xml</span></a>.</p>
+</div>
+<div class="section" id="models-dock">
+<h2><strong>Models</strong> dock<a class="headerlink" href="#models-dock" title="Permalink to this headline">¶</a></h2>
+<p>The dock <strong>Models</strong> (3) gathers all the parameters of the mathematical flow model initially contained in the input file <em>modelV4.xml</em> of the considered test case.
+The details of the parameters are presented in section <a class="reference internal" href="Chap3_1_2model.html#sec-input-model"><span class="std std-ref">ModelV4.xml</span></a>. This dock allows, among other things, to:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Change the model on the fly.</p></li>
+<li><p>Change the number of phases.</p></li>
+<li><p>Select for each phase an equation of state present in the ECOGEN directory.</p></li>
+</ul>
+</div></blockquote>
+<p>An interesting feature of ECOGEN_GUI is that any modification linked to the model will automatically be reported on the other docks (<strong>Boundary conditions</strong> and <strong>Physical domains</strong>) and consequently on the input files of the test case during saving.</p>
+</div>
+<div class="section" id="mesh-properties-dock">
+<h2><strong>Mesh properties</strong> dock<a class="headerlink" href="#mesh-properties-dock" title="Permalink to this headline">¶</a></h2>
+<p>The dock <strong>Mesh properties</strong> (4) gathers all the settings related to the mesh. These parameters are initially contained in the input file <em>meshV5.xml</em> of the considered test case.
+The details of the parameters are presented in section <a class="reference internal" href="Chap3_1_3mesh.html#sec-input-mesh"><span class="std std-ref">MeshV5.xml</span></a>.</p>
+<p>The appearance of this dock depends on the type of mesh considered (Cartesian or unstructured). The two possible aspects of the dock <strong>Mesh properties</strong> are presented on figure <a class="reference internal" href="#fig-gui-meshdock"><span class="std std-numref">Fig. 33</span></a>.</p>
+<div class="figure align-center" id="id6">
+<span id="fig-gui-meshdock"></span><a class="reference internal image-reference" href="_images/meshDock.png"><img alt="_images/meshDock.png" src="_images/meshDock.png" style="width: 487.2px; height: 248.49999999999997px;" /></a>
+<p class="caption"><span class="caption-number">Fig. 33 </span><span class="caption-text">Two different aspects of the dock <strong>Mesh properties</strong>. Left: The standalone Cartesian mesh version is fully adaptable. Right: The unstructured version which requires to specify a mesh file from a third-party application.</span><a class="headerlink" href="#id6" title="Permalink to this image">¶</a></p>
+</div>
+<p>It is not possible to change the nature of the mesh on the fly. To change the mesh type, a new test case with the correct initial mesh structure must be created.</p>
+<div class="section" id="cartesian-mesh">
+<h3>Cartesian mesh<a class="headerlink" href="#cartesian-mesh" title="Permalink to this headline">¶</a></h3>
+<p>When the mesh is Cartesian (figure <a class="reference internal" href="#fig-gui-meshdock"><span class="std std-numref">Fig. 33</span></a>, left), it is fully adaptable via ECOGEN_GUI (dimensions, number of computation cells, use of AMR for adaptative mesh refinement of discontinuities).</p>
+</div>
+<div class="section" id="unstructured-mesh">
+<h3>Unstructured mesh<a class="headerlink" href="#unstructured-mesh" title="Permalink to this headline">¶</a></h3>
+<p>When the mesh is unstructured (figure <a class="reference internal" href="#fig-gui-meshdock"><span class="std std-numref">Fig. 33</span></a>, right), the mesh must first be prepared using a third-party mesh application. The resulting mesh file must be specified here. Details on the mesh files accepted by ECOGEN are available in section <a class="reference internal" href="Chap4_2generatingMeshes.html#sec-tuto-generatingmeshes"><span class="std std-ref">Generating Meshes</span></a>.</p>
+<div class="admonition caution">
+<p class="admonition-title">Caution</p>
+<p>In case of modification of the mesh file, it may be necessary to edit the boundary conditions of the input file <em>initialConditionsV4.xml</em> manually, these boundary conditions being dependent on the mesh file. This will be recalled in the <em>log</em> area of the test case if needed.</p>
+</div>
+</div>
+</div>
+<div class="section" id="boundary-conditions-dock">
+<h2><strong>Boundary conditions</strong> dock<a class="headerlink" href="#boundary-conditions-dock" title="Permalink to this headline">¶</a></h2>
+<p>The dock <strong>Boundary conditions</strong> (5) gathers all the settings related to the boundary conditions. These parameters are initially contained in the input file <em>initialConditionsV4.xml</em> of the considered test case.
+The details of the parameters are presented in section <a class="reference internal" href="Chap3_1_4initialConditions.html#sec-input-boundaryconditions"><span class="std std-ref">Boundary conditions</span></a>.</p>
+<p>The dock will automatically adjust to the parameters of the other docks (<strong>Mesh properties</strong> and <strong>Models</strong>).
+The different boundary conditions available are selectable within the dock list. Once the condition is selected within the list, its parameters can be modified.</p>
+</div>
+<div class="section" id="physical-domains-dock">
+<h2><strong>Physical domains</strong> dock<a class="headerlink" href="#physical-domains-dock" title="Permalink to this headline">¶</a></h2>
+<p>The dock <strong>Physical domains</strong> (6) gathers all the settings related to the physical domains to initialize (initial conditions of the computation). These parameters are initially contained in the input file <em>initialConditionsV4.xml</em> of the considered test case.
+The details of the parameters are presented in section <a class="reference internal" href="Chap3_1_4initialConditions.html#sec-input-physicaldomains"><span class="std std-ref">Physical domains</span></a>.</p>
+<p>In ECOGEN_GUI, the dock <strong>Physical domains</strong> will automatically adapt to the parameters present in the dock <strong>Models</strong>.</p>
+<p>The <strong>Physical domains</strong> dock is used to define different initialization regions for the thermo-mechanical variables of fluids within the computational domain. These regions operate by accumulation and can therefore overlap each other. It is then possible to create a base region initializing the whole domain and then add as many domains as desired using the <span class="math notranslate nohighlight">\(+\)</span> button.
+Once added, the geometric domains can be removed using the <span class="math notranslate nohighlight">\(-\)</span> button or moved up or down (the domain at the top of the list being the first initialized, the following ones will be overlapped in order).</p>
+</div>
+<div class="section" id="equations-of-state-dock">
+<h2><strong>Equations of state</strong> dock<a class="headerlink" href="#equations-of-state-dock" title="Permalink to this headline">¶</a></h2>
+<p>This dock is independent. It indexes all the files of thermodynamic parameters of the fluids available in the directory of ECOGEN. These parameters can be directly modified within the ECOGEN interface by checking the box within the dock (used as a lock). Information on the equations of state can be found in section <a class="reference internal" href="Chap3_2materials.html#sec-io-materials"><span class="std std-ref">Materials</span></a>.</p>
+</div>
+</div>
+<div class="section" id="modify-ecogen-gui-s-configuration">
+<h1>Modify ECOGEN_GUI’s configuration<a class="headerlink" href="#modify-ecogen-gui-s-configuration" title="Permalink to this headline">¶</a></h1>
+<p>At any time, ECOGEN_GUI can be reconfigured via the menu bar <em>Edit</em> <span class="math notranslate nohighlight">\(\rightarrow\)</span> <em>Configure</em>). In this case, the user has access to the configuration window again (<a class="reference internal" href="#fig-gui-config"><span class="std std-numref">Fig. 29</span></a>).</p>
+<div class="section" id="ecogen-s-working-directory">
+<h2>ECOGEN’s working directory<a class="headerlink" href="#ecogen-s-working-directory" title="Permalink to this headline">¶</a></h2>
+<p>In this window, the path to ECOGEN’s working directory must be correctly specified to ensure the operation of the ECOGEN_GUI interface. At the time of validation, if the chosen directory does not contain the main input file of the code <em>ECOGEN.xml</em>, an error message will appear and the user will again be prompted to modify the directory (see section <a class="reference internal" href="Chap4_1startWithECOGEN.html#sec-tuto-mainxml"><span class="std std-ref">The main input file</span></a> for details on the main input file <em>ECOGEN.xml</em>).</p>
+</div>
+<div class="section" id="links-to-external-tools">
+<h2>Links to external tools<a class="headerlink" href="#links-to-external-tools" title="Permalink to this headline">¶</a></h2>
+<p>It is an option you can use in ECOGEN_GUI. It is possible to specify the link to external application executables which can be frequently used during a simulation session via ECOGEN. Once these links are effective, it will be possible to call the corresponding applications via the menu (1) of the main window (<em>Tools</em>).</p>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="zBibliography.html" class="btn btn-neutral float-right" title="Bibliography" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="Chap8_GUI.html" class="btn btn-neutral float-left" title="Graphical User Interface" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019, code-mphi
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

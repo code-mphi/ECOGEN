@@ -17,6 +17,10 @@ var dir_23a3fe25c2dc2d34a4dff7ecdccfd5ac =
     [ "OutputCutGNU.h", "OutputCutGNU_8h.html", [
       [ "OutputCutGNU", "classOutputCutGNU.html", "classOutputCutGNU" ]
     ] ],
+    [ "OutputGlobalGNU.cpp", "OutputGlobalGNU_8cpp.html", null ],
+    [ "OutputGlobalGNU.h", "OutputGlobalGNU_8h.html", [
+      [ "OutputGlobalGNU", "classOutputGlobalGNU.html", "classOutputGlobalGNU" ]
+    ] ],
     [ "OutputGNU.cpp", "OutputGNU_8cpp.html", null ],
     [ "OutputGNU.h", "OutputGNU_8h.html", [
       [ "OutputGNU", "classOutputGNU.html", "classOutputGNU" ]

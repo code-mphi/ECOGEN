@@ -3,7 +3,7 @@
 Tutorials
 =========
 
-Here are presented a collection of tutorials to help using efficiently ECOGEN. One should began with the section :ref:`Sec:tuto:begin` when first use of ECOGEN.
+Here are presented a collection of tutorials to help you use ECOGEN efficiently. One should begin with the section :ref:`Sec:tuto:begin` for the first use of ECOGEN.
 
 .. toctree::
    :maxdepth: 1
@@ -11,3 +11,6 @@ Here are presented a collection of tutorials to help using efficiently ECOGEN. O
 
    Chap4_1startWithECOGEN
    Chap4_2generatingMeshes
+   Chap4_3restartRun
+   Chap4_4splitPhysicalDomainsNS
+   

@@ -9,8 +9,9 @@ var classModel =
     [ "allocatePhase", "classModel.html#a3cbbf2edc4af8eef6088dedd7353ed19", null ],
     [ "fulfillState", "classModel.html#ab6c71ee6f6078d493e65c852a085f83f", null ],
     [ "getRelaxations", "classModel.html#a2ae87f97b23a04177ba45ccabb48731c", null ],
-    [ "getSM", "classModel.html#ae1cf5948f243eff67949d799223fc309", null ],
-    [ "getVelocity", "classModel.html#afed45633f78d68bd0116fd85ab57e297", null ],
+    [ "getSM", "classModel.html#aa89e06b3682a488d2d131a368c405231", null ],
+    [ "getVelocity", "classModel.html#ab0d2d4f5248d13ad94b1f42f5753e898", null ],
+    [ "getVelocity", "classModel.html#aced38882902d5b606e2075c64b74f037", null ],
     [ "printInfo", "classModel.html#a70a1b021374eee494433ba014617f39c", null ],
     [ "relaxations", "classModel.html#a4d67cffcf3ee934825e7333ba6a12ade", null ],
     [ "reverseProjection", "classModel.html#aceb7a7a6fd3c9da73c4ab111018e80a9", null ],
@@ -24,7 +25,7 @@ var classModel =
     [ "solveRiemannTransportTank", "classModel.html#a1fc0b0092975ef9101a56b1a8a6a213c", null ],
     [ "solveRiemannTransportWall", "classModel.html#a3ba54a5073e1ab22144b35529eedee31", null ],
     [ "solveRiemannWall", "classModel.html#a94469c3406cba01a8c86f0360d1ff178", null ],
-    [ "whoAmI", "classModel.html#aee478c84efea07d76dfc4c16213f9472", null ],
+    [ "whoAmI", "classModel.html#a9b6438b9b9beb4f9cfbcb0501f511930", null ],
     [ "m_name", "classModel.html#a459f3420c7e47200f15c946cb7702170", null ],
     [ "m_relaxations", "classModel.html#abe24dadb515411b661ec7003089cc9af", null ]
 ];

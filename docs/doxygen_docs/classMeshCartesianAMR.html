@@ -127,48 +127,53 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:ac7d2422b09996d9ba2b4f24e2f7d0468"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a288ffcf296ea0209cddc0b2d638b3dfe"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMeshCartesianAMR.html#a288ffcf296ea0209cddc0b2d638b3dfe">~MeshCartesianAMR</a> ()</td></tr>
 <tr class="separator:a288ffcf296ea0209cddc0b2d638b3dfe"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a924ea0442d6b43605c8c40aa3ce258e0"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMeshCartesianAMR.html#a924ea0442d6b43605c8c40aa3ce258e0">genereTableauxCellsBordsLvl</a> (<a class="el" href="classCell.html">Cell</a> **cells, <a class="el" href="classCellInterface.html">CellInterface</a> **bord, std::vector&lt; <a class="el" href="classCell.html">Cell</a> * &gt; **cellsLvl, std::vector&lt; <a class="el" href="classCellInterface.html">CellInterface</a> * &gt; **boundariesLvl)</td></tr>
-<tr class="separator:a924ea0442d6b43605c8c40aa3ce258e0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a882a4895fd557e71d829583a903ce7aa"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMeshCartesianAMR.html#a882a4895fd557e71d829583a903ce7aa">procedureRaffinementInitialization</a> (std::vector&lt; <a class="el" href="classCell.html">Cell</a> * &gt; *cellsLvl, std::vector&lt; <a class="el" href="classCellInterface.html">CellInterface</a> * &gt; *boundariesLvl, const std::vector&lt; <a class="el" href="classAddPhys.html">AddPhys</a> * &gt; &amp;addPhys, <a class="el" href="classModel.html">Model</a> *model, int &amp;nbCellsTotalAMR, std::vector&lt; <a class="el" href="classGeometricalDomain.html">GeometricalDomain</a> * &gt; &amp;domains, <a class="el" href="classCell.html">Cell</a> **cells, <a class="el" href="classEos.html">Eos</a> **eos, const int &amp;resumeSimulation)</td></tr>
-<tr class="separator:a882a4895fd557e71d829583a903ce7aa"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:afc7f95479b2dfbdf1a5978773fb06bd0"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMeshCartesianAMR.html#afc7f95479b2dfbdf1a5978773fb06bd0">procedureRaffinement</a> (std::vector&lt; <a class="el" href="classCell.html">Cell</a> * &gt; *cellsLvl, std::vector&lt; <a class="el" href="classCellInterface.html">CellInterface</a> * &gt; *boundariesLvl, const int &amp;lvl, const std::vector&lt; <a class="el" href="classAddPhys.html">AddPhys</a> * &gt; &amp;addPhys, <a class="el" href="classModel.html">Model</a> *model, int &amp;nbCellsTotalAMR, <a class="el" href="classCell.html">Cell</a> **cells, <a class="el" href="classEos.html">Eos</a> **eos)</td></tr>
-<tr class="separator:afc7f95479b2dfbdf1a5978773fb06bd0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a16332f37576e7222e1c0acef7528af10"><td class="memItemLeft" align="right" valign="top">virtual std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMeshCartesianAMR.html#a16332f37576e7222e1c0acef7528af10">whoAmI</a> () const </td></tr>
-<tr class="separator:a16332f37576e7222e1c0acef7528af10"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2b3672e382abb8659c642f4b32b09e1d"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMeshCartesianAMR.html#a2b3672e382abb8659c642f4b32b09e1d">ecritHeaderPiece</a> (std::ofstream &amp;fileStream, std::vector&lt; <a class="el" href="classCell.html">Cell</a> * &gt; *cellsLvl, int lvl=0) const </td></tr>
-<tr class="separator:a2b3672e382abb8659c642f4b32b09e1d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa8a1b8e5834722f0788903d011011ace"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMeshCartesianAMR.html#aa8a1b8e5834722f0788903d011011ace">recupereNoeuds</a> (std::vector&lt; double &gt; &amp;jeuDonnees, int lvl=0) const </td></tr>
-<tr class="separator:aa8a1b8e5834722f0788903d011011ace"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2bd797f19ede3cbdce8aaabdde57c574"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMeshCartesianAMR.html#a2bd797f19ede3cbdce8aaabdde57c574">recupereConnectivite</a> (std::vector&lt; double &gt; &amp;jeuDonnees, int lvl=0) const </td></tr>
-<tr class="separator:a2bd797f19ede3cbdce8aaabdde57c574"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac379da6e617f66ee9ded53c12e49a17a"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMeshCartesianAMR.html#ac379da6e617f66ee9ded53c12e49a17a">recupereOffsets</a> (std::vector&lt; double &gt; &amp;jeuDonnees, int lvl=0) const </td></tr>
-<tr class="separator:ac379da6e617f66ee9ded53c12e49a17a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aecb91c4cae2eca00b616991186d8b93a"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMeshCartesianAMR.html#aecb91c4cae2eca00b616991186d8b93a">recupereTypeCell</a> (std::vector&lt; double &gt; &amp;jeuDonnees, int lvl=0) const </td></tr>
-<tr class="separator:aecb91c4cae2eca00b616991186d8b93a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4a92911651046e551061b0cbecde5d39"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMeshCartesianAMR.html#a4a92911651046e551061b0cbecde5d39">recupereDonnees</a> (std::vector&lt; <a class="el" href="classCell.html">Cell</a> * &gt; *cellsLvl, std::vector&lt; double &gt; &amp;jeuDonnees, const int var, int phase, int lvl=0) const </td></tr>
-<tr class="memdesc:a4a92911651046e551061b0cbecde5d39"><td class="mdescLeft">&#160;</td><td class="mdescRight">Extracting data for printing results.  <a href="#a4a92911651046e551061b0cbecde5d39">More...</a><br /></td></tr>
-<tr class="separator:a4a92911651046e551061b0cbecde5d39"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4a42927bf0b5e02afbe702b1d4d5194e"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMeshCartesianAMR.html#a4a42927bf0b5e02afbe702b1d4d5194e">setDataSet</a> (std::vector&lt; double &gt; &amp;jeuDonnees, std::vector&lt; <a class="el" href="classCell.html">Cell</a> * &gt; *cellsLvl, const int var, int phase, int lvl=0) const </td></tr>
-<tr class="memdesc:a4a42927bf0b5e02afbe702b1d4d5194e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Extracting data for printing results.  <a href="#a4a42927bf0b5e02afbe702b1d4d5194e">More...</a><br /></td></tr>
-<tr class="separator:a4a42927bf0b5e02afbe702b1d4d5194e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2839cad6087e16f1b682dba704a6c1b5"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMeshCartesianAMR.html#a2839cad6087e16f1b682dba704a6c1b5">refineCell</a> (<a class="el" href="classCell.html">Cell</a> *cell, const std::vector&lt; <a class="el" href="classAddPhys.html">AddPhys</a> * &gt; &amp;addPhys, <a class="el" href="classModel.html">Model</a> *model, int &amp;nbCellsTotalAMR)</td></tr>
-<tr class="separator:a2839cad6087e16f1b682dba704a6c1b5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0db054583be66e61fcaf8f114e776836"><td class="memItemLeft" align="right" valign="top">virtual int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMeshCartesianAMR.html#a0db054583be66e61fcaf8f114e776836">initializeGeometrie</a> (<a class="el" href="Tools_8h.html#a6a3bb3ec3ebf7c9a9f95790b2336019c">TypeMeshContainer</a>&lt; <a class="el" href="classCell.html">Cell</a> * &gt; &amp;cells, <a class="el" href="Tools_8h.html#a6a3bb3ec3ebf7c9a9f95790b2336019c">TypeMeshContainer</a>&lt; <a class="el" href="classCell.html">Cell</a> * &gt; &amp;cellsGhost, <a class="el" href="Tools_8h.html#a6a3bb3ec3ebf7c9a9f95790b2336019c">TypeMeshContainer</a>&lt; <a class="el" href="classCellInterface.html">CellInterface</a> * &gt; &amp;cellInterfaces, const int &amp;restartSimulation, bool pretraitementParallele, std::string ordreCalcul)</td></tr>
+<tr class="memdesc:a0db054583be66e61fcaf8f114e776836"><td class="mdescLeft">&#160;</td><td class="mdescRight">renvoi le number de dimensions (1,2 ou 3)  <a href="#a0db054583be66e61fcaf8f114e776836">More...</a><br /></td></tr>
+<tr class="separator:a0db054583be66e61fcaf8f114e776836"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aad492b13745aa2fb9453010d00911cef"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMeshCartesianAMR.html#aad492b13745aa2fb9453010d00911cef">initializeGeometrieAMR</a> (<a class="el" href="Tools_8h.html#a6a3bb3ec3ebf7c9a9f95790b2336019c">TypeMeshContainer</a>&lt; <a class="el" href="classCell.html">Cell</a> * &gt; &amp;cells, <a class="el" href="Tools_8h.html#a6a3bb3ec3ebf7c9a9f95790b2336019c">TypeMeshContainer</a>&lt; <a class="el" href="classCell.html">Cell</a> * &gt; &amp;cellsGhost, <a class="el" href="Tools_8h.html#a6a3bb3ec3ebf7c9a9f95790b2336019c">TypeMeshContainer</a>&lt; <a class="el" href="classCellInterface.html">CellInterface</a> * &gt; &amp;cellInterfaces, const int &amp;restartSimulation, std::string ordreCalcul)</td></tr>
+<tr class="separator:aad492b13745aa2fb9453010d00911cef"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0a40f690c919539bf9447e59cede934f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMeshCartesianAMR.html#a0a40f690c919539bf9447e59cede934f">assignElementProperties</a> (<a class="el" href="Tools_8h.html#a6a3bb3ec3ebf7c9a9f95790b2336019c">TypeMeshContainer</a>&lt; <a class="el" href="classCell.html">Cell</a> * &gt; &amp;cells, std::vector&lt; <a class="el" href="structdecomposition_1_1Key.html">decomposition::Key</a>&lt; 3 &gt;&gt; &amp;keys)</td></tr>
+<tr class="separator:a0a40f690c919539bf9447e59cede934f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab3c9d86007c929c52ac2ccaa3676ee9e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMeshCartesianAMR.html#ab3c9d86007c929c52ac2ccaa3676ee9e">createCellInterfacesFacesAndGhostCells</a> (<a class="el" href="Tools_8h.html#a6a3bb3ec3ebf7c9a9f95790b2336019c">TypeMeshContainer</a>&lt; <a class="el" href="classCell.html">Cell</a> * &gt; &amp;cells, <a class="el" href="Tools_8h.html#a6a3bb3ec3ebf7c9a9f95790b2336019c">TypeMeshContainer</a>&lt; <a class="el" href="classCell.html">Cell</a> * &gt; &amp;cellsGhost, <a class="el" href="Tools_8h.html#a6a3bb3ec3ebf7c9a9f95790b2336019c">TypeMeshContainer</a>&lt; <a class="el" href="classCellInterface.html">CellInterface</a> * &gt; &amp;cellInterfaces, std::string ordreCalcul)</td></tr>
+<tr class="separator:ab3c9d86007c929c52ac2ccaa3676ee9e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aabe0e11e851e74129385e1afed48fd19"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMeshCartesianAMR.html#aabe0e11e851e74129385e1afed48fd19">procedureRaffinementInitialization</a> (<a class="el" href="Tools_8h.html#a6a3bb3ec3ebf7c9a9f95790b2336019c">TypeMeshContainer</a>&lt; <a class="el" href="classCell.html">Cell</a> * &gt; *cellsLvl, <a class="el" href="Tools_8h.html#a6a3bb3ec3ebf7c9a9f95790b2336019c">TypeMeshContainer</a>&lt; <a class="el" href="classCell.html">Cell</a> * &gt; *cellsLvlGhost, <a class="el" href="Tools_8h.html#a6a3bb3ec3ebf7c9a9f95790b2336019c">TypeMeshContainer</a>&lt; <a class="el" href="classCellInterface.html">CellInterface</a> * &gt; *cellInterfacesLvl, const std::vector&lt; <a class="el" href="classAddPhys.html">AddPhys</a> * &gt; &amp;addPhys, <a class="el" href="classModel.html">Model</a> *model, int &amp;nbCellsTotalAMR, std::vector&lt; <a class="el" href="classGeometricalDomain.html">GeometricalDomain</a> * &gt; &amp;domains, <a class="el" href="classEos.html">Eos</a> **eos, const int &amp;restartSimulation, std::string ordreCalcul, const int &amp;numberPhases, const int &amp;numberTransports)</td></tr>
+<tr class="separator:aabe0e11e851e74129385e1afed48fd19"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a58970c5dd889989bd7b27925277cb5d6"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMeshCartesianAMR.html#a58970c5dd889989bd7b27925277cb5d6">procedureRaffinement</a> (<a class="el" href="Tools_8h.html#a6a3bb3ec3ebf7c9a9f95790b2336019c">TypeMeshContainer</a>&lt; <a class="el" href="classCell.html">Cell</a> * &gt; *cellsLvl, <a class="el" href="Tools_8h.html#a6a3bb3ec3ebf7c9a9f95790b2336019c">TypeMeshContainer</a>&lt; <a class="el" href="classCell.html">Cell</a> * &gt; *cellsLvlGhost, <a class="el" href="Tools_8h.html#a6a3bb3ec3ebf7c9a9f95790b2336019c">TypeMeshContainer</a>&lt; <a class="el" href="classCellInterface.html">CellInterface</a> * &gt; *cellInterfacesLvl, const int &amp;lvl, const std::vector&lt; <a class="el" href="classAddPhys.html">AddPhys</a> * &gt; &amp;addPhys, <a class="el" href="classModel.html">Model</a> *model, int &amp;nbCellsTotalAMR, <a class="el" href="classEos.html">Eos</a> **eos)</td></tr>
+<tr class="separator:a58970c5dd889989bd7b27925277cb5d6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a85ae864920496e76322fce65c22b64a5"><td class="memItemLeft" align="right" valign="top">virtual std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMeshCartesianAMR.html#a85ae864920496e76322fce65c22b64a5">whoAmI</a> () const </td></tr>
+<tr class="separator:a85ae864920496e76322fce65c22b64a5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a294644defbd4c18c44d4db2052d9a97c"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMeshCartesianAMR.html#a294644defbd4c18c44d4db2052d9a97c">ecritHeaderPiece</a> (std::ofstream &amp;fileStream, <a class="el" href="Tools_8h.html#a6a3bb3ec3ebf7c9a9f95790b2336019c">TypeMeshContainer</a>&lt; <a class="el" href="classCell.html">Cell</a> * &gt; *cellsLvl) const </td></tr>
+<tr class="separator:a294644defbd4c18c44d4db2052d9a97c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a774e31dc2fd7be92e552691de1500d0c"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMeshCartesianAMR.html#a774e31dc2fd7be92e552691de1500d0c">recupereNoeuds</a> (std::vector&lt; double &gt; &amp;jeuDonnees, std::vector&lt; <a class="el" href="classCell.html">Cell</a> * &gt; *cellsLvl) const </td></tr>
+<tr class="separator:a774e31dc2fd7be92e552691de1500d0c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7b0d531570109c0e630ba5d1432fca69"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMeshCartesianAMR.html#a7b0d531570109c0e630ba5d1432fca69">recupereConnectivite</a> (std::vector&lt; double &gt; &amp;jeuDonnees, std::vector&lt; <a class="el" href="classCell.html">Cell</a> * &gt; *cellsLvl) const </td></tr>
+<tr class="separator:a7b0d531570109c0e630ba5d1432fca69"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac51dff8f637776029cd2adea732c276c"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMeshCartesianAMR.html#ac51dff8f637776029cd2adea732c276c">recupereOffsets</a> (std::vector&lt; double &gt; &amp;jeuDonnees, std::vector&lt; <a class="el" href="classCell.html">Cell</a> * &gt; *cellsLvl) const </td></tr>
+<tr class="separator:ac51dff8f637776029cd2adea732c276c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a404acd00d46d12b8562536b18db3b73a"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMeshCartesianAMR.html#a404acd00d46d12b8562536b18db3b73a">recupereTypeCell</a> (std::vector&lt; double &gt; &amp;jeuDonnees, std::vector&lt; <a class="el" href="classCell.html">Cell</a> * &gt; *cellsLvl) const </td></tr>
+<tr class="separator:a404acd00d46d12b8562536b18db3b73a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a93f2966b0d11cbc5a8686c50482461d5"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMeshCartesianAMR.html#a93f2966b0d11cbc5a8686c50482461d5">recupereDonnees</a> (<a class="el" href="Tools_8h.html#a6a3bb3ec3ebf7c9a9f95790b2336019c">TypeMeshContainer</a>&lt; <a class="el" href="classCell.html">Cell</a> * &gt; *cellsLvl, std::vector&lt; double &gt; &amp;jeuDonnees, const int var, int phase) const </td></tr>
+<tr class="separator:a93f2966b0d11cbc5a8686c50482461d5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a28b1f9c9a3c3e527ef203a9bd99f9ccd"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMeshCartesianAMR.html#a28b1f9c9a3c3e527ef203a9bd99f9ccd">setDataSet</a> (std::vector&lt; double &gt; &amp;jeuDonnees, <a class="el" href="Tools_8h.html#a6a3bb3ec3ebf7c9a9f95790b2336019c">TypeMeshContainer</a>&lt; <a class="el" href="classCell.html">Cell</a> * &gt; *cellsLvl, const int var, int phase) const </td></tr>
+<tr class="separator:a28b1f9c9a3c3e527ef203a9bd99f9ccd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0ef3d04c0578e74961119ecf07818b3c"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMeshCartesianAMR.html#a0ef3d04c0578e74961119ecf07818b3c">refineCellAndCellInterfaces</a> (<a class="el" href="classCell.html">Cell</a> *cell, const std::vector&lt; <a class="el" href="classAddPhys.html">AddPhys</a> * &gt; &amp;addPhys, <a class="el" href="classModel.html">Model</a> *model, int &amp;nbCellsTotalAMR)</td></tr>
+<tr class="separator:a0ef3d04c0578e74961119ecf07818b3c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a83ebfc714f2165512aa8e59468891b9c"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMeshCartesianAMR.html#a83ebfc714f2165512aa8e59468891b9c">printDomainDecomposition</a> (std::ofstream &amp;fileStream)</td></tr>
+<tr class="separator:a83ebfc714f2165512aa8e59468891b9c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a91ba88f54b643ff741143203f6958d9b"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMeshCartesianAMR.html#a91ba88f54b643ff741143203f6958d9b">readDomainDecomposition</a> (std::ifstream &amp;fileStream)</td></tr>
+<tr class="separator:a91ba88f54b643ff741143203f6958d9b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:afb1cc2db842cf8292089269e14a86a4e"><td class="memItemLeft" align="right" valign="top">virtual int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMeshCartesianAMR.html#afb1cc2db842cf8292089269e14a86a4e">getLvlMax</a> () const </td></tr>
 <tr class="separator:afb1cc2db842cf8292089269e14a86a4e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4c8e24bef3d6297f3a4fe02135a592a8"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMeshCartesianAMR.html#a4c8e24bef3d6297f3a4fe02135a592a8">initializePersistentCommunications</a> (const int numberPhases, const int numberTransports, <a class="el" href="classCell.html">Cell</a> **cells, std::string ordreCalcul)</td></tr>
-<tr class="separator:a4c8e24bef3d6297f3a4fe02135a592a8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aca5f32de76078f2ecf913d6a55f9b159"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMeshCartesianAMR.html#aca5f32de76078f2ecf913d6a55f9b159">communicationsPrimitives</a> (<a class="el" href="classCell.html">Cell</a> **cells, <a class="el" href="classEos.html">Eos</a> **eos, const int &amp;lvl, <a class="el" href="Phase_8h.html#a2c815f6ae654fe19b3985d14c9c8d74e">Prim</a> type=<a class="el" href="Phase_8h.html#a2c815f6ae654fe19b3985d14c9c8d74ea2270f1269fdfbdfd9044eaa8af19750d">vecPhases</a>)</td></tr>
-<tr class="separator:aca5f32de76078f2ecf913d6a55f9b159"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa6b8521e24c3608df57c9a7278117ee0"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMeshCartesianAMR.html#aa6b8521e24c3608df57c9a7278117ee0">communicationsSlopes</a> (<a class="el" href="classCell.html">Cell</a> **cells, const int &amp;lvl)</td></tr>
-<tr class="separator:aa6b8521e24c3608df57c9a7278117ee0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a05ce2c4631e321f362052cb35b38dfb6"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMeshCartesianAMR.html#a05ce2c4631e321f362052cb35b38dfb6">communicationsVector</a> (<a class="el" href="classCell.html">Cell</a> **cells, std::string nameVector, const int &amp;dim, const int &amp;lvl, int num, int index)</td></tr>
-<tr class="separator:a05ce2c4631e321f362052cb35b38dfb6"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aded143762f3f1df4003f449eda86b5c3"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMeshCartesianAMR.html#aded143762f3f1df4003f449eda86b5c3">communicationsAddPhys</a> (const std::vector&lt; <a class="el" href="classAddPhys.html">AddPhys</a> * &gt; &amp;addPhys, <a class="el" href="classCell.html">Cell</a> **cells, const int &amp;lvl)</td></tr>
-<tr class="separator:aded143762f3f1df4003f449eda86b5c3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae6e309a57e8fd6d0eae1449d89d4d76a"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMeshCartesianAMR.html#ae6e309a57e8fd6d0eae1449d89d4d76a">communicationsTransports</a> (<a class="el" href="classCell.html">Cell</a> **cells, const int &amp;lvl)</td></tr>
-<tr class="separator:ae6e309a57e8fd6d0eae1449d89d4d76a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afc13b7cdae43a672c4099da9da348304"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMeshCartesianAMR.html#afc13b7cdae43a672c4099da9da348304">initializePersistentCommunications</a> (const int numberPhases, const int numberTransports, const <a class="el" href="Tools_8h.html#a6a3bb3ec3ebf7c9a9f95790b2336019c">TypeMeshContainer</a>&lt; <a class="el" href="classCell.html">Cell</a> * &gt; &amp;cells, std::string ordreCalcul)</td></tr>
+<tr class="separator:afc13b7cdae43a672c4099da9da348304"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:acfbd945127f36f011ef7f68b3a46790e"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMeshCartesianAMR.html#acfbd945127f36f011ef7f68b3a46790e">finalizeParallele</a> (const int &amp;lvlMax)</td></tr>
 <tr class="separator:acfbd945127f36f011ef7f68b3a46790e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9492c3e742a6793312b3e002c01d80ce"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMeshCartesianAMR.html#a9492c3e742a6793312b3e002c01d80ce">parallelLoadBalancingAMR</a> (<a class="el" href="Tools_8h.html#a6a3bb3ec3ebf7c9a9f95790b2336019c">TypeMeshContainer</a>&lt; <a class="el" href="classCell.html">Cell</a> * &gt; *cellsLvl, <a class="el" href="Tools_8h.html#a6a3bb3ec3ebf7c9a9f95790b2336019c">TypeMeshContainer</a>&lt; <a class="el" href="classCell.html">Cell</a> * &gt; *cellsLvlGhost, <a class="el" href="Tools_8h.html#a6a3bb3ec3ebf7c9a9f95790b2336019c">TypeMeshContainer</a>&lt; <a class="el" href="classCellInterface.html">CellInterface</a> * &gt; *cellInterfacesLvl, std::string ordreCalcul, const int &amp;numberPhases, const int &amp;numberTransports, const std::vector&lt; <a class="el" href="classAddPhys.html">AddPhys</a> * &gt; &amp;addPhys, <a class="el" href="classModel.html">Model</a> *model, <a class="el" href="classEos.html">Eos</a> **eos, int &amp;nbCellsTotalAMR, bool init=false)</td></tr>
+<tr class="separator:a9492c3e742a6793312b3e002c01d80ce"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a78a81b30de4b6c954c06873d2f32d824"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMeshCartesianAMR.html#a78a81b30de4b6c954c06873d2f32d824">computePotentialBalancing</a> (<a class="el" href="Tools_8h.html#a6a3bb3ec3ebf7c9a9f95790b2336019c">TypeMeshContainer</a>&lt; <a class="el" href="classCell.html">Cell</a> * &gt; *cellsLvl, bool init, int lvl, bool &amp;<a class="el" href="classMeshCartesianAMR.html#a30e2e3c7f9f58d836743600224448950">balance</a>, std::string ordreCalcul, std::vector&lt; typename <a class="el" href="structdecomposition_1_1Key.html">decomposition::Key</a>&lt; 3 &gt;::value_type &gt; &amp;indicesSendStartGlobal, std::vector&lt; typename <a class="el" href="structdecomposition_1_1Key.html">decomposition::Key</a>&lt; 3 &gt;::value_type &gt; &amp;indicesSendEndGlobal, std::vector&lt; typename <a class="el" href="structdecomposition_1_1Key.html">decomposition::Key</a>&lt; 3 &gt;::value_type &gt; &amp;indicesReceiveStartGlobal, std::vector&lt; typename <a class="el" href="structdecomposition_1_1Key.html">decomposition::Key</a>&lt; 3 &gt;::value_type &gt; &amp;indicesReceiveEndGlobal)</td></tr>
+<tr class="separator:a78a81b30de4b6c954c06873d2f32d824"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a30e2e3c7f9f58d836743600224448950"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMeshCartesianAMR.html#a30e2e3c7f9f58d836743600224448950">balance</a> (<a class="el" href="Tools_8h.html#a6a3bb3ec3ebf7c9a9f95790b2336019c">TypeMeshContainer</a>&lt; <a class="el" href="classCell.html">Cell</a> * &gt; *cellsLvl, <a class="el" href="Tools_8h.html#a6a3bb3ec3ebf7c9a9f95790b2336019c">TypeMeshContainer</a>&lt; <a class="el" href="classCell.html">Cell</a> * &gt; *cellsLvlGhost, <a class="el" href="Tools_8h.html#a6a3bb3ec3ebf7c9a9f95790b2336019c">TypeMeshContainer</a>&lt; <a class="el" href="classCellInterface.html">CellInterface</a> * &gt; *cellInterfacesLvl, std::string ordreCalcul, const int &amp;numberPhases, const int &amp;numberTransports, const std::vector&lt; <a class="el" href="classAddPhys.html">AddPhys</a> * &gt; &amp;addPhys, <a class="el" href="classModel.html">Model</a> *model, <a class="el" href="classEos.html">Eos</a> **eos, int &amp;nbCellsTotalAMR, std::vector&lt; typename <a class="el" href="structdecomposition_1_1Key.html">decomposition::Key</a>&lt; 3 &gt;::value_type &gt; &amp;indicesSendStartGlobal, std::vector&lt; typename <a class="el" href="structdecomposition_1_1Key.html">decomposition::Key</a>&lt; 3 &gt;::value_type &gt; &amp;indicesSendEndGlobal, std::vector&lt; typename <a class="el" href="structdecomposition_1_1Key.html">decomposition::Key</a>&lt; 3 &gt;::value_type &gt; &amp;indicesReceiveStartGlobal, std::vector&lt; typename <a class="el" href="structdecomposition_1_1Key.html">decomposition::Key</a>&lt; 3 &gt;::value_type &gt; &amp;indicesReceiveEndGlobal)</td></tr>
+<tr class="separator:a30e2e3c7f9f58d836743600224448950"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_methods_classMeshCartesian"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classMeshCartesian')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classMeshCartesian.html">MeshCartesian</a></td></tr>
 <tr class="memitem:ac79da8c44697e23ac3241a5ad1de8564 inherit pub_methods_classMeshCartesian"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMeshCartesian.html#ac79da8c44697e23ac3241a5ad1de8564">MeshCartesian</a> (double lX, int numberCellsX, double lY, int numberCellsY, double lZ, int numberCellsZ, std::vector&lt; <a class="el" href="classstretchZone.html">stretchZone</a> &gt; stretchX, std::vector&lt; <a class="el" href="classstretchZone.html">stretchZone</a> &gt; stretchY, std::vector&lt; <a class="el" href="classstretchZone.html">stretchZone</a> &gt; stretchZ)</td></tr>
 <tr class="separator:ac79da8c44697e23ac3241a5ad1de8564 inherit pub_methods_classMeshCartesian"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -180,53 +185,66 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:aa94ddf8ae1af69ccf836b8b6b37a308a inherit pub_methods_classMeshCartesian"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a07fd0fda31b0c1515a1b3b7b51368ccb inherit pub_methods_classMeshCartesian"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMeshCartesian.html#a07fd0fda31b0c1515a1b3b7b51368ccb">construitIGlobal</a> (const int &amp;i, const int &amp;j, const int &amp;k, int &amp;index) const </td></tr>
 <tr class="separator:a07fd0fda31b0c1515a1b3b7b51368ccb inherit pub_methods_classMeshCartesian"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0cb7a0fc17983d6b952fb5c8cfcf91a8 inherit pub_methods_classMeshCartesian"><td class="memItemLeft" align="right" valign="top">virtual int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMeshCartesian.html#a0cb7a0fc17983d6b952fb5c8cfcf91a8">initializeGeometrie</a> (<a class="el" href="classCell.html">Cell</a> ***cells, <a class="el" href="classCellInterface.html">CellInterface</a> ***bord, bool pretraitementParallele, std::string ordreCalcul)</td></tr>
-<tr class="memdesc:a0cb7a0fc17983d6b952fb5c8cfcf91a8 inherit pub_methods_classMeshCartesian"><td class="mdescLeft">&#160;</td><td class="mdescRight">renvoi le number de dimensions (1,2 ou 3)  <a href="#a0cb7a0fc17983d6b952fb5c8cfcf91a8">More...</a><br /></td></tr>
-<tr class="separator:a0cb7a0fc17983d6b952fb5c8cfcf91a8 inherit pub_methods_classMeshCartesian"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6a07ce67949a32ddc816b2365e4205d5 inherit pub_methods_classMeshCartesian"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMeshCartesian.html#a6a07ce67949a32ddc816b2365e4205d5">meshStretching</a> ()</td></tr>
 <tr class="separator:a6a07ce67949a32ddc816b2365e4205d5 inherit pub_methods_classMeshCartesian"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af8b423fbfa7f9e27c7bd86edde9fb91c inherit pub_methods_classMeshCartesian"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMeshCartesian.html#af8b423fbfa7f9e27c7bd86edde9fb91c">initializeGeometrieMonoCpu</a> (<a class="el" href="classCell.html">Cell</a> ***cells, <a class="el" href="classCellInterface.html">CellInterface</a> ***bord, std::string ordreCalcul)</td></tr>
-<tr class="separator:af8b423fbfa7f9e27c7bd86edde9fb91c inherit pub_methods_classMeshCartesian"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5532e05ced0c975a8594d2a0687fe5d6 inherit pub_methods_classMeshCartesian"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMeshCartesian.html#a5532e05ced0c975a8594d2a0687fe5d6">initializeGeometrieParallele</a> (<a class="el" href="classCell.html">Cell</a> ***cells, <a class="el" href="classCellInterface.html">CellInterface</a> ***bord, std::string ordreCalcul)</td></tr>
-<tr class="separator:a5532e05ced0c975a8594d2a0687fe5d6 inherit pub_methods_classMeshCartesian"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:adb1d5c57aa3977837da8839837fe4e04 inherit pub_methods_classMeshCartesian"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMeshCartesian.html#adb1d5c57aa3977837da8839837fe4e04">effetsMesh</a> (<a class="el" href="classCellInterface.html">CellInterface</a> **face, const int &amp;numberPhases) const </td></tr>
-<tr class="separator:adb1d5c57aa3977837da8839837fe4e04 inherit pub_methods_classMeshCartesian"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1de0ff1511f6bdee229894eb560b6428 inherit pub_methods_classMeshCartesian"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMeshCartesian.html#a1de0ff1511f6bdee229894eb560b6428">decoupageParallele</a> ()</td></tr>
-<tr class="separator:a1de0ff1511f6bdee229894eb560b6428 inherit pub_methods_classMeshCartesian"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2c86b64b85341a33ba47725ea67ec5ea inherit pub_methods_classMeshCartesian"><td class="memItemLeft" align="right" valign="top">virtual std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMeshCartesian.html#a2c86b64b85341a33ba47725ea67ec5ea">recupereChaineExtent</a> (int localRank, bool global=false) const </td></tr>
-<tr class="separator:a2c86b64b85341a33ba47725ea67ec5ea inherit pub_methods_classMeshCartesian"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8f54f587956c185ab48e1a22bf3f80e1 inherit pub_methods_classMeshCartesian"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMeshCartesian.html#a8f54f587956c185ab48e1a22bf3f80e1">recupereCoord</a> (std::vector&lt; <a class="el" href="classCell.html">Cell</a> * &gt; *cellsLvl, std::vector&lt; double &gt; &amp;jeuDonnees, <a class="el" href="Tools_8h.html#a8b7a26aefee5b4a459d8a50eb8abf573">Axe</a> axe) const </td></tr>
-<tr class="separator:a8f54f587956c185ab48e1a22bf3f80e1 inherit pub_methods_classMeshCartesian"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acf00ae74c6a30d99c1b95690e92eab60 inherit pub_methods_classMeshCartesian"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMeshCartesian.html#acf00ae74c6a30d99c1b95690e92eab60">initializeGeometrieMonoCpu</a> (<a class="el" href="Tools_8h.html#a6a3bb3ec3ebf7c9a9f95790b2336019c">TypeMeshContainer</a>&lt; <a class="el" href="classCell.html">Cell</a> * &gt; &amp;cells, <a class="el" href="Tools_8h.html#a6a3bb3ec3ebf7c9a9f95790b2336019c">TypeMeshContainer</a>&lt; <a class="el" href="classCellInterface.html">CellInterface</a> * &gt; &amp;cellInterfaces, std::string ordreCalcul)</td></tr>
+<tr class="separator:acf00ae74c6a30d99c1b95690e92eab60 inherit pub_methods_classMeshCartesian"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad5532326b640d4817694d43575e08c7e inherit pub_methods_classMeshCartesian"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMeshCartesian.html#ad5532326b640d4817694d43575e08c7e">initializeGeometrieParallele</a> (<a class="el" href="Tools_8h.html#a6a3bb3ec3ebf7c9a9f95790b2336019c">TypeMeshContainer</a>&lt; <a class="el" href="classCell.html">Cell</a> * &gt; &amp;cells, <a class="el" href="Tools_8h.html#a6a3bb3ec3ebf7c9a9f95790b2336019c">TypeMeshContainer</a>&lt; <a class="el" href="classCell.html">Cell</a> * &gt; &amp;cellsGhost, <a class="el" href="Tools_8h.html#a6a3bb3ec3ebf7c9a9f95790b2336019c">TypeMeshContainer</a>&lt; <a class="el" href="classCellInterface.html">CellInterface</a> * &gt; &amp;cellInterfaces, std::string ordreCalcul)</td></tr>
+<tr class="separator:ad5532326b640d4817694d43575e08c7e inherit pub_methods_classMeshCartesian"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad97e8f7ec3ee7af86248101593b1e7b9 inherit pub_methods_classMeshCartesian"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMeshCartesian.html#ad97e8f7ec3ee7af86248101593b1e7b9">decoupageParallele</a> (std::string ordreCalcul, <a class="el" href="Tools_8h.html#a6a3bb3ec3ebf7c9a9f95790b2336019c">TypeMeshContainer</a>&lt; <a class="el" href="classCell.html">Cell</a> * &gt; &amp;cells)</td></tr>
+<tr class="separator:ad97e8f7ec3ee7af86248101593b1e7b9 inherit pub_methods_classMeshCartesian"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af4f6add223821a259fd0669daa7f9f9d inherit pub_methods_classMeshCartesian"><td class="memItemLeft" align="right" valign="top">virtual int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMeshCartesian.html#af4f6add223821a259fd0669daa7f9f9d">getNumberCellsY</a> ()</td></tr>
+<tr class="separator:af4f6add223821a259fd0669daa7f9f9d inherit pub_methods_classMeshCartesian"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6143b774ca9155dd3e29166e5591df13 inherit pub_methods_classMeshCartesian"><td class="memItemLeft" align="right" valign="top">virtual int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMeshCartesian.html#a6143b774ca9155dd3e29166e5591df13">getNumberCellsZ</a> ()</td></tr>
+<tr class="separator:a6143b774ca9155dd3e29166e5591df13 inherit pub_methods_classMeshCartesian"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a43fe2be3240af77e0095a060ad3607aa inherit pub_methods_classMeshCartesian"><td class="memItemLeft" align="right" valign="top">virtual std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMeshCartesian.html#a43fe2be3240af77e0095a060ad3607aa">recupereChaineExtent</a> (int localRank, bool global=false) const </td></tr>
+<tr class="separator:a43fe2be3240af77e0095a060ad3607aa inherit pub_methods_classMeshCartesian"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9be6bc079d2aeee3f4809a9d32686587 inherit pub_methods_classMeshCartesian"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMeshCartesian.html#a9be6bc079d2aeee3f4809a9d32686587">recupereCoord</a> (<a class="el" href="Tools_8h.html#a6a3bb3ec3ebf7c9a9f95790b2336019c">TypeMeshContainer</a>&lt; <a class="el" href="classCell.html">Cell</a> * &gt; *cellsLvl, std::vector&lt; double &gt; &amp;jeuDonnees, <a class="el" href="Tools_8h.html#ae3996976d8ffb3e58d88f58227473f8e">Axis</a> axis) const </td></tr>
+<tr class="separator:a9be6bc079d2aeee3f4809a9d32686587 inherit pub_methods_classMeshCartesian"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_methods_classMesh"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classMesh')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classMesh.html">Mesh</a></td></tr>
 <tr class="memitem:a2af137f1571af89172b9c102302c416b inherit pub_methods_classMesh"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMesh.html#a2af137f1571af89172b9c102302c416b">Mesh</a> ()</td></tr>
 <tr class="separator:a2af137f1571af89172b9c102302c416b inherit pub_methods_classMesh"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5efe4da1a4c0971cfb037bd70304c303 inherit pub_methods_classMesh"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMesh.html#a5efe4da1a4c0971cfb037bd70304c303">~Mesh</a> ()</td></tr>
 <tr class="separator:a5efe4da1a4c0971cfb037bd70304c303 inherit pub_methods_classMesh"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a413876362a792da4a7f42b60d8e90878 inherit pub_methods_classMesh"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMesh.html#a413876362a792da4a7f42b60d8e90878">getGeometrie</a> () const </td></tr>
-<tr class="separator:a413876362a792da4a7f42b60d8e90878 inherit pub_methods_classMesh"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a037ec97b8dae288b9fa861017c5b2298 inherit pub_methods_classMesh"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMesh.html#a037ec97b8dae288b9fa861017c5b2298">getNumberCells</a> () const </td></tr>
-<tr class="separator:a037ec97b8dae288b9fa861017c5b2298 inherit pub_methods_classMesh"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa42c0fcd13d785a7a5012013ede9fc9a inherit pub_methods_classMesh"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMesh.html#aa42c0fcd13d785a7a5012013ede9fc9a">getNumberCellsTotal</a> () const </td></tr>
-<tr class="separator:aa42c0fcd13d785a7a5012013ede9fc9a inherit pub_methods_classMesh"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae66d8a8d10a58c5bd9cd0146f8b7890d inherit pub_methods_classMesh"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMesh.html#ae66d8a8d10a58c5bd9cd0146f8b7890d">getNumberFaces</a> () const </td></tr>
-<tr class="separator:ae66d8a8d10a58c5bd9cd0146f8b7890d inherit pub_methods_classMesh"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af722876e4c94087d70d15d8fdebac691 inherit pub_methods_classMesh"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMesh.html#af722876e4c94087d70d15d8fdebac691">getNumFichier</a> () const </td></tr>
-<tr class="separator:af722876e4c94087d70d15d8fdebac691 inherit pub_methods_classMesh"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:affc38244de7ad452742239a36b439de6 inherit pub_methods_classMesh"><td class="memItemLeft" align="right" valign="top">const int &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMesh.html#affc38244de7ad452742239a36b439de6">getGeometrie</a> () const </td></tr>
+<tr class="separator:affc38244de7ad452742239a36b439de6 inherit pub_methods_classMesh"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abed1cb73ee507d1d36d2c36c3418b2b4 inherit pub_methods_classMesh"><td class="memItemLeft" align="right" valign="top">const int &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMesh.html#abed1cb73ee507d1d36d2c36c3418b2b4">getNumberCells</a> () const </td></tr>
+<tr class="separator:abed1cb73ee507d1d36d2c36c3418b2b4 inherit pub_methods_classMesh"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac1d939b7c1c59d49ad599be94c0179c8 inherit pub_methods_classMesh"><td class="memItemLeft" align="right" valign="top">const int &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMesh.html#ac1d939b7c1c59d49ad599be94c0179c8">getNumberCellsTotal</a> () const </td></tr>
+<tr class="separator:ac1d939b7c1c59d49ad599be94c0179c8 inherit pub_methods_classMesh"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad8c6efaf604e654a62f1da67fba6335f inherit pub_methods_classMesh"><td class="memItemLeft" align="right" valign="top">const int &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMesh.html#ad8c6efaf604e654a62f1da67fba6335f">getNumberFaces</a> () const </td></tr>
+<tr class="separator:ad8c6efaf604e654a62f1da67fba6335f inherit pub_methods_classMesh"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5d2a6ea54c55665c35fd5dbe3df9d666 inherit pub_methods_classMesh"><td class="memItemLeft" align="right" valign="top">const int &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMesh.html#a5d2a6ea54c55665c35fd5dbe3df9d666">getNumFichier</a> () const </td></tr>
+<tr class="separator:a5d2a6ea54c55665c35fd5dbe3df9d666 inherit pub_methods_classMesh"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac735f2ac310cf30893c431717768c84b inherit pub_methods_classMesh"><td class="memItemLeft" align="right" valign="top">virtual double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMesh.html#ac735f2ac310cf30893c431717768c84b">getdX</a> () const </td></tr>
 <tr class="separator:ac735f2ac310cf30893c431717768c84b inherit pub_methods_classMesh"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a97a1a7738ff57efcd81b69c1a2eac53a inherit pub_methods_classMesh"><td class="memItemLeft" align="right" valign="top">virtual double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMesh.html#a97a1a7738ff57efcd81b69c1a2eac53a">getdY</a> () const </td></tr>
 <tr class="separator:a97a1a7738ff57efcd81b69c1a2eac53a inherit pub_methods_classMesh"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae092f35ebdb66c34938bca33e08bbbeb inherit pub_methods_classMesh"><td class="memItemLeft" align="right" valign="top">virtual double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMesh.html#ae092f35ebdb66c34938bca33e08bbbeb">getdZ</a> () const </td></tr>
 <tr class="separator:ae092f35ebdb66c34938bca33e08bbbeb inherit pub_methods_classMesh"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a142c27bf229134eb71425769bf23144d inherit pub_methods_classMesh"><td class="memItemLeft" align="right" valign="top"><a class="el" href="Tools_8h.html#a090fa0180c1c24153a78ae4597899ff7">TypeM</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMesh.html#a142c27bf229134eb71425769bf23144d">getType</a> () const </td></tr>
-<tr class="separator:a142c27bf229134eb71425769bf23144d inherit pub_methods_classMesh"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad9942508c1cecb6fc859f4e0af8a6b87 inherit pub_methods_classMesh"><td class="memItemLeft" align="right" valign="top">const <a class="el" href="Tools_8h.html#a090fa0180c1c24153a78ae4597899ff7">TypeM</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMesh.html#ad9942508c1cecb6fc859f4e0af8a6b87">getType</a> () const </td></tr>
+<tr class="separator:ad9942508c1cecb6fc859f4e0af8a6b87 inherit pub_methods_classMesh"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5e79830beff3654515c48bcf4303e05e inherit pub_methods_classMesh"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMesh.html#a5e79830beff3654515c48bcf4303e05e">ecritSolutionGnuplot</a> (std::vector&lt; <a class="el" href="classCell.html">Cell</a> * &gt; *cellsLvl, std::ofstream &amp;fileStream, <a class="el" href="classGeometricObject.html">GeometricObject</a> *objet=0) const </td></tr>
 <tr class="separator:a5e79830beff3654515c48bcf4303e05e inherit pub_methods_classMesh"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2abd5216e0be24ab963b27752fccbcf7 inherit pub_methods_classMesh"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMesh.html#a2abd5216e0be24ab963b27752fccbcf7">extractAbsVeloxityMRF</a> (std::vector&lt; <a class="el" href="classCell.html">Cell</a> * &gt; *cellsLvl, std::vector&lt; double &gt; &amp;jeuDonnees, <a class="el" href="classSource.html">Source</a> *sourceMRF, int lvl=0) const </td></tr>
-<tr class="memdesc:a2abd5216e0be24ab963b27752fccbcf7 inherit pub_methods_classMesh"><td class="mdescLeft">&#160;</td><td class="mdescRight">Extracting absolute velocity for specific Moving Reference Frame computations.  <a href="#a2abd5216e0be24ab963b27752fccbcf7">More...</a><br /></td></tr>
-<tr class="separator:a2abd5216e0be24ab963b27752fccbcf7 inherit pub_methods_classMesh"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a979d8f5b3c050cf8b4be6eb22cadb684 inherit pub_methods_classMesh"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMesh.html#a979d8f5b3c050cf8b4be6eb22cadb684">printTree</a> (std::vector&lt; <a class="el" href="classCell.html">Cell</a> * &gt; *cellsLvl)</td></tr>
-<tr class="separator:a979d8f5b3c050cf8b4be6eb22cadb684 inherit pub_methods_classMesh"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad87419b649dca3d15a73f14e18bd6527 inherit pub_methods_classMesh"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMesh.html#ad87419b649dca3d15a73f14e18bd6527">ecritHeaderPiece</a> (std::ofstream &amp;fileStream, std::vector&lt; <a class="el" href="classCell.html">Cell</a> * &gt; *cellsLvl) const </td></tr>
+<tr class="separator:ad87419b649dca3d15a73f14e18bd6527 inherit pub_methods_classMesh"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aac60125c826b8dfc5591fa0130e83726 inherit pub_methods_classMesh"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMesh.html#aac60125c826b8dfc5591fa0130e83726">recupereCoord</a> (std::vector&lt; <a class="el" href="classCell.html">Cell</a> * &gt; *cellsLvl, std::vector&lt; double &gt; &amp;jeuDonnees, <a class="el" href="Tools_8h.html#ae3996976d8ffb3e58d88f58227473f8e">Axis</a> axis) const </td></tr>
+<tr class="separator:aac60125c826b8dfc5591fa0130e83726 inherit pub_methods_classMesh"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad64f614c8e2c4e40e7e4e5791a48a893 inherit pub_methods_classMesh"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMesh.html#ad64f614c8e2c4e40e7e4e5791a48a893">recupereDonnees</a> (std::vector&lt; <a class="el" href="classCell.html">Cell</a> * &gt; *cellsLvl, std::vector&lt; double &gt; &amp;jeuDonnees, const int var, int phase) const </td></tr>
+<tr class="memdesc:ad64f614c8e2c4e40e7e4e5791a48a893 inherit pub_methods_classMesh"><td class="mdescLeft">&#160;</td><td class="mdescRight">Extracting data for printing results.  <a href="#ad64f614c8e2c4e40e7e4e5791a48a893">More...</a><br /></td></tr>
+<tr class="separator:ad64f614c8e2c4e40e7e4e5791a48a893 inherit pub_methods_classMesh"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aebc5d26c66249c054e84b668a2188866 inherit pub_methods_classMesh"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMesh.html#aebc5d26c66249c054e84b668a2188866">setDataSet</a> (std::vector&lt; double &gt; &amp;jeuDonnees, std::vector&lt; <a class="el" href="classCell.html">Cell</a> * &gt; *cellsLvl, const int var, int phase) const </td></tr>
+<tr class="memdesc:aebc5d26c66249c054e84b668a2188866 inherit pub_methods_classMesh"><td class="mdescLeft">&#160;</td><td class="mdescRight">Extracting data for printing results.  <a href="#aebc5d26c66249c054e84b668a2188866">More...</a><br /></td></tr>
+<tr class="separator:aebc5d26c66249c054e84b668a2188866 inherit pub_methods_classMesh"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7d13c6d3b7af71de2d4c75689f3afd75 inherit pub_methods_classMesh"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMesh.html#a7d13c6d3b7af71de2d4c75689f3afd75">extractAbsVeloxityMRF</a> (std::vector&lt; <a class="el" href="classCell.html">Cell</a> * &gt; *cellsLvl, std::vector&lt; double &gt; &amp;jeuDonnees, <a class="el" href="classSource.html">Source</a> *sourceMRF) const </td></tr>
+<tr class="memdesc:a7d13c6d3b7af71de2d4c75689f3afd75 inherit pub_methods_classMesh"><td class="mdescLeft">&#160;</td><td class="mdescRight">Extracting absolute velocity for specific Moving Reference Frame computations.  <a href="#a7d13c6d3b7af71de2d4c75689f3afd75">More...</a><br /></td></tr>
+<tr class="separator:a7d13c6d3b7af71de2d4c75689f3afd75 inherit pub_methods_classMesh"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afb5ba3045036500fa97120235e655e74 inherit pub_methods_classMesh"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMesh.html#afb5ba3045036500fa97120235e655e74">procedureRaffinementInitialization</a> (std::vector&lt; <a class="el" href="classCell.html">Cell</a> * &gt; *cellsLvl, <a class="el" href="Tools_8h.html#a6a3bb3ec3ebf7c9a9f95790b2336019c">TypeMeshContainer</a>&lt; <a class="el" href="classCell.html">Cell</a> * &gt; *cellsLvlGhost, std::vector&lt; <a class="el" href="classCellInterface.html">CellInterface</a> * &gt; *cellInterfacesLvl, const std::vector&lt; <a class="el" href="classAddPhys.html">AddPhys</a> * &gt; &amp;addPhys, <a class="el" href="classModel.html">Model</a> *model, int &amp;nbCellsTotalAMR, std::vector&lt; <a class="el" href="classGeometricalDomain.html">GeometricalDomain</a> * &gt; &amp;domains, <a class="el" href="classEos.html">Eos</a> **eos, const int &amp;restartSimulation, std::string ordreCalcul, const int &amp;numberPhases, const int &amp;numberTransports)</td></tr>
+<tr class="separator:afb5ba3045036500fa97120235e655e74 inherit pub_methods_classMesh"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae1c0e47499e98c7a88ae38c0669e125c inherit pub_methods_classMesh"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMesh.html#ae1c0e47499e98c7a88ae38c0669e125c">procedureRaffinement</a> (std::vector&lt; <a class="el" href="classCell.html">Cell</a> * &gt; *cellsLvl, <a class="el" href="Tools_8h.html#a6a3bb3ec3ebf7c9a9f95790b2336019c">TypeMeshContainer</a>&lt; <a class="el" href="classCell.html">Cell</a> * &gt; *cellsLvlGhost, std::vector&lt; <a class="el" href="classCellInterface.html">CellInterface</a> * &gt; *cellInterfacesLvl, const int &amp;lvl, const std::vector&lt; <a class="el" href="classAddPhys.html">AddPhys</a> * &gt; &amp;addPhys, <a class="el" href="classModel.html">Model</a> *model, int &amp;nbCellsTotalAMR, <a class="el" href="classEos.html">Eos</a> **eos)</td></tr>
+<tr class="separator:ae1c0e47499e98c7a88ae38c0669e125c inherit pub_methods_classMesh"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a838c1aaba37a6e28b5f3ce21f751962e inherit pub_methods_classMesh"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMesh.html#a838c1aaba37a6e28b5f3ce21f751962e">parallelLoadBalancingAMR</a> (std::vector&lt; <a class="el" href="classCell.html">Cell</a> * &gt; *cellsLvl, <a class="el" href="Tools_8h.html#a6a3bb3ec3ebf7c9a9f95790b2336019c">TypeMeshContainer</a>&lt; <a class="el" href="classCell.html">Cell</a> * &gt; *cellsLvlGhost, std::vector&lt; <a class="el" href="classCellInterface.html">CellInterface</a> * &gt; *cellInterfacesLvl, std::string ordreCalcul, const int &amp;numberPhases, const int &amp;numberTransports, const std::vector&lt; <a class="el" href="classAddPhys.html">AddPhys</a> * &gt; &amp;addPhys, <a class="el" href="classModel.html">Model</a> *model, <a class="el" href="classEos.html">Eos</a> **eos, int &amp;nbCellsTotalAMR, bool init=false)</td></tr>
+<tr class="separator:a838c1aaba37a6e28b5f3ce21f751962e inherit pub_methods_classMesh"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-attribs"></a>
 Private Attributes</h2></td></tr>
@@ -250,20 +268,19 @@ Private Attributes</h2></td></tr>
 <tr class="memitem:a15e643efe0c1f2bfee51cf8013ced296"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMeshCartesianAMR.html#a15e643efe0c1f2bfee51cf8013ced296">m_xiJoin</a></td></tr>
 <tr class="memdesc:a15e643efe0c1f2bfee51cf8013ced296"><td class="mdescLeft">&#160;</td><td class="mdescRight">Valeur de xi pour split ou join les mailles.  <a href="#a15e643efe0c1f2bfee51cf8013ced296">More...</a><br /></td></tr>
 <tr class="separator:a15e643efe0c1f2bfee51cf8013ced296"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a668c28f1d37f197c94ff09696b17f98f"><td class="memItemLeft" align="right" valign="top">std::vector&lt; <a class="el" href="classCell.html">Cell</a> * &gt; **&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMeshCartesianAMR.html#a668c28f1d37f197c94ff09696b17f98f">m_cellsLvl</a></td></tr>
-<tr class="memdesc:a668c28f1d37f197c94ff09696b17f98f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pointer vers le tableau de vecteurs contenant les cells de compute, un vecteur par niveau.  <a href="#a668c28f1d37f197c94ff09696b17f98f">More...</a><br /></td></tr>
-<tr class="separator:a668c28f1d37f197c94ff09696b17f98f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:abd872b9acff3a1fd2e6e1197c3022991"><td class="memItemLeft" align="right" valign="top">std::vector&lt; <a class="el" href="classCell.html">Cell</a> * &gt; *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMeshCartesianAMR.html#abd872b9acff3a1fd2e6e1197c3022991">m_cellsLvlGhost</a></td></tr>
-<tr class="memdesc:abd872b9acff3a1fd2e6e1197c3022991"><td class="mdescLeft">&#160;</td><td class="mdescRight">Tableau de vecteurs contenant les cells fantomes, un vecteur par niveau.  <a href="#abd872b9acff3a1fd2e6e1197c3022991">More...</a><br /></td></tr>
-<tr class="separator:abd872b9acff3a1fd2e6e1197c3022991"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a84155c5ecbb0af38b59267f7d25387c3"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classdecomposition_1_1Decomposition.html">decomposition::Decomposition</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMeshCartesianAMR.html#a84155c5ecbb0af38b59267f7d25387c3">m_decomp</a></td></tr>
+<tr class="memdesc:a84155c5ecbb0af38b59267f7d25387c3"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classParallel.html">Parallel</a> domain decomposition based on keys.  <a href="#a84155c5ecbb0af38b59267f7d25387c3">More...</a><br /></td></tr>
+<tr class="separator:a84155c5ecbb0af38b59267f7d25387c3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="inherited"></a>
 Additional Inherited Members</h2></td></tr>
 <tr class="inherit_header pro_attribs_classMeshCartesian"><td colspan="2" onclick="javascript:toggleInherit('pro_attribs_classMeshCartesian')"><img src="closed.png" alt="-"/>&#160;Protected Attributes inherited from <a class="el" href="classMeshCartesian.html">MeshCartesian</a></td></tr>
-<tr class="memitem:a4c6501b9cab207b6c306d4e9df17153b inherit pro_attribs_classMeshCartesian"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classElementCartesian.html">ElementCartesian</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMeshCartesian.html#a4c6501b9cab207b6c306d4e9df17153b">m_elements</a></td></tr>
-<tr class="separator:a4c6501b9cab207b6c306d4e9df17153b inherit pro_attribs_classMeshCartesian"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a58f204c69067589556a6046b7f4db32b inherit pro_attribs_classMeshCartesian"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classFaceCartesian.html">FaceCartesian</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMeshCartesian.html#a58f204c69067589556a6046b7f4db32b">m_faces</a></td></tr>
-<tr class="separator:a58f204c69067589556a6046b7f4db32b inherit pro_attribs_classMeshCartesian"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2f91291680f0f78b7ab93b6c71944370 inherit pro_attribs_classMeshCartesian"><td class="memItemLeft" align="right" valign="top"><a class="el" href="Tools_8h.html#a6a3bb3ec3ebf7c9a9f95790b2336019c">TypeMeshContainer</a>&lt; <a class="el" href="classElement.html">Element</a> * &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMeshCartesian.html#a2f91291680f0f78b7ab93b6c71944370">m_elements</a></td></tr>
+<tr class="memdesc:a2f91291680f0f78b7ab93b6c71944370 inherit pro_attribs_classMeshCartesian"><td class="mdescLeft">&#160;</td><td class="mdescRight">Vector of element objects: Contains geometrical attributes.  <a href="#a2f91291680f0f78b7ab93b6c71944370">More...</a><br /></td></tr>
+<tr class="separator:a2f91291680f0f78b7ab93b6c71944370 inherit pro_attribs_classMeshCartesian"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7333dd70944a0503160c29f6b2e719f0 inherit pro_attribs_classMeshCartesian"><td class="memItemLeft" align="right" valign="top"><a class="el" href="Tools_8h.html#a6a3bb3ec3ebf7c9a9f95790b2336019c">TypeMeshContainer</a>&lt; <a class="el" href="classFace.html">Face</a> * &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMeshCartesian.html#a7333dd70944a0503160c29f6b2e719f0">m_faces</a></td></tr>
+<tr class="memdesc:a7333dd70944a0503160c29f6b2e719f0 inherit pro_attribs_classMeshCartesian"><td class="mdescLeft">&#160;</td><td class="mdescRight">Vector of face objects (between two elements or at boundaries): Contains geometrical attributes.  <a href="#a7333dd70944a0503160c29f6b2e719f0">More...</a><br /></td></tr>
+<tr class="separator:a7333dd70944a0503160c29f6b2e719f0 inherit pro_attribs_classMeshCartesian"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2445bf70a4e2ac2c39caade6b7d1bd3c inherit pro_attribs_classMeshCartesian"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMeshCartesian.html#a2445bf70a4e2ac2c39caade6b7d1bd3c">m_lX</a></td></tr>
 <tr class="separator:a2445bf70a4e2ac2c39caade6b7d1bd3c inherit pro_attribs_classMeshCartesian"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:acd9e261909960e412b36b16944a10589 inherit pro_attribs_classMeshCartesian"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMeshCartesian.html#acd9e261909960e412b36b16944a10589">m_lY</a></td></tr>
@@ -493,30 +510,21 @@ Additional Inherited Members</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a class="anchor" id="aded143762f3f1df4003f449eda86b5c3"></a>
+<a class="anchor" id="a0a40f690c919539bf9447e59cede934f"></a>
 <div class="memitem">
 <div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void MeshCartesianAMR::communicationsAddPhys </td>
+          <td class="memname">void MeshCartesianAMR::assignElementProperties </td>
           <td>(</td>
-          <td class="paramtype">const std::vector&lt; <a class="el" href="classAddPhys.html">AddPhys</a> * &gt; &amp;&#160;</td>
-          <td class="paramname"><em>addPhys</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="classCell.html">Cell</a> **&#160;</td>
+          <td class="paramtype"><a class="el" href="Tools_8h.html#a6a3bb3ec3ebf7c9a9f95790b2336019c">TypeMeshContainer</a>&lt; <a class="el" href="classCell.html">Cell</a> * &gt; &amp;&#160;</td>
           <td class="paramname"><em>cells</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">const int &amp;&#160;</td>
-          <td class="paramname"><em>lvl</em>&#160;</td>
+          <td class="paramtype">std::vector&lt; <a class="el" href="structdecomposition_1_1Key.html">decomposition::Key</a>&lt; 3 &gt;&gt; &amp;&#160;</td>
+          <td class="paramname"><em>keys</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -524,18 +532,11 @@ Additional Inherited Members</h2></td></tr>
           <td></td><td></td>
         </tr>
       </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
-  </tr>
-</table>
 </div><div class="memdoc">
 
-<p>Reimplemented from <a class="el" href="classMesh.html#a5448233e5aaa13207e80e860710b10db">Mesh</a>.</p>
-
 </div>
 </div>
-<a class="anchor" id="aca5f32de76078f2ecf913d6a55f9b159"></a>
+<a class="anchor" id="a30e2e3c7f9f58d836743600224448950"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="mlabels">
@@ -543,10 +544,52 @@ Additional Inherited Members</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void MeshCartesianAMR::communicationsPrimitives </td>
+          <td class="memname">void MeshCartesianAMR::balance </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="classCell.html">Cell</a> **&#160;</td>
-          <td class="paramname"><em>cells</em>, </td>
+          <td class="paramtype"><a class="el" href="Tools_8h.html#a6a3bb3ec3ebf7c9a9f95790b2336019c">TypeMeshContainer</a>&lt; <a class="el" href="classCell.html">Cell</a> * &gt; *&#160;</td>
+          <td class="paramname"><em>cellsLvl</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="Tools_8h.html#a6a3bb3ec3ebf7c9a9f95790b2336019c">TypeMeshContainer</a>&lt; <a class="el" href="classCell.html">Cell</a> * &gt; *&#160;</td>
+          <td class="paramname"><em>cellsLvlGhost</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="Tools_8h.html#a6a3bb3ec3ebf7c9a9f95790b2336019c">TypeMeshContainer</a>&lt; <a class="el" href="classCellInterface.html">CellInterface</a> * &gt; *&#160;</td>
+          <td class="paramname"><em>cellInterfacesLvl</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::string&#160;</td>
+          <td class="paramname"><em>ordreCalcul</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const int &amp;&#160;</td>
+          <td class="paramname"><em>numberPhases</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const int &amp;&#160;</td>
+          <td class="paramname"><em>numberTransports</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const std::vector&lt; <a class="el" href="classAddPhys.html">AddPhys</a> * &gt; &amp;&#160;</td>
+          <td class="paramname"><em>addPhys</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classModel.html">Model</a> *&#160;</td>
+          <td class="paramname"><em>model</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -557,146 +600,108 @@ Additional Inherited Members</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">const int &amp;&#160;</td>
+          <td class="paramtype">int &amp;&#160;</td>
+          <td class="paramname"><em>nbCellsTotalAMR</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::vector&lt; typename <a class="el" href="structdecomposition_1_1Key.html">decomposition::Key</a>&lt; 3 &gt;::value_type &gt; &amp;&#160;</td>
+          <td class="paramname"><em>indicesSendStartGlobal</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::vector&lt; typename <a class="el" href="structdecomposition_1_1Key.html">decomposition::Key</a>&lt; 3 &gt;::value_type &gt; &amp;&#160;</td>
+          <td class="paramname"><em>indicesSendEndGlobal</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::vector&lt; typename <a class="el" href="structdecomposition_1_1Key.html">decomposition::Key</a>&lt; 3 &gt;::value_type &gt; &amp;&#160;</td>
+          <td class="paramname"><em>indicesReceiveStartGlobal</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::vector&lt; typename <a class="el" href="structdecomposition_1_1Key.html">decomposition::Key</a>&lt; 3 &gt;::value_type &gt; &amp;&#160;</td>
+          <td class="paramname"><em>indicesReceiveEndGlobal</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a78a81b30de4b6c954c06873d2f32d824"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void MeshCartesianAMR::computePotentialBalancing </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="Tools_8h.html#a6a3bb3ec3ebf7c9a9f95790b2336019c">TypeMeshContainer</a>&lt; <a class="el" href="classCell.html">Cell</a> * &gt; *&#160;</td>
+          <td class="paramname"><em>cellsLvl</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>init</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
           <td class="paramname"><em>lvl</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="Phase_8h.html#a2c815f6ae654fe19b3985d14c9c8d74e">Prim</a>&#160;</td>
-          <td class="paramname"><em>type</em> = <code><a class="el" href="Phase_8h.html#a2c815f6ae654fe19b3985d14c9c8d74ea2270f1269fdfbdfd9044eaa8af19750d">vecPhases</a></code>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Reimplemented from <a class="el" href="classMesh.html#a2374372f3f126f85ce3ed95bbbdc4887">Mesh</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="aa6b8521e24c3608df57c9a7278117ee0"></a>
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">void MeshCartesianAMR::communicationsSlopes </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="classCell.html">Cell</a> **&#160;</td>
-          <td class="paramname"><em>cells</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const int &amp;&#160;</td>
-          <td class="paramname"><em>lvl</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Reimplemented from <a class="el" href="classMesh.html#a9feb7e52a9b159bcf9aa3e97b2398eba">Mesh</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="ae6e309a57e8fd6d0eae1449d89d4d76a"></a>
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">void MeshCartesianAMR::communicationsTransports </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="classCell.html">Cell</a> **&#160;</td>
-          <td class="paramname"><em>cells</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const int &amp;&#160;</td>
-          <td class="paramname"><em>lvl</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Reimplemented from <a class="el" href="classMesh.html#a7a645bb30157ec62b2f455bc5a15e46a">Mesh</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="a05ce2c4631e321f362052cb35b38dfb6"></a>
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">void MeshCartesianAMR::communicationsVector </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="classCell.html">Cell</a> **&#160;</td>
-          <td class="paramname"><em>cells</em>, </td>
+          <td class="paramtype">bool &amp;&#160;</td>
+          <td class="paramname"><em>balance</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">std::string&#160;</td>
-          <td class="paramname"><em>nameVector</em>, </td>
+          <td class="paramname"><em>ordreCalcul</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">const int &amp;&#160;</td>
-          <td class="paramname"><em>dim</em>, </td>
+          <td class="paramtype">std::vector&lt; typename <a class="el" href="structdecomposition_1_1Key.html">decomposition::Key</a>&lt; 3 &gt;::value_type &gt; &amp;&#160;</td>
+          <td class="paramname"><em>indicesSendStartGlobal</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">const int &amp;&#160;</td>
-          <td class="paramname"><em>lvl</em>, </td>
+          <td class="paramtype">std::vector&lt; typename <a class="el" href="structdecomposition_1_1Key.html">decomposition::Key</a>&lt; 3 &gt;::value_type &gt; &amp;&#160;</td>
+          <td class="paramname"><em>indicesSendEndGlobal</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>num</em>, </td>
+          <td class="paramtype">std::vector&lt; typename <a class="el" href="structdecomposition_1_1Key.html">decomposition::Key</a>&lt; 3 &gt;::value_type &gt; &amp;&#160;</td>
+          <td class="paramname"><em>indicesReceiveStartGlobal</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>index</em>&#160;</td>
+          <td class="paramtype">std::vector&lt; typename <a class="el" href="structdecomposition_1_1Key.html">decomposition::Key</a>&lt; 3 &gt;::value_type &gt; &amp;&#160;</td>
+          <td class="paramname"><em>indicesReceiveEndGlobal</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -711,11 +716,47 @@ Additional Inherited Members</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Reimplemented from <a class="el" href="classMesh.html#a7a20c2d7427fc726b949c114fc00fc2d">Mesh</a>.</p>
+</div>
+</div>
+<a class="anchor" id="ab3c9d86007c929c52ac2ccaa3676ee9e"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void MeshCartesianAMR::createCellInterfacesFacesAndGhostCells </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="Tools_8h.html#a6a3bb3ec3ebf7c9a9f95790b2336019c">TypeMeshContainer</a>&lt; <a class="el" href="classCell.html">Cell</a> * &gt; &amp;&#160;</td>
+          <td class="paramname"><em>cells</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="Tools_8h.html#a6a3bb3ec3ebf7c9a9f95790b2336019c">TypeMeshContainer</a>&lt; <a class="el" href="classCell.html">Cell</a> * &gt; &amp;&#160;</td>
+          <td class="paramname"><em>cellsGhost</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="Tools_8h.html#a6a3bb3ec3ebf7c9a9f95790b2336019c">TypeMeshContainer</a>&lt; <a class="el" href="classCellInterface.html">CellInterface</a> * &gt; &amp;&#160;</td>
+          <td class="paramname"><em>cellInterfaces</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::string&#160;</td>
+          <td class="paramname"><em>ordreCalcul</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
 
 </div>
 </div>
-<a class="anchor" id="a2b3672e382abb8659c642f4b32b09e1d"></a>
+<a class="anchor" id="a294644defbd4c18c44d4db2052d9a97c"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="mlabels">
@@ -731,14 +772,8 @@ Additional Inherited Members</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">std::vector&lt; <a class="el" href="classCell.html">Cell</a> * &gt; *&#160;</td>
-          <td class="paramname"><em>cellsLvl</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>lvl</em> = <code>0</code>&#160;</td>
+          <td class="paramtype"><a class="el" href="Tools_8h.html#a6a3bb3ec3ebf7c9a9f95790b2336019c">TypeMeshContainer</a>&lt; <a class="el" href="classCell.html">Cell</a> * &gt; *&#160;</td>
+          <td class="paramname"><em>cellsLvl</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -752,8 +787,6 @@ Additional Inherited Members</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
-
-<p>Reimplemented from <a class="el" href="classMesh.html#a61cb14f9197c3e41360075b548f4a620">Mesh</a>.</p>
 
 </div>
 </div>
@@ -783,54 +816,6 @@ Additional Inherited Members</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="a924ea0442d6b43605c8c40aa3ce258e0"></a>
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">void MeshCartesianAMR::genereTableauxCellsBordsLvl </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="classCell.html">Cell</a> **&#160;</td>
-          <td class="paramname"><em>cells</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="classCellInterface.html">CellInterface</a> **&#160;</td>
-          <td class="paramname"><em>bord</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">std::vector&lt; <a class="el" href="classCell.html">Cell</a> * &gt; **&#160;</td>
-          <td class="paramname"><em>cellsLvl</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">std::vector&lt; <a class="el" href="classCellInterface.html">CellInterface</a> * &gt; **&#160;</td>
-          <td class="paramname"><em>boundariesLvl</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Reimplemented from <a class="el" href="classMesh.html#a96022168a6eda892c58af6f797291fec">Mesh</a>.</p>
-
-</div>
-</div>
 <a class="anchor" id="afb1cc2db842cf8292089269e14a86a4e"></a>
 <div class="memitem">
 <div class="memproto">
@@ -856,7 +841,113 @@ Additional Inherited Members</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="a4c8e24bef3d6297f3a4fe02135a592a8"></a>
+<a class="anchor" id="a0db054583be66e61fcaf8f114e776836"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">int MeshCartesianAMR::initializeGeometrie </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="Tools_8h.html#a6a3bb3ec3ebf7c9a9f95790b2336019c">TypeMeshContainer</a>&lt; <a class="el" href="classCell.html">Cell</a> * &gt; &amp;&#160;</td>
+          <td class="paramname"><em>cells</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="Tools_8h.html#a6a3bb3ec3ebf7c9a9f95790b2336019c">TypeMeshContainer</a>&lt; <a class="el" href="classCell.html">Cell</a> * &gt; &amp;&#160;</td>
+          <td class="paramname"><em>cellsGhost</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="Tools_8h.html#a6a3bb3ec3ebf7c9a9f95790b2336019c">TypeMeshContainer</a>&lt; <a class="el" href="classCellInterface.html">CellInterface</a> * &gt; &amp;&#160;</td>
+          <td class="paramname"><em>cellInterfaces</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const int &amp;&#160;</td>
+          <td class="paramname"><em>restartSimulation</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>pretraitementParallele</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::string&#160;</td>
+          <td class="paramname"><em>ordreCalcul</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>renvoi le number de dimensions (1,2 ou 3) </p>
+
+<p>Reimplemented from <a class="el" href="classMeshCartesian.html#a5323f62872af3f0932a9ed0df4bf6079">MeshCartesian</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="aad492b13745aa2fb9453010d00911cef"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void MeshCartesianAMR::initializeGeometrieAMR </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="Tools_8h.html#a6a3bb3ec3ebf7c9a9f95790b2336019c">TypeMeshContainer</a>&lt; <a class="el" href="classCell.html">Cell</a> * &gt; &amp;&#160;</td>
+          <td class="paramname"><em>cells</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="Tools_8h.html#a6a3bb3ec3ebf7c9a9f95790b2336019c">TypeMeshContainer</a>&lt; <a class="el" href="classCell.html">Cell</a> * &gt; &amp;&#160;</td>
+          <td class="paramname"><em>cellsGhost</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="Tools_8h.html#a6a3bb3ec3ebf7c9a9f95790b2336019c">TypeMeshContainer</a>&lt; <a class="el" href="classCellInterface.html">CellInterface</a> * &gt; &amp;&#160;</td>
+          <td class="paramname"><em>cellInterfaces</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const int &amp;&#160;</td>
+          <td class="paramname"><em>restartSimulation</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::string&#160;</td>
+          <td class="paramname"><em>ordreCalcul</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="afc13b7cdae43a672c4099da9da348304"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="mlabels">
@@ -878,7 +969,7 @@ Additional Inherited Members</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="classCell.html">Cell</a> **&#160;</td>
+          <td class="paramtype">const <a class="el" href="Tools_8h.html#a6a3bb3ec3ebf7c9a9f95790b2336019c">TypeMeshContainer</a>&lt; <a class="el" href="classCell.html">Cell</a> * &gt; &amp;&#160;</td>
           <td class="paramname"><em>cells</em>, </td>
         </tr>
         <tr>
@@ -900,11 +991,125 @@ Additional Inherited Members</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Reimplemented from <a class="el" href="classMesh.html#ac9d1c058b3d1d8864085adfd6e4fa805">Mesh</a>.</p>
+<p>Reimplemented from <a class="el" href="classMesh.html#a66cb1c997eff5efe2d4229c4f92b667e">Mesh</a>.</p>
 
 </div>
 </div>
-<a class="anchor" id="afc7f95479b2dfbdf1a5978773fb06bd0"></a>
+<a class="anchor" id="a9492c3e742a6793312b3e002c01d80ce"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void MeshCartesianAMR::parallelLoadBalancingAMR </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="Tools_8h.html#a6a3bb3ec3ebf7c9a9f95790b2336019c">TypeMeshContainer</a>&lt; <a class="el" href="classCell.html">Cell</a> * &gt; *&#160;</td>
+          <td class="paramname"><em>cellsLvl</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="Tools_8h.html#a6a3bb3ec3ebf7c9a9f95790b2336019c">TypeMeshContainer</a>&lt; <a class="el" href="classCell.html">Cell</a> * &gt; *&#160;</td>
+          <td class="paramname"><em>cellsLvlGhost</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="Tools_8h.html#a6a3bb3ec3ebf7c9a9f95790b2336019c">TypeMeshContainer</a>&lt; <a class="el" href="classCellInterface.html">CellInterface</a> * &gt; *&#160;</td>
+          <td class="paramname"><em>cellInterfacesLvl</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::string&#160;</td>
+          <td class="paramname"><em>ordreCalcul</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const int &amp;&#160;</td>
+          <td class="paramname"><em>numberPhases</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const int &amp;&#160;</td>
+          <td class="paramname"><em>numberTransports</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const std::vector&lt; <a class="el" href="classAddPhys.html">AddPhys</a> * &gt; &amp;&#160;</td>
+          <td class="paramname"><em>addPhys</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classModel.html">Model</a> *&#160;</td>
+          <td class="paramname"><em>model</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classEos.html">Eos</a> **&#160;</td>
+          <td class="paramname"><em>eos</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int &amp;&#160;</td>
+          <td class="paramname"><em>nbCellsTotalAMR</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>init</em> = <code>false</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a83ebfc714f2165512aa8e59468891b9c"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void MeshCartesianAMR::printDomainDecomposition </td>
+          <td>(</td>
+          <td class="paramtype">std::ofstream &amp;&#160;</td>
+          <td class="paramname"><em>fileStream</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Reimplemented from <a class="el" href="classMesh.html#a3f4bf228172a3a63c1de54e2b6e9e316">Mesh</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a58970c5dd889989bd7b27925277cb5d6"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="mlabels">
@@ -914,14 +1119,20 @@ Additional Inherited Members</h2></td></tr>
         <tr>
           <td class="memname">void MeshCartesianAMR::procedureRaffinement </td>
           <td>(</td>
-          <td class="paramtype">std::vector&lt; <a class="el" href="classCell.html">Cell</a> * &gt; *&#160;</td>
+          <td class="paramtype"><a class="el" href="Tools_8h.html#a6a3bb3ec3ebf7c9a9f95790b2336019c">TypeMeshContainer</a>&lt; <a class="el" href="classCell.html">Cell</a> * &gt; *&#160;</td>
           <td class="paramname"><em>cellsLvl</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">std::vector&lt; <a class="el" href="classCellInterface.html">CellInterface</a> * &gt; *&#160;</td>
-          <td class="paramname"><em>boundariesLvl</em>, </td>
+          <td class="paramtype"><a class="el" href="Tools_8h.html#a6a3bb3ec3ebf7c9a9f95790b2336019c">TypeMeshContainer</a>&lt; <a class="el" href="classCell.html">Cell</a> * &gt; *&#160;</td>
+          <td class="paramname"><em>cellsLvlGhost</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="Tools_8h.html#a6a3bb3ec3ebf7c9a9f95790b2336019c">TypeMeshContainer</a>&lt; <a class="el" href="classCellInterface.html">CellInterface</a> * &gt; *&#160;</td>
+          <td class="paramname"><em>cellInterfacesLvl</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -950,12 +1161,6 @@ Additional Inherited Members</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="classCell.html">Cell</a> **&#160;</td>
-          <td class="paramname"><em>cells</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
           <td class="paramtype"><a class="el" href="classEos.html">Eos</a> **&#160;</td>
           <td class="paramname"><em>eos</em>&#160;</td>
         </tr>
@@ -972,11 +1177,9 @@ Additional Inherited Members</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Reimplemented from <a class="el" href="classMesh.html#ade7ff783ebf52250b327acec667bcfd4">Mesh</a>.</p>
-
 </div>
 </div>
-<a class="anchor" id="a882a4895fd557e71d829583a903ce7aa"></a>
+<a class="anchor" id="aabe0e11e851e74129385e1afed48fd19"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="mlabels">
@@ -986,14 +1189,20 @@ Additional Inherited Members</h2></td></tr>
         <tr>
           <td class="memname">void MeshCartesianAMR::procedureRaffinementInitialization </td>
           <td>(</td>
-          <td class="paramtype">std::vector&lt; <a class="el" href="classCell.html">Cell</a> * &gt; *&#160;</td>
+          <td class="paramtype"><a class="el" href="Tools_8h.html#a6a3bb3ec3ebf7c9a9f95790b2336019c">TypeMeshContainer</a>&lt; <a class="el" href="classCell.html">Cell</a> * &gt; *&#160;</td>
           <td class="paramname"><em>cellsLvl</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">std::vector&lt; <a class="el" href="classCellInterface.html">CellInterface</a> * &gt; *&#160;</td>
-          <td class="paramname"><em>boundariesLvl</em>, </td>
+          <td class="paramtype"><a class="el" href="Tools_8h.html#a6a3bb3ec3ebf7c9a9f95790b2336019c">TypeMeshContainer</a>&lt; <a class="el" href="classCell.html">Cell</a> * &gt; *&#160;</td>
+          <td class="paramname"><em>cellsLvlGhost</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="Tools_8h.html#a6a3bb3ec3ebf7c9a9f95790b2336019c">TypeMeshContainer</a>&lt; <a class="el" href="classCellInterface.html">CellInterface</a> * &gt; *&#160;</td>
+          <td class="paramname"><em>cellInterfacesLvl</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -1022,12 +1231,6 @@ Additional Inherited Members</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="classCell.html">Cell</a> **&#160;</td>
-          <td class="paramname"><em>cells</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
           <td class="paramtype"><a class="el" href="classEos.html">Eos</a> **&#160;</td>
           <td class="paramname"><em>eos</em>, </td>
         </tr>
@@ -1035,7 +1238,25 @@ Additional Inherited Members</h2></td></tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">const int &amp;&#160;</td>
-          <td class="paramname"><em>resumeSimulation</em>&#160;</td>
+          <td class="paramname"><em>restartSimulation</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::string&#160;</td>
+          <td class="paramname"><em>ordreCalcul</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const int &amp;&#160;</td>
+          <td class="paramname"><em>numberPhases</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const int &amp;&#160;</td>
+          <td class="paramname"><em>numberTransports</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -1050,11 +1271,35 @@ Additional Inherited Members</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Reimplemented from <a class="el" href="classMesh.html#afebfe061ca4a1b59c42feca7505ac4c1">Mesh</a>.</p>
+</div>
+</div>
+<a class="anchor" id="a91ba88f54b643ff741143203f6958d9b"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void MeshCartesianAMR::readDomainDecomposition </td>
+          <td>(</td>
+          <td class="paramtype">std::ifstream &amp;&#160;</td>
+          <td class="paramname"><em>fileStream</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Reimplemented from <a class="el" href="classMesh.html#adb88f6dfbd64af48ee7e6cd6ad055e9f">Mesh</a>.</p>
 
 </div>
 </div>
-<a class="anchor" id="a2bd797f19ede3cbdce8aaabdde57c574"></a>
+<a class="anchor" id="a7b0d531570109c0e630ba5d1432fca69"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="mlabels">
@@ -1070,8 +1315,8 @@ Additional Inherited Members</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>lvl</em> = <code>0</code>&#160;</td>
+          <td class="paramtype">std::vector&lt; <a class="el" href="classCell.html">Cell</a> * &gt; *&#160;</td>
+          <td class="paramname"><em>cellsLvl</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -1086,11 +1331,11 @@ Additional Inherited Members</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Reimplemented from <a class="el" href="classMesh.html#a99ca2212efac799efcfed888e2033e62">Mesh</a>.</p>
+<p>Reimplemented from <a class="el" href="classMesh.html#af87140932b03174f38b98a16e5322de0">Mesh</a>.</p>
 
 </div>
 </div>
-<a class="anchor" id="a4a92911651046e551061b0cbecde5d39"></a>
+<a class="anchor" id="a93f2966b0d11cbc5a8686c50482461d5"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="mlabels">
@@ -1100,7 +1345,7 @@ Additional Inherited Members</h2></td></tr>
         <tr>
           <td class="memname">void MeshCartesianAMR::recupereDonnees </td>
           <td>(</td>
-          <td class="paramtype">std::vector&lt; <a class="el" href="classCell.html">Cell</a> * &gt; *&#160;</td>
+          <td class="paramtype"><a class="el" href="Tools_8h.html#a6a3bb3ec3ebf7c9a9f95790b2336019c">TypeMeshContainer</a>&lt; <a class="el" href="classCell.html">Cell</a> * &gt; *&#160;</td>
           <td class="paramname"><em>cellsLvl</em>, </td>
         </tr>
         <tr>
@@ -1119,13 +1364,7 @@ Additional Inherited Members</h2></td></tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>phase</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>lvl</em> = <code>0</code>&#160;</td>
+          <td class="paramname"><em>phase</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -1140,23 +1379,11 @@ Additional Inherited Members</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Extracting data for printing results. </p>
-<p>This method enable to extract a set of data for mixture or phase, scalar or vetor </p><dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">cellsLvl</td><td>data structure containing pointer to cells </td></tr>
-    <tr><td class="paramname">lvl</td><td>0 for non AMR (optional) </td></tr>
-    <tr><td class="paramname">var</td><td>number of requested varaible to extract (&gt;0 for scalar, &lt;0 for vector) </td></tr>
-    <tr><td class="paramname">phase</td><td>number of requested phase (-1 for mixture, -2 for transport, -3 for xi, -4 for gradient density mixture) </td></tr>
-    <tr><td class="paramname">jeuDonnees</td><td>double vector containing the extracted data </td></tr>
-  </table>
-  </dd>
-</dl>
-
-<p>Reimplemented from <a class="el" href="classMeshCartesian.html#a64a6f24a7a0d39a3595fcaf27490492f">MeshCartesian</a>.</p>
+<p>Reimplemented from <a class="el" href="classMeshCartesian.html#a4bbe648dfac22f76b734287725c9d7f6">MeshCartesian</a>.</p>
 
 </div>
 </div>
-<a class="anchor" id="aa8a1b8e5834722f0788903d011011ace"></a>
+<a class="anchor" id="a774e31dc2fd7be92e552691de1500d0c"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="mlabels">
@@ -1172,8 +1399,8 @@ Additional Inherited Members</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>lvl</em> = <code>0</code>&#160;</td>
+          <td class="paramtype">std::vector&lt; <a class="el" href="classCell.html">Cell</a> * &gt; *&#160;</td>
+          <td class="paramname"><em>cellsLvl</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -1188,11 +1415,11 @@ Additional Inherited Members</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Reimplemented from <a class="el" href="classMesh.html#ac1c4477d7c8ac191aa7d7914a3846b86">Mesh</a>.</p>
+<p>Reimplemented from <a class="el" href="classMesh.html#aa9a5ae70b24e78c8d518672404c44208">Mesh</a>.</p>
 
 </div>
 </div>
-<a class="anchor" id="ac379da6e617f66ee9ded53c12e49a17a"></a>
+<a class="anchor" id="ac51dff8f637776029cd2adea732c276c"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="mlabels">
@@ -1208,8 +1435,8 @@ Additional Inherited Members</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>lvl</em> = <code>0</code>&#160;</td>
+          <td class="paramtype">std::vector&lt; <a class="el" href="classCell.html">Cell</a> * &gt; *&#160;</td>
+          <td class="paramname"><em>cellsLvl</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -1224,11 +1451,11 @@ Additional Inherited Members</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Reimplemented from <a class="el" href="classMesh.html#acda46792d0862645d316938ec8563cdf">Mesh</a>.</p>
+<p>Reimplemented from <a class="el" href="classMesh.html#a9485c6d3d71f01e3d5b965fd90701308">Mesh</a>.</p>
 
 </div>
 </div>
-<a class="anchor" id="aecb91c4cae2eca00b616991186d8b93a"></a>
+<a class="anchor" id="a404acd00d46d12b8562536b18db3b73a"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="mlabels">
@@ -1244,8 +1471,8 @@ Additional Inherited Members</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>lvl</em> = <code>0</code>&#160;</td>
+          <td class="paramtype">std::vector&lt; <a class="el" href="classCell.html">Cell</a> * &gt; *&#160;</td>
+          <td class="paramname"><em>cellsLvl</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -1260,11 +1487,11 @@ Additional Inherited Members</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Reimplemented from <a class="el" href="classMesh.html#a1560ff255500a7e434c9856ecf539858">Mesh</a>.</p>
+<p>Reimplemented from <a class="el" href="classMesh.html#ad647bce0b9ec11ab450e4e20d0fa8738">Mesh</a>.</p>
 
 </div>
 </div>
-<a class="anchor" id="a2839cad6087e16f1b682dba704a6c1b5"></a>
+<a class="anchor" id="a0ef3d04c0578e74961119ecf07818b3c"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="mlabels">
@@ -1272,7 +1499,7 @@ Additional Inherited Members</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void MeshCartesianAMR::refineCell </td>
+          <td class="memname">void MeshCartesianAMR::refineCellAndCellInterfaces </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="classCell.html">Cell</a> *&#160;</td>
           <td class="paramname"><em>cell</em>, </td>
@@ -1308,11 +1535,11 @@ Additional Inherited Members</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Reimplemented from <a class="el" href="classMesh.html#a9f538e15c2a26166d9a41df4757abe74">Mesh</a>.</p>
+<p>Reimplemented from <a class="el" href="classMesh.html#ab2416fde05d5fab9cf579d24f9409d44">Mesh</a>.</p>
 
 </div>
 </div>
-<a class="anchor" id="a4a42927bf0b5e02afbe702b1d4d5194e"></a>
+<a class="anchor" id="a28b1f9c9a3c3e527ef203a9bd99f9ccd"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="mlabels">
@@ -1328,7 +1555,7 @@ Additional Inherited Members</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">std::vector&lt; <a class="el" href="classCell.html">Cell</a> * &gt; *&#160;</td>
+          <td class="paramtype"><a class="el" href="Tools_8h.html#a6a3bb3ec3ebf7c9a9f95790b2336019c">TypeMeshContainer</a>&lt; <a class="el" href="classCell.html">Cell</a> * &gt; *&#160;</td>
           <td class="paramname"><em>cellsLvl</em>, </td>
         </tr>
         <tr>
@@ -1341,13 +1568,7 @@ Additional Inherited Members</h2></td></tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>phase</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>lvl</em> = <code>0</code>&#160;</td>
+          <td class="paramname"><em>phase</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -1362,23 +1583,11 @@ Additional Inherited Members</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Extracting data for printing results. </p>
-<p>This method enable to extract a set of data for mixture or phase, scalar or vetor </p><dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">cellsLvl</td><td>data structure containing pointer to cells </td></tr>
-    <tr><td class="paramname">lvl</td><td>0 for non AMR (optional) </td></tr>
-    <tr><td class="paramname">var</td><td>number of requested varaible to extract (&gt;0 for scalar, &lt;0 for vector) </td></tr>
-    <tr><td class="paramname">phase</td><td>number of requested phase (-1 for mixture, -2 for transport, -3 for xi, -4 for gradient density mixture) </td></tr>
-    <tr><td class="paramname">jeuDonnees</td><td>double vector containing the extracted data </td></tr>
-  </table>
-  </dd>
-</dl>
-
-<p>Reimplemented from <a class="el" href="classMeshCartesian.html#a87ddca4aba022324602003a1936459c1">MeshCartesian</a>.</p>
+<p>Reimplemented from <a class="el" href="classMeshCartesian.html#ae1d9054ddb12d4ce3f43fdbd49487025">MeshCartesian</a>.</p>
 
 </div>
 </div>
-<a class="anchor" id="a16332f37576e7222e1c0acef7528af10"></a>
+<a class="anchor" id="a85ae864920496e76322fce65c22b64a5"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="mlabels">
@@ -1386,7 +1595,7 @@ Additional Inherited Members</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">string MeshCartesianAMR::whoAmI </td>
+          <td class="memname">std::string MeshCartesianAMR::whoAmI </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td> const</td>
@@ -1399,55 +1608,11 @@ Additional Inherited Members</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Reimplemented from <a class="el" href="classMeshCartesian.html#a8e30b5459e8b73fcaba308409a560b70">MeshCartesian</a>.</p>
+<p>Reimplemented from <a class="el" href="classMeshCartesian.html#a85bb4ccafa16e5b56c4ccfd253f3d84e">MeshCartesian</a>.</p>
 
 </div>
 </div>
 <h2 class="groupheader">Member Data Documentation</h2>
-<a class="anchor" id="a668c28f1d37f197c94ff09696b17f98f"></a>
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">std::vector&lt;<a class="el" href="classCell.html">Cell</a> *&gt;** MeshCartesianAMR::m_cellsLvl</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">private</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Pointer vers le tableau de vecteurs contenant les cells de compute, un vecteur par niveau. </p>
-
-</div>
-</div>
-<a class="anchor" id="abd872b9acff3a1fd2e6e1197c3022991"></a>
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">std::vector&lt;<a class="el" href="classCell.html">Cell</a> *&gt;* MeshCartesianAMR::m_cellsLvlGhost</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">private</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Tableau de vecteurs contenant les cells fantomes, un vecteur par niveau. </p>
-
-</div>
-</div>
 <a class="anchor" id="aa547fe624a2a511b7bfb9e976c616236"></a>
 <div class="memitem">
 <div class="memproto">
@@ -1467,6 +1632,28 @@ Additional Inherited Members</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Valeur du criteria a depasser sur la variation d'une variable pour le (de)raffinement (met xi=1.) </p>
+
+</div>
+</div>
+<a class="anchor" id="a84155c5ecbb0af38b59267f7d25387c3"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classdecomposition_1_1Decomposition.html">decomposition::Decomposition</a> MeshCartesianAMR::m_decomp</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p><a class="el" href="classParallel.html">Parallel</a> domain decomposition based on keys. </p>
 
 </div>
 </div>
@@ -1626,7 +1813,7 @@ Additional Inherited Members</h2></td></tr>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="classMeshCartesianAMR.html">MeshCartesianAMR</a></li>
-    <li class="footer">Generated on Wed Apr 29 2020 10:31:12 for ECOGEN by
+    <li class="footer">Generated on Mon May 11 2020 16:03:19 for ECOGEN by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.11 </li>
   </ul>

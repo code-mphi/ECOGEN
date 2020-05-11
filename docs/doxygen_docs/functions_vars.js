@@ -6,6 +6,8 @@ var functions_vars =
     [ "d", "functions_vars_d.html", null ],
     [ "e", "functions_vars_e.html", null ],
     [ "h", "functions_vars_h.html", null ],
+    [ "i", "functions_vars_i.html", null ],
+    [ "k", "functions_vars_k.html", null ],
     [ "l", "functions_vars_l.html", null ],
     [ "m", "functions_vars_m.html", null ],
     [ "n", "functions_vars_n.html", null ],

@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Output Files &mdash; ECOGEN b1.0 documentation</title>
+  <title>Output Files &mdash; ECOGEN 2.0 documentation</title>
   
 
   
@@ -61,7 +61,7 @@
             
             
               <div class="version">
-                1.0
+                2.0
               </div>
             
           
@@ -96,6 +96,8 @@
 <li class="toctree-l3"><a class="reference internal" href="#using-gnu-format">Using GNU format</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#xml-vtk-file-format">XML VTK file format</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#saving-input-files">Saving input files</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#probes-and-cuts">Probes and cuts</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#mesh-information">Mesh information</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#screen-output">Screen output</a></li>
 </ul>
 </li>
@@ -103,8 +105,9 @@
 </li>
 <li class="toctree-l1"><a class="reference internal" href="Chap4_tutorials_Chapter.html">Tutorials</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Chap5_testCases_Chapter.html">Test cases</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Chap6_developpersGuide_Chapter.html">Developers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Chap6_developersGuide_Chapter.html">Developers</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Chap7_license.html">License</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Chap8_GUI.html">Graphical User Interface</a></li>
 <li class="toctree-l1"><a class="reference internal" href="zBibliography.html">Bibliography</a></li>
 </ul>
 
@@ -174,49 +177,61 @@
             
   <div class="section" id="output-files">
 <span id="sec-io-output"></span><h1>Output Files<a class="headerlink" href="#output-files" title="Permalink to this headline">¶</a></h1>
-<p>Writing the result files is done according the user’s choice in <em>mainV5.xml</em> INPUT FILE of the current test (see section <a class="reference internal" href="Chap3_1_1main.html#sec-input-main"><span class="std std-ref">MainV5.xml</span></a>). For each run, the results are recorded in the specified folder in <strong>ECOGEN/results/XXX/</strong> where XX is the test case <em>name</em>.
+<p>Writing the result files is done according to the user’s choice in <em>mainV5.xml</em> input file of the current test (see section <a class="reference internal" href="Chap3_1_1main.html#sec-input-main"><span class="std std-ref">MainV5.xml</span></a>). For each run, the results are recorded in the specified folder <strong>ECOGEN/results/XXX/</strong> where XXX is the test case <em>name</em>.
 One can select the following format:</p>
 <ul class="simple">
 <li><p><em>GNU</em>: Format in ASCII, results are given in column.</p></li>
 <li><p><em>XML</em>: VTK file format (ASCII or binary).</p></li>
 </ul>
-<p>The name of the results files follows the rules:</p>
-<p>result(format)_CPU(proc)_AMR(level)_TIME(instant). (ext)</p>
-<p>that can select results files according:</p>
+<p>The result files are placed within the <strong>ECOGEN/results/XXX/datasets/</strong> subfolder and their names follow the rules:</p>
+<p>result(format)_CPU(proc)_TIME(instant).(ext)</p>
+<p>where the variables are:</p>
 <ul class="simple">
-<li><p>(format)      : data format (empty for ASCII, B64 for binary).</p></li>
-<li><p>(instant)     : time of writing results (depends on the selected frequency for writing.</p></li>
-<li><p>(level)       : AMR level (in the case of an AMR simulation).</p></li>
-<li><p>(proc)        : the number of the processor where the results are from (in the case of a parallel simulation).</p></li>
-<li><p>(ext)         : kind of mesh.</p></li>
+<li><p>(format): Data format (empty for ASCII, B64 for binary).</p></li>
+<li><p>(instant): Timestamp of the written result (depends on the selected frequency for writing).</p></li>
+<li><p>(proc): The core number where the results are from (in the case of a parallel simulation).</p></li>
+<li><p>(ext): Type of mesh.</p></li>
 </ul>
 <div class="section" id="using-gnu-format">
 <h2>Using GNU format<a class="headerlink" href="#using-gnu-format" title="Permalink to this headline">¶</a></h2>
-<p>This format lead to results files with the (ext)=out extension. This format in colon is very useful for a quick visualization of the results when the freeware gnuplot  or any other tool. When this format is selected, ECOGEN automatically creates a script file visualisation.gnu at the root of the result folder. This allows a very quick and efficient use for 1D runs.</p>
+<p>This format leads to result files with the <em>(ext)=out</em> extension. This format in column is very useful for a quick visualization of the results using the freeware <a class="reference external" href="http://www.gnuplot.info/">gnuplot</a> or any other tool. When this format is selected, ECOGEN automatically creates a script file <em>visualization.gnu</em> at the root of the result folder. This allows a very quick and efficient use for 1D runs.</p>
 </div>
 <div class="section" id="xml-vtk-file-format">
 <h2>XML VTK file format<a class="headerlink" href="#xml-vtk-file-format" title="Permalink to this headline">¶</a></h2>
-<p>ECOGEN can provide output using XML files in VTK file format (ASCII or BINARY). Writing files according VTK file format leads to files with the extension:</p>
+<p>ECOGEN can provide output using XML files in VTK file format (ASCII or BINARY). Writing files in VTK file format leads to files with the extension:</p>
 <ul class="simple">
-<li><p>(ext)=vtr     : cartesian mesh.</p></li>
-<li><p>(ext)=vtu     : unstructured mesh.</p></li>
+<li><p><em>(ext)=vtr</em>: Cartesian mesh.</p></li>
+<li><p><em>(ext)=vtu</em>: Unstructured mesh.</p></li>
 </ul>
-<p>ECOGEN also produces a file named <em>collection.pvd</em> in order to load only one pack of files when the software PARAVIEW is used.</p>
+<p>ECOGEN also produces files named <em>collectionParaview.pvd</em> and <em>collectionVisIt.visit</em> (or <em>collectionParaviewB64.pvd</em> and <em>collectionParaviewB64.pvd</em> for BINARY) in order to load only one pack of files when the softwares <a class="reference external" href="https://www.paraview.org/">PARAVIEW</a> and <a class="reference external" href="https://wci.llnl.gov/simulation/computer-codes/visit/">VisIt</a> are used, respectively.</p>
 </div>
 <div class="section" id="saving-input-files">
 <h2>Saving input files<a class="headerlink" href="#saving-input-files" title="Permalink to this headline">¶</a></h2>
-<p>In addition to the results, a copy of the INPUT FILES of the current simulation is done in the subfolder <strong>ECOGEN/results/dossierResExemple/savesEntrees/</strong> to ensure a safe reproduction of the results.</p>
+<p>In addition to the results, a copy of the input files of the current simulation is done in the subfolder <strong>ECOGEN/results/XXX/savesInput/</strong> to ensure a safe reproduction of the results.</p>
+</div>
+<div class="section" id="probes-and-cuts">
+<h2>Probes and cuts<a class="headerlink" href="#probes-and-cuts" title="Permalink to this headline">¶</a></h2>
+<p>All the output files linked to the probes and cuts of the simulation are placed within the subfolders <strong>ECOGEN/results/XXX/probes/</strong> and <strong>ECOGEN/results/XXX/cuts/</strong>, respectively.</p>
+</div>
+<div class="section" id="mesh-information">
+<h2>Mesh information<a class="headerlink" href="#mesh-information" title="Permalink to this headline">¶</a></h2>
+<p>When using AMR, mesh information is saved at a frequency specified in the <em>mainV5.xml</em> file to allow a restart of the simulation and the corresponding files are placed within the subfolders <strong>ECOGEN/results/XXX/infoMesh/</strong>.</p>
 </div>
 <div class="section" id="screen-output">
 <h2>Screen output<a class="headerlink" href="#screen-output" title="Permalink to this headline">¶</a></h2>
-<p>In real time, some data are available during the simulation directly at the terminal screen as soon as ECOGEN starts. hereafter an example of a screenshot:</p>
+<p>In real time, some data are available during the simulation directly at the terminal screen as soon as ECOGEN starts. Hereafter is an example of a screenshot:</p>
+<div class="figure align-center" id="id1">
+<a class="reference internal image-reference" href="_images/RunECOGEN_Logo.png"><img alt="_images/RunECOGEN_Logo.png" src="_images/RunECOGEN_Logo.png" style="width: 759.0px; height: 468.0px;" /></a>
+<p class="caption"><span class="caption-number">Fig. 3 </span><span class="caption-text">: Screenshot of the top of ECOGEN’s default run console.</span><a class="headerlink" href="#id1" title="Permalink to this image">¶</a></p>
+</div>
 <p>One reads:</p>
 <ul class="simple">
-<li><p>number of the results files.</p></li>
-<li><p>number of the last timestep.</p></li>
-<li><p>Real time in the simulation.</p></li>
-<li><p>Value of the last timestep.</p></li>
-<li><p>CPU time since the beginning of the simulation.</p></li>
+<li><p>number of the result files,</p></li>
+<li><p>number of the last timestep,</p></li>
+<li><p>physical time in the simulation,</p></li>
+<li><p>value of the last timestep,</p></li>
+<li><p>CPU time since the beginning of the simulation,</p></li>
+<li><p>CPU time spent in AMR routines since the beginning of the simulation.</p></li>
 </ul>
 </div>
 </div>

@@ -129,19 +129,23 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:af9ca8bebd4914206705ab4e66c313375"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3fe5ccaec232bfca3d61b68c1b463e5c"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCellO2Ghost.html#a3fe5ccaec232bfca3d61b68c1b463e5c">~CellO2Ghost</a> ()</td></tr>
 <tr class="separator:a3fe5ccaec232bfca3d61b68c1b463e5c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae29578865cdefd87ca421bee14500151"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCellO2Ghost.html#ae29578865cdefd87ca421bee14500151">pushBackSlope</a> ()</td></tr>
+<tr class="separator:ae29578865cdefd87ca421bee14500151"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9df39ca0037aab5a7f0fe74e8ae87964"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCellO2Ghost.html#a9df39ca0037aab5a7f0fe74e8ae87964">allocate</a> (const int &amp;numberPhases, const int &amp;numberTransports, const std::vector&lt; <a class="el" href="classAddPhys.html">AddPhys</a> * &gt; &amp;addPhys, <a class="el" href="classModel.html">Model</a> *model)</td></tr>
 <tr class="memdesc:a9df39ca0037aab5a7f0fe74e8ae87964"><td class="mdescLeft">&#160;</td><td class="mdescRight">Memory allocation of cell attributes.  <a href="#a9df39ca0037aab5a7f0fe74e8ae87964">More...</a><br /></td></tr>
 <tr class="separator:a9df39ca0037aab5a7f0fe74e8ae87964"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa76aca508eeab6d3524655eabb163ed6"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCellO2Ghost.html#aa76aca508eeab6d3524655eabb163ed6">computeLocalSlopes</a> (const int &amp;numberPhases, const int &amp;numberTransports, <a class="el" href="classCellInterface.html">CellInterface</a> &amp;bordRef, <a class="el" href="classLimiter.html">Limiter</a> &amp;globalLimiter, <a class="el" href="classLimiter.html">Limiter</a> &amp;interfaceLimiter, <a class="el" href="classLimiter.html">Limiter</a> &amp;globalVolumeFractionLimiter, <a class="el" href="classLimiter.html">Limiter</a> &amp;interfaceVolumeFractionLimiter, double &amp;alphaCellAfterOppositeSide, double &amp;alphaCell, double &amp;alphaCellOtherInterfaceSide, double &amp;epsInterface)</td></tr>
-<tr class="separator:aa76aca508eeab6d3524655eabb163ed6"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:adbc840e9a24c21bdc136dce13bb8fc39"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCellO2Ghost.html#adbc840e9a24c21bdc136dce13bb8fc39">createChildCell</a> (const int &amp;num, const int &amp;lvl)</td></tr>
-<tr class="separator:adbc840e9a24c21bdc136dce13bb8fc39"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:adf2628b83557bf082a23ae4bcfb3aa71"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCellO2Ghost.html#adf2628b83557bf082a23ae4bcfb3aa71">getBufferSlopes</a> (double *buffer, int &amp;counter)</td></tr>
-<tr class="separator:adf2628b83557bf082a23ae4bcfb3aa71"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a88a1be0c5901a69d21ba9481cb12c839"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCellO2Ghost.html#a88a1be0c5901a69d21ba9481cb12c839">getBufferSlopesAMR</a> (double *buffer, int &amp;counter, const int &amp;lvl)</td></tr>
-<tr class="separator:a88a1be0c5901a69d21ba9481cb12c839"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad1ecb8cc6bf66e152895982bb66c099f"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCellO2Ghost.html#ad1ecb8cc6bf66e152895982bb66c099f">isCellO2Ghost</a> () const </td></tr>
-<tr class="separator:ad1ecb8cc6bf66e152895982bb66c099f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:affc4612afa3b8dc53ab1eabfb3c06d13"><td class="memItemLeft" align="right" valign="top">virtual int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCellO2Ghost.html#affc4612afa3b8dc53ab1eabfb3c06d13">getRankOfNeighborCPU</a> () const </td></tr>
+<tr class="separator:affc4612afa3b8dc53ab1eabfb3c06d13"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aff14a4716f29648787d4751026a94cab"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCellO2Ghost.html#aff14a4716f29648787d4751026a94cab">setRankOfNeighborCPU</a> (int rank)</td></tr>
+<tr class="separator:aff14a4716f29648787d4751026a94cab"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8903e84d43d7b769f86338c38d7a31f1"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCellO2Ghost.html#a8903e84d43d7b769f86338c38d7a31f1">computeLocalSlopes</a> (const int &amp;numberPhases, const int &amp;numberTransports, <a class="el" href="classCellInterface.html">CellInterface</a> &amp;cellInterfaceRef, <a class="el" href="classLimiter.html">Limiter</a> &amp;globalLimiter, <a class="el" href="classLimiter.html">Limiter</a> &amp;interfaceLimiter, <a class="el" href="classLimiter.html">Limiter</a> &amp;globalVolumeFractionLimiter, <a class="el" href="classLimiter.html">Limiter</a> &amp;interfaceVolumeFractionLimiter, double &amp;alphaCellAfterOppositeSide, double &amp;alphaCell, double &amp;alphaCellOtherInterfaceSide, double &amp;epsInterface)</td></tr>
+<tr class="separator:a8903e84d43d7b769f86338c38d7a31f1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9d6ac7132fae991357ce46e23407a736"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCellO2Ghost.html#a9d6ac7132fae991357ce46e23407a736">createChildCell</a> (const int &amp;lvl)</td></tr>
+<tr class="separator:a9d6ac7132fae991357ce46e23407a736"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4b890d13fcd389e8d8aa08e4e522e622"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCellO2Ghost.html#a4b890d13fcd389e8d8aa08e4e522e622">getBufferSlopes</a> (double *buffer, int &amp;counter, const int &amp;lvl)</td></tr>
+<tr class="separator:a4b890d13fcd389e8d8aa08e4e522e622"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aabd63e4c12fb06b5ee94c2616bd7e24f"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCellO2Ghost.html#aabd63e4c12fb06b5ee94c2616bd7e24f">isCellGhost</a> () const </td></tr>
+<tr class="separator:aabd63e4c12fb06b5ee94c2616bd7e24f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_methods_classCellO2"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classCellO2')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classCellO2.html">CellO2</a></td></tr>
 <tr class="memitem:a6e62dce876abb8ae64f2d10bccb71251 inherit pub_methods_classCellO2"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCellO2.html#a6e62dce876abb8ae64f2d10bccb71251">CellO2</a> ()</td></tr>
 <tr class="separator:a6e62dce876abb8ae64f2d10bccb71251 inherit pub_methods_classCellO2"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -151,8 +155,8 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:ac058c7a6b879cff49a4c6d6774b8b76e inherit pub_methods_classCellO2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:afedf1719fa476680b11909d75fe278c0 inherit pub_methods_classCellO2"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCellO2.html#afedf1719fa476680b11909d75fe278c0">copyPhase</a> (const int &amp;phaseNumber, <a class="el" href="classPhase.html">Phase</a> *phase)</td></tr>
 <tr class="separator:afedf1719fa476680b11909d75fe278c0 inherit pub_methods_classCellO2"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af232a23c09999e7d239443c5f24c4844 inherit pub_methods_classCellO2"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCellO2.html#af232a23c09999e7d239443c5f24c4844">computeLocalSlopesLimite</a> (const int &amp;numberPhases, const int &amp;numberTransports, <a class="el" href="classCellInterface.html">CellInterface</a> &amp;bordRef, <a class="el" href="classLimiter.html">Limiter</a> &amp;globalLimiter, <a class="el" href="classLimiter.html">Limiter</a> &amp;interfaceLimiter, <a class="el" href="classLimiter.html">Limiter</a> &amp;globalVolumeFractionLimiter, <a class="el" href="classLimiter.html">Limiter</a> &amp;interfaceVolumeFractionLimiter)</td></tr>
-<tr class="separator:af232a23c09999e7d239443c5f24c4844 inherit pub_methods_classCellO2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8eab5437e5eef26082e043235cc5f0bb inherit pub_methods_classCellO2"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCellO2.html#a8eab5437e5eef26082e043235cc5f0bb">computeLocalSlopesLimite</a> (const int &amp;numberPhases, const int &amp;numberTransports, <a class="el" href="classCellInterface.html">CellInterface</a> &amp;cellInterfaceRef, <a class="el" href="classLimiter.html">Limiter</a> &amp;globalLimiter, <a class="el" href="classLimiter.html">Limiter</a> &amp;interfaceLimiter, <a class="el" href="classLimiter.html">Limiter</a> &amp;globalVolumeFractionLimiter, <a class="el" href="classLimiter.html">Limiter</a> &amp;interfaceVolumeFractionLimiter, double &amp;epsInterface)</td></tr>
+<tr class="separator:a8eab5437e5eef26082e043235cc5f0bb inherit pub_methods_classCellO2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab379e9ebd66ebcafad8f1433d008d4e6 inherit pub_methods_classCellO2"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCellO2.html#ab379e9ebd66ebcafad8f1433d008d4e6">saveCons</a> (const int &amp;numberPhases, const int &amp;numberTransports)</td></tr>
 <tr class="separator:ab379e9ebd66ebcafad8f1433d008d4e6 inherit pub_methods_classCellO2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad2b1a9a7a5b880b44733c80f7eb253eb inherit pub_methods_classCellO2"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCellO2.html#ad2b1a9a7a5b880b44733c80f7eb253eb">recuperationCons</a> (const int &amp;numberPhases, const int &amp;numberTransports)</td></tr>
@@ -181,10 +185,8 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a47de31e34eec1aa5c39688649e295623 inherit pub_methods_classCellO2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7c4f6777afcbf4b17c89a6f61e10dbf4 inherit pub_methods_classCellO2"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCellO2.html#a7c4f6777afcbf4b17c89a6f61e10dbf4">setTransport</a> (double value, int &amp;numTransport, <a class="el" href="Phase_8h.html#a2c815f6ae654fe19b3985d14c9c8d74e">Prim</a> type=<a class="el" href="Phase_8h.html#a2c815f6ae654fe19b3985d14c9c8d74ea2270f1269fdfbdfd9044eaa8af19750d">vecPhases</a>)</td></tr>
 <tr class="separator:a7c4f6777afcbf4b17c89a6f61e10dbf4 inherit pub_methods_classCellO2"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a610e9b1de44fa47898787c3deeba84fb inherit pub_methods_classCellO2"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCellO2.html#a610e9b1de44fa47898787c3deeba84fb">fillBufferSlopes</a> (double *buffer, int &amp;counter, std::string whichCpuAmIForNeighbour) const </td></tr>
-<tr class="separator:a610e9b1de44fa47898787c3deeba84fb inherit pub_methods_classCellO2"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9044f8e7478e8e21886d5166c824214b inherit pub_methods_classCellO2"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCellO2.html#a9044f8e7478e8e21886d5166c824214b">fillBufferSlopesAMR</a> (double *buffer, int &amp;counter, const int &amp;lvl, std::string whichCpuAmIForNeighbour) const </td></tr>
-<tr class="separator:a9044f8e7478e8e21886d5166c824214b inherit pub_methods_classCellO2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9f6d8d3e491cb19012596488b30230c2 inherit pub_methods_classCellO2"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCellO2.html#a9f6d8d3e491cb19012596488b30230c2">fillBufferSlopes</a> (double *buffer, int &amp;counter, const int &amp;lvl, const int &amp;neighbour) const </td></tr>
+<tr class="separator:a9f6d8d3e491cb19012596488b30230c2 inherit pub_methods_classCellO2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_methods_classCell"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classCell')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classCell.html">Cell</a></td></tr>
 <tr class="memitem:a394510643e8664cf12b5efaf5cb99f71 inherit pub_methods_classCell"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCell.html#a394510643e8664cf12b5efaf5cb99f71">Cell</a> ()</td></tr>
 <tr class="memdesc:a394510643e8664cf12b5efaf5cb99f71 inherit pub_methods_classCell"><td class="mdescLeft">&#160;</td><td class="mdescRight">Basic <a class="el" href="classCell.html" title="Base class for a mesh cell. ">Cell</a> constructor for a non AMR cell.  <a href="#a394510643e8664cf12b5efaf5cb99f71">More...</a><br /></td></tr>
@@ -194,12 +196,12 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a5ff3ee1450fafc9ca52e6dd66defbbd7 inherit pub_methods_classCell"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9fa559f7a28e2b4336c6879ca09304d8 inherit pub_methods_classCell"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCell.html#a9fa559f7a28e2b4336c6879ca09304d8">~Cell</a> ()</td></tr>
 <tr class="separator:a9fa559f7a28e2b4336c6879ca09304d8 inherit pub_methods_classCell"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:acde7cbecae9033c0c78aa2c8311ff89b inherit pub_methods_classCell"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCell.html#acde7cbecae9033c0c78aa2c8311ff89b">addBoundary</a> (<a class="el" href="classCellInterface.html">CellInterface</a> *bord)</td></tr>
-<tr class="memdesc:acde7cbecae9033c0c78aa2c8311ff89b inherit pub_methods_classCell"><td class="mdescLeft">&#160;</td><td class="mdescRight">Add a boundary to current cell.  <a href="#acde7cbecae9033c0c78aa2c8311ff89b">More...</a><br /></td></tr>
-<tr class="separator:acde7cbecae9033c0c78aa2c8311ff89b inherit pub_methods_classCell"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a273f0826a91768912b423c2e1aec3d1c inherit pub_methods_classCell"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCell.html#a273f0826a91768912b423c2e1aec3d1c">deleteBoundary</a> (<a class="el" href="classCellInterface.html">CellInterface</a> *bord)</td></tr>
-<tr class="memdesc:a273f0826a91768912b423c2e1aec3d1c inherit pub_methods_classCell"><td class="mdescLeft">&#160;</td><td class="mdescRight">Delete the boundary of current cell.  <a href="#a273f0826a91768912b423c2e1aec3d1c">More...</a><br /></td></tr>
-<tr class="separator:a273f0826a91768912b423c2e1aec3d1c inherit pub_methods_classCell"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a082f4dcbaccddfe61c51b50b98ad5dec inherit pub_methods_classCell"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCell.html#a082f4dcbaccddfe61c51b50b98ad5dec">addCellInterface</a> (<a class="el" href="classCellInterface.html">CellInterface</a> *cellInterface)</td></tr>
+<tr class="memdesc:a082f4dcbaccddfe61c51b50b98ad5dec inherit pub_methods_classCell"><td class="mdescLeft">&#160;</td><td class="mdescRight">Add a cell interface to current cell.  <a href="#a082f4dcbaccddfe61c51b50b98ad5dec">More...</a><br /></td></tr>
+<tr class="separator:a082f4dcbaccddfe61c51b50b98ad5dec inherit pub_methods_classCell"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae8c6a4a640ba377d7c669c4f0261a4cd inherit pub_methods_classCell"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCell.html#ae8c6a4a640ba377d7c669c4f0261a4cd">deleteCellInterface</a> (<a class="el" href="classCellInterface.html">CellInterface</a> *cellInterface)</td></tr>
+<tr class="memdesc:ae8c6a4a640ba377d7c669c4f0261a4cd inherit pub_methods_classCell"><td class="mdescLeft">&#160;</td><td class="mdescRight">Delete the cell interface of current cell.  <a href="#ae8c6a4a640ba377d7c669c4f0261a4cd">More...</a><br /></td></tr>
+<tr class="separator:ae8c6a4a640ba377d7c669c4f0261a4cd inherit pub_methods_classCell"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:adf13afb299b11ee943d664a36afbd053 inherit pub_methods_classCell"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCell.html#adf13afb299b11ee943d664a36afbd053">allocateEos</a> (const int &amp;numberPhases, <a class="el" href="classModel.html">Model</a> *model)</td></tr>
 <tr class="separator:adf13afb299b11ee943d664a36afbd053 inherit pub_methods_classCell"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5b3ac840dc7e4a0e7bb1ad1645e12b5c inherit pub_methods_classCell"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCell.html#a5b3ac840dc7e4a0e7bb1ad1645e12b5c">fill</a> (std::vector&lt; <a class="el" href="classGeometricalDomain.html">GeometricalDomain</a> * &gt; &amp;domains, const int &amp;lvlMax)</td></tr>
@@ -233,21 +235,23 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:ac5c9bd274ac2761197625dac3e17fc73 inherit pub_methods_classCell"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6c392922126698ffaf6e2405de3c543e inherit pub_methods_classCell"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCell.html#a6c392922126698ffaf6e2405de3c543e">prepareAddPhys</a> ()</td></tr>
 <tr class="separator:a6c392922126698ffaf6e2405de3c543e inherit pub_methods_classCell"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4748395f7cc82a9a7a041d5d925115b5 inherit pub_methods_classCell"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCell.html#a4748395f7cc82a9a7a041d5d925115b5">selectScalar</a> (std::string nameVariable, int num=0) const </td></tr>
-<tr class="separator:a4748395f7cc82a9a7a041d5d925115b5 inherit pub_methods_classCell"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aab609d9bab85e617e670df887df8b6ee inherit pub_methods_classCell"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCell.html#aab609d9bab85e617e670df887df8b6ee">setScalar</a> (std::string nameVariable, const double &amp;value, int num=0, int subscript=-1)</td></tr>
-<tr class="separator:aab609d9bab85e617e670df887df8b6ee inherit pub_methods_classCell"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3f50d81a7ea8e22e67bc99d62818e88d inherit pub_methods_classCell"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classCoord.html">Coord</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCell.html#a3f50d81a7ea8e22e67bc99d62818e88d">selectVector</a> (std::string nameVector, int num=0, int subscript=-1) const </td></tr>
-<tr class="separator:a3f50d81a7ea8e22e67bc99d62818e88d inherit pub_methods_classCell"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:acdda8f0567d0c47bf864a73069ff8b62 inherit pub_methods_classCell"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCell.html#acdda8f0567d0c47bf864a73069ff8b62">setVector</a> (std::string nameVector, const <a class="el" href="classCoord.html">Coord</a> &amp;value, int num=0, int subscript=-1)</td></tr>
-<tr class="separator:acdda8f0567d0c47bf864a73069ff8b62 inherit pub_methods_classCell"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0828333a29aa9b5fd79874c9004dc546 inherit pub_methods_classCell"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classCoord.html">Coord</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCell.html#a0828333a29aa9b5fd79874c9004dc546">computeGradient</a> (std::string nameVariable, int num=-1)</td></tr>
-<tr class="separator:a0828333a29aa9b5fd79874c9004dc546 inherit pub_methods_classCell"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2b0b68401db346af9737c177062568ae inherit pub_methods_classCell"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classQuantitiesAddPhys.html">QuantitiesAddPhys</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCell.html#a2b0b68401db346af9737c177062568ae">getQPA</a> (int &amp;numQPA) const </td></tr>
-<tr class="memdesc:a2b0b68401db346af9737c177062568ae inherit pub_methods_classCell"><td class="mdescLeft">&#160;</td><td class="mdescRight">Allow to recover an additional physical quantity.  <a href="#a2b0b68401db346af9737c177062568ae">More...</a><br /></td></tr>
-<tr class="separator:a2b0b68401db346af9737c177062568ae inherit pub_methods_classCell"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2523483464fc30cf4d7923f34134956e inherit pub_methods_classCell"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classCoord.html">Coord</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCell.html#a2523483464fc30cf4d7923f34134956e">getGradTk</a> (int &amp;numPhase, int &amp;numAddPhys) const </td></tr>
-<tr class="separator:a2523483464fc30cf4d7923f34134956e inherit pub_methods_classCell"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a06d98588feddeb7602db6fc9082c482e inherit pub_methods_classCell"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCell.html#a06d98588feddeb7602db6fc9082c482e">selectScalar</a> (<a class="el" href="Cell_8h.html#acca207de98b59d1c41e3975008706d61">Variable</a> nameVariable, int num=0) const </td></tr>
+<tr class="separator:a06d98588feddeb7602db6fc9082c482e inherit pub_methods_classCell"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5b983cc3aa58e446f1605e15a4a26a7f inherit pub_methods_classCell"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCell.html#a5b983cc3aa58e446f1605e15a4a26a7f">setScalar</a> (<a class="el" href="Cell_8h.html#acca207de98b59d1c41e3975008706d61">Variable</a> nameVariable, const double &amp;value, int num=0, int subscript=-1)</td></tr>
+<tr class="separator:a5b983cc3aa58e446f1605e15a4a26a7f inherit pub_methods_classCell"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9c018ef4d2b0da5ffcc8e4fcc7720767 inherit pub_methods_classCell"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classCoord.html">Coord</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCell.html#a9c018ef4d2b0da5ffcc8e4fcc7720767">selectVector</a> (<a class="el" href="Cell_8h.html#acca207de98b59d1c41e3975008706d61">Variable</a> nameVector, int num=0, int subscript=-1) const </td></tr>
+<tr class="separator:a9c018ef4d2b0da5ffcc8e4fcc7720767 inherit pub_methods_classCell"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acfa3835ed89b1dac15bc4006594f7dc2 inherit pub_methods_classCell"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCell.html#acfa3835ed89b1dac15bc4006594f7dc2">setVector</a> (<a class="el" href="Cell_8h.html#acca207de98b59d1c41e3975008706d61">Variable</a> nameVector, const <a class="el" href="classCoord.html">Coord</a> &amp;value, int num=0, int subscript=-1)</td></tr>
+<tr class="separator:acfa3835ed89b1dac15bc4006594f7dc2 inherit pub_methods_classCell"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad0c71c44ca957c23137ecf522807d9c3 inherit pub_methods_classCell"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classCoord.html">Coord</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCell.html#ad0c71c44ca957c23137ecf522807d9c3">computeGradient</a> (<a class="el" href="Cell_8h.html#acca207de98b59d1c41e3975008706d61">Variable</a> nameVariable, int num=-1)</td></tr>
+<tr class="separator:ad0c71c44ca957c23137ecf522807d9c3 inherit pub_methods_classCell"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8a62bd9ae9ca1366f47da30e10b016eb inherit pub_methods_classCell"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCell.html#a8a62bd9ae9ca1366f47da30e10b016eb">computeGradient</a> (std::vector&lt; <a class="el" href="classCoord.html">Coord</a> &gt; &amp;grads, std::vector&lt; <a class="el" href="Cell_8h.html#acca207de98b59d1c41e3975008706d61">Variable</a> &gt; &amp;nameVariables, std::vector&lt; int &gt; &amp;numPhases)</td></tr>
+<tr class="separator:a8a62bd9ae9ca1366f47da30e10b016eb inherit pub_methods_classCell"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acb688b780c6e0257243f28ef0aafeb08 inherit pub_methods_classCell"><td class="memItemLeft" align="right" valign="top">const <a class="el" href="classQuantitiesAddPhys.html">QuantitiesAddPhys</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCell.html#acb688b780c6e0257243f28ef0aafeb08">getQPA</a> (int &amp;numQPA) const </td></tr>
+<tr class="separator:acb688b780c6e0257243f28ef0aafeb08 inherit pub_methods_classCell"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5f94765e1f81877165c62b1e00a4dfc6 inherit pub_methods_classCell"><td class="memItemLeft" align="right" valign="top">const <a class="el" href="classCoord.html">Coord</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCell.html#a5f94765e1f81877165c62b1e00a4dfc6">getGradTk</a> (int &amp;numPhase, int &amp;numAddPhys) const </td></tr>
+<tr class="memdesc:a5f94765e1f81877165c62b1e00a4dfc6 inherit pub_methods_classCell"><td class="mdescLeft">&#160;</td><td class="mdescRight">Allow to recover an additional physical quantity.  <a href="#a5f94765e1f81877165c62b1e00a4dfc6">More...</a><br /></td></tr>
+<tr class="separator:a5f94765e1f81877165c62b1e00a4dfc6 inherit pub_methods_classCell"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a206b8f9794b507eded596558f844a4e7 inherit pub_methods_classCell"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCell.html#a206b8f9794b507eded596558f844a4e7">setGradTk</a> (int &amp;numPhase, int &amp;numAddPhys, double *buffer, int &amp;counter)</td></tr>
 <tr class="separator:a206b8f9794b507eded596558f844a4e7 inherit pub_methods_classCell"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:afaa73c71a1199c6383a597733e5adf9c inherit pub_methods_classCell"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCell.html#afaa73c71a1199c6383a597733e5adf9c">addNonConsAddPhys</a> (const int &amp;numberPhases, <a class="el" href="classAddPhys.html">AddPhys</a> &amp;addPhys, <a class="el" href="classSymmetry.html">Symmetry</a> *symmetry)</td></tr>
@@ -255,48 +259,46 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:aee64cb575f7f1cded43a706bf812a23a inherit pub_methods_classCell"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCell.html#aee64cb575f7f1cded43a706bf812a23a">reinitializeColorFunction</a> (const int &amp;numTransport, const int &amp;numPhase)</td></tr>
 <tr class="memdesc:aee64cb575f7f1cded43a706bf812a23a inherit pub_methods_classCell"><td class="mdescLeft">&#160;</td><td class="mdescRight">Re-initialize the color function (transport) with alpha.  <a href="#aee64cb575f7f1cded43a706bf812a23a">More...</a><br /></td></tr>
 <tr class="separator:aee64cb575f7f1cded43a706bf812a23a inherit pub_methods_classCell"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a685d94ed37b48375a7a2e900066e65d2 inherit pub_methods_classCell"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCell.html#a685d94ed37b48375a7a2e900066e65d2">getBordsSize</a> () const </td></tr>
-<tr class="separator:a685d94ed37b48375a7a2e900066e65d2 inherit pub_methods_classCell"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2082ea0241ab7982bd39cdca1debe244 inherit pub_methods_classCell"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classCellInterface.html">CellInterface</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCell.html#a2082ea0241ab7982bd39cdca1debe244">getBord</a> (int &amp;b)</td></tr>
-<tr class="separator:a2082ea0241ab7982bd39cdca1debe244 inherit pub_methods_classCell"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3ebc6615cf77d25411d97671b71a590b inherit pub_methods_classCell"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCell.html#a3ebc6615cf77d25411d97671b71a590b">getCellInterfacesSize</a> () const </td></tr>
+<tr class="separator:a3ebc6615cf77d25411d97671b71a590b inherit pub_methods_classCell"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a30bb973262fea22cc77b5a7e5757d854 inherit pub_methods_classCell"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classCellInterface.html">CellInterface</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCell.html#a30bb973262fea22cc77b5a7e5757d854">getCellInterface</a> (int &amp;b)</td></tr>
+<tr class="separator:a30bb973262fea22cc77b5a7e5757d854 inherit pub_methods_classCell"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a62f02641f63878dd014319463686085b inherit pub_methods_classCell"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classFlux.html">Flux</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCell.html#a62f02641f63878dd014319463686085b">getCons</a> () const </td></tr>
 <tr class="separator:a62f02641f63878dd014319463686085b inherit pub_methods_classCell"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a473cd6ca6840b2afbdcb9034d0d307f0 inherit pub_methods_classCell"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCell.html#a473cd6ca6840b2afbdcb9034d0d307f0">setCons</a> (<a class="el" href="classFlux.html">Flux</a> *cons)</td></tr>
 <tr class="separator:a473cd6ca6840b2afbdcb9034d0d307f0 inherit pub_methods_classCell"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a347bb40a7903d9083b4a67889aaf8de7 inherit pub_methods_classCell"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classCoord.html">Coord</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCell.html#a347bb40a7903d9083b4a67889aaf8de7">getPosition</a> () const </td></tr>
-<tr class="separator:a347bb40a7903d9083b4a67889aaf8de7 inherit pub_methods_classCell"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a30cedb13ca6c67c977cc305c721c6b5e inherit pub_methods_classCell"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classCoord.html">Coord</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCell.html#a30cedb13ca6c67c977cc305c721c6b5e">getSize</a> () const </td></tr>
-<tr class="separator:a30cedb13ca6c67c977cc305c721c6b5e inherit pub_methods_classCell"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a13d8c41dcbbf65fd6e850b2fd9f7a3e4 inherit pub_methods_classCell"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCell.html#a13d8c41dcbbf65fd6e850b2fd9f7a3e4">getSizeX</a> () const </td></tr>
-<tr class="separator:a13d8c41dcbbf65fd6e850b2fd9f7a3e4 inherit pub_methods_classCell"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3c0f97c6364b5315d69b7faab8222522 inherit pub_methods_classCell"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCell.html#a3c0f97c6364b5315d69b7faab8222522">getSizeY</a> () const </td></tr>
-<tr class="separator:a3c0f97c6364b5315d69b7faab8222522 inherit pub_methods_classCell"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab56853917905d5b74e2029d359a4afc8 inherit pub_methods_classCell"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCell.html#ab56853917905d5b74e2029d359a4afc8">getSizeZ</a> () const </td></tr>
-<tr class="separator:ab56853917905d5b74e2029d359a4afc8 inherit pub_methods_classCell"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa89afcd8847f3ddb837e640c8900e0b9 inherit pub_methods_classCell"><td class="memItemLeft" align="right" valign="top">const <a class="el" href="classCoord.html">Coord</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCell.html#aa89afcd8847f3ddb837e640c8900e0b9">getPosition</a> () const </td></tr>
+<tr class="separator:aa89afcd8847f3ddb837e640c8900e0b9 inherit pub_methods_classCell"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab7dadc316d8e37672e8d7d8d529ecb53 inherit pub_methods_classCell"><td class="memItemLeft" align="right" valign="top">const <a class="el" href="classCoord.html">Coord</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCell.html#ab7dadc316d8e37672e8d7d8d529ecb53">getSize</a> () const </td></tr>
+<tr class="separator:ab7dadc316d8e37672e8d7d8d529ecb53 inherit pub_methods_classCell"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af490329c1552df21f5acd357369c6fb8 inherit pub_methods_classCell"><td class="memItemLeft" align="right" valign="top">const double &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCell.html#af490329c1552df21f5acd357369c6fb8">getSizeX</a> () const </td></tr>
+<tr class="separator:af490329c1552df21f5acd357369c6fb8 inherit pub_methods_classCell"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4a26bf90a31897086b57a3d8fb9f0964 inherit pub_methods_classCell"><td class="memItemLeft" align="right" valign="top">const double &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCell.html#a4a26bf90a31897086b57a3d8fb9f0964">getSizeY</a> () const </td></tr>
+<tr class="separator:a4a26bf90a31897086b57a3d8fb9f0964 inherit pub_methods_classCell"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad5dfeb6317d07f65cef96e695572897d inherit pub_methods_classCell"><td class="memItemLeft" align="right" valign="top">const double &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCell.html#ad5dfeb6317d07f65cef96e695572897d">getSizeZ</a> () const </td></tr>
+<tr class="separator:ad5dfeb6317d07f65cef96e695572897d inherit pub_methods_classCell"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad5f1c7b952dbe5a1ef1b839b0d203c9d inherit pub_methods_classCell"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCell.html#ad5f1c7b952dbe5a1ef1b839b0d203c9d">setElement</a> (<a class="el" href="classElement.html">Element</a> *element, const int &amp;numCell)</td></tr>
 <tr class="separator:ad5f1c7b952dbe5a1ef1b839b0d203c9d inherit pub_methods_classCell"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8142d15197cc516f783d669521bb06ae inherit pub_methods_classCell"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classElement.html">Element</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCell.html#a8142d15197cc516f783d669521bb06ae">getElement</a> ()</td></tr>
-<tr class="separator:a8142d15197cc516f783d669521bb06ae inherit pub_methods_classCell"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a366b30895862848a8b9e7809715b375f inherit pub_methods_classCell"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classElement.html">Element</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCell.html#a366b30895862848a8b9e7809715b375f">getElement</a> () const </td></tr>
+<tr class="separator:a366b30895862848a8b9e7809715b375f inherit pub_methods_classCell"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2baad92515aadf82ebd1015a1d3df068 inherit pub_methods_classCell"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classTransport.html">Transport</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCell.html#a2baad92515aadf82ebd1015a1d3df068">getConsTransport</a> (const int &amp;numTransport) const </td></tr>
 <tr class="separator:a2baad92515aadf82ebd1015a1d3df068 inherit pub_methods_classCell"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a145c6d95038e59c8e4da1041e0afd5fd inherit pub_methods_classCell"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCell.html#a145c6d95038e59c8e4da1041e0afd5fd">setConsTransport</a> (double value, const int &amp;numTransport)</td></tr>
 <tr class="separator:a145c6d95038e59c8e4da1041e0afd5fd inherit pub_methods_classCell"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a86cb639b28b0542884823438760a115d inherit pub_methods_classCell"><td class="memItemLeft" align="right" valign="top">std::vector&lt; <a class="el" href="classQuantitiesAddPhys.html">QuantitiesAddPhys</a> * &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCell.html#a86cb639b28b0542884823438760a115d">getVecQuantitiesAddPhys</a> ()</td></tr>
-<tr class="separator:a86cb639b28b0542884823438760a115d inherit pub_methods_classCell"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:adac8171580d9cc0d7b30386d3b4a6233 inherit pub_methods_classCell"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCell.html#adac8171580d9cc0d7b30386d3b4a6233">getNumberPhases</a> () const </td></tr>
-<tr class="separator:adac8171580d9cc0d7b30386d3b4a6233 inherit pub_methods_classCell"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae6581a035e5f6d9555b56646c58b4137 inherit pub_methods_classCell"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCell.html#ae6581a035e5f6d9555b56646c58b4137">getNumberTransports</a> () const </td></tr>
-<tr class="separator:ae6581a035e5f6d9555b56646c58b4137 inherit pub_methods_classCell"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae2b5de4f62ec1699ffb2bd376365e5f9 inherit pub_methods_classCell"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCell.html#ae2b5de4f62ec1699ffb2bd376365e5f9">getXi</a> () const </td></tr>
-<tr class="separator:ae2b5de4f62ec1699ffb2bd376365e5f9 inherit pub_methods_classCell"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a226d7ca84c008019690967da01898fb9 inherit pub_methods_classCell"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCell.html#a226d7ca84c008019690967da01898fb9">getGradient</a> ()</td></tr>
-<tr class="separator:a226d7ca84c008019690967da01898fb9 inherit pub_methods_classCell"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae3fbfa4268ec9a345685ec38c8140602 inherit pub_methods_classCell"><td class="memItemLeft" align="right" valign="top">std::vector&lt; <a class="el" href="classQuantitiesAddPhys.html">QuantitiesAddPhys</a> * &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCell.html#ae3fbfa4268ec9a345685ec38c8140602">getVecQuantitiesAddPhys</a> ()</td></tr>
+<tr class="separator:ae3fbfa4268ec9a345685ec38c8140602 inherit pub_methods_classCell"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a61aae8713af074be6ab078de17bc4c43 inherit pub_methods_classCell"><td class="memItemLeft" align="right" valign="top">const int &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCell.html#a61aae8713af074be6ab078de17bc4c43">getNumberPhases</a> () const </td></tr>
+<tr class="separator:a61aae8713af074be6ab078de17bc4c43 inherit pub_methods_classCell"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab65ca731e52f14a8680599025fac24d1 inherit pub_methods_classCell"><td class="memItemLeft" align="right" valign="top">const int &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCell.html#ab65ca731e52f14a8680599025fac24d1">getNumberTransports</a> () const </td></tr>
+<tr class="separator:ab65ca731e52f14a8680599025fac24d1 inherit pub_methods_classCell"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a072b895161e1831388239e6b2885f571 inherit pub_methods_classCell"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCell.html#a072b895161e1831388239e6b2885f571">getDensityGradient</a> ()</td></tr>
+<tr class="separator:a072b895161e1831388239e6b2885f571 inherit pub_methods_classCell"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab5932fc54b2cfb3b2b6282105518d21f inherit pub_methods_classCell"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classModel.html">Model</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCell.html#ab5932fc54b2cfb3b2b6282105518d21f">getModel</a> ()</td></tr>
 <tr class="separator:ab5932fc54b2cfb3b2b6282105518d21f inherit pub_methods_classCell"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af75d70ab2dd540a9add4024ed1d2bfb6 inherit pub_methods_classCell"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classCoord.html">Coord</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCell.html#af75d70ab2dd540a9add4024ed1d2bfb6">getVelocity</a> ()</td></tr>
-<tr class="separator:af75d70ab2dd540a9add4024ed1d2bfb6 inherit pub_methods_classCell"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:abffa599f32f90332e58bbf5145d3d97e inherit pub_methods_classCell"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCell.html#abffa599f32f90332e58bbf5145d3d97e">computeMultiSlope</a> (const int &amp;numberPhases, <a class="el" href="classCellInterface.html">CellInterface</a> *bord, <a class="el" href="classLimiter.html">Limiter</a> *globalLimiter)</td></tr>
-<tr class="separator:abffa599f32f90332e58bbf5145d3d97e inherit pub_methods_classCell"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8a97973530d1163e9bd133e150f2783b inherit pub_methods_classCell"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classCoord.html">Coord</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCell.html#a8a97973530d1163e9bd133e150f2783b">getVelocity</a> ()</td></tr>
+<tr class="separator:a8a97973530d1163e9bd133e150f2783b inherit pub_methods_classCell"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa2013a944073806f509dd37ad0e7fe37 inherit pub_methods_classCell"><td class="memItemLeft" align="right" valign="top">const <a class="el" href="classCoord.html">Coord</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCell.html#aa2013a944073806f509dd37ad0e7fe37">getVelocity</a> () const </td></tr>
+<tr class="separator:aa2013a944073806f509dd37ad0e7fe37 inherit pub_methods_classCell"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a767b28e066f73e546f476dc4d394437b inherit pub_methods_classCell"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classPhase.html">Phase</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCell.html#a767b28e066f73e546f476dc4d394437b">getSlopes</a> (const int &amp;phaseNumber) const </td></tr>
 <tr class="separator:a767b28e066f73e546f476dc4d394437b inherit pub_methods_classCell"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a001e5e22b5a32e0422f645b20e7c30c7 inherit pub_methods_classCell"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classTransport.html">Transport</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCell.html#a001e5e22b5a32e0422f645b20e7c30c7">getSlopesTransport</a> (const int &amp;numberTransport) const </td></tr>
@@ -325,6 +327,10 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a772bdc56ef35951ec251486cc4d78e67 inherit pub_methods_classCell"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a62d4df872a40dbb40d7a6ffe4da199c6 inherit pub_methods_classCell"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCell.html#a62d4df872a40dbb40d7a6ffe4da199c6">computeIntegration</a> (double &amp;integration)</td></tr>
 <tr class="separator:a62d4df872a40dbb40d7a6ffe4da199c6 inherit pub_methods_classCell"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2264570e83ad8036314a26c82c571aa7 inherit pub_methods_classCell"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCell.html#a2264570e83ad8036314a26c82c571aa7">computeMass</a> (double &amp;mass, double &amp;alphaRef)</td></tr>
+<tr class="separator:a2264570e83ad8036314a26c82c571aa7 inherit pub_methods_classCell"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a50565e0b6e65a92982b1779674c552f7 inherit pub_methods_classCell"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCell.html#a50565e0b6e65a92982b1779674c552f7">computeTotalMass</a> (double &amp;mass)</td></tr>
+<tr class="separator:a50565e0b6e65a92982b1779674c552f7 inherit pub_methods_classCell"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3148c1c2ef687cd4af36140a6c9076ef inherit pub_methods_classCell"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCell.html#a3148c1c2ef687cd4af36140a6c9076ef">lookForPmax</a> (double *pMax, double *pMaxWall)</td></tr>
 <tr class="separator:a3148c1c2ef687cd4af36140a6c9076ef inherit pub_methods_classCell"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aec77003ab74feab724abc598ee52953f inherit pub_methods_classCell"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCell.html#aec77003ab74feab724abc598ee52953f">setToZeroXi</a> ()</td></tr>
@@ -337,24 +343,24 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a5f228716f61ba98ac6ce45a56c85c5da inherit pub_methods_classCell"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1f8f32869bc7ab864dd0fae7ba8f4d57 inherit pub_methods_classCell"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCell.html#a1f8f32869bc7ab864dd0fae7ba8f4d57">chooseUnrefine</a> (const double &amp;xiJoin, int &amp;nbCellsTotalAMR)</td></tr>
 <tr class="separator:a1f8f32869bc7ab864dd0fae7ba8f4d57 inherit pub_methods_classCell"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac0a870e5604ee9217e9ca9c6445316f2 inherit pub_methods_classCell"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCell.html#ac0a870e5604ee9217e9ca9c6445316f2">refineCellAndBoundaries</a> (const int &amp;nbCellsY, const int &amp;nbCellsZ, const std::vector&lt; <a class="el" href="classAddPhys.html">AddPhys</a> * &gt; &amp;addPhys, <a class="el" href="classModel.html">Model</a> *model)</td></tr>
-<tr class="separator:ac0a870e5604ee9217e9ca9c6445316f2 inherit pub_methods_classCell"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4334c8d03df745d4b2fc0c8ccad884ec inherit pub_methods_classCell"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCell.html#a4334c8d03df745d4b2fc0c8ccad884ec">unrefineCellAndBoundaries</a> ()</td></tr>
-<tr class="separator:a4334c8d03df745d4b2fc0c8ccad884ec inherit pub_methods_classCell"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6fff21011cdda3e2eec656b2ec55ddab inherit pub_methods_classCell"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCell.html#a6fff21011cdda3e2eec656b2ec55ddab">refineCellAndCellInterfaces</a> (const int &amp;nbCellsY, const int &amp;nbCellsZ, const std::vector&lt; <a class="el" href="classAddPhys.html">AddPhys</a> * &gt; &amp;addPhys, <a class="el" href="classModel.html">Model</a> *model, const bool &amp;refineExternalCellInterfaces)</td></tr>
+<tr class="separator:a6fff21011cdda3e2eec656b2ec55ddab inherit pub_methods_classCell"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab05c7f5fd1483fcf68469ecb9533ab46 inherit pub_methods_classCell"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCell.html#ab05c7f5fd1483fcf68469ecb9533ab46">unrefineCellAndCellInterfaces</a> ()</td></tr>
+<tr class="separator:ab05c7f5fd1483fcf68469ecb9533ab46 inherit pub_methods_classCell"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab69dcb89f8217141c67b6b9e95c25377 inherit pub_methods_classCell"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCell.html#ab69dcb89f8217141c67b6b9e95c25377">averageChildrenInParent</a> ()</td></tr>
 <tr class="separator:ab69dcb89f8217141c67b6b9e95c25377 inherit pub_methods_classCell"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8d9e68cc57e789e4455f5bf343dfc71b inherit pub_methods_classCell"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCell.html#a8d9e68cc57e789e4455f5bf343dfc71b">lvlNeighborTooHigh</a> ()</td></tr>
 <tr class="separator:a8d9e68cc57e789e4455f5bf343dfc71b inherit pub_methods_classCell"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a60cb3aec0238d7be005bb10c76919ed8 inherit pub_methods_classCell"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCell.html#a60cb3aec0238d7be005bb10c76919ed8">lvlNeighborTooLow</a> ()</td></tr>
 <tr class="separator:a60cb3aec0238d7be005bb10c76919ed8 inherit pub_methods_classCell"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aba6c85b5c3711c932816a6fc3d3346dd inherit pub_methods_classCell"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCell.html#aba6c85b5c3711c932816a6fc3d3346dd">buildLvlCellsAndLvlInternalBoundariesArrays</a> (std::vector&lt; <a class="el" href="classCell.html">Cell</a> * &gt; *cellsLvl, std::vector&lt; <a class="el" href="classCellInterface.html">CellInterface</a> * &gt; *boundariesLvl)</td></tr>
-<tr class="separator:aba6c85b5c3711c932816a6fc3d3346dd inherit pub_methods_classCell"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae83fc2064247a294a104bcdaf3db7f62 inherit pub_methods_classCell"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCell.html#ae83fc2064247a294a104bcdaf3db7f62">getLvl</a> ()</td></tr>
-<tr class="separator:ae83fc2064247a294a104bcdaf3db7f62 inherit pub_methods_classCell"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:acdeecbc3516681cece1775a90291db95 inherit pub_methods_classCell"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCell.html#acdeecbc3516681cece1775a90291db95">getSplit</a> ()</td></tr>
-<tr class="separator:acdeecbc3516681cece1775a90291db95 inherit pub_methods_classCell"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad1306ffa6839b38e0843d65c49a28bb7 inherit pub_methods_classCell"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCell.html#ad1306ffa6839b38e0843d65c49a28bb7">getXi</a> ()</td></tr>
-<tr class="separator:ad1306ffa6839b38e0843d65c49a28bb7 inherit pub_methods_classCell"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4a402e44a7ca385beba561753de8b8ab inherit pub_methods_classCell"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCell.html#a4a402e44a7ca385beba561753de8b8ab">buildLvlCellsAndLvlInternalCellInterfacesArrays</a> (std::vector&lt; <a class="el" href="classCell.html">Cell</a> * &gt; *cellsLvl, std::vector&lt; <a class="el" href="classCellInterface.html">CellInterface</a> * &gt; *cellInterfacesLvl)</td></tr>
+<tr class="separator:a4a402e44a7ca385beba561753de8b8ab inherit pub_methods_classCell"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a80fd6d60e739e867ae0850d55509334e inherit pub_methods_classCell"><td class="memItemLeft" align="right" valign="top">const int &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCell.html#a80fd6d60e739e867ae0850d55509334e">getLvl</a> () const </td></tr>
+<tr class="separator:a80fd6d60e739e867ae0850d55509334e inherit pub_methods_classCell"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa5fdc95f6828a31e4168e50010db1a1c inherit pub_methods_classCell"><td class="memItemLeft" align="right" valign="top">const bool &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCell.html#aa5fdc95f6828a31e4168e50010db1a1c">getSplit</a> () const </td></tr>
+<tr class="separator:aa5fdc95f6828a31e4168e50010db1a1c inherit pub_methods_classCell"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4f6573c4baba04d68dda077ec589ff06 inherit pub_methods_classCell"><td class="memItemLeft" align="right" valign="top">const double &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCell.html#a4f6573c4baba04d68dda077ec589ff06">getXi</a> () const </td></tr>
+<tr class="separator:a4f6573c4baba04d68dda077ec589ff06 inherit pub_methods_classCell"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6065ebe6a312dc6a0448f7f0bf21ae64 inherit pub_methods_classCell"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCell.html#a6065ebe6a312dc6a0448f7f0bf21ae64">setXi</a> (double value)</td></tr>
 <tr class="separator:a6065ebe6a312dc6a0448f7f0bf21ae64 inherit pub_methods_classCell"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0995f84b16bda4fbbd5ffe57cc8d9a2d inherit pub_methods_classCell"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCell.html#a0995f84b16bda4fbbd5ffe57cc8d9a2d">addFluxXi</a> (double value)</td></tr>
@@ -367,57 +373,67 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a15dcc2eb34fd974fdc4ecc434d34cb19 inherit pub_methods_classCell"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4a62f5112aa8646670504a7682a0d1d0 inherit pub_methods_classCell"><td class="memItemLeft" align="right" valign="top">std::vector&lt; <a class="el" href="classCell.html">Cell</a> * &gt; *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCell.html#a4a62f5112aa8646670504a7682a0d1d0">getChildVector</a> ()</td></tr>
 <tr class="separator:a4a62f5112aa8646670504a7682a0d1d0 inherit pub_methods_classCell"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2664967ff8ccff29527f6701e0343394 inherit pub_methods_classCell"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCell.html#a2664967ff8ccff29527f6701e0343394">fillBufferPrimitives</a> (double *buffer, int &amp;counter, <a class="el" href="Phase_8h.html#a2c815f6ae654fe19b3985d14c9c8d74e">Prim</a> type=<a class="el" href="Phase_8h.html#a2c815f6ae654fe19b3985d14c9c8d74ea2270f1269fdfbdfd9044eaa8af19750d">vecPhases</a>) const </td></tr>
-<tr class="separator:a2664967ff8ccff29527f6701e0343394 inherit pub_methods_classCell"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac83daacf6207451a4ff6bb9b95a3cd11 inherit pub_methods_classCell"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCell.html#ac83daacf6207451a4ff6bb9b95a3cd11">getBufferPrimitives</a> (double *buffer, int &amp;counter, <a class="el" href="classEos.html">Eos</a> **eos, <a class="el" href="Phase_8h.html#a2c815f6ae654fe19b3985d14c9c8d74e">Prim</a> type=<a class="el" href="Phase_8h.html#a2c815f6ae654fe19b3985d14c9c8d74ea2270f1269fdfbdfd9044eaa8af19750d">vecPhases</a>)</td></tr>
-<tr class="separator:ac83daacf6207451a4ff6bb9b95a3cd11 inherit pub_methods_classCell"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4886813e37f302bb384699b3724db780 inherit pub_methods_classCell"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCell.html#a4886813e37f302bb384699b3724db780">fillBufferVector</a> (double *buffer, int &amp;counter, const int &amp;dim, std::string nameVector, int num=0, int index=-1) const </td></tr>
-<tr class="separator:a4886813e37f302bb384699b3724db780 inherit pub_methods_classCell"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac609deae7253631b946b38bfbcf9c1b0 inherit pub_methods_classCell"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCell.html#ac609deae7253631b946b38bfbcf9c1b0">getBufferVector</a> (double *buffer, int &amp;counter, const int &amp;dim, std::string nameVector, int num=0, int index=-1)</td></tr>
-<tr class="separator:ac609deae7253631b946b38bfbcf9c1b0 inherit pub_methods_classCell"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2c5deb2a79c86cf4f761299a67e4c223 inherit pub_methods_classCell"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCell.html#a2c5deb2a79c86cf4f761299a67e4c223">fillBufferTransports</a> (double *buffer, int &amp;counter) const </td></tr>
-<tr class="separator:a2c5deb2a79c86cf4f761299a67e4c223 inherit pub_methods_classCell"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aecc7d18a85b2959838c2a59f72cd7af6 inherit pub_methods_classCell"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCell.html#aecc7d18a85b2959838c2a59f72cd7af6">getBufferTransports</a> (double *buffer, int &amp;counter)</td></tr>
-<tr class="separator:aecc7d18a85b2959838c2a59f72cd7af6 inherit pub_methods_classCell"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a934c4ca28d2aef9eebb3558d2745210f inherit pub_methods_classCell"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCell.html#a934c4ca28d2aef9eebb3558d2745210f">fillBufferPrimitivesAMR</a> (double *buffer, int &amp;counter, const int &amp;lvl, std::string whichCpuAmIForNeighbour, <a class="el" href="Phase_8h.html#a2c815f6ae654fe19b3985d14c9c8d74e">Prim</a> type=<a class="el" href="Phase_8h.html#a2c815f6ae654fe19b3985d14c9c8d74ea2270f1269fdfbdfd9044eaa8af19750d">vecPhases</a>) const </td></tr>
-<tr class="separator:a934c4ca28d2aef9eebb3558d2745210f inherit pub_methods_classCell"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:abeff081e9a3afbe21bcca74d4b25721a inherit pub_methods_classCell"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCell.html#abeff081e9a3afbe21bcca74d4b25721a">getBufferPrimitivesAMR</a> (double *buffer, int &amp;counter, const int &amp;lvl, <a class="el" href="classEos.html">Eos</a> **eos, <a class="el" href="Phase_8h.html#a2c815f6ae654fe19b3985d14c9c8d74e">Prim</a> type=<a class="el" href="Phase_8h.html#a2c815f6ae654fe19b3985d14c9c8d74ea2270f1269fdfbdfd9044eaa8af19750d">vecPhases</a>)</td></tr>
-<tr class="separator:abeff081e9a3afbe21bcca74d4b25721a inherit pub_methods_classCell"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a541be17d259ae3a4ef3235df046d463a inherit pub_methods_classCell"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCell.html#a541be17d259ae3a4ef3235df046d463a">fillBufferVectorAMR</a> (double *buffer, int &amp;counter, const int &amp;lvl, std::string whichCpuAmIForNeighbour, const int &amp;dim, std::string nameVector, int num=0, int index=-1) const </td></tr>
-<tr class="separator:a541be17d259ae3a4ef3235df046d463a inherit pub_methods_classCell"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7a8f1987f6f55a9cf7f529d48fc98339 inherit pub_methods_classCell"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCell.html#a7a8f1987f6f55a9cf7f529d48fc98339">getBufferVectorAMR</a> (double *buffer, int &amp;counter, const int &amp;lvl, const int &amp;dim, std::string nameVector, int num=0, int index=-1)</td></tr>
-<tr class="separator:a7a8f1987f6f55a9cf7f529d48fc98339 inherit pub_methods_classCell"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a48a03647eaae3536bb7a4a736d07517a inherit pub_methods_classCell"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCell.html#a48a03647eaae3536bb7a4a736d07517a">fillBufferTransportsAMR</a> (double *buffer, int &amp;counter, const int &amp;lvl, std::string whichCpuAmIForNeighbour) const </td></tr>
-<tr class="separator:a48a03647eaae3536bb7a4a736d07517a inherit pub_methods_classCell"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3ea9b992231eafa3eb1e9bf78b370881 inherit pub_methods_classCell"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCell.html#a3ea9b992231eafa3eb1e9bf78b370881">getBufferTransportsAMR</a> (double *buffer, int &amp;counter, const int &amp;lvl)</td></tr>
-<tr class="separator:a3ea9b992231eafa3eb1e9bf78b370881 inherit pub_methods_classCell"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1c42e2893bb6111e2ada4ce4f3ab0702 inherit pub_methods_classCell"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCell.html#a1c42e2893bb6111e2ada4ce4f3ab0702">fillBufferPrimitives</a> (double *buffer, int &amp;counter, const int &amp;lvl, const int &amp;neighbour, <a class="el" href="Phase_8h.html#a2c815f6ae654fe19b3985d14c9c8d74e">Prim</a> type=<a class="el" href="Phase_8h.html#a2c815f6ae654fe19b3985d14c9c8d74ea2270f1269fdfbdfd9044eaa8af19750d">vecPhases</a>) const </td></tr>
+<tr class="separator:a1c42e2893bb6111e2ada4ce4f3ab0702 inherit pub_methods_classCell"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aff253e2fe70c2df036dbbcc803f80357 inherit pub_methods_classCell"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCell.html#aff253e2fe70c2df036dbbcc803f80357">getBufferPrimitives</a> (double *buffer, int &amp;counter, const int &amp;lvl, <a class="el" href="classEos.html">Eos</a> **eos, <a class="el" href="Phase_8h.html#a2c815f6ae654fe19b3985d14c9c8d74e">Prim</a> type=<a class="el" href="Phase_8h.html#a2c815f6ae654fe19b3985d14c9c8d74ea2270f1269fdfbdfd9044eaa8af19750d">vecPhases</a>)</td></tr>
+<tr class="separator:aff253e2fe70c2df036dbbcc803f80357 inherit pub_methods_classCell"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7cd436bb28fcc7b902a06de70646a69c inherit pub_methods_classCell"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCell.html#a7cd436bb28fcc7b902a06de70646a69c">fillBufferVector</a> (double *buffer, int &amp;counter, const int &amp;lvl, const int &amp;neighbour, const int &amp;dim, <a class="el" href="Cell_8h.html#acca207de98b59d1c41e3975008706d61">Variable</a> nameVector, int num=0, int index=-1) const </td></tr>
+<tr class="separator:a7cd436bb28fcc7b902a06de70646a69c inherit pub_methods_classCell"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8c6331c850ec5857fb183008c0ee3168 inherit pub_methods_classCell"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCell.html#a8c6331c850ec5857fb183008c0ee3168">getBufferVector</a> (double *buffer, int &amp;counter, const int &amp;lvl, const int &amp;dim, <a class="el" href="Cell_8h.html#acca207de98b59d1c41e3975008706d61">Variable</a> nameVector, int num=0, int index=-1)</td></tr>
+<tr class="separator:a8c6331c850ec5857fb183008c0ee3168 inherit pub_methods_classCell"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a56b0d303497638217ea6de9cb7eaf183 inherit pub_methods_classCell"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCell.html#a56b0d303497638217ea6de9cb7eaf183">fillBufferTransports</a> (double *buffer, int &amp;counter, const int &amp;lvl, const int &amp;neighbour) const </td></tr>
+<tr class="separator:a56b0d303497638217ea6de9cb7eaf183 inherit pub_methods_classCell"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6716fd05a6a19efd10736cdbbeaf8d11 inherit pub_methods_classCell"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCell.html#a6716fd05a6a19efd10736cdbbeaf8d11">getBufferTransports</a> (double *buffer, int &amp;counter, const int &amp;lvl)</td></tr>
+<tr class="separator:a6716fd05a6a19efd10736cdbbeaf8d11 inherit pub_methods_classCell"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aae0ced59dfaeabbb4b3842c1ebea797f inherit pub_methods_classCell"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCell.html#aae0ced59dfaeabbb4b3842c1ebea797f">hasNeighboringGhostCellOfCPUneighbour</a> (const int &amp;neighbour) const </td></tr>
+<tr class="separator:aae0ced59dfaeabbb4b3842c1ebea797f inherit pub_methods_classCell"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a042ddb10eefd480d62ed6b0c71ab2020 inherit pub_methods_classCell"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCell.html#a042ddb10eefd480d62ed6b0c71ab2020">numberOfNeighboringGhostCellsOfCPUneighbour</a> (const int &amp;neighbour) const </td></tr>
+<tr class="separator:a042ddb10eefd480d62ed6b0c71ab2020 inherit pub_methods_classCell"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8721d9b633f20069285c2bf13de6b259 inherit pub_methods_classCell"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCell.html#a8721d9b633f20069285c2bf13de6b259">chooseRefineDeraffineGhost</a> (const int &amp;nbCellsY, const int &amp;nbCellsZ, const std::vector&lt; <a class="el" href="classAddPhys.html">AddPhys</a> * &gt; &amp;addPhys, <a class="el" href="classModel.html">Model</a> *model, std::vector&lt; <a class="el" href="classCell.html">Cell</a> * &gt; *cellsLvlGhost)</td></tr>
 <tr class="separator:a8721d9b633f20069285c2bf13de6b259 inherit pub_methods_classCell"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a08f07aaf6b0690e5a5f5de4b56afce32 inherit pub_methods_classCell"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCell.html#a08f07aaf6b0690e5a5f5de4b56afce32">refineCellAndBoundariesGhost</a> (const int &amp;nbCellsY, const int &amp;nbCellsZ, const std::vector&lt; <a class="el" href="classAddPhys.html">AddPhys</a> * &gt; &amp;addPhys, <a class="el" href="classModel.html">Model</a> *model)</td></tr>
-<tr class="separator:a08f07aaf6b0690e5a5f5de4b56afce32 inherit pub_methods_classCell"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a454ec55cc6f07380d0f56602b9118887 inherit pub_methods_classCell"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCell.html#a454ec55cc6f07380d0f56602b9118887">unrefineCellAndBoundariesGhost</a> ()</td></tr>
-<tr class="separator:a454ec55cc6f07380d0f56602b9118887 inherit pub_methods_classCell"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a19a52e80c3f2b67c3a9239c9f45bd0c9 inherit pub_methods_classCell"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCell.html#a19a52e80c3f2b67c3a9239c9f45bd0c9">fillBufferXi</a> (double *buffer, int &amp;counter, const int &amp;lvl, std::string whichCpuAmIForNeighbour) const </td></tr>
-<tr class="separator:a19a52e80c3f2b67c3a9239c9f45bd0c9 inherit pub_methods_classCell"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa61f6e87cb46416cfd8be2f842995969 inherit pub_methods_classCell"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCell.html#aa61f6e87cb46416cfd8be2f842995969">refineCellAndCellInterfacesGhost</a> (const int &amp;nbCellsY, const int &amp;nbCellsZ, const std::vector&lt; <a class="el" href="classAddPhys.html">AddPhys</a> * &gt; &amp;addPhys, <a class="el" href="classModel.html">Model</a> *model)</td></tr>
+<tr class="separator:aa61f6e87cb46416cfd8be2f842995969 inherit pub_methods_classCell"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad2ad331b6a93974b54cd7521b7018a86 inherit pub_methods_classCell"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCell.html#ad2ad331b6a93974b54cd7521b7018a86">unrefineCellAndCellInterfacesGhost</a> ()</td></tr>
+<tr class="separator:ad2ad331b6a93974b54cd7521b7018a86 inherit pub_methods_classCell"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac308cf1f1f86955c618046eaa5741ef0 inherit pub_methods_classCell"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCell.html#ac308cf1f1f86955c618046eaa5741ef0">fillBufferXi</a> (double *buffer, int &amp;counter, const int &amp;lvl, const int &amp;neighbour) const </td></tr>
+<tr class="separator:ac308cf1f1f86955c618046eaa5741ef0 inherit pub_methods_classCell"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a749131a9538fdb8e3087f8eb78bf9c1f inherit pub_methods_classCell"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCell.html#a749131a9538fdb8e3087f8eb78bf9c1f">getBufferXi</a> (double *buffer, int &amp;counter, const int &amp;lvl)</td></tr>
 <tr class="separator:a749131a9538fdb8e3087f8eb78bf9c1f inherit pub_methods_classCell"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0040e5ab0efb71e9f83bfccadfba3cb3 inherit pub_methods_classCell"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCell.html#a0040e5ab0efb71e9f83bfccadfba3cb3">fillBufferSplit</a> (bool *buffer, int &amp;counter, const int &amp;lvl, std::string whichCpuAmIForNeighbour) const </td></tr>
-<tr class="separator:a0040e5ab0efb71e9f83bfccadfba3cb3 inherit pub_methods_classCell"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3f757e430cb138e8ddc940014ac7731c inherit pub_methods_classCell"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCell.html#a3f757e430cb138e8ddc940014ac7731c">fillBufferSplit</a> (bool *buffer, int &amp;counter, const int &amp;lvl, const int &amp;neighbour) const </td></tr>
+<tr class="separator:a3f757e430cb138e8ddc940014ac7731c inherit pub_methods_classCell"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7ed2a1a7298baaed3bed9294a9022912 inherit pub_methods_classCell"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCell.html#a7ed2a1a7298baaed3bed9294a9022912">getBufferSplit</a> (bool *buffer, int &amp;counter, const int &amp;lvl)</td></tr>
 <tr class="separator:a7ed2a1a7298baaed3bed9294a9022912 inherit pub_methods_classCell"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aae705f38fdded15f38f7029646e30f9d inherit pub_methods_classCell"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCell.html#aae705f38fdded15f38f7029646e30f9d">fillNumberElementsToSendToNeighbour</a> (int &amp;numberNumberElementsToSendToNeighbor, const int &amp;lvl, std::string whichCpuAmIForNeighbour)</td></tr>
-<tr class="separator:aae705f38fdded15f38f7029646e30f9d inherit pub_methods_classCell"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a59019540fe054c368503f53901af438c inherit pub_methods_classCell"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCell.html#a59019540fe054c368503f53901af438c">fillNumberElementsToSendToNeighbour</a> (int &amp;numberElementsToSendToNeighbor, int &amp;numberSlopesToSendToNeighbor, const int &amp;lvl, const int &amp;neighbour, int numberNeighboursOfCPUneighbour)</td></tr>
+<tr class="separator:a59019540fe054c368503f53901af438c inherit pub_methods_classCell"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae8173bf087ef623699bf16176704134f inherit pub_methods_classCell"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCell.html#ae8173bf087ef623699bf16176704134f">fillDataToSend</a> (std::vector&lt; double &gt; &amp;dataToSend, std::vector&lt; int &gt; &amp;dataSplitToSend, const int &amp;lvl) const </td></tr>
+<tr class="separator:ae8173bf087ef623699bf16176704134f inherit pub_methods_classCell"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa4528dca664a5eacebc8bf6f840f0df6 inherit pub_methods_classCell"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCell.html#aa4528dca664a5eacebc8bf6f840f0df6">getDataToReceiveAndRefine</a> (std::vector&lt; double &gt; &amp;dataToReceive, std::vector&lt; int &gt; &amp;dataSplitToReceive, const int &amp;lvl, <a class="el" href="classEos.html">Eos</a> **eos, int &amp;counter, int &amp;counterSplit, const int &amp;nbCellsY, const int &amp;nbCellsZ, const std::vector&lt; <a class="el" href="classAddPhys.html">AddPhys</a> * &gt; &amp;addPhys, <a class="el" href="classModel.html">Model</a> *model)</td></tr>
+<tr class="separator:aa4528dca664a5eacebc8bf6f840f0df6 inherit pub_methods_classCell"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a02ea17e6ea866ddb144de59a6aa8cb82 inherit pub_methods_classCell"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCell.html#a02ea17e6ea866ddb144de59a6aa8cb82">computeLoad</a> (double &amp;load, int lvl) const </td></tr>
+<tr class="separator:a02ea17e6ea866ddb144de59a6aa8cb82 inherit pub_methods_classCell"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a712156b304c76866fdffc42a2bc8b502 inherit pub_methods_classCell"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCell.html#a712156b304c76866fdffc42a2bc8b502">computeLvlMax</a> (int &amp;lvlMax) const </td></tr>
+<tr class="separator:a712156b304c76866fdffc42a2bc8b502 inherit pub_methods_classCell"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad397da7649f698c92df694b8cd9a36d9 inherit pub_methods_classCell"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCell.html#ad397da7649f698c92df694b8cd9a36d9">clearExternalCellInterfaces</a> (const int &amp;nbCellsY, const int &amp;nbCellsZ)</td></tr>
+<tr class="separator:ad397da7649f698c92df694b8cd9a36d9 inherit pub_methods_classCell"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3e33864a0e2181e1b58ff0653734c7da inherit pub_methods_classCell"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCell.html#a3e33864a0e2181e1b58ff0653734c7da">updatePointersInternalCellInterfaces</a> ()</td></tr>
+<tr class="separator:a3e33864a0e2181e1b58ff0653734c7da inherit pub_methods_classCell"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af1484fc5d3973b2fb5d261b841beba8e inherit pub_methods_classCell"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCell.html#af1484fc5d3973b2fb5d261b841beba8e">updateNbCellsTotalAMR</a> (int &amp;nbCellsTotalAMR)</td></tr>
+<tr class="separator:af1484fc5d3973b2fb5d261b841beba8e inherit pub_methods_classCell"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
-<tr class="memitem:a6f95c531cd59244e12cbfb6469582c5b"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classPhase.html">Phase</a> **&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCellO2Ghost.html#a6f95c531cd59244e12cbfb6469582c5b">m_vecPhasesSlopesGhost</a></td></tr>
-<tr class="separator:a6f95c531cd59244e12cbfb6469582c5b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0e8ba358dddfbbe393753a2d1d98f705"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classMixture.html">Mixture</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCellO2Ghost.html#a0e8ba358dddfbbe393753a2d1d98f705">m_mixtureSlopesGhost</a></td></tr>
-<tr class="separator:a0e8ba358dddfbbe393753a2d1d98f705"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:afee1cabd948bec8da023c3330dc9402e"><td class="memItemLeft" align="right" valign="top">double *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCellO2Ghost.html#afee1cabd948bec8da023c3330dc9402e">m_vecTransportsSlopesGhost</a></td></tr>
-<tr class="separator:afee1cabd948bec8da023c3330dc9402e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ade03acab058ca3f5a39bd604b65277db"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCellO2Ghost.html#ade03acab058ca3f5a39bd604b65277db">m_alphaCellAfterOppositeSide</a></td></tr>
-<tr class="separator:ade03acab058ca3f5a39bd604b65277db"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a564161b3d7db344f73abaa0898c2b0d8"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCellO2Ghost.html#a564161b3d7db344f73abaa0898c2b0d8">m_rankOfNeighborCPU</a></td></tr>
+<tr class="separator:a564161b3d7db344f73abaa0898c2b0d8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab427c74df7cea58ef8a82edfcf50ec87"><td class="memItemLeft" align="right" valign="top">std::vector&lt; int &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCellO2Ghost.html#ab427c74df7cea58ef8a82edfcf50ec87">m_indexCellInterface</a></td></tr>
+<tr class="separator:ab427c74df7cea58ef8a82edfcf50ec87"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad88658103e2382e075bc2010c149c5fa"><td class="memItemLeft" align="right" valign="top">std::vector&lt; <a class="el" href="classPhase.html">Phase</a> ** &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCellO2Ghost.html#ad88658103e2382e075bc2010c149c5fa">m_vecPhasesSlopesGhost</a></td></tr>
+<tr class="separator:ad88658103e2382e075bc2010c149c5fa"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a07c9096239fa35b4f4eecdc4c7250fd2"><td class="memItemLeft" align="right" valign="top">std::vector&lt; <a class="el" href="classMixture.html">Mixture</a> * &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCellO2Ghost.html#a07c9096239fa35b4f4eecdc4c7250fd2">m_mixtureSlopesGhost</a></td></tr>
+<tr class="separator:a07c9096239fa35b4f4eecdc4c7250fd2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7063dcf4b30a5ca60446b0a6865672e5"><td class="memItemLeft" align="right" valign="top">std::vector&lt; double * &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCellO2Ghost.html#a7063dcf4b30a5ca60446b0a6865672e5">m_vecTransportsSlopesGhost</a></td></tr>
+<tr class="separator:a7063dcf4b30a5ca60446b0a6865672e5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a179ec2e3e4a3c1abf23e0ab91976fa79"><td class="memItemLeft" align="right" valign="top">std::vector&lt; double &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCellO2Ghost.html#a179ec2e3e4a3c1abf23e0ab91976fa79">m_alphaCellAfterOppositeSide</a></td></tr>
+<tr class="separator:a179ec2e3e4a3c1abf23e0ab91976fa79"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pro_attribs_classCellO2"><td colspan="2" onclick="javascript:toggleInherit('pro_attribs_classCellO2')"><img src="closed.png" alt="-"/>&#160;Protected Attributes inherited from <a class="el" href="classCellO2.html">CellO2</a></td></tr>
 <tr class="memitem:ae67526847f7c96b8149d56bbd5442e5d inherit pro_attribs_classCellO2"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classPhase.html">Phase</a> **&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCellO2.html#ae67526847f7c96b8149d56bbd5442e5d">m_vecPhasesO2</a></td></tr>
 <tr class="separator:ae67526847f7c96b8149d56bbd5442e5d inherit pro_attribs_classCellO2"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -446,8 +462,8 @@ Protected Attributes</h2></td></tr>
 <tr class="separator:a145e116f3155250a5ccc2d88d226666f inherit pro_attribs_classCell"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a15173b02171ed3ff8a43522c20065c44 inherit pro_attribs_classCell"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classElement.html">Element</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCell.html#a15173b02171ed3ff8a43522c20065c44">m_element</a></td></tr>
 <tr class="separator:a15173b02171ed3ff8a43522c20065c44 inherit pro_attribs_classCell"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9efa0a2e295a1bfece1679f969418a9f inherit pro_attribs_classCell"><td class="memItemLeft" align="right" valign="top">std::vector&lt; <a class="el" href="classCellInterface.html">CellInterface</a> * &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCell.html#a9efa0a2e295a1bfece1679f969418a9f">m_boundaries</a></td></tr>
-<tr class="separator:a9efa0a2e295a1bfece1679f969418a9f inherit pro_attribs_classCell"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a560b2b9417e4f74c82e87f82a3a2aa61 inherit pro_attribs_classCell"><td class="memItemLeft" align="right" valign="top">std::vector&lt; <a class="el" href="classCellInterface.html">CellInterface</a> * &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCell.html#a560b2b9417e4f74c82e87f82a3a2aa61">m_cellInterfaces</a></td></tr>
+<tr class="separator:a560b2b9417e4f74c82e87f82a3a2aa61 inherit pro_attribs_classCell"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:afe3988d20347f4a52c08acaa1bcaab07 inherit pro_attribs_classCell"><td class="memItemLeft" align="right" valign="top">std::vector&lt; <a class="el" href="classQuantitiesAddPhys.html">QuantitiesAddPhys</a> * &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCell.html#afe3988d20347f4a52c08acaa1bcaab07">m_vecQuantitiesAddPhys</a></td></tr>
 <tr class="separator:afe3988d20347f4a52c08acaa1bcaab07 inherit pro_attribs_classCell"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1c8dcea4cbfda9f781ff25a4ee8c0ab1 inherit pro_attribs_classCell"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classModel.html">Model</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCell.html#a1c8dcea4cbfda9f781ff25a4ee8c0ab1">m_model</a></td></tr>
@@ -462,8 +478,8 @@ Protected Attributes</h2></td></tr>
 <tr class="separator:a4f935afdd6776000d834c2e672d08266 inherit pro_attribs_classCell"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0cf6ab137a7b90437e412b8a9329dbaf inherit pro_attribs_classCell"><td class="memItemLeft" align="right" valign="top">std::vector&lt; <a class="el" href="classCell.html">Cell</a> * &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCell.html#a0cf6ab137a7b90437e412b8a9329dbaf">m_childrenCells</a></td></tr>
 <tr class="separator:a0cf6ab137a7b90437e412b8a9329dbaf inherit pro_attribs_classCell"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:acf5d2d9c736f98123285d9fdbf7f36b8 inherit pro_attribs_classCell"><td class="memItemLeft" align="right" valign="top">std::vector&lt; <a class="el" href="classCellInterface.html">CellInterface</a> * &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCell.html#acf5d2d9c736f98123285d9fdbf7f36b8">m_childrenInternalBoundaries</a></td></tr>
-<tr class="separator:acf5d2d9c736f98123285d9fdbf7f36b8 inherit pro_attribs_classCell"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a768ab28bb2612a5e69e328b6352d79b2 inherit pro_attribs_classCell"><td class="memItemLeft" align="right" valign="top">std::vector&lt; <a class="el" href="classCellInterface.html">CellInterface</a> * &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCell.html#a768ab28bb2612a5e69e328b6352d79b2">m_childrenInternalCellInterfaces</a></td></tr>
+<tr class="separator:a768ab28bb2612a5e69e328b6352d79b2 inherit pro_attribs_classCell"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a class="anchor" id="a1d73bf6004db392185ea99c416b01bd7"></a>
@@ -580,7 +596,7 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="aa76aca508eeab6d3524655eabb163ed6"></a>
+<a class="anchor" id="a8903e84d43d7b769f86338c38d7a31f1"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="mlabels">
@@ -603,7 +619,7 @@ Protected Attributes</h2></td></tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype"><a class="el" href="classCellInterface.html">CellInterface</a> &amp;&#160;</td>
-          <td class="paramname"><em>bordRef</em>, </td>
+          <td class="paramname"><em>cellInterfaceRef</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -666,11 +682,11 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Reimplemented from <a class="el" href="classCellO2.html#a584b9425ff5936b3233c0a6965639800">CellO2</a>.</p>
+<p>Reimplemented from <a class="el" href="classCellO2.html#a2e11040885e5fdfe46b74135caa89800">CellO2</a>.</p>
 
 </div>
 </div>
-<a class="anchor" id="adbc840e9a24c21bdc136dce13bb8fc39"></a>
+<a class="anchor" id="a9d6ac7132fae991357ce46e23407a736"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="mlabels">
@@ -681,18 +697,8 @@ Protected Attributes</h2></td></tr>
           <td class="memname">void CellO2Ghost::createChildCell </td>
           <td>(</td>
           <td class="paramtype">const int &amp;&#160;</td>
-          <td class="paramname"><em>num</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
+          <td class="paramname"><em>lvl</em></td><td>)</td>
           <td></td>
-          <td class="paramtype">const int &amp;&#160;</td>
-          <td class="paramname"><em>lvl</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
         </tr>
       </table>
   </td>
@@ -703,11 +709,11 @@ Protected Attributes</h2></td></tr>
 </div><div class="memdoc">
 <p>Creer une cell enfant (non initializee) </p>
 
-<p>Reimplemented from <a class="el" href="classCellO2.html#a7144adf0dd3d42ee39185494f7eed90a">CellO2</a>.</p>
+<p>Reimplemented from <a class="el" href="classCellO2.html#ab3f6b291c280f92ccd378ddf67c453e6">CellO2</a>.</p>
 
 </div>
 </div>
-<a class="anchor" id="adf2628b83557bf082a23ae4bcfb3aa71"></a>
+<a class="anchor" id="a4b890d13fcd389e8d8aa08e4e522e622"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="mlabels">
@@ -716,43 +722,6 @@ Protected Attributes</h2></td></tr>
       <table class="memname">
         <tr>
           <td class="memname">void CellO2Ghost::getBufferSlopes </td>
-          <td>(</td>
-          <td class="paramtype">double *&#160;</td>
-          <td class="paramname"><em>buffer</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">int &amp;&#160;</td>
-          <td class="paramname"><em>counter</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-<p>Do nothing for first order cells </p>
-
-<p>Reimplemented from <a class="el" href="classCell.html#aaa6068c61e72b202cbeca1a2641fa119">Cell</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="a88a1be0c5901a69d21ba9481cb12c839"></a>
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">void CellO2Ghost::getBufferSlopesAMR </td>
           <td>(</td>
           <td class="paramtype">double *&#160;</td>
           <td class="paramname"><em>buffer</em>, </td>
@@ -781,13 +750,13 @@ Protected Attributes</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Do nothing for first order cells </p>
+<p>Does nothing for first order cells </p>
 
-<p>Reimplemented from <a class="el" href="classCell.html#ae459ea8b28dfd5f4bc74bf58cf4844cf">Cell</a>.</p>
+<p>Reimplemented from <a class="el" href="classCell.html#a1e76107e28e9374a63482407922c71ab">Cell</a>.</p>
 
 </div>
 </div>
-<a class="anchor" id="ad1ecb8cc6bf66e152895982bb66c099f"></a>
+<a class="anchor" id="affc4612afa3b8dc53ab1eabfb3c06d13"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="mlabels">
@@ -795,7 +764,33 @@ Protected Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">virtual bool CellO2Ghost::isCellO2Ghost </td>
+          <td class="memname">int CellO2Ghost::getRankOfNeighborCPU </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Does nothing for non-ghost O2 cells </p>
+
+<p>Reimplemented from <a class="el" href="classCell.html#a99de546dc1587e9ef750eabb590523cb">Cell</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="aabd63e4c12fb06b5ee94c2616bd7e24f"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual bool CellO2Ghost::isCellGhost </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td> const</td>
@@ -807,13 +802,65 @@ Protected Attributes</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+<p>Does nothing for first order cells </p>
 
-<p>Reimplemented from <a class="el" href="classCell.html#a002ef953b10745dd341636a103a05d6d">Cell</a>.</p>
+<p>Reimplemented from <a class="el" href="classCell.html#a5ab5fbae2e45195420a2f2099b279774">Cell</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="ae29578865cdefd87ca421bee14500151"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void CellO2Ghost::pushBackSlope </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Reimplemented from <a class="el" href="classCell.html#ad19bffac7eeab34be02b960c7986887d">Cell</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="aff14a4716f29648787d4751026a94cab"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void CellO2Ghost::setRankOfNeighborCPU </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>rank</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Reimplemented from <a class="el" href="classCell.html#a01e23b22590ab03eea47e479094a51b6">Cell</a>.</p>
 
 </div>
 </div>
 <h2 class="groupheader">Member Data Documentation</h2>
-<a class="anchor" id="ade03acab058ca3f5a39bd604b65277db"></a>
+<a class="anchor" id="a179ec2e3e4a3c1abf23e0ab91976fa79"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="mlabels">
@@ -821,7 +868,7 @@ Protected Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">double CellO2Ghost::m_alphaCellAfterOppositeSide</td>
+          <td class="memname">std::vector&lt;double&gt; CellO2Ghost::m_alphaCellAfterOppositeSide</td>
         </tr>
       </table>
   </td>
@@ -830,11 +877,11 @@ Protected Attributes</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>pour stocker la fraction volumique apres la cellule fantome </p>
+<p>To store volume fractions after ghost cell </p>
 
 </div>
 </div>
-<a class="anchor" id="a0e8ba358dddfbbe393753a2d1d98f705"></a>
+<a class="anchor" id="ab427c74df7cea58ef8a82edfcf50ec87"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="mlabels">
@@ -842,7 +889,7 @@ Protected Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classMixture.html">Mixture</a>* CellO2Ghost::m_mixtureSlopesGhost</td>
+          <td class="memname">std::vector&lt;int&gt; CellO2Ghost::m_indexCellInterface</td>
         </tr>
       </table>
   </td>
@@ -851,11 +898,11 @@ Protected Attributes</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>pour stocker les slopes de mixture </p>
+<p>Index of the corresponding cell interface for following vectors </p>
 
 </div>
 </div>
-<a class="anchor" id="a6f95c531cd59244e12cbfb6469582c5b"></a>
+<a class="anchor" id="a07c9096239fa35b4f4eecdc4c7250fd2"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="mlabels">
@@ -863,7 +910,7 @@ Protected Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classPhase.html">Phase</a>** CellO2Ghost::m_vecPhasesSlopesGhost</td>
+          <td class="memname">std::vector&lt;<a class="el" href="classMixture.html">Mixture</a> *&gt; CellO2Ghost::m_mixtureSlopesGhost</td>
         </tr>
       </table>
   </td>
@@ -872,11 +919,11 @@ Protected Attributes</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>pour stocker les slopes des phases </p>
+<p>To store slopes of mixtures </p>
 
 </div>
 </div>
-<a class="anchor" id="afee1cabd948bec8da023c3330dc9402e"></a>
+<a class="anchor" id="a564161b3d7db344f73abaa0898c2b0d8"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="mlabels">
@@ -884,7 +931,7 @@ Protected Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">double* CellO2Ghost::m_vecTransportsSlopesGhost</td>
+          <td class="memname">int CellO2Ghost::m_rankOfNeighborCPU</td>
         </tr>
       </table>
   </td>
@@ -893,13 +940,55 @@ Protected Attributes</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>pour stocker les slopes des transports </p>
+<p>Rank of the neighbor CPU corresponding to this ghost cell </p>
+
+</div>
+</div>
+<a class="anchor" id="ad88658103e2382e075bc2010c149c5fa"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::vector&lt;<a class="el" href="classPhase.html">Phase</a> **&gt; CellO2Ghost::m_vecPhasesSlopesGhost</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>To store slopes of phases </p>
+
+</div>
+</div>
+<a class="anchor" id="a7063dcf4b30a5ca60446b0a6865672e5"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::vector&lt;double *&gt; CellO2Ghost::m_vecTransportsSlopesGhost</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>To store slopes of transports </p>
 
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following files:<ul>
-<li>/home/travis/build/code-mphi/ECOGEN/src/Ordre2/<a class="el" href="CellO2Ghost_8h_source.html">CellO2Ghost.h</a></li>
-<li>/home/travis/build/code-mphi/ECOGEN/src/Ordre2/<a class="el" href="CellO2Ghost_8cpp.html">CellO2Ghost.cpp</a></li>
+<li>/home/travis/build/code-mphi/ECOGEN/src/Order2/<a class="el" href="CellO2Ghost_8h_source.html">CellO2Ghost.h</a></li>
+<li>/home/travis/build/code-mphi/ECOGEN/src/Order2/<a class="el" href="CellO2Ghost_8cpp.html">CellO2Ghost.cpp</a></li>
 </ul>
 </div><!-- contents -->
 </div><!-- doc-content -->
@@ -907,7 +996,7 @@ Protected Attributes</h2></td></tr>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="classCellO2Ghost.html">CellO2Ghost</a></li>
-    <li class="footer">Generated on Wed Apr 29 2020 10:31:12 for ECOGEN by
+    <li class="footer">Generated on Mon May 11 2020 16:03:19 for ECOGEN by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.11 </li>
   </ul>

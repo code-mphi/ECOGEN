@@ -110,6 +110,7 @@ $(document).ready(function(){initNavTree('classSource.html','');});
 <div class="header">
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pro-attribs">Protected Attributes</a> &#124;
 <a href="classSource-members.html">List of all members</a>  </div>
   <div class="headertitle">
 <div class="title">Source Class Reference</div>  </div>
@@ -127,15 +128,36 @@ $(document).ready(function(){initNavTree('classSource.html','');});
 Public Member Functions</h2></td></tr>
 <tr class="memitem:a660c0a4b8b8f8402568bef86f2cb2fbb"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSource.html#a660c0a4b8b8f8402568bef86f2cb2fbb">Source</a> ()</td></tr>
 <tr class="separator:a660c0a4b8b8f8402568bef86f2cb2fbb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a209991899a7d82118da654b61416ef0a"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSource.html#a209991899a7d82118da654b61416ef0a">Source</a> (int order)</td></tr>
+<tr class="separator:a209991899a7d82118da654b61416ef0a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac5104a4d66641ae529419b47da4a1473"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSource.html#ac5104a4d66641ae529419b47da4a1473">~Source</a> ()</td></tr>
 <tr class="separator:ac5104a4d66641ae529419b47da4a1473"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a32cf671cb9b3f32ba2f69b781e86a3a2"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSource.html#a32cf671cb9b3f32ba2f69b781e86a3a2">integrateSourceTerms</a> (<a class="el" href="classCell.html">Cell</a> *cell, const int &amp;numberPhases, const double &amp;dt)</td></tr>
-<tr class="memdesc:a32cf671cb9b3f32ba2f69b781e86a3a2"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classSource.html" title="Abstract class for source terms. ">Source</a> terms integration on conservative quantities.  <a href="#a32cf671cb9b3f32ba2f69b781e86a3a2">More...</a><br /></td></tr>
-<tr class="separator:a32cf671cb9b3f32ba2f69b781e86a3a2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9e398537f46f77d13b8bb4c5072d3ce3"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSource.html#a9e398537f46f77d13b8bb4c5072d3ce3">prepSourceTerms</a> (<a class="el" href="classCell.html">Cell</a> *cell, const int &amp;numberPhases, const double &amp;dt, const int i=0)</td></tr>
+<tr class="memdesc:a9e398537f46f77d13b8bb4c5072d3ce3"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classSource.html" title="Abstract class for source terms. ">Source</a> terms preparation for integration.  <a href="#a9e398537f46f77d13b8bb4c5072d3ce3">More...</a><br /></td></tr>
+<tr class="separator:a9e398537f46f77d13b8bb4c5072d3ce3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a87caea31bcde39a08cc476ea0ef6e792"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSource.html#a87caea31bcde39a08cc476ea0ef6e792">integrateSourceTerms</a> (<a class="el" href="classCell.html">Cell</a> *cell, const int &amp;numberPhases, const double &amp;dt)</td></tr>
+<tr class="memdesc:a87caea31bcde39a08cc476ea0ef6e792"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classSource.html" title="Abstract class for source terms. ">Source</a> terms integration on conservative quantities.  <a href="#a87caea31bcde39a08cc476ea0ef6e792">More...</a><br /></td></tr>
+<tr class="separator:a87caea31bcde39a08cc476ea0ef6e792"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab54dcc1d2e807917dd5791d5485fc596"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSource.html#ab54dcc1d2e807917dd5791d5485fc596">integrationEuler</a> (<a class="el" href="classCell.html">Cell</a> *cell, const int &amp;numberPhases, const double &amp;dt)</td></tr>
+<tr class="memdesc:ab54dcc1d2e807917dd5791d5485fc596"><td class="mdescLeft">&#160;</td><td class="mdescRight">Euler explicite integration (order 1)  <a href="#ab54dcc1d2e807917dd5791d5485fc596">More...</a><br /></td></tr>
+<tr class="separator:ab54dcc1d2e807917dd5791d5485fc596"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a897aa4c420e5fd61ff692e405b45be5f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSource.html#a897aa4c420e5fd61ff692e405b45be5f">integrationRK2</a> (<a class="el" href="classCell.html">Cell</a> *cell, const int &amp;numberPhases, const double &amp;dt)</td></tr>
+<tr class="memdesc:a897aa4c420e5fd61ff692e405b45be5f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Runge-Kutta integration (order 2)  <a href="#a897aa4c420e5fd61ff692e405b45be5f">More...</a><br /></td></tr>
+<tr class="separator:a897aa4c420e5fd61ff692e405b45be5f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a911163cdfa7f32b697c02533f56ab838"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSource.html#a911163cdfa7f32b697c02533f56ab838">integrationRK4</a> (<a class="el" href="classCell.html">Cell</a> *cell, const int &amp;numberPhases, const double &amp;dt)</td></tr>
+<tr class="memdesc:a911163cdfa7f32b697c02533f56ab838"><td class="mdescLeft">&#160;</td><td class="mdescRight">Runge-Kutta integration (order 4)  <a href="#a911163cdfa7f32b697c02533f56ab838">More...</a><br /></td></tr>
+<tr class="separator:a911163cdfa7f32b697c02533f56ab838"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a664c2810f78acadcef35f1786b24c126"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSource.html#a664c2810f78acadcef35f1786b24c126">sourceEvolution</a> (const double &amp;time)</td></tr>
+<tr class="memdesc:a664c2810f78acadcef35f1786b24c126"><td class="mdescLeft">&#160;</td><td class="mdescRight">Allows to modifiy the source term along time.  <a href="#a664c2810f78acadcef35f1786b24c126">More...</a><br /></td></tr>
 <tr class="separator:a664c2810f78acadcef35f1786b24c126"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aabed587afb2c56487f9602c111e2cc9b"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classCoord.html">Coord</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSource.html#aabed587afb2c56487f9602c111e2cc9b">computeAbsVelocity</a> (const <a class="el" href="classCoord.html">Coord</a> relVelocity, const <a class="el" href="classCoord.html">Coord</a> position)</td></tr>
+<tr class="memdesc:aabed587afb2c56487f9602c111e2cc9b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute the absolute velocity in the fixed coordinate system.  <a href="#aabed587afb2c56487f9602c111e2cc9b">More...</a><br /></td></tr>
 <tr class="separator:aabed587afb2c56487f9602c111e2cc9b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-attribs"></a>
+Protected Attributes</h2></td></tr>
+<tr class="memitem:aa379ff4f29c02d0cd6f02258e34e4ace"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSource.html#aa379ff4f29c02d0cd6f02258e34e4ace">m_order</a></td></tr>
+<tr class="separator:aa379ff4f29c02d0cd6f02258e34e4ace"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Abstract class for source terms. </p>
@@ -148,6 +170,22 @@ Public Member Functions</h2></td></tr>
           <td class="memname">Source::Source </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a209991899a7d82118da654b61416ef0a"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">Source::Source </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>order</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -211,19 +249,25 @@ Public Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
+<p>Compute the absolute velocity in the fixed coordinate system. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">relVelocity</td><td>velocity in the moving coordinate system </td></tr>
+    <tr><td class="paramname">position</td><td>position vector in the fixed coordinate system </td></tr>
+  </table>
+  </dd>
+</dl>
+
 <p>Reimplemented in <a class="el" href="classSourceMRF.html#a60961f793abe984375c82a30bcc8d916">SourceMRF</a>.</p>
 
 </div>
 </div>
-<a class="anchor" id="a32cf671cb9b3f32ba2f69b781e86a3a2"></a>
+<a class="anchor" id="a87caea31bcde39a08cc476ea0ef6e792"></a>
 <div class="memitem">
 <div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">virtual void Source::integrateSourceTerms </td>
+          <td class="memname">void Source::integrateSourceTerms </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="classCell.html">Cell</a> *&#160;</td>
           <td class="paramname"><em>cell</em>, </td>
@@ -246,14 +290,51 @@ Public Member Functions</h2></td></tr>
           <td></td><td></td>
         </tr>
       </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
-  </tr>
-</table>
 </div><div class="memdoc">
 
 <p><a class="el" href="classSource.html" title="Abstract class for source terms. ">Source</a> terms integration on conservative quantities. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">cell</td><td>cell for source term integration </td></tr>
+    <tr><td class="paramname">numberPhases</td><td>number of phases </td></tr>
+    <tr><td class="paramname">dt</td><td>integration time step </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a class="anchor" id="ab54dcc1d2e807917dd5791d5485fc596"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Source::integrationEuler </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classCell.html">Cell</a> *&#160;</td>
+          <td class="paramname"><em>cell</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const int &amp;&#160;</td>
+          <td class="paramname"><em>numberPhases</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const double &amp;&#160;</td>
+          <td class="paramname"><em>dt</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Euler explicite integration (order 1) </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">cell</td><td>cell for source term integration </td></tr>
@@ -263,7 +344,147 @@ Public Member Functions</h2></td></tr>
   </dd>
 </dl>
 
-<p>Reimplemented in <a class="el" href="classSourceGravity.html#aa52868855cb06132dc98d04fa27d43eb">SourceGravity</a>, <a class="el" href="classSourceHeating.html#a150dbb9152850b26b5f9fe1140a95185">SourceHeating</a>, and <a class="el" href="classSourceMRF.html#a309e60dc63bd0b1bcca2d96838772882">SourceMRF</a>.</p>
+</div>
+</div>
+<a class="anchor" id="a897aa4c420e5fd61ff692e405b45be5f"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Source::integrationRK2 </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classCell.html">Cell</a> *&#160;</td>
+          <td class="paramname"><em>cell</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const int &amp;&#160;</td>
+          <td class="paramname"><em>numberPhases</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const double &amp;&#160;</td>
+          <td class="paramname"><em>dt</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Runge-Kutta integration (order 2) </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">cell</td><td>cell for source term integration </td></tr>
+    <tr><td class="paramname">numberPhases</td><td>number of phases </td></tr>
+    <tr><td class="paramname">dt</td><td>explicit integration time step </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a class="anchor" id="a911163cdfa7f32b697c02533f56ab838"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Source::integrationRK4 </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classCell.html">Cell</a> *&#160;</td>
+          <td class="paramname"><em>cell</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const int &amp;&#160;</td>
+          <td class="paramname"><em>numberPhases</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const double &amp;&#160;</td>
+          <td class="paramname"><em>dt</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Runge-Kutta integration (order 4) </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">cell</td><td>cell for source term integration </td></tr>
+    <tr><td class="paramname">numberPhases</td><td>number of phases </td></tr>
+    <tr><td class="paramname">dt</td><td>explicit integration time step </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a class="anchor" id="a9e398537f46f77d13b8bb4c5072d3ce3"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual void Source::prepSourceTerms </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classCell.html">Cell</a> *&#160;</td>
+          <td class="paramname"><em>cell</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const int &amp;&#160;</td>
+          <td class="paramname"><em>numberPhases</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const double &amp;&#160;</td>
+          <td class="paramname"><em>dt</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const int&#160;</td>
+          <td class="paramname"><em>i</em> = <code>0</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p><a class="el" href="classSource.html" title="Abstract class for source terms. ">Source</a> terms preparation for integration. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">cell</td><td>cell for source term integration </td></tr>
+    <tr><td class="paramname">numberPhases</td><td>number of phases </td></tr>
+    <tr><td class="paramname">dt</td><td>integration time step </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>Reimplemented in <a class="el" href="classSourceGravity.html#a4dc69c23df70612b0d38a64421df8a23">SourceGravity</a>, <a class="el" href="classSourceHeating.html#ae482e6ac4043772eeacab1a80668863a">SourceHeating</a>, and <a class="el" href="classSourceMRF.html#a5324bb9323b43dcd588ccb016e282b5f">SourceMRF</a>.</p>
 
 </div>
 </div>
@@ -289,7 +510,36 @@ Public Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
+<p>Allows to modifiy the source term along time. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">time</td><td>physical time of the computation </td></tr>
+  </table>
+  </dd>
+</dl>
+
 <p>Reimplemented in <a class="el" href="classSourceMRF.html#acb83073c39ea1f62a86191ca17d3b093">SourceMRF</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Member Data Documentation</h2>
+<a class="anchor" id="aa379ff4f29c02d0cd6f02258e34e4ace"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">int Source::m_order</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
 
 </div>
 </div>
@@ -303,7 +553,7 @@ Public Member Functions</h2></td></tr>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="classSource.html">Source</a></li>
-    <li class="footer">Generated on Wed Apr 29 2020 10:31:12 for ECOGEN by
+    <li class="footer">Generated on Mon May 11 2020 16:03:19 for ECOGEN by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.11 </li>
   </ul>

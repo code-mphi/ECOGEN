@@ -128,7 +128,7 @@ $(document).ready(function(){initNavTree('classPhaseKapila.html','');});
 Public Member Functions</h2></td></tr>
 <tr class="memitem:acf8df473ae2827c305d4045496e6abe7"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPhaseKapila.html#acf8df473ae2827c305d4045496e6abe7">PhaseKapila</a> ()</td></tr>
 <tr class="separator:acf8df473ae2827c305d4045496e6abe7"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a880afb57d9ff283ef8f77a8fc6cbb488"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPhaseKapila.html#a880afb57d9ff283ef8f77a8fc6cbb488">PhaseKapila</a> (<a class="el" href="classtinyxml2_1_1XMLElement.html">tinyxml2::XMLElement</a> *material, <a class="el" href="classEos.html">Eos</a> *eos, const double &amp;pressure, std::string fileName)</td></tr>
+<tr class="memitem:a880afb57d9ff283ef8f77a8fc6cbb488"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPhaseKapila.html#a880afb57d9ff283ef8f77a8fc6cbb488">PhaseKapila</a> (<a class="el" href="classtinyxml2_1_1XMLElement.html">tinyxml2::XMLElement</a> *material, <a class="el" href="classEos.html">Eos</a> *eos, const double &amp;<a class="el" href="Cell_8h.html#acca207de98b59d1c41e3975008706d61a8e7f8389b914e827058d694b31468b3a">pressure</a>, std::string fileName)</td></tr>
 <tr class="memdesc:a880afb57d9ff283ef8f77a8fc6cbb488"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classPhase.html" title="Abstract class for a phase. ">Phase</a> constructor from a XML format reading.  <a href="#a880afb57d9ff283ef8f77a8fc6cbb488">More...</a><br /></td></tr>
 <tr class="separator:a880afb57d9ff283ef8f77a8fc6cbb488"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a786a92dc6db3173de10b22d69fc88805"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPhaseKapila.html#a786a92dc6db3173de10b22d69fc88805">~PhaseKapila</a> ()</td></tr>
@@ -142,7 +142,7 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:ab7c145b44d88bddc1db908db4300dbcb"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPhaseKapila.html#ab7c145b44d88bddc1db908db4300dbcb">extendedCalculusPhase</a> (const <a class="el" href="classCoord.html">Coord</a> &amp;velocity)</td></tr>
 <tr class="memdesc:ab7c145b44d88bddc1db908db4300dbcb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute extra thermodynammical variables.  <a href="#ab7c145b44d88bddc1db908db4300dbcb">More...</a><br /></td></tr>
 <tr class="separator:ab7c145b44d88bddc1db908db4300dbcb"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2c44d1c475daa8f6f852f5fae80f80b4"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPhaseKapila.html#a2c44d1c475daa8f6f852f5fae80f80b4">computeMassFraction</a> (const double &amp;density)</td></tr>
+<tr class="memitem:a2c44d1c475daa8f6f852f5fae80f80b4"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPhaseKapila.html#a2c44d1c475daa8f6f852f5fae80f80b4">computeMassFraction</a> (const double &amp;<a class="el" href="Cell_8h.html#acca207de98b59d1c41e3975008706d61a22ebfd60994ac594c00a8e367372d092">density</a>)</td></tr>
 <tr class="separator:a2c44d1c475daa8f6f852f5fae80f80b4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a60667382f94a9326b1f7a7288ed544b0"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPhaseKapila.html#a60667382f94a9326b1f7a7288ed544b0">localProjection</a> (const <a class="el" href="classCoord.html">Coord</a> &amp;normal, const <a class="el" href="classCoord.html">Coord</a> &amp;tangent, const <a class="el" href="classCoord.html">Coord</a> &amp;binormal)</td></tr>
 <tr class="separator:a60667382f94a9326b1f7a7288ed544b0"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -156,8 +156,8 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:abc1ed3eb948cfd3c077e9f60b00c9840"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6c177ec46de8131bab50bf92a235c1e0"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classCoord.html">Coord</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPhaseKapila.html#a6c177ec46de8131bab50bf92a235c1e0">returnVector</a> (const int &amp;numVar) const </td></tr>
 <tr class="separator:a6c177ec46de8131bab50bf92a235c1e0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:abf5ba44ef2a7bc8dba22f8c995f2fd1d"><td class="memItemLeft" align="right" valign="top">virtual std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPhaseKapila.html#abf5ba44ef2a7bc8dba22f8c995f2fd1d">returnNameScalar</a> (const int &amp;numVar) const </td></tr>
-<tr class="separator:abf5ba44ef2a7bc8dba22f8c995f2fd1d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a642ecc0e2d783aa69e6fe3e7bafceb4e"><td class="memItemLeft" align="right" valign="top">virtual std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPhaseKapila.html#a642ecc0e2d783aa69e6fe3e7bafceb4e">returnNameScalar</a> (const int &amp;numVar) const </td></tr>
+<tr class="separator:a642ecc0e2d783aa69e6fe3e7bafceb4e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4d6c0390977c8ba75483e0e9fe93c235"><td class="memItemLeft" align="right" valign="top">virtual std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPhaseKapila.html#a4d6c0390977c8ba75483e0e9fe93c235">returnNameVector</a> (const int &amp;numVar) const </td></tr>
 <tr class="separator:a4d6c0390977c8ba75483e0e9fe93c235"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2d590496d1a73ce2ed1b1dcce9f5a077"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPhaseKapila.html#a2d590496d1a73ce2ed1b1dcce9f5a077">setScalar</a> (const int &amp;numVar, const double &amp;value)</td></tr>
@@ -166,8 +166,12 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a94ed477a844f7ea933f98c6a01297b38"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac6a27e28401813dd25e68c1d4ebda3d0"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPhaseKapila.html#ac6a27e28401813dd25e68c1d4ebda3d0">fillBuffer</a> (double *buffer, int &amp;counter) const </td></tr>
 <tr class="separator:ac6a27e28401813dd25e68c1d4ebda3d0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac2eca7bf5b10dcab17f9c217361a8f10"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPhaseKapila.html#ac2eca7bf5b10dcab17f9c217361a8f10">fillBuffer</a> (std::vector&lt; double &gt; &amp;dataToSend) const </td></tr>
+<tr class="separator:ac2eca7bf5b10dcab17f9c217361a8f10"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0f10cf4295f4a3f7db31b24e4510fceb"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPhaseKapila.html#a0f10cf4295f4a3f7db31b24e4510fceb">getBuffer</a> (double *buffer, int &amp;counter, <a class="el" href="classEos.html">Eos</a> **eos)</td></tr>
 <tr class="separator:a0f10cf4295f4a3f7db31b24e4510fceb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9da1c37ae77dfad9e73289bc19e290cb"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPhaseKapila.html#a9da1c37ae77dfad9e73289bc19e290cb">getBuffer</a> (std::vector&lt; double &gt; &amp;dataToReceive, int &amp;counter, <a class="el" href="classEos.html">Eos</a> **eos)</td></tr>
+<tr class="separator:a9da1c37ae77dfad9e73289bc19e290cb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa3e51a84798a3afa034293b6209d63ab"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPhaseKapila.html#aa3e51a84798a3afa034293b6209d63ab">computeSlopesPhase</a> (const <a class="el" href="classPhase.html">Phase</a> &amp;sLeft, const <a class="el" href="classPhase.html">Phase</a> &amp;sRight, const double &amp;distance)</td></tr>
 <tr class="separator:aa3e51a84798a3afa034293b6209d63ab"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7be7ac7b117405fc17eda4f4f95f3db9"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPhaseKapila.html#a7be7ac7b117405fc17eda4f4f95f3db9">setToZero</a> ()</td></tr>
@@ -186,35 +190,37 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a6582946dd43825f6f34fd7b9eadd537b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac47f919e2dd5f1e0a6b3f4e41da78828"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPhaseKapila.html#ac47f919e2dd5f1e0a6b3f4e41da78828">verifyAndCorrectPhase</a> ()</td></tr>
 <tr class="separator:ac47f919e2dd5f1e0a6b3f4e41da78828"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aaa171c8f2cf8de142542f92339947e01"><td class="memItemLeft" align="right" valign="top">virtual double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPhaseKapila.html#aaa171c8f2cf8de142542f92339947e01">getAlpha</a> () const </td></tr>
-<tr class="separator:aaa171c8f2cf8de142542f92339947e01"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:adf52c1ec1bf921d09eca6927ac109c1e"><td class="memItemLeft" align="right" valign="top">virtual double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPhaseKapila.html#adf52c1ec1bf921d09eca6927ac109c1e">getDensity</a> () const </td></tr>
-<tr class="separator:adf52c1ec1bf921d09eca6927ac109c1e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a83054df03da3cb75c25f9829f867b8eb"><td class="memItemLeft" align="right" valign="top">virtual double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPhaseKapila.html#a83054df03da3cb75c25f9829f867b8eb">getPressure</a> () const </td></tr>
-<tr class="separator:a83054df03da3cb75c25f9829f867b8eb"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4f4e285963fb41270ed294636da2204e"><td class="memItemLeft" align="right" valign="top">virtual double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPhaseKapila.html#a4f4e285963fb41270ed294636da2204e">getY</a> () const </td></tr>
-<tr class="separator:a4f4e285963fb41270ed294636da2204e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af0e64b78b8552404ef0c19b1af63a9d8"><td class="memItemLeft" align="right" valign="top">virtual double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPhaseKapila.html#af0e64b78b8552404ef0c19b1af63a9d8">getU</a> () const </td></tr>
-<tr class="separator:af0e64b78b8552404ef0c19b1af63a9d8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4fb707524c33c75f3bee0f3305c629d3"><td class="memItemLeft" align="right" valign="top">virtual double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPhaseKapila.html#a4fb707524c33c75f3bee0f3305c629d3">getV</a> () const </td></tr>
-<tr class="separator:a4fb707524c33c75f3bee0f3305c629d3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad0bdcda847d6940f9446c3df34ca190f"><td class="memItemLeft" align="right" valign="top">virtual double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPhaseKapila.html#ad0bdcda847d6940f9446c3df34ca190f">getW</a> () const </td></tr>
-<tr class="separator:ad0bdcda847d6940f9446c3df34ca190f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a025a14e8bb0265c38886a2f0baf09594"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classCoord.html">Coord</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPhaseKapila.html#a025a14e8bb0265c38886a2f0baf09594">getVelocity</a> () const </td></tr>
-<tr class="separator:a025a14e8bb0265c38886a2f0baf09594"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8e3a36fda49db9fb2233d3561b030745"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classEos.html">Eos</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPhaseKapila.html#a8e3a36fda49db9fb2233d3561b030745">getEos</a> () const </td></tr>
-<tr class="separator:a8e3a36fda49db9fb2233d3561b030745"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a68c293aeff79032e0a409f5b6ce7c567"><td class="memItemLeft" align="right" valign="top">virtual double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPhaseKapila.html#a68c293aeff79032e0a409f5b6ce7c567">getEnergy</a> () const </td></tr>
-<tr class="separator:a68c293aeff79032e0a409f5b6ce7c567"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a03580289d73f0d9dd05f2341afadb6e4"><td class="memItemLeft" align="right" valign="top">virtual double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPhaseKapila.html#a03580289d73f0d9dd05f2341afadb6e4">getSoundSpeed</a> () const </td></tr>
-<tr class="separator:a03580289d73f0d9dd05f2341afadb6e4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5c6a0fd5c58326345794e24330dd6ee9"><td class="memItemLeft" align="right" valign="top">virtual double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPhaseKapila.html#a5c6a0fd5c58326345794e24330dd6ee9">getTemperature</a> () const </td></tr>
-<tr class="separator:a5c6a0fd5c58326345794e24330dd6ee9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a363a8e9f70706177d7bc4fde97b9886c"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPhaseKapila.html#a363a8e9f70706177d7bc4fde97b9886c">setAlpha</a> (double alpha)</td></tr>
+<tr class="memitem:aaf7e2d27be8b9a15cf3857f6c58ecd46"><td class="memItemLeft" align="right" valign="top">virtual const double &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPhaseKapila.html#aaf7e2d27be8b9a15cf3857f6c58ecd46">getAlpha</a> () const </td></tr>
+<tr class="separator:aaf7e2d27be8b9a15cf3857f6c58ecd46"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2aad8d41553d12088fbc4396295d6090"><td class="memItemLeft" align="right" valign="top">virtual const double &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPhaseKapila.html#a2aad8d41553d12088fbc4396295d6090">getDensity</a> () const </td></tr>
+<tr class="separator:a2aad8d41553d12088fbc4396295d6090"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8c04e58602c696287b68747b6bec34d3"><td class="memItemLeft" align="right" valign="top">virtual const double &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPhaseKapila.html#a8c04e58602c696287b68747b6bec34d3">getPressure</a> () const </td></tr>
+<tr class="separator:a8c04e58602c696287b68747b6bec34d3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adb65de30e8781e9de49ba7b4f4677d7d"><td class="memItemLeft" align="right" valign="top">virtual const double &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPhaseKapila.html#adb65de30e8781e9de49ba7b4f4677d7d">getY</a> () const </td></tr>
+<tr class="separator:adb65de30e8781e9de49ba7b4f4677d7d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab5c06f7775260377803f204c0286585f"><td class="memItemLeft" align="right" valign="top">virtual const double &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPhaseKapila.html#ab5c06f7775260377803f204c0286585f">getU</a> () const </td></tr>
+<tr class="separator:ab5c06f7775260377803f204c0286585f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a860247e489c71d0e3825cec4bfd29dc4"><td class="memItemLeft" align="right" valign="top">virtual const double &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPhaseKapila.html#a860247e489c71d0e3825cec4bfd29dc4">getV</a> () const </td></tr>
+<tr class="separator:a860247e489c71d0e3825cec4bfd29dc4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a89bbd793a4c512589f235955e8272916"><td class="memItemLeft" align="right" valign="top">virtual const double &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPhaseKapila.html#a89bbd793a4c512589f235955e8272916">getW</a> () const </td></tr>
+<tr class="separator:a89bbd793a4c512589f235955e8272916"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad43f6565ec583c3240ef9cdc1d2d6c07"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classCoord.html">Coord</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPhaseKapila.html#ad43f6565ec583c3240ef9cdc1d2d6c07">getVelocity</a> ()</td></tr>
+<tr class="separator:ad43f6565ec583c3240ef9cdc1d2d6c07"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9e146d133cfbab394ea20e234be924a1"><td class="memItemLeft" align="right" valign="top">virtual const <a class="el" href="classCoord.html">Coord</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPhaseKapila.html#a9e146d133cfbab394ea20e234be924a1">getVelocity</a> () const </td></tr>
+<tr class="separator:a9e146d133cfbab394ea20e234be924a1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa7e159007604a3dfcf48cadd507cfcf3"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classEos.html">Eos</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPhaseKapila.html#aa7e159007604a3dfcf48cadd507cfcf3">getEos</a> () const </td></tr>
+<tr class="separator:aa7e159007604a3dfcf48cadd507cfcf3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af1ae0c0215f42a8461079233e02ca2c2"><td class="memItemLeft" align="right" valign="top">virtual const double &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPhaseKapila.html#af1ae0c0215f42a8461079233e02ca2c2">getEnergy</a> () const </td></tr>
+<tr class="separator:af1ae0c0215f42a8461079233e02ca2c2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a553e48914322c78d9bd35f39e5243d87"><td class="memItemLeft" align="right" valign="top">virtual const double &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPhaseKapila.html#a553e48914322c78d9bd35f39e5243d87">getSoundSpeed</a> () const </td></tr>
+<tr class="separator:a553e48914322c78d9bd35f39e5243d87"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3ec9c573cf8f72c0f38b0af24fdb3da4"><td class="memItemLeft" align="right" valign="top">virtual double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPhaseKapila.html#a3ec9c573cf8f72c0f38b0af24fdb3da4">getTemperature</a> () const </td></tr>
+<tr class="separator:a3ec9c573cf8f72c0f38b0af24fdb3da4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a363a8e9f70706177d7bc4fde97b9886c"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPhaseKapila.html#a363a8e9f70706177d7bc4fde97b9886c">setAlpha</a> (double <a class="el" href="Cell_8h.html#acca207de98b59d1c41e3975008706d61a2cf6ecbb4e108d5977ec6bcc0750f86a">alpha</a>)</td></tr>
 <tr class="separator:a363a8e9f70706177d7bc4fde97b9886c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:afc3819929998a9eb843afb38333ce904"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPhaseKapila.html#afc3819929998a9eb843afb38333ce904">setDensity</a> (double density)</td></tr>
+<tr class="memitem:afc3819929998a9eb843afb38333ce904"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPhaseKapila.html#afc3819929998a9eb843afb38333ce904">setDensity</a> (double <a class="el" href="Cell_8h.html#acca207de98b59d1c41e3975008706d61a22ebfd60994ac594c00a8e367372d092">density</a>)</td></tr>
 <tr class="separator:afc3819929998a9eb843afb38333ce904"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac8d3419d5dbca4121113cad76d9c0ff4"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPhaseKapila.html#ac8d3419d5dbca4121113cad76d9c0ff4">setPressure</a> (double pressure)</td></tr>
+<tr class="memitem:ac8d3419d5dbca4121113cad76d9c0ff4"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPhaseKapila.html#ac8d3419d5dbca4121113cad76d9c0ff4">setPressure</a> (double <a class="el" href="Cell_8h.html#acca207de98b59d1c41e3975008706d61a8e7f8389b914e827058d694b31468b3a">pressure</a>)</td></tr>
 <tr class="separator:ac8d3419d5dbca4121113cad76d9c0ff4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a69692ca1010b17fa564cdbc3a1586cb2"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPhaseKapila.html#a69692ca1010b17fa564cdbc3a1586cb2">setVelocity</a> (const double &amp;u, const double &amp;v, const double &amp;w)</td></tr>
 <tr class="separator:a69692ca1010b17fa564cdbc3a1586cb2"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -248,11 +254,11 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a1499773722b90aad0e2e4182566423ba inherit pub_methods_classPhase"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a99afaf416629434cd97d91f131467ecd inherit pub_methods_classPhase"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPhase.html#a99afaf416629434cd97d91f131467ecd">setVector</a> (const int &amp;numVar, const <a class="el" href="classCoord.html">Coord</a> &amp;value)</td></tr>
 <tr class="separator:a99afaf416629434cd97d91f131467ecd inherit pub_methods_classPhase"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a166f7571fca9927265913c1284e049fc inherit pub_methods_classPhase"><td class="memItemLeft" align="right" valign="top">virtual double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPhase.html#a166f7571fca9927265913c1284e049fc">getTotalEnergy</a> () const </td></tr>
-<tr class="separator:a166f7571fca9927265913c1284e049fc inherit pub_methods_classPhase"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa912b673fe7a6e1bdf4fce3b7798f13c inherit pub_methods_classPhase"><td class="memItemLeft" align="right" valign="top">virtual const double &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPhase.html#aa912b673fe7a6e1bdf4fce3b7798f13c">getTotalEnergy</a> () const </td></tr>
+<tr class="separator:aa912b673fe7a6e1bdf4fce3b7798f13c inherit pub_methods_classPhase"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a50eb21dd867ecbb874c4a6f8cacb4fa5 inherit pub_methods_classPhase"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPhase.html#a50eb21dd867ecbb874c4a6f8cacb4fa5">setTotalEnergy</a> (double totalEnergy)</td></tr>
 <tr class="separator:a50eb21dd867ecbb874c4a6f8cacb4fa5 inherit pub_methods_classPhase"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa1b68854de67247d82e067ba20e27fa2 inherit pub_methods_classPhase"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPhase.html#aa1b68854de67247d82e067ba20e27fa2">setTemperature</a> (double temperature)</td></tr>
+<tr class="memitem:aa1b68854de67247d82e067ba20e27fa2 inherit pub_methods_classPhase"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPhase.html#aa1b68854de67247d82e067ba20e27fa2">setTemperature</a> (double <a class="el" href="Cell_8h.html#acca207de98b59d1c41e3975008706d61a9922a43d37bee3212593f77ce4ec82f3">temperature</a>)</td></tr>
 <tr class="separator:aa1b68854de67247d82e067ba20e27fa2 inherit pub_methods_classPhase"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-attribs"></a>
@@ -664,6 +670,32 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
+<a class="anchor" id="ac2eca7bf5b10dcab17f9c217361a8f10"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void PhaseKapila::fillBuffer </td>
+          <td>(</td>
+          <td class="paramtype">std::vector&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>dataToSend</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Reimplemented from <a class="el" href="classPhase.html#aea9965506452531d68ca7d791b473400">Phase</a>.</p>
+
+</div>
+</div>
 <a class="anchor" id="a2f239575b5d9e77783f46bcf4c719f82"></a>
 <div class="memitem">
 <div class="memproto">
@@ -700,7 +732,7 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="aaa171c8f2cf8de142542f92339947e01"></a>
+<a class="anchor" id="aaf7e2d27be8b9a15cf3857f6c58ecd46"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="mlabels">
@@ -708,7 +740,7 @@ Protected Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">double PhaseKapila::getAlpha </td>
+          <td class="memname">virtual const double&amp; PhaseKapila::getAlpha </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td> const</td>
@@ -716,12 +748,12 @@ Protected Attributes</h2></td></tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
-<p>Reimplemented from <a class="el" href="classPhase.html#ab1531e683fc306d5abc4ec7d79d5f2eb">Phase</a>.</p>
+<p>Reimplemented from <a class="el" href="classPhase.html#a50782fc2c49f580ddf0ec95689d253b1">Phase</a>.</p>
 
 </div>
 </div>
@@ -767,6 +799,48 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
+<a class="anchor" id="a9da1c37ae77dfad9e73289bc19e290cb"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void PhaseKapila::getBuffer </td>
+          <td>(</td>
+          <td class="paramtype">std::vector&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>dataToReceive</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int &amp;&#160;</td>
+          <td class="paramname"><em>counter</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classEos.html">Eos</a> **&#160;</td>
+          <td class="paramname"><em>eos</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Reimplemented from <a class="el" href="classPhase.html#a743005388bcf0d605c6fbe710761a3b1">Phase</a>.</p>
+
+</div>
+</div>
 <a class="anchor" id="a67a2be1a66be6062077bb150b29b361b"></a>
 <div class="memitem">
 <div class="memproto">
@@ -803,7 +877,7 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="adf52c1ec1bf921d09eca6927ac109c1e"></a>
+<a class="anchor" id="a2aad8d41553d12088fbc4396295d6090"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="mlabels">
@@ -811,7 +885,7 @@ Protected Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">double PhaseKapila::getDensity </td>
+          <td class="memname">virtual const double&amp; PhaseKapila::getDensity </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td> const</td>
@@ -819,16 +893,16 @@ Protected Attributes</h2></td></tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
-<p>Reimplemented from <a class="el" href="classPhase.html#a590ce5d328473fc651d3416de760ae77">Phase</a>.</p>
+<p>Reimplemented from <a class="el" href="classPhase.html#a835bccf1d55cc046b6569658e51c8a48">Phase</a>.</p>
 
 </div>
 </div>
-<a class="anchor" id="a68c293aeff79032e0a409f5b6ce7c567"></a>
+<a class="anchor" id="af1ae0c0215f42a8461079233e02ca2c2"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="mlabels">
@@ -836,7 +910,7 @@ Protected Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">double PhaseKapila::getEnergy </td>
+          <td class="memname">virtual const double&amp; PhaseKapila::getEnergy </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td> const</td>
@@ -844,16 +918,16 @@ Protected Attributes</h2></td></tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
-<p>Reimplemented from <a class="el" href="classPhase.html#ab950e84e48d8d5618eb0560de8c3465b">Phase</a>.</p>
+<p>Reimplemented from <a class="el" href="classPhase.html#a10a0cb583de726f0457e59727d8144e7">Phase</a>.</p>
 
 </div>
 </div>
-<a class="anchor" id="a8e3a36fda49db9fb2233d3561b030745"></a>
+<a class="anchor" id="aa7e159007604a3dfcf48cadd507cfcf3"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="mlabels">
@@ -861,7 +935,7 @@ Protected Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classEos.html">Eos</a> * PhaseKapila::getEos </td>
+          <td class="memname">virtual <a class="el" href="classEos.html">Eos</a>* PhaseKapila::getEos </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td> const</td>
@@ -869,7 +943,7 @@ Protected Attributes</h2></td></tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -928,7 +1002,7 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="a83054df03da3cb75c25f9829f867b8eb"></a>
+<a class="anchor" id="a8c04e58602c696287b68747b6bec34d3"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="mlabels">
@@ -936,7 +1010,7 @@ Protected Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">double PhaseKapila::getPressure </td>
+          <td class="memname">virtual const double&amp; PhaseKapila::getPressure </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td> const</td>
@@ -944,16 +1018,16 @@ Protected Attributes</h2></td></tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
-<p>Reimplemented from <a class="el" href="classPhase.html#ad44d5e3a33ff548b9f75dce26a237793">Phase</a>.</p>
+<p>Reimplemented from <a class="el" href="classPhase.html#aa92a686a9f26dbdefb075f28c8476397">Phase</a>.</p>
 
 </div>
 </div>
-<a class="anchor" id="a03580289d73f0d9dd05f2341afadb6e4"></a>
+<a class="anchor" id="a553e48914322c78d9bd35f39e5243d87"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="mlabels">
@@ -961,7 +1035,7 @@ Protected Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">double PhaseKapila::getSoundSpeed </td>
+          <td class="memname">virtual const double&amp; PhaseKapila::getSoundSpeed </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td> const</td>
@@ -969,16 +1043,16 @@ Protected Attributes</h2></td></tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
-<p>Reimplemented from <a class="el" href="classPhase.html#aa70cfa2e53fb6f7d4616d8bbe645af29">Phase</a>.</p>
+<p>Reimplemented from <a class="el" href="classPhase.html#a388ad8bc5bdee154d1e5ed860544a369">Phase</a>.</p>
 
 </div>
 </div>
-<a class="anchor" id="a5c6a0fd5c58326345794e24330dd6ee9"></a>
+<a class="anchor" id="a3ec9c573cf8f72c0f38b0af24fdb3da4"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="mlabels">
@@ -986,7 +1060,7 @@ Protected Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">double PhaseKapila::getTemperature </td>
+          <td class="memname">virtual double PhaseKapila::getTemperature </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td> const</td>
@@ -994,7 +1068,7 @@ Protected Attributes</h2></td></tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -1003,7 +1077,7 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="af0e64b78b8552404ef0c19b1af63a9d8"></a>
+<a class="anchor" id="ab5c06f7775260377803f204c0286585f"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="mlabels">
@@ -1011,7 +1085,7 @@ Protected Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">virtual double PhaseKapila::getU </td>
+          <td class="memname">virtual const double&amp; PhaseKapila::getU </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td> const</td>
@@ -1024,11 +1098,11 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Reimplemented from <a class="el" href="classPhase.html#ab499ece61e0a2237a323e6d54a9753c0">Phase</a>.</p>
+<p>Reimplemented from <a class="el" href="classPhase.html#a82a5962e0e7e6939fb4d71c8376a5faf">Phase</a>.</p>
 
 </div>
 </div>
-<a class="anchor" id="a4fb707524c33c75f3bee0f3305c629d3"></a>
+<a class="anchor" id="a860247e489c71d0e3825cec4bfd29dc4"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="mlabels">
@@ -1036,7 +1110,7 @@ Protected Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">virtual double PhaseKapila::getV </td>
+          <td class="memname">virtual const double&amp; PhaseKapila::getV </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td> const</td>
@@ -1049,11 +1123,11 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Reimplemented from <a class="el" href="classPhase.html#ac5fe4a08768e3639c3ce439ef4c4b7cf">Phase</a>.</p>
+<p>Reimplemented from <a class="el" href="classPhase.html#a5a40bea9e7b130e6eedd69dadbf1ecf3">Phase</a>.</p>
 
 </div>
 </div>
-<a class="anchor" id="a025a14e8bb0265c38886a2f0baf09594"></a>
+<a class="anchor" id="ad43f6565ec583c3240ef9cdc1d2d6c07"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="mlabels">
@@ -1061,7 +1135,32 @@ Protected Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">virtual <a class="el" href="classCoord.html">Coord</a> PhaseKapila::getVelocity </td>
+          <td class="memname">virtual <a class="el" href="classCoord.html">Coord</a>&amp; PhaseKapila::getVelocity </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Reimplemented from <a class="el" href="classPhase.html#a2e0a221c04c536f1e7ec79ac8c04eee1">Phase</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a9e146d133cfbab394ea20e234be924a1"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual const <a class="el" href="classCoord.html">Coord</a>&amp; PhaseKapila::getVelocity </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td> const</td>
@@ -1074,11 +1173,11 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Reimplemented from <a class="el" href="classPhase.html#aa645c1ad5b3ff4098dda7614773c8f4e">Phase</a>.</p>
+<p>Reimplemented from <a class="el" href="classPhase.html#a8e8f28c76288507865794e0824479747">Phase</a>.</p>
 
 </div>
 </div>
-<a class="anchor" id="ad0bdcda847d6940f9446c3df34ca190f"></a>
+<a class="anchor" id="a89bbd793a4c512589f235955e8272916"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="mlabels">
@@ -1086,7 +1185,7 @@ Protected Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">virtual double PhaseKapila::getW </td>
+          <td class="memname">virtual const double&amp; PhaseKapila::getW </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td> const</td>
@@ -1099,11 +1198,11 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Reimplemented from <a class="el" href="classPhase.html#ad86415d697321f3e0c949da09aa3cecc">Phase</a>.</p>
+<p>Reimplemented from <a class="el" href="classPhase.html#afd8541363b8565fcd5a2ab9a68d34b81">Phase</a>.</p>
 
 </div>
 </div>
-<a class="anchor" id="a4f4e285963fb41270ed294636da2204e"></a>
+<a class="anchor" id="adb65de30e8781e9de49ba7b4f4677d7d"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="mlabels">
@@ -1111,7 +1210,7 @@ Protected Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">double PhaseKapila::getY </td>
+          <td class="memname">virtual const double&amp; PhaseKapila::getY </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td> const</td>
@@ -1119,12 +1218,12 @@ Protected Attributes</h2></td></tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
-<p>Reimplemented from <a class="el" href="classPhase.html#afcebbda8e3d13fc975c01a0c50c01ea7">Phase</a>.</p>
+<p>Reimplemented from <a class="el" href="classPhase.html#a6bc9e77e2b06502fb0d47320256ace9c">Phase</a>.</p>
 
 </div>
 </div>
@@ -1304,7 +1403,7 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="abf5ba44ef2a7bc8dba22f8c995f2fd1d"></a>
+<a class="anchor" id="a642ecc0e2d783aa69e6fe3e7bafceb4e"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="mlabels">
@@ -1312,7 +1411,7 @@ Protected Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">string PhaseKapila::returnNameScalar </td>
+          <td class="memname">std::string PhaseKapila::returnNameScalar </td>
           <td>(</td>
           <td class="paramtype">const int &amp;&#160;</td>
           <td class="paramname"><em>numVar</em></td><td>)</td>
@@ -2051,7 +2150,7 @@ Protected Attributes</h2></td></tr>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="classPhaseKapila.html">PhaseKapila</a></li>
-    <li class="footer">Generated on Wed Apr 29 2020 10:31:12 for ECOGEN by
+    <li class="footer">Generated on Mon May 11 2020 16:03:19 for ECOGEN by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.11 </li>
   </ul>

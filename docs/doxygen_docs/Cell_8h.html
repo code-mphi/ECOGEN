@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.11"/>
-<title>ECOGEN: /home/travis/build/code-mphi/ECOGEN/src/Cell.h File Reference</title>
+<title>ECOGEN: /home/travis/build/code-mphi/ECOGEN/src/Order1/Cell.h File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -107,24 +107,25 @@ $(document).ready(function(){initNavTree('Cell_8h.html','');});
 
 <div class="header">
   <div class="summary">
-<a href="#nested-classes">Classes</a>  </div>
+<a href="#nested-classes">Classes</a> &#124;
+<a href="#enum-members">Enumerations</a>  </div>
   <div class="headertitle">
 <div class="title">Cell.h File Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
 <div class="textblock"><code>#include &lt;vector&gt;</code><br />
 <code>#include &lt;fstream&gt;</code><br />
-<code>#include &quot;<a class="el" href="Phase_8h_source.html">Models/Phase.h</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="Coord_8h_source.html">Maths/Coord.h</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="Transport_8h_source.html">Transport/Transport.h</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="Mixture_8h_source.html">Models/Mixture.h</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="QuantitiesAddPhys_8h_source.html">AdditionalPhysics/QuantitiesAddPhys.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="Phase_8h_source.html">../Models/Phase.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="Coord_8h_source.html">../Maths/Coord.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="Transport_8h_source.html">../Transport/Transport.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="Mixture_8h_source.html">../Models/Mixture.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="QuantitiesAddPhys_8h_source.html">../AdditionalPhysics/QuantitiesAddPhys.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="CellInterface_8h_source.html">CellInterface.h</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="Model_8h_source.html">Models/Model.h</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="Flux_8h_source.html">Models/Flux.h</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="Element_8h_source.html">Meshes/Element.h</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="GeometricalDomain_8h_source.html">Geometries/GeometricalDomain.h</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="Symmetry_8h_source.html">Symmetries/Symmetry.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="Model_8h_source.html">../Models/Model.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="Flux_8h_source.html">../Models/Flux.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="Element_8h_source.html">../Meshes/Element.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="GeometricalDomain_8h_source.html">../Geometries/GeometricalDomain.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="Symmetry_8h_source.html">../Symmetries/Symmetry.h</a>&quot;</code><br />
 </div>
 <p><a href="Cell_8h_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
@@ -133,18 +134,72 @@ Classes</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCell.html">Cell</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Base class for a mesh cell.  <a href="classCell.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="enum-members"></a>
+Enumerations</h2></td></tr>
+<tr class="memitem:acca207de98b59d1c41e3975008706d61"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="Cell_8h.html#acca207de98b59d1c41e3975008706d61">Variable</a> { <br />
+&#160;&#160;<a class="el" href="Cell_8h.html#acca207de98b59d1c41e3975008706d61af659d189d4d478b389ad7b385262732a">transport</a>, 
+<a class="el" href="Cell_8h.html#acca207de98b59d1c41e3975008706d61a8e7f8389b914e827058d694b31468b3a">pressure</a>, 
+<a class="el" href="Cell_8h.html#acca207de98b59d1c41e3975008706d61a22ebfd60994ac594c00a8e367372d092">density</a>, 
+<a class="el" href="Cell_8h.html#acca207de98b59d1c41e3975008706d61a2cf6ecbb4e108d5977ec6bcc0750f86a">alpha</a>, 
+<br />
+&#160;&#160;<a class="el" href="Cell_8h.html#acca207de98b59d1c41e3975008706d61afe9672b956fd93df436140296f0f6884">velocityMag</a>, 
+<a class="el" href="Cell_8h.html#acca207de98b59d1c41e3975008706d61a1f52f320e6d1ac8ac8cad43ddd768d57">velocityU</a>, 
+<a class="el" href="Cell_8h.html#acca207de98b59d1c41e3975008706d61a7070271fa8a317598e2705927ed5cb8f">velocityV</a>, 
+<a class="el" href="Cell_8h.html#acca207de98b59d1c41e3975008706d61aa7805ed0a0aaf6f5ec59e04563ecc52e">velocityW</a>, 
+<br />
+&#160;&#160;<a class="el" href="Cell_8h.html#acca207de98b59d1c41e3975008706d61a9922a43d37bee3212593f77ce4ec82f3">temperature</a>, 
+<a class="el" href="Cell_8h.html#acca207de98b59d1c41e3975008706d61a20446aa548ede84c8005c3d211a8da23">QPA</a>
+<br />
+ }</td></tr>
+<tr class="separator:acca207de98b59d1c41e3975008706d61"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><dl class="section author"><dt>Author</dt><dd>F. Petitpas, K. Schmidmayer, S. Le Martelot </dd></dl>
-<dl class="section version"><dt>Version</dt><dd>1.0 </dd></dl>
-<dl class="section date"><dt>Date</dt><dd>July 30 2018 </dd></dl>
-</div></div><!-- contents -->
+<div class="textblock"><dl class="section author"><dt>Author</dt><dd>F. Petitpas, K. Schmidmayer, S. Le Martelot, B. Dorschner </dd></dl>
+<dl class="section version"><dt>Version</dt><dd>1.1 </dd></dl>
+<dl class="section date"><dt>Date</dt><dd>June 5 2019 </dd></dl>
+</div><h2 class="groupheader">Enumeration Type Documentation</h2>
+<a class="anchor" id="acca207de98b59d1c41e3975008706d61"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">enum <a class="el" href="Cell_8h.html#acca207de98b59d1c41e3975008706d61">Variable</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<table class="fieldtable">
+<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a class="anchor" id="acca207de98b59d1c41e3975008706d61af659d189d4d478b389ad7b385262732a"></a>transport&#160;</td><td class="fielddoc">
+</td></tr>
+<tr><td class="fieldname"><a class="anchor" id="acca207de98b59d1c41e3975008706d61a8e7f8389b914e827058d694b31468b3a"></a>pressure&#160;</td><td class="fielddoc">
+</td></tr>
+<tr><td class="fieldname"><a class="anchor" id="acca207de98b59d1c41e3975008706d61a22ebfd60994ac594c00a8e367372d092"></a>density&#160;</td><td class="fielddoc">
+</td></tr>
+<tr><td class="fieldname"><a class="anchor" id="acca207de98b59d1c41e3975008706d61a2cf6ecbb4e108d5977ec6bcc0750f86a"></a>alpha&#160;</td><td class="fielddoc">
+</td></tr>
+<tr><td class="fieldname"><a class="anchor" id="acca207de98b59d1c41e3975008706d61afe9672b956fd93df436140296f0f6884"></a>velocityMag&#160;</td><td class="fielddoc">
+</td></tr>
+<tr><td class="fieldname"><a class="anchor" id="acca207de98b59d1c41e3975008706d61a1f52f320e6d1ac8ac8cad43ddd768d57"></a>velocityU&#160;</td><td class="fielddoc">
+</td></tr>
+<tr><td class="fieldname"><a class="anchor" id="acca207de98b59d1c41e3975008706d61a7070271fa8a317598e2705927ed5cb8f"></a>velocityV&#160;</td><td class="fielddoc">
+</td></tr>
+<tr><td class="fieldname"><a class="anchor" id="acca207de98b59d1c41e3975008706d61aa7805ed0a0aaf6f5ec59e04563ecc52e"></a>velocityW&#160;</td><td class="fielddoc">
+</td></tr>
+<tr><td class="fieldname"><a class="anchor" id="acca207de98b59d1c41e3975008706d61a9922a43d37bee3212593f77ce4ec82f3"></a>temperature&#160;</td><td class="fielddoc">
+</td></tr>
+<tr><td class="fieldname"><a class="anchor" id="acca207de98b59d1c41e3975008706d61a20446aa548ede84c8005c3d211a8da23"></a>QPA&#160;</td><td class="fielddoc">
+</td></tr>
+</table>
+
+</div>
+</div>
+</div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="Cell_8h.html">Cell.h</a></li>
-    <li class="footer">Generated on Wed Apr 29 2020 10:31:11 for ECOGEN by
+    <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_40c18257395e9708536bbd6afde4da2a.html">Order1</a></li><li class="navelem"><a class="el" href="Cell_8h.html">Cell.h</a></li>
+    <li class="footer">Generated on Mon May 11 2020 16:03:18 for ECOGEN by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.11 </li>
   </ul>

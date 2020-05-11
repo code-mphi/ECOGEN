@@ -17,8 +17,6 @@ var dir_ecd1a0d342fca7f5a033480c812e9ce0 =
     ] ],
     [ "HeaderAddPhys.h", "HeaderAddPhys_8h.html", null ],
     [ "HeaderQuantitiesAddPhys.h", "HeaderQuantitiesAddPhys_8h.html", null ],
-    [ "QuantitiesAddPhys.cpp", "QuantitiesAddPhys_8cpp.html", null ],
-    [ "QuantitiesAddPhys.h", "QuantitiesAddPhys_8h.html", [
-      [ "QuantitiesAddPhys", "classQuantitiesAddPhys.html", "classQuantitiesAddPhys" ]
-    ] ]
+    [ "QuantitiesAddPhys.cpp", "QuantitiesAddPhys_8cpp.html", "QuantitiesAddPhys_8cpp" ],
+    [ "QuantitiesAddPhys.h", "QuantitiesAddPhys_8h.html", "QuantitiesAddPhys_8h" ]
 ];

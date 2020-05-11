@@ -117,6 +117,8 @@ $(document).ready(function(){initNavTree('Tools_8h.html','');});
 <div class="contents">
 <div class="textblock"><code>#include &lt;string&gt;</code><br />
 <code>#include &lt;cmath&gt;</code><br />
+<code>#include &lt;vector&gt;</code><br />
+<code>#include &lt;list&gt;</code><br />
 <code>#include &quot;<a class="el" href="Eos_8h_source.html">Eos/Eos.h</a>&quot;</code><br />
 </div>
 <p><a href="Tools_8h_source.html">Go to the source code of this file.</a></p>
@@ -129,9 +131,9 @@ Classes</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="typedef-members"></a>
 Typedefs</h2></td></tr>
-<tr class="memitem:ad77ac5fac89856b8e54dae631c55e3d0"><td class="memItemLeft" align="right" valign="top">typedef enum <a class="el" href="Tools_8h.html#a8b7a26aefee5b4a459d8a50eb8abf573">Axe</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="Tools_8h.html#ad77ac5fac89856b8e54dae631c55e3d0">Axe</a></td></tr>
-<tr class="memdesc:ad77ac5fac89856b8e54dae631c55e3d0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Enumeration for the axe (X, Y and Z for the axe in the x-, y- and z-direction)  <a href="#ad77ac5fac89856b8e54dae631c55e3d0">More...</a><br /></td></tr>
-<tr class="separator:ad77ac5fac89856b8e54dae631c55e3d0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a41e5fa25d44c4365ed64aaa1366f5c93"><td class="memItemLeft" align="right" valign="top">typedef enum <a class="el" href="Tools_8h.html#ae3996976d8ffb3e58d88f58227473f8e">Axis</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="Tools_8h.html#a41e5fa25d44c4365ed64aaa1366f5c93">Axis</a></td></tr>
+<tr class="memdesc:a41e5fa25d44c4365ed64aaa1366f5c93"><td class="mdescLeft">&#160;</td><td class="mdescRight">Enumeration for the axes (X, Y and Z for the axes in the x-, y- and z-direction)  <a href="#a41e5fa25d44c4365ed64aaa1366f5c93">More...</a><br /></td></tr>
+<tr class="separator:a41e5fa25d44c4365ed64aaa1366f5c93"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9b9ec59f8ec9bc1e34aaf4e4577e7b86"><td class="memItemLeft" align="right" valign="top">typedef enum <a class="el" href="Tools_8h.html#a090fa0180c1c24153a78ae4597899ff7">TypeM</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="Tools_8h.html#a9b9ec59f8ec9bc1e34aaf4e4577e7b86">TypeM</a></td></tr>
 <tr class="memdesc:a9b9ec59f8ec9bc1e34aaf4e4577e7b86"><td class="mdescLeft">&#160;</td><td class="mdescRight">Enumeration for the type of mesh (REC: rectilinear, UNS: unstructured, AMR: adaptative mesh refinement)  <a href="#a9b9ec59f8ec9bc1e34aaf4e4577e7b86">More...</a><br /></td></tr>
 <tr class="separator:a9b9ec59f8ec9bc1e34aaf4e4577e7b86"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -141,15 +143,19 @@ Typedefs</h2></td></tr>
 <tr class="memitem:a25e27c66a09c3175e54fbeec7482c6de"><td class="memItemLeft" align="right" valign="top">typedef enum <a class="el" href="Tools_8h.html#a5946f8fd806542d86ae4019735369057">TypeGO</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="Tools_8h.html#a25e27c66a09c3175e54fbeec7482c6de">TypeGO</a></td></tr>
 <tr class="memdesc:a25e27c66a09c3175e54fbeec7482c6de"><td class="mdescLeft">&#160;</td><td class="mdescRight">Enumeration for the type of geometric object (VERTEX, LINE, PLAN)  <a href="#a25e27c66a09c3175e54fbeec7482c6de">More...</a><br /></td></tr>
 <tr class="separator:a25e27c66a09c3175e54fbeec7482c6de"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6a3bb3ec3ebf7c9a9f95790b2336019c"><td class="memTemplParams" colspan="2">template&lt;class Type &gt; </td></tr>
+<tr class="memitem:a6a3bb3ec3ebf7c9a9f95790b2336019c"><td class="memTemplItemLeft" align="right" valign="top">using&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="Tools_8h.html#a6a3bb3ec3ebf7c9a9f95790b2336019c">TypeMeshContainer</a> = std::vector&lt; Type &gt;</td></tr>
+<tr class="memdesc:a6a3bb3ec3ebf7c9a9f95790b2336019c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Template for the type of the mesh container (std::list for now, but may change to something else if wanted)  <a href="#a6a3bb3ec3ebf7c9a9f95790b2336019c">More...</a><br /></td></tr>
+<tr class="separator:a6a3bb3ec3ebf7c9a9f95790b2336019c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="enum-members"></a>
 Enumerations</h2></td></tr>
-<tr class="memitem:a8b7a26aefee5b4a459d8a50eb8abf573"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="Tools_8h.html#a8b7a26aefee5b4a459d8a50eb8abf573">Axe</a> { <a class="el" href="Tools_8h.html#a8b7a26aefee5b4a459d8a50eb8abf573a58833a3110c570fb05130d40c365d1e4">X</a>, 
-<a class="el" href="Tools_8h.html#a8b7a26aefee5b4a459d8a50eb8abf573a5596231eabd6cf29050967d5ac83ad84">Y</a>, 
-<a class="el" href="Tools_8h.html#a8b7a26aefee5b4a459d8a50eb8abf573aa70478ce277ffc322f8e1e3418e07355">Z</a>
- }<tr class="memdesc:a8b7a26aefee5b4a459d8a50eb8abf573"><td class="mdescLeft">&#160;</td><td class="mdescRight">Enumeration for the axe (X, Y and Z for the axe in the x-, y- and z-direction)  <a href="Tools_8h.html#a8b7a26aefee5b4a459d8a50eb8abf573">More...</a><br /></td></tr>
+<tr class="memitem:ae3996976d8ffb3e58d88f58227473f8e"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="Tools_8h.html#ae3996976d8ffb3e58d88f58227473f8e">Axis</a> { <a class="el" href="Tools_8h.html#ae3996976d8ffb3e58d88f58227473f8ea58833a3110c570fb05130d40c365d1e4">X</a>, 
+<a class="el" href="Tools_8h.html#ae3996976d8ffb3e58d88f58227473f8ea5596231eabd6cf29050967d5ac83ad84">Y</a>, 
+<a class="el" href="Tools_8h.html#ae3996976d8ffb3e58d88f58227473f8eaa70478ce277ffc322f8e1e3418e07355">Z</a>
+ }<tr class="memdesc:ae3996976d8ffb3e58d88f58227473f8e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Enumeration for the axes (X, Y and Z for the axes in the x-, y- and z-direction)  <a href="Tools_8h.html#ae3996976d8ffb3e58d88f58227473f8e">More...</a><br /></td></tr>
 </td></tr>
-<tr class="separator:a8b7a26aefee5b4a459d8a50eb8abf573"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="separator:ae3996976d8ffb3e58d88f58227473f8e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a090fa0180c1c24153a78ae4597899ff7"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="Tools_8h.html#a090fa0180c1c24153a78ae4597899ff7">TypeM</a> { <a class="el" href="Tools_8h.html#a090fa0180c1c24153a78ae4597899ff7ad1e3bf5a209fb7daf98e299d9c995fa5">REC</a>, 
 <a class="el" href="Tools_8h.html#a090fa0180c1c24153a78ae4597899ff7adfabd9829b149f4dca70d33da4d1e7f8">UNS</a>, 
 <a class="el" href="Tools_8h.html#a090fa0180c1c24153a78ae4597899ff7ab7140387917f2389cfb4029ed5a890b6">AMR</a>
@@ -177,20 +183,20 @@ Variables</h2></td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><dl class="section author"><dt>Author</dt><dd>F. Petitpas, K. Schmidmayer </dd></dl>
-<dl class="section version"><dt>Version</dt><dd>1.0 </dd></dl>
-<dl class="section date"><dt>Date</dt><dd>December 6 2018 </dd></dl>
+<dl class="section version"><dt>Version</dt><dd>1.1 </dd></dl>
+<dl class="section date"><dt>Date</dt><dd>June 5 2019 </dd></dl>
 </div><h2 class="groupheader">Typedef Documentation</h2>
-<a class="anchor" id="ad77ac5fac89856b8e54dae631c55e3d0"></a>
+<a class="anchor" id="a41e5fa25d44c4365ed64aaa1366f5c93"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">typedef enum <a class="el" href="Tools_8h.html#a8b7a26aefee5b4a459d8a50eb8abf573">Axe</a>  <a class="el" href="Tools_8h.html#a8b7a26aefee5b4a459d8a50eb8abf573">Axe</a></td>
+          <td class="memname">typedef enum <a class="el" href="Tools_8h.html#ae3996976d8ffb3e58d88f58227473f8e">Axis</a>  <a class="el" href="Tools_8h.html#ae3996976d8ffb3e58d88f58227473f8e">Axis</a></td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p>Enumeration for the axe (X, Y and Z for the axe in the x-, y- and z-direction) </p>
+<p>Enumeration for the axes (X, Y and Z for the axes in the x-, y- and z-direction) </p>
 
 </div>
 </div>
@@ -236,24 +242,40 @@ Variables</h2></td></tr>
 
 </div>
 </div>
-<h2 class="groupheader">Enumeration Type Documentation</h2>
-<a class="anchor" id="a8b7a26aefee5b4a459d8a50eb8abf573"></a>
+<a class="anchor" id="a6a3bb3ec3ebf7c9a9f95790b2336019c"></a>
 <div class="memitem">
 <div class="memproto">
+<div class="memtemplate">
+template&lt;class Type &gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">enum <a class="el" href="Tools_8h.html#a8b7a26aefee5b4a459d8a50eb8abf573">Axe</a></td>
+          <td class="memname">using <a class="el" href="Tools_8h.html#a6a3bb3ec3ebf7c9a9f95790b2336019c">TypeMeshContainer</a> =  std::vector&lt;Type&gt;</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p>Enumeration for the axe (X, Y and Z for the axe in the x-, y- and z-direction) </p>
+<p>Template for the type of the mesh container (std::list for now, but may change to something else if wanted) </p>
+
+</div>
+</div>
+<h2 class="groupheader">Enumeration Type Documentation</h2>
+<a class="anchor" id="ae3996976d8ffb3e58d88f58227473f8e"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">enum <a class="el" href="Tools_8h.html#ae3996976d8ffb3e58d88f58227473f8e">Axis</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Enumeration for the axes (X, Y and Z for the axes in the x-, y- and z-direction) </p>
 <table class="fieldtable">
-<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a class="anchor" id="a8b7a26aefee5b4a459d8a50eb8abf573a58833a3110c570fb05130d40c365d1e4"></a>X&#160;</td><td class="fielddoc">
+<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a class="anchor" id="ae3996976d8ffb3e58d88f58227473f8ea58833a3110c570fb05130d40c365d1e4"></a>X&#160;</td><td class="fielddoc">
 </td></tr>
-<tr><td class="fieldname"><a class="anchor" id="a8b7a26aefee5b4a459d8a50eb8abf573a5596231eabd6cf29050967d5ac83ad84"></a>Y&#160;</td><td class="fielddoc">
+<tr><td class="fieldname"><a class="anchor" id="ae3996976d8ffb3e58d88f58227473f8ea5596231eabd6cf29050967d5ac83ad84"></a>Y&#160;</td><td class="fielddoc">
 </td></tr>
-<tr><td class="fieldname"><a class="anchor" id="a8b7a26aefee5b4a459d8a50eb8abf573aa70478ce277ffc322f8e1e3418e07355"></a>Z&#160;</td><td class="fielddoc">
+<tr><td class="fieldname"><a class="anchor" id="ae3996976d8ffb3e58d88f58227473f8eaa70478ce277ffc322f8e1e3418e07355"></a>Z&#160;</td><td class="fielddoc">
 </td></tr>
 </table>
 
@@ -346,7 +368,7 @@ Variables</h2></td></tr>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="Tools_8h.html">Tools.h</a></li>
-    <li class="footer">Generated on Wed Apr 29 2020 10:31:12 for ECOGEN by
+    <li class="footer">Generated on Mon May 11 2020 16:03:18 for ECOGEN by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.11 </li>
   </ul>

@@ -1,7 +1,9 @@
 var dir_05629216c833aafed9df1e8cf2a80ebb =
 [
-    [ "FluxMultiP.cpp", "FluxMultiP_8cpp.html", "FluxMultiP_8cpp" ],
-    [ "FluxMultiP.h", "FluxMultiP_8h.html", "FluxMultiP_8h" ],
+    [ "FluxMultiP.cpp", "FluxMultiP_8cpp.html", null ],
+    [ "FluxMultiP.h", "FluxMultiP_8h.html", [
+      [ "FluxMultiP", "classFluxMultiP.html", "classFluxMultiP" ]
+    ] ],
     [ "MixMultiP.cpp", "MixMultiP_8cpp.html", null ],
     [ "MixMultiP.h", "MixMultiP_8h.html", [
       [ "MixMultiP", "classMixMultiP.html", "classMixMultiP" ]

@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>InitialConditionsV4.xml &mdash; ECOGEN b1.0 documentation</title>
+  <title>InitialConditionsV4.xml &mdash; ECOGEN 2.0 documentation</title>
   
 
   
@@ -61,7 +61,7 @@
             
             
               <div class="version">
-                1.0
+                2.0
               </div>
             
           
@@ -108,8 +108,9 @@
 </li>
 <li class="toctree-l1"><a class="reference internal" href="Chap4_tutorials_Chapter.html">Tutorials</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Chap5_testCases_Chapter.html">Test cases</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Chap6_developpersGuide_Chapter.html">Developers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Chap6_developersGuide_Chapter.html">Developers</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Chap7_license.html">License</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Chap8_GUI.html">Graphical User Interface</a></li>
 <li class="toctree-l1"><a class="reference internal" href="zBibliography.html">Bibliography</a></li>
 </ul>
 
@@ -192,16 +193,16 @@
 
   <span class="c">&lt;!-- LIST OF BOUNDARY CONDITIONS --&gt;</span>
   <span class="nt">&lt;boundaryConditions&gt;</span>
-    <span class="nt">&lt;boundCond</span> <span class="na">name=</span><span class="s">&quot;CLXm&quot;</span> <span class="na">type=</span><span class="s">&quot;abs&quot;</span> <span class="na">number=</span><span class="s">&quot;1&quot;</span><span class="nt">/&gt;</span>
-    <span class="nt">&lt;boundCond</span> <span class="na">name=</span><span class="s">&quot;CLXp&quot;</span> <span class="na">type=</span><span class="s">&quot;abs&quot;</span> <span class="na">number=</span><span class="s">&quot;2&quot;</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;boundCond</span> <span class="na">name=</span><span class="s">&quot;CLXm&quot;</span> <span class="na">type=</span><span class="s">&quot;nonReflecting&quot;</span> <span class="na">number=</span><span class="s">&quot;1&quot;</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;boundCond</span> <span class="na">name=</span><span class="s">&quot;CLXp&quot;</span> <span class="na">type=</span><span class="s">&quot;nonReflecting&quot;</span> <span class="na">number=</span><span class="s">&quot;2&quot;</span><span class="nt">/&gt;</span>
   <span class="nt">&lt;/boundaryConditions&gt;</span>
 
   <span class="c">&lt;!--  LIST OF STATES  --&gt;</span>
   <span class="nt">&lt;state</span> <span class="na">name=</span><span class="s">&quot;leftChamber&quot;</span><span class="nt">&gt;</span>
-    <span class="nt">&lt;material</span> <span class="na">type=</span><span class="s">&quot;fluide&quot;</span> <span class="na">EOS=</span><span class="s">&quot;IG_air.xml&quot;</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;material</span> <span class="na">type=</span><span class="s">&quot;fluid&quot;</span> <span class="na">EOS=</span><span class="s">&quot;IG_air.xml&quot;</span><span class="nt">&gt;</span>
       <span class="nt">&lt;dataFluid</span> <span class="na">alpha=</span><span class="s">&quot;0.5&quot;</span> <span class="na">density=</span><span class="s">&quot;1.0&quot;</span><span class="nt">/&gt;</span>
     <span class="nt">&lt;/material&gt;</span>
-    <span class="nt">&lt;material</span> <span class="na">type=</span><span class="s">&quot;fluide&quot;</span> <span class="na">EOS=</span><span class="s">&quot;SG_water.xml&quot;</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;material</span> <span class="na">type=</span><span class="s">&quot;fluid&quot;</span> <span class="na">EOS=</span><span class="s">&quot;SG_water.xml&quot;</span><span class="nt">&gt;</span>
       <span class="nt">&lt;dataFluid</span> <span class="na">alpha=</span><span class="s">&quot;0.5&quot;</span> <span class="na">density=</span><span class="s">&quot;1000.0&quot;</span><span class="nt">/&gt;</span>
     <span class="nt">&lt;/material&gt;</span>
     <span class="nt">&lt;mixture&gt;</span>
@@ -215,47 +216,47 @@
 </div>
 </div></blockquote>
 <div class="section" id="physical-domains">
-<h2>Physical domains<a class="headerlink" href="#physical-domains" title="Permalink to this headline">¶</a></h2>
-<p>The <code class="code xml docutils literal notranslate"><span class="name tag"><span class="pre">&lt;physicalDomains&gt;</span></span></code> markup is mandatory. Some different initial conditions can be specified at different zones of the computational domain. This markup must contain as many nodes <code class="code xml docutils literal notranslate"><span class="name tag"><span class="pre">&lt;domain&gt;</span></span></code> as necessary to correctly initialize the computational domain (overlaps are possible). A <code class="code xml docutils literal notranslate"><span class="name tag"><span class="pre">&lt;domain&gt;</span></span></code> node contains the following attributes:</p>
+<span id="sec-input-physicaldomains"></span><h2>Physical domains<a class="headerlink" href="#physical-domains" title="Permalink to this headline">¶</a></h2>
+<p>The <code class="code xml docutils literal notranslate"><span class="name tag"><span class="pre">&lt;physicalDomains&gt;</span></span></code> markup is mandatory. Different initial conditions can be specified for different regions of the computational domain. This markup must contain as many nodes <code class="code xml docutils literal notranslate"><span class="name tag"><span class="pre">&lt;domain&gt;</span></span></code> as necessary to correctly initialize the computational domain (overlaps are possible). A <code class="code xml docutils literal notranslate"><span class="name tag"><span class="pre">&lt;domain&gt;</span></span></code> node contains the following attributes:</p>
 <ul class="simple">
-<li><p><code class="code xml docutils literal notranslate"><span class="pre">name</span></code>: a name for the domain. This name has no influence on the choices remaining in this file.</p></li>
+<li><p><code class="code xml docutils literal notranslate"><span class="pre">name</span></code>: A name for the domain. This name has no influence on the choices remaining in this file.</p></li>
 <li><p><code class="code xml docutils literal notranslate"><span class="pre">state</span></code>: This is the state of the fluid which will be specified with the <code class="code xml docutils literal notranslate"><span class="name tag"><span class="pre">&lt;state&gt;</span></span></code> markup further in the file.</p></li>
-<li><p><code class="code xml docutils literal notranslate"><span class="pre">type</span></code>: to specify the kind of geometrical domain on which the state of the fluid must be attribute: <a class="reference internal" href="#sec-input-entiredomain"><span class="std std-ref">entireDomain</span></a>, <a class="reference internal" href="#sec-input-halfspace"><span class="std std-ref">halfSpace</span></a>, <a class="reference internal" href="#sec-input-disc"><span class="std std-ref">disc</span></a>, <a class="reference internal" href="#sec-input-rectangle"><span class="std std-ref">Rectangle</span></a>, <a class="reference internal" href="#sec-input-pavement"><span class="std std-ref">Pavement</span></a>, <a class="reference internal" href="#sec-input-sphere"><span class="std std-ref">sphere</span></a>.</p></li>
+<li><p><code class="code xml docutils literal notranslate"><span class="pre">type</span></code>: Specify the type of geometric domain to which the state of the fluid will be assigned; <a class="reference internal" href="#sec-input-entiredomain"><span class="std std-ref">EntireDomain</span></a>, <a class="reference internal" href="#sec-input-halfspace"><span class="std std-ref">HalfSpace</span></a>, <a class="reference internal" href="#sec-input-disc"><span class="std std-ref">Disc</span></a>, <a class="reference internal" href="#sec-input-rectangle"><span class="std std-ref">Rectangle</span></a>, <a class="reference internal" href="#sec-input-ellipse"><span class="std std-ref">Ellipse</span></a>, <a class="reference internal" href="#sec-input-cuboid"><span class="std std-ref">Cuboid</span></a>, <a class="reference internal" href="#sec-input-sphere"><span class="std std-ref">Sphere</span></a>, <a class="reference internal" href="#sec-input-ellipsoid"><span class="std std-ref">Ellipsoid</span></a>, <a class="reference internal" href="#sec-input-cylinder"><span class="std std-ref">Cylinder</span></a>.</p></li>
 </ul>
 <p><strong>Important remark:</strong></p>
-<p>The initial conditions are attributed on each domain by using a superposition principle. The order is important: in the case of overlapping, the last attributed data are considered in the flow computation. Hence, it is important to attribute at least the entire domain at the first-place thanks to the value entireDomain.</p>
-<p>According to the geometrical shape, additional information is required thanks to the use of the nodes among the list:</p>
+<p>The initial conditions are attributed on each domain by using an overlapping principle. The order is therefore important: in the case of overlapping, the last attributed data are considered in the flow computation. Hence, it is important to attribute at least the entire domain at the first place thanks to the value <em>entireDomain</em>.</p>
+<p>Depending on the geometrical shape, additional information is required through the use of the following nodes.</p>
 <div class="section" id="entiredomain">
-<span id="sec-input-entiredomain"></span><h3>entireDomain<a class="headerlink" href="#entiredomain" title="Permalink to this headline">¶</a></h3>
+<span id="sec-input-entiredomain"></span><h3>EntireDomain<a class="headerlink" href="#entiredomain" title="Permalink to this headline">¶</a></h3>
 <p>Set the initial condition on the entire domain. No more information required.</p>
 <div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;domain</span> <span class="na">name=</span><span class="s">&quot;base&quot;</span> <span class="na">state=</span><span class="s">&quot;leftChamber&quot;</span> <span class="na">type=</span><span class="s">&quot;entireDomain&quot;</span><span class="nt">/&gt;</span>
 </pre></div>
 </div>
 </div>
 <div class="section" id="halfspace">
-<span id="sec-input-halfspace"></span><h3>halfSpace<a class="headerlink" href="#halfspace" title="Permalink to this headline">¶</a></h3>
-<p>Set the initial condition on a half-domain. The node <code class="code xml docutils literal notranslate"><span class="name tag"><span class="pre">&lt;dataHalfSpace&gt;</span></span></code> must be included with the following attributes:</p>
+<span id="sec-input-halfspace"></span><h3>HalfSpace<a class="headerlink" href="#halfspace" title="Permalink to this headline">¶</a></h3>
+<p>Set the initial condition on a half domain. The node <code class="code xml docutils literal notranslate"><span class="name tag"><span class="pre">&lt;dataHalfSpace&gt;</span></span></code> must be included with the following attributes:</p>
 <ul class="simple">
-<li><p><code class="code xml docutils literal notranslate"><span class="pre">axe</span></code>: can take the value <em>x</em>, <em>y</em> or <em>z</em>.</p></li>
-<li><p><code class="code xml docutils literal notranslate"><span class="pre">origin</span></code>: real number, indicates the location of the edge between the two subdomains on the specified axis.</p></li>
-<li><p><code class="code xml docutils literal notranslate"><span class="pre">direction</span></code>: can take the value positive or negative on the specified axis.</p></li>
+<li><p><code class="code xml docutils literal notranslate"><span class="pre">axis</span></code>: Can take the value <em>x</em>, <em>y</em> or <em>z</em>.</p></li>
+<li><p><code class="code xml docutils literal notranslate"><span class="pre">origin</span></code>: Real number indicating the location of the edge between the two subdomains on the specified axis.</p></li>
+<li><p><code class="code xml docutils literal notranslate"><span class="pre">direction</span></code>: Can take a <em>positive</em> or <em>negative</em> value on the specified axis.</p></li>
 </ul>
 <div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;domain</span> <span class="na">name=</span><span class="s">&quot;HP&quot;</span>  <span class="na">state=</span><span class="s">&quot;rightChamber&quot;</span> <span class="na">type=</span><span class="s">&quot;halfSpace&quot;</span><span class="nt">&gt;</span>
-  <span class="nt">&lt;dataHalfSpace</span> <span class="na">axe=</span><span class="s">&quot;x&quot;</span> <span class="na">origin=</span><span class="s">&quot;0.5&quot;</span> <span class="na">direction=</span><span class="s">&quot;positive&quot;</span><span class="nt">/&gt;</span>
+  <span class="nt">&lt;dataHalfSpace</span> <span class="na">axis=</span><span class="s">&quot;x&quot;</span> <span class="na">origin=</span><span class="s">&quot;0.5&quot;</span> <span class="na">direction=</span><span class="s">&quot;positive&quot;</span><span class="nt">/&gt;</span>
 <span class="nt">&lt;/domain&gt;</span>
 </pre></div>
 </div>
 </div>
 <div class="section" id="disc">
-<span id="sec-input-disc"></span><h3>disc<a class="headerlink" href="#disc" title="Permalink to this headline">¶</a></h3>
-<p>In 2D allows to define a disc on a plane, in 3D a cylinder with an infinite length is defined.  The node <code class="code xml docutils literal notranslate"><span class="name tag"><span class="pre">&lt;dataDisc&gt;</span></span></code> must be added with the following attributes:</p>
+<span id="sec-input-disc"></span><h3>Disc<a class="headerlink" href="#disc" title="Permalink to this headline">¶</a></h3>
+<p>In 2D, a disc is defined on a plane, while in 3D, a cylinder with an infinite length is defined. The node <code class="code xml docutils literal notranslate"><span class="name tag"><span class="pre">&lt;dataDisc&gt;</span></span></code> must be added with the following attributes:</p>
 <ul class="simple">
-<li><p>Attributes <code class="code xml docutils literal notranslate"><span class="pre">axe1</span></code>, <code class="code xml docutils literal notranslate"><span class="pre">axe2</span></code>: The name of 2 axes to define the plane on which the disc is defined. Can take two different values among <em>x</em>, <em>y</em> or <em>z</em>.</p></li>
-<li><p>Attribute <code class="code xml docutils literal notranslate"><span class="pre">radius</span></code>: Real number of the radius disc (unit: m (SI)).</p></li>
-<li><p>Node <code class="code xml docutils literal notranslate"><span class="name tag"><span class="pre">&lt;center&gt;</span></span></code>: requires the attributes <code class="code xml docutils literal notranslate"><span class="pre">x</span></code>, <code class="code xml docutils literal notranslate"><span class="pre">y</span></code> et <code class="code xml docutils literal notranslate"><span class="pre">z</span></code> giving the location of the center of the disc in the plan (axe1, axe2) in real numbers (unit: m (SI)).</p></li>
+<li><p><code class="code xml docutils literal notranslate"><span class="pre">axis1</span></code> and <code class="code xml docutils literal notranslate"><span class="pre">axis2</span></code>: The name of the 2 axes to define the plane on which the disc is defined. Can take two different values among <em>x</em>, <em>y</em> and <em>z</em>.</p></li>
+<li><p><code class="code xml docutils literal notranslate"><span class="pre">radius</span></code>: Real number indicating the disc radius (unit: m (SI)).</p></li>
+<li><p>Node <code class="code xml docutils literal notranslate"><span class="name tag"><span class="pre">&lt;center&gt;</span></span></code>: Require the attributes <code class="code xml docutils literal notranslate"><span class="pre">x</span></code>, <code class="code xml docutils literal notranslate"><span class="pre">y</span></code> and <code class="code xml docutils literal notranslate"><span class="pre">z</span></code>, as real numbers (unit: m (SI)), giving the location of the center of the disc in the plane (axis1, axis2).</p></li>
 </ul>
 <div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;domain</span> <span class="na">name=</span><span class="s">&quot;HP&quot;</span>  <span class="na">state=</span><span class="s">&quot;rightChamber&quot;</span> <span class="na">type=</span><span class="s">&quot;disc&quot;</span><span class="nt">&gt;</span>
-  <span class="nt">&lt;dataDisc</span> <span class="na">axe1=</span><span class="s">&quot;x&quot;</span> <span class="na">axe2=</span><span class="s">&quot;y&quot;</span> <span class="na">radius=</span><span class="s">&quot;0.5&quot;</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;dataDisc</span> <span class="na">axis1=</span><span class="s">&quot;x&quot;</span> <span class="na">axis2=</span><span class="s">&quot;y&quot;</span> <span class="na">radius=</span><span class="s">&quot;0.5&quot;</span><span class="nt">&gt;</span>
     <span class="nt">&lt;center</span> <span class="na">x=</span><span class="s">&quot;0.&quot;</span> <span class="na">y=</span><span class="s">&quot;0.&quot;</span> <span class="na">z=</span><span class="s">&quot;0.&quot;</span><span class="nt">/&gt;</span>
   <span class="nt">&lt;/dataDisc&gt;</span>
 <span class="nt">&lt;/domain&gt;</span>
@@ -264,41 +265,57 @@
 </div>
 <div class="section" id="rectangle">
 <span id="sec-input-rectangle"></span><h3>Rectangle<a class="headerlink" href="#rectangle" title="Permalink to this headline">¶</a></h3>
-<p>In 2D allows to define a rectangle on a plane, in 3D a rectangular beam with an infinite length is defined. The node <code class="code xml docutils literal notranslate"><span class="name tag"><span class="pre">&lt;</span> <span class="pre">dataRectangle</span></span> <span class="name tag"><span class="pre">&gt;</span></span></code> must be added with the following attributes:</p>
+<p>In 2D, a rectangle is defined on a plane, while in 3D, a rectangular beam with an infinite length is defined. The node <code class="code xml docutils literal notranslate"><span class="name tag"><span class="pre">&lt;</span> <span class="pre">dataRectangle</span></span> <span class="name tag"><span class="pre">&gt;</span></span></code> must be added with the following attributes:</p>
 <ul class="simple">
-<li><p>Attributes <code class="code xml docutils literal notranslate"><span class="pre">axe1</span></code>, <code class="code xml docutils literal notranslate"><span class="pre">axe2</span></code>: The name of 2 axes to define the plane on which the disc is defined.  Can take two different values among <em>x</em>, <em>y</em> or <em>z</em>.</p></li>
-<li><p>Attributes <code class="code xml docutils literal notranslate"><span class="pre">lAxe1</span></code>, <code class="code xml docutils literal notranslate"><span class="pre">lAxe2</span></code>: Length of both sides along (axe1,axe2).</p></li>
-<li><p>Node <code class="code xml docutils literal notranslate"><span class="name tag"><span class="pre">&lt;posInferiorVertex&gt;</span></span></code>: equipped with the attributes <code class="code xml docutils literal notranslate"><span class="pre">x</span></code>, <code class="code xml docutils literal notranslate"><span class="pre">y</span></code> and <code class="code xml docutils literal notranslate"><span class="pre">z</span></code>, real numbers giving the location of the inferior corner in the plane (axe1, axe2).</p></li>
+<li><p><code class="code xml docutils literal notranslate"><span class="pre">axis1</span></code> and <code class="code xml docutils literal notranslate"><span class="pre">axis2</span></code>: The name of the 2 axes to define the plane on which the rectangle is defined. Can take two different values among <em>x</em>, <em>y</em> and <em>z</em>.</p></li>
+<li><p><code class="code xml docutils literal notranslate"><span class="pre">lAxis1</span></code> and <code class="code xml docutils literal notranslate"><span class="pre">lAxis2</span></code>: Real number indicating the length of both sides along (axis1, axis2).</p></li>
+<li><p>Node <code class="code xml docutils literal notranslate"><span class="name tag"><span class="pre">&lt;posInferiorVertex&gt;</span></span></code>: Require the attributes <code class="code xml docutils literal notranslate"><span class="pre">x</span></code>, <code class="code xml docutils literal notranslate"><span class="pre">y</span></code> and <code class="code xml docutils literal notranslate"><span class="pre">z</span></code>, as real numbers (unit: m (SI)), giving the location of the inferior corner in the plane (axis1, axis2).</p></li>
 </ul>
 <div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;domain</span> <span class="na">name=</span><span class="s">&quot;HP&quot;</span>  <span class="na">state=</span><span class="s">&quot;rightChamber&quot;</span> <span class="na">type=</span><span class="s">&quot;rectangle&quot;</span><span class="nt">&gt;</span>
-  <span class="nt">&lt;dataRectangle</span> <span class="na">axe1=</span><span class="s">&quot;x&quot;</span> <span class="na">axe2=</span><span class="s">&quot;y&quot;</span> <span class="na">lAxe1=</span><span class="s">&quot;0.3&quot;</span> <span class="na">lAxe2=</span><span class="s">&quot;0.2&quot;</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;dataRectangle</span> <span class="na">axis1=</span><span class="s">&quot;x&quot;</span> <span class="na">axis2=</span><span class="s">&quot;y&quot;</span> <span class="na">lAxis1=</span><span class="s">&quot;0.3&quot;</span> <span class="na">lAxis2=</span><span class="s">&quot;0.2&quot;</span><span class="nt">&gt;</span>
     <span class="nt">&lt;posInferiorVertex</span> <span class="na">x=</span><span class="s">&quot;0.4&quot;</span> <span class="na">y=</span><span class="s">&quot;0.5&quot;</span> <span class="na">z=</span><span class="s">&quot;0.&quot;</span><span class="nt">/&gt;</span>
   <span class="nt">&lt;/dataRectangle&gt;</span>
 <span class="nt">&lt;/domain&gt;</span>
 </pre></div>
 </div>
 </div>
-<div class="section" id="pavement">
-<span id="sec-input-pavement"></span><h3>Pavement<a class="headerlink" href="#pavement" title="Permalink to this headline">¶</a></h3>
-<p>Set the initial condition in a pavement. The additional node <code class="code xml docutils literal notranslate"><span class="name tag"><span class="pre">&lt;dataPavement&gt;</span></span></code> must be added with the attributes:</p>
+<div class="section" id="ellipse">
+<span id="sec-input-ellipse"></span><h3>Ellipse<a class="headerlink" href="#ellipse" title="Permalink to this headline">¶</a></h3>
+<p>In 2D, an ellipse is defined on a plane, while in 3D, an ellipsoid with an infinite length is defined. The node <code class="code xml docutils literal notranslate"><span class="name tag"><span class="pre">&lt;dataEllipse&gt;</span></span></code> must be added with the following attributes:</p>
 <ul class="simple">
-<li><p>Attributes <code class="code xml docutils literal notranslate"><span class="pre">lAxeX</span></code>, <code class="code xml docutils literal notranslate"><span class="pre">lAxeY</span></code>, <code class="code xml docutils literal notranslate"><span class="pre">lAxeZ</span></code>: Real numbers for length of each side of the pavement along axes (unit: m (SI)).</p></li>
-<li><p>Node <code class="code xml docutils literal notranslate"><span class="name tag"><span class="pre">&lt;posInferiorVertex&gt;</span></span></code>: with the des attributes <code class="code xml docutils literal notranslate"><span class="pre">x</span></code>, <code class="code xml docutils literal notranslate"><span class="pre">y</span></code> and <code class="code xml docutils literal notranslate"><span class="pre">z</span></code>, real numbers corresponding to the location of the inferior corner (unit: m (SI)).</p></li>
+<li><p><code class="code xml docutils literal notranslate"><span class="pre">axis1</span></code> and <code class="code xml docutils literal notranslate"><span class="pre">axis2</span></code>: The name of the 2 axes to define the plane on which the ellipse is defined. Can take two different values among <em>x</em>, <em>y</em> and <em>z</em>.</p></li>
+<li><p><code class="code xml docutils literal notranslate"><span class="pre">radius1</span></code> and <code class="code xml docutils literal notranslate"><span class="pre">radius2</span></code>: Real numbers indicating the ellipse radii (unit: m (SI)) along the corresponding axes.</p></li>
+<li><p>Node <code class="code xml docutils literal notranslate"><span class="name tag"><span class="pre">&lt;center&gt;</span></span></code>: Require the attributes <code class="code xml docutils literal notranslate"><span class="pre">x</span></code>, <code class="code xml docutils literal notranslate"><span class="pre">y</span></code> and <code class="code xml docutils literal notranslate"><span class="pre">z</span></code>, as real numbers (unit: m (SI)), giving the location of the center of the ellipse in the plane (axis1, axis2).</p></li>
 </ul>
-<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;domain</span> <span class="na">name=</span><span class="s">&quot;HP&quot;</span>  <span class="na">state=</span><span class="s">&quot;rightChamber&quot;</span> <span class="na">type=</span><span class="s">&quot;pavement&quot;</span><span class="nt">&gt;</span>
-  <span class="nt">&lt;dataPavement</span> <span class="na">lAxeX=</span><span class="s">&quot;1.&quot;</span> <span class="na">lAxeY=</span><span class="s">&quot;1.&quot;</span> <span class="na">lAxeZ=</span><span class="s">&quot;0.5&quot;</span><span class="nt">&gt;</span>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;domain</span> <span class="na">name=</span><span class="s">&quot;HP&quot;</span>  <span class="na">state=</span><span class="s">&quot;rightChamber&quot;</span> <span class="na">type=</span><span class="s">&quot;ellipse&quot;</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;dataEllipse</span> <span class="na">axis1=</span><span class="s">&quot;x&quot;</span> <span class="na">axis2=</span><span class="s">&quot;y&quot;</span> <span class="na">radius1=</span><span class="s">&quot;1.&quot;</span> <span class="na">radius2=</span><span class="s">&quot;1.5&quot;</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;center</span> <span class="na">x=</span><span class="s">&quot;0.&quot;</span> <span class="na">y=</span><span class="s">&quot;0.&quot;</span> <span class="na">z=</span><span class="s">&quot;0.&quot;</span><span class="nt">/&gt;</span>
+  <span class="nt">&lt;/dataEllipse&gt;</span>
+<span class="nt">&lt;/domain&gt;</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="cuboid">
+<span id="sec-input-cuboid"></span><h3>Cuboid<a class="headerlink" href="#cuboid" title="Permalink to this headline">¶</a></h3>
+<p>Set the initial condition of a cuboid. The additional node <code class="code xml docutils literal notranslate"><span class="name tag"><span class="pre">&lt;dataCuboid&gt;</span></span></code> must be added with the attributes:</p>
+<ul class="simple">
+<li><p><code class="code xml docutils literal notranslate"><span class="pre">lAxisX</span></code>, <code class="code xml docutils literal notranslate"><span class="pre">lAxisY</span></code> and <code class="code xml docutils literal notranslate"><span class="pre">lAxisZ</span></code>: Real numbers for length of each side of the cuboid along axes (unit: m (SI)).</p></li>
+<li><p>Node <code class="code xml docutils literal notranslate"><span class="name tag"><span class="pre">&lt;posInferiorVertex&gt;</span></span></code>: With the attributes <code class="code xml docutils literal notranslate"><span class="pre">x</span></code>, <code class="code xml docutils literal notranslate"><span class="pre">y</span></code> and <code class="code xml docutils literal notranslate"><span class="pre">z</span></code>, real numbers corresponding to the location of the inferior corner (unit: m (SI)).</p></li>
+</ul>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;domain</span> <span class="na">name=</span><span class="s">&quot;HP&quot;</span>  <span class="na">state=</span><span class="s">&quot;rightChamber&quot;</span> <span class="na">type=</span><span class="s">&quot;cuboid&quot;</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;dataCuboid</span> <span class="na">lAxisX=</span><span class="s">&quot;1.&quot;</span> <span class="na">lAxisY=</span><span class="s">&quot;1.&quot;</span> <span class="na">lAxisZ=</span><span class="s">&quot;0.5&quot;</span><span class="nt">&gt;</span>
     <span class="nt">&lt;posInferiorVertex</span> <span class="na">x=</span><span class="s">&quot;1.&quot;</span> <span class="na">y=</span><span class="s">&quot;0.5&quot;</span> <span class="na">z=</span><span class="s">&quot;0.5&quot;</span><span class="nt">/&gt;</span>
-  <span class="nt">&lt;/dataPavement&gt;</span>
+  <span class="nt">&lt;/dataCuboid&gt;</span>
 <span class="nt">&lt;/domain&gt;</span>
 </pre></div>
 </div>
 </div>
 <div class="section" id="sphere">
-<span id="sec-input-sphere"></span><h3>sphere<a class="headerlink" href="#sphere" title="Permalink to this headline">¶</a></h3>
-<p>Set the initial condition in a sphere. The additional node <code class="code xml docutils literal notranslate"><span class="name tag"><span class="pre">&lt;dataSphere&gt;</span></span></code> is required with the attributes or nodes:</p>
+<span id="sec-input-sphere"></span><h3>Sphere<a class="headerlink" href="#sphere" title="Permalink to this headline">¶</a></h3>
+<p>Set the initial condition of a sphere. The additional node <code class="code xml docutils literal notranslate"><span class="name tag"><span class="pre">&lt;dataSphere&gt;</span></span></code> is required with the attributes:</p>
 <ul class="simple">
-<li><p>Attribute radius: real number giving the radius of the sphere (unit: m (SI)).</p></li>
-<li><p>Node <code class="code xml docutils literal notranslate"><span class="name tag"><span class="pre">&lt;center&gt;</span></span></code>: with the attributes <code class="code xml docutils literal notranslate"><span class="pre">x</span></code>, <code class="code xml docutils literal notranslate"><span class="pre">y</span></code> et <code class="code xml docutils literal notranslate"><span class="pre">z</span></code> real numbers giving the ocation on the ceter of the sphere (unit: m (SI)).</p></li>
+<li><p><code class="code xml docutils literal notranslate"><span class="pre">radius</span></code>: Real number giving the radius of the sphere (unit: m (SI)).</p></li>
+<li><p>Node <code class="code xml docutils literal notranslate"><span class="name tag"><span class="pre">&lt;center&gt;</span></span></code>: With the attributes <code class="code xml docutils literal notranslate"><span class="pre">x</span></code>, <code class="code xml docutils literal notranslate"><span class="pre">y</span></code> and <code class="code xml docutils literal notranslate"><span class="pre">z</span></code>, real numbers giving the location on the center of the sphere (unit: m (SI)).</p></li>
 </ul>
 <div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;domain</span> <span class="na">name=</span><span class="s">&quot;HP&quot;</span>  <span class="na">state=</span><span class="s">&quot;rightChamber&quot;</span> <span class="na">type=</span><span class="s">&quot;sphere&quot;</span><span class="nt">&gt;</span>
   <span class="nt">&lt;dataSphere</span> <span class="na">radius=</span><span class="s">&quot;0.5&quot;</span><span class="nt">&gt;</span>
@@ -308,52 +325,131 @@
 </pre></div>
 </div>
 </div>
+<div class="section" id="ellipsoid">
+<span id="sec-input-ellipsoid"></span><h3>Ellipsoid<a class="headerlink" href="#ellipsoid" title="Permalink to this headline">¶</a></h3>
+<p>Set the initial condition of an ellipsoid. The additional node <code class="code xml docutils literal notranslate"><span class="name tag"><span class="pre">&lt;dataEllipsoid&gt;</span></span></code> is required with the attributes:</p>
+<ul class="simple">
+<li><p><code class="code xml docutils literal notranslate"><span class="pre">axis1</span></code>, <code class="code xml docutils literal notranslate"><span class="pre">axis2</span></code> and <code class="code xml docutils literal notranslate"><span class="pre">axis3</span></code>: The name and therefore order of the 3 axes on which the ellipsoid is defined. Can take values among <em>x</em>, <em>y</em> and <em>z</em>.</p></li>
+<li><p><code class="code xml docutils literal notranslate"><span class="pre">radius1</span></code>, <code class="code xml docutils literal notranslate"><span class="pre">radius2</span></code> and <code class="code xml docutils literal notranslate"><span class="pre">radius3</span></code>: Real numbers indicating the ellipsoid radii (unit: m (SI)) along the corresponding axes.</p></li>
+<li><p>Node <code class="code xml docutils literal notranslate"><span class="name tag"><span class="pre">&lt;center&gt;</span></span></code>: Require the attributes <code class="code xml docutils literal notranslate"><span class="pre">x</span></code>, <code class="code xml docutils literal notranslate"><span class="pre">y</span></code> and <code class="code xml docutils literal notranslate"><span class="pre">z</span></code>, as real numbers (unit: m (SI)), giving the location of the center of the ellipsoid.</p></li>
+</ul>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;domain</span> <span class="na">name=</span><span class="s">&quot;HP&quot;</span>  <span class="na">state=</span><span class="s">&quot;rightChamber&quot;</span> <span class="na">type=</span><span class="s">&quot;ellipsoid&quot;</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;dataEllipsoid</span> <span class="na">axis1=</span><span class="s">&quot;x&quot;</span> <span class="na">axis2=</span><span class="s">&quot;y&quot;</span> <span class="na">axis3=</span><span class="s">&quot;z&quot;</span> <span class="na">radius1=</span><span class="s">&quot;1.&quot;</span> <span class="na">radius2=</span><span class="s">&quot;1.5&quot;</span> <span class="na">radius3=</span><span class="s">&quot;1.5&quot;</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;center</span> <span class="na">x=</span><span class="s">&quot;0.&quot;</span> <span class="na">y=</span><span class="s">&quot;0.&quot;</span> <span class="na">z=</span><span class="s">&quot;0.&quot;</span><span class="nt">/&gt;</span>
+  <span class="nt">&lt;/dataEllipsoid&gt;</span>
+<span class="nt">&lt;/domain&gt;</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="cylinder">
+<span id="sec-input-cylinder"></span><h3>Cylinder<a class="headerlink" href="#cylinder" title="Permalink to this headline">¶</a></h3>
+<p>Set the initial condition of a cylinder. The additional node <code class="code xml docutils literal notranslate"><span class="name tag"><span class="pre">&lt;dataCylinder&gt;</span></span></code> is required with the attributes:</p>
+<ul class="simple">
+<li><p><code class="code xml docutils literal notranslate"><span class="pre">axis1</span></code> and <code class="code xml docutils literal notranslate"><span class="pre">axis2</span></code>: The name of the 2 axes to define the plane on which the disc surface of the cylinder is defined. Can take two different values among <em>x</em>, <em>y</em> and <em>z</em>.</p></li>
+<li><p><code class="code xml docutils literal notranslate"><span class="pre">radius</span></code>: Real number indicating the disc-surface radius (unit: m (SI)).</p></li>
+<li><p><code class="code xml docutils literal notranslate"><span class="pre">length</span></code>: Real number indicating the length of the cylinder (unit: m (SI)).</p></li>
+<li><p>Node <code class="code xml docutils literal notranslate"><span class="name tag"><span class="pre">&lt;center&gt;</span></span></code>: Require the attributes <code class="code xml docutils literal notranslate"><span class="pre">x</span></code>, <code class="code xml docutils literal notranslate"><span class="pre">y</span></code> and <code class="code xml docutils literal notranslate"><span class="pre">z</span></code>, as real numbers (unit: m (SI)), giving the location of the center of the cylinder.</p></li>
+</ul>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;domain</span> <span class="na">name=</span><span class="s">&quot;HP&quot;</span>  <span class="na">state=</span><span class="s">&quot;rightChamber&quot;</span> <span class="na">type=</span><span class="s">&quot;cylinder&quot;</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;dataCylinder</span> <span class="na">axis1=</span><span class="s">&quot;x&quot;</span> <span class="na">axis2=</span><span class="s">&quot;y&quot;</span> <span class="na">radius=</span><span class="s">&quot;0.5&quot;</span> <span class="na">length=</span><span class="s">&quot;1.&quot;</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;center</span> <span class="na">x=</span><span class="s">&quot;0.&quot;</span> <span class="na">y=</span><span class="s">&quot;0.&quot;</span> <span class="na">z=</span><span class="s">&quot;0.&quot;</span><span class="nt">/&gt;</span>
+  <span class="nt">&lt;/dataCylinder&gt;</span>
+<span class="nt">&lt;/domain&gt;</span>
+</pre></div>
+</div>
+</div>
 <div class="section" id="initializing-using-physical-identity">
-<h3>Initializing using physical Identity<a class="headerlink" href="#initializing-using-physical-identity" title="Permalink to this headline">¶</a></h3>
-<p>Additional feature for geometrical domain: It is possible to use physicalIdentity number coming from mesh software to initialize a geometrical domain.</p>
+<h3>Initializing using physical identity<a class="headerlink" href="#initializing-using-physical-identity" title="Permalink to this headline">¶</a></h3>
+<p>An additional possible feature for the geometric domain is to use <code class="code xml docutils literal notranslate"><span class="pre">physicalIdentity</span></code> number coming from mesh software to initialize a geometrical domain.</p>
 <p>Example:</p>
 <div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;domain</span> <span class="na">name=</span><span class="s">&quot;base&quot;</span> <span class="na">state=</span><span class="s">&quot;leftChamber&quot;</span> <span class="na">type=</span><span class="s">&quot;entireDomain&quot;</span> <span class="na">physicalEntity=</span><span class="s">&quot;10&quot;</span><span class="nt">/&gt;</span>
 </pre></div>
 </div>
-<p>In this example the entire computation domain will be initialize accordingly to the physicalEntity 10.</p>
+<p>In this example, the entire computation domain will be initialized accordingly to the <code class="code xml docutils literal notranslate"><span class="pre">physicalIdentity</span></code> 10 from the mesh file.</p>
 </div>
 </div>
 <div class="section" id="boundary-conditions">
-<h2>Boundary conditions<a class="headerlink" href="#boundary-conditions" title="Permalink to this headline">¶</a></h2>
-<p>The <code class="code xml docutils literal notranslate"><span class="name tag"><span class="pre">&lt;boundaryConditions&gt;</span></span></code> markup is mandatory. The boundary conditions are specified at the boundary of the computational domain. This markup must contain as many nodes <code class="code xml docutils literal notranslate"><span class="name tag"><span class="pre">&lt;boundCond&gt;</span></span></code> as necessary to recover the entire boundary. Each <code class="code xml docutils literal notranslate"><span class="name tag"><span class="pre">&lt;boundCond&gt;</span></span></code> node contains the following attributes:</p>
+<span id="sec-input-boundaryconditions"></span><h2>Boundary conditions<a class="headerlink" href="#boundary-conditions" title="Permalink to this headline">¶</a></h2>
+<p>The <code class="code xml docutils literal notranslate"><span class="name tag"><span class="pre">&lt;boundaryConditions&gt;</span></span></code> markup is mandatory. The boundary conditions are specified at the boundary of the computational domain. This markup must contain as many nodes <code class="code xml docutils literal notranslate"><span class="name tag"><span class="pre">&lt;boundCond&gt;</span></span></code> as necessary to cover the entire boundary. Each <code class="code xml docutils literal notranslate"><span class="name tag"><span class="pre">&lt;boundCond&gt;</span></span></code> node contains the following attributes:</p>
 <ul class="simple">
-<li><p>name: a name for the boundary condition. This name has no influence on the choices remaining in this file.</p></li>
-<li><p>type:  the kind of boundary condition, to choose among <a class="reference internal" href="#sec-input-abs"><span class="std std-ref">abs</span></a>, <a class="reference internal" href="#sec-input-wall"><span class="std std-ref">wall</span></a>, <a class="reference internal" href="#sec-input-tank"><span class="std std-ref">tank</span></a>, <a class="reference internal" href="#sec-input-outflow"><span class="std std-ref">outflow</span></a></p></li>
-<li><p>numero: integer number that correspond to the number of the boundary.</p></li>
+<li><p><code class="code xml docutils literal notranslate"><span class="pre">name</span></code>: A name for the boundary condition. This name has no influence on the choices remaining in this file.</p></li>
+<li><p><code class="code xml docutils literal notranslate"><span class="pre">type</span></code>:  The type of boundary condition, to choose among <a class="reference internal" href="#sec-input-nonreflecting"><span class="std std-ref">Non-reflecting</span></a>, <a class="reference internal" href="#sec-input-symmetry"><span class="std std-ref">Symmetry</span></a>, <a class="reference internal" href="#sec-input-wall"><span class="std std-ref">Wall</span></a>, <a class="reference internal" href="#sec-input-injection"><span class="std std-ref">Injection</span></a>, <a class="reference internal" href="#sec-input-outflow"><span class="std std-ref">Outflow</span></a> and <a class="reference internal" href="#sec-input-tank"><span class="std std-ref">Tank</span></a>.</p></li>
+<li><p><code class="code xml docutils literal notranslate"><span class="pre">number</span></code>: Integer corresponding to the identifier of the boundary.</p></li>
 </ul>
-<p>According <code class="code xml docutils literal notranslate"><span class="name tag"><span class="pre">&lt;type&gt;</span></span></code>, additional information is required thanks the use of the nodes among the list:</p>
-<div class="section" id="abs">
-<span id="sec-input-abs"></span><h3>abs<a class="headerlink" href="#abs" title="Permalink to this headline">¶</a></h3>
-<p>The numerical treatment corresponds to an outgoing flow with no wave reflection. No more information required.</p>
-<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;boundCond</span> <span class="na">name=</span><span class="s">&quot;exit&quot;</span> <span class="na">type=</span><span class="s">&quot;abs&quot;</span> <span class="na">number=</span><span class="s">&quot;1&quot;</span> <span class="nt">/&gt;</span>
+<p>Depending on the <code class="code xml docutils literal notranslate"><span class="name tag"><span class="pre">&lt;type&gt;</span></span></code>, additional information is required through the use of the following nodes.</p>
+<div class="section" id="non-reflecting">
+<span id="sec-input-nonreflecting"></span><h3>Non-reflecting<a class="headerlink" href="#non-reflecting" title="Permalink to this headline">¶</a></h3>
+<p>The numerical treatment corresponds to an in- or out-going flow without any wave reflection. No more information required.</p>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;boundCond</span> <span class="na">name=</span><span class="s">&quot;exit&quot;</span> <span class="na">type=</span><span class="s">&quot;nonReflecting&quot;</span> <span class="na">number=</span><span class="s">&quot;1&quot;</span> <span class="nt">/&gt;</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="symmetry">
+<span id="sec-input-symmetry"></span><h3>Symmetry<a class="headerlink" href="#symmetry" title="Permalink to this headline">¶</a></h3>
+<p>The numerical treatment corresponds to a symmetry condition. No more information required.</p>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;boundCond</span> <span class="na">name=</span><span class="s">&quot;symmetry&quot;</span> <span class="na">type=</span><span class="s">&quot;symmetry&quot;</span> <span class="na">number=</span><span class="s">&quot;2&quot;</span> <span class="nt">/&gt;</span>
 </pre></div>
 </div>
 </div>
 <div class="section" id="wall">
-<span id="sec-input-wall"></span><h3>wall<a class="headerlink" href="#wall" title="Permalink to this headline">¶</a></h3>
+<span id="sec-input-wall"></span><h3>Wall<a class="headerlink" href="#wall" title="Permalink to this headline">¶</a></h3>
 <p>The numerical treatment corresponds to a wall boundary condition. No more information required.</p>
 <div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;boundCond</span> <span class="na">name=</span><span class="s">&quot;wall&quot;</span> <span class="na">type=</span><span class="s">&quot;wall&quot;</span> <span class="na">number=</span><span class="s">&quot;3&quot;</span> <span class="nt">/&gt;</span>
 </pre></div>
 </div>
 </div>
-<div class="section" id="tank">
-<span id="sec-input-tank"></span><h3>tank<a class="headerlink" href="#tank" title="Permalink to this headline">¶</a></h3>
-<p>The numerical treatment corresponds to the link between the boundary with an infinite tank. An infinite tank is characterized by a null velocity while pressure and temperature are constant). <code class="code xml docutils literal notranslate"><span class="name tag"><span class="pre">&lt;tank&gt;</span></span></code> requires the <code class="code xml docutils literal notranslate"><span class="name tag"><span class="pre">&lt;dataTank&gt;</span></span></code> node with the following attributes:</p>
-<ul class="simple">
-<li><p><code class="code xml docutils literal notranslate"><span class="pre">p0</span></code>: Stagnation pressure, real number (unit: Pa(SI)).</p></li>
-<li><p><code class="code xml docutils literal notranslate"><span class="pre">T0</span></code>: Stagnation pressure, real number (unit: K (SI)).</p></li>
-<li><dl class="simple">
-<dt>An additional <code class="code xml docutils literal notranslate"><span class="name tag"><span class="pre">&lt;fluidsProp&gt;</span></span></code> node is necessary to define the presence of each phase in the tank. It must contain as many nodes <code class="code xml docutils literal notranslate"><span class="name tag"><span class="pre">&lt;dataFluid&gt;</span></span></code> as the number of phases in the flow simulation and contains the attributes:</dt><dd><ul>
-<li><p><code class="code xml docutils literal notranslate"><span class="pre">EOS</span></code>: the name of the file corresponding to the choice of the EOS for the phase in the tank. This file must correspond to the one specified in modelV4.xml input file for every fluid.</p></li>
-<li><p><code class="code xml docutils literal notranslate"><span class="pre">alpha</span></code>: The volume fraction of the fluid in the tank, real number in the range ]0.,1.[</p></li>
+<div class="section" id="injection">
+<span id="sec-input-injection"></span><h3>Injection<a class="headerlink" href="#injection" title="Permalink to this headline">¶</a></h3>
+<p>The numerical treatment corresponds to the link between the boundary with a inflow. The inflow is characterized by an incoming mass-flow rate at a given thermodynamical state. <code class="code xml docutils literal notranslate"><span class="pre">injection</span></code> requires the <code class="code xml docutils literal notranslate"><span class="name tag"><span class="pre">&lt;dataInjection&gt;</span></span></code> node with the following attributes:</p>
+<ul>
+<li><p><code class="code xml docutils literal notranslate"><span class="pre">m0</span></code>: Incoming mass-flow rate, real number (unit: kg/s.m-2 (SI)).</p></li>
+<li><p>Node <code class="code xml docutils literal notranslate"><span class="name tag"><span class="pre">&lt;dataFluid&gt;</span></span></code> for each phase: It must contain as many nodes <code class="code xml docutils literal notranslate"><span class="name tag"><span class="pre">&lt;dataFluid&gt;</span></span></code> as the number of phases in the flow simulation and each contains the attributes:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p><code class="code xml docutils literal notranslate"><span class="pre">EOS</span></code>: The name of the file corresponding to the choice of the EOS for the phase in the tank. This file must correspond to the one specified in <em>modelV4.xml</em> input file for every fluid.</p></li>
+<li><p><code class="code xml docutils literal notranslate"><span class="pre">density</span></code>: The density of the fluid incoming, real number (unit: kg/m3 (SI)).</p></li>
+<li><p><code class="code xml docutils literal notranslate"><span class="pre">pressure</span></code>: The pressure of the fluid incoming, real number (unit: Pa (SI)).</p></li>
+<li><p><code class="code xml docutils literal notranslate"><span class="pre">alpha</span></code>: The volume fraction of the fluid incoming, real number in the range ]0.,1.[.</p></li>
 </ul>
-</dd>
-</dl>
+</div></blockquote>
+</li>
+</ul>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;boundCond</span> <span class="na">name=</span><span class="s">&quot;entrance&quot;</span> <span class="na">type=</span><span class="s">&quot;injection&quot;</span> <span class="na">number=</span><span class="s">&quot;1&quot;</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;dataInjection</span> <span class="na">m0=</span><span class="s">&quot;2.413092&quot;</span><span class="nt">/&gt;</span>
+  <span class="nt">&lt;dataFluid</span> <span class="na">EOS=</span><span class="s">&quot;IG_air.xml&quot;</span> <span class="na">density=</span><span class="s">&quot;4.04e-3&quot;</span> <span class="na">pressure=</span><span class="s">&quot;2.57404e2&quot;</span> <span class="na">alpha=</span><span class="s">&quot;0.1&quot;</span><span class="nt">/&gt;</span>
+  <span class="nt">&lt;dataFluid</span> <span class="na">EOS=</span><span class="s">&quot;SG_water.xml&quot;</span> <span class="na">density=</span><span class="s">&quot;1000.&quot;</span> <span class="na">pressure=</span><span class="s">&quot;2.57404e2&quot;</span> <span class="na">alpha=</span><span class="s">&quot;0.9&quot;</span><span class="nt">/&gt;</span>
+<span class="nt">&lt;/boundCond&gt;</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="outflow">
+<span id="sec-input-outflow"></span><h3>Outflow<a class="headerlink" href="#outflow" title="Permalink to this headline">¶</a></h3>
+<p>In the case of a subsonic flow, the pressure is set equal to the ambient (distant) pressure at the boundary. The additional <code class="code xml docutils literal notranslate"><span class="name tag"><span class="pre">&lt;dataOutflow&gt;</span></span></code> node is required with the attributes:</p>
+<ul class="simple">
+<li><p><code class="code xml docutils literal notranslate"><span class="pre">p0</span></code>: Outside pressure, real number (unit: Pa (SI)).</p></li>
+<li><p>Node <code class="code xml docutils literal notranslate"><span class="name tag"><span class="pre">&lt;transport&gt;</span></span></code>: This node is also required for each transport equation used.</p></li>
+</ul>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;boundCond</span> <span class="na">name=</span><span class="s">&quot;exit&quot;</span> <span class="na">type=</span><span class="s">&quot;outflow&quot;</span> <span class="na">number=</span><span class="s">&quot;5&quot;</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;dataOutflow</span> <span class="na">p0=</span><span class="s">&quot;1.e5&quot;</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;transport</span> <span class="na">name=</span><span class="s">&quot;color&quot;</span> <span class="na">value=</span><span class="s">&quot;1.e-6&quot;</span><span class="nt">/&gt;</span>
+  <span class="nt">&lt;/dataOutflow&gt;</span>
+<span class="nt">&lt;/boundCond&gt;</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="tank">
+<span id="sec-input-tank"></span><h3>Tank<a class="headerlink" href="#tank" title="Permalink to this headline">¶</a></h3>
+<p>The numerical treatment corresponds to the link between the boundary with an infinite tank. An infinite tank is characterized by a null velocity while pressure and temperature are constant. <code class="code xml docutils literal notranslate"><span class="pre">tank</span></code> requires the <code class="code xml docutils literal notranslate"><span class="name tag"><span class="pre">&lt;dataTank&gt;</span></span></code> node with the following attributes:</p>
+<ul>
+<li><p><code class="code xml docutils literal notranslate"><span class="pre">p0</span></code>: Stagnation pressure, real number (unit: Pa (SI)).</p></li>
+<li><p><code class="code xml docutils literal notranslate"><span class="pre">T0</span></code>: Stagnation temperature, real number (unit: K (SI)).</p></li>
+<li><p>Node <code class="code xml docutils literal notranslate"><span class="name tag"><span class="pre">&lt;fluidsProp&gt;</span></span></code>: Necessary to define the presence of each phase in the tank. It must contain as many nodes <code class="code xml docutils literal notranslate"><span class="name tag"><span class="pre">&lt;dataFluid&gt;</span></span></code> as the number of phases in the flow simulation and each contains the attributes:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p><code class="code xml docutils literal notranslate"><span class="pre">EOS</span></code>: The name of the file corresponding to the choice of the EOS for the phase in the tank. This file must correspond to the one specified in <em>modelV4.xml</em> input file for every fluid.</p></li>
+<li><p><code class="code xml docutils literal notranslate"><span class="pre">alpha</span></code>: The volume fraction of the fluid in the tank, real number in the range ]0.,1.[.</p></li>
+</ul>
+</div></blockquote>
 </li>
 </ul>
 <div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;boundCond</span> <span class="na">name=</span><span class="s">&quot;entrance&quot;</span> <span class="na">type=</span><span class="s">&quot;tank&quot;</span> <span class="na">number=</span><span class="s">&quot;3&quot;</span><span class="nt">&gt;</span>
@@ -365,53 +461,39 @@
 <span class="nt">&lt;/boundCond&gt;</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="outflow">
-<span id="sec-input-outflow"></span><h3>outflow<a class="headerlink" href="#outflow" title="Permalink to this headline">¶</a></h3>
-<p>In the case of a subsonic flow, the pressure is set equal to the ambient pressure at the boundary. The additional <code class="code xml docutils literal notranslate"><span class="name tag"><span class="pre">&lt;dataOutflow&gt;</span></span></code> node is required with the attributes:</p>
-<ul class="simple">
-<li><p>p0: outside pressure, real number (unit: Pa(SI)).</p></li>
-</ul>
-<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;boundCond</span> <span class="na">name=</span><span class="s">&quot;exit&quot;</span> <span class="na">type=</span><span class="s">&quot;outflow&quot;</span> <span class="na">number=</span><span class="s">&quot;5&quot;</span><span class="nt">&gt;</span>
-  <span class="nt">&lt;dataOutflow</span> <span class="na">p0=</span><span class="s">&quot;1.e5&quot;</span><span class="nt">&gt;</span>
-    <span class="nt">&lt;transport</span> <span class="na">name=</span><span class="s">&quot;color&quot;</span> <span class="na">value=</span><span class="s">&quot;1.e-6&quot;</span><span class="nt">/&gt;</span>
-  <span class="nt">&lt;/dataOutflow&gt;</span>
-<span class="nt">&lt;/boundCond&gt;</span>
-</pre></div>
-</div>
 <p><strong>Important remark</strong></p>
-<p>The choice of the boundary condition number is made according to the kind of mesh given in meshV5.xml input file according to the following rules:</p>
-<ul class="simple">
-<li><dl class="simple">
-<dt>cartesian: The boundaries are ordered and labeled from 1 to 6 (in 3D) according to:</dt><dd><ol class="arabic simple">
-<li><p>boundary condition at the minimal x location</p></li>
-<li><p>boundary condition at the maximal x location</p></li>
-<li><p>boundary condition at the minimal y location</p></li>
-<li><p>boundary condition at the maximal y location</p></li>
-<li><p>boundary condition at the minimal z location</p></li>
-<li><p>boundary condition at the maximal z location</p></li>
+<p>The choice of the boundary-condition number is made according to the type of mesh given in <em>meshV5.xml</em> input file and it follows the rules:</p>
+<ul>
+<li><p>Cartesian: The boundaries are ordered and labeled from 1 to 6 (in 3D) according to:</p>
+<blockquote>
+<div><ol class="arabic simple">
+<li><p>boundary condition at the minimal x location,</p></li>
+<li><p>boundary condition at the maximal x location,</p></li>
+<li><p>boundary condition at the minimal y location,</p></li>
+<li><p>boundary condition at the maximal y location,</p></li>
+<li><p>boundary condition at the minimal z location,</p></li>
+<li><p>boundary condition at the maximal z location.</p></li>
 </ol>
-</dd>
-</dl>
+</div></blockquote>
 </li>
-<li><p>unStructured: When an unstructured mesh is used, the number of the boundary condition must correspond to the number specified in the mesh file .geo (see example in section <a class="reference internal" href="Chap4_2generatingMeshes.html#sec-tuto-generatingmeshes"><span class="std std-ref">Generating Meshes</span></a>).</p></li>
+<li><p>UnStructured: When an unstructured mesh is used, the number of the boundary condition must correspond to the number specified in the mesh file .geo (see example in section <a class="reference internal" href="Chap4_2generatingMeshes.html#sec-tuto-generatingmeshes"><span class="std std-ref">Generating Meshes</span></a>).</p></li>
 </ul>
 <p><strong>Remark</strong></p>
-<p>The boundary conditions are dependent on the flow model specified in modelV4.xml input file. Some boundary conditions may be not available for the flow model considered.</p>
+<p>The boundary conditions are dependent on the flow model specified in <em>modelV4.xml</em> input file. Some boundary conditions may be not available for the flow model considered.</p>
 </div>
 </div>
 <div class="section" id="mechanical-and-thermodynamical-states-of-the-fluid">
 <h2>Mechanical and thermodynamical states of the fluid<a class="headerlink" href="#mechanical-and-thermodynamical-states-of-the-fluid" title="Permalink to this headline">¶</a></h2>
 <p>For each physical domain in the <code class="code xml docutils literal notranslate"><span class="name tag"><span class="pre">&lt;physicalDomains&gt;</span></span></code> markup, a fluid state must correspond. It implies an additional <code class="code xml docutils literal notranslate"><span class="name tag"><span class="pre">&lt;state&gt;</span></span></code> markup for each state of fluid. This <code class="code xml docutils literal notranslate"><span class="name tag"><span class="pre">&lt;state&gt;</span></span></code> markup contains:</p>
 <ul class="simple">
-<li><p>as many <code class="code xml docutils literal notranslate"><span class="name tag"><span class="pre">&lt;material&gt;</span></span></code> nodes as the number of phases involved in the simulation.</p></li>
+<li><p>As many <code class="code xml docutils literal notranslate"><span class="name tag"><span class="pre">&lt;material&gt;</span></span></code> nodes as the number of phases involved in the simulation.</p></li>
 <li><p>A <code class="code xml docutils literal notranslate"><span class="name tag"><span class="pre">&lt;mixture&gt;</span></span></code> node is required if a multiphase model is used.</p></li>
 </ul>
 <p>Each <code class="code xml docutils literal notranslate"><span class="name tag"><span class="pre">&lt;material&gt;</span></span></code> node corresponds to a phase and contains the following attributes or nodes:</p>
 <ul class="simple">
-<li><p>Attribute <code class="code xml docutils literal notranslate"><span class="pre">type</span></code>: Only the value <em>fluide</em> is available in the current ECOGEN version.</p></li>
-<li><p>Attribute <code class="code xml docutils literal notranslate"><span class="pre">EOS</span></code>: the name of the file corresponding to the fluid Equation of State parameters. This file must correspond to the one specified in <em>modelV4.xml</em> input file for each phase (see section <a class="reference internal" href="Chap3_1_2model.html#sec-input-flowmodel"><span class="std std-ref">Flow model</span></a>).</p></li>
-<li><p>Node <code class="code xml docutils literal notranslate"><span class="name tag"><span class="pre">&lt;dataFluid&gt;</span></span></code>: contains data related to the considered state of the fluid in the current phase.</p></li>
+<li><p>Attribute <code class="code xml docutils literal notranslate"><span class="pre">type</span></code>: Only the value <em>fluid</em> is available in the current ECOGEN version.</p></li>
+<li><p>Attribute <code class="code xml docutils literal notranslate"><span class="pre">EOS</span></code>: The name of the file corresponding to the fluid equation-of-state parameters. This file must correspond to the one specified in <em>modelV4.xml</em> input file for each phase (see section <a class="reference internal" href="Chap3_1_2model.html#sec-input-flowmodel"><span class="std std-ref">Flow model</span></a>).</p></li>
+<li><p>Node <code class="code xml docutils literal notranslate"><span class="name tag"><span class="pre">&lt;dataFluid&gt;</span></span></code>: Contain data related to the considered state of the fluid in the current phase.</p></li>
 </ul>
 <p>This last node <code class="code xml docutils literal notranslate"><span class="name tag"><span class="pre">&lt;dataFluid&gt;</span></span></code> as well as the <code class="code xml docutils literal notranslate"><span class="name tag"><span class="pre">&lt;mixture&gt;</span></span></code> node are dependent on the flow model according to:</p>
 <div class="section" id="euler">
@@ -420,9 +502,9 @@
 <ul class="simple">
 <li><p>Attribute <code class="code xml docutils literal notranslate"><span class="pre">temperature</span></code>: Initial temperature of the fluid, real number (unit: K (SI)).</p></li>
 <li><p>Attribute <code class="code xml docutils literal notranslate"><span class="pre">pressure</span></code>: Initial pressure of the fluid, real number (unit: Pa(SI)).</p></li>
-<li><p>Node <code class="code xml docutils literal notranslate"><span class="name tag"><span class="pre">&lt;velocity&gt;</span></span></code>: with <code class="code xml docutils literal notranslate"><span class="pre">x</span></code>, <code class="code xml docutils literal notranslate"><span class="pre">y</span></code> and <code class="code xml docutils literal notranslate"><span class="pre">z</span></code> attributes setting the initial values for the components of the velocity vector, real numbers (unit: m/s (SI)).</p></li>
+<li><p>Node <code class="code xml docutils literal notranslate"><span class="name tag"><span class="pre">&lt;velocity&gt;</span></span></code>: With <code class="code xml docutils literal notranslate"><span class="pre">x</span></code>, <code class="code xml docutils literal notranslate"><span class="pre">y</span></code> and <code class="code xml docutils literal notranslate"><span class="pre">z</span></code> attributes setting the initial values for the components of the velocity vector, real numbers (unit: m/s (SI)).</p></li>
 </ul>
-<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;material</span> <span class="na">type=</span><span class="s">&quot;fluide&quot;</span> <span class="na">EOS=</span><span class="s">&quot;IG_air.xml&quot;</span><span class="nt">&gt;</span>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;material</span> <span class="na">type=</span><span class="s">&quot;fluid&quot;</span> <span class="na">EOS=</span><span class="s">&quot;IG_air.xml&quot;</span><span class="nt">&gt;</span>
   <span class="nt">&lt;dataFluid</span> <span class="na">density=</span><span class="s">&quot;10.0&quot;</span> <span class="na">pressure=</span><span class="s">&quot;1.e5&quot;</span><span class="nt">&gt;</span>
     <span class="nt">&lt;velocity</span> <span class="na">x=</span><span class="s">&quot;1000.&quot;</span> <span class="na">y=</span><span class="s">&quot;1000.&quot;</span> <span class="na">z=</span><span class="s">&quot;0.&quot;</span><span class="nt">/&gt;</span>
   <span class="nt">&lt;/dataFluid&gt;</span>
@@ -432,20 +514,20 @@
 </div>
 <div class="section" id="kapila">
 <span id="sec-input-kapila"></span><h3>Kapila<a class="headerlink" href="#kapila" title="Permalink to this headline">¶</a></h3>
-<p>Multiphase flow at pressure and velocity equilibrium (same velocity and same pressure for every phase). Each <code class="code xml docutils literal notranslate"><span class="name tag"><span class="pre">&lt;dataFluid&gt;</span></span></code> node corresponds to a phase with the following attributes:</p>
+<p>Multiphase flow at pressure and velocity equilibrium (same velocity and pressure for every phase within each cell). Each <code class="code xml docutils literal notranslate"><span class="name tag"><span class="pre">&lt;dataFluid&gt;</span></span></code> node corresponds to a phase with the following attributes:</p>
 <ul class="simple">
-<li><p><code class="code xml docutils literal notranslate"><span class="pre">alpha</span></code>: Volume fraction of the phase, real number in the range ]0.,1.[.</p></li>
-<li><p><code class="code xml docutils literal notranslate"><span class="pre">density</span></code>: Initial specific mass of the fluid, real number (unit: kg/m3 (SI)) or <code class="code xml docutils literal notranslate"><span class="pre">temperature</span></code>: Initial temperature (unit: K).</p></li>
+<li><p><code class="code xml docutils literal notranslate"><span class="pre">alpha</span></code>: Volume fraction of the phase, real number in the range ]0.,1.[. The range can be increased to [0.;1.] if the option <em>alphaNull</em> is turned on (<em>true</em>) in the <em>modelV4.xml</em> input file.</p></li>
+<li><p><code class="code xml docutils literal notranslate"><span class="pre">density</span></code> or <code class="code xml docutils literal notranslate"><span class="pre">temperature</span></code>: Initial density or temperature of the fluid, real number (unit: kg/m3 or K (SI)), respectively.</p></li>
 </ul>
 <p>Moreover, in this case, the <code class="code xml docutils literal notranslate"><span class="name tag"><span class="pre">&lt;mixture&gt;</span></span></code> node contains:</p>
 <ul class="simple">
-<li><p>the <code class="code xml docutils literal notranslate"><span class="name tag"><span class="pre">&lt;dataMix&gt;</span></span></code> node with <code class="code xml docutils literal notranslate"><span class="pre">pressure</span></code> attribute for initial pressure of the fluid, real number (unit: Pa(SI)).</p></li>
-<li><p>the <code class="code xml docutils literal notranslate"><span class="name tag"><span class="pre">&lt;velocity&gt;</span></span></code> node with <code class="code xml docutils literal notranslate"><span class="pre">x</span></code>, <code class="code xml docutils literal notranslate"><span class="pre">y</span></code> and <code class="code xml docutils literal notranslate"><span class="pre">z</span></code> attributes setting the initial values for the components of the velocity vector, real number (unit: m/s (SI)).</p></li>
+<li><p>Node <code class="code xml docutils literal notranslate"><span class="name tag"><span class="pre">&lt;dataMix&gt;</span></span></code>: With <code class="code xml docutils literal notranslate"><span class="pre">pressure</span></code> attribute for initial pressure of the fluid, real number (unit: Pa (SI)).</p></li>
+<li><p>Node <code class="code xml docutils literal notranslate"><span class="name tag"><span class="pre">&lt;velocity&gt;</span></span></code>: With <code class="code xml docutils literal notranslate"><span class="pre">x</span></code>, <code class="code xml docutils literal notranslate"><span class="pre">y</span></code> and <code class="code xml docutils literal notranslate"><span class="pre">z</span></code> attributes setting the initial values for the components of the velocity vector, real numbers (unit: m/s (SI)).</p></li>
 </ul>
-<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;material</span> <span class="na">type=</span><span class="s">&quot;fluide&quot;</span> <span class="na">EOS=</span><span class="s">&quot;IG_air.xml&quot;</span><span class="nt">&gt;</span>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;material</span> <span class="na">type=</span><span class="s">&quot;fluid&quot;</span> <span class="na">EOS=</span><span class="s">&quot;IG_air.xml&quot;</span><span class="nt">&gt;</span>
   <span class="nt">&lt;dataFluid</span> <span class="na">alpha=</span><span class="s">&quot;0.5&quot;</span> <span class="na">density=</span><span class="s">&quot;1.0&quot;</span><span class="nt">/&gt;</span>
 <span class="nt">&lt;/material&gt;</span>
-<span class="nt">&lt;material</span> <span class="na">type=</span><span class="s">&quot;fluide&quot;</span> <span class="na">EOS=</span><span class="s">&quot;SG_water.xml&quot;</span><span class="nt">&gt;</span>
+<span class="nt">&lt;material</span> <span class="na">type=</span><span class="s">&quot;fluid&quot;</span> <span class="na">EOS=</span><span class="s">&quot;SG_water.xml&quot;</span><span class="nt">&gt;</span>
   <span class="nt">&lt;dataFluid</span> <span class="na">alpha=</span><span class="s">&quot;0.5&quot;</span> <span class="na">density=</span><span class="s">&quot;1000.0&quot;</span><span class="nt">/&gt;</span>
 <span class="nt">&lt;/material&gt;</span>
 <span class="nt">&lt;mixture&gt;</span>
@@ -457,17 +539,16 @@
 </div>
 <div class="section" id="thermaleq">
 <span id="sec-input-thermaleq"></span><h3>ThermalEq<a class="headerlink" href="#thermaleq" title="Permalink to this headline">¶</a></h3>
-<p>Multiphase flow at pressure, velocity and thermal equilibrium (same velocity, same pressure and same temperature for every phase). In this case, every <code class="code xml docutils literal notranslate"><span class="name tag"><span class="pre">&lt;dataFluid&gt;</span></span></code> node corresponds to a phase with only one attribute <code class="code xml docutils literal notranslate"><span class="pre">alpha</span></code> setting the volume fraction real number in the range ]0.,1.[.</p>
+<p>Multiphase flow at pressure, velocity and thermal equilibrium (same velocity, pressure and temperature for every phase within each cell). In this case, every <code class="code xml docutils literal notranslate"><span class="name tag"><span class="pre">&lt;dataFluid&gt;</span></span></code> node corresponds to a phase with only one attribute <code class="code xml docutils literal notranslate"><span class="pre">alpha</span></code> setting the volume-fraction real number in the range ]0.,1.[.</p>
 <p>The <code class="code xml docutils literal notranslate"><span class="name tag"><span class="pre">&lt;mixture&gt;</span></span></code> node contains the following attributes and nodes:</p>
 <ul class="simple">
-<li><p>the <code class="code xml docutils literal notranslate"><span class="name tag"><span class="pre">&lt;dataMix&gt;</span></span></code> node with temperature and pressure attributes for initial temperature of the fluid, real number (unit: K (SI)) and initial pressure, real number (unit: Pa).</p></li>
-<li><p>Attribute <code class="code xml docutils literal notranslate"><span class="pre">pressure</span></code>: Initial pressure of the mixture, real number (unit: Pa(SI)).</p></li>
-<li><p>Node <code class="code xml docutils literal notranslate"><span class="name tag"><span class="pre">&lt;velocity&gt;</span></span></code>: with <code class="code xml docutils literal notranslate"><span class="pre">x</span></code>, <code class="code xml docutils literal notranslate"><span class="pre">y</span></code> and <code class="code xml docutils literal notranslate"><span class="pre">z</span></code> attributes setting the initial values for the components of the velocity vector of the mixture, real numbers (unit : m/s (SI)).</p></li>
+<li><p>Node <code class="code xml docutils literal notranslate"><span class="name tag"><span class="pre">&lt;dataMix&gt;</span></span></code>: With <code class="code xml docutils literal notranslate"><span class="pre">temperature</span></code> and <code class="code xml docutils literal notranslate"><span class="pre">pressure</span></code> attributes for initial temperature and pressure of the fluid, real numbers (unit: K and Pa (SI)), respectively.</p></li>
+<li><p>Node <code class="code xml docutils literal notranslate"><span class="name tag"><span class="pre">&lt;velocity&gt;</span></span></code>: With <code class="code xml docutils literal notranslate"><span class="pre">x</span></code>, <code class="code xml docutils literal notranslate"><span class="pre">y</span></code> and <code class="code xml docutils literal notranslate"><span class="pre">z</span></code> attributes setting the initial values for the components of the velocity vector of the mixture, real numbers (unit: m/s (SI)).</p></li>
 </ul>
-<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;material</span> <span class="na">type=</span><span class="s">&quot;fluide&quot;</span> <span class="na">EOS=</span><span class="s">&quot;IG_waterVap.xml&quot;</span><span class="nt">&gt;</span>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;material</span> <span class="na">type=</span><span class="s">&quot;fluid&quot;</span> <span class="na">EOS=</span><span class="s">&quot;IG_waterVap.xml&quot;</span><span class="nt">&gt;</span>
   <span class="nt">&lt;dataFluid</span> <span class="na">alpha=</span><span class="s">&quot;0.2&quot;</span><span class="nt">/&gt;</span>
 <span class="nt">&lt;/material&gt;</span>
-<span class="nt">&lt;material</span> <span class="na">type=</span><span class="s">&quot;fluide&quot;</span> <span class="na">EOS=</span><span class="s">&quot;SG_waterLiq.xml&quot;</span><span class="nt">&gt;</span>
+<span class="nt">&lt;material</span> <span class="na">type=</span><span class="s">&quot;fluid&quot;</span> <span class="na">EOS=</span><span class="s">&quot;SG_waterLiq.xml&quot;</span><span class="nt">&gt;</span>
   <span class="nt">&lt;dataFluid</span> <span class="na">alpha=</span><span class="s">&quot;0.8&quot;</span><span class="nt">/&gt;</span>
 <span class="nt">&lt;/material&gt;</span>
 <span class="nt">&lt;mixture&gt;</span>
@@ -479,16 +560,16 @@
 </div>
 <div class="section" id="eulerhomogeneous">
 <span id="sec-input-eulerhomogeneous"></span><h3>EulerHomogeneous<a class="headerlink" href="#eulerhomogeneous" title="Permalink to this headline">¶</a></h3>
-<p>Multiphase flow at mechanical and thermodynamical equilibrium. In this case, every <code class="code xml docutils literal notranslate"><span class="name tag"><span class="pre">&lt;dataFluid&gt;</span></span></code> node corresponds to a phase with only one attribute <code class="code xml docutils literal notranslate"><span class="pre">alpha</span></code> setting the volume fraction real number in the range ]0.,1.[.</p>
+<p>Multiphase flow at mechanical and thermodynamical equilibrium. In this case, every <code class="code xml docutils literal notranslate"><span class="name tag"><span class="pre">&lt;dataFluid&gt;</span></span></code> node corresponds to a phase with only one attribute <code class="code xml docutils literal notranslate"><span class="pre">alpha</span></code> setting the volume-fraction real number in the range ]0.,1.[.</p>
 <p>Moreover, in this case, the <code class="code xml docutils literal notranslate"><span class="name tag"><span class="pre">&lt;mixture&gt;</span></span></code> contains the following attributes and nodes:</p>
 <ul class="simple">
-<li><p>the <code class="code xml docutils literal notranslate"><span class="name tag"><span class="pre">&lt;dataMix&gt;</span></span></code> node with <code class="code xml docutils literal notranslate"><span class="pre">pressure</span></code> attribute for initial pressure of the mixture, real number (unit: Pa(SI)).</p></li>
-<li><p>Node <code class="code xml docutils literal notranslate"><span class="name tag"><span class="pre">&lt;velocity&gt;</span></span></code>: with <code class="code xml docutils literal notranslate"><span class="pre">x</span></code>, <code class="code xml docutils literal notranslate"><span class="pre">y</span></code> and <code class="code xml docutils literal notranslate"><span class="pre">z</span></code> attributes setting the initial values for the components of the velocity vector of the mixture, real numbers (unit: m/s (SI)).</p></li>
+<li><p>Node <code class="code xml docutils literal notranslate"><span class="name tag"><span class="pre">&lt;dataMix&gt;</span></span></code>: With <code class="code xml docutils literal notranslate"><span class="pre">pressure</span></code> attribute for initial pressure of the mixture, real number (unit: Pa (SI)).</p></li>
+<li><p>Node <code class="code xml docutils literal notranslate"><span class="name tag"><span class="pre">&lt;velocity&gt;</span></span></code>: With <code class="code xml docutils literal notranslate"><span class="pre">x</span></code>, <code class="code xml docutils literal notranslate"><span class="pre">y</span></code> and <code class="code xml docutils literal notranslate"><span class="pre">z</span></code> attributes setting the initial values for the components of the velocity vector of the mixture, real numbers (unit: m/s (SI)).</p></li>
 </ul>
-<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;material</span> <span class="na">type=</span><span class="s">&quot;fluide&quot;</span> <span class="na">EOS=</span><span class="s">&quot;SG_waterLiq.xml&quot;</span><span class="nt">&gt;</span>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;material</span> <span class="na">type=</span><span class="s">&quot;fluid&quot;</span> <span class="na">EOS=</span><span class="s">&quot;SG_waterLiq.xml&quot;</span><span class="nt">&gt;</span>
   <span class="nt">&lt;dataFluid</span> <span class="na">alpha=</span><span class="s">&quot;0.99&quot;</span><span class="nt">/&gt;</span>
 <span class="nt">&lt;/material&gt;</span>
-<span class="nt">&lt;material</span> <span class="na">type=</span><span class="s">&quot;fluide&quot;</span> <span class="na">EOS=</span><span class="s">&quot;IG_waterVap.xml&quot;</span><span class="nt">&gt;</span>
+<span class="nt">&lt;material</span> <span class="na">type=</span><span class="s">&quot;fluid&quot;</span> <span class="na">EOS=</span><span class="s">&quot;IG_waterVap.xml&quot;</span><span class="nt">&gt;</span>
   <span class="nt">&lt;dataFluid</span> <span class="na">alpha=</span><span class="s">&quot;0.01&quot;</span><span class="nt">/&gt;</span>
 <span class="nt">&lt;/material&gt;</span>
 <span class="nt">&lt;mixture&gt;</span>
@@ -498,7 +579,7 @@
 </pre></div>
 </div>
 <p><strong>Remark</strong></p>
-<p>Be careful to set the volume fraction in the range ]0,.1.[ as well as the sum over the phases equal to 1.</p>
+<p>Be careful to set the volume fraction in the range ]0,.1.[ (unless you use the option <em>alphaNull=true</em> for Kapila’s model) as well as the its sum over all the phases equal to 1.</p>
 </div>
 </div>
 </div>

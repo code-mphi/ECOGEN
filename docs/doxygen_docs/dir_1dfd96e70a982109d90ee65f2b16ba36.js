@@ -1,7 +1,9 @@
 var dir_1dfd96e70a982109d90ee65f2b16ba36 =
 [
-    [ "FluxEulerHomogeneous.cpp", "FluxEulerHomogeneous_8cpp.html", "FluxEulerHomogeneous_8cpp" ],
-    [ "FluxEulerHomogeneous.h", "FluxEulerHomogeneous_8h.html", "FluxEulerHomogeneous_8h" ],
+    [ "FluxEulerHomogeneous.cpp", "FluxEulerHomogeneous_8cpp.html", null ],
+    [ "FluxEulerHomogeneous.h", "FluxEulerHomogeneous_8h.html", [
+      [ "FluxEulerHomogeneous", "classFluxEulerHomogeneous.html", "classFluxEulerHomogeneous" ]
+    ] ],
     [ "MixEulerHomogeneous.cpp", "MixEulerHomogeneous_8cpp.html", null ],
     [ "MixEulerHomogeneous.h", "MixEulerHomogeneous_8h.html", [
       [ "MixEulerHomogeneous", "classMixEulerHomogeneous.html", "classMixEulerHomogeneous" ]

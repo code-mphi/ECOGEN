@@ -83,6 +83,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
       <li class="current"><a href="functions.html"><span>All</span></a></li>
       <li><a href="functions_func.html"><span>Functions</span></a></li>
       <li><a href="functions_vars.html"><span>Variables</span></a></li>
+      <li><a href="functions_type.html"><span>Typedefs</span></a></li>
       <li><a href="functions_eval.html"><span>Enumerator</span></a></li>
       <li><a href="functions_rela.html"><span>Related&#160;Functions</span></a></li>
     </ul>
@@ -99,6 +100,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
       <li><a href="functions_g.html#index_g"><span>g</span></a></li>
       <li><a href="functions_h.html#index_h"><span>h</span></a></li>
       <li><a href="functions_i.html#index_i"><span>i</span></a></li>
+      <li><a href="functions_k.html#index_k"><span>k</span></a></li>
       <li><a href="functions_l.html#index_l"><span>l</span></a></li>
       <li><a href="functions_m.html#index_m"><span>m</span></a></li>
       <li><a href="functions_n.html#index_n"><span>n</span></a></li>
@@ -113,6 +115,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
       <li><a href="functions_w.html#index_w"><span>w</span></a></li>
       <li><a href="functions_x.html#index_x"><span>x</span></a></li>
       <li><a href="functions_y.html#index_y"><span>y</span></a></li>
+      <li><a href="functions_z.html#index_z"><span>z</span></a></li>
       <li><a href="functions_0x7e.html#index_0x7e"><span>~</span></a></li>
     </ul>
   </div>
@@ -151,6 +154,10 @@ $(document).ready(function(){initNavTree('functions_p.html','');});
 <h3><a class="anchor" id="index_p"></a>- p -</h3><ul>
 <li>Parallel()
 : <a class="el" href="classParallel.html#a8aa97948de88463387591e5c9bc537ea">Parallel</a>
+</li>
+<li>parallelLoadBalancingAMR()
+: <a class="el" href="classMesh.html#a838c1aaba37a6e28b5f3ce21f751962e">Mesh</a>
+, <a class="el" href="classMeshCartesianAMR.html#a9492c3e742a6793312b3e002c01d80ce">MeshCartesianAMR</a>
 </li>
 <li>Parent()
 : <a class="el" href="classtinyxml2_1_1XMLNode.html#a4e39bdcf9bfafa55d04857ece6aaf64e">tinyxml2::XMLNode</a>
@@ -209,6 +216,9 @@ $(document).ready(function(){initNavTree('functions_p.html','');});
 <li>pkStar
 : <a class="el" href="classTools.html#a6a3fef5cd446e0f13e7f93a3d815c888">Tools</a>
 </li>
+<li>pointer
+: <a class="el" href="classmath_1_1vector.html#a2c161f225cb2735c6f1bce0c616e2319">math::vector&lt; T, N &gt;</a>
+</li>
 <li>Pop()
 : <a class="el" href="classtinyxml2_1_1DynArray.html#a2281e3342bc235bf391a67e362c75866">tinyxml2::DynArray&lt; T, INIT &gt;</a>
 </li>
@@ -236,22 +246,50 @@ $(document).ready(function(){initNavTree('functions_p.html','');});
 </li>
 <li>prepareSortieSpecifique()
 : <a class="el" href="classOutput.html#ab7b15cddd0099bd762f1e062be3b2657">Output</a>
+, <a class="el" href="classOutputGlobalGNU.html#af85d9d4472c5af45475a02fe44ff3f6a">OutputGlobalGNU</a>
 , <a class="el" href="classOutputGNU.html#a71dca1a19876116d3e2b579c6dd6e971">OutputGNU</a>
 , <a class="el" href="classOutputProbeGNU.html#a34c0842b6f10c487ad997c3d6d7d4ba1">OutputProbeGNU</a>
 , <a class="el" href="classOutputXML.html#a475afccf47c0faea15f06c2977c9cd7a">OutputXML</a>
 </li>
-<li>pretraitementFichierMeshGmsh()
-: <a class="el" href="classMeshUnStruct.html#ac9c7937cca59f039bb375524ba7f5a06">MeshUnStruct</a>
+<li>preProcessMeshFileForParallel()
+: <a class="el" href="classMeshUnStruct.html#a60860759033bf4636060fd8672e301ce">MeshUnStruct</a>
+, <a class="el" href="classMUSGmsh.html#a8aef5632793e5c229a978b317277c465">MUSGmsh</a>
+, <a class="el" href="classMUSGmshV2.html#a94cb70970f2614a74a0ddce3a64face5">MUSGmshV2</a>
+, <a class="el" href="classMUSGmshV4.html#a706aaf2f5d5451f57ba689d7a923c98b">MUSGmshV4</a>
+</li>
+<li>prepSourceTerms()
+: <a class="el" href="classSource.html#a9e398537f46f77d13b8bb4c5072d3ce3">Source</a>
+, <a class="el" href="classSourceGravity.html#a4dc69c23df70612b0d38a64421df8a23">SourceGravity</a>
+, <a class="el" href="classSourceHeating.html#ae482e6ac4043772eeacab1a80668863a">SourceHeating</a>
+, <a class="el" href="classSourceMRF.html#a5324bb9323b43dcd588ccb016e282b5f">SourceMRF</a>
+</li>
+<li>prepSourceTermsGravity()
+: <a class="el" href="classFlux.html#a61fa6b64216db767920ece6c50abe0b1">Flux</a>
+, <a class="el" href="classFluxKapila.html#ad8fa0b1533998352c0836b96b9e258f6">FluxKapila</a>
+, <a class="el" href="classFluxMultiP.html#ac96b962eb2fad853d4541eae7ee0b997">FluxMultiP</a>
+</li>
+<li>prepSourceTermsHeating()
+: <a class="el" href="classFlux.html#affd32e250b7176b5a0e6b8c0995bfa95">Flux</a>
+, <a class="el" href="classFluxEuler.html#a62a34b62b7ba40380e823a5f993f0752">FluxEuler</a>
+, <a class="el" href="classFluxKapila.html#ae8eaec0516ce8e2c1f4baca36d3c5d86">FluxKapila</a>
+, <a class="el" href="classFluxMultiP.html#a1dfd466b3b677e5adadc72c27412398e">FluxMultiP</a>
+, <a class="el" href="classFluxThermalEq.html#aa1d92c58fb8015306978ce3efa569466">FluxThermalEq</a>
+</li>
+<li>prepSourceTermsMRF()
+: <a class="el" href="classFlux.html#adbc43272ba14e0cba75f76e88575be17">Flux</a>
+, <a class="el" href="classFluxEuler.html#a79c464e28e221f9f4ed7438c53f79f1d">FluxEuler</a>
+, <a class="el" href="classFluxKapila.html#a7fafc41fde8b24c7ad52a9c1ef5bdce5">FluxKapila</a>
+, <a class="el" href="classFluxMultiP.html#a568045ffff2f5658e58208adfa6667ae">FluxMultiP</a>
 </li>
 <li>PreviousSibling()
 : <a class="el" href="classtinyxml2_1_1XMLConstHandle.html#a6917564e26b2c20ebdcb23c7940ad80a">tinyxml2::XMLConstHandle</a>
 , <a class="el" href="classtinyxml2_1_1XMLHandle.html#a428374e756f4db4cbc287fec64eae02c">tinyxml2::XMLHandle</a>
-, <a class="el" href="classtinyxml2_1_1XMLNode.html#a4cb1bf63e9de55129d21a7be60685fd4">tinyxml2::XMLNode</a>
+, <a class="el" href="classtinyxml2_1_1XMLNode.html#ae760e5e7e766df1d2cf3bb4a847876d6">tinyxml2::XMLNode</a>
 </li>
 <li>PreviousSiblingElement()
 : <a class="el" href="classtinyxml2_1_1XMLConstHandle.html#acb2e1c5762eff9f6ed72d1a2dfc14271">tinyxml2::XMLConstHandle</a>
 , <a class="el" href="classtinyxml2_1_1XMLHandle.html#a31a0d5d060292bec5df2b2efe2eca228">tinyxml2::XMLHandle</a>
-, <a class="el" href="classtinyxml2_1_1XMLNode.html#a573b2559c41dce244d893d610fbe0bd9">tinyxml2::XMLNode</a>
+, <a class="el" href="classtinyxml2_1_1XMLNode.html#ae9177fdc49cb89879f333581d5f734f1">tinyxml2::XMLNode</a>
 </li>
 <li>Print()
 : <a class="el" href="classtinyxml2_1_1XMLDocument.html#a686ea28672c0e0c60383ec28148c1ac0">tinyxml2::XMLDocument</a>
@@ -259,6 +297,11 @@ $(document).ready(function(){initNavTree('functions_p.html','');});
 </li>
 <li>printBlocGnuplot()
 : <a class="el" href="classOutputGNU.html#aab04817c09100fd9c130221f6b98a5b8">OutputGNU</a>
+</li>
+<li>printDomainDecomposition()
+: <a class="el" href="classdecomposition_1_1Decomposition.html#a39d1d1ed3177f6773f2b35d1d386de47">decomposition::Decomposition</a>
+, <a class="el" href="classMesh.html#a3f4bf228172a3a63c1de54e2b6e9e316">Mesh</a>
+, <a class="el" href="classMeshCartesianAMR.html#a83ebfc714f2165512aa8e59468891b9c">MeshCartesianAMR</a>
 </li>
 <li>PrintError()
 : <a class="el" href="classtinyxml2_1_1XMLDocument.html#a7545cc9a9a67eee9307c001aa316a388">tinyxml2::XMLDocument</a>
@@ -309,16 +352,15 @@ $(document).ready(function(){initNavTree('functions_p.html','');});
 : <a class="el" href="classtinyxml2_1_1XMLPrinter.html#a5495e504053f63f2c4d603327314fa91">tinyxml2::XMLPrinter</a>
 </li>
 <li>printTree()
-: <a class="el" href="classMesh.html#a979d8f5b3c050cf8b4be6eb22cadb684">Mesh</a>
-, <a class="el" href="classOutput.html#a4ee6870b924a5023198aba5589ed6692">Output</a>
+: <a class="el" href="classOutput.html#aeffa3714a2a75eb7dd994ba5ae7eecb6">Output</a>
 </li>
 <li>procedureRaffinement()
-: <a class="el" href="classMesh.html#ade7ff783ebf52250b327acec667bcfd4">Mesh</a>
-, <a class="el" href="classMeshCartesianAMR.html#afc7f95479b2dfbdf1a5978773fb06bd0">MeshCartesianAMR</a>
+: <a class="el" href="classMesh.html#ae1c0e47499e98c7a88ae38c0669e125c">Mesh</a>
+, <a class="el" href="classMeshCartesianAMR.html#a58970c5dd889989bd7b27925277cb5d6">MeshCartesianAMR</a>
 </li>
 <li>procedureRaffinementInitialization()
-: <a class="el" href="classMesh.html#afebfe061ca4a1b59c42feca7505ac4c1">Mesh</a>
-, <a class="el" href="classMeshCartesianAMR.html#a882a4895fd557e71d829583a903ce7aa">MeshCartesianAMR</a>
+: <a class="el" href="classMesh.html#afb5ba3045036500fa97120235e655e74">Mesh</a>
+, <a class="el" href="classMeshCartesianAMR.html#aabe0e11e851e74129385e1afed48fd19">MeshCartesianAMR</a>
 </li>
 <li>ProcessEntities()
 : <a class="el" href="classtinyxml2_1_1XMLDocument.html#adfcff7d0599cd520e9fcbb8891e1b678">tinyxml2::XMLDocument</a>
@@ -338,6 +380,10 @@ $(document).ready(function(){initNavTree('functions_p.html','');});
 <li>PushAttribute()
 : <a class="el" href="classtinyxml2_1_1XMLPrinter.html#a9a4e2c9348b42e147629d5a99f4af3f0">tinyxml2::XMLPrinter</a>
 </li>
+<li>pushBackSlope()
+: <a class="el" href="classCell.html#ad19bffac7eeab34be02b960c7986887d">Cell</a>
+, <a class="el" href="classCellO2Ghost.html#ae29578865cdefd87ca421bee14500151">CellO2Ghost</a>
+</li>
 <li>PushComment()
 : <a class="el" href="classtinyxml2_1_1XMLPrinter.html#afc8416814219591c2fd5656e0c233140">tinyxml2::XMLPrinter</a>
 </li>
@@ -348,7 +394,7 @@ $(document).ready(function(){initNavTree('functions_p.html','');});
 : <a class="el" href="classtinyxml2_1_1XMLPrinter.html#a178c608ce8476043d5d6513819cde903">tinyxml2::XMLPrinter</a>
 </li>
 <li>PushText()
-: <a class="el" href="classtinyxml2_1_1XMLPrinter.html#a3e0d4d78de25d4cf081009e1431cea7e">tinyxml2::XMLPrinter</a>
+: <a class="el" href="classtinyxml2_1_1XMLPrinter.html#aa715302dfc09473c77c853cbd5431965">tinyxml2::XMLPrinter</a>
 </li>
 <li>PushUnknown()
 : <a class="el" href="classtinyxml2_1_1XMLPrinter.html#ab1efc6d1548505e9984185f58f54b713">tinyxml2::XMLPrinter</a>
@@ -359,7 +405,7 @@ $(document).ready(function(){initNavTree('functions_p.html','');});
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Wed Apr 29 2020 10:31:20 for ECOGEN by
+    <li class="footer">Generated on Mon May 11 2020 16:03:30 for ECOGEN by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.11 </li>
   </ul>

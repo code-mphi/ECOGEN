@@ -3,6 +3,7 @@ var classTools =
     [ "Tools", "classTools.html#afb07d80318b98bb63771efa0654f961e", null ],
     [ "Tools", "classTools.html#a421c3e3454e24841544136d3e3a63929", null ],
     [ "~Tools", "classTools.html#a18472d06fc4c94a3af67d49d128a8510", null ],
+    [ "lowercase", "classTools.html#ae4d882025ee055870cc8c634c8297eb4", null ],
     [ "pi", "classTools.html#a1d4d24109d06e7986dfd19ad7e9f3359", null ],
     [ "uppercase", "classTools.html#a22a310269c758f79a7fb440114479b6e", null ],
     [ "ak", "classTools.html#af83874e60d4c2188bed6072578758e58", null ],

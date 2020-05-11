@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Introduction &mdash; ECOGEN b1.0 documentation</title>
+  <title>Introduction &mdash; ECOGEN 2.0 documentation</title>
   
 
   
@@ -61,7 +61,7 @@
             
             
               <div class="version">
-                1.0
+                2.0
               </div>
             
           
@@ -88,16 +88,17 @@
               <p class="caption"><span class="caption-text">Contents:</span></p>
 <ul class="current">
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Introduction</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#what-kind-of-physical-problems">What kind of physical problems ?</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#what-about-the-engine">What about the engine ?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#what-kind-of-physical-problems">What kind of physical problems?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#what-about-the-engine">What about the engine?</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="Chap2_installation_Chapter.html">Installation instructions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Chap3_IO_Chapter.html">I/O descriptions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Chap4_tutorials_Chapter.html">Tutorials</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Chap5_testCases_Chapter.html">Test cases</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Chap6_developpersGuide_Chapter.html">Developers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Chap6_developersGuide_Chapter.html">Developers</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Chap7_license.html">License</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Chap8_GUI.html">Graphical User Interface</a></li>
 <li class="toctree-l1"><a class="reference internal" href="zBibliography.html">Bibliography</a></li>
 </ul>
 
@@ -165,43 +166,44 @@
             
   <div class="section" id="introduction">
 <h1>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h1>
-<p>ECOGEN is a CFD plateform written in C++ object oriented programming langage. It is dedicated to numerical simulation of compressible multiphase flows. It has the vocation to share academics researches in the multiphase flow field in direction to ohter academics but also for industrials, students, etc.</p>
+<p>ECOGEN is a CFD</p>
 <ul class="simple">
-<li><p>multi-models (single phase, multiphase with or without equilibrium)</p></li>
-<li><p>multi-physics (thermal transfers, viscosity, surface tension, mass transfers)</p></li>
-<li><p>multi-meshes (Cartesian, unstructured, AMR)</p></li>
-<li><p>multi-CPU</p></li>
+<li><p>multi-model (single phase, multiphase with or without equilibriums),</p></li>
+<li><p>multi-physics (thermal transfers, viscosity, surface tension, mass transfers),</p></li>
+<li><p>multi-mesh (Cartesian, unstructured, AMR),</p></li>
+<li><p>multi-core,</p></li>
 </ul>
+<p>plateform written in C++ object-oriented-programming language. It is dedicated to numerical simulation of compressible multiphase flows. It has the vocation to share academics research in the multiphase flow field in direction to other academics but also for industrials, students, etc.</p>
 <p>ECOGEN stands for:</p>
 <ul class="simple">
-<li><p><strong>E</strong>volutive: makes easier future developpements</p></li>
-<li><p><strong>C</strong>ompressible: dedicated to compressible flows</p></li>
-<li><p><strong>O</strong>penSource: Distributed under GPLv3 Licence</p></li>
-<li><p><strong>G</strong>enuine: Uses the “Diffuse Interface Method” (DIM)</p></li>
-<li><p><strong>E</strong>asy: simple to install and use (C++ compiler and MPI)</p></li>
-<li><p><strong>N</strong>-phase: liquids, vapors, inert gases and/or reactives</p></li>
+<li><p><strong>E</strong>volutive: Made for easier future developments.</p></li>
+<li><p><strong>C</strong>ompressible: Dedicated to compressible flows.</p></li>
+<li><p><strong>O</strong>pen-source: Distributed under <a class="reference external" href="http://www.gnu.org/licenses">GNU GPLv3 License</a>.</p></li>
+<li><p><strong>G</strong>enuine: Uses the “Diffuse Interface Method” (DIM).</p></li>
+<li><p><strong>E</strong>asy: Simple to install and use (C++ compiler and MPI).</p></li>
+<li><p><strong>N</strong>-phase: Liquids, vapors, inert gases and/or reactives.</p></li>
 </ul>
 <div class="section" id="what-kind-of-physical-problems">
-<h2>What kind of physical problems ?<a class="headerlink" href="#what-kind-of-physical-problems" title="Permalink to this headline">¶</a></h2>
-<p>ECOGEN is designed for following applications:</p>
+<h2>What kind of physical problems?<a class="headerlink" href="#what-kind-of-physical-problems" title="Permalink to this headline">¶</a></h2>
+<p>ECOGEN is designed for the following:</p>
 <ul class="simple">
-<li><p>Solving interface problems between pure or multicomponents fluids and mixtures of multiphase flows.</p></li>
-<li><p>Treating surface tension, heat and mass transfers for evaporating and condensing flow, cavitation.</p></li>
-<li><p>Computing wave propagation in strongly unsteady situations using a specific Adaptative Mesh Reffinement .</p></li>
+<li><p>Solving interface problems between pure or multicomponent fluids and mixtures of multiphase flows.</p></li>
+<li><p>Treating surface tension, heat and mass transfers for cavitation, evaporating and condensing flows.</p></li>
+<li><p>Computing wave propagation in strongly unsteady situations using a specific Adaptive Mesh Refinement.</p></li>
 <li><p>Computing on unstructured grids to simulate complex geometries.</p></li>
 <li><p>Parallel computing using open MPI libraries.</p></li>
 </ul>
 </div>
 <div class="section" id="what-about-the-engine">
-<h2>What about the engine ?<a class="headerlink" href="#what-about-the-engine" title="Permalink to this headline">¶</a></h2>
-<p>ECOGEN is a receptacle of a story of diffuse interface method (DIM) theory that started in the late 90s. DIM summarizes more than 20 years of researches on multiphase flow modelling with the objective to develop mathematical models as well as their associated numerical methods.</p>
-<p>What is a diffuse interface? In DIM theory, the interfaces between pure phases are captured as diffuse numerical zones meaning that one goes continuously from one phase to another.</p>
+<h2>What about the engine?<a class="headerlink" href="#what-about-the-engine" title="Permalink to this headline">¶</a></h2>
+<p>ECOGEN is a receptacle of a story of diffuse-interface-method (DIM) theory that started in the late 90s. DIM summarizes more than 20 years of researches on multiphase flow modelling with the goal to develop mathematical models as well as their associated numerical methods.</p>
+<p>What is a diffuse interface? In DIM theory, the interfaces between pure phases are captured as diffuse numerical regions, meaning that one goes continuously from one phase to another.</p>
 <div class="figure align-default" id="id1">
 <span id="fig-introduction-diffinterface"></span><img alt="_images/diffInterface.png" src="_images/diffInterface.png" />
-<p class="caption"><span class="caption-number">Fig. 1 </span><span class="caption-text">1D extraction of the diffuse interface zone of a water droplet.</span><a class="headerlink" href="#id1" title="Permalink to this image">¶</a></p>
+<p class="caption"><span class="caption-number">Fig. 1 </span><span class="caption-text">1D extraction of the diffuse interface region of a water droplet.</span><a class="headerlink" href="#id1" title="Permalink to this image">¶</a></p>
 </div>
-<p>This way is possible thanks to a thermodynamical consistency. Then, the flow solution does no longer requires interface tracking algorithms: It became easy to simulate complex topological shape evolutions between miscible or non miscible fluid. Moreover, pressure waves (shock waves, acoustic waves) can propagate and interact properly in the whole flow.</p>
-<p>The basic research on DIM is now matured enough to propose ECOGEN, a numerical tool that can be largely cast and use to solve industrial as well as research multiphase flow problems.</p>
+<p>This way is possible thanks to a thermodynamics consistency. Then, the flow solution does no longer requires interface tracking algorithms: It becomes easy to simulate complex topological-shape evolutions between miscible or non-miscible fluids. Moreover, pressure waves (shock waves, acoustic waves) can propagate and interact properly in the whole flow.</p>
+<p>The base research on DIM is now matured enough to propose ECOGEN, a numerical tool that can be largely cast and use to solve industrial as well as research multiphase flow problems.</p>
 </div>
 </div>
 

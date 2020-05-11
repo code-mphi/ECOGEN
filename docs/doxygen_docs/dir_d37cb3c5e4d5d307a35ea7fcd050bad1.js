@@ -1,7 +1,9 @@
 var dir_d37cb3c5e4d5d307a35ea7fcd050bad1 =
 [
-    [ "FluxEuler.cpp", "FluxEuler_8cpp.html", "FluxEuler_8cpp" ],
-    [ "FluxEuler.h", "FluxEuler_8h.html", "FluxEuler_8h" ],
+    [ "FluxEuler.cpp", "FluxEuler_8cpp.html", null ],
+    [ "FluxEuler.h", "FluxEuler_8h.html", [
+      [ "FluxEuler", "classFluxEuler.html", "classFluxEuler" ]
+    ] ],
     [ "MixEuler.cpp", "MixEuler_8cpp.html", null ],
     [ "MixEuler.h", "MixEuler_8h.html", [
       [ "MixEuler", "classMixEuler.html", "classMixEuler" ]

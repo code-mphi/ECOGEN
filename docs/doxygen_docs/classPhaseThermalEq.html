@@ -154,8 +154,8 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a138c158fe749ffa60fb0393e9dda7630"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7c5bbaf78cca9a138a0d8a8dddd9758c"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classCoord.html">Coord</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPhaseThermalEq.html#a7c5bbaf78cca9a138a0d8a8dddd9758c">returnVector</a> (const int &amp;numVar) const </td></tr>
 <tr class="separator:a7c5bbaf78cca9a138a0d8a8dddd9758c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af3997720f534098a537cba9813bd4a6e"><td class="memItemLeft" align="right" valign="top">virtual std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPhaseThermalEq.html#af3997720f534098a537cba9813bd4a6e">returnNameScalar</a> (const int &amp;numVar) const </td></tr>
-<tr class="separator:af3997720f534098a537cba9813bd4a6e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab78292f1bcf9b67086efcb44487267f6"><td class="memItemLeft" align="right" valign="top">virtual std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPhaseThermalEq.html#ab78292f1bcf9b67086efcb44487267f6">returnNameScalar</a> (const int &amp;numVar) const </td></tr>
+<tr class="separator:ab78292f1bcf9b67086efcb44487267f6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7ee69ae92e1e18eb9ae9f51ac1eb69d8"><td class="memItemLeft" align="right" valign="top">virtual std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPhaseThermalEq.html#a7ee69ae92e1e18eb9ae9f51ac1eb69d8">returnNameVector</a> (const int &amp;numVar) const </td></tr>
 <tr class="separator:a7ee69ae92e1e18eb9ae9f51ac1eb69d8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a98d99c6436b49b4c600541426a09bb5a"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPhaseThermalEq.html#a98d99c6436b49b4c600541426a09bb5a">setScalar</a> (const int &amp;numVar, const double &amp;value)</td></tr>
@@ -164,8 +164,12 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a9fd903b31a606d738f5aad5ef9a71ec3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ada0efb01f403cb562d1798c0f921e2e2"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPhaseThermalEq.html#ada0efb01f403cb562d1798c0f921e2e2">fillBuffer</a> (double *buffer, int &amp;counter) const </td></tr>
 <tr class="separator:ada0efb01f403cb562d1798c0f921e2e2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3269150ee250c94d7b3c37680ef422fb"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPhaseThermalEq.html#a3269150ee250c94d7b3c37680ef422fb">fillBuffer</a> (std::vector&lt; double &gt; &amp;dataToSend) const </td></tr>
+<tr class="separator:a3269150ee250c94d7b3c37680ef422fb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8099f825ab589d40ea2500eb88499c3a"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPhaseThermalEq.html#a8099f825ab589d40ea2500eb88499c3a">getBuffer</a> (double *buffer, int &amp;counter, <a class="el" href="classEos.html">Eos</a> **eos)</td></tr>
 <tr class="separator:a8099f825ab589d40ea2500eb88499c3a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad5c6cf7d8cf96bdf03ea1021235a1f31"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPhaseThermalEq.html#ad5c6cf7d8cf96bdf03ea1021235a1f31">getBuffer</a> (std::vector&lt; double &gt; &amp;dataToReceive, int &amp;counter, <a class="el" href="classEos.html">Eos</a> **eos)</td></tr>
+<tr class="separator:ad5c6cf7d8cf96bdf03ea1021235a1f31"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa38e72703fc6d544d0549c2162b60d5f"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPhaseThermalEq.html#aa38e72703fc6d544d0549c2162b60d5f">computeSlopesPhase</a> (const <a class="el" href="classPhase.html">Phase</a> &amp;sLeft, const <a class="el" href="classPhase.html">Phase</a> &amp;sRight, const double &amp;distance)</td></tr>
 <tr class="separator:aa38e72703fc6d544d0549c2162b60d5f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab2f3b0966e62386207a0979520b0a846"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPhaseThermalEq.html#ab2f3b0966e62386207a0979520b0a846">setToZero</a> ()</td></tr>
@@ -184,35 +188,37 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:af0af7b0ceb783178fefc01464f8a2751"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad5d41b46a134dc9466e0fbc7d25a42e5"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPhaseThermalEq.html#ad5d41b46a134dc9466e0fbc7d25a42e5">verifyAndCorrectPhase</a> ()</td></tr>
 <tr class="separator:ad5d41b46a134dc9466e0fbc7d25a42e5"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab29a9b0d3685fd81d4acc50c4662e3a7"><td class="memItemLeft" align="right" valign="top">virtual double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPhaseThermalEq.html#ab29a9b0d3685fd81d4acc50c4662e3a7">getAlpha</a> () const </td></tr>
-<tr class="separator:ab29a9b0d3685fd81d4acc50c4662e3a7"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a694367a72fa8e9c8d6e02f5203ac3861"><td class="memItemLeft" align="right" valign="top">virtual double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPhaseThermalEq.html#a694367a72fa8e9c8d6e02f5203ac3861">getDensity</a> () const </td></tr>
-<tr class="separator:a694367a72fa8e9c8d6e02f5203ac3861"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a57ccdd7246ef196fc21e5b8701bd6443"><td class="memItemLeft" align="right" valign="top">virtual double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPhaseThermalEq.html#a57ccdd7246ef196fc21e5b8701bd6443">getPressure</a> () const </td></tr>
-<tr class="separator:a57ccdd7246ef196fc21e5b8701bd6443"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2a161aacfb6efaaa100b78c8e0c80661"><td class="memItemLeft" align="right" valign="top">virtual double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPhaseThermalEq.html#a2a161aacfb6efaaa100b78c8e0c80661">getU</a> () const </td></tr>
-<tr class="separator:a2a161aacfb6efaaa100b78c8e0c80661"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa941e1a043ae804f93d53ae81aafb40f"><td class="memItemLeft" align="right" valign="top">virtual double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPhaseThermalEq.html#aa941e1a043ae804f93d53ae81aafb40f">getV</a> () const </td></tr>
-<tr class="separator:aa941e1a043ae804f93d53ae81aafb40f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:abaad4d935e60e13cee20640ad1117ebd"><td class="memItemLeft" align="right" valign="top">virtual double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPhaseThermalEq.html#abaad4d935e60e13cee20640ad1117ebd">getW</a> () const </td></tr>
-<tr class="separator:abaad4d935e60e13cee20640ad1117ebd"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2154d1871164b29189404d403b433635"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classCoord.html">Coord</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPhaseThermalEq.html#a2154d1871164b29189404d403b433635">getVelocity</a> () const </td></tr>
-<tr class="separator:a2154d1871164b29189404d403b433635"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a365700b540bbbac1b3a345da07aa5948"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classEos.html">Eos</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPhaseThermalEq.html#a365700b540bbbac1b3a345da07aa5948">getEos</a> () const </td></tr>
-<tr class="separator:a365700b540bbbac1b3a345da07aa5948"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aacb38d78254074afb4f5e58926cd7101"><td class="memItemLeft" align="right" valign="top">virtual double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPhaseThermalEq.html#aacb38d78254074afb4f5e58926cd7101">getEnergy</a> () const </td></tr>
-<tr class="separator:aacb38d78254074afb4f5e58926cd7101"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a48795d70553482d2e5972f22b6da19d5"><td class="memItemLeft" align="right" valign="top">virtual double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPhaseThermalEq.html#a48795d70553482d2e5972f22b6da19d5">getSoundSpeed</a> () const </td></tr>
-<tr class="separator:a48795d70553482d2e5972f22b6da19d5"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3775fd99052c23ab20d81d055bedde3c"><td class="memItemLeft" align="right" valign="top">virtual double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPhaseThermalEq.html#a3775fd99052c23ab20d81d055bedde3c">getTotalEnergy</a> () const </td></tr>
-<tr class="separator:a3775fd99052c23ab20d81d055bedde3c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8452feb6ba004efd600fd9f5c6c5a36e"><td class="memItemLeft" align="right" valign="top">virtual double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPhaseThermalEq.html#a8452feb6ba004efd600fd9f5c6c5a36e">getTemperature</a> () const </td></tr>
-<tr class="separator:a8452feb6ba004efd600fd9f5c6c5a36e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae4695ea7f82758bd066a7667309329a7"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPhaseThermalEq.html#ae4695ea7f82758bd066a7667309329a7">setAlpha</a> (double alpha)</td></tr>
+<tr class="memitem:a91fbe244040893a04321d98bcb768a7b"><td class="memItemLeft" align="right" valign="top">virtual const double &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPhaseThermalEq.html#a91fbe244040893a04321d98bcb768a7b">getAlpha</a> () const </td></tr>
+<tr class="separator:a91fbe244040893a04321d98bcb768a7b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1438e6c002566a53b06e94d2c724e4bf"><td class="memItemLeft" align="right" valign="top">virtual const double &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPhaseThermalEq.html#a1438e6c002566a53b06e94d2c724e4bf">getDensity</a> () const </td></tr>
+<tr class="separator:a1438e6c002566a53b06e94d2c724e4bf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3ccd9ba1c3ef3854d24fca9a194e81aa"><td class="memItemLeft" align="right" valign="top">virtual const double &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPhaseThermalEq.html#a3ccd9ba1c3ef3854d24fca9a194e81aa">getPressure</a> () const </td></tr>
+<tr class="separator:a3ccd9ba1c3ef3854d24fca9a194e81aa"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a13a9145cadbf36d7fe97073ff95c478c"><td class="memItemLeft" align="right" valign="top">virtual const double &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPhaseThermalEq.html#a13a9145cadbf36d7fe97073ff95c478c">getU</a> () const </td></tr>
+<tr class="separator:a13a9145cadbf36d7fe97073ff95c478c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af089c09d0b84d9b6192493c168ecf83f"><td class="memItemLeft" align="right" valign="top">virtual const double &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPhaseThermalEq.html#af089c09d0b84d9b6192493c168ecf83f">getV</a> () const </td></tr>
+<tr class="separator:af089c09d0b84d9b6192493c168ecf83f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aad9cbd38d94639dc16df14f09b6685c6"><td class="memItemLeft" align="right" valign="top">virtual const double &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPhaseThermalEq.html#aad9cbd38d94639dc16df14f09b6685c6">getW</a> () const </td></tr>
+<tr class="separator:aad9cbd38d94639dc16df14f09b6685c6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a80f7b7c587ed1f8efe4e09cbb0f8dbce"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classCoord.html">Coord</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPhaseThermalEq.html#a80f7b7c587ed1f8efe4e09cbb0f8dbce">getVelocity</a> ()</td></tr>
+<tr class="separator:a80f7b7c587ed1f8efe4e09cbb0f8dbce"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a78142cde1b94e7c1e112b40097a6245a"><td class="memItemLeft" align="right" valign="top">virtual const <a class="el" href="classCoord.html">Coord</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPhaseThermalEq.html#a78142cde1b94e7c1e112b40097a6245a">getVelocity</a> () const </td></tr>
+<tr class="separator:a78142cde1b94e7c1e112b40097a6245a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae58b1e68b1776b10b2874d68eed5987b"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classEos.html">Eos</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPhaseThermalEq.html#ae58b1e68b1776b10b2874d68eed5987b">getEos</a> () const </td></tr>
+<tr class="separator:ae58b1e68b1776b10b2874d68eed5987b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a91b9a064a7fb81c91324939ef583a3f1"><td class="memItemLeft" align="right" valign="top">virtual const double &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPhaseThermalEq.html#a91b9a064a7fb81c91324939ef583a3f1">getEnergy</a> () const </td></tr>
+<tr class="separator:a91b9a064a7fb81c91324939ef583a3f1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ace5e74faaec1424e38f0051c9968a76f"><td class="memItemLeft" align="right" valign="top">virtual const double &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPhaseThermalEq.html#ace5e74faaec1424e38f0051c9968a76f">getSoundSpeed</a> () const </td></tr>
+<tr class="separator:ace5e74faaec1424e38f0051c9968a76f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a36c1ecf5e8d4af3e087c4dfe9d4e941f"><td class="memItemLeft" align="right" valign="top">virtual const double &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPhaseThermalEq.html#a36c1ecf5e8d4af3e087c4dfe9d4e941f">getTotalEnergy</a> () const </td></tr>
+<tr class="separator:a36c1ecf5e8d4af3e087c4dfe9d4e941f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a712c0ee95f51d32d17549df0aca061e3"><td class="memItemLeft" align="right" valign="top">virtual double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPhaseThermalEq.html#a712c0ee95f51d32d17549df0aca061e3">getTemperature</a> () const </td></tr>
+<tr class="separator:a712c0ee95f51d32d17549df0aca061e3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae4695ea7f82758bd066a7667309329a7"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPhaseThermalEq.html#ae4695ea7f82758bd066a7667309329a7">setAlpha</a> (double <a class="el" href="Cell_8h.html#acca207de98b59d1c41e3975008706d61a2cf6ecbb4e108d5977ec6bcc0750f86a">alpha</a>)</td></tr>
 <tr class="separator:ae4695ea7f82758bd066a7667309329a7"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:abf7e9c7bc8bcd4eaf831f504137097aa"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPhaseThermalEq.html#abf7e9c7bc8bcd4eaf831f504137097aa">setDensity</a> (double density)</td></tr>
+<tr class="memitem:abf7e9c7bc8bcd4eaf831f504137097aa"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPhaseThermalEq.html#abf7e9c7bc8bcd4eaf831f504137097aa">setDensity</a> (double <a class="el" href="Cell_8h.html#acca207de98b59d1c41e3975008706d61a22ebfd60994ac594c00a8e367372d092">density</a>)</td></tr>
 <tr class="separator:abf7e9c7bc8bcd4eaf831f504137097aa"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa15d7fe78009dccdbb237a8dce254545"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPhaseThermalEq.html#aa15d7fe78009dccdbb237a8dce254545">setPressure</a> (double pressure)</td></tr>
+<tr class="memitem:aa15d7fe78009dccdbb237a8dce254545"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPhaseThermalEq.html#aa15d7fe78009dccdbb237a8dce254545">setPressure</a> (double <a class="el" href="Cell_8h.html#acca207de98b59d1c41e3975008706d61a8e7f8389b914e827058d694b31468b3a">pressure</a>)</td></tr>
 <tr class="separator:aa15d7fe78009dccdbb237a8dce254545"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7090717ffe971b4e72a8109c09b52118"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPhaseThermalEq.html#a7090717ffe971b4e72a8109c09b52118">setVelocity</a> (const double &amp;u, const double &amp;v, const double &amp;w)</td></tr>
 <tr class="separator:a7090717ffe971b4e72a8109c09b52118"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -246,13 +252,13 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a1499773722b90aad0e2e4182566423ba inherit pub_methods_classPhase"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPhase.html#a1499773722b90aad0e2e4182566423ba">printPhase</a> (std::ofstream &amp;fileStream) const </td></tr>
 <tr class="memdesc:a1499773722b90aad0e2e4182566423ba inherit pub_methods_classPhase"><td class="mdescLeft">&#160;</td><td class="mdescRight">Print phase variables in file stream.  <a href="#a1499773722b90aad0e2e4182566423ba">More...</a><br /></td></tr>
 <tr class="separator:a1499773722b90aad0e2e4182566423ba inherit pub_methods_classPhase"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa7eac9a64fc6c331e534e14066bd41b0 inherit pub_methods_classPhase"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPhase.html#aa7eac9a64fc6c331e534e14066bd41b0">computeMassFraction</a> (const double &amp;density)</td></tr>
+<tr class="memitem:aa7eac9a64fc6c331e534e14066bd41b0 inherit pub_methods_classPhase"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPhase.html#aa7eac9a64fc6c331e534e14066bd41b0">computeMassFraction</a> (const double &amp;<a class="el" href="Cell_8h.html#acca207de98b59d1c41e3975008706d61a22ebfd60994ac594c00a8e367372d092">density</a>)</td></tr>
 <tr class="separator:aa7eac9a64fc6c331e534e14066bd41b0 inherit pub_methods_classPhase"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a99afaf416629434cd97d91f131467ecd inherit pub_methods_classPhase"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPhase.html#a99afaf416629434cd97d91f131467ecd">setVector</a> (const int &amp;numVar, const <a class="el" href="classCoord.html">Coord</a> &amp;value)</td></tr>
 <tr class="separator:a99afaf416629434cd97d91f131467ecd inherit pub_methods_classPhase"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:afcebbda8e3d13fc975c01a0c50c01ea7 inherit pub_methods_classPhase"><td class="memItemLeft" align="right" valign="top">virtual double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPhase.html#afcebbda8e3d13fc975c01a0c50c01ea7">getY</a> () const </td></tr>
-<tr class="separator:afcebbda8e3d13fc975c01a0c50c01ea7 inherit pub_methods_classPhase"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa1b68854de67247d82e067ba20e27fa2 inherit pub_methods_classPhase"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPhase.html#aa1b68854de67247d82e067ba20e27fa2">setTemperature</a> (double temperature)</td></tr>
+<tr class="memitem:a6bc9e77e2b06502fb0d47320256ace9c inherit pub_methods_classPhase"><td class="memItemLeft" align="right" valign="top">virtual const double &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPhase.html#a6bc9e77e2b06502fb0d47320256ace9c">getY</a> () const </td></tr>
+<tr class="separator:a6bc9e77e2b06502fb0d47320256ace9c inherit pub_methods_classPhase"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa1b68854de67247d82e067ba20e27fa2 inherit pub_methods_classPhase"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPhase.html#aa1b68854de67247d82e067ba20e27fa2">setTemperature</a> (double <a class="el" href="Cell_8h.html#acca207de98b59d1c41e3975008706d61a9922a43d37bee3212593f77ce4ec82f3">temperature</a>)</td></tr>
 <tr class="separator:aa1b68854de67247d82e067ba20e27fa2 inherit pub_methods_classPhase"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-attribs"></a>
@@ -629,6 +635,32 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
+<a class="anchor" id="a3269150ee250c94d7b3c37680ef422fb"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void PhaseThermalEq::fillBuffer </td>
+          <td>(</td>
+          <td class="paramtype">std::vector&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>dataToSend</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Reimplemented from <a class="el" href="classPhase.html#aea9965506452531d68ca7d791b473400">Phase</a>.</p>
+
+</div>
+</div>
 <a class="anchor" id="af36cc678ecc5dd7a4e2b51fcd6a890e5"></a>
 <div class="memitem">
 <div class="memproto">
@@ -665,7 +697,7 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="ab29a9b0d3685fd81d4acc50c4662e3a7"></a>
+<a class="anchor" id="a91fbe244040893a04321d98bcb768a7b"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="mlabels">
@@ -673,7 +705,7 @@ Protected Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">double PhaseThermalEq::getAlpha </td>
+          <td class="memname">virtual const double&amp; PhaseThermalEq::getAlpha </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td> const</td>
@@ -681,12 +713,12 @@ Protected Attributes</h2></td></tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
-<p>Reimplemented from <a class="el" href="classPhase.html#ab1531e683fc306d5abc4ec7d79d5f2eb">Phase</a>.</p>
+<p>Reimplemented from <a class="el" href="classPhase.html#a50782fc2c49f580ddf0ec95689d253b1">Phase</a>.</p>
 
 </div>
 </div>
@@ -732,6 +764,48 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
+<a class="anchor" id="ad5c6cf7d8cf96bdf03ea1021235a1f31"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void PhaseThermalEq::getBuffer </td>
+          <td>(</td>
+          <td class="paramtype">std::vector&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>dataToReceive</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int &amp;&#160;</td>
+          <td class="paramname"><em>counter</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classEos.html">Eos</a> **&#160;</td>
+          <td class="paramname"><em>eos</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Reimplemented from <a class="el" href="classPhase.html#a743005388bcf0d605c6fbe710761a3b1">Phase</a>.</p>
+
+</div>
+</div>
 <a class="anchor" id="a30f2e0852b1978671df15c0c26df6bef"></a>
 <div class="memitem">
 <div class="memproto">
@@ -768,7 +842,7 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="a694367a72fa8e9c8d6e02f5203ac3861"></a>
+<a class="anchor" id="a1438e6c002566a53b06e94d2c724e4bf"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="mlabels">
@@ -776,7 +850,7 @@ Protected Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">double PhaseThermalEq::getDensity </td>
+          <td class="memname">virtual const double&amp; PhaseThermalEq::getDensity </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td> const</td>
@@ -784,16 +858,16 @@ Protected Attributes</h2></td></tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
-<p>Reimplemented from <a class="el" href="classPhase.html#a590ce5d328473fc651d3416de760ae77">Phase</a>.</p>
+<p>Reimplemented from <a class="el" href="classPhase.html#a835bccf1d55cc046b6569658e51c8a48">Phase</a>.</p>
 
 </div>
 </div>
-<a class="anchor" id="aacb38d78254074afb4f5e58926cd7101"></a>
+<a class="anchor" id="a91b9a064a7fb81c91324939ef583a3f1"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="mlabels">
@@ -801,7 +875,7 @@ Protected Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">double PhaseThermalEq::getEnergy </td>
+          <td class="memname">virtual const double&amp; PhaseThermalEq::getEnergy </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td> const</td>
@@ -809,16 +883,16 @@ Protected Attributes</h2></td></tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
-<p>Reimplemented from <a class="el" href="classPhase.html#ab950e84e48d8d5618eb0560de8c3465b">Phase</a>.</p>
+<p>Reimplemented from <a class="el" href="classPhase.html#a10a0cb583de726f0457e59727d8144e7">Phase</a>.</p>
 
 </div>
 </div>
-<a class="anchor" id="a365700b540bbbac1b3a345da07aa5948"></a>
+<a class="anchor" id="ae58b1e68b1776b10b2874d68eed5987b"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="mlabels">
@@ -826,7 +900,7 @@ Protected Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classEos.html">Eos</a> * PhaseThermalEq::getEos </td>
+          <td class="memname">virtual <a class="el" href="classEos.html">Eos</a>* PhaseThermalEq::getEos </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td> const</td>
@@ -834,7 +908,7 @@ Protected Attributes</h2></td></tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -893,7 +967,7 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="a57ccdd7246ef196fc21e5b8701bd6443"></a>
+<a class="anchor" id="a3ccd9ba1c3ef3854d24fca9a194e81aa"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="mlabels">
@@ -901,7 +975,7 @@ Protected Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">double PhaseThermalEq::getPressure </td>
+          <td class="memname">virtual const double&amp; PhaseThermalEq::getPressure </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td> const</td>
@@ -909,16 +983,16 @@ Protected Attributes</h2></td></tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
-<p>Reimplemented from <a class="el" href="classPhase.html#ad44d5e3a33ff548b9f75dce26a237793">Phase</a>.</p>
+<p>Reimplemented from <a class="el" href="classPhase.html#aa92a686a9f26dbdefb075f28c8476397">Phase</a>.</p>
 
 </div>
 </div>
-<a class="anchor" id="a48795d70553482d2e5972f22b6da19d5"></a>
+<a class="anchor" id="ace5e74faaec1424e38f0051c9968a76f"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="mlabels">
@@ -926,7 +1000,7 @@ Protected Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">double PhaseThermalEq::getSoundSpeed </td>
+          <td class="memname">virtual const double&amp; PhaseThermalEq::getSoundSpeed </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td> const</td>
@@ -934,16 +1008,16 @@ Protected Attributes</h2></td></tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
-<p>Reimplemented from <a class="el" href="classPhase.html#aa70cfa2e53fb6f7d4616d8bbe645af29">Phase</a>.</p>
+<p>Reimplemented from <a class="el" href="classPhase.html#a388ad8bc5bdee154d1e5ed860544a369">Phase</a>.</p>
 
 </div>
 </div>
-<a class="anchor" id="a8452feb6ba004efd600fd9f5c6c5a36e"></a>
+<a class="anchor" id="a712c0ee95f51d32d17549df0aca061e3"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="mlabels">
@@ -951,7 +1025,7 @@ Protected Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">double PhaseThermalEq::getTemperature </td>
+          <td class="memname">virtual double PhaseThermalEq::getTemperature </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td> const</td>
@@ -959,7 +1033,7 @@ Protected Attributes</h2></td></tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -968,7 +1042,7 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="a3775fd99052c23ab20d81d055bedde3c"></a>
+<a class="anchor" id="a36c1ecf5e8d4af3e087c4dfe9d4e941f"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="mlabels">
@@ -976,32 +1050,7 @@ Protected Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">double PhaseThermalEq::getTotalEnergy </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td> const</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Reimplemented from <a class="el" href="classPhase.html#a166f7571fca9927265913c1284e049fc">Phase</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="a2a161aacfb6efaaa100b78c8e0c80661"></a>
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">virtual double PhaseThermalEq::getU </td>
+          <td class="memname">virtual const double&amp; PhaseThermalEq::getTotalEnergy </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td> const</td>
@@ -1014,11 +1063,11 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Reimplemented from <a class="el" href="classPhase.html#ab499ece61e0a2237a323e6d54a9753c0">Phase</a>.</p>
+<p>Reimplemented from <a class="el" href="classPhase.html#aa912b673fe7a6e1bdf4fce3b7798f13c">Phase</a>.</p>
 
 </div>
 </div>
-<a class="anchor" id="aa941e1a043ae804f93d53ae81aafb40f"></a>
+<a class="anchor" id="a13a9145cadbf36d7fe97073ff95c478c"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="mlabels">
@@ -1026,7 +1075,7 @@ Protected Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">virtual double PhaseThermalEq::getV </td>
+          <td class="memname">virtual const double&amp; PhaseThermalEq::getU </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td> const</td>
@@ -1039,11 +1088,11 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Reimplemented from <a class="el" href="classPhase.html#ac5fe4a08768e3639c3ce439ef4c4b7cf">Phase</a>.</p>
+<p>Reimplemented from <a class="el" href="classPhase.html#a82a5962e0e7e6939fb4d71c8376a5faf">Phase</a>.</p>
 
 </div>
 </div>
-<a class="anchor" id="a2154d1871164b29189404d403b433635"></a>
+<a class="anchor" id="af089c09d0b84d9b6192493c168ecf83f"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="mlabels">
@@ -1051,7 +1100,7 @@ Protected Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">virtual <a class="el" href="classCoord.html">Coord</a> PhaseThermalEq::getVelocity </td>
+          <td class="memname">virtual const double&amp; PhaseThermalEq::getV </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td> const</td>
@@ -1064,11 +1113,11 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Reimplemented from <a class="el" href="classPhase.html#aa645c1ad5b3ff4098dda7614773c8f4e">Phase</a>.</p>
+<p>Reimplemented from <a class="el" href="classPhase.html#a5a40bea9e7b130e6eedd69dadbf1ecf3">Phase</a>.</p>
 
 </div>
 </div>
-<a class="anchor" id="abaad4d935e60e13cee20640ad1117ebd"></a>
+<a class="anchor" id="a80f7b7c587ed1f8efe4e09cbb0f8dbce"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="mlabels">
@@ -1076,7 +1125,32 @@ Protected Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">virtual double PhaseThermalEq::getW </td>
+          <td class="memname">virtual <a class="el" href="classCoord.html">Coord</a>&amp; PhaseThermalEq::getVelocity </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Reimplemented from <a class="el" href="classPhase.html#a2e0a221c04c536f1e7ec79ac8c04eee1">Phase</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a78142cde1b94e7c1e112b40097a6245a"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual const <a class="el" href="classCoord.html">Coord</a>&amp; PhaseThermalEq::getVelocity </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td> const</td>
@@ -1089,7 +1163,32 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Reimplemented from <a class="el" href="classPhase.html#ad86415d697321f3e0c949da09aa3cecc">Phase</a>.</p>
+<p>Reimplemented from <a class="el" href="classPhase.html#a8e8f28c76288507865794e0824479747">Phase</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="aad9cbd38d94639dc16df14f09b6685c6"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual const double&amp; PhaseThermalEq::getW </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Reimplemented from <a class="el" href="classPhase.html#afd8541363b8565fcd5a2ab9a68d34b81">Phase</a>.</p>
 
 </div>
 </div>
@@ -1269,7 +1368,7 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="af3997720f534098a537cba9813bd4a6e"></a>
+<a class="anchor" id="ab78292f1bcf9b67086efcb44487267f6"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="mlabels">
@@ -1277,7 +1376,7 @@ Protected Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">string PhaseThermalEq::returnNameScalar </td>
+          <td class="memname">std::string PhaseThermalEq::returnNameScalar </td>
           <td>(</td>
           <td class="paramtype">const int &amp;&#160;</td>
           <td class="paramname"><em>numVar</em></td><td>)</td>
@@ -2020,7 +2119,7 @@ Protected Attributes</h2></td></tr>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="classPhaseThermalEq.html">PhaseThermalEq</a></li>
-    <li class="footer">Generated on Wed Apr 29 2020 10:31:12 for ECOGEN by
+    <li class="footer">Generated on Mon May 11 2020 16:03:19 for ECOGEN by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.11 </li>
   </ul>

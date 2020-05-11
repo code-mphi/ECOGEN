@@ -2,7 +2,7 @@
 
 I/O descriptions
 ================
-ECOGEN settings are managed via INPUT FILES only. The global INPUT FILES and OUTPUT FILES structure is depicted in :numref:`Fig:userGuide:overview`.
+ECOGEN settings are managed via input files only. The global input- and output- file structure is depicted in :numref:`Fig:userGuide:overview`.
 
 .. _Fig:userGuide:overview:
 

@@ -147,7 +147,7 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a785dc9c98e0397287efa169c5dea5d6d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af804a28d192297fb454fd89a8430ca2d"><td class="memItemLeft" align="right" valign="top">virtual double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMixThermalEq.html#af804a28d192297fb454fd89a8430ca2d">computePressure</a> (double *masses, const double &amp;mixInternalEnerg, <a class="el" href="classPhase.html">Phase</a> **phases, const int &amp;numberPhases)</td></tr>
 <tr class="separator:af804a28d192297fb454fd89a8430ca2d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a60dfbd32818b9556d3a7e36a2e1cd6ce"><td class="memItemLeft" align="right" valign="top">virtual double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMixThermalEq.html#a60dfbd32818b9556d3a7e36a2e1cd6ce">computeTemperature</a> (double *masses, const double &amp;pressure, <a class="el" href="classPhase.html">Phase</a> **phases, const int &amp;numberPhases)</td></tr>
+<tr class="memitem:a60dfbd32818b9556d3a7e36a2e1cd6ce"><td class="memItemLeft" align="right" valign="top">virtual double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMixThermalEq.html#a60dfbd32818b9556d3a7e36a2e1cd6ce">computeTemperature</a> (double *masses, const double &amp;<a class="el" href="Cell_8h.html#acca207de98b59d1c41e3975008706d61a8e7f8389b914e827058d694b31468b3a">pressure</a>, <a class="el" href="classPhase.html">Phase</a> **phases, const int &amp;numberPhases)</td></tr>
 <tr class="separator:a60dfbd32818b9556d3a7e36a2e1cd6ce"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8fc8b05a4ac4d2ecd5a0817c0cc9497b"><td class="memItemLeft" align="right" valign="top">virtual double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMixThermalEq.html#a8fc8b05a4ac4d2ecd5a0817c0cc9497b">computeInternalEnergy</a> (const double *Yk, const double *ek, const int &amp;numberPhases)</td></tr>
 <tr class="memdesc:a8fc8b05a4ac4d2ecd5a0817c0cc9497b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute mixture specific internal energy.  <a href="#a8fc8b05a4ac4d2ecd5a0817c0cc9497b">More...</a><br /></td></tr>
@@ -187,10 +187,10 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a36f91274d16eef00850eb92ba7d7bc22"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ada0fa8adabe73000e1d33756868eea4e"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classCoord.html">Coord</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMixThermalEq.html#ada0fa8adabe73000e1d33756868eea4e">returnVector</a> (const int &amp;numVar) const </td></tr>
 <tr class="separator:ada0fa8adabe73000e1d33756868eea4e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:abfc072be209b99affffa73ede04597be"><td class="memItemLeft" align="right" valign="top">virtual std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMixThermalEq.html#abfc072be209b99affffa73ede04597be">returnNameScalar</a> (const int &amp;numVar) const </td></tr>
-<tr class="separator:abfc072be209b99affffa73ede04597be"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8b72ab7cb67eccb5b28f53b5da15c1e4"><td class="memItemLeft" align="right" valign="top">virtual std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMixThermalEq.html#a8b72ab7cb67eccb5b28f53b5da15c1e4">returnNameVector</a> (const int &amp;numVar) const </td></tr>
-<tr class="separator:a8b72ab7cb67eccb5b28f53b5da15c1e4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a920571b031909abb5c08f8555e9c14ee"><td class="memItemLeft" align="right" valign="top">virtual std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMixThermalEq.html#a920571b031909abb5c08f8555e9c14ee">returnNameScalar</a> (const int &amp;numVar) const </td></tr>
+<tr class="separator:a920571b031909abb5c08f8555e9c14ee"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5c1fb02d568c3ca368138adbab9f12c8"><td class="memItemLeft" align="right" valign="top">virtual std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMixThermalEq.html#a5c1fb02d568c3ca368138adbab9f12c8">returnNameVector</a> (const int &amp;numVar) const </td></tr>
+<tr class="separator:a5c1fb02d568c3ca368138adbab9f12c8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5319c9a8f645a6b3165a0e698e6e8c5b"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMixThermalEq.html#a5319c9a8f645a6b3165a0e698e6e8c5b">setScalar</a> (const int &amp;numVar, const double &amp;value)</td></tr>
 <tr class="separator:a5319c9a8f645a6b3165a0e698e6e8c5b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af003e11018dde2b1b1dbe4ce6e092619"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMixThermalEq.html#af003e11018dde2b1b1dbe4ce6e092619">setVector</a> (const int &amp;numVar, const <a class="el" href="classCoord.html">Coord</a> &amp;value)</td></tr>
@@ -199,8 +199,12 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a6b4fbe7692d47b153a13e655d43dc4ff"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aed82243b159c6b483764220f4066152f"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMixThermalEq.html#aed82243b159c6b483764220f4066152f">fillBuffer</a> (double *buffer, int &amp;counter) const </td></tr>
 <tr class="separator:aed82243b159c6b483764220f4066152f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aca7fdc9ce5e660d510c642cf666b5dd2"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMixThermalEq.html#aca7fdc9ce5e660d510c642cf666b5dd2">fillBuffer</a> (std::vector&lt; double &gt; &amp;dataToSend) const </td></tr>
+<tr class="separator:aca7fdc9ce5e660d510c642cf666b5dd2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a29b34e31561edab7ae1e92fb753ab9be"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMixThermalEq.html#a29b34e31561edab7ae1e92fb753ab9be">getBuffer</a> (double *buffer, int &amp;counter)</td></tr>
 <tr class="separator:a29b34e31561edab7ae1e92fb753ab9be"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a362623785317bdf0fe372ec0f4ef4eff"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMixThermalEq.html#a362623785317bdf0fe372ec0f4ef4eff">getBuffer</a> (std::vector&lt; double &gt; &amp;dataToReceive, int &amp;counter)</td></tr>
+<tr class="separator:a362623785317bdf0fe372ec0f4ef4eff"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7f0405e2f9d9fb9b6423aaae59d3e370"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMixThermalEq.html#a7f0405e2f9d9fb9b6423aaae59d3e370">computeSlopesMixture</a> (const <a class="el" href="classMixture.html">Mixture</a> &amp;sLeft, const <a class="el" href="classMixture.html">Mixture</a> &amp;sRight, const double &amp;distance)</td></tr>
 <tr class="separator:a7f0405e2f9d9fb9b6423aaae59d3e370"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aff8d993587957d8763dfa11132819ab5"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMixThermalEq.html#aff8d993587957d8763dfa11132819ab5">setToZero</a> ()</td></tr>
@@ -215,26 +219,28 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a4f1aa231cbc5489a60eb45d269a13de6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3b451a783ebb4181ea23a2f6f6abf0b9"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMixThermalEq.html#a3b451a783ebb4181ea23a2f6f6abf0b9">getBufferSlopes</a> (double *buffer, int &amp;counter)</td></tr>
 <tr class="separator:a3b451a783ebb4181ea23a2f6f6abf0b9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae662f10b3649f9a52d9eeaa966a5c80b"><td class="memItemLeft" align="right" valign="top">virtual double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMixThermalEq.html#ae662f10b3649f9a52d9eeaa966a5c80b">getDensity</a> () const </td></tr>
-<tr class="separator:ae662f10b3649f9a52d9eeaa966a5c80b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a176fc5c52d1faebfb57ce14a6f4880e3"><td class="memItemLeft" align="right" valign="top">virtual double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMixThermalEq.html#a176fc5c52d1faebfb57ce14a6f4880e3">getPressure</a> () const </td></tr>
-<tr class="separator:a176fc5c52d1faebfb57ce14a6f4880e3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a145452c9e5da1c08def5038b7d43ea84"><td class="memItemLeft" align="right" valign="top">virtual double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMixThermalEq.html#a145452c9e5da1c08def5038b7d43ea84">getTemperature</a> () const </td></tr>
-<tr class="separator:a145452c9e5da1c08def5038b7d43ea84"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a838b13bc52ccae8c6a9d9c2a26569f29"><td class="memItemLeft" align="right" valign="top">virtual double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMixThermalEq.html#a838b13bc52ccae8c6a9d9c2a26569f29">getU</a> () const </td></tr>
-<tr class="separator:a838b13bc52ccae8c6a9d9c2a26569f29"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aedbdb6045f9ea8ca11312907f9e7783d"><td class="memItemLeft" align="right" valign="top">virtual double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMixThermalEq.html#aedbdb6045f9ea8ca11312907f9e7783d">getV</a> () const </td></tr>
-<tr class="separator:aedbdb6045f9ea8ca11312907f9e7783d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3d32eee67f4dc71afdfc181e98ccc0b4"><td class="memItemLeft" align="right" valign="top">virtual double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMixThermalEq.html#a3d32eee67f4dc71afdfc181e98ccc0b4">getW</a> () const </td></tr>
-<tr class="separator:a3d32eee67f4dc71afdfc181e98ccc0b4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a69f6d2f44cd52c88e48f57e1652df254"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classCoord.html">Coord</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMixThermalEq.html#a69f6d2f44cd52c88e48f57e1652df254">getVelocity</a> () const </td></tr>
-<tr class="separator:a69f6d2f44cd52c88e48f57e1652df254"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af3d62fcbb9ae3b2d4eaf8443086ccddd"><td class="memItemLeft" align="right" valign="top">virtual double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMixThermalEq.html#af3d62fcbb9ae3b2d4eaf8443086ccddd">getEnergy</a> () const </td></tr>
-<tr class="separator:af3d62fcbb9ae3b2d4eaf8443086ccddd"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:afed4e6b29d883c58a4b186aa67b809fb"><td class="memItemLeft" align="right" valign="top">virtual double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMixThermalEq.html#afed4e6b29d883c58a4b186aa67b809fb">getTotalEnergy</a> () const </td></tr>
-<tr class="separator:afed4e6b29d883c58a4b186aa67b809fb"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3b5aaecbfdfdc0e8f27ce3191de183e2"><td class="memItemLeft" align="right" valign="top">virtual double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMixThermalEq.html#a3b5aaecbfdfdc0e8f27ce3191de183e2">getMixSoundSpeed</a> () const </td></tr>
-<tr class="separator:a3b5aaecbfdfdc0e8f27ce3191de183e2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3beefd82b09bb079f32fe7e94797a125"><td class="memItemLeft" align="right" valign="top">virtual const double &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMixThermalEq.html#a3beefd82b09bb079f32fe7e94797a125">getDensity</a> () const </td></tr>
+<tr class="separator:a3beefd82b09bb079f32fe7e94797a125"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a522a3db54f56d7ca71cc68ca07459d1e"><td class="memItemLeft" align="right" valign="top">virtual const double &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMixThermalEq.html#a522a3db54f56d7ca71cc68ca07459d1e">getPressure</a> () const </td></tr>
+<tr class="separator:a522a3db54f56d7ca71cc68ca07459d1e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aec7a557a4e654edb41843dce312b47e1"><td class="memItemLeft" align="right" valign="top">virtual const double &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMixThermalEq.html#aec7a557a4e654edb41843dce312b47e1">getTemperature</a> () const </td></tr>
+<tr class="separator:aec7a557a4e654edb41843dce312b47e1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af4e6c5801f1f9b41ce83057c846c50e6"><td class="memItemLeft" align="right" valign="top">virtual const double &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMixThermalEq.html#af4e6c5801f1f9b41ce83057c846c50e6">getU</a> () const </td></tr>
+<tr class="separator:af4e6c5801f1f9b41ce83057c846c50e6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2f4412a5c6e68892608b7b6b45995c55"><td class="memItemLeft" align="right" valign="top">virtual const double &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMixThermalEq.html#a2f4412a5c6e68892608b7b6b45995c55">getV</a> () const </td></tr>
+<tr class="separator:a2f4412a5c6e68892608b7b6b45995c55"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a69f52b407d5e985250bfb5610bdb6134"><td class="memItemLeft" align="right" valign="top">virtual const double &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMixThermalEq.html#a69f52b407d5e985250bfb5610bdb6134">getW</a> () const </td></tr>
+<tr class="separator:a69f52b407d5e985250bfb5610bdb6134"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a10a1f882001194fcedb47d2ee93ec64c"><td class="memItemLeft" align="right" valign="top">virtual const <a class="el" href="classCoord.html">Coord</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMixThermalEq.html#a10a1f882001194fcedb47d2ee93ec64c">getVelocity</a> () const </td></tr>
+<tr class="separator:a10a1f882001194fcedb47d2ee93ec64c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a52dbe3cf690f18d3b822dd3a2eeef750"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classCoord.html">Coord</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMixThermalEq.html#a52dbe3cf690f18d3b822dd3a2eeef750">getVelocity</a> ()</td></tr>
+<tr class="separator:a52dbe3cf690f18d3b822dd3a2eeef750"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aac901c1d10a72f2c5abab8934a0d560a"><td class="memItemLeft" align="right" valign="top">virtual const double &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMixThermalEq.html#aac901c1d10a72f2c5abab8934a0d560a">getEnergy</a> () const </td></tr>
+<tr class="separator:aac901c1d10a72f2c5abab8934a0d560a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a08831cab5bdd0257c8983aaf5eba6718"><td class="memItemLeft" align="right" valign="top">virtual const double &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMixThermalEq.html#a08831cab5bdd0257c8983aaf5eba6718">getTotalEnergy</a> () const </td></tr>
+<tr class="separator:a08831cab5bdd0257c8983aaf5eba6718"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4c4288d7a2f7766e0e8bdf57335b91f8"><td class="memItemLeft" align="right" valign="top">virtual const double &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMixThermalEq.html#a4c4288d7a2f7766e0e8bdf57335b91f8">getMixSoundSpeed</a> () const </td></tr>
+<tr class="separator:a4c4288d7a2f7766e0e8bdf57335b91f8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aadf05130a749e97f421b7e47f868f745"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMixThermalEq.html#aadf05130a749e97f421b7e47f868f745">setPressure</a> (const double &amp;p)</td></tr>
 <tr class="separator:aadf05130a749e97f421b7e47f868f745"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1055affa89d50ccb6acdd9be1134a281"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMixThermalEq.html#a1055affa89d50ccb6acdd9be1134a281">setVelocity</a> (const double &amp;u, const double &amp;v, const double &amp;w)</td></tr>
@@ -263,15 +269,15 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a17c8b4e5becf22245a06b51688e6bed3 inherit pub_methods_classMixture"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMixture.html#a17c8b4e5becf22245a06b51688e6bed3">printMixture</a> (std::ofstream &amp;fileStream) const </td></tr>
 <tr class="memdesc:a17c8b4e5becf22245a06b51688e6bed3 inherit pub_methods_classMixture"><td class="mdescLeft">&#160;</td><td class="mdescRight">Print mixture variables in file stream.  <a href="#a17c8b4e5becf22245a06b51688e6bed3">More...</a><br /></td></tr>
 <tr class="separator:a17c8b4e5becf22245a06b51688e6bed3 inherit pub_methods_classMixture"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7ca8882c4fd979a284c6f1d024cbb09e inherit pub_methods_classMixture"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMixture.html#a7ca8882c4fd979a284c6f1d024cbb09e">computeTsat</a> (const <a class="el" href="classEos.html">Eos</a> *eosLiq, const <a class="el" href="classEos.html">Eos</a> *eosVap, const double &amp;pressure, double *dTsat=0)</td></tr>
+<tr class="memitem:a7ca8882c4fd979a284c6f1d024cbb09e inherit pub_methods_classMixture"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMixture.html#a7ca8882c4fd979a284c6f1d024cbb09e">computeTsat</a> (const <a class="el" href="classEos.html">Eos</a> *eosLiq, const <a class="el" href="classEos.html">Eos</a> *eosVap, const double &amp;<a class="el" href="Cell_8h.html#acca207de98b59d1c41e3975008706d61a8e7f8389b914e827058d694b31468b3a">pressure</a>, double *dTsat=0)</td></tr>
 <tr class="memdesc:a7ca8882c4fd979a284c6f1d024cbb09e inherit pub_methods_classMixture"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute saturation temperature for a liq/vapor couple of fluid at given pressure.  <a href="#a7ca8882c4fd979a284c6f1d024cbb09e">More...</a><br /></td></tr>
 <tr class="separator:a7ca8882c4fd979a284c6f1d024cbb09e inherit pub_methods_classMixture"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae07a8cca04ccb8de8fdb9af73520b183 inherit pub_methods_classMixture"><td class="memItemLeft" align="right" valign="top">virtual double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMixture.html#ae07a8cca04ccb8de8fdb9af73520b183">computePressure</a> (double masse, const double &amp;internalEnergy, <a class="el" href="classPhase.html">Phase</a> **phases, <a class="el" href="classMixture.html">Mixture</a> *mixture, const int &amp;numberPhases, const int &amp;liq, const int &amp;vap)</td></tr>
 <tr class="separator:ae07a8cca04ccb8de8fdb9af73520b183 inherit pub_methods_classMixture"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6d854f494b4b2b6a0c1d5c29a5030316 inherit pub_methods_classMixture"><td class="memItemLeft" align="right" valign="top">virtual double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMixture.html#a6d854f494b4b2b6a0c1d5c29a5030316">getFrozenSoundSpeed</a> () const </td></tr>
-<tr class="separator:a6d854f494b4b2b6a0c1d5c29a5030316 inherit pub_methods_classMixture"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a96e94215421df023ab82d53b9751c83c inherit pub_methods_classMixture"><td class="memItemLeft" align="right" valign="top">virtual double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMixture.html#a96e94215421df023ab82d53b9751c83c">getWoodSoundSpeed</a> () const </td></tr>
-<tr class="separator:a96e94215421df023ab82d53b9751c83c inherit pub_methods_classMixture"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adba6f7140e6dc7bf639da88792e25fe7 inherit pub_methods_classMixture"><td class="memItemLeft" align="right" valign="top">virtual const double &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMixture.html#adba6f7140e6dc7bf639da88792e25fe7">getFrozenSoundSpeed</a> () const </td></tr>
+<tr class="separator:adba6f7140e6dc7bf639da88792e25fe7 inherit pub_methods_classMixture"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1b8e9684381fe334b91e47f0e3f0a6fb inherit pub_methods_classMixture"><td class="memItemLeft" align="right" valign="top">virtual const double &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMixture.html#a1b8e9684381fe334b91e47f0e3f0a6fb">getWoodSoundSpeed</a> () const </td></tr>
+<tr class="separator:a1b8e9684381fe334b91e47f0e3f0a6fb inherit pub_methods_classMixture"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5a35a31bc8544ac3625af576224eb3f1 inherit pub_methods_classMixture"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMixture.html#a5a35a31bc8544ac3625af576224eb3f1">setTemperature</a> (const double &amp;T)</td></tr>
 <tr class="separator:a5a35a31bc8544ac3625af576224eb3f1 inherit pub_methods_classMixture"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
@@ -1181,6 +1187,32 @@ Private Attributes</h2></td></tr>
 
 </div>
 </div>
+<a class="anchor" id="aca7fdc9ce5e660d510c642cf666b5dd2"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void MixThermalEq::fillBuffer </td>
+          <td>(</td>
+          <td class="paramtype">std::vector&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>dataToSend</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Reimplemented from <a class="el" href="classMixture.html#ab82fd8a855dc29770c44b5963eb1ae3b">Mixture</a>.</p>
+
+</div>
+</div>
 <a class="anchor" id="a4f1aa231cbc5489a60eb45d269a13de6"></a>
 <div class="memitem">
 <div class="memproto">
@@ -1253,6 +1285,42 @@ Private Attributes</h2></td></tr>
 
 </div>
 </div>
+<a class="anchor" id="a362623785317bdf0fe372ec0f4ef4eff"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void MixThermalEq::getBuffer </td>
+          <td>(</td>
+          <td class="paramtype">std::vector&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>dataToReceive</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int &amp;&#160;</td>
+          <td class="paramname"><em>counter</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Reimplemented from <a class="el" href="classMixture.html#a5e816141a8d18adf26eea95db7db061e">Mixture</a>.</p>
+
+</div>
+</div>
 <a class="anchor" id="a3b451a783ebb4181ea23a2f6f6abf0b9"></a>
 <div class="memitem">
 <div class="memproto">
@@ -1289,7 +1357,7 @@ Private Attributes</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="ae662f10b3649f9a52d9eeaa966a5c80b"></a>
+<a class="anchor" id="a3beefd82b09bb079f32fe7e94797a125"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="mlabels">
@@ -1297,7 +1365,7 @@ Private Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">double MixThermalEq::getDensity </td>
+          <td class="memname">virtual const double&amp; MixThermalEq::getDensity </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td> const</td>
@@ -1305,16 +1373,16 @@ Private Attributes</h2></td></tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
-<p>Reimplemented from <a class="el" href="classMixture.html#abab77ebe1bdf4c002c339998d150f16a">Mixture</a>.</p>
+<p>Reimplemented from <a class="el" href="classMixture.html#a014b5b093c1749daefabd137d9c21dda">Mixture</a>.</p>
 
 </div>
 </div>
-<a class="anchor" id="af3d62fcbb9ae3b2d4eaf8443086ccddd"></a>
+<a class="anchor" id="aac901c1d10a72f2c5abab8934a0d560a"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="mlabels">
@@ -1322,7 +1390,7 @@ Private Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">double MixThermalEq::getEnergy </td>
+          <td class="memname">virtual const double&amp; MixThermalEq::getEnergy </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td> const</td>
@@ -1330,16 +1398,16 @@ Private Attributes</h2></td></tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
-<p>Reimplemented from <a class="el" href="classMixture.html#a325479f3f1c4788e7d1ae97b231e1d33">Mixture</a>.</p>
+<p>Reimplemented from <a class="el" href="classMixture.html#a98d7c6da94c6a2062bfd50c83bd8a40f">Mixture</a>.</p>
 
 </div>
 </div>
-<a class="anchor" id="a3b5aaecbfdfdc0e8f27ce3191de183e2"></a>
+<a class="anchor" id="a4c4288d7a2f7766e0e8bdf57335b91f8"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="mlabels">
@@ -1347,7 +1415,7 @@ Private Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">double MixThermalEq::getMixSoundSpeed </td>
+          <td class="memname">virtual const double&amp; MixThermalEq::getMixSoundSpeed </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td> const</td>
@@ -1355,12 +1423,12 @@ Private Attributes</h2></td></tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
-<p>Reimplemented from <a class="el" href="classMixture.html#a7bcb3906172c19e503bedb51ebfc1a70">Mixture</a>.</p>
+<p>Reimplemented from <a class="el" href="classMixture.html#a87659cdd56410e202a9a850c86cf574d">Mixture</a>.</p>
 
 </div>
 </div>
@@ -1414,7 +1482,7 @@ Private Attributes</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="a176fc5c52d1faebfb57ce14a6f4880e3"></a>
+<a class="anchor" id="a522a3db54f56d7ca71cc68ca07459d1e"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="mlabels">
@@ -1422,7 +1490,7 @@ Private Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">double MixThermalEq::getPressure </td>
+          <td class="memname">virtual const double&amp; MixThermalEq::getPressure </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td> const</td>
@@ -1430,16 +1498,16 @@ Private Attributes</h2></td></tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
-<p>Reimplemented from <a class="el" href="classMixture.html#aedaa1cdab8ddb9b6705ce70b11f1b782">Mixture</a>.</p>
+<p>Reimplemented from <a class="el" href="classMixture.html#ade2e89ccea2bc49b983a935040d917bb">Mixture</a>.</p>
 
 </div>
 </div>
-<a class="anchor" id="a145452c9e5da1c08def5038b7d43ea84"></a>
+<a class="anchor" id="aec7a557a4e654edb41843dce312b47e1"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="mlabels">
@@ -1447,7 +1515,7 @@ Private Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">double MixThermalEq::getTemperature </td>
+          <td class="memname">virtual const double&amp; MixThermalEq::getTemperature </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td> const</td>
@@ -1455,16 +1523,16 @@ Private Attributes</h2></td></tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
-<p>Reimplemented from <a class="el" href="classMixture.html#a1122de11fa3a8baa840190955d02208c">Mixture</a>.</p>
+<p>Reimplemented from <a class="el" href="classMixture.html#af41015fcffa92d07149387e37135281c">Mixture</a>.</p>
 
 </div>
 </div>
-<a class="anchor" id="afed4e6b29d883c58a4b186aa67b809fb"></a>
+<a class="anchor" id="a08831cab5bdd0257c8983aaf5eba6718"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="mlabels">
@@ -1472,7 +1540,7 @@ Private Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">double MixThermalEq::getTotalEnergy </td>
+          <td class="memname">virtual const double&amp; MixThermalEq::getTotalEnergy </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td> const</td>
@@ -1480,16 +1548,16 @@ Private Attributes</h2></td></tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
-<p>Reimplemented from <a class="el" href="classMixture.html#a8e709966c7ec6d9b7a2c9bd69a36427b">Mixture</a>.</p>
+<p>Reimplemented from <a class="el" href="classMixture.html#a38b2abab58459bd56d59ccf638a41b76">Mixture</a>.</p>
 
 </div>
 </div>
-<a class="anchor" id="a838b13bc52ccae8c6a9d9c2a26569f29"></a>
+<a class="anchor" id="af4e6c5801f1f9b41ce83057c846c50e6"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="mlabels">
@@ -1497,7 +1565,7 @@ Private Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">double MixThermalEq::getU </td>
+          <td class="memname">virtual const double&amp; MixThermalEq::getU </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td> const</td>
@@ -1505,16 +1573,16 @@ Private Attributes</h2></td></tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
-<p>Reimplemented from <a class="el" href="classMixture.html#a72823d523142487e39c32d65323d35ec">Mixture</a>.</p>
+<p>Reimplemented from <a class="el" href="classMixture.html#a7995f0a95a6bf40007f50387a5b4175e">Mixture</a>.</p>
 
 </div>
 </div>
-<a class="anchor" id="aedbdb6045f9ea8ca11312907f9e7783d"></a>
+<a class="anchor" id="a2f4412a5c6e68892608b7b6b45995c55"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="mlabels">
@@ -1522,7 +1590,7 @@ Private Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">double MixThermalEq::getV </td>
+          <td class="memname">virtual const double&amp; MixThermalEq::getV </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td> const</td>
@@ -1530,16 +1598,16 @@ Private Attributes</h2></td></tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
-<p>Reimplemented from <a class="el" href="classMixture.html#a8c92f5883b9d8289b7f57c6577a3b66b">Mixture</a>.</p>
+<p>Reimplemented from <a class="el" href="classMixture.html#ac49e434a0029e084a6272b7bb06077f6">Mixture</a>.</p>
 
 </div>
 </div>
-<a class="anchor" id="a69f6d2f44cd52c88e48f57e1652df254"></a>
+<a class="anchor" id="a10a1f882001194fcedb47d2ee93ec64c"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="mlabels">
@@ -1547,7 +1615,7 @@ Private Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classCoord.html">Coord</a> MixThermalEq::getVelocity </td>
+          <td class="memname">virtual const <a class="el" href="classCoord.html">Coord</a>&amp; MixThermalEq::getVelocity </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td> const</td>
@@ -1555,16 +1623,16 @@ Private Attributes</h2></td></tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
-<p>Reimplemented from <a class="el" href="classMixture.html#ae2122d0bbd5658f16224f0ce14073eb0">Mixture</a>.</p>
+<p>Reimplemented from <a class="el" href="classMixture.html#a7cae16653204369a1346e17417bdadd4">Mixture</a>.</p>
 
 </div>
 </div>
-<a class="anchor" id="a3d32eee67f4dc71afdfc181e98ccc0b4"></a>
+<a class="anchor" id="a52dbe3cf690f18d3b822dd3a2eeef750"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="mlabels">
@@ -1572,7 +1640,32 @@ Private Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">double MixThermalEq::getW </td>
+          <td class="memname">virtual <a class="el" href="classCoord.html">Coord</a>&amp; MixThermalEq::getVelocity </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Reimplemented from <a class="el" href="classMixture.html#aaf9b2e9bbb49758fae0f065417d0b435">Mixture</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a69f52b407d5e985250bfb5610bdb6134"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual const double&amp; MixThermalEq::getW </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td> const</td>
@@ -1580,12 +1673,12 @@ Private Attributes</h2></td></tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
-<p>Reimplemented from <a class="el" href="classMixture.html#af8ce96e663536aa4a7c1107c8d03bad7">Mixture</a>.</p>
+<p>Reimplemented from <a class="el" href="classMixture.html#affff3558fbfbb39ef929149e2d4bd0ca">Mixture</a>.</p>
 
 </div>
 </div>
@@ -1706,9 +1799,9 @@ Private Attributes</h2></td></tr>
 <p>velocity vector projection in a local cartesian coordinate system </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">normal</td><td>normal vector associated to the cell boundary </td></tr>
-    <tr><td class="paramname">tangent</td><td>tangent vector associated to the cell boundary </td></tr>
-    <tr><td class="paramname">binormal</td><td>binormal vector associated to the cell boundary </td></tr>
+    <tr><td class="paramname">normal</td><td>normal vector associated to the cell interface </td></tr>
+    <tr><td class="paramname">tangent</td><td>tangent vector associated to the cell interface </td></tr>
+    <tr><td class="paramname">binormal</td><td>binormal vector associated to the cell interface </td></tr>
   </table>
   </dd>
 </dl>
@@ -1803,7 +1896,7 @@ Private Attributes</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="abfc072be209b99affffa73ede04597be"></a>
+<a class="anchor" id="a920571b031909abb5c08f8555e9c14ee"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="mlabels">
@@ -1811,7 +1904,7 @@ Private Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">string MixThermalEq::returnNameScalar </td>
+          <td class="memname">std::string MixThermalEq::returnNameScalar </td>
           <td>(</td>
           <td class="paramtype">const int &amp;&#160;</td>
           <td class="paramname"><em>numVar</em></td><td>)</td>
@@ -1829,7 +1922,7 @@ Private Attributes</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="a8b72ab7cb67eccb5b28f53b5da15c1e4"></a>
+<a class="anchor" id="a5c1fb02d568c3ca368138adbab9f12c8"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="mlabels">
@@ -1837,7 +1930,7 @@ Private Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">string MixThermalEq::returnNameVector </td>
+          <td class="memname">std::string MixThermalEq::returnNameVector </td>
           <td>(</td>
           <td class="paramtype">const int &amp;&#160;</td>
           <td class="paramname"><em>numVar</em></td><td>)</td>
@@ -1948,9 +2041,9 @@ Private Attributes</h2></td></tr>
 <p>velocity vector reverse projection in the absolute cartesian coordinate system </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">normal</td><td>normal vector associated to the cell boundary </td></tr>
-    <tr><td class="paramname">tangent</td><td>tangent vector associated to the cell boundary </td></tr>
-    <tr><td class="paramname">binormal</td><td>binormal vector associated to the cell boundary </td></tr>
+    <tr><td class="paramname">normal</td><td>normal vector associated to the cell interface </td></tr>
+    <tr><td class="paramname">tangent</td><td>tangent vector associated to the cell interface </td></tr>
+    <tr><td class="paramname">binormal</td><td>binormal vector associated to the cell interface </td></tr>
   </table>
   </dd>
 </dl>
@@ -2453,7 +2546,7 @@ Private Attributes</h2></td></tr>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="classMixThermalEq.html">MixThermalEq</a></li>
-    <li class="footer">Generated on Wed Apr 29 2020 10:31:12 for ECOGEN by
+    <li class="footer">Generated on Mon May 11 2020 16:03:19 for ECOGEN by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.11 </li>
   </ul>

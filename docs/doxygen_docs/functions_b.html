@@ -83,6 +83,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
       <li class="current"><a href="functions.html"><span>All</span></a></li>
       <li><a href="functions_func.html"><span>Functions</span></a></li>
       <li><a href="functions_vars.html"><span>Variables</span></a></li>
+      <li><a href="functions_type.html"><span>Typedefs</span></a></li>
       <li><a href="functions_eval.html"><span>Enumerator</span></a></li>
       <li><a href="functions_rela.html"><span>Related&#160;Functions</span></a></li>
     </ul>
@@ -99,6 +100,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
       <li><a href="functions_g.html#index_g"><span>g</span></a></li>
       <li><a href="functions_h.html#index_h"><span>h</span></a></li>
       <li><a href="functions_i.html#index_i"><span>i</span></a></li>
+      <li><a href="functions_k.html#index_k"><span>k</span></a></li>
       <li><a href="functions_l.html#index_l"><span>l</span></a></li>
       <li><a href="functions_m.html#index_m"><span>m</span></a></li>
       <li><a href="functions_n.html#index_n"><span>n</span></a></li>
@@ -113,6 +115,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
       <li><a href="functions_w.html#index_w"><span>w</span></a></li>
       <li><a href="functions_x.html#index_x"><span>x</span></a></li>
       <li><a href="functions_y.html#index_y"><span>y</span></a></li>
+      <li><a href="functions_z.html#index_z"><span>z</span></a></li>
       <li><a href="functions_0x7e.html#index_0x7e"><span>~</span></a></li>
     </ul>
   </div>
@@ -149,13 +152,24 @@ $(document).ready(function(){initNavTree('functions_b.html','');});
 <div class="textblock">Here is a list of all class members with links to the classes they belong to:</div>
 
 <h3><a class="anchor" id="index_b"></a>- b -</h3><ul>
+<li>back()
+: <a class="el" href="classmath_1_1vector.html#ad29fd2ea6fba88fd885d1f033e41710c">math::vector&lt; T, N &gt;</a>
+</li>
+<li>balance()
+: <a class="el" href="classMeshCartesianAMR.html#a30e2e3c7f9f58d836743600224448950">MeshCartesianAMR</a>
+</li>
+<li>begin()
+: <a class="el" href="classmath_1_1vector.html#a8082bf1b381fbdb3f6c12f6e2fe5454e">math::vector&lt; T, N &gt;</a>
+</li>
 <li>belong()
-: <a class="el" href="classGDDisc.html#ac8221eaaa1283b469fecc061155e2d9e">GDDisc</a>
+: <a class="el" href="classGDCuboid.html#ab36571f25e9c642c741a22ce50b27053">GDCuboid</a>
+, <a class="el" href="classGDCylinder.html#a4df7a49bbc0f4d2b5a5721dd42afc426">GDCylinder</a>
+, <a class="el" href="classGDDisc.html#ac8221eaaa1283b469fecc061155e2d9e">GDDisc</a>
 , <a class="el" href="classGDEllipse.html#a392cdaf177ad00e796f3154ac73f11fa">GDEllipse</a>
+, <a class="el" href="classGDEllipsoid.html#a3d3611a6617169cd8d0ced0ed4e8c75b">GDEllipsoid</a>
 , <a class="el" href="classGDEntireDomain.html#aca2d4bd9bc6d1a64142a5ff85ae27b82">GDEntireDomain</a>
 , <a class="el" href="classGDEntireDomainWithParticularities.html#ad58e313600e9d05c250a64ea7ce68e53">GDEntireDomainWithParticularities</a>
 , <a class="el" href="classGDHalfSpace.html#a1928c2fc0b9e7cac9c9d7a93d96daf09">GDHalfSpace</a>
-, <a class="el" href="classGDPavement.html#aeda2d5417d15adf9fac7ff85773a7e49">GDPavement</a>
 , <a class="el" href="classGDRectangle.html#aaa47466985c1469ab271acb5fcd1358f">GDRectangle</a>
 , <a class="el" href="classGDSphere.html#afa0700c04b86359cc8d55220ae32bc47">GDSphere</a>
 , <a class="el" href="classGeometricalDomain.html#ae50006cb2e26fc2c8bd21a296982cb23">GeometricalDomain</a>
@@ -169,11 +183,11 @@ $(document).ready(function(){initNavTree('functions_b.html','');});
 <li>BoundCond()
 : <a class="el" href="classBoundCond.html#a7058212d3f84c7de448e19d84cdd2c4e">BoundCond</a>
 </li>
-<li>BoundCondAbs()
-: <a class="el" href="classBoundCondAbs.html#a5410901a191d7f542f9fb82d74a730bf">BoundCondAbs</a>
-</li>
 <li>BoundCondInj()
 : <a class="el" href="classBoundCondInj.html#ae14943cd2f0be6123d19f6d1522b71c1">BoundCondInj</a>
+</li>
+<li>BoundCondNonReflecting()
+: <a class="el" href="classBoundCondNonReflecting.html#a9ea10bb442db8100ea8c405d19ad8612">BoundCondNonReflecting</a>
 </li>
 <li>BoundCondOutflow()
 : <a class="el" href="classBoundCondOutflow.html#a9c1e406bc917b726a52faf651fc4cc71">BoundCondOutflow</a>
@@ -185,7 +199,7 @@ $(document).ready(function(){initNavTree('functions_b.html','');});
 : <a class="el" href="classBoundCondTank.html#ae83a9e4f92a1ef785ee651498d5f37ff">BoundCondTank</a>
 </li>
 <li>BoundCondWall()
-: <a class="el" href="classBoundCondWall.html#a7235929cb12f2bfe4866a470d70ffbe8">BoundCondWall</a>
+: <a class="el" href="classBoundCondWall.html#a4bb9d293a6231b39b8bf2e11c4cafa93">BoundCondWall</a>
 </li>
 <li>BoundCondWallO2()
 : <a class="el" href="classBoundCondWallO2.html#ab2e651ed625951cb19771742ee113582">BoundCondWallO2</a>
@@ -204,8 +218,8 @@ $(document).ready(function(){initNavTree('functions_b.html','');});
 , <a class="el" href="classFluxMultiP.html#a2209f87cd3fe760996e2bfd8b84a3b43">FluxMultiP</a>
 , <a class="el" href="classFluxThermalEq.html#a35ba0ce9cc83ea64017535c849b397e8">FluxThermalEq</a>
 </li>
-<li>buildLvlCellsAndLvlInternalBoundariesArrays()
-: <a class="el" href="classCell.html#aba6c85b5c3711c932816a6fc3d3346dd">Cell</a>
+<li>buildLvlCellsAndLvlInternalCellInterfacesArrays()
+: <a class="el" href="classCell.html#a4a402e44a7ca385beba561753de8b8ab">Cell</a>
 </li>
 <li>buildPrim()
 : <a class="el" href="classCell.html#a35d6c408dd8052d26ed3fd145d6be081">Cell</a>
@@ -222,7 +236,7 @@ $(document).ready(function(){initNavTree('functions_b.html','');});
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Wed Apr 29 2020 10:31:20 for ECOGEN by
+    <li class="footer">Generated on Mon May 11 2020 16:03:30 for ECOGEN by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.11 </li>
   </ul>

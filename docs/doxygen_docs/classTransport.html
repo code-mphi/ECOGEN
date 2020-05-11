@@ -126,14 +126,14 @@ $(document).ready(function(){initNavTree('classTransport.html','');});
 Public Member Functions</h2></td></tr>
 <tr class="memitem:a36928c178aa490c02aa25b4b12e2bf63"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classTransport.html#a36928c178aa490c02aa25b4b12e2bf63">Transport</a> ()</td></tr>
 <tr class="separator:a36928c178aa490c02aa25b4b12e2bf63"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9071b156741912e4550f6c88467d2834"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classTransport.html#a9071b156741912e4550f6c88467d2834">~Transport</a> ()</td></tr>
+<tr class="memitem:a9071b156741912e4550f6c88467d2834"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classTransport.html#a9071b156741912e4550f6c88467d2834">~Transport</a> ()</td></tr>
 <tr class="separator:a9071b156741912e4550f6c88467d2834"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1ac0ea1929d40518fc6a75eb378b0757"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classTransport.html#a1ac0ea1929d40518fc6a75eb378b0757">setValue</a> (double value)</td></tr>
 <tr class="memdesc:a1ac0ea1929d40518fc6a75eb378b0757"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the value of the corresponding transport variable.  <a href="#a1ac0ea1929d40518fc6a75eb378b0757">More...</a><br /></td></tr>
 <tr class="separator:a1ac0ea1929d40518fc6a75eb378b0757"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a16f09b4c5351a1bae1ce474527e736bc"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classTransport.html#a16f09b4c5351a1bae1ce474527e736bc">getValue</a> () const </td></tr>
-<tr class="memdesc:a16f09b4c5351a1bae1ce474527e736bc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return the value of the corresponding transport variable.  <a href="#a16f09b4c5351a1bae1ce474527e736bc">More...</a><br /></td></tr>
-<tr class="separator:a16f09b4c5351a1bae1ce474527e736bc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa117e22da56185f41ee55f7e9eecc28e"><td class="memItemLeft" align="right" valign="top">const double &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classTransport.html#aa117e22da56185f41ee55f7e9eecc28e">getValue</a> () const </td></tr>
+<tr class="memdesc:aa117e22da56185f41ee55f7e9eecc28e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return the value of the corresponding transport variable.  <a href="#aa117e22da56185f41ee55f7e9eecc28e">More...</a><br /></td></tr>
+<tr class="separator:aa117e22da56185f41ee55f7e9eecc28e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa069edd3b32d74df6434b4a962def4ea"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classTransport.html#aa069edd3b32d74df6434b4a962def4ea">solveRiemann</a> (double transportLeft, double transportRight, double sM)</td></tr>
 <tr class="memdesc:aa069edd3b32d74df6434b4a962def4ea"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classCell.html" title="Base class for a mesh cell. ">Cell</a> to cell Riemann solver for the corresponding transport equation.  <a href="#aa069edd3b32d74df6434b4a962def4ea">More...</a><br /></td></tr>
 <tr class="separator:aa069edd3b32d74df6434b4a962def4ea"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -155,10 +155,10 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a48d9deb5f4c1ebbc91b587e183083bbb"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classTransport.html#a48d9deb5f4c1ebbc91b587e183083bbb">subtractFlux</a> (double coefA, const int num)</td></tr>
 <tr class="memdesc:a48d9deb5f4c1ebbc91b587e183083bbb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Subtract flux to the corresponding transport buffer flux.  <a href="#a48d9deb5f4c1ebbc91b587e183083bbb">More...</a><br /></td></tr>
 <tr class="separator:a48d9deb5f4c1ebbc91b587e183083bbb"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac01e2057c724255fb5d0bed69c50ffb9"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classTransport.html#ac01e2057c724255fb5d0bed69c50ffb9">addNonCons</a> (double coefA, double transport, const double sM)</td></tr>
+<tr class="memitem:ac01e2057c724255fb5d0bed69c50ffb9"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classTransport.html#ac01e2057c724255fb5d0bed69c50ffb9">addNonCons</a> (double coefA, double <a class="el" href="Cell_8h.html#acca207de98b59d1c41e3975008706d61af659d189d4d478b389ad7b385262732a">transport</a>, const double sM)</td></tr>
 <tr class="memdesc:ac01e2057c724255fb5d0bed69c50ffb9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Add non conservative transport term to the flux.  <a href="#ac01e2057c724255fb5d0bed69c50ffb9">More...</a><br /></td></tr>
 <tr class="separator:ac01e2057c724255fb5d0bed69c50ffb9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac1a480ab59236dcca1be515338c208bf"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classTransport.html#ac1a480ab59236dcca1be515338c208bf">subtractNonCons</a> (double coefA, double transport, const double sM)</td></tr>
+<tr class="memitem:ac1a480ab59236dcca1be515338c208bf"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classTransport.html#ac1a480ab59236dcca1be515338c208bf">subtractNonCons</a> (double coefA, double <a class="el" href="Cell_8h.html#acca207de98b59d1c41e3975008706d61af659d189d4d478b389ad7b385262732a">transport</a>, const double sM)</td></tr>
 <tr class="memdesc:ac1a480ab59236dcca1be515338c208bf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Subtract non conservative transport term to the flux.  <a href="#ac1a480ab59236dcca1be515338c208bf">More...</a><br /></td></tr>
 <tr class="separator:ac1a480ab59236dcca1be515338c208bf"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a482f6d4f7ece8e2ebcd6fd40d10ab885"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classTransport.html#a482f6d4f7ece8e2ebcd6fd40d10ab885">multiply</a> (double scalar)</td></tr>
@@ -204,9 +204,6 @@ Private Attributes</h2></td></tr>
 <a class="anchor" id="a9071b156741912e4550f6c88467d2834"></a>
 <div class="memitem">
 <div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
       <table class="memname">
         <tr>
           <td class="memname">Transport::~Transport </td>
@@ -215,11 +212,6 @@ Private Attributes</h2></td></tr>
           <td></td>
         </tr>
       </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
-  </tr>
-</table>
 </div><div class="memdoc">
 
 </div>
@@ -319,7 +311,7 @@ Private Attributes</h2></td></tr>
   <table class="params">
     <tr><td class="paramname">coefA</td><td>possibility to multiply the non conservative transport term before adding (set 1.d0 if not needed) </td></tr>
     <tr><td class="paramname">transport</td><td>transport value used to approximate the non conservative transport term </td></tr>
-    <tr><td class="paramname">sM</td><td>fluid velocity for intercell boundaries </td></tr>
+    <tr><td class="paramname">sM</td><td>fluid velocity for intercell interfaces </td></tr>
   </table>
   </dd>
 </dl>
@@ -420,17 +412,25 @@ Private Attributes</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="a16f09b4c5351a1bae1ce474527e736bc"></a>
+<a class="anchor" id="aa117e22da56185f41ee55f7e9eecc28e"></a>
 <div class="memitem">
 <div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">double Transport::getValue </td>
+          <td class="memname">const double&amp; Transport::getValue </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td> const</td>
         </tr>
       </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
 </div><div class="memdoc">
 
 <p>Return the value of the corresponding transport variable. </p>
@@ -520,7 +520,7 @@ Private Attributes</h2></td></tr>
   <table class="params">
     <tr><td class="paramname">transportLeft</td><td>left value of transport variable </td></tr>
     <tr><td class="paramname">transportRight</td><td>right value of transport variable </td></tr>
-    <tr><td class="paramname">sM</td><td>fluid velocity for intercell boundaries </td></tr>
+    <tr><td class="paramname">sM</td><td>fluid velocity for intercell interfaces </td></tr>
   </table>
   </dd>
 </dl>
@@ -561,7 +561,7 @@ Private Attributes</h2></td></tr>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">transportLeft</td><td>left value of transport variable </td></tr>
-    <tr><td class="paramname">sM</td><td>fluid velocity for intercell boundaries </td></tr>
+    <tr><td class="paramname">sM</td><td>fluid velocity for intercell interfaces </td></tr>
     <tr><td class="paramname">valueTransport</td><td>injection value of transport variable </td></tr>
   </table>
   </dd>
@@ -603,7 +603,7 @@ Private Attributes</h2></td></tr>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">transportLeft</td><td>left value of transport variable </td></tr>
-    <tr><td class="paramname">sM</td><td>fluid velocity for intercell boundaries </td></tr>
+    <tr><td class="paramname">sM</td><td>fluid velocity for intercell interfaces </td></tr>
     <tr><td class="paramname">valueTransport</td><td>outflow value of transport variable </td></tr>
   </table>
   </dd>
@@ -645,7 +645,7 @@ Private Attributes</h2></td></tr>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">transportLeft</td><td>left value of transport variable </td></tr>
-    <tr><td class="paramname">sM</td><td>fluid velocity for intercell boundaries </td></tr>
+    <tr><td class="paramname">sM</td><td>fluid velocity for intercell interfaces </td></tr>
     <tr><td class="paramname">valueTransport</td><td>tank value of transport variable </td></tr>
   </table>
   </dd>
@@ -740,7 +740,7 @@ Private Attributes</h2></td></tr>
   <table class="params">
     <tr><td class="paramname">coefA</td><td>possibility to multiply the non conservative transport term before adding (set 1.d0 if not needed) </td></tr>
     <tr><td class="paramname">transport</td><td>transport value used to approximate the non conservative transport term </td></tr>
-    <tr><td class="paramname">sM</td><td>fluid velocity for intercell boundaries </td></tr>
+    <tr><td class="paramname">sM</td><td>fluid velocity for intercell interfaces </td></tr>
   </table>
   </dd>
 </dl>
@@ -778,7 +778,7 @@ Private Attributes</h2></td></tr>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="classTransport.html">Transport</a></li>
-    <li class="footer">Generated on Wed Apr 29 2020 10:31:12 for ECOGEN by
+    <li class="footer">Generated on Mon May 11 2020 16:03:19 for ECOGEN by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.11 </li>
   </ul>

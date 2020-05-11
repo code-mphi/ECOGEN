@@ -4,7 +4,7 @@ var classElementQuadrangle =
     [ "~ElementQuadrangle", "classElementQuadrangle.html#a8ff0c7c6f5c7ad626d42bc9259fb951f", null ],
     [ "attributFaceCommunicante", "classElementQuadrangle.html#af9e4b05709d39e6457b99ee9bb1a61b0", null ],
     [ "attributFaceLimite", "classElementQuadrangle.html#a471dcf9514258de54d20d426365b6948", null ],
-    [ "compteFaceCommunicante", "classElementQuadrangle.html#a218b4a97e656d11568930de97c5e4244", null ],
+    [ "compteFaceCommunicante", "classElementQuadrangle.html#a161c5375897ac27af1b71f44ddcb29ca", null ],
     [ "compteFaceCommunicante", "classElementQuadrangle.html#a01501192f5816ef9e58b771154d399ef", null ],
     [ "computeLCFL", "classElementQuadrangle.html#a937cb611d33e0e52872b47d962036c92", null ],
     [ "computeVolume", "classElementQuadrangle.html#a379b72d9de2350cfcf0d862a0d06ab47", null ],

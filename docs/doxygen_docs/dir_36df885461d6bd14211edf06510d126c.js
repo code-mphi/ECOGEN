@@ -5,10 +5,8 @@ var dir_36df885461d6bd14211edf06510d126c =
     [ "Kapila", "dir_8fc41130de47c121cfc86af68b151e40.html", "dir_8fc41130de47c121cfc86af68b151e40" ],
     [ "MultiP", "dir_05629216c833aafed9df1e8cf2a80ebb.html", "dir_05629216c833aafed9df1e8cf2a80ebb" ],
     [ "ThermalEq", "dir_a8edda692e2dc855ede0e9ba8229b57a.html", "dir_a8edda692e2dc855ede0e9ba8229b57a" ],
-    [ "Flux.cpp", "Flux_8cpp.html", null ],
-    [ "Flux.h", "Flux_8h.html", [
-      [ "Flux", "classFlux.html", "classFlux" ]
-    ] ],
+    [ "Flux.cpp", "Flux_8cpp.html", "Flux_8cpp" ],
+    [ "Flux.h", "Flux_8h.html", "Flux_8h" ],
     [ "HeaderModel.h", "HeaderModel_8h.html", null ],
     [ "HeaderPhase.h", "HeaderPhase_8h.html", null ],
     [ "Mixture.cpp", "Mixture_8cpp.html", null ],

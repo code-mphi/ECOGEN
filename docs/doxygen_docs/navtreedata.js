@@ -1,7 +1,6 @@
 var NAVTREE =
 [
   [ "ECOGEN", "index.html", [
-    [ "ECOGEN API documentation", "index.html", null ],
     [ "Namespaces", null, [
       [ "Namespace List", "namespaces.html", "namespaces" ],
       [ "Namespace Members", "namespacemembers.html", [
@@ -20,6 +19,7 @@ var NAVTREE =
         [ "All", "functions.html", "functions_dup" ],
         [ "Functions", "functions_func.html", "functions_func" ],
         [ "Variables", "functions_vars.html", "functions_vars" ],
+        [ "Typedefs", "functions_type.html", null ],
         [ "Enumerator", "functions_eval.html", null ],
         [ "Related Functions", "functions_rela.html", null ]
       ] ]
@@ -42,22 +42,23 @@ var NAVTREE =
 var NAVTREEINDEX =
 [
 "APEuler_8cpp.html",
-"GOLine_8cpp.html",
-"classAPKConductivity.html",
-"classCell.html#a1af1bead228023b81519867f5e1f1321",
-"classCoord.html#a3a02e4f7e456831394238d5e204da2d0",
-"classEos.html#a0b593baae33ca0c1c06a451a56bef84f",
-"classFaceCartesian.html#a0d52bb8873868f42b57725e951f47ffd",
-"classFluxThermalEq.html#ad5166cd728753a1d9406fb6991b0634d",
-"classMeshCartesian.html#a8b01306939f19667665c0f1b2f537e6c",
-"classMixKapila.html#a9eb8fa1d48ec8e10aa94bf041ebc1b8a",
-"classModEulerHomogeneous.html#aefbe64be9b4abb20cf549e7982760f5f",
-"classParallel.html#abdf873d9ebaf61c13ec5191f5a22dd75",
-"classPhaseKapila.html#aaa171c8f2cf8de142542f92339947e01",
-"classRun.html#a758cd8548ddb7c0feefb3502d8fe4016",
-"classtinyxml2_1_1XMLAttribute.html#abcf5c9b7f040ed71ed2a66557584b5b0",
-"classtinyxml2_1_1XMLNode.html#aff47671055aa99840a1c1ebd661e63e3",
-"tinyxml2_8h.html#a1406cb43e9d84251509e069b6cb21781"
+"GDHalfSpace_8cpp.html",
+"SymSpherical_8h.html",
+"classBoundCondWall.html#a4bb9d293a6231b39b8bf2e11c4cafa93",
+"classCellInterfaceO2.html#ac3baacc7e603bca4ad9aa64047b126ea",
+"classElementPyramid.html#aaa9eb6355ae82e81867f1bb44c77793d",
+"classErrorXMLBoundCondInconnue.html#a6bebccd5d96d2184f0afe3bac1b852b7",
+"classFluxEulerHomogeneous.html#a5e8191318abb9843cb29de8004cd466f",
+"classIO.html#a035c2fff7540d4e776f76af93c1010c3",
+"classMeshUnStruct.html#a76d81a1a6a9d848e08be26a48cba5f01",
+"classMixMultiP.html#ad6619510d1b6794a318855ed9d7dddc0",
+"classModel.html",
+"classPhase.html#a4a3e6cd8777d1767f37b14261d32583d",
+"classPhaseMultiP.html#a2b26f874365102ecf8218c30606476cd",
+"classRun.html#ab63671298c13d4ca9d251bdffae0cb30",
+"classtinyxml2_1_1DynArray.html#af076df9203a7eda3f3501a0c84dbbb8a",
+"classtinyxml2_1_1XMLHandle.html#a31a0d5d060292bec5df2b2efe2eca228",
+"functions_func_u.html"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';

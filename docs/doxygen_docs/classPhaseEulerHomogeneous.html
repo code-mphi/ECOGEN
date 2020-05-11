@@ -128,7 +128,7 @@ $(document).ready(function(){initNavTree('classPhaseEulerHomogeneous.html','');}
 Public Member Functions</h2></td></tr>
 <tr class="memitem:afa34bf6c036961629c5b646308e425f7"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPhaseEulerHomogeneous.html#afa34bf6c036961629c5b646308e425f7">PhaseEulerHomogeneous</a> ()</td></tr>
 <tr class="separator:afa34bf6c036961629c5b646308e425f7"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a148561831c22a8e2fce3a34be3a0a3b9"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPhaseEulerHomogeneous.html#a148561831c22a8e2fce3a34be3a0a3b9">PhaseEulerHomogeneous</a> (double alpha, double density, <a class="el" href="classEos.html">Eos</a> *eos)</td></tr>
+<tr class="memitem:a148561831c22a8e2fce3a34be3a0a3b9"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPhaseEulerHomogeneous.html#a148561831c22a8e2fce3a34be3a0a3b9">PhaseEulerHomogeneous</a> (double <a class="el" href="Cell_8h.html#acca207de98b59d1c41e3975008706d61a2cf6ecbb4e108d5977ec6bcc0750f86a">alpha</a>, double <a class="el" href="Cell_8h.html#acca207de98b59d1c41e3975008706d61a22ebfd60994ac594c00a8e367372d092">density</a>, <a class="el" href="classEos.html">Eos</a> *eos)</td></tr>
 <tr class="memdesc:a148561831c22a8e2fce3a34be3a0a3b9"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classPhase.html" title="Abstract class for a phase. ">Phase</a> constructor from a XML format reading.  <a href="#a148561831c22a8e2fce3a34be3a0a3b9">More...</a><br /></td></tr>
 <tr class="separator:a148561831c22a8e2fce3a34be3a0a3b9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a14c2f5c07cc1ec5bdd369faf2a092168"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPhaseEulerHomogeneous.html#a14c2f5c07cc1ec5bdd369faf2a092168">PhaseEulerHomogeneous</a> (<a class="el" href="classtinyxml2_1_1XMLElement.html">tinyxml2::XMLElement</a> *material, <a class="el" href="classEos.html">Eos</a> *eos, std::string fileName)</td></tr>
@@ -145,7 +145,7 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a681cffe29f7b7983eb79d7f4f4e95317"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPhaseEulerHomogeneous.html#a681cffe29f7b7983eb79d7f4f4e95317">extendedCalculusPhase</a> (const <a class="el" href="classCoord.html">Coord</a> &amp;velocity)</td></tr>
 <tr class="memdesc:a681cffe29f7b7983eb79d7f4f4e95317"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute extra thermodynammical variables.  <a href="#a681cffe29f7b7983eb79d7f4f4e95317">More...</a><br /></td></tr>
 <tr class="separator:a681cffe29f7b7983eb79d7f4f4e95317"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a812e3908e15299dc9be6c7d882faa959"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPhaseEulerHomogeneous.html#a812e3908e15299dc9be6c7d882faa959">computeMassFraction</a> (const double &amp;density)</td></tr>
+<tr class="memitem:a812e3908e15299dc9be6c7d882faa959"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPhaseEulerHomogeneous.html#a812e3908e15299dc9be6c7d882faa959">computeMassFraction</a> (const double &amp;<a class="el" href="Cell_8h.html#acca207de98b59d1c41e3975008706d61a22ebfd60994ac594c00a8e367372d092">density</a>)</td></tr>
 <tr class="separator:a812e3908e15299dc9be6c7d882faa959"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a13f70fb8c48c5c6f5596f614bc04384c"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPhaseEulerHomogeneous.html#a13f70fb8c48c5c6f5596f614bc04384c">localProjection</a> (const <a class="el" href="classCoord.html">Coord</a> &amp;normal, const <a class="el" href="classCoord.html">Coord</a> &amp;tangent, const <a class="el" href="classCoord.html">Coord</a> &amp;binormal)</td></tr>
 <tr class="separator:a13f70fb8c48c5c6f5596f614bc04384c"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -159,8 +159,8 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:ad3f8908ba3bedf6e173fdefd2438a0b8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a83a3df0816dc9d8fd960f1ce691bc1ea"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classCoord.html">Coord</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPhaseEulerHomogeneous.html#a83a3df0816dc9d8fd960f1ce691bc1ea">returnVector</a> (const int &amp;numVar) const </td></tr>
 <tr class="separator:a83a3df0816dc9d8fd960f1ce691bc1ea"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a61f3769cf7fc1c7b7a2443e98cf5f542"><td class="memItemLeft" align="right" valign="top">virtual std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPhaseEulerHomogeneous.html#a61f3769cf7fc1c7b7a2443e98cf5f542">returnNameScalar</a> (const int &amp;numVar) const </td></tr>
-<tr class="separator:a61f3769cf7fc1c7b7a2443e98cf5f542"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab073c26e84a7dc6f7ef2c8d3477cdd78"><td class="memItemLeft" align="right" valign="top">virtual std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPhaseEulerHomogeneous.html#ab073c26e84a7dc6f7ef2c8d3477cdd78">returnNameScalar</a> (const int &amp;numVar) const </td></tr>
+<tr class="separator:ab073c26e84a7dc6f7ef2c8d3477cdd78"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab501691d81ab114c1f75e88739a15b75"><td class="memItemLeft" align="right" valign="top">virtual std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPhaseEulerHomogeneous.html#ab501691d81ab114c1f75e88739a15b75">returnNameVector</a> (const int &amp;numVar) const </td></tr>
 <tr class="separator:ab501691d81ab114c1f75e88739a15b75"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa44e386acb3127016f0f7eed8b851643"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPhaseEulerHomogeneous.html#aa44e386acb3127016f0f7eed8b851643">setScalar</a> (const int &amp;numVar, const double &amp;value)</td></tr>
@@ -169,8 +169,12 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:ad9d9b456989a0a1dd5231ff34d8680ba"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9a8ee4da8719eba9af5c41345793d072"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPhaseEulerHomogeneous.html#a9a8ee4da8719eba9af5c41345793d072">fillBuffer</a> (double *buffer, int &amp;counter) const </td></tr>
 <tr class="separator:a9a8ee4da8719eba9af5c41345793d072"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7f629fcce3ec7d0b15d2c61a280dc13a"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPhaseEulerHomogeneous.html#a7f629fcce3ec7d0b15d2c61a280dc13a">fillBuffer</a> (std::vector&lt; double &gt; &amp;dataToSend) const </td></tr>
+<tr class="separator:a7f629fcce3ec7d0b15d2c61a280dc13a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aabe3e191295ac6abf8a56bb14f8c4f19"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPhaseEulerHomogeneous.html#aabe3e191295ac6abf8a56bb14f8c4f19">getBuffer</a> (double *buffer, int &amp;counter, <a class="el" href="classEos.html">Eos</a> **eos)</td></tr>
 <tr class="separator:aabe3e191295ac6abf8a56bb14f8c4f19"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac62ee6584e4f09f17cf2d78fd3c373a1"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPhaseEulerHomogeneous.html#ac62ee6584e4f09f17cf2d78fd3c373a1">getBuffer</a> (std::vector&lt; double &gt; &amp;dataToReceive, int &amp;counter, <a class="el" href="classEos.html">Eos</a> **eos)</td></tr>
+<tr class="separator:ac62ee6584e4f09f17cf2d78fd3c373a1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:abd1e461c7764876da96e8cfd6f40b573"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPhaseEulerHomogeneous.html#abd1e461c7764876da96e8cfd6f40b573">computeSlopesPhase</a> (const <a class="el" href="classPhase.html">Phase</a> &amp;sLeft, const <a class="el" href="classPhase.html">Phase</a> &amp;sRight, const double &amp;distance)</td></tr>
 <tr class="separator:abd1e461c7764876da96e8cfd6f40b573"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:affee1e09c38a5dd8d42b3e0123e1c996"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPhaseEulerHomogeneous.html#affee1e09c38a5dd8d42b3e0123e1c996">setToZero</a> ()</td></tr>
@@ -189,29 +193,29 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a8a4bfb2abe69e6293922319c61a4f9d2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a57f4ac578114bf9ed99910545f0d4877"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPhaseEulerHomogeneous.html#a57f4ac578114bf9ed99910545f0d4877">verifyAndCorrectPhase</a> ()</td></tr>
 <tr class="separator:a57f4ac578114bf9ed99910545f0d4877"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a40319610f716ad2671d16fbfe9c565f4"><td class="memItemLeft" align="right" valign="top">virtual double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPhaseEulerHomogeneous.html#a40319610f716ad2671d16fbfe9c565f4">getAlpha</a> () const </td></tr>
-<tr class="separator:a40319610f716ad2671d16fbfe9c565f4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a42296653f96302de8022d5928a2d821a"><td class="memItemLeft" align="right" valign="top">virtual double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPhaseEulerHomogeneous.html#a42296653f96302de8022d5928a2d821a">getDensity</a> () const </td></tr>
-<tr class="separator:a42296653f96302de8022d5928a2d821a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a33ff19585e06ce79cbb8ffbdf79aa9d0"><td class="memItemLeft" align="right" valign="top">virtual double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPhaseEulerHomogeneous.html#a33ff19585e06ce79cbb8ffbdf79aa9d0">getPressure</a> () const </td></tr>
-<tr class="separator:a33ff19585e06ce79cbb8ffbdf79aa9d0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2d35a6253c3c332df4a274f07ded76b1"><td class="memItemLeft" align="right" valign="top">virtual double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPhaseEulerHomogeneous.html#a2d35a6253c3c332df4a274f07ded76b1">getY</a> () const </td></tr>
-<tr class="separator:a2d35a6253c3c332df4a274f07ded76b1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4c545b0aa6cf78eb663642a1eb297fcb"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classEos.html">Eos</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPhaseEulerHomogeneous.html#a4c545b0aa6cf78eb663642a1eb297fcb">getEos</a> () const </td></tr>
-<tr class="separator:a4c545b0aa6cf78eb663642a1eb297fcb"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a54a67521bc91ebb8ecbb43f01d7a8155"><td class="memItemLeft" align="right" valign="top">virtual double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPhaseEulerHomogeneous.html#a54a67521bc91ebb8ecbb43f01d7a8155">getEnergy</a> () const </td></tr>
-<tr class="separator:a54a67521bc91ebb8ecbb43f01d7a8155"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2f61b3bbd2503f0564de8589e225837d"><td class="memItemLeft" align="right" valign="top">virtual double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPhaseEulerHomogeneous.html#a2f61b3bbd2503f0564de8589e225837d">getSoundSpeed</a> () const </td></tr>
-<tr class="separator:a2f61b3bbd2503f0564de8589e225837d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a628f4d75e5e5f644fee018355d8fff3a"><td class="memItemLeft" align="right" valign="top">virtual double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPhaseEulerHomogeneous.html#a628f4d75e5e5f644fee018355d8fff3a">getTotalEnergy</a> () const </td></tr>
-<tr class="separator:a628f4d75e5e5f644fee018355d8fff3a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a94e325bf659a2a329d93d6a9d936106b"><td class="memItemLeft" align="right" valign="top">virtual double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPhaseEulerHomogeneous.html#a94e325bf659a2a329d93d6a9d936106b">getTemperature</a> () const </td></tr>
-<tr class="separator:a94e325bf659a2a329d93d6a9d936106b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a153b52bce484011c769efb20175dccd4"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPhaseEulerHomogeneous.html#a153b52bce484011c769efb20175dccd4">setAlpha</a> (double alpha)</td></tr>
+<tr class="memitem:a300e3503edb5d0d8de0c3c2d90176702"><td class="memItemLeft" align="right" valign="top">virtual const double &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPhaseEulerHomogeneous.html#a300e3503edb5d0d8de0c3c2d90176702">getAlpha</a> () const </td></tr>
+<tr class="separator:a300e3503edb5d0d8de0c3c2d90176702"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a738e5fc136ed9791847d3a7a171b4b63"><td class="memItemLeft" align="right" valign="top">virtual const double &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPhaseEulerHomogeneous.html#a738e5fc136ed9791847d3a7a171b4b63">getDensity</a> () const </td></tr>
+<tr class="separator:a738e5fc136ed9791847d3a7a171b4b63"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad97c2c4f819739e7728c54fc0ee5ec0a"><td class="memItemLeft" align="right" valign="top">virtual const double &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPhaseEulerHomogeneous.html#ad97c2c4f819739e7728c54fc0ee5ec0a">getPressure</a> () const </td></tr>
+<tr class="separator:ad97c2c4f819739e7728c54fc0ee5ec0a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6c1e216483a5a4b3e9a5114e8bb6df22"><td class="memItemLeft" align="right" valign="top">virtual const double &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPhaseEulerHomogeneous.html#a6c1e216483a5a4b3e9a5114e8bb6df22">getY</a> () const </td></tr>
+<tr class="separator:a6c1e216483a5a4b3e9a5114e8bb6df22"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1c73547b52703dc116587f28d7d44100"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classEos.html">Eos</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPhaseEulerHomogeneous.html#a1c73547b52703dc116587f28d7d44100">getEos</a> () const </td></tr>
+<tr class="separator:a1c73547b52703dc116587f28d7d44100"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4624000b22a341def8988897a5e913b9"><td class="memItemLeft" align="right" valign="top">virtual const double &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPhaseEulerHomogeneous.html#a4624000b22a341def8988897a5e913b9">getEnergy</a> () const </td></tr>
+<tr class="separator:a4624000b22a341def8988897a5e913b9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4ae539fbf1b3d4287a931bbb52ef2611"><td class="memItemLeft" align="right" valign="top">virtual const double &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPhaseEulerHomogeneous.html#a4ae539fbf1b3d4287a931bbb52ef2611">getSoundSpeed</a> () const </td></tr>
+<tr class="separator:a4ae539fbf1b3d4287a931bbb52ef2611"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6d765c98eaeee00f1202f92334c677d0"><td class="memItemLeft" align="right" valign="top">virtual const double &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPhaseEulerHomogeneous.html#a6d765c98eaeee00f1202f92334c677d0">getTotalEnergy</a> () const </td></tr>
+<tr class="separator:a6d765c98eaeee00f1202f92334c677d0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8dd6062f940bb605e3bf7bdd355b3ecb"><td class="memItemLeft" align="right" valign="top">virtual double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPhaseEulerHomogeneous.html#a8dd6062f940bb605e3bf7bdd355b3ecb">getTemperature</a> () const </td></tr>
+<tr class="separator:a8dd6062f940bb605e3bf7bdd355b3ecb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a153b52bce484011c769efb20175dccd4"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPhaseEulerHomogeneous.html#a153b52bce484011c769efb20175dccd4">setAlpha</a> (double <a class="el" href="Cell_8h.html#acca207de98b59d1c41e3975008706d61a2cf6ecbb4e108d5977ec6bcc0750f86a">alpha</a>)</td></tr>
 <tr class="separator:a153b52bce484011c769efb20175dccd4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:abb0b5e3ae84fe498de27eeee62dc5a65"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPhaseEulerHomogeneous.html#abb0b5e3ae84fe498de27eeee62dc5a65">setDensity</a> (double density)</td></tr>
+<tr class="memitem:abb0b5e3ae84fe498de27eeee62dc5a65"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPhaseEulerHomogeneous.html#abb0b5e3ae84fe498de27eeee62dc5a65">setDensity</a> (double <a class="el" href="Cell_8h.html#acca207de98b59d1c41e3975008706d61a22ebfd60994ac594c00a8e367372d092">density</a>)</td></tr>
 <tr class="separator:abb0b5e3ae84fe498de27eeee62dc5a65"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5a0afa0e516eab61e16a5746b5da6b8a"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPhaseEulerHomogeneous.html#a5a0afa0e516eab61e16a5746b5da6b8a">setPressure</a> (double pressure)</td></tr>
+<tr class="memitem:a5a0afa0e516eab61e16a5746b5da6b8a"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPhaseEulerHomogeneous.html#a5a0afa0e516eab61e16a5746b5da6b8a">setPressure</a> (double <a class="el" href="Cell_8h.html#acca207de98b59d1c41e3975008706d61a8e7f8389b914e827058d694b31468b3a">pressure</a>)</td></tr>
 <tr class="separator:a5a0afa0e516eab61e16a5746b5da6b8a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a491f71f5713e8aa71f2b7979adc79e25"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPhaseEulerHomogeneous.html#a491f71f5713e8aa71f2b7979adc79e25">setEos</a> (<a class="el" href="classEos.html">Eos</a> *eos)</td></tr>
 <tr class="separator:a491f71f5713e8aa71f2b7979adc79e25"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -237,14 +241,16 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a1499773722b90aad0e2e4182566423ba inherit pub_methods_classPhase"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a99afaf416629434cd97d91f131467ecd inherit pub_methods_classPhase"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPhase.html#a99afaf416629434cd97d91f131467ecd">setVector</a> (const int &amp;numVar, const <a class="el" href="classCoord.html">Coord</a> &amp;value)</td></tr>
 <tr class="separator:a99afaf416629434cd97d91f131467ecd inherit pub_methods_classPhase"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab499ece61e0a2237a323e6d54a9753c0 inherit pub_methods_classPhase"><td class="memItemLeft" align="right" valign="top">virtual double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPhase.html#ab499ece61e0a2237a323e6d54a9753c0">getU</a> () const </td></tr>
-<tr class="separator:ab499ece61e0a2237a323e6d54a9753c0 inherit pub_methods_classPhase"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac5fe4a08768e3639c3ce439ef4c4b7cf inherit pub_methods_classPhase"><td class="memItemLeft" align="right" valign="top">virtual double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPhase.html#ac5fe4a08768e3639c3ce439ef4c4b7cf">getV</a> () const </td></tr>
-<tr class="separator:ac5fe4a08768e3639c3ce439ef4c4b7cf inherit pub_methods_classPhase"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad86415d697321f3e0c949da09aa3cecc inherit pub_methods_classPhase"><td class="memItemLeft" align="right" valign="top">virtual double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPhase.html#ad86415d697321f3e0c949da09aa3cecc">getW</a> () const </td></tr>
-<tr class="separator:ad86415d697321f3e0c949da09aa3cecc inherit pub_methods_classPhase"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa645c1ad5b3ff4098dda7614773c8f4e inherit pub_methods_classPhase"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classCoord.html">Coord</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPhase.html#aa645c1ad5b3ff4098dda7614773c8f4e">getVelocity</a> () const </td></tr>
-<tr class="separator:aa645c1ad5b3ff4098dda7614773c8f4e inherit pub_methods_classPhase"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a82a5962e0e7e6939fb4d71c8376a5faf inherit pub_methods_classPhase"><td class="memItemLeft" align="right" valign="top">virtual const double &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPhase.html#a82a5962e0e7e6939fb4d71c8376a5faf">getU</a> () const </td></tr>
+<tr class="separator:a82a5962e0e7e6939fb4d71c8376a5faf inherit pub_methods_classPhase"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5a40bea9e7b130e6eedd69dadbf1ecf3 inherit pub_methods_classPhase"><td class="memItemLeft" align="right" valign="top">virtual const double &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPhase.html#a5a40bea9e7b130e6eedd69dadbf1ecf3">getV</a> () const </td></tr>
+<tr class="separator:a5a40bea9e7b130e6eedd69dadbf1ecf3 inherit pub_methods_classPhase"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afd8541363b8565fcd5a2ab9a68d34b81 inherit pub_methods_classPhase"><td class="memItemLeft" align="right" valign="top">virtual const double &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPhase.html#afd8541363b8565fcd5a2ab9a68d34b81">getW</a> () const </td></tr>
+<tr class="separator:afd8541363b8565fcd5a2ab9a68d34b81 inherit pub_methods_classPhase"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2e0a221c04c536f1e7ec79ac8c04eee1 inherit pub_methods_classPhase"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classCoord.html">Coord</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPhase.html#a2e0a221c04c536f1e7ec79ac8c04eee1">getVelocity</a> ()</td></tr>
+<tr class="separator:a2e0a221c04c536f1e7ec79ac8c04eee1 inherit pub_methods_classPhase"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8e8f28c76288507865794e0824479747 inherit pub_methods_classPhase"><td class="memItemLeft" align="right" valign="top">virtual const <a class="el" href="classCoord.html">Coord</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPhase.html#a8e8f28c76288507865794e0824479747">getVelocity</a> () const </td></tr>
+<tr class="separator:a8e8f28c76288507865794e0824479747 inherit pub_methods_classPhase"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a28e1e8ca8b9543eaac2678816debbb1c inherit pub_methods_classPhase"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPhase.html#a28e1e8ca8b9543eaac2678816debbb1c">setVelocity</a> (const double &amp;u, const double &amp;v, const double &amp;w)</td></tr>
 <tr class="separator:a28e1e8ca8b9543eaac2678816debbb1c inherit pub_methods_classPhase"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab4eb6d2d79d59bf890f56ea1f3009aa7 inherit pub_methods_classPhase"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPhase.html#ab4eb6d2d79d59bf890f56ea1f3009aa7">setVelocity</a> (const <a class="el" href="classCoord.html">Coord</a> &amp;vit)</td></tr>
@@ -255,7 +261,7 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a2e84544dffd05d3f31e3f2e6a4aadd79 inherit pub_methods_classPhase"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a91e3acb4baa80e2302cf1d26a03963ad inherit pub_methods_classPhase"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPhase.html#a91e3acb4baa80e2302cf1d26a03963ad">setW</a> (const double &amp;w)</td></tr>
 <tr class="separator:a91e3acb4baa80e2302cf1d26a03963ad inherit pub_methods_classPhase"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa1b68854de67247d82e067ba20e27fa2 inherit pub_methods_classPhase"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPhase.html#aa1b68854de67247d82e067ba20e27fa2">setTemperature</a> (double temperature)</td></tr>
+<tr class="memitem:aa1b68854de67247d82e067ba20e27fa2 inherit pub_methods_classPhase"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPhase.html#aa1b68854de67247d82e067ba20e27fa2">setTemperature</a> (double <a class="el" href="Cell_8h.html#acca207de98b59d1c41e3975008706d61a9922a43d37bee3212593f77ce4ec82f3">temperature</a>)</td></tr>
 <tr class="separator:aa1b68854de67247d82e067ba20e27fa2 inherit pub_methods_classPhase"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-attribs"></a>
@@ -696,6 +702,32 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
+<a class="anchor" id="a7f629fcce3ec7d0b15d2c61a280dc13a"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void PhaseEulerHomogeneous::fillBuffer </td>
+          <td>(</td>
+          <td class="paramtype">std::vector&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>dataToSend</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Reimplemented from <a class="el" href="classPhase.html#aea9965506452531d68ca7d791b473400">Phase</a>.</p>
+
+</div>
+</div>
 <a class="anchor" id="a05197ffb47bc42a7e2b1cd3a37b9e08a"></a>
 <div class="memitem">
 <div class="memproto">
@@ -732,7 +764,7 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="a40319610f716ad2671d16fbfe9c565f4"></a>
+<a class="anchor" id="a300e3503edb5d0d8de0c3c2d90176702"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="mlabels">
@@ -740,7 +772,7 @@ Protected Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">double PhaseEulerHomogeneous::getAlpha </td>
+          <td class="memname">virtual const double&amp; PhaseEulerHomogeneous::getAlpha </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td> const</td>
@@ -748,12 +780,12 @@ Protected Attributes</h2></td></tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
-<p>Reimplemented from <a class="el" href="classPhase.html#ab1531e683fc306d5abc4ec7d79d5f2eb">Phase</a>.</p>
+<p>Reimplemented from <a class="el" href="classPhase.html#a50782fc2c49f580ddf0ec95689d253b1">Phase</a>.</p>
 
 </div>
 </div>
@@ -799,6 +831,48 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
+<a class="anchor" id="ac62ee6584e4f09f17cf2d78fd3c373a1"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void PhaseEulerHomogeneous::getBuffer </td>
+          <td>(</td>
+          <td class="paramtype">std::vector&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>dataToReceive</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int &amp;&#160;</td>
+          <td class="paramname"><em>counter</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classEos.html">Eos</a> **&#160;</td>
+          <td class="paramname"><em>eos</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Reimplemented from <a class="el" href="classPhase.html#a743005388bcf0d605c6fbe710761a3b1">Phase</a>.</p>
+
+</div>
+</div>
 <a class="anchor" id="a1ce595cf431728c661230714c80f984c"></a>
 <div class="memitem">
 <div class="memproto">
@@ -835,7 +909,7 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="a42296653f96302de8022d5928a2d821a"></a>
+<a class="anchor" id="a738e5fc136ed9791847d3a7a171b4b63"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="mlabels">
@@ -843,7 +917,7 @@ Protected Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">double PhaseEulerHomogeneous::getDensity </td>
+          <td class="memname">virtual const double&amp; PhaseEulerHomogeneous::getDensity </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td> const</td>
@@ -851,16 +925,16 @@ Protected Attributes</h2></td></tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
-<p>Reimplemented from <a class="el" href="classPhase.html#a590ce5d328473fc651d3416de760ae77">Phase</a>.</p>
+<p>Reimplemented from <a class="el" href="classPhase.html#a835bccf1d55cc046b6569658e51c8a48">Phase</a>.</p>
 
 </div>
 </div>
-<a class="anchor" id="a54a67521bc91ebb8ecbb43f01d7a8155"></a>
+<a class="anchor" id="a4624000b22a341def8988897a5e913b9"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="mlabels">
@@ -868,7 +942,7 @@ Protected Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">double PhaseEulerHomogeneous::getEnergy </td>
+          <td class="memname">virtual const double&amp; PhaseEulerHomogeneous::getEnergy </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td> const</td>
@@ -876,16 +950,16 @@ Protected Attributes</h2></td></tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
-<p>Reimplemented from <a class="el" href="classPhase.html#ab950e84e48d8d5618eb0560de8c3465b">Phase</a>.</p>
+<p>Reimplemented from <a class="el" href="classPhase.html#a10a0cb583de726f0457e59727d8144e7">Phase</a>.</p>
 
 </div>
 </div>
-<a class="anchor" id="a4c545b0aa6cf78eb663642a1eb297fcb"></a>
+<a class="anchor" id="a1c73547b52703dc116587f28d7d44100"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="mlabels">
@@ -893,7 +967,7 @@ Protected Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classEos.html">Eos</a> * PhaseEulerHomogeneous::getEos </td>
+          <td class="memname">virtual <a class="el" href="classEos.html">Eos</a>* PhaseEulerHomogeneous::getEos </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td> const</td>
@@ -901,7 +975,7 @@ Protected Attributes</h2></td></tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -960,7 +1034,7 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="a33ff19585e06ce79cbb8ffbdf79aa9d0"></a>
+<a class="anchor" id="ad97c2c4f819739e7728c54fc0ee5ec0a"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="mlabels">
@@ -968,7 +1042,7 @@ Protected Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">double PhaseEulerHomogeneous::getPressure </td>
+          <td class="memname">virtual const double&amp; PhaseEulerHomogeneous::getPressure </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td> const</td>
@@ -976,16 +1050,16 @@ Protected Attributes</h2></td></tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
-<p>Reimplemented from <a class="el" href="classPhase.html#ad44d5e3a33ff548b9f75dce26a237793">Phase</a>.</p>
+<p>Reimplemented from <a class="el" href="classPhase.html#aa92a686a9f26dbdefb075f28c8476397">Phase</a>.</p>
 
 </div>
 </div>
-<a class="anchor" id="a2f61b3bbd2503f0564de8589e225837d"></a>
+<a class="anchor" id="a4ae539fbf1b3d4287a931bbb52ef2611"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="mlabels">
@@ -993,7 +1067,7 @@ Protected Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">double PhaseEulerHomogeneous::getSoundSpeed </td>
+          <td class="memname">virtual const double&amp; PhaseEulerHomogeneous::getSoundSpeed </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td> const</td>
@@ -1001,16 +1075,16 @@ Protected Attributes</h2></td></tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
-<p>Reimplemented from <a class="el" href="classPhase.html#aa70cfa2e53fb6f7d4616d8bbe645af29">Phase</a>.</p>
+<p>Reimplemented from <a class="el" href="classPhase.html#a388ad8bc5bdee154d1e5ed860544a369">Phase</a>.</p>
 
 </div>
 </div>
-<a class="anchor" id="a94e325bf659a2a329d93d6a9d936106b"></a>
+<a class="anchor" id="a8dd6062f940bb605e3bf7bdd355b3ecb"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="mlabels">
@@ -1018,7 +1092,7 @@ Protected Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">double PhaseEulerHomogeneous::getTemperature </td>
+          <td class="memname">virtual double PhaseEulerHomogeneous::getTemperature </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td> const</td>
@@ -1026,7 +1100,7 @@ Protected Attributes</h2></td></tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -1035,7 +1109,7 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="a628f4d75e5e5f644fee018355d8fff3a"></a>
+<a class="anchor" id="a6d765c98eaeee00f1202f92334c677d0"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="mlabels">
@@ -1043,7 +1117,7 @@ Protected Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">double PhaseEulerHomogeneous::getTotalEnergy </td>
+          <td class="memname">virtual const double&amp; PhaseEulerHomogeneous::getTotalEnergy </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td> const</td>
@@ -1051,16 +1125,16 @@ Protected Attributes</h2></td></tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
-<p>Reimplemented from <a class="el" href="classPhase.html#a166f7571fca9927265913c1284e049fc">Phase</a>.</p>
+<p>Reimplemented from <a class="el" href="classPhase.html#aa912b673fe7a6e1bdf4fce3b7798f13c">Phase</a>.</p>
 
 </div>
 </div>
-<a class="anchor" id="a2d35a6253c3c332df4a274f07ded76b1"></a>
+<a class="anchor" id="a6c1e216483a5a4b3e9a5114e8bb6df22"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="mlabels">
@@ -1068,7 +1142,7 @@ Protected Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">double PhaseEulerHomogeneous::getY </td>
+          <td class="memname">virtual const double&amp; PhaseEulerHomogeneous::getY </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td> const</td>
@@ -1076,12 +1150,12 @@ Protected Attributes</h2></td></tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
-<p>Reimplemented from <a class="el" href="classPhase.html#afcebbda8e3d13fc975c01a0c50c01ea7">Phase</a>.</p>
+<p>Reimplemented from <a class="el" href="classPhase.html#a6bc9e77e2b06502fb0d47320256ace9c">Phase</a>.</p>
 
 </div>
 </div>
@@ -1261,7 +1335,7 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="a61f3769cf7fc1c7b7a2443e98cf5f542"></a>
+<a class="anchor" id="ab073c26e84a7dc6f7ef2c8d3477cdd78"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="mlabels">
@@ -1269,7 +1343,7 @@ Protected Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">string PhaseEulerHomogeneous::returnNameScalar </td>
+          <td class="memname">std::string PhaseEulerHomogeneous::returnNameScalar </td>
           <td>(</td>
           <td class="paramtype">const int &amp;&#160;</td>
           <td class="paramname"><em>numVar</em></td><td>)</td>
@@ -1888,7 +1962,7 @@ Protected Attributes</h2></td></tr>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="classPhaseEulerHomogeneous.html">PhaseEulerHomogeneous</a></li>
-    <li class="footer">Generated on Wed Apr 29 2020 10:31:12 for ECOGEN by
+    <li class="footer">Generated on Mon May 11 2020 16:03:19 for ECOGEN by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.11 </li>
   </ul>

@@ -9,5 +9,5 @@ var classIO =
     [ "toString", "classIO.html#aa1f621e94ce41edf88225d6ee3ff4c64", null ],
     [ "write", "classIO.html#a6d2400de6e3caab604115fd92167afe1", null ],
     [ "writeb64", "classIO.html#aba75219eb1e690684ae7e05b44862381", null ],
-    [ "writeb64Chaine", "classIO.html#ae0ea87614600f78bb7cfd27c853f88b3", null ]
+    [ "writeb64Chaine", "classIO.html#ae06ffae4951346ca09dfca0fb373a240", null ]
 ];

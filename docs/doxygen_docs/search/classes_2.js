@@ -1,6 +1,7 @@
 var searchData=
 [
   ['cell',['Cell',['../classCell.html',1,'']]],
+  ['cellghost',['CellGhost',['../classCellGhost.html',1,'']]],
   ['cellinterface',['CellInterface',['../classCellInterface.html',1,'']]],
   ['cellinterfaceo2',['CellInterfaceO2',['../classCellInterfaceO2.html',1,'']]],
   ['cello2',['CellO2',['../classCellO2.html',1,'']]],

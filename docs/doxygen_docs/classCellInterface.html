@@ -173,40 +173,40 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a26197c05f91a4b537ee99d6570d85941"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2c8bfa724d7ce745a64ab9cb25ff0c7f"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classCell.html">Cell</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCellInterface.html#a2c8bfa724d7ce745a64ab9cb25ff0c7f">getCellDroite</a> () const </td></tr>
 <tr class="separator:a2c8bfa724d7ce745a64ab9cb25ff0c7f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae272bb5e2dabf80deacf522909f3e635"><td class="memItemLeft" align="right" valign="top">virtual int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCellInterface.html#ae272bb5e2dabf80deacf522909f3e635">getNumPhys</a> () const </td></tr>
-<tr class="separator:ae272bb5e2dabf80deacf522909f3e635"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1f58baf5d9dd093b940a1b2ccfd29ccc"><td class="memItemLeft" align="right" valign="top">virtual const int &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCellInterface.html#a1f58baf5d9dd093b940a1b2ccfd29ccc">getNumPhys</a> () const </td></tr>
+<tr class="separator:a1f58baf5d9dd093b940a1b2ccfd29ccc"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a36375ef0bba07fd9689823fb51ca6b43"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCellInterface.html#a36375ef0bba07fd9689823fb51ca6b43">computeXi</a> (const double &amp;criteriaVar, const bool &amp;varRho, const bool &amp;varP, const bool &amp;varU, const bool &amp;varAlpha)</td></tr>
 <tr class="separator:a36375ef0bba07fd9689823fb51ca6b43"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6f392838ea4795d5943aa259dd8b1f18"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCellInterface.html#a6f392838ea4795d5943aa259dd8b1f18">computeCritereAMR</a> (const double &amp;criteriaVar, std::string nameVariable, int num=0)</td></tr>
-<tr class="separator:a6f392838ea4795d5943aa259dd8b1f18"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8e7d7b922168725404d09f15ba65733a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCellInterface.html#a8e7d7b922168725404d09f15ba65733a">computeCritereAMR</a> (const double &amp;criteriaVar, <a class="el" href="Cell_8h.html#acca207de98b59d1c41e3975008706d61">Variable</a> nameVariable, int num=0)</td></tr>
+<tr class="separator:a8e7d7b922168725404d09f15ba65733a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aea8ccf4a6875140c85d9df093807dde1"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCellInterface.html#aea8ccf4a6875140c85d9df093807dde1">computeFluxXi</a> ()</td></tr>
 <tr class="separator:aea8ccf4a6875140c85d9df093807dde1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7e03e224393d97e0be3b6ffd3f82ebcd"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCellInterface.html#a7e03e224393d97e0be3b6ffd3f82ebcd">creerBordChild</a> ()</td></tr>
-<tr class="separator:a7e03e224393d97e0be3b6ffd3f82ebcd"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6d7073eac69386a1bb8d2a284545f727"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCellInterface.html#a6d7073eac69386a1bb8d2a284545f727">creerBordChildInterne</a> (const int &amp;lvl, std::vector&lt; <a class="el" href="classCellInterface.html">CellInterface</a> * &gt; *childrenInternalBoundaries)</td></tr>
-<tr class="separator:a6d7073eac69386a1bb8d2a284545f727"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3ba58c2f713e81535c3fe036adadd605"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCellInterface.html#a3ba58c2f713e81535c3fe036adadd605">creerFaceChild</a> (<a class="el" href="classCellInterface.html">CellInterface</a> *bordParent)</td></tr>
-<tr class="separator:a3ba58c2f713e81535c3fe036adadd605"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:acd5dccbaf759fcce29098e021b528950"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCellInterface.html#acd5dccbaf759fcce29098e021b528950">raffineBordExterne</a> (const int &amp;nbCellsY, const int &amp;nbCellsZ, const double &amp;dXParent, const double &amp;dYParent, const double &amp;dZParent, <a class="el" href="classCell.html">Cell</a> *cellRef, const int &amp;dim)</td></tr>
-<tr class="separator:acd5dccbaf759fcce29098e021b528950"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a86614f07509eeda269bd1f727dd9c044"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCellInterface.html#a86614f07509eeda269bd1f727dd9c044">raffineBordExterneGhost</a> (const int &amp;nbCellsY, const int &amp;nbCellsZ, const double &amp;dXParent, const double &amp;dYParent, const double &amp;dZParent, <a class="el" href="classCell.html">Cell</a> *cellRef, const int &amp;dim)</td></tr>
-<tr class="separator:a86614f07509eeda269bd1f727dd9c044"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0721e7c848d4d00bc734076a98a1dba4"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCellInterface.html#a0721e7c848d4d00bc734076a98a1dba4">deraffineBordExterne</a> (<a class="el" href="classCell.html">Cell</a> *cellRef)</td></tr>
-<tr class="separator:a0721e7c848d4d00bc734076a98a1dba4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:adda0e258a1f72713c15360d9c6f3a47e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCellInterface.html#adda0e258a1f72713c15360d9c6f3a47e">finalizeFace</a> ()</td></tr>
-<tr class="separator:adda0e258a1f72713c15360d9c6f3a47e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5048065502862612f505a19d50bad0c0"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCellInterface.html#a5048065502862612f505a19d50bad0c0">deraffineBordsChildren</a> ()</td></tr>
-<tr class="separator:a5048065502862612f505a19d50bad0c0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a088fa582b5aac19838c930167b3b0150"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCellInterface.html#a088fa582b5aac19838c930167b3b0150">constructionTableauBordsExternesLvl</a> (std::vector&lt; <a class="el" href="classCellInterface.html">CellInterface</a> * &gt; *boundariesLvl)</td></tr>
-<tr class="separator:a088fa582b5aac19838c930167b3b0150"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6587eaf7f840ba74dba7ff53a6dc03ac"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCellInterface.html#a6587eaf7f840ba74dba7ff53a6dc03ac">creerCellInterfaceChild</a> ()</td></tr>
+<tr class="separator:a6587eaf7f840ba74dba7ff53a6dc03ac"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aeb659a136fea46ff1b0ba683abbe8a38"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCellInterface.html#aeb659a136fea46ff1b0ba683abbe8a38">creerCellInterfaceChildInterne</a> (const int &amp;lvl, std::vector&lt; <a class="el" href="classCellInterface.html">CellInterface</a> * &gt; *childrenInternalCellInterfaces)</td></tr>
+<tr class="separator:aeb659a136fea46ff1b0ba683abbe8a38"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac53736492fd1b858815c25d33ebb1475"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCellInterface.html#ac53736492fd1b858815c25d33ebb1475">creerFaceChild</a> (<a class="el" href="classCellInterface.html">CellInterface</a> *cellInterfaceParent)</td></tr>
+<tr class="separator:ac53736492fd1b858815c25d33ebb1475"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8172713eb70ab29af50714cfa0f8c236"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCellInterface.html#a8172713eb70ab29af50714cfa0f8c236">raffineCellInterfaceExterne</a> (const int &amp;nbCellsY, const int &amp;nbCellsZ, const double &amp;dXParent, const double &amp;dYParent, const double &amp;dZParent, <a class="el" href="classCell.html">Cell</a> *cellRef, const int &amp;dim)</td></tr>
+<tr class="separator:a8172713eb70ab29af50714cfa0f8c236"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae7ebc273062013ea797106226d71c4b5"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCellInterface.html#ae7ebc273062013ea797106226d71c4b5">deraffineCellInterfaceExterne</a> (<a class="el" href="classCell.html">Cell</a> *cellRef)</td></tr>
+<tr class="separator:ae7ebc273062013ea797106226d71c4b5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aeb6b914720886eb34e31940b69c7ee15"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCellInterface.html#aeb6b914720886eb34e31940b69c7ee15">deraffineCellInterfacesChildren</a> ()</td></tr>
+<tr class="separator:aeb6b914720886eb34e31940b69c7ee15"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1c2d6512243f4bab6a7c7f4e026d1115"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCellInterface.html#a1c2d6512243f4bab6a7c7f4e026d1115">constructionTableauCellInterfacesExternesLvl</a> (std::vector&lt; <a class="el" href="classCellInterface.html">CellInterface</a> * &gt; *cellInterfacesLvl)</td></tr>
+<tr class="separator:a1c2d6512243f4bab6a7c7f4e026d1115"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6ef90d9be18ce68250da100ffb3b1214"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCellInterface.html#a6ef90d9be18ce68250da100ffb3b1214">getSplit</a> () const </td></tr>
 <tr class="separator:a6ef90d9be18ce68250da100ffb3b1214"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:afe27313947a85c043f1c0a64932d3688"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCellInterface.html#afe27313947a85c043f1c0a64932d3688">getLvl</a> () const </td></tr>
-<tr class="separator:afe27313947a85c043f1c0a64932d3688"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae9e316f4c7486a4fd5e52409aff64fe0"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCellInterface.html#ae9e316f4c7486a4fd5e52409aff64fe0">getNumberBordsChildren</a> () const </td></tr>
-<tr class="separator:ae9e316f4c7486a4fd5e52409aff64fe0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac72dc84840ad417fd3a7042e0779a731"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classCellInterface.html">CellInterface</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCellInterface.html#ac72dc84840ad417fd3a7042e0779a731">getBordChild</a> (const int &amp;numChild)</td></tr>
-<tr class="separator:ac72dc84840ad417fd3a7042e0779a731"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a892951b76e0c8cea13a7d81d55d7c5bf"><td class="memItemLeft" align="right" valign="top">const int &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCellInterface.html#a892951b76e0c8cea13a7d81d55d7c5bf">getLvl</a> () const </td></tr>
+<tr class="separator:a892951b76e0c8cea13a7d81d55d7c5bf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a982e25d96980fe70c7f3b8392756fb4c"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCellInterface.html#a982e25d96980fe70c7f3b8392756fb4c">getNumberCellInterfacesChildren</a> () const </td></tr>
+<tr class="separator:a982e25d96980fe70c7f3b8392756fb4c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af134c35c990fcc471c86c53fb81369e7"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classCellInterface.html">CellInterface</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCellInterface.html#af134c35c990fcc471c86c53fb81369e7">getCellInterfaceChild</a> (const int &amp;numChild)</td></tr>
+<tr class="separator:af134c35c990fcc471c86c53fb81369e7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8b240acef83bcfae9272a0764aad53ca"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classCellInterface.html">CellInterface</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCellInterface.html#a8b240acef83bcfae9272a0764aad53ca">getCellInterfaceChildBack</a> ()</td></tr>
+<tr class="separator:a8b240acef83bcfae9272a0764aad53ca"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab70f79dd001bce5526708e48c8dfd606"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCellInterface.html#ab70f79dd001bce5526708e48c8dfd606">updatePointersInternalCellInterfaces</a> ()</td></tr>
+<tr class="separator:ab70f79dd001bce5526708e48c8dfd606"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
@@ -220,8 +220,8 @@ Protected Attributes</h2></td></tr>
 <tr class="separator:a232216c98026a9cb0358c7bcac8d8743"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7a3d7adf90981f1918cedbec88a1cdf6"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCellInterface.html#a7a3d7adf90981f1918cedbec88a1cdf6">m_lvl</a></td></tr>
 <tr class="separator:a7a3d7adf90981f1918cedbec88a1cdf6"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab795834e8d61d192dd2c96c449dba636"><td class="memItemLeft" align="right" valign="top">std::vector&lt; <a class="el" href="classCellInterface.html">CellInterface</a> * &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCellInterface.html#ab795834e8d61d192dd2c96c449dba636">m_boundariesChildren</a></td></tr>
-<tr class="separator:ab795834e8d61d192dd2c96c449dba636"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adb6d34b5f103d7de52fabdbddceeedf6"><td class="memItemLeft" align="right" valign="top">std::vector&lt; <a class="el" href="classCellInterface.html">CellInterface</a> * &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCellInterface.html#adb6d34b5f103d7de52fabdbddceeedf6">m_cellInterfacesChildren</a></td></tr>
+<tr class="separator:adb6d34b5f103d7de52fabdbddceeedf6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a class="anchor" id="a9b6475eb2be5f4d13eec0f5057e6318a"></a>
@@ -379,7 +379,7 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="a6f392838ea4795d5943aa259dd8b1f18"></a>
+<a class="anchor" id="a8e7d7b922168725404d09f15ba65733a"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
@@ -392,7 +392,7 @@ Protected Attributes</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">std::string&#160;</td>
+          <td class="paramtype"><a class="el" href="Cell_8h.html#acca207de98b59d1c41e3975008706d61">Variable</a>&#160;</td>
           <td class="paramname"><em>nameVariable</em>, </td>
         </tr>
         <tr>
@@ -583,7 +583,7 @@ Protected Attributes</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Ne fait rien pour des Bord de Maille ordre 1 </p>
+<p>Ne fait rien pour des cell interfaces ordre 1 </p>
 
 <p>Reimplemented in <a class="el" href="classCellInterfaceO2.html#a5cd780129f75e439ad788b0901fbe70a">CellInterfaceO2</a>, and <a class="el" href="classBoundCondWallO2.html#ab1738bdb9716ce90f0645e8fc7a58754">BoundCondWallO2</a>.</p>
 
@@ -644,24 +644,24 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="a088fa582b5aac19838c930167b3b0150"></a>
+<a class="anchor" id="a1c2d6512243f4bab6a7c7f4e026d1115"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">void CellInterface::constructionTableauBordsExternesLvl </td>
+          <td class="memname">void CellInterface::constructionTableauCellInterfacesExternesLvl </td>
           <td>(</td>
           <td class="paramtype">std::vector&lt; <a class="el" href="classCellInterface.html">CellInterface</a> * &gt; *&#160;</td>
-          <td class="paramname"><em>boundariesLvl</em></td><td>)</td>
+          <td class="paramname"><em>cellInterfacesLvl</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Construction du nouveau tableau de boundaries du niveau (lvl + 1), boundaries externes ajoutes ici </p>
+<p>Construction du nouveau tableau de cell interfaces du niveau (lvl + 1), cell interfaces externes ajoutes ici </p>
 
 </div>
 </div>
-<a class="anchor" id="a7e03e224393d97e0be3b6ffd3f82ebcd"></a>
+<a class="anchor" id="a6587eaf7f840ba74dba7ff53a6dc03ac"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="mlabels">
@@ -669,7 +669,7 @@ Protected Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void CellInterface::creerBordChild </td>
+          <td class="memname">void CellInterface::creerCellInterfaceChild </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -681,13 +681,13 @@ Protected Attributes</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Creer un bord enfant (non initialize) </p>
+<p>Creer un child cell interface (non initialize) </p>
 
-<p>Reimplemented in <a class="el" href="classCellInterfaceO2.html#a02c22365cf92fb0cdae837318219b224">CellInterfaceO2</a>, <a class="el" href="classBoundCondWallO2.html#a62c2fa8519672d8997654e6877268007">BoundCondWallO2</a>, <a class="el" href="classBoundCondOutflow.html#a72ee202c93080b9958775da619f37968">BoundCondOutflow</a>, <a class="el" href="classBoundCondInj.html#a7b4e7b95a6f716971c2184cc8821e2c3">BoundCondInj</a>, <a class="el" href="classBoundCondTank.html#afec4edd22c82fbc137da0e98b15f081f">BoundCondTank</a>, <a class="el" href="classBoundCondWall.html#a98f86a6925e4297039b74b1836b483b8">BoundCondWall</a>, <a class="el" href="classBoundCondAbs.html#addb6a1449281fff6b0fe872c7f3636be">BoundCondAbs</a>, and <a class="el" href="classBoundCondSymmetryO2.html#ae1fd598ac56ea9a7e3e70077b2cc96ab">BoundCondSymmetryO2</a>.</p>
+<p>Reimplemented in <a class="el" href="classCellInterfaceO2.html#a29220cd6effc8761f6a0164b2950a8da">CellInterfaceO2</a>, <a class="el" href="classBoundCondWallO2.html#a25c3fac5e632030f3e22ebe6f9af43c7">BoundCondWallO2</a>, <a class="el" href="classBoundCondOutflow.html#a3147c0169b89656a34357973fe603575">BoundCondOutflow</a>, <a class="el" href="classBoundCondInj.html#acf782b383346af641759179cb9954230">BoundCondInj</a>, <a class="el" href="classBoundCondTank.html#a7b66f878a9aeca7c4ad18f799f8108d7">BoundCondTank</a>, <a class="el" href="classBoundCondWall.html#a18743bea215d01ac4b5b0c9c2bada1e6">BoundCondWall</a>, <a class="el" href="classBoundCondNonReflecting.html#a3ec1724095be5a5062135753166ca36a">BoundCondNonReflecting</a>, and <a class="el" href="classBoundCondSymmetryO2.html#ab28edee41338bbafedd9cb4f0ce46c9b">BoundCondSymmetryO2</a>.</p>
 
 </div>
 </div>
-<a class="anchor" id="a6d7073eac69386a1bb8d2a284545f727"></a>
+<a class="anchor" id="aeb659a136fea46ff1b0ba683abbe8a38"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="mlabels">
@@ -695,7 +695,7 @@ Protected Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void CellInterface::creerBordChildInterne </td>
+          <td class="memname">void CellInterface::creerCellInterfaceChildInterne </td>
           <td>(</td>
           <td class="paramtype">const int &amp;&#160;</td>
           <td class="paramname"><em>lvl</em>, </td>
@@ -704,7 +704,7 @@ Protected Attributes</h2></td></tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">std::vector&lt; <a class="el" href="classCellInterface.html">CellInterface</a> * &gt; *&#160;</td>
-          <td class="paramname"><em>childrenInternalBoundaries</em>&#160;</td>
+          <td class="paramname"><em>childrenInternalCellInterfaces</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -718,13 +718,13 @@ Protected Attributes</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Creer un bord enfant interne (non initialize) </p>
+<p>Creer un intern child cell interface (non initialize) </p>
 
-<p>Reimplemented in <a class="el" href="classCellInterfaceO2.html#aaafba7d334f7778cb727f28e765715ec">CellInterfaceO2</a>.</p>
+<p>Reimplemented in <a class="el" href="classCellInterfaceO2.html#a3cb8c07e82dc3f81e17c842004f43f5b">CellInterfaceO2</a>.</p>
 
 </div>
 </div>
-<a class="anchor" id="a3ba58c2f713e81535c3fe036adadd605"></a>
+<a class="anchor" id="ac53736492fd1b858815c25d33ebb1475"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
@@ -732,7 +732,7 @@ Protected Attributes</h2></td></tr>
           <td class="memname">void CellInterface::creerFaceChild </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="classCellInterface.html">CellInterface</a> *&#160;</td>
-          <td class="paramname"><em>bordParent</em></td><td>)</td>
+          <td class="paramname"><em>cellInterfaceParent</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -741,7 +741,7 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="a0721e7c848d4d00bc734076a98a1dba4"></a>
+<a class="anchor" id="ae7ebc273062013ea797106226d71c4b5"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="mlabels">
@@ -749,7 +749,7 @@ Protected Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void CellInterface::deraffineBordExterne </td>
+          <td class="memname">void CellInterface::deraffineCellInterfaceExterne </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="classCell.html">Cell</a> *&#160;</td>
           <td class="paramname"><em>cellRef</em></td><td>)</td>
@@ -762,25 +762,25 @@ Protected Attributes</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Deraffinement du bord externe en supprimant si besoin ses boundaries enfants + liaisons cells/boundaries </p>
+<p>Deraffinement du extern cell interface en supprimant si besoin ses children cell interfaces + liaisons cells/cell interfaces </p>
 
-<p>Reimplemented in <a class="el" href="classBoundCond.html#a910e947f5c56106777ec68bb6330144a">BoundCond</a>.</p>
+<p>Reimplemented in <a class="el" href="classBoundCond.html#ab802b08dbb2ddeac849c15e67aa5ad34">BoundCond</a>.</p>
 
 </div>
 </div>
-<a class="anchor" id="a5048065502862612f505a19d50bad0c0"></a>
+<a class="anchor" id="aeb6b914720886eb34e31940b69c7ee15"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">void CellInterface::deraffineBordsChildren </td>
+          <td class="memname">void CellInterface::deraffineCellInterfacesChildren </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Supprime les boundaries enfants </p>
+<p>Supprime les children cell interfaces </p>
 
 </div>
 </div>
@@ -816,39 +816,6 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="adda0e258a1f72713c15360d9c6f3a47e"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void CellInterface::finalizeFace </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<p>Supprime la face correspondante au bord </p>
-
-</div>
-</div>
-<a class="anchor" id="ac72dc84840ad417fd3a7042e0779a731"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="classCellInterface.html">CellInterface</a> * CellInterface::getBordChild </td>
-          <td>(</td>
-          <td class="paramtype">const int &amp;&#160;</td>
-          <td class="paramname"><em>numChild</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<p>Renvoie le bord enfant correspondant au number </p>
-
-</div>
-</div>
 <a class="anchor" id="a2c8bfa724d7ce745a64ab9cb25ff0c7f"></a>
 <div class="memitem">
 <div class="memproto">
@@ -879,6 +846,39 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
+<a class="anchor" id="af134c35c990fcc471c86c53fb81369e7"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classCellInterface.html">CellInterface</a> * CellInterface::getCellInterfaceChild </td>
+          <td>(</td>
+          <td class="paramtype">const int &amp;&#160;</td>
+          <td class="paramname"><em>numChild</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Renvoie le child cell interface correspondant au number </p>
+
+</div>
+</div>
+<a class="anchor" id="a8b240acef83bcfae9272a0764aad53ca"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classCellInterface.html">CellInterface</a> * CellInterface::getCellInterfaceChildBack </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Renvoie le child cell interface correspondant au number </p>
+
+</div>
+</div>
 <a class="anchor" id="a6427c77e8246803b4e940cda6c596555"></a>
 <div class="memitem">
 <div class="memproto">
@@ -891,23 +891,30 @@ Protected Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Ne fait rien pour des Bord de Maille ordre 1 Attention, <a class="el" href="classCellInterface.html#a6427c77e8246803b4e940cda6c596555">getFace()</a> non const </p>
+<p>Ne fait rien pour des cell interfaces ordre 1 Attention, <a class="el" href="classCellInterface.html#a6427c77e8246803b4e940cda6c596555">getFace()</a> non const </p>
 
 </div>
 </div>
-<a class="anchor" id="afe27313947a85c043f1c0a64932d3688"></a>
+<a class="anchor" id="a892951b76e0c8cea13a7d81d55d7c5bf"></a>
 <div class="memitem">
 <div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">int CellInterface::getLvl </td>
+          <td class="memname">const int&amp; CellInterface::getLvl </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td> const</td>
         </tr>
       </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
 </div><div class="memdoc">
-<p>Renvoie le niveau du bord </p>
 
 </div>
 </div>
@@ -926,23 +933,23 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="ae9e316f4c7486a4fd5e52409aff64fe0"></a>
+<a class="anchor" id="a982e25d96980fe70c7f3b8392756fb4c"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">int CellInterface::getNumberBordsChildren </td>
+          <td class="memname">int CellInterface::getNumberCellInterfacesChildren </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td> const</td>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Renvoie le number de boundaries enfants de ce bord </p>
+<p>Renvoie le niveau du cell interface Renvoie le number de children cell interfaces de ce cell interface </p>
 
 </div>
 </div>
-<a class="anchor" id="ae272bb5e2dabf80deacf522909f3e635"></a>
+<a class="anchor" id="a1f58baf5d9dd093b940a1b2ccfd29ccc"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="mlabels">
@@ -950,7 +957,7 @@ Protected Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">virtual int CellInterface::getNumPhys </td>
+          <td class="memname">virtual const int&amp; CellInterface::getNumPhys </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td> const</td>
@@ -963,7 +970,7 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Reimplemented in <a class="el" href="classBoundCond.html#ac679bec446b2c0e9c1767f3af0e4cad2">BoundCond</a>.</p>
+<p>Reimplemented in <a class="el" href="classBoundCond.html#aca387f86f4c17e3819274a088193ab63">BoundCond</a>.</p>
 
 </div>
 </div>
@@ -987,7 +994,7 @@ Protected Attributes</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Ne fait rien pour des Bord de Maille ordre 1 </p>
+<p>Ne fait rien pour des cell interfaces ordre 1 </p>
 
 <p>Reimplemented in <a class="el" href="classCellInterfaceO2.html#a5fcaad19fbf7f48fcc66abe8a8569985">CellInterfaceO2</a>, and <a class="el" href="classBoundCondWallO2.html#aef3ce3c05cb30687121a3536f7b44c96">BoundCondWallO2</a>.</p>
 
@@ -1014,7 +1021,7 @@ Protected Attributes</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Ne fait rien pour des Bord de Maille ordre 1 </p>
+<p>Ne fait rien pour des cell interfaces ordre 1 </p>
 
 <p>Reimplemented in <a class="el" href="classCellInterfaceO2.html#a064555971c99dbb072d02963dd63a149">CellInterfaceO2</a>, and <a class="el" href="classBoundCondWallO2.html#a518d7c31d3d206f3c9913f75b04690b2">BoundCondWallO2</a>.</p>
 
@@ -1041,7 +1048,7 @@ Protected Attributes</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Ne fait rien pour des Bord de Maille ordre 1 </p>
+<p>Ne fait rien pour des cell interfaces ordre 1 </p>
 
 <p>Reimplemented in <a class="el" href="classCellInterfaceO2.html#a6719c32d0143e7c92b3ea2fe0e69581a">CellInterfaceO2</a>, and <a class="el" href="classBoundCondWallO2.html#a0abb2f780dfbcf83fefc2a7a784aa47b">BoundCondWallO2</a>.</p>
 
@@ -1059,7 +1066,7 @@ Protected Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Renvoie si oui ou non le bord est splitte </p>
+<p>Renvoie si oui ou non le cell interface est splitte </p>
 
 </div>
 </div>
@@ -1139,7 +1146,7 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="acd5dccbaf759fcce29098e021b528950"></a>
+<a class="anchor" id="a8172713eb70ab29af50714cfa0f8c236"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="mlabels">
@@ -1147,7 +1154,7 @@ Protected Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void CellInterface::raffineBordExterne </td>
+          <td class="memname">void CellInterface::raffineCellInterfaceExterne </td>
           <td>(</td>
           <td class="paramtype">const int &amp;&#160;</td>
           <td class="paramname"><em>nbCellsY</em>, </td>
@@ -1200,66 +1207,9 @@ Protected Attributes</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Raffinement du bord externe en creant si besoin des boundaries enfants + liaisons cells/boundaries </p>
+<p>Raffinement du extern cell interface en creant si besoin des children cell interfaces + liaisons cells/cell interfaces </p>
 
-<p>Reimplemented in <a class="el" href="classBoundCond.html#ac6d7ee0e1efb8a9b03d6045df87b0cce">BoundCond</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="a86614f07509eeda269bd1f727dd9c044"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void CellInterface::raffineBordExterneGhost </td>
-          <td>(</td>
-          <td class="paramtype">const int &amp;&#160;</td>
-          <td class="paramname"><em>nbCellsY</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const int &amp;&#160;</td>
-          <td class="paramname"><em>nbCellsZ</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const double &amp;&#160;</td>
-          <td class="paramname"><em>dXParent</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const double &amp;&#160;</td>
-          <td class="paramname"><em>dYParent</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const double &amp;&#160;</td>
-          <td class="paramname"><em>dZParent</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="classCell.html">Cell</a> *&#160;</td>
-          <td class="paramname"><em>cellRef</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const int &amp;&#160;</td>
-          <td class="paramname"><em>dim</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<p>Raffinement du bord externe pour les cells fantomes en creant si besoin des boundaries enfants + liaisons cells/boundaries </p>
+<p>Reimplemented in <a class="el" href="classBoundCond.html#aa913f3adb4233771c710b86c249ec74e">BoundCond</a>.</p>
 
 </div>
 </div>
@@ -1383,6 +1333,21 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
+<a class="anchor" id="ab70f79dd001bce5526708e48c8dfd606"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void CellInterface::updatePointersInternalCellInterfaces </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a class="anchor" id="a552ad34c2e4c58cb577819b75f855d1f"></a>
 <div class="memitem">
 <div class="memproto">
@@ -1404,12 +1369,12 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Reimplemented in <a class="el" href="classBoundCond.html#aa09d56b07e2eba8aad3e19524d1eeb15">BoundCond</a>, <a class="el" href="classBoundCondOutflow.html#ad990a0bb94311485d0f55b7ef6afef31">BoundCondOutflow</a>, <a class="el" href="classBoundCondWallO2.html#a63273dd27ff92684a29e4650d4b4b2bd">BoundCondWallO2</a>, <a class="el" href="classBoundCondInj.html#aec1e474e5eca4ab484540b0cd9d3f93d">BoundCondInj</a>, <a class="el" href="classBoundCondWall.html#a4a9cac3937c188f90d4364530a351af4">BoundCondWall</a>, <a class="el" href="classBoundCondAbs.html#af7b786ed52f3d06448d959572452e834">BoundCondAbs</a>, <a class="el" href="classBoundCondTank.html#abed9fdbf5a555609df5037d5f4f4db88">BoundCondTank</a>, and <a class="el" href="classBoundCondSymmetryO2.html#a7ffa5ff4bf1e97654bc8599977b107d5">BoundCondSymmetryO2</a>.</p>
+<p>Reimplemented in <a class="el" href="classBoundCond.html#aa09d56b07e2eba8aad3e19524d1eeb15">BoundCond</a>, <a class="el" href="classBoundCondOutflow.html#ad990a0bb94311485d0f55b7ef6afef31">BoundCondOutflow</a>, <a class="el" href="classBoundCondWallO2.html#a63273dd27ff92684a29e4650d4b4b2bd">BoundCondWallO2</a>, <a class="el" href="classBoundCondInj.html#aec1e474e5eca4ab484540b0cd9d3f93d">BoundCondInj</a>, <a class="el" href="classBoundCondWall.html#a4a9cac3937c188f90d4364530a351af4">BoundCondWall</a>, <a class="el" href="classBoundCondNonReflecting.html#a281adcb1156fc2022747c6d93e22cbf0">BoundCondNonReflecting</a>, <a class="el" href="classBoundCondTank.html#abed9fdbf5a555609df5037d5f4f4db88">BoundCondTank</a>, and <a class="el" href="classBoundCondSymmetryO2.html#a7ffa5ff4bf1e97654bc8599977b107d5">BoundCondSymmetryO2</a>.</p>
 
 </div>
 </div>
 <h2 class="groupheader">Member Data Documentation</h2>
-<a class="anchor" id="ab795834e8d61d192dd2c96c449dba636"></a>
+<a class="anchor" id="adb6d34b5f103d7de52fabdbddceeedf6"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="mlabels">
@@ -1417,7 +1382,7 @@ Protected Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">std::vector&lt;<a class="el" href="classCellInterface.html">CellInterface</a>*&gt; CellInterface::m_boundariesChildren</td>
+          <td class="memname">std::vector&lt;<a class="el" href="classCellInterface.html">CellInterface</a>*&gt; CellInterface::m_cellInterfacesChildren</td>
         </tr>
       </table>
   </td>
@@ -1426,7 +1391,7 @@ Protected Attributes</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Tableau de boundaries enfants (taille : 1 en 1D, 2 en 2D et 4 en 3D) </p>
+<p>Tableau de children cell interfaces (taille : 1 en 1D, 2 en 2D et 4 en 3D) </p>
 
 </div>
 </div>
@@ -1507,7 +1472,7 @@ Protected Attributes</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Niveau dans l arbre AMR du bord </p>
+<p>Niveau dans l arbre AMR du cell interface </p>
 
 </div>
 </div>
@@ -1532,8 +1497,8 @@ Protected Attributes</h2></td></tr>
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following files:<ul>
-<li>/home/travis/build/code-mphi/ECOGEN/src/<a class="el" href="CellInterface_8h_source.html">CellInterface.h</a></li>
-<li>/home/travis/build/code-mphi/ECOGEN/src/<a class="el" href="CellInterface_8cpp.html">CellInterface.cpp</a></li>
+<li>/home/travis/build/code-mphi/ECOGEN/src/Order1/<a class="el" href="CellInterface_8h_source.html">CellInterface.h</a></li>
+<li>/home/travis/build/code-mphi/ECOGEN/src/Order1/<a class="el" href="CellInterface_8cpp.html">CellInterface.cpp</a></li>
 </ul>
 </div><!-- contents -->
 </div><!-- doc-content -->
@@ -1541,7 +1506,7 @@ Protected Attributes</h2></td></tr>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="classCellInterface.html">CellInterface</a></li>
-    <li class="footer">Generated on Wed Apr 29 2020 10:31:12 for ECOGEN by
+    <li class="footer">Generated on Mon May 11 2020 16:03:19 for ECOGEN by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.11 </li>
   </ul>

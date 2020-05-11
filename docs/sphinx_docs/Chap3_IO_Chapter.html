@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>I/O descriptions &mdash; ECOGEN b1.0 documentation</title>
+  <title>I/O descriptions &mdash; ECOGEN 2.0 documentation</title>
   
 
   
@@ -37,7 +37,7 @@
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="Input Files" href="Chap3_1inputFiles.html" />
-    <link rel="prev" title="Prerequisities" href="Chap2_1installation.html" /> 
+    <link rel="prev" title="Prerequisites" href="Chap2_1installation.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -61,7 +61,7 @@
             
             
               <div class="version">
-                1.0
+                2.0
               </div>
             
           
@@ -97,8 +97,9 @@
 </li>
 <li class="toctree-l1"><a class="reference internal" href="Chap4_tutorials_Chapter.html">Tutorials</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Chap5_testCases_Chapter.html">Test cases</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Chap6_developpersGuide_Chapter.html">Developers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Chap6_developersGuide_Chapter.html">Developers</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Chap7_license.html">License</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Chap8_GUI.html">Graphical User Interface</a></li>
 <li class="toctree-l1"><a class="reference internal" href="zBibliography.html">Bibliography</a></li>
 </ul>
 
@@ -166,9 +167,9 @@
             
   <div class="section" id="i-o-descriptions">
 <span id="chap-userguide"></span><h1>I/O descriptions<a class="headerlink" href="#i-o-descriptions" title="Permalink to this headline">¶</a></h1>
-<p>ECOGEN settings are managed via INPUT FILES only. The global INPUT FILES and OUTPUT FILES structure is depicted in <a class="reference internal" href="#fig-userguide-overview"><span class="std std-numref">Fig. 2</span></a>.</p>
+<p>ECOGEN settings are managed via input files only. The global input- and output- file structure is depicted in <a class="reference internal" href="#fig-userguide-overview"><span class="std std-numref">Fig. 2</span></a>.</p>
 <div class="figure align-center" id="id1">
-<span id="fig-userguide-overview"></span><a class="reference internal image-reference" href="_images/overview.png"><img alt="_images/overview.png" src="_images/overview.png" style="width: 491.4px; height: 698.5999999999999px;" /></a>
+<span id="fig-userguide-overview"></span><a class="reference internal image-reference" href="_images/overview.png"><img alt="_images/overview.png" src="_images/overview.png" style="width: 510.99999999999994px; height: 734.3px;" /></a>
 <p class="caption"><span class="caption-number">Fig. 2 </span><span class="caption-text">Structure of input and output files in ECOGEN</span><a class="headerlink" href="#id1" title="Permalink to this image">¶</a></p>
 </div>
 <div class="toctree-wrapper compound">
@@ -182,14 +183,17 @@
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="Chap3_2materials.html">Materials</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="Chap3_2materials.html#ideal-gas">Ideal Gas</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Chap3_2materials.html#sec-input-idealgas">Ideal Gas</a></li>
 <li class="toctree-l2"><a class="reference internal" href="Chap3_2materials.html#stiffened-gas">Stiffened Gas</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Chap3_2materials.html#noble-abel-stiffened-gas">Noble-Abel Stiffened Gas</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="Chap3_3outputFiles.html">Output Files</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="Chap3_3outputFiles.html#using-gnu-format">Using GNU format</a></li>
 <li class="toctree-l2"><a class="reference internal" href="Chap3_3outputFiles.html#xml-vtk-file-format">XML VTK file format</a></li>
 <li class="toctree-l2"><a class="reference internal" href="Chap3_3outputFiles.html#saving-input-files">Saving input files</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Chap3_3outputFiles.html#probes-and-cuts">Probes and cuts</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Chap3_3outputFiles.html#mesh-information">Mesh information</a></li>
 <li class="toctree-l2"><a class="reference internal" href="Chap3_3outputFiles.html#screen-output">Screen output</a></li>
 </ul>
 </li>
@@ -208,7 +212,7 @@
         <a href="Chap3_1inputFiles.html" class="btn btn-neutral float-right" title="Input Files" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="Chap2_1installation.html" class="btn btn-neutral float-left" title="Prerequisities" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="Chap2_1installation.html" class="btn btn-neutral float-left" title="Prerequisites" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   

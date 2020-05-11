@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Input Files &mdash; ECOGEN b1.0 documentation</title>
+  <title>Input Files &mdash; ECOGEN 2.0 documentation</title>
   
 
   
@@ -61,7 +61,7 @@
             
             
               <div class="version">
-                1.0
+                2.0
               </div>
             
           
@@ -103,8 +103,9 @@
 </li>
 <li class="toctree-l1"><a class="reference internal" href="Chap4_tutorials_Chapter.html">Tutorials</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Chap5_testCases_Chapter.html">Test cases</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Chap6_developpersGuide_Chapter.html">Developers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Chap6_developersGuide_Chapter.html">Developers</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Chap7_license.html">License</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Chap8_GUI.html">Graphical User Interface</a></li>
 <li class="toctree-l1"><a class="reference internal" href="zBibliography.html">Bibliography</a></li>
 </ul>
 
@@ -174,8 +175,8 @@
             
   <div class="section" id="input-files">
 <span id="chap-input"></span><h1>Input Files<a class="headerlink" href="#input-files" title="Permalink to this headline">¶</a></h1>
-<p>The standard XML format is used for ECOGEN input files. This data format is using markups that gives to the input files some interesting flexibility. ECOGEN is using the <a class="reference external" href="http://www.grinninglizard.com/tinyxml2/">TinyXML-2</a>  parser to read/write xml files.</p>
-<p>More information about XML format can be found at: <a class="reference external" href="https://www.w3schools.com/xml/">https://www.w3schools.com/xml/</a></p>
+<p>The standard XML format is used for ECOGEN input files. This data format is using markups which give to the input files some interesting flexibility. ECOGEN is using the <a class="reference external" href="http://www.grinninglizard.com/tinyxml2/">TinyXML-2</a>  parser to read/write XML files.</p>
+<p>More information about XML format can be found at: <a class="reference external" href="https://www.w3schools.com/xml/">https://www.w3schools.com/xml/</a>.</p>
 <p>ECOGEN package includes a sample of test cases. Each of them is independent, ready to use and can also be adapted and enriched to develop a new configuration. The test case to be run is chosen in the main input file: <em>ECOGEN.xml</em>. The minima structure of this file is:</p>
 <div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="cp">&lt;?xml version = &quot;1.0&quot; encoding = &quot;UTF-8&quot; standalone = &quot;yes&quot;?&gt;</span>
 <span class="nt">&lt;ecogen&gt;</span>
@@ -183,7 +184,7 @@
 <span class="nt">&lt;/ecogen&gt;</span>
 </pre></div>
 </div>
-<p>In this file, the <code class="code xml docutils literal notranslate"><span class="name tag"><span class="pre">&lt;testCase&gt;</span></span></code> markup indicates the folder containing the test case to be run. It is then possible to run successively several cases by adding as many <code class="code xml docutils literal notranslate"><span class="name tag"><span class="pre">&lt;testCase&gt;</span></span></code> markup as necessary.
+<p>In this file, the <code class="code xml docutils literal notranslate"><span class="name tag"><span class="pre">&lt;testCase&gt;</span></span></code> markup indicates the folder containing the test case to be run. It is then possible to run successively several cases by adding as many <code class="code xml docutils literal notranslate"><span class="name tag"><span class="pre">&lt;testCase&gt;</span></span></code> markups as necessary.
 Each folder indicated in a <code class="code xml docutils literal notranslate"><span class="name tag"><span class="pre">&lt;testCase&gt;</span></span></code> markup must contain 4 input files:</p>
 <ul class="simple">
 <li><p><em>mainV5.xml</em></p></li>
@@ -193,10 +194,10 @@ Each folder indicated in a <code class="code xml docutils literal notranslate"><
 </ul>
 <p>Additional input files depending on the test case are necessary. They are placed in the following folders:</p>
 <ul class="simple">
-<li><p><strong>ECOGEN/libEOS/</strong>: contains the files defining the material used in the test case.</p></li>
-<li><p><strong>ECOGEN/libMeshes/</strong>: contains the files defining the mesh used in the test case.</p></li>
+<li><p><strong>ECOGEN/libEOS/</strong>: Contains the files defining the material used in the test case.</p></li>
+<li><p><strong>ECOGEN/libMeshes/</strong>: Contains the files defining the mesh used in the test case (for unstructured grid).</p></li>
 </ul>
-<p>In this section the structure of each input file is detailed. This information is also provided in a condensed form in the “handbook” files at the root folder of test cases library <strong>ECOGEN/libTests/</strong>. These files are named and constitute quick-reference manuals:</p>
+<p>In this section, the structure of each input file is detailed. This information is also provided in a condensed form in the “handbook” files at the root folder of the test-case library <strong>ECOGEN/libTests/</strong>. These files constitute quick-reference manuals and are named as follow:</p>
 <ul class="simple">
 <li><p><em>manualMainV5.xml</em></p></li>
 <li><p><em>manualMeshV5.xml</em></p></li>

@@ -133,8 +133,8 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a475afccf47c0faea15f06c2977c9cd7a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a474d108c3080695d11dfaaa78e5edb29"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classOutputXML.html#a474d108c3080695d11dfaaa78e5edb29">ecritSolution</a> (<a class="el" href="classMesh.html">Mesh</a> *mesh, std::vector&lt; <a class="el" href="classCell.html">Cell</a> * &gt; *cellsLvl)</td></tr>
 <tr class="separator:a474d108c3080695d11dfaaa78e5edb29"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4e81d1d994001d01eff3fab1c26b86d9"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classOutputXML.html#a4e81d1d994001d01eff3fab1c26b86d9">readResults</a> (<a class="el" href="classMesh.html">Mesh</a> *mesh, std::vector&lt; <a class="el" href="classCell.html">Cell</a> * &gt; *cellsLvl, const int fileNumber)</td></tr>
-<tr class="separator:a4e81d1d994001d01eff3fab1c26b86d9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9bdde138abf6dc43e884ec6eabc0f1cc"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classOutputXML.html#a9bdde138abf6dc43e884ec6eabc0f1cc">readResults</a> (<a class="el" href="classMesh.html">Mesh</a> *mesh, std::vector&lt; <a class="el" href="classCell.html">Cell</a> * &gt; *cellsLvl)</td></tr>
+<tr class="separator:a9bdde138abf6dc43e884ec6eabc0f1cc"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_methods_classOutput"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classOutput')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classOutput.html">Output</a></td></tr>
 <tr class="memitem:a428c663520336477a12f1a33504eb067 inherit pub_methods_classOutput"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classOutput.html#a428c663520336477a12f1a33504eb067">Output</a> ()</td></tr>
 <tr class="separator:a428c663520336477a12f1a33504eb067 inherit pub_methods_classOutput"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -142,22 +142,26 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a1ab20f8fa7659568613ee9607aa759e2 inherit pub_methods_classOutput"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a61d0840daf98bea49e4dc471f235eeab inherit pub_methods_classOutput"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classOutput.html#a61d0840daf98bea49e4dc471f235eeab">~Output</a> ()</td></tr>
 <tr class="separator:a61d0840daf98bea49e4dc471f235eeab inherit pub_methods_classOutput"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad3c1e5dcd037eef3259f922ca3fe3ec9 inherit pub_methods_classOutput"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classOutput.html#ad3c1e5dcd037eef3259f922ca3fe3ec9">locateProbeInMesh</a> (<a class="el" href="classCell.html">Cell</a> **cells, const int &amp;nbCells, bool localSeeking=false)</td></tr>
-<tr class="separator:ad3c1e5dcd037eef3259f922ca3fe3ec9 inherit pub_methods_classOutput"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9c6e6f6187a89dbd86c6154e1c4bc4cb inherit pub_methods_classOutput"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classOutput.html#a9c6e6f6187a89dbd86c6154e1c4bc4cb">locateProbeInMesh</a> (const <a class="el" href="Tools_8h.html#a6a3bb3ec3ebf7c9a9f95790b2336019c">TypeMeshContainer</a>&lt; <a class="el" href="classCell.html">Cell</a> * &gt; &amp;cells, const int &amp;nbCells, bool localSeeking=false)</td></tr>
+<tr class="separator:a9c6e6f6187a89dbd86c6154e1c4bc4cb inherit pub_methods_classOutput"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8dacc4a76c10fb7e9bec2ab2fcc83ec5 inherit pub_methods_classOutput"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classCell.html">Cell</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classOutput.html#a8dacc4a76c10fb7e9bec2ab2fcc83ec5">locateProbeInAMRSubMesh</a> (std::vector&lt; <a class="el" href="classCell.html">Cell</a> * &gt; *cells, const int &amp;nbCells)</td></tr>
 <tr class="separator:a8dacc4a76c10fb7e9bec2ab2fcc83ec5 inherit pub_methods_classOutput"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab93a976bbb7da40ba600876d9674741a inherit pub_methods_classOutput"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classOutput.html#ab93a976bbb7da40ba600876d9674741a">prepareOutput</a> (const <a class="el" href="classCell.html">Cell</a> &amp;cell)</td></tr>
 <tr class="separator:ab93a976bbb7da40ba600876d9674741a inherit pub_methods_classOutput"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5802016613529734e44976951094920d inherit pub_methods_classOutput"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classOutput.html#a5802016613529734e44976951094920d">prepareOutputInfos</a> ()</td></tr>
 <tr class="separator:a5802016613529734e44976951094920d inherit pub_methods_classOutput"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4ee6870b924a5023198aba5589ed6692 inherit pub_methods_classOutput"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classOutput.html#a4ee6870b924a5023198aba5589ed6692">printTree</a> (<a class="el" href="classMesh.html">Mesh</a> *mesh, std::vector&lt; <a class="el" href="classCell.html">Cell</a> * &gt; *cellsLvl)</td></tr>
-<tr class="separator:a4ee6870b924a5023198aba5589ed6692 inherit pub_methods_classOutput"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aeffa3714a2a75eb7dd994ba5ae7eecb6 inherit pub_methods_classOutput"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classOutput.html#aeffa3714a2a75eb7dd994ba5ae7eecb6">printTree</a> (<a class="el" href="classMesh.html">Mesh</a> *mesh, std::vector&lt; <a class="el" href="classCell.html">Cell</a> * &gt; *cellsLvl, int m_restartAMRsaveFreq)</td></tr>
+<tr class="separator:aeffa3714a2a75eb7dd994ba5ae7eecb6 inherit pub_methods_classOutput"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2d963da439bf46e41f001ecd377668ad inherit pub_methods_classOutput"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classOutput.html#a2d963da439bf46e41f001ecd377668ad">ecritInfos</a> ()</td></tr>
 <tr class="separator:a2d963da439bf46e41f001ecd377668ad inherit pub_methods_classOutput"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a55f7e0f6fc4aef28f2c927bcd212b3c9 inherit pub_methods_classOutput"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classOutput.html#a55f7e0f6fc4aef28f2c927bcd212b3c9">saveInfosMailles</a> () const </td></tr>
+<tr class="separator:a55f7e0f6fc4aef28f2c927bcd212b3c9 inherit pub_methods_classOutput"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ada5452d639177cf52f00da98c6698e62 inherit pub_methods_classOutput"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classOutput.html#ada5452d639177cf52f00da98c6698e62">readInfos</a> ()</td></tr>
 <tr class="separator:ada5452d639177cf52f00da98c6698e62 inherit pub_methods_classOutput"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aed990e5af6c5ce8a55ed2b7a3e068661 inherit pub_methods_classOutput"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classOutput.html#aed990e5af6c5ce8a55ed2b7a3e068661">readTree</a> (<a class="el" href="classMesh.html">Mesh</a> *mesh, std::vector&lt; <a class="el" href="classCell.html">Cell</a> * &gt; *cellsLvl, std::vector&lt; <a class="el" href="classCellInterface.html">CellInterface</a> * &gt; *boundariesLvl, const int fileNumber, const std::vector&lt; <a class="el" href="classAddPhys.html">AddPhys</a> * &gt; &amp;addPhys, <a class="el" href="classModel.html">Model</a> *model, int &amp;nbCellsTotalAMR)</td></tr>
-<tr class="separator:aed990e5af6c5ce8a55ed2b7a3e068661 inherit pub_methods_classOutput"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a715271f7600e13e3c90076b732b8dc17 inherit pub_methods_classOutput"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classOutput.html#a715271f7600e13e3c90076b732b8dc17">readDomainDecompostion</a> (<a class="el" href="classMesh.html">Mesh</a> *mesh, int restartSimulation)</td></tr>
+<tr class="separator:a715271f7600e13e3c90076b732b8dc17 inherit pub_methods_classOutput"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aee4ebb02eb5666d3dd05b8451fe0e4b1 inherit pub_methods_classOutput"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classOutput.html#aee4ebb02eb5666d3dd05b8451fe0e4b1">readTree</a> (<a class="el" href="classMesh.html">Mesh</a> *mesh, <a class="el" href="Tools_8h.html#a6a3bb3ec3ebf7c9a9f95790b2336019c">TypeMeshContainer</a>&lt; <a class="el" href="classCell.html">Cell</a> * &gt; *cellsLvl, <a class="el" href="Tools_8h.html#a6a3bb3ec3ebf7c9a9f95790b2336019c">TypeMeshContainer</a>&lt; <a class="el" href="classCell.html">Cell</a> * &gt; *cellsLvlGhost, <a class="el" href="Tools_8h.html#a6a3bb3ec3ebf7c9a9f95790b2336019c">TypeMeshContainer</a>&lt; <a class="el" href="classCellInterface.html">CellInterface</a> * &gt; *cellInterfacesLvl, const std::vector&lt; <a class="el" href="classAddPhys.html">AddPhys</a> * &gt; &amp;addPhys, <a class="el" href="classModel.html">Model</a> *model, <a class="el" href="classEos.html">Eos</a> **eos, int &amp;nbCellsTotalAMR)</td></tr>
+<tr class="separator:aee4ebb02eb5666d3dd05b8451fe0e4b1 inherit pub_methods_classOutput"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a40aae1058f2ea868468955317e74bb81 inherit pub_methods_classOutput"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classOutput.html#a40aae1058f2ea868468955317e74bb81">getNumSortie</a> () const </td></tr>
 <tr class="separator:a40aae1058f2ea868468955317e74bb81 inherit pub_methods_classOutput"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a296ad30c3a9921ec2be5b08e805647ee inherit pub_methods_classOutput"><td class="memItemLeft" align="right" valign="top">virtual double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classOutput.html#a296ad30c3a9921ec2be5b08e805647ee">getNextTime</a> ()</td></tr>
@@ -167,39 +171,31 @@ Public Member Functions</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-methods"></a>
 Protected Member Functions</h2></td></tr>
-<tr class="memitem:a195287b3b173d3bb9b7772baab20bd58"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classOutputXML.html#a195287b3b173d3bb9b7772baab20bd58">ReadDonneesPhysiquesXML</a> (<a class="el" href="classMesh.html">Mesh</a> *mesh, std::vector&lt; <a class="el" href="classCell.html">Cell</a> * &gt; *cellsLvl, <a class="el" href="classtinyxml2_1_1XMLElement.html">tinyxml2::XMLElement</a> *nodeCellData, const int &amp;lvl, std::string fileName=&quot;Unknown file&quot;)</td></tr>
-<tr class="separator:a195287b3b173d3bb9b7772baab20bd58"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af1b04872b2aafcf3caab279b7eda9545"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classOutputXML.html#af1b04872b2aafcf3caab279b7eda9545">creationNameFichierXML</a> (const char *name, <a class="el" href="classMesh.html">Mesh</a> *mesh=0, int lvl=-1, int proc=-1, int numFichier=-1, std::string nameVariable=&quot;defaut&quot;)</td></tr>
-<tr class="separator:af1b04872b2aafcf3caab279b7eda9545"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abcf546b7e47b050e33eb8391804cf233"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classOutputXML.html#abcf546b7e47b050e33eb8391804cf233">ReadDonneesPhysiquesXML</a> (<a class="el" href="classMesh.html">Mesh</a> *mesh, std::vector&lt; <a class="el" href="classCell.html">Cell</a> * &gt; *cellsLvl, <a class="el" href="classtinyxml2_1_1XMLElement.html">tinyxml2::XMLElement</a> *nodeCellData, std::string fileName=&quot;Unknown file&quot;)</td></tr>
+<tr class="separator:abcf546b7e47b050e33eb8391804cf233"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae1baf2446a9eb19b493b0499d5ca0497"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classOutputXML.html#ae1baf2446a9eb19b493b0499d5ca0497">creationNameFichierXML</a> (const char *name, <a class="el" href="classMesh.html">Mesh</a> *mesh=0, int proc=-1, int numFichier=-1, std::string nameVariable=&quot;defaut&quot;)</td></tr>
+<tr class="separator:ae1baf2446a9eb19b493b0499d5ca0497"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1626e5a5543f7238dd0a65634f7441a6"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classOutputXML.html#a1626e5a5543f7238dd0a65634f7441a6">ecritSolutionXML</a> (<a class="el" href="classMesh.html">Mesh</a> *mesh, std::vector&lt; <a class="el" href="classCell.html">Cell</a> * &gt; *cellsLvl)</td></tr>
 <tr class="separator:a1626e5a5543f7238dd0a65634f7441a6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a17beb9711f03a6f1dc9add2b8e569f65"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classOutputXML.html#a17beb9711f03a6f1dc9add2b8e569f65">ecritCollectionXML</a> (<a class="el" href="classMesh.html">Mesh</a> *mesh)</td></tr>
 <tr class="separator:a17beb9711f03a6f1dc9add2b8e569f65"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a73e84546ba2311c58709596aa28bea2f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classOutputXML.html#a73e84546ba2311c58709596aa28bea2f">ecritDonneesPhysiquesXML</a> (<a class="el" href="classMesh.html">Mesh</a> *mesh, std::vector&lt; <a class="el" href="classCell.html">Cell</a> * &gt; *cellsLvl, std::ofstream &amp;fileStream, const int &amp;lvl, bool <a class="el" href="Parallel_8h.html#aa56d1b9e42f2f1b7ef0cd9a1b1bbe3bd">parallel</a>=false)</td></tr>
-<tr class="separator:a73e84546ba2311c58709596aa28bea2f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab8cacf9c03ef6805466f92e9ac852931"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classOutputXML.html#ab8cacf9c03ef6805466f92e9ac852931">ecritDonneesPhysiquesXML</a> (<a class="el" href="classMesh.html">Mesh</a> *mesh, std::vector&lt; <a class="el" href="classCell.html">Cell</a> * &gt; *cellsLvl, std::ofstream &amp;fileStream, bool <a class="el" href="Parallel_8h.html#aa56d1b9e42f2f1b7ef0cd9a1b1bbe3bd">parallel</a>=false)</td></tr>
+<tr class="separator:ab8cacf9c03ef6805466f92e9ac852931"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1f4b09ea5c20444943784aefd92b6b9b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classOutputXML.html#a1f4b09ea5c20444943784aefd92b6b9b">ecritMeshRectilinearXML</a> (<a class="el" href="classMesh.html">Mesh</a> *mesh, std::vector&lt; <a class="el" href="classCell.html">Cell</a> * &gt; *cellsLvl, std::ofstream &amp;fileStream, bool <a class="el" href="Parallel_8h.html#aa56d1b9e42f2f1b7ef0cd9a1b1bbe3bd">parallel</a>=false)</td></tr>
 <tr class="separator:a1f4b09ea5c20444943784aefd92b6b9b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa0bfe3a1b4c8626a130346edacabeea3"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classOutputXML.html#aa0bfe3a1b4c8626a130346edacabeea3">ecritMeshUnstructuredXML</a> (<a class="el" href="classMesh.html">Mesh</a> *mesh, std::vector&lt; <a class="el" href="classCell.html">Cell</a> * &gt; *cellsLvl, std::ofstream &amp;fileStream, const int &amp;lvl, bool <a class="el" href="Parallel_8h.html#aa56d1b9e42f2f1b7ef0cd9a1b1bbe3bd">parallel</a>=false)</td></tr>
-<tr class="separator:aa0bfe3a1b4c8626a130346edacabeea3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6ededf712e4261f38ff129a039e84688"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classOutputXML.html#a6ededf712e4261f38ff129a039e84688">ecritMeshPolyDataXML</a> (<a class="el" href="classMesh.html">Mesh</a> *mesh, std::vector&lt; <a class="el" href="classCell.html">Cell</a> * &gt; *cellsLvl, std::ofstream &amp;fileStream, const int &amp;lvl, bool <a class="el" href="Parallel_8h.html#aa56d1b9e42f2f1b7ef0cd9a1b1bbe3bd">parallel</a>=false)</td></tr>
-<tr class="separator:a6ededf712e4261f38ff129a039e84688"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a798572ab2c96ff6896bcb72eaaa0ce12"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classOutputXML.html#a798572ab2c96ff6896bcb72eaaa0ce12">ecritMeshUnstructuredXML</a> (<a class="el" href="classMesh.html">Mesh</a> *mesh, std::vector&lt; <a class="el" href="classCell.html">Cell</a> * &gt; *cellsLvl, std::ofstream &amp;fileStream, bool <a class="el" href="Parallel_8h.html#aa56d1b9e42f2f1b7ef0cd9a1b1bbe3bd">parallel</a>=false)</td></tr>
+<tr class="separator:a798572ab2c96ff6896bcb72eaaa0ce12"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a00c079f9e7b98d0faa45a21db3ac8e85"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classOutputXML.html#a00c079f9e7b98d0faa45a21db3ac8e85">ecritFinFichierRectilinearXML</a> (std::ofstream &amp;fileStream, bool <a class="el" href="Parallel_8h.html#aa56d1b9e42f2f1b7ef0cd9a1b1bbe3bd">parallel</a>=false)</td></tr>
 <tr class="separator:a00c079f9e7b98d0faa45a21db3ac8e85"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2d861a9b9e17971bffbdf27e231f1a1d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classOutputXML.html#a2d861a9b9e17971bffbdf27e231f1a1d">ecritFinFichierUnstructuredXML</a> (std::ofstream &amp;fileStream, bool <a class="el" href="Parallel_8h.html#aa56d1b9e42f2f1b7ef0cd9a1b1bbe3bd">parallel</a>=false)</td></tr>
 <tr class="separator:a2d861a9b9e17971bffbdf27e231f1a1d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8ff5010b5f1ca41794effd2a44761950"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classOutputXML.html#a8ff5010b5f1ca41794effd2a44761950">ecritFinFichierPolyDataXML</a> (std::ofstream &amp;fileStream, bool <a class="el" href="Parallel_8h.html#aa56d1b9e42f2f1b7ef0cd9a1b1bbe3bd">parallel</a>=false)</td></tr>
-<tr class="separator:a8ff5010b5f1ca41794effd2a44761950"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9be393921de7fd74b843d5dff8e47642"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classOutputXML.html#a9be393921de7fd74b843d5dff8e47642">ecritFichierParallelXML</a> (<a class="el" href="classMesh.html">Mesh</a> *mesh, std::vector&lt; <a class="el" href="classCell.html">Cell</a> * &gt; *cellsLvl)</td></tr>
-<tr class="separator:a9be393921de7fd74b843d5dff8e47642"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pro_methods_classOutput"><td colspan="2" onclick="javascript:toggleInherit('pro_methods_classOutput')"><img src="closed.png" alt="-"/>&#160;Protected Member Functions inherited from <a class="el" href="classOutput.html">Output</a></td></tr>
 <tr class="memitem:a8443ee8c79dc12df3f752871f192cb90 inherit pro_methods_classOutput"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classOutput.html#a8443ee8c79dc12df3f752871f192cb90">afficheInfoEcriture</a> () const </td></tr>
 <tr class="separator:a8443ee8c79dc12df3f752871f192cb90 inherit pro_methods_classOutput"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4dd1ea14d59e6c98d60ead3cf7f9e99a inherit pro_methods_classOutput"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classOutput.html#a4dd1ea14d59e6c98d60ead3cf7f9e99a">saveInfos</a> () const </td></tr>
 <tr class="separator:a4dd1ea14d59e6c98d60ead3cf7f9e99a inherit pro_methods_classOutput"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a55f7e0f6fc4aef28f2c927bcd212b3c9 inherit pro_methods_classOutput"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classOutput.html#a55f7e0f6fc4aef28f2c927bcd212b3c9">saveInfosMailles</a> () const </td></tr>
-<tr class="separator:a55f7e0f6fc4aef28f2c927bcd212b3c9 inherit pro_methods_classOutput"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0558114dc824ba0a2c61eb12ada47b56 inherit pro_methods_classOutput"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classOutput.html#a0558114dc824ba0a2c61eb12ada47b56">creationNameFichier</a> (const char *name, int lvl=-1, int proc=-1, int numFichier=-1) const </td></tr>
-<tr class="separator:a0558114dc824ba0a2c61eb12ada47b56 inherit pro_methods_classOutput"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a419ac185394f9c93b6184c01ee0033db inherit pro_methods_classOutput"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classOutput.html#a419ac185394f9c93b6184c01ee0033db">creationNameFichier</a> (const char *name, int lvl=-1, int proc=-1, int numFichier=-1) const </td></tr>
+<tr class="separator:a419ac185394f9c93b6184c01ee0033db inherit pro_methods_classOutput"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab6ea2ac5b86eb9c04170a589841bac3a inherit pro_methods_classOutput"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classOutput.html#ab6ea2ac5b86eb9c04170a589841bac3a">ecritJeuDonnees</a> (std::vector&lt; double &gt; jeuDonnees, std::ofstream &amp;fileStream, <a class="el" href="Tools_8h.html#a154edc1b1ca466c17e8dd4556b664412">TypeData</a> typeData)</td></tr>
 <tr class="separator:ab6ea2ac5b86eb9c04170a589841bac3a inherit pro_methods_classOutput"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aeb1ae27581e4279c62d3b3e934176c45 inherit pro_methods_classOutput"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classOutput.html#aeb1ae27581e4279c62d3b3e934176c45">getJeuDonnees</a> (std::istringstream &amp;data, std::vector&lt; double &gt; &amp;jeuDonnees, <a class="el" href="Tools_8h.html#a154edc1b1ca466c17e8dd4556b664412">TypeData</a> typeData)</td></tr>
@@ -217,39 +213,54 @@ Additional Inherited Members</h2></td></tr>
 <tr class="memitem:ad2884c73d5e6fc69ec3a396977264184 inherit pro_attribs_classOutput"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classOutput.html#ad2884c73d5e6fc69ec3a396977264184">m_simulationName</a></td></tr>
 <tr class="memdesc:ad2884c73d5e6fc69ec3a396977264184 inherit pro_attribs_classOutput"><td class="mdescLeft">&#160;</td><td class="mdescRight">Name du cas test (defini dans "main.xml")  <a href="#ad2884c73d5e6fc69ec3a396977264184">More...</a><br /></td></tr>
 <tr class="separator:ad2884c73d5e6fc69ec3a396977264184 inherit pro_attribs_classOutput"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a413f400cfe14c0fdd9228e353cade3e8 inherit pro_attribs_classOutput"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classOutput.html#a413f400cfe14c0fdd9228e353cade3e8">m_infosCalcul</a></td></tr>
-<tr class="memdesc:a413f400cfe14c0fdd9228e353cade3e8 inherit pro_attribs_classOutput"><td class="mdescLeft">&#160;</td><td class="mdescRight">Name file pour saver les infos utiles du compute.  <a href="#a413f400cfe14c0fdd9228e353cade3e8">More...</a><br /></td></tr>
-<tr class="separator:a413f400cfe14c0fdd9228e353cade3e8 inherit pro_attribs_classOutput"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9618a11c6832ea801c66bc087cd51703 inherit pro_attribs_classOutput"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classOutput.html#a9618a11c6832ea801c66bc087cd51703">m_infoMailles</a></td></tr>
-<tr class="memdesc:a9618a11c6832ea801c66bc087cd51703 inherit pro_attribs_classOutput"><td class="mdescLeft">&#160;</td><td class="mdescRight">Name fichiers pour stocker les infos de mesh.  <a href="#a9618a11c6832ea801c66bc087cd51703">More...</a><br /></td></tr>
-<tr class="separator:a9618a11c6832ea801c66bc087cd51703 inherit pro_attribs_classOutput"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2d8e628866b054dcc2317fc7315334d1 inherit pro_attribs_classOutput"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classOutput.html#a2d8e628866b054dcc2317fc7315334d1">m_infoCalcul</a></td></tr>
+<tr class="memdesc:a2d8e628866b054dcc2317fc7315334d1 inherit pro_attribs_classOutput"><td class="mdescLeft">&#160;</td><td class="mdescRight">Name file pour saver les infos utiles du compute.  <a href="#a2d8e628866b054dcc2317fc7315334d1">More...</a><br /></td></tr>
+<tr class="separator:a2d8e628866b054dcc2317fc7315334d1 inherit pro_attribs_classOutput"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5b035a965341f1b521f89fd03691df2f inherit pro_attribs_classOutput"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classOutput.html#a5b035a965341f1b521f89fd03691df2f">m_infoMesh</a></td></tr>
+<tr class="memdesc:a5b035a965341f1b521f89fd03691df2f inherit pro_attribs_classOutput"><td class="mdescLeft">&#160;</td><td class="mdescRight">Name fichiers pour stocker les infos de mesh.  <a href="#a5b035a965341f1b521f89fd03691df2f">More...</a><br /></td></tr>
+<tr class="separator:a5b035a965341f1b521f89fd03691df2f inherit pro_attribs_classOutput"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4938be9f265f0c5b0a5c86abb06ddb0e inherit pro_attribs_classOutput"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classOutput.html#a4938be9f265f0c5b0a5c86abb06ddb0e">m_treeStructure</a></td></tr>
 <tr class="memdesc:a4938be9f265f0c5b0a5c86abb06ddb0e inherit pro_attribs_classOutput"><td class="mdescLeft">&#160;</td><td class="mdescRight">File name for tree structure backup.  <a href="#a4938be9f265f0c5b0a5c86abb06ddb0e">More...</a><br /></td></tr>
 <tr class="separator:a4938be9f265f0c5b0a5c86abb06ddb0e inherit pro_attribs_classOutput"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac770535492d38d01f9183940426a0c35 inherit pro_attribs_classOutput"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classOutput.html#ac770535492d38d01f9183940426a0c35">m_domainDecomposition</a></td></tr>
+<tr class="memdesc:ac770535492d38d01f9183940426a0c35 inherit pro_attribs_classOutput"><td class="mdescLeft">&#160;</td><td class="mdescRight">File name for domain decomposition backup.  <a href="#ac770535492d38d01f9183940426a0c35">More...</a><br /></td></tr>
+<tr class="separator:ac770535492d38d01f9183940426a0c35 inherit pro_attribs_classOutput"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2bee9cc403cdc201c07199fae620dba7 inherit pro_attribs_classOutput"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classOutput.html#a2bee9cc403cdc201c07199fae620dba7">m_fileNameResults</a></td></tr>
 <tr class="memdesc:a2bee9cc403cdc201c07199fae620dba7 inherit pro_attribs_classOutput"><td class="mdescLeft">&#160;</td><td class="mdescRight">Name du file de sortie resultat.  <a href="#a2bee9cc403cdc201c07199fae620dba7">More...</a><br /></td></tr>
 <tr class="separator:a2bee9cc403cdc201c07199fae620dba7 inherit pro_attribs_classOutput"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2d38515d35e1079308a337c8e713d050 inherit pro_attribs_classOutput"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classOutput.html#a2d38515d35e1079308a337c8e713d050">m_fileNameCollection</a></td></tr>
-<tr class="memdesc:a2d38515d35e1079308a337c8e713d050 inherit pro_attribs_classOutput"><td class="mdescLeft">&#160;</td><td class="mdescRight">Name de la collection regroupant les fichiers resultats.  <a href="#a2d38515d35e1079308a337c8e713d050">More...</a><br /></td></tr>
-<tr class="separator:a2d38515d35e1079308a337c8e713d050 inherit pro_attribs_classOutput"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aef16d7fda6276ddc65cd0c504a6dd107 inherit pro_attribs_classOutput"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classOutput.html#aef16d7fda6276ddc65cd0c504a6dd107">m_dossierSortie</a></td></tr>
-<tr class="memdesc:aef16d7fda6276ddc65cd0c504a6dd107 inherit pro_attribs_classOutput"><td class="mdescLeft">&#160;</td><td class="mdescRight">Dossier pour enregistrement des resultats.  <a href="#aef16d7fda6276ddc65cd0c504a6dd107">More...</a><br /></td></tr>
-<tr class="separator:aef16d7fda6276ddc65cd0c504a6dd107 inherit pro_attribs_classOutput"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5cbf6dc123c2759be89f74910b6a5194 inherit pro_attribs_classOutput"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classOutput.html#a5cbf6dc123c2759be89f74910b6a5194">m_dossierSauvegardesInput</a></td></tr>
-<tr class="memdesc:a5cbf6dc123c2759be89f74910b6a5194 inherit pro_attribs_classOutput"><td class="mdescLeft">&#160;</td><td class="mdescRight">Dossier pour copier les fichiers entrees.  <a href="#a5cbf6dc123c2759be89f74910b6a5194">More...</a><br /></td></tr>
-<tr class="separator:a5cbf6dc123c2759be89f74910b6a5194 inherit pro_attribs_classOutput"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a10a5129e58cc5325abbd3649b197b4ef inherit pro_attribs_classOutput"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classOutput.html#a10a5129e58cc5325abbd3649b197b4ef">m_dossierSauvegardesInfosMailles</a></td></tr>
-<tr class="memdesc:a10a5129e58cc5325abbd3649b197b4ef inherit pro_attribs_classOutput"><td class="mdescLeft">&#160;</td><td class="mdescRight">Dossier pour stocker les infos de mesh.  <a href="#a10a5129e58cc5325abbd3649b197b4ef">More...</a><br /></td></tr>
-<tr class="separator:a10a5129e58cc5325abbd3649b197b4ef inherit pro_attribs_classOutput"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4b7600304aff3d233b9019d35b85d7c6 inherit pro_attribs_classOutput"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classOutput.html#a4b7600304aff3d233b9019d35b85d7c6">m_dossierCuts</a></td></tr>
-<tr class="memdesc:a4b7600304aff3d233b9019d35b85d7c6 inherit pro_attribs_classOutput"><td class="mdescLeft">&#160;</td><td class="mdescRight">cuts results folder location  <a href="#a4b7600304aff3d233b9019d35b85d7c6">More...</a><br /></td></tr>
-<tr class="separator:a4b7600304aff3d233b9019d35b85d7c6 inherit pro_attribs_classOutput"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5aa396ecc674167398b0054f76b0ad51 inherit pro_attribs_classOutput"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classOutput.html#a5aa396ecc674167398b0054f76b0ad51">m_fileNameCollectionParaview</a></td></tr>
+<tr class="memdesc:a5aa396ecc674167398b0054f76b0ad51 inherit pro_attribs_classOutput"><td class="mdescLeft">&#160;</td><td class="mdescRight">Name de la collection regroupant les fichiers resultats (for Paraview)  <a href="#a5aa396ecc674167398b0054f76b0ad51">More...</a><br /></td></tr>
+<tr class="separator:a5aa396ecc674167398b0054f76b0ad51 inherit pro_attribs_classOutput"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a98a8069e6afea4360c127595d913e698 inherit pro_attribs_classOutput"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classOutput.html#a98a8069e6afea4360c127595d913e698">m_fileNameCollectionVisIt</a></td></tr>
+<tr class="memdesc:a98a8069e6afea4360c127595d913e698 inherit pro_attribs_classOutput"><td class="mdescLeft">&#160;</td><td class="mdescRight">Name de la collection regroupant les fichiers resultats (for VisIt)  <a href="#a98a8069e6afea4360c127595d913e698">More...</a><br /></td></tr>
+<tr class="separator:a98a8069e6afea4360c127595d913e698 inherit pro_attribs_classOutput"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0ba8f9c2e560906f10635f1d31ab5d50 inherit pro_attribs_classOutput"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classOutput.html#a0ba8f9c2e560906f10635f1d31ab5d50">m_folderOutput</a></td></tr>
+<tr class="memdesc:a0ba8f9c2e560906f10635f1d31ab5d50 inherit pro_attribs_classOutput"><td class="mdescLeft">&#160;</td><td class="mdescRight">Dossier pour enregistrement des resultats.  <a href="#a0ba8f9c2e560906f10635f1d31ab5d50">More...</a><br /></td></tr>
+<tr class="separator:a0ba8f9c2e560906f10635f1d31ab5d50 inherit pro_attribs_classOutput"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad49cc2c3530f5b3f53e999614db81dd2 inherit pro_attribs_classOutput"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classOutput.html#ad49cc2c3530f5b3f53e999614db81dd2">m_folderSavesInput</a></td></tr>
+<tr class="memdesc:ad49cc2c3530f5b3f53e999614db81dd2 inherit pro_attribs_classOutput"><td class="mdescLeft">&#160;</td><td class="mdescRight">Dossier pour copier les fichiers entrees.  <a href="#ad49cc2c3530f5b3f53e999614db81dd2">More...</a><br /></td></tr>
+<tr class="separator:ad49cc2c3530f5b3f53e999614db81dd2 inherit pro_attribs_classOutput"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa815981607c489a9263020e5960193d1 inherit pro_attribs_classOutput"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classOutput.html#aa815981607c489a9263020e5960193d1">m_folderDatasets</a></td></tr>
+<tr class="memdesc:aa815981607c489a9263020e5960193d1 inherit pro_attribs_classOutput"><td class="mdescLeft">&#160;</td><td class="mdescRight">Folder to save the datasets.  <a href="#aa815981607c489a9263020e5960193d1">More...</a><br /></td></tr>
+<tr class="separator:aa815981607c489a9263020e5960193d1 inherit pro_attribs_classOutput"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae4dd1496c8534873f4a7e5d57d51b553 inherit pro_attribs_classOutput"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classOutput.html#ae4dd1496c8534873f4a7e5d57d51b553">m_folderInfoMesh</a></td></tr>
+<tr class="memdesc:ae4dd1496c8534873f4a7e5d57d51b553 inherit pro_attribs_classOutput"><td class="mdescLeft">&#160;</td><td class="mdescRight">Dossier pour stocker les infos de mesh.  <a href="#ae4dd1496c8534873f4a7e5d57d51b553">More...</a><br /></td></tr>
+<tr class="separator:ae4dd1496c8534873f4a7e5d57d51b553 inherit pro_attribs_classOutput"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa4e6aa203383cdffe377e248f7a18794 inherit pro_attribs_classOutput"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classOutput.html#aa4e6aa203383cdffe377e248f7a18794">m_folderCuts</a></td></tr>
+<tr class="memdesc:aa4e6aa203383cdffe377e248f7a18794 inherit pro_attribs_classOutput"><td class="mdescLeft">&#160;</td><td class="mdescRight">cuts results folder location  <a href="#aa4e6aa203383cdffe377e248f7a18794">More...</a><br /></td></tr>
+<tr class="separator:aa4e6aa203383cdffe377e248f7a18794 inherit pro_attribs_classOutput"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad691f6b4d3fa34e6ac2d3dfbc8fee436 inherit pro_attribs_classOutput"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classOutput.html#ad691f6b4d3fa34e6ac2d3dfbc8fee436">m_folderProbes</a></td></tr>
 <tr class="memdesc:ad691f6b4d3fa34e6ac2d3dfbc8fee436 inherit pro_attribs_classOutput"><td class="mdescLeft">&#160;</td><td class="mdescRight">probes results folder location  <a href="#ad691f6b4d3fa34e6ac2d3dfbc8fee436">More...</a><br /></td></tr>
 <tr class="separator:ad691f6b4d3fa34e6ac2d3dfbc8fee436 inherit pro_attribs_classOutput"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a77c054833e0df7cf7136dec9419aa486 inherit pro_attribs_classOutput"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classOutput.html#a77c054833e0df7cf7136dec9419aa486">m_fichierCollection</a></td></tr>
-<tr class="memdesc:a77c054833e0df7cf7136dec9419aa486 inherit pro_attribs_classOutput"><td class="mdescLeft">&#160;</td><td class="mdescRight">Chemin du file collection regroupant les fichiers resultats.  <a href="#a77c054833e0df7cf7136dec9419aa486">More...</a><br /></td></tr>
-<tr class="separator:a77c054833e0df7cf7136dec9419aa486 inherit pro_attribs_classOutput"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9be1792fa8b1f01b9546707498a02471 inherit pro_attribs_classOutput"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classOutput.html#a9be1792fa8b1f01b9546707498a02471">m_folderRecorderGlobalQuantity</a></td></tr>
+<tr class="memdesc:a9be1792fa8b1f01b9546707498a02471 inherit pro_attribs_classOutput"><td class="mdescLeft">&#160;</td><td class="mdescRight">Folder to save recorded global quantity such as mass, energy.  <a href="#a9be1792fa8b1f01b9546707498a02471">More...</a><br /></td></tr>
+<tr class="separator:a9be1792fa8b1f01b9546707498a02471 inherit pro_attribs_classOutput"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8c9122c98fcf791183bb0a61faf3218d inherit pro_attribs_classOutput"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classOutput.html#a8c9122c98fcf791183bb0a61faf3218d">m_fichierCollectionParaview</a></td></tr>
+<tr class="memdesc:a8c9122c98fcf791183bb0a61faf3218d inherit pro_attribs_classOutput"><td class="mdescLeft">&#160;</td><td class="mdescRight">Chemin du file collection regroupant les fichiers resultats (for Paraview)  <a href="#a8c9122c98fcf791183bb0a61faf3218d">More...</a><br /></td></tr>
+<tr class="separator:a8c9122c98fcf791183bb0a61faf3218d inherit pro_attribs_classOutput"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abf5a5ee4ca7fc221f65cbea9c6cff101 inherit pro_attribs_classOutput"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classOutput.html#abf5a5ee4ca7fc221f65cbea9c6cff101">m_fichierCollectionVisIt</a></td></tr>
+<tr class="memdesc:abf5a5ee4ca7fc221f65cbea9c6cff101 inherit pro_attribs_classOutput"><td class="mdescLeft">&#160;</td><td class="mdescRight">Chemin du file collection regroupant les fichiers resultats (for VisIt)  <a href="#abf5a5ee4ca7fc221f65cbea9c6cff101">More...</a><br /></td></tr>
+<tr class="separator:abf5a5ee4ca7fc221f65cbea9c6cff101 inherit pro_attribs_classOutput"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a04c20cb53fcc874010d60b870b2e8303 inherit pro_attribs_classOutput"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classOutput.html#a04c20cb53fcc874010d60b870b2e8303">m_ecritBinaire</a></td></tr>
 <tr class="memdesc:a04c20cb53fcc874010d60b870b2e8303 inherit pro_attribs_classOutput"><td class="mdescLeft">&#160;</td><td class="mdescRight">Choix print binary/ASCII.  <a href="#a04c20cb53fcc874010d60b870b2e8303">More...</a><br /></td></tr>
 <tr class="separator:a04c20cb53fcc874010d60b870b2e8303 inherit pro_attribs_classOutput"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -264,7 +275,7 @@ Additional Inherited Members</h2></td></tr>
 <tr class="memitem:a5b2933da3657bc03aa28f8e7bbe221d8 inherit pro_attribs_classOutput"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classOutput.html#a5b2933da3657bc03aa28f8e7bbe221d8">m_endianMode</a></td></tr>
 <tr class="separator:a5b2933da3657bc03aa28f8e7bbe221d8 inherit pro_attribs_classOutput"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a453d065185af6d5502a3404c24185ff2 inherit pro_attribs_classOutput"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classCell.html">Cell</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classOutput.html#a453d065185af6d5502a3404c24185ff2">m_cellRef</a></td></tr>
-<tr class="memdesc:a453d065185af6d5502a3404c24185ff2 inherit pro_attribs_classOutput"><td class="mdescLeft">&#160;</td><td class="mdescRight">cell de reference pour recupérer les names des variables  <a href="#a453d065185af6d5502a3404c24185ff2">More...</a><br /></td></tr>
+<tr class="memdesc:a453d065185af6d5502a3404c24185ff2 inherit pro_attribs_classOutput"><td class="mdescLeft">&#160;</td><td class="mdescRight">cell de reference pour recupï¿½rer les names des variables  <a href="#a453d065185af6d5502a3404c24185ff2">More...</a><br /></td></tr>
 <tr class="separator:a453d065185af6d5502a3404c24185ff2 inherit pro_attribs_classOutput"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
@@ -351,7 +362,7 @@ Additional Inherited Members</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a class="anchor" id="af1b04872b2aafcf3caab279b7eda9545"></a>
+<a class="anchor" id="ae1baf2446a9eb19b493b0499d5ca0497"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="mlabels">
@@ -359,7 +370,7 @@ Additional Inherited Members</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">string OutputXML::creationNameFichierXML </td>
+          <td class="memname">std::string OutputXML::creationNameFichierXML </td>
           <td>(</td>
           <td class="paramtype">const char *&#160;</td>
           <td class="paramname"><em>name</em>, </td>
@@ -369,12 +380,6 @@ Additional Inherited Members</h2></td></tr>
           <td></td>
           <td class="paramtype"><a class="el" href="classMesh.html">Mesh</a> *&#160;</td>
           <td class="paramname"><em>mesh</em> = <code>0</code>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>lvl</em> = <code>-1</code>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -433,7 +438,7 @@ Additional Inherited Members</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="a73e84546ba2311c58709596aa28bea2f"></a>
+<a class="anchor" id="ab8cacf9c03ef6805466f92e9ac852931"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="mlabels">
@@ -455,80 +460,6 @@ Additional Inherited Members</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">std::ofstream &amp;&#160;</td>
-          <td class="paramname"><em>fileStream</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const int &amp;&#160;</td>
-          <td class="paramname"><em>lvl</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">bool&#160;</td>
-          <td class="paramname"><em>parallel</em> = <code>false</code>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="a9be393921de7fd74b843d5dff8e47642"></a>
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">void OutputXML::ecritFichierParallelXML </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="classMesh.html">Mesh</a> *&#160;</td>
-          <td class="paramname"><em>mesh</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">std::vector&lt; <a class="el" href="classCell.html">Cell</a> * &gt; *&#160;</td>
-          <td class="paramname"><em>cellsLvl</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="a8ff5010b5f1ca41794effd2a44761950"></a>
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">void OutputXML::ecritFinFichierPolyDataXML </td>
-          <td>(</td>
           <td class="paramtype">std::ofstream &amp;&#160;</td>
           <td class="paramname"><em>fileStream</em>, </td>
         </tr>
@@ -621,58 +552,6 @@ Additional Inherited Members</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="a6ededf712e4261f38ff129a039e84688"></a>
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">void OutputXML::ecritMeshPolyDataXML </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="classMesh.html">Mesh</a> *&#160;</td>
-          <td class="paramname"><em>mesh</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">std::vector&lt; <a class="el" href="classCell.html">Cell</a> * &gt; *&#160;</td>
-          <td class="paramname"><em>cellsLvl</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">std::ofstream &amp;&#160;</td>
-          <td class="paramname"><em>fileStream</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const int &amp;&#160;</td>
-          <td class="paramname"><em>lvl</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">bool&#160;</td>
-          <td class="paramname"><em>parallel</em> = <code>false</code>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-</div>
-</div>
 <a class="anchor" id="a1f4b09ea5c20444943784aefd92b6b9b"></a>
 <div class="memitem">
 <div class="memproto">
@@ -719,7 +598,7 @@ Additional Inherited Members</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="aa0bfe3a1b4c8626a130346edacabeea3"></a>
+<a class="anchor" id="a798572ab2c96ff6896bcb72eaaa0ce12"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="mlabels">
@@ -743,12 +622,6 @@ Additional Inherited Members</h2></td></tr>
           <td></td>
           <td class="paramtype">std::ofstream &amp;&#160;</td>
           <td class="paramname"><em>fileStream</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const int &amp;&#160;</td>
-          <td class="paramname"><em>lvl</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -866,7 +739,7 @@ Additional Inherited Members</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="a195287b3b173d3bb9b7772baab20bd58"></a>
+<a class="anchor" id="abcf546b7e47b050e33eb8391804cf233"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="mlabels">
@@ -894,12 +767,6 @@ Additional Inherited Members</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">const int &amp;&#160;</td>
-          <td class="paramname"><em>lvl</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
           <td class="paramtype">std::string&#160;</td>
           <td class="paramname"><em>fileName</em> = <code>&quot;Unknown&#160;file&quot;</code>&#160;</td>
         </tr>
@@ -918,7 +785,7 @@ Additional Inherited Members</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="a4e81d1d994001d01eff3fab1c26b86d9"></a>
+<a class="anchor" id="a9bdde138abf6dc43e884ec6eabc0f1cc"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="mlabels">
@@ -935,13 +802,7 @@ Additional Inherited Members</h2></td></tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">std::vector&lt; <a class="el" href="classCell.html">Cell</a> * &gt; *&#160;</td>
-          <td class="paramname"><em>cellsLvl</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const int&#160;</td>
-          <td class="paramname"><em>fileNumber</em>&#160;</td>
+          <td class="paramname"><em>cellsLvl</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -956,7 +817,7 @@ Additional Inherited Members</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Reimplemented from <a class="el" href="classOutput.html#a2f7a7271422739485b2dae03b3317b64">Output</a>.</p>
+<p>Reimplemented from <a class="el" href="classOutput.html#a072ac396f97ad261f17dcdc4b08808ba">Output</a>.</p>
 
 </div>
 </div>
@@ -970,7 +831,7 @@ Additional Inherited Members</h2></td></tr>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="classOutputXML.html">OutputXML</a></li>
-    <li class="footer">Generated on Wed Apr 29 2020 10:31:12 for ECOGEN by
+    <li class="footer">Generated on Mon May 11 2020 16:03:19 for ECOGEN by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.11 </li>
   </ul>

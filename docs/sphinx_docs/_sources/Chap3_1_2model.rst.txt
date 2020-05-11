@@ -1,10 +1,12 @@
 .. role:: xml(code)
 	:language: xml
 
+.. _Sec:input:model:
+
 ModelV4.xml
 ===========
 
-Fluid mechanics models used in the computation are specified in *modelv4.xml* file. It is **mandatory** located in the folder of the current case. A typical form of this file is:
+Fluid mechanics models used in the computation are specified in the *modelv4.xml* file. It is **mandatory** located in the folder of the current case. A typical form of this file is:
 
 .. code-block:: xml
 
@@ -24,16 +26,16 @@ Flow model
 
 	<flowModel name="Kapila" numberPhases="2" numberTransports="1" alphaNull="false"/>
 
-The :xml:`<flowModel>` markup is **mandatory** to specify the mathematical model to solve during the computation. This markup may contains the following attributes:
+The :xml:`<flowModel>` markup is **mandatory** to specify the mathematical model to solve during the computation. This markup may contain the following attributes:
 
-- :xml:`name`: name of the mathematical flow model. This attribute can take the values: *Euler*, *Kapila*, *multip*, *ThermalEq* or *EulerHomogeneous*.
-- :xml:`numberPhases`: Integer number corresponding to the number of phases present in the simulations. The total amount of equations is related to this number. This attribute is not necessary for the values of name: *Euler*, *EulerHomogeneous*.
-- :xml:`numberTransports`: this attribute is optionnal and is set to 0 as default. It can be used to add specific variable advected in the flow (color function).
-- :xml:`alphaNull`: For *Kapila*'s model, the volume fraction can either be null or not and this choice is determined by the parameter alphaNull. default value is *false*.
+- :xml:`name`: Name of the mathematical flow model. This attribute can take the values: *Euler* :cite:`euler1757principes`, *Kapila* :cite:`relaxjcp`:cite:`kapila2001`, *multip*, *ThermalEq* :cite:`martelotboiling` or *EulerHomogeneous*.
+- :xml:`numberPhases`: Integer number corresponding to the number of phases present in the simulation. The total amount of equations is related to this number. This attribute is not necessary when the values of :xml:`name` are *Euler* or *EulerHomogeneous*.
+- :xml:`numberTransports`: This attribute is optionnal and is set to 0 as default. It can be used to add specific variables advected in the flow (color functions).
+- :xml:`alphaNull`: For *Kapila*'s model, the volume fraction can either be null (*true*) or not (*false*) and this choice is determined by this parameter. Default value is *false*.
 
-**Remark:** 
+**Remark:**
 
-if *EulerHomogeneous* model is chosen, two additional attributes may be used: :xml:`liquid` and :xml:`vapor` to specify the number corresponding to the liquid phase and the vapor phase. It is phase 0 (for the first) or 1 (for the second).
+If *EulerHomogeneous* model is chosen, two additional attributes may be used: :xml:`liquid` and :xml:`vapor` to specify the number corresponding to the liquid phase and the vapor phase. They are phase 0 for the first and 1 for the second.
 
 .. code-block:: xml
 
@@ -48,7 +50,7 @@ Equations of state (EOS)
 
 	<EOS name="IG_air.xml"/>
 
-The *modelV4.xml* input fle **must contain** as many :xml:`<EOS>` markups as many number of phases specified in the :ref:`Sec:input:FlowModel` markup. Each phase is described thanks to relations and parameters. The values of these parameters are specified in a separate file: the attribute name contains the name of this file that must be placed in the folder **ECOGEN/libEOS/**. Some fluid files are already present in the ECOGEN package.
+The *modelV4.xml* input file **must contain** as many :xml:`<EOS>` markups as number of phases specified in the :ref:`Sec:input:FlowModel` markup. Each phase is described thanks to relations and parameters. The values of these parameters are specified in a separate file: The attribute name contains the name of this file that must be placed in the folder **ECOGEN/libEOS/**. Some fluid files are already present in the ECOGEN package.
 
 .. _Sec:input:Transport:
 
@@ -59,7 +61,7 @@ Advected additional variables
 
 	<transport name="color"/>
 
-The *modelV4.xml* input fle **must contain** as many :xml:`<transport>` markups as many number of transport specified in the :ref:`Sec:input:FlowModel` markup. Each transported variable is described by its name. The default number of advected variable is 0.
+The *modelV4.xml* input fle **must contain** as many :xml:`<transport>` markups as number of transports specified in the :ref:`Sec:input:FlowModel` markup. Each transported variable is described by its name. The default number of advected variable is 0.
 
 Relaxation procedures
 ---------------------
@@ -68,11 +70,11 @@ Relaxation procedures
 
 	<relaxation type="PT"/>
 
-An additional markup :xml:`<relaxation>` may be used to impose some specific equilibrium between the phases depending on the flow model used. The attribute :xml:`type` specifies the kind of equilibrium:
+An additional markup :xml:`<relaxation>` may be used to impose some specific equilibrium between the phases depending on the flow model used. The attribute :xml:`type` specifies the type of equilibrium:
 
-- *P*: a pressure equilibrium is imposed at every location of the flow. It does not require additional attributes.
+- *P*: A pressure equilibrium is imposed at every location of the flow. It does not require additional attributes.
 - *PT*: Both pressure and thermal equilibrium are imposed at every location of the flow. It does not require additional attributes.
-- *PTMu*: a thermodynamical equilibrium is imposed at every location of the flow. It must be associated to the node :xml:`<dataPTMu>` with attributes :xml:`liquid` and :xml:`vapor` to specify the name of the EOS of the liquid and the vapor phase. Hereafter the complete node when PTMu is used:
+- *PTMu*: A thermodynamical equilibrium is imposed at every location of the flow. It must be associated with the node :xml:`<dataPTMu>` whose attributes are :xml:`liquid` and :xml:`vapor` to specify the name of the EOS of the liquid and the vapor phase. Hereafter the complete node when *PTMu* is used:
 
 .. code-block:: xml
 
@@ -85,7 +87,7 @@ Source terms
 
 The additional :xml:`<sourceTerms>` markup can be used to numerically integrate some source terms in the equations. The attribute :xml:`type` selects the source term:
 
-- *heating*: related to a thermal energy heating/cooling. This attribute requires the :xml:`<dataHeating>` node with the attribute :xml:`volumeHeatPower`: a real number corresponding to the power by volume unit added to the flow (unit: W/m3 (SI)).
+- *heating*: Related to a thermal energy heating/cooling. This attribute requires the :xml:`<dataHeating>` node with the attribute :xml:`volumeHeatPower`; a real number corresponding to the power by volume unit added to the flow (unit: W/m3 (SI)).
 
 .. code-block:: xml
 
@@ -93,7 +95,7 @@ The additional :xml:`<sourceTerms>` markup can be used to numerically integrate 
 	  <dataHeating volumeHeatPower="1.e6"/>
 	</sourceTerms>
 
-- *gravity*: if the gravity is considered. The node :xml:`<dataGravity>` with the following attributes must be present with the attributes :xml:`x`, :xml:`y` et :xml:`z` giving the coordinates for the gravity acceleration vector in real numbers (unit: m/s2 (SI))
+- *gravity*: If the gravity is considered. The node :xml:`<dataGravity>` must be present with the attributes :xml:`x`, :xml:`y` and :xml:`z` giving the coordinates for the gravity acceleration vector in real numbers (unit: m/s2 (SI)).
 
 .. code-block:: xml
 
@@ -101,7 +103,7 @@ The additional :xml:`<sourceTerms>` markup can be used to numerically integrate 
 	  <gravity x="0." y="-9.81" z="0."/>
 	</sourceTerms>
 
-- *MRF*: for a simulation in the moving reference frame. Allow to compute solution in a rotating frame. The node :xml:`<omega>` requires the attributes :xml:`x`, :xml:`y` et :xml:`z` giving the coordinates for the rotating vector in real numbers (unit: rad/s (SI)). The node :xml:`<timeToOmega>` is optional and allow to specify a progressing acceleration (linear) to the final rotating velocity (requires the attribute :xml:`tf` for acceleration time).
+- *MRF*: For a simulation in a moving reference frame. Allow to compute solution in a rotating frame. The node :xml:`<omega>` requires the attributes :xml:`x`, :xml:`y` and :xml:`z` giving the coordinates for the rotating vector in real numbers (unit: rad/s (SI)). The node :xml:`<timeToOmega>` is optional and allow to specify a progressing acceleration (linear) to the final rotating velocity (requires the attribute :xml:`tf` for acceleration time).
 
 .. code-block:: xml
 
@@ -113,35 +115,35 @@ The additional :xml:`<sourceTerms>` markup can be used to numerically integrate 
 Symmetry terms
 --------------
 
-Both cylindrical (2D) and spherical (1D) symmetries are implemented. The additional :xml:`<symmetryTerm>` markup can be used. It requires the attribute :xml:`type` that can take the value *cylindrical* ar *spherical*. It also requires an additional node depending on the symmetry terms:
+Both cylindrical (2D) and spherical (1D) symmetries are implemented. The additional :xml:`<symmetryTerm>` markup can be used. It requires the attribute :xml:`type` that can take the value *cylindrical* or *spherical*. It also requires an additional node to specify the radial axis:
 
-- cylindrical:
+- Cylindrical:
 
 .. code-block:: xml
 
 	<symmetryTerm type="cylindrical">
-	  <dataSymCyl radialAxe="X"/>
+	  <dataSymCyl radialAxis="X"/>
 	</symmetryTerm>
 
-- spherical:
+- Spherical:
 
 .. code-block:: xml
 
 	<symmetryTerm type="spherical">
-	  <dataSymSpher radialAxe="X"/>
+	  <dataSymSpher radialAxis="X"/>
 	</symmetryTerm>
 
 Additional physics (dev)
--------------------------
+------------------------
 
-Depending on the model chosen in section :ref:`Sec:input:FlowModel`, tension surface effects can be added. This is the case for surface tension, viscosity and conductive heat transfers. These additional physical effects are obtained thanks to the additional markup :xml:`additionalPhysics` with the attribute :xml:`type` that can take different value according to the chosen effect.
+Depending on the model chosen in section :ref:`Sec:input:FlowModel`, additional physical effects can be added. This is the case for surface tension, viscosity and conductive heat transfers. These additional physical effects are obtained thanks to the additional markup :xml:`additionalPhysics` with the attribute :xml:`type` that can take different value according to the chosen effect.
 
 Surface tension
 ~~~~~~~~~~~~~~~
 This physical effect is obtained by using the type *surface tension*. Then it requires the node :xml:`dataSurfaceTension` with following attributes:
 
-- :xml:`transport`: this is the name of advected variable used as color function for surface-tension terms. This advected variable has been precised in the section :ref:`Sec:input:Transport`. The name should be the same.
-- :xml:`sigma`: a real number for the surface-tension coefficient in N/m.
+- :xml:`transport`: This is the name of advected variable used as color function for surface-tension terms. This advected variable has been precised in the section :ref:`Sec:input:Transport`. The name should be the same.
+- :xml:`sigma`: A real number for the surface-tension coefficient (unit: N/m (SI)).
 
 .. code-block:: xml
 
@@ -149,7 +151,15 @@ This physical effect is obtained by using the type *surface tension*. Then it re
 	  <dataSurfaceTension transport="color" sigma="72.e-3"/>
 	</additionalPhysic>
 
+Viscosity
+~~~~~~~~~
+This physical effect is obtained by using the type *viscosity* and it needs the attribute :xml:`mu` of the :xml:`<physicalParameters>` to be set in the EOS files (:ref:`Sec:IO:materials`).
+
+.. code-block:: xml
+
+	<additionalPhysic type="viscosity"/>
+
 Others
 ~~~~~~
 
-in dev...
+In dev...

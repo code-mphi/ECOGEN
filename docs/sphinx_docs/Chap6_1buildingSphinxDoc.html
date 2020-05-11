@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Building Sphinx Doc &mdash; ECOGEN b1.0 documentation</title>
+  <title>Building Sphinx Doc &mdash; ECOGEN 2.0 documentation</title>
   
 
   
@@ -61,7 +61,7 @@
             
             
               <div class="version">
-                1.0
+                2.0
               </div>
             
           
@@ -92,23 +92,24 @@
 <li class="toctree-l1"><a class="reference internal" href="Chap3_IO_Chapter.html">I/O descriptions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Chap4_tutorials_Chapter.html">Tutorials</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Chap5_testCases_Chapter.html">Test cases</a></li>
-<li class="toctree-l1 current"><a class="reference internal" href="Chap6_developpersGuide_Chapter.html">Developers</a><ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="Chap6_developersGuide_Chapter.html">Developers</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="Chap6_2improvingECOGEN.html">Contribute to ECOGEN</a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#">Building Sphinx Doc</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#prerequisities">Prerequisities</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#prerequisites">Prerequisites</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#install-python">Install Python</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#install-sphinx">Install Sphinx</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#install-latex">Install Latex</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#install-latex">Install <em>LaTeX</em></a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="#building-html-doc">Building html doc</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#building-pdf-doc">Building pdf doc</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#building-pdf-doc">Building PDF doc</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#learning-sphinx">Learning Sphinx</a></li>
 </ul>
 </li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="Chap7_license.html">License</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Chap8_GUI.html">Graphical User Interface</a></li>
 <li class="toctree-l1"><a class="reference internal" href="zBibliography.html">Bibliography</a></li>
 </ul>
 
@@ -155,7 +156,7 @@
     
       <li><a href="index.html">Docs</a> &raquo;</li>
         
-          <li><a href="Chap6_developpersGuide_Chapter.html">Developers</a> &raquo;</li>
+          <li><a href="Chap6_developersGuide_Chapter.html">Developers</a> &raquo;</li>
         
       <li>Building Sphinx Doc</li>
     
@@ -178,31 +179,31 @@
             
   <div class="section" id="building-sphinx-doc">
 <h1>Building Sphinx Doc<a class="headerlink" href="#building-sphinx-doc" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="prerequisities">
-<h2>Prerequisities<a class="headerlink" href="#prerequisities" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="prerequisites">
+<h2>Prerequisites<a class="headerlink" href="#prerequisites" title="Permalink to this headline">¶</a></h2>
 <p>This documentation uses Sphinx third-party Python package. To generate it locally from the <strong>docs/sphinx_docs/</strong> folder, you need to install additional components.</p>
 <div class="section" id="install-python">
 <h3>Install Python<a class="headerlink" href="#install-python" title="Permalink to this headline">¶</a></h3>
 <p>To install python, you can install for example the <a class="reference external" href="https://www.anaconda.com/distribution/">Anaconda package</a> or the <a class="reference external" href="https://www.python.org/">python offical package</a>.
-You can also install the packages directly from ubuntu terminal:</p>
+You can also install the packages directly from Ubuntu terminal:</p>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">apt-get install python3</span>
-<span class="go">apt-get install python-pip</span>
+<span class="go">apt-get install python3-pip</span>
 </pre></div>
 </div>
 </div>
 <div class="section" id="install-sphinx">
 <h3>Install Sphinx<a class="headerlink" href="#install-sphinx" title="Permalink to this headline">¶</a></h3>
-<p>From the prompt, it is possible to install sphinx, as well as additional libraries required for building this documentation using pip:</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">pip install sphinx</span>
-<span class="go">pip install sphinx_rtd_theme</span>
-<span class="go">pip install sphinx-numfig</span>
-<span class="go">pip install sphinxcontrib-bibtex</span>
+<p>From the prompt, it is possible to install Sphinx, as well as additional libraries required for building this documentation using pip:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">pip3 install sphinx</span>
+<span class="go">pip3 install sphinx_rtd_theme</span>
+<span class="go">pip3 install sphinx-numfig</span>
+<span class="go">pip3 install sphinxcontrib-bibtex</span>
 </pre></div>
 </div>
 </div>
 <div class="section" id="install-latex">
-<h3>Install Latex<a class="headerlink" href="#install-latex" title="Permalink to this headline">¶</a></h3>
-<p>If you want to build pdf, you will need Latex installed</p>
+<h3>Install <em>LaTeX</em><a class="headerlink" href="#install-latex" title="Permalink to this headline">¶</a></h3>
+<p>If you want to build PDF, you will need <em>LaTeX</em> installed:</p>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">apt-get install texlive</span>
 <span class="go">apt-get install texlive-latex-extra</span>
 <span class="go">apt-get install latexmk</span>
@@ -212,25 +213,25 @@ You can also install the packages directly from ubuntu terminal:</p>
 </div>
 <div class="section" id="building-html-doc">
 <h2>Building html doc<a class="headerlink" href="#building-html-doc" title="Permalink to this headline">¶</a></h2>
-<p>To build the docuentation as a webpage (as shown on <a class="reference external" href="https://code-mphi.github.io/ECOGEN/docs/sphinx_docs/index.html">ECOGEN</a> webSite), move to the <em>docs</em> folder and run under prompt:</p>
+<p>To build the documentation as a webpage (as shown on <a class="reference external" href="https://code-mphi.github.io/ECOGEN/docs/sphinx_docs/index.html">ECOGEN</a> website), move to the <em>docs</em> folder and run under prompt:</p>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">make html</span>
 </pre></div>
 </div>
 </div>
 <div class="section" id="building-pdf-doc">
-<h2>Building pdf doc<a class="headerlink" href="#building-pdf-doc" title="Permalink to this headline">¶</a></h2>
-<p>To build the docuentation as a PDF, move to the <em>docs</em> folder and run under prompt:</p>
+<h2>Building PDF doc<a class="headerlink" href="#building-pdf-doc" title="Permalink to this headline">¶</a></h2>
+<p>To build the documentation as a PDF, move to the <em>docs</em> folder and run under prompt:</p>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">make latexpdf</span>
 </pre></div>
 </div>
-<p>This will generate a folder <em>docs/build/latex</em> containing source files in <em>LaTeX</em> that can be used to generate a pdf.</p>
+<p>This will generate a folder <em>docs/build/latex</em> containing source files in <em>LaTeX</em> that can be used to generate a PDF.</p>
 </div>
 <div class="section" id="learning-sphinx">
 <h2>Learning Sphinx<a class="headerlink" href="#learning-sphinx" title="Permalink to this headline">¶</a></h2>
-<p>To learn how to developp a documentation using sphinx, here are some usefull links:</p>
+<p>To learn how to develop a documentation using Sphinx, here are some usefull links:</p>
 <ul class="simple">
-<li><p><a class="reference external" href="https://www.sphinx-doc.org/en/master/contents.html">Sphinx documentation</a></p></li>
-<li><p>Hosting documentation and read the docs theme : <a class="reference external" href="https://readthedocs.org/">Read the docs website</a></p></li>
+<li><p><a class="reference external" href="https://www.sphinx-doc.org/en/master/contents.html">Sphinx documentation</a>,</p></li>
+<li><p>Hosting documentation and read the docs theme: <a class="reference external" href="https://readthedocs.org/">Read the docs website</a>.</p></li>
 </ul>
 </div>
 </div>

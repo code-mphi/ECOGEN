@@ -122,7 +122,7 @@ $(document).ready(function(){initNavTree('classEos.html','');});
 
 <p><code>#include &lt;<a class="el" href="Eos_8h_source.html">Eos.h</a>&gt;</code></p>
 
-<p>Inherited by <a class="el" href="classEosIG.html">EosIG</a>, and <a class="el" href="classEosSG.html">EosSG</a>.</p>
+<p>Inherited by <a class="el" href="classEosIG.html">EosIG</a>, <a class="el" href="classEosNASG.html">EosNASG</a>, and <a class="el" href="classEosSG.html">EosSG</a>.</p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
@@ -135,48 +135,48 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a0b593baae33ca0c1c06a451a56bef84f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classEos.html#a0b593baae33ca0c1c06a451a56bef84f">display</a> () const </td></tr>
 <tr class="memdesc:a0b593baae33ca0c1c06a451a56bef84f"><td class="mdescLeft">&#160;</td><td class="mdescRight">display the name of the fluid  <a href="#a0b593baae33ca0c1c06a451a56bef84f">More...</a><br /></td></tr>
 <tr class="separator:a0b593baae33ca0c1c06a451a56bef84f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a43c899eb6dc8f63c13687552b2025ef2"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classEos.html#a43c899eb6dc8f63c13687552b2025ef2">getName</a> () const </td></tr>
-<tr class="separator:a43c899eb6dc8f63c13687552b2025ef2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a18235c88711807dfbbefb1ff9210f032"><td class="memItemLeft" align="right" valign="top">const std::string &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classEos.html#a18235c88711807dfbbefb1ff9210f032">getName</a> () const </td></tr>
+<tr class="separator:a18235c88711807dfbbefb1ff9210f032"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a60ff51a5bb3536f3c7e74664b76fadda"><td class="memItemLeft" align="right" valign="top">virtual std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classEos.html#a60ff51a5bb3536f3c7e74664b76fadda">getType</a> () const </td></tr>
 <tr class="memdesc:a60ff51a5bb3536f3c7e74664b76fadda"><td class="mdescLeft">&#160;</td><td class="mdescRight">See derived classes.  <a href="#a60ff51a5bb3536f3c7e74664b76fadda">More...</a><br /></td></tr>
 <tr class="separator:a60ff51a5bb3536f3c7e74664b76fadda"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aadf9a8a141dd542aa68b4efa10f79567"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classEos.html#aadf9a8a141dd542aa68b4efa10f79567">getNumber</a> () const </td></tr>
-<tr class="memdesc:aadf9a8a141dd542aa68b4efa10f79567"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return the number associated to the EOS return m_number.  <a href="#aadf9a8a141dd542aa68b4efa10f79567">More...</a><br /></td></tr>
-<tr class="separator:aadf9a8a141dd542aa68b4efa10f79567"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a813aa8cd897e6b84d0d52d0c2e514610"><td class="memItemLeft" align="right" valign="top">const int &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classEos.html#a813aa8cd897e6b84d0d52d0c2e514610">getNumber</a> () const </td></tr>
+<tr class="memdesc:a813aa8cd897e6b84d0d52d0c2e514610"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return the number associated to the EOS.  <a href="#a813aa8cd897e6b84d0d52d0c2e514610">More...</a><br /></td></tr>
+<tr class="separator:a813aa8cd897e6b84d0d52d0c2e514610"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0f74421b7ab8008d790ef763241f4bed"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classEos.html#a0f74421b7ab8008d790ef763241f4bed">readPhysicalParameter</a> (<a class="el" href="classtinyxml2_1_1XMLNode.html">tinyxml2::XMLNode</a> *element, std::string fileName=&quot;Unknown File&quot;)</td></tr>
 <tr class="memdesc:a0f74421b7ab8008d790ef763241f4bed"><td class="mdescLeft">&#160;</td><td class="mdescRight">Read physical parameters (viscosity, thermal conductivity....)  <a href="#a0f74421b7ab8008d790ef763241f4bed">More...</a><br /></td></tr>
 <tr class="separator:a0f74421b7ab8008d790ef763241f4bed"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad52be68b8c53ce76455d5c6b50c19981"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classEos.html#ad52be68b8c53ce76455d5c6b50c19981">computeTotalEnthalpy</a> (const double &amp;density, const double &amp;pressure, const double &amp;velocity) const </td></tr>
+<tr class="memitem:ad52be68b8c53ce76455d5c6b50c19981"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classEos.html#ad52be68b8c53ce76455d5c6b50c19981">computeTotalEnthalpy</a> (const double &amp;<a class="el" href="Cell_8h.html#acca207de98b59d1c41e3975008706d61a22ebfd60994ac594c00a8e367372d092">density</a>, const double &amp;<a class="el" href="Cell_8h.html#acca207de98b59d1c41e3975008706d61a8e7f8389b914e827058d694b31468b3a">pressure</a>, const double &amp;velocity) const </td></tr>
 <tr class="memdesc:ad52be68b8c53ce76455d5c6b50c19981"><td class="mdescLeft">&#160;</td><td class="mdescRight">compute the total enthalpy of the phase  <a href="#ad52be68b8c53ce76455d5c6b50c19981">More...</a><br /></td></tr>
 <tr class="separator:ad52be68b8c53ce76455d5c6b50c19981"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a614e3651cb9aaf588e0888e9a31b8a91"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classEos.html#a614e3651cb9aaf588e0888e9a31b8a91">getMu</a> () const </td></tr>
-<tr class="memdesc:a614e3651cb9aaf588e0888e9a31b8a91"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return the dynamic viscosity of the fluid return <img class="formulaInl" alt="$ \mu $" src="form_2.png"/> (Unit: Pa.s).  <a href="#a614e3651cb9aaf588e0888e9a31b8a91">More...</a><br /></td></tr>
-<tr class="separator:a614e3651cb9aaf588e0888e9a31b8a91"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7037416e309040b2dc1d156d94b02792"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classEos.html#a7037416e309040b2dc1d156d94b02792">getLambda</a> () const </td></tr>
-<tr class="memdesc:a7037416e309040b2dc1d156d94b02792"><td class="mdescLeft">&#160;</td><td class="mdescRight">get the thermal conductivity of the fluid return <img class="formulaInl" alt="$ \lambda $" src="form_3.png"/> (Unit: W/(m.K)).  <a href="#a7037416e309040b2dc1d156d94b02792">More...</a><br /></td></tr>
-<tr class="separator:a7037416e309040b2dc1d156d94b02792"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a274e314b8a0beac67d0b08e0ac0ceebe"><td class="memItemLeft" align="right" valign="top">const double &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classEos.html#a274e314b8a0beac67d0b08e0ac0ceebe">getMu</a> () const </td></tr>
+<tr class="memdesc:a274e314b8a0beac67d0b08e0ac0ceebe"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return the dynamic viscosity of the fluid return <img class="formulaInl" alt="$ \mu $" src="form_2.png"/> (Unit: Pa.s).  <a href="#a274e314b8a0beac67d0b08e0ac0ceebe">More...</a><br /></td></tr>
+<tr class="separator:a274e314b8a0beac67d0b08e0ac0ceebe"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a72d3c1859f173174beb1ed9603fd5e3b"><td class="memItemLeft" align="right" valign="top">const double &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classEos.html#a72d3c1859f173174beb1ed9603fd5e3b">getLambda</a> () const </td></tr>
+<tr class="memdesc:a72d3c1859f173174beb1ed9603fd5e3b"><td class="mdescLeft">&#160;</td><td class="mdescRight">get the thermal conductivity of the fluid return <img class="formulaInl" alt="$ \lambda $" src="form_3.png"/> (Unit: W/(m.K)).  <a href="#a72d3c1859f173174beb1ed9603fd5e3b">More...</a><br /></td></tr>
+<tr class="separator:a72d3c1859f173174beb1ed9603fd5e3b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a30fea2303ddf2b50f7dfd0089aa12f5f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classEos.html#a30fea2303ddf2b50f7dfd0089aa12f5f">assignEpsilonForAlphaNull</a> (bool alphaNull, std::string fileName) const </td></tr>
-<tr class="memdesc:a30fea2303ddf2b50f7dfd0089aa12f5f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Assign the epsilon value for alphaNull option (alpha = 0 =&gt; epsilon != 0 ; alpha != 0 =&gt; epsilon = 0)  <a href="#a30fea2303ddf2b50f7dfd0089aa12f5f">More...</a><br /></td></tr>
+<tr class="memdesc:a30fea2303ddf2b50f7dfd0089aa12f5f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Assign the epsilonAlphaNull value for alphaNull option (alpha = 0 =&gt; epsilonAlphaNull != 0 ; alpha != 0 =&gt; epsilonAlphaNull = 0)  <a href="#a30fea2303ddf2b50f7dfd0089aa12f5f">More...</a><br /></td></tr>
 <tr class="separator:a30fea2303ddf2b50f7dfd0089aa12f5f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a50401dbd8e6538f303f76b80a980cdc0"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classEos.html#a50401dbd8e6538f303f76b80a980cdc0">assignParametersEos</a> (std::string name, std::vector&lt; double &gt; parametersEos)=0</td></tr>
 <tr class="memdesc:a50401dbd8e6538f303f76b80a980cdc0"><td class="mdescLeft">&#160;</td><td class="mdescRight">See derived classes.  <a href="#a50401dbd8e6538f303f76b80a980cdc0">More...</a><br /></td></tr>
 <tr class="separator:a50401dbd8e6538f303f76b80a980cdc0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a97e12b2e9cb7147fbd334a88319843af"><td class="memItemLeft" align="right" valign="top">virtual double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classEos.html#a97e12b2e9cb7147fbd334a88319843af">computeTemperature</a> (const double &amp;density, const double &amp;pressure) const =0</td></tr>
+<tr class="memitem:a97e12b2e9cb7147fbd334a88319843af"><td class="memItemLeft" align="right" valign="top">virtual double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classEos.html#a97e12b2e9cb7147fbd334a88319843af">computeTemperature</a> (const double &amp;<a class="el" href="Cell_8h.html#acca207de98b59d1c41e3975008706d61a22ebfd60994ac594c00a8e367372d092">density</a>, const double &amp;<a class="el" href="Cell_8h.html#acca207de98b59d1c41e3975008706d61a8e7f8389b914e827058d694b31468b3a">pressure</a>) const =0</td></tr>
 <tr class="memdesc:a97e12b2e9cb7147fbd334a88319843af"><td class="mdescLeft">&#160;</td><td class="mdescRight">See derived classes.  <a href="#a97e12b2e9cb7147fbd334a88319843af">More...</a><br /></td></tr>
 <tr class="separator:a97e12b2e9cb7147fbd334a88319843af"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aff855cb4a74ea79ba50ecf81d86f887e"><td class="memItemLeft" align="right" valign="top">virtual double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classEos.html#aff855cb4a74ea79ba50ecf81d86f887e">computeEnergy</a> (const double &amp;density, const double &amp;pressure) const =0</td></tr>
+<tr class="memitem:aff855cb4a74ea79ba50ecf81d86f887e"><td class="memItemLeft" align="right" valign="top">virtual double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classEos.html#aff855cb4a74ea79ba50ecf81d86f887e">computeEnergy</a> (const double &amp;<a class="el" href="Cell_8h.html#acca207de98b59d1c41e3975008706d61a22ebfd60994ac594c00a8e367372d092">density</a>, const double &amp;<a class="el" href="Cell_8h.html#acca207de98b59d1c41e3975008706d61a8e7f8389b914e827058d694b31468b3a">pressure</a>) const =0</td></tr>
 <tr class="memdesc:aff855cb4a74ea79ba50ecf81d86f887e"><td class="mdescLeft">&#160;</td><td class="mdescRight">See derived classes.  <a href="#aff855cb4a74ea79ba50ecf81d86f887e">More...</a><br /></td></tr>
 <tr class="separator:aff855cb4a74ea79ba50ecf81d86f887e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3c55e17604471636a3d594aca5ea7e0b"><td class="memItemLeft" align="right" valign="top">virtual double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classEos.html#a3c55e17604471636a3d594aca5ea7e0b">computePressure</a> (const double &amp;density, const double &amp;energy) const =0</td></tr>
+<tr class="memitem:a3c55e17604471636a3d594aca5ea7e0b"><td class="memItemLeft" align="right" valign="top">virtual double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classEos.html#a3c55e17604471636a3d594aca5ea7e0b">computePressure</a> (const double &amp;<a class="el" href="Cell_8h.html#acca207de98b59d1c41e3975008706d61a22ebfd60994ac594c00a8e367372d092">density</a>, const double &amp;energy) const =0</td></tr>
 <tr class="memdesc:a3c55e17604471636a3d594aca5ea7e0b"><td class="mdescLeft">&#160;</td><td class="mdescRight">See derived classes.  <a href="#a3c55e17604471636a3d594aca5ea7e0b">More...</a><br /></td></tr>
 <tr class="separator:a3c55e17604471636a3d594aca5ea7e0b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0d63c03ef0f5874d4fbee8c6c5007cc0"><td class="memItemLeft" align="right" valign="top">virtual double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classEos.html#a0d63c03ef0f5874d4fbee8c6c5007cc0">computeDensity</a> (const double &amp;pressure, const double &amp;temperature) const =0</td></tr>
+<tr class="memitem:a0d63c03ef0f5874d4fbee8c6c5007cc0"><td class="memItemLeft" align="right" valign="top">virtual double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classEos.html#a0d63c03ef0f5874d4fbee8c6c5007cc0">computeDensity</a> (const double &amp;<a class="el" href="Cell_8h.html#acca207de98b59d1c41e3975008706d61a8e7f8389b914e827058d694b31468b3a">pressure</a>, const double &amp;<a class="el" href="Cell_8h.html#acca207de98b59d1c41e3975008706d61a9922a43d37bee3212593f77ce4ec82f3">temperature</a>) const =0</td></tr>
 <tr class="memdesc:a0d63c03ef0f5874d4fbee8c6c5007cc0"><td class="mdescLeft">&#160;</td><td class="mdescRight">See derived classes.  <a href="#a0d63c03ef0f5874d4fbee8c6c5007cc0">More...</a><br /></td></tr>
 <tr class="separator:a0d63c03ef0f5874d4fbee8c6c5007cc0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4ae94f5fe8bbe58d46ef496b2d507f37"><td class="memItemLeft" align="right" valign="top">virtual double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classEos.html#a4ae94f5fe8bbe58d46ef496b2d507f37">computeSoundSpeed</a> (const double &amp;density, const double &amp;pressure) const =0</td></tr>
+<tr class="memitem:a4ae94f5fe8bbe58d46ef496b2d507f37"><td class="memItemLeft" align="right" valign="top">virtual double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classEos.html#a4ae94f5fe8bbe58d46ef496b2d507f37">computeSoundSpeed</a> (const double &amp;<a class="el" href="Cell_8h.html#acca207de98b59d1c41e3975008706d61a22ebfd60994ac594c00a8e367372d092">density</a>, const double &amp;<a class="el" href="Cell_8h.html#acca207de98b59d1c41e3975008706d61a8e7f8389b914e827058d694b31468b3a">pressure</a>) const =0</td></tr>
 <tr class="memdesc:a4ae94f5fe8bbe58d46ef496b2d507f37"><td class="mdescLeft">&#160;</td><td class="mdescRight">See derived classes.  <a href="#a4ae94f5fe8bbe58d46ef496b2d507f37">More...</a><br /></td></tr>
 <tr class="separator:a4ae94f5fe8bbe58d46ef496b2d507f37"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af7abd886b42c09cff9e9cfe592261e7b"><td class="memItemLeft" align="right" valign="top">virtual double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classEos.html#af7abd886b42c09cff9e9cfe592261e7b">computeEntropy</a> (const double &amp;temperature, const double &amp;pressure) const =0</td></tr>
+<tr class="memitem:af7abd886b42c09cff9e9cfe592261e7b"><td class="memItemLeft" align="right" valign="top">virtual double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classEos.html#af7abd886b42c09cff9e9cfe592261e7b">computeEntropy</a> (const double &amp;<a class="el" href="Cell_8h.html#acca207de98b59d1c41e3975008706d61a9922a43d37bee3212593f77ce4ec82f3">temperature</a>, const double &amp;<a class="el" href="Cell_8h.html#acca207de98b59d1c41e3975008706d61a8e7f8389b914e827058d694b31468b3a">pressure</a>) const =0</td></tr>
 <tr class="memdesc:af7abd886b42c09cff9e9cfe592261e7b"><td class="mdescLeft">&#160;</td><td class="mdescRight">See derived classes.  <a href="#af7abd886b42c09cff9e9cfe592261e7b">More...</a><br /></td></tr>
 <tr class="separator:af7abd886b42c09cff9e9cfe592261e7b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7c05cdabde6367e17a5a5e0fae743f2b"><td class="memItemLeft" align="right" valign="top">virtual double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classEos.html#a7c05cdabde6367e17a5a5e0fae743f2b">computePressureIsentropic</a> (const double &amp;initialPressure, const double &amp;initialDensity, const double &amp;finalDensity) const =0</td></tr>
@@ -196,47 +196,47 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a0275d45e2c231952869b0087a627203c"><td class="memItemLeft" align="right" valign="top">virtual double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classEos.html#a0275d45e2c231952869b0087a627203c">computeEnthalpyIsentropic</a> (const double &amp;initialPressure, const double &amp;initialDensity, const double &amp;finalPressure, double *dhdp=0) const =0</td></tr>
 <tr class="memdesc:a0275d45e2c231952869b0087a627203c"><td class="mdescLeft">&#160;</td><td class="mdescRight">See derived classes.  <a href="#a0275d45e2c231952869b0087a627203c">More...</a><br /></td></tr>
 <tr class="separator:a0275d45e2c231952869b0087a627203c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae5e4c25f091a87cfb6ac5c50d524cd3b"><td class="memItemLeft" align="right" valign="top">virtual double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classEos.html#ae5e4c25f091a87cfb6ac5c50d524cd3b">computeDensitySaturation</a> (const double &amp;pressure, const double &amp;Tsat, const double &amp;dTsatdP, double *drhodp=0) const </td></tr>
+<tr class="memitem:ae5e4c25f091a87cfb6ac5c50d524cd3b"><td class="memItemLeft" align="right" valign="top">virtual double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classEos.html#ae5e4c25f091a87cfb6ac5c50d524cd3b">computeDensitySaturation</a> (const double &amp;<a class="el" href="Cell_8h.html#acca207de98b59d1c41e3975008706d61a8e7f8389b914e827058d694b31468b3a">pressure</a>, const double &amp;Tsat, const double &amp;dTsatdP, double *drhodp=0) const </td></tr>
 <tr class="memdesc:ae5e4c25f091a87cfb6ac5c50d524cd3b"><td class="mdescLeft">&#160;</td><td class="mdescRight">See derived classes.  <a href="#ae5e4c25f091a87cfb6ac5c50d524cd3b">More...</a><br /></td></tr>
 <tr class="separator:ae5e4c25f091a87cfb6ac5c50d524cd3b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a82841b0aabad1d4675d50c1e6eba2faa"><td class="memItemLeft" align="right" valign="top">virtual double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classEos.html#a82841b0aabad1d4675d50c1e6eba2faa">computeDensityEnergySaturation</a> (const double &amp;pressure, const double &amp;rho, const double &amp;drhodp, double *drhoedp=0) const </td></tr>
+<tr class="memitem:a82841b0aabad1d4675d50c1e6eba2faa"><td class="memItemLeft" align="right" valign="top">virtual double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classEos.html#a82841b0aabad1d4675d50c1e6eba2faa">computeDensityEnergySaturation</a> (const double &amp;<a class="el" href="Cell_8h.html#acca207de98b59d1c41e3975008706d61a8e7f8389b914e827058d694b31468b3a">pressure</a>, const double &amp;rho, const double &amp;drhodp, double *drhoedp=0) const </td></tr>
 <tr class="memdesc:a82841b0aabad1d4675d50c1e6eba2faa"><td class="mdescLeft">&#160;</td><td class="mdescRight">See derived classes.  <a href="#a82841b0aabad1d4675d50c1e6eba2faa">More...</a><br /></td></tr>
 <tr class="separator:a82841b0aabad1d4675d50c1e6eba2faa"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a74ad8205cc70bf0c251d03dba7350baf"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classEos.html#a74ad8205cc70bf0c251d03dba7350baf">sendSpecialMixtureEos</a> (double &amp;gamPinfOverGamMinusOne, double &amp;eRef, double &amp;oneOverGamMinusOne) const =0</td></tr>
-<tr class="memdesc:a74ad8205cc70bf0c251d03dba7350baf"><td class="mdescLeft">&#160;</td><td class="mdescRight">See derived classes.  <a href="#a74ad8205cc70bf0c251d03dba7350baf">More...</a><br /></td></tr>
-<tr class="separator:a74ad8205cc70bf0c251d03dba7350baf"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3b66702b132df934dcc37ad6670d075a"><td class="memItemLeft" align="right" valign="top">virtual double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classEos.html#a3b66702b132df934dcc37ad6670d075a">vfpfh</a> (const double &amp;pressure, const double &amp;enthalpy) const </td></tr>
+<tr class="memitem:a5944a447fdf5830ae9848a462b51ef2d"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classEos.html#a5944a447fdf5830ae9848a462b51ef2d">sendSpecialMixtureEos</a> (double &amp;gamPinfOverGamMinusOne, double &amp;eRef, double &amp;oneOverGamMinusOne, double &amp;covolume) const =0</td></tr>
+<tr class="memdesc:a5944a447fdf5830ae9848a462b51ef2d"><td class="mdescLeft">&#160;</td><td class="mdescRight">See derived classes.  <a href="#a5944a447fdf5830ae9848a462b51ef2d">More...</a><br /></td></tr>
+<tr class="separator:a5944a447fdf5830ae9848a462b51ef2d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3b66702b132df934dcc37ad6670d075a"><td class="memItemLeft" align="right" valign="top">virtual double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classEos.html#a3b66702b132df934dcc37ad6670d075a">vfpfh</a> (const double &amp;<a class="el" href="Cell_8h.html#acca207de98b59d1c41e3975008706d61a8e7f8389b914e827058d694b31468b3a">pressure</a>, const double &amp;enthalpy) const </td></tr>
 <tr class="memdesc:a3b66702b132df934dcc37ad6670d075a"><td class="mdescLeft">&#160;</td><td class="mdescRight">See derived classes.  <a href="#a3b66702b132df934dcc37ad6670d075a">More...</a><br /></td></tr>
 <tr class="separator:a3b66702b132df934dcc37ad6670d075a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:acc130fde18dd324ae423af9ed7a96618"><td class="memItemLeft" align="right" valign="top">virtual double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classEos.html#acc130fde18dd324ae423af9ed7a96618">dvdpch</a> (const double &amp;pressure, const double &amp;enthalpy) const </td></tr>
+<tr class="memitem:acc130fde18dd324ae423af9ed7a96618"><td class="memItemLeft" align="right" valign="top">virtual double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classEos.html#acc130fde18dd324ae423af9ed7a96618">dvdpch</a> (const double &amp;<a class="el" href="Cell_8h.html#acca207de98b59d1c41e3975008706d61a8e7f8389b914e827058d694b31468b3a">pressure</a>, const double &amp;enthalpy) const </td></tr>
 <tr class="memdesc:acc130fde18dd324ae423af9ed7a96618"><td class="mdescLeft">&#160;</td><td class="mdescRight">See derived classes.  <a href="#acc130fde18dd324ae423af9ed7a96618">More...</a><br /></td></tr>
 <tr class="separator:acc130fde18dd324ae423af9ed7a96618"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab598fea64caefa4ed706ae4a557d3f23"><td class="memItemLeft" align="right" valign="top">virtual double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classEos.html#ab598fea64caefa4ed706ae4a557d3f23">dvdhcp</a> (const double &amp;pressure, const double &amp;enthalpy) const </td></tr>
+<tr class="memitem:ab598fea64caefa4ed706ae4a557d3f23"><td class="memItemLeft" align="right" valign="top">virtual double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classEos.html#ab598fea64caefa4ed706ae4a557d3f23">dvdhcp</a> (const double &amp;<a class="el" href="Cell_8h.html#acca207de98b59d1c41e3975008706d61a8e7f8389b914e827058d694b31468b3a">pressure</a>, const double &amp;enthalpy) const </td></tr>
 <tr class="memdesc:ab598fea64caefa4ed706ae4a557d3f23"><td class="mdescLeft">&#160;</td><td class="mdescRight">See derived classes.  <a href="#ab598fea64caefa4ed706ae4a557d3f23">More...</a><br /></td></tr>
 <tr class="separator:ab598fea64caefa4ed706ae4a557d3f23"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa27c8660d5f173a099e855f1b959df48"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classEos.html#aa27c8660d5f173a099e855f1b959df48">verifyPressure</a> (const double &amp;pressure, const std::string &amp;message=&quot;&quot;) const </td></tr>
-<tr class="separator:aa27c8660d5f173a099e855f1b959df48"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a629267f89c8c8d5ecca68bed8914d126"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classEos.html#a629267f89c8c8d5ecca68bed8914d126">verifyAndModifyPressure</a> (double &amp;pressure) const </td></tr>
+<tr class="memitem:aef45a8d61e5ac3f5abd8b9eeab0761da"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classEos.html#aef45a8d61e5ac3f5abd8b9eeab0761da">verifyPressure</a> (const double &amp;<a class="el" href="Cell_8h.html#acca207de98b59d1c41e3975008706d61a8e7f8389b914e827058d694b31468b3a">pressure</a>, const std::string &amp;message=&quot; &quot;) const </td></tr>
+<tr class="separator:aef45a8d61e5ac3f5abd8b9eeab0761da"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a629267f89c8c8d5ecca68bed8914d126"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classEos.html#a629267f89c8c8d5ecca68bed8914d126">verifyAndModifyPressure</a> (double &amp;<a class="el" href="Cell_8h.html#acca207de98b59d1c41e3975008706d61a8e7f8389b914e827058d694b31468b3a">pressure</a>) const </td></tr>
 <tr class="memdesc:a629267f89c8c8d5ecca68bed8914d126"><td class="mdescLeft">&#160;</td><td class="mdescRight">See derived classes.  <a href="#a629267f89c8c8d5ecca68bed8914d126">More...</a><br /></td></tr>
 <tr class="separator:a629267f89c8c8d5ecca68bed8914d126"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a255532140760c648e7f043b26e46bcf8"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classEos.html#a255532140760c648e7f043b26e46bcf8">sendInfo</a> (double *&amp;data) const =0</td></tr>
 <tr class="memdesc:a255532140760c648e7f043b26e46bcf8"><td class="mdescLeft">&#160;</td><td class="mdescRight">See derived classes.  <a href="#a255532140760c648e7f043b26e46bcf8">More...</a><br /></td></tr>
 <tr class="separator:a255532140760c648e7f043b26e46bcf8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aea3c07695749d152db3bc66664d088f9"><td class="memItemLeft" align="right" valign="top">virtual double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classEos.html#aea3c07695749d152db3bc66664d088f9">getGamma</a> () const </td></tr>
-<tr class="memdesc:aea3c07695749d152db3bc66664d088f9"><td class="mdescLeft">&#160;</td><td class="mdescRight">See derived classes.  <a href="#aea3c07695749d152db3bc66664d088f9">More...</a><br /></td></tr>
-<tr class="separator:aea3c07695749d152db3bc66664d088f9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af22c05b371461622c1a278cfb8086be6"><td class="memItemLeft" align="right" valign="top">virtual double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classEos.html#af22c05b371461622c1a278cfb8086be6">getPInf</a> () const </td></tr>
-<tr class="memdesc:af22c05b371461622c1a278cfb8086be6"><td class="mdescLeft">&#160;</td><td class="mdescRight">See derived classes.  <a href="#af22c05b371461622c1a278cfb8086be6">More...</a><br /></td></tr>
-<tr class="separator:af22c05b371461622c1a278cfb8086be6"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a02e82e49d8a91fa53055623a30287e7f"><td class="memItemLeft" align="right" valign="top">virtual double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classEos.html#a02e82e49d8a91fa53055623a30287e7f">getCv</a> () const </td></tr>
-<tr class="memdesc:a02e82e49d8a91fa53055623a30287e7f"><td class="mdescLeft">&#160;</td><td class="mdescRight">See derived classes.  <a href="#a02e82e49d8a91fa53055623a30287e7f">More...</a><br /></td></tr>
-<tr class="separator:a02e82e49d8a91fa53055623a30287e7f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a095d63b48caaef8d57f2c7dc48fa4f90"><td class="memItemLeft" align="right" valign="top">virtual double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classEos.html#a095d63b48caaef8d57f2c7dc48fa4f90">getERef</a> () const </td></tr>
-<tr class="memdesc:a095d63b48caaef8d57f2c7dc48fa4f90"><td class="mdescLeft">&#160;</td><td class="mdescRight">See derived classes.  <a href="#a095d63b48caaef8d57f2c7dc48fa4f90">More...</a><br /></td></tr>
-<tr class="separator:a095d63b48caaef8d57f2c7dc48fa4f90"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2974ddb86ece15712b1b529740bc92c3"><td class="memItemLeft" align="right" valign="top">virtual double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classEos.html#a2974ddb86ece15712b1b529740bc92c3">getSRef</a> () const </td></tr>
-<tr class="memdesc:a2974ddb86ece15712b1b529740bc92c3"><td class="mdescLeft">&#160;</td><td class="mdescRight">See derived classes.  <a href="#a2974ddb86ece15712b1b529740bc92c3">More...</a><br /></td></tr>
-<tr class="separator:a2974ddb86ece15712b1b529740bc92c3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a186b6ce380d437ab5307ab64c9746d9b"><td class="memItemLeft" align="right" valign="top">virtual const double &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classEos.html#a186b6ce380d437ab5307ab64c9746d9b">getGamma</a> () const </td></tr>
+<tr class="memdesc:a186b6ce380d437ab5307ab64c9746d9b"><td class="mdescLeft">&#160;</td><td class="mdescRight">See derived classes.  <a href="#a186b6ce380d437ab5307ab64c9746d9b">More...</a><br /></td></tr>
+<tr class="separator:a186b6ce380d437ab5307ab64c9746d9b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0e3067c0159fcdcffdd5ad2ffa838e77"><td class="memItemLeft" align="right" valign="top">virtual const double &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classEos.html#a0e3067c0159fcdcffdd5ad2ffa838e77">getPInf</a> () const </td></tr>
+<tr class="memdesc:a0e3067c0159fcdcffdd5ad2ffa838e77"><td class="mdescLeft">&#160;</td><td class="mdescRight">See derived classes.  <a href="#a0e3067c0159fcdcffdd5ad2ffa838e77">More...</a><br /></td></tr>
+<tr class="separator:a0e3067c0159fcdcffdd5ad2ffa838e77"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5a9cbf67c02c459df51fa6be1242f098"><td class="memItemLeft" align="right" valign="top">virtual const double &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classEos.html#a5a9cbf67c02c459df51fa6be1242f098">getCv</a> () const </td></tr>
+<tr class="memdesc:a5a9cbf67c02c459df51fa6be1242f098"><td class="mdescLeft">&#160;</td><td class="mdescRight">See derived classes.  <a href="#a5a9cbf67c02c459df51fa6be1242f098">More...</a><br /></td></tr>
+<tr class="separator:a5a9cbf67c02c459df51fa6be1242f098"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3f392215175649ab7662e59576949a1e"><td class="memItemLeft" align="right" valign="top">virtual const double &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classEos.html#a3f392215175649ab7662e59576949a1e">getERef</a> () const </td></tr>
+<tr class="memdesc:a3f392215175649ab7662e59576949a1e"><td class="mdescLeft">&#160;</td><td class="mdescRight">See derived classes.  <a href="#a3f392215175649ab7662e59576949a1e">More...</a><br /></td></tr>
+<tr class="separator:a3f392215175649ab7662e59576949a1e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aafe745f6c71ef8a23e66e4e3b9cbd69f"><td class="memItemLeft" align="right" valign="top">virtual const double &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classEos.html#aafe745f6c71ef8a23e66e4e3b9cbd69f">getSRef</a> () const </td></tr>
+<tr class="memdesc:aafe745f6c71ef8a23e66e4e3b9cbd69f"><td class="mdescLeft">&#160;</td><td class="mdescRight">See derived classes.  <a href="#aafe745f6c71ef8a23e66e4e3b9cbd69f">More...</a><br /></td></tr>
+<tr class="separator:aafe745f6c71ef8a23e66e4e3b9cbd69f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
@@ -257,7 +257,7 @@ Protected Attributes</h2></td></tr>
 <div class="textblock"><p>General class for Equation of State (EOS). </p>
 <p>This is a pure virtual class: can not be instantiated.</p>
 <p>This base class and its derived classes contain mainly computational functions to obtain thermodynamical values for each phase: pressure, temperature, internal energy...</p>
-<p>In this ECOGEN release only two EOS are available : ideal Gas (sub class EoIG) and Stiffened (sub class EoSG). Appropriate data for both EOS lead to a large choice of gas, liquid or compressible solid. </p>
+<p>In this ECOGEN release only three EOS are available : ideal Gas (sub class <a class="el" href="classEosIG.html" title="Class describing an ideal gas equation of state. ">EosIG</a>), Stiffened (sub class EoSG) and Noble-Abel Stiffened Gas (sub class <a class="el" href="classEosNASG.html" title="Class describing a Noble-Abel stiffened gas equation of state. ">EosNASG</a>). Appropriate data for both EOS lead to a large choice of gas, liquid or compressible solid. </p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a class="anchor" id="a9959ddce3afde9909af5513949b68ff0"></a>
 <div class="memitem">
@@ -338,7 +338,7 @@ Protected Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Assign the epsilon value for alphaNull option (alpha = 0 =&gt; epsilon != 0 ; alpha != 0 =&gt; epsilon = 0) </p>
+<p>Assign the epsilonAlphaNull value for alphaNull option (alpha = 0 =&gt; epsilonAlphaNull != 0 ; alpha != 0 =&gt; epsilonAlphaNull = 0) </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">alphaNull</td><td><img class="formulaInl" alt="$\alpha = 0 $" src="form_4.png"/> (boolean value) </td></tr>
@@ -383,7 +383,7 @@ Protected Attributes</h2></td></tr>
 
 <p>See derived classes. </p>
 
-<p>Implemented in <a class="el" href="classEosIG.html#ac2a5260f78fdbab4226deed6ca6e0bb5">EosIG</a>, and <a class="el" href="classEosSG.html#a931a8b657f75e30743bdb0d209278384">EosSG</a>.</p>
+<p>Implemented in <a class="el" href="classEosIG.html#ac2a5260f78fdbab4226deed6ca6e0bb5">EosIG</a>, <a class="el" href="classEosNASG.html#ab469d7782a6635ca4bc400e16a2dd52e">EosNASG</a>, and <a class="el" href="classEosSG.html#a931a8b657f75e30743bdb0d209278384">EosSG</a>.</p>
 
 </div>
 </div>
@@ -421,7 +421,7 @@ Protected Attributes</h2></td></tr>
 
 <p>See derived classes. </p>
 
-<p>Implemented in <a class="el" href="classEosSG.html#aa876dc6af7f8bf62311850a503ffb651">EosSG</a>, and <a class="el" href="classEosIG.html#a4714ab8574d423e8a056307af92f16f6">EosIG</a>.</p>
+<p>Implemented in <a class="el" href="classEosSG.html#aa876dc6af7f8bf62311850a503ffb651">EosSG</a>, <a class="el" href="classEosNASG.html#a63c3ba67b926ee73fd9430ce1a78023d">EosNASG</a>, and <a class="el" href="classEosIG.html#a4714ab8574d423e8a056307af92f16f6">EosIG</a>.</p>
 
 </div>
 </div>
@@ -471,7 +471,7 @@ Protected Attributes</h2></td></tr>
 
 <p>See derived classes. </p>
 
-<p>Reimplemented in <a class="el" href="classEosSG.html#a832e49e3edde6573cded6b1c036f653d">EosSG</a>, and <a class="el" href="classEosIG.html#a157112080642e1df2625afa8eef43c80">EosIG</a>.</p>
+<p>Reimplemented in <a class="el" href="classEosSG.html#a832e49e3edde6573cded6b1c036f653d">EosSG</a>, <a class="el" href="classEosNASG.html#ae4ff980ffce9ade1ad6d193fbe1969d7">EosNASG</a>, and <a class="el" href="classEosIG.html#a157112080642e1df2625afa8eef43c80">EosIG</a>.</p>
 
 </div>
 </div>
@@ -521,7 +521,7 @@ Protected Attributes</h2></td></tr>
 
 <p>See derived classes. </p>
 
-<p>Implemented in <a class="el" href="classEosSG.html#a76baab3e49c465160fc35df71ad5131b">EosSG</a>, and <a class="el" href="classEosIG.html#a6924cefb1908797bc035df7b904f0776">EosIG</a>.</p>
+<p>Implemented in <a class="el" href="classEosSG.html#a76baab3e49c465160fc35df71ad5131b">EosSG</a>, <a class="el" href="classEosNASG.html#ad7e3fbc526a865c4839e0849a462390b">EosNASG</a>, and <a class="el" href="classEosIG.html#a6924cefb1908797bc035df7b904f0776">EosIG</a>.</p>
 
 </div>
 </div>
@@ -571,7 +571,7 @@ Protected Attributes</h2></td></tr>
 
 <p>See derived classes. </p>
 
-<p>Implemented in <a class="el" href="classEosSG.html#aa30cbfa450787efe266616a70e57a770">EosSG</a>, and <a class="el" href="classEosIG.html#a494bcaddf4bd99273a2cccb2e6880b2c">EosIG</a>.</p>
+<p>Implemented in <a class="el" href="classEosSG.html#aa30cbfa450787efe266616a70e57a770">EosSG</a>, <a class="el" href="classEosNASG.html#a6eed020d4f16c1b1a9a07e709e632532">EosNASG</a>, and <a class="el" href="classEosIG.html#a494bcaddf4bd99273a2cccb2e6880b2c">EosIG</a>.</p>
 
 </div>
 </div>
@@ -619,7 +619,7 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Implemented in <a class="el" href="classEosSG.html#afd3b1aa7b581cbca11ed33de50cc6a14">EosSG</a>, and <a class="el" href="classEosIG.html#ae1523db3e30fecd2f23bb72cff43b754">EosIG</a>.</p>
+<p>Implemented in <a class="el" href="classEosSG.html#afd3b1aa7b581cbca11ed33de50cc6a14">EosSG</a>, <a class="el" href="classEosNASG.html#ab2e52f219e9a16f9c57fba8dc646353f">EosNASG</a>, and <a class="el" href="classEosIG.html#ae1523db3e30fecd2f23bb72cff43b754">EosIG</a>.</p>
 
 </div>
 </div>
@@ -669,7 +669,7 @@ Protected Attributes</h2></td></tr>
 
 <p>See derived classes. </p>
 
-<p>Reimplemented in <a class="el" href="classEosSG.html#a3f6873978b844b0856a4e8333fcc7d6d">EosSG</a>, and <a class="el" href="classEosIG.html#ab8c121e6968a94d9df562bee59bb076b">EosIG</a>.</p>
+<p>Reimplemented in <a class="el" href="classEosSG.html#a3f6873978b844b0856a4e8333fcc7d6d">EosSG</a>, <a class="el" href="classEosNASG.html#aff803ee52e652e082fdb9299db0e400b">EosNASG</a>, and <a class="el" href="classEosIG.html#ab8c121e6968a94d9df562bee59bb076b">EosIG</a>.</p>
 
 </div>
 </div>
@@ -707,7 +707,7 @@ Protected Attributes</h2></td></tr>
 
 <p>See derived classes. </p>
 
-<p>Implemented in <a class="el" href="classEosSG.html#a4b624bd917d004e7ec4125d8eae0be77">EosSG</a>, and <a class="el" href="classEosIG.html#adfd352a152b19f037e2cf4fa5d42c6b4">EosIG</a>.</p>
+<p>Implemented in <a class="el" href="classEosNASG.html#adac7f79af7b9d4c2e7a370fcea241e15">EosNASG</a>, <a class="el" href="classEosSG.html#a4b624bd917d004e7ec4125d8eae0be77">EosSG</a>, and <a class="el" href="classEosIG.html#adfd352a152b19f037e2cf4fa5d42c6b4">EosIG</a>.</p>
 
 </div>
 </div>
@@ -757,7 +757,7 @@ Protected Attributes</h2></td></tr>
 
 <p>See derived classes. </p>
 
-<p>Implemented in <a class="el" href="classEosSG.html#a60151ef912d257993a0697fb87b03504">EosSG</a>, and <a class="el" href="classEosIG.html#af7f1349c0180a6165c83151dd4b0efcd">EosIG</a>.</p>
+<p>Implemented in <a class="el" href="classEosSG.html#a60151ef912d257993a0697fb87b03504">EosSG</a>, <a class="el" href="classEosNASG.html#a89a4377a896bba2e93b2a48564459c0e">EosNASG</a>, and <a class="el" href="classEosIG.html#af7f1349c0180a6165c83151dd4b0efcd">EosIG</a>.</p>
 
 </div>
 </div>
@@ -795,7 +795,7 @@ Protected Attributes</h2></td></tr>
 
 <p>See derived classes. </p>
 
-<p>Implemented in <a class="el" href="classEosSG.html#a15665323dd8e0278f7e7f79bf26c348b">EosSG</a>, and <a class="el" href="classEosIG.html#ad787774fce181ee4d0dab58fec69c2d5">EosIG</a>.</p>
+<p>Implemented in <a class="el" href="classEosSG.html#a15665323dd8e0278f7e7f79bf26c348b">EosSG</a>, <a class="el" href="classEosNASG.html#a1c81ab2b0ab5468a978a3b4b9117b447">EosNASG</a>, and <a class="el" href="classEosIG.html#ad787774fce181ee4d0dab58fec69c2d5">EosIG</a>.</p>
 
 </div>
 </div>
@@ -833,7 +833,7 @@ Protected Attributes</h2></td></tr>
 
 <p>See derived classes. </p>
 
-<p>Implemented in <a class="el" href="classEosSG.html#a91131e9ca799f0b18ce21a67b930fd94">EosSG</a>, and <a class="el" href="classEosIG.html#ab0b1047853995048a091cc100a91b397">EosIG</a>.</p>
+<p>Implemented in <a class="el" href="classEosSG.html#a91131e9ca799f0b18ce21a67b930fd94">EosSG</a>, <a class="el" href="classEosNASG.html#aaa8afbd3340886856c0758753295060d">EosNASG</a>, and <a class="el" href="classEosIG.html#ab0b1047853995048a091cc100a91b397">EosIG</a>.</p>
 
 </div>
 </div>
@@ -877,7 +877,7 @@ Protected Attributes</h2></td></tr>
 
 <p>See derived classes. </p>
 
-<p>Implemented in <a class="el" href="classEosSG.html#ad1647b9346e7978c5c4a2ed5a218536b">EosSG</a>, and <a class="el" href="classEosIG.html#ae6ccf315e75da70058ab2c62d38dad55">EosIG</a>.</p>
+<p>Implemented in <a class="el" href="classEosSG.html#ad1647b9346e7978c5c4a2ed5a218536b">EosSG</a>, <a class="el" href="classEosNASG.html#aac112050bac5588f2b1d89ef5aac2036">EosNASG</a>, and <a class="el" href="classEosIG.html#ae6ccf315e75da70058ab2c62d38dad55">EosIG</a>.</p>
 
 </div>
 </div>
@@ -921,7 +921,7 @@ Protected Attributes</h2></td></tr>
 
 <p>See derived classes. </p>
 
-<p>Implemented in <a class="el" href="classEosSG.html#a1baa7e58fb0a0378f138519698cbfa68">EosSG</a>, and <a class="el" href="classEosIG.html#a9aff36798c09e4225eef005c83af6978">EosIG</a>.</p>
+<p>Implemented in <a class="el" href="classEosSG.html#a1baa7e58fb0a0378f138519698cbfa68">EosSG</a>, <a class="el" href="classEosNASG.html#ac62d94b09caa524bb6705db859eb44b3">EosNASG</a>, and <a class="el" href="classEosIG.html#a9aff36798c09e4225eef005c83af6978">EosIG</a>.</p>
 
 </div>
 </div>
@@ -959,7 +959,7 @@ Protected Attributes</h2></td></tr>
 
 <p>See derived classes. </p>
 
-<p>Implemented in <a class="el" href="classEosSG.html#aa247211858576cd8e73b55730e8c795f">EosSG</a>, and <a class="el" href="classEosIG.html#afd523e50604bbe6804111b647494c5d4">EosIG</a>.</p>
+<p>Implemented in <a class="el" href="classEosSG.html#aa247211858576cd8e73b55730e8c795f">EosSG</a>, <a class="el" href="classEosNASG.html#a637a9157d630e40d57f611724817c40b">EosNASG</a>, and <a class="el" href="classEosIG.html#afd523e50604bbe6804111b647494c5d4">EosIG</a>.</p>
 
 </div>
 </div>
@@ -997,7 +997,7 @@ Protected Attributes</h2></td></tr>
 
 <p>See derived classes. </p>
 
-<p>Implemented in <a class="el" href="classEosSG.html#ad0832475fd1ec16bf4980595b68fde0f">EosSG</a>, and <a class="el" href="classEosIG.html#a01f0b0bd3779b16c74ec1de59c415ba8">EosIG</a>.</p>
+<p>Implemented in <a class="el" href="classEosNASG.html#abf933c09aa400c30e40ad11c02322a4c">EosNASG</a>, <a class="el" href="classEosSG.html#ad0832475fd1ec16bf4980595b68fde0f">EosSG</a>, and <a class="el" href="classEosIG.html#a01f0b0bd3779b16c74ec1de59c415ba8">EosIG</a>.</p>
 
 </div>
 </div>
@@ -1096,7 +1096,7 @@ Protected Attributes</h2></td></tr>
 
 <p>See derived classes. </p>
 
-<p>Reimplemented in <a class="el" href="classEosSG.html#acafde83784d7cc4e3dd63e6836f32e85">EosSG</a>, and <a class="el" href="classEosIG.html#a2f9bb2ba789ee90aebfd257ca1444583">EosIG</a>.</p>
+<p>Reimplemented in <a class="el" href="classEosSG.html#acafde83784d7cc4e3dd63e6836f32e85">EosSG</a>, <a class="el" href="classEosNASG.html#a4164a8e31eac1ff2cede4f740201713b">EosNASG</a>, and <a class="el" href="classEosIG.html#a2f9bb2ba789ee90aebfd257ca1444583">EosIG</a>.</p>
 
 </div>
 </div>
@@ -1134,11 +1134,11 @@ Protected Attributes</h2></td></tr>
 
 <p>See derived classes. </p>
 
-<p>Reimplemented in <a class="el" href="classEosSG.html#a5469b5878cfbbd61f3a906448e2a2d82">EosSG</a>, and <a class="el" href="classEosIG.html#acbbe1088e1cc9dc3f9045a3d33c4d451">EosIG</a>.</p>
+<p>Reimplemented in <a class="el" href="classEosSG.html#a5469b5878cfbbd61f3a906448e2a2d82">EosSG</a>, <a class="el" href="classEosNASG.html#a77e259f4cc518b68383442bf3a21f6d2">EosNASG</a>, and <a class="el" href="classEosIG.html#acbbe1088e1cc9dc3f9045a3d33c4d451">EosIG</a>.</p>
 
 </div>
 </div>
-<a class="anchor" id="a02e82e49d8a91fa53055623a30287e7f"></a>
+<a class="anchor" id="a5a9cbf67c02c459df51fa6be1242f098"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="mlabels">
@@ -1146,7 +1146,7 @@ Protected Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">virtual double Eos::getCv </td>
+          <td class="memname">virtual const double&amp; Eos::getCv </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td> const</td>
@@ -1161,11 +1161,11 @@ Protected Attributes</h2></td></tr>
 
 <p>See derived classes. </p>
 
-<p>Reimplemented in <a class="el" href="classEosSG.html#a4683cb0a28a0ef7852294e2f363e7d1d">EosSG</a>, and <a class="el" href="classEosIG.html#ae3e1ee3811ee4d1bf38b665be1b557c5">EosIG</a>.</p>
+<p>Reimplemented in <a class="el" href="classEosSG.html#a3a18d4a0ee0d689559bb253e1bffc797">EosSG</a>, <a class="el" href="classEosNASG.html#abea68c9db6e4e6620aff270b0608b7b9">EosNASG</a>, and <a class="el" href="classEosIG.html#a0b7b2d33d6b5abacf4794f187f0a586e">EosIG</a>.</p>
 
 </div>
 </div>
-<a class="anchor" id="a095d63b48caaef8d57f2c7dc48fa4f90"></a>
+<a class="anchor" id="a3f392215175649ab7662e59576949a1e"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="mlabels">
@@ -1173,7 +1173,7 @@ Protected Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">virtual double Eos::getERef </td>
+          <td class="memname">virtual const double&amp; Eos::getERef </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td> const</td>
@@ -1188,11 +1188,11 @@ Protected Attributes</h2></td></tr>
 
 <p>See derived classes. </p>
 
-<p>Reimplemented in <a class="el" href="classEosSG.html#a4e0f47d6efdd56e98205a5cbe0cc2bfb">EosSG</a>, and <a class="el" href="classEosIG.html#aa90d5b6d9523515d96d16c5f3b6c834d">EosIG</a>.</p>
+<p>Reimplemented in <a class="el" href="classEosSG.html#a50b101bb47c3319e26770a8a7111920e">EosSG</a>, <a class="el" href="classEosNASG.html#a1f1655f1465189e00e56e739ffe12d6b">EosNASG</a>, and <a class="el" href="classEosIG.html#a623a413ccc03a02c97956187cee135a4">EosIG</a>.</p>
 
 </div>
 </div>
-<a class="anchor" id="aea3c07695749d152db3bc66664d088f9"></a>
+<a class="anchor" id="a186b6ce380d437ab5307ab64c9746d9b"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="mlabels">
@@ -1200,7 +1200,7 @@ Protected Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">virtual double Eos::getGamma </td>
+          <td class="memname">virtual const double&amp; Eos::getGamma </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td> const</td>
@@ -1215,77 +1215,61 @@ Protected Attributes</h2></td></tr>
 
 <p>See derived classes. </p>
 
-<p>Reimplemented in <a class="el" href="classEosSG.html#a50457614cf02a8827055da0e77afdaaa">EosSG</a>, and <a class="el" href="classEosIG.html#a396e7d9fe489e63b1e210f514a9c9316">EosIG</a>.</p>
+<p>Reimplemented in <a class="el" href="classEosSG.html#aa1e9048b5f6201c1e39587717f3c799a">EosSG</a>, <a class="el" href="classEosNASG.html#af7a32fab78de7a9dce5c837b2a01ce4e">EosNASG</a>, and <a class="el" href="classEosIG.html#acac617d129e3b65e1fda4c1cbfe1039c">EosIG</a>.</p>
 
 </div>
 </div>
-<a class="anchor" id="a7037416e309040b2dc1d156d94b02792"></a>
+<a class="anchor" id="a72d3c1859f173174beb1ed9603fd5e3b"></a>
 <div class="memitem">
 <div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">double Eos::getLambda </td>
+          <td class="memname">const double&amp; Eos::getLambda </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td> const</td>
         </tr>
       </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
 </div><div class="memdoc">
 
 <p>get the thermal conductivity of the fluid return <img class="formulaInl" alt="$ \lambda $" src="form_3.png"/> (Unit: W/(m.K)). </p>
 
 </div>
 </div>
-<a class="anchor" id="a614e3651cb9aaf588e0888e9a31b8a91"></a>
+<a class="anchor" id="a274e314b8a0beac67d0b08e0ac0ceebe"></a>
 <div class="memitem">
 <div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">double Eos::getMu </td>
+          <td class="memname">const double&amp; Eos::getMu </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td> const</td>
         </tr>
       </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
 </div><div class="memdoc">
 
 <p>Return the dynamic viscosity of the fluid return <img class="formulaInl" alt="$ \mu $" src="form_2.png"/> (Unit: Pa.s). </p>
 
 </div>
 </div>
-<a class="anchor" id="a43c899eb6dc8f63c13687552b2025ef2"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">string Eos::getName </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td> const</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="aadf9a8a141dd542aa68b4efa10f79567"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">int Eos::getNumber </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td> const</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Return the number associated to the EOS return m_number. </p>
-
-</div>
-</div>
-<a class="anchor" id="af22c05b371461622c1a278cfb8086be6"></a>
+<a class="anchor" id="a18235c88711807dfbbefb1ff9210f032"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="mlabels">
@@ -1293,7 +1277,56 @@ Protected Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">virtual double Eos::getPInf </td>
+          <td class="memname">const std::string&amp; Eos::getName </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a813aa8cd897e6b84d0d52d0c2e514610"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">const int&amp; Eos::getNumber </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Return the number associated to the EOS. </p>
+<dl class="section return"><dt>Returns</dt><dd>m_number </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a0e3067c0159fcdcffdd5ad2ffa838e77"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual const double&amp; Eos::getPInf </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td> const</td>
@@ -1308,11 +1341,11 @@ Protected Attributes</h2></td></tr>
 
 <p>See derived classes. </p>
 
-<p>Reimplemented in <a class="el" href="classEosSG.html#a43583234091be97088dda66d8e314b0c">EosSG</a>.</p>
+<p>Reimplemented in <a class="el" href="classEosSG.html#a05af11e3c886737c9a79db268c05e560">EosSG</a>, and <a class="el" href="classEosNASG.html#a0c130726b6df209183270f549c751c50">EosNASG</a>.</p>
 
 </div>
 </div>
-<a class="anchor" id="a2974ddb86ece15712b1b529740bc92c3"></a>
+<a class="anchor" id="aafe745f6c71ef8a23e66e4e3b9cbd69f"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="mlabels">
@@ -1320,7 +1353,7 @@ Protected Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">virtual double Eos::getSRef </td>
+          <td class="memname">virtual const double&amp; Eos::getSRef </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td> const</td>
@@ -1335,7 +1368,7 @@ Protected Attributes</h2></td></tr>
 
 <p>See derived classes. </p>
 
-<p>Reimplemented in <a class="el" href="classEosSG.html#a950f5b13eb042e5931a43913df246315">EosSG</a>, and <a class="el" href="classEosIG.html#adb5499fc2989c8751f96c63f711b8936">EosIG</a>.</p>
+<p>Reimplemented in <a class="el" href="classEosSG.html#a5554b5447dd0d620d2445dfd41ec8b72">EosSG</a>, <a class="el" href="classEosNASG.html#a922c32b3f3fc4223c65185ac1809c529">EosNASG</a>, and <a class="el" href="classEosIG.html#aa6ef428c80969bdc83ca3b158b069315">EosIG</a>.</p>
 
 </div>
 </div>
@@ -1362,7 +1395,7 @@ Protected Attributes</h2></td></tr>
 
 <p>See derived classes. </p>
 
-<p>Reimplemented in <a class="el" href="classEosSG.html#ab4c7e3dbaa0b6e1857d1106beff2773e">EosSG</a>, and <a class="el" href="classEosIG.html#abe5716820245f8487b905deade16377f">EosIG</a>.</p>
+<p>Reimplemented in <a class="el" href="classEosNASG.html#a449e7948ad90af5593960d53556ca528">EosNASG</a>, <a class="el" href="classEosSG.html#ab4c7e3dbaa0b6e1857d1106beff2773e">EosSG</a>, and <a class="el" href="classEosIG.html#abe5716820245f8487b905deade16377f">EosIG</a>.</p>
 
 </div>
 </div>
@@ -1418,11 +1451,11 @@ Protected Attributes</h2></td></tr>
 
 <p>See derived classes. </p>
 
-<p>Implemented in <a class="el" href="classEosSG.html#a0a253490f21ab6cce0a28aec88877a8b">EosSG</a>, and <a class="el" href="classEosIG.html#a568effaeba3279592827923e72e10e35">EosIG</a>.</p>
+<p>Implemented in <a class="el" href="classEosSG.html#a0a253490f21ab6cce0a28aec88877a8b">EosSG</a>, <a class="el" href="classEosNASG.html#a1d36c6adeb81f19af0a0d2c995d95e5a">EosNASG</a>, and <a class="el" href="classEosIG.html#a568effaeba3279592827923e72e10e35">EosIG</a>.</p>
 
 </div>
 </div>
-<a class="anchor" id="a74ad8205cc70bf0c251d03dba7350baf"></a>
+<a class="anchor" id="a5944a447fdf5830ae9848a462b51ef2d"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="mlabels">
@@ -1445,7 +1478,13 @@ Protected Attributes</h2></td></tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">double &amp;&#160;</td>
-          <td class="paramname"><em>oneOverGamMinusOne</em>&#160;</td>
+          <td class="paramname"><em>oneOverGamMinusOne</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double &amp;&#160;</td>
+          <td class="paramname"><em>covolume</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -1462,7 +1501,7 @@ Protected Attributes</h2></td></tr>
 
 <p>See derived classes. </p>
 
-<p>Implemented in <a class="el" href="classEosSG.html#a50d14e879c0672543a6024610b6b6009">EosSG</a>, and <a class="el" href="classEosIG.html#aadb434407ff4734db906b3f4b7ee1daa">EosIG</a>.</p>
+<p>Implemented in <a class="el" href="classEosSG.html#a7cb18292d735eb2c95cee8bbcc016991">EosSG</a>, <a class="el" href="classEosNASG.html#a8774c5ed9ed6b744e9e3755f240c91f7">EosNASG</a>, and <a class="el" href="classEosIG.html#aeb1a5e732295f0aebe1e7d18725d00dd">EosIG</a>.</p>
 
 </div>
 </div>
@@ -1490,11 +1529,11 @@ Protected Attributes</h2></td></tr>
 
 <p>See derived classes. </p>
 
-<p>Reimplemented in <a class="el" href="classEosSG.html#a91493234fc17a253597170b7c2286e49">EosSG</a>, and <a class="el" href="classEosIG.html#a996b6fe82ef7e86017855fa3e24901fd">EosIG</a>.</p>
+<p>Reimplemented in <a class="el" href="classEosSG.html#a91493234fc17a253597170b7c2286e49">EosSG</a>, <a class="el" href="classEosNASG.html#a0b5ca0fef05ba1dec282004a7f1a23b5">EosNASG</a>, and <a class="el" href="classEosIG.html#a996b6fe82ef7e86017855fa3e24901fd">EosIG</a>.</p>
 
 </div>
 </div>
-<a class="anchor" id="aa27c8660d5f173a099e855f1b959df48"></a>
+<a class="anchor" id="aef45a8d61e5ac3f5abd8b9eeab0761da"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="mlabels">
@@ -1511,7 +1550,7 @@ Protected Attributes</h2></td></tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">const std::string &amp;&#160;</td>
-          <td class="paramname"><em>message</em> = <code>&quot;&quot;</code>&#160;</td>
+          <td class="paramname"><em>message</em> = <code>&quot;&#160;&quot;</code>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -1526,7 +1565,7 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Reimplemented in <a class="el" href="classEosSG.html#aac4e283d8a8cbe6d0cee1ca94ec63280">EosSG</a>, and <a class="el" href="classEosIG.html#a45f395f993b38e7bbaa425a95bfa6a94">EosIG</a>.</p>
+<p>Reimplemented in <a class="el" href="classEosSG.html#aac4e283d8a8cbe6d0cee1ca94ec63280">EosSG</a>, <a class="el" href="classEosNASG.html#a26a1312824fd4a43134960e8fac87ca0">EosNASG</a>, and <a class="el" href="classEosIG.html#a45f395f993b38e7bbaa425a95bfa6a94">EosIG</a>.</p>
 
 </div>
 </div>
@@ -1564,7 +1603,7 @@ Protected Attributes</h2></td></tr>
 
 <p>See derived classes. </p>
 
-<p>Reimplemented in <a class="el" href="classEosSG.html#a4e7b158075c7314523b8033c63d8b268">EosSG</a>, and <a class="el" href="classEosIG.html#a494d60fe98389830eb944a3f09133a65">EosIG</a>.</p>
+<p>Reimplemented in <a class="el" href="classEosSG.html#a4e7b158075c7314523b8033c63d8b268">EosSG</a>, <a class="el" href="classEosNASG.html#a770862f5a6e3cc864e170010fd79d11b">EosNASG</a>, and <a class="el" href="classEosIG.html#a494d60fe98389830eb944a3f09133a65">EosIG</a>.</p>
 
 </div>
 </div>
@@ -1667,7 +1706,7 @@ Protected Attributes</h2></td></tr>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="classEos.html">Eos</a></li>
-    <li class="footer">Generated on Wed Apr 29 2020 10:31:12 for ECOGEN by
+    <li class="footer">Generated on Mon May 11 2020 16:03:19 for ECOGEN by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.11 </li>
   </ul>

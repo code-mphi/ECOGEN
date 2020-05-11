@@ -130,8 +130,8 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a1ab20f8fa7659568613ee9607aa759e2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a61d0840daf98bea49e4dc471f235eeab"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classOutput.html#a61d0840daf98bea49e4dc471f235eeab">~Output</a> ()</td></tr>
 <tr class="separator:a61d0840daf98bea49e4dc471f235eeab"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad3c1e5dcd037eef3259f922ca3fe3ec9"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classOutput.html#ad3c1e5dcd037eef3259f922ca3fe3ec9">locateProbeInMesh</a> (<a class="el" href="classCell.html">Cell</a> **cells, const int &amp;nbCells, bool localSeeking=false)</td></tr>
-<tr class="separator:ad3c1e5dcd037eef3259f922ca3fe3ec9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9c6e6f6187a89dbd86c6154e1c4bc4cb"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classOutput.html#a9c6e6f6187a89dbd86c6154e1c4bc4cb">locateProbeInMesh</a> (const <a class="el" href="Tools_8h.html#a6a3bb3ec3ebf7c9a9f95790b2336019c">TypeMeshContainer</a>&lt; <a class="el" href="classCell.html">Cell</a> * &gt; &amp;cells, const int &amp;nbCells, bool localSeeking=false)</td></tr>
+<tr class="separator:a9c6e6f6187a89dbd86c6154e1c4bc4cb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8dacc4a76c10fb7e9bec2ab2fcc83ec5"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classCell.html">Cell</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classOutput.html#a8dacc4a76c10fb7e9bec2ab2fcc83ec5">locateProbeInAMRSubMesh</a> (std::vector&lt; <a class="el" href="classCell.html">Cell</a> * &gt; *cells, const int &amp;nbCells)</td></tr>
 <tr class="separator:a8dacc4a76c10fb7e9bec2ab2fcc83ec5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab93a976bbb7da40ba600876d9674741a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classOutput.html#ab93a976bbb7da40ba600876d9674741a">prepareOutput</a> (const <a class="el" href="classCell.html">Cell</a> &amp;cell)</td></tr>
@@ -140,18 +140,22 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a5802016613529734e44976951094920d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae71d2c989ce3fc152b51eebee329e608"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classOutput.html#ae71d2c989ce3fc152b51eebee329e608">ecritSolution</a> (<a class="el" href="classMesh.html">Mesh</a> *mesh, std::vector&lt; <a class="el" href="classCell.html">Cell</a> * &gt; *cellsLvl)</td></tr>
 <tr class="separator:ae71d2c989ce3fc152b51eebee329e608"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4ee6870b924a5023198aba5589ed6692"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classOutput.html#a4ee6870b924a5023198aba5589ed6692">printTree</a> (<a class="el" href="classMesh.html">Mesh</a> *mesh, std::vector&lt; <a class="el" href="classCell.html">Cell</a> * &gt; *cellsLvl)</td></tr>
-<tr class="separator:a4ee6870b924a5023198aba5589ed6692"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aeffa3714a2a75eb7dd994ba5ae7eecb6"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classOutput.html#aeffa3714a2a75eb7dd994ba5ae7eecb6">printTree</a> (<a class="el" href="classMesh.html">Mesh</a> *mesh, std::vector&lt; <a class="el" href="classCell.html">Cell</a> * &gt; *cellsLvl, int m_restartAMRsaveFreq)</td></tr>
+<tr class="separator:aeffa3714a2a75eb7dd994ba5ae7eecb6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2d963da439bf46e41f001ecd377668ad"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classOutput.html#a2d963da439bf46e41f001ecd377668ad">ecritInfos</a> ()</td></tr>
 <tr class="separator:a2d963da439bf46e41f001ecd377668ad"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a55f7e0f6fc4aef28f2c927bcd212b3c9"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classOutput.html#a55f7e0f6fc4aef28f2c927bcd212b3c9">saveInfosMailles</a> () const </td></tr>
+<tr class="separator:a55f7e0f6fc4aef28f2c927bcd212b3c9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab7b15cddd0099bd762f1e062be3b2657"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classOutput.html#ab7b15cddd0099bd762f1e062be3b2657">prepareSortieSpecifique</a> ()</td></tr>
 <tr class="separator:ab7b15cddd0099bd762f1e062be3b2657"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ada5452d639177cf52f00da98c6698e62"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classOutput.html#ada5452d639177cf52f00da98c6698e62">readInfos</a> ()</td></tr>
 <tr class="separator:ada5452d639177cf52f00da98c6698e62"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2f7a7271422739485b2dae03b3317b64"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classOutput.html#a2f7a7271422739485b2dae03b3317b64">readResults</a> (<a class="el" href="classMesh.html">Mesh</a> *mesh, std::vector&lt; <a class="el" href="classCell.html">Cell</a> * &gt; *cellsLvl, const int fileNumber)</td></tr>
-<tr class="separator:a2f7a7271422739485b2dae03b3317b64"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aed990e5af6c5ce8a55ed2b7a3e068661"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classOutput.html#aed990e5af6c5ce8a55ed2b7a3e068661">readTree</a> (<a class="el" href="classMesh.html">Mesh</a> *mesh, std::vector&lt; <a class="el" href="classCell.html">Cell</a> * &gt; *cellsLvl, std::vector&lt; <a class="el" href="classCellInterface.html">CellInterface</a> * &gt; *boundariesLvl, const int fileNumber, const std::vector&lt; <a class="el" href="classAddPhys.html">AddPhys</a> * &gt; &amp;addPhys, <a class="el" href="classModel.html">Model</a> *model, int &amp;nbCellsTotalAMR)</td></tr>
-<tr class="separator:aed990e5af6c5ce8a55ed2b7a3e068661"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a072ac396f97ad261f17dcdc4b08808ba"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classOutput.html#a072ac396f97ad261f17dcdc4b08808ba">readResults</a> (<a class="el" href="classMesh.html">Mesh</a> *mesh, std::vector&lt; <a class="el" href="classCell.html">Cell</a> * &gt; *cellsLvl)</td></tr>
+<tr class="separator:a072ac396f97ad261f17dcdc4b08808ba"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a715271f7600e13e3c90076b732b8dc17"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classOutput.html#a715271f7600e13e3c90076b732b8dc17">readDomainDecompostion</a> (<a class="el" href="classMesh.html">Mesh</a> *mesh, int restartSimulation)</td></tr>
+<tr class="separator:a715271f7600e13e3c90076b732b8dc17"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aee4ebb02eb5666d3dd05b8451fe0e4b1"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classOutput.html#aee4ebb02eb5666d3dd05b8451fe0e4b1">readTree</a> (<a class="el" href="classMesh.html">Mesh</a> *mesh, <a class="el" href="Tools_8h.html#a6a3bb3ec3ebf7c9a9f95790b2336019c">TypeMeshContainer</a>&lt; <a class="el" href="classCell.html">Cell</a> * &gt; *cellsLvl, <a class="el" href="Tools_8h.html#a6a3bb3ec3ebf7c9a9f95790b2336019c">TypeMeshContainer</a>&lt; <a class="el" href="classCell.html">Cell</a> * &gt; *cellsLvlGhost, <a class="el" href="Tools_8h.html#a6a3bb3ec3ebf7c9a9f95790b2336019c">TypeMeshContainer</a>&lt; <a class="el" href="classCellInterface.html">CellInterface</a> * &gt; *cellInterfacesLvl, const std::vector&lt; <a class="el" href="classAddPhys.html">AddPhys</a> * &gt; &amp;addPhys, <a class="el" href="classModel.html">Model</a> *model, <a class="el" href="classEos.html">Eos</a> **eos, int &amp;nbCellsTotalAMR)</td></tr>
+<tr class="separator:aee4ebb02eb5666d3dd05b8451fe0e4b1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a40aae1058f2ea868468955317e74bb81"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classOutput.html#a40aae1058f2ea868468955317e74bb81">getNumSortie</a> () const </td></tr>
 <tr class="separator:a40aae1058f2ea868468955317e74bb81"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a296ad30c3a9921ec2be5b08e805647ee"><td class="memItemLeft" align="right" valign="top">virtual double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classOutput.html#a296ad30c3a9921ec2be5b08e805647ee">getNextTime</a> ()</td></tr>
@@ -165,10 +169,8 @@ Protected Member Functions</h2></td></tr>
 <tr class="separator:a8443ee8c79dc12df3f752871f192cb90"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4dd1ea14d59e6c98d60ead3cf7f9e99a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classOutput.html#a4dd1ea14d59e6c98d60ead3cf7f9e99a">saveInfos</a> () const </td></tr>
 <tr class="separator:a4dd1ea14d59e6c98d60ead3cf7f9e99a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a55f7e0f6fc4aef28f2c927bcd212b3c9"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classOutput.html#a55f7e0f6fc4aef28f2c927bcd212b3c9">saveInfosMailles</a> () const </td></tr>
-<tr class="separator:a55f7e0f6fc4aef28f2c927bcd212b3c9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0558114dc824ba0a2c61eb12ada47b56"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classOutput.html#a0558114dc824ba0a2c61eb12ada47b56">creationNameFichier</a> (const char *name, int lvl=-1, int proc=-1, int numFichier=-1) const </td></tr>
-<tr class="separator:a0558114dc824ba0a2c61eb12ada47b56"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a419ac185394f9c93b6184c01ee0033db"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classOutput.html#a419ac185394f9c93b6184c01ee0033db">creationNameFichier</a> (const char *name, int lvl=-1, int proc=-1, int numFichier=-1) const </td></tr>
+<tr class="separator:a419ac185394f9c93b6184c01ee0033db"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab6ea2ac5b86eb9c04170a589841bac3a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classOutput.html#ab6ea2ac5b86eb9c04170a589841bac3a">ecritJeuDonnees</a> (std::vector&lt; double &gt; jeuDonnees, std::ofstream &amp;fileStream, <a class="el" href="Tools_8h.html#a154edc1b1ca466c17e8dd4556b664412">TypeData</a> typeData)</td></tr>
 <tr class="separator:ab6ea2ac5b86eb9c04170a589841bac3a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aeb1ae27581e4279c62d3b3e934176c45"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classOutput.html#aeb1ae27581e4279c62d3b3e934176c45">getJeuDonnees</a> (std::istringstream &amp;data, std::vector&lt; double &gt; &amp;jeuDonnees, <a class="el" href="Tools_8h.html#a154edc1b1ca466c17e8dd4556b664412">TypeData</a> typeData)</td></tr>
@@ -185,39 +187,54 @@ Protected Attributes</h2></td></tr>
 <tr class="memitem:ad2884c73d5e6fc69ec3a396977264184"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classOutput.html#ad2884c73d5e6fc69ec3a396977264184">m_simulationName</a></td></tr>
 <tr class="memdesc:ad2884c73d5e6fc69ec3a396977264184"><td class="mdescLeft">&#160;</td><td class="mdescRight">Name du cas test (defini dans "main.xml")  <a href="#ad2884c73d5e6fc69ec3a396977264184">More...</a><br /></td></tr>
 <tr class="separator:ad2884c73d5e6fc69ec3a396977264184"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a413f400cfe14c0fdd9228e353cade3e8"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classOutput.html#a413f400cfe14c0fdd9228e353cade3e8">m_infosCalcul</a></td></tr>
-<tr class="memdesc:a413f400cfe14c0fdd9228e353cade3e8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Name file pour saver les infos utiles du compute.  <a href="#a413f400cfe14c0fdd9228e353cade3e8">More...</a><br /></td></tr>
-<tr class="separator:a413f400cfe14c0fdd9228e353cade3e8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9618a11c6832ea801c66bc087cd51703"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classOutput.html#a9618a11c6832ea801c66bc087cd51703">m_infoMailles</a></td></tr>
-<tr class="memdesc:a9618a11c6832ea801c66bc087cd51703"><td class="mdescLeft">&#160;</td><td class="mdescRight">Name fichiers pour stocker les infos de mesh.  <a href="#a9618a11c6832ea801c66bc087cd51703">More...</a><br /></td></tr>
-<tr class="separator:a9618a11c6832ea801c66bc087cd51703"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2d8e628866b054dcc2317fc7315334d1"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classOutput.html#a2d8e628866b054dcc2317fc7315334d1">m_infoCalcul</a></td></tr>
+<tr class="memdesc:a2d8e628866b054dcc2317fc7315334d1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Name file pour saver les infos utiles du compute.  <a href="#a2d8e628866b054dcc2317fc7315334d1">More...</a><br /></td></tr>
+<tr class="separator:a2d8e628866b054dcc2317fc7315334d1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5b035a965341f1b521f89fd03691df2f"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classOutput.html#a5b035a965341f1b521f89fd03691df2f">m_infoMesh</a></td></tr>
+<tr class="memdesc:a5b035a965341f1b521f89fd03691df2f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Name fichiers pour stocker les infos de mesh.  <a href="#a5b035a965341f1b521f89fd03691df2f">More...</a><br /></td></tr>
+<tr class="separator:a5b035a965341f1b521f89fd03691df2f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4938be9f265f0c5b0a5c86abb06ddb0e"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classOutput.html#a4938be9f265f0c5b0a5c86abb06ddb0e">m_treeStructure</a></td></tr>
 <tr class="memdesc:a4938be9f265f0c5b0a5c86abb06ddb0e"><td class="mdescLeft">&#160;</td><td class="mdescRight">File name for tree structure backup.  <a href="#a4938be9f265f0c5b0a5c86abb06ddb0e">More...</a><br /></td></tr>
 <tr class="separator:a4938be9f265f0c5b0a5c86abb06ddb0e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac770535492d38d01f9183940426a0c35"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classOutput.html#ac770535492d38d01f9183940426a0c35">m_domainDecomposition</a></td></tr>
+<tr class="memdesc:ac770535492d38d01f9183940426a0c35"><td class="mdescLeft">&#160;</td><td class="mdescRight">File name for domain decomposition backup.  <a href="#ac770535492d38d01f9183940426a0c35">More...</a><br /></td></tr>
+<tr class="separator:ac770535492d38d01f9183940426a0c35"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2bee9cc403cdc201c07199fae620dba7"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classOutput.html#a2bee9cc403cdc201c07199fae620dba7">m_fileNameResults</a></td></tr>
 <tr class="memdesc:a2bee9cc403cdc201c07199fae620dba7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Name du file de sortie resultat.  <a href="#a2bee9cc403cdc201c07199fae620dba7">More...</a><br /></td></tr>
 <tr class="separator:a2bee9cc403cdc201c07199fae620dba7"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2d38515d35e1079308a337c8e713d050"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classOutput.html#a2d38515d35e1079308a337c8e713d050">m_fileNameCollection</a></td></tr>
-<tr class="memdesc:a2d38515d35e1079308a337c8e713d050"><td class="mdescLeft">&#160;</td><td class="mdescRight">Name de la collection regroupant les fichiers resultats.  <a href="#a2d38515d35e1079308a337c8e713d050">More...</a><br /></td></tr>
-<tr class="separator:a2d38515d35e1079308a337c8e713d050"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aef16d7fda6276ddc65cd0c504a6dd107"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classOutput.html#aef16d7fda6276ddc65cd0c504a6dd107">m_dossierSortie</a></td></tr>
-<tr class="memdesc:aef16d7fda6276ddc65cd0c504a6dd107"><td class="mdescLeft">&#160;</td><td class="mdescRight">Dossier pour enregistrement des resultats.  <a href="#aef16d7fda6276ddc65cd0c504a6dd107">More...</a><br /></td></tr>
-<tr class="separator:aef16d7fda6276ddc65cd0c504a6dd107"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5cbf6dc123c2759be89f74910b6a5194"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classOutput.html#a5cbf6dc123c2759be89f74910b6a5194">m_dossierSauvegardesInput</a></td></tr>
-<tr class="memdesc:a5cbf6dc123c2759be89f74910b6a5194"><td class="mdescLeft">&#160;</td><td class="mdescRight">Dossier pour copier les fichiers entrees.  <a href="#a5cbf6dc123c2759be89f74910b6a5194">More...</a><br /></td></tr>
-<tr class="separator:a5cbf6dc123c2759be89f74910b6a5194"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a10a5129e58cc5325abbd3649b197b4ef"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classOutput.html#a10a5129e58cc5325abbd3649b197b4ef">m_dossierSauvegardesInfosMailles</a></td></tr>
-<tr class="memdesc:a10a5129e58cc5325abbd3649b197b4ef"><td class="mdescLeft">&#160;</td><td class="mdescRight">Dossier pour stocker les infos de mesh.  <a href="#a10a5129e58cc5325abbd3649b197b4ef">More...</a><br /></td></tr>
-<tr class="separator:a10a5129e58cc5325abbd3649b197b4ef"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4b7600304aff3d233b9019d35b85d7c6"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classOutput.html#a4b7600304aff3d233b9019d35b85d7c6">m_dossierCuts</a></td></tr>
-<tr class="memdesc:a4b7600304aff3d233b9019d35b85d7c6"><td class="mdescLeft">&#160;</td><td class="mdescRight">cuts results folder location  <a href="#a4b7600304aff3d233b9019d35b85d7c6">More...</a><br /></td></tr>
-<tr class="separator:a4b7600304aff3d233b9019d35b85d7c6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5aa396ecc674167398b0054f76b0ad51"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classOutput.html#a5aa396ecc674167398b0054f76b0ad51">m_fileNameCollectionParaview</a></td></tr>
+<tr class="memdesc:a5aa396ecc674167398b0054f76b0ad51"><td class="mdescLeft">&#160;</td><td class="mdescRight">Name de la collection regroupant les fichiers resultats (for Paraview)  <a href="#a5aa396ecc674167398b0054f76b0ad51">More...</a><br /></td></tr>
+<tr class="separator:a5aa396ecc674167398b0054f76b0ad51"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a98a8069e6afea4360c127595d913e698"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classOutput.html#a98a8069e6afea4360c127595d913e698">m_fileNameCollectionVisIt</a></td></tr>
+<tr class="memdesc:a98a8069e6afea4360c127595d913e698"><td class="mdescLeft">&#160;</td><td class="mdescRight">Name de la collection regroupant les fichiers resultats (for VisIt)  <a href="#a98a8069e6afea4360c127595d913e698">More...</a><br /></td></tr>
+<tr class="separator:a98a8069e6afea4360c127595d913e698"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0ba8f9c2e560906f10635f1d31ab5d50"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classOutput.html#a0ba8f9c2e560906f10635f1d31ab5d50">m_folderOutput</a></td></tr>
+<tr class="memdesc:a0ba8f9c2e560906f10635f1d31ab5d50"><td class="mdescLeft">&#160;</td><td class="mdescRight">Dossier pour enregistrement des resultats.  <a href="#a0ba8f9c2e560906f10635f1d31ab5d50">More...</a><br /></td></tr>
+<tr class="separator:a0ba8f9c2e560906f10635f1d31ab5d50"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad49cc2c3530f5b3f53e999614db81dd2"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classOutput.html#ad49cc2c3530f5b3f53e999614db81dd2">m_folderSavesInput</a></td></tr>
+<tr class="memdesc:ad49cc2c3530f5b3f53e999614db81dd2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Dossier pour copier les fichiers entrees.  <a href="#ad49cc2c3530f5b3f53e999614db81dd2">More...</a><br /></td></tr>
+<tr class="separator:ad49cc2c3530f5b3f53e999614db81dd2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa815981607c489a9263020e5960193d1"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classOutput.html#aa815981607c489a9263020e5960193d1">m_folderDatasets</a></td></tr>
+<tr class="memdesc:aa815981607c489a9263020e5960193d1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Folder to save the datasets.  <a href="#aa815981607c489a9263020e5960193d1">More...</a><br /></td></tr>
+<tr class="separator:aa815981607c489a9263020e5960193d1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae4dd1496c8534873f4a7e5d57d51b553"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classOutput.html#ae4dd1496c8534873f4a7e5d57d51b553">m_folderInfoMesh</a></td></tr>
+<tr class="memdesc:ae4dd1496c8534873f4a7e5d57d51b553"><td class="mdescLeft">&#160;</td><td class="mdescRight">Dossier pour stocker les infos de mesh.  <a href="#ae4dd1496c8534873f4a7e5d57d51b553">More...</a><br /></td></tr>
+<tr class="separator:ae4dd1496c8534873f4a7e5d57d51b553"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa4e6aa203383cdffe377e248f7a18794"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classOutput.html#aa4e6aa203383cdffe377e248f7a18794">m_folderCuts</a></td></tr>
+<tr class="memdesc:aa4e6aa203383cdffe377e248f7a18794"><td class="mdescLeft">&#160;</td><td class="mdescRight">cuts results folder location  <a href="#aa4e6aa203383cdffe377e248f7a18794">More...</a><br /></td></tr>
+<tr class="separator:aa4e6aa203383cdffe377e248f7a18794"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad691f6b4d3fa34e6ac2d3dfbc8fee436"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classOutput.html#ad691f6b4d3fa34e6ac2d3dfbc8fee436">m_folderProbes</a></td></tr>
 <tr class="memdesc:ad691f6b4d3fa34e6ac2d3dfbc8fee436"><td class="mdescLeft">&#160;</td><td class="mdescRight">probes results folder location  <a href="#ad691f6b4d3fa34e6ac2d3dfbc8fee436">More...</a><br /></td></tr>
 <tr class="separator:ad691f6b4d3fa34e6ac2d3dfbc8fee436"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a77c054833e0df7cf7136dec9419aa486"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classOutput.html#a77c054833e0df7cf7136dec9419aa486">m_fichierCollection</a></td></tr>
-<tr class="memdesc:a77c054833e0df7cf7136dec9419aa486"><td class="mdescLeft">&#160;</td><td class="mdescRight">Chemin du file collection regroupant les fichiers resultats.  <a href="#a77c054833e0df7cf7136dec9419aa486">More...</a><br /></td></tr>
-<tr class="separator:a77c054833e0df7cf7136dec9419aa486"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9be1792fa8b1f01b9546707498a02471"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classOutput.html#a9be1792fa8b1f01b9546707498a02471">m_folderRecorderGlobalQuantity</a></td></tr>
+<tr class="memdesc:a9be1792fa8b1f01b9546707498a02471"><td class="mdescLeft">&#160;</td><td class="mdescRight">Folder to save recorded global quantity such as mass, energy.  <a href="#a9be1792fa8b1f01b9546707498a02471">More...</a><br /></td></tr>
+<tr class="separator:a9be1792fa8b1f01b9546707498a02471"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8c9122c98fcf791183bb0a61faf3218d"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classOutput.html#a8c9122c98fcf791183bb0a61faf3218d">m_fichierCollectionParaview</a></td></tr>
+<tr class="memdesc:a8c9122c98fcf791183bb0a61faf3218d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Chemin du file collection regroupant les fichiers resultats (for Paraview)  <a href="#a8c9122c98fcf791183bb0a61faf3218d">More...</a><br /></td></tr>
+<tr class="separator:a8c9122c98fcf791183bb0a61faf3218d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abf5a5ee4ca7fc221f65cbea9c6cff101"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classOutput.html#abf5a5ee4ca7fc221f65cbea9c6cff101">m_fichierCollectionVisIt</a></td></tr>
+<tr class="memdesc:abf5a5ee4ca7fc221f65cbea9c6cff101"><td class="mdescLeft">&#160;</td><td class="mdescRight">Chemin du file collection regroupant les fichiers resultats (for VisIt)  <a href="#abf5a5ee4ca7fc221f65cbea9c6cff101">More...</a><br /></td></tr>
+<tr class="separator:abf5a5ee4ca7fc221f65cbea9c6cff101"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a04c20cb53fcc874010d60b870b2e8303"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classOutput.html#a04c20cb53fcc874010d60b870b2e8303">m_ecritBinaire</a></td></tr>
 <tr class="memdesc:a04c20cb53fcc874010d60b870b2e8303"><td class="mdescLeft">&#160;</td><td class="mdescRight">Choix print binary/ASCII.  <a href="#a04c20cb53fcc874010d60b870b2e8303">More...</a><br /></td></tr>
 <tr class="separator:a04c20cb53fcc874010d60b870b2e8303"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -232,7 +249,7 @@ Protected Attributes</h2></td></tr>
 <tr class="memitem:a5b2933da3657bc03aa28f8e7bbe221d8"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classOutput.html#a5b2933da3657bc03aa28f8e7bbe221d8">m_endianMode</a></td></tr>
 <tr class="separator:a5b2933da3657bc03aa28f8e7bbe221d8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a453d065185af6d5502a3404c24185ff2"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classCell.html">Cell</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classOutput.html#a453d065185af6d5502a3404c24185ff2">m_cellRef</a></td></tr>
-<tr class="memdesc:a453d065185af6d5502a3404c24185ff2"><td class="mdescLeft">&#160;</td><td class="mdescRight">cell de reference pour recupérer les names des variables  <a href="#a453d065185af6d5502a3404c24185ff2">More...</a><br /></td></tr>
+<tr class="memdesc:a453d065185af6d5502a3404c24185ff2"><td class="mdescLeft">&#160;</td><td class="mdescRight">cell de reference pour recupï¿½rer les names des variables  <a href="#a453d065185af6d5502a3404c24185ff2">More...</a><br /></td></tr>
 <tr class="separator:a453d065185af6d5502a3404c24185ff2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
@@ -342,7 +359,7 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="a0558114dc824ba0a2c61eb12ada47b56"></a>
+<a class="anchor" id="a419ac185394f9c93b6184c01ee0033db"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="mlabels">
@@ -350,7 +367,7 @@ Protected Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">string Output::creationNameFichier </td>
+          <td class="memname">std::string Output::creationNameFichier </td>
           <td>(</td>
           <td class="paramtype">const char *&#160;</td>
           <td class="paramname"><em>name</em>, </td>
@@ -485,7 +502,7 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Reimplemented in <a class="el" href="classOutputProbeGNU.html#ab4184a3e1d577223aa220e242d1933fe">OutputProbeGNU</a>, <a class="el" href="classOutputCutGNU.html#acffe3149e91dc923f0362907956e1188">OutputCutGNU</a>, <a class="el" href="classOutputXML.html#a474d108c3080695d11dfaaa78e5edb29">OutputXML</a>, and <a class="el" href="classOutputGNU.html#a11387c6e97cca80104b364c643adb457">OutputGNU</a>.</p>
+<p>Reimplemented in <a class="el" href="classOutputProbeGNU.html#ab4184a3e1d577223aa220e242d1933fe">OutputProbeGNU</a>, <a class="el" href="classOutputCutGNU.html#acffe3149e91dc923f0362907956e1188">OutputCutGNU</a>, <a class="el" href="classOutputGlobalGNU.html#ad01366fe03a13117e543667070b91bfe">OutputGlobalGNU</a>, <a class="el" href="classOutputXML.html#a474d108c3080695d11dfaaa78e5edb29">OutputXML</a>, and <a class="el" href="classOutputGNU.html#a11387c6e97cca80104b364c643adb457">OutputGNU</a>.</p>
 
 </div>
 </div>
@@ -613,7 +630,7 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="ad3c1e5dcd037eef3259f922ca3fe3ec9"></a>
+<a class="anchor" id="a9c6e6f6187a89dbd86c6154e1c4bc4cb"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="mlabels">
@@ -623,7 +640,7 @@ Protected Attributes</h2></td></tr>
         <tr>
           <td class="memname">virtual void Output::locateProbeInMesh </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="classCell.html">Cell</a> **&#160;</td>
+          <td class="paramtype">const <a class="el" href="Tools_8h.html#a6a3bb3ec3ebf7c9a9f95790b2336019c">TypeMeshContainer</a>&lt; <a class="el" href="classCell.html">Cell</a> * &gt; &amp;&#160;</td>
           <td class="paramname"><em>cells</em>, </td>
         </tr>
         <tr>
@@ -651,7 +668,7 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Reimplemented in <a class="el" href="classOutputProbeGNU.html#a810803cb0f3cd21fc9236cbfc1a55666">OutputProbeGNU</a>.</p>
+<p>Reimplemented in <a class="el" href="classOutputProbeGNU.html#a35050a7ace168b6c82825136d76f28da">OutputProbeGNU</a>.</p>
 
 </div>
 </div>
@@ -742,11 +759,11 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Reimplemented in <a class="el" href="classOutputProbeGNU.html#a34c0842b6f10c487ad997c3d6d7d4ba1">OutputProbeGNU</a>, <a class="el" href="classOutputXML.html#a475afccf47c0faea15f06c2977c9cd7a">OutputXML</a>, and <a class="el" href="classOutputGNU.html#a71dca1a19876116d3e2b579c6dd6e971">OutputGNU</a>.</p>
+<p>Reimplemented in <a class="el" href="classOutputProbeGNU.html#a34c0842b6f10c487ad997c3d6d7d4ba1">OutputProbeGNU</a>, <a class="el" href="classOutputGlobalGNU.html#af85d9d4472c5af45475a02fe44ff3f6a">OutputGlobalGNU</a>, <a class="el" href="classOutputXML.html#a475afccf47c0faea15f06c2977c9cd7a">OutputXML</a>, and <a class="el" href="classOutputGNU.html#a71dca1a19876116d3e2b579c6dd6e971">OutputGNU</a>.</p>
 
 </div>
 </div>
-<a class="anchor" id="a4ee6870b924a5023198aba5589ed6692"></a>
+<a class="anchor" id="aeffa3714a2a75eb7dd994ba5ae7eecb6"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
@@ -760,7 +777,39 @@ Protected Attributes</h2></td></tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">std::vector&lt; <a class="el" href="classCell.html">Cell</a> * &gt; *&#160;</td>
-          <td class="paramname"><em>cellsLvl</em>&#160;</td>
+          <td class="paramname"><em>cellsLvl</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>m_restartAMRsaveFreq</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a715271f7600e13e3c90076b732b8dc17"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Output::readDomainDecompostion </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classMesh.html">Mesh</a> *&#160;</td>
+          <td class="paramname"><em>mesh</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>restartSimulation</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -787,7 +836,7 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="a2f7a7271422739485b2dae03b3317b64"></a>
+<a class="anchor" id="a072ac396f97ad261f17dcdc4b08808ba"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="mlabels">
@@ -804,13 +853,7 @@ Protected Attributes</h2></td></tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">std::vector&lt; <a class="el" href="classCell.html">Cell</a> * &gt; *&#160;</td>
-          <td class="paramname"><em>cellsLvl</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const int&#160;</td>
-          <td class="paramname"><em>fileNumber</em>&#160;</td>
+          <td class="paramname"><em>cellsLvl</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -825,11 +868,11 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Reimplemented in <a class="el" href="classOutputXML.html#a4e81d1d994001d01eff3fab1c26b86d9">OutputXML</a>.</p>
+<p>Reimplemented in <a class="el" href="classOutputXML.html#a9bdde138abf6dc43e884ec6eabc0f1cc">OutputXML</a>.</p>
 
 </div>
 </div>
-<a class="anchor" id="aed990e5af6c5ce8a55ed2b7a3e068661"></a>
+<a class="anchor" id="aee4ebb02eb5666d3dd05b8451fe0e4b1"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
@@ -842,20 +885,20 @@ Protected Attributes</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">std::vector&lt; <a class="el" href="classCell.html">Cell</a> * &gt; *&#160;</td>
+          <td class="paramtype"><a class="el" href="Tools_8h.html#a6a3bb3ec3ebf7c9a9f95790b2336019c">TypeMeshContainer</a>&lt; <a class="el" href="classCell.html">Cell</a> * &gt; *&#160;</td>
           <td class="paramname"><em>cellsLvl</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">std::vector&lt; <a class="el" href="classCellInterface.html">CellInterface</a> * &gt; *&#160;</td>
-          <td class="paramname"><em>boundariesLvl</em>, </td>
+          <td class="paramtype"><a class="el" href="Tools_8h.html#a6a3bb3ec3ebf7c9a9f95790b2336019c">TypeMeshContainer</a>&lt; <a class="el" href="classCell.html">Cell</a> * &gt; *&#160;</td>
+          <td class="paramname"><em>cellsLvlGhost</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">const int&#160;</td>
-          <td class="paramname"><em>fileNumber</em>, </td>
+          <td class="paramtype"><a class="el" href="Tools_8h.html#a6a3bb3ec3ebf7c9a9f95790b2336019c">TypeMeshContainer</a>&lt; <a class="el" href="classCellInterface.html">CellInterface</a> * &gt; *&#160;</td>
+          <td class="paramname"><em>cellInterfacesLvl</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -868,6 +911,12 @@ Protected Attributes</h2></td></tr>
           <td></td>
           <td class="paramtype"><a class="el" href="classModel.html">Model</a> *&#160;</td>
           <td class="paramname"><em>model</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classEos.html">Eos</a> **&#160;</td>
+          <td class="paramname"><em>eos</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -911,9 +960,6 @@ Protected Attributes</h2></td></tr>
 <a class="anchor" id="a55f7e0f6fc4aef28f2c927bcd212b3c9"></a>
 <div class="memitem">
 <div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
       <table class="memname">
         <tr>
           <td class="memname">void Output::saveInfosMailles </td>
@@ -922,11 +968,6 @@ Protected Attributes</h2></td></tr>
           <td> const</td>
         </tr>
       </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
-  </tr>
-</table>
 </div><div class="memdoc">
 
 </div>
@@ -950,7 +991,29 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>cell de reference pour recupérer les names des variables </p>
+<p>cell de reference pour recupï¿½rer les names des variables </p>
+
+</div>
+</div>
+<a class="anchor" id="ac770535492d38d01f9183940426a0c35"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::string Output::m_domainDecomposition</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>File name for domain decomposition backup. </p>
 
 </div>
 </div>
@@ -973,94 +1036,6 @@ Protected Attributes</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Choix print donnees dans des fichiers separes. </p>
-
-</div>
-</div>
-<a class="anchor" id="a4b7600304aff3d233b9019d35b85d7c6"></a>
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">std::string Output::m_dossierCuts</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>cuts results folder location </p>
-
-</div>
-</div>
-<a class="anchor" id="a10a5129e58cc5325abbd3649b197b4ef"></a>
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">std::string Output::m_dossierSauvegardesInfosMailles</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Dossier pour stocker les infos de mesh. </p>
-
-</div>
-</div>
-<a class="anchor" id="a5cbf6dc123c2759be89f74910b6a5194"></a>
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">std::string Output::m_dossierSauvegardesInput</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Dossier pour copier les fichiers entrees. </p>
-
-</div>
-</div>
-<a class="anchor" id="aef16d7fda6276ddc65cd0c504a6dd107"></a>
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">std::string Output::m_dossierSortie</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Dossier pour enregistrement des resultats. </p>
 
 </div>
 </div>
@@ -1106,7 +1081,7 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="a77c054833e0df7cf7136dec9419aa486"></a>
+<a class="anchor" id="a8c9122c98fcf791183bb0a61faf3218d"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="mlabels">
@@ -1114,7 +1089,7 @@ Protected Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">std::string Output::m_fichierCollection</td>
+          <td class="memname">std::string Output::m_fichierCollectionParaview</td>
         </tr>
       </table>
   </td>
@@ -1124,11 +1099,11 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Chemin du file collection regroupant les fichiers resultats. </p>
+<p>Chemin du file collection regroupant les fichiers resultats (for Paraview) </p>
 
 </div>
 </div>
-<a class="anchor" id="a2d38515d35e1079308a337c8e713d050"></a>
+<a class="anchor" id="abf5a5ee4ca7fc221f65cbea9c6cff101"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="mlabels">
@@ -1136,7 +1111,7 @@ Protected Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">std::string Output::m_fileNameCollection</td>
+          <td class="memname">std::string Output::m_fichierCollectionVisIt</td>
         </tr>
       </table>
   </td>
@@ -1146,7 +1121,51 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Name de la collection regroupant les fichiers resultats. </p>
+<p>Chemin du file collection regroupant les fichiers resultats (for VisIt) </p>
+
+</div>
+</div>
+<a class="anchor" id="a5aa396ecc674167398b0054f76b0ad51"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::string Output::m_fileNameCollectionParaview</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Name de la collection regroupant les fichiers resultats (for Paraview) </p>
+
+</div>
+</div>
+<a class="anchor" id="a98a8069e6afea4360c127595d913e698"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::string Output::m_fileNameCollectionVisIt</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Name de la collection regroupant les fichiers resultats (for VisIt) </p>
 
 </div>
 </div>
@@ -1172,6 +1191,94 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
+<a class="anchor" id="aa4e6aa203383cdffe377e248f7a18794"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::string Output::m_folderCuts</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>cuts results folder location </p>
+
+</div>
+</div>
+<a class="anchor" id="aa815981607c489a9263020e5960193d1"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::string Output::m_folderDatasets</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Folder to save the datasets. </p>
+
+</div>
+</div>
+<a class="anchor" id="ae4dd1496c8534873f4a7e5d57d51b553"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::string Output::m_folderInfoMesh</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Dossier pour stocker les infos de mesh. </p>
+
+</div>
+</div>
+<a class="anchor" id="a0ba8f9c2e560906f10635f1d31ab5d50"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::string Output::m_folderOutput</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Dossier pour enregistrement des resultats. </p>
+
+</div>
+</div>
 <a class="anchor" id="ad691f6b4d3fa34e6ac2d3dfbc8fee436"></a>
 <div class="memitem">
 <div class="memproto">
@@ -1194,7 +1301,7 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="a9618a11c6832ea801c66bc087cd51703"></a>
+<a class="anchor" id="a9be1792fa8b1f01b9546707498a02471"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="mlabels">
@@ -1202,7 +1309,7 @@ Protected Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">std::string Output::m_infoMailles</td>
+          <td class="memname">std::string Output::m_folderRecorderGlobalQuantity</td>
         </tr>
       </table>
   </td>
@@ -1212,11 +1319,11 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Name fichiers pour stocker les infos de mesh. </p>
+<p>Folder to save recorded global quantity such as mass, energy. </p>
 
 </div>
 </div>
-<a class="anchor" id="a413f400cfe14c0fdd9228e353cade3e8"></a>
+<a class="anchor" id="ad49cc2c3530f5b3f53e999614db81dd2"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="mlabels">
@@ -1224,7 +1331,29 @@ Protected Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">std::string Output::m_infosCalcul</td>
+          <td class="memname">std::string Output::m_folderSavesInput</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Dossier pour copier les fichiers entrees. </p>
+
+</div>
+</div>
+<a class="anchor" id="a2d8e628866b054dcc2317fc7315334d1"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::string Output::m_infoCalcul</td>
         </tr>
       </table>
   </td>
@@ -1235,6 +1364,28 @@ Protected Attributes</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Name file pour saver les infos utiles du compute. </p>
+
+</div>
+</div>
+<a class="anchor" id="a5b035a965341f1b521f89fd03691df2f"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::string Output::m_infoMesh</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Name fichiers pour stocker les infos de mesh. </p>
 
 </div>
 </div>
@@ -1378,7 +1529,7 @@ Protected Attributes</h2></td></tr>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="classOutput.html">Output</a></li>
-    <li class="footer">Generated on Wed Apr 29 2020 10:31:12 for ECOGEN by
+    <li class="footer">Generated on Mon May 11 2020 16:03:19 for ECOGEN by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.11 </li>
   </ul>

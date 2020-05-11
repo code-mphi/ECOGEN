@@ -176,14 +176,16 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a6a30f60d2b0f22ce0d3fa46a60fe0d29"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classModKapila.html#a6a30f60d2b0f22ce0d3fa46a60fe0d29">reverseProjection</a> (const <a class="el" href="classCoord.html">Coord</a> normal, const <a class="el" href="classCoord.html">Coord</a> tangent, const <a class="el" href="classCoord.html">Coord</a> binormal) const </td></tr>
 <tr class="memdesc:a6a30f60d2b0f22ce0d3fa46a60fe0d29"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classFlux.html" title="Abstract class for conservative variables and fluxes. ">Flux</a> reverse projection in the absolute cartesian coordinate system.  <a href="#a6a30f60d2b0f22ce0d3fa46a60fe0d29">More...</a><br /></td></tr>
 <tr class="separator:a6a30f60d2b0f22ce0d3fa46a60fe0d29"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a537ddb2906c4d31a205202044dfa5d4f"><td class="memItemLeft" align="right" valign="top">virtual double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classModKapila.html#a537ddb2906c4d31a205202044dfa5d4f">getSM</a> ()</td></tr>
-<tr class="memdesc:a537ddb2906c4d31a205202044dfa5d4f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return the local fluid velocity.  <a href="#a537ddb2906c4d31a205202044dfa5d4f">More...</a><br /></td></tr>
-<tr class="separator:a537ddb2906c4d31a205202044dfa5d4f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9dd2c1b43073e6377913f654f03b8d92"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classCoord.html">Coord</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classModKapila.html#a9dd2c1b43073e6377913f654f03b8d92">getVelocity</a> (<a class="el" href="classCell.html">Cell</a> *cell) const </td></tr>
-<tr class="memdesc:a9dd2c1b43073e6377913f654f03b8d92"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return the fluid velocity of the corresponding cell.  <a href="#a9dd2c1b43073e6377913f654f03b8d92">More...</a><br /></td></tr>
-<tr class="separator:a9dd2c1b43073e6377913f654f03b8d92"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a23d3db81c4526de01ac6b7d499c49c19"><td class="memItemLeft" align="right" valign="top">virtual std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classModKapila.html#a23d3db81c4526de01ac6b7d499c49c19">whoAmI</a> () const </td></tr>
-<tr class="separator:a23d3db81c4526de01ac6b7d499c49c19"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a75edeff731869de4f8d8ada63c6e4790"><td class="memItemLeft" align="right" valign="top">virtual const double &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classModKapila.html#a75edeff731869de4f8d8ada63c6e4790">getSM</a> ()</td></tr>
+<tr class="memdesc:a75edeff731869de4f8d8ada63c6e4790"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return the local fluid velocity.  <a href="#a75edeff731869de4f8d8ada63c6e4790">More...</a><br /></td></tr>
+<tr class="separator:a75edeff731869de4f8d8ada63c6e4790"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac5323072d6b93ca61769306fa8701777"><td class="memItemLeft" align="right" valign="top">virtual const <a class="el" href="classCoord.html">Coord</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classModKapila.html#ac5323072d6b93ca61769306fa8701777">getVelocity</a> (const <a class="el" href="classCell.html">Cell</a> *cell) const </td></tr>
+<tr class="memdesc:ac5323072d6b93ca61769306fa8701777"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return the fluid velocity of the corresponding cell.  <a href="#ac5323072d6b93ca61769306fa8701777">More...</a><br /></td></tr>
+<tr class="separator:ac5323072d6b93ca61769306fa8701777"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a92a50ec219b85f4acff4d78cda58761a"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classCoord.html">Coord</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classModKapila.html#a92a50ec219b85f4acff4d78cda58761a">getVelocity</a> (<a class="el" href="classCell.html">Cell</a> *cell)</td></tr>
+<tr class="separator:a92a50ec219b85f4acff4d78cda58761a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac543b2a446a169d0732f3259ddd77a2b"><td class="memItemLeft" align="right" valign="top">virtual const std::string &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classModKapila.html#ac543b2a446a169d0732f3259ddd77a2b">whoAmI</a> () const </td></tr>
+<tr class="separator:ac543b2a446a169d0732f3259ddd77a2b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_methods_classModel"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classModel')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classModel.html">Model</a></td></tr>
 <tr class="memitem:ae3b375de5f6df4faf74a95d64748e048 inherit pub_methods_classModel"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classModel.html#ae3b375de5f6df4faf74a95d64748e048">Model</a> ()</td></tr>
 <tr class="separator:ae3b375de5f6df4faf74a95d64748e048 inherit pub_methods_classModel"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -446,7 +448,7 @@ Additional Inherited Members</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="a537ddb2906c4d31a205202044dfa5d4f"></a>
+<a class="anchor" id="a75edeff731869de4f8d8ada63c6e4790"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="mlabels">
@@ -454,7 +456,7 @@ Additional Inherited Members</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">double ModKapila::getSM </td>
+          <td class="memname">const double &amp; ModKapila::getSM </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -470,11 +472,11 @@ Additional Inherited Members</h2></td></tr>
 <p>Return the local fluid velocity. </p>
 <dl class="section return"><dt>Returns</dt><dd>the velocity solution of the local Riemann problem </dd></dl>
 
-<p>Reimplemented from <a class="el" href="classModel.html#ae1cf5948f243eff67949d799223fc309">Model</a>.</p>
+<p>Reimplemented from <a class="el" href="classModel.html#aa89e06b3682a488d2d131a368c405231">Model</a>.</p>
 
 </div>
 </div>
-<a class="anchor" id="a9dd2c1b43073e6377913f654f03b8d92"></a>
+<a class="anchor" id="ac5323072d6b93ca61769306fa8701777"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="mlabels">
@@ -482,16 +484,16 @@ Additional Inherited Members</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classCoord.html">Coord</a> ModKapila::getVelocity </td>
+          <td class="memname">virtual const <a class="el" href="classCoord.html">Coord</a>&amp; ModKapila::getVelocity </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="classCell.html">Cell</a> *&#160;</td>
+          <td class="paramtype">const <a class="el" href="classCell.html">Cell</a> *&#160;</td>
           <td class="paramname"><em>cell</em></td><td>)</td>
           <td> const</td>
         </tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -505,7 +507,33 @@ Additional Inherited Members</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>velocity </dd></dl>
 
-<p>Reimplemented from <a class="el" href="classModel.html#afed45633f78d68bd0116fd85ab57e297">Model</a>.</p>
+<p>Reimplemented from <a class="el" href="classModel.html#ab0d2d4f5248d13ad94b1f42f5753e898">Model</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a92a50ec219b85f4acff4d78cda58761a"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual <a class="el" href="classCoord.html">Coord</a>&amp; ModKapila::getVelocity </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classCell.html">Cell</a> *&#160;</td>
+          <td class="paramname"><em>cell</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Reimplemented from <a class="el" href="classModel.html#aced38882902d5b606e2075c64b74f037">Model</a>.</p>
 
 </div>
 </div>
@@ -550,9 +578,9 @@ Additional Inherited Members</h2></td></tr>
 <p><a class="el" href="classFlux.html" title="Abstract class for conservative variables and fluxes. ">Flux</a> reverse projection in the absolute cartesian coordinate system. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">normal</td><td>normal vector associated to the cell boundary </td></tr>
-    <tr><td class="paramname">tangent</td><td>tangent vector associated to the cell boundary </td></tr>
-    <tr><td class="paramname">binormal</td><td>binormal vector associated to the cell boundary </td></tr>
+    <tr><td class="paramname">normal</td><td>normal vector associated to the cell interface </td></tr>
+    <tr><td class="paramname">tangent</td><td>tangent vector associated to the cell interface </td></tr>
+    <tr><td class="paramname">binormal</td><td>binormal vector associated to the cell interface </td></tr>
   </table>
   </dd>
 </dl>
@@ -636,7 +664,7 @@ Additional Inherited Members</h2></td></tr>
     <tr><td class="paramname">numberPhases</td><td>number of phases </td></tr>
     <tr><td class="paramname">dxLeft</td><td>left characteristic lenght </td></tr>
     <tr><td class="paramname">dtMax</td><td>maximum explicit time step </td></tr>
-    <tr><td class="paramname">m0</td><td>specific mass flow rate (kg/s/m²) </td></tr>
+    <tr><td class="paramname">m0</td><td>specific mass flow rate (kg/s/mï¿½) </td></tr>
     <tr><td class="paramname">ak0</td><td>volume fraction array of injected fluids </td></tr>
     <tr><td class="paramname">rhok0</td><td>density array of injected fluids </td></tr>
     <tr><td class="paramname">pk0</td><td>pressure array of injected fluids </td></tr>
@@ -1180,7 +1208,7 @@ Additional Inherited Members</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="a23d3db81c4526de01ac6b7d499c49c19"></a>
+<a class="anchor" id="ac543b2a446a169d0732f3259ddd77a2b"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="mlabels">
@@ -1188,7 +1216,7 @@ Additional Inherited Members</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">string ModKapila::whoAmI </td>
+          <td class="memname">virtual const std::string&amp; ModKapila::whoAmI </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td> const</td>
@@ -1196,12 +1224,12 @@ Additional Inherited Members</h2></td></tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
-<p>Reimplemented from <a class="el" href="classModel.html#aee478c84efea07d76dfc4c16213f9472">Model</a>.</p>
+<p>Reimplemented from <a class="el" href="classModel.html#a9b6438b9b9beb4f9cfbcb0501f511930">Model</a>.</p>
 
 </div>
 </div>
@@ -1257,7 +1285,7 @@ Additional Inherited Members</h2></td></tr>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="classModKapila.html">ModKapila</a></li>
-    <li class="footer">Generated on Wed Apr 29 2020 10:31:12 for ECOGEN by
+    <li class="footer">Generated on Mon May 11 2020 16:03:19 for ECOGEN by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.11 </li>
   </ul>

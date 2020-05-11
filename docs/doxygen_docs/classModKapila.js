@@ -6,8 +6,9 @@ var classModKapila =
     [ "allocateMixture", "classModKapila.html#aa92751c16376ec98023945b31ed858c9", null ],
     [ "allocatePhase", "classModKapila.html#a64c4c1221bd6f3cb5b574303057f05ce", null ],
     [ "fulfillState", "classModKapila.html#a0bb3528e7701160eafa9f933ed81d7d6", null ],
-    [ "getSM", "classModKapila.html#a537ddb2906c4d31a205202044dfa5d4f", null ],
-    [ "getVelocity", "classModKapila.html#a9dd2c1b43073e6377913f654f03b8d92", null ],
+    [ "getSM", "classModKapila.html#a75edeff731869de4f8d8ada63c6e4790", null ],
+    [ "getVelocity", "classModKapila.html#ac5323072d6b93ca61769306fa8701777", null ],
+    [ "getVelocity", "classModKapila.html#a92a50ec219b85f4acff4d78cda58761a", null ],
     [ "reverseProjection", "classModKapila.html#a6a30f60d2b0f22ce0d3fa46a60fe0d29", null ],
     [ "solveRiemannInflow", "classModKapila.html#a8033afba1b5f699acd0222baf271e794", null ],
     [ "solveRiemannIntern", "classModKapila.html#ae310bbf72c90503e4395457a4241b5aa", null ],
@@ -19,7 +20,7 @@ var classModKapila =
     [ "solveRiemannTransportTank", "classModKapila.html#a2244e1a7fdffaf833914e34f1477761d", null ],
     [ "solveRiemannTransportWall", "classModKapila.html#a8468b5b659359ae3c0375af4bb334e56", null ],
     [ "solveRiemannWall", "classModKapila.html#ad4bffa5fc4cb79be8c106bd90c98de8e", null ],
-    [ "whoAmI", "classModKapila.html#a23d3db81c4526de01ac6b7d499c49c19", null ],
+    [ "whoAmI", "classModKapila.html#ac543b2a446a169d0732f3259ddd77a2b", null ],
     [ "FluxKapila", "classModKapila.html#a13f4f11f7775383a811a2779edefd8bf", null ],
     [ "NAME", "classModKapila.html#a54d468ac5f92702e8f67edaf108721ea", null ]
 ];

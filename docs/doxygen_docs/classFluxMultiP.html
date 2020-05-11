@@ -136,13 +136,16 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a0b8dcf7489febc89aa8a168592b0024d"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classFluxMultiP.html#a0b8dcf7489febc89aa8a168592b0024d">printFlux</a> () const </td></tr>
 <tr class="separator:a0b8dcf7489febc89aa8a168592b0024d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a76f1a276c60acdff16a2627b8f377fc1"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classFluxMultiP.html#a76f1a276c60acdff16a2627b8f377fc1">addFlux</a> (double coefA, const int &amp;numberPhases)</td></tr>
-<tr class="memdesc:a76f1a276c60acdff16a2627b8f377fc1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Add flux to the corresponding model buffer flux.  <a href="#a76f1a276c60acdff16a2627b8f377fc1">More...</a><br /></td></tr>
+<tr class="memdesc:a76f1a276c60acdff16a2627b8f377fc1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Add flux to the corresponding model flux.  <a href="#a76f1a276c60acdff16a2627b8f377fc1">More...</a><br /></td></tr>
 <tr class="separator:a76f1a276c60acdff16a2627b8f377fc1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2304f5c2ced757056b3557c22d38d07f"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classFluxMultiP.html#a2304f5c2ced757056b3557c22d38d07f">addFlux</a> (<a class="el" href="classFlux.html">Flux</a> *flux, const int &amp;numberPhases)</td></tr>
+<tr class="memdesc:a2304f5c2ced757056b3557c22d38d07f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Add flux passed in parameter to the correspond model flux.  <a href="#a2304f5c2ced757056b3557c22d38d07f">More...</a><br /></td></tr>
+<tr class="separator:a2304f5c2ced757056b3557c22d38d07f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:add1d9abf969e2e0aa265129c7a8257a5"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classFluxMultiP.html#add1d9abf969e2e0aa265129c7a8257a5">subtractFlux</a> (double coefA, const int &amp;numberPhases)</td></tr>
 <tr class="memdesc:add1d9abf969e2e0aa265129c7a8257a5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Subtract flux to the corresponding model buffer flux.  <a href="#add1d9abf969e2e0aa265129c7a8257a5">More...</a><br /></td></tr>
 <tr class="separator:add1d9abf969e2e0aa265129c7a8257a5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a37d5aae7920166d2401a583d428b2250"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classFluxMultiP.html#a37d5aae7920166d2401a583d428b2250">multiply</a> (double scalar, const int &amp;numberPhases)</td></tr>
-<tr class="memdesc:a37d5aae7920166d2401a583d428b2250"><td class="mdescLeft">&#160;</td><td class="mdescRight">multiply flux by a constant  <a href="#a37d5aae7920166d2401a583d428b2250">More...</a><br /></td></tr>
+<tr class="memdesc:a37d5aae7920166d2401a583d428b2250"><td class="mdescLeft">&#160;</td><td class="mdescRight">multiply the flux of the corresponding model by a constant  <a href="#a37d5aae7920166d2401a583d428b2250">More...</a><br /></td></tr>
 <tr class="separator:a37d5aae7920166d2401a583d428b2250"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8b12cfc48de0374d5a14ae863a6aa01f"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classFluxMultiP.html#a8b12cfc48de0374d5a14ae863a6aa01f">setBufferFlux</a> (<a class="el" href="classCell.html">Cell</a> &amp;cell, const int &amp;numberPhases)</td></tr>
 <tr class="memdesc:a8b12cfc48de0374d5a14ae863a6aa01f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Temporary store the conservative variables of a given cell.  <a href="#a8b12cfc48de0374d5a14ae863a6aa01f">More...</a><br /></td></tr>
@@ -165,26 +168,31 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a9fdae8d9bf0053282f9254cf56b34d3f"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classFluxMultiP.html#a9fdae8d9bf0053282f9254cf56b34d3f">subtractNonCons</a> (double coefA, const <a class="el" href="classCell.html">Cell</a> *cell, const int &amp;numberPhases)</td></tr>
 <tr class="memdesc:a9fdae8d9bf0053282f9254cf56b34d3f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Subtract non conservative term to the flux.  <a href="#a9fdae8d9bf0053282f9254cf56b34d3f">More...</a><br /></td></tr>
 <tr class="separator:a9fdae8d9bf0053282f9254cf56b34d3f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abcf0f662335c24a9774038dc40477bf6"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classFluxMultiP.html#abcf0f662335c24a9774038dc40477bf6">correctionEnergy</a> (<a class="el" href="classCell.html">Cell</a> *cell, const int &amp;numberPhases, <a class="el" href="Phase_8h.html#a2c815f6ae654fe19b3985d14c9c8d74e">Prim</a> type=<a class="el" href="Phase_8h.html#a2c815f6ae654fe19b3985d14c9c8d74ea2270f1269fdfbdfd9044eaa8af19750d">vecPhases</a>) const </td></tr>
+<tr class="memdesc:abcf0f662335c24a9774038dc40477bf6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Method to correct energy in non conservative models using total energy conservation.  <a href="#abcf0f662335c24a9774038dc40477bf6">More...</a><br /></td></tr>
+<tr class="separator:abcf0f662335c24a9774038dc40477bf6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2eb7f145639b5ed9ed917ab8f39fb900"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classFluxMultiP.html#a2eb7f145639b5ed9ed917ab8f39fb900">schemeCorrection</a> (<a class="el" href="classCell.html">Cell</a> *cell, const int &amp;numberPhases, <a class="el" href="Phase_8h.html#a2c815f6ae654fe19b3985d14c9c8d74e">Prim</a> type=<a class="el" href="Phase_8h.html#a2c815f6ae654fe19b3985d14c9c8d74ea2270f1269fdfbdfd9044eaa8af19750d">vecPhases</a>) const </td></tr>
 <tr class="separator:a2eb7f145639b5ed9ed917ab8f39fb900"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2a2d80c46753502b73224aa9327db521"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classFluxMultiP.html#a2a2d80c46753502b73224aa9327db521">addSymmetricTerms</a> (<a class="el" href="classPhase.html">Phase</a> **phases, <a class="el" href="classMixture.html">Mixture</a> *mixture, const int &amp;numberPhases, const double &amp;r, const double &amp;v, const double &amp;dt)</td></tr>
 <tr class="separator:a2a2d80c46753502b73224aa9327db521"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab188e92f4ce84b982a2f75d1fd00991f"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classFluxMultiP.html#ab188e92f4ce84b982a2f75d1fd00991f">integrateSourceTermsGravity</a> (<a class="el" href="classCell.html">Cell</a> *cell, const double &amp;dt, const int &amp;numberPhases, const int &amp;axe, const int &amp;direction, const <a class="el" href="classCoord.html">Coord</a> &amp;g)</td></tr>
-<tr class="memdesc:ab188e92f4ce84b982a2f75d1fd00991f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gravity source term.  <a href="#ab188e92f4ce84b982a2f75d1fd00991f">More...</a><br /></td></tr>
-<tr class="separator:ab188e92f4ce84b982a2f75d1fd00991f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aec69723e46b076ce0ce2475f4a7518fa"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classFluxMultiP.html#aec69723e46b076ce0ce2475f4a7518fa">integrateSourceTermsHeating</a> (<a class="el" href="classCell.html">Cell</a> *cell, const double &amp;dt, const int &amp;numberPhases, const double &amp;q)</td></tr>
-<tr class="memdesc:aec69723e46b076ce0ce2475f4a7518fa"><td class="mdescLeft">&#160;</td><td class="mdescRight">Heating source term.  <a href="#aec69723e46b076ce0ce2475f4a7518fa">More...</a><br /></td></tr>
-<tr class="separator:aec69723e46b076ce0ce2475f4a7518fa"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3f957770e06a98658e592350e0e5785e"><td class="memItemLeft" align="right" valign="top">virtual double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classFluxMultiP.html#a3f957770e06a98658e592350e0e5785e">getAlpha</a> (const int &amp;numPhase) const </td></tr>
-<tr class="separator:a3f957770e06a98658e592350e0e5785e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aec62f50ec7255dbc420a1a82f794aa06"><td class="memItemLeft" align="right" valign="top">virtual double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classFluxMultiP.html#aec62f50ec7255dbc420a1a82f794aa06">getMasse</a> (const int &amp;numPhase) const </td></tr>
-<tr class="separator:aec62f50ec7255dbc420a1a82f794aa06"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aeb94908e719bcbe586bffc1573552f15"><td class="memItemLeft" align="right" valign="top">virtual double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classFluxMultiP.html#aeb94908e719bcbe586bffc1573552f15">getEnergy</a> (const int &amp;numPhase) const </td></tr>
-<tr class="separator:aeb94908e719bcbe586bffc1573552f15"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab23b9d597f84596ebaadf46497ce53ba"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classCoord.html">Coord</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classFluxMultiP.html#ab23b9d597f84596ebaadf46497ce53ba">getQdm</a> () const </td></tr>
-<tr class="separator:ab23b9d597f84596ebaadf46497ce53ba"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab4a0d7170f5009dfa8ef77bfbad9c026"><td class="memItemLeft" align="right" valign="top">virtual double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classFluxMultiP.html#ab4a0d7170f5009dfa8ef77bfbad9c026">getEnergyMix</a> () const </td></tr>
-<tr class="separator:ab4a0d7170f5009dfa8ef77bfbad9c026"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac96b962eb2fad853d4541eae7ee0b997"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classFluxMultiP.html#ac96b962eb2fad853d4541eae7ee0b997">prepSourceTermsGravity</a> (<a class="el" href="classCell.html">Cell</a> *cell, const double &amp;dt, const int &amp;numberPhases, const int &amp;axis, const int &amp;direction, const <a class="el" href="classCoord.html">Coord</a> &amp;g)</td></tr>
+<tr class="separator:ac96b962eb2fad853d4541eae7ee0b997"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1dfd466b3b677e5adadc72c27412398e"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classFluxMultiP.html#a1dfd466b3b677e5adadc72c27412398e">prepSourceTermsHeating</a> (<a class="el" href="classCell.html">Cell</a> *cell, const double &amp;dt, const int &amp;numberPhases, const double &amp;q)</td></tr>
+<tr class="memdesc:a1dfd466b3b677e5adadc72c27412398e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Heating source term.  <a href="#a1dfd466b3b677e5adadc72c27412398e">More...</a><br /></td></tr>
+<tr class="separator:a1dfd466b3b677e5adadc72c27412398e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a568045ffff2f5658e58208adfa6667ae"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classFluxMultiP.html#a568045ffff2f5658e58208adfa6667ae">prepSourceTermsMRF</a> (<a class="el" href="classCell.html">Cell</a> *cell, const double &amp;dt, const int &amp;numberPhases, const <a class="el" href="classCoord.html">Coord</a> &amp;omega)</td></tr>
+<tr class="memdesc:a568045ffff2f5658e58208adfa6667ae"><td class="mdescLeft">&#160;</td><td class="mdescRight">MRF source term.  <a href="#a568045ffff2f5658e58208adfa6667ae">More...</a><br /></td></tr>
+<tr class="separator:a568045ffff2f5658e58208adfa6667ae"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3a0101d06221857e1e2f9f4c8dc0608e"><td class="memItemLeft" align="right" valign="top">virtual const double &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classFluxMultiP.html#a3a0101d06221857e1e2f9f4c8dc0608e">getAlpha</a> (const int &amp;numPhase) const </td></tr>
+<tr class="separator:a3a0101d06221857e1e2f9f4c8dc0608e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a90272cd3f1ed50f48fb407165de75edc"><td class="memItemLeft" align="right" valign="top">virtual const double &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classFluxMultiP.html#a90272cd3f1ed50f48fb407165de75edc">getMasse</a> (const int &amp;numPhase) const </td></tr>
+<tr class="separator:a90272cd3f1ed50f48fb407165de75edc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3f2741195dc417b135c47db3960323a5"><td class="memItemLeft" align="right" valign="top">virtual const double &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classFluxMultiP.html#a3f2741195dc417b135c47db3960323a5">getEnergy</a> (const int &amp;numPhase) const </td></tr>
+<tr class="separator:a3f2741195dc417b135c47db3960323a5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:affb2c2c8aac12b0a1335f1c215e52bea"><td class="memItemLeft" align="right" valign="top">virtual const <a class="el" href="classCoord.html">Coord</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classFluxMultiP.html#affb2c2c8aac12b0a1335f1c215e52bea">getQdm</a> () const </td></tr>
+<tr class="separator:affb2c2c8aac12b0a1335f1c215e52bea"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af310c4c363a247128b4f8678c304cc28"><td class="memItemLeft" align="right" valign="top">virtual const double &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classFluxMultiP.html#af310c4c363a247128b4f8678c304cc28">getEnergyMix</a> () const </td></tr>
+<tr class="separator:af310c4c363a247128b4f8678c304cc28"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5daeda32cee71304e00a6a5c4f6b4b3e"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classFluxMultiP.html#a5daeda32cee71304e00a6a5c4f6b4b3e">setCons</a> (const <a class="el" href="classFlux.html">Flux</a> *cons, const int &amp;numberPhases)</td></tr>
 <tr class="separator:a5daeda32cee71304e00a6a5c4f6b4b3e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_methods_classFlux"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classFlux')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classFlux.html">Flux</a></td></tr>
@@ -192,21 +200,18 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a1e8f1efffccbc22015d2345e6be7fbb5 inherit pub_methods_classFlux"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad786ad12b8d050bc1830b223204f2a80 inherit pub_methods_classFlux"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classFlux.html#ad786ad12b8d050bc1830b223204f2a80">~Flux</a> ()</td></tr>
 <tr class="separator:ad786ad12b8d050bc1830b223204f2a80 inherit pub_methods_classFlux"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8218ce373c2b8bf6be5347789eac4086 inherit pub_methods_classFlux"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classFlux.html#a8218ce373c2b8bf6be5347789eac4086">correctionEnergy</a> (<a class="el" href="classCell.html">Cell</a> *cell, const int &amp;numberPhases, <a class="el" href="Phase_8h.html#a2c815f6ae654fe19b3985d14c9c8d74e">Prim</a> type=<a class="el" href="Phase_8h.html#a2c815f6ae654fe19b3985d14c9c8d74ea2270f1269fdfbdfd9044eaa8af19750d">vecPhases</a>) const </td></tr>
-<tr class="memdesc:a8218ce373c2b8bf6be5347789eac4086 inherit pub_methods_classFlux"><td class="mdescLeft">&#160;</td><td class="mdescRight">Method to correct energy in non conservative models using total energy conservation.  <a href="#a8218ce373c2b8bf6be5347789eac4086">More...</a><br /></td></tr>
-<tr class="separator:a8218ce373c2b8bf6be5347789eac4086 inherit pub_methods_classFlux"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a576bb0da678c1acb416d24a04beace32 inherit pub_methods_classFlux"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classFlux.html#a576bb0da678c1acb416d24a04beace32">addSymmetricTerms</a> (<a class="el" href="classPhase.html">Phase</a> **phases, <a class="el" href="classMixture.html">Mixture</a> *mixture, const int &amp;numberPhases, const double &amp;r, const double &amp;v)</td></tr>
 <tr class="memdesc:a576bb0da678c1acb416d24a04beace32 inherit pub_methods_classFlux"><td class="mdescLeft">&#160;</td><td class="mdescRight">Add symetric terms.  <a href="#a576bb0da678c1acb416d24a04beace32">More...</a><br /></td></tr>
 <tr class="separator:a576bb0da678c1acb416d24a04beace32 inherit pub_methods_classFlux"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a094fc96de5094ebef7883d2241b02aa5 inherit pub_methods_classFlux"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classFlux.html#a094fc96de5094ebef7883d2241b02aa5">integrateSourceTermsMRF</a> (<a class="el" href="classCell.html">Cell</a> *cell, const double &amp;dt, const int &amp;numberPhases, const <a class="el" href="classCoord.html">Coord</a> &amp;omega)</td></tr>
-<tr class="memdesc:a094fc96de5094ebef7883d2241b02aa5 inherit pub_methods_classFlux"><td class="mdescLeft">&#160;</td><td class="mdescRight">MRF source term.  <a href="#a094fc96de5094ebef7883d2241b02aa5">More...</a><br /></td></tr>
-<tr class="separator:a094fc96de5094ebef7883d2241b02aa5 inherit pub_methods_classFlux"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a61fa6b64216db767920ece6c50abe0b1 inherit pub_methods_classFlux"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classFlux.html#a61fa6b64216db767920ece6c50abe0b1">prepSourceTermsGravity</a> (<a class="el" href="classCell.html">Cell</a> *cell, const double &amp;dt, const int &amp;numberPhases, const <a class="el" href="classCoord.html">Coord</a> &amp;g)</td></tr>
+<tr class="memdesc:a61fa6b64216db767920ece6c50abe0b1 inherit pub_methods_classFlux"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gravity source term.  <a href="#a61fa6b64216db767920ece6c50abe0b1">More...</a><br /></td></tr>
+<tr class="separator:a61fa6b64216db767920ece6c50abe0b1 inherit pub_methods_classFlux"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aba08b5897fbd7396d652808fda7c8bfc inherit pub_methods_classFlux"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classFlux.html#aba08b5897fbd7396d652808fda7c8bfc">addTuyere1D</a> (const <a class="el" href="classCoord.html">Coord</a> normal, const double surface, <a class="el" href="classCell.html">Cell</a> *cell, const int &amp;numberPhases)</td></tr>
 <tr class="separator:aba08b5897fbd7396d652808fda7c8bfc inherit pub_methods_classFlux"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0b1b19dd2d422ccdb4274edd7eb9363c inherit pub_methods_classFlux"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classFlux.html#a0b1b19dd2d422ccdb4274edd7eb9363c">subtractTuyere1D</a> (const <a class="el" href="classCoord.html">Coord</a> normal, const double surface, <a class="el" href="classCell.html">Cell</a> *cell, const int &amp;numberPhases)</td></tr>
 <tr class="separator:a0b1b19dd2d422ccdb4274edd7eb9363c inherit pub_methods_classFlux"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a89ea70ad15df1c83e05e09239de49f9a inherit pub_methods_classFlux"><td class="memItemLeft" align="right" valign="top">virtual double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classFlux.html#a89ea70ad15df1c83e05e09239de49f9a">getMasseMix</a> () const </td></tr>
-<tr class="separator:a89ea70ad15df1c83e05e09239de49f9a inherit pub_methods_classFlux"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9ca4d9351882370dacd845d005f2431e inherit pub_methods_classFlux"><td class="memItemLeft" align="right" valign="top">virtual const double &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classFlux.html#a9ca4d9351882370dacd845d005f2431e">getMasseMix</a> () const </td></tr>
+<tr class="separator:a9ca4d9351882370dacd845d005f2431e inherit pub_methods_classFlux"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
@@ -217,20 +222,20 @@ Protected Attributes</h2></td></tr>
 <tr class="memdesc:aadacb55fa041a22bbb47db61e6dd3c3a"><td class="mdescLeft">&#160;</td><td class="mdescRight">mass array  <a href="#aadacb55fa041a22bbb47db61e6dd3c3a">More...</a><br /></td></tr>
 <tr class="separator:aadacb55fa041a22bbb47db61e6dd3c3a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9da249d0493c6d723b1b7e910027e96a"><td class="memItemLeft" align="right" valign="top">double *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classFluxMultiP.html#a9da249d0493c6d723b1b7e910027e96a">m_energ</a></td></tr>
-<tr class="memdesc:a9da249d0493c6d723b1b7e910027e96a"><td class="mdescLeft">&#160;</td><td class="mdescRight">specific internal energy array  <a href="#a9da249d0493c6d723b1b7e910027e96a">More...</a><br /></td></tr>
+<tr class="memdesc:a9da249d0493c6d723b1b7e910027e96a"><td class="mdescLeft">&#160;</td><td class="mdescRight">specific internal energy array //JC//Q// This model uses 2 total energy eq. (typo ?)  <a href="#a9da249d0493c6d723b1b7e910027e96a">More...</a><br /></td></tr>
 <tr class="separator:a9da249d0493c6d723b1b7e910027e96a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9a63e728adc9d97d02dfa3020a4970d4"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classCoord.html">Coord</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classFluxMultiP.html#a9a63e728adc9d97d02dfa3020a4970d4">m_qdm</a></td></tr>
 <tr class="memdesc:a9a63e728adc9d97d02dfa3020a4970d4"><td class="mdescLeft">&#160;</td><td class="mdescRight">momentum array  <a href="#a9a63e728adc9d97d02dfa3020a4970d4">More...</a><br /></td></tr>
 <tr class="separator:a9a63e728adc9d97d02dfa3020a4970d4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7ebb24b9108463e2b9f2f27d959da6eb"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classFluxMultiP.html#a7ebb24b9108463e2b9f2f27d959da6eb">m_energMixture</a></td></tr>
-<tr class="memdesc:a7ebb24b9108463e2b9f2f27d959da6eb"><td class="mdescLeft">&#160;</td><td class="mdescRight">mixture energy  <a href="#a7ebb24b9108463e2b9f2f27d959da6eb">More...</a><br /></td></tr>
+<tr class="memdesc:a7ebb24b9108463e2b9f2f27d959da6eb"><td class="mdescLeft">&#160;</td><td class="mdescRight">mixture energy //JC//Q// This model is not using mixture total energy since it doesnt require a correction (!= Kapila)  <a href="#a7ebb24b9108463e2b9f2f27d959da6eb">More...</a><br /></td></tr>
 <tr class="separator:a7ebb24b9108463e2b9f2f27d959da6eb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a219b0b9eabaf7e77830cf950b0af99ae"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classModMultiP.html">ModMultiP</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classFluxMultiP.html#a219b0b9eabaf7e77830cf950b0af99ae">m_model</a></td></tr>
 <tr class="memdesc:a219b0b9eabaf7e77830cf950b0af99ae"><td class="mdescLeft">&#160;</td><td class="mdescRight">associated model  <a href="#a219b0b9eabaf7e77830cf950b0af99ae">More...</a><br /></td></tr>
 <tr class="separator:a219b0b9eabaf7e77830cf950b0af99ae"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pro_attribs_classFlux"><td colspan="2" onclick="javascript:toggleInherit('pro_attribs_classFlux')"><img src="closed.png" alt="-"/>&#160;Protected Attributes inherited from <a class="el" href="classFlux.html">Flux</a></td></tr>
 <tr class="memitem:ad0fca662bb69f02a1a061b4c9958c68f inherit pro_attribs_classFlux"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classFlux.html#ad0fca662bb69f02a1a061b4c9958c68f">m_sM</a></td></tr>
-<tr class="memdesc:ad0fca662bb69f02a1a061b4c9958c68f inherit pro_attribs_classFlux"><td class="mdescLeft">&#160;</td><td class="mdescRight">Fluid velocity for intercell boundaries.  <a href="#ad0fca662bb69f02a1a061b4c9958c68f">More...</a><br /></td></tr>
+<tr class="memdesc:ad0fca662bb69f02a1a061b4c9958c68f inherit pro_attribs_classFlux"><td class="mdescLeft">&#160;</td><td class="mdescRight">Fluid velocity for intercell interfaces.  <a href="#ad0fca662bb69f02a1a061b4c9958c68f">More...</a><br /></td></tr>
 <tr class="separator:ad0fca662bb69f02a1a061b4c9958c68f inherit pro_attribs_classFlux"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="friends"></a>
@@ -344,7 +349,7 @@ Friends</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Add flux to the corresponding model buffer flux. </p>
+<p>Add flux to the corresponding model flux. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">coefA</td><td>possibility to multiply the flux before adding (set 1.d0 if not needed) </td></tr>
@@ -354,6 +359,51 @@ Friends</h2></td></tr>
 </dl>
 
 <p>Reimplemented from <a class="el" href="classFlux.html#a293e2178f9f34fbf87969ef4821739fc">Flux</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a2304f5c2ced757056b3557c22d38d07f"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void FluxMultiP::addFlux </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classFlux.html">Flux</a> *&#160;</td>
+          <td class="paramname"><em>flux</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const int &amp;&#160;</td>
+          <td class="paramname"><em>numberPhases</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Add flux passed in parameter to the correspond model flux. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">flux</td><td>flux to add to the current one </td></tr>
+    <tr><td class="paramname">numberPhases</td><td>number of phases </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>Reimplemented from <a class="el" href="classFlux.html#a63e88f96ef7936579b8dcbde4241e471">Flux</a>.</p>
 
 </div>
 </div>
@@ -571,7 +621,7 @@ Friends</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="a3f957770e06a98658e592350e0e5785e"></a>
+<a class="anchor" id="abcf0f662335c24a9774038dc40477bf6"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="mlabels">
@@ -579,144 +629,10 @@ Friends</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">double FluxMultiP::getAlpha </td>
-          <td>(</td>
-          <td class="paramtype">const int &amp;&#160;</td>
-          <td class="paramname"><em>numPhase</em></td><td>)</td>
-          <td> const</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Reimplemented from <a class="el" href="classFlux.html#ac80ed2fa3407205ed45643d92f269508">Flux</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="aeb94908e719bcbe586bffc1573552f15"></a>
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">double FluxMultiP::getEnergy </td>
-          <td>(</td>
-          <td class="paramtype">const int &amp;&#160;</td>
-          <td class="paramname"><em>numPhase</em></td><td>)</td>
-          <td> const</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Reimplemented from <a class="el" href="classFlux.html#a4965509f4b6ac8dded87cd22116d32fd">Flux</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="ab4a0d7170f5009dfa8ef77bfbad9c026"></a>
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">double FluxMultiP::getEnergyMix </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td> const</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Reimplemented from <a class="el" href="classFlux.html#a4a7d34da1b07fcfe99a023064e53ab37">Flux</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="aec62f50ec7255dbc420a1a82f794aa06"></a>
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">double FluxMultiP::getMasse </td>
-          <td>(</td>
-          <td class="paramtype">const int &amp;&#160;</td>
-          <td class="paramname"><em>numPhase</em></td><td>)</td>
-          <td> const</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Reimplemented from <a class="el" href="classFlux.html#a16df413e2c7e4ded70c78bd4300c0634">Flux</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="ab23b9d597f84596ebaadf46497ce53ba"></a>
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="classCoord.html">Coord</a> FluxMultiP::getQdm </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td> const</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Reimplemented from <a class="el" href="classFlux.html#ae9f86626d91d02ea0c9b8678a9a4bd2c">Flux</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="ab188e92f4ce84b982a2f75d1fd00991f"></a>
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">void FluxMultiP::integrateSourceTermsGravity </td>
+          <td class="memname">virtual void FluxMultiP::correctionEnergy </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="classCell.html">Cell</a> *&#160;</td>
           <td class="paramname"><em>cell</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const double &amp;&#160;</td>
-          <td class="paramname"><em>dt</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -727,41 +643,37 @@ Friends</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">const int &amp;&#160;</td>
-          <td class="paramname"><em>axe</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const int &amp;&#160;</td>
-          <td class="paramname"><em>direction</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const <a class="el" href="classCoord.html">Coord</a> &amp;&#160;</td>
-          <td class="paramname"><em>g</em>&#160;</td>
+          <td class="paramtype"><a class="el" href="Phase_8h.html#a2c815f6ae654fe19b3985d14c9c8d74e">Prim</a>&#160;</td>
+          <td class="paramname"><em>type</em> = <code><a class="el" href="Phase_8h.html#a2c815f6ae654fe19b3985d14c9c8d74ea2270f1269fdfbdfd9044eaa8af19750d">vecPhases</a></code>&#160;</td>
         </tr>
         <tr>
           <td></td>
           <td>)</td>
-          <td></td><td></td>
+          <td></td><td> const</td>
         </tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
-<p>Gravity source term. </p>
+<p>Method to correct energy in non conservative models using total energy conservation. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">cell</td><td>cell to correct </td></tr>
+    <tr><td class="paramname">numberPhases</td><td>number of phases </td></tr>
+    <tr><td class="paramname">type</td><td>enumeration allowing to correct either state in the cell or second order half time step state </td></tr>
+  </table>
+  </dd>
+</dl>
 
-<p>Reimplemented from <a class="el" href="classFlux.html#a892e8f95ff2cf7daaf665a3cde06d61c">Flux</a>.</p>
+<p>Reimplemented from <a class="el" href="classFlux.html#a8218ce373c2b8bf6be5347789eac4086">Flux</a>.</p>
 
 </div>
 </div>
-<a class="anchor" id="aec69723e46b076ce0ce2475f4a7518fa"></a>
+<a class="anchor" id="a3a0101d06221857e1e2f9f4c8dc0608e"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="mlabels">
@@ -769,45 +681,123 @@ Friends</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void FluxMultiP::integrateSourceTermsHeating </td>
+          <td class="memname">virtual const double&amp; FluxMultiP::getAlpha </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="classCell.html">Cell</a> *&#160;</td>
-          <td class="paramname"><em>cell</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const double &amp;&#160;</td>
-          <td class="paramname"><em>dt</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
           <td class="paramtype">const int &amp;&#160;</td>
-          <td class="paramname"><em>numberPhases</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const double &amp;&#160;</td>
-          <td class="paramname"><em>q</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
+          <td class="paramname"><em>numPhase</em></td><td>)</td>
+          <td> const</td>
         </tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
-<p>Heating source term. </p>
+<p>Reimplemented from <a class="el" href="classFlux.html#ad7e05753dc81037dd786180384512f9c">Flux</a>.</p>
 
-<p>Reimplemented from <a class="el" href="classFlux.html#a13bd56b523946ef6ae112b6d7b918209">Flux</a>.</p>
+</div>
+</div>
+<a class="anchor" id="a3f2741195dc417b135c47db3960323a5"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual const double&amp; FluxMultiP::getEnergy </td>
+          <td>(</td>
+          <td class="paramtype">const int &amp;&#160;</td>
+          <td class="paramname"><em>numPhase</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Reimplemented from <a class="el" href="classFlux.html#a0c6b10e0d110305adb7275d96d4d8d3a">Flux</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="af310c4c363a247128b4f8678c304cc28"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual const double&amp; FluxMultiP::getEnergyMix </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Reimplemented from <a class="el" href="classFlux.html#afac1e19269cbf730dbeaedf7d4a23b2c">Flux</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a90272cd3f1ed50f48fb407165de75edc"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual const double&amp; FluxMultiP::getMasse </td>
+          <td>(</td>
+          <td class="paramtype">const int &amp;&#160;</td>
+          <td class="paramname"><em>numPhase</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Reimplemented from <a class="el" href="classFlux.html#a378b4fadb0d56aabe67ff6c325f4b217">Flux</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="affb2c2c8aac12b0a1335f1c215e52bea"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual const <a class="el" href="classCoord.html">Coord</a>&amp; FluxMultiP::getQdm </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Reimplemented from <a class="el" href="classFlux.html#afb2e817b3fada488b9abe91363d0b4f7">Flux</a>.</p>
 
 </div>
 </div>
@@ -843,7 +833,7 @@ Friends</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>multiply flux by a constant </p>
+<p>multiply the flux of the corresponding model by a constant </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">scalar</td><td>constant </td></tr>
@@ -853,6 +843,164 @@ Friends</h2></td></tr>
 </dl>
 
 <p>Reimplemented from <a class="el" href="classFlux.html#a3ec05a78877f430d2413da05071270fe">Flux</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="ac96b962eb2fad853d4541eae7ee0b997"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual void FluxMultiP::prepSourceTermsGravity </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classCell.html">Cell</a> *&#160;</td>
+          <td class="paramname"><em>cell</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const double &amp;&#160;</td>
+          <td class="paramname"><em>dt</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const int &amp;&#160;</td>
+          <td class="paramname"><em>numberPhases</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const int &amp;&#160;</td>
+          <td class="paramname"><em>axis</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const int &amp;&#160;</td>
+          <td class="paramname"><em>direction</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="classCoord.html">Coord</a> &amp;&#160;</td>
+          <td class="paramname"><em>g</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a1dfd466b3b677e5adadc72c27412398e"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual void FluxMultiP::prepSourceTermsHeating </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classCell.html">Cell</a> *&#160;</td>
+          <td class="paramname"><em>cell</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const double &amp;&#160;</td>
+          <td class="paramname"><em>dt</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const int &amp;&#160;</td>
+          <td class="paramname"><em>numberPhases</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const double &amp;&#160;</td>
+          <td class="paramname"><em>q</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Heating source term. </p>
+
+<p>Reimplemented from <a class="el" href="classFlux.html#affd32e250b7176b5a0e6b8c0995bfa95">Flux</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a568045ffff2f5658e58208adfa6667ae"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual void FluxMultiP::prepSourceTermsMRF </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classCell.html">Cell</a> *&#160;</td>
+          <td class="paramname"><em>cell</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const double &amp;&#160;</td>
+          <td class="paramname"><em>dt</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const int &amp;&#160;</td>
+          <td class="paramname"><em>numberPhases</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="classCoord.html">Coord</a> &amp;&#160;</td>
+          <td class="paramname"><em>omega</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>MRF source term. </p>
+
+<p>Reimplemented from <a class="el" href="classFlux.html#adbc43272ba14e0cba75f76e88575be17">Flux</a>.</p>
 
 </div>
 </div>
@@ -1291,7 +1439,7 @@ Friends</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>specific internal energy array </p>
+<p>specific internal energy array //JC//Q// This model uses 2 total energy eq. (typo ?) </p>
 
 </div>
 </div>
@@ -1313,7 +1461,7 @@ Friends</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>mixture energy </p>
+<p>mixture energy //JC//Q// This model is not using mixture total energy since it doesnt require a correction (!= Kapila) </p>
 
 </div>
 </div>
@@ -1393,7 +1541,7 @@ Friends</h2></td></tr>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="classFluxMultiP.html">FluxMultiP</a></li>
-    <li class="footer">Generated on Wed Apr 29 2020 10:31:12 for ECOGEN by
+    <li class="footer">Generated on Mon May 11 2020 16:03:19 for ECOGEN by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.11 </li>
   </ul>

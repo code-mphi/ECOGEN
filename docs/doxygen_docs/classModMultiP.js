@@ -6,8 +6,9 @@ var classModMultiP =
     [ "allocateMixture", "classModMultiP.html#abe6e467e0b5a2e55badde266c7b278b2", null ],
     [ "allocatePhase", "classModMultiP.html#aeff244223203a9a2b32101d1dba11284", null ],
     [ "fulfillState", "classModMultiP.html#a94b918872ba22b8982ab8d7be8b1febb", null ],
-    [ "getSM", "classModMultiP.html#a2fd5bbc770b0b401a2432944ae8fe218", null ],
-    [ "getVelocity", "classModMultiP.html#ad4b8cca89c81abe79cb9444a3a92049a", null ],
+    [ "getSM", "classModMultiP.html#aa400b1d1a96c5ac91329662d0e8484a4", null ],
+    [ "getVelocity", "classModMultiP.html#a1c12e56f550ab78fffabf29f78c95afd", null ],
+    [ "getVelocity", "classModMultiP.html#acaa53506618fe7a4210baacfcaefb4a9", null ],
     [ "reverseProjection", "classModMultiP.html#a051ec0aab36f911876b8b42448945418", null ],
     [ "solveRiemannInflow", "classModMultiP.html#ab2c93f8dbed1093948d3680061e547d5", null ],
     [ "solveRiemannIntern", "classModMultiP.html#a8234f57e841291a97c4bcc2b24315b4d", null ],
@@ -19,7 +20,7 @@ var classModMultiP =
     [ "solveRiemannTransportTank", "classModMultiP.html#afe2555f482539ac5a16a9bc52815483f", null ],
     [ "solveRiemannTransportWall", "classModMultiP.html#afcdad5d5924bda351204e32b96efea43", null ],
     [ "solveRiemannWall", "classModMultiP.html#a0a7ecaf2badbcac869cacbe64eb22dcb", null ],
-    [ "whoAmI", "classModMultiP.html#ac1bc35d45211d2e8388570d3f548b476", null ],
+    [ "whoAmI", "classModMultiP.html#a19137657054f0f7bd30b05ba961731f0", null ],
     [ "FluxMultiP", "classModMultiP.html#ab088d30bb946959c5007543ec4196774", null ],
     [ "NAME", "classModMultiP.html#a9672655beb54b2a4808430b18967ccea", null ]
 ];
