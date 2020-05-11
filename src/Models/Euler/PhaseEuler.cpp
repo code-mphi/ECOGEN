@@ -29,14 +29,12 @@
 
 //! \file      PhaseEuler.cpp
 //! \author    F. Petitpas, K. Schmidmayer
-//! \version   1.0
-//! \date      December 21 2017
+//! \version   1.1
+//! \date      June 5 2019
 
 #include "PhaseEuler.h"
 #include "../../Eos/Eos.h"
-#include <fstream>
 
-using namespace std;
 using namespace tinyxml2;
 
 //***************************************************************************
@@ -48,7 +46,7 @@ PhaseEuler::PhaseEuler() :m_density(0.), m_pressure(0.), m_eos(0), m_energie(0.)
 
 //***************************************************************************
 
-PhaseEuler::PhaseEuler(XMLElement *material, Eos *eos, string fileName) : m_eos(eos), m_energie(0.), m_totalEnergy(0.), m_soundSpeed(0.)
+PhaseEuler::PhaseEuler(XMLElement *material, Eos *eos, std::string fileName) : m_eos(eos), m_energie(0.), m_totalEnergy(0.), m_soundSpeed(0.)
 {
   XMLElement *sousElement(material->FirstChildElement("dataFluid"));
   if (sousElement == NULL) throw ErrorXMLElement("dataFluid", fileName, __FILE__, __LINE__);
@@ -165,7 +163,7 @@ Coord PhaseEuler::returnVector(const int &numVar) const
 
 //***************************************************************************
 
-string PhaseEuler::returnNameScalar(const int &numVar) const
+std::string PhaseEuler::returnNameScalar(const int &numVar) const
 {
   switch (numVar)
   {
@@ -182,7 +180,7 @@ string PhaseEuler::returnNameScalar(const int &numVar) const
 
 //***************************************************************************
 
-string PhaseEuler::returnNameVector(const int &numVar) const
+std::string PhaseEuler::returnNameVector(const int &numVar) const
 {
   switch (numVar)
   {
@@ -249,6 +247,18 @@ void PhaseEuler::fillBuffer(double *buffer, int &counter) const
 
 //***************************************************************************
 
+void PhaseEuler::fillBuffer(std::vector<double> &dataToSend) const
+{
+  dataToSend.push_back(m_density);
+  dataToSend.push_back(m_velocity.getX());
+  dataToSend.push_back(m_velocity.getY());
+  dataToSend.push_back(m_velocity.getZ());
+  dataToSend.push_back(m_pressure);
+  dataToSend.push_back(static_cast<double>(m_eos->getNumber()));
+}
+
+//***************************************************************************
+
 void PhaseEuler::getBuffer(double *buffer, int &counter, Eos **eos)
 {
   m_density = buffer[++counter];
@@ -257,6 +267,18 @@ void PhaseEuler::getBuffer(double *buffer, int &counter, Eos **eos)
   m_velocity.setZ(buffer[++counter]);
   m_pressure = buffer[++counter];
   m_eos = eos[static_cast<int>(buffer[++counter])];
+}
+
+//***************************************************************************
+
+void PhaseEuler::getBuffer(std::vector<double> &dataToReceive, int &counter, Eos **eos)
+{
+  m_density = dataToReceive[counter++];
+  m_velocity.setX(dataToReceive[counter++]);
+  m_velocity.setY(dataToReceive[counter++]);
+  m_velocity.setZ(dataToReceive[counter++]);
+  m_pressure = dataToReceive[counter++];
+  m_eos = eos[static_cast<int>(dataToReceive[counter++])];
 }
 
 //****************************************************************************
@@ -338,7 +360,7 @@ void PhaseEuler::getBufferSlopes(double *buffer, int &counter)
 //**************************** VERIFICATION **********************************
 //****************************************************************************
 
-void PhaseEuler::verifyPhase(const string &message) const
+void PhaseEuler::verifyPhase(const std::string &message) const
 {
   if (m_density <= 1.e-10) errors.push_back(Errors(message + "too small density in verifyPhase"));
   m_eos->verifyPressure(m_pressure);
@@ -355,44 +377,6 @@ void PhaseEuler::verifyAndCorrectPhase()
 //****************************************************************************
 //**************************** DATA ACCESSORS ********************************
 //****************************************************************************
-
-double PhaseEuler::getDensity() const { return m_density; }
-
-//***************************************************************************
-
-double PhaseEuler::getPressure() const { return m_pressure; }
-
-//***************************************************************************
-
-double PhaseEuler::getU() const { return m_velocity.getX(); }
-double PhaseEuler::getV() const { return m_velocity.getY(); }
-double PhaseEuler::getW() const { return m_velocity.getZ(); }
-
-//***************************************************************************
-
-Coord PhaseEuler::getVelocity() const { return m_velocity; }
-
-//***************************************************************************
-
-Eos* PhaseEuler::getEos() const { return m_eos; }
-
-//***************************************************************************
-
-double PhaseEuler::getEnergy() const { return m_energie; }
-
-//***************************************************************************
-
-double PhaseEuler::getSoundSpeed() const { return m_soundSpeed; }
-
-//***************************************************************************
-
-double PhaseEuler::getTotalEnergy() const { return m_totalEnergy; }
-
-//***************************************************************************
-
-double PhaseEuler::getTemperature() const { return m_eos->computeTemperature(m_density, m_pressure); }
-
-//***************************************************************************
 
 void PhaseEuler::setDensity(double density) { m_density = density; }
 

@@ -28,16 +28,14 @@
 //  If not, see <http://www.gnu.org/licenses/>.
 
 //! \file      Coord.cpp
-//! \author    F. Petitpas, K. Schmidmayer, S. Le Martelot
-//! \version   1.0
-//! \date      January 5 2018
+//! \author    F. Petitpas, K. Schmidmayer, S. Le Martelot, B. Dorschner
+//! \version   1.1
+//! \date      June 5 2019
 
 #include <algorithm>
 #include <cmath>
 #include "Coord.h"
 #include <iostream>
-
-using namespace std;
 
 //*********************************************************************
 
@@ -45,13 +43,35 @@ Coord::Coord() : m_x(0.), m_y(0.), m_z(0.){}
 
 //*********************************************************************
 
-Coord::Coord(const double &x, const double &y, const double&z) :
+Coord::Coord(const double &x, const double &y, const double &z) :
 m_x(x), m_y(y), m_z(z)
 {}
 
 //*********************************************************************
 
 Coord::~Coord(){}
+
+//*********************************************************************
+
+const Coord& Coord::coord() const
+{
+    return defaultCoord;
+}
+
+//*********************************************************************
+
+Coord& Coord::coord()
+{
+    return defaultCoordNonConst;
+}
+
+//*********************************************************************
+
+const Coord Coord::defaultCoord = Coord();
+
+//*********************************************************************
+
+Coord Coord::defaultCoordNonConst = Coord();
 
 //*********************************************************************
 
@@ -76,27 +96,6 @@ void Coord::setZ(const double &z){m_z = z;}
 
 //*********************************************************************
 
-double Coord::getX() const
-{
-  return m_x;
-}
-
-//*********************************************************************
-
-double Coord::getY() const
-{
-  return m_y;
-}
-
-//*********************************************************************
-
-double Coord::getZ() const
-{
-  return m_z;
-}
-
-//*********************************************************************
-
 double Coord::norm() const
 {
   return sqrt(m_x*m_x+m_y*m_y+m_z*m_z);
@@ -107,6 +106,17 @@ double Coord::norm() const
 double Coord::squaredNorm() const
 {
   return m_x*m_x + m_y*m_y + m_z*m_z;
+}
+
+//*********************************************************************
+
+Coord Coord::abs() const
+{
+  Coord vec;
+  vec.m_x = std::fabs(m_x);
+  vec.m_y = std::fabs(m_y);
+  vec.m_z = std::fabs(m_z);
+  return vec;
 }
 
 //*********************************************************************
@@ -226,7 +236,7 @@ Coord Coord::sin(const Coord &v1, const Coord &v2)
 
 void Coord::printInfo() const
 {
-  cout << " X = " << m_x << " Y = " << m_y << " Z = " << m_z << endl;
+  std::cout << " X = " << m_x << " Y = " << m_y << " Z = " << m_z << std::endl;
 }
 
 //*******************SURCHARGES OPERATEURS*****************************
@@ -261,16 +271,17 @@ Coord& Coord::operator/= (const double &scalar)
 
 //*********************************************************************
 
-Coord Coord::operator* (const double &scalar)
+Coord Coord::operator* (const double &scalar) const
 {
   Coord copie(*this);
   copie *= scalar;
   return copie;
 }
 
+
 //*********************************************************************
 
-Coord Coord::operator/ (const double &scalar)
+Coord Coord::operator/ (const double &scalar) const
 {
   Coord copie(*this);
   copie /= scalar;

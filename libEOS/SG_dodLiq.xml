@@ -1,15 +1,6 @@
-<?xml version = "1.0" encoding = "UTF-8" standalone = "yes"?>
+<?xml version='1.0' encoding='UTF-8' standalone='yes'?>
 <parametersEOS>
-	<EOS fichier="SG_dodLiq.xml" type="SG"/>
-	<parameters
-		gamma="2.35"
-		pInf="4.e8"
-		cv="1956.0"
-		energyRef="-755.e3"
-		entropyRef="0.">
-	</parameters>
-	<physicalParameters
-		mu="1.e-3"
-		lambda="0.6">
-	</physicalParameters>		
+  <EOS type="SG" fichier="SG_dodLiq.xml"/>
+  <parameters cv="1956.0" gamma="2.35" energyRef="-755.e3" pInf="4.e8" entropyRef="35600"/>
+  <physicalParameters lambda="0.6" mu="1.e-3"/>
 </parametersEOS>

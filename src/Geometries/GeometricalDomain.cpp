@@ -34,11 +34,9 @@
 
 #include "GeometricalDomain.h"
 
-using namespace std;
-
 //******************************************************************
 
-GeometricalDomain::GeometricalDomain(string name, vector<Phase*> vecPhases, Mixture *mixture, vector<Transport> vecTransports, const int &physicalEntity) : m_name(name), m_physicalEntity(physicalEntity)
+GeometricalDomain::GeometricalDomain(std::string name, std::vector<Phase*> vecPhases, Mixture *mixture, std::vector<Transport> vecTransports, const int &physicalEntity) : m_name(name), m_physicalEntity(physicalEntity)
 {
   m_numberPhases = vecPhases.size();
   m_numberTransports = vecTransports.size();

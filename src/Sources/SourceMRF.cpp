@@ -28,13 +28,12 @@
 //  If not, see <http://www.gnu.org/licenses/>.
 
 //! \file      SourceMRF.cpp
-//! \author    F. Petitpas
+//! \author    F. Petitpas, J. Caze
 //! \version   1.0
-//! \date      July 06 2018
+//! \date      October 29 2019
 
 #include "SourceMRF.h"
 
-using namespace std;
 using namespace tinyxml2;
 
 //***********************************************************************
@@ -43,7 +42,7 @@ SourceMRF::SourceMRF(){}
 
 //***********************************************************************
 
-SourceMRF::SourceMRF(XMLElement *element, string fileName)
+SourceMRF::SourceMRF(XMLElement *element, int order, std::string fileName) : Source(order)
 {
   XMLElement *sousElement(element->FirstChildElement("omega"));
   if (sousElement == NULL) throw ErrorXMLElement("omega", fileName, __FILE__, __LINE__);
@@ -77,12 +76,9 @@ SourceMRF::~SourceMRF()
 
 //***********************************************************************
 
-void SourceMRF::integrateSourceTerms(Cell *cell, const int &numberPhases, const double &dt)
+void SourceMRF::prepSourceTerms(Cell *cell, const int &numberPhases, const double &dt, const int i)
 {
-  //Source terms integration on conservative quantities
-  cell->buildCons(numberPhases);
-  cell->getCons()->integrateSourceTermsMRF(cell, dt, numberPhases, m_incr*m_omega);
-  cell->buildPrim(numberPhases);
+  sourceCons[i]->prepSourceTermsMRF(cell, dt, numberPhases, m_incr*m_omega); 
 }
 
 //***********************************************************************
@@ -90,7 +86,7 @@ void SourceMRF::integrateSourceTerms(Cell *cell, const int &numberPhases, const 
 void SourceMRF::sourceEvolution(const double &time)
 {
   if (m_incr < 1.) {
-    m_incr = min(time/m_tf,1.);
+    m_incr = std::min(time/m_tf,1.);
   }
 }
 

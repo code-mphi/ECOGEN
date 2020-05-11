@@ -35,7 +35,6 @@
 #include "OutputGNU.h"
 #include "../Run.h"
 
-using namespace std;
 using namespace tinyxml2;
 
 //***********************************************************************
@@ -44,10 +43,11 @@ OutputGNU::OutputGNU(){}
 
 //***********************************************************************
 
-OutputGNU::OutputGNU(string casTest, string run, XMLElement *element, string fileName, Input *entree) :
+OutputGNU::OutputGNU(std::string casTest, std::string run, XMLElement *element, std::string fileName, Input *entree) :
   Output(casTest, run, element, fileName, entree)
 {
-  m_fileNameVisu = "visualisation.gnu";
+  m_fileNameVisu = "visualization.gnu";
+  m_folderScriptGnuplot = "./datasets/";
 }
 
 //***********************************************************************
@@ -59,15 +59,15 @@ OutputGNU::~OutputGNU(){}
 void OutputGNU::ecritSolution(Mesh *mesh, std::vector<Cell *> *cellsLvl)
 {
   try {
-    ofstream fileStream;
-    string file = m_dossierSortie + creationNameFichierGNU(m_fileNameResults.c_str(), -1, rankCpu, m_numFichier);
+    std::ofstream fileStream;
+    std::string file = m_folderDatasets + creationNameFichierGNU(m_fileNameResults.c_str(), -1, rankCpu, m_numFichier);
     fileStream.open(file.c_str());
     if (!fileStream) { throw ErrorECOGEN("Impossible d ouvrir le file " + file, __FILE__, __LINE__); }
     mesh->ecritSolutionGnuplot(cellsLvl, fileStream);
-    fileStream << endl;
+    fileStream << std::endl;
     fileStream.close();
 
-    //Creation du file gnuplot pour visualisation des resultats
+    //Creation du file gnuplot pour visualization des resultats
     if (rankCpu == 0) ecritScriptGnuplot(mesh->getGeometrie());
   }
   catch (ErrorECOGEN &) { throw; }
@@ -79,31 +79,31 @@ void OutputGNU::ecritSolution(Mesh *mesh, std::vector<Cell *> *cellsLvl)
 void OutputGNU::ecritScriptGnuplot(const int &dim)
 {
   try {
-    ofstream fileStream;
+    std::ofstream fileStream;
 
-    fileStream.open((m_dossierSortie + m_fileNameVisu).c_str());
-    if (!fileStream) { throw ErrorECOGEN("Impossible d ouvrir le file " + m_dossierSortie + m_fileNameVisu, __FILE__, __LINE__); }
-    fileStream << "reset" << endl << "set style data lines" << endl;
-    fileStream << "set nokey" << endl;
-    fileStream << endl;
+    fileStream.open((m_folderOutput + m_fileNameVisu).c_str());
+    if (!fileStream) { throw ErrorECOGEN("Impossible d ouvrir le file " + m_folderOutput + m_fileNameVisu, __FILE__, __LINE__); }
+    fileStream << "reset" << std::endl << "set style data lines" << std::endl;
+    fileStream << "set nokey" << std::endl;
+    fileStream << std::endl;
 
     int index;
     
     if (dim == 0) { //Special case probe: first columns : t, etc.
       index = 2;
-      fileStream << "set xlabel 't (s)'" << endl;
+      fileStream << "set xlabel 't (s)'" << std::endl;
     }
     else{
       index = 1 + dim; //premiere colonne file resultat == premiere donnee apres X,(Y,Z)
-      fileStream << "set xlabel 'x (m)'" << endl;
+      fileStream << "set xlabel 'x (m)'" << std::endl;
     }
     //Gestion 2D/3D
     if (dim == 2) {
-      fileStream << "set surface" << endl;
-      fileStream << "set dgrid3d 50,50" << endl;
-      fileStream << "set contour base" << endl;
-      fileStream << "set cntrparam levels 25" << endl;
-      fileStream << "show contour" << endl;
+      fileStream << "set surface" << std::endl;
+      fileStream << "set dgrid3d 50,50" << std::endl;
+      fileStream << "set contour base" << std::endl;
+      fileStream << "set cntrparam levels 25" << std::endl;
+      fileStream << "show contour" << std::endl;
       //fileStream << "set view 180,180,1,1" << endl;
     }
     else if (dim == 3) { throw ErrorECOGEN("OutputGNU::ecritScriptGnuplot : print script gnuplot non prevu en 3D", __FILE__, __LINE__); }
@@ -114,12 +114,12 @@ void OutputGNU::ecritScriptGnuplot(const int &dim)
     {
       //Variables scalars
       for (int var = 1; var <= m_cellRef.getPhase(phase)->getNumberScalars(); var++) {
-        fileStream << "set title '" << m_cellRef.getPhase(phase)->returnNameScalar(var) << "_" << m_cellRef.getPhase(phase)->getEos()->getName() << "'" << endl;
+        fileStream << "set title '" << m_cellRef.getPhase(phase)->returnNameScalar(var) << "_" << m_cellRef.getPhase(phase)->getEos()->getName() << "'" << std::endl;
         printBlocGnuplot(fileStream, index, dim);
       } //Fin var scalar
       //Variables vectorielles (u)
       for (int var = 1; var <= m_cellRef.getPhase(phase)->getNumberVectors(); var++) {
-        fileStream << "set title '" << m_cellRef.getPhase(phase)->returnNameVector(var) << "_" << m_cellRef.getPhase(phase)->getEos()->getName() << "'" << endl;
+        fileStream << "set title '" << m_cellRef.getPhase(phase)->returnNameVector(var) << "_" << m_cellRef.getPhase(phase)->getEos()->getName() << "'" << std::endl;
         printBlocGnuplot(fileStream, index, dim);
       } //Fin var vectorielle
     } //Fin phase
@@ -128,30 +128,30 @@ void OutputGNU::ecritScriptGnuplot(const int &dim)
    //--------------------
    //Variables scalars
     for (int var = 1; var <= m_cellRef.getMixture()->getNumberScalars(); var++) {
-      fileStream << "set title '" << m_cellRef.getMixture()->returnNameScalar(var) << "'" << endl;
+      fileStream << "set title '" << m_cellRef.getMixture()->returnNameScalar(var) << "'" << std::endl;
       printBlocGnuplot(fileStream, index, dim);
     } //Fin var scalar
     //Variables vectorielle
     for (int var = 1; var <= m_cellRef.getMixture()->getNumberVectors(); var++) {
-      fileStream << "set title '" << m_cellRef.getMixture()->returnNameVector(var) << "'" << endl;
+      fileStream << "set title '" << m_cellRef.getMixture()->returnNameVector(var) << "'" << std::endl;
       printBlocGnuplot(fileStream, index, dim);
     } //Fin var vectorielle
 
     //3) Variables transports
     //-----------------------
     for (int var = 1; var <= m_cellRef.getNumberTransports(); var++) {
-      fileStream << "set title 'Transport" << var << "'" << endl;
+      fileStream << "set title 'Transport" << var << "'" << std::endl;
       printBlocGnuplot(fileStream, index, dim);
     } //Fin var scalar
 
     //4) Ecriture niveaux AMR
     //-----------------------
-    fileStream << "set title 'Niveau AMR'" << endl;
+    fileStream << "set title 'Niveau AMR'" << std::endl;
     printBlocGnuplot(fileStream, index, dim);
 
     //5) Ecriture variable detection gradients
     //----------------------------------------
-    fileStream << "set title 'Xi'" << endl;
+    fileStream << "set title 'Xi'" << std::endl;
     printBlocGnuplot(fileStream, index, dim);
 
     fileStream.close();
@@ -172,20 +172,20 @@ void OutputGNU::printBlocGnuplot(std::ofstream &fileStream, int &index, const in
     for (int t = 0; t <= m_numFichier; t++) {
       for (int p = 0; p < Ncpu; p++) {
         fileStream << " \"";
-        if(dim==0){ fileStream << creationNameFichierGNU(m_fileNameResults.c_str(), -1, -1, -1); }
-        else { fileStream << creationNameFichierGNU(m_fileNameResults.c_str(), -1, p, t); }
+        if(dim==0){ fileStream << m_folderScriptGnuplot + creationNameFichierGNU(m_fileNameResults.c_str(), -1, -1, -1); }
+        else { fileStream << m_folderScriptGnuplot + creationNameFichierGNU(m_fileNameResults.c_str(), -1, p, t); }
         fileStream << "\"";
         if (dim <= 1) { fileStream << " u 1:" << index; }
         else { fileStream << " u 1:2:" << index; }
         if (dim == 0) {
-          fileStream << endl;
+          fileStream << std::endl;
           break;
         }
         if (p < Ncpu - 1 || t != m_numFichier) fileStream << ",\\";
-        fileStream << endl;
+        fileStream << std::endl;
       }
     }
-    fileStream << "pause(-1)" << endl << endl;
+    fileStream << "pause(-1)" << std::endl << std::endl;
     index++;
   }
   catch (ErrorECOGEN &) { throw; }
@@ -193,10 +193,10 @@ void OutputGNU::printBlocGnuplot(std::ofstream &fileStream, int &index, const in
 
 //***********************************************************************
 
-string OutputGNU::creationNameFichierGNU(const char* name, int lvl, int proc, int numFichier, string nameVariable) const
+std::string OutputGNU::creationNameFichierGNU(const char* name, int lvl, int proc, int numFichier, std::string nameVariable) const
 {
   try {
-    stringstream num;
+    std::stringstream num;
 
     if (m_donneesSeparees) {
       throw ErrorECOGEN("OutputGNU::creationNameFichierGNU : donnees Separees non prevu", __FILE__, __LINE__);

@@ -2,6 +2,6 @@
 <model>
 	<flowModel name="Kapila" numberPhases="2" alphaNull="false"/>
 	<EOS name="IG_air.xml"/>
-	<EOS name="IG_air2.xml"/>
-	<additionalPhysic type="conductivity" />
+	<EOS name="IG_air.xml"/>
+	<additionalPhysic type="conductivity"/>
 </model>

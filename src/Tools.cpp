@@ -34,8 +34,6 @@
 
 #include "Tools.h"
 
-using namespace std;
-
 Tools *TB;
 
 //***********************************************************************
@@ -91,9 +89,16 @@ Tools::~Tools()
 
 //***********************************************************************
 
-void Tools::uppercase(string &string)
+void Tools::uppercase(std::string &string)
 {
   for (unsigned int c = 0; c < string.size(); c++){ string[c] = toupper(string[c]); }
+}
+
+//***********************************************************************
+
+void Tools::lowercase(std::string& string)
+{
+	for (unsigned int c = 0; c < string.size(); c++) { string[c] = tolower(string[c]); }
 }
 
 //***********************************************************************

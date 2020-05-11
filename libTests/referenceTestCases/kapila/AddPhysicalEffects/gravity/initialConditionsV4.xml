@@ -1,48 +1,44 @@
-<?xml version = "1.0" encoding = "UTF-8" standalone = "yes"?>
+<?xml version='1.0' encoding='UTF-8' standalone='yes'?>
 <CI>
-    <!-- LIST OF GEOMETRICAL DOMAINS  -->
-    <physicalDomains> 
-        <domain name="base" state="air" type="entireDomain"/>
-        <domain name="waterDroplet"  state="waterDroplet" type="Sphere">
-            <dataSphere radius="0.15">
-                <center x="0.375" y="0.375" z="0.375"/>
-            </dataSphere>
-        </domain>
-    </physicalDomains>
-
-    <!-- LIST OF BOUNDARY CONDITIONS -->
-    <boundaryConditions>
-        <boundCond name="CLXm" type="wall" number="1" />
-        <boundCond name="CLXp" type="wall" number="2" />
-        <boundCond name="CLYm" type="wall" number="3" />
-        <boundCond name="CLYp" type="abs" number="4" />
-    </boundaryConditions>
-    
-    <!--  LIST OF STATES  -->
-    <state name="air">
-        <material type="fluide" EOS="IG_air.xml">
-            <dataFluid alpha="0.999999" density="1.0"/>
-        </material>
-        <material type="fluide" EOS="SG_water.xml">
-            <dataFluid alpha="0.000001" density="1000.0"/>
-        </material>
-        <mixture>
-            <dataMix pressure = "1.e5"/>
-            <velocity x="0." y="0." z="0."/>
-        </mixture>
-    </state>
-
-    <state name="waterDroplet">
-        <material type="fluide" EOS="IG_air.xml">
-            <dataFluid alpha="0.000001" density="1.0"/>
-        </material>
-        <material type="fluide" EOS="SG_water.xml">
-            <dataFluid alpha="0.999999" density="1000.0"/>
-        </material>
-        <mixture>
-            <dataMix pressure = "1.e5"/>
-            <velocity x="0." y="0." z="0."/>
-        </mixture>
-    </state>
-
+  <!-- LIST OF GEOMETRICAL DOMAINS  -->
+  <physicalDomains>
+    <domain type="entireDomain" name="base" state="air"/>
+    <domain type="sphere" name="waterDroplet" state="waterDroplet">
+      <dataSphere radius="0.15">
+        <center x="0.375" z="0.375" y="0.375"/>
+      </dataSphere>
+    </domain>
+  </physicalDomains>
+  <!-- LIST OF BOUNDARY CONDITIONS -->
+  <boundaryConditions>
+    <boundCond type="wall" name="CLXm" number="1"/>
+    <boundCond type="wall" name="CLXp" number="2"/>
+    <boundCond type="wall" name="CLYm" number="3"/>
+    <boundCond type="nonReflecting" name="CLYp" number="4"/>
+  </boundaryConditions>
+  <!--  LIST OF STATES  -->
+  <state name="air">
+    <material type="fluid" EOS="IG_air.xml">
+      <dataFluid density="1.0" alpha="0.999999"/>
+    </material>
+    <material type="fluid" EOS="SG_water.xml">
+      <dataFluid density="1000.0" alpha="0.000001"/>
+    </material>
+    <mixture>
+      <dataMix pressure="1.e5"/>
+      <velocity x="0." z="0." y="0."/>
+    </mixture>
+  </state>
+  <state name="waterDroplet">
+    <material type="fluid" EOS="IG_air.xml">
+      <dataFluid density="1.0" alpha="0.000001"/>
+    </material>
+    <material type="fluid" EOS="SG_water.xml">
+      <dataFluid density="1000.0" alpha="0.999999"/>
+    </material>
+    <mixture>
+      <dataMix pressure="1.e5"/>
+      <velocity x="0." z="0." y="0."/>
+    </mixture>
+  </state>
 </CI>

@@ -17,7 +17,7 @@ REQUIRED computational parameters
 **************************
 Contains model name and phase number for multiphase models.
 For Kapila's model, the volume fraction can either be null or not and this choice is determined by the parameter alphaNull.
-For single phase model (example : Euler), numberPhases is optionnal and is 1 as default.
+For single phase model (example: Euler), numberPhases is optionnal and is 1 as default.
 Attribute numberTransports is optionnal and is set to 0 as default.
 Available models are : Euler, Kapila, ThermalEq, EulerHomogeneous.
 %%%%%%%%%%%%%%%%%% << copy between these lines
@@ -34,9 +34,9 @@ Available models are : Euler, Kapila, ThermalEq, EulerHomogeneous.
 --------------------
 MODELS SPECIFICITIES
 --------------------
-Caution : for EulerHomogeneous, the two attributes for phase number of liquid and vapor phasesmust be added.
+Caution: For EulerHomogeneous, the two attributes for phase number of liquid and vapor phases must be added.
 %%%%%%%%%%%%%%%%%% << copy between these lines
-<flowModel name="EulerHomogeneous" liquid="0" vapor="1"/>
+<flowModel name="EulerHomogeneous" numberPhases="2" liquid="0" vapor="1"/>
 <EOS name="SG_waterLiq.xml"/>
 <EOS name="IG_waterVap.xml"/>
 %%%%%%%%%%%%%%%%%% << copy between these lines
@@ -57,13 +57,19 @@ OPTIONNAL model parameters
 Flow model can be augmented by additionnal physical effects as surface tension, viscosity and conductive heat transfer.
 a) Surface tension
 ------------------
-this physical effect needs the name of advected variable used as color function for surface-tension terms as well as surface-tension coefficient in N/m.
+This physical effect needs the name of advected variable used as color function for surface-tension terms as well as surface-tension coefficient in N/m.
 %%%%%%%%%%%%%%%%%% << copy between these lines
 <additionalPhysic type="surfaceTension" >
   <dataSurfaceTension transport="color" sigma="72.e-3"/>
 </additionalPhysic>
 %%%%%%%%%%%%%%%%%% << copy between these lines
-b) Others : in dev...
+b) Viscosity
+------------
+This physical effect needs the <physicalParameters> "mu" to be set in the EOS files.
+%%%%%%%%%%%%%%%%%% << copy between these lines
+<additionalPhysic type="viscosity"/>
+%%%%%%%%%%%%%%%%%% << copy between these lines
+c) Others : In dev...
 
 *) Symmetry terms
 *****************
@@ -72,61 +78,62 @@ a) Cylindrical symmetry (2D)
 ----------------------------
 %%%%%%%%%%%%%%%%%% << copy between these lines
 <symmetryTerm type="cylindrical">
-  <dataSymCyl radialAxe="X"/>
+  <dataSymCyl radialAxis="X"/>
 </symmetryTerm>
 %%%%%%%%%%%%%%%%%% << copy between these lines
 b) Spherical symmetry (1D)
 --------------------------
 %%%%%%%%%%%%%%%%%% << copy between these lines
 <symmetryTerm type="spherical">
-  <dataSymSpher radialAxe="X"/>
+  <dataSymSpher radialAxis="X"/>
 </symmetryTerm>
 %%%%%%%%%%%%%%%%%% << copy between these lines
 
 *) Source terms
 ***************
 Few source terms are already implemented, it is the case to take into account the gravity effects.
+the order of integration choice can be EULER, RK2 or RK4.
 a) Gravity
 ----------
 %%%%%%%%%%%%%%%%%% << copy between these lines
-<sourceTerms type="gravity">
+<sourceTerms type="gravity" order="EULER">
   <gravity x="0." y="-9.81" z="0."/>
 </sourceTerms>
 %%%%%%%%%%%%%%%%%% << copy between these lines
 b) Heating
 ----------
 %%%%%%%%%%%%%%%%%% << copy between these lines
-<sourceTerms type="heating">
+<sourceTerms type="heating" order="EULER">
   <dataHeating volumeHeatPower="1.e6"/>
 </sourceTerms>
 %%%%%%%%%%%%%%%%%% << copy between these lines
 b) Moving Reference Frame
 -------------------------
 %%%%%%%%%%%%%%%%%% << copy between these lines
-<sourceTerms type="MRF">
+<sourceTerms type="MRF" order="EULER">
   <omega x="0." y="0." z="1."/>
-  <timeToOmega tf="1.e-3"/>  <!-- Optional : if activated, the angular velocity increase linearly to omega in during tf -->
+  <timeToOmega tf="1.e-3"/>  <!-- Optional: If activated, the angular velocity increase linearly to omega in during tf -->
 </sourceTerms>
 %%%%%%%%%%%%%%%%%% << copy between these lines
 
 *) Relaxation terms
 *******************
-Some models can be used coupled to relaxation procedure to impose phases equilibriums.
-a) pressures
+Some models can be used coupled to relaxation procedure to impose phase equilibriums.
+a) Pressures
 --------------------------------------------------
 %%%%%%%%%%%%%%%%%% << copy between these lines
 <relaxation type="P"/>
 %%%%%%%%%%%%%%%%%% << copy between these lines
-b) pressures and temperatures
+b) Pressures and temperatures
 --------------------------------------------------
 %%%%%%%%%%%%%%%%%% << copy between these lines
 <relaxation type="PT"/>
 %%%%%%%%%%%%%%%%%% << copy between these lines
-c) pressures, temperatures and chemical potentials
+c) Pressures, temperatures and chemical potentials
 --------------------------------------------------
 %%%%%%%%%%%%%%%%%% << copy between these lines
 <relaxation type="PTMu">
   <dataPTMu liquid="SG_waterLiq.xml" vapor="IG_waterVap.xml"/>
 </relaxation>
 %%%%%%%%%%%%%%%%%% << copy between these lines
-c) Others : in dev...
+c) Others : In dev...

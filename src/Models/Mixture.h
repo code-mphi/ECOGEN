@@ -32,8 +32,8 @@
 
 //! \file      Mixture.h
 //! \author    K. Schmidmayer, F. Petitpas
-//! \version   1.0
-//! \date      May 04 2018
+//! \version   1.1
+//! \date      June 5 2019
 
 #include <vector>
 
@@ -132,14 +132,14 @@ class Mixture
       virtual void totalEnergyToInternalEnergy(std::vector<QuantitiesAddPhys*> &vecGPA) { Errors::errorMessage("totalEnergyToInternalEnergy not available for required mixture"); };
       
       //! \brief     velocity vector projection in a local cartesian coordinate system
-      //! \param     normal            normal vector associated to the cell boundary
-      //! \param     tangent           tangent vector associated to the cell boundary
-      //! \param     binormal          binormal vector associated to the cell boundary
+      //! \param     normal            normal vector associated to the cell interface
+      //! \param     tangent           tangent vector associated to the cell interface
+      //! \param     binormal          binormal vector associated to the cell interface
       virtual void localProjection(const Coord &normal, const Coord &tangent, const Coord &binormal) { Errors::errorMessage("localProjection not available for required mixture"); };
       //! \brief     velocity vector reverse projection in the absolute cartesian coordinate system
-      //! \param     normal            normal vector associated to the cell boundary
-      //! \param     tangent           tangent vector associated to the cell boundary
-      //! \param     binormal          binormal vector associated to the cell boundary
+      //! \param     normal            normal vector associated to the cell interface
+      //! \param     tangent           tangent vector associated to the cell interface
+      //! \param     binormal          binormal vector associated to the cell interface
       virtual void reverseProjection(const Coord &normal, const Coord &tangent, const Coord &binormal) { Errors::errorMessage("reverseProjection not available for required mixture"); };
 
       //Specific methods for data printing
@@ -160,7 +160,9 @@ class Mixture
       //---------------------------------------
       virtual int numberOfTransmittedVariables() const { Errors::errorMessage("numberOfTransmittedVariables non implemente pour mixture utilise"); return 0; };
       virtual void fillBuffer(double *buffer, int &counter) const { Errors::errorMessage("fillBuffer non implemente pour mixture utilise"); };
+      virtual void fillBuffer(std::vector<double> &dataToSend) const { Errors::errorMessage("fillBuffer non implemente pour mixture utilise"); };
       virtual void getBuffer(double *buffer, int &counter) { Errors::errorMessage("getBuffer non implemente pour mixture utilise"); };
+      virtual void getBuffer(std::vector<double> &dataToReceive, int &counter) { Errors::errorMessage("getBuffer non implemente pour mixture utilise"); };
 
       //Specific methods for second order
       //---------------------------------
@@ -177,18 +179,19 @@ class Mixture
 
       //Accessors
       //---------
-      virtual double getDensity() const { Errors::errorMessage("getDensity not available for required mixture"); return 0.; };
-      virtual double getPressure() const { Errors::errorMessage("getPressure not available for required mixture"); return 0.; };
-      virtual double getTemperature() const { Errors::errorMessage("getTemperature not available for required mixture"); return 0.; };
-      virtual double getU() const { Errors::errorMessage("getU not available for required mixture"); return 0.; };
-      virtual double getV() const { Errors::errorMessage("getV not available for required mixture"); return 0.; };
-      virtual double getW() const { Errors::errorMessage("getW not available for required mixture"); return 0.; };
-      virtual Coord getVelocity() const { Errors::errorMessage("getVelocity not available for required mixture"); return 0; };
-      virtual double getEnergy() const { Errors::errorMessage("getEnergy not available for required mixture"); return 0.; };
-      virtual double getTotalEnergy() const { Errors::errorMessage("getTotalEnergy not available for required mixture"); return 0.; };
-      virtual double getFrozenSoundSpeed() const { Errors::errorMessage("getFrozenSoundSpeed not available for required mixture"); return 0.; };
-      virtual double getWoodSoundSpeed() const { Errors::errorMessage("getWoodSoundSpeed not available for required mixture"); return 0.; };
-      virtual double getMixSoundSpeed() const { Errors::errorMessage("getMixSoundSpeed not available for required mixture"); return 0.; };
+      virtual const double& getDensity() const { Errors::errorMessage("getDensity not available for required mixture"); return Errors::defaultDouble; };
+      virtual const double& getPressure() const { Errors::errorMessage("getPressure not available for required mixture"); return Errors::defaultDouble; };
+      virtual const double& getTemperature() const { Errors::errorMessage("getTemperature not available for required mixture"); return Errors::defaultDouble; };
+      virtual const double& getU() const { Errors::errorMessage("getU not available for required mixture"); return Errors::defaultDouble; };
+      virtual const double& getV() const { Errors::errorMessage("getV not available for required mixture"); return Errors::defaultDouble; };
+      virtual const double& getW() const { Errors::errorMessage("getW not available for required mixture"); return Errors::defaultDouble; };
+      virtual const Coord& getVelocity() const { Errors::errorMessage("getVelocity not available for required mixture"); return Coord::defaultCoord; };
+      virtual Coord& getVelocity() { Errors::errorMessage("getVelocity not available for required mixture"); return Coord::defaultCoordNonConst; };
+      virtual const double& getEnergy() const { Errors::errorMessage("getEnergy not available for required mixture"); return Errors::defaultDouble; };
+      virtual const double& getTotalEnergy() const { Errors::errorMessage("getTotalEnergy not available for required mixture"); return Errors::defaultDouble; };
+      virtual const double& getFrozenSoundSpeed() const { Errors::errorMessage("getFrozenSoundSpeed not available for required mixture"); return Errors::defaultDouble; };
+      virtual const double& getWoodSoundSpeed() const { Errors::errorMessage("getWoodSoundSpeed not available for required mixture"); return Errors::defaultDouble; };
+      virtual const double& getMixSoundSpeed() const { Errors::errorMessage("getMixSoundSpeed not available for required mixture"); return Errors::defaultDouble; };
 
       virtual void setPressure(const double &p) { Errors::errorMessage("setPressure non implemente pour mixture utilise"); };
       virtual void setTemperature(const double &T) { Errors::errorMessage("setTemperature non implemente pour mixture utilise"); }

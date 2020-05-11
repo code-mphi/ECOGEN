@@ -32,13 +32,13 @@
 
 //! \file      BoundCond.h
 //! \author    F. Petitpas, K. Schmidmayer
-//! \version   1.0
-//! \date      December 20 2017
+//! \version   1.1
+//! \date      June 5 2019
 
 #include <iostream>
 
-#include "../CellInterface.h"
-#include "../Ordre2/CellInterfaceO2.h" //Ajouter pour l'AMR, a priori ne pose pas de probleme
+#include "../Order1/CellInterface.h"
+#include "../Order2/CellInterfaceO2.h" //Ajouter pour l'AMR, a priori ne pose pas de probleme
 #include "../libTierces/tinyxml2.h"
 #include "../Errors.h"
 #include "../Tools.h"
@@ -51,8 +51,8 @@ class BoundCond : public CellInterface
     BoundCond(const BoundCond &Source);
     virtual ~BoundCond();
 
-    virtual void creeLimite(CellInterface **face){ Errors::errorMessage("Impossible de creer la limite dans creeLimite"); };
-    virtual void creeLimite(CellInterface **face, std::string ordreCalcul) { Errors::errorMessage("Impossible de creer la limite dans creeLimite"); };
+    virtual void creeLimite(TypeMeshContainer<CellInterface *> &cellInterfaces){ Errors::errorMessage("Impossible de creer la limite dans creeLimite"); };
+    virtual void creeLimite(TypeMeshContainer<CellInterface *> &cellInterfaces, std::string ordreCalcul) { Errors::errorMessage("Impossible de creer la limite dans creeLimite"); };
     virtual void initialize(Cell *cellLeft, Cell *cellRight);
 
     virtual void computeFlux(const int &numberPhases, const int &numberTransports, double &dtMax, Limiter &globalLimiter, Limiter &interfaceLimiter, Limiter &globalVolumeFractionLimiter, Limiter &interfaceVolumeFractionLimiter, Prim type = vecPhases);
@@ -65,13 +65,13 @@ class BoundCond : public CellInterface
     virtual int whoAmI() const { Errors::errorMessage("whoAmI pas prevu pour la limite demandee"); return 0; };
     virtual void printInfo(){};
 
-    virtual int getNumPhys() const;
+    virtual const int& getNumPhys() const { return m_numPhysique; };
 
     //Pour methode AMR
     virtual void computeXi(const double &criteriaVar, const bool &varRho, const bool &varP, const bool &varU, const bool &varAlpha) {};
     virtual void computeFluxXi();
-    virtual void raffineBordExterne(const int &nbCellsY, const int &nbCellsZ, const double &dXParent, const double &dYParent, const double &dZParent, Cell *cellRef, const int &dim);
-    virtual void deraffineBordExterne(Cell *cellRef);
+    virtual void raffineCellInterfaceExterne(const int &nbCellsY, const int &nbCellsZ, const double &dXParent, const double &dYParent, const double &dZParent, Cell *cellRef, const int &dim);
+    virtual void deraffineCellInterfaceExterne(Cell *cellRef);
 
   protected:
     int m_numPhysique;

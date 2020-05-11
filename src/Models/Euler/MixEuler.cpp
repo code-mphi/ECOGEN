@@ -35,7 +35,6 @@
 #include <cmath>
 #include "MixEuler.h"
 
-using namespace std;
 using namespace tinyxml2;
 
 //***************************************************************************

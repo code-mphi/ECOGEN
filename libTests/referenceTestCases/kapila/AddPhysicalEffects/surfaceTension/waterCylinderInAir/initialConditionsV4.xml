@@ -4,15 +4,15 @@
     <physicalDomains> 
         <domain name="base" state="air" type="entireDomain"/>
         <domain name="waterDroplet"  state="waterDroplet" type="disc">
-            <dataDisc axe1="x" axe2="y" radius="0.15">
+            <dataDisc axis1="x" axis2="y" radius="0.15">
                 <!-- <center x="0.375" y="0.375" z="0.375"/> -->
                 <center x="0." y="0." z="0."/>
             </dataDisc>
         </domain>
-        <!-- <domain name="waterDroplet"  state="waterDroplet" type="pavement">
-            <dataPavement lAxeX="0.15" lAxeY="0.15" lAxeZ="1.">
+        <!-- <domain name="waterDroplet"  state="waterDroplet" type="cuboid">
+            <dataCuboid lAxisX="0.15" lAxisY="0.15" lAxisZ="1.">
                 <posInferiorVertex x="0." y="0." z="0."/>
-            </dataPavement>
+            </dataCuboid>
         </domain> -->
     </physicalDomains>
 
@@ -44,10 +44,10 @@
     
     <!--  LIST OF STATES  -->
     <state name="air">
-        <material type="fluide" EOS="IG_air.xml">
+        <material type="fluid" EOS="IG_air.xml">
             <dataFluid alpha="0.99999999" density="1.0"/>
         </material>
-        <material type="fluide" EOS="SG_liquidForSurfaceTensionCases.xml">
+        <material type="fluid" EOS="SG_liquidForSurfaceTensionCases.xml">
             <dataFluid alpha="0.00000001" density="1000.0"/>
         </material>
         <mixture>
@@ -58,10 +58,10 @@
     </state>
 
     <state name="waterDroplet">
-        <material type="fluide" EOS="IG_air.xml">
+        <material type="fluid" EOS="IG_air.xml">
             <dataFluid alpha="0.00000001" density="1.0"/>
         </material>
-        <material type="fluide" EOS="SG_liquidForSurfaceTensionCases.xml">
+        <material type="fluid" EOS="SG_liquidForSurfaceTensionCases.xml">
             <dataFluid alpha="0.99999999" density="1000.0"/>
         </material>
         <mixture>

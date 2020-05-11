@@ -34,11 +34,9 @@
 
 #include "GDEntireDomain.h"
 
-using namespace std;
-
 //***********************************************************
 
-GDEntireDomain::GDEntireDomain(string name, vector<Phase*> vecPhases, Mixture *mixture, vector<Transport> vecTransports, const int &physicalEntity) :
+GDEntireDomain::GDEntireDomain(std::string name, std::vector<Phase*> vecPhases, Mixture *mixture, std::vector<Transport> vecTransports, const int &physicalEntity) :
   GeometricalDomain(name, vecPhases, mixture, vecTransports, physicalEntity)
 {}
 

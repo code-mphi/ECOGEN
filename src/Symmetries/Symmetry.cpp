@@ -34,8 +34,6 @@
 
 #include "Symmetry.h"
 
-using namespace std;
-
 //***********************************************************************
 
 Symmetry::Symmetry() {}

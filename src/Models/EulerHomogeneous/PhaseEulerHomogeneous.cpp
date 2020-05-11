@@ -29,14 +29,12 @@
 
 //! \file      PhaseEulerHomogeneous.cpp
 //! \author    F. Petitpas, K. Schmidmayer
-//! \version   1.0
-//! \date      December 21 2017
+//! \version   1.1
+//! \date      June 5 2019
 
 #include "PhaseEulerHomogeneous.h"
 #include "../../Eos/Eos.h"
-#include <fstream>
 
-using namespace std;
 using namespace tinyxml2;
 
 //***************************************************************************
@@ -45,7 +43,7 @@ PhaseEulerHomogeneous::PhaseEulerHomogeneous() :m_alpha(1.0), m_density(0.), m_p
 
 //***************************************************************************
 
-PhaseEulerHomogeneous::PhaseEulerHomogeneous(XMLElement *material, Eos *eos, string fileName) : m_eos(eos), m_energie(0.), m_totalEnergy(0.), m_soundSpeed(0.)
+PhaseEulerHomogeneous::PhaseEulerHomogeneous(XMLElement *material, Eos *eos, std::string fileName) : m_eos(eos), m_energie(0.), m_totalEnergy(0.), m_soundSpeed(0.)
 {
   XMLElement *sousElement(material->FirstChildElement("dataFluid"));
   if (sousElement == NULL) throw ErrorXMLElement("dataFluid", fileName, __FILE__, __LINE__);
@@ -123,7 +121,7 @@ double PhaseEulerHomogeneous::returnScalar(const int &numVar) const
 
 //***************************************************************************
 
-string PhaseEulerHomogeneous::returnNameScalar(const int &numVar) const
+std::string PhaseEulerHomogeneous::returnNameScalar(const int &numVar) const
 {
   switch (numVar)
   {
@@ -179,12 +177,32 @@ void PhaseEulerHomogeneous::fillBuffer(double *buffer, int &counter) const
 
 //***************************************************************************
 
+void PhaseEulerHomogeneous::fillBuffer(std::vector<double> &dataToSend) const
+{
+  dataToSend.push_back(m_alpha);
+  dataToSend.push_back(m_density);
+  dataToSend.push_back(m_pressure);
+  dataToSend.push_back(static_cast<double>(m_eos->getNumber()));
+}
+
+//***************************************************************************
+
 void PhaseEulerHomogeneous::getBuffer(double *buffer, int &counter, Eos **eos)
 {
   m_alpha = buffer[++counter];
   m_density = buffer[++counter];
   m_pressure = buffer[++counter];
   m_eos = eos[static_cast<int>(buffer[++counter])];
+}
+
+//***************************************************************************
+
+void PhaseEulerHomogeneous::getBuffer(std::vector<double> &dataToReceive, int &counter, Eos **eos)
+{
+  m_alpha = dataToReceive[counter++];
+  m_density = dataToReceive[counter++];
+  m_pressure = dataToReceive[counter++];
+  m_eos = eos[static_cast<int>(dataToReceive[counter++])];
 }
 
 //****************************************************************************
@@ -244,7 +262,7 @@ void PhaseEulerHomogeneous::getBufferSlopes(double *buffer, int &counter)
 //**************************** VERIFICATION **********************************
 //****************************************************************************
 
-void PhaseEulerHomogeneous::verifyPhase(const string &message) const
+void PhaseEulerHomogeneous::verifyPhase(const std::string &message) const
 {
   if (m_alpha <= 1e-10) errors.push_back(Errors(message + "too small alpha in verifyPhase"));
   if (m_density <= 1.e-10) errors.push_back(Errors(message + "too small density in verifyPhase"));
@@ -264,42 +282,6 @@ void PhaseEulerHomogeneous::verifyAndCorrectPhase()
 //****************************************************************************
 //**************************** DATA ACCESSORS ********************************
 //****************************************************************************
-
-double PhaseEulerHomogeneous::getAlpha() const { return m_alpha; }
-
-//***************************************************************************
-
-double PhaseEulerHomogeneous::getDensity() const { return m_density; }
-
-//***************************************************************************
-
-double PhaseEulerHomogeneous::getPressure() const { return m_pressure; }
-
-//***************************************************************************
-
-double PhaseEulerHomogeneous::getY() const { return m_Y; }
-
-//***************************************************************************
-
-Eos* PhaseEulerHomogeneous::getEos() const { return m_eos; }
-
-//***************************************************************************
-
-double PhaseEulerHomogeneous::getEnergy() const { return m_energie; }
-
-//***************************************************************************
-
-double PhaseEulerHomogeneous::getSoundSpeed() const { return m_soundSpeed; }
-
-//***************************************************************************
-
-double PhaseEulerHomogeneous::getTotalEnergy() const { return m_totalEnergy; }
-
-//***************************************************************************
-
-double PhaseEulerHomogeneous::getTemperature() const { return m_eos->computeTemperature(m_density, m_pressure); }
-
-//***************************************************************************
 
 void PhaseEulerHomogeneous::setAlpha(double alpha) { m_alpha = alpha; }
 

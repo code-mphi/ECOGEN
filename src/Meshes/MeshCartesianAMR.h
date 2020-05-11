@@ -31,9 +31,9 @@
 #define MESHCARTESIANAMR_H
 
 //! \file      MeshCartesian.h
-//! \author    K.Schmidmayer, F. Petitpas
-//! \version   1.0
-//! \date      September 06 2018
+//! \author    K. Schmidmayer, F. Petitpas, B. Dorschner
+//! \version   1.1
+//! \date      June 5 2019
 
 #include "MeshCartesian.h"
 
@@ -46,44 +46,52 @@ public:
     bool varAlpha = false, double xiSplit = 1., double xiJoin = 1.);
   virtual ~MeshCartesianAMR();
 
-	virtual void genereTableauxCellsBordsLvl(Cell **cells, CellInterface **bord, std::vector<Cell *> **cellsLvl,
-		std::vector<CellInterface *> **boundariesLvl);
-  virtual void procedureRaffinementInitialization(std::vector<Cell *> *cellsLvl, std::vector<CellInterface *> *boundariesLvl,
+  virtual int initializeGeometrie(TypeMeshContainer<Cell *> &cells, TypeMeshContainer<Cell *> &cellsGhost, TypeMeshContainer<CellInterface *> &cellInterfaces,
+    const int &restartSimulation, bool pretraitementParallele, std::string ordreCalcul);
+  void initializeGeometrieAMR(TypeMeshContainer<Cell *> &cells, TypeMeshContainer<Cell *> &cellsGhost, TypeMeshContainer<CellInterface *> &cellInterfaces, const int &restartSimulation, std::string ordreCalcul);
+  void assignElementProperties(TypeMeshContainer<Cell *> &cells, std::vector<decomposition::Key<3>> &keys);
+  void createCellInterfacesFacesAndGhostCells(TypeMeshContainer<Cell *> &cells, TypeMeshContainer<Cell *> &cellsGhost, TypeMeshContainer<CellInterface*>& cellInterfaces, std::string ordreCalcul);
+  virtual void procedureRaffinementInitialization(TypeMeshContainer<Cell *> *cellsLvl, TypeMeshContainer<Cell *> *cellsLvlGhost, TypeMeshContainer<CellInterface *> *cellInterfacesLvl,
 		const std::vector<AddPhys*> &addPhys, Model *model, int &nbCellsTotalAMR, std::vector<GeometricalDomain*> &domains,
-		Cell **cells, Eos **eos, const int &resumeSimulation);
-  virtual void procedureRaffinement(std::vector<Cell *> *cellsLvl, std::vector<CellInterface *> *boundariesLvl, const int &lvl,
-    const std::vector<AddPhys*> &addPhys, Model *model, int &nbCellsTotalAMR, Cell **cells, Eos **eos);
+		Eos **eos, const int &restartSimulation, std::string ordreCalcul, const int &numberPhases, const int &numberTransports);
+  virtual void procedureRaffinement(TypeMeshContainer<Cell *> *cellsLvl, TypeMeshContainer<Cell *> *cellsLvlGhost, TypeMeshContainer<CellInterface *> *cellInterfacesLvl, const int &lvl,
+    const std::vector<AddPhys*> &addPhys, Model *model, int &nbCellsTotalAMR, Eos **eos);
   virtual std::string whoAmI() const;
 
   //Printing / Reading
-  virtual void ecritHeaderPiece(std::ofstream &fileStream, std::vector<Cell *> *cellsLvl, int lvl = 0) const;
-  virtual void recupereNoeuds(std::vector<double> &jeuDonnees, int lvl = 0) const;
-  virtual void recupereConnectivite(std::vector<double> &jeuDonnees, int lvl = 0) const;
-  virtual void recupereOffsets(std::vector<double> &jeuDonnees, int lvl = 0) const;
-  virtual void recupereTypeCell(std::vector<double> &jeuDonnees, int lvl = 0) const;
-  virtual void recupereDonnees(std::vector<Cell *> *cellsLvl, std::vector<double> &jeuDonnees, const int var, int phase, int lvl = 0) const;
-  virtual void setDataSet(std::vector<double> &jeuDonnees, std::vector<Cell *> *cellsLvl, const int var, int phase, int lvl = 0) const;
-  virtual void refineCell(Cell *cell, const std::vector<AddPhys*> &addPhys, Model *model, int &nbCellsTotalAMR);
+  virtual void ecritHeaderPiece(std::ofstream &fileStream, TypeMeshContainer<Cell *> *cellsLvl) const;
+  virtual void recupereNoeuds(std::vector<double> &jeuDonnees, std::vector<Cell *> *cellsLvl) const;
+  virtual void recupereConnectivite(std::vector<double> &jeuDonnees, std::vector<Cell *> *cellsLvl) const;
+  virtual void recupereOffsets(std::vector<double> &jeuDonnees, std::vector<Cell *> *cellsLvl) const;
+  virtual void recupereTypeCell(std::vector<double> &jeuDonnees, std::vector<Cell *> *cellsLvl) const;
+  virtual void recupereDonnees(TypeMeshContainer<Cell *> *cellsLvl, std::vector<double> &jeuDonnees, const int var, int phase) const;
+  virtual void setDataSet(std::vector<double> &jeuDonnees, TypeMeshContainer<Cell *> *cellsLvl, const int var, int phase) const;
+  virtual void refineCellAndCellInterfaces(Cell *cell, const std::vector<AddPhys*> &addPhys, Model *model, int &nbCellsTotalAMR);
+  virtual void printDomainDecomposition(std::ofstream &fileStream);
+  virtual void readDomainDecomposition(std::ifstream &fileStream);
 
   //Accesseurs
   virtual int getLvlMax() const { return m_lvlMax; };
 
 	//Pour parallele
-	virtual void initializePersistentCommunications(const int numberPhases, const int numberTransports, Cell **cells, std::string ordreCalcul);
-	virtual void communicationsPrimitives(Cell **cells, Eos **eos, const int &lvl, Prim type = vecPhases);
-	virtual void communicationsSlopes(Cell **cells, const int &lvl);
-	virtual void communicationsVector(Cell **cells, std::string nameVector, const int &dim, const int &lvl, int num, int index);
-	virtual void communicationsAddPhys(const std::vector<AddPhys*> &addPhys, Cell **cells, const int &lvl);
-  virtual void communicationsTransports(Cell **cells, const int &lvl);
-	virtual void finalizeParallele(const int &lvlMax);
+  virtual void initializePersistentCommunications(const int numberPhases, const int numberTransports, const TypeMeshContainer<Cell *> &cells, std::string ordreCalcul);
+  virtual void finalizeParallele(const int &lvlMax);
+  virtual void parallelLoadBalancingAMR(TypeMeshContainer<Cell *> *cellsLvl, TypeMeshContainer<Cell *> *cellsLvlGhost, TypeMeshContainer<CellInterface *> *cellInterfacesLvl, std::string ordreCalcul,
+    const int &numberPhases, const int &numberTransports, const std::vector<AddPhys*> &addPhys, Model *model, Eos **eos, int &nbCellsTotalAMR, bool init = false);
+  virtual void computePotentialBalancing(TypeMeshContainer<Cell *> *cellsLvl, bool init, int lvl, bool &balance, std::string ordreCalcul,
+    std::vector<typename decomposition::Key<3>::value_type> &indicesSendStartGlobal, std::vector<typename decomposition::Key<3>::value_type> &indicesSendEndGlobal,
+    std::vector<typename decomposition::Key<3>::value_type> &indicesReceiveStartGlobal, std::vector<typename decomposition::Key<3>::value_type> &indicesReceiveEndGlobal);
+  virtual void balance(TypeMeshContainer<Cell *> *cellsLvl, TypeMeshContainer<Cell *> *cellsLvlGhost, TypeMeshContainer<CellInterface *> *cellInterfacesLvl, std::string ordreCalcul,
+    const int &numberPhases, const int &numberTransports, const std::vector<AddPhys*> &addPhys, Model *model, Eos **eos, int &nbCellsTotalAMR,
+    std::vector<typename decomposition::Key<3>::value_type> &indicesSendStartGlobal, std::vector<typename decomposition::Key<3>::value_type> &indicesSendEndGlobal,
+    std::vector<typename decomposition::Key<3>::value_type> &indicesReceiveStartGlobal, std::vector<typename decomposition::Key<3>::value_type> &indicesReceiveEndGlobal);
 
 private:
-  int m_lvlMax;                              //!<Niveau maximal sur l arbre AMR (si m_lvlMax = 0, pas d AMR)
-	double m_criteriaVar;                      //!<Valeur du criteria a depasser sur la variation d'une variable pour le (de)raffinement (met xi=1.)
-	bool m_varRho, m_varP, m_varU, m_varAlpha; //!<Choix sur quelle variation on (de)raffine
-	double m_xiSplit, m_xiJoin;                //!<Valeur de xi pour split ou join les mailles
-  std::vector<Cell *> **m_cellsLvl;          //!<Pointer vers le tableau de vecteurs contenant les cells de compute, un vecteur par niveau.
-	std::vector<Cell *> *m_cellsLvlGhost;      //!<Tableau de vecteurs contenant les cells fantomes, un vecteur par niveau.
+  int m_lvlMax;                               //!<Niveau maximal sur l arbre AMR (si m_lvlMax = 0, pas d AMR)
+	double m_criteriaVar;                       //!<Valeur du criteria a depasser sur la variation d'une variable pour le (de)raffinement (met xi=1.)
+	bool m_varRho, m_varP, m_varU, m_varAlpha;  //!<Choix sur quelle variation on (de)raffine
+	double m_xiSplit, m_xiJoin;                 //!<Valeur de xi pour split ou join les mailles
+  decomposition::Decomposition m_decomp;      //!<Parallel domain decomposition based on keys
 
 };
 

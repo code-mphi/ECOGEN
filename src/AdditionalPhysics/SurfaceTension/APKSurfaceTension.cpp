@@ -28,16 +28,15 @@
 //  If not, see <http://www.gnu.org/licenses/>.
 
 //! \file      APKSurfaceTension.cpp
-//! \author    K. Schmidmayer
-//! \version   1.0
-//! \date      December 20 2017
+//! \author    K. Schmidmayer, J. Caze
+//! \version   1.1
+//! \date      November 19 2019
 
 #include <iostream>
 #include <cmath>
 #include <algorithm>
 #include "APKSurfaceTension.h"
 
-using namespace std;
 using namespace tinyxml2;
 
 //***********************************************************************
@@ -49,7 +48,7 @@ APKSurfaceTension::APKSurfaceTension(){}
 *  APKSurfaceTension constructor from a read in XML format
 *  ex : <dataSurfaceTension transport="color1" sigma="800."/>
 */
-APKSurfaceTension::APKSurfaceTension(XMLElement *element, int& numberQPA, vector<string> nameTransports, vector<string> namePhases, string nameFichier)
+APKSurfaceTension::APKSurfaceTension(XMLElement *element, int& numberQPA, std::vector<std::string> nameTransports, std::vector<std::string> namePhases, std::string nameFichier)
 {
   //Collecting attributes
   //---------------------
@@ -77,7 +76,7 @@ APKSurfaceTension::APKSurfaceTension(XMLElement *element, int& numberQPA, vector
   XMLElement *sousElement2(element->FirstChildElement("reinitializationTransport"));
   if (sousElement2 != NULL) {
     m_reinitializationActivated = true;
-    //Name du fluide associee
+    //Name of associated fluid
     m_namePhaseAssociated = sousElement2->Attribute("phase");
     if (m_namePhaseAssociated == "") throw ErrorXMLAttribut("phase", nameFichier, __FILE__, __LINE__);
     //On associe tout de suite avec le number correspondant dans m_vecPhases des cells
@@ -114,62 +113,64 @@ double APKSurfaceTension::computeEnergyAddPhys(QuantitiesAddPhys* QPA)
 
 //***********************************************************************
 
-void APKSurfaceTension::solveFluxAddPhys(CellInterface *cellBound, const int& numberPhases)
+void APKSurfaceTension::solveFluxAddPhys(CellInterface *cellInterface, const int& numberPhases)
 {
-  m_normal = cellBound->getFace()->getNormal();
-  m_tangent = cellBound->getFace()->getTangent();
-  m_binormal = cellBound->getFace()->getBinormal();
+  m_normal = cellInterface->getFace()->getNormal();
+  m_tangent = cellInterface->getFace()->getTangent();
+  m_binormal = cellInterface->getFace()->getBinormal();
 
   // Copy and projection on orientation axes attached to the edge of velocities of left and right cells
-  m_velocityLeft = cellBound->getCellGauche()->getMixture()->getVelocity();
-  m_velocityRight = cellBound->getCellDroite()->getMixture()->getVelocity();
+  m_velocityLeft = cellInterface->getCellGauche()->getMixture()->getVelocity();
+  m_velocityRight = cellInterface->getCellDroite()->getMixture()->getVelocity();
   m_velocityLeft.localProjection(m_normal, m_tangent, m_binormal);
   m_velocityRight.localProjection(m_normal, m_tangent, m_binormal);
 
   // Copy and projection on orientation axes attached to the edge of gradients of left and right cells
-  m_gradCLeft = cellBound->getCellGauche()->getQPA(m_numQPAGradC)->getGrad();
-  m_gradCRight = cellBound->getCellDroite()->getQPA(m_numQPAGradC)->getGrad();
+  m_gradCLeft = cellInterface->getCellGauche()->getQPA(m_numQPAGradC)->getGrad();
+  m_gradCRight = cellInterface->getCellDroite()->getQPA(m_numQPAGradC)->getGrad();
   m_gradCLeft.localProjection(m_normal, m_tangent, m_binormal);
   m_gradCRight.localProjection(m_normal, m_tangent, m_binormal);
 
-  // Reset of fluxBufferKapila
-  fluxBufferKapila->setToZero(numberPhases);
+  // Reset of fluxBuffKapila
+  static_cast<FluxKapila*> (fluxBuff)->setToZero(numberPhases);
 
   this->solveFluxSurfaceTensionInner(m_velocityLeft, m_velocityRight, m_gradCLeft, m_gradCRight);
 
   // Flux projection on the absolute orientation axes
-  cellBound->getMod()->reverseProjection(m_normal, m_tangent, m_binormal);
+  cellInterface->getMod()->reverseProjection(m_normal, m_tangent, m_binormal);
 }
 
 //***********************************************************************
 
-void APKSurfaceTension::solveFluxAddPhysBoundary(CellInterface *cellBound, const int &numberPhases)
+void APKSurfaceTension::solveFluxAddPhysBoundary(CellInterface *cellInterface, const int &numberPhases)
 {
-  m_normal = cellBound->getFace()->getNormal();
-  m_tangent = cellBound->getFace()->getTangent();
-  m_binormal = cellBound->getFace()->getBinormal();
+  //KS//DEV// Nothing special is done at the boundaries with surface tension right now (considered as symmetry)
+
+  m_normal = cellInterface->getFace()->getNormal();
+  m_tangent = cellInterface->getFace()->getTangent();
+  m_binormal = cellInterface->getFace()->getBinormal();
 
   // Copy and projection on orientation axes attached to the edge of velocities of left and right cells
-  m_velocityLeft = cellBound->getCellGauche()->getMixture()->getVelocity();
+  m_velocityLeft = cellInterface->getCellGauche()->getMixture()->getVelocity();
   m_velocityLeft.localProjection(m_normal, m_tangent, m_binormal);
   
   // Copy and projection on orientation axes attached to the edge of gradients of left and right cells
-  m_gradCLeft = cellBound->getCellGauche()->getQPA(m_numQPAGradC)->getGrad();
+  m_gradCLeft = cellInterface->getCellGauche()->getQPA(m_numQPAGradC)->getGrad();
   m_gradCLeft.localProjection(m_normal, m_tangent, m_binormal);
 
-  // Reset of fluxBufferKapila (allow to then do the sum of surface-tension effects for the different phases combinations)
-  fluxBufferKapila->setToZero(numberPhases);
+  // Reset of fluxBuffKapila (allow to then do the sum of surface-tension effects for the different phases combinations)
+  static_cast<FluxKapila*> (fluxBuff)->setToZero(numberPhases);
 
-  int typeBord = cellBound->whoAmI();
-  if (typeBord == 1) { this->solveFluxSurfaceTensionAbs(m_velocityLeft, m_gradCLeft); }
-  else if (typeBord == 2 || typeBord == 6) { this->solveFluxSurfaceTensionWall(m_gradCLeft); }
-  else if (typeBord == 3) { this->solveFluxSurfaceTensionOutflow(m_velocityLeft, m_gradCLeft); }
-  else if (typeBord == 4) { this->solveFluxSurfaceTensionInflow(m_velocityLeft, m_gradCLeft); }
-  else { this->solveFluxSurfaceTensionOther(m_velocityLeft, m_gradCLeft); }
+  int typeCellInterface = cellInterface->whoAmI();
+  if (typeCellInterface == 1) { this->solveFluxSurfaceTensionNonReflecting(m_velocityLeft, m_gradCLeft); } //Non-reflecting
+  else if (typeCellInterface == 2 || typeCellInterface == 6) { this->solveFluxSurfaceTensionWall(m_gradCLeft); } //Wall or Symmetry
+  else if (typeCellInterface == 3) { this->solveFluxSurfaceTensionOutflow(m_velocityLeft, m_gradCLeft); } //Outflow
+  else if (typeCellInterface == 4) { this->solveFluxSurfaceTensionInflow(m_velocityLeft, m_gradCLeft); } //Injection
+  else { this->solveFluxSurfaceTensionOther(m_velocityLeft, m_gradCLeft); } //Tank or else
   // etc... Boundaries not taken into account yet for surface tension, pay attention
 
   // Flux projection on the absolute orientation axes
-  cellBound->getMod()->reverseProjection(m_normal, m_tangent, m_binormal);
+  cellInterface->getMod()->reverseProjection(m_normal, m_tangent, m_binormal);
 }
 
 //***********************************************************************
@@ -194,7 +195,7 @@ void APKSurfaceTension::solveFluxSurfaceTensionInner(Coord &velocityLeft, Coord 
 	w3R = gradCRight.getZ();
 	normWR = gradCRight.norm();
 
-	//Data of the cell boundary
+	//Data of the cell interface
 	double u, v, w, w1, w2, w3, normW;
 	u = (uL + uR) / 2.;
 	v = (vL + vR) / 2.;
@@ -204,18 +205,18 @@ void APKSurfaceTension::solveFluxSurfaceTensionInner(Coord &velocityLeft, Coord 
 	w3 = (w3L + w3R) / 2.;
 	normW = (normWL + normWR) / 2.;
 
-	//Writing of surface-tension terms on each equation of fluxBufferKapila
+	//Writing of surface-tension terms on each equation of fluxBuffKapila
 	if (normW > 1.e-6) {
-	  fluxBufferKapila->m_qdm.setX(fluxBufferKapila->m_qdm.getX() + m_sigma*(w1*w1 / normW - normW));
-	  fluxBufferKapila->m_qdm.setY(fluxBufferKapila->m_qdm.getY() + m_sigma *w1*w2 / normW);
-	  fluxBufferKapila->m_qdm.setZ(fluxBufferKapila->m_qdm.getZ() + m_sigma *w1*w3 / normW);
-    fluxBufferKapila->m_energMixture += m_sigma / normW*(w1*w1*u + w1*w2*v + w1*w3*w);
+	  static_cast<FluxKapila*> (fluxBuff)->m_qdm.setX(static_cast<FluxKapila*> (fluxBuff)->m_qdm.getX() + m_sigma*(w1*w1 / normW - normW));
+	  static_cast<FluxKapila*> (fluxBuff)->m_qdm.setY(static_cast<FluxKapila*> (fluxBuff)->m_qdm.getY() + m_sigma *w1*w2 / normW);
+	  static_cast<FluxKapila*> (fluxBuff)->m_qdm.setZ(static_cast<FluxKapila*> (fluxBuff)->m_qdm.getZ() + m_sigma *w1*w3 / normW);
+    static_cast<FluxKapila*> (fluxBuff)->m_energMixture += m_sigma / normW*(w1*w1*u + w1*w2*v + w1*w3*w);
 	}
 }
 
 //***********************************************************************
 
-void APKSurfaceTension::solveFluxSurfaceTensionAbs(Coord &velocityLeft, Coord &gradCLeft) const
+void APKSurfaceTension::solveFluxSurfaceTensionNonReflecting(Coord &velocityLeft, Coord &gradCLeft) const
 {
   this->solveFluxSurfaceTensionInner(velocityLeft, velocityLeft, gradCLeft, gradCLeft);
 }
@@ -226,13 +227,13 @@ void APKSurfaceTension::solveFluxSurfaceTensionWall(Coord &gradCLeft) const
 {
   //Considered as a symmetry and not as a wall with a triple vertex yet
 
-  //Data of the cell boundary
+  //Data of the cell interface
   double normW;
   normW = gradCLeft.norm();
 
-  //Writing of surface-tension terms on each equation of fluxBufferKapila
+  //Writing of surface-tension terms on each equation of fluxBuffKapila
   if (normW > 1.e-6) {
-    fluxBufferKapila->m_qdm.setX(fluxBufferKapila->m_qdm.getX() - m_sigma*normW);
+    static_cast<FluxKapila*> (fluxBuff)->m_qdm.setX(static_cast<FluxKapila*> (fluxBuff)->m_qdm.getX() - m_sigma*normW);
   }
 }
 
@@ -243,10 +244,10 @@ void APKSurfaceTension::solveFluxSurfaceTensionOutflow(Coord &velocityLeft, Coor
   //Not manage at the moment, just an example
 
   // To avoid bug when not manage
-  fluxBufferKapila->m_qdm.setX(fluxBufferKapila->m_qdm.getX() + 0.);
-  fluxBufferKapila->m_qdm.setY(fluxBufferKapila->m_qdm.getY() + 0.);
-  fluxBufferKapila->m_qdm.setZ(fluxBufferKapila->m_qdm.getZ() + 0.);
-  fluxBufferKapila->m_energMixture += 0.;
+  static_cast<FluxKapila*> (fluxBuff)->m_qdm.setX(static_cast<FluxKapila*> (fluxBuff)->m_qdm.getX() + 0.);
+  static_cast<FluxKapila*> (fluxBuff)->m_qdm.setY(static_cast<FluxKapila*> (fluxBuff)->m_qdm.getY() + 0.);
+  static_cast<FluxKapila*> (fluxBuff)->m_qdm.setZ(static_cast<FluxKapila*> (fluxBuff)->m_qdm.getZ() + 0.);
+  static_cast<FluxKapila*> (fluxBuff)->m_energMixture += 0.;
 }
 
 //***********************************************************************
@@ -256,10 +257,10 @@ void APKSurfaceTension::solveFluxSurfaceTensionInflow(Coord &velocityLeft, Coord
   //Not manage at the moment, just an example
 
   // To avoid bug when not manage
-  fluxBufferKapila->m_qdm.setX(fluxBufferKapila->m_qdm.getX() + 0.);
-  fluxBufferKapila->m_qdm.setY(fluxBufferKapila->m_qdm.getY() + 0.);
-  fluxBufferKapila->m_qdm.setZ(fluxBufferKapila->m_qdm.getZ() + 0.);
-  fluxBufferKapila->m_energMixture += 0.;
+  static_cast<FluxKapila*> (fluxBuff)->m_qdm.setX(static_cast<FluxKapila*> (fluxBuff)->m_qdm.getX() + 0.);
+  static_cast<FluxKapila*> (fluxBuff)->m_qdm.setY(static_cast<FluxKapila*> (fluxBuff)->m_qdm.getY() + 0.);
+  static_cast<FluxKapila*> (fluxBuff)->m_qdm.setZ(static_cast<FluxKapila*> (fluxBuff)->m_qdm.getZ() + 0.);
+  static_cast<FluxKapila*> (fluxBuff)->m_energMixture += 0.;
 }
 
 //***********************************************************************
@@ -267,40 +268,40 @@ void APKSurfaceTension::solveFluxSurfaceTensionInflow(Coord &velocityLeft, Coord
 void APKSurfaceTension::solveFluxSurfaceTensionOther(Coord &velocityLeft, Coord &gradCLeft) const
 {
   //Not manage at the moment, just an example
-  cout << "Surface-tension boundary not manage" << endl;
+  std::cout << "Surface-tension boundary not manage" << std::endl;
 
   // To avoid bug when not manage
-  fluxBufferKapila->m_qdm.setX(fluxBufferKapila->m_qdm.getX() + 0.);
-  fluxBufferKapila->m_qdm.setY(fluxBufferKapila->m_qdm.getY() + 0.);
-  fluxBufferKapila->m_qdm.setZ(fluxBufferKapila->m_qdm.getZ() + 0.);
-  fluxBufferKapila->m_energMixture += 0.;
+  static_cast<FluxKapila*> (fluxBuff)->m_qdm.setX(static_cast<FluxKapila*> (fluxBuff)->m_qdm.getX() + 0.);
+  static_cast<FluxKapila*> (fluxBuff)->m_qdm.setY(static_cast<FluxKapila*> (fluxBuff)->m_qdm.getY() + 0.);
+  static_cast<FluxKapila*> (fluxBuff)->m_qdm.setZ(static_cast<FluxKapila*> (fluxBuff)->m_qdm.getZ() + 0.);
+  static_cast<FluxKapila*> (fluxBuff)->m_energMixture += 0.;
 }
 
 //***********************************************************************
 
-void APKSurfaceTension::addSymmetricTermsRadialAxeOnX(Cell *cell, const int &numberPhases)
+void APKSurfaceTension::addSymmetricTermsRadialAxisOnX(Cell *cell, const int &numberPhases)
 {
   //Extraction of data
   double r, w1, w2, normW;
-  r = cell->getPosition().getY();
+  r = cell->getPosition().getX();
   w1 = cell->getQPA(m_numQPAGradC)->getGrad().getX();
   w2 = cell->getQPA(m_numQPAGradC)->getGrad().getY();
   normW = cell->getQPA(m_numQPAGradC)->getGrad().norm();
 
-  //Writing of symmetrical surface-tension terms on each equation of fluxBufferKapila
+  //Writing of symmetrical surface-tension terms on each equation of fluxBuffKapila
   for (int k = 0; k<numberPhases; k++) {
-    fluxBufferKapila->m_alpha[k] = 0.;
-    fluxBufferKapila->m_masse[k] = 0.;
-    fluxBufferKapila->m_energ[k] = 0.;
+    static_cast<FluxKapila*> (fluxBuff)->m_alpha[k] = 0.;
+    static_cast<FluxKapila*> (fluxBuff)->m_masse[k] = 0.;
+    static_cast<FluxKapila*> (fluxBuff)->m_energ[k] = 0.;
   }
   if (normW > 1.e-6) {
-    fluxBufferKapila->m_qdm.setX(-m_sigma * w1*w1 / normW / r);
-    fluxBufferKapila->m_qdm.setY(-m_sigma * w1*w2 / normW / r);
-    fluxBufferKapila->m_energMixture = -m_sigma / normW * (w1*w1*cell->getMixture()->getU() + w1*w2*cell->getMixture()->getV()) / r;
+    static_cast<FluxKapila*> (fluxBuff)->m_qdm.setX(-m_sigma * w1*w1 / normW / r);
+    static_cast<FluxKapila*> (fluxBuff)->m_qdm.setY(-m_sigma * w1*w2 / normW / r);
+    static_cast<FluxKapila*> (fluxBuff)->m_energMixture = -m_sigma / normW * (w1*w1*cell->getMixture()->getU() + w1*w2*cell->getMixture()->getV()) / r;
   }
   else {
-    fluxBufferKapila->m_qdm = 0.;
-    fluxBufferKapila->m_energMixture = 0.;
+    static_cast<FluxKapila*> (fluxBuff)->m_qdm = 0.;
+    static_cast<FluxKapila*> (fluxBuff)->m_energMixture = 0.;
   }
 
   cell->getCons()->addFlux(1., numberPhases);
@@ -308,7 +309,7 @@ void APKSurfaceTension::addSymmetricTermsRadialAxeOnX(Cell *cell, const int &num
 
 //***********************************************************************
 
-void APKSurfaceTension::addSymmetricTermsRadialAxeOnY(Cell *cell, const int &numberPhases)
+void APKSurfaceTension::addSymmetricTermsRadialAxisOnY(Cell *cell, const int &numberPhases)
 {
   //Extraction of data
   double r, w1, w2, normW;
@@ -317,35 +318,35 @@ void APKSurfaceTension::addSymmetricTermsRadialAxeOnY(Cell *cell, const int &num
   w2 = cell->getQPA(m_numQPAGradC)->getGrad().getY();
   normW = cell->getQPA(m_numQPAGradC)->getGrad().norm();
 
-  //Writing of symmetrical surface-tension terms on each equation of fluxBufferKapila
+  //Writing of symmetrical surface-tension terms on each equation of fluxBuffKapila
   for (int k = 0; k<numberPhases; k++) {
-    fluxBufferKapila->m_alpha[k] = 0.;
-    fluxBufferKapila->m_masse[k] = 0.;
-    fluxBufferKapila->m_energ[k] = 0.;
+    static_cast<FluxKapila*> (fluxBuff)->m_alpha[k] = 0.;
+    static_cast<FluxKapila*> (fluxBuff)->m_masse[k] = 0.;
+    static_cast<FluxKapila*> (fluxBuff)->m_energ[k] = 0.;
   }
   if (normW > 1.e-6) {
-    fluxBufferKapila->m_qdm.setX(-m_sigma * w1*w2 / normW / r);
-    fluxBufferKapila->m_qdm.setY(-m_sigma * w2*w2 / normW / r);
-    fluxBufferKapila->m_energMixture = -m_sigma / normW * (w1*w2*cell->getMixture()->getU() + w2*w2*cell->getMixture()->getV()) / r;
+    static_cast<FluxKapila*> (fluxBuff)->m_qdm.setX(-m_sigma * w1*w2 / normW / r);
+    static_cast<FluxKapila*> (fluxBuff)->m_qdm.setY(-m_sigma * w2*w2 / normW / r);
+    static_cast<FluxKapila*> (fluxBuff)->m_energMixture = -m_sigma / normW * (w1*w2*cell->getMixture()->getU() + w2*w2*cell->getMixture()->getV()) / r;
 
-    //if ((abs(-m_sigma * w1*w2 / normW / r) + abs(-m_sigma * w2*w2 / normW / r)) > 2*(abs(cell->getCons()->getQdm().getX()) + abs(cell->getCons()->getQdm().getY()))) {
-    //  fluxBufferKapila->m_qdm.setX((-m_sigma * w1*w2 / normW / r) * 2*(abs(cell->getCons()->getQdm().getX()) + abs(cell->getCons()->getQdm().getY())) / (abs(-m_sigma * w1*w2 / normW / r) + abs(-m_sigma * w2*w2 / normW / r)));
-    //  fluxBufferKapila->m_qdm.setY((-m_sigma * w2*w2 / normW / r) * 2*(abs(cell->getCons()->getQdm().getX()) + abs(cell->getCons()->getQdm().getY())) / (abs(-m_sigma * w1*w2 / normW / r) + abs(-m_sigma * w2*w2 / normW / r)));
+    //if ((std::fabs(-m_sigma * w1*w2 / normW / r) + std::fabs(-m_sigma * w2*w2 / normW / r)) > 2*(std::fabs(cell->getCons()->getQdm().getX()) + std::fabs(cell->getCons()->getQdm().getY()))) {
+    //  static_cast<FluxKapila*> (fluxBuff)->m_qdm.setX((-m_sigma * w1*w2 / normW / r) * 2*(std::fabs(cell->getCons()->getQdm().getX()) + std::fabs(cell->getCons()->getQdm().getY())) / (std::fabs(-m_sigma * w1*w2 / normW / r) + std::fabs(-m_sigma * w2*w2 / normW / r)));
+    //  static_cast<FluxKapila*> (fluxBuff)->m_qdm.setY((-m_sigma * w2*w2 / normW / r) * 2*(std::fabs(cell->getCons()->getQdm().getX()) + std::fabs(cell->getCons()->getQdm().getY())) / (std::fabs(-m_sigma * w1*w2 / normW / r) + std::fabs(-m_sigma * w2*w2 / normW / r)));
     //}
     //else {
-    //  fluxBufferKapila->m_qdm.setX(-m_sigma * w1*w2 / normW / r);
-    //  fluxBufferKapila->m_qdm.setY(-m_sigma * w2*w2 / normW / r);
+    //  static_cast<FluxKapila*> (fluxBuff)->m_qdm.setX(-m_sigma * w1*w2 / normW / r);
+    //  static_cast<FluxKapila*> (fluxBuff)->m_qdm.setY(-m_sigma * w2*w2 / normW / r);
     //}
-    //if (abs(-m_sigma / normW * (w1*w2*cell->getMixture()->getU() + w2*w2*cell->getMixture()->getV()) / r) > 2*abs(cell->getCons()->getEnergyMix())) {
-    //  fluxBufferKapila->m_energMixture = (-m_sigma / normW * (w1*w2*cell->getMixture()->getU() + w2*w2*cell->getMixture()->getV()) / r) * 2*abs(cell->getCons()->getEnergyMix()) / abs(-m_sigma / normW * (w1*w2*cell->getMixture()->getU() + w2*w2*cell->getMixture()->getV()) / r);
+    //if (std::fabs(-m_sigma / normW * (w1*w2*cell->getMixture()->getU() + w2*w2*cell->getMixture()->getV()) / r) > 2*std::fabs(cell->getCons()->getEnergyMix())) {
+    //  static_cast<FluxKapila*> (fluxBuff)->m_energMixture = (-m_sigma / normW * (w1*w2*cell->getMixture()->getU() + w2*w2*cell->getMixture()->getV()) / r) * 2*std::fabs(cell->getCons()->getEnergyMix()) / std::fabs(-m_sigma / normW * (w1*w2*cell->getMixture()->getU() + w2*w2*cell->getMixture()->getV()) / r);
     //}
     //else {
-    //  fluxBufferKapila->m_energMixture = -m_sigma / normW * (w1*w2*cell->getMixture()->getU() + w2*w2*cell->getMixture()->getV()) / r;
+    //  static_cast<FluxKapila*> (fluxBuff)->m_energMixture = -m_sigma / normW * (w1*w2*cell->getMixture()->getU() + w2*w2*cell->getMixture()->getV()) / r;
     //}
   }
   else {
-    fluxBufferKapila->m_qdm = 0.;
-    fluxBufferKapila->m_energMixture = 0.;
+    static_cast<FluxKapila*> (fluxBuff)->m_qdm = 0.;
+    static_cast<FluxKapila*> (fluxBuff)->m_energMixture = 0.;
   }
   
   cell->getCons()->addFlux(1., numberPhases);
@@ -353,34 +354,18 @@ void APKSurfaceTension::addSymmetricTermsRadialAxeOnY(Cell *cell, const int &num
 
 //***********************************************************************
 
-void APKSurfaceTension::reinitializeColorFunction(vector<Cell *> *cellsLvl, int &lvl)
+void APKSurfaceTension::reinitializeColorFunction(std::vector<Cell *> *cellsLvl, int &lvl)
 {
-  if (m_reinitializationActivated) {
-    for (unsigned int i = 0; i < cellsLvl[lvl].size(); i++) {
-      if (!cellsLvl[lvl][i]->getSplit()) { cellsLvl[lvl][i]->reinitializeColorFunction(m_numTransportAssociated, m_numPhaseAssociated); }
-    }
+  for (unsigned int i = 0; i < cellsLvl[lvl].size(); i++) {
+    if (!cellsLvl[lvl][i]->getSplit()) { cellsLvl[lvl][i]->reinitializeColorFunction(m_numTransportAssociated, m_numPhaseAssociated); }
   }
 }
 
 //***********************************************************************
 
-void APKSurfaceTension::communicationsAddPhys(Cell **cells, const int &dim)
+void APKSurfaceTension::communicationsAddPhys(int numberPhases, const int &dim, const int &lvl)
 {
-  parallel.communicationsVector(cells, "QPA", dim, m_numQPAGradC);
-}
-
-//***********************************************************************
-
-void APKSurfaceTension::communicationsAddPhysAMR(Cell **cells, const int &dim, const int &lvl)
-{
-	parallel.communicationsVectorAMR(cells, "QPA", dim, lvl, m_numQPAGradC);
-}
-
-//***********************************************************************
-
-int APKSurfaceTension::getNumTransportAssociated() const
-{
-  return m_numTransportAssociated;
+	parallel.communicationsVector(QPA, dim, lvl, m_numQPAGradC);
 }
 
 //***********************************************************************

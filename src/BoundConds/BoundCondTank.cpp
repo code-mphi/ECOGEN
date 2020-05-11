@@ -30,11 +30,10 @@
 //! \file      BoundCondTank.cpp
 //! \author    F. Petitpas, K. Schmidmayer
 //! \version   1.0
-//! \date      December 20 2017
+//! \date      February 13 2019
 
 #include "BoundCondTank.h"
 
-using namespace std;
 using namespace tinyxml2;
 
 //****************************************************************************
@@ -43,7 +42,7 @@ BoundCondTank::BoundCondTank(){}
 
 //****************************************************************************
 
-BoundCondTank::BoundCondTank(int numPhysique, XMLElement *element, int &numberPhases, int &numberTransports, std::vector<std::string> nameTransports, Eos **eos, string fileName) :
+BoundCondTank::BoundCondTank(int numPhysique, XMLElement *element, int &numberPhases, int &numberTransports, std::vector<std::string> nameTransports, Eos **eos, std::string fileName) :
   BoundCond(numPhysique)
 {
   m_numberPhase = numberPhases;
@@ -74,7 +73,7 @@ BoundCondTank::BoundCondTank(int numPhysique, XMLElement *element, int &numberPh
     if (sousElement == NULL) throw ErrorXMLElement("fluidsProp", fileName, __FILE__, __LINE__);
     XMLElement* fluid(sousElement->FirstChildElement("dataFluid"));
 
-    int nbFluids(0); string nameEOS;
+    int nbFluids(0); std::string nameEOS;
     int presenceAlpha(0), presenceMassFrac(0);
     while (fluid != NULL)
     {
@@ -108,7 +107,7 @@ BoundCondTank::BoundCondTank(int numPhysique, XMLElement *element, int &numberPh
         if (m_ak0[k]<0. || m_ak0[k]>1.) throw ErrorXMLAttribut("alpha should be in [0,1]", fileName, __FILE__, __LINE__);
         sum += m_ak0[k];
       }
-      if (abs(sum - 1.) > 1.e-6) { throw ErrorXMLAttribut("sum of alpha should be 1", fileName, __FILE__, __LINE__); }
+      if (std::fabs(sum - 1.) > 1.e-6) { throw ErrorXMLAttribut("sum of alpha should be 1", fileName, __FILE__, __LINE__); }
       else {
         for (int k = 0; k < m_numberPhase; k++) { m_ak0[k] /= sum; }
       }
@@ -118,7 +117,7 @@ BoundCondTank::BoundCondTank(int numPhysique, XMLElement *element, int &numberPh
         if (m_Yk0[k]<0. || m_Yk0[k]>1.) throw ErrorXMLAttribut("massFrac should be in [0,1]", fileName, __FILE__, __LINE__);
         sum += m_Yk0[k];
       }
-      if (abs(sum - 1.) > 1.e-6) { throw ErrorXMLAttribut("sum of massFrac should be 1", fileName, __FILE__, __LINE__); }
+      if (std::fabs(sum - 1.) > 1.e-6) { throw ErrorXMLAttribut("sum of massFrac should be 1", fileName, __FILE__, __LINE__); }
       else {
         for (int k = 0; k < m_numberPhase; k++) { m_Yk0[k] /= sum; }
       }
@@ -153,7 +152,7 @@ BoundCondTank::BoundCondTank(int numPhysique, XMLElement *element, int &numberPh
     int foundColors(0);
     m_valueTransport = new double[numberTransports];
     XMLElement *elementTransport(sousElement->FirstChildElement("transport"));
-    string nameTransport;
+    std::string nameTransport;
     while (elementTransport != NULL)
     {
       nameTransport = elementTransport->Attribute("name");
@@ -214,9 +213,9 @@ BoundCondTank::~BoundCondTank()
 
 //****************************************************************************
 
-void BoundCondTank::creeLimite(CellInterface **face)
+void BoundCondTank::creeLimite(TypeMeshContainer<CellInterface *> &cellInterfaces)
 {
-  *face = new BoundCondTank(*(this));
+  cellInterfaces.push_back(new BoundCondTank(*(this)));
 }
 
 //****************************************************************************
@@ -225,7 +224,7 @@ void BoundCondTank::solveRiemannLimite(Cell &cellLeft, const int & numberPhases,
 {
   Coord omega(0., 0., 500.);
   m_mod->solveRiemannTank(cellLeft, numberPhases, dxLeft, dtMax, m_ak0, m_rhok0, m_p0, m_T0);
-  //cout << m_face->getPos().getX() << " " << m_face->getPos().getY() << " " << m_face->getPos().getZ() << endl;
+  //std::cout << m_face->getPos().getX() << " " << m_face->getPos().getY() << " " << m_face->getPos().getZ() << std::endl;
 }
 
 //****************************************************************************
@@ -239,17 +238,17 @@ void BoundCondTank::solveRiemannTransportLimite(Cell &cellLeft, const int & numb
 
 void BoundCondTank::printInfo()
 {
-  cout << m_numPhysique << endl;
-  cout << m_rhok0[0] << endl;
+  std::cout << m_numPhysique << std::endl;
+  std::cout << m_rhok0[0] << std::endl;
 }
 
 //****************************************************************************
 //******************************Methode AMR***********************************
 //****************************************************************************
 
-void BoundCondTank::creerBordChild()
+void BoundCondTank::creerCellInterfaceChild()
 {
-  m_boundariesChildren.push_back(new BoundCondTank(*this, m_lvl + 1));
+  m_cellInterfacesChildren.push_back(new BoundCondTank(*this, m_lvl + 1));
 }
 
 //****************************************************************************

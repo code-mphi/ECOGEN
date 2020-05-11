@@ -33,7 +33,7 @@
 //! \file      BoundCondTank.cpp
 //! \author    F. Petitpas, K. Schmidmayer
 //! \version   1.0
-//! \date      December 20 2017
+//! \date      February 13 2019
 
 #include "BoundCond.h"
 
@@ -45,7 +45,7 @@ class BoundCondTank : public BoundCond
     BoundCondTank(const BoundCondTank &Source, const int lvl = 0); //Constructeur de copie (utile pour AMR)
     virtual ~BoundCondTank();
 
-    virtual void creeLimite(CellInterface **face);
+    virtual void creeLimite(TypeMeshContainer<CellInterface *> &cellInterfaces);
     virtual void solveRiemannLimite(Cell &cellLeft, const int &numberPhases, const double &dxLeft, double &dtMax);
     virtual void solveRiemannTransportLimite(Cell &cellLeft, const int &numberTransports) const;
 
@@ -53,7 +53,7 @@ class BoundCondTank : public BoundCond
     virtual void printInfo();
 
     //Pour methode AMR
-    virtual void creerBordChild();  /*!< Creer un bord enfant (non initialize) */
+    virtual void creerCellInterfaceChild();  /*!< Creer un child cell interface (non initialize) */
 
   protected:
   private:

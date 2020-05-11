@@ -1,13 +1,14 @@
-<?xml version = "1.0" encoding = "UTF-8" standalone = "yes"?>
+<?xml version='1.0' encoding='UTF-8' standalone='yes'?>
 <computationParam>
-	<run>kapila3DairShockHeliumBubble</run>
-	<outputMode format="XML" binary="false"/>
-	<timeControlMode iterations="false">
-		<iterations number="100" iterFreq="10"/>
-		<physicalTime totalTime="700.e-6" timeFreq="700.e-7"/>
-	</timeControlMode>
-	<computationControl CFL="0.8"/>
-	<secondOrder>
-		<globalLimiter>vanleer</globalLimiter>
-	</secondOrder>
+  <run>kapila3DairShockHeliumBubble</run>
+  <outputMode format="XML" binary="false"/>
+  <timeControlMode iterations="false">
+    <iterations iterFreq="10" number="100"/>
+    <physicalTime timeFreq="700.e-7" totalTime="700.e-6"/>
+  </timeControlMode>
+  <computationControl CFL="0.8"/>
+  <secondOrder>
+    <globalLimiter>vanleer</globalLimiter>
+    <interfaceVolumeFractionLimiter>thinc</interfaceVolumeFractionLimiter>
+  </secondOrder>
 </computationParam>

@@ -32,8 +32,8 @@
 
 //! \file      Model.h
 //! \author    F. Petitpas, K. Schmidmayer, S. Le Martelot
-//! \version   1.0
-//! \date      December 20 2017
+//! \version   1.1
+//! \date      June 5 2019
 
 class Model; //Predeclaration of class Model to include Flux.h
 
@@ -96,7 +96,7 @@ class Model
     //! \param     numberPhases      number of phases
     //! \param     dxLeft            left characteristic lenght
     //! \param     dtMax             maximum explicit time step
-    //! \param     m0                specific mass flow rate (kg/s/m²)
+    //! \param     m0                specific mass flow rate (kg/s/mï¿½)
     //! \param     ak0               volume fraction array of injected fluids
     //! \param     rhok0             density array of injected fluids
     //! \param     pk0               pressure array of injected fluids
@@ -145,9 +145,9 @@ class Model
     virtual void solveRiemannTransportOutflow(Cell &cellLeft, const int &numberTransports, double *valueTransports) { Errors::errorMessage("solveRiemannTransportOutflow not available for required model"); };
 
     //! \brief     Flux reverse projection in the absolute cartesian coordinate system
-    //! \param     normal            normal vector associated to the cell boundary
-    //! \param     tangent           tangent vector associated to the cell boundary
-    //! \param     binormal          binormal vector associated to the cell boundary
+    //! \param     normal            normal vector associated to the cell interface
+    //! \param     tangent           tangent vector associated to the cell interface
+    //! \param     binormal          binormal vector associated to the cell interface
     virtual void reverseProjection(const Coord normal, const Coord tangent, const Coord binormal) const { Errors::errorMessage("reverseProjection not available for required model"); };
 
 	//Relaxations
@@ -158,16 +158,17 @@ class Model
     //---------
     //! \brief     Return the local fluid velocity
     //! \return    the velocity solution of the local Riemann problem
-    virtual double getSM() { Errors::errorMessage("getSM not available for required model"); return 0; };
+    virtual const double& getSM() { Errors::errorMessage("getSM not available for required model"); return Errors::defaultDouble; };
     //! \brief     Return the fluid velocity of the corresponding cell
     //! \param     cell       pointer to corresponding cell
     //! \return    velocity
-    virtual Coord getVelocity(Cell *cell) const { Errors::errorMessage("getVelocity not available for required model"); return 0; };
+    virtual const Coord& getVelocity(const Cell *cell) const { Errors::errorMessage("getVelocity not available for required model"); return Coord::defaultCoord; };
+    virtual Coord& getVelocity(Cell *cell) { Errors::errorMessage("getVelocity not available for required model"); return Coord::defaultCoordNonConst; };
 
 	std::vector<Relaxation*> *getRelaxations() { return &m_relaxations; };
     
     void printInfo() const;
-    virtual std::string whoAmI() const { return 0; };
+    virtual const std::string& whoAmI() const { return Errors::defaultString; };
 
   protected:
     std::string m_name;                        //!< Name of the required model

@@ -34,7 +34,6 @@
 
 #include "SymCylindrical.h"
 
-using namespace std;
 using namespace tinyxml2;
 
 //***********************************************************************
@@ -44,21 +43,21 @@ SymCylindrical::SymCylindrical() {}
 //***********************************************************************
 /*!
 *  Cylindrical symmetry constructor from a read in XML format
-*  ex : <dataSymCyl RadialAxe="X"/>
+*  ex : <dataSymCyl RadialAxis="X"/>
 */
-SymCylindrical::SymCylindrical(XMLElement *element, string nameFile)
+SymCylindrical::SymCylindrical(XMLElement *element, std::string nameFile)
 {
   XMLElement *sousElement(element->FirstChildElement("dataSymCyl"));
   if (sousElement == NULL) throw ErrorXMLElement("dataSymCyl", nameFile, __FILE__, __LINE__);
   //Attributes collecting
   //---------------------
-  //Applicated axe
-  string axe(sousElement->Attribute("radialAxe"));
-  Tools::uppercase(axe);
-  if (axe == "X") { m_radialAxe = X; }
-  else if (axe == "Y") { m_radialAxe = Y; }
-  else if (axe == "Z") { m_radialAxe = Z; }
-  else { throw ErrorXMLAttribut("radialAxe", nameFile, __FILE__, __LINE__); }
+  //Applicated axis
+  std::string axis(sousElement->Attribute("radialAxis"));
+  Tools::uppercase(axis);
+  if (axis == "X") { m_radialAxis = X; }
+  else if (axis == "Y") { m_radialAxis = Y; }
+  else if (axis == "Z") { m_radialAxis = Z; }
+  else { throw ErrorXMLAttribut("radialAxis", nameFile, __FILE__, __LINE__); }
 }
 
 //***********************************************************************
@@ -70,23 +69,34 @@ SymCylindrical::~SymCylindrical() {}
 void SymCylindrical::addSymmetricTerms(Cell *cell, const int &numberPhases, Prim type)
 {
   double r(0.), v(0.);
-  switch (m_radialAxe) {
-  case X: r = cell->getPosition().getX(); v = cell->getMixture(type)->getU(); break;
-  case Y: r = cell->getPosition().getY(); v = cell->getMixture(type)->getV(); break;
-  case Z: r = cell->getPosition().getZ(); v = cell->getMixture(type)->getW(); break;
-  default: Errors::errorMessage("Name of the axe is unknown in SymCylindrical::addSymmetricTerms");
+  if (numberPhases > 1) { // Multiphase models
+	  switch (m_radialAxis) {
+		case X: r = cell->getPosition().getX(); v = cell->getMixture(type)->getU(); break;
+		case Y: r = cell->getPosition().getY(); v = cell->getMixture(type)->getV(); break;
+		case Z: r = cell->getPosition().getZ(); v = cell->getMixture(type)->getW(); break;
+		default: Errors::errorMessage("Name of the axis is unknown in SymCylindrical::addSymmetricTerms");
+	  }
+	  cell->getCons()->addSymmetricTerms(cell->getPhases(type), cell->getMixture(type), numberPhases, r, v);
   }
-  cell->getCons()->addSymmetricTerms(cell->getPhases(type), cell->getMixture(type), numberPhases, r, v);
+  else { // Euler monophasic model //JC//Q// Why MixEuler is not linked to PhaseEuler ? Like getMixture() redirects to getPhase(0)  
+	  switch (m_radialAxis) {
+		case X: r = cell->getPosition().getX(); v = cell->getPhase(0)->getU(); break;
+		case Y: r = cell->getPosition().getY(); v = cell->getPhase(0)->getV(); break;
+		case Z: r = cell->getPosition().getZ(); v = cell->getPhase(0)->getW(); break;
+		default: Errors::errorMessage("Name of the axis is unknown in SymCylindrical::addSymmetricTerms");
+	  }
+	  cell->getCons()->addSymmetricTerms(cell->getPhases(type), cell->getMixture(type), numberPhases, r, v);
+  }
 }
 
 //***********************************************************************
 
 void SymCylindrical::addSymmetricTermsAddPhys(Cell *cell, const int &numberPhases, AddPhys &addPhys)
 {
-  switch (m_radialAxe) {
-  case X: addPhys.addSymmetricTermsRadialAxeOnX(cell, numberPhases); break;
-  case Y: addPhys.addSymmetricTermsRadialAxeOnY(cell, numberPhases); break;
-  default: Errors::errorMessage("Name of the axe is unknown in SymCylindrical::addSymmetricTermsAddPhys");
+  switch (m_radialAxis) {
+  case X: addPhys.addSymmetricTermsRadialAxisOnX(cell, numberPhases); break;
+  case Y: addPhys.addSymmetricTermsRadialAxisOnY(cell, numberPhases); break;
+  default: Errors::errorMessage("Name of the axis is unknown in SymCylindrical::addSymmetricTermsAddPhys");
   }
 }
 

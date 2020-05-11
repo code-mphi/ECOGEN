@@ -32,16 +32,13 @@
 //! \version   1.0
 //! \date      December 19 2017
 
-#include <vector>
 #include "GDRectangle.h"
-#include <iostream>
 
-using namespace std;
 using namespace tinyxml2;
 
 //***************************************************************
 
-GDRectangle::GDRectangle(string name, vector<Phase*> vecPhases, Mixture *mixture, vector<Transport> vecTransports, XMLElement *element, const int &physicalEntity, string fileName) :
+GDRectangle::GDRectangle(std::string name, std::vector<Phase*> vecPhases, Mixture *mixture, std::vector<Transport> vecTransports, XMLElement *element, const int &physicalEntity, std::string fileName) :
 GeometricalDomain(name, vecPhases, mixture, vecTransports, physicalEntity)
 {
   XMLElement *sousElement(element->FirstChildElement("dataRectangle"));
@@ -49,26 +46,26 @@ GeometricalDomain(name, vecPhases, mixture, vecTransports, physicalEntity)
   //Attributes reading
   //--------------------------
   XMLError error;
-  //width along axe 1
-  error = sousElement->QueryDoubleAttribute("lAxe1", &m_lAxe1);
-  if (error != XML_NO_ERROR) throw ErrorXMLAttribut("lAxe1", fileName, __FILE__, __LINE__);
-  //width along axe2
-  error = sousElement->QueryDoubleAttribute("lAxe2", &m_lAxe2);
-  if (error != XML_NO_ERROR) throw ErrorXMLAttribut("lAxe2", fileName, __FILE__, __LINE__);
-  //Axe1
-  string axe(sousElement->Attribute("axe1"));
-  Tools::uppercase(axe);
-  if (axe == "X"){ m_axe1 = X; }
-  else if (axe == "Y"){ m_axe1 = Y; }
-  else if (axe == "Z"){ m_axe1 = Z; }
-  else { throw ErrorXMLAttribut("axe1", fileName, __FILE__, __LINE__); }
-  //Axe2
-  axe = sousElement->Attribute("axe2");
-  Tools::uppercase(axe);
-  if (axe == "X"){ m_axe2 = X; }
-  else if (axe == "Y"){ m_axe2 = Y; }
-  else if (axe == "Z"){ m_axe2 = Z; }
-  else { throw ErrorXMLAttribut("axe2", fileName, __FILE__, __LINE__); }
+  //width along axis 1
+  error = sousElement->QueryDoubleAttribute("lAxis1", &m_lAxis1);
+  if (error != XML_NO_ERROR) throw ErrorXMLAttribut("lAxis1", fileName, __FILE__, __LINE__);
+  //width along axis2
+  error = sousElement->QueryDoubleAttribute("lAxis2", &m_lAxis2);
+  if (error != XML_NO_ERROR) throw ErrorXMLAttribut("lAxis2", fileName, __FILE__, __LINE__);
+  //Axis1
+  std::string axis(sousElement->Attribute("axis1"));
+  Tools::uppercase(axis);
+  if (axis == "X"){ m_axis1 = X; }
+  else if (axis == "Y"){ m_axis1 = Y; }
+  else if (axis == "Z"){ m_axis1 = Z; }
+  else { throw ErrorXMLAttribut("axis1", fileName, __FILE__, __LINE__); }
+  //Axis2
+  axis = sousElement->Attribute("axis2");
+  Tools::uppercase(axis);
+  if (axis == "X"){ m_axis2 = X; }
+  else if (axis == "Y"){ m_axis2 = Y; }
+  else if (axis == "Z"){ m_axis2 = Z; }
+  else { throw ErrorXMLAttribut("axis2", fileName, __FILE__, __LINE__); }
   //Inferior vertex position
   double x(0.), y(0.), z(0.);
   XMLElement *coin(sousElement->FirstChildElement("posInferiorVertex"));
@@ -88,12 +85,12 @@ GDRectangle::~GDRectangle(){}
 bool GDRectangle::belong(Coord &posElement, const int &lvl) const
 {
   double somme(0.);
-  vector<Axe> axes;
-  axes.push_back(m_axe1);
-  axes.push_back(m_axe2);
-  vector<double> lengths;
-  lengths.push_back(m_lAxe1);
-  lengths.push_back(m_lAxe2);
+  std::vector<Axis> axes;
+  axes.push_back(m_axis1);
+  axes.push_back(m_axis2);
+  std::vector<double> lengths;
+  lengths.push_back(m_lAxis1);
+  lengths.push_back(m_lAxis2);
 
   for (unsigned int i = 0; i < axes.size(); i++)
   {

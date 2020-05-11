@@ -28,19 +28,14 @@
 //  If not, see <http://www.gnu.org/licenses/>.
 
 //! \file      FluxThermalEq.cpp
-//! \author    F. Petitpas
-//! \version   1.0
-//! \date      May 04 2018
+//! \author    F. Petitpas, K. Schmidmayer
+//! \version   1.1
+//! \date      June 5 2019
 
 #include <cmath>
 #include <algorithm>
 #include "FluxThermalEq.h"
 #include "../Mixture.h"
-
-using namespace std;
-
-FluxThermalEq *fluxBufferThermalEq;
-FluxThermalEq *sourceConsThermEq;
 
 //***********************************************************************
 
@@ -64,7 +59,7 @@ FluxThermalEq::~FluxThermalEq()
 
 void FluxThermalEq::printFlux() const
 {
-  cout << m_masse << " " << m_qdm.getX() << endl;
+  std::cout << m_masse << " " << m_qdm.getX() << std::endl;
 }
 
 //***********************************************************************
@@ -72,10 +67,21 @@ void FluxThermalEq::printFlux() const
 void FluxThermalEq::addFlux(double coefA, const int &numberPhases)
 {
   for (int k = 0; k < numberPhases; k++) {
-    m_masse[k] += coefA*fluxBufferThermalEq->m_masse[k];
+    m_masse[k] += coefA*static_cast<FluxThermalEq*> (fluxBuff)->m_masse[k];
   }
-  m_qdm += coefA*fluxBufferThermalEq->m_qdm;
-  m_energMixture += coefA*fluxBufferThermalEq->m_energMixture;
+  m_qdm += coefA*static_cast<FluxThermalEq*> (fluxBuff)->m_qdm;
+  m_energMixture += coefA*static_cast<FluxThermalEq*> (fluxBuff)->m_energMixture;
+}
+
+//***********************************************************************
+
+void FluxThermalEq::addFlux(Flux* flux, const int &numberPhases)
+{
+  for (int k = 0; k < numberPhases; k++) {
+    m_masse[k] += static_cast<FluxThermalEq*> (flux)->m_masse[k];
+  }
+  m_qdm += static_cast<FluxThermalEq*> (flux)->m_qdm;
+  m_energMixture += static_cast<FluxThermalEq*> (flux)->m_energMixture;
 }
 
 //***********************************************************************
@@ -83,10 +89,10 @@ void FluxThermalEq::addFlux(double coefA, const int &numberPhases)
 void FluxThermalEq::subtractFlux(double coefA, const int &numberPhases)
 {
   for (int k = 0; k < numberPhases; k++) {
-    m_masse[k] -= coefA*fluxBufferThermalEq->m_masse[k];
+    m_masse[k] -= coefA*static_cast<FluxThermalEq*> (fluxBuff)->m_masse[k];
   }
-  m_qdm -= coefA*fluxBufferThermalEq->m_qdm;
-  m_energMixture -= coefA*fluxBufferThermalEq->m_energMixture;
+  m_qdm -= coefA*static_cast<FluxThermalEq*> (fluxBuff)->m_qdm;
+  m_energMixture -= coefA*static_cast<FluxThermalEq*> (fluxBuff)->m_energMixture;
 }
 
 //***********************************************************************
@@ -105,7 +111,7 @@ void FluxThermalEq::multiply(double scalar, const int &numberPhases)
 
 void FluxThermalEq::setBufferFlux(Cell &cell, const int &numberPhases)
 {
-  fluxBufferThermalEq->buildCons(cell.getPhases(), numberPhases, cell.getMixture());
+  static_cast<FluxThermalEq*> (fluxBuff)->buildCons(cell.getPhases(), numberPhases, cell.getMixture());
 }
 
 //***********************************************************************
@@ -137,9 +143,9 @@ void FluxThermalEq::buildPrim(Phase **phases, Mixture *mixture, const int &numbe
   }
   mixture->setVelocity(m_qdm.getX() / rhoMel, m_qdm.getY() / rhoMel, m_qdm.getZ() / rhoMel);
   //Erasing small velocity variations
-  if (abs(mixture->getU()) < 1.e-8) mixture->setU(0.);
-  if (abs(mixture->getV()) < 1.e-8) mixture->setV(0.);
-  if (abs(mixture->getW()) < 1.e-8) mixture->setW(0.);
+  if (std::fabs(mixture->getU()) < 1.e-8) mixture->setU(0.);
+  if (std::fabs(mixture->getV()) < 1.e-8) mixture->setV(0.);
+  if (std::fabs(mixture->getW()) < 1.e-8) mixture->setW(0.);
   internalEnergy = m_energMixture / rhoMel - 0.5*(mixture->getU()*mixture->getU() + mixture->getV()*mixture->getV() + mixture->getW()*mixture->getW()) ;
   
   //Pressure and temperature determination
@@ -177,41 +183,23 @@ void FluxThermalEq::setToZero(const int &numberPhases)
 void FluxThermalEq::setToZeroBufferFlux(const int &numberPhases)
 {
   for (int k = 0; k<numberPhases; k++) {
-    fluxBufferThermalEq->m_masse[k] = 0.;
+    static_cast<FluxThermalEq*> (fluxBuff)->m_masse[k] = 0.;
   }
-  fluxBufferThermalEq->m_qdm = 0.;
-  fluxBufferThermalEq->m_energMixture = 0.;
+  static_cast<FluxThermalEq*> (fluxBuff)->m_qdm = 0.;
+  static_cast<FluxThermalEq*> (fluxBuff)->m_energMixture = 0.;
 }
 
 //***********************************************************************
 
-void FluxThermalEq::integrateSourceTermsHeating(Cell *cell, const double &dt, const int &numberPhases, const double &q)
+void FluxThermalEq::prepSourceTermsHeating(Cell *cell, const double &dt, const int &numberPhases, const double &q)
 {
-  sourceConsThermEq->setToZero(numberPhases);
-  sourceConsThermEq->m_energMixture = q;
+  m_energMixture = q;
 
-  m_energMixture += dt*sourceConsThermEq->m_energMixture;
-}
-
-//***********************************************************************
-
-double FluxThermalEq::getMasse(const int &numPhase) const
-{
-  return m_masse[numPhase];
-}
-
-//***********************************************************************
-
-Coord FluxThermalEq::getQdm() const
-{
-  return m_qdm;
-}
-
-//***********************************************************************
-
-double FluxThermalEq::getEnergyMix() const
-{
-	return m_energMixture;
+  //Null source components 
+  m_qdm = 0.;
+  for (int k = 0; k < numberPhases; k++) {
+	  m_masse[k] = 0.;
+  }
 }
 
 //***********************************************************************

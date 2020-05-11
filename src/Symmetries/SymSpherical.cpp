@@ -34,7 +34,6 @@
 
 #include "SymSpherical.h"
 
-using namespace std;
 using namespace tinyxml2;
 
 //***********************************************************************
@@ -44,21 +43,21 @@ SymSpherical::SymSpherical() {}
 //***********************************************************************
 /*!
 *  Spherical symmetry constructor from a read in XML format
-*  ex : <dataSymSpher radialAxe="X"/>
+*  ex : <dataSymSpher radialAxis="X"/>
 */
-SymSpherical::SymSpherical(XMLElement *element, string nameFile)
+SymSpherical::SymSpherical(XMLElement *element, std::string nameFile)
 {
   XMLElement *sousElement(element->FirstChildElement("dataSymSpher"));
   if (sousElement == NULL) throw ErrorXMLElement("dataSymSpher", nameFile, __FILE__, __LINE__);
   //Attributes collecting
   //---------------------
-  //Applicated axe
-  string axe(sousElement->Attribute("radialAxe"));
-  Tools::uppercase(axe);
-  if (axe == "X") { m_radialAxe = X; }
-  else if (axe == "Y") { m_radialAxe = Y; }
-  else if (axe == "Z") { m_radialAxe = Z; }
-  else { throw ErrorXMLAttribut("radialAxe", nameFile, __FILE__, __LINE__); }
+  //Applicated axis
+  std::string axis(sousElement->Attribute("radialAxis"));
+  Tools::uppercase(axis);
+  if (axis == "X") { m_radialAxis = X; }
+  else if (axis == "Y") { m_radialAxis = Y; }
+  else if (axis == "Z") { m_radialAxis = Z; }
+  else { throw ErrorXMLAttribut("radialAxis", nameFile, __FILE__, __LINE__); }
 }
 
 //***********************************************************************
@@ -70,11 +69,21 @@ SymSpherical::~SymSpherical() {}
 void SymSpherical::addSymmetricTerms(Cell *cell, const int &numberPhases, Prim type)
 {
   double r(0.), v(0.);
-  switch (m_radialAxe) {
-  case X: r = cell->getPosition().getX(); v = cell->getMixture(type)->getU(); break;
-  case Y: r = cell->getPosition().getY(); v = cell->getMixture(type)->getV(); break;
-  case Z: r = cell->getPosition().getZ(); v = cell->getMixture(type)->getW(); break;
-  default: Errors::errorMessage("Name of the axe is unknown in SymSpherical::addSymmetricTerms");
+  if (numberPhases > 1) {
+	  switch (m_radialAxis) {
+		case X: r = cell->getPosition().getX(); v = cell->getMixture(type)->getU(); break;
+		case Y: r = cell->getPosition().getY(); v = cell->getMixture(type)->getV(); break;
+		case Z: r = cell->getPosition().getZ(); v = cell->getMixture(type)->getW(); break;
+		default: Errors::errorMessage("Name of the axis is unknown in SymSpherical::addSymmetricTerms");
+	  }
+  }
+  else {
+	  switch (m_radialAxis) {
+		case X: r = cell->getPosition().getX(); v = cell->getPhase(0)->getU(); break;
+		case Y: r = cell->getPosition().getY(); v = cell->getPhase(0)->getV(); break;
+		case Z: r = cell->getPosition().getZ(); v = cell->getPhase(0)->getW(); break;
+		default: Errors::errorMessage("Name of the axis is unknown in SymSpherical::addSymmetricTerms");
+	  }
   }
   v *= 2.; //v is multiplied by 2 for the spherical symmetry in comparison to the cylindrical symmetry
   cell->getCons()->addSymmetricTerms(cell->getPhases(type), cell->getMixture(type), numberPhases, r, v);

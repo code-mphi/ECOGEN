@@ -29,13 +29,12 @@
 
 //! \file      MixEulerHomogeneous.cpp
 //! \author    K. Schmidmayer, F. Petitpas
-//! \version   1.0
-//! \date      December 19 2017
+//! \version   1.1
+//! \date      June 5 2019
 
 #include <cmath>
 #include "MixEulerHomogeneous.h"
 
-using namespace std;
 using namespace tinyxml2;
 
 //***************************************************************************
@@ -44,7 +43,7 @@ MixEulerHomogeneous::MixEulerHomogeneous() :m_density(0.), m_pressure(0.), m_vel
 
 //***************************************************************************
 
-MixEulerHomogeneous::MixEulerHomogeneous(XMLElement *state, string fileName) :
+MixEulerHomogeneous::MixEulerHomogeneous(XMLElement *state, std::string fileName) :
   m_density(0.), m_pressure(0.), m_energie(0.), m_totalEnergy(0.), m_EqSoundSpeed(0.)
 {
   XMLElement *sousElement(state->FirstChildElement("mixture"));
@@ -130,7 +129,7 @@ double MixEulerHomogeneous::computePressure(double masse, const double &internal
 {
   double pressure(0.);
 
-  //Restrictions
+  //Restrictions //FP//TODO// to extend for N phases
   if (numberPhases > 2) Errors::errorMessage("more than two phases not permitted in thermodynamical equilibrium model : MixEulerHomogeneous::computePressure");
   if (phases[vap]->getEos()->getType() != "IG" && phases[liq]->getEos()->getType() != "SG") { Errors::errorMessage("Only IG for vapor and SG for liquid permitted in thermodyanmical equilibrium model : MixEulerHomogeneous::computePressure"); }
 
@@ -154,7 +153,7 @@ double MixEulerHomogeneous::computePressure(double masse, const double &internal
     rhoeLiq = phases[liq]->getEos()->computeDensityEnergySaturation(pressure, rhoLiq, drhoLiq, &drhoeLiq);
     f = masse*internalEnergy - alphaVap*(rhoeVap - rhoeLiq) - rhoeLiq;
     df = -dalphaVap*(rhoeVap - rhoeLiq) - alphaVap*(drhoeVap - drhoeLiq) - drhoeLiq;
-  } while (abs(f / (masse*internalEnergy)) > 1e-10);
+  } while (std::fabs(f / (masse*internalEnergy)) > 1e-10);
 
   return pressure;
 }
@@ -209,7 +208,7 @@ void MixEulerHomogeneous::computeMixtureVariables(Phase **vecPhase, const int &n
 
 //***************************************************************************
 
-void MixEulerHomogeneous::internalEnergyToTotalEnergy(vector<QuantitiesAddPhys*> &vecGPA)
+void MixEulerHomogeneous::internalEnergyToTotalEnergy(std::vector<QuantitiesAddPhys*> &vecGPA)
 {
   m_totalEnergy = m_energie + 0.5*m_velocity.squaredNorm();
   for (unsigned int pa = 0; pa < vecGPA.size(); pa++) {
@@ -219,7 +218,7 @@ void MixEulerHomogeneous::internalEnergyToTotalEnergy(vector<QuantitiesAddPhys*>
 
 //***************************************************************************
 
-void MixEulerHomogeneous::totalEnergyToInternalEnergy(vector<QuantitiesAddPhys*> &vecGPA)
+void MixEulerHomogeneous::totalEnergyToInternalEnergy(std::vector<QuantitiesAddPhys*> &vecGPA)
 {
   m_energie = m_totalEnergy - 0.5*m_velocity.squaredNorm();
   for (unsigned int pa = 0; pa < vecGPA.size(); pa++) {
@@ -275,7 +274,7 @@ Coord MixEulerHomogeneous::returnVector(const int &numVar) const
 
 //***************************************************************************
 
-string MixEulerHomogeneous::returnNameScalar(const int &numVar) const
+std::string MixEulerHomogeneous::returnNameScalar(const int &numVar) const
 {
   switch (numVar)
   {
@@ -292,7 +291,7 @@ string MixEulerHomogeneous::returnNameScalar(const int &numVar) const
 
 //***************************************************************************
 
-string MixEulerHomogeneous::returnNameVector(const int &numVar) const
+std::string MixEulerHomogeneous::returnNameVector(const int &numVar) const
 {
   switch (numVar)
   {
@@ -358,6 +357,17 @@ void MixEulerHomogeneous::fillBuffer(double *buffer, int &counter) const
 
 //***************************************************************************
 
+void MixEulerHomogeneous::fillBuffer(std::vector<double> &dataToSend) const
+{
+  dataToSend.push_back(m_velocity.getX());
+  dataToSend.push_back(m_velocity.getY());
+  dataToSend.push_back(m_velocity.getZ());
+  dataToSend.push_back(m_pressure);
+  dataToSend.push_back(m_totalEnergy);
+}
+
+//***************************************************************************
+
 void MixEulerHomogeneous::getBuffer(double *buffer, int &counter)
 {
   m_velocity.setX(buffer[++counter]);
@@ -365,6 +375,17 @@ void MixEulerHomogeneous::getBuffer(double *buffer, int &counter)
   m_velocity.setZ(buffer[++counter]);
   m_pressure = buffer[++counter];
   m_totalEnergy = buffer[++counter];
+}
+
+//***************************************************************************
+
+void MixEulerHomogeneous::getBuffer(std::vector<double> &dataToReceive, int &counter)
+{
+  m_velocity.setX(dataToReceive[counter++]);
+  m_velocity.setY(dataToReceive[counter++]);
+  m_velocity.setZ(dataToReceive[counter++]);
+  m_pressure = dataToReceive[counter++];
+  m_totalEnergy = dataToReceive[counter++];
 }
 
 //****************************************************************************
@@ -439,54 +460,6 @@ void MixEulerHomogeneous::getBufferSlopes(double *buffer, int &counter)
 //****************************************************************************
 //****************************** ACCESSORS  **********************************
 //****************************************************************************
-
-double MixEulerHomogeneous::getDensity() const
-{
-  return m_density;
-}
-
-//***************************************************************************
-
-double MixEulerHomogeneous::getPressure() const
-{
-  return m_pressure;
-}
-
-//***************************************************************************
-
-double MixEulerHomogeneous::getU() const { return m_velocity.getX(); }
-double MixEulerHomogeneous::getV() const { return m_velocity.getY(); }
-double MixEulerHomogeneous::getW() const { return m_velocity.getZ(); }
-
-//***************************************************************************
-
-Coord MixEulerHomogeneous::getVelocity() const
-{
-  return m_velocity;
-}
-
-//***************************************************************************
-
-double MixEulerHomogeneous::getEnergy() const
-{
-  return m_energie;
-}
-
-//***************************************************************************
-
-double MixEulerHomogeneous::getTotalEnergy() const
-{
-  return m_totalEnergy;
-}
-
-//***************************************************************************
-
-double MixEulerHomogeneous::getMixSoundSpeed() const
-{
-  return m_EqSoundSpeed;
-}
-
-//***************************************************************************
 
 void MixEulerHomogeneous::setPressure(const double &p) { m_pressure = p; }
 

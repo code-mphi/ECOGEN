@@ -32,8 +32,8 @@
 
 //! \file      PhaseKapila.h
 //! \author    F. Petitpas, K. Schmidmayer
-//! \version   1.0
-//! \date      December 21 2017
+//! \version   1.1
+//! \date      June 5 2019
 
 #include "../Phase.h"
 #include "../../Eos/Eos.h"
@@ -63,7 +63,8 @@ class PhaseKapila : public Phase
 
     //Specific methods for data printing
     //----------------------------------
-    virtual int getNumberScalars() const { return 4; };
+    //virtual int getNumberScalars() const { return 4; }; //For complete output
+    virtual int getNumberScalars() const { return 2; };   //For reduced output
     virtual int getNumberVectors() const { return 0; };
     virtual double returnScalar(const int &numVar) const;
     virtual Coord returnVector(const int &numVar) const { return 0; };
@@ -78,7 +79,9 @@ class PhaseKapila : public Phase
     //---------------------------------------
     virtual int numberOfTransmittedVariables() const;
     virtual void fillBuffer(double *buffer, int &counter) const;
+    virtual void fillBuffer(std::vector<double> &dataToSend) const;
     virtual void getBuffer(double *buffer, int &counter, Eos **eos);
+    virtual void getBuffer(std::vector<double> &dataToReceive, int &counter, Eos **eos);
 
     //Specific methods for second order
     //---------------------------------
@@ -89,9 +92,9 @@ class PhaseKapila : public Phase
 
     //Specific methods for parallele computing at second order
     //--------------------------------------------------------
-	  virtual int numberOfTransmittedSlopes() const;
-	  virtual void fillBufferSlopes(double *buffer, int &counter) const;
-	  virtual void getBufferSlopes(double *buffer, int &counter);
+    virtual int numberOfTransmittedSlopes() const;
+    virtual void fillBufferSlopes(double *buffer, int &counter) const;
+    virtual void getBufferSlopes(double *buffer, int &counter);
 
     //Verifications
     //-------------
@@ -100,18 +103,19 @@ class PhaseKapila : public Phase
 
     //Accessors
     //---------
-    virtual double getAlpha() const;
-    virtual double getDensity() const;
-    virtual double getPressure() const;
-    virtual double getY() const;
-    virtual double getU() const { return 0.; };
-    virtual double getV() const { return 0.; };
-    virtual double getW() const { return 0.; };
-    virtual Coord getVelocity() const { return 0; };
-    virtual Eos* getEos() const;
-    virtual double getEnergy() const;
-    virtual double getSoundSpeed() const;
-    virtual double getTemperature() const;
+    virtual const double& getAlpha() const { return m_alpha; };
+    virtual const double& getDensity() const { return m_density; };
+    virtual const double& getPressure() const { return m_pressure; };
+    virtual const double& getY() const { return m_Y; };
+    virtual const double& getU() const { return Errors::defaultDouble; };
+    virtual const double& getV() const { return Errors::defaultDouble; };
+    virtual const double& getW() const { return Errors::defaultDouble; };
+    virtual Coord& getVelocity() { return Coord::defaultCoordNonConst; };
+    virtual const Coord& getVelocity() const { return Coord::defaultCoord; };
+    virtual Eos* getEos() const { return m_eos; };
+    virtual const double& getEnergy() const { return m_energie; };
+    virtual const double& getSoundSpeed() const { return m_soundSpeed; };
+    virtual double getTemperature() const { return m_eos->computeTemperature(m_density, m_pressure); };
 
     virtual void setAlpha(double alpha);
     virtual void setDensity(double density);

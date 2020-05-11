@@ -29,13 +29,18 @@
 
 //! \file      QuantitiesAddPhys.cpp
 //! \author    K. Schmidmayer
-//! \version   1.0
-//! \date      December 20 2017
+//! \version   1.1
+//! \date      June 5 2019
 
 #include "QuantitiesAddPhys.h"
 #include <iostream>
 
-using namespace std;
+std::vector<Variable> variableNameSurfTens;
+std::vector<int> numPhaseSurfTens;
+std::vector<Variable> variableNamesVisc;
+std::vector<int> numPhasesVisc;
+std::vector<Variable> variableNamesCond;
+std::vector<int> numPhasesCond;
 
 //***********************************************************************
 

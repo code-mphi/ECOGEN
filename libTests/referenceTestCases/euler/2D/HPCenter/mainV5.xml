@@ -12,7 +12,7 @@
 	</timeControlMode>
 	<computationControl CFL="0.8"/>
 	<secondOrder>
-		<globalLimiter>vanleer</globalLimiter>
+		<globalLimiter>mc</globalLimiter>
 	</secondOrder>
-	<resumeSimulation fileNumber="0"/>
+	<restartSimulation restartFileNumber="0" AMRsaveFreq="0"/>
 </computationParam>

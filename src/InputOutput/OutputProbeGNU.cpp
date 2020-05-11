@@ -28,14 +28,13 @@
 //  If not, see <http://www.gnu.org/licenses/>.
 
 //! \file      OutputProbeGNU.cpp
-//! \author    F. Petitpas
-//! \version   1.0
-//! \date      June 04 2018
+//! \author    F. Petitpas, K. Schmidmayer
+//! \version   1.1
+//! \date      Octotber 02 2019
 
 #include "OutputProbeGNU.h"
 #include "../Maths/GOVertex.h"
 
-using namespace std;
 using namespace tinyxml2;
 
 //***************************************************************
@@ -44,15 +43,16 @@ OutputProbeGNU::OutputProbeGNU(){}
 
 //***************************************************************
 
-OutputProbeGNU::OutputProbeGNU(string casTest, string run, XMLElement *element, string fileName, Input *entree)
+OutputProbeGNU::OutputProbeGNU(std::string casTest, std::string run, XMLElement *element, std::string fileName, Input *entree)
 {
   try {
     //Attributes settings
     m_ecritBinaire = false;
     m_simulationName = casTest;
     m_fileNameResults = element->Attribute("name");
-    m_fileNameVisu = "visualisation" + m_fileNameResults + ".gnu";
-    m_dossierSortie = "./results/" + run + "/probes/";
+    m_fileNameVisu = "visualization" + m_fileNameResults + ".gnu";
+    m_folderOutput = "./results/" + run + "/probes/";
+	m_folderScriptGnuplot = "";
     m_donneesSeparees = 0;
     m_numFichier = 0;
     m_input = entree;
@@ -94,7 +94,7 @@ OutputProbeGNU::~OutputProbeGNU()
 
 //***********************************************************************
 
-void OutputProbeGNU::locateProbeInMesh(Cell **cells, const int &nbCells, bool localSeeking)
+void OutputProbeGNU::locateProbeInMesh(const TypeMeshContainer<Cell *> &cells, const int &nbCells, bool localSeeking)
 {
   //Locate probe in mesh
   double minimumDistance(1.e12), distance;
@@ -111,7 +111,8 @@ void OutputProbeGNU::locateProbeInMesh(Cell **cells, const int &nbCells, bool lo
     if (Ncpu != 1) {
       double minimumAllCPU(minimumDistance);
       MPI_Allreduce(&minimumDistance, &minimumAllCPU, 1, MPI_DOUBLE, MPI_MIN, MPI_COMM_WORLD);
-      if (abs(minimumAllCPU - minimumDistance) > 1.e-10) { m_possessesProbe = false; }
+      if (std::fabs(minimumAllCPU - minimumDistance) > 1.e-10) { m_possessesProbe = false; }
+      else { m_possessesProbe = true; }
     }
   }
 }
@@ -148,18 +149,18 @@ void OutputProbeGNU::prepareSortieSpecifique()
   m_nextAcq = 0.;
 
   //Locate probe in mesh
-  locateProbeInMesh(m_run->m_cells, m_run->m_mesh->getNumberCells());
+  locateProbeInMesh(m_run->m_cellsLvl[0], m_run->m_mesh->getNumberCells());
 
   //Preparing output files
   try {
     if (m_possessesProbe) {
       //Creating output file
-      ofstream fileStream;
-      string file = m_dossierSortie + creationNameFichierGNU(m_fileNameResults.c_str(), -1, -1, -1);
+      std::ofstream fileStream;
+      std::string file = m_folderOutput + creationNameFichierGNU(m_fileNameResults.c_str(), -1, -1, -1);
       fileStream.open(file.c_str());
       fileStream.close();
 
-      //Gnuplot script printing for visualisation
+      //Gnuplot script printing for visualization
       ecritScriptGnuplot(0);
     }
   }
@@ -170,9 +171,9 @@ void OutputProbeGNU::prepareSortieSpecifique()
 
 void OutputProbeGNU::ecritSolution(Mesh *mesh, std::vector<Cell *> *cellsLvl)
 {
-  ofstream fileStream;
-  string file = m_dossierSortie + creationNameFichierGNU(m_fileNameResults.c_str(), -1, -1, -1);
-  fileStream.open(file.c_str(), ios_base::app);
+  std::ofstream fileStream;
+  std::string file = m_folderOutput + creationNameFichierGNU(m_fileNameResults.c_str(), -1, -1, -1);
+  fileStream.open(file.c_str(), std::ios_base::app);
   fileStream << m_run->m_physicalTime << " ";
 
   //Printing solution with AMR treatement if necessary

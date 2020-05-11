@@ -28,13 +28,11 @@
 //  If not, see <http://www.gnu.org/licenses/>.
 
 //! \file      ElementCartesian.cpp
-//! \author    F. Petitpas, K. Schmidmayer, S. Le Martelot
-//! \version   1.0
-//! \date      December 20 2017
+//! \author    F. Petitpas, K. Schmidmayer, S. Le Martelot, B. Dorschner
+//! \version   1.1
+//! \date      June 5 2019
 
 #include "ElementCartesian.h"
-
-using namespace std;
 
 //***********************************************************************
 
@@ -44,9 +42,6 @@ ElementCartesian::ElementCartesian() : m_elementsChildren(0) {}
 
 ElementCartesian::~ElementCartesian()
 {
-  for (unsigned int i = 0; i < m_elementsChildren.size(); i++) {
-    delete m_elementsChildren[i];
-  }
   m_elementsChildren.clear();
 }
 
@@ -115,34 +110,6 @@ void ElementCartesian::setSize(const Coord &size)
 }
 
 //****************************************************************************
-
-double ElementCartesian::getSizeX()
-{
-  return m_size.getX();
-}
-
-//****************************************************************************
-
-double ElementCartesian::getSizeY()
-{
-  return m_size.getY();
-}
-
-//****************************************************************************
-
-double ElementCartesian::getSizeZ()
-{
-  return m_size.getZ();
-}
-
-//****************************************************************************
-
-Coord ElementCartesian::getSize()
-{
-  return m_size;
-}
-
-//****************************************************************************
 //***************************** Methode AMR **********************************
 //****************************************************************************
 
@@ -160,10 +127,13 @@ Element* ElementCartesian::getElementChild(const int &numberChild)
 
 //****************************************************************************
 
+Element* ElementCartesian::getElementChildBack()
+{
+  return m_elementsChildren.back();
+}
+//****************************************************************************
+
 void ElementCartesian::finalizeElementsChildren()
 {
-  for (unsigned int i = 0; i < m_elementsChildren.size(); i++) {
-    delete m_elementsChildren[i];
-  }
   m_elementsChildren.clear();
 }

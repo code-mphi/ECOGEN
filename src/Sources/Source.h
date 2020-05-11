@@ -31,15 +31,16 @@
 #define SOURCE_H
 
 //! \file      Source.h
-//! \author    F. Petitpas, K. Schmidmayer
-//! \version   1.0
-//! \date      January 10 2018
+//! \author    F. Petitpas, K. Schmidmayer, J. Caze
+//! \version   1.1
+//! \date      October 29 2019
 
 #include <string>
 #include "../libTierces/tinyxml2.h"
 #include "../Errors.h"
 #include "../Tools.h"
-#include "../Cell.h"
+#include "../Order1/Cell.h"
+#include "../Models/Flux.h"
 
 //! \class     Source
 //! \brief     Abstract class for source terms
@@ -47,16 +48,50 @@ class Source
 {
   public:
     Source();
+    Source(int order);
     virtual ~Source();
+
+    //! \brief     Source terms preparation for integration
+    //! \param     cell           cell for source term integration
+    //! \param     numberPhases   number of phases
+    //! \param     dt             integration time step
+    virtual void prepSourceTerms(Cell* cell, const int& numberPhases, const double& dt, const int i = 0) { Errors::errorMessage("prepSourceTerms not available for required source"); };
 
     //! \brief     Source terms integration on conservative quantities
     //! \param     cell           cell for source term integration
     //! \param     numberPhases   number of phases
-    //! \param     dt             explicit integration time step
-    virtual void integrateSourceTerms(Cell *cell, const int &numberPhases, const double &dt){ Errors::errorMessage("integrateSourceTerms not available for required source"); };
-    virtual void sourceEvolution(const double &time) {};
+    //! \param     dt             integration time step
+    void integrateSourceTerms(Cell *cell, const int &numberPhases, const double &dt);
 
+    //! \brief     Euler explicite integration (order 1)
+    //! \param     cell           cell for source term integration
+    //! \param     numberPhases   number of phases
+    //! \param     dt             explicit integration time step
+    void integrationEuler(Cell *cell, const int &numberPhases, const double &dt);
+
+    //! \brief     Runge-Kutta integration (order 2)
+    //! \param     cell           cell for source term integration
+    //! \param     numberPhases   number of phases
+    //! \param     dt             explicit integration time step
+    void integrationRK2(Cell* cell, const int& numberPhases, const double& dt);
+
+    //! \brief     Runge-Kutta integration (order 4)
+    //! \param     cell           cell for source term integration
+    //! \param     numberPhases   number of phases
+    //! \param     dt             explicit integration time step
+    void integrationRK4(Cell* cell, const int& numberPhases, const double& dt);
+
+    //! \brief     Allows to modifiy the source term along time
+    //! \param     time            physical time of the computation
+    virtual void sourceEvolution(const double& time) {};
+
+    //! \brief     Compute the absolute velocity in the fixed coordinate system
+    //! \param     relVelocity     velocity in the moving coordinate system
+    //! \param     position        position vector in the fixed coordinate system
     virtual Coord computeAbsVelocity(const Coord relVelocity, const Coord position) { Errors::errorMessage("computeAbsVelocity not available for required source"); return 0.; };
+
+  protected:
+    int m_order;
 };
 
 #endif // SOURCE_H

@@ -28,15 +28,13 @@
 //  If not, see <http://www.gnu.org/licenses/>.
 
 //! \file      PhaseMultiP.cpp
-//! \author    F. Petitpas
-//! \version   1.0
-//! \date      June 5 2017
+//! \author    F. Petitpas, K. Schmidmayer
+//! \version   1.1
+//! \date      June 5 2019
 
 #include "PhaseMultiP.h"
 #include "../../Eos/Eos.h"
-#include <fstream>
 
-using namespace std;
 using namespace tinyxml2;
 
 //***************************************************************************
@@ -45,7 +43,7 @@ PhaseMultiP::PhaseMultiP() :m_alpha(1.0), m_density(0.), m_pressure(0.), m_eos(0
 
 //***************************************************************************
 
-PhaseMultiP::PhaseMultiP(XMLElement *material, Eos *eos, string fileName) : m_eos(eos), m_energie(0.), m_totalEnergy(0.), m_soundSpeed(0.)
+PhaseMultiP::PhaseMultiP(XMLElement *material, Eos *eos, std::string fileName) : m_eos(eos), m_energie(0.), m_totalEnergy(0.), m_soundSpeed(0.)
 {
   XMLElement *sousElement(material->FirstChildElement("dataFluid"));
   if (sousElement == NULL) throw ErrorXMLElement("dataFluid", fileName, __FILE__, __LINE__);
@@ -108,7 +106,7 @@ void PhaseMultiP::extendedCalculusPhase(const Coord &velocity)
 
 void PhaseMultiP::computeMassFraction(const double &density)
 {
-  m_Y = m_alpha*m_density / density;
+  m_Y = m_alpha*m_density / std::max(density, epsilonAlphaNull);
 }
 
 //****************************************************************************
@@ -136,7 +134,7 @@ double PhaseMultiP::returnScalar(const int &numVar) const
 
 //***************************************************************************
 
-string PhaseMultiP::returnNameScalar(const int &numVar) const
+std::string PhaseMultiP::returnNameScalar(const int &numVar) const
 {
   switch (numVar)
   {
@@ -200,12 +198,32 @@ void PhaseMultiP::fillBuffer(double *buffer, int &counter) const
 
 //***************************************************************************
 
+void PhaseMultiP::fillBuffer(std::vector<double> &dataToSend) const
+{
+  dataToSend.push_back(m_alpha);
+  dataToSend.push_back(m_density);
+  dataToSend.push_back(m_pressure);
+  dataToSend.push_back(static_cast<double>(m_eos->getNumber()));
+}
+
+//***************************************************************************
+
 void PhaseMultiP::getBuffer(double *buffer, int &counter, Eos **eos)
 {
   m_alpha = buffer[++counter];
   m_density = buffer[++counter];
   m_pressure = buffer[++counter];
   m_eos = eos[static_cast<int>(buffer[++counter])];
+}
+
+//***************************************************************************
+
+void PhaseMultiP::getBuffer(std::vector<double> &dataToReceive, int &counter, Eos **eos)
+{
+  m_alpha = dataToReceive[counter++];
+  m_density = dataToReceive[counter++];
+  m_pressure = dataToReceive[counter++];
+  m_eos = eos[static_cast<int>(dataToReceive[counter++])];
 }
 
 //****************************************************************************
@@ -275,63 +293,41 @@ void PhaseMultiP::getBufferSlopes(double *buffer, int &counter)
 //**************************** VERIFICATION **********************************
 //****************************************************************************
 
-void PhaseMultiP::verifyPhase(const string &message) const
+void PhaseMultiP::verifyPhase(const std::string &message) const
 {
-  if (m_alpha <= 1e-10) errors.push_back(Errors(message + "too small alpha in verifyPhase"));
-  if (m_alpha >= 1. - 1e-10) errors.push_back(Errors(message + "too big alpha in verifyPhase"));
-  if (m_density <= 1.e-10) errors.push_back(Errors(message + "too small density in verifyPhase"));
-  m_eos->verifyPressure(m_pressure, message);
+  if (epsilonAlphaNull > 1.e-20) { // alpha = 0 is activated
+    if (m_alpha < 0.) errors.push_back(Errors(message + "too small alpha in verifyPhase"));
+    if (m_alpha > 1.) errors.push_back(Errors(message + "too big alpha in verifyPhase"));
+    if (m_density < 0.) errors.push_back(Errors(message + "too small density in verifyPhase"));
+    m_eos->verifyPressure(m_pressure, message);
+  }
+  else { // alpha = 0 is desactivated (alpha != 0)
+    if (m_alpha <= 1e-15) errors.push_back(Errors(message + "too small alpha in verifyPhase"));
+    if (m_alpha >= 1. - 1e-15) errors.push_back(Errors(message + "too big alpha in verifyPhase"));
+    if (m_density <= 1.e-15) errors.push_back(Errors(message + "too small density in verifyPhase"));
+  }
 }
 
 //***************************************************************************
 
 void PhaseMultiP::verifyAndCorrectPhase()
 {
-  if (m_alpha < 1e-10) m_alpha = 1e-9;
-  if (m_alpha > 1. - 1e-10) m_alpha = 1. - 1e-9;
-  if (m_density < 1.e-10) m_density = 1.e-9;
+  if (epsilonAlphaNull > 1.e-20) { // alpha = 0 is activated
+    if (m_alpha < 0.) m_alpha = 0.;
+    if (m_alpha > 1.) m_alpha = 1.;
+    if (m_density <= 1.e-15) m_density = 1.e-15;
+  }
+  else { // alpha = 0 is desactivated (alpha != 0)
+    if (m_alpha < 1e-15) m_alpha = 1e-14;
+    if (m_alpha > 1. - 1e-15) m_alpha = 1. - 1e-14;
+    if (m_density < 1.e-15) m_density = 1.e-14;
+  }
   m_eos->verifyAndModifyPressure(m_pressure);
 }
 
 //****************************************************************************
 //**************************** DATA ACCESSORS ********************************
 //****************************************************************************
-
-double PhaseMultiP::getAlpha() const { return m_alpha; }
-
-//***************************************************************************
-
-double PhaseMultiP::getDensity() const { return m_density; }
-
-//***************************************************************************
-
-double PhaseMultiP::getPressure() const { return m_pressure; }
-
-//***************************************************************************
-
-double PhaseMultiP::getY() const { return m_Y; }
-
-//***************************************************************************
-
-Eos* PhaseMultiP::getEos() const { return m_eos; }
-
-//***************************************************************************
-
-double PhaseMultiP::getEnergy() const { return m_energie; }
-
-//***************************************************************************
-
-double PhaseMultiP::getSoundSpeed() const { return m_soundSpeed; }
-
-//***************************************************************************
-
-double PhaseMultiP::getTotalEnergy() const { return m_totalEnergy; }
-
-//***************************************************************************
-
-double PhaseMultiP::getTemperature() const { return m_eos->computeTemperature(m_density, m_pressure); }
-
-//***************************************************************************
 
 void PhaseMultiP::setAlpha(double alpha) { m_alpha = alpha; }
 

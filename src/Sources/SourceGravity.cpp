@@ -28,13 +28,12 @@
 //  If not, see <http://www.gnu.org/licenses/>.
 
 //! \file      SourceGravity.cpp
-//! \author    F. Petitpas, K. Schmidmayer
+//! \author    F. Petitpas, K. Schmidmayer, J. Caze
 //! \version   1.0
-//! \date      January 10 2018
+//! \date      October 29 2019
 
 #include "SourceGravity.h"
 
-using namespace std;
 using namespace tinyxml2;
 
 //***********************************************************************
@@ -43,7 +42,7 @@ SourceGravity::SourceGravity(){}
 
 //***********************************************************************
 
-SourceGravity::SourceGravity(XMLElement *element, string fileName)
+SourceGravity::SourceGravity(XMLElement *element, int order, std::string fileName) : Source(order)
 {
   XMLElement *sousElement(element->FirstChildElement("gravity"));
   if (sousElement == NULL) throw ErrorXMLElement("gravity", fileName, __FILE__, __LINE__);
@@ -67,12 +66,9 @@ SourceGravity::~SourceGravity(){}
 
 //***********************************************************************
 
-void SourceGravity::integrateSourceTerms(Cell *cell, const int &numberPhases, const double &dt)
+void SourceGravity::prepSourceTerms(Cell *cell, const int &numberPhases, const double &dt, const int i)
 {
-  //Source terms integration on conservative quantities
-  cell->buildCons(numberPhases);
-  cell->getCons()->integrateSourceTermsGravity(cell, dt, numberPhases, m_axe, m_direction, m_g);
-  cell->buildPrim(numberPhases);
+  sourceCons[i]->prepSourceTermsGravity(cell, dt, numberPhases, m_g);
 }
 
 //***********************************************************************

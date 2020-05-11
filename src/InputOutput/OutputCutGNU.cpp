@@ -29,12 +29,11 @@
 
 //! \file      OutputCutGNU.cpp
 //! \author    F. Petitpas, K. Schmidmayer
-//! \version   1.0
-//! \date      May 03 2018
+//! \version   1.1
+//! \date      June 5 2019
 
 #include "OutputCutGNU.h"
 
-using namespace std;
 using namespace tinyxml2;
 
 //***************************************************************
@@ -45,7 +44,7 @@ OutputCutGNU::OutputCutGNU(){
 
 //***************************************************************
 
-OutputCutGNU::OutputCutGNU(string casTest, string run, XMLElement *element, string fileName, TypeGO type, Input *entree)
+OutputCutGNU::OutputCutGNU(std::string casTest, std::string run, XMLElement *element, std::string fileName, TypeGO type, Input *entree)
 {
   try {
     //Modification des attributs
@@ -54,8 +53,8 @@ OutputCutGNU::OutputCutGNU(string casTest, string run, XMLElement *element, stri
     if (type == LINE) { m_fileNameResults = "cut1D"; }
     else if (type == PLAN) { m_fileNameResults = "cut2D"; }
     else { throw ErrorECOGEN("OutputCutGNU::OutputCutGNU : type de cut inconnu", __FILE__, __LINE__); }
-    m_fileNameVisu = "visualisation" + m_fileNameResults + ".gnu";
-    m_dossierSortie = "./results/" + run + "/cuts/";
+    m_fileNameVisu = "visualization" + m_fileNameResults + ".gnu";
+    m_folderOutput = "./results/" + run + "/cuts/";
     m_donneesSeparees = 0;
     m_numFichier = 0;
     m_input = entree;
@@ -103,15 +102,15 @@ OutputCutGNU::~OutputCutGNU(){}
 
 void OutputCutGNU::ecritSolution(Mesh *mesh, std::vector<Cell *> *cellsLvl)
 {
-  ofstream fileStream;
-  string file = m_dossierSortie + creationNameFichierGNU(m_fileNameResults.c_str(), -1, rankCpu, m_numFichier);
+  std::ofstream fileStream;
+  std::string file = m_folderOutput + creationNameFichierGNU(m_fileNameResults.c_str(), -1, rankCpu, m_numFichier);
   fileStream.open(file.c_str());
   mesh->ecritSolutionGnuplot(cellsLvl, fileStream, m_objet);
-  fileStream << endl;
+  fileStream << std::endl;
   fileStream.close();
 
   try {
-    //Creation du file gnuplot pour visualisation des resultats
+    //Creation du file gnuplot pour visualization des resultats
     if (rankCpu == 0) {
       if (m_objet->getType() == LINE) { ecritScriptGnuplot(1); }
       else if (m_objet->getType() == PLAN) { ecritScriptGnuplot(2); }

@@ -29,13 +29,11 @@
 
 //! \file      QAPSurfaceTension.cpp
 //! \author    K. Schmidmayer
-//! \version   1.0
-//! \date      December 20 2017
+//! \version   1.1
+//! \date      June 5 2019
 
 #include "QAPSurfaceTension.h"
 #include <iostream>
-
-using namespace std;
 
 //***********************************************************************
 
@@ -44,8 +42,14 @@ QAPSurfaceTension::QAPSurfaceTension(){}
 
 //***********************************************************************
 
-QAPSurfaceTension::QAPSurfaceTension(AddPhys* addPhys) : QuantitiesAddPhys(addPhys), m_gradC(0.,0.,0.)
-{}
+QAPSurfaceTension::QAPSurfaceTension(AddPhys* addPhys) : QuantitiesAddPhys(addPhys), m_gradC(1)
+{
+  m_gradC[0] = 0.;
+  variableNameSurfTens.resize(1);
+  numPhaseSurfTens.resize(1);
+  variableNameSurfTens[0] = transport;
+  numPhaseSurfTens[0] = m_addPhys->getNumTransportAssociated();
+}
 
 //***********************************************************************
 
@@ -55,21 +59,14 @@ QAPSurfaceTension::~QAPSurfaceTension(){}
 
 void QAPSurfaceTension::computeQuantities(Cell* cell)
 {
-  m_gradC = cell->computeGradient("TR", m_addPhys->getNumTransportAssociated());
+  cell->computeGradient(m_gradC, variableNameSurfTens, numPhaseSurfTens);
 }
 
 //***********************************************************************
 
 void QAPSurfaceTension::setGrad(const Coord &grad, int num)
 {
-  m_gradC = grad;
-}
-
-//***********************************************************************
-
-Coord QAPSurfaceTension::getGrad(int num) const
-{
-  return m_gradC;
+  m_gradC[0] = grad;
 }
 
 //***********************************************************************

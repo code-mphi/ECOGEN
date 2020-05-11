@@ -31,9 +31,9 @@
 #define FACE_H
 
 //! \file      Face.h
-//! \author    F. Petitpas, K.Schmidmayer, S. Le Martelot
-//! \version   1.0
-//! \date      December 20 2017
+//! \author    F. Petitpas, K. Schmidmayer, S. Le Martelot
+//! \version   1.1
+//! \date      June 5 2019
 
 #include <cmath>
 #include <algorithm>
@@ -53,11 +53,11 @@ public:
   virtual ~Face();
 
   //Accesseurs
-  Coord getNormal() const;
-  Coord getTangent() const;
-  Coord getBinormal() const;
-  double getSurface() const;
-  Coord getPos() const;
+  const Coord& getNormal() const { return m_normal; };
+  const Coord& getTangent() const { return m_tangent; };
+  const Coord& getBinormal() const { return m_binormal; };
+  const double& getSurface() const { return m_surface; };
+  const Coord& getPos() const { return m_position; };
 
   virtual void setSurface(const double &surface){ Errors::errorMessage("setSurface not available for requested face"); };
   virtual void initializeAutres(const double &surface, const Coord &normal, const Coord &tangent, const Coord &binormal){ Errors::errorMessage("initializeAutres not available for requested face"); }
@@ -73,10 +73,10 @@ public:
 
   virtual void printInfo() const{ Errors::errorMessage("AfficheInfos not available for requested face"); };
 
-  virtual double getSizeX() { Errors::errorMessage("getSizeX not available for requested face"); return 0; };
-  virtual double getSizeY() { Errors::errorMessage("getSizeY not available for requested face"); return 0; };
-  virtual double getSizeZ() { Errors::errorMessage("getSizeZ not available for requested face"); return 0; };
-  virtual Coord getSize() { Errors::errorMessage("getSize not available for requested face"); return 0; };
+  virtual const double& getSizeX() { Errors::errorMessage("getSizeX not available for requested face"); return Errors::defaultDouble; };
+  virtual const double& getSizeY() { Errors::errorMessage("getSizeY not available for requested face"); return Errors::defaultDouble; };
+  virtual const double& getSizeZ() { Errors::errorMessage("getSizeZ not available for requested face"); return Errors::defaultDouble; };
+  virtual const Coord& getSize() { Errors::errorMessage("getSize not available for requested face"); return Coord::defaultCoord; };
 
   //Pour methode AMR
   virtual Face* creerNouvelleFace() { Errors::errorMessage("creerNouvelleFace not available for requested face"); return 0; };

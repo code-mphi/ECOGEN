@@ -31,9 +31,9 @@
 #define FLUXKAPILA_H
 
 //! \file      FluxKapila.h
-//! \author    F. Petitpas, K. Schmidmayer
-//! \version   1.0
-//! \date      February 15 2018
+//! \author    F. Petitpas, K. Schmidmayer, J. Caze
+//! \version   1.1
+//! \date      November 19 2019
 
 #include <iostream>
 #include "../Flux.h"
@@ -48,11 +48,12 @@ class FluxKapila : public Flux
 {
   public:
     FluxKapila();
-    FluxKapila(ModKapila *model, const int &numberPhases);
+    FluxKapila(ModKapila *model, const int &numberPhases); //JC//Q why some constructors don't need to take into parameter *model ?
     virtual ~FluxKapila();
 
     virtual void printFlux() const;
     virtual void addFlux(double coefA, const int &numberPhases);
+    virtual void addFlux(Flux* flux, const int& numberPhases);
     virtual void subtractFlux(double coefA, const int &numberPhases);
     virtual void multiply(double scalar, const int &numberPhases);
     virtual void setBufferFlux(Cell &cell, const int &numberPhases);
@@ -65,17 +66,17 @@ class FluxKapila : public Flux
     virtual void correctionEnergy(Cell *cell, const int &numberPhases, Prim type = vecPhases) const;
 
     virtual void addSymmetricTerms(Phase **phases, Mixture *mixture, const int &numberPhases, const double &r, const double &v);
-    virtual void integrateSourceTermsGravity(Cell *cell, const double &dt, const int &numberPhases, const int &axe, const int &direction, const Coord &g);
-    virtual void integrateSourceTermsHeating(Cell *cell, const double &dt, const int &numberPhases, const double &q);
-    virtual void integrateSourceTermsMRF(Cell *cell, const double &dt, const int &numberPhases, const Coord &omega);
+    virtual void prepSourceTermsGravity(Cell *cell, const double &dt, const int &numberPhases, const Coord &g);
+    virtual void prepSourceTermsHeating(Cell *cell, const double &dt, const int &numberPhases, const double &q);
+    virtual void prepSourceTermsMRF(Cell *cell, const double &dt, const int &numberPhases, const Coord &omega);
 
     // Accessors
     //----------
-    virtual double getAlpha(const int &numPhase) const;
-    virtual double getMasse(const int &numPhase) const;
-    virtual double getEnergy(const int &numPhase) const;
-    virtual Coord getQdm() const;
-    virtual double getEnergyMix() const;
+    virtual const double& getAlpha(const int &numPhase) const { return m_alpha[numPhase]; };
+    virtual const double& getMasse(const int &numPhase) const { return m_masse[numPhase]; };
+    virtual const double& getEnergy(const int &numPhase) const { return m_energ[numPhase]; };
+    virtual const Coord& getQdm() const { return m_qdm; };
+    virtual const double& getEnergyMix() const { return m_energMixture; };
     virtual void setCons(const Flux *cons, const int &numberPhases);
 
 protected:
@@ -95,8 +96,5 @@ protected:
     friend class APKConductivity;
 
 };
-
-extern FluxKapila *fluxBufferKapila;
-extern FluxKapila *sourceConsKap;
 
 #endif // FLUXKAPILA_H

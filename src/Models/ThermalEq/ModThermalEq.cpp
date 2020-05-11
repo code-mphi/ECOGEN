@@ -28,17 +28,14 @@
 //  If not, see <http://www.gnu.org/licenses/>.
 
 //! \file      ModThermalEq.cpp
-//! \author    F. Petitpas
-//! \version   1.0
-//! \date      May 04 2018
+//! \author    F. Petitpas, K. Schmidmayer, J. Caze
+//! \version   1.1
+//! \date      November 18 2019
 
-#include <iostream>
 #include <cmath>
 #include <algorithm>
 #include "ModThermalEq.h"
 #include "PhaseThermalEq.h"
-
-using namespace std;
 
 const std::string ModThermalEq::NAME = "THERMALEQ";
 
@@ -47,16 +44,21 @@ const std::string ModThermalEq::NAME = "THERMALEQ";
 ModThermalEq::ModThermalEq(int &numberTransports, const int &numberPhases) :
   Model(NAME,numberTransports)
 {
-  fluxBufferThermalEq = new FluxThermalEq(numberPhases);
-  sourceConsThermEq = new FluxThermalEq(numberPhases);
+  fluxBuff = new FluxThermalEq(numberPhases);
+  for (int i = 0; i < 4; i++) {
+    sourceCons.push_back(new FluxThermalEq(numberPhases));
+  }
 }
 
 //***********************************************************************
 
 ModThermalEq::~ModThermalEq()
 {
-  delete fluxBufferThermalEq;
-  delete sourceConsThermEq;
+  delete fluxBuff;
+  for (int i = 0; i < 4; i++) {
+    delete sourceCons[i];
+  }
+  sourceCons.clear();
 }
 
 //***********************************************************************
@@ -107,16 +109,16 @@ void ModThermalEq::solveRiemannIntern(Cell &cellLeft, Cell &cellRight, const int
   double uR = cellRight.getMixture()->getVelocity().getX(), cR = cellRight.getMixture()->getMixSoundSpeed(), pR = cellRight.getMixture()->getPressure(), rhoR = cellRight.getMixture()->getDensity();
 
   //Davies
-  sL = min(uL - cL, uR - cR);
-  sR = max(uR + cR, uL + cL);
+  sL = std::min(uL - cL, uR - cR);
+  sR = std::max(uR + cR, uL + cL);
 
-  if (abs(sL)>1.e-3) dtMax = min(dtMax, dxLeft / abs(sL));
-  if (abs(sR)>1.e-3) dtMax = min(dtMax, dxRight / abs(sR));
+  if (std::fabs(sL)>1.e-3) dtMax = std::min(dtMax, dxLeft / std::fabs(sL));
+  if (std::fabs(sR)>1.e-3) dtMax = std::min(dtMax, dxRight / std::fabs(sR));
 
   //compute left and right mass flow rates and sM
   double mL(rhoL*(sL - uL)), mR(rhoR*(sR - uR)), mkL, mkR;
   double sM((pR - pL + mL*uL - mR*uR) / (mL - mR));
-  if (abs(sM)<1.e-8) sM = 0.;
+  if (std::fabs(sM)<1.e-8) sM = 0.;
 
   //Solution sampling
   if (sL >= 0.){
@@ -124,14 +126,14 @@ void ModThermalEq::solveRiemannIntern(Cell &cellLeft, Cell &cellRight, const int
       vecPhase = cellLeft.getPhase(k);
       double alpha = vecPhase->getAlpha();
       double density = vecPhase->getDensity();
-      fluxBufferThermalEq->m_masse[k] = alpha*density*uL;
+      static_cast<FluxThermalEq*> (fluxBuff)->m_masse[k] = alpha*density*uL;
     }
     double vitY = cellLeft.getMixture()->getVelocity().getY(); double vitZ = cellLeft.getMixture()->getVelocity().getZ();
     double totalEnergy = cellLeft.getMixture()->getEnergy() + 0.5*cellLeft.getMixture()->getVelocity().squaredNorm();
-    fluxBufferThermalEq->m_qdm.setX(rhoL*uL*uL + pL);
-    fluxBufferThermalEq->m_qdm.setY(rhoL*vitY*uL);
-    fluxBufferThermalEq->m_qdm.setZ(rhoL*vitZ*uL);
-    fluxBufferThermalEq->m_energMixture = (rhoL*totalEnergy + pL)*uL;
+    static_cast<FluxThermalEq*> (fluxBuff)->m_qdm.setX(rhoL*uL*uL + pL);
+    static_cast<FluxThermalEq*> (fluxBuff)->m_qdm.setY(rhoL*vitY*uL);
+    static_cast<FluxThermalEq*> (fluxBuff)->m_qdm.setZ(rhoL*vitZ*uL);
+    static_cast<FluxThermalEq*> (fluxBuff)->m_energMixture = (rhoL*totalEnergy + pL)*uL;
 
   }
   else if (sR <= 0.){
@@ -139,14 +141,14 @@ void ModThermalEq::solveRiemannIntern(Cell &cellLeft, Cell &cellRight, const int
       vecPhase = cellRight.getPhase(k);
       double alpha = vecPhase->getAlpha();
       double density = vecPhase->getDensity();
-      fluxBufferThermalEq->m_masse[k] = alpha*density*uR;
+      static_cast<FluxThermalEq*> (fluxBuff)->m_masse[k] = alpha*density*uR;
     }
     double vitY = cellRight.getMixture()->getVelocity().getY(); double vitZ = cellRight.getMixture()->getVelocity().getZ();
     double totalEnergy = cellRight.getMixture()->getEnergy() + 0.5*cellRight.getMixture()->getVelocity().squaredNorm();
-    fluxBufferThermalEq->m_qdm.setX(rhoR*uR*uR + pR);
-    fluxBufferThermalEq->m_qdm.setY(rhoR*vitY*uR);
-    fluxBufferThermalEq->m_qdm.setZ(rhoR*vitZ*uR);
-    fluxBufferThermalEq->m_energMixture = (rhoR*totalEnergy + pR)*uR;
+    static_cast<FluxThermalEq*> (fluxBuff)->m_qdm.setX(rhoR*uR*uR + pR);
+    static_cast<FluxThermalEq*> (fluxBuff)->m_qdm.setY(rhoR*vitY*uR);
+    static_cast<FluxThermalEq*> (fluxBuff)->m_qdm.setZ(rhoR*vitZ*uR);
+    static_cast<FluxThermalEq*> (fluxBuff)->m_energMixture = (rhoR*totalEnergy + pR)*uR;
 
   }
   else if (sM >= 0.){
@@ -161,12 +163,12 @@ void ModThermalEq::solveRiemannIntern(Cell &cellLeft, Cell &cellRight, const int
       double alpha = vecPhase->getAlpha();
       double density = vecPhase->getDensity();
       mkL = alpha*density*(sL - uL);
-      fluxBufferThermalEq->m_masse[k] = mkL / (sL - sM) * sM;
+      static_cast<FluxThermalEq*> (fluxBuff)->m_masse[k] = mkL / (sL - sM) * sM;
     }
-    fluxBufferThermalEq->m_qdm.setX(rhoStar*sM*sM + pStar);
-    fluxBufferThermalEq->m_qdm.setY(rhoStar*vitY*sM);
-    fluxBufferThermalEq->m_qdm.setZ(rhoStar*vitZ*sM);
-    fluxBufferThermalEq->m_energMixture = (rhoStar*EStar + pStar)*sM;
+    static_cast<FluxThermalEq*> (fluxBuff)->m_qdm.setX(rhoStar*sM*sM + pStar);
+    static_cast<FluxThermalEq*> (fluxBuff)->m_qdm.setY(rhoStar*vitY*sM);
+    static_cast<FluxThermalEq*> (fluxBuff)->m_qdm.setZ(rhoStar*vitZ*sM);
+    static_cast<FluxThermalEq*> (fluxBuff)->m_energMixture = (rhoStar*EStar + pStar)*sM;
   }
   else{
     //Compute right solution state
@@ -180,16 +182,16 @@ void ModThermalEq::solveRiemannIntern(Cell &cellLeft, Cell &cellRight, const int
       double alpha = vecPhase->getAlpha();
       double density = vecPhase->getDensity();
       mkR = alpha*density*(sR - uR);
-      fluxBufferThermalEq->m_masse[k] = mkR / (sR - sM) * sM;
+      static_cast<FluxThermalEq*> (fluxBuff)->m_masse[k] = mkR / (sR - sM) * sM;
     }
-    fluxBufferThermalEq->m_qdm.setX(rhoStar*sM*sM + pStar);
-    fluxBufferThermalEq->m_qdm.setY(rhoStar*vitY*sM);
-    fluxBufferThermalEq->m_qdm.setZ(rhoStar*vitZ*sM);
-    fluxBufferThermalEq->m_energMixture = (rhoStar*EStar + pStar)*sM;
+    static_cast<FluxThermalEq*> (fluxBuff)->m_qdm.setX(rhoStar*sM*sM + pStar);
+    static_cast<FluxThermalEq*> (fluxBuff)->m_qdm.setY(rhoStar*vitY*sM);
+    static_cast<FluxThermalEq*> (fluxBuff)->m_qdm.setZ(rhoStar*vitZ*sM);
+    static_cast<FluxThermalEq*> (fluxBuff)->m_energMixture = (rhoStar*EStar + pStar)*sM;
   }
 
   //Contact discontinuity velocity
-  fluxBufferThermalEq->m_sM = sM;
+  static_cast<FluxThermalEq*> (fluxBuff)->m_sM = sM;
 }
 
 //****************************************************************************
@@ -203,22 +205,22 @@ void ModThermalEq::solveRiemannWall(Cell &cellLeft, const int &numberPhases, con
 
   double uL = cellLeft.getMixture()->getVelocity().getX(), cL = cellLeft.getMixture()->getMixSoundSpeed(), pL = cellLeft.getMixture()->getPressure(), rhoL = cellLeft.getMixture()->getDensity();
 
-  sL = min(uL - cL, -uL - cL);
-  if (abs(sL)>1.e-3) dtMax = min(dtMax, dxLeft / abs(sL));
+  sL = std::min(uL - cL, -uL - cL);
+  if (std::fabs(sL)>1.e-3) dtMax = std::min(dtMax, dxLeft / std::fabs(sL));
 
   pStar = rhoL*(uL - sL)*uL + pL;
 
   for (int k = 0; k < numberPhases; k++)
   {
-    fluxBufferThermalEq->m_masse[k] = 0.;
+    static_cast<FluxThermalEq*> (fluxBuff)->m_masse[k] = 0.;
   }
-  fluxBufferThermalEq->m_qdm.setX(pStar);
-  fluxBufferThermalEq->m_qdm.setY(0.);
-  fluxBufferThermalEq->m_qdm.setZ(0.);
-  fluxBufferThermalEq->m_energMixture = 0.;
+  static_cast<FluxThermalEq*> (fluxBuff)->m_qdm.setX(pStar);
+  static_cast<FluxThermalEq*> (fluxBuff)->m_qdm.setY(0.);
+  static_cast<FluxThermalEq*> (fluxBuff)->m_qdm.setZ(0.);
+  static_cast<FluxThermalEq*> (fluxBuff)->m_energMixture = 0.;
 
   //Contact discontinuity velocity
-  fluxBufferThermalEq->m_sM = 0.;
+  static_cast<FluxThermalEq*> (fluxBuff)->m_sM = 0.;
 }
 
 //****************************************************************************
@@ -241,10 +243,10 @@ void ModThermalEq::solveRiemannTank(Cell &cellLeft, const int &numberPhases, con
   pStar = p0;
   vStar = cellLeft.getMixture()->computeVolumeIsentrope(TB->Yk, pL, TL, pStar, numberPhases);
   vmv0 = vStar - 1. / rhoL;
-  if (abs(vmv0) > 1e-10) { mL = sqrt((pL - pStar) / vmv0); }
+  if (std::fabs(vmv0) > 1e-10) { mL = sqrt((pL - pStar) / vmv0); }
   else { mL = zL; }
   sL = uL - mL / rhoL;
-  if (abs(sL)>1.e-3) dtMax = min(dtMax, dxLeft / abs(sL));
+  if (std::fabs(sL)>1.e-3) dtMax = std::min(dtMax, dxLeft / std::fabs(sL));
   sM = uL + mL * vmv0;
 
   //2) Check for pathologic cases
@@ -308,7 +310,7 @@ void ModThermalEq::solveRiemannTank(Cell &cellLeft, const int &numberPhases, con
       TStarL = cellLeft.getMixture()->computeTemperatureIsentrope(TB->Yk, pL, TL, p, numberPhases, &dTStarL);
       vStarL = cellLeft.getMixture()->computeVolumeIsentrope(TB->Yk, pL, TL, p, numberPhases, &dvStarL);
       vmv0 = vStarL - 1. / rhoL;
-      if (abs(vmv0) > 1e-10) {
+      if (std::fabs(vmv0) > 1e-10) {
         mL = sqrt((pL - p) / vmv0);
         dmL = 0.5*(-vmv0 + (p - pL)*dvStarL) / (vmv0*vmv0) / mL;
       }
@@ -317,13 +319,13 @@ void ModThermalEq::solveRiemannTank(Cell &cellLeft, const int &numberPhases, con
         dmL = 0.;
       }
       sL = uL - mL / rhoL;
-      if (abs(sL)>1.e-3) dtMax = min(dtMax, dxLeft / abs(sL));
+      if (std::fabs(sL)>1.e-3) dtMax = std::min(dtMax, dxLeft / std::fabs(sL));
       uStarL = uL + mL*vmv0;
       duStarL = dmL*vmv0 + mL* dvStarL;
       //solved function
       f = uStarR - uStarL;
       df = duStarR - duStarL;
-    } while (abs(f)>1e-3); //End iterative loop
+    } while (std::fabs(f)>1e-3); //End iterative loop
     pStar = p;
     uStar = 0.5*(uStarL + uStarR);
     rhoStar = 0.;
@@ -340,15 +342,15 @@ void ModThermalEq::solveRiemannTank(Cell &cellLeft, const int &numberPhases, con
   //4) Flux completion
   //------------------
   for (int k = 0; k < numberPhases; k++) {
-    fluxBufferThermalEq->m_masse[k] = rhoStar* TB->YkStar[k] * uStar;
+    static_cast<FluxThermalEq*> (fluxBuff)->m_masse[k] = rhoStar* TB->YkStar[k] * uStar;
   }
-  fluxBufferThermalEq->m_qdm.setX(rhoStar*uStar*uStar + pStar);
-  fluxBufferThermalEq->m_qdm.setY(rhoStar*uStar*uyStar);
-  fluxBufferThermalEq->m_qdm.setZ(rhoStar*uStar*uzStar);
-  fluxBufferThermalEq->m_energMixture = (rhoStar*EStar + pStar)*uStar;
+  static_cast<FluxThermalEq*> (fluxBuff)->m_qdm.setX(rhoStar*uStar*uStar + pStar);
+  static_cast<FluxThermalEq*> (fluxBuff)->m_qdm.setY(rhoStar*uStar*uyStar);
+  static_cast<FluxThermalEq*> (fluxBuff)->m_qdm.setZ(rhoStar*uStar*uzStar);
+  static_cast<FluxThermalEq*> (fluxBuff)->m_energMixture = (rhoStar*EStar + pStar)*uStar;
 
   //Contact discontinuity velocity
-  fluxBufferThermalEq->m_sM = sM;
+  static_cast<FluxThermalEq*> (fluxBuff)->m_sM = sM;
 }
 
 //****************************************************************************
@@ -371,17 +373,17 @@ void ModThermalEq::solveRiemannOutflow(Cell &cellLeft, const int &numberPhases, 
   double rhoStar(0.), vmv0, mL, uStar;
   rhoStar = 1./cellLeft.getMixture()->computeVolumeIsentrope(TB->Yk, pL, TL, p0, numberPhases);
   vmv0 = 1./ rhoStar - 1. / rhoL;
-  if (abs(vmv0) > 1e-10) {
+  if (std::fabs(vmv0) > 1e-10) {
     mL = sqrt((pL - p0) / vmv0);
   }
   else {
     mL = zL;
   }
   sL = uL - mL / rhoL;
-  if (abs(sL)>1.e-3) dtMax = min(dtMax, dxLeft / abs(sL));
+  if (std::fabs(sL)>1.e-3) dtMax = std::min(dtMax, dxLeft / std::fabs(sL));
   uStar = uL + mL*vmv0;
 
-  //Pathologic case sL>0
+  //Pathologic case sL>0            //FP//Q// Look for special case u<0
   if (sL >= 0.) { //Supersonic outflow => Left state solution
     uStar = uL;
     pStar = pL;
@@ -392,34 +394,27 @@ void ModThermalEq::solveRiemannOutflow(Cell &cellLeft, const int &numberPhases, 
   double totalEnergy = cellLeft.getMixture()->getEnergy() + 0.5*cellLeft.getMixture()->getVelocity().squaredNorm();
   double EStar(totalEnergy + (uStar - uL)*(uStar - pL / mL));
   for (int k = 0; k < numberPhases; k++) {
-    fluxBufferThermalEq->m_masse[k] = rhoStar * TB->Yk[k] * uStar ;
+    static_cast<FluxThermalEq*> (fluxBuff)->m_masse[k] = rhoStar * TB->Yk[k] * uStar ;
   }
-  fluxBufferThermalEq->m_qdm.setX(uStar*uStar*rhoStar + pStar);
-  fluxBufferThermalEq->m_qdm.setY(uStar*vL*rhoStar);
-  fluxBufferThermalEq->m_qdm.setZ(uStar*wL*rhoStar);
-  fluxBufferThermalEq->m_energMixture = (EStar*rhoStar + pStar)*uStar;
+  static_cast<FluxThermalEq*> (fluxBuff)->m_qdm.setX(uStar*uStar*rhoStar + pStar);
+  static_cast<FluxThermalEq*> (fluxBuff)->m_qdm.setY(uStar*vL*rhoStar);
+  static_cast<FluxThermalEq*> (fluxBuff)->m_qdm.setZ(uStar*wL*rhoStar);
+  static_cast<FluxThermalEq*> (fluxBuff)->m_energMixture = (EStar*rhoStar + pStar)*uStar;
 
   //Contact discontinuity velocity
-  fluxBufferThermalEq->m_sM = uStar;
+  static_cast<FluxThermalEq*> (fluxBuff)->m_sM = uStar;
 
-  //Specific mass flow rate output (kg/s/m²)
+  //Specific mass flow rate output (kg/s/mï¿½)
   for (int k = 0; k < numberPhases; k++) {
-    debitSurf[k] = fluxBufferThermalEq->m_masse[k];
+    debitSurf[k] = static_cast<FluxThermalEq*> (fluxBuff)->m_masse[k];
   }
 }
 
 //****************************************************************************
 
-double ModThermalEq::getSM()
+const double& ModThermalEq::getSM()
 {
-  return fluxBufferThermalEq->m_sM;
-}
-
-//****************************************************************************
-
-Coord ModThermalEq::getVelocity(Cell *cell) const
-{
-  return cell->getMixture()->getVelocity();
+  return static_cast<FluxThermalEq*> (fluxBuff)->m_sM;
 }
 
 //****************************************************************************
@@ -429,17 +424,10 @@ Coord ModThermalEq::getVelocity(Cell *cell) const
 void ModThermalEq::reverseProjection(const Coord normal, const Coord tangent, const Coord binormal) const
 {
   Coord fluxProjete;
-  fluxProjete.setX(normal.getX()*fluxBufferThermalEq->m_qdm.getX() + tangent.getX()*fluxBufferThermalEq->m_qdm.getY() + binormal.getX()*fluxBufferThermalEq->m_qdm.getZ());
-  fluxProjete.setY(normal.getY()*fluxBufferThermalEq->m_qdm.getX() + tangent.getY()*fluxBufferThermalEq->m_qdm.getY() + binormal.getY()*fluxBufferThermalEq->m_qdm.getZ());
-  fluxProjete.setZ(normal.getZ()*fluxBufferThermalEq->m_qdm.getX() + tangent.getZ()*fluxBufferThermalEq->m_qdm.getY() + binormal.getZ()*fluxBufferThermalEq->m_qdm.getZ());
-  fluxBufferThermalEq->m_qdm.setXYZ(fluxProjete.getX(), fluxProjete.getY(), fluxProjete.getZ());
-}
-
-//****************************************************************************
-
-string ModThermalEq::whoAmI() const
-{
-  return m_name;
+  fluxProjete.setX(normal.getX()*static_cast<FluxThermalEq*> (fluxBuff)->m_qdm.getX() + tangent.getX()*static_cast<FluxThermalEq*> (fluxBuff)->m_qdm.getY() + binormal.getX()*static_cast<FluxThermalEq*> (fluxBuff)->m_qdm.getZ());
+  fluxProjete.setY(normal.getY()*static_cast<FluxThermalEq*> (fluxBuff)->m_qdm.getX() + tangent.getY()*static_cast<FluxThermalEq*> (fluxBuff)->m_qdm.getY() + binormal.getY()*static_cast<FluxThermalEq*> (fluxBuff)->m_qdm.getZ());
+  fluxProjete.setZ(normal.getZ()*static_cast<FluxThermalEq*> (fluxBuff)->m_qdm.getX() + tangent.getZ()*static_cast<FluxThermalEq*> (fluxBuff)->m_qdm.getY() + binormal.getZ()*static_cast<FluxThermalEq*> (fluxBuff)->m_qdm.getZ());
+  static_cast<FluxThermalEq*> (fluxBuff)->m_qdm.setXYZ(fluxProjete.getX(), fluxProjete.getY(), fluxProjete.getZ());
 }
 
 //****************************************************************************

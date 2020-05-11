@@ -31,9 +31,9 @@
 #define FLUXEULERHOMOGENEOUS_H
 
 //! \file      FluxEulerHomogeneous.h
-//! \author    F. Petitpas, K. Schmidmayer
-//! \version   1.0
-//! \date      December 22 2017
+//! \author    F. Petitpas, K. Schmidmayer, J. Caze
+//! \version   1.1
+//! \date      November 18 2019
 
 #include <iostream>
 #include "../Flux.h"
@@ -68,9 +68,9 @@ class FluxEulerHomogeneous : public Flux
     
     // Accessors
     //----------
-    virtual Coord getQdm() const;
-    virtual double getMasseMix() const;
-    virtual double getEnergyMix() const;
+    virtual const Coord& getQdm() const { return m_qdm; };
+    virtual const double& getMasseMix() const { return m_masse; };
+    virtual const double& getEnergyMix() const { return m_energ; };
     virtual void setCons(const Flux *cons, const int &numberPhases);
 
   protected:
@@ -85,8 +85,6 @@ class FluxEulerHomogeneous : public Flux
     //friend class PAEHuler;  // To modify if needed, example: to add a class PAEHViscosity, add friend class PAEHViscosity.
 
 };
-
-extern FluxEulerHomogeneous fluxBufferEulerHomogeneous;
 
 #endif // FLUXEULERHOMOGENEOUS_H
 

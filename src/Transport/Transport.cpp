@@ -29,13 +29,11 @@
 
 //! \file      Transport.cpp
 //! \author    K. Schmidmayer
-//! \version   1.0
-//! \date      January 3 2018
+//! \version   1.1
+//! \date      June 5 2019
 
 #include "Transport.h"
-#include <fstream>
 
-using namespace std;
 using namespace tinyxml2;
 
 Transport* fluxBufferTransport;
@@ -54,13 +52,6 @@ Transport::~Transport(){}
 void Transport::setValue(double value)
 {
   m_value = value;
-}
-
-//***********************************************************************
-
-double Transport::getValue() const
-{
-  return m_value;
 }
 
 //***********************************************************************

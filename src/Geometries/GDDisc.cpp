@@ -32,16 +32,13 @@
 //! \version   1.0
 //! \date      December 19 2017
 
-#include <vector>
 #include "GDDisc.h"
-#include <iostream>
 
-using namespace std;
 using namespace tinyxml2;
 
 //***************************************************************
 
-GDDisc::GDDisc(string name, vector<Phase*> vecPhases, Mixture *mixture, vector<Transport> vecTransports, XMLElement *element, const int &physicalEntity, string fileName) :
+GDDisc::GDDisc(std::string name, std::vector<Phase*> vecPhases, Mixture *mixture, std::vector<Transport> vecTransports, XMLElement *element, const int &physicalEntity, std::string fileName) :
 GeometricalDomain(name, vecPhases, mixture, vecTransports, physicalEntity)
 {
   XMLElement *sousElement(element->FirstChildElement("dataDisc"));
@@ -52,20 +49,20 @@ GeometricalDomain(name, vecPhases, mixture, vecTransports, physicalEntity)
   //radius
   error = sousElement->QueryDoubleAttribute("radius", &m_radius);
   if (error != XML_NO_ERROR) throw ErrorXMLAttribut("radius", fileName, __FILE__, __LINE__);
-  //Axe1
-  string axe(sousElement->Attribute("axe1"));
-  Tools::uppercase(axe);
-  if (axe == "X"){ m_axe1 = X; }
-  else if (axe == "Y"){ m_axe1 = Y; }
-  else if (axe == "Z"){ m_axe1 = Z; }
-  else { throw ErrorXMLAttribut("axe1", fileName, __FILE__, __LINE__); }
-  //Axe2
-  axe = sousElement->Attribute("axe2");
-  Tools::uppercase(axe);
-  if (axe == "X"){ m_axe2 = X; }
-  else if (axe == "Y"){ m_axe2 = Y; }
-  else if (axe == "Z"){ m_axe2 = Z; }
-  else { throw ErrorXMLAttribut("axe2", fileName, __FILE__, __LINE__); }
+  //Axis1
+  std::string axis(sousElement->Attribute("axis1"));
+  Tools::uppercase(axis);
+  if (axis == "X"){ m_axis1 = X; }
+  else if (axis == "Y"){ m_axis1 = Y; }
+  else if (axis == "Z"){ m_axis1 = Z; }
+  else { throw ErrorXMLAttribut("axis1", fileName, __FILE__, __LINE__); }
+  //Axis2
+  axis = sousElement->Attribute("axis2");
+  Tools::uppercase(axis);
+  if (axis == "X"){ m_axis2 = X; }
+  else if (axis == "Y"){ m_axis2 = Y; }
+  else if (axis == "Z"){ m_axis2 = Z; }
+  else { throw ErrorXMLAttribut("axis2", fileName, __FILE__, __LINE__); }
   //Disc center
   double x(0.), y(0.), z(0.);
   XMLElement *center(sousElement->FirstChildElement("center"));
@@ -85,20 +82,20 @@ GDDisc::~GDDisc(){}
 bool GDDisc::belong(Coord &posElement, const int &lvl) const
 {
   double sum(0.);
-  vector<Axe> axes;
-  axes.push_back(m_axe1);
-  axes.push_back(m_axe2);
+  std::vector<Axis> axes;
+  axes.push_back(m_axis1);
+  axes.push_back(m_axis2);
 
   for (unsigned int i = 0; i < axes.size(); i++)
   {
     switch (axes[i])
     {
     case X:
-      sum += pow(posElement.getX() - m_centerPos.getX(), 2.); break;
+      sum += std::pow(posElement.getX() - m_centerPos.getX(), 2.); break;
     case Y:
-      sum += pow(posElement.getY() - m_centerPos.getY(), 2.); break;
+      sum += std::pow(posElement.getY() - m_centerPos.getY(), 2.); break;
     case Z:
-      sum += pow(posElement.getZ() - m_centerPos.getZ(), 2.); break;
+      sum += std::pow(posElement.getZ() - m_centerPos.getZ(), 2.); break;
     }
   }
   

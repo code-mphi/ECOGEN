@@ -29,12 +29,11 @@
 
 //! \file      BoundCondInj.cpp
 //! \author    F. Petitpas, K. Schmidmayer
-//! \version   1.0
-//! \date      December 20 2017
+//! \version   1.1
+//! \date      May 07 2020
 
 #include "BoundCondInj.h"
 
-using namespace std;
 using namespace tinyxml2;
 
 //****************************************************************************
@@ -43,8 +42,8 @@ BoundCondInj::BoundCondInj(){}
 
 //****************************************************************************
 
-BoundCondInj::BoundCondInj(int numPhysique, XMLElement *element, int &numberPhases, int &numberTransports, std::vector<std::string> nameTransports, Eos **eos, string fileName) :
-  BoundCond(numPhysique)
+BoundCondInj::BoundCondInj(int numPhysique, XMLElement* element, int& numberPhases, int& numberTransports, std::vector<std::string> nameTransports, Eos** eos, std::string fileName) :
+  BoundCond(numPhysique), m_T0(0.)
 {
   m_numberPhase = numberPhases;
   m_ak0 = new double[m_numberPhase];
@@ -69,29 +68,20 @@ BoundCondInj::BoundCondInj(int numPhysique, XMLElement *element, int &numberPhas
     if (fluid == NULL) throw ErrorXMLElement("dataFluid", fileName, __FILE__, __LINE__);
     //Attributes reading
     error = fluid->QueryDoubleAttribute("density", &m_rhok0[0]);
+    if (error != XML_NO_ERROR) error = fluid->QueryDoubleAttribute("temperature", &m_T0);
     if (error != XML_NO_ERROR) throw ErrorXMLAttribut("density", fileName, __FILE__, __LINE__);
     error = fluid->QueryDoubleAttribute("pressure", &m_pk0[0]);
     if (error != XML_NO_ERROR) throw ErrorXMLAttribut("pressure", fileName, __FILE__, __LINE__);
+
+    if(m_T0 !=0.) m_rhok0[0] = eos[0]->computeDensity(m_pk0[0], m_T0);
+
   }
   else {
-    //Reading fluids proportion in tank
-    //---------------------------------
-    sousElement = element->FirstChildElement("fluidsProp");
-    if (sousElement == NULL) throw ErrorXMLElement("fluidsProp", fileName, __FILE__, __LINE__);
-    XMLElement* fluid(sousElement->FirstChildElement("dataFluid"));
+    //Reading proportion of inflow fluids
+    //-----------------------------------
+    XMLElement* fluid(element->FirstChildElement("dataFluid"));
 
-    int nbFluids(0); string nameEOS;
-    while (fluid != NULL)
-    {
-      nbFluids++;
-      //EOS name searching
-      nameEOS = fluid->Attribute("EOS");
-      int e(0);
-      for (e = 0; e < m_numberPhase; e++) {
-        if (nameEOS == eos[e]->getName()) { break; }
-      }
-      if (e == m_numberPhase) { throw ErrorXMLEOSInconnue(nameEOS, fileName, __FILE__, __LINE__); }
-
+    for(int e = 0; e <m_numberPhase; e++){
       //Attributes reading
       error = fluid->QueryDoubleAttribute("alpha", &m_ak0[e]);
       if (error != XML_NO_ERROR) throw ErrorXMLAttribut("alpha", fileName, __FILE__, __LINE__);
@@ -99,10 +89,8 @@ BoundCondInj::BoundCondInj(int numPhysique, XMLElement *element, int &numberPhas
       if (error != XML_NO_ERROR) throw ErrorXMLAttribut("density", fileName, __FILE__, __LINE__);
       error = fluid->QueryDoubleAttribute("pressure", &m_pk0[e]);
       if (error != XML_NO_ERROR) throw ErrorXMLAttribut("pressure", fileName, __FILE__, __LINE__);
-
       fluid = fluid->NextSiblingElement("dataFluid");
     }
-    if (nbFluids != m_numberPhase) throw ErrorXMLEtat("Inj", fileName, __FILE__, __LINE__);
 
     //Proportions checking
     //--------------------
@@ -111,7 +99,7 @@ BoundCondInj::BoundCondInj(int numPhysique, XMLElement *element, int &numberPhas
       if (m_ak0[k]<0. || m_ak0[k]>1.) throw ErrorXMLAttribut("alpha should be in [0,1]", fileName, __FILE__, __LINE__);
       sum += m_ak0[k];
     }
-    if (abs(sum - 1.) > 1.e-6) { throw ErrorXMLAttribut("sum of alpha should be 1", fileName, __FILE__, __LINE__); }
+    if (std::fabs(sum - 1.) > 1.e-6) { throw ErrorXMLAttribut("sum of alpha should be 1", fileName, __FILE__, __LINE__); }
     else {
       for (int k = 0; k < m_numberPhase; k++) { m_ak0[k] /= sum; }
     }
@@ -127,7 +115,7 @@ BoundCondInj::BoundCondInj(int numPhysique, XMLElement *element, int &numberPhas
     int foundColors(0);
     m_valueTransport = new double[numberTransports];
     XMLElement *elementTransport(sousElement->FirstChildElement("transport"));
-    string nameTransport;
+    std::string nameTransport;
     while (elementTransport != NULL)
     {
       nameTransport = elementTransport->Attribute("name");
@@ -188,9 +176,9 @@ BoundCondInj::~BoundCondInj()
 
 //****************************************************************************
 
-void BoundCondInj::creeLimite(CellInterface **face)
+void BoundCondInj::creeLimite(TypeMeshContainer<CellInterface *> &cellInterfaces)
 {
-  *face = new BoundCondInj(*(this));
+  cellInterfaces.push_back(new BoundCondInj(*(this)));
 }
 
 //****************************************************************************
@@ -211,9 +199,9 @@ void BoundCondInj::solveRiemannTransportLimite(Cell &cellLeft, const int & numbe
 
 void BoundCondInj::printInfo()
 {
-  cout << m_numPhysique << endl;
-  cout << m_m0 << endl;
-  cout << m_rhok0[0] << endl;
+  std::cout << m_numPhysique << std::endl;
+  std::cout << m_m0 << std::endl;
+  std::cout << m_rhok0[0] << std::endl;
 }
 
 
@@ -221,9 +209,9 @@ void BoundCondInj::printInfo()
 //******************************Methode AMR***********************************
 //****************************************************************************
 
-void BoundCondInj::creerBordChild()
+void BoundCondInj::creerCellInterfaceChild()
 {
-  m_boundariesChildren.push_back(new BoundCondInj(*this, m_lvl + 1));
+  m_cellInterfacesChildren.push_back(new BoundCondInj(*this, m_lvl + 1));
 }
 
 //****************************************************************************

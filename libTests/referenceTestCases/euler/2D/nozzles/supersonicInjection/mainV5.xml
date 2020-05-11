@@ -1,0 +1,10 @@
+<?xml version = "1.0" encoding = "UTF-8" standalone = "yes"?>
+<computationParam>
+	<run>euler2DNozzleSupersonicInjection</run>
+	<outputMode format="XML" binary="false"/>
+	<timeControlMode iterations="false">
+		<iterations number="100" iterFreq="10"/>
+		<physicalTime totalTime="2.e-2" timeFreq="1.e-3"/>
+	</timeControlMode>
+	<computationControl CFL="0.8"/>
+</computationParam>

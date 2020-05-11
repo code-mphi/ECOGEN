@@ -29,12 +29,10 @@
 
 //! \file      BoundCondWallO2.cpp
 //! \author    F. Petitpas, K. Schmidmayer
-//! \version   1.0
-//! \date      December 20 2017
+//! \version   1.1
+//! \date      June 5 2019
 
 #include "BoundCondWallO2.h"
-
-using namespace std;
 
 //****************************************************************************
 
@@ -64,9 +62,9 @@ BoundCondWallO2::~BoundCondWallO2()
 
 //****************************************************************************
 
-void BoundCondWallO2::creeLimite(CellInterface **face)
+void BoundCondWallO2::creeLimite(TypeMeshContainer<CellInterface *> &cellInterfaces)
 {
-  *face = new BoundCondWallO2(*(this));
+  cellInterfaces.push_back(new BoundCondWallO2(*(this)));
 }
 
 //***********************************************************************
@@ -103,19 +101,19 @@ void BoundCondWallO2::computeSlopes(const int &numberPhases, const int &numberTr
   distanceX = m_cellLeft->getElement()->distanceX(m_face);
   distanceY = m_cellLeft->getElement()->distanceY(m_face);
   distanceZ = m_cellLeft->getElement()->distanceZ(m_face);
-  if (abs(distanceX) > 1.e-8) {
+  if (std::fabs(distanceX) > 1.e-8) {
     for (int k = 0; k < numberPhases; k++) {
       m_vecPhasesSlopes[k]->setU(m_cellLeft->getPhase(k, type)->getVelocity().getX() / distanceX);
     }
     m_mixtureSlopes->setU(m_cellLeft->getMixture(type)->getVelocity().getX() / distanceX);
   }
-  if (abs(distanceY) > 1.e-8) {
+  if (std::fabs(distanceY) > 1.e-8) {
     for (int k = 0; k < numberPhases; k++) {
       m_vecPhasesSlopes[k]->setV(m_cellLeft->getPhase(k, type)->getVelocity().getY() / distanceY);
     }
     m_mixtureSlopes->setV(m_cellLeft->getMixture(type)->getVelocity().getY() / distanceY);
   }
-  if (abs(distanceZ) > 1.e-8) {
+  if (std::fabs(distanceZ) > 1.e-8) {
     for (int k = 0; k < numberPhases; k++) {
       m_vecPhasesSlopes[k]->setW(m_cellLeft->getPhase(k, type)->getVelocity().getZ() / distanceZ);
     }
@@ -129,12 +127,15 @@ void BoundCondWallO2::solveRiemann(const int &numberPhases, const int &numberTra
 {
   cellLeft->copyVec(m_cellLeft->getPhases(type), m_cellLeft->getMixture(type), m_cellLeft->getTransports(type));
 
-  //Calcul des distances bord de maille <-> cells pour l extrapolation
+  //Calcul des distances cell interfaces <-> cells pour l extrapolation
   double distanceGauche(this->distance(m_cellLeft));
+  //KS//FP// A voir avec Fabien comment faire ca bien pour qu'il n'y est aucun probleme en non-structure !
+  //Probleme que la distance est une norm et donc on ne change pas le signe de la slope pour faire correctement l'extrapolation
   if (m_face->getNormal().getX() < 0. || m_face->getNormal().getY() < 0. || m_face->getNormal().getZ() < 0.) { distanceGauche = -distanceGauche; }
 
   //Extrapolation gauche
-  m_cellLeft->computeLocalSlopesLimite(numberPhases, numberTransports, *this, globalLimiter, interfaceLimiter, globalVolumeFractionLimiter, interfaceVolumeFractionLimiter);
+  double epsInterface(1.e-4);
+  m_cellLeft->computeLocalSlopesLimite(numberPhases, numberTransports, *this, globalLimiter, interfaceLimiter, globalVolumeFractionLimiter, interfaceVolumeFractionLimiter, epsInterface);
   for (int k = 0; k < numberPhases; k++) {
     cellLeft->getPhase(k)->extrapolate(*slopesPhasesLocal1[k], distanceGauche);
   }
@@ -150,7 +151,7 @@ void BoundCondWallO2::solveRiemann(const int &numberPhases, const int &numberTra
 
   //Probleme de Riemann
   double dxLeft(m_cellLeft->getElement()->getLCFL());
-  dxLeft = dxLeft*pow(2., (double)m_lvl);
+  dxLeft = dxLeft*std::pow(2., (double)m_lvl);
   this->solveRiemannLimite(*cellLeft, numberPhases, dxLeft, dtMax);
   //Traitement des fonctions de transport (m_Sm connu : doit etre place apres l appel au Solveur de Riemann)
   if (numberTransports > 0) { this->solveRiemannTransportLimite(*cellLeft, numberTransports); }
@@ -185,9 +186,9 @@ Transport* BoundCondWallO2::getSlopesTransport(const int &numberTransport) const
 //******************************Methode AMR***********************************
 //****************************************************************************
 
-void BoundCondWallO2::creerBordChild()
+void BoundCondWallO2::creerCellInterfaceChild()
 {
-  m_boundariesChildren.push_back(new BoundCondWallO2(*this, m_lvl + 1));
+  m_cellInterfacesChildren.push_back(new BoundCondWallO2(*this, m_lvl + 1));
 }
 
 //****************************************************************************

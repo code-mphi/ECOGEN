@@ -9,6 +9,6 @@
 		<reinitializationTransport phase="SG_liquidForSurfaceTensionCases.xml"/>
 	</additionalPhysic>
   <!-- <symmetryTerm type="cylindrical">
-    <dataSymCyl radialAxe="Y"/>
+    <dataSymCyl radialAxis="Y"/>
   </symmetryTerm> -->
 </model>

@@ -28,13 +28,11 @@
 //  If not, see <http://www.gnu.org/licenses/>.
 
 //! \file      RelaxationP.cpp
-//! \author    F. Petitpas
-//! \version   1.0
-//! \date      October 15 2018
+//! \author    F. Petitpas, K. Schmidmayer
+//! \version   1.1
+//! \date      June 5 2019
 
 #include "RelaxationP.h"
-
-using namespace std;
 
 //***********************************************************************
 
@@ -52,7 +50,7 @@ void RelaxationP::stiffRelaxation(Cell *cell, const int &numberPhases, Prim type
   //If alpha = 0 is activated, a test is done to know if the relaxation procedure is necessary or not
   //Else, i.e. alpha = 0 is desactivated (alpha != 0), the relaxation procedure is always done (relax = true)
   bool relax(true);
-  if (epsilon > 1.e-20) { // alpha = 0 is activated
+  if (epsilonAlphaNull > 1.e-20) { // alpha = 0 is activated
     for (int k = 0; k < numberPhases; k++) {
       if (cell->getPhase(k, type)->getAlpha() >(1. - 1.e-5)) relax = false;
     }
@@ -90,13 +88,14 @@ void RelaxationP::stiffRelaxation(Cell *cell, const int &numberPhases, Prim type
         df -= dalpha;
       }
       if (iteration > 100) {
-        cout << "pStar=" << pStar << " f=" << f << " df=" << df << endl;
-        errors.push_back(Errors("not converged in relaxPressures", __FILE__, __LINE__));
+        std::cout << "pStar=" << pStar << " f=" << f << " df=" << df << std::endl;
+        errors.push_back(Errors("Not converged in relaxPressures", __FILE__, __LINE__));
         break;
       }
-    } while (abs(f)>1e-10 && iteration < 100);
-    //} while (abs(f) > 1e-10);
+    } while (std::fabs(f)>1e-10 && iteration < 100);
+    //} while (std::fabs(f) > 1e-10);
 
+    //Apply the relaxation procedure only if it has converged to a solution.
     if (iteration < 100) {
       //Cell update
       for (int k = 0; k < numberPhases; k++) {

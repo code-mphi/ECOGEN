@@ -1,14 +1,14 @@
-<?xml version = "1.0" encoding = "UTF-8" standalone = "yes"?>
+<?xml version='1.0' encoding='UTF-8' standalone='yes'?>
 <model>
-	<flowModel name="Kapila" numberPhases="2" numberTransports="1" alphaNull="true"/>
-	<EOS name="IG_air.xml"/>
-	<EOS name="SG_liquidForSurfaceTensionCases.xml"/>
-	<transport name="color"/>
-	<additionalPhysic type="surfaceTension" >
-		<dataSurfaceTension transport="color" sigma="7.3"/>
-		<reinitializationTransport phase="SG_liquidForSurfaceTensionCases.xml"/>
-	</additionalPhysic>
-	<sourceTerms type="gravity">
-  		<gravity x="0." y="-80000.81" z="0."/>
-	</sourceTerms>
+  <flowModel name="Kapila" alphaNull="true" numberPhases="2" numberTransports="1"/>
+  <EOS name="IG_air.xml"/>
+  <EOS name="SG_liquidForSurfaceTensionCases.xml"/>
+  <transport name="color"/>
+  <additionalPhysic type="surfaceTension">
+    <dataSurfaceTension sigma="7.3" transport="color"/>
+    <reinitializationTransport phase="SG_liquidForSurfaceTensionCases.xml"/>
+  </additionalPhysic>
+  <sourceTerms type="gravity" order="RK4">
+    <gravity x="0." z="0." y="-80000.81"/>
+  </sourceTerms>
 </model>

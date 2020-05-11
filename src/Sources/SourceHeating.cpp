@@ -28,13 +28,12 @@
 //  If not, see <http://www.gnu.org/licenses/>.
 
 //! \file      SourceHeating.cpp
-//! \author    F. Petitpas
+//! \author    F. Petitpas, J. Caze
 //! \version   1.0
-//! \date      January 10 2018
+//! \date      October 29 2019
 
 #include "SourceHeating.h"
 
-using namespace std;
 using namespace tinyxml2;
 
 //***********************************************************************
@@ -43,7 +42,7 @@ SourceHeating::SourceHeating(){}
 
 //***********************************************************************
 
-SourceHeating::SourceHeating(XMLElement *element, string fileName)
+SourceHeating::SourceHeating(XMLElement *element, int order, std::string fileName) : Source(order)
 {
   XMLElement *sousElement(element->FirstChildElement("dataHeating"));
   if (sousElement == NULL) throw ErrorXMLElement("dataHeating", fileName, __FILE__, __LINE__);
@@ -62,12 +61,9 @@ SourceHeating::~SourceHeating()
 
 //***********************************************************************
 
-void SourceHeating::integrateSourceTerms(Cell *cell, const int &numberPhases, const double &dt)
+void SourceHeating::prepSourceTerms(Cell *cell, const int &numberPhases, const double &dt, const int i)
 {
-  //Source terms integration on conservative quantities
-  cell->buildCons(numberPhases);
-  cell->getCons()->integrateSourceTermsHeating(cell, dt, numberPhases, m_q);
-  cell->buildPrim(numberPhases);
+  sourceCons[i]->prepSourceTermsHeating(cell, dt, numberPhases, m_q);
 }
 
 //***********************************************************************

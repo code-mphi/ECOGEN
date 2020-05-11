@@ -28,14 +28,13 @@
 //  If not, see <http://www.gnu.org/licenses/>.
 
 //! \file      MixThermalEq.cpp
-//! \author    F. Petitpas
-//! \version   1.0
-//! \date      May 04 2018
+//! \author    F. Petitpas, K. Schmidmayer
+//! \version   1.1
+//! \date      June 5 2019
 
 #include <cmath>
 #include "MixThermalEq.h"
 
-using namespace std;
 using namespace tinyxml2;
 
 //***************************************************************************
@@ -44,7 +43,7 @@ MixThermalEq::MixThermalEq() :m_density(0.), m_pressure(0.), m_velocity(0), m_en
 
 //***************************************************************************
 
-MixThermalEq::MixThermalEq(XMLElement *state, string fileName) :
+MixThermalEq::MixThermalEq(XMLElement *state, std::string fileName) :
   m_density(0.), m_pressure(0.), m_energie(0.), m_totalEnergy(0.), m_thermalEqSoundSpeed(0.)
 {
   XMLElement *sousElement(state->FirstChildElement("mixture"));
@@ -126,7 +125,7 @@ double MixThermalEq::computePressure(const double *alphak, const double *pk, con
 
 double MixThermalEq::computePressure(double *masses, const double &mixInternalEnerg, Phase **phases, const int &numberPhases)
 {
-  //Restrictions
+  //Restrictions //FP//TODO// to improve
   if (numberPhases > 2) Errors::errorMessage("more than two phases not permitted in thermal equilibrium model : MixThermalEq::computePressure");
   for (int k = 0; k < numberPhases; k++) {
     if (phases[k]->getEos()->getType() != "IG" && phases[k]->getEos()->getType() != "SG") { Errors::errorMessage("Only IG and SG permitted in thermal equilibrium model : MixThermalEq::computePressure"+ phases[k]->getEos()->getType()); }
@@ -165,7 +164,7 @@ double MixThermalEq::computePressure(double *masses, const double &mixInternalEn
 
 double MixThermalEq::computeTemperature(double *masses, const double &pressure, Phase **phases, const int &numberPhases)
 {
-  //Restrictions
+  //Restrictions //FP//TODO// to improve
   for (int k = 0; k < numberPhases; k++) {
     if (phases[k]->getEos()->getType() != "IG" && phases[k]->getEos()->getType() != "SG") { Errors::errorMessage("Only IG and SG permitted in thermal equilibrium model : MixThermalEq::computePressure"); }
   }
@@ -218,7 +217,7 @@ double MixThermalEq::computeFrozenSoundSpeed(const double *Yk, const double *ck,
 
 double MixThermalEq::computeTemperatureIsentrope(const double *Yk, const double &p0, const double &T0, const double &p, const int &numberPhases, double *dTdp)
 {
-  //Restrictions
+  //Restrictions //FP//TODO// to improve
   if (numberPhases > 2) Errors::errorMessage("more than two phases not permitted in thermal equilibrium model : MixThermalEq::computeTemperatureIsentrope");
   for (int k = 0; k < numberPhases; k++) {
     if (TB->eos[k]->getType() != "IG" && TB->eos[k]->getType() != "SG") { Errors::errorMessage("Only IG and SG permitted in thermal equilibrium model : MixThermalEq::computeTemperatureIsentrope" + TB->eos[k]->getType()); }
@@ -233,7 +232,7 @@ double MixThermalEq::computeTemperatureIsentrope(const double *Yk, const double 
   double puissance(0.), fk;
   for (int k = 0; k < numberPhases; k++) {
     puissance = (TB->eos[k]->getGamma() - 1.)*Yk[k] * TB->eos[k]->getCv()/cM;
-    fk = pow((p + TB->eos[k]->getPInf()) / ((p0 + TB->eos[k]->getPInf())), puissance);
+    fk = std::pow((p + TB->eos[k]->getPInf()) / ((p0 + TB->eos[k]->getPInf())), puissance);
     T *= fk;
     if (dTdp != NULL) *dTdp += puissance/ (p + TB->eos[k]->getPInf());
   }
@@ -246,7 +245,7 @@ double MixThermalEq::computeTemperatureIsentrope(const double *Yk, const double 
 
 double MixThermalEq::computeEnthalpyIsentrope(const double *Yk, const double &p0, const double &T0, const double &p, const int &numberPhases, double *dhdp)
 {
-  //Restrictions
+  //Restrictions //FP//TODO// to improve
   for (int k = 0; k < numberPhases; k++) {
     if (TB->eos[k]->getType() != "IG" && TB->eos[k]->getType() != "SG") { Errors::errorMessage("Only IG and SG permitted in thermal equilibrium model : MixThermalEq::computeEnthalpyIsentrope" + TB->eos[k]->getType()); }
   }
@@ -268,7 +267,7 @@ double MixThermalEq::computeEnthalpyIsentrope(const double *Yk, const double &p0
 
 double MixThermalEq::computeVolumeIsentrope(const double *Yk, const double &p0, const double &T0, const double &p, const int &numberPhases, double *dvdp)
 {
-  //Restrictions
+  //Restrictions //FP//TODO// to improve
   for (int k = 0; k < numberPhases; k++) {
     if (TB->eos[k]->getType() != "IG" && TB->eos[k]->getType() != "SG") { Errors::errorMessage("Only IG and SG permitted in thermal equilibrium model : MixThermalEq::computeVolumeIsentrope" + TB->eos[k]->getType()); }
   }
@@ -301,7 +300,7 @@ void MixThermalEq::computeMixtureVariables(Phase **vecPhase, const int &numberPh
   for (int k = 0; k < numberPhases; k++) {
     TB->Yk[k] = vecPhase[k]->getAlpha()*vecPhase[k]->getDensity() / m_density;
   }
-  //Specific internal energy, speed of sound
+  //Specific internal energy, speed of sound (frozen for now //FP//TODO//CHANGE sound speed)
   m_energie = 0.;
   m_thermalEqSoundSpeed = 0.;
   for (int k = 0; k < numberPhases; k++) {
@@ -314,7 +313,7 @@ void MixThermalEq::computeMixtureVariables(Phase **vecPhase, const int &numberPh
 
 //***************************************************************************
 
-void MixThermalEq::internalEnergyToTotalEnergy(vector<QuantitiesAddPhys*> &vecGPA)
+void MixThermalEq::internalEnergyToTotalEnergy(std::vector<QuantitiesAddPhys*> &vecGPA)
 {
   m_totalEnergy = m_energie + 0.5*m_velocity.squaredNorm();
   for (unsigned int pa = 0; pa < vecGPA.size(); pa++) {
@@ -324,7 +323,7 @@ void MixThermalEq::internalEnergyToTotalEnergy(vector<QuantitiesAddPhys*> &vecGP
 
 //***************************************************************************
 
-void MixThermalEq::totalEnergyToInternalEnergy(vector<QuantitiesAddPhys*> &vecGPA)
+void MixThermalEq::totalEnergyToInternalEnergy(std::vector<QuantitiesAddPhys*> &vecGPA)
 {
   m_energie = m_totalEnergy - 0.5*m_velocity.squaredNorm();
   for (unsigned int pa = 0; pa < vecGPA.size(); pa++) {
@@ -380,7 +379,7 @@ Coord MixThermalEq::returnVector(const int &numVar) const
 
 //***************************************************************************
 
-string MixThermalEq::returnNameScalar(const int &numVar) const
+std::string MixThermalEq::returnNameScalar(const int &numVar) const
 {
   switch (numVar)
   {
@@ -397,7 +396,7 @@ string MixThermalEq::returnNameScalar(const int &numVar) const
 
 //***************************************************************************
 
-string MixThermalEq::returnNameVector(const int &numVar) const
+std::string MixThermalEq::returnNameVector(const int &numVar) const
 {
   switch (numVar)
   {
@@ -464,6 +463,18 @@ void MixThermalEq::fillBuffer(double *buffer, int &counter) const
 
 //***************************************************************************
 
+void MixThermalEq::fillBuffer(std::vector<double> &dataToSend) const
+{
+  dataToSend.push_back(m_pressure);
+  dataToSend.push_back(m_temperature);
+  dataToSend.push_back(m_velocity.getX());
+  dataToSend.push_back(m_velocity.getY());
+  dataToSend.push_back(m_velocity.getZ());
+  dataToSend.push_back(m_totalEnergy);
+}
+
+//***************************************************************************
+
 void MixThermalEq::getBuffer(double *buffer, int &counter)
 {
   m_pressure = buffer[++counter];
@@ -472,6 +483,18 @@ void MixThermalEq::getBuffer(double *buffer, int &counter)
   m_velocity.setY(buffer[++counter]);
   m_velocity.setZ(buffer[++counter]);
   m_totalEnergy = buffer[++counter];
+}
+
+//***************************************************************************
+
+void MixThermalEq::getBuffer(std::vector<double> &dataToReceive, int &counter)
+{
+  m_pressure = dataToReceive[counter++];
+  m_temperature = dataToReceive[counter++];
+  m_velocity.setX(dataToReceive[counter++]);
+  m_velocity.setY(dataToReceive[counter++]);
+  m_velocity.setZ(dataToReceive[counter++]);
+  m_totalEnergy = dataToReceive[counter++];
 }
 
 //****************************************************************************
@@ -551,62 +574,6 @@ void MixThermalEq::getBufferSlopes(double *buffer, int &counter)
 //****************************************************************************
 //******************************* ACCESSORS **********************************
 //****************************************************************************
-
-double MixThermalEq::getDensity() const
-{
-  return m_density;
-}
-
-//***************************************************************************
-
-double MixThermalEq::getPressure() const
-{
-  return m_pressure;
-}
-
-//***************************************************************************
-
-double MixThermalEq::getTemperature() const
-{
-  return m_temperature;
-}
-
-
-//***************************************************************************
-
-double MixThermalEq::getU() const { return m_velocity.getX(); }
-double MixThermalEq::getV() const { return m_velocity.getY(); }
-double MixThermalEq::getW() const { return m_velocity.getZ(); }
-
-//***************************************************************************
-
-Coord MixThermalEq::getVelocity() const
-{
-  return m_velocity;
-}
-
-//***************************************************************************
-
-double MixThermalEq::getEnergy() const
-{
-  return m_energie;
-}
-
-//***************************************************************************
-
-double MixThermalEq::getTotalEnergy() const
-{
-  return m_totalEnergy;
-}
-
-//***************************************************************************
-
-double MixThermalEq::getMixSoundSpeed() const
-{
-  return m_thermalEqSoundSpeed;
-}
-
-//***************************************************************************
 
 void MixThermalEq::setPressure(const double &p) { m_pressure = p; }
 

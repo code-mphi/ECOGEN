@@ -31,9 +31,9 @@
 #define GDHALFSPACE_H
 
 //! \file      GDHalfSpace.h
-//! \author    F. Petitpas
-//! \version   1.0
-//! \date      December 19 2017
+//! \author    F. Petitpas, K. Schmidmayer
+//! \version   1.1
+//! \date      June 5 2019
 
 #include "GeometricalDomain.h"
 
@@ -44,7 +44,7 @@ class GDHalfSpace : public GeometricalDomain
   public:
     //! \brief     Geometrical constructor from a XML format reading
     //! \details   Reading data from XML file under the following format:
-    //!            ex : <dataHalfSpace axe="x" origin="0.5" direction="positive"/>
+    //!            ex : <dataHalfSpace axis="x" origin="0.5" direction="positive"/>
     //! \param     vecPhases      Phases vector variables to copy in geometrical domain
     //! \param     mixture        Mixture variables to copy in geometrical domain
     //! \param     vecTransports  Transports vector varaiables to copy in geometrical domain
@@ -55,11 +55,12 @@ class GDHalfSpace : public GeometricalDomain
     virtual ~GDHalfSpace();
 
     virtual bool belong(Coord &posElement, const int &lvl) const;
+    virtual void fillIn(Cell *cell, const int &numberPhases, const int &numberTransports) const;
 
   private:
-    double m_position;  //!< Origin of the half space along axe
-    Axe m_axe;          //!< Axe orthogonal to the origin plane of the half space
-    int m_direction;    //!< Direction along axe (positive or negative)
+    double m_position;  //!< Origin of the half space along axis
+    Axis m_axis;          //!< Axis orthogonal to the origin plane of the half space
+    int m_direction;    //!< Direction along axis (positive or negative)
 };
 
 #endif //GDHALFSPACE_H

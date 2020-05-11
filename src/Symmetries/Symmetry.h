@@ -32,8 +32,8 @@
 
 //! \file      Symmetry.h
 //! \author    K. Schmidmayer
-//! \version   1.0
-//! \date      December 20 2017
+//! \version   1.1
+//! \date      June 5 2019
 
 #include <string>
 #include "../libTierces/tinyxml2.h"
@@ -41,7 +41,7 @@
 #include "../Tools.h"
 
 class Symmetry; //Predeclaration of the class Symmetry to include Cell.h
-#include "../Cell.h"
+#include "../Order1/Cell.h"
 
 //! \class     Symmetry
 //! \brief     General class for axial symmetries
@@ -63,7 +63,7 @@ public:
   virtual void addSymmetricTermsAddPhys(Cell *cell, const int &numberPhases, AddPhys &addPhys) {};
 
 protected:
-  int m_radialAxe;   //!< Name of the radial axe for the axi-symmetry
+  int m_radialAxis;   //!< Name of the radial axis for the axi-symmetry
 };
 
 #endif // SYMMETRY_H

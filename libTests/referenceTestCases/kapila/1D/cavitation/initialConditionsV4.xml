@@ -4,22 +4,22 @@
     <physicalDomains> 
         <domain name="base" state="right" type="entireDomain"/>
         <domain name="HP"  state="left" type="halfSpace">
-            <dataHalfSpace axe="x" origin="0.5" direction="negative"/>
+            <dataHalfSpace axis="x" origin="0.5" direction="negative"/>
         </domain>
     </physicalDomains>
 
     <!-- LIST OF BOUNDARY CONDITIONS -->
     <boundaryConditions>
-        <boundCond name="CLXm" type="abs" number="1"/>
-        <boundCond name="CLXp" type="abs" number="2"/>
+        <boundCond name="CLXm" type="nonReflecting" number="1"/>
+        <boundCond name="CLXp" type="nonReflecting" number="2"/>
     </boundaryConditions>
     
     <!--  LIST OF STATES  -->
     <state name="left">
-        <material type="fluide" EOS="IG_air.xml">
+        <material type="fluid" EOS="IG_air.xml">
             <dataFluid alpha="0.01" density="10.0"/>
         </material>
-        <material type="fluide" EOS="SG_water.xml">
+        <material type="fluid" EOS="SG_water.xml">
             <dataFluid alpha="0.99" density="1000.0"/>
         </material>
         <mixture>
@@ -29,10 +29,10 @@
     </state>
 
     <state name="right">
-        <material type="fluide" EOS="IG_air.xml">
+        <material type="fluid" EOS="IG_air.xml">
             <dataFluid alpha="0.01" density="10.0"/>
         </material>
-        <material type="fluide" EOS="SG_water.xml">
+        <material type="fluid" EOS="SG_water.xml">
             <dataFluid alpha="0.99" density="1000.0"/>
         </material>
         <mixture>

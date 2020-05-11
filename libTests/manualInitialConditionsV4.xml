@@ -11,16 +11,16 @@ Typical example for initialConditions input file version 4
 
   <!-- LIST OF BOUNDARY CONDITIONS -->
   <boundaryConditions>
-    <boundCond name="CLXm" type="abs" number="1"/>
-    <boundCond name="CLXp" type="abs" number="2"/>
+    <boundCond name="CLXm" type="nonReflecting" number="1"/>
+    <boundCond name="CLXp" type="nonReflecting" number="2"/>
   </boundaryConditions>
 
   <!--  LIST OF STATES  -->
   <state name="leftChamber">
-    <material type="fluide" EOS="IG_air.xml">
+    <material type="fluid" EOS="IG_air.xml">
       <dataFluid alpha="0.5" density="1.0"/>  
     </material>
-    <material type="fluide" EOS="SG_water.xml">
+    <material type="fluid" EOS="SG_water.xml">
       <dataFluid alpha="0.5" density="1000.0"/>
     </material>
     <mixture>
@@ -42,32 +42,44 @@ Contains one or more <domain> nodes. Each node contains a domain geometrical pro
 <physicalDomains> 
   <domain name="base" state="leftChamber" type="entireDomain"/>
   <domain name="HP"  state="rightChamber" type="rectangle">
-    <!-- <dataHalfSpace axe="x" origin="0.5" direction="positive"/> -->
-    <dataRectangle axe1="x" axe2="y" lAxe1="0.3" lAxe2="0.2">
+    <!-- <dataHalfSpace axis="x" origin="0.5" direction="positive"/> -->
+    <dataRectangle axis1="x" axis2="y" lAxis1="0.3" lAxis2="0.2">
       <posInferiorVertex x="0.2" y="0." z="0."/>
     </dataRectangle>
   </domain>
 </physicalDomains>
 %%%%%%%%%%%%%%%%%% << copy between these lines
-Available geometrical domains are: entireDomain, halfSpace, disc, rectangle, pavement, sphere.
+Available geometrical domains are: entireDomain, halfSpace, disc, rectangle, ellipse, cuboid, sphere, ellipsoid, cylinder.
 <!-- type=halfSpace -->
-<dataHalfSpace axe="x" origin="0.5" direction="positive"/>
+<dataHalfSpace axis="x" origin="0.5" direction="positive"/>
 <!-- type=disc -->
-<dataDisc axe1="x" axe2="y" radius="0.5">
+<dataDisc axis1="x" axis2="y" radius="0.5">
   <center x="0." y="0." z="0."/>
 </dataDisc>
 <!-- type=rectangle -->
-<dataRectangle axe1="x" axe2="y" lAxe1="0.3" lAxe2="0.2">
+<dataRectangle axis1="x" axis2="y" lAxis1="0.3" lAxis2="0.2">
   <posInferiorVertex x="0.4" y="0.5" z="0."/>
 </dataRectangle>
-<!-- type=pavement -->
-<dataPavement lAxeX="1." lAxeY="1." lAxeZ="0.5">
+<!-- type=ellipse -->
+<dataEllipse axis1="x" axis2="y" radius1="1." radius2="1.5">
+  <center x="0." y="0." z="0."/>
+</dataEllipse>
+<!-- type=cuboid -->
+<dataCuboid lAxisX="1." lAxisY="1." lAxisZ="0.5">
   <posInferiorVertex x="1." y="0.5" z="0.5"/>
-</dataPavement>
+</dataCuboid>
 <!-- type=sphere -->
 <dataSphere radius="0.5">
   <center x="1." y="0.5" z="0.5"/>
 </dataSphere>
+<!-- type=ellipsoid -->
+<dataEllipsoid axis1="x" axis2="y" axis3="z" radius1="1." radius2="1.5" radius3="1.5">
+  <center x="0." y="0." z="0."/>
+</dataEllipsoid>
+<!-- type=cylinder -->
+<dataCylinder axis1="x" axis2="y" radius="0.5" length="1.">
+  <center x="0." y="0." z="0."/>
+</dataCylinder>
 ******************
 Additional feature for geometrical domain: It is possible to use physicalIdentity number coming from mesh software to initialize a geometrical domain.
 Example:
@@ -82,7 +94,7 @@ Contains the list of needed boundary conditions.
   <boundCond name="around" type="wall" number="1" />
 </boundaryConditions>
 %%%%%%%%%%%%%%%%%% << copy between these lines
-Default value of BC are transmitive (abs).
+Default value of BC are non-reflecting.
 a) For a Cartesian mesh, boundary conditions order and names are imposed :
 CLXm : condition limite en X moins
 CLXp : condition limite en X plus
@@ -92,9 +104,9 @@ CLZm : condition limite en Z moins
 CLZp : condition limite en Z plus
 b) For unStrucutred meshes, the number is important and should be in agreement with physical conditions determined in the mesh file comming from GMSH.
 
-Available boundary conditions are: abs, wall, symmetry, injection, tank, outflow. Some of then needs to refer to a material state.
-<!-- abs -->
-<boundCond name="exit" type="abs" number="1" />
+Available boundary conditions are: nonReflecting, wall, symmetry, injection, tank, outflow. Some of them needs to refer to a material state.
+<!-- nonReflecting -->
+<boundCond name="exit" type="nonReflecting" number="1" />
 <!-- symmetry -->
 <boundCond name="symmetry" type="symmetry" number="2" />
 <!-- wall -->
@@ -102,7 +114,8 @@ Available boundary conditions are: abs, wall, symmetry, injection, tank, outflow
 <!-- injection -->
 <boundCond name="entrance" type="injection" number="1">
     <dataInjection m0="2.413092"/>
-    <dataFluid EOS="IG_air.xml" density="4.04e-3" pressure="2.57404e2"/>
+    <dataFluid EOS="IG_air.xml" density="4.04e-3" pressure="2.57404e2" alpha="0.1"/>
+    <dataFluid EOS="SG_water.xml" density="1000." pressure="2.57404e2" alpha="0.9"/>
 </boundCond>
 <!--outflow  -->
 <boundCond name="exit" type="outflow" number="5">
@@ -124,10 +137,10 @@ Available boundary conditions are: abs, wall, symmetry, injection, tank, outflow
 The list of materials states used in domains and boundCond must be precised. Each state contains as much as needed materials and transports defined in the "modelVX.xml" input file.
 %%%%%%%%%%%%%%%%%% << copy between these lines
 <state name="leftChamber">
-  <material type="fluide" EOS="IG_air.xml">
+  <material type="fluid" EOS="IG_air.xml">
     <dataFluid alpha="0.5" density="1.0"/>  
   </material>
-  <material type="fluide" EOS="SG_water.xml">
+  <material type="fluid" EOS="SG_water.xml">
     <dataFluid alpha="0.5" density="1000.0"/>   
   </material>
   <mixture>
@@ -141,10 +154,10 @@ a) For multiphase model of  Kapila
 ----------------------------------
 volume fractions, densities (or temperatures), pressure and velocity components. Caution, pressure and velocity data are linked to the mmixture.
 %%%%%%%%%%%%%%%%%% << copy between these lines
-<material type="fluide" EOS="IG_air.xml">
+<material type="fluid" EOS="IG_air.xml">
   <dataFluid alpha="0.5" density="1.0"/>  
 </material>
-<material type="fluide" EOS="SG_water.xml">
+<material type="fluid" EOS="SG_water.xml">
   <dataFluid alpha="0.5" density="1000.0"/>   
 </material>
 <mixture>
@@ -154,9 +167,9 @@ volume fractions, densities (or temperatures), pressure and velocity components.
 %%%%%%%%%%%%%%%%%% << copy between these lines
 b) For signle phase model of Euler
 ----------------------------------
-density, pressure et velocity components.
+density or temperature, pressure and velocity components.
 %%%%%%%%%%%%%%%%%% << copy between these lines
-<material type="fluide" EOS="IG_air.xml">
+<material type="fluid" EOS="IG_air.xml">
   <dataFluid density="10.0" pressure="1.e5">
     <velocity x="1000." y="1000." z="0."/>
   </dataFluid>
@@ -166,10 +179,10 @@ c) for Thermal equilibrium model
 --------------------------------
 volume fractions, temperature, pressure and velocity components. Caution, pressure, temperature and velocity data are linked to the mmixture.
 %%%%%%%%%%%%%%%%%% << copy between these lines
-<material type="fluide" EOS="IG_waterVap.xml">
+<material type="fluid" EOS="IG_waterVap.xml">
   <dataFluid alpha="0.2"/>
 </material>
-<material type="fluide" EOS="SG_waterLiq.xml">
+<material type="fluid" EOS="SG_waterLiq.xml">
   <dataFluid alpha="0.8"/>
 </material>
 <mixture>
@@ -181,10 +194,10 @@ d) for homogeneous Euler equations
 ----------------------------------
 volume fractions, pressure and velocity components. Caution, pressure and velocity data are linked to the mmixture.
 %%%%%%%%%%%%%%%%%% << copy between these lines
-<material type="fluide" EOS="SG_waterLiq.xml">
+<material type="fluid" EOS="SG_waterLiq.xml">
   <dataFluid alpha="0.99"/>  
 </material>
-<material type="fluide" EOS="IG_waterVap.xml">
+<material type="fluid" EOS="IG_waterVap.xml">
   <dataFluid alpha="0.01"/>   
 </material>
 <mixture>

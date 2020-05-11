@@ -28,19 +28,14 @@
 //  If not, see <http://www.gnu.org/licenses/>.
 
 //! \file      FluxKapila.cpp
-//! \author    F. Petitpas, K. Schmidmayer
-//! \version   1.0
-//! \date      February 15 2018
+//! \author    F. Petitpas, K. Schmidmayer, J. Caze
+//! \version   1.1
+//! \date      November 18 2019
 
 #include <cmath>
 #include <algorithm>
 #include "FluxKapila.h"
 #include "../Mixture.h"
-
-using namespace std;
-
-FluxKapila *fluxBufferKapila;
-FluxKapila *sourceConsKap;
 
 //***********************************************************************
 
@@ -68,7 +63,7 @@ FluxKapila::~FluxKapila()
 
 void FluxKapila::printFlux() const
 {
-  cout << m_masse << " " << m_qdm.getX() << " " << m_energ << endl;
+  std::cout << m_masse << " " << m_qdm.getX() << " " << m_energ << std::endl;
 }
 
 //***********************************************************************
@@ -76,12 +71,25 @@ void FluxKapila::printFlux() const
 void FluxKapila::addFlux(double coefA, const int &numberPhases)
 {
   for (int k = 0; k < numberPhases; k++) {
-    m_alpha[k] += coefA*fluxBufferKapila->m_alpha[k];
-    m_masse[k] += coefA*fluxBufferKapila->m_masse[k];
-    m_energ[k] += coefA*fluxBufferKapila->m_energ[k];
+    m_alpha[k] += coefA*static_cast<FluxKapila*> (fluxBuff)->m_alpha[k];
+    m_masse[k] += coefA*static_cast<FluxKapila*> (fluxBuff)->m_masse[k];
+    m_energ[k] += coefA*static_cast<FluxKapila*> (fluxBuff)->m_energ[k];
   }
-  m_qdm += coefA*fluxBufferKapila->m_qdm;
-  m_energMixture += coefA*fluxBufferKapila->m_energMixture;
+  m_qdm += coefA*static_cast<FluxKapila*> (fluxBuff)->m_qdm;
+  m_energMixture += coefA*static_cast<FluxKapila*> (fluxBuff)->m_energMixture;
+}
+
+//***********************************************************************
+
+void FluxKapila::addFlux(Flux* flux, const int &numberPhases)
+{
+  for (int k = 0; k < numberPhases; k++) {
+    m_alpha[k] += static_cast<FluxKapila*> (flux)->m_alpha[k];
+    m_masse[k] += static_cast<FluxKapila*> (flux)->m_masse[k];
+    m_energ[k] += static_cast<FluxKapila*> (flux)->m_energ[k];
+  }
+  m_qdm += static_cast<FluxKapila*> (flux)->m_qdm;
+  m_energMixture += static_cast<FluxKapila*> (flux)->m_energMixture;
 }
 
 //***********************************************************************
@@ -89,12 +97,12 @@ void FluxKapila::addFlux(double coefA, const int &numberPhases)
 void FluxKapila::subtractFlux(double coefA, const int &numberPhases)
 {
   for (int k = 0; k < numberPhases; k++) {
-    m_alpha[k] -= coefA*fluxBufferKapila->m_alpha[k];
-    m_masse[k] -= coefA*fluxBufferKapila->m_masse[k];
-    m_energ[k] -= coefA*fluxBufferKapila->m_energ[k];
+    m_alpha[k] -= coefA*static_cast<FluxKapila*> (fluxBuff)->m_alpha[k];
+    m_masse[k] -= coefA*static_cast<FluxKapila*> (fluxBuff)->m_masse[k];
+    m_energ[k] -= coefA*static_cast<FluxKapila*> (fluxBuff)->m_energ[k];
   }
-  m_qdm -= coefA*fluxBufferKapila->m_qdm;
-  m_energMixture -= coefA*fluxBufferKapila->m_energMixture;
+  m_qdm -= coefA*static_cast<FluxKapila*> (fluxBuff)->m_qdm;
+  m_energMixture -= coefA*static_cast<FluxKapila*> (fluxBuff)->m_energMixture;
 }
 
 //***********************************************************************
@@ -115,7 +123,7 @@ void FluxKapila::multiply(double scalar, const int &numberPhases)
 
 void FluxKapila::setBufferFlux(Cell &cell, const int &numberPhases)
 {
-  fluxBufferKapila->buildCons(cell.getPhases(), numberPhases, cell.getMixture());
+  static_cast<FluxKapila*> (fluxBuff)->buildCons(cell.getPhases(), numberPhases, cell.getMixture());
 }
 
 //***********************************************************************
@@ -139,10 +147,9 @@ void FluxKapila::buildCons(Phase **phases, const int &numberPhases, Mixture *mix
 void FluxKapila::buildPrim(Phase **phases, Mixture *mixture, const int &numberPhases)
 {
   double pressure(0.), energieInterne(0.), rhoMel(0.);
-
   //Verification and correction if needed (alpha and mass for order 2)
   double un(0.);
-  if (epsilon > 1.e-20) { // alpha = 0 is activated
+  if (epsilonAlphaNull > 1.e-20) { // alpha = 0 is activated
     for (int k = 0; k < numberPhases; k++) {
       if (m_alpha[k] < 0.) m_alpha[k] = 0.;
       if (m_alpha[k] > 1.) m_alpha[k] = 1.;
@@ -162,18 +169,18 @@ void FluxKapila::buildPrim(Phase **phases, Mixture *mixture, const int &numberPh
   for (int k = 0; k < numberPhases; k++) {
       rhoMel = rhoMel + m_masse[k];
       phases[k]->setAlpha(m_alpha[k]);
-      phases[k]->setDensity(m_masse[k] / max(m_alpha[k], epsilon));
+      phases[k]->setDensity(m_masse[k] / std::max(m_alpha[k], epsilonAlphaNull));
       //Calcul Pressure
-      energieInterne = m_energ[k] / max(m_masse[k], epsilon);
+      energieInterne = m_energ[k] / std::max(m_masse[k], epsilonAlphaNull);
       pressure = TB->eos[k]->computePressure(phases[k]->getDensity(), energieInterne);
       phases[k]->setPressure(pressure);
       phases[k]->verifyAndCorrectPhase();
   }
   mixture->setVelocity(m_qdm.getX() / rhoMel, m_qdm.getY() / rhoMel, m_qdm.getZ() / rhoMel);
   //Erasing small velocity variations
-  if (abs(mixture->getU()) < 1.e-8) mixture->setU(0.);
-  if (abs(mixture->getV()) < 1.e-8) mixture->setV(0.);
-  if (abs(mixture->getW()) < 1.e-8) mixture->setW(0.);
+  if (std::fabs(mixture->getU()) < 1.e-8) mixture->setU(0.);
+  if (std::fabs(mixture->getV()) < 1.e-8) mixture->setV(0.);
+  if (std::fabs(mixture->getW()) < 1.e-8) mixture->setW(0.);
   for (int k = 0; k < numberPhases; k++) {
     phases[k]->extendedCalculusPhase(mixture->getVelocity());
   }
@@ -202,12 +209,12 @@ void FluxKapila::setToZero(const int &numberPhases)
 void FluxKapila::setToZeroBufferFlux(const int &numberPhases)
 {
   for (int k = 0; k<numberPhases; k++) {
-    fluxBufferKapila->m_alpha[k] = 0.;
-    fluxBufferKapila->m_masse[k] = 0.;
-    fluxBufferKapila->m_energ[k] = 0.;
+    static_cast<FluxKapila*> (fluxBuff)->m_alpha[k] = 0.;
+    static_cast<FluxKapila*> (fluxBuff)->m_masse[k] = 0.;
+    static_cast<FluxKapila*> (fluxBuff)->m_energ[k] = 0.;
   }
-  fluxBufferKapila->m_qdm = 0.;
-  fluxBufferKapila->m_energMixture = 0.;
+  static_cast<FluxKapila*> (fluxBuff)->m_qdm = 0.;
+  static_cast<FluxKapila*> (fluxBuff)->m_energMixture = 0.;
 }
 
 //***********************************************************************
@@ -217,8 +224,8 @@ void FluxKapila::addNonCons(double coefA, const Cell *cell, const int &numberPha
   Phase *phase;
   for(int k=0;k<numberPhases;k++){
     phase = cell->getPhase(k);
-    m_alpha[k] += -coefA*phase->getAlpha()*fluxBufferKapila->m_sM;
-    m_energ[k] += coefA*phase->getAlpha()*phase->getPressure()*fluxBufferKapila->m_sM;
+    m_alpha[k] += -coefA*phase->getAlpha()*static_cast<FluxKapila*> (fluxBuff)->m_sM;
+    m_energ[k] += coefA*phase->getAlpha()*phase->getPressure()*static_cast<FluxKapila*> (fluxBuff)->m_sM;
   }
 }
 
@@ -229,8 +236,8 @@ void FluxKapila::subtractNonCons(double coefA, const Cell *cell, const int &numb
   Phase *phase;
   for(int k=0;k<numberPhases;k++){
     phase = cell->getPhase(k);
-    m_alpha[k] -= -coefA*phase->getAlpha()*fluxBufferKapila->m_sM;
-    m_energ[k] -= coefA*phase->getAlpha()*phase->getPressure()*fluxBufferKapila->m_sM;
+    m_alpha[k] -= -coefA*phase->getAlpha()*static_cast<FluxKapila*> (fluxBuff)->m_sM;
+    m_energ[k] -= coefA*phase->getAlpha()*phase->getPressure()*static_cast<FluxKapila*> (fluxBuff)->m_sM;
   }
 }
 
@@ -248,18 +255,36 @@ void FluxKapila::correctionEnergy(Cell *cell, const int &numberPhases, Prim type
   }
   //Mixture pressure calculus from mixture EOS
   double rhoe = cell->getMixture(type)->getDensity() * cell->getMixture(type)->getEnergy();
-  double p(rhoe), denom(0.), gamPinfSurGamMoinsUn(0.), eRef(0.), unSurGamMoinsUn(0.);
+  double p(rhoe), denom(0.), gamPinfSurGamMoinsUn(0.), eRef(0.), unSurGamMoinsUn(0.), covolume(0.);
   for (int k = 0; k < numberPhases; k++) {
-    TB->eos[k]->sendSpecialMixtureEos(gamPinfSurGamMoinsUn, eRef, unSurGamMoinsUn);
-    p -= TB->ak[k]*(gamPinfSurGamMoinsUn + TB->rhok[k] * eRef);
-    denom += TB->ak[k] * unSurGamMoinsUn;
+    TB->eos[k]->sendSpecialMixtureEos(gamPinfSurGamMoinsUn, eRef, unSurGamMoinsUn, covolume);
+    p -= TB->ak[k]*(gamPinfSurGamMoinsUn*(1.-TB->rhok[k]*covolume) + TB->rhok[k] * eRef);
+    denom += TB->ak[k]*unSurGamMoinsUn*(1.-TB->rhok[k]*covolume);
   }
   p /= denom;
+  
+  //Puisqu'on permet au code d'avoir maintenant des pressions negatives dans le liquide, cette procedure n'est plus utile et on garantie ainsi la conservation de l'enegie.
+  //En revanche, pour eviter tout probleme durant la simulation, on modifie tout de meme la pression du gas pour etre non-negative si jamais cela est le cas (depend de l'EOS).
+  //Cette configuration ne devrait se produire que dans les localisations ou la fraction volumique du gas est tres faible ou nulle.
+  //----------------------------------
+  //Verifications for mixture pressure
+  //double pCorr(p);
+  //for (int k = 0; k < numberPhases; k++) {
+  //  TB->eos[k]->verifyAndModifyPressure(pCorr, cell->getPhase(k, type)->getAlpha());
+  //}
+  //if (p < pCorr) {
+  //  //Note: when doing this, we are no more locally conservative but it avoids the run to crash in some particular test cases.
+  //  //Furthermore, the non-conservative correction has a very negligible impact on the total conservation of energy.
+  //  //std::cout << p << " " << pCorr << cell->getMixture(type)->getPressure() << std::endl;
+  //  p = cell->getMixture(type)->getPressure();
+  //}
+  //----------------------------------
 
   //Cell update
   for (int k = 0; k < numberPhases; k++){
     phase = cell->getPhase(k, type);
     phase->setPressure(p);
+    //Same remark as previous one (instead of "phase->verifyPhase("correctionEnergy: ");").
     phase->verifyAndCorrectPhase();
   }
   cell->getMixture(type)->setPressure(p);
@@ -283,40 +308,49 @@ void FluxKapila::addSymmetricTerms(Phase **phases, Mixture *mixture, const int &
 
 //***********************************************************************
 
-void FluxKapila::integrateSourceTermsGravity(Cell *cell, const double &dt, const int &numberPhases, const int &axe, const int &direction, const Coord &g)
+void FluxKapila::prepSourceTermsGravity(Cell *cell, const double &dt, const int &numberPhases, const Coord &g)
 {
-  sourceConsKap->setToZero(numberPhases);
   //Mass and velocity extraction
-  double rho = cell->getMixture()->getDensity();
-  Coord u = cell->getMixture()->getVelocity();
+  double rho(0.); 
+  Coord u(0.);
+  
+  for (int k = 0; k < numberPhases; k++){
+    rho += m_masse[k];
+  }
+  u = m_qdm/rho;
 
   //Gravity force and work
-  sourceConsKap->m_qdm = rho*g;
-  sourceConsKap->m_energMixture = rho*Coord::scalarProduct(g,u);
+  m_qdm = rho*g;
+  m_energMixture = rho* Coord::scalarProduct(g, u);
 
-  //Euler integration (order 1)
-  m_qdm += dt*sourceConsKap->m_qdm;
-  m_energMixture += dt*sourceConsKap->m_energMixture;
+  //Null source components
+  for (int k = 0; k < numberPhases; k++) {
+	  m_alpha[k] = 0.;
+	  m_masse[k] = 0.;
+	  m_energ[k] = 0.;
+  }
 }
 
 //***********************************************************************
 
-void FluxKapila::integrateSourceTermsHeating(Cell *cell, const double &dt, const int &numberPhases, const double &q)
+void FluxKapila::prepSourceTermsHeating(Cell *cell, const double &dt, const int &numberPhases, const double &q)
 {
-  sourceConsKap->setToZero(numberPhases);
-
   //Version 1 on 2p model, then relax
-  sourceConsKap->m_energMixture = q;
+  m_energMixture = q;
   double sumMasses(0.);
   for (int k = 0; k < numberPhases; k++) {
     sumMasses += m_masse[k];
   }
-    for (int k = 0; k < numberPhases; k++) {
-    sourceConsKap->m_energ[k] = m_masse[k] / sumMasses * q;
-    m_energ[k] += dt*sourceConsKap->m_energ[k];
+  for (int k = 0; k < numberPhases; k++) {
+    m_energ[k] = m_masse[k] / sumMasses * q;
   }
-  m_energMixture += dt*sourceConsKap->m_energMixture;
 
+  //Null source components
+  m_qdm = 0.;
+  for (int k = 0; k < numberPhases; k++) {
+	  m_alpha[k] = 0.;
+	  m_masse[k] = 0.;
+  }
 
   ////Version 2 directly on Kapila model
   //double p0 = cell->getMixture()->getPressure();
@@ -347,7 +381,7 @@ void FluxKapila::integrateSourceTermsHeating(Cell *cell, const double &dt, const
   //    f -= m_masse[k] * vk[k];
   //    df -= m_masse[k] * dvkdp;
   //  }
-  //} while (abs(f)>1e-12);
+  //} while (std::fabs(f)>1e-12);
 
   ////Cell update
   //Phase *phase;
@@ -372,58 +406,30 @@ void FluxKapila::integrateSourceTermsHeating(Cell *cell, const double &dt, const
 
 //***********************************************************************
 
-void FluxKapila::integrateSourceTermsMRF(Cell *cell, const double &dt, const int &numberPhases, const Coord &omega)
+void FluxKapila::prepSourceTermsMRF(Cell *cell, const double &dt, const int &numberPhases, const Coord &omega)
 {
-  sourceConsKap->setToZero(numberPhases);
   //Mass and velocity extraction
-  double rho = cell->getMixture()->getDensity();
-  Coord u = cell->getMixture()->getVelocity();
+  double rho(0.); 
+  Coord u(0.);
+  
+  for (int k = 0; k < numberPhases; k++){ 
+    rho += m_masse[k];
+  }
+  u = m_qdm/rho;
   
   //Coriolis acceleration
-  sourceConsKap->m_qdm = -2.*rho*Coord::crossProduct(omega,u);
+  m_qdm = -2.*rho*Coord::crossProduct(omega,u);
   //Centrifugal acceleration
-  sourceConsKap->m_qdm -= rho*Coord::crossProduct(omega, Coord::crossProduct(omega, cell->getPosition()));
+  m_qdm -= rho*Coord::crossProduct(omega, Coord::crossProduct(omega, cell->getPosition()));
   //Centrifugal acceleration work
-  sourceConsKap->m_energMixture = Coord::scalarProduct(u, sourceConsKap->m_qdm);
+  m_energMixture = Coord::scalarProduct(u, m_qdm);
 
-  //Euler integration (order 1)
-  m_qdm += dt*sourceConsKap->m_qdm;
-  m_energMixture += dt*sourceConsKap->m_energMixture;
-}
-
-//***********************************************************************
-
-double FluxKapila::getAlpha(const int &numPhase) const
-{
-  return m_alpha[numPhase];
-}
-
-//***********************************************************************
-
-double FluxKapila::getMasse(const int &numPhase) const
-{
-  return m_masse[numPhase];
-}
-
-//***********************************************************************
-
-double FluxKapila::getEnergy(const int &numPhase) const
-{
-  return m_energ[numPhase];
-}
-
-//***********************************************************************
-
-Coord FluxKapila::getQdm() const
-{
-  return m_qdm;
-}
-
-//***********************************************************************
-
-double FluxKapila::getEnergyMix() const
-{
-	return m_energMixture;
+  //Null source components
+  for (int k = 0; k < numberPhases; k++) {
+	  m_alpha[k] = 0.;
+	  m_masse[k] = 0.;
+	  m_energ[k] = 0.;
+  }
 }
 
 //***********************************************************************

@@ -29,17 +29,15 @@
 
 //! \file      Eos.cpp
 //! \author    F. Petitpas, K. Schmidmayer, E. Daniel
-//! \version   1.0
-//! \date      May 14 2018
+//! \version   1.1
+//! \date      June 5 2019
 
 #include <iostream>
-#include <string>
 #include "Eos.h"
 
-using namespace std;
 using namespace tinyxml2;
 
-double epsilon;
+double epsilonAlphaNull;
 
 //***********************************************************************
 
@@ -59,7 +57,7 @@ Eos::~Eos(){}
 
 //***********************************************************************
 
-void Eos::readPhysicalParameter(XMLNode *element, string fileName)
+void Eos::readPhysicalParameter(XMLNode *element, std::string fileName)
 {
   XMLError error;
 
@@ -77,21 +75,7 @@ void Eos::readPhysicalParameter(XMLNode *element, string fileName)
 
 void Eos::display() const
 {
-    cout << "Fluid : " << m_name << endl;
-}
-
-//***********************************************************************
-
-string Eos::getName() const
-{
-  return m_name;
-}
-
-//***********************************************************************
-
-int Eos::getNumber() const
-{
-  return m_number;
+    std::cout << "Fluid : " << m_name << std::endl;
 }
 
 //***********************************************************************
@@ -103,21 +87,13 @@ double Eos::computeTotalEnthalpy(const double &density, const double &pressure, 
 
 //***********************************************************************
 
-double Eos::getMu() const { return m_mu; }
-
-//***********************************************************************
-
-double Eos::getLambda() const { return m_lambda; }
-
-//***********************************************************************
-
-void Eos::assignEpsilonForAlphaNull(bool alphaNull, string fileName) const
+void Eos::assignEpsilonForAlphaNull(bool alphaNull, std::string fileName) const
 {
   if (alphaNull) {
-    epsilon = 1.e-15;
+    epsilonAlphaNull = 1.e-15;
   }
   else {
-    epsilon = 0.;
+    epsilonAlphaNull = 0.;
   }
 }
 

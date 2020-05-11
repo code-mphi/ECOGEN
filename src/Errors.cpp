@@ -28,14 +28,12 @@
 //  If not, see <http://www.gnu.org/licenses/>.
 
 //! \file      Errors.cpp
-//! \author    F. Petitpas, S. Le Martelot
-//! \version   1.0
-//! \date      December 20 2017
+//! \author    F. Petitpas, S. Le Martelot, K. Schmidmayer, B. Dorschner
+//! \version   1.1
+//! \date      June 5 2019
 
 #include "Errors.h"
 #include "Run.h"
-
-using namespace std;
 
 std::vector<Errors> errors;
 
@@ -46,7 +44,7 @@ Errors::Errors() : m_state(0), m_ligne(0), m_value(0.), m_message("non renseigne
 
 //***********************************************************************
 
-Errors::Errors(const string &message, const char* fichierSource, int numberLigne) :
+Errors::Errors(const std::string &message, const char* fichierSource, int numberLigne) :
   m_message(message), m_fichier(fichierSource), m_ligne(numberLigne), m_value(0.)
 {
   m_state = 1;
@@ -58,20 +56,20 @@ Errors::~Errors(){}
 
 //***********************************************************************
 
-void Errors::errorMessage(const string &message)
+void Errors::errorMessage(const std::string &message)
 {
   if (rankCpu == 0)
   { 
-    stringstream numCPU;
+    std::stringstream numCPU;
     numCPU << rankCpu;
 
-    cerr << endl << "-------------------------------------------------------" << endl;
-    cerr << "ERREUR sur CPU " + numCPU.str() + " : " << message.c_str() << endl; 
-    cerr << "Fix it and try again ;-)" << endl;
-    cerr << "-------------------------------------------------------" << endl;
+    std::cerr << std::endl << "-------------------------------------------------------" << std::endl;
+    std::cerr << "ERREUR sur CPU " + numCPU.str() + " : " << message.c_str() << std::endl; 
+    std::cerr << "Fix it and try again ;-)" << std::endl;
+    std::cerr << "-------------------------------------------------------" << std::endl;
   }
   //run.finalize();
-  exit(0);
+  //exit(0);
 }
 
 //***********************************************************************
@@ -80,13 +78,13 @@ void Errors::errorMessage(const std::string &message, double value)
 {
   if (rankCpu == 0)
   {
-    stringstream numCPU;
+    std::stringstream numCPU;
     numCPU << rankCpu;
 
-    cout << endl << "-------------------------------------------------------" << endl;
-    cout << "ERREUR sur CPU " + numCPU.str() + " : " << message.c_str() << " " << value << endl;
-    cout << "Corriger error et relancer le code" << endl;
-    cout << "-------------------------------------------------------" << endl;
+    std::cout << std::endl << "-------------------------------------------------------" << std::endl;
+    std::cout << "ERREUR sur CPU " + numCPU.str() + " : " << message.c_str() << " " << value << std::endl;
+    std::cout << "Corriger error et relancer le code" << std::endl;
+    std::cout << "-------------------------------------------------------" << std::endl;
   }
   //run.finalize();
   exit(0);
@@ -122,39 +120,39 @@ int Errors::getEtat()
 
 void Errors::afficheError()
 {
-  cout << endl << "-------------------------------------------------------" << endl;
-  cout << "        ERREUR NECESSITANT ARRET DU PROGRAMME" << endl;
-  cout << " - number du CPU : " << rankCpu << endl;
-  cout << " - file :  " << m_fichier.c_str() << " ligne : " << m_ligne << endl;
-  cout << " - message : " << m_message.c_str() << " " << m_value << endl;
-  cout << "=> Corriger error et relancer le run" << endl;
-  cout << "-------------------------------------------------------" << endl;
+  std::cout << std::endl << "-------------------------------------------------------" << std::endl;
+  std::cout << "        ERREUR NECESSITANT ARRET DU PROGRAMME" << std::endl;
+  std::cout << " - number du CPU : " << rankCpu << std::endl;
+  std::cout << " - file :  " << m_fichier.c_str() << " ligne : " << m_ligne << std::endl;
+  std::cout << " - message : " << m_message.c_str() << " " << m_value << std::endl;
+  std::cout << "=> Corriger error et relancer le run" << std::endl;
+  std::cout << "-------------------------------------------------------" << std::endl;
 }
 
 //***********************************************************************
 
 void Errors::ecritErrorFichier()
 {
-  ofstream fileStream;
-  stringstream num;
+  std::ofstream fileStream;
+  std::stringstream num;
 
   num << "error_CPU" << rankCpu;
   fileStream.open((num.str()).c_str());
 
-  fileStream << "-------------------------------------------------------" << endl;
-  fileStream << "        ERREUR NECESSITANT ARRET DU PROGRAMME" << endl;
-  fileStream << " - number du CPU : " << rankCpu << endl;
-  fileStream << " - file :  " << m_fichier.c_str() << " ligne : " << m_ligne << endl;
-  fileStream << " - message : " << m_message.c_str() << " " << m_value << endl;
-  fileStream << "=> Corriger error et relancer le run" << endl;
-  fileStream << "-------------------------------------------------------" << endl;
+  fileStream << "-------------------------------------------------------" << std::endl;
+  fileStream << "        ERREUR NECESSITANT ARRET DU PROGRAMME" << std::endl;
+  fileStream << " - number du CPU : " << rankCpu << std::endl;
+  fileStream << " - file :  " << m_fichier.c_str() << " ligne : " << m_ligne << std::endl;
+  fileStream << " - message : " << m_message.c_str() << " " << m_value << std::endl;
+  fileStream << "=> Corriger error et relancer le run" << std::endl;
+  fileStream << "-------------------------------------------------------" << std::endl;
 
   fileStream.close();
 }
 
 //***********************************************************************
 
-void Errors::arretCodeApresError(vector<Errors> &errors)
+void Errors::arretCodeApresError(std::vector<Errors> &errors)
 {
   //Affichage ecran des errors
   for (unsigned int e = 0; e < errors.size(); e++) {
@@ -164,5 +162,12 @@ void Errors::arretCodeApresError(vector<Errors> &errors)
   //run.finalize();
   exit(0);
 }
+
+//***********************************************************************
+
+constexpr int Errors::defaultInt;
+constexpr int Errors::defaultIntNeg;
+constexpr double Errors::defaultDouble;
+const std::string Errors::defaultString = "NA";
 
 //***********************************************************************

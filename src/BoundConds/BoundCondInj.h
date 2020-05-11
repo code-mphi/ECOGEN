@@ -33,7 +33,7 @@
 //! \file      BoundCondInj.h
 //! \author    F. Petitpas, K. Schmidmayer
 //! \version   1.0
-//! \date      December 20 2017
+//! \date      February 13 2019
 
 #include "BoundCond.h"
 
@@ -46,7 +46,7 @@ class BoundCondInj : public BoundCond
     BoundCondInj(const BoundCondInj &Source, const int lvl = 0); //Constructeur de copie (utile pour AMR)
     virtual ~BoundCondInj();
 
-    virtual void creeLimite(CellInterface **face);
+    virtual void creeLimite(TypeMeshContainer<CellInterface *> &cellInterfaces);
     virtual void solveRiemannLimite(Cell &cellLeft, const int &numberPhases, const double &dxLeft, double &dtMax);
     virtual void solveRiemannTransportLimite(Cell &cellLeft, const int &numberTransports) const;
 
@@ -54,12 +54,13 @@ class BoundCondInj : public BoundCond
     virtual void printInfo();
 
     //Pour methode AMR
-    virtual void creerBordChild();  /*!< Creer un bord enfant (non initialize) */
+    virtual void creerCellInterfaceChild();  /*!< Creer un child cell interface (non initialize) */
 
   protected:
   private:
     int m_numberPhase;
     double m_m0;     //!< debit massique surfacique
+    double m_T0;
     double *m_ak0;
     double *m_rhok0;
     double *m_pk0;

@@ -28,14 +28,12 @@
 //  If not, see <http://www.gnu.org/licenses/>.
 
 //! \file      timeStats.h
-//! \author    F. Petitpas
-//! \version   1.0
-//! \date      September 07 2018
+//! \author    F. Petitpas, K. Schmidmayer
+//! \version   1.1
+//! \date      June 5 2019
 
 #include "timeStats.h"
 #include <iostream>
-
-using namespace std;
 
 //***********************************************************************
 
@@ -52,6 +50,7 @@ void timeStats::initialize()
   m_InitialTime = clock();
   m_computationTime = 0;
   m_AMRTime = 0;
+  m_communicationTime = 0;
 }
 
 //***********************************************************************
@@ -66,6 +65,7 @@ void timeStats::updateComputationTime()
 
 void timeStats::startAMRTime()
 {
+  MPI_Barrier(MPI_COMM_WORLD);
   m_AMRRefTime = clock();
 }
 
@@ -73,16 +73,34 @@ void timeStats::startAMRTime()
 
 void timeStats::endAMRTime()
 {
+  MPI_Barrier(MPI_COMM_WORLD);
   m_AMRTime += (clock() - m_AMRRefTime);
 }
 
 //***********************************************************************
 
-void timeStats::setCompTime(const clock_t &time) { m_computationTime = time; }
+void timeStats::startCommunicationTime()
+{
+  MPI_Barrier(MPI_COMM_WORLD);
+  m_communicationRefTime = clock();
+}
 
 //***********************************************************************
 
-clock_t timeStats::getComputationTime() const { return m_computationTime; }
+void timeStats::endCommunicationTime()
+{
+  MPI_Barrier(MPI_COMM_WORLD);
+  m_communicationTime += (clock() - m_communicationRefTime);
+}
+
+//***********************************************************************
+
+void timeStats::setCompTime(const clock_t &compTime, const clock_t &AMRTime, const clock_t &comTime)
+{
+  m_computationTime = compTime;
+  m_AMRTime = AMRTime;
+  m_communicationTime = comTime;
+}
 
 //***********************************************************************
 
@@ -90,18 +108,19 @@ void timeStats::printScreenStats(const int &numTest) const
 {
   printScreenTime(m_computationTime, "Elapsed time", numTest);
   printScreenTime(m_AMRTime, "AMR time", numTest);
+  printScreenTime(m_communicationTime, "Communication time", numTest);
 
   //Estimation temps restant
   //A faire...
-  cout << "T" << numTest << " | ------------------------------------------" << endl;
+  std::cout << "T" << numTest << " | -------------------------------------------" << std::endl;
 }
 
 //***********************************************************************
 
-void timeStats::printScreenTime(const clock_t &time, string chaine, const int &numTest) const
+void timeStats::printScreenTime(const clock_t &time, std::string chaine, const int &numTest) const
 {
   //Managing string size
-  string timeName(" |     " + chaine.substr(0,18));
+  std::string timeName(" |     " + chaine.substr(0,18));
   for (unsigned int i = 0; i < 19 - chaine.size(); i++) {
     timeName += " ";
   }
@@ -113,7 +132,7 @@ void timeStats::printScreenTime(const clock_t &time, string chaine, const int &n
   int seconde(convTime);
   if (seconde < 60)
   {
-    cout << "T" << numTest << timeName << convDouble << " s " << endl;
+    std::cout << "T" << numTest << timeName << convDouble << " s " << std::endl;
   }
   else
   {
@@ -121,13 +140,13 @@ void timeStats::printScreenTime(const clock_t &time, string chaine, const int &n
     seconde = seconde % 60;
     if (minute <60)
     {
-      cout << "T" << numTest << timeName << minute << " min " << seconde << " s " << endl;
+      std::cout << "T" << numTest << timeName << minute << " min " << seconde << " s " << std::endl;
     }
     else
     {
       int heure(minute / 60);
       minute = minute % 60;
-      cout << "T" << numTest << timeName << heure << " h " << minute << " min " << seconde << " s " << endl;
+      std::cout << "T" << numTest << timeName << heure << " h " << minute << " min " << seconde << " s " << std::endl;
     }
   }
 }

@@ -34,7 +34,6 @@
 
 #include "RelaxationPTMu.h"
 
-using namespace std;
 using namespace tinyxml2;
 
 //***********************************************************************
@@ -43,7 +42,7 @@ RelaxationPTMu::RelaxationPTMu(){}
 
 //***********************************************************************
 
-RelaxationPTMu::RelaxationPTMu(XMLElement *element, string fileName)
+RelaxationPTMu::RelaxationPTMu(XMLElement *element, std::string fileName)
 {
 	XMLElement *sousElement(element->FirstChildElement("dataPTMu"));
 	if (sousElement == NULL) throw ErrorXMLElement("dataPTMu", fileName, __FILE__, __LINE__);
@@ -64,7 +63,7 @@ void RelaxationPTMu::stiffRelaxation(Cell *cell, const int &numberPhases, Prim t
 {
  	Phase *phase(0);
 
-	if (numberPhases > 2) errors.push_back(Errors("more than 2-phase calculation with evaporation not implemented in RelaxationPTMu::stiffRelaxation", __FILE__, __LINE__));
+	if (numberPhases > 2) errors.push_back(Errors("More than 2-phase calculation with evaporation not implemented in RelaxationPTMu::stiffRelaxation", __FILE__, __LINE__));
 
 	//Initial state
 	double pStar(0.), Tsat;
@@ -102,11 +101,11 @@ void RelaxationPTMu::stiffRelaxation(Cell *cell, const int &numberPhases, Prim t
 	do {
 		pStar -= f / df; iteration++;
 		if (iteration > 50) {
-			errors.push_back(Errors("number iterations trop grand dans relaxPTMu", __FILE__, __LINE__));
-			cout << "info cell problematic" << endl;
-			cout << "Liq " << TL << " " << TB->rhok[m_liq] << " " << cell->getMixture()->getPressure() << endl;
-			cout << "Vap " << TV << " " << TB->rhok[m_vap] << " " << cell->getMixture()->getPressure() << endl;
-			cout << Tsat << " " << pStar << endl;
+			errors.push_back(Errors("Number of iterations too large in relaxPTMu", __FILE__, __LINE__));
+			std::cout << "info cell problematic" << std::endl;
+			std::cout << "Liq " << TL << " " << TB->rhok[m_liq] << " " << cell->getMixture()->getPressure() << std::endl;
+			std::cout << "Vap " << TV << " " << TB->rhok[m_vap] << " " << cell->getMixture()->getPressure() << std::endl;
+			std::cout << Tsat << " " << pStar << std::endl;
 			break;
 		}
 		//Physical pressure?
@@ -141,7 +140,7 @@ void RelaxationPTMu::stiffRelaxation(Cell *cell, const int &numberPhases, Prim t
 		df -= (daLSat*rhoeLSat + aLSat * drhoeLSat + daVSat * rhoeVSat + aVSat * drhoeVSat);
 		f /= rhoe;
 		df /= rhoe;
-	} while (abs(f) > 1e-10);
+	} while (std::fabs(f) > 1e-10);
 
 	//Cell update
 	phase = cell->getPhase(m_liq);

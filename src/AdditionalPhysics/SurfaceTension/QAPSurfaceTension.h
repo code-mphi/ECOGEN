@@ -32,8 +32,8 @@
 
 //! \file      QAPSurfaceTension.h
 //! \author    K. Schmidmayer
-//! \version   1.0
-//! \date      December 20 2017
+//! \version   1.1
+//! \date      June 5 2019
 
 #include "../QuantitiesAddPhys.h"
 
@@ -50,10 +50,10 @@ class QAPSurfaceTension : public QuantitiesAddPhys
 
       //Accessors
       virtual void setGrad(const Coord &grad, int num = -1);
-      virtual Coord getGrad(int num = -1) const;
+      virtual const Coord& getGrad(int num = -1) const { return m_gradC[0]; };
 
     protected:
-    Coord m_gradC;           //!< Gradient of the transport function (vector w)
+    std::vector<Coord> m_gradC;           //!< Gradient of the transport function (vector w)
 
     private:
 };

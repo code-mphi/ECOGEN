@@ -32,8 +32,8 @@
 
 //! \file      QuantitiesAddPhys.h
 //! \author    K. Schmidmayer
-//! \version   1.0
-//! \date      December 20 2017
+//! \version   1.1
+//! \date      June 5 2019
 
 class QuantitiesAddPhys; //pre-declaration of QuantitiesAddPhys class needed for AddPhys.h inclusion
 
@@ -61,10 +61,10 @@ class QuantitiesAddPhys
     //! \brief     Set the additional-physic gradient with the transmitted values
     //! \param     grad                 transmitted gradient
     //! \param     num                  number to determine the corresponding gradient
-    virtual void setGrad(const Coord &grad, int num=-1) { Errors::errorMessage("setGrad not implemented for used quantities of additional physics"); };
+    virtual void setGrad(const Coord &grad, int num = -1) { Errors::errorMessage("setGrad not implemented for used quantities of additional physics"); };
     //! \brief     Get the additional-physic gradient
     //! \param     num                  number to determine the corresponding gradient
-    virtual Coord getGrad(int num=-1) const { Errors::errorMessage("getGrad not implemented for used quantities of additional physics"); return 0; };
+    virtual const Coord& getGrad(int num = -1) const { Errors::errorMessage("getGrad not implemented for used quantities of additional physics"); return Coord::defaultCoord; };
 
     //! \brief     Set the gradient of the velocity along the x-direction with the transmitted values
     //! \param     grad                 transmitted gradient
@@ -87,7 +87,7 @@ class QuantitiesAddPhys
     virtual Coord getGradW() const { return 0; };
     //! \brief     Return the gradient of the phase temperature
     //! \param     phaseNum             number of the corresponding phase
-    virtual Coord getGradTk(int &phaseNum) const { return 0; };
+    virtual const Coord& getGradTk(int &phaseNum) const { return Coord::defaultCoord; };
 
     //! \brief     Return the corresponding additional-physic class of this quantities class
     AddPhys* getAddPhys() { return m_addPhys; };
@@ -97,5 +97,12 @@ class QuantitiesAddPhys
 
     private:
 };
+
+extern std::vector<Variable> variableNameSurfTens;  //!< Variable name of the corresponding gradient
+extern std::vector<int> numPhaseSurfTens;           //!< Number of the phase (here transport)
+extern std::vector<Variable> variableNamesVisc;     //!< Variable names of the corresponding gradients
+extern std::vector<int> numPhasesVisc;              //!< Number of the phase (-1 for viscosity: works on mixture)
+extern std::vector<Variable> variableNamesCond;     //!< Variable names of the corresponding gradients
+extern std::vector<int> numPhasesCond;              //!< Number of the phase
 
 #endif // QUANTITIESADDPHYS_H

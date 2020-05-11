@@ -32,9 +32,7 @@
 //! \version   1.0
 //! \date      December 21 2017
 
-#include <iostream>
 #include "Phase.h"
-using namespace std;
 
 //***************************************************************************
 
@@ -46,7 +44,7 @@ Phase::~Phase(){}
 
 //***************************************************************************
 
-void Phase::printPhase(ofstream &fileStream) const
+void Phase::printPhase(std::ofstream &fileStream) const
 {
   //Scalar variables
   for (int var = 1; var <= this->getNumberScalars(); var++) {

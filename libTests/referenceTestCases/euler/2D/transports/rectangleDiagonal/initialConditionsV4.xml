@@ -6,7 +6,7 @@
 		<domain name="base" state="around" type="entireDomain"/>
 		<!-- chamber high pressure -->
 		<domain name="rectangle"  state="rectangle" type="rectangle">
-			<dataRectangle axe1="x" axe2="y" lAxe1="0.3" lAxe2="0.2">
+			<dataRectangle axis1="x" axis2="y" lAxis1="0.3" lAxis2="0.2">
 				<posInferiorVertex x="0.2" y="0.2" z="0."/>
 			</dataRectangle>
 		</domain>
@@ -14,22 +14,22 @@
 
 	<!-- LIST OF BOUNDARY CONDITIONS -->
 	<boundaryConditions>
-		<boundCond name="CLXm" type="abs" number="1" />
-		<boundCond name="CLXp" type="abs" number="2" />
-		<boundCond name="CLYm" type="abs" number="3" />
-		<boundCond name="CLYp" type="abs" number="4" />
+		<boundCond name="CLXm" type="nonReflecting" number="1" />
+		<boundCond name="CLXp" type="nonReflecting" number="2" />
+		<boundCond name="CLYm" type="nonReflecting" number="3" />
+		<boundCond name="CLYp" type="nonReflecting" number="4" />
 	</boundaryConditions>
 
 	<!--  LIST OF STATES  -->
 	<state name="rectangle">
-		<material type="fluide" EOS="IG_air.xml">
+		<material type="fluid" EOS="IG_air.xml">
 			<dataFluid density="10.0" pressure="1.e5">
 				<velocity x="1000." y="1000." z="0."/>
 			</dataFluid>
 		</material>
 	</state>
 	<state name="around">
-		<material type="fluide" EOS="IG_air.xml">
+		<material type="fluid" EOS="IG_air.xml">
 			<dataFluid density="1.0" pressure="1.e5">
 				<velocity x="1000." y="1000." z="0."/>
 			</dataFluid>

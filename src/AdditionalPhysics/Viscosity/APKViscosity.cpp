@@ -28,16 +28,15 @@
 //  If not, see <http://www.gnu.org/licenses/>.
 
 //! \file      APKViscosity.cpp
-//! \author    K. Schmidmayer
-//! \version   1.0
-//! \date      December 20 2017
+//! \author    K. Schmidmayer, J. Caze
+//! \version   1.1
+//! \date      November 19 2019
 
 #include <iostream>
 #include <cmath>
 #include <algorithm>
 #include "APKViscosity.h"
 
-using namespace std;
 using namespace tinyxml2;
 
 //***********************************************************************
@@ -46,7 +45,7 @@ APKViscosity::APKViscosity(){}
 
 //***********************************************************************
 
-APKViscosity::APKViscosity(int& numberQPA, Eos** eos, int &numberPhases, string fileName)
+APKViscosity::APKViscosity(int& numberQPA, Eos** eos, int &numberPhases, std::string fileName)
 {
   m_muk = new double[numberPhases];
   for (int k = 0; k < numberPhases; k++) {
@@ -69,29 +68,29 @@ void APKViscosity::addQuantityAddPhys(Cell *cell)
 
 //***********************************************************************
 
-void APKViscosity::solveFluxAddPhys(CellInterface *cellBound, const int &numberPhases)
+void APKViscosity::solveFluxAddPhys(CellInterface *cellInterface, const int &numberPhases)
 {
   // Copy velocities and gradients of left and right cells
-  m_velocityLeft = cellBound->getCellGauche()->getMixture()->getVelocity();
-  m_velocityRight = cellBound->getCellDroite()->getMixture()->getVelocity();
+  m_velocityLeft = cellInterface->getCellGauche()->getMixture()->getVelocity();
+  m_velocityRight = cellInterface->getCellDroite()->getMixture()->getVelocity();
 
-  m_gradULeft = cellBound->getCellGauche()->getQPA(m_numQPA)->getGrad(1);
-  m_gradURight = cellBound->getCellDroite()->getQPA(m_numQPA)->getGrad(1);
-  m_gradVLeft = cellBound->getCellGauche()->getQPA(m_numQPA)->getGrad(2);
-  m_gradVRight = cellBound->getCellDroite()->getQPA(m_numQPA)->getGrad(2);
-  m_gradWLeft = cellBound->getCellGauche()->getQPA(m_numQPA)->getGrad(3);
-  m_gradWRight = cellBound->getCellDroite()->getQPA(m_numQPA)->getGrad(3);
+  m_gradULeft = cellInterface->getCellGauche()->getQPA(m_numQPA)->getGrad(1);
+  m_gradURight = cellInterface->getCellDroite()->getQPA(m_numQPA)->getGrad(1);
+  m_gradVLeft = cellInterface->getCellGauche()->getQPA(m_numQPA)->getGrad(2);
+  m_gradVRight = cellInterface->getCellDroite()->getQPA(m_numQPA)->getGrad(2);
+  m_gradWLeft = cellInterface->getCellGauche()->getQPA(m_numQPA)->getGrad(3);
+  m_gradWRight = cellInterface->getCellDroite()->getQPA(m_numQPA)->getGrad(3);
 
   // Compute the mixture mu on left and right
   double muMixLeft(0.), muMixRight(0.);
   for (int k = 0; k < numberPhases; k++) {
-    muMixLeft += cellBound->getCellGauche()->getPhase(k)->getAlpha()*m_muk[k];
-    muMixRight += cellBound->getCellDroite()->getPhase(k)->getAlpha()*m_muk[k];
+    muMixLeft += cellInterface->getCellGauche()->getPhase(k)->getAlpha()*m_muk[k];
+    muMixRight += cellInterface->getCellDroite()->getPhase(k)->getAlpha()*m_muk[k];
   }
 
-  m_normal = cellBound->getFace()->getNormal();
-  m_tangent = cellBound->getFace()->getTangent();
-  m_binormal = cellBound->getFace()->getBinormal();
+  m_normal = cellInterface->getFace()->getNormal();
+  m_tangent = cellInterface->getFace()->getTangent();
+  m_binormal = cellInterface->getFace()->getBinormal();
 
   // Projection on orientation axes attached to the edge of velocities and gradients
   m_velocityLeft.localProjection(m_normal, m_tangent, m_binormal);
@@ -103,36 +102,34 @@ void APKViscosity::solveFluxAddPhys(CellInterface *cellBound, const int &numberP
   m_gradWLeft.localProjection(m_normal, m_tangent, m_binormal);
   m_gradWRight.localProjection(m_normal, m_tangent, m_binormal);
 
-  // Distances cells/cellBoundary for weighting on the flux
-  double distLeft = cellBound->getCellGauche()->distance(cellBound);
-  double distRight = cellBound->getCellDroite()->distance(cellBound);
-
   this->solveFluxViscosityInner(m_velocityLeft, m_velocityRight, m_gradULeft, m_gradURight,
-    m_gradVLeft, m_gradVRight, m_gradWLeft, m_gradWRight, muMixLeft, muMixRight, distLeft, distRight, numberPhases);
+    m_gradVLeft, m_gradVRight, m_gradWLeft, m_gradWRight, muMixLeft, muMixRight, numberPhases);
 
   // Flux projection on the absolute orientation axes
-  cellBound->getMod()->reverseProjection(m_normal, m_tangent, m_binormal);
+  cellInterface->getMod()->reverseProjection(m_normal, m_tangent, m_binormal);
 }
 
 //***********************************************************************
 
-void APKViscosity::solveFluxAddPhysBoundary(CellInterface *cellBound, const int &numberPhases)
+void APKViscosity::solveFluxAddPhysBoundary(CellInterface *cellInterface, const int &numberPhases)
 {
+  ////KS//DEV// BC Injection, Tank, Outflow to do
+
   // Copy velocities and gradients of left and right cells
-  m_velocityLeft = cellBound->getCellGauche()->getMixture()->getVelocity();
-  m_gradULeft = cellBound->getCellGauche()->getQPA(m_numQPA)->getGrad(1);
-  m_gradVLeft = cellBound->getCellGauche()->getQPA(m_numQPA)->getGrad(2);
-  m_gradWLeft = cellBound->getCellGauche()->getQPA(m_numQPA)->getGrad(3);
+  m_velocityLeft = cellInterface->getCellGauche()->getMixture()->getVelocity();
+  m_gradULeft = cellInterface->getCellGauche()->getQPA(m_numQPA)->getGrad(1);
+  m_gradVLeft = cellInterface->getCellGauche()->getQPA(m_numQPA)->getGrad(2);
+  m_gradWLeft = cellInterface->getCellGauche()->getQPA(m_numQPA)->getGrad(3);
 
   // Compute the mixture mu on left and right
   double muMixLeft(0.);
   for (int k = 0; k < numberPhases; k++) {
-    muMixLeft += cellBound->getCellGauche()->getPhase(k)->getAlpha()*m_muk[k];
+    muMixLeft += cellInterface->getCellGauche()->getPhase(k)->getAlpha()*m_muk[k];
   }
 
-  m_normal = cellBound->getFace()->getNormal();
-  m_tangent = cellBound->getFace()->getTangent();
-  m_binormal = cellBound->getFace()->getBinormal();
+  m_normal = cellInterface->getFace()->getNormal();
+  m_tangent = cellInterface->getFace()->getTangent();
+  m_binormal = cellInterface->getFace()->getBinormal();
 
   // Projection on orientation axes attached to the edge of velocities and gradients
   m_velocityLeft.localProjection(m_normal, m_tangent, m_binormal);
@@ -140,34 +137,34 @@ void APKViscosity::solveFluxAddPhysBoundary(CellInterface *cellBound, const int 
   m_gradVLeft.localProjection(m_normal, m_tangent, m_binormal);
   m_gradWLeft.localProjection(m_normal, m_tangent, m_binormal);
 
-  // Distances cells/cellBoundary for weighting on the flux
-  double distLeft = cellBound->getCellGauche()->distance(cellBound);
+  // Distances cells/cell interfaces for weighting on the flux
+  double distLeft = cellInterface->getCellGauche()->distance(cellInterface);
 
-  int typeCellBound = cellBound->whoAmI();
-  if (typeCellBound == 1 || typeCellBound == 3 || typeCellBound == 4 || typeCellBound == 5 || typeCellBound == 6) {
-    // Cell boundary of type Abs, Inlet, Outlet, Res or Symmetry
-    this->solveFluxViscosityAbs(m_velocityLeft, m_gradULeft, m_gradVLeft, m_gradWLeft, muMixLeft, distLeft, numberPhases);
+  int typeCellInterface = cellInterface->whoAmI();
+  if (typeCellInterface == 1 || typeCellInterface == 3 || typeCellInterface == 4 || typeCellInterface == 5 || typeCellInterface == 6) {
+    // Cell interface of type NonReflecting, Outflow, Injection, Tank or Symmetry
+    this->solveFluxViscosityNonReflecting(m_velocityLeft, m_gradULeft, m_gradVLeft, m_gradWLeft, muMixLeft, numberPhases);
   }
-  else if (typeCellBound == 2) {
-    // Cell boundary of type Wall
+  else if (typeCellInterface == 2) {
+    // Cell interface of type Wall
     this->solveFluxViscosityWall(m_velocityLeft, muMixLeft, distLeft, numberPhases);
   }
-  else { this->solveFluxViscosityOther(m_velocityLeft, m_gradULeft, m_gradVLeft, m_gradWLeft, muMixLeft, distLeft, numberPhases); }
+  else { this->solveFluxViscosityOther(m_velocityLeft, m_gradULeft, m_gradVLeft, m_gradWLeft, muMixLeft, numberPhases); }
 
   // Flux projection on the absolute orientation axes
-  cellBound->getMod()->reverseProjection(m_normal, m_tangent, m_binormal);
+  cellInterface->getMod()->reverseProjection(m_normal, m_tangent, m_binormal);
 }
 
 //***********************************************************************
 
 void APKViscosity::solveFluxViscosityInner(Coord &velocityLeft, Coord &velocityRight, Coord &gradULeft, Coord &gradURight,
-  Coord &gradVLeft, Coord &gradVRight, Coord &gradWLeft, Coord &gradWRight, double &muMixLeft, double &muMixRight, double &distLeft, double &distRight, int numberPhases) const
+  Coord &gradVLeft, Coord &gradVRight, Coord &gradWLeft, Coord &gradWRight, double &muMixLeft, double &muMixRight, int numberPhases) const
 {
 	//Extraction of data
 	double uL, vL, wL, uR, vR, wR;
-	double du1L, du2L, du3L, du1R, du2R, du3R;
-  double dv1L, dv2L, dv1R, dv2R;
-  double dw1L, dw3L, dw1R, dw3R;
+	double dudxL, dudyL, dudzL, dudxR, dudyR, dudzR;
+  double dvdxL, dvdyL, dvdxR, dvdyR;
+  double dwdxL, dwdzL, dwdxR, dwdzR;
 	uL = velocityLeft.getX();
 	vL = velocityLeft.getY();
 	wL = velocityLeft.getZ();
@@ -175,139 +172,198 @@ void APKViscosity::solveFluxViscosityInner(Coord &velocityLeft, Coord &velocityR
 	vR = velocityRight.getY();
 	wR = velocityRight.getZ();
 
-	du1L = gradULeft.getX();
-  du2L = gradULeft.getY();
-  du3L = gradULeft.getZ();
-  du1R = gradURight.getX();
-  du2R = gradURight.getY();
-  du3R = gradURight.getZ();
+	dudxL = gradULeft.getX();
+  dudyL = gradULeft.getY();
+  dudzL = gradULeft.getZ();
+  dudxR = gradURight.getX();
+  dudyR = gradURight.getY();
+  dudzR = gradURight.getZ();
 
-  dv1L = gradVLeft.getX();
-  dv2L = gradVLeft.getY();
-  dv1R = gradVRight.getX();
-  dv2R = gradVRight.getY();
+  dvdxL = gradVLeft.getX();
+  dvdyL = gradVLeft.getY();
+  dvdxR = gradVRight.getX();
+  dvdyR = gradVRight.getY();
 
-  dw1L = gradWLeft.getX();
-  dw3L = gradWLeft.getZ();
-  dw1R = gradWRight.getX();
-  dw3R = gradWRight.getZ();
+  dwdxL = gradWLeft.getX();
+  dwdzL = gradWLeft.getZ();
+  dwdxR = gradWRight.getX();
+  dwdzR = gradWRight.getZ();
 
-	//Data of the cell boundary
+	//Data of the cell interface
   double u, v, w;
-  double du1, du2, du3;
-  double dv1, dv2;
-  double dw1, dw3;
+  double dudx, dudy, dudz;
+  double dvdx, dvdy;
+  double dwdx, dwdz;
   double muMel;
-	u = (uL*distRight + uR*distLeft) / (distLeft + distRight);
-	v = (vL*distRight + vR*distLeft) / (distLeft + distRight);
-	w = (wL*distRight + wR*distLeft) / (distLeft + distRight);
+	u = (uL + uR) / 2.;
+	v = (vL + vR) / 2.;
+	w = (wL + wR) / 2.;
 
-	du1 = (du1L*distRight + du1R*distLeft) / (distLeft + distRight);
-  du2 = (du2L*distRight + du2R*distLeft) / (distLeft + distRight);
-  du3 = (du3L*distRight + du3R*distLeft) / (distLeft + distRight);
+	dudx = (dudxL + dudxR) / 2.;
+  dudy = (dudyL + dudyR) / 2.;
+  dudz = (dudzL + dudzR) / 2.;
 
-  dv1 = (dv1L*distRight + dv1R*distLeft) / (distLeft + distRight);
-  dv2 = (dv2L*distRight + dv2R*distLeft) / (distLeft + distRight);
+  dvdx = (dvdxL + dvdxR) / 2.;
+  dvdy = (dvdyL + dvdyR) / 2.;
 
-  dw1 = (dw1L*distRight + dw1R*distLeft) / (distLeft + distRight);
-  dw3 = (dw3L*distRight + dw3R*distLeft) / (distLeft + distRight);
+  dwdx = (dwdxL + dwdxR) / 2.;
+  dwdz = (dwdzL + dwdzR) / 2.;
 
-  muMel = (muMixLeft*distRight + muMixRight*distLeft) / (distLeft + distRight);
+  muMel = (muMixLeft + muMixRight) / 2.;
 
-	//Writing of viscous terms on each equation of fluxTempXXX
+	//Writing of viscous terms on each equation of fluxBuffKapila
 	for (int k = 0; k<numberPhases; k++)
 	{
-	  fluxBufferKapila->m_alpha[k] = 0.;
-	  fluxBufferKapila->m_masse[k] = 0.;
-	  fluxBufferKapila->m_energ[k] = 0.;
+	  static_cast<FluxKapila*> (fluxBuff)->m_alpha[k] = 0.;
+	  static_cast<FluxKapila*> (fluxBuff)->m_masse[k] = 0.;
+	  static_cast<FluxKapila*> (fluxBuff)->m_energ[k] = 0.;
 	}
-  fluxBufferKapila->m_qdm.setX(-muMel / 3. * (4.*du1 - 2.*(dv2 + dw3)));
-  fluxBufferKapila->m_qdm.setY(-muMel * (dv1 + du2));
-  fluxBufferKapila->m_qdm.setZ(-muMel * (dw1 + du3));
-  fluxBufferKapila->m_energMixture = -muMel * (4. / 3.*du1*u + (dv1 + du2)*v + (dw1 + du3)*w - 2. / 3.*(dv2 + dw3)*u);
+  static_cast<FluxKapila*> (fluxBuff)->m_qdm.setX(-muMel / 3. * (4.*dudx - 2.*(dvdy + dwdz)));
+  static_cast<FluxKapila*> (fluxBuff)->m_qdm.setY(-muMel * (dvdx + dudy));
+  static_cast<FluxKapila*> (fluxBuff)->m_qdm.setZ(-muMel * (dwdx + dudz));
+  static_cast<FluxKapila*> (fluxBuff)->m_energMixture = -muMel * (4./3.*dudx*u + (dvdx + dudy)*v + (dwdx + dudz)*w - 2./3.*(dvdy + dwdz)*u);
 }
 
 //***********************************************************************
 
-void APKViscosity::solveFluxViscosityAbs(Coord &velocityLeft, Coord &gradULeft, Coord &gradVLeft, Coord &gradWLeft, double &muMixLeft, double &distLeft, int numberPhases) const
+void APKViscosity::solveFluxViscosityNonReflecting(Coord &velocityLeft, Coord &gradULeft, Coord &gradVLeft, Coord &gradWLeft, double &muMixLeft, int numberPhases) const
 {
   this->solveFluxViscosityInner(velocityLeft, velocityLeft, gradULeft, gradULeft,
-    gradVLeft, gradVLeft, gradWLeft, gradWLeft, muMixLeft, muMixLeft, distLeft, distLeft, numberPhases);
+    gradVLeft, gradVLeft, gradWLeft, gradWLeft, muMixLeft, muMixLeft, numberPhases);
 }
 
 //***********************************************************************
 
 void APKViscosity::solveFluxViscosityWall(Coord &velocityLeft, double &muMixLeft, double &distLeft, int numberPhases) const
 {
-  double du1 = -velocityLeft.getX() / distLeft;
-  double dv1 = -velocityLeft.getY() / distLeft;
-  double dw1 = -velocityLeft.getZ() / distLeft;
+  double dudx = -velocityLeft.getX() / distLeft;
+  double dvdx = -velocityLeft.getY() / distLeft;
+  double dwdx = -velocityLeft.getZ() / distLeft;
 
   for (int k = 0; k<numberPhases; k++)
   {
-    fluxBufferKapila->m_alpha[k] = 0.;
-    fluxBufferKapila->m_masse[k] = 0.;
-    fluxBufferKapila->m_energ[k] = 0.;
+    static_cast<FluxKapila*> (fluxBuff)->m_alpha[k] = 0.;
+    static_cast<FluxKapila*> (fluxBuff)->m_masse[k] = 0.;
+    static_cast<FluxKapila*> (fluxBuff)->m_energ[k] = 0.;
   }
-  fluxBufferKapila->m_qdm.setX(-muMixLeft / 3. * 4. * du1 );
-  fluxBufferKapila->m_qdm.setY(-muMixLeft * dv1);
-  fluxBufferKapila->m_qdm.setZ(-muMixLeft * dw1);
-  fluxBufferKapila->m_energMixture = 0.;
+  static_cast<FluxKapila*> (fluxBuff)->m_qdm.setX(-muMixLeft / 3. * 4. * dudx );
+  static_cast<FluxKapila*> (fluxBuff)->m_qdm.setY(-muMixLeft * dvdx);
+  static_cast<FluxKapila*> (fluxBuff)->m_qdm.setZ(-muMixLeft * dwdx);
+  static_cast<FluxKapila*> (fluxBuff)->m_energMixture = 0.;
 }
 
 //***********************************************************************
 
-void APKViscosity::solveFluxViscosityOther(Coord &velocityLeft, Coord &gradULeft, Coord &gradVLeft, Coord &gradWLeft, double &muMixLeft, double &distLeft, int numberPhases) const
+void APKViscosity::solveFluxViscosityOther(Coord &velocityLeft, Coord &gradULeft, Coord &gradVLeft, Coord &gradWLeft, double &muMixLeft, int numberPhases) const
 {
   //Not manage at the moment, just an example
-  cout << "Viscous boundary not manage" << endl;
+  std::cout << "Viscous boundary not manage" << std::endl;
 
   // To avoid bug when not manage
   for (int k = 0; k<numberPhases; k++) {
-    fluxBufferKapila->m_alpha[k] = 0.;
-    fluxBufferKapila->m_masse[k] = 0.;
-    fluxBufferKapila->m_energ[k] = 0.;
+    static_cast<FluxKapila*> (fluxBuff)->m_alpha[k] = 0.;
+    static_cast<FluxKapila*> (fluxBuff)->m_masse[k] = 0.;
+    static_cast<FluxKapila*> (fluxBuff)->m_energ[k] = 0.;
   }
-  fluxBufferKapila->m_qdm = 0.;
-  fluxBufferKapila->m_energMixture = 0.;
+  static_cast<FluxKapila*> (fluxBuff)->m_qdm = 0.;
+  static_cast<FluxKapila*> (fluxBuff)->m_energMixture = 0.;
 }
 
 //***********************************************************************
 
 void APKViscosity::addNonCons(Cell *cell, const int &numberPhases)
 {
-  double du1 = cell->getQPA(m_numQPA)->getGrad(1).getX();
-  double dv2 = cell->getQPA(m_numQPA)->getGrad(2).getY();
-  double dw3 = cell->getQPA(m_numQPA)->getGrad(3).getZ();
-  double termeNonCons = 2.*(du1*du1 + dv2*dv2 + dw3*dw3) - 2. / 3.*(du1 + dv2 + dw3)*(du1 + dv2 + dw3);
+  double dudx = cell->getQPA(m_numQPA)->getGrad(1).getX();
+  double dudy = cell->getQPA(m_numQPA)->getGrad(1).getY();
+  double dudz = cell->getQPA(m_numQPA)->getGrad(1).getZ();
+  double dvdx = cell->getQPA(m_numQPA)->getGrad(2).getX();
+  double dvdy = cell->getQPA(m_numQPA)->getGrad(2).getY();
+  double dvdz = cell->getQPA(m_numQPA)->getGrad(2).getZ();
+  double dwdx = cell->getQPA(m_numQPA)->getGrad(3).getX();
+  double dwdy = cell->getQPA(m_numQPA)->getGrad(3).getY();
+  double dwdz = cell->getQPA(m_numQPA)->getGrad(3).getZ();
+  double termeNonCons = - 2./3.*(dudx + dvdy + dwdz)*(dudx + dvdy + dwdz)
+                        + 2.*(dudx*dudx + dvdy*dvdy + dwdz*dwdz)
+                        + (dudy+dvdx)*(dudy+dvdx) + (dudz+dwdx)*(dudz+dwdx) + (dvdz+dwdy)*(dvdz+dwdy);
 
   for (int k = 0; k<numberPhases; k++) {
-    fluxBufferKapila->m_alpha[k] = 0.;
-    fluxBufferKapila->m_masse[k] = 0.;
-    fluxBufferKapila->m_energ[k] = cell->getPhase(k)->getAlpha()*m_muk[k] * termeNonCons;
+    static_cast<FluxKapila*> (fluxBuff)->m_alpha[k] = 0.;
+    static_cast<FluxKapila*> (fluxBuff)->m_masse[k] = 0.;
+    static_cast<FluxKapila*> (fluxBuff)->m_energ[k] = cell->getPhase(k)->getAlpha()*m_muk[k] * termeNonCons;
   }
-  fluxBufferKapila->m_qdm = 0.;
-  fluxBufferKapila->m_energMixture = 0.;
+  static_cast<FluxKapila*> (fluxBuff)->m_qdm = 0.;
+  static_cast<FluxKapila*> (fluxBuff)->m_energMixture = 0.;
 
   cell->getCons()->addFlux(1., numberPhases);
 }
 
 //***********************************************************************
 
-void APKViscosity::communicationsAddPhys(Cell **cells, const int &dim)
+void APKViscosity::addSymmetricTermsRadialAxisOnX(Cell *cell, const int &numberPhases)
 {
-  parallel.communicationsVector(cells, "QPA", dim, m_numQPA, 1); //m_gradU
-  parallel.communicationsVector(cells, "QPA", dim, m_numQPA, 2); //m_gradV
-  parallel.communicationsVector(cells, "QPA", dim, m_numQPA, 3); //m_gradW
+  //Extraction of data
+  double r = cell->getPosition().getX();
+  double dudx = cell->getQPA(m_numQPA)->getGrad(1).getX();
+  double dudy = cell->getQPA(m_numQPA)->getGrad(1).getY();
+  double dvdx = cell->getQPA(m_numQPA)->getGrad(2).getX();
+  double dvdy = cell->getQPA(m_numQPA)->getGrad(2).getY();
+
+  //Compute the mixture mu
+  double muMix(0.);
+  for (int k = 0; k < numberPhases; k++) {
+    muMix += cell->getPhase(k)->getAlpha()*m_muk[k];
+  }
+
+  //Writing of symmetrical viscous terms on each equation of fluxBuffKapila
+  for (int k = 0; k<numberPhases; k++) {
+    static_cast<FluxKapila*> (fluxBuff)->m_alpha[k] = 0.;
+    static_cast<FluxKapila*> (fluxBuff)->m_masse[k] = 0.;
+    static_cast<FluxKapila*> (fluxBuff)->m_energ[k] = 0.;
+  }
+  static_cast<FluxKapila*> (fluxBuff)->m_qdm.setX(muMix * 2. * dudx / r);
+  static_cast<FluxKapila*> (fluxBuff)->m_qdm.setY(muMix * (dvdx + dudy) / r);
+  static_cast<FluxKapila*> (fluxBuff)->m_energMixture = muMix * (1./3.*(4.*dudx - 2.*dvdy)*cell->getMixture()->getU() + (dudy+dvdx)*cell->getMixture()->getV()) / r;
+
+  cell->getCons()->addFlux(1., numberPhases);
 }
 
 //***********************************************************************
 
-void APKViscosity::communicationsAddPhysAMR(Cell **cells, const int &dim, const int &lvl)
+void APKViscosity::addSymmetricTermsRadialAxisOnY(Cell *cell, const int &numberPhases)
 {
-	parallel.communicationsVectorAMR(cells, "QPA", dim, lvl, m_numQPA, 1); //m_gradU
-	parallel.communicationsVectorAMR(cells, "QPA", dim, lvl, m_numQPA, 2); //m_gradV
-	parallel.communicationsVectorAMR(cells, "QPA", dim, lvl, m_numQPA, 3); //m_gradW
+  //Extraction of data
+  double r = cell->getPosition().getY();
+  double dudx = cell->getQPA(m_numQPA)->getGrad(1).getX();
+  double dudy = cell->getQPA(m_numQPA)->getGrad(1).getY();
+  double dvdx = cell->getQPA(m_numQPA)->getGrad(2).getX();
+  double dvdy = cell->getQPA(m_numQPA)->getGrad(2).getY();
+
+  //Compute the mixture mu
+  double muMix(0.);
+  for (int k = 0; k < numberPhases; k++) {
+    muMix += cell->getPhase(k)->getAlpha()*m_muk[k];
+  }
+
+  //Writing of symmetrical viscous terms on each equation of fluxBuffKapila
+  for (int k = 0; k<numberPhases; k++) {
+    static_cast<FluxKapila*> (fluxBuff)->m_alpha[k] = 0.;
+    static_cast<FluxKapila*> (fluxBuff)->m_masse[k] = 0.;
+    static_cast<FluxKapila*> (fluxBuff)->m_energ[k] = 0.;
+  }
+  static_cast<FluxKapila*> (fluxBuff)->m_qdm.setX(muMix * (dvdx + dudy) / r);
+  static_cast<FluxKapila*> (fluxBuff)->m_qdm.setY(muMix * 2. * dvdy / r);
+  static_cast<FluxKapila*> (fluxBuff)->m_energMixture = muMix * (1./3.*(4.*dvdy - 2.*dudx)*cell->getMixture()->getV() + (dudy+dvdx)*cell->getMixture()->getU()) / r;
+  
+  cell->getCons()->addFlux(1., numberPhases);
+}
+
+//***********************************************************************
+
+void APKViscosity::communicationsAddPhys(int numberPhases, const int &dim, const int &lvl)
+{
+	parallel.communicationsVector(QPA, dim, lvl, m_numQPA, 1); //m_gradU
+	parallel.communicationsVector(QPA, dim, lvl, m_numQPA, 2); //m_gradV
+	parallel.communicationsVector(QPA, dim, lvl, m_numQPA, 3); //m_gradW
 }
 
 //***********************************************************************

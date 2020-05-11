@@ -1,7 +1,7 @@
-<?xml version = "1.0" encoding = "UTF-8" standalone = "yes"?>
+<?xml version='1.0' encoding='UTF-8' standalone='yes'?>
 <model>
-	<flowModel name="Kapila" numberPhases="2" numberTransports="1" alphaNull="false"/>
-	<EOS name="IG_air.xml"/>
-	<EOS name="SG_water.xml"/>
-	<transport name="color"/>
+  <flowModel numberTransports="1" numberPhases="2" name="Kapila" alphaNull="false"/>
+  <EOS name="IG_air.xml"/>
+  <EOS name="SG_water.xml"/>
+  <transport name="color"/>
 </model>

@@ -30,11 +30,10 @@
 //! \file      BoundCondOutflow.cpp
 //! \author    F. Petitpas, K. Schmidmayer
 //! \version   1.0
-//! \date      December 20 2017
+//! \date      February 13 2019
 
 #include "BoundCondOutflow.h"
 
-using namespace std;
 using namespace tinyxml2;
 
 //****************************************************************************
@@ -43,7 +42,7 @@ BoundCondOutflow::BoundCondOutflow(){}
 
 //****************************************************************************
 
-BoundCondOutflow::BoundCondOutflow(int numPhysique, XMLElement *element, int &numberPhases, int &numberTransports, std::vector<std::string> nameTransports, string fileName) :
+BoundCondOutflow::BoundCondOutflow(int numPhysique, XMLElement *element, int &numberPhases, int &numberTransports, std::vector<std::string> nameTransports, std::string fileName) :
   BoundCond(numPhysique)
 {
   //Lecture de the pressure en sortie
@@ -59,7 +58,7 @@ BoundCondOutflow::BoundCondOutflow(int numPhysique, XMLElement *element, int &nu
   int couleurTrouvee(0);
   m_valueTransport = new double[numberTransports];
   XMLElement *elementTransport(sousElement->FirstChildElement("transport"));
-  string nameTransport;
+  std::string nameTransport;
   while (elementTransport != NULL)
   {
     nameTransport = elementTransport->Attribute("name");
@@ -120,9 +119,9 @@ BoundCondOutflow::~BoundCondOutflow()
 
 //****************************************************************************
 
-void BoundCondOutflow::creeLimite(CellInterface **face)
+void BoundCondOutflow::creeLimite(TypeMeshContainer<CellInterface *> &cellInterfaces)
 {
-  *face = new BoundCondOutflow(*(this));
+  cellInterfaces.push_back(new BoundCondOutflow(*(this)));
 }
 
 //****************************************************************************
@@ -147,8 +146,8 @@ void BoundCondOutflow::solveRiemannTransportLimite(Cell &cellLeft, const int & n
 
 void BoundCondOutflow::printInfo()
 {
-  cout << m_numPhysique << endl;
-  cout << m_p0 << endl;
+  std::cout << m_numPhysique << std::endl;
+  std::cout << m_p0 << std::endl;
 }
 
 //****************************************************************************
@@ -162,9 +161,9 @@ void BoundCondOutflow::printInfo()
 //******************************Methode AMR***********************************
 //****************************************************************************
 
-void BoundCondOutflow::creerBordChild()
+void BoundCondOutflow::creerCellInterfaceChild()
 {
-  m_boundariesChildren.push_back(new BoundCondOutflow(*this, m_lvl + 1));
+  m_cellInterfacesChildren.push_back(new BoundCondOutflow(*this, m_lvl + 1));
 }
 
 //****************************************************************************

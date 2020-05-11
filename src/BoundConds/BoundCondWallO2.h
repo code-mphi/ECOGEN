@@ -33,7 +33,7 @@
 //! \file      BoundCondWallO2.cpp
 //! \author    F. Petitpas, K. Schmidmayer
 //! \version   1.0
-//! \date      December 20 2017
+//! \date      February 13 2019
 
 #include "BoundCondWall.h"
 
@@ -46,7 +46,7 @@ public:
   BoundCondWallO2(int numPhysique);
   virtual ~BoundCondWallO2();
 
-  virtual void creeLimite(CellInterface **face);
+  virtual void creeLimite(TypeMeshContainer<CellInterface *> &cellInterfaces);
   virtual void allocateSlopes(const int &numberPhases, const int &numberTransports, int &allocateSlopeLocal);
   virtual void computeSlopes(const int &numberPhases, const int &numberTransports, Prim type = vecPhases);
   virtual void solveRiemann(const int &numberPhases, const int &numberTransports, double &dtMax, Limiter &globalLimiter, Limiter &interfaceLimiter, Limiter &globalVolumeFractionLimiter, Limiter &interfaceVolumeFractionLimiter, Prim type = vecPhases);
@@ -59,7 +59,7 @@ public:
   virtual Transport* getSlopesTransport(const int &numberTransport) const;
 
   //Pour methode AMR
-  virtual void creerBordChild();  /*!< Creer un bord enfant (non initialize) */
+  virtual void creerCellInterfaceChild();  /*!< Creer un child cell interface (non initialize) */
 
 protected:
   int m_numberPhases;

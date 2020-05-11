@@ -1,6 +1,5 @@
-<?xml version = "1.0" encoding = "UTF-8" standalone = "yes"?>
+<?xml version='1.0' encoding='UTF-8' standalone='yes'?>
 <ecogen>
-
   <!-- Euler reference test cases -->
   <!-- -------------------------- -->
   <testCase>./libTests/referenceTestCases/euler/1D/transport/positiveVelocity/</testCase>
@@ -12,17 +11,22 @@
   <!-- <testCase>./libTests/referenceTestCases/euler/2D/HPUnstructured/</testCase> -->
   <!-- <testCase>./libTests/referenceTestCases/euler/2D/nozzles/tankWithShock/</testCase> -->
   <!-- <testCase>./libTests/referenceTestCases/euler/3D/LPCenter/</testCase> -->
+  <!-- <testCase>./libTests/referenceTestCases/euler/2D/shockTubes/cylindrical/</testCase> -->
+  <!-- <testCase>./libTests/referenceTestCases/euler/2D/nozzles/supersonicInjection/</testCase> -->
 
   <!-- Kapila reference test cases -->
   <!-- --------------------------- -->
   <!-- <testCase>./libTests/referenceTestCases/kapila/1D/transports/interfaceWaterAir/</testCase> -->
   <!-- <testCase>./libTests/referenceTestCases/kapila/1D/shockTubes/interfaceWaterAir/</testCase> -->
+  <!-- <testCase>./libTests/referenceTestCases/kapila/1D/shockTubes/interfaceWaterAirNASG/</testCase> -->
   <!-- <testCase>./libTests/referenceTestCases/kapila/1D/shockTubes/epoxySpinel/</testCase> -->
   <!-- <testCase>./libTests/referenceTestCases/kapila/1D/cavitation/</testCase> -->
   <!-- <testCase>./libTests/referenceTestCases/kapila/2D/transportWaterSquareInAir/</testCase> -->
   <!-- <testCase>./libTests/referenceTestCases/kapila/2D/squareWaterExplosion/</testCase> -->
   <!-- <testCase>./libTests/referenceTestCases/kapila/2D/shockBubble/heliumAir/</testCase> -->
   <!-- <testCase>./libTests/referenceTestCases/kapila/2D/richtmyerMeshkov/</testCase> -->
+  <!-- <testCase>./libTests/referenceTestCases/kapila/2D/nozzles/tank/</testCase> -->
+  <!-- <testCase>./libTests/referenceTestCases/kapila/2D/nozzles/injection/</testCase> -->
   <!-- <testCase>./libTests/referenceTestCases/kapila/2D/testUnstructured/</testCase> -->
   <!-- <testCase>./libTests/referenceTestCases/Kapila/AddPhysicalEffects/evap/evapShockTube/</testCase> -->
   <!-- <testCase>./libTests/referenceTestCases/kapila/AddPhysicalEffects/surfaceTension/squareToCircle/</testCase> -->
@@ -31,9 +35,10 @@
   <!-- <testCase>./libTests/referenceTestCases/kapila/AddPhysicalEffects/surfaceTension/waterDropletInAir/</testCase> -->
   <!-- <testCase>./libTests/referenceTestCases/kapila/AddPhysicalEffects/surfaceTension/dropletImpact/</testCase> -->
   <!-- <testCase>./libTests/referenceTestCases/kapila/AddPhysicalEffects/gravity/</testCase> -->
+  <!-- <testCase>./libTests/referenceTestCases/kapila/AddPhysicalEffects/heatConduction/simple/</testCase> -->
   <!-- <testCase>./libTests/referenceTestCases/kapila/3D/unstructured/</testCase> -->
   <!-- <testCase>./libTests/referenceTestCases/kapila/3D/shockBubble/heliumAir/</testCase> -->
-    
+
   <!-- Thermal and Mechanical equilibrium reference test cases -->
   <!-- ------------------------------------------------------- -->
   <!-- <testCase>./libTests/referenceTestCases/thermalEq/transports/interfaceAirHelium/</testCase> -->
@@ -50,5 +55,4 @@
   <!-- <testCase>./libTests/referenceTestCases/multiP/1D/shockTubes/interfaceWaterAir/</testCase> -->
   <!-- <testCase>./libTests/referenceTestCases/multiP/1D/shockTubes/epoxySpinel/</testCase> -->
   <!-- <testCase>./libTests/referenceTestCases/multiP/1D/cavitation/</testCase> -->
-
 </ecogen>

@@ -34,8 +34,6 @@
 
 #include "Relaxation.h"
 
-using namespace std;
-
 //***********************************************************************
 
 Relaxation::Relaxation(){}

@@ -28,18 +28,15 @@
 //  If not, see <http://www.gnu.org/licenses/>.
 
 //! \file      ModKapila.cpp
-//! \author    F. Petitpas, K. Schmidmayer
-//! \version   1.0
-//! \date      December 20 2017
+//! \author    F. Petitpas, K. Schmidmayer, J. Caze
+//! \version   1.1
+//! \date      May 07 2020
 
-#include <iostream>
 #include <cmath>
 #include <algorithm>
 #include "ModKapila.h"
 #include "PhaseKapila.h"
 #include "../../Relaxations/RelaxationP.h"
-
-using namespace std;
 
 const std::string ModKapila::NAME = "KAPILA";
 
@@ -48,17 +45,22 @@ const std::string ModKapila::NAME = "KAPILA";
 ModKapila::ModKapila(int &numberTransports, const int &numberPhases) :
   Model(NAME,numberTransports)
 {
-  fluxBufferKapila = new FluxKapila(this,numberPhases);
-  sourceConsKap = new FluxKapila(this, numberPhases);
+  fluxBuff = new FluxKapila(this,numberPhases);
   m_relaxations.push_back(new RelaxationP); //Pressure relaxation imposed in this model
+  for (int i = 0; i < 4; i++) {
+    sourceCons.push_back(new FluxKapila(this,numberPhases));
+  }
 }
 
 //***********************************************************************
 
 ModKapila::~ModKapila()
 {
-  delete fluxBufferKapila;
-  delete sourceConsKap;
+  delete fluxBuff;
+  for (int i = 0; i < 4; i++) {
+    delete sourceCons[i];
+  }
+  sourceCons.clear();
 }
 
 //***********************************************************************
@@ -86,8 +88,8 @@ void ModKapila::allocateMixture(Mixture **mixture)
 
 void ModKapila::fulfillState(Phase **phases, Mixture *mixture, const int &numberPhases, Prim type)
 {
-  //Specific to resume simulation
-  if (type == resume) {
+  //Specific to restart simulation
+  if (type == restart) {
     for (int k = 0; k < numberPhases; k++) { phases[k]->setPressure(mixture->getPressure()); }
   }
   //Complete phases state
@@ -114,16 +116,16 @@ void ModKapila::solveRiemannIntern(Cell &cellLeft, Cell &cellRight, const int &n
   double uR = cellRight.getMixture()->getVelocity().getX(), cR = cellRight.getMixture()->getFrozenSoundSpeed(), pR = cellRight.getMixture()->getPressure(), rhoR = cellRight.getMixture()->getDensity();
 
   //Davies
-  sL = min(uL - cL, uR - cR);
-  sR = max(uR + cR, uL + cL);
+  sL = std::min(uL - cL, uR - cR);
+  sR = std::max(uR + cR, uL + cL);
 
-  if (abs(sL)>1.e-3) dtMax = min(dtMax, dxLeft / abs(sL));
-  if (abs(sR)>1.e-3) dtMax = min(dtMax, dxRight / abs(sR));
+  if (std::fabs(sL)>1.e-3) dtMax = std::min(dtMax, dxLeft / std::fabs(sL));
+  if (std::fabs(sR)>1.e-3) dtMax = std::min(dtMax, dxRight / std::fabs(sR));
 
   //compute left and right mass flow rates and sM
   double mL(rhoL*(sL - uL)), mR(rhoR*(sR - uR)), mkL, mkR;
   double sM((pR - pL + mL*uL - mR*uR) / (mL - mR));
-  if (abs(sM)<1.e-8) sM = 0.;
+  if (std::fabs(sM)<1.e-8) sM = 0.;
 
   //Solution sampling
   if (sL >= 0.){
@@ -132,16 +134,16 @@ void ModKapila::solveRiemannIntern(Cell &cellLeft, Cell &cellRight, const int &n
       double alpha = vecPhase->getAlpha();
       double density = vecPhase->getDensity();
       double energie = vecPhase->getEnergy();
-      fluxBufferKapila->m_alpha[k] = alpha*sM;
-      fluxBufferKapila->m_masse[k] = alpha*density*uL;
-      fluxBufferKapila->m_energ[k] = alpha*density*energie*uL;
+      static_cast<FluxKapila*> (fluxBuff)->m_alpha[k] = alpha*sM;
+      static_cast<FluxKapila*> (fluxBuff)->m_masse[k] = alpha*density*uL;
+      static_cast<FluxKapila*> (fluxBuff)->m_energ[k] = alpha*density*energie*uL;
     }
     double vitY = cellLeft.getMixture()->getVelocity().getY(); double vitZ = cellLeft.getMixture()->getVelocity().getZ();
     double totalEnergy = cellLeft.getMixture()->getEnergy() + 0.5*cellLeft.getMixture()->getVelocity().squaredNorm();
-    fluxBufferKapila->m_qdm.setX(rhoL*uL*uL + pL);
-    fluxBufferKapila->m_qdm.setY(rhoL*vitY*uL);
-    fluxBufferKapila->m_qdm.setZ(rhoL*vitZ*uL);
-    fluxBufferKapila->m_energMixture = (rhoL*totalEnergy + pL)*uL;
+    static_cast<FluxKapila*> (fluxBuff)->m_qdm.setX(rhoL*uL*uL + pL);
+    static_cast<FluxKapila*> (fluxBuff)->m_qdm.setY(rhoL*vitY*uL);
+    static_cast<FluxKapila*> (fluxBuff)->m_qdm.setZ(rhoL*vitZ*uL);
+    static_cast<FluxKapila*> (fluxBuff)->m_energMixture = (rhoL*totalEnergy + pL)*uL;
 
   }
   else if (sR <= 0.){
@@ -150,16 +152,16 @@ void ModKapila::solveRiemannIntern(Cell &cellLeft, Cell &cellRight, const int &n
       double alpha = vecPhase->getAlpha();
       double density = vecPhase->getDensity();
       double energie = vecPhase->getEnergy();
-      fluxBufferKapila->m_alpha[k] = alpha*sM;
-      fluxBufferKapila->m_masse[k] = alpha*density*uR;
-      fluxBufferKapila->m_energ[k] = alpha*density*energie*uR;
+      static_cast<FluxKapila*> (fluxBuff)->m_alpha[k] = alpha*sM;
+      static_cast<FluxKapila*> (fluxBuff)->m_masse[k] = alpha*density*uR;
+      static_cast<FluxKapila*> (fluxBuff)->m_energ[k] = alpha*density*energie*uR;
     }
     double vitY = cellRight.getMixture()->getVelocity().getY(); double vitZ = cellRight.getMixture()->getVelocity().getZ();
     double totalEnergy = cellRight.getMixture()->getEnergy() + 0.5*cellRight.getMixture()->getVelocity().squaredNorm();
-    fluxBufferKapila->m_qdm.setX(rhoR*uR*uR + pR);
-    fluxBufferKapila->m_qdm.setY(rhoR*vitY*uR);
-    fluxBufferKapila->m_qdm.setZ(rhoR*vitZ*uR);
-    fluxBufferKapila->m_energMixture = (rhoR*totalEnergy + pR)*uR;
+    static_cast<FluxKapila*> (fluxBuff)->m_qdm.setX(rhoR*uR*uR + pR);
+    static_cast<FluxKapila*> (fluxBuff)->m_qdm.setY(rhoR*vitY*uR);
+    static_cast<FluxKapila*> (fluxBuff)->m_qdm.setZ(rhoR*vitZ*uR);
+    static_cast<FluxKapila*> (fluxBuff)->m_energMixture = (rhoR*totalEnergy + pR)*uR;
 
   }
   else if (sM >= 0.){
@@ -178,14 +180,14 @@ void ModKapila::solveRiemannIntern(Cell &cellLeft, Cell &cellRight, const int &n
       TB->rhokStar[k] = mkL / (sL - sM);
       TB->pkStar[k] = TB->eos[k]->computePressureIsentropic(pressure, density, TB->rhokStar[k]);
       TB->ekStar[k] = TB->eos[k]->computeEnergy(TB->rhokStar[k], TB->pkStar[k]);
-      fluxBufferKapila->m_alpha[k] = alpha*sM;
-      fluxBufferKapila->m_masse[k] = alpha* TB->rhokStar[k] * sM;
-      fluxBufferKapila->m_energ[k] = alpha* TB->rhokStar[k] * TB->ekStar[k] * sM;
+      static_cast<FluxKapila*> (fluxBuff)->m_alpha[k] = alpha*sM;
+      static_cast<FluxKapila*> (fluxBuff)->m_masse[k] = alpha* TB->rhokStar[k] * sM;
+      static_cast<FluxKapila*> (fluxBuff)->m_energ[k] = alpha* TB->rhokStar[k] * TB->ekStar[k] * sM;
     }
-    fluxBufferKapila->m_qdm.setX(rhoStar*sM*sM + pStar);
-    fluxBufferKapila->m_qdm.setY(rhoStar*vitY*sM);
-    fluxBufferKapila->m_qdm.setZ(rhoStar*vitZ*sM);
-    fluxBufferKapila->m_energMixture = (rhoStar*EStar + pStar)*sM;
+    static_cast<FluxKapila*> (fluxBuff)->m_qdm.setX(rhoStar*sM*sM + pStar);
+    static_cast<FluxKapila*> (fluxBuff)->m_qdm.setY(rhoStar*vitY*sM);
+    static_cast<FluxKapila*> (fluxBuff)->m_qdm.setZ(rhoStar*vitZ*sM);
+    static_cast<FluxKapila*> (fluxBuff)->m_energMixture = (rhoStar*EStar + pStar)*sM;
   }
   else{
     //Compute right solution state
@@ -203,18 +205,18 @@ void ModKapila::solveRiemannIntern(Cell &cellLeft, Cell &cellRight, const int &n
       TB->rhokStar[k] = mkR / (sR - sM);
       TB->pkStar[k] = TB->eos[k]->computePressureIsentropic(pressure, density, TB->rhokStar[k]);
       TB->ekStar[k] = TB->eos[k]->computeEnergy(TB->rhokStar[k], TB->pkStar[k]);
-      fluxBufferKapila->m_alpha[k] = alpha*sM;
-      fluxBufferKapila->m_masse[k] = alpha* TB->rhokStar[k] * sM;
-      fluxBufferKapila->m_energ[k] = alpha* TB->rhokStar[k] * TB->ekStar[k] * sM;
+      static_cast<FluxKapila*> (fluxBuff)->m_alpha[k] = alpha*sM;
+      static_cast<FluxKapila*> (fluxBuff)->m_masse[k] = alpha* TB->rhokStar[k] * sM;
+      static_cast<FluxKapila*> (fluxBuff)->m_energ[k] = alpha* TB->rhokStar[k] * TB->ekStar[k] * sM;
     }
-    fluxBufferKapila->m_qdm.setX(rhoStar*sM*sM + pStar);
-    fluxBufferKapila->m_qdm.setY(rhoStar*vitY*sM);
-    fluxBufferKapila->m_qdm.setZ(rhoStar*vitZ*sM);
-    fluxBufferKapila->m_energMixture = (rhoStar*EStar + pStar)*sM;
+    static_cast<FluxKapila*> (fluxBuff)->m_qdm.setX(rhoStar*sM*sM + pStar);
+    static_cast<FluxKapila*> (fluxBuff)->m_qdm.setY(rhoStar*vitY*sM);
+    static_cast<FluxKapila*> (fluxBuff)->m_qdm.setZ(rhoStar*vitZ*sM);
+    static_cast<FluxKapila*> (fluxBuff)->m_energMixture = (rhoStar*EStar + pStar)*sM;
   }
 
   //Contact discontinuity velocity
-  fluxBufferKapila->m_sM = sM;
+  static_cast<FluxKapila*> (fluxBuff)->m_sM = sM;
 }
 
 //****************************************************************************
@@ -228,24 +230,24 @@ void ModKapila::solveRiemannWall(Cell &cellLeft, const int &numberPhases, const 
 
   double uL = cellLeft.getMixture()->getVelocity().getX(), cL = cellLeft.getMixture()->getFrozenSoundSpeed(), pL = cellLeft.getMixture()->getPressure(), rhoL = cellLeft.getMixture()->getDensity();
 
-  sL = min(uL - cL, -uL - cL);
-  if (abs(sL)>1.e-3) dtMax = min(dtMax, dxLeft / abs(sL));
+  sL = std::min(uL - cL, -uL - cL);
+  if (std::fabs(sL)>1.e-3) dtMax = std::min(dtMax, dxLeft / std::fabs(sL));
 
   pStar = rhoL*(uL - sL)*uL + pL;
 
   for (int k = 0; k < numberPhases; k++)
   {
-    fluxBufferKapila->m_alpha[k] = 0.;
-    fluxBufferKapila->m_masse[k] = 0.;
-    fluxBufferKapila->m_energ[k] = 0.;
+    static_cast<FluxKapila*> (fluxBuff)->m_alpha[k] = 0.;
+    static_cast<FluxKapila*> (fluxBuff)->m_masse[k] = 0.;
+    static_cast<FluxKapila*> (fluxBuff)->m_energ[k] = 0.;
   }
-  fluxBufferKapila->m_qdm.setX(pStar);
-  fluxBufferKapila->m_qdm.setY(0.);
-  fluxBufferKapila->m_qdm.setZ(0.);
-  fluxBufferKapila->m_energMixture = 0.;
+  static_cast<FluxKapila*> (fluxBuff)->m_qdm.setX(pStar);
+  static_cast<FluxKapila*> (fluxBuff)->m_qdm.setY(0.);
+  static_cast<FluxKapila*> (fluxBuff)->m_qdm.setZ(0.);
+  static_cast<FluxKapila*> (fluxBuff)->m_energMixture = 0.;
 
   //Contact discontinuity velocity
-  fluxBufferKapila->m_sM = 0.;
+  static_cast<FluxKapila*> (fluxBuff)->m_sM = 0.;
 }
 
 //****************************************************************************
@@ -258,67 +260,94 @@ void ModKapila::solveRiemannInflow(Cell &cellLeft, const int &numberPhases, cons
   double uL = cellLeft.getMixture()->getVelocity().getX(), cL = cellLeft.getMixture()->getFrozenSoundSpeed(), pL = cellLeft.getMixture()->getPressure(), rhoL = cellLeft.getMixture()->getDensity();
   double vL = cellLeft.getMixture()->getVelocity().getY(), wL = cellLeft.getMixture()->getVelocity().getZ();
 
-  //Compute total enthalpy of injected fluid
+  //Compute total enthalpy of injected fluid and speed of sound
   double rho0 = cellLeft.getMixture()->computeDensity(ak0, rhok0, numberPhases);
   double u0 = m0 / rho0;
+  double c0(0.), p0(0.);
   for (int k = 0;k < numberPhases;k++) {
+    p0 += ak0[k] * pk0[k];
     TB->Hk0[k] = TB->eos[k]->computeTotalEnthalpy(rhok0[k], pk0[k], u0);
     TB->Yk0[k] = ak0[k] * rhok0[k] / rho0;
+    double ck = cellLeft.getPhase(k)->getEos()->computeSoundSpeed(rhok0[k], pk0[k]);
+    c0 += ak0[k]/ std::max((rhok0[k] * ck * ck), epsilonAlphaNull);
   }
+  c0 = 1./ sqrt(rho0 * c0);
 
-  //ITERATIVE PROCESS FOR PRESSURE SOLUTION DETERMINATION
-  //-----------------------------------------------------
+
   //Estimates for acoustic wave sL
   sL = uL - cL;
-  if (abs(sL)>1.e-3) dtMax = min(dtMax, dxLeft / abs(sL));
+  if (std::fabs(sL)>1.e-3) dtMax = std::min(dtMax, dxLeft / std::fabs(sL));
   zL = rhoL*cL;
 
-  int iteration(0);
-  pStar = pL;
-  double f(0.), df(1.);
-  double u, du, v, dv, hk;
+  //Null Mass flow
+  //--------------
+  if (fabs(u0) < 1.e-6) {
+    uStar = 0.;
+    pStar = pL;
+    rhoStar = rhoL;
+    for (int k = 0; k < numberPhases; k++) {
+      TB->vkStar[k] = 1.;
+    }
+  }
+  //Supersonic inflow
+  //-----------------
+  else if (u0 < -c0) {
+    uStar = u0;
+    pStar = p0;
+    rhoStar = rho0;
+    for (int k = 0; k < numberPhases; k++) {
+      TB->vkStar[k] = 1. / rhok0[k];
+    }
+  }
+  else {
+    //Subsonic inflow
+    //---------------
+    int iteration(0);
+    pStar = pL;
+    double f(0.), df(1.);
+    double u, du, hk;
 
-  do {
-    pStar -= f / df; iteration++;
-    if (iteration > 50) Errors::errorMessage("solveRiemannInflow not converged in modKapila");
-    //Physical pressure ?
-    for (int k = 0; k < numberPhases; k++) {
-      TB->eos[k]->verifyAndModifyPressure(pStar);
-    }
-    //Left acoustic relations
-    u = uL + (pL - pStar) / zL;
-    if (u >= -1e-6) u = -1e-6;
-    du = -1. / zL;
-    //Compute from m0, Hk0, Yk0 on the right
-    v = u / m0;
-    dv = du / m0;
-    f = v;
-    df = dv;
-    for (int k = 0; k < numberPhases; k++) {
-      hk = TB->Hk0[k] - 0.5*u*u;
-      TB->vkStar[k] = TB->eos[k]->vfpfh(pStar, hk);
-      double dvk = TB->eos[k]->dvdpch(pStar, hk) - TB->eos[k]->dvdhcp(pStar, hk)*u*du;
-      f -= TB->Yk0[k] * TB->vkStar[k];
-      df -= TB->Yk0[k] * dvk;
-    }
-  } while (abs(f)>1e-10);
+    do {
+      pStar -= f / df; iteration++;
+      if (iteration > 50) Errors::errorMessage("solveRiemannInflow not converged in modKapila");
+      //Physical pressure ?
+      for (int k = 0; k < numberPhases; k++) {
+        TB->eos[k]->verifyAndModifyPressure(pStar);
+      }
+      //Left acoustic relations
+      u = uL + (pL - pStar) / zL;
+      if (u >= -1e-6) u = -1e-6;
+      du = -1. / zL;
+      f = u / u0; df = du / u0;
+      //Compute from m0, Hk0, Yk0 on the right
+      for (int k = 0; k < numberPhases; k++) {
+        hk = TB->Hk0[k] - 0.5 * u * u;
+        TB->vkStar[k] = TB->eos[k]->vfpfh(pStar, hk);
+        double dvk = TB->eos[k]->dvdpch(pStar, hk) - TB->eos[k]->dvdhcp(pStar, hk) * u * du;
+        f -= TB->Yk0[k] * TB->vkStar[k] * rho0;
+        df -= TB->Yk0[k] * dvk * rho0;
+      }
+    } while (std::fabs(f) > 1e-8 && iteration <= 50);
+    uStar = u;
+    rhoStar = m0 / uStar;
+  }
 
   //Flux completion
-  double Estar(0.5*(u*u + vL*vL + wL*wL)), ek, rhok;
+  double Estar(0.5*(uStar * uStar + vL*vL + wL*wL)), ek, rhok;
   for (int k = 0; k<numberPhases; k++) {
     rhok = 1. / TB->vkStar[k];
     ek = TB->eos[k]->computeEnergy(rhok, pStar); Estar += TB->Yk0[k] * ek;
-    fluxBufferKapila->m_alpha[k] = TB->Yk0[k] * TB->vkStar[k] / v*u;
-    fluxBufferKapila->m_masse[k] = fluxBufferKapila->m_alpha[k] * rhok;
-    fluxBufferKapila->m_energ[k] = fluxBufferKapila->m_alpha[k] * rhok*ek;
+    static_cast<FluxKapila*> (fluxBuff)->m_alpha[k] = TB->Yk0[k] * TB->vkStar[k] *rhoStar * uStar;
+    static_cast<FluxKapila*> (fluxBuff)->m_masse[k] = static_cast<FluxKapila*> (fluxBuff)->m_alpha[k] * rhok;
+    static_cast<FluxKapila*> (fluxBuff)->m_energ[k] = static_cast<FluxKapila*> (fluxBuff)->m_alpha[k] * rhok*ek;
   }
-  fluxBufferKapila->m_qdm.setX(u*u / v + pStar);
-  fluxBufferKapila->m_qdm.setY(u*vL / v);
-  fluxBufferKapila->m_qdm.setZ(u*wL / v);
-  fluxBufferKapila->m_energMixture = (Estar / v + pStar)*u;
+  static_cast<FluxKapila*> (fluxBuff)->m_qdm.setX(uStar * uStar * rhoStar + pStar);
+  static_cast<FluxKapila*> (fluxBuff)->m_qdm.setY(uStar *vL * rhoStar);
+  static_cast<FluxKapila*> (fluxBuff)->m_qdm.setZ(uStar *wL * rhoStar);
+  static_cast<FluxKapila*> (fluxBuff)->m_energMixture = (Estar * rhoStar + pStar)* uStar;
 
   //Contact discontinuity velocity
-  fluxBufferKapila->m_sM = u;
+  static_cast<FluxKapila*> (fluxBuff)->m_sM = uStar;
 }
 
 //****************************************************************************
@@ -342,13 +371,13 @@ void ModKapila::solveRiemannTank(Cell &cellLeft, const int &numberPhases, const 
     vecPhase = cellLeft.getPhase(k);
     //TB->rhokStar[k] = TB->eos[k]->computeDensityIsentropic(vecPhase->getPressure(), vecPhase->getDensity(), pStar); //other possiblity
     TB->rhokStar[k] = TB->eos[k]->computeDensityHugoniot(vecPhase->getPressure(), vecPhase->getDensity(), pStar);
-    vStar += vecPhase->getAlpha()*vecPhase->getDensity() / rhoL / max(TB->rhokStar[k], epsilon);
+    vStar += vecPhase->getAlpha()*vecPhase->getDensity() / rhoL / std::max(TB->rhokStar[k], epsilonAlphaNull);
   }
   vmv0 = vStar - 1. / rhoL;
-  if (abs(vmv0) > 1e-10) { mL = sqrt((pL - pStar) / vmv0); }
+  if (std::fabs(vmv0) > 1e-10) { mL = sqrt((pL - pStar) / vmv0); }
   else { mL = zL; }
   sL = uL - mL / rhoL;
-  if (abs(sL)>1.e-3) dtMax = min(dtMax, dxLeft / abs(sL));
+  if (std::fabs(sL)>1.e-3) dtMax = std::min(dtMax, dxLeft / std::fabs(sL));
   sM = uL + mL*vmv0;
 
   //2) Check for pathologic cases
@@ -403,7 +432,7 @@ void ModKapila::solveRiemannTank(Cell &cellLeft, const int &numberPhases, const 
       if (p > p0) { p = p0 - 1e-6; }
       tabp[iteration - 1] = p; tabf[iteration - 1] = f;
       if (iteration > 50) {
-        for (int i = 0; i < 50; i++) { cout << tabp[i] << " " << tabf[i] << endl; }
+        for (int i = 0; i < 50; i++) { std::cout << tabp[i] << " " << tabf[i] << std::endl; }
         Errors::errorMessage("solveRiemannTank not converged in modKapila");
       }
       //R) Tank rekations in the right (H=cte et sk=cste)
@@ -420,14 +449,14 @@ void ModKapila::solveRiemannTank(Cell &cellLeft, const int &numberPhases, const 
       vStarL = 0.; dvStarL = 0.;
       for (int k = 0; k < numberPhases; k++) {
         vecPhase = cellLeft.getPhase(k);
-        //rhok = TB->eos[k]->computeDensityIsentropic(vecPhase->getPressure(), vecPhase->getDensity(), p, &drhok); //other possiblity
-        rhok = TB->eos[k]->computeDensityHugoniot(vecPhase->getPressure(), vecPhase->getDensity(), p, &drhok);
+        rhok = TB->eos[k]->computeDensityIsentropic(vecPhase->getPressure(), vecPhase->getDensity(), p, &drhok); //other possiblity
+        //rhok = TB->eos[k]->computeDensityHugoniot(vecPhase->getPressure(), vecPhase->getDensity(), p, &drhok);
         YkL = vecPhase->getAlpha()*vecPhase->getDensity() / rhoL;
-        vStarL += YkL / max(rhok, epsilon);
-        dvStarL -= YkL / max((rhok * rhok), epsilon) * drhok;
+        vStarL += YkL / std::max(rhok, epsilonAlphaNull);
+        dvStarL -= YkL / std::max((rhok * rhok), epsilonAlphaNull) * drhok;
       }
       vmv0 = vStarL - 1. / rhoL;
-      if (abs(vmv0) > 1e-10) {
+      if (std::fabs(vmv0) > 1e-10) {
         mL = sqrt((pL - p) / vmv0);
         dmL = 0.5*(-vmv0 + (p - pL)*dvStarL) / (vmv0*vmv0) / mL;
       }
@@ -436,19 +465,19 @@ void ModKapila::solveRiemannTank(Cell &cellLeft, const int &numberPhases, const 
         dmL = 0.;
       }
       sL = uL - mL / rhoL;
-      if (abs(sL)>1.e-3) dtMax = min(dtMax, dxLeft / abs(sL));
+      if (std::fabs(sL)>1.e-3) dtMax = std::min(dtMax, dxLeft / std::fabs(sL));
       uStarL = uL + mL*vmv0;
       duStarL = dmL*vmv0 + mL*dvStarL;
       //solved function
       f = uStarR - uStarL;
       df = duStarR - duStarL;
-    } while (abs(f)>1e-2); //End iterative loop
+    } while (std::fabs(f)>1e-2); //End iterative loop
     pStar = p;
     uStar = 0.5*(uStarL + uStarR);
     rhoStar = 0.;
     for (int k = 0; k < numberPhases; k++) { 
       TB->YkStar[k] = TB->Yk0[k];
-      rhoStar += TB->YkStar[k] / max(TB->rhokStar[k], epsilon);
+      rhoStar += TB->YkStar[k] / std::max(TB->rhokStar[k], epsilonAlphaNull);
     }
     rhoStar = 1. / rhoStar;
     uyStar = 0.;
@@ -461,17 +490,17 @@ void ModKapila::solveRiemannTank(Cell &cellLeft, const int &numberPhases, const 
   double EStar(0.5*(uStar*uStar + uyStar*uyStar + uzStar*uzStar)), ek;
   for (int k = 0; k < numberPhases; k++) {
     ek = TB->eos[k]->computeEnergy(TB->rhokStar[k], pStar); EStar += TB->YkStar[k] * ek;
-    fluxBufferKapila->m_alpha[k] = TB->YkStar[k] * rhoStar / max(TB->rhokStar[k], epsilon) * uStar;
-    fluxBufferKapila->m_masse[k] = fluxBufferKapila->m_alpha[k] * TB->rhokStar[k];
-    fluxBufferKapila->m_energ[k] = fluxBufferKapila->m_masse[k] * ek;
+    static_cast<FluxKapila*> (fluxBuff)->m_alpha[k] = TB->YkStar[k] * rhoStar / std::max(TB->rhokStar[k], epsilonAlphaNull) * uStar;
+    static_cast<FluxKapila*> (fluxBuff)->m_masse[k] = static_cast<FluxKapila*> (fluxBuff)->m_alpha[k] * TB->rhokStar[k];
+    static_cast<FluxKapila*> (fluxBuff)->m_energ[k] = static_cast<FluxKapila*> (fluxBuff)->m_masse[k] * ek;
   }
-  fluxBufferKapila->m_qdm.setX(rhoStar*uStar*uStar + pStar);
-  fluxBufferKapila->m_qdm.setY(rhoStar*uStar*uyStar);
-  fluxBufferKapila->m_qdm.setZ(rhoStar*uStar*uzStar);
-  fluxBufferKapila->m_energMixture = (rhoStar*EStar + pStar)*uStar;
+  static_cast<FluxKapila*> (fluxBuff)->m_qdm.setX(rhoStar*uStar*uStar + pStar);
+  static_cast<FluxKapila*> (fluxBuff)->m_qdm.setY(rhoStar*uStar*uyStar);
+  static_cast<FluxKapila*> (fluxBuff)->m_qdm.setZ(rhoStar*uStar*uzStar);
+  static_cast<FluxKapila*> (fluxBuff)->m_energMixture = (rhoStar*EStar + pStar)*uStar;
 
   //Contact discontinuity velocity
-  fluxBufferKapila->m_sM = uStar;
+  static_cast<FluxKapila*> (fluxBuff)->m_sM = uStar;
 }
 
 //****************************************************************************
@@ -480,7 +509,6 @@ void ModKapila::solveRiemannOutflow(Cell &cellLeft, const int &numberPhases, con
 {
   double sL, sM, zL;
   double pStar(p0), EStar(0.), vStar(0.), uStar(0.);
-  Phase *vecPhase;
 
   double uL = cellLeft.getMixture()->getVelocity().getX(), cL = cellLeft.getMixture()->getFrozenSoundSpeed(), pL = cellLeft.getMixture()->getPressure(), rhoL = cellLeft.getMixture()->getDensity();
   double uyL = cellLeft.getMixture()->getVelocity().getY(), uzL = cellLeft.getMixture()->getVelocity().getZ(), EL = cellLeft.getMixture()->getEnergy() + 0.5*cellLeft.getMixture()->getVelocity().squaredNorm();
@@ -490,15 +518,15 @@ void ModKapila::solveRiemannOutflow(Cell &cellLeft, const int &numberPhases, con
   //--------------------------------------
   double vSmvL, mL(zL);
   for (int k = 0; k < numberPhases; k++) {
-    vecPhase = cellLeft.getPhase(k);
-    TB->rhokStar[k] = TB->eos[k]->computeDensityIsentropic(pL, vecPhase->getDensity(), pStar); //other possiblity
-    //TB->rhokStar[k] = TB->eos[k]->computeDensityHugoniot(pL, vecPhase->getDensity(), pStar);
-    vStar += vecPhase->getAlpha()*vecPhase->getDensity() /rhoL / max(TB->rhokStar[k], epsilon);
+    //TB->rhokStar[k] = TB->eos[k]->computeDensityIsentropic(pL, vecPhase->getDensity(), pStar); //other possiblity
+    TB->rhokStar[k] = TB->eos[k]->computeDensityHugoniot(pL, cellLeft.getPhase(k)->getDensity(), pStar);
+    vStar += cellLeft.getPhase(k)->getAlpha()*cellLeft.getPhase(k)->getDensity() /rhoL / std::max(TB->rhokStar[k], epsilonAlphaNull);
   }
   vSmvL = vStar - 1. / rhoL;
   if (abs(vSmvL) > 1e-10) { mL = sqrt((pL - pStar) / vSmvL); }
+  else { mL = zL; }
   sL = uL - mL / rhoL;
-  if (abs(sL)>1.e-3) dtMax = min(dtMax, dxLeft / abs(sL));
+  if (std::fabs(sL)>1.e-3) dtMax = std::min(dtMax, dxLeft / std::fabs(sL));
   sM = uL + mL*vSmvL;
 
   //Pathologic case sL>0
@@ -507,41 +535,38 @@ void ModKapila::solveRiemannOutflow(Cell &cellLeft, const int &numberPhases, con
     pStar = pL;
     for (int k = 0; k < numberPhases; k++) { TB->rhokStar[k] = cellLeft.getPhase(k)->getDensity(); }
     vStar = 1. / rhoL;
-    EStar = EL;
   }
   else if (sM < 0) { //Inflow conditions : the outflow assumption is not adapted
-    uStar = uL;
-    pStar = pL;
+    uStar = sM;
     for (int k = 0; k < numberPhases; k++) { TB->rhokStar[k] = cellLeft.getPhase(k)->getDensity(); }
     vStar = 1. / rhoL;
-    EStar = EL;
   }
   else { //imposed pressure outflow OK
     uStar = sM;
-    EStar = EL + (uStar - uL)*(uStar - pL / mL);
   }
 
   //Flux completion
   double ekStar;
+  EStar = 0.5*(uStar*uStar + uyL * uyL + uzL * uzL);
   for (int k = 0; k < numberPhases; k++) {
-    vecPhase = cellLeft.getPhase(k);
-    double YkL = vecPhase->getAlpha()*vecPhase->getDensity() / rhoL;
+    double YkL = cellLeft.getPhase(k)->getAlpha()*cellLeft.getPhase(k)->getDensity() / rhoL;
     ekStar = TB->eos[k]->computeEnergy(TB->rhokStar[k], pStar);
-    fluxBufferKapila->m_alpha[k] = YkL / max(TB->rhokStar[k], epsilon) / vStar * uStar;
-    fluxBufferKapila->m_masse[k] = fluxBufferKapila->m_alpha[k] * TB->rhokStar[k];
-    fluxBufferKapila->m_energ[k] = fluxBufferKapila->m_masse[k] * ekStar;
+    static_cast<FluxKapila*> (fluxBuff)->m_alpha[k] = YkL / std::max(TB->rhokStar[k], epsilonAlphaNull) / vStar * uStar;
+    static_cast<FluxKapila*> (fluxBuff)->m_masse[k] = static_cast<FluxKapila*> (fluxBuff)->m_alpha[k] * TB->rhokStar[k];
+    static_cast<FluxKapila*> (fluxBuff)->m_energ[k] = static_cast<FluxKapila*> (fluxBuff)->m_masse[k] * ekStar;
+    EStar += YkL * ekStar;
   }
-  fluxBufferKapila->m_qdm.setX(uStar*uStar / vStar + pStar);
-  fluxBufferKapila->m_qdm.setY(uStar*uyL / vStar);
-  fluxBufferKapila->m_qdm.setZ(uStar*uzL / vStar);
-  fluxBufferKapila->m_energMixture = (EStar / vStar + pStar)*uStar;
+  static_cast<FluxKapila*> (fluxBuff)->m_qdm.setX(uStar*uStar / vStar + pStar);
+  static_cast<FluxKapila*> (fluxBuff)->m_qdm.setY(uStar*uyL / vStar);
+  static_cast<FluxKapila*> (fluxBuff)->m_qdm.setZ(uStar*uzL / vStar);
+  static_cast<FluxKapila*> (fluxBuff)->m_energMixture = (EStar / vStar + pStar)*uStar;
 
   //Contact discontinuity velocity
-  fluxBufferKapila->m_sM = uStar;
+  static_cast<FluxKapila*> (fluxBuff)->m_sM = uStar;
 
-  //Specific mass flow rate output (kg/s/m²)
+  //Specific mass flow rate output (kg/s/mï¿½)
   for (int k = 0; k < numberPhases; k++) {
-    debitSurf[k] = fluxBufferKapila->m_masse[k];
+    debitSurf[k] = static_cast<FluxKapila*> (fluxBuff)->m_masse[k];
   }
 }
 
@@ -552,7 +577,7 @@ void ModKapila::solveRiemannOutflow(Cell &cellLeft, const int &numberPhases, con
 void ModKapila::solveRiemannTransportIntern(Cell &cellLeft, Cell &cellRight, const int &numberTransports)
 {
 	for (int k = 0; k < numberTransports; k++) {
-		fluxBufferTransport[k].solveRiemann(cellLeft.getTransport(k).getValue(), cellRight.getTransport(k).getValue(), fluxBufferKapila->m_sM);
+		fluxBufferTransport[k].solveRiemann(cellLeft.getTransport(k).getValue(), cellRight.getTransport(k).getValue(), static_cast<FluxKapila*> (fluxBuff)->m_sM);
 	}
 }
 
@@ -570,7 +595,7 @@ void ModKapila::solveRiemannTransportWall(const int &numberTransports)
 void ModKapila::solveRiemannTransportInflow(Cell &cellLeft, const int &numberTransports, double *valueTransports)
 {
 	for (int k = 0; k < numberTransports; k++) {
-    fluxBufferTransport[k].solveRiemannInflow(cellLeft.getTransport(k).getValue(), fluxBufferKapila->m_sM, valueTransports[k]);
+    fluxBufferTransport[k].solveRiemannInflow(cellLeft.getTransport(k).getValue(), static_cast<FluxKapila*> (fluxBuff)->m_sM, valueTransports[k]);
 	}
 }
 
@@ -579,7 +604,7 @@ void ModKapila::solveRiemannTransportInflow(Cell &cellLeft, const int &numberTra
 void ModKapila::solveRiemannTransportTank(Cell &cellLeft, const int &numberTransports, double *valueTransports)
 {
 	for (int k = 0; k < numberTransports; k++) {
-    fluxBufferTransport[k].solveRiemannTank(cellLeft.getTransport(k).getValue(), fluxBufferKapila->m_sM, valueTransports[k]);
+    fluxBufferTransport[k].solveRiemannTank(cellLeft.getTransport(k).getValue(), static_cast<FluxKapila*> (fluxBuff)->m_sM, valueTransports[k]);
 	}
 }
 
@@ -588,22 +613,15 @@ void ModKapila::solveRiemannTransportTank(Cell &cellLeft, const int &numberTrans
 void ModKapila::solveRiemannTransportOutflow(Cell &cellLeft, const int &numberTransports, double *valueTransports)
 {
 	for (int k = 0; k < numberTransports; k++) {
-    fluxBufferTransport[k].solveRiemannOutflow(cellLeft.getTransport(k).getValue(), fluxBufferKapila->m_sM, valueTransports[k]);
+    fluxBufferTransport[k].solveRiemannOutflow(cellLeft.getTransport(k).getValue(), static_cast<FluxKapila*> (fluxBuff)->m_sM, valueTransports[k]);
 	}
 }
 
 //****************************************************************************
 
-double ModKapila::getSM()
+const double& ModKapila::getSM()
 {
-  return fluxBufferKapila->m_sM;
-}
-
-//****************************************************************************
-
-Coord ModKapila::getVelocity(Cell *cell) const
-{
-  return cell->getMixture()->getVelocity();
+  return static_cast<FluxKapila*> (fluxBuff)->m_sM;
 }
 
 //****************************************************************************
@@ -613,17 +631,10 @@ Coord ModKapila::getVelocity(Cell *cell) const
 void ModKapila::reverseProjection(const Coord normal, const Coord tangent, const Coord binormal) const
 {
   Coord fluxProjete;
-  fluxProjete.setX(normal.getX()*fluxBufferKapila->m_qdm.getX() + tangent.getX()*fluxBufferKapila->m_qdm.getY() + binormal.getX()*fluxBufferKapila->m_qdm.getZ());
-  fluxProjete.setY(normal.getY()*fluxBufferKapila->m_qdm.getX() + tangent.getY()*fluxBufferKapila->m_qdm.getY() + binormal.getY()*fluxBufferKapila->m_qdm.getZ());
-  fluxProjete.setZ(normal.getZ()*fluxBufferKapila->m_qdm.getX() + tangent.getZ()*fluxBufferKapila->m_qdm.getY() + binormal.getZ()*fluxBufferKapila->m_qdm.getZ());
-  fluxBufferKapila->m_qdm.setXYZ(fluxProjete.getX(), fluxProjete.getY(), fluxProjete.getZ());
-}
-
-//****************************************************************************
-
-string ModKapila::whoAmI() const
-{
-  return m_name;
+  fluxProjete.setX(normal.getX()*static_cast<FluxKapila*> (fluxBuff)->m_qdm.getX() + tangent.getX()*static_cast<FluxKapila*> (fluxBuff)->m_qdm.getY() + binormal.getX()*static_cast<FluxKapila*> (fluxBuff)->m_qdm.getZ());
+  fluxProjete.setY(normal.getY()*static_cast<FluxKapila*> (fluxBuff)->m_qdm.getX() + tangent.getY()*static_cast<FluxKapila*> (fluxBuff)->m_qdm.getY() + binormal.getY()*static_cast<FluxKapila*> (fluxBuff)->m_qdm.getZ());
+  fluxProjete.setZ(normal.getZ()*static_cast<FluxKapila*> (fluxBuff)->m_qdm.getX() + tangent.getZ()*static_cast<FluxKapila*> (fluxBuff)->m_qdm.getY() + binormal.getZ()*static_cast<FluxKapila*> (fluxBuff)->m_qdm.getZ());
+  static_cast<FluxKapila*> (fluxBuff)->m_qdm.setXYZ(fluxProjete.getX(), fluxProjete.getY(), fluxProjete.getZ());
 }
 
 //****************************************************************************

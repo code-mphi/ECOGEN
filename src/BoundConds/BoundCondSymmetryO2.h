@@ -33,7 +33,7 @@
 //! \file      BoundCondSymmetryO2.h
 //! \author    F. Petitpas, K. Schmidmayer
 //! \version   1.0
-//! \date      December 20 2017
+//! \date      February 13 2019
 
 #include "BoundCondWallO2.h"
 
@@ -46,12 +46,12 @@ public:
   BoundCondSymmetryO2(int numPhysique);
   virtual ~BoundCondSymmetryO2();
 
-  virtual void creeLimite(CellInterface **face);
+  virtual void creeLimite(TypeMeshContainer<CellInterface *> &cellInterfaces);
 
   virtual int whoAmI() const { return 6; };
 
   //Pour methode AMR
-  virtual void creerBordChild();  /*!< Creer un bord enfant (non initialize) */
+  virtual void creerCellInterfaceChild();  /*!< Creer un child cell interface (non initialize) */
 
 protected:
 

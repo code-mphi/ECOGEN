@@ -35,8 +35,6 @@
 #include "IO.h"
 #include "../Errors.h"
 
-using namespace std;
-
 //***********************************************************************
 
 IO::IO(){}
@@ -47,7 +45,7 @@ IO::~IO(){}
 
 //***********************************************************************
 
-ostream& IO::writeb64Chaine(ostream &fluxSortie, char *chaine, int &tailleChaine)
+std::ostream& IO::writeb64Chaine(std::ostream &fluxSortie, char *chaine, int &tailleChaine)
 {
   std::string chaineEncodee;
   //int tailleChaine = chaineAEncoder.size();
@@ -94,20 +92,20 @@ ostream& IO::writeb64Chaine(ostream &fluxSortie, char *chaine, int &tailleChaine
 
 //***********************************************************************
 
-void IO::copieFichier(string file, string dossierSource, string dossierDestination)
+void IO::copieFichier(std::string file, std::string dossierSource, std::string dossierDestination)
 {
   try {
-    ifstream fichierSource;
-    ofstream fichierDestination;
+    std::ifstream fichierSource;
+    std::ofstream fichierDestination;
 
     fichierSource.open((dossierSource + file).c_str());
     fichierDestination.open((dossierDestination + file).c_str());
-    //cout << "copie : " << dossierSource + file << " -> " << dossierDestination + file << endl;
+    //std::cout << "copie : " << dossierSource + file << " -> " << dossierDestination + file << std::endl;
     if (!fichierSource) throw ErrorECOGEN("IO::copieFichier : file non trouve \"" + dossierSource + file + "\"", __FILE__, __LINE__);
     if (!fichierDestination) throw ErrorECOGEN("IO::copieFichier : dossier non trouve \"" + dossierDestination + "\"", __FILE__, __LINE__);
 
-    string ligne;
-    while (getline(fichierSource, ligne)) { fichierDestination << ligne << endl; }
+    std::string ligne;
+    while (getline(fichierSource, ligne)) { fichierDestination << ligne << std::endl; }
   }
   catch (ErrorECOGEN &) { throw; }
 }

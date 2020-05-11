@@ -28,18 +28,17 @@
 //  If not, see <http://www.gnu.org/licenses/>.
 
 //! \file      GDHalfSpace.cpp
-//! \author    F. Petitpas
-//! \version   1.0
-//! \date      December 19 2017
+//! \author    F. Petitpas, K. Schmidmayer
+//! \version   1.1
+//! \date      June 5 2019
 
 #include "GDHalfSpace.h"
 
-using namespace std;
 using namespace tinyxml2;
 
 //***************************************************************
 
-GDHalfSpace::GDHalfSpace(string name, vector<Phase*> vecPhases, Mixture *mixture, vector<Transport> vecTransports, XMLElement *element, const int &physicalEntity, string fileName) :
+GDHalfSpace::GDHalfSpace(std::string name, std::vector<Phase*> vecPhases, Mixture *mixture, std::vector<Transport> vecTransports, XMLElement *element, const int &physicalEntity, std::string fileName) :
   GeometricalDomain(name, vecPhases, mixture, vecTransports, physicalEntity)
 {
   XMLElement *sousElement(element->FirstChildElement("dataHalfSpace"));
@@ -50,15 +49,15 @@ GDHalfSpace::GDHalfSpace(string name, vector<Phase*> vecPhases, Mixture *mixture
   //Origin
   error = sousElement->QueryDoubleAttribute("origin", &m_position);
   if (error != XML_NO_ERROR) throw ErrorXMLAttribut("origin", fileName, __FILE__, __LINE__);
-  //Axe
-  string axe(sousElement->Attribute("axe"));
-  Tools::uppercase(axe);
-  if      (axe == "X"){ m_axe = X; }
-  else if (axe == "Y"){ m_axe = Y; }
-  else if (axe == "Z"){ m_axe = Z; }
-  else { throw ErrorXMLAttribut("axe", fileName, __FILE__, __LINE__); }
+  //Axis
+  std::string axis(sousElement->Attribute("axis"));
+  Tools::uppercase(axis);
+  if      (axis == "X"){ m_axis = X; }
+  else if (axis == "Y"){ m_axis = Y; }
+  else if (axis == "Z"){ m_axis = Z; }
+  else { throw ErrorXMLAttribut("axis", fileName, __FILE__, __LINE__); }
   //Direction
-  string direction(sousElement->Attribute("direction"));
+  std::string direction(sousElement->Attribute("direction"));
   Tools::uppercase(direction);
   if      (direction == "POSITIVE"){ m_direction = 1; }
   else if (direction == "NEGATIVE"){ m_direction = -1; }
@@ -74,7 +73,7 @@ GDHalfSpace::~GDHalfSpace(){}
 bool GDHalfSpace::belong(Coord &posElement, const int &lvl) const
 {
   bool result(false);
-  switch (m_axe)
+  switch (m_axis)
   {
   case X:
     if (m_direction >= 0){if (posElement.getX() >= m_position) result = true;}
@@ -93,6 +92,37 @@ bool GDHalfSpace::belong(Coord &posElement, const int &lvl) const
     break;
   }
   return result;
+}
+
+//***************************************************************
+
+void GDHalfSpace::fillIn(Cell *cell, const int &numberPhases, const int &numberTransports) const
+{
+  //As basic fillIn: Test if the cell belongs to the geometrical domain
+  bool belongs(true);
+  if (cell->getElement() != 0) {
+    Coord coord(cell->getPosition());
+    if (!this->belong(coord, cell->getLvl())) { belongs = false; }
+    //Test if the cell belongs to physical mesh entity (for unstructured meshes)
+    if (cell->getElement()->getAppartenancePhysique() > 0 && m_physicalEntity > 0) {
+      if(cell->getElement()->getAppartenancePhysique() != m_physicalEntity) { belongs = false; }
+    }
+  }
+
+  if (belongs) {
+    for (int k = 0; k < numberPhases; k++) { cell->copyPhase(k, m_vecPhases[k]); }
+    cell->copyMixture(m_mixture);
+    for (int k = 0; k < numberTransports; k++) { cell->setTransport(m_vecTransports[k].getValue(), k); }
+
+    //To uncomment only for special test cases
+    //4. Random velocity perturbations: O(1e−4 u_s)
+    //---------------------------------------------
+    // Coord perturbedVelocity(cell->getMixture()->getVelocity());
+    // perturbedVelocity.setX(static_cast<double>(rand() % 2001 - 1000)/1.e3 * 1.e-3*151.821433232719 + perturbedVelocity.getX());
+    // perturbedVelocity.setY(static_cast<double>(rand() % 2001 - 1000)/1.e3 * 1.e-3*151.821433232719 + perturbedVelocity.getY());
+    // perturbedVelocity.setZ(static_cast<double>(rand() % 2001 - 1000)/1.e3 * 1.e-3*151.821433232719 + perturbedVelocity.getZ());
+    // cell->getMixture()->setVelocity(perturbedVelocity);
+  }
 }
 
 //***************************************************************

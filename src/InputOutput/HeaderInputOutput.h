@@ -43,6 +43,7 @@
 #include "OutputXML.h"
 #include "OutputCutGNU.h"
 #include "OutputProbeGNU.h"
+#include "OutputGlobalGNU.h"
 //#include "OutputCutXML.h"
 
 //Ajouter ici entetes des nouvelles entrees sorties

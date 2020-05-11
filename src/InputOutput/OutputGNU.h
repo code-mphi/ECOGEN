@@ -54,6 +54,7 @@ protected:
   void printBlocGnuplot(std::ofstream &fileStream, int &index, const int &dim);
 
   std::string m_fileNameVisu;
+  std::string m_folderScriptGnuplot;
 };
 
 #endif //OUTPUTGNU_H

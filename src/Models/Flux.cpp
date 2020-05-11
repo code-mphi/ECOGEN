@@ -28,11 +28,16 @@
 //  If not, see <http://www.gnu.org/licenses/>.
 
 //! \file      Flux.cpp
-//! \author    F. Petitpas, K. Schmidmayer, S. Le Martelot
+//! \author    F. Petitpas, K. Schmidmayer, S. Le Martelot, J. Caze
 //! \version   1.0
-//! \date      December 22 2017
+//! \date      November 19 2019
 
 #include "Flux.h"
+
+std::vector<Flux*> sourceCons;
+Flux* fluxBuff;
+
+//****************************************************************************
 
 Flux::Flux(){}
 

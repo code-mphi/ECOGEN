@@ -29,13 +29,11 @@
 
 //! \file      QAPViscosity.cpp
 //! \author    K. Schmidmayer
-//! \version   1.0
-//! \date      December 20 2017
+//! \version   1.1
+//! \date      June 5 2019
 
 #include "QAPViscosity.h"
 #include <iostream>
-
-using namespace std;
 
 //***********************************************************************
 
@@ -43,8 +41,18 @@ QAPViscosity::QAPViscosity(){}
 
 //***********************************************************************
 
-QAPViscosity::QAPViscosity(AddPhys* addPhys) : QuantitiesAddPhys(addPhys), m_gradU(0.), m_gradV(0.), m_gradW(0.)
-{}
+QAPViscosity::QAPViscosity(AddPhys* addPhys) : QuantitiesAddPhys(addPhys), m_grads(3)
+{
+  variableNamesVisc.resize(3);
+  numPhasesVisc.resize(3);
+  for (int i = 0; i < 3; ++i) {
+    m_grads[i] = 0.;
+    numPhasesVisc[i] = -1;
+  }
+  variableNamesVisc[0] = velocityU;
+  variableNamesVisc[1] = velocityV;
+  variableNamesVisc[2] = velocityW;
+}
 
 //***********************************************************************
 
@@ -54,34 +62,14 @@ QAPViscosity::~QAPViscosity(){}
 
 void QAPViscosity::computeQuantities(Cell* cell)
 {
-  m_gradU = cell->computeGradient("u");
-  m_gradV = cell->computeGradient("v");
-  m_gradW = cell->computeGradient("w");
+  cell->computeGradient(m_grads, variableNamesVisc, numPhasesVisc);
 }
 
 //***********************************************************************
 
 void QAPViscosity::setGrad(const Coord &grad, int num)
 {
-  switch (num) {
-  case 1: m_gradU = grad; break;
-  case 2: m_gradV = grad; break;
-  case 3: m_gradW = grad; break;
-  default: Errors::errorMessage("Error in QAPViscosity::setGrad value of num non defined"); break;
-  }
-}
-
-//***********************************************************************
-
-Coord QAPViscosity::getGrad(int num) const
-{
-  switch (num) {
-  case 1: return m_gradU; break;
-  case 2: return m_gradV; break;
-  case 3: return m_gradW; break;
-  default: Errors::errorMessage("Error in QAPViscosity::getGrad value of num non defined"); break;
-  }
-  return 0;
+  m_grads[num-1] = grad;
 }
 
 //***********************************************************************

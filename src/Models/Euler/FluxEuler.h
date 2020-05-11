@@ -31,9 +31,9 @@
 #define FLUXEULER_H
 
 //! \file      FluxEuler.h
-//! \author    F. Petitpas, K. Schmidmayer, S. Le Martelot
-//! \version   1.0
-//! \date      December 22 2017
+//! \author    F. Petitpas, K. Schmidmayer, S. Le Martelot, J. Caze
+//! \version   1.1
+//! \date      November 19 2019
 
 #include <iostream>
 #include "../Flux.h"
@@ -43,11 +43,12 @@
 class FluxEuler : public Flux
 {
   public:
-    FluxEuler();
+    FluxEuler(); //JC//Q why some constructors don't need to take into parameter *model ?
     virtual ~FluxEuler();
 
     virtual void printFlux() const;
     virtual void addFlux(double coefA, const int &numberPhases);
+    virtual void addFlux(Flux* flux, const int& numberPhases);
     virtual void subtractFlux(double coefA, const int &numberPhases);
     virtual void multiply(double scalar, const int &numberPhases);
     virtual void setBufferFlux(Cell &cell, const int &numberPhases);
@@ -61,14 +62,15 @@ class FluxEuler : public Flux
     virtual void addTuyere1D(const Coord normal, const double surface, Cell *cell, const int &numberPhases);
     virtual void subtractTuyere1D(const Coord normal, const double surface, Cell *cell, const int &numberPhases);
 
-    virtual void integrateSourceTermsHeating(Cell *cell, const double &dt, const int &numberPhases, const double &q);
-    virtual void integrateSourceTermsMRF(Cell *cell, const double &dt, const int &numberPhases, const Coord &omega);
+	virtual void addSymmetricTerms(Phase** phases, Mixture* mixture, const int& numberPhases, const double& r, const double& v);
+	virtual void prepSourceTermsHeating(Cell *cell, const double &dt, const int &numberPhases, const double &q);
+    virtual void prepSourceTermsMRF(Cell *cell, const double &dt, const int &numberPhases, const Coord &omega);
 
     // Accessors
     //----------
-    virtual Coord getQdm() const;
-    virtual double getMasseMix() const; 
-    virtual double getEnergyMix() const;
+    virtual const Coord& getQdm() const { return m_qdm; };
+    virtual const double& getMasseMix() const { return m_masse; }; 
+    virtual const double& getEnergyMix() const { return m_energ; };
     virtual void setCons(const Flux *cons, const int &numberPhases);
 
   protected:
@@ -83,9 +85,6 @@ class FluxEuler : public Flux
     friend class APEuler;
 
 };
-
-extern FluxEuler fluxBufferEuler;
-extern FluxEuler sourceConsEul;
 
 #endif // FLUXEULER_H
 

@@ -28,15 +28,13 @@
 //  If not, see <http://www.gnu.org/licenses/>.
 
 //! \file      PhaseThermalEq.cpp
-//! \author    F. Petitpas
-//! \version   1.0
-//! \date      May 04 2018
+//! \author    F. Petitpas, K. Schmidmayer
+//! \version   1.1
+//! \date      June 5 2019
 
 #include "PhaseThermalEq.h"
 #include "../../Eos/Eos.h"
-#include <fstream>
 
-using namespace std;
 using namespace tinyxml2;
 
 //***************************************************************************
@@ -45,7 +43,7 @@ PhaseThermalEq::PhaseThermalEq() :m_alpha(1.0), m_density(0.), m_pressure(0.), m
 
 //***************************************************************************
 
-PhaseThermalEq::PhaseThermalEq(XMLElement *material, Eos *eos, string fileName) : m_eos(eos), m_energie(0.), m_totalEnergy(0.), m_soundSpeed(0.)
+PhaseThermalEq::PhaseThermalEq(XMLElement *material, Eos *eos, std::string fileName) : m_eos(eos), m_energie(0.), m_totalEnergy(0.), m_soundSpeed(0.)
 {
   XMLElement *sousElement(material->FirstChildElement("dataFluid"));
   if (sousElement == NULL) throw ErrorXMLElement("dataFluid", fileName, __FILE__, __LINE__);
@@ -109,7 +107,7 @@ double PhaseThermalEq::returnScalar(const int &numVar) const
 
 //***************************************************************************
 
-string PhaseThermalEq::returnNameScalar(const int &numVar) const
+std::string PhaseThermalEq::returnNameScalar(const int &numVar) const
 {
   switch (numVar)
   {
@@ -159,10 +157,26 @@ void PhaseThermalEq::fillBuffer(double *buffer, int &counter) const
 
 //***************************************************************************
 
+void PhaseThermalEq::fillBuffer(std::vector<double> &dataToSend) const
+{
+  dataToSend.push_back(m_alpha);
+  dataToSend.push_back(static_cast<double>(m_eos->getNumber()));
+}
+
+//***************************************************************************
+
 void PhaseThermalEq::getBuffer(double *buffer, int &counter, Eos **eos)
 {
   m_alpha = buffer[++counter];
   m_eos = eos[static_cast<int>(buffer[++counter])];
+}
+
+//***************************************************************************
+
+void PhaseThermalEq::getBuffer(std::vector<double> &dataToReceive, int &counter, Eos **eos)
+{
+  m_alpha = dataToReceive[counter++];
+  m_eos = eos[static_cast<int>(dataToReceive[counter++])];
 }
 
 //****************************************************************************
@@ -222,7 +236,7 @@ void PhaseThermalEq::getBufferSlopes(double *buffer, int &counter)
 //**************************** VERIFICATION **********************************
 //****************************************************************************
 
-void PhaseThermalEq::verifyPhase(const string &message) const
+void PhaseThermalEq::verifyPhase(const std::string &message) const
 {
   if (m_alpha <= 1e-10) errors.push_back(Errors(message + "too small alpha in verifyPhase"));
   if (m_density <= 1.e-10) errors.push_back(Errors(message + "too small density in verifyPhase"));
@@ -242,38 +256,6 @@ void PhaseThermalEq::verifyAndCorrectPhase()
 //****************************************************************************
 //**************************** DATA ACCESSORS ********************************
 //****************************************************************************
-
-double PhaseThermalEq::getAlpha() const { return m_alpha; }
-
-//***************************************************************************
-
-double PhaseThermalEq::getDensity() const { return m_density; }
-
-//***************************************************************************
-
-double PhaseThermalEq::getPressure() const { return m_pressure; }
-
-//***************************************************************************
-
-Eos* PhaseThermalEq::getEos() const { return m_eos; }
-
-//***************************************************************************
-
-double PhaseThermalEq::getEnergy() const { return m_energie; }
-
-//***************************************************************************
-
-double PhaseThermalEq::getSoundSpeed() const { return m_soundSpeed; }
-
-//***************************************************************************
-
-double PhaseThermalEq::getTotalEnergy() const { return m_totalEnergy; }
-
-//***************************************************************************
-
-double PhaseThermalEq::getTemperature() const { return m_eos->computeTemperature(m_density, m_pressure); }
-
-//***************************************************************************
 
 void PhaseThermalEq::setAlpha(double alpha) { m_alpha = alpha; }
 

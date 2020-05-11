@@ -34,15 +34,13 @@
 
 #include "Model.h"
 
-using namespace std;
-
 //***********************************************************************
 
 Model::Model(){}
 
 //***********************************************************************
 
-Model::Model(const string &name, const int &numberTransports) :
+Model::Model(const std::string &name, const int &numberTransports) :
  m_name(name)
 {
   fluxBufferTransport = 0;
@@ -70,13 +68,14 @@ void Model::relaxations(Cell *cell, const int &numberPhases, Prim type) const
 	for (unsigned int r = 0; r < m_relaxations.size(); r++) {
 		m_relaxations[r]->stiffRelaxation(cell, numberPhases, type);
 	}
+	//FP//TODO// Add condition for not applying the same relaxation twice
 }
 
 //***********************************************************************
 
 void Model::printInfo() const
 {
-  cout << "Model : " << m_name << endl;
+  std::cout << "Model : " << m_name << std::endl;
 }
 
 //***********************************************************************

@@ -28,13 +28,11 @@
 //  If not, see <http://www.gnu.org/licenses/>.
 
 //! \file      Element.cpp
-//! \author    F. Petitpas, K. Schmidmayer, S. Le Martelot
-//! \version   1.0
-//! \date      December 20 2017
+//! \author    F. Petitpas, K. Schmidmayer, S. Le Martelot, B. Dorschner
+//! \version   1.1
+//! \date      June 5 2019
 
 #include "Element.h"
-
-using namespace std;
 
 //***********************************************************************
 
@@ -46,44 +44,9 @@ Element::~Element(){}
 
 //***********************************************************************
 
-void Element::setCellAssociee(const int &numCell)
+void Element::ecritPos(std::ofstream &fileStream, Axis axis)
 {
-  m_numCellAssociee = numCell;
-}
-
-//***********************************************************************
-
-Coord Element::getPosition() const
-{
-  return m_position;
-}
-
-//***********************************************************************
-
-double Element::getLCFL() const
-{
-  return m_lCFL;
-}
-
-//***********************************************************************
-
-double Element::getVolume() const
-{
-  return m_volume;
-}
-
-//***********************************************************************
-
-int Element::getNumCellAssociee() const
-{
-  return m_numCellAssociee;
-}
-
-//***********************************************************************
-
-void Element::ecritPos(ofstream &fileStream, Axe axe)
-{
-  switch (axe) {
+  switch (axis) {
   case X:
     fileStream << m_position.getX() << " "; break;
   case Y:
@@ -91,7 +54,7 @@ void Element::ecritPos(ofstream &fileStream, Axe axe)
   case Z:
     fileStream << m_position.getZ() << " "; break;
   default:
-    Errors::errorMessage("Element::ecritPos : Axe inconnu"); break;
+    Errors::errorMessage("Element::ecritPos : Axis unknown"); break;
   }
 }
 
@@ -183,6 +146,17 @@ bool Element::traverseObjet(const GeometricObject &objet) const
 {
   if (objet.distancePoint(m_position) < m_lCFL) return true;
   return false;
+}
+
+//***********************************************************************
+
+//***********************************************************************
+//*********************** Parallel load balancing ***********************
+//***********************************************************************
+
+void Element::setKey(const decomposition::Key<3> &key)
+{
+  m_key = key;
 }
 
 //***********************************************************************

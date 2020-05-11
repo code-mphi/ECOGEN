@@ -61,7 +61,7 @@ GOLine::~GOLine(){}
 double GOLine::distancePoint(const Coord &vertex) const
 {
   Coord vec; vec.setFromSubtractedVectors(m_point, vertex);
-  if (abs(vec.scalar(m_vecDir)) < 1e-6) { return 0.; }
+  if (std::fabs(vec.scalar(m_vecDir)) < 1e-6) { return 0.; }
   else { return  (vec.cross(m_vecDir)).norm(); }
 }
 

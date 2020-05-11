@@ -7,7 +7,7 @@
 
 	<!-- LIST OF BOUNDARY CONDITIONS -->
 	<boundaryConditions>
-		<boundCond name="axe" type="wall" number="1"/>
+		<boundCond name="axis" type="wall" number="1"/>
 		<boundCond name="wall" type="wall" number="2"/>
 		<boundCond name="entrance" type="tank" number="3">
 			<dataTank p0="2.e5" T0="375."/>
@@ -24,10 +24,10 @@
 	
 	<!--  LIST OF STATES  -->
 	<state name="around">
-		<material type="fluide" EOS="IG_helium.xml">
+		<material type="fluid" EOS="IG_helium.xml">
 			<dataFluid alpha="0.99" density="1.0"/>
 		</material>
-		<material type="fluide" EOS="SG_water.xml">
+		<material type="fluid" EOS="SG_water.xml">
 			<dataFluid alpha="0.01" density="1000.0"/>
 		</material>
 		<mixture>

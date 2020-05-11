@@ -31,9 +31,9 @@
 #define SOURCEGRAVITY_H
 
 //! \file      SourceGravity.h
-//! \author    F. Petitpas, K. Schmidmayer
+//! \author    F. Petitpas, K. Schmidmayer, J. Caze
 //! \version   1.0
-//! \date      January 10 2018
+//! \date      October 29 2019
 
 #include "Source.h"
 
@@ -48,15 +48,13 @@ class SourceGravity : public Source
     //!            ex: <gravity x="0." y="-9.81" z="0." / >
     //! \param     element          XML element to read for source term
     //! \param     fileName         string name of readed XML file
-    SourceGravity(tinyxml2::XMLElement *element, std::string fileName = "Unknown file");
+    SourceGravity(tinyxml2::XMLElement *element, int order, std::string fileName = "Unknown file");
     virtual ~SourceGravity();
 
-    virtual void integrateSourceTerms(Cell *cell, const int &numberPhases, const double &dt);
+    virtual void prepSourceTerms(Cell *cell, const int &numberPhases, const double &dt, const int i = 0);
 
   private:
     Coord m_g;       //! Gravity acceleration vector
-    Axe m_axe;       //! Applicated axe
-    int m_direction; //! -1 for axe in the negative direction, 1 otherwise
 };
 
 #endif // SOURCEGRAVITY_H

@@ -32,28 +32,30 @@
 
 //! \file      Run.h
 //! \author    F. Petitpas, K. Schmidmayer
-//! \version   1.0
-//! \date      June 27 2018
+//! \version   1.1
+//! \date      June 5 2019
 
 class Run;
 
 #include <iostream>
 #include <fstream>
 #include <vector>
+#include <list>
 #include <cmath>
 #include <ctime>
 #include <algorithm>
 #include <sstream>
-#include "Cell.h"
+#include "Tools.h"
+#include "Order1/Cell.h"
 #include "Models/HeaderPhase.h"
-#include "CellInterface.h"
-#include "Parallel.h"
+#include "Order1/CellInterface.h"
+#include "Parallel/Parallel.h"
 #include "Meshes/HeaderMesh.h"
 #include "BoundConds/HeaderBoundCond.h"
 #include "Eos/HeaderEquationOfState.h"
 #include "Models/HeaderModel.h"
 #include "Geometries/HeaderGeometricalDomain.h"
-#include "Ordre2/HeaderLimiter.h"
+#include "Order2/HeaderLimiter.h"
 #include "AdditionalPhysics/HeaderQuantitiesAddPhys.h"
 #include "AdditionalPhysics/HeaderAddPhys.h"
 
@@ -69,7 +71,7 @@ class Run
 {
   public:
     Run(std::string nameCasTest, const int &number);
-    virtual ~Run();
+    ~Run();
 
     //! \brief    Initialization of the simulation
     void initialize(int argc, char* argv[]);
@@ -80,21 +82,21 @@ class Run
     //! \details  Memory desallocations
     void finalize();
     
-    void resumeSimulation(int &iteration, double &dt, double &tempsPhysique);
+    void restartSimulation();
 
     //Accessors
-    int getNumberPhases() const;
+    const int& getNumberPhases() const { return m_numberPhases; };
 
   private:   
 
     //Specific solvers
     void integrationProcedure(double &dt, int lvl, double &dtMax, int &nbCellsTotalAMR);
-    void advancingProcedure(double &dt, int &lvl, double &dtMax) const;
-    void solveHyperbolic(double &dt, int &lvl, double &dtMax) const;
-    void solveHyperbolicO2(double &dt, int &lvl, double &dtMax) const;
-    void solveAdditionalPhysics(double &dt, int &lvl) const;
-    void solveSourceTerms(double &dt, int &lvl) const;
-    void solveRelaxations(int &lvl) const;
+    void advancingProcedure(double &dt, int &lvl, double &dtMax);
+    void solveHyperbolic(double &dt, int &lvl, double &dtMax);
+    void solveHyperbolicO2(double &dt, int &lvl, double &dtMax);
+    void solveAdditionalPhysics(double &dt, int &lvl);
+    void solveSourceTerms(double &dt, int &lvl);
+    void solveRelaxations(int &lvl);
     void verifyErrors() const;
 
     int m_numTest;                             //!<Number of the simulation
@@ -117,8 +119,6 @@ class Run
     //Specific to AMR method
     int m_lvlMax;                              //!<Maximum AMR level (if 0, then no AMR)
     int m_nbCellsTotalAMR;                     //!<Number de mailles total maximum durant la simulation
-    std::vector<Cell *> *m_cellsLvl;           //!<Tableau de vecteurs contenant les cells de compute, un vecteur par niveau.
-    std::vector<CellInterface *> *m_boundariesLvl;   //!<Tableau de vecteurs contenant les boundaries de compute, un vecteur par niveau.
 
     //Geometrical attributes
     bool m_parallelPreTreatment;               //!<Choice for mesh parallel pre-treatment  (needed for first simulation on a new parallel unstructured geometry)
@@ -126,9 +126,10 @@ class Run
     //Calcul attributes
     Mesh *m_mesh;                              //!<Mesh type object: contains all geometrical properties of the simulation
     Model *m_model;                            //!<Model type object: contains the flow model methods
-    Cell **m_cells;                            //!<Array of computational cells objects: contains physical fluids states
-    CellInterface **m_boundaries;              //!<Array of interfaces objects between cells (or between a cell and a boundary)
-    Eos **m_eos;                               //!<Array of Equations of states: contains fluids EOS parameters
+    TypeMeshContainer<Cell *> *m_cellsLvl;                   //!<Array of vectors (one per level) of computational cell objects: Contains physical fluid states.
+    TypeMeshContainer<Cell *> *m_cellsLvlGhost;              //!<Array of vectors (one per level) of ghost cell objects.
+    TypeMeshContainer<CellInterface *> *m_cellInterfacesLvl; //!<Array of vectors (one per level) of interface objects between cells (or between a cell and a physical domain boundary)
+    Eos **m_eos;                               //!<Array of Equations of states: Contains fluid EOS parameters
     std::vector<AddPhys*> m_addPhys;           //!<Vector of Additional physics
     Symmetry *m_symmetry;                      //!<Specific object for symmetry (cylindrical or spherical) if active
     Symmetry *m_symmetryAddPhys;               //!<Object containing the parent class of symmetry to trick the corresponding additional physics argument (avoid taking into account symmetry terms multipled times)
@@ -141,23 +142,28 @@ class Run
     std::vector<std::string> m_nameQPA;        //!<Vector of names of the quantities of additional physics
     std::vector<std::string> m_nameGPH;        //!<Vector of phasic variables name
     double m_dt;                               //!<Explicit time step
+    double m_dtNext;                           //!<Next time step
     double m_physicalTime;                     //!<Physical time
     int m_iteration;                           //!<time iteration number
-    int m_resumeSimulation;                    //!<File number for restarting a simulation
+    int m_restartSimulation;                   //!<File number for restarting a simulation
+    int m_restartAMRsaveFreq;                  //!<Frequency at which a save to restart a simulation is done (usefull only for AMR)
 
     //Input/Output attributes
-	  Input* m_input;						                 //!<Input object
+	Input* m_input;						       //!<Input object
     Output* m_outPut;                          //!<Main output object
     std::vector<Output *> m_cuts;              //!<Vector of output objects for cuts
     std::vector<Output *> m_probes;            //!<Vector of output objects for probes
+	std::vector<Output*> m_globalQuantities;     //!<Vector of output objects for global quantities (mass, total energy)
     timeStats m_stat;                          //!<Object linked to computational time statistics
-    double *m_pMax, *m_pMaxWall;             //!<Maximal pressure found between each written output and its corresponding coordinate (only for few test case)
+    double *m_pMax, *m_pMaxWall;               //!<Maximal pressure found between each written output and its corresponding coordinate (only for few test cases)
+    double m_massWanted, m_alphaWanted;        //!<Mass and corresponding volume fraction for special output (only for few test cases)
 
     friend class Input;
     friend class Output;
     friend class OutputXML;
     friend class OutputGNU;
     friend class OutputProbeGNU;
+	friend class OutputGlobalGNU;
     friend class Mesh;
 };
 

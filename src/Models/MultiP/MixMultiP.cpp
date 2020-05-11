@@ -28,14 +28,13 @@
 //  If not, see <http://www.gnu.org/licenses/>.
 
 //! \file      MixMultiP.cpp
-//! \author    F. Petitpas
-//! \version   1.0
-//! \date      June 5 2017
+//! \author    F. Petitpas, K. Schmidmayer
+//! \version   1.1
+//! \date      June 5 2019
 
 #include <cmath>
 #include "MixMultiP.h"
 
-using namespace std;
 using namespace tinyxml2;
 
 //***************************************************************************
@@ -44,7 +43,7 @@ MixMultiP::MixMultiP() :m_density(0.), m_pressure(0.), m_velocity(0), m_energie(
 
 //***************************************************************************
 
-MixMultiP::MixMultiP(XMLElement *state, string fileName) :
+MixMultiP::MixMultiP(XMLElement *state, std::string fileName) :
   m_density(0.), m_pressure(0.), m_energie(0.), m_totalEnergy(0.), m_frozenSoundSpeed(0.), m_woodSoundSpeed(0.)
 {
   XMLElement *sousElement(state->FirstChildElement("mixture"));
@@ -159,7 +158,7 @@ void MixMultiP::computeMixtureVariables(Phase **vecPhase, const int &numberPhase
   for (int k = 0; k < numberPhases; k++) {
     m_energie += vecPhase[k]->getY() * vecPhase[k]->getEnergy();
     m_frozenSoundSpeed += vecPhase[k]->getY() * vecPhase[k]->getSoundSpeed()*vecPhase[k]->getSoundSpeed();
-    m_woodSoundSpeed += vecPhase[k]->getAlpha() / (vecPhase[k]->getDensity()*vecPhase[k]->getSoundSpeed()*vecPhase[k]->getSoundSpeed());
+    m_woodSoundSpeed += vecPhase[k]->getAlpha() / std::max((vecPhase[k]->getDensity()*vecPhase[k]->getSoundSpeed()*vecPhase[k]->getSoundSpeed()), epsilonAlphaNull);                                  
   }
   m_frozenSoundSpeed = sqrt(m_frozenSoundSpeed);
   m_woodSoundSpeed = 1. / sqrt(m_density*m_woodSoundSpeed);
@@ -168,7 +167,7 @@ void MixMultiP::computeMixtureVariables(Phase **vecPhase, const int &numberPhase
 
 //***************************************************************************
 
-void MixMultiP::internalEnergyToTotalEnergy(vector<QuantitiesAddPhys*> &vecGPA)
+void MixMultiP::internalEnergyToTotalEnergy(std::vector<QuantitiesAddPhys*> &vecGPA)
 {
   m_totalEnergy = m_energie + 0.5*m_velocity.squaredNorm();
   for (unsigned int pa = 0; pa < vecGPA.size(); pa++) {
@@ -178,7 +177,7 @@ void MixMultiP::internalEnergyToTotalEnergy(vector<QuantitiesAddPhys*> &vecGPA)
 
 //***************************************************************************
 
-void MixMultiP::totalEnergyToInternalEnergy(vector<QuantitiesAddPhys*> &vecGPA)
+void MixMultiP::totalEnergyToInternalEnergy(std::vector<QuantitiesAddPhys*> &vecGPA)
 {
   m_energie = m_totalEnergy - 0.5*m_velocity.squaredNorm();
   for (unsigned int pa = 0; pa < vecGPA.size(); pa++) {
@@ -232,7 +231,7 @@ Coord MixMultiP::returnVector(const int &numVar) const
 
 //***************************************************************************
 
-string MixMultiP::returnNameScalar(const int &numVar) const
+std::string MixMultiP::returnNameScalar(const int &numVar) const
 {
   switch (numVar)
   {
@@ -247,7 +246,7 @@ string MixMultiP::returnNameScalar(const int &numVar) const
 
 //***************************************************************************
 
-string MixMultiP::returnNameVector(const int &numVar) const
+std::string MixMultiP::returnNameVector(const int &numVar) const
 {
   switch (numVar)
   {
@@ -310,12 +309,32 @@ void MixMultiP::fillBuffer(double *buffer, int &counter) const
 
 //***************************************************************************
 
+void MixMultiP::fillBuffer(std::vector<double> &dataToSend) const
+{
+  dataToSend.push_back(m_velocity.getX());
+  dataToSend.push_back(m_velocity.getY());
+  dataToSend.push_back(m_velocity.getZ());
+  dataToSend.push_back(m_totalEnergy);
+}
+
+//***************************************************************************
+
 void MixMultiP::getBuffer(double *buffer, int &counter)
 {
   m_velocity.setX(buffer[++counter]);
   m_velocity.setY(buffer[++counter]);
   m_velocity.setZ(buffer[++counter]);
   m_totalEnergy = buffer[++counter];
+}
+
+//***************************************************************************
+
+void MixMultiP::getBuffer(std::vector<double> &dataToReceive, int &counter)
+{
+  m_velocity.setX(dataToReceive[counter++]);
+  m_velocity.setY(dataToReceive[counter++]);
+  m_velocity.setZ(dataToReceive[counter++]);
+  m_totalEnergy = dataToReceive[counter++];
 }
 
 //****************************************************************************
@@ -384,61 +403,6 @@ void MixMultiP::getBufferSlopes(double *buffer, int &counter)
 //****************************************************************************
 //******************************* ACCESSORS **********************************
 //****************************************************************************
-
-double MixMultiP::getDensity() const
-{
-  return m_density;
-}
-
-//***************************************************************************
-
-double MixMultiP::getPressure() const
-{
-  return m_pressure;
-}
-
-//***************************************************************************
-
-double MixMultiP::getU() const { return m_velocity.getX(); }
-double MixMultiP::getV() const { return m_velocity.getY(); }
-double MixMultiP::getW() const { return m_velocity.getZ(); }
-
-//***************************************************************************
-
-Coord MixMultiP::getVelocity() const
-{
-  return m_velocity;
-}
-
-//***************************************************************************
-
-double MixMultiP::getEnergy() const
-{
-  return m_energie;
-}
-
-//***************************************************************************
-
-double MixMultiP::getTotalEnergy() const
-{
-  return m_totalEnergy;
-}
-
-//***************************************************************************
-
-double MixMultiP::getFrozenSoundSpeed() const
-{
-  return m_frozenSoundSpeed;
-}
-
-//***************************************************************************
-
-double MixMultiP::getWoodSoundSpeed() const
-{
-  return m_woodSoundSpeed;
-}
-
-//***************************************************************************
 
 void MixMultiP::setPressure(const double &p) { m_pressure = p; }
 

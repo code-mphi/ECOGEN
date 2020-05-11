@@ -1,6 +1,6 @@
 <?xml version = "1.0" encoding = "UTF-8" standalone = "yes"?>
 <model>
-	<flowModel name="MultiP" numberPhases="2"/>
+	<flowModel name="multiP" numberPhases="2" alphaNull="false"/>
 	<EOS name="SG_epoxy.xml"/>
 	<EOS name="SG_spinel.xml"/>
 <!-- 	<relaxation type="P"/> -->

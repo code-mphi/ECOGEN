@@ -34,8 +34,6 @@
 
 #include "GOPlan.h"
 
-using namespace std;
-
 //***********************************************************************
 
 GOPlan::GOPlan(){}
@@ -64,7 +62,7 @@ GOPlan::~GOPlan(){}
 double GOPlan::distancePoint(const Coord &vertex) const
 {
   Coord vec; vec.setFromSubtractedVectors(m_point, vertex);
-  return  abs(vec.scalar(m_normal));
+  return  std::fabs(vec.scalar(m_normal));
 }
 
 //***********************************************************************
@@ -85,15 +83,15 @@ void GOPlan::createBase()
   M = m_point;
 
   //Determination of a tangent
-  if (abs(m_normal.getZ()) >= 1e-6) {
+  if (std::fabs(m_normal.getZ()) >= 1e-6) {
     N.setX(0); N.setY(0);
     N.setZ((M.getX()*m_normal.getX() + M.getY()*m_normal.getY()) / m_normal.getZ() + M.getZ());
   }
-  else if (abs(m_normal.getY()) >= 1e-6) {
+  else if (std::fabs(m_normal.getY()) >= 1e-6) {
     N.setX(0); N.setZ(0);
     N.setY((M.getX()*m_normal.getX() + M.getZ()*m_normal.getZ()) / m_normal.getY() + M.getY());
   }
-  else if (abs(m_normal.getX()) >= 1e-6) {
+  else if (std::fabs(m_normal.getX()) >= 1e-6) {
     N.setY(0); N.setZ(0);
     N.setX((M.getY()*m_normal.getY() + M.getZ()*m_normal.getZ()) / m_normal.getX() + M.getX());
   }

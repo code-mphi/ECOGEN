@@ -8,10 +8,13 @@
 	</cut1D> -->
 	<timeControlMode iterations="false">
 		<iterations number="20" iterFreq="1"/>
-		<physicalTime totalTime="1.e-2" timeFreq="1.e-3"/>
+		<physicalTime totalTime="1.e-1" timeFreq="1.e-3"/>
 	</timeControlMode>
 	<computationControl CFL="0.6"/>
 	<secondOrder>
-    <globalLimiter>minmod</globalLimiter>
-  </secondOrder>
+	  <globalLimiter>mc</globalLimiter>
+	  <interfaceLimiter>minmod</interfaceLimiter>                           
+	  <globalVolumeFractionLimiter>minmod</globalVolumeFractionLimiter>       
+	  <interfaceVolumeFractionLimiter>thinc</interfaceVolumeFractionLimiter>   
+	</secondOrder>
 </computationParam>

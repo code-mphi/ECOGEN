@@ -29,13 +29,11 @@
 
 //! \file      QAPConductivity.cpp
 //! \author    K. Schmidmayer
-//! \version   1.0
-//! \date      December 20 2017
+//! \version   1.1
+//! \date      June 5 2019
 
 #include "QAPConductivity.h"
 #include <iostream>
-
-using namespace std;
 
 //***********************************************************************
 
@@ -43,25 +41,27 @@ QAPConductivity::QAPConductivity(){}
 
 //***********************************************************************
 
-QAPConductivity::QAPConductivity(AddPhys* addPhys, const int &numberPhases) : QuantitiesAddPhys(addPhys)
+QAPConductivity::QAPConductivity(AddPhys* addPhys, const int &numberPhases) : QuantitiesAddPhys(addPhys),
+	m_gradTk(numberPhases)
 {
-  m_gradTk = new Coord[numberPhases];
-  for (int k = 0; k < numberPhases; k++) {
+  variableNamesCond.resize(numberPhases);
+  numPhasesCond.resize(numberPhases);
+  for (int k = 0; k < numberPhases; ++k) {
     m_gradTk[k] = 0.;
+    variableNamesCond[k] = temperature;
+    numPhasesCond[k] = k;
   }
 }
 
 //***********************************************************************
 
-QAPConductivity::~QAPConductivity(){  delete[] m_gradTk; }
+QAPConductivity::~QAPConductivity(){}
 
 //***********************************************************************
 
 void QAPConductivity::computeQuantities(Cell* cell)
 {
-  for (int k = 0; k < cell->getNumberPhases(); k++) {
-    m_gradTk[k] = cell->computeGradient("T", k);
-  }
+  cell->computeGradient(m_gradTk, variableNamesCond, numPhasesCond);
 }
 
 //***********************************************************************
@@ -69,13 +69,6 @@ void QAPConductivity::computeQuantities(Cell* cell)
 void QAPConductivity::setGrad(const Coord &grad, int num)
 {
   m_gradTk[num] = grad;
-}
-
-//***********************************************************************
-
-Coord QAPConductivity::getGrad(int num) const
-{
-  return m_gradTk[num];
 }
 
 //***********************************************************************

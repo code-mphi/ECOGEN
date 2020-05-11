@@ -1,6 +1,6 @@
 <?xml version = "1.0" encoding = "UTF-8" standalone = "yes"?>
 <model>
-	<flowModel name="Kapila" numberPhases="2" numberTransports="1" alphaNull="false"/>
+	<flowModel name="Kapila" numberPhases="2" numberTransports="1" alphaNull="true"/>
 	<EOS name="IG_air.xml"/>
 	<EOS name="SG_liquidForSurfaceTensionCases.xml"/>
 	<transport name="color"/>
@@ -8,4 +8,5 @@
 		<dataSurfaceTension transport="color" sigma="800."/>
 		<reinitializationTransport phase="SG_liquidForSurfaceTensionCases.xml"/>
 	</additionalPhysic>
+	<additionalPhysic type="viscosity"/>
 </model>

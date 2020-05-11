@@ -45,7 +45,7 @@ class GDRectangle :
 public:
   //! \brief     Geometrical constructor from a XML format reading
   //! \details   Reading data from XML file under the following format:
-  //!           ex : <dataRectangle axe1 = "x" axe2 = "y" lAxe1 = "0.3" lAxe2 = "0.2">
+  //!           ex : <dataRectangle axis1 = "x" axis2 = "y" lAxis1 = "0.3" lAxis2 = "0.2">
   //!                  <posInferiorVertex x = "0.4" y = "0.5" z = "0."/>
   //!                </dataRectangle>
   //! \param     vecPhases      Phases vector variables to copy in geometrical domain
@@ -60,8 +60,8 @@ public:
   virtual bool belong(Coord &posElement, const int &lvl) const;
 private:
   Coord m_posLeftBottom;       //!< Coordinates of left bottom corner (minimum positions in X, Y, Z)
-  Axe m_axe1, m_axe2;          //!< Axes defining rectangle plane
-  double m_lAxe1, m_lAxe2;     //!< Width along axe1, axe2 axis
+  Axis m_axis1, m_axis2;          //!< Axes defining rectangle plane
+  double m_lAxis1, m_lAxis2;     //!< Width along axes 1 and 2
 };
 
 #endif //GDRECTANGLE_H

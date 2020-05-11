@@ -31,9 +31,9 @@
 #define SOURCEHEATING_H
 
 //! \file      SourceHeating.h
-//! \author    F. Petitpas
+//! \author    F. Petitpas, J. Caze
 //! \version   1.0
-//! \date      January 10 2018
+//! \date      October 29 2019
 
 #include "Source.h"
 
@@ -48,10 +48,10 @@ public:
   //!            ex: <dataHeating q="1.d3"/>
   //! \param     element          XML element to read for source term
   //! \param     fileName         string name of readed XML file
-  SourceHeating(tinyxml2::XMLElement *element, std::string fileName = "Unknown file");
+  SourceHeating(tinyxml2::XMLElement *element, int order, std::string fileName = "Unknown file");
   virtual ~SourceHeating();
 
-  virtual void integrateSourceTerms(Cell *cell, const int &numberPhases, const double &dt);
+  virtual void prepSourceTerms(Cell *cell, const int &numberPhases, const double &dt, const int i = 0);
 
 private:
   double m_q;     //!Specific heat power (W/m3)

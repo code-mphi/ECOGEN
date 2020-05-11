@@ -31,9 +31,9 @@
 #define OUTPUTPROBEGNU_H
 
 //! \file      OutputProbeGNU.h
-//! \author    F. Petitpas
+//! \author    F. Petitpas, K. Schmidmayer
 //! \version   1.0
-//! \date      June 04 2018
+//! \date      February 13 2019
 
 #include "OutputGNU.h"
 #include "../Maths/GOLine.h"
@@ -60,7 +60,7 @@ public:
   OutputProbeGNU(std::string casTest, std::string run, tinyxml2::XMLElement *element, std::string fileName, Input *entree);
   virtual ~OutputProbeGNU();
 
-  virtual void locateProbeInMesh(Cell **cells, const int &nbCells, bool localSeeking = false);
+  virtual void locateProbeInMesh(const TypeMeshContainer<Cell *> &cells, const int &nbCells, bool localSeeking = false);
   virtual Cell* locateProbeInAMRSubMesh(std::vector<Cell*>* cells, const int &nbCells);
 
   virtual void prepareSortieSpecifique();

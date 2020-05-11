@@ -37,8 +37,6 @@
 #include <algorithm>
 #include "APKapila.h"
 
-using namespace std;
-
 //***********************************************************************
 
 APKapila::APKapila(){}

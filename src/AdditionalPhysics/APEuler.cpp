@@ -38,8 +38,6 @@
 #include <string>
 #include "APEuler.h"
 
-using namespace std;
-
 //****************************************************************************
 
 APEuler::APEuler(){}

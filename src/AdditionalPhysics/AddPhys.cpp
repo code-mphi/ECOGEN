@@ -29,12 +29,10 @@
 
 //! \file      AddPhys.cpp
 //! \author    K. Schmidmayer
-//! \version   1.0
-//! \date      December 20 2017
+//! \version   1.1
+//! \date      June 5 2019
 
 #include "AddPhys.h"
-
-using namespace std;
 
 //***********************************************************************
 
@@ -46,52 +44,48 @@ AddPhys::~AddPhys(){}
 
 //***********************************************************************
 
-void AddPhys::computeFluxAddPhys(CellInterface *cellBound, const int &numberPhases)
+void AddPhys::computeFluxAddPhys(CellInterface *cellInterface, const int &numberPhases)
 {
-  this->solveFluxAddPhys(cellBound, numberPhases);
+  this->solveFluxAddPhys(cellInterface, numberPhases);
 
-  if (cellBound->getCellGauche()->getLvl() == cellBound->getCellDroite()->getLvl()) {     //CoefAMR = 1 for the two
-    this->addFluxAddPhys(cellBound, numberPhases, 1.);                                    //Add flux on the right cell
-    this->subtractFluxAddPhys(cellBound, numberPhases, 1.);                               //Subtract flux on the left cell
+  if (cellInterface->getCellGauche()->getLvl() == cellInterface->getCellDroite()->getLvl()) {     //CoefAMR = 1 for the two
+    this->addFluxAddPhys(cellInterface, numberPhases, 1.);                                        //Add flux on the right cell
+    this->subtractFluxAddPhys(cellInterface, numberPhases, 1.);                                   //Subtract flux on the left cell
   }
-  else if (cellBound->getCellGauche()->getLvl() > cellBound->getCellDroite()->getLvl()) { //CoefAMR = 1 for the left and 0.5 for the right
-    this->addFluxAddPhys(cellBound, numberPhases, 0.5);                                   //Add flux on the right cell
-    this->subtractFluxAddPhys(cellBound, numberPhases, 1.);                               //Subtract flux on the left cell
+  else if (cellInterface->getCellGauche()->getLvl() > cellInterface->getCellDroite()->getLvl()) { //CoefAMR = 1 for the left and 0.5 for the right
+    this->addFluxAddPhys(cellInterface, numberPhases, 0.5);                                       //Add flux on the right cell
+    this->subtractFluxAddPhys(cellInterface, numberPhases, 1.);                                   //Subtract flux on the left cell
   }
-  else {                                                                                  //CoefAMR = 0.5 for the left and 1 for the right
-    this->addFluxAddPhys(cellBound, numberPhases, 1.);                                    //Add flux on the right cell
-    this->subtractFluxAddPhys(cellBound, numberPhases, 0.5);                              //Subtract flux on the left cell
+  else {                                                                                          //CoefAMR = 0.5 for the left and 1 for the right
+    this->addFluxAddPhys(cellInterface, numberPhases, 1.);                                        //Add flux on the right cell
+    this->subtractFluxAddPhys(cellInterface, numberPhases, 0.5);                                  //Subtract flux on the left cell
   }
 }
 
 //***********************************************************************
 
-void AddPhys::computeFluxAddPhysBoundary(CellInterface *cellBound, const int &numberPhases)
+void AddPhys::computeFluxAddPhysBoundary(CellInterface *cellInterface, const int &numberPhases)
 {
-  this->solveFluxAddPhysBoundary(cellBound, numberPhases);
-  this->subtractFluxAddPhys(cellBound, numberPhases, 1.); //Subtract flux on the left cell
+  this->solveFluxAddPhysBoundary(cellInterface, numberPhases);
+  this->subtractFluxAddPhys(cellInterface, numberPhases, 1.); //Subtract flux on the left cell
 }
 
 //***********************************************************************
 
-void AddPhys::addFluxAddPhys(CellInterface *cellBound, const int &numberPhases, const double &coefAMR)
+void AddPhys::addFluxAddPhys(CellInterface *cellInterface, const int &numberPhases, const double &coefAMR)
 {
-  double volume(cellBound->getCellDroite()->getElement()->getVolume());
-  double surface(cellBound->getFace()->getSurface());
-  double coefA(surface / volume); //no "time step"
-  coefA = coefA*coefAMR;
-  cellBound->getCellDroite()->getCons()->addFlux(coefA, numberPhases);
+  //No "time step"
+  double coefA = cellInterface->getFace()->getSurface() / cellInterface->getCellDroite()->getElement()->getVolume() * coefAMR;
+  cellInterface->getCellDroite()->getCons()->addFlux(coefA, numberPhases);
 }
 
 //***********************************************************************
 
-void AddPhys::subtractFluxAddPhys(CellInterface *cellBound, const int &numberPhases, const double &coefAMR)
+void AddPhys::subtractFluxAddPhys(CellInterface *cellInterface, const int &numberPhases, const double &coefAMR)
 {
-  double volume(cellBound->getCellGauche()->getElement()->getVolume());
-  double surface(cellBound->getFace()->getSurface());
-  double coefA(surface / volume); //no "time step"
-  coefA = coefA*coefAMR;
-  cellBound->getCellGauche()->getCons()->subtractFlux(coefA, numberPhases);
+  //No "time step"
+  double coefA = cellInterface->getFace()->getSurface() / cellInterface->getCellGauche()->getElement()->getVolume() * coefAMR;
+  cellInterface->getCellGauche()->getCons()->subtractFlux(coefA, numberPhases);
 }
 
 //***********************************************************************

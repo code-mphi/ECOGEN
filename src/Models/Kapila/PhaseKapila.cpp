@@ -29,14 +29,12 @@
 
 //! \file      PhaseKapila.cpp
 //! \author    F. Petitpas, K. Schmidmayer
-//! \version   1.0
-//! \date      December 21 2017
+//! \version   1.1
+//! \date      June 5 2019
 
 #include "PhaseKapila.h"
 #include "../../Eos/Eos.h"
-#include <fstream>
 
-using namespace std;
 using namespace tinyxml2;
 
 //***************************************************************************
@@ -45,7 +43,7 @@ PhaseKapila::PhaseKapila() :m_alpha(1.0), m_density(0.), m_pressure(0.), m_eos(0
 
 //***************************************************************************
 
-PhaseKapila::PhaseKapila(XMLElement *material, Eos *eos, const double &pressure, string fileName) : m_eos(eos), m_energie(0.), m_soundSpeed(0.), m_pressure(pressure)
+PhaseKapila::PhaseKapila(XMLElement *material, Eos *eos, const double &pressure, std::string fileName) : m_eos(eos), m_energie(0.), m_soundSpeed(0.), m_pressure(pressure)
 {
   XMLElement *sousElement(material->FirstChildElement("dataFluid"));
   if (sousElement == NULL) throw ErrorXMLElement("dataFluid", fileName, __FILE__, __LINE__);
@@ -105,7 +103,7 @@ void PhaseKapila::extendedCalculusPhase(const Coord &velocity)
 
 void PhaseKapila::computeMassFraction(const double &density)
 {
-  m_Y = m_alpha*m_density / max(density, epsilon);
+  m_Y = m_alpha*m_density / std::max(density, epsilonAlphaNull);
 }
 
 //****************************************************************************
@@ -139,7 +137,7 @@ double PhaseKapila::returnScalar(const int &numVar) const
 
 //***************************************************************************
 
-string PhaseKapila::returnNameScalar(const int &numVar) const
+std::string PhaseKapila::returnNameScalar(const int &numVar) const
 {
   switch (numVar)
   {
@@ -199,12 +197,32 @@ void PhaseKapila::fillBuffer(double *buffer, int &counter) const
 
 //***************************************************************************
 
+void PhaseKapila::fillBuffer(std::vector<double> &dataToSend) const
+{
+  dataToSend.push_back(m_alpha);
+  dataToSend.push_back(m_density);
+  dataToSend.push_back(m_pressure);
+  dataToSend.push_back(static_cast<double>(m_eos->getNumber()));
+}
+
+//***************************************************************************
+
 void PhaseKapila::getBuffer(double *buffer, int &counter, Eos **eos)
 {
   m_alpha = buffer[++counter];
   m_density = buffer[++counter];
   m_pressure = buffer[++counter];
   m_eos = eos[static_cast<int>(buffer[++counter])];
+}
+
+//***************************************************************************
+
+void PhaseKapila::getBuffer(std::vector<double> &dataToReceive, int &counter, Eos **eos)
+{
+  m_alpha = dataToReceive[counter++];
+  m_density = dataToReceive[counter++];
+  m_pressure = dataToReceive[counter++];
+  m_eos = eos[static_cast<int>(std::round(dataToReceive[counter++]))];
 }
 
 //****************************************************************************
@@ -274,9 +292,9 @@ void PhaseKapila::getBufferSlopes(double *buffer, int &counter)
 //**************************** VERIFICATION **********************************
 //****************************************************************************
 
-void PhaseKapila::verifyPhase(const string &message) const
+void PhaseKapila::verifyPhase(const std::string &message) const
 {
-  if (epsilon > 1.e-20) { // alpha = 0 is activated
+  if (epsilonAlphaNull > 1.e-20) { // alpha = 0 is activated
     if (m_alpha < 0.) errors.push_back(Errors(message + "too small alpha in verifyPhase"));
     if (m_alpha > 1.) errors.push_back(Errors(message + "too big alpha in verifyPhase"));
     if (m_density < 0.) errors.push_back(Errors(message + "too small density in verifyPhase"));
@@ -293,7 +311,7 @@ void PhaseKapila::verifyPhase(const string &message) const
 
 void PhaseKapila::verifyAndCorrectPhase()
 {
-  if (epsilon > 1.e-20) { // alpha = 0 is activated
+  if (epsilonAlphaNull > 1.e-20) { // alpha = 0 is activated
     if (m_alpha < 0.) m_alpha = 0.;
     if (m_alpha > 1.) m_alpha = 1.;
     if (m_density <= 1.e-15) m_density = 1.e-15;
@@ -309,38 +327,6 @@ void PhaseKapila::verifyAndCorrectPhase()
 //****************************************************************************
 //**************************** DATA ACCESSORS ********************************
 //****************************************************************************
-
-double PhaseKapila::getAlpha() const { return m_alpha; }
-
-//***************************************************************************
-
-double PhaseKapila::getDensity() const { return m_density; }
-
-//***************************************************************************
-
-double PhaseKapila::getPressure() const { return m_pressure; }
-
-//***************************************************************************
-
-double PhaseKapila::getY() const { return m_Y; }
-
-//***************************************************************************
-
-Eos* PhaseKapila::getEos() const { return m_eos; }
-
-//***************************************************************************
-
-double PhaseKapila::getEnergy() const { return m_energie; }
-
-//***************************************************************************
-
-double PhaseKapila::getSoundSpeed() const { return m_soundSpeed; }
-
-//***************************************************************************
-
-double PhaseKapila::getTemperature() const { return m_eos->computeTemperature(m_density, m_pressure); }
-
-//***************************************************************************
 
 void PhaseKapila::setAlpha(double alpha) { m_alpha = alpha; }
 

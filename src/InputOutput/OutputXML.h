@@ -47,28 +47,28 @@ public:
   virtual void prepareSortieSpecifique();
   virtual void ecritSolution(Mesh *mesh, std::vector<Cell *> *cellsLvl);
 
-  virtual void readResults(Mesh *mesh, std::vector<Cell *> *cellsLvl, const int fileNumber);
+  virtual void readResults(Mesh *mesh, std::vector<Cell *> *cellsLvl);
 
 protected:
 
-  void ReadDonneesPhysiquesXML(Mesh *mesh, std::vector<Cell *> *cellsLvl, tinyxml2::XMLElement *nodeCellData, const int &lvl, std::string fileName = "Unknown file");
+  void ReadDonneesPhysiquesXML(Mesh *mesh, std::vector<Cell *> *cellsLvl, tinyxml2::XMLElement *nodeCellData, std::string fileName = "Unknown file");
 
-  std::string creationNameFichierXML(const char* name, Mesh *mesh=0, int lvl=-1, int proc=-1, int numFichier=-1, std::string nameVariable ="defaut");
+  std::string creationNameFichierXML(const char* name, Mesh *mesh=0, int proc=-1, int numFichier=-1, std::string nameVariable ="defaut");
 
   void ecritSolutionXML(Mesh *mesh, std::vector<Cell *> *cellsLvl);
   void ecritCollectionXML(Mesh *mesh);
-  void ecritDonneesPhysiquesXML(Mesh *mesh, std::vector<Cell *> *cellsLvl, std::ofstream &fileStream, const int &lvl, bool parallel = false);
+  void ecritDonneesPhysiquesXML(Mesh *mesh, std::vector<Cell *> *cellsLvl, std::ofstream &fileStream, bool parallel = false);
 
   //Dependant du type de mesh
   void ecritMeshRectilinearXML(Mesh *mesh, std::vector<Cell *> *cellsLvl, std::ofstream &fileStream, bool parallel = false);
-  void ecritMeshUnstructuredXML(Mesh *mesh, std::vector<Cell *> *cellsLvl, std::ofstream &fileStream, const int &lvl, bool parallel = false);
-  void ecritMeshPolyDataXML(Mesh *mesh, std::vector<Cell *> *cellsLvl, std::ofstream &fileStream, const int &lvl, bool parallel = false);
+  void ecritMeshUnstructuredXML(Mesh *mesh, std::vector<Cell *> *cellsLvl, std::ofstream &fileStream, bool parallel = false);
   void ecritFinFichierRectilinearXML(std::ofstream &fileStream, bool parallel = false);
   void ecritFinFichierUnstructuredXML(std::ofstream &fileStream, bool parallel = false);
-  void ecritFinFichierPolyDataXML(std::ofstream &fileStream, bool parallel = false);
 
-  //Non utilise
-  void ecritFichierParallelXML(Mesh *mesh, std::vector<Cell *> *cellsLvl);
+  //Non used / old
+  // void ecritFichierParallelXML(Mesh *mesh, std::vector<Cell *> *cellsLvl);
+  // void ecritFinFichierPolyDataXML(std::ofstream &fileStream, bool parallel = false);
+  // void ecritMeshPolyDataXML(Mesh *mesh, std::vector<Cell *> *cellsLvl, std::ofstream &fileStream, const int &lvl, bool parallel = false);
 };
 
 #endif //OUTPUTXML_H

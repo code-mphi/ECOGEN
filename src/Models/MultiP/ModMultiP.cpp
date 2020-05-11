@@ -28,17 +28,15 @@
 //  If not, see <http://www.gnu.org/licenses/>.
 
 //! \file      ModMultiP.cpp
-//! \author    F. Petitpas
-//! \version   1.0
-//! \date      June 5 2017
+//! \author    F. Petitpas, K. Schmidmayer, J. Caze
+//! \version   1.1
+//! \date      November 18 2019
 
-#include <iostream>
 #include <cmath>
 #include <algorithm>
 #include "ModMultiP.h"
 #include "PhaseMultiP.h"
 
-using namespace std;
 
 const std::string ModMultiP::NAME = "MULTIP";
 
@@ -47,16 +45,21 @@ const std::string ModMultiP::NAME = "MULTIP";
 ModMultiP::ModMultiP(int &numberTransports, const int &numberPhases) :
   Model(NAME,numberTransports)
 {
-  fluxBufferMultiP = new FluxMultiP(this,numberPhases);
-  sourceConsMultiP = new FluxMultiP(this, numberPhases);
+  fluxBuff = new FluxMultiP(this,numberPhases);
+  for (int i = 0; i < 4; i++) {
+    sourceCons.push_back(new FluxMultiP(this,numberPhases));
+  }
 }
 
 //***********************************************************************
 
 ModMultiP::~ModMultiP()
 {
-  delete fluxBufferMultiP;
-  delete sourceConsMultiP;
+  delete fluxBuff;
+  for (int i = 0; i < 4; i++) {
+    delete sourceCons[i];
+  }
+  sourceCons.clear();
 }
 
 //***********************************************************************
@@ -108,16 +111,16 @@ void ModMultiP::solveRiemannIntern(Cell &cellLeft, Cell &cellRight, const int &n
   double uR = cellRight.getMixture()->getVelocity().getX(), cR = cellRight.getMixture()->getFrozenSoundSpeed(), pR = cellRight.getMixture()->getPressure(), rhoR = cellRight.getMixture()->getDensity();
 
   //Davies
-  sL = min(uL - cL, uR - cR);
-  sR = max(uR + cR, uL + cL);
+  sL = std::min(uL - cL, uR - cR);
+  sR = std::max(uR + cR, uL + cL);
 
-  if (abs(sL)>1.e-3) dtMax = min(dtMax, dxLeft / abs(sL));
-  if (abs(sR)>1.e-3) dtMax = min(dtMax, dxRight / abs(sR));
+  if (std::fabs(sL)>1.e-3) dtMax = std::min(dtMax, dxLeft / std::fabs(sL));
+  if (std::fabs(sR)>1.e-3) dtMax = std::min(dtMax, dxRight / std::fabs(sR));
 
   //compute left and right mass flow rates and sM
   double mL(rhoL*(sL - uL)), mR(rhoR*(sR - uR)), mkL, mkR;
   double sM((pR - pL + mL*uL - mR*uR) / (mL - mR));
-  if (abs(sM)<1.e-8) sM = 0.;
+  if (std::fabs(sM)<1.e-8) sM = 0.;
 
   //Solution sampling
   if (sL >= 0.){
@@ -126,16 +129,16 @@ void ModMultiP::solveRiemannIntern(Cell &cellLeft, Cell &cellRight, const int &n
       double alpha = vecPhase->getAlpha();
       double density = vecPhase->getDensity();
       double energie = vecPhase->getEnergy();
-      fluxBufferMultiP->m_alpha[k] = alpha*sM;
-      fluxBufferMultiP->m_masse[k] = alpha*density*uL;
-      fluxBufferMultiP->m_energ[k] = alpha*density*energie*uL;
+      static_cast<FluxMultiP*> (fluxBuff)->m_alpha[k] = alpha*sM;
+      static_cast<FluxMultiP*> (fluxBuff)->m_masse[k] = alpha*density*uL;
+      static_cast<FluxMultiP*> (fluxBuff)->m_energ[k] = alpha*density*energie*uL;
     }
     double vitY = cellLeft.getMixture()->getVelocity().getY(); double vitZ = cellLeft.getMixture()->getVelocity().getZ();
     double totalEnergy = cellLeft.getMixture()->getEnergy() + 0.5*cellLeft.getMixture()->getVelocity().squaredNorm();
-    fluxBufferMultiP->m_qdm.setX(rhoL*uL*uL + pL);
-    fluxBufferMultiP->m_qdm.setY(rhoL*vitY*uL);
-    fluxBufferMultiP->m_qdm.setZ(rhoL*vitZ*uL);
-    fluxBufferMultiP->m_energMixture = (rhoL*totalEnergy + pL)*uL;
+    static_cast<FluxMultiP*> (fluxBuff)->m_qdm.setX(rhoL*uL*uL + pL);
+    static_cast<FluxMultiP*> (fluxBuff)->m_qdm.setY(rhoL*vitY*uL);
+    static_cast<FluxMultiP*> (fluxBuff)->m_qdm.setZ(rhoL*vitZ*uL);
+    static_cast<FluxMultiP*> (fluxBuff)->m_energMixture = (rhoL*totalEnergy + pL)*uL;
 
   }
   else if (sR <= 0.){
@@ -144,16 +147,16 @@ void ModMultiP::solveRiemannIntern(Cell &cellLeft, Cell &cellRight, const int &n
       double alpha = vecPhase->getAlpha();
       double density = vecPhase->getDensity();
       double energie = vecPhase->getEnergy();
-      fluxBufferMultiP->m_alpha[k] = alpha*sM;
-      fluxBufferMultiP->m_masse[k] = alpha*density*uR;
-      fluxBufferMultiP->m_energ[k] = alpha*density*energie*uR;
+      static_cast<FluxMultiP*> (fluxBuff)->m_alpha[k] = alpha*sM;
+      static_cast<FluxMultiP*> (fluxBuff)->m_masse[k] = alpha*density*uR;
+      static_cast<FluxMultiP*> (fluxBuff)->m_energ[k] = alpha*density*energie*uR;
     }
     double vitY = cellRight.getMixture()->getVelocity().getY(); double vitZ = cellRight.getMixture()->getVelocity().getZ();
     double totalEnergy = cellRight.getMixture()->getEnergy() + 0.5*cellRight.getMixture()->getVelocity().squaredNorm();
-    fluxBufferMultiP->m_qdm.setX(rhoR*uR*uR + pR);
-    fluxBufferMultiP->m_qdm.setY(rhoR*vitY*uR);
-    fluxBufferMultiP->m_qdm.setZ(rhoR*vitZ*uR);
-    fluxBufferMultiP->m_energMixture = (rhoR*totalEnergy + pR)*uR;
+    static_cast<FluxMultiP*> (fluxBuff)->m_qdm.setX(rhoR*uR*uR + pR);
+    static_cast<FluxMultiP*> (fluxBuff)->m_qdm.setY(rhoR*vitY*uR);
+    static_cast<FluxMultiP*> (fluxBuff)->m_qdm.setZ(rhoR*vitZ*uR);
+    static_cast<FluxMultiP*> (fluxBuff)->m_energMixture = (rhoR*totalEnergy + pR)*uR;
 
   }
   else if (sM >= 0.){
@@ -173,14 +176,14 @@ void ModMultiP::solveRiemannIntern(Cell &cellLeft, Cell &cellRight, const int &n
       TB->rhokStar[k] = mkL / (sL - sM);
       TB->pkStar[k] = TB->eos[k]->computePressureIsentropic(pressure, density, TB->rhokStar[k]);
       TB->ekStar[k] = TB->eos[k]->computeEnergy(TB->rhokStar[k], TB->pkStar[k]);
-      fluxBufferMultiP->m_alpha[k] = alpha*sM;
-      fluxBufferMultiP->m_masse[k] = alpha* TB->rhokStar[k] * sM;
-      fluxBufferMultiP->m_energ[k] = alpha* TB->rhokStar[k] * TB->ekStar[k] * sM;
+      static_cast<FluxMultiP*> (fluxBuff)->m_alpha[k] = alpha*sM;
+      static_cast<FluxMultiP*> (fluxBuff)->m_masse[k] = alpha* TB->rhokStar[k] * sM;
+      static_cast<FluxMultiP*> (fluxBuff)->m_energ[k] = alpha* TB->rhokStar[k] * TB->ekStar[k] * sM;
     }
-    fluxBufferMultiP->m_qdm.setX(rhoStar*sM*sM + pStar);
-    fluxBufferMultiP->m_qdm.setY(rhoStar*vitY*sM);
-    fluxBufferMultiP->m_qdm.setZ(rhoStar*vitZ*sM);
-    fluxBufferMultiP->m_energMixture = (rhoStar*EStar + pStar)*sM;
+    static_cast<FluxMultiP*> (fluxBuff)->m_qdm.setX(rhoStar*sM*sM + pStar);
+    static_cast<FluxMultiP*> (fluxBuff)->m_qdm.setY(rhoStar*vitY*sM);
+    static_cast<FluxMultiP*> (fluxBuff)->m_qdm.setZ(rhoStar*vitZ*sM);
+    static_cast<FluxMultiP*> (fluxBuff)->m_energMixture = (rhoStar*EStar + pStar)*sM;
   }
   else{
     //Compute right solution state
@@ -199,18 +202,18 @@ void ModMultiP::solveRiemannIntern(Cell &cellLeft, Cell &cellRight, const int &n
       TB->rhokStar[k] = mkR / (sR - sM);
       TB->pkStar[k] = TB->eos[k]->computePressureIsentropic(pressure, density, TB->rhokStar[k]);
       TB->ekStar[k] = TB->eos[k]->computeEnergy(TB->rhokStar[k], TB->pkStar[k]);
-      fluxBufferMultiP->m_alpha[k] = alpha*sM;
-      fluxBufferMultiP->m_masse[k] = alpha* TB->rhokStar[k] * sM;
-      fluxBufferMultiP->m_energ[k] = alpha* TB->rhokStar[k] * TB->ekStar[k] * sM;
+      static_cast<FluxMultiP*> (fluxBuff)->m_alpha[k] = alpha*sM;
+      static_cast<FluxMultiP*> (fluxBuff)->m_masse[k] = alpha* TB->rhokStar[k] * sM;
+      static_cast<FluxMultiP*> (fluxBuff)->m_energ[k] = alpha* TB->rhokStar[k] * TB->ekStar[k] * sM;
     }
-    fluxBufferMultiP->m_qdm.setX(rhoStar*sM*sM + pStar);
-    fluxBufferMultiP->m_qdm.setY(rhoStar*vitY*sM);
-    fluxBufferMultiP->m_qdm.setZ(rhoStar*vitZ*sM);
-    fluxBufferMultiP->m_energMixture = (rhoStar*EStar + pStar)*sM;
+    static_cast<FluxMultiP*> (fluxBuff)->m_qdm.setX(rhoStar*sM*sM + pStar);
+    static_cast<FluxMultiP*> (fluxBuff)->m_qdm.setY(rhoStar*vitY*sM);
+    static_cast<FluxMultiP*> (fluxBuff)->m_qdm.setZ(rhoStar*vitZ*sM);
+    static_cast<FluxMultiP*> (fluxBuff)->m_energMixture = (rhoStar*EStar + pStar)*sM;
   }
 
   //Contact discontinuity velocity
-  fluxBufferMultiP->m_sM = sM;
+  static_cast<FluxMultiP*> (fluxBuff)->m_sM = sM;
 }
 
 //****************************************************************************
@@ -224,24 +227,24 @@ void ModMultiP::solveRiemannWall(Cell &cellLeft, const int &numberPhases, const 
 
   double uL = cellLeft.getMixture()->getVelocity().getX(), cL = cellLeft.getMixture()->getFrozenSoundSpeed(), pL = cellLeft.getMixture()->getPressure(), rhoL = cellLeft.getMixture()->getDensity();
 
-  sL = min(uL - cL, -uL - cL);
-  if (abs(sL)>1.e-3) dtMax = min(dtMax, dxLeft / abs(sL));
+  sL = std::min(uL - cL, -uL - cL);
+  if (std::fabs(sL)>1.e-3) dtMax = std::min(dtMax, dxLeft / std::fabs(sL));
 
   pStar = rhoL*(uL - sL)*uL + pL;
 
   for (int k = 0; k < numberPhases; k++)
   {
-    fluxBufferMultiP->m_alpha[k] = 0.;
-    fluxBufferMultiP->m_masse[k] = 0.;
-    fluxBufferMultiP->m_energ[k] = 0.;
+    static_cast<FluxMultiP*> (fluxBuff)->m_alpha[k] = 0.;
+    static_cast<FluxMultiP*> (fluxBuff)->m_masse[k] = 0.;
+    static_cast<FluxMultiP*> (fluxBuff)->m_energ[k] = 0.;
   }
-  fluxBufferMultiP->m_qdm.setX(pStar);
-  fluxBufferMultiP->m_qdm.setY(0.);
-  fluxBufferMultiP->m_qdm.setZ(0.);
-  fluxBufferMultiP->m_energMixture = 0.;
+  static_cast<FluxMultiP*> (fluxBuff)->m_qdm.setX(pStar);
+  static_cast<FluxMultiP*> (fluxBuff)->m_qdm.setY(0.);
+  static_cast<FluxMultiP*> (fluxBuff)->m_qdm.setZ(0.);
+  static_cast<FluxMultiP*> (fluxBuff)->m_energMixture = 0.;
 
   //Contact discontinuity velocity
-  fluxBufferMultiP->m_sM = 0.;
+  static_cast<FluxMultiP*> (fluxBuff)->m_sM = 0.;
 }
 
 //****************************************************************************
@@ -266,7 +269,7 @@ void ModMultiP::solveRiemannInflow(Cell &cellLeft, const int &numberPhases, cons
   //-----------------------------------------------------
   //Estimates for acoustic wave sL
   sL = uL - cL;
-  if (abs(sL)>1.e-3) dtMax = min(dtMax, dxLeft / abs(sL));
+  if (std::fabs(sL)>1.e-3) dtMax = std::min(dtMax, dxLeft / std::fabs(sL));
   zL = rhoL*cL;
 
   int iteration(0);
@@ -297,24 +300,24 @@ void ModMultiP::solveRiemannInflow(Cell &cellLeft, const int &numberPhases, cons
       f -= TB->Yk0[k] * TB->vkStar[k];
       df -= TB->Yk0[k] * dvk;
     }
-  } while (abs(f)>1e-10);
+  } while (std::fabs(f)>1e-10);
 
   //Flux completion
   double Estar(0.5*(u*u + vL*vL + wL*wL)), ek, rhok;
   for (int k = 0; k<numberPhases; k++) {
     rhok = 1. / TB->vkStar[k];
     ek = TB->eos[k]->computeEnergy(rhok, pStar); Estar += TB->Yk0[k] * ek;
-    fluxBufferMultiP->m_alpha[k] = TB->Yk0[k] * TB->vkStar[k] / v*u;
-    fluxBufferMultiP->m_masse[k] = fluxBufferMultiP->m_alpha[k] * rhok;
-    fluxBufferMultiP->m_energ[k] = fluxBufferMultiP->m_alpha[k] * rhok*ek;
+    static_cast<FluxMultiP*> (fluxBuff)->m_alpha[k] = TB->Yk0[k] * TB->vkStar[k] / v*u;
+    static_cast<FluxMultiP*> (fluxBuff)->m_masse[k] = static_cast<FluxMultiP*> (fluxBuff)->m_alpha[k] * rhok;
+    static_cast<FluxMultiP*> (fluxBuff)->m_energ[k] = static_cast<FluxMultiP*> (fluxBuff)->m_alpha[k] * rhok*ek;
   }
-  fluxBufferMultiP->m_qdm.setX(u*u / v + pStar);
-  fluxBufferMultiP->m_qdm.setY(u*vL / v);
-  fluxBufferMultiP->m_qdm.setZ(u*wL / v);
-  fluxBufferMultiP->m_energMixture = (Estar / v + pStar)*u;
+  static_cast<FluxMultiP*> (fluxBuff)->m_qdm.setX(u*u / v + pStar);
+  static_cast<FluxMultiP*> (fluxBuff)->m_qdm.setY(u*vL / v);
+  static_cast<FluxMultiP*> (fluxBuff)->m_qdm.setZ(u*wL / v);
+  static_cast<FluxMultiP*> (fluxBuff)->m_energMixture = (Estar / v + pStar)*u;
 
   //Contact discontinuity velocity
-  fluxBufferMultiP->m_sM = u;
+  static_cast<FluxMultiP*> (fluxBuff)->m_sM = u;
 }
 
 //****************************************************************************
@@ -337,13 +340,13 @@ void ModMultiP::solveRiemannTank(Cell &cellLeft, const int &numberPhases, const 
     vecPhase = cellLeft.getPhase(k);
     //TB->rhokStar[k] = TB->eos[k]->computeDensityIsentropic(vecPhase->getPressure(), vecPhase->getDensity(), pStar); //other possiblity
     TB->rhokStar[k] = TB->eos[k]->computeDensityHugoniot(vecPhase->getPressure(), vecPhase->getDensity(), pStar);
-    vStar += vecPhase->getAlpha()*vecPhase->getDensity() / rhoL / TB->rhokStar[k];
+    vStar += vecPhase->getAlpha()*vecPhase->getDensity() / rhoL / std::max(TB->rhokStar[k], epsilonAlphaNull);
   }
   vmv0 = vStar - 1. / rhoL;
-  if (abs(vmv0) > 1e-10) { mL = sqrt((pL - pStar) / vmv0); }
+  if (std::fabs(vmv0) > 1e-10) { mL = sqrt((pL - pStar) / vmv0); }
   else { mL = zL; }
   sL = uL - mL / rhoL;
-  if (abs(sL)>1.e-3) dtMax = min(dtMax, dxLeft / abs(sL));
+  if (std::fabs(sL)>1.e-3) dtMax = std::min(dtMax, dxLeft / std::fabs(sL));
   sM = uL + mL*vmv0;
 
   //2) Check for pathologic cases
@@ -413,11 +416,11 @@ void ModMultiP::solveRiemannTank(Cell &cellLeft, const int &numberPhases, const 
         //rhok = TB->eos[k]->computeDensityIsentropic(vecPhase->getPressure(), vecPhase->getDensity(), p, &drhok); //other possiblity
         rhok = TB->eos[k]->computeDensityHugoniot(vecPhase->getPressure(), vecPhase->getDensity(), p, &drhok);
         YkL = vecPhase->getAlpha()*vecPhase->getDensity() / rhoL;
-        vStarL += YkL / rhok;
-        dvStarL -= YkL / (rhok * rhok) * drhok;
+        vStarL += YkL / std::max(rhok, epsilonAlphaNull);
+        dvStarL -= YkL / std::max((rhok * rhok), epsilonAlphaNull) * drhok;
       }
       vmv0 = vStarL - 1. / rhoL;
-      if (abs(vmv0) > 1e-10) {
+      if (std::fabs(vmv0) > 1e-10) {
         mL = sqrt((pL - p) / vmv0);
         dmL = 0.5*(-vmv0 + (p - pL)*dvStarL) / (vmv0*vmv0) / mL;
       }
@@ -426,19 +429,19 @@ void ModMultiP::solveRiemannTank(Cell &cellLeft, const int &numberPhases, const 
         dmL = 0.;
       }
       sL = uL - mL / rhoL;
-      if (abs(sL)>1.e-3) dtMax = min(dtMax, dxLeft / abs(sL));
+      if (std::fabs(sL)>1.e-3) dtMax = std::min(dtMax, dxLeft / std::fabs(sL));
       uStarL = uL + mL*vmv0;
       duStarL = dmL*vmv0 + mL*dvStarL;
       //solved function
       f = uStarR - uStarL;
       df = duStarR - duStarL;
-    } while (abs(f)>1e-3); //End iterative loop
+    } while (std::fabs(f)>1e-3); //End iterative loop
     pStar = p;
     uStar = 0.5*(uStarL + uStarR);
     rhoStar = 0.;
     for (int k = 0; k < numberPhases; k++) { 
       TB->YkStar[k] = TB->Yk0[k];
-      rhoStar += TB->YkStar[k] / TB->rhokStar[k];
+      rhoStar += TB->YkStar[k] / std::max(TB->rhokStar[k], epsilonAlphaNull);
     }
     rhoStar = 1. / rhoStar;
     uyStar = 0.;
@@ -450,17 +453,17 @@ void ModMultiP::solveRiemannTank(Cell &cellLeft, const int &numberPhases, const 
   double EStar(0.5*(uStar*uStar + uyStar*uyStar + uzStar*uzStar)), ek;
   for (int k = 0; k < numberPhases; k++) {
     ek = TB->eos[k]->computeEnergy(TB->rhokStar[k], pStar); EStar += TB->YkStar[k] * ek;
-    fluxBufferMultiP->m_alpha[k] = TB->YkStar[k] * rhoStar / TB->rhokStar[k] * uStar;
-    fluxBufferMultiP->m_masse[k] = fluxBufferMultiP->m_alpha[k] * TB->rhokStar[k];
-    fluxBufferMultiP->m_energ[k] = fluxBufferMultiP->m_masse[k] * ek;
+    static_cast<FluxMultiP*> (fluxBuff)->m_alpha[k] = TB->YkStar[k] * rhoStar / std::max(TB->rhokStar[k], epsilonAlphaNull) * uStar;
+    static_cast<FluxMultiP*> (fluxBuff)->m_masse[k] = static_cast<FluxMultiP*> (fluxBuff)->m_alpha[k] * TB->rhokStar[k];
+    static_cast<FluxMultiP*> (fluxBuff)->m_energ[k] = static_cast<FluxMultiP*> (fluxBuff)->m_masse[k] * ek;
   }
-  fluxBufferMultiP->m_qdm.setX(rhoStar*uStar*uStar + pStar);
-  fluxBufferMultiP->m_qdm.setY(rhoStar*uStar*uyStar);
-  fluxBufferMultiP->m_qdm.setZ(rhoStar*uStar*uzStar);
-  fluxBufferMultiP->m_energMixture = (rhoStar*EStar + pStar)*uStar;
+  static_cast<FluxMultiP*> (fluxBuff)->m_qdm.setX(rhoStar*uStar*uStar + pStar);
+  static_cast<FluxMultiP*> (fluxBuff)->m_qdm.setY(rhoStar*uStar*uyStar);
+  static_cast<FluxMultiP*> (fluxBuff)->m_qdm.setZ(rhoStar*uStar*uzStar);
+  static_cast<FluxMultiP*> (fluxBuff)->m_energMixture = (rhoStar*EStar + pStar)*uStar;
 
   //Contact discontinuity velocity
-  fluxBufferMultiP->m_sM = sM;
+  static_cast<FluxMultiP*> (fluxBuff)->m_sM = sM;
 }
 
 //****************************************************************************
@@ -483,13 +486,13 @@ void ModMultiP::solveRiemannOutflow(Cell &cellLeft, const int &numberPhases, con
     vecPhase = cellLeft.getPhase(k);
     //TB->rhokStar[k] = TB->eos[k]->computeDensityIsentropic(pL, vecPhase->getDensity(), pStar); //other possiblity
     TB->rhokStar[k] = TB->eos[k]->computeDensityHugoniot(pL, vecPhase->getDensity(), pStar);
-    vStar += vecPhase->getAlpha()*vecPhase->getDensity() /rhoL / TB->rhokStar[k];
+    vStar += vecPhase->getAlpha()*vecPhase->getDensity() / rhoL / std::max(TB->rhokStar[k], epsilonAlphaNull);
   }
   vSmvL = vStar - 1. / rhoL;
-  if (abs(vSmvL) > 1e-10) { mL = sqrt((pL - pStar) / vSmvL); }
+  if (std::fabs(vSmvL) > 1e-10) { mL = sqrt((pL - pStar) / vSmvL); }
 //  else { cout << "bug" << endl;  mL = zL; }
   sL = uL - mL / rhoL;
-  if (abs(sL)>1.e-3) dtMax = min(dtMax, dxLeft / abs(sL));
+  if (std::fabs(sL)>1.e-3) dtMax = std::min(dtMax, dxLeft / std::fabs(sL));
   sM = uL + mL*vSmvL;
 
   //Pathologic case sL>0
@@ -518,21 +521,21 @@ void ModMultiP::solveRiemannOutflow(Cell &cellLeft, const int &numberPhases, con
     vecPhase = cellLeft.getPhase(k);
     double YkL = vecPhase->getAlpha()*vecPhase->getDensity() / rhoL;
     ekStar = TB->eos[k]->computeEnergy(TB->rhokStar[k], pStar);
-    fluxBufferMultiP->m_alpha[k] = YkL / TB->rhokStar[k] / vStar * uStar;
-    fluxBufferMultiP->m_masse[k] = fluxBufferMultiP->m_alpha[k] * TB->rhokStar[k];
-    fluxBufferMultiP->m_energ[k] = fluxBufferMultiP->m_masse[k] * ekStar;
+    static_cast<FluxMultiP*> (fluxBuff)->m_alpha[k] = YkL / std::max(TB->rhokStar[k], epsilonAlphaNull) / vStar * uStar;
+    static_cast<FluxMultiP*> (fluxBuff)->m_masse[k] = static_cast<FluxMultiP*> (fluxBuff)->m_alpha[k] * TB->rhokStar[k];
+    static_cast<FluxMultiP*> (fluxBuff)->m_energ[k] = static_cast<FluxMultiP*> (fluxBuff)->m_masse[k] * ekStar;
   }
-  fluxBufferMultiP->m_qdm.setX(uStar*uStar / vStar + pStar);
-  fluxBufferMultiP->m_qdm.setY(uStar*uyL / vStar);
-  fluxBufferMultiP->m_qdm.setZ(uStar*uzL / vStar);
-  fluxBufferMultiP->m_energMixture = (EStar / vStar + pStar)*uStar;
+  static_cast<FluxMultiP*> (fluxBuff)->m_qdm.setX(uStar*uStar / vStar + pStar);
+  static_cast<FluxMultiP*> (fluxBuff)->m_qdm.setY(uStar*uyL / vStar);
+  static_cast<FluxMultiP*> (fluxBuff)->m_qdm.setZ(uStar*uzL / vStar);
+  static_cast<FluxMultiP*> (fluxBuff)->m_energMixture = (EStar / vStar + pStar)*uStar;
 
   //Contact discontinuity velocity
-  fluxBufferMultiP->m_sM = uStar;
+  static_cast<FluxMultiP*> (fluxBuff)->m_sM = uStar;
 
-  //Specific mass flow rate output (kg/s/m²)
+  //Specific mass flow rate output (kg/s/mï¿½)
   for (int k = 0; k < numberPhases; k++) {
-    debitSurf[k] = fluxBufferMultiP->m_masse[k];
+    debitSurf[k] = static_cast<FluxMultiP*> (fluxBuff)->m_masse[k];
   }
 }
 
@@ -543,7 +546,7 @@ void ModMultiP::solveRiemannOutflow(Cell &cellLeft, const int &numberPhases, con
 void ModMultiP::solveRiemannTransportIntern(Cell &cellLeft, Cell &cellRight, const int &numberTransports)
 {
 	for (int k = 0; k < numberTransports; k++) {
-		fluxBufferTransport[k].solveRiemann(cellLeft.getTransport(k).getValue(), cellRight.getTransport(k).getValue(), fluxBufferMultiP->m_sM);
+		fluxBufferTransport[k].solveRiemann(cellLeft.getTransport(k).getValue(), cellRight.getTransport(k).getValue(), static_cast<FluxMultiP*> (fluxBuff)->m_sM);
 	}
 }
 
@@ -561,7 +564,7 @@ void ModMultiP::solveRiemannTransportWall(const int &numberTransports)
 void ModMultiP::solveRiemannTransportInflow(Cell &cellLeft, const int &numberTransports, double *valueTransports)
 {
 	for (int k = 0; k < numberTransports; k++) {
-    fluxBufferTransport[k].solveRiemannInflow(cellLeft.getTransport(k).getValue(), fluxBufferMultiP->m_sM, valueTransports[k]);
+    fluxBufferTransport[k].solveRiemannInflow(cellLeft.getTransport(k).getValue(), static_cast<FluxMultiP*> (fluxBuff)->m_sM, valueTransports[k]);
 	}
 }
 
@@ -570,7 +573,7 @@ void ModMultiP::solveRiemannTransportInflow(Cell &cellLeft, const int &numberTra
 void ModMultiP::solveRiemannTransportTank(Cell &cellLeft, const int &numberTransports, double *valueTransports)
 {
 	for (int k = 0; k < numberTransports; k++) {
-    fluxBufferTransport[k].solveRiemannTank(cellLeft.getTransport(k).getValue(), fluxBufferMultiP->m_sM, valueTransports[k]);
+    fluxBufferTransport[k].solveRiemannTank(cellLeft.getTransport(k).getValue(), static_cast<FluxMultiP*> (fluxBuff)->m_sM, valueTransports[k]);
 	}
 }
 
@@ -579,22 +582,15 @@ void ModMultiP::solveRiemannTransportTank(Cell &cellLeft, const int &numberTrans
 void ModMultiP::solveRiemannTransportOutflow(Cell &cellLeft, const int &numberTransports, double *valueTransports)
 {
 	for (int k = 0; k < numberTransports; k++) {
-    fluxBufferTransport[k].solveRiemannOutflow(cellLeft.getTransport(k).getValue(), fluxBufferMultiP->m_sM, valueTransports[k]);
+    fluxBufferTransport[k].solveRiemannOutflow(cellLeft.getTransport(k).getValue(), static_cast<FluxMultiP*> (fluxBuff)->m_sM, valueTransports[k]);
 	}
 }
 
 //****************************************************************************
 
-double ModMultiP::getSM()
+const double& ModMultiP::getSM()
 {
-  return fluxBufferMultiP->m_sM;
-}
-
-//****************************************************************************
-
-Coord ModMultiP::getVelocity(Cell *cell) const
-{
-  return cell->getMixture()->getVelocity();
+  return static_cast<FluxMultiP*> (fluxBuff)->m_sM;
 }
 
 //****************************************************************************
@@ -604,17 +600,10 @@ Coord ModMultiP::getVelocity(Cell *cell) const
 void ModMultiP::reverseProjection(const Coord normal, const Coord tangent, const Coord binormal) const
 {
   Coord fluxProjete;
-  fluxProjete.setX(normal.getX()*fluxBufferMultiP->m_qdm.getX() + tangent.getX()*fluxBufferMultiP->m_qdm.getY() + binormal.getX()*fluxBufferMultiP->m_qdm.getZ());
-  fluxProjete.setY(normal.getY()*fluxBufferMultiP->m_qdm.getX() + tangent.getY()*fluxBufferMultiP->m_qdm.getY() + binormal.getY()*fluxBufferMultiP->m_qdm.getZ());
-  fluxProjete.setZ(normal.getZ()*fluxBufferMultiP->m_qdm.getX() + tangent.getZ()*fluxBufferMultiP->m_qdm.getY() + binormal.getZ()*fluxBufferMultiP->m_qdm.getZ());
-  fluxBufferMultiP->m_qdm.setXYZ(fluxProjete.getX(), fluxProjete.getY(), fluxProjete.getZ());
-}
-
-//****************************************************************************
-
-string ModMultiP::whoAmI() const
-{
-  return m_name;
+  fluxProjete.setX(normal.getX()*static_cast<FluxMultiP*> (fluxBuff)->m_qdm.getX() + tangent.getX()*static_cast<FluxMultiP*> (fluxBuff)->m_qdm.getY() + binormal.getX()*static_cast<FluxMultiP*> (fluxBuff)->m_qdm.getZ());
+  fluxProjete.setY(normal.getY()*static_cast<FluxMultiP*> (fluxBuff)->m_qdm.getX() + tangent.getY()*static_cast<FluxMultiP*> (fluxBuff)->m_qdm.getY() + binormal.getY()*static_cast<FluxMultiP*> (fluxBuff)->m_qdm.getZ());
+  fluxProjete.setZ(normal.getZ()*static_cast<FluxMultiP*> (fluxBuff)->m_qdm.getX() + tangent.getZ()*static_cast<FluxMultiP*> (fluxBuff)->m_qdm.getY() + binormal.getZ()*static_cast<FluxMultiP*> (fluxBuff)->m_qdm.getZ());
+  static_cast<FluxMultiP*> (fluxBuff)->m_qdm.setXYZ(fluxProjete.getX(), fluxProjete.getY(), fluxProjete.getZ());
 }
 
 //****************************************************************************

@@ -31,9 +31,9 @@
 #define COORD_H
 
 //! \file      Coord.h
-//! \author    F. Petitpas, K. Schmidmayer, S. Le Martelot
-//! \version   1.0
-//! \date      January 5 2018
+//! \author    F. Petitpas, K. Schmidmayer, S. Le Martelot, B. Dorschner
+//! \version   1.1
+//! \date      June 5 2019
 
 //! \class     Coord
 //! \brief     Class for a coordinate system object such as coordinates of the vertex or a vector
@@ -45,8 +45,20 @@ public:
   //! \param     x                    value of the x-direction coordinate
   //! \param     y                    value of the y-direction coordinate (if it is not assigned it is set to 0.)
   //! \param     z                    value of the z-direction coordinate (if it is not assigned it is set to 0.)
-  Coord(const double &x, const double &y = 0., const double&z = 0.);
-  virtual ~Coord();
+  Coord(const double &x, const double &y = 0., const double &z = 0.);
+  ~Coord();
+  //! \brief     Method for defaultCoord (const version)
+  //! \details   Used for the defaultCoord object
+  const Coord& coord() const;
+  //! \brief     Method for defaultCoord (non-const version)
+  //! \details   Used for the defaultCoord object
+  Coord& coord();
+  //! \brief     Default Coord object (const version)
+  //! \details   Used when returning a const Coord&
+  static const Coord defaultCoord;
+  //! \brief     Default Coord object (non-const version)
+  //! \details   Used when returning a const Coord&
+  static Coord defaultCoordNonConst;
   //! \brief     Set the values of the Coord object
   //! \param     x                    value of the x-direction coordinate
   //! \param     y                    value of the y-direction coordinate
@@ -62,15 +74,17 @@ public:
   //! \param     z                    value of the z-direction coordinate
   void setZ(const double &z);
   //! \brief     Return the value in the x-direction of the Coord object
-  double getX() const;
+  const double& getX() const { return m_x; }
   //! \brief     Return the value in the y-direction of the Coord object
-  double getY() const;
+  const double& getY() const { return m_y; }
   //! \brief     Return the value in the z-direction of the Coord object
-  double getZ() const;
+  const double& getZ() const { return m_z; }
   //! \brief     Return the value of the norm of the Coord object
   double norm() const;
   //! \brief     Return the value of the squared norm of the Coord object
   double squaredNorm() const;
+  //! \brief     Return a Coord object with absolute values of each component
+  Coord abs() const;
 
   //! \brief     Scalar product between the present vector and vector a
   //! \param     a                    vector (Coord)
@@ -127,8 +141,8 @@ public:
   Coord& operator=(const double &scalar);
   Coord& operator*= (const double &scalar);
   Coord& operator/= (const double &scalar);
-  Coord operator* (const double &scalar);
-  Coord operator/ (const double &scalar);
+  Coord operator* (const double &scalar) const; 
+  Coord operator/ (const double &scalar) const;
   Coord& operator+= (const Coord &a);
   Coord& operator-= (const Coord &a);
 

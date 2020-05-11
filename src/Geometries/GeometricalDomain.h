@@ -32,8 +32,8 @@
 
 //! \file      GeometricalDomain.h
 //! \author    F. Petitpas, K. Schmidmayer
-//! \version   1.0
-//! \date      December 19 2017
+//! \version   1.1
+//! \date      June 5 2019
 
 #include <string>
 #include <vector>
@@ -45,7 +45,7 @@
 #include "../Tools.h"
 
 class GeometricalDomain; //pre-declaration of GeometricalDomain class needed for Cell.h inclusion
-#include "../Cell.h"
+#include "../Order1/Cell.h"
 
 //! \class     GeometricalDomain
 //! \brief     General class for geometrical domain
@@ -72,7 +72,7 @@ public:
   //! \param     numberTransports  Number of transport
   virtual void fillIn(Cell *cell, const int &numberPhases, const int &numberTransports) const;
 
-  std::string getName() { return m_name; };
+  const std::string& getName() { return m_name; };
 
 protected:
   std::string m_name;           //!< Geometrical domain name

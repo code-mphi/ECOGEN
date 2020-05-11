@@ -4,10 +4,10 @@
     <physicalDomains> 
         <domain name="base" state="chamberLP" type="entireDomain"/>
         <domain name="HP"  state="shockedState" type="halfSpace">
-            <dataHalfSpace axe="x" origin="0.27" direction="positive"/>
+            <dataHalfSpace axis="x" origin="0.27" direction="positive"/>
         </domain>
         <domain name="bubble"  state="heliumBubble" type="disc">
-            <dataDisc axe1="x" axe2="y" radius="0.02">
+            <dataDisc axis1="x" axis2="y" radius="0.02">
                 <center x="0.23" y="0." z="0."/>
             </dataDisc>
         </domain>
@@ -15,18 +15,18 @@
 
     <!-- LIST OF BOUNDARY CONDITIONS -->
     <boundaryConditions>
-        <boundCond name="CLXm" type="abs" number="1"/>
-        <boundCond name="CLXp" type="abs" number="2"/>
+        <boundCond name="CLXm" type="nonReflecting" number="1"/>
+        <boundCond name="CLXp" type="nonReflecting" number="2"/>
         <boundCond name="CLYm" type="symmetry" number="3"/>
-        <boundCond name="CLYp" type="wall" number="4"/>
+        <boundCond name="CLYp" type="nonReflecting" number="4"/>
     </boundaryConditions>
     
     <!--  LIST OF STATES  -->
     <state name="chamberLP">
-        <material type="fluide" EOS="IG_air.xml">
+        <material type="fluid" EOS="IG_air.xml">
             <dataFluid alpha="1." density="1.29"/>
         </material>
-        <material type="fluide" EOS="IG_helium.xml">
+        <material type="fluid" EOS="IG_helium.xml">
             <dataFluid alpha="0." density="0.167"/>
         </material>
         <mixture>
@@ -36,10 +36,10 @@
     </state>
 
     <state name="shockedState">
-        <material type="fluide" EOS="IG_air.xml">
+        <material type="fluid" EOS="IG_air.xml">
             <dataFluid alpha="1." density="2.4"/>
         </material>
-        <material type="fluide" EOS="IG_helium.xml">
+        <material type="fluid" EOS="IG_helium.xml">
             <dataFluid alpha="0." density="0.167"/>
         </material>
         <mixture>
@@ -49,10 +49,10 @@
     </state>
 
     <state name="heliumBubble">
-        <material type="fluide" EOS="IG_air.xml">
+        <material type="fluid" EOS="IG_air.xml">
             <dataFluid alpha="0." density="1.29"/>
         </material>
-        <material type="fluide" EOS="IG_helium.xml">
+        <material type="fluid" EOS="IG_helium.xml">
             <dataFluid alpha="1." density="0.167"/>
         </material>
         <mixture>

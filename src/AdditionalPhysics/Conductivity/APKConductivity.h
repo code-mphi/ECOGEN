@@ -32,8 +32,8 @@
 
 //! \file      APKConductivity.h
 //! \author    K. Schmidmayer
-//! \version   1.0
-//! \date      December 20 2017
+//! \version   1.1
+//! \date      June 5 2019
 
 #include "../APKapila.h"
 #include "QAPConductivity.h"
@@ -50,8 +50,8 @@ class APKConductivity : public APKapila
 
     virtual void addQuantityAddPhys(Cell *cell);
 
-    virtual void solveFluxAddPhys(CellInterface *cellBound, const int &numberPhases);
-    virtual void solveFluxAddPhysBoundary(CellInterface *cellBound, const int &numberPhases);
+    virtual void solveFluxAddPhys(CellInterface *cellInterface, const int &numberPhases);
+    virtual void solveFluxAddPhysBoundary(CellInterface *cellInterface, const int &numberPhases);
     //! \brief     Solve the conductivity flux between two cells
     //! \param     gradTkLeft           temperature gradient of phase k of the left cell
     //! \param     gradTkRight          temperature gradient of phase k of the right cell
@@ -59,11 +59,11 @@ class APKConductivity : public APKapila
     //! \param     alphakR              volume fraction of phase k of the right cell
     //! \param     numPhase             number of the phase
     void solveFluxConductivityInner(Coord &gradTkLeft, Coord &gradTkRight, double &alphakL, double &alphakR, int &numPhase) const;
-    //! \brief     Solve the conductivity flux at a boundary with an absorption type
+    //! \brief     Solve the conductivity flux at a boundary with an non-reflecting type
     //! \param     gradTkLeft           temperature gradient of phase k of the left cell
     //! \param     alphakL              volume fraction of phase k of the left cell
     //! \param     numPhase             number of the phase
-    void solveFluxConductivityAbs(Coord &gradTkLeft, double &alphakL, int &numPhase) const;
+    void solveFluxConductivityNonReflecting(Coord &gradTkLeft, double &alphakL, int &numPhase) const;
     //! \brief     Solve the conductivity flux at a boundary with an wall type
     //! \param     gradTkLeft           temperature gradient of phase k of the left cell
     //! \param     alphakL              volume fraction of phase k of the left cell
@@ -86,8 +86,7 @@ class APKConductivity : public APKapila
     void solveFluxConductivityOther(Coord &gradTkLeft, double &alphakL, int &numPhase) const;
     virtual void addNonCons(Cell *cell, const int &numberPhases) {}; //The conductivity does not involve non-conservative terms.
 
-    virtual void communicationsAddPhys(Cell **cells, const int &dim);
-		virtual void communicationsAddPhysAMR(Cell **cells, const int &dim, const int &lvl);
+    virtual void communicationsAddPhys(int numberPhases, const int &dim, const int &lvl);
 
   protected:
 

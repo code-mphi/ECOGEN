@@ -32,8 +32,8 @@
 
 //! \file      APKViscosity.h
 //! \author    K. Schmidmayer
-//! \version   1.0
-//! \date      December 20 2017
+//! \version   1.1
+//! \date      June 5 2019
 
 #include "../APKapila.h"
 #include "QAPViscosity.h"
@@ -50,8 +50,8 @@ class APKViscosity : public APKapila
 
     virtual void addQuantityAddPhys(Cell *cell);
 
-    virtual void solveFluxAddPhys(CellInterface *cellBound, const int &numberPhases);
-    virtual void solveFluxAddPhysBoundary(CellInterface *cellBound, const int &numberPhases);
+    virtual void solveFluxAddPhys(CellInterface *cellInterface, const int &numberPhases);
+    virtual void solveFluxAddPhysBoundary(CellInterface *cellInterface, const int &numberPhases);
     //! \brief     Solve the viscosity flux between two cells
     //! \param     velocityLeft         velocity of the left cell
     //! \param     velocityRight        velocity of the right cell
@@ -63,19 +63,16 @@ class APKViscosity : public APKapila
     //! \param     gradWRight           gradient of the velocity in the z-direction of the right cell
     //! \param     muMixLeft            dynamic viscosity of the mixture of the left cell
     //! \param     muMixRight           dynamic viscosity of the mixture of the right cell
-    //! \param     distLeft             distance between the center of the left cell and its corresponding edge
-    //! \param     distRight            distance between the center of the right cell and its corresponding edge
     //! \param     numberPhases         number of phases
-    void solveFluxViscosityInner(Coord &velocityLeft, Coord &velocityRight, Coord &gradULeft, Coord &gradURight, Coord &gradVLeft, Coord &gradVRight, Coord &gradWLeft, Coord &gradWRight, double &muMixLeft, double &muMixRight, double &distLeft, double &distRight, int numberPhases) const;
-    //! \brief     Solve the viscosity flux at a boundary with an absorption type
+    void solveFluxViscosityInner(Coord &velocityLeft, Coord &velocityRight, Coord &gradULeft, Coord &gradURight, Coord &gradVLeft, Coord &gradVRight, Coord &gradWLeft, Coord &gradWRight, double &muMixLeft, double &muMixRight, int numberPhases) const;
+    //! \brief     Solve the viscosity flux at a boundary with an non-reflecting type
     //! \param     velocityLeft         velocity of the left cell
     //! \param     gradULeft            gradient of the velocity in the x-direction of the left cell
     //! \param     gradVLeft            gradient of the velocity in the y-direction of the left cell
     //! \param     gradWLeft            gradient of the velocity in the z-direction of the left cell
     //! \param     muMixLeft            dynamic viscosity of the mixture of the left cell
-    //! \param     distLeft             distance between the center of the left cell and its corresponding edge
     //! \param     numberPhases         number of phases
-    void solveFluxViscosityAbs(Coord &velocityLeft, Coord &gradULeft, Coord &gradVLeft, Coord &gradWLeft, double &muMixLeft, double &distLeft, int numberPhases) const;
+    void solveFluxViscosityNonReflecting(Coord &velocityLeft, Coord &gradULeft, Coord &gradVLeft, Coord &gradWLeft, double &muMixLeft, int numberPhases) const;
     //! \brief     Solve the viscosity flux at a boundary with an wall type
     //! \param     velocityLeft         velocity of the left cell
     //! \param     muMixLeft            dynamic viscosity of the mixture of the left cell
@@ -88,13 +85,13 @@ class APKViscosity : public APKapila
     //! \param     gradVLeft            gradient of the velocity in the y-direction of the left cell
     //! \param     gradWLeft            gradient of the velocity in the z-direction of the left cell
     //! \param     muMixLeft            dynamic viscosity of the mixture of the left cell
-    //! \param     distLeft             distance between the center of the left cell and its corresponding edge
     //! \param     numberPhases         number of phases
-    void solveFluxViscosityOther(Coord &velocityLeft, Coord &gradULeft, Coord &gradVLeft, Coord &gradWLeft, double &muMixLeft, double &distLeft, int numberPhases) const;
+    void solveFluxViscosityOther(Coord &velocityLeft, Coord &gradULeft, Coord &gradVLeft, Coord &gradWLeft, double &muMixLeft, int numberPhases) const;
     virtual void addNonCons(Cell *cell, const int &numberPhases);
+    virtual void addSymmetricTermsRadialAxisOnX(Cell *cell, const int &numberPhases);
+    virtual void addSymmetricTermsRadialAxisOnY(Cell *cell, const int &numberPhases);
 
-    virtual void communicationsAddPhys(Cell **cells, const int &dim);
-		virtual void communicationsAddPhysAMR(Cell **cells, const int &dim, const int &lvl);
+    virtual void communicationsAddPhys(int numberPhases, const int &dim, const int &lvl);
 
   protected:
   

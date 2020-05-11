@@ -32,11 +32,11 @@
 
 //! \file      ModEulerHomogeneousous.h
 //! \author    F. Petitpas, K. Schmidmayer
-//! \version   1.0
-//! \date      February 15 2018
+//! \version   1.1
+//! \date      June 5 2019
 
 #include "../Model.h"
-#include "../../Cell.h"
+#include "../../Order1/Cell.h"
 #include "MixEulerHomogeneous.h"
 
 class ModEulerHomogeneous;
@@ -68,11 +68,12 @@ class ModEulerHomogeneous : public Model
 
     //Accessors
     //---------
-    virtual double getSM();
-    virtual Coord getVelocity(Cell *cell) const;
+    virtual const double& getSM();
+    virtual const Coord& getVelocity(const Cell *cell) const { return cell->getMixture()->getVelocity(); };
+    virtual Coord& getVelocity(Cell *cell) { return cell->getMixture()->getVelocity(); };
     int getLiq();
     int getVap();
-    virtual std::string whoAmI() const;
+    virtual const std::string& whoAmI() const { return m_name; };
 
   protected:
 

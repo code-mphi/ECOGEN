@@ -1,7 +1,7 @@
 <?xml version = "1.0" encoding = "UTF-8" standalone = "yes"?>
 <computationParam>
 	<run>euler1DShockTubeHPLeft</run>
-	<outputMode format="GNU" binary="false" precision="10"/>
+	<outputMode format="XML" binary="false" precision="10"/>
 	<timeControlMode iterations="false">
 		<iterations number="10" iterFreq="1"/>
 		<physicalTime totalTime="6.e-4" timeFreq="6e-5"/>
@@ -10,19 +10,19 @@
 	<secondOrder>
 		<globalLimiter>vanleer</globalLimiter>
 	</secondOrder>
-	<resumeSimulation fileNumber="0"/>
+	<restartSimulation restartFileNumber="0" AMRsaveFreq="0"/>
 
 	<probe name="capteur1">
 		<vertex x="0.3" y="0.05" z="0.05"/>
-		<timeControl acqFreq="1e-5."/>       <!-- if negative or nul, recording at each time step -->
+		<timeControl acqFreq="1e-5."/>       
 	</probe>
 	<probe name="capteur2">
 		<vertex x="0.6" y="0.05" z="0.05"/>
-		<timeControl acqFreq="1e-5."/>       <!-- if negative or nul, recording at each time step -->
+		<timeControl acqFreq="1e-5."/>       
 	</probe>
 	<probe name="capteur3">
 		<vertex x="0.8" y="0.05" z="0.05"/>
-		<timeControl acqFreq="1e-5."/>       <!-- if negative or nul, recording at each time step -->
+		<timeControl acqFreq="1e-5."/>       
 	</probe>
 
 </computationParam>

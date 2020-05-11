@@ -32,8 +32,8 @@
 
 //! \file      APKSurfaceTension.h
 //! \author    K. Schmidmayer
-//! \version   1.0
-//! \date      December 20 2017
+//! \version   1.1
+//! \date      June 5 2019
 
 #include "../APKapila.h"
 #include "QAPSurfaceTension.h"
@@ -50,18 +50,18 @@ class APKSurfaceTension : public APKapila
     virtual void addQuantityAddPhys(Cell *cell);
 
     virtual double computeEnergyAddPhys(QuantitiesAddPhys* QPA);
-    virtual void solveFluxAddPhys(CellInterface *cellBound, const int &numberPhases);
-    virtual void solveFluxAddPhysBoundary(CellInterface *cellBound, const int &numberPhases);
+    virtual void solveFluxAddPhys(CellInterface *cellInterface, const int &numberPhases);
+    virtual void solveFluxAddPhysBoundary(CellInterface *cellInterface, const int &numberPhases);
     //! \brief     Solve the surface-tension flux between two cells
     //! \param     velocityLeft         velocity of the left cell
     //! \param     velocityRight        velocity of the right cell
     //! \param     gradCLeft            color function gradient of the left cell
     //! \param     gradCRight           color function gradient of the right cell
     void solveFluxSurfaceTensionInner(Coord &velocityLeft, Coord &velocityRight, Coord &gradCLeft, Coord &gradCRight) const;
-    //! \brief     Solve the surface-tension flux at a boundary with an absorption type
+    //! \brief     Solve the surface-tension flux at a boundary with an non-reflecting type
     //! \param     velocityLeft         velocity of the left cell
     //! \param     gradCLeft            color function gradient of the left cell
-    void solveFluxSurfaceTensionAbs(Coord &velocityLeft, Coord &gradCLeft) const;
+    void solveFluxSurfaceTensionNonReflecting(Coord &velocityLeft, Coord &gradCLeft) const;
     //! \brief     Solve the surface-tension flux at a boundary with a wall type
     //! \param     gradCLeft            color function gradient of the left cell
     void solveFluxSurfaceTensionWall(Coord &gradCLeft) const;
@@ -78,14 +78,14 @@ class APKSurfaceTension : public APKapila
     //! \param     gradCLeft            color function gradient of the left cell
     void solveFluxSurfaceTensionOther(Coord &velocityLeft, Coord &gradCLeft) const;
     virtual void addNonCons(Cell *cell, const int &numberPhases) {}; //The surface-tension effects do not involve non-conservative terms.
-    virtual void addSymmetricTermsRadialAxeOnX(Cell *cell, const int &numberPhases);
-    virtual void addSymmetricTermsRadialAxeOnY(Cell *cell, const int &numberPhases);
+    virtual void addSymmetricTermsRadialAxisOnX(Cell *cell, const int &numberPhases);
+    virtual void addSymmetricTermsRadialAxisOnY(Cell *cell, const int &numberPhases);
 
-		virtual void reinitializeColorFunction(std::vector<Cell *> *cellsLvl, int &lvl);
+    virtual void reinitializeColorFunction(std::vector<Cell *> *cellsLvl, int &lvl);
+    virtual bool reinitializationActivated() { return m_reinitializationActivated; };
 
-    virtual void communicationsAddPhys(Cell **cells, const int &dim);
-		virtual void communicationsAddPhysAMR(Cell **cells, const int &dim, const int &lvl);
-    virtual int getNumTransportAssociated() const;
+    virtual void communicationsAddPhys(int numberPhases, const int &dim, const int &lvl);
+    virtual const int& getNumTransportAssociated() const { return m_numTransportAssociated; };
 
   protected:
   

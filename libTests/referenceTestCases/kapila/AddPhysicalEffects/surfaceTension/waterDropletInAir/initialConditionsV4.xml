@@ -34,10 +34,10 @@
     
     <!--  LIST OF STATES  -->
     <state name="air">
-        <material type="fluide" EOS="IG_air.xml">
+        <material type="fluid" EOS="IG_air.xml">
             <dataFluid alpha="0.999999" density="1.0"/>
         </material>
-        <material type="fluide" EOS="SG_liquidForSurfaceTensionCases.xml">
+        <material type="fluid" EOS="SG_liquidForSurfaceTensionCases.xml">
             <dataFluid alpha="0.000001" density="1000.0"/>
         </material>
         <mixture>
@@ -48,10 +48,10 @@
     </state>
 
     <state name="waterDroplet">
-        <material type="fluide" EOS="IG_air.xml">
+        <material type="fluid" EOS="IG_air.xml">
             <dataFluid alpha="0.000001" density="1.0"/>
         </material>
-        <material type="fluide" EOS="SG_liquidForSurfaceTensionCases.xml">
+        <material type="fluid" EOS="SG_liquidForSurfaceTensionCases.xml">
             <dataFluid alpha="0.999999" density="1000.0"/>
         </material>
         <mixture>

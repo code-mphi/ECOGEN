@@ -4,22 +4,22 @@
     <physicalDomains> 
         <domain name="left" state="air" type="entireDomain"/>
         <domain name="right"  state="helium" type="halfSpace">
-            <dataHalfSpace axe="x" origin="0.3" direction="positive"/>
+            <dataHalfSpace axis="x" origin="0.3" direction="positive"/>
         </domain>
     </physicalDomains>
 
     <!-- LIST OF BOUNDARY CONDITIONS -->
     <boundaryConditions>
-        <boundCond name="CLXm" type="abs" number="1"/>
-        <boundCond name="CLXp" type="abs" number="2"/>
+        <boundCond name="CLXm" type="nonReflecting" number="1"/>
+        <boundCond name="CLXp" type="nonReflecting" number="2"/>
     </boundaryConditions>
     
     <!--  LIST OF STATES  -->
     <state name="air">
-        <material type="fluide" EOS="IG_air.xml">
+        <material type="fluid" EOS="IG_air.xml">
             <dataFluid alpha="0.1"/>
         </material>
-        <material type="fluide" EOS="IG_helium.xml">
+        <material type="fluid" EOS="IG_helium.xml">
             <dataFluid alpha="0.9"/>
         </material>
         <mixture>
@@ -29,10 +29,10 @@
     </state>
 
     <state name="helium">
-        <material type="fluide" EOS="IG_air.xml">
+        <material type="fluid" EOS="IG_air.xml">
             <dataFluid alpha="0.9"/>
         </material>
-        <material type="fluide" EOS="IG_helium.xml">
+        <material type="fluid" EOS="IG_helium.xml">
             <dataFluid alpha="0.1"/>
         </material>
         <mixture>

@@ -31,9 +31,9 @@
 #define FLUXTHERMALEQ_H
 
 //! \file      FluxThermalEq.h
-//! \author    F. Petitpas
-//! \version   1.0
-//! \date      May 04 2018
+//! \author    F. Petitpas, K. Schmidmayer, J. Caze
+//! \version   1.1
+//! \date      November 18 2019
 
 #include "../Flux.h"
 #include <iostream>
@@ -49,6 +49,7 @@ class FluxThermalEq : public Flux
 
     virtual void printFlux() const;
     virtual void addFlux(double coefA, const int &numberPhases);
+    virtual void addFlux(Flux* flux, const int& numberPhases);
     virtual void subtractFlux(double coefA, const int &numberPhases);
     virtual void multiply(double scalar, const int &numberPhases);
     virtual void setBufferFlux(Cell &cell, const int &numberPhases);
@@ -60,16 +61,16 @@ class FluxThermalEq : public Flux
     virtual void subtractNonCons(double coefA, const Cell *cell, const int &numberPhases) {};
     virtual void correctionEnergy(Cell *cell, const int &numberPhases, Prim type = vecPhases) const {};
 
-    virtual void integrateSourceTermsHeating(Cell *cell, const double &dt, const int &numberPhases, const double &q);
+    virtual void prepSourceTermsHeating(Cell *cell, const double &dt, const int &numberPhases, const double &q);
 
     virtual void addTuyere1D(Coord &normal, double const &surface, Cell *cell, const int &numberPhases){};
     virtual void subtractTuyere1D(Coord &normal, double const &surface, Cell *cell, const int &numberPhases){};
 
     // Accessors
     //----------
-    virtual double getMasse(const int &numPhase) const;
-    virtual Coord getQdm() const;
-    virtual double getEnergyMix() const;
+    virtual const double& getMasse(const int &numPhase) const { return m_masse[numPhase]; };
+    virtual const Coord& getQdm() const { return m_qdm; };
+    virtual const double& getEnergyMix() const { return m_energMixture; };
     virtual void setCons(const Flux *cons, const int &numberPhases);
 
 protected:
@@ -83,8 +84,5 @@ protected:
     // To modify if needed, example: to add a class PATViscosity, add friend class PATViscosity.
 
 };
-
-extern FluxThermalEq *fluxBufferThermalEq;
-extern FluxThermalEq *sourceConsThermEq;
 
 #endif // FLUXTHERMALEQ_H

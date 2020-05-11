@@ -28,19 +28,14 @@
 //  If not, see <http://www.gnu.org/licenses/>.
 
 //! \file      FluxMultiP.cpp
-//! \author    F. Petitpas
-//! \version   1.0
-//! \date      June 5 2017
+//! \author    F. Petitpas, K. Schmidmayer, J. Caze
+//! \version   1.1
+//! \date      November 18 2019
 
 #include <cmath>
 #include <algorithm>
 #include "FluxMultiP.h"
 #include "../Mixture.h"
-
-using namespace std;
-
-FluxMultiP *fluxBufferMultiP;
-FluxMultiP *sourceConsMultiP;
 
 //***********************************************************************
 
@@ -68,7 +63,7 @@ FluxMultiP::~FluxMultiP()
 
 void FluxMultiP::printFlux() const
 {
-  cout << m_masse << " " << m_qdm.getX() << " " << m_energ << endl;
+  std::cout << m_masse << " " << m_qdm.getX() << " " << m_energ << std::endl;
 }
 
 //***********************************************************************
@@ -76,12 +71,25 @@ void FluxMultiP::printFlux() const
 void FluxMultiP::addFlux(double coefA, const int &numberPhases)
 {
   for (int k = 0; k < numberPhases; k++) {
-    m_alpha[k] += coefA*fluxBufferMultiP->m_alpha[k];
-    m_masse[k] += coefA*fluxBufferMultiP->m_masse[k];
-    m_energ[k] += coefA*fluxBufferMultiP->m_energ[k];
+    m_alpha[k] += coefA*static_cast<FluxMultiP*> (fluxBuff)->m_alpha[k];
+    m_masse[k] += coefA*static_cast<FluxMultiP*> (fluxBuff)->m_masse[k];
+    m_energ[k] += coefA*static_cast<FluxMultiP*> (fluxBuff)->m_energ[k];
   }
-  m_qdm += coefA*fluxBufferMultiP->m_qdm;
-  m_energMixture += coefA*fluxBufferMultiP->m_energMixture;
+  m_qdm += coefA*static_cast<FluxMultiP*> (fluxBuff)->m_qdm;
+  m_energMixture += coefA*static_cast<FluxMultiP*> (fluxBuff)->m_energMixture;
+}
+
+//***********************************************************************
+
+void FluxMultiP::addFlux(Flux* flux, const int &numberPhases)
+{
+  for (int k = 0; k < numberPhases; k++) {
+    m_alpha[k] += static_cast<FluxMultiP*> (flux)->m_alpha[k];
+    m_masse[k] += static_cast<FluxMultiP*> (flux)->m_masse[k];
+    m_energ[k] += static_cast<FluxMultiP*> (flux)->m_energ[k];
+  }
+  m_qdm += static_cast<FluxMultiP*> (flux)->m_qdm;
+  m_energMixture += static_cast<FluxMultiP*> (flux)->m_energMixture;
 }
 
 //***********************************************************************
@@ -89,12 +97,12 @@ void FluxMultiP::addFlux(double coefA, const int &numberPhases)
 void FluxMultiP::subtractFlux(double coefA, const int &numberPhases)
 {
   for (int k = 0; k < numberPhases; k++) {
-    m_alpha[k] -= coefA*fluxBufferMultiP->m_alpha[k];
-    m_masse[k] -= coefA*fluxBufferMultiP->m_masse[k];
-    m_energ[k] -= coefA*fluxBufferMultiP->m_energ[k];
+    m_alpha[k] -= coefA*static_cast<FluxMultiP*> (fluxBuff)->m_alpha[k];
+    m_masse[k] -= coefA*static_cast<FluxMultiP*> (fluxBuff)->m_masse[k];
+    m_energ[k] -= coefA*static_cast<FluxMultiP*> (fluxBuff)->m_energ[k];
   }
-  m_qdm -= coefA*fluxBufferMultiP->m_qdm;
-  m_energMixture -= coefA*fluxBufferMultiP->m_energMixture;
+  m_qdm -= coefA*static_cast<FluxMultiP*> (fluxBuff)->m_qdm;
+  m_energMixture -= coefA*static_cast<FluxMultiP*> (fluxBuff)->m_energMixture;
 }
 
 //***********************************************************************
@@ -115,7 +123,7 @@ void FluxMultiP::multiply(double scalar, const int &numberPhases)
 
 void FluxMultiP::setBufferFlux(Cell &cell, const int &numberPhases)
 {
-  fluxBufferMultiP->buildCons(cell.getPhases(), numberPhases, cell.getMixture());
+  static_cast<FluxMultiP*> (fluxBuff)->buildCons(cell.getPhases(), numberPhases, cell.getMixture());
 }
 
 //***********************************************************************
@@ -123,17 +131,12 @@ void FluxMultiP::setBufferFlux(Cell &cell, const int &numberPhases)
 void FluxMultiP::buildCons(Phase **phases, const int &numberPhases, Mixture *mixture)
 {
 	double energieInterne(0.);
-	Phase *phase(0);
   for (int k = 0; k < numberPhases; k++)
 	{
-		phase = phases[k];
-    TB->ak[k] = phase->getAlpha();
-    TB->rhok[k] = phase->getDensity();
-		m_alpha[k] = TB->ak[k];
-		m_masse[k] = TB->ak[k] * TB->rhok[k];
-		//Specific total energy calculus phase k
-		energieInterne = TB->eos[k]->computeEnergy(TB->rhok[k], phase->getPressure());
-		m_energ[k] = TB->ak[k] * TB->rhok[k] * energieInterne;
+		m_alpha[k] = phases[k]->getAlpha();
+		m_masse[k] = phases[k]->getAlpha() * phases[k]->getDensity();
+		energieInterne = phases[k]->getEos()->computeEnergy(phases[k]->getDensity(), phases[k]->getPressure());
+		m_energ[k] = phases[k]->getAlpha() * phases[k]->getDensity() * energieInterne;
 	}
 	m_qdm = mixture->getDensity()*mixture->getVelocity();
   m_energMixture = mixture->getDensity()*mixture->getTotalEnergy();
@@ -147,31 +150,38 @@ void FluxMultiP::buildPrim(Phase **phases, Mixture *mixture, const int &numberPh
 
   //Verification and correction if needed (alpha and mass for order 2)
   double un(0.);
-  for (int k = 0; k < numberPhases; k++) {
-    if (m_alpha[k] <= 1.e-10) m_alpha[k] = 1e-9;
-    if (m_alpha[k] >= 1.-1.e-10) m_alpha[k] = 1.0 - 1e-9;
-    un += m_alpha[k];
+  if (epsilonAlphaNull > 1.e-20) { // alpha = 0 is activated
+    for (int k = 0; k < numberPhases; k++) {
+      if (m_alpha[k] < 0.) m_alpha[k] = 0.;
+      if (m_alpha[k] > 1.) m_alpha[k] = 1.;
+      un += m_alpha[k];
+    }
+  }
+  else { // alpha = 0 is desactivated (alpha != 0)
+    for (int k = 0; k < numberPhases; k++) {
+      if (m_alpha[k] <= 1.e-15) m_alpha[k] = 1e-15;
+      if (m_alpha[k] >= 1.-1.e-15) m_alpha[k] = 1.0 - 1e-15;
+      un += m_alpha[k];
+    }
   }
   for (int k = 0; k < numberPhases; k++) { m_alpha[k] /= un; }
 
   //Phases and mixture variables
-  Phase *phase(0);
   for (int k = 0; k < numberPhases; k++) {
-      phase = phases[k];
       rhoMel = rhoMel + m_masse[k];
-      phase->setAlpha(m_alpha[k]);
-      phase->setDensity(m_masse[k]/m_alpha[k]);
+      phases[k]->setAlpha(m_alpha[k]);
+      phases[k]->setDensity(m_masse[k] / std::max(m_alpha[k], epsilonAlphaNull));
       //Calcul Pressure
-      energieInterne = m_energ[k]/m_masse[k];
-      pressure = TB->eos[k]->computePressure(phase->getDensity(),energieInterne);
-      phase->setPressure(pressure);
-      phase->verifyAndCorrectPhase();
+      energieInterne = m_energ[k] / std::max(m_masse[k], epsilonAlphaNull);
+      pressure = TB->eos[k]->computePressure(phases[k]->getDensity(), energieInterne);
+      phases[k]->setPressure(pressure);
+      phases[k]->verifyAndCorrectPhase();
   }
   mixture->setVelocity(m_qdm.getX() / rhoMel, m_qdm.getY() / rhoMel, m_qdm.getZ() / rhoMel);
   //Erasing small velocity variations
-  if (abs(mixture->getU()) < 1.e-8) mixture->setU(0.);
-  if (abs(mixture->getV()) < 1.e-8) mixture->setV(0.);
-  if (abs(mixture->getW()) < 1.e-8) mixture->setW(0.);
+  if (std::fabs(mixture->getU()) < 1.e-8) mixture->setU(0.);
+  if (std::fabs(mixture->getV()) < 1.e-8) mixture->setV(0.);
+  if (std::fabs(mixture->getW()) < 1.e-8) mixture->setW(0.);
   for (int k = 0; k < numberPhases; k++) {
     phases[k]->extendedCalculusPhase(mixture->getVelocity());
   }
@@ -200,12 +210,12 @@ void FluxMultiP::setToZero(const int &numberPhases)
 void FluxMultiP::setToZeroBufferFlux(const int &numberPhases)
 {
   for (int k = 0; k<numberPhases; k++) {
-    fluxBufferMultiP->m_alpha[k] = 0.;
-    fluxBufferMultiP->m_masse[k] = 0.;
-    fluxBufferMultiP->m_energ[k] = 0.;
+    static_cast<FluxMultiP*> (fluxBuff)->m_alpha[k] = 0.;
+    static_cast<FluxMultiP*> (fluxBuff)->m_masse[k] = 0.;
+    static_cast<FluxMultiP*> (fluxBuff)->m_energ[k] = 0.;
   }
-  fluxBufferMultiP->m_qdm = 0.;
-  fluxBufferMultiP->m_energMixture = 0.;
+  static_cast<FluxMultiP*> (fluxBuff)->m_qdm = 0.;
+  static_cast<FluxMultiP*> (fluxBuff)->m_energMixture = 0.;
 }
 
 //***********************************************************************
@@ -215,8 +225,8 @@ void FluxMultiP::addNonCons(double coefA, const Cell *cell, const int &numberPha
   Phase *phase;
   for(int k=0;k<numberPhases;k++){
     phase = cell->getPhase(k);
-    m_alpha[k] += -coefA*phase->getAlpha()*fluxBufferMultiP->m_sM;
-    m_energ[k] += coefA*phase->getAlpha()*phase->getPressure()*fluxBufferMultiP->m_sM;
+    m_alpha[k] += -coefA*phase->getAlpha()*static_cast<FluxMultiP*> (fluxBuff)->m_sM;
+    m_energ[k] += coefA*phase->getAlpha()*phase->getPressure()*static_cast<FluxMultiP*> (fluxBuff)->m_sM;
   }
 }
 
@@ -227,8 +237,8 @@ void FluxMultiP::subtractNonCons(double coefA, const Cell *cell, const int &numb
   Phase *phase;
   for(int k=0;k<numberPhases;k++){
     phase = cell->getPhase(k);
-    m_alpha[k] -= -coefA*phase->getAlpha()*fluxBufferMultiP->m_sM;
-    m_energ[k] -= coefA*phase->getAlpha()*phase->getPressure()*fluxBufferMultiP->m_sM;
+    m_alpha[k] -= -coefA*phase->getAlpha()*static_cast<FluxMultiP*> (fluxBuff)->m_sM;
+    m_energ[k] -= coefA*phase->getAlpha()*phase->getPressure()*static_cast<FluxMultiP*> (fluxBuff)->m_sM;
   }
 }
 
@@ -238,23 +248,19 @@ void FluxMultiP::schemeCorrection(Cell *cell, const int &numberPhases, Prim type
 {
   double rhoN(0.), rhoNp1(0.), sommeDeltaek(0.);
   for (int k = 0; k < numberPhases; k++) {
-    rhoN += fluxBufferMultiP->getMasse(k);
+    rhoN += static_cast<FluxMultiP*> (fluxBuff)->getMasse(k);
     rhoNp1 += m_masse[k];
-    TB->Deltaek[k] = m_energ[k] - fluxBufferMultiP->getEnergy(k);
-  }
-
-  for (int k = 0; k < numberPhases; k++) { 
-    //TB->Deltaek[k] *= (fluxBufferMultiP->getMasse(k));
-    sommeDeltaek += TB->Deltaek[k]; 
+    TB->Deltaek[k] = (m_energ[k] - static_cast<FluxMultiP*> (fluxBuff)->getEnergy(k));
+    sommeDeltaek += TB->Deltaek[k];
   }
 
   double DeltaE, DeltarhoU2;
-  DeltaE = m_energMixture - fluxBufferMultiP->getEnergyMix();
-  DeltarhoU2 = m_qdm.squaredNorm() / rhoNp1 - fluxBufferMultiP->getQdm().squaredNorm() / rhoN;
+  DeltaE = m_energMixture - static_cast<FluxMultiP*> (fluxBuff)->getEnergyMix();
+  DeltarhoU2 = m_qdm.squaredNorm() / rhoNp1 - static_cast<FluxMultiP*> (fluxBuff)->getQdm().squaredNorm() / rhoN;
 
-  if (abs(sommeDeltaek) > 1.e-10*m_energMixture) {
+  if (std::fabs(sommeDeltaek) > 1.e-10*m_energMixture) {
     for (int k = 0; k < numberPhases; k++) {
-      m_energ[k] = fluxBufferMultiP->getEnergy(k) + TB->Deltaek[k] / sommeDeltaek * (DeltaE - 0.5*DeltarhoU2);
+      m_energ[k] = static_cast<FluxMultiP*> (fluxBuff)->getEnergy(k) + TB->Deltaek[k] / sommeDeltaek * (DeltaE - 0.5*DeltarhoU2);
     }
   }
 }
@@ -263,97 +269,121 @@ void FluxMultiP::schemeCorrection(Cell *cell, const int &numberPhases, Prim type
 
 void FluxMultiP::addSymmetricTerms(Phase **phases, Mixture *mixture, const int &numberPhases, const double &r, const double &v, const double &dt)
 {
-  //double alphaNplus1(0.), masseNplus1(0.); //For option 2
   for (int k = 0; k<numberPhases; k++)
   {
-    //Option 1: classical way
-    m_alpha[k] += -phases[k]->getAlpha() * v / r;
+    //Note: there is no cylindrical or spherical terms in a transport equation
     m_masse[k] += -phases[k]->getAlpha() * phases[k]->getDensity() * v / r;
-
-    //Option 2: more robust but ommit sometime the terms
-    //Idea: if ((U^n+1 = U^n + (fluxSum + SymTerms)*dt) > 1.e-10) then etc. (for alpha and mass)
-    //alphaNplus1 = phases[k]->getAlpha() + (m_alpha[k] - phases[k]->getAlpha() * v / r) * dt;
-    //if ((alphaNplus1 > 1.e-10) && (alphaNplus1 < 1. - 1.e-10)) { m_alpha[k] += -phases[k]->getAlpha() * v / r; }
-    //masseNplus1 = phases[k]->getAlpha() * phases[k]->getDensity() + (m_masse[k] - phases[k]->getAlpha() * phases[k]->getDensity() * v / r) * dt;
-    //if (masseNplus1 > 1.e-10) { m_masse[k] += -phases[k]->getAlpha() * phases[k]->getDensity() * v / r; }
-
-    m_energ[k] += -phases[k]->getAlpha() * phases[k]->getDensity() * phases[k]->getEnergy() * v / r;
+    m_energ[k] += -(phases[k]->getAlpha() * phases[k]->getDensity() * phases[k]->getEnergy() + phases[k]->getAlpha() * phases[k]->getPressure()) * v / r;
   }
   m_qdm += -v / r * mixture->getDensity() * mixture->getVelocity();
-  m_energMixture += -mixture->getDensity() * mixture->getTotalEnergy() * v / r;
+  m_energMixture += -(mixture->getDensity() * mixture->getTotalEnergy() + mixture->getPressure()) * v / r;
 }
 
 //***********************************************************************
 
-void FluxMultiP::integrateSourceTermsGravity(Cell *cell, const double &dt, const int &numberPhases, const int &axe, const int &direction, const Coord &g)
-{
-  sourceConsMultiP->setToZero(numberPhases);
-  //Mass and velocity extraction
-  double rho = cell->getMixture()->getDensity();
-  Coord u = cell->getMixture()->getVelocity();
-
-  //Gravity force and work
-  sourceConsMultiP->m_qdm = rho*g;
-  sourceConsMultiP->m_energMixture = rho*Coord::scalarProduct(g, u);
-
-  //Euler integration (order 1)
-  m_qdm += dt*sourceConsMultiP->m_qdm;
-  m_energMixture += dt*sourceConsMultiP->m_energMixture;
-}
-
-//***********************************************************************
-
-void FluxMultiP::integrateSourceTermsHeating(Cell *cell, const double &dt, const int &numberPhases, const double &q)
-{
-  sourceConsMultiP->setToZero(numberPhases);
-
-  //Version 1 on 2p model, then relax
-  sourceConsMultiP->m_energMixture = q;
-  double sumMasses(0.);
-  for (int k = 0; k < numberPhases; k++) {
-    sumMasses += m_masse[k];
-  }
-    for (int k = 0; k < numberPhases; k++) {
-    sourceConsMultiP->m_energ[k] = m_masse[k] / sumMasses * q;
-    m_energ[k] += dt*sourceConsMultiP->m_energ[k];
-  }
-  m_energMixture += dt*sourceConsMultiP->m_energMixture;
-}
+//void FluxMultiP::prepSourceTermsGravity(Cell *cell, const double &dt, const int &numberPhases, const int &axis, const int &direction, const Coord &g)
+//{
+//  // Mass and velocity extraction
+//  double rho; 
+//  Coord u;
+//  
+//  for (int k = 0; k < numberPhases; k++){
+//    rho = m_masse[k];
+//  }
+//  u = m_qdm/rho;
+//
+//  //Gravity force and work
+//  m_qdm = rho*g;
+//  m_energMixture = rho*Coord::scalarProduct(g, u);
+//}
 
 //***********************************************************************
 
-double FluxMultiP::getAlpha(const int &numPhase) const
-{
-  return m_alpha[numPhase];
-}
+//void FluxMultiP::prepSourceTermsHeating(Cell *cell, const double &dt, const int &numberPhases, const double &q)
+//{
+//  //Version 1 on 2p model, then relax
+//  m_energMixture = q;
+//  double sumMasses(0.);
+//  for (int k = 0; k < numberPhases; k++) {
+//    sumMasses += m_masse[k];
+//  }
+//  for (int k = 0; k < numberPhases; k++) {
+//    m_energ[k] = m_masse[k] / sumMasses * q;
+//  }
+//
+//  ////Version 2 directly on Kapila model
+//  //double p0 = cell->getMixture()->getPressure();
+//  //double v = 1./cell->getMixture()->getDensity();
+//  //vector<double> vk(numberPhases);
+//  //vector<double> vk0(numberPhases);
+//  //for (int k = 0; k < numberPhases; k++) {
+//  //  vk0[k] = 1./cell->getPhase(k)->getDensity();
+//  //}
+//  //double pStar(p0+1.);
+//  //double dvkdp(0.);
+//
+//  //int iteration(0);
+//  //double f(0.), df(1.);
+//  //do {
+//  //  pStar -= f / df; iteration++;
+//  //  if (iteration > 50) {
+//  //    errors.push_back(Errors("not converged in integrateSourceTermsHeating", __FILE__, __LINE__));
+//  //    break;
+//  //  }
+//  //  //Physical pressure?
+//  //  for (int k = 0; k < numberPhases; k++) { TB->eos[k]->verifyAndModifyPressure(pStar); }
+//  //  //Specific volumes after heating
+//  //  f = 1.;
+//  //  df = 0.;
+//  //  for (int k = 0; k < numberPhases; k++) {
+//  //    vk[k] = TB->eos[k]->computeSpecificVolumeQ(p0, vk0[k], pStar, q*v*dt, &dvkdp);
+//  //    f -= m_masse[k] * vk[k];
+//  //    df -= m_masse[k] * dvkdp;
+//  //  }
+//  //} while (std::fabs(f)>1e-12);
+//
+//  ////Cell update
+//  //Phase *phase;
+//  //double ak;
+//  //for (int k = 0; k < numberPhases; k++) {
+//  //  phase = cell->getPhase(k);
+//  //  ak = m_masse[k] * vk[k];
+//  //  phase->setAlpha(ak);
+//  //  phase->setDensity(1./vk[k]);
+//  //  phase->setPressure(pStar);
+//
+//  //  //m_alpha[k] = m_masse[k] * vk[k];
+//  //  //m_energ[k] = m_masse[k] * TB->eos[k]->computeEnergy(1. / vk[k], pStar);
+//  //}
+//
+//  //
+//  ////m_energMixture += dt*q;
+//
+//  ////cell->getMixture()->setPressure(pStar);
+//  //cell->fulfillState();
+//}
 
 //***********************************************************************
 
-double FluxMultiP::getMasse(const int &numPhase) const
-{
-  return m_masse[numPhase];
-}
-
-//***********************************************************************
-
-double FluxMultiP::getEnergy(const int &numPhase) const
-{
-  return m_energ[numPhase];
-}
-
-//***********************************************************************
-
-Coord FluxMultiP::getQdm() const
-{
-  return m_qdm;
-}
-
-//***********************************************************************
-
-double FluxMultiP::getEnergyMix() const
-{
-	return m_energMixture;
-}
+//void FluxMultiP::prepSourceTermsMRF(Cell *cell, const double &dt, const int &numberPhases, const Coord &omega)
+//{
+//  // Mass and velocity extraction
+//  double rho(0.);
+//  Coord u(0.);
+//  
+//  for (int k = 0; k < numberPhases; k++){
+//    rho += m_masse[k];
+//  }
+//  u = m_qdm/rho;
+//  
+//  //Coriolis acceleration
+//  m_qdm = -2.*rho*Coord::crossProduct(omega,u);
+//  //Centrifugal acceleration
+//  m_qdm -= rho*Coord::crossProduct(omega, Coord::crossProduct(omega, cell->getPosition()));
+//  //Centrifugal acceleration work
+//  m_energMixture = Coord::scalarProduct(u, m_qdm); //JC//Q// The mixture energy is not used in this model and phase total energy are not taken into consideration
+//
+//}
 
 //***********************************************************************
 

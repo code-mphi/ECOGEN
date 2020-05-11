@@ -31,14 +31,14 @@
 #define FLUX_H
 
 //! \file      Flux.h
-//! \author    F. Petitpas, K. Schmidmayer, S. Le Martelot
-//! \version   1.0
-//! \date      December 22 2017
+//! \author    F. Petitpas, K. Schmidmayer, S. Le Martelot, J. Caze
+//! \version   1.1
+//! \date      November 19 2019
 
 class Flux; //Predeclaration of class Flux to include Cell.h
 
 #include "Phase.h"
-#include "../Cell.h"
+#include "../Order1/Cell.h"
 #include "../Tools.h"
 
 //! \class     Flux
@@ -50,7 +50,12 @@ class Flux
     virtual ~Flux();
 
     virtual void printFlux() const { Errors::errorMessage("printFlux not available for required model"); };
-    //! \brief     Add flux to the corresponding model buffer flux
+
+    //! \brief     Add flux passed in parameter to the correspond model flux
+    //! \param     flux           flux to add to the current one
+    //! \param     numberPhases   number of phases
+    virtual void addFlux(Flux *flux, const int& numberPhases) { Errors::errorMessage("addFlux not available for required model"); };
+    //! \brief     Add flux to the corresponding model flux
     //! \param     coefA          possibility to multiply the flux before adding (set 1.d0 if not needed)
     //! \param     numberPhases   number of phases
     virtual void addFlux(double coefA, const int &numberPhases){ Errors::errorMessage("addFlux not available for required model"); };
@@ -58,7 +63,7 @@ class Flux
     //! \param     coefA          possibility to multiply the flux before subtraction (set 1.d0 if not needed)
     //! \param     numberPhases   number of phases
     virtual void subtractFlux(double coefA, const int &numberPhases){ Errors::errorMessage("subtractFlux not available for required model"); };
-    //! \brief     multiply flux by a constant
+    //! \brief     multiply the flux of the corresponding model by a constant
     //! \param     scalar       constant
     //! \param     numberPhases   number of phases
     virtual void multiply(double scalar, const int &numberPhases){ Errors::errorMessage("multiply not available for required model"); };
@@ -67,6 +72,7 @@ class Flux
     //! \param     cell           cell used for conservative variables calculus
     //! \param     numberPhases   number of phases
     virtual void setBufferFlux(Cell &cell, const int &numberPhases){ Errors::errorMessage("setBufferFlux not available for required model"); };
+    // virtual void setBufferFlux(Cell *cell, const int &numberPhases){ Errors::errorMessage("setBufferFlux not available for required model"); };
     //! \brief     Build the conservative variables for a given cell from primitive one
     //! \param     phases         Phases array used for conservative variables calculus
     //! \param     mixture        Mixture used for conservative variables calculus
@@ -83,7 +89,7 @@ class Flux
     //! \brief     set each attribute of the corresponding buffer flux to zero
     //! \param     numberPhases   number of phases
     virtual void setToZeroBufferFlux(const int &numberPhases) { Errors::errorMessage("setToZero not available for required model"); };
-
+    
     //! \brief     Add non conservative term to the flux
     //! \param     coefA          possibility to multiply the non conservative term before adding (set 1.d0 if not needed)
     //! \param     cell           reference cell used to approximate the non conservative term
@@ -103,31 +109,36 @@ class Flux
     virtual void schemeCorrection(Cell *cell, const int &numberPhases, Prim type = vecPhases) const {};
 
     //! \brief     Add symetric terms 
+	//! \param     r   radial distance of the cell from the axis of symmetry
+	//! \param     v   velocity in the radial direction
     virtual void addSymmetricTerms(Phase **phases, Mixture *mixture, const int &numberPhases, const double &r, const double &v) { Errors::errorMessage("addSymmetricTerms not implemented for used model"); };
 
     //! \brief     Gravity source term
-    virtual void integrateSourceTermsGravity(Cell *cell, const double &dt, const int &numberPhases, const int &axe, const int &direction, const Coord &g){ Errors::errorMessage("integrateSourceTermsGravity not available for required model"); };
+    virtual void prepSourceTermsGravity(Cell *cell, const double &dt, const int &numberPhases, const Coord &g){ Errors::errorMessage("prepSourceTermsGravity not available for required model"); };
     //! \brief     Heating source term
-    virtual void integrateSourceTermsHeating(Cell *cell, const double &dt, const int &numberPhases, const double &q) { Errors::errorMessage("integrateSourceTermsHeating not available for required model"); };
+    virtual void prepSourceTermsHeating(Cell *cell, const double &dt, const int &numberPhases, const double &q) { Errors::errorMessage("prepSourceTermsHeating not available for required model"); };
     //! \brief     MRF source term
-    virtual void integrateSourceTermsMRF(Cell *cell, const double &dt, const int &numberPhases, const Coord &omega) { Errors::errorMessage("integrateSourceTermsMRF not available for required model"); };
+    virtual void prepSourceTermsMRF(Cell* cell, const double& dt, const int& numberPhases, const Coord& omega) { Errors::errorMessage("prepSourceTermsMRF not available for required model"); };
 
     virtual void addTuyere1D(const Coord normal, const double surface, Cell *cell, const int &numberPhases){};
     virtual void subtractTuyere1D(const Coord normal, const double surface, Cell *cell, const int &numberPhases){};
 
     // Accessors
     //----------
-    virtual double getAlpha(const int &numPhase) const { return 0.; };
-    virtual double getMasse(const int &numPhase) const { return 0.; };
-    virtual double getEnergy(const int &numPhase) const { return 0.; };
-    virtual Coord getQdm() const { return 0.; };
-    virtual double getMasseMix() const { return 0.; };
-    virtual double getEnergyMix() const { return 0.; };
+    virtual const double& getAlpha(const int &numPhase) const { return Errors::defaultDouble; };
+    virtual const double& getMasse(const int &numPhase) const { return Errors::defaultDouble; };
+    virtual const double& getEnergy(const int &numPhase) const { return Errors::defaultDouble; };
+    virtual const Coord& getQdm() const { return Coord::defaultCoord; };
+    virtual const double& getMasseMix() const { return Errors::defaultDouble; };
+    virtual const double& getEnergyMix() const { return Errors::defaultDouble; };
     virtual void setCons(const Flux *cons, const int &numberPhases) { Errors::errorMessage("setCons not available for required model"); };
 
   protected:
-    double  m_sM;     //!< Fluid velocity for intercell boundaries
+    double  m_sM;     //!< Fluid velocity for intercell interfaces
   private:
 };
+
+extern std::vector<Flux*> sourceCons;
+extern Flux* fluxBuff;
 
 #endif // FLUX_H

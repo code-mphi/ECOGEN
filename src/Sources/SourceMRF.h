@@ -31,9 +31,9 @@
 #define SOURCEMRF_H
 
 //! \file      SourceMRF.h
-//! \author    F. Petitpas
+//! \author    F. Petitpas, J. Caze
 //! \version   1.0
-//! \date      July 06 2018
+//! \date      October 29 2019
 
 #include "Source.h"
 
@@ -48,10 +48,10 @@ public:
   //!            ex: <dataMRF omega="1.d3"/>
   //! \param     element          XML element to read for source term
   //! \param     fileName         string name of readed XML file
-  SourceMRF(tinyxml2::XMLElement *element, std::string fileName = "Unknown file");
+  SourceMRF(tinyxml2::XMLElement *element, int order, std::string fileName = "Unknown file");
   virtual ~SourceMRF();
 
-  virtual void integrateSourceTerms(Cell *cell, const int &numberPhases, const double &dt);
+  virtual void prepSourceTerms(Cell *cell, const int &numberPhases, const double &dt, const int i=0 );
   virtual void sourceEvolution(const double &time);
 
   virtual Coord computeAbsVelocity(const Coord relVelocity, const Coord position);

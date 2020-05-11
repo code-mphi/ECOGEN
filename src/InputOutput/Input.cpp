@@ -29,15 +29,13 @@
 
 //! \file      Input.cpp
 //! \author    F. Petitpas, K. Schmidmayer
-//! \version   1.0
-//! \date      July 20 2018
+//! \version   1.1
+//! \date      June 5 2019
 
 #include "Input.h"
 #include "HeaderInputOutput.h"
-#include <iostream>
 #include "../Meshes/stretchZone.h"
 
-using namespace std;
 using namespace tinyxml2;
 
 //***********************************************************************
@@ -62,32 +60,32 @@ Input::~Input(){}
 
 //***********************************************************************
 
-void Input::lectureInputXML(vector<GeometricalDomain*> &domains, vector<BoundCond*> &boundCond)
+void Input::lectureInputXML(std::vector<GeometricalDomain*> &domains, std::vector<BoundCond*> &boundCond)
 {
   try{
     //1) Parametres generaux du compute
     entreeMain(m_run->m_simulationName);
     //2) Donnees de Mesh
     entreeMesh(m_run->m_simulationName);
-    //3) Donnees models et fluides
+    //3) Donnees models et fluids
     entreeModel(m_run->m_simulationName);
     //4) Lecture des conditions initiales
     entreeConditionsInitiales(m_run->m_simulationName, domains, boundCond);
   }
   catch (ErrorXML &e){
-    if(rankCpu==0) cerr << e.infoError() << endl;
+    if(rankCpu==0) std::cerr << e.infoError() << std::endl;
     throw;
   }
 }
 
 //***********************************************************************
 
-void Input::entreeMain(string casTest)
+void Input::entreeMain(std::string casTest)
 {
   try{
     //1) Parsing du file XML par la bibliotheque tinyxml2
     //------------------------------------------------------
-	  stringstream fileName(casTest + m_nameMain);
+	  std::stringstream fileName(casTest + m_nameMain);
     XMLDocument xmlMain;
     XMLError error(xmlMain.LoadFile(fileName.str().c_str())); //Le file est parse ici
     if (error != XML_SUCCESS) throw ErrorXML(fileName.str(),__FILE__, __LINE__);
@@ -112,7 +110,7 @@ void Input::entreeMain(string casTest)
     element = computationParam->FirstChildElement("outputMode");
     if (element == NULL) throw ErrorXMLElement("outputMode", fileName.str(), __FILE__, __LINE__);
     //Lecture format sortie
-    string format(element->Attribute("format"));
+    std::string format(element->Attribute("format"));
     if (format == "") throw ErrorXMLAttribut("format", fileName.str(), __FILE__, __LINE__);
     Tools::uppercase(format);
     if (format == "XML") { m_run->m_outPut = new OutputXML(casTest, xmlText->Value(), element, fileName.str(), this); }
@@ -140,6 +138,16 @@ void Input::entreeMain(string casTest)
       m_run->m_probes.push_back(new OutputProbeGNU(casTest, xmlText->Value(), element, fileName.str(), this));
       element = element->NextSiblingElement("probe");
     }
+
+	//Record global quantity on whole domain (mass, total energy)
+	element = computationParam->FirstChildElement("recordGlobalQuantity");
+	if (element != NULL) {
+		std::string quantity(element->Attribute("quantity"));
+		if (quantity == "") throw ErrorXMLAttribut("quantity", fileName.str(), __FILE__, __LINE__);
+		Tools::lowercase(quantity);
+		if (quantity == "mass" || quantity == "energy") { m_run->m_globalQuantities.push_back(new OutputGlobalGNU(casTest, xmlText->Value(), fileName.str(), this, quantity)); }
+		else { throw ErrorXMLAttribut("quantity", fileName.str(), __FILE__, __LINE__); }
+	}
     
     //Recuperation Iteration / temps Physique
     element = computationParam->FirstChildElement("timeControlMode");
@@ -190,7 +198,7 @@ void Input::entreeMain(string casTest)
       if (sousElement == NULL) throw ErrorXMLElement("globalLimiter", fileName.str(), __FILE__, __LINE__);
       contenu = sousElement->FirstChild();
       if (contenu == NULL) throw ErrorXMLElement("globalLimiter", fileName.str(), __FILE__, __LINE__);
-      string globalLimiter = contenu->ToText()->Value();
+      std::string globalLimiter = contenu->ToText()->Value();
       Tools::uppercase(globalLimiter);
       if (globalLimiter == "MINMOD") { m_run->m_globalLimiter = new LimiterMinmod; }
       else if (globalLimiter == "VANLEER") { m_run->m_globalLimiter = new LimiterVanLeer; }
@@ -200,7 +208,7 @@ void Input::entreeMain(string casTest)
       else if (globalLimiter == "THINC") { throw ErrorXMLAttribut("THINC can only be a volume-fraction limiter", fileName.str(), __FILE__, __LINE__); }
       else { throw ErrorXMLDev(fileName.str(), __FILE__, __LINE__); }
       //Recuperation interface limiter
-      string interfaceLimiter = globalLimiter;
+      std::string interfaceLimiter = globalLimiter;
       sousElement = element->FirstChildElement("interfaceLimiter");
       if (sousElement != NULL) {
         contenu = sousElement->FirstChild();
@@ -216,7 +224,7 @@ void Input::entreeMain(string casTest)
       else if (interfaceLimiter == "THINC") { throw ErrorXMLAttribut("THINC can only be a volume-fraction limiter", fileName.str(), __FILE__, __LINE__); }
       else { throw ErrorXMLDev(fileName.str(), __FILE__, __LINE__); }
       //Recuperation global volume-fraction limiter
-      string globalVolumeFractionLimiter = globalLimiter;
+      std::string globalVolumeFractionLimiter = globalLimiter;
       sousElement = element->FirstChildElement("globalVolumeFractionLimiter");
       if (sousElement != NULL) {
         contenu = sousElement->FirstChild();
@@ -232,7 +240,7 @@ void Input::entreeMain(string casTest)
       else if (globalVolumeFractionLimiter == "THINC") { m_run->m_globalVolumeFractionLimiter = new LimiterTHINC; }
       else { throw ErrorXMLDev(fileName.str(), __FILE__, __LINE__); }
       //Recuperation interface volume-fraction limiter
-      string interfaceVolumeFractionLimiter = interfaceLimiter;
+      std::string interfaceVolumeFractionLimiter = interfaceLimiter;
       sousElement = element->FirstChildElement("interfaceVolumeFractionLimiter");
       if (sousElement != NULL) {
         contenu = sousElement->FirstChild();
@@ -250,11 +258,13 @@ void Input::entreeMain(string casTest)
 
     }
 
-    //Reprise de Calcul depuis file resultat
-    element = computationParam->FirstChildElement("resumeSimulation");
+    //Reprise de calcul depuis file resultat
+    element = computationParam->FirstChildElement("restartSimulation");
     if (element != NULL) { 
-      error = element->QueryIntAttribute("fileNumber", &m_run->m_resumeSimulation);
-      if (error != XML_NO_ERROR) throw ErrorXMLAttribut("number", fileName.str(), __FILE__, __LINE__);
+      error = element->QueryIntAttribute("restartFileNumber", &m_run->m_restartSimulation);
+      if (error != XML_NO_ERROR) throw ErrorXMLAttribut("restartFileNumber", fileName.str(), __FILE__, __LINE__);
+      error = element->QueryIntAttribute("AMRsaveFreq", &m_run->m_restartAMRsaveFreq);
+      if (error != XML_NO_ERROR) throw ErrorXMLAttribut("AMRsaveFreq", fileName.str(), __FILE__, __LINE__);
     }
 
   }
@@ -263,7 +273,7 @@ void Input::entreeMain(string casTest)
 
 //***********************************************************************
 
-void Input::entreeMesh(string casTest)
+void Input::entreeMesh(std::string casTest)
 {
   try{
     //Methode AMR: initialization des variables
@@ -274,7 +284,7 @@ void Input::entreeMesh(string casTest)
 
     //1) Parsing du file XML par la bibliotheque tinyxml2
     //------------------------------------------------------
-    stringstream fileName(casTest + m_nameMesh);
+    std::stringstream fileName(casTest + m_nameMesh);
     XMLDocument xmlMesh;
     XMLError error(xmlMesh.LoadFile(fileName.str().c_str())); //Le file est parse ici
     if (error != XML_SUCCESS) throw ErrorXML(fileName.str(), __FILE__, __LINE__);
@@ -289,7 +299,7 @@ void Input::entreeMesh(string casTest)
     //Recuperation du type de mesh
     element = mesh->FirstChildElement("type");
     if (element == NULL) throw ErrorXMLElement("type", fileName.str(), __FILE__, __LINE__);
-    string structureMesh(element->Attribute("structure"));
+    std::string structureMesh(element->Attribute("structure"));
     if (structureMesh == "") throw ErrorXMLAttribut("structure", fileName.str(), __FILE__, __LINE__);
     Tools::uppercase(structureMesh);
     if (structureMesh == "UNSTRUCTURED")
@@ -298,12 +308,32 @@ void Input::entreeMesh(string casTest)
       XMLElement *meshNS;
       meshNS = mesh->FirstChildElement("unstructuredMesh");
       if (meshNS == NULL) throw ErrorXMLElement("unstructuredMesh", fileName.str(), __FILE__, __LINE__);
-      //Lecture name du file contenant les informations de mesh (.msh)
+      //Lecture name du file contenant les informations de mesh
       element = meshNS->FirstChildElement("file");
       if (element == NULL) throw ErrorXMLElement("file", fileName.str(), __FILE__, __LINE__);
-      string fichierMesh(element->Attribute("name"));
-      if (fichierMesh == "") throw ErrorXMLAttribut("name", fileName.str(), __FILE__, __LINE__);
-      m_run->m_mesh = new MeshUnStruct(fichierMesh);
+      std::string meshFile(element->Attribute("name"));
+      if (meshFile == "") throw ErrorXMLAttribut("name", fileName.str(), __FILE__, __LINE__);
+      //Read format of the mesh file (.msh, .mesh ...)
+      std::string meshExtension(MeshUnStruct::readMeshFileExtension(meshFile));
+      Tools::uppercase(meshExtension);
+      if (meshExtension == "MSH") // Gmsh format
+      {
+        std::string version(MUSGmsh::readVersion(meshFile));
+        if (version == "2.2") {
+			    bool switchTags(false);
+			    element = meshNS->FirstChildElement("tag");
+			    if (element != NULL) {
+				    error = element->QueryBoolAttribute("GMSHSwitchTags", &switchTags);
+				    if (error != XML_NO_ERROR) throw ErrorXMLAttribut("GMSHSwitchTags", fileName.str(), __FILE__, __LINE__);
+			    }
+			    m_run->m_mesh = new MUSGmshV2(meshFile, meshExtension, switchTags);
+		    }
+        else if (version == "4.1") m_run->m_mesh = new MUSGmshV4(meshFile, meshExtension);
+        else throw ErrorXML("mesh version not found for file : " + meshFile, __FILE__, __LINE__);
+      }
+      else if (meshExtension == "MESH") throw ErrorXML("MESH format is not supported for file : " + meshFile, __FILE__, __LINE__);
+      else { throw ErrorXML("mesh extension not supported for file : " + meshFile, __FILE__, __LINE__); }
+      
       //Recuperation pretraitement parallele
       element = meshNS->FirstChildElement("parallel");
       if (element != NULL) {
@@ -344,7 +374,7 @@ void Input::entreeMesh(string casTest)
       if (nbZ > 1 && nbY <= 1) throw ErrorXMLAttribut("Number of cells in the z-direction can't be superior to 1 if number of cells in the y-direction is equal to 1", fileName.str(), __FILE__, __LINE__);
       
       //Stretching data
-      vector<stretchZone> stretchX, stretchY, stretchZ;
+      std::vector<stretchZone> stretchX, stretchY, stretchZ;
       element = cartesianMesh->FirstChildElement("meshStretching");
       if (element != NULL) {
         double tempStart, tempEnd, tempFactor;
@@ -449,12 +479,12 @@ void Input::entreeMesh(string casTest)
 
 //***********************************************************************
 
-void Input::entreeModel(string casTest)
+void Input::entreeModel(std::string casTest)
 {
   try{
     //1) Parsing du file XML par la bibliotheque tinyxml2
     //------------------------------------------------------
-    stringstream fileName(casTest + m_nameModel);
+    std::stringstream fileName(casTest + m_nameModel);
     XMLDocument xmlModel;
     XMLError error(xmlModel.LoadFile(fileName.str().c_str())); //Le file est parse ici
     if (error != XML_SUCCESS) throw ErrorXML(fileName.str(), __FILE__, __LINE__);
@@ -467,7 +497,7 @@ void Input::entreeModel(string casTest)
     //Recuperation name du model resolu
     XMLElement *element(xmlNode->FirstChildElement("flowModel"));
     if (element == NULL) throw ErrorXMLElement("flowModel", fileName.str(), __FILE__, __LINE__);
-    string model(element->Attribute("name"));
+    std::string model(element->Attribute("name"));
     if (model == "") throw ErrorXMLAttribut("name", fileName.str(), __FILE__, __LINE__);
     m_run->m_numberTransports = 0;
     error = element->QueryIntAttribute("numberTransports", &m_run->m_numberTransports);
@@ -495,6 +525,8 @@ void Input::entreeModel(string casTest)
       error = element->QueryIntAttribute("numberPhases", &m_run->m_numberPhases);
       m_run->m_model = new ModMultiP(m_run->m_numberTransports, m_run->m_numberPhases);
       if (error != XML_NO_ERROR) throw ErrorXMLAttribut("numberPhases", fileName.str(), __FILE__, __LINE__);
+      error = element->QueryBoolAttribute("alphaNull", &alphaNull);
+      if (error != XML_NO_ERROR) throw ErrorXMLAttribut("alphaNull", fileName.str(), __FILE__, __LINE__);
     }
     else if (model == "THERMALEQ")
     {
@@ -507,7 +539,7 @@ void Input::entreeModel(string casTest)
     if (m_run->m_interfaceVolumeFractionLimiter->AmITHINC() && (m_run->m_numberPhases != 2)) { throw ErrorXMLAttribut("Limiter THINC only works for 2 phases", fileName.str(), __FILE__, __LINE__); }
     
     //Thermodynamique
-    vector<string> nameEOS;
+    std::vector<std::string> nameEOS;
     int EOSTrouvee(0);
     XMLElement *sousElement(xmlNode->FirstChildElement("EOS"));
     while (sousElement != NULL)
@@ -546,7 +578,7 @@ void Input::entreeModel(string casTest)
     while (element != NULL) {
       physiqueAddTrouvee++;
       //Lecture physique additionnelle
-      string typeAddPhys(element->Attribute("type"));
+      std::string typeAddPhys(element->Attribute("type"));
       if (typeAddPhys == "") throw ErrorXMLAttribut("type", fileName.str(), __FILE__, __LINE__);
       Tools::uppercase(typeAddPhys);
       //switch sur le type de physique additionelle
@@ -578,7 +610,7 @@ void Input::entreeModel(string casTest)
     }
     else {
       //Symmetry reading
-      string typeSym(element->Attribute("type"));
+      std::string typeSym(element->Attribute("type"));
       if (typeSym == "") throw ErrorXMLAttribut("type", fileName.str(), __FILE__, __LINE__);
       Tools::uppercase(typeSym);
       //Switch on the type of symmetry
@@ -593,13 +625,20 @@ void Input::entreeModel(string casTest)
     while (element != NULL) {
       sourceFound++;
       //Source reading
-      string typeSource(element->Attribute("type"));
+      std::string typeSource(element->Attribute("type"));
       if (typeSource == "") throw ErrorXMLAttribut("type", fileName.str(), __FILE__, __LINE__);
       Tools::uppercase(typeSource);
+      std::string orderSource(element->Attribute("order"));
+      Tools::uppercase(orderSource);
+      //Order
+      int order = 1;
+      if (orderSource == "EULER") { order = 1; }
+      else if (orderSource == "RK2") { order = 2; }
+      else if (orderSource == "RK4") { order = 4; }
       //Switch on the type of source
-      if (typeSource == "GRAVITY") { m_run->m_sources.push_back(new SourceGravity(element, fileName.str())); }
-      else if (typeSource == "HEATING") { m_run->m_sources.push_back(new SourceHeating(element, fileName.str())); }
-      else if (typeSource == "MRF") { m_run->m_MRF = m_run->m_sources.size(); m_run->m_sources.push_back(new SourceMRF(element, fileName.str())); }
+      if (typeSource == "GRAVITY") { m_run->m_sources.push_back(new SourceGravity(element, order, fileName.str())); }
+      else if (typeSource == "HEATING") { m_run->m_sources.push_back(new SourceHeating(element, order, fileName.str())); }
+      else if (typeSource == "MRF") { m_run->m_MRF = m_run->m_sources.size(); m_run->m_sources.push_back(new SourceMRF(element, order, fileName.str())); }
       else { throw ErrorXMLDev(fileName.str(), __FILE__, __LINE__); }
       element = element->NextSiblingElement("sourceTerms");
     }
@@ -609,12 +648,12 @@ void Input::entreeModel(string casTest)
     element = xmlNode->FirstChildElement("relaxation");
     while (element != NULL) {
       //Lecture source
-      string typeRelax(element->Attribute("type"));
+      std::string typeRelax(element->Attribute("type"));
       if (typeRelax == "") throw ErrorXMLAttribut("type", fileName.str(), __FILE__, __LINE__);
       Tools::uppercase(typeRelax);
       //switch sur le type de relaxation
       if (typeRelax == "PTMU") { m_run->m_model->getRelaxations()->push_back(new RelaxationPTMu(element, fileName.str())); }
-	  else if (typeRelax == "PT") {m_run->m_model->getRelaxations()->push_back(new RelaxationPT()); }
+	    else if (typeRelax == "PT") {m_run->m_model->getRelaxations()->push_back(new RelaxationPT()); }
       else if (typeRelax == "P") { m_run->m_model->getRelaxations()->push_back(new RelaxationP()); }
       else { throw ErrorXMLDev(fileName.str(), __FILE__, __LINE__); }
       element = element->NextSiblingElement("relaxation");
@@ -626,12 +665,12 @@ void Input::entreeModel(string casTest)
 
 //***********************************************************************
 
-Eos* Input::entreeEOS(string EOS, int &numberEOS)
+Eos* Input::entreeEOS(std::string EOS, int &numberEOS)
 {
   try{
     //1) Parsing du file XML par la bibliotheque tinyxml2
     //------------------------------------------------------
-    stringstream fileName("./libEOS/" + EOS);
+    std::stringstream fileName("./libEOS/" + EOS);
     XMLDocument xmlEOS;
     XMLError error(xmlEOS.LoadFile(fileName.str().c_str())); //Le file est parse ici
     if (error != XML_SUCCESS) throw ErrorXML(fileName.str(), __FILE__, __LINE__);
@@ -645,20 +684,21 @@ Eos* Input::entreeEOS(string EOS, int &numberEOS)
     XMLElement *element;
     element = xmlNode->FirstChildElement("EOS");
     if (element == NULL) throw ErrorXMLElement("EOS", fileName.str(), __FILE__, __LINE__);
-    string typeEOS(element->Attribute("type"));
+    std::string typeEOS(element->Attribute("type"));
     if (typeEOS == "") throw ErrorXMLAttribut("type", fileName.str(), __FILE__, __LINE__);
     Tools::uppercase(typeEOS);
     //Switch selon EOS
     Eos *eos;
-    vector<string> NamesParametresEos;
+    std::vector<std::string> NamesParametresEos;
     if      (typeEOS == "IG"){ eos = new EosIG(NamesParametresEos, numberEOS); }
     else if (typeEOS == "SG"){ eos = new EosSG(NamesParametresEos, numberEOS); }
+    else if (typeEOS == "NASG"){ eos = new EosNASG(NamesParametresEos, numberEOS); }
     else{ throw ErrorXMLEOSInconnue(typeEOS, fileName.str(), __FILE__, __LINE__); } //Cas ou la loi state est inconnue
 
     //Recuperation des parametres de l'EOS
     element = xmlNode->FirstChildElement("parameters");
     if (element == NULL) throw ErrorXMLElement("parameters", fileName.str(), __FILE__, __LINE__);
-    vector<double> parametresEos(NamesParametresEos.size());
+    std::vector<double> parametresEos(NamesParametresEos.size());
     for (unsigned int p = 0; p < NamesParametresEos.size(); p++)
     {
       error = element->QueryDoubleAttribute(NamesParametresEos[p].c_str(), &parametresEos[p]);
@@ -675,12 +715,12 @@ Eos* Input::entreeEOS(string EOS, int &numberEOS)
 
 //***********************************************************************
 
-void Input::entreeConditionsInitiales(string casTest, vector<GeometricalDomain*> &domains, vector<BoundCond*> &boundCond)
+void Input::entreeConditionsInitiales(std::string casTest, std::vector<GeometricalDomain*> &domains, std::vector<BoundCond*> &boundCond)
 {
   try{
     //1) Parsing du file XML par la bibliotheque tinyxml2
     //------------------------------------------------------
-    stringstream fileName(casTest + m_nameCI);
+    std::stringstream fileName(casTest + m_nameCI);
     XMLDocument xmlModel;
     XMLError error(xmlModel.LoadFile(fileName.str().c_str())); //Le file est parse ici
     if (error != XML_SUCCESS) throw ErrorXML(fileName.str(), __FILE__, __LINE__);
@@ -696,7 +736,7 @@ void Input::entreeConditionsInitiales(string casTest, vector<GeometricalDomain*>
 
     //3) Recuperation des domains definis
     //------------------------------------
-    string nameDomaine, stateDomaine;
+    std::string nameDomaine, stateDomaine;
     int domaineTrouve(0);
     XMLElement *element(elementDomaine->FirstChildElement("domain"));
     while (element != NULL)
@@ -714,7 +754,7 @@ void Input::entreeConditionsInitiales(string casTest, vector<GeometricalDomain*>
       Tools::uppercase(stateDomaine);
       //Recherche de l state associe au domain
       XMLElement *state(xmlNode->FirstChildElement("state"));
-      bool trouve(false); string nameEtat;
+      bool trouve(false); std::string nameEtat;
       while (state != NULL)
       {
         nameEtat = state->Attribute("name");
@@ -731,11 +771,11 @@ void Input::entreeConditionsInitiales(string casTest, vector<GeometricalDomain*>
       else if (m_run->m_model->whoAmI() == "MULTIP") { stateMixture = new MixMultiP(state, fileName.str()); }
       else if (m_run->m_model->whoAmI() == "THERMALEQ") { stateMixture = new MixThermalEq(state, fileName.str()); }
       else  if (m_run->m_model->whoAmI() == "EULERHOMOGENEOUS") { stateMixture = new MixEulerHomogeneous(state, fileName.str()); }
-      else { throw ErrorXMLElement("Couplage Model-Fluide non valide", fileName.str(), __FILE__, __LINE__); }
+      else { throw ErrorXMLElement("Couplage Model-Fluid non valide", fileName.str(), __FILE__, __LINE__); }
 
       //Then Reading phases states
-      vector<Phase*> statesPhases;
-      string typeMateriau; string nameEOS;
+      std::vector<Phase*> statesPhases;
+      std::string typeMateriau; std::string nameEOS;
       XMLElement* material(state->FirstChildElement("material"));
       int nbMateriauxEtat(0);
       while (material != NULL)
@@ -743,8 +783,8 @@ void Input::entreeConditionsInitiales(string casTest, vector<GeometricalDomain*>
         typeMateriau = material->Attribute("type");
         Tools::uppercase(typeMateriau);
 
-        //LECTURE FLUIDE
-        if (typeMateriau == "FLUIDE") { 
+        //LECTURE FLUID
+        if (typeMateriau == "FLUID") { 
           nbMateriauxEtat++;
           //Recuperation de l EOS
           nameEOS = material->Attribute("EOS");
@@ -759,7 +799,7 @@ void Input::entreeConditionsInitiales(string casTest, vector<GeometricalDomain*>
           else if (m_run->m_model->whoAmI() == "MULTIP") { statesPhases.push_back(new PhaseMultiP(material, m_run->m_eos[e], fileName.str())); }
           else if (m_run->m_model->whoAmI() == "THERMALEQ") { statesPhases.push_back(new PhaseThermalEq(material, m_run->m_eos[e], fileName.str())); }
           else if (m_run->m_model->whoAmI() == "EULERHOMOGENEOUS") { statesPhases.push_back(new PhaseEulerHomogeneous(material, m_run->m_eos[e], fileName.str())); }
-          else { throw ErrorXMLElement("Not valid Model-Fluide coupling", fileName.str(), __FILE__, __LINE__); }
+          else { throw ErrorXMLElement("Not valid Model-Fluid coupling", fileName.str(), __FILE__, __LINE__); }
         }
         
         //MATERIAU INCONNU
@@ -769,8 +809,8 @@ void Input::entreeConditionsInitiales(string casTest, vector<GeometricalDomain*>
       if(nbMateriauxEtat!=m_run->m_numberPhases) throw ErrorXMLEtat(stateDomaine, fileName.str(), __FILE__, __LINE__);
 
       //Lecture des variables transportees pour l'state trouve
-      vector<Transport> statesTransport(m_run->m_numberTransports);
-      string nameTransport; double valueTransport(0.);
+      std::vector<Transport> statesTransport(m_run->m_numberTransports);
+      std::string nameTransport; double valueTransport(0.);
       XMLElement *elementTransport(state->FirstChildElement("transport"));
       int nbTransports(0);
       while (elementTransport != NULL) {
@@ -793,17 +833,19 @@ void Input::entreeConditionsInitiales(string casTest, vector<GeometricalDomain*>
 
       //C)Reading domain type
       //*********************
-      string typeDomaine(element->Attribute("type"));
+      std::string typeDomaine(element->Attribute("type"));
       Tools::uppercase(typeDomaine);
-      vector<string> NamesParametresDomaine;
+      std::vector<std::string> NamesParametresDomaine;
       if      (typeDomaine == "ENTIREDOMAIN")                    { domains.push_back(new GDEntireDomain(nameDomaine, statesPhases, stateMixture, statesTransport, physicalEntity)); }
       else if (typeDomaine == "ENTIREDOMAINWITHPARTICULARITIES") { domains.push_back(new GDEntireDomainWithParticularities(nameDomaine, statesPhases, stateMixture, statesTransport, physicalEntity)); }
       else if (typeDomaine == "HALFSPACE")                       { domains.push_back(new GDHalfSpace(nameDomaine, statesPhases, stateMixture, statesTransport, element, physicalEntity, fileName.str())); }
       else if (typeDomaine == "DISC")                            { domains.push_back(new GDDisc(nameDomaine, statesPhases, stateMixture, statesTransport, element, physicalEntity, fileName.str())); }
       else if (typeDomaine == "ELLIPSE")                         { domains.push_back(new GDEllipse(nameDomaine, statesPhases, stateMixture, statesTransport, element, physicalEntity, fileName.str())); }
       else if (typeDomaine == "RECTANGLE")                       { domains.push_back(new GDRectangle(nameDomaine, statesPhases, stateMixture, statesTransport, element, physicalEntity, fileName.str())); }
-      else if (typeDomaine == "PAVEMENT")                        { domains.push_back(new GDPavement(nameDomaine, statesPhases, stateMixture, statesTransport, element, physicalEntity, fileName.str())); }
+      else if (typeDomaine == "CUBOID")                          { domains.push_back(new GDCuboid(nameDomaine, statesPhases, stateMixture, statesTransport, element, physicalEntity, fileName.str())); }
       else if (typeDomaine == "SPHERE")                          { domains.push_back(new GDSphere(nameDomaine, statesPhases, stateMixture, statesTransport, element, physicalEntity, fileName.str())); }
+      else if (typeDomaine == "ELLIPSOID")                       { domains.push_back(new GDEllipsoid(nameDomaine, statesPhases, stateMixture, statesTransport, element, physicalEntity, fileName.str())); }
+      else if (typeDomaine == "CYLINDER")                        { domains.push_back(new GDCylinder(nameDomaine, statesPhases, stateMixture, statesTransport, element, physicalEntity, fileName.str())); }
       else{ throw ErrorXMLDomaineInconnu(typeDomaine, fileName.str(), __FILE__, __LINE__); } //Cas ou le domain n a pas ete implemente
       domaineTrouve++;
       //Domaine suivant
@@ -822,7 +864,7 @@ void Input::entreeConditionsInitiales(string casTest, vector<GeometricalDomain*>
 
     //5) Recuperation des boundCond definies
     //------------------------------------
-    string nameBoundCond, stateLimite, typeBoundCond;
+    std::string nameBoundCond, stateLimite, typeBoundCond;
     int numBoundCond;
     int boundCondTrouve(0);
     element = elementLimites->FirstChildElement("boundCond");
@@ -847,7 +889,7 @@ void Input::entreeConditionsInitiales(string casTest, vector<GeometricalDomain*>
 
       //D)Reading conLim specific data
       //******************************
-      if (typeBoundCond == "ABS") { boundCond.push_back(new BoundCondAbs(numBoundCond)); }
+      if (typeBoundCond == "NONREFLECTING") { boundCond.push_back(new BoundCondNonReflecting(numBoundCond)); }
       else if (typeBoundCond == "SYMMETRY") { if (m_run->m_order == "FIRSTORDER") { boundCond.push_back(new BoundCondWall(numBoundCond)); } else { boundCond.push_back(new BoundCondSymmetryO2(numBoundCond)); } }
       else if (typeBoundCond == "WALL") { if (m_run->m_order == "FIRSTORDER") { boundCond.push_back(new BoundCondWall(numBoundCond)); } else { boundCond.push_back(new BoundCondWallO2(numBoundCond)); } }
       else if (typeBoundCond == "INJECTION") { boundCond.push_back(new BoundCondInj(numBoundCond, element, m_run->m_numberPhases, m_run->m_numberTransports, m_run->m_nameGTR, m_run->m_eos, fileName.str())); }

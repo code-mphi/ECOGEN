@@ -1,0 +1,6 @@
+<?xml version='1.0' encoding='UTF-8' standalone='yes'?>
+<parametersEOS>
+  <EOS type="NASG" fichier="NASG_dodLiq.xml"/>
+  <parameters cv="2393." b="7.51e-4" gamma="1.09" energyRef="-794.696e3" pInf="1.159e8" entropyRef="35600"/>
+  <physicalParameters lambda="0.6" mu="1.e-3"/>
+</parametersEOS>

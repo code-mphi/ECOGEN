@@ -32,8 +32,8 @@
 
 //! \file      MixEuler.h
 //! \author    K. Schmidmayer, F. Petitpas
-//! \version   1.0
-//! \date      December 19 2017
+//! \version   1.1
+//! \date      June 5 2019
 
 #include <vector>
 #include "../Mixture.h"
@@ -73,7 +73,9 @@ class MixEuler : public Mixture
       //---------------------------------------
       virtual int numberOfTransmittedVariables() const { return 0; };
       virtual void fillBuffer(double *buffer, int &counter) const {};
+      virtual void fillBuffer(std::vector<double> &dataToSend) const {};
       virtual void getBuffer(double *buffer, int &counter) {};
+      virtual void getBuffer(std::vector<double> &dataToReceive, int &counter) {};
 
       //Specific methods for second order
       //---------------------------------
@@ -84,22 +86,23 @@ class MixEuler : public Mixture
 
       //Specific methods for parallele computing at second order
       //--------------------------------------------------------
-			virtual int numberOfTransmittedSlopes() const { return 0; };
-			virtual void fillBufferSlopes(double *buffer, int &counter) const {};
-			virtual void getBufferSlopes(double *buffer, int &counter) {};
+      virtual int numberOfTransmittedSlopes() const { return 0; };
+      virtual void fillBufferSlopes(double *buffer, int &counter) const {};
+      virtual void getBufferSlopes(double *buffer, int &counter) {};
 
       //Accessors
       //---------
-      virtual double getDensity() const { return 0.; };
-      virtual double getPressure() const { return 0.; };
-      virtual double getU() const { return 0.; };
-      virtual double getV() const { return 0.; };
-      virtual double getW() const { return 0.; };
-      virtual Coord getVelocity() const { return 0; };
-      virtual double getEnergy() const { return 0.; };
-      virtual double getTotalEnergy() const { return 0.; };
-      virtual double getFrozenSoundSpeed() const { return 0.; };
-      virtual double getWoodSoundSpeed() const { return 0.; };
+      virtual const double& getDensity() const { return Errors::defaultDouble; };
+      virtual const double& getPressure() const { return Errors::defaultDouble; };
+      virtual const double& getU() const { return Errors::defaultDouble; };
+      virtual const double& getV() const { return Errors::defaultDouble; };
+      virtual const double& getW() const { return Errors::defaultDouble; };
+      virtual const Coord& getVelocity() const { return Coord::defaultCoord; };
+      virtual Coord& getVelocity() { return Coord::defaultCoordNonConst; };
+      virtual const double& getEnergy() const { return Errors::defaultDouble; };
+      virtual const double& getTotalEnergy() const { return Errors::defaultDouble; };
+      virtual const double& getFrozenSoundSpeed() const { return Errors::defaultDouble; };
+      virtual const double& getWoodSoundSpeed() const { return Errors::defaultDouble; };
 
       virtual void setPressure(const double &p) {};
       virtual void setVelocity(const double &u, const double &v, const double &w) {};

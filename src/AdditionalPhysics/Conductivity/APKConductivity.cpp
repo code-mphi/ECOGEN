@@ -29,15 +29,13 @@
 
 //! \file      APKConductivity.cpp
 //! \author    K. Schmidmayer
-//! \version   1.0
-//! \date      December 20 2017
+//! \version   1.1
+//! \date      June 5 2019
 
 #include <iostream>
 #include <cmath>
 #include <algorithm>
 #include "APKConductivity.h"
-
-using namespace std;
 
 //***********************************************************************
 
@@ -45,7 +43,7 @@ APKConductivity::APKConductivity() {}
 
 //***********************************************************************
 
-APKConductivity::APKConductivity(int& numberQPA, Eos** eos, int &numberPhases, string nameFile)
+APKConductivity::APKConductivity(int& numberQPA, Eos** eos, int &numberPhases, std::string nameFile)
 {
   m_lambdak = new double[numberPhases];
   for (int k = 0; k < numberPhases; k++) {
@@ -67,94 +65,96 @@ void APKConductivity::addQuantityAddPhys(Cell *cell)
 
 //***********************************************************************
 
-void APKConductivity::solveFluxAddPhys(CellInterface *cellBound, const int &numberPhases)
+void APKConductivity::solveFluxAddPhys(CellInterface *cellInterface, const int &numberPhases)
 {
-  m_normal = cellBound->getFace()->getNormal();
-  m_tangent = cellBound->getFace()->getTangent();
-  m_binormal = cellBound->getFace()->getBinormal();
+  m_normal = cellInterface->getFace()->getNormal();
+  m_tangent = cellInterface->getFace()->getTangent();
+  m_binormal = cellInterface->getFace()->getBinormal();
 
-  // Reset of fluxBufferKapila
+  // Reset of fluxBuffKapila
   for (int k = 0; k<numberPhases; k++) {
-    fluxBufferKapila->m_alpha[k] = 0.;
-    fluxBufferKapila->m_masse[k] = 0.;
-    fluxBufferKapila->m_energ[k] = 0.;
+    static_cast<FluxKapila*> (fluxBuff)->m_alpha[k] = 0.;
+    static_cast<FluxKapila*> (fluxBuff)->m_masse[k] = 0.;
+    static_cast<FluxKapila*> (fluxBuff)->m_energ[k] = 0.;
   }
-  fluxBufferKapila->m_qdm = 0.;
-  fluxBufferKapila->m_energMixture = 0.;
+  static_cast<FluxKapila*> (fluxBuff)->m_qdm = 0.;
+  static_cast<FluxKapila*> (fluxBuff)->m_energMixture = 0.;
 
   for (int numPhase = 0; numPhase < numberPhases; numPhase++) {
-    // Copy and projection on orientation axes attached to the edge of gradients of left and right cells
-    m_gradTkLeft = cellBound->getCellGauche()->getQPA(m_numQPA)->getGrad(numPhase);
-    m_gradTkRight = cellBound->getCellDroite()->getQPA(m_numQPA)->getGrad(numPhase);
+    // Copy and projection on orientation axis attached to the edge of gradients of left and right cells
+    m_gradTkLeft = cellInterface->getCellGauche()->getQPA(m_numQPA)->getGrad(numPhase);
+    m_gradTkRight = cellInterface->getCellDroite()->getQPA(m_numQPA)->getGrad(numPhase);
     m_gradTkLeft.localProjection(m_normal, m_tangent, m_binormal);
     m_gradTkRight.localProjection(m_normal, m_tangent, m_binormal);
 
     // Extraction of alphak
-    double alphakLeft = cellBound->getCellGauche()->getPhase(numPhase)->getAlpha();
-    double alphakRight = cellBound->getCellDroite()->getPhase(numPhase)->getAlpha();
+    double alphakLeft = cellInterface->getCellGauche()->getPhase(numPhase)->getAlpha();
+    double alphakRight = cellInterface->getCellDroite()->getPhase(numPhase)->getAlpha();
 
     this->solveFluxConductivityInner(m_gradTkLeft, m_gradTkRight, alphakLeft, alphakRight, numPhase);
   }
 
   // Flux projection on the absolute orientation axes
-  cellBound->getMod()->reverseProjection(m_normal, m_tangent, m_binormal);
+  cellInterface->getMod()->reverseProjection(m_normal, m_tangent, m_binormal);
 }
 
 //***********************************************************************
 
-void APKConductivity::solveFluxAddPhysBoundary(CellInterface *cellBound, const int &numberPhases)
+void APKConductivity::solveFluxAddPhysBoundary(CellInterface *cellInterface, const int &numberPhases)
 {
-  m_normal = cellBound->getFace()->getNormal();
-  m_tangent = cellBound->getFace()->getTangent();
-  m_binormal = cellBound->getFace()->getBinormal();
+  //KS//DEV// On ne fait rien aux limites avec la conductivite pour le moment, a gerer un jour
 
-  // Reset of fluxBufferKapila (allow to then do the sum of conductivity effects for the different phases combinations)
+  m_normal = cellInterface->getFace()->getNormal();
+  m_tangent = cellInterface->getFace()->getTangent();
+  m_binormal = cellInterface->getFace()->getBinormal();
+
+  // Reset of fluxBuffKapila (allow to then do the sum of conductivity effects for the different phases combinations)
   for (int k = 0; k<numberPhases; k++) {
-    fluxBufferKapila->m_alpha[k] = 0.;
-    fluxBufferKapila->m_masse[k] = 0.;
-    fluxBufferKapila->m_energ[k] = 0.;
+    static_cast<FluxKapila*> (fluxBuff)->m_alpha[k] = 0.;
+    static_cast<FluxKapila*> (fluxBuff)->m_masse[k] = 0.;
+    static_cast<FluxKapila*> (fluxBuff)->m_energ[k] = 0.;
   }
-  fluxBufferKapila->m_qdm = 0.;
-  fluxBufferKapila->m_energMixture = 0.;
+  static_cast<FluxKapila*> (fluxBuff)->m_qdm = 0.;
+  static_cast<FluxKapila*> (fluxBuff)->m_energMixture = 0.;
 
   for (int numPhase = 0; numPhase < numberPhases; numPhase++) {
     // Copy and projection on orientation axes attached to the edge of gradients of left and right cells
-    m_gradTkLeft = cellBound->getCellGauche()->getQPA(m_numQPA)->getGrad(numPhase);
+    m_gradTkLeft = cellInterface->getCellGauche()->getQPA(m_numQPA)->getGrad(numPhase);
     m_gradTkLeft.localProjection(m_normal, m_tangent, m_binormal);
 
     // Extraction of alphak
-    double alphakLeft = cellBound->getCellGauche()->getPhase(numPhase)->getAlpha();
+    double alphakLeft = cellInterface->getCellGauche()->getPhase(numPhase)->getAlpha();
 
-    int typeBord = cellBound->whoAmI();
-    if (typeBord == 1) { this->solveFluxConductivityAbs(m_gradTkLeft, alphakLeft, numPhase); }
-    else if (typeBord == 2 || typeBord == 6) { this->solveFluxConductivityWall(m_gradTkLeft, alphakLeft, numPhase); }
-    else if (typeBord == 3) { this->solveFluxConductivityOutflow(m_gradTkLeft, alphakLeft, numPhase); }
-    else if (typeBord == 4) { this->solveFluxConductivityInflow(m_gradTkLeft, alphakLeft, numPhase); }
+    int typeCellInterface = cellInterface->whoAmI();
+    if (typeCellInterface == 1) { this->solveFluxConductivityNonReflecting(m_gradTkLeft, alphakLeft, numPhase); }
+    else if (typeCellInterface == 2 || typeCellInterface == 6) { this->solveFluxConductivityWall(m_gradTkLeft, alphakLeft, numPhase); }
+    else if (typeCellInterface == 3) { this->solveFluxConductivityOutflow(m_gradTkLeft, alphakLeft, numPhase); }
+    else if (typeCellInterface == 4) { this->solveFluxConductivityInflow(m_gradTkLeft, alphakLeft, numPhase); }
     else { this->solveFluxConductivityOther(m_gradTkLeft, alphakLeft, numPhase); }
     // etc... Boundaries not taken into account yet for conductivity, pay attention
   }
 
   // Flux projection on the absolute orientation axes
-  cellBound->getMod()->reverseProjection(m_normal, m_tangent, m_binormal);
+  cellInterface->getMod()->reverseProjection(m_normal, m_tangent, m_binormal);
 }
 
 //***********************************************************************
 
 void APKConductivity::solveFluxConductivityInner(Coord &gradTkLeft, Coord &gradTkRight, double &alphakL, double &alphakR, int &numPhase) const
 {
-  //Data of the cell boundary
+  //Data of the cell interface
   double dTkdx, alphak;
   dTkdx = (gradTkLeft.getX() + gradTkRight.getX()) / 2.;
   alphak = (alphakL + alphakR) / 2.;
 
-  //Writing of conductive terms on each equation of fluxTempXXX
-  fluxBufferKapila->m_energ[numPhase] += -alphak*m_lambdak[numPhase]* dTkdx;
-  fluxBufferKapila->m_energMixture += -alphak*m_lambdak[numPhase] * dTkdx;
+  //Writing of conductive terms on each equation of fluxBuffKapila
+  static_cast<FluxKapila*> (fluxBuff)->m_energ[numPhase] = -alphak*m_lambdak[numPhase] * dTkdx;
+  static_cast<FluxKapila*> (fluxBuff)->m_energMixture   += -alphak*m_lambdak[numPhase] * dTkdx;
 }
 
 //***********************************************************************
 
-void APKConductivity::solveFluxConductivityAbs(Coord &gradTkLeft, double &alphakL, int &numPhase) const
+void APKConductivity::solveFluxConductivityNonReflecting(Coord &gradTkLeft, double &alphakL, int &numPhase) const
 {
   this->solveFluxConductivityInner(gradTkLeft, gradTkLeft, alphakL, alphakL, numPhase);
 }
@@ -164,12 +164,13 @@ void APKConductivity::solveFluxConductivityAbs(Coord &gradTkLeft, double &alphak
 void APKConductivity::solveFluxConductivityWall(Coord &gradTkLeft, double &alphakL, int &numPhase) const
 {
   //Not manage at the moment, just an example
+  //KS//DEV// A faire pour couche limite thermique !!! ...
 
   // To avoid bug when not manage
-  fluxBufferKapila->m_qdm.setX(fluxBufferKapila->m_qdm.getX() + 0.);
-  fluxBufferKapila->m_qdm.setY(fluxBufferKapila->m_qdm.getY() + 0.);
-  fluxBufferKapila->m_qdm.setZ(fluxBufferKapila->m_qdm.getZ() + 0.);
-  fluxBufferKapila->m_energMixture += 0.;
+  static_cast<FluxKapila*> (fluxBuff)->m_qdm.setX(static_cast<FluxKapila*> (fluxBuff)->m_qdm.getX() + 0.);
+  static_cast<FluxKapila*> (fluxBuff)->m_qdm.setY(static_cast<FluxKapila*> (fluxBuff)->m_qdm.getY() + 0.);
+  static_cast<FluxKapila*> (fluxBuff)->m_qdm.setZ(static_cast<FluxKapila*> (fluxBuff)->m_qdm.getZ() + 0.);
+  static_cast<FluxKapila*> (fluxBuff)->m_energMixture += 0.;
 }
 
 //***********************************************************************
@@ -179,10 +180,10 @@ void APKConductivity::solveFluxConductivityOutflow(Coord &gradTkLeft, double &al
   //Not manage at the moment, just an example
 
   // To avoid bug when not manage
-  fluxBufferKapila->m_qdm.setX(fluxBufferKapila->m_qdm.getX() + 0.);
-  fluxBufferKapila->m_qdm.setY(fluxBufferKapila->m_qdm.getY() + 0.);
-  fluxBufferKapila->m_qdm.setZ(fluxBufferKapila->m_qdm.getZ() + 0.);
-  fluxBufferKapila->m_energMixture += 0.;
+  static_cast<FluxKapila*> (fluxBuff)->m_qdm.setX(static_cast<FluxKapila*> (fluxBuff)->m_qdm.getX() + 0.);
+  static_cast<FluxKapila*> (fluxBuff)->m_qdm.setY(static_cast<FluxKapila*> (fluxBuff)->m_qdm.getY() + 0.);
+  static_cast<FluxKapila*> (fluxBuff)->m_qdm.setZ(static_cast<FluxKapila*> (fluxBuff)->m_qdm.getZ() + 0.);
+  static_cast<FluxKapila*> (fluxBuff)->m_energMixture += 0.;
 }
 
 //***********************************************************************
@@ -192,10 +193,10 @@ void APKConductivity::solveFluxConductivityInflow(Coord &gradTkLeft, double &alp
   //Not manage at the moment, just an example
 
   // To avoid bug when not manage
-  fluxBufferKapila->m_qdm.setX(fluxBufferKapila->m_qdm.getX() + 0.);
-  fluxBufferKapila->m_qdm.setY(fluxBufferKapila->m_qdm.getY() + 0.);
-  fluxBufferKapila->m_qdm.setZ(fluxBufferKapila->m_qdm.getZ() + 0.);
-  fluxBufferKapila->m_energMixture += 0.;
+  static_cast<FluxKapila*> (fluxBuff)->m_qdm.setX(static_cast<FluxKapila*> (fluxBuff)->m_qdm.getX() + 0.);
+  static_cast<FluxKapila*> (fluxBuff)->m_qdm.setY(static_cast<FluxKapila*> (fluxBuff)->m_qdm.getY() + 0.);
+  static_cast<FluxKapila*> (fluxBuff)->m_qdm.setZ(static_cast<FluxKapila*> (fluxBuff)->m_qdm.getZ() + 0.);
+  static_cast<FluxKapila*> (fluxBuff)->m_energMixture += 0.;
 }
 
 //***********************************************************************
@@ -203,30 +204,21 @@ void APKConductivity::solveFluxConductivityInflow(Coord &gradTkLeft, double &alp
 void APKConductivity::solveFluxConductivityOther(Coord &gradTkLeft, double &alphakL, int &numPhase) const
 {
   //Not manage at the moment, just an example
-  cout << "Conductive boundary not manage" << endl;
+  std::cout << "Conductive boundary not manage" << std::endl;
 
   // To avoid bug when not manage
-  fluxBufferKapila->m_qdm.setX(fluxBufferKapila->m_qdm.getX() + 0.);
-  fluxBufferKapila->m_qdm.setY(fluxBufferKapila->m_qdm.getY() + 0.);
-  fluxBufferKapila->m_qdm.setZ(fluxBufferKapila->m_qdm.getZ() + 0.);
-  fluxBufferKapila->m_energMixture += 0.;
+  static_cast<FluxKapila*> (fluxBuff)->m_qdm.setX(static_cast<FluxKapila*> (fluxBuff)->m_qdm.getX() + 0.);
+  static_cast<FluxKapila*> (fluxBuff)->m_qdm.setY(static_cast<FluxKapila*> (fluxBuff)->m_qdm.getY() + 0.);
+  static_cast<FluxKapila*> (fluxBuff)->m_qdm.setZ(static_cast<FluxKapila*> (fluxBuff)->m_qdm.getZ() + 0.);
+  static_cast<FluxKapila*> (fluxBuff)->m_energMixture += 0.;
 }
 
 //***********************************************************************
 
-void APKConductivity::communicationsAddPhys(Cell **cells, const int &dim)
+void APKConductivity::communicationsAddPhys(int numberPhases, const int &dim, const int &lvl)
 {
-  for (int k = 0; k < cells[0]->getNumberPhases(); k++) {
-    parallel.communicationsVector(cells, "QPA", dim, m_numQPA, k);
-  }
-}
-
-//***********************************************************************
-
-void APKConductivity::communicationsAddPhysAMR(Cell **cells, const int &dim, const int &lvl)
-{
-	for (int k = 0; k < cells[0]->getNumberPhases(); k++) {
-		parallel.communicationsVectorAMR(cells, "QPA", dim, lvl, m_numQPA, k);
+  for (int k = 0; k < numberPhases; k++) {
+		parallel.communicationsVector(QPA, dim, lvl, m_numQPA, k);
 	}
 }
 

@@ -35,7 +35,7 @@
 //! \version   1.0
 //! \date      December 20 2017
 
-#include "BoundCondAbs.h"
+#include "BoundCondNonReflecting.h"
 #include "BoundCondInj.h"
 #include "BoundCondTank.h"
 #include "BoundCondWall.h"

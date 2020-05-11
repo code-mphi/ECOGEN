@@ -32,8 +32,8 @@
 
 //! \file      PhaseEulerHomogeneous.h
 //! \author    F. Petitpas, K. Schmidmayer
-//! \version   1.0
-//! \date      December 21 2017
+//! \version   1.1
+//! \date      June 5 2019
 
 #include "../Phase.h"
 #include "../../Eos/Eos.h"
@@ -81,7 +81,9 @@ public:
   //---------------------------------------
   virtual int numberOfTransmittedVariables() const;
   virtual void fillBuffer(double *buffer, int &counter) const;
+  virtual void fillBuffer(std::vector<double> &dataToSend) const;
   virtual void getBuffer(double *buffer, int &counter, Eos **eos);
+  virtual void getBuffer(std::vector<double> &dataToReceive, int &counter, Eos **eos);
 
   //Specific methods for second order
   //---------------------------------
@@ -92,9 +94,9 @@ public:
 
   //Specific methods for parallele computing at second order
   //--------------------------------------------------------
-	virtual int numberOfTransmittedSlopes() const;
-	virtual void fillBufferSlopes(double *buffer, int &counter) const;
-	virtual void getBufferSlopes(double *buffer, int &counter);
+  virtual int numberOfTransmittedSlopes() const;
+  virtual void fillBufferSlopes(double *buffer, int &counter) const;
+  virtual void getBufferSlopes(double *buffer, int &counter);
 
   //Verifications
   //-------------
@@ -103,15 +105,15 @@ public:
 
   //Accessors
   //---------
-  virtual double getAlpha() const;
-  virtual double getDensity() const;
-  virtual double getPressure() const;
-  virtual double getY() const;
-  virtual Eos* getEos() const;
-  virtual double getEnergy() const;
-  virtual double getSoundSpeed() const;
-  virtual double getTotalEnergy() const;
-  virtual double getTemperature() const;
+  virtual const double& getAlpha() const { return m_alpha; };
+  virtual const double& getDensity() const { return m_density; };
+  virtual const double& getPressure() const { return m_pressure; };
+  virtual const double& getY() const { return m_Y; };
+  virtual Eos* getEos() const { return m_eos; };
+  virtual const double& getEnergy() const { return m_energie; };
+  virtual const double& getSoundSpeed() const { return m_soundSpeed; };
+  virtual const double& getTotalEnergy() const { return m_totalEnergy; };
+  virtual double getTemperature() const { return m_eos->computeTemperature(m_density, m_pressure); };
 
   virtual void setAlpha(double alpha);
   virtual void setDensity(double density);

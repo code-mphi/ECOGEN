@@ -31,9 +31,9 @@
 #define FLUXMULTIP_H
 
 //! \file      FluxMultiP.h
-//! \author    F. Petitpas
-//! \version   1.0
-//! \date      June 5 2017
+//! \author    F. Petitpas, K. Schmidmayer, J. Caze
+//! \version   1.1
+//! \date      November 18 2019
 
 #include <iostream>
 #include "../Flux.h"
@@ -46,43 +46,46 @@ class FluxMultiP;
 //! \brief     Model class for MultiP system of equations flux
 class FluxMultiP : public Flux
 {
-  public:
-    FluxMultiP();
-    FluxMultiP(ModMultiP *model, const int &numberPhases);
-    virtual ~FluxMultiP();
+public:
+	FluxMultiP();
+	FluxMultiP(ModMultiP* model, const int& numberPhases);
+	virtual ~FluxMultiP();
 
-    virtual void printFlux() const;
-    virtual void addFlux(double coefA, const int &numberPhases);
-    virtual void subtractFlux(double coefA, const int &numberPhases);
-    virtual void multiply(double scalar, const int &numberPhases);
-    virtual void setBufferFlux(Cell &cell, const int &numberPhases);
-    virtual void buildCons(Phase **phases, const int &numberPhases, Mixture *mixture);
-    virtual void buildPrim(Phase **phases, Mixture *mixture, const int &numberPhases);
-    virtual void setToZero(const int &numberPhases);
-    virtual void setToZeroBufferFlux(const int &numberPhases);
-    virtual void addNonCons(double coefA, const Cell *cell, const int &numberPhases);
-    virtual void subtractNonCons(double coefA, const Cell *cell, const int &numberPhases);
-    virtual void schemeCorrection(Cell *cell, const int &numberPhases, Prim type = vecPhases) const;
+	virtual void printFlux() const;
+	virtual void addFlux(double coefA, const int& numberPhases);
+	virtual void addFlux(Flux* flux, const int& numberPhases);
+	virtual void subtractFlux(double coefA, const int& numberPhases);
+	virtual void multiply(double scalar, const int& numberPhases);
+	virtual void setBufferFlux(Cell& cell, const int& numberPhases);
+	virtual void buildCons(Phase** phases, const int& numberPhases, Mixture* mixture);
+	virtual void buildPrim(Phase** phases, Mixture* mixture, const int& numberPhases);
+	virtual void setToZero(const int& numberPhases);
+	virtual void setToZeroBufferFlux(const int& numberPhases);
+	virtual void addNonCons(double coefA, const Cell* cell, const int& numberPhases);
+	virtual void subtractNonCons(double coefA, const Cell* cell, const int& numberPhases);
+	virtual void correctionEnergy(Cell* cell, const int& numberPhases, Prim type = vecPhases) const {};
+	virtual void schemeCorrection(Cell* cell, const int& numberPhases, Prim type = vecPhases) const;
 
-    virtual void addSymmetricTerms(Phase **phases, Mixture *mixture, const int &numberPhases, const double &r, const double &v, const double &dt);
-    virtual void integrateSourceTermsGravity(Cell *cell, const double &dt, const int &numberPhases, const int &axe, const int &direction, const Coord &g);
-    virtual void integrateSourceTermsHeating(Cell *cell, const double &dt, const int &numberPhases, const double &q);
+	virtual void addSymmetricTerms(Phase** phases, Mixture* mixture, const int& numberPhases, const double& r, const double& v, const double& dt);
+	virtual void prepSourceTermsGravity(Cell* cell, const double& dt, const int& numberPhases, const int& axis, const int& direction, const Coord& g) { Errors::errorMessage("prepSourceTermsGravity not available for required model"); };
+    virtual void prepSourceTermsHeating(Cell *cell, const double &dt, const int &numberPhases, const double &q) { Errors::errorMessage("prepSourceTermsHeating not available for required model"); };
+    virtual void prepSourceTermsMRF(Cell *cell, const double &dt, const int &numberPhases, const Coord &omega) { Errors::errorMessage("prepSourceTermsMRF not available for required model"); }; //JC/Q// Those source terms seem copy pasted from Kapila to correct ?
 
     // Accessors
     //----------
-    virtual double getAlpha(const int &numPhase) const;
-    virtual double getMasse(const int &numPhase) const;
-    virtual double getEnergy(const int &numPhase) const;
-    virtual Coord getQdm() const;
-    virtual double getEnergyMix() const;
+    virtual const double& getAlpha(const int &numPhase) const { return m_alpha[numPhase]; };
+    virtual const double& getMasse(const int &numPhase) const { return m_masse[numPhase]; };
+    virtual const double& getEnergy(const int &numPhase) const { return m_energ[numPhase]; };
+    virtual const Coord& getQdm() const { return m_qdm; };
+    virtual const double& getEnergyMix() const { return m_energMixture; };
     virtual void setCons(const Flux *cons, const int &numberPhases);
 
 protected:
     double *m_alpha;          //!< volume fraction array
     double *m_masse;          //!< mass array
-    double *m_energ;          //!< specific internal energy array
+    double *m_energ;          //!< specific internal energy array //JC//Q// This model uses 2 total energy eq. (typo ?)
     Coord m_qdm;              //!< momentum array
-    double m_energMixture;    //!< mixture energy
+    double m_energMixture;    //!< mixture energy //JC//Q// This model is not using mixture total energy since it doesnt require a correction (!= Kapila)
     ModMultiP *m_model;       //!< associated model
 
   private:
@@ -94,8 +97,5 @@ protected:
     friend class APKConductivity;
 
 };
-
-extern FluxMultiP *fluxBufferMultiP;
-extern FluxMultiP *sourceConsMultiP;
 
 #endif // FLUXMULTIP_H

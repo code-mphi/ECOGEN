@@ -12,6 +12,6 @@
 		<vertex x="0.7" y="0.75" z="0.05"/>
 		<timeControl acqFreq="1e-5."/>       <!-- if negative or nul, recording at each time step -->
 	</probe>
-	<!-- <resumeSimulation fileNumber="10"/> -->
+	<!-- <restartSimulation restartFileNumber="10" AMRsaveFreq="0"/> -->
 
 </computationParam>

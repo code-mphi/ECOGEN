@@ -32,16 +32,13 @@
 //! \version   1.0
 //! \date      December 19 2017
 
-#include <vector>
 #include "GDSphere.h"
-#include <iostream>
 
-using namespace std;
 using namespace tinyxml2;
 
 //***************************************************************
 
-GDSphere::GDSphere(string name, vector<Phase*> vecPhases, Mixture *mixture, vector<Transport> vecTransports, XMLElement *element, const int &physicalEntity, string fileName) :
+GDSphere::GDSphere(std::string name, std::vector<Phase*> vecPhases, Mixture *mixture, std::vector<Transport> vecTransports, XMLElement *element, const int &physicalEntity, std::string fileName) :
 GeometricalDomain(name, vecPhases, mixture, vecTransports, physicalEntity)
 {
   XMLElement *sousElement(element->FirstChildElement("dataSphere"));
@@ -71,9 +68,9 @@ GDSphere::~GDSphere(){}
 bool GDSphere::belong(Coord &posElement, const int &lvl) const
 {
   double sum;
-  sum = pow(posElement.getX() - m_centerPos.getX(), 2.)
-        + pow(posElement.getY() - m_centerPos.getY(), 2.)
-        + pow(posElement.getZ() - m_centerPos.getZ(), 2.);
+  sum = std::pow(posElement.getX() - m_centerPos.getX(), 2.)
+        + std::pow(posElement.getY() - m_centerPos.getY(), 2.)
+        + std::pow(posElement.getZ() - m_centerPos.getZ(), 2.);
   if (sum <= m_radius*m_radius) return true;
   return false;
 }

@@ -18,10 +18,10 @@
     
     <!--  LIST OF STATES  -->
 	<state name="leftChamber">
-		<material type="fluide" EOS="IG_air.xml">
+		<material type="fluid" EOS="IG_air.xml">
 			<dataFluid alpha="0.5" density="1.0"/>	
 		</material>
-		<material type="fluide" EOS="SG_water.xml">
+		<material type="fluid" EOS="SG_water.xml">
 			<dataFluid alpha="0.5" density="1000.0"/>	
 		</material>
 		<mixture>
@@ -30,10 +30,10 @@
         </mixture>
 	</state>
 	<state name="rightChamber">
-		<material type="fluide" EOS="IG_air.xml">
+		<material type="fluid" EOS="IG_air.xml">
 			<dataFluid alpha="0.5" density="100.0"/>
 		</material>
-		<material type="fluide" EOS="SG_water.xml">
+		<material type="fluid" EOS="SG_water.xml">
 			<dataFluid alpha="0.5" density="1000.0"/>	
 		</material>
 		<mixture>

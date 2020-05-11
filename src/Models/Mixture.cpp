@@ -34,8 +34,6 @@
 
 #include "Mixture.h"
 
-using namespace std;
-
 //***************************************************************************
 
 Mixture::Mixture(){}
@@ -62,7 +60,7 @@ void Mixture::printMixture(std::ofstream &fileStream) const
 
 double Mixture::computeTsat(const Eos *eosLiq, const Eos *eosVap, const double &pressure, double *dTsat)
 {
-  //Restrictions
+  //Restrictions //FP//TODO// to improve
   if (eosLiq->getType() != "IG" && eosLiq->getType() != "SG") { Errors::errorMessage("Only IG and SG permitted in thermal equilibrium model : MixThermalEq::computeTsat" + eosLiq->getType()); }
   if (eosVap->getType() != "IG" && eosVap->getType() != "SG") { Errors::errorMessage("Only IG and SG permitted in thermal equilibrium model : MixThermalEq::computeTsat" + eosVap->getType()); }
 
@@ -96,7 +94,7 @@ double Mixture::computeTsat(const Eos *eosLiq, const Eos *eosVap, const double &
     }
     f = A + B / Tsat + C*log(Tsat) - log(pressure + pInfV) + D*log(pressure + pInfL);
     df = C / Tsat - B / (Tsat*Tsat);
-  } while (abs(f)>1e-10);
+  } while (std::fabs(f)>1e-10);
 
   double dfdp = -1. / (pressure + pInfV) + D / (pressure + pInfL);
   if (dTsat != 0) *dTsat = -dfdp / df;

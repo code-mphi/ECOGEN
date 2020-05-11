@@ -45,7 +45,7 @@ class GDDisc :
 public:
   //! \brief     Geometrical constructor from a XML format reading
   //! \details   Reading data from XML file under the following format:
-  //!            ex: <dataDisc axe1="x" axe2="y" radius="0.5">
+  //!            ex: <dataDisc axis1="x" axis2="y" radius="0.5">
   //!                  <center x = "0." y = "0." z = "0." />
   //!                </dataDisc>
   //! \param     vecPhases      Phases vector variables to copy in geometrical domain
@@ -60,7 +60,7 @@ public:
   virtual bool belong(Coord &posElement, const int &lvl) const;
 private:
   Coord m_centerPos;          //!< Disc position center
-  Axe m_axe1, m_axe2;         //!< Axes that define the disc plane
+  Axis m_axis1, m_axis2;         //!< Axes that define the disc plane
   double m_radius;            //!< Disc radius
 };
 

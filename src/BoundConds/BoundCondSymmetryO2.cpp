@@ -30,11 +30,9 @@
 //! \file      BoundCondSymmetryO2.cpp
 //! \author    F. Petitpas, K. Schmidmayer
 //! \version   1.0
-//! \date      December 20 2017
+//! \date      February 13 2019
 
 #include "BoundCondSymmetryO2.h"
-
-using namespace std;
 
 //****************************************************************************
 
@@ -57,18 +55,18 @@ BoundCondSymmetryO2::~BoundCondSymmetryO2()
 
 //****************************************************************************
 
-void BoundCondSymmetryO2::creeLimite(CellInterface **face)
+void BoundCondSymmetryO2::creeLimite(TypeMeshContainer<CellInterface *> &cellInterfaces)
 {
-  *face = new BoundCondSymmetryO2(*(this));
+  cellInterfaces.push_back(new BoundCondSymmetryO2(*(this)));
 }
 
 //****************************************************************************
 //******************************Methode AMR***********************************
 //****************************************************************************
 
-void BoundCondSymmetryO2::creerBordChild()
+void BoundCondSymmetryO2::creerCellInterfaceChild()
 {
-  m_boundariesChildren.push_back(new BoundCondSymmetryO2(*this, m_lvl + 1));
+  m_cellInterfacesChildren.push_back(new BoundCondSymmetryO2(*this, m_lvl + 1));
 }
 
 //****************************************************************************

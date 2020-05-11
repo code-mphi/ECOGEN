@@ -3,10 +3,10 @@
     <!-- LIST OF GEOMETRICAL DOMAINS  -->
     <physicalDomains> 
         <domain name="base" state="air" type="entireDomain"/>
-        <domain name="square"  state="square" type="pavement">
-            <dataPavement lAxeX="0.2" lAxeY="0.1" lAxeZ="1.">
+        <domain name="square"  state="square" type="cuboid">
+            <dataCuboid lAxisX="0.2" lAxisY="0.1" lAxisZ="1.">
                 <posInferiorVertex x="0.275" y="0." z="0."/>
-            </dataPavement>
+            </dataCuboid>
         </domain>
     </physicalDomains>
 
@@ -32,10 +32,10 @@
     
     <!--  LIST OF STATES  -->
     <state name="air">
-        <material type="fluide" EOS="IG_air.xml">
+        <material type="fluid" EOS="IG_air.xml">
             <dataFluid alpha="0.999999" density="1.0"/>
         </material>
-        <material type="fluide" EOS="SG_liquidForSurfaceTensionCases.xml">
+        <material type="fluid" EOS="SG_liquidForSurfaceTensionCases.xml">
             <dataFluid alpha="0.000001" density="1000.0"/>
         </material>
         <mixture>
@@ -46,10 +46,10 @@
     </state>
 
     <state name="square">
-        <material type="fluide" EOS="IG_air.xml">
+        <material type="fluid" EOS="IG_air.xml">
             <dataFluid alpha="0.000001" density="1.0"/>
         </material>
-        <material type="fluide" EOS="SG_liquidForSurfaceTensionCases.xml">
+        <material type="fluid" EOS="SG_liquidForSurfaceTensionCases.xml">
             <dataFluid alpha="0.999999" density="1000.0"/>
         </material>
         <mixture>

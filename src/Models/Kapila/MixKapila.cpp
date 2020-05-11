@@ -29,13 +29,12 @@
 
 //! \file      MixKapila.cpp
 //! \author    K. Schmidmayer, F. Petitpas
-//! \version   1.0
-//! \date      December 19 2017
+//! \version   1.1
+//! \date      June 5 2019
 
 #include <cmath>
 #include "MixKapila.h"
 
-using namespace std;
 using namespace tinyxml2;
 
 //***************************************************************************
@@ -44,7 +43,7 @@ MixKapila::MixKapila() :m_density(0.), m_pressure(0.), m_velocity(0), m_energie(
 
 //***************************************************************************
 
-MixKapila::MixKapila(XMLElement *state, string fileName) :
+MixKapila::MixKapila(XMLElement *state, std::string fileName) :
   m_density(0.), m_pressure(0.), m_energie(0.), m_totalEnergy(0.), m_frozenSoundSpeed(0.), m_woodSoundSpeed(0.)
 {
   XMLElement *sousElement(state->FirstChildElement("mixture"));
@@ -164,7 +163,7 @@ void MixKapila::computeMixtureVariables(Phase **vecPhase, const int &numberPhase
   for (int k = 0; k < numberPhases; k++) {
     m_energie += vecPhase[k]->getY() * vecPhase[k]->getEnergy();
     m_frozenSoundSpeed += vecPhase[k]->getY() * vecPhase[k]->getSoundSpeed()*vecPhase[k]->getSoundSpeed();
-    m_woodSoundSpeed += vecPhase[k]->getAlpha() / max((vecPhase[k]->getDensity()*vecPhase[k]->getSoundSpeed()*vecPhase[k]->getSoundSpeed()), epsilon);
+    m_woodSoundSpeed += vecPhase[k]->getAlpha() / std::max((vecPhase[k]->getDensity()*vecPhase[k]->getSoundSpeed()*vecPhase[k]->getSoundSpeed()), epsilonAlphaNull);
   }
   m_frozenSoundSpeed = sqrt(m_frozenSoundSpeed);
   m_woodSoundSpeed = 1. / sqrt(m_density*m_woodSoundSpeed);
@@ -173,7 +172,7 @@ void MixKapila::computeMixtureVariables(Phase **vecPhase, const int &numberPhase
 
 //***************************************************************************
 
-void MixKapila::internalEnergyToTotalEnergy(vector<QuantitiesAddPhys*> &vecGPA)
+void MixKapila::internalEnergyToTotalEnergy(std::vector<QuantitiesAddPhys*> &vecGPA)
 {
   m_totalEnergy = m_energie + 0.5*m_velocity.squaredNorm();
   for (unsigned int pa = 0; pa < vecGPA.size(); pa++) {
@@ -183,7 +182,7 @@ void MixKapila::internalEnergyToTotalEnergy(vector<QuantitiesAddPhys*> &vecGPA)
 
 //***************************************************************************
 
-void MixKapila::totalEnergyToInternalEnergy(vector<QuantitiesAddPhys*> &vecGPA)
+void MixKapila::totalEnergyToInternalEnergy(std::vector<QuantitiesAddPhys*> &vecGPA)
 {
   m_energie = m_totalEnergy - 0.5*m_velocity.squaredNorm();
   for (unsigned int pa = 0; pa < vecGPA.size(); pa++) {
@@ -217,6 +216,8 @@ double MixKapila::returnScalar(const int &numVar) const
     return m_density; break;
   case 2:
     return m_pressure; break;
+  case 3:
+    return m_totalEnergy; break;
   default:
     return 0.; break;
   }
@@ -237,7 +238,7 @@ Coord MixKapila::returnVector(const int &numVar) const
 
 //***************************************************************************
 
-string MixKapila::returnNameScalar(const int &numVar) const
+std::string MixKapila::returnNameScalar(const int &numVar) const
 {
   switch (numVar)
   {
@@ -245,6 +246,8 @@ string MixKapila::returnNameScalar(const int &numVar) const
     return "Density_Mixture"; break;
   case 2:
     return "Pressure_Mixture"; break;
+  case 3:
+    return "Total_energy_Mixture"; break;
   default:
     return "NoName"; break;
   }
@@ -252,7 +255,7 @@ string MixKapila::returnNameScalar(const int &numVar) const
 
 //***************************************************************************
 
-string MixKapila::returnNameVector(const int &numVar) const
+std::string MixKapila::returnNameVector(const int &numVar) const
 {
   switch (numVar)
   {
@@ -275,6 +278,8 @@ void MixKapila::setScalar(const int &numVar, const double &value)
     m_density = value; break;
   case 2:
     m_pressure = value; break;
+  case 3:
+    m_totalEnergy = value; break;
   default:
     Errors::errorMessage("numVar not found in MixKapila::setScalar"); break;
   }
@@ -315,12 +320,32 @@ void MixKapila::fillBuffer(double *buffer, int &counter) const
 
 //***************************************************************************
 
+void MixKapila::fillBuffer(std::vector<double> &dataToSend) const
+{
+  dataToSend.push_back(m_velocity.getX());
+  dataToSend.push_back(m_velocity.getY());
+  dataToSend.push_back(m_velocity.getZ());
+  dataToSend.push_back(m_totalEnergy);
+}
+
+//***************************************************************************
+
 void MixKapila::getBuffer(double *buffer, int &counter)
 {
   m_velocity.setX(buffer[++counter]);
   m_velocity.setY(buffer[++counter]);
   m_velocity.setZ(buffer[++counter]);
   m_totalEnergy = buffer[++counter];
+}
+
+//***************************************************************************
+
+void MixKapila::getBuffer(std::vector<double> &dataToReceive, int &counter)
+{
+  m_velocity.setX(dataToReceive[counter++]);
+  m_velocity.setY(dataToReceive[counter++]);
+  m_velocity.setZ(dataToReceive[counter++]);
+  m_totalEnergy = dataToReceive[counter++];
 }
 
 //****************************************************************************
@@ -389,61 +414,6 @@ void MixKapila::getBufferSlopes(double *buffer, int &counter)
 //****************************************************************************
 //******************************* ACCESSORS **********************************
 //****************************************************************************
-
-double MixKapila::getDensity() const
-{
-  return m_density;
-}
-
-//***************************************************************************
-
-double MixKapila::getPressure() const
-{
-  return m_pressure;
-}
-
-//***************************************************************************
-
-double MixKapila::getU() const { return m_velocity.getX(); }
-double MixKapila::getV() const { return m_velocity.getY(); }
-double MixKapila::getW() const { return m_velocity.getZ(); }
-
-//***************************************************************************
-
-Coord MixKapila::getVelocity() const
-{
-  return m_velocity;
-}
-
-//***************************************************************************
-
-double MixKapila::getEnergy() const
-{
-  return m_energie;
-}
-
-//***************************************************************************
-
-double MixKapila::getTotalEnergy() const
-{
-  return m_totalEnergy;
-}
-
-//***************************************************************************
-
-double MixKapila::getFrozenSoundSpeed() const
-{
-  return m_frozenSoundSpeed;
-}
-
-//***************************************************************************
-
-double MixKapila::getWoodSoundSpeed() const
-{
-  return m_woodSoundSpeed;
-}
-
-//***************************************************************************
 
 void MixKapila::setPressure(const double &p) { m_pressure = p; }
 

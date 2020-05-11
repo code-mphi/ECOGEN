@@ -31,13 +31,14 @@
 #define HEADEREQUATIONOFSTATE_H
 
 //! \file      HeaderEquationOfState.h
-//! \author    F. Petitpas, K. Schmidmayer, E. Daniel
+//! \author    F. Petitpas, K. Schmidmayer, E. Daniel, J. Caze
 //! \version   1.0
-//! \date      December 20 2017
+//! \date      October 11 2019
 //! \brief     New equation of state headers should be added here
 
 #include "EosIG.h"
 #include "EosSG.h"
+#include "EosNASG.h"
 
 //Add here headers for new equations of state
 

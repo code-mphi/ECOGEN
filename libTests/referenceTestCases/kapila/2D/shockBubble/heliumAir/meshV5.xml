@@ -4,6 +4,6 @@
 	<cartesianMesh>
 		<dimensions x="0.3" y="0.06" z="0.1"/>
 		<numberCells x="50" y ="10" z="1"/>
-		<AMR lvlMax="2" criteriaVar="0.08" varRho="true" varP="true" varU="false" varAlpha="true" xiSplit="0.11" xiJoin="0.11"/>
+		<AMR lvlMax="4" criteriaVar="0.08" varRho="true" varP="true" varU="false" varAlpha="true" xiSplit="0.11" xiJoin="0.11"/>
 	</cartesianMesh>
 </mesh>

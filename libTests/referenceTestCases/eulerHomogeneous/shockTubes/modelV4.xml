@@ -1,6 +1,6 @@
 <?xml version = "1.0" encoding = "UTF-8" standalone = "yes"?>
 <model>
-	<flowModel name="EulerHomogeneous" liquid="0" vapor="1"/>
+	<flowModel name="EulerHomogeneous" numberPhases="2" liquid="0" vapor="1"/>
 	<EOS name="SG_waterLiq.xml"/>
 	<EOS name="IG_waterVap.xml"/>
 </model>

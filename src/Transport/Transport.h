@@ -32,8 +32,8 @@
 
 //! \file      Transport.h
 //! \author    K. Schmidmayer
-//! \version   1.0
-//! \date      January 3 2018
+//! \version   1.1
+//! \date      June 5 2019
 
 #include "../libTierces/tinyxml2.h"
 #include <fstream>
@@ -45,34 +45,34 @@ class Transport
 {
   public:
     Transport();
-    virtual ~Transport();
+    ~Transport();
 
     //! \brief     Set the value of the corresponding transport variable
     //! \param     value                  value of the transport variable
     void setValue(double value);
     //! \brief     Return the value of the corresponding transport variable
-    double getValue() const;
+    const double& getValue() const { return m_value; };
 
     //! \brief     Cell to cell Riemann solver for the corresponding transport equation
     //! \param     transportLeft          left value of transport variable
     //! \param     transportRight         right value of transport variable
-    //! \param     sM                     fluid velocity for intercell boundaries
+    //! \param     sM                     fluid velocity for intercell interfaces
    	void solveRiemann(double transportLeft, double transportRight, double sM);
     //! \brief     Wall half Riemann solver for the corresponding transport equation
     void solveRiemannWall();
     //! \brief     Inflow (injection) half Riemann solver for the corresponding transport equation
     //! \param     transportLeft          left value of transport variable
-    //! \param     sM                     fluid velocity for intercell boundaries
+    //! \param     sM                     fluid velocity for intercell interfaces
     //! \param     valueTransport         injection value of transport variable
     void solveRiemannInflow(double transportLeft, double sM, double valueTransport);
     //! \brief     Tank half Riemann solver for the corresponding transport equation
     //! \param     transportLeft          left value of transport variable
-    //! \param     sM                     fluid velocity for intercell boundaries
+    //! \param     sM                     fluid velocity for intercell interfaces
     //! \param     valueTransport         tank value of transport variable
     void solveRiemannTank(double transportLeft, double sM, double valueTransport);
     //! \brief     Outflow half Riemann solver for the corresponding transport equation
     //! \param     transportLeft          left value of transport variable
-    //! \param     sM                     fluid velocity for intercell boundaries
+    //! \param     sM                     fluid velocity for intercell interfaces
     //! \param     valueTransport         outflow value of transport variable
     void solveRiemannOutflow(double transportLeft, double sM, double valueTransport);
     //! \brief     Add flux to the corresponding transport buffer flux
@@ -86,12 +86,12 @@ class Transport
     //! \brief     Add non conservative transport term to the flux
     //! \param     coefA                  possibility to multiply the non conservative transport term before adding (set 1.d0 if not needed)
     //! \param     transport              transport value used to approximate the non conservative transport term
-    //! \param     sM                     fluid velocity for intercell boundaries
+    //! \param     sM                     fluid velocity for intercell interfaces
     void addNonCons(double coefA, double transport, const double sM);
     //! \brief     Subtract non conservative transport term to the flux
     //! \param     coefA                  possibility to multiply the non conservative transport term before adding (set 1.d0 if not needed)
     //! \param     transport              transport value used to approximate the non conservative transport term
-    //! \param     sM                     fluid velocity for intercell boundaries
+    //! \param     sM                     fluid velocity for intercell interfaces
     void subtractNonCons(double coefA, double transport, const double sM);
     //! \brief     Multiply the corresponding transport value by a scalar
     //! \param     scalar                 scalar by what the transport value is multiplied

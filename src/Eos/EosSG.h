@@ -31,9 +31,9 @@
 #define EOSSG_H
 
 //! \file      EosSG.h
-//! \author    F. Petitpas, K. Schmidmayer, E. Daniel
-//! \version   1.0
-//! \date      May 14 2018
+//! \author    F. Petitpas, K. Schmidmayer, E. Daniel, J. Caze
+//! \version   1.1
+//! \date      October 11 2019
 
 #include "Eos.h"
 
@@ -93,7 +93,7 @@ class EosSG : public Eos
 		//! \param     temperature        temperature (T)
 		//! \param     pressure           pressure (p)
 		//! \return    entropy
-		//! \details  with s : \f$  s(T, p)  = c_v \ ln \left( \frac{T^\gamma}  { (p+p_{\infty})^\frac{\gamma}{(\gamma-1)} } \right)+s_{ref} \f$
+		//! \details  with s : \f$  s(T, p)  = c_v \ ln \left( \frac{T^\gamma}  { (p+p_{\infty})^{(\gamma-1)} } \right)+s_{ref} \f$
 		virtual double computeEntropy(const double &temperature, const double &pressure) const;
 
 		//! \brief     Compute phase pressure along an isentropic path
@@ -109,7 +109,7 @@ class EosSG : public Eos
 		//! \param     initialDensity     initial density (\f$ \rho_i \f$)
 		//! \param     finalDensity       final density (\f$ \rho_f \f$)
 		//! \return    finalPressure  
-		//! \details    with finalPressure : \f$ p_f = (p_i+p_{\infty}) \frac{  (\gamma+1)*\rho_f - (\gamma-1)*\rho_i  }{  (\gamma+1)*\rho_i-(\gamma-1)*\rho_f  } -p_{\infty} \f$
+		//! \details   with finalPressure : \f$ p_f = (p_i+p_{\infty}) \frac{  (\gamma+1)*\rho_f - (\gamma-1)*\rho_i  }{  (\gamma+1)*\rho_i-(\gamma-1)*\rho_f  } -p_{\infty} \f$
 		virtual double computePressureHugoniot(const double &initialPressure, const double &initialDensity, const double &finalDensity) const;
         
 		//! \brief     Compute  density along an isentropic path AND its derivature versus the pressure at constant entropy
@@ -125,10 +125,16 @@ class EosSG : public Eos
 		//! \param     initialDensity     initial density (\f$ \rho_i \f$)
 		//! \param     finalPressure      final pressure (\f$ p_f \f$)
 		//! \return    finalDensity  AND  *drhodp (OPTIONAL)
-		//! \detail    with finalDensity : \f$ \rho_f =\rho_i\frac{ (\gamma + 1)*(p_f+p_{\infty}) + (\gamma - 1)*(p_i+p_{\infty})}{(\gamma - 1)(p_f+p_{\infty}) +(\gamma + 1)(p_i+p_{\infty})) }\f$ AND with  *drhodp :  \f$  \left.  \frac{\partial \rho}{\partial p} \right)_Hug   =  \frac{4\gamma \rho_i \ (p_i+p_{\infty})}{ \left( (\gamma - 1)(p_f+p_{\infty}) +(\gamma + 1)(p_i+p_{\infty}) \right) ^2}   \f$
+		//! \detail    with finalDensity : \f$ \rho_f =\rho_i\frac{ (\gamma + 1)*(p_f+p_{\infty}) + (\gamma - 1)*(p_i+p_{\infty})}{(\gamma - 1)(p_f+p_{\infty}) +(\gamma + 1)(p_i+p_{\infty})}\f$ AND with  *drhodp :  \f$  \left.  \frac{\partial \rho}{\partial p} \right)_{Hug} = \frac{4\gamma \rho_i \ (p_i+p_{\infty})}{ \left( (\gamma - 1)(p_f+p_{\infty}) +(\gamma + 1)(p_i+p_{\infty}) \right) ^2}   \f$
 		virtual double computeDensityHugoniot(const double &initialPressure, const double &initialDensity, const double &finalPressure, double *drhodp = 0) const;
-        
-    virtual double computeDensityPfinal(const double &initialPressure, const double &initialDensity, const double &finalPressure, double *drhodp = 0) const;
+
+		//! \brief     Compute density during relaxation step AND its derivative versus the pressure
+		//! \param     initialPressure    initial pressure (\f$ p_i \f$)
+		//! \param     initialDensity     initial density (\f$ \rho_i \f$)
+		//! \param     finalPressure      final pressure (\f$ p_f \f$)
+		//! \return    finalDensity  AND  *drhodp (OPTIONAL)
+    //! \detail    with finalDensity : \f$ \rho_f = \rho_i \frac{\gamma (p_f+p_{\infty})}{\gamma (p_f+p_{\infty}) + p_i - p_f} \f$ AND with *drhodp : \f$ \frac{d\rho}{dp} = \rho_i \frac{\gamma (p_i + p_{\infty})}{\left(\gamma (p_f+p_{\infty}) + p_i - p_f\right)^2} \f$
+		virtual double computeDensityPfinal(const double &initialPressure, const double &initialDensity, const double &finalPressure, double *drhodp = 0) const;
 
 		//! \brief     Compute  enthalpy at the end of an isentropic path AND the enthalpy derivature versus the pressure
 		//! \param     initialPressure	  Initial pressure (\f$ p_i \f$ at the beginning of the isentropic path)
@@ -153,14 +159,14 @@ class EosSG : public Eos
 		//! \param     density			density (\f$ \rho \f$)
 		//! \param     drhodp			derivative of the density versus pressure (\f$\frac{d \rho}{d p}\f$ at the saturation state)
 		//! \return    rhoe AND *drhoedp (OPTIONAL)
-		//! \detail  with  rhoe : \f$  \rho\epsilon(p, \rho)  =  \frac{p+p_{\infty}}{(\gamma-1)} +\rho\epsilon_{ref}\f$ AND \f$ \frac{d \rho\epsilon}{d p} =\left.  \frac{\partial \rho\epsilon}{\partial p} \right)_{\rho} + \left.  \frac{\partial \rho\epsilon}{\partial\rho  } \right)_p   = \frac{1}{(\gamma-1)} +\frac{d \rho}{d p}\epsilon_{ref} \f$		
+		//! \detail  with  rhoe : \f$  \rho\epsilon(p, \rho)  =  \frac{p+\gamma p_{\infty}}{(\gamma-1)} +\rho\epsilon_{ref}\f$ AND \f$ \frac{d \rho\epsilon}{d p} =\left.  \frac{\partial \rho\epsilon}{\partial p} \right)_{\rho} + \left.  \frac{\partial \rho\epsilon}{\partial\rho  } \right)_p \frac{d\rho}{dp} = \frac{1}{(\gamma-1)} +\frac{d \rho}{d p}\epsilon_{ref} \f$		
 		virtual double computeDensityEnergySaturation(const double &pressure, const double &rho, const double &drhodp, double *drhoedp = 0) const;
 
 		//! \brief    send specific values of the parameters useful for mixture EOS based on Ideal Gas and Stiffened Gas
 		//! \param     gamPinfOverGamMinusOne	\f$  \frac{\gamma p_{\infty}}{(\gamma-1)} \f$ 		
 		//! \param     eRef						\f$	  \epsilon_{ref} \f$ 
 		//! \param     oneOverGamMinusOne		\f$  \frac{1}{(\gamma-1)}\f$ 	  
-        virtual void sendSpecialMixtureEos(double &gamPinfOverGamMinusOne, double &eRef, double &oneOverGamMinusOne) const;
+        virtual void sendSpecialMixtureEos(double &gamPinfOverGamMinusOne, double &eRef, double &oneOverGamMinusOne, double &covolume) const;
 
 
 		//! \brief   compute the specific volume with the pressure and the enthalpy
@@ -202,22 +208,22 @@ class EosSG : public Eos
 
         //Get
 		//! \brief  get the adiabatic exponent of the fluid 
-		//!return  m_gamma :  \f$ \gamma \f$
-        virtual double getGamma() const;
+		//!return   m_gamma :  \f$ \gamma \f$
+        virtual const double& getGamma() const { return m_gamma; };
 		//! \brief  get the constant pressure 
-		//!return  m_pInf :  \f$ p_{\infty} \f$
-        virtual double getPInf() const;
+		//!return   m_pInf :  \f$ p_{\infty} \f$
+        virtual const double& getPInf() const { return m_pInf; };
 		//! \brief  get the volume calorific energy of the fluid
-		//!return     \f$ c_v \f$
-        virtual double getCv() const;
+		//!return   m_cv : \f$ c_v \f$
+        virtual const double& getCv() const { return m_cv; };
 		//! \brief  get the energy of reference of the fluid
-		//!return     \f$ \epsilon_{ref} \f$
-        virtual double getERef() const;
+		//!return   m_eRef : \f$ \epsilon_{ref} \f$
+        virtual const double& getERef() const { return m_eRef; };
 		//! \brief  get the entropy of reference of the fluid
-		//!return     \f$ \ s_{ref} \f$
-        virtual double getSRef() const;
+		//!return   m_sRef : \f$ \ s_{ref} \f$
+        virtual const double& getSRef() const { return m_sRef; };
 		//! \brief  get the type that is to say the  reduced name of the EOS in ECOGEN :
-		//!return     \f$ \ "SG" \f$
+		//!return   \f$ \ "SG" \f$
         virtual std::string getType() const { return "SG"; };
 
     protected:

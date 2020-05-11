@@ -32,8 +32,8 @@
 
 //! \file      EosIG.h
 //! \author    F. Petitpas, K. Schmidmayer, E. Daniel
-//! \version   1.0
-//! \date      May 14 2018
+//! \version   1.1
+//! \date      June 5 2019
 
 #include "Eos.h"
 
@@ -146,7 +146,7 @@ class EosIG : public Eos
 		//! \param     gamPinfOverGamMinusOne	\f$  \frac{\gamma p_{\infty}}{(\gamma-1)} = 0 \;for\; Ideal\; Gas\f$ 		
 		//! \param     eRef						\f$	  \epsilon_{ref} \f$ 
 		//! \param     oneOverGamMinusOne		\f$  \frac{1}{(\gamma-1)}\f$ 	  
-        virtual void sendSpecialMixtureEos(double &gamPinfOverGamMinusOne, double &eRef, double &oneOverGamMinusOne) const;
+        virtual void sendSpecialMixtureEos(double &gamPinfOverGamMinusOne, double &eRef, double &oneOverGamMinusOne, double &covolume) const;
 		//! \brief   compute the specific volume with the pressure and the enthalpy
 		//! \param   pressure		pressure (p)  		
 		//! \param   enthalpy       enthalpy (h)
@@ -186,16 +186,16 @@ class EosIG : public Eos
     //Get 
 		//! \brief  get the adiabatic exponent of the fluid 
 		//!return  m_gamma :  \f$ \gamma \f$
-        virtual double getGamma() const;
+        virtual const double& getGamma() const { return m_gamma; };
 		//! \brief  get the volume calorific energy of the fluid
 		//!return     \f$ c_v \f$
-        virtual double getCv() const;
+        virtual const double& getCv() const { return m_cv; };
 		//! \brief  get the energy of reference of the fluid
 		//!return     \f$ \epsilon_{ref} \f$
-        virtual double getERef() const;
+        virtual const double& getERef() const { return m_eRef; };
 		//! \brief  get the entropy of reference of the fluid
 		//!return     \f$ \ s_{ref} \f$
-        virtual double getSRef() const;
+        virtual const double& getSRef() const { return m_sRef; };
 		//! \brief  get the type that is to say the  reduced name of the EOS in ECOGEN :
 		//!return     \f$ \ "IG" \f$
         virtual std::string getType() const { return "IG"; };

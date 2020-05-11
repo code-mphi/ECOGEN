@@ -1,8 +1,8 @@
-<?xml version = "1.0" encoding = "UTF-8" standalone = "yes"?>
+<?xml version='1.0' encoding='UTF-8' standalone='yes'?>
 <mesh>
-	<type structure="unstructured"/>
-	<unstructuredMesh>
-		<file name="unstructured2D/testUS.msh"/>
-		<parallel GMSHPretraitement="true"/>
-	</unstructuredMesh>
+  <type structure="unStructured"/>
+  <unstructuredMesh>
+    <file name="unstructured2D/testUS.msh"/>
+    <parallel GMSHPretraitement="true"/>
+  </unstructuredMesh>
 </mesh>

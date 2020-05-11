@@ -7,12 +7,12 @@
 		<AMR lvlMax="3" criteriaVar="0.08" varRho="true" varP="true" varU="false" varAlpha="false" xiSplit="0.11" xiJoin="0.11"/>
 		<meshStretching>
 			<XStretching>
-				<stretch startAt="0." endAt="0.5" factor="0.9" numberCells="10"/>
-			 	<stretch startAt="0.5" endAt="1." factor="1.1" numberCells="10"/>
+				<stretch startAt="0." endAt="0.5" factor="0.9803921568627451" numberCells="10"/>
+			 	<stretch startAt="0.5" endAt="1." factor="1.02" numberCells="10"/>
 			</XStretching>
 			<YStretching>
-				<stretch startAt="0." endAt="0.5" factor="0.9" numberCells="10"/>
-			 	<stretch startAt="0.5" endAt="1." factor="1.1" numberCells="10"/>
+				<stretch startAt="0." endAt="0.5" factor="0.9803921568627451" numberCells="10"/>
+			 	<stretch startAt="0.5" endAt="1." factor="1.02" numberCells="10"/>
 			</YStretching>
 			<ZStretching>
 				<stretch startAt="0." endAt="1." factor="1." numberCells="1"/>

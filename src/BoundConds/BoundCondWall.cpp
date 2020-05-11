@@ -30,11 +30,9 @@
 //! \file      BoundCondWall.cpp
 //! \author    F. Petitpas, K. Schmidmayer
 //! \version   1.0
-//! \date      December 20 2017
+//! \date      February 13 2019
 
 #include "BoundCondWall.h"
-
-using namespace std;
 
 //****************************************************************************
 
@@ -58,9 +56,9 @@ BoundCondWall::~BoundCondWall() {}
 
 //****************************************************************************
 
-void BoundCondWall::creeLimite(CellInterface **face)
+void BoundCondWall::creeLimite(TypeMeshContainer<CellInterface *> &cellInterfaces)
 {
-  *face = new BoundCondWall(*(this));
+  cellInterfaces.push_back(new BoundCondWall(*(this)));
 }
 
 //****************************************************************************
@@ -81,9 +79,9 @@ void BoundCondWall::solveRiemannTransportLimite(Cell &cellLeft, const int & numb
 //******************************Methode AMR***********************************
 //****************************************************************************
 
-void BoundCondWall::creerBordChild()
+void BoundCondWall::creerCellInterfaceChild()
 {
-  m_boundariesChildren.push_back(new BoundCondWall(*this, m_lvl + 1));
+  m_cellInterfacesChildren.push_back(new BoundCondWall(*this, m_lvl + 1));
 }
 
 //****************************************************************************

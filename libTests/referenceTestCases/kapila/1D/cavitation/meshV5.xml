@@ -3,7 +3,7 @@
 	<type structure="cartesian"/>
 	<cartesianMesh>
 		<dimensions x="1.0" y="0.1" z="0.1"/>
-		<numberCells x="100" y ="1" z="1"/>
-		<AMR lvlMax="4" criteriaVar="0.05" varRho="false" varP="true" varU="true" varAlpha="true" xiSplit="0.11" xiJoin="0.11"/>
+		<numberCells x="1000" y ="1" z="1"/>
+		<!-- <AMR lvlMax="4" criteriaVar="0.05" varRho="false" varP="true" varU="true" varAlpha="true" xiSplit="0.11" xiJoin="0.11"/> -->
 	</cartesianMesh>
 </mesh>

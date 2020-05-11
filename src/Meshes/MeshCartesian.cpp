@@ -28,17 +28,13 @@
 //  If not, see <http://www.gnu.org/licenses/>.
 
 //! \file      MeshCartesian.cpp
-//! \author    F. Petitpas, K. Schmidmayer, S. Le Martelot
-//! \version   1.0
-//! \date      September 06 2018
+//! \author    F. Petitpas, K. Schmidmayer, S. Le Martelot, B. Dorschner
+//! \version   1.1
+//! \date      June 5 2019
 
-#include <iostream>
 #include <algorithm>
-#include <sstream>
 
 #include "MeshCartesian.h"
-
-using namespace std;
 
 //***********************************************************************
 
@@ -72,8 +68,6 @@ MeshCartesian::MeshCartesian(double lX, int numberCellsX, double lY, int numberC
 //***********************************************************************
 
 MeshCartesian::~MeshCartesian(){
-  delete[] m_elements;
-  delete[] m_faces;
   for (int j = m_numberBoundCondInit; j < 6; j++) {
     switch (j) {
     case 0:
@@ -121,17 +115,17 @@ void MeshCartesian::attributLimites(std::vector<BoundCond*> &boundCond)
   for (int j = m_numberBoundCondInit; j < 6; j++) {
     switch (j) {
     case 0:
-      m_limXm = new BoundCondAbs(j+1); break;
+      m_limXm = new BoundCondNonReflecting(j+1); break;
     case 1:
-      m_limXp = new BoundCondAbs(j+1); break;
+      m_limXp = new BoundCondNonReflecting(j+1); break;
     case 2:
-      m_limYm = new BoundCondAbs(j+1); break;
+      m_limYm = new BoundCondNonReflecting(j+1); break;
     case 3:
-      m_limYp = new BoundCondAbs(j+1); break;
+      m_limYp = new BoundCondNonReflecting(j+1); break;
     case 4:
-      m_limZm = new BoundCondAbs(j+1); break;
+      m_limZm = new BoundCondNonReflecting(j+1); break;
     case 5:
-      m_limZp = new BoundCondAbs(j+1); break;
+      m_limZp = new BoundCondNonReflecting(j+1); break;
     default:
       Errors::errorMessage("Probleme de limites dans attributLimites"); break;
     }
@@ -161,16 +155,17 @@ void MeshCartesian::construitIGlobal(const int &i, const int &j, const int &k, i
 
 //***********************************************************************
 
-int MeshCartesian::initializeGeometrie(Cell ***cells, CellInterface ***bord, bool pretraitementParallele, string ordreCalcul)
+int MeshCartesian::initializeGeometrie(TypeMeshContainer<Cell *> &cells, TypeMeshContainer<Cell *> &cellsGhost, TypeMeshContainer<CellInterface *> &cellInterfaces,
+  const int &restartSimulation, bool pretraitementParallele, std::string ordreCalcul)
 {
   this->meshStretching();
   if (Ncpu == 1)
   {
-    this->initializeGeometrieMonoCpu(cells, bord, ordreCalcul);
+    this->initializeGeometrieMonoCpu(cells, cellInterfaces, ordreCalcul);
   }
   else
   {
-    this->initializeGeometrieParallele(cells, bord, ordreCalcul);
+    this->initializeGeometrieParallele(cells, cellsGhost, cellInterfaces, ordreCalcul);
   }
   return m_geometrie;
 }
@@ -221,7 +216,7 @@ void MeshCartesian::meshStretching()
 
 //***********************************************************************
 
-void MeshCartesian::initializeGeometrieMonoCpu(Cell ***cells, CellInterface ***bord, string ordreCalcul)
+void MeshCartesian::initializeGeometrieMonoCpu(TypeMeshContainer<Cell *> &cells, TypeMeshContainer<CellInterface *> &cellInterfaces, std::string ordreCalcul)
 {
   int ix, iy, iz;
   int compteMaillesParallele(0);
@@ -233,12 +228,11 @@ void MeshCartesian::initializeGeometrieMonoCpu(Cell ***cells, CellInterface ***b
 
   //Declaration du tableau de mailles et d'elements
   //-----------------------------------------------
-  m_elements = new ElementCartesian[m_numberCellsCalcul];
-  (*cells) = new Cell*[m_numberCellsCalcul];
-  for (int i = 0; i < m_numberCellsCalcul; i++) { 
-    if(ordreCalcul == "FIRSTORDER") { (*cells)[i] = new Cell; }
-    else { (*cells)[i] = new CellO2; }
-    (*cells)[i]->setElement(&m_elements[i], i); 
+  for (int i = 0; i < m_numberCellsCalcul; i++) {
+    if(ordreCalcul == "FIRSTORDER") { cells.push_back(new Cell); }
+    else { cells.push_back(new CellO2); }
+    m_elements.push_back(new ElementCartesian());
+    cells[i]->setElement(m_elements[i], i); 
   }
 
   //Attribution des donnees geometriques cartesiennes aux mailles
@@ -250,22 +244,22 @@ void MeshCartesian::initializeGeometrieMonoCpu(Cell ***cells, CellInterface ***b
   {
     this->recupereIJK(i, ix, iy, iz);
     volume = m_dXi[ix] * m_dYj[iy] * m_dZk[iz];
-    (*cells)[i]->getElement()->setVolume(volume);
+    cells[i]->getElement()->setVolume(volume);
 
     //CFL lenght
     double lCFL(1.e10);
-    if (m_numberCellsX != 1) { lCFL = min(lCFL, m_dXi[ix]); }
-    if (m_numberCellsY != 1) { lCFL = min(lCFL, m_dYj[iy]); }
-    if (m_numberCellsZ != 1) { lCFL = min(lCFL, m_dZk[iz]); }
+    if (m_numberCellsX != 1) { lCFL = std::min(lCFL, m_dXi[ix]); }
+    if (m_numberCellsY != 1) { lCFL = std::min(lCFL, m_dYj[iy]); }
+    if (m_numberCellsZ != 1) { lCFL = std::min(lCFL, m_dZk[iz]); }
     if (m_geometrie > 1) lCFL *= 0.6;
 
-    (*cells)[i]->getElement()->setLCFL(lCFL);
-    (*cells)[i]->getElement()->setPos(m_posXi[ix], m_posYj[iy], m_posZk[iz]);
-    (*cells)[i]->getElement()->setSize(m_dXi[ix], m_dYj[iy], m_dZk[iz]);
+    cells[i]->getElement()->setLCFL(lCFL);
+    cells[i]->getElement()->setPos(m_posXi[ix], m_posYj[iy], m_posZk[iz]);
+    cells[i]->getElement()->setSize(m_dXi[ix], m_dYj[iy], m_dZk[iz]);
   }
 
-  //Attribution des donnees geometriques cartesiennes aux boundaries de mailles
-  //----------------------------------------------------------------------
+  //Attribution des donnees geometriques cartesiennes aux cell interfaces
+  //---------------------------------------------------------------------
   //Determination du number de faces selon compute 1D/2D/3D
   //m_numberFaces : number total de faces
   //m_numberFacesLimites : number de faces sur les limites
@@ -288,9 +282,6 @@ void MeshCartesian::initializeGeometrieMonoCpu(Cell ***cells, CellInterface ***b
     m_numberFacesLimites += 2 * m_numberCellsX*m_numberCellsY;
   }
   int numberFacesInternes(m_numberFacesTotal - m_numberFacesLimites);
-  //Allocation globale
-  (*bord) = new CellInterface*[m_numberFacesTotal];
-  m_faces = new FaceCartesian[m_numberFacesTotal];
 
   //Initialization des faces internes
   //*********************************
@@ -304,27 +295,28 @@ void MeshCartesian::initializeGeometrieMonoCpu(Cell ***cells, CellInterface ***b
     {
       for (iz = 0; iz < m_numberCellsZ; iz++)
       {
-        if (ordreCalcul == "FIRSTORDER") { (*bord)[iFace] = new CellInterface; }
-        else { (*bord)[iFace] = new CellInterfaceO2; }
-        (*bord)[iFace]->setFace(&m_faces[iFace]);
+        if (ordreCalcul == "FIRSTORDER") { cellInterfaces.push_back(new CellInterface); }
+        else { cellInterfaces.push_back(new CellInterfaceO2); }
+        m_faces.push_back(new FaceCartesian());
+        cellInterfaces[iFace]->setFace(m_faces[iFace]);
         this->construitIGlobal(ix, iy, iz, iMailleG);
         this->construitIGlobal(ix + 1, iy, iz, iMailleD);
-        (*bord)[iFace]->initialize((*cells)[iMailleG], (*cells)[iMailleD]);
-        (*cells)[iMailleG]->addBoundary((*bord)[iFace]);
-        (*cells)[iMailleD]->addBoundary((*bord)[iFace]);
+        cellInterfaces[iFace]->initialize(cells[iMailleG], cells[iMailleD]);
+        cells[iMailleG]->addCellInterface(cellInterfaces[iFace]);
+        cells[iMailleD]->addCellInterface(cellInterfaces[iFace]);
         surface = m_dYj[iy] * m_dZk[iz];
-        m_faces[iFace].initializeAutres(surface, normal, tangent, binormal);
-        m_faces[iFace].setSize(0., m_dYj[iy], m_dZk[iz]);
+        m_faces[iFace]->initializeAutres(surface, normal, tangent, binormal);
+        m_faces[iFace]->setSize(0., m_dYj[iy], m_dZk[iz]);
         posX = m_posXi[ix] + 0.5*m_dXi[ix];
         posY = m_posYj[iy];
         posZ = m_posZk[iz];
-        m_faces[iFace].setPos(posX, posY, posZ);
+        m_faces[iFace]->setPos(posX, posY, posZ);
         //Preparation des cells pour ordre 2 multislopes
         BGM = 0; BGP = 0; BDM = 0; BDP = 0;
-        if (ix != 0) { this->construitIGlobal(ix - 1, iy, iz, iTemp); BGM = (*cells)[iTemp]; }
-        if (ix < m_numberCellsX - 1) { this->construitIGlobal(ix + 1, iy, iz, iTemp); BGP = (*cells)[iTemp]; }
-        if (ix < m_numberCellsX - 2) { this->construitIGlobal(ix + 2, iy, iz, iTemp); BDM = (*cells)[iTemp]; }
-        this->construitIGlobal(ix, iy, iz, iTemp); BDP = (*cells)[iTemp];
+        if (ix != 0) { this->construitIGlobal(ix - 1, iy, iz, iTemp); BGM = cells[iTemp]; }
+        if (ix < m_numberCellsX - 1) { this->construitIGlobal(ix + 1, iy, iz, iTemp); BGP = cells[iTemp]; }
+        if (ix < m_numberCellsX - 2) { this->construitIGlobal(ix + 2, iy, iz, iTemp); BDM = cells[iTemp]; }
+        this->construitIGlobal(ix, iy, iz, iTemp); BDP = cells[iTemp];
         iFace++;
       }
     }
@@ -337,27 +329,36 @@ void MeshCartesian::initializeGeometrieMonoCpu(Cell ***cells, CellInterface ***b
     {
       for (iz = 0; iz < m_numberCellsZ; iz++)
       {
-        if(ordreCalcul == "FIRSTORDER") { (*bord)[iFace] = new CellInterface; }
-        else { (*bord)[iFace] = new CellInterfaceO2; }
-        (*bord)[iFace]->setFace(&m_faces[iFace]);
+        if(ordreCalcul == "FIRSTORDER") { cellInterfaces.push_back(new CellInterface); }
+        else { cellInterfaces.push_back(new CellInterfaceO2); }
+        m_faces.push_back(new FaceCartesian());
+        cellInterfaces[iFace]->setFace(m_faces[iFace]);
         this->construitIGlobal(ix, iy, iz, iMailleG);
         this->construitIGlobal(ix, iy + 1, iz, iMailleD);
-        (*bord)[iFace]->initialize((*cells)[iMailleG], (*cells)[iMailleD]);
-        (*cells)[iMailleG]->addBoundary((*bord)[iFace]);
-        (*cells)[iMailleD]->addBoundary((*bord)[iFace]);
+        cellInterfaces[iFace]->initialize(cells[iMailleG], cells[iMailleD]);
+        cells[iMailleG]->addCellInterface(cellInterfaces[iFace]);
+        cells[iMailleD]->addCellInterface(cellInterfaces[iFace]);
         surface = m_dXi[ix] * m_dZk[iz];
-        m_faces[iFace].initializeAutres(surface, normal, tangent, binormal);
-        m_faces[iFace].setSize(m_dXi[ix], 0., m_dZk[iz]);
+        m_faces[iFace]->initializeAutres(surface, normal, tangent, binormal);
+        m_faces[iFace]->setSize(m_dXi[ix], 0., m_dZk[iz]);
         posX = m_posXi[ix];
         posY = m_posYj[iy] + 0.5*m_dYj[iy];
         posZ = m_posZk[iz];
-        m_faces[iFace].setPos(posX, posY, posZ);
+        m_faces[iFace]->setPos(posX, posY, posZ);
         //Preparation des cells pour ordre 2 multislopes
         BGM = 0; BGP = 0; BDM = 0; BDP = 0;
-        if (iy != 0) { this->construitIGlobal(ix, iy - 1, iz, iTemp); BGM = (*cells)[iTemp]; }
-        if (iy < m_numberCellsY - 1) { this->construitIGlobal(ix, iy + 1, iz, iTemp); BGP = (*cells)[iTemp]; }
-        if (iy < m_numberCellsY - 2) { this->construitIGlobal(ix, iy + 2, iz, iTemp); BDM = (*cells)[iTemp]; }
-        this->construitIGlobal(ix, iy, iz, iTemp); BDP = (*cells)[iTemp];
+        if (iy != 0) { this->construitIGlobal(ix, iy - 1, iz, iTemp); BGM = cells[iTemp]; }
+        if (iy < m_numberCellsY - 1) { this->construitIGlobal(ix, iy + 1, iz, iTemp); BGP = cells[iTemp]; }
+        if (iy < m_numberCellsY - 2) { this->construitIGlobal(ix, iy + 2, iz, iTemp); BDM = cells[iTemp]; }
+        this->construitIGlobal(ix, iy, iz, iTemp); BDP = cells[iTemp];
+        //cellInterfaces[iFace]->setB(BG1M, BGM);
+        //cellInterfaces[iFace]->setB(BG1P, BGP);
+        //cellInterfaces[iFace]->setB(BD1M, BDM);
+        //cellInterfaces[iFace]->setB(BD1P, BDP);
+        //cellInterfaces[iFace]->setDistanceH(distanceHGM, m_dY);
+        //cellInterfaces[iFace]->setDistanceH(distanceHGP, m_dY);
+        //cellInterfaces[iFace]->setDistanceH(distanceHDM, m_dY);
+        //cellInterfaces[iFace]->setDistanceH(distanceHDP, m_dY);
         iFace++;
       }
     }
@@ -370,27 +371,36 @@ void MeshCartesian::initializeGeometrieMonoCpu(Cell ***cells, CellInterface ***b
     {
       for (iz = 0; iz < m_numberCellsZ - 1; iz++)
       {
-        if(ordreCalcul == "FIRSTORDER") { (*bord)[iFace] = new CellInterface; }
-        else { (*bord)[iFace] = new CellInterfaceO2; }
-        (*bord)[iFace]->setFace(&m_faces[iFace]);
+        if(ordreCalcul == "FIRSTORDER") { cellInterfaces.push_back(new CellInterface); }
+        else { cellInterfaces.push_back(new CellInterfaceO2); }
+        m_faces.push_back(new FaceCartesian());
+        cellInterfaces[iFace]->setFace(m_faces[iFace]);
         this->construitIGlobal(ix, iy, iz, iMailleG);
         this->construitIGlobal(ix, iy, iz + 1, iMailleD);
-        (*bord)[iFace]->initialize((*cells)[iMailleG], (*cells)[iMailleD]);
-        (*cells)[iMailleG]->addBoundary((*bord)[iFace]);
-        (*cells)[iMailleD]->addBoundary((*bord)[iFace]);
+        cellInterfaces[iFace]->initialize(cells[iMailleG], cells[iMailleD]);
+        cells[iMailleG]->addCellInterface(cellInterfaces[iFace]);
+        cells[iMailleD]->addCellInterface(cellInterfaces[iFace]);
         surface = m_dXi[ix] * m_dYj[iy];
-        m_faces[iFace].initializeAutres(surface, normal, tangent, binormal);
-        m_faces[iFace].setSize(m_dXi[ix], m_dYj[iy], 0.);
+        m_faces[iFace]->initializeAutres(surface, normal, tangent, binormal);
+        m_faces[iFace]->setSize(m_dXi[ix], m_dYj[iy], 0.);
         posX = m_posXi[ix];
         posY = m_posYj[iy];
         posZ = m_posZk[iz] + 0.5*m_dZk[iz];
-        m_faces[iFace].setPos(posX, posY, posZ);
+        m_faces[iFace]->setPos(posX, posY, posZ);
         //Preparation des cells pour ordre 2 multislopes
         BGM = 0; BGP = 0; BDM = 0; BDP = 0;
-        if (iz != 0) { this->construitIGlobal(ix, iy, iz - 1, iTemp); BGM = (*cells)[iTemp]; }
-        if (iz < m_numberCellsZ - 1) { this->construitIGlobal(ix, iy, iz + 1, iTemp); BGP = (*cells)[iTemp]; }
-        if (iz < m_numberCellsZ - 2) { this->construitIGlobal(ix, iy, iz + 2, iTemp); BDM = (*cells)[iTemp]; }
-        this->construitIGlobal(ix, iy, iz, iTemp); BDP = (*cells)[iTemp];
+        if (iz != 0) { this->construitIGlobal(ix, iy, iz - 1, iTemp); BGM = cells[iTemp]; }
+        if (iz < m_numberCellsZ - 1) { this->construitIGlobal(ix, iy, iz + 1, iTemp); BGP = cells[iTemp]; }
+        if (iz < m_numberCellsZ - 2) { this->construitIGlobal(ix, iy, iz + 2, iTemp); BDM = cells[iTemp]; }
+        this->construitIGlobal(ix, iy, iz, iTemp); BDP = cells[iTemp];
+        //(*cellInterface)[iFace]->setB(BG1M, BGM);
+        //(*cellInterface)[iFace]->setB(BG1P, BGP);
+        //(*cellInterface)[iFace]->setB(BD1M, BDM);
+        //(*cellInterface)[iFace]->setB(BD1P, BDP);
+        //(*cellInterface)[iFace]->setDistanceH(distanceHGM, m_dZ);
+        //(*cellInterface)[iFace]->setDistanceH(distanceHGP, m_dZ);
+        //(*cellInterface)[iFace]->setDistanceH(distanceHDM, m_dZ);
+        //(*cellInterface)[iFace]->setDistanceH(distanceHDP, m_dZ);
         iFace++;
       }
     }
@@ -407,19 +417,20 @@ void MeshCartesian::initializeGeometrieMonoCpu(Cell ***cells, CellInterface ***b
     {
       for (iz = 0; iz < m_numberCellsZ; iz++)
       {
-        m_limXm->creeLimite(&(*bord)[iFace]);
-        (*bord)[iFace]->setFace(&m_faces[iFace]);
+        m_limXm->creeLimite(cellInterfaces);
+        m_faces.push_back(new FaceCartesian());
+        cellInterfaces[iFace]->setFace(m_faces[iFace]);
         this->construitIGlobal(ix, iy, iz, iMailleG);
         iMailleD = iMailleG;
-        (*bord)[iFace]->initialize((*cells)[iMailleG], (*cells)[iMailleD]);
-        (*cells)[iMailleG]->addBoundary((*bord)[iFace]);
+        cellInterfaces[iFace]->initialize(cells[iMailleG], cells[iMailleD]);
+        cells[iMailleG]->addCellInterface(cellInterfaces[iFace]);
         surface = m_dYj[iy] * m_dZk[iz];
-        m_faces[iFace].initializeAutres(surface, normal, tangent, binormal);
-        m_faces[iFace].setSize(0., m_dYj[iy], m_dZk[iz]);
+        m_faces[iFace]->initializeAutres(surface, normal, tangent, binormal); //FP//Q// Interet d'avoir deux fonctions initialize ?
+        m_faces[iFace]->setSize(0., m_dYj[iy], m_dZk[iz]);
         posX = 0.;
         posY = m_posYj[iy];
         posZ = m_posZk[iz];
-        m_faces[iFace].setPos(posX, posY, posZ);
+        m_faces[iFace]->setPos(posX, posY, posZ);
         iFace++;
       }
     }
@@ -430,19 +441,20 @@ void MeshCartesian::initializeGeometrieMonoCpu(Cell ***cells, CellInterface ***b
     {
       for (iz = 0; iz < m_numberCellsZ; iz++)
       {
-        m_limXp->creeLimite(&(*bord)[iFace]);
-        (*bord)[iFace]->setFace(&m_faces[iFace]);
+        m_limXp->creeLimite(cellInterfaces);
+        m_faces.push_back(new FaceCartesian());
+        cellInterfaces[iFace]->setFace(m_faces[iFace]);
         this->construitIGlobal(ix, iy, iz, iMailleG);
         iMailleD = iMailleG;
-        (*bord)[iFace]->initialize((*cells)[iMailleG], (*cells)[iMailleD]);
-        (*cells)[iMailleG]->addBoundary((*bord)[iFace]);
+        cellInterfaces[iFace]->initialize(cells[iMailleG], cells[iMailleD]);
+        cells[iMailleG]->addCellInterface(cellInterfaces[iFace]);
         surface = m_dYj[iy] * m_dZk[iz];
-        m_faces[iFace].initializeAutres(surface, normal, tangent, binormal);
-        m_faces[iFace].setSize(0., m_dYj[iy], m_dZk[iz]);
+        m_faces[iFace]->initializeAutres(surface, normal, tangent, binormal);
+        m_faces[iFace]->setSize(0., m_dYj[iy], m_dZk[iz]);
         posX = m_posXi[ix] + 0.5*m_dXi[ix];
         posY = m_posYj[iy];
         posZ = m_posZk[iz];
-        m_faces[iFace].setPos(posX, posY, posZ);
+        m_faces[iFace]->setPos(posX, posY, posZ);
         iFace++;
       }
     }
@@ -458,19 +470,20 @@ void MeshCartesian::initializeGeometrieMonoCpu(Cell ***cells, CellInterface ***b
     {
       for (iz = 0; iz < m_numberCellsZ; iz++)
       {
-        m_limYm->creeLimite(&(*bord)[iFace]);
-        (*bord)[iFace]->setFace(&m_faces[iFace]);
+        m_limYm->creeLimite(cellInterfaces);
+        m_faces.push_back(new FaceCartesian());
+        cellInterfaces[iFace]->setFace(m_faces[iFace]);
         this->construitIGlobal(ix, iy, iz, iMailleG);
         iMailleD = iMailleG;
-        (*bord)[iFace]->initialize((*cells)[iMailleG], (*cells)[iMailleD]);
-        (*cells)[iMailleG]->addBoundary((*bord)[iFace]);
+        cellInterfaces[iFace]->initialize(cells[iMailleG], cells[iMailleD]);
+        cells[iMailleG]->addCellInterface(cellInterfaces[iFace]);
         surface = m_dXi[ix] * m_dZk[iz];
-        m_faces[iFace].initializeAutres(surface, normal, tangent, binormal);
-        m_faces[iFace].setSize(m_dXi[ix], 0., m_dZk[iz]);
+        m_faces[iFace]->initializeAutres(surface, normal, tangent, binormal);
+        m_faces[iFace]->setSize(m_dXi[ix], 0., m_dZk[iz]);
         posX = m_posXi[ix];
         posY = 0.;
         posZ = m_posZk[iz];
-        m_faces[iFace].setPos(posX, posY, posZ);
+        m_faces[iFace]->setPos(posX, posY, posZ);
         iFace++;
       }
     }
@@ -481,19 +494,20 @@ void MeshCartesian::initializeGeometrieMonoCpu(Cell ***cells, CellInterface ***b
     {
       for (iz = 0; iz < m_numberCellsZ; iz++)
       {
-        m_limYp->creeLimite(&(*bord)[iFace]);
-        (*bord)[iFace]->setFace(&m_faces[iFace]);
+        m_limYp->creeLimite(cellInterfaces);
+        m_faces.push_back(new FaceCartesian());
+        cellInterfaces[iFace]->setFace(m_faces[iFace]);
         this->construitIGlobal(ix, iy, iz, iMailleG);
         iMailleD = iMailleG;
-        (*bord)[iFace]->initialize((*cells)[iMailleG], (*cells)[iMailleD]);
-        (*cells)[iMailleG]->addBoundary((*bord)[iFace]);
+        cellInterfaces[iFace]->initialize(cells[iMailleG], cells[iMailleD]);
+        cells[iMailleG]->addCellInterface(cellInterfaces[iFace]);
         surface = m_dXi[ix] * m_dZk[iz];
-        m_faces[iFace].initializeAutres(surface, normal, tangent, binormal);
-        m_faces[iFace].setSize(m_dXi[ix], 0., m_dZk[iz]);
+        m_faces[iFace]->initializeAutres(surface, normal, tangent, binormal);
+        m_faces[iFace]->setSize(m_dXi[ix], 0., m_dZk[iz]);
         posX = m_posXi[ix];
         posY = m_posYj[iy] + 0.5*m_dYj[iy];
         posZ = m_posZk[iz];
-        m_faces[iFace].setPos(posX, posY, posZ);
+        m_faces[iFace]->setPos(posX, posY, posZ);
         iFace++;
       }
     }
@@ -509,19 +523,20 @@ void MeshCartesian::initializeGeometrieMonoCpu(Cell ***cells, CellInterface ***b
     {
       for (iy = 0; iy < m_numberCellsY; iy++)
       {
-        m_limZm->creeLimite(&(*bord)[iFace]);
-        (*bord)[iFace]->setFace(&m_faces[iFace]);
+        m_limZm->creeLimite(cellInterfaces);
+        m_faces.push_back(new FaceCartesian());
+        cellInterfaces[iFace]->setFace(m_faces[iFace]);
         this->construitIGlobal(ix, iy, iz, iMailleG);
         iMailleD = iMailleG;
-        (*bord)[iFace]->initialize((*cells)[iMailleG], (*cells)[iMailleD]);
-        (*cells)[iMailleG]->addBoundary((*bord)[iFace]);
+        cellInterfaces[iFace]->initialize(cells[iMailleG], cells[iMailleD]);
+        cells[iMailleG]->addCellInterface(cellInterfaces[iFace]);
         surface = m_dXi[ix] * m_dYj[iy];
-        m_faces[iFace].initializeAutres(surface, normal, tangent, binormal);
-        m_faces[iFace].setSize(m_dXi[ix], m_dYj[iy], 0.);
+        m_faces[iFace]->initializeAutres(surface, normal, tangent, binormal);
+        m_faces[iFace]->setSize(m_dXi[ix], m_dYj[iy], 0.);
         posX = m_posXi[ix];
         posY = m_posYj[iy];
         posZ = 0.;
-        m_faces[iFace].setPos(posX, posY, posZ);
+        m_faces[iFace]->setPos(posX, posY, posZ);
         iFace++;
       }
     }
@@ -532,19 +547,20 @@ void MeshCartesian::initializeGeometrieMonoCpu(Cell ***cells, CellInterface ***b
     {
       for (iy = 0; iy < m_numberCellsY; iy++)
       {
-        m_limZp->creeLimite(&(*bord)[iFace]);
-        (*bord)[iFace]->setFace(&m_faces[iFace]);
+        m_limZp->creeLimite(cellInterfaces);
+        m_faces.push_back(new FaceCartesian());
+        cellInterfaces[iFace]->setFace(m_faces[iFace]);
         this->construitIGlobal(ix, iy, iz, iMailleG);
         iMailleD = iMailleG;
-        (*bord)[iFace]->initialize((*cells)[iMailleG], (*cells)[iMailleD]);
-        (*cells)[iMailleG]->addBoundary((*bord)[iFace]);
+        cellInterfaces[iFace]->initialize(cells[iMailleG], cells[iMailleD]);
+        cells[iMailleG]->addCellInterface(cellInterfaces[iFace]);
         surface = m_dXi[ix] * m_dYj[iy];
-        m_faces[iFace].initializeAutres(surface, normal, tangent, binormal);
-        m_faces[iFace].setSize(m_dXi[ix], m_dYj[iy], 0.);
+        m_faces[iFace]->initializeAutres(surface, normal, tangent, binormal);
+        m_faces[iFace]->setSize(m_dXi[ix], m_dYj[iy], 0.);
         posX = m_posXi[ix];
         posY = m_posYj[iy];
         posZ = m_posZk[iz] + 0.5*m_dZk[iz];
-        m_faces[iFace].setPos(posX, posY, posZ);
+        m_faces[iFace]->setPos(posX, posY, posZ);
         iFace++;
       }
     }
@@ -553,7 +569,7 @@ void MeshCartesian::initializeGeometrieMonoCpu(Cell ***cells, CellInterface ***b
 
 //***********************************************************************
 
-void MeshCartesian::initializeGeometrieParallele(Cell ***cells, CellInterface ***bord, string ordreCalcul)
+void MeshCartesian::initializeGeometrieParallele(TypeMeshContainer<Cell *> &cells, TypeMeshContainer<Cell *> &cellsGhost, TypeMeshContainer<CellInterface *> &cellInterfaces, std::string ordreCalcul)
 {
   int ix, iy, iz;
   int compteMaillesParallele(0);
@@ -561,23 +577,11 @@ void MeshCartesian::initializeGeometrieParallele(Cell ***cells, CellInterface **
   m_numberCellsX = m_numberCellsXGlobal;
   m_numberCellsY = m_numberCellsYGlobal;
   m_numberCellsZ = m_numberCellsZGlobal;
-  
+
   //Declaration du tableau de mailles
   //---------------------------------
   //Decoupage parallele du domain geometrique
-  this->decoupageParallele();
-  m_elements = new ElementCartesian[m_numberCellsTotal];
-  (*cells) = new Cell*[m_numberCellsTotal];
-  for (int i = 0; i < m_numberCellsCalcul; i++) {
-	  if (ordreCalcul == "FIRSTORDER") { (*cells)[i] = new Cell; }
-	  else { (*cells)[i] = new CellO2; }
-    (*cells)[i]->setElement(&m_elements[i], i);
-  }
-	for (int i = m_numberCellsCalcul; i < m_numberCellsTotal; i++) {
-		if (ordreCalcul == "FIRSTORDER") { (*cells)[i] = new Cell; }
-		else { (*cells)[i] = new CellO2Ghost; }
-		(*cells)[i]->setElement(&m_elements[i], i);
-	}
+  this->decoupageParallele(ordreCalcul, cells);
   
   //Geometrical data settings for computational cells
   //-------------------------------------------------
@@ -588,22 +592,22 @@ void MeshCartesian::initializeGeometrieParallele(Cell ***cells, CellInterface **
   {
     this->recupereIJK(i, ix, iy, iz);
     volume = m_dXi[m_offsetX + ix] * m_dYj[m_offsetY + iy] * m_dZk[m_offsetZ + iz];
-    (*cells)[i]->getElement()->setVolume(volume);
+    cells[i]->getElement()->setVolume(volume);
 
     //CFL lenght
     double lCFL(1.e10);
-    if (m_numberCellsX != 1) { lCFL = min(lCFL, m_dXi[ix]); }
-    if (m_numberCellsY != 1) { lCFL = min(lCFL, m_dYj[iy]); }
-    if (m_numberCellsZ != 1) { lCFL = min(lCFL, m_dZk[iz]); }
+    if (m_numberCellsX != 1) { lCFL = std::min(lCFL, m_dXi[m_offsetX + ix]); }
+    if (m_numberCellsY != 1) { lCFL = std::min(lCFL, m_dYj[m_offsetY + iy]); }
+    if (m_numberCellsZ != 1) { lCFL = std::min(lCFL, m_dZk[m_offsetZ + iz]); }
     if (m_geometrie > 1) lCFL *= 0.6;
 
-    (*cells)[i]->getElement()->setLCFL(lCFL);
-    (*cells)[i]->getElement()->setPos(m_posXi[m_offsetX + ix], m_posYj[m_offsetY + iy], m_posZk[m_offsetZ + iz]);
-    (*cells)[i]->getElement()->setSize(m_dXi[m_offsetX + ix], m_dYj[m_offsetY + iy], m_dZk[m_offsetZ + iz]);
+    cells[i]->getElement()->setLCFL(lCFL);
+    cells[i]->getElement()->setPos(m_posXi[m_offsetX + ix], m_posYj[m_offsetY + iy], m_posZk[m_offsetZ + iz]);
+    cells[i]->getElement()->setSize(m_dXi[m_offsetX + ix], m_dYj[m_offsetY + iy], m_dZk[m_offsetZ + iz]);
   }
 
-  //Attribution des donnees geometriques cartesiennes aux boundaries de mailles
-  //----------------------------------------------------------------------
+  //Attribution des donnees geometriques cartesiennes aux cell interfaces
+  //---------------------------------------------------------------------
   //Determination du number de faces selon compute 1D/2D/3D
   //m_numberFaces : number total de faces
   //m_numberFacesLimites : number de faces sur les limites
@@ -626,9 +630,6 @@ void MeshCartesian::initializeGeometrieParallele(Cell ***cells, CellInterface **
     m_numberFacesLimites += 2 * m_numberCellsX*m_numberCellsY;
   }
   int numberFacesInternes(m_numberFacesTotal - m_numberFacesLimites);
-  //Allocation globale
-  (*bord) = new CellInterface*[m_numberFacesTotal];
-  m_faces = new FaceCartesian[m_numberFacesTotal];
   
   //Initialization des faces internes
   //*********************************
@@ -641,21 +642,22 @@ void MeshCartesian::initializeGeometrieParallele(Cell ***cells, CellInterface **
     {
       for (iz = 0; iz < m_numberCellsZ; iz++)
       {
-        if(ordreCalcul == "FIRSTORDER") { (*bord)[iFace] = new CellInterface; }
-        else { (*bord)[iFace] = new CellInterfaceO2; }
-        (*bord)[iFace]->setFace(&m_faces[iFace]);
+        if(ordreCalcul == "FIRSTORDER") { cellInterfaces.push_back(new CellInterface); }
+        else { cellInterfaces.push_back(new CellInterfaceO2); }
+        m_faces.push_back(new FaceCartesian());
+        cellInterfaces[iFace]->setFace(m_faces[iFace]);
         this->construitIGlobal(ix, iy, iz, iMailleG);
         this->construitIGlobal(ix + 1, iy, iz, iMailleD);
-        (*bord)[iFace]->initialize((*cells)[iMailleG], (*cells)[iMailleD]);
-        (*cells)[iMailleG]->addBoundary((*bord)[iFace]);
-        (*cells)[iMailleD]->addBoundary((*bord)[iFace]);
+        cellInterfaces[iFace]->initialize(cells[iMailleG], cells[iMailleD]);
+        cells[iMailleG]->addCellInterface(cellInterfaces[iFace]);
+        cells[iMailleD]->addCellInterface(cellInterfaces[iFace]);
         surface = m_dYj[m_offsetY + iy] * m_dZk[m_offsetZ + iz];
-        m_faces[iFace].initializeAutres(surface, normal, tangent, binormal);
-        m_faces[iFace].setSize(0., m_dYj[m_offsetY + iy], m_dZk[m_offsetZ + iz]);
+        m_faces[iFace]->initializeAutres(surface, normal, tangent, binormal);
+        m_faces[iFace]->setSize(0., m_dYj[m_offsetY + iy], m_dZk[m_offsetZ + iz]);
         posX = m_posXi[m_offsetX + ix] + 0.5*m_dXi[m_offsetX + ix];
         posY = m_posYj[m_offsetY + iy];
         posZ = m_posZk[m_offsetZ + iz];
-        m_faces[iFace].setPos(posX, posY, posZ);
+        m_faces[iFace]->setPos(posX, posY, posZ);
         iFace++;
       }
     }
@@ -668,21 +670,22 @@ void MeshCartesian::initializeGeometrieParallele(Cell ***cells, CellInterface **
     {
       for (iz = 0; iz < m_numberCellsZ; iz++)
       {
-        if(ordreCalcul == "FIRSTORDER") { (*bord)[iFace] = new CellInterface; }
-        else { (*bord)[iFace] = new CellInterfaceO2; }
-        (*bord)[iFace]->setFace(&m_faces[iFace]);
+        if(ordreCalcul == "FIRSTORDER") { cellInterfaces.push_back(new CellInterface); }
+        else { cellInterfaces.push_back(new CellInterfaceO2); }
+        m_faces.push_back(new FaceCartesian());
+        cellInterfaces[iFace]->setFace(m_faces[iFace]);
         this->construitIGlobal(ix, iy, iz, iMailleG);
         this->construitIGlobal(ix, iy + 1, iz, iMailleD);
-        (*bord)[iFace]->initialize((*cells)[iMailleG], (*cells)[iMailleD]);
-        (*cells)[iMailleG]->addBoundary((*bord)[iFace]);
-        (*cells)[iMailleD]->addBoundary((*bord)[iFace]);
+        cellInterfaces[iFace]->initialize(cells[iMailleG], cells[iMailleD]);
+        cells[iMailleG]->addCellInterface(cellInterfaces[iFace]);
+        cells[iMailleD]->addCellInterface(cellInterfaces[iFace]);
         surface = m_dXi[m_offsetX + ix] * m_dZk[m_offsetZ + iz];
-        m_faces[iFace].initializeAutres(surface, normal, tangent, binormal);
-        m_faces[iFace].setSize(m_dXi[m_offsetX + ix], 0., m_dZk[m_offsetZ + iz]);
+        m_faces[iFace]->initializeAutres(surface, normal, tangent, binormal);
+        m_faces[iFace]->setSize(m_dXi[m_offsetX + ix], 0., m_dZk[m_offsetZ + iz]);
         posX = m_posXi[m_offsetX + ix];
         posY = m_posYj[m_offsetY + iy] + 0.5*m_dYj[m_offsetY + iy];
         posZ = m_posZk[m_offsetZ + iz];
-        m_faces[iFace].setPos(posX, posY, posZ);
+        m_faces[iFace]->setPos(posX, posY, posZ);
         iFace++;
       }
     }
@@ -695,21 +698,22 @@ void MeshCartesian::initializeGeometrieParallele(Cell ***cells, CellInterface **
     {
       for (iz = 0; iz < m_numberCellsZ - 1; iz++)
       {
-        if(ordreCalcul == "FIRSTORDER") { (*bord)[iFace] = new CellInterface; }
-        else { (*bord)[iFace] = new CellInterfaceO2; }
-        (*bord)[iFace]->setFace(&m_faces[iFace]);
+        if(ordreCalcul == "FIRSTORDER") { cellInterfaces.push_back(new CellInterface); }
+        else { cellInterfaces.push_back(new CellInterfaceO2); }
+        m_faces.push_back(new FaceCartesian());
+        cellInterfaces[iFace]->setFace(m_faces[iFace]);
         this->construitIGlobal(ix, iy, iz, iMailleG);
         this->construitIGlobal(ix, iy, iz + 1, iMailleD);
-        (*bord)[iFace]->initialize((*cells)[iMailleG], (*cells)[iMailleD]);
-        (*cells)[iMailleG]->addBoundary((*bord)[iFace]);
-        (*cells)[iMailleD]->addBoundary((*bord)[iFace]);
+        cellInterfaces[iFace]->initialize(cells[iMailleG], cells[iMailleD]);
+        cells[iMailleG]->addCellInterface(cellInterfaces[iFace]);
+        cells[iMailleD]->addCellInterface(cellInterfaces[iFace]);
         surface = m_dXi[m_offsetX + ix] * m_dYj[m_offsetY + iy];
-        m_faces[iFace].initializeAutres(surface, normal, tangent, binormal);
-        m_faces[iFace].setSize(m_dXi[m_offsetX + ix], m_dYj[m_offsetY + iy], 0.);
+        m_faces[iFace]->initializeAutres(surface, normal, tangent, binormal);
+        m_faces[iFace]->setSize(m_dXi[m_offsetX + ix], m_dYj[m_offsetY + iy], 0.);
         posX = m_posXi[m_offsetX + ix];
         posY = m_posYj[m_offsetY + iy];
         posZ = m_posZk[m_offsetZ + iz] + 0.5*m_dZk[m_offsetZ + iz];
-        m_faces[iFace].setPos(posX, posY, posZ);
+        m_faces[iFace]->setPos(posX, posY, posZ);
         iFace++;
       }
     }
@@ -717,8 +721,8 @@ void MeshCartesian::initializeGeometrieParallele(Cell ***cells, CellInterface **
 
   compteMaillesParallele = m_numberCellsCalcul;
 
-  //Ghosts cells and boundaries initialisation in X direction
-  //*********************************************************
+  //Ghosts cells and cell interfaces initialisation in X direction
+  //**************************************************************
   if (m_numberCellsX != 1)
   {
     //X=0 boundary
@@ -736,20 +740,20 @@ void MeshCartesian::initializeGeometrieParallele(Cell ***cells, CellInterface **
 					this->construitIGlobal(ix, iy, iz, iMailleD);
           iMailleG = compteMaillesParallele++; //Ghost cell number taken in order
           //setting ghost cell geometry
-					(*cells)[iMailleG]->getElement()->setPos((*cells)[iMailleD]->getElement()->getPosition());
-          (*cells)[iMailleG]->getElement()->setPosX(m_posXi[m_offsetX - 1]);
-          (*cells)[iMailleG]->getElement()->setSize(m_dXi[m_offsetX -1], m_dYj[m_offsetY + iy], m_dZk[m_offsetZ + iz]);
-          (*cells)[iMailleG]->getElement()->setVolume(m_dXi[m_offsetX - 1] * m_dYj[m_offsetY + iy] * m_dZk[m_offsetZ + iz]);
+					cells[iMailleG]->getElement()->setPos(cells[iMailleD]->getElement()->getPosition());
+          cells[iMailleG]->getElement()->setPosX(m_posXi[m_offsetX - 1]);
+          cells[iMailleG]->getElement()->setSize(m_dXi[m_offsetX -1], m_dYj[m_offsetY + iy], m_dZk[m_offsetZ + iz]);
+          cells[iMailleG]->getElement()->setVolume(m_dXi[m_offsetX - 1] * m_dYj[m_offsetY + iy] * m_dZk[m_offsetZ + iz]);
           double lCFL(1.e10);
-          if (m_numberCellsX != 1) { lCFL = min(lCFL, m_dXi[m_offsetX - 1]); }
-          if (m_numberCellsY != 1) { lCFL = min(lCFL, m_dYj[m_offsetY + iy]); }
-          if (m_numberCellsZ != 1) { lCFL = min(lCFL, m_dZk[m_offsetZ + iz]); }
+          if (m_numberCellsX != 1) { lCFL = std::min(lCFL, m_dXi[m_offsetX - 1]); }
+          if (m_numberCellsY != 1) { lCFL = std::min(lCFL, m_dYj[m_offsetY + iy]); }
+          if (m_numberCellsZ != 1) { lCFL = std::min(lCFL, m_dZk[m_offsetZ + iz]); }
           if (m_geometrie > 1) lCFL *= 0.6;
-          (*cells)[iMailleG]->getElement()->setLCFL(lCFL);
+          cells[iMailleG]->getElement()->setLCFL(lCFL);
           //setting boundary
-          if (ordreCalcul == "FIRSTORDER") { (*bord)[iFace] = new CellInterface; }
-          else { (*bord)[iFace] = new CellInterfaceO2; }     
-					(*cells)[iMailleD]->addBoundary((*bord)[iFace]);
+          if (ordreCalcul == "FIRSTORDER") { cellInterfaces.push_back(new CellInterface); }
+          else { cellInterfaces.push_back(new CellInterfaceO2); }     
+					cells[iMailleD]->addCellInterface(cellInterfaces[iFace]);
         }
         //B) Physical boundary condition treatment
         //----------------------------------------
@@ -759,18 +763,19 @@ void MeshCartesian::initializeGeometrieParallele(Cell ***cells, CellInterface **
 					this->construitIGlobal(ix, iy, iz, iMailleG);
           iMailleD = iMailleG;
           //setting boundary
-          m_limXm->creeLimite(&(*bord)[iFace]);
+          m_limXm->creeLimite(cellInterfaces);
         }
         //Common settings
-        (*cells)[iMailleG]->addBoundary((*bord)[iFace]);
-        (*bord)[iFace]->setFace(&m_faces[iFace]);
-        (*bord)[iFace]->initialize((*cells)[iMailleG], (*cells)[iMailleD]);
-        m_faces[iFace].initializeAutres(m_dYj[m_offsetY + iy] * m_dZk[m_offsetZ + iz], normal, tangent, binormal);
-        m_faces[iFace].setSize(0., m_dYj[m_offsetY + iy], m_dZk[m_offsetZ + iz]);
+        cells[iMailleG]->addCellInterface(cellInterfaces[iFace]);
+        m_faces.push_back(new FaceCartesian());
+        cellInterfaces[iFace]->setFace(m_faces[iFace]);
+        cellInterfaces[iFace]->initialize(cells[iMailleG], cells[iMailleD]);
+        m_faces[iFace]->initializeAutres(m_dYj[m_offsetY + iy] * m_dZk[m_offsetZ + iz], normal, tangent, binormal);
+        m_faces[iFace]->setSize(0., m_dYj[m_offsetY + iy], m_dZk[m_offsetZ + iz]);
         posX = m_posXi[m_offsetX + ix] - 0.5*m_dXi[m_offsetX + ix];
         posY = m_posYj[m_offsetY + iy];
         posZ = m_posZk[m_offsetZ + iz];
-        m_faces[iFace].setPos(posX, posY, posZ);
+        m_faces[iFace]->setPos(posX, posY, posZ);
         iFace++;
       }
     }
@@ -787,44 +792,45 @@ void MeshCartesian::initializeGeometrieParallele(Cell ***cells, CellInterface **
         if (m_numberCpuX > 1 && m_CpuCoordX < m_numberCpuX - 1) {
           iMailleD = compteMaillesParallele++; //Ghost cell number taken in order
           //setting ghost cell geometry
-          (*cells)[iMailleD]->getElement()->setPos((*cells)[iMailleG]->getElement()->getPosition());
-          (*cells)[iMailleD]->getElement()->setPosX(m_posXi[m_offsetX + ix + 1]);
-          (*cells)[iMailleD]->getElement()->setSize(m_dXi[m_offsetX + ix + 1], m_dYj[m_offsetY + iy], m_dZk[m_offsetZ + iz]);
-          (*cells)[iMailleD]->getElement()->setVolume(m_dXi[m_offsetX + ix + 1] * m_dYj[m_offsetY + iy] * m_dZk[m_offsetZ + iz]);
+          cells[iMailleD]->getElement()->setPos(cells[iMailleG]->getElement()->getPosition());
+          cells[iMailleD]->getElement()->setPosX(m_posXi[m_offsetX + ix + 1]);
+          cells[iMailleD]->getElement()->setSize(m_dXi[m_offsetX + ix + 1], m_dYj[m_offsetY + iy], m_dZk[m_offsetZ + iz]);
+          cells[iMailleD]->getElement()->setVolume(m_dXi[m_offsetX + ix + 1] * m_dYj[m_offsetY + iy] * m_dZk[m_offsetZ + iz]);
           double lCFL(1.e10);
-          if (m_numberCellsX != 1) { lCFL = min(lCFL, m_dXi[m_offsetX + ix + 1]); }
-          if (m_numberCellsY != 1) { lCFL = min(lCFL, m_dYj[m_offsetY + iy]); }
-          if (m_numberCellsZ != 1) { lCFL = min(lCFL, m_dZk[m_offsetZ + iz]); }
+          if (m_numberCellsX != 1) { lCFL = std::min(lCFL, m_dXi[m_offsetX + ix + 1]); }
+          if (m_numberCellsY != 1) { lCFL = std::min(lCFL, m_dYj[m_offsetY + iy]); }
+          if (m_numberCellsZ != 1) { lCFL = std::min(lCFL, m_dZk[m_offsetZ + iz]); }
           if (m_geometrie > 1) lCFL *= 0.6;
-          (*cells)[iMailleD]->getElement()->setLCFL(lCFL);
+          cells[iMailleD]->getElement()->setLCFL(lCFL);
           //setting boundary
-          if (ordreCalcul == "FIRSTORDER") { (*bord)[iFace] = new CellInterface; }
-          else { (*bord)[iFace] = new CellInterfaceO2; }
-          (*cells)[iMailleD]->addBoundary((*bord)[iFace]);
+          if (ordreCalcul == "FIRSTORDER") { cellInterfaces.push_back(new CellInterface); }
+          else { cellInterfaces.push_back(new CellInterfaceO2); }
+          cells[iMailleD]->addCellInterface(cellInterfaces[iFace]);
         }
         //B) Physical boundary condition treatment
         //----------------------------------------
         else {
-          m_limXp->creeLimite(&(*bord)[iFace]);
+          m_limXp->creeLimite(cellInterfaces);
           iMailleD = iMailleG;
         }
         //Common settings
-        (*cells)[iMailleG]->addBoundary((*bord)[iFace]);
-        (*bord)[iFace]->setFace(&m_faces[iFace]);
-        (*bord)[iFace]->initialize((*cells)[iMailleG], (*cells)[iMailleD]);
-        m_faces[iFace].initializeAutres(m_dYj[m_offsetY + iy] * m_dZk[m_offsetZ + iz], normal, tangent, binormal);
-        m_faces[iFace].setSize(0., m_dYj[m_offsetY + iy], m_dZk[m_offsetZ + iz]);
+        cells[iMailleG]->addCellInterface(cellInterfaces[iFace]);
+        m_faces.push_back(new FaceCartesian());
+        cellInterfaces[iFace]->setFace(m_faces[iFace]);
+        cellInterfaces[iFace]->initialize(cells[iMailleG], cells[iMailleD]);
+        m_faces[iFace]->initializeAutres(m_dYj[m_offsetY + iy] * m_dZk[m_offsetZ + iz], normal, tangent, binormal);
+        m_faces[iFace]->setSize(0., m_dYj[m_offsetY + iy], m_dZk[m_offsetZ + iz]);
         posX = m_posXi[m_offsetX + ix] + 0.5*m_dXi[m_offsetX + ix];
         posY = m_posYj[m_offsetY + iy];
         posZ = m_posZk[m_offsetZ + iz];
-        m_faces[iFace].setPos(posX, posY, posZ);
+        m_faces[iFace]->setPos(posX, posY, posZ);
         iFace++;
       }
     }
   }
 
-  //Ghosts cells and boundaries initialisation in Y direction
-  //*********************************************************
+  //Ghosts cells and cell interfaces initialisation in Y direction
+  //**************************************************************
   if (m_numberCellsY != 1)
   {
     //Y=0 boundary
@@ -842,20 +848,20 @@ void MeshCartesian::initializeGeometrieParallele(Cell ***cells, CellInterface **
 					this->construitIGlobal(ix, iy, iz, iMailleD);
           iMailleG = compteMaillesParallele++; //Ghost cell number taken in order
           //setting ghost cell geometry
-          (*cells)[iMailleG]->getElement()->setPos((*cells)[iMailleD]->getElement()->getPosition());
-          (*cells)[iMailleG]->getElement()->setPosY(m_posYj[m_offsetY - 1]);
-          (*cells)[iMailleG]->getElement()->setSize(m_dXi[m_offsetX + ix], m_dYj[m_offsetY - 1], m_dZk[m_offsetZ + iz]);
-          (*cells)[iMailleG]->getElement()->setVolume(m_dXi[m_offsetX + ix] * m_dYj[m_offsetY - 1] * m_dZk[m_offsetZ + iz]);
+          cells[iMailleG]->getElement()->setPos(cells[iMailleD]->getElement()->getPosition());
+          cells[iMailleG]->getElement()->setPosY(m_posYj[m_offsetY - 1]);
+          cells[iMailleG]->getElement()->setSize(m_dXi[m_offsetX + ix], m_dYj[m_offsetY - 1], m_dZk[m_offsetZ + iz]);
+          cells[iMailleG]->getElement()->setVolume(m_dXi[m_offsetX + ix] * m_dYj[m_offsetY - 1] * m_dZk[m_offsetZ + iz]);
           double lCFL(1.e10);
-          if (m_numberCellsX != 1) { lCFL = min(lCFL, m_dXi[m_offsetX + ix]); }
-          if (m_numberCellsY != 1) { lCFL = min(lCFL, m_dYj[m_offsetY - 1]); }
-          if (m_numberCellsZ != 1) { lCFL = min(lCFL, m_dZk[m_offsetZ + iz]); }
+          if (m_numberCellsX != 1) { lCFL = std::min(lCFL, m_dXi[m_offsetX + ix]); }
+          if (m_numberCellsY != 1) { lCFL = std::min(lCFL, m_dYj[m_offsetY - 1]); }
+          if (m_numberCellsZ != 1) { lCFL = std::min(lCFL, m_dZk[m_offsetZ + iz]); }
           if (m_geometrie > 1) lCFL *= 0.6;
-          (*cells)[iMailleG]->getElement()->setLCFL(lCFL);
+          cells[iMailleG]->getElement()->setLCFL(lCFL);
           //setting boundary
-          if (ordreCalcul == "FIRSTORDER") { (*bord)[iFace] = new CellInterface; }
-          else { (*bord)[iFace] = new CellInterfaceO2; }
-          (*cells)[iMailleD]->addBoundary((*bord)[iFace]);
+          if (ordreCalcul == "FIRSTORDER") { cellInterfaces.push_back(new CellInterface); }
+          else { cellInterfaces.push_back(new CellInterfaceO2); }
+          cells[iMailleD]->addCellInterface(cellInterfaces[iFace]);
         } 
         //B) Physical boundary condition treatment
         //----------------------------------------
@@ -865,18 +871,19 @@ void MeshCartesian::initializeGeometrieParallele(Cell ***cells, CellInterface **
 					this->construitIGlobal(ix, iy, iz, iMailleG);
           iMailleD = iMailleG;
           //setting boundary
-          m_limYm->creeLimite(&(*bord)[iFace]);
+          m_limYm->creeLimite(cellInterfaces);
         }
         //Common settings
-        (*cells)[iMailleG]->addBoundary((*bord)[iFace]);
-        (*bord)[iFace]->setFace(&m_faces[iFace]);
-        (*bord)[iFace]->initialize((*cells)[iMailleG], (*cells)[iMailleD]);
-        m_faces[iFace].initializeAutres(m_dXi[m_offsetX + ix] * m_dZk[m_offsetZ + iz], normal, tangent, binormal);
-        m_faces[iFace].setSize(m_dXi[m_offsetX + ix], 0., m_dZk[m_offsetZ + iz]);
+        cells[iMailleG]->addCellInterface(cellInterfaces[iFace]);
+        m_faces.push_back(new FaceCartesian());
+        cellInterfaces[iFace]->setFace(m_faces[iFace]);
+        cellInterfaces[iFace]->initialize(cells[iMailleG], cells[iMailleD]);
+        m_faces[iFace]->initializeAutres(m_dXi[m_offsetX + ix] * m_dZk[m_offsetZ + iz], normal, tangent, binormal);
+        m_faces[iFace]->setSize(m_dXi[m_offsetX + ix], 0., m_dZk[m_offsetZ + iz]);
         posX = m_posXi[m_offsetX + ix];
         posY = m_posYj[m_offsetY + iy] - 0.5*m_dYj[m_offsetY + iy];
         posZ = m_posZk[m_offsetZ + iz];
-        m_faces[iFace].setPos(posX, posY, posZ);
+        m_faces[iFace]->setPos(posX, posY, posZ);
         iFace++;
       }
     }
@@ -893,44 +900,45 @@ void MeshCartesian::initializeGeometrieParallele(Cell ***cells, CellInterface **
         if (m_numberCpuY > 1 && m_CpuCoordY < m_numberCpuY - 1) {
           iMailleD = compteMaillesParallele++; //Ghost cell number taken in order
           //setting ghost cell geometry
-          (*cells)[iMailleD]->getElement()->setPos((*cells)[iMailleG]->getElement()->getPosition());
-          (*cells)[iMailleD]->getElement()->setPosY(m_posYj[m_offsetY + iy + 1]);
-          (*cells)[iMailleD]->getElement()->setSize(m_dXi[m_offsetX + ix], m_dYj[m_offsetY + iy + 1], m_dZk[m_offsetZ + iz]);
-          (*cells)[iMailleD]->getElement()->setVolume(m_dXi[m_offsetX + ix] * m_dYj[m_offsetY + iy + 1] * m_dZk[m_offsetZ + iz]);
+          cells[iMailleD]->getElement()->setPos(cells[iMailleG]->getElement()->getPosition());
+          cells[iMailleD]->getElement()->setPosY(m_posYj[m_offsetY + iy + 1]);
+          cells[iMailleD]->getElement()->setSize(m_dXi[m_offsetX + ix], m_dYj[m_offsetY + iy + 1], m_dZk[m_offsetZ + iz]);
+          cells[iMailleD]->getElement()->setVolume(m_dXi[m_offsetX + ix] * m_dYj[m_offsetY + iy + 1] * m_dZk[m_offsetZ + iz]);
           double lCFL(1.e10);
-          if (m_numberCellsX != 1) { lCFL = min(lCFL, m_dXi[m_offsetX + ix]); }
-          if (m_numberCellsY != 1) { lCFL = min(lCFL, m_dYj[m_offsetY + iy + 1]); }
-          if (m_numberCellsZ != 1) { lCFL = min(lCFL, m_dZk[m_offsetZ + iz]); }
+          if (m_numberCellsX != 1) { lCFL = std::min(lCFL, m_dXi[m_offsetX + ix]); }
+          if (m_numberCellsY != 1) { lCFL = std::min(lCFL, m_dYj[m_offsetY + iy + 1]); }
+          if (m_numberCellsZ != 1) { lCFL = std::min(lCFL, m_dZk[m_offsetZ + iz]); }
           if (m_geometrie > 1) lCFL *= 0.6;
-          (*cells)[iMailleD]->getElement()->setLCFL(lCFL);
+          cells[iMailleD]->getElement()->setLCFL(lCFL);
           //setting boundary
-          if (ordreCalcul == "FIRSTORDER") { (*bord)[iFace] = new CellInterface; }
-          else { (*bord)[iFace] = new CellInterfaceO2; }
-          (*cells)[iMailleD]->addBoundary((*bord)[iFace]);
+          if (ordreCalcul == "FIRSTORDER") { cellInterfaces.push_back(new CellInterface); }
+          else { cellInterfaces.push_back(new CellInterfaceO2); }
+          cells[iMailleD]->addCellInterface(cellInterfaces[iFace]);
         }
         //B) Physical boundary condition treatment
         //----------------------------------------
         else {
-          m_limYp->creeLimite(&(*bord)[iFace]);
+          m_limYp->creeLimite(cellInterfaces);
           iMailleD = iMailleG;
         }
         //Common settings
-        (*cells)[iMailleG]->addBoundary((*bord)[iFace]);
-        (*bord)[iFace]->setFace(&m_faces[iFace]);
-        (*bord)[iFace]->initialize((*cells)[iMailleG], (*cells)[iMailleD]);
-        m_faces[iFace].initializeAutres(m_dXi[m_offsetX + ix] * m_dZk[m_offsetZ + iz], normal, tangent, binormal);
-        m_faces[iFace].setSize(m_dXi[m_offsetX + ix], 0., m_dZk[m_offsetZ + iz]);
+        cells[iMailleG]->addCellInterface(cellInterfaces[iFace]);
+        m_faces.push_back(new FaceCartesian());
+        cellInterfaces[iFace]->setFace(m_faces[iFace]);
+        cellInterfaces[iFace]->initialize(cells[iMailleG], cells[iMailleD]);
+        m_faces[iFace]->initializeAutres(m_dXi[m_offsetX + ix] * m_dZk[m_offsetZ + iz], normal, tangent, binormal);
+        m_faces[iFace]->setSize(m_dXi[m_offsetX + ix], 0., m_dZk[m_offsetZ + iz]);
         posX = m_posXi[m_offsetX + ix];
         posY = m_posYj[m_offsetY + iy] + 0.5*m_dYj[m_offsetY + iy];
         posZ = m_posZk[m_offsetZ + iz];
-        m_faces[iFace].setPos(posX, posY, posZ);
+        m_faces[iFace]->setPos(posX, posY, posZ);
         iFace++;
       }
     }
   }
 
-  //Ghosts cells and boundaries initialisation in Z direction
-  //*********************************************************
+  //Ghosts cells and cell interfaces initialisation in Z direction
+  //**************************************************************
   if (m_numberCellsZ != 1)
   {
     //Z=0 Boundary
@@ -948,20 +956,20 @@ void MeshCartesian::initializeGeometrieParallele(Cell ***cells, CellInterface **
           this->construitIGlobal(ix, iy, iz, iMailleD);
           iMailleG = compteMaillesParallele++; //Ghost cell number taken in order
           //setting ghost cell geometry
-          (*cells)[iMailleG]->getElement()->setPos((*cells)[iMailleD]->getElement()->getPosition());
-          (*cells)[iMailleG]->getElement()->setPosZ(m_posZk[m_offsetZ - 1]);
-          (*cells)[iMailleG]->getElement()->setSize(m_dXi[m_offsetX + ix], m_dYj[m_offsetY + iy], m_dZk[m_offsetZ - 1]);
-          (*cells)[iMailleG]->getElement()->setVolume(m_dXi[m_offsetX + ix] * m_dYj[m_offsetY + iy] * m_dZk[m_offsetZ - 1]);
+          cells[iMailleG]->getElement()->setPos(cells[iMailleD]->getElement()->getPosition());
+          cells[iMailleG]->getElement()->setPosZ(m_posZk[m_offsetZ - 1]);
+          cells[iMailleG]->getElement()->setSize(m_dXi[m_offsetX + ix], m_dYj[m_offsetY + iy], m_dZk[m_offsetZ - 1]);
+          cells[iMailleG]->getElement()->setVolume(m_dXi[m_offsetX + ix] * m_dYj[m_offsetY + iy] * m_dZk[m_offsetZ - 1]);
           double lCFL(1.e10);
-          if (m_numberCellsX != 1) { lCFL = min(lCFL, m_dXi[m_offsetX + ix]); }
-          if (m_numberCellsY != 1) { lCFL = min(lCFL, m_dYj[m_offsetY + iy]); }
-          if (m_numberCellsZ != 1) { lCFL = min(lCFL, m_dZk[m_offsetZ - 1]); }
+          if (m_numberCellsX != 1) { lCFL = std::min(lCFL, m_dXi[m_offsetX + ix]); }
+          if (m_numberCellsY != 1) { lCFL = std::min(lCFL, m_dYj[m_offsetY + iy]); }
+          if (m_numberCellsZ != 1) { lCFL = std::min(lCFL, m_dZk[m_offsetZ - 1]); }
           if (m_geometrie > 1) lCFL *= 0.6;
-          (*cells)[iMailleG]->getElement()->setLCFL(lCFL);
+          cells[iMailleG]->getElement()->setLCFL(lCFL);
           //setting boundary
-          if (ordreCalcul == "FIRSTORDER") { (*bord)[iFace] = new CellInterface; }
-          else { (*bord)[iFace] = new CellInterfaceO2; }
-          (*cells)[iMailleD]->addBoundary((*bord)[iFace]);
+          if (ordreCalcul == "FIRSTORDER") { cellInterfaces.push_back(new CellInterface); }
+          else { cellInterfaces.push_back(new CellInterfaceO2); }
+          cells[iMailleD]->addCellInterface(cellInterfaces[iFace]);
         }
         //B) Physical boundary condition treatment
         //----------------------------------------
@@ -971,18 +979,19 @@ void MeshCartesian::initializeGeometrieParallele(Cell ***cells, CellInterface **
           this->construitIGlobal(ix, iy, iz, iMailleG);
           iMailleD = iMailleG;
           //setting boundary
-          m_limZm->creeLimite(&(*bord)[iFace]);
+          m_limZm->creeLimite(cellInterfaces);
         }
         //Common settings
-        (*cells)[iMailleG]->addBoundary((*bord)[iFace]);
-        (*bord)[iFace]->setFace(&m_faces[iFace]);
-        (*bord)[iFace]->initialize((*cells)[iMailleG], (*cells)[iMailleD]);
-        m_faces[iFace].initializeAutres(m_dXi[m_offsetX + ix] * m_dYj[m_offsetY + iy], normal, tangent, binormal);
-        m_faces[iFace].setSize(m_dXi[m_offsetX + ix], m_dYj[m_offsetY + iy], 0.);
+        cells[iMailleG]->addCellInterface(cellInterfaces[iFace]);
+        m_faces.push_back(new FaceCartesian());
+        cellInterfaces[iFace]->setFace(m_faces[iFace]);
+        cellInterfaces[iFace]->initialize(cells[iMailleG], cells[iMailleD]);
+        m_faces[iFace]->initializeAutres(m_dXi[m_offsetX + ix] * m_dYj[m_offsetY + iy], normal, tangent, binormal);
+        m_faces[iFace]->setSize(m_dXi[m_offsetX + ix], m_dYj[m_offsetY + iy], 0.);
         posX = m_posXi[m_offsetX + ix];
         posY = m_posYj[m_offsetY + iy];
         posZ = m_posZk[m_offsetZ + iz] - 0.5*m_dZk[m_offsetZ + iz];
-        m_faces[iFace].setPos(posX, posY, posZ);
+        m_faces[iFace]->setPos(posX, posY, posZ);
         iFace++;
       }
     }
@@ -999,53 +1008,57 @@ void MeshCartesian::initializeGeometrieParallele(Cell ***cells, CellInterface **
         if (m_numberCpuZ > 1 && m_CpuCoordZ < m_numberCpuZ - 1) {
           iMailleD = compteMaillesParallele++; //Ghost cell number taken in order
           //setting ghost cell geometry
-          (*cells)[iMailleD]->getElement()->setPos((*cells)[iMailleG]->getElement()->getPosition());
-          (*cells)[iMailleD]->getElement()->setPosZ(m_posZk[m_offsetZ + iz + 1]);
-          (*cells)[iMailleD]->getElement()->setSize(m_dXi[m_offsetX + ix], m_dYj[m_offsetY + iy], m_dZk[m_offsetZ + iz + 1]);
-          (*cells)[iMailleD]->getElement()->setVolume(m_dXi[m_offsetX + ix] * m_dYj[m_offsetY + iy] * m_dZk[m_offsetZ + iz + 1]);
+          cells[iMailleD]->getElement()->setPos(cells[iMailleG]->getElement()->getPosition());
+          cells[iMailleD]->getElement()->setPosZ(m_posZk[m_offsetZ + iz + 1]);
+          cells[iMailleD]->getElement()->setSize(m_dXi[m_offsetX + ix], m_dYj[m_offsetY + iy], m_dZk[m_offsetZ + iz + 1]);
+          cells[iMailleD]->getElement()->setVolume(m_dXi[m_offsetX + ix] * m_dYj[m_offsetY + iy] * m_dZk[m_offsetZ + iz + 1]);
           double lCFL(1.e10);
-          if (m_numberCellsX != 1) { lCFL = min(lCFL, m_dXi[m_offsetX + ix]); }
-          if (m_numberCellsY != 1) { lCFL = min(lCFL, m_dYj[m_offsetY + iy]); }
-          if (m_numberCellsZ != 1) { lCFL = min(lCFL, m_dZk[m_offsetZ + iz + 1]); }
+          if (m_numberCellsX != 1) { lCFL = std::min(lCFL, m_dXi[m_offsetX + ix]); }
+          if (m_numberCellsY != 1) { lCFL = std::min(lCFL, m_dYj[m_offsetY + iy]); }
+          if (m_numberCellsZ != 1) { lCFL = std::min(lCFL, m_dZk[m_offsetZ + iz + 1]); }
           if (m_geometrie > 1) lCFL *= 0.6;
-          (*cells)[iMailleD]->getElement()->setLCFL(lCFL);
+          cells[iMailleD]->getElement()->setLCFL(lCFL);
           //setting boundary
-          if (ordreCalcul == "FIRSTORDER") { (*bord)[iFace] = new CellInterface; }
-          else { (*bord)[iFace] = new CellInterfaceO2; }
-          (*cells)[iMailleD]->addBoundary((*bord)[iFace]);
+          if (ordreCalcul == "FIRSTORDER") { cellInterfaces.push_back(new CellInterface); }
+          else { cellInterfaces.push_back(new CellInterfaceO2); }
+          cells[iMailleD]->addCellInterface(cellInterfaces[iFace]);
         }
         //B) Physical boundary condition treatment
         //----------------------------------------
         else {
-          m_limZp->creeLimite(&(*bord)[iFace]);
+          m_limZp->creeLimite(cellInterfaces);
           iMailleD = iMailleG;
         }
         //Common settings
-        (*cells)[iMailleG]->addBoundary((*bord)[iFace]);
-        (*bord)[iFace]->setFace(&m_faces[iFace]);
-        (*bord)[iFace]->initialize((*cells)[iMailleG], (*cells)[iMailleD]);
-        m_faces[iFace].initializeAutres(m_dXi[m_offsetX + ix] * m_dYj[m_offsetY + iy], normal, tangent, binormal);
-        m_faces[iFace].setSize(m_dXi[m_offsetX + ix], m_dYj[m_offsetY + iy], 0.);
+        cells[iMailleG]->addCellInterface(cellInterfaces[iFace]);
+        m_faces.push_back(new FaceCartesian());
+        cellInterfaces[iFace]->setFace(m_faces[iFace]);
+        cellInterfaces[iFace]->initialize(cells[iMailleG], cells[iMailleD]);
+        m_faces[iFace]->initializeAutres(m_dXi[m_offsetX + ix] * m_dYj[m_offsetY + iy], normal, tangent, binormal);
+        m_faces[iFace]->setSize(m_dXi[m_offsetX + ix], m_dYj[m_offsetY + iy], 0.);
         posX = m_posXi[m_offsetX + ix];
         posY = m_posYj[m_offsetY + iy];
         posZ = m_posZk[m_offsetZ + iz] + 0.5*m_dZk[m_offsetZ + iz];
-        m_faces[iFace].setPos(posX, posY, posZ);
+        m_faces[iFace]->setPos(posX, posY, posZ);
         iFace++;
       }
     }
   }
+
+  //Update of cellsGhost
+  cellsGhost.insert(cellsGhost.begin(), cells.begin()+m_numberCellsCalcul, cells.end());
+  cells.erase(cells.begin()+m_numberCellsCalcul, cells.end());
 }
 
 //***********************************************************************
 
-void MeshCartesian::decoupageParallele()
+void MeshCartesian::decoupageParallele(std::string ordreCalcul, TypeMeshContainer<Cell *> &cells)
 {
   int ix, iy, iz;
   int maille_par_cpu, reste, iMaille, neighbour;
   int numberElements, compteMaillesParallele(0), countElements(0);
   int *elements_rec, *elements_env;
-  string whichCpuAmIForNeighbour;
-
+  
   if (m_geometrie == 1) {
     //1D Cartesian Processor Topology
     //-------------------------------
@@ -1073,54 +1086,68 @@ void MeshCartesian::decoupageParallele()
     if (rankCpu > 0 && rankCpu < Ncpu - 1){ m_numberCellsTotal = m_numberCellsCalcul + 2 * numberElements; }
     else{ m_numberCellsTotal = m_numberCellsCalcul + numberElements; }
 
+
+    //Generating cells 
+    for (int i = 0; i < m_numberCellsCalcul; i++) {
+        if (ordreCalcul == "FIRSTORDER") { cells.push_back(new Cell); }
+        else { cells.push_back(new CellO2); }
+        m_elements.push_back(new ElementCartesian());
+        cells[i]->setElement(m_elements[i], i);
+    }
+    for (int i = m_numberCellsCalcul; i < m_numberCellsTotal; i++) {
+        if (ordreCalcul == "FIRSTORDER") { cells.push_back(new CellGhost); }
+        else { cells.push_back(new CellO2Ghost); }
+        m_elements.push_back(new ElementCartesian());
+        cells[i]->setElement(m_elements[i], i);
+        cells[i]->pushBackSlope();
+    }
+
     ////***************Table de connectivite**********
 
     //Le number des mailles paralleles est situe en dehors du number de maille "vraies"
     //donc commence a numberCells
     compteMaillesParallele = m_numberCellsCalcul;
-    elements_rec = new int[numberElements];
-    elements_env = new int[numberElements];
     countElements = 0;
     if (rankCpu > 0)
     {
       neighbour = rankCpu - 1;
-      whichCpuAmIForNeighbour = "RIGHT";
-      parallel.setNeighbour(neighbour, whichCpuAmIForNeighbour);
+      parallel.setNeighbour(neighbour);
       ix = 0;
       for (iy = 0; iy < m_numberCellsY; iy++)
       {
         for (iz = 0; iz < m_numberCellsZ; iz++)
         {
-          elements_rec[countElements] = compteMaillesParallele;
           this->construitIGlobal(ix, iy, iz, iMaille);
-          elements_env[countElements] = iMaille;
+          parallel.addElementToSend(neighbour, cells[iMaille]);
+          parallel.addElementToReceive(neighbour, cells[compteMaillesParallele]);
+          parallel.addSlopesToSend(neighbour);
+          parallel.addSlopesToReceive(neighbour);
+          cells[compteMaillesParallele]->setRankOfNeighborCPU(neighbour);
           ++countElements;
           ++compteMaillesParallele;
         }
       }
-      parallel.setElementsToSend(neighbour, elements_env, numberElements);
-      parallel.setElementsToReceive(neighbour, elements_rec, numberElements);
     }
     countElements = 0;
     if (rankCpu < Ncpu - 1)
     {
       neighbour = rankCpu + 1;
-      whichCpuAmIForNeighbour = "LEFT";
-      parallel.setNeighbour(neighbour, whichCpuAmIForNeighbour);
+      parallel.setNeighbour(neighbour);
       ix = m_numberCellsX - 1;
       for (iy = 0; iy < m_numberCellsY; iy++)
       {
         for (iz = 0; iz < m_numberCellsZ; iz++)
         {
-          elements_rec[countElements] = compteMaillesParallele;
           this->construitIGlobal(ix, iy, iz, iMaille);
-          elements_env[countElements] = iMaille;
+          parallel.addElementToSend(neighbour, cells[iMaille]);
+          parallel.addElementToReceive(neighbour, cells[compteMaillesParallele]);
+          parallel.addSlopesToSend(neighbour);
+          parallel.addSlopesToReceive(neighbour);
+          cells[compteMaillesParallele]->setRankOfNeighborCPU(neighbour);
           ++countElements;
           ++compteMaillesParallele;
         }
       }
-      parallel.setElementsToSend(neighbour, elements_env, numberElements);
-      parallel.setElementsToReceive(neighbour, elements_rec, numberElements);
     }
   }
 
@@ -1140,17 +1167,17 @@ void MeshCartesian::decoupageParallele()
     double tempNumberCpuX(static_cast<double>(m_numberCpuX)); //Non-optimal number of processors in the x-direction
     double tempNumberCpuY(static_cast<double>(m_numberCpuY)); //Non-optimal number of processors in the y-direction
     double CpuFactorizationMin;                               //Processor factorization (fct) minimization parameter
-    CpuFactorizationMin = 10.*abs(static_cast<double>(m_numberCellsXGlobal) / tempNumberCpuX - static_cast<double>(m_numberCellsYGlobal) / tempNumberCpuY);
+    CpuFactorizationMin = 10.*std::fabs(static_cast<double>(m_numberCellsXGlobal) / tempNumberCpuX - static_cast<double>(m_numberCellsYGlobal) / tempNumberCpuY);
 
     //Optimization of the initial processor topology
     for (int i = 1; i <= Ncpu; i++) {
       if ((Ncpu % i == 0) && (m_numberCellsXGlobal / i >= minCellNumberOneDirection)) {
         tempNumberCpuX = i;
         tempNumberCpuY = Ncpu / i;
-        if (CpuFactorizationMin >= abs(m_numberCellsXGlobal / tempNumberCpuX -m_numberCellsYGlobal / tempNumberCpuY) && m_numberCellsYGlobal / tempNumberCpuY >= minCellNumberOneDirection) {
+        if (CpuFactorizationMin >= std::fabs(m_numberCellsXGlobal / tempNumberCpuX -m_numberCellsYGlobal / tempNumberCpuY) && m_numberCellsYGlobal / tempNumberCpuY >= minCellNumberOneDirection) {
           m_numberCpuX = i;
           m_numberCpuY = Ncpu / i;
-          CpuFactorizationMin = abs(m_numberCellsXGlobal / tempNumberCpuX - m_numberCellsYGlobal / tempNumberCpuY);
+          CpuFactorizationMin = std::fabs(m_numberCellsXGlobal / tempNumberCpuX - m_numberCellsYGlobal / tempNumberCpuY);
           error = 0;
         }
       }
@@ -1201,14 +1228,26 @@ void MeshCartesian::decoupageParallele()
       else { m_numberCellsTotal += numberElementsY; }
     }
 
+    //Generating cells 
+    for (int i = 0; i < m_numberCellsCalcul; i++) {
+        if (ordreCalcul == "FIRSTORDER") { cells.push_back(new Cell); }
+        else { cells.push_back(new CellO2); }
+        m_elements.push_back(new ElementCartesian());
+        cells[i]->setElement(m_elements[i], i);
+    }
+    for (int i = m_numberCellsCalcul; i < m_numberCellsTotal; i++) {
+        if (ordreCalcul == "FIRSTORDER") { cells.push_back(new CellGhost); }
+        else { cells.push_back(new CellO2Ghost); }
+        m_elements.push_back(new ElementCartesian());
+        cells[i]->setElement(m_elements[i], i);
+        cells[i]->pushBackSlope();
+    }
+
     //Connectivity table
     //The number of the ghost cells is located apart from the number of "true" cells, hence start at m_numberCellsCalcul
     compteMaillesParallele = m_numberCellsCalcul;
     int neighbourCpuCoordX, neighbourCpuCoordY;
     //In the x-direction
-    int *elements_recX, *elements_envX;
-    elements_recX = new int[numberElementsX];
-    elements_envX = new int[numberElementsX];
     countElements = 0;
     if (m_CpuCoordX > 0)
     {
@@ -1217,22 +1256,22 @@ void MeshCartesian::decoupageParallele()
       neighbour = 0;
       neighbour += neighbourCpuCoordX;
       neighbour += neighbourCpuCoordY * m_numberCpuX;
-      whichCpuAmIForNeighbour = "RIGHT";
-      parallel.setNeighbour(neighbour, whichCpuAmIForNeighbour);
+      parallel.setNeighbour(neighbour);
       ix = 0;
       for (iy = 0; iy < m_numberCellsY; iy++)
       {
         for (iz = 0; iz < m_numberCellsZ; iz++)
         {
-          elements_recX[countElements] = compteMaillesParallele;
           this->construitIGlobal(ix, iy, iz, iMaille);
-          elements_envX[countElements] = iMaille;
+          parallel.addElementToSend(neighbour, cells[iMaille]);
+          parallel.addElementToReceive(neighbour, cells[compteMaillesParallele]);
+          parallel.addSlopesToSend(neighbour);
+          parallel.addSlopesToReceive(neighbour);
+          cells[compteMaillesParallele]->setRankOfNeighborCPU(neighbour);
           ++countElements;
           ++compteMaillesParallele;
         }
       }
-      parallel.setElementsToSend(neighbour, elements_envX, numberElementsX);
-      parallel.setElementsToReceive(neighbour, elements_recX, numberElementsX);
     }
     countElements = 0;
     if (m_CpuCoordX < m_numberCpuX - 1)
@@ -1242,27 +1281,24 @@ void MeshCartesian::decoupageParallele()
       neighbour = 0;
       neighbour += neighbourCpuCoordX;
       neighbour += neighbourCpuCoordY * m_numberCpuX;
-      whichCpuAmIForNeighbour = "LEFT";
-      parallel.setNeighbour(neighbour, whichCpuAmIForNeighbour);
+      parallel.setNeighbour(neighbour);
       ix = m_numberCellsX - 1;
       for (iy = 0; iy < m_numberCellsY; iy++)
       {
         for (iz = 0; iz < m_numberCellsZ; iz++)
         {
-          elements_recX[countElements] = compteMaillesParallele;
           this->construitIGlobal(ix, iy, iz, iMaille);
-          elements_envX[countElements] = iMaille;
+          parallel.addElementToSend(neighbour, cells[iMaille]);
+          parallel.addElementToReceive(neighbour, cells[compteMaillesParallele]);
+          parallel.addSlopesToSend(neighbour);
+          parallel.addSlopesToReceive(neighbour);
+          cells[compteMaillesParallele]->setRankOfNeighborCPU(neighbour);
           ++countElements;
           ++compteMaillesParallele;
         }
       }
-      parallel.setElementsToSend(neighbour, elements_envX, numberElementsX);
-      parallel.setElementsToReceive(neighbour, elements_recX, numberElementsX);
     }
     //In the y-direction
-    int *elements_recY, *elements_envY;
-    elements_recY = new int[numberElementsY];
-    elements_envY = new int[numberElementsY];
     countElements = 0;
     if (m_CpuCoordY > 0)
     {
@@ -1271,22 +1307,22 @@ void MeshCartesian::decoupageParallele()
       neighbour = 0;
       neighbour += neighbourCpuCoordX;
       neighbour += neighbourCpuCoordY * m_numberCpuX;
-      whichCpuAmIForNeighbour = "TOP";
-      parallel.setNeighbour(neighbour, whichCpuAmIForNeighbour);
+      parallel.setNeighbour(neighbour);
       iy = 0;
       for (ix = 0; ix < m_numberCellsX; ix++)
       {
         for (iz = 0; iz < m_numberCellsZ; iz++)
         {
-          elements_recY[countElements] = compteMaillesParallele;
           this->construitIGlobal(ix, iy, iz, iMaille);
-          elements_envY[countElements] = iMaille;
+          parallel.addElementToSend(neighbour, cells[iMaille]);
+          parallel.addElementToReceive(neighbour, cells[compteMaillesParallele]);
+          parallel.addSlopesToSend(neighbour);
+          parallel.addSlopesToReceive(neighbour);
+          cells[compteMaillesParallele]->setRankOfNeighborCPU(neighbour);
           ++countElements;
           ++compteMaillesParallele;
         }
       }
-      parallel.setElementsToSend(neighbour, elements_envY, numberElementsY);
-      parallel.setElementsToReceive(neighbour, elements_recY, numberElementsY);
     }
     countElements = 0;
     if (m_CpuCoordY < m_numberCpuY - 1)
@@ -1296,22 +1332,22 @@ void MeshCartesian::decoupageParallele()
       neighbour = 0;
       neighbour += neighbourCpuCoordX;
       neighbour += neighbourCpuCoordY * m_numberCpuX;
-      whichCpuAmIForNeighbour = "BOTTOM";
-      parallel.setNeighbour(neighbour, whichCpuAmIForNeighbour);
+      parallel.setNeighbour(neighbour);
       iy = m_numberCellsY - 1;
       for (ix = 0; ix < m_numberCellsX; ix++)
       {
         for (iz = 0; iz < m_numberCellsZ; iz++)
         {
-          elements_recY[countElements] = compteMaillesParallele;
           this->construitIGlobal(ix, iy, iz, iMaille);
-          elements_envY[countElements] = iMaille;
+          parallel.addElementToSend(neighbour, cells[iMaille]);
+          parallel.addElementToReceive(neighbour, cells[compteMaillesParallele]);
+          parallel.addSlopesToSend(neighbour);
+          parallel.addSlopesToReceive(neighbour);
+          cells[compteMaillesParallele]->setRankOfNeighborCPU(neighbour);
           ++countElements;
           ++compteMaillesParallele;
         }
       }
-      parallel.setElementsToSend(neighbour, elements_envY, numberElementsY);
-      parallel.setElementsToReceive(neighbour, elements_recY, numberElementsY);
     }
   }
 
@@ -1333,8 +1369,8 @@ void MeshCartesian::decoupageParallele()
     double tempNumberCpuY(static_cast<double>(m_numberCpuY)); //Non-optimal number of processors in the y-direction
     double tempNumberCpuZ(static_cast<double>(m_numberCpuZ)); //Non-optimal number of processors in the z-direction
     double CpuFactorizationMin;                               //Processor factorization (fct) minimization parameter
-    CpuFactorizationMin = 10.*abs(static_cast<double>(m_numberCellsXGlobal) / tempNumberCpuX - static_cast<double>(m_numberCellsYGlobal) / tempNumberCpuY)
-      + 10.*abs(static_cast<double>(m_numberCellsYGlobal) / tempNumberCpuY - static_cast<double>(m_numberCellsZGlobal) / tempNumberCpuZ);
+    CpuFactorizationMin = 10.*std::fabs(static_cast<double>(m_numberCellsXGlobal) / tempNumberCpuX - static_cast<double>(m_numberCellsYGlobal) / tempNumberCpuY)
+      + 10.*std::fabs(static_cast<double>(m_numberCellsYGlobal) / tempNumberCpuY - static_cast<double>(m_numberCellsZGlobal) / tempNumberCpuZ);
 
     //Optimization of the initial processor topology
     for (int i = 1; i <= Ncpu; i++) {
@@ -1344,12 +1380,12 @@ void MeshCartesian::decoupageParallele()
             tempNumberCpuX = i;
             tempNumberCpuY = j;
             tempNumberCpuZ = Ncpu / (i*j);
-            if (CpuFactorizationMin >= abs(m_numberCellsXGlobal / tempNumberCpuX - m_numberCellsYGlobal / tempNumberCpuY) + abs(m_numberCellsYGlobal / tempNumberCpuY - m_numberCellsZGlobal / tempNumberCpuZ)
+            if (CpuFactorizationMin >= std::fabs(m_numberCellsXGlobal / tempNumberCpuX - m_numberCellsYGlobal / tempNumberCpuY) + std::fabs(m_numberCellsYGlobal / tempNumberCpuY - m_numberCellsZGlobal / tempNumberCpuZ)
               && m_numberCellsZGlobal / tempNumberCpuZ >= minCellNumberOneDirection) {
               m_numberCpuX = i;
               m_numberCpuY = j;
               m_numberCpuZ = Ncpu / (i*j);
-              CpuFactorizationMin = abs(m_numberCellsXGlobal / tempNumberCpuX - m_numberCellsYGlobal / tempNumberCpuY) + abs(m_numberCellsYGlobal / tempNumberCpuY - m_numberCellsZGlobal / tempNumberCpuZ);
+              CpuFactorizationMin = std::fabs(m_numberCellsXGlobal / tempNumberCpuX - m_numberCellsYGlobal / tempNumberCpuY) + std::fabs(m_numberCellsYGlobal / tempNumberCpuY - m_numberCellsZGlobal / tempNumberCpuZ);
               error = 0;
             }
           }
@@ -1412,14 +1448,26 @@ void MeshCartesian::decoupageParallele()
       else { m_numberCellsTotal += numberElementsZ; }
     }
 
+    //Generating cells 
+    for (int i = 0; i < m_numberCellsCalcul; i++) {
+        if (ordreCalcul == "FIRSTORDER") { cells.push_back(new Cell); }
+        else { cells.push_back(new CellO2); }
+        m_elements.push_back(new ElementCartesian());
+        cells[i]->setElement(m_elements[i], i);
+    }
+    for (int i = m_numberCellsCalcul; i < m_numberCellsTotal; i++) {
+        if (ordreCalcul == "FIRSTORDER") { cells.push_back(new CellGhost); }
+        else { cells.push_back(new CellO2Ghost); }
+        m_elements.push_back(new ElementCartesian());
+        cells[i]->setElement(m_elements[i], i);
+        cells[i]->pushBackSlope();
+    }
+
     //Connectivity table
     //The number of the ghost cells is located apart from the number of "true" cells, hence start at m_numberCellsCalcul
     compteMaillesParallele = m_numberCellsCalcul;
     int neighbourCpuCoordX, neighbourCpuCoordY, neighbourCpuCoordZ;
     //In the x-direction
-    int *elements_recX, *elements_envX;
-    elements_recX = new int[numberElementsX];
-    elements_envX = new int[numberElementsX];
     countElements = 0;
     if (m_CpuCoordX > 0)
     {
@@ -1430,22 +1478,22 @@ void MeshCartesian::decoupageParallele()
       neighbour += neighbourCpuCoordX;
       neighbour += neighbourCpuCoordY * m_numberCpuX;
       neighbour += neighbourCpuCoordZ * m_numberCpuX*m_numberCpuY;
-      whichCpuAmIForNeighbour = "RIGHT";
-      parallel.setNeighbour(neighbour, whichCpuAmIForNeighbour);
+      parallel.setNeighbour(neighbour);
       ix = 0;
       for (iy = 0; iy < m_numberCellsY; iy++)
       {
         for (iz = 0; iz < m_numberCellsZ; iz++)
         {
-          elements_recX[countElements] = compteMaillesParallele;
           this->construitIGlobal(ix, iy, iz, iMaille);
-          elements_envX[countElements] = iMaille;
+          parallel.addElementToSend(neighbour, cells[iMaille]);
+          parallel.addElementToReceive(neighbour, cells[compteMaillesParallele]);
+          parallel.addSlopesToSend(neighbour);
+          parallel.addSlopesToReceive(neighbour);
+          cells[compteMaillesParallele]->setRankOfNeighborCPU(neighbour);
           ++countElements;
           ++compteMaillesParallele;
         }
       }
-      parallel.setElementsToSend(neighbour, elements_envX, numberElementsX);
-      parallel.setElementsToReceive(neighbour, elements_recX, numberElementsX);
     }
     countElements = 0;
     if (m_CpuCoordX < m_numberCpuX - 1)
@@ -1457,27 +1505,24 @@ void MeshCartesian::decoupageParallele()
       neighbour += neighbourCpuCoordX;
       neighbour += neighbourCpuCoordY * m_numberCpuX;
       neighbour += neighbourCpuCoordZ * m_numberCpuX*m_numberCpuY;
-      whichCpuAmIForNeighbour = "LEFT";
-      parallel.setNeighbour(neighbour, whichCpuAmIForNeighbour);
+      parallel.setNeighbour(neighbour);
       ix = m_numberCellsX - 1;
       for (iy = 0; iy < m_numberCellsY; iy++)
       {
         for (iz = 0; iz < m_numberCellsZ; iz++)
         {
-          elements_recX[countElements] = compteMaillesParallele;
           this->construitIGlobal(ix, iy, iz, iMaille);
-          elements_envX[countElements] = iMaille;
+          parallel.addElementToSend(neighbour, cells[iMaille]);
+          parallel.addElementToReceive(neighbour, cells[compteMaillesParallele]);
+          parallel.addSlopesToSend(neighbour);
+          parallel.addSlopesToReceive(neighbour);
+          cells[compteMaillesParallele]->setRankOfNeighborCPU(neighbour);
           ++countElements;
           ++compteMaillesParallele;
         }
       }
-      parallel.setElementsToSend(neighbour, elements_envX, numberElementsX);
-      parallel.setElementsToReceive(neighbour, elements_recX, numberElementsX);
     }
     //In the y-direction
-    int *elements_recY, *elements_envY;
-    elements_recY = new int[numberElementsY];
-    elements_envY = new int[numberElementsY];
     countElements = 0;
     if (m_CpuCoordY > 0)
     {
@@ -1488,22 +1533,22 @@ void MeshCartesian::decoupageParallele()
       neighbour += neighbourCpuCoordX;
       neighbour += neighbourCpuCoordY * m_numberCpuX;
       neighbour += neighbourCpuCoordZ * m_numberCpuX*m_numberCpuY;
-      whichCpuAmIForNeighbour = "TOP";
-      parallel.setNeighbour(neighbour, whichCpuAmIForNeighbour);
+      parallel.setNeighbour(neighbour);
       iy = 0;
       for (ix = 0; ix < m_numberCellsX; ix++)
       {
         for (iz = 0; iz < m_numberCellsZ; iz++)
         {
-          elements_recY[countElements] = compteMaillesParallele;
           this->construitIGlobal(ix, iy, iz, iMaille);
-          elements_envY[countElements] = iMaille;
+          parallel.addElementToSend(neighbour, cells[iMaille]);
+          parallel.addElementToReceive(neighbour, cells[compteMaillesParallele]);
+          parallel.addSlopesToSend(neighbour);
+          parallel.addSlopesToReceive(neighbour);
+          cells[compteMaillesParallele]->setRankOfNeighborCPU(neighbour);
           ++countElements;
           ++compteMaillesParallele;
         }
       }
-      parallel.setElementsToSend(neighbour, elements_envY, numberElementsY);
-      parallel.setElementsToReceive(neighbour, elements_recY, numberElementsY);
     }
     countElements = 0;
     if (m_CpuCoordY < m_numberCpuY - 1)
@@ -1515,27 +1560,24 @@ void MeshCartesian::decoupageParallele()
       neighbour += neighbourCpuCoordX;
       neighbour += neighbourCpuCoordY * m_numberCpuX;
       neighbour += neighbourCpuCoordZ * m_numberCpuX*m_numberCpuY;
-      whichCpuAmIForNeighbour = "BOTTOM";
-      parallel.setNeighbour(neighbour, whichCpuAmIForNeighbour);
+      parallel.setNeighbour(neighbour);
       iy = m_numberCellsY - 1;
       for (ix = 0; ix < m_numberCellsX; ix++)
       {
         for (iz = 0; iz < m_numberCellsZ; iz++)
         {
-          elements_recY[countElements] = compteMaillesParallele;
           this->construitIGlobal(ix, iy, iz, iMaille);
-          elements_envY[countElements] = iMaille;
+          parallel.addElementToSend(neighbour, cells[iMaille]);
+          parallel.addElementToReceive(neighbour, cells[compteMaillesParallele]);
+          parallel.addSlopesToSend(neighbour);
+          parallel.addSlopesToReceive(neighbour);
+          cells[compteMaillesParallele]->setRankOfNeighborCPU(neighbour);
           ++countElements;
           ++compteMaillesParallele;
         }
       }
-      parallel.setElementsToSend(neighbour, elements_envY, numberElementsY);
-      parallel.setElementsToReceive(neighbour, elements_recY, numberElementsY);
     }
     //In the z-direction
-    int *elements_recZ, *elements_envZ;
-    elements_recZ = new int[numberElementsZ];
-    elements_envZ = new int[numberElementsZ];
     countElements = 0;
     if (m_CpuCoordZ > 0)
     {
@@ -1546,22 +1588,22 @@ void MeshCartesian::decoupageParallele()
       neighbour += neighbourCpuCoordX;
       neighbour += neighbourCpuCoordY * m_numberCpuX;
       neighbour += neighbourCpuCoordZ * m_numberCpuX*m_numberCpuY;
-      whichCpuAmIForNeighbour = "FRONT";
-      parallel.setNeighbour(neighbour, whichCpuAmIForNeighbour);
+      parallel.setNeighbour(neighbour);
       iz = 0;
       for (ix = 0; ix < m_numberCellsX; ix++)
       {
         for (iy = 0; iy < m_numberCellsY; iy++)
         {
-          elements_recZ[countElements] = compteMaillesParallele;
           this->construitIGlobal(ix, iy, iz, iMaille);
-          elements_envZ[countElements] = iMaille;
+          parallel.addElementToSend(neighbour, cells[iMaille]);
+          parallel.addElementToReceive(neighbour, cells[compteMaillesParallele]);
+          parallel.addSlopesToSend(neighbour);
+          parallel.addSlopesToReceive(neighbour);
+          cells[compteMaillesParallele]->setRankOfNeighborCPU(neighbour);
           ++countElements;
           ++compteMaillesParallele;
         }
       }
-      parallel.setElementsToSend(neighbour, elements_envZ, numberElementsZ);
-      parallel.setElementsToReceive(neighbour, elements_recZ, numberElementsZ);
     }
     countElements = 0;
     if (m_CpuCoordZ < m_numberCpuZ - 1)
@@ -1573,29 +1615,29 @@ void MeshCartesian::decoupageParallele()
       neighbour += neighbourCpuCoordX;
       neighbour += neighbourCpuCoordY * m_numberCpuX;
       neighbour += neighbourCpuCoordZ * m_numberCpuX*m_numberCpuY;
-      whichCpuAmIForNeighbour = "BACK";
-      parallel.setNeighbour(neighbour, whichCpuAmIForNeighbour);
+      parallel.setNeighbour(neighbour);
       iz = m_numberCellsZ - 1;
       for (ix = 0; ix < m_numberCellsX; ix++)
       {
         for (iy = 0; iy < m_numberCellsY; iy++)
         {
-          elements_recZ[countElements] = compteMaillesParallele;
           this->construitIGlobal(ix, iy, iz, iMaille);
-          elements_envZ[countElements] = iMaille;
+          parallel.addElementToSend(neighbour, cells[iMaille]);
+          parallel.addElementToReceive(neighbour, cells[compteMaillesParallele]);
+          parallel.addSlopesToSend(neighbour);
+          parallel.addSlopesToReceive(neighbour);
+          cells[compteMaillesParallele]->setRankOfNeighborCPU(neighbour);
           ++countElements;
           ++compteMaillesParallele;
         }
       }
-      parallel.setElementsToSend(neighbour, elements_envZ, numberElementsZ);
-      parallel.setElementsToReceive(neighbour, elements_recZ, numberElementsZ);
     }
   }
 }
 
 //***********************************************************************
 
-string MeshCartesian::whoAmI() const
+std::string MeshCartesian::whoAmI() const
 {
   return "CARTESIAN";
 }
@@ -1604,11 +1646,11 @@ string MeshCartesian::whoAmI() const
 //******************************** PRINTING ********************************
 //**************************************************************************
 
-//****************************************************************************
+//**************************************************************************
 
-string MeshCartesian::recupereChaineExtent(int localRank, bool global) const
+std::string MeshCartesian::recupereChaineExtent(int localRank, bool global) const
 {
-  stringstream chaineExtent;
+  std::stringstream chaineExtent;
 
   //Determination of the offset of the current CPU in each direction => determination of the first and last element of the current CPU in the complete domain
   //Number of remaining cells
@@ -1630,9 +1672,9 @@ string MeshCartesian::recupereChaineExtent(int localRank, bool global) const
 
 //****************************************************************************
 
-void MeshCartesian::recupereCoord(vector<Cell *> *cellsLvl, std::vector<double> &jeuDonnees, Axe axe) const
+void MeshCartesian::recupereCoord(TypeMeshContainer<Cell *> *cellsLvl, std::vector<double> &jeuDonnees, Axis axis) const
 {
-  switch (axe) {
+  switch (axis) {
   case X:
     for (int i = 0; i < m_numberCellsX; i++)
     {
@@ -1659,10 +1701,11 @@ void MeshCartesian::recupereCoord(vector<Cell *> *cellsLvl, std::vector<double> 
 
 //****************************************************************************
 
-void MeshCartesian::recupereDonnees(vector<Cell *> *cellsLvl, std::vector<double> &jeuDonnees, const int var, int phase, int lvl) const
+void MeshCartesian::recupereDonnees(TypeMeshContainer<Cell *> *cellsLvl, std::vector<double> &jeuDonnees, const int var, int phase) const
 {
   jeuDonnees.clear();
   int numCell;
+  double transport(0.);
   for (int k = 0; k < m_numberCellsZ; k++) {
     for (int j = 0; j < m_numberCellsY; j++) {
       for (int i = 0; i < m_numberCellsX; i++) {
@@ -1670,9 +1713,13 @@ void MeshCartesian::recupereDonnees(vector<Cell *> *cellsLvl, std::vector<double
         if (var > 0) { //On veut recuperer les donnees scalars
           if (phase >= 0) { jeuDonnees.push_back(cellsLvl[0][numCell]->getPhase(phase)->returnScalar(var)); }     //Donnees de phases
           else if (phase == -1) { jeuDonnees.push_back(cellsLvl[0][numCell]->getMixture()->returnScalar(var)); }  //Donnees de mixture
-          else if (phase == -2) { jeuDonnees.push_back(cellsLvl[0][numCell]->getTransport(var - 1).getValue()); }
+          else if (phase == -2) {
+            transport = cellsLvl[0][numCell]->getTransport(var - 1).getValue();
+            if (transport < 1.e-20) { transport = 0.; }
+            jeuDonnees.push_back(transport);
+          }
           else if (phase == -3) { jeuDonnees.push_back(cellsLvl[0][numCell]->getXi()); }
-          else if (phase == -4) { jeuDonnees.push_back(cellsLvl[0][numCell]->getGradient()); }
+          else if (phase == -4) { jeuDonnees.push_back(cellsLvl[0][numCell]->getDensityGradient()); }
           else { Errors::errorMessage("MeshCartesian::recupereDonnees: unknown number of phase: ", phase); }
         }
         else { //On veut recuperer les donnees vectorielles
@@ -1695,7 +1742,7 @@ void MeshCartesian::recupereDonnees(vector<Cell *> *cellsLvl, std::vector<double
 
 //****************************************************************************
 
-void MeshCartesian::setDataSet(std::vector<double> &jeuDonnees, vector<Cell *> *cellsLvl, const int var, int phase, int lvl) const
+void MeshCartesian::setDataSet(std::vector<double> &jeuDonnees, TypeMeshContainer<Cell *> *cellsLvl, const int var, int phase) const
 {
   int iterDataSet(0);
   int numCell;

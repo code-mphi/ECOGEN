@@ -30,14 +30,15 @@
 #ifndef HEADERMESH_H
 #define HEADERMESH_H
 
-//! \file      enteteMesh.h
-//! \author    F. Petitpas, K.Schmidmayer
+//! \file      HeaderMesh.h
+//! \author    F. Petitpas, K. Schmidmayer, J. Caze
 //! \version   1.0
-//! \date      December 20 2017
+//! \date      November 19 2019
 
 #include "MeshCartesian.h"
 #include "MeshCartesianAMR.h"
 #include "MeshUnStruct.h"
-//Ajouter ici les entetes des meshs
+#include "MeshUnStruct/MUSGmsh/HeaderMUSGmsh.h"
+// Add here mesh 
 
 #endif // HEADERMESH_H
