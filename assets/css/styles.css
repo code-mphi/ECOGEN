@@ -74,9 +74,15 @@ p { text-indent: 0em; }
 
 .colonne aside + div { /*background-color: yellow ;*/ width: 100%; }
 
-/*Reglages article*/
-/*article>h1{ font-size: 1.5em;
-}*/
+/******************************************/
+/*Gestion des articles*/
+/******************************************/
+article > h1 { font-size: 1.5em; }
+
+article > h2 { font-size: 1em; }
+
+article > h3 { font-size: 2em; }
+
 article { /*  margin:0; padding: 0;*/ justify-content: center; align-items: center; text-align: justify; }
 
 aside { border-right-style: solid; border-right-color: grey; border-right-width: 1.1px; font-size: 0.7em; margin-right: 50px; padding-right: 20px; }
@@ -96,6 +102,8 @@ img { width: 100%; height: 100%; padding: 20px; }
 .gallery { display: flex; flex-direction: row; flex-wrap: wrap; justify-content: center; align-items: center; }
 
 .galleryVideo { justify-content: center; align-items: center; text-align: justify; width: 45%; margin: 15px; font-size: 0.8em; }
+
+.galleryGif { padding: 0; }
 
 video { max-width: 100%; }
 
@@ -119,6 +127,9 @@ video + figcaption, img + figcaption { font-size: 80%; font-style: italic; text-
 
 .colonneLeft { display: flex; flex-direction: row; justify-content: left; /*justify-content: space-between;*/ }
 .colonneLeft a { margin-left: 10px; }
+
+a.badge { margin: auto; text-decoration: none; }
+a.badge img { vertical-align: middle; width: auto; height: auto; padding: 0; margin: auto; margin-left: 10px; margin-right: 10px; text-decoration: none; align-items: center; }
 
 /** Syntax highlighting styles */
 .highlight { background: #fff; }
