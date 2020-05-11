@@ -3,7 +3,7 @@
 Test cases
 ==========
 
-ECOGEN is provided including several test cases. Major part of these tests can be found in companion papers. The full list of available test cases in the package are listed in the conductor input file *ECOGEN.xml*. Description of some provided test cases is presented in this section. We will refer to the test case following the line format to uncomment in *ECOGEN.xml* input file.
+ECOGEN is provided with several test cases. Major part of these tests can be found in companion papers. The complete list of available test cases in the package are listed in the main input file *ECOGEN.xml*. Description of few provided test cases is presented in this section. We will refer to the test case following the line format to uncomment in *ECOGEN.xml* input file.
 
 .. admonition:: Example
   
@@ -13,7 +13,7 @@ ECOGEN is provided including several test cases. Major part of these tests can b
 
     <testCase>./libTests/referenceTestCases/euler/1D/transport/positiveVelocity/</testCase>
 
-  It is presented in details in the tutorial section :ref:`Sec:tuto:default` :
+  It is presented in details in the tutorial section :ref:`Sec:tuto:default`.
 
 .. toctree::
    :maxdepth: 2

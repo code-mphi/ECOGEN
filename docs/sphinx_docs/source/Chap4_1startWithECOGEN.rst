@@ -1,20 +1,22 @@
-.. _Sec:tuto:begin:
-
 .. role:: xml(code)
   :language: xml
+
+.. _Sec:tuto:begin:
 
 *****************
 Start with ECOGEN
 *****************
 
-Here is described your first use of ECOGEN: running the *default test case*. This is what user should observe without any change in the downloaded ECOGEN package. 
+Here is described your first use of ECOGEN: Running the *default test case*. This is what user should observe without any change in the downloaded ECOGEN package. 
 
 .. important::
 
-  Before beginning with ECOGEN, you should have succeed all steps of installation instructions of section :ref:`Chap:Start`.
+  Before starting with ECOGEN, you should have passed all steps of installation instructions of section :ref:`Chap:Start`.
 
-The conductor input file
-========================
+.. _Sec:tuto:mainXML:
+
+The main input file
+===================
 ECOGEN is mainly controled thanks to the input file named *ECOGEN.xml*. This file looks like :
 
 .. code-block:: xml
@@ -30,15 +32,15 @@ ECOGEN is mainly controled thanks to the input file named *ECOGEN.xml*. This fil
 
 Each test case corresponds to specific input files organised in different folders and associated to a markup :xml:`<testCase>`.
 
-When executing ECOGEN, it will run each test case corresponding to the uncommented lines present in the markup :xml:`<ecogen>`. 
+When executing ECOGEN, it runs sequentially each test case corresponding to the uncommented lines present in the markup :xml:`<ecogen>`.
 
-A unique line is uncommented in the original file and corresponds to the *default test case*. One should modify the *ECOGEN.xml* input file to run other provided test by uncommenting / commenting lines in this file. New lines can also be added when creating new test cases.
+A unique line is uncommented in the original file and corresponds to the *default test case*. One should modify the *ECOGEN.xml* input file to run other provided test by uncommenting/commenting lines in this file. New lines can also be added when creating new test cases.
 
 .. _Sec:tuto:default:
 
 Running the default test case
 =============================
-The default test case provided with ECOGEN package is a single flow test which simply advect a density discontinuity with a positive velocity in 1D. Input files for this test case are present in the folder *./libTests/referenceTestCases/euler/1D/transport/positiveVelocity/*
+The default test case provided with ECOGEN package is a single-phase flow test which simply advect a density discontinuity with a positive velocity in 1D. Input files for this test case are present in the folder *./libTests/referenceTestCases/euler/1D/transport/positiveVelocity/*.
 
 .. _Fig:tutos:default:CI:
 
@@ -46,7 +48,7 @@ The default test case provided with ECOGEN package is a single flow test which s
   :scale: 70%
   :align: center
 
-  Initial condition for single phase 1D transport test case.
+  Initial condition for 1D, single-phase transport test case.
 
 The initial characteristics of the run are:
 
@@ -68,7 +70,7 @@ The initial characteristics of the run are:
 | solution printing frequency | 0.036 ms     |
 +-----------------------------+--------------+
 
-This test can be executed on single CPU or on XX CPU by one of the commands:
+This test can be executed on a single core or on XX cores by one of the commands:
 
 .. code-block:: console
 
@@ -77,43 +79,45 @@ This test can be executed on single CPU or on XX CPU by one of the commands:
 
 .. note:: 
 
-  Informations on available CPU can be obtained under linux system using the command:
+  Information on available cores can be obtained under linux system using the command:
 
   .. code-block:: console
 
     /usr/bin/nproc
 
-The code is running and at the top of the console output one can read :
+The code is running and at the top of the console output one can read:
  - The console logo of ECOGEN 
  - The name of the test case including the full path of the test case : *./libTests/referenceTestCases/euler/1D/transport/positiveVelocity/*
- - Information concerning the number of iterations, the elapsed time...
+ - Information concerning the number of iterations, the elapsed time, etc.
 
-*euler1DTransportPositiveVelocity* is the actual name of the default run.
+*euler1DTransportPositiveVelocity* is the name of the default run.
 
 .. figure:: ./_static/tutos/default/RunECOGEN_Logo.png
   :scale: 100%
   :align: center
 
-  : Screenshot of the top of ECOGEN default run console. In this particular run, 8 CPU have been used.
+  Screenshot of the top of ECOGEN's default run console. In this particular run, 8 cores have been used.
 
-The code ends and the following information comes:
+The run ends and the following information comes:
 
 
 .. figure:: ./_static/tutos/default/RunECOGEN_NormalEnding.png
   :scale: 100%
   :align: center
 
-  : Screenshot of the end of the default run console with 8 CPU used.
+  Screenshot of the end of ECOGEN's default run console with 8 cores used.
 
-A new folder *results* is created at the first run, (unusefull to remove it). This folder contains a folder named *euler1DTransportPositiveVelocity* containing output files of our test case. Are included in :
+A new folder *results* is created at the first run (unusefull to remove it). This folder contains a folder named *euler1DTransportPositiveVelocity* containing output files of our test case:
 
- - *collection.pvd* used in *Paraview* software and the associated *vtu* files
- - *infoCalcul.out*  
- - *infoMesh* folder
- - *probes* folder 
- - *savesInput* folder: a kind of log folder that contains the *xml* files used for this run.
+ - *collectionParaview.pvd* and *collectionVisIt.visit* used in *Paraview* and *VisIt* softwares,
+ - *datasets* folder containing the associated *vtu* files,
+ - *infoCalcul.out*,
+ - *infoMesh* folder,
+ - *probes* folder,
+ - *cuts* folder,
+ - *savesInput* folder; a kind of log folder that contains the *XML* files used for this run.
 
-By default, output files are recorder in VTK XML format in separate files for each CPU, AMR level and TIME. A way to post-treat this output files is to open the *collection.pvd* file using Paraview_ software.
+By default, output files are recorder in VTK XML format in separate files for each core and TIME. A way to post-treat this output files is to open the *collectionParaview.pvd* or *collectionVisIt.visit* file using Paraview_ or VisIt_ software.
 
 .. _Fig:tutos:default:results:
 
@@ -121,28 +125,29 @@ By default, output files are recorder in VTK XML format in separate files for ea
   :scale: 50%
   :align: center
 
-  Results for the single phase transport test
+  Results for the single-phase transport test.
 
-This basic test shows advection of a contact discontinuity while preserving pressure and velocity uniform conditions.
+This basic test shows advection of a contact discontinuity while preserving pressure and velocity uniform.
 
 Editing input files
 -------------------
 Input files for this test case are located in the following folder: *./libTests/referenceTestCases/euler/1D/transport/positiveVelocity/*.
 
-Computation parameters will easily be modified according to the input file description of section :ref:`Chap:input`
+Computation parameters are easily modified according to the input file description of section :ref:`Chap:input`.
 
-For example, one can prefer to visualise results under *gnu* file format. For that simply turn the *xml* option in the xml file *\libTests\referenceTestCases\euler\1D\transport\positiveVelocity\mainV5.xml*  into *gnu* and re-run the test case:
+For example, one can prefer to visualize results under *gnu* file format. For that, simply turn the *XML* option in the XML file *\libTests\referenceTestCases\euler\1D\transport\positiveVelocity\mainV5.xml* into *gnu* and re-run the test case:
 
 .. code-block:: xml
 
   <outputMode format="GNU" binary="false" precision="10"/>
 
-The results can be drawn by loading in the Gnuplot software the file *visualisation.gnu*.
+The results can be drawn by loading in the Gnuplot software the file *visualization.gnu*.
 
 .. figure:: ./_static/tutos/default/GnuplotScreenshotDefaultUse.png
   :scale: 75%
   :align: center
 
-  : Screenshot of results in *Gnuplot*
+  Screenshot of results in *Gnuplot*.
 
 .. _Paraview: https://www.paraview.org/
+.. _VisIt: https://wci.llnl.gov/simulation/computer-codes/visit/

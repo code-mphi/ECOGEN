@@ -27,9 +27,9 @@ copyright = '2019, code-mphi'
 author = 'code-mphi'
 
 # The short X.Y version
-version = '1.0'
+version = '2.0'
 # The full version, including alpha/beta/rc tags
-release = 'b1.0'
+release = '2.0'
 
 
 # -- General configuration ---------------------------------------------------

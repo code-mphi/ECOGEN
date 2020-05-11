@@ -5,7 +5,7 @@
 Multiphase mechanical equilibrium flows
 ***************************************
 
-Mechanical equilibrium flows are solved in ECOGEN using the Kapila model :cite:`kapila2001`. In the particular case of 2 phases invilved, this model reads:
+Mechanical equilibrium flows are solved in ECOGEN using Kapila's model :cite:`kapila2001`. In the particular case of 2 phases involved and without any extra physics (surface tension, viscosity...), this model reads:
 
 .. math::
   :nowrap:
@@ -42,7 +42,7 @@ This model is solved thanks to the numerical method presented in :cite:`relaxjcp
 Advection test cases
 ====================
 
-The code is provided with following test cases for advections:
+The code is provided with the following test cases for advections:
 
 .. code-block:: xml
 
@@ -51,7 +51,7 @@ The code is provided with following test cases for advections:
 
 interfaceWaterAir
 -----------------
-This first test case is important since it validates the capacity of the numerical method to treat simple advection of an interface between pure fluid without creating spurious oscillations on pressure or velocity profiles. Input files for this test are available in ./libTests/referenceTestCases/kapila/1D/transports/interfaceWaterAir/
+This first test case is important since it validates the capacity of the numerical method to treat simple advection of an interface between pure fluid without creating spurious oscillations on pressure or velocity profiles. Input files for this test are available in *./libTests/referenceTestCases/kapila/1D/transports/interfaceWaterAir/*.
 
 .. _Fig:testCases:Kapila:advection1DCI:
 
@@ -59,29 +59,29 @@ This first test case is important since it validates the capacity of the numeric
   :scale: 70%
   :align: center
 
-  Initial condition for 1D advection of water/air interface.
+  Initial condition for 1D advection of water--air interface.
 
 The initial characteristics of the run are:
 
-+-----------------------------+--------------+
-| Characteristic              | value        |
-+=============================+==============+
-| dimension                   | 1 m          |
-+-----------------------------+--------------+
-| Mesh size                   | 800          |
-+-----------------------------+--------------+
-| interface position          | 0.3 m        |
-+-----------------------------+--------------+
-| boundary conditions         | transmittive |
-+-----------------------------+--------------+
-| final solution time         | 0.7 ms       |
-+-----------------------------+--------------+
-| solution printing frequency | 0.025 ms     |
-+-----------------------------+--------------+
-| precision                   | 1st order    |
-+-----------------------------+--------------+
++-----------------------------+----------------+
+| Characteristic              | Value          |
++=============================+================+
+| dimension                   | 1 m            |
++-----------------------------+----------------+
+| Mesh size                   | 800            |
++-----------------------------+----------------+
+| interface position          | 0.3 m          |
++-----------------------------+----------------+
+| boundary conditions         | non-reflecting |
++-----------------------------+----------------+
+| final solution time         | 0.7 ms         |
++-----------------------------+----------------+
+| solution printing frequency | 0.025 ms       |
++-----------------------------+----------------+
+| precision                   | 1st order      |
++-----------------------------+----------------+
 
-In the default case, the computation is performed with a 1st order scheme. We compare this solution with those obtained using the 2nd order scheme with THINC limiter :cite:`shyue2014thinc`.
+In the default test case, the computation is performed with a 1st order scheme. We compare this solution with those obtained using the 2nd order scheme with THINC limiter :cite:`shyue2014thinc`.
 
 .. _Fig:testCases:Kapila:advection1D:
 
@@ -89,11 +89,11 @@ In the default case, the computation is performed with a 1st order scheme. We co
   :scale: 50%
   :align: center
 
-  Advection of a water/air interface. Visualization using Paraview_ software.
+  Advection of a water--air interface. Visualization using Paraview_ software.
 
 Shock tubes
 ===========
-The test cases relative to Kapila model are those presented in :cite:`relaxjcp`. They are here reproduced using ECOGEN.
+The test cases relative to Kapila's model are those presented in :cite:`relaxjcp`. They are here reproduced using ECOGEN.
 
 .. code-block:: xml
 
@@ -102,7 +102,7 @@ The test cases relative to Kapila model are those presented in :cite:`relaxjcp`.
 
 interfaceWaterAir shock tube
 ----------------------------
-A shock tube between a high pressure chamber filled with water and a low pressire chamber filled with air is released. Input files for this test are available in ./libTests/referenceTestCases/kapila/1D/shockTubes/interfaceWaterAir/.
+A shock tube between a high-pressure chamber filled with water and a low-pressure chamber filled with air is released. Input files for this test are available in *./libTests/referenceTestCases/kapila/1D/shockTubes/interfaceWaterAir/*.
 
 .. _Fig:testCases:Kapila:shockTubeWaterAirCI:
 
@@ -110,12 +110,12 @@ A shock tube between a high pressure chamber filled with water and a low pressir
   :scale: 70%
   :align: center
 
-  Initial condition for 1D advection of water/air interface.
+  Initial condition for 1D water--air shock tube.
 
 The initial characteristics of the run are:
 
 +------------------------------+---------------------------+
-| Characteristic               | value                     |
+| Characteristic               | Value                     |
 +==============================+===========================+
 | dimension                    | 1 m                       |
 +------------------------------+---------------------------+
@@ -125,7 +125,7 @@ The initial characteristics of the run are:
 +------------------------------+---------------------------+
 | diaphragm position           | 0.7 m                     |
 +------------------------------+---------------------------+
-| boundary conditions          | transmittive              |
+| boundary conditions          | non-reflecting            |
 +------------------------------+---------------------------+
 | final solution time          | 0.240 ms                  |
 +------------------------------+---------------------------+
@@ -134,7 +134,7 @@ The initial characteristics of the run are:
 | precision                    | 2nd order (Vanleer/THINC) |
 +------------------------------+---------------------------+
 
-AMR technique of :cite:`schmidmayer2019adaptive` is used with 4 refinement level such that a maximum of 230 computational cells are used for this run.
+AMR technique of :cite:`schmidmayer2019adaptive` is used with 4 refinement levels such that a maximum of 230 computational cells are used for this run.
 
 .. _Fig:testCases:Kapila:shockTubeWaterAir:
 
@@ -142,11 +142,11 @@ AMR technique of :cite:`schmidmayer2019adaptive` is used with 4 refinement level
   :scale: 50%
   :align: center
 
-  Shock tube with water and air. Visualization using Paraview_ software.
+  Water--air shock tube. Visualization using Paraview_ software.
 
 epoxySpinel
 -----------
-This test deals with shocks in mixture of materials. Epoxy and Spinel are supposed mixed such that caracteristic times for wave propagation and drag effects are very small allowing to consider the mixture as evolving in mechanical equilibrium. Input files for this test are available in ./libTests/referenceTestCases/kapila/1D/shockTubes/epoxySpinel/.
+This test deals with shocks in mixture of materials. Epoxy and spinel are supposed mixed such that caracteristic times for wave propagation and drag effects are very small, allowing to consider the mixture as evolving in mechanical equilibrium. Input files for this test are available in *./libTests/referenceTestCases/kapila/1D/shockTubes/epoxySpinel/*.
 
 .. _Fig:testCases:Kapila:shockTubeEpoSpiCI:
 
@@ -159,7 +159,7 @@ This test deals with shocks in mixture of materials. Epoxy and Spinel are suppos
 The initial characteristics of the run are:
 
 +------------------------------+---------------------+
-| Characteristic               | value               |
+| Characteristic               | Value               |
 +==============================+=====================+
 | dimension                    | 1 m                 |
 +------------------------------+---------------------+
@@ -169,7 +169,7 @@ The initial characteristics of the run are:
 +------------------------------+---------------------+
 | diaphragm position           | 0.6 m               |
 +------------------------------+---------------------+
-| boundary conditions          | transmittive        |
+| boundary conditions          | non-reflecting      |
 +------------------------------+---------------------+
 | final solution time          | 0.1 ms              |
 +------------------------------+---------------------+
@@ -188,7 +188,7 @@ The initial characteristics of the run are:
 
 Other tests cases
 =================
-Other tests are provided with ECOGEN package. They will be described in details soon.
+Other tests are provided with ECOGEN package. They will soon be described in details.
 
 .. code-block:: xml
 
