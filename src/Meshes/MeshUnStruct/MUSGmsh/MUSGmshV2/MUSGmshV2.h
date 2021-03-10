@@ -6,6 +6,7 @@
 //       |  `--.  \  `-.  \ `-' /   \  `-) ) |  `--.  | | |)| 
 //       /( __.'   \____\  )---'    )\____/  /( __.'  /(  (_) 
 //      (__)              (_)      (__)     (__)     (__)     
+//      Official webSite: https://code-mphi.github.io/ECOGEN/
 //
 //  This file is part of ECOGEN.
 //
@@ -30,11 +31,6 @@
 #ifndef MUSGMSHV2_H
 #define MUSGMSHV2_H
 
-//! \file      MUSGmshV2.h
-//! \author    J. Caze
-//! \version   1.0
-//! \date      November 19 2019
-
 #include "../MUSGmsh.h"
 
 class MUSGmshV2 : public MUSGmsh
@@ -44,14 +40,14 @@ public:
   virtual ~MUSGmshV2();
 
   // --- MeshUnStruct virtual member functions --- 
-  virtual void initGeometryMonoCPU(TypeMeshContainer<Cell *> &cells, TypeMeshContainer<CellInterface *> &cellInterfaces, std::string computeOrder = "FIRSTORDER");
-  virtual void initGeometryParallel(TypeMeshContainer<Cell *> &cells, TypeMeshContainer<Cell *> &cellsGhost, TypeMeshContainer<CellInterface *> &cellInterfaces, std::string computeOrder = "FIRSTORDER");
+  virtual void initGeometryMonoCPU(TypeMeshContainer<Cell*>& cells, TypeMeshContainer<CellInterface*>& cellInterfaces, std::string computeOrder = "FIRSTORDER");
+  virtual void initGeometryParallel(TypeMeshContainer<Cell*>& cells, TypeMeshContainer<Cell*>& cellsGhost, TypeMeshContainer<CellInterface*>& cellInterfaces, std::string computeOrder = "FIRSTORDER");
   virtual void preProcessMeshFileForParallel();
 
 private:
   // --- Gmsh v2 related member functions ---
   void readMeshMonoCPU(std::vector<ElementNS*>** neighborNodes);
-  void readElement(const Coord *nodesTable, std::ifstream &meshFile, ElementNS **element);
+  void readElement(const Coord* nodesTable, std::ifstream &meshFile, ElementNS** element);
   void readMeshParallel();
 
   bool m_switchTags;

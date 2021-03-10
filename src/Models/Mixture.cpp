@@ -6,6 +6,7 @@
 //       |  `--.  \  `-.  \ `-' /   \  `-) ) |  `--.  | | |)| 
 //       /( __.'   \____\  )---'    )\____/  /( __.'  /(  (_) 
 //      (__)              (_)      (__)     (__)     (__)     
+//      Official webSite: https://code-mphi.github.io/ECOGEN/
 //
 //  This file is part of ECOGEN.
 //
@@ -26,11 +27,6 @@
 //  You should have received a copy of the GNU General Public License
 //  along with ECOGEN (file LICENSE).  
 //  If not, see <http://www.gnu.org/licenses/>.
-
-//! \file      Mixture.cpp
-//! \author    K. Schmidmayer, F. Petitpas
-//! \version   1.0
-//! \date      May 04 2018
 
 #include "Mixture.h"
 
@@ -58,11 +54,11 @@ void Mixture::printMixture(std::ofstream &fileStream) const
 
 //***************************************************************************
 
-double Mixture::computeTsat(const Eos *eosLiq, const Eos *eosVap, const double &pressure, double *dTsat)
+double Mixture::computeTsat(const Eos* eosLiq, const Eos* eosVap, const double& pressure, double* dTsat)
 {
   //Restrictions //FP//TODO// to improve
-  if (eosLiq->getType() != "IG" && eosLiq->getType() != "SG") { Errors::errorMessage("Only IG and SG permitted in thermal equilibrium model : MixThermalEq::computeTsat" + eosLiq->getType()); }
-  if (eosVap->getType() != "IG" && eosVap->getType() != "SG") { Errors::errorMessage("Only IG and SG permitted in thermal equilibrium model : MixThermalEq::computeTsat" + eosVap->getType()); }
+  if (eosLiq->getType() != "IG" && eosLiq->getType() != "SG") { Errors::errorMessage("Only IG and SG permitted in thermal equilibrium model : MixPTUEq::computeTsat" + eosLiq->getType()); }
+  if (eosVap->getType() != "IG" && eosVap->getType() != "SG") { Errors::errorMessage("Only IG and SG permitted in thermal equilibrium model : MixPTUEq::computeTsat" + eosVap->getType()); }
 
   double gammaL = eosLiq->getGamma();
   double pInfL = eosLiq->getPInf();

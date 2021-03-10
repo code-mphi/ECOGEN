@@ -6,6 +6,7 @@
 //       |  `--.  \  `-.  \ `-' /   \  `-) ) |  `--.  | | |)| 
 //       /( __.'   \____\  )---'    )\____/  /( __.'  /(  (_) 
 //      (__)              (_)      (__)     (__)     (__)     
+//      Official webSite: https://code-mphi.github.io/ECOGEN/
 //
 //  This file is part of ECOGEN.
 //
@@ -30,25 +31,20 @@
 #ifndef FACEQUADRANGLE_H
 #define FACEQUADRANGLE_H
 
-//! \file      FaceQuadrangle.h
-//! \author    F. Petitpas
-//! \version   1.0
-//! \date      December 20 2017
-
 #include "FaceNS.h"
 
 class FaceQuadrangle : public FaceNS
 {
 public:
-  FaceQuadrangle(const int &numNoeud1, const int &numNoeud2, const int &numNoeud3, const int &numNoeud4, int tri=1);
+  FaceQuadrangle(const int& numNoeud1, const int& numNoeud2, const int& numNoeud3, const int& numNoeud4, int tri=1);
   virtual ~FaceQuadrangle();
 
 private:
-  virtual void computeSurface(const Coord *noeuds);
-  virtual void computeRepere(const Coord *noeuds, const int &numNoeudAutre, ElementNS *elementVoisin);
+  virtual void computeSurface(const Coord* noeuds);
+  virtual void computeRepere(const Coord* noeuds, const int& numNoeudAutre, ElementNS *elementVoisin);
 
   static const int NOMBRENOEUDS;
-  int *m_numNoeudsOrigine;
+  int* m_numNoeudsOrigine;
 };
 
 #endif // FACEQUADRANGLE_H

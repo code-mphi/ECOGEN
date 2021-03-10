@@ -6,6 +6,7 @@
 //       |  `--.  \  `-.  \ `-' /   \  `-) ) |  `--.  | | |)| 
 //       /( __.'   \____\  )---'    )\____/  /( __.'  /(  (_) 
 //      (__)              (_)      (__)     (__)     (__)     
+//      Official webSite: https://code-mphi.github.io/ECOGEN/
 //
 //  This file is part of ECOGEN.
 //
@@ -30,29 +31,24 @@
 #ifndef BOUNDCONDNONREFLECTING_H
 #define BOUNDCONDNONREFLECTING_H
 
-//! \file      BoundCondNonReflecting.h
-//! \author    F. Petitpas, K. Schmidmayer
-//! \version   1.0
-//! \date      February 13 2019
-
 #include "BoundCond.h"
 
 class BoundCondNonReflecting : public BoundCond
 {
   public:
     BoundCondNonReflecting();
-    BoundCondNonReflecting(const BoundCondNonReflecting& Source, const int lvl = 0); //Constructeur de copie (utile pour AMR)
+    BoundCondNonReflecting(const BoundCondNonReflecting& Source, const int& lvl = 0); //Copy ctor (useful for AMR)
     BoundCondNonReflecting(int numPhysique);
     virtual ~BoundCondNonReflecting();
 
-    virtual void creeLimite(TypeMeshContainer<CellInterface *> &cellInterfaces);
-    virtual void solveRiemannLimite(Cell &cellLeft, const int &numberPhases, const double &dxLeft, double &dtMax);
-    virtual void solveRiemannTransportLimite(Cell &cellLeft, const int &numberTransports) const;
+    virtual void createBoundary(TypeMeshContainer<CellInterface*>& cellInterfaces);
+    virtual void solveRiemannBoundary(Cell& cellLeft, const int& numberPhases, const double& dxLeft, double& dtMax);
+    virtual void solveRiemannTransportBoundary(Cell& cellLeft, const int& numberTransports) const;
     
-		virtual int whoAmI() const { return 1; };
+		virtual int whoAmI() const { return NONREFLECTING; };
 
     //Pour methode AMR
-    virtual void creerCellInterfaceChild();  /*!< Creer un child cell interface (non initialize) */
+    virtual void creerCellInterfaceChild();  /*!< Create a child cell interface (not initialized) */
 
   protected:
   private:

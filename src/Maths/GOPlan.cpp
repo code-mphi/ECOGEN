@@ -6,6 +6,7 @@
 //       |  `--.  \  `-.  \ `-' /   \  `-) ) |  `--.  | | |)| 
 //       /( __.'   \____\  )---'    )\____/  /( __.'  /(  (_) 
 //      (__)              (_)      (__)     (__)     (__)     
+//      Official webSite: https://code-mphi.github.io/ECOGEN/
 //
 //  This file is part of ECOGEN.
 //
@@ -27,20 +28,11 @@
 //  along with ECOGEN (file LICENSE).  
 //  If not, see <http://www.gnu.org/licenses/>.
 
-//! \file      GOPlan.cpp
-//! \author    F. Petitpas, K. Schmidmayer
-//! \version   1.0
-//! \date      January 5 2018
-
 #include "GOPlan.h"
 
 //***********************************************************************
 
-GOPlan::GOPlan(){}
-
-//***********************************************************************
-
-GOPlan::GOPlan(const Coord &vertex, const Coord &normal) :
+GOPlan::GOPlan(const Coord& vertex, const Coord& normal) :
   GeometricObject(PLAN), m_point(vertex), m_normal(normal)
 {
   if (normal.norm() < 1e-6) { 
@@ -59,7 +51,7 @@ GOPlan::~GOPlan(){}
 
 //***********************************************************************
 
-double GOPlan::distancePoint(const Coord &vertex) const
+double GOPlan::distancePoint(const Coord& vertex) const
 {
   Coord vec; vec.setFromSubtractedVectors(m_point, vertex);
   return  std::fabs(vec.scalar(m_normal));
@@ -67,7 +59,7 @@ double GOPlan::distancePoint(const Coord &vertex) const
 
 //***********************************************************************
 
-Coord GOPlan::projectionPoint(const Coord &vertex) const
+Coord GOPlan::projectionPoint(const Coord& vertex) const
 {
   Coord projection;
   Coord vec; vec.setFromSubtractedVectors(m_point, vertex);

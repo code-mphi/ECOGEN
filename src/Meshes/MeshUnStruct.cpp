@@ -6,6 +6,7 @@
 //       |  `--.  \  `-.  \ `-' /   \  `-) ) |  `--.  | | |)| 
 //       /( __.'   \____\  )---'    )\____/  /( __.'  /(  (_) 
 //      (__)              (_)      (__)     (__)     (__)     
+//      Official webSite: https://code-mphi.github.io/ECOGEN/
 //
 //  This file is part of ECOGEN.
 //
@@ -27,11 +28,6 @@
 //  along with ECOGEN (file LICENSE).  
 //  If not, see <http://www.gnu.org/licenses/>.
 
-//! \file      MeshUnStruct.cpp
-//! \author    F. Petitpas, K. Schmidmayer
-//! \version   1.1
-//! \date      June 5 2019
-
 #include <cmath>
 #include <algorithm>
 #include "MeshUnStruct.h"
@@ -41,7 +37,7 @@ using namespace tinyxml2;
 
 //***********************************************************************
 
-MeshUnStruct::MeshUnStruct(const std::string &meshFile, const std::string &meshExtension) :
+MeshUnStruct::MeshUnStruct(const std::string& meshFile, const std::string& meshExtension) :
   Mesh(),
   m_meshFile(meshFile),
   m_nameMesh(meshFile),
@@ -50,8 +46,8 @@ MeshUnStruct::MeshUnStruct(const std::string &meshFile, const std::string &meshE
   m_numberInnerElements(0),
   m_numberGhostElements(0),
   m_numberCommunicatingElements(0),
-  m_numberGhostCells(0),
   m_numberFacesParallel(0),
+  m_numberGhostCells(0),
   m_numberElements0D(0),
   m_numberElements1D(0),
   m_numberElements2D(0),
@@ -66,7 +62,7 @@ MeshUnStruct::MeshUnStruct(const std::string &meshFile, const std::string &meshE
   m_totalSurface(0.),
   m_totalVolume(0.)
 {
-  m_meshFile = "./libMeshes/" + m_nameMesh; // meshFile with extension and full path
+  m_meshFile = m_nameMesh; // meshFile with extension and full path
   m_nameMesh.resize(m_nameMesh.size() - meshExtension.size() - 1); // Remove mesh file extension
   m_type = UNS;
 
@@ -90,7 +86,7 @@ MeshUnStruct::~MeshUnStruct(){
 
 //***********************************************************************
 
-std::string MeshUnStruct::readMeshFileExtension(const std::string &meshFile)
+std::string MeshUnStruct::readMeshFileExtension(const std::string& meshFile)
 { 
 	if (rankCpu == 0) {
 		std::cout << "------------------------------------------------------" << std::endl;
@@ -102,7 +98,7 @@ std::string MeshUnStruct::readMeshFileExtension(const std::string &meshFile)
 
 //***********************************************************************
 
-void MeshUnStruct::attributLimites(std::vector<BoundCond*> &boundCond)
+void MeshUnStruct::attributLimites(std::vector<BoundCond*>& boundCond)
 {
 //JC//Q// If the user specifies an high number for a defined boundary but not specifies numbers for other boundaries
 		// you will fill other boundaries with non-reflecting.
@@ -131,8 +127,8 @@ void MeshUnStruct::attributLimites(std::vector<BoundCond*> &boundCond)
 
 //***********************************************************************
 
-int MeshUnStruct::initializeGeometrie(TypeMeshContainer<Cell *> &cells, TypeMeshContainer<Cell *> &cellsGhost, TypeMeshContainer<CellInterface *> &cellInterfaces,
-  const int &restartSimulation, bool pretraitementParallele, std::string ordreCalcul)
+int MeshUnStruct::initializeGeometrie(TypeMeshContainer<Cell*>& cells, TypeMeshContainer<Cell*>& cellsGhost, TypeMeshContainer<CellInterface*>& cellInterfaces,
+  const int& /*restartSimulation*/, bool pretraitementParallele, std::string ordreCalcul)
 {
   try {
     if (Ncpu == 1) { this->initGeometryMonoCPU(cells, cellInterfaces, ordreCalcul); }
@@ -283,7 +279,7 @@ void MeshUnStruct::writeMeshInfoData() const
 
 //***********************************************************************
 
-// void MeshUnStruct::lectureElementGmshV4(const Coord *TableauNoeuds, std::ifstream &fichierMesh, ElementNS **element, const int &typeElement, int &indiceElement, const int & physicalEntity)
+// void MeshUnStruct::lectureElementGmshV4(const Coord* TableauNoeuds, std::ifstream &fichierMesh, ElementNS** element, const int& typeElement, int& indiceElement, const int&  physicalEntity)
 // {
 //   try {
 //     //1)Number of vertex affectation
@@ -330,8 +326,8 @@ void MeshUnStruct::writeMeshInfoData() const
 //     //2) Element building / properties filling
 //     //----------------------------------------
 //     int noeudCourant, tag;
-//     int *numNoeud = new int[(*element)->getNumberNoeuds()];
-//     Coord *noeud = new Coord[(*element)->getNumberNoeuds()];
+//     int* numNoeud = new int[(*element)->getNumberNoeuds()];
+//     Coord* noeud = new Coord[(*element)->getNumberNoeuds()];
 //     std::string currentLine;
 //     std::stringstream lineTotreat;
 //     getline(fichierMesh, currentLine); lineTotreat << currentLine;
@@ -356,14 +352,14 @@ void MeshUnStruct::writeMeshInfoData() const
 //******************************** ECRITURE ********************************
 //**************************************************************************
 
-void MeshUnStruct::ecritHeaderPiece(std::ofstream &fileStream, TypeMeshContainer<Cell *> *cellsLvl) const
+void MeshUnStruct::ecritHeaderPiece(std::ofstream& fileStream, TypeMeshContainer<Cell*>* /*cellsLvl*/) const
 {
   fileStream << "    <Piece NumberOfPoints=\"" << m_numberNodes << "\" NumberOfCells=\"" << m_numberCellsCalcul - m_numberGhostCells << "\">" << std::endl;
 }
 
 //****************************************************************************
 
-void MeshUnStruct::recupereNoeuds(std::vector<double> &jeuDonnees, std::vector<Cell *> *cellsLvl) const
+void MeshUnStruct::recupereNoeuds(std::vector<double>& jeuDonnees, std::vector<Cell*>* /*cellsLvl*/) const
 {
   for (int noeud = 0; noeud < m_numberNodes; noeud++)
   {
@@ -375,7 +371,7 @@ void MeshUnStruct::recupereNoeuds(std::vector<double> &jeuDonnees, std::vector<C
 
 //****************************************************************************
 
-void MeshUnStruct::recupereConnectivite(std::vector<double> &jeuDonnees, std::vector<Cell *> *cellsLvl) const
+void MeshUnStruct::recupereConnectivite(std::vector<double>& jeuDonnees, std::vector<Cell*>* /*cellsLvl*/) const
 {
   for (int i = m_numberBoundFaces; i < m_numberInnerElements; i++)
   {
@@ -391,7 +387,7 @@ void MeshUnStruct::recupereConnectivite(std::vector<double> &jeuDonnees, std::ve
 
 //****************************************************************************
 
-void MeshUnStruct::recupereOffsets(std::vector<double> &jeuDonnees, std::vector<Cell *> *cellsLvl) const
+void MeshUnStruct::recupereOffsets(std::vector<double>& jeuDonnees, std::vector<Cell*>* /*cellsLvl*/) const
 {
   int offset(0);
   for (int i = m_numberBoundFaces; i < m_numberInnerElements; i++)
@@ -406,7 +402,7 @@ void MeshUnStruct::recupereOffsets(std::vector<double> &jeuDonnees, std::vector<
 
 //****************************************************************************
 
-void MeshUnStruct::recupereTypeCell(std::vector<double> &jeuDonnees, std::vector<Cell *> *cellsLvl) const
+void MeshUnStruct::recupereTypeCell(std::vector<double>& jeuDonnees, std::vector<Cell*>* /*cellsLvl*/) const
 {
   for (int i = m_numberBoundFaces; i < m_numberInnerElements; i++)
   {
@@ -419,7 +415,7 @@ void MeshUnStruct::recupereTypeCell(std::vector<double> &jeuDonnees, std::vector
 
 //****************************************************************************
 
-void MeshUnStruct::recupereDonnees(TypeMeshContainer<Cell *> *cellsLvl, std::vector<double> &jeuDonnees, const int var, int phase) const
+void MeshUnStruct::recupereDonnees(TypeMeshContainer<Cell*>* cellsLvl, std::vector<double>& jeuDonnees, const int var, int phase) const
 {
   jeuDonnees.clear();
   int numCell;
@@ -460,7 +456,7 @@ void MeshUnStruct::recupereDonnees(TypeMeshContainer<Cell *> *cellsLvl, std::vec
 
 //****************************************************************************
 
-void MeshUnStruct::setDataSet(std::vector<double> &jeuDonnees, TypeMeshContainer<Cell *> *cellsLvl, const int var, int phase) const
+void MeshUnStruct::setDataSet(std::vector<double>& jeuDonnees, TypeMeshContainer<Cell*>* cellsLvl, const int var, int phase) const
 {
   int iterDataSet(0);
   int numCell;
@@ -494,7 +490,8 @@ void MeshUnStruct::setDataSet(std::vector<double> &jeuDonnees, TypeMeshContainer
 }
 
 //****************************************************************************
-void MeshUnStruct::extractAbsVeloxityMRF(TypeMeshContainer<Cell *> *cellsLvl, std::vector<double> &jeuDonnees, Source *sourceMRF) const
+
+void MeshUnStruct::extractAbsVelocityMRF(TypeMeshContainer<Cell*>* cellsLvl, std::vector<double>& jeuDonnees, Source *sourceMRF) const
 {
   jeuDonnees.clear();
   int numCell;
@@ -503,17 +500,24 @@ void MeshUnStruct::extractAbsVeloxityMRF(TypeMeshContainer<Cell *> *cellsLvl, st
     if (!m_elements[i]->isFantome())
     {
       numCell = m_elements[i]->getNumCellAssociee();
-      Coord absoluteVelocity = sourceMRF->computeAbsVelocity(cellsLvl[0][numCell]->getVelocity(), cellsLvl[0][numCell]->getPosition());
-      jeuDonnees.push_back(absoluteVelocity.getX());
-      jeuDonnees.push_back(absoluteVelocity.getY());
-      jeuDonnees.push_back(absoluteVelocity.getZ());
+      if (sourceMRF->getPhysicalEntity() == cellsLvl[0][numCell]->getElement()->getAppartenancePhysique() || sourceMRF->getPhysicalEntity() == 0) {
+        Coord absoluteVelocity = sourceMRF->computeAbsVelocity(cellsLvl[0][numCell]->getVelocity(), cellsLvl[0][numCell]->getPosition());
+        jeuDonnees.push_back(absoluteVelocity.getX());
+        jeuDonnees.push_back(absoluteVelocity.getY());
+        jeuDonnees.push_back(absoluteVelocity.getZ());
+      }
+      else {
+        jeuDonnees.push_back(cellsLvl[0][numCell]->getVelocity().getX());
+        jeuDonnees.push_back(cellsLvl[0][numCell]->getVelocity().getY());
+        jeuDonnees.push_back(cellsLvl[0][numCell]->getVelocity().getZ());
+      }
     }
   }
 }
 
 //***********************************************************************
 
-// void MeshUnStruct::rechercheElementsArrieres(ElementNS *element, FaceNS *face, CellInterface *cellInterface, std::vector<ElementNS *> voisins, Cell **cells) const
+// void MeshUnStruct::rechercheElementsArrieres(ElementNS *element, FaceNS *face, CellInterface* cellInterface, std::vector<ElementNS *> voisins, Cell** cells) const
 // {
 //   //int index(element->getIndex() - m_numberBoundFaces);
 //   //Coord vG = element->vecteur(face);
@@ -531,7 +535,7 @@ void MeshUnStruct::extractAbsVeloxityMRF(TypeMeshContainer<Cell *> *cellsLvl, st
 //   //      cellInterface->setB(BG1M, 0);
 //   //    }
 //   //    else { //Sinon on met a jour avec la maille la plus loin
-//   //      Cell *c(cells[eT->getNumCellAssociee()]);
+//   //      Cell* c(cells[eT->getNumCellAssociee()]);
 //   //      cellInterface->setB(BG1M, c);
 //   //    }
 //   //  }
@@ -561,7 +565,7 @@ void MeshUnStruct::extractAbsVeloxityMRF(TypeMeshContainer<Cell *> *cellsLvl, st
 //   //            cellInterface->setB(BG2M, 0);
 //   //          }
 //   //          else {  //Sinon on met a jour avec la 2 eme maille la plus loin
-//   //            Cell *c(cells[eT->getNumCellAssociee()]);
+//   //            Cell* c(cells[eT->getNumCellAssociee()]);
 //   //            cellInterface->setB(BG2M, c);
 //   //          }
 //   //        }
@@ -598,7 +602,7 @@ void MeshUnStruct::extractAbsVeloxityMRF(TypeMeshContainer<Cell *> *cellsLvl, st
 
 //***********************************************************************
 
-// void MeshUnStruct::rechercheElementsAvants(ElementNS *element, FaceNS *face, CellInterface *cellInterface, std::vector<ElementNS *> voisins, Cell **cells) const
+// void MeshUnStruct::rechercheElementsAvants(ElementNS *element, FaceNS *face, CellInterface* cellInterface, std::vector<ElementNS *> voisins, Cell** cells) const
 // {
 //   int index(element->getIndex() - m_numberBoundFaces);
 //   Coord vG = element->vecteur(face);
@@ -616,7 +620,7 @@ void MeshUnStruct::extractAbsVeloxityMRF(TypeMeshContainer<Cell *> *cellsLvl, st
 //   //      cellInterface->setB(BG1P, 0);
 //   //    }
 //   //    else { //Sinon on met a jour avec la maille la plus loin
-//   //      Cell *c(cells[eT->getNumCellAssociee()]);
+//   //      Cell* c(cells[eT->getNumCellAssociee()]);
 //   //      cellInterface->setB(BG1P, c);
 //   //    }
 //   //  }
@@ -646,7 +650,7 @@ void MeshUnStruct::extractAbsVeloxityMRF(TypeMeshContainer<Cell *> *cellsLvl, st
 //   //            cellInterface->setB(BG2P, 0);
 //   //          }
 //   //          else {  //Sinon on met a jour avec la 2 eme maille la plus loin
-//   //            Cell *c(cells[eT->getNumCellAssociee()]);
+//   //            Cell* c(cells[eT->getNumCellAssociee()]);
 //   //            cellInterface->setB(BG2P, c);
 //   //          }
 //   //        }

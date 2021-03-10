@@ -6,6 +6,7 @@
 //       |  `--.  \  `-.  \ `-' /   \  `-) ) |  `--.  | | |)| 
 //       /( __.'   \____\  )---'    )\____/  /( __.'  /(  (_) 
 //      (__)              (_)      (__)     (__)     (__)     
+//      Official webSite: https://code-mphi.github.io/ECOGEN/
 //
 //  This file is part of ECOGEN.
 //
@@ -30,11 +31,6 @@
 #ifndef EOS_H
 #define EOS_H
 
-//! \file      Eos.h
-//! \author    F. Petitpas, K. Schmidmayer, E. Daniel, J. Caze
-//! \version   1.1
-//! \date      October 11 2019
-
 #include <string>
 #include <vector>
 #include <cassert>
@@ -49,14 +45,10 @@
 class Eos
 {
     public:
-      Eos();
-      Eos(int &number);
+      Eos(int& number);
       virtual ~Eos();
 
-
       //Constant methods
-      //! \brief display the name of the fluid
-      void display() const;
 
       const std::string& getName() const { return m_name; };
       //! \brief See derived classes 
@@ -66,7 +58,7 @@ class Eos
       const int& getNumber() const { return m_number; };
 
       //! \brief Read physical parameters (viscosity, thermal conductivity....)
-      void readPhysicalParameter(tinyxml2::XMLNode *element, std::string fileName = "Unknown File");
+      void readPhysicalParameter(tinyxml2::XMLNode *element);
 
       //! \brief    compute the total enthalpy of the phase
       //! \param     density           density (\f$\rho \f$)
@@ -74,7 +66,7 @@ class Eos
       //! \param     velocity          velocity (m/s)
       //! \return    this -> hTotal
       //! \details  hTotal is computed as :\f$H_{total} =  \epsilon (\rho, p)   + \frac{p}{\rho} +\frac{1}{2}u^2 \f$. 
-      double computeTotalEnthalpy(const double &density, const double &pressure, const double &velocity) const;
+      double computeTotalEnthalpy(const double& density, const double& pressure, const double& velocity) const;
       //! \brief  Return the dynamic viscosity of the fluid  
       //!return    \f$ \mu \f$ (Unit: Pa.s).
       const double& getMu() const { return m_mu; };
@@ -83,64 +75,62 @@ class Eos
       const double& getLambda() const { return m_lambda; };
       //! \brief  Assign the epsilonAlphaNull value for alphaNull option (alpha = 0 => epsilonAlphaNull != 0 ; alpha != 0 => epsilonAlphaNull = 0)
       //! \param     alphaNull         \f$\alpha = 0 \f$ (boolean value)
-      //! \param     fileName          Name of the open file
-      void assignEpsilonForAlphaNull(bool alphaNull, std::string fileName) const;
+      void assignEpsilonForAlphaNull(bool alphaNull) const;
 
 
       //Gereral methods for all EOS
-
 
       //Virtual methods for child classes
       //! \brief See derived classes  
       virtual void assignParametersEos(std::string name, std::vector<double> parametersEos) = 0;
       //! \brief See derived classes 
-      virtual double computeTemperature(const double &density, const double &pressure) const=0; //virtual methods 
+      virtual double computeTemperature(const double& density, const double& pressure) const=0; //virtual methods 
       //! \brief See derived classes 
-      virtual double computeEnergy(const double &density, const double &pressure) const=0;
+      virtual double computeEnergy(const double& density, const double& pressure) const=0;
       //! \brief See derived classes 
-      virtual double computePressure(const double &density, const double &energy) const=0;
+      virtual double computePressure(const double& density, const double& energy) const=0;
       //! \brief See derived classes 
-      virtual double computeDensity(const double &pressure, const double &temperature) const = 0;
+      virtual double computeDensity(const double& pressure, const double& temperature) const = 0;
       //! \brief See derived classes 
-      virtual double computeSoundSpeed(const double &density, const double &pressure) const=0;
+      virtual double computeSoundSpeed(const double& density, const double& pressure) const=0;
       //! \brief See derived classes 
-      virtual double computeEntropy(const double &temperature, const double &pressure) const = 0;
+      virtual double computeInterfaceSoundSpeed(const double& density, const double& interfacePressure, const double& pressure) const=0;
       //! \brief See derived classes 
-      virtual double computePressureIsentropic(const double &initialPressure, const double &initialDensity, const double &finalDensity) const=0;
+      virtual double computeEntropy(const double& temperature, const double& pressure) const = 0;
       //! \brief See derived classes 
-      virtual double computePressureHugoniot(const double &initialPressure, const double &initialDensity, const double &finalDensity) const=0;
+      virtual double computePressureIsentropic(const double& initialPressure, const double& initialDensity, const double& finalDensity) const=0;
       //! \brief See derived classes 
-      virtual double computeDensityIsentropic(const double &initialPressure, const double &initialDensity, const double &finalPressure, double *drhodp=0) const=0;
+      virtual double computePressureHugoniot(const double& initialPressure, const double& initialDensity, const double& finalDensity) const=0;
       //! \brief See derived classes 
-      virtual double computeDensityHugoniot(const double &initialPressure, const double &initialDensity, const double &finalPressure, double *drhodp = 0) const = 0;
+      virtual double computeDensityIsentropic(const double& initialPressure, const double& initialDensity, const double& finalPressure, double* drhodp=0) const=0;
+      //! \brief See derived classes 
+      virtual double computeDensityHugoniot(const double& initialPressure, const double& initialDensity, const double& finalPressure, double* drhodp = 0) const = 0;
 
-      virtual double computeDensityPfinal(const double &initialPressure, const double &initialDensity, const double &finalPressure, double *drhodp = 0) const = 0;
+      virtual double computeDensityPfinal(const double& initialPressure, const double& initialDensity, const double& finalPressure, double* drhodp = 0) const = 0;
 
       //! \brief See derived classes 
-      virtual double computeEnthalpyIsentropic(const double &initialPressure, const double &initialDensity, const double &finalPressure, double *dhdp = 0) const = 0;
+      virtual double computeEnthalpyIsentropic(const double& initialPressure, const double& initialDensity, const double& finalPressure, double* dhdp = 0) const = 0;
       //! \brief See derived classes 
-      virtual double computeDensitySaturation(const double &pressure, const double &Tsat, const double &dTsatdP, double *drhodp = 0) const { Errors::errorMessage("computeDensitySaturation not yet programmed for EOS : " + m_name); return 0; };
+      virtual double computeDensitySaturation(const double& /*pressure*/, const double& /*Tsat*/, const double& /*dTsatdP*/, double* /*drhodp*/ = 0) const { Errors::errorMessage("computeDensitySaturation not yet programmed for EOS : " + m_name); return 0; };
       //! \brief See derived classes 
-      virtual double computeDensityEnergySaturation(const double &pressure, const double &rho, const double &drhodp, double *drhoedp = 0) const { Errors::errorMessage("computeDensityEnergySaturation non prevu pour EOS : " + m_name); return 0; };
+      virtual double computeDensityEnergySaturation(const double& /*pressure*/, const double& /*rho*/, const double& /*drhodp*/, double* /*drhoedp*/ = 0) const { Errors::errorMessage("computeDensityEnergySaturation non prevu pour EOS : " + m_name); return 0; };
       //! \brief See derived classes 
-      virtual void sendSpecialMixtureEos(double &gamPinfOverGamMinusOne, double &eRef, double &oneOverGamMinusOne, double &covolume) const = 0;
+      virtual void sendSpecialMixtureEos(double& gamPinfOverGamMinusOne, double& eRef, double& oneOverGamMinusOne, double& covolume) const = 0;
       //! \brief See derived classes 
-      virtual double vfpfh(const double &pressure, const double &enthalpy) const { Errors::errorMessage("vfpfh not yet programmed for EOS : " + m_name); return 0; };
+      virtual double vfpfh(const double& /*pressure*/, const double& /*enthalpy*/) const { Errors::errorMessage("vfpfh not yet programmed for EOS : " + m_name); return 0; };
 
       //Partial derivatives 
       //! \brief See derived classes 
-      virtual double dvdpch(const double &pressure, const double &enthalpy) const { Errors::errorMessage("dvdpch not yet programmed for EOS : " + m_name); return 0; };
+      virtual double dvdpch(const double& /*pressure*/, const double& /*enthalpy*/) const { Errors::errorMessage("dvdpch not yet programmed for EOS : " + m_name); return 0; };
       //! \brief See derived classes 
-      virtual double dvdhcp(const double &pressure, const double &enthalpy) const { Errors::errorMessage("dvdhcp not yet programmed for EOS : " + m_name); return 0; };
+      virtual double dvdhcp(const double& /*pressure*/) const { Errors::errorMessage("dvdhcp not yet programmed for EOS : " + m_name); return 0; };
+      //! \brief See derived classes
+      virtual double drhodpcT(const double& /*pressure*/, const double& /*temperature*/) const { Errors::errorMessage("drhodpcT not yet programmed for EOS : " + m_name); return 0; };
 
       //Checking..
-      virtual void verifyPressure(const double &pressure, const std::string &message = " ") const { Errors::errorMessage("verifyPressure not yet programmed Eos : " + m_name); };
+      virtual void verifyPressure(const double& /*pressure*/, const std::string& /*message*/ = " ") const { Errors::errorMessage("verifyPressure not yet programmed Eos : " + m_name); };
       //! \brief See derived classes 
-      virtual void verifyAndModifyPressure(double &pressure) const { Errors::errorMessage("verifyAndModifyPressure not yet programmed Eos : "+ m_name); };
-
-      //Mod
-      //! \brief See derived classes 
-      virtual void sendInfo(double *&data) const = 0; //FP//DEV// Usefull for some exact solvers (not used)
+      virtual void verifyAndModifyPressure(double& /*pressure*/) const { Errors::errorMessage("verifyAndModifyPressure not yet programmed Eos : "+ m_name); };
 
       //Get
       //! \brief See derived classes 

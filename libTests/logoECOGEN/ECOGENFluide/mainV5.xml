@@ -1,0 +1,10 @@
+<?xml version = "1.0" encoding = "UTF-8" standalone = "yes"?>
+<computationParam>
+	<run>ECOGENFluid</run>
+	<outputMode format="XML" binary="false" precision="15"/>
+	<timeControlMode iterations="false">
+		<iterations number="4000" iterFreq="400"/>
+		<physicalTime totalTime="2.e0" timeFreq="2.e-2"/>
+	</timeControlMode>
+	<computationControl CFL="0.4"/>
+</computationParam>

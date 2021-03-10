@@ -6,6 +6,7 @@
 //       |  `--.  \  `-.  \ `-' /   \  `-) ) |  `--.  | | |)| 
 //       /( __.'   \____\  )---'    )\____/  /( __.'  /(  (_) 
 //      (__)              (_)      (__)     (__)     (__)     
+//      Official webSite: https://code-mphi.github.io/ECOGEN/
 //
 //  This file is part of ECOGEN.
 //
@@ -30,16 +31,11 @@
 #ifndef HEADERMODELE_H
 #define HEADERMODELE_H
 
-//! \file      HeaderModel.h
-//! \author    F. Petitpas, K. Schmidmayer
-//! \version   1.0
-//! \date      January 19 2018
-
 #include "Euler/ModEuler.h"
-#include "Kapila/ModKapila.h"
+#include "PUEq/ModPUEq.h"
 #include "EulerHomogeneous/ModEulerHomogeneous.h"
-#include "ThermalEq/ModThermalEq.h"
-#include "MultiP/ModMultiP.h"
+#include "PTUEq/ModPTUEq.h"
+#include "UEq/ModUEq.h"
 
 //Add new models here
 

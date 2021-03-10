@@ -6,6 +6,7 @@
 //       |  `--.  \  `-.  \ `-' /   \  `-) ) |  `--.  | | |)| 
 //       /( __.'   \____\  )---'    )\____/  /( __.'  /(  (_) 
 //      (__)              (_)      (__)     (__)     (__)     
+//      Official webSite: https://code-mphi.github.io/ECOGEN/
 //
 //  This file is part of ECOGEN.
 //
@@ -30,11 +31,6 @@
 #ifndef QUANTITIESADDPHYS_H
 #define QUANTITIESADDPHYS_H
 
-//! \file      QuantitiesAddPhys.h
-//! \author    K. Schmidmayer
-//! \version   1.1
-//! \date      June 5 2019
-
 class QuantitiesAddPhys; //pre-declaration of QuantitiesAddPhys class needed for AddPhys.h inclusion
 
 #include "AddPhys.h"
@@ -45,7 +41,6 @@ class QuantitiesAddPhys; //pre-declaration of QuantitiesAddPhys class needed for
 class QuantitiesAddPhys
 {
     public:
-    QuantitiesAddPhys();
     //! \brief     Generic model constructor
     //! \param     addPhys              corresponding additional physic
     QuantitiesAddPhys(AddPhys* addPhys);
@@ -53,7 +48,7 @@ class QuantitiesAddPhys
 
     //! \brief     Compute the needed quantities for the additional physic
     //! \param     cell                 corresponding cell
-    virtual void computeQuantities(Cell* cell) { Errors::errorMessage("computeQuantities not implemented for used quantities of additional physics"); };
+    virtual void computeQuantities(Cell* /*cell*/) { Errors::errorMessage("computeQuantities not implemented for used quantities of additional physics"); };
     //! \brief     Compute and send back mass energie linked to the physic (0 if no linked energy)
     double computeEnergyAddPhys();
 
@@ -61,33 +56,33 @@ class QuantitiesAddPhys
     //! \brief     Set the additional-physic gradient with the transmitted values
     //! \param     grad                 transmitted gradient
     //! \param     num                  number to determine the corresponding gradient
-    virtual void setGrad(const Coord &grad, int num = -1) { Errors::errorMessage("setGrad not implemented for used quantities of additional physics"); };
+    virtual void setGrad(const Coord& /*grad*/, const int& /*num*/ = -1) { Errors::errorMessage("setGrad not implemented for used quantities of additional physics"); };
     //! \brief     Get the additional-physic gradient
     //! \param     num                  number to determine the corresponding gradient
-    virtual const Coord& getGrad(int num = -1) const { Errors::errorMessage("getGrad not implemented for used quantities of additional physics"); return Coord::defaultCoord; };
+    virtual const Coord& getGrad(const int& /*num*/ = -1) const { Errors::errorMessage("getGrad not implemented for used quantities of additional physics"); return Coord::defaultCoord; };
 
     //! \brief     Set the gradient of the velocity along the x-direction with the transmitted values
     //! \param     grad                 transmitted gradient
-    virtual void setGradU(const Coord &grad) {};
+    virtual void setGradU(const Coord& /*grad*/) { Errors::errorMessage("setGradU not implemented for used quantities of additional physics"); };
     //! \brief     Set the gradient of the velocity along the y-direction with the transmitted values
     //! \param     grad                 transmitted gradient
-    virtual void setGradV(const Coord &grad) {};
+    virtual void setGradV(const Coord& /*grad*/) { Errors::errorMessage("setGradV not implemented for used quantities of additional physics"); };
     //! \brief     Set the gradient of the velocity along the z-direction with the transmitted values
     //! \param     grad                 transmitted gradient
-    virtual void setGradW(const Coord &grad) {};
+    virtual void setGradW(const Coord& /*grad*/) { Errors::errorMessage("setGradW not implemented for used quantities of additional physics"); };
     //! \brief     Set the gradient of the phase temperature with the transmitted values
     //! \param     phaseNum             number of the corresponding phase
     //! \param     grad                 transmitted gradient
-    virtual void setGradTk(int &phaseNum, const Coord &grad) {};
+    virtual void setGradTk(const int& /*phaseNum*/, const Coord& /*grad*/) { Errors::errorMessage("setGradTk not implemented for used quantities of additional physics"); };
     //! \brief     Return the gradient of the velocity along the x-direction
-    virtual Coord getGradU() const { return 0; };
+    virtual Coord getGradU() const {  Errors::errorMessage("getGradU not implemented for used quantities of additional physics"); return 0; };
     //! \brief     Return the gradient of the velocity along the y-direction
-    virtual Coord getGradV() const { return 0; };
+    virtual Coord getGradV() const {  Errors::errorMessage("getGradV not implemented for used quantities of additional physics"); return 0; };
     //! \brief     Return the gradient of the velocity along the z-direction
-    virtual Coord getGradW() const { return 0; };
+    virtual Coord getGradW() const {  Errors::errorMessage("getGradW not implemented for used quantities of additional physics"); return 0; };
     //! \brief     Return the gradient of the phase temperature
     //! \param     phaseNum             number of the corresponding phase
-    virtual const Coord& getGradTk(int &phaseNum) const { return Coord::defaultCoord; };
+    virtual const Coord& getGradTk(const int& /*phaseNum*/) const {  Errors::errorMessage("getGradTk not implemented for used quantities of additional physics"); return Coord::defaultCoord; };
 
     //! \brief     Return the corresponding additional-physic class of this quantities class
     AddPhys* getAddPhys() { return m_addPhys; };

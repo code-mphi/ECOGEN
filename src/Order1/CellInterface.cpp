@@ -6,6 +6,7 @@
 //       |  `--.  \  `-.  \ `-' /   \  `-) ) |  `--.  | | |)| 
 //       /( __.'   \____\  )---'    )\____/  /( __.'  /(  (_) 
 //      (__)              (_)      (__)     (__)     (__)     
+//      Official webSite: https://code-mphi.github.io/ECOGEN/
 //
 //  This file is part of ECOGEN.
 //
@@ -27,31 +28,22 @@
 //  along with ECOGEN (file LICENSE).  
 //  If not, see <http://www.gnu.org/licenses/>.
 
-//! \file      CellInterface.cpp
-//! \author    F. Petitpas, K. Schmidmayer, S. Le Martelot, B. Dorschner
-//! \version   1.1
-//! \date      June 5 2019
-
 #include "CellInterface.h"
 #include <iostream>
 
 //Utile pour la resolution des problemes de Riemann
-Cell *cellLeft;
-Cell *cellRight;
+Cell* cellLeft;
+Cell* cellRight;
 
 //***********************************************************************
 
-CellInterface::CellInterface() : m_mod(0), m_cellLeft(0), m_cellRight(0), m_face(0), m_cellInterfacesChildren(0)
-{
-  m_lvl = 0;
-}
+CellInterface::CellInterface() : m_cellLeft(0), m_cellRight(0), m_mod(0), m_face(0), m_lvl(0), m_cellInterfacesChildren(0)
+{}
 
 //***********************************************************************
 
-CellInterface::CellInterface(int lvl) : m_mod(0), m_cellLeft(0), m_cellRight(0), m_face(0), m_cellInterfacesChildren(0)
-{
-  m_lvl = lvl;
-}
+CellInterface::CellInterface(const int& lvl) : m_cellLeft(0), m_cellRight(0), m_mod(0), m_face(0), m_lvl(lvl), m_cellInterfacesChildren(0)
+{}
 
 //***********************************************************************
 
@@ -66,7 +58,7 @@ CellInterface::~CellInterface()
 
 //***********************************************************************
 
-void CellInterface::initialize(Cell *cellLeft, Cell *cellRight)
+void CellInterface::initialize(Cell* cellLeft, Cell* cellRight)
 {
   m_cellLeft = cellLeft;
   m_cellRight = cellRight;
@@ -74,14 +66,14 @@ void CellInterface::initialize(Cell *cellLeft, Cell *cellRight)
 
 //***********************************************************************
 
-void CellInterface::initializeGauche(Cell *cellLeft)
+void CellInterface::initializeGauche(Cell* cellLeft)
 {
   m_cellLeft = cellLeft;
 }
 
 //***********************************************************************
 
-void CellInterface::initializeDroite(Cell *cellRight)
+void CellInterface::initializeDroite(Cell* cellRight)
 {
   m_cellRight = cellRight;
 }
@@ -95,7 +87,7 @@ void CellInterface::setFace(Face *face)
 
 //***********************************************************************
 
-void CellInterface::computeFlux(const int &numberPhases, const int &numberTransports, double &dtMax, Limiter &globalLimiter, Limiter &interfaceLimiter, Limiter &globalVolumeFractionLimiter, Limiter &interfaceVolumeFractionLimiter, Prim type)
+void CellInterface::computeFlux(const int& numberPhases, const int& numberTransports, double& dtMax, Limiter& globalLimiter, Limiter& interfaceLimiter, Limiter& globalVolumeFractionLimiter, Limiter& interfaceVolumeFractionLimiter, Prim type)
 {
   this->solveRiemann(numberPhases, numberTransports, dtMax, globalLimiter, interfaceLimiter, globalVolumeFractionLimiter, interfaceVolumeFractionLimiter, type);
 
@@ -115,14 +107,14 @@ void CellInterface::computeFlux(const int &numberPhases, const int &numberTransp
 
 //***********************************************************************
 
-void CellInterface::computeFluxAddPhys(const int &numberPhases, AddPhys &addPhys)
+void CellInterface::computeFluxAddPhys(const int& numberPhases, AddPhys &addPhys)
 {
   addPhys.computeFluxAddPhys(this, numberPhases);
 }
 
 //***********************************************************************
 
-void CellInterface::solveRiemann(const int &numberPhases, const int &numberTransports, double &dtMax, Limiter &globalLimiter, Limiter &interfaceLimiter, Limiter &globalVolumeFractionLimiter, Limiter &interfaceVolumeFractionLimiter, Prim type)
+void CellInterface::solveRiemann(const int& numberPhases, const int& numberTransports, double& dtMax, Limiter& /*globalLimiter*/, Limiter& /*interfaceLimiter*/, Limiter& /*globalVolumeFractionLimiter*/, Limiter& /*interfaceVolumeFractionLimiter*/, Prim /*type*/)
 {
   //Projection des velocities sur repere attache a la face
   m_cellLeft->localProjection(m_face->getNormal(), m_face->getTangent(), m_face->getBinormal(), numberPhases);
@@ -133,8 +125,9 @@ void CellInterface::solveRiemann(const int &numberPhases, const int &numberTrans
   double dxRight(m_cellRight->getElement()->getLCFL());
   dxLeft = dxLeft*std::pow(2., (double)m_lvl);
   dxRight = dxRight*std::pow(2., (double)m_lvl);
-  m_mod->solveRiemannIntern(*m_cellLeft, *m_cellRight, numberPhases, dxLeft, dxRight, dtMax);
-  //Traitement des fonctions de transport (m_Sm connu : doit etre place apres l appel au Solveur de Riemann)
+  double massflow(0.), powerFlux(0.); // Those var. are useless here, only meaningful for recording flux of BoundCond
+  m_mod->solveRiemannIntern(*m_cellLeft, *m_cellRight, numberPhases, dxLeft, dxRight, dtMax, massflow, powerFlux);
+  //Handling of transport functions (m_Sm known: need to be called after Riemann solver)
   if (numberTransports > 0) { m_mod->solveRiemannTransportIntern(*m_cellLeft, *m_cellRight, numberTransports); }
 
   //Projection du flux sur le repere absolu
@@ -145,7 +138,7 @@ void CellInterface::solveRiemann(const int &numberPhases, const int &numberTrans
 
 //***********************************************************************
 
-void CellInterface::addFlux(const int &numberPhases, const int &numberTransports, const double &coefAMR)
+void CellInterface::addFlux(const int& numberPhases, const int& numberTransports, const double& coefAMR)
 {
   //No "time step"
   double coefA = m_face->getSurface() / m_cellRight->getElement()->getVolume() * coefAMR;
@@ -159,7 +152,7 @@ void CellInterface::addFlux(const int &numberPhases, const int &numberTransports
 
 //***********************************************************************
 
-void CellInterface::subtractFlux(const int &numberPhases, const int &numberTransports, const double &coefAMR)
+void CellInterface::subtractFlux(const int& numberPhases, const int& numberTransports, const double& coefAMR)
 {
   //No "time step"
   double coefA = m_face->getSurface() / m_cellLeft->getElement()->getVolume() * coefAMR;
@@ -173,13 +166,13 @@ void CellInterface::subtractFlux(const int &numberPhases, const int &numberTrans
 
 //***********************************************************************
 
-double CellInterface::distance(Cell *c)
+double CellInterface::distance(Cell* c)
 {
   return m_face->distance(c->getElement());
 }
 
 //***********************************************************************
-void CellInterface::EffetsSurface1D(const int &numberPhases)
+void CellInterface::EffetsSurface1D(const int& numberPhases)
 {
   if (m_cellRight != NULL){ m_cellRight->getCons()->addTuyere1D(m_face->getNormal(), m_face->getSurface(), m_cellRight, numberPhases); }
   m_cellLeft->getCons()->subtractTuyere1D(m_face->getNormal(), m_face->getSurface(), m_cellLeft, numberPhases);
@@ -187,7 +180,7 @@ void CellInterface::EffetsSurface1D(const int &numberPhases)
 
 //***********************************************************************
 
-void CellInterface::associeModel(Model *model)
+void CellInterface::associeModel(Model* model)
 {
   m_mod = model;
 }
@@ -201,30 +194,30 @@ Face *CellInterface::getFace()
 
 //***********************************************************************
 
-Model *CellInterface::getMod() const
+Model* CellInterface::getMod() const
 {
   return m_mod;
 }
 
 //***********************************************************************
 
-Cell *CellInterface::getCellGauche() const
+Cell* CellInterface::getCellGauche() const
 {
   return m_cellLeft;
 }
 
 //***********************************************************************
 
-Cell *CellInterface::getCellDroite() const
+Cell* CellInterface::getCellDroite() const
 {
   return m_cellRight;
 }
 
 //****************************************************************************
-//******************************Methode AMR***********************************
+//******************************AMR Method***********************************
 //****************************************************************************
 
-void CellInterface::computeXi(const double &criteriaVar, const bool &varRho, const bool &varP, const bool &varU, const bool &varAlpha)
+void CellInterface::computeXi(const double& criteriaVar, const bool &varRho, const bool &varP, const bool &varU, const bool &varAlpha)
 {
   if (varRho) { this->computeCritereAMR(criteriaVar, density); }
   if (varP) {
@@ -240,7 +233,7 @@ void CellInterface::computeXi(const double &criteriaVar, const bool &varRho, con
 
 //***********************************************************************
 
-void CellInterface::computeCritereAMR(const double &criteriaVar, Variable nameVariable, int num)
+void CellInterface::computeCritereAMR(const double& criteriaVar, Variable nameVariable, int num)
 {
   double valueMin, variation, cd, cg;
   // Recuperation des values de la variable en question a gauche et a droite
@@ -295,21 +288,21 @@ void CellInterface::creerCellInterfaceChild()
 
 //***********************************************************************
 
-void CellInterface::creerCellInterfaceChildInterne(const int &lvl, std::vector<CellInterface*> *childrenInternalCellInterfaces)
+void CellInterface::creerCellInterfaceChildInterne(const int& lvl, std::vector<CellInterface*>* childrenInternalCellInterfaces)
 {
   (*childrenInternalCellInterfaces).push_back(new CellInterface(lvl + 1));
 }
 
 //***********************************************************************
 
-void CellInterface::creerFaceChild(CellInterface *cellInterfaceParent)
+void CellInterface::creerFaceChild(CellInterface* cellInterfaceParent)
 {
   m_face = cellInterfaceParent->m_face->creerNouvelleFace();
 }
 
 //***********************************************************************
 
-void CellInterface::raffineCellInterfaceExterne(const int &nbCellsY, const int &nbCellsZ, const double &dXParent, const double &dYParent, const double &dZParent, Cell *cellRef, const int &dim)
+void CellInterface::raffineCellInterfaceExterne(const int& nbCellsY, const int& nbCellsZ, const double& dXParent, const double& dYParent, const double& dZParent, Cell* cellRef, const int& dim)
 {
   //La creation des children cell interfaces n'est pas systematique, on regarde d'abord si ces children cell interfaces ne sont pas deja crees.
   //Dans tous les cas on re-attribut les liaisons cells/cell interfaces.
@@ -1010,7 +1003,7 @@ void CellInterface::raffineCellInterfaceExterne(const int &nbCellsY, const int &
 
 //***********************************************************************
 
-void CellInterface::deraffineCellInterfaceExterne(Cell *cellRef)
+void CellInterface::deraffineCellInterfaceExterne(Cell* cellRef)
 {
   //On parcourt seulement les parent cell interfaces pour regarder si la cell voisine de celle de reference a des enfants,
   //si oui (enfants), on ne peut pas deraffiner le cell interface, on reaffecte donc les liaisons cells/cell interfaces des children cell interfaces,
@@ -1079,7 +1072,7 @@ void CellInterface::deraffineCellInterfacesChildren()
 
 //***********************************************************************
 
-void CellInterface::constructionTableauCellInterfacesExternesLvl(std::vector<CellInterface *> *cellInterfacesLvl)
+void CellInterface::constructionTableauCellInterfacesExternesLvl(std::vector<CellInterface*>* cellInterfacesLvl)
 {
   for (unsigned int i = 0; i < m_cellInterfacesChildren.size(); i++) {
     cellInterfacesLvl[m_lvl + 1].push_back(m_cellInterfacesChildren[i]);
@@ -1104,7 +1097,7 @@ int CellInterface::getNumberCellInterfacesChildren() const
 
 //***********************************************************************
 
-CellInterface* CellInterface::getCellInterfaceChild(const int &numChild)
+CellInterface* CellInterface::getCellInterfaceChild(const int& numChild)
 {
   return m_cellInterfacesChildren[numChild];
 }
@@ -1140,7 +1133,7 @@ void CellInterface::updatePointersInternalCellInterfaces()
   if (!foundCellInterface) m_cellRight->addCellInterface(this);
 
   //Also check my children
-  for (int b = 0; b < m_cellInterfacesChildren.size(); b++) {
+  for (unsigned int b = 0; b < m_cellInterfacesChildren.size(); b++) {
     m_cellInterfacesChildren[b]->updatePointersInternalCellInterfaces();
   }
 }

@@ -48,7 +48,7 @@ Mesh file name should be precised here. The corresponding mesh file must be laca
 ECOGEN can read from single or multi-CPU mesh files coming from GMSH software (*.msh)
 %%%%%%%%%%%%%%%%%% << copy between these lines
 <unstructuredMesh>
-  <file name="unstructured2D/testUS.msh"/>
+  <file name="./libMeshes/unstructured2D/testUS.msh"/>
   <parallel GMSHPretraitement="true"/>  <!-- Optionnal node if multiCPU -->
 </unstructuredMesh>
 %%%%%%%%%%%%%%%%%% << copy between these lines

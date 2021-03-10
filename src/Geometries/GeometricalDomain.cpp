@@ -6,6 +6,7 @@
 //       |  `--.  \  `-.  \ `-' /   \  `-) ) |  `--.  | | |)| 
 //       /( __.'   \____\  )---'    )\____/  /( __.'  /(  (_) 
 //      (__)              (_)      (__)     (__)     (__)     
+//      Official webSite: https://code-mphi.github.io/ECOGEN/
 //
 //  This file is part of ECOGEN.
 //
@@ -27,16 +28,11 @@
 //  along with ECOGEN (file LICENSE).  
 //  If not, see <http://www.gnu.org/licenses/>.
 
-//! \file      GeometricalDomain.cpp
-//! \author    F. Petitpas, K. Schmidmayer
-//! \version   1.0
-//! \date      December 19 2017
-
 #include "GeometricalDomain.h"
 
 //******************************************************************
 
-GeometricalDomain::GeometricalDomain(std::string name, std::vector<Phase*> vecPhases, Mixture *mixture, std::vector<Transport> vecTransports, const int &physicalEntity) : m_name(name), m_physicalEntity(physicalEntity)
+GeometricalDomain::GeometricalDomain(std::string name, std::vector<Phase*> vecPhases, Mixture* mixture, std::vector<Transport> vecTransports, const int& physicalEntity) : m_name(name), m_physicalEntity(physicalEntity)
 {
   m_numberPhases = vecPhases.size();
   m_numberTransports = vecTransports.size();
@@ -65,7 +61,7 @@ GeometricalDomain::~GeometricalDomain()
 
 //******************************************************************
 
-void GeometricalDomain::fillIn(Cell *cell, const int &numberPhases, const int &numberTransports) const
+void GeometricalDomain::fillIn(Cell* cell, const int& numberPhases, const int& numberTransports) const
 {
   //Test if the cell belongs to the geometrical domain
   bool belongs(true);

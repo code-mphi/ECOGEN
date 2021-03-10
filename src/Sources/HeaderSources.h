@@ -6,6 +6,7 @@
 //       |  `--.  \  `-.  \ `-' /   \  `-) ) |  `--.  | | |)| 
 //       /( __.'   \____\  )---'    )\____/  /( __.'  /(  (_) 
 //      (__)              (_)      (__)     (__)     (__)     
+//      Official webSite: https://code-mphi.github.io/ECOGEN/
 //
 //  This file is part of ECOGEN.
 //
@@ -29,11 +30,6 @@
 
 #ifndef HEADERSOURCES_H
 #define HEADERSOURCES_H
-
-//! \file      HeaderSources.h
-//! \author    F. Petitpas, K. Schmidmayer
-//! \version   1.0
-//! \date      July 06 2018
 
 #include "SourceGravity.h"
 #include "SourceHeating.h"

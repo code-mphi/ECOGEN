@@ -6,6 +6,7 @@
 //       |  `--.  \  `-.  \ `-' /   \  `-) ) |  `--.  | | |)| 
 //       /( __.'   \____\  )---'    )\____/  /( __.'  /(  (_) 
 //      (__)              (_)      (__)     (__)     (__)     
+//      Official webSite: https://code-mphi.github.io/ECOGEN/
 //
 //  This file is part of ECOGEN.
 //
@@ -30,11 +31,6 @@
 #ifndef TOOLS_H
 #define TOOLS_H
 
-//! \file      Tools.h
-//! \author    F. Petitpas, K. Schmidmayer
-//! \version   1.1
-//! \date      June 5 2019
-
 #include <string>
 #include <cmath>
 #include <vector>
@@ -43,14 +39,22 @@
 
 //#define DEBUG
 
+//! \brief     Enumeration for the primitive-variable type (usefull for second order, slopes, etc.)
+enum Prim { vecPhases, vecPhasesO2, vecSlopes, restart };
 //! \brief     Enumeration for the axes (X, Y and Z for the axes in the x-, y- and z-direction)
-typedef enum Axis{ X, Y, Z } Axis;
+enum Axis { X, Y, Z };
 //! \brief     Enumeration for the type of mesh (REC: rectilinear, UNS: unstructured, AMR: adaptative mesh refinement)
-typedef enum TypeM { REC, UNS, AMR } TypeM;
+enum TypeM { REC, UNS, AMR };
 //! \brief     Enumeration for the type of data (FLOAT, DOUBLE, INT, CHAR)
-typedef enum TypeData { FLOAT, DOUBLE, INT, CHAR } TypeData;
+enum TypeData { FLOAT, DOUBLE, INT, CHAR };
 //! \brief     Enumeration for the type of geometric object (VERTEX, LINE, PLAN)
-typedef enum TypeGO { VERTEX, LINE, PLAN } TypeGO;
+enum TypeGO { VERTEX, LINE, PLAN };
+//! \brief     Enumeration for the type of boundary (INJ, NONREFLECTING, OUTFLOW, SUBINJ, SYMMETRY, TANK, WALL)
+enum TypeBC { INJ = 4, NONREFLECTING = 1, OUTFLOW = 3, SUBINJ = 7, SYMMETRY = 6, TANK = 5, WALL = 2 };
+//! \brief     Enumeration for the heat type of wall boundary (ADIABATIC, IMPOSEDTEMP, IMPOSEDFLUX)
+enum TypeBCHeat { ADIABATIC = 0, IMPOSEDTEMP = 1, IMPOSEDFLUX = 2};
+//! \brief     Enumeration for the type of relaxation (P, PT, PTMu)
+enum TypeRelax { P = 1, PT = 2, PTMU = 3 };
 //! \brief     Template for the type of the mesh container (std::list for now, but may change to something else if wanted)
 template<class Type>
 using TypeMeshContainer=std::vector<Type>;
@@ -60,20 +64,17 @@ using TypeMeshContainer=std::vector<Type>;
 class Tools
 {
   public:
-    Tools();
     //! \brief     Generic model constructor
     //! \param     numberPhases         number of phases
-    Tools(const int &numberPhases);
+    Tools(const int& numberPhases);
     ~Tools();
 
     //! \brief     Modify the string of characters to uppercase it
     //! \param     string               string of characters
-    static void uppercase(std::string &string);
-	//! \brief     Modify the string of characters to lowercase it
-	//! \param     string               string of characters
-	static void lowercase(std::string& string);
-    //! \brief     Return the value of pi
-    static double pi();
+    static void uppercase(std::string& string);
+    //! \brief     Modify the string of characters to lowercase it
+    //! \param     string               string of characters
+	  static void lowercase(std::string& string);
 
     double m_numberPhases;
     double* ak;
@@ -88,6 +89,8 @@ class Tools
     double* vkStar;
     double* YkStar;
     double* Deltaek;
+    double* Deltapk;           //!< Pressure differences, one for each phase
+    double* zk;                //!< Acoustic impedance of each phase
     Eos** eos;
 
     double* Hk0;

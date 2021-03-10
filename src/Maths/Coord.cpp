@@ -6,6 +6,7 @@
 //       |  `--.  \  `-.  \ `-' /   \  `-) ) |  `--.  | | |)| 
 //       /( __.'   \____\  )---'    )\____/  /( __.'  /(  (_) 
 //      (__)              (_)      (__)     (__)     (__)     
+//      Official webSite: https://code-mphi.github.io/ECOGEN/
 //
 //  This file is part of ECOGEN.
 //
@@ -27,15 +28,12 @@
 //  along with ECOGEN (file LICENSE).  
 //  If not, see <http://www.gnu.org/licenses/>.
 
-//! \file      Coord.cpp
-//! \author    F. Petitpas, K. Schmidmayer, S. Le Martelot, B. Dorschner
-//! \version   1.1
-//! \date      June 5 2019
-
 #include <algorithm>
 #include <cmath>
 #include "Coord.h"
 #include <iostream>
+
+Coord coordBuff;
 
 //*********************************************************************
 
@@ -43,27 +41,13 @@ Coord::Coord() : m_x(0.), m_y(0.), m_z(0.){}
 
 //*********************************************************************
 
-Coord::Coord(const double &x, const double &y, const double &z) :
+Coord::Coord(const double& x, const double& y, const double& z) :
 m_x(x), m_y(y), m_z(z)
 {}
 
 //*********************************************************************
 
 Coord::~Coord(){}
-
-//*********************************************************************
-
-const Coord& Coord::coord() const
-{
-    return defaultCoord;
-}
-
-//*********************************************************************
-
-Coord& Coord::coord()
-{
-    return defaultCoordNonConst;
-}
 
 //*********************************************************************
 
@@ -75,7 +59,7 @@ Coord Coord::defaultCoordNonConst = Coord();
 
 //*********************************************************************
 
-void Coord::setXYZ(const double &x, const double & y, const double &z)
+void Coord::setXYZ(const double& x, const double&  y, const double& z)
 {
   m_x = x;
   m_y = y;
@@ -84,15 +68,15 @@ void Coord::setXYZ(const double &x, const double & y, const double &z)
 
 //*********************************************************************
 
-void Coord::setX(const double &x){m_x = x;}
+void Coord::setX(const double& x){m_x = x;}
 
 //*********************************************************************
 
-void Coord::setY(const double &y){m_y = y;}
+void Coord::setY(const double& y){m_y = y;}
 
 //*********************************************************************
 
-void Coord::setZ(const double &z){m_z = z;}
+void Coord::setZ(const double& z){m_z = z;}
 
 //*********************************************************************
 
@@ -112,56 +96,54 @@ double Coord::squaredNorm() const
 
 Coord Coord::abs() const
 {
-  Coord vec;
-  vec.m_x = std::fabs(m_x);
-  vec.m_y = std::fabs(m_y);
-  vec.m_z = std::fabs(m_z);
-  return vec;
+  coordBuff.m_x = std::fabs(m_x);
+  coordBuff.m_y = std::fabs(m_y);
+  coordBuff.m_z = std::fabs(m_z);
+  return coordBuff;
 }
 
 //*********************************************************************
 
-double Coord::scalar(const Coord &a) const
+double Coord::scalar(const Coord& a) const
 {
   return m_x*a.m_x + m_y*a.m_y + m_z*a.m_z;
 }
 
 //*********************************************************************
 
-Coord Coord::cross(const Coord &a) const
+Coord Coord::cross(const Coord& a) const
 {
-  Coord vec;
-  vec.m_x = m_y*a.m_z - m_z*a.m_y;
-  vec.m_y = m_z*a.m_x - m_x*a.m_z;
-  vec.m_z = m_x*a.m_y - m_y*a.m_x;
-  return vec;
+  coordBuff.m_x = m_y*a.m_z - m_z*a.m_y;
+  coordBuff.m_y = m_z*a.m_x - m_x*a.m_z;
+  coordBuff.m_z = m_x*a.m_y - m_y*a.m_x;
+  return coordBuff;
 }
 
 //*********************************************************************
 
-void Coord::localProjection(const Coord &normal, const Coord &tangent, const Coord &binormal)
+void Coord::localProjection(const Coord& normal, const Coord& tangent, const Coord& binormal)
 {
-  Coord vecteurProjete;
-  vecteurProjete.m_x = this->scalar(normal);
-  vecteurProjete.m_y = this->scalar(tangent);
-  vecteurProjete.m_z = this->scalar(binormal);
-  *this = vecteurProjete;
+  //coordBuff here is the projected vector
+  coordBuff.m_x = this->scalar(normal);
+  coordBuff.m_y = this->scalar(tangent);
+  coordBuff.m_z = this->scalar(binormal);
+  *this = coordBuff;
 }
 
 //*********************************************************************
 
-void Coord::reverseProjection(const Coord &normal, const Coord &tangent, const Coord &binormal)
+void Coord::reverseProjection(const Coord& normal, const Coord& tangent, const Coord& binormal)
 {
-  Coord vecteurProjete;
-  vecteurProjete.m_x = normal.m_x*m_x + tangent.m_x*m_y + binormal.m_x*m_z;
-  vecteurProjete.m_y = normal.m_y*m_x + tangent.m_y*m_y + binormal.m_y*m_z;
-  vecteurProjete.m_z = normal.m_z*m_x + tangent.m_z*m_y + binormal.m_z*m_z;
-  *this = vecteurProjete;
+  //coordBuff here is the projected vector
+  coordBuff.m_x = normal.m_x*m_x + tangent.m_x*m_y + binormal.m_x*m_z;
+  coordBuff.m_y = normal.m_y*m_x + tangent.m_y*m_y + binormal.m_y*m_z;
+  coordBuff.m_z = normal.m_z*m_x + tangent.m_z*m_y + binormal.m_z*m_z;
+  *this = coordBuff;
 }
 
 //*********************************************************************
 
-void Coord::setFromSubtractedVectors(const Coord &a, const Coord &b)
+void Coord::setFromSubtractedVectors(const Coord& a, const Coord& b)
 {
   m_x = b.m_x - a.m_x;
   m_y = b.m_y - a.m_y;
@@ -170,20 +152,19 @@ void Coord::setFromSubtractedVectors(const Coord &a, const Coord &b)
 
 //*********************************************************************
 
-double Coord::scalarProduct(const Coord &v1, const Coord &v2)
+double Coord::scalarProduct(const Coord& v1, const Coord& v2)
 {
   return v1.m_x*v2.m_x + v1.m_y*v2.m_y + v1.m_z*v2.m_z;
 }
 
 //*********************************************************************
 
-Coord Coord::crossProduct(const Coord &v1, const Coord &v2)
+Coord Coord::crossProduct(const Coord& v1, const Coord& v2)
 {
-  Coord vec;
-  vec.m_x = v1.m_y*v2.m_z - v1.m_z*v2.m_y;
-  vec.m_y = v1.m_z*v2.m_x - v1.m_x*v2.m_z;
-  vec.m_z = v1.m_x*v2.m_y - v1.m_y*v2.m_x;
-  return vec;
+  coordBuff.m_x = v1.m_y*v2.m_z - v1.m_z*v2.m_y;
+  coordBuff.m_y = v1.m_z*v2.m_x - v1.m_x*v2.m_z;
+  coordBuff.m_z = v1.m_x*v2.m_y - v1.m_y*v2.m_x;
+  return coordBuff;
 }
 
 //*********************************************************************
@@ -204,7 +185,7 @@ void Coord::normalized()
 
 //*********************************************************************
 
-double Coord::determinant(const Coord &v1, const Coord &v2, const Coord &v3)
+double Coord::determinant(const Coord& v1, const Coord& v2, const Coord& v3)
 {
   double det(0.); 
   det =  (v1.getX()*v2.getY()*v3.getZ()) + (v1.getY()*v2.getZ()*v3.getX()) + (v1.getZ()*v2.getX()*v3.getY());
@@ -214,7 +195,7 @@ double Coord::determinant(const Coord &v1, const Coord &v2, const Coord &v3)
 
 //*********************************************************************
 
-double Coord::cos(const Coord &v1, const Coord &v2)
+double Coord::cos(const Coord& v1, const Coord& v2)
 {
   double cos(0.);
   double nv1(v1.norm()), nv2(v2.norm());
@@ -224,7 +205,7 @@ double Coord::cos(const Coord &v1, const Coord &v2)
 
 //*********************************************************************
 
-Coord Coord::sin(const Coord &v1, const Coord &v2)
+Coord Coord::sin(const Coord& v1, const Coord& v2)
 {
   Coord sin;
   double nv1(v1.norm()), nv2(v2.norm());
@@ -241,7 +222,7 @@ void Coord::printInfo() const
 
 //*******************SURCHARGES OPERATEURS*****************************
 
-Coord& Coord::operator=(const double &scalar)
+Coord& Coord::operator=(const double& scalar)
 {
   m_x = scalar;
   m_y = scalar;
@@ -251,7 +232,7 @@ Coord& Coord::operator=(const double &scalar)
 
 //*********************************************************************
 
-Coord& Coord::operator*= (const double &scalar)
+Coord& Coord::operator*= (const double& scalar)
 {
   m_x *= scalar;
   m_y *= scalar;
@@ -261,7 +242,7 @@ Coord& Coord::operator*= (const double &scalar)
 
 //*********************************************************************
 
-Coord& Coord::operator/= (const double &scalar)
+Coord& Coord::operator/= (const double& scalar)
 {
   m_x /= scalar;
   m_y /= scalar;
@@ -271,7 +252,7 @@ Coord& Coord::operator/= (const double &scalar)
 
 //*********************************************************************
 
-Coord Coord::operator* (const double &scalar) const
+Coord Coord::operator* (const double& scalar) const
 {
   Coord copie(*this);
   copie *= scalar;
@@ -281,7 +262,7 @@ Coord Coord::operator* (const double &scalar) const
 
 //*********************************************************************
 
-Coord Coord::operator/ (const double &scalar) const
+Coord Coord::operator/ (const double& scalar) const
 {
   Coord copie(*this);
   copie /= scalar;
@@ -301,7 +282,7 @@ Coord& Coord::operator+= (const Coord& a)
 
 //*********************************************************************
 
-Coord& Coord::operator-= (const Coord &a)
+Coord& Coord::operator-= (const Coord& a)
 {
   m_x -= a.m_x;
   m_y -= a.m_y;
@@ -312,21 +293,21 @@ Coord& Coord::operator-= (const Coord &a)
 //*********************************************************************
 //Surcharge operateur externe a la classe car prends deux arguments
 
-Coord operator* (const double &scalar, const Coord &a)
+Coord operator* (const double& scalar, const Coord& a)
 {
   Coord copie(a);
   copie *= scalar;
   return copie;
 }
 
-Coord operator+ (const Coord &a, const Coord &b)
+Coord operator+ (const Coord& a, const Coord& b)
 {
   Coord copie(a);
   copie += b;
   return copie;
 }
 
-Coord operator- (const Coord &a, const Coord &b)
+Coord operator- (const Coord& a, const Coord& b)
 {
   Coord copie(a);
   copie -= b;

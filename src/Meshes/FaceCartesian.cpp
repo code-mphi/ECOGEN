@@ -6,6 +6,7 @@
 //       |  `--.  \  `-.  \ `-' /   \  `-) ) |  `--.  | | |)| 
 //       /( __.'   \____\  )---'    )\____/  /( __.'  /(  (_) 
 //      (__)              (_)      (__)     (__)     (__)     
+//      Official webSite: https://code-mphi.github.io/ECOGEN/
 //
 //  This file is part of ECOGEN.
 //
@@ -27,11 +28,6 @@
 //  along with ECOGEN (file LICENSE).  
 //  If not, see <http://www.gnu.org/licenses/>.
 
-//! \file      FaceCartesian.cpp
-//! \author    F. Petitpas, K. Schmidmayer
-//! \version   1.1
-//! \date      June 5 2019
-
 #include "FaceCartesian.h"
 
 //***********************************************************************
@@ -44,14 +40,14 @@ FaceCartesian::~FaceCartesian(){}
 
 //***********************************************************************
 
-void FaceCartesian::setSurface(const double &surface)
+void FaceCartesian::setSurface(const double& surface)
 {
   m_surface = surface;
 }
 
 //***********************************************************************
 
-void FaceCartesian::initializeAutres(const double &surface, const Coord &normal, const Coord &tangent, const Coord &binormal)
+void FaceCartesian::initializeAutres(const double& surface, const Coord& normal, const Coord& tangent, const Coord& binormal)
 {
   m_surface = surface;
   m_normal = normal;
@@ -61,42 +57,42 @@ void FaceCartesian::initializeAutres(const double &surface, const Coord &normal,
 
 //***********************************************************************
 
-void FaceCartesian::setPos(const double &X, const double &Y, const double &Z)
+void FaceCartesian::setPos(const double& X, const double& Y, const double& Z)
 {
   m_position.setXYZ(X, Y, Z);
 }
 
 //***********************************************************************
 
-void FaceCartesian::setNormal(const double &X, const double &Y, const double &Z)
+void FaceCartesian::setNormal(const double& X, const double& Y, const double& Z)
 {
   m_normal.setXYZ(X, Y, Z);
 }
 
 //***********************************************************************
 
-void FaceCartesian::setTangent(const double &X, const double &Y, const double &Z)
+void FaceCartesian::setTangent(const double& X, const double& Y, const double& Z)
 {
   m_tangent.setXYZ(X, Y, Z);
 }
 
 //***********************************************************************
 
-void FaceCartesian::setBinormal(const double &X, const double &Y, const double &Z)
+void FaceCartesian::setBinormal(const double& X, const double& Y, const double& Z)
 {
   m_binormal.setXYZ(X, Y, Z);
 }
 
 //****************************************************************************
 
-void FaceCartesian::setSize(const double &sizeX, const double &sizeY, const double &sizeZ)
+void FaceCartesian::setSize(const double& sizeX, const double& sizeY, const double& sizeZ)
 {
   m_size.setXYZ(sizeX, sizeY, sizeZ);
 }
 
 //****************************************************************************
 
-void FaceCartesian::setSize(const Coord &size)
+void FaceCartesian::setSize(const Coord& size)
 {
   m_size = size;
 }

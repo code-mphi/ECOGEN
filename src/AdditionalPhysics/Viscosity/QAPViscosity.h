@@ -6,6 +6,7 @@
 //       |  `--.  \  `-.  \ `-' /   \  `-) ) |  `--.  | | |)| 
 //       /( __.'   \____\  )---'    )\____/  /( __.'  /(  (_) 
 //      (__)              (_)      (__)     (__)     (__)     
+//      Official webSite: https://code-mphi.github.io/ECOGEN/
 //
 //  This file is part of ECOGEN.
 //
@@ -30,11 +31,6 @@
 #ifndef QAPVISCOSITY_H
 #define QAPVISCOSITY_H
 
-//! \file      QAPViscosity.h
-//! \author    K. Schmidmayer
-//! \version   1.1
-//! \date      June 5 2019
-
 #include "../QuantitiesAddPhys.h"
 
 //! \class     QAPViscosity
@@ -42,18 +38,17 @@
 class QAPViscosity : public QuantitiesAddPhys
 {
     public:
-    QAPViscosity();
     QAPViscosity(AddPhys* addPhys);
     virtual ~QAPViscosity();
 
     virtual void computeQuantities(Cell* cell);
 
     //Accessors
-    virtual void setGrad(const Coord &grad, int num = -1);                       //1:U, 2:V, 3:W
-    virtual const Coord& getGrad(int num = -1) const { return m_grads[num-1]; }; //1:U, 2:V, 3:W
+    virtual void setGrad(const Coord& grad, const int& num = -1);                       //1:U, 2:V, 3:W
+    virtual const Coord& getGrad(const int& num = -1) const { return m_grads[num-1]; }; //1:U, 2:V, 3:W
 
     protected:
-    std::vector<Coord> m_grads;                   //!< Gradient vectors of the velocities of the cell in x-, y- and z-directions       
+    std::vector<Coord> m_grads;    //!< Gradient vectors of the velocities of the cell in x-, y- and z-directions (ex: m_grads[0] = (du/dx, du/dy, du/dz))
 
     private:
 };

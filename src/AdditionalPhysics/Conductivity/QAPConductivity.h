@@ -6,6 +6,7 @@
 //       |  `--.  \  `-.  \ `-' /   \  `-) ) |  `--.  | | |)| 
 //       /( __.'   \____\  )---'    )\____/  /( __.'  /(  (_) 
 //      (__)              (_)      (__)     (__)     (__)     
+//      Official webSite: https://code-mphi.github.io/ECOGEN/
 //
 //  This file is part of ECOGEN.
 //
@@ -30,11 +31,6 @@
 #ifndef QAPCONDUCTIVITY_H
 #define QAPCONDUCTIVITY_H
 
-//! \file      QAPConductivity.h
-//! \author    K. Schmidmayer
-//! \version   1.1
-//! \date      June 5 2019
-
 #include "../QuantitiesAddPhys.h"
 
 //! \class     QAPConductivity
@@ -42,15 +38,14 @@
 class QAPConductivity : public QuantitiesAddPhys
 {
     public:
-    QAPConductivity();
-    QAPConductivity(AddPhys* addPhys, const int &numberPhases);
+    QAPConductivity(AddPhys* addPhys, const int& numberPhases);
     virtual ~QAPConductivity();
 
     virtual void computeQuantities(Cell* cell);
 
     //Accessors
-    virtual void setGrad(const Coord &grad, int num = -1);
-    virtual const Coord& getGrad(int num = -1) const { return m_gradTk[num]; };
+    virtual void setGrad(const Coord& grad, const int& num = -1);
+    virtual const Coord& getGrad(const int& num = -1) const { return m_gradTk[num]; };
 
     protected:
     std::vector<Coord> m_gradTk;                  //!< Vector of the temperature gradient of each phase of the cell

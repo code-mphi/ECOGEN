@@ -6,6 +6,7 @@
 //       |  `--.  \  `-.  \ `-' /   \  `-) ) |  `--.  | | |)| 
 //       /( __.'   \____\  )---'    )\____/  /( __.'  /(  (_) 
 //      (__)              (_)      (__)     (__)     (__)     
+//      Official webSite: https://code-mphi.github.io/ECOGEN/
 //
 //  This file is part of ECOGEN.
 //
@@ -30,11 +31,6 @@
 #ifndef HEADERINPUTOUTPUT_H
 #define HEADERINPUTOUTPUT_H
 
-//! \file      HeaderInputOutput.h
-//! \author    F. Petitpas, K. Schmidmayer
-//! \version   1.0
-//! \date      June 04 2018
-
 //Input
 //#include "Input.h"
 
@@ -44,6 +40,7 @@
 #include "OutputCutGNU.h"
 #include "OutputProbeGNU.h"
 #include "OutputGlobalGNU.h"
+#include "OutputBoundaryFluxGNU.h"
 //#include "OutputCutXML.h"
 
 //Ajouter ici entetes des nouvelles entrees sorties

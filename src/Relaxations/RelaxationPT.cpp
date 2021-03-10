@@ -6,6 +6,7 @@
 //       |  `--.  \  `-.  \ `-' /   \  `-) ) |  `--.  | | |)| 
 //       /( __.'   \____\  )---'    )\____/  /( __.'  /(  (_) 
 //      (__)              (_)      (__)     (__)     (__)     
+//      Official webSite: https://code-mphi.github.io/ECOGEN/
 //
 //  This file is part of ECOGEN.
 //
@@ -27,11 +28,6 @@
 //  along with ECOGEN (file LICENSE).  
 //  If not, see <http://www.gnu.org/licenses/>.
 
-//! \file      RelaxationPT.cpp
-//! \author    F. Petitpas
-//! \version   1.0
-//! \date      October 16 2018
-
 #include "RelaxationPT.h"
 
 //***********************************************************************
@@ -44,7 +40,7 @@ RelaxationPT::~RelaxationPT(){}
 
 //***********************************************************************
 
-void RelaxationPT::stiffRelaxation(Cell *cell, const int &numberPhases, Prim type) const
+void RelaxationPT::relaxation(Cell* cell, const int& numberPhases, const double& /*dt*/, Prim type)
 {
   //Is the pressure-Temperature relaxation procedure necessary?
   //If alpha = 0 is activated, a test is done to know if the relaxation procedure is necessary or not
@@ -58,9 +54,9 @@ void RelaxationPT::stiffRelaxation(Cell *cell, const int &numberPhases, Prim typ
 
   if (relax) {
     //Restrictions //FP//TODO// to improve
-    if (numberPhases > 2) Errors::errorMessage("More than two phases not permitted in RelaxationPT::stiffRelaxation");
+    if (numberPhases > 2) Errors::errorMessage("More than two phases not permitted in RelaxationPT::relaxation");
     for (int k = 0; k < numberPhases; k++) {
-      if (cell->getPhase(k, type)->getEos()->getType() != "IG" && cell->getPhase(k, type)->getEos()->getType() != "SG") { Errors::errorMessage("Only IG and SG permitted in RelaxationPT::stiffRelaxation"); }
+      if (cell->getPhase(k, type)->getEos()->getType() != "IG" && cell->getPhase(k, type)->getEos()->getType() != "SG") { Errors::errorMessage("Only IG and SG permitted in RelaxationPT::relaxation"); }
     }
        
     //Relaxaed pressure for 2 phases (SG or IG EOS)
@@ -86,7 +82,7 @@ void RelaxationPT::stiffRelaxation(Cell *cell, const int &numberPhases, Prim typ
 
 //***********************************************************************
 
-double RelaxationPT::analyticalPressure(Cell *cell, const int &numberPhases, Prim type) const
+double RelaxationPT::analyticalPressure(Cell* cell, const int& numberPhases, Prim type) const
 {
   //Restrictions
   if (numberPhases > 2) Errors::errorMessage("More than two phases not permitted in RelaxationPT::analyticalPressure");
@@ -120,7 +116,7 @@ double RelaxationPT::analyticalPressure(Cell *cell, const int &numberPhases, Pri
 
 //***********************************************************************
 
-double RelaxationPT::analyticalTemperature(double pressure, Cell *cell, const int &numberPhases, Prim type) const
+double RelaxationPT::analyticalTemperature(double pressure, Cell* cell, const int& numberPhases, Prim type) const
 {
   //Restrictions
   for (int k = 0; k < numberPhases; k++) {

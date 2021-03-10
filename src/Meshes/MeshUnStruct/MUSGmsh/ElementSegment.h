@@ -6,6 +6,7 @@
 //       |  `--.  \  `-.  \ `-' /   \  `-) ) |  `--.  | | |)| 
 //       /( __.'   \____\  )---'    )\____/  /( __.'  /(  (_) 
 //      (__)              (_)      (__)     (__)     (__)     
+//      Official webSite: https://code-mphi.github.io/ECOGEN/
 //
 //  This file is part of ECOGEN.
 //
@@ -30,11 +31,6 @@
 #ifndef ELEMENTSEGMENT_H
 #define ELEMENTSEGMENT_H
 
-//! \file      ElementSegment.h
-//! \author    F. Petitpas
-//! \version   1.0
-//! \date      December 20 2017
-
 #include "ElementNS.h"
 #include "FacePoint.h"
 #include "FaceSegment.h"
@@ -45,16 +41,16 @@ public:
   ElementSegment();
   virtual ~ElementSegment();
 
-  virtual void construitFaces(const Coord *noeuds, FaceNS **faces, int &indexMaxFaces, int** facesTemp, int* sommeNoeudsTemp); //Plus rapide  
-  virtual void construitFacesSimplifie(int &iMax, int** facesTemp, int* sommeNoeudsTemp);
-  virtual void attributFaceLimite(const Coord *noeuds, FaceNS **faces, const int &indexMaxFaces);
-  virtual void attributFaceCommunicante(const Coord *noeuds, FaceNS **faces, const int &indexMaxFaces, const int &numberNoeudsInternes);
-  virtual int compteFaceCommunicante(std::vector<int*> &faces, std::vector<int> &sommeNoeudsTemp);
-  virtual int compteFaceCommunicante(int &iMax, int **faces, int *sommeNoeudsTemp);
+  virtual void construitFaces(const Coord* noeuds, FaceNS** faces, int& indexMaxFaces, int** facesTemp, int* sommeNoeudsTemp); //Plus rapide  
+  virtual void construitFacesSimplifie(int& iMax, int** facesTemp, int* sommeNoeudsTemp);
+  virtual void attributFaceLimite(FaceNS** faces, const int& indexMaxFaces);
+  virtual void attributFaceCommunicante(FaceNS** faces, const int& indexMaxFaces, const int& numberNoeudsInternes);
+  virtual int compteFaceCommunicante(std::vector<int*>& faces, std::vector<int>& sommeNoeudsTemp);
+  virtual int compteFaceCommunicante(int& iMax, int** faces, int* sommeNoeudsTemp);
 
 private:
-  virtual void computeVolume(const Coord *noeuds);
-  virtual void computeLCFL(const Coord *noeuds);
+  virtual void computeVolume(const Coord* noeuds);
+  virtual void computeLCFL(const Coord* noeuds);
 
   static const int TYPEGMSH;
   static const int NOMBRENOEUDS;

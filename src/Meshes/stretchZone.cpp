@@ -6,6 +6,7 @@
 //       |  `--.  \  `-.  \ `-' /   \  `-) ) |  `--.  | | |)| 
 //       /( __.'   \____\  )---'    )\____/  /( __.'  /(  (_) 
 //      (__)              (_)      (__)     (__)     (__)     
+//      Official webSite: https://code-mphi.github.io/ECOGEN/
 //
 //  This file is part of ECOGEN.
 //
@@ -27,18 +28,9 @@
 //  along with ECOGEN (file LICENSE).  
 //  If not, see <http://www.gnu.org/licenses/>.
 
-//! \file      stretchZone.h
-//! \author    F. Petitpas
-//! \version   1.0
-//! \date      September 06 2018
-
 #include "stretchZone.h"
 #include "../Errors.h"
 #include "../Parallel/Parallel.h"
-
-//***********************************************************************
-
-stretchZone::stretchZone() {}
 
 //***********************************************************************
 
@@ -52,7 +44,7 @@ stretchZone::~stretchZone() {}
 
 //***********************************************************************
 
-int stretchZone::stretching(std::vector<double> &dX, std::vector<double> &posX)
+int stretchZone::stretching(std::vector<double>& dX, std::vector<double>& posX)
 {
   double dX0((m_endAt - m_startAt) / m_numberCells);
   if (std::fabs(m_factor - 1.) < 1e-6) {
@@ -77,7 +69,7 @@ int stretchZone::stretching(std::vector<double> &dX, std::vector<double> &posX)
 
 //***********************************************************************
 
-int stretchZone::verifyStretching(std::vector<stretchZone> &tabStretch, const double l, std::string fileName)
+int stretchZone::verifyStretching(std::vector<stretchZone>& tabStretch, const double l, std::string fileName)
 {
   if (tabStretch.size() == 0) return 0;
   try {

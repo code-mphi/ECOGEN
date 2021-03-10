@@ -6,6 +6,7 @@
 //       |  `--.  \  `-.  \ `-' /   \  `-) ) |  `--.  | | |)| 
 //       /( __.'   \____\  )---'    )\____/  /( __.'  /(  (_) 
 //      (__)              (_)      (__)     (__)     (__)     
+//      Official webSite: https://code-mphi.github.io/ECOGEN/
 //
 //  This file is part of ECOGEN.
 //
@@ -27,11 +28,6 @@
 //  along with ECOGEN (file LICENSE).  
 //  If not, see <http://www.gnu.org/licenses/>.
 
-//! \file      OutputXML.cpp
-//! \author    F. Petitpas, K. Schmidmayer
-//! \version   1.1
-//! \date      June 5 2019
-
 #include "OutputXML.h"
 #include "../Run.h"
 
@@ -39,11 +35,7 @@ using namespace tinyxml2;
 
 //***********************************************************************
 
-OutputXML::OutputXML(){}
-
-//***********************************************************************
-
-OutputXML::OutputXML(std::string casTest, std::string run, XMLElement *element, std::string fileName, Input *entree) :
+OutputXML::OutputXML(std::string casTest, std::string run, XMLElement* element, std::string fileName, Input *entree) :
   Output(casTest, run, element, fileName, entree)
 {}
 
@@ -82,7 +74,7 @@ void OutputXML::prepareSortieSpecifique()
 
 //***********************************************************************
 
-void OutputXML::ecritSolution(Mesh* mesh, std::vector<Cell *> *cellsLvl)
+void OutputXML::ecritSolution(Mesh* mesh, std::vector<Cell*>* cellsLvl)
 {
   try {
     //Ecriture des fichiers de sortie au format XML
@@ -96,7 +88,7 @@ void OutputXML::ecritSolution(Mesh* mesh, std::vector<Cell *> *cellsLvl)
 
 //***********************************************************************
 
-void OutputXML::readResults(Mesh *mesh, std::vector<Cell *> *cellsLvl)
+void OutputXML::readResults(Mesh *mesh, std::vector<Cell*>* cellsLvl)
 {
   try {
     //1) Parsing XML file
@@ -108,7 +100,7 @@ void OutputXML::readResults(Mesh *mesh, std::vector<Cell *> *cellsLvl)
     
     //2) Entering XML file according to mesh
     //--------------------------------------
-    XMLElement *nodeVTK, *nodeGrid, *nodePiece, *nodeCellData;
+    XMLElement* nodeVTK, *nodeGrid, *nodePiece, *nodeCellData;
     nodeVTK = xmlMain.FirstChildElement("VTKFile");
     if (nodeVTK == NULL) throw ErrorXMLRacine("VTKFile", fileName.str(), __FILE__, __LINE__);
     //Depend on mesh
@@ -143,7 +135,7 @@ void OutputXML::readResults(Mesh *mesh, std::vector<Cell *> *cellsLvl)
 
 //***********************************************************************
 
-void OutputXML::ReadDonneesPhysiquesXML(Mesh *mesh, std::vector<Cell *> *cellsLvl, XMLElement *nodeCellData, std::string fileName)
+void OutputXML::ReadDonneesPhysiquesXML(Mesh *mesh, std::vector<Cell*>* cellsLvl, XMLElement* nodeCellData, std::string fileName)
 {
   int totalCellsLvlSize(0);
   for (int lvl = 0; lvl <= mesh->getLvlMax(); lvl++) {
@@ -151,7 +143,7 @@ void OutputXML::ReadDonneesPhysiquesXML(Mesh *mesh, std::vector<Cell *> *cellsLv
   }
   std::vector<double> scalarDataSet(totalCellsLvlSize);
   std::vector<double> vectorDataSet(3 * totalCellsLvlSize);
-  XMLElement *nodeData;
+  XMLElement* nodeData;
 
   try {
 
@@ -165,14 +157,14 @@ void OutputXML::ReadDonneesPhysiquesXML(Mesh *mesh, std::vector<Cell *> *cellsLv
       //Reading scalars
       for (int var = 1; var <= m_cellRef.getPhase(phase)->getNumberScalars(); var++) {
         std::istringstream data(nodeData->GetText());
-        this->getJeuDonnees(data, scalarDataSet, DOUBLE);
+        this->getJeuDonnees(data, scalarDataSet);
         mesh->setDataSet(scalarDataSet, cellsLvl, var, phase);
         nodeData = nodeData->NextSiblingElement("DataArray");
       }
       //Reading vectors
       for (int var = 1; var <= m_cellRef.getPhase(phase)->getNumberVectors(); var++) {
         std::istringstream data(nodeData->GetText());
-        this->getJeuDonnees(data, vectorDataSet, DOUBLE);
+        this->getJeuDonnees(data, vectorDataSet);
         mesh->setDataSet(vectorDataSet, cellsLvl, -var, phase);
         nodeData = nodeData->NextSiblingElement("DataArray");
       }
@@ -185,14 +177,14 @@ void OutputXML::ReadDonneesPhysiquesXML(Mesh *mesh, std::vector<Cell *> *cellsLv
       //Reading scalars
       for (int var = 1; var <= m_cellRef.getMixture()->getNumberScalars(); var++) {
         std::istringstream data(nodeData->GetText());
-        this->getJeuDonnees(data, scalarDataSet, DOUBLE);
+        this->getJeuDonnees(data, scalarDataSet);
         mesh->setDataSet(scalarDataSet, cellsLvl, var, mixture);
         nodeData = nodeData->NextSiblingElement("DataArray");
       }
       //Reading vectors
       for (int var = 1; var <= m_cellRef.getMixture()->getNumberVectors(); var++) {
         std::istringstream data(nodeData->GetText());
-        this->getJeuDonnees(data, vectorDataSet, DOUBLE);
+        this->getJeuDonnees(data, vectorDataSet);
         mesh->setDataSet(vectorDataSet, cellsLvl, -var, mixture);
         nodeData = nodeData->NextSiblingElement("DataArray");
       }
@@ -203,7 +195,7 @@ void OutputXML::ReadDonneesPhysiquesXML(Mesh *mesh, std::vector<Cell *> *cellsLv
     int transport = -2;
     for (int var = 1; var <= m_run->m_numberTransports; var++) {
       std::istringstream data(nodeData->GetText());
-      this->getJeuDonnees(data, scalarDataSet, DOUBLE);
+      this->getJeuDonnees(data, scalarDataSet);
       mesh->setDataSet(scalarDataSet, cellsLvl, var, transport);
       nodeData = nodeData->NextSiblingElement("DataArray");
     }
@@ -213,7 +205,7 @@ void OutputXML::ReadDonneesPhysiquesXML(Mesh *mesh, std::vector<Cell *> *cellsLv
     if (mesh->getType() == AMR) {
       int xi = -3;
       std::istringstream data(nodeData->GetText());
-      this->getJeuDonnees(data, scalarDataSet, DOUBLE);
+      this->getJeuDonnees(data, scalarDataSet);
       mesh->setDataSet(scalarDataSet, cellsLvl, 1, xi);
       nodeData = nodeData->NextSiblingElement("DataArray");
     }
@@ -269,7 +261,7 @@ std::string OutputXML::creationNameFichierXML(const char* name, Mesh *mesh, int 
 
 //***********************************************************************
 
-void OutputXML::ecritSolutionXML(Mesh* mesh, std::vector<Cell *> *cellsLvl)
+void OutputXML::ecritSolutionXML(Mesh* mesh, std::vector<Cell*>* cellsLvl)
 {
   std::ofstream fileStream;
 
@@ -286,7 +278,7 @@ void OutputXML::ecritSolutionXML(Mesh* mesh, std::vector<Cell *> *cellsLvl)
       //-----------------------
       switch (mesh->getType()) {
       case REC:
-        ecritMeshRectilinearXML(mesh, cellsLvl, fileStream); break;
+        ecritMeshRectilinearXML(mesh, fileStream); break;
       case UNS:
         ecritMeshUnstructuredXML(mesh, cellsLvl, fileStream); break;
       case AMR:
@@ -367,7 +359,7 @@ void OutputXML::ecritCollectionXML(Mesh *mesh)
 
 //***********************************************************************
 
-void OutputXML::ecritDonneesPhysiquesXML(Mesh *mesh, std::vector<Cell *> *cellsLvl, std::ofstream &fileStream, bool parallel)
+void OutputXML::ecritDonneesPhysiquesXML(Mesh *mesh, std::vector<Cell*>* cellsLvl, std::ofstream &fileStream, bool parallel)
 {
   std::vector<double> jeuDonnees;
 
@@ -497,7 +489,7 @@ void OutputXML::ecritDonneesPhysiquesXML(Mesh *mesh, std::vector<Cell *> *cellsL
     fileStream << "        <" << prefix << "DataArray type=\"Float64\" Name=\"absoluteVelocityMRF\" NumberOfComponents=\"3\"";
     if (!parallel) {
       fileStream << " format=\"" << format << "\">" << std::endl;
-      mesh->extractAbsVeloxityMRF(cellsLvl, jeuDonnees, m_run->m_sources[m_run->m_MRF]);
+      mesh->extractAbsVelocityMRF(cellsLvl, jeuDonnees, m_run->m_sources[m_run->m_MRF]);
       this->ecritJeuDonnees(jeuDonnees, fileStream, DOUBLE);
       fileStream << std::endl;
       fileStream << "        </" << prefix << "DataArray>" << std::endl;
@@ -541,7 +533,7 @@ void OutputXML::ecritDonneesPhysiquesXML(Mesh *mesh, std::vector<Cell *> *cellsL
 
 //***********************************************************************
 
-void OutputXML::ecritMeshRectilinearXML(Mesh *mesh, std::vector<Cell *> *cellsLvl, std::ofstream &fileStream, bool parallel)
+void OutputXML::ecritMeshRectilinearXML(Mesh* mesh, std::ofstream& fileStream, bool parallel)
 {
   std::vector<double> jeuDonnees;
 
@@ -555,11 +547,11 @@ void OutputXML::ecritMeshRectilinearXML(Mesh *mesh, std::vector<Cell *> *cellsLv
   if (!m_ecritBinaire) fileStream << "LittleEndian\">" << std::endl;
   else fileStream << m_endianMode.c_str() << "\">" << std::endl;
   if (!parallel) {
-    fileStream << "  <RectilinearGrid WholeExtent=\"" << mesh->recupereChaineExtent(rankCpu) << "\">" << std::endl;
-    fileStream << "    <Piece Extent=\"" << mesh->recupereChaineExtent(rankCpu) << "\">" << std::endl;
+    fileStream << "  <RectilinearGrid WholeExtent=\"" << mesh->recupereChaineExtent() << "\">" << std::endl;
+    fileStream << "    <Piece Extent=\"" << mesh->recupereChaineExtent() << "\">" << std::endl;
   }
   else {
-    fileStream << "  <PRectilinearGrid WholeExtent = \"" << mesh->recupereChaineExtent(rankCpu, true) << "\" GhostLevel=\"0\">" << std::endl;
+    fileStream << "  <PRectilinearGrid WholeExtent = \"" << mesh->recupereChaineExtent(true) << "\" GhostLevel=\"0\">" << std::endl;
   }
   
   //1) Ecriture des Coordonnees des noeuds
@@ -571,7 +563,7 @@ void OutputXML::ecritMeshRectilinearXML(Mesh *mesh, std::vector<Cell *> *cellsLv
     if (!m_ecritBinaire) { fileStream << "format=\"ascii\">" << std::endl << "          "; }
     else { fileStream << "format=\"binary\">" << std::endl; }
     jeuDonnees.clear();
-    mesh->recupereCoord(cellsLvl, jeuDonnees, X);
+    mesh->recupereCoord(jeuDonnees, X);
     ecritJeuDonnees(jeuDonnees, fileStream, DOUBLE);
     fileStream << std::endl;
     fileStream << "        </" << prefix << "DataArray>" << std::endl;
@@ -583,7 +575,7 @@ void OutputXML::ecritMeshRectilinearXML(Mesh *mesh, std::vector<Cell *> *cellsLv
     if (!m_ecritBinaire) { fileStream << "format=\"ascii\">" << std::endl << "          "; }
     else { fileStream << "format=\"binary\">" << std::endl; }
     jeuDonnees.clear();
-    mesh->recupereCoord(cellsLvl, jeuDonnees, Y);
+    mesh->recupereCoord(jeuDonnees, Y);
     ecritJeuDonnees(jeuDonnees, fileStream, DOUBLE);
     fileStream << std::endl;
     fileStream << "        </" << prefix << "DataArray>" << std::endl;
@@ -595,7 +587,7 @@ void OutputXML::ecritMeshRectilinearXML(Mesh *mesh, std::vector<Cell *> *cellsLv
     if (!m_ecritBinaire) { fileStream << "format=\"ascii\">" << std::endl << "          "; }
     else { fileStream << "format=\"binary\">" << std::endl; }
     jeuDonnees.clear();
-    mesh->recupereCoord(cellsLvl, jeuDonnees, Z);
+    mesh->recupereCoord(jeuDonnees, Z);
     ecritJeuDonnees(jeuDonnees, fileStream, DOUBLE);
     fileStream << std::endl;
     fileStream << "        </" << prefix << "DataArray>" << std::endl;
@@ -606,7 +598,7 @@ void OutputXML::ecritMeshRectilinearXML(Mesh *mesh, std::vector<Cell *> *cellsLv
 
 //***********************************************************************
 
-void OutputXML::ecritMeshUnstructuredXML(Mesh *mesh, std::vector<Cell *> *cellsLvl, std::ofstream &fileStream, bool parallel)
+void OutputXML::ecritMeshUnstructuredXML(Mesh *mesh, std::vector<Cell*>* cellsLvl, std::ofstream &fileStream, bool parallel)
 {
   std::vector<double> jeuDonnees;
 
@@ -718,7 +710,7 @@ void OutputXML::ecritFinFichierUnstructuredXML(std::ofstream &fileStream, bool p
 
 //***********************************************************************
 
-// void OutputXML::ecritMeshPolyDataXML(Mesh *mesh, vector<Cell *> *cellsLvl, std::ofstream &fileStream, const int &lvl, bool parallel)
+// void OutputXML::ecritMeshPolyDataXML(Mesh *mesh, vector<Cell*>* cellsLvl, std::ofstream &fileStream, const int& lvl, bool parallel)
 // {
 //   vector<double> jeuDonnees;
 
@@ -801,7 +793,7 @@ void OutputXML::ecritFinFichierUnstructuredXML(std::ofstream &fileStream, bool p
 
 // //***********************************************************************
 
-// void OutputXML::ecritFichierParallelXML(Mesh *mesh, vector<Cell *> *cellsLvl)
+// void OutputXML::ecritFichierParallelXML(Mesh *mesh, vector<Cell*>* cellsLvl)
 // {
 //   ofstream fileStream;
 //   stringstream num;
@@ -840,7 +832,7 @@ void OutputXML::ecritFinFichierUnstructuredXML(std::ofstream &fileStream, bool p
 //       //------------------------------
 //       switch (mesh->getType()) {
 //       case REC:
-//         ecritMeshRectilinearXML(mesh, cellsLvl, fileStream, parallel); break;
+//         ecritMeshRectilinearXML(mesh, fileStream, parallel); break;
 //       case UNS:
 //         ecritMeshUnstructuredXML(mesh, cellsLvl, fileStream, lvl, parallel); break;
 //       case AMR:
@@ -867,7 +859,7 @@ void OutputXML::ecritFinFichierUnstructuredXML(std::ofstream &fileStream, bool p
 //         switch (mesh->getType()) {
 //         case REC:
 //           fichTemp << ".vtr";
-//           fileStream << "    <Piece Extent=\"" << mesh->recupereChaineExtent(p) << "\" Source=\"" << fichTemp.str() << "\"/>" << endl;
+//           fileStream << "    <Piece Extent=\"" << mesh->recupereChaineExtent() << "\" Source=\"" << fichTemp.str() << "\"/>" << endl;
 //           break;
 //         case UNS:
 //           fichTemp << ".vtu";

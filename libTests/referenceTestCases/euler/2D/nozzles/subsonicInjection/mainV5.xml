@@ -1,0 +1,15 @@
+<?xml version = "1.0" encoding = "UTF-8" standalone = "yes"?>
+<computationParam>
+	<run>euler2DnozzleSubsonicInjection</run>
+	<outputMode format="XML" binary="false"/>
+	<timeControlMode iterations="false">
+		<iterations number="100" iterFreq="10"/>
+		<physicalTime totalTime="1." timeFreq="0.25"/>
+	</timeControlMode>
+	<computationControl CFL="0.6"/>
+
+    <recordBoundaryFlux name="outflow">
+      <boundary number="4" flux="massflow"/>
+      <timeControl acqFreq="0.25"/>
+    </recordBoundaryFlux>
+</computationParam>

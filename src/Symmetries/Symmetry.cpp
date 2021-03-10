@@ -6,6 +6,7 @@
 //       |  `--.  \  `-.  \ `-' /   \  `-) ) |  `--.  | | |)| 
 //       /( __.'   \____\  )---'    )\____/  /( __.'  /(  (_) 
 //      (__)              (_)      (__)     (__)     (__)     
+//      Official webSite: https://code-mphi.github.io/ECOGEN/
 //
 //  This file is part of ECOGEN.
 //
@@ -26,11 +27,6 @@
 //  You should have received a copy of the GNU General Public License
 //  along with ECOGEN (file LICENSE).  
 //  If not, see <http://www.gnu.org/licenses/>.
-
-//! \file      Symmetry.cpp
-//! \author    K. Schmidmayer
-//! \version   1.0
-//! \date      December 20 2017
 
 #include "Symmetry.h"
 

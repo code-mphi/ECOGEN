@@ -6,6 +6,7 @@
 //       |  `--.  \  `-.  \ `-' /   \  `-) ) |  `--.  | | |)| 
 //       /( __.'   \____\  )---'    )\____/  /( __.'  /(  (_) 
 //      (__)              (_)      (__)     (__)     (__)     
+//      Official webSite: https://code-mphi.github.io/ECOGEN/
 //
 //  This file is part of ECOGEN.
 //
@@ -27,11 +28,7 @@
 //  along with ECOGEN (file LICENSE).
 //  If not, see <http://www.gnu.org/licenses/>.
 
-//! \file      main.cpp
-//! \author    F. Petitpas, K. Schmidmayer, S. Le Martelot
-//! \version   1.1
-//! \date      June 5 2019
-
+#include "Config.h"
 #include "Run.h"
 #include "Errors.h"
 #include "libTierces/tinyxml2.h"
@@ -49,9 +46,10 @@ int main(int argc, char* argv[])
   Run* run(0);
 
   //Error redirection
-  std::ofstream Out("Error.txt");
+  std::ofstream Out("Error.out");
   std::streambuf* strBackup(std::cerr.rdbuf());
   std::cerr.rdbuf(Out.rdbuf());
+  int errorCode(0);
 
   //Parallel initialization
   MPI_Init(&argc, &argv);
@@ -63,66 +61,85 @@ int main(int argc, char* argv[])
 
   //Parsing of the XML file by the tinyxml2 library
   //-----------------------------------------------
-  std::stringstream fileName("ECOGEN.xml");
-  tinyxml2::XMLDocument xmlEcogen;
-  XMLError error(xmlEcogen.LoadFile(fileName.str().c_str())); //The file is parse here
-  //Find the root of the XML folder
-  XMLNode *xmlNode = xmlEcogen.FirstChildElement("ecogen");
-
-  //Loop on the test cases to execute
-  //---------------------------------
-  int numTestCase(0);
-  XMLElement *elementTestCase = xmlNode->FirstChildElement("testCase");
-  while (elementTestCase != NULL) {
-    try {
-      XMLNode* xmlNode2 = elementTestCase->FirstChild();
-      if (xmlNode2 == NULL) throw ErrorXMLElement("testCase", fileName.str(), __FILE__, __LINE__);
-      XMLText* xmlText = xmlNode2->ToText();
-      if (xmlText == NULL) throw ErrorXMLElement("testCase", fileName.str(), __FILE__, __LINE__);
-
-      //1) Creation of the test case
-      numTestCase++;
-      run = new Run(xmlText->Value(), numTestCase);
-      MPI_Barrier(MPI_COMM_WORLD);
-      if (rankCpu == 0) {
-        std::cout << "           EXECUTION OF THE TEST CASE NUMBER: " << numTestCase << std::endl;
-        std::cout << "************************************************************" << std::endl;
-        std::cout << "T" << numTestCase << " | Test case: " << xmlText->Value() << std::endl;
-      }
-      MPI_Barrier(MPI_COMM_WORLD);
-      //2) Execution of the test case
-      run->initialize(argc, argv);
-      run->solver();
-      run->finalize();
-      //3) Removal of the test case
-      delete run;
+  try {
+    //Working on specific folder
+    if (argc > 1) {
+      config.setWorkFolder(std::string(argv[1]));
     }
+    std::stringstream fileName;
+    fileName << config.getWorkFolder();
+    fileName << "ECOGEN.xml";
+
+    tinyxml2::XMLDocument xmlEcogen;
+    XMLError error(xmlEcogen.LoadFile(fileName.str().c_str())); //The file is parse here
+    if (error != XML_NO_ERROR) throw ErrorXML(fileName.str().c_str(), __FILE__, __LINE__);
+    //Find the root of the XML folder
+    XMLNode *xmlNode = xmlEcogen.FirstChildElement("ecogen");
+
+    //Loop on the test cases to execute
+    //---------------------------------
+    int numTestCase(0);
+    XMLElement* elementTestCase = xmlNode->FirstChildElement("testCase");
+    while (elementTestCase != NULL) {
+      try {
+        XMLNode* xmlNode2 = elementTestCase->FirstChild();
+        if (xmlNode2 == NULL) throw ErrorXMLElement("testCase", fileName.str(), __FILE__, __LINE__);
+        XMLText* xmlText = xmlNode2->ToText();
+        if (xmlText == NULL) throw ErrorXMLElement("testCase", fileName.str(), __FILE__, __LINE__);
+        std::stringstream testLocation;
+        testLocation << config.getWorkFolder();
+        testLocation << xmlText->Value();
+
+        //1) Creation of the test case
+        numTestCase++;
+        run = new Run(testLocation.str(), numTestCase);
+        MPI_Barrier(MPI_COMM_WORLD);
+        if (rankCpu == 0) {
+          std::cout << "************************************************************" << std::endl;
+          std::cout << "           EXECUTION OF THE TEST CASE NUMBER: " << numTestCase << std::endl;
+          std::cout << "************************************************************" << std::endl;
+          std::cout << "T" << numTestCase << " | Test case: " << testLocation.str() << std::endl;
+        }
+        MPI_Barrier(MPI_COMM_WORLD);
+        //2) Execution of the test case
+        run->initialize();
+        run->solver();
+        run->finalize();
+        //3) Removal of the test case
+        delete run;
+      }
     
-    //Gestion of the exceptions
-    //-------------------------
-    catch (ErrorXML &e) {
-      if (rankCpu == 0) std::cout << e.infoError() << std::endl;
-      if (!run) {
-        run->finalize();
-        delete run;
+      //Gestion of the exceptions
+      //-------------------------
+      catch (ErrorXML &e) {
+        errorCode = e.getErrorCode();
+        if (rankCpu == 0) std::cout << e.infoError() << std::endl;
+        if (run) {
+          run->finalize();
+          delete run;
+        }
       }
-    }
-    catch (ErrorECOGEN &e) {
-      if(rankCpu==0) std::cerr << e.infoError() << std::endl;
-      std::cerr << "T" << numTestCase << " | " << e.infoError() << std::endl;
-      if (!run) {
-        run->finalize();
-        delete run;
+      catch (ErrorECOGEN &e) {
+        errorCode = e.getErrorCode();
+       // if(rankCpu==0) std::cerr << "T" << numTestCase << " | " << e.infoError() << std::endl;
+        if (run) {
+          run->finalize();
+          delete run;
+        }
       }
-    }
-    elementTestCase = elementTestCase->NextSiblingElement("testCase");
+      elementTestCase = elementTestCase->NextSiblingElement("testCase");
+    }//End of the loop on test cases
+  }
+  catch (ErrorXML& e) {
+    errorCode = e.getErrorCode();
+    if (rankCpu == 0) std::cout << e.infoError() << std::endl;
+  }
 
-  }//End of the loop on test cases
   MPI_Barrier(MPI_COMM_WORLD);
   MPI_Finalize();
   std::cerr.rdbuf(strBackup);
   Out.close();
-  return 0;
+  return errorCode;
 }
 
 //***********************************************************************
@@ -138,8 +155,8 @@ void displayHeader()
   std::cout << "    |  `--.  \\  `-.  \\ `-' /   \\  `-) ) |  `--.  | | |)| " << std::endl;
   std::cout << "    /( __.'   \\____\\  )---'    )\\____/  /( __.'  /(  (_) " << std::endl;
   std::cout << "   (__)              (_)      (__)     (__)     (__)     " << std::endl;
+  std::cout << "   Official webSite: https://code-mphi.github.io/ECOGEN/" << std::endl;
   std::cout << std::endl;
-  std::cout << "************************************************************" << std::endl;
 }
 
 //***********************************************************************

@@ -6,6 +6,7 @@
 //       |  `--.  \  `-.  \ `-' /   \  `-) ) |  `--.  | | |)| 
 //       /( __.'   \____\  )---'    )\____/  /( __.'  /(  (_) 
 //      (__)              (_)      (__)     (__)     (__)     
+//      Official webSite: https://code-mphi.github.io/ECOGEN/
 //
 //  This file is part of ECOGEN.
 //
@@ -27,21 +28,16 @@
 //  along with ECOGEN (file LICENSE).  
 //  If not, see <http://www.gnu.org/licenses/>.
 
-//! \file      GDCuboid.cpp
-//! \author    F. Petitpas
-//! \version   1.0
-//! \date      December 19 2017
-
 #include "GDCuboid.h"
 
 using namespace tinyxml2;
 
 //***************************************************************
 
-GDCuboid::GDCuboid(std::string name, std::vector<Phase*> vecPhases, Mixture *mixture, std::vector<Transport> vecTransports, XMLElement *element, const int &physicalEntity, std::string fileName) :
+GDCuboid::GDCuboid(std::string name, std::vector<Phase*> vecPhases, Mixture* mixture, std::vector<Transport> vecTransports, XMLElement* element, const int& physicalEntity, std::string fileName) :
 GeometricalDomain(name, vecPhases, mixture, vecTransports, physicalEntity)
 {
-  XMLElement *sousElement(element->FirstChildElement("dataCuboid"));
+  XMLElement* sousElement(element->FirstChildElement("dataCuboid"));
   if (sousElement == NULL) throw ErrorXMLElement("dataCuboid", fileName, __FILE__, __LINE__);
   //Attributes reading
   //------------------
@@ -57,7 +53,7 @@ GeometricalDomain(name, vecPhases, mixture, vecTransports, physicalEntity)
   if (error != XML_NO_ERROR) throw ErrorXMLAttribut("lAxisZ", fileName, __FILE__, __LINE__);
   //inferior vertex of cuboid
   double x(0.), y(0.), z(0.);
-  XMLElement *coin(sousElement->FirstChildElement("posInferiorVertex"));
+  XMLElement* coin(sousElement->FirstChildElement("posInferiorVertex"));
   if (coin == NULL) throw ErrorXMLElement("posInferiorVertex", fileName, __FILE__, __LINE__);
   error = coin->QueryDoubleAttribute("x", &x);
   error = coin->QueryDoubleAttribute("y", &y);
@@ -71,7 +67,7 @@ GDCuboid::~GDCuboid(){}
 
 //***************************************************************
 
-bool GDCuboid::belong(Coord &posElement, const int &lvl) const
+bool GDCuboid::belong(Coord& posElement, const int& /*lvl*/) const
 {
   if ((posElement.getX() - m_posXmYmZm.getX())<0) return false;
   if ((posElement.getX() - m_posXmYmZm.getX())>m_lX) return false;

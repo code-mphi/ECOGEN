@@ -6,6 +6,7 @@
 //       |  `--.  \  `-.  \ `-' /   \  `-) ) |  `--.  | | |)| 
 //       /( __.'   \____\  )---'    )\____/  /( __.'  /(  (_) 
 //      (__)              (_)      (__)     (__)     (__)     
+//      Official webSite: https://code-mphi.github.io/ECOGEN/
 //
 //  This file is part of ECOGEN.
 //
@@ -27,18 +28,13 @@
 //  along with ECOGEN (file LICENSE).  
 //  If not, see <http://www.gnu.org/licenses/>.
 
-//! \file      FaceQuadrangle.cpp
-//! \author    F. Petitpas
-//! \version   1.0
-//! \date      December 20 2017
-
 #include "FaceQuadrangle.h"
 
 const int FaceQuadrangle::NOMBRENOEUDS = 4;
 
 //***********************************************************************
 
-FaceQuadrangle::FaceQuadrangle(const int &numNoeud1, const int &numNoeud2, const int &numNoeud3, const int &numNoeud4, int tri) :
+FaceQuadrangle::FaceQuadrangle(const int& numNoeud1, const int& numNoeud2, const int& numNoeud3, const int& numNoeud4, int tri) :
 FaceNS(NOMBRENOEUDS)
 {
   //Sauvegarde ordre initial
@@ -65,7 +61,7 @@ FaceQuadrangle::~FaceQuadrangle()
 
 //***********************************************************************
 
-void FaceQuadrangle::computeSurface(const Coord *noeuds)
+void FaceQuadrangle::computeSurface(const Coord* noeuds)
 {
   //Atention utilisation des numbering de noeud d origin pour assurer le compute des surfaces
   //une diagonale :
@@ -89,7 +85,7 @@ void FaceQuadrangle::computeSurface(const Coord *noeuds)
 
 //***********************************************************************
 
-void FaceQuadrangle::computeRepere(const Coord *noeuds, const int &numNoeudAutre, ElementNS *elementVoisin)
+void FaceQuadrangle::computeRepere(const Coord* noeuds, const int& numNoeudAutre, ElementNS *elementVoisin)
 {
   Coord v1; v1.setFromSubtractedVectors(noeuds[m_numNoeuds[0]], noeuds[m_numNoeuds[1]]);
   Coord v2; v2.setFromSubtractedVectors(noeuds[m_numNoeuds[0]], noeuds[m_numNoeuds[2]]);

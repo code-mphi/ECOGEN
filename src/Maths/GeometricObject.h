@@ -6,6 +6,7 @@
 //       |  `--.  \  `-.  \ `-' /   \  `-) ) |  `--.  | | |)| 
 //       /( __.'   \____\  )---'    )\____/  /( __.'  /(  (_) 
 //      (__)              (_)      (__)     (__)     (__)     
+//      Official webSite: https://code-mphi.github.io/ECOGEN/
 //
 //  This file is part of ECOGEN.
 //
@@ -30,11 +31,6 @@
 #ifndef GEOMETRICOBJECT_H
 #define GEOMETRICOBJECT_H
 
-//! \file      GeometricObject.h
-//! \author    F. Petitpas, K. Schmidmayer
-//! \version   1.0
-//! \date      January 5 2018
-
 #include "Coord.h"
 #include "../Errors.h"
 #include "../Tools.h"
@@ -51,10 +47,10 @@ public:
 
   //! \brief     Compute the distance between a vertex and the corresponding geometric object
   //! \param     vertex             coordinates of the vertex
-  virtual double distancePoint(const Coord &vertex) const { Errors::errorMessage("distancePoint unknown for considered geometric object"); return 0; };
+  virtual double distancePoint(const Coord& /*vertex*/) const { Errors::errorMessage("distancePoint unknown for considered geometric object"); return 0; };
   //! \brief     Compute the projection between a vertex and the corresponding geometric object
   //! \param     vertex             coordinates of the vertex
-  virtual Coord projectionPoint(const Coord &vertex) const { Errors::errorMessage("projectionPoint unknown for considered geometric object"); return 0; };
+  virtual Coord projectionPoint(const Coord& /*vertex*/) const { Errors::errorMessage("projectionPoint unknown for considered geometric object"); return 0; };
 
   //! \brief     Return the type of the geometric object
   TypeGO getType() { return m_type; };

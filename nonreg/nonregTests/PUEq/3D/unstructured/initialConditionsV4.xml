@@ -1,0 +1,44 @@
+<?xml version = "1.0" encoding = "UTF-8" standalone = "yes"?>
+<CI>
+    <!-- LIST OF GEOMETRICAL DOMAINS  -->
+    <physicalDomains> 
+		<domain name="base" state="leftChamber" type="entireDomain"/>
+		<domain name="HP"  state="rightChamber" type="sphere">
+			<dataSphere radius="0.5">
+				<center x="1." y="0.5" z="0.5"/>
+			</dataSphere>
+		</domain>
+    </physicalDomains>
+
+    <!-- LIST OF BOUNDARY CONDITIONS -->
+    <boundaryConditions>
+        <boundCond name="premiere" type="wall" number="1"/>
+        <boundCond name="deuxieme" type="wall" number="2"/>
+    </boundaryConditions>
+    
+    <!--  LIST OF STATES  -->
+	<state name="leftChamber">
+		<material type="fluid" EOS="IG_air.xml">
+			<dataFluid alpha="0.5" density="1.0"/>	
+		</material>
+		<material type="fluid" EOS="SG_water.xml">
+			<dataFluid alpha="0.5" density="1000.0"/>	
+		</material>
+		<mixture>
+			<dataMix pressure = "1.e5"/>
+            <velocity x="0." y="0." z="0."/>
+        </mixture>
+	</state>
+	<state name="rightChamber">
+		<material type="fluid" EOS="IG_air.xml">
+			<dataFluid alpha="0.5" density="100.0"/>
+		</material>
+		<material type="fluid" EOS="SG_water.xml">
+			<dataFluid alpha="0.5" density="1000.0"/>	
+		</material>
+		<mixture>
+			<dataMix pressure = "1.e7"/>
+            <velocity x="0." y="0." z="0."/>
+        </mixture>
+	</state>
+</CI>

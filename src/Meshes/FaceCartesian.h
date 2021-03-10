@@ -6,6 +6,7 @@
 //       |  `--.  \  `-.  \ `-' /   \  `-) ) |  `--.  | | |)| 
 //       /( __.'   \____\  )---'    )\____/  /( __.'  /(  (_) 
 //      (__)              (_)      (__)     (__)     (__)     
+//      Official webSite: https://code-mphi.github.io/ECOGEN/
 //
 //  This file is part of ECOGEN.
 //
@@ -30,11 +31,6 @@
 #ifndef FACECARTESIAN_H
 #define FACECARTESIAN_H
 
-//! \file      FaceCartesian.h
-//! \author    F. Petitpas, K. Schmidmayer
-//! \version   1.1
-//! \date      June 5 2019
-
 #include "Face.h"
 class FaceCartesian : public Face
 {
@@ -42,14 +38,14 @@ public:
   FaceCartesian();
   virtual ~FaceCartesian();
 
-  virtual void setSurface(const double &surface);
-  virtual void initializeAutres(const double &surface, const Coord &normal, const Coord &tangent, const Coord &binormal);
-  virtual void setPos(const double &X, const double &Y, const double &Z);
-  virtual void setNormal(const double &X, const double &Y, const double &Z);
-  virtual void setTangent(const double &X, const double &Y, const double &Z);
-  virtual void setBinormal(const double &X, const double &Y, const double &Z);
-  virtual void setSize(const double &sizeX, const double &sizeY, const double &sizeZ);
-  virtual void setSize(const Coord &size);
+  virtual void setSurface(const double& surface);
+  virtual void initializeAutres(const double& surface, const Coord& normal, const Coord& tangent, const Coord& binormal);
+  virtual void setPos(const double& X, const double& Y, const double& Z);
+  virtual void setNormal(const double& X, const double& Y, const double& Z);
+  virtual void setTangent(const double& X, const double& Y, const double& Z);
+  virtual void setBinormal(const double& X, const double& Y, const double& Z);
+  virtual void setSize(const double& sizeX, const double& sizeY, const double& sizeZ);
+  virtual void setSize(const Coord& size);
 
   virtual const double& getSizeX() { return m_size.getX(); };
   virtual const double& getSizeY() { return m_size.getY(); };

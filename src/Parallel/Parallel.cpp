@@ -6,6 +6,7 @@
 //       |  `--.  \  `-.  \ `-' /   \  `-) ) |  `--.  | | |)| 
 //       /( __.'   \____\  )---'    )\____/  /( __.'  /(  (_) 
 //      (__)              (_)      (__)     (__)     (__)     
+//      Official webSite: https://code-mphi.github.io/ECOGEN/
 //
 //  This file is part of ECOGEN.
 //
@@ -27,11 +28,6 @@
 //  along with ECOGEN (file LICENSE).  
 //  If not, see <http://www.gnu.org/licenses/>.
 
-//! \file      Parallel.cpp
-//! \author    F. Petitpas, K. Schmidmayer, S. Le Martelot, B. Dorschner
-//! \version   1.1
-//! \date      November 11 2019
-
 #include "Parallel.h"
 #include "../Eos/Eos.h"
 
@@ -41,7 +37,7 @@ int rankCpu, Ncpu;
 
 //***********************************************************************
 
-Parallel::Parallel(): m_stateCPU(1) {}
+Parallel::Parallel(){}
 
 //***********************************************************************
 
@@ -49,7 +45,7 @@ Parallel::~Parallel(){}
 
 //***********************************************************************
 
-void Parallel::initialization(int &argc, char* argv[])
+void Parallel::initialization()
 {
   if (Ncpu == 1) return; //The following is not necessary in the case of monoCPU
 
@@ -196,28 +192,21 @@ void Parallel::clearElementsAndSlopesToSendAndReceivePLusNeighbour()
 
 //***********************************************************************
 
-const TypeMeshContainer<Cell*> &Parallel::getElementsToSend(int neighbour) const
+TypeMeshContainer<Cell*>& Parallel::getElementsToSend(int neighbour)
 {
   return m_elementsToSend[neighbour];
 }
 
 //***********************************************************************
 
-TypeMeshContainer<Cell*> &Parallel::getElementsToSend(int neighbour)
-{
-  return m_elementsToSend[neighbour];
-}
-
-//***********************************************************************
-
-TypeMeshContainer<Cell*> &Parallel::getElementsToReceive(int neighbour)
+TypeMeshContainer<Cell*>& Parallel::getElementsToReceive(int neighbour)
 {
   return m_elementsToReceive[neighbour];
 }
 
 //***********************************************************************
 
-void Parallel::initializePersistentCommunications(const int &numberPrimitiveVariables, const int &numberSlopeVariables, const int &numberTransportVariables, const int &dim)
+void Parallel::initializePersistentCommunications(const int& numberPrimitiveVariables, const int& numberSlopeVariables, const int& numberTransportVariables, const int& dim)
 {
   if (Ncpu > 1) {
     m_numberPrimitiveVariables = numberPrimitiveVariables;
@@ -237,7 +226,7 @@ void Parallel::initializePersistentCommunications(const int &numberPrimitiveVari
 
 //***********************************************************************
 
-void Parallel::computeDt(double &dt)
+void Parallel::computeDt(double& dt)
 {
   double dt_temp = dt;
   MPI_Allreduce(&dt_temp, &dt, 1, MPI_DOUBLE, MPI_MIN, MPI_COMM_WORLD);
@@ -245,7 +234,7 @@ void Parallel::computeDt(double &dt)
 
 //***********************************************************************
 
-void Parallel::computePMax(double &pMax, double &pMaxWall)
+void Parallel::computePMax(double& pMax, double& pMaxWall)
 {
   double pMax_temp(pMax), pMaxWall_temp(pMaxWall);
   MPI_Allreduce(&pMax_temp, &pMax, 1, MPI_DOUBLE, MPI_MAX, MPI_COMM_WORLD);
@@ -254,15 +243,15 @@ void Parallel::computePMax(double &pMax, double &pMaxWall)
 
 //***********************************************************************
 
-void Parallel::computeMassTotal(double &mass)
+void Parallel::computeSum(double& var)
 {
-  double massBuff(mass);
-  MPI_Allreduce(&massBuff, &mass, 1, MPI_DOUBLE, MPI_SUM, MPI_COMM_WORLD);
+  double buff(var);
+  MPI_Allreduce(&buff, &var, 1, MPI_DOUBLE, MPI_SUM, MPI_COMM_WORLD);
 }
 
 //***********************************************************************
 
-void Parallel::finalize(const int &lvlMax)
+void Parallel::finalize(const int& lvlMax)
 {
   if (Ncpu > 1) {
     this->finalizePersistentCommunicationsPrimitives(lvlMax);
@@ -295,7 +284,7 @@ void Parallel::stopRun()
 
 //***********************************************************************
 
-void Parallel::verifyStateCPUs()
+bool Parallel::verifyStateCPUs()
 {
   //Gathering of errors
   int nbErr_temp(0);
@@ -303,8 +292,10 @@ void Parallel::verifyStateCPUs()
   MPI_Allreduce(&nbErr, &nbErr_temp, 1, MPI_INTEGER, MPI_SUM, MPI_COMM_WORLD);
   //Stop if error on one CPU
   if (nbErr_temp) {
-    Errors::arretCodeApresError(errors);
+    return true;
+    //Errors::codeShutdownAfterError(errors);
   }
+  return false;
 }
 
 //****************************************************************************
@@ -334,7 +325,7 @@ void Parallel::initializePersistentCommunicationsPrimitives()
 
 //***********************************************************************
 
-void Parallel::finalizePersistentCommunicationsPrimitives(const int &lvlMax)
+void Parallel::finalizePersistentCommunicationsPrimitives(const int& lvlMax)
 {
   for (int lvl = 0; lvl <= lvlMax; lvl++) {
     for (int neighbour = 0; neighbour < Ncpu; neighbour++)	{
@@ -360,7 +351,7 @@ void Parallel::finalizePersistentCommunicationsPrimitives(const int &lvlMax)
 
 //***********************************************************************
 
-void Parallel::communicationsPrimitives(Eos **eos, int lvl, Prim type)
+void Parallel::communicationsPrimitives(Eos** eos, int lvl, Prim type)
 {
   int count(0);
   MPI_Status status;
@@ -421,7 +412,7 @@ void Parallel::initializePersistentCommunicationsSlopes()
 
 //***********************************************************************
 
-void Parallel::finalizePersistentCommunicationsSlopes(const int &lvlMax)
+void Parallel::finalizePersistentCommunicationsSlopes(const int& lvlMax)
 {
   for (int lvl = 0; lvl <= lvlMax; lvl++) {
     for (int neighbour = 0; neighbour < Ncpu; neighbour++)	{
@@ -511,7 +502,7 @@ void Parallel::initializePersistentCommunicationsScalar()
 
 //***********************************************************************
 
-void Parallel::finalizePersistentCommunicationsScalar(const int &lvlMax)
+void Parallel::finalizePersistentCommunicationsScalar(const int& lvlMax)
 {
   for (int lvl = 0; lvl <= lvlMax; lvl++) {
     for (int neighbour = 0; neighbour < Ncpu; neighbour++)	{
@@ -539,7 +530,7 @@ void Parallel::finalizePersistentCommunicationsScalar(const int &lvlMax)
 //*********************** Methods for the vectors ****************************
 //****************************************************************************
 
-void Parallel::initializePersistentCommunicationsVector(const int &dim)
+void Parallel::initializePersistentCommunicationsVector(const int& dim)
 {
   for (int neighbour = 0; neighbour < Ncpu; neighbour++) {
     if (m_isNeighbour[neighbour]) {
@@ -562,7 +553,7 @@ void Parallel::initializePersistentCommunicationsVector(const int &dim)
 
 //***********************************************************************
 
-void Parallel::finalizePersistentCommunicationsVector(const int &lvlMax)
+void Parallel::finalizePersistentCommunicationsVector(const int& lvlMax)
 {
   for (int lvl = 0; lvl <= lvlMax; lvl++) {
     for (int neighbour = 0; neighbour < Ncpu; neighbour++)	{
@@ -588,7 +579,7 @@ void Parallel::finalizePersistentCommunicationsVector(const int &lvlMax)
 
 //***********************************************************************
 
-void Parallel::communicationsVector(Variable nameVector, const int &dim, int lvl, int num, int index)
+void Parallel::communicationsVector(Variable nameVector, const int& dim, int lvl, int num, int index)
 {
   int count(0);
   MPI_Status status;
@@ -650,7 +641,7 @@ void Parallel::initializePersistentCommunicationsTransports()
 
 //***********************************************************************
 
-void Parallel::finalizePersistentCommunicationsTransports(const int &lvlMax)
+void Parallel::finalizePersistentCommunicationsTransports(const int& lvlMax)
 {
   for (int lvl = 0; lvl <= lvlMax; lvl++) {
     for (int neighbour = 0; neighbour < Ncpu; neighbour++) {
@@ -715,7 +706,7 @@ void Parallel::communicationsTransports(int lvl)
 //******************** Methodes pour les variables AMR ***********************
 //****************************************************************************
 
-void Parallel::initializePersistentCommunicationsAMR(const int &numberPrimitiveVariables, const int &numberSlopeVariables, const int &numberTransportVariables, const int &dim, const int &lvlMax)
+void Parallel::initializePersistentCommunicationsAMR(const int& numberPrimitiveVariables, const int& numberSlopeVariables, const int& numberTransportVariables, const int& dim, const int& lvlMax)
 {
   if (Ncpu > 1) {
     m_numberPrimitiveVariables = numberPrimitiveVariables;
@@ -742,7 +733,7 @@ void Parallel::initializePersistentCommunicationsAMR(const int &numberPrimitiveV
 
 //***********************************************************************
 
-void Parallel::initializePersistentCommunicationsLvlAMR(const int &lvlMax)
+void Parallel::initializePersistentCommunicationsLvlAMR(const int& lvlMax)
 {
   //Extension of parallel variables to the maximum AMR level. We starts at 1, the level 0 being already initialized
   for (int lvl = 1; lvl <= lvlMax; lvl++) {
@@ -960,7 +951,7 @@ void Parallel::clearRequestsAndBuffers(int lvl)
 
 //***********************************************************************
 
-void Parallel::updatePersistentCommunicationsAMR(const int &dim)
+void Parallel::updatePersistentCommunicationsAMR(const int& dim)
 {
   //We first empty the sending and receiving variables of level 0 (from previous domain decomposition)
   this->clearRequestsAndBuffers(0);
@@ -982,7 +973,7 @@ void Parallel::updatePersistentCommunicationsAMR(const int &dim)
 
 //***********************************************************************
 
-void Parallel::updatePersistentCommunicationsLvlAMR(int lvl, const int &dim)
+void Parallel::updatePersistentCommunicationsLvlAMR(int lvl, const int& dim)
 {
   //We first empty the sending and receiving variables of level lvl (from previous domain decomposition)
   this->clearRequestsAndBuffers(lvl);
@@ -1080,7 +1071,7 @@ void Parallel::updatePersistentCommunicationsLvlAMR(int lvl, const int &dim)
 
 //***********************************************************************
 
-void Parallel::finalizeAMR(const int &lvlMax)
+void Parallel::finalizeAMR(const int& lvlMax)
 {
   if (Ncpu > 1) {
     this->finalizePersistentCommunicationsXi(lvlMax);
@@ -1118,7 +1109,7 @@ void Parallel::initializePersistentCommunicationsXi()
 
 //***********************************************************************
 
-void Parallel::finalizePersistentCommunicationsXi(const int &lvlMax)
+void Parallel::finalizePersistentCommunicationsXi(const int& lvlMax)
 {
   for (int lvl = 0; lvl <= lvlMax; lvl++) {
     for (int neighbour = 0; neighbour < Ncpu; neighbour++) {
@@ -1207,7 +1198,7 @@ void Parallel::initializePersistentCommunicationsSplit()
 
 //***********************************************************************
 
-void Parallel::finalizePersistentCommunicationsSplit(const int &lvlMax)
+void Parallel::finalizePersistentCommunicationsSplit(const int& lvlMax)
 {
   for (int lvl = 0; lvl <= lvlMax; lvl++) {
     for (int neighbour = 0; neighbour < Ncpu; neighbour++) {

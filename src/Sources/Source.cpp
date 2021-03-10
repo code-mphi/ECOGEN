@@ -6,6 +6,7 @@
 //       |  `--.  \  `-.  \ `-' /   \  `-) ) |  `--.  | | |)| 
 //       /( __.'   \____\  )---'    )\____/  /( __.'  /(  (_) 
 //      (__)              (_)      (__)     (__)     (__)     
+//      Official webSite: https://code-mphi.github.io/ECOGEN/
 //
 //  This file is part of ECOGEN.
 //
@@ -27,23 +28,13 @@
 //  along with ECOGEN (file LICENSE).  
 //  If not, see <http://www.gnu.org/licenses/>.
 
-//! \file      Source.cpp
-//! \author    F. Petitpas, J. Caze
-//! \version   1.0
-//! \date      October 29 2019
-
 #include "Source.h"
 
 enum srcOrder { K1,K2,K3,K4 };
 
 //***********************************************************************
 
-Source::Source() : m_order(1)
-{}
-
-//***********************************************************************
-
-Source::Source(int order) : m_order(order)
+Source::Source(int order, int physicalEntity) : m_order(order), m_physicalEntity(physicalEntity)
 {}
 
 //***********************************************************************
@@ -53,17 +44,17 @@ Source::~Source()
 
 //***********************************************************************
 
-void Source::integrationEuler(Cell *cell, const int &numberPhases, const double &dt)
+void Source::integrationEuler(Cell* cell, const int& numberPhases, const double& dt)
 {
   sourceCons[K1]->setToZero(numberPhases);
   sourceCons[K1]->addFlux(cell->getCons(), numberPhases);
-  this->prepSourceTerms(cell, numberPhases, dt);
+  this->prepSourceTerms(cell, numberPhases);
   sourceCons[K1]->multiply(dt,numberPhases);
 }
 
 //***********************************************************************
 
-void Source::integrationRK2(Cell *cell, const int &numberPhases, const double &dt)
+void Source::integrationRK2(Cell* cell, const int& numberPhases, const double& dt)
 {
   // Construct term K1
   this->integrationEuler(cell, numberPhases, dt);
@@ -72,7 +63,7 @@ void Source::integrationRK2(Cell *cell, const int &numberPhases, const double &d
   sourceCons[K2]->addFlux(cell->getCons(),numberPhases);
   sourceCons[K2]->addFlux(sourceCons[K1], numberPhases);
 
-  this->prepSourceTerms(cell, numberPhases, dt, K2);
+  this->prepSourceTerms(cell, numberPhases, K2);
   sourceCons[K2]->multiply(dt, numberPhases);
  
   //RK2 Coefficients
@@ -83,7 +74,7 @@ void Source::integrationRK2(Cell *cell, const int &numberPhases, const double &d
 
 //***********************************************************************
 
-void Source::integrationRK4(Cell *cell, const int &numberPhases, const double &dt)
+void Source::integrationRK4(Cell* cell, const int& numberPhases, const double& dt)
 {
 
   // Construct term K1
@@ -95,7 +86,7 @@ void Source::integrationRK4(Cell *cell, const int &numberPhases, const double &d
   sourceCons[K2]->multiply(0.5, numberPhases);
   sourceCons[K2]->addFlux(cell->getCons(), numberPhases);
 
-  this->prepSourceTerms(cell, numberPhases, dt, K2);
+  this->prepSourceTerms(cell, numberPhases, K2);
   sourceCons[K2]->multiply(dt, numberPhases);
 
   // Construct term K3
@@ -104,7 +95,7 @@ void Source::integrationRK4(Cell *cell, const int &numberPhases, const double &d
   sourceCons[K3]->multiply(0.5, numberPhases);
   sourceCons[K3]->addFlux(cell->getCons(), numberPhases);
 
-  this->prepSourceTerms(cell, numberPhases, dt, K3);
+  this->prepSourceTerms(cell, numberPhases, K3);
   sourceCons[K3]->multiply(dt, numberPhases);
 
   // Construct term K4
@@ -112,7 +103,7 @@ void Source::integrationRK4(Cell *cell, const int &numberPhases, const double &d
   sourceCons[K4]->addFlux(sourceCons[K3], numberPhases);
   sourceCons[K4]->addFlux(cell->getCons(), numberPhases);
 
-  this->prepSourceTerms(cell, numberPhases, dt, K4);
+  this->prepSourceTerms(cell, numberPhases, K4);
   sourceCons[K4]->multiply(dt, numberPhases);
 
   // RK4 coefficients
@@ -124,21 +115,25 @@ void Source::integrationRK4(Cell *cell, const int &numberPhases, const double &d
 
 //***********************************************************************
 
-void Source::integrateSourceTerms(Cell *cell, const int &numberPhases, const double &dt)
+void Source::integrateSourceTerms(Cell* cell, const int& numberPhases, const double& dt)
 {
-  cell->buildCons(numberPhases); // Initialize conservative vector U^n
+  if (cell->getElement()->getAppartenancePhysique() == m_physicalEntity || m_physicalEntity == 0) {
+    // For unstructured mesh if source term is not applied on specific physicalEntity all cells include it. 
+    // For cartesian mesh, there is no physicalEntity (default value is 0) thus source is applied on all cells.
+    cell->buildCons(numberPhases); // Initialize conservative vector U^n
   
-  //Deleting old stuff
-  for (auto s : sourceCons) { s->setToZero(numberPhases); }
+    //Deleting old stuff
+    for (auto s : sourceCons) { s->setToZero(numberPhases); }
 
-  // Integration order
-  if (m_order == 1) { this->integrationEuler(cell, numberPhases, dt); }
-  else if (m_order == 2) { this->integrationRK2(cell, numberPhases, dt); }
-  else if (m_order == 4) { this->integrationRK4(cell, numberPhases, dt); }
-  
-  // Source scheme
-   for (auto s : sourceCons) {
-    cell->getCons()->addFlux(s, numberPhases);    
+    // Integration order
+    if (m_order == 1) { this->integrationEuler(cell, numberPhases, dt); }
+    else if (m_order == 2) { this->integrationRK2(cell, numberPhases, dt); }
+    else if (m_order == 4) { this->integrationRK4(cell, numberPhases, dt); }
+
+    // Source scheme
+    for (auto s : sourceCons) {
+      cell->getCons()->addFlux(s, numberPhases);    
+    }
+    cell->buildPrim(numberPhases);
   }
-  cell->buildPrim(numberPhases); 
 }

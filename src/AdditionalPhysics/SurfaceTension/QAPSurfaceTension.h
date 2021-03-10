@@ -6,6 +6,7 @@
 //       |  `--.  \  `-.  \ `-' /   \  `-) ) |  `--.  | | |)| 
 //       /( __.'   \____\  )---'    )\____/  /( __.'  /(  (_) 
 //      (__)              (_)      (__)     (__)     (__)     
+//      Official webSite: https://code-mphi.github.io/ECOGEN/
 //
 //  This file is part of ECOGEN.
 //
@@ -30,11 +31,6 @@
 #ifndef QAPSURFACETENSION_H
 #define QAPSURFACETENSION_H
 
-//! \file      QAPSurfaceTension.h
-//! \author    K. Schmidmayer
-//! \version   1.1
-//! \date      June 5 2019
-
 #include "../QuantitiesAddPhys.h"
 
 //! \class     QAPSurfaceTension
@@ -42,15 +38,14 @@
 class QAPSurfaceTension : public QuantitiesAddPhys
 {
     public:
-      QAPSurfaceTension();
       QAPSurfaceTension(AddPhys* addPhys);
       virtual ~QAPSurfaceTension();
 
       virtual void computeQuantities(Cell* cell);
 
       //Accessors
-      virtual void setGrad(const Coord &grad, int num = -1);
-      virtual const Coord& getGrad(int num = -1) const { return m_gradC[0]; };
+      virtual void setGrad(const Coord& grad, const int& /*num*/ = -1);
+      virtual const Coord& getGrad(const int& /*num*/ = -1) const { return m_gradC[0]; };
 
     protected:
     std::vector<Coord> m_gradC;           //!< Gradient of the transport function (vector w)

@@ -6,6 +6,7 @@
 //       |  `--.  \  `-.  \ `-' /   \  `-) ) |  `--.  | | |)| 
 //       /( __.'   \____\  )---'    )\____/  /( __.'  /(  (_) 
 //      (__)              (_)      (__)     (__)     (__)     
+//      Official webSite: https://code-mphi.github.io/ECOGEN/
 //
 //  This file is part of ECOGEN.
 //
@@ -26,11 +27,6 @@
 //  You should have received a copy of the GNU General Public License
 //  along with ECOGEN (file LICENSE).  
 //  If not, see <http://www.gnu.org/licenses/>.
-
-//! \file      Flux.cpp
-//! \author    F. Petitpas, K. Schmidmayer, S. Le Martelot, J. Caze
-//! \version   1.0
-//! \date      November 19 2019
 
 #include "Flux.h"
 

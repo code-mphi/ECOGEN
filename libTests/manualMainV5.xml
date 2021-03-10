@@ -107,8 +107,31 @@ Cut results will be placed in the corresponding results folder under GNU format.
 *) Probes
 *********
 Adding probes at chosen location in the physical domain. Define a name, a vertex and time recording parameters
-<probe name="capteur1">
+<probe name="sensor1">
   <vertex x="0.51" y="0.51" z="0.51"/>
   <timeControl acqFreq="-1."/>       <!-- if negative or nul, recording at each time step -->
 </probe>
 
+%%%%%%%%%%%%%%%%%% << copy between these lines
+
+*) Boundaries
+*************
+Record a flux through a specified boundary, could be either massflow (flux="massflow") or power flux (flux="powerflux").
+Define a name, boundary number and time recording parameters.
+To record both massflow and powerflux on the same boundary it is required to set twice the recordBoundaryFlux section.
+Boundary flux results will be placed in the corresponding results folder under GNU format.
+Note that this feature is not available on AMR mesh. 
+%%%%%%%%%%%%%%%%%% << copy between these lines
+<recordBoundaryFlux name="inflow">
+  <boundary number="1" flux="massflow"/>
+  <timeControl acqFreq="-1."/>       <!-- if negative or nul, recording at each time step -->
+</recordBoundaryFlux>
+%%%%%%%%%%%%%%%%%% << copy between these lines
+
+*) Global quantity
+******************
+Possibility to record a global quantity on whole domain. Could be mass or total energy.
+Global quantity results will be placed in the corresponding results folder under GNU format.
+%%%%%%%%%%%%%%%%%% << copy between these lines
+<recordGlobalQuantity quantity="mass"/>
+%%%%%%%%%%%%%%%%%% << copy between these lines

@@ -6,6 +6,7 @@
 //       |  `--.  \  `-.  \ `-' /   \  `-) ) |  `--.  | | |)| 
 //       /( __.'   \____\  )---'    )\____/  /( __.'  /(  (_) 
 //      (__)              (_)      (__)     (__)     (__)     
+//      Official webSite: https://code-mphi.github.io/ECOGEN/
 //
 //  This file is part of ECOGEN.
 //
@@ -30,11 +31,6 @@
 #ifndef SOURCEGRAVITY_H
 #define SOURCEGRAVITY_H
 
-//! \file      SourceGravity.h
-//! \author    F. Petitpas, K. Schmidmayer, J. Caze
-//! \version   1.0
-//! \date      October 29 2019
-
 #include "Source.h"
 
 //! \class     SourceGravity
@@ -42,16 +38,15 @@
 class SourceGravity : public Source
 {
   public:
-    SourceGravity();
     //! \brief     Source constructor from a XML format reading
     //! \details   Reading data from XML file under the following format:
     //!            ex: <gravity x="0." y="-9.81" z="0." / >
     //! \param     element          XML element to read for source term
     //! \param     fileName         string name of readed XML file
-    SourceGravity(tinyxml2::XMLElement *element, int order, std::string fileName = "Unknown file");
+    SourceGravity(tinyxml2::XMLElement* element, int order, int physicalEntity, std::string fileName = "Unknown file");
     virtual ~SourceGravity();
 
-    virtual void prepSourceTerms(Cell *cell, const int &numberPhases, const double &dt, const int i = 0);
+    virtual void prepSourceTerms(Cell* /*cell*/, const int& numberPhases, const int& i = 0);
 
   private:
     Coord m_g;       //! Gravity acceleration vector

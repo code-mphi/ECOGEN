@@ -6,6 +6,7 @@
 //       |  `--.  \  `-.  \ `-' /   \  `-) ) |  `--.  | | |)| 
 //       /( __.'   \____\  )---'    )\____/  /( __.'  /(  (_) 
 //      (__)              (_)      (__)     (__)     (__)     
+//      Official webSite: https://code-mphi.github.io/ECOGEN/
 //
 //  This file is part of ECOGEN.
 //
@@ -30,11 +31,6 @@
 #ifndef GDCUBOID_H
 #define GDCUBOID_H
 
-//! \file      GDCuboid.h
-//! \author    F. Petitpas
-//! \version   1.0
-//! \date      December 19 2017
-
 #include "GeometricalDomain.h"
 
 //! \class     GDCuboid
@@ -54,10 +50,10 @@ public:
   //! \param     element        XML element to read for geometrical properties
   //! \param     physicalEntity physical entity number relative to mesh generation (see mesh tool)
   //! \param     fileName       String name of readed XML file
-  GDCuboid(std::string name, std::vector<Phase*> vecPhases, Mixture *mixture, std::vector<Transport> vecTransports, tinyxml2::XMLElement *element, const int &physicalEntity, std::string fileName = "Fichier Inconnu");
+  GDCuboid(std::string name, std::vector<Phase*> vecPhases, Mixture* mixture, std::vector<Transport> vecTransports, tinyxml2::XMLElement* element, const int& physicalEntity, std::string fileName = "Fichier Inconnu");
   virtual ~GDCuboid();
 
-  virtual bool belong(Coord &posElement, const int &lvl) const;
+  virtual bool belong(Coord& posElement, const int& /*lvl*/) const;
 private:
   Coord m_posXmYmZm;            //!< Coordinates of the bottom left front corner (minimum positions in X, Y, Z)
   double m_lX, m_lY, m_lZ;      //!< Width along X, Y and Z axis

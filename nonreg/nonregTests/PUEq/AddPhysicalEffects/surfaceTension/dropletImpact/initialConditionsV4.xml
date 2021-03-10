@@ -1,0 +1,46 @@
+<?xml version='1.0' encoding='UTF-8' standalone='yes'?>
+<CI>
+  <!-- LIST OF GEOMETRICAL DOMAINS  -->
+  <physicalDomains>
+    <domain type="entireDomain" name="base" state="air"/>
+    <domain type="disc" name="droplet" state="droplet">
+      <dataDisc axis2="y" axis1="x" radius="2.5e-4">
+        <center x="0.0025" z="0." y="0.004"/>
+      </dataDisc>
+    </domain>
+  </physicalDomains>
+  <!-- LIST OF BOUNDARY CONDITIONS -->
+  <boundaryConditions>
+    <boundCond type="wall" name="CLXm" number="1"/>
+    <boundCond type="wall" name="CLXp" number="2"/>
+    <boundCond type="wall" name="CLYm" number="3"/>
+    <boundCond type="wall" name="CLYp" number="4"/>
+  </boundaryConditions>
+  <!--  LIST OF STATES  -->
+  <state name="air">
+    <material type="fluid" EOS="IG_air.xml">
+      <dataFluid density="1.0" alpha="1."/>
+    </material>
+    <material type="fluid" EOS="SG_liquidForSurfaceTensionCases.xml">
+      <dataFluid density="1000.0" alpha="0."/>
+    </material>
+    <mixture>
+      <dataMix pressure="1.e5"/>
+      <velocity x="0." z="0." y="0."/>
+    </mixture>
+    <transport name="color" value="1.e-6"/>
+  </state>
+  <state name="droplet">
+    <material type="fluid" EOS="IG_air.xml">
+      <dataFluid density="1.0" alpha="0."/>
+    </material>
+    <material type="fluid" EOS="SG_liquidForSurfaceTensionCases.xml">
+      <dataFluid density="1000.0" alpha="1."/>
+    </material>
+    <mixture>
+      <dataMix pressure="1.292e5"/>
+      <velocity x="8." z="0." y="20."/>
+    </mixture>
+    <transport name="color" value="1."/>
+  </state>
+</CI>

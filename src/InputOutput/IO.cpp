@@ -6,6 +6,7 @@
 //       |  `--.  \  `-.  \ `-' /   \  `-) ) |  `--.  | | |)| 
 //       /( __.'   \____\  )---'    )\____/  /( __.'  /(  (_) 
 //      (__)              (_)      (__)     (__)     (__)     
+//      Official webSite: https://code-mphi.github.io/ECOGEN/
 //
 //  This file is part of ECOGEN.
 //
@@ -27,11 +28,6 @@
 //  along with ECOGEN (file LICENSE).  
 //  If not, see <http://www.gnu.org/licenses/>.
 
-//! \file      IO.cpp
-//! \author    F. Petitpas
-//! \version   1.0
-//! \date      May 03 2018
-
 #include "IO.h"
 #include "../Errors.h"
 
@@ -45,7 +41,7 @@ IO::~IO(){}
 
 //***********************************************************************
 
-std::ostream& IO::writeb64Chaine(std::ostream &fluxSortie, char *chaine, int &tailleChaine)
+std::ostream& IO::writeb64Chaine(std::ostream& fluxSortie, char* chaine, int& tailleChaine)
 {
   std::string chaineEncodee;
   //int tailleChaine = chaineAEncoder.size();

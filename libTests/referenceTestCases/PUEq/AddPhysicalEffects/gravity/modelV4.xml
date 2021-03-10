@@ -1,0 +1,9 @@
+<?xml version='1.0' encoding='UTF-8' standalone='yes'?>
+<model>
+  <flowModel name="PressureVelocityEq" alphaNull="false" numberPhases="2"/>
+  <EOS name="IG_air.xml"/>
+  <EOS name="SG_water.xml"/>
+  <sourceTerms type="gravity" order="RK4">
+    <gravity x="0." z="0." y="-9.81"/>
+  </sourceTerms>
+</model>

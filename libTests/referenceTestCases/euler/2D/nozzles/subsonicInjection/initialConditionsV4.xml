@@ -1,0 +1,30 @@
+<?xml version = "1.0" encoding = "UTF-8" standalone = "yes"?>
+<CI>
+	<!-- LIST OF GEOMETRICAL DOMAINS  -->
+	<physicalDomains>	
+		<domain name="base" state="init" type="entireDomain" physicalEntity="10"/>
+	</physicalDomains>	
+
+	<!-- LIST OF BOUNDARY CONDITIONS -->
+	<boundaryConditions>
+		<boundCond name="axis" type="symmetry" number="1"/>
+		<boundCond name="wall" type="wall" number="2"/>
+		<boundCond name="inflow" type="subInjection" number="3">
+		    <dataInjection m0="300." T0="300."/> <!-- Supersonic divergent -->
+		    <!-- <dataInjection m0="200." T0="300."/> --> <!-- Subsonic divergent -->
+		</boundCond>
+		<boundCond name="outflow" type="outflow" number="4">
+			<dataOutflow p0="1.e5"/>
+		</boundCond>	
+	</boundaryConditions>
+	
+	<!--  LIST OF STATES  -->
+	<state name="init">
+		<material type="fluid" EOS="IG_air.xml">
+			<dataFluid density="1.0" pressure="1.e5">
+				<velocity x="0." y="0." z="0."/>
+			</dataFluid>
+		</material>
+	</state>
+
+</CI>

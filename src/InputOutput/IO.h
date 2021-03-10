@@ -6,6 +6,7 @@
 //       |  `--.  \  `-.  \ `-' /   \  `-) ) |  `--.  | | |)| 
 //       /( __.'   \____\  )---'    )\____/  /( __.'  /(  (_) 
 //      (__)              (_)      (__)     (__)     (__)     
+//      Official webSite: https://code-mphi.github.io/ECOGEN/
 //
 //  This file is part of ECOGEN.
 //
@@ -29,11 +30,6 @@
 
 #ifndef IO_H
 #define IO_H
-
-//! \file      IO.h
-//! \author    F. Petitpas
-//! \version   1.0
-//! \date      May 03 2018
 
 #include <fstream>
 #include <algorithm>
@@ -69,12 +65,12 @@ public:
 
   //Definition de template pour print au format binary
   template <typename T>
-  static std::ostream& write(std::ostream &fluxSortie, T &value)
+  static std::ostream& write(std::ostream& fluxSortie, T& value)
   {
     //Swap Little <-> Big endian eventuel
     IO::endswap(&value);
     return fluxSortie.write(reinterpret_cast<char*>(&value), sizeof(T));
-  };
+  }
 
   // //Definition de template pour lecture au format binary
   // template <typename T>
@@ -84,23 +80,23 @@ public:
   //   //Swap Little <-> Big endian eventuel
   //   IO::endswap(&value);
   //   //Bug ici je pense, a voir...
-  // };
+  // }
 
   //Templates Format Binaire Base64 pour le XML VTK
   //-----------------------------------------------
 
   //Template pour ajouter n importe quelle type de donnee a une chaine de caractere
   template <typename T>
-  static void ajouteAlaChaine(char *chaine, int &taille, T &value)
+  static void ajouteAlaChaine(char* chaine, int& taille, T& value)
   {
-    char *conversionChaine = reinterpret_cast<char*>(&value);
-    for (int octet = 0; octet < sizeof(value); octet++)
+    char* conversionChaine = reinterpret_cast<char*>(&value);
+    for (unsigned int octet = 0; octet < sizeof(value); octet++)
     { chaine[taille++] = conversionChaine[octet]; }  
   }
 
   //Definition de template pour print d un number au format binary base64
   template <typename T>
-  static std::ostream& writeb64(std::ostream &fluxSortie, T &value)
+  static std::ostream& writeb64(std::ostream& fluxSortie, T& value)
   {
     //Swap Little <-> Big endian eventuel ne marche pas ??
     //IO::endswap(&value);
@@ -108,7 +104,7 @@ public:
     char* chaine = reinterpret_cast<char*>(&value);
     int tailleChaine = sizeof(value);
     return IO::writeb64Chaine(fluxSortie, chaine, tailleChaine);
-  };
+  }
 
   // //ATTENTION !!!!!!!!!!!Lecture non Fonctionnelle !!!!!!!!!!!!!!
   // //Definition de template pour lecture au format binary base64
@@ -121,7 +117,7 @@ public:
   // };
   // //ATTENTION !!!!!!!!!!!Lecture non Fonctionnelle !!!!!!!!!!!!!!
 
-  static std::ostream& writeb64Chaine(std::ostream &fluxSortie, char *chaineAEncoder, int &taille);
+  static std::ostream& writeb64Chaine(std::ostream& fluxSortie, char* chaineAEncoder, int& taille);
 
   static void copieFichier(std::string file, std::string dossierSource, std::string dossierDestination);
 
@@ -129,9 +125,9 @@ private:
 
   //Swap Little <-> Big Endian
   template <typename T>
-  static void endswap(T *objp)
+  static void endswap(T* objp)
   {
-    unsigned char *memp = reinterpret_cast<unsigned char*>(objp);
+    unsigned char* memp = reinterpret_cast<unsigned char*>(objp);
     std::reverse(memp, memp + sizeof(T));
   }
   
@@ -150,7 +146,7 @@ Sa representation binary avec les bits de poids fort a gauche est :
 En hexadecimal cela devient:
  0    F       4    9       A    F       F    F         soit 0xF49AFFF
 Cet entier peut être stocke dans un tableau de 4 caracteres de 1 octet chacun par:
-char *tableau = reinterpret_cast<char *>(value)
+char* tableau = reinterpret_cast<char* >(value)
 Chaque octet correspond alors a un caractere de la table ASCII (sur 8 bits)
 
 ----------BASE64-------------

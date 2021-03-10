@@ -6,6 +6,7 @@
 //       |  `--.  \  `-.  \ `-' /   \  `-) ) |  `--.  | | |)| 
 //       /( __.'   \____\  )---'    )\____/  /( __.'  /(  (_) 
 //      (__)              (_)      (__)     (__)     (__)     
+//      Official webSite: https://code-mphi.github.io/ECOGEN/
 //
 //  This file is part of ECOGEN.
 //
@@ -30,11 +31,6 @@
 #ifndef GDENTIREDOMAIN_H
 #define GDENTIREDOMAIN_H
 
-//! \file      GDEntireDomain.h
-//! \author    F. Petitpas
-//! \version   1.0
-//! \date      December 19 2017
-
 #include "GeometricalDomain.h"
 
 //! \class     GDEntireDomain
@@ -48,10 +44,10 @@ public:
   //! \param     mixture        Mixture variables to copy in geometrical domain
   //! \param     vecTransports  Transports vector varaiables to copy in geometrical domain
   //! \param     physicalEntity physical entity number relative to mesh generation (see mesh tool)
-  GDEntireDomain(std::string name, std::vector<Phase*> vecPhases, Mixture *mixture, std::vector<Transport> vecTransports, const int &physicalEntity);
+  GDEntireDomain(std::string name, std::vector<Phase*> vecPhases, Mixture* mixture, std::vector<Transport> vecTransports, const int& physicalEntity);
   virtual ~GDEntireDomain();
 
-  virtual bool belong(Coord &posElement, const int &lvl) const;
+  virtual bool belong(Coord& /*posElement*/, const int& /*lvl*/) const;
 };
 
 #endif //GDENTIREDOMAIN_H

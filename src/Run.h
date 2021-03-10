@@ -6,6 +6,7 @@
 //       |  `--.  \  `-.  \ `-' /   \  `-) ) |  `--.  | | |)| 
 //       /( __.'   \____\  )---'    )\____/  /( __.'  /(  (_) 
 //      (__)              (_)      (__)     (__)     (__)     
+//      Official webSite: https://code-mphi.github.io/ECOGEN/
 //
 //  This file is part of ECOGEN.
 //
@@ -29,11 +30,6 @@
 
 #ifndef RUN_H
 #define RUN_H
-
-//! \file      Run.h
-//! \author    F. Petitpas, K. Schmidmayer
-//! \version   1.1
-//! \date      June 5 2019
 
 class Run;
 
@@ -70,11 +66,11 @@ class Run;
 class Run
 {
   public:
-    Run(std::string nameCasTest, const int &number);
+    Run(std::string nameCasTest, const int& number);
     ~Run();
 
     //! \brief    Initialization of the simulation
-    void initialize(int argc, char* argv[]);
+    void initialize();
     //! \brief    Hyperbolic resolution + Relaxations + Source terms integration
     //! \details  Hyperbolic part is solved using Finite Volume method : \f[ \frac{U^{n+1}_i-U^{n}_i}{\Delta t} =  -\sum_{faces} \vec{F}^*_f \cdot \vec{n}_f \f]
     void solver();
@@ -90,13 +86,13 @@ class Run
   private:   
 
     //Specific solvers
-    void integrationProcedure(double &dt, int lvl, double &dtMax, int &nbCellsTotalAMR);
-    void advancingProcedure(double &dt, int &lvl, double &dtMax);
-    void solveHyperbolic(double &dt, int &lvl, double &dtMax);
-    void solveHyperbolicO2(double &dt, int &lvl, double &dtMax);
-    void solveAdditionalPhysics(double &dt, int &lvl);
-    void solveSourceTerms(double &dt, int &lvl);
-    void solveRelaxations(int &lvl);
+    void integrationProcedure(double& dt, int lvl, double& dtMax, int& nbCellsTotalAMR);
+    void advancingProcedure(double& dt, int& lvl, double& dtMax);
+    void solveHyperbolic(double& dt, int& lvl, double& dtMax);
+    void solveHyperbolicO2(double& dt, int& lvl, double& dtMax);
+    void solveAdditionalPhysics(double& dt, int& lvl);
+    void solveSourceTerms(double& dt, int& lvl);
+    void solveRelaxations(double& dt, int& lvl);
     void verifyErrors() const;
 
     int m_numTest;                             //!<Number of the simulation
@@ -105,7 +101,7 @@ class Run
     std::string m_simulationName;              //!<Name of the simulation
     bool m_controleIterations;                 //!Choice for time control mode (iteration or physical time)
     int m_nbIte, m_freq;                       //!<Requested number of final time iteration and frequency
-    float m_finalPhysicalTime, m_timeFreq;     //!<Requested final physical time of the simulation and time frequency for output printing
+    double m_finalPhysicalTime, m_timeFreq;    //!<Requested final physical time of the simulation and time frequency for output printing
     double m_cfl;                              //!<CFL criteria (between 0 and 1)
     int m_numberPhases;                        //!<Number of phases
     int m_numberEos;                           //!<Number of equations of states
@@ -124,20 +120,19 @@ class Run
     bool m_parallelPreTreatment;               //!<Choice for mesh parallel pre-treatment  (needed for first simulation on a new parallel unstructured geometry)
     
     //Calcul attributes
-    Mesh *m_mesh;                              //!<Mesh type object: contains all geometrical properties of the simulation
-    Model *m_model;                            //!<Model type object: contains the flow model methods
-    TypeMeshContainer<Cell *> *m_cellsLvl;                   //!<Array of vectors (one per level) of computational cell objects: Contains physical fluid states.
-    TypeMeshContainer<Cell *> *m_cellsLvlGhost;              //!<Array of vectors (one per level) of ghost cell objects.
-    TypeMeshContainer<CellInterface *> *m_cellInterfacesLvl; //!<Array of vectors (one per level) of interface objects between cells (or between a cell and a physical domain boundary)
-    Eos **m_eos;                               //!<Array of Equations of states: Contains fluid EOS parameters
+    Mesh* m_mesh;                              //!<Mesh type object: contains all geometrical properties of the simulation
+    Model* m_model;                            //!<Model type object: contains the flow model methods
+    TypeMeshContainer<Cell*>* m_cellsLvl;                   //!<Array of vectors (one per level) of computational cell objects: Contains physical fluid states.
+    TypeMeshContainer<Cell*>* m_cellsLvlGhost;              //!<Array of vectors (one per level) of ghost cell objects.
+    TypeMeshContainer<CellInterface*>* m_cellInterfacesLvl; //!<Array of vectors (one per level) of interface objects between cells (or between a cell and a physical domain boundary)
+    Eos** m_eos;                               //!<Array of Equations of states: Contains fluid EOS parameters
     std::vector<AddPhys*> m_addPhys;           //!<Vector of Additional physics
-    Symmetry *m_symmetry;                      //!<Specific object for symmetry (cylindrical or spherical) if active
-    Symmetry *m_symmetryAddPhys;               //!<Object containing the parent class of symmetry to trick the corresponding additional physics argument (avoid taking into account symmetry terms multipled times)
+    Symmetry* m_symmetry;                      //!<Specific object for symmetry (cylindrical or spherical) if active
     std::vector<Source*> m_sources;            //!<Vector of source terms
-    Limiter *m_globalLimiter;                  //!<Slope limiter type object for second order in space
-    Limiter *m_interfaceLimiter;               //!<Slope limiter type object for second order in space specific to interface location
-    Limiter *m_globalVolumeFractionLimiter;    //!<Slope limiter type object for second order in space specific to interface advected variables (alpha, transports)
-    Limiter *m_interfaceVolumeFractionLimiter; //!<Slope limiter type object for second order in space specific to interface advected variables (alpha, transports) and to interface location
+    Limiter* m_globalLimiter;                  //!<Slope limiter type object for second order in space
+    Limiter* m_interfaceLimiter;               //!<Slope limiter type object for second order in space specific to interface location
+    Limiter* m_globalVolumeFractionLimiter;    //!<Slope limiter type object for second order in space specific to interface advected variables (alpha, transports)
+    Limiter* m_interfaceVolumeFractionLimiter; //!<Slope limiter type object for second order in space specific to interface advected variables (alpha, transports) and to interface location
     std::vector<std::string> m_nameGTR;        //!<Vector of transport variable names
     std::vector<std::string> m_nameQPA;        //!<Vector of names of the quantities of additional physics
     std::vector<std::string> m_nameGPH;        //!<Vector of phasic variables name
@@ -149,21 +144,25 @@ class Run
     int m_restartAMRsaveFreq;                  //!<Frequency at which a save to restart a simulation is done (usefull only for AMR)
 
     //Input/Output attributes
-	Input* m_input;						       //!<Input object
-    Output* m_outPut;                          //!<Main output object
-    std::vector<Output *> m_cuts;              //!<Vector of output objects for cuts
-    std::vector<Output *> m_probes;            //!<Vector of output objects for probes
-	std::vector<Output*> m_globalQuantities;     //!<Vector of output objects for global quantities (mass, total energy)
-    timeStats m_stat;                          //!<Object linked to computational time statistics
-    double *m_pMax, *m_pMaxWall;               //!<Maximal pressure found between each written output and its corresponding coordinate (only for few test cases)
-    double m_massWanted, m_alphaWanted;        //!<Mass and corresponding volume fraction for special output (only for few test cases)
+    Input* m_input;         						 //!<Input object
+    Output* m_outPut;                                //!<Main output object
+    std::vector<Output*> m_cuts;                     //!<Vector of output objects for cuts
+    std::vector<Output*> m_probes;                   //!<Vector of output objects for probes
+    std::vector<Output*> m_globalQuantities;         //!<Vector of output objects for global quantities (mass or total energy)
+    std::vector<Output*> m_recordBoundariesFlux;     //!<Vector of output object for flux (massflow or power flux) recording on boundaries
+    timeStats m_stat;                                //!<Object linked to computational time statistics
+    double* m_pMax;                                  //!<Maximal pressure found between each written output (only for few test cases)
+    double* m_pMaxWall;                              //!<Coordinate of the maximal pressure found between each written output (only for few test cases)
+    double m_volumePhaseK;                           //!<Volume of phase k. Output with purpose to track the radius of a bubble over time
+    double m_massWanted, m_alphaWanted;              //!<Mass and corresponding volume fraction for special output (only for few test cases)
 
     friend class Input;
     friend class Output;
     friend class OutputXML;
     friend class OutputGNU;
     friend class OutputProbeGNU;
-	friend class OutputGlobalGNU;
+    friend class OutputGlobalGNU;
+    friend class OutputBoundaryFluxGNU;
     friend class Mesh;
 };
 

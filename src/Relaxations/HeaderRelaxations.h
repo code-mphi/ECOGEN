@@ -6,6 +6,7 @@
 //       |  `--.  \  `-.  \ `-' /   \  `-) ) |  `--.  | | |)| 
 //       /( __.'   \____\  )---'    )\____/  /( __.'  /(  (_) 
 //      (__)              (_)      (__)     (__)     (__)     
+//      Official webSite: https://code-mphi.github.io/ECOGEN/
 //
 //  This file is part of ECOGEN.
 //
@@ -30,12 +31,9 @@
 #ifndef HEADERRELAXATIONS_H
 #define HEADERRELAXATIONS_H
 
-//! \file      HeaderRelaxations.h
-//! \author    F. Petitpas
-//! \version   1.0
-//! \date      Octopber 15 2018
-
 #include "RelaxationP.h"
+#include "RelaxationPInfinite.h"
+#include "RelaxationPFinite.h"
 #include "RelaxationPT.h"
 #include "RelaxationPTMu.h"
 

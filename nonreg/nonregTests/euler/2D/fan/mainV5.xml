@@ -1,0 +1,10 @@
+<?xml version = "1.0" encoding = "UTF-8" standalone = "yes"?>
+<computationParam>
+	<run>euler2DFan</run>
+	<outputMode format="XML" binary="false"/>
+	<timeControlMode iterations="false">
+		<iterations number="2000" iterFreq="100"/>
+		<physicalTime totalTime="0.04" timeFreq="0.01"/>
+	</timeControlMode>
+	<computationControl CFL="0.8"/>
+</computationParam>

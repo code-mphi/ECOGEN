@@ -6,6 +6,7 @@
 //       |  `--.  \  `-.  \ `-' /   \  `-) ) |  `--.  | | |)| 
 //       /( __.'   \____\  )---'    )\____/  /( __.'  /(  (_) 
 //      (__)              (_)      (__)     (__)     (__)     
+//      Official webSite: https://code-mphi.github.io/ECOGEN/
 //
 //  This file is part of ECOGEN.
 //
@@ -27,21 +28,12 @@
 //  along with ECOGEN (file LICENSE).  
 //  If not, see <http://www.gnu.org/licenses/>.
 
-//! \file      GOLine.cpp
-//! \author    F. Petitpas, K. Schmidmayer
-//! \version   1.0
-//! \date      January 5 2018
-
 #include "GOLine.h"
 #include <iostream>
 
 //***********************************************************************
 
-GOLine::GOLine(){}
-
-//***********************************************************************
-
-GOLine::GOLine(const Coord &vertex, const Coord &vecDir) :
+GOLine::GOLine(const Coord& vertex, const Coord& vecDir) :
   GeometricObject(LINE), m_point(vertex), m_vecDir(vecDir)
 {
   if (vecDir.norm() < 1e-6) {
@@ -58,7 +50,7 @@ GOLine::~GOLine(){}
 
 //***********************************************************************
 
-double GOLine::distancePoint(const Coord &vertex) const
+double GOLine::distancePoint(const Coord& vertex) const
 {
   Coord vec; vec.setFromSubtractedVectors(m_point, vertex);
   if (std::fabs(vec.scalar(m_vecDir)) < 1e-6) { return 0.; }
@@ -67,7 +59,7 @@ double GOLine::distancePoint(const Coord &vertex) const
 
 //***********************************************************************
 
-Coord GOLine::projectionPoint(const Coord &vertex) const
+Coord GOLine::projectionPoint(const Coord& vertex) const
 {
   Coord projection;
   Coord vec; vec.setFromSubtractedVectors(m_point, vertex);

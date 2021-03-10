@@ -6,6 +6,7 @@
 //       |  `--.  \  `-.  \ `-' /   \  `-) ) |  `--.  | | |)| 
 //       /( __.'   \____\  )---'    )\____/  /( __.'  /(  (_) 
 //      (__)              (_)      (__)     (__)     (__)     
+//      Official webSite: https://code-mphi.github.io/ECOGEN/
 //
 //  This file is part of ECOGEN.
 //
@@ -27,16 +28,11 @@
 //  along with ECOGEN (file LICENSE).  
 //  If not, see <http://www.gnu.org/licenses/>.
 
-//! \file      Cell.cpp
-//! \author    F. Petitpas, K. Schmidmayer, S. Le Martelot, B. Dorschner
-//! \version   1.1
-//! \date      June 5 2019
-
 #include "Cell.h"
 
 //***********************************************************************
 
-Cell::Cell() : m_vecPhases(0), m_mixture(0), m_cons(0), m_vecTransports(0), m_consTransports(0), m_childrenCells(0),m_element(0)
+Cell::Cell() : m_numberPhases(0), m_vecPhases(0), m_mixture(0), m_vecTransports(0), m_cons(0), m_consTransports(0), m_element(0), m_childrenCells(0)
 {
   m_lvl = 0;
   m_xi = 0.;
@@ -45,7 +41,7 @@ Cell::Cell() : m_vecPhases(0), m_mixture(0), m_cons(0), m_vecTransports(0), m_co
 
 //***********************************************************************
 
-Cell::Cell(int lvl) : m_vecPhases(0), m_mixture(0), m_cons(0), m_vecTransports(0), m_consTransports(0), m_childrenCells(0), m_element(0)
+Cell::Cell(int lvl) : m_numberPhases(0), m_vecPhases(0), m_mixture(0), m_vecTransports(0), m_cons(0), m_consTransports(0), m_element(0), m_childrenCells(0)
 {
   m_lvl = lvl;
   m_xi = 0.;
@@ -80,14 +76,14 @@ Cell::~Cell()
 
 //***********************************************************************
 
-void Cell::addCellInterface(CellInterface *cellInterface)
+void Cell::addCellInterface(CellInterface* cellInterface)
 {
   m_cellInterfaces.push_back(cellInterface);
 }
 
 //***********************************************************************
 
-void Cell::deleteCellInterface(CellInterface *cellInterface)
+void Cell::deleteCellInterface(CellInterface* cellInterface)
 {
   for (unsigned int b = 0; b < m_cellInterfaces.size(); b++) {
     if (m_cellInterfaces[b] == cellInterface) { m_cellInterfaces.erase(m_cellInterfaces.begin() + b); }
@@ -96,7 +92,7 @@ void Cell::deleteCellInterface(CellInterface *cellInterface)
 
 //***********************************************************************
 
-void Cell::allocate(const int &numberPhases, const int &numberTransports, const std::vector<AddPhys*> &addPhys, Model *model)
+void Cell::allocate(const int& numberPhases, const int& numberTransports, const std::vector<AddPhys*>& addPhys, Model* model)
 {
   m_numberPhases = numberPhases;
   m_numberTransports = numberTransports;
@@ -118,14 +114,14 @@ void Cell::allocate(const int &numberPhases, const int &numberTransports, const 
 
 //***********************************************************************
 
-void Cell::allocateEos(const int &numberPhases, Model *model)
+void Cell::allocateEos(const int& numberPhases, Model* model)
 {
 	model->allocateEos(*this, numberPhases);
 }
 
 //***********************************************************************
 
-void Cell::fill(std::vector<GeometricalDomain*> &domains, const int &lvlMax)
+void Cell::fill(std::vector<GeometricalDomain*>& domains, const int& /*lvlMax*/)
 {
   Coord coordinates;
   coordinates = m_element->getPosition();
@@ -164,6 +160,32 @@ void Cell::fill(std::vector<GeometricalDomain*> &domains, const int &lvlMax)
   // double velocity(variation*(-100.)+(1.-variation)*100.);
   // m_mixture->setVelocity(velocity, 0., 0.);
 
+  //Initial smearing for 1D water--air shock tube test case. Uncomment only when needed.
+  // double coordX;
+  // coordX = std::pow(std::pow(coordinates.getX(), 2.), 0.5); //1D
+  // double variation(0.);
+  // double h(1./5000./std::pow(2., (double)lvlMax));
+  // variation = 1. / 2.*(1. - tanh((coordX - 0.7)/1.5/h));
+  // double pressure(variation*1.e9 + (1.-variation)*1.e5);
+  // double alphaWater(variation*1. + (1.-variation)*0.);
+  // double alphaAir(1. - alphaWater);
+  // m_vecPhases[0]->setPressure(pressure);
+  // m_vecPhases[1]->setPressure(pressure);
+  // m_mixture->setPressure(pressure);
+  // m_vecPhases[0]->setAlpha(alphaAir);
+  // m_vecPhases[1]->setAlpha(alphaWater);
+
+  //Initial smearing for 1D water--air shock-on-interface test case. Uncomment only when needed.
+  // double coordX;
+  // coordX = std::pow(std::pow(coordinates.getX(), 2.), 0.5); //1D
+  // double variation(0.);
+  // double h(1./250./std::pow(2., (double)lvlMax));
+  // variation = 1. / 2.*(1. - tanh((coordX - 0.5)/1.5/h));
+  // double alphaWater(variation*1. + (1.-variation)*0.);
+  // double alphaAir(1. - alphaWater);
+  // m_vecPhases[0]->setAlpha(alphaAir);
+  // m_vecPhases[1]->setAlpha(alphaWater);
+
   //Debug
   // double radius;
   // radius = std::pow(std::pow(coordinates.getX(), 2.) + std::pow(coordinates.getY(), 2.), 0.5); //2D
@@ -175,28 +197,21 @@ void Cell::fill(std::vector<GeometricalDomain*> &domains, const int &lvlMax)
 
 //***********************************************************************
 
-void Cell::allocateAndCopyPhase(const int &phaseNumber, Phase *phase)
-{
-  phase->allocateAndCopyPhase(&m_vecPhases[phaseNumber]);
-}
-
-//***********************************************************************
-
-void Cell::copyPhase(const int &phaseNumber, Phase *phase)
+void Cell::copyPhase(const int& phaseNumber, Phase* phase)
 {
   m_vecPhases[phaseNumber]->copyPhase(*phase);
 }
 
 //***********************************************************************
 
-void Cell::copyMixture(Mixture *mixture)
+void Cell::copyMixture(Mixture* mixture)
 {
   m_mixture->copyMixture(*mixture);
 }
 
 //***********************************************************************
 
-void Cell::setToZeroCons(const int &numberPhases, const int &numberTransports)
+void Cell::setToZeroCons(const int& numberPhases, const int& numberTransports)
 {
   m_cons->setToZero(numberPhases);
   for (int k = 0; k < numberTransports; k++) {
@@ -206,7 +221,7 @@ void Cell::setToZeroCons(const int &numberPhases, const int &numberTransports)
 
 //***********************************************************************
 
-void Cell::setToZeroConsGlobal(const int &numberPhases, const int &numberTransports)
+void Cell::setToZeroConsGlobal(const int& numberPhases, const int& numberTransports)
 {
   if (!m_split) {
     m_cons->setToZero(numberPhases);
@@ -223,20 +238,20 @@ void Cell::setToZeroConsGlobal(const int &numberPhases, const int &numberTranspo
 
 //***********************************************************************
 
-void Cell::setToZeroBufferFlux(const int &numberPhases)
+void Cell::setToZeroBufferFlux(const int& numberPhases)
 {
   m_cons->setToZeroBufferFlux(numberPhases);
 }
 
 //***********************************************************************
 
-void Cell::timeEvolution(const double &dt, const int &numberPhases, const int &numberTransports, Symmetry *symmetry, Prim type)
+void Cell::timeEvolution(const double& dt, const int& numberPhases, const int& numberTransports, Symmetry* symmetry, Prim type)
 {
-  m_cons->setBufferFlux(*this, numberPhases);                //fluxTempXXX receive conservative variables at time n : Un
-  symmetry->addSymmetricTerms(this, numberPhases, type);     //m_cons is incremented by the symmetric terms from primitive variables at time n
-  m_cons->multiply(dt, numberPhases);                        //m_cons is multiplied by dt
-  m_cons->addFlux(1., numberPhases);                         //Adding the buffer fluxTempXXX to obtain Un+1 in m_cons
-  m_cons->schemeCorrection(this, numberPhases);              //Specific correction for non-conservative models
+  m_cons->setBufferFlux(*this, numberPhases);             //fluxTempXXX receive conservative variables at time n: Un
+  symmetry->addSymmetricTerms(this, numberPhases, type);  //m_cons is incremented by the symmetric terms from primitive variables at time n //KS//Sure to use type here? To analyse and test without
+  m_cons->multiply(dt, numberPhases);                     //m_cons is multiplied by dt
+  m_cons->addFlux(1., numberPhases);                      //Adding the buffer fluxTempXXX to obtain Un+1 in m_cons
+  m_cons->schemeCorrection(numberPhases);                 //Specific correction for non-conservative models (using Un in fluxTempXXX and Un+1 in m_cons)
 
   //Same process for transport (Un construction not needed)
   for (int k = 0; k < numberTransports; k++) {
@@ -247,7 +262,7 @@ void Cell::timeEvolution(const double &dt, const int &numberPhases, const int &n
 
 //***********************************************************************
 
-void Cell::timeEvolutionAddPhys(const double &dt, const int &numberPhases, const int &numberTransports)
+void Cell::timeEvolutionAddPhys(const double& dt, const int& numberPhases)
 {
   m_cons->setBufferFlux(*this, numberPhases);                //fluxTempXXX receive conservative variables at time n : Un
   m_cons->multiply(dt, numberPhases);                        //m_cons is multiplied by dt
@@ -256,21 +271,21 @@ void Cell::timeEvolutionAddPhys(const double &dt, const int &numberPhases, const
 
 //***********************************************************************
 
-void Cell::buildPrim(const int &numberPhases)
+void Cell::buildPrim(const int& numberPhases)
 {
   m_cons->buildPrim(m_vecPhases, m_mixture, numberPhases);
 }
 
 //***********************************************************************
 
-void Cell::buildCons(const int &numberPhases)
+void Cell::buildCons(const int& numberPhases)
 {
   m_cons->buildCons(m_vecPhases, numberPhases, m_mixture);
 }
 
 //***********************************************************************
 
-void Cell::correctionEnergy(const int &numberPhases)
+void Cell::correctionEnergy(const int& numberPhases)
 {
   m_mixture->totalEnergyToInternalEnergy(m_vecQuantitiesAddPhys);    //Building specific internal energy from totale one
   m_cons->correctionEnergy(this, numberPhases);                      //Pressure correction
@@ -278,7 +293,7 @@ void Cell::correctionEnergy(const int &numberPhases)
 
 //***********************************************************************
 
-void Cell::printPhasesMixture(const int &numberPhases, const int &numberTransports, std::ofstream &fileStream) const
+void Cell::printPhasesMixture(const int& numberPhases, const int& numberTransports, std::ofstream &fileStream) const
 {
   for (int k = 0; k < numberPhases; k++) { m_vecPhases[k]->printPhase(fileStream); }
   m_mixture->printMixture(fileStream);
@@ -314,7 +329,7 @@ void Cell::fulfillState(Prim type)
 
 //***********************************************************************
 
-void Cell::localProjection(const Coord &normal, const Coord &tangent, const Coord &binormal, const int &numberPhases, Prim type)
+void Cell::localProjection(const Coord& normal, const Coord& tangent, const Coord& binormal, const int& numberPhases, Prim /*type*/)
 {
   for (int k = 0; k < numberPhases; k++) {
     m_vecPhases[k]->localProjection(normal, tangent, binormal);
@@ -324,7 +339,7 @@ void Cell::localProjection(const Coord &normal, const Coord &tangent, const Coor
 
 //***********************************************************************
 
-void Cell::reverseProjection(const Coord &normal, const Coord &tangent, const Coord &binormal, const int &numberPhases, Prim type)
+void Cell::reverseProjection(const Coord& normal, const Coord& tangent, const Coord& binormal, const int& numberPhases)
 {
   for (int k = 0; k < numberPhases; k++) {
     m_vecPhases[k]->reverseProjection(normal, tangent, binormal);
@@ -334,7 +349,7 @@ void Cell::reverseProjection(const Coord &normal, const Coord &tangent, const Co
 
 //***********************************************************************
 
-void Cell::copyVec(Phase **vecPhases, Mixture *mixture, Transport *vecTransports)
+void Cell::copyVec(Phase** vecPhases, Mixture* mixture, Transport* vecTransports)
 {
   for (int k = 0; k < m_numberPhases; k++) {
     m_vecPhases[k]->copyPhase(*vecPhases[k]);
@@ -347,7 +362,7 @@ void Cell::copyVec(Phase **vecPhases, Mixture *mixture, Transport *vecTransports
 
 //***********************************************************************
 
-//void Cell::printCut1Dde2D(std::ofstream &fileStream, std::string variableConstanteCut, const double &valueCut, const double &dL)
+//void Cell::printCut1Dde2D(std::ofstream &fileStream, std::string variableConstanteCut, const double& valueCut, const double& dL)
 //{
 //  if (m_childrenCells.size() == 0) {
 //    bool imprX(false), imprY(false), imprZ(false);
@@ -383,7 +398,7 @@ void Cell::copyVec(Phase **vecPhases, Mixture *mixture, Transport *vecTransports
 ////***********************************************************************
 //
 //void Cell::printCut1Dde3D(std::ofstream &fileStream, std::string variableConstanteCut1, std::string variableConstanteCut2,
-//  const double &valueCut1, const double &valueCut2, const double &dL1, const double &dL2)
+//  const double& valueCut1, const double& valueCut2, const double& dL1, const double& dL2)
 //{
 //  if (m_childrenCells.size() == 0) {
 //    bool imprX(true), imprY(true), imprZ(true);
@@ -522,7 +537,7 @@ double Cell::selectScalar(Variable nameVariable, int num) const
 
 //***********************************************************************
 
-void Cell::setScalar(Variable nameVariable, const double &value, int num, int subscript)
+void Cell::setScalar(Variable nameVariable, const double& value, int num)
 {
   //Selection scalar
   if (nameVariable == transport) {
@@ -546,7 +561,7 @@ Coord Cell::selectVector(Variable nameVector, int num, int subscript) const
 
 //***********************************************************************
 
-void Cell::setVector(Variable nameVector, const Coord &value, int num, int subscript)
+void Cell::setVector(Variable nameVector, const Coord& value, int num, int subscript)
 {
   //Selection vector
   if (nameVector == QPA) { //additional physics
@@ -569,7 +584,7 @@ Coord Cell::computeGradient(Variable nameVariable, int numPhase)
   for (unsigned int b = 0; b < m_cellInterfaces.size(); b++) {
     if (!m_cellInterfaces[b]->getSplit()) {
       typeCellInterface = m_cellInterfaces[b]->whoAmI();
-      if (typeCellInterface == 0) //Cell interface type CellInterface/O2
+      if (typeCellInterface == 0) //Cell interface of type CellInterface/O2 (inner)
       {
         // Sum for each cell interface with ponderation using distance in each direction
         // then the cell gradient is normalized by sum of distances.
@@ -605,20 +620,20 @@ Coord Cell::computeGradient(Variable nameVariable, int numPhase)
           // and calculus of the gradient normal to the face
           distance = this->distance(m_cellInterfaces[b]);
           cg = m_cellInterfaces[b]->getCellGauche()->selectScalar(nameVariable, numPhase);
-          gradCellInterface = cg / distance;
+          gradCellInterface = - cg / distance;
 
-          if (typeCellInterface == 6) { //Cell Interface of type Symmetry
+          if (typeCellInterface == SYMMETRY) {
             // Multiplication of the gradient by the normal direction to guarantee symmetry
-            if (nameVariable == velocityU) { gradCellInterface = gradCellInterface * m_cellInterfaces[b]->getFace()->getNormal().getX(); }
-            if (nameVariable == velocityV) { gradCellInterface = gradCellInterface * m_cellInterfaces[b]->getFace()->getNormal().getY(); }
-            if (nameVariable == velocityW) { gradCellInterface = gradCellInterface * m_cellInterfaces[b]->getFace()->getNormal().getZ(); }
+            if (nameVariable == velocityU) { gradCellInterface = gradCellInterface * std::fabs(m_cellInterfaces[b]->getFace()->getNormal().getX()); }
+            if (nameVariable == velocityV) { gradCellInterface = gradCellInterface * std::fabs(m_cellInterfaces[b]->getFace()->getNormal().getY()); }
+            if (nameVariable == velocityW) { gradCellInterface = gradCellInterface * std::fabs(m_cellInterfaces[b]->getFace()->getNormal().getZ()); }
 
-            // Projection in the absolute system of coordinate +
+            // Projection in the absolute system of coordinate
             grad.setXYZ(grad.getX() + m_cellInterfaces[b]->getFace()->getNormal().getX()*gradCellInterface*distanceX,
                         grad.getY() + m_cellInterfaces[b]->getFace()->getNormal().getY()*gradCellInterface*distanceY,
                         grad.getZ() + m_cellInterfaces[b]->getFace()->getNormal().getZ()*gradCellInterface*distanceZ);
           }
-          else if (typeCellInterface == 2) { //Cell interface of type Wall
+          else if (typeCellInterface == WALL) {
             // Projection in the absolute system of coordinate
             grad.setXYZ(grad.getX() + m_cellInterfaces[b]->getFace()->getNormal().getX()*gradCellInterface*distanceX,
                         grad.getY() + m_cellInterfaces[b]->getFace()->getNormal().getY()*gradCellInterface*distanceY,
@@ -642,7 +657,7 @@ Coord Cell::computeGradient(Variable nameVariable, int numPhase)
 
 //***********************************************************************
 
-void Cell::computeGradient(std::vector<Coord> &grads, std::vector<Variable> &nameVariables, std::vector<int> &numPhases)
+void Cell::computeGradient(std::vector<Coord>& grads, std::vector<Variable>& nameVariables, std::vector<int>& numPhases)
 {
   int typeCellInterface(0);
   double cg(0.), cd(0.), gradCellInterface(0.);
@@ -653,7 +668,7 @@ void Cell::computeGradient(std::vector<Coord> &grads, std::vector<Variable> &nam
   for (unsigned int b = 0; b < m_cellInterfaces.size(); b++) {
     if (!m_cellInterfaces[b]->getSplit()) {
       typeCellInterface = m_cellInterfaces[b]->whoAmI();
-      if (typeCellInterface == 0) //Cell interface type CellInterface/O2
+      if (typeCellInterface == 0) //Cell interface of type CellInterface/O2 (inner)
       {
         // Sum for each cell interface with ponderation using distance in each direction
         // then the cell gradient is normalized by sum of distances.
@@ -692,20 +707,20 @@ void Cell::computeGradient(std::vector<Coord> &grads, std::vector<Variable> &nam
             // Extracting left variables values
             // and calculus of the gradient normal to the face
             cg = m_cellInterfaces[b]->getCellGauche()->selectScalar(nameVariables[g], numPhases[g]);
-            gradCellInterface = cg / distance;
+            gradCellInterface = - cg / distance;
 
-            if (typeCellInterface == 6) { //Cell Interface of type Symmetry
+            if (typeCellInterface == SYMMETRY) {
               // Multiplication of the gradient by the normal direction to guarantee symmetry
-              if (nameVariables[g] == velocityU) { gradCellInterface = gradCellInterface * m_cellInterfaces[b]->getFace()->getNormal().getX(); }
-              if (nameVariables[g] == velocityV) { gradCellInterface = gradCellInterface * m_cellInterfaces[b]->getFace()->getNormal().getY(); }
-              if (nameVariables[g] == velocityW) { gradCellInterface = gradCellInterface * m_cellInterfaces[b]->getFace()->getNormal().getZ(); }
+              if (nameVariables[g] == velocityU) { gradCellInterface = gradCellInterface * std::fabs(m_cellInterfaces[b]->getFace()->getNormal().getX()); }
+              if (nameVariables[g] == velocityV) { gradCellInterface = gradCellInterface * std::fabs(m_cellInterfaces[b]->getFace()->getNormal().getY()); }
+              if (nameVariables[g] == velocityW) { gradCellInterface = gradCellInterface * std::fabs(m_cellInterfaces[b]->getFace()->getNormal().getZ()); }
 
-              // Projection in the absolute system of coordinate +
+              // Projection in the absolute system of coordinate
               grads[g].setXYZ(grads[g].getX() + m_cellInterfaces[b]->getFace()->getNormal().getX()*gradCellInterface*distanceX,
                               grads[g].getY() + m_cellInterfaces[b]->getFace()->getNormal().getY()*gradCellInterface*distanceY,
                               grads[g].getZ() + m_cellInterfaces[b]->getFace()->getNormal().getZ()*gradCellInterface*distanceZ);
             }
-            else if (typeCellInterface == 2) { //Cell interface of type Wall
+            else if (typeCellInterface == WALL) {
               // Projection in the absolute system of coordinate
               grads[g].setXYZ(grads[g].getX() + m_cellInterfaces[b]->getFace()->getNormal().getX()*gradCellInterface*distanceX,
                               grads[g].getY() + m_cellInterfaces[b]->getFace()->getNormal().getY()*gradCellInterface*distanceY,
@@ -730,14 +745,14 @@ void Cell::computeGradient(std::vector<Coord> &grads, std::vector<Variable> &nam
 
 //***********************************************************************
 
-const Coord& Cell::getGradTk(int &numPhase, int &numAddPhys) const
+const Coord& Cell::getGradTk(int& numPhase, int& numAddPhys) const
 {
   return m_vecQuantitiesAddPhys[numAddPhys]->getGradTk(numPhase);
 }
 
 //***********************************************************************
 
-void Cell::setGradTk(int &numPhase, int &numAddPhys, double *buffer, int &counter)
+void Cell::setGradTk(int& numPhase, int& numAddPhys, double* buffer, int& counter)
 {
   Coord grad(0.);
   grad.setX(buffer[++counter]);
@@ -748,7 +763,7 @@ void Cell::setGradTk(int &numPhase, int &numAddPhys, double *buffer, int &counte
 
 //***********************************************************************
 
-void Cell::addNonConsAddPhys(const int &numberPhases, AddPhys &addPhys, Symmetry *symmetry)
+void Cell::addNonConsAddPhys(const int& numberPhases, AddPhys &addPhys, Symmetry* symmetry)
 {
   addPhys.addNonConsAddPhys(this, numberPhases);
   symmetry->addSymmetricTermsAddPhys(this, numberPhases, addPhys);
@@ -756,7 +771,7 @@ void Cell::addNonConsAddPhys(const int &numberPhases, AddPhys &addPhys, Symmetry
 
 //***********************************************************************
 
-void Cell::reinitializeColorFunction(const int &numTransport, const int &numPhase)
+void Cell::reinitializeColorFunction(const int& numTransport, const int& numPhase)
 {
 	m_vecTransports[numTransport].setValue(m_vecPhases[numPhase]->getAlpha());
 }
@@ -772,28 +787,28 @@ int Cell::getCellInterfacesSize() const
 
 //***********************************************************************
 
-CellInterface* Cell::getCellInterface(int &b)
+CellInterface* Cell::getCellInterface(const int& b)
 {
   return m_cellInterfaces[b];
 }
 
 //***********************************************************************
 
-Phase* Cell::getPhase(const int &phaseNumber, Prim type) const
+Phase* Cell::getPhase(const int& phaseNumber, Prim /*type*/) const
 {
   return m_vecPhases[phaseNumber];
 }
 
 //***********************************************************************
 
-Phase** Cell::getPhases(Prim type) const
+Phase** Cell::getPhases(Prim /*type*/) const
 {
   return m_vecPhases;
 }
 
 //***********************************************************************
 
-Mixture* Cell::getMixture(Prim type) const
+Mixture* Cell::getMixture(Prim /*type*/) const
 {
   return m_mixture;
 }
@@ -807,14 +822,14 @@ Flux* Cell::getCons() const
 
 //***********************************************************************
 
-void Cell::setCons(Flux *cons)
+void Cell::setCons(Flux* cons)
 {
   m_cons->setCons(cons, m_numberPhases);
 }
 
 //***********************************************************************
 
-void Cell::setElement(Element *element, const int &numCell)
+void Cell::setElement(Element *element, const int& numCell)
 {
   m_element = element;
   m_element->setCellAssociee(numCell);
@@ -829,35 +844,35 @@ Element* Cell::getElement() const
 
 //***********************************************************************
 
-void Cell::setTransport(double value, int &numTransport, Prim type)
+void Cell::setTransport(double value, int& numTransport, Prim /*type*/)
 {
   m_vecTransports[numTransport].setValue(value);
 }
 
 //***********************************************************************
 
-Transport& Cell::getTransport(const int &numTransport, Prim type) const
+Transport& Cell::getTransport(const int& numTransport, Prim /*type*/) const
 {
 	return m_vecTransports[numTransport];
 }
 
 //***********************************************************************
 
-Transport* Cell::getTransports(Prim type) const
+Transport* Cell::getTransports(Prim /*type*/) const
 {
 	return m_vecTransports;
 }
 
 //***********************************************************************
 
-Transport* Cell::getConsTransport(const int &numTransport) const
+Transport* Cell::getConsTransport(const int& numTransport) const
 {
   return &m_consTransports[numTransport];
 }
 
 //***********************************************************************
 
-void Cell::setConsTransport(double value, const int &numTransport)
+void Cell::setConsTransport(double value, const int& numTransport)
 {
   m_consTransports[numTransport].setValue(value);
 }
@@ -908,56 +923,56 @@ void Cell::printInfo() const
 //******************************Distances*************************************
 //****************************************************************************
 
-double Cell::distance(Cell *c)
+double Cell::distance(Cell* c)
 {
   return m_element->distance(c->getElement());
 }
 
 //***********************************************************************
 
-double Cell::distanceX(Cell *c)
+double Cell::distanceX(Cell* c)
 {
 	return m_element->distanceX(c->getElement());
 }
 
 //***********************************************************************
 
-double Cell::distanceY(Cell *c)
+double Cell::distanceY(Cell* c)
 {
 	return m_element->distanceY(c->getElement());
 }
 
 //***********************************************************************
 
-double Cell::distanceZ(Cell *c)
+double Cell::distanceZ(Cell* c)
 {
 	return m_element->distanceZ(c->getElement());
 }
 
 //***********************************************************************
 
-double Cell::distance(CellInterface *b)
+double Cell::distance(CellInterface* b)
 {
   return m_element->distance(b->getFace());
 }
 
 //***********************************************************************
 
-double Cell::distanceX(CellInterface *b)
+double Cell::distanceX(CellInterface* b)
 {
   return m_element->distanceX(b->getFace());
 }
 
 //***********************************************************************
 
-double Cell::distanceY(CellInterface *b)
+double Cell::distanceY(CellInterface* b)
 {
   return m_element->distanceY(b->getFace());
 }
 
 //***********************************************************************
 
-double Cell::distanceZ(CellInterface *b)
+double Cell::distanceZ(CellInterface* b)
 {
   return m_element->distanceZ(b->getFace());
 }
@@ -994,8 +1009,8 @@ void Cell::timeEvolutionXi()
 
 //***********************************************************************
 
-void Cell::chooseRefine(const double &xiSplit, const int &nbCellsY, const int &nbCellsZ,
-  const std::vector<AddPhys*> &addPhys, Model *model, int &nbCellsTotalAMR)
+void Cell::chooseRefine(const double& xiSplit, const int& nbCellsY, const int& nbCellsZ,
+  const std::vector<AddPhys*>& addPhys, Model* model, int& nbCellsTotalAMR)
 {
   if (!m_split) {
     if (m_xi >= xiSplit) {
@@ -1010,7 +1025,7 @@ void Cell::chooseRefine(const double &xiSplit, const int &nbCellsY, const int &n
 
 //***********************************************************************
 
-void Cell::chooseUnrefine(const double &xiJoin, int &nbCellsTotalAMR)
+void Cell::chooseUnrefine(const double& xiJoin, int& nbCellsTotalAMR)
 {
   if (m_split) {
     bool deraffineGlobal(false);
@@ -1033,7 +1048,7 @@ void Cell::chooseUnrefine(const double &xiJoin, int &nbCellsTotalAMR)
 
 //***********************************************************************
 
-void Cell::refineCellAndCellInterfaces(const int &nbCellsY, const int &nbCellsZ, const std::vector<AddPhys*> &addPhys, Model *model, const bool &refineExternalCellInterfaces)
+void Cell::refineCellAndCellInterfaces(const int& nbCellsY, const int& nbCellsZ, const std::vector<AddPhys*>& addPhys, Model* model, const bool &refineExternalCellInterfaces)
 {
 	m_split = true;
 
@@ -1057,7 +1072,7 @@ void Cell::refineCellAndCellInterfaces(const int &nbCellsY, const int &nbCellsZ,
   }
   CellInterface* cellInterfaceRef(0);
   for (unsigned int b = 0; b < m_cellInterfaces.size(); b++) {
-    if (m_cellInterfaces[b]->whoAmI() == 0) { cellInterfaceRef = m_cellInterfaces[b]; break; } //Cell interface type CellInterface/O2
+    if (m_cellInterfaces[b]->whoAmI() == 0) { cellInterfaceRef = m_cellInterfaces[b]; break; } //Cell interface of type CellInterface/O2 (inner)
   }
   int allocateSlopeLocal = 1;
   
@@ -1380,7 +1395,7 @@ void Cell::refineCellAndCellInterfaces(const int &nbCellsY, const int &nbCellsZ,
 
 //***********************************************************************
 
-void Cell::createChildCell(const int &lvl)
+void Cell::createChildCell(const int& lvl)
 {
   m_childrenCells.push_back(new Cell(lvl + 1));
 }
@@ -1442,7 +1457,8 @@ void Cell::averageChildrenInParent()
     
     //Primitive variables reconstruction using relaxation
     m_cons->buildPrim(m_vecPhases, m_mixture, m_numberPhases);
-    m_model->relaxations(this, m_numberPhases);
+    double dt(0.); //No finite relaxation is computed
+    m_model->relaxations(this, m_numberPhases, dt);
 
     //Transport
     for (int k = 0; k < m_numberTransports; k++) {
@@ -1487,7 +1503,7 @@ bool Cell::lvlNeighborTooLow()
   bool criteria(false);
   for (unsigned int b = 0; b < m_cellInterfaces.size(); b++) {
     if (!m_cellInterfaces[b]->getSplit()) {
-      if (m_cellInterfaces[b]->whoAmI() == 0) //Cell interface type CellInterface/O2
+      if (m_cellInterfaces[b]->whoAmI() == 0) //Cell interface of type CellInterface/O2 (inner)
       {
         //Getting left and right AMR levels for each cell interface
         int lvlg = m_cellInterfaces[b]->getCellGauche()->getLvl();
@@ -1512,7 +1528,7 @@ bool Cell::lvlNeighborTooLow()
 
 //***********************************************************************
 
-void Cell::buildLvlCellsAndLvlInternalCellInterfacesArrays(std::vector<Cell *> *cellsLvl, std::vector<CellInterface *> *cellInterfacesLvl)
+void Cell::buildLvlCellsAndLvlInternalCellInterfacesArrays(std::vector<Cell*>* cellsLvl, std::vector<CellInterface*>* cellInterfacesLvl)
 {
   for (unsigned int i = 0; i < m_childrenCells.size(); i++) {
     cellsLvl[m_lvl + 1].push_back(m_childrenCells[i]);
@@ -1524,7 +1540,7 @@ void Cell::buildLvlCellsAndLvlInternalCellInterfacesArrays(std::vector<Cell *> *
 
 //***********************************************************************
 
-bool Cell::printGnuplotAMR(std::ofstream &fileStream, const int &dim, GeometricObject *objet)
+bool Cell::printGnuplotAMR(std::ofstream &fileStream, const int& dim, GeometricObject *objet)
 {
   bool ecrit(true);
   int dimension(dim);
@@ -1561,21 +1577,21 @@ bool Cell::printGnuplotAMR(std::ofstream &fileStream, const int &dim, GeometricO
 
 //***********************************************************************
 
-void Cell::computeIntegration(double &integration)
+void Cell::computeVolumePhaseK(double& integration, const int& numPhase)
 {
   if (!m_split) {
-    integration += m_element->getVolume()*m_vecPhases[1]->getAlpha();
+    integration += m_element->getVolume()*m_vecPhases[numPhase]->getAlpha();
   }
   else {
     for (unsigned int i = 0; i < m_childrenCells.size(); i++) {
-      m_childrenCells[i]->computeIntegration(integration);
+      m_childrenCells[i]->computeVolumePhaseK(integration, numPhase);
     }
   }
 }
 
 //***********************************************************************
 
-void Cell::computeMass(double &mass, double &alphaRef)
+void Cell::computeMass(double& mass, double& alphaRef)
 {
   if (!m_split) {
     if (m_vecPhases[1]->getAlpha() >= alphaRef) {
@@ -1591,7 +1607,7 @@ void Cell::computeMass(double &mass, double &alphaRef)
 
 //***********************************************************************
 
-void Cell::computeTotalMass(double &mass)
+void Cell::computeTotalMass(double& mass)
 {
 	if (!m_split) {
 		if (m_numberPhases > 1) {
@@ -1608,7 +1624,24 @@ void Cell::computeTotalMass(double &mass)
 
 //***********************************************************************
 
-void Cell::lookForPmax(double *pMax, double*pMaxWall)
+void Cell::computeTotalEnergy(double& totalEnergy)
+{
+  if (!m_split) {
+    if (m_numberPhases > 1) {
+      totalEnergy += m_mixture->getDensity() * m_mixture->getTotalEnergy();
+    }
+    else { totalEnergy += m_vecPhases[0]->getDensity() * m_vecPhases[0]->getTotalEnergy(); }
+  }
+  else {
+    for (unsigned int i = 0; i < m_childrenCells.size(); i++) {
+      m_childrenCells[i]->computeTotalEnergy(totalEnergy);
+    }
+  }
+}
+
+//***********************************************************************
+
+void Cell::lookForPmax(double* pMax, double*pMaxWall)
 {
   if (!m_split) {
     if (m_mixture->getPressure() > pMax[0]) {
@@ -1647,13 +1680,6 @@ void Cell::addFluxXi(double value)
 
 //***********************************************************************
 
-void Cell::subtractFluxXi(double value)
-{
-  m_consXi -= value;
-}
-
-//***********************************************************************
-
 int Cell::getNumberCellsChildren()
 {
   return m_childrenCells.size();
@@ -1661,14 +1687,14 @@ int Cell::getNumberCellsChildren()
 
 //***********************************************************************
 
-Cell* Cell::getCellChild(const int &num)
+Cell* Cell::getCellChild(const int& num)
 {
   return m_childrenCells[num];
 }
 
 //***********************************************************************
 
-std::vector<Cell *>* Cell::getChildVector()
+std::vector<Cell*>* Cell::getChildVector()
 {
   return &m_childrenCells;
 }
@@ -1677,7 +1703,7 @@ std::vector<Cell *>* Cell::getChildVector()
 //************************** Parallel non-AMR *******************************
 //****************************************************************************
 
-void Cell::fillBufferPrimitives(double *buffer, int &counter, const int &lvl, const int &neighbour, Prim type) const
+void Cell::fillBufferPrimitives(double* buffer, int& counter, const int& lvl, const int& neighbour, Prim type) const
 {
   if (m_lvl == lvl) {
     for (int k = 0; k < m_numberPhases; k++) {
@@ -1699,7 +1725,7 @@ void Cell::fillBufferPrimitives(double *buffer, int &counter, const int &lvl, co
 
 //***********************************************************************
 
-void Cell::getBufferPrimitives(double *buffer, int &counter, const int &lvl, Eos **eos, Prim type)
+void Cell::getBufferPrimitives(double* buffer, int& counter, const int& lvl, Eos** eos, Prim type)
 {
   if (m_lvl == lvl) {
     for (int k = 0; k < m_numberPhases; k++) {
@@ -1720,7 +1746,7 @@ void Cell::getBufferPrimitives(double *buffer, int &counter, const int &lvl, Eos
 
 //***********************************************************************
 
-void Cell::fillBufferVector(double *buffer, int &counter, const int &lvl, const int &neighbour, const int &dim, Variable nameVector, int num, int index) const
+void Cell::fillBufferVector(double* buffer, int& counter, const int& lvl, const int& neighbour, const int& dim, Variable nameVector, int num, int index) const
 {
   if (m_lvl == lvl) {
     buffer[++counter] = this->selectVector(nameVector, num, index).getX();
@@ -1738,7 +1764,7 @@ void Cell::fillBufferVector(double *buffer, int &counter, const int &lvl, const 
 
 //***********************************************************************
 
-void Cell::getBufferVector(double *buffer, int &counter, const int &lvl, const int &dim, Variable nameVector, int num, int index)
+void Cell::getBufferVector(double* buffer, int& counter, const int& lvl, const int& dim, Variable nameVector, int num, int index)
 {
   if (m_lvl == lvl) {
     Coord temp;
@@ -1756,7 +1782,7 @@ void Cell::getBufferVector(double *buffer, int &counter, const int &lvl, const i
 
 //***********************************************************************
 
-void Cell::fillBufferTransports(double *buffer, int &counter, const int &lvl, const int &neighbour) const
+void Cell::fillBufferTransports(double* buffer, int& counter, const int& lvl, const int& neighbour) const
 {
   if (m_lvl == lvl) {
     for (int k = 0; k < m_numberTransports; k++) {
@@ -1774,7 +1800,7 @@ void Cell::fillBufferTransports(double *buffer, int &counter, const int &lvl, co
 
 //***********************************************************************
 
-void Cell::getBufferTransports(double *buffer, int &counter, const int &lvl)
+void Cell::getBufferTransports(double* buffer, int& counter, const int& lvl)
 {
   if (m_lvl == lvl) {
     for (int k = 0; k < m_numberTransports; k++) {
@@ -1790,11 +1816,11 @@ void Cell::getBufferTransports(double *buffer, int &counter, const int &lvl)
 
 //***********************************************************************
 
-bool Cell::hasNeighboringGhostCellOfCPUneighbour(const int &neighbour) const
+bool Cell::hasNeighboringGhostCellOfCPUneighbour(const int& neighbour) const
 {
   bool hasGhostNeighbour(false);
   for (unsigned int b = 0; b < m_cellInterfaces.size(); b++) {
-    if (m_cellInterfaces[b]->whoAmI() == 0) { //Inner face
+    if (m_cellInterfaces[b]->whoAmI() == 0) { //Cell interface of type CellInterface/O2 (inner)
       if (this == m_cellInterfaces[b]->getCellGauche()) {
         if (m_cellInterfaces[b]->getCellDroite()->isCellGhost()) {
           if (m_cellInterfaces[b]->getCellDroite()->getRankOfNeighborCPU() == neighbour) {
@@ -1818,11 +1844,11 @@ bool Cell::hasNeighboringGhostCellOfCPUneighbour(const int &neighbour) const
 
 //***********************************************************************
 
-int Cell::numberOfNeighboringGhostCellsOfCPUneighbour(const int &neighbour) const
+int Cell::numberOfNeighboringGhostCellsOfCPUneighbour(const int& neighbour) const
 {
   int hasGhostNeighbour(0);
   for (unsigned int b = 0; b < m_cellInterfaces.size(); b++) {
-    if (m_cellInterfaces[b]->whoAmI() == 0) { //Inner face
+    if (m_cellInterfaces[b]->whoAmI() == 0) { //Cell interface of type CellInterface/O2 (inner)
       if (m_cellInterfaces[b]->getLvl() == m_lvl) {
         if (this == m_cellInterfaces[b]->getCellGauche()) {
           if (m_cellInterfaces[b]->getCellDroite()->isCellGhost()) {
@@ -1848,7 +1874,7 @@ int Cell::numberOfNeighboringGhostCellsOfCPUneighbour(const int &neighbour) cons
 //**************************** AMR Parallel **********************************
 //****************************************************************************
 
-void Cell::chooseRefineDeraffineGhost(const int &nbCellsY, const int &nbCellsZ,	const std::vector<AddPhys*> &addPhys, Model *model, std::vector<Cell *> *cellsLvlGhost)
+void Cell::chooseRefineDeraffineGhost(const int& nbCellsY, const int& nbCellsZ,	const std::vector<AddPhys*>& addPhys, Model* model, std::vector<Cell*>* cellsLvlGhost)
 {
   if (m_split) {
     if (m_childrenCells.size() == 0) { this->refineCellAndCellInterfacesGhost(nbCellsY, nbCellsZ, addPhys, model); }
@@ -1863,7 +1889,7 @@ void Cell::chooseRefineDeraffineGhost(const int &nbCellsY, const int &nbCellsZ,	
 
 //***********************************************************************
 
-void Cell::refineCellAndCellInterfacesGhost(const int &nbCellsY, const int &nbCellsZ, const std::vector<AddPhys*> &addPhys, Model *model)
+void Cell::refineCellAndCellInterfacesGhost(const int& nbCellsY, const int& nbCellsZ, const std::vector<AddPhys*>& addPhys, Model* model)
 {
   //--------------------------------------
   //Initializations (children and dimension)
@@ -1891,7 +1917,6 @@ void Cell::refineCellAndCellInterfacesGhost(const int &nbCellsY, const int &nbCe
   //----------------------------------------------
   double posXCellParent, posYCellParent, posZCellParent;
   double dXParent, dYParent, dZParent;
-  double posXChild, posYChild, posZChild;
   posXCellParent = m_element->getPosition().getX();
   posYCellParent = m_element->getPosition().getY();
   posZCellParent = m_element->getPosition().getZ();
@@ -1941,9 +1966,9 @@ void Cell::refineCellAndCellInterfacesGhost(const int &nbCellsY, const int &nbCe
           auto coordChild = coordFirstChild;
           if (GhostCellIsLeft)
           {
-            coordChild[0] += m_cellInterfaces[b]->getFace()->getNormal().getX();
-            coordChild[1] += m_cellInterfaces[b]->getFace()->getNormal().getY();
-            coordChild[2] += m_cellInterfaces[b]->getFace()->getNormal().getZ();
+            coordChild[0] += (int)m_cellInterfaces[b]->getFace()->getNormal().getX();
+            coordChild[1] += (int)m_cellInterfaces[b]->getFace()->getNormal().getY();
+            coordChild[2] += (int)m_cellInterfaces[b]->getFace()->getNormal().getZ();
           }
           coordChild[(idx+1)%dim] += i;
           coordChild[(idx+2)%dim] += j;
@@ -1952,7 +1977,7 @@ void Cell::refineCellAndCellInterfacesGhost(const int &nbCellsY, const int &nbCe
           //Try to find the child ghost cell into the already created ghost cells (inside parent ghost cell)
           Cell* childCellGhost=0;
           bool cellExists = false;
-          for (int c = 0; c < m_childrenCells.size(); c++) 
+          for (unsigned int c = 0; c < m_childrenCells.size(); c++) 
           {
             if (m_childrenCells[c]->getElement()->getKey() == keyChild)
             {
@@ -2078,7 +2103,7 @@ void Cell::refineCellAndCellInterfacesGhost(const int &nbCellsY, const int &nbCe
   }
   //Association of model and slopes
   for (unsigned int b = 0; b < m_cellInterfaces.size(); b++) {
-    for (unsigned int i = 0; i < m_cellInterfaces[b]->getNumberCellInterfacesChildren(); i++) {
+    for (int i = 0; i < m_cellInterfaces[b]->getNumberCellInterfacesChildren(); i++) {
       if (m_cellInterfaces[b]->getCellInterfaceChild(i)->getMod() == 0) {
         m_cellInterfaces[b]->getCellInterfaceChild(i)->associeModel(model);
         m_cellInterfaces[b]->getCellInterfaceChild(i)->allocateSlopes(this->getNumberPhases(), this->getNumberTransports(), allocateSlopeLocal);
@@ -2122,7 +2147,7 @@ void Cell::unrefineCellAndCellInterfacesGhost()
 
 //***********************************************************************
 
-void Cell::fillBufferXi(double *buffer, int &counter, const int &lvl, const int &neighbour) const
+void Cell::fillBufferXi(double* buffer, int& counter, const int& lvl, const int& neighbour) const
 {
 	if (m_lvl == lvl) {
 		buffer[++counter] = m_xi;
@@ -2138,7 +2163,7 @@ void Cell::fillBufferXi(double *buffer, int &counter, const int &lvl, const int 
 
 //***********************************************************************
 
-void Cell::getBufferXi(double *buffer, int &counter, const int &lvl)
+void Cell::getBufferXi(double* buffer, int& counter, const int& lvl)
 {
 	if (m_lvl == lvl) {
 		m_xi = buffer[++counter];
@@ -2152,7 +2177,7 @@ void Cell::getBufferXi(double *buffer, int &counter, const int &lvl)
 
 //***********************************************************************
 
-void Cell::fillBufferSplit(bool *buffer, int &counter, const int &lvl, const int &neighbour) const
+void Cell::fillBufferSplit(bool *buffer, int& counter, const int& lvl, const int& neighbour) const
 {
 	if (m_lvl == lvl) {
 		buffer[++counter] = m_split;
@@ -2168,7 +2193,7 @@ void Cell::fillBufferSplit(bool *buffer, int &counter, const int &lvl, const int
 
 //***********************************************************************
 
-void Cell::getBufferSplit(bool *buffer, int &counter, const int &lvl)
+void Cell::getBufferSplit(bool *buffer, int& counter, const int& lvl)
 {
 	if (m_lvl == lvl) {
 		m_split = buffer[++counter];
@@ -2182,7 +2207,7 @@ void Cell::getBufferSplit(bool *buffer, int &counter, const int &lvl)
 
 //***********************************************************************
 
-void Cell::fillNumberElementsToSendToNeighbour(int &numberElementsToSendToNeighbor, int &numberSlopesToSendToNeighbor, const int &lvl, const int &neighbour, int numberNeighboursOfCPUneighbour)
+void Cell::fillNumberElementsToSendToNeighbour(int& numberElementsToSendToNeighbor, int& numberSlopesToSendToNeighbor, const int& lvl, const int& neighbour, int numberNeighboursOfCPUneighbour)
 {
 	if (m_lvl == lvl) {
 		numberElementsToSendToNeighbor++;
@@ -2200,7 +2225,7 @@ void Cell::fillNumberElementsToSendToNeighbour(int &numberElementsToSendToNeighb
 
 //***********************************************************************
 
-void Cell::fillDataToSend(std::vector<double> &dataToSend, std::vector<int> &dataSplitToSend, const int &lvl) const
+void Cell::fillDataToSend(std::vector<double>& dataToSend, std::vector<int>& dataSplitToSend, const int& lvl) const
 {
   if (m_lvl == lvl) {
     for (int k = 0; k < m_numberPhases; k++) {
@@ -2222,8 +2247,8 @@ void Cell::fillDataToSend(std::vector<double> &dataToSend, std::vector<int> &dat
 
 //***********************************************************************
 
-void Cell::getDataToReceiveAndRefine(std::vector<double> &dataToReceive, std::vector<int> &dataSplitToReceive, const int &lvl, Eos **eos, int &counter, int &counterSplit,
-  const int &nbCellsY, const int &nbCellsZ, const std::vector<AddPhys*> &addPhys, Model *model)
+void Cell::getDataToReceiveAndRefine(std::vector<double>& dataToReceive, std::vector<int>& dataSplitToReceive, const int& lvl, Eos** eos, int& counter, int& counterSplit,
+  const int& nbCellsY, const int& nbCellsZ, const std::vector<AddPhys*>& addPhys, Model* model)
 {
   if (m_lvl == lvl) {
     for (int k = 0; k < m_numberPhases; k++) {
@@ -2253,7 +2278,7 @@ void Cell::getDataToReceiveAndRefine(std::vector<double> &dataToReceive, std::ve
 
 //***************************************************************************
 
-void Cell::computeLoad(double &load, int lvl) const
+void Cell::computeLoad(double& load, int lvl) const
 {
   if (!m_split) {
     //if (m_lvl == lvl) { load += 1.; } //For levelwise balancing
@@ -2268,7 +2293,7 @@ void Cell::computeLoad(double &load, int lvl) const
 
 //***************************************************************************
 
-void Cell::computeLvlMax(int &lvlMax) const
+void Cell::computeLvlMax(int& lvlMax) const
 {
   if (!m_split) {
     if (m_lvl > lvlMax) { lvlMax = m_lvl; }
@@ -2282,7 +2307,7 @@ void Cell::computeLvlMax(int &lvlMax) const
 
 //***************************************************************************
 
-void Cell::clearExternalCellInterfaces(const int &nbCellsY, const int &nbCellsZ)
+void Cell::clearExternalCellInterfaces(const int& nbCellsY, const int& nbCellsZ)
 {
   //Clear cell interfaces
   for (unsigned int i = 0; i < m_childrenCells.size(); i++) {
@@ -2377,15 +2402,14 @@ void Cell::clearExternalCellInterfaces(const int &nbCellsY, const int &nbCellsZ)
 void Cell::updatePointersInternalCellInterfaces()
 {
   //Check if the cells pointed by my internal cell interfaces also points to my internal cell interfaces
-  bool foundCellInterface(false);
-  for (int b = 0; b < m_childrenInternalCellInterfaces.size(); b++) {
+  for (unsigned int b = 0; b < m_childrenInternalCellInterfaces.size(); b++) {
     m_childrenInternalCellInterfaces[b]->updatePointersInternalCellInterfaces();
   }
 }
 
 //***************************************************************************
 
-void Cell::updateNbCellsTotalAMR(int &nbCellsTotalAMR)
+void Cell::updateNbCellsTotalAMR(int& nbCellsTotalAMR)
 {
   if (m_childrenCells.size() == 0) {
     ++nbCellsTotalAMR;

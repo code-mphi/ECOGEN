@@ -6,6 +6,7 @@
 //       |  `--.  \  `-.  \ `-' /   \  `-) ) |  `--.  | | |)| 
 //       /( __.'   \____\  )---'    )\____/  /( __.'  /(  (_) 
 //      (__)              (_)      (__)     (__)     (__)     
+//      Official webSite: https://code-mphi.github.io/ECOGEN/
 //
 //  This file is part of ECOGEN.
 //
@@ -27,21 +28,16 @@
 //  along with ECOGEN (file LICENSE).  
 //  If not, see <http://www.gnu.org/licenses/>.
 
-//! \file      GDDisc.cpp
-//! \author    F. Petitpas
-//! \version   1.0
-//! \date      December 19 2017
-
 #include "GDDisc.h"
 
 using namespace tinyxml2;
 
 //***************************************************************
 
-GDDisc::GDDisc(std::string name, std::vector<Phase*> vecPhases, Mixture *mixture, std::vector<Transport> vecTransports, XMLElement *element, const int &physicalEntity, std::string fileName) :
+GDDisc::GDDisc(std::string name, std::vector<Phase*> vecPhases, Mixture* mixture, std::vector<Transport> vecTransports, XMLElement* element, const int& physicalEntity, std::string fileName) :
 GeometricalDomain(name, vecPhases, mixture, vecTransports, physicalEntity)
 {
-  XMLElement *sousElement(element->FirstChildElement("dataDisc"));
+  XMLElement* sousElement(element->FirstChildElement("dataDisc"));
   if (sousElement == NULL) throw ErrorXMLElement("dataDisc", fileName, __FILE__, __LINE__);
   //Attributes reading
   //------------------
@@ -65,7 +61,7 @@ GeometricalDomain(name, vecPhases, mixture, vecTransports, physicalEntity)
   else { throw ErrorXMLAttribut("axis2", fileName, __FILE__, __LINE__); }
   //Disc center
   double x(0.), y(0.), z(0.);
-  XMLElement *center(sousElement->FirstChildElement("center"));
+  XMLElement* center(sousElement->FirstChildElement("center"));
   if (center == NULL) throw ErrorXMLElement("center", fileName, __FILE__, __LINE__);
   error = center->QueryDoubleAttribute("x", &x);
   error = center->QueryDoubleAttribute("y", &y);
@@ -79,7 +75,7 @@ GDDisc::~GDDisc(){}
 
 //***************************************************************
 
-bool GDDisc::belong(Coord &posElement, const int &lvl) const
+bool GDDisc::belong(Coord& posElement, const int& /*lvl*/) const
 {
   double sum(0.);
   std::vector<Axis> axes;

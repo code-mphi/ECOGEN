@@ -6,6 +6,7 @@
 //       |  `--.  \  `-.  \ `-' /   \  `-) ) |  `--.  | | |)| 
 //       /( __.'   \____\  )---'    )\____/  /( __.'  /(  (_) 
 //      (__)              (_)      (__)     (__)     (__)     
+//      Official webSite: https://code-mphi.github.io/ECOGEN/
 //
 //  This file is part of ECOGEN.
 //
@@ -30,11 +31,6 @@
 #ifndef MODEULERHOMOGENEOUSOUS_H
 #define MODEULERHOMOGENEOUSOUS_H
 
-//! \file      ModEulerHomogeneousous.h
-//! \author    F. Petitpas, K. Schmidmayer
-//! \version   1.1
-//! \date      June 5 2019
-
 #include "../Model.h"
 #include "../../Order1/Cell.h"
 #include "MixEulerHomogeneous.h"
@@ -52,25 +48,25 @@ class ModEulerHomogeneous : public Model
     //! \param     numberTransports    number of additional transport equations
     //! \param     liquid              fluid number for liquid phase
     //! \param     vapor               fluid number for vapor phase
-    ModEulerHomogeneous(const int &numberTransports, const int liquid = 0, const int vapor = 1);
+    ModEulerHomogeneous(const int& numberTransports, const int liquid = 0, const int vapor = 1);
     virtual ~ModEulerHomogeneous();
 
-    virtual void allocateCons(Flux **cons, const int &numberPhases);
-    virtual void allocatePhase(Phase **phase);
-    virtual void allocateMixture(Mixture **mixture);
+    virtual void allocateCons(Flux** cons, const int& /*numberPhases*/);
+    virtual void allocatePhase(Phase** phase);
+    virtual void allocateMixture(Mixture** mixture);
 
-    virtual void fulfillState(Phase **phases, Mixture *mixture, const int &numberPhases, Prim type = vecPhases);
+    virtual void fulfillState(Phase** phases, Mixture* mixture, const int& numberPhases, Prim /*type*/ = vecPhases);
 
     //Hydrodynamic Riemann solvers
     //----------------------------
-    virtual void solveRiemannIntern(Cell &cellLeft, Cell &cellRight, const int &numberPhases, const double &dxLeft, const double &dxRight, double &dtMax) const;
+    virtual void solveRiemannIntern(Cell& cellLeft, Cell& cellRight, const int& /*numberPhases*/, const double& dxLeft, const double& dxRight, double& dtMax, double& massflow, double& powerFlux) const;
     virtual void reverseProjection(const Coord normal, const Coord tangent, const Coord binormal) const;
 
     //Accessors
     //---------
     virtual const double& getSM();
-    virtual const Coord& getVelocity(const Cell *cell) const { return cell->getMixture()->getVelocity(); };
-    virtual Coord& getVelocity(Cell *cell) { return cell->getMixture()->getVelocity(); };
+    virtual const Coord& getVelocity(const Cell* cell) const { return cell->getMixture()->getVelocity(); };
+    virtual Coord& getVelocity(Cell* cell) { return cell->getMixture()->getVelocity(); };
     int getLiq();
     int getVap();
     virtual const std::string& whoAmI() const { return m_name; };
@@ -79,8 +75,8 @@ class ModEulerHomogeneous : public Model
 
   private:
     static const std::string NAME;
-	int m_liq;                                 //!< Liquid phase number for phase change
-	int m_vap;                                 //!< Vapor phase number for phase change
+    int m_liq;                                 //!< Liquid phase number for phase change
+    int m_vap;                                 //!< Vapor phase number for phase change
 
     friend class FluxEulerHomogeneous;
 };

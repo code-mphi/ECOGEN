@@ -6,6 +6,7 @@
 //       |  `--.  \  `-.  \ `-' /   \  `-) ) |  `--.  | | |)| 
 //       /( __.'   \____\  )---'    )\____/  /( __.'  /(  (_) 
 //      (__)              (_)      (__)     (__)     (__)     
+//      Official webSite: https://code-mphi.github.io/ECOGEN/
 //
 //  This file is part of ECOGEN.
 //
@@ -29,11 +30,6 @@
 
 #ifndef FACE_H
 #define FACE_H
-
-//! \file      Face.h
-//! \author    F. Petitpas, K. Schmidmayer, S. Le Martelot
-//! \version   1.1
-//! \date      June 5 2019
 
 #include <cmath>
 #include <algorithm>
@@ -59,17 +55,17 @@ public:
   const double& getSurface() const { return m_surface; };
   const Coord& getPos() const { return m_position; };
 
-  virtual void setSurface(const double &surface){ Errors::errorMessage("setSurface not available for requested face"); };
-  virtual void initializeAutres(const double &surface, const Coord &normal, const Coord &tangent, const Coord &binormal){ Errors::errorMessage("initializeAutres not available for requested face"); }
-  virtual void setPos(const double &X, const double &Y, const double &Z) { Errors::errorMessage("setPos not available for requested face"); };
-  virtual void setNormal(const double &X, const double &Y, const double &Z) { Errors::errorMessage("setNormal not available for requested face"); };
-  virtual void setTangent(const double &X, const double &Y, const double &Z) { Errors::errorMessage("setTangent not available for requested face"); };
-  virtual void setBinormal(const double &X, const double &Y, const double &Z) { Errors::errorMessage("setBinormal not available for requested face"); };
-  virtual void setSize(const double &sizeX, const double &sizeY, const double &sizeZ) { Errors::errorMessage("setSize not available for requested face"); };
-  virtual void setSize(const Coord &size) { Errors::errorMessage("setSize not available for requested face"); };
+  virtual void setSurface(const double& /*surface*/){ Errors::errorMessage("setSurface not available for requested face"); };
+  virtual void initializeAutres(const double& /*surface*/, const Coord& /*normal*/, const Coord& /*tangent*/, const Coord& /*binormal*/){ Errors::errorMessage("initializeAutres not available for requested face"); }
+  virtual void setPos(const double& /*X*/, const double& /*Y*/, const double& /*Z*/) { Errors::errorMessage("setPos not available for requested face"); };
+  virtual void setNormal(const double& /*X*/, const double& /*Y*/, const double& /*Z*/) { Errors::errorMessage("setNormal not available for requested face"); };
+  virtual void setTangent(const double& /*X*/, const double& /*Y*/, const double& /*Z*/) { Errors::errorMessage("setTangent not available for requested face"); };
+  virtual void setBinormal(const double& /*X*/, const double& /*Y*/, const double& /*Z*/) { Errors::errorMessage("setBinormal not available for requested face"); };
+  virtual void setSize(const double& /*sizeX*/, const double& /*sizeY*/, const double& /*sizeZ*/) { Errors::errorMessage("setSize not available for requested face"); };
+  virtual void setSize(const Coord& /*size*/) { Errors::errorMessage("setSize not available for requested face"); };
 
-  Coord vecteur(Element *e);   /*!< Cree vecteur entre center face et center d un element */
-  double distance(Element *e); /*!< Calcul de la distance a un center d element */
+  Coord vecteur(Element* e);   /*!< Cree vecteur entre center face et center d un element */
+  double distance(Element* e); /*!< Calcul de la distance a un center d element */
 
   virtual void printInfo() const{ Errors::errorMessage("AfficheInfos not available for requested face"); };
 

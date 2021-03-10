@@ -6,6 +6,7 @@
 //       |  `--.  \  `-.  \ `-' /   \  `-) ) |  `--.  | | |)| 
 //       /( __.'   \____\  )---'    )\____/  /( __.'  /(  (_) 
 //      (__)              (_)      (__)     (__)     (__)     
+//      Official webSite: https://code-mphi.github.io/ECOGEN/
 //
 //  This file is part of ECOGEN.
 //
@@ -27,11 +28,6 @@
 //  along with ECOGEN (file LICENSE).  
 //  If not, see <http://www.gnu.org/licenses/>.
 
-//! \file      ElementNS.cpp
-//! \author    F. Petitpas, K. Schmidmayer
-//! \version   1.1
-//! \date      June 5 2019
-
 #include "ElementNS.h"
 
 //***********************************************************************
@@ -40,11 +36,11 @@ ElementNS::ElementNS(){}
 
 //***********************************************************************
 
-ElementNS::ElementNS(const int &typeGmsh, const int &numberNoeuds, const int &numberFaces, const int &typeVTK) :
+ElementNS::ElementNS(const int& typeGmsh, const int& numberNoeuds, const int& numberFaces, const int& typeVTK) :
 m_typeGmsh(typeGmsh),
+m_typeVTK(typeVTK),
 m_numberNoeuds(numberNoeuds),
 m_numberFaces(numberFaces),
-m_typeVTK(typeVTK),
 m_isFantome(false),
 m_isCommunicant(false),
 m_autresCPU(0)
@@ -62,7 +58,7 @@ ElementNS::~ElementNS()
 
 //***********************************************************************
 
-void ElementNS::construitElement(const int *numNoeuds, const Coord *noeuds, const int numberEntitePhysique, const int numberEntiteGeometrique, int &indexElement)
+void ElementNS::construitElement(const int* numNoeuds, const Coord* noeuds, const int numberEntitePhysique, const int numberEntiteGeometrique, int& indexElement)
 {
   m_index = indexElement;
   //Attribution des number de noeud vis a vis du tableau de noeud global et compute position du Centre de l'element
@@ -83,9 +79,9 @@ void ElementNS::construitElement(const int *numNoeuds, const Coord *noeuds, cons
 
 //***********************************************************************
 
-void ElementNS::construitElementParallele(const Coord *noeuds)
+void ElementNS::construitElementParallele(const Coord* noeuds)
 {
-  Coord *noeudslocal = new Coord[m_numberNoeuds];
+  Coord* noeudslocal = new Coord[m_numberNoeuds];
   for (int i = 0; i < m_numberNoeuds; i++){ noeudslocal[i] = noeuds[m_numNoeuds[i]]; }
 
   //Attribution des number de noeud vis a vis du tableau de noeud global et compute position du Centre de l'element
@@ -102,28 +98,28 @@ void ElementNS::construitElementParallele(const Coord *noeuds)
 
 //***********************************************************************
 
-void ElementNS::setIndex(int &index)
+void ElementNS::setIndex(int& index)
 {
   m_index = index;
 }
 
 //***********************************************************************
 
-void ElementNS::setAppartenancePhysique(int &appartenancePhysique)
+void ElementNS::setAppartenancePhysique(int& appartenancePhysique)
 {
   m_appartenancePhysique = appartenancePhysique;
 }
 
 //***********************************************************************
 
-void ElementNS::setNumNoeud(int *numNoeuds)
+void ElementNS::setNumNoeud(int* numNoeuds)
 {
   for (int i = 0; i < m_numberNoeuds; i++){ m_numNoeuds[i] = numNoeuds[i]; }
 }
 
 //***********************************************************************
 
-void ElementNS::setNumNoeud(int &noeud, int &numNoeud)
+void ElementNS::setNumNoeud(int& noeud, int& numNoeud)
 {
   m_numNoeuds[noeud] = numNoeud;
 }
@@ -144,7 +140,7 @@ void ElementNS::setIsCommunicant(bool isCommunicant)
 
 //***********************************************************************
 
-void ElementNS::setAppartenanceCPU(const int *numCPU, const int &numberCPU)
+void ElementNS::setAppartenanceCPU(const int* numCPU, const int& numberCPU)
 {
   m_CPU = numCPU[0] - 1;
   m_numberautresCPU = numberCPU - 1;
@@ -157,11 +153,11 @@ void ElementNS::setAppartenanceCPU(const int *numCPU, const int &numberCPU)
 
 //***********************************************************************
 
-void ElementNS::enleveCPUAutres(std::vector<int> &numCPU)
+void ElementNS::enleveCPUAutres(std::vector<int>& numCPU)
 {
   //if (numCPU >= m_numberautresCPU){ Errors::errorMessage("Probleme dans enleveCPUAutres"); }
   //Copie des anciens
-  int *autresCPUTemp = new int[m_numberautresCPU];
+  int* autresCPUTemp = new int[m_numberautresCPU];
   for (int i = 0; i < m_numberautresCPU; i++)
   {
     autresCPUTemp[i] = m_autresCPU[i];
@@ -194,9 +190,9 @@ void ElementNS::enleveCPUAutres(std::vector<int> &numCPU)
 
 //***********************************************************************
 
-const int& ElementNS::getAutreCPU(const int &autreCPU) const
+const int& ElementNS::getAutreCPU(const int& autreCPU) const
 {
-  if (sizeof(m_autresCPU) <= autreCPU)
+  if (sizeof(m_autresCPU) <= (unsigned int)autreCPU)
   {
     Errors::errorMessage("probleme de dimension dans m_autresCPU");
   }

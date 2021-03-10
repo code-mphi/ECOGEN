@@ -6,6 +6,7 @@
 //       |  `--.  \  `-.  \ `-' /   \  `-) ) |  `--.  | | |)| 
 //       /( __.'   \____\  )---'    )\____/  /( __.'  /(  (_) 
 //      (__)              (_)      (__)     (__)     (__)     
+//      Official webSite: https://code-mphi.github.io/ECOGEN/
 //
 //  This file is part of ECOGEN.
 //
@@ -30,11 +31,6 @@
 #ifndef SOURCEHEATING_H
 #define SOURCEHEATING_H
 
-//! \file      SourceHeating.h
-//! \author    F. Petitpas, J. Caze
-//! \version   1.0
-//! \date      October 29 2019
-
 #include "Source.h"
 
 //! \class     SourceHeating
@@ -42,16 +38,15 @@
 class SourceHeating : public Source
 {
 public:
-  SourceHeating();
   //! \brief     Source constructor from a XML format reading
   //! \details   Reading data from XML file under the following format:
   //!            ex: <dataHeating q="1.d3"/>
   //! \param     element          XML element to read for source term
   //! \param     fileName         string name of readed XML file
-  SourceHeating(tinyxml2::XMLElement *element, int order, std::string fileName = "Unknown file");
+  SourceHeating(tinyxml2::XMLElement* element, int order, int physicalEntity, std::string fileName = "Unknown file");
   virtual ~SourceHeating();
 
-  virtual void prepSourceTerms(Cell *cell, const int &numberPhases, const double &dt, const int i = 0);
+  virtual void prepSourceTerms(Cell* /*cell*/, const int& numberPhases, const int& i = 0);
 
 private:
   double m_q;     //!Specific heat power (W/m3)

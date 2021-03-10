@@ -6,6 +6,7 @@
 //       |  `--.  \  `-.  \ `-' /   \  `-) ) |  `--.  | | |)| 
 //       /( __.'   \____\  )---'    )\____/  /( __.'  /(  (_) 
 //      (__)              (_)      (__)     (__)     (__)     
+//      Official webSite: https://code-mphi.github.io/ECOGEN/
 //
 //  This file is part of ECOGEN.
 //
@@ -27,21 +28,16 @@
 //  along with ECOGEN (file LICENSE).  
 //  If not, see <http://www.gnu.org/licenses/>.
 
-//! \file      GDEllipsoid.cpp
-//! \author    K. Schmidmayer
-//! \version   1.1
-//! \date      June 5 2019
-
 #include "GDEllipsoid.h"
 
 using namespace tinyxml2;
 
 //***************************************************************
 
-GDEllipsoid::GDEllipsoid(std::string name, std::vector<Phase*> vecPhases, Mixture *mixture, std::vector<Transport> vecTransports, XMLElement *element, const int &physicalEntity, std::string fileName) :
+GDEllipsoid::GDEllipsoid(std::string name, std::vector<Phase*> vecPhases, Mixture* mixture, std::vector<Transport> vecTransports, XMLElement* element, const int& physicalEntity, std::string fileName) :
   GeometricalDomain(name, vecPhases, mixture, vecTransports, physicalEntity)
 {
-  XMLElement *sousElement(element->FirstChildElement("dataEllipsoid"));
+  XMLElement* sousElement(element->FirstChildElement("dataEllipsoid"));
   if (sousElement == NULL) throw ErrorXMLElement("dataEllipsoid", fileName, __FILE__, __LINE__);
   //Attributes reading
   //------------------
@@ -78,7 +74,7 @@ GDEllipsoid::GDEllipsoid(std::string name, std::vector<Phase*> vecPhases, Mixtur
   else { throw ErrorXMLAttribut("axis3", fileName, __FILE__, __LINE__); }
   //Ellipsoid center
   double x(0.), y(0.), z(0.);
-  XMLElement *center(sousElement->FirstChildElement("center"));
+  XMLElement* center(sousElement->FirstChildElement("center"));
   if (center == NULL) throw ErrorXMLElement("center", fileName, __FILE__, __LINE__);
   error = center->QueryDoubleAttribute("x", &x);
   error = center->QueryDoubleAttribute("y", &y);
@@ -92,7 +88,7 @@ GDEllipsoid::~GDEllipsoid() {}
 
 //***************************************************************
 
-bool GDEllipsoid::belong(Coord &posElement, const int &lvl) const
+bool GDEllipsoid::belong(Coord& posElement, const int& /*lvl*/) const
 {
   double sum(0.);
   std::vector<Axis> axes;

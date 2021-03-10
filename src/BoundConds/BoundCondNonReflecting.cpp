@@ -6,6 +6,7 @@
 //       |  `--.  \  `-.  \ `-' /   \  `-) ) |  `--.  | | |)| 
 //       /( __.'   \____\  )---'    )\____/  /( __.'  /(  (_) 
 //      (__)              (_)      (__)     (__)     (__)     
+//      Official webSite: https://code-mphi.github.io/ECOGEN/
 //
 //  This file is part of ECOGEN.
 //
@@ -27,11 +28,6 @@
 //  along with ECOGEN (file LICENSE).  
 //  If not, see <http://www.gnu.org/licenses/>.
 
-//! \file      BoundCondNonReflecting.cpp
-//! \author    F. Petitpas, K. Schmidmayer
-//! \version   1.0
-//! \date      February 13 2019
-
 #include "BoundCondNonReflecting.h"
 
 BoundCondNonReflecting BoundCondDefaut;
@@ -42,10 +38,8 @@ BoundCondNonReflecting::BoundCondNonReflecting(){}
 
 //****************************************************************************
 
-BoundCondNonReflecting::BoundCondNonReflecting(const BoundCondNonReflecting& Source, const int lvl) : BoundCond(Source)
-{
-  m_lvl = lvl;
-}
+BoundCondNonReflecting::BoundCondNonReflecting(const BoundCondNonReflecting& Source, const int& lvl) : BoundCond(Source, lvl)
+{}
 
 //****************************************************************************
 
@@ -58,27 +52,27 @@ BoundCondNonReflecting::~BoundCondNonReflecting() {}
 
 //****************************************************************************
 
-void BoundCondNonReflecting::creeLimite(TypeMeshContainer<CellInterface *> &cellInterfaces)
+void BoundCondNonReflecting::createBoundary(TypeMeshContainer<CellInterface*>& cellInterfaces)
 {
   cellInterfaces.push_back(new BoundCondNonReflecting(*(this)));
 }
 
 //****************************************************************************
 
-void BoundCondNonReflecting::solveRiemannLimite(Cell &cellLeft, const int & numberPhases, const double & dxLeft, double & dtMax)
+void BoundCondNonReflecting::solveRiemannBoundary(Cell& cellLeft, const int& numberPhases, const double& dxLeft, double& dtMax)
 {
-  m_mod->solveRiemannIntern(cellLeft, cellLeft, numberPhases, dxLeft, dxLeft, dtMax);
+  m_mod->solveRiemannIntern(cellLeft, cellLeft, numberPhases, dxLeft, dxLeft, dtMax, m_massflow, m_powerFlux);
 }
 
 //****************************************************************************
 
-void BoundCondNonReflecting::solveRiemannTransportLimite(Cell &cellLeft, const int & numberTransports) const
+void BoundCondNonReflecting::solveRiemannTransportBoundary(Cell& cellLeft, const int&  numberTransports) const
 {
 	m_mod->solveRiemannTransportIntern(cellLeft, cellLeft, numberTransports);
 }
 
 //****************************************************************************
-//******************************Methode AMR***********************************
+//******************************AMR Method***********************************
 //****************************************************************************
 
 void BoundCondNonReflecting::creerCellInterfaceChild()

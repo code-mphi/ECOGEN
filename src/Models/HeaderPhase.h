@@ -6,6 +6,7 @@
 //       |  `--.  \  `-.  \ `-' /   \  `-) ) |  `--.  | | |)| 
 //       /( __.'   \____\  )---'    )\____/  /( __.'  /(  (_) 
 //      (__)              (_)      (__)     (__)     (__)     
+//      Official webSite: https://code-mphi.github.io/ECOGEN/
 //
 //  This file is part of ECOGEN.
 //
@@ -30,16 +31,11 @@
 #ifndef HEADERPHASE_H
 #define HEADERPHASE_H
 
-//! \file      HeaderPhase.h
-//! \author    F. Petitpas, K. Schmidmayer
-//! \version   1.0
-//! \date      January 19 2018
-
 #include "Euler/PhaseEuler.h"
-#include "Kapila/PhaseKapila.h"
+#include "PUEq/PhasePUEq.h"
 #include "EulerHomogeneous/PhaseEulerHomogeneous.h"
-#include "ThermalEq/PhaseThermalEq.h"
-#include "MultiP/PhaseMultiP.h"
+#include "PTUEq/PhasePTUEq.h"
+#include "UEq/PhaseUEq.h"
 
 //Add new phases here
 

@@ -1,0 +1,10 @@
+<?xml version = "1.0" encoding = "UTF-8" standalone = "yes"?>
+<computationParam>
+	<run>ECOGEN</run>
+	<outputMode format="XML" binary="false"/>
+	<timeControlMode iterations="false">
+		<iterations number="1" iterFreq="1"/>
+		<physicalTime totalTime="1e-0" timeFreq="0.5e-1"/>
+	</timeControlMode>
+	<computationControl CFL="0.4"/>
+</computationParam>

@@ -6,6 +6,7 @@
 //       |  `--.  \  `-.  \ `-' /   \  `-) ) |  `--.  | | |)| 
 //       /( __.'   \____\  )---'    )\____/  /( __.'  /(  (_) 
 //      (__)              (_)      (__)     (__)     (__)     
+//      Official webSite: https://code-mphi.github.io/ECOGEN/
 //
 //  This file is part of ECOGEN.
 //
@@ -27,11 +28,6 @@
 //  along with ECOGEN (file LICENSE).  
 //  If not, see <http://www.gnu.org/licenses/>.
 
-//! \file      ElementHexahedron.cpp
-//! \author    F. Petitpas
-//! \version   1.0
-//! \date      December 20 2017
-
 #include "ElementHexahedron.h"
 
 const int ElementHexahedron::TYPEGMSH = 5;
@@ -51,7 +47,7 @@ ElementHexahedron::~ElementHexahedron(){}
 
 //***********************************************************************
 
-void ElementHexahedron::computeVolume(const Coord *noeuds)
+void ElementHexahedron::computeVolume(const Coord* noeuds)
 {
   //On va computeer le volume des 6 tetraedres inclus dans l hexaerdre
   Coord v1, v2, v3;
@@ -72,7 +68,7 @@ void ElementHexahedron::computeVolume(const Coord *noeuds)
 
 //***********************************************************************
 
-void ElementHexahedron::computeLCFL(const Coord *noeuds)
+void ElementHexahedron::computeLCFL(const Coord* noeuds)
 {
   Coord vec; m_lCFL = 1e10;
   vec = ((noeuds[0] + noeuds[1] + noeuds[2] + noeuds[3]) / 4.) - m_position;
@@ -91,7 +87,7 @@ void ElementHexahedron::computeLCFL(const Coord *noeuds)
 
 //***********************************************************************
 // Nouvelle version beaucoup plus efficace avec recherche dans tableau temporaire
-void ElementHexahedron::construitFaces(const Coord *noeuds, FaceNS **faces, int &iMax, int** facesTemp, int* sommeNoeudsTemp)
+void ElementHexahedron::construitFaces(const Coord* noeuds, FaceNS** faces, int& iMax, int** facesTemp, int* sommeNoeudsTemp)
 {
   //6 faces a traiter de type quadrangle
   int indexFaceExiste(-1);
@@ -127,7 +123,7 @@ void ElementHexahedron::construitFaces(const Coord *noeuds, FaceNS **faces, int 
 
 //***********************************************************************
 // Nouvelle version beaucoup plus efficace avec recherche dans tableau temporaire
-void ElementHexahedron::construitFacesSimplifie(int &iMax, int** facesTemp, int* sommeNoeudsTemp)
+void ElementHexahedron::construitFacesSimplifie(int& iMax, int** facesTemp, int* sommeNoeudsTemp)
 {
   //6 faces a traiter de type quadrangle
   int indexFaceExiste(-1);
@@ -156,7 +152,7 @@ void ElementHexahedron::construitFacesSimplifie(int &iMax, int** facesTemp, int*
 
 //***********************************************************************
 
-void ElementHexahedron::attributFaceCommunicante(const Coord *noeuds, FaceNS **faces, const int &indexMaxFaces, const int &numberNoeudsInternes)
+void ElementHexahedron::attributFaceCommunicante(FaceNS** faces, const int& indexMaxFaces, const int& numberNoeudsInternes)
 {
   int indexFaceExiste(0);
   //Verification face 1 :
@@ -223,7 +219,7 @@ void ElementHexahedron::attributFaceCommunicante(const Coord *noeuds, FaceNS **f
 
 //***********************************************************************
 
-int ElementHexahedron::compteFaceCommunicante(std::vector<int*> &facesTemp, std::vector<int> &sommeNoeudsTemp)
+int ElementHexahedron::compteFaceCommunicante(std::vector<int*>& facesTemp, std::vector<int>& sommeNoeudsTemp)
 {
   //6 faces a traiter de type quadrangle
   int indexFaceExiste(-1), numberFacesCommunicante(0);
@@ -254,7 +250,7 @@ int ElementHexahedron::compteFaceCommunicante(std::vector<int*> &facesTemp, std:
 
 //***********************************************************************
 //Nouvelle version plus efficace
-int ElementHexahedron::compteFaceCommunicante(int &iMax, int **facesTemp, int *sommeNoeudsTemp)
+int ElementHexahedron::compteFaceCommunicante(int& iMax, int** facesTemp, int* sommeNoeudsTemp)
 {
   //6 faces a traiter de type quadrangle
   int indexFaceExiste(-1), numberFacesCommunicante(0);

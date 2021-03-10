@@ -6,6 +6,7 @@
 //       |  `--.  \  `-.  \ `-' /   \  `-) ) |  `--.  | | |)| 
 //       /( __.'   \____\  )---'    )\____/  /( __.'  /(  (_) 
 //      (__)              (_)      (__)     (__)     (__)     
+//      Official webSite: https://code-mphi.github.io/ECOGEN/
 //
 //  This file is part of ECOGEN.
 //
@@ -29,11 +30,6 @@
 
 #ifndef HEADERSYMMETRY_H
 #define HEADERSYMMETRY_H
-
-//! \file      HeaderSymmetry.h
-//! \author    K. Schmidmayer
-//! \version   1.0
-//! \date      December 20 2017
 
 #include "SymCylindrical.h"
 #include "SymSpherical.h"

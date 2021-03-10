@@ -6,6 +6,7 @@
 //       |  `--.  \  `-.  \ `-' /   \  `-) ) |  `--.  | | |)| 
 //       /( __.'   \____\  )---'    )\____/  /( __.'  /(  (_) 
 //      (__)              (_)      (__)     (__)     (__)     
+//      Official webSite: https://code-mphi.github.io/ECOGEN/
 //
 //  This file is part of ECOGEN.
 //
@@ -27,20 +28,11 @@
 //  along with ECOGEN (file LICENSE).  
 //  If not, see <http://www.gnu.org/licenses/>.
 
-//! \file      Model.cpp
-//! \author    F. Petitpas, K. Schmidmayer, S. Le Martelot
-//! \version   1.0
-//! \date      December 20 2017
-
 #include "Model.h"
 
 //***********************************************************************
 
-Model::Model(){}
-
-//***********************************************************************
-
-Model::Model(const std::string &name, const int &numberTransports) :
+Model::Model(const std::string& name, const int& numberTransports) :
  m_name(name)
 {
   fluxBufferTransport = 0;
@@ -52,23 +44,25 @@ Model::Model(const std::string &name, const int &numberTransports) :
 Model::~Model()
 {
   if(fluxBufferTransport !=0) delete[] fluxBufferTransport;
+  for (unsigned int r = 0; r < m_relaxations.size(); r++) {
+    delete m_relaxations[r];
+  }
 }
 
 //***********************************************************************
 
-void Model::allocateEos(Cell &cell, const int &numberPhases) const
+void Model::allocateEos(Cell& cell, const int& numberPhases) const
 {
   for (int k = 0; k < numberPhases; k++) { TB->eos[k] = cell.getPhase(k)->getEos(); }
 }
 
 //***********************************************************************
 
-void Model::relaxations(Cell *cell, const int &numberPhases, Prim type) const
+void Model::relaxations(Cell* cell, const int& numberPhases, const double& dt, Prim type) const
 {
 	for (unsigned int r = 0; r < m_relaxations.size(); r++) {
-		m_relaxations[r]->stiffRelaxation(cell, numberPhases, type);
+		m_relaxations[r]->relaxation(cell, numberPhases, dt, type);
 	}
-	//FP//TODO// Add condition for not applying the same relaxation twice
 }
 
 //***********************************************************************

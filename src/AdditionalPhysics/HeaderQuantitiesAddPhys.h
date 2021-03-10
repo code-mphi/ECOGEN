@@ -6,6 +6,7 @@
 //       |  `--.  \  `-.  \ `-' /   \  `-) ) |  `--.  | | |)| 
 //       /( __.'   \____\  )---'    )\____/  /( __.'  /(  (_) 
 //      (__)              (_)      (__)     (__)     (__)     
+//      Official webSite: https://code-mphi.github.io/ECOGEN/
 //
 //  This file is part of ECOGEN.
 //
@@ -29,12 +30,6 @@
 
 #ifndef HEADERQUANTITIESADDPHYS_H
 #define HEADERQUANTITIESADDPHYS_H
-
-//! \file      HeaderAddPhys.h
-//! \author    K. Schmidmayer
-//! \version   1.0
-//! \date      December 20 2017
-//! \brief     New headers of the quantities of additional-physics should be added here
 
 #include "SurfaceTension/QAPSurfaceTension.h"
 #include "Viscosity/QAPViscosity.h"

@@ -6,6 +6,7 @@
 //       |  `--.  \  `-.  \ `-' /   \  `-) ) |  `--.  | | |)| 
 //       /( __.'   \____\  )---'    )\____/  /( __.'  /(  (_) 
 //      (__)              (_)      (__)     (__)     (__)     
+//      Official webSite: https://code-mphi.github.io/ECOGEN/
 //
 //  This file is part of ECOGEN.
 //
@@ -30,11 +31,6 @@
 #ifndef GOVERTEX_H
 #define GOVERTEX_H
 
-//! \file      GOVertex.h
-//! \author    F. Petitpas
-//! \version   1.0
-//! \date      June 4 2018
-
 #include "GeometricObject.h"
 
 //! \class     GOVertex
@@ -42,12 +38,11 @@
 class GOVertex : public GeometricObject
 {
 public:
-  GOVertex();
-  GOVertex(const Coord &vertex);
+  GOVertex(const Coord& vertex);
   virtual ~GOVertex();
 
-  virtual double distancePoint(const Coord &vertex) const;
-  Coord projectionPoint(const Coord &vertex) const { return vertex; };
+  virtual double distancePoint(const Coord& vertex) const;
+  Coord projectionPoint(const Coord& vertex) const { return vertex; };
 
 private:
   Coord m_point;           //! Point

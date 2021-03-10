@@ -6,6 +6,7 @@
 //       |  `--.  \  `-.  \ `-' /   \  `-) ) |  `--.  | | |)| 
 //       /( __.'   \____\  )---'    )\____/  /( __.'  /(  (_) 
 //      (__)              (_)      (__)     (__)     (__)     
+//      Official webSite: https://code-mphi.github.io/ECOGEN/
 //
 //  This file is part of ECOGEN.
 //
@@ -27,28 +28,49 @@
 //  along with ECOGEN (file LICENSE).  
 //  If not, see <http://www.gnu.org/licenses/>.
 
-//! \file      BoundCondWall.cpp
-//! \author    F. Petitpas, K. Schmidmayer
-//! \version   1.0
-//! \date      February 13 2019
-
 #include "BoundCondWall.h"
 
-//****************************************************************************
-
-BoundCondWall::BoundCondWall() {}
+using namespace tinyxml2;
 
 //****************************************************************************
 
-BoundCondWall::BoundCondWall(const BoundCondWall& Source, const int lvl) : BoundCond(Source)
+BoundCondWall::BoundCondWall(const BoundCondWall& Source, const int& lvl) : BoundCond(Source, lvl)
 {
-  m_lvl = lvl;
+  m_heatCondition = Source.m_heatCondition;
+  m_imposedHeatQuantity = Source.m_imposedHeatQuantity;
 }
 
 //****************************************************************************
 
-BoundCondWall::BoundCondWall(int numPhysique) : BoundCond(numPhysique)
-{}
+BoundCondWall::BoundCondWall(int numPhysique, XMLElement *element, std::string fileName) : 
+  BoundCond(numPhysique), m_heatCondition(ADIABATIC), m_imposedHeatQuantity(0.)
+{
+  XMLElement* subElement(element->FirstChildElement("dataWall"));
+  if (subElement != NULL) {
+    std::string heatCondition(subElement->Attribute("heatCondition"));
+    Tools::uppercase(heatCondition);
+    XMLError error;
+    // One could use wall with imposed temperature, imposed flux density or adiabatic (default)
+    // This option requires the conductivity additionnal physic
+    if (heatCondition == "TEMPERATURE") {
+      m_heatCondition = IMPOSEDTEMP;
+      error = subElement->QueryDoubleAttribute("temperature", &m_imposedHeatQuantity);
+      if (error != XML_NO_ERROR) throw ErrorXMLAttribut("temperature", fileName, __FILE__, __LINE__);
+    }
+    else if (heatCondition == "FLUX") {
+      m_heatCondition = IMPOSEDFLUX;
+      error = subElement->QueryDoubleAttribute("flux", &m_imposedHeatQuantity);
+      if (error != XML_NO_ERROR) throw ErrorXMLAttribut("flux", fileName, __FILE__, __LINE__);
+    }
+  }
+}
+
+//****************************************************************************
+
+BoundCondWall::BoundCondWall(int numPhysique) : 
+  BoundCond(numPhysique), m_heatCondition(ADIABATIC), m_imposedHeatQuantity(0.)
+{
+}
 
 //****************************************************************************
 
@@ -56,27 +78,27 @@ BoundCondWall::~BoundCondWall() {}
 
 //****************************************************************************
 
-void BoundCondWall::creeLimite(TypeMeshContainer<CellInterface *> &cellInterfaces)
+void BoundCondWall::createBoundary(TypeMeshContainer<CellInterface*>& cellInterfaces)
 {
   cellInterfaces.push_back(new BoundCondWall(*(this)));
 }
 
 //****************************************************************************
 
-void BoundCondWall::solveRiemannLimite(Cell &cellLeft, const int & numberPhases, const double & dxLeft, double & dtMax)
+void BoundCondWall::solveRiemannBoundary(Cell& cellLeft, const int& numberPhases, const double& dxLeft, double& dtMax)
 {
   m_mod->solveRiemannWall(cellLeft, numberPhases, dxLeft, dtMax);
 }
 
 //****************************************************************************
 
-void BoundCondWall::solveRiemannTransportLimite(Cell &cellLeft, const int & numberTransports) const
+void BoundCondWall::solveRiemannTransportBoundary(Cell& /*cellLeft*/, const int&  numberTransports) const
 {
   m_mod->solveRiemannTransportWall(numberTransports);
 }
 
 //****************************************************************************
-//******************************Methode AMR***********************************
+//******************************AMR Method***********************************
 //****************************************************************************
 
 void BoundCondWall::creerCellInterfaceChild()

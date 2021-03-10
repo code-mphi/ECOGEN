@@ -177,7 +177,7 @@ math::vector<typename std::common_type<U,V>::type,N> operator+(const math::vecto
 {
 	math::vector<typename std::common_type<U,V>::type,N> res(lhs);
 	for(unsigned int i=0; i<N; ++i) res[i] += rhs[i];
-	return std::move(res); 
+	return res; 
 }
 
 template<typename U, typename V, std::size_t N>
@@ -201,7 +201,7 @@ math::vector<typename std::common_type<U,V>::type,N> operator-(const math::vecto
 {
 	math::vector<typename std::common_type<U,V>::type,N> res(lhs);
 	for(unsigned int i=0; i<N; ++i) res[i] -= rhs[i];
-	return std::move(res); 
+	return res; 
 }
 
 template<typename U, typename V, std::size_t N>

@@ -6,6 +6,7 @@
 //       |  `--.  \  `-.  \ `-' /   \  `-) ) |  `--.  | | |)| 
 //       /( __.'   \____\  )---'    )\____/  /( __.'  /(  (_) 
 //      (__)              (_)      (__)     (__)     (__)     
+//      Official webSite: https://code-mphi.github.io/ECOGEN/
 //
 //  This file is part of ECOGEN.
 //
@@ -30,22 +31,17 @@
 #ifndef FACETRIANGLE_H
 #define FACETRIANGLE_H
 
-//! \file      FaceTriangle.h
-//! \author    F. Petitpas
-//! \version   1.0
-//! \date      December 20 2017
-
 #include "FaceNS.h"
 
 class FaceTriangle : public FaceNS
 {
 public:
-  FaceTriangle(const int &numNoeud1, const int &numNoeud2, const int &numNoeud3, int tri=1);
+  FaceTriangle(const int& numNoeud1, const int& numNoeud2, const int& numNoeud3, int tri=1);
   virtual ~FaceTriangle();
 
 private:
-  virtual void computeSurface(const Coord *noeuds);
-  virtual void computeRepere(const Coord *noeuds, const int &numNoeudAutre, ElementNS *elementVoisin);
+  virtual void computeSurface(const Coord* noeuds);
+  virtual void computeRepere(const Coord* noeuds, const int& numNoeudAutre, ElementNS *elementVoisin);
 
   static const int NOMBRENOEUDS;
 };

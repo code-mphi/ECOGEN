@@ -6,6 +6,7 @@
 //       |  `--.  \  `-.  \ `-' /   \  `-) ) |  `--.  | | |)| 
 //       /( __.'   \____\  )---'    )\____/  /( __.'  /(  (_) 
 //      (__)              (_)      (__)     (__)     (__)     
+//      Official webSite: https://code-mphi.github.io/ECOGEN/
 //
 //  This file is part of ECOGEN.
 //
@@ -30,22 +31,17 @@
 #ifndef FACEPOINT_H
 #define FACEPOINT_H
 
-//! \file      FacePoint.h
-//! \author    F. Petitpas
-//! \version   1.0
-//! \date      December 20 2017
-
 #include "FaceNS.h"
 
 class FacePoint : public FaceNS
 {
 public:
-  FacePoint(const int &numNoeud1);
+  FacePoint(const int& numNoeud1);
   virtual ~FacePoint();
 
 private:
-  virtual void computeSurface(const Coord *noeuds);
-  virtual void computeRepere(const Coord *noeuds, const int &numNoeudAutre, ElementNS *elementVoisin);
+  virtual void computeSurface(const Coord* /*noeuds*/);
+  virtual void computeRepere(const Coord* noeuds, const int& numNoeudAutre, ElementNS* elementVoisin);
 
   static const int NOMBRENOEUDS;
 };

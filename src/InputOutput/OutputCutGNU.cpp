@@ -6,6 +6,7 @@
 //       |  `--.  \  `-.  \ `-' /   \  `-) ) |  `--.  | | |)| 
 //       /( __.'   \____\  )---'    )\____/  /( __.'  /(  (_) 
 //      (__)              (_)      (__)     (__)     (__)     
+//      Official webSite: https://code-mphi.github.io/ECOGEN/
 //
 //  This file is part of ECOGEN.
 //
@@ -27,24 +28,14 @@
 //  along with ECOGEN (file LICENSE).  
 //  If not, see <http://www.gnu.org/licenses/>.
 
-//! \file      OutputCutGNU.cpp
-//! \author    F. Petitpas, K. Schmidmayer
-//! \version   1.1
-//! \date      June 5 2019
-
 #include "OutputCutGNU.h"
+#include "../Config.h"
 
 using namespace tinyxml2;
 
 //***************************************************************
 
-OutputCutGNU::OutputCutGNU(){
-  delete m_objet;
-}
-
-//***************************************************************
-
-OutputCutGNU::OutputCutGNU(std::string casTest, std::string run, XMLElement *element, std::string fileName, TypeGO type, Input *entree)
+OutputCutGNU::OutputCutGNU(std::string casTest, std::string run, XMLElement* element, std::string fileName, TypeGO type, Input *entree)
 {
   try {
     //Modification des attributs
@@ -54,13 +45,13 @@ OutputCutGNU::OutputCutGNU(std::string casTest, std::string run, XMLElement *ele
     else if (type == PLAN) { m_fileNameResults = "cut2D"; }
     else { throw ErrorECOGEN("OutputCutGNU::OutputCutGNU : type de cut inconnu", __FILE__, __LINE__); }
     m_fileNameVisu = "visualization" + m_fileNameResults + ".gnu";
-    m_folderOutput = "./results/" + run + "/cuts/";
+    m_folderOutput = config.getWorkFolder() + "results/" + run + "/cuts/";
     m_donneesSeparees = 0;
     m_numFichier = 0;
     m_input = entree;
     m_run = m_input->getRun();
 
-    XMLElement *sousElement;
+    XMLElement* sousElement;
     XMLError error;
 
     double donnee;
@@ -96,11 +87,14 @@ OutputCutGNU::OutputCutGNU(std::string casTest, std::string run, XMLElement *ele
 
 //***************************************************************
 
-OutputCutGNU::~OutputCutGNU(){}
+OutputCutGNU::~OutputCutGNU()
+{
+  delete m_objet;
+}
 
 //***********************************************************************
 
-void OutputCutGNU::ecritSolution(Mesh *mesh, std::vector<Cell *> *cellsLvl)
+void OutputCutGNU::ecritSolution(Mesh *mesh, std::vector<Cell*>* cellsLvl)
 {
   std::ofstream fileStream;
   std::string file = m_folderOutput + creationNameFichierGNU(m_fileNameResults.c_str(), -1, rankCpu, m_numFichier);

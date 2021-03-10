@@ -6,6 +6,7 @@
 //       |  `--.  \  `-.  \ `-' /   \  `-) ) |  `--.  | | |)| 
 //       /( __.'   \____\  )---'    )\____/  /( __.'  /(  (_) 
 //      (__)              (_)      (__)     (__)     (__)     
+//      Official webSite: https://code-mphi.github.io/ECOGEN/
 //
 //  This file is part of ECOGEN.
 //
@@ -26,11 +27,6 @@
 //  You should have received a copy of the GNU General Public License
 //  along with ECOGEN (file LICENSE).  
 //  If not, see <http://www.gnu.org/licenses/>.
-
-//! \file      FluxEulerHomogeneous.cpp
-//! \author    F. Petitpas, K. Schmidmayer, J. Caze
-//! \version   1.1
-//! \date      November 18 2019
 
 #include <cmath>
 #include "FluxEulerHomogeneous.h"
@@ -57,7 +53,7 @@ void FluxEulerHomogeneous::printFlux() const
 
 //***********************************************************************
 
-void FluxEulerHomogeneous::addFlux(double coefA, const int &numberPhases)
+void FluxEulerHomogeneous::addFlux(double coefA, const int& /*numberPhases*/)
 {
     m_masse += coefA*static_cast<FluxEulerHomogeneous*> (fluxBuff)->m_masse;
     m_qdm   += coefA*static_cast<FluxEulerHomogeneous*> (fluxBuff)->m_qdm;
@@ -66,7 +62,16 @@ void FluxEulerHomogeneous::addFlux(double coefA, const int &numberPhases)
 
 //***********************************************************************
 
-void FluxEulerHomogeneous::subtractFlux(double coefA, const int &numberPhases)
+void FluxEulerHomogeneous::addFlux(Flux* flux, const int& /*numberPhases*/)
+{
+  m_masse += static_cast<FluxEulerHomogeneous*> (flux)->m_masse;
+  m_qdm   += static_cast<FluxEulerHomogeneous*> (flux)->m_qdm;
+  m_energ += static_cast<FluxEulerHomogeneous*> (flux)->m_energ;
+}
+
+//***********************************************************************
+
+void FluxEulerHomogeneous::subtractFlux(double coefA, const int& /*numberPhases*/)
 {
     m_masse -= coefA*static_cast<FluxEulerHomogeneous*> (fluxBuff)->m_masse;
     m_qdm   -= coefA*static_cast<FluxEulerHomogeneous*> (fluxBuff)->m_qdm;
@@ -75,7 +80,7 @@ void FluxEulerHomogeneous::subtractFlux(double coefA, const int &numberPhases)
 
 //***********************************************************************
 
-void FluxEulerHomogeneous::multiply(double scalar, const int &numberPhases)
+void FluxEulerHomogeneous::multiply(double scalar, const int& /*numberPhases*/)
 {
     m_masse *= scalar;
     m_qdm   *= scalar;
@@ -84,19 +89,19 @@ void FluxEulerHomogeneous::multiply(double scalar, const int &numberPhases)
 
 //***********************************************************************
 
-void FluxEulerHomogeneous::setBufferFlux(Cell &cell, const int &numberPhases)
+void FluxEulerHomogeneous::setBufferFlux(Cell& cell, const int& numberPhases)
 {
   static_cast<FluxEulerHomogeneous*> (fluxBuff)->buildCons(cell.getPhases(), numberPhases, cell.getMixture());
 }
 
 //***********************************************************************
 
-void FluxEulerHomogeneous::buildCons(Phase **phases, const int &numberPhases, Mixture *mixture)
+void FluxEulerHomogeneous::buildCons(Phase** phases, const int& numberPhases, Mixture* mixture)
 {
   double energieInterne(0.);
   double rhok, alphak, ek;
 
-  Phase *phase(0);
+  Phase* phase(0);
   m_masse = 0.;
   m_energ = 0.;
 
@@ -117,10 +122,9 @@ void FluxEulerHomogeneous::buildCons(Phase **phases, const int &numberPhases, Mi
 
 //***********************************************************************
 
-void FluxEulerHomogeneous::buildPrim(Phase **phases, Mixture *mixture, const int &numberPhases)
+void FluxEulerHomogeneous::buildPrim(Phase** phases, Mixture* mixture, const int& numberPhases)
 {
   double pressure, Tsat, internalEnergy;
-  Phase* phase(0);
   
   int liq(m_model->m_liq), vap(m_model->m_vap);
 
@@ -155,7 +159,7 @@ void FluxEulerHomogeneous::buildPrim(Phase **phases, Mixture *mixture, const int
 
 //***********************************************************************
 
-void FluxEulerHomogeneous::setToZero(const int &numberPhases)
+void FluxEulerHomogeneous::setToZero(const int& /*numberPhases*/)
 {
   m_masse = 0.;
   m_qdm   = 0.;
@@ -164,20 +168,20 @@ void FluxEulerHomogeneous::setToZero(const int &numberPhases)
 
 //***********************************************************************
 
-void FluxEulerHomogeneous::addTuyere1D(const Coord normal, const double surface, Cell *cell, const int &numberPhases)
+void FluxEulerHomogeneous::addTuyere1D(const Coord& normal, const double& surface, Cell* cell, const int& /*numberPhases*/)
 {
   double coef = normal.getX()*surface / cell->getElement()->getVolume();
-  Phase * phase;
+  Phase*  phase;
   phase = cell->getPhase(0);
 
   m_qdm.setX(m_qdm.getX() - phase->getPressure()*coef);
 }
 //***********************************************************************
 
-void FluxEulerHomogeneous::subtractTuyere1D(const Coord normal, const double surface, Cell *cell, const int &numberPhases)
+void FluxEulerHomogeneous::subtractTuyere1D(const Coord& normal, const double& surface, Cell* cell, const int& /*numberPhases*/)
 {
   double coef = normal.getX()*surface / cell->getElement()->getVolume();
-  Phase * phase;
+  Phase*  phase;
   phase = cell->getPhase(0);
 
   m_qdm.setX(m_qdm.getX() + phase->getPressure()*coef);
@@ -186,7 +190,7 @@ void FluxEulerHomogeneous::subtractTuyere1D(const Coord normal, const double sur
 
 //***********************************************************************
 
-void FluxEulerHomogeneous::setCons(const Flux *cons, const int &numberPhases)
+void FluxEulerHomogeneous::setCons(const Flux* cons, const int& /*numberPhases*/)
 {
   m_masse = cons->getMasseMix();
   m_qdm = cons->getQdm();

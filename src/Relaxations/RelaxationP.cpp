@@ -6,6 +6,7 @@
 //       |  `--.  \  `-.  \ `-' /   \  `-) ) |  `--.  | | |)| 
 //       /( __.'   \____\  )---'    )\____/  /( __.'  /(  (_) 
 //      (__)              (_)      (__)     (__)     (__)     
+//      Official webSite: https://code-mphi.github.io/ECOGEN/
 //
 //  This file is part of ECOGEN.
 //
@@ -27,11 +28,6 @@
 //  along with ECOGEN (file LICENSE).  
 //  If not, see <http://www.gnu.org/licenses/>.
 
-//! \file      RelaxationP.cpp
-//! \author    F. Petitpas, K. Schmidmayer
-//! \version   1.1
-//! \date      June 5 2019
-
 #include "RelaxationP.h"
 
 //***********************************************************************
@@ -44,67 +40,33 @@ RelaxationP::~RelaxationP(){}
 
 //***********************************************************************
 
-void RelaxationP::stiffRelaxation(Cell *cell, const int &numberPhases, Prim type) const
+void RelaxationP::NewtonRaphson(const int& numberPhases, double& pStar, int& iteration)
 {
-  //Is the pressure-relaxation procedure necessary?
-  //If alpha = 0 is activated, a test is done to know if the relaxation procedure is necessary or not
-  //Else, i.e. alpha = 0 is desactivated (alpha != 0), the relaxation procedure is always done (relax = true)
-  bool relax(true);
-  if (epsilonAlphaNull > 1.e-20) { // alpha = 0 is activated
+  //Iterative process for relaxed pressure determination
+  double f(0.), df(1.), drho(0.), dalpha(0.);
+  do {
+    iteration++;
+    pStar -= f / df;
+    //Physical pressure?
+    for (int k = 0; k < numberPhases; k++) { TB->eos[k]->verifyAndModifyPressure(pStar); }
+    f = -1.; df = 0.;
     for (int k = 0; k < numberPhases; k++) {
-      if (cell->getPhase(k, type)->getAlpha() >(1. - 1.e-5)) relax = false;
+      TB->rhokS[k] = TB->eos[k]->computeDensityPfinal(TB->pk[k], TB->rhok[k], pStar, &drho);
+      TB->akS[k] = TB->ak[k] * TB->rhok[k] / TB->rhokS[k];
+      dalpha = TB->ak[k] * TB->rhok[k] * drho / (TB->rhokS[k] * TB->rhokS[k]);
+      f += TB->akS[k];
+      df -= dalpha;
     }
-  }
+  } while (std::fabs(f)>1e-10 && iteration < 100);
 
-  if (relax) {
-    double drho(0.), dalpha(0.);
-    Phase *phase(0);
-    //Initial state
-    double pStar(0.);
-    for (int k = 0; k < numberPhases; k++) {
-      phase = cell->getPhase(k, type);
-      phase->verifyAndCorrectPhase();
-      TB->ak[k] = phase->getAlpha();
-      TB->pk[k] = phase->getPressure();
-      TB->rhok[k] = phase->getDensity();
-      pStar += TB->ak[k] * TB->pk[k];
-      //phase->verifyPhase();
-    }
-
-    //Iterative process for relaxed pressure determination
-    int iteration(0);
-    double f(0.), df(1.);
-    do {
-      iteration++;
-      pStar -= f / df;
-      //Physical pressure?
-      for (int k = 0; k < numberPhases; k++) { TB->eos[k]->verifyAndModifyPressure(pStar); }
-      f = -1.; df = 0.;
-      for (int k = 0; k < numberPhases; k++) {
-        TB->rhokS[k] = TB->eos[k]->computeDensityPfinal(TB->pk[k], TB->rhok[k], pStar, &drho);
-        TB->akS[k] = TB->ak[k] * TB->rhok[k] / TB->rhokS[k];
-        dalpha = TB->ak[k] * TB->rhok[k] * drho / (TB->rhokS[k] * TB->rhokS[k]);
-        f += TB->akS[k];
-        df -= dalpha;
-      }
-      if (iteration > 100) {
-        std::cout << "pStar=" << pStar << " f=" << f << " df=" << df << std::endl;
-        errors.push_back(Errors("Not converged in relaxPressures", __FILE__, __LINE__));
-        break;
-      }
-    } while (std::fabs(f)>1e-10 && iteration < 100);
-    //} while (std::fabs(f) > 1e-10);
-
-    //Apply the relaxation procedure only if it has converged to a solution.
-    if (iteration < 100) {
-      //Cell update
-      for (int k = 0; k < numberPhases; k++) {
-        phase = cell->getPhase(k, type);
-        phase->setAlpha(TB->akS[k]);
-        phase->setDensity(TB->rhokS[k]);
-        phase->setPressure(pStar);
-      }
-      cell->getMixture(type)->setPressure(pStar);
-    }
+  if (iteration == 100) {
+    // std::cout<<"alpha0 "<<TB->ak[0]<<" "<<TB->akS[0]<<std::endl;
+    // std::cout<<"alpha1 "<<TB->ak[1]<<" "<<TB->akS[1]<<std::endl;
+    // std::cout<<"sumAlpha "<<TB->ak[0]+TB->ak[1]<<" "<<TB->akS[0]+TB->akS[1]<<std::endl;
+    // std::cout << "pStar=" << pStar << " f=" << f << " df=" << df << std::endl;
+    std::stringstream warningMessage;
+    warningMessage << "Not converged in RelaxationP::NewtonRaphson.";
+    warningMessage << "Convergence error = " << std::fabs(f);
+    warnings.push_back(Errors(warningMessage.str().c_str(), __FILE__, __LINE__));
   }
 }

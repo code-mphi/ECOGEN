@@ -6,6 +6,7 @@
 //       |  `--.  \  `-.  \ `-' /   \  `-) ) |  `--.  | | |)| 
 //       /( __.'   \____\  )---'    )\____/  /( __.'  /(  (_) 
 //      (__)              (_)      (__)     (__)     (__)     
+//      Official webSite: https://code-mphi.github.io/ECOGEN/
 //
 //  This file is part of ECOGEN.
 //
@@ -30,44 +31,30 @@
 #ifndef BOUNDCONDOUTFLOW_H
 #define BOUNDCONDOUTFLOW_H
 
-//! \file      BoundCondOutflow.h
-//! \author    F. Petitpas, K. Schmidmayer
-//! \version   1.0
-//! \date      February 13 2019
-
 #include "BoundCond.h"
-
 
 class BoundCondOutflow : public BoundCond
 {
   public:
-    BoundCondOutflow();
-    BoundCondOutflow(int numPhysique, tinyxml2::XMLElement *element, int &numberPhases, int &numberTransports, std::vector<std::string> nameTransports, std::string fileName);
-    BoundCondOutflow(double p0);
-    BoundCondOutflow(const BoundCondOutflow& Source, const int lvl = 0); //Constructeur de copie (utile pour AMR)
+    BoundCondOutflow(int numPhysique, tinyxml2::XMLElement* element, int& numberTransports, std::vector<std::string> nameTransports, std::string fileName);
+    BoundCondOutflow(const BoundCondOutflow& Source, const int& lvl = 0); //Copy ctor (useful for AMR)
     virtual ~BoundCondOutflow();
 
-    virtual void creeLimite(TypeMeshContainer<CellInterface *> &cellInterfaces);
-    virtual void solveRiemannLimite(Cell &cellLeft, const int &numberPhases, const double &dxLeft, double &dtMax);
-    virtual void solveRiemannTransportLimite(Cell &cellLeft, const int &numberTransports) const;
+    virtual void createBoundary(TypeMeshContainer<CellInterface*>& cellInterfaces);
+    virtual void solveRiemannBoundary(Cell& cellLeft, const int& numberPhases, const double& dxLeft, double& dtMax);
+    virtual void solveRiemannTransportBoundary(Cell& cellLeft, const int& numberTransports) const;
 
-    virtual int whoAmI() const { return 3; };
+    virtual int whoAmI() const { return OUTFLOW; };
     virtual void printInfo();
 
-    //Accesseur
-    //virtual double getDebit(int numPhase) const;
-
-    //Pour methode AMR
-    virtual void creerCellInterfaceChild();  /*!< Creer un child cell interface (non initialize) */
+    //For AMR method
+    virtual void creerCellInterfaceChild();  /*!< Create a child cell interface (not initialized) */
 
   protected:
   private:
     double m_p0;
     int m_numberTransports;
-    int m_numberPhases;
-    double *m_valueTransport;
-
-    double *m_debits;
+    double* m_valueTransport;
 };
 
 #endif // BOUNDCONDOUTFLOW_H

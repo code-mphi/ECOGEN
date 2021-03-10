@@ -6,6 +6,7 @@
 //       |  `--.  \  `-.  \ `-' /   \  `-) ) |  `--.  | | |)| 
 //       /( __.'   \____\  )---'    )\____/  /( __.'  /(  (_) 
 //      (__)              (_)      (__)     (__)     (__)     
+//      Official webSite: https://code-mphi.github.io/ECOGEN/
 //
 //  This file is part of ECOGEN.
 //
@@ -30,20 +31,16 @@
 #ifndef HEADERADDPHYS_H
 #define HEADERADDPHYS_H
 
-//! \file      HeaderAddPhys.h
-//! \author    K. Schmidmayer
-//! \version   1.0
-//! \date      December 20 2017
-//! \brief     New additional-physics headers should be added here
-
 //Additional physics for Euler model
 #include "APEuler.h"
+#include "Viscosity/APEViscosity.h"
+#include "Conductivity/APEConductivity.h"
 
-//Additional physics for Kapila model
-#include "APKapila.h"
-#include "SurfaceTension/APKSurfaceTension.h"
-#include "Viscosity/APKViscosity.h"
-#include "Conductivity/APKConductivity.h"
+//Additional physics for the velocity-equilibrium system of equations
+#include "APUEq.h"
+#include "SurfaceTension/APUEqSurfaceTension.h"
+#include "Viscosity/APUEqViscosity.h"
+#include "Conductivity/APUEqConductivity.h"
 
 //Add here headers of new additional physics
 

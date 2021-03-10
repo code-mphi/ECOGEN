@@ -6,6 +6,7 @@
 //       |  `--.  \  `-.  \ `-' /   \  `-) ) |  `--.  | | |)| 
 //       /( __.'   \____\  )---'    )\____/  /( __.'  /(  (_) 
 //      (__)              (_)      (__)     (__)     (__)     
+//      Official webSite: https://code-mphi.github.io/ECOGEN/
 //
 //  This file is part of ECOGEN.
 //
@@ -27,23 +28,15 @@
 //  along with ECOGEN (file LICENSE).  
 //  If not, see <http://www.gnu.org/licenses/>.
 
-//! \file      OutputProbeGNU.cpp
-//! \author    F. Petitpas, K. Schmidmayer
-//! \version   1.1
-//! \date      Octotber 02 2019
-
 #include "OutputProbeGNU.h"
 #include "../Maths/GOVertex.h"
+#include "../Config.h"
 
 using namespace tinyxml2;
 
 //***************************************************************
 
-OutputProbeGNU::OutputProbeGNU(){}
-
-//***************************************************************
-
-OutputProbeGNU::OutputProbeGNU(std::string casTest, std::string run, XMLElement *element, std::string fileName, Input *entree)
+OutputProbeGNU::OutputProbeGNU(std::string casTest, std::string run, XMLElement* element, std::string fileName, Input *entree)
 {
   try {
     //Attributes settings
@@ -51,15 +44,15 @@ OutputProbeGNU::OutputProbeGNU(std::string casTest, std::string run, XMLElement 
     m_simulationName = casTest;
     m_fileNameResults = element->Attribute("name");
     m_fileNameVisu = "visualization" + m_fileNameResults + ".gnu";
-    m_folderOutput = "./results/" + run + "/probes/";
-	m_folderScriptGnuplot = "";
+    m_folderOutput = config.getWorkFolder() + "results/" + run + "/probes/";
+	  m_folderScriptGnuplot = "";
     m_donneesSeparees = 0;
     m_numFichier = 0;
     m_input = entree;
     m_run = m_input->getRun();
-    m_possessesProbe = true;
+    m_possessesProbe = new bool[Ncpu];
 
-    XMLElement *sousElement;
+    XMLElement* sousElement;
     XMLError error;
 
     double donnee;
@@ -90,11 +83,12 @@ OutputProbeGNU::OutputProbeGNU(std::string casTest, std::string run, XMLElement 
 OutputProbeGNU::~OutputProbeGNU()
 {
   if (m_objet != 0) delete m_objet;
+  if(m_possessesProbe !=0) delete m_possessesProbe;
 }
 
 //***********************************************************************
 
-void OutputProbeGNU::locateProbeInMesh(const TypeMeshContainer<Cell *> &cells, const int &nbCells, bool localSeeking)
+void OutputProbeGNU::locateProbeInMesh(const TypeMeshContainer<Cell*>& cells, const int& nbCells, bool localSeeking)
 {
   //Locate probe in mesh
   double minimumDistance(1.e12), distance;
@@ -111,15 +105,27 @@ void OutputProbeGNU::locateProbeInMesh(const TypeMeshContainer<Cell *> &cells, c
     if (Ncpu != 1) {
       double minimumAllCPU(minimumDistance);
       MPI_Allreduce(&minimumDistance, &minimumAllCPU, 1, MPI_DOUBLE, MPI_MIN, MPI_COMM_WORLD);
-      if (std::fabs(minimumAllCPU - minimumDistance) > 1.e-10) { m_possessesProbe = false; }
-      else { m_possessesProbe = true; }
+      if (std::fabs(minimumAllCPU - minimumDistance) > 1.e-10) { m_possessesProbe[rankCpu] = false; }
+      else { m_possessesProbe[rankCpu] = true; }
+      MPI_Allgather(&m_possessesProbe[rankCpu], 1, MPI_C_BOOL, m_possessesProbe, 1, MPI_C_BOOL, MPI_COMM_WORLD);
+      //Checking for belonging a single CPU
+      for(int c=0; c<Ncpu; c++){
+        if(m_possessesProbe[c]==true){
+          for(int c2=c+1; c2<Ncpu; c2++){
+            m_possessesProbe[c2]=false;
+          }
+        }
+      }
+    }
+    else{
+      m_possessesProbe[rankCpu] = true;
     }
   }
 }
 
 //***********************************************************************
 
-Cell* OutputProbeGNU::locateProbeInAMRSubMesh(std::vector<Cell*> *cells, const int &nbCells)
+Cell* OutputProbeGNU::locateProbeInAMRSubMesh(std::vector<Cell*>* cells, const int& nbCells)
 {
   int index = 0;
 
@@ -153,7 +159,7 @@ void OutputProbeGNU::prepareSortieSpecifique()
 
   //Preparing output files
   try {
-    if (m_possessesProbe) {
+    if (m_possessesProbe[rankCpu]) {
       //Creating output file
       std::ofstream fileStream;
       std::string file = m_folderOutput + creationNameFichierGNU(m_fileNameResults.c_str(), -1, -1, -1);
@@ -169,7 +175,7 @@ void OutputProbeGNU::prepareSortieSpecifique()
 
 //***********************************************************************
 
-void OutputProbeGNU::ecritSolution(Mesh *mesh, std::vector<Cell *> *cellsLvl)
+void OutputProbeGNU::ecritSolution(Mesh* /*mesh*/, std::vector<Cell*>* /*cellsLvl*/)
 {
   std::ofstream fileStream;
   std::string file = m_folderOutput + creationNameFichierGNU(m_fileNameResults.c_str(), -1, -1, -1);

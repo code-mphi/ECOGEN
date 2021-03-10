@@ -6,6 +6,7 @@
 //       |  `--.  \  `-.  \ `-' /   \  `-) ) |  `--.  | | |)| 
 //       /( __.'   \____\  )---'    )\____/  /( __.'  /(  (_) 
 //      (__)              (_)      (__)     (__)     (__)     
+//      Official webSite: https://code-mphi.github.io/ECOGEN/
 //
 //  This file is part of ECOGEN.
 //
@@ -27,11 +28,6 @@
 //  along with ECOGEN (file LICENSE).  
 //  If not, see <http://www.gnu.org/licenses/>.
 
-//! \file      ModEuler.cpp
-//! \author    F. Petitpas, K. Schmidmayer, S. Le Martelot, J. Caze
-//! \version   1.1
-//! \date      May 07 2020
-
 #include <cmath>
 #include <algorithm>
 #include "ModEuler.h"
@@ -41,7 +37,7 @@ const std::string ModEuler::NAME = "EULER";
 
 //****************************************************************************
 
-ModEuler::ModEuler(const int &numberTransports) :
+ModEuler::ModEuler(const int& numberTransports) :
   Model(NAME, numberTransports)
 {
   fluxBuff = new FluxEuler();
@@ -63,28 +59,28 @@ ModEuler::~ModEuler()
 
 //****************************************************************************
 
-void ModEuler::allocateCons(Flux **cons, const int &numberPhases)
+void ModEuler::allocateCons(Flux** cons, const int& /*numberPhases*/)
 {
   *cons = new FluxEuler;
 }
 
 //***********************************************************************
 
-void ModEuler::allocatePhase(Phase **phase)
+void ModEuler::allocatePhase(Phase** phase)
 {
   *phase = new PhaseEuler;
 }
 
 //***********************************************************************
 
-void ModEuler::allocateMixture(Mixture **mixture)
+void ModEuler::allocateMixture(Mixture** mixture)
 {
   *mixture = new MixEuler;
 }
 
 //***********************************************************************
 
-void ModEuler::fulfillState(Phase **phases, Mixture *mixture, const int &numberPhases, Prim type)
+void ModEuler::fulfillState(Phase** phases, Mixture* /*mixture*/, const int& /*numberPhases*/, Prim /*type*/)
 {
   phases[0]->extendedCalculusPhase(phases[0]->getVelocity());
 }
@@ -92,33 +88,31 @@ void ModEuler::fulfillState(Phase **phases, Mixture *mixture, const int &numberP
 //***********************************************************************
 
 //****************************************************************************
-//********************* Cell to cell Riemann solvers *************************
+//********************* Cell to cell Riemann solvers** ***********************
 //****************************************************************************
 
-void ModEuler::solveRiemannIntern(Cell &cellLeft, Cell &cellRight, const int &numberPhases, const double &dxLeft, const double &dxRight, double &dtMax) const
+void ModEuler::solveRiemannIntern(Cell& cellLeft, Cell& cellRight, const int& /*numberPhases*/, const double& dxLeft, const double& dxRight, double& dtMax, double& massflow, double& powerFlux) const
 {
-  Eos *eos;
-
   double cL, cR, sL, sR;
   double uL, uR, vL, vR, wL, wR, pL, pR, rhoL, rhoR, EL, ER;
 
-  Phase *phaseGauche(0), *phaseDroite(0);
-  phaseGauche = cellLeft.getPhase(0);
-  phaseDroite = cellRight.getPhase(0);
+  Phase* phaseLeft(0), *phaseRight(0);
+  phaseLeft = cellLeft.getPhase(0);
+  phaseRight = cellRight.getPhase(0);
+  Eos* eos(0);
+  eos = phaseLeft->getEos();
 
-  eos = phaseGauche->getEos();
-  uL = phaseGauche->getU(); vL = phaseGauche->getV(); wL = phaseGauche->getW();
-  pL = phaseGauche->getPressure();
-  rhoL = phaseGauche->getDensity();
-  cL = phaseGauche->getSoundSpeed();
-  EL = phaseGauche->getTotalEnergy();
+  uL = phaseLeft->getU(); vL = phaseLeft->getV(); wL = phaseLeft->getW();
+  pL = phaseLeft->getPressure();
+  rhoL = phaseLeft->getDensity();
+  cL = phaseLeft->getSoundSpeed();
+  EL = phaseLeft->getTotalEnergy();
 
-  eos = phaseDroite->getEos();
-  uR = phaseDroite->getU(); vR = phaseDroite->getV(); wR = phaseDroite->getW();
-  pR = phaseDroite->getPressure();
-  rhoR = phaseDroite->getDensity();
-  cR = phaseDroite->getSoundSpeed();
-  ER = phaseDroite->getTotalEnergy();
+  uR = phaseRight->getU(); vR = phaseRight->getV(); wR = phaseRight->getW();
+  pR = phaseRight->getPressure();
+  rhoR = phaseRight->getDensity();
+  cR = phaseRight->getSoundSpeed();
+  ER = phaseRight->getTotalEnergy();
 
   sL = std::min(uL - cL, uR - cR);
   sR = std::max(uR + cR, uL + cL);
@@ -137,6 +131,9 @@ void ModEuler::solveRiemannIntern(Cell &cellLeft, Cell &cellRight, const int &nu
     static_cast<FluxEuler*> (fluxBuff)->m_qdm.setY(rhoL*vL*uL);
     static_cast<FluxEuler*> (fluxBuff)->m_qdm.setZ(rhoL*wL*uL);
     static_cast<FluxEuler*> (fluxBuff)->m_energ = (rhoL*EL + pL)*uL;
+
+    //Specific power flux through interface (W.m-2)
+    powerFlux = rhoL * uL * eos->computeTotalEnthalpy(rhoL, pL, uL);
   }
   else if (sR < 0.){
     static_cast<FluxEuler*> (fluxBuff)->m_masse = rhoR*uR;
@@ -144,6 +141,9 @@ void ModEuler::solveRiemannIntern(Cell &cellLeft, Cell &cellRight, const int &nu
     static_cast<FluxEuler*> (fluxBuff)->m_qdm.setY(rhoR*vR*uR);
     static_cast<FluxEuler*> (fluxBuff)->m_qdm.setZ(rhoR*wR*uR);
     static_cast<FluxEuler*> (fluxBuff)->m_energ = (rhoR*ER + pR)*uR;
+
+    //Specific power flux through interface (W.m-2)
+    powerFlux = rhoR * uR * eos->computeTotalEnthalpy(rhoR, pR, uR);
   }
 
   ////1) Option HLL
@@ -166,6 +166,9 @@ void ModEuler::solveRiemannIntern(Cell &cellLeft, Cell &cellRight, const int &nu
     static_cast<FluxEuler*> (fluxBuff)->m_qdm.setY(rhoStar*sM*vL);
     static_cast<FluxEuler*> (fluxBuff)->m_qdm.setZ(rhoStar*sM*wL);
     static_cast<FluxEuler*> (fluxBuff)->m_energ = (rhoStar*Estar + pStar)*sM;
+
+    //Specific power flux through interface (W.m-2)
+    powerFlux = rhoStar * sM * eos->computeTotalEnthalpy(rhoStar, pStar, sM);
   }
   else {
     double pStar = mR*(sM - uR) + pR;
@@ -176,32 +179,35 @@ void ModEuler::solveRiemannIntern(Cell &cellLeft, Cell &cellRight, const int &nu
     static_cast<FluxEuler*> (fluxBuff)->m_qdm.setY(rhoStar*sM*vR);
     static_cast<FluxEuler*> (fluxBuff)->m_qdm.setZ(rhoStar*sM*wR);
     static_cast<FluxEuler*> (fluxBuff)->m_energ = (rhoStar*Estar + pStar)*sM;
+
+    //Specific power flux through interface (W.m-2)
+    powerFlux = rhoStar * sM * eos->computeTotalEnthalpy(rhoStar, pStar, sM);
   }
 
   //Contact discontinuity velocity
   static_cast<FluxEuler*> (fluxBuff)->m_sM = sM;
+
+  //Specific mass flow through interface (kg.s-1.m-2)
+  massflow = static_cast<FluxEuler*> (fluxBuff)->m_masse;
 }
 
 //****************************************************************************
-//************** Half Riemann solvers for boundary conditions ****************
+//************** Half Riemann solvers for boundary conditions** **************
 //****************************************************************************
 
-void ModEuler::solveRiemannWall(Cell &cellLeft, const int &numberPhases, const double &dxLeft, double &dtMax) const
+void ModEuler::solveRiemannWall(Cell& cellLeft, const int& /*numberPhases*/, const double& dxLeft, double& dtMax) const
 {
-  Eos *eos;
-
   double cL, sL;
   double uL, pL, rhoL;
   double pStar(0.);
 
-  Phase *phaseGauche(0);
-  phaseGauche = cellLeft.getPhase(0);
+  Phase* phaseLeft(0);
+  phaseLeft = cellLeft.getPhase(0);
 
-  eos = phaseGauche->getEos();
-  uL = phaseGauche->getU();
-  pL = phaseGauche->getPressure();
-  rhoL = phaseGauche->getDensity();
-  cL = phaseGauche->getSoundSpeed();
+  uL = phaseLeft->getU();
+  pL = phaseLeft->getPressure();
+  rhoL = phaseLeft->getDensity();
+  cL = phaseLeft->getSoundSpeed();
 
   sL = std::min(uL - cL, -uL - cL);
   if (std::fabs(sL)>1.e-3) dtMax = std::min(dtMax, dxLeft / std::fabs(sL));
@@ -220,25 +226,25 @@ void ModEuler::solveRiemannWall(Cell &cellLeft, const int &numberPhases, const d
 
 //****************************************************************************
 
-void ModEuler::solveRiemannInflow(Cell &cellLeft, const int &numberPhases, const double &dxLeft, double &dtMax, const double m0, const double *ak0, const double *rhok0, const double *pk0) const
+void ModEuler::solveRiemannInflow(Cell& cellLeft, const int& /*numberPhases*/, const double& dxLeft, double& dtMax, const double m0, const double* /*ak0*/, const double* rhok0, const double* pk0, double& massflow, double& powerFlux) const
 {
-  Eos *eos;
+  Eos* eos;
   double H0, u0;
 
   double cL, sL, zL;
   double uL, pL, rhoL, vL, wL;
   double uStar(0.), rhoStar(0.), pStar(0.), eStar(0.);
 
-  Phase *phaseGauche(0);
-  phaseGauche = cellLeft.getPhase(0);
+  Phase* phaseLeft(0);
+  phaseLeft = cellLeft.getPhase(0);
 
-  eos = phaseGauche->getEos();
-  uL = phaseGauche->getU();
-  vL = phaseGauche->getV();
-  wL = phaseGauche->getW();
-  pL = phaseGauche->getPressure();
-  rhoL = phaseGauche->getDensity();
-  cL = phaseGauche->getSoundSpeed();
+  eos = phaseLeft->getEos();
+  uL = phaseLeft->getU();
+  vL = phaseLeft->getV();
+  wL = phaseLeft->getW();
+  pL = phaseLeft->getPressure();
+  rhoL = phaseLeft->getDensity();
+  cL = phaseLeft->getSoundSpeed();
   zL = rhoL*cL;
 
   sL = uL - cL;
@@ -282,7 +288,7 @@ void ModEuler::solveRiemannInflow(Cell &cellLeft, const int &numberPhases, const
       //Compute from m0, H0 on the right
       h = H0 - 0.5 * u * u;
       v = eos->vfpfh(pStar, h);
-      dv = eos->dvdpch(pStar, h) - eos->dvdhcp(pStar, h) * u * du;
+      dv = eos->dvdpch(pStar, h) - eos->dvdhcp(pStar) * u * du;
       f -= v * rhok0[0];
       df -= dv * rhok0[0];
 
@@ -294,7 +300,7 @@ void ModEuler::solveRiemannInflow(Cell &cellLeft, const int &numberPhases, const
 
   ////IG or SG version only   =>   exact solver
   ////-----------------------------------------
-  //double *dataEos;
+  //double* dataEos;
   //double a, b, c, delta, u1, u2, gammaTemp;
   //eos->sendInfo(dataEos);
   //gammaTemp = (dataEos[0] - 1)* m0 / dataEos[0];
@@ -317,28 +323,120 @@ void ModEuler::solveRiemannInflow(Cell &cellLeft, const int &numberPhases, const
 
   //Contact discontinuity velocity
   static_cast<FluxEuler*> (fluxBuff)->m_sM = uStar;
+  
+  //Specific mass flow through interface (kg.s-1.m-2)
+  massflow = static_cast<FluxEuler*> (fluxBuff)->m_masse;
+
+  //Specific power flux through interface (W.m-2)
+  powerFlux = massflow * eos->computeTotalEnthalpy(rhoStar, pStar, uStar);
 }
 
 //****************************************************************************
 
-void ModEuler::solveRiemannTank(Cell &cellLeft, const int &numberPhases, const double &dxLeft, double &dtMax, const double *ak0, const double *rhok0, const double &p0, const double &T0) const
+void ModEuler::solveRiemannSubInj(Cell& cellLeft, const int& /*numberPhases*/, const double& dxLeft, double& dtMax, const double m0, const double T0, double& massflow, double& powerFlux) const
 {
-  Eos *eos;
+  Eos* eos;
+  Phase* leftPhase(0);
+  double uL, vL, wL, pL, rhoL;
+  double cL, sL, zL;
+
+  leftPhase = cellLeft.getPhase(0);
+  eos = leftPhase->getEos();
+  uL = leftPhase->getU();
+  vL = leftPhase->getV();
+  wL = leftPhase->getW();
+  pL = leftPhase->getPressure();
+  rhoL = leftPhase->getDensity();
+  cL = leftPhase->getSoundSpeed();
+  zL = rhoL * cL;
+
+  sL = uL - cL;
+  if (std::fabs(sL) > 1.e-3) dtMax = std::min(dtMax, dxLeft / std::fabs(sL));
+
+  double uRef(m0 / rhoL); // N-R reference velocity (don't use directly uL to avoid /0)
+
+  int it(0);
+  double p(pL), f(0.), df(1.);
+  double mL(zL), dmL(0.), vSmvL(0.);
+  double rhoStarR(0.), uStarR(0.), drhoStarR(0.), duStarR(0.);
+  double rhoStarL(0.), uStarL(0.), drhoStarL(0.), duStarL(0.), vStarL(0.), dvStarL(0.);
+  double eStar(0.), rhoStar(0.), pStar(0.), uStar(0.);
+
+  // ITERATIVE PROCESS FOR PRESSURE DETERMINATION
+  // --------------------------------------------
+  do {
+    p -= f / df;
+    it++;
+    if (it > 50) Errors::errorMessage("solveRiemannSubInj not converged in modEuler");
+    eos->verifyAndModifyPressure(p);
+
+    // Right intermediate state 
+    rhoStarR = eos->computeDensity(p, T0);
+    drhoStarR = eos->drhodpcT(p, T0);
+    uStarR = m0 / rhoStarR;
+    duStarR = - m0 * drhoStarR / (rhoStarR * rhoStarR);
+
+    // Left intermediate state
+    rhoStarL = eos->computeDensityHugoniot(pL, rhoL, p, &drhoStarL);
+    vStarL = 1. / rhoStarL;
+    dvStarL = - drhoStarL / (rhoStarL * rhoStarL);
+    vSmvL = vStarL - 1. / rhoL;
+    if (std::fabs(vSmvL) > 1.e-10) { // Rankine-Hugoniot
+      mL = std::sqrt((pL - p) / vSmvL);
+      dmL = 0.5 * (- vSmvL + (p - pL) * dvStarL) / (vSmvL * vSmvL) / mL;
+      duStarL = dmL * vSmvL + mL * dvStarL;
+    }
+    else { // Acoustic
+      mL = zL;
+      duStarL = zL * dvStarL;
+    }
+    uStarL = uL + mL * vSmvL;
+
+    f = (uStarL - uStarR);
+    df = (duStarL - duStarR);
+  } while (std::fabs(f/uRef) > 1.e-5);
+
+  pStar = p;
+  rhoStar = rhoStarR;
+  eStar = eos->computeEnergy(rhoStar, pStar);
+  uStar = 0.5 * (uStarL + uStarR);
+
+  static_cast<FluxEuler*> (fluxBuff)->m_masse = rhoStar * uStar;
+  static_cast<FluxEuler*> (fluxBuff)->m_qdm.setX(rhoStar * uStar * uStar + pStar);
+  static_cast<FluxEuler*> (fluxBuff)->m_qdm.setY(rhoStar * uStar * vL);
+  static_cast<FluxEuler*> (fluxBuff)->m_qdm.setZ(rhoStar * uStar * wL);
+  static_cast<FluxEuler*> (fluxBuff)->m_energ = (rhoStar * (eStar + 0.5 * (uStar * uStar + vL * vL + wL * wL)) + pStar) * uStar;
+
+  // Contact discontinuity velocity
+  static_cast<FluxEuler*> (fluxBuff)->m_sM = uStar;
+  
+  //Specific mass flow through interface (kg.s-1.m-2)
+  massflow = static_cast<FluxEuler*> (fluxBuff)->m_masse;
+
+  //Specific power flux through interface (W.m-2)
+  powerFlux = massflow * eos->computeTotalEnthalpy(rhoStar, pStar, uStar);
+}
+
+//****************************************************************************
+
+void ModEuler::solveRiemannTank(Cell& cellLeft, const int& /*numberPhases*/, const double& dxLeft, double& dtMax, const double* /*ak0*/, const double* rhok0, const double& p0, const double& /*T0*/, double& massflow, double& powerFlux) const
+{
+  Eos* eos;
 
   double cL, sL, zL;
   double uL, pL, rhoL, vL, wL;
   double uStar(0.), rhoStar(0.), pStar(0.), eStar(0.), vStar(0.), wStar(0.);
 
-  Phase *phaseGauche(0);
-  phaseGauche = cellLeft.getPhase(0);
+  Phase* phaseLeft(0);
+  phaseLeft = cellLeft.getPhase(0);
 
-  eos = phaseGauche->getEos();
-  uL = phaseGauche->getU();
-  vL = phaseGauche->getV();
-  wL = phaseGauche->getW();
-  pL = phaseGauche->getPressure();
-  rhoL = phaseGauche->getDensity();
-  cL = phaseGauche->getSoundSpeed();
+  eos = phaseLeft->getEos();
+  uL = phaseLeft->getU();
+  vL = phaseLeft->getV();
+  wL = phaseLeft->getW();
+  pL = phaseLeft->getPressure();
+  rhoL = phaseLeft->getDensity();
+  cL = phaseLeft->getSoundSpeed();
   zL = rhoL*cL;
 
   //Left wave velocity estimation using pStar = p0
@@ -439,46 +537,66 @@ void ModEuler::solveRiemannTank(Cell &cellLeft, const int &numberPhases, const d
 
   //Contact discontinuity velocity
   static_cast<FluxEuler*> (fluxBuff)->m_sM = uStar;
+
+  //Specific mass flow rate output (kg.s-1.m-2)
+  massflow = static_cast<FluxEuler*> (fluxBuff)->m_masse;
+
+  //Specific power flux through interface (W.m-2)
+  powerFlux = massflow * eos->computeTotalEnthalpy(rhoStar, pStar, uStar);
 }
 
 //****************************************************************************
 
-void ModEuler::solveRiemannOutflow(Cell &cellLeft, const int &numberPhases, const double &dxLeft, double &dtMax, const double p0, double *debitSurf) const
+void ModEuler::solveRiemannOutflow(Cell& cellLeft, const int& /*numberPhases*/, const double& dxLeft, double& dtMax, const double p0, double& massflow, double& powerFlux) const
 {
   double cL, sL, zL;
   double uL, pL, rhoL, vL, wL;
-  double uStar(0.), rhoStar(0.), pStar(0.), eStar(0.);
+  double uStar(0.), rhoStar(0.), pStar(p0), eStar(0.);
 
-  Phase *phaseGauche(0);
-  phaseGauche = cellLeft.getPhase(0);
-
-  uL = phaseGauche->getU();
-  vL = phaseGauche->getV();
-  wL = phaseGauche->getW();
-  pL = phaseGauche->getPressure();
-  rhoL = phaseGauche->getDensity();
-  cL = phaseGauche->getSoundSpeed();
+  Phase* phaseLeft(0);
+  phaseLeft = cellLeft.getPhase(0);
+  Eos* eos(0);
+  eos = phaseLeft->getEos();
+  
+  uL = phaseLeft->getU();
+  vL = phaseLeft->getV();
+  wL = phaseLeft->getW();
+  pL = phaseLeft->getPressure();
+  rhoL = phaseLeft->getDensity();
+  cL = phaseLeft->getSoundSpeed();
   zL = rhoL*cL;
 
-  sL = uL - cL;
-  if (std::fabs(sL)>1.e-3) dtMax = std::min(dtMax, dxLeft / std::fabs(sL));
+  // Perturbed state
+  double vStar(0.), vSmvL(0.), mL(zL), sM(0.);
+  //rhoStar = TB->eos[0]->computeDensityIsentropic(pL, rhoL, pStar); // Isentropic relations if needed
+  rhoStar = TB->eos[0]->computeDensityHugoniot(pL, rhoL, pStar);
+  vStar = 1. / std::max(rhoStar, 1e-10);
+  vSmvL = vStar - 1. / rhoL;
 
-  pStar = p0;
-  //rhoStar = TB->eos[0]->computeDensityIsentropic(pL, rhoL, pStar);
-  rhoStar = TB->eos[0]->computeDensityHugoniot(pL, rhoL, pStar);  //Shock relations if needed
-  uStar = (pL + zL*uL - pStar) / zL;
+  // Jump accross left wave is described by RH or acoustic relations (if specific volume jump is small)
+  if (std::abs(vSmvL) > 1e-10) { mL = sqrt((pL - pStar) / vSmvL); }
+  else { mL = zL; }
+  sL = uL - mL / rhoL;
+  if (std::fabs(sL) > 1.e-3) dtMax = std::min(dtMax, dxLeft / std::fabs(sL));
+  sM = uL + mL * vSmvL;
 
-  //Pathologic case I : sL>0
+  // Pathologic case I: sL>0
   if (sL >= 0.) { //Supersonic outflow => Left state solution
     uStar = uL;
     pStar = pL;
     rhoStar = rhoL;
   }
-  //Pathologic case II : inflow conditions, we temporarly keep the specific mass
-  else if (uStar < 0) {
+  // Pathologic case II: inflow conditions, we temporarly keep the specific mass
+  else if (sM < 0) {
+    uStar = sM;
     rhoStar = rhoL;
   }
+  // Imposed pressure outflow
+  else {
+    uStar = sM;
+  }
 
+  // Flux completion
   eStar = TB->eos[0]->computeEnergy(rhoStar, pStar);
   static_cast<FluxEuler*> (fluxBuff)->m_masse = rhoStar*uStar;
   static_cast<FluxEuler*> (fluxBuff)->m_qdm.setX(rhoStar*uStar*uStar + pStar);
@@ -489,10 +607,11 @@ void ModEuler::solveRiemannOutflow(Cell &cellLeft, const int &numberPhases, cons
   //Contact discontinuity velocity
   static_cast<FluxEuler*> (fluxBuff)->m_sM = uStar;
 
-  //Specific mass flow rate output (kg/s/m�)
-  debitSurf[0] = static_cast<FluxEuler*> (fluxBuff)->m_masse;
+  //Specific mass flow rate output (kg.s-1.m-2)
+  massflow = static_cast<FluxEuler*> (fluxBuff)->m_masse;
 
-  //cerr << uStar << " " << pStar << " " << rhoStar << endl;
+  //Specific power flux through interface (W.m-2)
+  powerFlux = massflow * eos->computeTotalEnthalpy(rhoStar, pStar, uStar);
 }
 
 //****************************************************************************

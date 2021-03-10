@@ -6,6 +6,7 @@
 //       |  `--.  \  `-.  \ `-' /   \  `-) ) |  `--.  | | |)| 
 //       /( __.'   \____\  )---'    )\____/  /( __.'  /(  (_) 
 //      (__)              (_)      (__)     (__)     (__)     
+//      Official webSite: https://code-mphi.github.io/ECOGEN/
 //
 //  This file is part of ECOGEN.
 //
@@ -27,18 +28,13 @@
 //  along with ECOGEN (file LICENSE).  
 //  If not, see <http://www.gnu.org/licenses/>.
 
-//! \file      FaceTriangle.cpp
-//! \author    F. Petitpas
-//! \version   1.0
-//! \date      December 20 2017
-
 #include "FaceTriangle.h"
 
 const int FaceTriangle::NOMBRENOEUDS=3;
 
 //***********************************************************************
 
-FaceTriangle::FaceTriangle(const int &numNoeud1, const int &numNoeud2, const int &numNoeud3, int tri) :
+FaceTriangle::FaceTriangle(const int& numNoeud1, const int& numNoeud2, const int& numNoeud3, int tri) :
 FaceNS(NOMBRENOEUDS)
 {
   m_numNoeuds[0] = numNoeud1;
@@ -54,7 +50,7 @@ FaceTriangle::~FaceTriangle(){}
 
 //***********************************************************************
 
-void FaceTriangle::computeSurface(const Coord *noeuds)
+void FaceTriangle::computeSurface(const Coord* noeuds)
 {
   Coord v1(noeuds[m_numNoeuds[1]] - noeuds[m_numNoeuds[0]]);
   Coord v2(noeuds[m_numNoeuds[2]] - noeuds[m_numNoeuds[1]]);
@@ -66,7 +62,7 @@ void FaceTriangle::computeSurface(const Coord *noeuds)
 
 //***********************************************************************
 
-void FaceTriangle::computeRepere(const Coord *noeuds, const int &numNoeudAutre, ElementNS *elementVoisin)
+void FaceTriangle::computeRepere(const Coord* noeuds, const int& numNoeudAutre, ElementNS *elementVoisin)
 {
   Coord v1; v1.setFromSubtractedVectors(noeuds[m_numNoeuds[0]], noeuds[m_numNoeuds[1]]);
   Coord v2; v2.setFromSubtractedVectors(noeuds[m_numNoeuds[0]], noeuds[m_numNoeuds[2]]);

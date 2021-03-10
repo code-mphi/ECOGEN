@@ -6,6 +6,7 @@
 //       |  `--.  \  `-.  \ `-' /   \  `-) ) |  `--.  | | |)| 
 //       /( __.'   \____\  )---'    )\____/  /( __.'  /(  (_) 
 //      (__)              (_)      (__)     (__)     (__)     
+//      Official webSite: https://code-mphi.github.io/ECOGEN/
 //
 //  This file is part of ECOGEN.
 //
@@ -29,11 +30,6 @@
 
 #ifndef HEADERMUSGMSH_H
 #define HEADERMUSGMSH_H
-
-//! \file      HeaderMUSGmsh.h
-//! \author    J. Caze
-//! \version   1.0
-//! \date      November 19 2019
 
 #include "MUSGmsh.h"
 #include "MUSGmshV2/MUSGmshV2.h"

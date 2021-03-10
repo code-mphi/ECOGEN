@@ -6,6 +6,7 @@
 //       |  `--.  \  `-.  \ `-' /   \  `-) ) |  `--.  | | |)| 
 //       /( __.'   \____\  )---'    )\____/  /( __.'  /(  (_) 
 //      (__)              (_)      (__)     (__)     (__)     
+//      Official webSite: https://code-mphi.github.io/ECOGEN/
 //
 //  This file is part of ECOGEN.
 //
@@ -30,11 +31,6 @@
 #ifndef GDENTIREDOMAINWITHPARTICULARITIES_H
 #define GDENTIREDOMAINWITHPARTICULARITIES_H
 
-//! \file      GDEntireDomainWithParticularities.h
-//! \author    K. Schmidmayer
-//! \version   1.0
-//! \date      January 3 2018
-
 #include "GeometricalDomain.h"
 
 //! \class     GDEntireDomainWithParticularities
@@ -48,11 +44,11 @@ public:
   //! \param     mixture        Mixture variables to copy in geometrical domain
   //! \param     vecTransports  Transports vector varaiables to copy in geometrical domain
   //! \param     physicalEntity physical entity number relative to mesh generation (see mesh tool)
-  GDEntireDomainWithParticularities(std::string name, std::vector<Phase*> vecPhases, Mixture *mixture, std::vector<Transport> vecTransports, const int &physicalEntity);
+  GDEntireDomainWithParticularities(std::string name, std::vector<Phase*> vecPhases, Mixture* mixture, std::vector<Transport> vecTransports, const int& physicalEntity);
   virtual ~GDEntireDomainWithParticularities();
 
-  virtual bool belong(Coord &posElement, const int &lvl) const;
-  virtual void fillIn(Cell *cell, const int &numberPhases, const int &numberTransports) const;
+  virtual bool belong(Coord& /*posElement*/, const int& /*lvl*/) const;
+  virtual void fillIn(Cell* cell, const int& numberPhases, const int& numberTransports) const;
 };
 
 #endif //GDENTIREDOMAINWITHPARTICULARITIES_H

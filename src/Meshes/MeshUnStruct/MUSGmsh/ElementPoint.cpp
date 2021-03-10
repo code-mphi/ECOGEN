@@ -6,6 +6,7 @@
 //       |  `--.  \  `-.  \ `-' /   \  `-) ) |  `--.  | | |)| 
 //       /( __.'   \____\  )---'    )\____/  /( __.'  /(  (_) 
 //      (__)              (_)      (__)     (__)     (__)     
+//      Official webSite: https://code-mphi.github.io/ECOGEN/
 //
 //  This file is part of ECOGEN.
 //
@@ -27,11 +28,6 @@
 //  along with ECOGEN (file LICENSE).  
 //  If not, see <http://www.gnu.org/licenses/>.
 
-//! \file      ElementPoint.cpp
-//! \author    F. Petitpas
-//! \version   1.0
-//! \date      December 20 2017
-
 #include "ElementPoint.h"
 
 const int ElementPoint::TYPEGMSH = 15;
@@ -51,21 +47,21 @@ ElementPoint::~ElementPoint(){}
 
 //***********************************************************************
 
-void ElementPoint::computeVolume(const Coord *noeuds)
+void ElementPoint::computeVolume(const Coord* /*noeuds*/)
 {
   m_volume = 1.0; //sans unite inutile
 }
 
 //***********************************************************************
 
-void ElementPoint::computeLCFL(const Coord *noeuds)
+void ElementPoint::computeLCFL(const Coord* /*noeuds*/)
 {
   m_lCFL = 1.0; //inutile
 }
 
 //***********************************************************************
 
-void ElementPoint::attributFaceLimite(const Coord *noeuds, FaceNS **faces, const int &indexMaxFaces)
+void ElementPoint::attributFaceLimite(FaceNS** faces, const int& indexMaxFaces)
 {
   int indexFaceExiste(0);
   FacePoint face(m_numNoeuds[0]);

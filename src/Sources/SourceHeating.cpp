@@ -6,6 +6,7 @@
 //       |  `--.  \  `-.  \ `-' /   \  `-) ) |  `--.  | | |)| 
 //       /( __.'   \____\  )---'    )\____/  /( __.'  /(  (_) 
 //      (__)              (_)      (__)     (__)     (__)     
+//      Official webSite: https://code-mphi.github.io/ECOGEN/
 //
 //  This file is part of ECOGEN.
 //
@@ -27,24 +28,15 @@
 //  along with ECOGEN (file LICENSE).  
 //  If not, see <http://www.gnu.org/licenses/>.
 
-//! \file      SourceHeating.cpp
-//! \author    F. Petitpas, J. Caze
-//! \version   1.0
-//! \date      October 29 2019
-
 #include "SourceHeating.h"
 
 using namespace tinyxml2;
 
 //***********************************************************************
 
-SourceHeating::SourceHeating(){}
-
-//***********************************************************************
-
-SourceHeating::SourceHeating(XMLElement *element, int order, std::string fileName) : Source(order)
+SourceHeating::SourceHeating(XMLElement* element, int order, int physicalEntity, std::string fileName) : Source(order, physicalEntity)
 {
-  XMLElement *sousElement(element->FirstChildElement("dataHeating"));
+  XMLElement* sousElement(element->FirstChildElement("dataHeating"));
   if (sousElement == NULL) throw ErrorXMLElement("dataHeating", fileName, __FILE__, __LINE__);
   //Collecting attributes
   //---------------------
@@ -61,9 +53,9 @@ SourceHeating::~SourceHeating()
 
 //***********************************************************************
 
-void SourceHeating::prepSourceTerms(Cell *cell, const int &numberPhases, const double &dt, const int i)
+void SourceHeating::prepSourceTerms(Cell* /*cell*/, const int& numberPhases, const int& i)
 {
-  sourceCons[i]->prepSourceTermsHeating(cell, dt, numberPhases, m_q);
+  sourceCons[i]->prepSourceTermsHeating(numberPhases, m_q);
 }
 
 //***********************************************************************

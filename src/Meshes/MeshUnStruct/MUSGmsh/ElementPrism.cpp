@@ -6,6 +6,7 @@
 //       |  `--.  \  `-.  \ `-' /   \  `-) ) |  `--.  | | |)| 
 //       /( __.'   \____\  )---'    )\____/  /( __.'  /(  (_) 
 //      (__)              (_)      (__)     (__)     (__)     
+//      Official webSite: https://code-mphi.github.io/ECOGEN/
 //
 //  This file is part of ECOGEN.
 //
@@ -27,11 +28,6 @@
 //  along with ECOGEN (file LICENSE).  
 //  If not, see <http://www.gnu.org/licenses/>.
 
-//! \file      ElementPrism.cpp
-//! \author    F. Petitpas
-//! \version   1.0
-//! \date      December 20 2017
-
 #include "ElementPrism.h"
 
 const int ElementPrism::TYPEGMSH = 6;
@@ -51,7 +47,7 @@ ElementPrism::~ElementPrism(){}
 
 //***********************************************************************
 
-void ElementPrism::computeVolume(const Coord *noeuds)
+void ElementPrism::computeVolume(const Coord* noeuds)
 {
   //On va computeer le volume des 3 tetraedres inclus dans le prisme
   Coord v1, v2, v3;
@@ -66,7 +62,7 @@ void ElementPrism::computeVolume(const Coord *noeuds)
 
 //***********************************************************************
 
-void ElementPrism::computeLCFL(const Coord *noeuds)
+void ElementPrism::computeLCFL(const Coord* noeuds)
 {
   Coord vec; m_lCFL = 1e10;
   vec = ((noeuds[0] + noeuds[1] + noeuds[4] + noeuds[3]) / 4.) - m_position;
@@ -83,7 +79,7 @@ void ElementPrism::computeLCFL(const Coord *noeuds)
 
 //***********************************************************************
 // Nouvelle version beaucoup plus efficace avec recherche dans tableau temporaire
-void ElementPrism::construitFaces(const Coord *noeuds, FaceNS **faces, int &iMax, int** facesTemp, int* sommeNoeudsTemp)
+void ElementPrism::construitFaces(const Coord* noeuds, FaceNS** faces, int& iMax, int** facesTemp, int* sommeNoeudsTemp)
 {
   //3 faces a traiter de type quadrangle et 2 faces de type triangle
   int indexFaceExiste(-1);
@@ -139,7 +135,7 @@ void ElementPrism::construitFaces(const Coord *noeuds, FaceNS **faces, int &iMax
 
 //***********************************************************************
 // Nouvelle version beaucoup plus efficace avec recherche dans tableau temporaire
-void ElementPrism::construitFacesSimplifie(int &iMax, int** facesTemp, int* sommeNoeudsTemp)
+void ElementPrism::construitFacesSimplifie(int& iMax, int** facesTemp, int* sommeNoeudsTemp)
 {
   //3 faces a traiter de type quadrangle et 2 faces triangle
   int indexFaceExiste(-1);
@@ -177,7 +173,7 @@ void ElementPrism::construitFacesSimplifie(int &iMax, int** facesTemp, int* somm
 
 //***********************************************************************
 
-void ElementPrism::attributFaceCommunicante(const Coord *noeuds, FaceNS **faces, const int &indexMaxFaces, const int &numberNoeudsInternes)
+void ElementPrism::attributFaceCommunicante(FaceNS** faces, const int& indexMaxFaces, const int& numberNoeudsInternes)
 {
   int indexFaceExiste(0);
   //Verification face 1 :
@@ -234,7 +230,7 @@ void ElementPrism::attributFaceCommunicante(const Coord *noeuds, FaceNS **faces,
 
 //***********************************************************************
 
-int ElementPrism::compteFaceCommunicante(std::vector<int*> &facesTemp, std::vector<int> &sommeNoeudsTemp)
+int ElementPrism::compteFaceCommunicante(std::vector<int*>& facesTemp, std::vector<int>& sommeNoeudsTemp)
 {
   //3 faces a traiter de type quadrangle et 2 faces triangle
   int indexFaceExiste(-1), numberFacesCommunicante(0);
@@ -274,7 +270,7 @@ int ElementPrism::compteFaceCommunicante(std::vector<int*> &facesTemp, std::vect
 
 //***********************************************************************
 //Nouvelle version plus efficace
-int ElementPrism::compteFaceCommunicante(int &iMax, int **facesTemp, int *sommeNoeudsTemp)
+int ElementPrism::compteFaceCommunicante(int& iMax, int** facesTemp, int* sommeNoeudsTemp)
 {
   //3 faces a traiter de type quadrangle et 2 faces triangle
   int indexFaceExiste(-1), numberFacesCommunicante(0);

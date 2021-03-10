@@ -6,6 +6,7 @@
 //       |  `--.  \  `-.  \ `-' /   \  `-) ) |  `--.  | | |)| 
 //       /( __.'   \____\  )---'    )\____/  /( __.'  /(  (_) 
 //      (__)              (_)      (__)     (__)     (__)     
+//      Official webSite: https://code-mphi.github.io/ECOGEN/
 //
 //  This file is part of ECOGEN.
 //
@@ -27,11 +28,6 @@
 //  along with ECOGEN (file LICENSE).  
 //  If not, see <http://www.gnu.org/licenses/>.
 
-//! \file      PhaseEulerHomogeneous.cpp
-//! \author    F. Petitpas, K. Schmidmayer
-//! \version   1.1
-//! \date      June 5 2019
-
 #include "PhaseEulerHomogeneous.h"
 #include "../../Eos/Eos.h"
 
@@ -43,9 +39,9 @@ PhaseEulerHomogeneous::PhaseEulerHomogeneous() :m_alpha(1.0), m_density(0.), m_p
 
 //***************************************************************************
 
-PhaseEulerHomogeneous::PhaseEulerHomogeneous(XMLElement *material, Eos *eos, std::string fileName) : m_eos(eos), m_energie(0.), m_totalEnergy(0.), m_soundSpeed(0.)
+PhaseEulerHomogeneous::PhaseEulerHomogeneous(XMLElement* material, Eos* eos, std::string fileName) : m_eos(eos), m_energie(0.), m_totalEnergy(0.), m_soundSpeed(0.)
 {
-  XMLElement *sousElement(material->FirstChildElement("dataFluid"));
+  XMLElement* sousElement(material->FirstChildElement("dataFluid"));
   if (sousElement == NULL) throw ErrorXMLElement("dataFluid", fileName, __FILE__, __LINE__);
   //Attributes reading
   //------------------
@@ -57,16 +53,11 @@ PhaseEulerHomogeneous::PhaseEulerHomogeneous(XMLElement *material, Eos *eos, std
 
 //***************************************************************************
 
-PhaseEulerHomogeneous::PhaseEulerHomogeneous(double alpha, double density, Eos *eos) :
-  m_alpha(alpha), m_density(density), m_eos(eos) {}
-
-//***************************************************************************
-
 PhaseEulerHomogeneous::~PhaseEulerHomogeneous() {}
 
 //***************************************************************************
 
-void PhaseEulerHomogeneous::allocateAndCopyPhase(Phase **vecPhase)
+void PhaseEulerHomogeneous::allocateAndCopyPhase(Phase** vecPhase)
 {
   *vecPhase = new PhaseEulerHomogeneous(*this);
 }
@@ -86,7 +77,7 @@ void PhaseEulerHomogeneous::copyPhase(Phase &phase)
 
 //***************************************************************************
 
-void PhaseEulerHomogeneous::extendedCalculusPhase(const Coord &velocity)
+void PhaseEulerHomogeneous::extendedCalculusPhase(const Coord& velocity)
 {
   m_energie = m_eos->computeEnergy(m_density, m_pressure);
   m_soundSpeed = m_eos->computeSoundSpeed(m_density, m_pressure);
@@ -95,7 +86,7 @@ void PhaseEulerHomogeneous::extendedCalculusPhase(const Coord &velocity)
 
 //****************************************************************************
 
-void PhaseEulerHomogeneous::computeMassFraction(const double &density)
+void PhaseEulerHomogeneous::computeMassFraction(const double& density)
 {
   m_Y = m_alpha*m_density / density;
 }
@@ -104,7 +95,7 @@ void PhaseEulerHomogeneous::computeMassFraction(const double &density)
 //****************************** DATA PRINTING *******************************
 //****************************************************************************
 
-double PhaseEulerHomogeneous::returnScalar(const int &numVar) const
+double PhaseEulerHomogeneous::returnScalar(const int& numVar) const
 {
   switch (numVar)
   {
@@ -121,7 +112,7 @@ double PhaseEulerHomogeneous::returnScalar(const int &numVar) const
 
 //***************************************************************************
 
-std::string PhaseEulerHomogeneous::returnNameScalar(const int &numVar) const
+std::string PhaseEulerHomogeneous::returnNameScalar(const int& numVar) const
 {
   switch (numVar)
   {
@@ -140,7 +131,7 @@ std::string PhaseEulerHomogeneous::returnNameScalar(const int &numVar) const
 //************************* READING FROM FILE ********************************
 //****************************************************************************
 
-void PhaseEulerHomogeneous::setScalar(const int &numVar, const double &value)
+void PhaseEulerHomogeneous::setScalar(const int& numVar, const double& value)
 {
   switch (numVar)
   {
@@ -167,7 +158,7 @@ int PhaseEulerHomogeneous::numberOfTransmittedVariables() const
 
 //***************************************************************************
 
-void PhaseEulerHomogeneous::fillBuffer(double *buffer, int &counter) const
+void PhaseEulerHomogeneous::fillBuffer(double* buffer, int& counter) const
 {
   buffer[++counter] = m_alpha;
   buffer[++counter] = m_density;
@@ -177,17 +168,7 @@ void PhaseEulerHomogeneous::fillBuffer(double *buffer, int &counter) const
 
 //***************************************************************************
 
-void PhaseEulerHomogeneous::fillBuffer(std::vector<double> &dataToSend) const
-{
-  dataToSend.push_back(m_alpha);
-  dataToSend.push_back(m_density);
-  dataToSend.push_back(m_pressure);
-  dataToSend.push_back(static_cast<double>(m_eos->getNumber()));
-}
-
-//***************************************************************************
-
-void PhaseEulerHomogeneous::getBuffer(double *buffer, int &counter, Eos **eos)
+void PhaseEulerHomogeneous::getBuffer(double* buffer, int& counter, Eos** eos)
 {
   m_alpha = buffer[++counter];
   m_density = buffer[++counter];
@@ -195,21 +176,11 @@ void PhaseEulerHomogeneous::getBuffer(double *buffer, int &counter, Eos **eos)
   m_eos = eos[static_cast<int>(buffer[++counter])];
 }
 
-//***************************************************************************
-
-void PhaseEulerHomogeneous::getBuffer(std::vector<double> &dataToReceive, int &counter, Eos **eos)
-{
-  m_alpha = dataToReceive[counter++];
-  m_density = dataToReceive[counter++];
-  m_pressure = dataToReceive[counter++];
-  m_eos = eos[static_cast<int>(dataToReceive[counter++])];
-}
-
 //****************************************************************************
 //******************************* ORDER 2 ************************************
 //****************************************************************************
 
-void PhaseEulerHomogeneous::computeSlopesPhase(const Phase &sLeft, const Phase &sRight, const double &distance)
+void PhaseEulerHomogeneous::computeSlopesPhase(const Phase &sLeft, const Phase &sRight, const double& distance)
 {
   m_alpha = (sRight.getAlpha() - sLeft.getAlpha()) / distance;
 }
@@ -223,14 +194,14 @@ void PhaseEulerHomogeneous::setToZero()
 
 //***************************************************************************
 
-void PhaseEulerHomogeneous::extrapolate(const Phase &slope, const double &distance)
+void PhaseEulerHomogeneous::extrapolate(const Phase &slope, const double& distance)
 {
   m_alpha += slope.getAlpha() * distance;
 }
 
 //***************************************************************************
 
-void PhaseEulerHomogeneous::limitSlopes(const Phase &slopeGauche, const Phase &slopeDroite, Limiter &globalLimiter, Limiter &volumeFractionLimiter)
+void PhaseEulerHomogeneous::limitSlopes(const Phase& slopeGauche, const Phase& slopeDroite, Limiter& /*globalLimiter*/, Limiter& volumeFractionLimiter)
 {
   m_alpha = volumeFractionLimiter.limiteSlope(slopeGauche.getAlpha(), slopeDroite.getAlpha());
 }
@@ -246,14 +217,14 @@ int PhaseEulerHomogeneous::numberOfTransmittedSlopes() const
 
 //***************************************************************************
 
-void PhaseEulerHomogeneous::fillBufferSlopes(double *buffer, int &counter) const
+void PhaseEulerHomogeneous::fillBufferSlopes(double* buffer, int& counter) const
 {
 	buffer[++counter] = m_alpha;
 }
 
 //***************************************************************************
 
-void PhaseEulerHomogeneous::getBufferSlopes(double *buffer, int &counter)
+void PhaseEulerHomogeneous::getBufferSlopes(double* buffer, int& counter)
 {
 	m_alpha = buffer[++counter];
 }
@@ -262,7 +233,7 @@ void PhaseEulerHomogeneous::getBufferSlopes(double *buffer, int &counter)
 //**************************** VERIFICATION **********************************
 //****************************************************************************
 
-void PhaseEulerHomogeneous::verifyPhase(const std::string &message) const
+void PhaseEulerHomogeneous::verifyPhase(const std::string& message) const
 {
   if (m_alpha <= 1e-10) errors.push_back(Errors(message + "too small alpha in verifyPhase"));
   if (m_density <= 1.e-10) errors.push_back(Errors(message + "too small density in verifyPhase"));
@@ -295,7 +266,7 @@ void PhaseEulerHomogeneous::setPressure(double pressure) { m_pressure = pressure
 
 //***************************************************************************
 
-void PhaseEulerHomogeneous::setEos(Eos *eos) { m_eos = eos; }
+void PhaseEulerHomogeneous::setEos(Eos* eos) { m_eos = eos; }
 
 //***************************************************************************
 
@@ -320,14 +291,14 @@ void PhaseEulerHomogeneous::changeSign()
 
 //***************************************************************************
 
-void PhaseEulerHomogeneous::multiplyAndAdd(const Phase &slopesPhasesTemp, const double &coeff)
+void PhaseEulerHomogeneous::multiplyAndAdd(const Phase &slopesPhasesTemp, const double& coeff)
 {
   m_alpha += slopesPhasesTemp.getAlpha()*coeff;
 }
 
 //***************************************************************************
 
-void PhaseEulerHomogeneous::divide(const double &coeff)
+void PhaseEulerHomogeneous::divide(const double& coeff)
 {
   m_alpha /= coeff;
 }

@@ -1,0 +1,8 @@
+<?xml version = "1.0" encoding = "UTF-8" standalone = "yes"?>
+<model>
+	<flowModel name="Euler"/>
+	<EOS name="IG_air.xml"/>
+	<symmetryTerm type="cylindrical">
+  		<dataSymCyl radialAxis="Y"/>
+	</symmetryTerm>
+</model>

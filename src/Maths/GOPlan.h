@@ -6,6 +6,7 @@
 //       |  `--.  \  `-.  \ `-' /   \  `-) ) |  `--.  | | |)| 
 //       /( __.'   \____\  )---'    )\____/  /( __.'  /(  (_) 
 //      (__)              (_)      (__)     (__)     (__)     
+//      Official webSite: https://code-mphi.github.io/ECOGEN/
 //
 //  This file is part of ECOGEN.
 //
@@ -30,11 +31,6 @@
 #ifndef GOPLAN_H
 #define GOPLAN_H
 
-//! \file      GOPlan.h
-//! \author    F. Petitpas, K. Schmidmayer
-//! \version   1.0
-//! \date      January 5 2018
-
 #include "GeometricObject.h"
 
 //! \class     GOPlan
@@ -42,12 +38,11 @@
 class GOPlan : public GeometricObject
 {
 public:
-  GOPlan();
-  GOPlan(const Coord &vertex, const Coord &normal);
+  GOPlan(const Coord& vertex, const Coord& normal);
   virtual ~GOPlan();
 
-  virtual double distancePoint(const Coord &vertex) const;
-  virtual Coord projectionPoint(const Coord &vertex) const;
+  virtual double distancePoint(const Coord& vertex) const;
+  virtual Coord projectionPoint(const Coord& vertex) const;
 
 private:
   Coord m_point;          //! Point from the plan

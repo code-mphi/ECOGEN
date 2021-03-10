@@ -6,6 +6,7 @@
 //       |  `--.  \  `-.  \ `-' /   \  `-) ) |  `--.  | | |)| 
 //       /( __.'   \____\  )---'    )\____/  /( __.'  /(  (_) 
 //      (__)              (_)      (__)     (__)     (__)     
+//      Official webSite: https://code-mphi.github.io/ECOGEN/
 //
 //  This file is part of ECOGEN.
 //
@@ -30,11 +31,6 @@
 #ifndef ELEMENTPOINT_H
 #define ELEMENTPOINT_H
 
-//! \file      ElementPoint.h
-//! \author    F. Petitpas
-//! \version   1.0
-//! \date      December 20 2017
-
 #include "ElementNS.h"
 #include "FacePoint.h"
 
@@ -44,11 +40,11 @@ public:
   ElementPoint();
   virtual ~ElementPoint();
 
-  virtual void attributFaceLimite(const Coord *noeuds, FaceNS **faces, const int &indexMaxFaces);
+  virtual void attributFaceLimite(FaceNS** faces, const int& indexMaxFaces);
 
 private:
-  virtual void computeVolume(const Coord *noeuds);
-  virtual void computeLCFL(const Coord *noeuds);
+  virtual void computeVolume(const Coord* /*noeuds*/);
+  virtual void computeLCFL(const Coord* /*noeuds*/);
 
   static const int TYPEGMSH;
   static const int NOMBRENOEUDS;

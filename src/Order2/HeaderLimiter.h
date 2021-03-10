@@ -6,6 +6,7 @@
 //       |  `--.  \  `-.  \ `-' /   \  `-) ) |  `--.  | | |)| 
 //       /( __.'   \____\  )---'    )\____/  /( __.'  /(  (_) 
 //      (__)              (_)      (__)     (__)     (__)     
+//      Official webSite: https://code-mphi.github.io/ECOGEN/
 //
 //  This file is part of ECOGEN.
 //
@@ -29,11 +30,6 @@
 
 #ifndef HEADERLIMITER_H
 #define HEADERLIMITER_H
-
-//! \file      HeaderLimiter.h
-//! \author    F. Petitpas, K. Schmidmayer
-//! \version   1.0
-//! \date      July 19 2018
 
 #include "LimiterMinmod.h"
 #include "LimiterVanLeer.h"

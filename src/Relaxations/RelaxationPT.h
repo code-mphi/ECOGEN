@@ -6,6 +6,7 @@
 //       |  `--.  \  `-.  \ `-' /   \  `-) ) |  `--.  | | |)| 
 //       /( __.'   \____\  )---'    )\____/  /( __.'  /(  (_) 
 //      (__)              (_)      (__)     (__)     (__)     
+//      Official webSite: https://code-mphi.github.io/ECOGEN/
 //
 //  This file is part of ECOGEN.
 //
@@ -30,11 +31,6 @@
 #ifndef RELAXATIONPT_H
 #define RELAXATIONPT_H
 
-//! \file      RelaxationPT.h
-//! \author    F. Petitpas
-//! \version   1.0
-//! \date      October 16 2018
-
 #include "Relaxation.h"
 
 //! \class     RelaxationPT
@@ -42,7 +38,7 @@
 class RelaxationPT : public Relaxation
 {
 public:
-	RelaxationPT();
+  RelaxationPT();
   virtual ~RelaxationPT();
 
   //! \brief     Stiff Pressure-Temperature relaxation method
@@ -50,7 +46,7 @@ public:
   //! \param     cell           cell to relax
   //! \param     numberPhases   number of phases
   //! \param     type           enumeration allowing to relax either state in the cell or second order half time step state
-  virtual void stiffRelaxation(Cell *cell, const int &numberPhases, Prim type = vecPhases) const;
+  virtual void relaxation(Cell* cell, const int& numberPhases, const double& /*dt*/, Prim type = vecPhases);
 
   //! \brief     Pressure determination with analytical formulae for 2 phases governed by SG or IG EOS
   //! \details   call for this method determines the pressure using the analytical formulae only valid in the specific case of 2 phases governed by SG or IG EOS
@@ -58,7 +54,7 @@ public:
   //! \param     numberPhases   number of phases
   //! \param     type           enumeration allowing to relax either state in the cell or second order half time step state
   //! \return    pressure
-  double analyticalPressure(Cell *cell, const int &numberPhases, Prim type = vecPhases) const;
+  double analyticalPressure(Cell* cell, const int& numberPhases, Prim type = vecPhases) const;
 
   //! \brief     Temperature calculus with analytical formulae for N phases governed by SG or IG EOS
   //! \details   call for this method computes the temprerature for N phases governed by SG or IG EOS using the known relaxed pressure
@@ -67,7 +63,10 @@ public:
   //! \param     numberPhases   number of phases
   //! \param     type           enumeration allowing to relax either state in the cell or second order half time step state
   //! \return    temperature
-  double analyticalTemperature(double pressure, Cell *cell, const int &numberPhases, Prim type = vecPhases) const;
+  double analyticalTemperature(double pressure, Cell* cell, const int& numberPhases, Prim type = vecPhases) const;
+
+  //! \brief     Return the pressure- and temperature-relaxation type
+  virtual int getType() const { return PT; }
 };
 
 #endif // RELAXATIONPT_H

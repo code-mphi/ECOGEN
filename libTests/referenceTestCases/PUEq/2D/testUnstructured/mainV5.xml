@@ -1,0 +1,10 @@
+<?xml version='1.0' encoding='UTF-8' standalone='yes'?>
+<computationParam>
+  <run>pressureVelocityEq2DtestUnstructured</run>
+  <outputMode binary="true" format="XML" precision="11"/>
+  <timeControlMode iterations="false">
+    <iterations iterFreq="30" number="600"/>
+    <physicalTime totalTime="4.e-3" timeFreq="4.e-4"/>
+  </timeControlMode>
+  <computationControl CFL="0.5"/>
+</computationParam>

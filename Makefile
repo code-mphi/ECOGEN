@@ -1,12 +1,13 @@
 #desactivation of the implicite rules
 .SUFFIXES:
+.PHONY: nonreg
 
 #Definitions
 EXECUTABLE = ECOGEN
 CXX = mpicxx
-CXXFLAGS = -O3 -std=c++11
-#CXXFLAGS = -g -std=c++11
-# LDFLAGS =
+CXXFLAGS = -O3 -std=c++11 -Wall -Wextra -Wpedantic #release
+#CXXFLAGS = -g -std=c++11 -Wall -Wextra -Wpedantic #debug
+#CXXFLAGS = -O3 -std=c++11 -Wall -Wextra -Wpedantic -fprofile-arcs -ftest-coverage #code coverage
 
 dirs = $(shell find . -type d)
 SOURCES = $(foreach dir,$(dirs),$(wildcard $(dir)/*.cpp))
@@ -30,9 +31,9 @@ clean:
 cleanres:
 		rm -rf ./results/*
 
-#Creation of the executable
+#Use command: time make nonreg
+nonreg:
+	@./nonreg/nonreg.sh || true
 
-
-# DO NOT DELETE
-
-
+cleannonreg:
+		rm -rf ./nonreg/reports/*

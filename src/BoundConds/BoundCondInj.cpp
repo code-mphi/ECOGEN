@@ -6,6 +6,7 @@
 //       |  `--.  \  `-.  \ `-' /   \  `-) ) |  `--.  | | |)| 
 //       /( __.'   \____\  )---'    )\____/  /( __.'  /(  (_) 
 //      (__)              (_)      (__)     (__)     (__)     
+//      Official webSite: https://code-mphi.github.io/ECOGEN/
 //
 //  This file is part of ECOGEN.
 //
@@ -27,32 +28,23 @@
 //  along with ECOGEN (file LICENSE).  
 //  If not, see <http://www.gnu.org/licenses/>.
 
-//! \file      BoundCondInj.cpp
-//! \author    F. Petitpas, K. Schmidmayer
-//! \version   1.1
-//! \date      May 07 2020
-
 #include "BoundCondInj.h"
 
 using namespace tinyxml2;
 
 //****************************************************************************
 
-BoundCondInj::BoundCondInj(){}
-
-//****************************************************************************
-
 BoundCondInj::BoundCondInj(int numPhysique, XMLElement* element, int& numberPhases, int& numberTransports, std::vector<std::string> nameTransports, Eos** eos, std::string fileName) :
   BoundCond(numPhysique), m_T0(0.)
 {
-  m_numberPhase = numberPhases;
-  m_ak0 = new double[m_numberPhase];
-  m_rhok0 = new double[m_numberPhase];
-  m_pk0 = new double[m_numberPhase];
+  m_numberPhases = numberPhases;
+  m_ak0 = new double[m_numberPhases];
+  m_rhok0 = new double[m_numberPhases];
+  m_pk0 = new double[m_numberPhases];
 
-  //Reading injection surface-mass-flow condition (kg/s/m²)
+  //Reading injection surface-mass-flow condition (kg/s/mï¿½)
   //-------------------------------------------------------
-  XMLElement *sousElement(element->FirstChildElement("dataInjection"));
+  XMLElement* sousElement(element->FirstChildElement("dataInjection"));
   if (sousElement == NULL) throw ErrorXMLElement("dataInjection", fileName, __FILE__, __LINE__);
   //Attributes reading
   XMLError error;
@@ -62,7 +54,7 @@ BoundCondInj::BoundCondInj(int numPhysique, XMLElement* element, int& numberPhas
 
   //Reading volume fraction, density and pressure of the phases
   //-----------------------------------------------------------
-  if (m_numberPhase == 1) {
+  if (m_numberPhases == 1) {
     m_ak0[0] = 1.;
     XMLElement* fluid(element->FirstChildElement("dataFluid"));
     if (fluid == NULL) throw ErrorXMLElement("dataFluid", fileName, __FILE__, __LINE__);
@@ -81,7 +73,7 @@ BoundCondInj::BoundCondInj(int numPhysique, XMLElement* element, int& numberPhas
     //-----------------------------------
     XMLElement* fluid(element->FirstChildElement("dataFluid"));
 
-    for(int e = 0; e <m_numberPhase; e++){
+    for(int e = 0; e <m_numberPhases; e++){
       //Attributes reading
       error = fluid->QueryDoubleAttribute("alpha", &m_ak0[e]);
       if (error != XML_NO_ERROR) throw ErrorXMLAttribut("alpha", fileName, __FILE__, __LINE__);
@@ -95,26 +87,26 @@ BoundCondInj::BoundCondInj(int numPhysique, XMLElement* element, int& numberPhas
     //Proportions checking
     //--------------------
     double sum(0.);
-    for (int k = 0; k < m_numberPhase; k++) {
+    for (int k = 0; k < m_numberPhases; k++) {
       if (m_ak0[k]<0. || m_ak0[k]>1.) throw ErrorXMLAttribut("alpha should be in [0,1]", fileName, __FILE__, __LINE__);
       sum += m_ak0[k];
     }
     if (std::fabs(sum - 1.) > 1.e-6) { throw ErrorXMLAttribut("sum of alpha should be 1", fileName, __FILE__, __LINE__); }
     else {
-      for (int k = 0; k < m_numberPhase; k++) { m_ak0[k] /= sum; }
+      for (int k = 0; k < m_numberPhases; k++) { m_ak0[k] /= sum; }
     }
   }
 
   //Reading of transports
   //---------------------
+  m_valueTransport = new double[numberTransports];
   if (numberTransports) {
-    XMLElement *sousElement(element->FirstChildElement("dataInjection"));
+    XMLElement* sousElement(element->FirstChildElement("dataInjection"));
     if (sousElement == NULL) throw ErrorXMLElement("dataInjection", fileName, __FILE__, __LINE__);
     XMLError error;
 
     int foundColors(0);
-    m_valueTransport = new double[numberTransports];
-    XMLElement *elementTransport(sousElement->FirstChildElement("transport"));
+    XMLElement* elementTransport(sousElement->FirstChildElement("transport"));
     std::string nameTransport;
     while (elementTransport != NULL)
     {
@@ -129,7 +121,7 @@ BoundCondInj::BoundCondInj(int numPhysique, XMLElement* element, int& numberPhas
         if (error != XML_NO_ERROR) throw ErrorXMLAttribut("value", fileName, __FILE__, __LINE__);
         foundColors++;
       }
-      //Following transport
+      //Next transport
       elementTransport = elementTransport->NextSiblingElement("transport");
     }
     if (numberTransports > foundColors) throw ErrorXMLAttribut("Not enough transport equations in inj BC", fileName, __FILE__, __LINE__);
@@ -139,17 +131,17 @@ BoundCondInj::BoundCondInj(int numPhysique, XMLElement* element, int& numberPhas
 
 //****************************************************************************
 
-BoundCondInj::BoundCondInj(const BoundCondInj &Source, const int lvl) : BoundCond(Source)
+BoundCondInj::BoundCondInj(const BoundCondInj &Source, const int& lvl) : BoundCond(Source, lvl)
 {
-  m_numberPhase = Source.m_numberPhase;
+  m_numberPhases = Source.m_numberPhases;
   m_numberTransports = Source.m_numberTransports;
-  m_ak0 = new double[m_numberPhase];
-  m_rhok0 = new double[m_numberPhase];
-  m_pk0 = new double[m_numberPhase];
+  m_ak0 = new double[m_numberPhases];
+  m_rhok0 = new double[m_numberPhases];
+  m_pk0 = new double[m_numberPhases];
 
   m_m0 = Source.m_m0;
 
-  for (int k = 0; k < m_numberPhase; k++)
+  for (int k = 0; k < m_numberPhases; k++)
   {
     m_ak0[k] = Source.m_ak0[k];
     m_rhok0[k] = Source.m_rhok0[k];
@@ -160,8 +152,6 @@ BoundCondInj::BoundCondInj(const BoundCondInj &Source, const int lvl) : BoundCon
   for (int k = 0; k < Source.m_numberTransports; k++) {
     m_valueTransport[k] = Source.m_valueTransport[k];
   }
-
-  m_lvl = lvl;
 }
 
 //****************************************************************************
@@ -176,21 +166,21 @@ BoundCondInj::~BoundCondInj()
 
 //****************************************************************************
 
-void BoundCondInj::creeLimite(TypeMeshContainer<CellInterface *> &cellInterfaces)
+void BoundCondInj::createBoundary(TypeMeshContainer<CellInterface*>& cellInterfaces)
 {
   cellInterfaces.push_back(new BoundCondInj(*(this)));
 }
 
 //****************************************************************************
 
-void BoundCondInj::solveRiemannLimite(Cell &cellLeft, const int & numberPhases, const double & dxLeft, double & dtMax)
+void BoundCondInj::solveRiemannBoundary(Cell& cellLeft, const int& numberPhases, const double& dxLeft, double& dtMax)
 {
-  m_mod->solveRiemannInflow(cellLeft, numberPhases, dxLeft, dtMax, m_m0, m_ak0, m_rhok0, m_pk0);
+  m_mod->solveRiemannInflow(cellLeft, numberPhases, dxLeft, dtMax, m_m0, m_ak0, m_rhok0, m_pk0, m_massflow, m_powerFlux);
 }
 
 //****************************************************************************
 
-void BoundCondInj::solveRiemannTransportLimite(Cell &cellLeft, const int & numberTransports) const
+void BoundCondInj::solveRiemannTransportBoundary(Cell& cellLeft, const int&  numberTransports) const
 {
 	m_mod->solveRiemannTransportInflow(cellLeft, numberTransports, m_valueTransport);
 }
@@ -204,10 +194,9 @@ void BoundCondInj::printInfo()
   std::cout << m_rhok0[0] << std::endl;
 }
 
-
-//****************************************************************************
-//******************************Methode AMR***********************************
-//****************************************************************************
+//***************************************************************************
+//******************************AMR Method***********************************
+//***************************************************************************
 
 void BoundCondInj::creerCellInterfaceChild()
 {

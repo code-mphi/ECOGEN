@@ -6,6 +6,7 @@
 //       |  `--.  \  `-.  \ `-' /   \  `-) ) |  `--.  | | |)| 
 //       /( __.'   \____\  )---'    )\____/  /( __.'  /(  (_) 
 //      (__)              (_)      (__)     (__)     (__)     
+//      Official webSite: https://code-mphi.github.io/ECOGEN/
 //
 //  This file is part of ECOGEN.
 //
@@ -30,28 +31,22 @@
 #ifndef BOUNDCONDSYMMETRYO2_H
 #define BOUNDCONDSYMMETRYO2_H
 
-//! \file      BoundCondSymmetryO2.h
-//! \author    F. Petitpas, K. Schmidmayer
-//! \version   1.0
-//! \date      February 13 2019
-
 #include "BoundCondWallO2.h"
 
 
 class BoundCondSymmetryO2 : public BoundCondWallO2
 {
 public:
-  BoundCondSymmetryO2();
-  BoundCondSymmetryO2(const BoundCondSymmetryO2& Source, const int lvl = 0); //Constructeur de copie (utile pour AMR)
+  BoundCondSymmetryO2(const BoundCondSymmetryO2& Source, const int& lvl = 0); //Copy ctor (useful for AMR)
   BoundCondSymmetryO2(int numPhysique);
   virtual ~BoundCondSymmetryO2();
 
-  virtual void creeLimite(TypeMeshContainer<CellInterface *> &cellInterfaces);
+  virtual void createBoundary(TypeMeshContainer<CellInterface*>& cellInterfaces);
 
-  virtual int whoAmI() const { return 6; };
+  virtual int whoAmI() const { return SYMMETRY; };
 
-  //Pour methode AMR
-  virtual void creerCellInterfaceChild();  /*!< Creer un child cell interface (non initialize) */
+  //For AMR method
+  virtual void creerCellInterfaceChild();  /*!< Create a child cell interface (not initialized) */
 
 protected:
 

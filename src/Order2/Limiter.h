@@ -6,6 +6,7 @@
 //       |  `--.  \  `-.  \ `-' /   \  `-) ) |  `--.  | | |)| 
 //       /( __.'   \____\  )---'    )\____/  /( __.'  /(  (_) 
 //      (__)              (_)      (__)     (__)     (__)     
+//      Official webSite: https://code-mphi.github.io/ECOGEN/
 //
 //  This file is part of ECOGEN.
 //
@@ -30,11 +31,6 @@
 #ifndef LIMITER_H
 #define LIMITER_H
 
-//! \file      Limiter.h
-//! \author    F. Petitpas, K. Schmidmayer
-//! \version   1.0
-//! \date      July 19 2018
-
 #include <iostream>
 #include <cmath>
 #include <algorithm>
@@ -46,7 +42,7 @@ class Limiter
     Limiter();
     virtual ~Limiter();
 
-    virtual double limiteSlope(const double& slope1, const double& slope2) { Errors::errorMessage("Unknown limiter"); return 0.; };
+    virtual double limiteSlope(const double& /*slope1*/, const double& /*slope2*/) { Errors::errorMessage("Unknown limiter"); return 0.; };
     virtual bool AmITHINC() { return false; }
 
 };

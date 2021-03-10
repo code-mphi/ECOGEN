@@ -12,7 +12,7 @@ Fluid mechanics models used in the computation are specified in the *modelv4.xml
 
 	<?xml version = "1.0" encoding = "UTF-8" standalone = "yes"?>
 	<model>
-	  <flowModel name="Kapila" numberPhases="2" alphaNull="false"/>
+	  <flowModel name="PressureVelocityEq" numberPhases="2" alphaNull="false"/>
 	  <EOS name="IG_air.xml"/>
 	  <EOS name="SG_water.xml"/>
 	</model>
@@ -24,14 +24,14 @@ Flow model
 
 .. code-block:: xml
 
-	<flowModel name="Kapila" numberPhases="2" numberTransports="1" alphaNull="false"/>
+	<flowModel name="PressureVelocityEq" numberPhases="2" numberTransports="1" alphaNull="false"/>
 
 The :xml:`<flowModel>` markup is **mandatory** to specify the mathematical model to solve during the computation. This markup may contain the following attributes:
 
-- :xml:`name`: Name of the mathematical flow model. This attribute can take the values: *Euler* :cite:`euler1757principes`, *Kapila* :cite:`relaxjcp`:cite:`kapila2001`, *multip*, *ThermalEq* :cite:`martelotboiling` or *EulerHomogeneous*.
+- :xml:`name`: Name of the mathematical flow model. This attribute can take the values: *Euler* :cite:`euler1757principes`, *PressureVelocityEq* (previously named *Kapila*) :cite:`relaxjcp`:cite:`kapila2001`, *VelocityEq* previously named *multiP*), *TemperaturePressureVelocityEq* (previously named *ThermalEq*) :cite:`martelotboiling` or *EulerHomogeneous*.
 - :xml:`numberPhases`: Integer number corresponding to the number of phases present in the simulation. The total amount of equations is related to this number. This attribute is not necessary when the values of :xml:`name` are *Euler* or *EulerHomogeneous*.
 - :xml:`numberTransports`: This attribute is optionnal and is set to 0 as default. It can be used to add specific variables advected in the flow (color functions).
-- :xml:`alphaNull`: For *Kapila*'s model, the volume fraction can either be null (*true*) or not (*false*) and this choice is determined by this parameter. Default value is *false*.
+- :xml:`alphaNull`: For *PressureVelocityEq* and *VelocityEq* models, the volume fraction can either be null (*true*) or not (*false*) and this choice is determined by this parameter. Default value is *false*.
 
 **Remark:**
 
@@ -72,7 +72,12 @@ Relaxation procedures
 
 An additional markup :xml:`<relaxation>` may be used to impose some specific equilibrium between the phases depending on the flow model used. The attribute :xml:`type` specifies the type of equilibrium:
 
-- *P*: A pressure equilibrium is imposed at every location of the flow. It does not require additional attributes.
+- *P*: A pressure equilibrium is imposed at every location of the flow. The attribute :xml:`speed` can be added to specify the speed at which the relaxation operates (*infinite* or *finite*). Default is *infinite*.
+
+.. code-block:: xml
+
+	<relaxation type="P" speed="infinite"/>
+
 - *PT*: Both pressure and thermal equilibrium are imposed at every location of the flow. It does not require additional attributes.
 - *PTMu*: A thermodynamical equilibrium is imposed at every location of the flow. It must be associated with the node :xml:`<dataPTMu>` whose attributes are :xml:`liquid` and :xml:`vapor` to specify the name of the EOS of the liquid and the vapor phase. Hereafter the complete node when *PTMu* is used:
 
@@ -91,7 +96,7 @@ The additional :xml:`<sourceTerms>` markup can be used to numerically integrate 
 
 .. code-block:: xml
 
-	<sourceTerms type="heating">
+	<sourceTerms type="heating" order="EULER">
 	  <dataHeating volumeHeatPower="1.e6"/>
 	</sourceTerms>
 
@@ -99,7 +104,7 @@ The additional :xml:`<sourceTerms>` markup can be used to numerically integrate 
 
 .. code-block:: xml
 
-	<sourceTerms type="gravity">
+	<sourceTerms type="gravity" order="EULER">
 	  <gravity x="0." y="-9.81" z="0."/>
 	</sourceTerms>
 
@@ -107,10 +112,18 @@ The additional :xml:`<sourceTerms>` markup can be used to numerically integrate 
 
 .. code-block:: xml
 
-	<sourceTerms type="MRF">
+	<sourceTerms type="MRF" order="RK4">
 	  <omega x="0." y="0." z="1."/>
 	  <timeToOmega tf="1.e-3"/>  <!-- Optional: If activated, the angular velocity increase linearly to omega in during tf -->
 	</sourceTerms>
+
+Source-term integration can be done up to 4th order. Available integration schemes are:
+
+- *EULER* (1st order)
+- Runge--Kutta 2 *RK2* (2nd order)
+- Runge--Kutta 4 *RK4* (4th order)
+
+Scheme selection is done through :xml:`order` attribute.
 
 Symmetry terms
 --------------
@@ -140,7 +153,7 @@ Depending on the model chosen in section :ref:`Sec:input:FlowModel`, additional 
 
 Surface tension
 ~~~~~~~~~~~~~~~
-This physical effect is obtained by using the type *surface tension*. Then it requires the node :xml:`dataSurfaceTension` with following attributes:
+This physical effect is obtained by using the type *surface tension* and its treatment is detailed in :cite:`schmidmayer2017capillary`. Then it requires the node :xml:`dataSurfaceTension` with following attributes:
 
 - :xml:`transport`: This is the name of advected variable used as color function for surface-tension terms. This advected variable has been precised in the section :ref:`Sec:input:Transport`. The name should be the same.
 - :xml:`sigma`: A real number for the surface-tension coefficient (unit: N/m (SI)).

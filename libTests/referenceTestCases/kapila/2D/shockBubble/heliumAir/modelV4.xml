@@ -1,6 +1,0 @@
-<?xml version='1.0' encoding='UTF-8' standalone='yes'?>
-<model>
-  <flowModel numberPhases="2" name="Kapila" alphaNull="true"/>
-  <EOS name="IG_air.xml"/>
-  <EOS name="IG_helium.xml"/>
-</model>

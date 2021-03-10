@@ -6,6 +6,7 @@
 //       |  `--.  \  `-.  \ `-' /   \  `-) ) |  `--.  | | |)| 
 //       /( __.'   \____\  )---'    )\____/  /( __.'  /(  (_) 
 //      (__)              (_)      (__)     (__)     (__)     
+//      Official webSite: https://code-mphi.github.io/ECOGEN/
 //
 //  This file is part of ECOGEN.
 //
@@ -27,11 +28,6 @@
 //  along with ECOGEN (file LICENSE).  
 //  If not, see <http://www.gnu.org/licenses/>.
 
-//! \file      ElementTriangle.cpp
-//! \author    F. Petitpas
-//! \version   1.0
-//! \date      December 20 2017
-
 #include "ElementTriangle.h"
 
 const int ElementTriangle::TYPEGMSH = 2;
@@ -51,7 +47,7 @@ ElementTriangle::~ElementTriangle(){}
 
 //***********************************************************************
 
-void ElementTriangle::computeVolume(const Coord *noeuds)
+void ElementTriangle::computeVolume(const Coord* noeuds)
 {
   Coord v1(noeuds[1] - noeuds[0]), v2(noeuds[2] - noeuds[1]), v3(noeuds[0] - noeuds[2]);
   double a(v1.norm()), b(v2.norm()), c(v3.norm());
@@ -61,7 +57,7 @@ void ElementTriangle::computeVolume(const Coord *noeuds)
 
 //***********************************************************************
 
-void ElementTriangle::computeLCFL(const Coord *noeuds)
+void ElementTriangle::computeLCFL(const Coord* noeuds)
 {
   Coord vec; m_lCFL = 1e10;
   vec = ((noeuds[0] + noeuds[1]) / 2.) - m_position;
@@ -74,7 +70,7 @@ void ElementTriangle::computeLCFL(const Coord *noeuds)
 
 //***********************************************************************
 // Nouvelle version beaucoup plus efficace avec recherche dans tableau temporaire
-void ElementTriangle::construitFaces(const Coord *noeuds, FaceNS **faces, int &iMax, int** facesTemp, int* sommeNoeudsTemp)
+void ElementTriangle::construitFaces(const Coord* noeuds, FaceNS** faces, int& iMax, int** facesTemp, int* sommeNoeudsTemp)
 {
   //3 faces a traiter de type segment
   int indexFaceExiste(-1);
@@ -107,7 +103,7 @@ void ElementTriangle::construitFaces(const Coord *noeuds, FaceNS **faces, int &i
 
 //***********************************************************************
 // Nouvelle version beaucoup plus efficace avec recherche dans tableau temporaire
-void ElementTriangle::construitFacesSimplifie(int &iMax, int** facesTemp, int* sommeNoeudsTemp)
+void ElementTriangle::construitFacesSimplifie(int& iMax, int** facesTemp, int* sommeNoeudsTemp)
 {
   //3 faces a traiter de type segment
   int indexFaceExiste(-1);
@@ -133,7 +129,7 @@ void ElementTriangle::construitFacesSimplifie(int &iMax, int** facesTemp, int* s
 
 //***********************************************************************
 
-void ElementTriangle::attributFaceLimite(const Coord *noeuds, FaceNS **faces, const int &indexMaxFaces)
+void ElementTriangle::attributFaceLimite(FaceNS** faces, const int& indexMaxFaces)
 {
   int indexFaceExiste(0);
   FaceTriangle face(m_numNoeuds[0], m_numNoeuds[1], m_numNoeuds[2]);
@@ -149,7 +145,7 @@ void ElementTriangle::attributFaceLimite(const Coord *noeuds, FaceNS **faces, co
 
 //***********************************************************************
 
-void ElementTriangle::attributFaceCommunicante(const Coord *noeuds, FaceNS **faces, const int &indexMaxFaces, const int &numberNoeudsInternes)
+void ElementTriangle::attributFaceCommunicante(FaceNS** faces, const int& indexMaxFaces, const int& numberNoeudsInternes)
 {
   int indexFaceExiste(0);
   //Verification face 1 :
@@ -186,7 +182,7 @@ void ElementTriangle::attributFaceCommunicante(const Coord *noeuds, FaceNS **fac
 
 //***********************************************************************
 
-int ElementTriangle::compteFaceCommunicante(std::vector<int*> &facesTemp, std::vector<int> &sommeNoeudsTemp)
+int ElementTriangle::compteFaceCommunicante(std::vector<int*>& facesTemp, std::vector<int>& sommeNoeudsTemp)
 {
   //4 faces a traiter de type segment
   int indexFaceExiste(-1), numberFacesCommunicante(0);
@@ -214,7 +210,7 @@ int ElementTriangle::compteFaceCommunicante(std::vector<int*> &facesTemp, std::v
 
 //***********************************************************************
 //Nouvelle version plus efficace
-int ElementTriangle::compteFaceCommunicante(int &iMax, int **facesTemp, int *sommeNoeudsTemp)
+int ElementTriangle::compteFaceCommunicante(int& iMax, int** facesTemp, int* sommeNoeudsTemp)
 {
   //4 faces a traiter de type segment
   int indexFaceExiste(-1), numberFacesCommunicante(0);

@@ -6,6 +6,7 @@
 //       |  `--.  \  `-.  \ `-' /   \  `-) ) |  `--.  | | |)| 
 //       /( __.'   \____\  )---'    )\____/  /( __.'  /(  (_) 
 //      (__)              (_)      (__)     (__)     (__)     
+//      Official webSite: https://code-mphi.github.io/ECOGEN/
 //
 //  This file is part of ECOGEN.
 //
@@ -27,24 +28,15 @@
 //  along with ECOGEN (file LICENSE).  
 //  If not, see <http://www.gnu.org/licenses/>.
 
-//! \file      SourceGravity.cpp
-//! \author    F. Petitpas, K. Schmidmayer, J. Caze
-//! \version   1.0
-//! \date      October 29 2019
-
 #include "SourceGravity.h"
 
 using namespace tinyxml2;
 
 //***********************************************************************
 
-SourceGravity::SourceGravity(){}
-
-//***********************************************************************
-
-SourceGravity::SourceGravity(XMLElement *element, int order, std::string fileName) : Source(order)
+SourceGravity::SourceGravity(XMLElement* element, int order, int physicalEntity, std::string fileName) : Source(order, physicalEntity)
 {
-  XMLElement *sousElement(element->FirstChildElement("gravity"));
+  XMLElement* sousElement(element->FirstChildElement("gravity"));
   if (sousElement == NULL) throw ErrorXMLElement("gravity", fileName, __FILE__, __LINE__);
   //Collecting attributes
   //---------------------
@@ -66,9 +58,9 @@ SourceGravity::~SourceGravity(){}
 
 //***********************************************************************
 
-void SourceGravity::prepSourceTerms(Cell *cell, const int &numberPhases, const double &dt, const int i)
+void SourceGravity::prepSourceTerms(Cell* /*cell*/, const int& numberPhases, const int& i)
 {
-  sourceCons[i]->prepSourceTermsGravity(cell, dt, numberPhases, m_g);
+  sourceCons[i]->prepSourceTermsGravity(numberPhases, m_g);
 }
 
 //***********************************************************************

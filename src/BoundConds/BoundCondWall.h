@@ -6,6 +6,7 @@
 //       |  `--.  \  `-.  \ `-' /   \  `-) ) |  `--.  | | |)| 
 //       /( __.'   \____\  )---'    )\____/  /( __.'  /(  (_) 
 //      (__)              (_)      (__)     (__)     (__)     
+//      Official webSite: https://code-mphi.github.io/ECOGEN/
 //
 //  This file is part of ECOGEN.
 //
@@ -30,32 +31,32 @@
 #ifndef BOUNDCONDWALL_H
 #define BOUNDCONDWALL_H
 
-//! \file      BoundCondWall.h
-//! \author    F. Petitpas, K. Schmidmayer
-//! \version   1.0
-//! \date      February 13 2019
-
 #include "BoundCond.h"
 
 
 class BoundCondWall : public BoundCond
 {
 public:
-  BoundCondWall();
-  BoundCondWall(const BoundCondWall& Source, const int lvl = 0); //Constructeur de copie (utile pour AMR)
+  BoundCondWall(const BoundCondWall& Source, const int& lvl = 0); //Copy ctor (useful for AMR)
+  BoundCondWall(int numPhysique, tinyxml2::XMLElement* element, std::string fileName);
   BoundCondWall(int numPhysique);
   virtual ~BoundCondWall();
 
-  virtual void creeLimite(TypeMeshContainer<CellInterface *> &cellInterfaces);
-  virtual void solveRiemannLimite(Cell &cellLeft, const int &numberPhases, const double &dxLeft, double &dtMax);
-  virtual void solveRiemannTransportLimite(Cell &cellLeft, const int &numberTransports) const;
+  virtual void createBoundary(TypeMeshContainer<CellInterface*>& cellInterfaces);
+  virtual void solveRiemannBoundary(Cell& cellLeft, const int& numberPhases, const double& dxLeft, double& dtMax);
+  virtual void solveRiemannTransportBoundary(Cell& /*cellLeft*/, const int& numberTransports) const;
 
-  virtual int whoAmI() const { return 2; };
+  virtual int whoAmI() const { return WALL; };
+  virtual int whoAmIHeat() const { return m_heatCondition; }
 
-  //Pour methode AMR
-  virtual void creerCellInterfaceChild();  /*!< Creer un child cell interface (non initialize) */
+  virtual double getBoundaryHeatQuantity() const { return m_imposedHeatQuantity; }
+
+  //For AMR method
+  virtual void creerCellInterfaceChild();  /*!< Create a child cell interface (not initialized) */
 
 protected:
+  TypeBCHeat m_heatCondition;   //!< Specific heat boundary condition, could be imposed temperature or flux density (default is adiabatic)
+  double m_imposedHeatQuantity; //!< Imposed heat quantity on the wall. Depending on input (m_heatCondition) could be imposed temperature or flux density. This option requires conductivity additionnal physics to work
 private:
 };
 

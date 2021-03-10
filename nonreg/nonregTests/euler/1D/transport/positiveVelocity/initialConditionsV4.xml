@@ -1,0 +1,32 @@
+<?xml version='1.0' encoding='UTF-8' standalone='yes'?>
+<CI>
+  <!-- LIST OF GEOMETRICAL DOMAINS  -->
+  <physicalDomains>
+    <!-- complete domain -->
+    <domain type="entireDomain" name="base" state="lowDensity"/>
+    <!-- chamber high pressure -->
+    <domain type="halfSpace" name="leftChamber" state="highDensity">
+      <dataHalfSpace axis="x" direction="negative" origin="0.5"/>
+    </domain>
+  </physicalDomains>
+  <!-- LIST OF BOUNDARY CONDITIONS -->
+  <boundaryConditions>
+    <boundCond type="nonReflecting" number="1" name="CLXm"/>
+    <boundCond type="nonReflecting" number="2" name="CLXp"/>
+  </boundaryConditions>
+  <!--  LIST OF STATES  -->
+  <state name="lowDensity">
+    <material type="fluid" EOS="IG_air.xml">
+      <dataFluid density="1" pressure="100000">
+        <velocity x="1000" z="0" y="0"/>
+      </dataFluid>
+    </material>
+  </state>
+  <state name="highDensity">
+    <material type="fluid" EOS="IG_air.xml">
+      <dataFluid density="10" pressure="100000">
+        <velocity x="1000" z="0" y="0"/>
+      </dataFluid>
+    </material>
+  </state>
+</CI>

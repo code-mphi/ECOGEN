@@ -6,6 +6,7 @@
 //       |  `--.  \  `-.  \ `-' /   \  `-) ) |  `--.  | | |)| 
 //       /( __.'   \____\  )---'    )\____/  /( __.'  /(  (_) 
 //      (__)              (_)      (__)     (__)     (__)     
+//      Official webSite: https://code-mphi.github.io/ECOGEN/
 //
 //  This file is part of ECOGEN.
 //
@@ -27,24 +28,15 @@
 //  along with ECOGEN (file LICENSE).  
 //  If not, see <http://www.gnu.org/licenses/>.
 
-//! \file      SourceMRF.cpp
-//! \author    F. Petitpas, J. Caze
-//! \version   1.0
-//! \date      October 29 2019
-
 #include "SourceMRF.h"
 
 using namespace tinyxml2;
 
 //***********************************************************************
 
-SourceMRF::SourceMRF(){}
-
-//***********************************************************************
-
-SourceMRF::SourceMRF(XMLElement *element, int order, std::string fileName) : Source(order)
+SourceMRF::SourceMRF(XMLElement* element, int order, int physicalEntity, std::string fileName) : Source(order, physicalEntity)
 {
-  XMLElement *sousElement(element->FirstChildElement("omega"));
+  XMLElement* sousElement(element->FirstChildElement("omega"));
   if (sousElement == NULL) throw ErrorXMLElement("omega", fileName, __FILE__, __LINE__);
   //Collecting attributes
   //---------------------
@@ -76,14 +68,14 @@ SourceMRF::~SourceMRF()
 
 //***********************************************************************
 
-void SourceMRF::prepSourceTerms(Cell *cell, const int &numberPhases, const double &dt, const int i)
+void SourceMRF::prepSourceTerms(Cell* cell, const int& numberPhases, const int& i)
 {
-  sourceCons[i]->prepSourceTermsMRF(cell, dt, numberPhases, m_incr*m_omega); 
+  sourceCons[i]->prepSourceTermsMRF(cell, numberPhases, m_incr*m_omega); 
 }
 
 //***********************************************************************
 
-void SourceMRF::sourceEvolution(const double &time)
+void SourceMRF::sourceEvolution(const double& time)
 {
   if (m_incr < 1.) {
     m_incr = std::min(time/m_tf,1.);
@@ -92,7 +84,7 @@ void SourceMRF::sourceEvolution(const double &time)
 
 //***********************************************************************
 
-Coord SourceMRF::computeAbsVelocity(const Coord relVelocity, const Coord position)
+Coord SourceMRF::computeAbsVelocity(const Coord& relVelocity, const Coord& position)
 {
   Coord absVelocity(m_incr*m_omega);
   absVelocity = relVelocity + absVelocity.cross(position);

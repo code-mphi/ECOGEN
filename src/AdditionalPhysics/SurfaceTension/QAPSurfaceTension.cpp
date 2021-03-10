@@ -6,6 +6,7 @@
 //       |  `--.  \  `-.  \ `-' /   \  `-) ) |  `--.  | | |)| 
 //       /( __.'   \____\  )---'    )\____/  /( __.'  /(  (_) 
 //      (__)              (_)      (__)     (__)     (__)     
+//      Official webSite: https://code-mphi.github.io/ECOGEN/
 //
 //  This file is part of ECOGEN.
 //
@@ -27,18 +28,8 @@
 //  along with ECOGEN (file LICENSE).  
 //  If not, see <http://www.gnu.org/licenses/>.
 
-//! \file      QAPSurfaceTension.cpp
-//! \author    K. Schmidmayer
-//! \version   1.1
-//! \date      June 5 2019
-
 #include "QAPSurfaceTension.h"
 #include <iostream>
-
-//***********************************************************************
-
-QAPSurfaceTension::QAPSurfaceTension(){}
-
 
 //***********************************************************************
 
@@ -64,7 +55,7 @@ void QAPSurfaceTension::computeQuantities(Cell* cell)
 
 //***********************************************************************
 
-void QAPSurfaceTension::setGrad(const Coord &grad, int num)
+void QAPSurfaceTension::setGrad(const Coord& grad, const int& /*num*/)
 {
   m_gradC[0] = grad;
 }

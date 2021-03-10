@@ -1,0 +1,38 @@
+<?xml version = "1.0" encoding = "UTF-8" standalone = "yes"?>
+<CI>
+    <!-- LIST OF GEOMETRICAL DOMAINS  -->
+    <physicalDomains> 
+        <domain name="base" state="air" type="entireDomain"/>
+        <domain name="zoneHP"  state="square" type="rectangle">
+            <dataRectangle axis1="x" axis2="y" lAxis1="0.2" lAxis2="0.2">
+                <posInferiorVertex x="0.4" y="0.4" z="0.5"/>
+            </dataRectangle>
+        </domain>
+    </physicalDomains>
+
+    <!-- LIST OF BOUNDARY CONDITIONS -->
+    <boundaryConditions>
+        <boundCond name="CLXm" type="wall" number="1" />
+        <boundCond name="CLXp" type="wall" number="2" />
+        <boundCond name="CLYm" type="wall" number="3" />
+        <boundCond name="CLYp" type="wall" number="4" />
+    </boundaryConditions>
+    
+    <!--  LIST OF STATES  -->
+    <state name="air">
+        <material type="fluid" EOS="IG_air.xml">
+            <dataFluid density="1.2" pressure="1.e5">
+                <velocity x="0." y="0." z="0."/>
+            </dataFluid>
+        </material>
+    </state>
+
+    <state name="square">
+        <material type="fluid" EOS="IG_air.xml">
+            <dataFluid density="1.2" pressure="1.e6">
+                <velocity x="0." y="0." z="0."/>
+            </dataFluid>
+        </material>
+    </state>
+
+</CI>

@@ -1,0 +1,9 @@
+<?xml version='1.0' encoding='UTF-8' standalone='yes'?>
+<model>
+  <flowModel name="Euler"/>
+  <EOS name="IG_air.xml"/>
+  <sourceTerms order="RK4" type="MRF">
+    <omega z="1000" y="0." x="0."/>
+    <!-- <timeToOmega tf="2.e-2"/> -->
+  </sourceTerms>
+</model>

@@ -6,6 +6,7 @@
 //       |  `--.  \  `-.  \ `-' /   \  `-) ) |  `--.  | | |)| 
 //       /( __.'   \____\  )---'    )\____/  /( __.'  /(  (_) 
 //      (__)              (_)      (__)     (__)     (__)     
+//      Official webSite: https://code-mphi.github.io/ECOGEN/
 //
 //  This file is part of ECOGEN.
 //
@@ -27,21 +28,16 @@
 //  along with ECOGEN (file LICENSE).  
 //  If not, see <http://www.gnu.org/licenses/>.
 
-//! \file      GDEllipse.cpp
-//! \author    K. Schmidmayer
-//! \version   1.0
-//! \date      June 25 2018
-
 #include "GDEllipse.h"
 
 using namespace tinyxml2;
 
 //***************************************************************
 
-GDEllipse::GDEllipse(std::string name, std::vector<Phase*> vecPhases, Mixture *mixture, std::vector<Transport> vecTransports, XMLElement *element, const int &physicalEntity, std::string fileName) :
+GDEllipse::GDEllipse(std::string name, std::vector<Phase*> vecPhases, Mixture* mixture, std::vector<Transport> vecTransports, XMLElement* element, const int& physicalEntity, std::string fileName) :
   GeometricalDomain(name, vecPhases, mixture, vecTransports, physicalEntity)
 {
-  XMLElement *sousElement(element->FirstChildElement("dataEllipse"));
+  XMLElement* sousElement(element->FirstChildElement("dataEllipse"));
   if (sousElement == NULL) throw ErrorXMLElement("dataEllipse", fileName, __FILE__, __LINE__);
   //Attributes reading
   //------------------
@@ -68,7 +64,7 @@ GDEllipse::GDEllipse(std::string name, std::vector<Phase*> vecPhases, Mixture *m
   else { throw ErrorXMLAttribut("axis2", fileName, __FILE__, __LINE__); }
   //Ellipse center
   double x(0.), y(0.), z(0.);
-  XMLElement *center(sousElement->FirstChildElement("center"));
+  XMLElement* center(sousElement->FirstChildElement("center"));
   if (center == NULL) throw ErrorXMLElement("center", fileName, __FILE__, __LINE__);
   error = center->QueryDoubleAttribute("x", &x);
   error = center->QueryDoubleAttribute("y", &y);
@@ -82,7 +78,7 @@ GDEllipse::~GDEllipse() {}
 
 //***************************************************************
 
-bool GDEllipse::belong(Coord &posElement, const int &lvl) const
+bool GDEllipse::belong(Coord& posElement, const int& /*lvl*/) const
 {
   double sum(0.);
   std::vector<Axis> axes;

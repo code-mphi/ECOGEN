@@ -6,6 +6,7 @@
 //       |  `--.  \  `-.  \ `-' /   \  `-) ) |  `--.  | | |)| 
 //       /( __.'   \____\  )---'    )\____/  /( __.'  /(  (_) 
 //      (__)              (_)      (__)     (__)     (__)     
+//      Official webSite: https://code-mphi.github.io/ECOGEN/
 //
 //  This file is part of ECOGEN.
 //
@@ -27,11 +28,6 @@
 //  along with ECOGEN (file LICENSE).  
 //  If not, see <http://www.gnu.org/licenses/>.
 
-//! \file      SymmetryCylindrical.cpp
-//! \author    F. Petitpas, K. Schmidmayer
-//! \version   1.0
-//! \date      December 20 2017
-
 #include "SymCylindrical.h"
 
 using namespace tinyxml2;
@@ -45,9 +41,9 @@ SymCylindrical::SymCylindrical() {}
 *  Cylindrical symmetry constructor from a read in XML format
 *  ex : <dataSymCyl RadialAxis="X"/>
 */
-SymCylindrical::SymCylindrical(XMLElement *element, std::string nameFile)
+SymCylindrical::SymCylindrical(XMLElement* element, std::string nameFile)
 {
-  XMLElement *sousElement(element->FirstChildElement("dataSymCyl"));
+  XMLElement* sousElement(element->FirstChildElement("dataSymCyl"));
   if (sousElement == NULL) throw ErrorXMLElement("dataSymCyl", nameFile, __FILE__, __LINE__);
   //Attributes collecting
   //---------------------
@@ -66,7 +62,7 @@ SymCylindrical::~SymCylindrical() {}
 
 //***********************************************************************
 
-void SymCylindrical::addSymmetricTerms(Cell *cell, const int &numberPhases, Prim type)
+void SymCylindrical::addSymmetricTerms(Cell* cell, const int& numberPhases, Prim type)
 {
   double r(0.), v(0.);
   if (numberPhases > 1) { // Multiphase models
@@ -76,22 +72,21 @@ void SymCylindrical::addSymmetricTerms(Cell *cell, const int &numberPhases, Prim
 		case Z: r = cell->getPosition().getZ(); v = cell->getMixture(type)->getW(); break;
 		default: Errors::errorMessage("Name of the axis is unknown in SymCylindrical::addSymmetricTerms");
 	  }
-	  cell->getCons()->addSymmetricTerms(cell->getPhases(type), cell->getMixture(type), numberPhases, r, v);
   }
-  else { // Euler monophasic model //JC//Q// Why MixEuler is not linked to PhaseEuler ? Like getMixture() redirects to getPhase(0)  
+  else { // Euler monophasic model
 	  switch (m_radialAxis) {
 		case X: r = cell->getPosition().getX(); v = cell->getPhase(0)->getU(); break;
 		case Y: r = cell->getPosition().getY(); v = cell->getPhase(0)->getV(); break;
 		case Z: r = cell->getPosition().getZ(); v = cell->getPhase(0)->getW(); break;
 		default: Errors::errorMessage("Name of the axis is unknown in SymCylindrical::addSymmetricTerms");
 	  }
-	  cell->getCons()->addSymmetricTerms(cell->getPhases(type), cell->getMixture(type), numberPhases, r, v);
   }
+  cell->getCons()->addSymmetricTerms(cell->getPhases(type), cell->getMixture(type), numberPhases, r, v);
 }
 
 //***********************************************************************
 
-void SymCylindrical::addSymmetricTermsAddPhys(Cell *cell, const int &numberPhases, AddPhys &addPhys)
+void SymCylindrical::addSymmetricTermsAddPhys(Cell* cell, const int& numberPhases, AddPhys &addPhys)
 {
   switch (m_radialAxis) {
   case X: addPhys.addSymmetricTermsRadialAxisOnX(cell, numberPhases); break;

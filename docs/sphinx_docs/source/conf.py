@@ -61,6 +61,9 @@ numfig_number_figures = True
 numfig_figure_caption_prefix = "Figure"
 numfig_secnum_depth = 1
 
+#Bibtex
+bibtex_bibfiles = ['Biblio.bib']
+
 # Add any paths that contain templates here, relative to this directory.
 templates_path = ['_templates']
 

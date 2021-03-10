@@ -8,7 +8,7 @@
 	</cut1D>
 	<timeControlMode iterations="false">
 		<iterations number="100" iterFreq="10"/>
-		<physicalTime totalTime="3.6e-4" timeFreq="3.6e-5"/>
+		<physicalTime totalTime="3.6e-4" timeFreq="3.6e-4"/>
 	</timeControlMode>
 	<computationControl CFL="0.8"/>
 	<secondOrder>

@@ -6,6 +6,7 @@
 //       |  `--.  \  `-.  \ `-' /   \  `-) ) |  `--.  | | |)| 
 //       /( __.'   \____\  )---'    )\____/  /( __.'  /(  (_) 
 //      (__)              (_)      (__)     (__)     (__)     
+//      Official webSite: https://code-mphi.github.io/ECOGEN/
 //
 //  This file is part of ECOGEN.
 //
@@ -30,11 +31,6 @@
 #ifndef SYMCYLINDRICAL_H
 #define SYMCYLINDRICAL_H
 
-//! \file      SymmetryCylindrical.h
-//! \author    F. Petitpas, K. Schmidmayer
-//! \version   1.0
-//! \date      December 20 2017
-
 #include "Symmetry.h"
 
 //! \class     SymmetryCylindrical
@@ -43,11 +39,11 @@ class SymCylindrical : public Symmetry
 {
 public:
   SymCylindrical();
-  SymCylindrical(tinyxml2::XMLElement *element, std::string nameFile = "Unknown file");
+  SymCylindrical(tinyxml2::XMLElement* element, std::string nameFile = "Unknown file");
   virtual ~SymCylindrical();
 
-  virtual void addSymmetricTerms(Cell *cell, const int &numberPhases, Prim type = vecPhases);
-  virtual void addSymmetricTermsAddPhys(Cell *cell, const int &numberPhases, AddPhys &addPhys);
+  virtual void addSymmetricTerms(Cell* cell, const int& numberPhases, Prim type = vecPhases);
+  virtual void addSymmetricTermsAddPhys(Cell* cell, const int& numberPhases, AddPhys& addPhys);
 };
 
 #endif //SYMCYLINDRICAL_H

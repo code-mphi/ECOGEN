@@ -1,0 +1,30 @@
+<?xml version = "1.0" encoding = "UTF-8" standalone = "yes"?>
+<CI>
+    <!-- LIST OF GEOMETRICAL DOMAINS  -->
+    <physicalDomains> 
+        <domain name="mrf" state="mrf" type="entireDomain" physicalEntity="10"/>
+        <domain name="static" state="static" type="entireDomain" physicalEntity="11"/>
+    </physicalDomains>
+
+    <!-- LIST OF BOUNDARY CONDITIONS -->
+    <boundaryConditions>
+        <boundCond name="wall" type="wall" number="1"/>
+    </boundaryConditions>
+    
+    <!--  LIST OF STATES  -->
+    <state name="mrf">
+        <material type="fluid" EOS="IG_air.xml">
+            <dataFluid density="1.225" pressure="1.e5">
+                <velocity x="0." y="0." z="0."/>
+            </dataFluid>
+        </material>
+    </state>
+
+    <state name="static">
+        <material type="fluid" EOS="IG_air.xml">
+            <dataFluid density="1.225" pressure="1.e5">
+                <velocity x="0." y="0." z="0."/>
+            </dataFluid>
+        </material>
+    </state>
+</CI>

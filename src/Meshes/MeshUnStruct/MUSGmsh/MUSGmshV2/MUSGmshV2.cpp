@@ -6,6 +6,7 @@
 //       |  `--.  \  `-.  \ `-' /   \  `-) ) |  `--.  | | |)| 
 //       /( __.'   \____\  )---'    )\____/  /( __.'  /(  (_) 
 //      (__)              (_)      (__)     (__)     (__)     
+//      Official webSite: https://code-mphi.github.io/ECOGEN/
 //
 //  This file is part of ECOGEN.
 //
@@ -27,11 +28,6 @@
 //  along with ECOGEN (file LICENSE).  
 //  If not, see <http://www.gnu.org/licenses/>.
 
-//! \file      MUSGmshV2.h
-//! \author    J. Caze
-//! \version   1.0
-//! \date      November 19 2019
-
 #include "MUSGmshV2.h"
 
 //***********************************************************************
@@ -45,7 +41,7 @@ MUSGmshV2::~MUSGmshV2() {}
 
 //***********************************************************************
 
-void MUSGmshV2::initGeometryMonoCPU(TypeMeshContainer<Cell *> &cells, TypeMeshContainer<CellInterface *> &cellInterfaces, std::string computeOrder)
+void MUSGmshV2::initGeometryMonoCPU(TypeMeshContainer<Cell*>& cells, TypeMeshContainer<CellInterface*>& cellInterfaces, std::string computeOrder)
 {
   try {
     // 1) Reading nodes and elements
@@ -150,11 +146,11 @@ void MUSGmshV2::initGeometryMonoCPU(TypeMeshContainer<Cell *> &cells, TypeMeshCo
     // -------------------------------
     // Sizing faces array
     m_faces = new FaceNS*[m_numberFacesTotal];
-    int **facesBuff; int *sumNodesBuff; // We build a temporary array of faces to speed up the search process
+    int** facesBuff; int* sumNodesBuff; // We build a temporary array of faces to speed up the search process
     facesBuff = new int*[m_numberFacesTotal + 1];
     sumNodesBuff = new int[m_numberFacesTotal + 1];
     // Determination of the maximum number of nodes for the faces 
-    int sizeFace; // Will be initialize at maximale size
+    int sizeFace(1); // Will be initialize at maximale size
     if (m_numberElements3D != 0)
     {
       if (m_numberQuadrangles != 0) { sizeFace = 4; }
@@ -162,7 +158,6 @@ void MUSGmshV2::initGeometryMonoCPU(TypeMeshContainer<Cell *> &cells, TypeMeshCo
       else { Errors::errorMessage("Issue in initGeometryMonoCPU for initialization of facesBuff array"); }
     }
     else if (m_numberElements2D != 0) { sizeFace = 2; }
-    else { sizeFace = 1; }
     for (int i = 0; i < m_numberFacesTotal + 1; i++)
     {
       facesBuff[i] = new int[sizeFace];
@@ -171,33 +166,33 @@ void MUSGmshV2::initGeometryMonoCPU(TypeMeshContainer<Cell *> &cells, TypeMeshCo
     // Inner faces
     int indexMaxFaces(0);
     clock_t tTemp(clock());
-    float t1(0.);
+    double t1(0.);
     std::cout << "  1/Building faces ..." << std::endl;
-    int frequenceImpressure(std::max((m_numberElements - m_numberBoundFaces) / 10, 1));
+    int printFrequency(std::max((m_numberElements - m_numberBoundFaces) / 10, 1));
     for (int i = m_numberBoundFaces; i < m_numberElements; i++)
     {
-      if ((i - m_numberBoundFaces) % frequenceImpressure == 0) { std::cout << "    " << (100 * (i - m_numberBoundFaces) / (m_numberElements - m_numberBoundFaces)) << "% ... " << std::endl; }
+      if ((i - m_numberBoundFaces) % printFrequency == 0) { std::cout << "    " << (100 * (i - m_numberBoundFaces) / (m_numberElements - m_numberBoundFaces)) << "% ... " << std::endl; }
       m_elements[i]->construitFaces(m_nodes, m_faces, indexMaxFaces, facesBuff, sumNodesBuff);
     }
     for (int i = 0; i < m_numberFacesTotal + 1; i++) { delete facesBuff[i]; }
     delete[] facesBuff; delete[] sumNodesBuff;
-    tTemp = clock() - tTemp; t1 = static_cast<float>(tTemp) / CLOCKS_PER_SEC;
+    tTemp = clock() - tTemp; t1 = static_cast<double>(tTemp) / CLOCKS_PER_SEC;
     std::cout << "    OK in " << t1 << " seconds" << std::endl;
 
     // Boundaries
     std::cout << "  2/Boundary elements attribution to boundary faces ..." << std::endl;
     tTemp = clock();
-    frequenceImpressure = std::max(m_numberBoundFaces / 10, 1);
+    printFrequency = std::max(m_numberBoundFaces / 10, 1);
     for (int i = 0; i < m_numberBoundFaces; i++)
     {
-      if (i%frequenceImpressure == 0)
+      if (i%printFrequency == 0)
       {
         std::cout << "    " << (100 * i / m_numberBoundFaces) << "% ... " << std::endl; 
       }
       // Assigning the boundary
-      m_elements[i]->attributFaceLimite(m_nodes, m_faces, indexMaxFaces);
+      m_elements[i]->attributFaceLimite(m_faces, indexMaxFaces);
     }
-    tTemp = clock() - tTemp; t1 = static_cast<float>(tTemp) / CLOCKS_PER_SEC;
+    tTemp = clock() - tTemp; t1 = static_cast<double>(tTemp) / CLOCKS_PER_SEC;
     std::cout << "    OK in " << t1 << " seconds" << std::endl;
 
     // Link Geometry/cellInterfaces of compute
@@ -210,7 +205,7 @@ void MUSGmshV2::initGeometryMonoCPU(TypeMeshContainer<Cell *> &cells, TypeMeshCo
       {
         int appPhys(m_faces[i]->getElementDroite()->getAppartenancePhysique() - 1); // (appartenance - 1) for array starting at zero
         if (appPhys >= static_cast<int>(m_bound.size()) || appPhys < 0) { Errors::errorMessage("Number of boundary conditions not suited"); }
-        m_bound[appPhys]->creeLimite(cellInterfaces);
+        m_bound[appPhys]->createBoundary(cellInterfaces);
         cellInterfaces[i]->setFace(m_faces[i]);
         iMailleG = m_faces[i]->getElementGauche()->getIndex() - m_numberBoundFaces;
         iMailleD = iMailleG;
@@ -264,7 +259,7 @@ void MUSGmshV2::initGeometryMonoCPU(TypeMeshContainer<Cell *> &cells, TypeMeshCo
         //      cellInterfaces[i]->setB(BG1M, 0);
         //    }
         //    else { //Sinon on met a jour avec la maille la plus loin
-        //      Cell *c(cells[eT->getNumCellAssociee()]);
+        //      Cell* c(cells[eT->getNumCellAssociee()]);
         //      cellInterfaces[i]->setB(BG1M, c);
         //    }
         //  }
@@ -294,7 +289,7 @@ void MUSGmshV2::initGeometryMonoCPU(TypeMeshContainer<Cell *> &cells, TypeMeshCo
         //            cellInterfaces[i]->setB(BG2M, 0);
         //          }
         //          else {  //Sinon on met a jour avec la 2 eme maille la plus loin
-        //            Cell *c(cells[eT->getNumCellAssociee()]);
+        //            Cell* c(cells[eT->getNumCellAssociee()]);
         //            cellInterfaces[i]->setB(BG2M, c);
         //          }
         //        }
@@ -341,7 +336,7 @@ void MUSGmshV2::initGeometryMonoCPU(TypeMeshContainer<Cell *> &cells, TypeMeshCo
         //      cellInterfaces[i]->setB(BG1P, 0);
         //    }
         //    else { //Sinon on met a jour avec la maille la plus loin
-        //      Cell *c(cells[eT->getNumCellAssociee()]);
+        //      Cell* c(cells[eT->getNumCellAssociee()]);
         //      cellInterfaces[i]->setB(BG1P, c);
         //    }
         //  }
@@ -371,7 +366,7 @@ void MUSGmshV2::initGeometryMonoCPU(TypeMeshContainer<Cell *> &cells, TypeMeshCo
         //            cellInterfaces[i]->setB(BG2P, 0);
         //          }
         //          else {  //Sinon on met a jour avec la 2 eme maille la plus loin
-        //            Cell *c(cells[eT->getNumCellAssociee()]);
+        //            Cell* c(cells[eT->getNumCellAssociee()]);
         //            cellInterfaces[i]->setB(BG2P, c);
         //          }
         //        }
@@ -425,7 +420,7 @@ void MUSGmshV2::initGeometryMonoCPU(TypeMeshContainer<Cell *> &cells, TypeMeshCo
         //        cellInterfaces[i]->setB(BD1M, 0);
         //      }
         //      else { //Sinon on met a jour avec la maille la plus loin
-        //        Cell *c(cells[eT->getNumCellAssociee()]);
+        //        Cell* c(cells[eT->getNumCellAssociee()]);
         //        cellInterfaces[i]->setB(BD1M, c);
         //      }
         //    }
@@ -455,7 +450,7 @@ void MUSGmshV2::initGeometryMonoCPU(TypeMeshContainer<Cell *> &cells, TypeMeshCo
         //              cellInterfaces[i]->setB(BD2M, 0);
         //            }
         //            else {  //Sinon on met a jour avec la 2 eme maille la plus loin
-        //              Cell *c(cells[eT->getNumCellAssociee()]);
+        //              Cell* c(cells[eT->getNumCellAssociee()]);
         //              cellInterfaces[i]->setB(BD2M, c);
         //            }
         //          }
@@ -502,7 +497,7 @@ void MUSGmshV2::initGeometryMonoCPU(TypeMeshContainer<Cell *> &cells, TypeMeshCo
         //        cellInterfaces[i]->setB(BD1P, 0);
         //      }
         //      else { //Sinon on met a jour avec la maille la plus loin
-        //        Cell *c(cells[eT->getNumCellAssociee()]);
+        //        Cell* c(cells[eT->getNumCellAssociee()]);
         //        cellInterfaces[i]->setB(BD1P, c);
         //      }
         //    }
@@ -532,7 +527,7 @@ void MUSGmshV2::initGeometryMonoCPU(TypeMeshContainer<Cell *> &cells, TypeMeshCo
         //              cellInterfaces[i]->setB(BD2P, 0);
         //            }
         //            else {  //Sinon on met a jour avec la 2 eme maille la plus loin
-        //              Cell *c(cells[eT->getNumCellAssociee()]);
+        //              Cell* c(cells[eT->getNumCellAssociee()]);
         //              cellInterfaces[i]->setB(BD2P, c);
         //            }
         //          }
@@ -584,7 +579,7 @@ void MUSGmshV2::initGeometryMonoCPU(TypeMeshContainer<Cell *> &cells, TypeMeshCo
       //---------------------------------------------------------------------------------------
 
     } // End face
-    tTemp = clock() - tTemp; t1 = static_cast<float>(tTemp) / CLOCKS_PER_SEC;
+    tTemp = clock() - tTemp; t1 = static_cast<double>(tTemp) / CLOCKS_PER_SEC;
     std::cout << "    OK in " << t1 << " seconds" << std::endl;
     std::cout << "... BUILDING GEOMETRY COMPLETE " << std::endl;
     std::cout << "------------------------------------------------------" << std::endl;
@@ -620,7 +615,7 @@ void MUSGmshV2::readMeshMonoCPU(std::vector<ElementNS*>** neighborNodes)
     // ------------------------
     std::cout << "  1/Mesh nodes reading ...";
     meshFile >> m_numberNodes;
-    meshFile.ignore(1, '\n');
+    meshFile.ignore(10, '\n');
     m_nodes = new Coord[m_numberNodes];
     *neighborNodes = new std::vector<ElementNS*>[m_numberNodes];
     int useless(0); double x, y, z;
@@ -629,7 +624,7 @@ void MUSGmshV2::readMeshMonoCPU(std::vector<ElementNS*>** neighborNodes)
       meshFile >> useless >> x >> y >> z;
       m_nodes[i].setXYZ(x, y, z);
     }
-    meshFile.ignore(1, '\n');
+    meshFile.ignore(10, '\n');
     getline(meshFile, currentLine); // Skip keyword $EndNodes
     getline(meshFile, currentLine); // Skip keyword $Elements
     std::cout << "OK" << std::endl;
@@ -638,12 +633,12 @@ void MUSGmshV2::readMeshMonoCPU(std::vector<ElementNS*>** neighborNodes)
     // --------------------------------------------------------------
 	std::cout << "  2/0D/1D/2D/3D elements reading ..." << std::endl;
     meshFile >> m_numberElements;
-    meshFile.ignore(1, '\n');
+    meshFile.ignore(10, '\n');
     // Allocation array of elements
     m_elements = new ElementNS*[m_numberElements];
     // Reading elements and assigning geometric properties 
     m_numberElements1D = 0, m_numberElements2D = 0, m_numberElements3D = 0;
-    int posBeginElement = static_cast<int>(meshFile.tellg()); // id of the position of elements in file for quick return
+    //int posBeginElement = static_cast<int>(meshFile.tellg()); // id of the position of elements in file for quick return
     int nodeG;
     for (int i = 0; i < m_numberElements; i++) {
       this->readElement(m_nodes, meshFile, &m_elements[i]);
@@ -672,7 +667,7 @@ void MUSGmshV2::readMeshMonoCPU(std::vector<ElementNS*>** neighborNodes)
 
 //***********************************************************************
 
-void MUSGmshV2::initGeometryParallel(TypeMeshContainer<Cell *> &cells, TypeMeshContainer<Cell *> &cellsGhost, TypeMeshContainer<CellInterface *> &cellInterfaces, std::string computeOrder)
+void MUSGmshV2::initGeometryParallel(TypeMeshContainer<Cell*>& cells, TypeMeshContainer<Cell*>& cellsGhost, TypeMeshContainer<CellInterface*>& cellInterfaces, std::string computeOrder)
 {
   //KS//FP//DEV// Distinction between cells and cellsGhost not done here. To do in the future.
   clock_t totalTime(clock());
@@ -739,11 +734,11 @@ void MUSGmshV2::initGeometryParallel(TypeMeshContainer<Cell *> &cells, TypeMeshC
     
     // Sizing faces array
     m_faces = new FaceNS*[m_numberFacesTotal];
-    int **facesBuff; int *sumNodesBuff; // We build a temporary array of faces to speed up the search process
+    int** facesBuff; int* sumNodesBuff; // We build a temporary array of faces to speed up the search process
     facesBuff = new int*[m_numberFacesTotal + 1];
     sumNodesBuff = new int[m_numberFacesTotal + 1];
     // Determination of the maximum number of nodes for the faces 
-    int sizeFace; // Will be initialize at maximale size
+    int sizeFace(1); // Will be initialize at maximale size
     if (m_numberElements3D != 0)
     {
       if (m_numberQuadrangles != 0) { sizeFace = 4; }
@@ -751,7 +746,6 @@ void MUSGmshV2::initGeometryParallel(TypeMeshContainer<Cell *> &cells, TypeMeshC
       else { Errors::errorMessage("Issue in initGeometryMonoCPU for initialization of facesBuff array"); }
     }
     else if (m_numberElements2D != 0) { sizeFace = 2; }
-    else { sizeFace = 1; } 
     for (int i = 0; i < m_numberFacesTotal + 1; i++) // +1 is used for the search for the existence of faces
     {
       facesBuff[i] = new int[sizeFace]; // Unknown on the number of points of a face (4 seems to be the max) 
@@ -761,17 +755,17 @@ void MUSGmshV2::initGeometryParallel(TypeMeshContainer<Cell *> &cells, TypeMeshC
     // -----------
     int indexMaxFaces(0);
     MPI_Barrier(MPI_COMM_WORLD);
-    int frequenceImpressure;
+    int printFrequency(1);
     clock_t tTemp(clock());
-    float t1(0.);
+    double t1(0.);
     if (rankCpu == 0)
     {
       std::cout << "  1/Building faces ..." << std::endl;
-      frequenceImpressure = std::max((m_numberInnerElements - m_numberBoundFaces) / 10, 1);
+      printFrequency = std::max((m_numberInnerElements - m_numberBoundFaces) / 10, 1);
     }
     for (int i = m_numberBoundFaces; i < m_numberInnerElements; i++)
     {
-      if (rankCpu == 0 && (i - m_numberBoundFaces) % frequenceImpressure == 0) { std::cout << "    " << (100 * (i - m_numberBoundFaces) / (m_numberInnerElements - m_numberBoundFaces)) << "% ... " << std::endl; }
+      if (rankCpu == 0 && (i - m_numberBoundFaces) % printFrequency == 0) { std::cout << "    " << (100 * (i - m_numberBoundFaces) / (m_numberInnerElements - m_numberBoundFaces)) << "% ... " << std::endl; }
       // Building
       m_elements[i]->construitFaces(m_nodes, m_faces, indexMaxFaces, facesBuff, sumNodesBuff);
     }
@@ -780,7 +774,7 @@ void MUSGmshV2::initGeometryParallel(TypeMeshContainer<Cell *> &cells, TypeMeshC
     MPI_Barrier(MPI_COMM_WORLD);
     if (rankCpu == 0)
     {
-      tTemp = clock() - tTemp; t1 = static_cast<float>(tTemp) / CLOCKS_PER_SEC;
+      tTemp = clock() - tTemp; t1 = static_cast<double>(tTemp) / CLOCKS_PER_SEC;
       std::cout << "    OK in " << t1 << " seconds" << std::endl;
     }
 
@@ -790,21 +784,21 @@ void MUSGmshV2::initGeometryParallel(TypeMeshContainer<Cell *> &cells, TypeMeshC
     if (rankCpu == 0)
     {
       std::cout << "  2/Boundary elements attribution to boundary faces ..." << std::endl;
-      frequenceImpressure = std::max(m_numberBoundFaces / 10, 1);
+      printFrequency = std::max(m_numberBoundFaces / 10, 1);
     }
     for (int i = 0; i < m_numberBoundFaces; i++)
     {
-      if (rankCpu == 0 && i%frequenceImpressure == 0) 
+      if (rankCpu == 0 && i%printFrequency == 0) 
       {
          std::cout << "    " << (100 * i / m_numberBoundFaces) << "% ... " << std::endl; 
       }
       // Assigning the boundary
-      m_elements[i]->attributFaceLimite(m_nodes, m_faces, indexMaxFaces);
+      m_elements[i]->attributFaceLimite(m_faces, indexMaxFaces);
     }
     MPI_Barrier(MPI_COMM_WORLD);
     if (rankCpu == 0)
     {
-      tTemp = clock() - tTemp; t1 = static_cast<float>(tTemp) / CLOCKS_PER_SEC;
+      tTemp = clock() - tTemp; t1 = static_cast<double>(tTemp) / CLOCKS_PER_SEC;
       std::cout << "    OK in " << t1 << " seconds" << std::endl;
     }
 
@@ -814,18 +808,18 @@ void MUSGmshV2::initGeometryParallel(TypeMeshContainer<Cell *> &cells, TypeMeshC
     if (rankCpu == 0)
     {
       std::cout << "  3/Ghost cells attribution to communicating faces ..." << std::endl;
-      frequenceImpressure = std::max((m_numberElements - m_numberInnerElements) / 10, 1);
+      printFrequency = std::max((m_numberElements - m_numberInnerElements) / 10, 1);
     }
     for (int i = m_numberInnerElements; i < m_numberElements; i++)
     {
-      if (rankCpu == 0 && (i - m_numberInnerElements) % frequenceImpressure == 0) { std::cout << "    " << (100 * (i - m_numberInnerElements) / (m_numberElements - m_numberInnerElements)) << "% ... " << std::endl; }
+      if (rankCpu == 0 && (i - m_numberInnerElements) % printFrequency == 0) { std::cout << "    " << (100 * (i - m_numberInnerElements) / (m_numberElements - m_numberInnerElements)) << "% ... " << std::endl; }
       // Assigning missing boundary
-      m_elements[i]->attributFaceCommunicante(m_nodes, m_faces, indexMaxFaces, m_numberInnerNodes);
+      m_elements[i]->attributFaceCommunicante(m_faces, indexMaxFaces, m_numberInnerNodes);
     }
     MPI_Barrier(MPI_COMM_WORLD);
     if (rankCpu == 0)
     {
-      tTemp = clock() - tTemp; t1 = static_cast<float>(tTemp) / CLOCKS_PER_SEC;
+      tTemp = clock() - tTemp; t1 = static_cast<double>(tTemp) / CLOCKS_PER_SEC;
       std::cout << "    OK in " << t1 << " seconds" << std::endl;
     }
 
@@ -836,13 +830,13 @@ void MUSGmshV2::initGeometryParallel(TypeMeshContainer<Cell *> &cells, TypeMeshC
     if (rankCpu == 0)
     {
       std::cout << "  4/Linking Geometries -> Physics ..." << std::endl;
-      frequenceImpressure = std::max(m_numberFacesTotal / 10, 1);
+      printFrequency = std::max(m_numberFacesTotal / 10, 1);
     }
     int iMailleG, iMailleD;
 
     for (int i = 0; i < m_numberFacesTotal; i++)
     {
-      if (rankCpu == 0 && i%frequenceImpressure == 0) { std::cout << "    " << 100 * i / m_numberFacesTotal << "% ... " << std::endl; }
+      if (rankCpu == 0 && i%printFrequency == 0) { std::cout << "    " << 100 * i / m_numberFacesTotal << "% ... " << std::endl; }
       // Boundary faces (physical or communication boundary)
       if (m_faces[i]->getEstLimite())
       {
@@ -860,7 +854,7 @@ void MUSGmshV2::initGeometryParallel(TypeMeshContainer<Cell *> &cells, TypeMeshC
         {
           int appPhys(m_faces[i]->getElementDroite()->getAppartenancePhysique() - 1); // (appartenance - 1) for array starting at zero
           if (appPhys >= static_cast<int>(m_bound.size()) || appPhys < 0) { throw ErrorECOGEN("Number of boundary conditions not suited", __FILE__, __LINE__); }
-          m_bound[appPhys]->creeLimite(cellInterfaces);
+          m_bound[appPhys]->createBoundary(cellInterfaces);
           cellInterfaces[i]->setFace(m_faces[i]);
           iMailleG = m_faces[i]->getElementGauche()->getNumCellAssociee();
           iMailleD = iMailleG;
@@ -882,7 +876,7 @@ void MUSGmshV2::initGeometryParallel(TypeMeshContainer<Cell *> &cells, TypeMeshC
     MPI_Barrier(MPI_COMM_WORLD);
     if (rankCpu == 0)
     {
-      tTemp = clock() - tTemp; t1 = static_cast<float>(tTemp) / CLOCKS_PER_SEC;
+      tTemp = clock() - tTemp; t1 = static_cast<double>(tTemp) / CLOCKS_PER_SEC;
       std::cout << "    OK in " << t1 << " seconds" << std::endl;
     }
     
@@ -893,7 +887,7 @@ void MUSGmshV2::initGeometryParallel(TypeMeshContainer<Cell *> &cells, TypeMeshC
     if (rankCpu == 0)
     {
       std::cout << "  5/Building connectivity tables for CPUs ..." << std::endl;
-      frequenceImpressure = std::max((m_numberElements - m_numberBoundFaces) / 10, 1);
+      printFrequency = std::max((m_numberElements - m_numberBoundFaces) / 10, 1);
     }
 
     std::vector<int> numberElementsToSend(Ncpu);
@@ -942,14 +936,14 @@ void MUSGmshV2::initGeometryParallel(TypeMeshContainer<Cell *> &cells, TypeMeshC
     MPI_Barrier(MPI_COMM_WORLD);
     if (rankCpu == 0)
     {
-      tTemp = clock() - tTemp; t1 = static_cast<float>(tTemp) / CLOCKS_PER_SEC;
+      tTemp = clock() - tTemp; t1 = static_cast<double>(tTemp) / CLOCKS_PER_SEC;
       std::cout << "    OK in " << t1 << " seconds" << std::endl;
     }
 
     if (rankCpu == 0)
     {
       std::cout << "... BUILDING GEOMETRY COMPLETE ";
-      totalTime = clock() - totalTime; t1 = static_cast<float>(totalTime) / CLOCKS_PER_SEC;
+      totalTime = clock() - totalTime; t1 = static_cast<double>(totalTime) / CLOCKS_PER_SEC;
       std::cout << " Total time of geometrical building : " << t1 << " seconds" << std::endl;
       std::cout << "------------------------------------------------------" << std::endl;
     }
@@ -976,7 +970,7 @@ void MUSGmshV2::readMeshParallel()
     }
     std::stringstream flux;
     flux << rankCpu;
-    m_meshFile = "./libMeshes/" + m_nameMesh + "_CPU" + flux.str() + ".msh";
+    m_meshFile = m_nameMesh + "_CPU" + flux.str() + ".msh";
     std::ifstream meshFile(m_meshFile.c_str(), std::ios::in);
     if (!meshFile) { throw ErrorECOGEN("file mesh absent :" + m_meshFile, __FILE__, __LINE__); }
     std::string currentLine;
@@ -993,7 +987,7 @@ void MUSGmshV2::readMeshParallel()
     MPI_Barrier(MPI_COMM_WORLD);
     if (rankCpu == 0) { std::cout << "  1/Reading mesh nodes ..."; }
     meshFile >> m_numberNodes;
-    meshFile.ignore(1, '\n');
+    meshFile.ignore(10, '\n');
     m_nodes = new Coord[m_numberNodes];
     int useless(0); double x, y, z;
     for (int i = 0; i < m_numberNodes; i++)
@@ -1001,7 +995,7 @@ void MUSGmshV2::readMeshParallel()
       meshFile >> useless >> x >> y >> z;
       m_nodes[i].setXYZ(x, y, z);
     }
-    meshFile.ignore(1, '\n');
+    meshFile.ignore(10, '\n');
     getline(meshFile, currentLine); // Skip keyword $EndNodes
     getline(meshFile, currentLine); // Skip keyword $Elements
     if (rankCpu == 0) { std::cout << "OK" << std::endl; }
@@ -1011,12 +1005,12 @@ void MUSGmshV2::readMeshParallel()
     MPI_Barrier(MPI_COMM_WORLD);
     if (rankCpu == 0) { std::cout << "  2/Reading internal 1D/2D/3D elements ..."; }
     meshFile >> m_numberElements;
-    meshFile.ignore(1, '\n');
+    meshFile.ignore(10, '\n');
     // Allocation array of elements
     m_elements = new ElementNS*[m_numberElements];
     // Reading elements and assigning geometric properties 
     m_numberElements1D = 0, m_numberElements2D = 0, m_numberElements3D = 0;
-    int posBeginElement = static_cast<int>(meshFile.tellg()); // id of the position of elements in file for quick return
+    //int posBeginElement = static_cast<int>(meshFile.tellg()); // id of the position of elements in file for quick return
     for (int i = 0; i < m_numberElements; i++)
     {
       this->readElement(m_nodes, meshFile, &m_elements[i]);
@@ -1029,12 +1023,12 @@ void MUSGmshV2::readMeshParallel()
       }
       else { m_numberGhostElements++; }
     }
-    meshFile.ignore(1, '\n');
+    meshFile.ignore(10, '\n');
     getline(meshFile, currentLine);
     // Reading informations outside Gmsh
     getline(meshFile, currentLine);
     meshFile >> m_numberFacesParallel;
-    meshFile.ignore(1, '\n');
+    meshFile.ignore(10, '\n');
     getline(meshFile, currentLine);
     meshFile >> m_numberInnerNodes;
     meshFile.close();
@@ -1049,9 +1043,9 @@ void MUSGmshV2::readMeshParallel()
 
 void MUSGmshV2::preProcessMeshFileForParallel()
 {
-  ElementNS **elementsGlobal;
-  Coord *nodesGlobal;
-  int frequenceImpressure(0);
+  ElementNS** elementsGlobal;
+  Coord* nodesGlobal;
+  int printFrequency(0);
   int numberNodesGlobal(0), numberElementsGlobal(0);
   int numberElements0D(0), numberElements1D(0), numberElements2D(0), numberElements3D(0);
 
@@ -1076,7 +1070,7 @@ void MUSGmshV2::preProcessMeshFileForParallel()
     // --------------------------------------------------------
     std::cout << "  1/Mesh nodes reading ...";
     meshFile >> numberNodesGlobal;
-    meshFile.ignore(1, '\n');
+    meshFile.ignore(10, '\n');
     nodesGlobal = new Coord[numberNodesGlobal];
     int useless(0); double x, y, z;
     for (int i = 0; i < numberNodesGlobal; i++)
@@ -1084,7 +1078,7 @@ void MUSGmshV2::preProcessMeshFileForParallel()
       meshFile >> useless >> x >> y >> z;
       nodesGlobal[i].setXYZ(x, y, z);
     }
-    meshFile.ignore(1, '\n');
+    meshFile.ignore(10, '\n');
     getline(meshFile, currentLine);
     getline(meshFile, currentLine);
     std::cout << "OK" << std::endl;
@@ -1093,11 +1087,11 @@ void MUSGmshV2::preProcessMeshFileForParallel()
     // ----------------------------------------------------------------------
     std::cout << "  2/1D/2D/3D elements reading ...";
     meshFile >> numberElementsGlobal;
-    meshFile.ignore(1, '\n');
+    meshFile.ignore(10, '\n');
     // Allocation array of elements
     elementsGlobal = new ElementNS*[numberElementsGlobal];
     // Reading elements and assigning geometric properties 
-    int posBeginElement = static_cast<int>(meshFile.tellg()); // id of the position of elements in file for quick return
+    //int posBeginElement = static_cast<int>(meshFile.tellg()); // id of the position of elements in file for quick return
     for (int i = 0; i < numberElementsGlobal; i++)
     {
       this->readElement(nodesGlobal, meshFile, &elementsGlobal[i]);
@@ -1135,16 +1129,16 @@ void MUSGmshV2::preProcessMeshFileForParallel()
     // 3) Tracking and allocation by CPU
     // ---------------------------------
     std::cout << "  3/Attributing nodes to CPUs ..." << std::endl;
-    clock_t tTemp(clock()); float t1(0);
-    frequenceImpressure = std::max(numberElementsGlobal / 10, 1);
+    clock_t tTemp(clock()); double t1(0);
+    printFrequency = std::max(numberElementsGlobal / 10, 1);
     std::vector< std::vector<int> > nodesCPU(Ncpu);
     std::vector< std::vector<int> > elementsCPU(Ncpu);
-    int numCPU; int nodeCurrent; bool nodeExist;
+    int numCPU(0); int nodeCurrent; bool nodeExist;
     int numCPUMax(0); // To check if mesh suited or not
     // Seeking nodes of the inner mesh (without ghost) for each CPU
     for (int i = 0; i < numberElementsGlobal; i++)
     {
-      if (i%frequenceImpressure == 0) { std::cout << "    " << 100 * i / numberElementsGlobal << "% ... " << std::endl; }
+      if (i%printFrequency == 0) { std::cout << "    " << 100 * i / numberElementsGlobal << "% ... " << std::endl; }
       numCPU = elementsGlobal[i]->getCPU();
       if (numCPU > numCPUMax) numCPUMax = numCPU;
       elementsCPU[numCPU].push_back(i); // Filling number of CPU-specific elements
@@ -1159,12 +1153,12 @@ void MUSGmshV2::preProcessMeshFileForParallel()
         if (!nodeExist) { nodesCPU[numCPU].push_back(nodeCurrent); }
       }
     }
-    int *numberInnerNodes = new int[Ncpu];
+    int* numberInnerNodes = new int[Ncpu];
     for (int p = 0; p < Ncpu; p++)
     {
       numberInnerNodes[p] = nodesCPU[p].size();
     }
-    tTemp = clock() - tTemp; t1 = static_cast<float>(tTemp) / CLOCKS_PER_SEC;
+    tTemp = clock() - tTemp; t1 = static_cast<double>(tTemp) / CLOCKS_PER_SEC;
     std::cout << "    OK in " << t1 << " seconds" << std::endl;
     // Checking if mesh matches with CPUs used
     if (numCPUMax != Ncpu - 1) throw ErrorECOGEN("mesh file .msh not suited with the number of CPUs used - Generate the mesh and restard the test case", __FILE__, __LINE__);
@@ -1174,9 +1168,9 @@ void MUSGmshV2::preProcessMeshFileForParallel()
     // Test estimation of the number of faces (rough)
     std::cout << "  4/Creating faces array ..." << std::endl;
     tTemp = clock();
-    frequenceImpressure = std::max((numberElementsGlobal - numberElementsBoundary) / 10, 1);
-    int *numberFacesBuff = new int[Ncpu];
-    int *iMaxFaces = new int[Ncpu];
+    printFrequency = std::max((numberElementsGlobal - numberElementsBoundary) / 10, 1);
+    int* numberFacesBuff = new int[Ncpu];
+    int* iMaxFaces = new int[Ncpu];
     for (int p = 0; p < Ncpu; p++)
     {
       iMaxFaces[p] = 0;
@@ -1186,8 +1180,8 @@ void MUSGmshV2::preProcessMeshFileForParallel()
         numberFacesBuff[p] += elementsGlobal[elementsCPU[numCPU][i]]->getNumberFaces();
       }
     }
-    int ***facesBuff2 = new int**[Ncpu];
-    int **sumNodesBuff2 = new int*[Ncpu];
+    int*** facesBuff2 = new int**[Ncpu];
+    int** sumNodesBuff2 = new int*[Ncpu];
     for (int p = 0; p < Ncpu; p++)
     {
       sumNodesBuff2[p] = new int[numberFacesBuff[p]];
@@ -1199,23 +1193,23 @@ void MUSGmshV2::preProcessMeshFileForParallel()
     }
     for (int i = numberElementsBoundary; i < numberElementsGlobal; i++)
     {
-      if ((i - numberElementsBoundary) % frequenceImpressure == 0) { std::cout << "    " << (100 * (i - numberElementsBoundary) / (numberElementsGlobal - numberElementsBoundary)) << "% ... " << std::endl; }
+      if ((i - numberElementsBoundary) % printFrequency == 0) { std::cout << "    " << (100 * (i - numberElementsBoundary) / (numberElementsGlobal - numberElementsBoundary)) << "% ... " << std::endl; }
       int numCPU(elementsGlobal[i]->getCPU());
       elementsGlobal[i]->construitFacesSimplifie(iMaxFaces[numCPU], facesBuff2[numCPU], sumNodesBuff2[numCPU]);
     }
-    tTemp = clock() - tTemp; t1 = static_cast<float>(tTemp) / CLOCKS_PER_SEC;
+    tTemp = clock() - tTemp; t1 = static_cast<double>(tTemp) / CLOCKS_PER_SEC;
     std::cout << "    OK in " << t1 << " seconds" << std::endl;
 
     // 5) Seeking ghost elements which have a shared face with an inner element (communicators)
     // ----------------------------------------------------------------------------------------
     std::cout << "  5/Looking for ghosts elements ..." << std::endl;
     tTemp = clock();
-    frequenceImpressure = std::max(numberElementsGlobal / 10, 1);
-    int *numberFacesCommunicatingCPU = new int[Ncpu];
+    printFrequency = std::max(numberElementsGlobal / 10, 1);
+    int* numberFacesCommunicatingCPU = new int[Ncpu];
     for (int i = 0; i < Ncpu; i++) { numberFacesCommunicatingCPU[i] = 0; }
     for (int i = 0; i < numberElementsGlobal; i++)
     {
-      if (i%frequenceImpressure == 0) { std::cout << "    " << (100 * i / numberElementsGlobal) << "% ... " << std::endl; }
+      if (i%printFrequency == 0) { std::cout << "    " << (100 * i / numberElementsGlobal) << "% ... " << std::endl; }
       if (elementsGlobal[i]->getNumberAutresCPU() != 0)
       {
         std::vector<int> CPUAEnlever;
@@ -1263,7 +1257,7 @@ void MUSGmshV2::preProcessMeshFileForParallel()
         elementsGlobal[i]->enleveCPUAutres(CPUAEnlever);
       }
     }
-    tTemp = clock() - tTemp; t1 = static_cast<float>(tTemp) / CLOCKS_PER_SEC;
+    tTemp = clock() - tTemp; t1 = static_cast<double>(tTemp) / CLOCKS_PER_SEC;
     std::cout << "    OK in " << t1 << " seconds" << std::endl;
 
     for (int p = 0; p < Ncpu; p++)
@@ -1282,7 +1276,7 @@ void MUSGmshV2::preProcessMeshFileForParallel()
     {
       std::stringstream flux;
       flux << p;
-      std::string meshFileCPU("./libMeshes/" + m_nameMesh + "_CPU" + flux.str() + ".msh");
+      std::string meshFileCPU(m_nameMesh + "_CPU" + flux.str() + ".msh");
       std::cout << "    print '" << meshFileCPU.c_str() << "' in progress ...' " << std::endl;
       std::ofstream fileStream;
       fileStream.open(meshFileCPU.c_str());
@@ -1336,11 +1330,11 @@ void MUSGmshV2::preProcessMeshFileForParallel()
       fileStream << numberInnerNodes[p] << std::endl;
       fileStream.close();
     }
-    tTemp = clock() - tTemp; t1 = static_cast<float>(tTemp) / CLOCKS_PER_SEC;
+    tTemp = clock() - tTemp; t1 = static_cast<double>(tTemp) / CLOCKS_PER_SEC;
     std::cout << "    OK in " << t1 << " seconds" << std::endl;
 
     std::cout << "... MESH FILE PRE-PROCESSING COMPLETE ";
-    totalTime = clock() - totalTime; t1 = static_cast<float>(totalTime) / CLOCKS_PER_SEC;
+    totalTime = clock() - totalTime; t1 = static_cast<double>(totalTime) / CLOCKS_PER_SEC;
     std::cout << " Total time of pre-processing : " << t1 << " seconds" << std::endl;
 
     // Deallocations
@@ -1359,7 +1353,7 @@ void MUSGmshV2::preProcessMeshFileForParallel()
 
 //***********************************************************************
 
-void MUSGmshV2::readElement(const Coord *nodesTable, std::ifstream &meshFile, ElementNS **element)
+void MUSGmshV2::readElement(const Coord* nodesTable, std::ifstream &meshFile, ElementNS** element)
 {
   int numberElement,numberTags,typeElement,numberPhysicEntity,numberGeometricEntity;
   meshFile >> numberElement >> typeElement;
@@ -1415,7 +1409,7 @@ void MUSGmshV2::readElement(const Coord *nodesTable, std::ifstream &meshFile, El
   if (numberTags > 2)
   { 
     meshFile >> numberCPU; // Number of mesh partitions to which the elment belongs
-    int *numCPU = new int[numberCPU];
+    int* numCPU = new int[numberCPU];
     for (int tag = 0; tag < numberCPU; tag++){ meshFile >> numCPU[tag]; }
     (*element)->setAppartenanceCPU(numCPU, numberCPU);
     delete[] numCPU;
@@ -1424,8 +1418,8 @@ void MUSGmshV2::readElement(const Coord *nodesTable, std::ifstream &meshFile, El
   // 3) Building the element and its properties
   // ------------------------------------------
   int currentNode;
-  int *numNode = new int[(*element)->getNumberNoeuds()];
-  Coord *node = new Coord[(*element)->getNumberNoeuds()];
+  int* numNode = new int[(*element)->getNumberNoeuds()];
+  Coord* node = new Coord[(*element)->getNumberNoeuds()];
   for (int i = 0; i < (*element)->getNumberNoeuds(); i++)
   {
     meshFile >> currentNode;

@@ -6,6 +6,7 @@
 //       |  `--.  \  `-.  \ `-' /   \  `-) ) |  `--.  | | |)| 
 //       /( __.'   \____\  )---'    )\____/  /( __.'  /(  (_) 
 //      (__)              (_)      (__)     (__)     (__)     
+//      Official webSite: https://code-mphi.github.io/ECOGEN/
 //
 //  This file is part of ECOGEN.
 //
@@ -27,23 +28,13 @@
 //  along with ECOGEN (file LICENSE).  
 //  If not, see <http://www.gnu.org/licenses/>.
 
-//! \file      Tools.cpp
-//! \author    F. Petitpas, K. Schmidmayer
-//! \version   1.0
-//! \date      December 6 2018
-
 #include "Tools.h"
 
 Tools *TB;
 
 //***********************************************************************
 
-Tools::Tools() : ak(0), rhok(0), pk(0), akS(0), rhokS(0), eos(0)
-{}
-
-//***********************************************************************
-
-Tools::Tools(const int &numberPhases)
+Tools::Tools(const int& numberPhases)
 {
   m_numberPhases = numberPhases;
   ak = new double[numberPhases];
@@ -58,6 +49,8 @@ Tools::Tools(const int &numberPhases)
   YkStar = new double[numberPhases];
   vkStar = new double[numberPhases];
   Deltaek = new double[numberPhases];
+  Deltapk = new double[numberPhases];
+  zk = new double[numberPhases];
   eos = new Eos*[numberPhases];
 
   Hk0 = new double[numberPhases];
@@ -81,6 +74,8 @@ Tools::~Tools()
   if (YkStar != 0) delete[] YkStar;
   if (vkStar != 0) delete[] vkStar;
   if (Deltaek != 0) delete[] Deltaek;
+  if (Deltapk != 0) delete[] Deltapk;
+  if (zk != 0) delete[] zk;
   if (eos != 0) delete[] eos;
 
   if (Hk0 != 0) delete[] Hk0;
@@ -89,7 +84,7 @@ Tools::~Tools()
 
 //***********************************************************************
 
-void Tools::uppercase(std::string &string)
+void Tools::uppercase(std::string& string)
 {
   for (unsigned int c = 0; c < string.size(); c++){ string[c] = toupper(string[c]); }
 }
@@ -99,14 +94,6 @@ void Tools::uppercase(std::string &string)
 void Tools::lowercase(std::string& string)
 {
 	for (unsigned int c = 0; c < string.size(); c++) { string[c] = tolower(string[c]); }
-}
-
-//***********************************************************************
-
-double Tools::pi()
-{
-  //return acos(-1.);
-  return 3.14159;
 }
 
 //***********************************************************************

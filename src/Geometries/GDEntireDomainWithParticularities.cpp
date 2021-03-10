@@ -6,6 +6,7 @@
 //       |  `--.  \  `-.  \ `-' /   \  `-) ) |  `--.  | | |)| 
 //       /( __.'   \____\  )---'    )\____/  /( __.'  /(  (_) 
 //      (__)              (_)      (__)     (__)     (__)     
+//      Official webSite: https://code-mphi.github.io/ECOGEN/
 //
 //  This file is part of ECOGEN.
 //
@@ -27,16 +28,11 @@
 //  along with ECOGEN (file LICENSE).  
 //  If not, see <http://www.gnu.org/licenses/>.
 
-//! \file      GDEntireDomainWithParticularities.cpp
-//! \author    K. Schmidmayer
-//! \version   1.1
-//! \date      June 5 2019
-
 #include "GDEntireDomainWithParticularities.h"
 
 //***********************************************************
 
-GDEntireDomainWithParticularities::GDEntireDomainWithParticularities(std::string name, std::vector<Phase*> vecPhases, Mixture *mixture, std::vector<Transport> vecTransports, const int &physicalEntity) :
+GDEntireDomainWithParticularities::GDEntireDomainWithParticularities(std::string name, std::vector<Phase*> vecPhases, Mixture* mixture, std::vector<Transport> vecTransports, const int& physicalEntity) :
   GeometricalDomain(name, vecPhases, mixture, vecTransports, physicalEntity)
 {}
 
@@ -46,7 +42,7 @@ GDEntireDomainWithParticularities::~GDEntireDomainWithParticularities() {}
 
 //***********************************************************
 
-bool GDEntireDomainWithParticularities::belong(Coord &posElement, const int &lvl) const
+bool GDEntireDomainWithParticularities::belong(Coord& /*posElement*/, const int& /*lvl*/) const
 {
   //1. Laplace pressure initialization
   //----------------------------------
@@ -71,12 +67,16 @@ bool GDEntireDomainWithParticularities::belong(Coord &posElement, const int &lvl
 
   //4. Random velocity perturbations
   //--------------------------------
+  // return true; //always belong to entire domain
+
+  //5. Rayleigh-Taylor instability
+  //------------------------------
   return true; //always belong to entire domain
 }
 
 //******************************************************************
 
-void GDEntireDomainWithParticularities::fillIn(Cell *cell, const int &numberPhases, const int &numberTransports) const
+void GDEntireDomainWithParticularities::fillIn(Cell* cell, const int& numberPhases, const int& numberTransports) const
 {
   //As basic fillIn: Test if the cell belongs to the geometrical domain
   bool belongs(true);
@@ -132,12 +132,75 @@ void GDEntireDomainWithParticularities::fillIn(Cell *cell, const int &numberPhas
 
     //4. Random velocity perturbations: O(1e−4 u_s)
     //---------------------------------------------
-    Coord perturbedVelocity(cell->getMixture()->getVelocity());
-    perturbedVelocity.setX(static_cast<double>(rand() % 2001 - 1000)/1.e3 * 1.e-3*151.821433232719 + perturbedVelocity.getX());
-    perturbedVelocity.setY(static_cast<double>(rand() % 2001 - 1000)/1.e3 * 1.e-3*151.821433232719 + perturbedVelocity.getY());
-    perturbedVelocity.setZ(static_cast<double>(rand() % 2001 - 1000)/1.e3 * 1.e-3*151.821433232719 + perturbedVelocity.getZ());
-    cell->getMixture()->setVelocity(perturbedVelocity);
+    // Coord perturbedVelocity(cell->getMixture()->getVelocity());
+    // perturbedVelocity.setX(static_cast<double>(rand() % 2001 - 1000)/1.e3 * 1.e-3*151.821433232719 + perturbedVelocity.getX());
+    // perturbedVelocity.setY(static_cast<double>(rand() % 2001 - 1000)/1.e3 * 1.e-3*151.821433232719 + perturbedVelocity.getY());
+    // perturbedVelocity.setZ(static_cast<double>(rand() % 2001 - 1000)/1.e3 * 1.e-3*151.821433232719 + perturbedVelocity.getZ());
+    // cell->getMixture()->setVelocity(perturbedVelocity);
+
+    //5. Rayleigh-Taylor instability
+    //------------------------------
+    // // Sinus shape parameters
+    // const double pi = std::acos(-1); // Pi constant
     
+    // // * For R-T Kevin
+    // double lambda = 0.2;             // Width of the domain
+    // double h = 0.7;                  // Height of the interface
+
+    // // * For R-T Hope et al.
+    // // double lambda = 2.5;             // Width of the domain
+    // // double h = 12.5;                 // Height of the interface
+
+    // double k = 2 * pi / lambda;      // Wave-number
+    // int nx = 1000;                   // Nb of points to plot interface function
+    // double dx = lambda / (nx - 1.);  // Points spacing for the plot of the interface fn 
+    // double amp = 0.05 / k;           // Amplitude of the sinus function
+
+    // double rhoLight = cell->getPhase(0)->getDensity(), 
+    //   rhoHeavy = cell->getPhase(1)->getDensity();
+    // std::vector<double> alpha(2, 0.);
+    
+    // // For R-T Hope et al. (not used otherwise if pressure not set)
+    // double pref = 1.e5, pinterface = pref, pressure = 0.;
+    // double g = 1., ly = 25.; 
+
+    // std::vector<double> interfaceX, interfaceY; // Interface fn coordinates
+    // for (int i = 0; i < nx; i++) {
+    //   interfaceX.push_back(i * dx);
+    //   interfaceY.push_back(amp * std::sin(2. * pi * interfaceX[i] / lambda + pi / 2.) + h);
+    // }
+
+    // int index = 0;
+    
+    // if (cell->getElement() != 0) {
+    //   Coord posElement(cell->getPosition());
+    //   double minVal = 1.;
+    //   for (unsigned int i = 0; i < interfaceX.size(); i++) { // Find nearest index corresponding to x-position of interface fn
+    //     if (std::abs(posElement.getX() - interfaceX[i]) < minVal) { 
+    //       minVal = std::abs(posElement.getX() - interfaceX[i]);
+    //       index = i;
+    //     }
+    //   }
+
+    //   // Check location to interface and initialize domain accordingly
+    //   if (posElement.getY() > interfaceY[index]) {
+	  //   alpha[0] = 0.;
+	  //   alpha[1] = 1.;
+    //     pressure = pref + rhoHeavy * g * (ly - posElement.getY());
+    //   }
+    //   else {
+    //     alpha[0] = 1.;
+    //     alpha[1] = 0.;
+    //     pinterface = pref + rhoHeavy * g * (ly - interfaceY[index]);
+    //     pressure = pinterface + rhoLight * g * (interfaceY[index] - posElement.getY());
+    //   }
+
+    //   for (int k = 0; k < numberPhases; k++) { 
+    //     cell->getPhase(k)->setAlpha(alpha[k]);
+    //     cell->getPhase(k)->setPressure(pressure);
+    //   }
+    //   // cell->getMixture()->setPressure(pressure); // Hydrostatic pressure only for R-T Hope et al.
+    // }
   }
 }
 

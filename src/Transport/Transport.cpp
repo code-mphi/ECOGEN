@@ -6,6 +6,7 @@
 //       |  `--.  \  `-.  \ `-' /   \  `-) ) |  `--.  | | |)| 
 //       /( __.'   \____\  )---'    )\____/  /( __.'  /(  (_) 
 //      (__)              (_)      (__)     (__)     (__)     
+//      Official webSite: https://code-mphi.github.io/ECOGEN/
 //
 //  This file is part of ECOGEN.
 //
@@ -26,11 +27,6 @@
 //  You should have received a copy of the GNU General Public License
 //  along with ECOGEN (file LICENSE).  
 //  If not, see <http://www.gnu.org/licenses/>.
-
-//! \file      Transport.cpp
-//! \author    K. Schmidmayer
-//! \version   1.1
-//! \date      June 5 2019
 
 #include "Transport.h"
 
@@ -144,14 +140,14 @@ void Transport::changeSign()
 
 //***************************************************************************
 
-void Transport::computeSlopeTransport(const double valueLeft, const double valueRight, const double &distance)
+void Transport::computeSlopeTransport(const double valueLeft, const double valueRight, const double& distance)
 {
   m_value = (valueRight - valueLeft) / distance;
 }
 
 //***********************************************************************
 
-void Transport::extrapolate(const double &slope, const double &distance)
+void Transport::extrapolate(const double& slope, const double& distance)
 {
   m_value += slope * distance;
 }

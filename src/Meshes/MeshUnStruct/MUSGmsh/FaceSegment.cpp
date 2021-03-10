@@ -6,6 +6,7 @@
 //       |  `--.  \  `-.  \ `-' /   \  `-) ) |  `--.  | | |)| 
 //       /( __.'   \____\  )---'    )\____/  /( __.'  /(  (_) 
 //      (__)              (_)      (__)     (__)     (__)     
+//      Official webSite: https://code-mphi.github.io/ECOGEN/
 //
 //  This file is part of ECOGEN.
 //
@@ -27,18 +28,13 @@
 //  along with ECOGEN (file LICENSE).  
 //  If not, see <http://www.gnu.org/licenses/>.
 
-//! \file      FaceSegment.cpp
-//! \author    F. Petitpas
-//! \version   1.0
-//! \date      December 20 2017
-
 #include "FaceSegment.h"
 
 const int FaceSegment::NOMBRENOEUDS = 2;
 
 //***********************************************************************
 
-FaceSegment::FaceSegment(const int &numNoeud1, const int &numNoeud2, int tri) :
+FaceSegment::FaceSegment(const int& numNoeud1, const int& numNoeud2, int tri) :
 FaceNS(NOMBRENOEUDS)
 {
   m_numNoeuds[0] = numNoeud1;
@@ -53,14 +49,14 @@ FaceSegment::~FaceSegment(){}
 
 //***********************************************************************
 
-void FaceSegment::computeSurface(const Coord *noeuds)
+void FaceSegment::computeSurface(const Coord* noeuds)
 {
   m_surface = (noeuds[m_numNoeuds[1]] - noeuds[m_numNoeuds[0]]).norm(); //Longeur du segment
 }
 
 //***********************************************************************
 
-void FaceSegment::computeRepere(const Coord *noeuds, const int &numNoeudAutre, ElementNS *elementVoisin)
+void FaceSegment::computeRepere(const Coord* noeuds, const int& numNoeudAutre, ElementNS *elementVoisin)
 {
   Coord v1; v1.setFromSubtractedVectors(noeuds[m_numNoeuds[0]], noeuds[m_numNoeuds[1]]);
   m_tangent = v1 / v1.norm();

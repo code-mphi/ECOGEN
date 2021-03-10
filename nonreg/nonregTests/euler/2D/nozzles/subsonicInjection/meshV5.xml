@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mesh>
+	<type structure="unStructured"/>
+	<unstructuredMesh>
+		<file name="./libMeshes/nozzles/smoothNozzle2D_par.msh"/>
+		<parallel GMSHPretraitement="true"/> 
+	</unstructuredMesh>
+</mesh>

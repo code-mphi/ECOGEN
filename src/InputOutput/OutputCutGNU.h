@@ -6,6 +6,7 @@
 //       |  `--.  \  `-.  \ `-' /   \  `-) ) |  `--.  | | |)| 
 //       /( __.'   \____\  )---'    )\____/  /( __.'  /(  (_) 
 //      (__)              (_)      (__)     (__)     (__)     
+//      Official webSite: https://code-mphi.github.io/ECOGEN/
 //
 //  This file is part of ECOGEN.
 //
@@ -30,11 +31,6 @@
 #ifndef OUTPUTCUTGNU_H
 #define OUTPUTCUTGNU_H
 
-//! \file      OutputCutGNU.h
-//! \author    F. Petitpas, K. Schmidmayer
-//! \version   1.0
-//! \date      May 03 2018
-
 #include "OutputGNU.h"
 #include "../Maths/GOLine.h"
 #include "../Maths/GOPlan.h"
@@ -42,11 +38,10 @@
 class OutputCutGNU : public OutputGNU
 {
 public:
-  OutputCutGNU();
-  OutputCutGNU(std::string casTest, std::string run, tinyxml2::XMLElement *element, std::string fileName, TypeGO type, Input *entree);
+  OutputCutGNU(std::string casTest, std::string run, tinyxml2::XMLElement* element, std::string fileName, TypeGO type, Input *entree);
   virtual ~OutputCutGNU();
 
-  virtual void ecritSolution(Mesh *mesh, std::vector<Cell *> *cellsLvl);
+  virtual void ecritSolution(Mesh *mesh, std::vector<Cell*>* cellsLvl);
 
   virtual void prepareOutputInfos() {}; //Aucune infos a ecrire
   virtual void ecritInfos() {};

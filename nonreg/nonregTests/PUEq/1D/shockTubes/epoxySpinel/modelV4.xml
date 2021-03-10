@@ -1,0 +1,7 @@
+<?xml version = "1.0" encoding = "UTF-8" standalone = "yes"?>
+<model>
+	<flowModel name="PressureVelocityEq" numberPhases="2" alphaNull="false"/>
+	<EOS name="SG_epoxy.xml"/>
+	<EOS name="SG_spinel.xml"/>
+	<!-- <relaxation type="PT"/> -->
+</model>

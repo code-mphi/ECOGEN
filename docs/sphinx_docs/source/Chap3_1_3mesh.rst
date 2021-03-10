@@ -92,7 +92,7 @@ Unstructured mesh
 .. code-block:: xml
 
 	<unstructuredMesh>
-	  <file name="unstructured2D/testUS.msh"/>
+	  <file name="./libMeshes/unstructured2D/testUS.msh"/>
 	  <parallel GMSHPretraitement="true"/>  <!-- Optionnal node if multi-core -->
 	</unstructuredMesh>
 

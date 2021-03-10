@@ -6,6 +6,7 @@
 //       |  `--.  \  `-.  \ `-' /   \  `-) ) |  `--.  | | |)| 
 //       /( __.'   \____\  )---'    )\____/  /( __.'  /(  (_) 
 //      (__)              (_)      (__)     (__)     (__)     
+//      Official webSite: https://code-mphi.github.io/ECOGEN/
 //
 //  This file is part of ECOGEN.
 //
@@ -30,11 +31,6 @@
 #ifndef MUSGMSH_H
 #define MUSGMSH_H
 
-//! \file      MUSGmsh.h
-//! \author    J. Caze
-//! \version   1.0
-//! \date      November 20 2019
-
 #include <string>
 #include <sstream>
 #include "../../MeshUnStruct.h"
@@ -43,14 +39,14 @@
 class MUSGmsh : public MeshUnStruct
 {
 public:
-  MUSGmsh(const std::string &meshFile, const std::string &meshExtension);
+  MUSGmsh(const std::string& meshFile, const std::string& meshExtension);
   virtual ~MUSGmsh();
 
-  static std::string readVersion(const std::string &meshFile);
+  static std::string readVersion(const std::string& meshFile);
 
   // --- MeshUnStruct virtual member functions --- 
-  virtual void initGeometryMonoCPU(TypeMeshContainer<Cell *> &cells, TypeMeshContainer<CellInterface *> &cellInterfaces, std::string computeOrder = "FIRSTORDER") = 0;
-  virtual void initGeometryParallel(TypeMeshContainer<Cell *> &cells, TypeMeshContainer<Cell *> &cellsGhost, TypeMeshContainer<CellInterface *> &cellInterfaces, std::string computeOrder = "FIRSTORDER") = 0;
+  virtual void initGeometryMonoCPU(TypeMeshContainer<Cell*>& cells, TypeMeshContainer<CellInterface*>& cellInterfaces, std::string computeOrder = "FIRSTORDER") = 0;
+  virtual void initGeometryParallel(TypeMeshContainer<Cell*>& cells, TypeMeshContainer<Cell*>& cellsGhost, TypeMeshContainer<CellInterface*>& cellInterfaces, std::string computeOrder = "FIRSTORDER") = 0;
   virtual void preProcessMeshFileForParallel() = 0;
 
 private:

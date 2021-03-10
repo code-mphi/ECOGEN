@@ -6,6 +6,7 @@
 //       |  `--.  \  `-.  \ `-' /   \  `-) ) |  `--.  | | |)| 
 //       /( __.'   \____\  )---'    )\____/  /( __.'  /(  (_) 
 //      (__)              (_)      (__)     (__)     (__)     
+//      Official webSite: https://code-mphi.github.io/ECOGEN/
 //
 //  This file is part of ECOGEN.
 //
@@ -30,11 +31,6 @@
 #ifndef SOURCE_H
 #define SOURCE_H
 
-//! \file      Source.h
-//! \author    F. Petitpas, K. Schmidmayer, J. Caze
-//! \version   1.1
-//! \date      October 29 2019
-
 #include <string>
 #include "../libTierces/tinyxml2.h"
 #include "../Errors.h"
@@ -47,27 +43,28 @@
 class Source
 {
   public:
-    Source();
-    Source(int order);
+    //! \brief    Source constructor depending on integration order and physical entity to apply source
+    //! \param    order           integration order (could EULER, RK2 or RK4 scheme)
+    //! \param    physicalEntity  the entity to which the source term is applied (default whole domain)
+    Source(int order, int physicalEntity = 0);
     virtual ~Source();
 
     //! \brief     Source terms preparation for integration
     //! \param     cell           cell for source term integration
     //! \param     numberPhases   number of phases
-    //! \param     dt             integration time step
-    virtual void prepSourceTerms(Cell* cell, const int& numberPhases, const double& dt, const int i = 0) { Errors::errorMessage("prepSourceTerms not available for required source"); };
+    virtual void prepSourceTerms(Cell* /*cell*/, const int& /*numberPhases*/, const int& /*i*/ = 0) { Errors::errorMessage("prepSourceTerms not available for required source"); };
 
     //! \brief     Source terms integration on conservative quantities
     //! \param     cell           cell for source term integration
     //! \param     numberPhases   number of phases
     //! \param     dt             integration time step
-    void integrateSourceTerms(Cell *cell, const int &numberPhases, const double &dt);
+    void integrateSourceTerms(Cell* cell, const int& numberPhases, const double& dt);
 
     //! \brief     Euler explicite integration (order 1)
     //! \param     cell           cell for source term integration
     //! \param     numberPhases   number of phases
     //! \param     dt             explicit integration time step
-    void integrationEuler(Cell *cell, const int &numberPhases, const double &dt);
+    void integrationEuler(Cell* cell, const int& numberPhases, const double& dt);
 
     //! \brief     Runge-Kutta integration (order 2)
     //! \param     cell           cell for source term integration
@@ -83,15 +80,18 @@ class Source
 
     //! \brief     Allows to modifiy the source term along time
     //! \param     time            physical time of the computation
-    virtual void sourceEvolution(const double& time) {};
+    virtual void sourceEvolution(const double& /*time*/) {};
 
     //! \brief     Compute the absolute velocity in the fixed coordinate system
     //! \param     relVelocity     velocity in the moving coordinate system
     //! \param     position        position vector in the fixed coordinate system
-    virtual Coord computeAbsVelocity(const Coord relVelocity, const Coord position) { Errors::errorMessage("computeAbsVelocity not available for required source"); return 0.; };
+    virtual Coord computeAbsVelocity(const Coord& /*relVelocity*/, const Coord& /*position*/) { Errors::errorMessage("computeAbsVelocity not available for required source"); return 0.; };
+
+    int getPhysicalEntity() { return m_physicalEntity; }
 
   protected:
     int m_order;
+    int m_physicalEntity;
 };
 
 #endif // SOURCE_H

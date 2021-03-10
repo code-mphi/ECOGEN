@@ -6,6 +6,7 @@
 //       |  `--.  \  `-.  \ `-' /   \  `-) ) |  `--.  | | |)| 
 //       /( __.'   \____\  )---'    )\____/  /( __.'  /(  (_) 
 //      (__)              (_)      (__)     (__)     (__)     
+//      Official webSite: https://code-mphi.github.io/ECOGEN/
 //
 //  This file is part of ECOGEN.
 //
@@ -30,42 +31,37 @@
 #ifndef BOUNDCONDWALLO2_H
 #define BOUNDCONDWALLO2_H
 
-//! \file      BoundCondWallO2.cpp
-//! \author    F. Petitpas, K. Schmidmayer
-//! \version   1.0
-//! \date      February 13 2019
-
 #include "BoundCondWall.h"
 
 
 class BoundCondWallO2 : public BoundCondWall
 {
 public:
-  BoundCondWallO2();
-  BoundCondWallO2(const BoundCondWallO2& Source, const int lvl = 0); //Constructeur de copie (utile pour AMR)
+  BoundCondWallO2(const BoundCondWallO2& Source, const int& lvl = 0); //Copy ctor (useful for AMR)
+  BoundCondWallO2(int numPhysique, tinyxml2::XMLElement* element, std::string fileName);
   BoundCondWallO2(int numPhysique);
   virtual ~BoundCondWallO2();
 
-  virtual void creeLimite(TypeMeshContainer<CellInterface *> &cellInterfaces);
-  virtual void allocateSlopes(const int &numberPhases, const int &numberTransports, int &allocateSlopeLocal);
-  virtual void computeSlopes(const int &numberPhases, const int &numberTransports, Prim type = vecPhases);
-  virtual void solveRiemann(const int &numberPhases, const int &numberTransports, double &dtMax, Limiter &globalLimiter, Limiter &interfaceLimiter, Limiter &globalVolumeFractionLimiter, Limiter &interfaceVolumeFractionLimiter, Prim type = vecPhases);
+  virtual void createBoundary(TypeMeshContainer<CellInterface*>& cellInterfaces);
+  virtual void allocateSlopes(const int& numberPhases, const int& numberTransports, int& /*allocateSlopeLocal*/);
+  virtual void computeSlopes(const int& numberPhases, const int& /*numberTransports*/, Prim type = vecPhases);
+  virtual void solveRiemann(const int& numberPhases, const int& numberTransports, double& dtMax, Limiter& globalLimiter, Limiter& interfaceLimiter, Limiter& globalVolumeFractionLimiter, Limiter& interfaceVolumeFractionLimiter, Prim type = vecPhases);
 
-  virtual int whoAmI() const { return 2; };
+  virtual int whoAmI() const { return WALL; };
 
-  //Accesseurs
-  virtual Phase* getSlopesPhase(const int &phaseNumber) const;
+  //Accessors
+  virtual Phase* getSlopesPhase(const int& phaseNumber) const;
   virtual Mixture* getSlopesMixture() const;
-  virtual Transport* getSlopesTransport(const int &numberTransport) const;
+  virtual Transport* getSlopesTransport(const int& numberTransport) const;
 
-  //Pour methode AMR
-  virtual void creerCellInterfaceChild();  /*!< Creer un child cell interface (non initialize) */
+  //For AMR method
+  virtual void creerCellInterfaceChild();  /*!< Create a child cell interface (not initialized) */
 
 protected:
   int m_numberPhases;
-  Phase **m_vecPhasesSlopes;         /*!< vecteur des slopes des phases */
-  Mixture *m_mixtureSlopes;          /*!< vecteur des slopes de mixture */
-  Transport *m_vecTransportsSlopes;	/*!< vecteur des slopes des transports */
+  Phase** m_vecPhasesSlopes;         /*!< vecteur des slopes des phases */
+  Mixture* m_mixtureSlopes;          /*!< vecteur des slopes de mixture */
+  Transport* m_vecTransportsSlopes;  /*!< vecteur des slopes des transports */
 private:
 };
 

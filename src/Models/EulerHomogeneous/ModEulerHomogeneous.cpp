@@ -6,6 +6,7 @@
 //       |  `--.  \  `-.  \ `-' /   \  `-) ) |  `--.  | | |)| 
 //       /( __.'   \____\  )---'    )\____/  /( __.'  /(  (_) 
 //      (__)              (_)      (__)     (__)     (__)     
+//      Official webSite: https://code-mphi.github.io/ECOGEN/
 //
 //  This file is part of ECOGEN.
 //
@@ -27,11 +28,6 @@
 //  along with ECOGEN (file LICENSE).  
 //  If not, see <http://www.gnu.org/licenses/>.
 
-//! \file      ModEulerHomogeneousous.cpp
-//! \author    F. Petitpas, K. Schmidmayer, J. Caze
-//! \version   1.1
-//! \date      November 19 2019
-
 #include <cmath>
 #include <algorithm>
 #include "ModEulerHomogeneous.h"
@@ -41,8 +37,8 @@ const std::string ModEulerHomogeneous::NAME = "EULERHOMOGENEOUS";
 
 //****************************************************************************
 
-ModEulerHomogeneous::ModEulerHomogeneous(const int &numberTransports, const int liquid, const int vapor) :
-  m_liq(liquid), m_vap(vapor), Model(NAME, numberTransports)
+ModEulerHomogeneous::ModEulerHomogeneous(const int& numberTransports, const int liquid, const int vapor) :
+  Model(NAME, numberTransports), m_liq(liquid), m_vap(vapor)
 {
   fluxBuff = new FluxEulerHomogeneous(); 
 }
@@ -56,28 +52,28 @@ ModEulerHomogeneous::~ModEulerHomogeneous()
 
 //****************************************************************************
 
-void ModEulerHomogeneous::allocateCons(Flux **cons, const int &numberPhases)
+void ModEulerHomogeneous::allocateCons(Flux** cons, const int& /*numberPhases*/)
 {
   *cons = new FluxEulerHomogeneous(this);
 }
 
 //***********************************************************************
 
-void ModEulerHomogeneous::allocatePhase(Phase **phase)
+void ModEulerHomogeneous::allocatePhase(Phase** phase)
 {
   *phase = new PhaseEulerHomogeneous;
 }
 
 //***********************************************************************
 
-void ModEulerHomogeneous::allocateMixture(Mixture **mixture)
+void ModEulerHomogeneous::allocateMixture(Mixture** mixture)
 {
   *mixture = new MixEulerHomogeneous;
 }
 
 //***********************************************************************
 
-void ModEulerHomogeneous::fulfillState(Phase **phases, Mixture *mixture, const int &numberPhases, Prim type)
+void ModEulerHomogeneous::fulfillState(Phase** phases, Mixture* mixture, const int& numberPhases, Prim /*type*/)
 {
   //Temperature calculus
   double Tsat = mixture->computeTsat(phases[m_liq]->getEos(), phases[m_vap]->getEos(), mixture->getPressure());
@@ -96,7 +92,7 @@ void ModEulerHomogeneous::fulfillState(Phase **phases, Mixture *mixture, const i
 //********************* Cell to cell Riemann solvers *************************
 //****************************************************************************
 
-void ModEulerHomogeneous::solveRiemannIntern(Cell &cellLeft, Cell &cellRight, const int &numberPhases, const double &dxLeft, const double &dxRight, double &dtMax) const
+void ModEulerHomogeneous::solveRiemannIntern(Cell& cellLeft, Cell& cellRight, const int& /*numberPhases*/, const double& dxLeft, const double& dxRight, double& dtMax, double& massflow, double& powerFlux) const
 {
   double sL, sR;
   
@@ -105,7 +101,7 @@ void ModEulerHomogeneous::solveRiemannIntern(Cell &cellLeft, Cell &cellRight, co
   double uR = cellRight.getMixture()->getVelocity().getX(), vR = cellRight.getMixture()->getVelocity().getY(), wR = cellRight.getMixture()->getVelocity().getZ(), cR = cellRight.getMixture()->getMixSoundSpeed(), pR = cellRight.getMixture()->getPressure(), rhoR = cellRight.getMixture()->getDensity();
   double EL = cellLeft.getMixture()->getEnergy() + 0.5*cellLeft.getMixture()->getVelocity().squaredNorm(), ER = cellRight.getMixture()->getEnergy() + 0.5*cellRight.getMixture()->getVelocity().squaredNorm();
 
-  //Davies
+  //Davis
   sL = std::min(uL - cL, uR - cR);
   sR = std::max(uR + cR, uL + cL);
   if (std::fabs(sL)>1.e-3) dtMax = std::min(dtMax, dxLeft / std::fabs(sL));
@@ -122,6 +118,9 @@ void ModEulerHomogeneous::solveRiemannIntern(Cell &cellLeft, Cell &cellRight, co
     static_cast<FluxEulerHomogeneous*> (fluxBuff)->m_qdm.setY(rhoL*vL*uL);
     static_cast<FluxEulerHomogeneous*> (fluxBuff)->m_qdm.setZ(rhoL*wL*uL);
     static_cast<FluxEulerHomogeneous*> (fluxBuff)->m_energ = (rhoL*EL + pL)*uL;
+
+    //Specific power flux through interface (W.m-2)
+    powerFlux = rhoL * uL * (EL + pL / rhoL);
   }
   else if (sR < 0.){
     static_cast<FluxEulerHomogeneous*> (fluxBuff)->m_masse = rhoR*uR;
@@ -129,6 +128,9 @@ void ModEulerHomogeneous::solveRiemannIntern(Cell &cellLeft, Cell &cellRight, co
     static_cast<FluxEulerHomogeneous*> (fluxBuff)->m_qdm.setY(rhoR*vR*uR);
     static_cast<FluxEulerHomogeneous*> (fluxBuff)->m_qdm.setZ(rhoR*wR*uR);
     static_cast<FluxEulerHomogeneous*> (fluxBuff)->m_energ = (rhoR*ER + pR)*uR;
+
+    //Specific power flux through interface (W.m-2)
+    powerFlux = rhoR * uR * (ER + pR / rhoR);
   }
 
   ////1) Option HLL
@@ -151,6 +153,9 @@ void ModEulerHomogeneous::solveRiemannIntern(Cell &cellLeft, Cell &cellRight, co
     static_cast<FluxEulerHomogeneous*> (fluxBuff)->m_qdm.setY(rhoStar*sM*vL);
     static_cast<FluxEulerHomogeneous*> (fluxBuff)->m_qdm.setZ(rhoStar*sM*wL);
     static_cast<FluxEulerHomogeneous*> (fluxBuff)->m_energ = (rhoStar*Estar + pStar)*sM;
+
+    //Specific power flux through interface (W.m-2)
+    powerFlux = rhoStar * sM * (Estar + pStar / rhoStar);
   }
   else {
     double pStar = mR*(sM - uR) + pR;
@@ -161,10 +166,16 @@ void ModEulerHomogeneous::solveRiemannIntern(Cell &cellLeft, Cell &cellRight, co
     static_cast<FluxEulerHomogeneous*> (fluxBuff)->m_qdm.setY(rhoStar*sM*vR);
     static_cast<FluxEulerHomogeneous*> (fluxBuff)->m_qdm.setZ(rhoStar*sM*wR);
     static_cast<FluxEulerHomogeneous*> (fluxBuff)->m_energ = (rhoStar*Estar + pStar)*sM;
+
+    //Specific power flux through interface (W.m-2)
+    powerFlux = rhoStar * sM * (Estar + pStar / rhoStar);
   }
 
   //Contact discontinuity velocity
   static_cast<FluxEulerHomogeneous*> (fluxBuff)->m_sM = sM;
+  
+  //Specific mass flow through interface (kg.s-1.m-2)
+  massflow = static_cast<FluxEulerHomogeneous*> (fluxBuff)->m_masse;
 }
 
 //****************************************************************************

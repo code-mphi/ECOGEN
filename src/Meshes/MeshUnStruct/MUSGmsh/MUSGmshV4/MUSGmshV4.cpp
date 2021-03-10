@@ -6,6 +6,7 @@
 //       |  `--.  \  `-.  \ `-' /   \  `-) ) |  `--.  | | |)| 
 //       /( __.'   \____\  )---'    )\____/  /( __.'  /(  (_) 
 //      (__)              (_)      (__)     (__)     (__)     
+//      Official webSite: https://code-mphi.github.io/ECOGEN/
 //
 //  This file is part of ECOGEN.
 //
@@ -27,17 +28,12 @@
 //  along with ECOGEN (file LICENSE).  
 //  If not, see <http://www.gnu.org/licenses/>.
 
-//! \file      MUSGmshV4.cpp
-//! \author    J. Caze
-//! \version   1.0
-//! \date      November 26 2019
-
 #include "MUSGmshV4.h"
 #include <iterator>
 
 //***********************************************************************
 
-MUSGmshV4::MUSGmshV4(const std::string &meshFile, const std::string &meshExtension) : MUSGmsh(meshFile,meshExtension)
+MUSGmshV4::MUSGmshV4(const std::string& meshFile, const std::string& meshExtension) : MUSGmsh(meshFile,meshExtension)
 {}
 
 //***********************************************************************
@@ -124,7 +120,7 @@ void MUSGmshV4::initGeometryMonoCPU(TypeMeshContainer<Cell*>& cells, TypeMeshCon
 		facesBuff = new int* [m_numberFacesTotal + 1];
 		sumNodesBuff = new int[m_numberFacesTotal + 1];
 		// Determination of the maximum number of nodes for the faces 
-		int sizeFace; // Will be initialize at maximale size
+		int sizeFace(1); // Will be initialize at maximale size
 		if (m_numberElements3D != 0)
 		{
 			if (m_numberQuadrangles != 0) { sizeFace = 4; }
@@ -132,7 +128,6 @@ void MUSGmshV4::initGeometryMonoCPU(TypeMeshContainer<Cell*>& cells, TypeMeshCon
 			else { Errors::errorMessage("Issue in initGeometryMonoCPU for initialization of facesBuff array"); }
 		}
 		else if (m_numberElements2D != 0) { sizeFace = 2; }
-		else { sizeFace = 1; }
 		for (int i = 0; i < m_numberFacesTotal + 1; i++)
 		{
 			facesBuff[i] = new int[sizeFace];
@@ -141,33 +136,33 @@ void MUSGmshV4::initGeometryMonoCPU(TypeMeshContainer<Cell*>& cells, TypeMeshCon
 		// Inner faces
 		int indexMaxFaces(0);
 		clock_t tTemp(clock());
-		float t1(0.);
+		double t1(0.);
 		std::cout << "  1/Building faces ..." << std::endl;
-		int frequenceImpressure(std::max((m_numberElements - m_numberBoundFaces) / 10, 1));
+		int printFrequency(std::max((m_numberElements - m_numberBoundFaces) / 10, 1));
 		for (int i = m_numberBoundFaces; i < m_numberElements; i++)
 		{
-			if ((i - m_numberBoundFaces) % frequenceImpressure == 0) { std::cout << "    " << (100 * (i - m_numberBoundFaces) / (m_numberElements - m_numberBoundFaces)) << "% ... " << std::endl; }
+			if ((i - m_numberBoundFaces) % printFrequency == 0) { std::cout << "    " << (100 * (i - m_numberBoundFaces) / (m_numberElements - m_numberBoundFaces)) << "% ... " << std::endl; }
 			m_elements[i]->construitFaces(m_nodes, m_faces, indexMaxFaces, facesBuff, sumNodesBuff);
 		}
 		for (int i = 0; i < m_numberFacesTotal + 1; i++) { delete facesBuff[i]; }
 		delete[] facesBuff; delete[] sumNodesBuff;
-		tTemp = clock() - tTemp; t1 = static_cast<float>(tTemp) / CLOCKS_PER_SEC;
+		tTemp = clock() - tTemp; t1 = static_cast<double>(tTemp) / CLOCKS_PER_SEC;
 		std::cout << "    OK in " << t1 << " seconds" << std::endl;
 
 		// Boundaries
 		std::cout << "  2/Boundary elements attribution to boundary faces ..." << std::endl;
 		tTemp = clock();
-		frequenceImpressure = std::max(m_numberBoundFaces / 10, 1);
+		printFrequency = std::max(m_numberBoundFaces / 10, 1);
 		for (int i = 0; i < m_numberBoundFaces; i++)
 		{
-			if (i % frequenceImpressure == 0)
+			if (i % printFrequency == 0)
 			{
 				std::cout << "    " << (100 * i / m_numberBoundFaces) << "% ... " << std::endl;
 			}
 			// Assigning the boundary
-			m_elements[i]->attributFaceLimite(m_nodes, m_faces, indexMaxFaces);
+			m_elements[i]->attributFaceLimite(m_faces, indexMaxFaces);
 		}
-		tTemp = clock() - tTemp; t1 = static_cast<float>(tTemp) / CLOCKS_PER_SEC;
+		tTemp = clock() - tTemp; t1 = static_cast<double>(tTemp) / CLOCKS_PER_SEC;
 		std::cout << "    OK in " << t1 << " seconds" << std::endl;
 
 		// Link Geometry/cellInterfaces of compute
@@ -180,7 +175,7 @@ void MUSGmshV4::initGeometryMonoCPU(TypeMeshContainer<Cell*>& cells, TypeMeshCon
 			{
 				int appPhys(m_faces[i]->getElementDroite()->getAppartenancePhysique() - 1); // (appartenance - 1) for array starting at zero
 				if (appPhys >= static_cast<int>(m_bound.size()) || appPhys < 0) { Errors::errorMessage("Number of boundary conditions not suited"); }
-				m_bound[appPhys]->creeLimite(cellInterfaces);
+				m_bound[appPhys]->createBoundary(cellInterfaces);
 				cellInterfaces[i]->setFace(m_faces[i]);
 				iMailleG = m_faces[i]->getElementGauche()->getIndex() - m_numberBoundFaces;
 				iMailleD = iMailleG;
@@ -213,7 +208,7 @@ void MUSGmshV4::initGeometryMonoCPU(TypeMeshContainer<Cell*>& cells, TypeMeshCon
 //{
 //	ElementNS** elementsGlobal;
 //	Coord* nodesGlobal;
-//	int frequenceImpressure(0);
+//	int printFrequency(0);
 //	int numberNodesGlobal(0), numberElementsGlobal(0);
 //	int numberElements0D(0), numberElements1D(0), numberElements2D(0), numberElements3D(0);
 //
@@ -412,7 +407,7 @@ void MUSGmshV4::initGeometryMonoCPU(TypeMeshContainer<Cell*>& cells, TypeMeshCon
 //
 //		// 4) Reading nodes
 //		// ----------------
-//		meshFile.ignore(1, '\n');
+//		meshFile.ignore(10, '\n');
 //		getline(meshFile, currentLine);
 //		getline(meshFile, currentLine); // Skip keyword $EndPartitionedEntities
 //		getline(meshFile, currentLine); // Skip keyword $Nodes
@@ -541,7 +536,7 @@ void MUSGmshV4::readMeshMonoCPU()
 
 		// 2) Reading nodes
 		// ----------------
-		meshFile.ignore(1, '\n');
+		meshFile.ignore(10, '\n');
 		getline(meshFile, currentLine);
 		getline(meshFile, currentLine); // Skip keyword $EndEntities
 		getline(meshFile, currentLine); // Skip keyword $Nodes
@@ -573,7 +568,7 @@ void MUSGmshV4::readMeshMonoCPU()
 
 		// 3) Reading elements
 		// -------------------
-		meshFile.ignore(1, '\n');
+		meshFile.ignore(10, '\n');
 		getline(meshFile, currentLine); // Skip keyword $EndNodes 
 		getline(meshFile, currentLine); // Skip keyword $Elements
 		std::cout << "  3/0D/1D/2D/3D elements reading ..." << std::endl;
@@ -611,7 +606,7 @@ void MUSGmshV4::readMeshMonoCPU()
 
 void MUSGmshV4::readElement(const Coord* nodesTable, std::ifstream& meshFile, ElementNS** element, std::vector< std::map<int,int> >& entities, int entityDim, int entityTag, int eltType)
 {
-	int numberElement, numberPhysicEntity, numberGeometricEntity;
+	int numberElement, numberPhysicEntity(0), numberGeometricEntity;
 	meshFile >> numberElement;
 	
 	// Assigning tags to element thanks to entityDim, entityTag correspondance

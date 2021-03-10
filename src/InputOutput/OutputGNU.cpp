@@ -6,6 +6,7 @@
 //       |  `--.  \  `-.  \ `-' /   \  `-) ) |  `--.  | | |)| 
 //       /( __.'   \____\  )---'    )\____/  /( __.'  /(  (_) 
 //      (__)              (_)      (__)     (__)     (__)     
+//      Official webSite: https://code-mphi.github.io/ECOGEN/
 //
 //  This file is part of ECOGEN.
 //
@@ -27,11 +28,6 @@
 //  along with ECOGEN (file LICENSE).  
 //  If not, see <http://www.gnu.org/licenses/>.
 
-//! \file      OutputGNU.cpp
-//! \author    F. Petitpas, K. Schmidmayer
-//! \version   1.0
-//! \date      May 03 2018
-
 #include "OutputGNU.h"
 #include "../Run.h"
 
@@ -43,7 +39,7 @@ OutputGNU::OutputGNU(){}
 
 //***********************************************************************
 
-OutputGNU::OutputGNU(std::string casTest, std::string run, XMLElement *element, std::string fileName, Input *entree) :
+OutputGNU::OutputGNU(std::string casTest, std::string run, XMLElement* element, std::string fileName, Input *entree) :
   Output(casTest, run, element, fileName, entree)
 {
   m_fileNameVisu = "visualization.gnu";
@@ -56,7 +52,7 @@ OutputGNU::~OutputGNU(){}
 
 //***********************************************************************
 
-void OutputGNU::ecritSolution(Mesh *mesh, std::vector<Cell *> *cellsLvl)
+void OutputGNU::ecritSolution(Mesh *mesh, std::vector<Cell*>* cellsLvl)
 {
   try {
     std::ofstream fileStream;
@@ -76,7 +72,7 @@ void OutputGNU::ecritSolution(Mesh *mesh, std::vector<Cell *> *cellsLvl)
 
 //*********************************************************************** 
 
-void OutputGNU::ecritScriptGnuplot(const int &dim)
+void OutputGNU::ecritScriptGnuplot(const int& dim)
 {
   try {
     std::ofstream fileStream;
@@ -162,9 +158,30 @@ void OutputGNU::ecritScriptGnuplot(const int &dim)
 
 //***********************************************************************
 
+void OutputGNU::ecritScriptGnuplot(const std::string& varName)
+{
+  try {
+    std::ofstream fileStream;
+
+    fileStream.open((m_folderOutput + m_fileNameVisu).c_str());
+    if (!fileStream) { throw ErrorECOGEN("Cannot open the file " + m_folderOutput + m_fileNameVisu, __FILE__, __LINE__); }
+    fileStream << "reset" << std::endl << "set style data lines" << std::endl;
+    fileStream << "set nokey" << std::endl;
+    fileStream << std::endl;
+
+    fileStream << "set xlabel 't (s)'" << std::endl;
+    fileStream << "set title '" << varName << "'" << std::endl;
+
+    int index(2);
+    int dim(0);
+    printBlocGnuplot(fileStream, index, dim);
+  }
+  catch (ErrorECOGEN&) { throw; }
+}
+
 //***********************************************************************
 
-void OutputGNU::printBlocGnuplot(std::ofstream &fileStream, int &index, const int &dim)
+void OutputGNU::printBlocGnuplot(std::ofstream &fileStream, int& index, const int& dim)
 {
   try {
     if (dim <= 1) { fileStream << "plot"; }

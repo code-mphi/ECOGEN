@@ -6,6 +6,7 @@
 //       |  `--.  \  `-.  \ `-' /   \  `-) ) |  `--.  | | |)| 
 //       /( __.'   \____\  )---'    )\____/  /( __.'  /(  (_) 
 //      (__)              (_)      (__)     (__)     (__)     
+//      Official webSite: https://code-mphi.github.io/ECOGEN/
 //
 //  This file is part of ECOGEN.
 //
@@ -27,11 +28,6 @@
 //  along with ECOGEN (file LICENSE).  
 //  If not, see <http://www.gnu.org/licenses/>.
 
-//! \file      ElementQuadrangle.cpp
-//! \author    F. Petitpas
-//! \version   1.0
-//! \date      December 20 2017
-
 #include "ElementQuadrangle.h"
 
 const int ElementQuadrangle::TYPEGMSH = 3;
@@ -51,7 +47,7 @@ ElementQuadrangle::~ElementQuadrangle(){}
 
 //***********************************************************************
 
-void ElementQuadrangle::computeVolume(const Coord *noeuds)
+void ElementQuadrangle::computeVolume(const Coord* noeuds)
 {
   //une diagonale :
   Coord v0(noeuds[2] - noeuds[0]);
@@ -74,7 +70,7 @@ void ElementQuadrangle::computeVolume(const Coord *noeuds)
 
 //***********************************************************************
 
-void ElementQuadrangle::computeLCFL(const Coord *noeuds)
+void ElementQuadrangle::computeLCFL(const Coord* noeuds)
 {
   Coord vec; m_lCFL = 1e10;
   vec = ((noeuds[0] + noeuds[1]) / 2.) - m_position;
@@ -89,7 +85,7 @@ void ElementQuadrangle::computeLCFL(const Coord *noeuds)
 
 //***********************************************************************
 // Nouvelle version beaucoup plus efficace avec recherche dans tableau temporaire
-void ElementQuadrangle::construitFaces(const Coord *noeuds, FaceNS **faces, int &iMax, int** facesTemp, int* sommeNoeudsTemp)
+void ElementQuadrangle::construitFaces(const Coord* noeuds, FaceNS** faces, int& iMax, int** facesTemp, int* sommeNoeudsTemp)
 {
   //4 faces a traiter de type segment
   int indexFaceExiste(-1);
@@ -123,7 +119,7 @@ void ElementQuadrangle::construitFaces(const Coord *noeuds, FaceNS **faces, int 
 
 //***********************************************************************
 // Nouvelle version beaucoup plus efficace avec recherche dans tableau temporaire
-void ElementQuadrangle::construitFacesSimplifie(int &iMax, int** facesTemp, int* sommeNoeudsTemp)
+void ElementQuadrangle::construitFacesSimplifie(int& iMax, int** facesTemp, int* sommeNoeudsTemp)
 {
   //4 faces a traiter de type segment
   int indexFaceExiste(-1);
@@ -150,7 +146,7 @@ void ElementQuadrangle::construitFacesSimplifie(int &iMax, int** facesTemp, int*
 
 //***********************************************************************
 
-void ElementQuadrangle::attributFaceLimite(const Coord *noeuds, FaceNS **faces, const int &indexMaxFaces)
+void ElementQuadrangle::attributFaceLimite(FaceNS** faces, const int& indexMaxFaces)
 {
   int indexFaceExiste(0);
   FaceQuadrangle face(m_numNoeuds[0], m_numNoeuds[1], m_numNoeuds[2], m_numNoeuds[3]);
@@ -166,7 +162,7 @@ void ElementQuadrangle::attributFaceLimite(const Coord *noeuds, FaceNS **faces, 
 
 //***********************************************************************
 
-void ElementQuadrangle::attributFaceCommunicante(const Coord *noeuds, FaceNS **faces, const int &indexMaxFaces, const int &numberNoeudsInternes)
+void ElementQuadrangle::attributFaceCommunicante(FaceNS** faces, const int& indexMaxFaces, const int& numberNoeudsInternes)
 {
   int indexFaceExiste(0);
   //Verification face 1 :
@@ -213,7 +209,7 @@ void ElementQuadrangle::attributFaceCommunicante(const Coord *noeuds, FaceNS **f
 
 //***********************************************************************
 
-int ElementQuadrangle::compteFaceCommunicante(std::vector<int*> &facesTemp, std::vector<int> &sommeNoeudsTemp)
+int ElementQuadrangle::compteFaceCommunicante(std::vector<int*>& facesTemp, std::vector<int>& sommeNoeudsTemp)
 {
   //4 faces a traiter de type segment
   int indexFaceExiste(-1), numberFacesCommunicante(0);
@@ -242,7 +238,7 @@ int ElementQuadrangle::compteFaceCommunicante(std::vector<int*> &facesTemp, std:
 
 //***********************************************************************
 //Nouvelle version plus efficace
-int ElementQuadrangle::compteFaceCommunicante(int &iMax, int **facesTemp, int *sommeNoeudsTemp)
+int ElementQuadrangle::compteFaceCommunicante(int& iMax, int** facesTemp, int* sommeNoeudsTemp)
 {
   //4 faces a traiter de type segment
   int indexFaceExiste(-1), numberFacesCommunicante(0);

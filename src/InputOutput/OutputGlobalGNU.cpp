@@ -6,6 +6,7 @@
 //       |  `--.  \  `-.  \ `-' /   \  `-) ) |  `--.  | | |)| 
 //       /( __.'   \____\  )---'    )\____/  /( __.'  /(  (_) 
 //      (__)              (_)      (__)     (__)     (__)     
+//      Official webSite: https://code-mphi.github.io/ECOGEN/
 //
 //  This file is part of ECOGEN.
 //
@@ -27,12 +28,8 @@
 //  along with ECOGEN (file LICENSE).  
 //  If not, see <http://www.gnu.org/licenses/>.
 
-//! \file      OutputGlobalGNU.h
-//! \author    J. Caze
-//! \version   1.0
-//! \date      January 02 2020
-
 #include "OutputGlobalGNU.h"
+#include "../Config.h"
 
 //***************************************************************
 
@@ -41,7 +38,7 @@ OutputGlobalGNU::OutputGlobalGNU() : m_quantity(0.)
 
 //***************************************************************
 
-OutputGlobalGNU::OutputGlobalGNU(std::string casTest, std::string run, std::string fileName, Input *entree, std::string nameQuantity)
+OutputGlobalGNU::OutputGlobalGNU(std::string casTest, std::string run, Input *entree, std::string nameQuantity)
 {
 	try {
 		//Attributes settings
@@ -49,7 +46,7 @@ OutputGlobalGNU::OutputGlobalGNU(std::string casTest, std::string run, std::stri
 		m_simulationName = casTest;
 		m_fileNameResults = nameQuantity;
 		m_fileNameVisu = "visualization_" + m_fileNameResults + ".gnu";
-		m_folderOutput = "./results/" + run + "/globalQuantities/";
+		m_folderOutput = config.getWorkFolder() + "results/" + run + "/globalQuantities/";
 		m_folderScriptGnuplot = m_folderOutput;
 		m_donneesSeparees = 0;
 		m_numFichier = 0;
@@ -66,7 +63,25 @@ OutputGlobalGNU::~OutputGlobalGNU(){}
 
 //***************************************************************
 
-void OutputGlobalGNU::ecritSolution(Mesh* mesh, std::vector<Cell*>* cellsLvl)
+void OutputGlobalGNU::prepareSortieSpecifique()
+{
+	try {
+		// Creating output file
+		std::ofstream fileStream;
+		std::string file = m_folderOutput + creationNameFichierGNU(m_fileNameResults.c_str());
+		fileStream.open(file.c_str());
+		if (!fileStream) { throw ErrorECOGEN("Cannot open the file " + file, __FILE__, __LINE__); }
+		fileStream.close();
+		
+		// Gnuplot script printing for visualization
+		this->writeSpecificGnuplotScript();
+	}
+	catch (ErrorECOGEN&) { throw; }
+}
+
+//***************************************************************
+
+void OutputGlobalGNU::ecritSolution(Mesh* /*mesh*/, std::vector<Cell*>* cellsLvl)
 {
 	try {
 		this->extractTotalQuantity(cellsLvl);
@@ -74,7 +89,6 @@ void OutputGlobalGNU::ecritSolution(Mesh* mesh, std::vector<Cell*>* cellsLvl)
 			std::ofstream fileStream;
 			std::string file = m_folderOutput + creationNameFichierGNU(m_fileNameResults.c_str());
 			fileStream.open(file.c_str(), std::ios_base::app);
-			if (!fileStream) { throw ErrorECOGEN("Cannot open the file " + file, __FILE__, __LINE__); }
 			fileStream << m_run->m_physicalTime << " " << m_quantity << std::endl;
 			fileStream.close();
 		}
@@ -86,22 +100,15 @@ void OutputGlobalGNU::ecritSolution(Mesh* mesh, std::vector<Cell*>* cellsLvl)
 
 void OutputGlobalGNU::extractTotalQuantity(std::vector<Cell*>* cellsLvl)
 {
+	m_quantity = 0.;
 	if (m_fileNameResults == "mass") {
-		m_quantity = 0.;
 		for (unsigned int c = 0; c < cellsLvl[0].size(); c++) { cellsLvl[0][c]->computeTotalMass(m_quantity); }
-		if (Ncpu > 1) { parallel.computeMassTotal(m_quantity); }
 	}
-	else if (m_fileNameResults == "energy") { m_quantity = 0.; }
-}
-
-//***************************************************************
-
-void OutputGlobalGNU::prepareSortieSpecifique()
-{
-	try {
-		this->writeSpecificGnuplotScript();
+	else if (m_fileNameResults == "totalenergy") {
+		for (unsigned int c = 0; c < cellsLvl[0].size(); c++) { cellsLvl[0][c]->computeTotalEnergy(m_quantity); }
 	}
-	catch (ErrorECOGEN&) { throw; }
+	else { m_quantity = Errors::defaultDouble; }
+	if (Ncpu > 1) { parallel.computeSum(m_quantity); }
 }
 
 //***************************************************************
@@ -125,3 +132,5 @@ void OutputGlobalGNU::writeSpecificGnuplotScript()
 	}
 	catch (ErrorECOGEN&) { throw; }
 }
+
+//***************************************************************

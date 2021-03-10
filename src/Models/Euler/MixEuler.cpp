@@ -6,6 +6,7 @@
 //       |  `--.  \  `-.  \ `-' /   \  `-) ) |  `--.  | | |)| 
 //       /( __.'   \____\  )---'    )\____/  /( __.'  /(  (_) 
 //      (__)              (_)      (__)     (__)     (__)     
+//      Official webSite: https://code-mphi.github.io/ECOGEN/
 //
 //  This file is part of ECOGEN.
 //
@@ -27,11 +28,6 @@
 //  along with ECOGEN (file LICENSE).  
 //  If not, see <http://www.gnu.org/licenses/>.
 
-//! \file      MixEuler.cpp
-//! \author    K. Schmidmayer, F. Petitpas
-//! \version   1.0
-//! \date      December 19 2017
-
 #include <cmath>
 #include "MixEuler.h"
 
@@ -47,7 +43,7 @@ MixEuler::~MixEuler(){}
 
 //***************************************************************************
 
-void MixEuler::allocateAndCopyMixture(Mixture **mixture)
+void MixEuler::allocateAndCopyMixture(Mixture** mixture)
 {
   *mixture = new MixEuler(*this);
 }

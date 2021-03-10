@@ -6,6 +6,7 @@
 //       |  `--.  \  `-.  \ `-' /   \  `-) ) |  `--.  | | |)| 
 //       /( __.'   \____\  )---'    )\____/  /( __.'  /(  (_) 
 //      (__)              (_)      (__)     (__)     (__)     
+//      Official webSite: https://code-mphi.github.io/ECOGEN/
 //
 //  This file is part of ECOGEN.
 //
@@ -30,11 +31,6 @@
 #ifndef PHASEEULERHOMOGENEOUS_H
 #define PHASEEULERHOMOGENEOUS_H
 
-//! \file      PhaseEulerHomogeneous.h
-//! \author    F. Petitpas, K. Schmidmayer
-//! \version   1.1
-//! \date      June 5 2019
-
 #include "../Phase.h"
 #include "../../Eos/Eos.h"
 #include <fstream>
@@ -46,61 +42,56 @@ class PhaseEulerHomogeneous : public Phase
 public:
   PhaseEulerHomogeneous();
   //! \brief     Phase constructor from a XML format reading
-  //! \details   depreciated method / not used
-  PhaseEulerHomogeneous(double alpha, double density, Eos *eos);
-  //! \brief     Phase constructor from a XML format reading
   //! \details   Reading data from XML file under the following format:
   //!           ex:  <dataFluid alpha="0.5"/>
   //! \param     material           XML element to read for phase data
   //! \param     fileName           string name of readed XML file
-  PhaseEulerHomogeneous(tinyxml2::XMLElement *material, Eos *eos, std::string fileName);
+  PhaseEulerHomogeneous(tinyxml2::XMLElement* material, Eos* eos, std::string fileName);
   virtual ~PhaseEulerHomogeneous();
 
-  virtual void allocateAndCopyPhase(Phase **vecPhase);
-  virtual void copyPhase(Phase &vecPhase);
-  virtual void extendedCalculusPhase(const Coord &velocity);
-  virtual void computeMassFraction(const double &density);
+  virtual void allocateAndCopyPhase(Phase** vecPhase);
+  virtual void copyPhase(Phase& vecPhase);
+  virtual void extendedCalculusPhase(const Coord& velocity);
+  virtual void computeMassFraction(const double& density);
 
-  virtual void localProjection(const Coord &normal, const Coord &tangent, const Coord &binormal) {};
-  virtual void reverseProjection(const Coord &normal, const Coord &tangent, const Coord &binormal) {};
+  virtual void localProjection(const Coord& /*normal*/, const Coord& /*tangent*/, const Coord& /*binormal*/) {};
+  virtual void reverseProjection(const Coord& /*normal*/, const Coord& /*tangent*/, const Coord& /*binormal*/) {};
 
   //Specific methods for data printing
   //----------------------------------
   virtual int getNumberScalars() const { return 3; };
   virtual int getNumberVectors() const { return 0; };
-  virtual double returnScalar(const int &numVar) const;
-  virtual Coord returnVector(const int &numVar) const { return 0; };
-  virtual std::string returnNameScalar(const int &numVar) const;
-  virtual std::string returnNameVector(const int &numVar) const { return 0; };
+  virtual double returnScalar(const int& numVar) const;
+  virtual Coord returnVector(const int& /*numVar*/) const { return 0; };
+  virtual std::string returnNameScalar(const int& numVar) const;
+  virtual std::string returnNameVector(const int& /*numVar*/) const { return 0; };
 
   //Specific method for reading from file
   //-------------------------------------
-  virtual void setScalar(const int &numVar, const double &value);
+  virtual void setScalar(const int& numVar, const double& value);
 
   //Specific methods for parallel computing
   //---------------------------------------
   virtual int numberOfTransmittedVariables() const;
-  virtual void fillBuffer(double *buffer, int &counter) const;
-  virtual void fillBuffer(std::vector<double> &dataToSend) const;
-  virtual void getBuffer(double *buffer, int &counter, Eos **eos);
-  virtual void getBuffer(std::vector<double> &dataToReceive, int &counter, Eos **eos);
+  virtual void fillBuffer(double* buffer, int& counter) const;
+  virtual void getBuffer(double* buffer, int& counter, Eos** eos);
 
   //Specific methods for second order
   //---------------------------------
-  virtual void computeSlopesPhase(const Phase &sLeft, const Phase &sRight, const double &distance);
+  virtual void computeSlopesPhase(const Phase& sLeft, const Phase& sRight, const double& distance);
   virtual void setToZero();
-  virtual void extrapolate(const Phase &slope, const double &distance);
-  virtual void limitSlopes(const Phase &slopeGauche, const Phase &slopeDroite, Limiter &globalLimiter, Limiter &volumeFractionLimiter);
+  virtual void extrapolate(const Phase& slope, const double& distance);
+  virtual void limitSlopes(const Phase& slopeGauche, const Phase& slopeDroite, Limiter& /*globalLimiter*/, Limiter& volumeFractionLimiter);
 
   //Specific methods for parallele computing at second order
   //--------------------------------------------------------
   virtual int numberOfTransmittedSlopes() const;
-  virtual void fillBufferSlopes(double *buffer, int &counter) const;
-  virtual void getBufferSlopes(double *buffer, int &counter);
+  virtual void fillBufferSlopes(double* buffer, int& counter) const;
+  virtual void getBufferSlopes(double* buffer, int& counter);
 
   //Verifications
   //-------------
-  virtual void verifyPhase(const std::string &message = "") const;
+  virtual void verifyPhase(const std::string& message = "") const;
   virtual void verifyAndCorrectPhase();
 
   //Accessors
@@ -118,7 +109,7 @@ public:
   virtual void setAlpha(double alpha);
   virtual void setDensity(double density);
   virtual void setPressure(double pressure);
-  virtual void setEos(Eos *eos);
+  virtual void setEos(Eos* eos);
   virtual void setEnergy(double energie);
   virtual void setSoundSpeed(double soundSpeed);
   virtual void setTotalEnergy(double totalEnergy);
@@ -126,18 +117,18 @@ public:
   //Operators
   //---------
   virtual void changeSign();
-  virtual void multiplyAndAdd(const Phase &slopesPhasesTemp, const double &coeff);
-  virtual void divide(const double &coeff);
+  virtual void multiplyAndAdd(const Phase& slopesPhasesTemp, const double& coeff);
+  virtual void divide(const double& coeff);
 
 protected:
   double m_alpha;           //!< phase volume fraction
   double m_density;         //!< phase specific mass
   double m_pressure;        //!< phase pressure
   double m_Y;               //!< phase mass fraction
-  Eos *m_eos;               //!< pointer to phase equation of state
+  Eos* m_eos;               //!< pointer to phase equation of state
   double m_energie;         //!< phase internal energy
-  double m_soundSpeed;      //!< phase speed of sound
   double m_totalEnergy;     //!< phase total energy
+  double m_soundSpeed;      //!< phase speed of sound
 private:
 };
 

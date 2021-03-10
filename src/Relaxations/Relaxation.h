@@ -6,6 +6,7 @@
 //       |  `--.  \  `-.  \ `-' /   \  `-) ) |  `--.  | | |)| 
 //       /( __.'   \____\  )---'    )\____/  /( __.'  /(  (_) 
 //      (__)              (_)      (__)     (__)     (__)     
+//      Official webSite: https://code-mphi.github.io/ECOGEN/
 //
 //  This file is part of ECOGEN.
 //
@@ -30,11 +31,6 @@
 #ifndef RELAXATION_H
 #define RELAXATION_H
 
-//! \file      Relaxation.h
-//! \author    F. Petitpas, K. Schmidmayer
-//! \version   1.1
-//! \date      June 5 2019
-
 class Relaxation; //Predeclaration of class Relaxation to include Cell.h
 
 #include <string>
@@ -51,7 +47,15 @@ public:
   Relaxation();
   virtual ~Relaxation();
 
-  virtual void stiffRelaxation(Cell *cell, const int &numberPhases, Prim type = vecPhases) const { Errors::errorMessage("stiffRelaxation not available for required relaxation"); };
+  //! \brief     Stiff relaxation methods
+  //! \details   Call for this method computes the one of the stiff relaxation methods.
+  //! \param     cell           cell to relax
+  //! \param     numberPhases   number of phases
+  //! \param     type           enumeration allowing to relax either state in the cell or second order half time step state
+  virtual void relaxation(Cell* /*cell*/, const int& /*numberPhases*/, const double& /*dt*/, Prim /*type*/ = vecPhases) { Errors::errorMessage("relaxation not available for required relaxation"); };
+
+  //! \brief     Return the type of the corresponding relaxation method
+  virtual int getType() const { Errors::errorMessage("getType not available for required relaxation"); return 0; }
 
 private:
 };

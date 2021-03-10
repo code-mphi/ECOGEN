@@ -1,0 +1,11 @@
+<?xml version = "1.0" encoding = "UTF-8" standalone = "yes"?>
+<model>
+	<flowModel name="PressureVelocityEq" numberPhases="2" numberTransports="1" alphaNull="false"/>
+	<EOS name="IG_air.xml"/>
+	<EOS name="SG_liquidForSurfaceTensionCases.xml"/>
+	<transport name="color"/>
+	<additionalPhysic type="surfaceTension" >
+		<dataSurfaceTension transport="color" sigma="800."/>
+		<reinitializationTransport phase="SG_liquidForSurfaceTensionCases.xml"/>
+	</additionalPhysic>
+</model>

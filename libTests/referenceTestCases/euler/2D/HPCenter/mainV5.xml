@@ -2,13 +2,13 @@
 <computationParam>
 	<run>euler2DHPCenter</run>
 	<outputMode format="XML" binary="false" precision="10"/>
-<!-- 	<cut1D>
-	    <vertex x="0" y="0.5001" z="0.5"/>
+	<cut1D>
+		<vertex x="0" y="0.5001" z="0.5"/>
 		<vecDir x="1" y="0" z="0"/>
-	</cut1D> -->
+	</cut1D>
 	<timeControlMode iterations="false">
 		<iterations number="1" iterFreq="1"/>
-		<physicalTime totalTime="1.2e-3" timeFreq="1.2e-4"/>
+		<physicalTime totalTime="1.2e-3" timeFreq="2.4e-4"/>
 	</timeControlMode>
 	<computationControl CFL="0.8"/>
 	<secondOrder>

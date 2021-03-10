@@ -1,0 +1,20 @@
+<?xml version = "1.0" encoding = "UTF-8" standalone = "yes"?>
+<computationParam>
+	<run>pressureVelocityEq2DsurfaceTensionSquareToCircle</run>
+	<outputMode format="XML" binary="false"/>
+<!-- 	<cut1D>
+	    <vertex x="0" y="0.37501" z="0.375"/>
+		<vecDir x="1" y="0" z="0"/>
+	</cut1D> -->
+	<timeControlMode iterations="false">
+		<iterations number="20" iterFreq="1"/>
+		<physicalTime totalTime="1.e-1" timeFreq="5.e-3"/>
+	</timeControlMode>
+	<computationControl CFL="0.6"/>
+	<secondOrder>
+	  <globalLimiter>mc</globalLimiter>
+	  <interfaceLimiter>minmod</interfaceLimiter>                           
+	  <globalVolumeFractionLimiter>minmod</globalVolumeFractionLimiter>       
+	  <interfaceVolumeFractionLimiter>thinc</interfaceVolumeFractionLimiter>   
+	</secondOrder>
+</computationParam>

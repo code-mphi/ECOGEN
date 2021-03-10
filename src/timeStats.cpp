@@ -6,6 +6,7 @@
 //       |  `--.  \  `-.  \ `-' /   \  `-) ) |  `--.  | | |)| 
 //       /( __.'   \____\  )---'    )\____/  /( __.'  /(  (_) 
 //      (__)              (_)      (__)     (__)     (__)     
+//      Official webSite: https://code-mphi.github.io/ECOGEN/
 //
 //  This file is part of ECOGEN.
 //
@@ -26,11 +27,6 @@
 //  You should have received a copy of the GNU General Public License
 //  along with ECOGEN (file LICENSE).  
 //  If not, see <http://www.gnu.org/licenses/>.
-
-//! \file      timeStats.h
-//! \author    F. Petitpas, K. Schmidmayer
-//! \version   1.1
-//! \date      June 5 2019
 
 #include "timeStats.h"
 #include <iostream>
@@ -95,7 +91,7 @@ void timeStats::endCommunicationTime()
 
 //***********************************************************************
 
-void timeStats::setCompTime(const clock_t &compTime, const clock_t &AMRTime, const clock_t &comTime)
+void timeStats::setCompTime(const clock_t& compTime, const clock_t& AMRTime, const clock_t& comTime)
 {
   m_computationTime = compTime;
   m_AMRTime = AMRTime;
@@ -104,7 +100,7 @@ void timeStats::setCompTime(const clock_t &compTime, const clock_t &AMRTime, con
 
 //***********************************************************************
 
-void timeStats::printScreenStats(const int &numTest) const
+void timeStats::printScreenStats(const int& numTest) const
 {
   printScreenTime(m_computationTime, "Elapsed time", numTest);
   printScreenTime(m_AMRTime, "AMR time", numTest);
@@ -117,7 +113,7 @@ void timeStats::printScreenStats(const int &numTest) const
 
 //***********************************************************************
 
-void timeStats::printScreenTime(const clock_t &time, std::string chaine, const int &numTest) const
+void timeStats::printScreenTime(const clock_t& time, std::string chaine, const int& numTest) const
 {
   //Managing string size
   std::string timeName(" |     " + chaine.substr(0,18));
@@ -128,25 +124,24 @@ void timeStats::printScreenTime(const clock_t &time, std::string chaine, const i
 
   //printing time
   double convDouble = static_cast<double>(time) / CLOCKS_PER_SEC;
-  int convTime = static_cast<int>(convDouble);
-  int seconde(convTime);
-  if (seconde < 60)
+  int second = static_cast<int>(convDouble);
+  if (second < 60)
   {
     std::cout << "T" << numTest << timeName << convDouble << " s " << std::endl;
   }
   else
   {
-    int minute(seconde / 60);
-    seconde = seconde % 60;
+    int minute(second / 60);
+    second = second % 60;
     if (minute <60)
     {
-      std::cout << "T" << numTest << timeName << minute << " min " << seconde << " s " << std::endl;
+      std::cout << "T" << numTest << timeName << minute << " min " << second << " s " << std::endl;
     }
     else
     {
-      int heure(minute / 60);
+      int hour(minute / 60);
       minute = minute % 60;
-      std::cout << "T" << numTest << timeName << heure << " h " << minute << " min " << seconde << " s " << std::endl;
+      std::cout << "T" << numTest << timeName << hour << " h " << minute << " min " << second << " s " << std::endl;
     }
   }
 }

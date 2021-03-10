@@ -6,6 +6,7 @@
 //       |  `--.  \  `-.  \ `-' /   \  `-) ) |  `--.  | | |)| 
 //       /( __.'   \____\  )---'    )\____/  /( __.'  /(  (_) 
 //      (__)              (_)      (__)     (__)     (__)     
+//      Official webSite: https://code-mphi.github.io/ECOGEN/
 //
 //  This file is part of ECOGEN.
 //
@@ -27,16 +28,11 @@
 //  along with ECOGEN (file LICENSE).  
 //  If not, see <http://www.gnu.org/licenses/>.
 
-//! \file      MUSGmsh.h
-//! \author    J. Caze
-//! \version   1.0
-//! \date      November 20 2019
-
 #include "MUSGmsh.h"
 
 //***********************************************************************
 
-MUSGmsh::MUSGmsh(const std::string &meshFile, const std::string &meshExtension) : MeshUnStruct(meshFile,meshExtension)
+MUSGmsh::MUSGmsh(const std::string& meshFile, const std::string& meshExtension) : MeshUnStruct(meshFile,meshExtension)
 {}
 
 //***********************************************************************
@@ -45,10 +41,10 @@ MUSGmsh::~MUSGmsh() {}
 
 //***********************************************************************
 
-std::string MUSGmsh::readVersion(const std::string &meshFile)
+std::string MUSGmsh::readVersion(const std::string& meshFile)
 {
 	try {
-		std::string pathMeshFile("./libMeshes/" + meshFile);
+		std::string pathMeshFile(meshFile);
 		std::string currentLine;
 		std::ifstream mesh(pathMeshFile.c_str(), std::ios::in);
 		if (!mesh) { throw ErrorXML("mesh file not found : " + pathMeshFile, __FILE__, __LINE__); }

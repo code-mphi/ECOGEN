@@ -6,6 +6,7 @@
 //       |  `--.  \  `-.  \ `-' /   \  `-) ) |  `--.  | | |)| 
 //       /( __.'   \____\  )---'    )\____/  /( __.'  /(  (_) 
 //      (__)              (_)      (__)     (__)     (__)     
+//      Official webSite: https://code-mphi.github.io/ECOGEN/
 //
 //  This file is part of ECOGEN.
 //
@@ -27,21 +28,16 @@
 //  along with ECOGEN (file LICENSE).  
 //  If not, see <http://www.gnu.org/licenses/>.
 
-//! \file      GDSphere.cpp
-//! \author    F. Petitpas
-//! \version   1.0
-//! \date      December 19 2017
-
 #include "GDSphere.h"
 
 using namespace tinyxml2;
 
 //***************************************************************
 
-GDSphere::GDSphere(std::string name, std::vector<Phase*> vecPhases, Mixture *mixture, std::vector<Transport> vecTransports, XMLElement *element, const int &physicalEntity, std::string fileName) :
+GDSphere::GDSphere(std::string name, std::vector<Phase*> vecPhases, Mixture* mixture, std::vector<Transport> vecTransports, XMLElement* element, const int& physicalEntity, std::string fileName) :
 GeometricalDomain(name, vecPhases, mixture, vecTransports, physicalEntity)
 {
-  XMLElement *sousElement(element->FirstChildElement("dataSphere"));
+  XMLElement* sousElement(element->FirstChildElement("dataSphere"));
   if (sousElement == NULL) throw ErrorXMLElement("dataSphere", fileName, __FILE__, __LINE__);
   //Attributes reading
   //------------------
@@ -51,7 +47,7 @@ GeometricalDomain(name, vecPhases, mixture, vecTransports, physicalEntity)
   if (error != XML_NO_ERROR) throw ErrorXMLAttribut("radius", fileName, __FILE__, __LINE__);
   //center position
   double x(0.), y(0.), z(0.);
-  XMLElement *coin(sousElement->FirstChildElement("center"));
+  XMLElement* coin(sousElement->FirstChildElement("center"));
   if (coin == NULL) throw ErrorXMLElement("center", fileName, __FILE__, __LINE__);
   error = coin->QueryDoubleAttribute("x", &x);
   error = coin->QueryDoubleAttribute("y", &y);
@@ -65,7 +61,7 @@ GDSphere::~GDSphere(){}
 
 //***************************************************************
 
-bool GDSphere::belong(Coord &posElement, const int &lvl) const
+bool GDSphere::belong(Coord& posElement, const int& /*lvl*/) const
 {
   double sum;
   sum = std::pow(posElement.getX() - m_centerPos.getX(), 2.)

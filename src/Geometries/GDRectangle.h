@@ -6,6 +6,7 @@
 //       |  `--.  \  `-.  \ `-' /   \  `-) ) |  `--.  | | |)| 
 //       /( __.'   \____\  )---'    )\____/  /( __.'  /(  (_) 
 //      (__)              (_)      (__)     (__)     (__)     
+//      Official webSite: https://code-mphi.github.io/ECOGEN/
 //
 //  This file is part of ECOGEN.
 //
@@ -30,11 +31,6 @@
 #ifndef GDRECTANGLE_H
 #define GDRECTANGLE_H
 
-//! \file      GDRectangle.h
-//! \author    F. Petitpas
-//! \version   1.0
-//! \date      December 19 2017
-
 #include "GeometricalDomain.h"
 
 //! \class     GDRectangle
@@ -54,10 +50,10 @@ public:
   //! \param     element        XML element to read for geometrical properties
   //! \param     physicalEntity physical entity number relative to mesh generation (see mesh tool)
   //! \param     fileName       String name of readed XML file
-  GDRectangle(std::string name, std::vector<Phase*> vecPhases, Mixture *mixture, std::vector<Transport> vecTransports, tinyxml2::XMLElement *element, const int &physicalEntity, std::string fileName = "Fichier Inconnu");
+  GDRectangle(std::string name, std::vector<Phase*> vecPhases, Mixture* mixture, std::vector<Transport> vecTransports, tinyxml2::XMLElement* element, const int& physicalEntity, std::string fileName = "Fichier Inconnu");
   virtual ~GDRectangle();
 
-  virtual bool belong(Coord &posElement, const int &lvl) const;
+  virtual bool belong(Coord& posElement, const int& /*lvl*/) const;
 private:
   Coord m_posLeftBottom;       //!< Coordinates of left bottom corner (minimum positions in X, Y, Z)
   Axis m_axis1, m_axis2;          //!< Axes defining rectangle plane

@@ -6,6 +6,7 @@
 //       |  `--.  \  `-.  \ `-' /   \  `-) ) |  `--.  | | |)| 
 //       /( __.'   \____\  )---'    )\____/  /( __.'  /(  (_) 
 //      (__)              (_)      (__)     (__)     (__)     
+//      Official webSite: https://code-mphi.github.io/ECOGEN/
 //
 //  This file is part of ECOGEN.
 //
@@ -27,11 +28,6 @@
 //  along with ECOGEN (file LICENSE).  
 //  If not, see <http://www.gnu.org/licenses/>.
 
-//! \file      Mesh.cpp
-//! \author    F. Petitpas, K. Schmidmayer, S. Le Martelot, B. Dorschner
-//! \version   1.1
-//! \date      June 5 2019
-
 #include "Mesh.h"
 
 //***********************************************************************
@@ -47,7 +43,7 @@ Mesh::~Mesh() {}
 
 //***********************************************************************
 
-void Mesh::ecritSolutionGnuplot(std::vector<Cell *> *cellsLvl, std::ofstream &fileStream, GeometricObject *objet) const
+void Mesh::ecritSolutionGnuplot(std::vector<Cell*>* cellsLvl, std::ofstream &fileStream, GeometricObject *objet) const
 {
   for (unsigned int c = 0; c < cellsLvl[0].size(); c++) {
     if (cellsLvl[0][c]->printGnuplotAMR(fileStream, m_geometrie, objet)) break;
@@ -58,7 +54,7 @@ void Mesh::ecritSolutionGnuplot(std::vector<Cell *> *cellsLvl, std::ofstream &fi
 //****************************** Parallele ***********************************
 //****************************************************************************
 
-void Mesh::initializePersistentCommunications(const int numberPhases, const int numberTransports, const TypeMeshContainer<Cell *> &cells, std::string ordreCalcul)
+void Mesh::initializePersistentCommunications(const int numberPhases, const int numberTransports, const TypeMeshContainer<Cell*>& cells, std::string ordreCalcul)
 {
 	m_numberPhases = numberPhases;
 	m_numberTransports = numberTransports;
@@ -78,7 +74,7 @@ void Mesh::initializePersistentCommunications(const int numberPhases, const int 
 
 //***********************************************************************
 
-void Mesh::finalizeParallele(const int &lvlMax)
+void Mesh::finalizeParallele(const int& lvlMax)
 {
 	parallel.finalize(lvlMax);
 }

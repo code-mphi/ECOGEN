@@ -6,6 +6,7 @@
 //       |  `--.  \  `-.  \ `-' /   \  `-) ) |  `--.  | | |)| 
 //       /( __.'   \____\  )---'    )\____/  /( __.'  /(  (_) 
 //      (__)              (_)      (__)     (__)     (__)     
+//      Official webSite: https://code-mphi.github.io/ECOGEN/
 //
 //  This file is part of ECOGEN.
 //
@@ -27,21 +28,12 @@
 //  along with ECOGEN (file LICENSE).  
 //  If not, see <http://www.gnu.org/licenses/>.
 
-//! \file      GOVertex.cpp
-//! \author    F. Petitpas
-//! \version   1.0
-//! \date      June 6 2018
-
 #include "GOVertex.h"
 #include <iostream>
 
 //***********************************************************************
 
-GOVertex::GOVertex(){}
-
-//***********************************************************************
-
-GOVertex::GOVertex(const Coord &vertex) :
+GOVertex::GOVertex(const Coord& vertex) :
   GeometricObject(VERTEX), m_point(vertex)
 {}
 
@@ -51,7 +43,7 @@ GOVertex::~GOVertex(){}
 
 //***********************************************************************
 
-double GOVertex::distancePoint(const Coord &vertex) const
+double GOVertex::distancePoint(const Coord& vertex) const
 {
   Coord vec; vec.setFromSubtractedVectors(m_point, vertex);
   return  vec.norm();

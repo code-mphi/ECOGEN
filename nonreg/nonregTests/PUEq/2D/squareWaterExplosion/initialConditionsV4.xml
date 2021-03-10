@@ -1,0 +1,48 @@
+<?xml version = "1.0" encoding = "UTF-8" standalone = "yes"?>
+<CI>
+    <!-- LIST OF GEOMETRICAL DOMAINS  -->
+    <physicalDomains> 
+        <domain name="base" state="air" type="entireDomain"/>
+        <domain name="square"  state="waterSquare" type="rectangle">
+            <dataRectangle axis1="x" axis2="y" lAxis1="0.2" lAxis2="0.2">
+                <posInferiorVertex x="0.4" y="0.4" z="0."/>
+            </dataRectangle>
+        </domain>
+    </physicalDomains>
+
+    <!-- LIST OF BOUNDARY CONDITIONS -->
+    <boundaryConditions>
+        <boundCond name="CLXm" type="nonReflecting" number="1"/>
+        <boundCond name="CLXp" type="nonReflecting" number="2"/>
+        <boundCond name="CLYm" type="nonReflecting" number="3"/>
+        <boundCond name="CLYp" type="nonReflecting" number="4"/>
+    </boundaryConditions>
+    
+    <!--  LIST OF STATES  -->
+    <state name="air">
+        <material type="fluid" EOS="IG_air.xml">
+            <dataFluid alpha="0.999999" density="1.2"/>
+        </material>
+        <material type="fluid" EOS="SG_water.xml">
+            <dataFluid alpha="0.000001" density="1000.0"/>
+        </material>
+        <mixture>
+            <dataMix pressure = "1.e5"/>
+            <velocity x="0." y="0." z="0."/>
+        </mixture>
+    </state>
+
+    <state name="waterSquare">
+        <material type="fluid" EOS="IG_air.xml">
+            <dataFluid alpha="0.000001" density="1.2"/>
+        </material>
+        <material type="fluid" EOS="SG_water.xml">
+            <dataFluid alpha="0.999999" density="1000.0"/>
+        </material>
+        <mixture>
+            <dataMix pressure = "1.e8"/>
+            <velocity x="0." y="0." z="0."/>
+        </mixture>
+    </state>
+
+</CI>

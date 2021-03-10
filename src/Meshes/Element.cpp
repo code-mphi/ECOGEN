@@ -6,6 +6,7 @@
 //       |  `--.  \  `-.  \ `-' /   \  `-) ) |  `--.  | | |)| 
 //       /( __.'   \____\  )---'    )\____/  /( __.'  /(  (_) 
 //      (__)              (_)      (__)     (__)     (__)     
+//      Official webSite: https://code-mphi.github.io/ECOGEN/
 //
 //  This file is part of ECOGEN.
 //
@@ -26,11 +27,6 @@
 //  You should have received a copy of the GNU General Public License
 //  along with ECOGEN (file LICENSE).  
 //  If not, see <http://www.gnu.org/licenses/>.
-
-//! \file      Element.cpp
-//! \author    F. Petitpas, K. Schmidmayer, S. Le Martelot, B. Dorschner
-//! \version   1.1
-//! \date      June 5 2019
 
 #include "Element.h"
 
@@ -154,7 +150,7 @@ bool Element::traverseObjet(const GeometricObject &objet) const
 //*********************** Parallel load balancing ***********************
 //***********************************************************************
 
-void Element::setKey(const decomposition::Key<3> &key)
+void Element::setKey(const decomposition::Key<3>& key)
 {
   m_key = key;
 }

@@ -6,6 +6,7 @@
 //       |  `--.  \  `-.  \ `-' /   \  `-) ) |  `--.  | | |)| 
 //       /( __.'   \____\  )---'    )\____/  /( __.'  /(  (_) 
 //      (__)              (_)      (__)     (__)     (__)     
+//      Official webSite: https://code-mphi.github.io/ECOGEN/
 //
 //  This file is part of ECOGEN.
 //
@@ -27,11 +28,6 @@
 //  along with ECOGEN (file LICENSE).  
 //  If not, see <http://www.gnu.org/licenses/>.
 
-//! \file      SymmetrySpherical.cpp
-//! \author    K. Schmidmayer
-//! \version   1.0
-//! \date      December 20 2017
-
 #include "SymSpherical.h"
 
 using namespace tinyxml2;
@@ -45,9 +41,9 @@ SymSpherical::SymSpherical() {}
 *  Spherical symmetry constructor from a read in XML format
 *  ex : <dataSymSpher radialAxis="X"/>
 */
-SymSpherical::SymSpherical(XMLElement *element, std::string nameFile)
+SymSpherical::SymSpherical(XMLElement* element, std::string nameFile)
 {
-  XMLElement *sousElement(element->FirstChildElement("dataSymSpher"));
+  XMLElement* sousElement(element->FirstChildElement("dataSymSpher"));
   if (sousElement == NULL) throw ErrorXMLElement("dataSymSpher", nameFile, __FILE__, __LINE__);
   //Attributes collecting
   //---------------------
@@ -66,7 +62,7 @@ SymSpherical::~SymSpherical() {}
 
 //***********************************************************************
 
-void SymSpherical::addSymmetricTerms(Cell *cell, const int &numberPhases, Prim type)
+void SymSpherical::addSymmetricTerms(Cell* cell, const int& numberPhases, Prim type)
 {
   double r(0.), v(0.);
   if (numberPhases > 1) {

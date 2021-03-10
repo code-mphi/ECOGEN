@@ -6,6 +6,7 @@
 //       |  `--.  \  `-.  \ `-' /   \  `-) ) |  `--.  | | |)| 
 //       /( __.'   \____\  )---'    )\____/  /( __.'  /(  (_) 
 //      (__)              (_)      (__)     (__)     (__)     
+//      Official webSite: https://code-mphi.github.io/ECOGEN/
 //
 //  This file is part of ECOGEN.
 //
@@ -26,11 +27,6 @@
 //  You should have received a copy of the GNU General Public License
 //  along with ECOGEN (file LICENSE).  
 //  If not, see <http://www.gnu.org/licenses/>.
-
-//! \file      CellO2Ghost.cpp
-//! \author    F. Petitpas, K. Schmidmayer, B. Dorschner
-//! \version   1.1
-//! \date      June 5 2019
 
 #include "CellO2Ghost.h"
 
@@ -69,7 +65,7 @@ void CellO2Ghost::pushBackSlope()
 
 //***********************************************************************
 
-void CellO2Ghost::allocate(const int &numberPhases, const int &numberTransports, const std::vector<AddPhys*> &addPhys, Model *model)
+void CellO2Ghost::allocate(const int& numberPhases, const int& numberTransports, const std::vector<AddPhys*>& addPhys, Model* model)
 {
   m_numberPhases = numberPhases;
   m_numberTransports = numberTransports;
@@ -122,7 +118,9 @@ void CellO2Ghost::setRankOfNeighborCPU(int rank)
 
 //***********************************************************************
 
-void CellO2Ghost::computeLocalSlopes(const int &numberPhases, const int &numberTransports, CellInterface &cellInterfaceRef, Limiter &globalLimiter, Limiter &interfaceLimiter, Limiter &globalVolumeFractionLimiter, Limiter &interfaceVolumeFractionLimiter, double &alphaCellAfterOppositeSide, double &alphaCell, double &alphaCellOtherInterfaceSide, double &epsInterface)
+void CellO2Ghost::computeLocalSlopes(const int& numberPhases, const int& numberTransports, CellInterface& cellInterfaceRef,
+	Limiter& globalLimiter, Limiter& interfaceLimiter, Limiter& globalVolumeFractionLimiter, Limiter& interfaceVolumeFractionLimiter,
+	double& alphaCellAfterOppositeSide, double& alphaCell, double& alphaCellOtherInterfaceSide, double& epsInterface)
 {
 	//Find the corresponding slopes store inside this ghost cell
 	//----------------------------------------------------------
@@ -222,7 +220,7 @@ void CellO2Ghost::computeLocalSlopes(const int &numberPhases, const int &numberT
 
 //***********************************************************************
 
-void CellO2Ghost::createChildCell(const int &lvl)
+void CellO2Ghost::createChildCell(const int& lvl)
 {
 	m_childrenCells.push_back(new CellO2Ghost(lvl + 1));
 	m_childrenCells.back()->setRankOfNeighborCPU(m_rankOfNeighborCPU);
@@ -231,7 +229,7 @@ void CellO2Ghost::createChildCell(const int &lvl)
 
 //***********************************************************************
 
-void CellO2Ghost::getBufferSlopes(double *buffer, int &counter, const int &lvl)
+void CellO2Ghost::getBufferSlopes(double* buffer, int& counter, const int& lvl)
 {
 	if (m_lvl == lvl) {
 		for (unsigned int s = 0; s < m_vecPhasesSlopesGhost.size(); s++) {

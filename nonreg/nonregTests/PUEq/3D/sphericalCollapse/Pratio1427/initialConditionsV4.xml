@@ -1,0 +1,50 @@
+<?xml version = "1.0" encoding = "UTF-8" standalone = "yes"?>
+<CI>
+    <!-- LIST OF GEOMETRICAL DOMAINS  -->
+    <physicalDomains> 
+        <domain name="base" state="chamber" type="entireDomainWithParticularities"/>
+        <domain name="bubble"  state="airBubble" type="Sphere">
+            <dataSphere radius="100.e-6">
+                <center x="0." y="0." z="0."/>
+            </dataSphere>
+        </domain>
+    </physicalDomains>
+
+    <!-- LIST OF BOUNDARY CONDITIONS -->
+    <boundaryConditions>
+        <boundCond name="CLXm" type="symmetry" number="1"/>
+        <boundCond name="CLXp" type="nonReflecting" number="2"/>
+        <boundCond name="CLYm" type="symmetry" number="3"/>
+        <boundCond name="CLYp" type="nonReflecting" number="4"/>
+        <boundCond name="CLZm" type="symmetry" number="5"/>
+        <boundCond name="CLZp" type="nonReflecting" number="6"/>
+    </boundaryConditions>
+    
+    <!--  LIST OF STATES  -->
+    <state name="chamber">
+        <material type="fluid" EOS="SG_water_cavitation.xml">
+            <dataFluid alpha="1." density="1000."/>
+        </material>
+        <material type="fluid" EOS="IG_air.xml">
+            <dataFluid alpha="0." density="4.837"/>
+        </material>
+        <mixture>
+            <dataMix pressure = "50.6625e5"/>
+            <velocity x="0." y="0." z="0."/>
+        </mixture>
+    </state>
+
+    <state name="airBubble">
+        <material type="fluid" EOS="SG_water_cavitation.xml">
+            <dataFluid alpha="0." density="1000."/>
+        </material>
+        <material type="fluid" EOS="IG_air.xml">
+            <dataFluid alpha="1." density="0.027"/>
+        </material>
+        <mixture>
+            <dataMix pressure = "3.55e3"/>
+            <velocity x="0." y="0." z="0."/>
+        </mixture>
+    </state>
+
+</CI>

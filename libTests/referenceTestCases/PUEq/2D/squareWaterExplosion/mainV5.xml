@@ -1,0 +1,15 @@
+<?xml version = "1.0" encoding = "UTF-8" standalone = "yes"?>
+<computationParam>
+	<run>pressureVelocityEq2DsquareWaterExplosion</run>
+	<outputMode format="XML" binary="false"/>
+	<timeControlMode iterations="false">
+		<iterations number="1" iterFreq="1"/>
+		<physicalTime totalTime="1.e-3" timeFreq="2.e-4"/>
+	</timeControlMode>
+	<computationControl CFL="0.8"/>
+  <secondOrder>
+    <globalLimiter>minmod</globalLimiter>
+    <globalVolumeFractionLimiter>vanalbada</globalVolumeFractionLimiter>
+    <interfaceVolumeFractionLimiter>vanalbada</interfaceVolumeFractionLimiter>
+  </secondOrder>
+</computationParam>

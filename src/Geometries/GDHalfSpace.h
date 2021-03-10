@@ -6,6 +6,7 @@
 //       |  `--.  \  `-.  \ `-' /   \  `-) ) |  `--.  | | |)| 
 //       /( __.'   \____\  )---'    )\____/  /( __.'  /(  (_) 
 //      (__)              (_)      (__)     (__)     (__)     
+//      Official webSite: https://code-mphi.github.io/ECOGEN/
 //
 //  This file is part of ECOGEN.
 //
@@ -30,11 +31,6 @@
 #ifndef GDHALFSPACE_H
 #define GDHALFSPACE_H
 
-//! \file      GDHalfSpace.h
-//! \author    F. Petitpas, K. Schmidmayer
-//! \version   1.1
-//! \date      June 5 2019
-
 #include "GeometricalDomain.h"
 
 //! \class     GDHalfSpace
@@ -51,11 +47,11 @@ class GDHalfSpace : public GeometricalDomain
     //! \param     element        XML element to read for geometrical properties
     //! \param     physicalEntity physical entity number relative to mesh generation (see mesh tool)
     //! \param     fileName       String name of readed XML file
-    GDHalfSpace(std::string name, std::vector<Phase*> vecPhases, Mixture *mixture, std::vector<Transport> vecTransports, tinyxml2::XMLElement *element, const int &physicalEntity, std::string fileName="Fichier Inconnu");
+    GDHalfSpace(std::string name, std::vector<Phase*> vecPhases, Mixture* mixture, std::vector<Transport> vecTransports, tinyxml2::XMLElement* element, const int& physicalEntity, std::string fileName="Fichier Inconnu");
     virtual ~GDHalfSpace();
 
-    virtual bool belong(Coord &posElement, const int &lvl) const;
-    virtual void fillIn(Cell *cell, const int &numberPhases, const int &numberTransports) const;
+    virtual bool belong(Coord& posElement, const int& /*lvl*/) const;
+    virtual void fillIn(Cell* cell, const int& numberPhases, const int& numberTransports) const;
 
   private:
     double m_position;  //!< Origin of the half space along axis

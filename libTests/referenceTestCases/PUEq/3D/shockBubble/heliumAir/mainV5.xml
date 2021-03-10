@@ -1,0 +1,14 @@
+<?xml version='1.0' encoding='UTF-8' standalone='yes'?>
+<computationParam>
+  <run>pressureVelocityEq3DairShockHeliumBubble</run>
+  <outputMode format="XML" binary="false"/>
+  <timeControlMode iterations="false">
+    <iterations iterFreq="10" number="100"/>
+    <physicalTime totalTime="350.e-6" timeFreq="700.e-7"/>
+  </timeControlMode>
+  <computationControl CFL="0.8"/>
+  <secondOrder>
+    <globalLimiter>vanleer</globalLimiter>
+    <interfaceVolumeFractionLimiter>thinc</interfaceVolumeFractionLimiter>
+  </secondOrder>
+</computationParam>

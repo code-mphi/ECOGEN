@@ -6,6 +6,7 @@
 //       |  `--.  \  `-.  \ `-' /   \  `-) ) |  `--.  | | |)| 
 //       /( __.'   \____\  )---'    )\____/  /( __.'  /(  (_) 
 //      (__)              (_)      (__)     (__)     (__)     
+//      Official webSite: https://code-mphi.github.io/ECOGEN/
 //
 //  This file is part of ECOGEN.
 //
@@ -30,11 +31,6 @@
 #ifndef OUTPUTPROBEGNU_H
 #define OUTPUTPROBEGNU_H
 
-//! \file      OutputProbeGNU.h
-//! \author    F. Petitpas, K. Schmidmayer
-//! \version   1.0
-//! \date      February 13 2019
-
 #include "OutputGNU.h"
 #include "../Maths/GOLine.h"
 #include "../Maths/GOPlan.h"
@@ -45,10 +41,9 @@
 class OutputProbeGNU : public OutputGNU
 {
 public:
-  OutputProbeGNU();
   //! \brief     Probe output constructor from a XML format reading
   //! \details   Reading data from XML file under the following format:
-  //!            ex: 	<probe name="capteur1">
+  //!            ex: 	<probe name="sensor1">
   //!                   <vertex x = "0.3" y = "0.05" z = "0.05" / >
   //!                   <timeControl acqFreq = "1e-5." / >       <!-- if negative or nul, recording at each time step-->
   //!                 </probe>
@@ -57,29 +52,28 @@ public:
   //! \param     element           XML element to read for probe data
   //! \param     fileName          string name of readed XML file
   //! \param     entree            Pointer to corresponding run entry object
-  OutputProbeGNU(std::string casTest, std::string run, tinyxml2::XMLElement *element, std::string fileName, Input *entree);
+  OutputProbeGNU(std::string casTest, std::string run, tinyxml2::XMLElement* element, std::string fileName, Input *entree);
   virtual ~OutputProbeGNU();
 
-  virtual void locateProbeInMesh(const TypeMeshContainer<Cell *> &cells, const int &nbCells, bool localSeeking = false);
-  virtual Cell* locateProbeInAMRSubMesh(std::vector<Cell*>* cells, const int &nbCells);
+  virtual void locateProbeInMesh(const TypeMeshContainer<Cell*>& cells, const int& nbCells, bool localSeeking = false);
+  virtual Cell* locateProbeInAMRSubMesh(std::vector<Cell*>* cells, const int& nbCells);
 
   virtual void prepareSortieSpecifique();
-  virtual void ecritSolution(Mesh *mesh, std::vector<Cell *> *cellsLvl);
+  virtual void ecritSolution(Mesh* /*mesh*/, std::vector<Cell*>* /*cellsLvl*/);
 
   virtual void prepareOutputInfos() {}; //nothing to print
   virtual void ecritInfos() {};
 
   //Accessors
   virtual double getNextTime() { return m_nextAcq; };
-  virtual bool possesses() { return m_possessesProbe; };
-
+  virtual bool possesses() { return m_possessesProbe[rankCpu]; };
 
 private:
   double m_acqFreq;           //!< Acquisition time frequency
   double m_nextAcq;           //!< Next acquisition time
-  Cell *m_cell;               //!< Pointer to the level 0 cell containing the probe
+  Cell* m_cell;               //!< Pointer to the level 0 cell containing the probe
   GeometricObject *m_objet;   //!< To store position
-  bool m_possessesProbe;      //!< True if the CPU possesses probe
+  bool* m_possessesProbe;      //!< True if the CPU possesses probe
 };
 
 #endif //OUTPUTPROBEGNU_H

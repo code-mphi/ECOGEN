@@ -1,0 +1,17 @@
+<?xml version = "1.0" encoding = "UTF-8" standalone = "yes"?>
+<computationParam>
+	<run>euler3DLPCenter</run>
+	<outputMode format="XML" binary="false"/>
+	<cut2D>
+		<vertex x="0.5" y="0.5001" z="0.5"/>
+		<vecNormal x="1" y="0" z="0"/>
+	</cut2D>
+	<timeControlMode iterations="true">
+<iterations number="10" iterFreq="10"/>
+		<physicalTime totalTime="1.2e-3" timeFreq="2.4e-4"/>
+	</timeControlMode>
+	<computationControl CFL="0.3"/>
+	<secondOrder>
+		<globalLimiter>vanleer</globalLimiter>
+	</secondOrder>
+</computationParam>

@@ -6,6 +6,7 @@
 //       |  `--.  \  `-.  \ `-' /   \  `-) ) |  `--.  | | |)| 
 //       /( __.'   \____\  )---'    )\____/  /( __.'  /(  (_) 
 //      (__)              (_)      (__)     (__)     (__)     
+//      Official webSite: https://code-mphi.github.io/ECOGEN/
 //
 //  This file is part of ECOGEN.
 //
@@ -27,20 +28,16 @@
 //  along with ECOGEN (file LICENSE).  
 //  If not, see <http://www.gnu.org/licenses/>.
 
-//! \file      BoundCondWallO2.cpp
-//! \author    F. Petitpas, K. Schmidmayer
-//! \version   1.1
-//! \date      June 5 2019
-
 #include "BoundCondWallO2.h"
 
 //****************************************************************************
 
-BoundCondWallO2::BoundCondWallO2() {}
+BoundCondWallO2::BoundCondWallO2(const BoundCondWallO2& Source, const int& lvl) : BoundCondWall(Source, lvl)
+{}
 
 //****************************************************************************
 
-BoundCondWallO2::BoundCondWallO2(const BoundCondWallO2& Source, const int lvl) : BoundCondWall(Source, lvl)
+BoundCondWallO2::BoundCondWallO2(int numPhysique, tinyxml2::XMLElement* element, std::string fileName) : BoundCondWall(numPhysique, element, fileName)
 {}
 
 //****************************************************************************
@@ -62,21 +59,21 @@ BoundCondWallO2::~BoundCondWallO2()
 
 //****************************************************************************
 
-void BoundCondWallO2::creeLimite(TypeMeshContainer<CellInterface *> &cellInterfaces)
+void BoundCondWallO2::createBoundary(TypeMeshContainer<CellInterface*>& cellInterfaces)
 {
   cellInterfaces.push_back(new BoundCondWallO2(*(this)));
 }
 
 //***********************************************************************
 
-void BoundCondWallO2::allocateSlopes(const int &numberPhases, const int &numberTransports, int &allocateSlopeLocal)
+void BoundCondWallO2::allocateSlopes(const int& numberPhases, const int& numberTransports, int& /*allocateSlopeLocal*/)
 {
   m_numberPhases = numberPhases;
 
-  //Allocation des slopes des phases
+  //Allocation of phase slopes
   m_vecPhasesSlopes = new Phase*[numberPhases];
   //On attribut les phases a partir de la cell a gauche (car cell a droite inexistante pour les limites)
-  //Necessaire car il faut connaitre le type de phase (ex: PhaseKapila, etc.))
+  //Necessaire car il faut connaitre le type de phase (ex: PhasePUEq, etc.))
   //Ensuite on met a zero toutes les slopes
   for (int k = 0; k < numberPhases; k++) {
     m_cellLeft->getPhase(k)->allocateAndCopyPhase(&m_vecPhasesSlopes[k]);
@@ -94,7 +91,7 @@ void BoundCondWallO2::allocateSlopes(const int &numberPhases, const int &numberT
 
 //***********************************************************************
 
-void BoundCondWallO2::computeSlopes(const int &numberPhases, const int &numberTransports, Prim type)
+void BoundCondWallO2::computeSlopes(const int& numberPhases, const int& /*numberTransports*/, Prim type)
 {
   //Slopes des velocities normals aux limites
   double distanceX, distanceY, distanceZ;
@@ -123,14 +120,14 @@ void BoundCondWallO2::computeSlopes(const int &numberPhases, const int &numberTr
 
 //***********************************************************************
 
-void BoundCondWallO2::solveRiemann(const int &numberPhases, const int &numberTransports, double &dtMax, Limiter &globalLimiter, Limiter &interfaceLimiter, Limiter &globalVolumeFractionLimiter, Limiter &interfaceVolumeFractionLimiter, Prim type)
+void BoundCondWallO2::solveRiemann(const int& numberPhases, const int& numberTransports, double& dtMax, Limiter& globalLimiter, Limiter& interfaceLimiter, Limiter& globalVolumeFractionLimiter, Limiter& interfaceVolumeFractionLimiter, Prim type)
 {
   cellLeft->copyVec(m_cellLeft->getPhases(type), m_cellLeft->getMixture(type), m_cellLeft->getTransports(type));
 
   //Calcul des distances cell interfaces <-> cells pour l extrapolation
   double distanceGauche(this->distance(m_cellLeft));
   //KS//FP// A voir avec Fabien comment faire ca bien pour qu'il n'y est aucun probleme en non-structure !
-  //Probleme que la distance est une norm et donc on ne change pas le signe de la slope pour faire correctement l'extrapolation
+  //Probleme que la distance est une norme et donc on ne change pas le signe de la slope pour faire correctement l'extrapolation
   if (m_face->getNormal().getX() < 0. || m_face->getNormal().getY() < 0. || m_face->getNormal().getZ() < 0.) { distanceGauche = -distanceGauche; }
 
   //Extrapolation gauche
@@ -149,20 +146,20 @@ void BoundCondWallO2::solveRiemann(const int &numberPhases, const int &numberTra
   //Calcul des variables etendus (Phases, Mixture, AddPhys)
   cellLeft->fulfillState();
 
-  //Probleme de Riemann
+  //Riemann problem
   double dxLeft(m_cellLeft->getElement()->getLCFL());
   dxLeft = dxLeft*std::pow(2., (double)m_lvl);
-  this->solveRiemannLimite(*cellLeft, numberPhases, dxLeft, dtMax);
-  //Traitement des fonctions de transport (m_Sm connu : doit etre place apres l appel au Solveur de Riemann)
-  if (numberTransports > 0) { this->solveRiemannTransportLimite(*cellLeft, numberTransports); }
+  this->solveRiemannBoundary(*cellLeft, numberPhases, dxLeft, dtMax);
+  //Handling of transport functions (m_Sm known: need to be called after Riemann solver)
+  if (numberTransports > 0) { this->solveRiemannTransportBoundary(*cellLeft, numberTransports); }
 
-  //Projection du flux sur le repere absolu
+  //Flux projection on absolute reference frame
   m_mod->reverseProjection(m_face->getNormal(), m_face->getTangent(), m_face->getBinormal());
 }
 
 //***********************************************************************
 
-Phase* BoundCondWallO2::getSlopesPhase(const int &phaseNumber) const
+Phase* BoundCondWallO2::getSlopesPhase(const int& phaseNumber) const
 {
   return m_vecPhasesSlopes[phaseNumber];
 }
@@ -176,15 +173,15 @@ Mixture* BoundCondWallO2::getSlopesMixture() const
 
 //***********************************************************************
 
-Transport* BoundCondWallO2::getSlopesTransport(const int &numberTransport) const
+Transport* BoundCondWallO2::getSlopesTransport(const int& numberTransport) const
 {
   return &m_vecTransportsSlopes[numberTransport];
 }
 
 
-//****************************************************************************
-//******************************Methode AMR***********************************
-//****************************************************************************
+//***************************************************************************
+//******************************AMR Method***********************************
+//***************************************************************************
 
 void BoundCondWallO2::creerCellInterfaceChild()
 {

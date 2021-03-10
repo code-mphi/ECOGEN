@@ -1,0 +1,15 @@
+<?xml version = "1.0" encoding = "UTF-8" standalone = "yes"?>
+<parametersEOS>
+	<EOS fichier="IG_heavyGas.xml" type="IG"/>
+	<parameters
+		gamma="1.4"
+		cv="800" cv_save="717.46"
+		energyRef="0."
+		entropyRef="0.">
+	</parameters>
+	<physicalParameters 
+		mu="0.014744358985173"
+		lambda="0.0262">
+	</physicalParameters>
+
+</parametersEOS>

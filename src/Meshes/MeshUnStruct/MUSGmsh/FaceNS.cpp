@@ -6,6 +6,7 @@
 //       |  `--.  \  `-.  \ `-' /   \  `-) ) |  `--.  | | |)| 
 //       /( __.'   \____\  )---'    )\____/  /( __.'  /(  (_) 
 //      (__)              (_)      (__)     (__)     (__)     
+//      Official webSite: https://code-mphi.github.io/ECOGEN/
 //
 //  This file is part of ECOGEN.
 //
@@ -27,11 +28,6 @@
 //  along with ECOGEN (file LICENSE).  
 //  If not, see <http://www.gnu.org/licenses/>.
 
-//! \file      FaceNS.cpp
-//! \author    F. Petitpas, K. Schmidmayer
-//! \version   1.1
-//! \date      June 5 2019
-
 #include "FaceNS.h"
 
 //***********************************************************************
@@ -40,7 +36,7 @@ FaceNS::FaceNS(){}
 
 //***********************************************************************
 
-FaceNS::FaceNS(const int &numberNoeuds) :
+FaceNS::FaceNS(const int& numberNoeuds) :
 Face(),
 m_numberNoeuds(numberNoeuds),
 m_limite(false),
@@ -74,7 +70,7 @@ ElementNS *FaceNS::getElementDroite() const
 
 //***********************************************************************
 
-void FaceNS::construitFace(const Coord *noeuds, const int &numNoeudAutre, ElementNS *elementVoisin)
+void FaceNS::construitFace(const Coord* noeuds, const int& numNoeudAutre, ElementNS *elementVoisin)
 {
 
   //Calcul position du center de face
@@ -88,7 +84,7 @@ void FaceNS::construitFace(const Coord *noeuds, const int &numNoeudAutre, Elemen
 
 //***********************************************************************
 
-bool FaceNS::faceExiste(FaceNS **faces, const int &indexMaxFaces, int &indexFaceExiste)
+bool FaceNS::faceExiste(FaceNS** faces, const int& indexMaxFaces, int& indexFaceExiste)
 {
   int faceTrouvee(1);
   //for (int i = 0; i < indexMaxFaces; i++)
@@ -161,7 +157,7 @@ void FaceNS::setEstComm(const bool &estComm)
 
 //***********************************************************************
 
-void FaceNS::getInfoNoeuds(int *numNoeuds, int &sommeNumNoeuds) const
+void FaceNS::getInfoNoeuds(int* numNoeuds, int& sommeNumNoeuds) const
 {
   for(int i=0; i<m_numberNoeuds; i++)
   {
@@ -212,7 +208,7 @@ void FaceNS::afficheNoeuds() const
 
 //*********************************************************************
 
-int FaceNS::rechercheFace(int *face, int &sommeNoeuds, int **tableauFaces, int *tableauSommeNoeuds, int numberNoeuds, int &indexMaxFaces)
+int FaceNS::rechercheFace(int* face, int& sommeNoeuds, int** tableauFaces, int* tableauSommeNoeuds, int numberNoeuds, int& indexMaxFaces)
 {
     for (int i = indexMaxFaces-1; i>=0; i--)
     {
@@ -231,7 +227,7 @@ int FaceNS::rechercheFace(int *face, int &sommeNoeuds, int **tableauFaces, int *
 
 //*********************************************************************
 
-int FaceNS::rechercheFace(int *face, int &sommeNoeuds, std::vector<int*> tableauFaces, std::vector<int> tableauSommeNoeuds, int numberNoeuds, int &indexMaxFaces)
+int FaceNS::rechercheFace(int* face, int& sommeNoeuds, std::vector<int*> tableauFaces, std::vector<int> tableauSommeNoeuds, int numberNoeuds, int& indexMaxFaces)
 {
     for (int i = indexMaxFaces-1; i>=0; i--)
     {

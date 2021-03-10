@@ -6,6 +6,7 @@
 //       |  `--.  \  `-.  \ `-' /   \  `-) ) |  `--.  | | |)| 
 //       /( __.'   \____\  )---'    )\____/  /( __.'  /(  (_) 
 //      (__)              (_)      (__)     (__)     (__)     
+//      Official webSite: https://code-mphi.github.io/ECOGEN/
 //
 //  This file is part of ECOGEN.
 //
@@ -30,26 +31,21 @@
 #ifndef OUTPUTGLOBALGNU_H
 #define OUTPUTGLOBALGNU_H
 
-//! \file      OutputGlobalGNU.h
-//! \author    J. Caze
-//! \version   1.0
-//! \date      January 02 2020
-
 #include "OutputGNU.h"
 
 class OutputGlobalGNU : public OutputGNU
 {
 public:
 	OutputGlobalGNU();
-	OutputGlobalGNU(std::string casTest, std::string run, std::string fileName, Input *entree, std::string quantity);
+	OutputGlobalGNU(std::string casTest, std::string run, Input *entree, std::string quantity);
 	virtual ~OutputGlobalGNU();
 
 	virtual void prepareSortieSpecifique();
 
-	virtual void ecritSolution(Mesh* mesh, std::vector<Cell*>* cellsLvl);
+	virtual void ecritSolution(Mesh* /*mesh*/, std::vector<Cell*>* cellsLvl);
 
 protected:
-	double m_quantity; //!< Physical quantity recorded (mass only available right now)
+	double m_quantity; //!< Physical quantity recorded (mass or total energy)
 
 	void extractTotalQuantity(std::vector<Cell*>* cellsLvl);
 

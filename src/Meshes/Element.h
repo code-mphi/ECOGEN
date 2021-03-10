@@ -6,6 +6,7 @@
 //       |  `--.  \  `-.  \ `-' /   \  `-) ) |  `--.  | | |)| 
 //       /( __.'   \____\  )---'    )\____/  /( __.'  /(  (_) 
 //      (__)              (_)      (__)     (__)     (__)     
+//      Official webSite: https://code-mphi.github.io/ECOGEN/
 //
 //  This file is part of ECOGEN.
 //
@@ -30,11 +31,6 @@
 #ifndef ELEMENT_H
 #define ELEMENT_H
 
-//! \file      Element.h
-//! \author    F. Petitpas, K. Schmidmayer, S. Le Martelot, B. Dorschner
-//! \version   1.1
-//! \date      June 5 2019
-
 #include <fstream>
 #include <sstream>
 #include <iostream>
@@ -57,7 +53,7 @@ public:
   virtual ~Element();
 
   //Accesseurs
-  void setCellAssociee(const int &numCell){ m_numCellAssociee = numCell; };
+  void setCellAssociee(const int& numCell){ m_numCellAssociee = numCell; };
   const Coord& getPosition() const { return m_position; };
   const double& getLCFL() const { return m_lCFL; };
   const double& getVolume() const { return m_volume; };
@@ -65,31 +61,31 @@ public:
 
   virtual const int& getIndex() const { Errors::errorMessage("getIndex not available for requested element"); return Errors::defaultInt; };
   virtual const int& getAppartenancePhysique() const { return Errors::defaultInt; }; //!< default
-  virtual void setVolume(const double &volume){ Errors::errorMessage("setVolume not available for requested element"); };
-  virtual void setLCFL(const double &lCFL){ Errors::errorMessage("setlCFL not available for requested element"); };
-  virtual void setPos(const double &X, const double &Y, const double &Z){ Errors::errorMessage("setPos not available for requested element"); };
-  virtual void setPos(const Coord &pos) { Errors::errorMessage("setPos not available for requested element"); };
-  virtual void setPosX(const double &X) { Errors::errorMessage("setPosX not available for requested element"); };
-  virtual void setPosY(const double &Y) { Errors::errorMessage("setPosY not available for requested element"); };
-  virtual void setPosZ(const double &Z) { Errors::errorMessage("setPosZ not available for requested element"); };
-  virtual void setSize(const double &sizeX, const double &sizeY, const double &sizeZ) { Errors::errorMessage("setSize not available for requested element"); };
-  virtual void setSize(const Coord &size) { Errors::errorMessage("setSize not available for requested element"); };
+  virtual void setVolume(const double& /*volume*/){ Errors::errorMessage("setVolume not available for requested element"); };
+  virtual void setLCFL(const double& /*lCFL*/){ Errors::errorMessage("setlCFL not available for requested element"); };
+  virtual void setPos(const double& /*X*/, const double& /*Y*/, const double& /*Z*/){ Errors::errorMessage("setPos not available for requested element"); };
+  virtual void setPos(const Coord& /*pos*/) { Errors::errorMessage("setPos not available for requested element"); };
+  virtual void setPosX(const double& /*X*/) { Errors::errorMessage("setPosX not available for requested element"); };
+  virtual void setPosY(const double& /*Y*/) { Errors::errorMessage("setPosY not available for requested element"); };
+  virtual void setPosZ(const double& /*Z*/) { Errors::errorMessage("setPosZ not available for requested element"); };
+  virtual void setSize(const double& /*sizeX*/, const double& /*sizeY*/, const double& /*sizeZ*/) { Errors::errorMessage("setSize not available for requested element"); };
+  virtual void setSize(const Coord& /*size*/) { Errors::errorMessage("setSize not available for requested element"); };
   
-  void ecritPos(std::ofstream &fileStream, Axis axis);
+  void ecritPos(std::ofstream& fileStream, Axis axis);
 
   virtual void printInfo() const{ Errors::errorMessage("AfficheInfos not available for requested element"); };
   
-  Coord vecteur(const Element *e); /*!< Cree un vecteur a partir des centers d elements */
-  Coord vecteur(const Face *f);    /*!< Cree un vecteur entre center element et center d une face */
+  Coord vecteur(const Element* e); /*!< Cree un vecteur a partir des centers d elements */
+  Coord vecteur(const Face* f);    /*!< Cree un vecteur entre center element et center d une face */
 
-  double distance(const Element *e);  /*!< Calcul de la distance entre center et center d un autre element */
-  double distanceX(const Element *e); /*!< Calcul de la distance selon x entre center et center d un autre element */
-  double distanceY(const Element *e); /*!< Calcul de la distance selon y entre center et center d un autre element */
-  double distanceZ(const Element *e); /*!< Calcul de la distance selon z entre center et center d un autre element */
-  double distance(const Face *f);     /*!< Calcul de la distance entre center et center d une face */
-  double distanceX(const Face *f);    /*!< Calcul de la distance selon x entre center et center d une face */
-  double distanceY(const Face *f);    /*!< Calcul de la distance selon y entre center et center d une face */
-  double distanceZ(const Face *f);    /*!< Calcul de la distance selon z entre center et center d une face */
+  double distance(const Element* e);  /*!< Calcul de la distance entre center et center d un autre element */
+  double distanceX(const Element* e); /*!< Calcul de la distance selon x entre center et center d un autre element */
+  double distanceY(const Element* e); /*!< Calcul de la distance selon y entre center et center d un autre element */
+  double distanceZ(const Element* e); /*!< Calcul de la distance selon z entre center et center d un autre element */
+  double distance(const Face* f);     /*!< Calcul de la distance entre center et center d une face */
+  double distanceX(const Face* f);    /*!< Calcul de la distance selon x entre center et center d une face */
+  double distanceY(const Face* f);    /*!< Calcul de la distance selon y entre center et center d une face */
+  double distanceZ(const Face* f);    /*!< Calcul de la distance selon z entre center et center d une face */
 
   virtual const double& getSizeX() { Errors::errorMessage("getSizeX not available for requested element"); return Errors::defaultDouble; };
   virtual const double& getSizeY() { Errors::errorMessage("getSizeY not available for requested element"); return Errors::defaultDouble; };
@@ -100,12 +96,12 @@ public:
 
   //Pour methode AMR
   virtual void creerElementChild() { Errors::errorMessage("creerElementsChildren not available for requested element"); };
-  virtual Element* getElementChild(const int &numberChild) { Errors::errorMessage("getElementChild not available for requested element"); return 0; };
+  virtual Element* getElementChild(const int& /*numberChild*/) { Errors::errorMessage("getElementChild not available for requested element"); return 0; };
   virtual Element* getElementChildBack() { Errors::errorMessage("getElementChild not available for requested element"); return 0; };
   virtual void finalizeElementsChildren() { Errors::errorMessage("finalizeElementsChildren not available for requested element"); };
 
   //For parallel load balancing
-  virtual void setKey(const decomposition::Key<3> &key);
+  virtual void setKey(const decomposition::Key<3>& key);
   virtual const decomposition::Key<3>& getKey() const { return m_key; };
 
 protected:

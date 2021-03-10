@@ -6,6 +6,7 @@
 //       |  `--.  \  `-.  \ `-' /   \  `-) ) |  `--.  | | |)| 
 //       /( __.'   \____\  )---'    )\____/  /( __.'  /(  (_) 
 //      (__)              (_)      (__)     (__)     (__)     
+//      Official webSite: https://code-mphi.github.io/ECOGEN/
 //
 //  This file is part of ECOGEN.
 //
@@ -30,42 +31,35 @@
 #ifndef BOUNDCONDTANK_H
 #define BOUNDCONDTANK_H
 
-//! \file      BoundCondTank.cpp
-//! \author    F. Petitpas, K. Schmidmayer
-//! \version   1.0
-//! \date      February 13 2019
-
 #include "BoundCond.h"
 
 class BoundCondTank : public BoundCond
 {
   public:
-    BoundCondTank();
-    BoundCondTank(int numPhysique, tinyxml2::XMLElement *element, int &numberPhases, int &numberTransports, std::vector<std::string> nameTransports, Eos **eos, std::string fileName = "Fichier Inconnu");
-    BoundCondTank(const BoundCondTank &Source, const int lvl = 0); //Constructeur de copie (utile pour AMR)
+    BoundCondTank(int numPhysique, tinyxml2::XMLElement* element, int& numberPhases, int& numberTransports, std::vector<std::string> nameTransports, Eos** eos, std::string fileName = "Unknown file");
+    BoundCondTank(const BoundCondTank &Source, const int& lvl = 0); //Copy ctor (useful for AMR)
     virtual ~BoundCondTank();
 
-    virtual void creeLimite(TypeMeshContainer<CellInterface *> &cellInterfaces);
-    virtual void solveRiemannLimite(Cell &cellLeft, const int &numberPhases, const double &dxLeft, double &dtMax);
-    virtual void solveRiemannTransportLimite(Cell &cellLeft, const int &numberTransports) const;
+    virtual void createBoundary(TypeMeshContainer<CellInterface*>& cellInterfaces);
+    virtual void solveRiemannBoundary(Cell& cellLeft, const int& numberPhases, const double& dxLeft, double& dtMax);
+    virtual void solveRiemannTransportBoundary(Cell& cellLeft, const int& numberTransports) const;
 
-    virtual int whoAmI() const { return 5; };
+    virtual int whoAmI() const { return TANK; };
     virtual void printInfo();
 
-    //Pour methode AMR
-    virtual void creerCellInterfaceChild();  /*!< Creer un child cell interface (non initialize) */
+    //For AMR method
+    virtual void creerCellInterfaceChild();  /*!< Create a child cell interface (non initialize) */
 
   protected:
   private:
-    int m_numberPhase;
-    double *m_ak0;
-    double *m_Yk0;
-    double *m_rhok0;
+    int m_numberPhases;
+    double* m_ak0;
+    double* m_Yk0;
+    double* m_rhok0;
     double m_p0;
     double m_T0;
     int m_numberTransports;
-    double *m_valueTransport;
-
+    double* m_valueTransport;
 };
 
 #endif // BOUNDCONDTANK_H

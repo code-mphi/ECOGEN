@@ -57,7 +57,7 @@ public: // member types
     using float_type = double;
     template<typename U>
     using vector_type = math::vector<U,Dim>;
-    using coordinate_type = vector_type<scalar_coordinate_type>;;
+    using coordinate_type = vector_type<scalar_coordinate_type>;
     using real_coordinate_type = vector_type<float_type>;
     struct hash_functor
     {
@@ -81,7 +81,7 @@ public:  //static members
 public: 
     static coordinate_type coordinate(const value_type& code ) noexcept{
         coordinate_type c(0);
-        for(int d=0;d<Dim;++d) c[d]=compress_bits(code >>d);
+        for (int d = 0; d < Dim; ++d) c[d] = static_cast<scalar_coordinate_type>(compress_bits(code >> static_cast<value_type>(d)));
         return c;
     }
 

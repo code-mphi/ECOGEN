@@ -6,6 +6,7 @@
 //       |  `--.  \  `-.  \ `-' /   \  `-) ) |  `--.  | | |)| 
 //       /( __.'   \____\  )---'    )\____/  /( __.'  /(  (_) 
 //      (__)              (_)      (__)     (__)     (__)     
+//      Official webSite: https://code-mphi.github.io/ECOGEN/
 //
 //  This file is part of ECOGEN.
 //
@@ -27,20 +28,11 @@
 //  along with ECOGEN (file LICENSE).  
 //  If not, see <http://www.gnu.org/licenses/>.
 
-//! \file      BoundCondSymmetryO2.cpp
-//! \author    F. Petitpas, K. Schmidmayer
-//! \version   1.0
-//! \date      February 13 2019
-
 #include "BoundCondSymmetryO2.h"
 
 //****************************************************************************
 
-BoundCondSymmetryO2::BoundCondSymmetryO2() {}
-
-//****************************************************************************
-
-BoundCondSymmetryO2::BoundCondSymmetryO2(const BoundCondSymmetryO2& Source, const int lvl) : BoundCondWallO2(Source, lvl)
+BoundCondSymmetryO2::BoundCondSymmetryO2(const BoundCondSymmetryO2& Source, const int& lvl) : BoundCondWallO2(Source, lvl)
 {}
 
 //****************************************************************************
@@ -55,13 +47,13 @@ BoundCondSymmetryO2::~BoundCondSymmetryO2()
 
 //****************************************************************************
 
-void BoundCondSymmetryO2::creeLimite(TypeMeshContainer<CellInterface *> &cellInterfaces)
+void BoundCondSymmetryO2::createBoundary(TypeMeshContainer<CellInterface*>& cellInterfaces)
 {
   cellInterfaces.push_back(new BoundCondSymmetryO2(*(this)));
 }
 
 //****************************************************************************
-//******************************Methode AMR***********************************
+//******************************AMR Method***********************************
 //****************************************************************************
 
 void BoundCondSymmetryO2::creerCellInterfaceChild()

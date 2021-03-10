@@ -6,6 +6,7 @@
 //       |  `--.  \  `-.  \ `-' /   \  `-) ) |  `--.  | | |)| 
 //       /( __.'   \____\  )---'    )\____/  /( __.'  /(  (_) 
 //      (__)              (_)      (__)     (__)     (__)     
+//      Official webSite: https://code-mphi.github.io/ECOGEN/
 //
 //  This file is part of ECOGEN.
 //
@@ -27,11 +28,6 @@
 //  along with ECOGEN (file LICENSE).  
 //  If not, see <http://www.gnu.org/licenses/>.
 
-//! \file      ElementPyramid.cpp
-//! \author    F. Petitpas
-//! \version   1.0
-//! \date      December 20 2017
-
 #include "ElementPyramid.h"
 
 const int ElementPyramid::TYPEGMSH = 7;
@@ -51,7 +47,7 @@ ElementPyramid::~ElementPyramid(){}
 
 //***********************************************************************
 
-void ElementPyramid::computeVolume(const Coord *noeuds)
+void ElementPyramid::computeVolume(const Coord* noeuds)
 {
   ////Aire du Quadrangle a la base
   ////----------------------------
@@ -99,7 +95,7 @@ void ElementPyramid::computeVolume(const Coord *noeuds)
 
 //***********************************************************************
 
-void ElementPyramid::computeLCFL(const Coord *noeuds)
+void ElementPyramid::computeLCFL(const Coord* noeuds)
 {
   Coord vec; m_lCFL = 1e10;
   vec = ((noeuds[0] + noeuds[1] + noeuds[2] + noeuds[3]) / 4.) - m_position;
@@ -116,7 +112,7 @@ void ElementPyramid::computeLCFL(const Coord *noeuds)
 
 //***********************************************************************
 
-void ElementPyramid::construitFaces(const Coord *noeuds, FaceNS **faces, int &indexMaxFaces)
+void ElementPyramid::construitFaces(const Coord* noeuds, FaceNS** faces, int& indexMaxFaces, int** /*facesTemp*/, int* /*sommeNoeudsTemp*/)
 {
   //1 face de type quadrangle et 4 faces a traiter de type triangle
   int indexFaceExiste(0);

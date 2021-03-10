@@ -6,6 +6,7 @@
 //       |  `--.  \  `-.  \ `-' /   \  `-) ) |  `--.  | | |)| 
 //       /( __.'   \____\  )---'    )\____/  /( __.'  /(  (_) 
 //      (__)              (_)      (__)     (__)     (__)     
+//      Official webSite: https://code-mphi.github.io/ECOGEN/
 //
 //  This file is part of ECOGEN.
 //
@@ -27,11 +28,6 @@
 //  along with ECOGEN (file LICENSE).  
 //  If not, see <http://www.gnu.org/licenses/>.
 
-//! \file      ElementSegment.cpp
-//! \author    F. Petitpas
-//! \version   1.0
-//! \date      December 20 2017
-
 #include "ElementSegment.h"
 
 const int ElementSegment::TYPEGMSH = 1;
@@ -51,21 +47,21 @@ ElementSegment::~ElementSegment(){}
 
 //***********************************************************************
 
-void ElementSegment::computeVolume(const Coord *noeuds)
+void ElementSegment::computeVolume(const Coord* noeuds)
 {
    m_volume = (noeuds[1] - noeuds[0]).norm(); //longueur du segment
 }
 
 //***********************************************************************
 
-void ElementSegment::computeLCFL(const Coord *noeuds)
+void ElementSegment::computeLCFL(const Coord* noeuds)
 {
   m_lCFL = (noeuds[1] - noeuds[0]).norm()/2.0; //demi longueur du segment
 }
 
 //***********************************************************************
 // Nouvelle version beaucoup plus efficace avec recherche dans tableau temporaire
-void ElementSegment::construitFaces(const Coord *noeuds, FaceNS **faces, int &iMax, int** facesTemp, int* sommeNoeudsTemp)
+void ElementSegment::construitFaces(const Coord* noeuds, FaceNS** faces, int& iMax, int** facesTemp, int* sommeNoeudsTemp)
 {
   //2 faces a traiter de type vertex
   int indexFaceExiste(-1);
@@ -96,7 +92,7 @@ void ElementSegment::construitFaces(const Coord *noeuds, FaceNS **faces, int &iM
 
 //***********************************************************************
 // Nouvelle version beaucoup plus efficace avec recherche dans tableau temporaire
-void ElementSegment::construitFacesSimplifie(int &iMax, int** facesTemp, int* sommeNoeudsTemp)
+void ElementSegment::construitFacesSimplifie(int& iMax, int** facesTemp, int* sommeNoeudsTemp)
 {
   //2 faces a traiter de type vertex
   int indexFaceExiste(-1);
@@ -120,7 +116,7 @@ void ElementSegment::construitFacesSimplifie(int &iMax, int** facesTemp, int* so
 
 //***********************************************************************
 
-void ElementSegment::attributFaceLimite(const Coord *noeuds, FaceNS **faces, const int &indexMaxFaces)
+void ElementSegment::attributFaceLimite(FaceNS** faces, const int& indexMaxFaces)
 {
   int indexFaceExiste(0);
   FaceSegment face(m_numNoeuds[0], m_numNoeuds[1]);
@@ -136,7 +132,7 @@ void ElementSegment::attributFaceLimite(const Coord *noeuds, FaceNS **faces, con
 
 //***********************************************************************
 
-void ElementSegment::attributFaceCommunicante(const Coord *noeuds, FaceNS **faces, const int &indexMaxFaces, const int &numberNoeudsInternes)
+void ElementSegment::attributFaceCommunicante(FaceNS** faces, const int& indexMaxFaces, const int& numberNoeudsInternes)
 {
   int indexFaceExiste(0);
   //Verification face 1 :
@@ -163,7 +159,7 @@ void ElementSegment::attributFaceCommunicante(const Coord *noeuds, FaceNS **face
 
 //***********************************************************************
 
-int ElementSegment::compteFaceCommunicante(std::vector<int*> &facesTemp, std::vector<int> &sommeNoeudsTemp)
+int ElementSegment::compteFaceCommunicante(std::vector<int*>& facesTemp, std::vector<int>& sommeNoeudsTemp)
 {
   //2 faces a traiter de type vertex
   int indexFaceExiste(-1), numberFacesCommunicante(0);
@@ -188,7 +184,7 @@ int ElementSegment::compteFaceCommunicante(std::vector<int*> &facesTemp, std::ve
 
 //***********************************************************************
 //Nouvelle version plus efficace
-int ElementSegment::compteFaceCommunicante(int &iMax, int **facesTemp, int *sommeNoeudsTemp)
+int ElementSegment::compteFaceCommunicante(int& iMax, int** facesTemp, int* sommeNoeudsTemp)
 {
   //2 faces a traiter de type vertex
   int indexFaceExiste(-1), numberFacesCommunicante(0);

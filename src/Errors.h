@@ -6,6 +6,7 @@
 //       |  `--.  \  `-.  \ `-' /   \  `-) ) |  `--.  | | |)| 
 //       /( __.'   \____\  )---'    )\____/  /( __.'  /(  (_) 
 //      (__)              (_)      (__)     (__)     (__)     
+//      Official webSite: https://code-mphi.github.io/ECOGEN/
 //
 //  This file is part of ECOGEN.
 //
@@ -30,30 +31,27 @@
 #ifndef ERRORS_H
 #define ERRORS_H
 
-//! \file      Errors.h
-//! \author    F. Petitpas, S. Le Martelot, K. Schmidmayer, B. Dorschner
-//! \version   1.1
-//! \date      June 5 2019
-
-//Definitions de classes d'Errors tout type
-//Error de base
-//Exceptions sur lecture XML
+//Definition of Error classes of all kind
+//Exceptions on input XML files
 
 #include <iostream>
 #include <sstream>
 #include <cassert>
 #include <vector>
 
-// Macro permettant de faire un assert avec un message d'error.
+//! \brief     Enumeration for the type of error (warning, error)
+enum TypeError { WARNING = 0, ERROR = 1 };
+
+// Macro allowing to use assert with error message
 # ifndef NDEBUG
 #   define assertM(condition, message) \
   do {\
     if (!(condition)) {  \
     std::cerr << "---------------------------------------------------------" \
-      << std::endl << "Error assertion non verify" << std::endl << \
-      "  file : " << __FILE__ << std::endl << \
-      "  ligne : " << __LINE__ << std::endl << \
-      "  assertion : `" #condition "` a echouee" << std::endl \
+      << std::endl << "Error assertion not verified" << std::endl << \
+      "  file: " << __FILE__ << std::endl << \
+      "  line: " << __LINE__ << std::endl << \
+      "  assertion: `" #condition "` failed" << std::endl \
       << "  " << message << std::endl \
       << "---------------------------------------------------------" << std::endl; \
       std::exit(EXIT_FAILURE); \
@@ -63,24 +61,28 @@
 #   define ASSERT(condition, message) do { } while (false)
 #endif
 
+//***************************************************************************************
+//--------------------------Computing errors/warnings definition-------------------------
+//***************************************************************************************
+
 class Errors
 {
 public:
   Errors();
-  Errors(const std::string &message, const char* fichierSource = "non renseigne", int numberLigne = -1);
+  Errors(const std::string& message, const char* sourceFile = "unknown", int lineNumber = -1);
   virtual ~Errors();
 
-  static void errorMessage(const std::string &message);
-  static void errorMessage(const std::string &message, double value);
+  static void errorMessage(const std::string& message);
+  static void errorMessage(const std::string& message, double value);
+  static void prepareErrorFiles(const std::string& folder);
 
-  void setError(const std::string &message, const char* fichierSource = "", int numberLigne = -1);
-  void setError(const std::string &message, const double value);
-  void afficheError();
-  void ecritErrorFichier();
-  static void arretCodeApresError(std::vector<Errors> &errors);
+  void setError(const std::string& message, const char* sourceFile = "", int lineNumber = -1);
+  void setError(const std::string& message, const double value);
+  void displayError(const int& num);
+  void writeErrorInFile(const int& num, const std::string& folder, const int& ErrorType);
 
-  //Accesseur
-  int getEtat();
+  //Accessor
+  int getState();
 
   static constexpr int defaultInt = 0;
   static constexpr int defaultIntNeg = -1;
@@ -90,26 +92,31 @@ public:
 private:
   std::string m_message;
   int m_state;
-  std::string m_fichier;
-  int m_ligne;
-  double m_value; //!< permet de faire remonter une information en plus
-};
+  std::string m_file;
+  int m_line;
+  double m_value; //!< Allows you to send an additionnal piece of information
+}; 
 
 extern std::vector<Errors> errors;
+extern std::vector<Errors> warnings; //FP//TODO// To improve by a specific class
 
-//Gestion des exceptions sur error code ECOGEN
-//---------------------------------------------
+//***************************************************************************************
+//--------------------------------------EXCEPTIONS---------------------------------------
+//***************************************************************************************
+
+//Exception handling on error code ECOGEN
+//---------------------------------------
 class ErrorECOGEN : public std::exception
 {
 public:
   //***************
-  ErrorECOGEN(std::string infoError = "", const char* fichierSource = "", int numberLigne = -1):
-    std::exception(), m_infoError(infoError), m_numberLigne(numberLigne), m_fichierSource(fichierSource) {}
+  ErrorECOGEN(std::string infoError = "", const char* sourceFile = "", int lineNumber = -1, int errorCode = 1):
+    std::exception(), m_errorCode(errorCode), m_lineNumber(lineNumber), m_sourceFile(sourceFile), m_infoError(infoError) {}
   virtual ~ErrorECOGEN() throw() {}
   //***************
-  virtual const char *what(void) const throw()
+  virtual const char* what(void) const throw()
   {
-    return "Exception ECOGEN : corriger et relancer le run";
+    return "Exception ECOGEN: fix and restart run";
   }
   //***************
   std::string infoError(void) const throw()
@@ -118,44 +125,46 @@ public:
     message << "--------------------------------------------------" << std::endl;
     message << this->what() << std::endl;
     message << "****************************************" << std::endl;
-    if (m_fichierSource != "")
+    if (m_sourceFile != "")
     {
-      message << " infos sur exception code source :" << std::endl;
-      message << "  file : '" << m_fichierSource << "'" << std::endl;
-      if (m_numberLigne != -1) message << "  ligne : " << m_numberLigne << std::endl;
+      message << " infos on exception in code source :" << std::endl;
+      message << "  file: '" << m_sourceFile << "'" << std::endl;
+      if (m_lineNumber != -1) message << "  line: " << m_lineNumber << std::endl;
     }
-    message << this->infosAdditionelles() << std::endl;
+    message << this->additionalInfo() << std::endl;
     message << "--------------------------------------------------" << std::endl;
     return message.str();
   }
   //***************
-  virtual std::string infosAdditionelles(void) const throw()
+  virtual std::string additionalInfo(void) const throw()
   {
     return m_infoError;
   }
   //***************
-
+  int getErrorCode() { return m_errorCode; }
+  //***************
 private:
-  int m_numberLigne;
-  std::string m_fichierSource;
+  int m_errorCode;
+  int m_lineNumber;
+  std::string m_sourceFile;
   std::string m_infoError;
 };
 
 
-//Gestion des exceptions sur fichiers entrees XML
-//---------------------------------------------------------------
+//Exception handling on input XML files
+//-------------------------------------
 
 class ErrorXML : public ErrorECOGEN
 {
 public:
   //***************
-  ErrorXML(std::string fichierXML = "", const char* fichierSource = "", int numberLigne = -1) :
-    ErrorECOGEN(), m_fichierXML(fichierXML), m_fichierSource(fichierSource), m_numberLigne(numberLigne){}
+  ErrorXML(std::string fileXML = "", const char* sourceFile = "", int lineNumber = -1, int errorCode = 2) :
+    ErrorECOGEN(), m_errorCode(errorCode), m_lineNumber(lineNumber), m_sourceFile(sourceFile), m_fileXML(fileXML){}
   virtual ~ErrorXML() throw(){}
   //***************
-  virtual const char *what(void) const throw()
+  virtual const char* what(void) const throw()
   {
-    return "Exception sur lecture file XML : file introuvable ou structure incorrecte";
+    return "Exception during reading XML file: file not found or incorrect structure";
   }
   //***************
   std::string infoError(void) const throw()
@@ -164,31 +173,34 @@ public:
     message << "--------------------------------------------------" << std::endl;
     message << this->what() << std::endl;
     message << "****************************************" << std::endl;
-    if (m_fichierXML != "") { message << " file XML concerne : '" << m_fichierXML << "'" << std::endl; }
-    if (m_fichierSource != "")
+    if (m_fileXML != "") { message << " XML file concerned: '" << m_fileXML << "'" << std::endl; }
+    if (m_sourceFile != "")
     {
-      message << " infos sur exception code source :" << std::endl;
-      message << "  file : '" << m_fichierSource << "'" << std::endl;
-      if (m_numberLigne != -1) message << "  ligne : " << m_numberLigne << std::endl;
+      message << " infos on exception in code source :" << std::endl;
+      message << "  file: '" << m_sourceFile << "'" << std::endl;
+      if (m_lineNumber != -1) message << "  line: " << m_lineNumber << std::endl;
     }
-    message << this->infosAdditionelles();
+    message << this->additionalInfo();
     message << "--------------------------------------------------" << std::endl;
     return message.str();
   }
   //***************
-  virtual std::string infosAdditionelles(void) const throw()
+  virtual std::string additionalInfo(void) const throw()
   {
     return "";
   }
   //***************
-  int numberLigne() const throw () { return m_numberLigne; }
+  int lineNumber() const throw () { return m_lineNumber; }
   //***************
-  std::string fileName() const throw () { return m_fichierSource; }
+  std::string fileName() const throw () { return m_sourceFile; }
+  //***************
+  int getErrorCode() { return m_errorCode; }
   //***************
 private:
-  int m_numberLigne;
-  std::string m_fichierSource;
-  std::string m_fichierXML;
+  int m_errorCode;
+  int m_lineNumber;
+  std::string m_sourceFile;
+  std::string m_fileXML;
 };
 
 //---------------------------------------------------------------
@@ -197,26 +209,26 @@ class ErrorXMLRacine : public ErrorXML
 {
 public:
   //***************
-  ErrorXMLRacine(std::string racine = "", std::string fichierXML = "", const char* fichierSource = "", int numberLigne = -1) :
-    ErrorXML(fichierXML, fichierSource, numberLigne), m_racine(racine){}
+  ErrorXMLRacine(std::string root = "", std::string fileXML = "", const char* sourceFile = "", int lineNumber = -1) :
+    ErrorXML(fileXML, sourceFile, lineNumber), m_root(root){}
   virtual ~ErrorXMLRacine() throw(){}
   //***************
-  virtual const char *what(void) const throw()
+  virtual const char* what(void) const throw()
   {
-    return "Exception sur file XML : racine introuvable";
+    return "Exception on XML file: root not found";
   }
   //***************
-  virtual std::string infosAdditionelles(void) const throw()
+  virtual std::string additionalInfo(void) const throw()
   {
     std::stringstream message;
-    message << " name de la racine recherchee : '" << m_racine << "'" << std::endl;
+    message << " root name searched: '" << m_root << "'" << std::endl;
     return message.str();
   }
   //***************
-  std::string racine() const throw () { return m_racine; }
+  std::string root() const throw () { return m_root; }
   //***************
 private:
-  std::string m_racine;
+  std::string m_root;
 };
 
 //---------------------------------------------------------------
@@ -225,19 +237,19 @@ class ErrorXMLElement : public ErrorXML
 {
 public:
   //***************
-  ErrorXMLElement(std::string element = "", std::string fichierXML = "", const char* fichierSource = "", int numberLigne = -1) :
-    ErrorXML(fichierXML, fichierSource, numberLigne), m_element(element){}
+  ErrorXMLElement(std::string element = "", std::string fileXML = "", const char* sourceFile = "", int lineNumber = -1) :
+    ErrorXML(fileXML, sourceFile, lineNumber), m_element(element){}
   virtual ~ErrorXMLElement() throw(){}
   //***************
-  virtual const char *what(void) const throw()
+  virtual const char* what(void) const throw()
   {
-    return "Exception sur file XML : element introuvable ";
+    return "Exception on XML file: element not found";
   }
   //***************
-  virtual std::string infosAdditionelles(void) const throw()
+  virtual std::string additionalInfo(void) const throw()
   {
     std::stringstream message;
-    message << " name de l element recherche : '" << m_element << "'" << std::endl;
+    message << " element name searched: '" << m_element << "'" << std::endl;
     return message.str();
   }
   //***************
@@ -253,26 +265,26 @@ class ErrorXMLAttribut : public ErrorXML
 {
 public:
   //***************
-  ErrorXMLAttribut(std::string attribut = "", std::string fichierXML = "", const char* fichierSource = "", int numberLigne = -1) :
-    ErrorXML(fichierXML, fichierSource, numberLigne), m_attribut(attribut){}
+  ErrorXMLAttribut(std::string attribute = "", std::string fileXML = "", const char* sourceFile = "", int lineNumber = -1) :
+    ErrorXML(fileXML, sourceFile, lineNumber), m_attribute(attribute){}
   virtual ~ErrorXMLAttribut() throw(){}
   //***************
-  virtual const char *what(void) const throw()
+  virtual const char* what(void) const throw()
   {
-    return "Exception sur file XML : attribut introuvable ";
+    return "Exception on XML file: attribute not found";
   }
   //***************
-  virtual std::string infosAdditionelles(void) const throw()
+  virtual std::string additionalInfo(void) const throw()
   {
     std::stringstream message;
-    message << " name de l attribut recherche : '" << m_attribut << "'" << std::endl;
+    message << " attribute name searched: '" << m_attribute << "'" << std::endl;
     return message.str();
   }
   //***************
-  std::string attribut() const throw () { return m_attribut; }
+  std::string attribute() const throw () { return m_attribute; }
   //***************
 private:
-  std::string m_attribut;
+  std::string m_attribute;
 };
 
 //---------------------------------------------------------------
@@ -281,13 +293,13 @@ class ErrorXMLDev : public ErrorXML
 {
 public:
   //***************
-  ErrorXMLDev(std::string fichierXML = "", const char* fichierSource = "", int numberLigne = -1) :
-    ErrorXML(fichierXML, fichierSource, numberLigne){}
+  ErrorXMLDev(std::string fileXML = "", const char* sourceFile = "", int lineNumber = -1) :
+    ErrorXML(fileXML, sourceFile, lineNumber){}
   virtual ~ErrorXMLDev() throw(){}
   //***************
-  virtual const char *what(void) const throw()
+  virtual const char* what(void) const throw()
   {
-    return "Exception sur file XML : morceaux de code en cours de developpement ";
+    return "Exception on XML file: this portion of code is under development";
   }
   //***************
 private:
@@ -299,13 +311,13 @@ class ErrorXMLLimite : public ErrorXML
 {
 public:
   //***************
-  ErrorXMLLimite(std::string fichierXML = "", const char* fichierSource = "", int numberLigne = -1) :
-    ErrorXML(fichierXML, fichierSource, numberLigne){}
+  ErrorXMLLimite(std::string fileXML = "", const char* sourceFile = "", int lineNumber = -1) :
+    ErrorXML(fileXML, sourceFile, lineNumber){}
   virtual ~ErrorXMLLimite() throw(){}
   //***************
-  virtual const char *what(void) const throw()
+  virtual const char* what(void) const throw()
   {
-    return "Exception sur file XML : error sur conditions aux limites ";
+    return "Exception on XML file: error in boundary conditions";
   }
   //***************
 private:
@@ -317,13 +329,13 @@ class ErrorXMLTermeSource : public ErrorXML
 {
 public:
   //***************
-  ErrorXMLTermeSource(std::string fichierXML = "", const char* fichierSource = "", int numberLigne = -1) :
-    ErrorXML(fichierXML, fichierSource, numberLigne){}
+  ErrorXMLTermeSource(std::string fileXML = "", const char* sourceFile = "", int lineNumber = -1) :
+    ErrorXML(fileXML, sourceFile, lineNumber){}
   virtual ~ErrorXMLTermeSource() throw(){}
   //***************
-  virtual const char *what(void) const throw()
+  virtual const char* what(void) const throw()
   {
-    return "Exception sur file XML : error sur choix des termes sources ";
+    return "Exception on XML file: error in source term selection";
   }
   //***************
 private:
@@ -335,13 +347,13 @@ class ErrorXMLEOS : public ErrorXML
 {
 public:
   //***************
-  ErrorXMLEOS(std::string fichierXML = "", const char* fichierSource = "", int numberLigne = -1) :
-    ErrorXML(fichierXML, fichierSource, numberLigne){}
+  ErrorXMLEOS(std::string fileXML = "", const char* sourceFile = "", int lineNumber = -1) :
+    ErrorXML(fileXML, sourceFile, lineNumber){}
   virtual ~ErrorXMLEOS() throw(){}
   //***************
-  virtual const char *what(void) const throw()
+  virtual const char* what(void) const throw()
   {
-    return "Exception sur file XML : error sur equation state ";
+    return "Exception on XML file: error on equation of state";
   }
   //***************
 private:
@@ -353,19 +365,19 @@ class ErrorXMLEOSInconnue : public ErrorXML
 {
 public:
   //***************
-  ErrorXMLEOSInconnue(std::string typeEOS = "", std::string fichierXML = "", const char* fichierSource = "", int numberLigne = -1) :
-    ErrorXML(fichierXML, fichierSource, numberLigne), m_typeEOS(typeEOS){}
+  ErrorXMLEOSInconnue(std::string typeEOS = "", std::string fileXML = "", const char* sourceFile = "", int lineNumber = -1) :
+    ErrorXML(fileXML, sourceFile, lineNumber), m_typeEOS(typeEOS){}
   virtual ~ErrorXMLEOSInconnue() throw(){}
   //***************
-  virtual const char *what(void) const throw()
+  virtual const char* what(void) const throw()
   {
-    return "Exception sur file XML : error sur equation state ";
+    return "Exception on XML file: error on equation of state";
   }
   //***************
-  virtual std::string infosAdditionelles(void) const throw()
+  virtual std::string additionalInfo(void) const throw()
   {
     std::stringstream message;
-    message << " type EOS : '" << m_typeEOS << "' inconnu" << std::endl;
+    message << " EOS type: '" << m_typeEOS << "' unknown" << std::endl;
     return message.str();
   }
   //***************
@@ -379,24 +391,24 @@ class ErrorXMLDomaineInconnu : public ErrorXML
 {
 public:
   //***************
-  ErrorXMLDomaineInconnu(std::string typeDomaine = "", std::string fichierXML = "", const char* fichierSource = "", int numberLigne = -1) :
-    ErrorXML(fichierXML, fichierSource, numberLigne), m_typeDomaine(typeDomaine){}
+  ErrorXMLDomaineInconnu(std::string typeDomain = "", std::string fileXML = "", const char* sourceFile = "", int lineNumber = -1) :
+    ErrorXML(fileXML, sourceFile, lineNumber), m_typeDomain(typeDomain){}
   virtual ~ErrorXMLDomaineInconnu() throw(){}
   //***************
-  virtual const char *what(void) const throw()
+  virtual const char* what(void) const throw()
   {
-    return "Exception sur file XML : error sur domain CI ";
+    return "Exception on XML file: error on domain CI";
   }
   //***************
-  virtual std::string infosAdditionelles(void) const throw()
+  virtual std::string additionalInfo(void) const throw()
   {
     std::stringstream message;
-    message << " type Domaine : '" << m_typeDomaine << "' inconnu" << std::endl;
+    message << " domain type: '" << m_typeDomain << "' unknown" << std::endl;
     return message.str();
   }
   //***************
 private:
-  std::string m_typeDomaine;
+  std::string m_typeDomain;
 };
 
 //---------------------------------------------------------------
@@ -405,19 +417,19 @@ class ErrorXMLBoundCondInconnue : public ErrorXML
 {
 public:
   //***************
-  ErrorXMLBoundCondInconnue(std::string typeBoundCond = "", std::string fichierXML = "", const char* fichierSource = "", int numberLigne = -1) :
-    ErrorXML(fichierXML, fichierSource, numberLigne), m_typeBoundCond(typeBoundCond) {}
+  ErrorXMLBoundCondInconnue(std::string typeBoundCond = "", std::string fileXML = "", const char* sourceFile = "", int lineNumber = -1) :
+    ErrorXML(fileXML, sourceFile, lineNumber), m_typeBoundCond(typeBoundCond) {}
   virtual ~ErrorXMLBoundCondInconnue() throw() {}
   //***************
-  virtual const char *what(void) const throw()
+  virtual const char* what(void) const throw()
   {
-    return "Exception sur file XML : error sur Condition Limite CL ";
+    return "Exception on XML file: error in boundary condition CL";
   }
   //***************
-  virtual std::string infosAdditionelles(void) const throw()
+  virtual std::string additionalInfo(void) const throw()
   {
     std::stringstream message;
-    message << " type Limite : '" << m_typeBoundCond << "' inconnu" << std::endl;
+    message << " boundary type: '" << m_typeBoundCond << "' unknown" << std::endl;
     return message.str();
   }
   //***************
@@ -431,19 +443,19 @@ class ErrorXMLEtat : public ErrorXML
 {
 public:
   //***************
-  ErrorXMLEtat(std::string nameEtat = "", std::string fichierXML = "", const char* fichierSource = "", int numberLigne = -1) :
-    ErrorXML(fichierXML, fichierSource, numberLigne), m_nameEtat(nameEtat){}
+  ErrorXMLEtat(std::string nameEtat = "", std::string fileXML = "", const char* sourceFile = "", int lineNumber = -1) :
+    ErrorXML(fileXML, sourceFile, lineNumber), m_nameEtat(nameEtat){}
   virtual ~ErrorXMLEtat() throw(){}
   //***************
-  virtual const char *what(void) const throw()
+  virtual const char* what(void) const throw()
   {
-    return "Exception sur file XML : error sur state ";
+    return "Exception on XML file: error in state";
   }
   //***************
-  virtual std::string infosAdditionelles(void) const throw()
+  virtual std::string additionalInfo(void) const throw()
   {
     std::stringstream message;
-    message << " Etat : '" << m_nameEtat << "' non trouve ou incomplet" << std::endl;
+    message << " state: '" << m_nameEtat << "' not found or incomplete" << std::endl;
     return message.str();
   }
   //***************
@@ -457,19 +469,19 @@ class ErrorXMLMateriauInconnu : public ErrorXML
 {
 public:
   //***************
-  ErrorXMLMateriauInconnu(std::string nameMateriau = "", std::string fichierXML = "", const char* fichierSource = "", int numberLigne = -1) :
-    ErrorXML(fichierXML, fichierSource, numberLigne), m_nameMateriau(nameMateriau){}
+  ErrorXMLMateriauInconnu(std::string nameMateriau = "", std::string fileXML = "", const char* sourceFile = "", int lineNumber = -1) :
+    ErrorXML(fileXML, sourceFile, lineNumber), m_nameMateriau(nameMateriau){}
   virtual ~ErrorXMLMateriauInconnu() throw(){}
   //***************
-  virtual const char *what(void) const throw()
+  virtual const char* what(void) const throw()
   {
-    return "Exception sur file XML : error sur state CI ";
+    return "Exception on XML file: error in state CI";
   }
   //***************
-  virtual std::string infosAdditionelles(void) const throw()
+  virtual std::string additionalInfo(void) const throw()
   {
     std::stringstream message;
-    message << " type Materiau : '" << m_nameMateriau << "' inconnu" << std::endl;
+    message << " material type: '" << m_nameMateriau << "' unknown" << std::endl;
     return message.str();
   }
   //***************
@@ -483,13 +495,13 @@ class ErrorXMLStretching : public ErrorXML
 {
 public:
   //***************
-  ErrorXMLStretching(std::string fichierXML = "", const char* fichierSource = "", int numberLigne = -1) :
-    ErrorXML(fichierXML, fichierSource, numberLigne) {}
+  ErrorXMLStretching(std::string fileXML = "", const char* sourceFile = "", int lineNumber = -1) :
+    ErrorXML(fileXML, sourceFile, lineNumber) {}
   virtual ~ErrorXMLStretching() throw() {}
   //***************
-  virtual const char *what(void) const throw()
+  virtual const char* what(void) const throw()
   {
-    return "Exception sur file XML : error on stretching definition ";
+    return "Exception on XML file: error on stretching definition";
   }
   //***************
 private:
@@ -498,4 +510,30 @@ private:
 
 //---------------------------------------------------------------
 
-#endif // ERRORS_H 
+class ErrorXMLRelaxation : public ErrorXML
+{
+public:
+  //***************
+  ErrorXMLRelaxation(std::string nameRelaxation = "", std::string fileXML = "", const char* sourceFile = "", int lineNumber = -1) :
+    ErrorXML(fileXML, sourceFile, lineNumber), m_nameRelaxation(nameRelaxation){}
+  virtual ~ErrorXMLRelaxation() throw(){}
+  //***************
+  virtual const char* what(void) const throw()
+  {
+    return "Exception on XML file: error on relaxation";
+  }
+  //***************
+  virtual std::string additionalInfo(void) const throw()
+  {
+    std::stringstream message;
+    message << " relaxation type: '" << m_nameRelaxation << "' unknown or already added" << std::endl;
+    return message.str();
+  }
+  //***************
+private:
+  std::string m_nameRelaxation;
+};
+
+//---------------------------------------------------------------
+
+#endif // ERRORS_H

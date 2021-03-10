@@ -6,6 +6,7 @@
 //       |  `--.  \  `-.  \ `-' /   \  `-) ) |  `--.  | | |)| 
 //       /( __.'   \____\  )---'    )\____/  /( __.'  /(  (_) 
 //      (__)              (_)      (__)     (__)     (__)     
+//      Official webSite: https://code-mphi.github.io/ECOGEN/
 //
 //  This file is part of ECOGEN.
 //
@@ -30,11 +31,6 @@
 #ifndef ELEMENTCARTESIAN_H
 #define ELEMENTCARTESIAN_H
 
-//! \file      ElementCartesian.h
-//! \author    F. Petitpas, K. Schmidmayer, S. Le Martelot, B. Dorschner
-//! \version   1.1
-//! \date      June 5 2019
-
 #include "Element.h"
 
 class ElementCartesian : public Element
@@ -43,15 +39,15 @@ public:
   ElementCartesian();
   virtual ~ElementCartesian();
 
-  virtual void setVolume(const double &volume);
-  virtual void setLCFL(const double &lCFL);
-  virtual void setPos(const double &X, const double &Y, const double &Z);
-  virtual void setPos(const Coord &pos);
-  virtual void setPosX(const double &X);
-  virtual void setPosY(const double &Y);
-  virtual void setPosZ(const double &Z);
-  virtual void setSize(const double &sizeX, const double &sizeY, const double &sizeZ);
-  virtual void setSize(const Coord &size);
+  virtual void setVolume(const double& volume);
+  virtual void setLCFL(const double& lCFL);
+  virtual void setPos(const double& X, const double& Y, const double& Z);
+  virtual void setPos(const Coord& pos);
+  virtual void setPosX(const double& X);
+  virtual void setPosY(const double& Y);
+  virtual void setPosZ(const double& Z);
+  virtual void setSize(const double& sizeX, const double& sizeY, const double& sizeZ);
+  virtual void setSize(const Coord& size);
 
   virtual const double& getSizeX() { return m_size.getX(); };
   virtual const double& getSizeY() { return m_size.getY(); };
@@ -60,7 +56,7 @@ public:
 
   //Pour methode AMR
   virtual void creerElementChild();
-  virtual Element* getElementChild(const int &numberChild);
+  virtual Element* getElementChild(const int& numberChild);
   virtual Element* getElementChildBack();
   virtual void finalizeElementsChildren();
 

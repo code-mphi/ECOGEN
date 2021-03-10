@@ -107,7 +107,7 @@ public: //Ctors
             std::vector<int> nCells_per_rank;
             for (int i = 0; i < nProcs; ++i)
             {
-                size_t start = (i*chunks);
+                size_t start = (size_t)(i*chunks);
                 size_t end = std::min(static_cast<int>((i+1)*chunks), nCells_t);
                 const int nlocal = end-start;
                 int count = 0;
@@ -225,7 +225,7 @@ public: //Ctors
         }
     }
 
-    void communicateMaps(int _nCpu, std::vector<typename key_type::value_type> &localKeys, std::vector<int> &localRanks, int rank)
+    void communicateMaps(int _nCpu, std::vector<typename key_type::value_type>& localKeys, std::vector<int>& localRanks)
     {
         //Decompose local map into keys and values (ranks)
         int localMapSize = localKeys.size();

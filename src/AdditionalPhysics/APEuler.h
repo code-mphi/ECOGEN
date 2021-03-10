@@ -6,6 +6,7 @@
 //       |  `--.  \  `-.  \ `-' /   \  `-) ) |  `--.  | | |)| 
 //       /( __.'   \____\  )---'    )\____/  /( __.'  /(  (_) 
 //      (__)              (_)      (__)     (__)     (__)     
+//      Official webSite: https://code-mphi.github.io/ECOGEN/
 //
 //  This file is part of ECOGEN.
 //
@@ -29,11 +30,6 @@
 
 #ifndef APEULER_H
 #define APEULER_H
-
-//! \file      APEuler.h
-//! \author    K. Schmidmayer
-//! \version   1.0
-//! \date      December 20 2017
 
 #include "AddPhys.h"
 #include "../Models/Euler/FluxEuler.h"

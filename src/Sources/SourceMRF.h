@@ -6,6 +6,7 @@
 //       |  `--.  \  `-.  \ `-' /   \  `-) ) |  `--.  | | |)| 
 //       /( __.'   \____\  )---'    )\____/  /( __.'  /(  (_) 
 //      (__)              (_)      (__)     (__)     (__)     
+//      Official webSite: https://code-mphi.github.io/ECOGEN/
 //
 //  This file is part of ECOGEN.
 //
@@ -30,11 +31,6 @@
 #ifndef SOURCEMRF_H
 #define SOURCEMRF_H
 
-//! \file      SourceMRF.h
-//! \author    F. Petitpas, J. Caze
-//! \version   1.0
-//! \date      October 29 2019
-
 #include "Source.h"
 
 //! \class     SourceMRF
@@ -42,19 +38,18 @@
 class SourceMRF : public Source
 {
 public:
-  SourceMRF();
   //! \brief     Source constructor from a XML format reading
   //! \details   Reading data from XML file under the following format:
   //!            ex: <dataMRF omega="1.d3"/>
   //! \param     element          XML element to read for source term
   //! \param     fileName         string name of readed XML file
-  SourceMRF(tinyxml2::XMLElement *element, int order, std::string fileName = "Unknown file");
+  SourceMRF(tinyxml2::XMLElement* element, int order, int physicalEntity, std::string fileName = "Unknown file");
   virtual ~SourceMRF();
 
-  virtual void prepSourceTerms(Cell *cell, const int &numberPhases, const double &dt, const int i=0 );
-  virtual void sourceEvolution(const double &time);
+  virtual void prepSourceTerms(Cell* cell, const int& numberPhases, const int& i=0 );
+  virtual void sourceEvolution(const double& time);
 
-  virtual Coord computeAbsVelocity(const Coord relVelocity, const Coord position);
+  virtual Coord computeAbsVelocity(const Coord& relVelocity, const Coord& position);
 
 private:
   Coord m_omega;    //!Angular velocity

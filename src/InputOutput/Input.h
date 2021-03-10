@@ -6,6 +6,7 @@
 //       |  `--.  \  `-.  \ `-' /   \  `-) ) |  `--.  | | |)| 
 //       /( __.'   \____\  )---'    )\____/  /( __.'  /(  (_) 
 //      (__)              (_)      (__)     (__)     (__)     
+//      Official webSite: https://code-mphi.github.io/ECOGEN/
 //
 //  This file is part of ECOGEN.
 //
@@ -29,11 +30,6 @@
 
 #ifndef INPUT_H
 #define INPUT_H
-
-//! \file      Input.h
-//! \author    F. Petitpas, K. Schmidmayer
-//! \version   1.0
-//! \date      July 20 2018
 
 #include <sstream>
 #include <cassert>
@@ -60,13 +56,13 @@ class Input
     Input(Run *run);
     virtual ~Input();
 
-    void lectureInputXML(std::vector<GeometricalDomain*> &domains, std::vector<BoundCond*> &boundCond);
+    void lectureInputXML(std::vector<GeometricalDomain*>& domains, std::vector<BoundCond*>& boundCond);
 
     void entreeMain(std::string casTest);
     void entreeMesh(std::string casTest);
     void entreeModel(std::string casTest);
-    Eos* entreeEOS(std::string EOS, int &numberEOS);
-    void entreeConditionsInitiales(std::string casTest, std::vector<GeometricalDomain*> &domains, std::vector<BoundCond*> &boundCond);
+    Eos* entreeEOS(std::string EOS, int& numberEOS);
+    void entreeConditionsInitiales(std::string casTest, std::vector<GeometricalDomain*>& domains, std::vector<BoundCond*>& boundCond);
 
 	//Accesseur
 	std::string getMain() const { return m_nameMain; };

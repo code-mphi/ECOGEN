@@ -1,0 +1,69 @@
+<?xml version = "1.0" encoding = "UTF-8" standalone = "yes"?>
+<CI>
+    <!-- LIST OF GEOMETRICAL DOMAINS  -->
+    <physicalDomains> 
+        <domain name="base" state="chamberLP" type="entireDomain"/>
+        <domain name="HP"  state="chamberHP" type="halfSpace">
+            <dataHalfSpace axis="x" origin="0.7" direction="negative"/>
+        </domain>
+    </physicalDomains>
+
+    <!-- LIST OF BOUNDARY CONDITIONS -->
+    <boundaryConditions>
+        <boundCond name="CLXm" type="nonReflecting" number="1"/>
+        <boundCond name="CLXp" type="nonReflecting" number="2"/>
+    </boundaryConditions>
+    
+    <!--  LIST OF STATES  -->
+    <state name="chamberLP">
+        <material type="fluid" EOS="IG_air.xml">
+            <dataFluid alpha="0.999999" density="1." pressure="1.e5"/>
+        </material>
+        <material type="fluid" EOS="IG_helium.xml">
+            <dataFluid alpha="1.e-6" density="0.5" pressure="1.e5"/>
+        </material>
+        <mixture>
+            <velocity x="0." y="0." z="0."/>
+        </mixture>
+    </state>
+
+    <state name="chamberHP">
+        <material type="fluid" EOS="IG_air.xml">
+            <dataFluid alpha="1.e-6" density="1." pressure="1.e6"/>
+        </material>
+        <material type="fluid" EOS="IG_helium.xml">
+            <dataFluid alpha="0.999999" density="0.5" pressure="1.e6"/>
+        </material>
+        <mixture>
+            <velocity x="0." y="0." z="0."/>
+        </mixture>
+    </state>
+
+
+<!--     <state name="chamberLP">
+        <material type="fluid" EOS="IG_air.xml">
+            <dataFluid alpha="0.999999" density="1."/>
+        </material>
+        <material type="fluid" EOS="IG_helium.xml">
+            <dataFluid alpha="1.e-6" density="0.5"/>
+        </material>
+        <mixture>
+            <dataMix pressure = "1.e5"/>
+            <velocity x="0." y="0." z="0."/>
+        </mixture>
+    </state>
+
+    <state name="chamberHP">
+        <material type="fluid" EOS="IG_air.xml">
+            <dataFluid alpha="1.e-6" density="1."/>
+        </material>
+        <material type="fluid" EOS="IG_helium.xml">
+            <dataFluid alpha="0.999999" density="0.5"/>
+        </material>
+        <mixture>
+            <dataMix pressure = "1.e6"/>
+            <velocity x="0." y="0." z="0."/>
+        </mixture>
+    </state> -->
+
+</CI>

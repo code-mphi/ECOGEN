@@ -42,10 +42,11 @@ Schmidmayer, K., Petitpas, F., Le Martelot, S. & Daniel, E. (2020). ECOGEN, an o
 @article{schmidmayer2020ecogen,
   doi = {10.1016/j.cpc.2019.107093},
   url = {https://doi.org/10.1016/j.cpc.2019.107093},
-  title={ECOGEN: An open-source tool for multiphase, compressible, multiphysics flows},
-  author={Schmidmayer, Kevin and Petitpas, Fabien and Le Martelot, S{\'e}bastien and Daniel, E},
+  title={{ECOGEN}: {A}n open-source tool for multiphase, compressible, multiphysics flows},
+  author={Schmidmayer, Kevin and Petitpas, Fabien and Le Martelot, S{\'e}bastien and Daniel, {\'E}ric},
   journal={Computer Physics Communications},
   volume={251},
+  pages={107093},
   year={2020}
 }
 ```

@@ -6,6 +6,7 @@
 //       |  `--.  \  `-.  \ `-' /   \  `-) ) |  `--.  | | |)| 
 //       /( __.'   \____\  )---'    )\____/  /( __.'  /(  (_) 
 //      (__)              (_)      (__)     (__)     (__)     
+//      Official webSite: https://code-mphi.github.io/ECOGEN/
 //
 //  This file is part of ECOGEN.
 //
@@ -30,11 +31,6 @@
 #ifndef STRETCHZONE_H
 #define STRETCHZONE_H
 
-//! \file      stretchZone.h
-//! \author    F. Petitpas
-//! \version   1.0
-//! \date      September 06 2018
-
 #include <vector>
 #include <string>
 
@@ -44,15 +40,13 @@
 class stretchZone
 {
   public:
-    //! \brief     basic stretched zone constructor
-    stretchZone();
     //! \brief     improved stretched zone constructor
     stretchZone(double startAt, double endtAt, double factor, int numberCells);
     virtual ~stretchZone();
 
-    int stretching(std::vector<double> &dX, std::vector<double> &posX);
+    int stretching(std::vector<double>& dX, std::vector<double>& posX);
 
-    static int verifyStretching(std::vector<stretchZone> &tabStretch, const double l, std::string fileName = "");
+    static int verifyStretching(std::vector<stretchZone>& tabStretch, const double l, std::string fileName = "");
 
   private:
     double m_startAt;   //!< zone starting position along corresponding axis

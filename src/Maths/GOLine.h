@@ -6,6 +6,7 @@
 //       |  `--.  \  `-.  \ `-' /   \  `-) ) |  `--.  | | |)| 
 //       /( __.'   \____\  )---'    )\____/  /( __.'  /(  (_) 
 //      (__)              (_)      (__)     (__)     (__)     
+//      Official webSite: https://code-mphi.github.io/ECOGEN/
 //
 //  This file is part of ECOGEN.
 //
@@ -30,11 +31,6 @@
 #ifndef GOLINE_H
 #define GOLINE_H
 
-//! \file      GOLine.h
-//! \author    F. Petitpas, K. Schmidmayer
-//! \version   1.0
-//! \date      January 5 2018
-
 #include "GeometricObject.h"
 
 //! \class     GOLine
@@ -42,12 +38,11 @@
 class GOLine : public GeometricObject
 {
 public:
-  GOLine();
-  GOLine(const Coord &vertex, const Coord &vecDir);
+  GOLine(const Coord& vertex, const Coord& vecDir);
   virtual ~GOLine();
 
-  virtual double distancePoint(const Coord &vertex) const;
-  virtual Coord projectionPoint(const Coord &vertex) const;
+  virtual double distancePoint(const Coord& vertex) const;
+  virtual Coord projectionPoint(const Coord& vertex) const;
 
 private:
   Coord m_point;           //! Point from the line

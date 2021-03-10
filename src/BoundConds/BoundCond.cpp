@@ -6,6 +6,7 @@
 //       |  `--.  \  `-.  \ `-' /   \  `-) ) |  `--.  | | |)| 
 //       /( __.'   \____\  )---'    )\____/  /( __.'  /(  (_) 
 //      (__)              (_)      (__)     (__)     (__)     
+//      Official webSite: https://code-mphi.github.io/ECOGEN/
 //
 //  This file is part of ECOGEN.
 //
@@ -27,11 +28,6 @@
 //  along with ECOGEN (file LICENSE).  
 //  If not, see <http://www.gnu.org/licenses/>.
 
-//! \file      BoundCond.cpp
-//! \author    F. Petitpas, K. Schmidmayer
-//! \version   1.1
-//! \date      June 5 2019
-
 #include "BoundCond.h"
 #include <iostream>
 
@@ -41,12 +37,12 @@ BoundCond::BoundCond(){}
 
 //***********************************************************************
 
-BoundCond::BoundCond(int numPhysique) : m_numPhysique(numPhysique)
+BoundCond::BoundCond(int numPhysique) : m_numPhysique(numPhysique), m_massflow(0.), m_powerFlux(0.)
 {}
 
 //***********************************************************************
 
-BoundCond::BoundCond(const BoundCond &Source) : m_numPhysique(Source.m_numPhysique)
+BoundCond::BoundCond(const BoundCond &Source, const int& lvl) : CellInterface(lvl), m_numPhysique(Source.m_numPhysique), m_massflow(0.), m_powerFlux(0.)
 {}
 
 //***********************************************************************
@@ -55,7 +51,7 @@ BoundCond::~BoundCond() {}
 
 //***********************************************************************
 
-void BoundCond::initialize(Cell *cellLeft, Cell *cellRight)
+void BoundCond::initialize(Cell* cellLeft, Cell* /*cellRight*/)
 {
   m_cellLeft = cellLeft;
   m_cellRight = NULL;
@@ -63,43 +59,63 @@ void BoundCond::initialize(Cell *cellLeft, Cell *cellRight)
 
 //***********************************************************************
 
-void BoundCond::computeFlux(const int &numberPhases, const int &numberTransports, double &dtMax, Limiter &globalLimiter, Limiter &interfaceLimiter, Limiter &globalVolumeFractionLimiter, Limiter &interfaceVolumeFractionLimiter, Prim type)
+void BoundCond::computeFlux(const int& numberPhases, const int& numberTransports, double& dtMax, Limiter& globalLimiter, Limiter& interfaceLimiter, Limiter& globalVolumeFractionLimiter, Limiter& interfaceVolumeFractionLimiter, Prim type)
 {
   this->solveRiemann(numberPhases, numberTransports, dtMax, globalLimiter, interfaceLimiter, globalVolumeFractionLimiter, interfaceVolumeFractionLimiter, type);
-  this->subtractFlux(numberPhases, numberTransports, 1.); //Retrait du flux sur maille gauche
+  this->subtractFlux(numberPhases, numberTransports, 1.); //Substract flux on left cell
 }
 
 //***********************************************************************
 
-void BoundCond::computeFluxAddPhys(const int &numberPhases, AddPhys &addPhys)
+void BoundCond::computeFluxAddPhys(const int& numberPhases, AddPhys &addPhys)
 {
   addPhys.computeFluxAddPhysBoundary(this, numberPhases);
 }
 
 //***********************************************************************
 
-void BoundCond::solveRiemann(const int &numberPhases, const int &numberTransports, double &dtMax, Limiter &globalLimiter, Limiter &interfaceLimiter, Limiter &globalVolumeFractionLimiter, Limiter &interfaceVolumeFractionLimiter, Prim type)
+void BoundCond::solveRiemann(const int& numberPhases, const int& numberTransports, double& dtMax, Limiter& /*globalLimiter*/, Limiter& /*interfaceLimiter*/, Limiter& /*globalVolumeFractionLimiter*/, Limiter& /*interfaceVolumeFractionLimiter*/, Prim type)
 {
   cellLeft->copyVec(m_cellLeft->getPhases(type), m_cellLeft->getMixture(type), m_cellLeft->getTransports(type));
-  //Projection des velocities sur repere attache a la face
+  //Velocity projection on geometric reference frame of the face
   cellLeft->localProjection(m_face->getNormal(), m_face->getTangent(), m_face->getBinormal(), numberPhases);
-  //Calcul des variables etendus (Phases, Mixture, AddPhys)
+  //Computation of extended variables (Phases, Mixture, AddPhys)
   cellLeft->fulfillState();
 
-  //Probleme de Riemann
+  //Riemann problem
   double dxLeft(m_cellLeft->getElement()->getLCFL());
   dxLeft = dxLeft*std::pow(2., (double)m_lvl);
-  this->solveRiemannLimite(*cellLeft, numberPhases, dxLeft, dtMax);
-  //Traitement des fonctions de transport (m_Sm connu : doit etre place apres l appel au Solveur de Riemann)
-  if (numberTransports > 0) { this->solveRiemannTransportLimite(*cellLeft, numberTransports); }
+  // Reset recorded boundary fluxes in case it is not done in R-P 
+  m_massflow = 0.; 
+  m_powerFlux = 0.;
+  this->solveRiemannBoundary(*cellLeft, numberPhases, dxLeft, dtMax);
+  //Extraction of massflow/powerFlux through boundary done during R-P
+  m_massflow *= this->getFace()->getSurface();
+  m_powerFlux *= this->getFace()->getSurface();
+  //Handling of transport functions (m_Sm known: need to be called after Riemann solver)
+  if (numberTransports > 0) { this->solveRiemannTransportBoundary(*cellLeft, numberTransports); }
 
-  //Projection du flux sur le repere absolu
+  //Flux projection on absolute reference frame
   m_mod->reverseProjection(m_face->getNormal(), m_face->getTangent(), m_face->getBinormal());
 }
 
-//****************************************************************************
-//******************************Methode AMR***********************************
-//****************************************************************************
+//***********************************************************************
+
+double BoundCond::getMassflow() const
+{
+  return m_massflow;
+}
+
+//***********************************************************************
+
+double BoundCond::getPowerFlux() const
+{
+  return m_powerFlux;
+}
+
+//***************************************************************************
+//******************************AMR Method***********************************
+//***************************************************************************
 
 void BoundCond::computeFluxXi()
 {
@@ -110,8 +126,8 @@ void BoundCond::computeFluxXi()
 
 //****************************************************************************
 
-void BoundCond::raffineCellInterfaceExterne(const int &nbCellsY, const int &nbCellsZ, const double &dXParent, const double &dYParent,
-  const double &dZParent, Cell *cellRef, const int &dim)
+void BoundCond::raffineCellInterfaceExterne(const int& nbCellsY, const int& nbCellsZ, const double& dXParent, const double& dYParent,
+  const double& dZParent, Cell* cellRef, const int& dim)
 {
   //Le cell interface est une CL -> Creation des children cell interfaces
   double surfaceChild(std::pow(0.5, dim - 1.)*m_face->getSurface());
@@ -121,9 +137,9 @@ void BoundCond::raffineCellInterfaceExterne(const int &nbCellsY, const int &nbCe
   if (nbCellsZ == 1) {
     if (nbCellsY == 1) {
 
-      //--------------------------------------------------
-      //--------------------- Cas 1D ---------------------
-      //--------------------------------------------------
+      //---------------------------------------------------
+      //--------------------- 1D case ---------------------
+      //---------------------------------------------------
 
       this->creerCellInterfaceChild();
       m_cellInterfacesChildren[0]->creerFaceChild(this);
@@ -131,12 +147,12 @@ void BoundCond::raffineCellInterfaceExterne(const int &nbCellsY, const int &nbCe
       m_cellInterfacesChildren[0]->getFace()->setPos(m_face->getPos().getX(), m_face->getPos().getY(), m_face->getPos().getZ());
       m_cellInterfacesChildren[0]->getFace()->setSize(m_face->getSize());
       if (m_face->getPos().getX() < cellRef->getElement()->getPosition().getX()) {
-        //Cell interface number 1 (gauche)
+        //Cell interface number 1 (left)
         m_cellInterfacesChildren[0]->initializeGauche(cellRef->getCellChild(0));
         cellRef->getCellChild(0)->addCellInterface(m_cellInterfacesChildren[0]);
       }
       else {
-        //Cell interface number 2 (droite)
+        //Cell interface number 2 (right)
         m_cellInterfacesChildren[0]->initializeGauche(cellRef->getCellChild(1));
         cellRef->getCellChild(1)->addCellInterface(m_cellInterfacesChildren[0]);
       }
@@ -145,9 +161,9 @@ void BoundCond::raffineCellInterfaceExterne(const int &nbCellsY, const int &nbCe
     }
     else {
 
-      //--------------------------------------------------
-      //--------------------- Cas 2D ---------------------
-      //--------------------------------------------------
+      //---------------------------------------------------
+      //--------------------- 2D case ---------------------
+      //---------------------------------------------------
 
       //Creation des cell interfaces et faces enfants avec premiere initialization
       //--------------------------------------------------------------------------
@@ -239,8 +255,8 @@ void BoundCond::raffineCellInterfaceExterne(const int &nbCellsY, const int &nbCe
         }
       }
 
-      //Association du model et des slopes
-      //-----------------------------------
+      //Association of model and slopes
+      //-------------------------------
       for (int i = 0; i < 2; i++) {
         m_cellInterfacesChildren[i]->associeModel(m_mod);
         m_cellInterfacesChildren[i]->allocateSlopes(cellRef->getNumberPhases(), cellRef->getNumberTransports(), allocateSlopeLocal);
@@ -250,9 +266,9 @@ void BoundCond::raffineCellInterfaceExterne(const int &nbCellsY, const int &nbCe
   }
   else {
 
-    //--------------------------------------------------
-    //--------------------- Cas 3D ---------------------
-    //--------------------------------------------------
+    //---------------------------------------------------
+    //--------------------- 3D case ---------------------
+    //---------------------------------------------------
 
     //Creation des cell interfaces et faces enfants avec premiere initialization
     //--------------------------------------------------------------------------
@@ -464,7 +480,7 @@ void BoundCond::raffineCellInterfaceExterne(const int &nbCellsY, const int &nbCe
 
 //***********************************************************************
 
-void BoundCond::deraffineCellInterfaceExterne(Cell *cellRef)
+void BoundCond::deraffineCellInterfaceExterne(Cell* cellRef)
 {
   //Dans le cas des CL, on parcourt toujours les parent cell interfaces mais on peut directement les deraffiner et mettre a jour la cell gauche.
 

@@ -6,6 +6,7 @@
 //       |  `--.  \  `-.  \ `-' /   \  `-) ) |  `--.  | | |)| 
 //       /( __.'   \____\  )---'    )\____/  /( __.'  /(  (_) 
 //      (__)              (_)      (__)     (__)     (__)     
+//      Official webSite: https://code-mphi.github.io/ECOGEN/
 //
 //  This file is part of ECOGEN.
 //
@@ -30,11 +31,6 @@
 #ifndef GDCYLINDER_H
 #define GDCYLINDER_H
 
-//! \file      GDCylinder.h
-//! \author    K. Schmidmayer
-//! \version   1.1
-//! \date      June 5 2019
-
 #include "GeometricalDomain.h"
 
 //! \class     GDCylinder
@@ -54,10 +50,10 @@ public:
   //! \param     element        XML element to read for geometrical properties
   //! \param     physicalEntity physical entity number relative to mesh generation (see mesh tool)
   //! \param     fileName       String name of readed XML file
-  GDCylinder(std::string name, std::vector<Phase*> vecPhases, Mixture *mixture, std::vector<Transport> vecTransports, tinyxml2::XMLElement *element, const int &physicalEntity, std::string fileName = "Fichier Inconnu");
+  GDCylinder(std::string name, std::vector<Phase*> vecPhases, Mixture* mixture, std::vector<Transport> vecTransports, tinyxml2::XMLElement* element, const int& physicalEntity, std::string fileName = "Fichier Inconnu");
   virtual ~GDCylinder();
 
-  virtual bool belong(Coord &posElement, const int &lvl) const;
+  virtual bool belong(Coord& posElement, const int& /*lvl*/) const;
 private:
   Coord m_centerPos;          //!< Cylinder position center
   Axis m_axis1, m_axis2, m_axis3; //!< Axes that define the cylinder plane and the length direction

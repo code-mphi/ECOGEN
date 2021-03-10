@@ -6,6 +6,7 @@
 //       |  `--.  \  `-.  \ `-' /   \  `-) ) |  `--.  | | |)| 
 //       /( __.'   \____\  )---'    )\____/  /( __.'  /(  (_) 
 //      (__)              (_)      (__)     (__)     (__)     
+//      Official webSite: https://code-mphi.github.io/ECOGEN/
 //
 //  This file is part of ECOGEN.
 //
@@ -27,37 +28,28 @@
 //  along with ECOGEN (file LICENSE).  
 //  If not, see <http://www.gnu.org/licenses/>.
 
-//! \file      BoundCondOutflow.cpp
-//! \author    F. Petitpas, K. Schmidmayer
-//! \version   1.0
-//! \date      February 13 2019
-
 #include "BoundCondOutflow.h"
 
 using namespace tinyxml2;
 
 //****************************************************************************
 
-BoundCondOutflow::BoundCondOutflow(){}
-
-//****************************************************************************
-
-BoundCondOutflow::BoundCondOutflow(int numPhysique, XMLElement *element, int &numberPhases, int &numberTransports, std::vector<std::string> nameTransports, std::string fileName) :
+BoundCondOutflow::BoundCondOutflow(int numPhysique, XMLElement* element, int& numberTransports, std::vector<std::string> nameTransports, std::string fileName) :
   BoundCond(numPhysique)
 {
-  //Lecture de the pressure en sortie
-  XMLElement *sousElement(element->FirstChildElement("dataOutflow"));
+  //Reading imposed outflow pressure
+  XMLElement* sousElement(element->FirstChildElement("dataOutflow"));
   if (sousElement == NULL) throw ErrorXMLElement("dataOutflow", fileName, __FILE__, __LINE__);
-  //Recuperation des attributs
-  //--------------------------
+  //Reading attributes
+  //------------------
   XMLError error;
   error = sousElement->QueryDoubleAttribute("p0", &m_p0);
   if (error != XML_NO_ERROR) throw ErrorXMLAttribut("p0", fileName, __FILE__, __LINE__);
 
-  //Lecture des transports
+  //Reading transports
   int couleurTrouvee(0);
   m_valueTransport = new double[numberTransports];
-  XMLElement *elementTransport(sousElement->FirstChildElement("transport"));
+  XMLElement* elementTransport(sousElement->FirstChildElement("transport"));
   std::string nameTransport;
   while (elementTransport != NULL)
   {
@@ -72,41 +64,23 @@ BoundCondOutflow::BoundCondOutflow(int numPhysique, XMLElement *element, int &nu
       if (error != XML_NO_ERROR) throw ErrorXMLAttribut("value", fileName, __FILE__, __LINE__);
       couleurTrouvee++;
     }
-    //Transport suivant
+    //Next transport
     elementTransport = elementTransport->NextSiblingElement("transport");
   }
-  if (numberTransports > couleurTrouvee) throw ErrorXMLAttribut("Pas assez d equations de tansport dans CL inj", fileName, __FILE__, __LINE__);
+  if (numberTransports > couleurTrouvee) throw ErrorXMLAttribut("Not enough transport equations in BC inj", fileName, __FILE__, __LINE__);
   m_numberTransports = numberTransports;
-
-  //Allocation pour stocker les debits
-  m_debits = new double[numberPhases];
-  m_numberPhases = numberPhases;
 }
 
 //****************************************************************************
 
-BoundCondOutflow::BoundCondOutflow(double p0) : m_p0(p0){}
-
-//****************************************************************************
-
-BoundCondOutflow::BoundCondOutflow(const BoundCondOutflow& Source, const int lvl) : BoundCond(Source)
+BoundCondOutflow::BoundCondOutflow(const BoundCondOutflow& Source, const int& lvl) : BoundCond(Source, lvl)
 {
-  m_numberPhases = Source.m_numberPhases;
   m_numberTransports = Source.m_numberTransports;
-
   m_p0 = Source.m_p0;
-
   m_valueTransport = new double[m_numberTransports];
   for (int k = 0; k < m_numberTransports; k++) {
     m_valueTransport[k] = Source.m_valueTransport[k];
   }
-  
-  m_debits = new double[m_numberPhases];
-  for (int k = 0; k < m_numberPhases; k++) {
-    m_debits[k] = 0.;
-  }
-
-  m_lvl = lvl;
 }
 
 //****************************************************************************
@@ -114,30 +88,25 @@ BoundCondOutflow::BoundCondOutflow(const BoundCondOutflow& Source, const int lvl
 BoundCondOutflow::~BoundCondOutflow()
 {
   delete[] m_valueTransport;
-  delete[] m_debits;
 }
 
 //****************************************************************************
 
-void BoundCondOutflow::creeLimite(TypeMeshContainer<CellInterface *> &cellInterfaces)
+void BoundCondOutflow::createBoundary(TypeMeshContainer<CellInterface*>& cellInterfaces)
 {
   cellInterfaces.push_back(new BoundCondOutflow(*(this)));
 }
 
 //****************************************************************************
 
-void BoundCondOutflow::solveRiemannLimite(Cell &cellLeft, const int & numberPhases, const double & dxLeft, double & dtMax)
+void BoundCondOutflow::solveRiemannBoundary(Cell& cellLeft, const int& numberPhases, const double& dxLeft, double& dtMax)
 {
-  m_mod->solveRiemannOutflow(cellLeft, numberPhases, dxLeft, dtMax, m_p0, m_debits);
-  for (int k = 0; k < numberPhases; k++) {
-    m_debits[k] *= this->getFace()->getSurface();
-    //if (1) m_debits[k] *= 3.14*2.*this->getFace()->getPos().getY();
-  }
+  m_mod->solveRiemannOutflow(cellLeft, numberPhases, dxLeft, dtMax, m_p0, m_massflow, m_powerFlux);
 }
 
 //****************************************************************************
 
-void BoundCondOutflow::solveRiemannTransportLimite(Cell &cellLeft, const int & numberTransports) const
+void BoundCondOutflow::solveRiemannTransportBoundary(Cell& cellLeft, const int& numberTransports) const
 {
 	m_mod->solveRiemannTransportOutflow(cellLeft, numberTransports, m_valueTransport);
 }
@@ -150,16 +119,9 @@ void BoundCondOutflow::printInfo()
   std::cout << m_p0 << std::endl;
 }
 
-//****************************************************************************
-
-//double BoundCondOutflow::getDebit(int numPhase) const 
-//{
-//  return m_debits[numPhase];
-//}
-
-//****************************************************************************
-//******************************Methode AMR***********************************
-//****************************************************************************
+//***************************************************************************
+//******************************AMR Method***********************************
+//***************************************************************************
 
 void BoundCondOutflow::creerCellInterfaceChild()
 {

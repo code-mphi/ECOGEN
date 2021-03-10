@@ -6,6 +6,7 @@
 //       |  `--.  \  `-.  \ `-' /   \  `-) ) |  `--.  | | |)| 
 //       /( __.'   \____\  )---'    )\____/  /( __.'  /(  (_) 
 //      (__)              (_)      (__)     (__)     (__)     
+//      Official webSite: https://code-mphi.github.io/ECOGEN/
 //
 //  This file is part of ECOGEN.
 //
@@ -27,11 +28,6 @@
 //  along with ECOGEN (file LICENSE).  
 //  If not, see <http://www.gnu.org/licenses/>.
 
-//! \file      ElementTetrahedron.cpp
-//! \author    F. Petitpas
-//! \version   1.0
-//! \date      December 20 2017
-
 #include "ElementTetrahedron.h"
 
 const int ElementTetrahedron::TYPEGMSH = 4;
@@ -51,7 +47,7 @@ ElementTetrahedron::~ElementTetrahedron(){}
 
 //***********************************************************************
 
-void ElementTetrahedron::computeVolume(const Coord *noeuds)
+void ElementTetrahedron::computeVolume(const Coord* noeuds)
 {
   Coord v1(noeuds[1] - noeuds[0]), v2(noeuds[2] - noeuds[0]), v3(noeuds[3] - noeuds[0]);
   m_volume = std::fabs(Coord::determinant(v1, v2, v3)) / 6.; //volume du tetradre
@@ -59,7 +55,7 @@ void ElementTetrahedron::computeVolume(const Coord *noeuds)
 
 //***********************************************************************
 
-void ElementTetrahedron::computeLCFL(const Coord *noeuds)
+void ElementTetrahedron::computeLCFL(const Coord* noeuds)
 {
   Coord vec; m_lCFL = 1e10;
   vec = ((noeuds[0] + noeuds[1] + noeuds[2]) / 3.) - m_position;
@@ -74,7 +70,7 @@ void ElementTetrahedron::computeLCFL(const Coord *noeuds)
 
 //***********************************************************************
 // Nouvelle version beaucoup plus efficace avec recherche dans tableau temporaire
-void ElementTetrahedron::construitFaces(const Coord *noeuds, FaceNS **faces, int &iMax, int** facesTemp, int* sommeNoeudsTemp)
+void ElementTetrahedron::construitFaces(const Coord* noeuds, FaceNS** faces, int& iMax, int** facesTemp, int* sommeNoeudsTemp)
 {
   //4 faces a traiter de type triangle
   int indexFaceExiste(-1);
@@ -108,7 +104,7 @@ void ElementTetrahedron::construitFaces(const Coord *noeuds, FaceNS **faces, int
 
 //***********************************************************************
 // Nouvelle version beaucoup plus efficace avec recherche dans tableau temporaire
-void ElementTetrahedron::construitFacesSimplifie(int &iMax, int** facesTemp, int* sommeNoeudsTemp)
+void ElementTetrahedron::construitFacesSimplifie(int& iMax, int** facesTemp, int* sommeNoeudsTemp)
 {
   //4 faces a traiter de type triangle
   int indexFaceExiste(-1);
@@ -135,7 +131,7 @@ void ElementTetrahedron::construitFacesSimplifie(int &iMax, int** facesTemp, int
 
 //***********************************************************************
 
-void ElementTetrahedron::attributFaceCommunicante(const Coord *noeuds, FaceNS **faces, const int &indexMaxFaces, const int &numberNoeudsInternes)
+void ElementTetrahedron::attributFaceCommunicante(FaceNS** faces, const int& indexMaxFaces, const int& numberNoeudsInternes)
 {
   int indexFaceExiste(0);
   //Verification face 1 :
@@ -182,7 +178,7 @@ void ElementTetrahedron::attributFaceCommunicante(const Coord *noeuds, FaceNS **
 
 //***********************************************************************
 
-int ElementTetrahedron::compteFaceCommunicante(std::vector<int*> &facesTemp, std::vector<int> &sommeNoeudsTemp)
+int ElementTetrahedron::compteFaceCommunicante(std::vector<int*>& facesTemp, std::vector<int>& sommeNoeudsTemp)
 {
   //4 faces a traiter de type triangle
   int indexFaceExiste(-1), numberFacesCommunicante(0);
@@ -211,7 +207,7 @@ int ElementTetrahedron::compteFaceCommunicante(std::vector<int*> &facesTemp, std
 
 //***********************************************************************
 //Nouvelle version plus efficace
-int ElementTetrahedron::compteFaceCommunicante(int &iMax, int **facesTemp, int *sommeNoeudsTemp)
+int ElementTetrahedron::compteFaceCommunicante(int& iMax, int** facesTemp, int* sommeNoeudsTemp)
 {
   //4 faces a traiter de type triangle
   int indexFaceExiste(-1), numberFacesCommunicante(0);

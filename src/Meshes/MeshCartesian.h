@@ -6,6 +6,7 @@
 //       |  `--.  \  `-.  \ `-' /   \  `-) ) |  `--.  | | |)| 
 //       /( __.'   \____\  )---'    )\____/  /( __.'  /(  (_) 
 //      (__)              (_)      (__)     (__)     (__)     
+//      Official webSite: https://code-mphi.github.io/ECOGEN/
 //
 //  This file is part of ECOGEN.
 //
@@ -30,11 +31,6 @@
 #ifndef MESHCARTESIAN_H
 #define MESHCARTESIAN_H
 
-//! \file      MeshCartesian.h
-//! \author    F. Petitpas, K. Schmidmayer, S. Le Martelot, B. Dorschner
-//! \version   1.1
-//! \date      June 5 2019
-
 #include "Mesh.h"
 #include "ElementCartesian.h"
 #include "FaceCartesian.h"
@@ -48,15 +44,15 @@ public:
     std::vector<stretchZone> stretchX, std::vector<stretchZone> stretchY, std::vector<stretchZone> stretchZ);
   virtual ~MeshCartesian();
 
-  virtual void attributLimites(std::vector<BoundCond*> &boundCond);
-  void recupereIJK(const int &index, int &i, int &j, int &k) const;
-  void construitIGlobal(const int &i, const int &j, const int &k, int &index) const;
-  virtual int initializeGeometrie(TypeMeshContainer<Cell *> &cells, TypeMeshContainer<Cell *> &cellsGhost, TypeMeshContainer<CellInterface *> &cellInterfaces,
-    const int &restartSimulation, bool pretraitementParallele, std::string ordreCalcul);
+  virtual void attributLimites(std::vector<BoundCond*>& boundCond);
+  void recupereIJK(const int& index, int& i, int& j, int& k) const;
+  void construitIGlobal(const int& i, const int& j, const int& k, int& index) const;
+  virtual int initializeGeometrie(TypeMeshContainer<Cell*>& cells, TypeMeshContainer<Cell*>& cellsGhost, TypeMeshContainer<CellInterface*>& cellInterfaces,
+    const int& /*restartSimulation*/, bool /*pretraitementParallele*/, std::string ordreCalcul);
   void meshStretching();
-  void initializeGeometrieMonoCpu(TypeMeshContainer<Cell *> &cells, TypeMeshContainer<CellInterface *> &cellInterfaces, std::string ordreCalcul);
-  void initializeGeometrieParallele(TypeMeshContainer<Cell *> &cells, TypeMeshContainer<Cell *> &cellsGhost, TypeMeshContainer<CellInterface *> &cellInterfaces, std::string ordreCalcul);
-  void decoupageParallele(std::string ordreCalcul, TypeMeshContainer<Cell *> &cells);
+  void initializeGeometrieMonoCpu(TypeMeshContainer<Cell*>& cells, TypeMeshContainer<CellInterface*>& cellInterfaces, std::string ordreCalcul);
+  void initializeGeometrieParallele(TypeMeshContainer<Cell*>& cells, TypeMeshContainer<Cell*>& cellsGhost, TypeMeshContainer<CellInterface*>& cellInterfaces, std::string ordreCalcul);
+  void decoupageParallele(std::string ordreCalcul, TypeMeshContainer<Cell*>& cells);
   virtual std::string whoAmI() const;
 
   //Accessors
@@ -66,14 +62,13 @@ public:
 
   //Printing / Reading
   //------------------
-  virtual std::string recupereChaineExtent(int localRank, bool global = false) const;
-  virtual void recupereCoord(TypeMeshContainer<Cell *> *cellsLvl, std::vector<double> &jeuDonnees, Axis axis) const;
-  virtual void recupereDonnees(TypeMeshContainer<Cell *> *cellsLvl, std::vector<double> &jeuDonnees, const int var, int phase) const;
-  virtual void setDataSet(std::vector<double> &jeuDonnees, TypeMeshContainer<Cell *> *cellsLvl, const int var, int phase) const;
+  virtual std::string recupereChaineExtent(bool global = false) const;
+  virtual void recupereCoord(std::vector<double>& jeuDonnees, Axis axis) const;
+  virtual void recupereDonnees(TypeMeshContainer<Cell*>* cellsLvl, std::vector<double>& jeuDonnees, const int var, int phase) const;
 
 protected:
-  TypeMeshContainer<Element *> m_elements; //!<Vector of element objects: Contains geometrical attributes
-  TypeMeshContainer<Face *> m_faces;       //!<Vector of face objects (between two elements or at boundaries): Contains geometrical attributes
+  TypeMeshContainer<Element*> m_elements; //!<Vector of element objects: Contains geometrical attributes
+  TypeMeshContainer<Face*> m_faces;       //!<Vector of face objects (between two elements or at boundaries): Contains geometrical attributes
 
   double m_lX;
   double m_lY;
@@ -104,12 +99,12 @@ protected:
   int m_offsetZ;                 /*!< Offset in the z-direction of the current CPU for the array of cell lenghts and cell positions */
 
   int m_numberBoundCondInit;
-  BoundCond *m_limXm;
-  BoundCond *m_limXp;
-  BoundCond *m_limYm;
-  BoundCond *m_limYp;
-  BoundCond *m_limZm;
-  BoundCond *m_limZp;
+  BoundCond* m_limXm;
+  BoundCond* m_limXp;
+  BoundCond* m_limYm;
+  BoundCond* m_limYp;
+  BoundCond* m_limZm;
+  BoundCond* m_limZp;
 };
 
 #endif // MESHCARTESIAN_H

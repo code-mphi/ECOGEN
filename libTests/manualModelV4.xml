@@ -4,7 +4,7 @@ Typical example for model input file version 4
 
 <?xml version = "1.0" encoding = "UTF-8" standalone = "yes"?>
 <model>
-  <flowModel name="Kapila" numberPhases="2" alphaNull="false"/>
+  <flowModel name="PressureVelocityEq" numberPhases="2" alphaNull="false"/>
   <EOS name="IG_air.xml"/>
   <EOS name="SG_water.xml"/>
 </model>
@@ -16,12 +16,12 @@ REQUIRED computational parameters
 1) Hydrodynamic flow model
 **************************
 Contains model name and phase number for multiphase models.
-For Kapila's model, the volume fraction can either be null or not and this choice is determined by the parameter alphaNull.
+For the pressure-velocity- (Kapila's) and velocity-equilibrium models, the volume fraction can either be null or not and this choice is determined by the parameter alphaNull.
 For single phase model (example: Euler), numberPhases is optionnal and is 1 as default.
 Attribute numberTransports is optionnal and is set to 0 as default.
-Available models are : Euler, Kapila, ThermalEq, EulerHomogeneous.
+Available models are: Euler, PressureVelocityEq (Kapila), VelocityEq, TemperaturePressureVelocityEq, EulerHomogeneous.
 %%%%%%%%%%%%%%%%%% << copy between these lines
-<flowModel name="Kapila" numberPhases="2" numberTransports="1" alphaNull="false"/>
+<flowModel name="PressureVelocityEq" numberPhases="2" numberTransports="1" alphaNull="false"/>
 %%%%%%%%%%%%%%%%%% << copy between these lines
 
 2) Equations of states
@@ -93,6 +93,7 @@ b) Spherical symmetry (1D)
 ***************
 Few source terms are already implemented, it is the case to take into account the gravity effects.
 the order of integration choice can be EULER, RK2 or RK4.
+It is possible to set source term on a given zone of unstructured mesh through physicalEntity tag (when not specified the source term is applied on whole domain).
 a) Gravity
 ----------
 %%%%%%%%%%%%%%%%%% << copy between these lines
@@ -107,7 +108,7 @@ b) Heating
   <dataHeating volumeHeatPower="1.e6"/>
 </sourceTerms>
 %%%%%%%%%%%%%%%%%% << copy between these lines
-b) Moving Reference Frame
+c) Moving Reference Frame
 -------------------------
 %%%%%%%%%%%%%%%%%% << copy between these lines
 <sourceTerms type="MRF" order="EULER">
@@ -115,17 +116,32 @@ b) Moving Reference Frame
   <timeToOmega tf="1.e-3"/>  <!-- Optional: If activated, the angular velocity increase linearly to omega in during tf -->
 </sourceTerms>
 %%%%%%%%%%%%%%%%%% << copy between these lines
+d) Specific location for source term
+------------------------------------
+%%%%%%%%%%%%%%%%%% << copy between these lines
+<sourceTerms type="heating" order="EULER" physicalEntity="10">
+  <dataHeating volumeHeatPower="1.e6"/>
+</sourceTerms>
+%%%%%%%%%%%%%%%%%% << copy between these lines
 
 *) Relaxation terms
 *******************
 Some models can be used coupled to relaxation procedure to impose phase equilibriums.
 a) Pressures
---------------------------------------------------
+------------
 %%%%%%%%%%%%%%%%%% << copy between these lines
 <relaxation type="P"/>
 %%%%%%%%%%%%%%%%%% << copy between these lines
+or
+%%%%%%%%%%%%%%%%%% << copy between these lines
+<relaxation type="P" speed="infinite"/> <!-- Speed is optional: If absent, infinite relaxation is done -->
+%%%%%%%%%%%%%%%%%% << copy between these lines
+or
+%%%%%%%%%%%%%%%%%% << copy between these lines
+<relaxation type="P" speed="finite" rate="1."/> <!-- Speed and rate are optional: If absents, infinite relaxation is done -->
+%%%%%%%%%%%%%%%%%% << copy between these lines
 b) Pressures and temperatures
---------------------------------------------------
+-----------------------------
 %%%%%%%%%%%%%%%%%% << copy between these lines
 <relaxation type="PT"/>
 %%%%%%%%%%%%%%%%%% << copy between these lines

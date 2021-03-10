@@ -6,6 +6,7 @@
 //       |  `--.  \  `-.  \ `-' /   \  `-) ) |  `--.  | | |)| 
 //       /( __.'   \____\  )---'    )\____/  /( __.'  /(  (_) 
 //      (__)              (_)      (__)     (__)     (__)     
+//      Official webSite: https://code-mphi.github.io/ECOGEN/
 //
 //  This file is part of ECOGEN.
 //
@@ -30,11 +31,6 @@
 #ifndef GDELLIPSE_H
 #define GDELLIPSE_H
 
-//! \file      GDEllipse.h
-//! \author    K. Schmidmayer
-//! \version   1.0
-//! \date      June 25 2018
-
 #include "GeometricalDomain.h"
 
 //! \class     GDEllipse
@@ -54,10 +50,10 @@ public:
   //! \param     element        XML element to read for geometrical properties
   //! \param     physicalEntity physical entity number relative to mesh generation (see mesh tool)
   //! \param     fileName       String name of readed XML file
-  GDEllipse(std::string name, std::vector<Phase*> vecPhases, Mixture *mixture, std::vector<Transport> vecTransports, tinyxml2::XMLElement *element, const int &physicalEntity, std::string fileName = "Fichier Inconnu");
+  GDEllipse(std::string name, std::vector<Phase*> vecPhases, Mixture* mixture, std::vector<Transport> vecTransports, tinyxml2::XMLElement* element, const int& physicalEntity, std::string fileName = "Fichier Inconnu");
   virtual ~GDEllipse();
 
-  virtual bool belong(Coord &posElement, const int &lvl) const;
+  virtual bool belong(Coord& posElement, const int& /*lvl*/) const;
 private:
   Coord m_centerPos;            //!< Ellipse position center
   Axis m_axis1, m_axis2;           //!< Axes that define the Ellipse plane

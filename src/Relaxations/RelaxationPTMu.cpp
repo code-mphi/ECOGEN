@@ -6,6 +6,7 @@
 //       |  `--.  \  `-.  \ `-' /   \  `-) ) |  `--.  | | |)| 
 //       /( __.'   \____\  )---'    )\____/  /( __.'  /(  (_) 
 //      (__)              (_)      (__)     (__)     (__)     
+//      Official webSite: https://code-mphi.github.io/ECOGEN/
 //
 //  This file is part of ECOGEN.
 //
@@ -27,30 +28,20 @@
 //  along with ECOGEN (file LICENSE).  
 //  If not, see <http://www.gnu.org/licenses/>.
 
-//! \file      RelaxationPTMU.cpp
-//! \author    F. Petitpas
-//! \version   1.0
-//! \date      October 16 2018
-
 #include "RelaxationPTMu.h"
 
 using namespace tinyxml2;
 
 //***********************************************************************
 
-RelaxationPTMu::RelaxationPTMu(){}
-
-//***********************************************************************
-
-RelaxationPTMu::RelaxationPTMu(XMLElement *element, std::string fileName)
+RelaxationPTMu::RelaxationPTMu(XMLElement* element, std::string fileName)
 {
-	XMLElement *sousElement(element->FirstChildElement("dataPTMu"));
+	XMLElement* sousElement(element->FirstChildElement("dataPTMu"));
 	if (sousElement == NULL) throw ErrorXMLElement("dataPTMu", fileName, __FILE__, __LINE__);
 	//Collecting attributes
 	//---------------------
 	m_liq = 0;
 	m_vap = 1;
-	
 }
 
 //***********************************************************************
@@ -59,11 +50,11 @@ RelaxationPTMu::~RelaxationPTMu(){}
 
 //***********************************************************************
 
-void RelaxationPTMu::stiffRelaxation(Cell *cell, const int &numberPhases, Prim type) const
+void RelaxationPTMu::relaxation(Cell* cell, const int& numberPhases, const double& /*dt*/, Prim type)
 {
- 	Phase *phase(0);
+ 	Phase* phase(0);
 
-	if (numberPhases > 2) errors.push_back(Errors("More than 2-phase calculation with evaporation not implemented in RelaxationPTMu::stiffRelaxation", __FILE__, __LINE__));
+	if (numberPhases > 2) errors.push_back(Errors("More than 2-phase calculation with evaporation not implemented in RelaxationPTMu::relaxation", __FILE__, __LINE__));
 
 	//Initial state
 	double pStar(0.), Tsat;

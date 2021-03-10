@@ -1,0 +1,28 @@
+<?xml version = "1.0" encoding = "UTF-8" standalone = "yes"?>
+<computationParam>
+	<run>euler1DShockTubeHPLeft</run>
+	<outputMode format="XML" binary="false" precision="10"/>
+	<timeControlMode iterations="true">
+<iterations number="10" iterFreq="10"/>
+		<physicalTime totalTime="6.e-4" timeFreq="6e-5"/>
+	</timeControlMode>
+	<computationControl CFL="0.5"/>
+	<secondOrder>
+		<globalLimiter>vanleer</globalLimiter>
+	</secondOrder>
+	<restartSimulation restartFileNumber="0" AMRsaveFreq="0"/>
+
+	<probe name="sensor1">
+		<vertex x="0.3" y="0.05" z="0.05"/>
+		<timeControl acqFreq="1e-5."/>       
+	</probe>
+	<probe name="sensor2">
+		<vertex x="0.6" y="0.05" z="0.05"/>
+		<timeControl acqFreq="1e-5."/>       
+	</probe>
+	<probe name="sensor3">
+		<vertex x="0.8" y="0.05" z="0.05"/>
+		<timeControl acqFreq="1e-5."/>       
+	</probe>
+
+</computationParam>

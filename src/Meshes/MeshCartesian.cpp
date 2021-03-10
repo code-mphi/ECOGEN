@@ -6,6 +6,7 @@
 //       |  `--.  \  `-.  \ `-' /   \  `-) ) |  `--.  | | |)| 
 //       /( __.'   \____\  )---'    )\____/  /( __.'  /(  (_) 
 //      (__)              (_)      (__)     (__)     (__)     
+//      Official webSite: https://code-mphi.github.io/ECOGEN/
 //
 //  This file is part of ECOGEN.
 //
@@ -27,11 +28,6 @@
 //  along with ECOGEN (file LICENSE).  
 //  If not, see <http://www.gnu.org/licenses/>.
 
-//! \file      MeshCartesian.cpp
-//! \author    F. Petitpas, K. Schmidmayer, S. Le Martelot, B. Dorschner
-//! \version   1.1
-//! \date      June 5 2019
-
 #include <algorithm>
 
 #include "MeshCartesian.h"
@@ -40,9 +36,8 @@
 
 MeshCartesian::MeshCartesian(double lX, int numberCellsX, double lY, int numberCellsY, double lZ, int numberCellsZ,
   std::vector<stretchZone> stretchX, std::vector<stretchZone> stretchY, std::vector<stretchZone> stretchZ) :
-  m_lX(lX), m_numberCellsXGlobal(numberCellsX),
-  m_lY(lY), m_numberCellsYGlobal(numberCellsY),
-  m_lZ(lZ), m_numberCellsZGlobal(numberCellsZ)
+  m_lX(lX), m_lY(lY), m_lZ(lZ),
+  m_numberCellsXGlobal(numberCellsX), m_numberCellsYGlobal(numberCellsY), m_numberCellsZGlobal(numberCellsZ)
 {
   for (unsigned int i = 0; i < stretchX.size(); i++) { m_stretchX.push_back(stretchX[i]); }
   for (unsigned int i = 0; i < stretchY.size(); i++) { m_stretchY.push_back(stretchY[i]); }
@@ -90,7 +85,7 @@ MeshCartesian::~MeshCartesian(){
 
 //***********************************************************************
 
-void MeshCartesian::attributLimites(std::vector<BoundCond*> &boundCond)
+void MeshCartesian::attributLimites(std::vector<BoundCond*>& boundCond)
 {
   m_numberBoundCondInit = boundCond.size();
   for (int i = 0; i < m_numberBoundCondInit; i++) {
@@ -134,7 +129,7 @@ void MeshCartesian::attributLimites(std::vector<BoundCond*> &boundCond)
 
 //***********************************************************************
 
-void MeshCartesian::recupereIJK(const int &index, int &i, int &j, int &k) const
+void MeshCartesian::recupereIJK(const int& index, int& i, int& j, int& k) const
 {
   int reste;
   k = index / (m_numberCellsX*m_numberCellsY);
@@ -145,7 +140,7 @@ void MeshCartesian::recupereIJK(const int &index, int &i, int &j, int &k) const
 
 //***********************************************************************
 
-void MeshCartesian::construitIGlobal(const int &i, const int &j, const int &k, int &index) const
+void MeshCartesian::construitIGlobal(const int& i, const int& j, const int& k, int& index) const
 {
   index = 0;
   if (m_numberCellsX != 1) index += i;
@@ -155,8 +150,8 @@ void MeshCartesian::construitIGlobal(const int &i, const int &j, const int &k, i
 
 //***********************************************************************
 
-int MeshCartesian::initializeGeometrie(TypeMeshContainer<Cell *> &cells, TypeMeshContainer<Cell *> &cellsGhost, TypeMeshContainer<CellInterface *> &cellInterfaces,
-  const int &restartSimulation, bool pretraitementParallele, std::string ordreCalcul)
+int MeshCartesian::initializeGeometrie(TypeMeshContainer<Cell*>& cells, TypeMeshContainer<Cell*>& cellsGhost, TypeMeshContainer<CellInterface*>& cellInterfaces,
+  const int& /*restartSimulation*/, bool /*pretraitementParallele*/, std::string ordreCalcul)
 {
   this->meshStretching();
   if (Ncpu == 1)
@@ -216,10 +211,9 @@ void MeshCartesian::meshStretching()
 
 //***********************************************************************
 
-void MeshCartesian::initializeGeometrieMonoCpu(TypeMeshContainer<Cell *> &cells, TypeMeshContainer<CellInterface *> &cellInterfaces, std::string ordreCalcul)
+void MeshCartesian::initializeGeometrieMonoCpu(TypeMeshContainer<Cell*>& cells, TypeMeshContainer<CellInterface*>& cellInterfaces, std::string ordreCalcul)
 {
   int ix, iy, iz;
-  int compteMaillesParallele(0);
 
   m_numberCellsX = m_numberCellsXGlobal;
   m_numberCellsY = m_numberCellsYGlobal;
@@ -281,12 +275,11 @@ void MeshCartesian::initializeGeometrieMonoCpu(TypeMeshContainer<Cell *> &cells,
     m_numberFacesTotal += (m_numberCellsZ + 1)*m_numberCellsX*m_numberCellsY;
     m_numberFacesLimites += 2 * m_numberCellsX*m_numberCellsY;
   }
-  int numberFacesInternes(m_numberFacesTotal - m_numberFacesLimites);
+  //int numberFacesInternes(m_numberFacesTotal - m_numberFacesLimites);
 
   //Initialization des faces internes
   //*********************************
   int iMailleG, iMailleD, iFace(0), iTemp;
-  Cell *BGM=0, *BGP=0, *BDM=0, *BDP=0;
   //Faces selon X
   tangent.setXYZ(0., 1., 0.); normal.setXYZ(1., 0., 0.); binormal.setXYZ(0., 0., 1.);
   for (ix = 0; ix < m_numberCellsX - 1; ix++)
@@ -312,11 +305,10 @@ void MeshCartesian::initializeGeometrieMonoCpu(TypeMeshContainer<Cell *> &cells,
         posZ = m_posZk[iz];
         m_faces[iFace]->setPos(posX, posY, posZ);
         //Preparation des cells pour ordre 2 multislopes
-        BGM = 0; BGP = 0; BDM = 0; BDP = 0;
-        if (ix != 0) { this->construitIGlobal(ix - 1, iy, iz, iTemp); BGM = cells[iTemp]; }
-        if (ix < m_numberCellsX - 1) { this->construitIGlobal(ix + 1, iy, iz, iTemp); BGP = cells[iTemp]; }
-        if (ix < m_numberCellsX - 2) { this->construitIGlobal(ix + 2, iy, iz, iTemp); BDM = cells[iTemp]; }
-        this->construitIGlobal(ix, iy, iz, iTemp); BDP = cells[iTemp];
+        if (ix != 0) { this->construitIGlobal(ix - 1, iy, iz, iTemp); }
+        if (ix < m_numberCellsX - 1) { this->construitIGlobal(ix + 1, iy, iz, iTemp); }
+        if (ix < m_numberCellsX - 2) { this->construitIGlobal(ix + 2, iy, iz, iTemp); }
+        this->construitIGlobal(ix, iy, iz, iTemp);
         iFace++;
       }
     }
@@ -346,19 +338,10 @@ void MeshCartesian::initializeGeometrieMonoCpu(TypeMeshContainer<Cell *> &cells,
         posZ = m_posZk[iz];
         m_faces[iFace]->setPos(posX, posY, posZ);
         //Preparation des cells pour ordre 2 multislopes
-        BGM = 0; BGP = 0; BDM = 0; BDP = 0;
-        if (iy != 0) { this->construitIGlobal(ix, iy - 1, iz, iTemp); BGM = cells[iTemp]; }
-        if (iy < m_numberCellsY - 1) { this->construitIGlobal(ix, iy + 1, iz, iTemp); BGP = cells[iTemp]; }
-        if (iy < m_numberCellsY - 2) { this->construitIGlobal(ix, iy + 2, iz, iTemp); BDM = cells[iTemp]; }
-        this->construitIGlobal(ix, iy, iz, iTemp); BDP = cells[iTemp];
-        //cellInterfaces[iFace]->setB(BG1M, BGM);
-        //cellInterfaces[iFace]->setB(BG1P, BGP);
-        //cellInterfaces[iFace]->setB(BD1M, BDM);
-        //cellInterfaces[iFace]->setB(BD1P, BDP);
-        //cellInterfaces[iFace]->setDistanceH(distanceHGM, m_dY);
-        //cellInterfaces[iFace]->setDistanceH(distanceHGP, m_dY);
-        //cellInterfaces[iFace]->setDistanceH(distanceHDM, m_dY);
-        //cellInterfaces[iFace]->setDistanceH(distanceHDP, m_dY);
+        if (iy != 0) { this->construitIGlobal(ix, iy - 1, iz, iTemp); }
+        if (iy < m_numberCellsY - 1) { this->construitIGlobal(ix, iy + 1, iz, iTemp); }
+        if (iy < m_numberCellsY - 2) { this->construitIGlobal(ix, iy + 2, iz, iTemp); }
+        this->construitIGlobal(ix, iy, iz, iTemp);
         iFace++;
       }
     }
@@ -388,19 +371,10 @@ void MeshCartesian::initializeGeometrieMonoCpu(TypeMeshContainer<Cell *> &cells,
         posZ = m_posZk[iz] + 0.5*m_dZk[iz];
         m_faces[iFace]->setPos(posX, posY, posZ);
         //Preparation des cells pour ordre 2 multislopes
-        BGM = 0; BGP = 0; BDM = 0; BDP = 0;
-        if (iz != 0) { this->construitIGlobal(ix, iy, iz - 1, iTemp); BGM = cells[iTemp]; }
-        if (iz < m_numberCellsZ - 1) { this->construitIGlobal(ix, iy, iz + 1, iTemp); BGP = cells[iTemp]; }
-        if (iz < m_numberCellsZ - 2) { this->construitIGlobal(ix, iy, iz + 2, iTemp); BDM = cells[iTemp]; }
-        this->construitIGlobal(ix, iy, iz, iTemp); BDP = cells[iTemp];
-        //(*cellInterface)[iFace]->setB(BG1M, BGM);
-        //(*cellInterface)[iFace]->setB(BG1P, BGP);
-        //(*cellInterface)[iFace]->setB(BD1M, BDM);
-        //(*cellInterface)[iFace]->setB(BD1P, BDP);
-        //(*cellInterface)[iFace]->setDistanceH(distanceHGM, m_dZ);
-        //(*cellInterface)[iFace]->setDistanceH(distanceHGP, m_dZ);
-        //(*cellInterface)[iFace]->setDistanceH(distanceHDM, m_dZ);
-        //(*cellInterface)[iFace]->setDistanceH(distanceHDP, m_dZ);
+        if (iz != 0) { this->construitIGlobal(ix, iy, iz - 1, iTemp); }
+        if (iz < m_numberCellsZ - 1) { this->construitIGlobal(ix, iy, iz + 1, iTemp); }
+        if (iz < m_numberCellsZ - 2) { this->construitIGlobal(ix, iy, iz + 2, iTemp); }
+        this->construitIGlobal(ix, iy, iz, iTemp);
         iFace++;
       }
     }
@@ -417,7 +391,7 @@ void MeshCartesian::initializeGeometrieMonoCpu(TypeMeshContainer<Cell *> &cells,
     {
       for (iz = 0; iz < m_numberCellsZ; iz++)
       {
-        m_limXm->creeLimite(cellInterfaces);
+        m_limXm->createBoundary(cellInterfaces);
         m_faces.push_back(new FaceCartesian());
         cellInterfaces[iFace]->setFace(m_faces[iFace]);
         this->construitIGlobal(ix, iy, iz, iMailleG);
@@ -441,7 +415,7 @@ void MeshCartesian::initializeGeometrieMonoCpu(TypeMeshContainer<Cell *> &cells,
     {
       for (iz = 0; iz < m_numberCellsZ; iz++)
       {
-        m_limXp->creeLimite(cellInterfaces);
+        m_limXp->createBoundary(cellInterfaces);
         m_faces.push_back(new FaceCartesian());
         cellInterfaces[iFace]->setFace(m_faces[iFace]);
         this->construitIGlobal(ix, iy, iz, iMailleG);
@@ -470,11 +444,29 @@ void MeshCartesian::initializeGeometrieMonoCpu(TypeMeshContainer<Cell *> &cells,
     {
       for (iz = 0; iz < m_numberCellsZ; iz++)
       {
-        m_limYm->creeLimite(cellInterfaces);
-        m_faces.push_back(new FaceCartesian());
-        cellInterfaces[iFace]->setFace(m_faces[iFace]);
         this->construitIGlobal(ix, iy, iz, iMailleG);
         iMailleD = iMailleG;
+
+        // Hard-coded boundary condition for Blasius test case
+        // ---------------------------------------------------
+        // Allows to set slip and no-slip wall on same boundary of a cartesian mesh.
+        // Requires to set wall boundary condition in file initialConditions.xml 
+        // to define no-slip wall and slipping wall is defined thanks to a
+        // symmetry before a given position.
+        // To comment if not needed and be carefull when using it.
+        // if (cells[iMailleG]->getPosition().getX() < 0.1) {
+        //   BoundCond* limBuff(new BoundCondSymmetry(4));
+        //   limBuff->createBoundary(cellInterfaces);
+        // }
+        // else {
+        //   m_limYm->createBoundary(cellInterfaces);
+        // }
+        //JC//WARNING This hard-coded boundary condition will not be anymore useful 
+        // when 2nd order on unstructured mesh will be available.
+
+        m_limYm->createBoundary(cellInterfaces);
+        m_faces.push_back(new FaceCartesian());
+        cellInterfaces[iFace]->setFace(m_faces[iFace]);
         cellInterfaces[iFace]->initialize(cells[iMailleG], cells[iMailleD]);
         cells[iMailleG]->addCellInterface(cellInterfaces[iFace]);
         surface = m_dXi[ix] * m_dZk[iz];
@@ -494,7 +486,7 @@ void MeshCartesian::initializeGeometrieMonoCpu(TypeMeshContainer<Cell *> &cells,
     {
       for (iz = 0; iz < m_numberCellsZ; iz++)
       {
-        m_limYp->creeLimite(cellInterfaces);
+        m_limYp->createBoundary(cellInterfaces);
         m_faces.push_back(new FaceCartesian());
         cellInterfaces[iFace]->setFace(m_faces[iFace]);
         this->construitIGlobal(ix, iy, iz, iMailleG);
@@ -523,7 +515,7 @@ void MeshCartesian::initializeGeometrieMonoCpu(TypeMeshContainer<Cell *> &cells,
     {
       for (iy = 0; iy < m_numberCellsY; iy++)
       {
-        m_limZm->creeLimite(cellInterfaces);
+        m_limZm->createBoundary(cellInterfaces);
         m_faces.push_back(new FaceCartesian());
         cellInterfaces[iFace]->setFace(m_faces[iFace]);
         this->construitIGlobal(ix, iy, iz, iMailleG);
@@ -547,7 +539,7 @@ void MeshCartesian::initializeGeometrieMonoCpu(TypeMeshContainer<Cell *> &cells,
     {
       for (iy = 0; iy < m_numberCellsY; iy++)
       {
-        m_limZp->creeLimite(cellInterfaces);
+        m_limZp->createBoundary(cellInterfaces);
         m_faces.push_back(new FaceCartesian());
         cellInterfaces[iFace]->setFace(m_faces[iFace]);
         this->construitIGlobal(ix, iy, iz, iMailleG);
@@ -569,7 +561,7 @@ void MeshCartesian::initializeGeometrieMonoCpu(TypeMeshContainer<Cell *> &cells,
 
 //***********************************************************************
 
-void MeshCartesian::initializeGeometrieParallele(TypeMeshContainer<Cell *> &cells, TypeMeshContainer<Cell *> &cellsGhost, TypeMeshContainer<CellInterface *> &cellInterfaces, std::string ordreCalcul)
+void MeshCartesian::initializeGeometrieParallele(TypeMeshContainer<Cell*>& cells, TypeMeshContainer<Cell*>& cellsGhost, TypeMeshContainer<CellInterface*>& cellInterfaces, std::string ordreCalcul)
 {
   int ix, iy, iz;
   int compteMaillesParallele(0);
@@ -629,7 +621,7 @@ void MeshCartesian::initializeGeometrieParallele(TypeMeshContainer<Cell *> &cell
     m_numberFacesTotal += (m_numberCellsZ + 1)*m_numberCellsX*m_numberCellsY;
     m_numberFacesLimites += 2 * m_numberCellsX*m_numberCellsY;
   }
-  int numberFacesInternes(m_numberFacesTotal - m_numberFacesLimites);
+  //int numberFacesInternes(m_numberFacesTotal - m_numberFacesLimites);
   
   //Initialization des faces internes
   //*********************************
@@ -763,7 +755,7 @@ void MeshCartesian::initializeGeometrieParallele(TypeMeshContainer<Cell *> &cell
 					this->construitIGlobal(ix, iy, iz, iMailleG);
           iMailleD = iMailleG;
           //setting boundary
-          m_limXm->creeLimite(cellInterfaces);
+          m_limXm->createBoundary(cellInterfaces);
         }
         //Common settings
         cells[iMailleG]->addCellInterface(cellInterfaces[iFace]);
@@ -810,7 +802,7 @@ void MeshCartesian::initializeGeometrieParallele(TypeMeshContainer<Cell *> &cell
         //B) Physical boundary condition treatment
         //----------------------------------------
         else {
-          m_limXp->creeLimite(cellInterfaces);
+          m_limXp->createBoundary(cellInterfaces);
           iMailleD = iMailleG;
         }
         //Common settings
@@ -868,10 +860,28 @@ void MeshCartesian::initializeGeometrieParallele(TypeMeshContainer<Cell *> &cell
         else {
           tangent.setXYZ(1., 0., 0.); normal.setXYZ(0., -1., 0.);
           //right and Left cells equals
-					this->construitIGlobal(ix, iy, iz, iMailleG);
+          this->construitIGlobal(ix, iy, iz, iMailleG);
           iMailleD = iMailleG;
+
+          // Hard-coded boundary condition for Blasius test case
+          // ---------------------------------------------------
+          // Allows to set slip and no-slip wall on same boundary of a cartesian mesh.
+          // Requires to set wall boundary condition in file initialConditions.xml 
+          // to define no-slip wall and slipping wall is defined thanks to a
+          // symmetry before a given position.
+          // To comment if not needed and be carefull when using it.
+          // if (cells[iMailleG]->getPosition().getX() < 0.1) {
+          //   BoundCond* limBuff(new BoundCondSymmetry(4));
+          //   limBuff->createBoundary(cellInterfaces);
+          // }
+          // else {
+          //   m_limYm->createBoundary(cellInterfaces);
+          // }
+          //JC//WARNING This hard-coded boundary condition will not be anymore useful 
+          // when 2nd order on unstructured mesh will be available.
+
           //setting boundary
-          m_limYm->creeLimite(cellInterfaces);
+          m_limYm->createBoundary(cellInterfaces);
         }
         //Common settings
         cells[iMailleG]->addCellInterface(cellInterfaces[iFace]);
@@ -918,7 +928,7 @@ void MeshCartesian::initializeGeometrieParallele(TypeMeshContainer<Cell *> &cell
         //B) Physical boundary condition treatment
         //----------------------------------------
         else {
-          m_limYp->creeLimite(cellInterfaces);
+          m_limYp->createBoundary(cellInterfaces);
           iMailleD = iMailleG;
         }
         //Common settings
@@ -979,7 +989,7 @@ void MeshCartesian::initializeGeometrieParallele(TypeMeshContainer<Cell *> &cell
           this->construitIGlobal(ix, iy, iz, iMailleG);
           iMailleD = iMailleG;
           //setting boundary
-          m_limZm->creeLimite(cellInterfaces);
+          m_limZm->createBoundary(cellInterfaces);
         }
         //Common settings
         cells[iMailleG]->addCellInterface(cellInterfaces[iFace]);
@@ -1026,7 +1036,7 @@ void MeshCartesian::initializeGeometrieParallele(TypeMeshContainer<Cell *> &cell
         //B) Physical boundary condition treatment
         //----------------------------------------
         else {
-          m_limZp->creeLimite(cellInterfaces);
+          m_limZp->createBoundary(cellInterfaces);
           iMailleD = iMailleG;
         }
         //Common settings
@@ -1052,12 +1062,11 @@ void MeshCartesian::initializeGeometrieParallele(TypeMeshContainer<Cell *> &cell
 
 //***********************************************************************
 
-void MeshCartesian::decoupageParallele(std::string ordreCalcul, TypeMeshContainer<Cell *> &cells)
+void MeshCartesian::decoupageParallele(std::string ordreCalcul, TypeMeshContainer<Cell*>& cells)
 {
   int ix, iy, iz;
   int maille_par_cpu, reste, iMaille, neighbour;
   int numberElements, compteMaillesParallele(0), countElements(0);
-  int *elements_rec, *elements_env;
   
   if (m_geometrie == 1) {
     //1D Cartesian Processor Topology
@@ -1648,7 +1657,7 @@ std::string MeshCartesian::whoAmI() const
 
 //**************************************************************************
 
-std::string MeshCartesian::recupereChaineExtent(int localRank, bool global) const
+std::string MeshCartesian::recupereChaineExtent(bool global) const
 {
   std::stringstream chaineExtent;
 
@@ -1672,7 +1681,7 @@ std::string MeshCartesian::recupereChaineExtent(int localRank, bool global) cons
 
 //****************************************************************************
 
-void MeshCartesian::recupereCoord(TypeMeshContainer<Cell *> *cellsLvl, std::vector<double> &jeuDonnees, Axis axis) const
+void MeshCartesian::recupereCoord(std::vector<double>& jeuDonnees, Axis axis) const
 {
   switch (axis) {
   case X:
@@ -1701,7 +1710,7 @@ void MeshCartesian::recupereCoord(TypeMeshContainer<Cell *> *cellsLvl, std::vect
 
 //****************************************************************************
 
-void MeshCartesian::recupereDonnees(TypeMeshContainer<Cell *> *cellsLvl, std::vector<double> &jeuDonnees, const int var, int phase) const
+void MeshCartesian::recupereDonnees(TypeMeshContainer<Cell*>* cellsLvl, std::vector<double>& jeuDonnees, const int var, int phase) const
 {
   jeuDonnees.clear();
   int numCell;
@@ -1738,41 +1747,6 @@ void MeshCartesian::recupereDonnees(TypeMeshContainer<Cell *> *cellsLvl, std::ve
       } // Fin X
     } //Fin Y
   } //Fin Z
-}
-
-//****************************************************************************
-
-void MeshCartesian::setDataSet(std::vector<double> &jeuDonnees, TypeMeshContainer<Cell *> *cellsLvl, const int var, int phase) const
-{
-  int iterDataSet(0);
-  int numCell;
-  Coord vec;
-  for (int k = 0; k < m_numberCellsZ; k++) {
-    for (int j = 0; j < m_numberCellsY; j++) {
-      for (int i = 0; i < m_numberCellsX; i++) {
-        construitIGlobal(i, j, k, numCell);
-        if (var > 0) { //Scalars data are first set
-          if (phase >= 0) { cellsLvl[0][numCell]->getPhase(phase)->setScalar(var, jeuDonnees[iterDataSet++]); } //phases data
-          else if (phase == -1) { cellsLvl[0][numCell]->getMixture()->setScalar(var, jeuDonnees[iterDataSet++]); }  //mixture data
-          else if (phase == -2) { cellsLvl[0][numCell]->getTransport(var - 1).setValue(jeuDonnees[iterDataSet++]); } //transport data
-          else { Errors::errorMessage("MeshCartesian::setDataSet: unknown phase number: ", phase); }
-        }
-        else { //On veut recuperer les donnees vectorielles
-          if (phase >= 0) { //Phases data
-            vec.setXYZ(jeuDonnees[iterDataSet], jeuDonnees[iterDataSet + 1], jeuDonnees[iterDataSet + 2]);
-            cellsLvl[0][numCell]->getPhase(phase)->setVector(-var, vec);
-            iterDataSet += 3;
-          }
-          else if (phase == -1) {  //Mixture data
-            vec.setXYZ(jeuDonnees[iterDataSet], jeuDonnees[iterDataSet + 1], jeuDonnees[iterDataSet + 2]);
-            cellsLvl[0][numCell]->getMixture()->setVector(-var, vec);
-            iterDataSet += 3;
-          }
-          else { Errors::errorMessage("MeshCartesian::setDataSet: unknown phase number: ", phase); }
-        } //Fin vecteur
-      } // Fin X
-    } // Fin Y
-  } // Fin Z
 }
 
 //***********************************************************************

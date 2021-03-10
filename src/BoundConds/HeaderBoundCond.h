@@ -6,6 +6,7 @@
 //       |  `--.  \  `-.  \ `-' /   \  `-) ) |  `--.  | | |)| 
 //       /( __.'   \____\  )---'    )\____/  /( __.'  /(  (_) 
 //      (__)              (_)      (__)     (__)     (__)     
+//      Official webSite: https://code-mphi.github.io/ECOGEN/
 //
 //  This file is part of ECOGEN.
 //
@@ -30,19 +31,16 @@
 #ifndef HEADERBOUNDCOND_H
 #define HEADERBOUNDCOND_H
 
-//! \file      HeaderBoundCond.h
-//! \author    F. Petitpas, K. Schmidmayer
-//! \version   1.0
-//! \date      December 20 2017
-
 #include "BoundCondNonReflecting.h"
 #include "BoundCondInj.h"
+#include "BoundCondSubInj.h"
 #include "BoundCondTank.h"
 #include "BoundCondWall.h"
 #include "BoundCondWallO2.h"
+#include "BoundCondSymmetry.h"
 #include "BoundCondSymmetryO2.h"
 #include "BoundCondOutflow.h"
 
-//Ajouter ici entete des nouvelles conditions aux limites
+//Add here header of new boundary conditions
 
 #endif // HEADERBOUNDCOND_H

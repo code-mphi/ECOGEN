@@ -6,6 +6,7 @@
 //       |  `--.  \  `-.  \ `-' /   \  `-) ) |  `--.  | | |)| 
 //       /( __.'   \____\  )---'    )\____/  /( __.'  /(  (_) 
 //      (__)              (_)      (__)     (__)     (__)     
+//      Official webSite: https://code-mphi.github.io/ECOGEN/
 //
 //  This file is part of ECOGEN.
 //
@@ -30,28 +31,26 @@
 #ifndef OUTPUTGNU_H
 #define OUTPUTGNU_H
 
-//! \file      OutputGNU.h
-//! \author    F. Petitpas, K. Schmidmayer
-//! \version   1.0
-//! \date      May 03 2018
-
 #include "Output.h"
 class OutputGNU : public Output
 {
 public:
   OutputGNU();
-  OutputGNU(std::string casTest, std::string run, tinyxml2::XMLElement *element, std::string fileName, Input *entree);
+  OutputGNU(std::string casTest, std::string run, tinyxml2::XMLElement* element, std::string fileName, Input *entree);
   virtual ~OutputGNU();
 
-  virtual void prepareSortieSpecifique() {};  //Rien a faire pour cette sortie
-  virtual void ecritSolution(Mesh *mesh, std::vector<Cell *> *cellsLvl);
+  virtual void prepareSortieSpecifique() {};  // Nothing to do for this output
+  virtual void prepareSortieSpecifique(std::vector<CellInterface*>* /*cellInterfacesLvl*/) {}; // Nothing to do for this output
+  virtual void ecritSolution(Mesh *mesh, std::vector<Cell*>* cellsLvl);
+  virtual void ecritSolution(std::vector<CellInterface*>* /*cellInterfacesLvl*/) { try { throw ErrorECOGEN("ecritSolution not available for requested output format"); } catch (ErrorECOGEN&) { throw; } };
 
 protected:
 
-  void ecritScriptGnuplot(const int &dim);
+  void ecritScriptGnuplot(const int& dim);
+  void ecritScriptGnuplot(const std::string& varName);
 
   std::string creationNameFichierGNU(const char* name, int lvl = -1, int proc = -1, int numFichier = -1, std::string nameVariable = "defaut") const;
-  void printBlocGnuplot(std::ofstream &fileStream, int &index, const int &dim);
+  void printBlocGnuplot(std::ofstream& fileStream, int& index, const int& dim);
 
   std::string m_fileNameVisu;
   std::string m_folderScriptGnuplot;

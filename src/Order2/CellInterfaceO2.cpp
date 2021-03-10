@@ -6,6 +6,7 @@
 //       |  `--.  \  `-.  \ `-' /   \  `-) ) |  `--.  | | |)| 
 //       /( __.'   \____\  )---'    )\____/  /( __.'  /(  (_) 
 //      (__)              (_)      (__)     (__)     (__)     
+//      Official webSite: https://code-mphi.github.io/ECOGEN/
 //
 //  This file is part of ECOGEN.
 //
@@ -27,19 +28,14 @@
 //  along with ECOGEN (file LICENSE).  
 //  If not, see <http://www.gnu.org/licenses/>.
 
-//! \file      CellInterfaceO2.cpp
-//! \author    F. Petitpas, K. Schmidmayer
-//! \version   1.1
-//! \date      June 5 2019
-
 #include "CellInterfaceO2.h"
 
-Phase **slopesPhasesLocal1;
-Phase **slopesPhasesLocal2;
-Mixture *slopesMixtureLocal1;
-Mixture *slopesMixtureLocal2;
-double *slopesTransportLocal1;
-double *slopesTransportLocal2;
+Phase** slopesPhasesLocal1;
+Phase** slopesPhasesLocal2;
+Mixture* slopesMixtureLocal1;
+Mixture* slopesMixtureLocal2;
+double* slopesTransportLocal1;
+double* slopesTransportLocal2;
 
 //***********************************************************************
 
@@ -75,7 +71,7 @@ CellInterfaceO2::~CellInterfaceO2()
 
 //***********************************************************************
 
-void CellInterfaceO2::allocateSlopes(const int &numberPhases, const int &numberTransports, int &allocateSlopeLocal)
+void CellInterfaceO2::allocateSlopes(const int& numberPhases, const int& numberTransports, int& allocateSlopeLocal)
 {
   m_numberPhases = numberPhases;
 
@@ -83,7 +79,7 @@ void CellInterfaceO2::allocateSlopes(const int &numberPhases, const int &numberT
 	m_vecPhasesSlopes = new Phase*[numberPhases];
 
   //On attribut les phases a partir de la cell a gauche (car cell a droite inexistante pour les limites)
-  //Necessaire car il faut connaitre le type de phase (ex: PhaseKapila, etc.))
+  //Necessaire car il faut connaitre le type de phase (ex: PhasePUEq, etc.))
   //Ensuite on met a zero toutes les slopes
   for(int k = 0; k < numberPhases; k++){
     m_cellLeft->getPhase(k)->allocateAndCopyPhase(&m_vecPhasesSlopes[k]);
@@ -127,7 +123,7 @@ void CellInterfaceO2::allocateSlopes(const int &numberPhases, const int &numberT
 
 //***********************************************************************
 
-void CellInterfaceO2::computeSlopes(const int &numberPhases, const int &numberTransports, Prim type)
+void CellInterfaceO2::computeSlopes(const int& numberPhases, const int& numberTransports, Prim type)
 {
   if (m_cellInterfacesChildren.size() == 0) {
     //Distance entre les deux mailles en contact
@@ -151,7 +147,7 @@ void CellInterfaceO2::computeSlopes(const int &numberPhases, const int &numberTr
 
 //***********************************************************************
 
-void CellInterfaceO2::computeFlux(const int &numberPhases, const int &numberTransports, double &dtMax, Limiter &globalLimiter, Limiter &interfaceLimiter, Limiter &globalVolumeFractionLimiter, Limiter &interfaceVolumeFractionLimiter, Prim type)
+void CellInterfaceO2::computeFlux(const int& numberPhases, const int& numberTransports, double& dtMax, Limiter& globalLimiter, Limiter& interfaceLimiter, Limiter& globalVolumeFractionLimiter, Limiter& interfaceVolumeFractionLimiter, Prim type)
 {
   // Quand on fait le premier computeFlux (donc avec vecPhases) on n'incremente pas m_cons pour les mailles de niveau different (inferieur) de "lvl".
   // Sinon ca veut dire qu on l ajoute pour les 2 computeFlux sans le remettre a zero entre les deux, donc 2 fois plus de flux que ce que l on veut.
@@ -192,7 +188,7 @@ void CellInterfaceO2::computeFlux(const int &numberPhases, const int &numberTran
 
 //***********************************************************************
 
-void CellInterfaceO2::solveRiemann(const int &numberPhases, const int &numberTransports, double &dtMax, Limiter &globalLimiter, Limiter &interfaceLimiter, Limiter &globalVolumeFractionLimiter, Limiter &interfaceVolumeFractionLimiter, Prim type)
+void CellInterfaceO2::solveRiemann(const int& numberPhases, const int& numberTransports, double& dtMax, Limiter& globalLimiter, Limiter& interfaceLimiter, Limiter& globalVolumeFractionLimiter, Limiter& interfaceVolumeFractionLimiter, Prim type)
 {
   //Si la cell gauche ou droite est de niveau inferieur a "lvl", on ne prend pas "type" mais vecPhases (ca evite de prendre vecPhaseO2 alors qu'on ne l'a pas).
   if (m_cellLeft->getLvl() == m_lvl) { cellLeft->copyVec(m_cellLeft->getPhases(type), m_cellLeft->getMixture(type), m_cellLeft->getTransports(type)); }
@@ -284,8 +280,9 @@ void CellInterfaceO2::solveRiemann(const int &numberPhases, const int &numberTra
   double dxRight(m_cellRight->getElement()->getLCFL());
   dxLeft = dxLeft*std::pow(2., (double)m_lvl);
   dxRight = dxRight*std::pow(2., (double)m_lvl);
-  m_mod->solveRiemannIntern(*cellLeft, *cellRight, numberPhases, dxLeft, dxRight, dtMax);
-  //Traitement des fonctions de transport (m_Sm connu : doit etre place apres l appel au Solveur de Riemann)
+  double massflow(0.), powerFlux(0.); // Those var. are useless here, only meaningful for recording flux of BoundCond
+  m_mod->solveRiemannIntern(*cellLeft, *cellRight, numberPhases, dxLeft, dxRight, dtMax, massflow, powerFlux);
+  //Handling of transport functions (m_Sm known: need to be called after Riemann solver)
   if (numberTransports > 0) { m_mod->solveRiemannTransportIntern(*cellLeft, *cellRight, numberTransports); }
 
   //Projection du flux sur le repere absolu
@@ -294,7 +291,7 @@ void CellInterfaceO2::solveRiemann(const int &numberPhases, const int &numberTra
 
 //***********************************************************************
 
-Phase* CellInterfaceO2::getSlopesPhase(const int &phaseNumber) const
+Phase* CellInterfaceO2::getSlopesPhase(const int& phaseNumber) const
 {
   return m_vecPhasesSlopes[phaseNumber];
 }
@@ -308,14 +305,14 @@ Mixture* CellInterfaceO2::getSlopesMixture() const
 
 //***********************************************************************
 
-Transport* CellInterfaceO2::getSlopesTransport(const int &numberTransport) const
+Transport* CellInterfaceO2::getSlopesTransport(const int& numberTransport) const
 {
   return &m_vecTransportsSlopes[numberTransport];
 }
 
 //***********************************************************************
 
-//Cell * CellInterfaceO2::getB(BO2 B) const 
+//Cell*  CellInterfaceO2::getB(BO2 B) const 
 //{
 //  switch (B){
 //  case BG1M: return m_BG1M; break;
@@ -362,7 +359,7 @@ Transport* CellInterfaceO2::getSlopesTransport(const int &numberTransport) const
 
 //***********************************************************************
 
-//void CellInterfaceO2::setB(BO2 B, Cell *cell)
+//void CellInterfaceO2::setB(BO2 B, Cell* cell)
 //{
 //  switch (B) {
 //  case BG1M: m_BG1M = cell; break;
@@ -379,7 +376,7 @@ Transport* CellInterfaceO2::getSlopesTransport(const int &numberTransport) const
 
 //***********************************************************************
 
-//void CellInterfaceO2::setBeta(betaO2 beta, double &value)
+//void CellInterfaceO2::setBeta(betaO2 beta, double& value)
 //{
 //  switch (beta) {
 //  case betaG1M: m_betaG1M = value; break;
@@ -396,7 +393,7 @@ Transport* CellInterfaceO2::getSlopesTransport(const int &numberTransport) const
 
 //***********************************************************************
 
-//void CellInterfaceO2::setDistanceH(distanceHO2 dist, double &value) 
+//void CellInterfaceO2::setDistanceH(distanceHO2 dist, double& value) 
 //{
 //  switch (dist) {
 //  case distanceHGM: m_distanceHGM = value; break;
@@ -408,7 +405,7 @@ Transport* CellInterfaceO2::getSlopesTransport(const int &numberTransport) const
 //}
 
 //****************************************************************************
-//******************************Methode AMR***********************************
+//******************************AMR Method***********************************
 //****************************************************************************
 
 void CellInterfaceO2::creerCellInterfaceChild()
@@ -418,7 +415,7 @@ void CellInterfaceO2::creerCellInterfaceChild()
 
 //***********************************************************************
 
-void CellInterfaceO2::creerCellInterfaceChildInterne(const int &lvl, std::vector<CellInterface*> *childrenInternalCellInterfaces)
+void CellInterfaceO2::creerCellInterfaceChildInterne(const int& lvl, std::vector<CellInterface*>* childrenInternalCellInterfaces)
 {
   (*childrenInternalCellInterfaces).push_back(new CellInterfaceO2(lvl + 1));
 }

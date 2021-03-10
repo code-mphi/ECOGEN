@@ -6,6 +6,7 @@
 //       |  `--.  \  `-.  \ `-' /   \  `-) ) |  `--.  | | |)| 
 //       /( __.'   \____\  )---'    )\____/  /( __.'  /(  (_) 
 //      (__)              (_)      (__)     (__)     (__)     
+//      Official webSite: https://code-mphi.github.io/ECOGEN/
 //
 //  This file is part of ECOGEN.
 //
@@ -30,11 +31,6 @@
 #ifndef SYMSPHERICAL_H
 #define SYMSPHERICAL_H
 
-//! \file      SymmetrySpherical.h
-//! \author    K. Schmidmayer
-//! \version   1.0
-//! \date      December 20 2017
-
 #include "Symmetry.h"
 
 //! \class     SymmetrySpherical
@@ -43,11 +39,11 @@ class SymSpherical : public Symmetry
 {
 public:
   SymSpherical();
-  SymSpherical(tinyxml2::XMLElement *element, std::string nameFile = "Unknown file");
+  SymSpherical(tinyxml2::XMLElement* element, std::string nameFile = "Unknown file");
   virtual ~SymSpherical();
 
-  virtual void addSymmetricTerms(Cell *cell, const int &numberPhases, Prim type = vecPhases);
-  virtual void addSymmetricTermsAddPhys(Cell *cell, const int &numberPhases, AddPhys &addPhys) { Errors::errorMessage("addSymmetricTermsAddPhys not implemented for spherical symmetry with additional physics"); };
+  virtual void addSymmetricTerms(Cell* cell, const int& numberPhases, Prim type = vecPhases);
+  virtual void addSymmetricTermsAddPhys(Cell* /*cell*/, const int& /*numberPhases*/, AddPhys& /*addPhys*/) { Errors::errorMessage("addSymmetricTermsAddPhys not implemented for spherical symmetry with additional physics"); };
 };
 
 #endif //SYMSPHERICAL_H

@@ -131,6 +131,12 @@ Available boundary conditions are: nonReflecting, wall, symmetry, injection, tan
     <dataFluid EOS="SG_oxyLiq.xml" alpha="0.9999"/>
   </fluidsProp>
 </boundCond>
+******************
+One could use wall boundary condition with specific heat boundary condition such as imposed temperature, imposed flux or adiabatic (default). This option requires the conductivity additionnal physic (defined modelVX.xml).
+Example:
+<boundCond name="CLXp" type="wall" number="2">
+    <dataWall heatCondition="temperature" temperature="250."/>
+</boundCond> 
 
 3) Materials states list
 ************************
@@ -150,9 +156,9 @@ The list of materials states used in domains and boundCond must be precised. Eac
 </state>
 %%%%%%%%%%%%%%%%%% << copy between these lines
 Fluids and materials node structures depend on the flow model defined in the "modelVX.xml" input file.
-a) For multiphase model of  Kapila
-----------------------------------
-volume fractions, densities (or temperatures), pressure and velocity components. Caution, pressure and velocity data are linked to the mmixture.
+a) For pressure-velocity-equilibrium multiphase model (Kapila)
+--------------------------------------------------------------
+Volume fractions, densities (or temperatures), pressure and velocity components. Caution, pressure and velocity data are linked to the mixture.
 %%%%%%%%%%%%%%%%%% << copy between these lines
 <material type="fluid" EOS="IG_air.xml">
   <dataFluid alpha="0.5" density="1.0"/>  
@@ -165,9 +171,9 @@ volume fractions, densities (or temperatures), pressure and velocity components.
   <velocity x="0." y="0." z="0."/>
 </mixture>
 %%%%%%%%%%%%%%%%%% << copy between these lines
-b) For signle phase model of Euler
+b) For single-phase model of Euler
 ----------------------------------
-density or temperature, pressure and velocity components.
+Density or temperature, pressure and velocity components.
 %%%%%%%%%%%%%%%%%% << copy between these lines
 <material type="fluid" EOS="IG_air.xml">
   <dataFluid density="10.0" pressure="1.e5">
@@ -175,9 +181,9 @@ density or temperature, pressure and velocity components.
   </dataFluid>
 </material>
 %%%%%%%%%%%%%%%%%% << copy between these lines
-c) for Thermal equilibrium model
---------------------------------
-volume fractions, temperature, pressure and velocity components. Caution, pressure, temperature and velocity data are linked to the mmixture.
+c) For temperature-pressure-velocity-equilibrium multiphase model
+-----------------------------------------------------------------
+Volume fractions, temperature, pressure and velocity components. Caution, pressure, temperature and velocity data are linked to the mixture.
 %%%%%%%%%%%%%%%%%% << copy between these lines
 <material type="fluid" EOS="IG_waterVap.xml">
   <dataFluid alpha="0.2"/>
@@ -190,9 +196,9 @@ volume fractions, temperature, pressure and velocity components. Caution, pressu
   <velocity x="0." y="0." z="0."/>
 </mixture>
 %%%%%%%%%%%%%%%%%% << copy between these lines
-d) for homogeneous Euler equations
+d) For homogeneous Euler equations
 ----------------------------------
-volume fractions, pressure and velocity components. Caution, pressure and velocity data are linked to the mmixture.
+Volume fractions, pressure and velocity components. Caution, pressure and velocity data are linked to the mixture.
 %%%%%%%%%%%%%%%%%% << copy between these lines
 <material type="fluid" EOS="SG_waterLiq.xml">
   <dataFluid alpha="0.99"/>  
@@ -205,3 +211,16 @@ volume fractions, pressure and velocity components. Caution, pressure and veloci
   <velocity x="0." y="0." z="0."/>
 </mixture>
 %%%%%%%%%%%%%%%%%% << copy between these lines
+e) For velocity-equilibrium multiphase model
+--------------------------------------------
+Volume fractions, densities (or temperatures), pressure and velocity components. Caution, velocity data are linked to the mixture.
+%%%%%%%%%%%%%%%%%% << copy between these lines
+<material type="fluid" EOS="IG_air.xml">
+  <dataFluid alpha="0.5" density="1.0" pressure = "1.e5"/>  
+</material>
+<material type="fluid" EOS="SG_water.xml">
+  <dataFluid alpha="0.5" density="1000.0" pressure = "1.e5"/>   
+</material>
+<mixture>
+  <velocity x="0." y="0." z="0."/>
+</mixture>

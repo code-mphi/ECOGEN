@@ -6,6 +6,7 @@
 //       |  `--.  \  `-.  \ `-' /   \  `-) ) |  `--.  | | |)| 
 //       /( __.'   \____\  )---'    )\____/  /( __.'  /(  (_) 
 //      (__)              (_)      (__)     (__)     (__)     
+//      Official webSite: https://code-mphi.github.io/ECOGEN/
 //
 //  This file is part of ECOGEN.
 //
@@ -27,13 +28,9 @@
 //  along with ECOGEN (file LICENSE).  
 //  If not, see <http://www.gnu.org/licenses/>.
 
-//! \file      Output.cpp
-//! \author    F. Petitpas, K. Schmidmayer
-//! \version   1.1
-//! \date      June 5 2019
-
 #include "Output.h"
 #include "../Run.h"
+#include "../Config.h"
 
 using namespace tinyxml2;
 
@@ -45,8 +42,8 @@ Output::Output(){}
 //Constructeur sortie a partir d une lecture au format XML outputMode
 //ex :	<outputMode format="XML" binary="false"/>
 
-Output::Output(std::string casTest, std::string nameRun, XMLElement *element, std::string fileName, Input *entree) :
-  m_simulationName(casTest), m_folderOutput(nameRun), m_numFichier(0), m_donneesSeparees(0), m_input(entree)
+Output::Output(std::string casTest, std::string nameRun, XMLElement* element, std::string fileName, Input *entree) :
+  m_input(entree), m_simulationName(casTest), m_folderOutput(nameRun), m_donneesSeparees(0), m_numFichier(0)
 {
   //Affectation pointeur run
   m_run = m_input->getRun();
@@ -61,15 +58,17 @@ Output::Output(std::string casTest, std::string nameRun, XMLElement *element, st
   m_fileNameCollectionParaview = "collectionParaview";
   m_fileNameCollectionVisIt = "collectionVisIt";
 
-  m_folderOutput = "./results/" + m_folderOutput + "/";
+  m_folderOutput = config.getWorkFolder() + "results/" + m_folderOutput + "/";
   m_folderSavesInput = m_folderOutput + "savesInput/";
   m_folderDatasets = m_folderOutput + "datasets/";
   m_folderInfoMesh = m_folderOutput + "infoMesh/";
   m_folderCuts = m_folderOutput + "cuts/";
   m_folderProbes = m_folderOutput + "probes/";
-  m_folderRecorderGlobalQuantity = m_folderOutput + "globalQuantities/";
+  m_folderGlobalQuantities = m_folderOutput + "globalQuantities/";
+  m_folderBoundariesFlux = m_folderOutput + "boundariesFlux/";
+  m_folderErrorsAndWarnings = m_folderOutput + "errorsAndWarnings/";
 
-  //XMLElement *elementCut;
+  //XMLElement* elementCut;
   XMLError error;
 
   //Printing precision (digits number)
@@ -82,24 +81,29 @@ Output::Output(std::string casTest, std::string nameRun, XMLElement *element, st
   //Creation du dossier de sortie ou vidange /Macro selon OS Windows ou Linux
   if (rankCpu == 0) {
     //Macro pour les interaction systeme (creation/destruction repertoires)
+    std::string resultsFolder(config.getWorkFolder() + "results/");
     #ifdef WIN32
-      _mkdir("./results");
+      _mkdir(resultsFolder.c_str());
       _mkdir(m_folderOutput.c_str());
       _mkdir(m_folderSavesInput.c_str());
       _mkdir(m_folderDatasets.c_str());
       _mkdir(m_folderInfoMesh.c_str());
       _mkdir(m_folderCuts.c_str());
       _mkdir(m_folderProbes.c_str());
-	  _mkdir(m_folderRecorderGlobalQuantity.c_str());
+      _mkdir(m_folderGlobalQuantities.c_str());
+      _mkdir(m_folderBoundariesFlux.c_str());
+      _mkdir(m_folderErrorsAndWarnings.c_str());
     #else
-      mkdir("./results", S_IRWXU);
+      mkdir(resultsFolder.c_str(), S_IRWXU);
       mkdir(m_folderOutput.c_str(), S_IRWXU);
       mkdir(m_folderSavesInput.c_str(), S_IRWXU);
       mkdir(m_folderDatasets.c_str(), S_IRWXU);
       mkdir(m_folderInfoMesh.c_str(), S_IRWXU);
       mkdir(m_folderCuts.c_str(), S_IRWXU);
       mkdir(m_folderProbes.c_str(), S_IRWXU);
-	  mkdir(m_folderRecorderGlobalQuantity.c_str(), S_IRWXU);
+      mkdir(m_folderGlobalQuantities.c_str(), S_IRWXU);
+      mkdir(m_folderBoundariesFlux.c_str(), S_IRWXU);
+      mkdir(m_folderErrorsAndWarnings.c_str(), S_IRWXU);
     #endif
     try {
       //Sauvegarde des fichiers d entrees
@@ -115,7 +119,7 @@ Output::Output(std::string casTest, std::string nameRun, XMLElement *element, st
   //Determination du mode Little / Big Endian
   //-----------------------------------------
   int entierTest = 42; //En binary 0x2a
-  char *chaineTest = reinterpret_cast<char*>(&entierTest);
+  char* chaineTest = reinterpret_cast<char*>(&entierTest);
   m_endianMode = "LittleEndian";
   if (chaineTest[0] != 0x2a) { m_endianMode = "BigEndian"; }
 }
@@ -126,7 +130,7 @@ Output::~Output(){}
 
 //***********************************************************************
 
-void Output::prepareOutput(const Cell &cell)
+void Output::prepareOutput(const Cell& cell)
 {
   //Preparation de la cell de reference
   //--------------------------------------
@@ -145,22 +149,38 @@ void Output::prepareOutput(const Cell &cell)
 
 //***********************************************************************
 
+void Output::prepareOutput(std::vector<CellInterface*>* cellInterfacesLvl)
+{
+  //Preparation propres au type de sortie
+    //-------------------------------------
+  try {
+    this->prepareSortieSpecifique(cellInterfacesLvl);
+  }
+  catch (ErrorECOGEN&) { throw; }
+}
+
+//***********************************************************************
+
 void Output::prepareOutputInfos()
 {
   try {
     std::ofstream fileStream;
     //Fichier infosCalcul
-    if (rankCpu == 0) fileStream.open((m_folderOutput + m_infoCalcul).c_str(),std::ios::trunc); fileStream.close();
+    if (rankCpu == 0) {
+      fileStream.open((m_folderOutput + m_infoCalcul).c_str(),std::ios::trunc); 
+      fileStream.close();
+    }
     //Fichiers infosMeshes
     std::string file = m_folderInfoMesh + creationNameFichier(m_infoMesh.c_str(), -1, rankCpu);
-    fileStream.open(file.c_str(), std::ios::trunc); fileStream.close();
+    fileStream.open(file.c_str(), std::ios::trunc); 
+    fileStream.close();
   }
   catch (ErrorECOGEN &) { throw; }
 }
 
 //***********************************************************************
 
-void Output::printTree(Mesh* mesh, std::vector<Cell *> *cellsLvl, int restartAMRsaveFreq)
+void Output::printTree(Mesh* mesh, std::vector<Cell*>* cellsLvl, int restartAMRsaveFreq)
 {
   if (restartAMRsaveFreq != 0) {
     if ((m_numFichier % restartAMRsaveFreq) == 0) {
@@ -191,7 +211,7 @@ void Output::printTree(Mesh* mesh, std::vector<Cell *> *cellsLvl, int restartAMR
 
 //***********************************************************************
 
-void Output::readDomainDecompostion(Mesh* mesh, int restartSimulation)
+void Output::readDomainDecompostion(Mesh* mesh)
 {
   try {
     std::ifstream fileStream;
@@ -206,8 +226,8 @@ void Output::readDomainDecompostion(Mesh* mesh, int restartSimulation)
 
 //***********************************************************************
 
-void Output::readTree(Mesh *mesh, TypeMeshContainer<Cell *> *cellsLvl, TypeMeshContainer<Cell *> *cellsLvlGhost, TypeMeshContainer<CellInterface *> *cellInterfacesLvl,
-  const std::vector<AddPhys*> &addPhys, Model *model, Eos **eos, int &nbCellsTotalAMR)
+void Output::readTree(Mesh* mesh, TypeMeshContainer<Cell*>* cellsLvl, TypeMeshContainer<Cell*>* cellsLvlGhost, TypeMeshContainer<CellInterface*>* cellInterfacesLvl,
+  const std::vector<AddPhys*>& addPhys, Model* model, int& nbCellsTotalAMR)
 {
   try {
     std::ifstream fileStream;
@@ -243,7 +263,7 @@ void Output::readTree(Mesh *mesh, TypeMeshContainer<Cell *> *cellsLvl, TypeMeshC
       }
     }
     nbCellsTotalAMR = 0;
-    for (int i = 0; i < cellsLvl[0].size(); i++) { cellsLvl[0][i]->updateNbCellsTotalAMR(nbCellsTotalAMR); }
+    for (unsigned int i = 0; i < cellsLvl[0].size(); i++) { cellsLvl[0][i]->updateNbCellsTotalAMR(nbCellsTotalAMR); }
     fileStream.close();
   }
   catch (ErrorECOGEN &) { throw; }
@@ -296,7 +316,7 @@ void Output::ecritJeuDonnees(std::vector<double> jeuDonnees, std::ofstream &file
       taille = jeuDonnees.size()*sizeof(char); break;
     }
     IO::writeb64(fileStream, taille);
-    char *chaineTampon = new char[taille]; int index = 0;
+    char* chaineTampon = new char[taille]; int index = 0;
     switch (typeData) {
     case DOUBLE:
       for (unsigned int k = 0; k < jeuDonnees.size(); k++) {
@@ -330,7 +350,7 @@ void Output::ecritJeuDonnees(std::vector<double> jeuDonnees, std::ofstream &file
 
 //***********************************************************************
 
-void Output::getJeuDonnees(std::istringstream &data, std::vector<double> &jeuDonnees, TypeData typeData)
+void Output::getJeuDonnees(std::istringstream &data, std::vector<double>& jeuDonnees)
 {
   if (!m_ecritBinaire) {
     for (unsigned int k = 0; k < jeuDonnees.size(); k++) { data >> jeuDonnees[k]; }
@@ -350,7 +370,7 @@ void Output::getJeuDonnees(std::istringstream &data, std::vector<double> &jeuDon
     //  taille = jeuDonnees.size() * sizeof(char); break;
     //}
     //IO::writeb64(fileStream, taille);
-    //char *chaineTampon = new char[taille]; int index = 0;
+    //char* chaineTampon = new char[taille]; int index = 0;
     //switch (typeData) {
     //case DOUBLE:
     //  for (unsigned int k = 0; k < jeuDonnees.size(); k++) {
@@ -401,24 +421,23 @@ void Output::saveInfos() const
   if (m_precision != 0) fileStream.precision(m_precision);
   if (rankCpu == 0) {
     fileStream.open((m_folderOutput + m_infoCalcul).c_str(), std::ios::app);
-    if(m_numFichier == 0) fileStream << Ncpu << std::endl;
+
+    if (m_numFichier == 0) fileStream << Ncpu << std::endl;
+
+    double secondCompTime = static_cast<double>(m_run->m_stat.getComputationTime()) / CLOCKS_PER_SEC;
+    double secondAMRTime = static_cast<double>(m_run->m_stat.getAMRTime()) / CLOCKS_PER_SEC;
+    double secondComTime = static_cast<double>(m_run->m_stat.getCommunicationTime()) / CLOCKS_PER_SEC;
     fileStream << m_numFichier << " " << m_run->m_iteration << " " << m_run->m_physicalTime << " " << m_run->m_dtNext
-       << " " << m_run->m_stat.getComputationTime() << " " << m_run->m_stat.getAMRTime() << " " << m_run->m_stat.getCommunicationTime();
+       << " " << secondCompTime << " " << secondAMRTime << " " << secondComTime;
 
     //Additional output with purpose to track the radius of a bubble over time and the maximum pressures.
     //To comment if not needed. Be carefull when using it, integration for bubble radius and maximum pressure at the wall are not generalized.
     //-----
-    // if (m_run->m_numberPhases > 1) {
-    //  double integration(0.);
-    //  for (unsigned int c = 0; c < m_run->m_cellsLvl[0].size(); c++) {
-    //    m_run->m_cellsLvl[0][c]->computeIntegration(integration);
-    //  }
-    //  fileStream << " " << integration;
-    // }
-    // // fileStream << " " << m_run->m_pMax[0] << " " << m_run->m_pMax[1] << " " << m_run->m_pMax[2] << " " << m_run->m_pMax[3];
-    // // fileStream << " " << m_run->m_pMaxWall[0] << " " << m_run->m_pMaxWall[1] << " " << m_run->m_pMaxWall[2] << " " << m_run->m_pMaxWall[3];
-    // // fileStream << " " << m_run->m_pMax[0];
-    // // fileStream << " " << m_run->m_pMaxWall[0];
+    // fileStream << " " << m_run->m_volumePhaseK;
+    // fileStream << " " << m_run->m_pMax[0] << " " << m_run->m_pMax[1] << " " << m_run->m_pMax[2] << " " << m_run->m_pMax[3];
+    // fileStream << " " << m_run->m_pMaxWall[0] << " " << m_run->m_pMaxWall[1] << " " << m_run->m_pMaxWall[2] << " " << m_run->m_pMaxWall[3];
+    // fileStream << " " << m_run->m_pMax[0];
+    // fileStream << " " << m_run->m_pMaxWall[0];
     // fileStream << " " << m_run->m_alphaWanted;
     //-----
 
@@ -435,9 +454,9 @@ void Output::readInfos()
   std::vector<std::stringstream*> chaine(m_run->m_restartSimulation + 2); //1 for CPU number, and 1 for initial conditions
   for (unsigned int i = 0; i < chaine.size(); i++) { chaine[i] = new std::stringstream; }
   std::string chaineTemp;
-  clock_t compTime;
-  clock_t AMRTime;
-  clock_t comTime;
+  double secondCompTime;
+  double secondAMRTime;
+  double secondComTime;
   int numberCPURead;
   int iter(0);
   try {
@@ -452,7 +471,7 @@ void Output::readInfos()
     do {
       std::getline(fileStream, chaineTemp);
       *(chaine[iter]) << chaineTemp;
-      *(chaine[iter]) >> m_numFichier >> m_run->m_iteration >> m_run->m_physicalTime >> m_run->m_dt >> compTime >> AMRTime >> comTime;
+      *(chaine[iter]) >> m_numFichier >> m_run->m_iteration >> m_run->m_physicalTime >> m_run->m_dt >> secondCompTime >> secondAMRTime >> secondComTime;
       iter++;
     } while (m_numFichier != m_run->m_restartSimulation && !fileStream.eof());
     if (fileStream.eof()) { throw ErrorECOGEN("restart simulation not possible - check file 'infosCalcul.out'"); }
@@ -470,6 +489,9 @@ void Output::readInfos()
     }
     fileStream.close();
   }
+  clock_t compTime(secondCompTime * CLOCKS_PER_SEC);
+  clock_t AMRTime(secondAMRTime * CLOCKS_PER_SEC);
+  clock_t comTime(secondComTime * CLOCKS_PER_SEC);
   m_run->m_stat.setCompTime(compTime, AMRTime, comTime);
 }
 

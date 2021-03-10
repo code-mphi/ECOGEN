@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mesh>
+	<type structure="cartesian"/>
+	<cartesianMesh>
+		<dimensions x="0.375" y="0.375" z="0.375"/>
+		<numberCells x="20" y ="20" z="1"/>
+		<!-- <AMR lvlMax="2" criteriaVar="0.08" varRho="false" varP="false" varU="false" varAlpha="true" xiSplit="0.11" xiJoin="0.11"/> -->
+	</cartesianMesh>
+</mesh>

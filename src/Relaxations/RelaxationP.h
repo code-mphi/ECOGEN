@@ -6,6 +6,7 @@
 //       |  `--.  \  `-.  \ `-' /   \  `-) ) |  `--.  | | |)| 
 //       /( __.'   \____\  )---'    )\____/  /( __.'  /(  (_) 
 //      (__)              (_)      (__)     (__)     (__)     
+//      Official webSite: https://code-mphi.github.io/ECOGEN/
 //
 //  This file is part of ECOGEN.
 //
@@ -30,11 +31,6 @@
 #ifndef RELAXATIONP_H
 #define RELAXATIONP_H
 
-//! \file      RelaxationP.h
-//! \author    F. Petitpas
-//! \version   1.0
-//! \date      October 15 2018
-
 #include "Relaxation.h"
 
 //! \class     RelaxationP
@@ -45,12 +41,14 @@ public:
   RelaxationP();
   virtual ~RelaxationP();
 
-  //! \brief     Stiff Pressure relaxation method
-  //! \details   call for this method computes the mechanical relaxed state in a given cell. Relaxed state is stored depending on the type enum
-  //! \param     cell           cell to relax
+  //! \brief     Return the pressure-relaxation type
+  virtual int getType() const { return P; }
+  //! \brief     Newton-Raphson method for the infinite pressure relaxation
+  //! \details   Call of this method computes the totally relaxed pressure in a given cell.
   //! \param     numberPhases   number of phases
-  //! \param     type           enumeration allowing to relax either state in the cell or second order half time step state
-  virtual void stiffRelaxation(Cell *cell, const int &numberPhases, Prim type = vecPhases) const;
+  //! \param     pStar          initial and final pressure value
+  //! \param     iteration      number of iterations for convergence of the method
+  virtual void NewtonRaphson(const int& numberPhases, double& pStar, int& iteration);
 };
 
 #endif // RELAXATIONP_H

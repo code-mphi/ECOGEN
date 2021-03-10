@@ -6,6 +6,7 @@
 //       |  `--.  \  `-.  \ `-' /   \  `-) ) |  `--.  | | |)| 
 //       /( __.'   \____\  )---'    )\____/  /( __.'  /(  (_) 
 //      (__)              (_)      (__)     (__)     (__)     
+//      Official webSite: https://code-mphi.github.io/ECOGEN/
 //
 //  This file is part of ECOGEN.
 //
@@ -30,24 +31,19 @@
 #ifndef MUSGMSHV4_H
 #define MUSGMSHV4_H
 
-//! \file      MUSGmshV4.h
-//! \author    J. Caze
-//! \version   1.0
-//! \date      November 19 2019
-
 #include "../MUSGmsh.h"
 #include <map>
 
 class MUSGmshV4 : public MUSGmsh
 {
 public:
-	MUSGmshV4(const std::string &meshFile, const std::string &meshExtension);
+	MUSGmshV4(const std::string& meshFile, const std::string& meshExtension);
 	virtual ~MUSGmshV4();
 
 	// --- MeshUnStruct virtual member functions --- 
 	virtual void initGeometryMonoCPU(TypeMeshContainer<Cell*>& cells, TypeMeshContainer<CellInterface*>& cellInterfaces, std::string computeOrder = "FIRSTORDER");
 	//TODO// Reading partitioned mesh file for parallel computation
-	virtual void initGeometryParallel(TypeMeshContainer<Cell*>& cells, TypeMeshContainer<Cell*>& cellsGhost, TypeMeshContainer<CellInterface*>& cellInterfaces, std::string computeOrder = "FIRSTORDER") { Errors::errorMessage("reading partitioned Gmsh v4.x mesh file for parallel computation not avalaible in ECOGEN"); };
+	virtual void initGeometryParallel(TypeMeshContainer<Cell*>& /*cells*/, TypeMeshContainer<Cell*>& /*cellsGhost*/, TypeMeshContainer<CellInterface*>& /*cellInterfaces*/, std::string /*computeOrder*/ = "FIRSTORDER") { Errors::errorMessage("reading partitioned Gmsh v4.x mesh file for parallel computation not avalaible in ECOGEN"); };
 	virtual void preProcessMeshFileForParallel() { Errors::errorMessage("reading partitioned Gmsh v4.x mesh file for parallel computation not avalaible in ECOGEN"); };
 
 private:

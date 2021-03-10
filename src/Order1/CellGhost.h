@@ -6,6 +6,7 @@
 //       |  `--.  \  `-.  \ `-' /   \  `-) ) |  `--.  | | |)| 
 //       /( __.'   \____\  )---'    )\____/  /( __.'  /(  (_) 
 //      (__)              (_)      (__)     (__)     (__)     
+//      Official webSite: https://code-mphi.github.io/ECOGEN/
 //
 //  This file is part of ECOGEN.
 //
@@ -30,11 +31,6 @@
 #ifndef CELLGHOST_H
 #define CELLGHOST_H
 
-//! \file      CellGhost.h
-//! \author    K. Schmidmayer, B. Dorschner
-//! \version   1.1
-//! \date      June 5 2019
-
 #include "Cell.h"
 
 //! \class     CellGhost
@@ -51,7 +47,7 @@ class CellGhost : public Cell
 
         virtual int getRankOfNeighborCPU() const;
         virtual void setRankOfNeighborCPU(int rank);
-        virtual void createChildCell(const int &lvl);
+        virtual void createChildCell(const int& lvl);
         virtual bool isCellGhost() const { return true; };
 
     protected:

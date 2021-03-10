@@ -12,15 +12,15 @@
 	</secondOrder>
 	<restartSimulation restartFileNumber="0" AMRsaveFreq="0"/>
 
-	<probe name="capteur1">
+	<probe name="sensor1">
 		<vertex x="0.3" y="0.05" z="0.05"/>
 		<timeControl acqFreq="1e-5."/>       
 	</probe>
-	<probe name="capteur2">
+	<probe name="sensor2">
 		<vertex x="0.6" y="0.05" z="0.05"/>
 		<timeControl acqFreq="1e-5."/>       
 	</probe>
-	<probe name="capteur3">
+	<probe name="sensor3">
 		<vertex x="0.8" y="0.05" z="0.05"/>
 		<timeControl acqFreq="1e-5."/>       
 	</probe>

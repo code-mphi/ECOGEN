@@ -6,6 +6,7 @@
 //       |  `--.  \  `-.  \ `-' /   \  `-) ) |  `--.  | | |)| 
 //       /( __.'   \____\  )---'    )\____/  /( __.'  /(  (_) 
 //      (__)              (_)      (__)     (__)     (__)     
+//      Official webSite: https://code-mphi.github.io/ECOGEN/
 //
 //  This file is part of ECOGEN.
 //
@@ -27,21 +28,16 @@
 //  along with ECOGEN (file LICENSE).  
 //  If not, see <http://www.gnu.org/licenses/>.
 
-//! \file      GDRectangle.cpp
-//! \author    F. Petitpas
-//! \version   1.0
-//! \date      December 19 2017
-
 #include "GDRectangle.h"
 
 using namespace tinyxml2;
 
 //***************************************************************
 
-GDRectangle::GDRectangle(std::string name, std::vector<Phase*> vecPhases, Mixture *mixture, std::vector<Transport> vecTransports, XMLElement *element, const int &physicalEntity, std::string fileName) :
+GDRectangle::GDRectangle(std::string name, std::vector<Phase*> vecPhases, Mixture* mixture, std::vector<Transport> vecTransports, XMLElement* element, const int& physicalEntity, std::string fileName) :
 GeometricalDomain(name, vecPhases, mixture, vecTransports, physicalEntity)
 {
-  XMLElement *sousElement(element->FirstChildElement("dataRectangle"));
+  XMLElement* sousElement(element->FirstChildElement("dataRectangle"));
   if (sousElement == NULL) throw ErrorXMLElement("dataRectangle", fileName, __FILE__, __LINE__);
   //Attributes reading
   //--------------------------
@@ -68,7 +64,7 @@ GeometricalDomain(name, vecPhases, mixture, vecTransports, physicalEntity)
   else { throw ErrorXMLAttribut("axis2", fileName, __FILE__, __LINE__); }
   //Inferior vertex position
   double x(0.), y(0.), z(0.);
-  XMLElement *coin(sousElement->FirstChildElement("posInferiorVertex"));
+  XMLElement* coin(sousElement->FirstChildElement("posInferiorVertex"));
   if (coin == NULL) throw ErrorXMLElement("posInferiorVertex", fileName, __FILE__, __LINE__);
   error = coin->QueryDoubleAttribute("x", &x);
   error = coin->QueryDoubleAttribute("y", &y);
@@ -82,9 +78,8 @@ GDRectangle::~GDRectangle(){}
 
 //***************************************************************
 
-bool GDRectangle::belong(Coord &posElement, const int &lvl) const
+bool GDRectangle::belong(Coord& posElement, const int& /*lvl*/) const
 {
-  double somme(0.);
   std::vector<Axis> axes;
   axes.push_back(m_axis1);
   axes.push_back(m_axis2);

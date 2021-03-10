@@ -6,6 +6,7 @@
 //       |  `--.  \  `-.  \ `-' /   \  `-) ) |  `--.  | | |)| 
 //       /( __.'   \____\  )---'    )\____/  /( __.'  /(  (_) 
 //      (__)              (_)      (__)     (__)     (__)     
+//      Official webSite: https://code-mphi.github.io/ECOGEN/
 //
 //  This file is part of ECOGEN.
 //
@@ -29,11 +30,6 @@
 
 #ifndef TRANSPORT_H
 #define TRANSPORT_H
-
-//! \file      Transport.h
-//! \author    K. Schmidmayer
-//! \version   1.1
-//! \date      June 5 2019
 
 #include "../libTierces/tinyxml2.h"
 #include <fstream>
@@ -107,11 +103,11 @@ class Transport
     //! \param     valueLeft              transport value of the left cell
     //! \param     valueRight             transport value of the right cell
     //! \param     distance               distance between the left and right cell centers
-    void computeSlopeTransport(const double valueLeft, const double valueRight, const double &distance);
+    void computeSlopeTransport(const double valueLeft, const double valueRight, const double& distance);
     //! \brief     Extrapolate the value of the corresponding transport equation from the center of the cell to its edge
     //! \param     slope                  value of the slope
     //! \param     distance               distance between the center and the corresponding edge of the cell
-    void extrapolate(const double &slope, const double &distance);
+    void extrapolate(const double& slope, const double& distance);
 
   private:
     double m_value;     //! Value of the corresponding transport variable
