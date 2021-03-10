@@ -109,6 +109,7 @@ $(document).ready(function(){initNavTree('Errors_8h.html','');});
   <div class="summary">
 <a href="#nested-classes">Classes</a> &#124;
 <a href="#define-members">Macros</a> &#124;
+<a href="#enum-members">Enumerations</a> &#124;
 <a href="#var-members">Variables</a>  </div>
   <div class="headertitle">
 <div class="title">Errors.h File Reference</div>  </div>
@@ -155,22 +156,30 @@ Classes</h2></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classErrorXMLStretching.html">ErrorXMLStretching</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classErrorXMLRelaxation.html">ErrorXMLRelaxation</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="define-members"></a>
 Macros</h2></td></tr>
 <tr class="memitem:ad94ad57e224d048f2600260ad652d538"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="Errors_8h.html#ad94ad57e224d048f2600260ad652d538">assertM</a>(condition,  message)</td></tr>
 <tr class="separator:ad94ad57e224d048f2600260ad652d538"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="enum-members"></a>
+Enumerations</h2></td></tr>
+<tr class="memitem:a42cf5ff2ddac8acd8d3c6eefeeb19ff0"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="Errors_8h.html#a42cf5ff2ddac8acd8d3c6eefeeb19ff0">TypeError</a> { <a class="el" href="Errors_8h.html#a42cf5ff2ddac8acd8d3c6eefeeb19ff0a984de77c680eaff141ec910e25568a81">WARNING</a> = 0, 
+<a class="el" href="Errors_8h.html#a42cf5ff2ddac8acd8d3c6eefeeb19ff0a2fd6f336d08340583bd620a7f5694c90">ERROR</a> = 1
+ }<tr class="memdesc:a42cf5ff2ddac8acd8d3c6eefeeb19ff0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Enumeration for the type of error (warning, error)  <a href="Errors_8h.html#a42cf5ff2ddac8acd8d3c6eefeeb19ff0">More...</a><br /></td></tr>
+</td></tr>
+<tr class="separator:a42cf5ff2ddac8acd8d3c6eefeeb19ff0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="var-members"></a>
 Variables</h2></td></tr>
 <tr class="memitem:a7105ec7304f5d7360c104d2a9bc3f90e"><td class="memItemLeft" align="right" valign="top">std::vector&lt; <a class="el" href="classErrors.html">Errors</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="Errors_8h.html#a7105ec7304f5d7360c104d2a9bc3f90e">errors</a></td></tr>
 <tr class="separator:a7105ec7304f5d7360c104d2a9bc3f90e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af6b277b84ed704fd546c47e4c7bbd004"><td class="memItemLeft" align="right" valign="top">std::vector&lt; <a class="el" href="classErrors.html">Errors</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="Errors_8h.html#af6b277b84ed704fd546c47e4c7bbd004">warnings</a></td></tr>
+<tr class="separator:af6b277b84ed704fd546c47e4c7bbd004"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><dl class="section author"><dt>Author</dt><dd>F. Petitpas, S. Le Martelot, K. Schmidmayer, B. Dorschner </dd></dl>
-<dl class="section version"><dt>Version</dt><dd>1.1 </dd></dl>
-<dl class="section date"><dt>Date</dt><dd>June 5 2019 </dd></dl>
-</div><h2 class="groupheader">Macro Definition Documentation</h2>
+<h2 class="groupheader">Macro Definition Documentation</h2>
 <a class="anchor" id="ad94ad57e224d048f2600260ad652d538"></a>
 <div class="memitem">
 <div class="memproto">
@@ -194,7 +203,28 @@ Variables</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<b>Value:</b><div class="fragment"><div class="line"><span class="keywordflow">do</span> {\</div><div class="line">    if (!(condition)) {  \</div><div class="line">    std::cerr &lt;&lt; <span class="stringliteral">&quot;---------------------------------------------------------&quot;</span> \</div><div class="line">      &lt;&lt; std::endl &lt;&lt; <span class="stringliteral">&quot;Error assertion non verify&quot;</span> &lt;&lt; std::endl &lt;&lt; \</div><div class="line">      <span class="stringliteral">&quot;  file : &quot;</span> &lt;&lt; __FILE__ &lt;&lt; std::endl &lt;&lt; \</div><div class="line">      <span class="stringliteral">&quot;  ligne : &quot;</span> &lt;&lt; __LINE__ &lt;&lt; std::endl &lt;&lt; \</div><div class="line">      <span class="stringliteral">&quot;  assertion : `&quot;</span> #condition <span class="stringliteral">&quot;` a echouee&quot;</span> &lt;&lt; std::endl \</div><div class="line">      &lt;&lt; <span class="stringliteral">&quot;  &quot;</span> &lt;&lt; message &lt;&lt; std::endl \</div><div class="line">      &lt;&lt; <span class="stringliteral">&quot;---------------------------------------------------------&quot;</span> &lt;&lt; std::endl; \</div><div class="line">      std::exit(EXIT_FAILURE); \</div><div class="line">    } \</div><div class="line">  } <span class="keywordflow">while</span> (<span class="keyword">false</span>)</div></div><!-- fragment -->
+<b>Value:</b><div class="fragment"><div class="line"><span class="keywordflow">do</span> {\</div><div class="line">    if (!(condition)) {  \</div><div class="line">    std::cerr &lt;&lt; <span class="stringliteral">&quot;---------------------------------------------------------&quot;</span> \</div><div class="line">      &lt;&lt; std::endl &lt;&lt; <span class="stringliteral">&quot;Error assertion not verified&quot;</span> &lt;&lt; std::endl &lt;&lt; \</div><div class="line">      <span class="stringliteral">&quot;  file: &quot;</span> &lt;&lt; __FILE__ &lt;&lt; std::endl &lt;&lt; \</div><div class="line">      <span class="stringliteral">&quot;  line: &quot;</span> &lt;&lt; __LINE__ &lt;&lt; std::endl &lt;&lt; \</div><div class="line">      <span class="stringliteral">&quot;  assertion: `&quot;</span> #condition <span class="stringliteral">&quot;` failed&quot;</span> &lt;&lt; std::endl \</div><div class="line">      &lt;&lt; <span class="stringliteral">&quot;  &quot;</span> &lt;&lt; message &lt;&lt; std::endl \</div><div class="line">      &lt;&lt; <span class="stringliteral">&quot;---------------------------------------------------------&quot;</span> &lt;&lt; std::endl; \</div><div class="line">      std::exit(EXIT_FAILURE); \</div><div class="line">    } \</div><div class="line">  } <span class="keywordflow">while</span> (<span class="keyword">false</span>)</div></div><!-- fragment -->
+</div>
+</div>
+<h2 class="groupheader">Enumeration Type Documentation</h2>
+<a class="anchor" id="a42cf5ff2ddac8acd8d3c6eefeeb19ff0"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">enum <a class="el" href="Errors_8h.html#a42cf5ff2ddac8acd8d3c6eefeeb19ff0">TypeError</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Enumeration for the type of error (warning, error) </p>
+<table class="fieldtable">
+<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a class="anchor" id="a42cf5ff2ddac8acd8d3c6eefeeb19ff0a984de77c680eaff141ec910e25568a81"></a>WARNING&#160;</td><td class="fielddoc">
+</td></tr>
+<tr><td class="fieldname"><a class="anchor" id="a42cf5ff2ddac8acd8d3c6eefeeb19ff0a2fd6f336d08340583bd620a7f5694c90"></a>ERROR&#160;</td><td class="fielddoc">
+</td></tr>
+</table>
+
 </div>
 </div>
 <h2 class="groupheader">Variable Documentation</h2>
@@ -210,13 +240,25 @@ Variables</h2></td></tr>
 
 </div>
 </div>
+<a class="anchor" id="af6b277b84ed704fd546c47e4c7bbd004"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::vector&lt;<a class="el" href="classErrors.html">Errors</a>&gt; warnings</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
 </div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="Errors_8h.html">Errors.h</a></li>
-    <li class="footer">Generated on Mon May 11 2020 16:03:18 for ECOGEN by
+    <li class="footer">Generated on Wed Mar 10 2021 16:19:50 for ECOGEN by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.11 </li>
   </ul>

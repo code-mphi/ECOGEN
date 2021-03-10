@@ -2,8 +2,8 @@ var classElementSegment =
 [
     [ "ElementSegment", "classElementSegment.html#a4f9130f934e07764624ae820559e4400", null ],
     [ "~ElementSegment", "classElementSegment.html#a9fb3863a4d24fc546ec2bb54589320ae", null ],
-    [ "attributFaceCommunicante", "classElementSegment.html#aa6338584616dbb20b67a45e176a8c483", null ],
-    [ "attributFaceLimite", "classElementSegment.html#a3e39fc9a89bc992411e7aea66c397dce", null ],
+    [ "attributFaceCommunicante", "classElementSegment.html#aa6dafa9e07061c08fcba43340f923e6e", null ],
+    [ "attributFaceLimite", "classElementSegment.html#a7e2ac5f4e49e7f8b7157e07b1fb8a2a7", null ],
     [ "compteFaceCommunicante", "classElementSegment.html#afe5339840127c2eb1d4a48ecbb6f6765", null ],
     [ "compteFaceCommunicante", "classElementSegment.html#abca4f0240abafd63f18c84c2c01f86cf", null ],
     [ "computeLCFL", "classElementSegment.html#a93d4410a6fef5af06a32b9fafda2a55f", null ],

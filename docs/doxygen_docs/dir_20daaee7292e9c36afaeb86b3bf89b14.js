@@ -14,6 +14,14 @@ var dir_20daaee7292e9c36afaeb86b3bf89b14 =
     [ "BoundCondOutflow.h", "BoundCondOutflow_8h.html", [
       [ "BoundCondOutflow", "classBoundCondOutflow.html", "classBoundCondOutflow" ]
     ] ],
+    [ "BoundCondSubInj.cpp", "BoundCondSubInj_8cpp.html", null ],
+    [ "BoundCondSubInj.h", "BoundCondSubInj_8h.html", [
+      [ "BoundCondSubInj", "classBoundCondSubInj.html", "classBoundCondSubInj" ]
+    ] ],
+    [ "BoundCondSymmetry.cpp", "BoundCondSymmetry_8cpp.html", null ],
+    [ "BoundCondSymmetry.h", "BoundCondSymmetry_8h.html", [
+      [ "BoundCondSymmetry", "classBoundCondSymmetry.html", "classBoundCondSymmetry" ]
+    ] ],
     [ "BoundCondSymmetryO2.cpp", "BoundCondSymmetryO2_8cpp.html", null ],
     [ "BoundCondSymmetryO2.h", "BoundCondSymmetryO2_8h.html", [
       [ "BoundCondSymmetryO2", "classBoundCondSymmetryO2.html", "classBoundCondSymmetryO2" ]

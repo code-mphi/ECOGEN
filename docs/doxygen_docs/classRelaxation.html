@@ -129,8 +129,12 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:adf354585387927bf4481da52f5dfc450"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:afa1732be309eec698283302a9e49d006"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRelaxation.html#afa1732be309eec698283302a9e49d006">~Relaxation</a> ()</td></tr>
 <tr class="separator:afa1732be309eec698283302a9e49d006"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1f69c337cf17be6c1df0901518e04981"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRelaxation.html#a1f69c337cf17be6c1df0901518e04981">stiffRelaxation</a> (<a class="el" href="classCell.html">Cell</a> *cell, const int &amp;numberPhases, <a class="el" href="Phase_8h.html#a2c815f6ae654fe19b3985d14c9c8d74e">Prim</a> type=<a class="el" href="Phase_8h.html#a2c815f6ae654fe19b3985d14c9c8d74ea2270f1269fdfbdfd9044eaa8af19750d">vecPhases</a>) const </td></tr>
-<tr class="separator:a1f69c337cf17be6c1df0901518e04981"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a62ef9503529d4a755204a65bac95fa36"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRelaxation.html#a62ef9503529d4a755204a65bac95fa36">relaxation</a> (<a class="el" href="classCell.html">Cell</a> *, const int &amp;, const double &amp;, <a class="el" href="Tools_8h.html#a2c815f6ae654fe19b3985d14c9c8d74e">Prim</a>=<a class="el" href="Tools_8h.html#a2c815f6ae654fe19b3985d14c9c8d74ea2270f1269fdfbdfd9044eaa8af19750d">vecPhases</a>)</td></tr>
+<tr class="memdesc:a62ef9503529d4a755204a65bac95fa36"><td class="mdescLeft">&#160;</td><td class="mdescRight">Stiff relaxation methods.  <a href="#a62ef9503529d4a755204a65bac95fa36">More...</a><br /></td></tr>
+<tr class="separator:a62ef9503529d4a755204a65bac95fa36"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad2ec843f1ca1138cc01b82a2e893da5d"><td class="memItemLeft" align="right" valign="top">virtual int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRelaxation.html#ad2ec843f1ca1138cc01b82a2e893da5d">getType</a> () const </td></tr>
+<tr class="memdesc:ad2ec843f1ca1138cc01b82a2e893da5d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return the type of the corresponding relaxation method.  <a href="#ad2ec843f1ca1138cc01b82a2e893da5d">More...</a><br /></td></tr>
+<tr class="separator:ad2ec843f1ca1138cc01b82a2e893da5d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Abstract class for Relaxations. </p>
@@ -174,7 +178,7 @@ Public Member Functions</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a class="anchor" id="a1f69c337cf17be6c1df0901518e04981"></a>
+<a class="anchor" id="ad2ec843f1ca1138cc01b82a2e893da5d"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="mlabels">
@@ -182,27 +186,10 @@ Public Member Functions</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">virtual void Relaxation::stiffRelaxation </td>
+          <td class="memname">virtual int Relaxation::getType </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="classCell.html">Cell</a> *&#160;</td>
-          <td class="paramname"><em>cell</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const int &amp;&#160;</td>
-          <td class="paramname"><em>numberPhases</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="Phase_8h.html#a2c815f6ae654fe19b3985d14c9c8d74e">Prim</a>&#160;</td>
-          <td class="paramname"><em>type</em> = <code><a class="el" href="Phase_8h.html#a2c815f6ae654fe19b3985d14c9c8d74ea2270f1269fdfbdfd9044eaa8af19750d">vecPhases</a></code>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td> const</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
         </tr>
       </table>
   </td>
@@ -212,7 +199,67 @@ Public Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Reimplemented in <a class="el" href="classRelaxationPTMu.html#a24bf2c30a69b6b7d0b8ed87c2e5ef8e7">RelaxationPTMu</a>, <a class="el" href="classRelaxationP.html#a1ca13598f5856b816cdf222f94082a0c">RelaxationP</a>, and <a class="el" href="classRelaxationPT.html#a67f649cd7ece91189c99d5749c19c13e">RelaxationPT</a>.</p>
+<p>Return the type of the corresponding relaxation method. </p>
+
+<p>Reimplemented in <a class="el" href="classRelaxationPT.html#a6dd81813fdf8557bcb59102f3f2235e5">RelaxationPT</a>, <a class="el" href="classRelaxationPTMu.html#ad5c07523dc924b374177d155828a8e9a">RelaxationPTMu</a>, and <a class="el" href="classRelaxationP.html#ad59f229d1bb42a3c9d03292d10ed71fd">RelaxationP</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a62ef9503529d4a755204a65bac95fa36"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual void Relaxation::relaxation </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classCell.html">Cell</a> *&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const int &amp;&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const double &amp;&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="Tools_8h.html#a2c815f6ae654fe19b3985d14c9c8d74e">Prim</a>&#160;</td>
+          <td class="paramname"> = <code><a class="el" href="Tools_8h.html#a2c815f6ae654fe19b3985d14c9c8d74ea2270f1269fdfbdfd9044eaa8af19750d">vecPhases</a></code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Stiff relaxation methods. </p>
+<p>Call for this method computes the one of the stiff relaxation methods. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">cell</td><td>cell to relax </td></tr>
+    <tr><td class="paramname">numberPhases</td><td>number of phases </td></tr>
+    <tr><td class="paramname">type</td><td>enumeration allowing to relax either state in the cell or second order half time step state </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>Reimplemented in <a class="el" href="classRelaxationPTMu.html#a08bf06318d7511c1e18216623767e05b">RelaxationPTMu</a>, <a class="el" href="classRelaxationPFinite.html#a7dfd208404ba3e2a8183c38afddf7a96">RelaxationPFinite</a>, <a class="el" href="classRelaxationPInfinite.html#a7dbd90905760aa99d369a7b2fc7f724f">RelaxationPInfinite</a>, and <a class="el" href="classRelaxationPT.html#a6ce2073f0ac1821846ae98e161303108">RelaxationPT</a>.</p>
 
 </div>
 </div>
@@ -226,7 +273,7 @@ Public Member Functions</h2></td></tr>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="classRelaxation.html">Relaxation</a></li>
-    <li class="footer">Generated on Mon May 11 2020 16:03:19 for ECOGEN by
+    <li class="footer">Generated on Wed Mar 10 2021 16:19:53 for ECOGEN by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.11 </li>
   </ul>

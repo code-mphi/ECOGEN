@@ -1,6 +1,5 @@
 var classGOPlan =
 [
-    [ "GOPlan", "classGOPlan.html#aa489aa3fe099e69f387cb52c81dee5d9", null ],
     [ "GOPlan", "classGOPlan.html#a19b5b17a146e66882f2c9f32f29fa37a", null ],
     [ "~GOPlan", "classGOPlan.html#a98ba0582760a097d0fd6cae8ace2c491", null ],
     [ "createBase", "classGOPlan.html#a9d8d9e75ca27725fc3368a67c9e4e632", null ],

@@ -2,7 +2,7 @@ var classElementPrism =
 [
     [ "ElementPrism", "classElementPrism.html#a204845e25ee16a1c3872209752aa691a", null ],
     [ "~ElementPrism", "classElementPrism.html#a7be331584d57a68392277fbab143d1f4", null ],
-    [ "attributFaceCommunicante", "classElementPrism.html#a9352c47d8bfeb90876499122e99da6c9", null ],
+    [ "attributFaceCommunicante", "classElementPrism.html#ad8ff2b99ce6bfe50e4bfc81cbea89126", null ],
     [ "compteFaceCommunicante", "classElementPrism.html#abde978065ad83ba4224758e0ee7a04df", null ],
     [ "compteFaceCommunicante", "classElementPrism.html#a6a44f170a9d8af9e7bdc787cade7ebfa", null ],
     [ "computeLCFL", "classElementPrism.html#a3b179897bafb22d27a4c93f53cea4a77", null ],

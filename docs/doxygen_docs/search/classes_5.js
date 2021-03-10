@@ -10,7 +10,7 @@ var searchData=
   ['flux',['Flux',['../classFlux.html',1,'']]],
   ['fluxeuler',['FluxEuler',['../classFluxEuler.html',1,'']]],
   ['fluxeulerhomogeneous',['FluxEulerHomogeneous',['../classFluxEulerHomogeneous.html',1,'']]],
-  ['fluxkapila',['FluxKapila',['../classFluxKapila.html',1,'']]],
-  ['fluxmultip',['FluxMultiP',['../classFluxMultiP.html',1,'']]],
-  ['fluxthermaleq',['FluxThermalEq',['../classFluxThermalEq.html',1,'']]]
+  ['fluxptueq',['FluxPTUEq',['../classFluxPTUEq.html',1,'']]],
+  ['fluxpueq',['FluxPUEq',['../classFluxPUEq.html',1,'']]],
+  ['fluxueq',['FluxUEq',['../classFluxUEq.html',1,'']]]
 ];

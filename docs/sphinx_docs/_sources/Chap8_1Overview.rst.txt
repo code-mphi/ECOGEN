@@ -127,7 +127,7 @@ It is possible to open multiple test cases simultaneously. In this case, as many
   :scale: 70%
   :align: center
 
-  Here, 3 test cases are opened simultaneously. The test case being edited *kapila2DrichtmyerMeshkov* has been modified and not saved.
+  Here, 3 test cases are opened simultaneously. The test case being edited *pressureVelocityEq2DrichtmyerMeshkov* has been modified and not saved.
 
 Once the test cases have been loaded into ECOGEN_GUI and all saved, it is possible to generate the main input file of the ECOGEN code from the menu bar (*Run* :math:`\rightarrow` *Prepare* or Ctrl+E). The simulations are ready to run (refer to section :ref:`Sec:installation:compileAndExecute`).
 

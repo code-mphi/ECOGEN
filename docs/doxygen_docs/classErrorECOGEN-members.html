@@ -115,12 +115,14 @@ $(document).ready(function(){initNavTree('classErrorECOGEN.html','');});
 
 <p>This is the complete list of members for <a class="el" href="classErrorECOGEN.html">ErrorECOGEN</a>, including all inherited members.</p>
 <table class="directory">
-  <tr class="even"><td class="entry"><a class="el" href="classErrorECOGEN.html#a5bd4871f10827f0e3e32ef5eb8d57490">ErrorECOGEN</a>(std::string infoError=&quot;&quot;, const char *fichierSource=&quot;&quot;, int numberLigne=-1)</td><td class="entry"><a class="el" href="classErrorECOGEN.html">ErrorECOGEN</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="classErrorECOGEN.html#a1ba172bb7bc7810d37fa4eb632d70aa6">additionalInfo</a>(void) const </td><td class="entry"><a class="el" href="classErrorECOGEN.html">ErrorECOGEN</a></td><td class="entry"><span class="mlabel">inline</span><span class="mlabel">virtual</span></td></tr>
+  <tr><td class="entry"><a class="el" href="classErrorECOGEN.html#a8cdd1878ab6803882fc324c6508c2e35">ErrorECOGEN</a>(std::string infoError=&quot;&quot;, const char *sourceFile=&quot;&quot;, int lineNumber=-1, int errorCode=1)</td><td class="entry"><a class="el" href="classErrorECOGEN.html">ErrorECOGEN</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="classErrorECOGEN.html#a5dbb6dad349705a2f4f157288ce217d6">getErrorCode</a>()</td><td class="entry"><a class="el" href="classErrorECOGEN.html">ErrorECOGEN</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
   <tr><td class="entry"><a class="el" href="classErrorECOGEN.html#aebf1d759b41cf75192861fae2663359f">infoError</a>(void) const </td><td class="entry"><a class="el" href="classErrorECOGEN.html">ErrorECOGEN</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
-  <tr class="even"><td class="entry"><a class="el" href="classErrorECOGEN.html#a6990bc95378eb2503e50b44e9243941a">infosAdditionelles</a>(void) const </td><td class="entry"><a class="el" href="classErrorECOGEN.html">ErrorECOGEN</a></td><td class="entry"><span class="mlabel">inline</span><span class="mlabel">virtual</span></td></tr>
-  <tr><td class="entry"><a class="el" href="classErrorECOGEN.html#a14a7bf36bbceafa9d35a83845c528587">m_fichierSource</a></td><td class="entry"><a class="el" href="classErrorECOGEN.html">ErrorECOGEN</a></td><td class="entry"><span class="mlabel">private</span></td></tr>
-  <tr class="even"><td class="entry"><a class="el" href="classErrorECOGEN.html#a2a6f0c30b5664c64e405880ee7f4ee2f">m_infoError</a></td><td class="entry"><a class="el" href="classErrorECOGEN.html">ErrorECOGEN</a></td><td class="entry"><span class="mlabel">private</span></td></tr>
-  <tr><td class="entry"><a class="el" href="classErrorECOGEN.html#a9510d45ab3ffbc303717b452030ddfc5">m_numberLigne</a></td><td class="entry"><a class="el" href="classErrorECOGEN.html">ErrorECOGEN</a></td><td class="entry"><span class="mlabel">private</span></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="classErrorECOGEN.html#a46296526f03b9a219e9d59424a0cae62">m_errorCode</a></td><td class="entry"><a class="el" href="classErrorECOGEN.html">ErrorECOGEN</a></td><td class="entry"><span class="mlabel">private</span></td></tr>
+  <tr><td class="entry"><a class="el" href="classErrorECOGEN.html#a2a6f0c30b5664c64e405880ee7f4ee2f">m_infoError</a></td><td class="entry"><a class="el" href="classErrorECOGEN.html">ErrorECOGEN</a></td><td class="entry"><span class="mlabel">private</span></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="classErrorECOGEN.html#ae1ecb16c86c8f2824672e5e5c9ea57cc">m_lineNumber</a></td><td class="entry"><a class="el" href="classErrorECOGEN.html">ErrorECOGEN</a></td><td class="entry"><span class="mlabel">private</span></td></tr>
+  <tr><td class="entry"><a class="el" href="classErrorECOGEN.html#af7e8c84fc97b9620a4a8f94bf02797ca">m_sourceFile</a></td><td class="entry"><a class="el" href="classErrorECOGEN.html">ErrorECOGEN</a></td><td class="entry"><span class="mlabel">private</span></td></tr>
   <tr class="even"><td class="entry"><a class="el" href="classErrorECOGEN.html#a9614c4fb39ff3ef52b6a2d376a3c168a">what</a>(void) const </td><td class="entry"><a class="el" href="classErrorECOGEN.html">ErrorECOGEN</a></td><td class="entry"><span class="mlabel">inline</span><span class="mlabel">virtual</span></td></tr>
   <tr><td class="entry"><a class="el" href="classErrorECOGEN.html#ad3c59c1034d45139c9f05be6b26132d8">~ErrorECOGEN</a>()</td><td class="entry"><a class="el" href="classErrorECOGEN.html">ErrorECOGEN</a></td><td class="entry"><span class="mlabel">inline</span><span class="mlabel">virtual</span></td></tr>
 </table></div><!-- contents -->
@@ -128,7 +130,7 @@ $(document).ready(function(){initNavTree('classErrorECOGEN.html','');});
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Mon May 11 2020 16:03:19 for ECOGEN by
+    <li class="footer">Generated on Wed Mar 10 2021 16:19:51 for ECOGEN by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.11 </li>
   </ul>

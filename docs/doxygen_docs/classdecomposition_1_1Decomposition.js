@@ -7,7 +7,7 @@ var classdecomposition_1_1Decomposition =
     [ "~Decomposition", "classdecomposition_1_1Decomposition.html#a157d2e07b0506c35aae35b31819aacc9", null ],
     [ "Decomposition", "classdecomposition_1_1Decomposition.html#adf8bb156fe19cb9df2a79be70e45a17c", null ],
     [ "areConsecutive", "classdecomposition_1_1Decomposition.html#a77ae0f55b52fe8e523cc4a9b02b44261", null ],
-    [ "communicateMaps", "classdecomposition_1_1Decomposition.html#a3d8e13a048e376e3264bfd1cb43f5ef7", null ],
+    [ "communicateMaps", "classdecomposition_1_1Decomposition.html#a3d62bcfae5d37cbeebb65886da0b5f10", null ],
     [ "get_rank", "classdecomposition_1_1Decomposition.html#adec3733f5fef4da0431cdaf3c4820740", null ],
     [ "initialize", "classdecomposition_1_1Decomposition.html#a43969f81ef2053b420257dc0d6b93620", null ],
     [ "is_inside", "classdecomposition_1_1Decomposition.html#a5cf0b2f1c91008152499e11d5fb0ce3c", null ],

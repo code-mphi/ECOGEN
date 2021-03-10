@@ -11,9 +11,9 @@ var dir_ecd1a0d342fca7f5a033480c812e9ce0 =
     [ "APEuler.h", "APEuler_8h.html", [
       [ "APEuler", "classAPEuler.html", "classAPEuler" ]
     ] ],
-    [ "APKapila.cpp", "APKapila_8cpp.html", null ],
-    [ "APKapila.h", "APKapila_8h.html", [
-      [ "APKapila", "classAPKapila.html", "classAPKapila" ]
+    [ "APUEq.cpp", "APUEq_8cpp.html", null ],
+    [ "APUEq.h", "APUEq_8h.html", [
+      [ "APUEq", "classAPUEq.html", "classAPUEq" ]
     ] ],
     [ "HeaderAddPhys.h", "HeaderAddPhys_8h.html", null ],
     [ "HeaderQuantitiesAddPhys.h", "HeaderQuantitiesAddPhys_8h.html", null ],

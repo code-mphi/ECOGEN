@@ -2,7 +2,7 @@ var classGDEllipse =
 [
     [ "GDEllipse", "classGDEllipse.html#a05d816c431ddf7f1b9b428468c494306", null ],
     [ "~GDEllipse", "classGDEllipse.html#aeccdc2e377738b60c1327563b870e5f3", null ],
-    [ "belong", "classGDEllipse.html#a392cdaf177ad00e796f3154ac73f11fa", null ],
+    [ "belong", "classGDEllipse.html#a6d4644001905edf70a02097a0e94b8e4", null ],
     [ "m_axis1", "classGDEllipse.html#a2486e4ea2bac6d85e78a588cbb708323", null ],
     [ "m_axis2", "classGDEllipse.html#aaf8381875bb2cdb750c273f4bfd461c3", null ],
     [ "m_centerPos", "classGDEllipse.html#a1ef13ef3d992839232012c07e48b3ea4", null ],

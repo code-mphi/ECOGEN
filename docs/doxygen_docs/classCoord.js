@@ -5,8 +5,6 @@ var classCoord =
     [ "~Coord", "classCoord.html#a11c7e6743b57a2a7a3cefb04d04a17a6", null ],
     [ "abs", "classCoord.html#aafdd2e4afe35ef103d25aa0b85ae0c79", null ],
     [ "changeSign", "classCoord.html#a04ba0c9032420685b3c6405f2cb3ea5b", null ],
-    [ "coord", "classCoord.html#a0508f46fcb89bae698f47de7f564a266", null ],
-    [ "coord", "classCoord.html#abde5ae3b48f8d77ed62159f60da8bac6", null ],
     [ "cos", "classCoord.html#a6c1fd1ce08474e089298abc7f426b912", null ],
     [ "cross", "classCoord.html#a88aa79d55f20f843196e82b006273255", null ],
     [ "crossProduct", "classCoord.html#a3db8185b64c9b148bc3cf836fa06b4ef", null ],

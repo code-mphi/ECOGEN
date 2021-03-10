@@ -13,8 +13,8 @@ var classCellO2Ghost =
     [ "setRankOfNeighborCPU", "classCellO2Ghost.html#aff14a4716f29648787d4751026a94cab", null ],
     [ "m_alphaCellAfterOppositeSide", "classCellO2Ghost.html#a179ec2e3e4a3c1abf23e0ab91976fa79", null ],
     [ "m_indexCellInterface", "classCellO2Ghost.html#ab427c74df7cea58ef8a82edfcf50ec87", null ],
-    [ "m_mixtureSlopesGhost", "classCellO2Ghost.html#a07c9096239fa35b4f4eecdc4c7250fd2", null ],
+    [ "m_mixtureSlopesGhost", "classCellO2Ghost.html#a5579128f55fb30e0810190c8bbcd9270", null ],
     [ "m_rankOfNeighborCPU", "classCellO2Ghost.html#a564161b3d7db344f73abaa0898c2b0d8", null ],
-    [ "m_vecPhasesSlopesGhost", "classCellO2Ghost.html#ad88658103e2382e075bc2010c149c5fa", null ],
-    [ "m_vecTransportsSlopesGhost", "classCellO2Ghost.html#a7063dcf4b30a5ca60446b0a6865672e5", null ]
+    [ "m_vecPhasesSlopesGhost", "classCellO2Ghost.html#a09e51195600f7c18ebc99740680cc59b", null ],
+    [ "m_vecTransportsSlopesGhost", "classCellO2Ghost.html#ab4b5c7613a7905fc35ae14512a163eb4", null ]
 ];

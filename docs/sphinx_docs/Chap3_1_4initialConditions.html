@@ -1,39 +1,41 @@
 
 
 <!DOCTYPE html>
-<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8">
+  <meta charset="utf-8" />
   
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
   <title>InitialConditionsV4.xml &mdash; ECOGEN 2.0 documentation</title>
   
 
   
-  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+
   
   
 
   
-  <script type="text/javascript" src="_static/js/modernizr.min.js"></script>
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
         <script src="_static/jquery.js"></script>
         <script src="_static/underscore.js"></script>
         <script src="_static/doctools.js"></script>
-        <script src="_static/language_data.js"></script>
-        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     
     <script type="text/javascript" src="_static/js/theme.js"></script>
 
     
-
-  
-  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
-  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="Materials" href="Chap3_2materials.html" />
@@ -78,6 +80,7 @@
           
         </div>
 
+        
         <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
           
             
@@ -117,6 +120,7 @@
             
           
         </div>
+        
       </div>
     </nav>
 
@@ -151,11 +155,13 @@
 
 
 
+
+
 <div role="navigation" aria-label="breadcrumbs navigation">
 
   <ul class="wy-breadcrumbs">
     
-      <li><a href="index.html">Docs</a> &raquo;</li>
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
         
           <li><a href="Chap3_IO_Chapter.html">I/O descriptions</a> &raquo;</li>
         
@@ -166,7 +172,7 @@
     
       <li class="wy-breadcrumbs-aside">
         
-            
+          
             <a href="_sources/Chap3_1_4initialConditions.rst.txt" rel="nofollow"> View page source</a>
           
         
@@ -512,8 +518,32 @@
 </pre></div>
 </div>
 </div>
-<div class="section" id="kapila">
-<span id="sec-input-kapila"></span><h3>Kapila<a class="headerlink" href="#kapila" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="ueq-previously-named-multip">
+<span id="sec-input-ueq"></span><h3>UEq (previously named MultiP)<a class="headerlink" href="#ueq-previously-named-multip" title="Permalink to this headline">¶</a></h3>
+<p>Multiphase flow at velocity equilibrium (same velocity for every phase within each cell). Each <code class="code xml docutils literal notranslate"><span class="name tag"><span class="pre">&lt;dataFluid&gt;</span></span></code> node corresponds to a phase with the following attributes:</p>
+<ul class="simple">
+<li><p><code class="code xml docutils literal notranslate"><span class="pre">alpha</span></code>: Volume fraction of the phase, real number in the range ]0.,1.[. The range can be increased to [0.;1.] if the option <em>alphaNull</em> is turned on (<em>true</em>) in the <em>modelV4.xml</em> input file.</p></li>
+<li><p><code class="code xml docutils literal notranslate"><span class="pre">density</span></code> or <code class="code xml docutils literal notranslate"><span class="pre">temperature</span></code>: Initial density or temperature of the fluid, real number (unit: kg/m3 or K (SI)), respectively.</p></li>
+<li><p><code class="code xml docutils literal notranslate"><span class="pre">pressure</span></code>: Initial pressure of the fluid, real number (unit: Pa (SI)).</p></li>
+</ul>
+<p>Moreover, in this case, the <code class="code xml docutils literal notranslate"><span class="name tag"><span class="pre">&lt;mixture&gt;</span></span></code> node contains:</p>
+<ul class="simple">
+<li><p>Node <code class="code xml docutils literal notranslate"><span class="name tag"><span class="pre">&lt;velocity&gt;</span></span></code>: With <code class="code xml docutils literal notranslate"><span class="pre">x</span></code>, <code class="code xml docutils literal notranslate"><span class="pre">y</span></code> and <code class="code xml docutils literal notranslate"><span class="pre">z</span></code> attributes setting the initial values for the components of the velocity vector, real numbers (unit: m/s (SI)).</p></li>
+</ul>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;material</span> <span class="na">type=</span><span class="s">&quot;fluid&quot;</span> <span class="na">EOS=</span><span class="s">&quot;IG_air.xml&quot;</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;dataFluid</span> <span class="na">alpha=</span><span class="s">&quot;1.&quot;</span> <span class="na">density=</span><span class="s">&quot;50.&quot;</span> <span class="na">pressure=</span><span class="s">&quot;1.e5&quot;</span><span class="nt">/&gt;</span>
+<span class="nt">&lt;/material&gt;</span>
+<span class="nt">&lt;material</span> <span class="na">type=</span><span class="s">&quot;fluid&quot;</span> <span class="na">EOS=</span><span class="s">&quot;SG_water.xml&quot;</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;dataFluid</span> <span class="na">alpha=</span><span class="s">&quot;0.&quot;</span> <span class="na">density=</span><span class="s">&quot;1000.0&quot;</span> <span class="na">pressure=</span><span class="s">&quot;1.e5&quot;</span><span class="nt">/&gt;</span>
+<span class="nt">&lt;/material&gt;</span>
+<span class="nt">&lt;mixture&gt;</span>
+  <span class="nt">&lt;velocity</span> <span class="na">x=</span><span class="s">&quot;0.&quot;</span> <span class="na">y=</span><span class="s">&quot;0.&quot;</span> <span class="na">z=</span><span class="s">&quot;0.&quot;</span><span class="nt">/&gt;</span>
+<span class="nt">&lt;/mixture&gt;</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="pueq-previously-named-kapila">
+<span id="sec-input-pueq"></span><h3>PUEq (previously named Kapila)<a class="headerlink" href="#pueq-previously-named-kapila" title="Permalink to this headline">¶</a></h3>
 <p>Multiphase flow at pressure and velocity equilibrium (same velocity and pressure for every phase within each cell). Each <code class="code xml docutils literal notranslate"><span class="name tag"><span class="pre">&lt;dataFluid&gt;</span></span></code> node corresponds to a phase with the following attributes:</p>
 <ul class="simple">
 <li><p><code class="code xml docutils literal notranslate"><span class="pre">alpha</span></code>: Volume fraction of the phase, real number in the range ]0.,1.[. The range can be increased to [0.;1.] if the option <em>alphaNull</em> is turned on (<em>true</em>) in the <em>modelV4.xml</em> input file.</p></li>
@@ -537,8 +567,8 @@
 </pre></div>
 </div>
 </div>
-<div class="section" id="thermaleq">
-<span id="sec-input-thermaleq"></span><h3>ThermalEq<a class="headerlink" href="#thermaleq" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="ptueq-previously-named-thermaleq">
+<span id="sec-input-ptueq"></span><h3>PTUEq (previously named ThermalEq)<a class="headerlink" href="#ptueq-previously-named-thermaleq" title="Permalink to this headline">¶</a></h3>
 <p>Multiphase flow at pressure, velocity and thermal equilibrium (same velocity, pressure and temperature for every phase within each cell). In this case, every <code class="code xml docutils literal notranslate"><span class="name tag"><span class="pre">&lt;dataFluid&gt;</span></span></code> node corresponds to a phase with only one attribute <code class="code xml docutils literal notranslate"><span class="pre">alpha</span></code> setting the volume-fraction real number in the range ]0.,1.[.</p>
 <p>The <code class="code xml docutils literal notranslate"><span class="name tag"><span class="pre">&lt;mixture&gt;</span></span></code> node contains the following attributes and nodes:</p>
 <ul class="simple">
@@ -579,7 +609,7 @@
 </pre></div>
 </div>
 <p><strong>Remark</strong></p>
-<p>Be careful to set the volume fraction in the range ]0,.1.[ (unless you use the option <em>alphaNull=true</em> for Kapila’s model) as well as the its sum over all the phases equal to 1.</p>
+<p>Be careful to set the volume fraction in the range ]0,.1.[ (unless you use the option <em>alphaNull=true</em> for pressure-velocity- and velocity-equilibrium models) as well as the its sum over all the phases equal to 1.</p>
 </div>
 </div>
 </div>
@@ -589,29 +619,29 @@
            
           </div>
           <footer>
-  
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
-      
-        <a href="Chap3_2materials.html" class="btn btn-neutral float-right" title="Materials" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
-      
-      
-        <a href="Chap3_1_3mesh.html" class="btn btn-neutral float-left" title="MeshV5.xml" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
-      
+        <a href="Chap3_2materials.html" class="btn btn-neutral float-right" title="Materials" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="Chap3_1_3mesh.html" class="btn btn-neutral float-left" title="MeshV5.xml" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
     </div>
-  
 
   <hr/>
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright 2019, code-mphi
+        &#169; Copyright 2019, code-mphi.
 
     </p>
   </div>
-  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
 
 </footer>
-
         </div>
       </div>
 
@@ -619,7 +649,6 @@
 
   </div>
   
-
 
   <script type="text/javascript">
       jQuery(function () {

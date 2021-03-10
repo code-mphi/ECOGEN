@@ -1,6 +1,7 @@
 var searchData=
 [
   ['output',['Output',['../classOutput.html',1,'']]],
+  ['outputboundaryfluxgnu',['OutputBoundaryFluxGNU',['../classOutputBoundaryFluxGNU.html',1,'']]],
   ['outputcutgnu',['OutputCutGNU',['../classOutputCutGNU.html',1,'']]],
   ['outputglobalgnu',['OutputGlobalGNU',['../classOutputGlobalGNU.html',1,'']]],
   ['outputgnu',['OutputGNU',['../classOutputGNU.html',1,'']]],

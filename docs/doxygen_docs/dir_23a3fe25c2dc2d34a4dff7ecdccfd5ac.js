@@ -13,6 +13,10 @@ var dir_23a3fe25c2dc2d34a4dff7ecdccfd5ac =
     [ "Output.h", "Output_8h.html", [
       [ "Output", "classOutput.html", "classOutput" ]
     ] ],
+    [ "OutputBoundaryFluxGNU.cpp", "OutputBoundaryFluxGNU_8cpp.html", null ],
+    [ "OutputBoundaryFluxGNU.h", "OutputBoundaryFluxGNU_8h.html", [
+      [ "OutputBoundaryFluxGNU", "classOutputBoundaryFluxGNU.html", "classOutputBoundaryFluxGNU" ]
+    ] ],
     [ "OutputCutGNU.cpp", "OutputCutGNU_8cpp.html", null ],
     [ "OutputCutGNU.h", "OutputCutGNU_8h.html", [
       [ "OutputCutGNU", "classOutputCutGNU.html", "classOutputCutGNU" ]

@@ -122,75 +122,76 @@ $(document).ready(function(){initNavTree('classModel.html','');});
 
 <p><code>#include &lt;<a class="el" href="Model_8h_source.html">Model.h</a>&gt;</code></p>
 
-<p>Inherited by <a class="el" href="classModEuler.html">ModEuler</a>, <a class="el" href="classModEulerHomogeneous.html">ModEulerHomogeneous</a>, <a class="el" href="classModKapila.html">ModKapila</a>, <a class="el" href="classModMultiP.html">ModMultiP</a>, and <a class="el" href="classModThermalEq.html">ModThermalEq</a>.</p>
+<p>Inherited by <a class="el" href="classModEuler.html">ModEuler</a>, <a class="el" href="classModEulerHomogeneous.html">ModEulerHomogeneous</a>, <a class="el" href="classModPTUEq.html">ModPTUEq</a>, and <a class="el" href="classModUEq.html">ModUEq</a>.</p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:ae3b375de5f6df4faf74a95d64748e048"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classModel.html#ae3b375de5f6df4faf74a95d64748e048">Model</a> ()</td></tr>
-<tr class="separator:ae3b375de5f6df4faf74a95d64748e048"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8d42192b762b7424d03f8043b0a46205"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classModel.html#a8d42192b762b7424d03f8043b0a46205">Model</a> (const std::string &amp;name, const int &amp;numberTransports)</td></tr>
 <tr class="memdesc:a8d42192b762b7424d03f8043b0a46205"><td class="mdescLeft">&#160;</td><td class="mdescRight">Generic model constructor.  <a href="#a8d42192b762b7424d03f8043b0a46205">More...</a><br /></td></tr>
 <tr class="separator:a8d42192b762b7424d03f8043b0a46205"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad6ebd2062a0b823db841a0b88baac4c0"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classModel.html#ad6ebd2062a0b823db841a0b88baac4c0">~Model</a> ()</td></tr>
 <tr class="separator:ad6ebd2062a0b823db841a0b88baac4c0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a70f273ef2f34fe0346040f5a7ecd6cd7"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classModel.html#a70f273ef2f34fe0346040f5a7ecd6cd7">allocateCons</a> (<a class="el" href="classFlux.html">Flux</a> **cons, const int &amp;numberPhases)</td></tr>
-<tr class="memdesc:a70f273ef2f34fe0346040f5a7ecd6cd7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Allocate conservative variable arrays.  <a href="#a70f273ef2f34fe0346040f5a7ecd6cd7">More...</a><br /></td></tr>
-<tr class="separator:a70f273ef2f34fe0346040f5a7ecd6cd7"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3cbbf2edc4af8eef6088dedd7353ed19"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classModel.html#a3cbbf2edc4af8eef6088dedd7353ed19">allocatePhase</a> (<a class="el" href="classPhase.html">Phase</a> **phase)</td></tr>
-<tr class="memdesc:a3cbbf2edc4af8eef6088dedd7353ed19"><td class="mdescLeft">&#160;</td><td class="mdescRight">Instanciate phase variable.  <a href="#a3cbbf2edc4af8eef6088dedd7353ed19">More...</a><br /></td></tr>
-<tr class="separator:a3cbbf2edc4af8eef6088dedd7353ed19"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa9c2783803b05a4ebf81695a99812fee"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classModel.html#aa9c2783803b05a4ebf81695a99812fee">allocateMixture</a> (<a class="el" href="classMixture.html">Mixture</a> **mixture)</td></tr>
-<tr class="memdesc:aa9c2783803b05a4ebf81695a99812fee"><td class="mdescLeft">&#160;</td><td class="mdescRight">Instanciate mixture variable.  <a href="#aa9c2783803b05a4ebf81695a99812fee">More...</a><br /></td></tr>
-<tr class="separator:aa9c2783803b05a4ebf81695a99812fee"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1bb1ccddd1b9682226dbc37a04191483"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classModel.html#a1bb1ccddd1b9682226dbc37a04191483">allocateCons</a> (<a class="el" href="classFlux.html">Flux</a> **, const int &amp;)</td></tr>
+<tr class="memdesc:a1bb1ccddd1b9682226dbc37a04191483"><td class="mdescLeft">&#160;</td><td class="mdescRight">Allocate conservative variable arrays.  <a href="#a1bb1ccddd1b9682226dbc37a04191483">More...</a><br /></td></tr>
+<tr class="separator:a1bb1ccddd1b9682226dbc37a04191483"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa1e367086bd8df34a371ede69de6a023"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classModel.html#aa1e367086bd8df34a371ede69de6a023">allocatePhase</a> (<a class="el" href="classPhase.html">Phase</a> **)</td></tr>
+<tr class="memdesc:aa1e367086bd8df34a371ede69de6a023"><td class="mdescLeft">&#160;</td><td class="mdescRight">Instanciate phase variable.  <a href="#aa1e367086bd8df34a371ede69de6a023">More...</a><br /></td></tr>
+<tr class="separator:aa1e367086bd8df34a371ede69de6a023"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a54cf274ecfd0d59396c245b9a4a90255"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classModel.html#a54cf274ecfd0d59396c245b9a4a90255">allocateMixture</a> (<a class="el" href="classMixture.html">Mixture</a> **)</td></tr>
+<tr class="memdesc:a54cf274ecfd0d59396c245b9a4a90255"><td class="mdescLeft">&#160;</td><td class="mdescRight">Instanciate mixture variable.  <a href="#a54cf274ecfd0d59396c245b9a4a90255">More...</a><br /></td></tr>
+<tr class="separator:a54cf274ecfd0d59396c245b9a4a90255"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac9d39c6bd184e6a6d7a9487df1be0ae7"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classModel.html#ac9d39c6bd184e6a6d7a9487df1be0ae7">allocateEos</a> (<a class="el" href="classCell.html">Cell</a> &amp;cell, const int &amp;numberPhases) const </td></tr>
 <tr class="memdesc:ac9d39c6bd184e6a6d7a9487df1be0ae7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Associate equations of state.  <a href="#ac9d39c6bd184e6a6d7a9487df1be0ae7">More...</a><br /></td></tr>
 <tr class="separator:ac9d39c6bd184e6a6d7a9487df1be0ae7"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab6c71ee6f6078d493e65c852a085f83f"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classModel.html#ab6c71ee6f6078d493e65c852a085f83f">fulfillState</a> (<a class="el" href="classPhase.html">Phase</a> **phases, <a class="el" href="classMixture.html">Mixture</a> *mixture, const int &amp;numberPhases, <a class="el" href="Phase_8h.html#a2c815f6ae654fe19b3985d14c9c8d74e">Prim</a> type=<a class="el" href="Phase_8h.html#a2c815f6ae654fe19b3985d14c9c8d74ea2270f1269fdfbdfd9044eaa8af19750d">vecPhases</a>)</td></tr>
-<tr class="memdesc:ab6c71ee6f6078d493e65c852a085f83f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Complete a thermodynamics state frome minimum variables depending on the model.  <a href="#ab6c71ee6f6078d493e65c852a085f83f">More...</a><br /></td></tr>
-<tr class="separator:ab6c71ee6f6078d493e65c852a085f83f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a58289b087b39dc5fc6f6f69f0fa8a349"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classModel.html#a58289b087b39dc5fc6f6f69f0fa8a349">solveRiemannIntern</a> (<a class="el" href="classCell.html">Cell</a> &amp;<a class="el" href="CellInterface_8h.html#a29e9434a5b4c13e843d0ecd75f15c1f0">cellLeft</a>, <a class="el" href="classCell.html">Cell</a> &amp;<a class="el" href="CellInterface_8h.html#ab1df753c688d94d43518ee838092f4b2">cellRight</a>, const int &amp;numberPhases, const double &amp;dxLeft, const double &amp;dxRight, double &amp;dtMax) const </td></tr>
-<tr class="memdesc:a58289b087b39dc5fc6f6f69f0fa8a349"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classCell.html" title="Base class for a mesh cell. ">Cell</a> to cell Riemann solver.  <a href="#a58289b087b39dc5fc6f6f69f0fa8a349">More...</a><br /></td></tr>
-<tr class="separator:a58289b087b39dc5fc6f6f69f0fa8a349"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a94469c3406cba01a8c86f0360d1ff178"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classModel.html#a94469c3406cba01a8c86f0360d1ff178">solveRiemannWall</a> (<a class="el" href="classCell.html">Cell</a> &amp;<a class="el" href="CellInterface_8h.html#a29e9434a5b4c13e843d0ecd75f15c1f0">cellLeft</a>, const int &amp;numberPhases, const double &amp;dxLeft, double &amp;dtMax) const </td></tr>
-<tr class="memdesc:a94469c3406cba01a8c86f0360d1ff178"><td class="mdescLeft">&#160;</td><td class="mdescRight">Wall half Riemann solver.  <a href="#a94469c3406cba01a8c86f0360d1ff178">More...</a><br /></td></tr>
-<tr class="separator:a94469c3406cba01a8c86f0360d1ff178"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9bc850ce9124e758ac51b3d21b1f0e41"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classModel.html#a9bc850ce9124e758ac51b3d21b1f0e41">solveRiemannInflow</a> (<a class="el" href="classCell.html">Cell</a> &amp;<a class="el" href="CellInterface_8h.html#a29e9434a5b4c13e843d0ecd75f15c1f0">cellLeft</a>, const int &amp;numberPhases, const double &amp;dxLeft, double &amp;dtMax, const double m0, const double *ak0, const double *rhok0, const double *pk0) const </td></tr>
-<tr class="memdesc:a9bc850ce9124e758ac51b3d21b1f0e41"><td class="mdescLeft">&#160;</td><td class="mdescRight">Inflow (injection) half Riemann solver.  <a href="#a9bc850ce9124e758ac51b3d21b1f0e41">More...</a><br /></td></tr>
-<tr class="separator:a9bc850ce9124e758ac51b3d21b1f0e41"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2b3f6d896eccc8c4e6510bf201ec3f81"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classModel.html#a2b3f6d896eccc8c4e6510bf201ec3f81">solveRiemannTank</a> (<a class="el" href="classCell.html">Cell</a> &amp;<a class="el" href="CellInterface_8h.html#a29e9434a5b4c13e843d0ecd75f15c1f0">cellLeft</a>, const int &amp;numberPhases, const double &amp;dxLeft, double &amp;dtMax, const double *ak0, const double *rhok0, const double &amp;p0, const double &amp;T0) const </td></tr>
-<tr class="memdesc:a2b3f6d896eccc8c4e6510bf201ec3f81"><td class="mdescLeft">&#160;</td><td class="mdescRight">Tank half Riemann solver.  <a href="#a2b3f6d896eccc8c4e6510bf201ec3f81">More...</a><br /></td></tr>
-<tr class="separator:a2b3f6d896eccc8c4e6510bf201ec3f81"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa6122a56ab1ccf5d2ae8f2d4eb8ef632"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classModel.html#aa6122a56ab1ccf5d2ae8f2d4eb8ef632">solveRiemannOutflow</a> (<a class="el" href="classCell.html">Cell</a> &amp;<a class="el" href="CellInterface_8h.html#a29e9434a5b4c13e843d0ecd75f15c1f0">cellLeft</a>, const int &amp;numberPhases, const double &amp;dxLeft, double &amp;dtMax, const double p0, double *debitSurf) const </td></tr>
-<tr class="memdesc:aa6122a56ab1ccf5d2ae8f2d4eb8ef632"><td class="mdescLeft">&#160;</td><td class="mdescRight">Outflow half Riemann solver.  <a href="#aa6122a56ab1ccf5d2ae8f2d4eb8ef632">More...</a><br /></td></tr>
-<tr class="separator:aa6122a56ab1ccf5d2ae8f2d4eb8ef632"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab6cbf3a61069ccfb13d57b21d61d758b"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classModel.html#ab6cbf3a61069ccfb13d57b21d61d758b">solveRiemannTransportIntern</a> (<a class="el" href="classCell.html">Cell</a> &amp;<a class="el" href="CellInterface_8h.html#a29e9434a5b4c13e843d0ecd75f15c1f0">cellLeft</a>, <a class="el" href="classCell.html">Cell</a> &amp;<a class="el" href="CellInterface_8h.html#ab1df753c688d94d43518ee838092f4b2">cellRight</a>, const int &amp;numberTransports)</td></tr>
-<tr class="memdesc:ab6cbf3a61069ccfb13d57b21d61d758b"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classCell.html" title="Base class for a mesh cell. ">Cell</a> to cell Riemann solver for transport equations.  <a href="#ab6cbf3a61069ccfb13d57b21d61d758b">More...</a><br /></td></tr>
-<tr class="separator:ab6cbf3a61069ccfb13d57b21d61d758b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3ba54a5073e1ab22144b35529eedee31"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classModel.html#a3ba54a5073e1ab22144b35529eedee31">solveRiemannTransportWall</a> (const int &amp;numberTransports)</td></tr>
-<tr class="memdesc:a3ba54a5073e1ab22144b35529eedee31"><td class="mdescLeft">&#160;</td><td class="mdescRight">Wall half Riemann solver for transport equations.  <a href="#a3ba54a5073e1ab22144b35529eedee31">More...</a><br /></td></tr>
-<tr class="separator:a3ba54a5073e1ab22144b35529eedee31"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af7305e58b286b5a1adb6d4ce528ebfce"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classModel.html#af7305e58b286b5a1adb6d4ce528ebfce">solveRiemannTransportInflow</a> (<a class="el" href="classCell.html">Cell</a> &amp;<a class="el" href="CellInterface_8h.html#a29e9434a5b4c13e843d0ecd75f15c1f0">cellLeft</a>, const int &amp;numberTransports, double *valueTransports)</td></tr>
-<tr class="memdesc:af7305e58b286b5a1adb6d4ce528ebfce"><td class="mdescLeft">&#160;</td><td class="mdescRight">Flow injection half Riemann solver for transport equations.  <a href="#af7305e58b286b5a1adb6d4ce528ebfce">More...</a><br /></td></tr>
-<tr class="separator:af7305e58b286b5a1adb6d4ce528ebfce"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1fc0b0092975ef9101a56b1a8a6a213c"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classModel.html#a1fc0b0092975ef9101a56b1a8a6a213c">solveRiemannTransportTank</a> (<a class="el" href="classCell.html">Cell</a> &amp;<a class="el" href="CellInterface_8h.html#a29e9434a5b4c13e843d0ecd75f15c1f0">cellLeft</a>, const int &amp;numberTransports, double *valueTransports)</td></tr>
-<tr class="memdesc:a1fc0b0092975ef9101a56b1a8a6a213c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Tank half Riemann solver for transport equations.  <a href="#a1fc0b0092975ef9101a56b1a8a6a213c">More...</a><br /></td></tr>
-<tr class="separator:a1fc0b0092975ef9101a56b1a8a6a213c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4ed694da6563f7795edaf20802cd1ae9"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classModel.html#a4ed694da6563f7795edaf20802cd1ae9">solveRiemannTransportOutflow</a> (<a class="el" href="classCell.html">Cell</a> &amp;<a class="el" href="CellInterface_8h.html#a29e9434a5b4c13e843d0ecd75f15c1f0">cellLeft</a>, const int &amp;numberTransports, double *valueTransports)</td></tr>
-<tr class="memdesc:a4ed694da6563f7795edaf20802cd1ae9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Outflow half Riemann solver for transport equations.  <a href="#a4ed694da6563f7795edaf20802cd1ae9">More...</a><br /></td></tr>
-<tr class="separator:a4ed694da6563f7795edaf20802cd1ae9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aceb7a7a6fd3c9da73c4ab111018e80a9"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classModel.html#aceb7a7a6fd3c9da73c4ab111018e80a9">reverseProjection</a> (const <a class="el" href="classCoord.html">Coord</a> normal, const <a class="el" href="classCoord.html">Coord</a> tangent, const <a class="el" href="classCoord.html">Coord</a> binormal) const </td></tr>
-<tr class="memdesc:aceb7a7a6fd3c9da73c4ab111018e80a9"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classFlux.html" title="Abstract class for conservative variables and fluxes. ">Flux</a> reverse projection in the absolute cartesian coordinate system.  <a href="#aceb7a7a6fd3c9da73c4ab111018e80a9">More...</a><br /></td></tr>
-<tr class="separator:aceb7a7a6fd3c9da73c4ab111018e80a9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4d67cffcf3ee934825e7333ba6a12ade"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classModel.html#a4d67cffcf3ee934825e7333ba6a12ade">relaxations</a> (<a class="el" href="classCell.html">Cell</a> *cell, const int &amp;numberPhases, <a class="el" href="Phase_8h.html#a2c815f6ae654fe19b3985d14c9c8d74e">Prim</a> type=<a class="el" href="Phase_8h.html#a2c815f6ae654fe19b3985d14c9c8d74ea2270f1269fdfbdfd9044eaa8af19750d">vecPhases</a>) const </td></tr>
-<tr class="separator:a4d67cffcf3ee934825e7333ba6a12ade"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aedcd2d1af18d45920123479dadfac530"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classModel.html#aedcd2d1af18d45920123479dadfac530">fulfillState</a> (<a class="el" href="classPhase.html">Phase</a> **, <a class="el" href="classMixture.html">Mixture</a> *, const int &amp;, <a class="el" href="Tools_8h.html#a2c815f6ae654fe19b3985d14c9c8d74e">Prim</a>=<a class="el" href="Tools_8h.html#a2c815f6ae654fe19b3985d14c9c8d74ea2270f1269fdfbdfd9044eaa8af19750d">vecPhases</a>)</td></tr>
+<tr class="memdesc:aedcd2d1af18d45920123479dadfac530"><td class="mdescLeft">&#160;</td><td class="mdescRight">Complete a thermodynamics state frome minimum variables depending on the model.  <a href="#aedcd2d1af18d45920123479dadfac530">More...</a><br /></td></tr>
+<tr class="separator:aedcd2d1af18d45920123479dadfac530"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af05b24ff8aa4429983eb5826d19007d4"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classModel.html#af05b24ff8aa4429983eb5826d19007d4">solveRiemannIntern</a> (<a class="el" href="classCell.html">Cell</a> &amp;, <a class="el" href="classCell.html">Cell</a> &amp;, const int &amp;, const double &amp;, const double &amp;, double &amp;, double &amp;, double &amp;) const </td></tr>
+<tr class="memdesc:af05b24ff8aa4429983eb5826d19007d4"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classCell.html" title="Base class for a mesh cell. ">Cell</a> to cell Riemann solver.  <a href="#af05b24ff8aa4429983eb5826d19007d4">More...</a><br /></td></tr>
+<tr class="separator:af05b24ff8aa4429983eb5826d19007d4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa1395e8a9ca7cbc2805ac7cc9187ec34"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classModel.html#aa1395e8a9ca7cbc2805ac7cc9187ec34">solveRiemannWall</a> (<a class="el" href="classCell.html">Cell</a> &amp;, const int &amp;, const double &amp;, double &amp;) const </td></tr>
+<tr class="memdesc:aa1395e8a9ca7cbc2805ac7cc9187ec34"><td class="mdescLeft">&#160;</td><td class="mdescRight">Wall half Riemann solver.  <a href="#aa1395e8a9ca7cbc2805ac7cc9187ec34">More...</a><br /></td></tr>
+<tr class="separator:aa1395e8a9ca7cbc2805ac7cc9187ec34"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0fb3f7b86893de0c1a4afc5d74bc9856"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classModel.html#a0fb3f7b86893de0c1a4afc5d74bc9856">solveRiemannInflow</a> (<a class="el" href="classCell.html">Cell</a> &amp;, const int &amp;, const double &amp;, double &amp;, const double, const double *, const double *, const double *, double &amp;, double &amp;) const </td></tr>
+<tr class="memdesc:a0fb3f7b86893de0c1a4afc5d74bc9856"><td class="mdescLeft">&#160;</td><td class="mdescRight">Inflow (injection) half Riemann solver.  <a href="#a0fb3f7b86893de0c1a4afc5d74bc9856">More...</a><br /></td></tr>
+<tr class="separator:a0fb3f7b86893de0c1a4afc5d74bc9856"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a70f1cbc9f67ae32103efed5b1f24dae5"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classModel.html#a70f1cbc9f67ae32103efed5b1f24dae5">solveRiemannSubInj</a> (<a class="el" href="classCell.html">Cell</a> &amp;, const int &amp;, const double &amp;, double &amp;, const double, const double, double &amp;, double &amp;) const </td></tr>
+<tr class="memdesc:a70f1cbc9f67ae32103efed5b1f24dae5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Subsonic injection half Riemann solver (Euler specific)  <a href="#a70f1cbc9f67ae32103efed5b1f24dae5">More...</a><br /></td></tr>
+<tr class="separator:a70f1cbc9f67ae32103efed5b1f24dae5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4373b45db299b8abdfc0aaf5cff54b49"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classModel.html#a4373b45db299b8abdfc0aaf5cff54b49">solveRiemannTank</a> (<a class="el" href="classCell.html">Cell</a> &amp;, const int &amp;, const double &amp;, double &amp;, const double *, const double *, const double &amp;, const double &amp;, double &amp;, double &amp;) const </td></tr>
+<tr class="memdesc:a4373b45db299b8abdfc0aaf5cff54b49"><td class="mdescLeft">&#160;</td><td class="mdescRight">Tank half Riemann solver.  <a href="#a4373b45db299b8abdfc0aaf5cff54b49">More...</a><br /></td></tr>
+<tr class="separator:a4373b45db299b8abdfc0aaf5cff54b49"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6af3b415fba4b2bbe044406e43a70afe"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classModel.html#a6af3b415fba4b2bbe044406e43a70afe">solveRiemannOutflow</a> (<a class="el" href="classCell.html">Cell</a> &amp;, const int &amp;, const double &amp;, double &amp;, const double, double &amp;, double &amp;) const </td></tr>
+<tr class="memdesc:a6af3b415fba4b2bbe044406e43a70afe"><td class="mdescLeft">&#160;</td><td class="mdescRight">Outflow half Riemann solver.  <a href="#a6af3b415fba4b2bbe044406e43a70afe">More...</a><br /></td></tr>
+<tr class="separator:a6af3b415fba4b2bbe044406e43a70afe"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad77e0825bbac47739486a74522cb2a3e"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classModel.html#ad77e0825bbac47739486a74522cb2a3e">solveRiemannTransportIntern</a> (<a class="el" href="classCell.html">Cell</a> &amp;, <a class="el" href="classCell.html">Cell</a> &amp;, const int &amp;)</td></tr>
+<tr class="memdesc:ad77e0825bbac47739486a74522cb2a3e"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classCell.html" title="Base class for a mesh cell. ">Cell</a> to cell Riemann solver for transport equations.  <a href="#ad77e0825bbac47739486a74522cb2a3e">More...</a><br /></td></tr>
+<tr class="separator:ad77e0825bbac47739486a74522cb2a3e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a34d366eec85473443b31c63f54de292c"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classModel.html#a34d366eec85473443b31c63f54de292c">solveRiemannTransportWall</a> (const int &amp;)</td></tr>
+<tr class="memdesc:a34d366eec85473443b31c63f54de292c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Wall half Riemann solver for transport equations.  <a href="#a34d366eec85473443b31c63f54de292c">More...</a><br /></td></tr>
+<tr class="separator:a34d366eec85473443b31c63f54de292c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a649ee72cf98de7f114c017c8f094dba6"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classModel.html#a649ee72cf98de7f114c017c8f094dba6">solveRiemannTransportInflow</a> (<a class="el" href="classCell.html">Cell</a> &amp;, const int &amp;, double *)</td></tr>
+<tr class="memdesc:a649ee72cf98de7f114c017c8f094dba6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Flow injection half Riemann solver for transport equations.  <a href="#a649ee72cf98de7f114c017c8f094dba6">More...</a><br /></td></tr>
+<tr class="separator:a649ee72cf98de7f114c017c8f094dba6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aeb760ce3bab0acb03e694cacfa7cec37"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classModel.html#aeb760ce3bab0acb03e694cacfa7cec37">solveRiemannTransportTank</a> (<a class="el" href="classCell.html">Cell</a> &amp;, const int &amp;, double *)</td></tr>
+<tr class="memdesc:aeb760ce3bab0acb03e694cacfa7cec37"><td class="mdescLeft">&#160;</td><td class="mdescRight">Tank half Riemann solver for transport equations.  <a href="#aeb760ce3bab0acb03e694cacfa7cec37">More...</a><br /></td></tr>
+<tr class="separator:aeb760ce3bab0acb03e694cacfa7cec37"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acb57c8f3dfdd8bf2670f2cfe33d76df6"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classModel.html#acb57c8f3dfdd8bf2670f2cfe33d76df6">solveRiemannTransportOutflow</a> (<a class="el" href="classCell.html">Cell</a> &amp;, const int &amp;, double *)</td></tr>
+<tr class="memdesc:acb57c8f3dfdd8bf2670f2cfe33d76df6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Outflow half Riemann solver for transport equations.  <a href="#acb57c8f3dfdd8bf2670f2cfe33d76df6">More...</a><br /></td></tr>
+<tr class="separator:acb57c8f3dfdd8bf2670f2cfe33d76df6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aaf983e972c786ea87756c997971114d8"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classModel.html#aaf983e972c786ea87756c997971114d8">reverseProjection</a> (const <a class="el" href="classCoord.html">Coord</a>, const <a class="el" href="classCoord.html">Coord</a>, const <a class="el" href="classCoord.html">Coord</a>) const </td></tr>
+<tr class="memdesc:aaf983e972c786ea87756c997971114d8"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classFlux.html" title="Abstract class for conservative variables and fluxes. ">Flux</a> reverse projection in the absolute cartesian coordinate system.  <a href="#aaf983e972c786ea87756c997971114d8">More...</a><br /></td></tr>
+<tr class="separator:aaf983e972c786ea87756c997971114d8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8ce04d291716ac03de443fc7c8609a80"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classModel.html#a8ce04d291716ac03de443fc7c8609a80">relaxations</a> (<a class="el" href="classCell.html">Cell</a> *cell, const int &amp;numberPhases, const double &amp;dt, <a class="el" href="Tools_8h.html#a2c815f6ae654fe19b3985d14c9c8d74e">Prim</a> type=<a class="el" href="Tools_8h.html#a2c815f6ae654fe19b3985d14c9c8d74ea2270f1269fdfbdfd9044eaa8af19750d">vecPhases</a>) const </td></tr>
+<tr class="separator:a8ce04d291716ac03de443fc7c8609a80"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa89e06b3682a488d2d131a368c405231"><td class="memItemLeft" align="right" valign="top">virtual const double &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classModel.html#aa89e06b3682a488d2d131a368c405231">getSM</a> ()</td></tr>
 <tr class="memdesc:aa89e06b3682a488d2d131a368c405231"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return the local fluid velocity.  <a href="#aa89e06b3682a488d2d131a368c405231">More...</a><br /></td></tr>
 <tr class="separator:aa89e06b3682a488d2d131a368c405231"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab0d2d4f5248d13ad94b1f42f5753e898"><td class="memItemLeft" align="right" valign="top">virtual const <a class="el" href="classCoord.html">Coord</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classModel.html#ab0d2d4f5248d13ad94b1f42f5753e898">getVelocity</a> (const <a class="el" href="classCell.html">Cell</a> *cell) const </td></tr>
-<tr class="memdesc:ab0d2d4f5248d13ad94b1f42f5753e898"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return the fluid velocity of the corresponding cell.  <a href="#ab0d2d4f5248d13ad94b1f42f5753e898">More...</a><br /></td></tr>
-<tr class="separator:ab0d2d4f5248d13ad94b1f42f5753e898"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aced38882902d5b606e2075c64b74f037"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classCoord.html">Coord</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classModel.html#aced38882902d5b606e2075c64b74f037">getVelocity</a> (<a class="el" href="classCell.html">Cell</a> *cell)</td></tr>
-<tr class="separator:aced38882902d5b606e2075c64b74f037"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aaa9a5d86324c2fdeb3e4deec1f36e551"><td class="memItemLeft" align="right" valign="top">virtual const <a class="el" href="classCoord.html">Coord</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classModel.html#aaa9a5d86324c2fdeb3e4deec1f36e551">getVelocity</a> (const <a class="el" href="classCell.html">Cell</a> *) const </td></tr>
+<tr class="memdesc:aaa9a5d86324c2fdeb3e4deec1f36e551"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return the fluid velocity of the corresponding cell.  <a href="#aaa9a5d86324c2fdeb3e4deec1f36e551">More...</a><br /></td></tr>
+<tr class="separator:aaa9a5d86324c2fdeb3e4deec1f36e551"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af05f7856c1088763edb886645d0c79bd"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classCoord.html">Coord</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classModel.html#af05f7856c1088763edb886645d0c79bd">getVelocity</a> (<a class="el" href="classCell.html">Cell</a> *)</td></tr>
+<tr class="separator:af05f7856c1088763edb886645d0c79bd"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2ae87f97b23a04177ba45ccabb48731c"><td class="memItemLeft" align="right" valign="top">std::vector&lt; <a class="el" href="classRelaxation.html">Relaxation</a> * &gt; *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classModel.html#a2ae87f97b23a04177ba45ccabb48731c">getRelaxations</a> ()</td></tr>
 <tr class="separator:a2ae87f97b23a04177ba45ccabb48731c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a70a1b021374eee494433ba014617f39c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classModel.html#a70a1b021374eee494433ba014617f39c">printInfo</a> () const </td></tr>
@@ -210,21 +211,6 @@ Protected Attributes</h2></td></tr>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Abstract class for mathematical flow models. </p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a class="anchor" id="ae3b375de5f6df4faf74a95d64748e048"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">Model::Model </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
 <a class="anchor" id="a8d42192b762b7424d03f8043b0a46205"></a>
 <div class="memitem">
 <div class="memproto">
@@ -284,7 +270,7 @@ Protected Attributes</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a class="anchor" id="a70f273ef2f34fe0346040f5a7ecd6cd7"></a>
+<a class="anchor" id="a1bb1ccddd1b9682226dbc37a04191483"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="mlabels">
@@ -295,13 +281,13 @@ Protected Attributes</h2></td></tr>
           <td class="memname">virtual void Model::allocateCons </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="classFlux.html">Flux</a> **&#160;</td>
-          <td class="paramname"><em>cons</em>, </td>
+          <td class="paramname">, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">const int &amp;&#160;</td>
-          <td class="paramname"><em>numberPhases</em>&#160;</td>
+          <td class="paramname">&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -325,7 +311,7 @@ Protected Attributes</h2></td></tr>
   </dd>
 </dl>
 
-<p>Reimplemented in <a class="el" href="classModEulerHomogeneous.html#a23157426d6579344f0cb5f4bda03ec04">ModEulerHomogeneous</a>, <a class="el" href="classModKapila.html#a118876c7ab26b4fec556fd680d4c4764">ModKapila</a>, <a class="el" href="classModMultiP.html#aec86bf4dbe74d5b03efc333bfee0a0d7">ModMultiP</a>, <a class="el" href="classModThermalEq.html#a1105f794a8b21c07232601472d5892ad">ModThermalEq</a>, and <a class="el" href="classModEuler.html#a39091e8081df88170fc0dafa7f7f6e89">ModEuler</a>.</p>
+<p>Reimplemented in <a class="el" href="classModUEq.html#aff6c8dfdb3756fea267e42b05a40a7c2">ModUEq</a>, <a class="el" href="classModEulerHomogeneous.html#a002a2f9d1766f5528dd20749fb9d25e0">ModEulerHomogeneous</a>, <a class="el" href="classModPUEq.html#acaa6a0da8114f6c03edfe781067c111b">ModPUEq</a>, <a class="el" href="classModPTUEq.html#ac0baee005e1da629e636d15f3fad6d68">ModPTUEq</a>, and <a class="el" href="classModEuler.html#a0a70e880ed9d0d71df925d684e4a3f76">ModEuler</a>.</p>
 
 </div>
 </div>
@@ -364,7 +350,7 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="aa9c2783803b05a4ebf81695a99812fee"></a>
+<a class="anchor" id="a54cf274ecfd0d59396c245b9a4a90255"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="mlabels">
@@ -375,7 +361,7 @@ Protected Attributes</h2></td></tr>
           <td class="memname">virtual void Model::allocateMixture </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="classMixture.html">Mixture</a> **&#160;</td>
-          <td class="paramname"><em>mixture</em></td><td>)</td>
+          <td class="paramname"></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -394,11 +380,11 @@ Protected Attributes</h2></td></tr>
   </dd>
 </dl>
 
-<p>Reimplemented in <a class="el" href="classModEulerHomogeneous.html#aefbe64be9b4abb20cf549e7982760f5f">ModEulerHomogeneous</a>, <a class="el" href="classModKapila.html#aa92751c16376ec98023945b31ed858c9">ModKapila</a>, <a class="el" href="classModMultiP.html#abe6e467e0b5a2e55badde266c7b278b2">ModMultiP</a>, <a class="el" href="classModThermalEq.html#a5575afedf675ab28c8df71b364273d7a">ModThermalEq</a>, and <a class="el" href="classModEuler.html#a8c027df93de733c1c08586d6fa2cc0da">ModEuler</a>.</p>
+<p>Reimplemented in <a class="el" href="classModUEq.html#a93a1d3361511dd4e27a4b815806843ec">ModUEq</a>, <a class="el" href="classModEulerHomogeneous.html#aefbe64be9b4abb20cf549e7982760f5f">ModEulerHomogeneous</a>, <a class="el" href="classModPUEq.html#a75261f0d866966d1ec8cae0d989dd19c">ModPUEq</a>, <a class="el" href="classModPTUEq.html#a8b660f33e65ee452641c8f16a49b7e3e">ModPTUEq</a>, and <a class="el" href="classModEuler.html#a8c027df93de733c1c08586d6fa2cc0da">ModEuler</a>.</p>
 
 </div>
 </div>
-<a class="anchor" id="a3cbbf2edc4af8eef6088dedd7353ed19"></a>
+<a class="anchor" id="aa1e367086bd8df34a371ede69de6a023"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="mlabels">
@@ -409,7 +395,7 @@ Protected Attributes</h2></td></tr>
           <td class="memname">virtual void Model::allocatePhase </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="classPhase.html">Phase</a> **&#160;</td>
-          <td class="paramname"><em>phase</em></td><td>)</td>
+          <td class="paramname"></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -428,11 +414,11 @@ Protected Attributes</h2></td></tr>
   </dd>
 </dl>
 
-<p>Reimplemented in <a class="el" href="classModEulerHomogeneous.html#a6fef41a72d17cac4ec3e00cb73bf8381">ModEulerHomogeneous</a>, <a class="el" href="classModKapila.html#a64c4c1221bd6f3cb5b574303057f05ce">ModKapila</a>, <a class="el" href="classModMultiP.html#aeff244223203a9a2b32101d1dba11284">ModMultiP</a>, <a class="el" href="classModThermalEq.html#aab2aaf8c4214732f5c2c780a301fa1e2">ModThermalEq</a>, and <a class="el" href="classModEuler.html#a5d596a2db5bc1a853a0ae31231a61784">ModEuler</a>.</p>
+<p>Reimplemented in <a class="el" href="classModUEq.html#a9f789409d64b5df5b9b790ad4f494efe">ModUEq</a>, <a class="el" href="classModEulerHomogeneous.html#a6fef41a72d17cac4ec3e00cb73bf8381">ModEulerHomogeneous</a>, <a class="el" href="classModPUEq.html#a035ad651dd9b2c91ccb9160637f7ea70">ModPUEq</a>, <a class="el" href="classModPTUEq.html#ab546cc62afbae1400de90ce3de622915">ModPTUEq</a>, and <a class="el" href="classModEuler.html#a5d596a2db5bc1a853a0ae31231a61784">ModEuler</a>.</p>
 
 </div>
 </div>
-<a class="anchor" id="ab6c71ee6f6078d493e65c852a085f83f"></a>
+<a class="anchor" id="aedcd2d1af18d45920123479dadfac530"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="mlabels">
@@ -443,25 +429,25 @@ Protected Attributes</h2></td></tr>
           <td class="memname">virtual void Model::fulfillState </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="classPhase.html">Phase</a> **&#160;</td>
-          <td class="paramname"><em>phases</em>, </td>
+          <td class="paramname">, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype"><a class="el" href="classMixture.html">Mixture</a> *&#160;</td>
-          <td class="paramname"><em>mixture</em>, </td>
+          <td class="paramname">, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">const int &amp;&#160;</td>
-          <td class="paramname"><em>numberPhases</em>, </td>
+          <td class="paramname">, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="Phase_8h.html#a2c815f6ae654fe19b3985d14c9c8d74e">Prim</a>&#160;</td>
-          <td class="paramname"><em>type</em> = <code><a class="el" href="Phase_8h.html#a2c815f6ae654fe19b3985d14c9c8d74ea2270f1269fdfbdfd9044eaa8af19750d">vecPhases</a></code>&#160;</td>
+          <td class="paramtype"><a class="el" href="Tools_8h.html#a2c815f6ae654fe19b3985d14c9c8d74e">Prim</a>&#160;</td>
+          <td class="paramname"> = <code><a class="el" href="Tools_8h.html#a2c815f6ae654fe19b3985d14c9c8d74ea2270f1269fdfbdfd9044eaa8af19750d">vecPhases</a></code>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -486,7 +472,7 @@ Protected Attributes</h2></td></tr>
   </dd>
 </dl>
 
-<p>Reimplemented in <a class="el" href="classModEulerHomogeneous.html#a3557dc2d338a2693f782730187ce7d4e">ModEulerHomogeneous</a>, <a class="el" href="classModKapila.html#a0bb3528e7701160eafa9f933ed81d7d6">ModKapila</a>, <a class="el" href="classModMultiP.html#a94b918872ba22b8982ab8d7be8b1febb">ModMultiP</a>, <a class="el" href="classModEuler.html#acbff32027987c3a48e8d8762588d8717">ModEuler</a>, and <a class="el" href="classModThermalEq.html#a6396cdbd7470f850cb3229d1a57f7344">ModThermalEq</a>.</p>
+<p>Reimplemented in <a class="el" href="classModUEq.html#a8d0f9e642ac3250c5d5653d6739de592">ModUEq</a>, <a class="el" href="classModEulerHomogeneous.html#a4f9310c535065977a42c1b78addbd4d0">ModEulerHomogeneous</a>, <a class="el" href="classModEuler.html#abb051dc18fe9bd331ef6bd532088abd5">ModEuler</a>, and <a class="el" href="classModPTUEq.html#ab34e59c79a2de20431b286d1810592a7">ModPTUEq</a>.</p>
 
 </div>
 </div>
@@ -537,11 +523,11 @@ Protected Attributes</h2></td></tr>
 <p>Return the local fluid velocity. </p>
 <dl class="section return"><dt>Returns</dt><dd>the velocity solution of the local Riemann problem </dd></dl>
 
-<p>Reimplemented in <a class="el" href="classModKapila.html#a75edeff731869de4f8d8ada63c6e4790">ModKapila</a>, <a class="el" href="classModMultiP.html#aa400b1d1a96c5ac91329662d0e8484a4">ModMultiP</a>, <a class="el" href="classModEuler.html#aa3e055106835fa4b0fcd38208b25b053">ModEuler</a>, <a class="el" href="classModEulerHomogeneous.html#abda25e0b62366e32efef44185caa49ae">ModEulerHomogeneous</a>, and <a class="el" href="classModThermalEq.html#a5c512311d42e25fbbe7e24e5ccd32553">ModThermalEq</a>.</p>
+<p>Reimplemented in <a class="el" href="classModUEq.html#a9d795a45aec01284eb1b2a7ce30a4ef7">ModUEq</a>, <a class="el" href="classModEuler.html#aa3e055106835fa4b0fcd38208b25b053">ModEuler</a>, <a class="el" href="classModEulerHomogeneous.html#abda25e0b62366e32efef44185caa49ae">ModEulerHomogeneous</a>, and <a class="el" href="classModPTUEq.html#a94d1eabfad5724ccf5724b7641c4fe32">ModPTUEq</a>.</p>
 
 </div>
 </div>
-<a class="anchor" id="ab0d2d4f5248d13ad94b1f42f5753e898"></a>
+<a class="anchor" id="aaa9a5d86324c2fdeb3e4deec1f36e551"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="mlabels">
@@ -552,7 +538,7 @@ Protected Attributes</h2></td></tr>
           <td class="memname">virtual const <a class="el" href="classCoord.html">Coord</a>&amp; Model::getVelocity </td>
           <td>(</td>
           <td class="paramtype">const <a class="el" href="classCell.html">Cell</a> *&#160;</td>
-          <td class="paramname"><em>cell</em></td><td>)</td>
+          <td class="paramname"></td><td>)</td>
           <td> const</td>
         </tr>
       </table>
@@ -572,11 +558,11 @@ Protected Attributes</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>velocity </dd></dl>
 
-<p>Reimplemented in <a class="el" href="classModKapila.html#ac5323072d6b93ca61769306fa8701777">ModKapila</a>, <a class="el" href="classModMultiP.html#a1c12e56f550ab78fffabf29f78c95afd">ModMultiP</a>, <a class="el" href="classModEuler.html#a6fb625609b8895c5f24cab339b799eeb">ModEuler</a>, <a class="el" href="classModEulerHomogeneous.html#a07c7bc552b5091f81bb0fa7f4afdee06">ModEulerHomogeneous</a>, and <a class="el" href="classModThermalEq.html#a5d077d2a1f72c0d5f2df76d3ca718979">ModThermalEq</a>.</p>
+<p>Reimplemented in <a class="el" href="classModUEq.html#ac45ed89f7005a738a69733d9c4003bc1">ModUEq</a>, <a class="el" href="classModEuler.html#a6fb625609b8895c5f24cab339b799eeb">ModEuler</a>, <a class="el" href="classModEulerHomogeneous.html#a07c7bc552b5091f81bb0fa7f4afdee06">ModEulerHomogeneous</a>, and <a class="el" href="classModPTUEq.html#abbd29ccb7c53f5f2ecf5f14e0ae29e1d">ModPTUEq</a>.</p>
 
 </div>
 </div>
-<a class="anchor" id="aced38882902d5b606e2075c64b74f037"></a>
+<a class="anchor" id="af05f7856c1088763edb886645d0c79bd"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="mlabels">
@@ -587,7 +573,7 @@ Protected Attributes</h2></td></tr>
           <td class="memname">virtual <a class="el" href="classCoord.html">Coord</a>&amp; Model::getVelocity </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="classCell.html">Cell</a> *&#160;</td>
-          <td class="paramname"><em>cell</em></td><td>)</td>
+          <td class="paramname"></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -598,7 +584,7 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Reimplemented in <a class="el" href="classModKapila.html#a92a50ec219b85f4acff4d78cda58761a">ModKapila</a>, <a class="el" href="classModMultiP.html#acaa53506618fe7a4210baacfcaefb4a9">ModMultiP</a>, <a class="el" href="classModEuler.html#a20373f443ac7e03c5e1602e496ab6ab6">ModEuler</a>, <a class="el" href="classModEulerHomogeneous.html#a9fb313bc0abd7009b871272a244ff651">ModEulerHomogeneous</a>, and <a class="el" href="classModThermalEq.html#a5e50227d602ff9a8629903e1f5444e52">ModThermalEq</a>.</p>
+<p>Reimplemented in <a class="el" href="classModUEq.html#aca804e6b366a0056d54267c2d0a4b4ef">ModUEq</a>, <a class="el" href="classModEuler.html#a20373f443ac7e03c5e1602e496ab6ab6">ModEuler</a>, <a class="el" href="classModEulerHomogeneous.html#a9fb313bc0abd7009b871272a244ff651">ModEulerHomogeneous</a>, and <a class="el" href="classModPTUEq.html#af85a7f1346c2468abdc8db4f3998e04a">ModPTUEq</a>.</p>
 
 </div>
 </div>
@@ -617,7 +603,7 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="a4d67cffcf3ee934825e7333ba6a12ade"></a>
+<a class="anchor" id="a8ce04d291716ac03de443fc7c8609a80"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
@@ -636,8 +622,14 @@ Protected Attributes</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="Phase_8h.html#a2c815f6ae654fe19b3985d14c9c8d74e">Prim</a>&#160;</td>
-          <td class="paramname"><em>type</em> = <code><a class="el" href="Phase_8h.html#a2c815f6ae654fe19b3985d14c9c8d74ea2270f1269fdfbdfd9044eaa8af19750d">vecPhases</a></code>&#160;</td>
+          <td class="paramtype">const double &amp;&#160;</td>
+          <td class="paramname"><em>dt</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="Tools_8h.html#a2c815f6ae654fe19b3985d14c9c8d74e">Prim</a>&#160;</td>
+          <td class="paramname"><em>type</em> = <code><a class="el" href="Tools_8h.html#a2c815f6ae654fe19b3985d14c9c8d74ea2270f1269fdfbdfd9044eaa8af19750d">vecPhases</a></code>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -649,7 +641,7 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="aceb7a7a6fd3c9da73c4ab111018e80a9"></a>
+<a class="anchor" id="aaf983e972c786ea87756c997971114d8"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="mlabels">
@@ -660,19 +652,19 @@ Protected Attributes</h2></td></tr>
           <td class="memname">virtual void Model::reverseProjection </td>
           <td>(</td>
           <td class="paramtype">const <a class="el" href="classCoord.html">Coord</a>&#160;</td>
-          <td class="paramname"><em>normal</em>, </td>
+          <td class="paramname">, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">const <a class="el" href="classCoord.html">Coord</a>&#160;</td>
-          <td class="paramname"><em>tangent</em>, </td>
+          <td class="paramname">, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">const <a class="el" href="classCoord.html">Coord</a>&#160;</td>
-          <td class="paramname"><em>binormal</em>&#160;</td>
+          <td class="paramname">&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -697,11 +689,11 @@ Protected Attributes</h2></td></tr>
   </dd>
 </dl>
 
-<p>Reimplemented in <a class="el" href="classModKapila.html#a6a30f60d2b0f22ce0d3fa46a60fe0d29">ModKapila</a>, <a class="el" href="classModMultiP.html#a051ec0aab36f911876b8b42448945418">ModMultiP</a>, <a class="el" href="classModEuler.html#a58225abd2a0c238b61ab07f2b78db7c3">ModEuler</a>, <a class="el" href="classModEulerHomogeneous.html#a879ccfe4d733de1ed6dede686a2ba32e">ModEulerHomogeneous</a>, and <a class="el" href="classModThermalEq.html#a91826592f663cafde83c372d003c5e68">ModThermalEq</a>.</p>
+<p>Reimplemented in <a class="el" href="classModUEq.html#af74ecc914a359fd71a3aace82a717038">ModUEq</a>, <a class="el" href="classModEuler.html#a58225abd2a0c238b61ab07f2b78db7c3">ModEuler</a>, <a class="el" href="classModEulerHomogeneous.html#a879ccfe4d733de1ed6dede686a2ba32e">ModEulerHomogeneous</a>, and <a class="el" href="classModPTUEq.html#aa8428777bb080ba1281d6cd9472f31af">ModPTUEq</a>.</p>
 
 </div>
 </div>
-<a class="anchor" id="a9bc850ce9124e758ac51b3d21b1f0e41"></a>
+<a class="anchor" id="a0fb3f7b86893de0c1a4afc5d74bc9856"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="mlabels">
@@ -712,49 +704,61 @@ Protected Attributes</h2></td></tr>
           <td class="memname">virtual void Model::solveRiemannInflow </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="classCell.html">Cell</a> &amp;&#160;</td>
-          <td class="paramname"><em>cellLeft</em>, </td>
+          <td class="paramname">, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">const int &amp;&#160;</td>
-          <td class="paramname"><em>numberPhases</em>, </td>
+          <td class="paramname">, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">const double &amp;&#160;</td>
-          <td class="paramname"><em>dxLeft</em>, </td>
+          <td class="paramname">, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">double &amp;&#160;</td>
-          <td class="paramname"><em>dtMax</em>, </td>
+          <td class="paramname">, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">const double&#160;</td>
-          <td class="paramname"><em>m0</em>, </td>
+          <td class="paramname">, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">const double *&#160;</td>
-          <td class="paramname"><em>ak0</em>, </td>
+          <td class="paramname">, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">const double *&#160;</td>
-          <td class="paramname"><em>rhok0</em>, </td>
+          <td class="paramname">, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">const double *&#160;</td>
-          <td class="paramname"><em>pk0</em>&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double &amp;&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double &amp;&#160;</td>
+          <td class="paramname">&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -780,15 +784,17 @@ Protected Attributes</h2></td></tr>
     <tr><td class="paramname">ak0</td><td>volume fraction array of injected fluids </td></tr>
     <tr><td class="paramname">rhok0</td><td>density array of injected fluids </td></tr>
     <tr><td class="paramname">pk0</td><td>pressure array of injected fluids </td></tr>
+    <tr><td class="paramname">massflow</td><td>massflow through cell interface </td></tr>
+    <tr><td class="paramname">powerFlux</td><td>power flux through cell interface </td></tr>
   </table>
   </dd>
 </dl>
 
-<p>Reimplemented in <a class="el" href="classModKapila.html#a8033afba1b5f699acd0222baf271e794">ModKapila</a>, <a class="el" href="classModMultiP.html#ab2c93f8dbed1093948d3680061e547d5">ModMultiP</a>, and <a class="el" href="classModEuler.html#a3cb7414ffde6cf710f97644af9567873">ModEuler</a>.</p>
+<p>Reimplemented in <a class="el" href="classModUEq.html#aa37bbe6e1b5d78a071af401fa384354a">ModUEq</a>, and <a class="el" href="classModEuler.html#acb207308fba0d7286582cc6e82e51355">ModEuler</a>.</p>
 
 </div>
 </div>
-<a class="anchor" id="a58289b087b39dc5fc6f6f69f0fa8a349"></a>
+<a class="anchor" id="af05b24ff8aa4429983eb5826d19007d4"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="mlabels">
@@ -799,37 +805,49 @@ Protected Attributes</h2></td></tr>
           <td class="memname">virtual void Model::solveRiemannIntern </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="classCell.html">Cell</a> &amp;&#160;</td>
-          <td class="paramname"><em>cellLeft</em>, </td>
+          <td class="paramname">, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype"><a class="el" href="classCell.html">Cell</a> &amp;&#160;</td>
-          <td class="paramname"><em>cellRight</em>, </td>
+          <td class="paramname">, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">const int &amp;&#160;</td>
-          <td class="paramname"><em>numberPhases</em>, </td>
+          <td class="paramname">, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">const double &amp;&#160;</td>
-          <td class="paramname"><em>dxLeft</em>, </td>
+          <td class="paramname">, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">const double &amp;&#160;</td>
-          <td class="paramname"><em>dxRight</em>, </td>
+          <td class="paramname">, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">double &amp;&#160;</td>
-          <td class="paramname"><em>dtMax</em>&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double &amp;&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double &amp;&#160;</td>
+          <td class="paramname">&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -853,15 +871,17 @@ Protected Attributes</h2></td></tr>
     <tr><td class="paramname">dxLeft</td><td>left characteristic lenght </td></tr>
     <tr><td class="paramname">dxRight</td><td>right characteristic lenght </td></tr>
     <tr><td class="paramname">dtMax</td><td>maximum explicit time step </td></tr>
+    <tr><td class="paramname">massflow</td><td>massflow through cell interface </td></tr>
+    <tr><td class="paramname">powerFlux</td><td>power flux through cell interface </td></tr>
   </table>
   </dd>
 </dl>
 
-<p>Reimplemented in <a class="el" href="classModEulerHomogeneous.html#a8a68ef9e28ff348c19d03fcd01c62b15">ModEulerHomogeneous</a>, <a class="el" href="classModKapila.html#ae310bbf72c90503e4395457a4241b5aa">ModKapila</a>, <a class="el" href="classModMultiP.html#a8234f57e841291a97c4bcc2b24315b4d">ModMultiP</a>, <a class="el" href="classModEuler.html#a8d9974ac1b8ee781ca821900aceb25a0">ModEuler</a>, and <a class="el" href="classModThermalEq.html#aa049f4feae211b8437e63eea1a2a8692">ModThermalEq</a>.</p>
+<p>Reimplemented in <a class="el" href="classModUEq.html#a744f146ed5216d887d78742f88244163">ModUEq</a>, <a class="el" href="classModEulerHomogeneous.html#a5c4c28c83da6e6e3d383a7d070dc126a">ModEulerHomogeneous</a>, <a class="el" href="classModEuler.html#ae5fb64fa4c24dc242b3fb6e35c9fcf93">ModEuler</a>, and <a class="el" href="classModPTUEq.html#a72723f51e4af5ce44a7bbf0f1915c307">ModPTUEq</a>.</p>
 
 </div>
 </div>
-<a class="anchor" id="aa6122a56ab1ccf5d2ae8f2d4eb8ef632"></a>
+<a class="anchor" id="a6af3b415fba4b2bbe044406e43a70afe"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="mlabels">
@@ -872,37 +892,43 @@ Protected Attributes</h2></td></tr>
           <td class="memname">virtual void Model::solveRiemannOutflow </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="classCell.html">Cell</a> &amp;&#160;</td>
-          <td class="paramname"><em>cellLeft</em>, </td>
+          <td class="paramname">, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">const int &amp;&#160;</td>
-          <td class="paramname"><em>numberPhases</em>, </td>
+          <td class="paramname">, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">const double &amp;&#160;</td>
-          <td class="paramname"><em>dxLeft</em>, </td>
+          <td class="paramname">, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">double &amp;&#160;</td>
-          <td class="paramname"><em>dtMax</em>, </td>
+          <td class="paramname">, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">const double&#160;</td>
-          <td class="paramname"><em>p0</em>, </td>
+          <td class="paramname">, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">double *&#160;</td>
-          <td class="paramname"><em>debitSurf</em>&#160;</td>
+          <td class="paramtype">double &amp;&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double &amp;&#160;</td>
+          <td class="paramname">&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -925,15 +951,104 @@ Protected Attributes</h2></td></tr>
     <tr><td class="paramname">dxLeft</td><td>left characteristic lenght </td></tr>
     <tr><td class="paramname">dtMax</td><td>maximum explicit time step </td></tr>
     <tr><td class="paramname">p0</td><td>external pressure </td></tr>
+    <tr><td class="paramname">massflow</td><td>massflow through cell interface </td></tr>
+    <tr><td class="paramname">powerFlux</td><td>power flux through cell interface </td></tr>
   </table>
   </dd>
 </dl>
 
-<p>Reimplemented in <a class="el" href="classModKapila.html#a8bef71cebd90fa5c1029a9494b96d396">ModKapila</a>, <a class="el" href="classModMultiP.html#acf62fa25f82ba0808bc28caccc802bf8">ModMultiP</a>, <a class="el" href="classModEuler.html#af26e861cbb198e3d8aea8d057bc04278">ModEuler</a>, and <a class="el" href="classModThermalEq.html#a27d039cbc301ed45b27f847d561b171e">ModThermalEq</a>.</p>
+<p>Reimplemented in <a class="el" href="classModUEq.html#a6a037359e42ac8fbfce467b991536215">ModUEq</a>, <a class="el" href="classModEuler.html#ad1024aa1275f9bf7b029584479aa6365">ModEuler</a>, and <a class="el" href="classModPTUEq.html#a9a7fb4f7fdb1d3c4c5b7e987525fc7f7">ModPTUEq</a>.</p>
 
 </div>
 </div>
-<a class="anchor" id="a2b3f6d896eccc8c4e6510bf201ec3f81"></a>
+<a class="anchor" id="a70f1cbc9f67ae32103efed5b1f24dae5"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual void Model::solveRiemannSubInj </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classCell.html">Cell</a> &amp;&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const int &amp;&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const double &amp;&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double &amp;&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const double&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const double&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double &amp;&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double &amp;&#160;</td>
+          <td class="paramname">&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Subsonic injection half Riemann solver (Euler specific) </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">cellLeft</td><td>left cell </td></tr>
+    <tr><td class="paramname">numberPhases</td><td>number of phases </td></tr>
+    <tr><td class="paramname">dxLeft</td><td>left characteristic lenght </td></tr>
+    <tr><td class="paramname">dtMax</td><td>maximum explicit time step </td></tr>
+    <tr><td class="paramname">m0</td><td>specific mass flow rate (kg.s-1.m-2) </td></tr>
+    <tr><td class="paramname">T0</td><td>temperature of injected fluid </td></tr>
+    <tr><td class="paramname">massflow</td><td>massflow through cell interface </td></tr>
+    <tr><td class="paramname">powerFlux</td><td>power flux through cell interface </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>Reimplemented in <a class="el" href="classModEuler.html#a47a13bc81a853a98391d4558b459b59c">ModEuler</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a4373b45db299b8abdfc0aaf5cff54b49"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="mlabels">
@@ -944,49 +1059,61 @@ Protected Attributes</h2></td></tr>
           <td class="memname">virtual void Model::solveRiemannTank </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="classCell.html">Cell</a> &amp;&#160;</td>
-          <td class="paramname"><em>cellLeft</em>, </td>
+          <td class="paramname">, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">const int &amp;&#160;</td>
-          <td class="paramname"><em>numberPhases</em>, </td>
+          <td class="paramname">, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">const double &amp;&#160;</td>
-          <td class="paramname"><em>dxLeft</em>, </td>
+          <td class="paramname">, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">double &amp;&#160;</td>
-          <td class="paramname"><em>dtMax</em>, </td>
+          <td class="paramname">, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">const double *&#160;</td>
-          <td class="paramname"><em>ak0</em>, </td>
+          <td class="paramname">, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">const double *&#160;</td>
-          <td class="paramname"><em>rhok0</em>, </td>
+          <td class="paramname">, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">const double &amp;&#160;</td>
-          <td class="paramname"><em>p0</em>, </td>
+          <td class="paramname">, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">const double &amp;&#160;</td>
-          <td class="paramname"><em>T0</em>&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double &amp;&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double &amp;&#160;</td>
+          <td class="paramname">&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -1011,15 +1138,17 @@ Protected Attributes</h2></td></tr>
     <tr><td class="paramname">ak0</td><td>volume fraction array of fluids in tank </td></tr>
     <tr><td class="paramname">rhok0</td><td>density array of fluids in tank </td></tr>
     <tr><td class="paramname">pk0</td><td>pressure array of fluids in tank </td></tr>
+    <tr><td class="paramname">massflow</td><td>massflow through cell interface </td></tr>
+    <tr><td class="paramname">powerFlux</td><td>power flux through cell interface </td></tr>
   </table>
   </dd>
 </dl>
 
-<p>Reimplemented in <a class="el" href="classModKapila.html#a9e91b128033e7f15959d916160b2adcd">ModKapila</a>, <a class="el" href="classModMultiP.html#a980a3b025b6db70032a7ec41e25d158a">ModMultiP</a>, <a class="el" href="classModEuler.html#ab4150ccd3f9d6b9e48e85b169d9e004f">ModEuler</a>, and <a class="el" href="classModThermalEq.html#a1c9508c90865bffb1e9d8a418f5f9b75">ModThermalEq</a>.</p>
+<p>Reimplemented in <a class="el" href="classModUEq.html#ad21ddf90c03b7e40153ffcadb3e07f33">ModUEq</a>, <a class="el" href="classModEuler.html#a63067b43dd37ca0892194c8aaeb4e5d7">ModEuler</a>, and <a class="el" href="classModPTUEq.html#aa790284f03ded6e77299310e9ac2c865">ModPTUEq</a>.</p>
 
 </div>
 </div>
-<a class="anchor" id="af7305e58b286b5a1adb6d4ce528ebfce"></a>
+<a class="anchor" id="a649ee72cf98de7f114c017c8f094dba6"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="mlabels">
@@ -1030,19 +1159,19 @@ Protected Attributes</h2></td></tr>
           <td class="memname">virtual void Model::solveRiemannTransportInflow </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="classCell.html">Cell</a> &amp;&#160;</td>
-          <td class="paramname"><em>cellLeft</em>, </td>
+          <td class="paramname">, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">const int &amp;&#160;</td>
-          <td class="paramname"><em>numberTransports</em>, </td>
+          <td class="paramname">, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">double *&#160;</td>
-          <td class="paramname"><em>valueTransports</em>&#160;</td>
+          <td class="paramname">&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -1067,11 +1196,11 @@ Protected Attributes</h2></td></tr>
   </dd>
 </dl>
 
-<p>Reimplemented in <a class="el" href="classModKapila.html#a563eee9a12ec9b6687cceed607fe8019">ModKapila</a>, and <a class="el" href="classModMultiP.html#aae02a06c139f68a5ba4533eb7931838b">ModMultiP</a>.</p>
+<p>Reimplemented in <a class="el" href="classModUEq.html#a91f2d9205186af0c3bc46f2e4f9a61f9">ModUEq</a>.</p>
 
 </div>
 </div>
-<a class="anchor" id="ab6cbf3a61069ccfb13d57b21d61d758b"></a>
+<a class="anchor" id="ad77e0825bbac47739486a74522cb2a3e"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="mlabels">
@@ -1082,19 +1211,19 @@ Protected Attributes</h2></td></tr>
           <td class="memname">virtual void Model::solveRiemannTransportIntern </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="classCell.html">Cell</a> &amp;&#160;</td>
-          <td class="paramname"><em>cellLeft</em>, </td>
+          <td class="paramname">, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype"><a class="el" href="classCell.html">Cell</a> &amp;&#160;</td>
-          <td class="paramname"><em>cellRight</em>, </td>
+          <td class="paramname">, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">const int &amp;&#160;</td>
-          <td class="paramname"><em>numberTransports</em>&#160;</td>
+          <td class="paramname">&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -1119,11 +1248,11 @@ Protected Attributes</h2></td></tr>
   </dd>
 </dl>
 
-<p>Reimplemented in <a class="el" href="classModKapila.html#affa11cb57b362962051dc4230c6e0cfc">ModKapila</a>, and <a class="el" href="classModMultiP.html#a1dce7fe80f57353cbb4b72a605696dca">ModMultiP</a>.</p>
+<p>Reimplemented in <a class="el" href="classModUEq.html#a2264458612668369c49eab3090287344">ModUEq</a>.</p>
 
 </div>
 </div>
-<a class="anchor" id="a4ed694da6563f7795edaf20802cd1ae9"></a>
+<a class="anchor" id="acb57c8f3dfdd8bf2670f2cfe33d76df6"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="mlabels">
@@ -1134,19 +1263,19 @@ Protected Attributes</h2></td></tr>
           <td class="memname">virtual void Model::solveRiemannTransportOutflow </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="classCell.html">Cell</a> &amp;&#160;</td>
-          <td class="paramname"><em>cellLeft</em>, </td>
+          <td class="paramname">, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">const int &amp;&#160;</td>
-          <td class="paramname"><em>numberTransports</em>, </td>
+          <td class="paramname">, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">double *&#160;</td>
-          <td class="paramname"><em>valueTransports</em>&#160;</td>
+          <td class="paramname">&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -1171,11 +1300,11 @@ Protected Attributes</h2></td></tr>
   </dd>
 </dl>
 
-<p>Reimplemented in <a class="el" href="classModKapila.html#ad5d249d947be7247db4cce4e02f13f03">ModKapila</a>, and <a class="el" href="classModMultiP.html#aa784d8028bb53f6d2fb8a8dea9b51d8e">ModMultiP</a>.</p>
+<p>Reimplemented in <a class="el" href="classModUEq.html#aca266b9123caf03427963c6d2caae89a">ModUEq</a>.</p>
 
 </div>
 </div>
-<a class="anchor" id="a1fc0b0092975ef9101a56b1a8a6a213c"></a>
+<a class="anchor" id="aeb760ce3bab0acb03e694cacfa7cec37"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="mlabels">
@@ -1186,19 +1315,19 @@ Protected Attributes</h2></td></tr>
           <td class="memname">virtual void Model::solveRiemannTransportTank </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="classCell.html">Cell</a> &amp;&#160;</td>
-          <td class="paramname"><em>cellLeft</em>, </td>
+          <td class="paramname">, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">const int &amp;&#160;</td>
-          <td class="paramname"><em>numberTransports</em>, </td>
+          <td class="paramname">, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">double *&#160;</td>
-          <td class="paramname"><em>valueTransports</em>&#160;</td>
+          <td class="paramname">&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -1223,11 +1352,11 @@ Protected Attributes</h2></td></tr>
   </dd>
 </dl>
 
-<p>Reimplemented in <a class="el" href="classModKapila.html#a2244e1a7fdffaf833914e34f1477761d">ModKapila</a>, and <a class="el" href="classModMultiP.html#afe2555f482539ac5a16a9bc52815483f">ModMultiP</a>.</p>
+<p>Reimplemented in <a class="el" href="classModUEq.html#ad72866920b8576351009264c76ac8e75">ModUEq</a>.</p>
 
 </div>
 </div>
-<a class="anchor" id="a3ba54a5073e1ab22144b35529eedee31"></a>
+<a class="anchor" id="a34d366eec85473443b31c63f54de292c"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="mlabels">
@@ -1238,7 +1367,7 @@ Protected Attributes</h2></td></tr>
           <td class="memname">virtual void Model::solveRiemannTransportWall </td>
           <td>(</td>
           <td class="paramtype">const int &amp;&#160;</td>
-          <td class="paramname"><em>numberTransports</em></td><td>)</td>
+          <td class="paramname"></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -1257,11 +1386,11 @@ Protected Attributes</h2></td></tr>
   </dd>
 </dl>
 
-<p>Reimplemented in <a class="el" href="classModKapila.html#a8468b5b659359ae3c0375af4bb334e56">ModKapila</a>, and <a class="el" href="classModMultiP.html#afcdad5d5924bda351204e32b96efea43">ModMultiP</a>.</p>
+<p>Reimplemented in <a class="el" href="classModUEq.html#af3027a7ec97a50fccc3bd1fc991b3c14">ModUEq</a>.</p>
 
 </div>
 </div>
-<a class="anchor" id="a94469c3406cba01a8c86f0360d1ff178"></a>
+<a class="anchor" id="aa1395e8a9ca7cbc2805ac7cc9187ec34"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="mlabels">
@@ -1272,25 +1401,25 @@ Protected Attributes</h2></td></tr>
           <td class="memname">virtual void Model::solveRiemannWall </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="classCell.html">Cell</a> &amp;&#160;</td>
-          <td class="paramname"><em>cellLeft</em>, </td>
+          <td class="paramname">, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">const int &amp;&#160;</td>
-          <td class="paramname"><em>numberPhases</em>, </td>
+          <td class="paramname">, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">const double &amp;&#160;</td>
-          <td class="paramname"><em>dxLeft</em>, </td>
+          <td class="paramname">, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">double &amp;&#160;</td>
-          <td class="paramname"><em>dtMax</em>&#160;</td>
+          <td class="paramname">&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -1316,7 +1445,7 @@ Protected Attributes</h2></td></tr>
   </dd>
 </dl>
 
-<p>Reimplemented in <a class="el" href="classModKapila.html#ad4bffa5fc4cb79be8c106bd90c98de8e">ModKapila</a>, <a class="el" href="classModMultiP.html#a0a7ecaf2badbcac869cacbe64eb22dcb">ModMultiP</a>, <a class="el" href="classModEuler.html#a3769e2f027a4ac44612a3a6d6cc51a89">ModEuler</a>, and <a class="el" href="classModThermalEq.html#a5512426df2c39e2f12a74574f7c011be">ModThermalEq</a>.</p>
+<p>Reimplemented in <a class="el" href="classModUEq.html#a03456d6518438901940dafdc88eff6f3">ModUEq</a>, <a class="el" href="classModEuler.html#ac21b1337f6c278edf43591d38603d77a">ModEuler</a>, and <a class="el" href="classModPTUEq.html#a00f204419ab846fdd32847731a539713">ModPTUEq</a>.</p>
 
 </div>
 </div>
@@ -1341,7 +1470,7 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Reimplemented in <a class="el" href="classModKapila.html#ac543b2a446a169d0732f3259ddd77a2b">ModKapila</a>, <a class="el" href="classModMultiP.html#a19137657054f0f7bd30b05ba961731f0">ModMultiP</a>, <a class="el" href="classModEuler.html#a20957c510ed33ed6a874033ba6c0e580">ModEuler</a>, <a class="el" href="classModEulerHomogeneous.html#a1cdb1ffcc92d8df03871935e8358d02d">ModEulerHomogeneous</a>, and <a class="el" href="classModThermalEq.html#a937c15d3f8f11e2e4b87a9b9dd42ce04">ModThermalEq</a>.</p>
+<p>Reimplemented in <a class="el" href="classModUEq.html#aa1b1b10b8b852ca9c1594822ec91ef4f">ModUEq</a>, <a class="el" href="classModEuler.html#a20957c510ed33ed6a874033ba6c0e580">ModEuler</a>, <a class="el" href="classModEulerHomogeneous.html#a1cdb1ffcc92d8df03871935e8358d02d">ModEulerHomogeneous</a>, and <a class="el" href="classModPTUEq.html#a303af715ef70f78115f2fc4812a0dfc5">ModPTUEq</a>.</p>
 
 </div>
 </div>
@@ -1400,7 +1529,7 @@ Protected Attributes</h2></td></tr>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="classModel.html">Model</a></li>
-    <li class="footer">Generated on Mon May 11 2020 16:03:19 for ECOGEN by
+    <li class="footer">Generated on Wed Mar 10 2021 16:19:52 for ECOGEN by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.11 </li>
   </ul>

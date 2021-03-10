@@ -20,10 +20,10 @@ var searchData=
   ['fluxeuler_2eh',['FluxEuler.h',['../FluxEuler_8h.html',1,'']]],
   ['fluxeulerhomogeneous_2ecpp',['FluxEulerHomogeneous.cpp',['../FluxEulerHomogeneous_8cpp.html',1,'']]],
   ['fluxeulerhomogeneous_2eh',['FluxEulerHomogeneous.h',['../FluxEulerHomogeneous_8h.html',1,'']]],
-  ['fluxkapila_2ecpp',['FluxKapila.cpp',['../FluxKapila_8cpp.html',1,'']]],
-  ['fluxkapila_2eh',['FluxKapila.h',['../FluxKapila_8h.html',1,'']]],
-  ['fluxmultip_2ecpp',['FluxMultiP.cpp',['../FluxMultiP_8cpp.html',1,'']]],
-  ['fluxmultip_2eh',['FluxMultiP.h',['../FluxMultiP_8h.html',1,'']]],
-  ['fluxthermaleq_2ecpp',['FluxThermalEq.cpp',['../FluxThermalEq_8cpp.html',1,'']]],
-  ['fluxthermaleq_2eh',['FluxThermalEq.h',['../FluxThermalEq_8h.html',1,'']]]
+  ['fluxptueq_2ecpp',['FluxPTUEq.cpp',['../FluxPTUEq_8cpp.html',1,'']]],
+  ['fluxptueq_2eh',['FluxPTUEq.h',['../FluxPTUEq_8h.html',1,'']]],
+  ['fluxpueq_2ecpp',['FluxPUEq.cpp',['../FluxPUEq_8cpp.html',1,'']]],
+  ['fluxpueq_2eh',['FluxPUEq.h',['../FluxPUEq_8h.html',1,'']]],
+  ['fluxueq_2ecpp',['FluxUEq.cpp',['../FluxUEq_8cpp.html',1,'']]],
+  ['fluxueq_2eh',['FluxUEq.h',['../FluxUEq_8h.html',1,'']]]
 ];

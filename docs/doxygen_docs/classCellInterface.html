@@ -125,18 +125,18 @@ $(document).ready(function(){initNavTree('classCellInterface.html','');});
 Public Member Functions</h2></td></tr>
 <tr class="memitem:a9b6475eb2be5f4d13eec0f5057e6318a"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCellInterface.html#a9b6475eb2be5f4d13eec0f5057e6318a">CellInterface</a> ()</td></tr>
 <tr class="separator:a9b6475eb2be5f4d13eec0f5057e6318a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7948060c9ccd4da93838291da294cf6c"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCellInterface.html#a7948060c9ccd4da93838291da294cf6c">CellInterface</a> (int lvl)</td></tr>
-<tr class="separator:a7948060c9ccd4da93838291da294cf6c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a04eb9b4d2b4aa72db3621aecc4f1b2be"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCellInterface.html#a04eb9b4d2b4aa72db3621aecc4f1b2be">CellInterface</a> (const int &amp;lvl)</td></tr>
+<tr class="separator:a04eb9b4d2b4aa72db3621aecc4f1b2be"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa4bae1f82b9de56d98c4b945267a02bd"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCellInterface.html#aa4bae1f82b9de56d98c4b945267a02bd">~CellInterface</a> ()</td></tr>
 <tr class="separator:aa4bae1f82b9de56d98c4b945267a02bd"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1aa3b9cb3cbdcbcc0812b83018fa2c73"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCellInterface.html#a1aa3b9cb3cbdcbcc0812b83018fa2c73">setFace</a> (<a class="el" href="classFace.html">Face</a> *face)</td></tr>
 <tr class="separator:a1aa3b9cb3cbdcbcc0812b83018fa2c73"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1478d8f6bcec2330852c5da0afe9921d"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCellInterface.html#a1478d8f6bcec2330852c5da0afe9921d">computeFlux</a> (const int &amp;numberPhases, const int &amp;numberTransports, double &amp;dtMax, <a class="el" href="classLimiter.html">Limiter</a> &amp;globalLimiter, <a class="el" href="classLimiter.html">Limiter</a> &amp;interfaceLimiter, <a class="el" href="classLimiter.html">Limiter</a> &amp;globalVolumeFractionLimiter, <a class="el" href="classLimiter.html">Limiter</a> &amp;interfaceVolumeFractionLimiter, <a class="el" href="Phase_8h.html#a2c815f6ae654fe19b3985d14c9c8d74e">Prim</a> type=<a class="el" href="Phase_8h.html#a2c815f6ae654fe19b3985d14c9c8d74ea2270f1269fdfbdfd9044eaa8af19750d">vecPhases</a>)</td></tr>
+<tr class="memitem:a1478d8f6bcec2330852c5da0afe9921d"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCellInterface.html#a1478d8f6bcec2330852c5da0afe9921d">computeFlux</a> (const int &amp;numberPhases, const int &amp;numberTransports, double &amp;dtMax, <a class="el" href="classLimiter.html">Limiter</a> &amp;globalLimiter, <a class="el" href="classLimiter.html">Limiter</a> &amp;interfaceLimiter, <a class="el" href="classLimiter.html">Limiter</a> &amp;globalVolumeFractionLimiter, <a class="el" href="classLimiter.html">Limiter</a> &amp;interfaceVolumeFractionLimiter, <a class="el" href="Tools_8h.html#a2c815f6ae654fe19b3985d14c9c8d74e">Prim</a> type=<a class="el" href="Tools_8h.html#a2c815f6ae654fe19b3985d14c9c8d74ea2270f1269fdfbdfd9044eaa8af19750d">vecPhases</a>)</td></tr>
 <tr class="separator:a1478d8f6bcec2330852c5da0afe9921d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac7d899b8a3da4aca71de0a6e795a2caa"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCellInterface.html#ac7d899b8a3da4aca71de0a6e795a2caa">computeFluxAddPhys</a> (const int &amp;numberPhases, <a class="el" href="classAddPhys.html">AddPhys</a> &amp;addPhys)</td></tr>
 <tr class="separator:ac7d899b8a3da4aca71de0a6e795a2caa"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af8c00a7292fb0f19d1a21bfe31b1fa44"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCellInterface.html#af8c00a7292fb0f19d1a21bfe31b1fa44">solveRiemann</a> (const int &amp;numberPhases, const int &amp;numberTransports, double &amp;ondeMax, <a class="el" href="classLimiter.html">Limiter</a> &amp;globalLimiter, <a class="el" href="classLimiter.html">Limiter</a> &amp;interfaceLimiter, <a class="el" href="classLimiter.html">Limiter</a> &amp;globalVolumeFractionLimiter, <a class="el" href="classLimiter.html">Limiter</a> &amp;interfaceVolumeFractionLimiter, <a class="el" href="Phase_8h.html#a2c815f6ae654fe19b3985d14c9c8d74e">Prim</a> type=<a class="el" href="Phase_8h.html#a2c815f6ae654fe19b3985d14c9c8d74ea2270f1269fdfbdfd9044eaa8af19750d">vecPhases</a>)</td></tr>
-<tr class="separator:af8c00a7292fb0f19d1a21bfe31b1fa44"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a55b0ee6d32bf35b02d31e1d74246587d"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCellInterface.html#a55b0ee6d32bf35b02d31e1d74246587d">solveRiemann</a> (const int &amp;numberPhases, const int &amp;numberTransports, double &amp;ondeMax, <a class="el" href="classLimiter.html">Limiter</a> &amp;, <a class="el" href="classLimiter.html">Limiter</a> &amp;, <a class="el" href="classLimiter.html">Limiter</a> &amp;, <a class="el" href="classLimiter.html">Limiter</a> &amp;, <a class="el" href="Tools_8h.html#a2c815f6ae654fe19b3985d14c9c8d74e">Prim</a>=<a class="el" href="Tools_8h.html#a2c815f6ae654fe19b3985d14c9c8d74ea2270f1269fdfbdfd9044eaa8af19750d">vecPhases</a>)</td></tr>
+<tr class="separator:a55b0ee6d32bf35b02d31e1d74246587d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7bfb97c567f7ed108103750824afe505"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCellInterface.html#a7bfb97c567f7ed108103750824afe505">initialize</a> (<a class="el" href="classCell.html">Cell</a> *<a class="el" href="CellInterface_8h.html#a29e9434a5b4c13e843d0ecd75f15c1f0">cellLeft</a>, <a class="el" href="classCell.html">Cell</a> *<a class="el" href="CellInterface_8h.html#ab1df753c688d94d43518ee838092f4b2">cellRight</a>)</td></tr>
 <tr class="separator:a7bfb97c567f7ed108103750824afe505"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8218935356f4d3daa9e7f121be852b4b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCellInterface.html#a8218935356f4d3daa9e7f121be852b4b">initializeGauche</a> (<a class="el" href="classCell.html">Cell</a> *<a class="el" href="CellInterface_8h.html#a29e9434a5b4c13e843d0ecd75f15c1f0">cellLeft</a>)</td></tr>
@@ -155,16 +155,19 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a0a78f15d134169fc80d01e7132c08b17"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a552ad34c2e4c58cb577819b75f855d1f"><td class="memItemLeft" align="right" valign="top">virtual int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCellInterface.html#a552ad34c2e4c58cb577819b75f855d1f">whoAmI</a> () const </td></tr>
 <tr class="separator:a552ad34c2e4c58cb577819b75f855d1f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af2dcbbd4cd256a8c9b0ea96f761403ad"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCellInterface.html#af2dcbbd4cd256a8c9b0ea96f761403ad">allocateSlopes</a> (const int &amp;numberPhases, const int &amp;numberTransports, int &amp;allocateSlopeLocal)</td></tr>
-<tr class="separator:af2dcbbd4cd256a8c9b0ea96f761403ad"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1b68c6c9d3007044447985f4e561c868"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCellInterface.html#a1b68c6c9d3007044447985f4e561c868">computeSlopes</a> (const int &amp;numberPhases, const int &amp;numberTransports, <a class="el" href="Phase_8h.html#a2c815f6ae654fe19b3985d14c9c8d74e">Prim</a> type=<a class="el" href="Phase_8h.html#a2c815f6ae654fe19b3985d14c9c8d74ea2270f1269fdfbdfd9044eaa8af19750d">vecPhases</a>)</td></tr>
-<tr class="separator:a1b68c6c9d3007044447985f4e561c868"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a79b7678aa0554ced210c3626269f1537"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classPhase.html">Phase</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCellInterface.html#a79b7678aa0554ced210c3626269f1537">getSlopesPhase</a> (const int &amp;phaseNumber) const </td></tr>
-<tr class="separator:a79b7678aa0554ced210c3626269f1537"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a58fed060783167fcd3c12093c639224b"><td class="memItemLeft" align="right" valign="top">virtual int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCellInterface.html#a58fed060783167fcd3c12093c639224b">whoAmIHeat</a> () const </td></tr>
+<tr class="separator:a58fed060783167fcd3c12093c639224b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a33ef20a8513f7490398a80658f5e180e"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCellInterface.html#a33ef20a8513f7490398a80658f5e180e">allocateSlopes</a> (const int &amp;, const int &amp;, int &amp;)</td></tr>
+<tr class="memdesc:a33ef20a8513f7490398a80658f5e180e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns heat boundary type for wall (see <a class="el" href="BoundCondWall_8h.html">BoundCondWall.h</a>)  <a href="#a33ef20a8513f7490398a80658f5e180e">More...</a><br /></td></tr>
+<tr class="separator:a33ef20a8513f7490398a80658f5e180e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9632ded8c1e106d16fab95b3d6b95b5d"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCellInterface.html#a9632ded8c1e106d16fab95b3d6b95b5d">computeSlopes</a> (const int &amp;, const int &amp;, <a class="el" href="Tools_8h.html#a2c815f6ae654fe19b3985d14c9c8d74e">Prim</a>=<a class="el" href="Tools_8h.html#a2c815f6ae654fe19b3985d14c9c8d74ea2270f1269fdfbdfd9044eaa8af19750d">vecPhases</a>)</td></tr>
+<tr class="separator:a9632ded8c1e106d16fab95b3d6b95b5d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae2605e468e0a7dc35cab4790b977e142"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classPhase.html">Phase</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCellInterface.html#ae2605e468e0a7dc35cab4790b977e142">getSlopesPhase</a> (const int &amp;) const </td></tr>
+<tr class="separator:ae2605e468e0a7dc35cab4790b977e142"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:adecb7716120dd82eb6f343672565bc5e"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classMixture.html">Mixture</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCellInterface.html#adecb7716120dd82eb6f343672565bc5e">getSlopesMixture</a> () const </td></tr>
 <tr class="separator:adecb7716120dd82eb6f343672565bc5e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a64a6cb42c6aa3d88d6b04b6e24ae59f7"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classTransport.html">Transport</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCellInterface.html#a64a6cb42c6aa3d88d6b04b6e24ae59f7">getSlopesTransport</a> (const int &amp;numberTransport) const </td></tr>
-<tr class="separator:a64a6cb42c6aa3d88d6b04b6e24ae59f7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a97d9bc66e7bd37c64c4620ae09ad8d1a"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classTransport.html">Transport</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCellInterface.html#a97d9bc66e7bd37c64c4620ae09ad8d1a">getSlopesTransport</a> (const int &amp;) const </td></tr>
+<tr class="separator:a97d9bc66e7bd37c64c4620ae09ad8d1a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6427c77e8246803b4e940cda6c596555"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classFace.html">Face</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCellInterface.html#a6427c77e8246803b4e940cda6c596555">getFace</a> ()</td></tr>
 <tr class="separator:a6427c77e8246803b4e940cda6c596555"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3ec2ec571ae1d4473c17f3579878bf77"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classModel.html">Model</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCellInterface.html#a3ec2ec571ae1d4473c17f3579878bf77">getMod</a> () const </td></tr>
@@ -175,7 +178,14 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a2c8bfa724d7ce745a64ab9cb25ff0c7f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1f58baf5d9dd093b940a1b2ccfd29ccc"><td class="memItemLeft" align="right" valign="top">virtual const int &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCellInterface.html#a1f58baf5d9dd093b940a1b2ccfd29ccc">getNumPhys</a> () const </td></tr>
 <tr class="separator:a1f58baf5d9dd093b940a1b2ccfd29ccc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a26847cb6fe772e5d1bbb1c491b75bd4c"><td class="memItemLeft" align="right" valign="top">virtual double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCellInterface.html#a26847cb6fe772e5d1bbb1c491b75bd4c">getMassflow</a> () const </td></tr>
+<tr class="separator:a26847cb6fe772e5d1bbb1c491b75bd4c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a96ea5a1dcf5ff386082c73f9afabf8ac"><td class="memItemLeft" align="right" valign="top">virtual double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCellInterface.html#a96ea5a1dcf5ff386082c73f9afabf8ac">getPowerFlux</a> () const </td></tr>
+<tr class="separator:a96ea5a1dcf5ff386082c73f9afabf8ac"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac956636436d0c142440e0717a00016c7"><td class="memItemLeft" align="right" valign="top">virtual double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCellInterface.html#ac956636436d0c142440e0717a00016c7">getBoundaryHeatQuantity</a> () const </td></tr>
+<tr class="separator:ac956636436d0c142440e0717a00016c7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a36375ef0bba07fd9689823fb51ca6b43"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCellInterface.html#a36375ef0bba07fd9689823fb51ca6b43">computeXi</a> (const double &amp;criteriaVar, const bool &amp;varRho, const bool &amp;varP, const bool &amp;varU, const bool &amp;varAlpha)</td></tr>
+<tr class="memdesc:a36375ef0bba07fd9689823fb51ca6b43"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns imposed heat quantity on the wall, could be temperature or flux density (see BounCondWall.h)  <a href="#a36375ef0bba07fd9689823fb51ca6b43">More...</a><br /></td></tr>
 <tr class="separator:a36375ef0bba07fd9689823fb51ca6b43"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8e7d7b922168725404d09f15ba65733a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCellInterface.html#a8e7d7b922168725404d09f15ba65733a">computeCritereAMR</a> (const double &amp;criteriaVar, <a class="el" href="Cell_8h.html#acca207de98b59d1c41e3975008706d61">Variable</a> nameVariable, int num=0)</td></tr>
 <tr class="separator:a8e7d7b922168725404d09f15ba65733a"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -240,14 +250,14 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="a7948060c9ccd4da93838291da294cf6c"></a>
+<a class="anchor" id="a04eb9b4d2b4aa72db3621aecc4f1b2be"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
           <td class="memname">CellInterface::CellInterface </td>
           <td>(</td>
-          <td class="paramtype">int&#160;</td>
+          <td class="paramtype">const int &amp;&#160;</td>
           <td class="paramname"><em>lvl</em></td><td>)</td>
           <td></td>
         </tr>
@@ -319,9 +329,11 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
+<p>Reimplemented in <a class="el" href="classBoundCond.html#ab23b85bce0bc837b98a7d52052f62775">BoundCond</a>.</p>
+
 </div>
 </div>
-<a class="anchor" id="af2dcbbd4cd256a8c9b0ea96f761403ad"></a>
+<a class="anchor" id="a33ef20a8513f7490398a80658f5e180e"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="mlabels">
@@ -332,19 +344,19 @@ Protected Attributes</h2></td></tr>
           <td class="memname">virtual void CellInterface::allocateSlopes </td>
           <td>(</td>
           <td class="paramtype">const int &amp;&#160;</td>
-          <td class="paramname"><em>numberPhases</em>, </td>
+          <td class="paramname">, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">const int &amp;&#160;</td>
-          <td class="paramname"><em>numberTransports</em>, </td>
+          <td class="paramname">, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">int &amp;&#160;</td>
-          <td class="paramname"><em>allocateSlopeLocal</em>&#160;</td>
+          <td class="paramname">&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -359,7 +371,9 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Reimplemented in <a class="el" href="classCellInterfaceO2.html#abe44552378e85607023ce933c09a5c34">CellInterfaceO2</a>, and <a class="el" href="classBoundCondWallO2.html#a4e8e8f06a5cc5729b2bfbbdda2997c96">BoundCondWallO2</a>.</p>
+<p>Returns heat boundary type for wall (see <a class="el" href="BoundCondWall_8h.html">BoundCondWall.h</a>) </p>
+
+<p>Reimplemented in <a class="el" href="classCellInterfaceO2.html#abe44552378e85607023ce933c09a5c34">CellInterfaceO2</a>, and <a class="el" href="classBoundCondWallO2.html#a3db883f87967a1aaa5f6cf080c039399">BoundCondWallO2</a>.</p>
 
 </div>
 </div>
@@ -464,8 +478,8 @@ Protected Attributes</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="Phase_8h.html#a2c815f6ae654fe19b3985d14c9c8d74e">Prim</a>&#160;</td>
-          <td class="paramname"><em>type</em> = <code><a class="el" href="Phase_8h.html#a2c815f6ae654fe19b3985d14c9c8d74ea2270f1269fdfbdfd9044eaa8af19750d">vecPhases</a></code>&#160;</td>
+          <td class="paramtype"><a class="el" href="Tools_8h.html#a2c815f6ae654fe19b3985d14c9c8d74e">Prim</a>&#160;</td>
+          <td class="paramname"><em>type</em> = <code><a class="el" href="Tools_8h.html#a2c815f6ae654fe19b3985d14c9c8d74ea2270f1269fdfbdfd9044eaa8af19750d">vecPhases</a></code>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -546,7 +560,7 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="a1b68c6c9d3007044447985f4e561c868"></a>
+<a class="anchor" id="a9632ded8c1e106d16fab95b3d6b95b5d"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="mlabels">
@@ -557,19 +571,19 @@ Protected Attributes</h2></td></tr>
           <td class="memname">virtual void CellInterface::computeSlopes </td>
           <td>(</td>
           <td class="paramtype">const int &amp;&#160;</td>
-          <td class="paramname"><em>numberPhases</em>, </td>
+          <td class="paramname">, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">const int &amp;&#160;</td>
-          <td class="paramname"><em>numberTransports</em>, </td>
+          <td class="paramname">, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="Phase_8h.html#a2c815f6ae654fe19b3985d14c9c8d74e">Prim</a>&#160;</td>
-          <td class="paramname"><em>type</em> = <code><a class="el" href="Phase_8h.html#a2c815f6ae654fe19b3985d14c9c8d74ea2270f1269fdfbdfd9044eaa8af19750d">vecPhases</a></code>&#160;</td>
+          <td class="paramtype"><a class="el" href="Tools_8h.html#a2c815f6ae654fe19b3985d14c9c8d74e">Prim</a>&#160;</td>
+          <td class="paramname"> = <code><a class="el" href="Tools_8h.html#a2c815f6ae654fe19b3985d14c9c8d74ea2270f1269fdfbdfd9044eaa8af19750d">vecPhases</a></code>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -585,7 +599,7 @@ Protected Attributes</h2></td></tr>
 </div><div class="memdoc">
 <p>Ne fait rien pour des cell interfaces ordre 1 </p>
 
-<p>Reimplemented in <a class="el" href="classCellInterfaceO2.html#a5cd780129f75e439ad788b0901fbe70a">CellInterfaceO2</a>, and <a class="el" href="classBoundCondWallO2.html#ab1738bdb9716ce90f0645e8fc7a58754">BoundCondWallO2</a>.</p>
+<p>Reimplemented in <a class="el" href="classCellInterfaceO2.html#a5cd780129f75e439ad788b0901fbe70a">CellInterfaceO2</a>, and <a class="el" href="classBoundCondWallO2.html#a1c6b2bfc52cb467d79bda78ce9d68e08">BoundCondWallO2</a>.</p>
 
 </div>
 </div>
@@ -638,9 +652,11 @@ Protected Attributes</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+
+<p>Returns imposed heat quantity on the wall, could be temperature or flux density (see BounCondWall.h) </p>
 <p>Calcul de la variable Xi pour criteria de (de)raffinement a priori </p>
 
-<p>Reimplemented in <a class="el" href="classBoundCond.html#a826e6331f0a2b29dc5810b4ce52d5f95">BoundCond</a>.</p>
+<p>Reimplemented in <a class="el" href="classBoundCond.html#a2f8af96c54b9c002d00b2fa3bb37a1cf">BoundCond</a>.</p>
 
 </div>
 </div>
@@ -683,7 +699,7 @@ Protected Attributes</h2></td></tr>
 </div><div class="memdoc">
 <p>Creer un child cell interface (non initialize) </p>
 
-<p>Reimplemented in <a class="el" href="classCellInterfaceO2.html#a29220cd6effc8761f6a0164b2950a8da">CellInterfaceO2</a>, <a class="el" href="classBoundCondWallO2.html#a25c3fac5e632030f3e22ebe6f9af43c7">BoundCondWallO2</a>, <a class="el" href="classBoundCondOutflow.html#a3147c0169b89656a34357973fe603575">BoundCondOutflow</a>, <a class="el" href="classBoundCondInj.html#acf782b383346af641759179cb9954230">BoundCondInj</a>, <a class="el" href="classBoundCondTank.html#a7b66f878a9aeca7c4ad18f799f8108d7">BoundCondTank</a>, <a class="el" href="classBoundCondWall.html#a18743bea215d01ac4b5b0c9c2bada1e6">BoundCondWall</a>, <a class="el" href="classBoundCondNonReflecting.html#a3ec1724095be5a5062135753166ca36a">BoundCondNonReflecting</a>, and <a class="el" href="classBoundCondSymmetryO2.html#ab28edee41338bbafedd9cb4f0ce46c9b">BoundCondSymmetryO2</a>.</p>
+<p>Reimplemented in <a class="el" href="classCellInterfaceO2.html#a29220cd6effc8761f6a0164b2950a8da">CellInterfaceO2</a>, <a class="el" href="classBoundCondWallO2.html#a25c3fac5e632030f3e22ebe6f9af43c7">BoundCondWallO2</a>, <a class="el" href="classBoundCondWall.html#a18743bea215d01ac4b5b0c9c2bada1e6">BoundCondWall</a>, <a class="el" href="classBoundCondInj.html#acf782b383346af641759179cb9954230">BoundCondInj</a>, <a class="el" href="classBoundCondSubInj.html#a9f8582901215038433c64ab1c58ac4eb">BoundCondSubInj</a>, <a class="el" href="classBoundCondNonReflecting.html#a3ec1724095be5a5062135753166ca36a">BoundCondNonReflecting</a>, <a class="el" href="classBoundCondOutflow.html#a3147c0169b89656a34357973fe603575">BoundCondOutflow</a>, <a class="el" href="classBoundCondTank.html#a7b66f878a9aeca7c4ad18f799f8108d7">BoundCondTank</a>, <a class="el" href="classBoundCondSymmetryO2.html#ab28edee41338bbafedd9cb4f0ce46c9b">BoundCondSymmetryO2</a>, and <a class="el" href="classBoundCondSymmetry.html#aad6ec1b08fc595b1170dcdfcf4eae72c">BoundCondSymmetry</a>.</p>
 
 </div>
 </div>
@@ -816,6 +832,31 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
+<a class="anchor" id="ac956636436d0c142440e0717a00016c7"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual double CellInterface::getBoundaryHeatQuantity </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Reimplemented in <a class="el" href="classBoundCond.html#adfc9e7c74775c6f5749b07986307caa0">BoundCond</a>, and <a class="el" href="classBoundCondWall.html#adbbb62e46dd727976e7e52331e400922">BoundCondWall</a>.</p>
+
+</div>
+</div>
 <a class="anchor" id="a2c8bfa724d7ce745a64ab9cb25ff0c7f"></a>
 <div class="memitem">
 <div class="memproto">
@@ -918,6 +959,31 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
+<a class="anchor" id="a26847cb6fe772e5d1bbb1c491b75bd4c"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual double CellInterface::getMassflow </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Reimplemented in <a class="el" href="classBoundCond.html#ae4715a2c48dbfd382be4659da4f6f09b">BoundCond</a>.</p>
+
+</div>
+</div>
 <a class="anchor" id="a3ec2ec571ae1d4473c17f3579878bf77"></a>
 <div class="memitem">
 <div class="memproto">
@@ -974,6 +1040,31 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
+<a class="anchor" id="a96ea5a1dcf5ff386082c73f9afabf8ac"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual double CellInterface::getPowerFlux </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Reimplemented in <a class="el" href="classBoundCond.html#a5a0eb5d1d28dd830ca13bd8b47564fa4">BoundCond</a>.</p>
+
+</div>
+</div>
 <a class="anchor" id="adecb7716120dd82eb6f343672565bc5e"></a>
 <div class="memitem">
 <div class="memproto">
@@ -1000,7 +1091,7 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="a79b7678aa0554ced210c3626269f1537"></a>
+<a class="anchor" id="ae2605e468e0a7dc35cab4790b977e142"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="mlabels">
@@ -1011,7 +1102,7 @@ Protected Attributes</h2></td></tr>
           <td class="memname">virtual <a class="el" href="classPhase.html">Phase</a>* CellInterface::getSlopesPhase </td>
           <td>(</td>
           <td class="paramtype">const int &amp;&#160;</td>
-          <td class="paramname"><em>phaseNumber</em></td><td>)</td>
+          <td class="paramname"></td><td>)</td>
           <td> const</td>
         </tr>
       </table>
@@ -1027,7 +1118,7 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="a64a6cb42c6aa3d88d6b04b6e24ae59f7"></a>
+<a class="anchor" id="a97d9bc66e7bd37c64c4620ae09ad8d1a"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="mlabels">
@@ -1038,7 +1129,7 @@ Protected Attributes</h2></td></tr>
           <td class="memname">virtual <a class="el" href="classTransport.html">Transport</a>* CellInterface::getSlopesTransport </td>
           <td>(</td>
           <td class="paramtype">const int &amp;&#160;</td>
-          <td class="paramname"><em>numberTransport</em></td><td>)</td>
+          <td class="paramname"></td><td>)</td>
           <td> const</td>
         </tr>
       </table>
@@ -1102,7 +1193,7 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Reimplemented in <a class="el" href="classBoundCond.html#ae5a2abe3693171c844b0ab983797931c">BoundCond</a>.</p>
+<p>Reimplemented in <a class="el" href="classBoundCond.html#a9871f7758d1ebf48e4056f04310c0e3b">BoundCond</a>.</p>
 
 </div>
 </div>
@@ -1229,7 +1320,7 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="af8c00a7292fb0f19d1a21bfe31b1fa44"></a>
+<a class="anchor" id="a55b0ee6d32bf35b02d31e1d74246587d"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="mlabels">
@@ -1258,31 +1349,31 @@ Protected Attributes</h2></td></tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype"><a class="el" href="classLimiter.html">Limiter</a> &amp;&#160;</td>
-          <td class="paramname"><em>globalLimiter</em>, </td>
+          <td class="paramname">, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype"><a class="el" href="classLimiter.html">Limiter</a> &amp;&#160;</td>
-          <td class="paramname"><em>interfaceLimiter</em>, </td>
+          <td class="paramname">, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype"><a class="el" href="classLimiter.html">Limiter</a> &amp;&#160;</td>
-          <td class="paramname"><em>globalVolumeFractionLimiter</em>, </td>
+          <td class="paramname">, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype"><a class="el" href="classLimiter.html">Limiter</a> &amp;&#160;</td>
-          <td class="paramname"><em>interfaceVolumeFractionLimiter</em>, </td>
+          <td class="paramname">, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="Phase_8h.html#a2c815f6ae654fe19b3985d14c9c8d74e">Prim</a>&#160;</td>
-          <td class="paramname"><em>type</em> = <code><a class="el" href="Phase_8h.html#a2c815f6ae654fe19b3985d14c9c8d74ea2270f1269fdfbdfd9044eaa8af19750d">vecPhases</a></code>&#160;</td>
+          <td class="paramtype"><a class="el" href="Tools_8h.html#a2c815f6ae654fe19b3985d14c9c8d74e">Prim</a>&#160;</td>
+          <td class="paramname"> = <code><a class="el" href="Tools_8h.html#a2c815f6ae654fe19b3985d14c9c8d74ea2270f1269fdfbdfd9044eaa8af19750d">vecPhases</a></code>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -1297,7 +1388,7 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Reimplemented in <a class="el" href="classBoundCond.html#a2474207d3be3acb4c216ff3cb6ded84e">BoundCond</a>, <a class="el" href="classCellInterfaceO2.html#a6c1a0060dfb93ab9471b89b76dcef25d">CellInterfaceO2</a>, and <a class="el" href="classBoundCondWallO2.html#ad016bbecdecb8b3e2fd2fd137cea87ad">BoundCondWallO2</a>.</p>
+<p>Reimplemented in <a class="el" href="classBoundCond.html#aeb1894a8e557a77471bd5515fdf9da69">BoundCond</a>, <a class="el" href="classCellInterfaceO2.html#a6c1a0060dfb93ab9471b89b76dcef25d">CellInterfaceO2</a>, and <a class="el" href="classBoundCondWallO2.html#ad016bbecdecb8b3e2fd2fd137cea87ad">BoundCondWallO2</a>.</p>
 
 </div>
 </div>
@@ -1369,7 +1460,32 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Reimplemented in <a class="el" href="classBoundCond.html#aa09d56b07e2eba8aad3e19524d1eeb15">BoundCond</a>, <a class="el" href="classBoundCondOutflow.html#ad990a0bb94311485d0f55b7ef6afef31">BoundCondOutflow</a>, <a class="el" href="classBoundCondWallO2.html#a63273dd27ff92684a29e4650d4b4b2bd">BoundCondWallO2</a>, <a class="el" href="classBoundCondInj.html#aec1e474e5eca4ab484540b0cd9d3f93d">BoundCondInj</a>, <a class="el" href="classBoundCondWall.html#a4a9cac3937c188f90d4364530a351af4">BoundCondWall</a>, <a class="el" href="classBoundCondNonReflecting.html#a281adcb1156fc2022747c6d93e22cbf0">BoundCondNonReflecting</a>, <a class="el" href="classBoundCondTank.html#abed9fdbf5a555609df5037d5f4f4db88">BoundCondTank</a>, and <a class="el" href="classBoundCondSymmetryO2.html#a7ffa5ff4bf1e97654bc8599977b107d5">BoundCondSymmetryO2</a>.</p>
+<p>Reimplemented in <a class="el" href="classBoundCond.html#aa09d56b07e2eba8aad3e19524d1eeb15">BoundCond</a>, <a class="el" href="classBoundCondWallO2.html#a63273dd27ff92684a29e4650d4b4b2bd">BoundCondWallO2</a>, <a class="el" href="classBoundCondWall.html#a4a9cac3937c188f90d4364530a351af4">BoundCondWall</a>, <a class="el" href="classBoundCondInj.html#aec1e474e5eca4ab484540b0cd9d3f93d">BoundCondInj</a>, <a class="el" href="classBoundCondNonReflecting.html#a281adcb1156fc2022747c6d93e22cbf0">BoundCondNonReflecting</a>, <a class="el" href="classBoundCondSubInj.html#a3a3afc1ce1c35b46b9af180d56beef06">BoundCondSubInj</a>, <a class="el" href="classBoundCondOutflow.html#ad990a0bb94311485d0f55b7ef6afef31">BoundCondOutflow</a>, <a class="el" href="classBoundCondTank.html#abed9fdbf5a555609df5037d5f4f4db88">BoundCondTank</a>, <a class="el" href="classBoundCondSymmetryO2.html#a7ffa5ff4bf1e97654bc8599977b107d5">BoundCondSymmetryO2</a>, and <a class="el" href="classBoundCondSymmetry.html#ae9bf41d3a3a55524c394515aa4d132f0">BoundCondSymmetry</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a58fed060783167fcd3c12093c639224b"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual int CellInterface::whoAmIHeat </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Reimplemented in <a class="el" href="classBoundCond.html#ac3415c8ef58dbf3e9be3a9f05436645a">BoundCond</a>, and <a class="el" href="classBoundCondWall.html#afc667c7dd6123d6f78ac1ae52bf44603">BoundCondWall</a>.</p>
 
 </div>
 </div>
@@ -1506,7 +1622,7 @@ Protected Attributes</h2></td></tr>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="classCellInterface.html">CellInterface</a></li>
-    <li class="footer">Generated on Mon May 11 2020 16:03:19 for ECOGEN by
+    <li class="footer">Generated on Wed Mar 10 2021 16:19:51 for ECOGEN by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.11 </li>
   </ul>

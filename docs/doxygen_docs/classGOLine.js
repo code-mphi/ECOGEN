@@ -1,6 +1,5 @@
 var classGOLine =
 [
-    [ "GOLine", "classGOLine.html#ae00151adb3bd1ec544395f55475b4ff4", null ],
     [ "GOLine", "classGOLine.html#aa9af492d9205417dac4142744cf1f3db", null ],
     [ "~GOLine", "classGOLine.html#a6e71606d3121a7b5b0b11c7973fa4eda", null ],
     [ "distancePoint", "classGOLine.html#a1cdff238bccef1dabfb6ac0e517fe60e", null ],

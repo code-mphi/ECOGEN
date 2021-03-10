@@ -1,0 +1,26 @@
+var classFluxPTUEq =
+[
+    [ "FluxPTUEq", "classFluxPTUEq.html#aa2ee56990f6d78498ad0f3f882883308", null ],
+    [ "~FluxPTUEq", "classFluxPTUEq.html#a66b86e91207a5765a780afde43151baf", null ],
+    [ "addFlux", "classFluxPTUEq.html#ab0f6266ece42a551840fa608d7f0fa77", null ],
+    [ "addFlux", "classFluxPTUEq.html#ab835bb592dbc166ff1480f26d2a62a2c", null ],
+    [ "addNonCons", "classFluxPTUEq.html#ada18883e1497d9832ee03b6b73af1c22", null ],
+    [ "buildCons", "classFluxPTUEq.html#abf9a6cd868d53b73fff4855f93690cba", null ],
+    [ "buildPrim", "classFluxPTUEq.html#a533631074d38eb1930d86c5e85413737", null ],
+    [ "getEnergyMix", "classFluxPTUEq.html#a0269104cc5eeb77f3292af8392b8a3f9", null ],
+    [ "getMasse", "classFluxPTUEq.html#a2dc3b5611b2d7e74aa1075974d629052", null ],
+    [ "getQdm", "classFluxPTUEq.html#a234bf43c23a5afb32574632d50c2bff8", null ],
+    [ "multiply", "classFluxPTUEq.html#a1fe1e082d937b09b0bdee6659a57840e", null ],
+    [ "prepSourceTermsHeating", "classFluxPTUEq.html#a70a8c0e62ee469511f542dadefaece3c", null ],
+    [ "printFlux", "classFluxPTUEq.html#a5395da29f294e48675cd38ee5e2a4b41", null ],
+    [ "setBufferFlux", "classFluxPTUEq.html#a60d09069959aecba2e16568ab645d17d", null ],
+    [ "setCons", "classFluxPTUEq.html#a02ea6030b7af7f36bfddce491d11163a", null ],
+    [ "setToZero", "classFluxPTUEq.html#a1c0b4c1ca6c5933370838fa5a30854a1", null ],
+    [ "setToZeroBufferFlux", "classFluxPTUEq.html#a35f8d85b3da2d19a5dbdca7076f7aee4", null ],
+    [ "subtractFlux", "classFluxPTUEq.html#a2bf6349b1930b1be75465305bd3f0aea", null ],
+    [ "subtractNonCons", "classFluxPTUEq.html#a4bbe6d23aa35aad2d233c22981435a0d", null ],
+    [ "ModPTUEq", "classFluxPTUEq.html#abd14ba035d30d7664539fadede898c07", null ],
+    [ "m_energMixture", "classFluxPTUEq.html#afc66bc8423bf9a25d9d59402597301d2", null ],
+    [ "m_masse", "classFluxPTUEq.html#a47747e46f3dec41be3811f8e4cc19ce1", null ],
+    [ "m_qdm", "classFluxPTUEq.html#af16f992063d0ac672d96f8a2dca3bd98", null ]
+];

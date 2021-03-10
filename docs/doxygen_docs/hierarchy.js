@@ -1,11 +1,14 @@
 var hierarchy =
 [
     [ "AddPhys", "classAddPhys.html", [
-      [ "APEuler", "classAPEuler.html", null ],
-      [ "APKapila", "classAPKapila.html", [
-        [ "APKConductivity", "classAPKConductivity.html", null ],
-        [ "APKSurfaceTension", "classAPKSurfaceTension.html", null ],
-        [ "APKViscosity", "classAPKViscosity.html", null ]
+      [ "APEuler", "classAPEuler.html", [
+        [ "APEConductivity", "classAPEConductivity.html", null ],
+        [ "APEViscosity", "classAPEViscosity.html", null ]
+      ] ],
+      [ "APUEq", "classAPUEq.html", [
+        [ "APUEqConductivity", "classAPUEqConductivity.html", null ],
+        [ "APUEqSurfaceTension", "classAPUEqSurfaceTension.html", null ],
+        [ "APUEqViscosity", "classAPUEqViscosity.html", null ]
       ] ]
     ] ],
     [ "tinyxml2::MemPoolT< SIZE >::Block", "structtinyxml2_1_1MemPoolT_1_1Block.html", null ],
@@ -20,8 +23,10 @@ var hierarchy =
         [ "BoundCondInj", "classBoundCondInj.html", null ],
         [ "BoundCondNonReflecting", "classBoundCondNonReflecting.html", null ],
         [ "BoundCondOutflow", "classBoundCondOutflow.html", null ],
+        [ "BoundCondSubInj", "classBoundCondSubInj.html", null ],
         [ "BoundCondTank", "classBoundCondTank.html", null ],
         [ "BoundCondWall", "classBoundCondWall.html", [
+          [ "BoundCondSymmetry", "classBoundCondSymmetry.html", null ],
           [ "BoundCondWallO2", "classBoundCondWallO2.html", [
             [ "BoundCondSymmetryO2", "classBoundCondSymmetryO2.html", null ]
           ] ]
@@ -30,6 +35,7 @@ var hierarchy =
       [ "CellInterfaceO2", "classCellInterfaceO2.html", null ]
     ] ],
     [ "tinyxml2::MemPoolT< SIZE >::Chunk", "uniontinyxml2_1_1MemPoolT_1_1Chunk.html", null ],
+    [ "Config", "classConfig.html", null ],
     [ "Coord", "classCoord.html", null ],
     [ "decomposition::Decomposition", "classdecomposition_1_1Decomposition.html", null ],
     [ "tinyxml2::DynArray< T, INIT >", "classtinyxml2_1_1DynArray.html", null ],
@@ -70,6 +76,7 @@ var hierarchy =
           [ "ErrorXMLLimite", "classErrorXMLLimite.html", null ],
           [ "ErrorXMLMateriauInconnu", "classErrorXMLMateriauInconnu.html", null ],
           [ "ErrorXMLRacine", "classErrorXMLRacine.html", null ],
+          [ "ErrorXMLRelaxation", "classErrorXMLRelaxation.html", null ],
           [ "ErrorXMLStretching", "classErrorXMLStretching.html", null ],
           [ "ErrorXMLTermeSource", "classErrorXMLTermeSource.html", null ]
         ] ]
@@ -87,9 +94,10 @@ var hierarchy =
     [ "Flux", "classFlux.html", [
       [ "FluxEuler", "classFluxEuler.html", null ],
       [ "FluxEulerHomogeneous", "classFluxEulerHomogeneous.html", null ],
-      [ "FluxKapila", "classFluxKapila.html", null ],
-      [ "FluxMultiP", "classFluxMultiP.html", null ],
-      [ "FluxThermalEq", "classFluxThermalEq.html", null ]
+      [ "FluxPTUEq", "classFluxPTUEq.html", null ],
+      [ "FluxUEq", "classFluxUEq.html", [
+        [ "FluxPUEq", "classFluxPUEq.html", null ]
+      ] ]
     ] ],
     [ "GeometricalDomain", "classGeometricalDomain.html", [
       [ "GDCuboid", "classGDCuboid.html", null ],
@@ -142,19 +150,22 @@ var hierarchy =
     [ "Mixture", "classMixture.html", [
       [ "MixEuler", "classMixEuler.html", null ],
       [ "MixEulerHomogeneous", "classMixEulerHomogeneous.html", null ],
-      [ "MixKapila", "classMixKapila.html", null ],
-      [ "MixMultiP", "classMixMultiP.html", null ],
-      [ "MixThermalEq", "classMixThermalEq.html", null ]
+      [ "MixPTUEq", "classMixPTUEq.html", null ],
+      [ "MixUEq", "classMixUEq.html", [
+        [ "MixPUEq", "classMixPUEq.html", null ]
+      ] ]
     ] ],
     [ "Model", "classModel.html", [
       [ "ModEuler", "classModEuler.html", null ],
       [ "ModEulerHomogeneous", "classModEulerHomogeneous.html", null ],
-      [ "ModKapila", "classModKapila.html", null ],
-      [ "ModMultiP", "classModMultiP.html", null ],
-      [ "ModThermalEq", "classModThermalEq.html", null ]
+      [ "ModPTUEq", "classModPTUEq.html", null ],
+      [ "ModUEq", "classModUEq.html", [
+        [ "ModPUEq", "classModPUEq.html", null ]
+      ] ]
     ] ],
     [ "Output", "classOutput.html", [
       [ "OutputGNU", "classOutputGNU.html", [
+        [ "OutputBoundaryFluxGNU", "classOutputBoundaryFluxGNU.html", null ],
         [ "OutputCutGNU", "classOutputCutGNU.html", null ],
         [ "OutputGlobalGNU", "classOutputGlobalGNU.html", null ],
         [ "OutputProbeGNU", "classOutputProbeGNU.html", null ]
@@ -165,9 +176,10 @@ var hierarchy =
     [ "Phase", "classPhase.html", [
       [ "PhaseEuler", "classPhaseEuler.html", null ],
       [ "PhaseEulerHomogeneous", "classPhaseEulerHomogeneous.html", null ],
-      [ "PhaseKapila", "classPhaseKapila.html", null ],
-      [ "PhaseMultiP", "classPhaseMultiP.html", null ],
-      [ "PhaseThermalEq", "classPhaseThermalEq.html", null ]
+      [ "PhasePTUEq", "classPhasePTUEq.html", null ],
+      [ "PhaseUEq", "classPhaseUEq.html", [
+        [ "PhasePUEq", "classPhasePUEq.html", null ]
+      ] ]
     ] ],
     [ "QuantitiesAddPhys", "classQuantitiesAddPhys.html", [
       [ "QAPConductivity", "classQAPConductivity.html", null ],
@@ -175,7 +187,10 @@ var hierarchy =
       [ "QAPViscosity", "classQAPViscosity.html", null ]
     ] ],
     [ "Relaxation", "classRelaxation.html", [
-      [ "RelaxationP", "classRelaxationP.html", null ],
+      [ "RelaxationP", "classRelaxationP.html", [
+        [ "RelaxationPFinite", "classRelaxationPFinite.html", null ],
+        [ "RelaxationPInfinite", "classRelaxationPInfinite.html", null ]
+      ] ],
       [ "RelaxationPT", "classRelaxationPT.html", null ],
       [ "RelaxationPTMu", "classRelaxationPTMu.html", null ]
     ] ],
@@ -194,6 +209,7 @@ var hierarchy =
     ] ],
     [ "SymmetryCylindrical", "classSymmetryCylindrical.html", null ],
     [ "SymmetrySpherical", "classSymmetrySpherical.html", null ],
+    [ "Tensor", "classTensor.html", null ],
     [ "timeStats", "classtimeStats.html", null ],
     [ "Tools", "classTools.html", null ],
     [ "Transport", "classTransport.html", null ],

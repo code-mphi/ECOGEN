@@ -1,7 +1,9 @@
 var searchData=
 [
+  ['apeconductivity',['APEConductivity',['../classFluxEuler.html#aae4bcdc43f9fe8ff9ff54bd02c3679de',1,'FluxEuler']]],
   ['apeuler',['APEuler',['../classFluxEuler.html#a01fd240f5cc4f22c4d52b2cb278345b3',1,'FluxEuler']]],
-  ['apkconductivity',['APKConductivity',['../classFluxKapila.html#abf7f25d4fb1d4e69962e036dd2d8393e',1,'FluxKapila::APKConductivity()'],['../classFluxMultiP.html#abf7f25d4fb1d4e69962e036dd2d8393e',1,'FluxMultiP::APKConductivity()']]],
-  ['apksurfacetension',['APKSurfaceTension',['../classFluxKapila.html#aa001d6a713f9b3be087e46f66e98d793',1,'FluxKapila::APKSurfaceTension()'],['../classFluxMultiP.html#aa001d6a713f9b3be087e46f66e98d793',1,'FluxMultiP::APKSurfaceTension()']]],
-  ['apkviscosity',['APKViscosity',['../classFluxKapila.html#abc88277d74a37425205cf218ce1f60a1',1,'FluxKapila::APKViscosity()'],['../classFluxMultiP.html#abc88277d74a37425205cf218ce1f60a1',1,'FluxMultiP::APKViscosity()']]]
+  ['apeviscosity',['APEViscosity',['../classFluxEuler.html#a028662c77cfa639b609edfd8af2fe34d',1,'FluxEuler']]],
+  ['apueqconductivity',['APUEqConductivity',['../classFluxUEq.html#aa2f6c1a1855bf60157ba91b360c43ff2',1,'FluxUEq']]],
+  ['apueqsurfacetension',['APUEqSurfaceTension',['../classFluxUEq.html#a60cb661408f3c5de90b2d07ae9793672',1,'FluxUEq']]],
+  ['apueqviscosity',['APUEqViscosity',['../classFluxUEq.html#a5ee1ddb6e2be3e4d340090e1b6dfa6e0',1,'FluxUEq']]]
 ];

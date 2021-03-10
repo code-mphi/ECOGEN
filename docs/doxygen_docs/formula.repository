@@ -12,100 +12,104 @@
 \form#11:$ p(\rho, \epsilon) = (\gamma-1)\rho(\epsilon - \epsilon_{ref}) $
 \form#12:$ \rho(p, T) = \frac{p}{T \ c_v \ (\gamma-1)}\ $
 \form#13:$ c(p, \rho) = \sqrt{ \frac{\gamma \ p}{\rho}} $
-\form#14:$ s(T, p) = c_v \ ln \left( \frac{T^\gamma} { p^\frac{\gamma}{(\gamma-1)} } \right)+s_{ref} $
-\form#15:$ p_i $
-\form#16:$ \rho_i $
-\form#17:$ p_f = p_i \left( \frac{\rho_f}{\rho_i} \right) ^\gamma $
-\form#18:$ \rho_f $
-\form#19:$ p_f = p_i \frac{ (\gamma+1)*\rho_f - (\gamma-1)*\rho_i }{ (\gamma+1)*\rho_i-(\gamma-1)*\rho_f } $
-\form#20:$ (p_i) $
-\form#21:$ (\rho_i ) $
-\form#22:$ \rho_f = \rho_i \left( \frac{p_f}{ p_i}\right) ^\frac{1}{\gamma} $
-\form#23:$ \left. \frac{\partial \rho}{\partial p} \right)_s = \frac{\rho_f}{ \gamma \ p_f} $
-\form#24:$ p_f $
-\form#25:$ \rho_f =\rho_i\frac{ (\gamma + 1)*p_f + (\gamma - 1)*p_i}{(\gamma - 1)p_f +(\gamma + 1)p_i) }$
-\form#26:$ \left. \frac{\partial \rho}{\partial p} \right)_Hug = \frac{4\gamma \rho_i \ p_i}{ \left( (\gamma - 1)p_f +(\gamma + 1)p_i \right) ^2} $
-\form#27:$ h(p_f,{\rho_f})= \frac{\gamma}{(\gamma-1)}\frac{p_f}{\rho_f} +e_{ref} $
-\form#28:$ \frac{dh}{dp}=\frac{\gamma}{(\gamma-1)}\frac{ \rho_f - p_f \frac{d\rho}{dp} }{\rho_f^2} $
-\form#29:$\frac{d\rho}{dp}$
-\form#30:$T_{sat}$
-\form#31:$\frac{d T_{sat}}{d p}$
-\form#32:$ \rho(p, T_{sat}) = \frac{p}{T_{sat} \ c_v \ (\gamma-1)}\ $
-\form#33:$\frac{d \rho}{d p} = \left. \frac{\partial \rho}{\partial p} \right)_{T_{sat}} + \left. \frac{\partial \rho}{\partial T_{sat} } \right)_p \frac{d T_{sat}}{d p} =\frac{(\gamma-1)c_v\left(T_{sat} - p\frac{d T_{sat}}{d p}\right) }{\left((\gamma-1)c_vT_{sat}\right)^2 }$
-\form#34:$ \rho $
-\form#35:$\frac{d \rho}{d p}$
-\form#36:$ \rho\epsilon(p, \rho) = \frac{p}{(\gamma-1)} +\rho\epsilon_{ref}$
-\form#37:$ \frac{d \rho\epsilon}{d p} =\left. \frac{\partial \rho\epsilon}{\partial p} \right)_{\rho} + \left. \frac{\partial \rho\epsilon}{\partial\rho } \right)_p \frac{d \rho}{d p} = \frac{1}{(\gamma-1)} +\frac{d \rho}{d p}\epsilon_{ref} $
-\form#38:$ \frac{\gamma p_{\infty}}{(\gamma-1)} = 0 \;for\; Ideal\; Gas$
-\form#39:$ \epsilon_{ref} $
-\form#40:$ \frac{1}{(\gamma-1)}$
-\form#41:$ v= (h - \epsilon_{ref})\frac{(\gamma-1)}{\gamma p} $
-\form#42:$ h=\epsilon +pv $
-\form#43:$ \left. \frac{\partial v}{\partial p} \right)_h = - \frac{(\gamma-1)(h-\epsilon_{ref})}{\gamma p^2} $
-\form#44:$ \left. \frac{\partial v}{\partial h} \right)_p = \frac{(\gamma-1)}{\gamma p} $
-\form#45:$ 10^{-15} $
-\form#46:$ errors $
-\form#47:$ " :\;too\;low\;pressure \;in\; EosIG\;"$
-\form#48:$ if \; p < 10^{-15} \; then \; p= 10^{-15} $
-\form#49:$ \gamma $
-\form#50:$ c_v $
-\form#51:$ \ s_{ref} $
-\form#52:$ \ "IG" $
-\form#53:$ \gamma, \; p_{infty}, \; b, \; c_v, \; e_{ref}, \; s_{ref}$
-\form#54:$ \neq 6$
-\form#55:$ T(\rho, p) = \frac{(p+p_{\infty})(1-\rho b)}{c_v (\gamma-1)\rho} $
-\form#56:$ \epsilon (\rho, p) = \frac{(p + \gamma p_{\infty})(1-\rho b)}{\rho (\gamma-1)} \ + \ \epsilon_{ref} $
-\form#57:$ p(\rho, \epsilon) = (\gamma-1)\rho \frac{(\epsilon - \epsilon_{ref})}{(1-\rho b)} - \gamma p_{\infty} $
-\form#58:$ \rho(p, T) = \frac{p + p_{\infty} }{c_v T(\gamma-1) + b (p + p_{\infty})} $
-\form#59:$ c(p, \rho) = \sqrt{ \frac{\gamma \ (p+p_{\infty})}{\rho (1-\rho b)}} $
-\form#60:$ s(T, p) = c_v \ln \left( \frac{T^\gamma} { (p+p_{\infty})^{\gamma-1} } \right)+s_{ref} $
-\form#61:$ p_f = (p_i+p_{\infty}) \left( \frac{\rho_f}{\rho_i} \right)^\gamma \left(\frac{1-\rho_i b}{1-\rho_f b}\right)^\gamma -p_{\infty} $
-\form#62:$ p_f = \frac{\rho_i\left(2\gamma p_{\infty}+p_i (\gamma-1)\right)-\rho_f \left(2\gamma p_{\infty}+p_i (\gamma +1)\right)+2b\rho_i p_i}{\rho_f (\gamma-1)-\rho_i (\gamma+1)+2b\rho_0} $
-\form#63:$ \rho_f =\rho_i\frac{ (\gamma + 1)*(p_f+p_{\infty}) + (\gamma - 1)*(p_i+p_{\infty})}{(\gamma - 1)(p_f+p_{\infty}) +(\gamma + 1)(p_i+p_{\infty}) + 2 b \rho_0 (p_f-p_i)} $
-\form#64:$ \left. \frac{\partial \rho}{\partial p} \right)_{Hug} = \frac{4\gamma \rho_i \ (p_i+p_{\infty}) \ (1- b\rho_i)}{ \left( (\gamma - 1)(p_f+p_{\infty}) +(\gamma + 1)(p_i+p_{\infty}) +2b\rho_i (p_f-p_i)\right) ^2} $
-\form#65:$ \rho_f = \rho_i \frac{\gamma (p_f+p_{\infty})}{\gamma (p_f+p_{\infty}) + p_i - p_f + b \rho_i (p_f -p_i)} $
-\form#66:$ \frac{d\rho}{dp} = \rho_i \gamma \frac{\left(p_i + p_{\infty}-b \rho_i (p_i + p_{\infty})\right)}{\left(\gamma (p_f+p_{\infty}) + p_i - p_f+b \rho_i (p_f - p_i)\right)^2} $
-\form#67:$ h(p_f,{\rho_f})= \frac{\gamma}{(\gamma-1)}\frac{p_f+p_{\infty}}{\rho_f} (1-\rho_f b) + b p + e_{ref} $
-\form#68:$ \frac{dh}{dp}=\frac{\gamma}{(\gamma-1)}\left[\frac{ \rho_f - (p_f+p_{\infty}) \frac{d\rho}{dp} }{\rho_f^2}-b\right] +b $
-\form#69:$ \rho(p, T_{sat}) = \frac{p+p_{\infty}}{T_{sat} \ c_v \ (\gamma-1) + b(p+p_{\infty})} $
-\form#70:$ \frac{d \rho}{d p} = \left. \frac{\partial \rho}{\partial p} \right)_{T_{sat}} + \left. \frac{\partial \rho}{\partial T_{sat} } \right)_p \frac{d T_{sat}}{d p} =\frac{(\gamma-1)c_v\left(T_{sat} - (p+p_{\infty})\frac{d T_{sat}}{d p}\right) }{\left((\gamma-1)c_vT_{sat} + b(p+p_{\infty}) \right)^2 } $
-\form#71:$ \rho\epsilon(p, \rho) = \frac{(p+\gamma p_{\infty})(1-\rho b)}{(\gamma-1)} +\rho\epsilon_{ref} $
-\form#72:$ \frac{d \rho\epsilon}{d p} =\left. \frac{\partial \rho\epsilon}{\partial p} \right)_{\rho} + \left. \frac{\partial \rho\epsilon}{\partial\rho } \right)_p \frac{d\rho}{dp} = \frac{1-\rho b}{(\gamma-1)} +\frac{d \rho}{d p}\left(\epsilon_{ref}-b\frac{(p+\gamma p_{\infty})}{\gamma-1}\right) $
-\form#73:$ \frac{\gamma p_{\infty}}{(\gamma-1)} $
-\form#74:$ v(p,h) = (h - bp -\epsilon_{ref})\frac{(\gamma-1)}{\gamma (p+p_{\infty})}+b $
-\form#75:$ \left. \frac{\partial v}{\partial p} \right)_h = \frac{\gamma-1}{\gamma (p+p_{\infty})^2} \left(-b(p+p_{\infty})-(h-bp-q)\right) $
-\form#76:$ \left. \frac{\partial v}{\partial h} \right)_p = \frac{(\gamma-1)}{\gamma (p+p_{\infty})} $
-\form#77:$ -(1. - 10^{-15})*p_{\infty} + 10^{-15} $
-\form#78:$ " :\;too\;low\;pressure \;in\; EosNASG\;"$
-\form#79:$ if \; p < -(1. - 10^{-15})*p_{\infty} + 10^{-15} \; then \; p= -(1. - 10^{-15})*p_{\infty} + 10^{-15} $
-\form#80:$ p_{\infty}$
-\form#81:$ b $
-\form#82:$ p_{\infty} $
-\form#83:$ \ "NASG" $
-\form#84:$ \gamma, \; p_{infty}, \; c_v, \; e_{ref}, s_{ref}$
-\form#85:$ \neq 5$
-\form#86:$ T(\rho, p) = \frac{p+p_{\infty}}{\rho c_v (\gamma-1)}$
-\form#87:$ \epsilon (\rho, p) = \frac{p + \gamma p_{\infty}}{\rho \ (\gamma-1)} \ + \ \epsilon_{ref} $
-\form#88:$ p(\rho, \epsilon) = (\gamma-1)\rho(\epsilon - \epsilon_{ref}) - \gamma p_{\infty}$
-\form#89:$ \rho(p, T) = \frac{p + \gamma p_{\infty} }{T \ c_v \ (\gamma-1)}\ $
-\form#90:$ c(p, \rho) = \sqrt{ \frac{\gamma \ (p+p_{\infty})}{\rho}} $
-\form#91:$ s(T, p) = c_v \ ln \left( \frac{T^\gamma} { (p+p_{\infty})^{(\gamma-1)} } \right)+s_{ref} $
-\form#92:$ p_f = (p_i+p_{\infty}) \left( \frac{\rho_f}{\rho_i} \right) ^\gamma -p_{\infty} $
-\form#93:$ p_f = (p_i+p_{\infty}) \frac{ (\gamma+1)*\rho_f - (\gamma-1)*\rho_i }{ (\gamma+1)*\rho_i-(\gamma-1)*\rho_f } -p_{\infty} $
-\form#94:$ \rho_f = \rho_i \left( \frac{p_f+p_{\infty}}{ p_i+p_{\infty}}\right) ^\frac{1}{\gamma} $
-\form#95:$ \left. \frac{\partial \rho}{\partial p} \right)_s = \frac{\rho_f}{ \gamma \ (p_f+p_{\infty})} $
-\form#96:$ \rho_f =\rho_i\frac{ (\gamma + 1)*(p_f+p_{\infty}) + (\gamma - 1)*(p_i+p_{\infty})}{(\gamma - 1)(p_f+p_{\infty}) +(\gamma + 1)(p_i+p_{\infty})}$
-\form#97:$ \left. \frac{\partial \rho}{\partial p} \right)_{Hug} = \frac{4\gamma \rho_i \ (p_i+p_{\infty})}{ \left( (\gamma - 1)(p_f+p_{\infty}) +(\gamma + 1)(p_i+p_{\infty}) \right) ^2} $
-\form#98:$ \rho_f = \rho_i \frac{\gamma (p_f+p_{\infty})}{\gamma (p_f+p_{\infty}) + p_i - p_f} $
-\form#99:$ \frac{d\rho}{dp} = \rho_i \frac{\gamma (p_i + p_{\infty})}{\left(\gamma (p_f+p_{\infty}) + p_i - p_f\right)^2} $
-\form#100:$ h(p_f,{\rho_f})= \frac{\gamma}{(\gamma-1)}\frac{p_f+p_{\infty}}{\rho_f} +e_{ref} $
-\form#101:$ \frac{dh}{dp}=\frac{\gamma}{(\gamma-1)}\frac{ \rho_f - (p_f+p_{\infty}) \frac{d\rho}{dp} }{\rho_f^2} $
-\form#102:$ \rho(p, T_{sat}) = \frac{p+p_{\infty}}{T_{sat} \ c_v \ (\gamma-1)}\ $
-\form#103:$\frac{d \rho}{d p} = \left. \frac{\partial \rho}{\partial p} \right)_{T_{sat}} + \left. \frac{\partial \rho}{\partial T_{sat} } \right)_p \frac{d T_{sat}}{d p} =\frac{(\gamma-1)c_v\left(T_{sat} - (p+p_{\infty})\frac{d T_{sat}}{d p}\right) }{\left((\gamma-1)c_vT_{sat}\right)^2 }$
-\form#104:$ \rho\epsilon(p, \rho) = \frac{p+\gamma p_{\infty}}{(\gamma-1)} +\rho\epsilon_{ref}$
-\form#105:$ \frac{d \rho\epsilon}{d p} =\left. \frac{\partial \rho\epsilon}{\partial p} \right)_{\rho} + \left. \frac{\partial \rho\epsilon}{\partial\rho } \right)_p \frac{d\rho}{dp} = \frac{1}{(\gamma-1)} +\frac{d \rho}{d p}\epsilon_{ref} $
-\form#106:$ v= (h - \epsilon_{ref})\frac{(\gamma-1)}{\gamma (p+p_{\infty})} $
-\form#107:$ \left. \frac{\partial v}{\partial p} \right)_h = - \frac{(\gamma-1)(h-\epsilon_{ref})}{\gamma (p+p_{\infty})^2} $
-\form#108:$ " :\;too\;low\;pressure \;in\; EosSG\;"$
-\form#109:$ \ "SG" $
-\form#110:\[ \frac{U^{n+1}_i-U^{n}_i}{\Delta t} = -\sum_{faces} \vec{F}^*_f \cdot \vec{n}_f \]
+\form#14:$ c(pI, p, \rho) = \sqrt{ \frac{(\gamma-1) \ p_I + p}{\rho}} $
+\form#15:$ s(T, p) = c_v \ ln \left( \frac{T^\gamma} { p^\frac{\gamma}{(\gamma-1)} } \right)+s_{ref} $
+\form#16:$ p_i $
+\form#17:$ \rho_i $
+\form#18:$ p_f = p_i \left( \frac{\rho_f}{\rho_i} \right) ^\gamma $
+\form#19:$ \rho_f $
+\form#20:$ p_f = p_i \frac{ (\gamma+1)*\rho_f - (\gamma-1)*\rho_i }{ (\gamma+1)*\rho_i-(\gamma-1)*\rho_f } $
+\form#21:$ (p_i) $
+\form#22:$ (\rho_i ) $
+\form#23:$ \rho_f = \rho_i \left( \frac{p_f}{ p_i}\right) ^\frac{1}{\gamma} $
+\form#24:$ \left. \frac{\partial \rho}{\partial p} \right)_s = \frac{\rho_f}{ \gamma \ p_f} $
+\form#25:$ p_f $
+\form#26:$ \rho_f =\rho_i\frac{ (\gamma + 1)*p_f + (\gamma - 1)*p_i}{(\gamma - 1)p_f +(\gamma + 1)p_i) }$
+\form#27:$ \left. \frac{\partial \rho}{\partial p} \right)_Hug = \frac{4\gamma \rho_i \ p_i}{ \left( (\gamma - 1)p_f +(\gamma + 1)p_i \right) ^2} $
+\form#28:$ h(p_f,{\rho_f})= \frac{\gamma}{(\gamma-1)}\frac{p_f}{\rho_f} +e_{ref} $
+\form#29:$ \frac{dh}{dp}=\frac{\gamma}{(\gamma-1)}\frac{ \rho_f - p_f \frac{d\rho}{dp} }{\rho_f^2} $
+\form#30:$\frac{d\rho}{dp}$
+\form#31:$T_{sat}$
+\form#32:$\frac{d T_{sat}}{d p}$
+\form#33:$ \rho(p, T_{sat}) = \frac{p}{T_{sat} \ c_v \ (\gamma-1)}\ $
+\form#34:$\frac{d \rho}{d p} = \left. \frac{\partial \rho}{\partial p} \right)_{T_{sat}} + \left. \frac{\partial \rho}{\partial T_{sat} } \right)_p \frac{d T_{sat}}{d p} =\frac{(\gamma-1)c_v\left(T_{sat} - p\frac{d T_{sat}}{d p}\right) }{\left((\gamma-1)c_vT_{sat}\right)^2 }$
+\form#35:$ \rho $
+\form#36:$\frac{d \rho}{d p}$
+\form#37:$ \rho\epsilon(p, \rho) = \frac{p}{(\gamma-1)} +\rho\epsilon_{ref}$
+\form#38:$ \frac{d \rho\epsilon}{d p} =\left. \frac{\partial \rho\epsilon}{\partial p} \right)_{\rho} + \left. \frac{\partial \rho\epsilon}{\partial\rho } \right)_p \frac{d \rho}{d p} = \frac{1}{(\gamma-1)} +\frac{d \rho}{d p}\epsilon_{ref} $
+\form#39:$ \frac{\gamma p_{\infty}}{(\gamma-1)} = 0 \;for\; Ideal\; Gas$
+\form#40:$ \epsilon_{ref} $
+\form#41:$ \frac{1}{(\gamma-1)}$
+\form#42:$ v= (h - \epsilon_{ref})\frac{(\gamma-1)}{\gamma p} $
+\form#43:$ h=\epsilon +pv $
+\form#44:$ \left. \frac{\partial v}{\partial p} \right)_h = - \frac{(\gamma-1)(h-\epsilon_{ref})}{\gamma p^2} $
+\form#45:$ \left. \frac{\partial v}{\partial h} \right)_p = \frac{(\gamma-1)}{\gamma p} $
+\form#46:$ \left. \frac{\partial \rho}{\partial p} \right)_T = \frac{1}{c_v (\gamma - 1) T} $
+\form#47:$ 10^{-15} $
+\form#48:$ errors $
+\form#49:$ " :\;too\;low\;pressure \;in\; EosIG\;"$
+\form#50:$ if \; p < 10^{-15} \; then \; p= 10^{-15} $
+\form#51:$ \gamma $
+\form#52:$ c_v $
+\form#53:$ \ s_{ref} $
+\form#54:$ \ "IG" $
+\form#55:$ \gamma, \; p_{infty}, \; b, \; c_v, \; e_{ref}, \; s_{ref}$
+\form#56:$ \neq 6$
+\form#57:$ T(\rho, p) = \frac{(p+p_{\infty})(1-\rho b)}{c_v (\gamma-1)\rho} $
+\form#58:$ \epsilon (\rho, p) = \frac{(p + \gamma p_{\infty})(1-\rho b)}{\rho (\gamma-1)} \ + \ \epsilon_{ref} $
+\form#59:$ p(\rho, \epsilon) = (\gamma-1)\rho \frac{(\epsilon - \epsilon_{ref})}{(1-\rho b)} - \gamma p_{\infty} $
+\form#60:$ \rho(p, T) = \frac{p + p_{\infty} }{c_v T(\gamma-1) + b (p + p_{\infty})} $
+\form#61:$ c(p, \rho) = \sqrt{ \frac{\gamma \ (p+p_{\infty})}{\rho (1-\rho b)}} $
+\form#62:$ c(p, \rho) = \sqrt{ \frac{(\gamma-1) \ p_I + p_k + \gamma \ p_{\infty}}{(1 - \rho \ b) \ \rho}} $
+\form#63:$ s(T, p) = c_v \ln \left( \frac{T^\gamma} { (p+p_{\infty})^{\gamma-1} } \right)+s_{ref} $
+\form#64:$ p_f = (p_i+p_{\infty}) \left( \frac{\rho_f}{\rho_i} \right)^\gamma \left(\frac{1-\rho_i b}{1-\rho_f b}\right)^\gamma -p_{\infty} $
+\form#65:$ p_f = \frac{\rho_i\left(2\gamma p_{\infty}+p_i (\gamma-1)\right)-\rho_f \left(2\gamma p_{\infty}+p_i (\gamma +1)\right)+2b\rho_i p_i}{\rho_f (\gamma-1)-\rho_i (\gamma+1)+2b\rho_0} $
+\form#66:$ \rho_f =\rho_i\frac{ (\gamma + 1)*(p_f+p_{\infty}) + (\gamma - 1)*(p_i+p_{\infty})}{(\gamma - 1)(p_f+p_{\infty}) +(\gamma + 1)(p_i+p_{\infty}) + 2 b \rho_0 (p_f-p_i)} $
+\form#67:$ \left. \frac{\partial \rho}{\partial p} \right)_{Hug} = \frac{4\gamma \rho_i \ (p_i+p_{\infty}) \ (1- b\rho_i)}{ \left( (\gamma - 1)(p_f+p_{\infty}) +(\gamma + 1)(p_i+p_{\infty}) +2b\rho_i (p_f-p_i)\right) ^2} $
+\form#68:$ \rho_f = \rho_i \frac{\gamma (p_f+p_{\infty})}{\gamma (p_f+p_{\infty}) + p_i - p_f + b \rho_i (p_f -p_i)} $
+\form#69:$ \frac{d\rho}{dp} = \rho_i \gamma \frac{\left(p_i + p_{\infty}-b \rho_i (p_i + p_{\infty})\right)}{\left(\gamma (p_f+p_{\infty}) + p_i - p_f+b \rho_i (p_f - p_i)\right)^2} $
+\form#70:$ h(p_f,{\rho_f})= \frac{\gamma}{(\gamma-1)}\frac{p_f+p_{\infty}}{\rho_f} (1-\rho_f b) + b p + e_{ref} $
+\form#71:$ \frac{dh}{dp}=\frac{\gamma}{(\gamma-1)}\left[\frac{ \rho_f - (p_f+p_{\infty}) \frac{d\rho}{dp} }{\rho_f^2}-b\right] +b $
+\form#72:$ \rho(p, T_{sat}) = \frac{p+p_{\infty}}{T_{sat} \ c_v \ (\gamma-1) + b(p+p_{\infty})} $
+\form#73:$ \frac{d \rho}{d p} = \left. \frac{\partial \rho}{\partial p} \right)_{T_{sat}} + \left. \frac{\partial \rho}{\partial T_{sat} } \right)_p \frac{d T_{sat}}{d p} =\frac{(\gamma-1)c_v\left(T_{sat} - (p+p_{\infty})\frac{d T_{sat}}{d p}\right) }{\left((\gamma-1)c_vT_{sat} + b(p+p_{\infty}) \right)^2 } $
+\form#74:$ \rho\epsilon(p, \rho) = \frac{(p+\gamma p_{\infty})(1-\rho b)}{(\gamma-1)} +\rho\epsilon_{ref} $
+\form#75:$ \frac{d \rho\epsilon}{d p} =\left. \frac{\partial \rho\epsilon}{\partial p} \right)_{\rho} + \left. \frac{\partial \rho\epsilon}{\partial\rho } \right)_p \frac{d\rho}{dp} = \frac{1-\rho b}{(\gamma-1)} +\frac{d \rho}{d p}\left(\epsilon_{ref}-b\frac{(p+\gamma p_{\infty})}{\gamma-1}\right) $
+\form#76:$ \frac{\gamma p_{\infty}}{(\gamma-1)} $
+\form#77:$ v(p,h) = (h - bp -\epsilon_{ref})\frac{(\gamma-1)}{\gamma (p+p_{\infty})}+b $
+\form#78:$ \left. \frac{\partial v}{\partial p} \right)_h = \frac{\gamma-1}{\gamma (p+p_{\infty})^2} \left(-b(p+p_{\infty})-(h-bp-q)\right) $
+\form#79:$ \left. \frac{\partial v}{\partial h} \right)_p = \frac{(\gamma-1)}{\gamma (p+p_{\infty})} $
+\form#80:$ \left. \frac{\partial \rho}{\partial p} \right)_T = \frac{(\gamma -1) c_v T}{\left((\gamma - 1)* c_v * T + b * (p + p_{\infty})\right)^2} $
+\form#81:$ -(1. - 10^{-15})*p_{\infty} + 10^{-15} $
+\form#82:$ " :\;too\;low\;pressure \;in\; EosNASG\;"$
+\form#83:$ if \; p < -(1. - 10^{-15})*p_{\infty} + 10^{-15} \; then \; p= -(1. - 10^{-15})*p_{\infty} + 10^{-15} $
+\form#84:$ p_{\infty} $
+\form#85:$ b $
+\form#86:$ \ "NASG" $
+\form#87:$ \gamma, \; p_{infty}, \; c_v, \; e_{ref}, s_{ref}$
+\form#88:$ \neq 5$
+\form#89:$ T(\rho, p) = \frac{p+p_{\infty}}{\rho c_v (\gamma-1)}$
+\form#90:$ \epsilon (\rho, p) = \frac{p + \gamma p_{\infty}}{\rho \ (\gamma-1)} \ + \ \epsilon_{ref} $
+\form#91:$ p(\rho, \epsilon) = (\gamma-1)\rho(\epsilon - \epsilon_{ref}) - \gamma p_{\infty}$
+\form#92:$ \rho(p, T) = \frac{p + \gamma p_{\infty} }{T \ c_v \ (\gamma-1)}\ $
+\form#93:$ c(p, \rho) = \sqrt{ \frac{\gamma \ (p+p_{\infty})}{\rho}} $
+\form#94:$ c(p, \rho) = \sqrt{ \frac{(\gamma-1) \ p_I + p_k + \gamma \ p_{\infty}}{\rho}} $
+\form#95:$ s(T, p) = c_v \ ln \left( \frac{T^\gamma} { (p+p_{\infty})^{(\gamma-1)} } \right)+s_{ref} $
+\form#96:$ p_f = (p_i+p_{\infty}) \left( \frac{\rho_f}{\rho_i} \right) ^\gamma -p_{\infty} $
+\form#97:$ p_f = (p_i+p_{\infty}) \frac{ (\gamma+1)*\rho_f - (\gamma-1)*\rho_i }{ (\gamma+1)*\rho_i-(\gamma-1)*\rho_f } -p_{\infty} $
+\form#98:$ \rho_f = \rho_i \left( \frac{p_f+p_{\infty}}{ p_i+p_{\infty}}\right) ^\frac{1}{\gamma} $
+\form#99:$ \left. \frac{\partial \rho}{\partial p} \right)_s = \frac{\rho_f}{ \gamma \ (p_f+p_{\infty})} $
+\form#100:$ \rho_f =\rho_i\frac{ (\gamma + 1)*(p_f+p_{\infty}) + (\gamma - 1)*(p_i+p_{\infty})}{(\gamma - 1)(p_f+p_{\infty}) +(\gamma + 1)(p_i+p_{\infty})}$
+\form#101:$ \left. \frac{\partial \rho}{\partial p} \right)_{Hug} = \frac{4\gamma \rho_i \ (p_i+p_{\infty})}{ \left( (\gamma - 1)(p_f+p_{\infty}) +(\gamma + 1)(p_i+p_{\infty}) \right) ^2} $
+\form#102:$ \rho_f = \rho_i \frac{\gamma (p_f+p_{\infty})}{\gamma (p_f+p_{\infty}) + p_i - p_f} $
+\form#103:$ \frac{d\rho}{dp} = \rho_i \frac{\gamma (p_i + p_{\infty})}{\left(\gamma (p_f+p_{\infty}) + p_i - p_f\right)^2} $
+\form#104:$ h(p_f,{\rho_f})= \frac{\gamma}{(\gamma-1)}\frac{p_f+p_{\infty}}{\rho_f} +e_{ref} $
+\form#105:$ \frac{dh}{dp}=\frac{\gamma}{(\gamma-1)}\frac{ \rho_f - (p_f+p_{\infty}) \frac{d\rho}{dp} }{\rho_f^2} $
+\form#106:$ \rho(p, T_{sat}) = \frac{p+p_{\infty}}{T_{sat} \ c_v \ (\gamma-1)}\ $
+\form#107:$\frac{d \rho}{d p} = \left. \frac{\partial \rho}{\partial p} \right)_{T_{sat}} + \left. \frac{\partial \rho}{\partial T_{sat} } \right)_p \frac{d T_{sat}}{d p} =\frac{(\gamma-1)c_v\left(T_{sat} - (p+p_{\infty})\frac{d T_{sat}}{d p}\right) }{\left((\gamma-1)c_vT_{sat}\right)^2 }$
+\form#108:$ \rho\epsilon(p, \rho) = \frac{p+\gamma p_{\infty}}{(\gamma-1)} +\rho\epsilon_{ref}$
+\form#109:$ \frac{d \rho\epsilon}{d p} =\left. \frac{\partial \rho\epsilon}{\partial p} \right)_{\rho} + \left. \frac{\partial \rho\epsilon}{\partial\rho } \right)_p \frac{d\rho}{dp} = \frac{1}{(\gamma-1)} +\frac{d \rho}{d p}\epsilon_{ref} $
+\form#110:$ v= (h - \epsilon_{ref})\frac{(\gamma-1)}{\gamma (p+p_{\infty})} $
+\form#111:$ \left. \frac{\partial v}{\partial p} \right)_h = - \frac{(\gamma-1)(h-\epsilon_{ref})}{\gamma (p+p_{\infty})^2} $
+\form#112:$ " :\;too\;low\;pressure \;in\; EosSG\;"$
+\form#113:$ \ "SG" $
+\form#114:\[ \frac{U^{n+1}_i-U^{n}_i}{\Delta t} = -\sum_{faces} \vec{F}^*_f \cdot \vec{n}_f \]

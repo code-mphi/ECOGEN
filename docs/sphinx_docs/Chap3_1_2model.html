@@ -1,39 +1,41 @@
 
 
 <!DOCTYPE html>
-<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8">
+  <meta charset="utf-8" />
   
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
   <title>ModelV4.xml &mdash; ECOGEN 2.0 documentation</title>
   
 
   
-  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+
   
   
 
   
-  <script type="text/javascript" src="_static/js/modernizr.min.js"></script>
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
         <script src="_static/jquery.js"></script>
         <script src="_static/underscore.js"></script>
         <script src="_static/doctools.js"></script>
-        <script src="_static/language_data.js"></script>
-        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     
     <script type="text/javascript" src="_static/js/theme.js"></script>
 
     
-
-  
-  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
-  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="MeshV5.xml" href="Chap3_1_3mesh.html" />
@@ -78,6 +80,7 @@
           
         </div>
 
+        
         <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
           
             
@@ -121,6 +124,7 @@
             
           
         </div>
+        
       </div>
     </nav>
 
@@ -155,11 +159,13 @@
 
 
 
+
+
 <div role="navigation" aria-label="breadcrumbs navigation">
 
   <ul class="wy-breadcrumbs">
     
-      <li><a href="index.html">Docs</a> &raquo;</li>
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
         
           <li><a href="Chap3_IO_Chapter.html">I/O descriptions</a> &raquo;</li>
         
@@ -170,7 +176,7 @@
     
       <li class="wy-breadcrumbs-aside">
         
-            
+          
             <a href="_sources/Chap3_1_2model.rst.txt" rel="nofollow"> View page source</a>
           
         
@@ -189,7 +195,7 @@
 <p>Fluid mechanics models used in the computation are specified in the <em>modelv4.xml</em> file. It is <strong>mandatory</strong> located in the folder of the current case. A typical form of this file is:</p>
 <div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="cp">&lt;?xml version = &quot;1.0&quot; encoding = &quot;UTF-8&quot; standalone = &quot;yes&quot;?&gt;</span>
 <span class="nt">&lt;model&gt;</span>
-  <span class="nt">&lt;flowModel</span> <span class="na">name=</span><span class="s">&quot;Kapila&quot;</span> <span class="na">numberPhases=</span><span class="s">&quot;2&quot;</span> <span class="na">alphaNull=</span><span class="s">&quot;false&quot;</span><span class="nt">/&gt;</span>
+  <span class="nt">&lt;flowModel</span> <span class="na">name=</span><span class="s">&quot;PressureVelocityEq&quot;</span> <span class="na">numberPhases=</span><span class="s">&quot;2&quot;</span> <span class="na">alphaNull=</span><span class="s">&quot;false&quot;</span><span class="nt">/&gt;</span>
   <span class="nt">&lt;EOS</span> <span class="na">name=</span><span class="s">&quot;IG_air.xml&quot;</span><span class="nt">/&gt;</span>
   <span class="nt">&lt;EOS</span> <span class="na">name=</span><span class="s">&quot;SG_water.xml&quot;</span><span class="nt">/&gt;</span>
 <span class="nt">&lt;/model&gt;</span>
@@ -197,15 +203,15 @@
 </div>
 <div class="section" id="flow-model">
 <span id="sec-input-flowmodel"></span><h2>Flow model<a class="headerlink" href="#flow-model" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;flowModel</span> <span class="na">name=</span><span class="s">&quot;Kapila&quot;</span> <span class="na">numberPhases=</span><span class="s">&quot;2&quot;</span> <span class="na">numberTransports=</span><span class="s">&quot;1&quot;</span> <span class="na">alphaNull=</span><span class="s">&quot;false&quot;</span><span class="nt">/&gt;</span>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;flowModel</span> <span class="na">name=</span><span class="s">&quot;PressureVelocityEq&quot;</span> <span class="na">numberPhases=</span><span class="s">&quot;2&quot;</span> <span class="na">numberTransports=</span><span class="s">&quot;1&quot;</span> <span class="na">alphaNull=</span><span class="s">&quot;false&quot;</span><span class="nt">/&gt;</span>
 </pre></div>
 </div>
 <p>The <code class="code xml docutils literal notranslate"><span class="name tag"><span class="pre">&lt;flowModel&gt;</span></span></code> markup is <strong>mandatory</strong> to specify the mathematical model to solve during the computation. This markup may contain the following attributes:</p>
 <ul class="simple">
-<li><p><code class="code xml docutils literal notranslate"><span class="pre">name</span></code>: Name of the mathematical flow model. This attribute can take the values: <em>Euler</em> <a class="bibtex reference internal" href="zBibliography.html#euler1757principes" id="id1">[Eul57]</a>, <em>Kapila</em> <a class="bibtex reference internal" href="zBibliography.html#relaxjcp" id="id2">[SPB09]</a><a class="bibtex reference internal" href="zBibliography.html#kapila2001" id="id3">[KMB+01]</a>, <em>multip</em>, <em>ThermalEq</em> <a class="bibtex reference internal" href="zBibliography.html#martelotboiling" id="id4">[LMSN14]</a> or <em>EulerHomogeneous</em>.</p></li>
+<li><p><code class="code xml docutils literal notranslate"><span class="pre">name</span></code>: Name of the mathematical flow model. This attribute can take the values: <em>Euler</em> <span id="id1">[<a class="reference internal" href="zBibliography.html#id2">Eul57</a>]</span>, <em>PressureVelocityEq</em> (previously named <em>Kapila</em>) <span id="id2">[<a class="reference internal" href="zBibliography.html#id234">SPB09</a>]</span><span id="id3">[<a class="reference internal" href="zBibliography.html#id286">KMB+01</a>]</span>, <em>VelocityEq</em> previously named <em>multiP</em>), <em>TemperaturePressureVelocityEq</em> (previously named <em>ThermalEq</em>) <span id="id4">[<a class="reference internal" href="zBibliography.html#id201">LMSN14</a>]</span> or <em>EulerHomogeneous</em>.</p></li>
 <li><p><code class="code xml docutils literal notranslate"><span class="pre">numberPhases</span></code>: Integer number corresponding to the number of phases present in the simulation. The total amount of equations is related to this number. This attribute is not necessary when the values of <code class="code xml docutils literal notranslate"><span class="pre">name</span></code> are <em>Euler</em> or <em>EulerHomogeneous</em>.</p></li>
 <li><p><code class="code xml docutils literal notranslate"><span class="pre">numberTransports</span></code>: This attribute is optionnal and is set to 0 as default. It can be used to add specific variables advected in the flow (color functions).</p></li>
-<li><p><code class="code xml docutils literal notranslate"><span class="pre">alphaNull</span></code>: For <em>Kapila</em>’s model, the volume fraction can either be null (<em>true</em>) or not (<em>false</em>) and this choice is determined by this parameter. Default value is <em>false</em>.</p></li>
+<li><p><code class="code xml docutils literal notranslate"><span class="pre">alphaNull</span></code>: For <em>PressureVelocityEq</em> and <em>VelocityEq</em> models, the volume fraction can either be null (<em>true</em>) or not (<em>false</em>) and this choice is determined by this parameter. Default value is <em>false</em>.</p></li>
 </ul>
 <p><strong>Remark:</strong></p>
 <p>If <em>EulerHomogeneous</em> model is chosen, two additional attributes may be used: <code class="code xml docutils literal notranslate"><span class="pre">liquid</span></code> and <code class="code xml docutils literal notranslate"><span class="pre">vapor</span></code> to specify the number corresponding to the liquid phase and the vapor phase. They are phase 0 for the first and 1 for the second.</p>
@@ -236,7 +242,12 @@
 </div>
 <p>An additional markup <code class="code xml docutils literal notranslate"><span class="name tag"><span class="pre">&lt;relaxation&gt;</span></span></code> may be used to impose some specific equilibrium between the phases depending on the flow model used. The attribute <code class="code xml docutils literal notranslate"><span class="pre">type</span></code> specifies the type of equilibrium:</p>
 <ul class="simple">
-<li><p><em>P</em>: A pressure equilibrium is imposed at every location of the flow. It does not require additional attributes.</p></li>
+<li><p><em>P</em>: A pressure equilibrium is imposed at every location of the flow. The attribute <code class="code xml docutils literal notranslate"><span class="pre">speed</span></code> can be added to specify the speed at which the relaxation operates (<em>infinite</em> or <em>finite</em>). Default is <em>infinite</em>.</p></li>
+</ul>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;relaxation</span> <span class="na">type=</span><span class="s">&quot;P&quot;</span> <span class="na">speed=</span><span class="s">&quot;infinite&quot;</span><span class="nt">/&gt;</span>
+</pre></div>
+</div>
+<ul class="simple">
 <li><p><em>PT</em>: Both pressure and thermal equilibrium are imposed at every location of the flow. It does not require additional attributes.</p></li>
 <li><p><em>PTMu</em>: A thermodynamical equilibrium is imposed at every location of the flow. It must be associated with the node <code class="code xml docutils literal notranslate"><span class="name tag"><span class="pre">&lt;dataPTMu&gt;</span></span></code> whose attributes are <code class="code xml docutils literal notranslate"><span class="pre">liquid</span></code> and <code class="code xml docutils literal notranslate"><span class="pre">vapor</span></code> to specify the name of the EOS of the liquid and the vapor phase. Hereafter the complete node when <em>PTMu</em> is used:</p></li>
 </ul>
@@ -252,7 +263,7 @@
 <ul class="simple">
 <li><p><em>heating</em>: Related to a thermal energy heating/cooling. This attribute requires the <code class="code xml docutils literal notranslate"><span class="name tag"><span class="pre">&lt;dataHeating&gt;</span></span></code> node with the attribute <code class="code xml docutils literal notranslate"><span class="pre">volumeHeatPower</span></code>; a real number corresponding to the power by volume unit added to the flow (unit: W/m3 (SI)).</p></li>
 </ul>
-<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;sourceTerms</span> <span class="na">type=</span><span class="s">&quot;heating&quot;</span><span class="nt">&gt;</span>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;sourceTerms</span> <span class="na">type=</span><span class="s">&quot;heating&quot;</span> <span class="na">order=</span><span class="s">&quot;EULER&quot;</span><span class="nt">&gt;</span>
   <span class="nt">&lt;dataHeating</span> <span class="na">volumeHeatPower=</span><span class="s">&quot;1.e6&quot;</span><span class="nt">/&gt;</span>
 <span class="nt">&lt;/sourceTerms&gt;</span>
 </pre></div>
@@ -260,7 +271,7 @@
 <ul class="simple">
 <li><p><em>gravity</em>: If the gravity is considered. The node <code class="code xml docutils literal notranslate"><span class="name tag"><span class="pre">&lt;dataGravity&gt;</span></span></code> must be present with the attributes <code class="code xml docutils literal notranslate"><span class="pre">x</span></code>, <code class="code xml docutils literal notranslate"><span class="pre">y</span></code> and <code class="code xml docutils literal notranslate"><span class="pre">z</span></code> giving the coordinates for the gravity acceleration vector in real numbers (unit: m/s2 (SI)).</p></li>
 </ul>
-<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;sourceTerms</span> <span class="na">type=</span><span class="s">&quot;gravity&quot;</span><span class="nt">&gt;</span>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;sourceTerms</span> <span class="na">type=</span><span class="s">&quot;gravity&quot;</span> <span class="na">order=</span><span class="s">&quot;EULER&quot;</span><span class="nt">&gt;</span>
   <span class="nt">&lt;gravity</span> <span class="na">x=</span><span class="s">&quot;0.&quot;</span> <span class="na">y=</span><span class="s">&quot;-9.81&quot;</span> <span class="na">z=</span><span class="s">&quot;0.&quot;</span><span class="nt">/&gt;</span>
 <span class="nt">&lt;/sourceTerms&gt;</span>
 </pre></div>
@@ -268,12 +279,19 @@
 <ul class="simple">
 <li><p><em>MRF</em>: For a simulation in a moving reference frame. Allow to compute solution in a rotating frame. The node <code class="code xml docutils literal notranslate"><span class="name tag"><span class="pre">&lt;omega&gt;</span></span></code> requires the attributes <code class="code xml docutils literal notranslate"><span class="pre">x</span></code>, <code class="code xml docutils literal notranslate"><span class="pre">y</span></code> and <code class="code xml docutils literal notranslate"><span class="pre">z</span></code> giving the coordinates for the rotating vector in real numbers (unit: rad/s (SI)). The node <code class="code xml docutils literal notranslate"><span class="name tag"><span class="pre">&lt;timeToOmega&gt;</span></span></code> is optional and allow to specify a progressing acceleration (linear) to the final rotating velocity (requires the attribute <code class="code xml docutils literal notranslate"><span class="pre">tf</span></code> for acceleration time).</p></li>
 </ul>
-<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;sourceTerms</span> <span class="na">type=</span><span class="s">&quot;MRF&quot;</span><span class="nt">&gt;</span>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;sourceTerms</span> <span class="na">type=</span><span class="s">&quot;MRF&quot;</span> <span class="na">order=</span><span class="s">&quot;RK4&quot;</span><span class="nt">&gt;</span>
   <span class="nt">&lt;omega</span> <span class="na">x=</span><span class="s">&quot;0.&quot;</span> <span class="na">y=</span><span class="s">&quot;0.&quot;</span> <span class="na">z=</span><span class="s">&quot;1.&quot;</span><span class="nt">/&gt;</span>
   <span class="nt">&lt;timeToOmega</span> <span class="na">tf=</span><span class="s">&quot;1.e-3&quot;</span><span class="nt">/&gt;</span>  <span class="c">&lt;!-- Optional: If activated, the angular velocity increase linearly to omega in during tf --&gt;</span>
 <span class="nt">&lt;/sourceTerms&gt;</span>
 </pre></div>
 </div>
+<p>Source-term integration can be done up to 4th order. Available integration schemes are:</p>
+<ul class="simple">
+<li><p><em>EULER</em> (1st order)</p></li>
+<li><p>Runge–Kutta 2 <em>RK2</em> (2nd order)</p></li>
+<li><p>Runge–Kutta 4 <em>RK4</em> (4th order)</p></li>
+</ul>
+<p>Scheme selection is done through <code class="code xml docutils literal notranslate"><span class="pre">order</span></code> attribute.</p>
 </div>
 <div class="section" id="symmetry-terms">
 <h2>Symmetry terms<a class="headerlink" href="#symmetry-terms" title="Permalink to this headline">¶</a></h2>
@@ -300,7 +318,7 @@
 <p>Depending on the model chosen in section <a class="reference internal" href="#sec-input-flowmodel"><span class="std std-ref">Flow model</span></a>, additional physical effects can be added. This is the case for surface tension, viscosity and conductive heat transfers. These additional physical effects are obtained thanks to the additional markup <code class="code xml docutils literal notranslate"><span class="pre">additionalPhysics</span></code> with the attribute <code class="code xml docutils literal notranslate"><span class="pre">type</span></code> that can take different value according to the chosen effect.</p>
 <div class="section" id="surface-tension">
 <h3>Surface tension<a class="headerlink" href="#surface-tension" title="Permalink to this headline">¶</a></h3>
-<p>This physical effect is obtained by using the type <em>surface tension</em>. Then it requires the node <code class="code xml docutils literal notranslate"><span class="pre">dataSurfaceTension</span></code> with following attributes:</p>
+<p>This physical effect is obtained by using the type <em>surface tension</em> and its treatment is detailed in <span id="id5">[<a class="reference internal" href="zBibliography.html#id165">SPD+17</a>]</span>. Then it requires the node <code class="code xml docutils literal notranslate"><span class="pre">dataSurfaceTension</span></code> with following attributes:</p>
 <ul class="simple">
 <li><p><code class="code xml docutils literal notranslate"><span class="pre">transport</span></code>: This is the name of advected variable used as color function for surface-tension terms. This advected variable has been precised in the section <a class="reference internal" href="#sec-input-transport"><span class="std std-ref">Advected additional variables</span></a>. The name should be the same.</p></li>
 <li><p><code class="code xml docutils literal notranslate"><span class="pre">sigma</span></code>: A real number for the surface-tension coefficient (unit: N/m (SI)).</p></li>
@@ -330,29 +348,29 @@
            
           </div>
           <footer>
-  
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
-      
-        <a href="Chap3_1_3mesh.html" class="btn btn-neutral float-right" title="MeshV5.xml" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
-      
-      
-        <a href="Chap3_1_1main.html" class="btn btn-neutral float-left" title="MainV5.xml" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
-      
+        <a href="Chap3_1_3mesh.html" class="btn btn-neutral float-right" title="MeshV5.xml" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="Chap3_1_1main.html" class="btn btn-neutral float-left" title="MainV5.xml" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
     </div>
-  
 
   <hr/>
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright 2019, code-mphi
+        &#169; Copyright 2019, code-mphi.
 
     </p>
   </div>
-  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
 
 </footer>
-
         </div>
       </div>
 
@@ -360,7 +378,6 @@
 
   </div>
   
-
 
   <script type="text/javascript">
       jQuery(function () {

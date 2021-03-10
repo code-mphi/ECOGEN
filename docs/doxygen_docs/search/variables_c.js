@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['name',['NAME',['../classModEuler.html#a38d0ebaa7fd593ed6d296eb3f44ab667',1,'ModEuler::NAME()'],['../classModEulerHomogeneous.html#a0cc5206e8e6ea49a866458b1171036df',1,'ModEulerHomogeneous::NAME()'],['../classModKapila.html#a54d468ac5f92702e8f67edaf108721ea',1,'ModKapila::NAME()'],['../classModMultiP.html#a9672655beb54b2a4808430b18967ccea',1,'ModMultiP::NAME()'],['../classModThermalEq.html#aed14e902ec9b1d3520e34abf4c053f26',1,'ModThermalEq::NAME()']]],
+  ['name',['NAME',['../classModEuler.html#a38d0ebaa7fd593ed6d296eb3f44ab667',1,'ModEuler::NAME()'],['../classModEulerHomogeneous.html#a0cc5206e8e6ea49a866458b1171036df',1,'ModEulerHomogeneous::NAME()'],['../classModPTUEq.html#a578757672f4c1bfd9a16ff78fde27ced',1,'ModPTUEq::NAME()'],['../classModPUEq.html#a57774a201708f4043a746b17bcf4339d',1,'ModPUEq::NAME()'],['../classModUEq.html#abb92bd99a55eb5cd78278f9d4b066f84',1,'ModUEq::NAME()']]],
   ['ncells_5fglobal_5f',['nCells_global_',['../classdecomposition_1_1Decomposition.html#aead26bbaf926d97affedc2557670e4de',1,'decomposition::Decomposition']]],
   ['ncpu',['Ncpu',['../Parallel_8cpp.html#a601520f53e2d3d67744513d176ccf90a',1,'Ncpu():&#160;Parallel.cpp'],['../Parallel_8h.html#a601520f53e2d3d67744513d176ccf90a',1,'Ncpu():&#160;Parallel.cpp']]],
   ['next',['next',['../uniontinyxml2_1_1MemPoolT_1_1Chunk.html#ae97e0810e7bf7a28264f3e1f112d52b4',1,'tinyxml2::MemPoolT::Chunk']]],

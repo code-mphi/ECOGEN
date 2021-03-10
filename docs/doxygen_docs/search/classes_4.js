@@ -30,6 +30,7 @@ var searchData=
   ['errorxmllimite',['ErrorXMLLimite',['../classErrorXMLLimite.html',1,'']]],
   ['errorxmlmateriauinconnu',['ErrorXMLMateriauInconnu',['../classErrorXMLMateriauInconnu.html',1,'']]],
   ['errorxmlracine',['ErrorXMLRacine',['../classErrorXMLRacine.html',1,'']]],
+  ['errorxmlrelaxation',['ErrorXMLRelaxation',['../classErrorXMLRelaxation.html',1,'']]],
   ['errorxmlstretching',['ErrorXMLStretching',['../classErrorXMLStretching.html',1,'']]],
   ['errorxmltermesource',['ErrorXMLTermeSource',['../classErrorXMLTermeSource.html',1,'']]]
 ];

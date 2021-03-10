@@ -1,6 +1,5 @@
 var classstretchZone =
 [
-    [ "stretchZone", "classstretchZone.html#aaf404f3281344d81adb3f32a41bc21d3", null ],
     [ "stretchZone", "classstretchZone.html#aa1c4a0a3a5b8400f8c56e845bddecbcf", null ],
     [ "~stretchZone", "classstretchZone.html#abb423a2e2c17fc899edc16c62cb16080", null ],
     [ "stretching", "classstretchZone.html#a6de34502657250a65ca21f5c5c989734", null ],

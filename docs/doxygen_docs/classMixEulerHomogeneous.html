@@ -188,12 +188,8 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a3c72212c7a1c8737e6fcb4632fb46ec8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa1e7280d81361b48808a0f9d8c27a719"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMixEulerHomogeneous.html#aa1e7280d81361b48808a0f9d8c27a719">fillBuffer</a> (double *buffer, int &amp;counter) const </td></tr>
 <tr class="separator:aa1e7280d81361b48808a0f9d8c27a719"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa0f4ad48066195b956f95540c4a05442"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMixEulerHomogeneous.html#aa0f4ad48066195b956f95540c4a05442">fillBuffer</a> (std::vector&lt; double &gt; &amp;dataToSend) const </td></tr>
-<tr class="separator:aa0f4ad48066195b956f95540c4a05442"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6869d85e742b2b640536d16031a4306e"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMixEulerHomogeneous.html#a6869d85e742b2b640536d16031a4306e">getBuffer</a> (double *buffer, int &amp;counter)</td></tr>
 <tr class="separator:a6869d85e742b2b640536d16031a4306e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a83e71dcbbe5836ee1a5d0e6c14cea785"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMixEulerHomogeneous.html#a83e71dcbbe5836ee1a5d0e6c14cea785">getBuffer</a> (std::vector&lt; double &gt; &amp;dataToReceive, int &amp;counter)</td></tr>
-<tr class="separator:a83e71dcbbe5836ee1a5d0e6c14cea785"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad1010b9ad6fb764b5bb9b7abc93bb0c4"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMixEulerHomogeneous.html#ad1010b9ad6fb764b5bb9b7abc93bb0c4">computeSlopesMixture</a> (const <a class="el" href="classMixture.html">Mixture</a> &amp;sLeft, const <a class="el" href="classMixture.html">Mixture</a> &amp;sRight, const double &amp;distance)</td></tr>
 <tr class="separator:ad1010b9ad6fb764b5bb9b7abc93bb0c4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a71d8257531ceeb8debe0bb18b0181f39"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMixEulerHomogeneous.html#a71d8257531ceeb8debe0bb18b0181f39">setToZero</a> ()</td></tr>
@@ -261,19 +257,23 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a7ca8882c4fd979a284c6f1d024cbb09e inherit pub_methods_classMixture"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMixture.html#a7ca8882c4fd979a284c6f1d024cbb09e">computeTsat</a> (const <a class="el" href="classEos.html">Eos</a> *eosLiq, const <a class="el" href="classEos.html">Eos</a> *eosVap, const double &amp;<a class="el" href="Cell_8h.html#acca207de98b59d1c41e3975008706d61a8e7f8389b914e827058d694b31468b3a">pressure</a>, double *dTsat=0)</td></tr>
 <tr class="memdesc:a7ca8882c4fd979a284c6f1d024cbb09e inherit pub_methods_classMixture"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute saturation temperature for a liq/vapor couple of fluid at given pressure.  <a href="#a7ca8882c4fd979a284c6f1d024cbb09e">More...</a><br /></td></tr>
 <tr class="separator:a7ca8882c4fd979a284c6f1d024cbb09e inherit pub_methods_classMixture"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:afa73c554445ad7ed8fa3f1afcffc924b inherit pub_methods_classMixture"><td class="memItemLeft" align="right" valign="top">virtual double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMixture.html#afa73c554445ad7ed8fa3f1afcffc924b">computePressure</a> (double *masses, const double &amp;mixInternalEnerg, <a class="el" href="classPhase.html">Phase</a> **phases, const int &amp;numberPhases)</td></tr>
-<tr class="separator:afa73c554445ad7ed8fa3f1afcffc924b inherit pub_methods_classMixture"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa65f8ba7f49feb64ccfdb614005b3638 inherit pub_methods_classMixture"><td class="memItemLeft" align="right" valign="top">virtual double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMixture.html#aa65f8ba7f49feb64ccfdb614005b3638">computeTemperature</a> (double *masses, const double &amp;<a class="el" href="Cell_8h.html#acca207de98b59d1c41e3975008706d61a8e7f8389b914e827058d694b31468b3a">pressure</a>, <a class="el" href="classPhase.html">Phase</a> **phases, const int &amp;numberPhases)</td></tr>
-<tr class="separator:aa65f8ba7f49feb64ccfdb614005b3638 inherit pub_methods_classMixture"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a49fb0ebdcb97908a29eee9faad9473a9 inherit pub_methods_classMixture"><td class="memItemLeft" align="right" valign="top">virtual double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMixture.html#a49fb0ebdcb97908a29eee9faad9473a9">computeTemperatureIsentrope</a> (const double *Yk, const double &amp;p0, const double &amp;T0, const double &amp;p, const int &amp;numberPhases, double *dTdp=0)</td></tr>
-<tr class="memdesc:a49fb0ebdcb97908a29eee9faad9473a9 inherit pub_methods_classMixture"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute temperature for a mixture evolving at thermal equilibrium along mixture isentropic path.  <a href="#a49fb0ebdcb97908a29eee9faad9473a9">More...</a><br /></td></tr>
-<tr class="separator:a49fb0ebdcb97908a29eee9faad9473a9 inherit pub_methods_classMixture"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad62c34e38a7e0afb6eced05692c6a60b inherit pub_methods_classMixture"><td class="memItemLeft" align="right" valign="top">virtual double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMixture.html#ad62c34e38a7e0afb6eced05692c6a60b">computeEnthalpyIsentrope</a> (const double *Yk, const double &amp;p0, const double &amp;T0, const double &amp;p, const int &amp;numberPhases, double *dhdp=0)</td></tr>
-<tr class="memdesc:ad62c34e38a7e0afb6eced05692c6a60b inherit pub_methods_classMixture"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute mixture enthalpy for a mixture evolving at thermal equilibrium along mixture isentropic path.  <a href="#ad62c34e38a7e0afb6eced05692c6a60b">More...</a><br /></td></tr>
-<tr class="separator:ad62c34e38a7e0afb6eced05692c6a60b inherit pub_methods_classMixture"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa73fdd57594768d8afa863c9ebb9d30d inherit pub_methods_classMixture"><td class="memItemLeft" align="right" valign="top">virtual double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMixture.html#aa73fdd57594768d8afa863c9ebb9d30d">computeVolumeIsentrope</a> (const double *Yk, const double &amp;p0, const double &amp;T0, const double &amp;p, const int &amp;numberPhases, double *dvdp=0)</td></tr>
-<tr class="memdesc:aa73fdd57594768d8afa863c9ebb9d30d inherit pub_methods_classMixture"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute mixture specific volume for a mixture evolving at thermal equilibrium along mixture isentropic path.  <a href="#aa73fdd57594768d8afa863c9ebb9d30d">More...</a><br /></td></tr>
-<tr class="separator:aa73fdd57594768d8afa863c9ebb9d30d inherit pub_methods_classMixture"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a42860a24cfb9aeb53d6ac4087ccff492 inherit pub_methods_classMixture"><td class="memItemLeft" align="right" valign="top">virtual double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMixture.html#a42860a24cfb9aeb53d6ac4087ccff492">computePressure</a> (double *, const double &amp;, <a class="el" href="classPhase.html">Phase</a> **, const int &amp;)</td></tr>
+<tr class="separator:a42860a24cfb9aeb53d6ac4087ccff492 inherit pub_methods_classMixture"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad7d51b3b4a53ecc4a71bb9a8efa139d1 inherit pub_methods_classMixture"><td class="memItemLeft" align="right" valign="top">virtual double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMixture.html#ad7d51b3b4a53ecc4a71bb9a8efa139d1">computeTemperature</a> (double *, const double &amp;, <a class="el" href="classPhase.html">Phase</a> **, const int &amp;)</td></tr>
+<tr class="separator:ad7d51b3b4a53ecc4a71bb9a8efa139d1 inherit pub_methods_classMixture"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a00a84d872eec0d525c559adba9d4e1d1 inherit pub_methods_classMixture"><td class="memItemLeft" align="right" valign="top">virtual double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMixture.html#a00a84d872eec0d525c559adba9d4e1d1">computeTemperatureIsentrope</a> (const double *, const double &amp;, const double &amp;, const double &amp;, const int &amp;, double *=0)</td></tr>
+<tr class="memdesc:a00a84d872eec0d525c559adba9d4e1d1 inherit pub_methods_classMixture"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute temperature for a mixture evolving at thermal equilibrium along mixture isentropic path.  <a href="#a00a84d872eec0d525c559adba9d4e1d1">More...</a><br /></td></tr>
+<tr class="separator:a00a84d872eec0d525c559adba9d4e1d1 inherit pub_methods_classMixture"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a871c78477862198b5935491832374d91 inherit pub_methods_classMixture"><td class="memItemLeft" align="right" valign="top">virtual double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMixture.html#a871c78477862198b5935491832374d91">computeEnthalpyIsentrope</a> (const double *, const double &amp;, const double &amp;, const double &amp;, const int &amp;, double *=0)</td></tr>
+<tr class="memdesc:a871c78477862198b5935491832374d91 inherit pub_methods_classMixture"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute mixture enthalpy for a mixture evolving at thermal equilibrium along mixture isentropic path.  <a href="#a871c78477862198b5935491832374d91">More...</a><br /></td></tr>
+<tr class="separator:a871c78477862198b5935491832374d91 inherit pub_methods_classMixture"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a783b063f77a2a60cf95298cf0c0c9d43 inherit pub_methods_classMixture"><td class="memItemLeft" align="right" valign="top">virtual double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMixture.html#a783b063f77a2a60cf95298cf0c0c9d43">computeVolumeIsentrope</a> (const double *, const double &amp;, const double &amp;, const double &amp;, const int &amp;, double *=0)</td></tr>
+<tr class="memdesc:a783b063f77a2a60cf95298cf0c0c9d43 inherit pub_methods_classMixture"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute mixture specific volume for a mixture evolving at thermal equilibrium along mixture isentropic path.  <a href="#a783b063f77a2a60cf95298cf0c0c9d43">More...</a><br /></td></tr>
+<tr class="separator:a783b063f77a2a60cf95298cf0c0c9d43 inherit pub_methods_classMixture"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afd161a1ace508dd31ef964c35b82b4ea inherit pub_methods_classMixture"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMixture.html#afd161a1ace508dd31ef964c35b82b4ea">fillBuffer</a> (std::vector&lt; double &gt; &amp;) const </td></tr>
+<tr class="separator:afd161a1ace508dd31ef964c35b82b4ea inherit pub_methods_classMixture"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a97b611c07c1ca2a5c79dcaf4d557f030 inherit pub_methods_classMixture"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMixture.html#a97b611c07c1ca2a5c79dcaf4d557f030">getBuffer</a> (std::vector&lt; double &gt; &amp;, int &amp;)</td></tr>
+<tr class="separator:a97b611c07c1ca2a5c79dcaf4d557f030 inherit pub_methods_classMixture"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af41015fcffa92d07149387e37135281c inherit pub_methods_classMixture"><td class="memItemLeft" align="right" valign="top">virtual const double &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMixture.html#af41015fcffa92d07149387e37135281c">getTemperature</a> () const </td></tr>
 <tr class="separator:af41015fcffa92d07149387e37135281c inherit pub_methods_classMixture"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:adba6f7140e6dc7bf639da88792e25fe7 inherit pub_methods_classMixture"><td class="memItemLeft" align="right" valign="top">virtual const double &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMixture.html#adba6f7140e6dc7bf639da88792e25fe7">getFrozenSoundSpeed</a> () const </td></tr>
@@ -393,7 +393,7 @@ Private Attributes</h2></td></tr>
           <td class="memname">void MixEulerHomogeneous::allocateAndCopyMixture </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="classMixture.html">Mixture</a> **&#160;</td>
-          <td class="paramname"><em>mixture</em></td><td>)</td>
+          <td class="paramname"></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -412,7 +412,7 @@ Private Attributes</h2></td></tr>
   </dd>
 </dl>
 
-<p>Reimplemented from <a class="el" href="classMixture.html#a935108e13cc3b7b9eefb5fc71f229bad">Mixture</a>.</p>
+<p>Reimplemented from <a class="el" href="classMixture.html#a8525ba0cc2b7ab1727ecbfb894657830">Mixture</a>.</p>
 
 </div>
 </div>
@@ -452,19 +452,19 @@ Private Attributes</h2></td></tr>
           <td class="memname">double MixEulerHomogeneous::computeDensity </td>
           <td>(</td>
           <td class="paramtype">const double *&#160;</td>
-          <td class="paramname"><em>alphak</em>, </td>
+          <td class="paramname">, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">const double *&#160;</td>
-          <td class="paramname"><em>rhok</em>, </td>
+          <td class="paramname">, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">const int &amp;&#160;</td>
-          <td class="paramname"><em>numberPhases</em>&#160;</td>
+          <td class="paramname">&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -490,7 +490,7 @@ Private Attributes</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>mixture density </dd></dl>
 
-<p>Reimplemented from <a class="el" href="classMixture.html#a32a6b40285fd60fa92948d5857d7e87f">Mixture</a>.</p>
+<p>Reimplemented from <a class="el" href="classMixture.html#aa580873418661ff07e3fe53c7f1ec000">Mixture</a>.</p>
 
 </div>
 </div>
@@ -505,19 +505,19 @@ Private Attributes</h2></td></tr>
           <td class="memname">double MixEulerHomogeneous::computeFrozenSoundSpeed </td>
           <td>(</td>
           <td class="paramtype">const double *&#160;</td>
-          <td class="paramname"><em>Yk</em>, </td>
+          <td class="paramname">, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">const double *&#160;</td>
-          <td class="paramname"><em>ck</em>, </td>
+          <td class="paramname">, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">const int &amp;&#160;</td>
-          <td class="paramname"><em>numberPhases</em>&#160;</td>
+          <td class="paramname">&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -543,7 +543,7 @@ Private Attributes</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>mixture frozen speed of sound </dd></dl>
 
-<p>Reimplemented from <a class="el" href="classMixture.html#aaeca2d4a508a7757dcbc24feecef8962">Mixture</a>.</p>
+<p>Reimplemented from <a class="el" href="classMixture.html#a542a920e2a093e6fda39c935e6bb17c4">Mixture</a>.</p>
 
 </div>
 </div>
@@ -558,19 +558,19 @@ Private Attributes</h2></td></tr>
           <td class="memname">double MixEulerHomogeneous::computeInternalEnergy </td>
           <td>(</td>
           <td class="paramtype">const double *&#160;</td>
-          <td class="paramname"><em>Yk</em>, </td>
+          <td class="paramname">, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">const double *&#160;</td>
-          <td class="paramname"><em>ek</em>, </td>
+          <td class="paramname">, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">const int &amp;&#160;</td>
-          <td class="paramname"><em>numberPhases</em>&#160;</td>
+          <td class="paramname">&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -596,7 +596,7 @@ Private Attributes</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>mixture specific internal energy </dd></dl>
 
-<p>Reimplemented from <a class="el" href="classMixture.html#a9bff1d0799c89ccbfde489ee90c1edca">Mixture</a>.</p>
+<p>Reimplemented from <a class="el" href="classMixture.html#aad029e027ca4873d52033a5a8226bae6">Mixture</a>.</p>
 
 </div>
 </div>
@@ -611,13 +611,13 @@ Private Attributes</h2></td></tr>
           <td class="memname">void MixEulerHomogeneous::computeMixtureVariables </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="classPhase.html">Phase</a> **&#160;</td>
-          <td class="paramname"><em>vecPhase</em>, </td>
+          <td class="paramname">, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">const int &amp;&#160;</td>
-          <td class="paramname"><em>numberPhases</em>&#160;</td>
+          <td class="paramname">&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -641,7 +641,7 @@ Private Attributes</h2></td></tr>
   </dd>
 </dl>
 
-<p>Reimplemented from <a class="el" href="classMixture.html#a5df1ed4496b8fe5aba2d0fd52e73975c">Mixture</a>.</p>
+<p>Reimplemented from <a class="el" href="classMixture.html#a0afc8d0ac4734359ac8f9b59517ef695">Mixture</a>.</p>
 
 </div>
 </div>
@@ -656,19 +656,19 @@ Private Attributes</h2></td></tr>
           <td class="memname">double MixEulerHomogeneous::computePressure </td>
           <td>(</td>
           <td class="paramtype">const double *&#160;</td>
-          <td class="paramname"><em>alphak</em>, </td>
+          <td class="paramname">, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">const double *&#160;</td>
-          <td class="paramname"><em>pk</em>, </td>
+          <td class="paramname">, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">const int &amp;&#160;</td>
-          <td class="paramname"><em>numberPhases</em>&#160;</td>
+          <td class="paramname">&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -694,7 +694,7 @@ Private Attributes</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>mixture pressure </dd></dl>
 
-<p>Reimplemented from <a class="el" href="classMixture.html#af2f8771758d28adb0543faeedc60fe5e">Mixture</a>.</p>
+<p>Reimplemented from <a class="el" href="classMixture.html#af7e858382b3326b3b2754242d01039f3">Mixture</a>.</p>
 
 </div>
 </div>
@@ -760,7 +760,7 @@ Private Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Reimplemented from <a class="el" href="classMixture.html#ae07a8cca04ccb8de8fdb9af73520b183">Mixture</a>.</p>
+<p>Reimplemented from <a class="el" href="classMixture.html#a0d477abd64025a08c71a79d87389b27d">Mixture</a>.</p>
 
 </div>
 </div>
@@ -802,7 +802,7 @@ Private Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Reimplemented from <a class="el" href="classMixture.html#a846b5af015c53eb5abbeb5b3e337acca">Mixture</a>.</p>
+<p>Reimplemented from <a class="el" href="classMixture.html#aefbe7758c7901451965ab3549a014dc8">Mixture</a>.</p>
 
 </div>
 </div>
@@ -817,7 +817,7 @@ Private Attributes</h2></td></tr>
           <td class="memname">void MixEulerHomogeneous::copyMixture </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="classMixture.html">Mixture</a> &amp;&#160;</td>
-          <td class="paramname"><em>mixture</em></td><td>)</td>
+          <td class="paramname"></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -836,7 +836,7 @@ Private Attributes</h2></td></tr>
   </dd>
 </dl>
 
-<p>Reimplemented from <a class="el" href="classMixture.html#a17f944eaa11edc3479dd3e72d8d41612">Mixture</a>.</p>
+<p>Reimplemented from <a class="el" href="classMixture.html#a57cb46154de05a4264f2496709e53acc">Mixture</a>.</p>
 
 </div>
 </div>
@@ -862,7 +862,7 @@ Private Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Reimplemented from <a class="el" href="classMixture.html#adc785e8185b7eb5b5b73d2e84c02c03b">Mixture</a>.</p>
+<p>Reimplemented from <a class="el" href="classMixture.html#afbebdd817559143a4c2f05e2cba1eea6">Mixture</a>.</p>
 
 </div>
 </div>
@@ -898,7 +898,7 @@ Private Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Reimplemented from <a class="el" href="classMixture.html#a189f208964f8cd47dfd81c8dbd45efdb">Mixture</a>.</p>
+<p>Reimplemented from <a class="el" href="classMixture.html#a1abbc15401dbcccf10596892d415fd05">Mixture</a>.</p>
 
 </div>
 </div>
@@ -934,33 +934,7 @@ Private Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Reimplemented from <a class="el" href="classMixture.html#a88227cb9c4d566497e6e7a3c6e60e339">Mixture</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="aa0f4ad48066195b956f95540c4a05442"></a>
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">void MixEulerHomogeneous::fillBuffer </td>
-          <td>(</td>
-          <td class="paramtype">std::vector&lt; double &gt; &amp;&#160;</td>
-          <td class="paramname"><em>dataToSend</em></td><td>)</td>
-          <td> const</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Reimplemented from <a class="el" href="classMixture.html#ab82fd8a855dc29770c44b5963eb1ae3b">Mixture</a>.</p>
+<p>Reimplemented from <a class="el" href="classMixture.html#ab265987433328b43346fccf33d51f8af">Mixture</a>.</p>
 
 </div>
 </div>
@@ -996,7 +970,7 @@ Private Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Reimplemented from <a class="el" href="classMixture.html#a4183aa6ecc3dfe473c9f6fef157a5366">Mixture</a>.</p>
+<p>Reimplemented from <a class="el" href="classMixture.html#ab0186201529d69fd3413123a643fc26a">Mixture</a>.</p>
 
 </div>
 </div>
@@ -1032,43 +1006,7 @@ Private Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Reimplemented from <a class="el" href="classMixture.html#a98d1283e13b2f5f6e159b8311e3d2202">Mixture</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="a83e71dcbbe5836ee1a5d0e6c14cea785"></a>
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">void MixEulerHomogeneous::getBuffer </td>
-          <td>(</td>
-          <td class="paramtype">std::vector&lt; double &gt; &amp;&#160;</td>
-          <td class="paramname"><em>dataToReceive</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">int &amp;&#160;</td>
-          <td class="paramname"><em>counter</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Reimplemented from <a class="el" href="classMixture.html#a5e816141a8d18adf26eea95db7db061e">Mixture</a>.</p>
+<p>Reimplemented from <a class="el" href="classMixture.html#a23f12899aa34facce9f5686c8b0b65c2">Mixture</a>.</p>
 
 </div>
 </div>
@@ -1104,7 +1042,7 @@ Private Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Reimplemented from <a class="el" href="classMixture.html#ac1d7e275608d84d276e05140dd377146">Mixture</a>.</p>
+<p>Reimplemented from <a class="el" href="classMixture.html#ad6edb4f5956539a38df516e2d87ca366">Mixture</a>.</p>
 
 </div>
 </div>
@@ -1419,7 +1357,7 @@ Private Attributes</h2></td></tr>
           <td class="memname">void MixEulerHomogeneous::internalEnergyToTotalEnergy </td>
           <td>(</td>
           <td class="paramtype">std::vector&lt; <a class="el" href="classQuantitiesAddPhys.html">QuantitiesAddPhys</a> * &gt; &amp;&#160;</td>
-          <td class="paramname"><em>vecGPA</em></td><td>)</td>
+          <td class="paramname"></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -1438,7 +1376,7 @@ Private Attributes</h2></td></tr>
   </dd>
 </dl>
 
-<p>Reimplemented from <a class="el" href="classMixture.html#ac340ef36b6669064b8332f8e37a510c5">Mixture</a>.</p>
+<p>Reimplemented from <a class="el" href="classMixture.html#a7d2e64bcc35d241d666aac2b1e72f929">Mixture</a>.</p>
 
 </div>
 </div>
@@ -1480,7 +1418,7 @@ Private Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Reimplemented from <a class="el" href="classMixture.html#afe42ea1d17bed8feaea69bd1be3dd8a9">Mixture</a>.</p>
+<p>Reimplemented from <a class="el" href="classMixture.html#a38da5fe4924497531a47aa87922d8ed4">Mixture</a>.</p>
 
 </div>
 </div>
@@ -1495,19 +1433,19 @@ Private Attributes</h2></td></tr>
           <td class="memname">void MixEulerHomogeneous::localProjection </td>
           <td>(</td>
           <td class="paramtype">const <a class="el" href="classCoord.html">Coord</a> &amp;&#160;</td>
-          <td class="paramname"><em>normal</em>, </td>
+          <td class="paramname">, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">const <a class="el" href="classCoord.html">Coord</a> &amp;&#160;</td>
-          <td class="paramname"><em>tangent</em>, </td>
+          <td class="paramname">, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">const <a class="el" href="classCoord.html">Coord</a> &amp;&#160;</td>
-          <td class="paramname"><em>binormal</em>&#160;</td>
+          <td class="paramname">&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -1532,7 +1470,7 @@ Private Attributes</h2></td></tr>
   </dd>
 </dl>
 
-<p>Reimplemented from <a class="el" href="classMixture.html#a1b3d5bf1ab427cd04cfe4d0c64776bfb">Mixture</a>.</p>
+<p>Reimplemented from <a class="el" href="classMixture.html#adc0e6486932c2a182cdd27a3e21eabb5">Mixture</a>.</p>
 
 </div>
 </div>
@@ -1568,7 +1506,7 @@ Private Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Reimplemented from <a class="el" href="classMixture.html#af93bcc924411ae6cbfc90c53b3bada3e">Mixture</a>.</p>
+<p>Reimplemented from <a class="el" href="classMixture.html#a9f4de59b05a411578000728076b8d9da">Mixture</a>.</p>
 
 </div>
 </div>
@@ -1644,7 +1582,7 @@ Private Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Reimplemented from <a class="el" href="classMixture.html#afd2ad671f6823161a2c89439859708b0">Mixture</a>.</p>
+<p>Reimplemented from <a class="el" href="classMixture.html#a5c826f5dc88a309e7e21b104b60f3ec5">Mixture</a>.</p>
 
 </div>
 </div>
@@ -1670,7 +1608,7 @@ Private Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Reimplemented from <a class="el" href="classMixture.html#a7148a6efa61fb1c581fdaa25bfb5e98a">Mixture</a>.</p>
+<p>Reimplemented from <a class="el" href="classMixture.html#a81306140a89423f4e13221477ce7aa36">Mixture</a>.</p>
 
 </div>
 </div>
@@ -1696,7 +1634,7 @@ Private Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Reimplemented from <a class="el" href="classMixture.html#a1bb2c633aac392c7107df4df9e21d200">Mixture</a>.</p>
+<p>Reimplemented from <a class="el" href="classMixture.html#a3bc638f1efff163e0d639f783c915183">Mixture</a>.</p>
 
 </div>
 </div>
@@ -1722,7 +1660,7 @@ Private Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Reimplemented from <a class="el" href="classMixture.html#abfe1a38af42e5eada66bd8cf17c39d24">Mixture</a>.</p>
+<p>Reimplemented from <a class="el" href="classMixture.html#a2a4340b8611efa60f694004dba7589de">Mixture</a>.</p>
 
 </div>
 </div>
@@ -1737,19 +1675,19 @@ Private Attributes</h2></td></tr>
           <td class="memname">void MixEulerHomogeneous::reverseProjection </td>
           <td>(</td>
           <td class="paramtype">const <a class="el" href="classCoord.html">Coord</a> &amp;&#160;</td>
-          <td class="paramname"><em>normal</em>, </td>
+          <td class="paramname">, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">const <a class="el" href="classCoord.html">Coord</a> &amp;&#160;</td>
-          <td class="paramname"><em>tangent</em>, </td>
+          <td class="paramname">, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">const <a class="el" href="classCoord.html">Coord</a> &amp;&#160;</td>
-          <td class="paramname"><em>binormal</em>&#160;</td>
+          <td class="paramname">&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -1774,7 +1712,7 @@ Private Attributes</h2></td></tr>
   </dd>
 </dl>
 
-<p>Reimplemented from <a class="el" href="classMixture.html#a32127bacab99c8cd65c982907a4d0914">Mixture</a>.</p>
+<p>Reimplemented from <a class="el" href="classMixture.html#a8714cc538ee8843101ad53ced7aded70">Mixture</a>.</p>
 
 </div>
 </div>
@@ -1800,7 +1738,7 @@ Private Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Reimplemented from <a class="el" href="classMixture.html#aeabb48a45f752202d99ddfce609d11f5">Mixture</a>.</p>
+<p>Reimplemented from <a class="el" href="classMixture.html#a4537e89cbb932619ca39f7d398cbd7c0">Mixture</a>.</p>
 
 </div>
 </div>
@@ -1836,7 +1774,7 @@ Private Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Reimplemented from <a class="el" href="classMixture.html#a59b856da38b7318683ce7f9e0ff3c64d">Mixture</a>.</p>
+<p>Reimplemented from <a class="el" href="classMixture.html#ac593d6cb54de8fdd4d1149572f46e4bb">Mixture</a>.</p>
 
 </div>
 </div>
@@ -1862,7 +1800,7 @@ Private Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Reimplemented from <a class="el" href="classMixture.html#a5a35a31bc8544ac3625af576224eb3f1">Mixture</a>.</p>
+<p>Reimplemented from <a class="el" href="classMixture.html#a2045ee250529d7bfa7a7d09f764e58bd">Mixture</a>.</p>
 
 </div>
 </div>
@@ -1888,7 +1826,7 @@ Private Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Reimplemented from <a class="el" href="classMixture.html#ada6b8f28a53257506fd77b9c4664de53">Mixture</a>.</p>
+<p>Reimplemented from <a class="el" href="classMixture.html#ad4e0f8a381d64e46722b55a18fb87bee">Mixture</a>.</p>
 
 </div>
 </div>
@@ -1939,7 +1877,7 @@ Private Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Reimplemented from <a class="el" href="classMixture.html#af777bc2bb469bf90e3ce5dc15ba8a708">Mixture</a>.</p>
+<p>Reimplemented from <a class="el" href="classMixture.html#a5d9899061837ab0f4c2254bc567ef9cc">Mixture</a>.</p>
 
 </div>
 </div>
@@ -1965,7 +1903,7 @@ Private Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Reimplemented from <a class="el" href="classMixture.html#aadfa9f73557f58992c93d4b6514e44bd">Mixture</a>.</p>
+<p>Reimplemented from <a class="el" href="classMixture.html#a35d4041eed7f6a981d728a09c0f7b8f9">Mixture</a>.</p>
 
 </div>
 </div>
@@ -2001,7 +1939,7 @@ Private Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Reimplemented from <a class="el" href="classMixture.html#af21592a74fc62d5b8091c58864830280">Mixture</a>.</p>
+<p>Reimplemented from <a class="el" href="classMixture.html#a704533482632d11eb7c0cc99c37812ca">Mixture</a>.</p>
 
 </div>
 </div>
@@ -2043,7 +1981,7 @@ Private Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Reimplemented from <a class="el" href="classMixture.html#a7a3e52192b56596d1a44295514d60633">Mixture</a>.</p>
+<p>Reimplemented from <a class="el" href="classMixture.html#a697813ba9ef184406cd4b2081a469599">Mixture</a>.</p>
 
 </div>
 </div>
@@ -2069,7 +2007,7 @@ Private Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Reimplemented from <a class="el" href="classMixture.html#a1a070bcd6b2d5aea001db7b4152874cb">Mixture</a>.</p>
+<p>Reimplemented from <a class="el" href="classMixture.html#a8aaf0228a57e6a25be06349ccbf00302">Mixture</a>.</p>
 
 </div>
 </div>
@@ -2095,7 +2033,7 @@ Private Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Reimplemented from <a class="el" href="classMixture.html#a50d11eb47c981641d9f13e865829e128">Mixture</a>.</p>
+<p>Reimplemented from <a class="el" href="classMixture.html#a42116aa02a4ff3bf26299175fadd8340">Mixture</a>.</p>
 
 </div>
 </div>
@@ -2110,7 +2048,7 @@ Private Attributes</h2></td></tr>
           <td class="memname">void MixEulerHomogeneous::totalEnergyToInternalEnergy </td>
           <td>(</td>
           <td class="paramtype">std::vector&lt; <a class="el" href="classQuantitiesAddPhys.html">QuantitiesAddPhys</a> * &gt; &amp;&#160;</td>
-          <td class="paramname"><em>vecGPA</em></td><td>)</td>
+          <td class="paramname"></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -2129,7 +2067,7 @@ Private Attributes</h2></td></tr>
   </dd>
 </dl>
 
-<p>Reimplemented from <a class="el" href="classMixture.html#a64463129c78f38e8956af5be752d86d2">Mixture</a>.</p>
+<p>Reimplemented from <a class="el" href="classMixture.html#aff1dd483cc2898c0b5920ff540c9c291">Mixture</a>.</p>
 
 </div>
 </div>
@@ -2298,7 +2236,7 @@ Private Attributes</h2></td></tr>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="classMixEulerHomogeneous.html">MixEulerHomogeneous</a></li>
-    <li class="footer">Generated on Mon May 11 2020 16:03:19 for ECOGEN by
+    <li class="footer">Generated on Wed Mar 10 2021 16:19:52 for ECOGEN by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.11 </li>
   </ul>

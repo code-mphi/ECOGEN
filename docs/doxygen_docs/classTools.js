@@ -1,14 +1,13 @@
 var classTools =
 [
-    [ "Tools", "classTools.html#afb07d80318b98bb63771efa0654f961e", null ],
     [ "Tools", "classTools.html#a421c3e3454e24841544136d3e3a63929", null ],
     [ "~Tools", "classTools.html#a18472d06fc4c94a3af67d49d128a8510", null ],
     [ "lowercase", "classTools.html#ae4d882025ee055870cc8c634c8297eb4", null ],
-    [ "pi", "classTools.html#a1d4d24109d06e7986dfd19ad7e9f3359", null ],
     [ "uppercase", "classTools.html#a22a310269c758f79a7fb440114479b6e", null ],
     [ "ak", "classTools.html#af83874e60d4c2188bed6072578758e58", null ],
     [ "akS", "classTools.html#a324ad6b133678dba9216933d4dceb65e", null ],
     [ "Deltaek", "classTools.html#ace40271a45d5d4b1b5297524e4063c81", null ],
+    [ "Deltapk", "classTools.html#ae4a2e60a9ee4df41217a26986a475536", null ],
     [ "ekStar", "classTools.html#a2456d40c121a3e1de7136a56b32ea050", null ],
     [ "eos", "classTools.html#acd9de75823fa5478f3573b53597e26eb", null ],
     [ "Hk0", "classTools.html#a42fc424bd85bcf287edaa3ad3cefe3e5", null ],
@@ -21,5 +20,6 @@ var classTools =
     [ "vkStar", "classTools.html#a3e1041f27072ae1b080d6c6c614b8124", null ],
     [ "Yk", "classTools.html#ae1ba29e4db6f80e7364b4b7845470557", null ],
     [ "Yk0", "classTools.html#a235d0b567457dca51bc31e47c0649eef", null ],
-    [ "YkStar", "classTools.html#a40869b0f010b983dc70ea6ec388fbbf3", null ]
+    [ "YkStar", "classTools.html#a40869b0f010b983dc70ea6ec388fbbf3", null ],
+    [ "zk", "classTools.html#aee8a9a154b974d6d0fee26a72f2f18a7", null ]
 ];

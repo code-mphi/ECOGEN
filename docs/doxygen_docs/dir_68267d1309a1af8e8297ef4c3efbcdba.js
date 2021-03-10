@@ -16,6 +16,8 @@ var dir_68267d1309a1af8e8297ef4c3efbcdba =
     [ "Sources", "dir_0fd7c2fb25193e31d516b04a2525197f.html", "dir_0fd7c2fb25193e31d516b04a2525197f" ],
     [ "Symmetries", "dir_1a20a38dbbd138a5023e78cbc08fdf1e.html", "dir_1a20a38dbbd138a5023e78cbc08fdf1e" ],
     [ "Transport", "dir_a424be9c04c54fb66361ff8db17b7a64.html", "dir_a424be9c04c54fb66361ff8db17b7a64" ],
+    [ "Config.cpp", "Config_8cpp.html", "Config_8cpp" ],
+    [ "Config.h", "Config_8h.html", "Config_8h" ],
     [ "Errors.cpp", "Errors_8cpp.html", "Errors_8cpp" ],
     [ "Errors.h", "Errors_8h.html", "Errors_8h" ],
     [ "main.cpp", "main_8cpp.html", "main_8cpp" ],

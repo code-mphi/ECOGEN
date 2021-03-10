@@ -126,14 +126,14 @@ $(document).ready(function(){initNavTree('classGeometricalDomain.html','');});
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:ac2ab7410933fb899d5adf9ffc84448f8"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classGeometricalDomain.html#ac2ab7410933fb899d5adf9ffc84448f8">GeometricalDomain</a> (std::string name, std::vector&lt; <a class="el" href="classPhase.html">Phase</a> * &gt; <a class="el" href="Phase_8h.html#a2c815f6ae654fe19b3985d14c9c8d74ea2270f1269fdfbdfd9044eaa8af19750d">vecPhases</a>, <a class="el" href="classMixture.html">Mixture</a> *mixture, std::vector&lt; <a class="el" href="classTransport.html">Transport</a> &gt; vecTransports, const int &amp;physicalEntity)</td></tr>
+<tr class="memitem:ac2ab7410933fb899d5adf9ffc84448f8"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classGeometricalDomain.html#ac2ab7410933fb899d5adf9ffc84448f8">GeometricalDomain</a> (std::string name, std::vector&lt; <a class="el" href="classPhase.html">Phase</a> * &gt; <a class="el" href="Tools_8h.html#a2c815f6ae654fe19b3985d14c9c8d74ea2270f1269fdfbdfd9044eaa8af19750d">vecPhases</a>, <a class="el" href="classMixture.html">Mixture</a> *mixture, std::vector&lt; <a class="el" href="classTransport.html">Transport</a> &gt; vecTransports, const int &amp;physicalEntity)</td></tr>
 <tr class="memdesc:ac2ab7410933fb899d5adf9ffc84448f8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Generic geometrical constructor.  <a href="#ac2ab7410933fb899d5adf9ffc84448f8">More...</a><br /></td></tr>
 <tr class="separator:ac2ab7410933fb899d5adf9ffc84448f8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a928ecfc1e199e182a1a89328e37dba0d"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classGeometricalDomain.html#a928ecfc1e199e182a1a89328e37dba0d">~GeometricalDomain</a> ()</td></tr>
 <tr class="separator:a928ecfc1e199e182a1a89328e37dba0d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae50006cb2e26fc2c8bd21a296982cb23"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classGeometricalDomain.html#ae50006cb2e26fc2c8bd21a296982cb23">belong</a> (<a class="el" href="classCoord.html">Coord</a> &amp;posElement, const int &amp;lvl) const =0</td></tr>
-<tr class="memdesc:ae50006cb2e26fc2c8bd21a296982cb23"><td class="mdescLeft">&#160;</td><td class="mdescRight">Method to verify inclusion of a vertex in geometrical domain.  <a href="#ae50006cb2e26fc2c8bd21a296982cb23">More...</a><br /></td></tr>
-<tr class="separator:ae50006cb2e26fc2c8bd21a296982cb23"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab1eb0336b73d341df045a04585844f4a"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classGeometricalDomain.html#ab1eb0336b73d341df045a04585844f4a">belong</a> (<a class="el" href="classCoord.html">Coord</a> &amp;, const int &amp;) const =0</td></tr>
+<tr class="memdesc:ab1eb0336b73d341df045a04585844f4a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Method to verify inclusion of a vertex in geometrical domain.  <a href="#ab1eb0336b73d341df045a04585844f4a">More...</a><br /></td></tr>
+<tr class="separator:ab1eb0336b73d341df045a04585844f4a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a47edc9fd88c5bd151182c748c097d71b"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classGeometricalDomain.html#a47edc9fd88c5bd151182c748c097d71b">fillIn</a> (<a class="el" href="classCell.html">Cell</a> *cell, const int &amp;numberPhases, const int &amp;numberTransports) const </td></tr>
 <tr class="memdesc:a47edc9fd88c5bd151182c748c097d71b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Method to fill in the cell data with the ones of the corresponding domain.  <a href="#a47edc9fd88c5bd151182c748c097d71b">More...</a><br /></td></tr>
 <tr class="separator:a47edc9fd88c5bd151182c748c097d71b"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -247,7 +247,7 @@ Protected Attributes</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a class="anchor" id="ae50006cb2e26fc2c8bd21a296982cb23"></a>
+<a class="anchor" id="ab1eb0336b73d341df045a04585844f4a"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="mlabels">
@@ -258,13 +258,13 @@ Protected Attributes</h2></td></tr>
           <td class="memname">virtual bool GeometricalDomain::belong </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="classCoord.html">Coord</a> &amp;&#160;</td>
-          <td class="paramname"><em>posElement</em>, </td>
+          <td class="paramname">, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">const int &amp;&#160;</td>
-          <td class="paramname"><em>lvl</em>&#160;</td>
+          <td class="paramname">&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -289,7 +289,7 @@ Protected Attributes</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>True if the vertex belongs to geometrical domain </dd></dl>
 
-<p>Implemented in <a class="el" href="classGDCuboid.html#ab36571f25e9c642c741a22ce50b27053">GDCuboid</a>, <a class="el" href="classGDCylinder.html#a4df7a49bbc0f4d2b5a5721dd42afc426">GDCylinder</a>, <a class="el" href="classGDDisc.html#ac8221eaaa1283b469fecc061155e2d9e">GDDisc</a>, <a class="el" href="classGDEllipse.html#a392cdaf177ad00e796f3154ac73f11fa">GDEllipse</a>, <a class="el" href="classGDEllipsoid.html#a3d3611a6617169cd8d0ced0ed4e8c75b">GDEllipsoid</a>, <a class="el" href="classGDRectangle.html#aaa47466985c1469ab271acb5fcd1358f">GDRectangle</a>, <a class="el" href="classGDSphere.html#afa0700c04b86359cc8d55220ae32bc47">GDSphere</a>, <a class="el" href="classGDHalfSpace.html#a1928c2fc0b9e7cac9c9d7a93d96daf09">GDHalfSpace</a>, <a class="el" href="classGDEntireDomain.html#aca2d4bd9bc6d1a64142a5ff85ae27b82">GDEntireDomain</a>, and <a class="el" href="classGDEntireDomainWithParticularities.html#ad58e313600e9d05c250a64ea7ce68e53">GDEntireDomainWithParticularities</a>.</p>
+<p>Implemented in <a class="el" href="classGDCuboid.html#ace6c24eae31a2bfc9d602cb09ff2710e">GDCuboid</a>, <a class="el" href="classGDCylinder.html#a21862a7883178be72c7aa535213d5cf8">GDCylinder</a>, <a class="el" href="classGDDisc.html#a6c1427c0d4ecf76107e596f342f5179a">GDDisc</a>, <a class="el" href="classGDEllipse.html#a6d4644001905edf70a02097a0e94b8e4">GDEllipse</a>, <a class="el" href="classGDEllipsoid.html#aa21b26c0c79b077c393be2007fe0c7ae">GDEllipsoid</a>, <a class="el" href="classGDRectangle.html#adb01b1d34b504bacbf5ae39ca62aaf22">GDRectangle</a>, <a class="el" href="classGDSphere.html#a54026b594d678539e440c334670c1a1c">GDSphere</a>, <a class="el" href="classGDHalfSpace.html#a777e5751ce71c1fa1c40aa329c98d694">GDHalfSpace</a>, <a class="el" href="classGDEntireDomain.html#ae2064ef8a2f45c2e4d5c9834a363b2ab">GDEntireDomain</a>, and <a class="el" href="classGDEntireDomainWithParticularities.html#a9a91946bd7eab56b453c0e301609940e">GDEntireDomainWithParticularities</a>.</p>
 
 </div>
 </div>
@@ -533,7 +533,7 @@ Protected Attributes</h2></td></tr>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="classGeometricalDomain.html">GeometricalDomain</a></li>
-    <li class="footer">Generated on Mon May 11 2020 16:03:19 for ECOGEN by
+    <li class="footer">Generated on Wed Mar 10 2021 16:19:51 for ECOGEN by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.11 </li>
   </ul>

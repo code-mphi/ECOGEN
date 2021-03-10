@@ -20,7 +20,7 @@ ECOGEN is provided with several test cases. Major part of these tests can be fou
    :caption: Contents:
 
    Chap5_1Euler
-   Chap5_2Kapila
+   Chap5_2PUEq
    
 .. Chap5_3thermalEq
 .. Chap5_4eulerHomogene

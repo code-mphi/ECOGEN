@@ -145,11 +145,9 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a6435682ef16acd55a5d64e00a43a88ae"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:adf13afb299b11ee943d664a36afbd053"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCell.html#adf13afb299b11ee943d664a36afbd053">allocateEos</a> (const int &amp;numberPhases, <a class="el" href="classModel.html">Model</a> *model)</td></tr>
 <tr class="separator:adf13afb299b11ee943d664a36afbd053"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5b3ac840dc7e4a0e7bb1ad1645e12b5c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCell.html#a5b3ac840dc7e4a0e7bb1ad1645e12b5c">fill</a> (std::vector&lt; <a class="el" href="classGeometricalDomain.html">GeometricalDomain</a> * &gt; &amp;domains, const int &amp;lvlMax)</td></tr>
-<tr class="memdesc:a5b3ac840dc7e4a0e7bb1ad1645e12b5c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Filling cell properties using a physical domain.  <a href="#a5b3ac840dc7e4a0e7bb1ad1645e12b5c">More...</a><br /></td></tr>
-<tr class="separator:a5b3ac840dc7e4a0e7bb1ad1645e12b5c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a955cc120f49a5e1fad31dca2d6ad7bab"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCell.html#a955cc120f49a5e1fad31dca2d6ad7bab">allocateAndCopyPhase</a> (const int &amp;phaseNumber, <a class="el" href="classPhase.html">Phase</a> *phase)</td></tr>
-<tr class="separator:a955cc120f49a5e1fad31dca2d6ad7bab"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acd3b70c962831644613fe4d25986d61e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCell.html#acd3b70c962831644613fe4d25986d61e">fill</a> (std::vector&lt; <a class="el" href="classGeometricalDomain.html">GeometricalDomain</a> * &gt; &amp;domains, const int &amp;)</td></tr>
+<tr class="memdesc:acd3b70c962831644613fe4d25986d61e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Filling cell properties using a physical domain.  <a href="#acd3b70c962831644613fe4d25986d61e">More...</a><br /></td></tr>
+<tr class="separator:acd3b70c962831644613fe4d25986d61e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4baf5c7616603cc6f664fc18f04e6d61"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCell.html#a4baf5c7616603cc6f664fc18f04e6d61">copyPhase</a> (const int &amp;phaseNumber, <a class="el" href="classPhase.html">Phase</a> *phase)</td></tr>
 <tr class="separator:a4baf5c7616603cc6f664fc18f04e6d61"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aaf38be3d93f62243f3d7f9a1fe1a1fef"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCell.html#aaf38be3d93f62243f3d7f9a1fe1a1fef">copyMixture</a> (<a class="el" href="classMixture.html">Mixture</a> *mixture)</td></tr>
@@ -160,38 +158,38 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a17fab96a4707be42a6afbf2b89483b43"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab58a6b826dd8d1583578ae9f6a746a83"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCell.html#ab58a6b826dd8d1583578ae9f6a746a83">setToZeroBufferFlux</a> (const int &amp;numberPhases)</td></tr>
 <tr class="separator:ab58a6b826dd8d1583578ae9f6a746a83"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:adc4563ed64fe269354eb5bc56525937e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCell.html#adc4563ed64fe269354eb5bc56525937e">timeEvolution</a> (const double &amp;dt, const int &amp;numberPhases, const int &amp;numberTransports, <a class="el" href="classSymmetry.html">Symmetry</a> *symmetry, <a class="el" href="Phase_8h.html#a2c815f6ae654fe19b3985d14c9c8d74e">Prim</a> type=<a class="el" href="Phase_8h.html#a2c815f6ae654fe19b3985d14c9c8d74ea2270f1269fdfbdfd9044eaa8af19750d">vecPhases</a>)</td></tr>
+<tr class="memitem:adc4563ed64fe269354eb5bc56525937e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCell.html#adc4563ed64fe269354eb5bc56525937e">timeEvolution</a> (const double &amp;dt, const int &amp;numberPhases, const int &amp;numberTransports, <a class="el" href="classSymmetry.html">Symmetry</a> *symmetry, <a class="el" href="Tools_8h.html#a2c815f6ae654fe19b3985d14c9c8d74e">Prim</a> type=<a class="el" href="Tools_8h.html#a2c815f6ae654fe19b3985d14c9c8d74ea2270f1269fdfbdfd9044eaa8af19750d">vecPhases</a>)</td></tr>
 <tr class="separator:adc4563ed64fe269354eb5bc56525937e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aabfc76941c4a90f019a7589993842f2d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCell.html#aabfc76941c4a90f019a7589993842f2d">timeEvolutionAddPhys</a> (const double &amp;dt, const int &amp;numberPhases, const int &amp;numberTransports)</td></tr>
-<tr class="separator:aabfc76941c4a90f019a7589993842f2d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a81631413d828454e1d2b5d62efbc554d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCell.html#a81631413d828454e1d2b5d62efbc554d">timeEvolutionAddPhys</a> (const double &amp;dt, const int &amp;numberPhases)</td></tr>
+<tr class="separator:a81631413d828454e1d2b5d62efbc554d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a35d6c408dd8052d26ed3fd145d6be081"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCell.html#a35d6c408dd8052d26ed3fd145d6be081">buildPrim</a> (const int &amp;numberPhases)</td></tr>
 <tr class="separator:a35d6c408dd8052d26ed3fd145d6be081"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8069775e329aa8f43e10255b26c70345"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCell.html#a8069775e329aa8f43e10255b26c70345">buildCons</a> (const int &amp;numberPhases)</td></tr>
 <tr class="separator:a8069775e329aa8f43e10255b26c70345"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa822c02506e90697aae444ded84ba72f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCell.html#aa822c02506e90697aae444ded84ba72f">correctionEnergy</a> (const int &amp;numberPhases)</td></tr>
 <tr class="separator:aa822c02506e90697aae444ded84ba72f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a905f9c7eeaa79de0b3466c7cfba7382c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCell.html#a905f9c7eeaa79de0b3466c7cfba7382c">sourceTermIntegration</a> (const double &amp;dt, const int &amp;numberPhases)</td></tr>
-<tr class="separator:a905f9c7eeaa79de0b3466c7cfba7382c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae2b16b7ae9a6c66734af8a31a6b1ac7c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCell.html#ae2b16b7ae9a6c66734af8a31a6b1ac7c">sourceTermIntegration</a> (const double &amp;, const int &amp;)</td></tr>
+<tr class="separator:ae2b16b7ae9a6c66734af8a31a6b1ac7c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a30da2209c73e0a6d0dea1a7cafa4f1d2"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCell.html#a30da2209c73e0a6d0dea1a7cafa4f1d2">printPhasesMixture</a> (const int &amp;numberPhases, const int &amp;numberTransports, std::ofstream &amp;fileStream) const </td></tr>
 <tr class="separator:a30da2209c73e0a6d0dea1a7cafa4f1d2"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab6bc2b63abe0ae4200ba4bd2a75750a1"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCell.html#ab6bc2b63abe0ae4200ba4bd2a75750a1">completeFulfillState</a> (<a class="el" href="Phase_8h.html#a2c815f6ae654fe19b3985d14c9c8d74e">Prim</a> type=<a class="el" href="Phase_8h.html#a2c815f6ae654fe19b3985d14c9c8d74ea2270f1269fdfbdfd9044eaa8af19750d">vecPhases</a>)</td></tr>
+<tr class="memitem:ab6bc2b63abe0ae4200ba4bd2a75750a1"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCell.html#ab6bc2b63abe0ae4200ba4bd2a75750a1">completeFulfillState</a> (<a class="el" href="Tools_8h.html#a2c815f6ae654fe19b3985d14c9c8d74e">Prim</a> type=<a class="el" href="Tools_8h.html#a2c815f6ae654fe19b3985d14c9c8d74ea2270f1269fdfbdfd9044eaa8af19750d">vecPhases</a>)</td></tr>
 <tr class="separator:ab6bc2b63abe0ae4200ba4bd2a75750a1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a37990ca24bd9578fb4a823308c7133d2"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCell.html#a37990ca24bd9578fb4a823308c7133d2">fulfillState</a> (<a class="el" href="Phase_8h.html#a2c815f6ae654fe19b3985d14c9c8d74e">Prim</a> type=<a class="el" href="Phase_8h.html#a2c815f6ae654fe19b3985d14c9c8d74ea2270f1269fdfbdfd9044eaa8af19750d">vecPhases</a>)</td></tr>
+<tr class="memitem:a37990ca24bd9578fb4a823308c7133d2"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCell.html#a37990ca24bd9578fb4a823308c7133d2">fulfillState</a> (<a class="el" href="Tools_8h.html#a2c815f6ae654fe19b3985d14c9c8d74e">Prim</a> type=<a class="el" href="Tools_8h.html#a2c815f6ae654fe19b3985d14c9c8d74ea2270f1269fdfbdfd9044eaa8af19750d">vecPhases</a>)</td></tr>
 <tr class="separator:a37990ca24bd9578fb4a823308c7133d2"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a16a489a74a24224511a5a32ae0887eee"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCell.html#a16a489a74a24224511a5a32ae0887eee">localProjection</a> (const <a class="el" href="classCoord.html">Coord</a> &amp;normal, const <a class="el" href="classCoord.html">Coord</a> &amp;tangent, const <a class="el" href="classCoord.html">Coord</a> &amp;binormal, const int &amp;numberPhases, <a class="el" href="Phase_8h.html#a2c815f6ae654fe19b3985d14c9c8d74e">Prim</a> type=<a class="el" href="Phase_8h.html#a2c815f6ae654fe19b3985d14c9c8d74ea2270f1269fdfbdfd9044eaa8af19750d">vecPhases</a>)</td></tr>
-<tr class="separator:a16a489a74a24224511a5a32ae0887eee"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:abe24a830b4774e27ea4b439a45cb6072"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCell.html#abe24a830b4774e27ea4b439a45cb6072">reverseProjection</a> (const <a class="el" href="classCoord.html">Coord</a> &amp;normal, const <a class="el" href="classCoord.html">Coord</a> &amp;tangent, const <a class="el" href="classCoord.html">Coord</a> &amp;binormal, const int &amp;numberPhases, <a class="el" href="Phase_8h.html#a2c815f6ae654fe19b3985d14c9c8d74e">Prim</a> type=<a class="el" href="Phase_8h.html#a2c815f6ae654fe19b3985d14c9c8d74ea2270f1269fdfbdfd9044eaa8af19750d">vecPhases</a>)</td></tr>
-<tr class="separator:abe24a830b4774e27ea4b439a45cb6072"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa103ab80489ae55e5718e3e03d49496a"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCell.html#aa103ab80489ae55e5718e3e03d49496a">copyInCell</a> (<a class="el" href="classCell.html">Cell</a> &amp;cellSource, <a class="el" href="Phase_8h.html#a2c815f6ae654fe19b3985d14c9c8d74e">Prim</a> type=<a class="el" href="Phase_8h.html#a2c815f6ae654fe19b3985d14c9c8d74ea2270f1269fdfbdfd9044eaa8af19750d">vecPhases</a>) const </td></tr>
-<tr class="separator:aa103ab80489ae55e5718e3e03d49496a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac5c9bd274ac2761197625dac3e17fc73"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCell.html#ac5c9bd274ac2761197625dac3e17fc73">copyVec</a> (<a class="el" href="classPhase.html">Phase</a> **<a class="el" href="Phase_8h.html#a2c815f6ae654fe19b3985d14c9c8d74ea2270f1269fdfbdfd9044eaa8af19750d">vecPhases</a>, <a class="el" href="classMixture.html">Mixture</a> *mixture, <a class="el" href="classTransport.html">Transport</a> *vecTransports)</td></tr>
+<tr class="memitem:a5e461cac2fc7929eb892af7e4de3c250"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCell.html#a5e461cac2fc7929eb892af7e4de3c250">localProjection</a> (const <a class="el" href="classCoord.html">Coord</a> &amp;normal, const <a class="el" href="classCoord.html">Coord</a> &amp;tangent, const <a class="el" href="classCoord.html">Coord</a> &amp;binormal, const int &amp;numberPhases, <a class="el" href="Tools_8h.html#a2c815f6ae654fe19b3985d14c9c8d74e">Prim</a>=<a class="el" href="Tools_8h.html#a2c815f6ae654fe19b3985d14c9c8d74ea2270f1269fdfbdfd9044eaa8af19750d">vecPhases</a>)</td></tr>
+<tr class="separator:a5e461cac2fc7929eb892af7e4de3c250"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac61c58f7d58185426131e8beae2afc2c"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCell.html#ac61c58f7d58185426131e8beae2afc2c">reverseProjection</a> (const <a class="el" href="classCoord.html">Coord</a> &amp;normal, const <a class="el" href="classCoord.html">Coord</a> &amp;tangent, const <a class="el" href="classCoord.html">Coord</a> &amp;binormal, const int &amp;numberPhases)</td></tr>
+<tr class="separator:ac61c58f7d58185426131e8beae2afc2c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af612fe9ecefd34ffb28f64256714257b"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCell.html#af612fe9ecefd34ffb28f64256714257b">copyInCell</a> (<a class="el" href="classCell.html">Cell</a> &amp;) const </td></tr>
+<tr class="separator:af612fe9ecefd34ffb28f64256714257b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac5c9bd274ac2761197625dac3e17fc73"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCell.html#ac5c9bd274ac2761197625dac3e17fc73">copyVec</a> (<a class="el" href="classPhase.html">Phase</a> **<a class="el" href="Tools_8h.html#a2c815f6ae654fe19b3985d14c9c8d74ea2270f1269fdfbdfd9044eaa8af19750d">vecPhases</a>, <a class="el" href="classMixture.html">Mixture</a> *mixture, <a class="el" href="classTransport.html">Transport</a> *vecTransports)</td></tr>
 <tr class="separator:ac5c9bd274ac2761197625dac3e17fc73"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6c392922126698ffaf6e2405de3c543e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCell.html#a6c392922126698ffaf6e2405de3c543e">prepareAddPhys</a> ()</td></tr>
 <tr class="separator:a6c392922126698ffaf6e2405de3c543e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a06d98588feddeb7602db6fc9082c482e"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCell.html#a06d98588feddeb7602db6fc9082c482e">selectScalar</a> (<a class="el" href="Cell_8h.html#acca207de98b59d1c41e3975008706d61">Variable</a> nameVariable, int num=0) const </td></tr>
 <tr class="separator:a06d98588feddeb7602db6fc9082c482e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5b983cc3aa58e446f1605e15a4a26a7f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCell.html#a5b983cc3aa58e446f1605e15a4a26a7f">setScalar</a> (<a class="el" href="Cell_8h.html#acca207de98b59d1c41e3975008706d61">Variable</a> nameVariable, const double &amp;value, int num=0, int subscript=-1)</td></tr>
-<tr class="separator:a5b983cc3aa58e446f1605e15a4a26a7f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5f8d364cc0de03128a6f343ed9242ecf"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCell.html#a5f8d364cc0de03128a6f343ed9242ecf">setScalar</a> (<a class="el" href="Cell_8h.html#acca207de98b59d1c41e3975008706d61">Variable</a> nameVariable, const double &amp;value, int num=0)</td></tr>
+<tr class="separator:a5f8d364cc0de03128a6f343ed9242ecf"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9c018ef4d2b0da5ffcc8e4fcc7720767"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classCoord.html">Coord</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCell.html#a9c018ef4d2b0da5ffcc8e4fcc7720767">selectVector</a> (<a class="el" href="Cell_8h.html#acca207de98b59d1c41e3975008706d61">Variable</a> nameVector, int num=0, int subscript=-1) const </td></tr>
 <tr class="separator:a9c018ef4d2b0da5ffcc8e4fcc7720767"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:acfa3835ed89b1dac15bc4006594f7dc2"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCell.html#acfa3835ed89b1dac15bc4006594f7dc2">setVector</a> (<a class="el" href="Cell_8h.html#acca207de98b59d1c41e3975008706d61">Variable</a> nameVector, const <a class="el" href="classCoord.html">Coord</a> &amp;value, int num=0, int subscript=-1)</td></tr>
@@ -214,14 +212,14 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:aee64cb575f7f1cded43a706bf812a23a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3ebc6615cf77d25411d97671b71a590b"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCell.html#a3ebc6615cf77d25411d97671b71a590b">getCellInterfacesSize</a> () const </td></tr>
 <tr class="separator:a3ebc6615cf77d25411d97671b71a590b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a30bb973262fea22cc77b5a7e5757d854"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classCellInterface.html">CellInterface</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCell.html#a30bb973262fea22cc77b5a7e5757d854">getCellInterface</a> (int &amp;b)</td></tr>
-<tr class="separator:a30bb973262fea22cc77b5a7e5757d854"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa1371e80d46ee59b37e54a2f26008dd5"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classPhase.html">Phase</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCell.html#aa1371e80d46ee59b37e54a2f26008dd5">getPhase</a> (const int &amp;phaseNumber, <a class="el" href="Phase_8h.html#a2c815f6ae654fe19b3985d14c9c8d74e">Prim</a> type=<a class="el" href="Phase_8h.html#a2c815f6ae654fe19b3985d14c9c8d74ea2270f1269fdfbdfd9044eaa8af19750d">vecPhases</a>) const </td></tr>
-<tr class="separator:aa1371e80d46ee59b37e54a2f26008dd5"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3108676971bf967f2c8e648a5baf0aa7"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classPhase.html">Phase</a> **&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCell.html#a3108676971bf967f2c8e648a5baf0aa7">getPhases</a> (<a class="el" href="Phase_8h.html#a2c815f6ae654fe19b3985d14c9c8d74e">Prim</a> type=<a class="el" href="Phase_8h.html#a2c815f6ae654fe19b3985d14c9c8d74ea2270f1269fdfbdfd9044eaa8af19750d">vecPhases</a>) const </td></tr>
-<tr class="separator:a3108676971bf967f2c8e648a5baf0aa7"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a41cdd6ee3f8f01228a6ff6076a686646"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classMixture.html">Mixture</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCell.html#a41cdd6ee3f8f01228a6ff6076a686646">getMixture</a> (<a class="el" href="Phase_8h.html#a2c815f6ae654fe19b3985d14c9c8d74e">Prim</a> type=<a class="el" href="Phase_8h.html#a2c815f6ae654fe19b3985d14c9c8d74ea2270f1269fdfbdfd9044eaa8af19750d">vecPhases</a>) const </td></tr>
-<tr class="separator:a41cdd6ee3f8f01228a6ff6076a686646"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa664be4bfc31263f51cb2a37a9b9ab00"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classCellInterface.html">CellInterface</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCell.html#aa664be4bfc31263f51cb2a37a9b9ab00">getCellInterface</a> (const int &amp;b)</td></tr>
+<tr class="separator:aa664be4bfc31263f51cb2a37a9b9ab00"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa7d91cf53df1b7bcc84fc0391325b87f"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classPhase.html">Phase</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCell.html#aa7d91cf53df1b7bcc84fc0391325b87f">getPhase</a> (const int &amp;phaseNumber, <a class="el" href="Tools_8h.html#a2c815f6ae654fe19b3985d14c9c8d74e">Prim</a>=<a class="el" href="Tools_8h.html#a2c815f6ae654fe19b3985d14c9c8d74ea2270f1269fdfbdfd9044eaa8af19750d">vecPhases</a>) const </td></tr>
+<tr class="separator:aa7d91cf53df1b7bcc84fc0391325b87f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a92774eccd23b76279f675de5995ec6c0"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classPhase.html">Phase</a> **&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCell.html#a92774eccd23b76279f675de5995ec6c0">getPhases</a> (<a class="el" href="Tools_8h.html#a2c815f6ae654fe19b3985d14c9c8d74e">Prim</a>=<a class="el" href="Tools_8h.html#a2c815f6ae654fe19b3985d14c9c8d74ea2270f1269fdfbdfd9044eaa8af19750d">vecPhases</a>) const </td></tr>
+<tr class="separator:a92774eccd23b76279f675de5995ec6c0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4484a89b0dae3a8a2ed961a9a47fd1be"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classMixture.html">Mixture</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCell.html#a4484a89b0dae3a8a2ed961a9a47fd1be">getMixture</a> (<a class="el" href="Tools_8h.html#a2c815f6ae654fe19b3985d14c9c8d74e">Prim</a>=<a class="el" href="Tools_8h.html#a2c815f6ae654fe19b3985d14c9c8d74ea2270f1269fdfbdfd9044eaa8af19750d">vecPhases</a>) const </td></tr>
+<tr class="separator:a4484a89b0dae3a8a2ed961a9a47fd1be"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a62f02641f63878dd014319463686085b"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classFlux.html">Flux</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCell.html#a62f02641f63878dd014319463686085b">getCons</a> () const </td></tr>
 <tr class="separator:a62f02641f63878dd014319463686085b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a473cd6ca6840b2afbdcb9034d0d307f0"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCell.html#a473cd6ca6840b2afbdcb9034d0d307f0">setCons</a> (<a class="el" href="classFlux.html">Flux</a> *cons)</td></tr>
@@ -240,12 +238,12 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:ad5f1c7b952dbe5a1ef1b839b0d203c9d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a366b30895862848a8b9e7809715b375f"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classElement.html">Element</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCell.html#a366b30895862848a8b9e7809715b375f">getElement</a> () const </td></tr>
 <tr class="separator:a366b30895862848a8b9e7809715b375f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae83734ccc0c8bbca28766ef8d313df77"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCell.html#ae83734ccc0c8bbca28766ef8d313df77">setTransport</a> (double value, int &amp;numTransport, <a class="el" href="Phase_8h.html#a2c815f6ae654fe19b3985d14c9c8d74e">Prim</a> type=<a class="el" href="Phase_8h.html#a2c815f6ae654fe19b3985d14c9c8d74ea2270f1269fdfbdfd9044eaa8af19750d">vecPhases</a>)</td></tr>
-<tr class="separator:ae83734ccc0c8bbca28766ef8d313df77"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae878bde1f35f54c53711d34abe457723"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classTransport.html">Transport</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCell.html#ae878bde1f35f54c53711d34abe457723">getTransport</a> (const int &amp;numTransport, <a class="el" href="Phase_8h.html#a2c815f6ae654fe19b3985d14c9c8d74e">Prim</a> type=<a class="el" href="Phase_8h.html#a2c815f6ae654fe19b3985d14c9c8d74ea2270f1269fdfbdfd9044eaa8af19750d">vecPhases</a>) const </td></tr>
-<tr class="separator:ae878bde1f35f54c53711d34abe457723"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a92eaef970e4dd7249a333298452a6c4a"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classTransport.html">Transport</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCell.html#a92eaef970e4dd7249a333298452a6c4a">getTransports</a> (<a class="el" href="Phase_8h.html#a2c815f6ae654fe19b3985d14c9c8d74e">Prim</a> type=<a class="el" href="Phase_8h.html#a2c815f6ae654fe19b3985d14c9c8d74ea2270f1269fdfbdfd9044eaa8af19750d">vecPhases</a>) const </td></tr>
-<tr class="separator:a92eaef970e4dd7249a333298452a6c4a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af101875c0361699c6e197a0737281f9f"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCell.html#af101875c0361699c6e197a0737281f9f">setTransport</a> (double value, int &amp;numTransport, <a class="el" href="Tools_8h.html#a2c815f6ae654fe19b3985d14c9c8d74e">Prim</a>=<a class="el" href="Tools_8h.html#a2c815f6ae654fe19b3985d14c9c8d74ea2270f1269fdfbdfd9044eaa8af19750d">vecPhases</a>)</td></tr>
+<tr class="separator:af101875c0361699c6e197a0737281f9f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a04e34660d2baeb0717271d42a5acfcb5"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classTransport.html">Transport</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCell.html#a04e34660d2baeb0717271d42a5acfcb5">getTransport</a> (const int &amp;numTransport, <a class="el" href="Tools_8h.html#a2c815f6ae654fe19b3985d14c9c8d74e">Prim</a>=<a class="el" href="Tools_8h.html#a2c815f6ae654fe19b3985d14c9c8d74ea2270f1269fdfbdfd9044eaa8af19750d">vecPhases</a>) const </td></tr>
+<tr class="separator:a04e34660d2baeb0717271d42a5acfcb5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abd864b62a9ed9a685f702ad4de8f6650"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classTransport.html">Transport</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCell.html#abd864b62a9ed9a685f702ad4de8f6650">getTransports</a> (<a class="el" href="Tools_8h.html#a2c815f6ae654fe19b3985d14c9c8d74e">Prim</a>=<a class="el" href="Tools_8h.html#a2c815f6ae654fe19b3985d14c9c8d74ea2270f1269fdfbdfd9044eaa8af19750d">vecPhases</a>) const </td></tr>
+<tr class="separator:abd864b62a9ed9a685f702ad4de8f6650"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2baad92515aadf82ebd1015a1d3df068"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classTransport.html">Transport</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCell.html#a2baad92515aadf82ebd1015a1d3df068">getConsTransport</a> (const int &amp;numTransport) const </td></tr>
 <tr class="separator:a2baad92515aadf82ebd1015a1d3df068"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a145c6d95038e59c8e4da1041e0afd5fd"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCell.html#a145c6d95038e59c8e4da1041e0afd5fd">setConsTransport</a> (double value, const int &amp;numTransport)</td></tr>
@@ -264,20 +262,20 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a8a97973530d1163e9bd133e150f2783b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa2013a944073806f509dd37ad0e7fe37"><td class="memItemLeft" align="right" valign="top">const <a class="el" href="classCoord.html">Coord</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCell.html#aa2013a944073806f509dd37ad0e7fe37">getVelocity</a> () const </td></tr>
 <tr class="separator:aa2013a944073806f509dd37ad0e7fe37"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae7fa2817c9254ba8c00e5596fc4aae05"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCell.html#ae7fa2817c9254ba8c00e5596fc4aae05">computeLocalSlopes</a> (const int &amp;numberPhases, const int &amp;numberTransports, <a class="el" href="classCellInterface.html">CellInterface</a> &amp;cellInterface, <a class="el" href="classLimiter.html">Limiter</a> &amp;globalLimiter, <a class="el" href="classLimiter.html">Limiter</a> &amp;interfaceLimiter, <a class="el" href="classLimiter.html">Limiter</a> &amp;globalVolumeFractionLimiter, <a class="el" href="classLimiter.html">Limiter</a> &amp;interfaceVolumeFractionLimiter, double &amp;alphaCellAfterOppositeSide, double &amp;alphaCell, double &amp;alphaCellOtherInterfaceSide, double &amp;epsInterface)</td></tr>
-<tr class="separator:ae7fa2817c9254ba8c00e5596fc4aae05"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a51a2ace6873794013f82063651f5a3a5"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCell.html#a51a2ace6873794013f82063651f5a3a5">computeLocalSlopesLimite</a> (const int &amp;numberPhases, const int &amp;numberTransports, <a class="el" href="classCellInterface.html">CellInterface</a> &amp;cellInterface, <a class="el" href="classLimiter.html">Limiter</a> &amp;globalLimiter, <a class="el" href="classLimiter.html">Limiter</a> &amp;interfaceLimiter, <a class="el" href="classLimiter.html">Limiter</a> &amp;globalVolumeFractionLimiter, <a class="el" href="classLimiter.html">Limiter</a> &amp;interfaceVolumeFractionLimiter, double &amp;epsInterface)</td></tr>
-<tr class="separator:a51a2ace6873794013f82063651f5a3a5"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a767b28e066f73e546f476dc4d394437b"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classPhase.html">Phase</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCell.html#a767b28e066f73e546f476dc4d394437b">getSlopes</a> (const int &amp;phaseNumber) const </td></tr>
-<tr class="separator:a767b28e066f73e546f476dc4d394437b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a001e5e22b5a32e0422f645b20e7c30c7"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classTransport.html">Transport</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCell.html#a001e5e22b5a32e0422f645b20e7c30c7">getSlopesTransport</a> (const int &amp;numberTransport) const </td></tr>
-<tr class="separator:a001e5e22b5a32e0422f645b20e7c30c7"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab19503de136ea5873840bf0aeddc2bfe"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCell.html#ab19503de136ea5873840bf0aeddc2bfe">saveCons</a> (const int &amp;numberPhases, const int &amp;numberTransports)</td></tr>
-<tr class="separator:ab19503de136ea5873840bf0aeddc2bfe"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac128afdce5d59e05a956df0fc6de6065"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCell.html#ac128afdce5d59e05a956df0fc6de6065">recuperationCons</a> (const int &amp;numberPhases, const int &amp;numberTransports)</td></tr>
-<tr class="separator:ac128afdce5d59e05a956df0fc6de6065"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af8c1d067da24037f1e76bdc2594385aa"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCell.html#af8c1d067da24037f1e76bdc2594385aa">predictionOrdre2</a> (const double &amp;dt, const int &amp;numberPhases, const int &amp;numberTransports, <a class="el" href="classSymmetry.html">Symmetry</a> *symmetry)</td></tr>
-<tr class="separator:af8c1d067da24037f1e76bdc2594385aa"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6515aef2c9969627a2ff785fe61a210e"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCell.html#a6515aef2c9969627a2ff785fe61a210e">computeLocalSlopes</a> (const int &amp;, const int &amp;, <a class="el" href="classCellInterface.html">CellInterface</a> &amp;, <a class="el" href="classLimiter.html">Limiter</a> &amp;, <a class="el" href="classLimiter.html">Limiter</a> &amp;, <a class="el" href="classLimiter.html">Limiter</a> &amp;, <a class="el" href="classLimiter.html">Limiter</a> &amp;, double &amp;, double &amp;, double &amp;, double &amp;)</td></tr>
+<tr class="separator:a6515aef2c9969627a2ff785fe61a210e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acb6493fe9b9541e025948b56ab617f03"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCell.html#acb6493fe9b9541e025948b56ab617f03">computeLocalSlopesLimite</a> (const int &amp;, const int &amp;, <a class="el" href="classCellInterface.html">CellInterface</a> &amp;, <a class="el" href="classLimiter.html">Limiter</a> &amp;, <a class="el" href="classLimiter.html">Limiter</a> &amp;, <a class="el" href="classLimiter.html">Limiter</a> &amp;, <a class="el" href="classLimiter.html">Limiter</a> &amp;, double &amp;)</td></tr>
+<tr class="separator:acb6493fe9b9541e025948b56ab617f03"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a24d53735a5500124263592e851d5a971"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classPhase.html">Phase</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCell.html#a24d53735a5500124263592e851d5a971">getSlopes</a> (const int &amp;) const </td></tr>
+<tr class="separator:a24d53735a5500124263592e851d5a971"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a46ecfd3d7dc0511ac93793981441ce16"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classTransport.html">Transport</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCell.html#a46ecfd3d7dc0511ac93793981441ce16">getSlopesTransport</a> (const int &amp;) const </td></tr>
+<tr class="separator:a46ecfd3d7dc0511ac93793981441ce16"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5c7c6a89c5f8f6fba61c5023f0800f6d"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCell.html#a5c7c6a89c5f8f6fba61c5023f0800f6d">saveCons</a> (const int &amp;, const int &amp;)</td></tr>
+<tr class="separator:a5c7c6a89c5f8f6fba61c5023f0800f6d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6e056b8481d9384f5774d8e3931d2306"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCell.html#a6e056b8481d9384f5774d8e3931d2306">recuperationCons</a> (const int &amp;, const int &amp;)</td></tr>
+<tr class="separator:a6e056b8481d9384f5774d8e3931d2306"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a858726d9633a417b4b33330fc5d95d25"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCell.html#a858726d9633a417b4b33330fc5d95d25">predictionOrdre2</a> (const double &amp;, const int &amp;, const int &amp;, <a class="el" href="classSymmetry.html">Symmetry</a> *)</td></tr>
+<tr class="separator:a858726d9633a417b4b33330fc5d95d25"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6c2e3ca49ad22dc78f35e16f86c7e6ec"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCell.html#a6c2e3ca49ad22dc78f35e16f86c7e6ec">printInfo</a> () const </td></tr>
 <tr class="separator:a6c2e3ca49ad22dc78f35e16f86c7e6ec"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1b96a70b37d23edffe3fa482f5146ca3"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCell.html#a1b96a70b37d23edffe3fa482f5146ca3">distance</a> (<a class="el" href="classCell.html">Cell</a> *c)</td></tr>
@@ -300,12 +298,14 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:aa9189e2bf267b204000fcab23b11522b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a772bdc56ef35951ec251486cc4d78e67"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCell.html#a772bdc56ef35951ec251486cc4d78e67">printGnuplotAMR</a> (std::ofstream &amp;fileStream, const int &amp;dim, <a class="el" href="classGeometricObject.html">GeometricObject</a> *objet=0)</td></tr>
 <tr class="separator:a772bdc56ef35951ec251486cc4d78e67"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a62d4df872a40dbb40d7a6ffe4da199c6"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCell.html#a62d4df872a40dbb40d7a6ffe4da199c6">computeIntegration</a> (double &amp;integration)</td></tr>
-<tr class="separator:a62d4df872a40dbb40d7a6ffe4da199c6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2dd52364eec528a73eaac02ecd0da4a9"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCell.html#a2dd52364eec528a73eaac02ecd0da4a9">computeVolumePhaseK</a> (double &amp;integration, const int &amp;numPhase)</td></tr>
+<tr class="separator:a2dd52364eec528a73eaac02ecd0da4a9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2264570e83ad8036314a26c82c571aa7"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCell.html#a2264570e83ad8036314a26c82c571aa7">computeMass</a> (double &amp;mass, double &amp;alphaRef)</td></tr>
 <tr class="separator:a2264570e83ad8036314a26c82c571aa7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a50565e0b6e65a92982b1779674c552f7"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCell.html#a50565e0b6e65a92982b1779674c552f7">computeTotalMass</a> (double &amp;mass)</td></tr>
 <tr class="separator:a50565e0b6e65a92982b1779674c552f7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae732f66a0ceadd4eb4cfb4ee22529ce8"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCell.html#ae732f66a0ceadd4eb4cfb4ee22529ce8">computeTotalEnergy</a> (double &amp;totalEnergy)</td></tr>
+<tr class="separator:ae732f66a0ceadd4eb4cfb4ee22529ce8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3148c1c2ef687cd4af36140a6c9076ef"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCell.html#a3148c1c2ef687cd4af36140a6c9076ef">lookForPmax</a> (double *pMax, double *pMaxWall)</td></tr>
 <tr class="separator:a3148c1c2ef687cd4af36140a6c9076ef"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aec77003ab74feab724abc598ee52953f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCell.html#aec77003ab74feab724abc598ee52953f">setToZeroXi</a> ()</td></tr>
@@ -342,8 +342,6 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a6065ebe6a312dc6a0448f7f0bf21ae64"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0995f84b16bda4fbbd5ffe57cc8d9a2d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCell.html#a0995f84b16bda4fbbd5ffe57cc8d9a2d">addFluxXi</a> (double value)</td></tr>
 <tr class="separator:a0995f84b16bda4fbbd5ffe57cc8d9a2d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a03b30b27991e326f3dcf5213cab8f419"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCell.html#a03b30b27991e326f3dcf5213cab8f419">subtractFluxXi</a> (double value)</td></tr>
-<tr class="separator:a03b30b27991e326f3dcf5213cab8f419"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aac72fe8b0117013d4586405faef34629"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCell.html#aac72fe8b0117013d4586405faef34629">getNumberCellsChildren</a> ()</td></tr>
 <tr class="separator:aac72fe8b0117013d4586405faef34629"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a15dcc2eb34fd974fdc4ecc434d34cb19"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classCell.html">Cell</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCell.html#a15dcc2eb34fd974fdc4ecc434d34cb19">getCellChild</a> (const int &amp;num)</td></tr>
@@ -354,11 +352,11 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:ad19bffac7eeab34be02b960c7986887d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a99de546dc1587e9ef750eabb590523cb"><td class="memItemLeft" align="right" valign="top">virtual int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCell.html#a99de546dc1587e9ef750eabb590523cb">getRankOfNeighborCPU</a> () const </td></tr>
 <tr class="separator:a99de546dc1587e9ef750eabb590523cb"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a01e23b22590ab03eea47e479094a51b6"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCell.html#a01e23b22590ab03eea47e479094a51b6">setRankOfNeighborCPU</a> (int rank)</td></tr>
-<tr class="separator:a01e23b22590ab03eea47e479094a51b6"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1c42e2893bb6111e2ada4ce4f3ab0702"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCell.html#a1c42e2893bb6111e2ada4ce4f3ab0702">fillBufferPrimitives</a> (double *buffer, int &amp;counter, const int &amp;lvl, const int &amp;neighbour, <a class="el" href="Phase_8h.html#a2c815f6ae654fe19b3985d14c9c8d74e">Prim</a> type=<a class="el" href="Phase_8h.html#a2c815f6ae654fe19b3985d14c9c8d74ea2270f1269fdfbdfd9044eaa8af19750d">vecPhases</a>) const </td></tr>
+<tr class="memitem:a8894b5ec0d76c4b00aa6dac2e3ad6a74"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCell.html#a8894b5ec0d76c4b00aa6dac2e3ad6a74">setRankOfNeighborCPU</a> (int)</td></tr>
+<tr class="separator:a8894b5ec0d76c4b00aa6dac2e3ad6a74"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1c42e2893bb6111e2ada4ce4f3ab0702"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCell.html#a1c42e2893bb6111e2ada4ce4f3ab0702">fillBufferPrimitives</a> (double *buffer, int &amp;counter, const int &amp;lvl, const int &amp;neighbour, <a class="el" href="Tools_8h.html#a2c815f6ae654fe19b3985d14c9c8d74e">Prim</a> type=<a class="el" href="Tools_8h.html#a2c815f6ae654fe19b3985d14c9c8d74ea2270f1269fdfbdfd9044eaa8af19750d">vecPhases</a>) const </td></tr>
 <tr class="separator:a1c42e2893bb6111e2ada4ce4f3ab0702"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aff253e2fe70c2df036dbbcc803f80357"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCell.html#aff253e2fe70c2df036dbbcc803f80357">getBufferPrimitives</a> (double *buffer, int &amp;counter, const int &amp;lvl, <a class="el" href="classEos.html">Eos</a> **eos, <a class="el" href="Phase_8h.html#a2c815f6ae654fe19b3985d14c9c8d74e">Prim</a> type=<a class="el" href="Phase_8h.html#a2c815f6ae654fe19b3985d14c9c8d74ea2270f1269fdfbdfd9044eaa8af19750d">vecPhases</a>)</td></tr>
+<tr class="memitem:aff253e2fe70c2df036dbbcc803f80357"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCell.html#aff253e2fe70c2df036dbbcc803f80357">getBufferPrimitives</a> (double *buffer, int &amp;counter, const int &amp;lvl, <a class="el" href="classEos.html">Eos</a> **eos, <a class="el" href="Tools_8h.html#a2c815f6ae654fe19b3985d14c9c8d74e">Prim</a> type=<a class="el" href="Tools_8h.html#a2c815f6ae654fe19b3985d14c9c8d74ea2270f1269fdfbdfd9044eaa8af19750d">vecPhases</a>)</td></tr>
 <tr class="separator:aff253e2fe70c2df036dbbcc803f80357"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7cd436bb28fcc7b902a06de70646a69c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCell.html#a7cd436bb28fcc7b902a06de70646a69c">fillBufferVector</a> (double *buffer, int &amp;counter, const int &amp;lvl, const int &amp;neighbour, const int &amp;dim, <a class="el" href="Cell_8h.html#acca207de98b59d1c41e3975008706d61">Variable</a> nameVector, int num=0, int index=-1) const </td></tr>
 <tr class="separator:a7cd436bb28fcc7b902a06de70646a69c"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -368,10 +366,10 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a56b0d303497638217ea6de9cb7eaf183"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6716fd05a6a19efd10736cdbbeaf8d11"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCell.html#a6716fd05a6a19efd10736cdbbeaf8d11">getBufferTransports</a> (double *buffer, int &amp;counter, const int &amp;lvl)</td></tr>
 <tr class="separator:a6716fd05a6a19efd10736cdbbeaf8d11"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af5fefeb838afef6a0c0a6f0d5232de28"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCell.html#af5fefeb838afef6a0c0a6f0d5232de28">fillBufferSlopes</a> (double *buffer, int &amp;counter, const int &amp;lvl, const int &amp;neighbour) const </td></tr>
-<tr class="separator:af5fefeb838afef6a0c0a6f0d5232de28"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1e76107e28e9374a63482407922c71ab"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCell.html#a1e76107e28e9374a63482407922c71ab">getBufferSlopes</a> (double *buffer, int &amp;counter, const int &amp;lvl)</td></tr>
-<tr class="separator:a1e76107e28e9374a63482407922c71ab"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac98b82f9a4a4fd1fb775623f75400883"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCell.html#ac98b82f9a4a4fd1fb775623f75400883">fillBufferSlopes</a> (double *, int &amp;, const int &amp;, const int &amp;) const </td></tr>
+<tr class="separator:ac98b82f9a4a4fd1fb775623f75400883"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5837670a2fb516dd6515a30cebb52ffa"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCell.html#a5837670a2fb516dd6515a30cebb52ffa">getBufferSlopes</a> (double *, int &amp;, const int &amp;)</td></tr>
+<tr class="separator:a5837670a2fb516dd6515a30cebb52ffa"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5ab5fbae2e45195420a2f2099b279774"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCell.html#a5ab5fbae2e45195420a2f2099b279774">isCellGhost</a> () const </td></tr>
 <tr class="separator:a5ab5fbae2e45195420a2f2099b279774"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aae0ced59dfaeabbb4b3842c1ebea797f"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCell.html#aae0ced59dfaeabbb4b3842c1ebea797f">hasNeighboringGhostCellOfCPUneighbour</a> (const int &amp;neighbour) const </td></tr>
@@ -646,42 +644,6 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="a955cc120f49a5e1fad31dca2d6ad7bab"></a>
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">void Cell::allocateAndCopyPhase </td>
-          <td>(</td>
-          <td class="paramtype">const int &amp;&#160;</td>
-          <td class="paramname"><em>phaseNumber</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="classPhase.html">Phase</a> *&#160;</td>
-          <td class="paramname"><em>phase</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Reimplemented in <a class="el" href="classCellO2.html#a5e14aad9ed717f990721dc163e1135c2">CellO2</a>.</p>
-
-</div>
-</div>
 <a class="anchor" id="adf13afb299b11ee943d664a36afbd053"></a>
 <div class="memitem">
 <div class="memproto">
@@ -942,8 +904,8 @@ Protected Attributes</h2></td></tr>
         <tr>
           <td class="memname">void Cell::completeFulfillState </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="Phase_8h.html#a2c815f6ae654fe19b3985d14c9c8d74e">Prim</a>&#160;</td>
-          <td class="paramname"><em>type</em> = <code><a class="el" href="Phase_8h.html#a2c815f6ae654fe19b3985d14c9c8d74ea2270f1269fdfbdfd9044eaa8af19750d">vecPhases</a></code></td><td>)</td>
+          <td class="paramtype"><a class="el" href="Tools_8h.html#a2c815f6ae654fe19b3985d14c9c8d74e">Prim</a>&#160;</td>
+          <td class="paramname"><em>type</em> = <code><a class="el" href="Tools_8h.html#a2c815f6ae654fe19b3985d14c9c8d74ea2270f1269fdfbdfd9044eaa8af19750d">vecPhases</a></code></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -1016,22 +978,6 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="a62d4df872a40dbb40d7a6ffe4da199c6"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void Cell::computeIntegration </td>
-          <td>(</td>
-          <td class="paramtype">double &amp;&#160;</td>
-          <td class="paramname"><em>integration</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
 <a class="anchor" id="a02ea17e6ea866ddb144de59a6aa8cb82"></a>
 <div class="memitem">
 <div class="memproto">
@@ -1058,7 +1004,7 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="ae7fa2817c9254ba8c00e5596fc4aae05"></a>
+<a class="anchor" id="a6515aef2c9969627a2ff785fe61a210e"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="mlabels">
@@ -1069,67 +1015,67 @@ Protected Attributes</h2></td></tr>
           <td class="memname">virtual void Cell::computeLocalSlopes </td>
           <td>(</td>
           <td class="paramtype">const int &amp;&#160;</td>
-          <td class="paramname"><em>numberPhases</em>, </td>
+          <td class="paramname">, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">const int &amp;&#160;</td>
-          <td class="paramname"><em>numberTransports</em>, </td>
+          <td class="paramname">, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype"><a class="el" href="classCellInterface.html">CellInterface</a> &amp;&#160;</td>
-          <td class="paramname"><em>cellInterface</em>, </td>
+          <td class="paramname">, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype"><a class="el" href="classLimiter.html">Limiter</a> &amp;&#160;</td>
-          <td class="paramname"><em>globalLimiter</em>, </td>
+          <td class="paramname">, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype"><a class="el" href="classLimiter.html">Limiter</a> &amp;&#160;</td>
-          <td class="paramname"><em>interfaceLimiter</em>, </td>
+          <td class="paramname">, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype"><a class="el" href="classLimiter.html">Limiter</a> &amp;&#160;</td>
-          <td class="paramname"><em>globalVolumeFractionLimiter</em>, </td>
+          <td class="paramname">, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype"><a class="el" href="classLimiter.html">Limiter</a> &amp;&#160;</td>
-          <td class="paramname"><em>interfaceVolumeFractionLimiter</em>, </td>
+          <td class="paramname">, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">double &amp;&#160;</td>
-          <td class="paramname"><em>alphaCellAfterOppositeSide</em>, </td>
+          <td class="paramname">, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">double &amp;&#160;</td>
-          <td class="paramname"><em>alphaCell</em>, </td>
+          <td class="paramname">, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">double &amp;&#160;</td>
-          <td class="paramname"><em>alphaCellOtherInterfaceSide</em>, </td>
+          <td class="paramname">, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">double &amp;&#160;</td>
-          <td class="paramname"><em>epsInterface</em>&#160;</td>
+          <td class="paramname">&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -1148,7 +1094,7 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="a51a2ace6873794013f82063651f5a3a5"></a>
+<a class="anchor" id="acb6493fe9b9541e025948b56ab617f03"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="mlabels">
@@ -1159,49 +1105,49 @@ Protected Attributes</h2></td></tr>
           <td class="memname">virtual void Cell::computeLocalSlopesLimite </td>
           <td>(</td>
           <td class="paramtype">const int &amp;&#160;</td>
-          <td class="paramname"><em>numberPhases</em>, </td>
+          <td class="paramname">, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">const int &amp;&#160;</td>
-          <td class="paramname"><em>numberTransports</em>, </td>
+          <td class="paramname">, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype"><a class="el" href="classCellInterface.html">CellInterface</a> &amp;&#160;</td>
-          <td class="paramname"><em>cellInterface</em>, </td>
+          <td class="paramname">, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype"><a class="el" href="classLimiter.html">Limiter</a> &amp;&#160;</td>
-          <td class="paramname"><em>globalLimiter</em>, </td>
+          <td class="paramname">, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype"><a class="el" href="classLimiter.html">Limiter</a> &amp;&#160;</td>
-          <td class="paramname"><em>interfaceLimiter</em>, </td>
+          <td class="paramname">, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype"><a class="el" href="classLimiter.html">Limiter</a> &amp;&#160;</td>
-          <td class="paramname"><em>globalVolumeFractionLimiter</em>, </td>
+          <td class="paramname">, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype"><a class="el" href="classLimiter.html">Limiter</a> &amp;&#160;</td>
-          <td class="paramname"><em>interfaceVolumeFractionLimiter</em>, </td>
+          <td class="paramname">, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">double &amp;&#160;</td>
-          <td class="paramname"><em>epsInterface</em>&#160;</td>
+          <td class="paramname">&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -1263,6 +1209,22 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
+<a class="anchor" id="ae732f66a0ceadd4eb4cfb4ee22529ce8"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Cell::computeTotalEnergy </td>
+          <td>(</td>
+          <td class="paramtype">double &amp;&#160;</td>
+          <td class="paramname"><em>totalEnergy</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a class="anchor" id="a50565e0b6e65a92982b1779674c552f7"></a>
 <div class="memitem">
 <div class="memproto">
@@ -1279,7 +1241,33 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="aa103ab80489ae55e5718e3e03d49496a"></a>
+<a class="anchor" id="a2dd52364eec528a73eaac02ecd0da4a9"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Cell::computeVolumePhaseK </td>
+          <td>(</td>
+          <td class="paramtype">double &amp;&#160;</td>
+          <td class="paramname"><em>integration</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const int &amp;&#160;</td>
+          <td class="paramname"><em>numPhase</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="af612fe9ecefd34ffb28f64256714257b"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="mlabels">
@@ -1290,18 +1278,8 @@ Protected Attributes</h2></td></tr>
           <td class="memname">virtual void Cell::copyInCell </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="classCell.html">Cell</a> &amp;&#160;</td>
-          <td class="paramname"><em>cellSource</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="Phase_8h.html#a2c815f6ae654fe19b3985d14c9c8d74e">Prim</a>&#160;</td>
-          <td class="paramname"><em>type</em> = <code><a class="el" href="Phase_8h.html#a2c815f6ae654fe19b3985d14c9c8d74ea2270f1269fdfbdfd9044eaa8af19750d">vecPhases</a></code>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td> const</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
         </tr>
       </table>
   </td>
@@ -1310,8 +1288,6 @@ Protected Attributes</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
-
-<p>Reimplemented in <a class="el" href="classCellO2.html#a54675e5a2648c5c3e6ed4aae4d17a9cb">CellO2</a>.</p>
 
 </div>
 </div>
@@ -1602,7 +1578,7 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="a5b3ac840dc7e4a0e7bb1ad1645e12b5c"></a>
+<a class="anchor" id="acd3b70c962831644613fe4d25986d61e"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
@@ -1616,7 +1592,7 @@ Protected Attributes</h2></td></tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">const int &amp;&#160;</td>
-          <td class="paramname"><em>lvlMax</em>&#160;</td>
+          <td class="paramname">&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -1667,8 +1643,8 @@ Protected Attributes</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="Phase_8h.html#a2c815f6ae654fe19b3985d14c9c8d74e">Prim</a>&#160;</td>
-          <td class="paramname"><em>type</em> = <code><a class="el" href="Phase_8h.html#a2c815f6ae654fe19b3985d14c9c8d74ea2270f1269fdfbdfd9044eaa8af19750d">vecPhases</a></code>&#160;</td>
+          <td class="paramtype"><a class="el" href="Tools_8h.html#a2c815f6ae654fe19b3985d14c9c8d74e">Prim</a>&#160;</td>
+          <td class="paramname"><em>type</em> = <code><a class="el" href="Tools_8h.html#a2c815f6ae654fe19b3985d14c9c8d74ea2270f1269fdfbdfd9044eaa8af19750d">vecPhases</a></code>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -1681,7 +1657,7 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="af5fefeb838afef6a0c0a6f0d5232de28"></a>
+<a class="anchor" id="ac98b82f9a4a4fd1fb775623f75400883"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="mlabels">
@@ -1692,25 +1668,25 @@ Protected Attributes</h2></td></tr>
           <td class="memname">virtual void Cell::fillBufferSlopes </td>
           <td>(</td>
           <td class="paramtype">double *&#160;</td>
-          <td class="paramname"><em>buffer</em>, </td>
+          <td class="paramname">, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">int &amp;&#160;</td>
-          <td class="paramname"><em>counter</em>, </td>
+          <td class="paramname">, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">const int &amp;&#160;</td>
-          <td class="paramname"><em>lvl</em>, </td>
+          <td class="paramname">, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">const int &amp;&#160;</td>
-          <td class="paramname"><em>neighbour</em>&#160;</td>
+          <td class="paramname">&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -1991,8 +1967,8 @@ Protected Attributes</h2></td></tr>
         <tr>
           <td class="memname">void Cell::fulfillState </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="Phase_8h.html#a2c815f6ae654fe19b3985d14c9c8d74e">Prim</a>&#160;</td>
-          <td class="paramname"><em>type</em> = <code><a class="el" href="Phase_8h.html#a2c815f6ae654fe19b3985d14c9c8d74ea2270f1269fdfbdfd9044eaa8af19750d">vecPhases</a></code></td><td>)</td>
+          <td class="paramtype"><a class="el" href="Tools_8h.html#a2c815f6ae654fe19b3985d14c9c8d74e">Prim</a>&#160;</td>
+          <td class="paramname"><em>type</em> = <code><a class="el" href="Tools_8h.html#a2c815f6ae654fe19b3985d14c9c8d74ea2270f1269fdfbdfd9044eaa8af19750d">vecPhases</a></code></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -2038,8 +2014,8 @@ Protected Attributes</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="Phase_8h.html#a2c815f6ae654fe19b3985d14c9c8d74e">Prim</a>&#160;</td>
-          <td class="paramname"><em>type</em> = <code><a class="el" href="Phase_8h.html#a2c815f6ae654fe19b3985d14c9c8d74ea2270f1269fdfbdfd9044eaa8af19750d">vecPhases</a></code>&#160;</td>
+          <td class="paramtype"><a class="el" href="Tools_8h.html#a2c815f6ae654fe19b3985d14c9c8d74e">Prim</a>&#160;</td>
+          <td class="paramname"><em>type</em> = <code><a class="el" href="Tools_8h.html#a2c815f6ae654fe19b3985d14c9c8d74ea2270f1269fdfbdfd9044eaa8af19750d">vecPhases</a></code>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -2051,7 +2027,7 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="a1e76107e28e9374a63482407922c71ab"></a>
+<a class="anchor" id="a5837670a2fb516dd6515a30cebb52ffa"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="mlabels">
@@ -2062,19 +2038,19 @@ Protected Attributes</h2></td></tr>
           <td class="memname">virtual void Cell::getBufferSlopes </td>
           <td>(</td>
           <td class="paramtype">double *&#160;</td>
-          <td class="paramname"><em>buffer</em>, </td>
+          <td class="paramname">, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">int &amp;&#160;</td>
-          <td class="paramname"><em>counter</em>, </td>
+          <td class="paramname">, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">const int &amp;&#160;</td>
-          <td class="paramname"><em>lvl</em>&#160;</td>
+          <td class="paramname">&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -2263,14 +2239,14 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="a30bb973262fea22cc77b5a7e5757d854"></a>
+<a class="anchor" id="aa664be4bfc31263f51cb2a37a9b9ab00"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
           <td class="memname"><a class="el" href="classCellInterface.html">CellInterface</a> * Cell::getCellInterface </td>
           <td>(</td>
-          <td class="paramtype">int &amp;&#160;</td>
+          <td class="paramtype">const int &amp;&#160;</td>
           <td class="paramname"><em>b</em></td><td>)</td>
           <td></td>
         </tr>
@@ -2496,7 +2472,7 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="a41cdd6ee3f8f01228a6ff6076a686646"></a>
+<a class="anchor" id="a4484a89b0dae3a8a2ed961a9a47fd1be"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="mlabels">
@@ -2506,8 +2482,8 @@ Protected Attributes</h2></td></tr>
         <tr>
           <td class="memname"><a class="el" href="classMixture.html">Mixture</a> * Cell::getMixture </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="Phase_8h.html#a2c815f6ae654fe19b3985d14c9c8d74e">Prim</a>&#160;</td>
-          <td class="paramname"><em>type</em> = <code><a class="el" href="Phase_8h.html#a2c815f6ae654fe19b3985d14c9c8d74ea2270f1269fdfbdfd9044eaa8af19750d">vecPhases</a></code></td><td>)</td>
+          <td class="paramtype"><a class="el" href="Tools_8h.html#a2c815f6ae654fe19b3985d14c9c8d74e">Prim</a>&#160;</td>
+          <td class="paramname"> = <code><a class="el" href="Tools_8h.html#a2c815f6ae654fe19b3985d14c9c8d74ea2270f1269fdfbdfd9044eaa8af19750d">vecPhases</a></code></td><td>)</td>
           <td> const</td>
         </tr>
       </table>
@@ -2599,7 +2575,7 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="aa1371e80d46ee59b37e54a2f26008dd5"></a>
+<a class="anchor" id="aa7d91cf53df1b7bcc84fc0391325b87f"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="mlabels">
@@ -2615,8 +2591,8 @@ Protected Attributes</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="Phase_8h.html#a2c815f6ae654fe19b3985d14c9c8d74e">Prim</a>&#160;</td>
-          <td class="paramname"><em>type</em> = <code><a class="el" href="Phase_8h.html#a2c815f6ae654fe19b3985d14c9c8d74ea2270f1269fdfbdfd9044eaa8af19750d">vecPhases</a></code>&#160;</td>
+          <td class="paramtype"><a class="el" href="Tools_8h.html#a2c815f6ae654fe19b3985d14c9c8d74e">Prim</a>&#160;</td>
+          <td class="paramname"> = <code><a class="el" href="Tools_8h.html#a2c815f6ae654fe19b3985d14c9c8d74ea2270f1269fdfbdfd9044eaa8af19750d">vecPhases</a></code>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -2635,7 +2611,7 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="a3108676971bf967f2c8e648a5baf0aa7"></a>
+<a class="anchor" id="a92774eccd23b76279f675de5995ec6c0"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="mlabels">
@@ -2645,8 +2621,8 @@ Protected Attributes</h2></td></tr>
         <tr>
           <td class="memname"><a class="el" href="classPhase.html">Phase</a> ** Cell::getPhases </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="Phase_8h.html#a2c815f6ae654fe19b3985d14c9c8d74e">Prim</a>&#160;</td>
-          <td class="paramname"><em>type</em> = <code><a class="el" href="Phase_8h.html#a2c815f6ae654fe19b3985d14c9c8d74ea2270f1269fdfbdfd9044eaa8af19750d">vecPhases</a></code></td><td>)</td>
+          <td class="paramtype"><a class="el" href="Tools_8h.html#a2c815f6ae654fe19b3985d14c9c8d74e">Prim</a>&#160;</td>
+          <td class="paramname"> = <code><a class="el" href="Tools_8h.html#a2c815f6ae654fe19b3985d14c9c8d74ea2270f1269fdfbdfd9044eaa8af19750d">vecPhases</a></code></td><td>)</td>
           <td> const</td>
         </tr>
       </table>
@@ -2826,7 +2802,7 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="a767b28e066f73e546f476dc4d394437b"></a>
+<a class="anchor" id="a24d53735a5500124263592e851d5a971"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="mlabels">
@@ -2837,7 +2813,7 @@ Protected Attributes</h2></td></tr>
           <td class="memname">virtual <a class="el" href="classPhase.html">Phase</a>* Cell::getSlopes </td>
           <td>(</td>
           <td class="paramtype">const int &amp;&#160;</td>
-          <td class="paramname"><em>phaseNumber</em></td><td>)</td>
+          <td class="paramname"></td><td>)</td>
           <td> const</td>
         </tr>
       </table>
@@ -2851,7 +2827,7 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="a001e5e22b5a32e0422f645b20e7c30c7"></a>
+<a class="anchor" id="a46ecfd3d7dc0511ac93793981441ce16"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="mlabels">
@@ -2862,7 +2838,7 @@ Protected Attributes</h2></td></tr>
           <td class="memname">virtual <a class="el" href="classTransport.html">Transport</a>* Cell::getSlopesTransport </td>
           <td>(</td>
           <td class="paramtype">const int &amp;&#160;</td>
-          <td class="paramname"><em>numberTransport</em></td><td>)</td>
+          <td class="paramname"></td><td>)</td>
           <td> const</td>
         </tr>
       </table>
@@ -2900,7 +2876,7 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="ae878bde1f35f54c53711d34abe457723"></a>
+<a class="anchor" id="a04e34660d2baeb0717271d42a5acfcb5"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="mlabels">
@@ -2916,8 +2892,8 @@ Protected Attributes</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="Phase_8h.html#a2c815f6ae654fe19b3985d14c9c8d74e">Prim</a>&#160;</td>
-          <td class="paramname"><em>type</em> = <code><a class="el" href="Phase_8h.html#a2c815f6ae654fe19b3985d14c9c8d74ea2270f1269fdfbdfd9044eaa8af19750d">vecPhases</a></code>&#160;</td>
+          <td class="paramtype"><a class="el" href="Tools_8h.html#a2c815f6ae654fe19b3985d14c9c8d74e">Prim</a>&#160;</td>
+          <td class="paramname"> = <code><a class="el" href="Tools_8h.html#a2c815f6ae654fe19b3985d14c9c8d74ea2270f1269fdfbdfd9044eaa8af19750d">vecPhases</a></code>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -2936,7 +2912,7 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="a92eaef970e4dd7249a333298452a6c4a"></a>
+<a class="anchor" id="abd864b62a9ed9a685f702ad4de8f6650"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="mlabels">
@@ -2946,8 +2922,8 @@ Protected Attributes</h2></td></tr>
         <tr>
           <td class="memname"><a class="el" href="classTransport.html">Transport</a> * Cell::getTransports </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="Phase_8h.html#a2c815f6ae654fe19b3985d14c9c8d74e">Prim</a>&#160;</td>
-          <td class="paramname"><em>type</em> = <code><a class="el" href="Phase_8h.html#a2c815f6ae654fe19b3985d14c9c8d74ea2270f1269fdfbdfd9044eaa8af19750d">vecPhases</a></code></td><td>)</td>
+          <td class="paramtype"><a class="el" href="Tools_8h.html#a2c815f6ae654fe19b3985d14c9c8d74e">Prim</a>&#160;</td>
+          <td class="paramname"> = <code><a class="el" href="Tools_8h.html#a2c815f6ae654fe19b3985d14c9c8d74ea2270f1269fdfbdfd9044eaa8af19750d">vecPhases</a></code></td><td>)</td>
           <td> const</td>
         </tr>
       </table>
@@ -3074,12 +3050,9 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="a16a489a74a24224511a5a32ae0887eee"></a>
+<a class="anchor" id="a5e461cac2fc7929eb892af7e4de3c250"></a>
 <div class="memitem">
 <div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
       <table class="memname">
         <tr>
           <td class="memname">void Cell::localProjection </td>
@@ -3108,8 +3081,8 @@ Protected Attributes</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="Phase_8h.html#a2c815f6ae654fe19b3985d14c9c8d74e">Prim</a>&#160;</td>
-          <td class="paramname"><em>type</em> = <code><a class="el" href="Phase_8h.html#a2c815f6ae654fe19b3985d14c9c8d74ea2270f1269fdfbdfd9044eaa8af19750d">vecPhases</a></code>&#160;</td>
+          <td class="paramtype"><a class="el" href="Tools_8h.html#a2c815f6ae654fe19b3985d14c9c8d74e">Prim</a>&#160;</td>
+          <td class="paramname"> = <code><a class="el" href="Tools_8h.html#a2c815f6ae654fe19b3985d14c9c8d74ea2270f1269fdfbdfd9044eaa8af19750d">vecPhases</a></code>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -3117,14 +3090,7 @@ Protected Attributes</h2></td></tr>
           <td></td><td></td>
         </tr>
       </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
-  </tr>
-</table>
 </div><div class="memdoc">
-
-<p>Reimplemented in <a class="el" href="classCellO2.html#acc033f66f143322c8887953e79e4c84f">CellO2</a>.</p>
 
 </div>
 </div>
@@ -3203,7 +3169,7 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="af8c1d067da24037f1e76bdc2594385aa"></a>
+<a class="anchor" id="a858726d9633a417b4b33330fc5d95d25"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="mlabels">
@@ -3214,25 +3180,25 @@ Protected Attributes</h2></td></tr>
           <td class="memname">virtual void Cell::predictionOrdre2 </td>
           <td>(</td>
           <td class="paramtype">const double &amp;&#160;</td>
-          <td class="paramname"><em>dt</em>, </td>
+          <td class="paramname">, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">const int &amp;&#160;</td>
-          <td class="paramname"><em>numberPhases</em>, </td>
+          <td class="paramname">, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">const int &amp;&#160;</td>
-          <td class="paramname"><em>numberTransports</em>, </td>
+          <td class="paramname">, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype"><a class="el" href="classSymmetry.html">Symmetry</a> *&#160;</td>
-          <td class="paramname"><em>symmetry</em>&#160;</td>
+          <td class="paramname">&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -3372,7 +3338,7 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="ac128afdce5d59e05a956df0fc6de6065"></a>
+<a class="anchor" id="a6e056b8481d9384f5774d8e3931d2306"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="mlabels">
@@ -3383,13 +3349,13 @@ Protected Attributes</h2></td></tr>
           <td class="memname">virtual void Cell::recuperationCons </td>
           <td>(</td>
           <td class="paramtype">const int &amp;&#160;</td>
-          <td class="paramname"><em>numberPhases</em>, </td>
+          <td class="paramname">, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">const int &amp;&#160;</td>
-          <td class="paramname"><em>numberTransports</em>&#160;</td>
+          <td class="paramname">&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -3521,7 +3487,7 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="abe24a830b4774e27ea4b439a45cb6072"></a>
+<a class="anchor" id="ac61c58f7d58185426131e8beae2afc2c"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="mlabels">
@@ -3550,13 +3516,7 @@ Protected Attributes</h2></td></tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">const int &amp;&#160;</td>
-          <td class="paramname"><em>numberPhases</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="Phase_8h.html#a2c815f6ae654fe19b3985d14c9c8d74e">Prim</a>&#160;</td>
-          <td class="paramname"><em>type</em> = <code><a class="el" href="Phase_8h.html#a2c815f6ae654fe19b3985d14c9c8d74ea2270f1269fdfbdfd9044eaa8af19750d">vecPhases</a></code>&#160;</td>
+          <td class="paramname"><em>numberPhases</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -3573,7 +3533,7 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="ab19503de136ea5873840bf0aeddc2bfe"></a>
+<a class="anchor" id="a5c7c6a89c5f8f6fba61c5023f0800f6d"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="mlabels">
@@ -3584,13 +3544,13 @@ Protected Attributes</h2></td></tr>
           <td class="memname">virtual void Cell::saveCons </td>
           <td>(</td>
           <td class="paramtype">const int &amp;&#160;</td>
-          <td class="paramname"><em>numberPhases</em>, </td>
+          <td class="paramname">, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">const int &amp;&#160;</td>
-          <td class="paramname"><em>numberTransports</em>&#160;</td>
+          <td class="paramname">&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -3774,7 +3734,7 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="a01e23b22590ab03eea47e479094a51b6"></a>
+<a class="anchor" id="a8894b5ec0d76c4b00aa6dac2e3ad6a74"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="mlabels">
@@ -3785,7 +3745,7 @@ Protected Attributes</h2></td></tr>
           <td class="memname">virtual void Cell::setRankOfNeighborCPU </td>
           <td>(</td>
           <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>rank</em></td><td>)</td>
+          <td class="paramname"></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -3800,7 +3760,7 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="a5b983cc3aa58e446f1605e15a4a26a7f"></a>
+<a class="anchor" id="a5f8d364cc0de03128a6f343ed9242ecf"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
@@ -3820,13 +3780,7 @@ Protected Attributes</h2></td></tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>num</em> = <code>0</code>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>subscript</em> = <code>-1</code>&#160;</td>
+          <td class="paramname"><em>num</em> = <code>0</code>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -3938,7 +3892,7 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="ae83734ccc0c8bbca28766ef8d313df77"></a>
+<a class="anchor" id="af101875c0361699c6e197a0737281f9f"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="mlabels">
@@ -3960,8 +3914,8 @@ Protected Attributes</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="Phase_8h.html#a2c815f6ae654fe19b3985d14c9c8d74e">Prim</a>&#160;</td>
-          <td class="paramname"><em>type</em> = <code><a class="el" href="Phase_8h.html#a2c815f6ae654fe19b3985d14c9c8d74ea2270f1269fdfbdfd9044eaa8af19750d">vecPhases</a></code>&#160;</td>
+          <td class="paramtype"><a class="el" href="Tools_8h.html#a2c815f6ae654fe19b3985d14c9c8d74e">Prim</a>&#160;</td>
+          <td class="paramname"> = <code><a class="el" href="Tools_8h.html#a2c815f6ae654fe19b3985d14c9c8d74ea2270f1269fdfbdfd9044eaa8af19750d">vecPhases</a></code>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -4035,7 +3989,7 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="a905f9c7eeaa79de0b3466c7cfba7382c"></a>
+<a class="anchor" id="ae2b16b7ae9a6c66734af8a31a6b1ac7c"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="mlabels">
@@ -4046,13 +4000,13 @@ Protected Attributes</h2></td></tr>
           <td class="memname">void Cell::sourceTermIntegration </td>
           <td>(</td>
           <td class="paramtype">const double &amp;&#160;</td>
-          <td class="paramname"><em>dt</em>, </td>
+          <td class="paramname">, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">const int &amp;&#160;</td>
-          <td class="paramname"><em>numberPhases</em>&#160;</td>
+          <td class="paramname">&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -4066,23 +4020,6 @@ Protected Attributes</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="a03b30b27991e326f3dcf5213cab8f419"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void Cell::subtractFluxXi </td>
-          <td>(</td>
-          <td class="paramtype">double&#160;</td>
-          <td class="paramname"><em>value</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<p>Substract xi cell flux </p>
 
 </div>
 </div>
@@ -4117,8 +4054,8 @@ Protected Attributes</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="Phase_8h.html#a2c815f6ae654fe19b3985d14c9c8d74e">Prim</a>&#160;</td>
-          <td class="paramname"><em>type</em> = <code><a class="el" href="Phase_8h.html#a2c815f6ae654fe19b3985d14c9c8d74ea2270f1269fdfbdfd9044eaa8af19750d">vecPhases</a></code>&#160;</td>
+          <td class="paramtype"><a class="el" href="Tools_8h.html#a2c815f6ae654fe19b3985d14c9c8d74e">Prim</a>&#160;</td>
+          <td class="paramname"><em>type</em> = <code><a class="el" href="Tools_8h.html#a2c815f6ae654fe19b3985d14c9c8d74ea2270f1269fdfbdfd9044eaa8af19750d">vecPhases</a></code>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -4130,7 +4067,7 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="aabfc76941c4a90f019a7589993842f2d"></a>
+<a class="anchor" id="a81631413d828454e1d2b5d62efbc554d"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
@@ -4144,13 +4081,7 @@ Protected Attributes</h2></td></tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">const int &amp;&#160;</td>
-          <td class="paramname"><em>numberPhases</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const int &amp;&#160;</td>
-          <td class="paramname"><em>numberTransports</em>&#160;</td>
+          <td class="paramname"><em>numberPhases</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -4621,7 +4552,7 @@ Protected Attributes</h2></td></tr>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="classCell.html">Cell</a></li>
-    <li class="footer">Generated on Mon May 11 2020 16:03:19 for ECOGEN by
+    <li class="footer">Generated on Wed Mar 10 2021 16:19:51 for ECOGEN by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.11 </li>
   </ul>

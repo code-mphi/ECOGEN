@@ -94,7 +94,7 @@ The package includes:
 * ECOGEN/libEOS/ folder including some possible parameters for the equation-of-states in XML files. See section :ref:`Sec:IO:materials` for details.
 * ECOGEN/libTests folder including:
 
-	- ECOGEN/libTests/referenceTestCases/ folder organized as a test-case library according to the flow model (Euler-equation ECOGEN solver, Kapila's model for multiphase flow ECOGEN solver, homogeneous Euler-equation ECOGEN solver, etc.). A detailed list of available test cases is proposed in section :ref:`Chap:TestCases`.
+	- ECOGEN/libTests/referenceTestCases/ folder organized as a test-case library according to the flow model (Euler-equation ECOGEN solver, pressure-velocity-equilibrium model (previously named Kapila's model) and velocity-equilibrium model for multiphase-flow ECOGEN solver, homogeneous-Euler-equation ECOGEN solver, etc.). A detailed list of available test cases is proposed in section :ref:`Chap:TestCases`.
 	- 4 quick-manual XML files to create a new flow computation with ECOGEN.
 * *ECOGEN.xml*: Main entry file to select running cases.
 * *Makefile*: For compilation in Unix environment. This file may require some adaptation to the user's environment.

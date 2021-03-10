@@ -2,7 +2,7 @@ var classGDRectangle =
 [
     [ "GDRectangle", "classGDRectangle.html#a206d0268d87d3b262dce53e64e75fb6e", null ],
     [ "~GDRectangle", "classGDRectangle.html#ac2c81d0365d4eb471a7a88dceb60c7d7", null ],
-    [ "belong", "classGDRectangle.html#aaa47466985c1469ab271acb5fcd1358f", null ],
+    [ "belong", "classGDRectangle.html#adb01b1d34b504bacbf5ae39ca62aaf22", null ],
     [ "m_axis1", "classGDRectangle.html#ab2eb9291a2f29dda76b0da1b4b8af085", null ],
     [ "m_axis2", "classGDRectangle.html#addebcab5e9c7afeb045518f9c7bea69c", null ],
     [ "m_lAxis1", "classGDRectangle.html#a5e54fac8a98d154a5c5fa375487c44c4", null ],

@@ -121,7 +121,7 @@ $(document).ready(function(){initNavTree('classAddPhys.html','');});
 
 <p><code>#include &lt;<a class="el" href="AddPhys_8h_source.html">AddPhys.h</a>&gt;</code></p>
 
-<p>Inherited by <a class="el" href="classAPEuler.html">APEuler</a>, and <a class="el" href="classAPKapila.html">APKapila</a>.</p>
+<p>Inherited by <a class="el" href="classAPEuler.html">APEuler</a>, and <a class="el" href="classAPUEq.html">APUEq</a>.</p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
@@ -129,14 +129,14 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a79492729632bdcbc451603bdf485a9fa"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac75a0e1b5489b230c62777977d3ce2fa"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classAddPhys.html#ac75a0e1b5489b230c62777977d3ce2fa">~AddPhys</a> ()</td></tr>
 <tr class="separator:ac75a0e1b5489b230c62777977d3ce2fa"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7e8e6a214bc98f633503172f20c5cc3f"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classAddPhys.html#a7e8e6a214bc98f633503172f20c5cc3f">addQuantityAddPhys</a> (<a class="el" href="classCell.html">Cell</a> *cell)</td></tr>
-<tr class="memdesc:a7e8e6a214bc98f633503172f20c5cc3f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Add the quantities for the additional physic.  <a href="#a7e8e6a214bc98f633503172f20c5cc3f">More...</a><br /></td></tr>
-<tr class="separator:a7e8e6a214bc98f633503172f20c5cc3f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a18df295fea270275952e8ed1938e196a"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classAddPhys.html#a18df295fea270275952e8ed1938e196a">addQuantityAddPhys</a> (<a class="el" href="classCell.html">Cell</a> *)</td></tr>
+<tr class="memdesc:a18df295fea270275952e8ed1938e196a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Add the quantities for the additional physic.  <a href="#a18df295fea270275952e8ed1938e196a">More...</a><br /></td></tr>
+<tr class="separator:a18df295fea270275952e8ed1938e196a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7513ff053dd46ab841d84b141f605a4c"><td class="memItemLeft" align="right" valign="top">virtual std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classAddPhys.html#a7513ff053dd46ab841d84b141f605a4c">whoAmI</a> () const </td></tr>
 <tr class="separator:a7513ff053dd46ab841d84b141f605a4c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1fefcc175d77c2257a64980c4eb14278"><td class="memItemLeft" align="right" valign="top">virtual double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classAddPhys.html#a1fefcc175d77c2257a64980c4eb14278">computeEnergyAddPhys</a> (<a class="el" href="classQuantitiesAddPhys.html">QuantitiesAddPhys</a> *<a class="el" href="Cell_8h.html#acca207de98b59d1c41e3975008706d61a20446aa548ede84c8005c3d211a8da23">QPA</a>)</td></tr>
-<tr class="memdesc:a1fefcc175d77c2257a64980c4eb14278"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute and send back mass energie linked to the physic (0 if no linked energy)  <a href="#a1fefcc175d77c2257a64980c4eb14278">More...</a><br /></td></tr>
-<tr class="separator:a1fefcc175d77c2257a64980c4eb14278"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1127813e2ec98f31dd2664f7a5b2b4c7"><td class="memItemLeft" align="right" valign="top">virtual double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classAddPhys.html#a1127813e2ec98f31dd2664f7a5b2b4c7">computeEnergyAddPhys</a> (<a class="el" href="classQuantitiesAddPhys.html">QuantitiesAddPhys</a> *)</td></tr>
+<tr class="memdesc:a1127813e2ec98f31dd2664f7a5b2b4c7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute and send back mass energie linked to the physic (0 if no linked energy)  <a href="#a1127813e2ec98f31dd2664f7a5b2b4c7">More...</a><br /></td></tr>
+<tr class="separator:a1127813e2ec98f31dd2664f7a5b2b4c7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a16ab13df036cd800a20d5553f543f740"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classAddPhys.html#a16ab13df036cd800a20d5553f543f740">computeFluxAddPhys</a> (<a class="el" href="classCellInterface.html">CellInterface</a> *cellInterface, const int &amp;numberPhases)</td></tr>
 <tr class="memdesc:a16ab13df036cd800a20d5553f543f740"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute the additional physic flux between two cells.  <a href="#a16ab13df036cd800a20d5553f543f740">More...</a><br /></td></tr>
 <tr class="separator:a16ab13df036cd800a20d5553f543f740"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -146,36 +146,36 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a1968e07bc1d8295158111b4aa0ebaaba"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classAddPhys.html#a1968e07bc1d8295158111b4aa0ebaaba">addNonConsAddPhys</a> (<a class="el" href="classCell.html">Cell</a> *cell, const int &amp;numberPhases)</td></tr>
 <tr class="memdesc:a1968e07bc1d8295158111b4aa0ebaaba"><td class="mdescLeft">&#160;</td><td class="mdescRight">Add the non-conservative terms of the additional physic in a cell.  <a href="#a1968e07bc1d8295158111b4aa0ebaaba">More...</a><br /></td></tr>
 <tr class="separator:a1968e07bc1d8295158111b4aa0ebaaba"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4715e3450653165faaa5e291012eb5d4"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classAddPhys.html#a4715e3450653165faaa5e291012eb5d4">solveFluxAddPhys</a> (<a class="el" href="classCellInterface.html">CellInterface</a> *cellInterface, const int &amp;numberPhases)</td></tr>
-<tr class="memdesc:a4715e3450653165faaa5e291012eb5d4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Solve the additional physic flux between two cells.  <a href="#a4715e3450653165faaa5e291012eb5d4">More...</a><br /></td></tr>
-<tr class="separator:a4715e3450653165faaa5e291012eb5d4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9de74c4b8b78e33d35b476a33854eb07"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classAddPhys.html#a9de74c4b8b78e33d35b476a33854eb07">solveFluxAddPhysBoundary</a> (<a class="el" href="classCellInterface.html">CellInterface</a> *cellInterface, const int &amp;numberPhases)</td></tr>
-<tr class="memdesc:a9de74c4b8b78e33d35b476a33854eb07"><td class="mdescLeft">&#160;</td><td class="mdescRight">Solve the additional physic flux at a domain boundary.  <a href="#a9de74c4b8b78e33d35b476a33854eb07">More...</a><br /></td></tr>
-<tr class="separator:a9de74c4b8b78e33d35b476a33854eb07"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aba66e2d27351c5530559914ed6130a1f"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classAddPhys.html#aba66e2d27351c5530559914ed6130a1f">solveFluxAddPhys</a> (<a class="el" href="classCellInterface.html">CellInterface</a> *, const int &amp;)</td></tr>
+<tr class="memdesc:aba66e2d27351c5530559914ed6130a1f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Solve the additional physic flux between two cells.  <a href="#aba66e2d27351c5530559914ed6130a1f">More...</a><br /></td></tr>
+<tr class="separator:aba66e2d27351c5530559914ed6130a1f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af78a6fbf4f888c8fd400d834ce929124"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classAddPhys.html#af78a6fbf4f888c8fd400d834ce929124">solveFluxAddPhysBoundary</a> (<a class="el" href="classCellInterface.html">CellInterface</a> *, const int &amp;)</td></tr>
+<tr class="memdesc:af78a6fbf4f888c8fd400d834ce929124"><td class="mdescLeft">&#160;</td><td class="mdescRight">Solve the additional physic flux at a domain boundary.  <a href="#af78a6fbf4f888c8fd400d834ce929124">More...</a><br /></td></tr>
+<tr class="separator:af78a6fbf4f888c8fd400d834ce929124"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa1525469e246ddcc0d0ed92f7f51b943"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classAddPhys.html#aa1525469e246ddcc0d0ed92f7f51b943">addFluxAddPhys</a> (<a class="el" href="classCellInterface.html">CellInterface</a> *cellInterface, const int &amp;numberPhases, const double &amp;coefAMR)</td></tr>
 <tr class="memdesc:aa1525469e246ddcc0d0ed92f7f51b943"><td class="mdescLeft">&#160;</td><td class="mdescRight">Add the additional physic flux between two cells at the corresponding cell.  <a href="#aa1525469e246ddcc0d0ed92f7f51b943">More...</a><br /></td></tr>
 <tr class="separator:aa1525469e246ddcc0d0ed92f7f51b943"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ace3d2c93706cc17a53f7a6cb630ae7c7"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classAddPhys.html#ace3d2c93706cc17a53f7a6cb630ae7c7">subtractFluxAddPhys</a> (<a class="el" href="classCellInterface.html">CellInterface</a> *cellInterface, const int &amp;numberPhases, const double &amp;coefAMR)</td></tr>
 <tr class="memdesc:ace3d2c93706cc17a53f7a6cb630ae7c7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Subtract the additional physic flux between two cells at the corresponding cell.  <a href="#ace3d2c93706cc17a53f7a6cb630ae7c7">More...</a><br /></td></tr>
 <tr class="separator:ace3d2c93706cc17a53f7a6cb630ae7c7"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2ca56f1f32d0f3d155bd1480ead6e7a5"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classAddPhys.html#a2ca56f1f32d0f3d155bd1480ead6e7a5">addNonCons</a> (<a class="el" href="classCell.html">Cell</a> *cell, const int &amp;numberPhases)</td></tr>
-<tr class="memdesc:a2ca56f1f32d0f3d155bd1480ead6e7a5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Add the non-conservative terms of the corresponding additional physic in a cell.  <a href="#a2ca56f1f32d0f3d155bd1480ead6e7a5">More...</a><br /></td></tr>
-<tr class="separator:a2ca56f1f32d0f3d155bd1480ead6e7a5"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0c885e7c819a295fd0dfaf97a28ea6b2"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classAddPhys.html#a0c885e7c819a295fd0dfaf97a28ea6b2">addSymmetricTermsRadialAxisOnX</a> (<a class="el" href="classCell.html">Cell</a> *cell, const int &amp;numberPhases)</td></tr>
-<tr class="memdesc:a0c885e7c819a295fd0dfaf97a28ea6b2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Add the symmetrical terms of the corresponding additional physic in a cell (when radial axis is on X)  <a href="#a0c885e7c819a295fd0dfaf97a28ea6b2">More...</a><br /></td></tr>
-<tr class="separator:a0c885e7c819a295fd0dfaf97a28ea6b2"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a22db1e392ced49690bd26c431d25f4cd"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classAddPhys.html#a22db1e392ced49690bd26c431d25f4cd">addSymmetricTermsRadialAxisOnY</a> (<a class="el" href="classCell.html">Cell</a> *cell, const int &amp;numberPhases)</td></tr>
-<tr class="memdesc:a22db1e392ced49690bd26c431d25f4cd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Add the symmetrical terms of the corresponding additional physic in a cell (when radial axis is on Y)  <a href="#a22db1e392ced49690bd26c431d25f4cd">More...</a><br /></td></tr>
-<tr class="separator:a22db1e392ced49690bd26c431d25f4cd"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:acfa8ae98a496a90c65993f8ca0e0b699"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classAddPhys.html#acfa8ae98a496a90c65993f8ca0e0b699">reinitializeColorFunction</a> (std::vector&lt; <a class="el" href="classCell.html">Cell</a> * &gt; *cellsLvl, int &amp;lvl)</td></tr>
-<tr class="memdesc:acfa8ae98a496a90c65993f8ca0e0b699"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reinitialize the color function for the surface-tension terms with the volume fraction equation.  <a href="#acfa8ae98a496a90c65993f8ca0e0b699">More...</a><br /></td></tr>
-<tr class="separator:acfa8ae98a496a90c65993f8ca0e0b699"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa777a6f4a5eab95ef1c181ce9015a8d9"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classAddPhys.html#aa777a6f4a5eab95ef1c181ce9015a8d9">addNonCons</a> (<a class="el" href="classCell.html">Cell</a> *, const int &amp;)</td></tr>
+<tr class="memdesc:aa777a6f4a5eab95ef1c181ce9015a8d9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Add the non-conservative terms of the corresponding additional physic in a cell.  <a href="#aa777a6f4a5eab95ef1c181ce9015a8d9">More...</a><br /></td></tr>
+<tr class="separator:aa777a6f4a5eab95ef1c181ce9015a8d9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aabd1fbba1eb2b85ed13d13baa12576c6"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classAddPhys.html#aabd1fbba1eb2b85ed13d13baa12576c6">addSymmetricTermsRadialAxisOnX</a> (<a class="el" href="classCell.html">Cell</a> *, const int &amp;)</td></tr>
+<tr class="memdesc:aabd1fbba1eb2b85ed13d13baa12576c6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Add the symmetrical terms of the corresponding additional physic in a cell (when radial axis is on X)  <a href="#aabd1fbba1eb2b85ed13d13baa12576c6">More...</a><br /></td></tr>
+<tr class="separator:aabd1fbba1eb2b85ed13d13baa12576c6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a453184dfe242f11096018181d38eb3c3"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classAddPhys.html#a453184dfe242f11096018181d38eb3c3">addSymmetricTermsRadialAxisOnY</a> (<a class="el" href="classCell.html">Cell</a> *, const int &amp;)</td></tr>
+<tr class="memdesc:a453184dfe242f11096018181d38eb3c3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Add the symmetrical terms of the corresponding additional physic in a cell (when radial axis is on Y)  <a href="#a453184dfe242f11096018181d38eb3c3">More...</a><br /></td></tr>
+<tr class="separator:a453184dfe242f11096018181d38eb3c3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac2421c5bb6f990091ad7a7116c35e238"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classAddPhys.html#ac2421c5bb6f990091ad7a7116c35e238">reinitializeColorFunction</a> (std::vector&lt; <a class="el" href="classCell.html">Cell</a> * &gt; *, const int &amp;)</td></tr>
+<tr class="memdesc:ac2421c5bb6f990091ad7a7116c35e238"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reinitialize the color function for the surface-tension terms with the volume fraction equation.  <a href="#ac2421c5bb6f990091ad7a7116c35e238">More...</a><br /></td></tr>
+<tr class="separator:ac2421c5bb6f990091ad7a7116c35e238"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aabb79ab430a4f8830870d37e31536bb6"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classAddPhys.html#aabb79ab430a4f8830870d37e31536bb6">reinitializationActivated</a> ()</td></tr>
 <tr class="memdesc:aabb79ab430a4f8830870d37e31536bb6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Send back true if the reinitialization of the color function is activated.  <a href="#aabb79ab430a4f8830870d37e31536bb6">More...</a><br /></td></tr>
 <tr class="separator:aabb79ab430a4f8830870d37e31536bb6"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9ea6fa244b74dc5c9658a3f951353d91"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classAddPhys.html#a9ea6fa244b74dc5c9658a3f951353d91">communicationsAddPhys</a> (int numberPhases, const int &amp;dim, const int &amp;lvl)</td></tr>
-<tr class="memdesc:a9ea6fa244b74dc5c9658a3f951353d91"><td class="mdescLeft">&#160;</td><td class="mdescRight">Communication of the additional physics quantities for parallel purposes with Adaptive <a class="el" href="classMesh.html" title="Abstract class for a mesh. ">Mesh</a> Refinement.  <a href="#a9ea6fa244b74dc5c9658a3f951353d91">More...</a><br /></td></tr>
-<tr class="separator:a9ea6fa244b74dc5c9658a3f951353d91"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac4546bf72226c765d4e8fb7c3ce4cd01"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classAddPhys.html#ac4546bf72226c765d4e8fb7c3ce4cd01">communicationsAddPhys</a> (const int &amp;, const int &amp;, const int &amp;)</td></tr>
+<tr class="memdesc:ac4546bf72226c765d4e8fb7c3ce4cd01"><td class="mdescLeft">&#160;</td><td class="mdescRight">Communication of the additional physics quantities for parallel purposes with Adaptive <a class="el" href="classMesh.html" title="Abstract class for a mesh. ">Mesh</a> Refinement.  <a href="#ac4546bf72226c765d4e8fb7c3ce4cd01">More...</a><br /></td></tr>
+<tr class="separator:ac4546bf72226c765d4e8fb7c3ce4cd01"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:acdf374e4b8f611d910e99290a3c467b3"><td class="memItemLeft" align="right" valign="top">virtual const int &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classAddPhys.html#acdf374e4b8f611d910e99290a3c467b3">getNumTransportAssociated</a> () const </td></tr>
 <tr class="memdesc:acdf374e4b8f611d910e99290a3c467b3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return the associated number of the transport equation (only used for surface tension)  <a href="#acdf374e4b8f611d910e99290a3c467b3">More...</a><br /></td></tr>
 <tr class="separator:acdf374e4b8f611d910e99290a3c467b3"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -273,7 +273,7 @@ Public Member Functions</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="a2ca56f1f32d0f3d155bd1480ead6e7a5"></a>
+<a class="anchor" id="aa777a6f4a5eab95ef1c181ce9015a8d9"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="mlabels">
@@ -284,13 +284,13 @@ Public Member Functions</h2></td></tr>
           <td class="memname">virtual void AddPhys::addNonCons </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="classCell.html">Cell</a> *&#160;</td>
-          <td class="paramname"><em>cell</em>, </td>
+          <td class="paramname">, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">const int &amp;&#160;</td>
-          <td class="paramname"><em>numberPhases</em>&#160;</td>
+          <td class="paramname">&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -314,7 +314,7 @@ Public Member Functions</h2></td></tr>
   </dd>
 </dl>
 
-<p>Reimplemented in <a class="el" href="classAPKViscosity.html#a643d888fe099f18fcbb3f3aa0e92ef27">APKViscosity</a>, <a class="el" href="classAPKConductivity.html#a5b75ba3f82a005c7f641116a44c66a1c">APKConductivity</a>, and <a class="el" href="classAPKSurfaceTension.html#ab0df8ee229feefb6142b1f3402b2fb20">APKSurfaceTension</a>.</p>
+<p>Reimplemented in <a class="el" href="classAPUEqViscosity.html#afe67a98695492d2952ff7913b8a4fc43">APUEqViscosity</a>, <a class="el" href="classAPEViscosity.html#aa6b63203568bdef1143ea7688b9694dc">APEViscosity</a>, <a class="el" href="classAPUEqConductivity.html#a78dad695cb6e9e0c310bbb55cd71ce82">APUEqConductivity</a>, <a class="el" href="classAPUEqSurfaceTension.html#afc97989814c83b785f5962108cb8e13e">APUEqSurfaceTension</a>, and <a class="el" href="classAPEConductivity.html#a64777d698cbd5ec46b3e3e49637f1ecb">APEConductivity</a>.</p>
 
 </div>
 </div>
@@ -353,7 +353,7 @@ Public Member Functions</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="a7e8e6a214bc98f633503172f20c5cc3f"></a>
+<a class="anchor" id="a18df295fea270275952e8ed1938e196a"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="mlabels">
@@ -364,7 +364,7 @@ Public Member Functions</h2></td></tr>
           <td class="memname">virtual void AddPhys::addQuantityAddPhys </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="classCell.html">Cell</a> *&#160;</td>
-          <td class="paramname"><em>cell</em></td><td>)</td>
+          <td class="paramname"></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -383,11 +383,11 @@ Public Member Functions</h2></td></tr>
   </dd>
 </dl>
 
-<p>Reimplemented in <a class="el" href="classAPKConductivity.html#acd0e2dc8fdd381947023931fef3ce33d">APKConductivity</a>, <a class="el" href="classAPKViscosity.html#a115a4a1f859137813d3397b26946d3a1">APKViscosity</a>, and <a class="el" href="classAPKSurfaceTension.html#a7502937f8200df2f9ba4163b7fd8bc5a">APKSurfaceTension</a>.</p>
+<p>Reimplemented in <a class="el" href="classAPUEqConductivity.html#a548e69aebcb6bd32de24bacb9891e516">APUEqConductivity</a>, <a class="el" href="classAPEViscosity.html#a282a8ab43a70e5895545090ea6fa3d87">APEViscosity</a>, <a class="el" href="classAPEConductivity.html#ac6906bcbabc10fa46d6f3328e786bdab">APEConductivity</a>, <a class="el" href="classAPUEqViscosity.html#a562b4ba2a1791e933c1651c9c2e735b0">APUEqViscosity</a>, and <a class="el" href="classAPUEqSurfaceTension.html#a7d0b18215106f6a4d34dfc9b3780ee21">APUEqSurfaceTension</a>.</p>
 
 </div>
 </div>
-<a class="anchor" id="a0c885e7c819a295fd0dfaf97a28ea6b2"></a>
+<a class="anchor" id="aabd1fbba1eb2b85ed13d13baa12576c6"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="mlabels">
@@ -398,13 +398,13 @@ Public Member Functions</h2></td></tr>
           <td class="memname">virtual void AddPhys::addSymmetricTermsRadialAxisOnX </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="classCell.html">Cell</a> *&#160;</td>
-          <td class="paramname"><em>cell</em>, </td>
+          <td class="paramname">, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">const int &amp;&#160;</td>
-          <td class="paramname"><em>numberPhases</em>&#160;</td>
+          <td class="paramname">&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -428,11 +428,11 @@ Public Member Functions</h2></td></tr>
   </dd>
 </dl>
 
-<p>Reimplemented in <a class="el" href="classAPKViscosity.html#ae4726f916e05c0e8f7fb021fde5946e5">APKViscosity</a>, and <a class="el" href="classAPKSurfaceTension.html#a55ae8a0d56e55d767d4dbac611a08981">APKSurfaceTension</a>.</p>
+<p>Reimplemented in <a class="el" href="classAPUEqViscosity.html#a8dd17155f66443bb3cffee38fa42b987">APUEqViscosity</a>, <a class="el" href="classAPEViscosity.html#ac0ca34aef644a4bf078a1cf7f11755b1">APEViscosity</a>, and <a class="el" href="classAPUEqSurfaceTension.html#a9fb42d47afbcae247d776b485d2500db">APUEqSurfaceTension</a>.</p>
 
 </div>
 </div>
-<a class="anchor" id="a22db1e392ced49690bd26c431d25f4cd"></a>
+<a class="anchor" id="a453184dfe242f11096018181d38eb3c3"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="mlabels">
@@ -443,13 +443,13 @@ Public Member Functions</h2></td></tr>
           <td class="memname">virtual void AddPhys::addSymmetricTermsRadialAxisOnY </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="classCell.html">Cell</a> *&#160;</td>
-          <td class="paramname"><em>cell</em>, </td>
+          <td class="paramname">, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">const int &amp;&#160;</td>
-          <td class="paramname"><em>numberPhases</em>&#160;</td>
+          <td class="paramname">&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -473,11 +473,11 @@ Public Member Functions</h2></td></tr>
   </dd>
 </dl>
 
-<p>Reimplemented in <a class="el" href="classAPKViscosity.html#a254cbfc93b374b00d0b8f8a5db1e809c">APKViscosity</a>, and <a class="el" href="classAPKSurfaceTension.html#a00a34fd98bea8765e78a541d2a64f0cc">APKSurfaceTension</a>.</p>
+<p>Reimplemented in <a class="el" href="classAPUEqViscosity.html#a7b269e65f8cb3ad52e801ce30bb43b05">APUEqViscosity</a>, <a class="el" href="classAPEViscosity.html#afdb79b8c55c14bfa00be9080564c9475">APEViscosity</a>, and <a class="el" href="classAPUEqSurfaceTension.html#ae0e35efb649f786cf67cda7ed74cbf32">APUEqSurfaceTension</a>.</p>
 
 </div>
 </div>
-<a class="anchor" id="a9ea6fa244b74dc5c9658a3f951353d91"></a>
+<a class="anchor" id="ac4546bf72226c765d4e8fb7c3ce4cd01"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="mlabels">
@@ -487,20 +487,20 @@ Public Member Functions</h2></td></tr>
         <tr>
           <td class="memname">virtual void AddPhys::communicationsAddPhys </td>
           <td>(</td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>numberPhases</em>, </td>
+          <td class="paramtype">const int &amp;&#160;</td>
+          <td class="paramname">, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">const int &amp;&#160;</td>
-          <td class="paramname"><em>dim</em>, </td>
+          <td class="paramname">, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">const int &amp;&#160;</td>
-          <td class="paramname"><em>lvl</em>&#160;</td>
+          <td class="paramname">&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -525,11 +525,11 @@ Public Member Functions</h2></td></tr>
   </dd>
 </dl>
 
-<p>Reimplemented in <a class="el" href="classAPKViscosity.html#a2308c6a5f4c0e292b5ff9d1398b54b15">APKViscosity</a>, <a class="el" href="classAPKConductivity.html#a5acc1eb508d03085a63a1e2b10eb88aa">APKConductivity</a>, and <a class="el" href="classAPKSurfaceTension.html#ab9dd16d5eb73eaa3596cd890c35dbf8d">APKSurfaceTension</a>.</p>
+<p>Reimplemented in <a class="el" href="classAPUEqViscosity.html#a43bb8515a826fcc6577cecfba020a1c3">APUEqViscosity</a>, <a class="el" href="classAPEViscosity.html#a65bf97812593b718dacae62cbfa9c4d7">APEViscosity</a>, <a class="el" href="classAPUEqSurfaceTension.html#ae15311cb6bfac575ce6b0da7423b01d9">APUEqSurfaceTension</a>, <a class="el" href="classAPUEqConductivity.html#a0f874f9eb3f404fa5d0fbe82ef1f96be">APUEqConductivity</a>, and <a class="el" href="classAPEConductivity.html#a5ddaa052f32164371f1f014ef46d2b54">APEConductivity</a>.</p>
 
 </div>
 </div>
-<a class="anchor" id="a1fefcc175d77c2257a64980c4eb14278"></a>
+<a class="anchor" id="a1127813e2ec98f31dd2664f7a5b2b4c7"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="mlabels">
@@ -540,7 +540,7 @@ Public Member Functions</h2></td></tr>
           <td class="memname">virtual double AddPhys::computeEnergyAddPhys </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="classQuantitiesAddPhys.html">QuantitiesAddPhys</a> *&#160;</td>
-          <td class="paramname"><em>QPA</em></td><td>)</td>
+          <td class="paramname"></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -559,7 +559,7 @@ Public Member Functions</h2></td></tr>
   </dd>
 </dl>
 
-<p>Reimplemented in <a class="el" href="classAPKSurfaceTension.html#a942eeb1edc58212f0bcb80d536eebfa1">APKSurfaceTension</a>.</p>
+<p>Reimplemented in <a class="el" href="classAPUEqSurfaceTension.html#af6f156820e426462226702affdd0cd72">APUEqSurfaceTension</a>.</p>
 
 </div>
 </div>
@@ -656,7 +656,7 @@ Public Member Functions</h2></td></tr>
 
 <p>Return the associated number of the transport equation (only used for surface tension) </p>
 
-<p>Reimplemented in <a class="el" href="classAPKSurfaceTension.html#a683e0ae8fea4b4a2e8a79ab8fb37f7ef">APKSurfaceTension</a>.</p>
+<p>Reimplemented in <a class="el" href="classAPUEqSurfaceTension.html#ae7d4eef40c65a19a13814690054c044e">APUEqSurfaceTension</a>.</p>
 
 </div>
 </div>
@@ -683,11 +683,11 @@ Public Member Functions</h2></td></tr>
 
 <p>Send back true if the reinitialization of the color function is activated. </p>
 
-<p>Reimplemented in <a class="el" href="classAPKSurfaceTension.html#a70d095d163ec65a908b1ba57ad4e82b8">APKSurfaceTension</a>.</p>
+<p>Reimplemented in <a class="el" href="classAPUEqSurfaceTension.html#abe5995f8f68ace4d7fd7141608d9fa78">APUEqSurfaceTension</a>.</p>
 
 </div>
 </div>
-<a class="anchor" id="acfa8ae98a496a90c65993f8ca0e0b699"></a>
+<a class="anchor" id="ac2421c5bb6f990091ad7a7116c35e238"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="mlabels">
@@ -698,13 +698,13 @@ Public Member Functions</h2></td></tr>
           <td class="memname">virtual void AddPhys::reinitializeColorFunction </td>
           <td>(</td>
           <td class="paramtype">std::vector&lt; <a class="el" href="classCell.html">Cell</a> * &gt; *&#160;</td>
-          <td class="paramname"><em>cellsLvl</em>, </td>
+          <td class="paramname">, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">int &amp;&#160;</td>
-          <td class="paramname"><em>lvl</em>&#160;</td>
+          <td class="paramtype">const int &amp;&#160;</td>
+          <td class="paramname">&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -728,11 +728,11 @@ Public Member Functions</h2></td></tr>
   </dd>
 </dl>
 
-<p>Reimplemented in <a class="el" href="classAPKSurfaceTension.html#afe4db3b70e9cc8607d214b229581d85a">APKSurfaceTension</a>.</p>
+<p>Reimplemented in <a class="el" href="classAPUEqSurfaceTension.html#a650f641c7575a2674f0e74c0afe233a9">APUEqSurfaceTension</a>.</p>
 
 </div>
 </div>
-<a class="anchor" id="a4715e3450653165faaa5e291012eb5d4"></a>
+<a class="anchor" id="aba66e2d27351c5530559914ed6130a1f"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="mlabels">
@@ -743,13 +743,13 @@ Public Member Functions</h2></td></tr>
           <td class="memname">virtual void AddPhys::solveFluxAddPhys </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="classCellInterface.html">CellInterface</a> *&#160;</td>
-          <td class="paramname"><em>cellInterface</em>, </td>
+          <td class="paramname">, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">const int &amp;&#160;</td>
-          <td class="paramname"><em>numberPhases</em>&#160;</td>
+          <td class="paramname">&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -773,11 +773,11 @@ Public Member Functions</h2></td></tr>
   </dd>
 </dl>
 
-<p>Reimplemented in <a class="el" href="classAPKConductivity.html#aa3495368d688690e686f774360f57f04">APKConductivity</a>, <a class="el" href="classAPKSurfaceTension.html#a4955c3a710a8f942073b8f42a63c92a8">APKSurfaceTension</a>, and <a class="el" href="classAPKViscosity.html#a45e221eb7742efbbcaaef9efb4daf34c">APKViscosity</a>.</p>
+<p>Reimplemented in <a class="el" href="classAPUEqConductivity.html#a7a09986d5fa286f1051e1dfca45786e1">APUEqConductivity</a>, <a class="el" href="classAPEViscosity.html#a4f9fe7fff599d250a6163d6ccc25dd88">APEViscosity</a>, <a class="el" href="classAPEConductivity.html#a83a04281bc67bce7f16b2f2237f81495">APEConductivity</a>, <a class="el" href="classAPUEqSurfaceTension.html#a1d975f0fefda581a3a9f04b10d1c2cf2">APUEqSurfaceTension</a>, and <a class="el" href="classAPUEqViscosity.html#a74cc1d39a94a137350ff364ae14cd60a">APUEqViscosity</a>.</p>
 
 </div>
 </div>
-<a class="anchor" id="a9de74c4b8b78e33d35b476a33854eb07"></a>
+<a class="anchor" id="af78a6fbf4f888c8fd400d834ce929124"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="mlabels">
@@ -788,13 +788,13 @@ Public Member Functions</h2></td></tr>
           <td class="memname">virtual void AddPhys::solveFluxAddPhysBoundary </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="classCellInterface.html">CellInterface</a> *&#160;</td>
-          <td class="paramname"><em>cellInterface</em>, </td>
+          <td class="paramname">, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">const int &amp;&#160;</td>
-          <td class="paramname"><em>numberPhases</em>&#160;</td>
+          <td class="paramname">&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -818,7 +818,7 @@ Public Member Functions</h2></td></tr>
   </dd>
 </dl>
 
-<p>Reimplemented in <a class="el" href="classAPKConductivity.html#a7d04712a166cf7cc70424c9403b99625">APKConductivity</a>, <a class="el" href="classAPKSurfaceTension.html#af88d81d97aa71ff32d01546b296f414b">APKSurfaceTension</a>, and <a class="el" href="classAPKViscosity.html#ac2e8e4c2839d22f0b37887373019a229">APKViscosity</a>.</p>
+<p>Reimplemented in <a class="el" href="classAPEConductivity.html#acc8d570ca06682899f5f811d86ac540d">APEConductivity</a>, <a class="el" href="classAPUEqConductivity.html#ad416edda5616f1de5b59aa66e88fa591">APUEqConductivity</a>, <a class="el" href="classAPEViscosity.html#a3c073312f3f281ab06db9a4d4a05482a">APEViscosity</a>, <a class="el" href="classAPUEqSurfaceTension.html#a5f43075cb677a59a6794c317cf7fbe74">APUEqSurfaceTension</a>, and <a class="el" href="classAPUEqViscosity.html#af30268461aaf863f12eb958c0b6422dc">APUEqViscosity</a>.</p>
 
 </div>
 </div>
@@ -905,7 +905,7 @@ Public Member Functions</h2></td></tr>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="classAddPhys.html">AddPhys</a></li>
-    <li class="footer">Generated on Mon May 11 2020 16:03:18 for ECOGEN by
+    <li class="footer">Generated on Wed Mar 10 2021 16:19:51 for ECOGEN by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.11 </li>
   </ul>

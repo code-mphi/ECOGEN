@@ -9,6 +9,14 @@ var dir_d179dec916ccda495a492e9254131908 =
     [ "RelaxationP.h", "RelaxationP_8h.html", [
       [ "RelaxationP", "classRelaxationP.html", "classRelaxationP" ]
     ] ],
+    [ "RelaxationPFinite.cpp", "RelaxationPFinite_8cpp.html", null ],
+    [ "RelaxationPFinite.h", "RelaxationPFinite_8h.html", [
+      [ "RelaxationPFinite", "classRelaxationPFinite.html", "classRelaxationPFinite" ]
+    ] ],
+    [ "RelaxationPInfinite.cpp", "RelaxationPInfinite_8cpp.html", null ],
+    [ "RelaxationPInfinite.h", "RelaxationPInfinite_8h.html", [
+      [ "RelaxationPInfinite", "classRelaxationPInfinite.html", "classRelaxationPInfinite" ]
+    ] ],
     [ "RelaxationPT.cpp", "RelaxationPT_8cpp.html", null ],
     [ "RelaxationPT.h", "RelaxationPT_8h.html", [
       [ "RelaxationPT", "classRelaxationPT.html", "classRelaxationPT" ]
