@@ -90,7 +90,8 @@ void Errors::prepareErrorFiles(const std::string& folder)
   fileStream.open((myStream.str()).c_str());
   fileStream.close();
 
-  myStream = std::stringstream();
+  myStream.str("");
+  myStream.clear();
   fileName = "warning";
   myStream << folder << "errorsAndWarnings/" << fileName << "_CPU" << rankCpu << ".out";
   fileStream.open((myStream.str()).c_str());

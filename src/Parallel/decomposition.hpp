@@ -54,10 +54,10 @@ public:
 
 public: //Ctors
 	Decomposition() = default;
-	Decomposition(const Decomposition& other) = default;
-	Decomposition(Decomposition&& other) = default;
-	Decomposition& operator=(const Decomposition& other) & = default;
-	Decomposition& operator=(Decomposition&& other) & = default;
+	Decomposition(const Decomposition& /*other*/) = default;
+	Decomposition(Decomposition&& /*other*/) = default;
+	Decomposition& operator=(const Decomposition& /*other*/) & = default;
+	Decomposition& operator=(Decomposition&& /*other*/) & = default;
 	~Decomposition() = default;
 
 

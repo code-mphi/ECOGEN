@@ -33,7 +33,7 @@
 
 #include "Relaxation.h"
 
-//! \class     RelaxationPTMU
+//! \class     RelaxationPTMu
 //! \brief     Pressure-Temperature-Chemical Potential relaxation / Phase change
 class RelaxationPTMu : public Relaxation
 {
