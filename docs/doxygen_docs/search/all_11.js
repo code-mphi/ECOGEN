@@ -49,7 +49,7 @@ var searchData=
   ['relaxationpt',['RelaxationPT',['../classRelaxationPT.html',1,'RelaxationPT'],['../classRelaxationPT.html#a7ee18435abe7e893b6dcb4603d85f146',1,'RelaxationPT::RelaxationPT()']]],
   ['relaxationpt_2ecpp',['RelaxationPT.cpp',['../RelaxationPT_8cpp.html',1,'']]],
   ['relaxationpt_2eh',['RelaxationPT.h',['../RelaxationPT_8h.html',1,'']]],
-  ['relaxationptmu',['RelaxationPTMU',['../classRelaxationPTMU.html',1,'RelaxationPTMU'],['../classRelaxationPTMu.html',1,'RelaxationPTMu'],['../classRelaxationPTMu.html#a8ac1d762663eb2808a1111a184d27783',1,'RelaxationPTMu::RelaxationPTMu()']]],
+  ['relaxationptmu',['RelaxationPTMu',['../classRelaxationPTMu.html',1,'RelaxationPTMu'],['../classRelaxationPTMu.html#a8ac1d762663eb2808a1111a184d27783',1,'RelaxationPTMu::RelaxationPTMu()']]],
   ['relaxationptmu_2ecpp',['RelaxationPTMu.cpp',['../RelaxationPTMu_8cpp.html',1,'']]],
   ['relaxationptmu_2eh',['RelaxationPTMu.h',['../RelaxationPTMu_8h.html',1,'']]],
   ['relaxations',['relaxations',['../classModel.html#a8ce04d291716ac03de443fc7c8609a80',1,'Model']]],

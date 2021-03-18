@@ -1,6 +1,5 @@
 var NAVTREEINDEX16 =
 {
-"classtinyxml2_1_1XMLHandle.html#a5e73ed8f3f6f9619d5a8bb1862c47d99":[1,0,2,11,13],
 "classtinyxml2_1_1XMLHandle.html#a65449d71b75d8aeb40a54224c954c138":[1,0,2,11,17],
 "classtinyxml2_1_1XMLHandle.html#a6ab9e8cbfb41417246e5657e3842c62a":[1,0,2,11,15],
 "classtinyxml2_1_1XMLHandle.html#a75b908322bb4b83be3281b6845252b20":[1,0,2,11,9],
@@ -214,8 +213,8 @@ var NAVTREEINDEX16 =
 "dir_db9c7bb981757920a79f674e00894f69.html":[2,0,0,5],
 "dir_ecd1a0d342fca7f5a033480c812e9ce0.html":[2,0,0,0],
 "files.html":[2,0],
-"functions.html":[1,3,0],
 "functions.html":[1,3,0,0],
+"functions.html":[1,3,0],
 "functions_0x7e.html":[1,3,0,26],
 "functions_a.html":[1,3,0,1],
 "functions_b.html":[1,3,0,2],
@@ -249,5 +248,6 @@ var NAVTREEINDEX16 =
 "functions_func_v.html":[1,3,1,20],
 "functions_func_w.html":[1,3,1,21],
 "functions_func_x.html":[1,3,1,22],
-"functions_func_y.html":[1,3,1,23]
+"functions_func_y.html":[1,3,1,23],
+"functions_func_z.html":[1,3,1,24]
 };

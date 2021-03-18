@@ -140,7 +140,6 @@ var annotated_dup =
     [ "RelaxationPFinite", "classRelaxationPFinite.html", "classRelaxationPFinite" ],
     [ "RelaxationPInfinite", "classRelaxationPInfinite.html", "classRelaxationPInfinite" ],
     [ "RelaxationPT", "classRelaxationPT.html", "classRelaxationPT" ],
-    [ "RelaxationPTMU", "classRelaxationPTMU.html", null ],
     [ "RelaxationPTMu", "classRelaxationPTMu.html", "classRelaxationPTMu" ],
     [ "Run", "classRun.html", "classRun" ],
     [ "Source", "classSource.html", "classSource" ],

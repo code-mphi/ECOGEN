@@ -5,6 +5,6 @@ var searchData=
   ['relaxationpfinite',['RelaxationPFinite',['../classRelaxationPFinite.html',1,'']]],
   ['relaxationpinfinite',['RelaxationPInfinite',['../classRelaxationPInfinite.html',1,'']]],
   ['relaxationpt',['RelaxationPT',['../classRelaxationPT.html',1,'']]],
-  ['relaxationptmu',['RelaxationPTMU',['../classRelaxationPTMU.html',1,'RelaxationPTMU'],['../classRelaxationPTMu.html',1,'RelaxationPTMu']]],
+  ['relaxationptmu',['RelaxationPTMu',['../classRelaxationPTMu.html',1,'']]],
   ['run',['Run',['../classRun.html',1,'']]]
 ];

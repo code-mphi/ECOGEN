@@ -194,7 +194,6 @@ var hierarchy =
       [ "RelaxationPT", "classRelaxationPT.html", null ],
       [ "RelaxationPTMu", "classRelaxationPTMu.html", null ]
     ] ],
-    [ "RelaxationPTMU", "classRelaxationPTMU.html", null ],
     [ "Run", "classRun.html", null ],
     [ "Source", "classSource.html", [
       [ "SourceGravity", "classSourceGravity.html", null ],
