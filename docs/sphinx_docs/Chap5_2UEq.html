@@ -1,0 +1,306 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Velocity-equilibrium model &mdash; ECOGEN 3.1 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Velocity-equilibrium model based on total energies" href="Chap5_2UEqTotE.html" />
+    <link rel="prev" title="Spherical collapse" href="Chap5_2PUEq_2D_8sphericalCollapse.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="index.html" class="icon icon-home" alt="Documentation Home"> ECOGEN
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                3.1
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="Chap1_introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Chap2_installation_Chapter.html">Installation instructions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Chap3_IO_Chapter.html">I/O descriptions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Chap4_tutorials_Chapter.html">Tutorials</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="Chap5_testCases_Chapter.html">Test cases</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="Chap5_1Euler.html">Single-phase test cases</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="Chap5_2.html">Multiphase test cases</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="Chap5_2PUEq.html">Pressure- and velocity-equilibrium model</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Velocity-equilibrium model</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#tests-cases">Tests cases</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="Chap5_2UEqTotE.html">Velocity-equilibrium model based on total energies</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Chap5_2PTUEq.html">Temperature-, pressure- and velocity-equilibrium model</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Chap5_2eulerHomogeneous.html">Homogeneous Euler</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Chap5_2.html#other-tests-cases">Other tests cases</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="Chap6_developersGuide_Chapter.html">Developers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Chap7_license.html">License</a></li>
+<li class="toctree-l1"><a class="reference internal" href="zBibliography.html">Bibliography</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">ECOGEN</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="Chap5_testCases_Chapter.html">Test cases</a> &raquo;</li>
+        
+          <li><a href="Chap5_2.html">Multiphase test cases</a> &raquo;</li>
+        
+      <li>Velocity-equilibrium model</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/Chap5_2UEq.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="velocity-equilibrium-model">
+<h1>Velocity-equilibrium model<a class="headerlink" href="#velocity-equilibrium-model" title="Permalink to this headline">¶</a></h1>
+<p>Velocity-equilibrium and mechanical-equilibrium flows are solved in ECOGEN using the velocity-equilibrium model <span id="id1">[<a class="reference internal" href="zBibliography.html#id2"><span>SCazeP+21</span></a>]</span>. For <em>N</em> phases involved and without any extra physics (surface tension, viscosity…), this model reads:</p>
+<div class="math notranslate nohighlight">
+\begin{equation}
+\label{system_UEq}
+\left\{
+{\begin{array}{*{20}{l}}
+  \cfrac{\partial \alpha_k}{\partial t} + \mathbf{u} \cdot \nabla \alpha_k &amp; = \delta p_k , \\
+  \cfrac{\partial \alpha_k \rho_k}{\partial t} + \nabla \cdot \left( \alpha_k \rho_k \mathbf{u} \right) &amp; = 0 , \\
+  \cfrac{\partial \rho \mathbf{u}}{\partial t} + \nabla \cdot \left( \rho \mathbf{u} \otimes \mathbf{u} + p \mathbf{I} \right) &amp; = \mathbf{0} , \\
+  \cfrac{\partial \alpha_k \rho_k e_k}{\partial t} + \nabla \cdot \left( \alpha_k \rho_k e_k \mathbf{u} \right) + \alpha_k p_k \nabla \cdot \mathbf{u} &amp; = - p_I \delta p_k ,
+\end{array}} \right.\
+\end{equation}</div><p>where <span class="math notranslate nohighlight">\(\alpha_k\)</span>, <span class="math notranslate nohighlight">\(\rho_k\)</span>, <span class="math notranslate nohighlight">\(p_k\)</span> and <span class="math notranslate nohighlight">\(e_k\)</span> are the volume fraction, density, pressure and internal energy of each phase, respectively, and for which <span class="math notranslate nohighlight">\(k\)</span> indicates the phase index.
+The mixture density and pressure are</p>
+<div class="math notranslate nohighlight">
+\begin{equation}
+  \rho = \sum_{k=1}^N \alpha _k \rho_k  \quad \text{and} \quad p = \sum_{k=1}^N \alpha _k p_k ,
+\end{equation}</div><p>while the mixture total energy is</p>
+<div class="math notranslate nohighlight">
+\begin{equation}
+  E = e + \frac{1}{2} \| \mathbf{u} \|^2,
+\end{equation}</div><p>where <span class="math notranslate nohighlight">\(e\)</span> is the mixture specific internal energy</p>
+<div class="math notranslate nohighlight">
+\begin{equation}
+  e = \sum_{k=1}^N Y_k e_k \left( \rho_k , p_k \right) .
+\end{equation}</div><p><span class="math notranslate nohighlight">\(e_k \left( \rho_k , p_k \right)\)</span> is defined via an equation of state (EOS) and <span class="math notranslate nohighlight">\(Y_k\)</span> are the mass fractions</p>
+<div class="math notranslate nohighlight">
+\begin{equation}
+  Y_k = \frac{\alpha_k \rho_k}{\rho} .
+\end{equation}</div><p>The relaxation of pressures between the phases is</p>
+<div class="math notranslate nohighlight">
+\begin{equation}
+  \delta p_k = \sum_{j \neq k}^N \mu_{k,j} \left( p_k - p_j \right) ,
+\end{equation}</div><p>where <span class="math notranslate nohighlight">\(j\)</span> are phases different from <span class="math notranslate nohighlight">\(k\)</span> and <span class="math notranslate nohighlight">\(\mu_{k,j}\)</span> are the pressure-relaxation coefficients related to the <span class="math notranslate nohighlight">\(k\)</span>–<span class="math notranslate nohighlight">\(j\)</span> interactions. Herein, the pressure-relaxation coefficient <span class="math notranslate nohighlight">\(\mu\)</span> is considered the same for each phase combination.
+The interfacial pressure is defined as</p>
+<div class="math notranslate nohighlight">
+\begin{equation}
+  p_I = \cfrac{\sum_k^N \left( p_k \sum_{j \neq k}^N z_j \right)}{\sum_k^N z_k} ,
+\end{equation}</div><p>where <span class="math notranslate nohighlight">\(z_k = \rho_k c_k\)</span> and <span class="math notranslate nohighlight">\(c_k\)</span> are the acoustic impedance and speed of sound of the phase <span class="math notranslate nohighlight">\(k\)</span>, respectively.</p>
+<p>Since pressures are in disequilibrium here, the total energy equation of the mixture is replaced by the internal-energy equation for each phase. Nevertheless, conservation of the mixture total energy can be written in its usual form</p>
+<div class="math notranslate nohighlight">
+\begin{equation}
+  \frac{\partial \rho E}{\partial t} + \nabla \cdot \left[ \left( \rho E + p \right) \mathbf{u} \right] = 0 .
+\end{equation}</div><p>We note that this equation is redundant when the internal energy equations are also computed. However, in practice, we include it in our computations to ensure that the total energy is numerically conserved, and thus preserve a correct treatment of shock waves.</p>
+<p>This model is solved thanks to the numerical method presented in <span id="id2">[<a class="reference internal" href="zBibliography.html#id2"><span>SCazeP+21</span></a>]</span> where infinite as well as finite pressure-relaxation rates are possible.</p>
+<div class="section" id="tests-cases">
+<h2>Tests cases<a class="headerlink" href="#tests-cases" title="Permalink to this headline">¶</a></h2>
+<p>Tests are provided with ECOGEN package and may be described in details later.</p>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;testCase&gt;</span>libTests/referenceTestCases/UEq/1D/transports/interfaceWaterAir/<span class="nt">&lt;/testCase&gt;</span>
+<span class="nt">&lt;testCase&gt;</span>libTests/referenceTestCases/UEq/1D/shockTubes/interfaceAirHelium/<span class="nt">&lt;/testCase&gt;</span>
+<span class="nt">&lt;testCase&gt;</span>libTests/referenceTestCases/UEq/1D/shockTubes/interfaceWaterAir/<span class="nt">&lt;/testCase&gt;</span>
+<span class="nt">&lt;testCase&gt;</span>libTests/referenceTestCases/UEq/1D/shockTubes/interfaceWaterAirNASG/<span class="nt">&lt;/testCase&gt;</span>
+<span class="nt">&lt;testCase&gt;</span>libTests/referenceTestCases/UEq/1D/shockTubes/epoxySpinel/<span class="nt">&lt;/testCase&gt;</span>
+<span class="nt">&lt;testCase&gt;</span>libTests/referenceTestCases/UEq/1D/shockTubes/mixtures/<span class="nt">&lt;/testCase&gt;</span>
+<span class="nt">&lt;testCase&gt;</span>libTests/referenceTestCases/UEq/1D/mixture/waterAir/<span class="nt">&lt;/testCase&gt;</span>
+<span class="nt">&lt;testCase&gt;</span>libTests/referenceTestCases/UEq/1D/shockOnInterface/sharpInterfaceWaterAir/<span class="nt">&lt;/testCase&gt;</span>
+<span class="nt">&lt;testCase&gt;</span>libTests/referenceTestCases/UEq/1D/shockOnInterface/diffusedInterfaceWaterAir/<span class="nt">&lt;/testCase&gt;</span>
+<span class="nt">&lt;testCase&gt;</span>libTests/referenceTestCases/UEq/1D/cavitation/<span class="nt">&lt;/testCase&gt;</span>
+<span class="nt">&lt;testCase&gt;</span>libTests/referenceTestCases/UEq/1D/sphericalCollapse/Pratio1427/<span class="nt">&lt;/testCase&gt;</span>
+<span class="nt">&lt;testCase&gt;</span>libTests/referenceTestCases/UEq/2D/nonSphericalCollapseNearWall/<span class="nt">&lt;/testCase&gt;</span>
+<span class="nt">&lt;testCase&gt;</span>libTests/referenceTestCases/UEq/2D/squareToCircleSymmetry/<span class="nt">&lt;/testCase&gt;</span>
+</pre></div>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="Chap5_2UEqTotE.html" class="btn btn-neutral float-right" title="Velocity-equilibrium model based on total energies" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="Chap5_2PUEq_2D_8sphericalCollapse.html" class="btn btn-neutral float-left" title="Spherical collapse" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright 2022, code-mphi
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

@@ -3,11 +3,11 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" />
+  <meta charset="utf-8">
   
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Split physical domains for unstructured meshes &mdash; ECOGEN 3.0 documentation</title>
+  <title>Split physical domains for unstructured meshes &mdash; ECOGEN 3.1 documentation</title>
   
 
   
@@ -16,10 +16,7 @@
 
   
   
-
   
-  
-
   
 
   
@@ -54,7 +51,7 @@
           
 
           
-            <a href="index.html" class="icon icon-home"> ECOGEN
+            <a href="index.html" class="icon icon-home" alt="Documentation Home"> ECOGEN
           
 
           
@@ -64,7 +61,7 @@
             
             
               <div class="version">
-                3.0
+                3.1
               </div>
             
           
@@ -105,12 +102,13 @@
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="Chap4_5paraviewServer.html">ParaView server</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Chap4_6extractMassflowWithParaview.html">Gmsh example and extraction of mass-flow rate</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Chap4_7runningATestInAnotherFolder.html">Running a test case in another folder</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="Chap5_testCases_Chapter.html">Test cases</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Chap6_developersGuide_Chapter.html">Developers</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Chap7_license.html">License</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Chap8_GUI.html">Graphical User Interface</a></li>
 <li class="toctree-l1"><a class="reference internal" href="zBibliography.html">Bibliography</a></li>
 </ul>
 
@@ -152,8 +150,6 @@
 
 
 
-
-
 <div role="navigation" aria-label="breadcrumbs navigation">
 
   <ul class="wy-breadcrumbs">
@@ -167,7 +163,7 @@
     
       <li class="wy-breadcrumbs-aside">
         
-          
+            
             <a href="_sources/Chap4_4splitPhysicalDomainsNS.rst.txt" rel="nofollow"> View page source</a>
           
         
@@ -261,7 +257,7 @@ Physical Surface(rightChamber) = {11};
 <span class="nt">&lt;mesh&gt;</span>
         <span class="nt">&lt;type</span> <span class="na">structure=</span><span class="s">&quot;unStructured&quot;</span><span class="nt">/&gt;</span>
         <span class="nt">&lt;unstructuredMesh&gt;</span>
-                <span class="nt">&lt;file</span> <span class="na">name=</span><span class="s">&quot;./libMeshes/myMeshFolder/tube2d.msh&quot;</span><span class="nt">/&gt;</span>
+                <span class="nt">&lt;file</span> <span class="na">name=</span><span class="s">&quot;libMeshes/myMeshFolder/tube2d.msh&quot;</span><span class="nt">/&gt;</span>
         <span class="nt">&lt;/unstructuredMesh&gt;</span>
 <span class="nt">&lt;/mesh&gt;</span>
 </pre></div>
@@ -337,29 +333,37 @@ Physical Surface(rightChamber) = {11};
            
           </div>
           <footer>
+  
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
-        <a href="Chap4_5paraviewServer.html" class="btn btn-neutral float-right" title="ParaView server" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
-        <a href="Chap4_3restartRun.html" class="btn btn-neutral float-left" title="Restart a run" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+      
+        <a href="Chap4_5paraviewServer.html" class="btn btn-neutral float-right" title="ParaView server" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="Chap4_3restartRun.html" class="btn btn-neutral float-left" title="Restart a run" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
     </div>
+  
 
   <hr/>
 
   <div role="contentinfo">
     <p>
-        &#169; Copyright 2021, code-mphi.
+        
+        &copy; Copyright 2022, code-mphi
 
     </p>
   </div>
     
     
     
-    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
     
-    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
     
     provided by <a href="https://readthedocs.org">Read the Docs</a>. 
 
 </footer>
+
         </div>
       </div>
 

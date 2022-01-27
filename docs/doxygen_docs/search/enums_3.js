@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['prim',['Prim',['../Tools_8h.html#a2c815f6ae654fe19b3985d14c9c8d74e',1,'Tools.h']]]
+  ['fluxtype_5063',['FluxType',['../OutputBoundaryFluxGNU_8h.html#a3ef216eb53f1f8b0ecd0f2ed5245fbeb',1,'OutputBoundaryFluxGNU.h']]]
 ];

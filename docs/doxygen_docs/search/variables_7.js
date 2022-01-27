@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['hk0',['Hk0',['../classTools.html#a42fc424bd85bcf287edaa3ad3cefe3e5',1,'Tools']]]
+  ['gradient_4472',['gradient',['../Cell_8cpp.html#af28e03270360d253cc6fbc6f43daae6b',1,'gradient():&#160;Cell.cpp'],['../Cell_8h.html#af28e03270360d253cc6fbc6f43daae6b',1,'gradient():&#160;Cell.cpp']]]
 ];

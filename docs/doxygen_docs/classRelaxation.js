@@ -2,6 +2,6 @@ var classRelaxation =
 [
     [ "Relaxation", "classRelaxation.html#adf354585387927bf4481da52f5dfc450", null ],
     [ "~Relaxation", "classRelaxation.html#afa1732be309eec698283302a9e49d006", null ],
-    [ "getType", "classRelaxation.html#ad2ec843f1ca1138cc01b82a2e893da5d", null ],
-    [ "relaxation", "classRelaxation.html#a62ef9503529d4a755204a65bac95fa36", null ]
+    [ "getType", "classRelaxation.html#a306e83abd5ebd9aa574fb4251ff4e5f4", null ],
+    [ "relaxation", "classRelaxation.html#a295c6996fa543b8f57234905ce83c587", null ]
 ];

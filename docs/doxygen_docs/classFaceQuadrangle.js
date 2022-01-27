@@ -5,5 +5,5 @@ var classFaceQuadrangle =
     [ "computeRepere", "classFaceQuadrangle.html#ab7405188990873cbb129fde3a7986df3", null ],
     [ "computeSurface", "classFaceQuadrangle.html#aa3f9020ac7ce11dcb0421717955ed13e", null ],
     [ "m_numNoeudsOrigine", "classFaceQuadrangle.html#a44cd38850138c7f62693dc540bd7852a", null ],
-    [ "NOMBRENOEUDS", "classFaceQuadrangle.html#a416be119e7db720094698594a38fcccd", null ]
+    [ "NUMBERNODES", "classFaceQuadrangle.html#a866cdbff3874343bfc07244c7baeee93", null ]
 ];

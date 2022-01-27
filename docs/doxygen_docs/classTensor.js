@@ -5,7 +5,7 @@ var classTensor =
     [ "Tensor", "classTensor.html#a0a366dd4c00d9f6986b6264da04cc29d", null ],
     [ "~Tensor", "classTensor.html#a55df2819c974d0979b1bd0f47c4e3a17", null ],
     [ "localProjection", "classTensor.html#a7d12f87639e6a6d1d6122813495b6048", null ],
-    [ "scalar", "classTensor.html#abb81c818091d7851c6d69d81764dc08f", null ],
+    [ "scalar", "classTensor.html#a04136a87e1902b2fa197f0008a6e23aa", null ],
     [ "setTensorByColumns", "classTensor.html#a0ca8a4ae06044901ec9617f8f149a22f", null ],
     [ "setTensorByLines", "classTensor.html#a9c94ad549b974edc96dd3c0e0ab5e4fe", null ],
     [ "tensorToCoords", "classTensor.html#af13567dad9dc7d1f6f7dbd7ad70e49d8", null ],

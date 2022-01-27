@@ -3,11 +3,11 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" />
+  <meta charset="utf-8">
   
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>ModelV4.xml &mdash; ECOGEN 3.0 documentation</title>
+  <title>ModelV4.xml &mdash; ECOGEN 3.1 documentation</title>
   
 
   
@@ -16,10 +16,7 @@
 
   
   
-
   
-  
-
   
 
   
@@ -32,6 +29,7 @@
         <script src="_static/jquery.js"></script>
         <script src="_static/underscore.js"></script>
         <script src="_static/doctools.js"></script>
+        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     
     <script type="text/javascript" src="_static/js/theme.js"></script>
 
@@ -53,7 +51,7 @@
           
 
           
-            <a href="index.html" class="icon icon-home"> ECOGEN
+            <a href="index.html" class="icon icon-home" alt="Documentation Home"> ECOGEN
           
 
           
@@ -63,7 +61,7 @@
             
             
               <div class="version">
-                3.0
+                3.1
               </div>
             
           
@@ -111,13 +109,13 @@
 </li>
 <li class="toctree-l2"><a class="reference internal" href="Chap3_2materials.html">Materials</a></li>
 <li class="toctree-l2"><a class="reference internal" href="Chap3_3outputFiles.html">Output Files</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Chap3_4featuresModels.html">Feature compatibility</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="Chap4_tutorials_Chapter.html">Tutorials</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Chap5_testCases_Chapter.html">Test cases</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Chap6_developersGuide_Chapter.html">Developers</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Chap7_license.html">License</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Chap8_GUI.html">Graphical User Interface</a></li>
 <li class="toctree-l1"><a class="reference internal" href="zBibliography.html">Bibliography</a></li>
 </ul>
 
@@ -159,8 +157,6 @@
 
 
 
-
-
 <div role="navigation" aria-label="breadcrumbs navigation">
 
   <ul class="wy-breadcrumbs">
@@ -176,7 +172,7 @@
     
       <li class="wy-breadcrumbs-aside">
         
-          
+            
             <a href="_sources/Chap3_1_2model.rst.txt" rel="nofollow"> View page source</a>
           
         
@@ -208,16 +204,24 @@
 </div>
 <p>The <code class="code xml docutils literal notranslate"><span class="name tag"><span class="pre">&lt;flowModel&gt;</span></span></code> markup is <strong>mandatory</strong> to specify the mathematical model to solve during the computation. This markup may contain the following attributes:</p>
 <ul class="simple">
-<li><p><code class="code xml docutils literal notranslate"><span class="pre">name</span></code>: Name of the mathematical flow model. This attribute can take the values: <em>Euler</em> <span id="id1">[<a class="reference internal" href="zBibliography.html#id2">Eul57</a>]</span>, <em>PressureVelocityEq</em> (previously named <em>Kapila</em>) <span id="id2">[<a class="reference internal" href="zBibliography.html#id234">SPB09</a>]</span><span id="id3">[<a class="reference internal" href="zBibliography.html#id286">KMB+01</a>]</span>, <em>VelocityEq</em> previously named <em>multiP</em>), <em>TemperaturePressureVelocityEq</em> (previously named <em>ThermalEq</em>) <span id="id4">[<a class="reference internal" href="zBibliography.html#id201">LMSN14</a>]</span> or <em>EulerHomogeneous</em>.</p></li>
+<li><p><code class="code xml docutils literal notranslate"><span class="pre">name</span></code>: Name of the mathematical flow model. This attribute can take the values: <em>Euler</em> <span id="id1">[<a class="reference internal" href="zBibliography.html#id7"><span>Eul57</span></a>]</span>, <em>PressureVelocityEq</em> (previously named <em>Kapila</em>) <span id="id2">[<a class="reference internal" href="zBibliography.html#id239"><span>SPB09</span></a>]</span><span id="id3">[<a class="reference internal" href="zBibliography.html#id291"><span>KMB+01</span></a>]</span>, <em>VelocityEq</em> (previously named <em>multiP</em>) <span id="id4">[<a class="reference internal" href="zBibliography.html#id2"><span>SCazeP+21</span></a>]</span>, <em>VelocityEqTotEnergy</em>, <em>TemperaturePressureVelocityEq</em> (previously named <em>ThermalEq</em>) <span id="id5">[<a class="reference internal" href="zBibliography.html#id206"><span>LMSN14</span></a>]</span>, <em>EulerHomogeneous</em>, <em>EulerKorteweg</em> or <em>NonLinearSchrodinger</em> <span id="id6">[<a class="reference internal" href="zBibliography.html#id5"><span>Dha20</span></a>]</span>.</p></li>
 <li><p><code class="code xml docutils literal notranslate"><span class="pre">numberPhases</span></code>: Integer number corresponding to the number of phases present in the simulation. The total amount of equations is related to this number. This attribute is not necessary when the values of <code class="code xml docutils literal notranslate"><span class="pre">name</span></code> are <em>Euler</em> or <em>EulerHomogeneous</em>.</p></li>
 <li><p><code class="code xml docutils literal notranslate"><span class="pre">numberTransports</span></code>: This attribute is optionnal and is set to 0 as default. It can be used to add specific variables advected in the flow (color functions).</p></li>
-<li><p><code class="code xml docutils literal notranslate"><span class="pre">alphaNull</span></code>: For <em>PressureVelocityEq</em> and <em>VelocityEq</em> models, the volume fraction can either be null (<em>true</em>) or not (<em>false</em>) and this choice is determined by this parameter. Default value is <em>false</em>.</p></li>
+<li><p><code class="code xml docutils literal notranslate"><span class="pre">alphaNull</span></code>: For <em>PressureVelocityEq</em>, <em>VelocityEq</em> and <em>VelocityEqTotEnergy</em> models, the volume fraction can either be null (<em>true</em>) or not (<em>false</em>) and this choice is determined by this parameter. Default value is <em>false</em>.</p></li>
 </ul>
 <p><strong>Remark:</strong></p>
-<p>If <em>EulerHomogeneous</em> model is chosen, two additional attributes may be used: <code class="code xml docutils literal notranslate"><span class="pre">liquid</span></code> and <code class="code xml docutils literal notranslate"><span class="pre">vapor</span></code> to specify the number corresponding to the liquid phase and the vapor phase. They are phase 0 for the first and 1 for the second.</p>
+<p>If <em>EulerHomogeneous</em> model is chosen, two other attributes are to be used: <code class="code xml docutils literal notranslate"><span class="pre">liquid</span></code> and <code class="code xml docutils literal notranslate"><span class="pre">vapor</span></code> to specify the number corresponding to the liquid phase and the vapor phase. They are phase 0 for the first and 1 for the second.</p>
 <div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;flowModel</span> <span class="na">name=</span><span class="s">&quot;EulerHomogeneous&quot;</span> <span class="na">liquid=</span><span class="s">&quot;0&quot;</span> <span class="na">vapor=</span><span class="s">&quot;1&quot;</span><span class="nt">/&gt;</span>
 <span class="nt">&lt;EOS</span> <span class="na">name=</span><span class="s">&quot;SG_waterLiq.xml&quot;</span><span class="nt">/&gt;</span>
 <span class="nt">&lt;EOS</span> <span class="na">name=</span><span class="s">&quot;IG_waterVap.xml&quot;</span><span class="nt">/&gt;</span>
+</pre></div>
+</div>
+<p>If <em>EulerKorteweg</em> or <em>NonLinearSchrodinger</em> models are chosen, other attributes are needed, in accordance with Dhaouadi’s thesis <span id="id7">[<a class="reference internal" href="zBibliography.html#id5"><span>Dha20</span></a>]</span>. Note that Euler–Korteweg model is written for a given temperature and that non-linear Schrödinger model doesn’t need an EOS.</p>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;flowModel</span> <span class="na">name=</span><span class="s">&quot;EulerKorteweg&quot;</span> <span class="na">alpha=</span><span class="s">&quot;1.e-2&quot;</span> <span class="na">beta=</span><span class="s">&quot;2.e-5&quot;</span> <span class="na">temperature=</span><span class="s">&quot;550&quot;</span> <span class="na">kappa=</span><span class="s">&quot;1.e-2&quot;</span><span class="nt">/&gt;</span>
+<span class="nt">&lt;EOS</span> <span class="na">name=</span><span class="s">&quot;Polynomial_arbitrary.xml&quot;</span><span class="nt">/&gt;</span>
+</pre></div>
+</div>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;flowModel</span> <span class="na">name=</span><span class="s">&quot;NonLinearSchrodinger&quot;</span> <span class="na">alpha=</span><span class="s">&quot;3.33e-3&quot;</span> <span class="na">beta=</span><span class="s">&quot;2.e-5&quot;</span><span class="nt">/&gt;</span>
 </pre></div>
 </div>
 </div>
@@ -242,9 +246,12 @@
 </div>
 <p>An additional markup <code class="code xml docutils literal notranslate"><span class="name tag"><span class="pre">&lt;relaxation&gt;</span></span></code> may be used to impose some specific equilibrium between the phases depending on the flow model used. The attribute <code class="code xml docutils literal notranslate"><span class="pre">type</span></code> specifies the type of equilibrium:</p>
 <ul class="simple">
-<li><p><em>P</em>: A pressure equilibrium is imposed at every location of the flow. The attribute <code class="code xml docutils literal notranslate"><span class="pre">speed</span></code> can be added to specify the speed at which the relaxation operates (<em>infinite</em> or <em>finite</em>). Default is <em>infinite</em>.</p></li>
+<li><p><em>P</em>: A pressure equilibrium is imposed at every location of the flow. The attribute <code class="code xml docutils literal notranslate"><span class="pre">speed</span></code> can be added to specify the speed at which the relaxation operates (<em>infinite</em> or <em>finite</em>). Default is <em>infinite</em>. If a finite relaxation is chosen, the <code class="code xml docutils literal notranslate"><span class="pre">rate</span></code> and <code class="code xml docutils literal notranslate"><span class="pre">solver</span></code> have to be specified. The rate is a real number while the solver can either be <em>Euler</em> <span id="id8">[<a class="reference internal" href="zBibliography.html#id2"><span>SCazeP+21</span></a>]</span> or <em>LSODA</em> <span id="id9">[<a class="reference internal" href="zBibliography.html#id3"><span>Hin83</span></a>,<a class="reference internal" href="zBibliography.html#id4"><span>Pet83</span></a>]</span>.</p></li>
 </ul>
 <div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;relaxation</span> <span class="na">type=</span><span class="s">&quot;P&quot;</span> <span class="na">speed=</span><span class="s">&quot;infinite&quot;</span><span class="nt">/&gt;</span>
+</pre></div>
+</div>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;relaxation</span> <span class="na">type=</span><span class="s">&quot;P&quot;</span> <span class="na">speed=</span><span class="s">&quot;finite&quot;</span> <span class="na">rate=</span><span class="s">&quot;1.e-5&quot;</span> <span class="na">solver=</span><span class="s">&quot;Euler&quot;</span><span class="nt">/&gt;</span>
 </pre></div>
 </div>
 <ul class="simple">
@@ -318,7 +325,7 @@
 <p>Depending on the model chosen in section <a class="reference internal" href="#sec-input-flowmodel"><span class="std std-ref">Flow model</span></a>, additional physical effects can be added. This is the case for surface tension, viscosity and conductive heat transfers. These additional physical effects are obtained thanks to the additional markup <code class="code xml docutils literal notranslate"><span class="pre">additionalPhysics</span></code> with the attribute <code class="code xml docutils literal notranslate"><span class="pre">type</span></code> that can take different value according to the chosen effect.</p>
 <div class="section" id="surface-tension">
 <h3>Surface tension<a class="headerlink" href="#surface-tension" title="Permalink to this headline">¶</a></h3>
-<p>This physical effect is obtained by using the type <em>surface tension</em> and its treatment is detailed in <span id="id5">[<a class="reference internal" href="zBibliography.html#id165">SPD+17</a>]</span>. Then it requires the node <code class="code xml docutils literal notranslate"><span class="pre">dataSurfaceTension</span></code> with following attributes:</p>
+<p>This physical effect is obtained by using the type <em>surface tension</em> and its treatment is detailed in <span id="id10">[<a class="reference internal" href="zBibliography.html#id170"><span>SPD+17</span></a>]</span>. Then it requires the node <code class="code xml docutils literal notranslate"><span class="pre">dataSurfaceTension</span></code> with following attributes:</p>
 <ul class="simple">
 <li><p><code class="code xml docutils literal notranslate"><span class="pre">transport</span></code>: This is the name of advected variable used as color function for surface-tension terms. This advected variable has been precised in the section <a class="reference internal" href="#sec-input-transport"><span class="std std-ref">Advected additional variables</span></a>. The name should be the same.</p></li>
 <li><p><code class="code xml docutils literal notranslate"><span class="pre">sigma</span></code>: A real number for the surface-tension coefficient (unit: N/m (SI)).</p></li>
@@ -348,29 +355,37 @@
            
           </div>
           <footer>
+  
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
-        <a href="Chap3_1_3mesh.html" class="btn btn-neutral float-right" title="MeshV5.xml" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
-        <a href="Chap3_1_1main.html" class="btn btn-neutral float-left" title="MainV5.xml" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+      
+        <a href="Chap3_1_3mesh.html" class="btn btn-neutral float-right" title="MeshV5.xml" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="Chap3_1_1main.html" class="btn btn-neutral float-left" title="MainV5.xml" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
     </div>
+  
 
   <hr/>
 
   <div role="contentinfo">
     <p>
-        &#169; Copyright 2021, code-mphi.
+        
+        &copy; Copyright 2022, code-mphi
 
     </p>
   </div>
     
     
     
-    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
     
-    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
     
     provided by <a href="https://readthedocs.org">Read the Docs</a>. 
 
 </footer>
+
         </div>
       </div>
 

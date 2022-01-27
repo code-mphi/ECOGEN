@@ -5,8 +5,8 @@ var classElementPoint =
     [ "attributFaceLimite", "classElementPoint.html#ae64627eca73a68db7269a8697e94199a", null ],
     [ "computeLCFL", "classElementPoint.html#aeb37af6800b82f1ba9a06a93f0448549", null ],
     [ "computeVolume", "classElementPoint.html#a0842a88aec561d8ccef23070edaf8b4c", null ],
-    [ "NOMBREFACES", "classElementPoint.html#a09eca9ed49230ac9fabcd393f3874543", null ],
-    [ "NOMBRENOEUDS", "classElementPoint.html#a14371e3fc5295c7b065463a5f83e6b43", null ],
+    [ "NUMBERFACES", "classElementPoint.html#aff88aac1db07ebfec92c576d296e0696", null ],
+    [ "NUMBERNODES", "classElementPoint.html#aa862ff185c74e177b866acd4ce01c5f0", null ],
     [ "TYPEGMSH", "classElementPoint.html#a38ec5e469a5d4e603f9cc3def7a1da64", null ],
     [ "TYPEVTK", "classElementPoint.html#ab5665fefb760328b6765b90fdca6b77d", null ]
 ];

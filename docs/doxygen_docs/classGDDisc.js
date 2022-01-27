@@ -2,7 +2,7 @@ var classGDDisc =
 [
     [ "GDDisc", "classGDDisc.html#ae153f24f50951c77909ff074760cff88", null ],
     [ "~GDDisc", "classGDDisc.html#a82a017bc2a007e4078c410605ebff4f4", null ],
-    [ "belong", "classGDDisc.html#a6c1427c0d4ecf76107e596f342f5179a", null ],
+    [ "belong", "classGDDisc.html#a2d03a6a29f2c12c07016935dfda68be1", null ],
     [ "m_axis1", "classGDDisc.html#a976d4fbb91706599b6f5c9567155b0d4", null ],
     [ "m_axis2", "classGDDisc.html#ac3feba605fbacf66f3d901e076ca26f1", null ],
     [ "m_centerPos", "classGDDisc.html#a6ca29a15f162f545094a7c11d12d01d9", null ],

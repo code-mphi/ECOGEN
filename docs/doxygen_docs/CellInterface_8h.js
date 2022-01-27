@@ -35,6 +35,6 @@ var CellInterface_8h =
       [ "distanceHDM", "CellInterface_8h.html#a7bd2b03d5e7132b851b9c9404f9b8faea8ddd0b0d6ea9593eb4ca5df5bbba34e3", null ],
       [ "distanceHDP", "CellInterface_8h.html#a7bd2b03d5e7132b851b9c9404f9b8faea662138b7add5fe0071bc4e430627f5fc", null ]
     ] ],
-    [ "cellLeft", "CellInterface_8h.html#a29e9434a5b4c13e843d0ecd75f15c1f0", null ],
-    [ "cellRight", "CellInterface_8h.html#ab1df753c688d94d43518ee838092f4b2", null ]
+    [ "bufferCellLeft", "CellInterface_8h.html#a2528b6858b5fa644637c3062ce9c9bd2", null ],
+    [ "bufferCellRight", "CellInterface_8h.html#adb91d6400cca4a0309dabc64ac2876c7", null ]
 ];

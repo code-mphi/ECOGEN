@@ -12,5 +12,7 @@ var Cell_8h =
       [ "velocityW", "Cell_8h.html#acca207de98b59d1c41e3975008706d61aa7805ed0a0aaf6f5ec59e04563ecc52e", null ],
       [ "temperature", "Cell_8h.html#acca207de98b59d1c41e3975008706d61a9922a43d37bee3212593f77ce4ec82f3", null ],
       [ "QPA", "Cell_8h.html#acca207de98b59d1c41e3975008706d61a20446aa548ede84c8005c3d211a8da23", null ]
-    ] ]
+    ] ],
+    [ "gradient", "Cell_8h.html#af28e03270360d253cc6fbc6f43daae6b", null ],
+    [ "model", "Cell_8h.html#a7b56c3ca57dde73bdbc8dbe9772bca19", null ]
 ];

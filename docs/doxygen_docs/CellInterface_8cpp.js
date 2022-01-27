@@ -1,5 +1,6 @@
 var CellInterface_8cpp =
 [
-    [ "cellLeft", "CellInterface_8cpp.html#a29e9434a5b4c13e843d0ecd75f15c1f0", null ],
-    [ "cellRight", "CellInterface_8cpp.html#ab1df753c688d94d43518ee838092f4b2", null ]
+    [ "bufferCellLeft", "CellInterface_8cpp.html#a2528b6858b5fa644637c3062ce9c9bd2", null ],
+    [ "bufferCellRight", "CellInterface_8cpp.html#adb91d6400cca4a0309dabc64ac2876c7", null ],
+    [ "model", "CellInterface_8cpp.html#a7b56c3ca57dde73bdbc8dbe9772bca19", null ]
 ];

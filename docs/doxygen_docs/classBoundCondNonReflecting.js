@@ -6,7 +6,7 @@ var classBoundCondNonReflecting =
     [ "~BoundCondNonReflecting", "classBoundCondNonReflecting.html#a3fe3db7fe1a05c0f0cefa49c98c0c98f", null ],
     [ "createBoundary", "classBoundCondNonReflecting.html#ad1f06cbffff6f12f58e08248f9746f80", null ],
     [ "creerCellInterfaceChild", "classBoundCondNonReflecting.html#a3ec1724095be5a5062135753166ca36a", null ],
-    [ "solveRiemannBoundary", "classBoundCondNonReflecting.html#a49a099cf648fa0e8bfe6534abffb8114", null ],
-    [ "solveRiemannTransportBoundary", "classBoundCondNonReflecting.html#a02a7ad286ea37e5f35774210eb5710cc", null ],
-    [ "whoAmI", "classBoundCondNonReflecting.html#a281adcb1156fc2022747c6d93e22cbf0", null ]
+    [ "solveRiemannBoundary", "classBoundCondNonReflecting.html#abeb921f558d9f0a410849d54448d4177", null ],
+    [ "solveRiemannTransportBoundary", "classBoundCondNonReflecting.html#a4231fc64fcb4d865a77873e197b39c75", null ],
+    [ "whoAmI", "classBoundCondNonReflecting.html#a871d36f53bdde7643417a45302a59163", null ]
 ];

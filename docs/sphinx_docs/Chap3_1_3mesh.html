@@ -3,11 +3,11 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" />
+  <meta charset="utf-8">
   
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>MeshV5.xml &mdash; ECOGEN 3.0 documentation</title>
+  <title>MeshV5.xml &mdash; ECOGEN 3.1 documentation</title>
   
 
   
@@ -16,10 +16,7 @@
 
   
   
-
   
-  
-
   
 
   
@@ -32,6 +29,7 @@
         <script src="_static/jquery.js"></script>
         <script src="_static/underscore.js"></script>
         <script src="_static/doctools.js"></script>
+        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     
     <script type="text/javascript" src="_static/js/theme.js"></script>
 
@@ -53,7 +51,7 @@
           
 
           
-            <a href="index.html" class="icon icon-home"> ECOGEN
+            <a href="index.html" class="icon icon-home" alt="Documentation Home"> ECOGEN
           
 
           
@@ -63,7 +61,7 @@
             
             
               <div class="version">
-                3.0
+                3.1
               </div>
             
           
@@ -106,13 +104,13 @@
 </li>
 <li class="toctree-l2"><a class="reference internal" href="Chap3_2materials.html">Materials</a></li>
 <li class="toctree-l2"><a class="reference internal" href="Chap3_3outputFiles.html">Output Files</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Chap3_4featuresModels.html">Feature compatibility</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="Chap4_tutorials_Chapter.html">Tutorials</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Chap5_testCases_Chapter.html">Test cases</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Chap6_developersGuide_Chapter.html">Developers</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Chap7_license.html">License</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Chap8_GUI.html">Graphical User Interface</a></li>
 <li class="toctree-l1"><a class="reference internal" href="zBibliography.html">Bibliography</a></li>
 </ul>
 
@@ -154,8 +152,6 @@
 
 
 
-
-
 <div role="navigation" aria-label="breadcrumbs navigation">
 
   <ul class="wy-breadcrumbs">
@@ -171,7 +167,7 @@
     
       <li class="wy-breadcrumbs-aside">
         
-          
+            
             <a href="_sources/Chap3_1_3mesh.rst.txt" rel="nofollow"> View page source</a>
           
         
@@ -245,7 +241,7 @@
 <div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;AMR</span> <span class="na">lvlMax=</span><span class="s">&quot;2&quot;</span> <span class="na">criteriaVar=</span><span class="s">&quot;0.2&quot;</span> <span class="na">varRho=</span><span class="s">&quot;true&quot;</span> <span class="na">varP=</span><span class="s">&quot;true&quot;</span> <span class="na">varU=</span><span class="s">&quot;false&quot;</span> <span class="na">varAlpha=</span><span class="s">&quot;false&quot;</span> <span class="na">xiSplit=</span><span class="s">&quot;0.11&quot;</span> <span class="na">xiJoin=</span><span class="s">&quot;0.11&quot;</span><span class="nt">/&gt;</span> <span class="c">&lt;!-- Optionnal node --&gt;</span>
 </pre></div>
 </div>
-<p>An efficient Adaptive Mesh refinement (AMR) technology is embedded in ECOGEN <span id="id1">[<a class="reference internal" href="zBibliography.html#id4">SPD19</a>]</span>. To use it, the <em>meshV5.xml</em> file must contain the optional node <code class="code xml docutils literal notranslate"><span class="name tag"><span class="pre">&lt;AMR&gt;</span></span></code> of the <code class="code xml docutils literal notranslate"><span class="name tag"><span class="pre">&lt;cartesianMesh&gt;</span></span></code> markup and define the following attributes:</p>
+<p>An efficient Adaptive Mesh refinement (AMR) technology is embedded in ECOGEN <span id="id1">[<a class="reference internal" href="zBibliography.html#id9"><span>SPD19</span></a>]</span>. To use it, the <em>meshV5.xml</em> file must contain the optional node <code class="code xml docutils literal notranslate"><span class="name tag"><span class="pre">&lt;AMR&gt;</span></span></code> of the <code class="code xml docutils literal notranslate"><span class="name tag"><span class="pre">&lt;cartesianMesh&gt;</span></span></code> markup and define the following attributes:</p>
 <ul class="simple">
 <li><p><code class="code xml docutils literal notranslate"><span class="pre">lvlMax</span></code>: Integer to define the maximal number of refinements (levels).</p></li>
 <li><p><code class="code xml docutils literal notranslate"><span class="pre">criteriaVar</span></code>: Real number controlling the detection of gradients for the locations of refinement.</p></li>
@@ -253,13 +249,13 @@
 <li><p><code class="code xml docutils literal notranslate"><span class="pre">xiSplit</span></code>, <code class="code xml docutils literal notranslate"><span class="pre">xiJoin</span></code>: Normalized real numbers to control if a computational cell, selected by its high gradient value, must be refined or un-refined (values are in the range <em>0-1</em>.).</p></li>
 </ul>
 <p><strong>Remark:</strong></p>
-<p>The global efficiency of the method is greatly depending on the chosen values for the <code class="code xml docutils literal notranslate"><span class="pre">criteriaVar</span></code>, <code class="code xml docutils literal notranslate"><span class="pre">xiSplit</span></code> and <code class="code xml docutils literal notranslate"><span class="pre">xiJoin</span></code> attributes. These values depend on the physical problem and required a real <em>know-how</em>. More details about these criterion values can be found in <span id="id2">[<a class="reference internal" href="zBibliography.html#id4">SPD19</a>]</span>.</p>
+<p>The global efficiency of the method is greatly depending on the chosen values for the <code class="code xml docutils literal notranslate"><span class="pre">criteriaVar</span></code>, <code class="code xml docutils literal notranslate"><span class="pre">xiSplit</span></code> and <code class="code xml docutils literal notranslate"><span class="pre">xiJoin</span></code> attributes. These values depend on the physical problem and required a real <em>know-how</em>. More details about these criterion values can be found in <span id="id2">[<a class="reference internal" href="zBibliography.html#id9"><span>SPD19</span></a>]</span>.</p>
 </div>
 </div>
 <div class="section" id="unstructured-mesh">
 <span id="sec-input-unstructured"></span><h2>Unstructured mesh<a class="headerlink" href="#unstructured-mesh" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;unstructuredMesh&gt;</span>
-  <span class="nt">&lt;file</span> <span class="na">name=</span><span class="s">&quot;./libMeshes/unstructured2D/testUS.msh&quot;</span><span class="nt">/&gt;</span>
+  <span class="nt">&lt;file</span> <span class="na">name=</span><span class="s">&quot;libMeshes/unstructured2D/testUS.msh&quot;</span><span class="nt">/&gt;</span>
   <span class="nt">&lt;parallel</span> <span class="na">GMSHPretraitement=</span><span class="s">&quot;true&quot;</span><span class="nt">/&gt;</span>  <span class="c">&lt;!-- Optionnal node if multi-core --&gt;</span>
 <span class="nt">&lt;/unstructuredMesh&gt;</span>
 </pre></div>
@@ -279,7 +275,7 @@
 <p><strong>Remarks:</strong></p>
 <ol class="arabic simple">
 <li><p>The attribute <code class="code xml docutils literal notranslate"><span class="pre">GMSHPretraitement</span></code> must be set as <em>true</em> if this is the first run with the given mesh file.</p></li>
-<li><p>In the current version 3.0 of ECOGEN, only mesh files generated with the opensource <a class="reference external" href="http://gmsh.info/">Gmsh</a> software <span id="id3">[<a class="reference internal" href="zBibliography.html#id88">GR09</a>]</span> under file format <em>version 2</em> can be used.</p></li>
+<li><p>In the current version 3.1 of ECOGEN, only mesh files generated with the opensource <a class="reference external" href="http://gmsh.info/">Gmsh</a> software <span id="id3">[<a class="reference internal" href="zBibliography.html#id93"><span>GR09</span></a>]</span> under file format <em>version 2</em> can be used.</p></li>
 </ol>
 <p>Please refer to the section <a class="reference internal" href="Chap4_2generatingMeshes.html#sec-tuto-generatingmeshes"><span class="std std-ref">Generating Meshes</span></a> to learn how to generate a mesh adapted for ECOGEN.</p>
 </div>
@@ -290,29 +286,37 @@
            
           </div>
           <footer>
+  
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
-        <a href="Chap3_1_4initialConditions.html" class="btn btn-neutral float-right" title="InitialConditionsV4.xml" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
-        <a href="Chap3_1_2model.html" class="btn btn-neutral float-left" title="ModelV4.xml" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+      
+        <a href="Chap3_1_4initialConditions.html" class="btn btn-neutral float-right" title="InitialConditionsV4.xml" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="Chap3_1_2model.html" class="btn btn-neutral float-left" title="ModelV4.xml" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
     </div>
+  
 
   <hr/>
 
   <div role="contentinfo">
     <p>
-        &#169; Copyright 2021, code-mphi.
+        
+        &copy; Copyright 2022, code-mphi
 
     </p>
   </div>
     
     
     
-    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
     
-    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
     
     provided by <a href="https://readthedocs.org">Read the Docs</a>. 
 
 </footer>
+
         </div>
       </div>
 

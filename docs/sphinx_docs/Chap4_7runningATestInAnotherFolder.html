@@ -1,0 +1,301 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Running a test case in another folder &mdash; ECOGEN 3.1 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Test cases" href="Chap5_testCases_Chapter.html" />
+    <link rel="prev" title="Gmsh example and extraction of mass-flow rate" href="Chap4_6extractMassflowWithParaview.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="index.html" class="icon icon-home" alt="Documentation Home"> ECOGEN
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                3.1
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="Chap1_introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Chap2_installation_Chapter.html">Installation instructions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Chap3_IO_Chapter.html">I/O descriptions</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="Chap4_tutorials_Chapter.html">Tutorials</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="Chap4_1startWithECOGEN.html">Start with ECOGEN</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Chap4_2generatingMeshes.html">Generating Meshes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Chap4_3restartRun.html">Restart a run</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Chap4_4splitPhysicalDomainsNS.html">Split physical domains for unstructured meshes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Chap4_5paraviewServer.html">ParaView server</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Chap4_6extractMassflowWithParaview.html">Gmsh example and extraction of mass-flow rate</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Running a test case in another folder</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#required-files">Required files</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#running-a-test-in-another-folder">Running a test in another folder</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="Chap5_testCases_Chapter.html">Test cases</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Chap6_developersGuide_Chapter.html">Developers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Chap7_license.html">License</a></li>
+<li class="toctree-l1"><a class="reference internal" href="zBibliography.html">Bibliography</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">ECOGEN</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="Chap4_tutorials_Chapter.html">Tutorials</a> &raquo;</li>
+        
+      <li>Running a test case in another folder</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/Chap4_7runningATestInAnotherFolder.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="running-a-test-case-in-another-folder">
+<span id="sec-tuto-runinanotherfolder"></span><h1>Running a test case in another folder<a class="headerlink" href="#running-a-test-case-in-another-folder" title="Permalink to this headline">¶</a></h1>
+<p>If one wants to execute a test located outside of the <strong>ECOGEN</strong> folder, it is now possible. To illustrate this tutorial, we will use a shock tube filled with air in 1D with the high pressure on the left side. This test will be in a folder called <strong>test</strong>.</p>
+<div class="section" id="required-files">
+<h2>Required files<a class="headerlink" href="#required-files" title="Permalink to this headline">¶</a></h2>
+<p>First, make sure that you still have the main <strong>ECOGEN</strong> folder, or this will not work. In the folder where you want to work, you need to have the same structure as the one for <strong>ECOGEN</strong>. So, for this example, you need to have:</p>
+<ul class="simple">
+<li><p><em>ECOGEN.xml</em> with the test case associated.</p></li>
+<li><p><em>libTests</em> containing the test cases.</p></li>
+<li><p><em>libEOS</em> containing the fluids you want to use.</p></li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>In the presented test case, the type of mesh used is Cartesian. However, if you want to use an unstructured mesh, you must have the <em>libMeshes</em> folder in the <em>test</em> folder.</p>
+</div>
+<p>For this example, the <em>ECOGEN.xml</em> file looks like:</p>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="cp">&lt;?xml version = &quot;1.0&quot; encoding = &quot;UTF-8&quot; standalone = &quot;yes&quot;?&gt;</span>
+<span class="nt">&lt;ecogen&gt;</span>
+  <span class="c">&lt;!-- &lt;testCase&gt;./libTests/euler/1D/shockTubes/HPLeft/&lt;/testCase&gt; --&gt;</span>
+<span class="nt">&lt;/ecogen&gt;</span>
+</pre></div>
+</div>
+<p>As the fluid used here is air, the <em>libEOS</em> folder will contain <em>IG_air.xml</em>, and the <em>libTests</em> folder will contain the 4 input files that are detailed in <a class="reference internal" href="Chap3_1inputFiles.html#chap-input"><span class="std std-ref">Input Files</span></a>.</p>
+<p>To sum up, you should have the following folder/file structure:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">├── ECOGEN</span>
+<span class="go">│   ├── AUTHORS</span>
+<span class="go">│   ├── COPYRIGHT</span>
+<span class="go">│   ├── coverage_and_profile</span>
+<span class="go">│   ├── docs</span>
+<span class="go">│   ├── ECOGEN.xml</span>
+<span class="go">│   ├── libEOS</span>
+<span class="go">│   ├── libMeshes</span>
+<span class="go">│   ├── libTests</span>
+<span class="go">│   ├── LICENSE</span>
+<span class="go">│   ├── Makefile</span>
+<span class="go">│   ├── nonreg</span>
+<span class="go">│   ├── README_Developer.md</span>
+<span class="go">│   ├── README.md</span>
+<span class="go">│   ├── scripts</span>
+<span class="go">│   └── src</span>
+<span class="go">└── test</span>
+<span class="go">    ├── ECOGEN.xml</span>
+<span class="go">    ├── libEOS</span>
+<span class="go">    └── libTests</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="running-a-test-in-another-folder">
+<h2>Running a test in another folder<a class="headerlink" href="#running-a-test-in-another-folder" title="Permalink to this headline">¶</a></h2>
+<p>As said before, the test used here is a shock tube filled with air, that is precisely detailed in <a class="reference internal" href="Chap5_1Euler_1D_HPLeft.html#sec-testcases-shocktube"><span class="std std-ref">High-pressure left</span></a>.</p>
+<div class="figure align-center" id="id1">
+<span id="fig-tutos-default-ci-2"></span><a class="reference internal image-reference" href="_images/CI1.jpg"><img alt="_images/CI1.jpg" src="_images/CI1.jpg" style="width: 613.9px; height: 138.6px;" /></a>
+<p class="caption"><span class="caption-number">Fig. 33 </span><span class="caption-text">Initial condition for 1D, single-phase transport test case.</span><a class="headerlink" href="#id1" title="Permalink to this image">¶</a></p>
+</div>
+<p>This test can be executed on a single core or on XX cores by the command:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">mpirun -np XX ECOGEN path/folder/</span>
+</pre></div>
+</div>
+<p>So, if the folder named <em>test</em> is located in <em>Documents</em>, and one wants to run the test with 2 cores, the command is:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">mpirun -np 2 ECOGEN ~/Documents/test/</span>
+</pre></div>
+</div>
+<p>A new folder <em>results</em> is created in the <em>test</em> folder, with another folder inside named <em>euler1DTShockTubeHPLeft</em> and where one can find output files of the test done.</p>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="Chap5_testCases_Chapter.html" class="btn btn-neutral float-right" title="Test cases" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="Chap4_6extractMassflowWithParaview.html" class="btn btn-neutral float-left" title="Gmsh example and extraction of mass-flow rate" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright 2022, code-mphi
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

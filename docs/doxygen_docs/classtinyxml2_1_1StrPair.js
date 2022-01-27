@@ -15,7 +15,7 @@ var classtinyxml2_1_1StrPair =
     [ "~StrPair", "classtinyxml2_1_1StrPair.html#a60bed84d2503296e1c2a73fcef1431f9", null ],
     [ "StrPair", "classtinyxml2_1_1StrPair.html#ac43c1f4a5730c5582f9cff724376d106", null ],
     [ "CollapseWhitespace", "classtinyxml2_1_1StrPair.html#ade1469025e6b4cac74397a82a7429337", null ],
-    [ "Empty", "classtinyxml2_1_1StrPair.html#affa1043e73a18f05d5d2faec055725a7", null ],
+    [ "Empty", "classtinyxml2_1_1StrPair.html#aca963a7eaa900bfddbea7312f040b39c", null ],
     [ "GetStr", "classtinyxml2_1_1StrPair.html#ad87e3d11330f5e689ba1e7e54c023b57", null ],
     [ "operator=", "classtinyxml2_1_1StrPair.html#a0f095caeacc0b1fd9fee55cd71261ab4", null ],
     [ "ParseName", "classtinyxml2_1_1StrPair.html#aa6d8998efceba41d87ec2300c70a6085", null ],

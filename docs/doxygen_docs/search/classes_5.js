@@ -1,16 +1,19 @@
 var searchData=
 [
-  ['face',['Face',['../classFace.html',1,'']]],
-  ['facecartesian',['FaceCartesian',['../classFaceCartesian.html',1,'']]],
-  ['facens',['FaceNS',['../classFaceNS.html',1,'']]],
-  ['facepoint',['FacePoint',['../classFacePoint.html',1,'']]],
-  ['facequadrangle',['FaceQuadrangle',['../classFaceQuadrangle.html',1,'']]],
-  ['facesegment',['FaceSegment',['../classFaceSegment.html',1,'']]],
-  ['facetriangle',['FaceTriangle',['../classFaceTriangle.html',1,'']]],
-  ['flux',['Flux',['../classFlux.html',1,'']]],
-  ['fluxeuler',['FluxEuler',['../classFluxEuler.html',1,'']]],
-  ['fluxeulerhomogeneous',['FluxEulerHomogeneous',['../classFluxEulerHomogeneous.html',1,'']]],
-  ['fluxptueq',['FluxPTUEq',['../classFluxPTUEq.html',1,'']]],
-  ['fluxpueq',['FluxPUEq',['../classFluxPUEq.html',1,'']]],
-  ['fluxueq',['FluxUEq',['../classFluxUEq.html',1,'']]]
+  ['face_2573',['Face',['../classFace.html',1,'']]],
+  ['facecartesian_2574',['FaceCartesian',['../classFaceCartesian.html',1,'']]],
+  ['facens_2575',['FaceNS',['../classFaceNS.html',1,'']]],
+  ['facepoint_2576',['FacePoint',['../classFacePoint.html',1,'']]],
+  ['facequadrangle_2577',['FaceQuadrangle',['../classFaceQuadrangle.html',1,'']]],
+  ['facesegment_2578',['FaceSegment',['../classFaceSegment.html',1,'']]],
+  ['facetriangle_2579',['FaceTriangle',['../classFaceTriangle.html',1,'']]],
+  ['flux_2580',['Flux',['../classFlux.html',1,'']]],
+  ['fluxeuler_2581',['FluxEuler',['../classFluxEuler.html',1,'']]],
+  ['fluxeulerhomogeneous_2582',['FluxEulerHomogeneous',['../classFluxEulerHomogeneous.html',1,'']]],
+  ['fluxeulerkorteweg_2583',['FluxEulerKorteweg',['../classFluxEulerKorteweg.html',1,'']]],
+  ['fluxnonlinearschrodinger_2584',['FluxNonLinearSchrodinger',['../classFluxNonLinearSchrodinger.html',1,'']]],
+  ['fluxptueq_2585',['FluxPTUEq',['../classFluxPTUEq.html',1,'']]],
+  ['fluxpueq_2586',['FluxPUEq',['../classFluxPUEq.html',1,'']]],
+  ['fluxueq_2587',['FluxUEq',['../classFluxUEq.html',1,'']]],
+  ['fluxueqtotenergy_2588',['FluxUEqTotEnergy',['../classFluxUEqTotEnergy.html',1,'']]]
 ];

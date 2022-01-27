@@ -3,11 +3,11 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" />
+  <meta charset="utf-8">
   
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>MainV5.xml &mdash; ECOGEN 3.0 documentation</title>
+  <title>MainV5.xml &mdash; ECOGEN 3.1 documentation</title>
   
 
   
@@ -16,10 +16,7 @@
 
   
   
-
   
-  
-
   
 
   
@@ -32,6 +29,7 @@
         <script src="_static/jquery.js"></script>
         <script src="_static/underscore.js"></script>
         <script src="_static/doctools.js"></script>
+        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     
     <script type="text/javascript" src="_static/js/theme.js"></script>
 
@@ -53,7 +51,7 @@
           
 
           
-            <a href="index.html" class="icon icon-home"> ECOGEN
+            <a href="index.html" class="icon icon-home" alt="Documentation Home"> ECOGEN
           
 
           
@@ -63,7 +61,7 @@
             
             
               <div class="version">
-                3.0
+                3.1
               </div>
             
           
@@ -111,13 +109,13 @@
 </li>
 <li class="toctree-l2"><a class="reference internal" href="Chap3_2materials.html">Materials</a></li>
 <li class="toctree-l2"><a class="reference internal" href="Chap3_3outputFiles.html">Output Files</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Chap3_4featuresModels.html">Feature compatibility</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="Chap4_tutorials_Chapter.html">Tutorials</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Chap5_testCases_Chapter.html">Test cases</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Chap6_developersGuide_Chapter.html">Developers</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Chap7_license.html">License</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Chap8_GUI.html">Graphical User Interface</a></li>
 <li class="toctree-l1"><a class="reference internal" href="zBibliography.html">Bibliography</a></li>
 </ul>
 
@@ -159,8 +157,6 @@
 
 
 
-
-
 <div role="navigation" aria-label="breadcrumbs navigation">
 
   <ul class="wy-breadcrumbs">
@@ -176,7 +172,7 @@
     
       <li class="wy-breadcrumbs-aside">
         
-          
+            
             <a href="_sources/Chap3_1_1main.rst.txt" rel="nofollow"> View page source</a>
           
         
@@ -196,7 +192,7 @@
 <div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="cp">&lt;?xml version = &quot;1.0&quot; encoding = &quot;UTF-8&quot; standalone = &quot;yes&quot;?&gt;</span>
 <span class="nt">&lt;computationParam&gt;</span>
   <span class="nt">&lt;run&gt;</span>example<span class="nt">&lt;/run&gt;</span>
-  <span class="nt">&lt;outputMode</span> <span class="na">format=</span><span class="s">&quot;XML&quot;</span> <span class="na">binary=</span><span class="s">&quot;false&quot;</span> <span class="na">precision=</span><span class="s">&quot;10&quot;</span><span class="nt">/&gt;</span>
+  <span class="nt">&lt;outputMode</span> <span class="na">format=</span><span class="s">&quot;XML&quot;</span> <span class="na">binary=</span><span class="s">&quot;false&quot;</span><span class="nt">/&gt;</span>
   <span class="nt">&lt;timeControlMode</span> <span class="na">iterations=</span><span class="s">&quot;false&quot;</span><span class="nt">&gt;</span>
     <span class="nt">&lt;iterations</span> <span class="na">number=</span><span class="s">&quot;3&quot;</span> <span class="na">iterFreq=</span><span class="s">&quot;1&quot;</span><span class="nt">/&gt;</span>
     <span class="nt">&lt;physicalTime</span> <span class="na">totalTime=</span><span class="s">&quot;8.e-3&quot;</span> <span class="na">timeFreq=</span><span class="s">&quot;8.e-4&quot;</span><span class="nt">/&gt;</span>
@@ -215,13 +211,15 @@
 </div>
 <div class="section" id="output-format">
 <h2>Output format<a class="headerlink" href="#output-format" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;outputMode</span> <span class="na">format=</span><span class="s">&quot;XML&quot;</span> <span class="na">binary=</span><span class="s">&quot;false&quot;</span> <span class="na">precision=</span><span class="s">&quot;10&quot;</span><span class="nt">/&gt;</span>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;outputMode</span> <span class="na">format=</span><span class="s">&quot;XML&quot;</span> <span class="na">binary=</span><span class="s">&quot;false&quot;</span> <span class="na">precision=</span><span class="s">&quot;10&quot;</span> <span class="na">reducedOutput=</span><span class="s">&quot;true&quot;</span><span class="nt">/&gt;</span>
 </pre></div>
 </div>
 <p>The <code class="code xml docutils literal notranslate"><span class="name tag"><span class="pre">&lt;outputMode&gt;</span></span></code> markup is mandatory. The user can choose the writing output format. Attributes are:</p>
 <ul class="simple">
 <li><p><code class="code xml docutils literal notranslate"><span class="pre">format</span></code>: Can take the value <em>GNU</em> (standard writing in column) or <em>XML</em> (XML VTK format).</p></li>
 <li><p><code class="code xml docutils literal notranslate"><span class="pre">binary</span></code>: Can take the value true or false. <em>Binary</em> (true) or <em>ASCII</em> (false) format can be chosen.</p></li>
+<li><p><code class="code xml docutils literal notranslate"><span class="pre">precision</span></code>: Optional attribute. Precision of output files (number of digits). If not precised, set as default.</p></li>
+<li><p><code class="code xml docutils literal notranslate"><span class="pre">reducedOutput</span></code>: Optional attribute. Reduced number of output variables when possible (depends on the model). Only available for velocity and pressure-velocity equilibrium model. Can take the value true or false. If not precised, default is false (complete output).</p></li>
 </ul>
 <p>Output result files will be placed in the folder <strong>ECOGEN/results/</strong> into a specific subfolder bearing the name of the run.</p>
 </div>
@@ -267,7 +265,7 @@
 </div>
 <div class="section" id="global-accuracy-order-of-the-numerical-scheme">
 <h2>Global accuracy order of the numerical scheme<a class="headerlink" href="#global-accuracy-order-of-the-numerical-scheme" title="Permalink to this headline">¶</a></h2>
-<p>When it is possible, according to the mesh or to the flow model, ECOGEN can use a second-order scheme (based on MUSCL approach with a TVD slope limiter; see <span id="id1">[<a class="reference internal" href="zBibliography.html#id5">SPLMD20</a>]</span> for details). In this case, the optional markup <code class="code xml docutils literal notranslate"><span class="name tag"><span class="pre">&lt;secondOrder&gt;</span></span></code> can be inserted in the <em>mainV5.xml</em> input file as in the following example:</p>
+<p>When it is possible, according to the mesh or to the flow model, ECOGEN can use a second-order scheme (based on MUSCL approach with a TVD slope limiter; see <span id="id1">[<a class="reference internal" href="zBibliography.html#id10"><span>SPLMD20</span></a>]</span> for details). In this case, the optional markup <code class="code xml docutils literal notranslate"><span class="name tag"><span class="pre">&lt;secondOrder&gt;</span></span></code> can be inserted in the <em>mainV5.xml</em> input file as in the following example:</p>
 <div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;secondOrder&gt;</span>
   <span class="nt">&lt;globalLimiter&gt;</span>minmod<span class="nt">&lt;/globalLimiter&gt;</span>
   <span class="nt">&lt;interfaceLimiter&gt;</span>superbee<span class="nt">&lt;/interfaceLimiter&gt;</span>                            <span class="c">&lt;!-- optionnal node --&gt;</span>
@@ -276,7 +274,7 @@
 <span class="nt">&lt;/secondOrder&gt;</span>
 </pre></div>
 </div>
-<p>The <code class="code xml docutils literal notranslate"><span class="name tag"><span class="pre">&lt;secondOrder&gt;</span></span></code> markup must contain the node <code class="code xml docutils literal notranslate"><span class="name tag"><span class="pre">&lt;globalLimiter&gt;</span></span></code>. The other nodes are optional. The slope limiters available in ECOGEN are the following: minmod <span id="id2">[<a class="reference internal" href="zBibliography.html#id69">Roe86</a>]</span>, vanleer <span id="id3">[<a class="reference internal" href="zBibliography.html#id68">VL74</a>]</span>, vanalbada <span id="id4">[<a class="reference internal" href="zBibliography.html#id67">VAVLR97</a>]</span>, mc <span id="id5">[<a class="reference internal" href="zBibliography.html#id352">VL77</a>]</span>, superbee <span id="id6">[<a class="reference internal" href="zBibliography.html#id69">Roe86</a>]</span> and thinc <span id="id7">[<a class="reference internal" href="zBibliography.html#id113">SX14</a>]</span> (only for volume fraction at the interface location). Markup significations are:</p>
+<p>The <code class="code xml docutils literal notranslate"><span class="name tag"><span class="pre">&lt;secondOrder&gt;</span></span></code> markup must contain the node <code class="code xml docutils literal notranslate"><span class="name tag"><span class="pre">&lt;globalLimiter&gt;</span></span></code>. The other nodes are optional. The slope limiters available in ECOGEN are the following: minmod <span id="id2">[<a class="reference internal" href="zBibliography.html#id74"><span>Roe86</span></a>]</span>, vanleer <span id="id3">[<a class="reference internal" href="zBibliography.html#id73"><span>VL74</span></a>]</span>, vanalbada <span id="id4">[<a class="reference internal" href="zBibliography.html#id72"><span>VAVLR97</span></a>]</span>, mc <span id="id5">[<a class="reference internal" href="zBibliography.html#id357"><span>VL77</span></a>]</span>, superbee <span id="id6">[<a class="reference internal" href="zBibliography.html#id74"><span>Roe86</span></a>]</span> and thinc <span id="id7">[<a class="reference internal" href="zBibliography.html#id118"><span>SX14</span></a>]</span> (only for volume fraction at the interface location). Markup significations are:</p>
 <ul class="simple">
 <li><p><code class="code xml docutils literal notranslate"><span class="name tag"><span class="pre">&lt;globalLimiter&gt;</span></span></code>: Applied everywhere and on all variables unless it is overwritten by the following optional limiters.</p></li>
 <li><p><code class="code xml docutils literal notranslate"><span class="name tag"><span class="pre">&lt;interfaceLimiter&gt;</span></span></code>: Applied on all variables but only at the interface location. By default is equal to the global limiter.</p></li>
@@ -317,29 +315,37 @@
            
           </div>
           <footer>
+  
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
-        <a href="Chap3_1_2model.html" class="btn btn-neutral float-right" title="ModelV4.xml" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
-        <a href="Chap3_1inputFiles.html" class="btn btn-neutral float-left" title="Input Files" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+      
+        <a href="Chap3_1_2model.html" class="btn btn-neutral float-right" title="ModelV4.xml" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="Chap3_1inputFiles.html" class="btn btn-neutral float-left" title="Input Files" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
     </div>
+  
 
   <hr/>
 
   <div role="contentinfo">
     <p>
-        &#169; Copyright 2021, code-mphi.
+        
+        &copy; Copyright 2022, code-mphi
 
     </p>
   </div>
     
     
     
-    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
     
-    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
     
     provided by <a href="https://readthedocs.org">Read the Docs</a>. 
 
 </footer>
+
         </div>
       </div>
 

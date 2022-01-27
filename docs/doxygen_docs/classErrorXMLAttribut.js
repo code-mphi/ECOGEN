@@ -2,8 +2,8 @@ var classErrorXMLAttribut =
 [
     [ "ErrorXMLAttribut", "classErrorXMLAttribut.html#a40d82e43f9b8c9012df792e292f7da61", null ],
     [ "~ErrorXMLAttribut", "classErrorXMLAttribut.html#a0f5c96a8190ede240961778a7eb02609", null ],
-    [ "additionalInfo", "classErrorXMLAttribut.html#a0e352e1aae7e8e49c348c538c564c11e", null ],
-    [ "attribute", "classErrorXMLAttribut.html#a60d0f3fd2ffe62bd4777bb39e6c91abf", null ],
-    [ "what", "classErrorXMLAttribut.html#a7bce134e01afdd4f817b063a40193b88", null ],
+    [ "additionalInfo", "classErrorXMLAttribut.html#a61c1da77bfdf4e6753ba3c671868dfe9", null ],
+    [ "attribute", "classErrorXMLAttribut.html#a5a0fbd624b24ba1b88e0e6f23b966e98", null ],
+    [ "what", "classErrorXMLAttribut.html#adf806e40ae5d2a964fdc8173ec8388a8", null ],
     [ "m_attribute", "classErrorXMLAttribut.html#a61f688750db74ab3ee730f57869662fc", null ]
 ];

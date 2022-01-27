@@ -12,6 +12,7 @@ var hierarchy =
       ] ]
     ] ],
     [ "tinyxml2::MemPoolT< SIZE >::Block", "structtinyxml2_1_1MemPoolT_1_1Block.html", null ],
+    [ "BoundCondNullFlux", "classBoundCondNullFlux.html", null ],
     [ "Cell", "classCell.html", [
       [ "CellGhost", "classCellGhost.html", null ],
       [ "CellO2", "classCellO2.html", [
@@ -22,6 +23,7 @@ var hierarchy =
       [ "BoundCond", "classBoundCond.html", [
         [ "BoundCondInj", "classBoundCondInj.html", null ],
         [ "BoundCondNonReflecting", "classBoundCondNonReflecting.html", null ],
+        [ "BoundCondNullflux", "classBoundCondNullflux.html", null ],
         [ "BoundCondOutflow", "classBoundCondOutflow.html", null ],
         [ "BoundCondSubInj", "classBoundCondSubInj.html", null ],
         [ "BoundCondTank", "classBoundCondTank.html", null ],
@@ -59,7 +61,9 @@ var hierarchy =
     [ "Eos", "classEos.html", [
       [ "EosIG", "classEosIG.html", null ],
       [ "EosNASG", "classEosNASG.html", null ],
-      [ "EosSG", "classEosSG.html", null ]
+      [ "EosPolynomial", "classEosPolynomial.html", null ],
+      [ "EosSG", "classEosSG.html", null ],
+      [ "EosVDW", "classEosVDW.html", null ]
     ] ],
     [ "Errors", "classErrors.html", null ],
     [ "exception", null, [
@@ -75,6 +79,7 @@ var hierarchy =
           [ "ErrorXMLEtat", "classErrorXMLEtat.html", null ],
           [ "ErrorXMLLimite", "classErrorXMLLimite.html", null ],
           [ "ErrorXMLMateriauInconnu", "classErrorXMLMateriauInconnu.html", null ],
+          [ "ErrorXMLMessage", "classErrorXMLMessage.html", null ],
           [ "ErrorXMLRacine", "classErrorXMLRacine.html", null ],
           [ "ErrorXMLRelaxation", "classErrorXMLRelaxation.html", null ],
           [ "ErrorXMLStretching", "classErrorXMLStretching.html", null ],
@@ -94,10 +99,14 @@ var hierarchy =
     [ "Flux", "classFlux.html", [
       [ "FluxEuler", "classFluxEuler.html", null ],
       [ "FluxEulerHomogeneous", "classFluxEulerHomogeneous.html", null ],
+      [ "FluxEulerKorteweg", "classFluxEulerKorteweg.html", [
+        [ "FluxNonLinearSchrodinger", "classFluxNonLinearSchrodinger.html", null ]
+      ] ],
       [ "FluxPTUEq", "classFluxPTUEq.html", null ],
       [ "FluxUEq", "classFluxUEq.html", [
         [ "FluxPUEq", "classFluxPUEq.html", null ]
-      ] ]
+      ] ],
+      [ "FluxUEqTotEnergy", "classFluxUEqTotEnergy.html", null ]
     ] ],
     [ "GeometricalDomain", "classGeometricalDomain.html", [
       [ "GDCuboid", "classGDCuboid.html", null ],
@@ -116,6 +125,10 @@ var hierarchy =
       [ "GOPlan", "classGOPlan.html", null ],
       [ "GOVertex", "classGOVertex.html", null ]
     ] ],
+    [ "Gradient", "classGradient.html", [
+      [ "GradientFiniteDifference", "classGradientFiniteDifference.html", null ],
+      [ "GradientGreenGauss", "classGradientGreenGauss.html", null ]
+    ] ],
     [ "decomposition::Key< Dim >::hash_functor", "structdecomposition_1_1Key_1_1hash__functor.html", null ],
     [ "Input", "classInput.html", null ],
     [ "IO", "classIO.html", null ],
@@ -129,6 +142,7 @@ var hierarchy =
       [ "LimiterVanAlbada", "classLimiterVanAlbada.html", null ],
       [ "LimiterVanLeer", "classLimiterVanLeer.html", null ]
     ] ],
+    [ "LSODA", "classLSODA.html", null ],
     [ "tinyxml2::MemPool", "classtinyxml2_1_1MemPool.html", [
       [ "tinyxml2::MemPoolT< sizeof(tinyxml2::XMLAttribute) >", "classtinyxml2_1_1MemPoolT.html", null ],
       [ "tinyxml2::MemPoolT< sizeof(tinyxml2::XMLComment) >", "classtinyxml2_1_1MemPoolT.html", null ],
@@ -150,22 +164,34 @@ var hierarchy =
     [ "Mixture", "classMixture.html", [
       [ "MixEuler", "classMixEuler.html", null ],
       [ "MixEulerHomogeneous", "classMixEulerHomogeneous.html", null ],
+      [ "MixEulerKorteweg", "classMixEulerKorteweg.html", [
+        [ "MixNonLinearSchrodinger", "classMixNonLinearSchrodinger.html", null ]
+      ] ],
       [ "MixPTUEq", "classMixPTUEq.html", null ],
       [ "MixUEq", "classMixUEq.html", [
         [ "MixPUEq", "classMixPUEq.html", null ]
-      ] ]
+      ] ],
+      [ "MixUEqTotEnergy", "classMixUEqTotEnergy.html", null ]
     ] ],
     [ "Model", "classModel.html", [
       [ "ModEuler", "classModEuler.html", null ],
       [ "ModEulerHomogeneous", "classModEulerHomogeneous.html", null ],
+      [ "ModEulerKorteweg", "classModEulerKorteweg.html", [
+        [ "ModNonLinearSchrodinger", "classModNonLinearSchrodinger.html", null ]
+      ] ],
       [ "ModPTUEq", "classModPTUEq.html", null ],
       [ "ModUEq", "classModUEq.html", [
         [ "ModPUEq", "classModPUEq.html", null ]
-      ] ]
+      ] ],
+      [ "ModUEqTotEnergy", "classModUEqTotEnergy.html", null ]
     ] ],
+    [ "ModUEqTotEnergyTotEnergy", "classModUEqTotEnergyTotEnergy.html", null ],
     [ "Output", "classOutput.html", [
       [ "OutputGNU", "classOutputGNU.html", [
-        [ "OutputBoundaryFluxGNU", "classOutputBoundaryFluxGNU.html", null ],
+        [ "OutputBoundaryGNU", "classOutputBoundaryGNU.html", [
+          [ "OutputBoundaryAllGNU", "classOutputBoundaryAllGNU.html", null ],
+          [ "OutputBoundaryFluxGNU", "classOutputBoundaryFluxGNU.html", null ]
+        ] ],
         [ "OutputCutGNU", "classOutputCutGNU.html", null ],
         [ "OutputGlobalGNU", "classOutputGlobalGNU.html", null ],
         [ "OutputProbeGNU", "classOutputProbeGNU.html", null ]
@@ -176,10 +202,14 @@ var hierarchy =
     [ "Phase", "classPhase.html", [
       [ "PhaseEuler", "classPhaseEuler.html", null ],
       [ "PhaseEulerHomogeneous", "classPhaseEulerHomogeneous.html", null ],
+      [ "PhaseEulerKorteweg", "classPhaseEulerKorteweg.html", [
+        [ "PhaseNonLinearSchrodinger", "classPhaseNonLinearSchrodinger.html", null ]
+      ] ],
       [ "PhasePTUEq", "classPhasePTUEq.html", null ],
       [ "PhaseUEq", "classPhaseUEq.html", [
         [ "PhasePUEq", "classPhasePUEq.html", null ]
-      ] ]
+      ] ],
+      [ "PhaseUEqTotEnergy", "classPhaseUEqTotEnergy.html", null ]
     ] ],
     [ "QuantitiesAddPhys", "classQuantitiesAddPhys.html", [
       [ "QAPConductivity", "classQAPConductivity.html", null ],
@@ -196,10 +226,16 @@ var hierarchy =
     ] ],
     [ "Run", "classRun.html", null ],
     [ "Source", "classSource.html", [
-      [ "SourceGravity", "classSourceGravity.html", null ],
-      [ "SourceHeating", "classSourceHeating.html", null ],
-      [ "SourceMRF", "classSourceMRF.html", null ]
+      [ "SourceExact", "classSourceExact.html", [
+        [ "SourceExactEulerKorteweg", "classSourceExactEulerKorteweg.html", null ]
+      ] ],
+      [ "SourceNum", "classSourceNum.html", [
+        [ "SourceNumGravity", "classSourceNumGravity.html", null ],
+        [ "SourceNumHeating", "classSourceNumHeating.html", null ],
+        [ "SourceNumMRF", "classSourceNumMRF.html", null ]
+      ] ]
     ] ],
+    [ "SourceGravity", "classSourceGravity.html", null ],
     [ "stretchZone", "classstretchZone.html", null ],
     [ "tinyxml2::StrPair", "classtinyxml2_1_1StrPair.html", null ],
     [ "Symmetry", "classSymmetry.html", [

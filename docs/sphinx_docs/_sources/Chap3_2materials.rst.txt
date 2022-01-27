@@ -3,11 +3,12 @@
 Materials
 =========
 
-For each phase, an equation of state is required. The data for a given phase are gathered in a file. Every file must be in the folder **ECOGEN/libEOS/** and must follow rules depending on the EOS. Three equations of state are implemented in ECOGEN:
+For each phase, an equation of state is required. The data for a given phase are gathered in a file. Every file must be in the folder **ECOGEN/libEOS/** and must follow rules depending on the EOS. Five equations of state are implemented in ECOGEN:
 
 - :ref:`Sec:input:IdealGas`: For gaseous phase only.
 - :ref:`Sec:input:StiffenedGas`: For condensed matter (liquid, solid) in a pressure range where the compressible assumption is reasonable. 
 - :ref:`Sec:input:NobleAbelStiffenedGas`: For condensed matter (liquid, solid) subject to phase change.
+- Van der Waals and Polynomial: Experimental work on non-convex EOS therefore not detailed in the following.
 
 .. _Sec:input:IdealGas:
 

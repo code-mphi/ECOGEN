@@ -28,20 +28,31 @@ Flow model
 
 The :xml:`<flowModel>` markup is **mandatory** to specify the mathematical model to solve during the computation. This markup may contain the following attributes:
 
-- :xml:`name`: Name of the mathematical flow model. This attribute can take the values: *Euler* :cite:`euler1757principes`, *PressureVelocityEq* (previously named *Kapila*) :cite:`relaxjcp`:cite:`kapila2001`, *VelocityEq* previously named *multiP*), *TemperaturePressureVelocityEq* (previously named *ThermalEq*) :cite:`martelotboiling` or *EulerHomogeneous*.
+- :xml:`name`: Name of the mathematical flow model. This attribute can take the values: *Euler* :cite:`euler1757principes`, *PressureVelocityEq* (previously named *Kapila*) :cite:`relaxjcp`:cite:`kapila2001`, *VelocityEq* (previously named *multiP*) :cite:`schmidmayer2021UEq`, *VelocityEqTotEnergy*, *TemperaturePressureVelocityEq* (previously named *ThermalEq*) :cite:`martelotboiling`, *EulerHomogeneous*, *EulerKorteweg* or *NonLinearSchrodinger* :cite:`dhaouadi2020phd`.
 - :xml:`numberPhases`: Integer number corresponding to the number of phases present in the simulation. The total amount of equations is related to this number. This attribute is not necessary when the values of :xml:`name` are *Euler* or *EulerHomogeneous*.
 - :xml:`numberTransports`: This attribute is optionnal and is set to 0 as default. It can be used to add specific variables advected in the flow (color functions).
-- :xml:`alphaNull`: For *PressureVelocityEq* and *VelocityEq* models, the volume fraction can either be null (*true*) or not (*false*) and this choice is determined by this parameter. Default value is *false*.
+- :xml:`alphaNull`: For *PressureVelocityEq*, *VelocityEq* and *VelocityEqTotEnergy* models, the volume fraction can either be null (*true*) or not (*false*) and this choice is determined by this parameter. Default value is *false*.
 
 **Remark:**
 
-If *EulerHomogeneous* model is chosen, two additional attributes may be used: :xml:`liquid` and :xml:`vapor` to specify the number corresponding to the liquid phase and the vapor phase. They are phase 0 for the first and 1 for the second.
+If *EulerHomogeneous* model is chosen, two other attributes are to be used: :xml:`liquid` and :xml:`vapor` to specify the number corresponding to the liquid phase and the vapor phase. They are phase 0 for the first and 1 for the second.
 
 .. code-block:: xml
 
 	<flowModel name="EulerHomogeneous" liquid="0" vapor="1"/>
 	<EOS name="SG_waterLiq.xml"/>
 	<EOS name="IG_waterVap.xml"/>
+
+If *EulerKorteweg* or *NonLinearSchrodinger* models are chosen, other attributes are needed, in accordance with Dhaouadi's thesis :cite:`dhaouadi2020phd`. Note that Euler--Korteweg model is written for a given temperature and that non-linear Schrödinger model doesn't need an EOS.
+
+.. code-block:: xml
+
+	<flowModel name="EulerKorteweg" alpha="1.e-2" beta="2.e-5" temperature="550" kappa="1.e-2"/>
+	<EOS name="Polynomial_arbitrary.xml"/>
+
+.. code-block:: xml
+
+	<flowModel name="NonLinearSchrodinger" alpha="3.33e-3" beta="2.e-5"/>
 
 Equations of state (EOS)
 ------------------------
@@ -72,11 +83,15 @@ Relaxation procedures
 
 An additional markup :xml:`<relaxation>` may be used to impose some specific equilibrium between the phases depending on the flow model used. The attribute :xml:`type` specifies the type of equilibrium:
 
-- *P*: A pressure equilibrium is imposed at every location of the flow. The attribute :xml:`speed` can be added to specify the speed at which the relaxation operates (*infinite* or *finite*). Default is *infinite*.
+- *P*: A pressure equilibrium is imposed at every location of the flow. The attribute :xml:`speed` can be added to specify the speed at which the relaxation operates (*infinite* or *finite*). Default is *infinite*. If a finite relaxation is chosen, the :xml:`rate` and :xml:`solver` have to be specified. The rate is a real number while the solver can either be *Euler* :cite:`schmidmayer2021UEq` or *LSODA* :cite:`hindmarsh1983odepack, petzold1983LSODA`.
 
 .. code-block:: xml
 
 	<relaxation type="P" speed="infinite"/>
+
+.. code-block:: xml
+
+	<relaxation type="P" speed="finite" rate="1.e-5" solver="Euler"/>
 
 - *PT*: Both pressure and thermal equilibrium are imposed at every location of the flow. It does not require additional attributes.
 - *PTMu*: A thermodynamical equilibrium is imposed at every location of the flow. It must be associated with the node :xml:`<dataPTMu>` whose attributes are :xml:`liquid` and :xml:`vapor` to specify the name of the EOS of the liquid and the vapor phase. Hereafter the complete node when *PTMu* is used:

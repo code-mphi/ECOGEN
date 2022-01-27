@@ -39,3 +39,13 @@ To cite ECOGEN, please use :cite:`schmidmayer2020ecogen` |DOI:ecogen|
 
 .. |DOI:ecogen| image:: https://img.shields.io/badge/DOI-10.1016/j.cpc.2019.107093-green.svg
    :target: https://doi.org/10.1016/j.cpc.2019.107093
+
+Aknowledgments
+--------------
+
+A special thanks is also adressed to Tim Colonius and Nicolas Favrie for their advising and fundings.
+
+They helped to improve ECOGEN software through their valuable feedbacks: Luc Biasiori-Poulanges, Spencer Bryngelson, Theresa Trummler, Mathieu Brasseur.
+
+They also contributed to the evolution of ECOGEN software through their scholar internships:
+Paul Jeanney, Adrien Besse, Estefani Cardoso Aires, Guillaume Chavet.

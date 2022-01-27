@@ -3,6 +3,7 @@ var Errors_8h =
     [ "Errors", "classErrors.html", "classErrors" ],
     [ "ErrorECOGEN", "classErrorECOGEN.html", "classErrorECOGEN" ],
     [ "ErrorXML", "classErrorXML.html", "classErrorXML" ],
+    [ "ErrorXMLMessage", "classErrorXMLMessage.html", "classErrorXMLMessage" ],
     [ "ErrorXMLRacine", "classErrorXMLRacine.html", "classErrorXMLRacine" ],
     [ "ErrorXMLElement", "classErrorXMLElement.html", "classErrorXMLElement" ],
     [ "ErrorXMLAttribut", "classErrorXMLAttribut.html", "classErrorXMLAttribut" ],

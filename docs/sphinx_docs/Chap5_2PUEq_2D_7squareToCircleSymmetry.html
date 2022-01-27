@@ -1,0 +1,302 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Square to circle using symmetry &mdash; ECOGEN 3.1 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Spherical collapse" href="Chap5_2PUEq_2D_8sphericalCollapse.html" />
+    <link rel="prev" title="Droplet impact" href="Chap5_2PUEq_2D_6dropletImpact.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="index.html" class="icon icon-home" alt="Documentation Home"> ECOGEN
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                3.1
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="Chap1_introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Chap2_installation_Chapter.html">Installation instructions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Chap3_IO_Chapter.html">I/O descriptions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Chap4_tutorials_Chapter.html">Tutorials</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="Chap5_testCases_Chapter.html">Test cases</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="Chap5_1Euler.html">Single-phase test cases</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="Chap5_2.html">Multiphase test cases</a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="Chap5_2PUEq.html">Pressure- and velocity-equilibrium model</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="Chap5_2PUEq_1D.html">1D</a></li>
+<li class="toctree-l4 current"><a class="reference internal" href="Chap5_2PUEq_2D.html">2D</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="Chap5_2UEq.html">Velocity-equilibrium model</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Chap5_2UEqTotE.html">Velocity-equilibrium model based on total energies</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Chap5_2PTUEq.html">Temperature-, pressure- and velocity-equilibrium model</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Chap5_2eulerHomogeneous.html">Homogeneous Euler</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Chap5_2.html#other-tests-cases">Other tests cases</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="Chap6_developersGuide_Chapter.html">Developers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Chap7_license.html">License</a></li>
+<li class="toctree-l1"><a class="reference internal" href="zBibliography.html">Bibliography</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">ECOGEN</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="Chap5_testCases_Chapter.html">Test cases</a> &raquo;</li>
+        
+          <li><a href="Chap5_2.html">Multiphase test cases</a> &raquo;</li>
+        
+          <li><a href="Chap5_2PUEq.html">Pressure- and velocity-equilibrium model</a> &raquo;</li>
+        
+          <li><a href="Chap5_2PUEq_2D.html">2D</a> &raquo;</li>
+        
+      <li>Square to circle using symmetry</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/Chap5_2PUEq_2D_7squareToCircleSymmetry.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="square-to-circle-using-symmetry">
+<h1>Square to circle using symmetry<a class="headerlink" href="#square-to-circle-using-symmetry" title="Permalink to this headline">¶</a></h1>
+<p>This case is a 2D Cartesian test case. A square domain composed of air, with inside another square domain composed of liquid (special for few surface-tension test cases). Initial conditions of this test are shown in <a class="reference internal" href="#fig-testcases-pueq-squaretocirclesymmetryini"><span class="std std-numref">Fig. 79</span></a>.
+Input files for this test are available in <em>./libTests/referenceTestCases/PUEq/AddPhysicalEffects/surfaceTension/squareToCircleSymmetry/</em>. The corresponding uncommented line in <em>ECOGEN.xml</em> is:</p>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;testCase&gt;</span>./libTests/referenceTestCases/PUEq/AddPhysicalEffects/surfaceTension/squareToCircleSymmetry/<span class="nt">&lt;/testCase&gt;</span>
+</pre></div>
+</div>
+<div class="figure align-center" id="id1">
+<span id="fig-testcases-pueq-squaretocirclesymmetryini"></span><a class="reference internal image-reference" href="_images/squareToCircleSymmetryIni.png"><img alt="_images/squareToCircleSymmetryIni.png" src="_images/squareToCircleSymmetryIni.png" style="width: 747.6px; height: 359.4px;" /></a>
+<p class="caption"><span class="caption-number">Fig. 79 </span><span class="caption-text">Initial conditions.</span><a class="headerlink" href="#id1" title="Permalink to this image">¶</a></p>
+</div>
+<p>Computations are performed only on half of the domain because a symmetry is applied as indicated in the title of this test case.</p>
+<p>The initial characteristics of the run are:</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 48%" />
+<col style="width: 52%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Characteristic</p></th>
+<th class="head"><p>Value</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>dimension</p></td>
+<td><p>75 cm x 75 cm</p></td>
+</tr>
+<tr class="row-odd"><td><p>Initial mesh size</p></td>
+<td><p>20 x 10</p></td>
+</tr>
+<tr class="row-even"><td><p>AMR max level</p></td>
+<td><p>2</p></td>
+</tr>
+<tr class="row-odd"><td><p>boundary conditions</p></td>
+<td><p>outflow, symmetry</p></td>
+</tr>
+<tr class="row-even"><td><p>final solution time</p></td>
+<td><p>0.5 s</p></td>
+</tr>
+<tr class="row-odd"><td><p>solution printing frequency</p></td>
+<td><p>5 e-3 s</p></td>
+</tr>
+<tr class="row-even"><td><p>precision</p></td>
+<td><p>2nd order (MC + Minmod + THINC)</p></td>
+</tr>
+</tbody>
+</table>
+<p>Results are shown in <a class="reference internal" href="#fig-testcases-pueq-squaretocirclesymmetryanim"><span class="std std-numref">Fig. 80</span></a>. When the interface between the blue and the white regions disapears, because of surface tension, the region that was initially square is deformed and tends to become circular with time. Note that it is necessary to have a stationary solution to obtain this circle and this requires a relatively long final solution time.</p>
+<p>One can observe the distribution of computation on the CPUs (here 12) divided into different regions, according to AMR evolution. When the density variations are low or non-existent, the mesh is as coarse as possible (within the conditions given in meshV5.xml). On the contrary when the variations become significant, the mesh is refined. So, to distribute the work equally between the CPUs, highly refined regions are relatively small compared to coarse regions.</p>
+<div class="figure align-center" id="id2">
+<span id="fig-testcases-pueq-squaretocirclesymmetryanim"></span><a class="reference internal image-reference" href="_images/squareToCircleSymmetryAnim.gif"><img alt="_images/squareToCircleSymmetryAnim.gif" src="_images/squareToCircleSymmetryAnim.gif" style="width: 409.5px; height: 409.5px;" /></a>
+<p class="caption"><span class="caption-number">Fig. 80 </span><span class="caption-text">CPU (upper half) and density (lower half) over time. Visualization using <a class="reference external" href="https://www.paraview.org/">Paraview</a> software.</span><a class="headerlink" href="#id2" title="Permalink to this image">¶</a></p>
+</div>
+<div class="figure align-center">
+<a class="reference internal image-reference" href="_images/squareToCircleToggle.png"><img alt="_images/squareToCircleToggle.png" src="_images/squareToCircleToggle.png" style="width: 209.29999999999998px; height: 55.3px;" /></a>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="Chap5_2PUEq_2D_8sphericalCollapse.html" class="btn btn-neutral float-right" title="Spherical collapse" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="Chap5_2PUEq_2D_6dropletImpact.html" class="btn btn-neutral float-left" title="Droplet impact" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright 2022, code-mphi
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

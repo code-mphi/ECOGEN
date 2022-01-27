@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['wall',['WALL',['../Tools_8h.html#a36652a21e0b7ba895c97b2ab09843032afca2faad41310c7e71ec303ef789c53a',1,'Tools.h']]],
-  ['warning',['WARNING',['../Errors_8h.html#a42cf5ff2ddac8acd8d3c6eefeeb19ff0a984de77c680eaff141ec910e25568a81',1,'Errors.h']]]
+  ['uns_5170',['UNS',['../Tools_8h.html#a090fa0180c1c24153a78ae4597899ff7adfabd9829b149f4dca70d33da4d1e7f8',1,'Tools.h']]]
 ];

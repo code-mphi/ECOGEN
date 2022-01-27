@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['xmlerror',['XMLError',['../namespacetinyxml2.html#a1fbf88509c3ac88c09117b1947414e08',1,'tinyxml2']]]
+  ['whitespace_5078',['Whitespace',['../namespacetinyxml2.html#a7f91d00f77360f850fd5da0861e27dd5',1,'tinyxml2']]]
 ];

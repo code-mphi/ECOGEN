@@ -10,6 +10,10 @@ var dir_20daaee7292e9c36afaeb86b3bf89b14 =
     ] ],
     [ "BoundCondNonReflecting.cpp", "BoundCondNonReflecting_8cpp.html", "BoundCondNonReflecting_8cpp" ],
     [ "BoundCondNonReflecting.h", "BoundCondNonReflecting_8h.html", "BoundCondNonReflecting_8h" ],
+    [ "BoundCondNullFlux.cpp", "BoundCondNullFlux_8cpp.html", null ],
+    [ "BoundCondNullFlux.h", "BoundCondNullFlux_8h.html", [
+      [ "BoundCondNullflux", "classBoundCondNullflux.html", "classBoundCondNullflux" ]
+    ] ],
     [ "BoundCondOutflow.cpp", "BoundCondOutflow_8cpp.html", null ],
     [ "BoundCondOutflow.h", "BoundCondOutflow_8h.html", [
       [ "BoundCondOutflow", "classBoundCondOutflow.html", "classBoundCondOutflow" ]

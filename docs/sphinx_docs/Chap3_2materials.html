@@ -3,11 +3,11 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" />
+  <meta charset="utf-8">
   
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Materials &mdash; ECOGEN 3.0 documentation</title>
+  <title>Materials &mdash; ECOGEN 3.1 documentation</title>
   
 
   
@@ -16,10 +16,7 @@
 
   
   
-
   
-  
-
   
 
   
@@ -54,7 +51,7 @@
           
 
           
-            <a href="index.html" class="icon icon-home"> ECOGEN
+            <a href="index.html" class="icon icon-home" alt="Documentation Home"> ECOGEN
           
 
           
@@ -64,7 +61,7 @@
             
             
               <div class="version">
-                3.0
+                3.1
               </div>
             
           
@@ -102,13 +99,13 @@
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="Chap3_3outputFiles.html">Output Files</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Chap3_4featuresModels.html">Feature compatibility</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="Chap4_tutorials_Chapter.html">Tutorials</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Chap5_testCases_Chapter.html">Test cases</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Chap6_developersGuide_Chapter.html">Developers</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Chap7_license.html">License</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Chap8_GUI.html">Graphical User Interface</a></li>
 <li class="toctree-l1"><a class="reference internal" href="zBibliography.html">Bibliography</a></li>
 </ul>
 
@@ -150,8 +147,6 @@
 
 
 
-
-
 <div role="navigation" aria-label="breadcrumbs navigation">
 
   <ul class="wy-breadcrumbs">
@@ -165,7 +160,7 @@
     
       <li class="wy-breadcrumbs-aside">
         
-          
+            
             <a href="_sources/Chap3_2materials.rst.txt" rel="nofollow"> View page source</a>
           
         
@@ -181,11 +176,12 @@
             
   <div class="section" id="materials">
 <span id="sec-io-materials"></span><h1>Materials<a class="headerlink" href="#materials" title="Permalink to this headline">¶</a></h1>
-<p>For each phase, an equation of state is required. The data for a given phase are gathered in a file. Every file must be in the folder <strong>ECOGEN/libEOS/</strong> and must follow rules depending on the EOS. Three equations of state are implemented in ECOGEN:</p>
+<p>For each phase, an equation of state is required. The data for a given phase are gathered in a file. Every file must be in the folder <strong>ECOGEN/libEOS/</strong> and must follow rules depending on the EOS. Five equations of state are implemented in ECOGEN:</p>
 <ul class="simple">
 <li><p><a class="reference internal" href="#sec-input-idealgas"><span class="std std-ref">Ideal Gas</span></a>: For gaseous phase only.</p></li>
 <li><p><a class="reference internal" href="#sec-input-stiffenedgas"><span class="std std-ref">Stiffened Gas</span></a>: For condensed matter (liquid, solid) in a pressure range where the compressible assumption is reasonable.</p></li>
 <li><p><a class="reference internal" href="#sec-input-nobleabelstiffenedgas"><span class="std std-ref">Noble-Abel Stiffened Gas</span></a>: For condensed matter (liquid, solid) subject to phase change.</p></li>
+<li><p>Van der Waals and Polynomial: Experimental work on non-convex EOS therefore not detailed in the following.</p></li>
 </ul>
 <div class="section" id="sec-input-idealgas">
 <span id="ideal-gas"></span><h2>Ideal Gas<a class="headerlink" href="#sec-input-idealgas" title="Permalink to this headline">¶</a></h2>
@@ -218,7 +214,7 @@
 </div>
 <div class="section" id="stiffened-gas">
 <span id="sec-input-stiffenedgas"></span><h2>Stiffened Gas<a class="headerlink" href="#stiffened-gas" title="Permalink to this headline">¶</a></h2>
-<p>This equation of state was first presented in 1971 by Harlow &amp; Amdsen <span id="id1">[<a class="reference internal" href="zBibliography.html#id64">HA68</a>]</span>:</p>
+<p>This equation of state was first presented in 1971 by Harlow &amp; Amdsen <span id="id1">[<a class="reference internal" href="zBibliography.html#id69"><span>HA68</span></a>]</span>:</p>
 <div class="math notranslate nohighlight">
 \[e = \left(\frac{p + \gamma p_{\infty}}{\gamma-1}\right) v + e_{ref}\]</div>
 <p>This EOS takes into account the molecular attraction within condensed matter. This quite simple EOS is largely used in numerical simulation based on diffuse interface methods because it is able to reproduce shock relation as well as saturation curve for a liquid–vapor mixture when the phase transition is modeled.
@@ -227,7 +223,7 @@ Hereafter, some useful relations for the specific volume, the enthalpy and the e
 \[\begin{split}v(p,T) &amp;= \frac{ (\gamma-1) c_v T}{p + p_{\infty}} \\
 h(T) &amp;= \gamma c_v T + e_{ref} \\
 s(p,T) &amp;= c_v \ln{\left(\frac{T^{\gamma}}{\left(p+p_{\infty}\right)^{\gamma-1}} \right)} + s_{ref}\end{split}\]</div>
-<p>A usefull description of these relations can be found in <span id="id2">[<a class="reference internal" href="zBibliography.html#id253">LeMetayerMS04</a>]</span>.</p>
+<p>A usefull description of these relations can be found in <span id="id2">[<a class="reference internal" href="zBibliography.html#id258"><span>LeMetayerMS04</span></a>]</span>.</p>
 <p>The ideal-gas law is recovered if <span class="math notranslate nohighlight">\(p_{\infty}=0\)</span>. The following parameters are assumed constant <span class="math notranslate nohighlight">\(\gamma\)</span>, <span class="math notranslate nohighlight">\(p_{\infty}\)</span>, <span class="math notranslate nohighlight">\(c_v\)</span>, <span class="math notranslate nohighlight">\(e_{ref}\)</span> and <span class="math notranslate nohighlight">\(s_{ref}\)</span>. These parameters must be specified in the material file, as in the following example:</p>
 <div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="cp">&lt;?xml version = &quot;1.0&quot; encoding = &quot;UTF-8&quot; standalone = &quot;yes&quot;?&gt;</span>
 <span class="nt">&lt;parametersEOS&gt;</span>
@@ -249,7 +245,7 @@ s(p,T) &amp;= c_v \ln{\left(\frac{T^{\gamma}}{\left(p+p_{\infty}\right)^{\gamma-
 </div>
 <div class="section" id="noble-abel-stiffened-gas">
 <span id="sec-input-nobleabelstiffenedgas"></span><h2>Noble-Abel Stiffened Gas<a class="headerlink" href="#noble-abel-stiffened-gas" title="Permalink to this headline">¶</a></h2>
-<p>This equation of state is an improved version of the stiffened-gas equation of state in which a parameter of covolume <cite>b</cite> is introduced. This parameter allows to take into account the repulsive short distance effects linked to molecular motion. The Noble-Abel Stiffened-Gas (NASG) EOS was developed in 2016 by Le Métayer &amp; Saurel <span id="id3">[<a class="reference internal" href="zBibliography.html#id353">LMetayerS16</a>]</span> and it reads:</p>
+<p>This equation of state is an improved version of the stiffened-gas equation of state in which a parameter of covolume <cite>b</cite> is introduced. This parameter allows to take into account the repulsive short distance effects linked to molecular motion. The Noble-Abel Stiffened-Gas (NASG) EOS was developed in 2016 by Le Métayer &amp; Saurel <span id="id3">[<a class="reference internal" href="zBibliography.html#id358"><span>LMetayerS16</span></a>]</span> and it reads:</p>
 <div class="math notranslate nohighlight">
 \[e(p,v) = \frac{p+\gamma p_{\infty}}{\gamma-1}(v-b) + e_{ref}\]</div>
 <p>As the stiffened-gas EOS, the NASG EOS is able to take into account thermal agitation and attractive effects of condensed matter. This EOS is particularly interesting when phase transition is modeled because it is able to reproduce more accurately saturation curves of a liquid–vapor mixture than the traditionnal stiffened-gas EOS.
@@ -258,7 +254,7 @@ Hereafter, some useful relations for the specific volume, the enthalpy and the e
 \[\begin{split}v(p,T) &amp;= \frac{ (\gamma-1) c_v T}{p + p_{\infty}} + b \\
 h(p,T) &amp;= \gamma c_v T + + b p +e_{ref} \\
 s(p,T) &amp;= c_v \ln{\left(\frac{T^{\gamma}}{\left(p+p_{\infty}\right)^{\gamma-1}} \right)} + s_{ref}\end{split}\]</div>
-<p>A complete description of the obtention of these relations is given in <span id="id4">[<a class="reference internal" href="zBibliography.html#id353">LMetayerS16</a>]</span>.</p>
+<p>A complete description of the obtention of these relations is given in <span id="id4">[<a class="reference internal" href="zBibliography.html#id358"><span>LMetayerS16</span></a>]</span>.</p>
 <p>The stiffened-gas EOS is recovered if <span class="math notranslate nohighlight">\(b=0\)</span> and the ideal-gas law is recovered if <span class="math notranslate nohighlight">\(b = p_{\infty} = 0\)</span>. The parameters <span class="math notranslate nohighlight">\(\gamma\)</span>, <span class="math notranslate nohighlight">\(p_{\infty}\)</span>, <span class="math notranslate nohighlight">\(b\)</span>, <span class="math notranslate nohighlight">\(c_v\)</span>, <span class="math notranslate nohighlight">\(e_{ref}\)</span> and <span class="math notranslate nohighlight">\(s_{ref}\)</span> are assumed constant. These parameters must be specified in the material file, as in the following example:</p>
 <div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="cp">&lt;?xml version = &quot;1.0&quot; encoding = &quot;UTF-8&quot; standalone = &quot;yes&quot;?&gt;</span>
 <span class="nt">&lt;parametersEOS&gt;</span>
@@ -286,29 +282,37 @@ s(p,T) &amp;= c_v \ln{\left(\frac{T^{\gamma}}{\left(p+p_{\infty}\right)^{\gamma-
            
           </div>
           <footer>
+  
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
-        <a href="Chap3_3outputFiles.html" class="btn btn-neutral float-right" title="Output Files" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
-        <a href="Chap3_1_4initialConditions.html" class="btn btn-neutral float-left" title="InitialConditionsV4.xml" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+      
+        <a href="Chap3_3outputFiles.html" class="btn btn-neutral float-right" title="Output Files" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="Chap3_1_4initialConditions.html" class="btn btn-neutral float-left" title="InitialConditionsV4.xml" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
     </div>
+  
 
   <hr/>
 
   <div role="contentinfo">
     <p>
-        &#169; Copyright 2021, code-mphi.
+        
+        &copy; Copyright 2022, code-mphi
 
     </p>
   </div>
     
     
     
-    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
     
-    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
     
     provided by <a href="https://readthedocs.org">Read the Docs</a>. 
 
 </footer>
+
         </div>
       </div>
 

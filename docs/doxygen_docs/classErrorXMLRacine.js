@@ -2,8 +2,8 @@ var classErrorXMLRacine =
 [
     [ "ErrorXMLRacine", "classErrorXMLRacine.html#a9d031c14185832180464f2e4c37730f9", null ],
     [ "~ErrorXMLRacine", "classErrorXMLRacine.html#ab70341f60072e94e5a286893ca941d26", null ],
-    [ "additionalInfo", "classErrorXMLRacine.html#a629b169eeecbcd87621dda2d304d7600", null ],
-    [ "root", "classErrorXMLRacine.html#ae3115fb2414cf7a080bde5ea22b5138f", null ],
-    [ "what", "classErrorXMLRacine.html#af3066e5eae507779028b75d68171d686", null ],
+    [ "additionalInfo", "classErrorXMLRacine.html#afda39b33d6f9209bd14525b6835b3e36", null ],
+    [ "root", "classErrorXMLRacine.html#a27a47eefd18a0f9006147e5f3de951e6", null ],
+    [ "what", "classErrorXMLRacine.html#a14c3f11d10273704b4ba78209cd049b0", null ],
     [ "m_root", "classErrorXMLRacine.html#a78a1f7f6166f7c7cdc07740f133ec7b0", null ]
 ];

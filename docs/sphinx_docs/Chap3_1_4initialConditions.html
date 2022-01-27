@@ -3,11 +3,11 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" />
+  <meta charset="utf-8">
   
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>InitialConditionsV4.xml &mdash; ECOGEN 3.0 documentation</title>
+  <title>InitialConditionsV4.xml &mdash; ECOGEN 3.1 documentation</title>
   
 
   
@@ -16,10 +16,7 @@
 
   
   
-
   
-  
-
   
 
   
@@ -32,6 +29,7 @@
         <script src="_static/jquery.js"></script>
         <script src="_static/underscore.js"></script>
         <script src="_static/doctools.js"></script>
+        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     
     <script type="text/javascript" src="_static/js/theme.js"></script>
 
@@ -53,7 +51,7 @@
           
 
           
-            <a href="index.html" class="icon icon-home"> ECOGEN
+            <a href="index.html" class="icon icon-home" alt="Documentation Home"> ECOGEN
           
 
           
@@ -63,7 +61,7 @@
             
             
               <div class="version">
-                3.0
+                3.1
               </div>
             
           
@@ -107,13 +105,13 @@
 </li>
 <li class="toctree-l2"><a class="reference internal" href="Chap3_2materials.html">Materials</a></li>
 <li class="toctree-l2"><a class="reference internal" href="Chap3_3outputFiles.html">Output Files</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Chap3_4featuresModels.html">Feature compatibility</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="Chap4_tutorials_Chapter.html">Tutorials</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Chap5_testCases_Chapter.html">Test cases</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Chap6_developersGuide_Chapter.html">Developers</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Chap7_license.html">License</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Chap8_GUI.html">Graphical User Interface</a></li>
 <li class="toctree-l1"><a class="reference internal" href="zBibliography.html">Bibliography</a></li>
 </ul>
 
@@ -155,8 +153,6 @@
 
 
 
-
-
 <div role="navigation" aria-label="breadcrumbs navigation">
 
   <ul class="wy-breadcrumbs">
@@ -172,7 +168,7 @@
     
       <li class="wy-breadcrumbs-aside">
         
-          
+            
             <a href="_sources/Chap3_1_4initialConditions.rst.txt" rel="nofollow"> View page source</a>
           
         
@@ -504,8 +500,9 @@
 <p>This last node <code class="code xml docutils literal notranslate"><span class="name tag"><span class="pre">&lt;dataFluid&gt;</span></span></code> as well as the <code class="code xml docutils literal notranslate"><span class="name tag"><span class="pre">&lt;mixture&gt;</span></span></code> node are dependent on the flow model according to:</p>
 <div class="section" id="euler">
 <span id="sec-input-euler"></span><h3>Euler<a class="headerlink" href="#euler" title="Permalink to this headline">¶</a></h3>
-<p>Single phase flow. In this case, the <code class="code xml docutils literal notranslate"><span class="name tag"><span class="pre">&lt;mixture&gt;</span></span></code> node is absent and the <code class="code xml docutils literal notranslate"><span class="name tag"><span class="pre">&lt;dataFluid&gt;</span></span></code> node contains the following attributes or nodes:</p>
+<p>Single-phase flow. In this case, the <code class="code xml docutils literal notranslate"><span class="name tag"><span class="pre">&lt;mixture&gt;</span></span></code> node is absent and the <code class="code xml docutils literal notranslate"><span class="name tag"><span class="pre">&lt;dataFluid&gt;</span></span></code> node contains the following attributes or nodes:</p>
 <ul class="simple">
+<li><p><code class="code xml docutils literal notranslate"><span class="pre">density</span></code> or <code class="code xml docutils literal notranslate"><span class="pre">temperature</span></code>: Initial density or temperature of the fluid, real number (unit: kg/m3 or K (SI)), respectively.</p></li>
 <li><p>Attribute <code class="code xml docutils literal notranslate"><span class="pre">temperature</span></code>: Initial temperature of the fluid, real number (unit: K (SI)).</p></li>
 <li><p>Attribute <code class="code xml docutils literal notranslate"><span class="pre">pressure</span></code>: Initial pressure of the fluid, real number (unit: Pa(SI)).</p></li>
 <li><p>Node <code class="code xml docutils literal notranslate"><span class="name tag"><span class="pre">&lt;velocity&gt;</span></span></code>: With <code class="code xml docutils literal notranslate"><span class="pre">x</span></code>, <code class="code xml docutils literal notranslate"><span class="pre">y</span></code> and <code class="code xml docutils literal notranslate"><span class="pre">z</span></code> attributes setting the initial values for the components of the velocity vector, real numbers (unit: m/s (SI)).</p></li>
@@ -518,8 +515,8 @@
 </pre></div>
 </div>
 </div>
-<div class="section" id="ueq-previously-named-multip">
-<span id="sec-input-ueq"></span><h3>UEq (previously named MultiP)<a class="headerlink" href="#ueq-previously-named-multip" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="ueq-previously-named-multip-or-ueqtote">
+<span id="sec-input-ueq"></span><h3>UEq (previously named MultiP) or UEqTotE<a class="headerlink" href="#ueq-previously-named-multip-or-ueqtote" title="Permalink to this headline">¶</a></h3>
 <p>Multiphase flow at velocity equilibrium (same velocity for every phase within each cell). Each <code class="code xml docutils literal notranslate"><span class="name tag"><span class="pre">&lt;dataFluid&gt;</span></span></code> node corresponds to a phase with the following attributes:</p>
 <ul class="simple">
 <li><p><code class="code xml docutils literal notranslate"><span class="pre">alpha</span></code>: Volume fraction of the phase, real number in the range ]0.,1.[. The range can be increased to [0.;1.] if the option <em>alphaNull</em> is turned on (<em>true</em>) in the <em>modelV4.xml</em> input file.</p></li>
@@ -608,8 +605,38 @@
 <span class="nt">&lt;/mixture&gt;</span>
 </pre></div>
 </div>
+</div>
+<div class="section" id="euler-korteweg">
+<span id="sec-input-eulerkorteweg"></span><h3>Euler–Korteweg<a class="headerlink" href="#euler-korteweg" title="Permalink to this headline">¶</a></h3>
+<p>Single-phase flow. In this case, the <code class="code xml docutils literal notranslate"><span class="name tag"><span class="pre">&lt;mixture&gt;</span></span></code> node is absent and the <code class="code xml docutils literal notranslate"><span class="name tag"><span class="pre">&lt;dataFluid&gt;</span></span></code> node contains the following attributes or nodes:</p>
+<ul class="simple">
+<li><p>Attribute <code class="code xml docutils literal notranslate"><span class="pre">density</span></code>: Initial density of the fluid, real number (unit: kg/m3 (SI)).</p></li>
+<li><p>Node <code class="code xml docutils literal notranslate"><span class="name tag"><span class="pre">&lt;velocity&gt;</span></span></code>: With <code class="code xml docutils literal notranslate"><span class="pre">x</span></code>, <code class="code xml docutils literal notranslate"><span class="pre">y</span></code> and <code class="code xml docutils literal notranslate"><span class="pre">z</span></code> attributes setting the initial values for the components of the velocity vector, real numbers (unit: m/s (SI)).</p></li>
+</ul>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;material</span> <span class="na">type=</span><span class="s">&quot;fluid&quot;</span> <span class="na">EOS=</span><span class="s">&quot;Polynomial_arbitrary.xml&quot;</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;dataFluid</span> <span class="na">density=</span><span class="s">&quot;0.2452&quot;</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;velocity</span> <span class="na">x=</span><span class="s">&quot;0.&quot;</span> <span class="na">y=</span><span class="s">&quot;0.&quot;</span> <span class="na">z=</span><span class="s">&quot;0.&quot;</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;/dataFluid&gt;</span>
+<span class="nt">&lt;/material&gt;</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="non-linear-schrodinger">
+<span id="sec-input-nonlinearschrodinger"></span><h3>Non-linear Schrödinger<a class="headerlink" href="#non-linear-schrodinger" title="Permalink to this headline">¶</a></h3>
+<p>Defocusing non-linear Schrödinger equation. In this case, there isn’t any EOS, the <code class="code xml docutils literal notranslate"><span class="name tag"><span class="pre">&lt;mixture&gt;</span></span></code> node is absent and the <code class="code xml docutils literal notranslate"><span class="name tag"><span class="pre">&lt;dataFluid&gt;</span></span></code> node contains the following attributes or nodes:</p>
+<ul class="simple">
+<li><p>Attribute <code class="code xml docutils literal notranslate"><span class="pre">density</span></code>: Initial density of the fluid, real number (unit: kg/m3 (SI)).</p></li>
+<li><p>Node <code class="code xml docutils literal notranslate"><span class="name tag"><span class="pre">&lt;velocity&gt;</span></span></code>: With <code class="code xml docutils literal notranslate"><span class="pre">x</span></code>, <code class="code xml docutils literal notranslate"><span class="pre">y</span></code> and <code class="code xml docutils literal notranslate"><span class="pre">z</span></code> attributes setting the initial values for the components of the velocity vector, real numbers (unit: m/s (SI)).</p></li>
+</ul>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;material</span> <span class="na">type=</span><span class="s">&quot;none&quot;</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;dataFluid</span> <span class="na">density=</span><span class="s">&quot;2.0&quot;</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;velocity</span> <span class="na">x=</span><span class="s">&quot;0.&quot;</span> <span class="na">y=</span><span class="s">&quot;0.&quot;</span> <span class="na">z=</span><span class="s">&quot;0.&quot;</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;/dataFluid&gt;</span>
+<span class="nt">&lt;/material&gt;</span>
+</pre></div>
+</div>
 <p><strong>Remark</strong></p>
-<p>Be careful to set the volume fraction in the range ]0,.1.[ (unless you use the option <em>alphaNull=true</em> for pressure-velocity- and velocity-equilibrium models) as well as the its sum over all the phases equal to 1.</p>
+<p>For the multiphase models, be careful to set the volume fraction in the range ]0,.1.[ (unless you use the option <em>alphaNull=true</em> for pressure-velocity- and velocity-equilibrium models) as well as the its sum over all the phases equal to 1.</p>
 </div>
 </div>
 </div>
@@ -619,29 +646,37 @@
            
           </div>
           <footer>
+  
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
-        <a href="Chap3_2materials.html" class="btn btn-neutral float-right" title="Materials" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
-        <a href="Chap3_1_3mesh.html" class="btn btn-neutral float-left" title="MeshV5.xml" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+      
+        <a href="Chap3_2materials.html" class="btn btn-neutral float-right" title="Materials" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="Chap3_1_3mesh.html" class="btn btn-neutral float-left" title="MeshV5.xml" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
     </div>
+  
 
   <hr/>
 
   <div role="contentinfo">
     <p>
-        &#169; Copyright 2021, code-mphi.
+        
+        &copy; Copyright 2022, code-mphi
 
     </p>
   </div>
     
     
     
-    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
     
-    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
     
     provided by <a href="https://readthedocs.org">Read the Docs</a>. 
 
 </footer>
+
         </div>
       </div>
 

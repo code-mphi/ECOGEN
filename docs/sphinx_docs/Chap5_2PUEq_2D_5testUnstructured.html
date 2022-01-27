@@ -1,0 +1,297 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Test unstructured &mdash; ECOGEN 3.1 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Droplet impact" href="Chap5_2PUEq_2D_6dropletImpact.html" />
+    <link rel="prev" title="Rayleigh–Taylor" href="Chap5_2PUEq_2D_4rayleighTaylor.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="index.html" class="icon icon-home" alt="Documentation Home"> ECOGEN
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                3.1
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="Chap1_introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Chap2_installation_Chapter.html">Installation instructions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Chap3_IO_Chapter.html">I/O descriptions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Chap4_tutorials_Chapter.html">Tutorials</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="Chap5_testCases_Chapter.html">Test cases</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="Chap5_1Euler.html">Single-phase test cases</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="Chap5_2.html">Multiphase test cases</a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="Chap5_2PUEq.html">Pressure- and velocity-equilibrium model</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="Chap5_2PUEq_1D.html">1D</a></li>
+<li class="toctree-l4 current"><a class="reference internal" href="Chap5_2PUEq_2D.html">2D</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="Chap5_2UEq.html">Velocity-equilibrium model</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Chap5_2UEqTotE.html">Velocity-equilibrium model based on total energies</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Chap5_2PTUEq.html">Temperature-, pressure- and velocity-equilibrium model</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Chap5_2eulerHomogeneous.html">Homogeneous Euler</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Chap5_2.html#other-tests-cases">Other tests cases</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="Chap6_developersGuide_Chapter.html">Developers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Chap7_license.html">License</a></li>
+<li class="toctree-l1"><a class="reference internal" href="zBibliography.html">Bibliography</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">ECOGEN</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="Chap5_testCases_Chapter.html">Test cases</a> &raquo;</li>
+        
+          <li><a href="Chap5_2.html">Multiphase test cases</a> &raquo;</li>
+        
+          <li><a href="Chap5_2PUEq.html">Pressure- and velocity-equilibrium model</a> &raquo;</li>
+        
+          <li><a href="Chap5_2PUEq_2D.html">2D</a> &raquo;</li>
+        
+      <li>Test unstructured</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/Chap5_2PUEq_2D_5testUnstructured.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="test-unstructured">
+<h1>Test unstructured<a class="headerlink" href="#test-unstructured" title="Permalink to this headline">¶</a></h1>
+<p>This is a case with an unstructured mesh generated with the open-source <a class="reference external" href="http://gmsh.info/">Gmsh</a> software. Initial conditions are shown in <a class="reference internal" href="#fig-testcases-pueq-testunstructuredini"><span class="std std-numref">Fig. 73</span></a>. This test is referenced in <em>./libTests/referenceTestCases/PUEq/2D/testUnstructured/</em>. The corresponding uncommented line in <em>ECOGEN.xml</em> is:</p>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;testCase&gt;</span>./libTests/referenceTestCases/PUEq/2D/testUnstructured/<span class="nt">&lt;/testCase&gt;</span>
+</pre></div>
+</div>
+<div class="figure align-center" id="id1">
+<span id="fig-testcases-pueq-testunstructuredini"></span><a class="reference internal image-reference" href="_images/testUnstructuredIni.png"><img alt="_images/testUnstructuredIni.png" src="_images/testUnstructuredIni.png" style="width: 670.4000000000001px; height: 356.8px;" /></a>
+<p class="caption"><span class="caption-number">Fig. 73 </span><span class="caption-text">Initial conditions. Visualization using <a class="reference external" href="https://www.paraview.org/">Paraview</a> software.</span><a class="headerlink" href="#id1" title="Permalink to this image">¶</a></p>
+</div>
+<p>The initial characteristics of the run are:</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 57%" />
+<col style="width: 43%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Characteristic</p></th>
+<th class="head"><p>Value</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Initial mesh structure</p></td>
+<td><p>Unstructured</p></td>
+</tr>
+<tr class="row-odd"><td><p>Boundary conditions</p></td>
+<td><p>wall</p></td>
+</tr>
+<tr class="row-even"><td><p>Final solution time</p></td>
+<td><p>2e-2 s</p></td>
+</tr>
+<tr class="row-odd"><td><p>Solution printing frequency</p></td>
+<td><p>4e-4 s</p></td>
+</tr>
+</tbody>
+</table>
+<p>Results are shown in <a class="reference internal" href="#fig-testcases-pueq-testunstructuredanim"><span class="std std-numref">Fig. 74</span></a> and <a class="reference internal" href="#fig-testcases-pueq-testunstructuredanim2"><span class="std std-numref">Fig. 75</span></a>. There is a pressure gradient between the two regions, high pressure at t=0s is contained in red region. When the interface between the blue and the red regions disapears, a shock wave propagates, causing an increase in pressure in the blue region, and the red region relaxes.</p>
+<div class="figure align-center" id="id2">
+<span id="fig-testcases-pueq-testunstructuredanim"></span><a class="reference internal image-reference" href="_images/testUnstructuredAnim.gif"><img alt="_images/testUnstructuredAnim.gif" src="_images/testUnstructuredAnim.gif" style="width: 416.0px; height: 384.0px;" /></a>
+<p class="caption"><span class="caption-number">Fig. 74 </span><span class="caption-text">Pressure evolution over time. Visualization using <a class="reference external" href="https://www.paraview.org/">Paraview</a> software.</span><a class="headerlink" href="#id2" title="Permalink to this image">¶</a></p>
+</div>
+<div class="figure align-center">
+<a class="reference internal image-reference" href="_images/pressureToggle1.png"><img alt="_images/pressureToggle1.png" src="_images/pressureToggle1.png" style="width: 211.20000000000002px; height: 50.400000000000006px;" /></a>
+</div>
+<div class="figure align-center" id="id3">
+<span id="fig-testcases-pueq-testunstructuredanim2"></span><a class="reference internal image-reference" href="_images/testUnstructuredAnim2.gif"><img alt="_images/testUnstructuredAnim2.gif" src="_images/testUnstructuredAnim2.gif" style="width: 416.0px; height: 384.0px;" /></a>
+<p class="caption"><span class="caption-number">Fig. 75 </span><span class="caption-text">Mixture density over time. Visualization using <a class="reference external" href="https://www.paraview.org/">Paraview</a> software.</span><a class="headerlink" href="#id3" title="Permalink to this image">¶</a></p>
+</div>
+<div class="figure align-center">
+<a class="reference internal image-reference" href="_images/densityToggle1.png"><img alt="_images/densityToggle1.png" src="_images/densityToggle1.png" style="width: 211.20000000000002px; height: 50.400000000000006px;" /></a>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="Chap5_2PUEq_2D_6dropletImpact.html" class="btn btn-neutral float-right" title="Droplet impact" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="Chap5_2PUEq_2D_4rayleighTaylor.html" class="btn btn-neutral float-left" title="Rayleigh–Taylor" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright 2022, code-mphi
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

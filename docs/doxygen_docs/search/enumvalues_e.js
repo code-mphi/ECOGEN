@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['subinj',['SUBINJ',['../Tools_8h.html#a36652a21e0b7ba895c97b2ab09843032a157320bcfc42f4fee512a6f59ca83eac',1,'Tools.h']]],
-  ['symmetry',['SYMMETRY',['../Tools_8h.html#a36652a21e0b7ba895c97b2ab09843032aa18d562b4107edccb2e10090864d1c5e',1,'Tools.h']]]
+  ['qpa_5157',['QPA',['../Cell_8h.html#acca207de98b59d1c41e3975008706d61a20446aa548ede84c8005c3d211a8da23',1,'Cell.h']]]
 ];

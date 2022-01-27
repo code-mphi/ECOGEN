@@ -101,7 +101,7 @@ Reading of the unstructured mesh is done throught the *meshV5.xml* file:
 	<mesh>
 		<type structure="unStructured"/>
 		<unstructuredMesh>
-			<file name="./libMeshes/myMeshFolder/tube2d.msh"/>
+			<file name="libMeshes/myMeshFolder/tube2d.msh"/>
 		</unstructuredMesh>
 	</mesh>
 
