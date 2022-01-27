@@ -69,9 +69,47 @@
     </div>
 
     <main>
-      <div id="subtitle">The open-source CFD plateform for numerical simulation of compressible multiphase flows </div>
+      <div id="subtitle">An open-source CFD platform for numerical simulation of multiphase compressible flows </div>
 
       <hr />
+
+<article>
+	<h1> New release ECOGEN_v3.1 </h1>
+	<p class="date">2022-01-27</p>
+	<p>A new release, ECOGEN_v3.1, is available on GitHub. It includes new features and fixes bugs.
+	<h2>Major points: </h2>
+		<ul>	
+			<li> Add velocity-equilibrium model. Read the following paper for more information: K. Schmidmayer, J. Cazé, F. Petitpas, E. Daniel, N. Favrie. "Modelling interactions between waves and diffused interfaces". 2021. </li>
+			<li> Add velocity-equilibrium model based on total-energy equations. Read the previous paper for more information. </li>
+			<li> Possibility to use another gradient method (Green-Gauss) which is compatible with unstructured meshes. Previously, finite differences were the only available. </li>
+			<li> Possibility to use low-Mach preconditioning technique for Euler &amp; pressure-velocity-equilibrium models. </li>
+			<li> Option to use 1D with smooth cross-section-variation scheme (useful for nozzles). </li>
+			<li> Add models augmented Euler-Korteweg and defocusing non-linear Schrödinger as well as Van der Waals equation of state. Mainly experimental work. </li>
+		</ul>
+	<h2>Minor points: </h2>
+		<ul>
+			<li> Possibility to reduce output variable number for UEq and PUEq models. </li>
+			<li> Restarting computation possible for all models for XML format output. </li>
+			<li> Possibility to record flux on boundary (massflow, total enthalpy) and/or flow quantities (density, pressure, velocity) in agreement with Moving Reference Frame method. </li>
+			<li> Possibility to set precision for specific outputs (probes, cuts, global quantities, boundary flux/quantities). </li>
+			<li> Possibility to run test cases from a different folder. </li>
+			<li> Minor modification of axi-symmetric computations for second-order simulations. </li>
+			<li> Better handling of pressure relaxations when Newton-Raphson method does not converge. </li>
+			<li> Update of documentation regarding test cases. </li>
+		</ul>
+	<h2>Fixes: </h2>
+		<ul>
+			<li> Fix recording of probes with computational restart. </li>
+			<li> Fix bug on unstructured meshes using hexaedron and prisms. </li>
+			<li> Correction on NASG EOS to allow null volume fractions. </li>
+			<li> Fix bug GNU dataset output precision. </li>
+			<li> Fix bug AMR parallel when large domains were used </li>
+			<li> Fix bug AMR parallel on printing of load. </li>
+		</ul>
+	</p>
+	<img src="/ECOGEN/assets/images/smoothInterface.png" alt="Shock interacting with a smooth interface." />
+</article>
+<hr />
 
 <article>
 	<h1> New release ECOGEN_v3.0 </h1>
