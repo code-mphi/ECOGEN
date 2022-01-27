@@ -46,8 +46,8 @@ public:
 
   virtual void addQuantityAddPhys(Cell* cell);
 
-  virtual void solveFluxAddPhys(CellInterface* cellInterface, const int& /*numberPhases*/);
-  virtual void solveFluxAddPhysBoundary(CellInterface* cellInterface, const int& /*numberPhases*/);
+  virtual void solveFluxAddPhys(CellInterface* cellInterface);
+  virtual void solveFluxAddPhysBoundary(CellInterface* cellInterface);
   //! \brief     Solve the viscosity flux between two cells
   //! \param     velocityLeft         velocity of the left cell
   //! \param     velocityRight        velocity of the right cell
@@ -67,11 +67,12 @@ public:
   //! \param     gradWLeft            gradient of the velocity in the z-direction of the left cell
   //! \param     muLeft               dynamic viscosity of the left cell
   void solveFluxViscosityNonReflecting(const Coord& velocityLeft, const Coord& gradULeft, const Coord& gradVLeft, const Coord& gradWLeft, const double& muLeft) const;
-  //! \brief     Solve the viscosity flux at a boundary with a wall type
+  //! \brief     Solve the viscosity flux at a boundary with a wall type in MRF case
   //! \param     velocityLeft         velocity of the left cell
   //! \param     muLeft               dynamic viscosity of the left cell
   //! \param     distLeft             distance between the center of the left cell and its corresponding edge
-  void solveFluxViscosityWall(const Coord& velocityLeft, const double& muLeft, const double& distLeft) const;
+  //! \param     velocityWall         velocity of the wall in the Moving Reference Frame context (MRF)           
+  void solveFluxViscosityWall(const Coord& velocityLeft, const double& muLeft, const double& distLeft, Coord& velocityWall = Coord::defaultCoordNonConst) const;
   //! \brief     Solve the viscosity flux at a boundary with a symmetry type 
   //! \param     gradULeft            gradient of the velocity in the x-direction of the left cell
   //! \param     gradVLeft            gradient of the velocity in the y-direction of the left cell
@@ -80,11 +81,11 @@ public:
   void solveFluxViscositySymmetry(const Coord& gradULeft, const Coord& gradVLeft, const Coord& gradWLeft, const double& muLeft) const;
   //! \brief     Solve the viscosity flux at a boundary with non-defined type yet
   void solveFluxViscosityOther() const;
-  virtual void addNonCons(Cell* /*cell*/, const int& /*numberPhases*/) {};
-  virtual void addSymmetricTermsRadialAxisOnX(Cell* /*cell*/, const int& /*numberPhases*/) { Errors::errorMessage("addSymmetricTermsX not implemented for used additional physic"); };
-  virtual void addSymmetricTermsRadialAxisOnY(Cell* /*cell*/, const int& /*numberPhases*/) { Errors::errorMessage("addSymmetricTermsY not implemented for used additional physic"); };
+  virtual void addNonCons(Cell* /*cell*/) {};
+  virtual void addSymmetricTermsRadialAxisOnX(Cell* /*cell*/) { Errors::errorMessage("addSymmetricTermsX not implemented for used additional physic"); };
+  virtual void addSymmetricTermsRadialAxisOnY(Cell* /*cell*/) { Errors::errorMessage("addSymmetricTermsY not implemented for used additional physic"); };
 
-  virtual void communicationsAddPhys(const int& /*numberPhases*/, const int& dim, const int& lvl);
+  virtual void communicationsAddPhys(const int& dim, const int& lvl);
 
 protected:
 

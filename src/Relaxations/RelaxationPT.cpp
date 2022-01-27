@@ -40,7 +40,7 @@ RelaxationPT::~RelaxationPT(){}
 
 //***********************************************************************
 
-void RelaxationPT::relaxation(Cell* cell, const int& numberPhases, const double& /*dt*/, Prim type)
+void RelaxationPT::relaxation(Cell* cell, const double& /*dt*/, Prim type)
 {
   //Is the pressure-Temperature relaxation procedure necessary?
   //If alpha = 0 is activated, a test is done to know if the relaxation procedure is necessary or not
@@ -56,13 +56,13 @@ void RelaxationPT::relaxation(Cell* cell, const int& numberPhases, const double&
     //Restrictions //FP//TODO// to improve
     if (numberPhases > 2) Errors::errorMessage("More than two phases not permitted in RelaxationPT::relaxation");
     for (int k = 0; k < numberPhases; k++) {
-      if (cell->getPhase(k, type)->getEos()->getType() != "IG" && cell->getPhase(k, type)->getEos()->getType() != "SG") { Errors::errorMessage("Only IG and SG permitted in RelaxationPT::relaxation"); }
+      if (cell->getPhase(k, type)->getEos()->getType() != TypeEOS::IG && cell->getPhase(k, type)->getEos()->getType() != TypeEOS::SG) { Errors::errorMessage("Only IG and SG permitted in RelaxationPT::relaxation"); }
     }
        
     //Relaxaed pressure for 2 phases (SG or IG EOS)
-    double pStar = analyticalPressure(cell, numberPhases, type);
+    double pStar = analyticalPressure(cell, type);
     //Temperature for SG or IG
-    double TStar = analyticalTemperature(pStar, cell, numberPhases, type);
+    double TStar = analyticalTemperature(pStar, cell, type);
 
     for (int k = 0; k < numberPhases; k++) {
       TB->rhokS[k] = TB->eos[k]->computeDensity(pStar,TStar);
@@ -82,12 +82,12 @@ void RelaxationPT::relaxation(Cell* cell, const int& numberPhases, const double&
 
 //***********************************************************************
 
-double RelaxationPT::analyticalPressure(Cell* cell, const int& numberPhases, Prim type) const
+double RelaxationPT::analyticalPressure(Cell* cell, Prim type) const
 {
   //Restrictions
   if (numberPhases > 2) Errors::errorMessage("More than two phases not permitted in RelaxationPT::analyticalPressure");
   for (int k = 0; k < numberPhases; k++) {
-    if (cell->getPhase(k)->getEos()->getType() != "IG" && cell->getPhase(k)->getEos()->getType() != "SG") { Errors::errorMessage("Only IG and SG permitted in RelaxationPT::analyticalPressure" + cell->getPhase(k)->getEos()->getType()); }
+    if (cell->getPhase(k)->getEos()->getType() != TypeEOS::IG && cell->getPhase(k)->getEos()->getType() != TypeEOS::SG) { Errors::errorMessage("Only IG and SG permitted in RelaxationPT::analyticalPressure"); }
   }
 
   double e0(cell->getMixture(type)->getEnergy());
@@ -116,11 +116,11 @@ double RelaxationPT::analyticalPressure(Cell* cell, const int& numberPhases, Pri
 
 //***********************************************************************
 
-double RelaxationPT::analyticalTemperature(double pressure, Cell* cell, const int& numberPhases, Prim type) const
+double RelaxationPT::analyticalTemperature(double pressure, Cell* cell, Prim type) const
 {
   //Restrictions
   for (int k = 0; k < numberPhases; k++) {
-    if (cell->getPhase(k)->getEos()->getType() != "IG" && cell->getPhase(k)->getEos()->getType() != "SG") { Errors::errorMessage("Only IG and SG permitted in RelaxationPT::analyticalPressure" + cell->getPhase(k)->getEos()->getType()); }
+    if (cell->getPhase(k)->getEos()->getType() != TypeEOS::IG && cell->getPhase(k)->getEos()->getType() != TypeEOS::SG) { Errors::errorMessage("Only IG and SG permitted in RelaxationPT::analyticalPressure"); }
   }
 
   double rho0(cell->getMixture(type)->getDensity());

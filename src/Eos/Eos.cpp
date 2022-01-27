@@ -28,7 +28,6 @@
 //  along with ECOGEN (file LICENSE).  
 //  If not, see <http://www.gnu.org/licenses/>.
 
-#include <iostream>
 #include "Eos.h"
 
 using namespace tinyxml2;
@@ -65,9 +64,23 @@ void Eos::readPhysicalParameter(XMLNode *element)
 
 //***********************************************************************
 
-double Eos::computeTotalEnthalpy(const double& density, const double& pressure, const double& velocity) const
+double Eos::computeEnthalpy(const double& density, const double& pressure) const
 {
-  return this->computeEnergy(density, pressure) + pressure / density + 0.5*velocity*velocity;
+  return this->computeEnergy(density, pressure) + pressure / std::max(density, epsilonAlphaNull);
+}
+
+//***********************************************************************
+
+double Eos::computeTotalEnthalpy(const double& density, const double& pressure, const double& velX, const double& velY, const double &velZ) const
+{
+  return this->computeEnthalpy(density, pressure) + 0.5*(velX*velX + velY*velY + velZ*velZ);
+}
+
+//***********************************************************************
+
+double Eos::computeTotalEnthalpy(const double& density, const double& pressure, const Coord& velocity) const
+{
+  return this->computeEnthalpy(density, pressure) + 0.5*velocity.squaredNorm();
 }
 
 //***********************************************************************

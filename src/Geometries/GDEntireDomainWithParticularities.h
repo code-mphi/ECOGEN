@@ -48,7 +48,7 @@ public:
   virtual ~GDEntireDomainWithParticularities();
 
   virtual bool belong(Coord& /*posElement*/, const int& /*lvl*/) const;
-  virtual void fillIn(Cell* cell, const int& numberPhases, const int& numberTransports) const;
+  virtual void fillIn(Cell* cell) const;
 };
 
 #endif //GDENTIREDOMAINWITHPARTICULARITIES_H

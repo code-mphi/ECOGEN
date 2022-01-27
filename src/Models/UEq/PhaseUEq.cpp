@@ -35,11 +35,11 @@ using namespace tinyxml2;
 
 //***************************************************************************
 
-PhaseUEq::PhaseUEq() : m_alpha(1.0), m_density(0.), m_pressure(0.), m_eos(0), m_energie(0.), m_soundSpeed(0.) {}
+PhaseUEq::PhaseUEq() : m_alpha(1.), m_density(0.), m_pressure(0.), m_Y(1.), m_temperature(0.), m_eos(0), m_energy(0.), m_soundSpeed(0.) {}
 
 //***************************************************************************
 
-PhaseUEq::PhaseUEq(XMLElement* material, Eos* eos, std::string fileName) : m_alpha(1.0), m_density(0.), m_pressure(0.), m_eos(eos), m_energie(0.), m_soundSpeed(0.)
+PhaseUEq::PhaseUEq(XMLElement* material, Eos* eos, std::string fileName) : m_alpha(1.), m_density(0.), m_pressure(0.), m_Y(1.), m_temperature(0.), m_eos(eos), m_energy(0.), m_soundSpeed(0.)
 {
   XMLElement* sousElement(material->FirstChildElement("dataFluid"));
   if (sousElement == NULL) throw ErrorXMLElement("dataFluid", fileName, __FILE__, __LINE__);
@@ -61,8 +61,11 @@ PhaseUEq::PhaseUEq(XMLElement* material, Eos* eos, std::string fileName) : m_alp
 
   //Thermodynamic reconstruction if needed
   if (presencePressure&&presenceTemperature) m_density = m_eos->computeDensity(m_pressure, m_temperature);
-  if (presenceDensity&&presencePressure) m_temperature = m_eos->computeTemperature(m_density,m_pressure);
+  if (presenceDensity&&presencePressure) m_temperature = m_eos->computeTemperature(m_density, m_pressure);
   if (presenceDensity&&presenceTemperature) throw ErrorXMLAttribut("impossible to initialize UEq phase with density and temperature", fileName, __FILE__, __LINE__);
+
+  m_energy = m_eos->computeEnergy(m_density, m_pressure);
+  m_soundSpeed = m_eos->computeSoundSpeed(m_density, m_pressure);
 }
 
 //***************************************************************************
@@ -84,7 +87,7 @@ void PhaseUEq::copyPhase(Phase &phase)
   m_density = phase.getDensity();
   m_pressure = phase.getPressure();
   m_eos = phase.getEos();
-  m_energie = phase.getEnergy();
+  m_energy = phase.getEnergy();
   m_soundSpeed = phase.getSoundSpeed();
 }
 
@@ -93,7 +96,7 @@ void PhaseUEq::copyPhase(Phase &phase)
 void PhaseUEq::extendedCalculusPhase(const Coord& /*velocity*/)
 {
   m_temperature = m_eos->computeTemperature(m_density, m_pressure);
-  m_energie = m_eos->computeEnergy(m_density, m_pressure);
+  m_energy = m_eos->computeEnergy(m_density, m_pressure);
   m_soundSpeed = m_eos->computeSoundSpeed(m_density, m_pressure);
 }
 
@@ -329,6 +332,20 @@ void PhaseUEq::verifyAndCorrectPhase()
   m_eos->verifyAndModifyPressure(m_pressure);
 }
 
+//***************************************************************************
+
+void PhaseUEq::verifyAndCorrectDensityMax(const double& mass)
+{
+  m_eos->verifyAndCorrectDensityMax(mass, m_alpha, m_density);
+}
+
+//***************************************************************************
+
+void PhaseUEq::verifyAndCorrectDensityMax()
+{
+  m_eos->verifyAndCorrectDensityMax(m_density);
+}
+
 //****************************************************************************
 //**************************** DATA ACCESSORS ********************************
 //****************************************************************************
@@ -349,7 +366,7 @@ void PhaseUEq::setEos(Eos* eos) { m_eos = eos; }
 
 //***************************************************************************
 
-void PhaseUEq::setEnergy(double energie) { m_energie = energie; }
+void PhaseUEq::setEnergy(double energy) { m_energy = energy; }
 
 //***************************************************************************
 

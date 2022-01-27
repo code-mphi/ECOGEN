@@ -32,11 +32,11 @@
 
 //***********************************************************************
 
-Model::Model(const std::string& name, const int& numberTransports) :
- m_name(name)
+Model::Model(const std::string& name, const int& numbTransports) :
+ m_name(name), m_lowMach(false), m_smoothCrossSection1d(false)
 {
   fluxBufferTransport = 0;
-  if (numberTransports > 0) { fluxBufferTransport = new Transport[numberTransports]; }
+  if (numbTransports > 0) { fluxBufferTransport = new Transport[numbTransports]; }
 }
 
 //***********************************************************************
@@ -51,17 +51,17 @@ Model::~Model()
 
 //***********************************************************************
 
-void Model::allocateEos(Cell& cell, const int& numberPhases) const
+void Model::allocateEos(Cell& cell) const
 {
   for (int k = 0; k < numberPhases; k++) { TB->eos[k] = cell.getPhase(k)->getEos(); }
 }
 
 //***********************************************************************
 
-void Model::relaxations(Cell* cell, const int& numberPhases, const double& dt, Prim type) const
+void Model::relaxations(Cell* cell, const double& dt, Prim type) const
 {
 	for (unsigned int r = 0; r < m_relaxations.size(); r++) {
-		m_relaxations[r]->relaxation(cell, numberPhases, dt, type);
+		m_relaxations[r]->relaxation(cell, dt, type);
 	}
 }
 

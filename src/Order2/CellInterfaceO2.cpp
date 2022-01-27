@@ -61,7 +61,7 @@ CellInterfaceO2::CellInterfaceO2(int lvl) : CellInterface(lvl), m_vecPhasesSlope
 
 CellInterfaceO2::~CellInterfaceO2()
 {
-  for (int k = 0; k < m_numberPhases; k++) {
+  for (int k = 0; k < numberPhases; k++) {
     delete m_vecPhasesSlopes[k];
   }
   delete[] m_vecPhasesSlopes;
@@ -71,10 +71,8 @@ CellInterfaceO2::~CellInterfaceO2()
 
 //***********************************************************************
 
-void CellInterfaceO2::allocateSlopes(const int& numberPhases, const int& numberTransports, int& allocateSlopeLocal)
+void CellInterfaceO2::allocateSlopes(int& allocateSlopeLocal)
 {
-  m_numberPhases = numberPhases;
-
   //Allocation des slopes des phases
 	m_vecPhasesSlopes = new Phase*[numberPhases];
 
@@ -123,7 +121,7 @@ void CellInterfaceO2::allocateSlopes(const int& numberPhases, const int& numberT
 
 //***********************************************************************
 
-void CellInterfaceO2::computeSlopes(const int& numberPhases, const int& numberTransports, Prim type)
+void CellInterfaceO2::computeSlopes(Prim type)
 {
   if (m_cellInterfacesChildren.size() == 0) {
     //Distance entre les deux mailles en contact
@@ -147,38 +145,39 @@ void CellInterfaceO2::computeSlopes(const int& numberPhases, const int& numberTr
 
 //***********************************************************************
 
-void CellInterfaceO2::computeFlux(const int& numberPhases, const int& numberTransports, double& dtMax, Limiter& globalLimiter, Limiter& interfaceLimiter, Limiter& globalVolumeFractionLimiter, Limiter& interfaceVolumeFractionLimiter, Prim type)
+void CellInterfaceO2::computeFlux(double& dtMax, Limiter& globalLimiter, Limiter& interfaceLimiter,
+ Limiter& globalVolumeFractionLimiter, Limiter& interfaceVolumeFractionLimiter, Prim type)
 {
   // Quand on fait le premier computeFlux (donc avec vecPhases) on n'incremente pas m_cons pour les mailles de niveau different (inferieur) de "lvl".
   // Sinon ca veut dire qu on l ajoute pour les 2 computeFlux sans le remettre a zero entre les deux, donc 2 fois plus de flux que ce que l on veut.
-  this->solveRiemann(numberPhases, numberTransports, dtMax, globalLimiter, interfaceLimiter, globalVolumeFractionLimiter, interfaceVolumeFractionLimiter, type);
+  this->solveRiemann(dtMax, globalLimiter, interfaceLimiter, globalVolumeFractionLimiter, interfaceVolumeFractionLimiter, type);
 
   switch (type) {
   case vecPhases:
     if (m_cellLeft->getLvl() == m_cellRight->getLvl()) {       //CoefAMR = 1 pour les deux
-      this->addFlux(numberPhases, numberTransports, 1.);       //Ajout du flux sur maille droite
-      this->subtractFlux(numberPhases, numberTransports, 1.);  //Retrait du flux sur maille gauche
+      this->addFlux(1.);       //Ajout du flux sur maille droite
+      this->subtractFlux(1.);  //Retrait du flux sur maille gauche
     }
     else if (m_cellLeft->getLvl() > m_cellRight->getLvl()) {   //CoefAMR = 1 pour la gauche et on n'ajoute rien sur la maille droite
-      this->subtractFlux(numberPhases, numberTransports, 1.);  //Retrait du flux sur maille gauche
+      this->subtractFlux(1.);  //Retrait du flux sur maille gauche
     }
     else {                                                     //CoefAMR = 1 pour la droite et on ne retire rien sur la maille gauche
-      this->addFlux(numberPhases, numberTransports, 1.);       //Ajout du flux sur maille droite
+      this->addFlux(1.);       //Ajout du flux sur maille droite
     }
     break;
 
   case vecPhasesO2:
     if (m_cellLeft->getLvl() == m_cellRight->getLvl()) {       //CoefAMR = 1 pour les deux
-      this->addFlux(numberPhases, numberTransports, 1.);       //Ajout du flux sur maille droite
-      this->subtractFlux(numberPhases, numberTransports, 1.);  //Retrait du flux sur maille gauche
+      this->addFlux(1.);       //Ajout du flux sur maille droite
+      this->subtractFlux(1.);  //Retrait du flux sur maille gauche
     }
     else if (m_cellLeft->getLvl() > m_cellRight->getLvl()) {   //CoefAMR = 1 pour la gauche et 0.5 pour la droite
-      this->addFlux(numberPhases, numberTransports, 0.5);      //Ajout du flux sur maille droite
-      this->subtractFlux(numberPhases, numberTransports, 1.);  //Retrait du flux sur maille gauche
+      this->addFlux(0.5);      //Ajout du flux sur maille droite
+      this->subtractFlux(1.);  //Retrait du flux sur maille gauche
     }
     else {                                                     //CoefAMR = 1 pour la droite et 0.5 pour la gauche
-      this->addFlux(numberPhases, numberTransports, 1.);       //Ajout du flux sur maille droite
-      this->subtractFlux(numberPhases, numberTransports, 0.5); //Retrait du flux sur maille gauche
+      this->addFlux(1.);       //Ajout du flux sur maille droite
+      this->subtractFlux(0.5); //Retrait du flux sur maille gauche
     }
     break;
 
@@ -188,14 +187,14 @@ void CellInterfaceO2::computeFlux(const int& numberPhases, const int& numberTran
 
 //***********************************************************************
 
-void CellInterfaceO2::solveRiemann(const int& numberPhases, const int& numberTransports, double& dtMax, Limiter& globalLimiter, Limiter& interfaceLimiter, Limiter& globalVolumeFractionLimiter, Limiter& interfaceVolumeFractionLimiter, Prim type)
+void CellInterfaceO2::solveRiemann(double& dtMax, Limiter& globalLimiter, Limiter& interfaceLimiter, Limiter& globalVolumeFractionLimiter, Limiter& interfaceVolumeFractionLimiter, Prim type)
 {
   //Si la cell gauche ou droite est de niveau inferieur a "lvl", on ne prend pas "type" mais vecPhases (ca evite de prendre vecPhaseO2 alors qu'on ne l'a pas).
-  if (m_cellLeft->getLvl() == m_lvl) { cellLeft->copyVec(m_cellLeft->getPhases(type), m_cellLeft->getMixture(type), m_cellLeft->getTransports(type)); }
-  else { cellLeft->copyVec(m_cellLeft->getPhases(vecPhases), m_cellLeft->getMixture(vecPhases), m_cellLeft->getTransports(vecPhases)); }
+  if (m_cellLeft->getLvl() == m_lvl) { bufferCellLeft->copyVec(m_cellLeft->getPhases(type), m_cellLeft->getMixture(type), m_cellLeft->getTransports(type)); }
+  else { bufferCellLeft->copyVec(m_cellLeft->getPhases(vecPhases), m_cellLeft->getMixture(vecPhases), m_cellLeft->getTransports(vecPhases)); }
   
-  if (m_cellRight->getLvl() == m_lvl) { cellRight->copyVec(m_cellRight->getPhases(type), m_cellRight->getMixture(type), m_cellRight->getTransports(type)); }
-  else { cellRight->copyVec(m_cellRight->getPhases(vecPhases), m_cellRight->getMixture(vecPhases), m_cellRight->getTransports(vecPhases)); }
+  if (m_cellRight->getLvl() == m_lvl) { bufferCellRight->copyVec(m_cellRight->getPhases(type), m_cellRight->getMixture(type), m_cellRight->getTransports(type)); }
+  else { bufferCellRight->copyVec(m_cellRight->getPhases(vecPhases), m_cellRight->getMixture(vecPhases), m_cellRight->getTransports(vecPhases)); }
 
   //Calcul des distances cell interface <-> cells pour l extrapolation
   double distanceGauche(this->distance(m_cellLeft));
@@ -205,18 +204,19 @@ void CellInterfaceO2::solveRiemann(const int& numberPhases, const int& numberTra
   int phase0(0), phase1(1);
   double alphaCellLeft(0.), alphaCellLeftLeft(0.), alphaCellRight(0.), alphaCellRightRight(0.);
   double beta(1.6), sign(0.), newAlpha(0.), A(0.), B(0.), C(0.), qmin(0.), qmax(0.), epsInterface(1.e-4);
-  alphaCellLeft = cellLeft->getPhase(phase0)->getAlpha();
-  alphaCellRight = cellRight->getPhase(phase0)->getAlpha();
+  alphaCellLeft = bufferCellLeft->getPhase(phase0)->getAlpha();
+  alphaCellRight = bufferCellRight->getPhase(phase0)->getAlpha();
 
   //Extrapolation gauche
-  m_cellLeft->computeLocalSlopes(numberPhases, numberTransports, *this, globalLimiter, interfaceLimiter, globalVolumeFractionLimiter, interfaceVolumeFractionLimiter, alphaCellLeftLeft, alphaCellLeft, alphaCellRight, epsInterface);
+  m_cellLeft->computeLocalSlopes(*this, globalLimiter, interfaceLimiter, globalVolumeFractionLimiter, interfaceVolumeFractionLimiter, alphaCellLeftLeft, alphaCellLeft, alphaCellRight, epsInterface);
   for (int k = 0; k < numberPhases; k++) {
-    cellLeft->getPhase(k)->extrapolate(*slopesPhasesLocal1[k], distanceGauche);
-    cellLeft->getPhase(k)->verifyAndCorrectPhase();
+    bufferCellLeft->getPhase(k)->extrapolate(*slopesPhasesLocal1[k], distanceGauche);
+    bufferCellLeft->getPhase(k)->verifyAndCorrectPhase();
+    bufferCellLeft->getPhase(k)->verifyAndCorrectDensityMax();
   }
-  cellLeft->getMixture()->extrapolate(*slopesMixtureLocal1, distanceGauche);
+  bufferCellLeft->getMixture()->extrapolate(*slopesMixtureLocal1, distanceGauche);
 	for (int k = 0; k < numberTransports; k++) {
-		cellLeft->getTransport(k).extrapolate(slopesTransportLocal1[k], distanceGauche);
+		bufferCellLeft->getTransport(k).extrapolate(slopesTransportLocal1[k], distanceGauche);
 	}
   //THINC method (for alpha only)
   if (globalVolumeFractionLimiter.AmITHINC() || interfaceVolumeFractionLimiter.AmITHINC()) {
@@ -231,23 +231,24 @@ void CellInterfaceO2::solveRiemann(const int& numberPhases, const int& numberTra
       newAlpha = qmin + 0.5*qmax*(1. + sign * (tanh(beta) + A) / (1. + A * tanh(beta)));
       if (newAlpha < epsInterface) { newAlpha = epsInterface; }
       if (newAlpha > 1. - epsInterface) { newAlpha = 1. - epsInterface; }
-      cellLeft->getPhase(phase0)->setAlpha(newAlpha);
-      cellLeft->getPhase(phase1)->setAlpha(1. - newAlpha);
+      bufferCellLeft->getPhase(phase0)->setAlpha(newAlpha);
+      bufferCellLeft->getPhase(phase1)->setAlpha(1. - newAlpha);
     }
   }
 
   //Extrapolation droite
-  m_cellRight->computeLocalSlopes(numberPhases, numberTransports, *this, globalLimiter, interfaceLimiter, globalVolumeFractionLimiter, interfaceVolumeFractionLimiter, alphaCellRightRight, alphaCellRight, alphaCellLeft, epsInterface);
+  m_cellRight->computeLocalSlopes(*this, globalLimiter, interfaceLimiter, globalVolumeFractionLimiter, interfaceVolumeFractionLimiter, alphaCellRightRight, alphaCellRight, alphaCellLeft, epsInterface);
   for (int k = 0; k < numberPhases; k++) {
     slopesPhasesLocal1[k]->changeSign(); //On doit soustraire les slopes a droite
-    cellRight->getPhase(k)->extrapolate(*slopesPhasesLocal1[k], distanceDroite);
-    cellRight->getPhase(k)->verifyAndCorrectPhase();
+    bufferCellRight->getPhase(k)->extrapolate(*slopesPhasesLocal1[k], distanceDroite);
+    bufferCellRight->getPhase(k)->verifyAndCorrectPhase();
+    bufferCellRight->getPhase(k)->verifyAndCorrectDensityMax();
   }
   slopesMixtureLocal1->changeSign();
-  cellRight->getMixture()->extrapolate(*slopesMixtureLocal1, distanceDroite);
+  bufferCellRight->getMixture()->extrapolate(*slopesMixtureLocal1, distanceDroite);
 	for (int k = 0; k < numberTransports; k++) {
 		slopesTransportLocal1[k] = -slopesTransportLocal1[k];
-		cellRight->getTransport(k).extrapolate(slopesTransportLocal1[k], distanceDroite);
+		bufferCellRight->getTransport(k).extrapolate(slopesTransportLocal1[k], distanceDroite);
 	}
   //THINC method (for alpha only)
   if (globalVolumeFractionLimiter.AmITHINC() || interfaceVolumeFractionLimiter.AmITHINC()) {
@@ -262,31 +263,30 @@ void CellInterfaceO2::solveRiemann(const int& numberPhases, const int& numberTra
       newAlpha = qmin + 0.5*qmax*(1. + sign * A);
       if (newAlpha < epsInterface) { newAlpha = epsInterface; }
       if (newAlpha > 1. - epsInterface) { newAlpha = 1. - epsInterface; }
-      cellRight->getPhase(phase0)->setAlpha(newAlpha);
-      cellRight->getPhase(phase1)->setAlpha(1. - newAlpha);
+      bufferCellRight->getPhase(phase0)->setAlpha(newAlpha);
+      bufferCellRight->getPhase(phase1)->setAlpha(1. - newAlpha);
     }
   }
 
   //Projection des velocities sur repere attache a la face
-  cellLeft->localProjection(m_face->getNormal(), m_face->getTangent(), m_face->getBinormal(), numberPhases);
-  cellRight->localProjection(m_face->getNormal(), m_face->getTangent(), m_face->getBinormal(), numberPhases);
+  bufferCellLeft->localProjection(m_face->getNormal(), m_face->getTangent(), m_face->getBinormal());
+  bufferCellRight->localProjection(m_face->getNormal(), m_face->getTangent(), m_face->getBinormal());
 
   //Calcul des variables etendus (Phases, Mixture, AddPhys)
-  cellLeft->fulfillState();
-  cellRight->fulfillState();
+  bufferCellLeft->fulfillState();
+  bufferCellRight->fulfillState();
 
   //Probleme de Riemann
   double dxLeft(m_cellLeft->getElement()->getLCFL());
   double dxRight(m_cellRight->getElement()->getLCFL());
   dxLeft = dxLeft*std::pow(2., (double)m_lvl);
   dxRight = dxRight*std::pow(2., (double)m_lvl);
-  double massflow(0.), powerFlux(0.); // Those var. are useless here, only meaningful for recording flux of BoundCond
-  m_mod->solveRiemannIntern(*cellLeft, *cellRight, numberPhases, dxLeft, dxRight, dtMax, massflow, powerFlux);
+  model->solveRiemannIntern(*bufferCellLeft, *bufferCellRight, dxLeft, dxRight, dtMax);
   //Handling of transport functions (m_Sm known: need to be called after Riemann solver)
-  if (numberTransports > 0) { m_mod->solveRiemannTransportIntern(*cellLeft, *cellRight, numberTransports); }
+  if (numberTransports > 0) { model->solveRiemannTransportIntern(*bufferCellLeft, *bufferCellRight); }
 
   //Projection du flux sur le repere absolu
-  m_mod->reverseProjection(m_face->getNormal(), m_face->getTangent(), m_face->getBinormal());
+  model->reverseProjection(m_face->getNormal(), m_face->getTangent(), m_face->getBinormal());
 }
 
 //***********************************************************************

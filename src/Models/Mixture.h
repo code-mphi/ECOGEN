@@ -66,30 +66,26 @@ class Mixture
       //! \brief     Compute mixture density
       //! \param     alphak             phase volume fraction array
       //! \param     rhok               phase density array
-      //! \param     numberPhases       number of phase
       //! \return    mixture density
-      virtual double computeDensity(const double* /*alphak*/, const double* /*rhok*/, const int& /*numberPhases*/) { Errors::errorMessage("computeDensity not available for required mixture"); return 0.; };
+      virtual double computeDensity(const double* /*alphak*/, const double* /*rhok*/) { Errors::errorMessage("computeDensity not available for required mixture"); return 0.; };
       //! \brief     Compute mixture pressure
       //! \param     alphak             phase volume fraction array
       //! \param     pk                 phase pressure array
-      //! \param     numberPhases       number of phase
       //! \return    mixture pressure
-      virtual double computePressure(const double* /*alphak*/, const double* /*pk*/, const int& /*numberPhases*/) { Errors::errorMessage("computePressure not available for required mixture"); return 0.; };
-      virtual double computePressure(double* /*masses*/, const double& /*mixInternalEnerg*/, Phase** /*phases*/, const int& /*numberPhases*/) { Errors::errorMessage("computePressure not available for required mixture"); return 0.; };
-      virtual double computePressure(double /*masse*/, const double& /*internalEnergy*/, Phase** /*phases*/, Mixture* /*mixture*/, const int& /*numberPhases*/, const int& /*liq*/, const int& /*vap*/) { Errors::errorMessage("computePressure not available for required mixture"); return 0.; };
-      virtual double computeTemperature(double* /*masses*/, const double& /*pressure*/, Phase** /*phases*/, const int& /*numberPhases*/) { Errors::errorMessage("computeTemperature not available for required mixture"); return 0.; };
+      virtual double computePressure(const double* /*alphak*/, const double* /*pk*/) { Errors::errorMessage("computePressure not available for required mixture"); return 0.; };
+      virtual double computePressure(double* /*masses*/, const double& /*mixInternalEnerg*/, Phase** /*phases*/) { Errors::errorMessage("computePressure not available for required mixture"); return 0.; };
+      virtual double computePressure(double /*mass*/, const double& /*internalEnergy*/, Phase** /*phases*/, Mixture* /*mixture*/, const int& /*liq*/, const int& /*vap*/) { Errors::errorMessage("computePressure not available for required mixture"); return 0.; };
+      virtual double computeTemperature(double* /*masses*/, const double& /*pressure*/, Phase** /*phases*/) { Errors::errorMessage("computeTemperature not available for required mixture"); return 0.; };
       //! \brief     Compute mixture specific internal energy
       //! \param     Yk                 phase mass fraction array
       //! \param     ek                 phase specific internal energy array
-      //! \param     numberPhases       number of phase
       //! \return    mixture specific internal energy
-      virtual double computeInternalEnergy(const double* /*Yk*/, const double* /*ek*/, const int& /*numberPhases*/) { Errors::errorMessage("computeInternalEnergy not available for required mixture"); return 0.; };
+      virtual double computeInternalEnergy(const double* /*Yk*/, const double* /*ek*/) { Errors::errorMessage("computeInternalEnergy not available for required mixture"); return 0.; };
       //! \brief     Compute mixture frozen speed of sound
       //! \param     Yk                 phase mass fraction array
       //! \param     ck                 phase speed of sound array
-      //! \param     numberPhases       number of phase
       //! \return    mixture frozen speed of sound
-      virtual double computeFrozenSoundSpeed(const double* /*Yk*/, const double* /*ck*/, const int& /*numberPhases*/) { Errors::errorMessage("computeFrozenSoundSpeed not available for required mixture"); return 0.; };
+      virtual double computeFrozenSoundSpeed(const double* /*Yk*/, const double* /*ck*/) { Errors::errorMessage("computeFrozenSoundSpeed not available for required mixture"); return 0.; };
 
       //! \brief     Compute temperature for a mixture evolving at thermal equilibrium along mixture isentropic path
       //! \param     Yk                 array of mass fractions
@@ -98,7 +94,7 @@ class Mixture
       //! \param     p                  final pressure
       //! \param     dTdp               derivative according to pressure
       //! \return    temperature after isentropic path
-      virtual double computeTemperatureIsentrope(const double* /*Yk*/, const double& /*p0*/, const double& /*T0*/, const double& /*p*/, const int& /*numberPhases*/, double* /*dTdp*/ = 0) { Errors::errorMessage("computeTemperatureIsentrope not available for required mixture"); return 0.; };
+      virtual double computeTemperatureIsentrope(const double* /*Yk*/, const double& /*p0*/, const double& /*T0*/, const double& /*p*/, double* /*dTdp*/ = 0) { Errors::errorMessage("computeTemperatureIsentrope not available for required mixture"); return 0.; };
       //! \brief     Compute mixture enthalpy for a mixture evolving at thermal equilibrium along mixture isentropic path
       //! \param     Yk                 array of mass fractions
       //! \param     p0                 initial pressure
@@ -106,7 +102,7 @@ class Mixture
       //! \param     p                  final pressure
       //! \param     dhdp               derivative according to pressure
       //! \return    enthalpy after isentropic path
-      virtual double computeEnthalpyIsentrope(const double* /*Yk*/, const double& /*p0*/, const double& /*T0*/, const double& /*p*/, const int& /*numberPhases*/, double* /*dhdp*/ = 0) { Errors::errorMessage("computeEnthalpyIsentrope not available for required mixture"); return 0.; };
+      virtual double computeEnthalpyIsentrope(const double* /*Yk*/, const double& /*p0*/, const double& /*T0*/, const double& /*p*/, double* /*dhdp*/ = 0) { Errors::errorMessage("computeEnthalpyIsentrope not available for required mixture"); return 0.; };
       //! \brief     Compute mixture specific volume for a mixture evolving at thermal equilibrium along mixture isentropic path
       //! \param     Yk                 array of mass fractions
       //! \param     p0                 initial pressure
@@ -114,12 +110,11 @@ class Mixture
       //! \param     p                  final pressure
       //! \param     dvdp               derivative according to pressure
       //! \return    specific volume after isentropic path
-      virtual double computeVolumeIsentrope(const double* /*Yk*/, const double& /*p0*/, const double& /*T0*/, const double& /*p*/, const int& /*numberPhases*/, double* /*dvdp*/ = 0) { Errors::errorMessage("computeVolumeIsentrope not available for required mixture"); return 0.; };
+      virtual double computeVolumeIsentrope(const double* /*Yk*/, const double& /*p0*/, const double& /*T0*/, const double& /*p*/, double* /*dvdp*/ = 0) { Errors::errorMessage("computeVolumeIsentrope not available for required mixture"); return 0.; };
 
       //! \brief     Fills some mixture attributes from a phase array
       //! \param     vecPhase           phase array
-      //! \param     numberPhases       number of phase
-      virtual void computeMixtureVariables(Phase** /*vecPhase*/, const int& /*numberPhases*/) { Errors::errorMessage("computeMixtureVariables not available for required mixture"); };
+      virtual void computeMixtureVariables(Phase** /*vecPhase*/) { Errors::errorMessage("computeMixtureVariables not available for required mixture"); };
       //! \brief     Compute mixture total specific energy from internal one taking account for energies associated to extra physics
       //! \param     vecGPA             vector of additional physics variables
       virtual void internalEnergyToTotalEnergy(std::vector<QuantitiesAddPhys*>& /*vecGPA*/) { Errors::errorMessage("internalEnergyToTotalEnergy not available for required mixture"); };
@@ -127,12 +122,12 @@ class Mixture
       //! \param     vecGPA             vector of additional physics variables
       virtual void totalEnergyToInternalEnergy(std::vector<QuantitiesAddPhys*>& /*vecGPA*/) { Errors::errorMessage("totalEnergyToInternalEnergy not available for required mixture"); };
       
-      //! \brief     velocity vector projection in a local cartesian coordinate system
+      //! \brief     velocity vector projection in a local Cartesian coordinate system
       //! \param     normal            normal vector associated to the cell interface
       //! \param     tangent           tangent vector associated to the cell interface
       //! \param     binormal          binormal vector associated to the cell interface
       virtual void localProjection(const Coord& /*normal*/, const Coord& /*tangent*/, const Coord& /*binormal*/) { Errors::errorMessage("localProjection not available for required mixture"); };
-      //! \brief     velocity vector reverse projection in the absolute cartesian coordinate system
+      //! \brief     velocity vector reverse projection in the absolute Cartesian coordinate system
       //! \param     normal            normal vector associated to the cell interface
       //! \param     tangent           tangent vector associated to the cell interface
       //! \param     binormal          binormal vector associated to the cell interface
@@ -208,5 +203,7 @@ class Mixture
     private:
 
 };
+
+extern int numberScalarsMixture;
 
 #endif // MIXTURE_H

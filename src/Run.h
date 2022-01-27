@@ -33,13 +33,8 @@
 
 class Run;
 
-#include <iostream>
 #include <fstream>
-#include <vector>
-#include <list>
-#include <cmath>
 #include <ctime>
-#include <algorithm>
 #include <sstream>
 #include "Tools.h"
 #include "Order1/Cell.h"
@@ -50,6 +45,7 @@ class Run;
 #include "BoundConds/HeaderBoundCond.h"
 #include "Eos/HeaderEquationOfState.h"
 #include "Models/HeaderModel.h"
+#include "Gradients/HeaderGradient.h"
 #include "Geometries/HeaderGeometricalDomain.h"
 #include "Order2/HeaderLimiter.h"
 #include "AdditionalPhysics/HeaderQuantitiesAddPhys.h"
@@ -118,10 +114,12 @@ class Run
 
     //Geometrical attributes
     bool m_parallelPreTreatment;               //!<Choice for mesh parallel pre-treatment  (needed for first simulation on a new parallel unstructured geometry)
+    bool m_smoothCrossSection1d;               //!<1D with smooth cross section variation scheme if active
     
     //Calcul attributes
     Mesh* m_mesh;                              //!<Mesh type object: contains all geometrical properties of the simulation
     Model* m_model;                            //!<Model type object: contains the flow model methods
+    Gradient* m_gradient;                      //!<Gradient type object: contains the gradient method
     TypeMeshContainer<Cell*>* m_cellsLvl;                   //!<Array of vectors (one per level) of computational cell objects: Contains physical fluid states.
     TypeMeshContainer<Cell*>* m_cellsLvlGhost;              //!<Array of vectors (one per level) of ghost cell objects.
     TypeMeshContainer<CellInterface*>* m_cellInterfacesLvl; //!<Array of vectors (one per level) of interface objects between cells (or between a cell and a physical domain boundary)
@@ -144,12 +142,12 @@ class Run
     int m_restartAMRsaveFreq;                  //!<Frequency at which a save to restart a simulation is done (usefull only for AMR)
 
     //Input/Output attributes
-    Input* m_input;         						 //!<Input object
+    Input* m_input;                                  //!<Input object
     Output* m_outPut;                                //!<Main output object
     std::vector<Output*> m_cuts;                     //!<Vector of output objects for cuts
     std::vector<Output*> m_probes;                   //!<Vector of output objects for probes
     std::vector<Output*> m_globalQuantities;         //!<Vector of output objects for global quantities (mass or total energy)
-    std::vector<Output*> m_recordBoundariesFlux;     //!<Vector of output object for flux (massflow or power flux) recording on boundaries
+    std::vector<Output*> m_recordBoundaries;         //!<Vector of output object for boundaries data recording
     timeStats m_stat;                                //!<Object linked to computational time statistics
     double* m_pMax;                                  //!<Maximal pressure found between each written output (only for few test cases)
     double* m_pMaxWall;                              //!<Coordinate of the maximal pressure found between each written output (only for few test cases)
@@ -162,7 +160,9 @@ class Run
     friend class OutputGNU;
     friend class OutputProbeGNU;
     friend class OutputGlobalGNU;
+    friend class OutputBoundaryGNU;
     friend class OutputBoundaryFluxGNU;
+    friend class OutputBoundaryAllGNU;
     friend class Mesh;
 };
 

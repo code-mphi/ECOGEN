@@ -29,7 +29,6 @@
 //  If not, see <http://www.gnu.org/licenses/>.
 
 #include "GOVertex.h"
-#include <iostream>
 
 //***********************************************************************
 

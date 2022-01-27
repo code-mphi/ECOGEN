@@ -30,6 +30,8 @@
 
 #include "Mixture.h"
 
+int numberScalarsMixture;
+
 //***************************************************************************
 
 Mixture::Mixture(){}
@@ -57,8 +59,8 @@ void Mixture::printMixture(std::ofstream &fileStream) const
 double Mixture::computeTsat(const Eos* eosLiq, const Eos* eosVap, const double& pressure, double* dTsat)
 {
   //Restrictions //FP//TODO// to improve
-  if (eosLiq->getType() != "IG" && eosLiq->getType() != "SG") { Errors::errorMessage("Only IG and SG permitted in thermal equilibrium model : MixPTUEq::computeTsat" + eosLiq->getType()); }
-  if (eosVap->getType() != "IG" && eosVap->getType() != "SG") { Errors::errorMessage("Only IG and SG permitted in thermal equilibrium model : MixPTUEq::computeTsat" + eosVap->getType()); }
+  if (eosLiq->getType() != TypeEOS::IG && eosLiq->getType() != TypeEOS::SG) { Errors::errorMessage("Only IG and SG permitted in thermal equilibrium model: MixPTUEq::computeTsat"); }
+  if (eosVap->getType() != TypeEOS::IG && eosVap->getType() != TypeEOS::SG) { Errors::errorMessage("Only IG and SG permitted in thermal equilibrium model: MixPTUEq::computeTsat"); }
 
   double gammaL = eosLiq->getGamma();
   double pInfL = eosLiq->getPInf();

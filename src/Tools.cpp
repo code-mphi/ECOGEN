@@ -34,28 +34,31 @@ Tools *TB;
 
 //***********************************************************************
 
-Tools::Tools(const int& numberPhases)
+Tools::Tools(const int& numbPhases, const int& numbTransports)
 {
-  m_numberPhases = numberPhases;
-  ak = new double[numberPhases];
-  Yk = new double[numberPhases];
-  rhok = new double[numberPhases];
-  pk = new double[numberPhases];
-  akS = new double[numberPhases];
-  rhokS = new double[numberPhases];
-  rhokStar = new double[numberPhases];
-  pkStar = new double[numberPhases];
-  ekStar = new double[numberPhases];
-  YkStar = new double[numberPhases];
-  vkStar = new double[numberPhases];
-  Deltaek = new double[numberPhases];
-  Deltapk = new double[numberPhases];
-  zk = new double[numberPhases];
-  eos = new Eos*[numberPhases];
+  ak = new double[numbPhases];
+  Yk = new double[numbPhases];
+  rhok = new double[numbPhases];
+  pk = new double[numbPhases];
+  ek = new double[numbPhases];
+  Ek = new double[numbPhases];
+  akS = new double[numbPhases];
+  rhokS = new double[numbPhases];
+  rhokStar = new double[numbPhases];
+  pkStar = new double[numbPhases];
+  ekStar = new double[numbPhases];
+  EkStar = new double[numbPhases];
+  YkStar = new double[numbPhases];
+  vkStar = new double[numbPhases];
+  Deltapk = new double[numbPhases];
+  zk = new double[numbPhases];
+  rho_cIksquare = new double[numbPhases];
+  eos = new Eos*[numbPhases];
+  Hk0 = new double[numbPhases];
+  Yk0 = new double[numbPhases];
 
-  Hk0 = new double[numberPhases];
-  Yk0 = new double[numberPhases];
-
+  numberPhases = numbPhases;
+  numberTransports = numbTransports;
 }
 
 //***********************************************************************
@@ -66,16 +69,19 @@ Tools::~Tools()
   if (Yk != 0) delete[] Yk;
   if (rhok != 0) delete[] rhok;
   if (pk != 0) delete[] pk;
+  if (ek != 0) delete[] ek;
+  if (Ek != 0) delete[] Ek;
   if (akS != 0) delete[] akS;
   if (rhokS != 0) delete[] rhokS;
   if (rhokStar != 0) delete[] rhokStar;
   if (pkStar != 0) delete[] pkStar;
   if (ekStar != 0) delete[] ekStar;
+  if (EkStar != 0) delete[] EkStar;
   if (YkStar != 0) delete[] YkStar;
   if (vkStar != 0) delete[] vkStar;
-  if (Deltaek != 0) delete[] Deltaek;
   if (Deltapk != 0) delete[] Deltapk;
   if (zk != 0) delete[] zk;
+  if (rho_cIksquare != 0) delete[] rho_cIksquare;
   if (eos != 0) delete[] eos;
 
   if (Hk0 != 0) delete[] Hk0;
@@ -97,3 +103,26 @@ void Tools::lowercase(std::string& string)
 }
 
 //***********************************************************************
+
+void Tools::swap(double &a, double &b)
+{
+  double buff(a);
+  a = b;
+  b = buff;
+}
+
+//***********************************************************************
+
+double Tools::returnNonZeroValue(double a)
+{
+  if (a > epsilonAlphaNull || a < - epsilonAlphaNull) {
+   return a;
+  }
+  else {
+   return sign(a) * epsilonAlphaNull;
+  }
+}
+
+//***********************************************************************
+
+double Tools::uselessDouble;

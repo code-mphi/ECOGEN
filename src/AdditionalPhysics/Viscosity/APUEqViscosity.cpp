@@ -28,19 +28,16 @@
 //  along with ECOGEN (file LICENSE).  
 //  If not, see <http://www.gnu.org/licenses/>.
 
-#include <iostream>
-#include <cmath>
-#include <algorithm>
 #include "APUEqViscosity.h"
 
 using namespace tinyxml2;
 
 //***********************************************************************
 
-APUEqViscosity::APUEqViscosity(int& numberQPA, Eos** eos, const int& numberPhases)
+APUEqViscosity::APUEqViscosity(int& numberQPA, Eos** eos, const int& numbPhases)
 {
-  m_muk = new double[numberPhases];
-  for (int k = 0; k < numberPhases; k++) {
+  m_muk = new double[numbPhases];
+  for (int k = 0; k < numbPhases; k++) {
     m_muk[k] = eos[k]->getMu();
   }
   m_numQPA = numberQPA++;
@@ -60,7 +57,7 @@ void APUEqViscosity::addQuantityAddPhys(Cell* cell)
 
 //***********************************************************************
 
-void APUEqViscosity::solveFluxAddPhys(CellInterface* cellInterface, const int& numberPhases)
+void APUEqViscosity::solveFluxAddPhys(CellInterface* cellInterface)
 {
   // Copy velocities and gradients of left and right cells
   m_velocityLeft = cellInterface->getCellGauche()->getMixture()->getVelocity();
@@ -102,7 +99,7 @@ void APUEqViscosity::solveFluxAddPhys(CellInterface* cellInterface, const int& n
   m_tensorRight.tensorToCoords(m_gradURight, m_gradVRight, m_gradWRight);
 
   this->solveFluxViscosityInner(m_velocityLeft, m_velocityRight, m_gradULeft, m_gradURight,
-    m_gradVLeft, m_gradVRight, m_gradWLeft, m_gradWRight, muMixLeft, muMixRight, numberPhases);
+    m_gradVLeft, m_gradVRight, m_gradWLeft, m_gradWRight, muMixLeft, muMixRight);
 
   // Flux projection on the absolute orientation axes
   cellInterface->getMod()->reverseProjection(m_normal, m_tangent, m_binormal);
@@ -110,7 +107,7 @@ void APUEqViscosity::solveFluxAddPhys(CellInterface* cellInterface, const int& n
 
 //***********************************************************************
 
-void APUEqViscosity::solveFluxAddPhysBoundary(CellInterface* cellInterface, const int& numberPhases)
+void APUEqViscosity::solveFluxAddPhysBoundary(CellInterface* cellInterface)
 {
   ////KS//DEV// BC Injection, Tank, Outflow to do
 
@@ -145,15 +142,15 @@ void APUEqViscosity::solveFluxAddPhysBoundary(CellInterface* cellInterface, cons
 
   int typeCellInterface = cellInterface->whoAmI();
   if (typeCellInterface == NONREFLECTING || typeCellInterface == OUTFLOW || typeCellInterface == INJ || typeCellInterface == TANK || typeCellInterface == SUBINJ) {
-    this->solveFluxViscosityNonReflecting(m_velocityLeft, m_gradULeft, m_gradVLeft, m_gradWLeft, muMixLeft, numberPhases);
+    this->solveFluxViscosityNonReflecting(m_velocityLeft, m_gradULeft, m_gradVLeft, m_gradWLeft, muMixLeft);
   }
   else if (typeCellInterface == WALL) {
-    this->solveFluxViscosityWall(m_velocityLeft, muMixLeft, distLeft, numberPhases);
+    this->solveFluxViscosityWall(m_velocityLeft, muMixLeft, distLeft);
   }
   else if (typeCellInterface == SYMMETRY) {
-    this->solveFluxViscositySymmetry(m_gradULeft, m_gradVLeft, m_gradWLeft, muMixLeft, numberPhases);
+    this->solveFluxViscositySymmetry(m_gradULeft, m_gradVLeft, m_gradWLeft, muMixLeft);
   }
-  else { this->solveFluxViscosityOther(numberPhases); }
+  else { this->solveFluxViscosityOther(); }
 
   // Flux projection on the absolute orientation axes
   cellInterface->getMod()->reverseProjection(m_normal, m_tangent, m_binormal);
@@ -162,7 +159,7 @@ void APUEqViscosity::solveFluxAddPhysBoundary(CellInterface* cellInterface, cons
 //***********************************************************************
 
 void APUEqViscosity::solveFluxViscosityInner(const Coord& velocityLeft, const Coord& velocityRight, const Coord& gradULeft, const Coord& gradURight,
-  const Coord& gradVLeft, const Coord& gradVRight, const Coord& gradWLeft, const Coord& gradWRight, const double& muMixLeft, const double& muMixRight, const int& numberPhases) const
+  const Coord& gradVLeft, const Coord& gradVRight, const Coord& gradWLeft, const Coord& gradWRight, const double& muMixLeft, const double& muMixRight) const
 {
 	//Extraction of data
 	double uL, vL, wL, uR, vR, wR;
@@ -219,26 +216,26 @@ void APUEqViscosity::solveFluxViscosityInner(const Coord& velocityLeft, const Co
 	for (int k = 0; k<numberPhases; k++)
 	{
 	  static_cast<FluxUEq*> (fluxBuff)->m_alpha[k] = 0.;
-	  static_cast<FluxUEq*> (fluxBuff)->m_masse[k] = 0.;
+	  static_cast<FluxUEq*> (fluxBuff)->m_mass[k] = 0.;
 	  static_cast<FluxUEq*> (fluxBuff)->m_energ[k] = 0.;
 	}
-  static_cast<FluxUEq*> (fluxBuff)->m_qdm.setX(-muMel / 3. * (4.*dudx - 2.*(dvdy + dwdz)));
-  static_cast<FluxUEq*> (fluxBuff)->m_qdm.setY(-muMel * (dvdx + dudy));
-  static_cast<FluxUEq*> (fluxBuff)->m_qdm.setZ(-muMel * (dwdx + dudz));
+  static_cast<FluxUEq*> (fluxBuff)->m_momentum.setX(-muMel / 3. * (4.*dudx - 2.*(dvdy + dwdz)));
+  static_cast<FluxUEq*> (fluxBuff)->m_momentum.setY(-muMel * (dvdx + dudy));
+  static_cast<FluxUEq*> (fluxBuff)->m_momentum.setZ(-muMel * (dwdx + dudz));
   static_cast<FluxUEq*> (fluxBuff)->m_energMixture = -muMel * (1./3.*u*(4*dudx - 2.*(dvdy + dwdz)) + (dvdx + dudy)*v + (dwdx + dudz)*w);
 }
 
 //***********************************************************************
 
-void APUEqViscosity::solveFluxViscosityNonReflecting(const Coord& velocityLeft, const Coord& gradULeft, const Coord& gradVLeft, const Coord& gradWLeft, const double& muMixLeft, const int& numberPhases) const
+void APUEqViscosity::solveFluxViscosityNonReflecting(const Coord& velocityLeft, const Coord& gradULeft, const Coord& gradVLeft, const Coord& gradWLeft, const double& muMixLeft) const
 {
   this->solveFluxViscosityInner(velocityLeft, velocityLeft, gradULeft, gradULeft,
-    gradVLeft, gradVLeft, gradWLeft, gradWLeft, muMixLeft, muMixLeft, numberPhases);
+    gradVLeft, gradVLeft, gradWLeft, gradWLeft, muMixLeft, muMixLeft);
 }
 
 //***********************************************************************
 
-void APUEqViscosity::solveFluxViscosityWall(const Coord& velocityLeft, const double& muMixLeft, const double& distLeft, const int& numberPhases) const
+void APUEqViscosity::solveFluxViscosityWall(const Coord& velocityLeft, const double& muMixLeft, const double& distLeft) const
 {
   //Computed the gradients locally because of the particular condition at the wall
   double dudx = -velocityLeft.getX() / distLeft;
@@ -249,18 +246,18 @@ void APUEqViscosity::solveFluxViscosityWall(const Coord& velocityLeft, const dou
   for (int k = 0; k<numberPhases; k++)
   {
     static_cast<FluxUEq*> (fluxBuff)->m_alpha[k] = 0.;
-    static_cast<FluxUEq*> (fluxBuff)->m_masse[k] = 0.;
+    static_cast<FluxUEq*> (fluxBuff)->m_mass[k] = 0.;
     static_cast<FluxUEq*> (fluxBuff)->m_energ[k] = 0.;
   }
-  static_cast<FluxUEq*> (fluxBuff)->m_qdm.setX(-muMixLeft / 3. * 4. * dudx);
-  static_cast<FluxUEq*> (fluxBuff)->m_qdm.setY(-muMixLeft * dvdx);
-  static_cast<FluxUEq*> (fluxBuff)->m_qdm.setZ(-muMixLeft * dwdx);
+  static_cast<FluxUEq*> (fluxBuff)->m_momentum.setX(-muMixLeft / 3. * 4. * dudx);
+  static_cast<FluxUEq*> (fluxBuff)->m_momentum.setY(-muMixLeft * dvdx);
+  static_cast<FluxUEq*> (fluxBuff)->m_momentum.setZ(-muMixLeft * dwdx);
   static_cast<FluxUEq*> (fluxBuff)->m_energMixture = 0.;
 }
 
 //***********************************************************************
 
-void APUEqViscosity::solveFluxViscositySymmetry(const Coord& gradULeft, const Coord& gradVLeft, const Coord& gradWLeft, const double& muMixLeft, const int& numberPhases) const
+void APUEqViscosity::solveFluxViscositySymmetry(const Coord& gradULeft, const Coord& gradVLeft, const Coord& gradWLeft, const double& muMixLeft) const
 {	
   //Extraction of data
   //Note that dudy, dudz, dvdx and dwdx are nulls
@@ -273,18 +270,18 @@ void APUEqViscosity::solveFluxViscositySymmetry(const Coord& gradULeft, const Co
 	for (int k = 0; k<numberPhases; k++)
 	{
 	  static_cast<FluxUEq*> (fluxBuff)->m_alpha[k] = 0.;
-	  static_cast<FluxUEq*> (fluxBuff)->m_masse[k] = 0.;
+	  static_cast<FluxUEq*> (fluxBuff)->m_mass[k] = 0.;
 	  static_cast<FluxUEq*> (fluxBuff)->m_energ[k] = 0.;
 	}
-  static_cast<FluxUEq*> (fluxBuff)->m_qdm.setX(-muMixLeft / 3. * (4.*dudx - 2.*(dvdy + dwdz)));
-  static_cast<FluxUEq*> (fluxBuff)->m_qdm.setY(0.);
-  static_cast<FluxUEq*> (fluxBuff)->m_qdm.setZ(0.);
+  static_cast<FluxUEq*> (fluxBuff)->m_momentum.setX(-muMixLeft / 3. * (4.*dudx - 2.*(dvdy + dwdz)));
+  static_cast<FluxUEq*> (fluxBuff)->m_momentum.setY(0.);
+  static_cast<FluxUEq*> (fluxBuff)->m_momentum.setZ(0.);
   static_cast<FluxUEq*> (fluxBuff)->m_energMixture = 0.;
 }
 
 //***********************************************************************
 
-void APUEqViscosity::solveFluxViscosityOther(const int& numberPhases) const
+void APUEqViscosity::solveFluxViscosityOther() const
 {
   //Not manage at the moment, just an example
   // std::cout << "Viscous boundary not manage" << std::endl;
@@ -292,16 +289,16 @@ void APUEqViscosity::solveFluxViscosityOther(const int& numberPhases) const
   // To avoid bug when not manage
   for (int k = 0; k<numberPhases; k++) {
     static_cast<FluxUEq*> (fluxBuff)->m_alpha[k] = 0.;
-    static_cast<FluxUEq*> (fluxBuff)->m_masse[k] = 0.;
+    static_cast<FluxUEq*> (fluxBuff)->m_mass[k] = 0.;
     static_cast<FluxUEq*> (fluxBuff)->m_energ[k] = 0.;
   }
-  static_cast<FluxUEq*> (fluxBuff)->m_qdm = 0.;
+  static_cast<FluxUEq*> (fluxBuff)->m_momentum = 0.;
   static_cast<FluxUEq*> (fluxBuff)->m_energMixture = 0.;
 }
 
 //***********************************************************************
 
-void APUEqViscosity::addNonCons(Cell* cell, const int& numberPhases)
+void APUEqViscosity::addNonCons(Cell* cell)
 {
   double dudx = cell->getQPA(m_numQPA)->getGrad(1).getX();
   double dudy = cell->getQPA(m_numQPA)->getGrad(1).getY();
@@ -318,18 +315,18 @@ void APUEqViscosity::addNonCons(Cell* cell, const int& numberPhases)
 
   for (int k = 0; k<numberPhases; k++) {
     static_cast<FluxUEq*> (fluxBuff)->m_alpha[k] = 0.;
-    static_cast<FluxUEq*> (fluxBuff)->m_masse[k] = 0.;
+    static_cast<FluxUEq*> (fluxBuff)->m_mass[k] = 0.;
     static_cast<FluxUEq*> (fluxBuff)->m_energ[k] = cell->getPhase(k)->getAlpha()*m_muk[k] * termeNonCons;
   }
-  static_cast<FluxUEq*> (fluxBuff)->m_qdm = 0.;
+  static_cast<FluxUEq*> (fluxBuff)->m_momentum = 0.;
   static_cast<FluxUEq*> (fluxBuff)->m_energMixture = 0.;
 
-  cell->getCons()->addFlux(1., numberPhases);
+  cell->getCons()->addFlux(1.);
 }
 
 //***********************************************************************
 
-void APUEqViscosity::addSymmetricTermsRadialAxisOnX(Cell* cell, const int& numberPhases)
+void APUEqViscosity::addSymmetricTermsRadialAxisOnX(Cell* cell)
 {
   //Extraction of data
   double r = cell->getPosition().getX();
@@ -349,19 +346,19 @@ void APUEqViscosity::addSymmetricTermsRadialAxisOnX(Cell* cell, const int& numbe
   //Writing of symmetrical viscous terms on each equation of fluxBuffUEq
   for (int k = 0; k<numberPhases; k++) {
     static_cast<FluxUEq*> (fluxBuff)->m_alpha[k] = 0.;
-    static_cast<FluxUEq*> (fluxBuff)->m_masse[k] = 0.;
+    static_cast<FluxUEq*> (fluxBuff)->m_mass[k] = 0.;
     static_cast<FluxUEq*> (fluxBuff)->m_energ[k] = -cell->getPhase(k)->getAlpha()*m_muk[k] * 2./3.*u*(dudx + dvdy) / r;
   }
-  static_cast<FluxUEq*> (fluxBuff)->m_qdm.setX(muMix * 2./3. * (dudx - dvdy) / r);
-  static_cast<FluxUEq*> (fluxBuff)->m_qdm.setY(muMix * (1./3.*dudy + dvdx) / r);
+  static_cast<FluxUEq*> (fluxBuff)->m_momentum.setX(muMix * 2./3. * (dudx - dvdy) / r);
+  static_cast<FluxUEq*> (fluxBuff)->m_momentum.setY(muMix * (1./3.*dudy + dvdx) / r);
   static_cast<FluxUEq*> (fluxBuff)->m_energMixture = muMix * (v * (1./3.*dudy + dvdx) - 4./3.*u*dvdy) / r;
 
-  cell->getCons()->addFlux(1., numberPhases);
+  cell->getCons()->addFlux(1.);
 }
 
 //***********************************************************************
 
-void APUEqViscosity::addSymmetricTermsRadialAxisOnY(Cell* cell, const int& numberPhases)
+void APUEqViscosity::addSymmetricTermsRadialAxisOnY(Cell* cell)
 {
   //Extraction of data
   double r = cell->getPosition().getY();
@@ -381,19 +378,19 @@ void APUEqViscosity::addSymmetricTermsRadialAxisOnY(Cell* cell, const int& numbe
   //Writing of symmetrical viscous terms on each equation of fluxBuffUEq
   for (int k = 0; k<numberPhases; k++) {
     static_cast<FluxUEq*> (fluxBuff)->m_alpha[k] = 0.;
-    static_cast<FluxUEq*> (fluxBuff)->m_masse[k] = 0.;
+    static_cast<FluxUEq*> (fluxBuff)->m_mass[k] = 0.;
     static_cast<FluxUEq*> (fluxBuff)->m_energ[k] = -cell->getPhase(k)->getAlpha()*m_muk[k] * 2./3.*v*(dudx + dvdy) / r;
   }
-  static_cast<FluxUEq*> (fluxBuff)->m_qdm.setX(muMix * (1./3.*dvdx + dudy) / r);
-  static_cast<FluxUEq*> (fluxBuff)->m_qdm.setY(muMix * 2./3. * (dvdy - dudx) / r);
+  static_cast<FluxUEq*> (fluxBuff)->m_momentum.setX(muMix * (1./3.*dvdx + dudy) / r);
+  static_cast<FluxUEq*> (fluxBuff)->m_momentum.setY(muMix * 2./3. * (dvdy - dudx) / r);
   static_cast<FluxUEq*> (fluxBuff)->m_energMixture = muMix * (u * (1./3.*dvdx + dudy) - 4./3.*v*dudx) / r;
   
-  cell->getCons()->addFlux(1., numberPhases);
+  cell->getCons()->addFlux(1.);
 }
 
 //***********************************************************************
 
-void APUEqViscosity::communicationsAddPhys(const int& /*numberPhases*/, const int& dim, const int& lvl)
+void APUEqViscosity::communicationsAddPhys(const int& dim, const int& lvl)
 {
 	parallel.communicationsVector(QPA, dim, lvl, m_numQPA, 1); //m_gradU
 	parallel.communicationsVector(QPA, dim, lvl, m_numQPA, 2); //m_gradV

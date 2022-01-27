@@ -1,0 +1,7 @@
+<?xml version = "1.0" encoding = "UTF-8" standalone = "yes"?>
+<model>
+	<flowModel name="EulerKorteweg" alpha="1.e-7" beta="2.e-10" temperature="550" kappa="72.e-3"/>
+	<EOS name="VDW_water.xml"/>
+</model>
+
+

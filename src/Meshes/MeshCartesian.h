@@ -65,6 +65,7 @@ public:
   virtual std::string recupereChaineExtent(bool global = false) const;
   virtual void recupereCoord(std::vector<double>& jeuDonnees, Axis axis) const;
   virtual void recupereDonnees(TypeMeshContainer<Cell*>* cellsLvl, std::vector<double>& jeuDonnees, const int var, int phase) const;
+  virtual void setDataSet(std::vector<double>& jeuDonnees, TypeMeshContainer<Cell*>* cellsLvl, const int var, int phase) const;
 
 protected:
   TypeMeshContainer<Element*> m_elements; //!<Vector of element objects: Contains geometrical attributes

@@ -57,7 +57,7 @@ public:
 
 protected:
 
-  Coord m_size;    //!< dimensions of cartesian face
+  Coord m_size;    //!< dimensions of Cartesian face
 
 };
 

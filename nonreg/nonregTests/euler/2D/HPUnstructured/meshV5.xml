@@ -2,7 +2,7 @@
 <mesh>
 	<type structure="unStructured"/>
 	<unstructuredMesh>
-		<file name="./libMeshes/square/square.msh"/>
+		<file name="libMeshes/square/square.msh"/>
 		<parallel GMSHPretraitement="true"/>
 	</unstructuredMesh>
 </mesh>

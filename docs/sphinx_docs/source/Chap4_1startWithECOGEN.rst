@@ -107,7 +107,7 @@ The run ends and the following information comes:
 
   Screenshot of the end of ECOGEN's default run console with 8 cores used.
 
-A new folder *results* is created at the first run (unusefull to remove it). This folder contains a folder named *euler1DTransportPositiveVelocity* containing output files of our test case:
+A new folder *results* is created at the first run. This folder contains a folder named *euler1DTransportPositiveVelocity* containing output files of our test case:
 
  - *collectionParaview.pvd* and *collectionVisIt.visit* used in *Paraview* and *VisIt* softwares,
  - *datasets* folder containing the associated *vtu* files,
@@ -141,13 +141,13 @@ For example, one can prefer to visualize results under *gnu* file format. For th
 
   <outputMode format="GNU" binary="false" precision="10"/>
 
-The results can be drawn by loading in the Gnuplot software the file *visualization.gnu*.
+The results can be drawn by loading in the **gnuplot** software the file *visualization.gnu*.
 
 .. figure:: ./_static/tutos/default/GnuplotScreenshotDefaultUse.png
   :scale: 75%
   :align: center
 
-  Screenshot of results in *Gnuplot*.
+  Screenshot of results in **gnuplot**.
 
 .. _Paraview: https://www.paraview.org/
 .. _VisIt: https://wci.llnl.gov/simulation/computer-codes/visit/

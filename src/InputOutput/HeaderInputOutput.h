@@ -40,8 +40,9 @@
 #include "OutputCutGNU.h"
 #include "OutputProbeGNU.h"
 #include "OutputGlobalGNU.h"
+#include "OutputBoundaryGNU.h"
 #include "OutputBoundaryFluxGNU.h"
-//#include "OutputCutXML.h"
+#include "OutputBoundaryAllGNU.h"
 
 //Ajouter ici entetes des nouvelles entrees sorties
 

@@ -1,0 +1,18 @@
+<?xml version = "1.0" encoding = "UTF-8" standalone = "yes"?>
+<computationParam>
+  <run>EulerBlasiusLaminar</run>
+  <outputMode format="XML" binary="false" precision="10"/>
+  <timeControlMode iterations="false">
+    <iterations number="10" iterFreq="10"/>
+    <physicalTime totalTime="15." timeFreq="1."/>
+  </timeControlMode>
+  <computationControl CFL="0.5"/>
+  
+ 	<secondOrder>
+    <globalLimiter>mc</globalLimiter>
+  </secondOrder>
+
+  <gradient>
+    <method>green-gauss</method>
+  </gradient>
+</computationParam>

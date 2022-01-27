@@ -28,10 +28,7 @@
 //  along with ECOGEN (file LICENSE).  
 //  If not, see <http://www.gnu.org/licenses/>.
 
-#include <algorithm>
-#include <cmath>
 #include "Coord.h"
-#include <iostream>
 
 Coord coordBuff;
 

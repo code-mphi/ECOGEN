@@ -31,7 +31,6 @@
 #ifndef MIXEULER_H
 #define MIXEULER_H
 
-#include <vector>
 #include "../Mixture.h"
 
 //! \class     MixEuler
@@ -44,12 +43,12 @@ class MixEuler : public Mixture
 
       virtual void allocateAndCopyMixture(Mixture** mixture);
       virtual void copyMixture(Mixture& /*mixture*/) {};
-      virtual double computeDensity(const double* /*alphak*/, const double* /*rhok*/, const int& /*numberPhases*/) { return 0.; };
-      virtual double computePressure(const double* /*alphak*/, const double* /*pk*/, const int& /*numberPhases*/) { return 0.; };
-      virtual double computeInternalEnergy(const double* /*Yk*/, const double* /*ek*/, const int& /*numberPhases*/) { return 0.; };
-      virtual double computeFrozenSoundSpeed(const double* /*Yk*/, const double* /*ck*/, const int& /*numberPhases*/) { return 0.; };
+      virtual double computeDensity(const double* /*alphak*/, const double* /*rhok*/) { return 0.; };
+      virtual double computePressure(const double* /*alphak*/, const double* /*pk*/) { return 0.; };
+      virtual double computeInternalEnergy(const double* /*Yk*/, const double* /*ek*/) { return 0.; };
+      virtual double computeFrozenSoundSpeed(const double* /*Yk*/, const double* /*ck*/) { return 0.; };
       
-      virtual void computeMixtureVariables(Phase** /*vecPhase*/, const int& /*numberPhases*/) {};
+      virtual void computeMixtureVariables(Phase** /*vecPhase*/) {};
       virtual void internalEnergyToTotalEnergy(std::vector<QuantitiesAddPhys*>& /*vecGPA*/) {};
       virtual void totalEnergyToInternalEnergy(std::vector<QuantitiesAddPhys*>& /*vecGPA*/) {};
 

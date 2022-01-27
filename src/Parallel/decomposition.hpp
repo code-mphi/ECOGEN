@@ -30,11 +30,6 @@
 #ifndef INCLUDED_DECOMP_HPP
 #define INCLUDED_DECOMP_HPP
 
-//! \file      decomposition.hpp
-//! \author    B. Dorschner, K. Schmidmayer
-//! \version   1.1
-//! \date      June 5 2019
-
 #include <algorithm>
 #include <numeric>
 #include <functional>

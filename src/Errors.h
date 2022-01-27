@@ -38,6 +38,10 @@
 #include <sstream>
 #include <cassert>
 #include <vector>
+#include <cmath>
+#include <list>
+#include <string>
+#include <algorithm>
 
 //! \brief     Enumeration for the type of error (warning, error)
 enum TypeError { WARNING = 0, ERROR = 1 };
@@ -83,7 +87,7 @@ public:
 
   //Accessor
   int getState();
-
+  
   static constexpr int defaultInt = 0;
   static constexpr int defaultIntNeg = -1;
   static constexpr double defaultDouble = 0.;
@@ -201,6 +205,34 @@ private:
   int m_lineNumber;
   std::string m_sourceFile;
   std::string m_fileXML;
+};
+
+//---------------------------------------------------------------
+
+class ErrorXMLMessage : public ErrorXML
+{
+public:
+  //***************
+  ErrorXMLMessage(std::string message = "", std::string fileXML = "", const char* sourceFile = "", int lineNumber = -1) :
+    ErrorXML(fileXML, sourceFile, lineNumber), m_message(message){}
+  virtual ~ErrorXMLMessage() throw(){}
+  //***************
+  virtual const char* what(void) const throw()
+  {
+    return "Exception on XML file: input files are not compatible";
+  }
+  //***************
+  virtual std::string additionalInfo(void) const throw()
+  {
+    std::stringstream message;
+    message << " details: " << m_message << std::endl;
+    return message.str();
+  }
+  //***************
+  std::string message() const throw () { return m_message; }
+  //***************
+private:
+  std::string m_message;
 };
 
 //---------------------------------------------------------------

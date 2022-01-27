@@ -35,18 +35,19 @@ using namespace tinyxml2;
 
 //***************************************************************
 
-OutputCutGNU::OutputCutGNU(std::string casTest, std::string run, XMLElement* element, std::string fileName, TypeGO type, Input *entree)
+OutputCutGNU::OutputCutGNU(std::string casTest, std::string run, XMLElement* element, std::string fileName, TypeGO type, Input *entree) : 
+  OutputGNU(element)
 {
   try {
     //Modification des attributs
-    m_ecritBinaire = false;
+    m_writeBinary = false;
     m_simulationName = casTest;
     if (type == LINE) { m_fileNameResults = "cut1D"; }
     else if (type == PLAN) { m_fileNameResults = "cut2D"; }
     else { throw ErrorECOGEN("OutputCutGNU::OutputCutGNU : type de cut inconnu", __FILE__, __LINE__); }
-    m_fileNameVisu = "visualization" + m_fileNameResults + ".gnu";
+    m_fileNameVisu = "plot_" + m_fileNameResults + ".gnu";
     m_folderOutput = config.getWorkFolder() + "results/" + run + "/cuts/";
-    m_donneesSeparees = 0;
+    m_splitData = 0;
     m_numFichier = 0;
     m_input = entree;
     m_run = m_input->getRun();
@@ -94,21 +95,22 @@ OutputCutGNU::~OutputCutGNU()
 
 //***********************************************************************
 
-void OutputCutGNU::ecritSolution(Mesh *mesh, std::vector<Cell*>* cellsLvl)
+void OutputCutGNU::writeResults(Mesh *mesh, std::vector<Cell*>* cellsLvl)
 {
   std::ofstream fileStream;
-  std::string file = m_folderOutput + creationNameFichierGNU(m_fileNameResults.c_str(), -1, rankCpu, m_numFichier);
+  std::string file = m_folderOutput + createFilenameGNU(m_fileNameResults.c_str(), -1, rankCpu, m_numFichier);
   fileStream.open(file.c_str());
-  mesh->ecritSolutionGnuplot(cellsLvl, fileStream, m_objet);
+  if (m_precision != 0) fileStream.precision(m_precision);
+  mesh->writeResultsGnuplot(cellsLvl, fileStream, m_objet);
   fileStream << std::endl;
   fileStream.close();
 
   try {
-    //Creation du file gnuplot pour visualization des resultats
+    //Create Gnuplot file to plot results
     if (rankCpu == 0) {
       if (m_objet->getType() == LINE) { ecritScriptGnuplot(1); }
       else if (m_objet->getType() == PLAN) { ecritScriptGnuplot(2); }
-      else { throw ErrorECOGEN("OutputCutGNU::ecritSolutionSpecifique : type de cut inconnu", __FILE__, __LINE__); }
+      else { throw ErrorECOGEN("OutputCutGNU::writeResultsSpecifique : type de cut inconnu", __FILE__, __LINE__); }
     }
   }
   catch (ErrorECOGEN &) { throw; }

@@ -3,7 +3,7 @@
   <run>pressureVelocityEq2Dgravity</run>
   <outputMode format="XML" binary="false"/>
   <timeControlMode iterations="true">
-<iterations number="10" iterFreq="10"/>
+  <iterations number="10" iterFreq="10"/>
     <physicalTime timeFreq="0.04" totalTime="0.4"/>
   </timeControlMode>
   <computationControl CFL="0.8"/>

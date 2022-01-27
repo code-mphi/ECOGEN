@@ -31,10 +31,6 @@
 #ifndef FACE_H
 #define FACE_H
 
-#include <cmath>
-#include <algorithm>
-#include <iostream>
-#include <vector>
 #include "../Maths/Coord.h"
 #include "../Errors.h"
 

@@ -49,7 +49,7 @@ class QuantitiesAddPhys
     //! \brief     Compute the needed quantities for the additional physic
     //! \param     cell                 corresponding cell
     virtual void computeQuantities(Cell* /*cell*/) { Errors::errorMessage("computeQuantities not implemented for used quantities of additional physics"); };
-    //! \brief     Compute and send back mass energie linked to the physic (0 if no linked energy)
+    //! \brief     Compute and send back mass energy linked to the physic (0 if no linked energy)
     double computeEnergyAddPhys();
 
     //Accessors for the different gradients
@@ -96,7 +96,7 @@ class QuantitiesAddPhys
 extern std::vector<Variable> variableNameSurfTens;  //!< Variable name of the corresponding gradient
 extern std::vector<int> numPhaseSurfTens;           //!< Number of the phase (here transport)
 extern std::vector<Variable> variableNamesVisc;     //!< Variable names of the corresponding gradients
-extern std::vector<int> numPhasesVisc;              //!< Number of the phase (-1 for viscosity: works on mixture)
+extern std::vector<int> numPhasesVisc;              //!< Number of the phase (0: for Euler compatibility and not used for multiphase models)
 extern std::vector<Variable> variableNamesCond;     //!< Variable names of the corresponding gradients
 extern std::vector<int> numPhasesCond;              //!< Number of the phase
 

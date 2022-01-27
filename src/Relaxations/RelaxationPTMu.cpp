@@ -50,7 +50,7 @@ RelaxationPTMu::~RelaxationPTMu(){}
 
 //***********************************************************************
 
-void RelaxationPTMu::relaxation(Cell* cell, const int& numberPhases, const double& /*dt*/, Prim type)
+void RelaxationPTMu::relaxation(Cell* cell, const double& /*dt*/, Prim type)
 {
  	Phase* phase(0);
 
@@ -65,10 +65,9 @@ void RelaxationPTMu::relaxation(Cell* cell, const int& numberPhases, const doubl
 		TB->pk[k] = phase->getPressure();
 		TB->rhok[k] = phase->getDensity();
 		pStar += TB->ak[k] * TB->pk[k];
-    phase->verifyAndCorrectPhase();
 		//phase->verifyPhase();
 	}
-	//cell->extendedCalculus(numberPhases);
+	//cell->extendedCalculus();
 	double rho = cell->getMixture()->getDensity();
 	double rhoe = rho * cell->getMixture()->getEnergy();
 

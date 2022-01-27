@@ -28,7 +28,6 @@
 //  along with ECOGEN (file LICENSE).  
 //  If not, see <http://www.gnu.org/licenses/>.
 
-#include <cmath>
 #include "MixPUEq.h"
 
 using namespace tinyxml2;

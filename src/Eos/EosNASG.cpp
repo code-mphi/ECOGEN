@@ -28,8 +28,6 @@
 //  along with ECOGEN (file LICENSE).  
 //  If not, see <http://www.gnu.org/licenses/>.
 
-#include <cmath>
-#include <algorithm>
 #include "EosNASG.h"
 
 using namespace std;
@@ -65,47 +63,60 @@ void EosNASG::assignParametersEos(std::string name, std::vector<double> paramete
     m_sRef  = parametersEos[5];
 }
 
-
 //Constant methods
 //****************
 double EosNASG::computeTemperature(const double& density, const double& pressure) const
 {
-  return (pressure+m_pInf)*(1.-density*m_b)/(m_gamma-1.)/m_cv/std::max(density, epsilonAlphaNull);
+  return (pressure+m_pInf) * std::max(1. - density * m_b, epsilonAlphaNull) / (m_gamma-1.) / m_cv / std::max(density, epsilonAlphaNull);
 }
 
 //***********************************************************************
 
 double EosNASG::computeEnergy(const double& density, const double& pressure) const
 {
-  return (pressure+m_gamma*m_pInf)*(1.-density*m_b)/(m_gamma-1.)/std::max(density, epsilonAlphaNull) + m_eRef;
+  return (pressure+m_gamma*m_pInf) * std::max(1. - density * m_b, epsilonAlphaNull) / (m_gamma-1.) / std::max(density, epsilonAlphaNull) + m_eRef;
 }
 
 //***********************************************************************
 
 double EosNASG::computePressure(const double& density, const double& energy) const
 {
-  return (density*(m_gamma-1.)*(energy-m_eRef)/std::max((1.-density*m_b), epsilonAlphaNull) - m_gamma*m_pInf);
+  return (density*(m_gamma-1.)*(energy-m_eRef) / std::max(1. - density * m_b, epsilonAlphaNull) - m_gamma*m_pInf);
 }
 
 //***********************************************************************
 
 double EosNASG::computeDensity(const double& pressure, const double& temperature) const
 {
-  return (pressure + m_pInf)/std::max((m_gamma-1.)*m_cv*temperature + m_b*(pressure + m_pInf), epsilonAlphaNull);
+  return (pressure + m_pInf) / std::max((m_gamma-1.)*m_cv*temperature + m_b*(pressure + m_pInf), epsilonAlphaNull);
 }
 
 //***********************************************************************
 
 double EosNASG::computeSoundSpeed(const double& density, const double& pressure) const
 {
-  return sqrt(m_gamma*(pressure+m_pInf) / std::max(density*(1.-density*m_b), epsilonAlphaNull));
+  return sqrt(m_gamma*(pressure+m_pInf) / std::max(density * (1. - density * m_b), epsilonAlphaNull));
 }
 
 //***********************************************************************
 
 double EosNASG::computeInterfaceSoundSpeed(const double& density, const double& interfacePressure, const double& pressure) const
 {
-  return sqrt(((m_gamma - 1.) * interfacePressure + pressure + m_gamma * m_pInf) / std::max(density*(1.-density*m_b), epsilonAlphaNull));
+  return sqrt(((m_gamma - 1.) * interfacePressure + pressure + m_gamma * m_pInf) / std::max(density * (1. - density * m_b), epsilonAlphaNull));
+}
+
+//***********************************************************************
+
+double EosNASG::computeAcousticImpedance(const double& density, const double& pressure) const
+{
+  return sqrt(density * m_gamma * (pressure + m_pInf) / std::max(1. - density * m_b, epsilonAlphaNull));
+}
+
+//***********************************************************************
+
+double EosNASG::computeDensityTimesInterfaceSoundSpeedSquare(const double& density, const double& interfacePressure, const double& pressure) const
+{
+  return ((m_gamma - 1.) * interfacePressure + pressure + m_gamma * m_pInf) / std::max(1. - density * m_b, epsilonAlphaNull);
 }
 
 //***********************************************************************
@@ -119,22 +130,22 @@ double EosNASG::computeEntropy(const double& temperature, const double& pressure
 
 double EosNASG::computePressureIsentropic(const double& initialPressure, const double& initialDensity, const double& finalDensity) const
 {
-  return (initialPressure+m_pInf)*std::pow(finalDensity/std::max(initialDensity, epsilonAlphaNull),m_gamma)*std::pow((1.-initialDensity*m_b)/std::max(1.-finalDensity*m_b,epsilonAlphaNull),m_gamma)-m_pInf;
+  return (initialPressure + m_pInf) * std::pow(finalDensity / std::max(initialDensity, epsilonAlphaNull), m_gamma) * std::pow((1. - initialDensity * m_b) / (1. - finalDensity * m_b), m_gamma) - m_pInf;
 }
 
 //***********************************************************************
 
 double EosNASG::computePressureHugoniot(const double& initialPressure, const double& initialDensity, const double& finalDensity) const
 {
-  return ((initialDensity*(2.*m_gamma*m_pInf+initialPressure*(m_gamma-1.))-finalDensity*(2.*m_gamma*m_pInf+initialPressure*(m_gamma+1.))+2.*m_b*initialDensity*initialPressure)/std::max(finalDensity*(m_gamma-1.)-initialDensity*(m_gamma+1.)+2.*m_b*initialDensity,epsilonAlphaNull));
+  return (initialDensity*(2.*m_gamma*m_pInf+initialPressure*(m_gamma-1.)) - finalDensity*(2.*m_gamma*m_pInf+initialPressure*(m_gamma+1.)) + 2.*m_b*initialDensity*initialPressure) / TB->returnNonZeroValue(finalDensity*(m_gamma-1.) - initialDensity*(m_gamma+1.) + 2.*m_b*initialDensity);
 }
 
 //***********************************************************************
 
 double EosNASG::computeDensityIsentropic(const double& initialPressure, const double& initialDensity, const double& finalPressure, double* drhodp) const
 {
-  double finalDensity(initialDensity*std::pow(finalPressure + m_pInf, 1./m_gamma)/std::max(std::pow(initialPressure+m_pInf, 1./m_gamma)*(1.-initialDensity*m_b)+initialDensity*m_b*std::pow(finalPressure+m_pInf, 1./m_gamma), epsilonAlphaNull));
-  if (drhodp != NULL) *drhodp = finalDensity*(1-finalDensity*m_b)/std::max((m_gamma*(finalPressure+m_pInf)), epsilonAlphaNull);
+  double finalDensity(initialDensity * std::pow(finalPressure + m_pInf, 1./m_gamma) / TB->returnNonZeroValue(std::pow(initialPressure+m_pInf, 1./m_gamma) * (1.-initialDensity*m_b) + initialDensity*m_b*std::pow(finalPressure+m_pInf, 1./m_gamma)));
+  if (drhodp != NULL) *drhodp = finalDensity*(1-finalDensity*m_b) / std::max((m_gamma*(finalPressure+m_pInf)), epsilonAlphaNull);
   return finalDensity;
 }
 
@@ -144,8 +155,8 @@ double EosNASG::computeDensityHugoniot(const double& initialPressure, const doub
 {
   double num((m_gamma+1.)*(finalPressure+m_pInf)+ (m_gamma - 1.)*(initialPressure + m_pInf));
   double denom((m_gamma - 1.)*(finalPressure + m_pInf) + (m_gamma + 1.)*(initialPressure + m_pInf)+2.*m_b*initialDensity*(finalPressure-initialPressure));
-  double finalDensity(initialDensity*num/std::max(denom, epsilonAlphaNull));
-  if (drhodp != NULL) *drhodp = initialDensity*4.*(m_gamma)*(initialPressure+m_pInf)*(1.-m_b*initialDensity)/std::max((denom*denom), epsilonAlphaNull);
+  double finalDensity(initialDensity*num / TB->returnNonZeroValue(denom));
+  if (drhodp != NULL) *drhodp = initialDensity*4.*(m_gamma)*(initialPressure+m_pInf)*(1.-m_b*initialDensity) / TB->returnNonZeroValue(denom * denom);
   return finalDensity;
 }
 
@@ -155,8 +166,8 @@ double EosNASG::computeDensityPfinal(const double& initialPressure, const double
 {
   double num((m_gamma)*(finalPressure + m_pInf));
   double denom(num + initialPressure - finalPressure + m_b*initialDensity*(finalPressure-initialPressure));
-  double finalDensity(initialDensity*num/std::max(denom, epsilonAlphaNull));
-  if (drhodp != NULL) *drhodp = initialDensity*m_gamma*(initialPressure + m_pInf - m_b*initialDensity*(initialPressure+m_pInf)) / std::max((denom*denom), epsilonAlphaNull);
+  double finalDensity(initialDensity*num / TB->returnNonZeroValue(denom));
+  if (drhodp != NULL) *drhodp = initialDensity*m_gamma*(initialPressure + m_pInf - m_b*initialDensity*(initialPressure+m_pInf)) / TB->returnNonZeroValue(denom * denom);
   return finalDensity;
 }
 
@@ -180,7 +191,7 @@ double EosNASG::computeDensitySaturation(const double& pressure, const double& T
     *drhodp = (m_gamma - 1.)*m_cv*Tsat - (pressure + m_pInf)*(m_gamma - 1.)*m_cv*dTsatdP;
     *drhodp /= std::max((((m_gamma - 1.)*m_cv*Tsat + m_b*(pressure + m_pInf))*((m_gamma - 1.)*m_cv*Tsat + m_b*(pressure + m_pInf))), epsilonAlphaNull);
   }
-  rho = (pressure + m_pInf)/std::max(((m_gamma - 1.)*m_cv*Tsat + m_b*(pressure + m_pInf)), epsilonAlphaNull);
+  rho = (pressure + m_pInf) / std::max(((m_gamma - 1.)*m_cv*Tsat + m_b*(pressure + m_pInf)), epsilonAlphaNull);
   return rho;
 }
 
@@ -215,7 +226,7 @@ double EosNASG::vfpfh(const double& pressure, const double& enthalpy) const
 
 double EosNASG::dvdpch(const double& pressure, const double& enthalpy) const
 {
-  return (-(m_gamma-1.)/m_gamma/((pressure + m_pInf)*(pressure + m_pInf))*(m_b*(pressure+m_pInf) + enthalpy - m_b*pressure - m_eRef));
+  return (-(m_gamma-1.) / m_gamma / std::max(((pressure + m_pInf)*(pressure + m_pInf)), epsilonAlphaNull) * (m_b*(pressure+m_pInf) + enthalpy - m_b*pressure - m_eRef));
 }
 
 //***********************************************************************
@@ -245,6 +256,25 @@ void EosNASG::verifyPressure(const double& pressure, const std::string& message)
 void EosNASG::verifyAndModifyPressure(double& pressure) const
 {
   if (pressure <= -(1. - 1.e-15)*m_pInf + 1.e-15) pressure = -(1. - 1.e-15)*m_pInf + 1.e-15;
+}
+
+//***********************************************************************
+
+void EosNASG::verifyAndCorrectDensityMax(const double& mass, double& alpha, double& density) const
+{
+  if (density > 1. / m_b - 1.) {
+    density = 1. / m_b - 1.;
+    alpha = mass / density;
+  }
+}
+
+//***********************************************************************
+
+void EosNASG::verifyAndCorrectDensityMax(double& density) const
+{
+  if (density > 1. / m_b - 1.) {
+    density = 1. / m_b - 1.;
+  }
 }
 
 //***********************************************************************

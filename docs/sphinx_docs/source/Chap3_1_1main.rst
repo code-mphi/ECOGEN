@@ -13,7 +13,7 @@ MainV5.xml
 	<?xml version = "1.0" encoding = "UTF-8" standalone = "yes"?>
 	<computationParam>
 	  <run>example</run>
-	  <outputMode format="XML" binary="false" precision="10"/>
+	  <outputMode format="XML" binary="false"/>
 	  <timeControlMode iterations="false">
 	    <iterations number="3" iterFreq="1"/>
 	    <physicalTime totalTime="8.e-3" timeFreq="8.e-4"/>
@@ -39,12 +39,14 @@ Output format
 
 .. code-block:: xml
 
-	<outputMode format="XML" binary="false" precision="10"/>
+	<outputMode format="XML" binary="false" precision="10" reducedOutput="true"/>
 
 The :xml:`<outputMode>` markup is mandatory. The user can choose the writing output format. Attributes are:
 
 - :xml:`format`: Can take the value *GNU* (standard writing in column) or *XML* (XML VTK format).
 - :xml:`binary`: Can take the value true or false. *Binary* (true) or *ASCII* (false) format can be chosen.
+- :xml:`precision`: Optional attribute. Precision of output files (number of digits). If not precised, set as default.
+- :xml:`reducedOutput`: Optional attribute. Reduced number of output variables when possible (depends on the model). Only available for velocity and pressure-velocity equilibrium model. Can take the value true or false. If not precised, default is false (complete output).
 
 Output result files will be placed in the folder **ECOGEN/results/** into a specific subfolder bearing the name of the run.
 

@@ -34,11 +34,13 @@ using namespace tinyxml2;
 
 //***********************************************************************
 
-Run::Run(std::string nameCasTest, const int& number) : m_numTest(number), m_simulationName(nameCasTest), m_numberTransports(0),
-  m_MRF(-1), m_dt(1.e-15), m_physicalTime(0.), m_iteration(0), m_restartSimulation(0), m_restartAMRsaveFreq(0)
+Run::Run(std::string nameCasTest, const int& number) : m_numTest(number), m_simulationName(nameCasTest), m_numberEos(0),
+  m_numberTransports(0), m_MRF(-1), m_smoothCrossSection1d(false), m_dt(1.e-15), m_physicalTime(0.), m_iteration(0), 
+  m_restartSimulation(0), m_restartAMRsaveFreq(0)
 {
   m_mesh = nullptr;
   m_model = nullptr;
+  m_gradient = nullptr;
   m_cellsLvl = nullptr;
   m_cellsLvlGhost = nullptr;
   m_cellInterfacesLvl = nullptr;
@@ -69,10 +71,10 @@ void Run::initialize()
   std::vector<BoundCond*> boundCond;
   try {
     m_input = new Input(this);
-    m_input->lectureInputXML(domains, boundCond);
+    m_input->readInputXML(domains, boundCond);
   }
   catch (ErrorXML &) { throw; }
-  TB = new Tools(m_numberPhases);
+  TB = new Tools(m_numberPhases, m_numberTransports);
 
   //2) Initialization of parallel computing (also needed for 1 CPU)
   //---------------------------------------------------------------
@@ -90,15 +92,20 @@ void Run::initialize()
   m_cellInterfacesLvl = new TypeMeshContainer<CellInterface*>[m_lvlMax + 1];
   try {
     if (m_restartSimulation > 0) {
-      if (rankCpu == 0) std::cout << "T" << m_numTest << " | Restarting simulation from result file number: " << m_restartSimulation << "..." ;
-      m_outPut->readInfos();
-      if (m_mesh->getType() == AMR) {
-        if (m_restartSimulation % m_restartAMRsaveFreq == 0) {
-          m_outPut->readDomainDecompostion(m_mesh);
+      if (m_outPut->getType() == TypeOutput::XML) {
+        if (rankCpu == 0) std::cout << "T" << m_numTest << " | Restarting simulation from result file number: " << m_restartSimulation << "..." << std::endl;
+        m_outPut->readInfos();
+        if (m_mesh->getType() == AMR) {
+          if (m_restartSimulation % m_restartAMRsaveFreq == 0) {
+            m_outPut->readDomainDecompostion(m_mesh);
+          }
+          else {
+            Errors::errorMessage("Run::restartSimulation: Restart files not available");
+          }
         }
-        else {
-          Errors::errorMessage("Run::restartSimulation: Restart files not available");
-        }
+      }
+      else {
+        Errors::errorMessage("Run::restartSimulation: Restart option only available for XML output");
       }
     }
     m_dimension = m_mesh->initializeGeometrie(m_cellsLvl[0], m_cellsLvlGhost[0], m_cellInterfacesLvl[0], m_restartSimulation, m_parallelPreTreatment, m_order);
@@ -107,49 +114,47 @@ void Run::initialize()
 
   //4) Main array initialization using model and phase number
   //---------------------------------------------------------
-  for (unsigned int i = 0; i < m_cellsLvl[0].size(); i++) { m_cellsLvl[0][i]->allocate(m_numberPhases, m_numberTransports, m_addPhys, m_model); }
-  for (unsigned int i = 0; i < m_cellsLvlGhost[0].size(); i++) { m_cellsLvlGhost[0][i]->allocate(m_numberPhases, m_numberTransports, m_addPhys, m_model); }
-  //Attribution model and slopes to faces
-  for (int i = 0; i < m_mesh->getNumberFaces(); i++) { m_cellInterfacesLvl[0][i]->associeModel(m_model); }
+  m_cellsLvl[0][0]->associateExtVar(m_model, m_gradient);    //Associate external variables (model, gradient method)
+  for (unsigned int i = 0; i < m_cellsLvl[0].size(); i++) { m_cellsLvl[0][i]->allocate(m_addPhys); }
+  for (unsigned int i = 0; i < m_cellsLvlGhost[0].size(); i++) { m_cellsLvlGhost[0][i]->allocate(m_addPhys); }
 
   //5) Physical data initialization: filling fluid states
   //-----------------------------------------------------
   for (unsigned int i = 0; i < m_cellsLvl[0].size(); i++) { m_cellsLvl[0][i]->fill(domains, m_lvlMax); }
   for (unsigned int i = 0; i < m_cellsLvlGhost[0].size(); i++) { m_cellsLvlGhost[0][i]->fill(domains, m_lvlMax); }
   //EOS filling
-  m_cellsLvl[0][0]->allocateEos(m_numberPhases, m_model);
+  m_cellsLvl[0][0]->allocateEos();
   //Complete fluid state with additional calculations (sound speed, energies, mixture variables, etc.)
   for (unsigned int i = 0; i < m_cellsLvl[0].size(); i++) { m_cellsLvl[0][i]->completeFulfillState(); }
 
   //6) Allocate Sloped and buffer Cells for Riemann problems
   //--------------------------------------------------------
   int allocateSlopeLocal = 0;
-  for (int i = 0; i < m_mesh->getNumberFaces(); i++) { m_cellInterfacesLvl[0][i]->allocateSlopes(m_numberPhases, m_numberTransports, allocateSlopeLocal); }
-  cellLeft = new Cell; cellRight = new Cell;
-  cellLeft->allocate(m_numberPhases, m_numberTransports, m_addPhys, m_model);
-  cellRight->allocate(m_numberPhases, m_numberTransports, m_addPhys, m_model);
-  domains[0]->fillIn(cellLeft, m_numberPhases, m_numberTransports);
-  domains[0]->fillIn(cellRight, m_numberPhases, m_numberTransports);
+  for (int i = 0; i < m_mesh->getNumberFaces(); i++) { m_cellInterfacesLvl[0][i]->allocateSlopes(allocateSlopeLocal); }
+  bufferCellLeft = new Cell; bufferCellRight = new Cell;
+  bufferCellLeft->allocate(m_addPhys);
+  bufferCellRight->allocate(m_addPhys);
+  domains[0]->fillIn(bufferCellLeft);
+  domains[0]->fillIn(bufferCellRight);
 
   //7) Intialization of persistant communications for parallel computing
   //--------------------------------------------------------------------
-  m_mesh->initializePersistentCommunications(m_numberPhases, m_numberTransports, m_cellsLvl[0], m_order);
+  m_mesh->initializePersistentCommunications(m_cellsLvl[0], m_order);
   if (Ncpu > 1) { parallel.communicationsPrimitives(m_eos, 0); }
   
   //8) AMR initialization
   //---------------------
-  m_mesh->procedureRaffinementInitialization(m_cellsLvl, m_cellsLvlGhost, m_cellInterfacesLvl, m_addPhys, m_model,
-    m_nbCellsTotalAMR, domains, m_eos, m_restartSimulation, m_order, m_numberPhases, m_numberTransports);
+  m_mesh->procedureRaffinementInitialization(m_cellsLvl, m_cellsLvlGhost, m_cellInterfacesLvl, m_addPhys, m_nbCellsTotalAMR, domains, m_eos, m_restartSimulation, m_order);
 
   for (unsigned int d = 0; d < domains.size(); d++) { delete domains[d]; }
 
   //9) Output file preparation
   //--------------------------
-  m_outPut->prepareOutput(*cellLeft);
-  for (unsigned int c = 0; c < m_cuts.size(); c++) m_cuts[c]->prepareOutput(*cellLeft);
-  for (unsigned int p = 0; p < m_probes.size(); p++) m_probes[p]->prepareOutput(*cellLeft);
-  for (unsigned int g = 0; g < m_globalQuantities.size(); g++) m_globalQuantities[g]->prepareOutput(*cellLeft);
-  for (unsigned int b = 0; b < m_recordBoundariesFlux.size(); b++) m_recordBoundariesFlux[b]->prepareOutput(m_cellInterfacesLvl);
+  m_outPut->initializeOutput(*bufferCellLeft);
+  for (unsigned int c = 0; c < m_cuts.size(); c++) m_cuts[c]->initializeOutput(*bufferCellLeft);
+  for (unsigned int p = 0; p < m_probes.size(); p++) m_probes[p]->initializeOutput(*bufferCellLeft);
+  for (unsigned int g = 0; g < m_globalQuantities.size(); g++) m_globalQuantities[g]->initializeOutput(*bufferCellLeft);
+  for (unsigned int b = 0; b < m_recordBoundaries.size(); b++) m_recordBoundaries[b]->initializeOutput(m_cellInterfacesLvl);
 
   //10) Restart simulation
   //----------------------
@@ -183,15 +188,14 @@ void Run::initialize()
       // m_massWanted = 0.9*m_massWanted; //Percentage of the initial mass we want
       // m_alphaWanted = 0.;
       //-----
-      m_outPut->prepareOutputInfos();
-      if (rankCpu == 0) m_outPut->ecritInfos();
+      m_outPut->initializeOutputInfos();
+      if (rankCpu == 0) m_outPut->writeInfos();
       m_outPut->saveInfosMailles();
       if (m_mesh->getType() == AMR) m_outPut->printTree(m_mesh, m_cellsLvl, m_restartAMRsaveFreq);
-      for (unsigned int c = 0; c < m_cuts.size(); c++) m_cuts[c]->ecritSolution(m_mesh, m_cellsLvl);
-      for (unsigned int p = 0; p < m_probes.size(); p++) { if (m_probes[p]->possesses()) m_probes[p]->ecritSolution(m_mesh, m_cellsLvl); }
-      for (unsigned int g = 0; g < m_globalQuantities.size(); g++) { m_globalQuantities[g]->ecritSolution(m_mesh, m_cellsLvl); }
-      for (unsigned int b = 0; b < m_recordBoundariesFlux.size(); b++) { m_recordBoundariesFlux[b]->ecritSolution(m_cellInterfacesLvl); }
-      m_outPut->ecritSolution(m_mesh, m_cellsLvl);
+      for (unsigned int c = 0; c < m_cuts.size(); c++) m_cuts[c]->writeResults(m_mesh, m_cellsLvl);
+      for (unsigned int p = 0; p < m_probes.size(); p++) { if (m_probes[p]->possesses()) m_probes[p]->writeResults(m_mesh, m_cellsLvl); }
+      for (unsigned int g = 0; g < m_globalQuantities.size(); g++) { m_globalQuantities[g]->writeResults(m_mesh, m_cellsLvl); }
+      m_outPut->writeResults(m_mesh, m_cellsLvl);
       Errors::prepareErrorFiles(m_outPut->getFolderOutput());
     }
     catch (ErrorXML &) { throw; }
@@ -205,11 +209,11 @@ void Run::restartSimulation()
 {
   std::ifstream fileStream;
 
-  //Reconstruct the mesh and get physical data from restart point
+  //Reconstruct the AMR mesh if any and get physical data from restart point
   try {
     if (m_mesh->getType() == AMR) {
       if (m_restartSimulation % m_restartAMRsaveFreq == 0) {
-        m_outPut->readTree(m_mesh, m_cellsLvl, m_cellsLvlGhost, m_cellInterfacesLvl, m_addPhys, m_model, m_nbCellsTotalAMR);
+        m_outPut->readTree(m_mesh, m_cellsLvl, m_cellsLvlGhost, m_cellInterfacesLvl, m_addPhys, m_nbCellsTotalAMR);
       }
     }
     m_outPut->readResults(m_mesh, m_cellsLvl);
@@ -218,26 +222,18 @@ void Run::restartSimulation()
   fileStream.close();
 
   //Communicate physical data between processors and complete fluid state with additional calculations (sound speed, energies, mixture variables, etc.)
+  for (int lvl = 0; lvl <= m_lvlMax; lvl++) {
+    for (unsigned int i = 0; i < m_cellsLvl[lvl].size(); i++) { m_cellsLvl[lvl][i]->fulfillStateRestart(); }
+  }
   if (Ncpu > 1) {
     for (int lvl = 0; lvl <= m_lvlMax; lvl++) {
       parallel.communicationsPrimitives(m_eos, lvl);
       parallel.communicationsTransports(lvl);
     }
   }
-  for (int lvl = 0; lvl <= m_lvlMax; lvl++) { //With reduced output //KS//FP// To implement dynamically
-    for (unsigned int i = 0; i < m_cellsLvl[lvl].size(); i++) { m_cellsLvl[lvl][i]->completeFulfillState(restart); }
+  for (int lvl = 0; lvl <= m_lvlMax; lvl++) {
+    for (unsigned int i = 0; i < m_cellsLvl[lvl].size(); i++) { m_cellsLvl[lvl][i]->completeFulfillState(); }
   }
-  // for (int lvl = 0; lvl <= m_lvlMax; lvl++) { //With complete output //KS//FP// To implement dynamically
-  //   for (unsigned int i = 0; i < m_cellsLvl[lvl].size(); i++) { m_cellsLvl[lvl][i]->fulfillState(restart); }
-  //   if (m_numberAddPhys) {
-  //       for (unsigned int i = 0; i < m_cellsLvl[lvl].size(); i++) { if (!m_cellsLvl[lvl][i]->getSplit()) { m_cellsLvl[lvl][i]->prepareAddPhys(); } }
-  //       if (Ncpu > 1) {
-  //         m_stat.startCommunicationTime();
-  //         for (unsigned int pa = 0; pa < m_addPhys.size(); pa++) { m_addPhys[pa]->communicationsAddPhys(m_numberPhases, m_dimension, lvl); }
-  //         m_stat.endCommunicationTime();
-  //       }
-  //   }
-  // }
   if (m_mesh->getType() == AMR) {
     for (int lvl = 0; lvl < m_lvlMax; lvl++) {
       for (unsigned int i = 0; i < m_cellsLvl[lvl].size(); i++) { m_cellsLvl[lvl][i]->averageChildrenInParent(); }
@@ -246,7 +242,6 @@ void Run::restartSimulation()
   if (Ncpu > 1) {
     for (int lvl = 0; lvl <= m_lvlMax; lvl++) { parallel.communicationsPrimitives(m_eos, lvl); }
   }
-  //KS//FP//DEV// Apparemment fulfillState avec Prim::restart n'est pas a jour dans tous les modeles (seulement pour PUEq)
 
   if (rankCpu == 0) std::cout << " OK" << std::endl;
 }
@@ -273,7 +268,7 @@ void Run::solver()
     //------------------- INTEGRATION PROCEDURE -------------------
 
     //Setting cons variable to zero for spatial scheme on dU/dt: no need for time step at this point
-    for (unsigned int i = 0; i < m_cellsLvl[0].size(); i++) { m_cellsLvl[0][i]->setToZeroConsGlobal(m_numberPhases, m_numberTransports); }
+    for (unsigned int i = 0; i < m_cellsLvl[0].size(); i++) { m_cellsLvl[0][i]->setToZeroConsGlobal(); }
     dtMax = 1.e10;
     int lvlDep = 0;
     this->integrationProcedure(m_dt, lvlDep, dtMax, m_nbCellsTotalAMR);
@@ -330,25 +325,25 @@ void Run::solver()
       // } while (mass < 0.999*m_massWanted && m_alphaWanted > 0.001);
       // if (m_alphaWanted < 1.e-10) m_alphaWanted = 0.;
       //-----
-      if (rankCpu == 0) m_outPut->ecritInfos();
+      if (rankCpu == 0) m_outPut->writeInfos();
       m_outPut->saveInfosMailles();
       if (m_mesh->getType() == AMR) m_outPut->printTree(m_mesh, m_cellsLvl, m_restartAMRsaveFreq);
-      for (unsigned int c = 0; c < m_cuts.size(); c++) { m_cuts[c]->ecritSolution(m_mesh, m_cellsLvl); }
-      for (unsigned int g = 0; g < m_globalQuantities.size(); g++) { m_globalQuantities[g]->ecritSolution(m_mesh, m_cellsLvl); }
-      m_outPut->ecritSolution(m_mesh, m_cellsLvl);
+      for (unsigned int c = 0; c < m_cuts.size(); c++) { m_cuts[c]->writeResults(m_mesh, m_cellsLvl); }
+      for (unsigned int g = 0; g < m_globalQuantities.size(); g++) { m_globalQuantities[g]->writeResults(m_mesh, m_cellsLvl); }
+      m_outPut->writeResults(m_mesh, m_cellsLvl);
       if (rankCpu == 0) std::cout << "OK" << std::endl;
       print = false;
 	}
     //Printing probes data
     for (unsigned int p = 0; p < m_probes.size(); p++) { 
-      if((m_probes[p]->possesses()) && m_probes[p]->getNextTime()<=m_physicalTime) m_probes[p]->ecritSolution(m_mesh, m_cellsLvl);
+      if((m_probes[p]->possesses()) && m_probes[p]->getNextTime()<=m_physicalTime) m_probes[p]->writeResults(m_mesh, m_cellsLvl);
     }
 
     //Printing boundary data
-    for (unsigned int b = 0; b < m_recordBoundariesFlux.size(); b++)
+    for (unsigned int b = 0; b < m_recordBoundaries.size(); b++)
     {
-      if (m_recordBoundariesFlux[b]->getNextTime() <= m_physicalTime)
-        m_recordBoundariesFlux[b]->ecritSolution(m_cellInterfacesLvl);
+      if (m_recordBoundaries[b]->getNextTime() <= m_physicalTime)
+        m_recordBoundaries[b]->writeResults(m_cellInterfacesLvl);
     }
 
     //-------------------------- TIME STEP UPDATING --------------------------
@@ -359,10 +354,8 @@ void Run::solver()
   MPI_Barrier(MPI_COMM_WORLD);
   if (m_mesh->getType() == AMR) {
     double localLoad(0.);
-    for (int lvl = m_lvlMax; lvl >= 0; lvl--) {
-      for (unsigned int i = 0; i < m_cellsLvl[0].size(); i++) {
-      m_cellsLvl[0][i]->computeLoad(localLoad, lvl);
-      }
+    for (unsigned int i = 0; i < m_cellsLvl[0].size(); i++) {
+      m_cellsLvl[0][i]->computeLoad(localLoad, 0);
     }
     std::cout << "T" << m_numTest << " | Final local load on CPU " << rankCpu << " : " << localLoad << std::endl;
   }
@@ -378,21 +371,24 @@ void Run::integrationProcedure(double& dt, int lvl, double& dtMax, int& nbCellsT
   //2) Refinement procedure
   if (m_lvlMax > 0) { 
     m_stat.startAMRTime();
-    m_mesh->procedureRaffinement(m_cellsLvl, m_cellsLvlGhost, m_cellInterfacesLvl, lvl, m_addPhys, m_model, nbCellsTotalAMR, m_eos);
-    if (Ncpu > 1) { if (lvl == 0) { if (m_iteration % (static_cast<int>(1./m_cfl/0.6) + 1) == 0) {
-      m_mesh->parallelLoadBalancingAMR(m_cellsLvl, m_cellsLvlGhost, m_cellInterfacesLvl, m_order, m_numberPhases, m_numberTransports, m_addPhys, m_model, m_eos, nbCellsTotalAMR);
-      for (unsigned int p = 0; p < m_probes.size(); p++) {
-        m_probes[p]->locateProbeInMesh(m_cellsLvl[0], m_mesh->getNumberCells()); //Locate new probes CPU after Load Balancing
+    m_mesh->procedureRaffinement(m_cellsLvl, m_cellsLvlGhost, m_cellInterfacesLvl, lvl, m_addPhys, nbCellsTotalAMR, m_eos);
+    if (Ncpu > 1) {
+      if (lvl == 0) {
+        if (m_iteration % (static_cast<int>(1./m_cfl/0.6) + 1) == 0) {
+          m_mesh->parallelLoadBalancingAMR(m_cellsLvl, m_cellsLvlGhost, m_cellInterfacesLvl, m_order, m_addPhys, m_eos, nbCellsTotalAMR);
+          for (unsigned int p = 0; p < m_probes.size(); p++) {
+            m_probes[p]->locateProbeInMesh(m_cellsLvl[0], m_mesh->getNumberCells()); //Locate new probes CPU after Load Balancing
+          }
+        }
       }
-    } } }
-
+    }
     m_stat.endAMRTime();
   }
 
   //3) Slopes determination for second order and gradients for additional physics
   //Fait ici pour avoir une mise a jour d'effectuer lors de l'execution de la procedure de niveau lvl+1 (donc pour les slopes plus besoin de les faire au debut de resolHyperboliqueO2)
   if (m_order == "SECONDORDER") {
-    for (unsigned int i = 0; i < m_cellInterfacesLvl[lvl].size(); i++) { if (!m_cellInterfacesLvl[lvl][i]->getSplit()) { m_cellInterfacesLvl[lvl][i]->computeSlopes(m_numberPhases, m_numberTransports); } }
+    for (unsigned int i = 0; i < m_cellInterfacesLvl[lvl].size(); i++) { if (!m_cellInterfacesLvl[lvl][i]->getSplit()) { m_cellInterfacesLvl[lvl][i]->computeSlopes(); } }
     if (Ncpu > 1) {
       m_stat.startCommunicationTime();
       parallel.communicationsSlopes(lvl);
@@ -405,7 +401,7 @@ void Run::integrationProcedure(double& dt, int lvl, double& dtMax, int& nbCellsT
       for (unsigned int i = 0; i < m_cellsLvl[lvl].size(); i++) { if (!m_cellsLvl[lvl][i]->getSplit()) { m_cellsLvl[lvl][i]->prepareAddPhys(); } }
       if (Ncpu > 1) {
         m_stat.startCommunicationTime();
-        for (unsigned int pa = 0; pa < m_addPhys.size(); pa++) { m_addPhys[pa]->communicationsAddPhys(m_numberPhases, m_dimension, lvl); }
+        for (unsigned int pa = 0; pa < m_addPhys.size(); pa++) { m_addPhys[pa]->communicationsAddPhys(m_dimension, lvl); }
         m_stat.endCommunicationTime();
       }
     }
@@ -419,7 +415,7 @@ void Run::integrationProcedure(double& dt, int lvl, double& dtMax, int& nbCellsT
   //6) Additional calculations for AMR levels > 0
   if (lvl > 0) {
     if (m_order == "SECONDORDER") {
-      for (unsigned int i = 0; i < m_cellInterfacesLvl[lvl].size(); i++) { if (!m_cellInterfacesLvl[lvl][i]->getSplit()) { m_cellInterfacesLvl[lvl][i]->computeSlopes(m_numberPhases, m_numberTransports); } }
+      for (unsigned int i = 0; i < m_cellInterfacesLvl[lvl].size(); i++) { if (!m_cellInterfacesLvl[lvl][i]->getSplit()) { m_cellInterfacesLvl[lvl][i]->computeSlopes(); } }
       if (Ncpu > 1) {
         m_stat.startCommunicationTime();
         parallel.communicationsSlopes(lvl);
@@ -469,6 +465,7 @@ void Run::advancingProcedure(double& dt, int& lvl, double& dtMax)
   // // std::cout << std::fixed;
   // // std::cout << std::setprecision(3) << "Total energy = " << totalEnergy << std::endl;
   // std::cout << std::setprecision(15) << "Iter = " << m_iteration << " ; Total energy = " << totalEnergy << " / " << internalEnergies + momentum << std::endl;
+  // if (isnan(totalEnergy) || isnan(internalEnergies + momentum)) exit(0);
   //-----
 }
 
@@ -478,23 +475,23 @@ void Run::solveHyperbolicO2(double& dt, int& lvl, double& dtMax)
 {
   //1) m_cons saves for AMR/second order combination
   //------------------------------------------------
-  for (unsigned int i = 0; i < m_cellsLvl[lvl].size(); i++) { if (!m_cellsLvl[lvl][i]->getSplit()) { m_cellsLvl[lvl][i]->saveCons(m_numberPhases, m_numberTransports); } }
+  for (unsigned int i = 0; i < m_cellsLvl[lvl].size(); i++) { if (!m_cellsLvl[lvl][i]->getSplit()) { m_cellsLvl[lvl][i]->saveCons(); } }
 
   //2) Spatial second order scheme
   //------------------------------
   //Fluxes are determined at each cells interfaces and stored in the m_cons variableof corresponding cells. Hyperbolic maximum time step determination
-  for (unsigned int i = 0; i < m_cellInterfacesLvl[lvl].size(); i++) { if (!m_cellInterfacesLvl[lvl][i]->getSplit()) { m_cellInterfacesLvl[lvl][i]->computeFlux(m_numberPhases, m_numberTransports, dtMax, *m_globalLimiter, *m_interfaceLimiter, *m_globalVolumeFractionLimiter, *m_interfaceVolumeFractionLimiter); } }
+  for (unsigned int i = 0; i < m_cellInterfacesLvl[lvl].size(); i++) { if (!m_cellInterfacesLvl[lvl][i]->getSplit()) { m_cellInterfacesLvl[lvl][i]->computeFlux(dtMax, *m_globalLimiter, *m_interfaceLimiter, *m_globalVolumeFractionLimiter, *m_interfaceVolumeFractionLimiter); } }
 
   //3)Prediction step using slopes
   //------------------------------
-  for (unsigned int i = 0; i < m_cellsLvl[lvl].size(); i++) { if (!m_cellsLvl[lvl][i]->getSplit()) { m_cellsLvl[lvl][i]->predictionOrdre2(dt, m_numberPhases, m_numberTransports, m_symmetry); } }
+  for (unsigned int i = 0; i < m_cellsLvl[lvl].size(); i++) { if (!m_cellsLvl[lvl][i]->getSplit()) { m_cellsLvl[lvl][i]->predictionOrdre2(dt, m_symmetry); } }
   //3b) Option: Activate relaxation during prediction //KS//FP// To implement dynamically
   //3c) Option: Activate additional physics during prediction //KS//FP// To implement dynamically
   //3d) Option: Activate source terms during prediction //KS//FP// To implement dynamically
 
-  //4) m_cons recovery for AMR/second order combination (substotute to setToZeroCons)
+  //4) m_cons recovery for AMR/second order combination (substitute to setToZeroCons)
   //---------------------------------------------------------------------------------
-  for (unsigned int i = 0; i < m_cellsLvl[lvl].size(); i++) { if (!m_cellsLvl[lvl][i]->getSplit()) { m_cellsLvl[lvl][i]->recuperationCons(m_numberPhases, m_numberTransports); } }
+  for (unsigned int i = 0; i < m_cellsLvl[lvl].size(); i++) { if (!m_cellsLvl[lvl][i]->getSplit()) { m_cellsLvl[lvl][i]->recuperationCons(); } }
 
   //5) vecPhasesO2 communications
   //-----------------------------
@@ -506,7 +503,7 @@ void Run::solveHyperbolicO2(double& dt, int& lvl, double& dtMax)
 
   //6) Optional new slopes determination (improves code stability)
   //--------------------------------------------------------------
-  for (unsigned int i = 0; i < m_cellInterfacesLvl[lvl].size(); i++) { if (!m_cellInterfacesLvl[lvl][i]->getSplit()) { m_cellInterfacesLvl[lvl][i]->computeSlopes(m_numberPhases, m_numberTransports, vecPhasesO2); } }
+  for (unsigned int i = 0; i < m_cellInterfacesLvl[lvl].size(); i++) { if (!m_cellInterfacesLvl[lvl][i]->getSplit()) { m_cellInterfacesLvl[lvl][i]->computeSlopes(vecPhasesO2); } }
   if (Ncpu > 1) {
     m_stat.startCommunicationTime();
     parallel.communicationsSlopes(lvl);
@@ -517,15 +514,15 @@ void Run::solveHyperbolicO2(double& dt, int& lvl, double& dtMax)
   //7) Spatial scheme on predicted variables
   //----------------------------------------
   //Fluxes are determined at each cells interfaces and stored in the m_cons variableof corresponding cells. Hyperbolic maximum time step determination
-  for (unsigned int i = 0; i < m_cellInterfacesLvl[lvl].size(); i++) { if (!m_cellInterfacesLvl[lvl][i]->getSplit()) { m_cellInterfacesLvl[lvl][i]->computeFlux(m_numberPhases, m_numberTransports, dtMax, *m_globalLimiter, *m_interfaceLimiter, *m_globalVolumeFractionLimiter, *m_interfaceVolumeFractionLimiter, vecPhasesO2); } }
+  for (unsigned int i = 0; i < m_cellInterfacesLvl[lvl].size(); i++) { if (!m_cellInterfacesLvl[lvl][i]->getSplit()) { m_cellInterfacesLvl[lvl][i]->computeFlux(dtMax, *m_globalLimiter, *m_interfaceLimiter, *m_globalVolumeFractionLimiter, *m_interfaceVolumeFractionLimiter, vecPhasesO2); } }
 
   //8) Time evolution
   //-----------------
   for (unsigned int i = 0; i < m_cellsLvl[lvl].size(); i++) {
     if (!m_cellsLvl[lvl][i]->getSplit()) {
-      m_cellsLvl[lvl][i]->timeEvolution(dt, m_numberPhases, m_numberTransports, m_symmetry, vecPhasesO2);   //Obtention des cons pour shema sur (Un+1-Un)/dt
-      m_cellsLvl[lvl][i]->buildPrim(m_numberPhases);                                                        //On peut reconstruire Prim a partir de m_cons
-      m_cellsLvl[lvl][i]->setToZeroCons(m_numberPhases, m_numberTransports);                                //Mise a zero des cons pour shema spatial sur dU/dt : permet de s affranchir du pas de temps
+      m_cellsLvl[lvl][i]->timeEvolution(dt, m_symmetry);   //Obtention des cons pour shema sur (Un+1-Un)/dt
+      m_cellsLvl[lvl][i]->buildPrim();                     //On peut reconstruire Prim a partir de m_cons
+      m_cellsLvl[lvl][i]->setToZeroCons();                 //Mise a zero des cons pour shema spatial sur dU/dt : permet de s affranchir du pas de temps
     }
   }
 }
@@ -537,15 +534,19 @@ void Run::solveHyperbolic(double& dt, int& lvl, double& dtMax)
   //1) Spatial scheme
   //-----------------
   //Fluxes are determined at each cells interfaces and stored in the m_cons variableof corresponding cells. Hyperbolic maximum time step determination
-  for (unsigned int i = 0; i < m_cellInterfacesLvl[lvl].size(); i++) { if (!m_cellInterfacesLvl[lvl][i]->getSplit()) { m_cellInterfacesLvl[lvl][i]->computeFlux(m_numberPhases, m_numberTransports, dtMax, *m_globalLimiter, *m_interfaceLimiter, *m_globalVolumeFractionLimiter, *m_interfaceVolumeFractionLimiter); } }
+  for (unsigned int i = 0; i < m_cellInterfacesLvl[lvl].size(); i++) { 
+    if (!m_cellInterfacesLvl[lvl][i]->getSplit()) { 
+      m_cellInterfacesLvl[lvl][i]->computeFlux(dtMax, *m_globalLimiter, *m_interfaceLimiter, *m_globalVolumeFractionLimiter, *m_interfaceVolumeFractionLimiter); 
+    }
+  }
 
   //2) Time evolution
   //-----------------
   for (unsigned int i = 0; i < m_cellsLvl[lvl].size(); i++) {
     if (!m_cellsLvl[lvl][i]->getSplit()) {
-      m_cellsLvl[lvl][i]->timeEvolution(dt, m_numberPhases, m_numberTransports, m_symmetry);   //Obtention des cons pour shema sur (Un+1-Un)/dt
-      m_cellsLvl[lvl][i]->buildPrim(m_numberPhases);                                           //On peut reconstruire Prim a partir de m_cons
-      m_cellsLvl[lvl][i]->setToZeroCons(m_numberPhases, m_numberTransports);                   //Mise a zero des cons pour shema spatial sur dU/dt : permet de s affranchir du pas de temps
+      m_cellsLvl[lvl][i]->timeEvolution(dt, m_symmetry);   //Obtention des cons pour shema sur (Un+1-Un)/dt
+      m_cellsLvl[lvl][i]->buildPrim();                     //On peut reconstruire Prim a partir de m_cons
+      m_cellsLvl[lvl][i]->setToZeroCons();                 //Mise a zero des cons pour shema spatial sur dU/dt : permet de s affranchir du pas de temps
     }
   }
 }
@@ -564,7 +565,7 @@ void Run::solveAdditionalPhysics(double& dt, int& lvl)
   for (unsigned int i = 0; i < m_cellsLvl[lvl].size(); i++) { if (!m_cellsLvl[lvl][i]->getSplit()) { m_cellsLvl[lvl][i]->prepareAddPhys(); } }
   if (Ncpu > 1) {
     m_stat.startCommunicationTime();
-    for (unsigned int pa = 0; pa < m_addPhys.size(); pa++) { m_addPhys[pa]->communicationsAddPhys(m_numberPhases, m_dimension, lvl); }
+    for (unsigned int pa = 0; pa < m_addPhys.size(); pa++) { m_addPhys[pa]->communicationsAddPhys(m_dimension, lvl); }
     m_stat.endCommunicationTime();
   }
 
@@ -572,17 +573,17 @@ void Run::solveAdditionalPhysics(double& dt, int& lvl)
   //-------------------------------------------------------------------------------------------
   //Calcul de la somme des flux des physiques additionnelles que l on stock dans m_cons de chaque cell
   for (unsigned int pa = 0; pa < m_addPhys.size(); pa++) {
-    for (unsigned int i = 0; i < m_cellInterfacesLvl[lvl].size(); i++) { if (!m_cellInterfacesLvl[lvl][i]->getSplit()) { m_cellInterfacesLvl[lvl][i]->computeFluxAddPhys(m_numberPhases, *m_addPhys[pa]); } }
-    for (unsigned int i = 0; i < m_cellsLvl[lvl].size(); i++) { if (!m_cellsLvl[lvl][i]->getSplit()) { m_cellsLvl[lvl][i]->addNonConsAddPhys(m_numberPhases, *m_addPhys[pa], m_symmetry); } }
+    for (unsigned int i = 0; i < m_cellInterfacesLvl[lvl].size(); i++) { if (!m_cellInterfacesLvl[lvl][i]->getSplit()) { m_cellInterfacesLvl[lvl][i]->computeFluxAddPhys(*m_addPhys[pa]); } }
+    for (unsigned int i = 0; i < m_cellsLvl[lvl].size(); i++) { if (!m_cellsLvl[lvl][i]->getSplit()) { m_cellsLvl[lvl][i]->addNonConsAddPhys(*m_addPhys[pa], m_symmetry); } }
   }
 
   //3) Time evolution for additional physics
   //----------------------------------------
   for (unsigned int i = 0; i < m_cellsLvl[lvl].size(); i++) {
     if (!m_cellsLvl[lvl][i]->getSplit()) {
-      m_cellsLvl[lvl][i]->timeEvolutionAddPhys(dt, m_numberPhases);             //Obtention des cons pour shema sur (Un+1-Un)/dt
-      m_cellsLvl[lvl][i]->buildPrim(m_numberPhases);                            //On peut reconstruire Prim a partir de m_cons
-      m_cellsLvl[lvl][i]->setToZeroCons(m_numberPhases, m_numberTransports);    //Mise a zero des cons pour shema spatial sur dU/dt : permet de s affranchir du pas de temps
+      m_cellsLvl[lvl][i]->timeEvolutionAddPhys(dt);  //Obtention des cons pour shema sur (Un+1-Un)/dt
+      m_cellsLvl[lvl][i]->buildPrim();               //On peut reconstruire Prim a partir de m_cons
+      m_cellsLvl[lvl][i]->setToZeroCons();           //Mise a zero des cons pour shema spatial sur dU/dt : permet de s affranchir du pas de temps
     }
   }
 }
@@ -594,9 +595,9 @@ void Run::solveSourceTerms(double& dt, int& lvl)
   for (unsigned int i = 0; i < m_cellsLvl[lvl].size(); i++) {
     if (!m_cellsLvl[lvl][i]->getSplit()) {
       for (unsigned int s = 0; s < m_sources.size(); s++) { 
-        m_sources[s]->integrateSourceTerms(m_cellsLvl[lvl][i], m_numberPhases, dt);
+        m_sources[s]->integrateSourceTerms(m_cellsLvl[lvl][i], dt);
       }
-      m_cellsLvl[lvl][i]->setToZeroCons(m_numberPhases, m_numberTransports);
+      m_cellsLvl[lvl][i]->setToZeroCons();
     }
   }
 }
@@ -608,7 +609,7 @@ void Run::solveRelaxations(double& dt, int& lvl)
   //Relaxations
   for (unsigned int i = 0; i < m_cellsLvl[lvl].size(); i++) { 
     if (!m_cellsLvl[lvl][i]->getSplit()) { 
-		  m_model->relaxations(m_cellsLvl[lvl][i], m_numberPhases, dt);
+		  m_model->relaxations(m_cellsLvl[lvl][i], dt);
     } 
   }
   //Reset of colour function (transports) using volume fraction
@@ -626,15 +627,15 @@ void Run::solveRelaxations(double& dt, int& lvl)
   for (unsigned int i = 0; i < m_cellsLvl[lvl].size(); i++) { if (!m_cellsLvl[lvl][i]->getSplit()) { m_cellsLvl[lvl][i]->prepareAddPhys(); } }
   if (Ncpu > 1) {
     m_stat.startCommunicationTime();
-    for (unsigned int pa = 0; pa < m_addPhys.size(); pa++) { m_addPhys[pa]->communicationsAddPhys(m_numberPhases, m_dimension, lvl); }
+    for (unsigned int pa = 0; pa < m_addPhys.size(); pa++) { m_addPhys[pa]->communicationsAddPhys(m_dimension, lvl); }
     m_stat.endCommunicationTime();
   }
   //Optional energy corrections and other relaxations
   for (unsigned int i = 0; i < m_cellsLvl[lvl].size(); i++) {
     if (!m_cellsLvl[lvl][i]->getSplit()) {
-      m_cellsLvl[lvl][i]->correctionEnergy(m_numberPhases);               //Correction des energies
+      m_cellsLvl[lvl][i]->correctionEnergy();               //Correction of energies
       m_cellsLvl[lvl][i]->fulfillState();
-      //if (m_evaporation) m_cellsLvl[lvl][i]->relaxPTMu(m_numberPhases); //Relaxation des pressures, temperatures et potentiels chimiques //KS//FP// To implement dynamically
+      //if (m_evaporation) m_cellsLvl[lvl][i]->relaxPTMu(); //Relaxation des pressures, temperatures et potentiels chimiques //KS//FP// To implement dynamically
     }
   }
 }
@@ -648,7 +649,7 @@ void Run::verifyErrors() const
   //----------------------------
   for (unsigned int e = 0; e < warnings.size(); e++) {
     //errors[e].displayError(e);
-    warnings[e].writeErrorInFile(e, m_outPut->getFolderOutput(), WARNING); //FP//TODO// Delete files before run
+    warnings[e].writeErrorInFile(e, m_outPut->getFolderOutput(), WARNING);
   }
   warnings.clear();
 
@@ -666,7 +667,7 @@ void Run::verifyErrors() const
       if (errors.size() != 0) {
         for (unsigned int e = 0; e < errors.size(); e++) {
           errors[e].displayError(e);
-          errors[e].writeErrorInFile(e, m_outPut->getFolderOutput(), ERROR); //FP//TODO// Delete files before run
+          errors[e].writeErrorInFile(e, m_outPut->getFolderOutput(), ERROR);
         }
       }
       throw ErrorECOGEN("Stop code after error... not managed");
@@ -709,9 +710,10 @@ void Run::finalize()
 
   //Desallocations others
   delete TB;
-  delete cellLeft; delete cellRight;
+  delete bufferCellLeft; delete bufferCellRight;
   delete m_mesh;
   delete m_model;
+  delete m_gradient;
   delete m_symmetry;
   delete m_globalLimiter; delete m_interfaceLimiter; delete m_globalVolumeFractionLimiter; delete m_interfaceVolumeFractionLimiter;
   delete m_input;
@@ -719,7 +721,7 @@ void Run::finalize()
   for (unsigned int c = 0; c < m_cuts.size(); c++) { delete m_cuts[c]; }
   for (unsigned int p = 0; p < m_probes.size(); p++) { delete m_probes[p]; }
   for (unsigned int g = 0; g < m_globalQuantities.size(); g++) { delete m_globalQuantities[g]; }
-  for (unsigned int b = 0; b < m_recordBoundariesFlux.size(); b++) { delete m_recordBoundariesFlux[b]; }
+  for (unsigned int b = 0; b < m_recordBoundaries.size(); b++) { delete m_recordBoundaries[b]; }
 
   //Desallocations AMR
   delete[] m_cellsLvl;

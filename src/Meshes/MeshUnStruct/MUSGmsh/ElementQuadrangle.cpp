@@ -31,14 +31,14 @@
 #include "ElementQuadrangle.h"
 
 const int ElementQuadrangle::TYPEGMSH = 3;
-const int ElementQuadrangle::NOMBRENOEUDS = 4;
-const int ElementQuadrangle::NOMBREFACES = 4; /* ici il s'agit du number de segments*/
+const int ElementQuadrangle::NUMBERNODES = 4;
+const int ElementQuadrangle::NUMBERFACES = 4; /* Here it is the number of segments */
 const int ElementQuadrangle::TYPEVTK = 9;
 
 //***********************************************************************
 
 ElementQuadrangle::ElementQuadrangle() :
-ElementNS(TYPEGMSH, NOMBRENOEUDS, NOMBREFACES, TYPEVTK)
+ElementNS(TYPEGMSH, NUMBERNODES, NUMBERFACES, TYPEVTK)
 {}
 
 //***********************************************************************
@@ -47,67 +47,67 @@ ElementQuadrangle::~ElementQuadrangle(){}
 
 //***********************************************************************
 
-void ElementQuadrangle::computeVolume(const Coord* noeuds)
+void ElementQuadrangle::computeVolume(const Coord* nodes)
 {
-  //une diagonale :
-  Coord v0(noeuds[2] - noeuds[0]);
+  //A diagonal
+  Coord v0(nodes[2] - nodes[0]);
   double diagonale(v0.norm());
-  //Les 4 cotes :
-  Coord v1(noeuds[1] - noeuds[0]);
-  Coord v2(noeuds[2] - noeuds[1]);
-  Coord v3(noeuds[3] - noeuds[2]);
-  Coord v4(noeuds[0] - noeuds[3]);
+  //The 4 sides
+  Coord v1(nodes[1] - nodes[0]);
+  Coord v2(nodes[2] - nodes[1]);
+  Coord v3(nodes[3] - nodes[2]);
+  Coord v4(nodes[0] - nodes[3]);
   double a(v1.norm()); double b(v2.norm()); double c(v3.norm()); double d(v4.norm());
-  //Aire premier triangle
+  //Area 1st triangle
   double dp1 = 0.5*(a + b + diagonale);
   double surf1 = sqrt(dp1*(dp1 - a)*(dp1 - b)*(dp1 - diagonale));
-  //Aire second triangle
+  //Area 2nd triangle
   double dp2 = 0.5*(c + d + diagonale);
   double surf2 = sqrt(dp2*(dp2 - c)*(dp2 - d)*(dp2 - diagonale));
-  //Air quadrangle
-  m_volume = surf1 + surf2; //aire du quadrangle
+  //Area quadrangle
+  m_volume = surf1 + surf2;
 }
 
 //***********************************************************************
 
-void ElementQuadrangle::computeLCFL(const Coord* noeuds)
+void ElementQuadrangle::computeLCFL(const Coord* nodes)
 {
   Coord vec; m_lCFL = 1e10;
-  vec = ((noeuds[0] + noeuds[1]) / 2.) - m_position;
+  vec = ((nodes[0] + nodes[1]) / 2.) - m_position;
   m_lCFL = std::min(m_lCFL, vec.norm());
-  vec = ((noeuds[1] + noeuds[2]) / 2.) - m_position;
+  vec = ((nodes[1] + nodes[2]) / 2.) - m_position;
   m_lCFL = std::min(m_lCFL, vec.norm());
-  vec = ((noeuds[2] + noeuds[3]) / 2.) - m_position;
+  vec = ((nodes[2] + nodes[3]) / 2.) - m_position;
   m_lCFL = std::min(m_lCFL, vec.norm());
-  vec = ((noeuds[3] + noeuds[0]) / 2.) - m_position;
+  vec = ((nodes[3] + nodes[0]) / 2.) - m_position;
   m_lCFL = std::min(m_lCFL, vec.norm());
 }
 
 //***********************************************************************
-// Nouvelle version beaucoup plus efficace avec recherche dans tableau temporaire
-void ElementQuadrangle::construitFaces(const Coord* noeuds, FaceNS** faces, int& iMax, int** facesTemp, int* sommeNoeudsTemp)
+
+void ElementQuadrangle::construitFaces(const Coord* nodes, FaceNS** faces, int& iMax, int** facesBuff, int* sumNodesBuff)
 {
   //4 faces a traiter de type segment
   int indexFaceExiste(-1);
   int noeudAutre;
-  for (int i = 0; i < NOMBREFACES; i++)
+  for (int i = 0; i < NUMBERFACES; i++)
   {
     switch (i)
     {
-      case 0: facesTemp[iMax][0] = m_numNoeuds[0]; facesTemp[iMax][1] = m_numNoeuds[1]; noeudAutre = 2; break;
-      case 1: facesTemp[iMax][0] = m_numNoeuds[1]; facesTemp[iMax][1] = m_numNoeuds[2]; noeudAutre = 3; break;      
-      case 2: facesTemp[iMax][0] = m_numNoeuds[2]; facesTemp[iMax][1] = m_numNoeuds[3]; noeudAutre = 0; break;      
-      case 3: facesTemp[iMax][0] = m_numNoeuds[3]; facesTemp[iMax][1] = m_numNoeuds[0]; noeudAutre = 1; break;      
+      case 0: facesBuff[iMax][0] = m_numNoeuds[0]; facesBuff[iMax][1] = m_numNoeuds[1]; noeudAutre = 2; break;
+      case 1: facesBuff[iMax][0] = m_numNoeuds[1]; facesBuff[iMax][1] = m_numNoeuds[2]; noeudAutre = 3; break;      
+      case 2: facesBuff[iMax][0] = m_numNoeuds[2]; facesBuff[iMax][1] = m_numNoeuds[3]; noeudAutre = 0; break;      
+      case 3: facesBuff[iMax][0] = m_numNoeuds[3]; facesBuff[iMax][1] = m_numNoeuds[0]; noeudAutre = 1; break;      
     }
-    sommeNoeudsTemp[iMax] = facesTemp[iMax][0] + facesTemp[iMax][1];
-    std::sort(facesTemp[iMax],facesTemp[iMax]+2);  //Tri des noeuds
-    //Existance face ?
-    indexFaceExiste = FaceNS::rechercheFace(facesTemp[iMax],sommeNoeudsTemp[iMax],facesTemp,sommeNoeudsTemp,2,iMax);
+    sumNodesBuff[iMax] = facesBuff[iMax][0] + facesBuff[iMax][1];
+    std::sort(facesBuff[iMax],facesBuff[iMax]+2);  //Tri des nodes
+    // Checking face existence
+    indexFaceExiste = FaceNS::searchFace(facesBuff[iMax],sumNodesBuff[iMax],facesBuff,sumNodesBuff,2,iMax);
     //Creation face ou rattachement
     if (indexFaceExiste==-1)
     {
-      faces[iMax] = new FaceSegment(facesTemp[iMax][0], facesTemp[iMax][1], 0); //pas besoin du tri ici
-      faces[iMax]->construitFace(noeuds, m_numNoeuds[noeudAutre], this);
+      faces[iMax] = new FaceSegment(facesBuff[iMax][0], facesBuff[iMax][1], 0); //pas besoin du tri ici
+      faces[iMax]->construitFace(nodes, m_numNoeuds[noeudAutre], this);
       iMax++;
     }
     else
@@ -118,24 +118,24 @@ void ElementQuadrangle::construitFaces(const Coord* noeuds, FaceNS** faces, int&
 }
 
 //***********************************************************************
-// Nouvelle version beaucoup plus efficace avec recherche dans tableau temporaire
-void ElementQuadrangle::construitFacesSimplifie(int& iMax, int** facesTemp, int* sommeNoeudsTemp)
+
+void ElementQuadrangle::construitFacesSimplifie(int& iMax, int** facesBuff, int* sumNodesBuff)
 {
   //4 faces a traiter de type segment
   int indexFaceExiste(-1);
-  for (int i = 0; i < NOMBREFACES; i++)
+  for (int i = 0; i < NUMBERFACES; i++)
   {
     switch (i)
     {
-      case 0: facesTemp[iMax][0] = m_numNoeuds[0]; facesTemp[iMax][1] = m_numNoeuds[1]; break;
-      case 1: facesTemp[iMax][0] = m_numNoeuds[1]; facesTemp[iMax][1] = m_numNoeuds[2]; break;      
-      case 2: facesTemp[iMax][0] = m_numNoeuds[2]; facesTemp[iMax][1] = m_numNoeuds[3]; break;      
-      case 3: facesTemp[iMax][0] = m_numNoeuds[3]; facesTemp[iMax][1] = m_numNoeuds[0]; break;      
+      case 0: facesBuff[iMax][0] = m_numNoeuds[0]; facesBuff[iMax][1] = m_numNoeuds[1]; break;
+      case 1: facesBuff[iMax][0] = m_numNoeuds[1]; facesBuff[iMax][1] = m_numNoeuds[2]; break;      
+      case 2: facesBuff[iMax][0] = m_numNoeuds[2]; facesBuff[iMax][1] = m_numNoeuds[3]; break;      
+      case 3: facesBuff[iMax][0] = m_numNoeuds[3]; facesBuff[iMax][1] = m_numNoeuds[0]; break;      
     }
-    sommeNoeudsTemp[iMax] = facesTemp[iMax][0] + facesTemp[iMax][1];
-    std::sort(facesTemp[iMax],facesTemp[iMax]+2);  //Tri des noeuds
-    //Existance face ?
-    indexFaceExiste = FaceNS::rechercheFace(facesTemp[iMax],sommeNoeudsTemp[iMax],facesTemp,sommeNoeudsTemp,2,iMax);
+    sumNodesBuff[iMax] = facesBuff[iMax][0] + facesBuff[iMax][1];
+    std::sort(facesBuff[iMax],facesBuff[iMax]+2);  //Tri des nodes
+    // Checking face existence
+    indexFaceExiste = FaceNS::searchFace(facesBuff[iMax],sumNodesBuff[iMax],facesBuff,sumNodesBuff,2,iMax);
     //Creation face ou rattachement
     if (indexFaceExiste==-1)
     {
@@ -150,7 +150,7 @@ void ElementQuadrangle::attributFaceLimite(FaceNS** faces, const int& indexMaxFa
 {
   int indexFaceExiste(0);
   FaceQuadrangle face(m_numNoeuds[0], m_numNoeuds[1], m_numNoeuds[2], m_numNoeuds[3]);
-  if (face.faceExiste(faces, indexMaxFaces, indexFaceExiste))
+  if (face.faceExists(faces, indexMaxFaces, indexFaceExiste))
   {
     faces[indexFaceExiste]->ajouteElementVoisinLimite(this);
   }
@@ -169,7 +169,7 @@ void ElementQuadrangle::attributFaceCommunicante(FaceNS** faces, const int& inde
   if (m_numNoeuds[0] < numberNoeudsInternes && m_numNoeuds[1] < numberNoeudsInternes)
   {
     FaceSegment face(m_numNoeuds[0], m_numNoeuds[1]);
-    if (face.faceExiste(faces, indexMaxFaces, indexFaceExiste))
+    if (face.faceExists(faces, indexMaxFaces, indexFaceExiste))
     {
       faces[indexFaceExiste]->ajouteElementVoisinLimite(this);
       faces[indexFaceExiste]->setEstComm(true);
@@ -179,7 +179,7 @@ void ElementQuadrangle::attributFaceCommunicante(FaceNS** faces, const int& inde
   if (m_numNoeuds[1] < numberNoeudsInternes && m_numNoeuds[2] < numberNoeudsInternes)
   {
     FaceSegment face(m_numNoeuds[1], m_numNoeuds[2]);
-    if (face.faceExiste(faces, indexMaxFaces, indexFaceExiste))
+    if (face.faceExists(faces, indexMaxFaces, indexFaceExiste))
     {
       faces[indexFaceExiste]->ajouteElementVoisinLimite(this);
       faces[indexFaceExiste]->setEstComm(true);
@@ -189,7 +189,7 @@ void ElementQuadrangle::attributFaceCommunicante(FaceNS** faces, const int& inde
   if (m_numNoeuds[2] < numberNoeudsInternes && m_numNoeuds[3] < numberNoeudsInternes)
   {
     FaceSegment face(m_numNoeuds[2], m_numNoeuds[3]);
-    if (face.faceExiste(faces, indexMaxFaces, indexFaceExiste))
+    if (face.faceExists(faces, indexMaxFaces, indexFaceExiste))
     {
       faces[indexFaceExiste]->ajouteElementVoisinLimite(this);
       faces[indexFaceExiste]->setEstComm(true);
@@ -199,7 +199,7 @@ void ElementQuadrangle::attributFaceCommunicante(FaceNS** faces, const int& inde
   if (m_numNoeuds[3] < numberNoeudsInternes && m_numNoeuds[0] < numberNoeudsInternes)
   {
     FaceSegment face(m_numNoeuds[3], m_numNoeuds[0]);
-    if (face.faceExiste(faces, indexMaxFaces, indexFaceExiste))
+    if (face.faceExists(faces, indexMaxFaces, indexFaceExiste))
     {
       faces[indexFaceExiste]->ajouteElementVoisinLimite(this);
       faces[indexFaceExiste]->setEstComm(true);
@@ -209,12 +209,12 @@ void ElementQuadrangle::attributFaceCommunicante(FaceNS** faces, const int& inde
 
 //***********************************************************************
 
-int ElementQuadrangle::compteFaceCommunicante(std::vector<int*>& facesTemp, std::vector<int>& sommeNoeudsTemp)
+int ElementQuadrangle::compteFaceCommunicante(std::vector<int*>& facesBuff, std::vector<int>& sumNodesBuff)
 {
   //4 faces a traiter de type segment
   int indexFaceExiste(-1), numberFacesCommunicante(0);
-  int face[2], sommeNoeuds;
-  for (int i = 0; i < NOMBREFACES; i++)
+  int face[2], sumNodes;
+  for (int i = 0; i < NUMBERFACES; i++)
   {
     switch (i)
     {
@@ -223,11 +223,11 @@ int ElementQuadrangle::compteFaceCommunicante(std::vector<int*>& facesTemp, std:
       case 2: face[0] = m_numNoeuds[2]; face[1] = m_numNoeuds[3]; break;     
       case 3: face[0] = m_numNoeuds[3]; face[1] = m_numNoeuds[0]; break;     
     }
-    int iMax = sommeNoeudsTemp.size();
-    sommeNoeuds = face[0]+face[1];
+    int iMax = sumNodesBuff.size();
+    sumNodes = face[0]+face[1];
     std::sort(face, face+2);
     //Recherche existance faces
-    indexFaceExiste = FaceNS::rechercheFace(face,sommeNoeuds,facesTemp,sommeNoeudsTemp,2,iMax);
+    indexFaceExiste = FaceNS::searchFace(face,sumNodes,facesBuff,sumNodesBuff,2,iMax);
     if (indexFaceExiste!=-1)
     {
       numberFacesCommunicante++;
@@ -238,12 +238,12 @@ int ElementQuadrangle::compteFaceCommunicante(std::vector<int*>& facesTemp, std:
 
 //***********************************************************************
 //Nouvelle version plus efficace
-int ElementQuadrangle::compteFaceCommunicante(int& iMax, int** facesTemp, int* sommeNoeudsTemp)
+int ElementQuadrangle::compteFaceCommunicante(int& iMax, int** facesBuff, int* sumNodesBuff)
 {
   //4 faces a traiter de type segment
   int indexFaceExiste(-1), numberFacesCommunicante(0);
-  int face[2], sommeNoeuds;
-  for (int i = 0; i < NOMBREFACES; i++)
+  int face[2], sumNodes;
+  for (int i = 0; i < NUMBERFACES; i++)
   {
     switch (i)
     {
@@ -252,10 +252,10 @@ int ElementQuadrangle::compteFaceCommunicante(int& iMax, int** facesTemp, int* s
       case 2: face[0] = m_numNoeuds[2]; face[1] = m_numNoeuds[3]; break;     
       case 3: face[0] = m_numNoeuds[3]; face[1] = m_numNoeuds[0]; break;     
     }
-    sommeNoeuds = face[0]+face[1];
+    sumNodes = face[0]+face[1];
     std::sort(face, face+2);
     //Recherche existance faces
-    indexFaceExiste = FaceNS::rechercheFace(face,sommeNoeuds,facesTemp,sommeNoeudsTemp,2,iMax);
+    indexFaceExiste = FaceNS::searchFace(face,sumNodes,facesBuff,sumNodesBuff,2,iMax);
     if (indexFaceExiste!=-1)
     {
       numberFacesCommunicante++;

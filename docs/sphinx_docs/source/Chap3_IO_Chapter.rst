@@ -19,3 +19,4 @@ ECOGEN settings are managed via input files only. The global input- and output- 
    Chap3_1inputFiles
    Chap3_2materials
    Chap3_3outputFiles
+   Chap3_4featuresModels

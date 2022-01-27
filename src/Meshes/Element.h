@@ -33,9 +33,6 @@
 
 #include <fstream>
 #include <sstream>
-#include <iostream>
-#include <cmath>
-#include <algorithm>
 #include "../Maths/Coord.h"
 #include "../Maths/GeometricObject.h"
 #include "../Errors.h"

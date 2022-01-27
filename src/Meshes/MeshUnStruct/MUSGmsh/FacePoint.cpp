@@ -30,12 +30,12 @@
 
 #include "FacePoint.h"
 
-const int FacePoint::NOMBRENOEUDS = 1;
+const int FacePoint::NUMBERNODES = 1;
 
 //***********************************************************************
 
 FacePoint::FacePoint(const int& numNoeud1) :
-FaceNS(NOMBRENOEUDS)
+FaceNS(NUMBERNODES)
 {
   m_numNoeuds[0] = numNoeud1;
   m_sommeNumNoeuds = m_numNoeuds[0];

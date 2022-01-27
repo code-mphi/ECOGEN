@@ -34,8 +34,11 @@ using namespace tinyxml2;
 
 //****************************************************************************
 
-BoundCondSubInj::BoundCondSubInj(int numPhysique, XMLElement* element, int& numberPhases, std::string fileName) : BoundCond(numPhysique)
+BoundCondSubInj::BoundCondSubInj(int numPhysique, XMLElement* element, const int& numbPhases, std::string fileName) : BoundCond(numPhysique)
 {
+  m_Tk0 = new double[numbPhases];
+  m_ak0 = new double[numbPhases];
+  
   XMLElement* subElement(element->FirstChildElement("dataInjection"));
   if (subElement == NULL) throw ErrorXMLElement("dataInjection", fileName, __FILE__, __LINE__);
 
@@ -46,24 +49,40 @@ BoundCondSubInj::BoundCondSubInj(int numPhysique, XMLElement* element, int& numb
   if (error != XML_NO_ERROR) throw ErrorXMLAttribut("m0", fileName, __FILE__, __LINE__);
   m_m0 = - m_m0; // Sign change due to right side Riemann solver convention
 
-  // Reading temperature of fluid
-  // ----------------------------
-  error = subElement->QueryDoubleAttribute("T0", &m_T0);
-  if (error != tinyxml2::XML_NO_ERROR) throw ErrorXMLAttribut("T0", fileName, __FILE__, __LINE__);
-
-  // Boundary condition specific to Euler model
-  if (numberPhases > 1) { 
-    Errors::errorMessage("Subsonic inflow is only available for Euler model");;
-    throw ErrorXMLLimite(fileName, __FILE__, __LINE__); 
+  // Reading volume fraction and temperature of the phases
+  // -----------------------------------------------------
+  XMLElement* fluid(element->FirstChildElement("dataFluid"));
+  for (int k = 0; k < numbPhases; k++) {
+    // Attributes reading
+    error = fluid->QueryDoubleAttribute("temperature", &m_Tk0[k]);
+    if (error != XML_NO_ERROR) throw ErrorXMLAttribut("temperature", fileName, __FILE__, __LINE__);
+    if (numbPhases > 1) {
+      error = fluid->QueryDoubleAttribute("alpha", &m_ak0[k]);
+      if (error != XML_NO_ERROR) throw ErrorXMLAttribut("alpha", fileName, __FILE__, __LINE__);
+    }
+    else { m_ak0[0] = 1.; }
+    fluid = fluid->NextSiblingElement("dataFluid");
   }
+  bool notIsotherm(false);
+  for (int k = 0; k < numbPhases; k++) {
+    if (std::fabs(m_Tk0[0] - m_Tk0[k]) > 1.e-3) { notIsotherm = true; break; }
+  }
+  if (notIsotherm) throw ErrorXMLAttribut("temperature", fileName, __FILE__, __LINE__);
 }
 
 //****************************************************************************
 
 BoundCondSubInj::BoundCondSubInj(const BoundCondSubInj& Source, const int& lvl) : BoundCond(Source, lvl)
 {
+  m_Tk0 = new double[numberPhases];
+  m_ak0 = new double[numberPhases];
   m_m0 = Source.m_m0;
-  m_T0 = Source.m_T0;
+
+  for (int k = 0; k < numberPhases; k++)
+  {
+    m_Tk0[k] = Source.m_Tk0[k];
+    m_ak0[k] = Source.m_ak0[k];
+  }
 }
 
 //****************************************************************************
@@ -81,9 +100,9 @@ void BoundCondSubInj::createBoundary(TypeMeshContainer<CellInterface*>& cellInte
 
 //****************************************************************************
 
-void BoundCondSubInj::solveRiemannBoundary(Cell& cellLeft, const int& numberPhases, const double& dxLeft, double& dtMax)
+void BoundCondSubInj::solveRiemannBoundary(Cell& cellLeft, const double& dxLeft, double& dtMax)
 {
-  m_mod->solveRiemannSubInj(cellLeft, numberPhases, dxLeft, dtMax, m_m0, m_T0, m_massflow, m_powerFlux);
+  model->solveRiemannSubInj(cellLeft, dxLeft, dtMax, m_m0, m_Tk0, m_ak0, m_boundData);
 }
 
 //****************************************************************************
@@ -92,7 +111,7 @@ void BoundCondSubInj::printInfo()
 {
   std::cout << m_numPhysique << std::endl;
   std::cout << m_m0 << std::endl;
-  std::cout << m_T0 << std::endl;
+  std::cout << m_Tk0[0] << std::endl;
 }
 
 //****************************************************************************

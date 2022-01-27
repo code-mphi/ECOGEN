@@ -28,19 +28,18 @@
 //  along with ECOGEN (file LICENSE).  
 //  If not, see <http://www.gnu.org/licenses/>.
 
-#include <cmath>
 #include "MixEulerHomogeneous.h"
 
 using namespace tinyxml2;
 
 //***************************************************************************
 
-MixEulerHomogeneous::MixEulerHomogeneous() :m_density(0.), m_pressure(0.), m_velocity(0), m_energie(0.), m_totalEnergy(0.), m_EqSoundSpeed(0.) {}
+MixEulerHomogeneous::MixEulerHomogeneous() :m_density(0.), m_pressure(0.), m_velocity(0), m_energy(0.), m_totalEnergy(0.), m_EqSoundSpeed(0.) {}
 
 //***************************************************************************
 
 MixEulerHomogeneous::MixEulerHomogeneous(XMLElement* state, std::string fileName) :
-  m_density(0.), m_pressure(0.), m_energie(0.), m_totalEnergy(0.), m_EqSoundSpeed(0.)
+  m_density(0.), m_pressure(0.), m_energy(0.), m_totalEnergy(0.), m_EqSoundSpeed(0.)
 {
   XMLElement* sousElement(state->FirstChildElement("mixture"));
   if (sousElement == NULL) throw ErrorXMLElement("mixture", fileName, __FILE__, __LINE__);
@@ -90,14 +89,14 @@ void MixEulerHomogeneous::copyMixture(Mixture &mixture)
   m_density = mixture.getDensity();
   m_pressure = mixture.getPressure();
   m_velocity = mixture.getVelocity();
-  m_energie = mixture.getEnergy();
+  m_energy = mixture.getEnergy();
   m_totalEnergy = mixture.getTotalEnergy();
   m_EqSoundSpeed = mixture.getMixSoundSpeed();
 }
 
 //***************************************************************************
 
-double MixEulerHomogeneous::computeDensity(const double* alphak, const double* rhok, const int& numberPhases)
+double MixEulerHomogeneous::computeDensity(const double* alphak, const double* rhok)
 {
   double rho(0.);
   for (int k = 0; k<numberPhases; k++)
@@ -109,7 +108,7 @@ double MixEulerHomogeneous::computeDensity(const double* alphak, const double* r
 
 //***************************************************************************
 
-double MixEulerHomogeneous::computePressure(const double* alphak, const double* pk, const int& numberPhases)
+double MixEulerHomogeneous::computePressure(const double* alphak, const double* pk)
 {
   double p(0.);
   for (int k = 0; k<numberPhases; k++)
@@ -121,13 +120,13 @@ double MixEulerHomogeneous::computePressure(const double* alphak, const double* 
 
 //***************************************************************************
 
-double MixEulerHomogeneous::computePressure(double masse, const double& internalEnergy, Phase** phases, Mixture* mixture, const int& numberPhases, const int& liq, const int& vap)
+double MixEulerHomogeneous::computePressure(double mass, const double& internalEnergy, Phase** phases, Mixture* mixture, const int& liq, const int& vap)
 {
   double pressure(0.);
 
   //Restrictions //FP//TODO// to extend for N phases
-  if (numberPhases > 2) Errors::errorMessage("more than two phases not permitted in thermodynamical equilibrium model : MixEulerHomogeneous::computePressure");
-  if (phases[vap]->getEos()->getType() != "IG" && phases[liq]->getEos()->getType() != "SG") { Errors::errorMessage("Only IG for vapor and SG for liquid permitted in thermodyanmical equilibrium model : MixEulerHomogeneous::computePressure"); }
+  if (numberPhases > 2) Errors::errorMessage("More than two phases not permitted in thermodynamical equilibrium model: MixEulerHomogeneous::computePressure");
+  if (phases[vap]->getEos()->getType() != TypeEOS::IG && phases[liq]->getEos()->getType() != TypeEOS::SG) { Errors::errorMessage("Only IG for vapor and SG for liquid permitted in thermodyanmical equilibrium model: MixEulerHomogeneous::computePressure"); }
 
   //Iterative process for pressure determination based on energy conservation (e=Sum(Yk*ek))
   int iteration(0);
@@ -143,20 +142,20 @@ double MixEulerHomogeneous::computePressure(double masse, const double& internal
     Tsat = mixture->computeTsat(phases[liq]->getEos(), phases[vap]->getEos(), pressure, &dTsat);
     rhoVap = phases[vap]->getEos()->computeDensitySaturation(pressure, Tsat, dTsat, &drhoVap);
     rhoLiq = phases[liq]->getEos()->computeDensitySaturation(pressure, Tsat, dTsat, &drhoLiq);
-    alphaVap = (masse - rhoLiq) / (rhoVap - rhoLiq);
-    dalphaVap = (-drhoLiq*(rhoVap - rhoLiq) - (masse - rhoLiq)*(drhoVap - drhoLiq)) / ((rhoVap - rhoLiq)*(rhoVap - rhoLiq));
+    alphaVap = (mass - rhoLiq) / (rhoVap - rhoLiq);
+    dalphaVap = (-drhoLiq*(rhoVap - rhoLiq) - (mass - rhoLiq)*(drhoVap - drhoLiq)) / ((rhoVap - rhoLiq)*(rhoVap - rhoLiq));
     rhoeVap = phases[vap]->getEos()->computeDensityEnergySaturation(pressure, rhoVap, drhoVap, &drhoeVap);
     rhoeLiq = phases[liq]->getEos()->computeDensityEnergySaturation(pressure, rhoLiq, drhoLiq, &drhoeLiq);
-    f = masse*internalEnergy - alphaVap*(rhoeVap - rhoeLiq) - rhoeLiq;
+    f = mass*internalEnergy - alphaVap*(rhoeVap - rhoeLiq) - rhoeLiq;
     df = -dalphaVap*(rhoeVap - rhoeLiq) - alphaVap*(drhoeVap - drhoeLiq) - drhoeLiq;
-  } while (std::fabs(f / (masse*internalEnergy)) > 1e-10);
+  } while (std::fabs(f / (mass*internalEnergy)) > 1e-10);
 
   return pressure;
 }
 
 //***************************************************************************
 
-double MixEulerHomogeneous::computeInternalEnergy(const double* Yk, const double* ek, const int& numberPhases)
+double MixEulerHomogeneous::computeInternalEnergy(const double* Yk, const double* ek)
 {
   double e(0.);
   for (int k = 0; k<numberPhases; k++)
@@ -168,7 +167,7 @@ double MixEulerHomogeneous::computeInternalEnergy(const double* Yk, const double
 
 //***************************************************************************
 
-double MixEulerHomogeneous::computeFrozenSoundSpeed(const double* Yk, const double* ck, const int& numberPhases)
+double MixEulerHomogeneous::computeFrozenSoundSpeed(const double* Yk, const double* ck)
 {
   double cF(0.);
   for (int k = 0; k<numberPhases; k++)
@@ -180,7 +179,7 @@ double MixEulerHomogeneous::computeFrozenSoundSpeed(const double* Yk, const doub
 
 //***************************************************************************
 
-void MixEulerHomogeneous::computeMixtureVariables(Phase** vecPhase, const int& numberPhases)
+void MixEulerHomogeneous::computeMixtureVariables(Phase** vecPhase)
 {
   //mixture density and pressure
   m_density = 0.;
@@ -192,10 +191,10 @@ void MixEulerHomogeneous::computeMixtureVariables(Phase** vecPhase, const int& n
     vecPhase[k]->computeMassFraction(m_density);
   }
   //Specific internal energy, speed of sounds and total specific energy
-  m_energie = 0.;
+  m_energy = 0.;
   m_EqSoundSpeed = 0.;
   for (int k = 0; k < numberPhases; k++) {
-    m_energie += vecPhase[k]->getY() *vecPhase[k]->getEnergy();
+    m_energy += vecPhase[k]->getY() *vecPhase[k]->getEnergy();
     m_EqSoundSpeed += vecPhase[k]->getY() * vecPhase[k]->getSoundSpeed()*vecPhase[k]->getSoundSpeed();
   }
   m_EqSoundSpeed = sqrt(m_EqSoundSpeed);
@@ -206,7 +205,7 @@ void MixEulerHomogeneous::computeMixtureVariables(Phase** vecPhase, const int& n
 
 void MixEulerHomogeneous::internalEnergyToTotalEnergy(std::vector<QuantitiesAddPhys*>& vecGPA)
 {
-  m_totalEnergy = m_energie + 0.5*m_velocity.squaredNorm();
+  m_totalEnergy = m_energy + 0.5*m_velocity.squaredNorm();
   for (unsigned int pa = 0; pa < vecGPA.size(); pa++) {
     m_totalEnergy += vecGPA[pa]->computeEnergyAddPhys() / m_density; //Caution /m_density important
   }
@@ -216,9 +215,9 @@ void MixEulerHomogeneous::internalEnergyToTotalEnergy(std::vector<QuantitiesAddP
 
 void MixEulerHomogeneous::totalEnergyToInternalEnergy(std::vector<QuantitiesAddPhys*>& vecGPA)
 {
-  m_energie = m_totalEnergy - 0.5*m_velocity.squaredNorm();
+  m_energy = m_totalEnergy - 0.5*m_velocity.squaredNorm();
   for (unsigned int pa = 0; pa < vecGPA.size(); pa++) {
-    m_energie -= vecGPA[pa]->computeEnergyAddPhys() / m_density; //Caution /m_density important
+    m_energy -= vecGPA[pa]->computeEnergyAddPhys() / m_density; //Caution /m_density important
   }
 }
 

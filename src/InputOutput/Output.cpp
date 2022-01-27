@@ -39,11 +39,9 @@ using namespace tinyxml2;
 Output::Output(){}
 
 //***************************************************************
-//Constructeur sortie a partir d une lecture au format XML outputMode
-//ex :	<outputMode format="XML" binary="false"/>
 
 Output::Output(std::string casTest, std::string nameRun, XMLElement* element, std::string fileName, Input *entree) :
-  m_input(entree), m_simulationName(casTest), m_folderOutput(nameRun), m_donneesSeparees(0), m_numFichier(0)
+  m_input(entree), m_simulationName(casTest), m_folderOutput(nameRun), m_splitData(0), m_numFichier(0)
 {
   //Affectation pointeur run
   m_run = m_input->getRun();
@@ -55,8 +53,8 @@ Output::Output(std::string casTest, std::string nameRun, XMLElement* element, st
   m_treeStructure = "treeStructure";
   m_domainDecomposition = "domainDecomposition";
   m_fileNameResults = "result";
-  m_fileNameCollectionParaview = "collectionParaview";
-  m_fileNameCollectionVisIt = "collectionVisIt";
+  m_filenameCollectionParaview = "collectionParaview";
+  m_filenameCollectionVisIt = "collectionVisIt";
 
   m_folderOutput = config.getWorkFolder() + "results/" + m_folderOutput + "/";
   m_folderSavesInput = m_folderOutput + "savesInput/";
@@ -65,7 +63,7 @@ Output::Output(std::string casTest, std::string nameRun, XMLElement* element, st
   m_folderCuts = m_folderOutput + "cuts/";
   m_folderProbes = m_folderOutput + "probes/";
   m_folderGlobalQuantities = m_folderOutput + "globalQuantities/";
-  m_folderBoundariesFlux = m_folderOutput + "boundariesFlux/";
+  m_folderBoundaries = m_folderOutput + "boundaries/";
   m_folderErrorsAndWarnings = m_folderOutput + "errorsAndWarnings/";
 
   //XMLElement* elementCut;
@@ -74,8 +72,11 @@ Output::Output(std::string casTest, std::string nameRun, XMLElement* element, st
   //Printing precision (digits number)
   if (element->QueryIntAttribute("precision", &m_precision) != XML_NO_ERROR) m_precision = 0; //default if not specified
 
+  //Get if reduced output is on or off
+  if (element->QueryBoolAttribute("reducedOutput", &m_reducedOutput) != XML_NO_ERROR) m_reducedOutput = false;
+
   //Recuperation mode Ecriture
-  error = element->QueryBoolAttribute("binary", &m_ecritBinaire);
+  error = element->QueryBoolAttribute("binary", &m_writeBinary);
   if (error != XML_NO_ERROR) throw ErrorXMLAttribut("binary", fileName, __FILE__, __LINE__);
 
   //Creation du dossier de sortie ou vidange /Macro selon OS Windows ou Linux
@@ -91,7 +92,7 @@ Output::Output(std::string casTest, std::string nameRun, XMLElement* element, st
       _mkdir(m_folderCuts.c_str());
       _mkdir(m_folderProbes.c_str());
       _mkdir(m_folderGlobalQuantities.c_str());
-      _mkdir(m_folderBoundariesFlux.c_str());
+      _mkdir(m_folderBoundaries.c_str());
       _mkdir(m_folderErrorsAndWarnings.c_str());
     #else
       mkdir(resultsFolder.c_str(), S_IRWXU);
@@ -102,7 +103,7 @@ Output::Output(std::string casTest, std::string nameRun, XMLElement* element, st
       mkdir(m_folderCuts.c_str(), S_IRWXU);
       mkdir(m_folderProbes.c_str(), S_IRWXU);
       mkdir(m_folderGlobalQuantities.c_str(), S_IRWXU);
-      mkdir(m_folderBoundariesFlux.c_str(), S_IRWXU);
+      mkdir(m_folderBoundaries.c_str(), S_IRWXU);
       mkdir(m_folderErrorsAndWarnings.c_str(), S_IRWXU);
     #endif
     try {
@@ -126,15 +127,23 @@ Output::Output(std::string casTest, std::string nameRun, XMLElement* element, st
 
 //***********************************************************************
 
+Output::Output(XMLElement* element)
+{
+  //Printing precision (digits number)
+  if (element->QueryIntAttribute("precision", &m_precision) != XML_NO_ERROR) m_precision = 0; //default if not specified
+}
+
+//***********************************************************************
+
 Output::~Output(){}
 
 //***********************************************************************
 
-void Output::prepareOutput(const Cell& cell)
+void Output::initializeOutput(const Cell& cell)
 {
   //Preparation de la cell de reference
-  //--------------------------------------
-  m_cellRef.allocate(m_run->m_numberPhases, m_run->m_numberTransports, m_run->m_addPhys, m_run->m_model);
+  //-----------------------------------
+  m_cellRef.allocate(m_run->m_addPhys);
   for (int k = 0; k < m_run->m_numberPhases; k++) { m_cellRef.copyPhase(k, cell.getPhase(k)); }
   m_cellRef.copyMixture(cell.getMixture());
   for (int k = 0; k < m_run->m_numberTransports; k++) { m_cellRef.setTransport(cell.getTransport(k).getValue(), k); }
@@ -142,26 +151,30 @@ void Output::prepareOutput(const Cell& cell)
   //Preparation propres au type de sortie
   //-------------------------------------
   try {
-    this->prepareSortieSpecifique();
+    this->initializeSpecificOutput();
   }
   catch (ErrorECOGEN &) { throw; }
 }
 
 //***********************************************************************
 
-void Output::prepareOutput(std::vector<CellInterface*>* cellInterfacesLvl)
+void Output::initializeOutput(std::vector<CellInterface*>* cellInterfacesLvl)
 {
+  //Preparation de la cell de reference
+  //-----------------------------------
+  m_cellRef.allocate(m_run->m_addPhys); //Even if not used here
+
   //Preparation propres au type de sortie
-    //-------------------------------------
+  //-------------------------------------
   try {
-    this->prepareSortieSpecifique(cellInterfacesLvl);
+    this->initializeSpecificOutput(cellInterfacesLvl);
   }
   catch (ErrorECOGEN&) { throw; }
 }
 
 //***********************************************************************
 
-void Output::prepareOutputInfos()
+void Output::initializeOutputInfos()
 {
   try {
     std::ofstream fileStream;
@@ -171,7 +184,7 @@ void Output::prepareOutputInfos()
       fileStream.close();
     }
     //Fichiers infosMeshes
-    std::string file = m_folderInfoMesh + creationNameFichier(m_infoMesh.c_str(), -1, rankCpu);
+    std::string file = m_folderInfoMesh + createFilename(m_infoMesh.c_str(), -1, rankCpu);
     fileStream.open(file.c_str(), std::ios::trunc); 
     fileStream.close();
   }
@@ -189,13 +202,13 @@ void Output::printTree(Mesh* mesh, std::vector<Cell*>* cellsLvl, int restartAMRs
         std::string file;
         //Print domain decomposition
         if (rankCpu == 0) {
-          file = m_folderInfoMesh + creationNameFichier(m_domainDecomposition.c_str(), -1, -1, m_numFichier);
+          file = m_folderInfoMesh + createFilename(m_domainDecomposition.c_str(), -1, -1, m_numFichier);
           fileStream.open(file.c_str());
           mesh->printDomainDecomposition(fileStream);
           fileStream.close();
         }
         //Print cell tree
-        file = m_folderInfoMesh + creationNameFichier(m_treeStructure.c_str(), -1, rankCpu, m_numFichier);
+        file = m_folderInfoMesh + createFilename(m_treeStructure.c_str(), -1, rankCpu, m_numFichier);
         fileStream.open(file.c_str());
         for (int lvl = 0; lvl <= mesh->getLvlMax(); lvl++) {
           for (unsigned int c = 0; c < cellsLvl[lvl].size(); c++) {
@@ -216,7 +229,7 @@ void Output::readDomainDecompostion(Mesh* mesh)
   try {
     std::ifstream fileStream;
     std::string file;
-    file = m_folderInfoMesh + creationNameFichier(m_domainDecomposition.c_str(), -1, -1, m_numFichier);
+    file = m_folderInfoMesh + createFilename(m_domainDecomposition.c_str(), -1, -1, m_numFichier);
     fileStream.open(file.c_str());
     mesh->readDomainDecomposition(fileStream);
     fileStream.close();
@@ -227,20 +240,20 @@ void Output::readDomainDecompostion(Mesh* mesh)
 //***********************************************************************
 
 void Output::readTree(Mesh* mesh, TypeMeshContainer<Cell*>* cellsLvl, TypeMeshContainer<Cell*>* cellsLvlGhost, TypeMeshContainer<CellInterface*>* cellInterfacesLvl,
-  const std::vector<AddPhys*>& addPhys, Model* model, int& nbCellsTotalAMR)
+  const std::vector<AddPhys*>& addPhys, int& nbCellsTotalAMR)
 {
   try {
     std::ifstream fileStream;
     int splitCell(0);
     std::string chaine;
-    std::string file = m_folderInfoMesh + creationNameFichier(m_treeStructure.c_str(), -1, rankCpu, m_numFichier);
+    std::string file = m_folderInfoMesh + createFilename(m_treeStructure.c_str(), -1, rankCpu, m_numFichier);
     fileStream.open(file.c_str());
 
     for (int lvl = 0; lvl <= mesh->getLvlMax(); lvl++) {
       //Refine cells and cell interfaces
       for (unsigned int c = 0; c < cellsLvl[lvl].size(); c++) {
         fileStream >> splitCell;
-        if (splitCell) mesh->refineCellAndCellInterfaces(cellsLvl[lvl][c], addPhys, model, nbCellsTotalAMR);
+        if (splitCell) mesh->refineCellAndCellInterfaces(cellsLvl[lvl][c], addPhys, nbCellsTotalAMR);
       }
 
       if (lvl < mesh->getLvlMax()) {
@@ -248,7 +261,7 @@ void Output::readTree(Mesh* mesh, TypeMeshContainer<Cell*>* cellsLvl, TypeMeshCo
           //Refine ghost cells
           parallel.communicationsSplit(lvl);
           cellsLvlGhost[lvl + 1].clear();
-          for (unsigned int i = 0; i < cellsLvlGhost[lvl].size(); i++) { cellsLvlGhost[lvl][i]->chooseRefineDeraffineGhost(mesh->getNumberCellsY(), mesh->getNumberCellsZ(), addPhys, model, cellsLvlGhost); }
+          for (unsigned int i = 0; i < cellsLvlGhost[lvl].size(); i++) { cellsLvlGhost[lvl][i]->chooseRefineDeraffineGhost(mesh->getNumberCellsY(), mesh->getNumberCellsZ(), addPhys, cellsLvlGhost); }
 
           //Update of persistent communications of cells lvl + 1
           parallel.communicationsNumberGhostCells(lvl + 1);
@@ -271,7 +284,7 @@ void Output::readTree(Mesh* mesh, TypeMeshContainer<Cell*>* cellsLvl, TypeMeshCo
 
 //***********************************************************************
 
-void Output::ecritInfos()
+void Output::writeInfos()
 {
   if (m_run->m_iteration > 0) {
     afficheInfoEcriture();
@@ -286,7 +299,7 @@ void Output::saveInfosMailles() const
 {
   try {
     std::ofstream fileStream;
-    std::string file = m_folderInfoMesh + creationNameFichier(m_infoMesh.c_str(), -1, rankCpu);
+    std::string file = m_folderInfoMesh + createFilename(m_infoMesh.c_str(), -1, rankCpu);
     fileStream.open(file.c_str(), std::ios::app);
     fileStream << m_run->m_nbCellsTotalAMR << std::endl;
     fileStream.close();
@@ -296,10 +309,10 @@ void Output::saveInfosMailles() const
 
 //***********************************************************************
 
-void Output::ecritJeuDonnees(std::vector<double> jeuDonnees, std::ofstream &fileStream, TypeData typeData)
+void Output::writeDataset(std::vector<double> jeuDonnees, std::ofstream &fileStream, TypeData typeData)
 {
   if (m_precision != 0) fileStream.precision(m_precision);
-  if (!m_ecritBinaire) {
+  if (!m_writeBinary) {
     for (unsigned int k = 0; k < jeuDonnees.size(); k++) { fileStream << jeuDonnees[k] << " "; }
   }
   else {
@@ -350,9 +363,9 @@ void Output::ecritJeuDonnees(std::vector<double> jeuDonnees, std::ofstream &file
 
 //***********************************************************************
 
-void Output::getJeuDonnees(std::istringstream &data, std::vector<double>& jeuDonnees)
+void Output::getDataset(std::istringstream &data, std::vector<double>& jeuDonnees)
 {
-  if (!m_ecritBinaire) {
+  if (!m_writeBinary) {
     for (unsigned int k = 0; k < jeuDonnees.size(); k++) { data >> jeuDonnees[k]; }
   }
   else {
@@ -497,7 +510,7 @@ void Output::readInfos()
 
 //***********************************************************************
 
-std::string Output::creationNameFichier(const char* name, int lvl, int proc, int numFichier) const
+std::string Output::createFilename(const char* name, int lvl, int proc, int numFichier) const
 {
   try {
     std::stringstream num;

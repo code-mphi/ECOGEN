@@ -50,13 +50,7 @@ void MUSGmshV4::initGeometryMonoCPU(TypeMeshContainer<Cell*>& cells, TypeMeshCon
 		// -----------------------------
 		this->readMeshMonoCPU();  // Fill m_nodes and m_elements
 
-		// Display mesh information
-		this->writeMeshInfoData();
-
 		// CAUTION: Ordering of m_elements is important. Faces first, then cells.
-
-		std::cout << "------------------------------------------------------" << std::endl;
-		std::cout << " D) BUILDING GEOMETRY ..." << std::endl;
 
 		// 2) Assignment of cells to their geometric element
 		// -------------------------------------------------
@@ -80,6 +74,12 @@ void MUSGmshV4::initGeometryMonoCPU(TypeMeshContainer<Cell*>& cells, TypeMeshCon
 			m_geometrie = 3;
 		}
 		m_numberCellsTotal = m_numberCellsCalcul;
+
+		// Display mesh information
+		this->writeMeshInfoData();
+
+		std::cout << "------------------------------------------------------" << std::endl;
+		std::cout << " D) BUILDING GEOMETRY ..." << std::endl;
 
 		// Assignment of non-reflecting boundary for missing limits
 		unsigned int nbLimits(0);

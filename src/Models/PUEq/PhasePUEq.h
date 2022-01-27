@@ -55,8 +55,7 @@ class PhasePUEq : public PhaseUEq
 
     //Specific methods for data printing
     //----------------------------------
-    //virtual int getNumberScalars() const { return 4; }; //For complete output
-    virtual int getNumberScalars() const { return 2; };   //For reduced output
+    virtual int getNumberScalars() const { return numberScalarsPhase; };
 };
 
 #endif // PHASEPUEQ_H

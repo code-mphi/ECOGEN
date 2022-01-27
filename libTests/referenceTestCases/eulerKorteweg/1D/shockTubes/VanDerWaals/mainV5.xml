@@ -1,0 +1,17 @@
+<?xml version = "1.0" encoding = "UTF-8" standalone = "yes"?>
+<computationParam>
+	<run>vanDerWaals1DShockTube</run>
+	<outputMode format="GNU" binary="false" precision="10"/>
+	<timeControlMode iterations="false">
+		<iterations number="10" iterFreq="1"/>
+		<physicalTime totalTime="2.e-4" timeFreq="2.e-4"/>
+	</timeControlMode>
+	<computationControl CFL="0.5"/>
+	<secondOrder>
+		<globalLimiter>vanleer</globalLimiter>
+	</secondOrder>
+	<gradient>
+		<method>green-gauss</method>
+	</gradient>
+	<restartSimulation restartFileNumber="0" AMRsaveFreq="0"/>
+</computationParam>

@@ -34,13 +34,12 @@ using namespace tinyxml2;
 
 //****************************************************************************
 
-BoundCondTank::BoundCondTank(int numPhysique, XMLElement* element, int& numberPhases, int& numberTransports, std::vector<std::string> nameTransports, Eos** eos, std::string fileName) :
+BoundCondTank::BoundCondTank(int numPhysique, XMLElement* element, const int& numbPhases, const int& numbTransports, std::vector<std::string> nameTransports, Eos** eos, std::string fileName) :
   BoundCond(numPhysique)
 {
-  m_numberPhases = numberPhases;
-  m_ak0 = new double[m_numberPhases];
-  m_Yk0 = new double[m_numberPhases];
-  m_rhok0 = new double[m_numberPhases]; 
+  m_ak0 = new double[numbPhases];
+  m_Yk0 = new double[numbPhases];
+  m_rhok0 = new double[numbPhases]; 
   
   //Reading tank pressure and temperature conditions
   //------------------------------------------------
@@ -53,7 +52,7 @@ BoundCondTank::BoundCondTank(int numPhysique, XMLElement* element, int& numberPh
   error = sousElement->QueryDoubleAttribute("T0", &m_T0);
   if (error != XML_NO_ERROR) throw ErrorXMLAttribut("T0", fileName, __FILE__, __LINE__);
 
-  if (m_numberPhases == 1) {
+  if (numbPhases == 1) {
     m_rhok0[0] = eos[0]->computeDensity(m_p0, m_T0);
     m_ak0[0] = 1.;
     m_Yk0[0] = 1.;
@@ -73,10 +72,10 @@ BoundCondTank::BoundCondTank(int numPhysique, XMLElement* element, int& numberPh
       //EOS name searching
       nameEOS = fluid->Attribute("EOS");
       int e(0);
-      for (e = 0; e < m_numberPhases; e++) {
+      for (e = 0; e < numbPhases; e++) {
         if (nameEOS == eos[e]->getName()) { break; }
       }
-      if (e == m_numberPhases) { throw ErrorXMLEOSInconnue(nameEOS, fileName, __FILE__, __LINE__); }
+      if (e == numbPhases) { throw ErrorXMLEOSInconnue(nameEOS, fileName, __FILE__, __LINE__); }
 
       //Reading fluid proportion
       if (fluid->QueryDoubleAttribute("alpha", &m_ak0[e]) == XML_NO_ERROR) {
@@ -89,55 +88,55 @@ BoundCondTank::BoundCondTank(int numPhysique, XMLElement* element, int& numberPh
       }
       fluid = fluid->NextSiblingElement("dataFluid");
     }
-    if (nbFluids != m_numberPhases) throw ErrorXMLEtat("Tank", fileName, __FILE__, __LINE__);
+    if (nbFluids != numbPhases) throw ErrorXMLEtat("Tank", fileName, __FILE__, __LINE__);
 
     //Proportions checking
     //--------------------
     double sum(0.);
     if (presenceAlpha) {
-      for (int k = 0; k < m_numberPhases; k++) {
+      for (int k = 0; k < numbPhases; k++) {
         if (m_ak0[k]<0. || m_ak0[k]>1.) throw ErrorXMLAttribut("alpha should be in [0,1]", fileName, __FILE__, __LINE__);
         sum += m_ak0[k];
       }
       if (std::fabs(sum - 1.) > 1.e-6) { throw ErrorXMLAttribut("sum of alpha should be 1", fileName, __FILE__, __LINE__); }
       else {
-        for (int k = 0; k < m_numberPhases; k++) { m_ak0[k] /= sum; }
+        for (int k = 0; k < numbPhases; k++) { m_ak0[k] /= sum; }
       }
     }
     else if (presenceMassFrac) {
-      for (int k = 0; k < m_numberPhases; k++) {
+      for (int k = 0; k < numbPhases; k++) {
         if (m_Yk0[k]<0. || m_Yk0[k]>1.) throw ErrorXMLAttribut("massFrac should be in [0,1]", fileName, __FILE__, __LINE__);
         sum += m_Yk0[k];
       }
       if (std::fabs(sum - 1.) > 1.e-6) { throw ErrorXMLAttribut("sum of massFrac should be 1", fileName, __FILE__, __LINE__); }
       else {
-        for (int k = 0; k < m_numberPhases; k++) { m_Yk0[k] /= sum; }
+        for (int k = 0; k < numbPhases; k++) { m_Yk0[k] /= sum; }
       }
     }
     else { throw ErrorXMLAttribut("One of following is required : alpha, massFrac", fileName, __FILE__, __LINE__); }
 
     //Fulfill tank state (rhok0, ak0 or Yk0)
     //--------------------------------------
-    for (int k = 0; k < m_numberPhases; k++) {
+    for (int k = 0; k < numbPhases; k++) {
       m_rhok0[k] = eos[k]->computeDensity(m_p0, m_T0);
     }
     double rhoMel(0.);
     if (presenceAlpha) {
-      for (int k = 0; k < m_numberPhases; k++) { rhoMel += m_ak0[k] * m_rhok0[k]; }
-      for (int k = 0; k < m_numberPhases; k++) { m_Yk0[k] = m_ak0[k] * m_rhok0[k] / rhoMel; }
+      for (int k = 0; k < numbPhases; k++) { rhoMel += m_ak0[k] * m_rhok0[k]; }
+      for (int k = 0; k < numbPhases; k++) { m_Yk0[k] = m_ak0[k] * m_rhok0[k] / rhoMel; }
     }
     else {
-      for (int k = 0; k < m_numberPhases; k++) { rhoMel += m_Yk0[k] / m_rhok0[k]; }
+      for (int k = 0; k < numbPhases; k++) { rhoMel += m_Yk0[k] / m_rhok0[k]; }
       rhoMel = 1.0 / rhoMel;
-      for (int k = 0; k < m_numberPhases; k++) { m_ak0[k] = rhoMel * m_Yk0[k] / m_rhok0[k]; }
+      for (int k = 0; k < numbPhases; k++) { m_ak0[k] = rhoMel * m_Yk0[k] / m_rhok0[k]; }
     }
 
   } //End proportion
 
   //Reading of transports
   //---------------------
-  m_valueTransport = new double[numberTransports];
-  if (numberTransports) {
+  m_valueTransport = new double[numbTransports];
+  if (numbTransports) {
     XMLElement* sousElement(element->FirstChildElement("dataTank"));
     if (sousElement == NULL) throw ErrorXMLElement("dataTank", fileName, __FILE__, __LINE__);
     XMLError error;
@@ -150,10 +149,10 @@ BoundCondTank::BoundCondTank(int numPhysique, XMLElement* element, int& numberPh
       nameTransport = elementTransport->Attribute("name");
       if (nameTransport == "") throw ErrorXMLAttribut("name", fileName, __FILE__, __LINE__);
       int e(0);
-      for (e = 0; e < numberTransports; e++) {
+      for (e = 0; e < numbTransports; e++) {
         if (nameTransport == nameTransports[e]) { break; }
       }
-      if (e != numberTransports) {
+      if (e != numbTransports) {
         error = elementTransport->QueryDoubleAttribute("value", &m_valueTransport[e]);
         if (error != XML_NO_ERROR) throw ErrorXMLAttribut("value", fileName, __FILE__, __LINE__);
         foundColors++;
@@ -161,22 +160,19 @@ BoundCondTank::BoundCondTank(int numPhysique, XMLElement* element, int& numberPh
       //Next transport
       elementTransport = elementTransport->NextSiblingElement("transport");
     }
-    if (numberTransports > foundColors) throw ErrorXMLAttribut("Not enough transport equations in tank BC", fileName, __FILE__, __LINE__);
+    if (numbTransports > foundColors) throw ErrorXMLAttribut("Not enough transport equations in tank BC", fileName, __FILE__, __LINE__);
   }
-  m_numberTransports = numberTransports;
 }
 
 //****************************************************************************
 
 BoundCondTank::BoundCondTank(const BoundCondTank &Source, const int& lvl) : BoundCond(Source, lvl)
 {
-  m_numberPhases = Source.m_numberPhases;
-  m_numberTransports = Source.m_numberTransports;
-  m_ak0 = new double[m_numberPhases];
-  m_Yk0 = new double[m_numberPhases];
-  m_rhok0 = new double[m_numberPhases];
+  m_ak0 = new double[numberPhases];
+  m_Yk0 = new double[numberPhases];
+  m_rhok0 = new double[numberPhases];
 
-  for (int k = 0; k < m_numberPhases; k++)
+  for (int k = 0; k < numberPhases; k++)
   {
     m_ak0[k] = Source.m_ak0[k];
     m_Yk0[k] = Source.m_Yk0[k];
@@ -185,8 +181,8 @@ BoundCondTank::BoundCondTank(const BoundCondTank &Source, const int& lvl) : Boun
   m_p0 = Source.m_p0;
   m_T0 = Source.m_T0;
 
-  m_valueTransport = new double[Source.m_numberTransports];
-  for (int k = 0; k < Source.m_numberTransports; k++) {
+  m_valueTransport = new double[numberTransports];
+  for (int k = 0; k < numberTransports; k++) {
     m_valueTransport[k] = Source.m_valueTransport[k];
   }
 }
@@ -210,16 +206,16 @@ void BoundCondTank::createBoundary(TypeMeshContainer<CellInterface*>& cellInterf
 
 //****************************************************************************
 
-void BoundCondTank::solveRiemannBoundary(Cell& cellLeft, const int& numberPhases, const double& dxLeft, double& dtMax)
+void BoundCondTank::solveRiemannBoundary(Cell& cellLeft, const double& dxLeft, double& dtMax)
 {
-  m_mod->solveRiemannTank(cellLeft, numberPhases, dxLeft, dtMax, m_ak0, m_rhok0, m_p0, m_T0, m_massflow, m_powerFlux);
+  model->solveRiemannTank(cellLeft, dxLeft, dtMax, m_ak0, m_rhok0, m_p0, m_T0, m_boundData);
 }
 
 //****************************************************************************
 
-void BoundCondTank::solveRiemannTransportBoundary(Cell& cellLeft, const int&  numberTransports) const
+void BoundCondTank::solveRiemannTransportBoundary(Cell& cellLeft) const
 {
-	m_mod->solveRiemannTransportTank(cellLeft, numberTransports, m_valueTransport);
+	model->solveRiemannTransportTank(cellLeft, m_valueTransport);
 }
 
 //****************************************************************************

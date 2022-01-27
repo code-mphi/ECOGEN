@@ -31,7 +31,6 @@
 #ifndef SYMMETRY_H
 #define SYMMETRY_H
 
-#include <string>
 #include "../libTierces/tinyxml2.h"
 #include "../Errors.h"
 #include "../Tools.h"
@@ -49,14 +48,12 @@ public:
   virtual ~Symmetry();
   //! \brief     Add the symmetric terms for the cylindrical or spherical symmetry assumption
   //! \param     cell           cell to add the terms
-  //! \param     numberPhases   number of phases
   //! \param     type           enumeration allowing to correct either state in the cell or second order half time step state
-  virtual void addSymmetricTerms(Cell* /*cell*/, const int& /*numberPhases*/, Prim /*type*/ = vecPhases) {};
+  virtual void addSymmetricTerms(Cell* /*cell*/, Prim /*type*/ = vecPhases) {};
   //! \brief     Add the additional-physics, symmetric terms for the cylindrical or spherical symmetry assumption
   //! \param     cell           cell to add the terms
-  //! \param     numberPhases   number of phases
   //! \param     addPhys        additional-physics object to call the corresponding symmetry subroutine
-  virtual void addSymmetricTermsAddPhys(Cell* /*cell*/, const int& /*numberPhases*/, AddPhys& /*addPhys*/) {};
+  virtual void addSymmetricTermsAddPhys(Cell* /*cell*/, AddPhys& /*addPhys*/) {};
 
 protected:
   int m_radialAxis;   //!< Name of the radial axis for the axi-symmetry

@@ -10,8 +10,9 @@
 		<boundCond name="axis" type="symmetry" number="1"/>
 		<boundCond name="wall" type="wall" number="2"/>
 		<boundCond name="inflow" type="subInjection" number="3">
-		    <dataInjection m0="300." T0="300."/> <!-- Supersonic divergent -->
-		    <!-- <dataInjection m0="200." T0="300."/> --> <!-- Subsonic divergent -->
+		    <dataInjection m0="300."/> <!-- Supersonic divergent -->
+        <!-- <dataInjection m0="200."/> Subsonic divergent -->
+        <dataFluid temperature="300."/> 
 		</boundCond>
 		<boundCond name="outflow" type="outflow" number="4">
 			<dataOutflow p0="1.e5"/>

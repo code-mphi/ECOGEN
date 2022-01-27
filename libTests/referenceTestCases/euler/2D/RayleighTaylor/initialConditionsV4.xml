@@ -1,0 +1,43 @@
+<?xml version = "1.0" encoding = "UTF-8" standalone = "yes"?>
+<CI>
+    <!-- LIST OF GEOMETRICAL DOMAINS  -->
+    <physicalDomains> 
+        <domain name="base" state="lightGas" type="entireDomain"/>
+
+        <domain name="heavyGas" state="heavyGas" type="halfSpace">
+            <dataHalfSpace axis="y" origin="0.7" direction="positive"/>
+        </domain>
+
+        <domain name="heavyGas" state="heavyGas" type="ellipse">
+            <dataEllipse axis1="x" axis2="y" radius1="0.1" radius2="0.05">
+                <center x="0.1" y="0.74" z="0."/>
+            </dataEllipse>
+        </domain>
+    </physicalDomains>
+
+    <!-- LIST OF BOUNDARY CONDITIONS -->
+    <boundaryConditions>
+        <boundCond name="CLXm" type="symmetry" number="1"/>
+        <boundCond name="CLXp" type="symmetry" number="2"/>
+        <boundCond name="CLYm" type="wall" number="3"/>
+        <boundCond name="CLYp" type="wall" number="4"/>
+    </boundaryConditions>
+    
+    <!--  LIST OF STATES  -->
+    <state name="lightGas">
+        <material type="fluid" EOS="IG_heavyGas.xml">
+            <dataFluid pressure="1.e5" density="1.">
+                <velocity x="0." y="0." z="0."/>
+            </dataFluid>
+        </material>
+    </state>
+
+    <state name="heavyGas">
+        <material type="fluid" EOS="IG_heavyGas.xml">
+            <dataFluid pressure="1.e5" density="5.">
+                <velocity x="0." y="0." z="0."/>
+            </dataFluid>
+        </material>
+    </state>
+
+</CI>

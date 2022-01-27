@@ -36,6 +36,9 @@
 #include "EulerHomogeneous/PhaseEulerHomogeneous.h"
 #include "PTUEq/PhasePTUEq.h"
 #include "UEq/PhaseUEq.h"
+#include "UEqTotEnergy/PhaseUEqTotEnergy.h"
+#include "EulerKorteweg/PhaseEulerKorteweg.h"
+#include "NonLinearSchrodinger/PhaseNonLinearSchrodinger.h"
 
 //Add new phases here
 

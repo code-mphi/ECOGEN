@@ -58,11 +58,11 @@ public:
   virtual void locateProbeInMesh(const TypeMeshContainer<Cell*>& cells, const int& nbCells, bool localSeeking = false);
   virtual Cell* locateProbeInAMRSubMesh(std::vector<Cell*>* cells, const int& nbCells);
 
-  virtual void prepareSortieSpecifique();
-  virtual void ecritSolution(Mesh* /*mesh*/, std::vector<Cell*>* /*cellsLvl*/);
+  virtual void initializeSpecificOutput();
+  virtual void writeResults(Mesh* /*mesh*/, std::vector<Cell*>* /*cellsLvl*/);
 
-  virtual void prepareOutputInfos() {}; //nothing to print
-  virtual void ecritInfos() {};
+  virtual void initializeOutputInfos() {}; //nothing to print
+  virtual void writeInfos() {};
 
   //Accessors
   virtual double getNextTime() { return m_nextAcq; };

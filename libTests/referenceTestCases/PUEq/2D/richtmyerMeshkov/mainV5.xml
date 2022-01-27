@@ -4,7 +4,12 @@
   <outputMode format="XML" binary="false"/>
   <timeControlMode iterations="false">
     <iterations number="100" iterFreq="10"/>
-    <physicalTime totalTime="8.6e-3" timeFreq="1.72e-3"/>
+    <physicalTime totalTime="8.6e-2" timeFreq="1.72e-3"/>
   </timeControlMode>
   <computationControl CFL="0.6"/>
+  <secondOrder>
+		<globalLimiter>mc</globalLimiter>
+		<globalVolumeFractionLimiter>thinc</globalVolumeFractionLimiter>
+    	<interfaceVolumeFractionLimiter>thinc</interfaceVolumeFractionLimiter>
+	</secondOrder>
 </computationParam>

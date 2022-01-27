@@ -84,7 +84,7 @@ void FaceNS::construitFace(const Coord* noeuds, const int& numNoeudAutre, Elemen
 
 //***********************************************************************
 
-bool FaceNS::faceExiste(FaceNS** faces, const int& indexMaxFaces, int& indexFaceExiste)
+bool FaceNS::faceExists(FaceNS** faces, const int& indexMaxFaces, int& indexFaceExiste)
 {
   int faceTrouvee(1);
   //for (int i = 0; i < indexMaxFaces; i++)
@@ -208,13 +208,13 @@ void FaceNS::afficheNoeuds() const
 
 //*********************************************************************
 
-int FaceNS::rechercheFace(int* face, int& sommeNoeuds, int** tableauFaces, int* tableauSommeNoeuds, int numberNoeuds, int& indexMaxFaces)
+int FaceNS::searchFace(int* face, int& sumNodes, int** tableauFaces, int* tableauSommeNoeuds, int numberNoeuds, int& indexMaxFaces)
 {
     for (int i = indexMaxFaces-1; i>=0; i--)
     {
       int existe = 1;
       //On utilise la somme des number des noeuds pour faire un premier tri : permet d accelerer la recherche
-      if (tableauSommeNoeuds[i] != sommeNoeuds){ continue; };
+      if (tableauSommeNoeuds[i] != sumNodes){ continue; };
       //Verification noeud par noeud
       for (int n=0; n<numberNoeuds; n++)
       {
@@ -227,13 +227,13 @@ int FaceNS::rechercheFace(int* face, int& sommeNoeuds, int** tableauFaces, int* 
 
 //*********************************************************************
 
-int FaceNS::rechercheFace(int* face, int& sommeNoeuds, std::vector<int*> tableauFaces, std::vector<int> tableauSommeNoeuds, int numberNoeuds, int& indexMaxFaces)
+int FaceNS::searchFace(int* face, int& sumNodes, std::vector<int*> tableauFaces, std::vector<int> tableauSommeNoeuds, int numberNoeuds, int& indexMaxFaces)
 {
     for (int i = indexMaxFaces-1; i>=0; i--)
     {
       int existe = 1;
       //On utilise la somme des number des noeuds pour faire un premier tri : permet d accelerer la recherche
-      if (tableauSommeNoeuds[i] != sommeNoeuds){ continue; };
+      if (tableauSommeNoeuds[i] != sumNodes){ continue; };
       //Verification noeud par noeud
       for (int n=0; n<numberNoeuds; n++)
       {

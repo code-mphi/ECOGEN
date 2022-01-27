@@ -31,7 +31,6 @@
 #ifndef MIXPUEQ_H
 #define MIXPUEQ_H
 
-#include <vector>
 #include "../UEq/MixUEq.h"
 
 //! \class     MixPUEq

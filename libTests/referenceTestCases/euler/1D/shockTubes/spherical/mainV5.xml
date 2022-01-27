@@ -1,10 +1,14 @@
 <?xml version = "1.0" encoding = "UTF-8" standalone = "yes"?>
 <computationParam>
-	<run>eulerMrfCircleZones</run>
-	<outputMode format="XML" binary="false" precision="10"/>
-	<timeControlMode iterations="false">
-		<iterations number="10" iterFreq="1"/>
-		<physicalTime totalTime="0.5" timeFreq="0.01"/>
-	</timeControlMode>
-	<computationControl CFL="0.6"/>
+  <run>euler1DSphericalExplosion</run>
+  <outputMode format="GNU" binary="false" precision="10"/>
+  <timeControlMode iterations="false">
+  <iterations number="10" iterFreq="10"/>
+    <physicalTime totalTime="0.25" timeFreq="0.25"/>
+  </timeControlMode>
+  <computationControl CFL="0.7"/>
+  <secondOrder>
+    <globalLimiter>vanleer</globalLimiter>
+  </secondOrder>
+
 </computationParam>

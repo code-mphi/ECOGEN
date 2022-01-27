@@ -42,8 +42,8 @@ public:
   SymCylindrical(tinyxml2::XMLElement* element, std::string nameFile = "Unknown file");
   virtual ~SymCylindrical();
 
-  virtual void addSymmetricTerms(Cell* cell, const int& numberPhases, Prim type = vecPhases);
-  virtual void addSymmetricTermsAddPhys(Cell* cell, const int& numberPhases, AddPhys& addPhys);
+  virtual void addSymmetricTerms(Cell* cell, Prim type = vecPhases);
+  virtual void addSymmetricTermsAddPhys(Cell* cell, AddPhys& addPhys);
 };
 
 #endif //SYMCYLINDRICAL_H

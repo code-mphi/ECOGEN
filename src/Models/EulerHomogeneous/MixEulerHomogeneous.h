@@ -31,7 +31,6 @@
 #ifndef MIXEULERHOMOGENEOUSOUS_H
 #define MIXEULERHOMOGENEOUSOUS_H
 
-#include <vector>
 #include "../Mixture.h"
 
 //! \class     MixEulerHomogeneous
@@ -53,14 +52,14 @@ public:
 
   virtual void allocateAndCopyMixture(Mixture** mixture);
   virtual void copyMixture(Mixture &mixture);
-  virtual double computeDensity(const double* alphak, const double* rhok, const int& numberPhases);
-  virtual double computePressure(const double* alphak, const double* pk, const int& numberPhases);
-  virtual double computeInternalEnergy(const double* Yk, const double* ek, const int& numberPhases);
-  virtual double computeFrozenSoundSpeed(const double* Yk, const double* ck, const int& numberPhases);
+  virtual double computeDensity(const double* alphak, const double* rhok);
+  virtual double computePressure(const double* alphak, const double* pk);
+  virtual double computeInternalEnergy(const double* Yk, const double* ek);
+  virtual double computeFrozenSoundSpeed(const double* Yk, const double* ck);
 
-  virtual double computePressure(double masse, const double& internalEnergy, Phase** phases, Mixture* mixture, const int& numberPhases, const int& liq, const int& vap);
+  virtual double computePressure(double mass, const double& internalEnergy, Phase** phases, Mixture* mixture, const int& liq, const int& vap);
 
-  virtual void computeMixtureVariables(Phase** vecPhase, const int& numberPhases);
+  virtual void computeMixtureVariables(Phase** vecPhase);
   virtual void internalEnergyToTotalEnergy(std::vector<QuantitiesAddPhys*>& vecGPA);
   virtual void totalEnergyToInternalEnergy(std::vector<QuantitiesAddPhys*>& vecGPA);
 
@@ -108,7 +107,7 @@ public:
   virtual const double& getW() const { return m_velocity.getZ(); };
   virtual const Coord& getVelocity() const { return m_velocity; };
   virtual Coord& getVelocity() { return m_velocity; };
-  virtual const double& getEnergy() const { return m_energie; };
+  virtual const double& getEnergy() const { return m_energy; };
   virtual const double& getTotalEnergy() const { return m_totalEnergy; };
   virtual const double& getMixSoundSpeed() const { return m_EqSoundSpeed; };
 
@@ -133,7 +132,7 @@ private:
   double m_pressure;             //!< mixture pressure
   double m_temperature;          //!< mixture temperature
   Coord m_velocity;              //!< mixture velocity
-  double m_energie;              //!< mixture internal specific energy
+  double m_energy;               //!< mixture internal specific energy
   double m_totalEnergy;          //!< mixture total specific energy
   double m_EqSoundSpeed;         //!< thermodynamical equilibrium sound speed
 };

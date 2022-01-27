@@ -43,13 +43,15 @@ public:
   virtual ~BoundCondWall();
 
   virtual void createBoundary(TypeMeshContainer<CellInterface*>& cellInterfaces);
-  virtual void solveRiemannBoundary(Cell& cellLeft, const int& numberPhases, const double& dxLeft, double& dtMax);
-  virtual void solveRiemannTransportBoundary(Cell& /*cellLeft*/, const int& numberTransports) const;
+  virtual void solveRiemannBoundary(Cell& cellLeft, const double& dxLeft, double& dtMax);
+  virtual void solveRiemannTransportBoundary(Cell& /*cellLeft*/) const;
 
   virtual int whoAmI() const { return WALL; };
   virtual int whoAmIHeat() const { return m_heatCondition; }
+  virtual bool isMRFWall() const { return m_isMRFWall; }
 
   virtual double getBoundaryHeatQuantity() const { return m_imposedHeatQuantity; }
+  virtual Coord& getWallRotationalVelocityMRF() { return m_omegaWall; }
 
   //For AMR method
   virtual void creerCellInterfaceChild();  /*!< Create a child cell interface (not initialized) */
@@ -57,6 +59,8 @@ public:
 protected:
   TypeBCHeat m_heatCondition;   //!< Specific heat boundary condition, could be imposed temperature or flux density (default is adiabatic)
   double m_imposedHeatQuantity; //!< Imposed heat quantity on the wall. Depending on input (m_heatCondition) could be imposed temperature or flux density. This option requires conductivity additionnal physics to work
+  bool m_isMRFWall;             //!< Flag to check if a special boundary treatment is required with MRF
+  Coord m_omegaWall;            //!< Rotational wall velocity for MRF computation with viscous additionnal physic
 private:
 };
 

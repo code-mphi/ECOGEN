@@ -35,11 +35,11 @@ using namespace tinyxml2;
 
 //***************************************************************************
 
-PhaseEulerHomogeneous::PhaseEulerHomogeneous() :m_alpha(1.0), m_density(0.), m_pressure(0.), m_Y(0.), m_eos(0), m_energie(0.), m_totalEnergy(0.), m_soundSpeed(0.) {}
+PhaseEulerHomogeneous::PhaseEulerHomogeneous() :m_alpha(1.0), m_density(0.), m_pressure(0.), m_Y(0.), m_eos(0), m_energy(0.), m_totalEnergy(0.), m_soundSpeed(0.) {}
 
 //***************************************************************************
 
-PhaseEulerHomogeneous::PhaseEulerHomogeneous(XMLElement* material, Eos* eos, std::string fileName) : m_eos(eos), m_energie(0.), m_totalEnergy(0.), m_soundSpeed(0.)
+PhaseEulerHomogeneous::PhaseEulerHomogeneous(XMLElement* material, Eos* eos, std::string fileName) : m_eos(eos), m_energy(0.), m_totalEnergy(0.), m_soundSpeed(0.)
 {
   XMLElement* sousElement(material->FirstChildElement("dataFluid"));
   if (sousElement == NULL) throw ErrorXMLElement("dataFluid", fileName, __FILE__, __LINE__);
@@ -70,7 +70,7 @@ void PhaseEulerHomogeneous::copyPhase(Phase &phase)
   m_density = phase.getDensity();
   m_pressure = phase.getPressure();
   m_eos = phase.getEos();
-  m_energie = phase.getEnergy();
+  m_energy = phase.getEnergy();
   m_soundSpeed = phase.getSoundSpeed();
   m_totalEnergy = phase.getTotalEnergy();
 }
@@ -79,9 +79,9 @@ void PhaseEulerHomogeneous::copyPhase(Phase &phase)
 
 void PhaseEulerHomogeneous::extendedCalculusPhase(const Coord& velocity)
 {
-  m_energie = m_eos->computeEnergy(m_density, m_pressure);
+  m_energy = m_eos->computeEnergy(m_density, m_pressure);
   m_soundSpeed = m_eos->computeSoundSpeed(m_density, m_pressure);
-  m_totalEnergy = m_energie + 0.5*velocity.squaredNorm();
+  m_totalEnergy = m_energy + 0.5*velocity.squaredNorm();
 }
 
 //****************************************************************************
@@ -250,6 +250,20 @@ void PhaseEulerHomogeneous::verifyAndCorrectPhase()
   m_eos->verifyAndModifyPressure(m_pressure);
 }
 
+//***************************************************************************
+
+void PhaseEulerHomogeneous::verifyAndCorrectDensityMax(const double& mass)
+{
+  m_eos->verifyAndCorrectDensityMax(mass, m_alpha, m_density);
+}
+
+//***************************************************************************
+
+void PhaseEulerHomogeneous::verifyAndCorrectDensityMax()
+{
+  m_eos->verifyAndCorrectDensityMax(m_density);
+}
+
 //****************************************************************************
 //**************************** DATA ACCESSORS ********************************
 //****************************************************************************
@@ -270,7 +284,7 @@ void PhaseEulerHomogeneous::setEos(Eos* eos) { m_eos = eos; }
 
 //***************************************************************************
 
-void PhaseEulerHomogeneous::setEnergy(double energie) { m_energie = energie; }
+void PhaseEulerHomogeneous::setEnergy(double energy) { m_energy = energy; }
 
 //***************************************************************************
 

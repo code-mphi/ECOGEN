@@ -100,7 +100,7 @@ bool GDHalfSpace::belong(Coord& posElement, const int& /*lvl*/) const
 
 //***************************************************************
 
-void GDHalfSpace::fillIn(Cell* cell, const int& numberPhases, const int& numberTransports) const
+void GDHalfSpace::fillIn(Cell* cell) const
 {
   //As basic fillIn: Test if the cell belongs to the geometrical domain
   bool belongs(true);

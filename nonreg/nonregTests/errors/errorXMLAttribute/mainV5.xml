@@ -3,7 +3,7 @@
 	<run>pressureVelocityEq1DTransportsInterfaceWaterAir</run>
 	<outputMode format="GNU" binary="false"/>
 	<timeControlMode iterations="true">
-<iterations number="10" iterFreq="10"/>
+	<iterations number="10" iterFreq="10"/>
 		<physicalTime totalTime="500.e-6" timeFreq="500.e-6"/>
 	</timeControlMode>
 	<computationControl CFL="0.6"/>

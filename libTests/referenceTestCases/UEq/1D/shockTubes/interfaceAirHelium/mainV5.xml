@@ -3,13 +3,13 @@
 	<run>velocityEq1DshockTubeInterfaceAirHelium</run>
 	<outputMode format="GNU" binary="false"/>
 	<timeControlMode iterations="false">
-		<iterations number="100" iterFreq="100"/>
-		<physicalTime totalTime="1.e-4" timeFreq="1.e-5"/>
+		<iterations number="2" iterFreq="1"/>
+		<physicalTime totalTime="1.e-4" timeFreq="1.e-4"/>
 	</timeControlMode>
 	<computationControl CFL="0.8"/>
 	<secondOrder>
 		<globalLimiter>vanleer</globalLimiter>
-<!-- 		<globalVolumeFractionLimiter>thinc</globalVolumeFractionLimiter>
-    	<interfaceVolumeFractionLimiter>thinc</interfaceVolumeFractionLimiter> -->
+		<globalVolumeFractionLimiter>thinc</globalVolumeFractionLimiter>
+    	<interfaceVolumeFractionLimiter>thinc</interfaceVolumeFractionLimiter>
 	</secondOrder>
 </computationParam>

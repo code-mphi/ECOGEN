@@ -44,26 +44,23 @@ public:
   //! \brief     Stiff Pressure-Temperature relaxation method
   //! \details   call for this method computes the mechanical and thermal relaxed state in a given cell. Relaxed state is stored depending on the type enum
   //! \param     cell           cell to relax
-  //! \param     numberPhases   number of phases
   //! \param     type           enumeration allowing to relax either state in the cell or second order half time step state
-  virtual void relaxation(Cell* cell, const int& numberPhases, const double& /*dt*/, Prim type = vecPhases);
+  virtual void relaxation(Cell* cell, const double& /*dt*/, Prim type = vecPhases);
 
   //! \brief     Pressure determination with analytical formulae for 2 phases governed by SG or IG EOS
   //! \details   call for this method determines the pressure using the analytical formulae only valid in the specific case of 2 phases governed by SG or IG EOS
   //! \param     cell           cell to relax
-  //! \param     numberPhases   number of phases
   //! \param     type           enumeration allowing to relax either state in the cell or second order half time step state
   //! \return    pressure
-  double analyticalPressure(Cell* cell, const int& numberPhases, Prim type = vecPhases) const;
+  double analyticalPressure(Cell* cell, Prim type = vecPhases) const;
 
   //! \brief     Temperature calculus with analytical formulae for N phases governed by SG or IG EOS
   //! \details   call for this method computes the temprerature for N phases governed by SG or IG EOS using the known relaxed pressure
   //! \param     pressure       the value of relaxed pressure
   //! \param     cell           cell to relax
-  //! \param     numberPhases   number of phases
   //! \param     type           enumeration allowing to relax either state in the cell or second order half time step state
   //! \return    temperature
-  double analyticalTemperature(double pressure, Cell* cell, const int& numberPhases, Prim type = vecPhases) const;
+  double analyticalTemperature(double pressure, Cell* cell, Prim type = vecPhases) const;
 
   //! \brief     Return the pressure- and temperature-relaxation type
   virtual int getType() const { return PT; }

@@ -43,7 +43,7 @@ CellO2Ghost::CellO2Ghost(int lvl) : CellO2(lvl), m_rankOfNeighborCPU(0), m_vecPh
 CellO2Ghost::~CellO2Ghost()
 {
 	for (unsigned int s = 0; s < m_vecPhasesSlopesGhost.size(); s++) {
-		for (int k = 0; k < m_numberPhases; k++) {
+		for (int k = 0; k < numberPhases; k++) {
 			delete m_vecPhasesSlopesGhost[s][k];
 		}
 		delete[] m_vecPhasesSlopesGhost[s];
@@ -65,10 +65,8 @@ void CellO2Ghost::pushBackSlope()
 
 //***********************************************************************
 
-void CellO2Ghost::allocate(const int& numberPhases, const int& numberTransports, const std::vector<AddPhys*>& addPhys, Model* model)
+void CellO2Ghost::allocate(const std::vector<AddPhys*>& addPhys)
 {
-  m_numberPhases = numberPhases;
-  m_numberTransports = numberTransports;
   m_vecPhases = new Phase*[numberPhases];
   m_vecPhasesO2 = new Phase*[numberPhases];
   for (int k = 0; k < numberPhases; k++) {
@@ -77,8 +75,8 @@ void CellO2Ghost::allocate(const int& numberPhases, const int& numberTransports,
   }
   model->allocateMixture(&m_mixture);
   model->allocateMixture(&m_mixtureO2);
-  model->allocateCons(&m_cons, numberPhases);
-  model->allocateCons(&m_consSauvegarde, numberPhases);
+  model->allocateCons(&m_cons);
+  model->allocateCons(&m_consSauvegarde);
   if (numberTransports > 0) {
     m_vecTransports = new Transport[numberTransports];
     m_consTransports = new Transport[numberTransports];
@@ -86,7 +84,6 @@ void CellO2Ghost::allocate(const int& numberPhases, const int& numberTransports,
     m_vecTransportsO2 = new Transport[numberTransports];
   }
   for (unsigned int k = 0; k < addPhys.size(); k++) { addPhys[k]->addQuantityAddPhys(this); }
-  m_model = model;
 
   //Allocation des slopes fantomes, specifique aux limites paralleles
   for (unsigned int s = 0; s < m_vecPhasesSlopesGhost.size(); s++) {
@@ -118,8 +115,8 @@ void CellO2Ghost::setRankOfNeighborCPU(int rank)
 
 //***********************************************************************
 
-void CellO2Ghost::computeLocalSlopes(const int& numberPhases, const int& numberTransports, CellInterface& cellInterfaceRef,
-	Limiter& globalLimiter, Limiter& interfaceLimiter, Limiter& globalVolumeFractionLimiter, Limiter& interfaceVolumeFractionLimiter,
+void CellO2Ghost::computeLocalSlopes(CellInterface& cellInterfaceRef, Limiter& globalLimiter, Limiter& interfaceLimiter,
+	Limiter& globalVolumeFractionLimiter, Limiter& interfaceVolumeFractionLimiter,
 	double& alphaCellAfterOppositeSide, double& alphaCell, double& alphaCellOtherInterfaceSide, double& epsInterface)
 {
 	//Find the corresponding slopes store inside this ghost cell
@@ -233,11 +230,11 @@ void CellO2Ghost::getBufferSlopes(double* buffer, int& counter, const int& lvl)
 {
 	if (m_lvl == lvl) {
 		for (unsigned int s = 0; s < m_vecPhasesSlopesGhost.size(); s++) {
-			for (int k = 0; k < m_numberPhases; k++) {
+			for (int k = 0; k < numberPhases; k++) {
 				m_vecPhasesSlopesGhost[s][k]->getBufferSlopes(buffer, counter);
 			}
 			m_mixtureSlopesGhost[s]->getBufferSlopes(buffer, counter);
-			for (int k = 0; k < m_numberTransports; k++) {
+			for (int k = 0; k < numberTransports; k++) {
 				m_vecTransportsSlopesGhost[s][k] = buffer[++counter];
 			}
 	    	m_alphaCellAfterOppositeSide[s] = buffer[++counter];

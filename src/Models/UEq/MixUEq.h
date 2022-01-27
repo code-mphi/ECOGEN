@@ -31,7 +31,6 @@
 #ifndef MIXUEQ_H
 #define MIXUEQ_H
 
-#include <vector>
 #include "../Mixture.h"
 
 //! \class     MixUEq
@@ -52,12 +51,12 @@ class MixUEq : public Mixture
 
     virtual void allocateAndCopyMixture(Mixture** mixture);
     virtual void copyMixture(Mixture &mixture);
-    virtual double computeDensity(const double* alphak, const double* rhok, const int& numberPhases);
-    virtual double computePressure(const double* alphak, const double* pk, const int& numberPhases);
-    virtual double computeInternalEnergy(const double* Yk, const double* ek, const int& numberPhases);
-    virtual double computeFrozenSoundSpeed(const double* Yk, const double* ck, const int& numberPhases);
+    virtual double computeDensity(const double* alphak, const double* rhok);
+    virtual double computePressure(const double* alphak, const double* pk);
+    virtual double computeInternalEnergy(const double* Yk, const double* ek);
+    virtual double computeFrozenSoundSpeed(const double* Yk, const double* ck);
     
-    virtual void computeMixtureVariables(Phase** vecPhase, const int& numberPhases);
+    virtual void computeMixtureVariables(Phase** vecPhase);
     virtual void internalEnergyToTotalEnergy(std::vector<QuantitiesAddPhys*>& vecGPA);
     virtual void totalEnergyToInternalEnergy(std::vector<QuantitiesAddPhys*>& vecGPA);
 
@@ -65,8 +64,7 @@ class MixUEq : public Mixture
     virtual void reverseProjection(const Coord& normal, const Coord& tangent, const Coord& binormal);
 
     //Data printing
-    virtual int getNumberScalars() const { return 2; };   //For reduced output
-    //virtual int getNumberScalars() const { return 3; }; //For complete output
+    virtual int getNumberScalars() const { return numberScalarsMixture; };
     virtual int getNumberVectors() const { return 1; };
     virtual double returnScalar(const int& numVar) const;
     virtual Coord returnVector(const int& numVar) const;
@@ -103,7 +101,7 @@ class MixUEq : public Mixture
     virtual const double& getW() const { return m_velocity.getZ(); };
     virtual const Coord& getVelocity() const { return m_velocity; };
     virtual Coord& getVelocity() { return m_velocity; };
-    virtual const double& getEnergy() const { return m_energie; };
+    virtual const double& getEnergy() const { return m_energy; };
     virtual const double& getTotalEnergy() const { return m_totalEnergy; };
     virtual const double& getFrozenSoundSpeed() const { return m_frozenSoundSpeed; };
     virtual const double& getWoodSoundSpeed() const { return m_woodSoundSpeed; };
@@ -125,7 +123,7 @@ class MixUEq : public Mixture
     double m_density;              //!< mixture density
     double m_pressure;             //!< mixture pressure
     Coord m_velocity;              //!< mixture velocity
-    double m_energie;              //!< mixture internal specific energy
+    double m_energy;               //!< mixture internal specific energy
     double m_totalEnergy;          //!< mixture total specific energy
     double m_frozenSoundSpeed;     //!< frozen sound speed
     double m_woodSoundSpeed;       //!< wood sound speed

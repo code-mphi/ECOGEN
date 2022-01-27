@@ -34,13 +34,12 @@ using namespace tinyxml2;
 
 //****************************************************************************
 
-BoundCondInj::BoundCondInj(int numPhysique, XMLElement* element, int& numberPhases, int& numberTransports, std::vector<std::string> nameTransports, Eos** eos, std::string fileName) :
+BoundCondInj::BoundCondInj(int numPhysique, XMLElement* element, const int& numbPhases, const int& numbTransports, std::vector<std::string> nameTransports, Eos** eos, std::string fileName) :
   BoundCond(numPhysique), m_T0(0.)
 {
-  m_numberPhases = numberPhases;
-  m_ak0 = new double[m_numberPhases];
-  m_rhok0 = new double[m_numberPhases];
-  m_pk0 = new double[m_numberPhases];
+  m_ak0 = new double[numbPhases];
+  m_rhok0 = new double[numbPhases];
+  m_pk0 = new double[numbPhases];
 
   //Reading injection surface-mass-flow condition (kg/s/m�)
   //-------------------------------------------------------
@@ -54,7 +53,7 @@ BoundCondInj::BoundCondInj(int numPhysique, XMLElement* element, int& numberPhas
 
   //Reading volume fraction, density and pressure of the phases
   //-----------------------------------------------------------
-  if (m_numberPhases == 1) {
+  if (numbPhases == 1) {
     m_ak0[0] = 1.;
     XMLElement* fluid(element->FirstChildElement("dataFluid"));
     if (fluid == NULL) throw ErrorXMLElement("dataFluid", fileName, __FILE__, __LINE__);
@@ -73,7 +72,7 @@ BoundCondInj::BoundCondInj(int numPhysique, XMLElement* element, int& numberPhas
     //-----------------------------------
     XMLElement* fluid(element->FirstChildElement("dataFluid"));
 
-    for(int e = 0; e <m_numberPhases; e++){
+    for(int e = 0; e < numbPhases; e++){
       //Attributes reading
       error = fluid->QueryDoubleAttribute("alpha", &m_ak0[e]);
       if (error != XML_NO_ERROR) throw ErrorXMLAttribut("alpha", fileName, __FILE__, __LINE__);
@@ -87,20 +86,20 @@ BoundCondInj::BoundCondInj(int numPhysique, XMLElement* element, int& numberPhas
     //Proportions checking
     //--------------------
     double sum(0.);
-    for (int k = 0; k < m_numberPhases; k++) {
+    for (int k = 0; k < numbPhases; k++) {
       if (m_ak0[k]<0. || m_ak0[k]>1.) throw ErrorXMLAttribut("alpha should be in [0,1]", fileName, __FILE__, __LINE__);
       sum += m_ak0[k];
     }
     if (std::fabs(sum - 1.) > 1.e-6) { throw ErrorXMLAttribut("sum of alpha should be 1", fileName, __FILE__, __LINE__); }
     else {
-      for (int k = 0; k < m_numberPhases; k++) { m_ak0[k] /= sum; }
+      for (int k = 0; k < numbPhases; k++) { m_ak0[k] /= sum; }
     }
   }
 
   //Reading of transports
   //---------------------
-  m_valueTransport = new double[numberTransports];
-  if (numberTransports) {
+  m_valueTransport = new double[numbTransports];
+  if (numbTransports) {
     XMLElement* sousElement(element->FirstChildElement("dataInjection"));
     if (sousElement == NULL) throw ErrorXMLElement("dataInjection", fileName, __FILE__, __LINE__);
     XMLError error;
@@ -113,10 +112,10 @@ BoundCondInj::BoundCondInj(int numPhysique, XMLElement* element, int& numberPhas
       nameTransport = elementTransport->Attribute("name");
       if (nameTransport == "") throw ErrorXMLAttribut("name", fileName, __FILE__, __LINE__);
       int e(0);
-      for (e = 0; e < numberTransports; e++) {
+      for (e = 0; e < numbTransports; e++) {
         if (nameTransport == nameTransports[e]) { break; }
       }
-      if (e != numberTransports) {
+      if (e != numbTransports) {
         error = elementTransport->QueryDoubleAttribute("value", &m_valueTransport[e]);
         if (error != XML_NO_ERROR) throw ErrorXMLAttribut("value", fileName, __FILE__, __LINE__);
         foundColors++;
@@ -124,32 +123,29 @@ BoundCondInj::BoundCondInj(int numPhysique, XMLElement* element, int& numberPhas
       //Next transport
       elementTransport = elementTransport->NextSiblingElement("transport");
     }
-    if (numberTransports > foundColors) throw ErrorXMLAttribut("Not enough transport equations in inj BC", fileName, __FILE__, __LINE__);
+    if (numbTransports > foundColors) throw ErrorXMLAttribut("Not enough transport equations in inj BC", fileName, __FILE__, __LINE__);
   }
-  m_numberTransports = numberTransports;
 }
 
 //****************************************************************************
 
 BoundCondInj::BoundCondInj(const BoundCondInj &Source, const int& lvl) : BoundCond(Source, lvl)
 {
-  m_numberPhases = Source.m_numberPhases;
-  m_numberTransports = Source.m_numberTransports;
-  m_ak0 = new double[m_numberPhases];
-  m_rhok0 = new double[m_numberPhases];
-  m_pk0 = new double[m_numberPhases];
+  m_ak0 = new double[numberPhases];
+  m_rhok0 = new double[numberPhases];
+  m_pk0 = new double[numberPhases];
 
   m_m0 = Source.m_m0;
 
-  for (int k = 0; k < m_numberPhases; k++)
+  for (int k = 0; k < numberPhases; k++)
   {
     m_ak0[k] = Source.m_ak0[k];
     m_rhok0[k] = Source.m_rhok0[k];
     m_pk0[k] = Source.m_pk0[k];
   }
 
-  m_valueTransport = new double[Source.m_numberTransports];
-  for (int k = 0; k < Source.m_numberTransports; k++) {
+  m_valueTransport = new double[numberTransports];
+  for (int k = 0; k < numberTransports; k++) {
     m_valueTransport[k] = Source.m_valueTransport[k];
   }
 }
@@ -173,16 +169,16 @@ void BoundCondInj::createBoundary(TypeMeshContainer<CellInterface*>& cellInterfa
 
 //****************************************************************************
 
-void BoundCondInj::solveRiemannBoundary(Cell& cellLeft, const int& numberPhases, const double& dxLeft, double& dtMax)
+void BoundCondInj::solveRiemannBoundary(Cell& cellLeft, const double& dxLeft, double& dtMax)
 {
-  m_mod->solveRiemannInflow(cellLeft, numberPhases, dxLeft, dtMax, m_m0, m_ak0, m_rhok0, m_pk0, m_massflow, m_powerFlux);
+  model->solveRiemannInflow(cellLeft, dxLeft, dtMax, m_m0, m_ak0, m_rhok0, m_pk0, m_boundData);
 }
 
 //****************************************************************************
 
-void BoundCondInj::solveRiemannTransportBoundary(Cell& cellLeft, const int&  numberTransports) const
+void BoundCondInj::solveRiemannTransportBoundary(Cell& cellLeft) const
 {
-	m_mod->solveRiemannTransportInflow(cellLeft, numberTransports, m_valueTransport);
+	model->solveRiemannTransportInflow(cellLeft, m_valueTransport);
 }
 
 //****************************************************************************

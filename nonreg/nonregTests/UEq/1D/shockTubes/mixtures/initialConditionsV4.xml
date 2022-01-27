@@ -1,0 +1,68 @@
+<?xml version = "1.0" encoding = "UTF-8" standalone = "yes"?>
+<CI>
+    <!-- LIST OF GEOMETRICAL DOMAINS  -->
+    <physicalDomains> 
+        <domain name="base" state="chamberLP" type="entireDomain"/>
+        <domain name="HP"  state="chamberHP" type="halfSpace">
+            <dataHalfSpace axis="x" origin="0.6" direction="negative"/>
+        </domain>
+    </physicalDomains>
+
+    <!-- LIST OF BOUNDARY CONDITIONS -->
+    <boundaryConditions>
+        <boundCond name="CLXm" type="nonReflecting" number="1"/>
+        <boundCond name="CLXp" type="nonReflecting" number="2"/>
+    </boundaryConditions>
+    
+    <!--  LIST OF STATES  -->
+    <state name="chamberLP">
+        <material type="fluid" EOS="SG_mixtureShockTube.xml">
+            <dataFluid alpha="0.45" density="0.125" pressure="0.1"/>
+        </material>
+        <material type="fluid" EOS="IG_air.xml">
+            <dataFluid alpha="0.55" density="2." pressure="0.1"/>
+        </material>
+        <mixture>
+            <velocity x="0." y="0." z="0."/>
+        </mixture>
+    </state>
+
+    <state name="chamberHP">
+        <material type="fluid" EOS="SG_mixtureShockTube.xml">
+            <dataFluid alpha="0.55" density="1." pressure="1."/>
+        </material>
+        <material type="fluid" EOS="IG_air.xml">
+            <dataFluid alpha="0.45" density="0.2" pressure="1."/>
+        </material>
+        <mixture>
+            <velocity x="0." y="0." z="0."/>
+        </mixture>
+    </state>
+
+<!--     <state name="chamberLP">
+        <material type="fluid" EOS="SG_mixtureShockTube.xml">
+            <dataFluid alpha="0.45" density="0.125"/>
+        </material>
+        <material type="fluid" EOS="IG_air.xml">
+            <dataFluid alpha="0.55" density="2."/>
+        </material>
+        <mixture>
+            <dataMix pressure = "0.1"/>
+            <velocity x="0." y="0." z="0."/>
+        </mixture>
+    </state>
+
+    <state name="chamberHP">
+        <material type="fluid" EOS="SG_mixtureShockTube.xml">
+            <dataFluid alpha="0.55" density="1."/>
+        </material>
+        <material type="fluid" EOS="IG_air.xml">
+            <dataFluid alpha="0.45" density="0.2"/>
+        </material>
+        <mixture>
+            <dataMix pressure = "1."/>
+            <velocity x="0." y="0." z="0."/>
+        </mixture>
+    </state> -->
+
+</CI>

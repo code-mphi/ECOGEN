@@ -64,6 +64,9 @@ PhasePUEq::PhasePUEq(XMLElement* material, Eos* eos, const double& pressure, std
   //Thermodynamic reconstruction if needed
   if (presenceTemperature) m_density = m_eos->computeDensity(m_pressure, m_temperature);
   if (presenceDensity) m_temperature = m_eos->computeTemperature(m_density,m_pressure);
+
+  m_energy = m_eos->computeEnergy(m_density, m_pressure);
+  m_soundSpeed = m_eos->computeSoundSpeed(m_density, m_pressure);
 }
 
 //***************************************************************************

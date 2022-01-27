@@ -40,13 +40,13 @@
 class APUEqViscosity : public APUEq
 {
   public:
-    APUEqViscosity(int& numberQPA, Eos** eos, const int& numberPhases);
+    APUEqViscosity(int& numberQPA, Eos** eos, const int& numbPhases);
     virtual ~APUEqViscosity();
 
     virtual void addQuantityAddPhys(Cell* cell);
 
-    virtual void solveFluxAddPhys(CellInterface* cellInterface, const int& numberPhases);
-    virtual void solveFluxAddPhysBoundary(CellInterface* cellInterface, const int& numberPhases);
+    virtual void solveFluxAddPhys(CellInterface* cellInterface);
+    virtual void solveFluxAddPhysBoundary(CellInterface* cellInterface);
     //! \brief     Solve the viscosity flux between two cells
     //! \param     velocityLeft         velocity of the left cell
     //! \param     velocityRight        velocity of the right cell
@@ -58,43 +58,38 @@ class APUEqViscosity : public APUEq
     //! \param     gradWRight           gradient of the velocity in the z-direction of the right cell
     //! \param     muMixLeft            dynamic viscosity of the mixture of the left cell
     //! \param     muMixRight           dynamic viscosity of the mixture of the right cell
-    //! \param     numberPhases         number of phases
     void solveFluxViscosityInner(const Coord& velocityLeft, const Coord& velocityRight, const Coord& gradULeft, const Coord& gradURight, const Coord& gradVLeft, const Coord& gradVRight,
-      const Coord& gradWLeft, const Coord& gradWRight, const double& muMixLeft, const double& muMixRight, const int& numberPhases) const;
+      const Coord& gradWLeft, const Coord& gradWRight, const double& muMixLeft, const double& muMixRight) const;
     //! \brief     Solve the viscosity flux at a boundary with a non-reflecting type
     //! \param     velocityLeft         velocity of the left cell
     //! \param     gradULeft            gradient of the velocity in the x-direction of the left cell
     //! \param     gradVLeft            gradient of the velocity in the y-direction of the left cell
     //! \param     gradWLeft            gradient of the velocity in the z-direction of the left cell
     //! \param     muMixLeft            dynamic viscosity of the mixture of the left cell
-    //! \param     numberPhases         number of phases
-    void solveFluxViscosityNonReflecting(const Coord& velocityLeft, const Coord& gradULeft, const Coord& gradVLeft, const Coord& gradWLeft, const double& muMixLeft, const int& numberPhases) const;
+    void solveFluxViscosityNonReflecting(const Coord& velocityLeft, const Coord& gradULeft, const Coord& gradVLeft, const Coord& gradWLeft, const double& muMixLeft) const;
     //! \brief     Solve the viscosity flux at a boundary with a wall type
     //! \param     velocityLeft         velocity of the left cell
     //! \param     muMixLeft            dynamic viscosity of the mixture of the left cell
     //! \param     distLeft             distance between the center of the left cell and its corresponding edge
-    //! \param     numberPhases         number of phases
-    void solveFluxViscosityWall(const Coord& velocityLeft, const double& muMixLeft, const double& distLeft, const int& numberPhases) const;
+    void solveFluxViscosityWall(const Coord& velocityLeft, const double& muMixLeft, const double& distLeft) const;
     //! \brief     Solve the viscosity flux at a boundary with a symmetry type
     //! \param     gradULeft            gradient of the velocity in the x-direction of the left cell
     //! \param     gradVLeft            gradient of the velocity in the y-direction of the left cell
     //! \param     gradWLeft            gradient of the velocity in the z-direction of the left cell
     //! \param     muMixLeft            dynamic viscosity of the mixture of the left cell
-    //! \param     numberPhases         number of phases
-    void solveFluxViscositySymmetry(const Coord& gradULeft, const Coord& gradVLeft, const Coord& gradWLeft, const double& muMixLeft, const int& numberPhases) const;
+    void solveFluxViscositySymmetry(const Coord& gradULeft, const Coord& gradVLeft, const Coord& gradWLeft, const double& muMixLeft) const;
     //! \brief     Solve the viscosity flux at a boundary with non-defined type yet
     //! \param     velocityLeft         velocity of the left cell
     //! \param     gradULeft            gradient of the velocity in the x-direction of the left cell
     //! \param     gradVLeft            gradient of the velocity in the y-direction of the left cell
     //! \param     gradWLeft            gradient of the velocity in the z-direction of the left cell
     //! \param     muMixLeft            dynamic viscosity of the mixture of the left cell
-    //! \param     numberPhases         number of phases
-    void solveFluxViscosityOther(const int& numberPhases) const;
-    virtual void addNonCons(Cell* cell, const int& numberPhases);
-    virtual void addSymmetricTermsRadialAxisOnX(Cell* cell, const int& numberPhases);
-    virtual void addSymmetricTermsRadialAxisOnY(Cell* cell, const int& numberPhases);
+    void solveFluxViscosityOther() const;
+    virtual void addNonCons(Cell* cell);
+    virtual void addSymmetricTermsRadialAxisOnX(Cell* cell);
+    virtual void addSymmetricTermsRadialAxisOnY(Cell* cell);
 
-    virtual void communicationsAddPhys(const int& /*numberPhases*/, const int& dim, const int& lvl);
+    virtual void communicationsAddPhys(const int& dim, const int& lvl);
 
   protected:
   

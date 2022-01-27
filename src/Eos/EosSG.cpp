@@ -28,8 +28,6 @@
 //  along with ECOGEN (file LICENSE).  
 //  If not, see <http://www.gnu.org/licenses/>.
 
-#include <cmath>
-#include <algorithm>
 #include "EosSG.h"
 
 //***********************************************************************
@@ -103,6 +101,20 @@ double EosSG::computeSoundSpeed(const double& density, const double& pressure) c
 double EosSG::computeInterfaceSoundSpeed(const double& density, const double& interfacePressure, const double& pressure) const
 {
   return sqrt(((m_gamma - 1.) * interfacePressure + pressure + m_gamma * m_pInf) / std::max(density, epsilonAlphaNull));
+}
+
+//***********************************************************************
+
+double EosSG::computeAcousticImpedance(const double& density, const double& pressure) const
+{
+  return sqrt(density * m_gamma * (pressure + m_pInf));
+}
+
+//***********************************************************************
+
+double EosSG::computeDensityTimesInterfaceSoundSpeedSquare(const double& /*density*/, const double& interfacePressure, const double& pressure) const
+{
+  return (m_gamma - 1.) * interfacePressure + pressure + m_gamma * m_pInf;
 }
 
 //***********************************************************************

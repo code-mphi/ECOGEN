@@ -36,20 +36,18 @@
 class OutputGlobalGNU : public OutputGNU
 {
 public:
-	OutputGlobalGNU();
-	OutputGlobalGNU(std::string casTest, std::string run, Input *entree, std::string quantity);
-	virtual ~OutputGlobalGNU();
+  OutputGlobalGNU();
+  OutputGlobalGNU(std::string casTest, std::string run, tinyxml2::XMLElement* element, Input *entree, std::string quantity);
+  virtual ~OutputGlobalGNU();
 
-	virtual void prepareSortieSpecifique();
+  virtual void initializeSpecificOutput();
 
-	virtual void ecritSolution(Mesh* /*mesh*/, std::vector<Cell*>* cellsLvl);
+  virtual void writeResults(Mesh* /*mesh*/, std::vector<Cell*>* cellsLvl);
 
 protected:
-	double m_quantity; //!< Physical quantity recorded (mass or total energy)
+  double m_quantity; //!< Physical quantity recorded (mass or total energy)
 
-	void extractTotalQuantity(std::vector<Cell*>* cellsLvl);
-
-	void writeSpecificGnuplotScript();
+  void extractTotalQuantity(std::vector<Cell*>* cellsLvl);
 };
 
 #endif //OUTPUTGLOBALGNU_H

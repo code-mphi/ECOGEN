@@ -28,7 +28,6 @@
 //  along with ECOGEN (file LICENSE).  
 //  If not, see <http://www.gnu.org/licenses/>.
 
-#include <algorithm>
 #include <unordered_map> //For hash
 //#include <map> //For ordered map
 
@@ -508,9 +507,9 @@ TypeMeshContainer<CellInterface*>& cellInterfaces, std::string ordreCalcul)
 
 //***********************************************************************
 
-void MeshCartesianAMR::procedureRaffinementInitialization(TypeMeshContainer<Cell*>* cellsLvl, TypeMeshContainer<Cell*>* cellsLvlGhost, TypeMeshContainer<CellInterface*>* cellInterfacesLvl,
-  const std::vector<AddPhys*>& addPhys, Model* model, int& nbCellsTotalAMR, std::vector<GeometricalDomain*>& domains,
-  Eos** eos, const int& restartSimulation, std::string ordreCalcul, const int& numberPhases, const int& numberTransports)
+void MeshCartesianAMR::procedureRaffinementInitialization(TypeMeshContainer<Cell*>* cellsLvl, TypeMeshContainer<Cell*>* cellsLvlGhost,
+  TypeMeshContainer<CellInterface*>* cellInterfacesLvl, const std::vector<AddPhys*>& addPhys, int& nbCellsTotalAMR,
+  std::vector<GeometricalDomain*>& domains, Eos** eos, const int& restartSimulation, std::string ordreCalcul)
 {
   nbCellsTotalAMR = m_numberCellsCalcul;
 
@@ -518,7 +517,7 @@ void MeshCartesianAMR::procedureRaffinementInitialization(TypeMeshContainer<Cell
     for (int iterInit = 0; iterInit < 2; iterInit++) {
       for (int lvl = 0; lvl < m_lvlMax; lvl++) {
         if (Ncpu > 1) { parallel.communicationsPrimitives(eos, lvl); }
-        this->procedureRaffinement(cellsLvl, cellsLvlGhost, cellInterfacesLvl, lvl, addPhys, model, nbCellsTotalAMR, eos);
+        this->procedureRaffinement(cellsLvl, cellsLvlGhost, cellInterfacesLvl, lvl, addPhys, nbCellsTotalAMR, eos);
         for (unsigned int i = 0; i < cellsLvl[lvl + 1].size(); i++) {
           cellsLvl[lvl + 1][i]->fill(domains, m_lvlMax);
         }
@@ -536,14 +535,14 @@ void MeshCartesianAMR::procedureRaffinementInitialization(TypeMeshContainer<Cell
         if (!cellsLvl[lvl][i]->getSplit()) { cellsLvl[lvl][i]->completeFulfillState(); }
       }
     }
-    if (Ncpu > 1) { this->parallelLoadBalancingAMR(cellsLvl, cellsLvlGhost, cellInterfacesLvl, ordreCalcul, numberPhases, numberTransports, addPhys, model, eos, nbCellsTotalAMR, true); }
+    if (Ncpu > 1) { this->parallelLoadBalancingAMR(cellsLvl, cellsLvlGhost, cellInterfacesLvl, ordreCalcul, addPhys, eos, nbCellsTotalAMR, true); }
   }
 }
 
 //***********************************************************************
 
 void MeshCartesianAMR::procedureRaffinement(TypeMeshContainer<Cell*>* cellsLvl, TypeMeshContainer<Cell*>* cellsLvlGhost, TypeMeshContainer<CellInterface*>* cellInterfacesLvl, const int& lvl,
-  const std::vector<AddPhys*>& addPhys, Model* model, int& nbCellsTotalAMR, Eos** eos)
+  const std::vector<AddPhys*>& addPhys, int& nbCellsTotalAMR, Eos** eos)
 {
   //1) Calcul de Xi dans chaque cell de niveau lvl
   //-------------------------------------------------
@@ -588,7 +587,7 @@ void MeshCartesianAMR::procedureRaffinement(TypeMeshContainer<Cell*>* cellsLvl, 
     int lvlPlus1 = lvl + 1;
     //3) Raffinement des cells et cell interfaces
     //-------------------------------------------
-    for (unsigned int i = 0; i < cellsLvl[lvl].size(); i++) { cellsLvl[lvl][i]->chooseRefine(m_xiSplit, m_numberCellsY, m_numberCellsZ, addPhys, model, nbCellsTotalAMR); }
+    for (unsigned int i = 0; i < cellsLvl[lvl].size(); i++) { cellsLvl[lvl][i]->chooseRefine(m_xiSplit, m_numberCellsY, m_numberCellsZ, addPhys, nbCellsTotalAMR); }
 
     //4) Deraffinement des cells et cell interfaces
     //---------------------------------------------
@@ -600,7 +599,7 @@ void MeshCartesianAMR::procedureRaffinement(TypeMeshContainer<Cell*>* cellsLvl, 
       //Communication split + Raffinement et deraffinement des cells fantomes + Reconstruction du tableau de cells fantomes de niveau lvl + 1
       parallel.communicationsSplit(lvl);
       cellsLvlGhost[lvlPlus1].clear();
-      for (unsigned int i = 0; i < cellsLvlGhost[lvl].size(); i++) { cellsLvlGhost[lvl][i]->chooseRefineDeraffineGhost(m_numberCellsY, m_numberCellsZ, addPhys, model, cellsLvlGhost); }
+      for (unsigned int i = 0; i < cellsLvlGhost[lvl].size(); i++) { cellsLvlGhost[lvl][i]->chooseRefineDeraffineGhost(m_numberCellsY, m_numberCellsZ, addPhys, cellsLvlGhost); }
       //Communications primitives pour mettre a jour les cells deraffinees
       parallel.communicationsPrimitives(eos, lvl);
 
@@ -853,10 +852,10 @@ void MeshCartesianAMR::setDataSet(std::vector<double>& jeuDonnees, TypeMeshConta
 
 //***********************************************************************
 
-void MeshCartesianAMR::refineCellAndCellInterfaces(Cell* cell, const std::vector<AddPhys*>& addPhys, Model* model, int& nbCellsTotalAMR)
+void MeshCartesianAMR::refineCellAndCellInterfaces(Cell* cell, const std::vector<AddPhys*>& addPhys, int& nbCellsTotalAMR)
 {
   bool refineExternalCellInterfaces(true);
-  cell->refineCellAndCellInterfaces(m_numberCellsY, m_numberCellsZ, addPhys, model, refineExternalCellInterfaces);
+  cell->refineCellAndCellInterfaces(m_numberCellsY, m_numberCellsZ, addPhys, refineExternalCellInterfaces);
   nbCellsTotalAMR += cell->getNumberCellsChildren() - 1;
 }
 
@@ -880,22 +879,20 @@ void MeshCartesianAMR::readDomainDecomposition(std::ifstream &fileStream)
 //****************************** Parallele ***********************************
 //****************************************************************************
 
-void MeshCartesianAMR::initializePersistentCommunications(const int numberPhases, const int numberTransports, const TypeMeshContainer<Cell*>& cells, std::string ordreCalcul)
+void MeshCartesianAMR::initializePersistentCommunications(const TypeMeshContainer<Cell*>& cells, std::string ordreCalcul)
 {
-	m_numberPhases = numberPhases;
-	m_numberTransports = numberTransports;
 	int numberVariablesPhaseATransmettre = cells[0]->getPhase(0)->numberOfTransmittedVariables();
-	numberVariablesPhaseATransmettre *= m_numberPhases;
+	numberVariablesPhaseATransmettre *= numberPhases;
 	int numberVariablesMixtureATransmettre = cells[0]->getMixture()->numberOfTransmittedVariables();
-	int m_numberPrimitiveVariables = numberVariablesPhaseATransmettre + numberVariablesMixtureATransmettre + m_numberTransports;
+	int m_numberPrimitiveVariables = numberVariablesPhaseATransmettre + numberVariablesMixtureATransmettre + numberTransports;
   int m_numberSlopeVariables(0);
   if (ordreCalcul == "SECONDORDER") {
     int numberSlopesPhaseATransmettre = cells[0]->getPhase(0)->numberOfTransmittedSlopes();
-    numberSlopesPhaseATransmettre *= m_numberPhases;
+    numberSlopesPhaseATransmettre *= numberPhases;
     int numberSlopesMixtureATransmettre = cells[0]->getMixture()->numberOfTransmittedSlopes();
-    m_numberSlopeVariables = numberSlopesPhaseATransmettre + numberSlopesMixtureATransmettre + m_numberTransports + 1 + 1; //+1 for the interface detection + 1 for slope index
+    m_numberSlopeVariables = numberSlopesPhaseATransmettre + numberSlopesMixtureATransmettre + numberTransports + 1 + 1; //+1 for the interface detection + 1 for slope index
   }
-	parallel.initializePersistentCommunicationsAMR(m_numberPrimitiveVariables, m_numberSlopeVariables, m_numberTransports, m_geometrie, m_lvlMax);
+	parallel.initializePersistentCommunicationsAMR(m_numberPrimitiveVariables, m_numberSlopeVariables, numberTransports, m_geometrie, m_lvlMax);
 }
 
 //***********************************************************************
@@ -907,10 +904,10 @@ void MeshCartesianAMR::finalizeParallele(const int& lvlMax)
 
 //***********************************************************************
 
-void MeshCartesianAMR::parallelLoadBalancingAMR(TypeMeshContainer<Cell*>* cellsLvl, TypeMeshContainer<Cell*>* cellsLvlGhost, TypeMeshContainer<CellInterface*>* cellInterfacesLvl, std::string ordreCalcul,
-  const int& numberPhases, const int& numberTransports, const std::vector<AddPhys*>& addPhys, Model* model, Eos** eos, int& nbCellsTotalAMR, bool init)
+void MeshCartesianAMR::parallelLoadBalancingAMR(TypeMeshContainer<Cell*>* cellsLvl, TypeMeshContainer<Cell*>* cellsLvlGhost,
+  TypeMeshContainer<CellInterface*>* cellInterfacesLvl, std::string ordreCalcul,
+  const std::vector<AddPhys*>& addPhys, Eos** eos, int& nbCellsTotalAMR, bool init)
 {
-//return; //KS//BD//
   bool balance(false);
   do {
     balance = false;
@@ -926,14 +923,14 @@ void MeshCartesianAMR::parallelLoadBalancingAMR(TypeMeshContainer<Cell*>* cellsL
     //} //For levelwise balancing
 
     if (balance) {
-      this->balance(cellsLvl, cellsLvlGhost, cellInterfacesLvl, ordreCalcul, numberPhases, numberTransports, addPhys, model, eos,
+      this->balance(cellsLvl, cellsLvlGhost, cellInterfacesLvl, ordreCalcul, addPhys, eos,
         nbCellsTotalAMR, indicesSendStartGlobal, indicesSendEndGlobal, indicesReceiveStartGlobal, indicesReceiveEndGlobal);
     }
   } while (balance);
 
   //Update gradients for level max only (others are updated within the recursive time-stepping loop)
   for (unsigned int i = 0; i < cellsLvl[m_lvlMax].size(); i++) { if (!cellsLvl[m_lvlMax][i]->getSplit()) { cellsLvl[m_lvlMax][i]->prepareAddPhys(); } }
-  for (unsigned int pa = 0; pa < addPhys.size(); pa++) { addPhys[pa]->communicationsAddPhys(m_numberPhases, m_geometrie, m_lvlMax); }
+  for (unsigned int pa = 0; pa < addPhys.size(); pa++) { addPhys[pa]->communicationsAddPhys(m_geometrie, m_lvlMax); }
 }
 
 //***********************************************************************
@@ -1153,10 +1150,10 @@ void MeshCartesianAMR::computePotentialBalancing(TypeMeshContainer<Cell*>* cells
 
 //***********************************************************************
 
-void MeshCartesianAMR::balance(TypeMeshContainer<Cell*>* cellsLvl, TypeMeshContainer<Cell*>* cellsLvlGhost, TypeMeshContainer<CellInterface*>* cellInterfacesLvl, std::string ordreCalcul,
-  const int& numberPhases, const int& numberTransports, const std::vector<AddPhys*>& addPhys, Model* model, Eos** eos, int& nbCellsTotalAMR,
-    std::vector<typename decomposition::Key<3>::value_type>& indicesSendStartGlobal, std::vector<typename decomposition::Key<3>::value_type>& indicesSendEndGlobal,
-    std::vector<typename decomposition::Key<3>::value_type>& indicesReceiveStartGlobal, std::vector<typename decomposition::Key<3>::value_type>& indicesReceiveEndGlobal)
+void MeshCartesianAMR::balance(TypeMeshContainer<Cell*>* cellsLvl, TypeMeshContainer<Cell*>* cellsLvlGhost,
+  TypeMeshContainer<CellInterface*>* cellInterfacesLvl, std::string ordreCalcul, const std::vector<AddPhys*>& addPhys, Eos** eos, int& nbCellsTotalAMR,
+  std::vector<typename decomposition::Key<3>::value_type>& indicesSendStartGlobal, std::vector<typename decomposition::Key<3>::value_type>& indicesSendEndGlobal,
+  std::vector<typename decomposition::Key<3>::value_type>& indicesReceiveStartGlobal, std::vector<typename decomposition::Key<3>::value_type>& indicesReceiveEndGlobal)
 {
   int counter(0), counterSplit(0);
   MPI_Request req_neighborP1;
@@ -1299,13 +1296,12 @@ void MeshCartesianAMR::balance(TypeMeshContainer<Cell*>* cellsLvl, TypeMeshConta
 
   //5) Allocate physical variables of cells and cell interfaces level 0
   //-------------------------------------------------------------------
-  for (unsigned int i = 0; i < bufferReceiveCells.size(); i++) { bufferReceiveCells[i]->allocate(numberPhases, numberTransports, addPhys, model); }
-  for (unsigned int i = 0; i < cellsLvlGhost[0].size(); i++) { cellsLvlGhost[0][i]->allocate(numberPhases, numberTransports, addPhys, model); }
+  for (unsigned int i = 0; i < bufferReceiveCells.size(); i++) { bufferReceiveCells[i]->allocate(addPhys); }
+  for (unsigned int i = 0; i < cellsLvlGhost[0].size(); i++) { cellsLvlGhost[0][i]->allocate(addPhys); }
   //Attribution model and slopes to faces
   int allocateSlopeLocal = 1;
   for (unsigned int b = 0; b < cellInterfacesLvl[0].size(); b++) {
-    cellInterfacesLvl[0][b]->associeModel(model);
-    cellInterfacesLvl[0][b]->allocateSlopes(numberPhases, numberTransports, allocateSlopeLocal);
+    cellInterfacesLvl[0][b]->allocateSlopes(allocateSlopeLocal);
   }
 
   //6) Send/Receive physical values of cells lvl >= 0 and create new cells and new internal cell interfaces of lvl > 0
@@ -1374,7 +1370,7 @@ void MeshCartesianAMR::balance(TypeMeshContainer<Cell*>* cellsLvl, TypeMeshConta
     counter = 0; counterSplit = 0;
     for (int lvl = 0; lvl <= m_lvlMax; lvl++) {
       for (unsigned int i = 0; i < bufferReceiveCellsEnd.size(); i++) {
-        bufferReceiveCellsEnd[i]->getDataToReceiveAndRefine(dataToReceiveEnd, dataSplitToReceiveEnd, lvl, eos, counter, counterSplit, m_numberCellsY, m_numberCellsZ, addPhys, model);
+        bufferReceiveCellsEnd[i]->getDataToReceiveAndRefine(dataToReceiveEnd, dataSplitToReceiveEnd, lvl, eos, counter, counterSplit, m_numberCellsY, m_numberCellsZ, addPhys);
       }
     }
   }
@@ -1393,7 +1389,7 @@ void MeshCartesianAMR::balance(TypeMeshContainer<Cell*>* cellsLvl, TypeMeshConta
     counter = 0; counterSplit = 0;
     for (int lvl = 0; lvl <= m_lvlMax; lvl++) {
       for (unsigned int i = 0; i < bufferReceiveCellsStart.size(); i++) {
-        bufferReceiveCellsStart[i]->getDataToReceiveAndRefine(dataToReceiveStart, dataSplitToReceiveStart, lvl, eos, counter, counterSplit, m_numberCellsY, m_numberCellsZ, addPhys, model);
+        bufferReceiveCellsStart[i]->getDataToReceiveAndRefine(dataToReceiveStart, dataSplitToReceiveStart, lvl, eos, counter, counterSplit, m_numberCellsY, m_numberCellsZ, addPhys);
       }
     }
   }
@@ -1422,13 +1418,13 @@ void MeshCartesianAMR::balance(TypeMeshContainer<Cell*>* cellsLvl, TypeMeshConta
         }
         cellsLvl[lvl][i]->updatePointersInternalCellInterfaces();
       }
-      cellsLvl[lvl][i]->setToZeroCons(numberPhases, numberTransports);
+      cellsLvl[lvl][i]->setToZeroCons();
     }
 
     //Refine ghost cells
     parallel.communicationsSplit(lvl);
     cellsLvlGhost[lvl + 1].clear();
-    for (unsigned int i = 0; i < cellsLvlGhost[lvl].size(); i++) { cellsLvlGhost[lvl][i]->chooseRefineDeraffineGhost(m_numberCellsY, m_numberCellsZ, addPhys, model, cellsLvlGhost); }
+    for (unsigned int i = 0; i < cellsLvlGhost[lvl].size(); i++) { cellsLvlGhost[lvl][i]->chooseRefineDeraffineGhost(m_numberCellsY, m_numberCellsZ, addPhys, cellsLvlGhost); }
     parallel.communicationsPrimitives(eos, lvl);
 
     //Update of persistent communications of cells lvl + 1

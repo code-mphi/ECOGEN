@@ -35,14 +35,14 @@ using namespace tinyxml2;
 
 //***************************************************************************
 
-PhaseEuler::PhaseEuler() :m_density(0.), m_pressure(0.), m_eos(0), m_energie(0.), m_totalEnergy(0.), m_soundSpeed(0.)
+PhaseEuler::PhaseEuler() :m_density(0.), m_pressure(0.), m_eos(0), m_energy(0.), m_totalEnergy(0.), m_soundSpeed(0.)
 {
   m_velocity.setXYZ(0., 0., 0.);
 }
 
 //***************************************************************************
 
-PhaseEuler::PhaseEuler(XMLElement* material, Eos* eos, std::string fileName) : m_eos(eos), m_energie(0.), m_totalEnergy(0.), m_soundSpeed(0.)
+PhaseEuler::PhaseEuler(XMLElement* material, Eos* eos, std::string fileName) : m_eos(eos), m_energy(0.), m_totalEnergy(0.), m_soundSpeed(0.)
 {
   XMLElement* sousElement(material->FirstChildElement("dataFluid"));
   if (sousElement == NULL) throw ErrorXMLElement("dataFluid", fileName, __FILE__, __LINE__);
@@ -96,7 +96,7 @@ void PhaseEuler::copyPhase(Phase &phase)
   m_pressure = phase.getPressure();
   m_velocity = phase.getVelocity();
   m_eos = phase.getEos();
-  m_energie = phase.getEnergy();
+  m_energy = phase.getEnergy();
   m_soundSpeed = phase.getSoundSpeed();
   m_totalEnergy = phase.getTotalEnergy();
 }
@@ -105,9 +105,9 @@ void PhaseEuler::copyPhase(Phase &phase)
 
 void PhaseEuler::extendedCalculusPhase(const Coord& /*velocity*/)
 {
-  m_energie = m_eos->computeEnergy(m_density, m_pressure);
+  m_energy = m_eos->computeEnergy(m_density, m_pressure);
   m_soundSpeed = m_eos->computeSoundSpeed(m_density, m_pressure);
-  m_totalEnergy = m_energie + 0.5*m_velocity.squaredNorm();
+  m_totalEnergy = m_energy + 0.5*m_velocity.squaredNorm();
   m_temperature = m_eos->computeTemperature(m_density, m_pressure);
 }
 
@@ -370,6 +370,20 @@ void PhaseEuler::verifyAndCorrectPhase()
   m_eos->verifyAndModifyPressure(m_pressure);
 }
 
+//***************************************************************************
+
+void PhaseEuler::verifyAndCorrectDensityMax(const double& /*mass*/)
+{
+  m_eos->verifyAndCorrectDensityMax(m_density);
+}
+
+//***************************************************************************
+
+void PhaseEuler::verifyAndCorrectDensityMax()
+{
+  m_eos->verifyAndCorrectDensityMax(m_density);
+}
+
 //****************************************************************************
 //**************************** DATA ACCESSORS ********************************
 //****************************************************************************
@@ -406,7 +420,7 @@ void PhaseEuler::setEos(Eos* eos) { m_eos = eos; }
 
 //***************************************************************************
 
-void PhaseEuler::setEnergy(double energie) { m_energie = energie; }
+void PhaseEuler::setEnergy(double energy) { m_energy = energy; }
 
 //***************************************************************************
 

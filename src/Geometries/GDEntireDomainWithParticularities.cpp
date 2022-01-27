@@ -46,7 +46,7 @@ bool GDEntireDomainWithParticularities::belong(Coord& /*posElement*/, const int&
 {
   //1. Laplace pressure initialization
   //----------------------------------
-  //return true; //always belong to entire domain
+  return true; //always belong to entire domain
 
   //2. Respecting special coordinates
   //---------------------------------
@@ -71,12 +71,12 @@ bool GDEntireDomainWithParticularities::belong(Coord& /*posElement*/, const int&
 
   //5. Rayleigh-Taylor instability
   //------------------------------
-  return true; //always belong to entire domain
+  // return true; //always belong to entire domain
 }
 
 //******************************************************************
 
-void GDEntireDomainWithParticularities::fillIn(Cell* cell, const int& numberPhases, const int& numberTransports) const
+void GDEntireDomainWithParticularities::fillIn(Cell* cell) const
 {
   //As basic fillIn: Test if the cell belongs to the geometrical domain
   bool belongs(true);
@@ -102,13 +102,14 @@ void GDEntireDomainWithParticularities::fillIn(Cell* cell, const int& numberPhas
     //  Coord posElement(cell->getPosition());
     //  double radius;
     //  //radius = posElement.getX(); //1D
-    //  radius = std::pow(std::pow(posElement.getX(), 2.) + std::pow(posElement.getY(), 2.), 0.5); //2D
+    //  //radius = std::pow(std::pow(posElement.getX(), 2.) + std::pow(posElement.getY(), 2.), 0.5); //2D
+    //  radius = std::pow(std::pow(posElement.getX() - 0.75e-3, 2.) + std::pow(posElement.getY(), 2.), 0.5); //2D
     //  //radius = std::pow(std::pow(posElement.getX(), 2.) + std::pow(posElement.getY(), 2.) + std::pow(posElement.getZ(), 2.), 0.5); //3D
     //  //radius = std::pow(std::pow(posElement.getX() - 153.6e-3, 2.) + std::pow(posElement.getY(), 2.) + std::pow(posElement.getZ(), 2.), 0.5); //3D
-    //  pressure = 1.e5 + 1.e-3 / radius * (1.e4 - 1.e5);
+    //  //pressure = 1.e5 + 1.e-3 / radius * (1.e4 - 1.e5);
     //  //pressure = 1.e5 + 1.e-3 / radius * (4.e3 - 1.e5);
     //  //pressure = 1.e5 + 1.e-3 / radius * (1.e3 - 1.e5);
-    //  //pressure = 50.6625e5 + 100.e-6 / radius * (3.55e3 - 50.6625e5);
+    //  pressure = 50.6625e5 + 0.5e-3 / radius * (3.55e3 - 50.6625e5);
     //  for (int k = 0; k < numberPhases; k++) { cell->getPhase(k)->setPressure(pressure); }
     //  cell->getMixture()->setPressure(pressure);
     // }
@@ -143,25 +144,30 @@ void GDEntireDomainWithParticularities::fillIn(Cell* cell, const int& numberPhas
     // // Sinus shape parameters
     // const double pi = std::acos(-1); // Pi constant
     
-    // // * For R-T Kevin
+    // // * R-T same kinematic viscosity
     // double lambda = 0.2;             // Width of the domain
     // double h = 0.7;                  // Height of the interface
 
-    // // * For R-T Hope et al.
-    // // double lambda = 2.5;             // Width of the domain
-    // // double h = 12.5;                 // Height of the interface
+    // // * R-T same dynamic viscosity
+    // double lambda = 2.5;             // Width of the domain
+    // double h = 12.5;                 // Height of the interface
 
     // double k = 2 * pi / lambda;      // Wave-number
     // int nx = 1000;                   // Nb of points to plot interface function
     // double dx = lambda / (nx - 1.);  // Points spacing for the plot of the interface fn 
     // double amp = 0.05 / k;           // Amplitude of the sinus function
 
-    // double rhoLight = cell->getPhase(0)->getDensity(), 
-    //   rhoHeavy = cell->getPhase(1)->getDensity();
+    // double rhoHeavy = cell->getPhase(0)->getDensity(),
+    //   rhoLight = cell->getPhase(1)->getDensity();
     // std::vector<double> alpha(2, 0.);
     
-    // // For R-T Hope et al. (not used otherwise if pressure not set)
+    // // Hydrostatic pressure
     // double pref = 1.e5, pinterface = pref, pressure = 0.;
+
+    // // * R-T same kinematic viscosity
+    // double g = 9.81, ly = 1.2;
+
+    // // * R-T same dynamic viscosity
     // double g = 1., ly = 25.; 
 
     // std::vector<double> interfaceX, interfaceY; // Interface fn coordinates
@@ -184,13 +190,13 @@ void GDEntireDomainWithParticularities::fillIn(Cell* cell, const int& numberPhas
 
     //   // Check location to interface and initialize domain accordingly
     //   if (posElement.getY() > interfaceY[index]) {
-	  //   alpha[0] = 0.;
-	  //   alpha[1] = 1.;
-    //     pressure = pref + rhoHeavy * g * (ly - posElement.getY());
+	  //   alpha[0] = 1.;
+	  //   alpha[1] = 0.;
+    //   pressure = pref + rhoHeavy * g * (ly - posElement.getY());
     //   }
     //   else {
-    //     alpha[0] = 1.;
-    //     alpha[1] = 0.;
+    //     alpha[0] = 0.;
+    //     alpha[1] = 1.;
     //     pinterface = pref + rhoHeavy * g * (ly - interfaceY[index]);
     //     pressure = pinterface + rhoLight * g * (interfaceY[index] - posElement.getY());
     //   }
@@ -199,7 +205,7 @@ void GDEntireDomainWithParticularities::fillIn(Cell* cell, const int& numberPhas
     //     cell->getPhase(k)->setAlpha(alpha[k]);
     //     cell->getPhase(k)->setPressure(pressure);
     //   }
-    //   // cell->getMixture()->setPressure(pressure); // Hydrostatic pressure only for R-T Hope et al.
+    //   cell->getMixture()->setPressure(pressure);
     // }
   }
 }

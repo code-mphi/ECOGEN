@@ -31,6 +31,9 @@
 #ifndef COORD_H
 #define COORD_H
 
+#include <cmath>
+#include <iostream>
+
 //! \class     Coord
 //! \brief     Class for a coordinate system object such as coordinates of the vertex or a vector
 class Coord
@@ -87,7 +90,7 @@ public:
   //! \param     tangent              tangent vector (Coord)
   //! \param     binormal             binormal vector (Coord)
   void localProjection(const Coord& normal, const Coord& tangent, const Coord& binormal);
-  //! \brief     Reverse projection in the absolute cartesian coordinate system
+  //! \brief     Reverse projection in the absolute Cartesian coordinate system
   //! \param     normal               normal vector (Coord)
   //! \param     tangent              tangent vector (Coord)
   //! \param     binormal             binormal vector (Coord)

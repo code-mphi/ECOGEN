@@ -14,4 +14,5 @@ Here are presented a collection of tutorials to help you use ECOGEN efficiently.
    Chap4_3restartRun
    Chap4_4splitPhysicalDomainsNS
    Chap4_5paraviewServer
-   
+   Chap4_6extractMassflowWithParaview
+   Chap4_7runningATestInAnotherFolder

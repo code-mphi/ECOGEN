@@ -38,7 +38,7 @@
 class QAPConductivity : public QuantitiesAddPhys
 {
     public:
-    QAPConductivity(AddPhys* addPhys, const int& numberPhases);
+    QAPConductivity(AddPhys* addPhys);
     virtual ~QAPConductivity();
 
     virtual void computeQuantities(Cell* cell);

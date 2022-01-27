@@ -1,0 +1,11 @@
+<?xml version = "1.0" encoding = "UTF-8" standalone = "yes"?>
+<model>
+	<flowModel name="VelocityEq" numberPhases="2" alphaNull="true"/>
+	<EOS name="SG_water_cavitation.xml"/>
+	<EOS name="IG_air.xml"/>
+	<relaxation type="P" speed="infinite"/>
+	<!-- <relaxation type="P" speed="finite" rate="1.e-2" solver="euler"/> -->
+	<symmetryTerm type="cylindrical">
+		<dataSymCyl radialAxis="Y"/>
+	</symmetryTerm>
+</model>

@@ -31,8 +31,6 @@
 #ifndef BOUNDCOND_H
 #define BOUNDCOND_H
 
-#include <iostream>
-
 #include "../Order1/CellInterface.h"
 #include "../Order2/CellInterfaceO2.h" //Ajouter pour l'AMR, a priori ne pose pas de probleme
 #include "../libTierces/tinyxml2.h"
@@ -51,20 +49,19 @@ class BoundCond : public CellInterface
     virtual void createBoundary(TypeMeshContainer<CellInterface*>& /*cellInterfaces*/, std::string /*ordreCalcul*/) { Errors::errorMessage("Impossible to create the limit in createBoundary"); };
     virtual void initialize(Cell* cellLeft, Cell* /*cellRight*/);
 
-    virtual void computeFlux(const int& numberPhases, const int& numberTransports, double& dtMax, Limiter& globalLimiter, Limiter& interfaceLimiter, Limiter& globalVolumeFractionLimiter, Limiter& interfaceVolumeFractionLimiter, Prim type = vecPhases);
-    virtual void computeFluxAddPhys(const int& numberPhases, AddPhys& addPhys);
-    virtual void solveRiemann(const int& numberPhases, const int& numberTransports, double& dtMax, Limiter& /*globalLimiter*/, Limiter& /*interfaceLimiter*/, Limiter& /*globalVolumeFractionLimiter*/, Limiter& /*interfaceVolumeFractionLimiter*/, Prim type = vecPhases);
-    virtual void addFlux(const int& /*numberPhases*/, const int& /*numberTransports*/, const double& /*coefAMR*/) {}; //Since it is a boundary there is nothing to add to 'right' cell
-    virtual void solveRiemannBoundary(Cell& /*cellLeft*/, const int& /*numberPhases*/, const double& /*dxLeft*/, double& /*dtMax*/) { Errors::errorMessage("Warning solveRiemannLimite not provided for boundary used"); };
-    virtual void solveRiemannTransportBoundary(Cell& /*cellLeft*/, const int& /*numberTransports*/) const { Errors::errorMessage("Warning solveRiemannTransportLimite not provided for boundary used"); };
+    virtual void computeFlux(double& dtMax, Limiter& globalLimiter, Limiter& interfaceLimiter, Limiter& globalVolumeFractionLimiter, Limiter& interfaceVolumeFractionLimiter, Prim type = vecPhases);
+    virtual void computeFluxAddPhys(AddPhys& addPhys);
+    virtual void solveRiemann(double& dtMax, Limiter& /*globalLimiter*/, Limiter& /*interfaceLimiter*/, Limiter& /*globalVolumeFractionLimiter*/, Limiter& /*interfaceVolumeFractionLimiter*/, Prim type = vecPhases);
+    virtual void addFlux(const double& /*coefAMR*/) {}; //Since it is a boundary there is nothing to add to 'right' cell
+    virtual void solveRiemannBoundary(Cell& /*cellLeft*/, const double& /*dxLeft*/, double& /*dtMax*/) { Errors::errorMessage("Warning solveRiemannLimite not provided for boundary used"); };
+    virtual void solveRiemannTransportBoundary(Cell& /*cellLeft*/) const { Errors::errorMessage("Warning solveRiemannTransportLimite not provided for boundary used"); };
 
     virtual int whoAmI() const { Errors::errorMessage("whoAmI not available for boundary used"); return 0; };
     virtual int whoAmIHeat() const { Errors::errorMessage("whoAmIHeat not available for boundary used"); return ADIABATIC; };
     virtual void printInfo(){};
 
     virtual const int& getNumPhys() const { return m_numPhysique; };
-    virtual double getMassflow() const;
-    virtual double getPowerFlux() const;
+    virtual double getBoundData(VarBoundary var) const;
     virtual double getBoundaryHeatQuantity() const { Errors::errorMessage("getBoundaryHeatQuantity not available for boundary used"); return 0.; }
 
     //Pour methode AMR
@@ -75,10 +72,7 @@ class BoundCond : public CellInterface
 
   protected:
     int m_numPhysique;
-    double m_massflow;     //!< Total massflow through boundary (kg.s-1)
-    double m_powerFlux;    //!< Power flux through boundary (W)
-
-  private:
+    std::vector<double> m_boundData; //!< Boundary dataset for boundary output
 };
 
 #endif // BOUNDCOND_H

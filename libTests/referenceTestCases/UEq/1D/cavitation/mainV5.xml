@@ -4,7 +4,7 @@
 	<outputMode format="GNU" binary="false"/>
 	<timeControlMode iterations="false">
 		<iterations number="100" iterFreq="10"/>
-		<physicalTime totalTime="1.85e-4" timeFreq="9.25e-05"/>
+		<physicalTime totalTime="1.85e-3" timeFreq="0.925e-3"/>
 	</timeControlMode>
 	<computationControl CFL="0.8"/>
 	<secondOrder>

@@ -1,9 +1,9 @@
 <?xml version='1.0' encoding='UTF-8' standalone='yes'?>
 <computationParam>
   <run>pressureVelocityEq2DsurfaceTensionDropletImpact</run>
-  <outputMode format="XML" binary="false"/>
+  <outputMode format="XML" binary="false" precision="10" reducedOutput="true"/>
   <timeControlMode iterations="true">
-<iterations number="10" iterFreq="10"/>
+  <iterations number="20" iterFreq="10"/>
     <physicalTime timeFreq="2.e-5" totalTime="2.e-4"/>
   </timeControlMode>
   <computationControl CFL="0.6"/>

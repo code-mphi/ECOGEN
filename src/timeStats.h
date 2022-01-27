@@ -31,6 +31,7 @@
 #ifndef TIMESTATS_H
 #define TIMESTATS_H
 
+#include <iostream>
 #include <ctime>
 #include <string>
 #include <mpi.h>

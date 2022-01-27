@@ -7,12 +7,12 @@
 		<vecDir x="1" y="0" z="0"/>
 	</cut1D>
 	<timeControlMode iterations="true">
-<iterations number="10" iterFreq="10"/>
+	<iterations number="10" iterFreq="10"/>
 		<physicalTime totalTime="1.2e-3" timeFreq="2.4e-4"/>
 	</timeControlMode>
 	<computationControl CFL="0.8"/>
 	<secondOrder>
 		<globalLimiter>mc</globalLimiter>
 	</secondOrder>
-	<restartSimulation restartFileNumber="0" AMRsaveFreq="0"/>
+	<restartSimulation restartFileNumber="0" AMRsaveFreq="1"/>
 </computationParam>

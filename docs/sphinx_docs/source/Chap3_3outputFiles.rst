@@ -31,7 +31,7 @@ ECOGEN can provide output using XML files in VTK file format (ASCII or BINARY). 
 - *(ext)=vtr*: Cartesian mesh.
 - *(ext)=vtu*: Unstructured mesh.
 
-ECOGEN also produces files named *collectionParaview.pvd* and *collectionVisIt.visit* (or *collectionParaviewB64.pvd* and *collectionParaviewB64.pvd* for BINARY) in order to load only one pack of files when the softwares `PARAVIEW`_ and `VisIt`_ are used, respectively.
+ECOGEN also produces files named *collectionParaview.pvd* and *collectionVisIt.visit* (or *collectionParaviewB64.pvd* and *collectionParaviewB64.pvd* for BINARY) in order to load only one pack of files when the softwares `ParaView`_ and `VisIt`_ are used, respectively.
 
 Saving input files
 ------------------
@@ -65,5 +65,5 @@ One reads:
 - CPU time spent in AMR routines since the beginning of the simulation.
 
 .. _gnuplot: http://www.gnuplot.info/
-.. _PARAVIEW: https://www.paraview.org/
+.. _ParaView: https://www.paraview.org/
 .. _VisIt: https://wci.llnl.gov/simulation/computer-codes/visit/

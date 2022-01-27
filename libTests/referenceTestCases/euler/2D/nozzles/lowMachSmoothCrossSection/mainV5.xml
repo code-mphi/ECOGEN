@@ -1,0 +1,10 @@
+<?xml version = "1.0" encoding = "UTF-8" standalone = "yes"?>
+<computationParam>
+  <run>euler2DnozzleLowMachSmoothCrossSection</run>
+  <outputMode format="XML" binary="false"/>
+  <timeControlMode iterations="false">
+    <iterations number="5" iterFreq="1"/>
+    <physicalTime totalTime="2." timeFreq="0.1"/>
+  </timeControlMode>
+  <computationControl CFL="0.5"/>
+</computationParam>

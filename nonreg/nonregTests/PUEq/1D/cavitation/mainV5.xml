@@ -3,7 +3,7 @@
 	<run>pressureVelocityEq1DCavitation</run>
 	<outputMode format="GNU" binary="false"/>
 	<timeControlMode iterations="true">
-<iterations number="10" iterFreq="10"/>
+	<iterations number="10" iterFreq="10"/>
 		<physicalTime totalTime="1.85e-3" timeFreq="0.925e-3"/>
 	</timeControlMode>
 	<computationControl CFL="0.8"/>

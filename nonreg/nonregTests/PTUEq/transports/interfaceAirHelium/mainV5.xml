@@ -3,7 +3,7 @@
 	<run>temperaturePressureVelocityEq1DTransportsInterfaceAirHelium</run>
 	<outputMode format="GNU" binary="false"/>
 	<timeControlMode iterations="true">
-<iterations number="10" iterFreq="10"/>
+	<iterations number="10" iterFreq="10"/>
 		<physicalTime timeFreq="250.e-6" totalTime="500.e-6"/>
 	</timeControlMode>
 	<computationControl CFL="0.8"/>

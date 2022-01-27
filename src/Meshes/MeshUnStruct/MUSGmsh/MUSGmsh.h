@@ -31,7 +31,6 @@
 #ifndef MUSGMSH_H
 #define MUSGMSH_H
 
-#include <string>
 #include <sstream>
 #include "../../MeshUnStruct.h"
 #include "HeaderElements.h"

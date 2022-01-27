@@ -28,19 +28,18 @@
 //  along with ECOGEN (file LICENSE).  
 //  If not, see <http://www.gnu.org/licenses/>.
 
-#include <cmath>
 #include "MixUEq.h"
 
 using namespace tinyxml2;
 
 //***************************************************************************
 
-MixUEq::MixUEq() : m_density(0.), m_pressure(0.), m_velocity(0), m_energie(0.), m_totalEnergy(0.), m_frozenSoundSpeed(0.), m_woodSoundSpeed(0.) {}
+MixUEq::MixUEq() : m_density(0.), m_pressure(0.), m_velocity(0), m_energy(0.), m_totalEnergy(0.), m_frozenSoundSpeed(0.), m_woodSoundSpeed(0.) {}
 
 //***************************************************************************
 
 MixUEq::MixUEq(XMLElement* state, std::string fileName) :
-  m_density(0.), m_pressure(0.), m_velocity(0), m_energie(0.), m_totalEnergy(0.), m_frozenSoundSpeed(0.), m_woodSoundSpeed(0.)
+  m_density(0.), m_pressure(0.), m_velocity(0), m_energy(0.), m_totalEnergy(0.), m_frozenSoundSpeed(0.), m_woodSoundSpeed(0.)
 {
   XMLElement* sousElement(state->FirstChildElement("mixture"));
   if (sousElement == NULL) throw ErrorXMLElement("mixture", fileName, __FILE__, __LINE__);
@@ -78,7 +77,7 @@ void MixUEq::copyMixture(Mixture &mixture)
   m_density = mixture.getDensity();
   m_pressure = mixture.getPressure();
   m_velocity = mixture.getVelocity();
-  m_energie = mixture.getEnergy();
+  m_energy = mixture.getEnergy();
   m_totalEnergy = mixture.getTotalEnergy();
   m_frozenSoundSpeed = mixture.getFrozenSoundSpeed();
   m_woodSoundSpeed = mixture.getWoodSoundSpeed();
@@ -86,7 +85,7 @@ void MixUEq::copyMixture(Mixture &mixture)
 
 //***************************************************************************
 
-double MixUEq::computeDensity(const double* alphak, const double* rhok, const int& numberPhases)
+double MixUEq::computeDensity(const double* alphak, const double* rhok)
 {
   double rho(0.);
   for(int k=0;k<numberPhases;k++)
@@ -98,7 +97,7 @@ double MixUEq::computeDensity(const double* alphak, const double* rhok, const in
 
 //***************************************************************************
 
-double MixUEq::computePressure(const double* alphak, const double* pk, const int& numberPhases)
+double MixUEq::computePressure(const double* alphak, const double* pk)
 {
   double p(0.);
   for(int k=0;k<numberPhases;k++)
@@ -110,7 +109,7 @@ double MixUEq::computePressure(const double* alphak, const double* pk, const int
 
 //***************************************************************************
 
-double MixUEq::computeInternalEnergy(const double* Yk, const double* ek, const int& numberPhases)
+double MixUEq::computeInternalEnergy(const double* Yk, const double* ek)
 {
   double e(0.);
   for(int k=0;k<numberPhases;k++)
@@ -122,7 +121,7 @@ double MixUEq::computeInternalEnergy(const double* Yk, const double* ek, const i
 
 //***************************************************************************
 
-double MixUEq::computeFrozenSoundSpeed(const double* Yk, const double* ck, const int& numberPhases)
+double MixUEq::computeFrozenSoundSpeed(const double* Yk, const double* ck)
 {
   double cF(0.);
   for(int k=0;k<numberPhases;k++)
@@ -134,7 +133,7 @@ double MixUEq::computeFrozenSoundSpeed(const double* Yk, const double* ck, const
 
 //***************************************************************************
 
-void MixUEq::computeMixtureVariables(Phase** vecPhase, const int& numberPhases)
+void MixUEq::computeMixtureVariables(Phase** vecPhase)
 {
   //mixture density and pressure
   m_density = 0.;
@@ -148,11 +147,11 @@ void MixUEq::computeMixtureVariables(Phase** vecPhase, const int& numberPhases)
     vecPhase[k]->computeMassFraction(m_density);
   }
   //Specific internal energy and speed of sounds
-  m_energie = 0.;
+  m_energy = 0.;
   m_frozenSoundSpeed = 0.;
   m_woodSoundSpeed = 0.;
   for (int k = 0; k < numberPhases; k++) {
-    m_energie += vecPhase[k]->getY() * vecPhase[k]->getEnergy();
+    m_energy += vecPhase[k]->getY() * vecPhase[k]->getEnergy();
     m_frozenSoundSpeed += vecPhase[k]->getY() * vecPhase[k]->getSoundSpeed()*vecPhase[k]->getSoundSpeed();
     m_woodSoundSpeed += vecPhase[k]->getAlpha() / std::max((vecPhase[k]->getDensity()*vecPhase[k]->getSoundSpeed()*vecPhase[k]->getSoundSpeed()), epsilonAlphaNull);
   }
@@ -165,7 +164,7 @@ void MixUEq::computeMixtureVariables(Phase** vecPhase, const int& numberPhases)
 
 void MixUEq::internalEnergyToTotalEnergy(std::vector<QuantitiesAddPhys*>& vecGPA)
 {
-  m_totalEnergy = m_energie + 0.5*m_velocity.squaredNorm();
+  m_totalEnergy = m_energy + 0.5*m_velocity.squaredNorm();
   for (unsigned int pa = 0; pa < vecGPA.size(); pa++) {
     m_totalEnergy += vecGPA[pa]->computeEnergyAddPhys()/m_density; //Caution /m_density important
   }
@@ -175,9 +174,9 @@ void MixUEq::internalEnergyToTotalEnergy(std::vector<QuantitiesAddPhys*>& vecGPA
 
 void MixUEq::totalEnergyToInternalEnergy(std::vector<QuantitiesAddPhys*>& vecGPA)
 {
-  m_energie = m_totalEnergy - 0.5*m_velocity.squaredNorm();
+  m_energy = m_totalEnergy - 0.5*m_velocity.squaredNorm();
   for (unsigned int pa = 0; pa < vecGPA.size(); pa++) {
-    m_energie -= vecGPA[pa]->computeEnergyAddPhys()/m_density; //Caution /m_density important
+    m_energy -= vecGPA[pa]->computeEnergyAddPhys()/m_density; //Caution /m_density important
   }
 }
 

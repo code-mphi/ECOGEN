@@ -30,12 +30,12 @@
 
 #include "FaceQuadrangle.h"
 
-const int FaceQuadrangle::NOMBRENOEUDS = 4;
+const int FaceQuadrangle::NUMBERNODES = 4;
 
 //***********************************************************************
 
 FaceQuadrangle::FaceQuadrangle(const int& numNoeud1, const int& numNoeud2, const int& numNoeud3, const int& numNoeud4, int tri) :
-FaceNS(NOMBRENOEUDS)
+FaceNS(NUMBERNODES)
 {
   //Sauvegarde ordre initial
   m_numNoeudsOrigine = new int[4];

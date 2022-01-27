@@ -41,10 +41,12 @@ public:
 	virtual ~CellO2Ghost();
 
 	virtual void pushBackSlope();
-	virtual void allocate(const int& numberPhases, const int& numberTransports, const std::vector<AddPhys*>& addPhys, Model* model);
+	virtual void allocate(const std::vector<AddPhys*>& addPhys);
 	virtual int getRankOfNeighborCPU() const;
     virtual void setRankOfNeighborCPU(int rank);
-	virtual void computeLocalSlopes(const int& numberPhases, const int& numberTransports, CellInterface& cellInterfaceRef, Limiter& globalLimiter, Limiter& interfaceLimiter, Limiter& globalVolumeFractionLimiter, Limiter& interfaceVolumeFractionLimiter, double& alphaCellAfterOppositeSide, double& alphaCell, double& alphaCellOtherInterfaceSide, double& epsInterface);
+	virtual void computeLocalSlopes(CellInterface& cellInterfaceRef, Limiter& globalLimiter, Limiter& interfaceLimiter,
+		Limiter& globalVolumeFractionLimiter, Limiter& interfaceVolumeFractionLimiter, double& alphaCellAfterOppositeSide,
+		double& alphaCell, double& alphaCellOtherInterfaceSide, double& epsInterface);
 	virtual void createChildCell(const int& lvl);
 	virtual void getBufferSlopes(double* buffer, int& counter, const int& lvl);
 	virtual bool isCellGhost() const { return true; };

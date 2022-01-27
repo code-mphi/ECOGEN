@@ -2,7 +2,7 @@
 <mesh>
 	<type structure="unStructured"/>
 	<unstructuredMesh>
-		<file name="./libMeshes/shockTube/shockTubeFreeSurface.msh"/>
+		<file name="libMeshes/shockTube/shockTubeFreeSurface.msh"/>
 		<parallel GMSHPretraitement="true"/>
 	</unstructuredMesh>
 </mesh>

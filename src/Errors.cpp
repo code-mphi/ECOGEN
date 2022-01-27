@@ -145,18 +145,18 @@ void Errors::writeErrorInFile(const int& num, const std::string& folder, const i
   std::stringstream myStream;
 
   std::string fileName;
-  if(ErrorType == ERROR){ fileName = "error"; }
-  else if(ErrorType == WARNING){ fileName = "warning"; }
+  if      (ErrorType == ERROR)   { fileName = "error"; }
+  else if (ErrorType == WARNING) { fileName = "warning"; }
   myStream << folder <<"errorsAndWarnings/" <<  fileName << "_CPU" << rankCpu << ".out";
   fileStream.open((myStream.str()).c_str(), std::ofstream::app);
   fileStream << "-------------------------------------------------------" << std::endl;
-  fileStream << "        ERROR " << num << " REQUIRING PROGRAM SHUTDOWN" << std::endl;
+  if      (ErrorType == ERROR)   { fileStream << "        ERROR " << num << " REQUIRING PROGRAM SHUTDOWN" << std::endl; }
+  else if (ErrorType == WARNING) { fileStream << "        WARNING " << num << " REQUIRING ATTENTION" << std::endl; }
   fileStream << " - CPU number: " << rankCpu << std::endl;
   fileStream << " - file: " << m_file.c_str() << " line: " << m_line << std::endl;
   fileStream << " - message: " << m_message.c_str() << std::endl;
-  fileStream << "=> Fix error and restart run" << std::endl;
+  if      (ErrorType == ERROR)   { fileStream << "=> Fix error and restart run" << std::endl; }
   fileStream << "-------------------------------------------------------" << std::endl;
-
   fileStream.close();
 }
 

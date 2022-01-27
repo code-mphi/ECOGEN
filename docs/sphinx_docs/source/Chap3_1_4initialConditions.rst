@@ -361,8 +361,9 @@ This last node :xml:`<dataFluid>` as well as the :xml:`<mixture>` node are depen
 
 Euler
 ~~~~~
-Single phase flow. In this case, the :xml:`<mixture>` node is absent and the :xml:`<dataFluid>` node contains the following attributes or nodes:
+Single-phase flow. In this case, the :xml:`<mixture>` node is absent and the :xml:`<dataFluid>` node contains the following attributes or nodes:
 
+- :xml:`density` or :xml:`temperature`: Initial density or temperature of the fluid, real number (unit: kg/m3 or K (SI)), respectively.
 - Attribute :xml:`temperature`: Initial temperature of the fluid, real number (unit: K (SI)).
 - Attribute :xml:`pressure`: Initial pressure of the fluid, real number (unit: Pa(SI)).
 - Node :xml:`<velocity>`: With :xml:`x`, :xml:`y` and :xml:`z` attributes setting the initial values for the components of the velocity vector, real numbers (unit: m/s (SI)).
@@ -377,8 +378,8 @@ Single phase flow. In this case, the :xml:`<mixture>` node is absent and the :xm
 
 .. _Sec:input:UEq:
 
-UEq (previously named MultiP)
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+UEq (previously named MultiP) or UEqTotE
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 Multiphase flow at velocity equilibrium (same velocity for every phase within each cell). Each :xml:`<dataFluid>` node corresponds to a phase with the following attributes:
 
 - :xml:`alpha`: Volume fraction of the phase, real number in the range ]0.,1.[. The range can be increased to [0.;1.] if the option *alphaNull* is turned on (*true*) in the *modelV4.xml* input file.
@@ -476,6 +477,40 @@ Moreover, in this case, the :xml:`<mixture>` contains the following attributes a
 	  <velocity x="0." y="0." z="0."/>
 	</mixture>
 
+.. _Sec:input:EulerKorteweg:
+
+Euler--Korteweg
+~~~~~~~~~~~~~~~
+Single-phase flow. In this case, the :xml:`<mixture>` node is absent and the :xml:`<dataFluid>` node contains the following attributes or nodes:
+
+- Attribute :xml:`density`: Initial density of the fluid, real number (unit: kg/m3 (SI)).
+- Node :xml:`<velocity>`: With :xml:`x`, :xml:`y` and :xml:`z` attributes setting the initial values for the components of the velocity vector, real numbers (unit: m/s (SI)).
+
+.. code-block:: xml
+
+    <material type="fluid" EOS="Polynomial_arbitrary.xml">
+        <dataFluid density="0.2452">
+            <velocity x="0." y="0." z="0."/>
+        </dataFluid>
+    </material>
+
+.. _Sec:input:NonLinearSchrodinger:
+
+Non-linear Schrödinger
+~~~~~~~~~~~~~~~~~~~~~~
+Defocusing non-linear Schrödinger equation. In this case, there isn't any EOS, the :xml:`<mixture>` node is absent and the :xml:`<dataFluid>` node contains the following attributes or nodes:
+
+- Attribute :xml:`density`: Initial density of the fluid, real number (unit: kg/m3 (SI)).
+- Node :xml:`<velocity>`: With :xml:`x`, :xml:`y` and :xml:`z` attributes setting the initial values for the components of the velocity vector, real numbers (unit: m/s (SI)).
+
+.. code-block:: xml
+
+    <material type="none">
+        <dataFluid density="2.0">
+            <velocity x="0." y="0." z="0."/>
+        </dataFluid>
+    </material>
+
 **Remark**
 
-Be careful to set the volume fraction in the range ]0,.1.[ (unless you use the option *alphaNull=true* for pressure-velocity- and velocity-equilibrium models) as well as the its sum over all the phases equal to 1.
+For the multiphase models, be careful to set the volume fraction in the range ]0,.1.[ (unless you use the option *alphaNull=true* for pressure-velocity- and velocity-equilibrium models) as well as the its sum over all the phases equal to 1.

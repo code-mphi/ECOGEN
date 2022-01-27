@@ -48,10 +48,10 @@ public:
   void assignElementProperties(TypeMeshContainer<Cell*>& cells, std::vector<decomposition::Key<3>>& keys);
   void createCellInterfacesFacesAndGhostCells(TypeMeshContainer<Cell*>& cells, TypeMeshContainer<Cell*>& cellsGhost, TypeMeshContainer<CellInterface*>& cellInterfaces, std::string ordreCalcul);
   virtual void procedureRaffinementInitialization(TypeMeshContainer<Cell*>* cellsLvl, TypeMeshContainer<Cell*>* cellsLvlGhost, TypeMeshContainer<CellInterface*>* cellInterfacesLvl,
-		const std::vector<AddPhys*>& addPhys, Model* model, int& nbCellsTotalAMR, std::vector<GeometricalDomain*>& domains,
-		Eos** eos, const int& restartSimulation, std::string ordreCalcul, const int& numberPhases, const int& numberTransports);
+		const std::vector<AddPhys*>& addPhys, int& nbCellsTotalAMR, std::vector<GeometricalDomain*>& domains,
+		Eos** eos, const int& restartSimulation, std::string ordreCalcul);
   virtual void procedureRaffinement(TypeMeshContainer<Cell*>* cellsLvl, TypeMeshContainer<Cell*>* cellsLvlGhost, TypeMeshContainer<CellInterface*>* cellInterfacesLvl, const int& lvl,
-    const std::vector<AddPhys*>& addPhys, Model* model, int& nbCellsTotalAMR, Eos** eos);
+    const std::vector<AddPhys*>& addPhys, int& nbCellsTotalAMR, Eos** eos);
   virtual std::string whoAmI() const;
 
   //Printing / Reading
@@ -62,7 +62,7 @@ public:
   virtual void recupereTypeCell(std::vector<double>& jeuDonnees, std::vector<Cell*>* cellsLvl) const;
   virtual void recupereDonnees(TypeMeshContainer<Cell*>* cellsLvl, std::vector<double>& jeuDonnees, const int var, int phase) const;
   virtual void setDataSet(std::vector<double>& jeuDonnees, TypeMeshContainer<Cell*>* cellsLvl, const int var, int phase) const;
-  virtual void refineCellAndCellInterfaces(Cell* cell, const std::vector<AddPhys*>& addPhys, Model* model, int& nbCellsTotalAMR);
+  virtual void refineCellAndCellInterfaces(Cell* cell, const std::vector<AddPhys*>& addPhys, int& nbCellsTotalAMR);
   virtual void printDomainDecomposition(std::ofstream& fileStream);
   virtual void readDomainDecomposition(std::ifstream& fileStream);
 
@@ -70,15 +70,17 @@ public:
   virtual int getLvlMax() const { return m_lvlMax; };
 
 	//Pour parallele
-  virtual void initializePersistentCommunications(const int numberPhases, const int numberTransports, const TypeMeshContainer<Cell*>& cells, std::string ordreCalcul);
+  virtual void initializePersistentCommunications(const TypeMeshContainer<Cell*>& cells, std::string ordreCalcul);
   virtual void finalizeParallele(const int& lvlMax);
-  virtual void parallelLoadBalancingAMR(TypeMeshContainer<Cell*>* cellsLvl, TypeMeshContainer<Cell*>* cellsLvlGhost, TypeMeshContainer<CellInterface*>* cellInterfacesLvl, std::string ordreCalcul,
-    const int& numberPhases, const int& numberTransports, const std::vector<AddPhys*>& addPhys, Model* model, Eos** eos, int& nbCellsTotalAMR, bool init = false);
+  virtual void parallelLoadBalancingAMR(TypeMeshContainer<Cell*>* cellsLvl, TypeMeshContainer<Cell*>* cellsLvlGhost,
+    TypeMeshContainer<CellInterface*>* cellInterfacesLvl, std::string ordreCalcul,
+    const std::vector<AddPhys*>& addPhys, Eos** eos, int& nbCellsTotalAMR, bool init = false);
   virtual void computePotentialBalancing(TypeMeshContainer<Cell*>* cellsLvl, bool init, int lvl, bool& balance,
     std::vector<typename decomposition::Key<3>::value_type>& indicesSendStartGlobal, std::vector<typename decomposition::Key<3>::value_type>& indicesSendEndGlobal,
     std::vector<typename decomposition::Key<3>::value_type>& indicesReceiveStartGlobal, std::vector<typename decomposition::Key<3>::value_type>& indicesReceiveEndGlobal);
-  virtual void balance(TypeMeshContainer<Cell*>* cellsLvl, TypeMeshContainer<Cell*>* cellsLvlGhost, TypeMeshContainer<CellInterface*>* cellInterfacesLvl, std::string ordreCalcul,
-    const int& numberPhases, const int& numberTransports, const std::vector<AddPhys*>& addPhys, Model* model, Eos** eos, int& nbCellsTotalAMR,
+  virtual void balance(TypeMeshContainer<Cell*>* cellsLvl, TypeMeshContainer<Cell*>* cellsLvlGhost,
+    TypeMeshContainer<CellInterface*>* cellInterfacesLvl, std::string ordreCalcul,
+    const std::vector<AddPhys*>& addPhys, Eos** eos, int& nbCellsTotalAMR,
     std::vector<typename decomposition::Key<3>::value_type>& indicesSendStartGlobal, std::vector<typename decomposition::Key<3>::value_type>& indicesSendEndGlobal,
     std::vector<typename decomposition::Key<3>::value_type>& indicesReceiveStartGlobal, std::vector<typename decomposition::Key<3>::value_type>& indicesReceiveEndGlobal);
 

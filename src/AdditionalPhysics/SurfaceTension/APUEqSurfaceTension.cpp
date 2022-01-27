@@ -28,9 +28,6 @@
 //  along with ECOGEN (file LICENSE).  
 //  If not, see <http://www.gnu.org/licenses/>.
 
-#include <iostream>
-#include <cmath>
-#include <algorithm>
 #include "APUEqSurfaceTension.h"
 
 using namespace tinyxml2;
@@ -105,7 +102,7 @@ double APUEqSurfaceTension::computeEnergyAddPhys(QuantitiesAddPhys* QPA)
 
 //***********************************************************************
 
-void APUEqSurfaceTension::solveFluxAddPhys(CellInterface* cellInterface, const int& numberPhases)
+void APUEqSurfaceTension::solveFluxAddPhys(CellInterface* cellInterface)
 {
   m_normal = cellInterface->getFace()->getNormal();
   m_tangent = cellInterface->getFace()->getTangent();
@@ -124,7 +121,7 @@ void APUEqSurfaceTension::solveFluxAddPhys(CellInterface* cellInterface, const i
   m_gradCRight.localProjection(m_normal, m_tangent, m_binormal);
 
   // Reset of fluxBuffUEq
-  static_cast<FluxUEq*> (fluxBuff)->setToZero(numberPhases);
+  static_cast<FluxUEq*> (fluxBuff)->setToZero();
 
   this->solveFluxSurfaceTensionInner(m_velocityLeft, m_velocityRight, m_gradCLeft, m_gradCRight);
 
@@ -134,7 +131,7 @@ void APUEqSurfaceTension::solveFluxAddPhys(CellInterface* cellInterface, const i
 
 //***********************************************************************
 
-void APUEqSurfaceTension::solveFluxAddPhysBoundary(CellInterface* cellInterface, const int& numberPhases)
+void APUEqSurfaceTension::solveFluxAddPhysBoundary(CellInterface* cellInterface)
 {
   //KS//DEV// Nothing special is done at the boundaries with surface tension right now (considered as symmetry)
 
@@ -151,7 +148,7 @@ void APUEqSurfaceTension::solveFluxAddPhysBoundary(CellInterface* cellInterface,
   m_gradCLeft.localProjection(m_normal, m_tangent, m_binormal);
 
   // Reset of fluxBuffUEq (allow to then do the sum of surface-tension effects for the different phases combinations)
-  static_cast<FluxUEq*> (fluxBuff)->setToZero(numberPhases);
+  static_cast<FluxUEq*> (fluxBuff)->setToZero();
 
   int typeCellInterface = cellInterface->whoAmI();
   if (typeCellInterface == NONREFLECTING) { this->solveFluxSurfaceTensionNonReflecting(m_velocityLeft, m_gradCLeft); }
@@ -199,10 +196,10 @@ void APUEqSurfaceTension::solveFluxSurfaceTensionInner(const Coord& velocityLeft
 
 	//Writing of surface-tension terms on each equation of fluxBuffUEq
 	if (normW > 1.e-6) {
-    static_cast<FluxUEq*> (fluxBuff)->m_qdm.setX(static_cast<FluxUEq*> (fluxBuff)->m_qdm.getX() + m_sigma*(w1*w1 / normW - normW));
-    static_cast<FluxUEq*> (fluxBuff)->m_qdm.setY(static_cast<FluxUEq*> (fluxBuff)->m_qdm.getY() + m_sigma *w1*w2 / normW);
-    static_cast<FluxUEq*> (fluxBuff)->m_qdm.setZ(static_cast<FluxUEq*> (fluxBuff)->m_qdm.getZ() + m_sigma *w1*w3 / normW);
-    static_cast<FluxUEq*> (fluxBuff)->m_energMixture += m_sigma * (1./normW * (w1*w1*u + w1*w2*v + w1*w3*w) - normW*u);
+    static_cast<FluxUEq*> (fluxBuff)->m_momentum.setX(- m_sigma*(w2*w2 + w3*w3) / normW);
+    static_cast<FluxUEq*> (fluxBuff)->m_momentum.setY(m_sigma *w1*w2 / normW);
+    static_cast<FluxUEq*> (fluxBuff)->m_momentum.setZ(m_sigma *w1*w3 / normW);
+    static_cast<FluxUEq*> (fluxBuff)->m_energMixture = m_sigma * (w1*w1*u + w1*w2*v + w1*w3*w) / normW;
 	}
 }
 
@@ -220,12 +217,14 @@ void APUEqSurfaceTension::solveFluxSurfaceTensionWall(const Coord& gradCLeft) co
   //Considered as a symmetry and not as a wall with a triple vertex yet
 
   //Data of the cell interface
-  double normW;
+  double normW, w2, w3;
   normW = gradCLeft.norm();
+  w2 = gradCLeft.getY();
+  w3 = gradCLeft.getZ();
 
   //Writing of surface-tension terms on each equation of fluxBuffUEq
   if (normW > 1.e-6) {
-    static_cast<FluxUEq*> (fluxBuff)->m_qdm.setX(static_cast<FluxUEq*> (fluxBuff)->m_qdm.getX() - m_sigma*normW);
+    static_cast<FluxUEq*> (fluxBuff)->m_momentum.setX(- m_sigma*(w2*w2 + w3*w3) / normW);
   }
 }
 
@@ -236,10 +235,10 @@ void APUEqSurfaceTension::solveFluxSurfaceTensionOutflow() const
   //Not manage at the moment, just an example
 
   // To avoid bug when not manage
-  static_cast<FluxUEq*> (fluxBuff)->m_qdm.setX(static_cast<FluxUEq*> (fluxBuff)->m_qdm.getX() + 0.);
-  static_cast<FluxUEq*> (fluxBuff)->m_qdm.setY(static_cast<FluxUEq*> (fluxBuff)->m_qdm.getY() + 0.);
-  static_cast<FluxUEq*> (fluxBuff)->m_qdm.setZ(static_cast<FluxUEq*> (fluxBuff)->m_qdm.getZ() + 0.);
-  static_cast<FluxUEq*> (fluxBuff)->m_energMixture += 0.;
+  static_cast<FluxUEq*> (fluxBuff)->m_momentum.setX(0.);
+  static_cast<FluxUEq*> (fluxBuff)->m_momentum.setY(0.);
+  static_cast<FluxUEq*> (fluxBuff)->m_momentum.setZ(0.);
+  static_cast<FluxUEq*> (fluxBuff)->m_energMixture = 0.;
 }
 
 //***********************************************************************
@@ -249,10 +248,10 @@ void APUEqSurfaceTension::solveFluxSurfaceTensionInflow() const
   //Not manage at the moment, just an example
 
   // To avoid bug when not manage
-  static_cast<FluxUEq*> (fluxBuff)->m_qdm.setX(static_cast<FluxUEq*> (fluxBuff)->m_qdm.getX() + 0.);
-  static_cast<FluxUEq*> (fluxBuff)->m_qdm.setY(static_cast<FluxUEq*> (fluxBuff)->m_qdm.getY() + 0.);
-  static_cast<FluxUEq*> (fluxBuff)->m_qdm.setZ(static_cast<FluxUEq*> (fluxBuff)->m_qdm.getZ() + 0.);
-  static_cast<FluxUEq*> (fluxBuff)->m_energMixture += 0.;
+  static_cast<FluxUEq*> (fluxBuff)->m_momentum.setX(0.);
+  static_cast<FluxUEq*> (fluxBuff)->m_momentum.setY(0.);
+  static_cast<FluxUEq*> (fluxBuff)->m_momentum.setZ(0.);
+  static_cast<FluxUEq*> (fluxBuff)->m_energMixture = 0.;
 }
 
 //***********************************************************************
@@ -263,15 +262,15 @@ void APUEqSurfaceTension::solveFluxSurfaceTensionOther() const
   std::cout << "Surface-tension boundary not manage" << std::endl;
 
   // To avoid bug when not manage
-  static_cast<FluxUEq*> (fluxBuff)->m_qdm.setX(static_cast<FluxUEq*> (fluxBuff)->m_qdm.getX() + 0.);
-  static_cast<FluxUEq*> (fluxBuff)->m_qdm.setY(static_cast<FluxUEq*> (fluxBuff)->m_qdm.getY() + 0.);
-  static_cast<FluxUEq*> (fluxBuff)->m_qdm.setZ(static_cast<FluxUEq*> (fluxBuff)->m_qdm.getZ() + 0.);
-  static_cast<FluxUEq*> (fluxBuff)->m_energMixture += 0.;
+  static_cast<FluxUEq*> (fluxBuff)->m_momentum.setX(0.);
+  static_cast<FluxUEq*> (fluxBuff)->m_momentum.setY(0.);
+  static_cast<FluxUEq*> (fluxBuff)->m_momentum.setZ(0.);
+  static_cast<FluxUEq*> (fluxBuff)->m_energMixture = 0.;
 }
 
 //***********************************************************************
 
-void APUEqSurfaceTension::addSymmetricTermsRadialAxisOnX(Cell* cell, const int& numberPhases)
+void APUEqSurfaceTension::addSymmetricTermsRadialAxisOnX(Cell* cell)
 {
   //Extraction of data
   double r, w1, w2, normW;
@@ -283,25 +282,25 @@ void APUEqSurfaceTension::addSymmetricTermsRadialAxisOnX(Cell* cell, const int& 
   //Writing of symmetrical surface-tension terms on each equation of fluxBuffUEq
   for (int k = 0; k<numberPhases; k++) {
     static_cast<FluxUEq*> (fluxBuff)->m_alpha[k] = 0.;
-    static_cast<FluxUEq*> (fluxBuff)->m_masse[k] = 0.;
+    static_cast<FluxUEq*> (fluxBuff)->m_mass[k] = 0.;
     static_cast<FluxUEq*> (fluxBuff)->m_energ[k] = 0.;
   }
   if (normW > 1.e-6) {
-    static_cast<FluxUEq*> (fluxBuff)->m_qdm.setX(-m_sigma * (w1*w1 / normW - normW) / r);
-    static_cast<FluxUEq*> (fluxBuff)->m_qdm.setY(-m_sigma * w1*w2 / normW / r);
-    static_cast<FluxUEq*> (fluxBuff)->m_energMixture = -m_sigma * ((w1*w1/normW - normW)*cell->getMixture()->getU() + w1*w2/normW*cell->getMixture()->getV()) / r;
+    static_cast<FluxUEq*> (fluxBuff)->m_momentum.setX(-m_sigma * w1*w1 / normW / r);
+    static_cast<FluxUEq*> (fluxBuff)->m_momentum.setY(-m_sigma * w1*w2 / normW / r);
+    static_cast<FluxUEq*> (fluxBuff)->m_energMixture = -m_sigma * (w1*w1*cell->getMixture()->getU() + w1*w2*cell->getMixture()->getV()) / normW / r;
   }
   else {
-    static_cast<FluxUEq*> (fluxBuff)->m_qdm = 0.;
+    static_cast<FluxUEq*> (fluxBuff)->m_momentum = 0.;
     static_cast<FluxUEq*> (fluxBuff)->m_energMixture = 0.;
   }
 
-  cell->getCons()->addFlux(1., numberPhases);
+  cell->getCons()->addFlux(1.);
 }
 
 //***********************************************************************
 
-void APUEqSurfaceTension::addSymmetricTermsRadialAxisOnY(Cell* cell, const int& numberPhases)
+void APUEqSurfaceTension::addSymmetricTermsRadialAxisOnY(Cell* cell)
 {
   //Extraction of data
   double r, w1, w2, normW;
@@ -313,20 +312,20 @@ void APUEqSurfaceTension::addSymmetricTermsRadialAxisOnY(Cell* cell, const int& 
   //Writing of symmetrical surface-tension terms on each equation of fluxBuffUEq
   for (int k = 0; k<numberPhases; k++) {
     static_cast<FluxUEq*> (fluxBuff)->m_alpha[k] = 0.;
-    static_cast<FluxUEq*> (fluxBuff)->m_masse[k] = 0.;
+    static_cast<FluxUEq*> (fluxBuff)->m_mass[k] = 0.;
     static_cast<FluxUEq*> (fluxBuff)->m_energ[k] = 0.;
   }
   if (normW > 1.e-6) {
-    static_cast<FluxUEq*> (fluxBuff)->m_qdm.setX(-m_sigma * w1*w2 / normW / r);
-    static_cast<FluxUEq*> (fluxBuff)->m_qdm.setY(-m_sigma * (w2*w2 / normW - normW) / r);
-    static_cast<FluxUEq*> (fluxBuff)->m_energMixture = -m_sigma * (w1*w2/normW*cell->getMixture()->getU() + (w2*w2/normW - normW)*cell->getMixture()->getV()) / r;
+    static_cast<FluxUEq*> (fluxBuff)->m_momentum.setX(-m_sigma * w1*w2 / normW / r);
+    static_cast<FluxUEq*> (fluxBuff)->m_momentum.setY(-m_sigma * w2*w2 / normW / r);
+    static_cast<FluxUEq*> (fluxBuff)->m_energMixture = -m_sigma * (w1*w2*cell->getMixture()->getU() + w2*w2*cell->getMixture()->getV()) / normW / r;
   }
   else {
-    static_cast<FluxUEq*> (fluxBuff)->m_qdm = 0.;
+    static_cast<FluxUEq*> (fluxBuff)->m_momentum = 0.;
     static_cast<FluxUEq*> (fluxBuff)->m_energMixture = 0.;
   }
   
-  cell->getCons()->addFlux(1., numberPhases);
+  cell->getCons()->addFlux(1.);
 }
 
 //***********************************************************************
@@ -340,7 +339,7 @@ void APUEqSurfaceTension::reinitializeColorFunction(std::vector<Cell*>* cellsLvl
 
 //***********************************************************************
 
-void APUEqSurfaceTension::communicationsAddPhys(const int& /*numberPhases*/, const int& dim, const int& lvl)
+void APUEqSurfaceTension::communicationsAddPhys(const int& dim, const int& lvl)
 {
 	parallel.communicationsVector(QPA, dim, lvl, m_numQPAGradC);
 }

@@ -40,19 +40,19 @@ public:
   ElementHexahedron();
   virtual ~ElementHexahedron();
 
-  virtual void construitFaces(const Coord* noeuds, FaceNS** faces, int& indexMaxFaces, int** facesTemp, int* sommeNoeudsTemp); //Pour tests
-  virtual void construitFacesSimplifie(int& iMax, int** facesTemp, int* sommeNoeudsTemp);
+  virtual void construitFaces(const Coord* nodes, FaceNS** faces, int& indexMaxFaces, int** facesBuff, int* sumNodesBuff);
+  virtual void construitFacesSimplifie(int& iMax, int** facesBuff, int* sumNodesBuff);
   virtual void attributFaceCommunicante(FaceNS** faces, const int& indexMaxFaces, const int& numberNoeudsInternes);
-  virtual int compteFaceCommunicante(std::vector<int*>& faces, std::vector<int>& sommeNoeudsTemp);
-  virtual int compteFaceCommunicante(int& iMax, int** faces, int* sommeNoeudsTemp);
+  virtual int compteFaceCommunicante(std::vector<int*>& faces, std::vector<int>& sumNodesBuff);
+  virtual int compteFaceCommunicante(int& iMax, int** faces, int* sumNodesBuff);
 
 private:
-  virtual void computeVolume(const Coord* noeuds);
-  virtual void computeLCFL(const Coord* noeuds);
+  virtual void computeVolume(const Coord* nodes);
+  virtual void computeLCFL(const Coord* nodes);
 
   static const int TYPEGMSH;
-  static const int NOMBRENOEUDS;
-  static const int NOMBREFACES; /* ici il s'agit de quadrangles*/
+  static const int NUMBERNODES;
+  static const int NUMBERFACES; /* ici il s'agit de quadrangles*/
   static const int TYPEVTK;
 };
 

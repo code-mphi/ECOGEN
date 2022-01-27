@@ -28,8 +28,6 @@
 //  along with ECOGEN (file LICENSE).  
 //  If not, see <http://www.gnu.org/licenses/>.
 
-#include <cmath>
-#include <algorithm>
 #include "ModEulerHomogeneous.h"
 #include "PhaseEulerHomogeneous.h"
 
@@ -37,8 +35,8 @@ const std::string ModEulerHomogeneous::NAME = "EULERHOMOGENEOUS";
 
 //****************************************************************************
 
-ModEulerHomogeneous::ModEulerHomogeneous(const int& numberTransports, const int liquid, const int vapor) :
-  Model(NAME, numberTransports), m_liq(liquid), m_vap(vapor)
+ModEulerHomogeneous::ModEulerHomogeneous(const int& numbTransports, const int liquid, const int vapor) :
+  Model(NAME, numbTransports), m_liq(liquid), m_vap(vapor)
 {
   fluxBuff = new FluxEulerHomogeneous(); 
 }
@@ -52,9 +50,9 @@ ModEulerHomogeneous::~ModEulerHomogeneous()
 
 //****************************************************************************
 
-void ModEulerHomogeneous::allocateCons(Flux** cons, const int& /*numberPhases*/)
+void ModEulerHomogeneous::allocateCons(Flux** cons)
 {
-  *cons = new FluxEulerHomogeneous(this);
+  *cons = new FluxEulerHomogeneous();
 }
 
 //***********************************************************************
@@ -73,7 +71,7 @@ void ModEulerHomogeneous::allocateMixture(Mixture** mixture)
 
 //***********************************************************************
 
-void ModEulerHomogeneous::fulfillState(Phase** phases, Mixture* mixture, const int& numberPhases, Prim /*type*/)
+void ModEulerHomogeneous::fulfillState(Phase** phases, Mixture* mixture)
 {
   //Temperature calculus
   double Tsat = mixture->computeTsat(phases[m_liq]->getEos(), phases[m_vap]->getEos(), mixture->getPressure());
@@ -85,14 +83,14 @@ void ModEulerHomogeneous::fulfillState(Phase** phases, Mixture* mixture, const i
     phases[k]->extendedCalculusPhase(mixture->getVelocity());
   }
   mixture->setTemperature(Tsat);
-  mixture->computeMixtureVariables(phases, numberPhases);
+  mixture->computeMixtureVariables(phases);
 }
 
 //****************************************************************************
 //********************* Cell to cell Riemann solvers *************************
 //****************************************************************************
 
-void ModEulerHomogeneous::solveRiemannIntern(Cell& cellLeft, Cell& cellRight, const int& /*numberPhases*/, const double& dxLeft, const double& dxRight, double& dtMax, double& massflow, double& powerFlux) const
+void ModEulerHomogeneous::solveRiemannIntern(Cell& cellLeft, Cell& cellRight, const double& dxLeft, const double& dxRight, double& dtMax, std::vector<double> &boundData) const
 {
   double sL, sR;
   
@@ -113,33 +111,41 @@ void ModEulerHomogeneous::solveRiemannIntern(Cell& cellLeft, Cell& cellRight, co
   if (std::fabs(sM)<1.e-8) sM = 0.;
 
   if (sL > 0.){
-    static_cast<FluxEulerHomogeneous*> (fluxBuff)->m_masse = rhoL*uL;
-    static_cast<FluxEulerHomogeneous*> (fluxBuff)->m_qdm.setX(rhoL*uL*uL + pL);
-    static_cast<FluxEulerHomogeneous*> (fluxBuff)->m_qdm.setY(rhoL*vL*uL);
-    static_cast<FluxEulerHomogeneous*> (fluxBuff)->m_qdm.setZ(rhoL*wL*uL);
+    static_cast<FluxEulerHomogeneous*> (fluxBuff)->m_mass = rhoL*uL;
+    static_cast<FluxEulerHomogeneous*> (fluxBuff)->m_momentum.setX(rhoL*uL*uL + pL);
+    static_cast<FluxEulerHomogeneous*> (fluxBuff)->m_momentum.setY(rhoL*vL*uL);
+    static_cast<FluxEulerHomogeneous*> (fluxBuff)->m_momentum.setZ(rhoL*wL*uL);
     static_cast<FluxEulerHomogeneous*> (fluxBuff)->m_energ = (rhoL*EL + pL)*uL;
 
-    //Specific power flux through interface (W.m-2)
-    powerFlux = rhoL * uL * (EL + pL / rhoL);
+    // Boundary data for output
+    boundData[VarBoundary::p] = pL;
+    boundData[VarBoundary::rho] = rhoL;
+    boundData[VarBoundary::velU] = uL;
+    boundData[VarBoundary::velV] = vL;
+    boundData[VarBoundary::velW] = wL;
   }
   else if (sR < 0.){
-    static_cast<FluxEulerHomogeneous*> (fluxBuff)->m_masse = rhoR*uR;
-    static_cast<FluxEulerHomogeneous*> (fluxBuff)->m_qdm.setX(rhoR*uR*uR + pR);
-    static_cast<FluxEulerHomogeneous*> (fluxBuff)->m_qdm.setY(rhoR*vR*uR);
-    static_cast<FluxEulerHomogeneous*> (fluxBuff)->m_qdm.setZ(rhoR*wR*uR);
+    static_cast<FluxEulerHomogeneous*> (fluxBuff)->m_mass = rhoR*uR;
+    static_cast<FluxEulerHomogeneous*> (fluxBuff)->m_momentum.setX(rhoR*uR*uR + pR);
+    static_cast<FluxEulerHomogeneous*> (fluxBuff)->m_momentum.setY(rhoR*vR*uR);
+    static_cast<FluxEulerHomogeneous*> (fluxBuff)->m_momentum.setZ(rhoR*wR*uR);
     static_cast<FluxEulerHomogeneous*> (fluxBuff)->m_energ = (rhoR*ER + pR)*uR;
 
-    //Specific power flux through interface (W.m-2)
-    powerFlux = rhoR * uR * (ER + pR / rhoR);
+    // Boundary data for output
+    boundData[VarBoundary::p] = pR;
+    boundData[VarBoundary::rho] = rhoR;
+    boundData[VarBoundary::velU] = uR;
+    boundData[VarBoundary::velV] = vR;
+    boundData[VarBoundary::velW] = wR;
   }
 
   ////1) Option HLL
   //else if (std::fabs(sR - sL)>1.e-3)
   //{
-  //  static_cast<FluxEulerHomogeneous*> (fluxBuff)->m_masse = (rhoR*uR*sL - rhoL*uL*sR + sL*sR*(rhoL - rhoR)) / (sL - sR);
-  //  static_cast<FluxEulerHomogeneous*> (fluxBuff)->m_qdm.setX(((rhoR*uR*uR + pR)*sL - (rhoL*uL*uL + pL)*sR + sL*sR*(rhoL*uL - rhoR*uR)) / (sL - sR));
-  //  static_cast<FluxEulerHomogeneous*> (fluxBuff)->m_qdm.setY((rhoR*uR*vR*sL - rhoL*uL*vL*sR + sL*sR*(rhoL*vL - rhoR*vR)) / (sL - sR));
-  //  static_cast<FluxEulerHomogeneous*> (fluxBuff)->m_qdm.setZ((rhoR*uR*wR*sL - rhoL*uL*wL*sR + sL*sR*(rhoL*wL - rhoR*wR)) / (sL - sR));
+  //  static_cast<FluxEulerHomogeneous*> (fluxBuff)->m_mass = (rhoR*uR*sL - rhoL*uL*sR + sL*sR*(rhoL - rhoR)) / (sL - sR);
+  //  static_cast<FluxEulerHomogeneous*> (fluxBuff)->m_momentum.setX(((rhoR*uR*uR + pR)*sL - (rhoL*uL*uL + pL)*sR + sL*sR*(rhoL*uL - rhoR*uR)) / (sL - sR));
+  //  static_cast<FluxEulerHomogeneous*> (fluxBuff)->m_momentum.setY((rhoR*uR*vR*sL - rhoL*uL*vL*sR + sL*sR*(rhoL*vL - rhoR*vR)) / (sL - sR));
+  //  static_cast<FluxEulerHomogeneous*> (fluxBuff)->m_momentum.setZ((rhoR*uR*wR*sL - rhoL*uL*wL*sR + sL*sR*(rhoL*wL - rhoR*wR)) / (sL - sR));
   //  static_cast<FluxEulerHomogeneous*> (fluxBuff)->m_energ = ((rhoR*ER + pR)*uR*sL - (rhoL*EL + pL)*uL*sR + sL*sR*(rhoL*EL - rhoR*ER)) / (sL - sR);
   //}
 
@@ -148,34 +154,39 @@ void ModEulerHomogeneous::solveRiemannIntern(Cell& cellLeft, Cell& cellRight, co
     double pStar = mL*(sM - uL) + pL;
     double rhoStar = mL / (sL - sM);
     double Estar = EL + (sM - uL)*(sM + pL / mL);
-    static_cast<FluxEulerHomogeneous*> (fluxBuff)->m_masse = rhoStar*sM;
-    static_cast<FluxEulerHomogeneous*> (fluxBuff)->m_qdm.setX(rhoStar*sM*sM+pStar);
-    static_cast<FluxEulerHomogeneous*> (fluxBuff)->m_qdm.setY(rhoStar*sM*vL);
-    static_cast<FluxEulerHomogeneous*> (fluxBuff)->m_qdm.setZ(rhoStar*sM*wL);
+    static_cast<FluxEulerHomogeneous*> (fluxBuff)->m_mass = rhoStar*sM;
+    static_cast<FluxEulerHomogeneous*> (fluxBuff)->m_momentum.setX(rhoStar*sM*sM+pStar);
+    static_cast<FluxEulerHomogeneous*> (fluxBuff)->m_momentum.setY(rhoStar*sM*vL);
+    static_cast<FluxEulerHomogeneous*> (fluxBuff)->m_momentum.setZ(rhoStar*sM*wL);
     static_cast<FluxEulerHomogeneous*> (fluxBuff)->m_energ = (rhoStar*Estar + pStar)*sM;
 
-    //Specific power flux through interface (W.m-2)
-    powerFlux = rhoStar * sM * (Estar + pStar / rhoStar);
+    // Boundary data for output
+    boundData[VarBoundary::p] = pStar;
+    boundData[VarBoundary::rho] = rhoStar;
+    boundData[VarBoundary::velU] = sM;
+    boundData[VarBoundary::velV] = vL;
+    boundData[VarBoundary::velW] = wL;
   }
   else {
     double pStar = mR*(sM - uR) + pR;
     double rhoStar = mR / (sR - sM);
     double Estar = ER + (sM - uR)*(sM + pR / mR);
-    static_cast<FluxEulerHomogeneous*> (fluxBuff)->m_masse = rhoStar*sM;
-    static_cast<FluxEulerHomogeneous*> (fluxBuff)->m_qdm.setX(rhoStar*sM*sM + pStar);
-    static_cast<FluxEulerHomogeneous*> (fluxBuff)->m_qdm.setY(rhoStar*sM*vR);
-    static_cast<FluxEulerHomogeneous*> (fluxBuff)->m_qdm.setZ(rhoStar*sM*wR);
+    static_cast<FluxEulerHomogeneous*> (fluxBuff)->m_mass = rhoStar*sM;
+    static_cast<FluxEulerHomogeneous*> (fluxBuff)->m_momentum.setX(rhoStar*sM*sM + pStar);
+    static_cast<FluxEulerHomogeneous*> (fluxBuff)->m_momentum.setY(rhoStar*sM*vR);
+    static_cast<FluxEulerHomogeneous*> (fluxBuff)->m_momentum.setZ(rhoStar*sM*wR);
     static_cast<FluxEulerHomogeneous*> (fluxBuff)->m_energ = (rhoStar*Estar + pStar)*sM;
 
-    //Specific power flux through interface (W.m-2)
-    powerFlux = rhoStar * sM * (Estar + pStar / rhoStar);
+    // Boundary data for output
+    boundData[VarBoundary::p] = pStar;
+    boundData[VarBoundary::rho] = rhoStar;
+    boundData[VarBoundary::velU] = sM;
+    boundData[VarBoundary::velV] = vR;
+    boundData[VarBoundary::velW] = wR;
   }
 
   //Contact discontinuity velocity
   static_cast<FluxEulerHomogeneous*> (fluxBuff)->m_sM = sM;
-  
-  //Specific mass flow through interface (kg.s-1.m-2)
-  massflow = static_cast<FluxEulerHomogeneous*> (fluxBuff)->m_masse;
 }
 
 //****************************************************************************
@@ -196,10 +207,10 @@ const double& ModEulerHomogeneous::getSM()
 void ModEulerHomogeneous::reverseProjection(const Coord normal, const Coord tangent, const Coord binormal) const
 {
   Coord fluxProjete;
-  fluxProjete.setX(normal.getX()*static_cast<FluxEulerHomogeneous*> (fluxBuff)->m_qdm.getX() + tangent.getX()*static_cast<FluxEulerHomogeneous*> (fluxBuff)->m_qdm.getY() + binormal.getX()*static_cast<FluxEulerHomogeneous*> (fluxBuff)->m_qdm.getZ());
-  fluxProjete.setY(normal.getY()*static_cast<FluxEulerHomogeneous*> (fluxBuff)->m_qdm.getX() + tangent.getY()*static_cast<FluxEulerHomogeneous*> (fluxBuff)->m_qdm.getY() + binormal.getY()*static_cast<FluxEulerHomogeneous*> (fluxBuff)->m_qdm.getZ());
-  fluxProjete.setZ(normal.getZ()*static_cast<FluxEulerHomogeneous*> (fluxBuff)->m_qdm.getX() + tangent.getZ()*static_cast<FluxEulerHomogeneous*> (fluxBuff)->m_qdm.getY() + binormal.getZ()*static_cast<FluxEulerHomogeneous*> (fluxBuff)->m_qdm.getZ());
-  static_cast<FluxEulerHomogeneous*> (fluxBuff)->m_qdm.setXYZ(fluxProjete.getX(), fluxProjete.getY(), fluxProjete.getZ());
+  fluxProjete.setX(normal.getX()*static_cast<FluxEulerHomogeneous*> (fluxBuff)->m_momentum.getX() + tangent.getX()*static_cast<FluxEulerHomogeneous*> (fluxBuff)->m_momentum.getY() + binormal.getX()*static_cast<FluxEulerHomogeneous*> (fluxBuff)->m_momentum.getZ());
+  fluxProjete.setY(normal.getY()*static_cast<FluxEulerHomogeneous*> (fluxBuff)->m_momentum.getX() + tangent.getY()*static_cast<FluxEulerHomogeneous*> (fluxBuff)->m_momentum.getY() + binormal.getY()*static_cast<FluxEulerHomogeneous*> (fluxBuff)->m_momentum.getZ());
+  fluxProjete.setZ(normal.getZ()*static_cast<FluxEulerHomogeneous*> (fluxBuff)->m_momentum.getX() + tangent.getZ()*static_cast<FluxEulerHomogeneous*> (fluxBuff)->m_momentum.getY() + binormal.getZ()*static_cast<FluxEulerHomogeneous*> (fluxBuff)->m_momentum.getZ());
+  static_cast<FluxEulerHomogeneous*> (fluxBuff)->m_momentum.setXYZ(fluxProjete.getX(), fluxProjete.getY(), fluxProjete.getZ());
 }
 
 //****************************************************************************

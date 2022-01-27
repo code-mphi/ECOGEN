@@ -45,39 +45,52 @@ class ModUEq : public Model
 {
   public:
     //! \brief     UEq model constructor
-    //! \param     numberTransports    number of additional transport equations
-    //! \param     numberPhases        number of phases
-    ModUEq(int& numberTransports, const int& numberPhases);
+    //! \param     numbTransports    number of additional transport equations
+    //! \param     numbPhases        number of phases
+    ModUEq(const int& numbTransports, const int& numbPhases);
     //! \brief     Generic model constructor (used by derived classes)
-    //! \param     name                 model name
-    //! \param     numberTransports     number of additional transport equations
-    ModUEq(const std::string& name, const int& numberTransports);
+    //! \param     name              model name
+    //! \param     numbTransports    number of additional transport equations
+    ModUEq(const std::string& name, const int& numbTransports);
     virtual ~ModUEq();
 
-    virtual void allocateCons(Flux** cons, const int& numberPhases);
+    virtual void allocateCons(Flux** cons);
     virtual void allocatePhase(Phase** phase);
     virtual void allocateMixture(Mixture** mixture);
 
     //! \details    Complete multiphase state from volume fractions, pressures, densities and velocity
-    virtual void fulfillState(Phase** phases, Mixture* mixture, const int& numberPhases, Prim type = vecPhases);
+    virtual void fulfillState(Phase** phases, Mixture* mixture);
+
+    //! \details    Does nothing for this model
+    virtual void fulfillStateRestart(Phase** /*phases*/, Mixture* /*mixture*/) {};
+
+    //! \details    Does nothing for this model
+    virtual void initializeAugmentedVariables(Cell* /*cell*/) {};
 
     //Hydrodynamic Riemann solvers
     //----------------------------
-    virtual void solveRiemannIntern(Cell& cellLeft, Cell& cellRight, const int& numberPhases, const double& dxLeft, const double& dxRight, double& dtMax, double& massflow, double& powerFlux) const; // Riemann between two computed cells
-    virtual void solveRiemannWall(Cell& cellLeft, const int& numberPhases, const double& dxLeft, double& dtMax) const; // Riemann between left cell and wall
-    virtual void solveRiemannInflow(Cell& cellLeft, const int& numberPhases, const double& dxLeft, double& dtMax, const double m0, const double* ak0, const double* rhok0, const double* pk0, double& massflow, double& powerFlux) const; // Riemann for inflow (injection)
-    virtual void solveRiemannTank(Cell& cellLeft, const int& numberPhases, const double& dxLeft, double& dtMax, const double* ak0, const double* rhok0, const double& p0, const double& /*T0*/, double& massflow, double& powerFlux) const; // Riemann for tank
-    virtual void solveRiemannOutflow(Cell& cellLeft, const int& numberPhases, const double& dxLeft, double& dtMax, const double p0, double& massflow, double& powerFlux) const; // Riemann for outflow with imposed pressure
+    virtual void solveRiemannIntern(Cell& cellLeft, Cell& cellRight, const double& dxLeft, const double& dxRight, double& dtMax, std::vector<double> &boundData = DEFAULT_VEC_INTERFACE_DATA) const; // Riemann between two computed cells
+    virtual void solveRiemannWall(Cell& cellLeft, const double& dxLeft, double& dtMax, std::vector<double> &boundData) const; // Riemann between left cell and wall
+    virtual void solveRiemannInflow(Cell& cellLeft, const double& dxLeft, double& dtMax, const double m0, const double* ak0, const double* rhok0, const double* pk0, std::vector<double> &boundData) const; // Riemann for inflow (injection)
+    virtual void solveRiemannSubInj(Cell& cellLeft, const double& dxLeft, double& dtMax, const double m0, const double* Tk0, const double* ak0, std::vector<double> &boundData) const; 
+    virtual void solveRiemannTank(Cell& cellLeft, const double& dxLeft, double& dtMax, const double* ak0, const double* rhok0, const double& p0, const double& /*T0*/, std::vector<double> &boundData) const; // Riemann for tank
+    virtual void solveRiemannOutflow(Cell& cellLeft, const double& dxLeft, double& dtMax, const double p0, std::vector<double> &boundData) const; // Riemann for outflow with imposed pressure
+    virtual void solveRiemannNullFlux() const;
 
     //Transports Riemann solvers
     //--------------------------
-    virtual void solveRiemannTransportIntern(Cell& cellLeft, Cell& cellRight, const int& numberTransports);
-    virtual void solveRiemannTransportWall(const int& numberTransports);
-    virtual void solveRiemannTransportInflow(Cell& cellLeft, const int& numberTransports, double* valueTransports);
-    virtual void solveRiemannTransportTank(Cell& cellLeft, const int& numberTransports, double* valueTransports);
-    virtual void solveRiemannTransportOutflow(Cell& cellLeft, const int& numberTransports, double* valueTransport);
+    virtual void solveRiemannTransportIntern(Cell& cellLeft, Cell& cellRight);
+    virtual void solveRiemannTransportWall();
+    virtual void solveRiemannTransportInflow(Cell& cellLeft, double* valueTransports);
+    virtual void solveRiemannTransportTank(Cell& cellLeft, double* valueTransports);
+    virtual void solveRiemannTransportOutflow(Cell& cellLeft, double* valueTransport);
 
     virtual void reverseProjection(const Coord normal, const Coord tangent, const Coord binormal) const;
+
+    //Low-Mach preconditioning
+    //------------------------
+    virtual void lowMachSoundSpeed(double& machRef, const double& uL, double& cL, const double& uR = Errors::defaultDouble, double& cR = Tools::uselessDouble) const;
+    virtual void setLowMach(const bool& lowMach) { m_lowMach = lowMach; };
 
     //Accessors
     //---------
@@ -86,6 +99,8 @@ class ModUEq : public Model
     virtual Coord& getVelocity(Cell* cell) { return cell->getMixture()->getVelocity(); };
 
     virtual const std::string& whoAmI() const { return m_name; };
+
+    virtual void setSmoothCrossSection1d(const bool& applySmooth) { m_smoothCrossSection1d = applySmooth; };
 
   private:
     static const std::string NAME;

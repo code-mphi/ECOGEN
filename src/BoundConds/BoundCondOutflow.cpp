@@ -34,7 +34,7 @@ using namespace tinyxml2;
 
 //****************************************************************************
 
-BoundCondOutflow::BoundCondOutflow(int numPhysique, XMLElement* element, int& numberTransports, std::vector<std::string> nameTransports, std::string fileName) :
+BoundCondOutflow::BoundCondOutflow(int numPhysique, XMLElement* element, const int& numbTransports, std::vector<std::string> nameTransports, std::string fileName) :
   BoundCond(numPhysique)
 {
   //Reading imposed outflow pressure
@@ -48,7 +48,7 @@ BoundCondOutflow::BoundCondOutflow(int numPhysique, XMLElement* element, int& nu
 
   //Reading transports
   int couleurTrouvee(0);
-  m_valueTransport = new double[numberTransports];
+  m_valueTransport = new double[numbTransports];
   XMLElement* elementTransport(sousElement->FirstChildElement("transport"));
   std::string nameTransport;
   while (elementTransport != NULL)
@@ -56,10 +56,10 @@ BoundCondOutflow::BoundCondOutflow(int numPhysique, XMLElement* element, int& nu
     nameTransport = elementTransport->Attribute("name");
     if (nameTransport == "") throw ErrorXMLAttribut("name", fileName, __FILE__, __LINE__);
     int e(0);
-    for (e = 0; e < numberTransports; e++) {
+    for (e = 0; e < numbTransports; e++) {
       if (nameTransport == nameTransports[e]) { break; }
     }
-    if (e != numberTransports) {
+    if (e != numbTransports) {
       error = elementTransport->QueryDoubleAttribute("value", &m_valueTransport[e]);
       if (error != XML_NO_ERROR) throw ErrorXMLAttribut("value", fileName, __FILE__, __LINE__);
       couleurTrouvee++;
@@ -67,18 +67,16 @@ BoundCondOutflow::BoundCondOutflow(int numPhysique, XMLElement* element, int& nu
     //Next transport
     elementTransport = elementTransport->NextSiblingElement("transport");
   }
-  if (numberTransports > couleurTrouvee) throw ErrorXMLAttribut("Not enough transport equations in BC inj", fileName, __FILE__, __LINE__);
-  m_numberTransports = numberTransports;
+  if (numbTransports > couleurTrouvee) throw ErrorXMLAttribut("Not enough transport equations in BC inj", fileName, __FILE__, __LINE__);
 }
 
 //****************************************************************************
 
 BoundCondOutflow::BoundCondOutflow(const BoundCondOutflow& Source, const int& lvl) : BoundCond(Source, lvl)
 {
-  m_numberTransports = Source.m_numberTransports;
   m_p0 = Source.m_p0;
-  m_valueTransport = new double[m_numberTransports];
-  for (int k = 0; k < m_numberTransports; k++) {
+  m_valueTransport = new double[numberTransports];
+  for (int k = 0; k < numberTransports; k++) {
     m_valueTransport[k] = Source.m_valueTransport[k];
   }
 }
@@ -99,16 +97,16 @@ void BoundCondOutflow::createBoundary(TypeMeshContainer<CellInterface*>& cellInt
 
 //****************************************************************************
 
-void BoundCondOutflow::solveRiemannBoundary(Cell& cellLeft, const int& numberPhases, const double& dxLeft, double& dtMax)
+void BoundCondOutflow::solveRiemannBoundary(Cell& cellLeft, const double& dxLeft, double& dtMax)
 {
-  m_mod->solveRiemannOutflow(cellLeft, numberPhases, dxLeft, dtMax, m_p0, m_massflow, m_powerFlux);
+  model->solveRiemannOutflow(cellLeft, dxLeft, dtMax, m_p0, m_boundData);
 }
 
 //****************************************************************************
 
-void BoundCondOutflow::solveRiemannTransportBoundary(Cell& cellLeft, const int& numberTransports) const
+void BoundCondOutflow::solveRiemannTransportBoundary(Cell& cellLeft) const
 {
-	m_mod->solveRiemannTransportOutflow(cellLeft, numberTransports, m_valueTransport);
+	model->solveRiemannTransportOutflow(cellLeft, m_valueTransport);
 }
 
 //****************************************************************************

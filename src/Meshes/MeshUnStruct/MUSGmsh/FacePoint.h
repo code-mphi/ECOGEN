@@ -43,7 +43,7 @@ private:
   virtual void computeSurface(const Coord* /*noeuds*/);
   virtual void computeRepere(const Coord* noeuds, const int& numNoeudAutre, ElementNS* elementVoisin);
 
-  static const int NOMBRENOEUDS;
+  static const int NUMBERNODES;
 };
 
 #endif // FACEPOINT_H

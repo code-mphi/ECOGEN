@@ -28,14 +28,12 @@
 //  along with ECOGEN (file LICENSE).  
 //  If not, see <http://www.gnu.org/licenses/>.
 
-#include <cmath>
-#include <algorithm>
 #include "FluxPUEq.h"
 #include "../Mixture.h"
 
 //***********************************************************************
 
-FluxPUEq::FluxPUEq(const int& numberPhases) : FluxUEq(numberPhases){}
+FluxPUEq::FluxPUEq(const int& numbPhases) : FluxUEq(numbPhases){}
 
 //***********************************************************************
 
@@ -43,7 +41,31 @@ FluxPUEq::~FluxPUEq(){}
 
 //***********************************************************************
 
-void FluxPUEq::correctionEnergy(Cell* cell, const int& numberPhases, Prim type) const
+void FluxPUEq::addNonCons(double coefA, const Cell* cell)
+{
+  Phase* phase;
+  for(int k=0;k<numberPhases;k++){
+    phase = cell->getPhase(k);
+    m_alpha[k] += -coefA*phase->getAlpha()*static_cast<FluxPUEq*> (fluxBuff)->m_sM;
+    m_energ[k] += coefA*phase->getAlpha()*phase->getPressure()*static_cast<FluxPUEq*> (fluxBuff)->m_uStar;
+  }
+}
+
+//***********************************************************************
+
+void FluxPUEq::subtractNonCons(double coefA, const Cell* cell)
+{
+  Phase* phase;
+  for(int k=0;k<numberPhases;k++){
+    phase = cell->getPhase(k);
+    m_alpha[k] -= -coefA*phase->getAlpha()*static_cast<FluxPUEq*> (fluxBuff)->m_sM;
+    m_energ[k] -= coefA*phase->getAlpha()*phase->getPressure()*static_cast<FluxPUEq*> (fluxBuff)->m_uStar;
+  }
+}
+
+//***********************************************************************
+
+void FluxPUEq::correctionEnergy(Cell* cell, Prim type) const
 {
   Phase* phase;
 

@@ -28,8 +28,6 @@
 //  along with ECOGEN (file LICENSE).  
 //  If not, see <http://www.gnu.org/licenses/>.
 
-#include <cmath>
-#include <algorithm>
 #include "EosIG.h"
 
 //***********************************************************************
@@ -101,6 +99,20 @@ double EosIG::computeSoundSpeed(const double& density, const double& pressure) c
 double EosIG::computeInterfaceSoundSpeed(const double& density, const double& interfacePressure, const double& pressure) const
 {
   return sqrt(((m_gamma - 1.) * interfacePressure + pressure) / std::max(density, epsilonAlphaNull));
+}
+
+//***********************************************************************
+
+double EosIG::computeAcousticImpedance(const double& density, const double& pressure) const
+{
+  return sqrt(density * m_gamma * pressure);
+}
+
+//***********************************************************************
+
+double EosIG::computeDensityTimesInterfaceSoundSpeedSquare(const double& /*density*/, const double& interfacePressure, const double& pressure) const
+{
+  return (m_gamma - 1.) * interfacePressure + pressure;
 }
 
 //***********************************************************************
@@ -231,14 +243,14 @@ double EosIG::drhodpcT(const double& /*pressure*/, const double& temperature) co
 
 void EosIG::verifyPressure(const double& pressure, const std::string& message) const
 {
-  if (pressure < 1.e-15) errors.push_back(Errors(message + " : too low pressure in EosIG"));
+  if (pressure < 1.e-8) errors.push_back(Errors(message + " : too low pressure in EosIG"));
 }
 
 //***********************************************************************
 
 void EosIG::verifyAndModifyPressure(double& pressure) const
 {
-  if (pressure < 1.e-15) pressure = 1.e-15;
+  if (pressure < 1.e-8) pressure = 1.e-8;
 }
 
 //***********************************************************************

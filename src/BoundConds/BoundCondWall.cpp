@@ -38,29 +38,53 @@ BoundCondWall::BoundCondWall(const BoundCondWall& Source, const int& lvl) : Boun
 {
   m_heatCondition = Source.m_heatCondition;
   m_imposedHeatQuantity = Source.m_imposedHeatQuantity;
+  m_isMRFWall = Source.m_isMRFWall;
+  m_omegaWall = Source.m_omegaWall;
 }
 
 //****************************************************************************
 
 BoundCondWall::BoundCondWall(int numPhysique, XMLElement *element, std::string fileName) : 
-  BoundCond(numPhysique), m_heatCondition(ADIABATIC), m_imposedHeatQuantity(0.)
+  BoundCond(numPhysique), 
+  m_heatCondition(TypeBCHeat::ADIABATIC), m_imposedHeatQuantity(0.), 
+  m_isMRFWall(false), m_omegaWall(0.)
 {
   XMLElement* subElement(element->FirstChildElement("dataWall"));
   if (subElement != NULL) {
-    std::string heatCondition(subElement->Attribute("heatCondition"));
-    Tools::uppercase(heatCondition);
     XMLError error;
-    // One could use wall with imposed temperature, imposed flux density or adiabatic (default)
-    // This option requires the conductivity additionnal physic
-    if (heatCondition == "TEMPERATURE") {
-      m_heatCondition = IMPOSEDTEMP;
-      error = subElement->QueryDoubleAttribute("temperature", &m_imposedHeatQuantity);
-      if (error != XML_NO_ERROR) throw ErrorXMLAttribut("temperature", fileName, __FILE__, __LINE__);
+    XMLElement* elementPhysWall;
+
+    // Heat transfer
+    elementPhysWall = subElement->FirstChildElement("dataWallHeatTransfer");
+    if (elementPhysWall != NULL) {
+      std::string heatCondition(elementPhysWall->Attribute("heatCondition"));
+      Tools::uppercase(heatCondition);
+      // One could use wall with imposed temperature, imposed flux density or adiabatic (default)
+      // This option requires the conductivity additionnal physic
+      if (heatCondition == "TEMPERATURE") {
+        m_heatCondition = TypeBCHeat::IMPOSEDTEMP;
+        error = elementPhysWall->QueryDoubleAttribute("temperature", &m_imposedHeatQuantity);
+        if (error != XML_NO_ERROR) throw ErrorXMLAttribut("temperature", fileName, __FILE__, __LINE__);
+      }
+      else if (heatCondition == "FLUX") {
+        m_heatCondition = TypeBCHeat::IMPOSEDFLUX;
+        error = elementPhysWall->QueryDoubleAttribute("flux", &m_imposedHeatQuantity);
+        if (error != XML_NO_ERROR) throw ErrorXMLAttribut("flux", fileName, __FILE__, __LINE__);
+      }
     }
-    else if (heatCondition == "FLUX") {
-      m_heatCondition = IMPOSEDFLUX;
-      error = subElement->QueryDoubleAttribute("flux", &m_imposedHeatQuantity);
-      if (error != XML_NO_ERROR) throw ErrorXMLAttribut("flux", fileName, __FILE__, __LINE__);
+
+    // MRF wall
+    elementPhysWall = subElement->FirstChildElement("dataWallMRF");
+    if (elementPhysWall != NULL) { 
+      double omegaX(0.), omegaY(0.), omegaZ(0.);
+      error = elementPhysWall->QueryDoubleAttribute("omegaX", &omegaX);
+      if (error != XML_NO_ERROR) throw ErrorXMLAttribut("omegaX", fileName, __FILE__, __LINE__);
+      error = elementPhysWall->QueryDoubleAttribute("omegaY", &omegaY);
+      if (error != XML_NO_ERROR) throw ErrorXMLAttribut("omegaY", fileName, __FILE__, __LINE__);
+      error = elementPhysWall->QueryDoubleAttribute("omegaZ", &omegaZ);
+      if (error != XML_NO_ERROR) throw ErrorXMLAttribut("omegaZ", fileName, __FILE__, __LINE__);
+      m_omegaWall.setXYZ(omegaX, omegaY, omegaZ);
+      m_isMRFWall = true;
     }
   }
 }
@@ -68,7 +92,9 @@ BoundCondWall::BoundCondWall(int numPhysique, XMLElement *element, std::string f
 //****************************************************************************
 
 BoundCondWall::BoundCondWall(int numPhysique) : 
-  BoundCond(numPhysique), m_heatCondition(ADIABATIC), m_imposedHeatQuantity(0.)
+  BoundCond(numPhysique), 
+  m_heatCondition(TypeBCHeat::ADIABATIC), m_imposedHeatQuantity(0.), 
+  m_isMRFWall(false), m_omegaWall(0.)
 {
 }
 
@@ -85,16 +111,16 @@ void BoundCondWall::createBoundary(TypeMeshContainer<CellInterface*>& cellInterf
 
 //****************************************************************************
 
-void BoundCondWall::solveRiemannBoundary(Cell& cellLeft, const int& numberPhases, const double& dxLeft, double& dtMax)
+void BoundCondWall::solveRiemannBoundary(Cell& cellLeft, const double& dxLeft, double& dtMax)
 {
-  m_mod->solveRiemannWall(cellLeft, numberPhases, dxLeft, dtMax);
+  model->solveRiemannWall(cellLeft, dxLeft, dtMax, m_boundData);
 }
 
 //****************************************************************************
 
-void BoundCondWall::solveRiemannTransportBoundary(Cell& /*cellLeft*/, const int&  numberTransports) const
+void BoundCondWall::solveRiemannTransportBoundary(Cell& /*cellLeft*/) const
 {
-  m_mod->solveRiemannTransportWall(numberTransports);
+  model->solveRiemannTransportWall();
 }
 
 //****************************************************************************

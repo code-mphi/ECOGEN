@@ -31,7 +31,7 @@
 #ifndef OUTPUT_H
 #define OUTPUT_H
 
-//Macro pour les interactions systeme (creation/destruction repertoires)
+//Macro for system interactions (creation/destruction of folders)
 #ifdef WIN32
   #include <direct.h>
 #else
@@ -39,10 +39,7 @@
   #include <sys/stat.h>
 #endif
 
-#include <iostream>
-#include <string>
 #include <fstream>
-#include <vector>
 #include "../libTierces/tinyxml2.h"
 #include "../Errors.h"
 #include "../Meshes/HeaderMesh.h"
@@ -56,81 +53,98 @@ class Output;
 class Output
 {
   public:
+    //! \brief   Default constructor for specific output without specific needs
     Output();
+
+    //! \brief   Main constructor for datasets used for OutputXML and OutputGNU according to outputMode
+    //! \param   casTest   Test case name (defined in "main.xml")  
+    //! \param   nameRun   Folder to store results
+    //! \param   element   XML outputMode element
+    //! \param   fileName  Full path to mainVX.xml of current test case
+    //! \param   entree    Input pointer to access run pointer and its information
     Output(std::string casTest, std::string nameRun, tinyxml2::XMLElement* element, std::string fileName, Input* entree);
+
+    //! \brief   Constructor for specific derived GNU outputs (boundary, probe, cut)
+    //! \param   element   XML GNU output element to get stream precision
+    Output(tinyxml2::XMLElement* element);
+
     virtual ~Output();
 
     virtual void locateProbeInMesh(const TypeMeshContainer<Cell*>& /*cells*/, const int& /*nbCells*/, bool /*localSeeking*/ = false) { try { throw ErrorECOGEN("locateProbeInMesh not available for requested output format"); } catch (ErrorECOGEN&) { throw; } };
     virtual Cell* locateProbeInAMRSubMesh(std::vector<Cell*>* /*cells*/, const int& /*nbCells*/) { try { throw ErrorECOGEN("locateProbeInMesh not available for requested output format"); } catch (ErrorECOGEN&) { throw; } return 0; };
 
-    void prepareOutput(const Cell& cell);
-    void prepareOutput(std::vector<CellInterface*>* cellInterfacesLvl); //!< Currently only used for OutputBoundaryMassflowGNU
-    virtual void prepareOutputInfos();
-    virtual void ecritSolution(Mesh* /*mesh*/, std::vector<Cell*>* /*cellsLvl*/) { try { throw ErrorECOGEN("ecritSolution not available for requested output format"); } catch (ErrorECOGEN&) { throw; }};
-    virtual void ecritSolution(std::vector<CellInterface*>* /*cellInterfacesLvl*/) { try { throw ErrorECOGEN("ecritSolution not available for requested output format"); } catch (ErrorECOGEN&) { throw; } };
+    void initializeOutput(const Cell& cell);
+    void initializeOutput(std::vector<CellInterface*>* cellInterfacesLvl); //!< Currently only used for OutputBoundaryMassflowGNU
+    virtual void initializeOutputInfos();
+    virtual void writeResults(Mesh* /*mesh*/, std::vector<Cell*>* /*cellsLvl*/) { try { throw ErrorECOGEN("writeResults not available for requested output format"); } catch (ErrorECOGEN&) { throw; }};
+    virtual void writeResults(std::vector<CellInterface*>* /*cellInterfacesLvl*/) { try { throw ErrorECOGEN("writeResults not available for requested output format"); } catch (ErrorECOGEN&) { throw; } };
     void printTree(Mesh* mesh, std::vector<Cell*>* cellsLvl, int m_restartAMRsaveFreq);
-    virtual void ecritInfos();
+    virtual void writeInfos();
     void saveInfosMailles() const;
 
-    virtual void prepareSortieSpecifique() { try { throw ErrorECOGEN("prepareSortieSpecifique not available for requested output format"); } catch (ErrorECOGEN&) { throw; } };
-    virtual void prepareSortieSpecifique(std::vector<CellInterface*>* /*cellInterfacesLvl*/) { try { throw ErrorECOGEN("prepareSortieSpecifique not available for requested output format"); } catch (ErrorECOGEN&) { throw; } }; //!< Currently only used for OutputBoundaryMassflowGNU
+    virtual void initializeSpecificOutput() { try { throw ErrorECOGEN("initializeSpecificOutput not available for requested output format"); } catch (ErrorECOGEN&) { throw; } };
+    virtual void initializeSpecificOutput(std::vector<CellInterface*>* /*cellInterfacesLvl*/) { try { throw ErrorECOGEN("initializeSpecificOutput not available for requested output format"); } catch (ErrorECOGEN&) { throw; } }; //!< Currently only used for OutputBoundaryMassflowGNU
 
     void readInfos();
     virtual void readResults(Mesh* /*mesh*/, std::vector<Cell*>* /*cellsLvl*/) { try { throw ErrorECOGEN("readResutls not available for requested output format"); } catch (ErrorECOGEN&) { throw; } };
     void readDomainDecompostion(Mesh* mesh);
     void readTree(Mesh *mesh, TypeMeshContainer<Cell*>* cellsLvl, TypeMeshContainer<Cell*>* cellsLvlGhost, TypeMeshContainer<CellInterface*>* cellInterfacesLvl,
-        const std::vector<AddPhys*>& addPhys, Model* model, int& nbCellsTotalAMR);
+        const std::vector<AddPhys*>& addPhys, int& nbCellsTotalAMR);
 
-    //Accesseur
+    //Accessor
     int getNumSortie() const { return m_numFichier; };
     virtual double getNextTime() { try { throw ErrorECOGEN("getNextTime not available for requested output format"); } catch (ErrorECOGEN&) { throw; } return 0.; }
     virtual bool possesses() { try { throw ErrorECOGEN("possesses not available for requested output format"); } catch (ErrorECOGEN&) { throw; } return false; };
     const std::string& getFolderOutput(){ return m_folderOutput;}
+    const TypeOutput& getType() const { return m_type; };
+    bool getReducedOutput() const { return m_reducedOutput; };
 
   protected:
 
-    //Donnees generales
+    //General data
     void afficheInfoEcriture() const;
     void saveInfos() const;
-    std::string creationNameFichier(const char* name, int lvl = -1, int proc = -1, int numFichier = -1) const;
+    std::string createFilename(const char* name, int lvl = -1, int proc = -1, int numFichier = -1) const;
 
-    void ecritJeuDonnees(std::vector<double> jeuDonnees, std::ofstream& fileStream, TypeData typeData);
-    void getJeuDonnees(std::istringstream& data, std::vector<double>& jeuDonnees);
+    void writeDataset(std::vector<double> jeuDonnees, std::ofstream& fileStream, TypeData typeData);
+    void getDataset(std::istringstream& data, std::vector<double>& jeuDonnees);
 
-    Input* m_input;                                     //!<Pointeur vers entree
-    Run* m_run;                                         //!<pointeur vers run
+    Input* m_input;                                     //!<Pointer to input
+    Run* m_run;                                         //!<Pointer to run
+    TypeOutput m_type;                                  //!<Type of output
 
-    //attribut name fichiers/dossiers
-    std::string m_simulationName;                       //!<Name du cas test (defini dans "main.xml")
-    std::string m_infoCalcul;                           //!<Name file pour saver les infos utiles du compute
-    std::string m_infoMesh;                             //!<Name fichiers pour stocker les infos de mesh
-    std::string m_treeStructure;                        //!<File name for tree structure backup
-    std::string m_domainDecomposition;                  //!<File name for domain decomposition backup
-    std::string m_fileNameResults;                      //!<Name du file de sortie resultat
-    std::string m_fileNameCollectionParaview;           //!<Name de la collection regroupant les fichiers resultats (for Paraview)
-    std::string m_fileNameCollectionVisIt;              //!<Name de la collection regroupant les fichiers resultats (for VisIt)
-    std::string m_folderOutput;                         //!<Dossier pour enregistrement des resultats
-    std::string m_folderSavesInput;                     //!<Dossier pour copier les fichiers entrees
+    //Attributes names file/folder
+    std::string m_simulationName;                       //!<Test case name (defined in "main.xml")
+    std::string m_infoCalcul;                           //!<Filename to save useful info of computation
+    std::string m_infoMesh;                             //!<Filename of mesh info file
+    std::string m_treeStructure;                        //!<Filename for tree structure backup
+    std::string m_domainDecomposition;                  //!<Filename for domain decomposition backup
+    std::string m_fileNameResults;                      //!<Filename of result file
+    std::string m_filenameCollectionParaview;           //!<Name of the collection containing the results files (for Paraview)
+    std::string m_filenameCollectionVisIt;              //!<Name of the collection containing the results files (for VisIt)
+    std::string m_folderOutput;                         //!<Folder to store results
+    std::string m_folderSavesInput;                     //!<Folder to store a copy of input files
     std::string m_folderDatasets;                       //!<Folder to save the datasets
-    std::string m_folderInfoMesh;                       //!<Dossier pour stocker les infos de mesh
+    std::string m_folderInfoMesh;                       //!<Folder to store mesh info
     std::string m_folderCuts;                           //!<Cuts results folder location
     std::string m_folderProbes;                         //!<Probes results folder location
     std::string m_folderGlobalQuantities;               //!<Global quantity (e.g. mass) results folder location
-    std::string m_folderBoundariesFlux;                 //!<Boundaries flux results folder location
-    std::string m_fichierCollectionParaview;            //!<Chemin du file collection regroupant les fichiers resultats (for Paraview)
-    std::string m_fichierCollectionVisIt;               //!<Chemin du file collection regroupant les fichiers resultats (for VisIt)
-    std::string m_folderErrorsAndWarnings;               //!File path for errors and warnings
+    std::string m_folderBoundaries;                     //!<Boundaries flux results folder location
+    std::string m_fileCollectionParaview;               //!<Chemin du file collection regroupant les fichiers resultats (for Paraview)
+    std::string m_fileCollectionVisIt;                  //!<Chemin du file collection regroupant les fichiers resultats (for VisIt)
+    std::string m_folderErrorsAndWarnings;              //!<File path for errors and warnings
      
-    //attribut parametres d print
-    bool m_ecritBinaire;                                //!<Choix print binary/ASCII
-    bool m_donneesSeparees;                             //!<Choix print donnees dans des fichiers separes
+    //Attributes of print parameters
+    bool m_writeBinary;                                 //!<Choice to write binary/ASCII
+    bool m_splitData;                                   //!<Choix print donnees dans des fichiers separes
     int m_precision;                                    //!<Output files precision (number of digits) //default: 0
+    bool m_reducedOutput;                               //!<Choice of reduced number of output variables when possible (depends on the model)
 
     int m_numFichier; 
     std::string m_endianMode;
     
-    //Utile pour print des donnees de cells
-    Cell m_cellRef;                                     //!<cell de reference pour recup�rer les names des variables
+    //Useful to print cell data
+    Cell m_cellRef;                                     //!<Reference cell to extract variables name
 };
 
 #endif //OUTPUT_H

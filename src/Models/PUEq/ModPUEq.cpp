@@ -28,8 +28,6 @@
 //  along with ECOGEN (file LICENSE).  
 //  If not, see <http://www.gnu.org/licenses/>.
 
-#include <cmath>
-#include <algorithm>
 #include "ModPUEq.h"
 #include "PhasePUEq.h"
 #include "../../Relaxations/RelaxationPInfinite.h"
@@ -38,12 +36,12 @@ const std::string ModPUEq::NAME = "PRESSUREVELOCITYEQ";
 
 //***********************************************************************
 
-ModPUEq::ModPUEq(int& numberTransports, const int& numberPhases) : ModUEq(NAME,numberTransports)
+ModPUEq::ModPUEq(const int& numbTransports, const int& numbPhases) : ModUEq(NAME, numbTransports)
 {
-  fluxBuff = new FluxPUEq(numberPhases);
+  fluxBuff = new FluxPUEq(numbPhases);
   m_relaxations.push_back(new RelaxationPInfinite); //Pressure relaxation imposed in this model
   for (int i = 0; i < 4; i++) {
-    sourceCons.push_back(new FluxPUEq(numberPhases));
+    sourceCons.push_back(new FluxPUEq(numbPhases));
   }
 }
 
@@ -53,7 +51,7 @@ ModPUEq::~ModPUEq(){}
 
 //***********************************************************************
 
-void ModPUEq::allocateCons(Flux** cons, const int& numberPhases)
+void ModPUEq::allocateCons(Flux** cons)
 {
   *cons = new FluxPUEq(numberPhases);
 }
@@ -70,6 +68,13 @@ void ModPUEq::allocatePhase(Phase** phase)
 void ModPUEq::allocateMixture(Mixture** mixture)
 {
   *mixture = new MixPUEq;
+}
+
+//***********************************************************************
+
+void ModPUEq::fulfillStateRestart(Phase** phases, Mixture* mixture)
+{
+  for (int k = 0; k < numberPhases; k++) { phases[k]->setPressure(mixture->getPressure()); }
 }
 
 //***********************************************************************

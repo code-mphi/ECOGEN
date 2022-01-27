@@ -39,30 +39,4 @@
         </mixture>
     </state>
 
-<!--     <state name="chamberLP">
-        <material type="fluid" EOS="IG_air.xml">
-            <dataFluid alpha="1." density="50."/>
-        </material>
-        <material type="fluid" EOS="SG_water.xml">
-            <dataFluid alpha="0." density="1000."/>
-        </material>
-        <mixture>
-            <dataMix pressure = "1.e5"/>
-            <velocity x="0." y="0." z="0."/>
-        </mixture>
-    </state>
-
-    <state name="chamberHP">
-        <material type="fluid" EOS="IG_air.xml">
-            <dataFluid alpha="0." density="50."/>
-        </material>
-        <material type="fluid" EOS="SG_water.xml">
-            <dataFluid alpha="1." density="1000.0"/>
-        </material>
-        <mixture>
-            <dataMix pressure = "1.e9"/>
-            <velocity x="0." y="0." z="0."/>
-        </mixture>
-    </state> -->
-
 </CI>

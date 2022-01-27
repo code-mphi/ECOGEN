@@ -2,7 +2,7 @@
 <mesh>
 	<type structure="unStructured"/>
 	<unstructuredMesh>
-		<file name="./libMeshes/ECOGEN/ECOGENFluid.msh"/>
+		<file name="libMeshes/ECOGEN/ECOGENFluid.msh"/>
 		<parallel GMSHPretraitement="true"/>
 	</unstructuredMesh>
 </mesh>

@@ -36,13 +36,13 @@
 class BoundCondOutflow : public BoundCond
 {
   public:
-    BoundCondOutflow(int numPhysique, tinyxml2::XMLElement* element, int& numberTransports, std::vector<std::string> nameTransports, std::string fileName);
+    BoundCondOutflow(int numPhysique, tinyxml2::XMLElement* element, const int& numbTransports, std::vector<std::string> nameTransports, std::string fileName);
     BoundCondOutflow(const BoundCondOutflow& Source, const int& lvl = 0); //Copy ctor (useful for AMR)
     virtual ~BoundCondOutflow();
 
     virtual void createBoundary(TypeMeshContainer<CellInterface*>& cellInterfaces);
-    virtual void solveRiemannBoundary(Cell& cellLeft, const int& numberPhases, const double& dxLeft, double& dtMax);
-    virtual void solveRiemannTransportBoundary(Cell& cellLeft, const int& numberTransports) const;
+    virtual void solveRiemannBoundary(Cell& cellLeft, const double& dxLeft, double& dtMax);
+    virtual void solveRiemannTransportBoundary(Cell& cellLeft) const;
 
     virtual int whoAmI() const { return OUTFLOW; };
     virtual void printInfo();
@@ -53,7 +53,6 @@ class BoundCondOutflow : public BoundCond
   protected:
   private:
     double m_p0;
-    int m_numberTransports;
     double* m_valueTransport;
 };
 

@@ -3,7 +3,7 @@
   <run>euler1DTransportPositiveVelocity</run>
   <outputMode binary="false" precision="10" format="GNU"/>
   <timeControlMode iterations="true">
-<iterations number="10" iterFreq="10"/>
+  <iterations number="10" iterFreq="10"/>
     <physicalTime totalTime="3.6e-4" timeFreq="3.6e-5"/>
   </timeControlMode>
   <computationControl CFL="0.8"/>

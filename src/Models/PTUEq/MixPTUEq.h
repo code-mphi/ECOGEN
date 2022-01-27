@@ -31,7 +31,6 @@
 #ifndef MIXPTUEQ_H
 #define MIXPTUEQ_H
 
-#include <vector>
 #include "../Mixture.h"
 
 //! \class     MixPTUEq
@@ -53,19 +52,19 @@ class MixPTUEq : public Mixture
 
     virtual void allocateAndCopyMixture(Mixture** mixture);
     virtual void copyMixture(Mixture &mixture);
-    virtual double computeDensity(const double* alphak, const double* rhok, const int& numberPhases);
-    virtual double computePressure(const double* alphak, const double* pk, const int& numberPhases);
-    virtual double computePressure(double* masses, const double& mixInternalEnerg, Phase** phases, const int& numberPhases);
-    virtual double computeTemperature(double* masses, const double& pressure, Phase** phases, const int& numberPhases);
-    virtual double computeInternalEnergy(const double* Yk, const double* ek, const int& numberPhases);
-    virtual double computeFrozenSoundSpeed(const double* Yk, const double* ck, const int& numberPhases);
+    virtual double computeDensity(const double* alphak, const double* rhok);
+    virtual double computePressure(const double* alphak, const double* pk);
+    virtual double computePressure(double* masses, const double& mixInternalEnerg, Phase** phases);
+    virtual double computeTemperature(double* masses, const double& pressure, Phase** phases);
+    virtual double computeInternalEnergy(const double* Yk, const double* ek);
+    virtual double computeFrozenSoundSpeed(const double* Yk, const double* ck);
     
     //Specific thermodynamical evolutions
-    virtual double computeTemperatureIsentrope(const double* Yk, const double& p0, const double& T0, const double& p, const int& numberPhases, double* dTdp = 0);
-    virtual double computeEnthalpyIsentrope(const double* Yk, const double& p0, const double& T0, const double& p, const int& numberPhases, double* dhdp = 0);
-    virtual double computeVolumeIsentrope(const double* Yk, const double& p0, const double& T0, const double& p, const int& numberPhases, double* dvdp = 0);
+    virtual double computeTemperatureIsentrope(const double* Yk, const double& p0, const double& T0, const double& p, double* dTdp = 0);
+    virtual double computeEnthalpyIsentrope(const double* Yk, const double& p0, const double& T0, const double& p, double* dhdp = 0);
+    virtual double computeVolumeIsentrope(const double* Yk, const double& p0, const double& T0, const double& p, double* dvdp = 0);
 
-    virtual void computeMixtureVariables(Phase** vecPhase, const int& numberPhases);
+    virtual void computeMixtureVariables(Phase** vecPhase);
     virtual void internalEnergyToTotalEnergy(std::vector<QuantitiesAddPhys*>& vecGPA);
     virtual void totalEnergyToInternalEnergy(std::vector<QuantitiesAddPhys*>& vecGPA);
 
@@ -109,7 +108,7 @@ class MixPTUEq : public Mixture
     virtual const double& getW() const { return m_velocity.getZ(); };
     virtual const Coord& getVelocity() const { return m_velocity; };
     virtual Coord& getVelocity() { return m_velocity; };
-    virtual const double& getEnergy() const { return m_energie; };
+    virtual const double& getEnergy() const { return m_energy; };
     virtual const double& getTotalEnergy() const { return m_totalEnergy; };
     virtual const double& getMixSoundSpeed() const { return m_PTUEqSoundSpeed; };
 
@@ -131,7 +130,7 @@ class MixPTUEq : public Mixture
     double m_pressure;             //!< mixture pressure
     Coord m_velocity;              //!< mixture velocity
     double m_temperature;          //!< mixture temperature
-    double m_energie;              //!< mixture internal specific energy
+    double m_energy;               //!< mixture internal specific energy
     double m_totalEnergy;          //!< mixture total specific energy
     double m_PTUEqSoundSpeed;      //!< mixture thermal equilibrium sound speed
 };

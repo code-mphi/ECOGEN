@@ -3,7 +3,7 @@
 	<run>pressureVelocityEq1DshockTubeEpoxySpinel</run>
 	<outputMode format="GNU" binary="false" precision="10"/>
 	<timeControlMode iterations="true">
-<iterations number="10" iterFreq="10"/>
+	<iterations number="10" iterFreq="10"/>
 		<physicalTime totalTime="8.e-5" timeFreq="8.e-5"/>
 	</timeControlMode>
 	<computationControl CFL="0.6"/>

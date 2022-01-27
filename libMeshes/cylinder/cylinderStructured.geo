@@ -80,7 +80,7 @@ Extrude{0,0,h} { Surface{1:5}; Layers{Nz}; Recombine; }
 
 // Physical boundaries/volume
 Physical Surface(boundCondInflow) = {1,2,3,4,5}; 
-Physical Surface(boundCondOutflow) = {34,56,78,100};
+Physical Surface(boundCondOutflow) = {34,56,78,100,122};
 Physical Surface(boundCondWalls) = {29,51,73,95};
 
 Surface Loop(6) = {1,2,3,4,5, 29,51,95,73, 34,56,78,100,122};

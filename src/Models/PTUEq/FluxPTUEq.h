@@ -32,42 +32,41 @@
 #define FLUXPTUEQ_H
 
 #include "../Flux.h"
-#include <iostream>
 
 //! \class     FluxPTUEq
 //! \brief     Flux class for pressure-temperature-velocity (mechanical and thermal equilibrium) system of equations
 class FluxPTUEq : public Flux
 {
   public:
-    FluxPTUEq(const int& numberPhases);
+    FluxPTUEq(const int& numbPhases);
     virtual ~FluxPTUEq();
 
     virtual void printFlux() const;
-    virtual void addFlux(double coefA, const int& numberPhases);
-    virtual void addFlux(Flux* flux, const int& numberPhases);
-    virtual void subtractFlux(double coefA, const int& numberPhases);
-    virtual void multiply(double scalar, const int& numberPhases);
-    virtual void setBufferFlux(Cell& cell, const int& numberPhases);
-    virtual void buildCons(Phase** phases, const int& numberPhases, Mixture* mixture);
-    virtual void buildPrim(Phase** phases, Mixture* mixture, const int& numberPhases);
-    virtual void setToZero(const int& numberPhases);
-    virtual void setToZeroBufferFlux(const int& numberPhases);
-    virtual void addNonCons(double /*coefA*/, const Cell* /*cell*/, const int& /*numberPhases*/) {};
-    virtual void subtractNonCons(double /*coefA*/, const Cell* /*cell*/, const int& /*numberPhases*/) {};
+    virtual void addFlux(double coefA);
+    virtual void addFlux(Flux* flux);
+    virtual void subtractFlux(double coefA);
+    virtual void multiply(double scalar);
+    virtual void setBufferFlux(Cell& cell);
+    virtual void buildCons(Phase** phases, Mixture* mixture);
+    virtual void buildPrim(Phase** phases, Mixture* mixture);
+    virtual void setToZero();
+    virtual void setToZeroBufferFlux();
+    virtual void addNonCons(double /*coefA*/, const Cell* /*cell*/) {};
+    virtual void subtractNonCons(double /*coefA*/, const Cell* /*cell*/) {};
 
-    virtual void prepSourceTermsHeating(const int& numberPhases, const double& q);
+    virtual void prepSourceTermsHeating(const double& q);
 
     // Accessors
     //----------
-    virtual const double& getMasse(const int& numPhase) const { return m_masse[numPhase]; };
-    virtual const Coord& getQdm() const { return m_qdm; };
+    virtual const double& getMass(const int& numPhase) const { return m_mass[numPhase]; };
+    virtual const Coord& getMomentum() const { return m_momentum; };
     virtual const double& getEnergyMix() const { return m_energMixture; };
-    virtual void setCons(const Flux* cons, const int& numberPhases);
+    virtual void setCons(const Flux* cons);
 
   protected:
-    double* m_masse;          //!< mass array
-    Coord m_qdm;              //!< momentum array
-    double m_energMixture;    //!< mixture energy
+    double* m_mass;          //!< mass array
+    Coord m_momentum;        //!< momentum array
+    double m_energMixture;   //!< mixture energy
 
   private:
     friend class ModPTUEq;

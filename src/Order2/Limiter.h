@@ -31,9 +31,6 @@
 #ifndef LIMITER_H
 #define LIMITER_H
 
-#include <iostream>
-#include <cmath>
-#include <algorithm>
 #include "../Errors.h"
 
 class Limiter

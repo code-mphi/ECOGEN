@@ -19,7 +19,7 @@ REQUIRED computational parameters
 
 1) Run name
 ***********
-the run name correspond to the created folder name with results (in folder ECOGEN/results/)
+The run name correspond to the created folder name with results (in folder ECOGEN/results/)
 %%%%%%%%%%%%%%%%%% << copy between these lines
 <run>example</run>    
 %%%%%%%%%%%%%%%%%% << copy between these lines
@@ -27,18 +27,19 @@ the run name correspond to the created folder name with results (in folder ECOGE
 2) Output mode
 **************
 Allow choice for output format
-Implemented format : XML ou GNU
-Binary mode : false (ASCII) or true (binary)
-(Optional) precision of output files (number of digits). If not precised, set as default.
+Implemented format: XML ou GNU
+Binary mode: false (ASCII) or true (binary)
+Options: precision of output files (number of digits). If not precised, set as default.
+         reduced number of output variables when possible (depends on the model). Only available for velocity and pressure-velocity equilibrium model. If not precised, default is false (complete output).
 %%%%%%%%%%%%%%%%%% << copy between these lines
-<outputMode format="XML" binary="false" precision="10"/>
+<outputMode format="XML" binary="false" precision="10" reducedOutput="true"/>
 %%%%%%%%%%%%%%%%%% << copy between these lines
 
 3) Time control mode
 ********************
-Choice for simuation time control, two possibilities :
-a) iterations="true" : control the simulation time using iteration number. Output printing frequency is set in iteration number.
-b) iterations="false" : control the simulation time using a physical time in seconds. Output frequency printing is set in physical time in seconds
+Choice for simuation time control, two possibilities:
+a) iterations="true": control the simulation time using iteration number. Output printing frequency is set in iteration number.
+b) iterations="false": control the simulation time using a physical time in seconds. Output frequency printing is set in physical time in seconds
 %%%%%%%%%%%%%%%%%% << copy between these lines
 <timeControlMode iterations="false">
   <iterations number="3" iterFreq="1"/>
@@ -48,7 +49,7 @@ b) iterations="false" : control the simulation time using a physical time in sec
 
 4) CFL criteria (Courant number ratio)
 **************************************
-set a security marge accordingly to numerical scheme stability (real lower than 1.)
+Set a security marge accordingly to numerical scheme stability (real lower than 1.)
 %%%%%%%%%%%%%%%%%% << copy between these lines
 <computationControl CFL="0.8"/>
 %%%%%%%%%%%%%%%%%% << copy between these lines
@@ -59,8 +60,8 @@ OPTIONNAL computationnal parameters
 
 *) Scheme precision order
 *************************
-default (without this xml node), the scheme is first order in time and space. Possible using of a second order scheme in time and space using MUSCL method with TVD limiters.
-Available limiters are : minmod, vanleer, vanalbada, mc, superbee, thinc (only for volume-fraction limiter).
+Default (without this XML node), the scheme is first order in time and space. Possible using of a second-order scheme in time and space using MUSCL method with TVD limiters (currently only available for Cartesian mesh with/without AMR).
+Available limiters are: minmod, vanleer, vanalbada, mc, superbee, thinc (only for volume-fraction limiter).
 The choice of the limiters is divided into four parts:
 - global limiter: applied everywhere and on all variables unless it is overwrite by the following optional limiters.
 - interface limiter: applied on all variables but only at the interface location. By default is equal to the global limiter.
@@ -75,6 +76,17 @@ The choice of the limiters is divided into four parts:
 </secondOrder>
 %%%%%%%%%%%%%%%%%% << copy between these lines
 
+*) Gradient method
+******************
+To compute gradients, e.g. density gradient or viscous gradient, it is possible to use finite-difference-like gradient on Cartesian mesh (also with AMR) or Green-Gauss gradient on Cartesian and unstructured mesh.
+Default (without this XML node), the gradients will be computed using the finite-difference scheme (<method>finite-difference</method>).
+To define explicitly the gradient method or use the Green-Gauss one (<method>green-gauss</method>), one can use:
+%%%%%%%%%%%%%%%%%% << copy between these lines
+<gradient>
+  <method>finite-difference</method> <!-- For finite difference like gradient scheme -->
+</gradient>
+%%%%%%%%%%%%%%%%%% << copy between these lines
+
 *) Restart a simulation
 ***********************
 Restart a finished computation from the result file number. For AMR simulations, one also needs to specify the frequency at which restarts are saved (default is 0).
@@ -82,8 +94,19 @@ Restart a finished computation from the result file number. For AMR simulations,
 <restartSimulation restartFileNumber="15" AMRsaveFreq="5"/>                <!-- optionnal node -->
 %%%%%%%%%%%%%%%%%% << copy between these lines
 
-*) 1D output Cut
-****************
+*) Record specific information
+******************************
+Some specific recording methods are available below. 
+Note that all these methods can use a given precision (number of digits). 
+The precision parameter must be added to the method such as:
+%%%%%%%%%%%%%%%%%% << copy between these lines
+<boundary record="flux" precision="10">
+ ...
+</boundary>
+%%%%%%%%%%%%%%%%%% << copy between these lines
+
+a) 1D output Cut
+----------------
 Possibility to extract 1D output cuts from multiD computations. Define a line using a vertex and direction vector.
 Cut results will be placed in the corresponding results folder under GNU format.
 %%%%%%%%%%%%%%%%%% << copy between these lines
@@ -93,8 +116,8 @@ Cut results will be placed in the corresponding results folder under GNU format.
 </cut1D>
 %%%%%%%%%%%%%%%%%% << copy between these lines
 
-*) 2D output cut
-****************
+b) 2D output cut
+----------------
 Possibility to extract 2D output cuts from 3D computations. Define a plane using a vertex and normal vector.
 Cut results will be placed in the corresponding results folder under GNU format.
 %%%%%%%%%%%%%%%%%% << copy between these lines
@@ -104,34 +127,36 @@ Cut results will be placed in the corresponding results folder under GNU format.
 </cut2D>
 %%%%%%%%%%%%%%%%%% << copy between these lines
 
-*) Probes
-*********
+c) Probes
+---------
 Adding probes at chosen location in the physical domain. Define a name, a vertex and time recording parameters
 <probe name="sensor1">
   <vertex x="0.51" y="0.51" z="0.51"/>
   <timeControl acqFreq="-1."/>       <!-- if negative or nul, recording at each time step -->
 </probe>
-
 %%%%%%%%%%%%%%%%%% << copy between these lines
 
-*) Boundaries
-*************
-Record a flux through a specified boundary, could be either massflow (flux="massflow") or power flux (flux="powerflux").
-Define a name, boundary number and time recording parameters.
-To record both massflow and powerflux on the same boundary it is required to set twice the recordBoundaryFlux section.
-Boundary flux results will be placed in the corresponding results folder under GNU format.
-Note that this feature is not available on AMR mesh. 
+d) Boundaries
+-------------
+It is possible to extract data on a given boundary. It could be either a flux type (record="flux") or all quantities (record="all") following density, velocity, pressure and surface.
+This feature is only available on Cartesian grids without AMR and on unstructured meshes.
+It is mandatory to define the name, boundary number and time recording parameters.
+To record several information on the same boundary, it is necessary to set the boundary node for each information.
+Boundary results will be placed into the corresponding results folder under GNU format.
+Flux recording is done with the flux node and it allows to extract massflow (type="massflow") or power flux (type="powerflux").
+No specific node is required to extract all quantities.
 %%%%%%%%%%%%%%%%%% << copy between these lines
-<recordBoundaryFlux name="inflow">
-  <boundary number="1" flux="massflow"/>
+<boundary record="flux">
+  <boundaryID number="1" name="massflow-inflow"/>
   <timeControl acqFreq="-1."/>       <!-- if negative or nul, recording at each time step -->
-</recordBoundaryFlux>
+  <flux type="massflow"/>
+</boundary>
 %%%%%%%%%%%%%%%%%% << copy between these lines
 
-*) Global quantity
-******************
+e) Global quantity
+------------------
 Possibility to record a global quantity on whole domain. Could be mass or total energy.
 Global quantity results will be placed in the corresponding results folder under GNU format.
 %%%%%%%%%%%%%%%%%% << copy between these lines
-<recordGlobalQuantity quantity="mass"/>
+<globalQuantity quantity="mass"/>
 %%%%%%%%%%%%%%%%%% << copy between these lines

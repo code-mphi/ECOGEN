@@ -33,7 +33,6 @@
 
 #include <string>
 
-
 //! \class     Tools
 //! \brief     Class for tools
 class Config

@@ -3,8 +3,11 @@
   <run>pressureVelocityEq2DtestUnstructured</run>
   <outputMode binary="true" format="XML" precision="11"/>
   <timeControlMode iterations="true">
-<iterations number="10" iterFreq="10"/>
+  <iterations number="10" iterFreq="10"/>
     <physicalTime totalTime="4.e-3" timeFreq="4.e-4"/>
   </timeControlMode>
   <computationControl CFL="0.5"/>
+  <gradient>
+    <method>green-gauss</method>
+  </gradient>
 </computationParam>

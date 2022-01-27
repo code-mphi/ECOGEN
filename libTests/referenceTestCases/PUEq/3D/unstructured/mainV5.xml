@@ -7,6 +7,9 @@
 		<physicalTime totalTime="6.8e-4" timeFreq="6.8e-5"/>
 	</timeControlMode>
 	<computationControl CFL="0.5"/>
+	<gradient>
+		<method>green-gauss</method>
+	</gradient>
 <!-- 	<secondOrder>
 		<globalLimiter>vanleer</globalLimiter>
 	</secondOrder> -->

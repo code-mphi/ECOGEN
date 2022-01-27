@@ -30,11 +30,6 @@
 #ifndef INCLUDED_SIMPLE_VECTOR_HPP
 #define INCLUDED_SIMPLE_VECTOR_HPP
 
-//! \file      vector.hpp
-//! \author    B. Dorschner
-//! \version   1.1
-//! \date      June 5 2019
-
 #include <type_traits>
 #include <array>
 #include <iostream>

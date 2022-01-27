@@ -44,7 +44,7 @@ public:
   virtual ~FaceNS();
 
   void construitFace(const Coord* noeuds, const int& numNoeudAutre, ElementNS* elementVoisin);
-  bool faceExiste(FaceNS** faces, const int& indexMaxFaces, int& indexFaceExiste);
+  bool faceExists(FaceNS** faces, const int& indexMaxFaces, int& indexFaceExiste);
   void ajouteElementVoisin(ElementNS* elementVoisin);
   void ajouteElementVoisinLimite(ElementNS* elementVoisin);
 
@@ -62,8 +62,8 @@ public:
   const bool& getEstLimite() const { return m_limite; };
   void afficheNoeuds() const;
   virtual void printInfo() const;
-  static int rechercheFace(int* face, int& sommeNoeuds, int** tableauFaces, int* tableauSommeNoeuds, int numberNoeuds, int& indexMaxFaces); // Recherche si face appartient au tableau tableauFaces : renvoi le number ou -1 si absence
-  static int rechercheFace(int* face, int& sommeNoeuds, std::vector<int*> tableauFaces, std::vector<int> tableauSommeNoeuds, int numberNoeuds, int& indexMaxFaces); // Recherche si face appartient au tableau tableauFaces : renvoi le number ou -1 si absence. Utilise seulement sur ancienne version
+  static int searchFace(int* face, int& sumNodes, int** tableauFaces, int* tableauSommeNoeuds, int numberNoeuds, int& indexMaxFaces); // Recherche si face appartient au tableau tableauFaces : renvoi le number ou -1 si absence
+  static int searchFace(int* face, int& sumNodes, std::vector<int*> tableauFaces, std::vector<int> tableauSommeNoeuds, int numberNoeuds, int& indexMaxFaces); // Recherche si face appartient au tableau tableauFaces : renvoi le number ou -1 si absence. Utilise seulement sur ancienne version
 
 protected:
   virtual void computeSurface(const Coord* /*noeuds*/){};

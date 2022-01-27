@@ -2,7 +2,7 @@
 <mesh>
 	<type structure="unStructured"/>
 	<unstructuredMesh>
-		<file name="./libMeshes/bean3D/bean3D.msh"/>
+		<file name="libMeshes/bean3D/bean3D.msh"/>
 		<parallel GMSHPretraitement="true"/>
 	</unstructuredMesh>
 </mesh>

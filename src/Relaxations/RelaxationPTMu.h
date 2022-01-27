@@ -49,9 +49,8 @@ public:
   //! \brief     Stiff Thermo-Chemical relaxation method
   //! \details   call for this method computes the thermodyanmical equilibrium state in a given cell for a liquid and its vapor. Relaxed state is stored depending on the type enum
   //! \param     cell           cell to relax
-  //! \param     numberPhases   number of phases
   //! \param     type           enumeration allowing to relax either state in the cell or second order half time step state
-  virtual void relaxation(Cell* cell, const int& numberPhases, const double& /*dt*/, Prim type = vecPhases);
+  virtual void relaxation(Cell* cell, const double& /*dt*/, Prim type = vecPhases);
 
   //! \brief     Return the pressure-, temperature- and chemical-potential-relaxation type
   virtual int getType() const { return PTMU; }

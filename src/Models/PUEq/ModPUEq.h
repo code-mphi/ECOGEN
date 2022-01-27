@@ -45,14 +45,17 @@ class ModPUEq : public ModUEq
 {
   public:
     //! \brief     PUEq model constructor
-    //! \param     numberTransports    number of additional transport equations
-    //! \param     numberPhases        number of phases
-    ModPUEq(int& numberTransports, const int& numberPhases);
+    //! \param     numbTransports    number of additional transport equations
+    //! \param     numbPhases        number of phases
+    ModPUEq(const int& numbTransports, const int& numbPhases);
     virtual ~ModPUEq();
 
-    virtual void allocateCons(Flux** cons, const int& numberPhases);
+    virtual void allocateCons(Flux** cons);
     virtual void allocatePhase(Phase** phase);
     virtual void allocateMixture(Mixture** mixture);
+
+    //! \details    Complete pressures when restarting a simulation
+    virtual void fulfillStateRestart(Phase** phases, Mixture* mixture);
 
   private:
     static const std::string NAME;

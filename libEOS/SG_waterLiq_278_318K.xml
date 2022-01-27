@@ -1,0 +1,11 @@
+<?xml version='1.0' encoding='UTF-8' standalone='yes'?>
+<parametersEOS>
+  <EOS type="SG" fichier="SG_waterLiq_278_318K.xml"/>
+  <parameters 
+    cv="1479.48" 
+    gamma="2.82798" 
+    energyRef="-1.14264e6" 
+    pInf="8.05163e8" 
+    entropyRef="0."/>
+  <physicalParameters lambda="0.6" mu="1.e-3"/>
+</parametersEOS>

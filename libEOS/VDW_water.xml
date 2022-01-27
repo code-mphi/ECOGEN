@@ -1,0 +1,5 @@
+<?xml version = "1.0" encoding = "UTF-8" standalone = "yes"?>
+<parametersEOS>
+	<EOS fichier="VDW_water.xml" type="VDW"/>
+	<parameters Tc="647.3" Pc="22.12e6" r="462." gamma="1.25" p0="1.e5" rho0="1.7"/>
+</parametersEOS>

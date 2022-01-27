@@ -31,7 +31,6 @@
 #ifndef FLUXPUEQ_H
 #define FLUXPUEQ_H
 
-#include <iostream>
 #include "../UEq/FluxUEq.h"
 
 class FluxPUEq;
@@ -43,11 +42,13 @@ class FluxPUEq;
 class FluxPUEq : public FluxUEq
 {
   public:
-    FluxPUEq(const int& numberPhases);
+    FluxPUEq(const int& numbPhases);
     virtual ~FluxPUEq();
 
-    virtual void schemeCorrection(const int& /*numberPhases*/) const {};
-    virtual void correctionEnergy(Cell* cell, const int& numberPhases, Prim type = vecPhases) const;
+    virtual void addNonCons(double coefA, const Cell* cell);
+    virtual void subtractNonCons(double coefA, const Cell* cell);
+    virtual void schemeCorrection(Cell& /*cell*/) const {};
+    virtual void correctionEnergy(Cell* cell, Prim type = vecPhases) const;
 
   private:
     friend class ModPUEq;

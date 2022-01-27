@@ -37,13 +37,13 @@
 class BoundCondInj : public BoundCond
 {
   public:
-    BoundCondInj(int numPhysique, tinyxml2::XMLElement* element, int& numberPhases, int& numberTransports, std::vector<std::string> nameTransports, Eos** eos, std::string fileName = "Unknown file");
+    BoundCondInj(int numPhysique, tinyxml2::XMLElement* element, const int& numbPhases, const int& numbTransports, std::vector<std::string> nameTransports, Eos** eos, std::string fileName = "Unknown file");
     BoundCondInj(const BoundCondInj &Source, const int& lvl = 0); //Copy ctor (useful for AMR)
     virtual ~BoundCondInj();
 
     virtual void createBoundary(TypeMeshContainer<CellInterface*>& cellInterfaces);
-    virtual void solveRiemannBoundary(Cell& cellLeft, const int& numberPhases, const double& dxLeft, double& dtMax);
-    virtual void solveRiemannTransportBoundary(Cell& cellLeft, const int& numberTransports) const;
+    virtual void solveRiemannBoundary(Cell& cellLeft, const double& dxLeft, double& dtMax);
+    virtual void solveRiemannTransportBoundary(Cell& cellLeft) const;
 
     virtual int whoAmI() const { return INJ; };
     virtual void printInfo();
@@ -53,13 +53,11 @@ class BoundCondInj : public BoundCond
 
   protected:
   private:
-    int m_numberPhases;
     double m_m0; //!< Specific massflow (kg.s-1.m-2)
     double m_T0;
     double* m_ak0;
     double* m_rhok0;
     double* m_pk0;
-    int m_numberTransports;
     double* m_valueTransport;
 };
 

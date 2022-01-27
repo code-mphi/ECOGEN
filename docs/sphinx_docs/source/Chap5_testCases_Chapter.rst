@@ -16,11 +16,8 @@ ECOGEN is provided with several test cases. Major part of these tests can be fou
   It is presented in details in the tutorial section :ref:`Sec:tuto:default`.
 
 .. toctree::
-   :maxdepth: 2
+   :maxdepth: 10
    :caption: Contents:
 
    Chap5_1Euler
-   Chap5_2PUEq
-   
-.. Chap5_3thermalEq
-.. Chap5_4eulerHomogene
+   Chap5_2

@@ -31,9 +31,6 @@
 #ifndef GEOMETRICALDOMAIN_H
 #define GEOMETRICALDOMAIN_H
 
-#include <string>
-#include <vector>
-#include <cmath>
 #include "../Maths/Coord.h"
 #include "../Models/Phase.h"
 #include "../libTierces/tinyxml2.h"
@@ -64,16 +61,12 @@ public:
   virtual bool belong(Coord& /*posElement*/, const int& /*lvl*/) const = 0;
   //! \brief     Method to fill in the cell data with the ones of the corresponding domain
   //! \param     cell              Cell
-  //! \param     numberPhases      Number of phases
-  //! \param     numberTransports  Number of transport
-  virtual void fillIn(Cell* cell, const int& numberPhases, const int& numberTransports) const;
+  virtual void fillIn(Cell* cell) const;
 
   const std::string& getName() { return m_name; };
 
 protected:
   std::string m_name;           //!< Geometrical domain name
-  int m_numberPhases;           //!< Phases number
-  int m_numberTransports;       //!< Transport equations number
   Phase** m_vecPhases;          //!< Phases variable vector
   Mixture* m_mixture;           //!< Mixture variables
   Transport* m_vecTransports;   //!< Transport variables vector

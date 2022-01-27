@@ -42,23 +42,29 @@ class ModPTUEq : public Model
 {
   public:
     //! \brief     Thermal equilibrium model constructor
-    //! \param     numberTransports    number of additional transport equations
-    //! \param     numberPhases        number of phases
-    ModPTUEq(int& numberTransports, const int& numberPhases);
+    //! \param     numbTransports    number of additional transport equations
+    //! \param     numbPhases        number of phases
+    ModPTUEq(const int& numbTransports, const int& numbPhases);
     virtual ~ModPTUEq();
 
-    virtual void allocateCons(Flux** cons, const int& numberPhases);
+    virtual void allocateCons(Flux** cons);
     virtual void allocatePhase(Phase** phase);
     virtual void allocateMixture(Mixture** mixture);
 
-    virtual void fulfillState(Phase** phases, Mixture* mixture, const int& numberPhases, Prim /*type*/ = vecPhases);
+    virtual void fulfillState(Phase** phases, Mixture* mixture);
+
+    //! \details    Does nothing for this model
+    virtual void fulfillStateRestart(Phase** /*phases*/, Mixture* /*mixture*/) {};
+
+    //! \details    Does nothing for this model
+    virtual void initializeAugmentedVariables(Cell* /*cell*/) {};
 
     //Hydrodynamic Riemann solvers
     //----------------------------
-    virtual void solveRiemannIntern(Cell& cellLeft, Cell& cellRight, const int& numberPhases, const double& dxLeft, const double& dxRight, double& dtMax, double& massflow, double& powerFlux) const; // Riemann between two computed cells
-    virtual void solveRiemannWall(Cell& cellLeft, const int& numberPhases, const double& dxLeft, double& dtMax) const; // Riemann between left cell and wall
-    virtual void solveRiemannTank(Cell& cellLeft, const int& numberPhases, const double& dxLeft, double& dtMax, const double* ak0, const double* rhok0, const double& p0, const double& T0, double& massflow, double& powerFlux) const; // Riemann for tank
-    virtual void solveRiemannOutflow(Cell& cellLeft, const int& numberPhases, const double& dxLeft, double& dtMax, const double p0, double& massflow, double& powerFlux) const; // Riemann for outflow with imposed pressure
+    virtual void solveRiemannIntern(Cell& cellLeft, Cell& cellRight, const double& dxLeft, const double& dxRight, double& dtMax, std::vector<double> &boundData = DEFAULT_VEC_INTERFACE_DATA) const; // Riemann between two computed cells
+    virtual void solveRiemannWall(Cell& cellLeft, const double& dxLeft, double& dtMax, std::vector<double>& boundData) const; // Riemann between left cell and wall
+    virtual void solveRiemannTank(Cell& cellLeft, const double& dxLeft, double& dtMax, const double* ak0, const double* rhok0, const double& p0, const double& T0, std::vector<double> &boundData) const; // Riemann for tank
+    virtual void solveRiemannOutflow(Cell& cellLeft, const double& dxLeft, double& dtMax, const double p0, std::vector<double> &boundData) const; // Riemann for outflow with imposed pressure
 
     virtual void reverseProjection(const Coord normal, const Coord tangent, const Coord binormal) const;
 

@@ -42,8 +42,8 @@ class BoundCondNonReflecting : public BoundCond
     virtual ~BoundCondNonReflecting();
 
     virtual void createBoundary(TypeMeshContainer<CellInterface*>& cellInterfaces);
-    virtual void solveRiemannBoundary(Cell& cellLeft, const int& numberPhases, const double& dxLeft, double& dtMax);
-    virtual void solveRiemannTransportBoundary(Cell& cellLeft, const int& numberTransports) const;
+    virtual void solveRiemannBoundary(Cell& cellLeft, const double& dxLeft, double& dtMax);
+    virtual void solveRiemannTransportBoundary(Cell& cellLeft) const;
     
 		virtual int whoAmI() const { return NONREFLECTING; };
 

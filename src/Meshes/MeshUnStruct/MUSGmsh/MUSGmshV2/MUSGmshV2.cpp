@@ -49,13 +49,7 @@ void MUSGmshV2::initGeometryMonoCPU(TypeMeshContainer<Cell*>& cells, TypeMeshCon
     std::vector<ElementNS*>* neighborNodes; // Size number of nodes 
     this->readMeshMonoCPU(&neighborNodes);  // Fill m_nodes and m_elements
 
-	// Display mesh information
-	this->writeMeshInfoData();
-
     // CAUTION: Ordering of m_elements is important. Faces first, then cells.
-
-    std::cout << "------------------------------------------------------" << std::endl;
-    std::cout << " D) BUILDING GEOMETRY ..." << std::endl;
 
     // 2) Assignment of cells to their geometric element
     // -------------------------------------------------
@@ -79,6 +73,12 @@ void MUSGmshV2::initGeometryMonoCPU(TypeMeshContainer<Cell*>& cells, TypeMeshCon
       m_geometrie = 3;
     }
     m_numberCellsTotal = m_numberCellsCalcul;
+
+    // Display mesh information
+    this->writeMeshInfoData();
+
+    std::cout << "------------------------------------------------------" << std::endl;
+    std::cout << " D) BUILDING GEOMETRY ..." << std::endl;
 
     // Assignment of non-reflecting boundary for missing limits
     unsigned int nbLimits(0);
@@ -209,6 +209,7 @@ void MUSGmshV2::initGeometryMonoCPU(TypeMeshContainer<Cell*>& cells, TypeMeshCon
         cellInterfaces[i]->setFace(m_faces[i]);
         iMailleG = m_faces[i]->getElementGauche()->getIndex() - m_numberBoundFaces;
         iMailleD = iMailleG;
+        cells[iMailleG]->addCellInterface(cellInterfaces[i]);
       }
       // Inner faces of domain
       else
@@ -218,10 +219,10 @@ void MUSGmshV2::initGeometryMonoCPU(TypeMeshContainer<Cell*>& cells, TypeMeshCon
         cellInterfaces[i]->setFace(m_faces[i]);
         iMailleG = m_faces[i]->getElementGauche()->getIndex() - m_numberBoundFaces;
         iMailleD = m_faces[i]->getElementDroite()->getIndex() - m_numberBoundFaces;
+        cells[iMailleG]->addCellInterface(cellInterfaces[i]);
+        cells[iMailleD]->addCellInterface(cellInterfaces[i]);
       }
       cellInterfaces[i]->initialize(cells[iMailleG], cells[iMailleD]);
-      cells[iMailleG]->addCellInterface(cellInterfaces[i]);
-      cells[iMailleD]->addCellInterface(cellInterfaces[i]);
 
       //-------------Ici il faut trouver les mailles voisines pour le compute ordre 2 multislopes ------------
       if (computeOrder != "FIRSTORDER") {
@@ -631,7 +632,7 @@ void MUSGmshV2::readMeshMonoCPU(std::vector<ElementNS*>** neighborNodes)
 
     // 3) 1D/2D/3D elements are stored in m_elements array / counting
     // --------------------------------------------------------------
-	std::cout << "  2/0D/1D/2D/3D elements reading ..." << std::endl;
+    std::cout << "  2/0D/1D/2D/3D elements reading ..." << std::endl;
     meshFile >> m_numberElements;
     meshFile.ignore(10, '\n');
     // Allocation array of elements
@@ -848,6 +849,8 @@ void MUSGmshV2::initGeometryParallel(TypeMeshContainer<Cell*>& cells, TypeMeshCo
           cellInterfaces[i]->setFace(m_faces[i]);
           iMailleG = m_faces[i]->getElementGauche()->getNumCellAssociee();
           iMailleD = m_faces[i]->getElementDroite()->getNumCellAssociee();
+          cells[iMailleG]->addCellInterface(cellInterfaces[i]);
+          cells[iMailleD]->addCellInterface(cellInterfaces[i]);
         }
         // Physical boundary
         else
@@ -858,6 +861,7 @@ void MUSGmshV2::initGeometryParallel(TypeMeshContainer<Cell*>& cells, TypeMeshCo
           cellInterfaces[i]->setFace(m_faces[i]);
           iMailleG = m_faces[i]->getElementGauche()->getNumCellAssociee();
           iMailleD = iMailleG;
+          cells[iMailleG]->addCellInterface(cellInterfaces[i]);
         }
       }
       // Inner faces of domain
@@ -868,10 +872,10 @@ void MUSGmshV2::initGeometryParallel(TypeMeshContainer<Cell*>& cells, TypeMeshCo
         cellInterfaces[i]->setFace(m_faces[i]);
         iMailleG = m_faces[i]->getElementGauche()->getNumCellAssociee();
         iMailleD = m_faces[i]->getElementDroite()->getNumCellAssociee();
+        cells[iMailleG]->addCellInterface(cellInterfaces[i]);
+        cells[iMailleD]->addCellInterface(cellInterfaces[i]);
       }
       cellInterfaces[i]->initialize(cells[iMailleG], cells[iMailleD]);
-      cells[iMailleG]->addCellInterface(cellInterfaces[i]);
-      cells[iMailleD]->addCellInterface(cellInterfaces[i]);
     }
     MPI_Barrier(MPI_COMM_WORLD);
     if (rankCpu == 0)
@@ -1235,7 +1239,7 @@ void MUSGmshV2::preProcessMeshFileForParallel()
           }
           // Determination of the number of communicating faces 
           // **************************************************
-          //int numberFacesCommunicating(elementsGlobal[i]->compteFaceCommunicante(facesTemp[numCPU],sommeNoeudsTemp[numCPU]));
+          //int numberFacesCommunicating(elementsGlobal[i]->compteFaceCommunicante(facesBuff[numCPU],sumNodesBuff[numCPU]));
           int numberFacesCommunicating(elementsGlobal[i]->compteFaceCommunicante(iMaxFaces[numCPU], facesBuff2[numCPU], sumNodesBuff2[numCPU]));
           if (numberFacesCommunicating > 0)
           {
@@ -1382,10 +1386,10 @@ void MUSGmshV2::readElement(const Coord* nodesTable, std::ifstream &meshFile, El
       *element = new ElementTetrahedron;
       m_numberTetrahedrons++;
       break;
-    //case 7: // Quadrangular pyramid (five points) // This element seems to not work with Gmsh, volumes of elements seem to cause this issue 
-    //  *element = new ElementPyramid; 
-    //  m_numberPyramids++;
-    //  break;
+    case 7: // Quadrangular pyramid (five points) // This element seems to not work with Gmsh, volumes of elements seem to cause this issue 
+      *element = new ElementPyramid; 
+      m_numberPyramids++;
+      break;
     case 15: // Point (a vertex)
       *element = new ElementPoint;
       m_numberPoints++;

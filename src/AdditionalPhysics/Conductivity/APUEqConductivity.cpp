@@ -28,9 +28,6 @@
 //  along with ECOGEN (file LICENSE).  
 //  If not, see <http://www.gnu.org/licenses/>.
 
-#include <iostream>
-#include <cmath>
-#include <algorithm>
 #include "APUEqConductivity.h"
 
 //***********************************************************************
@@ -39,10 +36,10 @@ APUEqConductivity::APUEqConductivity() {}
 
 //***********************************************************************
 
-APUEqConductivity::APUEqConductivity(int& numberQPA, Eos** eos, const int& numberPhases)
+APUEqConductivity::APUEqConductivity(int& numberQPA, Eos** eos, const int& numbPhases)
 {
-  m_lambdak = new double[numberPhases];
-  for (int k = 0; k < numberPhases; k++) {
+  m_lambdak = new double[numbPhases];
+  for (int k = 0; k < numbPhases; k++) {
     m_lambdak[k] = eos[k]->getLambda();
   }
   m_numQPA = numberQPA++;
@@ -56,12 +53,12 @@ APUEqConductivity::~APUEqConductivity(){ delete[] m_lambdak; }
 
 void APUEqConductivity::addQuantityAddPhys(Cell* cell)
 {
-  cell->getVecQuantitiesAddPhys().push_back(new QAPConductivity(this,cell->getNumberPhases()));
+  cell->getVecQuantitiesAddPhys().push_back(new QAPConductivity(this));
 }
 
 //***********************************************************************
 
-void APUEqConductivity::solveFluxAddPhys(CellInterface* cellInterface, const int& numberPhases)
+void APUEqConductivity::solveFluxAddPhys(CellInterface* cellInterface)
 {
   m_normal = cellInterface->getFace()->getNormal();
   m_tangent = cellInterface->getFace()->getTangent();
@@ -70,10 +67,10 @@ void APUEqConductivity::solveFluxAddPhys(CellInterface* cellInterface, const int
   // Reset of fluxBuffUEq
   for (int k = 0; k<numberPhases; k++) {
     static_cast<FluxUEq*> (fluxBuff)->m_alpha[k] = 0.;
-    static_cast<FluxUEq*> (fluxBuff)->m_masse[k] = 0.;
+    static_cast<FluxUEq*> (fluxBuff)->m_mass[k] = 0.;
     static_cast<FluxUEq*> (fluxBuff)->m_energ[k] = 0.;
   }
-  static_cast<FluxUEq*> (fluxBuff)->m_qdm = 0.;
+  static_cast<FluxUEq*> (fluxBuff)->m_momentum = 0.;
   static_cast<FluxUEq*> (fluxBuff)->m_energMixture = 0.;
 
   for (int numPhase = 0; numPhase < numberPhases; numPhase++) {
@@ -96,7 +93,7 @@ void APUEqConductivity::solveFluxAddPhys(CellInterface* cellInterface, const int
 
 //***********************************************************************
 
-void APUEqConductivity::solveFluxAddPhysBoundary(CellInterface* cellInterface, const int& numberPhases)
+void APUEqConductivity::solveFluxAddPhysBoundary(CellInterface* cellInterface)
 {
   //KS//DEV// On ne fait rien aux limites avec la conductivite pour le moment, a gerer un jour
 
@@ -107,10 +104,10 @@ void APUEqConductivity::solveFluxAddPhysBoundary(CellInterface* cellInterface, c
   // Reset of fluxBuffUEq (allow to then do the sum of conductivity effects for the different phases combinations)
   for (int k = 0; k<numberPhases; k++) {
     static_cast<FluxUEq*> (fluxBuff)->m_alpha[k] = 0.;
-    static_cast<FluxUEq*> (fluxBuff)->m_masse[k] = 0.;
+    static_cast<FluxUEq*> (fluxBuff)->m_mass[k] = 0.;
     static_cast<FluxUEq*> (fluxBuff)->m_energ[k] = 0.;
   }
-  static_cast<FluxUEq*> (fluxBuff)->m_qdm = 0.;
+  static_cast<FluxUEq*> (fluxBuff)->m_momentum = 0.;
   static_cast<FluxUEq*> (fluxBuff)->m_energMixture = 0.;
 
   for (int numPhase = 0; numPhase < numberPhases; numPhase++) {
@@ -163,9 +160,9 @@ void APUEqConductivity::solveFluxConductivityWall() const
   //KS//DEV// A faire pour couche limite thermique !!! ...
 
   // To avoid bug when not manage
-  static_cast<FluxUEq*> (fluxBuff)->m_qdm.setX(static_cast<FluxUEq*> (fluxBuff)->m_qdm.getX() + 0.);
-  static_cast<FluxUEq*> (fluxBuff)->m_qdm.setY(static_cast<FluxUEq*> (fluxBuff)->m_qdm.getY() + 0.);
-  static_cast<FluxUEq*> (fluxBuff)->m_qdm.setZ(static_cast<FluxUEq*> (fluxBuff)->m_qdm.getZ() + 0.);
+  static_cast<FluxUEq*> (fluxBuff)->m_momentum.setX(static_cast<FluxUEq*> (fluxBuff)->m_momentum.getX() + 0.);
+  static_cast<FluxUEq*> (fluxBuff)->m_momentum.setY(static_cast<FluxUEq*> (fluxBuff)->m_momentum.getY() + 0.);
+  static_cast<FluxUEq*> (fluxBuff)->m_momentum.setZ(static_cast<FluxUEq*> (fluxBuff)->m_momentum.getZ() + 0.);
   static_cast<FluxUEq*> (fluxBuff)->m_energMixture += 0.;
 }
 
@@ -176,9 +173,9 @@ void APUEqConductivity::solveFluxConductivityOutflow() const
   //Not manage at the moment, just an example
 
   // To avoid bug when not manage
-  static_cast<FluxUEq*> (fluxBuff)->m_qdm.setX(static_cast<FluxUEq*> (fluxBuff)->m_qdm.getX() + 0.);
-  static_cast<FluxUEq*> (fluxBuff)->m_qdm.setY(static_cast<FluxUEq*> (fluxBuff)->m_qdm.getY() + 0.);
-  static_cast<FluxUEq*> (fluxBuff)->m_qdm.setZ(static_cast<FluxUEq*> (fluxBuff)->m_qdm.getZ() + 0.);
+  static_cast<FluxUEq*> (fluxBuff)->m_momentum.setX(static_cast<FluxUEq*> (fluxBuff)->m_momentum.getX() + 0.);
+  static_cast<FluxUEq*> (fluxBuff)->m_momentum.setY(static_cast<FluxUEq*> (fluxBuff)->m_momentum.getY() + 0.);
+  static_cast<FluxUEq*> (fluxBuff)->m_momentum.setZ(static_cast<FluxUEq*> (fluxBuff)->m_momentum.getZ() + 0.);
   static_cast<FluxUEq*> (fluxBuff)->m_energMixture += 0.;
 }
 
@@ -189,9 +186,9 @@ void APUEqConductivity::solveFluxConductivityInflow() const
   //Not manage at the moment, just an example
 
   // To avoid bug when not manage
-  static_cast<FluxUEq*> (fluxBuff)->m_qdm.setX(static_cast<FluxUEq*> (fluxBuff)->m_qdm.getX() + 0.);
-  static_cast<FluxUEq*> (fluxBuff)->m_qdm.setY(static_cast<FluxUEq*> (fluxBuff)->m_qdm.getY() + 0.);
-  static_cast<FluxUEq*> (fluxBuff)->m_qdm.setZ(static_cast<FluxUEq*> (fluxBuff)->m_qdm.getZ() + 0.);
+  static_cast<FluxUEq*> (fluxBuff)->m_momentum.setX(static_cast<FluxUEq*> (fluxBuff)->m_momentum.getX() + 0.);
+  static_cast<FluxUEq*> (fluxBuff)->m_momentum.setY(static_cast<FluxUEq*> (fluxBuff)->m_momentum.getY() + 0.);
+  static_cast<FluxUEq*> (fluxBuff)->m_momentum.setZ(static_cast<FluxUEq*> (fluxBuff)->m_momentum.getZ() + 0.);
   static_cast<FluxUEq*> (fluxBuff)->m_energMixture += 0.;
 }
 
@@ -203,15 +200,15 @@ void APUEqConductivity::solveFluxConductivityOther() const
   std::cout << "Conductive boundary not manage" << std::endl;
 
   // To avoid bug when not manage
-  static_cast<FluxUEq*> (fluxBuff)->m_qdm.setX(static_cast<FluxUEq*> (fluxBuff)->m_qdm.getX() + 0.);
-  static_cast<FluxUEq*> (fluxBuff)->m_qdm.setY(static_cast<FluxUEq*> (fluxBuff)->m_qdm.getY() + 0.);
-  static_cast<FluxUEq*> (fluxBuff)->m_qdm.setZ(static_cast<FluxUEq*> (fluxBuff)->m_qdm.getZ() + 0.);
+  static_cast<FluxUEq*> (fluxBuff)->m_momentum.setX(static_cast<FluxUEq*> (fluxBuff)->m_momentum.getX() + 0.);
+  static_cast<FluxUEq*> (fluxBuff)->m_momentum.setY(static_cast<FluxUEq*> (fluxBuff)->m_momentum.getY() + 0.);
+  static_cast<FluxUEq*> (fluxBuff)->m_momentum.setZ(static_cast<FluxUEq*> (fluxBuff)->m_momentum.getZ() + 0.);
   static_cast<FluxUEq*> (fluxBuff)->m_energMixture += 0.;
 }
 
 //***********************************************************************
 
-void APUEqConductivity::communicationsAddPhys(const int& numberPhases, const int& dim, const int& lvl)
+void APUEqConductivity::communicationsAddPhys(const int& dim, const int& lvl)
 {
   for (int k = 0; k < numberPhases; k++) {
 		parallel.communicationsVector(QPA, dim, lvl, m_numQPA, k);

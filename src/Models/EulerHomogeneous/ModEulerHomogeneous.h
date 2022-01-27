@@ -45,21 +45,27 @@ class ModEulerHomogeneous : public Model
 {
   public:
     //! \brief     Homogeneous Euler model constructor
-    //! \param     numberTransports    number of additional transport equations
+    //! \param     numbTransports      number of additional transport equations
     //! \param     liquid              fluid number for liquid phase
     //! \param     vapor               fluid number for vapor phase
-    ModEulerHomogeneous(const int& numberTransports, const int liquid = 0, const int vapor = 1);
+    ModEulerHomogeneous(const int& numbTransports, const int liquid = 0, const int vapor = 1);
     virtual ~ModEulerHomogeneous();
 
-    virtual void allocateCons(Flux** cons, const int& /*numberPhases*/);
+    virtual void allocateCons(Flux** cons);
     virtual void allocatePhase(Phase** phase);
     virtual void allocateMixture(Mixture** mixture);
 
-    virtual void fulfillState(Phase** phases, Mixture* mixture, const int& numberPhases, Prim /*type*/ = vecPhases);
+    virtual void fulfillState(Phase** phases, Mixture* mixture);
+
+    //! \details    Does nothing for this model
+    virtual void fulfillStateRestart(Phase** /*phases*/, Mixture* /*mixture*/) {};
+
+    //! \details    Does nothing for this model
+    virtual void initializeAugmentedVariables(Cell* /*cell*/) {};
 
     //Hydrodynamic Riemann solvers
     //----------------------------
-    virtual void solveRiemannIntern(Cell& cellLeft, Cell& cellRight, const int& /*numberPhases*/, const double& dxLeft, const double& dxRight, double& dtMax, double& massflow, double& powerFlux) const;
+    virtual void solveRiemannIntern(Cell& cellLeft, Cell& cellRight, const double& dxLeft, const double& dxRight, double& dtMax, std::vector<double> &boundData = DEFAULT_VEC_INTERFACE_DATA) const;
     virtual void reverseProjection(const Coord normal, const Coord tangent, const Coord binormal) const;
 
     //Accessors
@@ -70,6 +76,7 @@ class ModEulerHomogeneous : public Model
     int getLiq();
     int getVap();
     virtual const std::string& whoAmI() const { return m_name; };
+    virtual void setSmoothCrossSection1d(const bool& applySmooth) { m_smoothCrossSection1d = applySmooth; };
 
   protected:
 

@@ -49,7 +49,7 @@ BoundCondWallO2::BoundCondWallO2(int numPhysique) : BoundCondWall(numPhysique)
 
 BoundCondWallO2::~BoundCondWallO2()
 {
-  for (int k = 0; k < m_numberPhases; k++) {
+  for (int k = 0; k < numberPhases; k++) {
     delete m_vecPhasesSlopes[k];
   }
   delete[] m_vecPhasesSlopes;
@@ -66,10 +66,8 @@ void BoundCondWallO2::createBoundary(TypeMeshContainer<CellInterface*>& cellInte
 
 //***********************************************************************
 
-void BoundCondWallO2::allocateSlopes(const int& numberPhases, const int& numberTransports, int& /*allocateSlopeLocal*/)
+void BoundCondWallO2::allocateSlopes(int& /*allocateSlopeLocal*/)
 {
-  m_numberPhases = numberPhases;
-
   //Allocation of phase slopes
   m_vecPhasesSlopes = new Phase*[numberPhases];
   //On attribut les phases a partir de la cell a gauche (car cell a droite inexistante pour les limites)
@@ -91,7 +89,7 @@ void BoundCondWallO2::allocateSlopes(const int& numberPhases, const int& numberT
 
 //***********************************************************************
 
-void BoundCondWallO2::computeSlopes(const int& numberPhases, const int& /*numberTransports*/, Prim type)
+void BoundCondWallO2::computeSlopes(Prim type)
 {
   //Slopes des velocities normals aux limites
   double distanceX, distanceY, distanceZ;
@@ -120,9 +118,9 @@ void BoundCondWallO2::computeSlopes(const int& numberPhases, const int& /*number
 
 //***********************************************************************
 
-void BoundCondWallO2::solveRiemann(const int& numberPhases, const int& numberTransports, double& dtMax, Limiter& globalLimiter, Limiter& interfaceLimiter, Limiter& globalVolumeFractionLimiter, Limiter& interfaceVolumeFractionLimiter, Prim type)
+void BoundCondWallO2::solveRiemann(double& dtMax, Limiter& globalLimiter, Limiter& interfaceLimiter, Limiter& globalVolumeFractionLimiter, Limiter& interfaceVolumeFractionLimiter, Prim type)
 {
-  cellLeft->copyVec(m_cellLeft->getPhases(type), m_cellLeft->getMixture(type), m_cellLeft->getTransports(type));
+  bufferCellLeft->copyVec(m_cellLeft->getPhases(type), m_cellLeft->getMixture(type), m_cellLeft->getTransports(type));
 
   //Calcul des distances cell interfaces <-> cells pour l extrapolation
   double distanceGauche(this->distance(m_cellLeft));
@@ -132,29 +130,29 @@ void BoundCondWallO2::solveRiemann(const int& numberPhases, const int& numberTra
 
   //Extrapolation gauche
   double epsInterface(1.e-4);
-  m_cellLeft->computeLocalSlopesLimite(numberPhases, numberTransports, *this, globalLimiter, interfaceLimiter, globalVolumeFractionLimiter, interfaceVolumeFractionLimiter, epsInterface);
+  m_cellLeft->computeLocalSlopesLimite(*this, globalLimiter, interfaceLimiter, globalVolumeFractionLimiter, interfaceVolumeFractionLimiter, epsInterface);
   for (int k = 0; k < numberPhases; k++) {
-    cellLeft->getPhase(k)->extrapolate(*slopesPhasesLocal1[k], distanceGauche);
+    bufferCellLeft->getPhase(k)->extrapolate(*slopesPhasesLocal1[k], distanceGauche);
   }
-  cellLeft->getMixture()->extrapolate(*slopesMixtureLocal1, distanceGauche);
+  bufferCellLeft->getMixture()->extrapolate(*slopesMixtureLocal1, distanceGauche);
   for (int k = 0; k < numberTransports; k++) {
-    cellLeft->getTransport(k).extrapolate(slopesTransportLocal1[k], distanceGauche);
+    bufferCellLeft->getTransport(k).extrapolate(slopesTransportLocal1[k], distanceGauche);
   }
 
   //Projection des velocities sur repere attache a la face
-  cellLeft->localProjection(m_face->getNormal(), m_face->getTangent(), m_face->getBinormal(), numberPhases);
+  bufferCellLeft->localProjection(m_face->getNormal(), m_face->getTangent(), m_face->getBinormal());
   //Calcul des variables etendus (Phases, Mixture, AddPhys)
-  cellLeft->fulfillState();
+  bufferCellLeft->fulfillState();
 
   //Riemann problem
   double dxLeft(m_cellLeft->getElement()->getLCFL());
   dxLeft = dxLeft*std::pow(2., (double)m_lvl);
-  this->solveRiemannBoundary(*cellLeft, numberPhases, dxLeft, dtMax);
+  this->solveRiemannBoundary(*bufferCellLeft, dxLeft, dtMax);
   //Handling of transport functions (m_Sm known: need to be called after Riemann solver)
-  if (numberTransports > 0) { this->solveRiemannTransportBoundary(*cellLeft, numberTransports); }
+  if (numberTransports > 0) { this->solveRiemannTransportBoundary(*bufferCellLeft); }
 
   //Flux projection on absolute reference frame
-  m_mod->reverseProjection(m_face->getNormal(), m_face->getTangent(), m_face->getBinormal());
+  model->reverseProjection(m_face->getNormal(), m_face->getTangent(), m_face->getBinormal());
 }
 
 //***********************************************************************

@@ -31,14 +31,14 @@
 #include "ElementPoint.h"
 
 const int ElementPoint::TYPEGMSH = 15;
-const int ElementPoint::NOMBRENOEUDS = 1;
-const int ElementPoint::NOMBREFACES = 0;
+const int ElementPoint::NUMBERNODES = 1;
+const int ElementPoint::NUMBERFACES = 0;
 const int ElementPoint::TYPEVTK = 1;
 
 //***********************************************************************
 
 ElementPoint::ElementPoint() :
-ElementNS(TYPEGMSH, NOMBRENOEUDS, NOMBREFACES, TYPEVTK)
+ElementNS(TYPEGMSH, NUMBERNODES, NUMBERFACES, TYPEVTK)
 {}
 
 //***********************************************************************
@@ -47,16 +47,16 @@ ElementPoint::~ElementPoint(){}
 
 //***********************************************************************
 
-void ElementPoint::computeVolume(const Coord* /*noeuds*/)
+void ElementPoint::computeVolume(const Coord* /*nodes*/)
 {
-  m_volume = 1.0; //sans unite inutile
+  m_volume = 1.0; // Without unit, useless
 }
 
 //***********************************************************************
 
-void ElementPoint::computeLCFL(const Coord* /*noeuds*/)
+void ElementPoint::computeLCFL(const Coord* /*nodes*/)
 {
-  m_lCFL = 1.0; //inutile
+  m_lCFL = 1.0; // Useless
 }
 
 //***********************************************************************
@@ -65,7 +65,7 @@ void ElementPoint::attributFaceLimite(FaceNS** faces, const int& indexMaxFaces)
 {
   int indexFaceExiste(0);
   FacePoint face(m_numNoeuds[0]);
-  if (face.faceExiste(faces, indexMaxFaces, indexFaceExiste))
+  if (face.faceExists(faces, indexMaxFaces, indexFaceExiste))
   {
     faces[indexFaceExiste]->ajouteElementVoisinLimite(this);
   }

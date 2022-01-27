@@ -34,6 +34,8 @@
 #include "EosIG.h"
 #include "EosSG.h"
 #include "EosNASG.h"
+#include "EosVDW.h"
+#include "EosPolynomial.h"
 
 //Add here headers for new equations of state
 

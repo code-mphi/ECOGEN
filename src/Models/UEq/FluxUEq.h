@@ -31,7 +31,6 @@
 #ifndef FLUXUEQ_H
 #define FLUXUEQ_H
 
-#include <iostream>
 #include "../Flux.h"
 
 class FluxUEq;
@@ -43,42 +42,45 @@ class FluxUEq;
 class FluxUEq : public Flux
 {
   public:
-    FluxUEq(const int& numberPhases);
+    FluxUEq(const int& numbPhases);
     virtual ~FluxUEq();
 
     virtual void printFlux() const;
-    virtual void addFlux(double coefA, const int& numberPhases);
-    virtual void addFlux(Flux* flux, const int& numberPhases);
-    virtual void subtractFlux(double coefA, const int& numberPhases);
-    virtual void multiply(double scalar, const int& numberPhases);
-    virtual void setBufferFlux(Cell& cell, const int& numberPhases);
-    virtual void buildCons(Phase** phases, const int& numberPhases, Mixture* mixture);
-    virtual void buildPrim(Phase** phases, Mixture* mixture, const int& numberPhases);
-    virtual void setToZero(const int& numberPhases);
-    virtual void setToZeroBufferFlux(const int& numberPhases);
-    virtual void addNonCons(double coefA, const Cell* cell, const int& numberPhases);
-    virtual void subtractNonCons(double coefA, const Cell* cell, const int& numberPhases);
-    virtual void schemeCorrection(const int& numberPhases) const;
+    virtual void addFlux(double coefA);
+    virtual void addFlux(Flux* flux);
+    virtual void subtractFlux(double coefA);
+    virtual void multiply(double scalar);
+    virtual void setBufferFlux(Cell& cell);
+    virtual void buildCons(Phase** phases, Mixture* mixture);
+    virtual void buildPrim(Phase** phases, Mixture* mixture);
+    virtual void setToZero();
+    virtual void setToZeroBufferFlux();
+    virtual void addNonCons(double coefA, const Cell* cell);
+    virtual void subtractNonCons(double coefA, const Cell* cell);
+    virtual void schemeCorrection(Cell& cell) const;
 
-    virtual void addSymmetricTerms(Phase** phases, Mixture* mixture, const int& numberPhases, const double& r, const double& v);
-    virtual void prepSourceTermsGravity(const int& numberPhases, const Coord& g);
-    virtual void prepSourceTermsHeating(const int& numberPhases, const double& q);
-    virtual void prepSourceTermsMRF(Cell* cell, const int& numberPhases, const Coord& omega);
+    virtual void addFluxSmooth1D(double coefA, const Coord& normal, Cell* cell);
+    virtual void substractFluxSmooth1D(double coefA, const Coord& normal, Cell* cell);
+
+    virtual void addSymmetricTerms(Phase** phases, Mixture* mixture, const double& r, const double& v);
+    virtual void prepSourceTermsGravity(const Coord& g);
+    virtual void prepSourceTermsHeating(const double& q);
+    virtual void prepSourceTermsMRF(Cell* cell, const Coord& omega);
 
     // Accessors
     //----------
     virtual const double& getAlpha(const int& numPhase) const { return m_alpha[numPhase]; };
-    virtual const double& getMasse(const int& numPhase) const { return m_masse[numPhase]; };
+    virtual const double& getMass(const int& numPhase) const { return m_mass[numPhase]; };
     virtual const double& getEnergy(const int& numPhase) const { return m_energ[numPhase]; };
-    virtual const Coord& getQdm() const { return m_qdm; };
+    virtual const Coord& getMomentum() const { return m_momentum; };
     virtual const double& getEnergyMix() const { return m_energMixture; };
-    virtual void setCons(const Flux* cons, const int& numberPhases);
+    virtual void setCons(const Flux* cons);
 
   protected:
     double* m_alpha;          //!< volume fraction array
-    double* m_masse;          //!< mass array
+    double* m_mass;           //!< mass array
     double* m_energ;          //!< specific internal energy array
-    Coord m_qdm;              //!< momentum array
+    Coord m_momentum;         //!< momentum array
     double m_energMixture;    //!< mixture energy
 
   private:

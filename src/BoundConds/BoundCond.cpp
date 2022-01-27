@@ -29,7 +29,6 @@
 //  If not, see <http://www.gnu.org/licenses/>.
 
 #include "BoundCond.h"
-#include <iostream>
 
 //***********************************************************************
 
@@ -37,12 +36,12 @@ BoundCond::BoundCond(){}
 
 //***********************************************************************
 
-BoundCond::BoundCond(int numPhysique) : m_numPhysique(numPhysique), m_massflow(0.), m_powerFlux(0.)
+BoundCond::BoundCond(int numPhysique) : m_numPhysique(numPhysique), m_boundData(std::vector<double>(5,0))
 {}
 
 //***********************************************************************
 
-BoundCond::BoundCond(const BoundCond &Source, const int& lvl) : CellInterface(lvl), m_numPhysique(Source.m_numPhysique), m_massflow(0.), m_powerFlux(0.)
+BoundCond::BoundCond(const BoundCond &Source, const int& lvl) : CellInterface(lvl), m_numPhysique(Source.m_numPhysique), m_boundData(std::vector<double>(5,0))
 {}
 
 //***********************************************************************
@@ -59,58 +58,47 @@ void BoundCond::initialize(Cell* cellLeft, Cell* /*cellRight*/)
 
 //***********************************************************************
 
-void BoundCond::computeFlux(const int& numberPhases, const int& numberTransports, double& dtMax, Limiter& globalLimiter, Limiter& interfaceLimiter, Limiter& globalVolumeFractionLimiter, Limiter& interfaceVolumeFractionLimiter, Prim type)
+void BoundCond::computeFlux(double& dtMax, Limiter& globalLimiter, Limiter& interfaceLimiter,
+  Limiter& globalVolumeFractionLimiter, Limiter& interfaceVolumeFractionLimiter, Prim type)
 {
-  this->solveRiemann(numberPhases, numberTransports, dtMax, globalLimiter, interfaceLimiter, globalVolumeFractionLimiter, interfaceVolumeFractionLimiter, type);
-  this->subtractFlux(numberPhases, numberTransports, 1.); //Substract flux on left cell
+  this->solveRiemann(dtMax, globalLimiter, interfaceLimiter, globalVolumeFractionLimiter, interfaceVolumeFractionLimiter, type);
+  this->subtractFlux(1.); //Substract flux on left cell
 }
 
 //***********************************************************************
 
-void BoundCond::computeFluxAddPhys(const int& numberPhases, AddPhys &addPhys)
+void BoundCond::computeFluxAddPhys(AddPhys &addPhys)
 {
-  addPhys.computeFluxAddPhysBoundary(this, numberPhases);
+  addPhys.computeFluxAddPhysBoundary(this);
 }
 
 //***********************************************************************
 
-void BoundCond::solveRiemann(const int& numberPhases, const int& numberTransports, double& dtMax, Limiter& /*globalLimiter*/, Limiter& /*interfaceLimiter*/, Limiter& /*globalVolumeFractionLimiter*/, Limiter& /*interfaceVolumeFractionLimiter*/, Prim type)
+void BoundCond::solveRiemann(double& dtMax, Limiter& /*globalLimiter*/, Limiter& /*interfaceLimiter*/, Limiter& /*globalVolumeFractionLimiter*/, Limiter& /*interfaceVolumeFractionLimiter*/, Prim type)
 {
-  cellLeft->copyVec(m_cellLeft->getPhases(type), m_cellLeft->getMixture(type), m_cellLeft->getTransports(type));
+  bufferCellLeft->copyVec(m_cellLeft->getPhases(type), m_cellLeft->getMixture(type), m_cellLeft->getTransports(type));
   //Velocity projection on geometric reference frame of the face
-  cellLeft->localProjection(m_face->getNormal(), m_face->getTangent(), m_face->getBinormal(), numberPhases);
+  bufferCellLeft->localProjection(m_face->getNormal(), m_face->getTangent(), m_face->getBinormal());
   //Computation of extended variables (Phases, Mixture, AddPhys)
-  cellLeft->fulfillState();
+  bufferCellLeft->fulfillState();
 
   //Riemann problem
   double dxLeft(m_cellLeft->getElement()->getLCFL());
   dxLeft = dxLeft*std::pow(2., (double)m_lvl);
-  // Reset recorded boundary fluxes in case it is not done in R-P 
-  m_massflow = 0.; 
-  m_powerFlux = 0.;
-  this->solveRiemannBoundary(*cellLeft, numberPhases, dxLeft, dtMax);
-  //Extraction of massflow/powerFlux through boundary done during R-P
-  m_massflow *= this->getFace()->getSurface();
-  m_powerFlux *= this->getFace()->getSurface();
+  this->solveRiemannBoundary(*bufferCellLeft, dxLeft, dtMax);
+
   //Handling of transport functions (m_Sm known: need to be called after Riemann solver)
-  if (numberTransports > 0) { this->solveRiemannTransportBoundary(*cellLeft, numberTransports); }
+  if (numberTransports > 0) { this->solveRiemannTransportBoundary(*bufferCellLeft); }
 
   //Flux projection on absolute reference frame
-  m_mod->reverseProjection(m_face->getNormal(), m_face->getTangent(), m_face->getBinormal());
+  model->reverseProjection(m_face->getNormal(), m_face->getTangent(), m_face->getBinormal());
 }
 
 //***********************************************************************
 
-double BoundCond::getMassflow() const
+double BoundCond::getBoundData(VarBoundary var) const
 {
-  return m_massflow;
-}
-
-//***********************************************************************
-
-double BoundCond::getPowerFlux() const
-{
-  return m_powerFlux;
+  return m_boundData[var];
 }
 
 //***************************************************************************
@@ -156,8 +144,7 @@ void BoundCond::raffineCellInterfaceExterne(const int& nbCellsY, const int& nbCe
         m_cellInterfacesChildren[0]->initializeGauche(cellRef->getCellChild(1));
         cellRef->getCellChild(1)->addCellInterface(m_cellInterfacesChildren[0]);
       }
-      m_cellInterfacesChildren[0]->associeModel(m_mod);
-      m_cellInterfacesChildren[0]->allocateSlopes(cellRef->getNumberPhases(), cellRef->getNumberTransports(), allocateSlopeLocal);
+      m_cellInterfacesChildren[0]->allocateSlopes(allocateSlopeLocal);
     }
     else {
 
@@ -258,8 +245,7 @@ void BoundCond::raffineCellInterfaceExterne(const int& nbCellsY, const int& nbCe
       //Association of model and slopes
       //-------------------------------
       for (int i = 0; i < 2; i++) {
-        m_cellInterfacesChildren[i]->associeModel(m_mod);
-        m_cellInterfacesChildren[i]->allocateSlopes(cellRef->getNumberPhases(), cellRef->getNumberTransports(), allocateSlopeLocal);
+        m_cellInterfacesChildren[i]->allocateSlopes(allocateSlopeLocal);
       }
 
     }
@@ -471,8 +457,7 @@ void BoundCond::raffineCellInterfaceExterne(const int& nbCellsY, const int& nbCe
     //Association du model et des slopes
     //-----------------------------------
     for (int i = 0; i < 4; i++) {
-      m_cellInterfacesChildren[i]->associeModel(m_mod);
-      m_cellInterfacesChildren[i]->allocateSlopes(cellRef->getNumberPhases(), cellRef->getNumberTransports(), allocateSlopeLocal);
+      m_cellInterfacesChildren[i]->allocateSlopes(allocateSlopeLocal);
     }
 
   }

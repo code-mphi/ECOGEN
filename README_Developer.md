@@ -18,20 +18,13 @@ Standart Doxygen comments
 -------------------------
 To automatise code documentation, comments should be insert as follow in header files.
 
-A)At the head of files
-//! \file      file name
-//! \author    authors names
-//! \version   1.0
-//! \date      12 Novembre 2009
-//! \brief     brief description
-
-B)Before class definition
+A)Before class definition
 //! \class     class name
 //! \brief     brief descritption
 //! \details    Detailed description
 //!                  continue description
 
-C)Before function and method prototypes
+B)Before function and method prototypes
 //! \brief      brief description
 //! \details    Detailed description
 //!                  continue description
@@ -39,7 +32,7 @@ C)Before function and method prototypes
 //! \param      parameter name         description
 //! \return     return description
 
-D)class member descrption
+C)class member descrption
 type m_variable; //!< member description
 
 

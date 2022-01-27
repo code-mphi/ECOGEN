@@ -31,8 +31,6 @@
 #ifndef MESHUNSTRUCT_H
 #define MESHUNSTRUCT_H
 
-#include <stdint.h>
-
 #include "Mesh.h"
 #include "MeshUnStruct/MUSGmsh/HeaderElements.h"
 #include "../InputOutput/IO.h"

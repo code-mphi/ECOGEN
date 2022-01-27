@@ -28,8 +28,6 @@
 //  along with ECOGEN (file LICENSE).  
 //  If not, see <http://www.gnu.org/licenses/>.
 
-#include <algorithm>
-
 #include "MeshCartesian.h"
 
 //***********************************************************************
@@ -449,7 +447,7 @@ void MeshCartesian::initializeGeometrieMonoCpu(TypeMeshContainer<Cell*>& cells, 
 
         // Hard-coded boundary condition for Blasius test case
         // ---------------------------------------------------
-        // Allows to set slip and no-slip wall on same boundary of a cartesian mesh.
+        // Allows to set slip and no-slip wall on same boundary of a Cartesian mesh.
         // Requires to set wall boundary condition in file initialConditions.xml 
         // to define no-slip wall and slipping wall is defined thanks to a
         // symmetry before a given position.
@@ -865,7 +863,7 @@ void MeshCartesian::initializeGeometrieParallele(TypeMeshContainer<Cell*>& cells
 
           // Hard-coded boundary condition for Blasius test case
           // ---------------------------------------------------
-          // Allows to set slip and no-slip wall on same boundary of a cartesian mesh.
+          // Allows to set slip and no-slip wall on same boundary of a Cartesian mesh.
           // Requires to set wall boundary condition in file initialConditions.xml 
           // to define no-slip wall and slipping wall is defined thanks to a
           // symmetry before a given position.
@@ -1747,6 +1745,36 @@ void MeshCartesian::recupereDonnees(TypeMeshContainer<Cell*>* cellsLvl, std::vec
       } // Fin X
     } //Fin Y
   } //Fin Z
+}
+
+//****************************************************************************
+
+void MeshCartesian::setDataSet(std::vector<double>& jeuDonnees, TypeMeshContainer<Cell*>* cellsLvl, const int var, int phase) const
+{
+  int iterDataSet(0);
+  Coord vec;
+  for (unsigned int i = 0; i < cellsLvl[0].size(); i++) {
+    if (var > 0) { //Scalars data are first set
+      if (phase >= 0) { cellsLvl[0][i]->getPhase(phase)->setScalar(var, jeuDonnees[iterDataSet++]); } //phases data
+      else if (phase == -1) { cellsLvl[0][i]->getMixture()->setScalar(var, jeuDonnees[iterDataSet++]); }  //mixture data
+      else if (phase == -2) { cellsLvl[0][i]->getTransport(var - 1).setValue(jeuDonnees[iterDataSet++]); } //transport data
+      else if (phase == -3) { cellsLvl[0][i]->setXi(jeuDonnees[iterDataSet++]); } //xi indicator
+      else { Errors::errorMessage("MeshCartesian::setDataSet: unknown phase number: ", phase); }
+    }
+    else { //On veut recuperer les donnees vectorielles
+      if (phase >= 0) { //Phases data
+        vec.setXYZ(jeuDonnees[iterDataSet], jeuDonnees[iterDataSet + 1], jeuDonnees[iterDataSet + 2]);
+        cellsLvl[0][i]->getPhase(phase)->setVector(-var, vec);
+        iterDataSet += 3;
+      }
+      else if (phase == -1) {  //Mixture data
+        vec.setXYZ(jeuDonnees[iterDataSet], jeuDonnees[iterDataSet + 1], jeuDonnees[iterDataSet + 2]);
+        cellsLvl[0][i]->getMixture()->setVector(-var, vec);
+        iterDataSet += 3;
+      }
+      else { Errors::errorMessage("MeshCartesian::setDataSet: unknown phase number: ", phase); }
+    } //Fin vecteur
+  }
 }
 
 //***********************************************************************

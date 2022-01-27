@@ -31,7 +31,6 @@
 #ifndef SOURCE_H
 #define SOURCE_H
 
-#include <string>
 #include "../libTierces/tinyxml2.h"
 #include "../Errors.h"
 #include "../Tools.h"
@@ -44,39 +43,18 @@ class Source
 {
   public:
     //! \brief    Source constructor depending on integration order and physical entity to apply source
-    //! \param    order           integration order (could EULER, RK2 or RK4 scheme)
     //! \param    physicalEntity  the entity to which the source term is applied (default whole domain)
-    Source(int order, int physicalEntity = 0);
+    Source(int physicalEntity = 0);
     virtual ~Source();
 
     //! \brief     Source terms preparation for integration
     //! \param     cell           cell for source term integration
-    //! \param     numberPhases   number of phases
-    virtual void prepSourceTerms(Cell* /*cell*/, const int& /*numberPhases*/, const int& /*i*/ = 0) { Errors::errorMessage("prepSourceTerms not available for required source"); };
+    virtual void prepSourceTerms(Cell* /*cell*/, const int& /*i*/ = 0) { Errors::errorMessage("prepSourceTerms not available for required source"); };
 
     //! \brief     Source terms integration on conservative quantities
     //! \param     cell           cell for source term integration
-    //! \param     numberPhases   number of phases
     //! \param     dt             integration time step
-    void integrateSourceTerms(Cell* cell, const int& numberPhases, const double& dt);
-
-    //! \brief     Euler explicite integration (order 1)
-    //! \param     cell           cell for source term integration
-    //! \param     numberPhases   number of phases
-    //! \param     dt             explicit integration time step
-    void integrationEuler(Cell* cell, const int& numberPhases, const double& dt);
-
-    //! \brief     Runge-Kutta integration (order 2)
-    //! \param     cell           cell for source term integration
-    //! \param     numberPhases   number of phases
-    //! \param     dt             explicit integration time step
-    void integrationRK2(Cell* cell, const int& numberPhases, const double& dt);
-
-    //! \brief     Runge-Kutta integration (order 4)
-    //! \param     cell           cell for source term integration
-    //! \param     numberPhases   number of phases
-    //! \param     dt             explicit integration time step
-    void integrationRK4(Cell* cell, const int& numberPhases, const double& dt);
+    virtual void integrateSourceTerms(Cell* /*cell*/, const double& /*dt*/) { Errors::errorMessage("integrateSourceTerms not available for required source"); };
 
     //! \brief     Allows to modifiy the source term along time
     //! \param     time            physical time of the computation
@@ -90,7 +68,6 @@ class Source
     int getPhysicalEntity() { return m_physicalEntity; }
 
   protected:
-    int m_order;
     int m_physicalEntity;
 };
 

@@ -28,9 +28,6 @@
 //  along with ECOGEN (file LICENSE).  
 //  If not, see <http://www.gnu.org/licenses/>.
 
-#include <iostream>
-#include <cmath>
-#include <algorithm>
 #include "APUEq.h"
 
 //***********************************************************************

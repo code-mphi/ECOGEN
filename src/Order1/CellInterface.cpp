@@ -29,20 +29,20 @@
 //  If not, see <http://www.gnu.org/licenses/>.
 
 #include "CellInterface.h"
-#include <iostream>
 
+Model* model;
 //Utile pour la resolution des problemes de Riemann
-Cell* cellLeft;
-Cell* cellRight;
+Cell* bufferCellLeft;
+Cell* bufferCellRight;
 
 //***********************************************************************
 
-CellInterface::CellInterface() : m_cellLeft(0), m_cellRight(0), m_mod(0), m_face(0), m_lvl(0), m_cellInterfacesChildren(0)
+CellInterface::CellInterface() : m_cellLeft(0), m_cellRight(0), m_face(0), m_lvl(0), m_cellInterfacesChildren(0)
 {}
 
 //***********************************************************************
 
-CellInterface::CellInterface(const int& lvl) : m_cellLeft(0), m_cellRight(0), m_mod(0), m_face(0), m_lvl(lvl), m_cellInterfacesChildren(0)
+CellInterface::CellInterface(const int& lvl) : m_cellLeft(0), m_cellRight(0), m_face(0), m_lvl(lvl), m_cellInterfacesChildren(0)
 {}
 
 //***********************************************************************
@@ -87,80 +87,87 @@ void CellInterface::setFace(Face *face)
 
 //***********************************************************************
 
-void CellInterface::computeFlux(const int& numberPhases, const int& numberTransports, double& dtMax, Limiter& globalLimiter, Limiter& interfaceLimiter, Limiter& globalVolumeFractionLimiter, Limiter& interfaceVolumeFractionLimiter, Prim type)
+void CellInterface::computeFlux(double& dtMax, Limiter& globalLimiter, Limiter& interfaceLimiter,
+  Limiter& globalVolumeFractionLimiter, Limiter& interfaceVolumeFractionLimiter, Prim type)
 {
-  this->solveRiemann(numberPhases, numberTransports, dtMax, globalLimiter, interfaceLimiter, globalVolumeFractionLimiter, interfaceVolumeFractionLimiter, type);
+  this->solveRiemann(dtMax, globalLimiter, interfaceLimiter, globalVolumeFractionLimiter, interfaceVolumeFractionLimiter, type);
 
-  if (m_cellLeft->getLvl() == m_cellRight->getLvl()) {     //CoefAMR = 1 pour les deux
-    this->addFlux(numberPhases, numberTransports, 1.);      //Ajout du flux sur maille droite
-    this->subtractFlux(numberPhases, numberTransports, 1.);     //Retrait du flux sur maille gauche
+  if (m_cellLeft->getLvl() == m_cellRight->getLvl()) {      //CoefAMR = 1 pour les deux
+    this->addFlux(1.);       //Ajout du flux sur maille droite
+    this->subtractFlux(1.);  //Retrait du flux sur maille gauche
   }
-  else if (m_cellLeft->getLvl() > m_cellRight->getLvl()) { //CoefAMR = 1 pour la gauche et 0.5 pour la droite
-    this->addFlux(numberPhases, numberTransports, 0.5);     //Ajout du flux sur maille droite
-    this->subtractFlux(numberPhases, numberTransports, 1.);     //Retrait du flux sur maille gauche
+  else if (m_cellLeft->getLvl() > m_cellRight->getLvl()) {  //CoefAMR = 1 pour la gauche et 0.5 pour la droite
+    this->addFlux(0.5);      //Ajout du flux sur maille droite
+    this->subtractFlux(1.);  //Retrait du flux sur maille gauche
   }
-  else {                                                      //CoefAMR = 0.5 pour la gauche et 1 pour la droite
-    this->addFlux(numberPhases, numberTransports, 1.);      //Ajout du flux sur maille droite
-    this->subtractFlux(numberPhases, numberTransports, 0.5);    //Retrait du flux sur maille gauche
+  else {                                                     //CoefAMR = 0.5 pour la gauche et 1 pour la droite
+    this->addFlux(1.);       //Ajout du flux sur maille droite
+    this->subtractFlux(0.5); //Retrait du flux sur maille gauche
   }
 }
 
 //***********************************************************************
 
-void CellInterface::computeFluxAddPhys(const int& numberPhases, AddPhys &addPhys)
+void CellInterface::computeFluxAddPhys(AddPhys &addPhys)
 {
-  addPhys.computeFluxAddPhys(this, numberPhases);
+  addPhys.computeFluxAddPhys(this);
 }
 
 //***********************************************************************
 
-void CellInterface::solveRiemann(const int& numberPhases, const int& numberTransports, double& dtMax, Limiter& /*globalLimiter*/, Limiter& /*interfaceLimiter*/, Limiter& /*globalVolumeFractionLimiter*/, Limiter& /*interfaceVolumeFractionLimiter*/, Prim /*type*/)
+void CellInterface::solveRiemann(double& dtMax, Limiter& /*globalLimiter*/, Limiter& /*interfaceLimiter*/,
+  Limiter& /*globalVolumeFractionLimiter*/, Limiter& /*interfaceVolumeFractionLimiter*/, Prim /*type*/)
 {
   //Projection des velocities sur repere attache a la face
-  m_cellLeft->localProjection(m_face->getNormal(), m_face->getTangent(), m_face->getBinormal(), numberPhases);
-  m_cellRight->localProjection(m_face->getNormal(), m_face->getTangent(), m_face->getBinormal(), numberPhases);
+  m_cellLeft->localProjection(m_face->getNormal(), m_face->getTangent(), m_face->getBinormal());
+  m_cellRight->localProjection(m_face->getNormal(), m_face->getTangent(), m_face->getBinormal());
 
   //Probleme de Riemann
   double dxLeft(m_cellLeft->getElement()->getLCFL());
   double dxRight(m_cellRight->getElement()->getLCFL());
   dxLeft = dxLeft*std::pow(2., (double)m_lvl);
   dxRight = dxRight*std::pow(2., (double)m_lvl);
-  double massflow(0.), powerFlux(0.); // Those var. are useless here, only meaningful for recording flux of BoundCond
-  m_mod->solveRiemannIntern(*m_cellLeft, *m_cellRight, numberPhases, dxLeft, dxRight, dtMax, massflow, powerFlux);
+  model->solveRiemannIntern(*m_cellLeft, *m_cellRight, dxLeft, dxRight, dtMax);
   //Handling of transport functions (m_Sm known: need to be called after Riemann solver)
-  if (numberTransports > 0) { m_mod->solveRiemannTransportIntern(*m_cellLeft, *m_cellRight, numberTransports); }
+  if (numberTransports > 0) { model->solveRiemannTransportIntern(*m_cellLeft, *m_cellRight); }
 
   //Projection du flux sur le repere absolu
-  m_mod->reverseProjection(m_face->getNormal(), m_face->getTangent(), m_face->getBinormal());
-  m_cellLeft->reverseProjection(m_face->getNormal(), m_face->getTangent(), m_face->getBinormal(), numberPhases);
-  m_cellRight->reverseProjection(m_face->getNormal(), m_face->getTangent(), m_face->getBinormal(), numberPhases);
+  model->reverseProjection(m_face->getNormal(), m_face->getTangent(), m_face->getBinormal());
+  m_cellLeft->reverseProjection(m_face->getNormal(), m_face->getTangent(), m_face->getBinormal());
+  m_cellRight->reverseProjection(m_face->getNormal(), m_face->getTangent(), m_face->getBinormal());
 }
 
 //***********************************************************************
 
-void CellInterface::addFlux(const int& numberPhases, const int& numberTransports, const double& coefAMR)
+void CellInterface::addFlux(const double& coefAMR)
 {
   //No "time step"
   double coefA = m_face->getSurface() / m_cellRight->getElement()->getVolume() * coefAMR;
-  m_cellRight->getCons()->addFlux(coefA, numberPhases);
-  m_cellRight->getCons()->addNonCons(coefA, m_cellRight, numberPhases);
+  m_cellRight->getCons()->addFlux(coefA);
+  m_cellRight->getCons()->addNonCons(coefA, m_cellRight);
   for (int k = 0; k < numberTransports; k++) {
     m_cellRight->getConsTransport(k)->addFlux(coefA, k);
-    m_cellRight->getConsTransport(k)->addNonCons(coefA, m_cellRight->getTransport(k).getValue(), m_mod->getSM());
+    m_cellRight->getConsTransport(k)->addNonCons(coefA, m_cellRight->getTransport(k).getValue(), model->getSM());
+  }
+  if (model->isSmoothCrossSection1d()) {
+    m_cellRight->getCons()->addFluxSmooth1D(coefA, m_face->getNormal(), m_cellRight);
   }
 }
 
 //***********************************************************************
 
-void CellInterface::subtractFlux(const int& numberPhases, const int& numberTransports, const double& coefAMR)
+void CellInterface::subtractFlux(const double& coefAMR)
 {
   //No "time step"
   double coefA = m_face->getSurface() / m_cellLeft->getElement()->getVolume() * coefAMR;
-  m_cellLeft->getCons()->subtractFlux(coefA, numberPhases);
-  m_cellLeft->getCons()->subtractNonCons(coefA, m_cellLeft, numberPhases);
+  m_cellLeft->getCons()->subtractFlux(coefA);
+  m_cellLeft->getCons()->subtractNonCons(coefA, m_cellLeft);
   for (int k = 0; k < numberTransports; k++) {
     m_cellLeft->getConsTransport(k)->subtractFlux(coefA, k);
-    m_cellLeft->getConsTransport(k)->subtractNonCons(coefA, m_cellLeft->getTransport(k).getValue(), m_mod->getSM());
+    m_cellLeft->getConsTransport(k)->subtractNonCons(coefA, m_cellLeft->getTransport(k).getValue(), model->getSM());
+  }
+  if (model->isSmoothCrossSection1d()) { 
+    m_cellLeft->getCons()->substractFluxSmooth1D(coefA, m_face->getNormal(), m_cellLeft);
   }
 }
 
@@ -169,20 +176,6 @@ void CellInterface::subtractFlux(const int& numberPhases, const int& numberTrans
 double CellInterface::distance(Cell* c)
 {
   return m_face->distance(c->getElement());
-}
-
-//***********************************************************************
-void CellInterface::EffetsSurface1D(const int& numberPhases)
-{
-  if (m_cellRight != NULL){ m_cellRight->getCons()->addTuyere1D(m_face->getNormal(), m_face->getSurface(), m_cellRight, numberPhases); }
-  m_cellLeft->getCons()->subtractTuyere1D(m_face->getNormal(), m_face->getSurface(), m_cellLeft, numberPhases);
-}
-
-//***********************************************************************
-
-void CellInterface::associeModel(Model* model)
-{
-  m_mod = model;
 }
 
 //***********************************************************************
@@ -196,7 +189,7 @@ Face *CellInterface::getFace()
 
 Model* CellInterface::getMod() const
 {
-  return m_mod;
+  return model;
 }
 
 //***********************************************************************
@@ -341,8 +334,7 @@ void CellInterface::raffineCellInterfaceExterne(const int& nbCellsY, const int& 
           cellRef->getCellChild(1)->addCellInterface(m_cellInterfacesChildren[0]);
           m_cellRight->addCellInterface(m_cellInterfacesChildren[0]);
         }
-        m_cellInterfacesChildren[0]->associeModel(m_mod);
-        m_cellInterfacesChildren[0]->allocateSlopes(cellRef->getNumberPhases(), cellRef->getNumberTransports(), allocateSlopeLocal);
+        m_cellInterfacesChildren[0]->allocateSlopes(allocateSlopeLocal);
       }
 
       //Cell interface deja split -> on met seulement a jour les liaisons cells/cell interfaces
@@ -478,8 +470,7 @@ void CellInterface::raffineCellInterfaceExterne(const int& nbCellsY, const int& 
         //Association du model et des slopes
         //----------------------------------
         for (int i = 0; i < 2; i++) {
-          m_cellInterfacesChildren[i]->associeModel(m_mod);
-          m_cellInterfacesChildren[i]->allocateSlopes(cellRef->getNumberPhases(), cellRef->getNumberTransports(), allocateSlopeLocal);
+          m_cellInterfacesChildren[i]->allocateSlopes(allocateSlopeLocal);
         }
 
       }
@@ -811,8 +802,7 @@ void CellInterface::raffineCellInterfaceExterne(const int& nbCellsY, const int& 
       //Association du model et des slopes
       //----------------------------------
       for (int i = 0; i < 4; i++) {
-        m_cellInterfacesChildren[i]->associeModel(m_mod);
-        m_cellInterfacesChildren[i]->allocateSlopes(cellRef->getNumberPhases(), cellRef->getNumberTransports(), allocateSlopeLocal);
+        m_cellInterfacesChildren[i]->allocateSlopes(allocateSlopeLocal);
       }
 
     }

@@ -29,7 +29,6 @@
 //  If not, see <http://www.gnu.org/licenses/>.
 
 #include "QuantitiesAddPhys.h"
-#include <iostream>
 
 std::vector<Variable> variableNameSurfTens;
 std::vector<int> numPhaseSurfTens;

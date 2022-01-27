@@ -34,15 +34,15 @@
 
 GeometricalDomain::GeometricalDomain(std::string name, std::vector<Phase*> vecPhases, Mixture* mixture, std::vector<Transport> vecTransports, const int& physicalEntity) : m_name(name), m_physicalEntity(physicalEntity)
 {
-  m_numberPhases = vecPhases.size();
-  m_numberTransports = vecTransports.size();
-  m_vecPhases = new Phase*[m_numberPhases];
-  for (int k = 0; k < m_numberPhases; k++){
+  int numbPhases = vecPhases.size();
+  int numbTransports = vecTransports.size();
+  m_vecPhases = new Phase*[numbPhases];
+  for (int k = 0; k < numbPhases; k++){
     vecPhases[k]->allocateAndCopyPhase(&m_vecPhases[k]);
   }
   mixture->allocateAndCopyMixture(&m_mixture);
-  if (m_numberTransports > 0) { m_vecTransports = new Transport[m_numberTransports]; }
-  for (int k = 0; k < m_numberTransports; k++) {
+  if (numbTransports > 0) { m_vecTransports = new Transport[numbTransports]; }
+  for (int k = 0; k < numbTransports; k++) {
     m_vecTransports[k].setValue(vecTransports[k].getValue());
   }
 }
@@ -51,17 +51,17 @@ GeometricalDomain::GeometricalDomain(std::string name, std::vector<Phase*> vecPh
 
 GeometricalDomain::~GeometricalDomain()
 {
-  for (int k = 0; k < m_numberPhases; k++) {
+  for (int k = 0; k < numberPhases; k++) {
     delete m_vecPhases[k];
   }
   delete[] m_vecPhases;
   delete m_mixture;
-  if (m_numberTransports != 0) delete[] m_vecTransports;
+  if (numberTransports != 0) delete[] m_vecTransports;
 }
 
 //******************************************************************
 
-void GeometricalDomain::fillIn(Cell* cell, const int& numberPhases, const int& numberTransports) const
+void GeometricalDomain::fillIn(Cell* cell) const
 {
   //Test if the cell belongs to the geometrical domain
   bool belongs(true);

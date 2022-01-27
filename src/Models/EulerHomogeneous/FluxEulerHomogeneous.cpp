@@ -28,17 +28,11 @@
 //  along with ECOGEN (file LICENSE).  
 //  If not, see <http://www.gnu.org/licenses/>.
 
-#include <cmath>
 #include "FluxEulerHomogeneous.h"
 
 //***********************************************************************
 
 FluxEulerHomogeneous::FluxEulerHomogeneous() {}
-
-//***********************************************************************
-
-FluxEulerHomogeneous::FluxEulerHomogeneous(ModEulerHomogeneous *model) : m_model(model)
-{}
 
 //***********************************************************************
 
@@ -48,61 +42,61 @@ FluxEulerHomogeneous::~FluxEulerHomogeneous(){}
 
 void FluxEulerHomogeneous::printFlux() const
 {
-  std::cout << m_masse << " " << m_qdm.getX() << " " << m_energ << std::endl;
+  std::cout << m_mass << " " << m_momentum.getX() << " " << m_energ << std::endl;
 }
 
 //***********************************************************************
 
-void FluxEulerHomogeneous::addFlux(double coefA, const int& /*numberPhases*/)
+void FluxEulerHomogeneous::addFlux(double coefA)
 {
-    m_masse += coefA*static_cast<FluxEulerHomogeneous*> (fluxBuff)->m_masse;
-    m_qdm   += coefA*static_cast<FluxEulerHomogeneous*> (fluxBuff)->m_qdm;
+    m_mass += coefA*static_cast<FluxEulerHomogeneous*> (fluxBuff)->m_mass;
+    m_momentum   += coefA*static_cast<FluxEulerHomogeneous*> (fluxBuff)->m_momentum;
     m_energ += coefA*static_cast<FluxEulerHomogeneous*> (fluxBuff)->m_energ;
 }
 
 //***********************************************************************
 
-void FluxEulerHomogeneous::addFlux(Flux* flux, const int& /*numberPhases*/)
+void FluxEulerHomogeneous::addFlux(Flux* flux)
 {
-  m_masse += static_cast<FluxEulerHomogeneous*> (flux)->m_masse;
-  m_qdm   += static_cast<FluxEulerHomogeneous*> (flux)->m_qdm;
+  m_mass += static_cast<FluxEulerHomogeneous*> (flux)->m_mass;
+  m_momentum   += static_cast<FluxEulerHomogeneous*> (flux)->m_momentum;
   m_energ += static_cast<FluxEulerHomogeneous*> (flux)->m_energ;
 }
 
 //***********************************************************************
 
-void FluxEulerHomogeneous::subtractFlux(double coefA, const int& /*numberPhases*/)
+void FluxEulerHomogeneous::subtractFlux(double coefA)
 {
-    m_masse -= coefA*static_cast<FluxEulerHomogeneous*> (fluxBuff)->m_masse;
-    m_qdm   -= coefA*static_cast<FluxEulerHomogeneous*> (fluxBuff)->m_qdm;
+    m_mass -= coefA*static_cast<FluxEulerHomogeneous*> (fluxBuff)->m_mass;
+    m_momentum   -= coefA*static_cast<FluxEulerHomogeneous*> (fluxBuff)->m_momentum;
     m_energ -= coefA*static_cast<FluxEulerHomogeneous*> (fluxBuff)->m_energ;
 }
 
 //***********************************************************************
 
-void FluxEulerHomogeneous::multiply(double scalar, const int& /*numberPhases*/)
+void FluxEulerHomogeneous::multiply(double scalar)
 {
-    m_masse *= scalar;
-    m_qdm   *= scalar;
+    m_mass *= scalar;
+    m_momentum   *= scalar;
     m_energ *= scalar;
 }
 
 //***********************************************************************
 
-void FluxEulerHomogeneous::setBufferFlux(Cell& cell, const int& numberPhases)
+void FluxEulerHomogeneous::setBufferFlux(Cell& cell)
 {
-  static_cast<FluxEulerHomogeneous*> (fluxBuff)->buildCons(cell.getPhases(), numberPhases, cell.getMixture());
+  static_cast<FluxEulerHomogeneous*> (fluxBuff)->buildCons(cell.getPhases(), cell.getMixture());
 }
 
 //***********************************************************************
 
-void FluxEulerHomogeneous::buildCons(Phase** phases, const int& numberPhases, Mixture* mixture)
+void FluxEulerHomogeneous::buildCons(Phase** phases, Mixture* mixture)
 {
-  double energieInterne(0.);
+  double internalEnergy(0.);
   double rhok, alphak, ek;
 
   Phase* phase(0);
-  m_masse = 0.;
+  m_mass = 0.;
   m_energ = 0.;
 
   for (int k = 0; k < numberPhases; k++)
@@ -111,37 +105,37 @@ void FluxEulerHomogeneous::buildCons(Phase** phases, const int& numberPhases, Mi
     //Mixture density calculus
     alphak = phase->getAlpha();
     rhok = phase->getDensity();
-    m_masse += alphak * rhok;
+    m_mass += alphak * rhok;
     //Mixture specific internal energy calculus
     ek = phase->getEos()->computeEnergy(rhok, phase->getPressure());
-    energieInterne += alphak*rhok*ek;
+    internalEnergy += alphak*rhok*ek;
   }
-  m_qdm = m_masse*mixture->getVelocity();
-  m_energ = energieInterne + 0.5*m_masse*mixture->getVelocity().squaredNorm();
+  m_momentum = m_mass*mixture->getVelocity();
+  m_energ = internalEnergy + 0.5*m_mass*mixture->getVelocity().squaredNorm();
 }
 
 //***********************************************************************
 
-void FluxEulerHomogeneous::buildPrim(Phase** phases, Mixture* mixture, const int& numberPhases)
+void FluxEulerHomogeneous::buildPrim(Phase** phases, Mixture* mixture)
 {
   double pressure, Tsat, internalEnergy;
   
-  int liq(m_model->m_liq), vap(m_model->m_vap);
+  int liq(static_cast<ModEulerHomogeneous*> (model)->m_liq), vap(static_cast<ModEulerHomogeneous*> (model)->m_vap);
 
   //Simple extractions
-  mixture->setVelocity(m_qdm / m_masse);
+  mixture->setVelocity(m_momentum / m_mass);
   //Erasing small velocity variations
   if (std::fabs(mixture->getU()) < 1.e-8) mixture->setU(0.);
   if (std::fabs(mixture->getV()) < 1.e-8) mixture->setV(0.);
   if (std::fabs(mixture->getW()) < 1.e-8) mixture->setW(0.);
-  internalEnergy = m_energ / m_masse - 0.5*mixture->getVelocity().squaredNorm();
+  internalEnergy = m_energ / m_mass - 0.5*mixture->getVelocity().squaredNorm();
   
   //Pressure determination
-  pressure = mixture->computePressure(m_masse, internalEnergy, phases, mixture, numberPhases, liq, vap);
+  pressure = mixture->computePressure(m_mass, internalEnergy, phases, mixture, liq, vap);
   Tsat = mixture->computeTsat(phases[liq]->getEos(), phases[vap]->getEos(), pressure);
   phases[vap]->setDensity(phases[vap]->getEos()->computeDensitySaturation(pressure, Tsat, Tsat));
   phases[liq]->setDensity(phases[liq]->getEos()->computeDensitySaturation(pressure, Tsat, Tsat));
-  phases[vap]->setAlpha((m_masse - phases[liq]->getDensity())/(phases[vap]->getDensity()- phases[liq]->getDensity()));
+  phases[vap]->setAlpha((m_mass - phases[liq]->getDensity())/(phases[vap]->getDensity()- phases[liq]->getDensity()));
   phases[liq]->setAlpha(1. - phases[vap]->getAlpha());
   
   for (int k = 0; k < numberPhases; k++) {
@@ -151,49 +145,49 @@ void FluxEulerHomogeneous::buildPrim(Phase** phases, Mixture* mixture, const int
   //Mixture variables
   mixture->setPressure(pressure);
   mixture->setTemperature(Tsat);
-  mixture->computeMixtureVariables(phases, numberPhases);
+  mixture->computeMixtureVariables(phases);
   //Reconstruction of total energy from total energy equation
-  double totalEnergy(m_energ / m_masse);
+  double totalEnergy(m_energ / m_mass);
   mixture->setTotalEnergy(totalEnergy);
 }
 
 //***********************************************************************
 
-void FluxEulerHomogeneous::setToZero(const int& /*numberPhases*/)
+void FluxEulerHomogeneous::setToZero()
 {
-  m_masse = 0.;
-  m_qdm   = 0.;
+  m_mass = 0.;
+  m_momentum   = 0.;
   m_energ = 0.;
 }
 
 //***********************************************************************
 
-void FluxEulerHomogeneous::addTuyere1D(const Coord& normal, const double& surface, Cell* cell, const int& /*numberPhases*/)
+void FluxEulerHomogeneous::addFluxSmooth1D(double coefA, const Coord& normal, Cell* cell)
 {
-  double coef = normal.getX()*surface / cell->getElement()->getVolume();
-  Phase*  phase;
-  phase = cell->getPhase(0);
-
-  m_qdm.setX(m_qdm.getX() - phase->getPressure()*coef);
-}
-//***********************************************************************
-
-void FluxEulerHomogeneous::subtractTuyere1D(const Coord& normal, const double& surface, Cell* cell, const int& /*numberPhases*/)
-{
-  double coef = normal.getX()*surface / cell->getElement()->getVolume();
-  Phase*  phase;
-  phase = cell->getPhase(0);
-
-  m_qdm.setX(m_qdm.getX() + phase->getPressure()*coef);
-
+  Phase* phase(cell->getPhase(0));
+  coefA *= normal.getX(); // Switch sign for inflow boundary
+  // Contribution only on x-direction 
+  if (std::fabs(normal.getY()) > 1.e-6 || std::fabs(normal.getZ()) > 1.e-6) coefA = 0.;
+  m_momentum.setX(m_momentum.getX() - phase->getPressure()*coefA);
 }
 
 //***********************************************************************
 
-void FluxEulerHomogeneous::setCons(const Flux* cons, const int& /*numberPhases*/)
+void FluxEulerHomogeneous::substractFluxSmooth1D(double coefA, const Coord& normal, Cell* cell)
 {
-  m_masse = cons->getMasseMix();
-  m_qdm = cons->getQdm();
+  Phase* phase(cell->getPhase(0));
+  coefA *= normal.getX(); // Switch sign for inflow boundary
+  // Contribution only on x-direction
+  if (std::fabs(normal.getY()) > 1.e-6 || std::fabs(normal.getZ()) > 1.e-6) coefA = 0.;
+  m_momentum.setX(m_momentum.getX() + phase->getPressure()*coefA);
+}
+
+//***********************************************************************
+
+void FluxEulerHomogeneous::setCons(const Flux* cons)
+{
+  m_mass = cons->getMassMix();
+  m_momentum = cons->getMomentum();
   m_energ = cons->getEnergyMix();
 }
 

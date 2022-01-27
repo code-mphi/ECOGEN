@@ -36,17 +36,18 @@ using namespace tinyxml2;
 
 //***************************************************************
 
-OutputProbeGNU::OutputProbeGNU(std::string casTest, std::string run, XMLElement* element, std::string fileName, Input *entree)
+OutputProbeGNU::OutputProbeGNU(std::string casTest, std::string run, XMLElement* element, std::string fileName, Input *entree) : 
+  OutputGNU(element)
 {
   try {
     //Attributes settings
-    m_ecritBinaire = false;
+    m_writeBinary = false;
     m_simulationName = casTest;
     m_fileNameResults = element->Attribute("name");
-    m_fileNameVisu = "visualization" + m_fileNameResults + ".gnu";
+    m_fileNameVisu = "plot_" + m_fileNameResults + ".gnu";
     m_folderOutput = config.getWorkFolder() + "results/" + run + "/probes/";
 	  m_folderScriptGnuplot = "";
-    m_donneesSeparees = 0;
+    m_splitData = 0;
     m_numFichier = 0;
     m_input = entree;
     m_run = m_input->getRun();
@@ -149,7 +150,7 @@ Cell* OutputProbeGNU::locateProbeInAMRSubMesh(std::vector<Cell*>* cells, const i
 
 //***********************************************************************
 
-void OutputProbeGNU::prepareSortieSpecifique()
+void OutputProbeGNU::initializeSpecificOutput()
 {
   //settings
   m_nextAcq = 0.;
@@ -162,8 +163,13 @@ void OutputProbeGNU::prepareSortieSpecifique()
     if (m_possessesProbe[rankCpu]) {
       //Creating output file
       std::ofstream fileStream;
-      std::string file = m_folderOutput + creationNameFichierGNU(m_fileNameResults.c_str(), -1, -1, -1);
-      fileStream.open(file.c_str());
+      std::string file = m_folderOutput + createFilenameGNU(m_fileNameResults.c_str(), -1, -1, -1);
+      if (m_run->m_restartSimulation > 0) {
+        fileStream.open(file.c_str(), std::ios_base::app);
+      }
+      else {
+        fileStream.open(file.c_str());
+      }
       fileStream.close();
 
       //Gnuplot script printing for visualization
@@ -175,11 +181,12 @@ void OutputProbeGNU::prepareSortieSpecifique()
 
 //***********************************************************************
 
-void OutputProbeGNU::ecritSolution(Mesh* /*mesh*/, std::vector<Cell*>* /*cellsLvl*/)
+void OutputProbeGNU::writeResults(Mesh* /*mesh*/, std::vector<Cell*>* /*cellsLvl*/)
 {
   std::ofstream fileStream;
-  std::string file = m_folderOutput + creationNameFichierGNU(m_fileNameResults.c_str(), -1, -1, -1);
+  std::string file = m_folderOutput + createFilenameGNU(m_fileNameResults.c_str(), -1, -1, -1);
   fileStream.open(file.c_str(), std::ios_base::app);
+  if (m_precision != 0) fileStream.precision(m_precision);
   fileStream << m_run->m_physicalTime << " ";
 
   //Printing solution with AMR treatement if necessary

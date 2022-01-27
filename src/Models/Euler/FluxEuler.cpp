@@ -28,14 +28,12 @@
 //  along with ECOGEN (file LICENSE).  
 //  If not, see <http://www.gnu.org/licenses/>.
 
-#include <cmath>
 #include "FluxEuler.h"
-
 
 //***********************************************************************
 
 FluxEuler::FluxEuler() :
-  m_masse(0.), m_qdm(0.), m_energ(0.)
+  m_mass(0.), m_momentum(0.), m_energ(0.)
 {}
 
 //***********************************************************************
@@ -46,186 +44,185 @@ FluxEuler::~FluxEuler(){}
 
 void FluxEuler::printFlux() const
 {
-  std::cout << m_masse << " " << m_qdm.getX() << " " << m_energ << std::endl;
+  std::cout << m_mass << " " << m_momentum.getX() << " " << m_energ << std::endl;
 }
 
 //***********************************************************************
 
-void FluxEuler::addFlux(double coefA, const int& /*numberPhases*/)
+void FluxEuler::addFlux(double coefA)
 {
-  m_masse += coefA*static_cast<FluxEuler*> (fluxBuff)->m_masse;
-  m_qdm   += coefA*static_cast<FluxEuler*> (fluxBuff)->m_qdm;
+  m_mass += coefA*static_cast<FluxEuler*> (fluxBuff)->m_mass;
+  m_momentum   += coefA*static_cast<FluxEuler*> (fluxBuff)->m_momentum;
   m_energ += coefA*static_cast<FluxEuler*> (fluxBuff)->m_energ;
 }
 
 //***********************************************************************
 
-void FluxEuler::addFlux(Flux* flux, const int& /*numberPhases*/)
+void FluxEuler::addFlux(Flux* flux)
 {
-  m_masse += static_cast<FluxEuler*> (flux)->m_masse;
-  m_qdm   += static_cast<FluxEuler*> (flux)->m_qdm;
+  m_mass += static_cast<FluxEuler*> (flux)->m_mass;
+  m_momentum   += static_cast<FluxEuler*> (flux)->m_momentum;
   m_energ += static_cast<FluxEuler*> (flux)->m_energ;
 }
 
 //***********************************************************************
 
-void FluxEuler::subtractFlux(double coefA, const int& /*numberPhases*/)
+void FluxEuler::subtractFlux(double coefA)
 {
-    m_masse -= coefA*static_cast<FluxEuler*> (fluxBuff)->m_masse;
-    m_qdm   -= coefA*static_cast<FluxEuler*> (fluxBuff)->m_qdm;
+    m_mass -= coefA*static_cast<FluxEuler*> (fluxBuff)->m_mass;
+    m_momentum   -= coefA*static_cast<FluxEuler*> (fluxBuff)->m_momentum;
     m_energ -= coefA*static_cast<FluxEuler*> (fluxBuff)->m_energ;
 }
 
 //***********************************************************************
 
-void FluxEuler::multiply(double scalar, const int& /*numberPhases*/)
+void FluxEuler::multiply(double scalar)
 {
-    m_masse *= scalar;
-    m_qdm   *= scalar;
+    m_mass *= scalar;
+    m_momentum   *= scalar;
     m_energ *= scalar;
 }
 
 //***********************************************************************
 
-void FluxEuler::setBufferFlux(Cell& cell, const int& numberPhases)
+void FluxEuler::setBufferFlux(Cell& cell)
 {
-  static_cast<FluxEuler*> (fluxBuff)->buildCons(cell.getPhases(), numberPhases, cell.getMixture());
+  static_cast<FluxEuler*> (fluxBuff)->buildCons(cell.getPhases(), cell.getMixture());
 }
 
 //***********************************************************************
 
-void FluxEuler::buildCons(Phase** phases, const int& /*numberPhases*/, Mixture* /*mixture*/)
+void FluxEuler::buildCons(Phase** phases, Mixture* /*mixture*/)
 {
   Phase* phase(phases[0]);
   
-  m_masse = phase->getDensity();
-  m_qdm = m_masse*phase->getVelocity();
-  m_energ = m_masse*phase->getTotalEnergy();
+  m_mass = phase->getDensity();
+  m_momentum = m_mass*phase->getVelocity();
+  m_energ = m_mass*phase->getTotalEnergy();
 }
 
 //***********************************************************************
 
-void FluxEuler::buildPrim(Phase** phases, Mixture* /*mixture*/, const int& /*numberPhases*/)
+void FluxEuler::buildPrim(Phase** phases, Mixture* /*mixture*/)
 {
-  double pressure(0.), energieInterne(0.), totalEnergy(0.), soundSpeed(0.), temperature(0.);
+  double pressure(0.), internalEnergy(0.), totalEnergy(0.), soundSpeed(0.), temperature(0.);
   Phase* phase(phases[0]);
   Eos* eos(phase->getEos());
 
-  phase->setDensity(m_masse);
-  phase->setVelocity(m_qdm.getX() / m_masse, m_qdm.getY() / m_masse, m_qdm.getZ() / m_masse);
+  phase->setDensity(m_mass);
+  phase->setVelocity(m_momentum.getX() / m_mass, m_momentum.getY() / m_mass, m_momentum.getZ() / m_mass);
   //Erasing small velocity variations
   if (std::fabs(phase->getU()) < 1.e-8) phase->setU(0.);
   if (std::fabs(phase->getV()) < 1.e-8) phase->setV(0.);
   if (std::fabs(phase->getW()) < 1.e-8) phase->setW(0.);
 
-  totalEnergy = m_energ / m_masse;
+  totalEnergy = m_energ / m_mass;
   phase->setTotalEnergy(totalEnergy);
-  energieInterne = totalEnergy - 0.5*phase->getVelocity().squaredNorm();
-  phase->setEnergy(energieInterne);
-  pressure = eos->computePressure(m_masse, energieInterne);
+  internalEnergy = totalEnergy - 0.5*phase->getVelocity().squaredNorm();
+  phase->setEnergy(internalEnergy);
+  pressure = eos->computePressure(m_mass, internalEnergy);
   phase->setPressure(pressure);
-  soundSpeed = eos->computeSoundSpeed(m_masse, pressure);
+  soundSpeed = eos->computeSoundSpeed(m_mass, pressure);
   phase->setSoundSpeed(soundSpeed);
   
-  temperature = eos->computeTemperature(m_masse, pressure);
+  temperature = eos->computeTemperature(m_mass, pressure);
   phase->setTemperature(temperature);
 
 }
 
 //***********************************************************************
 
-void FluxEuler::setToZero(const int& /*numberPhases*/)
+void FluxEuler::setToZero()
 {
-  m_masse = 0.;
-  m_qdm   = 0.;
+  m_mass = 0.;
+  m_momentum   = 0.;
   m_energ = 0.;
 }
 
 //***********************************************************************
 
-void FluxEuler::addTuyere1D(const Coord& normal, const double& surface, Cell* cell, const int& /*numberPhases*/)
+void FluxEuler::addFluxSmooth1D(double coefA, const Coord& normal, Cell* cell)
 {
-  double coef = normal.getX()*surface / cell->getElement()->getVolume();
-  Phase*  phase;
-  phase = cell->getPhase(0);
-
-  m_qdm.setX(m_qdm.getX() - phase->getPressure()*coef);
+  Phase* phase(cell->getPhase(0));
+  coefA *= normal.getX(); // Switch sign for inflow boundary
+  // Contribution only on x-direction 
+  if (std::fabs(normal.getY()) > 1.e-6 || std::fabs(normal.getZ()) > 1.e-6) coefA = 0.;
+  m_momentum.setX(m_momentum.getX() - phase->getPressure()*coefA);
 }
 
 //***********************************************************************
 
-void FluxEuler::subtractTuyere1D(const Coord& normal, const double& surface, Cell* cell, const int& /*numberPhases*/)
+void FluxEuler::substractFluxSmooth1D(double coefA, const Coord& normal, Cell* cell)
 {
-  double coef = normal.getX()*surface / cell->getElement()->getVolume();
-  Phase*  phase;
-  phase = cell->getPhase(0);
-
-  m_qdm.setX(m_qdm.getX() + phase->getPressure()*coef);
-
+  Phase* phase(cell->getPhase(0));
+  coefA *= normal.getX(); // Switch sign for inflow boundary
+  // Contribution only on x-direction
+  if (std::fabs(normal.getY()) > 1.e-6 || std::fabs(normal.getZ()) > 1.e-6) coefA = 0.;
+  m_momentum.setX(m_momentum.getX() + phase->getPressure()*coefA);
 }
 
 //***********************************************************************
 
-void FluxEuler::addSymmetricTerms(Phase** phases, Mixture* /*mixture*/, const int& /*numberPhases*/, const double& r, const double& v)
+void FluxEuler::addSymmetricTerms(Phase** phases, Mixture* /*mixture*/, const double& r, const double& v)
 {
 	Phase* phase(phases[0]);
-	m_masse -= phase->getDensity() * v / r;
-	m_qdm -= phase->getDensity()* phase->getVelocity() * v / r;
+	m_mass -= phase->getDensity() * v / r;
+	m_momentum -= phase->getDensity()* phase->getVelocity() * v / r;
 	m_energ -= (phase->getDensity() * phase->getTotalEnergy() + phase->getPressure()) * v / r;
 }
 
 //***********************************************************************
 
-void FluxEuler::prepSourceTermsHeating(const int& /*numberPhases*/, const double& q)
+void FluxEuler::prepSourceTermsHeating(const double& q)
 {
   m_energ = q;
 
   // Null source components
-  m_masse = 0.;
-  m_qdm = 0.;
+  m_mass = 0.;
+  m_momentum = 0.;
 }
 
 //***********************************************************************
 
-void FluxEuler::prepSourceTermsGravity(const int& /*numberPhases*/, const Coord& g)
+void FluxEuler::prepSourceTermsGravity(const Coord& g)
 {
   //Mass and velocity extraction
-  double rho(m_masse);
-  Coord u(m_qdm/rho);
+  double rho(m_mass);
+  Coord u(m_momentum/rho);
 
   // Gravity force and work
-  m_qdm = rho * g;
+  m_momentum = rho * g;
   m_energ = rho * Coord::scalarProduct(g, u);
 
   // Null source component
-  m_masse = 0.;
+  m_mass = 0.;
 }
 
 //***********************************************************************
 
-void FluxEuler::prepSourceTermsMRF(Cell* cell, const int& /*numberPhases*/, const Coord& omega)
+void FluxEuler::prepSourceTermsMRF(Cell* cell, const Coord& omega)
 {
   //Mass and velocity extraction
-  double rho(m_masse);
-  Coord u(m_qdm/rho);
+  double rho(m_mass);
+  Coord u(m_momentum/rho);
 
   //Coriolis acceleration
-  m_qdm = -2.*rho*Coord::crossProduct(omega, u);
+  m_momentum = -2.*rho*Coord::crossProduct(omega, u);
   //Centrifugal acceleration
-  m_qdm -= rho*Coord::crossProduct(omega, Coord::crossProduct(omega, cell->getPosition())) ;
+  m_momentum -= rho*Coord::crossProduct(omega, Coord::crossProduct(omega, cell->getPosition())) ;
   //Centrifugal acceleration work
-  m_energ = Coord::scalarProduct(u, m_qdm);
+  m_energ = Coord::scalarProduct(u, m_momentum);
 
   // Null source components
-  m_masse = 0.;
+  m_mass = 0.;
 }
 
 //***********************************************************************
 
-void FluxEuler::setCons(const Flux* cons, const int& /*numberPhases*/)
+void FluxEuler::setCons(const Flux* cons)
 {
-  m_masse = cons->getMasseMix();
-  m_qdm = cons->getQdm();
+  m_mass = cons->getMassMix();
+  m_momentum = cons->getMomentum();
   m_energ = cons->getEnergyMix();
 }
 

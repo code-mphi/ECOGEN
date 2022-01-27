@@ -30,12 +30,12 @@
 
 #include "FaceSegment.h"
 
-const int FaceSegment::NOMBRENOEUDS = 2;
+const int FaceSegment::NUMBERNODES = 2;
 
 //***********************************************************************
 
 FaceSegment::FaceSegment(const int& numNoeud1, const int& numNoeud2, int tri) :
-FaceNS(NOMBRENOEUDS)
+FaceNS(NUMBERNODES)
 {
   m_numNoeuds[0] = numNoeud1;
   m_numNoeuds[1] = numNoeud2;

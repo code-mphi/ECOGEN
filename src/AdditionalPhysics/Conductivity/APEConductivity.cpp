@@ -28,9 +28,6 @@
 //  along with ECOGEN (file LICENSE).  
 //  If not, see <http://www.gnu.org/licenses/>.
 
-#include <iostream>
-#include <cmath>
-#include <algorithm>
 #include "APEConductivity.h"
 
 //***********************************************************************
@@ -49,12 +46,12 @@ APEConductivity::~APEConductivity() {}
 
 void APEConductivity::addQuantityAddPhys(Cell* cell)
 {
-  cell->getVecQuantitiesAddPhys().push_back(new QAPConductivity(this, cell->getNumberPhases()));
+  cell->getVecQuantitiesAddPhys().push_back(new QAPConductivity(this));
 }
 
 //***********************************************************************
 
-void APEConductivity::solveFluxAddPhys(CellInterface* cellInterface, const int& /*numberPhases*/)
+void APEConductivity::solveFluxAddPhys(CellInterface* cellInterface)
 {
   m_normal = cellInterface->getFace()->getNormal();
   m_tangent = cellInterface->getFace()->getTangent();
@@ -75,7 +72,7 @@ void APEConductivity::solveFluxAddPhys(CellInterface* cellInterface, const int& 
 
 //***********************************************************************
 
-void APEConductivity::solveFluxAddPhysBoundary(CellInterface* cellInterface, const int& /*numberPhases*/)
+void APEConductivity::solveFluxAddPhysBoundary(CellInterface* cellInterface)
 {
   m_normal = cellInterface->getFace()->getNormal();
   m_tangent = cellInterface->getFace()->getTangent();
@@ -119,8 +116,8 @@ void APEConductivity::solveFluxConductivityInner(const Coord& gradTLeft, const C
   dTdx = (gradTLeft.getX() + gradTRight.getX()) / 2.;
 
   // Compute heat fluxes
-  static_cast<FluxEuler*> (fluxBuff)->m_masse = 0.;
-  static_cast<FluxEuler*> (fluxBuff)->m_qdm = 0.;
+  static_cast<FluxEuler*> (fluxBuff)->m_mass = 0.;
+  static_cast<FluxEuler*> (fluxBuff)->m_momentum = 0.;
   static_cast<FluxEuler*> (fluxBuff)->m_energ = - m_lambda * dTdx;
 }
 
@@ -146,8 +143,8 @@ void APEConductivity::solveFluxConductivityWallImposedTemp(CellInterface *cellIn
   double dTdx((tempWall - temperatureLeft) / distLeft);
 
   // Compute heat fluxes
-  static_cast<FluxEuler*> (fluxBuff)->m_masse = 0.;
-  static_cast<FluxEuler*> (fluxBuff)->m_qdm = 0.;
+  static_cast<FluxEuler*> (fluxBuff)->m_mass = 0.;
+  static_cast<FluxEuler*> (fluxBuff)->m_momentum = 0.;
   static_cast<FluxEuler*> (fluxBuff)->m_energ = - m_lambda * dTdx;
 }
 
@@ -159,8 +156,8 @@ void APEConductivity::solveFluxConductivityWallImposedFlux(CellInterface* cellIn
   double flux(cellInterface->getBoundaryHeatQuantity());
 
   // Compute heat fluxes
-  static_cast<FluxEuler*> (fluxBuff)->m_masse = 0.;
-  static_cast<FluxEuler*> (fluxBuff)->m_qdm = 0.;
+  static_cast<FluxEuler*> (fluxBuff)->m_mass = 0.;
+  static_cast<FluxEuler*> (fluxBuff)->m_momentum = 0.;
   static_cast<FluxEuler*> (fluxBuff)->m_energ = flux;
 }
 
@@ -169,14 +166,14 @@ void APEConductivity::solveFluxConductivityWallImposedFlux(CellInterface* cellIn
 void APEConductivity::solveFluxConductivityOther() const
 {
   // To avoid bug when not managed or for adiabatic wall
-  static_cast<FluxEuler*> (fluxBuff)->m_masse = 0.;
-  static_cast<FluxEuler*> (fluxBuff)->m_qdm = 0.;
+  static_cast<FluxEuler*> (fluxBuff)->m_mass = 0.;
+  static_cast<FluxEuler*> (fluxBuff)->m_momentum = 0.;
   static_cast<FluxEuler*> (fluxBuff)->m_energ = 0.;
 }
 
 //***********************************************************************
 
-void APEConductivity::communicationsAddPhys(const int& /*numberPhases*/, const int& dim, const int& lvl)
+void APEConductivity::communicationsAddPhys(const int& dim, const int& lvl)
 {
   parallel.communicationsVector(QPA, dim, lvl, m_numQPA, 0); //m_gradT
 }

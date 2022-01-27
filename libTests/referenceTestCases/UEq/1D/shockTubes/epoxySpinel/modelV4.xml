@@ -3,5 +3,5 @@
 	<flowModel name="VelocityEq" numberPhases="2" alphaNull="false"/>
 	<EOS name="SG_epoxy.xml"/>
 	<EOS name="SG_spinel.xml"/>
-<!-- 	<relaxation type="P"/> -->
+	<relaxation type="P" speed="infinite"/>
 </model>

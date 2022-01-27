@@ -3,7 +3,7 @@
 	<run>euler1DSphericalExplosion</run>
 	<outputMode format="XML" binary="false" precision="10"/>
 	<timeControlMode iterations="true">
-<iterations number="10" iterFreq="10"/>
+	<iterations number="10" iterFreq="10"/>
 		<physicalTime totalTime="0.25" timeFreq="0.05"/>
 	</timeControlMode>
 	<computationControl CFL="0.7"/>

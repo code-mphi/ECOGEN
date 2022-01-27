@@ -59,16 +59,16 @@ void BoundCondNonReflecting::createBoundary(TypeMeshContainer<CellInterface*>& c
 
 //****************************************************************************
 
-void BoundCondNonReflecting::solveRiemannBoundary(Cell& cellLeft, const int& numberPhases, const double& dxLeft, double& dtMax)
+void BoundCondNonReflecting::solveRiemannBoundary(Cell& cellLeft, const double& dxLeft, double& dtMax)
 {
-  m_mod->solveRiemannIntern(cellLeft, cellLeft, numberPhases, dxLeft, dxLeft, dtMax, m_massflow, m_powerFlux);
+  model->solveRiemannIntern(cellLeft, cellLeft, dxLeft, dxLeft, dtMax, m_boundData);
 }
 
 //****************************************************************************
 
-void BoundCondNonReflecting::solveRiemannTransportBoundary(Cell& cellLeft, const int&  numberTransports) const
+void BoundCondNonReflecting::solveRiemannTransportBoundary(Cell& cellLeft) const
 {
-	m_mod->solveRiemannTransportIntern(cellLeft, cellLeft, numberTransports);
+	model->solveRiemannTransportIntern(cellLeft, cellLeft);
 }
 
 //****************************************************************************

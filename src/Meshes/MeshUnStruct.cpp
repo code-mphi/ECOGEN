@@ -28,8 +28,6 @@
 //  along with ECOGEN (file LICENSE).  
 //  If not, see <http://www.gnu.org/licenses/>.
 
-#include <cmath>
-#include <algorithm>
 #include "MeshUnStruct.h"
 #include "../Errors.h"
 
@@ -100,11 +98,6 @@ std::string MeshUnStruct::readMeshFileExtension(const std::string& meshFile)
 
 void MeshUnStruct::attributLimites(std::vector<BoundCond*>& boundCond)
 {
-//JC//Q// If the user specifies an high number for a defined boundary but not specifies numbers for other boundaries
-		// you will fill other boundaries with non-reflecting.
-		// But if you have a number of bc lower than the bc to imposed on the geometry 
-		// you will not attribute non-reflecting to these bc
-
   // Look for highest boundary physic number
   int maxNumLim(0); 
   for (unsigned int i = 0; i < boundCond.size(); i++) {
@@ -150,203 +143,58 @@ int MeshUnStruct::initializeGeometrie(TypeMeshContainer<Cell*>& cells, TypeMeshC
 void MeshUnStruct::writeMeshInfoData() const
 {
 	std::cout << "  --------------------------" << std::endl;
-	std::cout << "    MESH INFORMATIONS :" << std::endl;
+	std::cout << "    MESH INFORMATIONS:" << std::endl;
 	std::cout << "  --------------------------" << std::endl;
-	std::cout << "    mesh nodes number : " << m_numberNodes << std::endl;
-	std::cout << "    ~~~~~~~~~~~~~~~~~~~~" << std::endl;
+	std::cout << "    Number of mesh nodes: " << m_numberNodes << std::endl;
+	std::cout << "    ~~~~~~~~~~~~~~~~~~~~~" << std::endl;
 	if (m_numberElements0D != 0)
 	{
-		std::cout << std::endl << "    0D elements number : " << m_numberElements0D << std::endl;
-		std::cout << "    ~~~~~~~~~~~~~~~~~~~~" << std::endl;
-		if (m_numberPoints != 0) { std::cout << "      - number vertex : " << m_numberPoints << std::endl; }
+		std::cout << std::endl;
+    std::cout << "    Number of 0D elements: " << m_numberElements0D << std::endl;
+		std::cout << "    ~~~~~~~~~~~~~~~~~~~~~~" << std::endl;
+		if (m_numberPoints != 0) { std::cout << "      - number of vertices: " << m_numberPoints << std::endl; }
 	}
 	if (m_numberElements1D != 0)
 	{
-		std::cout << std::endl << "    1D elements number : " << m_numberElements1D << std::endl;
-		std::cout << "    ~~~~~~~~~~~~~~~~~~~~" << std::endl;
-		if (m_numberSegments != 0) { std::cout << "      - number segments : " << m_numberSegments << std::endl; }
+		std::cout << std::endl; 
+    std::cout << "    Number of 1D elements: " << m_numberElements1D << std::endl;
+		std::cout << "    ~~~~~~~~~~~~~~~~~~~~~~" << std::endl;
+		if (m_numberSegments != 0) { std::cout << "      - number of segments: " << m_numberSegments << std::endl; }
 	}
 	if (m_numberElements2D != 0)
 	{
-		std::cout << std::endl << "    2D elements number : " << m_numberElements2D << std::endl;
-		std::cout << "    ~~~~~~~~~~~~~~~~~~~~" << std::endl;
-		if (m_numberTriangles != 0) { std::cout << "      - number triangles   : " << m_numberTriangles << std::endl; }
-		if (m_numberQuadrangles != 0) { std::cout << "      - number quadrangles : " << m_numberQuadrangles << std::endl; }
-		std::cout << "      Total surface : " << m_totalSurface << " m2" << std::endl;
+		std::cout << std::endl;
+    std::cout << "    Number of 2D elements: " << m_numberElements2D << std::endl;
+		std::cout << "    ~~~~~~~~~~~~~~~~~~~~~~" << std::endl;
+		if (m_numberTriangles != 0) { std::cout << "      - number of triangles: " << m_numberTriangles << std::endl; }
+		if (m_numberQuadrangles != 0) { std::cout << "      - number of quadrangles: " << m_numberQuadrangles << std::endl; }
+		std::cout << "      Total surface: " << m_totalSurface << " m2" << std::endl;
 	}
 	if (m_numberElements3D != 0)
 	{
-		std::cout << std::endl << "    3D elements number : " << m_numberElements3D << std::endl;
-		std::cout << "    ~~~~~~~~~~~~~~~~~~~~" << std::endl;
-		if (m_numberTetrahedrons != 0) { std::cout << "      - number tetraedres   : " << m_numberTetrahedrons << std::endl; }
-		if (m_numberPyramids != 0) { std::cout << "      - number pyramides    : " << m_numberPyramids << std::endl; }
-		if (m_numberHexahedrons != 0) { std::cout << "      - number hexaedres    : " << m_numberHexahedrons << std::endl; }
-		std::cout << "      Total volume : " << m_totalVolume << " m3" << std::endl;
+		std::cout << std::endl;
+    std::cout << "    Number of 3D elements: " << m_numberElements3D << std::endl;
+		std::cout << "    ~~~~~~~~~~~~~~~~~~~~~~" << std::endl;
+		if (m_numberTetrahedrons != 0) { std::cout << "      - number of tetrahedrons: " << m_numberTetrahedrons << std::endl; }
+		if (m_numberPyramids != 0) { std::cout << "      - number of pyramids: " << m_numberPyramids << std::endl; }
+		if (m_numberHexahedrons != 0) { std::cout << "      - number of hexahedrons: " << m_numberHexahedrons << std::endl; }
+		std::cout << "      Total volume: " << m_totalVolume << " m3" << std::endl;
 	}
-	std::cout << std::endl << "... READING MESH FILE COMPLETE " << std::endl;
+  // Read reference length used for CFL criterion
+  double min(1.e5), max(0.), lref(0.);
+  for (int i = 0; i < m_numberCellsCalcul; i++) {
+    lref = m_elements[i + m_numberBoundFaces]->getLCFL();
+    min = std::min(min, lref);
+    max = std::max(max, lref);
+  }
+  std::cout << std::endl;
+  std::cout << "    Reference length: " << std::endl;
+  std::cout << "    ~~~~~~~~~~~~~~~~~" << std::endl;
+  std::cout << "      - min = " << min << std::endl;
+  std::cout << "      - max = " << max << std::endl;
+
+  std::cout << std::endl << "... READING MESH FILE COMPLETE " << std::endl;
 }
-
-//***********************************************************************
-
-// void MeshUnStruct::readGmshV4(std::vector<ElementNS*>** voisinsNoeuds, std::ifstream &meshFile)
-// {
-//   try {
-//     std::string currentLine;
-
-//     //1) Filling m_nodes array
-//     //-------------------------
-//     { 
-//       std::cout << "  1/Mesh nodes reading ...";
-//       while (currentLine != "$Nodes") {
-//         getline(meshFile, currentLine);
-//         if (meshFile.eof()) { throw ErrorECOGEN("Nodes block not found in mesh file", __FILE__, __LINE__); }
-//       }
-//       int numEntityBlocks;
-//       { std::stringstream lineTotreat;
-//       getline(meshFile, currentLine); lineTotreat << currentLine;
-//       lineTotreat >> numEntityBlocks >> m_numberNodes; }
-//       m_nodes = new Coord[m_numberNodes];
-//       //Allocate node array
-//       *voisinsNoeuds = new std::vector<ElementNS*>[m_numberNodes];
-//       //Reading nodes
-//       int tagEntity, dimEntity, parametric, numNodesEntity, tag; double x, y, z;
-//       for (int e = 0; e < numEntityBlocks; e++) { //Reading entity
-//         {std::stringstream lineTotreat;
-//         getline(meshFile, currentLine); lineTotreat << currentLine;
-//         lineTotreat >> tagEntity >> dimEntity >> parametric >> numNodesEntity; }
-//         for (int i = 0; i < numNodesEntity; i++) {
-//           std::stringstream lineTotreat;
-//           getline(meshFile, currentLine); lineTotreat << currentLine;
-//           lineTotreat >> tag >> x >> y >> z;
-//           m_nodes[i].setXYZ(x, y, z);
-//         }
-//       }
-//       getline(meshFile, currentLine);
-//       if (currentLine != "$EndNodes") { throw ErrorECOGEN("Nodes block not completely read in mesh file", __FILE__, __LINE__); }
-//       std::cout << "OK" << std::endl;
-//     }
-
-//     //2) 1D/2D/3D elements are stored in m_elements array / counting
-//     //--------------------------------------------------------------
-//     {
-//       std::cout << "  2/0D/1D/2D/3D elements reading ...";
-//       while (currentLine != "$Elements") {
-//         getline(meshFile, currentLine);
-//         if (meshFile.eof()) { throw ErrorECOGEN("Elements block not found in mesh file", __FILE__, __LINE__); }
-//       }
-//       int numEntityBlocks;
-//       { std::stringstream lineTotreat;
-//       getline(meshFile, currentLine); lineTotreat << currentLine;
-//       lineTotreat >> numEntityBlocks >> m_numberElements; }
-//       //Allocate elements array
-//       m_elements = new ElementNS*[m_numberElements];
-//       //Readin elements and geometrical properties attributions
-//       m_numberElements1D = 0, m_numberElements2D = 0, m_numberElements3D = 0;
-//       int posDebutElement = static_cast<int>(meshFile.tellg()); //reperage debut des elements pour retour rapide
-//       int noeudG;
-//       int tagEntity, dimEntity, typeEle, numElementsEntity;
-//       int numElement(0);
-//       for (int e = 0; e < numEntityBlocks; e++) { //Reading entity
-//         {std::stringstream lineTotreat;
-//         getline(meshFile, currentLine); lineTotreat << currentLine;
-//         lineTotreat >> tagEntity >> dimEntity >> typeEle >> numElementsEntity; }
-//         for (int i = 0; i < numElementsEntity; i++) {
-//           this->lectureElementGmshV4(m_nodes, meshFile, &m_elements[numElement], typeEle,numElement,tagEntity);
-//           //Les tags entity ne sont pas bon ni l'ordonancement des faces et cellules => a revoir
-//           if (m_elements[numElement]->getTypeGmsh() == 15) { m_numberElements0D++; }
-//           else if (m_elements[numElement]->getTypeGmsh() == 1) { m_numberElements1D++; }
-//           else if (m_elements[numElement]->getTypeGmsh() <= 3) { m_numberElements2D++; m_totalSurface += m_elements[i]->getVolume(); }
-//           else if (m_elements[numElement]->getTypeGmsh() <= 7) { m_numberElements3D++; m_totalVolume += m_elements[i]->getVolume(); }
-//           else { throw ErrorECOGEN("Type element du .msh non gere dans ECOGEN", __FILE__, __LINE__); }
-//           //Attribution element i voisin pour les noeuds concernes (Ordre 2 muiltislopes)
-//           for (int n = 0; n < m_elements[numElement]->getNumberNoeuds(); n++) {
-//             noeudG = m_elements[numElement]->getNumNoeud(n);
-//             (*voisinsNoeuds)[noeudG].push_back(m_elements[numElement]);
-//           }
-//           numElement++;
-//         }
-//       }
-//       m_numberInnerElements = m_numberElements;
-//       getline(meshFile, currentLine);
-//       if (currentLine != "$EndElements") { throw ErrorECOGEN("Elements block not completely read in mesh file", __FILE__, __LINE__); }
-//       std::cout << "OK" << std::endl;
-//     }
-
-//   }
-//   catch (ErrorECOGEN &) { throw; }
-// }
-
-
-//***********************************************************************
-
-// void MeshUnStruct::lectureElementGmshV4(const Coord* TableauNoeuds, std::ifstream &fichierMesh, ElementNS** element, const int& typeElement, int& indiceElement, const int&  physicalEntity)
-// {
-//   try {
-//     //1)Number of vertex affectation
-//     //------------------------------
-//     switch (typeElement)
-//     {
-//     case 1: //segment (deux points)
-//       *element = new ElementSegment;
-//       m_numberSegments++;
-//       break;
-//     case 2: //triangle (trois points)
-//       *element = new ElementTriangle;
-//       m_numberTriangles++;
-//       break;
-//     case 3: //Quadrangle (quatre points)
-//       *element = new ElementQuadrangle;
-//       m_numberQuadrangles++;
-//       break;
-//     case 4: //Tetrahedron (quatre points)
-//       *element = new ElementTetrahedron;
-//       m_numberTetrahedrons++;
-//       break;
-//     case 7: //Pyramid quadrangulaire (cinq points)
-//       *element = new ElementPyramid;
-//       m_numberPyramids++;
-//       break;
-//     case 15: //Point (un vertex)
-//       *element = new ElementPoint;
-//       m_numberPoints++;
-//       break;
-//     case 5: //Hexahedron (huit points)
-//       *element = new ElementHexahedron;
-//       m_numberHexahedrons++;
-//       break;
-//     case 6: //Prism (six points)
-//       *element = new ElementPrism;
-//       m_numberHexahedrons++;
-//       break;
-//     default:
-//       throw ErrorECOGEN("Element type unknown in mesh file", __FILE__, __LINE__);
-//       break;
-//     } //Fin switch typeElement
-
-//     //2) Element building / properties filling
-//     //----------------------------------------
-//     int noeudCourant, tag;
-//     int* numNoeud = new int[(*element)->getNumberNoeuds()];
-//     Coord* noeud = new Coord[(*element)->getNumberNoeuds()];
-//     std::string currentLine;
-//     std::stringstream lineTotreat;
-//     getline(fichierMesh, currentLine); lineTotreat << currentLine;
-//     lineTotreat >> tag;
-//     for (int i = 0; i < (*element)->getNumberNoeuds(); i++)
-//     {
-//       lineTotreat >> noeudCourant;
-//       numNoeud[i] = noeudCourant - 1;         //decalage car tableau commencant a zero
-//       noeud[i] = TableauNoeuds[noeudCourant - 1];
-//     }
-//     (*element)->construitElement(numNoeud, noeud, physicalEntity, 0, indiceElement);
-
-//     delete[] noeud;
-//     delete[] numNoeud;
-//   }
-//   catch (ErrorECOGEN &) { throw; }
-
-// }
-
 
 //**************************************************************************
 //******************************** ECRITURE ********************************
@@ -500,12 +348,14 @@ void MeshUnStruct::extractAbsVelocityMRF(TypeMeshContainer<Cell*>* cellsLvl, std
     if (!m_elements[i]->isFantome())
     {
       numCell = m_elements[i]->getNumCellAssociee();
+      // Absolute velocity is built on the specific region rotating or when whole geometry is rotating.
       if (sourceMRF->getPhysicalEntity() == cellsLvl[0][numCell]->getElement()->getAppartenancePhysique() || sourceMRF->getPhysicalEntity() == 0) {
         Coord absoluteVelocity = sourceMRF->computeAbsVelocity(cellsLvl[0][numCell]->getVelocity(), cellsLvl[0][numCell]->getPosition());
         jeuDonnees.push_back(absoluteVelocity.getX());
         jeuDonnees.push_back(absoluteVelocity.getY());
         jeuDonnees.push_back(absoluteVelocity.getZ());
       }
+      // If the region is not rotating absolute velocity = relative velocity
       else {
         jeuDonnees.push_back(cellsLvl[0][numCell]->getVelocity().getX());
         jeuDonnees.push_back(cellsLvl[0][numCell]->getVelocity().getY());

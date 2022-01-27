@@ -29,7 +29,6 @@
 //  If not, see <http://www.gnu.org/licenses/>.
 
 #include "QAPViscosity.h"
-#include <iostream>
 
 //***********************************************************************
 
@@ -39,10 +38,7 @@ QAPViscosity::QAPViscosity(AddPhys* addPhys) : QuantitiesAddPhys(addPhys), m_gra
   numPhasesVisc.resize(3);
   for (int i = 0; i < 3; ++i) {
     m_grads[i] = 0.;
-    numPhasesVisc[i] = 0; //JC//Q// Since all multiphase models use mixture velocity to compute gradients the 
-                                 // 'numPhasesVisc' is not used in this case but when Euler is used the 'numPhasesVic' is
-                                 // always '0'. Anyway no loop is done on phases, thus I don't understand the purpose of 
-                                 // of a vector for this var, an 'int' should be enough.
+    numPhasesVisc[i] = 0;
   }
   variableNamesVisc[0] = velocityU;
   variableNamesVisc[1] = velocityV;

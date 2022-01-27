@@ -42,27 +42,39 @@ class ModEuler : public Model
 {
   public:
     //! \brief     Euler model constructor
-    //! \param     numberTransports    number of additional transport equations
-    ModEuler(const int& numberTransports);
+    //! \param     numbTransports      number of additional transport equations
+    ModEuler(const int& numbTransports);
     virtual ~ModEuler();
 
-    virtual void allocateCons(Flux** cons, const int& /*numberPhases*/);
+    virtual void allocateCons(Flux** cons);
     virtual void allocatePhase(Phase** phase);
     virtual void allocateMixture(Mixture** mixture);
 
     //! \details    Complete single fluid state from pressure, density and velocity
-    virtual void fulfillState(Phase** phases, Mixture* /*mixture*/, const int& /*numberPhases*/, Prim /*type*/ = vecPhases);
+    virtual void fulfillState(Phase** phases, Mixture* /*mixture*/);
+
+    //! \details    Does nothing for this model
+    virtual void fulfillStateRestart(Phase** /*phases*/, Mixture* /*mixture*/) {};
+
+    //! \details    Does nothing for this model
+    virtual void initializeAugmentedVariables(Cell* /*cell*/) {};
 
     //Hydrodynamic Riemann solvers
     //----------------------------
-    virtual void solveRiemannIntern(Cell& cellLeft, Cell& cellRight, const int& /*numberPhases*/, const double& dxLeft, const double& dxRight, double& dtMax, double& massflow, double& powerFlux) const; 
-    virtual void solveRiemannWall(Cell& cellLeft, const int& /*numberPhases*/, const double& dxLeft, double& dtMax) const; 
-    virtual void solveRiemannInflow(Cell& cellLeft, const int& /*numberPhases*/, const double& dxLeft, double& dtMax, const double m0, const double* /*ak0*/, const double* rhok0, const double* pk0, double& massflow, double& powerFlux) const;
-    virtual void solveRiemannSubInj(Cell& cellLeft, const int& /*numberPhases*/, const double& dxLeft, double& dtMax, const double m0, const double T0, double& massflow, double& powerFlux) const;
-    virtual void solveRiemannTank(Cell& cellLeft, const int& /*numberPhases*/, const double& dxLeft, double& dtMax, const double* /*ak0*/, const double* rhok0, const double& p0, const double& /*T0*/, double& massflow, double& powerFlux) const;
-    virtual void solveRiemannOutflow(Cell& cellLeft, const int& /*numberPhases*/, const double& dxLeft, double& dtMax, const double p0, double& massflow, double& powerFlux) const; 
+    virtual void solveRiemannIntern(Cell& cellLeft, Cell& cellRight, const double& dxLeft, const double& dxRight, double& dtMax, std::vector<double> &boundData = DEFAULT_VEC_INTERFACE_DATA) const; 
+    virtual void solveRiemannWall(Cell& cellLeft, const double& dxLeft, double& dtMax, std::vector<double> &boundData) const; 
+    virtual void solveRiemannInflow(Cell& cellLeft, const double& dxLeft, double& dtMax, const double m0, const double* /*ak0*/, const double* rhok0, const double* pk0, std::vector<double> &boundData) const;
+    virtual void solveRiemannSubInj(Cell& cellLeft, const double& dxLeft, double& dtMax, const double m0, const double* Tk0, const double* /*ak0*/, std::vector<double> &boundData) const;
+    virtual void solveRiemannTank(Cell& cellLeft, const double& dxLeft, double& dtMax, const double* /*ak0*/, const double* rhok0, const double& p0, const double& /*T0*/, std::vector<double> &boundData) const;
+    virtual void solveRiemannOutflow(Cell& cellLeft, const double& dxLeft, double& dtMax, const double p0, std::vector<double> &boundData) const; 
+    virtual void solveRiemannNullFlux() const;
 
     virtual void reverseProjection(const Coord normal, const Coord tangent, const Coord binormal) const;
+
+    //low-Mach preconditioning
+    //------------------------
+    virtual void lowMachSoundSpeed(double& machRef, const double& uL, double& cL, const double& uR = Errors::defaultDouble, double& cR = Tools::uselessDouble) const;
+    virtual void setLowMach(const bool& lowMach) { m_lowMach = lowMach; };
 
     //Accessors
     //---------
@@ -71,6 +83,8 @@ class ModEuler : public Model
     virtual Coord& getVelocity(Cell* cell) { return cell->getPhase(0)->getVelocity(); };
 
     virtual const std::string& whoAmI() const { return m_name; };
+    
+    virtual void setSmoothCrossSection1d(const bool& applySmooth) { m_smoothCrossSection1d = applySmooth; };
   
   protected:
 

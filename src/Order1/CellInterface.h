@@ -56,35 +56,32 @@ class CellInterface
 
     void setFace(Face* face);
 
-    virtual void computeFlux(const int& numberPhases, const int& numberTransports, double& dtMax, Limiter& globalLimiter, Limiter& interfaceLimiter, Limiter& globalVolumeFractionLimiter, Limiter& interfaceVolumeFractionLimiter, Prim type = vecPhases);
-    virtual void computeFluxAddPhys(const int& numberPhases, AddPhys& addPhys);
-    virtual void solveRiemann(const int& numberPhases, const int& numberTransports, double& ondeMax, Limiter& /*globalLimiter*/, Limiter& /*interfaceLimiter*/, Limiter& /*globalVolumeFractionLimiter*/, Limiter& /*interfaceVolumeFractionLimiter*/, Prim /*type*/ = vecPhases);
+    virtual void computeFlux(double& dtMax, Limiter& globalLimiter, Limiter& interfaceLimiter, Limiter& globalVolumeFractionLimiter, Limiter& interfaceVolumeFractionLimiter, Prim type = vecPhases);
+    virtual void computeFluxAddPhys(AddPhys& addPhys);
+    virtual void solveRiemann(double& ondeMax, Limiter& /*globalLimiter*/, Limiter& /*interfaceLimiter*/, Limiter& /*globalVolumeFractionLimiter*/, Limiter& /*interfaceVolumeFractionLimiter*/, Prim /*type*/ = vecPhases);
     virtual void initialize(Cell* cellLeft, Cell* cellRight);
     void initializeGauche(Cell* cellLeft);
     virtual void initializeDroite(Cell* cellRight);
-    virtual void addFlux(const int& numberPhases, const int& numberTransports, const double& coefAMR);
-    void subtractFlux(const int& numberPhases, const int& numberTransports, const double& coefAMR);
+    virtual void addFlux(const double& coefAMR);
+    void subtractFlux(const double& coefAMR);
     double distance(Cell* c);
-
-    void EffetsSurface1D(const int& numberPhases);
-
-    void associeModel(Model* mod);
 
     virtual int whoAmI() const { return 0; };
     virtual int whoAmIHeat() const { return ADIABATIC; }; //!< Returns heat boundary type for wall (see BoundCondWall.h)
+    virtual bool isMRFWall() const { return false; }
 
     //Inutilise pour cell interfaces ordre 1
-    virtual void allocateSlopes(const int& /*numberPhases*/, const int& /*numberTransports*/, int& /*allocateSlopeLocal*/) {};   /*!< Ne fait rien pour des cell interfaces ordre 1 */
-    virtual void computeSlopes(const int& /*numberPhases*/, const int& /*numberTransports*/, Prim /*type*/ = vecPhases) {};  /*!< Ne fait rien pour des cell interfaces ordre 1 */
-    virtual Phase* getSlopesPhase(const int& /*phaseNumber*/) const { return 0; };                                   /*!< Ne fait rien pour des cell interfaces ordre 1 */
-    virtual Mixture* getSlopesMixture() const { return 0; };                                                     /*!< Ne fait rien pour des cell interfaces ordre 1 */
-    virtual Transport* getSlopesTransport(const int& /*numberTransport*/) const { return 0; };                       /*!< Ne fait rien pour des cell interfaces ordre 1 */
-    //virtual Cell* getB(BO2 B) const { return 0; };                                                          /*!< Ne fait rien pour des cell interfaces ordre 1 */
-    //virtual double getBeta(betaO2 beta) const { return 0.; };                                                  /*!< Ne fait rien pour des cell interfaces ordre 1 */
-    //virtual double getDistanceH(distanceHO2 dist) const { return 0.; };                                        /*!< Ne fait rien pour des cell interfaces ordre 1 */
-    //virtual void setB(BO2 B, Cell* cell) {};                                                             /*!< Ne fait rien pour des cell interfaces ordre 1 */
-    //virtual void setBeta(betaO2 beta, double& value) {};                                                      /*!< Ne fait rien pour des cell interfaces ordre 1 */
-    //virtual void setDistanceH(distanceHO2 dist, double& value) {};                                            /*!< Ne fait rien pour des cell interfaces ordre 1 */
+    virtual void allocateSlopes(int& /*allocateSlopeLocal*/) {};   /*!< Ne fait rien pour des cell interfaces ordre 1 */
+    virtual void computeSlopes(Prim /*type*/ = vecPhases) {};      /*!< Ne fait rien pour des cell interfaces ordre 1 */
+    virtual Phase* getSlopesPhase(const int& /*phaseNumber*/) const { return 0; };              /*!< Ne fait rien pour des cell interfaces ordre 1 */
+    virtual Mixture* getSlopesMixture() const { return 0; };                                    /*!< Ne fait rien pour des cell interfaces ordre 1 */
+    virtual Transport* getSlopesTransport(const int& /*numberTransport*/) const { return 0; };  /*!< Ne fait rien pour des cell interfaces ordre 1 */
+    //virtual Cell* getB(BO2 B) const { return 0; };                                            /*!< Ne fait rien pour des cell interfaces ordre 1 */
+    //virtual double getBeta(betaO2 beta) const { return 0.; };                                 /*!< Ne fait rien pour des cell interfaces ordre 1 */
+    //virtual double getDistanceH(distanceHO2 dist) const { return 0.; };                       /*!< Ne fait rien pour des cell interfaces ordre 1 */
+    //virtual void setB(BO2 B, Cell* cell) {};                                                  /*!< Ne fait rien pour des cell interfaces ordre 1 */
+    //virtual void setBeta(betaO2 beta, double& value) {};                                      /*!< Ne fait rien pour des cell interfaces ordre 1 */
+    //virtual void setDistanceH(distanceHO2 dist, double& value) {};                            /*!< Ne fait rien pour des cell interfaces ordre 1 */
 
 
     //Accesseurs
@@ -93,9 +90,9 @@ class CellInterface
     Cell* getCellGauche() const;
     Cell* getCellDroite() const;
     virtual const int& getNumPhys() const { return Errors::defaultIntNeg; };
-    virtual double getMassflow() const { Errors::errorMessage("getMassflow not available for CellInterface"); return Errors::defaultDouble; }
-    virtual double getPowerFlux() const { Errors::errorMessage("getPowerFlux not available for CellInterface"); return Errors::defaultDouble; }
+    virtual double getBoundData(VarBoundary /*var*/) const { Errors::errorMessage("getBoundData not available for CellInterface"); return 0.; }
     virtual double getBoundaryHeatQuantity() const { return Errors::defaultDouble; }; //!< Returns imposed heat quantity on the wall, could be temperature or flux density (see BounCondWall.h)
+    virtual Coord& getWallRotationalVelocityMRF() { return Coord::defaultCoordNonConst; }
 
     //Pour methode AMR
     virtual void computeXi(const double& criteriaVar, const bool& varRho, const bool& varP, const bool& varU, const bool& varAlpha);  /*!< Calcul de la variable Xi pour criteria de (de)raffinement a priori */
@@ -118,7 +115,6 @@ class CellInterface
    protected:
     Cell* m_cellLeft;
     Cell* m_cellRight;
-    Model* m_mod;
     Face *m_face;
     
     //Attributs pour methode AMR
@@ -129,7 +125,7 @@ class CellInterface
 };
 
 //Utile pour la resolution des problemes de Riemann
-extern Cell* cellLeft;
-extern Cell* cellRight;
+extern Cell* bufferCellLeft;
+extern Cell* bufferCellRight;
 
 #endif // CELLINTERFACE_H

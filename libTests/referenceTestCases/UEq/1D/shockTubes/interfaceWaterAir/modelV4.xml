@@ -3,10 +3,5 @@
 	<flowModel name="VelocityEq" numberPhases="2" alphaNull="true"/>
 	<EOS name="IG_air.xml"/>
 	<EOS name="SG_water.xml"/>
-	<!-- <relaxation type="P" speed="finite" rate="1.e8"/> -->
+	<relaxation type="P" speed="infinite"/>
 </model>
-<!-- <model>
-	<flowModel name="pressureVelocityEq" numberPhases="2" alphaNull="true"/>
-	<EOS name="IG_air.xml"/>
-	<EOS name="SG_water.xml"/>
-</model> -->

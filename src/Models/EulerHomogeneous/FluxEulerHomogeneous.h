@@ -31,7 +31,6 @@
 #ifndef FLUXEULERHOMOGENEOUS_H
 #define FLUXEULERHOMOGENEOUS_H
 
-#include <iostream>
 #include "../Flux.h"
 
 class FluxEulerHomogeneous;
@@ -44,36 +43,34 @@ class FluxEulerHomogeneous : public Flux
 {
   public:
     FluxEulerHomogeneous();
-    FluxEulerHomogeneous(ModEulerHomogeneous* model);
     virtual ~FluxEulerHomogeneous();
 
     virtual void printFlux() const;
-    virtual void addFlux(double coefA, const int& /*numberPhases*/);
-    virtual void addFlux(Flux* flux, const int& /*numberPhases*/);
-    virtual void subtractFlux(double coefA, const int& /*numberPhases*/);
-    virtual void multiply(double scalar, const int& /*numberPhases*/);
-    virtual void setBufferFlux(Cell& cell, const int& numberPhases);
-    virtual void buildCons(Phase** phase, const int& numberPhases, Mixture* mixture);
-    virtual void buildPrim(Phase** phase, Mixture* mixture, const int& numberPhases);
-    virtual void setToZero(const int& numberPhases);
-    virtual void addNonCons(double /*coefA*/, const Cell* /*cell*/, const int& /*numberPhases*/) {};
-    virtual void subtractNonCons(double /*coefA*/, const Cell* /*cell*/, const int& /*numberPhases*/) {};
+    virtual void addFlux(double coefA);
+    virtual void addFlux(Flux* flux);
+    virtual void subtractFlux(double coefA);
+    virtual void multiply(double scalar);
+    virtual void setBufferFlux(Cell& cell);
+    virtual void buildCons(Phase** phase, Mixture* mixture);
+    virtual void buildPrim(Phase** phase, Mixture* mixture);
+    virtual void setToZero();
+    virtual void addNonCons(double /*coefA*/, const Cell* /*cell*/) {};
+    virtual void subtractNonCons(double /*coefA*/, const Cell* /*cell*/) {};
     
-    virtual void addTuyere1D(const Coord& normal, const double& surface, Cell* cell, const int& numberPhases);
-    virtual void subtractTuyere1D(const Coord& normal, const double& surface, Cell* cell, const int& numberPhases);
-    
+    virtual void addFluxSmooth1D(double coefA, const Coord& normal, Cell* cell);
+    virtual void substractFluxSmooth1D(double coefA, const Coord& normal, Cell* cell);
+
     // Accessors
     //----------
-    virtual const Coord& getQdm() const { return m_qdm; };
-    virtual const double& getMasseMix() const { return m_masse; };
+    virtual const Coord& getMomentum() const { return m_momentum; };
+    virtual const double& getMassMix() const { return m_mass; };
     virtual const double& getEnergyMix() const { return m_energ; };
-    virtual void setCons(const Flux* cons, const int& numberPhases);
+    virtual void setCons(const Flux* cons);
 
   protected:
-    double m_masse;                   //!< mass
-    Coord m_qdm;                      //!< momentum
-    double m_energ;                   //!< total energy
-    ModEulerHomogeneous* m_model;    //!< associated model
+    double m_mass;                   //!< mass
+    Coord m_momentum;                //!< momentum
+    double m_energ;                  //!< total energy
 
   private:
 

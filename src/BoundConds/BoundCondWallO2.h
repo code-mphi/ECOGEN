@@ -36,33 +36,32 @@
 
 class BoundCondWallO2 : public BoundCondWall
 {
-public:
-  BoundCondWallO2(const BoundCondWallO2& Source, const int& lvl = 0); //Copy ctor (useful for AMR)
-  BoundCondWallO2(int numPhysique, tinyxml2::XMLElement* element, std::string fileName);
-  BoundCondWallO2(int numPhysique);
-  virtual ~BoundCondWallO2();
+  public:
+    BoundCondWallO2(const BoundCondWallO2& Source, const int& lvl = 0); //Copy ctor (useful for AMR)
+    BoundCondWallO2(int numPhysique, tinyxml2::XMLElement* element, std::string fileName);
+    BoundCondWallO2(int numPhysique);
+    virtual ~BoundCondWallO2();
 
-  virtual void createBoundary(TypeMeshContainer<CellInterface*>& cellInterfaces);
-  virtual void allocateSlopes(const int& numberPhases, const int& numberTransports, int& /*allocateSlopeLocal*/);
-  virtual void computeSlopes(const int& numberPhases, const int& /*numberTransports*/, Prim type = vecPhases);
-  virtual void solveRiemann(const int& numberPhases, const int& numberTransports, double& dtMax, Limiter& globalLimiter, Limiter& interfaceLimiter, Limiter& globalVolumeFractionLimiter, Limiter& interfaceVolumeFractionLimiter, Prim type = vecPhases);
+    virtual void createBoundary(TypeMeshContainer<CellInterface*>& cellInterfaces);
+    virtual void allocateSlopes(int& /*allocateSlopeLocal*/);
+    virtual void computeSlopes(Prim type = vecPhases);
+    virtual void solveRiemann(double& dtMax, Limiter& globalLimiter, Limiter& interfaceLimiter, Limiter& globalVolumeFractionLimiter, Limiter& interfaceVolumeFractionLimiter, Prim type = vecPhases);
 
-  virtual int whoAmI() const { return WALL; };
+    virtual int whoAmI() const { return WALL; };
 
-  //Accessors
-  virtual Phase* getSlopesPhase(const int& phaseNumber) const;
-  virtual Mixture* getSlopesMixture() const;
-  virtual Transport* getSlopesTransport(const int& numberTransport) const;
+    //Accessors
+    virtual Phase* getSlopesPhase(const int& phaseNumber) const;
+    virtual Mixture* getSlopesMixture() const;
+    virtual Transport* getSlopesTransport(const int& numberTransport) const;
 
-  //For AMR method
-  virtual void creerCellInterfaceChild();  /*!< Create a child cell interface (not initialized) */
+    //For AMR method
+    virtual void creerCellInterfaceChild();  /*!< Create a child cell interface (not initialized) */
 
-protected:
-  int m_numberPhases;
-  Phase** m_vecPhasesSlopes;         /*!< vecteur des slopes des phases */
-  Mixture* m_mixtureSlopes;          /*!< vecteur des slopes de mixture */
-  Transport* m_vecTransportsSlopes;  /*!< vecteur des slopes des transports */
-private:
+  protected:
+    Phase** m_vecPhasesSlopes;         /*!< vecteur des slopes des phases */
+    Mixture* m_mixtureSlopes;          /*!< vecteur des slopes de mixture */
+    Transport* m_vecTransportsSlopes;  /*!< vecteur des slopes des transports */
+  private:
 };
 
 #endif // BOUNDCONDWALLO2_H

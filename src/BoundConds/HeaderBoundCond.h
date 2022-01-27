@@ -40,6 +40,7 @@
 #include "BoundCondSymmetry.h"
 #include "BoundCondSymmetryO2.h"
 #include "BoundCondOutflow.h"
+#include "BoundCondNullFlux.h"
 
 //Add here header of new boundary conditions
 

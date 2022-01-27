@@ -1,0 +1,7 @@
+<?xml version = "1.0" encoding = "UTF-8" standalone = "yes"?>
+<model>
+	<flowModel name="EulerKorteweg" alpha="1.e-2" beta="2.e-5" temperature="550" kappa="1.e-2"/>
+	<EOS name="Polynomial_arbitrary.xml"/>
+</model>
+
+

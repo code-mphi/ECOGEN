@@ -1,0 +1,17 @@
+<?xml version = "1.0" encoding = "UTF-8" standalone = "yes"?>
+<computationParam>
+	<run>PUEqRayleighTaylorSameKinematicViscosity</run>
+	<outputMode format="XML" binary="false" precision="16"/>
+	<timeControlMode iterations="false">
+		<iterations number="20" iterFreq="1"/>
+		<physicalTime totalTime="2." timeFreq="0.1"/>
+	</timeControlMode>
+  <restartSimulation restartFileNumber="0" AMRsaveFreq="2"/>
+	<computationControl CFL="0.8"/>
+    <secondOrder>
+        <globalLimiter>mc</globalLimiter>
+        <!-- <interfaceLimiter>minmod</interfaceLimiter> -->
+        <!-- <globalVolumeFractionLimiter>minmod</globalVolumeFractionLimiter> -->
+        <!-- <interfaceVolumeFractionLimiter>thinc</interfaceVolumeFractionLimiter> -->
+    </secondOrder>
+</computationParam>

@@ -93,15 +93,18 @@ public:
   //-------------
   virtual void verifyPhase(const std::string& message = "") const;
   virtual void verifyAndCorrectPhase();
+  virtual void verifyAndCorrectDensityMax(const double& mass);
+  virtual void verifyAndCorrectDensityMax();
 
   //Accessors
   //---------
   virtual const double& getAlpha() const { return m_alpha; };
+  virtual const double& getMassFraction() const { return m_Y; };
   virtual const double& getDensity() const { return m_density; };
   virtual const double& getPressure() const { return m_pressure; };
   virtual const double& getY() const { return m_Y; };
   virtual Eos* getEos() const { return m_eos; };
-  virtual const double& getEnergy() const { return m_energie; };
+  virtual const double& getEnergy() const { return m_energy; };
   virtual const double& getSoundSpeed() const { return m_soundSpeed; };
   virtual const double& getTotalEnergy() const { return m_totalEnergy; };
   virtual double getTemperature() const { return m_eos->computeTemperature(m_density, m_pressure); };
@@ -110,7 +113,7 @@ public:
   virtual void setDensity(double density);
   virtual void setPressure(double pressure);
   virtual void setEos(Eos* eos);
-  virtual void setEnergy(double energie);
+  virtual void setEnergy(double energy);
   virtual void setSoundSpeed(double soundSpeed);
   virtual void setTotalEnergy(double totalEnergy);
 
@@ -126,7 +129,7 @@ protected:
   double m_pressure;        //!< phase pressure
   double m_Y;               //!< phase mass fraction
   Eos* m_eos;               //!< pointer to phase equation of state
-  double m_energie;         //!< phase internal energy
+  double m_energy;          //!< phase internal energy
   double m_totalEnergy;     //!< phase total energy
   double m_soundSpeed;      //!< phase speed of sound
 private:

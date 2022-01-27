@@ -17,7 +17,7 @@ REQUIRED computational parameters
 
 1) Mesh type
 ************
-Mesh can be : cartesian or unStructured
+Mesh can be: Cartesian or unStructured
 %%%%%%%%%%%%%%%%%% << copy between these lines
 <type structure="cartesian"/>
 %%%%%%%%%%%%%%%%%% << copy between these lines
@@ -48,8 +48,8 @@ Mesh file name should be precised here. The corresponding mesh file must be laca
 ECOGEN can read from single or multi-CPU mesh files coming from GMSH software (*.msh)
 %%%%%%%%%%%%%%%%%% << copy between these lines
 <unstructuredMesh>
-  <file name="./libMeshes/unstructured2D/testUS.msh"/>
+  <file name="libMeshes/unstructured2D/testUS.msh"/>
   <parallel GMSHPretraitement="true"/>  <!-- Optionnal node if multiCPU -->
 </unstructuredMesh>
 %%%%%%%%%%%%%%%%%% << copy between these lines
-Caution : The optionnal node <parallel> must be present if the multiCPU mesh file has not been used yet. Attribute GMSHPretraitement generates separated meshes accordingly to the CPU number from the global specified multiCPU mesh file.
+Caution: The optionnal node <parallel> must be present if the multiCPU mesh file has not been used yet. Attribute GMSHPretraitement generates separated meshes accordingly to the CPU number from the global specified multiCPU mesh file.

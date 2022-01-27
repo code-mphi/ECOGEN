@@ -40,18 +40,17 @@ class CellO2 : public Cell
         CellO2();
         CellO2(int lvl); //Pour AMR
         virtual ~CellO2();
-        virtual void allocate(const int& numberPhases, const int& numberTransports, const std::vector<AddPhys*>& addPhys, Model* model);
+        virtual void allocate(const std::vector<AddPhys*>& addPhys);
         virtual void copyPhase(const int& phaseNumber, Phase* phase);
-        virtual void computeLocalSlopes(const int& numberPhases, const int& numberTransports, CellInterface& cellInterfaceRef,
-            Limiter& globalLimiter, Limiter& interfaceLimiter, Limiter& globalVolumeFractionLimiter, Limiter& interfaceVolumeFractionLimiter,
+        virtual void computeLocalSlopes(CellInterface& cellInterfaceRef, Limiter& globalLimiter, Limiter& interfaceLimiter,
+            Limiter& globalVolumeFractionLimiter, Limiter& interfaceVolumeFractionLimiter,
             double& alphaCellAfterOppositeSide, double& alphaCell, double& alphaCellOtherInterfaceSide, double& epsInterface);
-        virtual void computeLocalSlopesLimite(const int& numberPhases, const int& numberTransports, CellInterface& cellInterfaceRef,
-            Limiter& globalLimiter, Limiter& interfaceLimiter, Limiter& globalVolumeFractionLimiter, Limiter& interfaceVolumeFractionLimiter,
+        virtual void computeLocalSlopesLimite(CellInterface& cellInterfaceRef, Limiter& globalLimiter,
+            Limiter& interfaceLimiter, Limiter& globalVolumeFractionLimiter, Limiter& interfaceVolumeFractionLimiter,
             double& epsInterface);
-        virtual void saveCons(const int& numberPhases, const int& numberTransports);
-        virtual void recuperationCons(const int& numberPhases, const int& numberTransports);
-        virtual void predictionOrdre2(const double& dt, const int& numberPhases, const int& numberTransports, Symmetry* symmetry);
-        virtual void completeFulfillState(Prim type = vecPhases);
+        virtual void saveCons();
+        virtual void recuperationCons();
+        virtual void predictionOrdre2(const double& dt, Symmetry* symmetry);
         virtual void fulfillState(Prim type = vecPhases);
 
         //Accesseurs

@@ -43,12 +43,12 @@ public:
   virtual void attributFaceLimite(FaceNS** faces, const int& indexMaxFaces);
 
 private:
-  virtual void computeVolume(const Coord* /*noeuds*/);
-  virtual void computeLCFL(const Coord* /*noeuds*/);
+  virtual void computeVolume(const Coord* /*nodes*/);
+  virtual void computeLCFL(const Coord* /*nodes*/);
 
   static const int TYPEGMSH;
-  static const int NOMBRENOEUDS;
-  static const int NOMBREFACES;
+  static const int NUMBERNODES;
+  static const int NUMBERFACES;
   static const int TYPEVTK;
 };
 

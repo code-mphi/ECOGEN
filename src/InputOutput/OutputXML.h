@@ -39,8 +39,8 @@ public:
   OutputXML(std::string casTest, std::string run, tinyxml2::XMLElement* element, std::string fileName, Input *entree);
   virtual ~OutputXML();
 
-  virtual void prepareSortieSpecifique();
-  virtual void ecritSolution(Mesh *mesh, std::vector<Cell*>* cellsLvl);
+  virtual void initializeSpecificOutput();
+  virtual void writeResults(Mesh *mesh, std::vector<Cell*>* cellsLvl);
 
   virtual void readResults(Mesh *mesh, std::vector<Cell*>* cellsLvl);
 
@@ -48,9 +48,9 @@ protected:
 
   void ReadDonneesPhysiquesXML(Mesh *mesh, std::vector<Cell*>* cellsLvl, tinyxml2::XMLElement* nodeCellData, std::string fileName = "Unknown file");
 
-  std::string creationNameFichierXML(const char* name, Mesh *mesh=0, int proc=-1, int numFichier=-1, std::string nameVariable ="defaut");
+  std::string createFilenameXML(const char* name, Mesh *mesh=0, int proc=-1, int numFichier=-1, std::string nameVariable ="defaut");
 
-  void ecritSolutionXML(Mesh *mesh, std::vector<Cell*>* cellsLvl);
+  void writeResultsXML(Mesh *mesh, std::vector<Cell*>* cellsLvl);
   void ecritCollectionXML(Mesh *mesh);
   void ecritDonneesPhysiquesXML(Mesh *mesh, std::vector<Cell*>* cellsLvl, std::ofstream &fileStream, bool parallel = false);
 

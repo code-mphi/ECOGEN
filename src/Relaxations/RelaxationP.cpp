@@ -40,7 +40,7 @@ RelaxationP::~RelaxationP(){}
 
 //***********************************************************************
 
-void RelaxationP::NewtonRaphson(const int& numberPhases, double& pStar, int& iteration)
+void RelaxationP::NewtonRaphson(double& pStar, int& iteration)
 {
   //Iterative process for relaxed pressure determination
   double f(0.), df(1.), drho(0.), dalpha(0.);

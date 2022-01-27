@@ -36,6 +36,9 @@
 #include "EulerHomogeneous/ModEulerHomogeneous.h"
 #include "PTUEq/ModPTUEq.h"
 #include "UEq/ModUEq.h"
+#include "UEqTotEnergy/ModUEqTotEnergy.h"
+#include "EulerKorteweg/ModEulerKorteweg.h"
+#include "NonLinearSchrodinger/ModNonLinearSchrodinger.h"
 
 //Add new models here
 

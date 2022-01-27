@@ -1,0 +1,14 @@
+<?xml version = "1.0" encoding = "UTF-8" standalone = "yes"?>
+<parametersEOS>
+	<EOS fichier="IG_airBlasiusLaminar.xml" type="IG"/>
+	<parameters
+		gamma="1.4"
+		cv="1."
+		energyRef="0."
+		entropyRef="0.">
+	</parameters>
+	<physicalParameters
+		mu="1.e-3"     
+		lambda="0.020">
+	</physicalParameters>	
+</parametersEOS>

@@ -46,10 +46,10 @@ class CellInterfaceO2 : public CellInterface
     /** Default destructor */
     virtual ~CellInterfaceO2();
 
-    virtual void allocateSlopes(const int& numberPhases, const int& numberTransports, int& allocateSlopeLocal);
-    virtual void computeSlopes(const int& numberPhases, const int& numberTransports, Prim type = vecPhases);
-    virtual void computeFlux(const int& numberPhases, const int& numberTransports, double& dtMax, Limiter& globalLimiter, Limiter& interfaceLimiter, Limiter& globalVolumeFractionLimiter, Limiter& interfaceVolumeFractionLimiter, Prim type = vecPhases);
-    void solveRiemann(const int& numberPhases, const int& numberTransports, double& ondeMax, Limiter& globalLimiter, Limiter& interfaceLimiter, Limiter& globalVolumeFractionLimiter, Limiter& interfaceVolumeFractionLimiter, Prim type = vecPhases); /*!< probleme de Riemann special ordre 2 */
+    virtual void allocateSlopes(int& allocateSlopeLocal);
+    virtual void computeSlopes(Prim type = vecPhases);
+    virtual void computeFlux(double& dtMax, Limiter& globalLimiter, Limiter& interfaceLimiter, Limiter& globalVolumeFractionLimiter, Limiter& interfaceVolumeFractionLimiter, Prim type = vecPhases);
+    void solveRiemann(double& ondeMax, Limiter& globalLimiter, Limiter& interfaceLimiter, Limiter& globalVolumeFractionLimiter, Limiter& interfaceVolumeFractionLimiter, Prim type = vecPhases); /*!< probleme de Riemann special ordre 2 */
 
     //Accesseurs
     virtual Phase* getSlopesPhase(const int& phaseNumber) const;
@@ -67,7 +67,6 @@ class CellInterfaceO2 : public CellInterface
     virtual void creerCellInterfaceChildInterne(const int& lvl, std::vector<CellInterface*>* childrenInternalCellInterfaces); /*!< Creer un intern child cell interface (non initialize) */
 
    protected:
-     int m_numberPhases;
      Phase** m_vecPhasesSlopes;         /*!< vecteur des slopes des phases */
      Mixture* m_mixtureSlopes;          /*!< vecteur des slopes de mixture */
      Transport* m_vecTransportsSlopes;	/*!< vecteur des slopes des transports */

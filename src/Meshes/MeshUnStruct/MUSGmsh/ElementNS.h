@@ -43,14 +43,14 @@ public:
   ElementNS(const int& typeGmsh, const int& numberNoeuds, const int& numberFaces, const int& typeVTK);
   virtual ~ElementNS();
 
-  void construitElement(const int* numNoeuds, const Coord* noeuds, const int numberEntitePhysique, const int numberEntiteGeometrique, int& indexElement); /*Calcul des proprietes de l element*/
-  void construitElementParallele(const Coord* noeuds); /*Calcul des proprietes de l element*/
+  void construitElement(const int* numNoeuds, const Coord* nodes, const int numberEntitePhysique, const int numberEntiteGeometrique, int& indexElement); /*Calcul des proprietes de l element*/
+  void construitElementParallele(const Coord* nodes); /*Calcul des proprietes de l element*/
   virtual void attributFaceLimite(FaceNS** /*faces*/, const int& /*indexMaxFaces*/) { Errors::errorMessage("attributFaceLimite non prevu pour le type d element demande"); };
   virtual void attributFaceCommunicante(FaceNS** /*faces*/, const int& /*indexMaxFaces*/, const int& /*numberNoeudsInternes*/) { Errors::errorMessage("attributFaceCommunicante non prevu pour le type d element demande"); };
-  virtual void construitFaces(const Coord* /*noeuds*/, FaceNS** /*faces*/, int& /*indexMaxFaces*/, int** /*facesTemp*/, int* /*sommeNoeudsTemp*/) { Errors::errorMessage("construitFaces non prevu pour le type d element demande"); }; //Pour tests
-  virtual void construitFacesSimplifie(int& /*iMax*/, int** /*facesTemp*/, int* /*sommeNoeudsTemp*/) { Errors::errorMessage("construitFacesSimplifie non prevu pour le type d element demande"); };
-  virtual int compteFaceCommunicante(std::vector<int*>& /*faces*/, std::vector<int>& /*sommeNoeudsTemp*/) { Errors::errorMessage("compteFaceCommunicante non prevu pour le type d element demande"); return 0; };
-  virtual int compteFaceCommunicante(int& /*iMax*/, int** /*faces*/, int* /*sommeNoeudsTemp*/) { Errors::errorMessage("compteFaceCommunicante non prevu pour le type d element demande"); return 0; };
+  virtual void construitFaces(const Coord* /*nodes*/, FaceNS** /*faces*/, int& /*indexMaxFaces*/, int** /*facesBuff*/, int* /*sumNodesBuff*/) { Errors::errorMessage("construitFaces non prevu pour le type d element demande"); }; //Pour tests
+  virtual void construitFacesSimplifie(int& /*iMax*/, int** /*facesBuff*/, int* /*sumNodesBuff*/) { Errors::errorMessage("construitFacesSimplifie non prevu pour le type d element demande"); };
+  virtual int compteFaceCommunicante(std::vector<int*>& /*faces*/, std::vector<int>& /*sumNodesBuff*/) { Errors::errorMessage("compteFaceCommunicante non prevu pour le type d element demande"); return 0; };
+  virtual int compteFaceCommunicante(int& /*iMax*/, int** /*faces*/, int* /*sumNodesBuff*/) { Errors::errorMessage("compteFaceCommunicante non prevu pour le type d element demande"); return 0; };
   /*  void enleveCPUAutres(const int& numCPU);*/
   void enleveCPUAutres(std::vector<int>& numCPU);
 
@@ -80,8 +80,8 @@ public:
   const bool& isCommunicant() const { return m_isCommunicant; };
 
 protected:
-  virtual void computeVolume(const Coord* /*noeuds*/){};
-  virtual void computeLCFL(const Coord* /*noeuds*/){};
+  virtual void computeVolume(const Coord* /*nodes*/){};
+  virtual void computeLCFL(const Coord* /*nodes*/){};
 
   int m_index;
 
@@ -96,7 +96,7 @@ protected:
   int m_CPU;              /*Number du CPU sur lequel l'element est present physiquement*/
   int m_numberautresCPU;
   int* m_autresCPU;       /*Number des CPU sur lesquels l'element est present en tant que fantome*/
-  int* m_numNoeuds;       /*Correspondance avec le tableau de noeuds du mesh*/
+  int* m_numNoeuds;       /*Correspondance avec le tableau de nodes du mesh*/
 
 };
 

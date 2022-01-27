@@ -7,7 +7,7 @@
 		<vecDir x="1" y="1" z="0"/>
 	</cut1D>
 	<timeControlMode iterations="true">
-<iterations number="10" iterFreq="10"/>
+	<iterations number="10" iterFreq="10"/>
 		<physicalTime totalTime="3.6e-4" timeFreq="3.6e-4"/>
 	</timeControlMode>
 	<computationControl CFL="0.8"/>

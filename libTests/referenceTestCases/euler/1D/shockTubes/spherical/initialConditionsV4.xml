@@ -2,29 +2,33 @@
 <CI>
     <!-- LIST OF GEOMETRICAL DOMAINS  -->
     <physicalDomains> 
-        <domain name="mrf" state="mrf" type="entireDomain" physicalEntity="10"/>
-        <domain name="static" state="static" type="entireDomain" physicalEntity="11"/>
-    </physicalDomains>
+        <domain name="base" state="chamberLP" type="entireDomain"/>
+        <domain name="HP"  state="chamberHP" type="halfSpace">
+            <dataHalfSpace axis="x" origin="0.4" direction="negative"/>
+        </domain>
+    </physicalDomains>    
 
     <!-- LIST OF BOUNDARY CONDITIONS -->
     <boundaryConditions>
-        <boundCond name="wall" type="wall" number="1"/>
+        <boundCond name="CLXm" type="wall" number="1" />
+        <boundCond name="CLXp" type="nonReflecting" number="2" />
     </boundaryConditions>
     
     <!--  LIST OF STATES  -->
-    <state name="mrf">
+    <state name="chamberLP">
         <material type="fluid" EOS="IG_air.xml">
-            <dataFluid density="1.225" pressure="1.e5">
+            <dataFluid density="0.125" pressure="0.1">
                 <velocity x="0." y="0." z="0."/>
             </dataFluid>
         </material>
     </state>
 
-    <state name="static">
+    <state name="chamberHP">
         <material type="fluid" EOS="IG_air.xml">
-            <dataFluid density="1.225" pressure="1.e5">
+            <dataFluid density="1.0" pressure="1.">
                 <velocity x="0." y="0." z="0."/>
             </dataFluid>
         </material>
     </state>
+
 </CI>

@@ -33,7 +33,6 @@
 
 class Relaxation; //Predeclaration of class Relaxation to include Cell.h
 
-#include <string>
 #include "../libTierces/tinyxml2.h"
 #include "../Errors.h"
 #include "../Tools.h"
@@ -50,9 +49,8 @@ public:
   //! \brief     Stiff relaxation methods
   //! \details   Call for this method computes the one of the stiff relaxation methods.
   //! \param     cell           cell to relax
-  //! \param     numberPhases   number of phases
   //! \param     type           enumeration allowing to relax either state in the cell or second order half time step state
-  virtual void relaxation(Cell* /*cell*/, const int& /*numberPhases*/, const double& /*dt*/, Prim /*type*/ = vecPhases) { Errors::errorMessage("relaxation not available for required relaxation"); };
+  virtual void relaxation(Cell* /*cell*/, const double& /*dt*/, Prim /*type*/ = vecPhases) { Errors::errorMessage("relaxation not available for required relaxation"); };
 
   //! \brief     Return the type of the corresponding relaxation method
   virtual int getType() const { Errors::errorMessage("getType not available for required relaxation"); return 0; }

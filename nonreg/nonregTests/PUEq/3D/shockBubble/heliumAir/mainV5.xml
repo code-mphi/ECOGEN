@@ -3,7 +3,7 @@
   <run>pressureVelocityEq3DairShockHeliumBubble</run>
   <outputMode format="XML" binary="false"/>
   <timeControlMode iterations="true">
-<iterations number="5" iterFreq="5"/>
+  <iterations number="5" iterFreq="5"/>
     <physicalTime totalTime="350.e-6" timeFreq="700.e-7"/>
   </timeControlMode>
   <computationControl CFL="0.8"/>

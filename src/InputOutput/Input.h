@@ -39,6 +39,7 @@
 #include "../Geometries/HeaderGeometricalDomain.h"
 #include "../Sources/HeaderSources.h"
 #include "../Symmetries/HeaderSymmetry.h"
+#include "../Gradients/HeaderGradient.h"
 #include "../Order2/HeaderLimiter.h"
 #include "../BoundConds/HeaderBoundCond.h"
 #include "../AdditionalPhysics/HeaderQuantitiesAddPhys.h"
@@ -56,13 +57,14 @@ class Input
     Input(Run *run);
     virtual ~Input();
 
-    void lectureInputXML(std::vector<GeometricalDomain*>& domains, std::vector<BoundCond*>& boundCond);
+    void readInputXML(std::vector<GeometricalDomain*>& domains, std::vector<BoundCond*>& boundCond);
 
-    void entreeMain(std::string casTest);
-    void entreeMesh(std::string casTest);
-    void entreeModel(std::string casTest);
-    Eos* entreeEOS(std::string EOS, int& numberEOS);
-    void entreeConditionsInitiales(std::string casTest, std::vector<GeometricalDomain*>& domains, std::vector<BoundCond*>& boundCond);
+    void inputMain(std::string testCase);
+    void inputMesh(std::string testCase);
+    void inputModel(std::string testCase);
+    Eos* inputEOS(std::string EOS, int& numberEOS);
+    void inputInitialConditions(std::string testCase, std::vector<GeometricalDomain*>& domains, std::vector<BoundCond*>& boundCond);
+    void verifyCompatibilityInput(std::string testCase);
 
 	//Accesseur
 	std::string getMain() const { return m_nameMain; };

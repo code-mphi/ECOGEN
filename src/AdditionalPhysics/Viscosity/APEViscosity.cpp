@@ -55,7 +55,7 @@ void APEViscosity::addQuantityAddPhys(Cell* cell)
 
 //***********************************************************************
 
-void APEViscosity::solveFluxAddPhys(CellInterface* cellInterface, const int& /*numberPhases*/)
+void APEViscosity::solveFluxAddPhys(CellInterface* cellInterface)
 {
   // Copy velocities and gradients of left and right cells
   m_velocityLeft = cellInterface->getCellGauche()->getPhase(0)->getVelocity();
@@ -98,7 +98,7 @@ void APEViscosity::solveFluxAddPhys(CellInterface* cellInterface, const int& /*n
 
 //***********************************************************************
 
-void APEViscosity::solveFluxAddPhysBoundary(CellInterface* cellInterface, const int& /*numberPhases*/)
+void APEViscosity::solveFluxAddPhysBoundary(CellInterface* cellInterface)
 {
   //DEV// BC Injection, Tank, Outflow to do
 
@@ -130,7 +130,16 @@ void APEViscosity::solveFluxAddPhysBoundary(CellInterface* cellInterface, const 
     this->solveFluxViscosityNonReflecting(m_velocityLeft, m_gradULeft, m_gradVLeft, m_gradWLeft, m_mu);
   }
   else if (typeCellInterface == WALL) {
-    this->solveFluxViscosityWall(m_velocityLeft, m_mu, distLeft);
+    if ( !cellInterface->isMRFWall() ) {
+      this->solveFluxViscosityWall(m_velocityLeft, m_mu, distLeft);
+    }
+    else {
+      Coord velocityWall(0.);
+      velocityWall = cellInterface->getWallRotationalVelocityMRF().cross(cellInterface->getFace()->getPos());
+      velocityWall.localProjection(m_normal, m_tangent, m_binormal);
+      velocityWall.setX(0.); // Fluid not crossing boundary
+      this->solveFluxViscosityWall(m_velocityLeft, m_mu, distLeft, velocityWall);
+    }
   }
   else if (typeCellInterface == SYMMETRY) {
     this->solveFluxViscositySymmetry(m_gradULeft, m_gradVLeft, m_gradWLeft, m_mu);
@@ -196,10 +205,10 @@ void APEViscosity::solveFluxViscosityInner(const Coord& velocityLeft, const Coor
   dwdz = (dwdzL + dwdzR) / 2.;
 
   //Writing of viscous terms on each equation of fluxBuffEuler
-  static_cast<FluxEuler*> (fluxBuff)->m_masse = 0.;
-  static_cast<FluxEuler*> (fluxBuff)->m_qdm.setX(-mu / 3. * (4. * dudx - 2. * (dvdy + dwdz)));
-  static_cast<FluxEuler*> (fluxBuff)->m_qdm.setY(-mu * (dvdx + dudy));
-  static_cast<FluxEuler*> (fluxBuff)->m_qdm.setZ(-mu * (dwdx + dudz));
+  static_cast<FluxEuler*> (fluxBuff)->m_mass = 0.;
+  static_cast<FluxEuler*> (fluxBuff)->m_momentum.setX(-mu / 3. * (4. * dudx - 2. * (dvdy + dwdz)));
+  static_cast<FluxEuler*> (fluxBuff)->m_momentum.setY(-mu * (dvdx + dudy));
+  static_cast<FluxEuler*> (fluxBuff)->m_momentum.setZ(-mu * (dwdx + dudz));
   static_cast<FluxEuler*> (fluxBuff)->m_energ = -mu * (1./3.*u*(4*dudx - 2.*(dvdy + dwdz)) + (dvdx + dudy)*v + (dwdx + dudz)*w);
 }
 
@@ -213,18 +222,18 @@ void APEViscosity::solveFluxViscosityNonReflecting(const Coord& velocityLeft, co
 
 //***********************************************************************
 
-void APEViscosity::solveFluxViscosityWall(const Coord& velocityLeft, const double& muLeft, const double& distLeft) const
+void APEViscosity::solveFluxViscosityWall(const Coord& velocityLeft, const double& muLeft, const double& distLeft, Coord& velocityWall) const
 {
   //Computed the gradients locally because of the particular condition at the wall
-  double dudx = -velocityLeft.getX() / distLeft;
-  double dvdx = -velocityLeft.getY() / distLeft;
-  double dwdx = -velocityLeft.getZ() / distLeft;
+  double dudx = velocityWall.getX() - velocityLeft.getX() / distLeft;
+  double dvdx = velocityWall.getY() - velocityLeft.getY() / distLeft;
+  double dwdx = velocityWall.getZ() - velocityLeft.getZ() / distLeft;
 
   //Writing of viscous terms on each equation of fluxBuffEuler
-  static_cast<FluxEuler*> (fluxBuff)->m_masse = 0.;
-  static_cast<FluxEuler*> (fluxBuff)->m_qdm.setX(-muLeft / 3. * 4. * dudx);
-  static_cast<FluxEuler*> (fluxBuff)->m_qdm.setY(-muLeft * dvdx);
-  static_cast<FluxEuler*> (fluxBuff)->m_qdm.setZ(-muLeft * dwdx);
+  static_cast<FluxEuler*> (fluxBuff)->m_mass = 0.;
+  static_cast<FluxEuler*> (fluxBuff)->m_momentum.setX(-muLeft / 3. * 4. * dudx);
+  static_cast<FluxEuler*> (fluxBuff)->m_momentum.setY(-muLeft * dvdx);
+  static_cast<FluxEuler*> (fluxBuff)->m_momentum.setZ(-muLeft * dwdx);
   static_cast<FluxEuler*> (fluxBuff)->m_energ = 0.;
 }
 
@@ -240,10 +249,10 @@ void APEViscosity::solveFluxViscositySymmetry(const Coord& gradULeft, const Coor
   dwdz = gradWLeft.getZ();
 
   //Writing of viscous terms on each equation of fluxBuffEuler
-  static_cast<FluxEuler*> (fluxBuff)->m_masse = 0.;
-  static_cast<FluxEuler*> (fluxBuff)->m_qdm.setX(-mu / 3. * (4. * dudx - 2. * (dvdy + dwdz)));
-  static_cast<FluxEuler*> (fluxBuff)->m_qdm.setY(0.);
-  static_cast<FluxEuler*> (fluxBuff)->m_qdm.setZ(0.);
+  static_cast<FluxEuler*> (fluxBuff)->m_mass = 0.;
+  static_cast<FluxEuler*> (fluxBuff)->m_momentum.setX(-mu / 3. * (4. * dudx - 2. * (dvdy + dwdz)));
+  static_cast<FluxEuler*> (fluxBuff)->m_momentum.setY(0.);
+  static_cast<FluxEuler*> (fluxBuff)->m_momentum.setZ(0.);
   static_cast<FluxEuler*> (fluxBuff)->m_energ = 0.;
 }
 
@@ -255,14 +264,14 @@ void APEViscosity::solveFluxViscosityOther() const
   //std::cout << "Viscous boundary not managed" << std::endl;
 
   // To avoid bug when not managed
-  static_cast<FluxEuler*> (fluxBuff)->m_masse = 0.;
-  static_cast<FluxEuler*> (fluxBuff)->m_qdm = 0.;
+  static_cast<FluxEuler*> (fluxBuff)->m_mass = 0.;
+  static_cast<FluxEuler*> (fluxBuff)->m_momentum = 0.;
   static_cast<FluxEuler*> (fluxBuff)->m_energ = 0.;
 }
 
 //***********************************************************************
 
-void APEViscosity::communicationsAddPhys(const int& /*numberPhases*/, const int& dim, const int& lvl)
+void APEViscosity::communicationsAddPhys(const int& dim, const int& lvl)
 {
   parallel.communicationsVector(QPA, dim, lvl, m_numQPA, 1); //m_gradU
   parallel.communicationsVector(QPA, dim, lvl, m_numQPA, 2); //m_gradV

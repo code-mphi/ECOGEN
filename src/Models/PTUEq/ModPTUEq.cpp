@@ -28,8 +28,6 @@
 //  along with ECOGEN (file LICENSE).  
 //  If not, see <http://www.gnu.org/licenses/>.
 
-#include <cmath>
-#include <algorithm>
 #include "ModPTUEq.h"
 #include "PhasePTUEq.h"
 
@@ -37,12 +35,12 @@ const std::string ModPTUEq::NAME = "TEMPERATUREPRESSUREVELOCITYEQ";
 
 //***********************************************************************
 
-ModPTUEq::ModPTUEq(int& numberTransports, const int& numberPhases) :
-  Model(NAME,numberTransports)
+ModPTUEq::ModPTUEq(const int& numbTransports, const int& numbPhases) :
+  Model(NAME, numbTransports)
 {
-  fluxBuff = new FluxPTUEq(numberPhases);
+  fluxBuff = new FluxPTUEq(numbPhases);
   for (int i = 0; i < 4; i++) {
-    sourceCons.push_back(new FluxPTUEq(numberPhases));
+    sourceCons.push_back(new FluxPTUEq(numbPhases));
   }
 }
 
@@ -59,7 +57,7 @@ ModPTUEq::~ModPTUEq()
 
 //***********************************************************************
 
-void ModPTUEq::allocateCons(Flux** cons, const int& numberPhases)
+void ModPTUEq::allocateCons(Flux** cons)
 {
   *cons = new FluxPTUEq(numberPhases);
 }
@@ -80,7 +78,7 @@ void ModPTUEq::allocateMixture(Mixture** mixture)
 
 //***********************************************************************
 
-void ModPTUEq::fulfillState(Phase** phases, Mixture* mixture, const int& numberPhases, Prim /*type*/)
+void ModPTUEq::fulfillState(Phase** phases, Mixture* mixture)
 {
   //Complete phases and mixture states from : alphak, pressure and temperature
   for (int k = 0; k < numberPhases; k++) {
@@ -88,14 +86,14 @@ void ModPTUEq::fulfillState(Phase** phases, Mixture* mixture, const int& numberP
     phases[k]->setDensity(phases[k]->getEos()->computeDensity(mixture->getPressure(), mixture->getTemperature()));
     phases[k]->extendedCalculusPhase(mixture->getVelocity());
   }
-  mixture->computeMixtureVariables(phases, numberPhases);
+  mixture->computeMixtureVariables(phases);
 }
 
 //****************************************************************************
 //********************* Cell to cell Riemann solvers *************************
 //****************************************************************************
 
-void ModPTUEq::solveRiemannIntern(Cell& cellLeft, Cell& cellRight, const int& numberPhases, const double& dxLeft, const double& dxRight, double& dtMax, double& massflow, double& powerFlux) const
+void ModPTUEq::solveRiemannIntern(Cell& cellLeft, Cell& cellRight, const double& dxLeft, const double& dxRight, double& dtMax, std::vector<double> &boundData) const
 {
   Phase* vecPhase;
   double sL, sR;
@@ -122,40 +120,42 @@ void ModPTUEq::solveRiemannIntern(Cell& cellLeft, Cell& cellRight, const int& nu
       vecPhase = cellLeft.getPhase(k);
       double alpha = vecPhase->getAlpha();
       double density = vecPhase->getDensity();
-      static_cast<FluxPTUEq*> (fluxBuff)->m_masse[k] = alpha*density*uL;
+      static_cast<FluxPTUEq*> (fluxBuff)->m_mass[k] = alpha*density*uL;
     }
     double vitY = cellLeft.getMixture()->getVelocity().getY(); double vitZ = cellLeft.getMixture()->getVelocity().getZ();
     double totalEnergy = cellLeft.getMixture()->getEnergy() + 0.5*cellLeft.getMixture()->getVelocity().squaredNorm();
-    static_cast<FluxPTUEq*> (fluxBuff)->m_qdm.setX(rhoL*uL*uL + pL);
-    static_cast<FluxPTUEq*> (fluxBuff)->m_qdm.setY(rhoL*vitY*uL);
-    static_cast<FluxPTUEq*> (fluxBuff)->m_qdm.setZ(rhoL*vitZ*uL);
+    static_cast<FluxPTUEq*> (fluxBuff)->m_momentum.setX(rhoL*uL*uL + pL);
+    static_cast<FluxPTUEq*> (fluxBuff)->m_momentum.setY(rhoL*vitY*uL);
+    static_cast<FluxPTUEq*> (fluxBuff)->m_momentum.setZ(rhoL*vitZ*uL);
     static_cast<FluxPTUEq*> (fluxBuff)->m_energMixture = (rhoL*totalEnergy + pL)*uL;
 
-    //Specific mass flow through interface (kg.s-1.m-2)
-    massflow = rhoL * uL;
-
-    //Specific power flux through interface (W.m-2)
-    powerFlux = massflow * (totalEnergy + pL / rhoL);
+    // Boundary data for output
+    boundData[VarBoundary::p] = pL;
+    boundData[VarBoundary::rho] = rhoL;
+    boundData[VarBoundary::velU] = uL;
+    boundData[VarBoundary::velV] = vitY;
+    boundData[VarBoundary::velW] = vitZ;
   }
   else if (sR <= 0.){
     for (int k = 0; k < numberPhases; k++) {
       vecPhase = cellRight.getPhase(k);
       double alpha = vecPhase->getAlpha();
       double density = vecPhase->getDensity();
-      static_cast<FluxPTUEq*> (fluxBuff)->m_masse[k] = alpha*density*uR;
+      static_cast<FluxPTUEq*> (fluxBuff)->m_mass[k] = alpha*density*uR;
     }
     double vitY = cellRight.getMixture()->getVelocity().getY(); double vitZ = cellRight.getMixture()->getVelocity().getZ();
     double totalEnergy = cellRight.getMixture()->getEnergy() + 0.5*cellRight.getMixture()->getVelocity().squaredNorm();
-    static_cast<FluxPTUEq*> (fluxBuff)->m_qdm.setX(rhoR*uR*uR + pR);
-    static_cast<FluxPTUEq*> (fluxBuff)->m_qdm.setY(rhoR*vitY*uR);
-    static_cast<FluxPTUEq*> (fluxBuff)->m_qdm.setZ(rhoR*vitZ*uR);
+    static_cast<FluxPTUEq*> (fluxBuff)->m_momentum.setX(rhoR*uR*uR + pR);
+    static_cast<FluxPTUEq*> (fluxBuff)->m_momentum.setY(rhoR*vitY*uR);
+    static_cast<FluxPTUEq*> (fluxBuff)->m_momentum.setZ(rhoR*vitZ*uR);
     static_cast<FluxPTUEq*> (fluxBuff)->m_energMixture = (rhoR*totalEnergy + pR)*uR;
 
-    //Specific mass flow through interface (kg.s-1.m-2)
-    massflow = rhoR * uR;
-
-    //Specific power flux through interface (W.m-2)
-    powerFlux = massflow * (totalEnergy + pR / rhoR);
+    // Boundary data for output
+    boundData[VarBoundary::p] = pR;
+    boundData[VarBoundary::rho] = rhoR;
+    boundData[VarBoundary::velU] = uR;
+    boundData[VarBoundary::velV] = vitY;
+    boundData[VarBoundary::velW] = vitZ;
   }
   else if (sM >= 0.){
     //Compute left solution state
@@ -169,18 +169,19 @@ void ModPTUEq::solveRiemannIntern(Cell& cellLeft, Cell& cellRight, const int& nu
       double alpha = vecPhase->getAlpha();
       double density = vecPhase->getDensity();
       mkL = alpha*density*(sL - uL);
-      static_cast<FluxPTUEq*> (fluxBuff)->m_masse[k] = mkL / (sL - sM) * sM;
+      static_cast<FluxPTUEq*> (fluxBuff)->m_mass[k] = mkL / (sL - sM) * sM;
     }
-    static_cast<FluxPTUEq*> (fluxBuff)->m_qdm.setX(rhoStar*sM*sM + pStar);
-    static_cast<FluxPTUEq*> (fluxBuff)->m_qdm.setY(rhoStar*vitY*sM);
-    static_cast<FluxPTUEq*> (fluxBuff)->m_qdm.setZ(rhoStar*vitZ*sM);
+    static_cast<FluxPTUEq*> (fluxBuff)->m_momentum.setX(rhoStar*sM*sM + pStar);
+    static_cast<FluxPTUEq*> (fluxBuff)->m_momentum.setY(rhoStar*vitY*sM);
+    static_cast<FluxPTUEq*> (fluxBuff)->m_momentum.setZ(rhoStar*vitZ*sM);
     static_cast<FluxPTUEq*> (fluxBuff)->m_energMixture = (rhoStar*EStar + pStar)*sM;
-    
-    //Specific mass flow through interface (kg.s-1.m-2)
-    massflow = rhoStar * sM;
 
-    //Specific power flux through interface (W.m-2)
-    powerFlux = massflow * (EStar + pStar / rhoStar);
+    // Boundary data for output
+    boundData[VarBoundary::p] = pStar;
+    boundData[VarBoundary::rho] = rhoStar;
+    boundData[VarBoundary::velU] = sM;
+    boundData[VarBoundary::velV] = vitY;
+    boundData[VarBoundary::velW] = vitZ;    
   }
   else{
     //Compute right solution state
@@ -194,18 +195,19 @@ void ModPTUEq::solveRiemannIntern(Cell& cellLeft, Cell& cellRight, const int& nu
       double alpha = vecPhase->getAlpha();
       double density = vecPhase->getDensity();
       mkR = alpha*density*(sR - uR);
-      static_cast<FluxPTUEq*> (fluxBuff)->m_masse[k] = mkR / (sR - sM) * sM;
+      static_cast<FluxPTUEq*> (fluxBuff)->m_mass[k] = mkR / (sR - sM) * sM;
     }
-    static_cast<FluxPTUEq*> (fluxBuff)->m_qdm.setX(rhoStar*sM*sM + pStar);
-    static_cast<FluxPTUEq*> (fluxBuff)->m_qdm.setY(rhoStar*vitY*sM);
-    static_cast<FluxPTUEq*> (fluxBuff)->m_qdm.setZ(rhoStar*vitZ*sM);
+    static_cast<FluxPTUEq*> (fluxBuff)->m_momentum.setX(rhoStar*sM*sM + pStar);
+    static_cast<FluxPTUEq*> (fluxBuff)->m_momentum.setY(rhoStar*vitY*sM);
+    static_cast<FluxPTUEq*> (fluxBuff)->m_momentum.setZ(rhoStar*vitZ*sM);
     static_cast<FluxPTUEq*> (fluxBuff)->m_energMixture = (rhoStar*EStar + pStar)*sM;
 
-    //Specific mass flow through interface (kg.s-1.m-2)
-    massflow = rhoStar * sM;
-
-    //Specific power flux through interface (W.m-2)
-    powerFlux = massflow * (EStar + pStar / rhoStar);
+    // Boundary data for output
+    boundData[VarBoundary::p] = pStar;
+    boundData[VarBoundary::rho] = rhoStar;
+    boundData[VarBoundary::velU] = sM;
+    boundData[VarBoundary::velV] = vitY;
+    boundData[VarBoundary::velW] = vitZ;
   }
 
   //Contact discontinuity velocity
@@ -216,7 +218,7 @@ void ModPTUEq::solveRiemannIntern(Cell& cellLeft, Cell& cellRight, const int& nu
 //************** Half Riemann solvers for boundary conditions ****************
 //****************************************************************************
 
-void ModPTUEq::solveRiemannWall(Cell& cellLeft, const int& numberPhases, const double& dxLeft, double& dtMax) const
+void ModPTUEq::solveRiemannWall(Cell& cellLeft, const double& dxLeft, double& dtMax, std::vector<double>& boundData) const
 {
   double sL;
   double pStar(0.);
@@ -230,20 +232,27 @@ void ModPTUEq::solveRiemannWall(Cell& cellLeft, const int& numberPhases, const d
 
   for (int k = 0; k < numberPhases; k++)
   {
-    static_cast<FluxPTUEq*> (fluxBuff)->m_masse[k] = 0.;
+    static_cast<FluxPTUEq*> (fluxBuff)->m_mass[k] = 0.;
   }
-  static_cast<FluxPTUEq*> (fluxBuff)->m_qdm.setX(pStar);
-  static_cast<FluxPTUEq*> (fluxBuff)->m_qdm.setY(0.);
-  static_cast<FluxPTUEq*> (fluxBuff)->m_qdm.setZ(0.);
+  static_cast<FluxPTUEq*> (fluxBuff)->m_momentum.setX(pStar);
+  static_cast<FluxPTUEq*> (fluxBuff)->m_momentum.setY(0.);
+  static_cast<FluxPTUEq*> (fluxBuff)->m_momentum.setZ(0.);
   static_cast<FluxPTUEq*> (fluxBuff)->m_energMixture = 0.;
 
   //Contact discontinuity velocity
   static_cast<FluxPTUEq*> (fluxBuff)->m_sM = 0.;
+
+  // Boundary data for output
+  boundData[VarBoundary::p] = pStar;
+  boundData[VarBoundary::rho] = 0.;
+  boundData[VarBoundary::velU] = 0.;
+  boundData[VarBoundary::velV] = 0.;
+  boundData[VarBoundary::velW] = 0.;
 }
 
 //****************************************************************************
 
-void ModPTUEq::solveRiemannTank(Cell& cellLeft, const int& numberPhases, const double& dxLeft, double& dtMax, const double* ak0, const double* rhok0, const double& p0, const double& T0, double& massflow, double& powerFlux) const
+void ModPTUEq::solveRiemannTank(Cell& cellLeft, const double& dxLeft, double& dtMax, const double* ak0, const double* rhok0, const double& p0, const double& T0, std::vector<double> &boundData) const
 {
   double sL, zL, sM, vmv0, mL;
   double pStar(0.), uStar(0.), rhoStar(0.), uyStar(0.), uzStar(0.), EStar(0.), vStar(0.);
@@ -259,7 +268,7 @@ void ModPTUEq::solveRiemannTank(Cell& cellLeft, const int& numberPhases, const d
   //1) Left wave velocity estimation using pStar = p0
   //-------------------------------------------------
   pStar = p0;
-  vStar = cellLeft.getMixture()->computeVolumeIsentrope(TB->Yk, pL, TL, pStar, numberPhases);
+  vStar = cellLeft.getMixture()->computeVolumeIsentrope(TB->Yk, pL, TL, pStar);
   vmv0 = vStar - 1. / rhoL;
   if (std::fabs(vmv0) > 1e-10) { mL = sqrt((pL - pStar) / vmv0); }
   else { mL = zL; }
@@ -297,7 +306,7 @@ void ModPTUEq::solveRiemannTank(Cell& cellLeft, const int& numberPhases, const d
   else { //tank inflow => star right state solution
     //Total enthalpy and entropy in tank state
     double H0(0.);
-    double rho0 = cellLeft.getMixture()->computeDensity(ak0, rhok0, numberPhases);
+    double rho0 = cellLeft.getMixture()->computeDensity(ak0, rhok0);
     for (int k = 0;k < numberPhases;k++) {
       TB->Yk0[k] = ak0[k] * rhok0[k] / rho0;
       H0 += TB->Yk0[k] * TB->eos[k]->computeTotalEnthalpy(rhok0[k], p0, 0.);  //default zero velocity in tank
@@ -320,12 +329,12 @@ void ModPTUEq::solveRiemannTank(Cell& cellLeft, const int& numberPhases, const d
       if (p > p0) { p = p0 - 1e-6; }
       //R) Tank rekations in the right (H=cte et s=cste)
       //mixture entropy constant brings the relation between Tr* andd p*
-      TStarR = cellLeft.getMixture()->computeTemperatureIsentrope(TB->Yk0, p0, T0, p, numberPhases, &TStarR);
-      hStarR = cellLeft.getMixture()->computeEnthalpyIsentrope(TB->Yk0, p0, T0, p, numberPhases, &dhStarR);
+      TStarR = cellLeft.getMixture()->computeTemperatureIsentrope(TB->Yk0, p0, T0, p, &TStarR);
+      hStarR = cellLeft.getMixture()->computeEnthalpyIsentrope(TB->Yk0, p0, T0, p, &dhStarR);
       uStarR = -sqrt(2.*(H0 - hStarR));
       duStarR = -dhStarR / uStarR;
       //L) Left relations s=cste (could be R-H if necessary)
-      vStarL = cellLeft.getMixture()->computeVolumeIsentrope(TB->Yk, pL, TL, p, numberPhases, &dvStarL);
+      vStarL = cellLeft.getMixture()->computeVolumeIsentrope(TB->Yk, pL, TL, p, &dvStarL);
       vmv0 = vStarL - 1. / rhoL;
       if (std::fabs(vmv0) > 1e-10) {
         mL = sqrt((pL - p) / vmv0);
@@ -359,26 +368,27 @@ void ModPTUEq::solveRiemannTank(Cell& cellLeft, const int& numberPhases, const d
   //4) Flux completion
   //------------------
   for (int k = 0; k < numberPhases; k++) {
-    static_cast<FluxPTUEq*> (fluxBuff)->m_masse[k] = rhoStar* TB->YkStar[k] * uStar;
+    static_cast<FluxPTUEq*> (fluxBuff)->m_mass[k] = rhoStar* TB->YkStar[k] * uStar;
   }
-  static_cast<FluxPTUEq*> (fluxBuff)->m_qdm.setX(rhoStar*uStar*uStar + pStar);
-  static_cast<FluxPTUEq*> (fluxBuff)->m_qdm.setY(rhoStar*uStar*uyStar);
-  static_cast<FluxPTUEq*> (fluxBuff)->m_qdm.setZ(rhoStar*uStar*uzStar);
+  static_cast<FluxPTUEq*> (fluxBuff)->m_momentum.setX(rhoStar*uStar*uStar + pStar);
+  static_cast<FluxPTUEq*> (fluxBuff)->m_momentum.setY(rhoStar*uStar*uyStar);
+  static_cast<FluxPTUEq*> (fluxBuff)->m_momentum.setZ(rhoStar*uStar*uzStar);
   static_cast<FluxPTUEq*> (fluxBuff)->m_energMixture = (rhoStar*EStar + pStar)*uStar;
 
   //Contact discontinuity velocity
   static_cast<FluxPTUEq*> (fluxBuff)->m_sM = sM;
 
-  //Specific mass flow through interface (kg.s-1.m-2)
-  massflow = rhoStar * uStar;
-
-  //Specific power flux through interface (W.m-2)
-  powerFlux = massflow * (EStar + pStar / rhoStar);
+  // Boundary data for output
+  boundData[VarBoundary::p] = pStar;
+  boundData[VarBoundary::rho] = rhoStar;
+  boundData[VarBoundary::velU] = uStar;
+  boundData[VarBoundary::velV] = uyStar;
+  boundData[VarBoundary::velW] = uzStar;
 }
 
 //****************************************************************************
 
-void ModPTUEq::solveRiemannOutflow(Cell& cellLeft, const int& numberPhases, const double& dxLeft, double& dtMax, const double p0, double& massflow, double& powerFlux) const
+void ModPTUEq::solveRiemannOutflow(Cell& cellLeft, const double& dxLeft, double& dtMax, const double p0, std::vector<double> &boundData) const
 {
   double sL, zL;
   double pStar(p0);
@@ -394,7 +404,7 @@ void ModPTUEq::solveRiemannOutflow(Cell& cellLeft, const int& numberPhases, cons
   //-----------------------------
   zL = rhoL*cL;
   double rhoStar(0.), vmv0, mL, uStar;
-  rhoStar = 1./cellLeft.getMixture()->computeVolumeIsentrope(TB->Yk, pL, TL, p0, numberPhases);
+  rhoStar = 1./cellLeft.getMixture()->computeVolumeIsentrope(TB->Yk, pL, TL, p0);
   vmv0 = 1./ rhoStar - 1. / rhoL;
   if (std::fabs(vmv0) > 1e-10) {
     mL = sqrt((pL - p0) / vmv0);
@@ -417,21 +427,22 @@ void ModPTUEq::solveRiemannOutflow(Cell& cellLeft, const int& numberPhases, cons
   double totalEnergy = cellLeft.getMixture()->getEnergy() + 0.5*cellLeft.getMixture()->getVelocity().squaredNorm();
   double EStar(totalEnergy + (uStar - uL)*(uStar - pL / mL));
   for (int k = 0; k < numberPhases; k++) {
-    static_cast<FluxPTUEq*> (fluxBuff)->m_masse[k] = rhoStar * TB->Yk[k] * uStar ;
+    static_cast<FluxPTUEq*> (fluxBuff)->m_mass[k] = rhoStar * TB->Yk[k] * uStar ;
   }
-  static_cast<FluxPTUEq*> (fluxBuff)->m_qdm.setX(uStar*uStar*rhoStar + pStar);
-  static_cast<FluxPTUEq*> (fluxBuff)->m_qdm.setY(uStar*vL*rhoStar);
-  static_cast<FluxPTUEq*> (fluxBuff)->m_qdm.setZ(uStar*wL*rhoStar);
+  static_cast<FluxPTUEq*> (fluxBuff)->m_momentum.setX(uStar*uStar*rhoStar + pStar);
+  static_cast<FluxPTUEq*> (fluxBuff)->m_momentum.setY(uStar*vL*rhoStar);
+  static_cast<FluxPTUEq*> (fluxBuff)->m_momentum.setZ(uStar*wL*rhoStar);
   static_cast<FluxPTUEq*> (fluxBuff)->m_energMixture = (EStar*rhoStar + pStar)*uStar;
 
   //Contact discontinuity velocity
   static_cast<FluxPTUEq*> (fluxBuff)->m_sM = uStar;
 
-  //Specific mass flow through interface (kg.s-1.m-2)
-  massflow = rhoStar * uStar;
-
-  //Specific power flux through interface (W.m-2)
-  powerFlux = massflow * (EStar + pStar / rhoStar);
+  // Boundary data for output
+  boundData[VarBoundary::p] = pStar;
+  boundData[VarBoundary::rho] = rhoStar;
+  boundData[VarBoundary::velU] = uStar;
+  boundData[VarBoundary::velV] = vL;
+  boundData[VarBoundary::velW] = wL;
 }
 
 //****************************************************************************
@@ -448,10 +459,10 @@ const double& ModPTUEq::getSM()
 void ModPTUEq::reverseProjection(const Coord normal, const Coord tangent, const Coord binormal) const
 {
   Coord fluxProjected;
-  fluxProjected.setX(normal.getX()*static_cast<FluxPTUEq*> (fluxBuff)->m_qdm.getX() + tangent.getX()*static_cast<FluxPTUEq*> (fluxBuff)->m_qdm.getY() + binormal.getX()*static_cast<FluxPTUEq*> (fluxBuff)->m_qdm.getZ());
-  fluxProjected.setY(normal.getY()*static_cast<FluxPTUEq*> (fluxBuff)->m_qdm.getX() + tangent.getY()*static_cast<FluxPTUEq*> (fluxBuff)->m_qdm.getY() + binormal.getY()*static_cast<FluxPTUEq*> (fluxBuff)->m_qdm.getZ());
-  fluxProjected.setZ(normal.getZ()*static_cast<FluxPTUEq*> (fluxBuff)->m_qdm.getX() + tangent.getZ()*static_cast<FluxPTUEq*> (fluxBuff)->m_qdm.getY() + binormal.getZ()*static_cast<FluxPTUEq*> (fluxBuff)->m_qdm.getZ());
-  static_cast<FluxPTUEq*> (fluxBuff)->m_qdm.setXYZ(fluxProjected.getX(), fluxProjected.getY(), fluxProjected.getZ());
+  fluxProjected.setX(normal.getX()*static_cast<FluxPTUEq*> (fluxBuff)->m_momentum.getX() + tangent.getX()*static_cast<FluxPTUEq*> (fluxBuff)->m_momentum.getY() + binormal.getX()*static_cast<FluxPTUEq*> (fluxBuff)->m_momentum.getZ());
+  fluxProjected.setY(normal.getY()*static_cast<FluxPTUEq*> (fluxBuff)->m_momentum.getX() + tangent.getY()*static_cast<FluxPTUEq*> (fluxBuff)->m_momentum.getY() + binormal.getY()*static_cast<FluxPTUEq*> (fluxBuff)->m_momentum.getZ());
+  fluxProjected.setZ(normal.getZ()*static_cast<FluxPTUEq*> (fluxBuff)->m_momentum.getX() + tangent.getZ()*static_cast<FluxPTUEq*> (fluxBuff)->m_momentum.getY() + binormal.getZ()*static_cast<FluxPTUEq*> (fluxBuff)->m_momentum.getZ());
+  static_cast<FluxPTUEq*> (fluxBuff)->m_momentum.setXYZ(fluxProjected.getX(), fluxProjected.getY(), fluxProjected.getZ());
 }
 
 //****************************************************************************

@@ -36,13 +36,13 @@
 class BoundCondTank : public BoundCond
 {
   public:
-    BoundCondTank(int numPhysique, tinyxml2::XMLElement* element, int& numberPhases, int& numberTransports, std::vector<std::string> nameTransports, Eos** eos, std::string fileName = "Unknown file");
+    BoundCondTank(int numPhysique, tinyxml2::XMLElement* element, const int& numbPhases, const int& numbTransports, std::vector<std::string> nameTransports, Eos** eos, std::string fileName = "Unknown file");
     BoundCondTank(const BoundCondTank &Source, const int& lvl = 0); //Copy ctor (useful for AMR)
     virtual ~BoundCondTank();
 
     virtual void createBoundary(TypeMeshContainer<CellInterface*>& cellInterfaces);
-    virtual void solveRiemannBoundary(Cell& cellLeft, const int& numberPhases, const double& dxLeft, double& dtMax);
-    virtual void solveRiemannTransportBoundary(Cell& cellLeft, const int& numberTransports) const;
+    virtual void solveRiemannBoundary(Cell& cellLeft, const double& dxLeft, double& dtMax);
+    virtual void solveRiemannTransportBoundary(Cell& cellLeft) const;
 
     virtual int whoAmI() const { return TANK; };
     virtual void printInfo();
@@ -52,13 +52,11 @@ class BoundCondTank : public BoundCond
 
   protected:
   private:
-    int m_numberPhases;
     double* m_ak0;
     double* m_Yk0;
     double* m_rhok0;
     double m_p0;
     double m_T0;
-    int m_numberTransports;
     double* m_valueTransport;
 };
 

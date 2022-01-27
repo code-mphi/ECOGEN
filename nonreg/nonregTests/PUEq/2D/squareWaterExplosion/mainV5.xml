@@ -3,13 +3,13 @@
 	<run>pressureVelocityEq2DsquareWaterExplosion</run>
 	<outputMode format="XML" binary="false"/>
 	<timeControlMode iterations="true">
-<iterations number="10" iterFreq="10"/>
+	<iterations number="10" iterFreq="10"/>
 		<physicalTime totalTime="1.e-3" timeFreq="2.e-4"/>
 	</timeControlMode>
 	<computationControl CFL="0.8"/>
-  <secondOrder>
-    <globalLimiter>minmod</globalLimiter>
-    <globalVolumeFractionLimiter>vanalbada</globalVolumeFractionLimiter>
-    <interfaceVolumeFractionLimiter>vanalbada</interfaceVolumeFractionLimiter>
-  </secondOrder>
+	<secondOrder>
+		<globalLimiter>minmod</globalLimiter>
+		<globalVolumeFractionLimiter>vanalbada</globalVolumeFractionLimiter>
+		<interfaceVolumeFractionLimiter>vanalbada</interfaceVolumeFractionLimiter>
+	</secondOrder>
 </computationParam>

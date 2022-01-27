@@ -1,0 +1,14 @@
+<?xml version = "1.0" encoding = "UTF-8" standalone = "yes"?>
+<computationParam>
+	<run>PUEqRayleighTaylorSameDynamicViscosity</run>
+	<outputMode format="XML" binary="false" precision="16"/>
+	<timeControlMode iterations="false">
+		<iterations number="20" iterFreq="1"/>
+		<physicalTime totalTime="10." timeFreq="0.1"/>
+	</timeControlMode>
+	<computationControl CFL="0.6"/>
+	<restartSimulation restartFileNumber="0" AMRsaveFreq="5"/>
+	<secondOrder>
+        	<globalLimiter>mc</globalLimiter>
+	</secondOrder>
+</computationParam>

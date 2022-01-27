@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mesh>
+	<type structure="unStructured"/>
+	<unstructuredMesh>
+		<file name="./libMeshes/foil/naca66-312_unstruct_aoa6d.msh"/>
+		<parallel GMSHPretraitement="true"/> 
+	</unstructuredMesh>
+</mesh>

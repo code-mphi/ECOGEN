@@ -30,7 +30,7 @@
   </state>
   <state name="rightChamber">
     <material type="fluid" EOS="IG_air.xml">
-      <dataFluid alpha="1.0" density="100.0"/>
+      <dataFluid alpha="0.5" density="100.0"/>
     </material>
     <material type="fluid" EOS="SG_water.xml">
       <dataFluid alpha="0.5" density="1000.0"/>

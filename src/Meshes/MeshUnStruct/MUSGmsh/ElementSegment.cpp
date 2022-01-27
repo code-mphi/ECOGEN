@@ -31,14 +31,14 @@
 #include "ElementSegment.h"
 
 const int ElementSegment::TYPEGMSH = 1;
-const int ElementSegment::NOMBRENOEUDS = 2;
-const int ElementSegment::NOMBREFACES = 2;
+const int ElementSegment::NUMBERNODES = 2;
+const int ElementSegment::NUMBERFACES = 2;
 const int ElementSegment::TYPEVTK = 3;
 
 //***********************************************************************
 
 ElementSegment::ElementSegment() :
-ElementNS(TYPEGMSH, NOMBRENOEUDS, NOMBREFACES, TYPEVTK)
+ElementNS(TYPEGMSH, NUMBERNODES, NUMBERFACES, TYPEVTK)
 {}
 
 //***********************************************************************
@@ -60,26 +60,26 @@ void ElementSegment::computeLCFL(const Coord* noeuds)
 }
 
 //***********************************************************************
-// Nouvelle version beaucoup plus efficace avec recherche dans tableau temporaire
-void ElementSegment::construitFaces(const Coord* noeuds, FaceNS** faces, int& iMax, int** facesTemp, int* sommeNoeudsTemp)
+
+void ElementSegment::construitFaces(const Coord* noeuds, FaceNS** faces, int& iMax, int** facesBuff, int* sumNodesBuff)
 {
   //2 faces a traiter de type vertex
   int indexFaceExiste(-1);
   int noeudAutre;
-  for (int i = 0; i < NOMBREFACES; i++)
+  for (int i = 0; i < NUMBERFACES; i++)
   {
     switch (i)
     {
-      case 0: facesTemp[iMax][0] = m_numNoeuds[0]; noeudAutre = 1; break;
-      case 1: facesTemp[iMax][0] = m_numNoeuds[1]; noeudAutre = 0; break;      
+      case 0: facesBuff[iMax][0] = m_numNoeuds[0]; noeudAutre = 1; break;
+      case 1: facesBuff[iMax][0] = m_numNoeuds[1]; noeudAutre = 0; break;      
     }
-    sommeNoeudsTemp[iMax] = facesTemp[iMax][0];
-    //Existance face ?
-    indexFaceExiste = FaceNS::rechercheFace(facesTemp[iMax],sommeNoeudsTemp[iMax],facesTemp,sommeNoeudsTemp,1,iMax);
+    sumNodesBuff[iMax] = facesBuff[iMax][0];
+    // Checking face existence
+    indexFaceExiste = FaceNS::searchFace(facesBuff[iMax],sumNodesBuff[iMax],facesBuff,sumNodesBuff,1,iMax);
     //Creation face ou rattachement
     if (indexFaceExiste==-1)
     {
-      faces[iMax] = new FacePoint(facesTemp[iMax][0]); //pas besoin du tri ici
+      faces[iMax] = new FacePoint(facesBuff[iMax][0]); //pas besoin du tri ici
       faces[iMax]->construitFace(noeuds, m_numNoeuds[noeudAutre], this);
       iMax++;
     }
@@ -91,21 +91,21 @@ void ElementSegment::construitFaces(const Coord* noeuds, FaceNS** faces, int& iM
 }
 
 //***********************************************************************
-// Nouvelle version beaucoup plus efficace avec recherche dans tableau temporaire
-void ElementSegment::construitFacesSimplifie(int& iMax, int** facesTemp, int* sommeNoeudsTemp)
+
+void ElementSegment::construitFacesSimplifie(int& iMax, int** facesBuff, int* sumNodesBuff)
 {
   //2 faces a traiter de type vertex
   int indexFaceExiste(-1);
-  for (int i = 0; i < NOMBREFACES; i++)
+  for (int i = 0; i < NUMBERFACES; i++)
   {
     switch (i)
     {
-      case 0: facesTemp[iMax][0] = m_numNoeuds[0]; break;
-      case 1: facesTemp[iMax][0] = m_numNoeuds[1]; break;
+      case 0: facesBuff[iMax][0] = m_numNoeuds[0]; break;
+      case 1: facesBuff[iMax][0] = m_numNoeuds[1]; break;
     }
-    sommeNoeudsTemp[iMax] = facesTemp[iMax][0];
-    //Existance face ?
-    indexFaceExiste = FaceNS::rechercheFace(facesTemp[iMax], sommeNoeudsTemp[iMax], facesTemp, sommeNoeudsTemp, 1, iMax);
+    sumNodesBuff[iMax] = facesBuff[iMax][0];
+    // Checking face existence
+    indexFaceExiste = FaceNS::searchFace(facesBuff[iMax], sumNodesBuff[iMax], facesBuff, sumNodesBuff, 1, iMax);
     //Creation face ou rattachement
     if (indexFaceExiste == -1)
     {
@@ -120,7 +120,7 @@ void ElementSegment::attributFaceLimite(FaceNS** faces, const int& indexMaxFaces
 {
   int indexFaceExiste(0);
   FaceSegment face(m_numNoeuds[0], m_numNoeuds[1]);
-  if (face.faceExiste(faces, indexMaxFaces, indexFaceExiste))
+  if (face.faceExists(faces, indexMaxFaces, indexFaceExiste))
   {
     faces[indexFaceExiste]->ajouteElementVoisinLimite(this);
   }
@@ -139,7 +139,7 @@ void ElementSegment::attributFaceCommunicante(FaceNS** faces, const int& indexMa
   if (m_numNoeuds[0] < numberNoeudsInternes)
   {
     FacePoint face(m_numNoeuds[0]);
-    if (face.faceExiste(faces, indexMaxFaces, indexFaceExiste))
+    if (face.faceExists(faces, indexMaxFaces, indexFaceExiste))
     {
       faces[indexFaceExiste]->ajouteElementVoisinLimite(this);
       faces[indexFaceExiste]->setEstComm(true);
@@ -149,7 +149,7 @@ void ElementSegment::attributFaceCommunicante(FaceNS** faces, const int& indexMa
   if (m_numNoeuds[1] < numberNoeudsInternes)
   {
     FacePoint face(m_numNoeuds[1]);
-    if (face.faceExiste(faces, indexMaxFaces, indexFaceExiste))
+    if (face.faceExists(faces, indexMaxFaces, indexFaceExiste))
     {
       faces[indexFaceExiste]->ajouteElementVoisinLimite(this);
       faces[indexFaceExiste]->setEstComm(true);
@@ -159,21 +159,21 @@ void ElementSegment::attributFaceCommunicante(FaceNS** faces, const int& indexMa
 
 //***********************************************************************
 
-int ElementSegment::compteFaceCommunicante(std::vector<int*>& facesTemp, std::vector<int>& sommeNoeudsTemp)
+int ElementSegment::compteFaceCommunicante(std::vector<int*>& facesBuff, std::vector<int>& sumNodesBuff)
 {
   //2 faces a traiter de type vertex
   int indexFaceExiste(-1), numberFacesCommunicante(0);
   int vertex;
-  for (int i = 0; i < NOMBREFACES; i++)
+  for (int i = 0; i < NUMBERFACES; i++)
   {
     switch (i)
     {
       case 0: vertex = m_numNoeuds[0]; break;
       case 1: vertex = m_numNoeuds[1]; break;
     }
-    int iMax = sommeNoeudsTemp.size();
+    int iMax = sumNodesBuff.size();
     //Recherche existance faces
-    indexFaceExiste = FaceNS::rechercheFace(&vertex, vertex, facesTemp, sommeNoeudsTemp, 1, iMax);
+    indexFaceExiste = FaceNS::searchFace(&vertex, vertex, facesBuff, sumNodesBuff, 1, iMax);
     if (indexFaceExiste != -1)
     {
       numberFacesCommunicante++;
@@ -184,12 +184,12 @@ int ElementSegment::compteFaceCommunicante(std::vector<int*>& facesTemp, std::ve
 
 //***********************************************************************
 //Nouvelle version plus efficace
-int ElementSegment::compteFaceCommunicante(int& iMax, int** facesTemp, int* sommeNoeudsTemp)
+int ElementSegment::compteFaceCommunicante(int& iMax, int** facesBuff, int* sumNodesBuff)
 {
   //2 faces a traiter de type vertex
   int indexFaceExiste(-1), numberFacesCommunicante(0);
   int vertex;
-  for (int i = 0; i < NOMBREFACES; i++)
+  for (int i = 0; i < NUMBERFACES; i++)
   {
     switch (i)
     {
@@ -197,7 +197,7 @@ int ElementSegment::compteFaceCommunicante(int& iMax, int** facesTemp, int* somm
       case 1: vertex = m_numNoeuds[1]; break;
     }
     //Recherche existance faces
-    indexFaceExiste = FaceNS::rechercheFace(&vertex, vertex, facesTemp, sommeNoeudsTemp, 1, iMax);
+    indexFaceExiste = FaceNS::searchFace(&vertex, vertex, facesBuff, sumNodesBuff, 1, iMax);
     if (indexFaceExiste != -1)
     {
       numberFacesCommunicante++;

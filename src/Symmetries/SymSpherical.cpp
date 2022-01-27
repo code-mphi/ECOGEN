@@ -62,7 +62,7 @@ SymSpherical::~SymSpherical() {}
 
 //***********************************************************************
 
-void SymSpherical::addSymmetricTerms(Cell* cell, const int& numberPhases, Prim type)
+void SymSpherical::addSymmetricTerms(Cell* cell, Prim type)
 {
   double r(0.), v(0.);
   if (numberPhases > 1) {
@@ -75,14 +75,14 @@ void SymSpherical::addSymmetricTerms(Cell* cell, const int& numberPhases, Prim t
   }
   else {
 	  switch (m_radialAxis) {
-		case X: r = cell->getPosition().getX(); v = cell->getPhase(0)->getU(); break;
-		case Y: r = cell->getPosition().getY(); v = cell->getPhase(0)->getV(); break;
-		case Z: r = cell->getPosition().getZ(); v = cell->getPhase(0)->getW(); break;
+		case X: r = cell->getPosition().getX(); v = cell->getPhase(0, type)->getU(); break;
+		case Y: r = cell->getPosition().getY(); v = cell->getPhase(0, type)->getV(); break;
+		case Z: r = cell->getPosition().getZ(); v = cell->getPhase(0, type)->getW(); break;
 		default: Errors::errorMessage("Name of the axis is unknown in SymSpherical::addSymmetricTerms");
 	  }
   }
   v *= 2.; //v is multiplied by 2 for the spherical symmetry in comparison to the cylindrical symmetry
-  cell->getCons()->addSymmetricTerms(cell->getPhases(type), cell->getMixture(type), numberPhases, r, v);
+  cell->getCons()->addSymmetricTerms(cell->getPhases(type), cell->getMixture(type), r, v);
 }
 
 //***********************************************************************

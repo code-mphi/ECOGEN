@@ -45,10 +45,9 @@ public:
   virtual int getType() const { return P; }
   //! \brief     Newton-Raphson method for the infinite pressure relaxation
   //! \details   Call of this method computes the totally relaxed pressure in a given cell.
-  //! \param     numberPhases   number of phases
   //! \param     pStar          initial and final pressure value
   //! \param     iteration      number of iterations for convergence of the method
-  virtual void NewtonRaphson(const int& numberPhases, double& pStar, int& iteration);
+  virtual void NewtonRaphson(double& pStar, int& iteration);
 };
 
 #endif // RELAXATIONP_H

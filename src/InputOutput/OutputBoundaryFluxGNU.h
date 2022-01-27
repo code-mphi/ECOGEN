@@ -28,32 +28,44 @@
 //  along with ECOGEN (file LICENSE).  
 //  If not, see <http://www.gnu.org/licenses/>.
 
-#ifndef OutputBoundaryFluxGNU_H
-#define OutputBoundaryFluxGNU_H
+#ifndef OUTPUTBOUNDARYFLUXGNU_H
+#define OUTPUTBOUNDARYFLUXGNU_H
 
-#include "OutputGNU.h"
+#include "OutputBoundaryGNU.h"
 
-class OutputBoundaryFluxGNU : public OutputGNU
+enum FluxType { MASSFLOW, POWERFLUX };
+
+class OutputBoundaryFluxGNU : public OutputBoundaryGNU
 {
 public:
   OutputBoundaryFluxGNU(std::string casTest, std::string run, tinyxml2::XMLElement* element, std::string fileName, Input* entree);
   virtual ~OutputBoundaryFluxGNU();
 
-  virtual void prepareSortieSpecifique(std::vector<CellInterface*>* cellInterfacesLvl);
-  virtual void ecritSolution(std::vector<CellInterface*>* cellInterfacesLvl);
-  virtual void extractFlux(std::vector<CellInterface*>* cellInterfacesLvl);
-
-  //Accessors
-  virtual double getNextTime() { return m_nextAcq; };
+  // Virtual methods
+  virtual void initializeSpecificOutputBound();
+  virtual void writeResults(std::vector<CellInterface*>* cellInterfacesLvl);
 
 protected:
-  std::string m_fluxType; //!< Flux type could be either massflow or power flux
-  double m_flux;          //!< Flux recorded through boundary either massflow (kg.s-1) or power flux (W)
-  int m_numPhys;          //!< Physical number of the boundary to record
-  std::vector<int> cellInterfaceIndexes; //!< Indexes of cellInterfaces on the boundary (speed up searching process)
+  //! \brief  Get flux either massflow or enthalpy through the boundary 
+  double getFlux(std::vector<CellInterface*>* cellInterfacesLvl);
 
-  double m_acqFreq; //!< Acquisition time frequency 
-  double m_nextAcq; //!< Next acquisition time
+  //! \brief  Extract massflow throught the whole boundary surface
+  double extractMassflow(std::vector<CellInterface*>* cellInterfacesLvl);
+
+  //! \brief  Extract enthalpy flux throught the whole boundary surface
+  double extractEnthalpyFlux(std::vector<CellInterface*>* cellInterfacesLvl);
+  
+  //! \brief  Compute the massflow contribution of a single cell interface
+  double computeMassflowFace(CellInterface *bound);
+
+  //! \brief  Compute the enthalpy flux contribution of a single cell interface
+  double computeTotalEnthalpyFluxFace(CellInterface *bound);
+
+  //! \brief  Compute the enthalpy flux contribution of a single cell interface when MRF is activated
+  double computeTotalEnthalpyFluxFaceMRF(CellInterface *bound);
+
+  FluxType m_fluxType;    //!< Flux type could be either massflow or power flux
+  double m_flux;          //!< Flux recorded through boundary either massflow (kg.s-1) or power flux (W)
 };
 
-#endif // OutputBoundaryFluxGNU_H
+#endif // OUTPUTBOUNDARYFLUXGNU_H

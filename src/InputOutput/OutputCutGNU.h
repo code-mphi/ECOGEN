@@ -41,10 +41,10 @@ public:
   OutputCutGNU(std::string casTest, std::string run, tinyxml2::XMLElement* element, std::string fileName, TypeGO type, Input *entree);
   virtual ~OutputCutGNU();
 
-  virtual void ecritSolution(Mesh *mesh, std::vector<Cell*>* cellsLvl);
+  virtual void writeResults(Mesh *mesh, std::vector<Cell*>* cellsLvl);
 
-  virtual void prepareOutputInfos() {}; //Aucune infos a ecrire
-  virtual void ecritInfos() {};
+  virtual void initializeOutputInfos() {}; //Aucune infos a ecrire
+  virtual void writeInfos() {};
 
 private:
   GeometricObject *m_objet; //droite ou plan de cut

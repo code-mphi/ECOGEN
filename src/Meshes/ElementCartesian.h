@@ -62,7 +62,7 @@ public:
 
 protected:
 
-  Coord m_size;     //!< dimensions of cartesian cell
+  Coord m_size;     //!< dimensions of Cartesian cell
 
   //Attributs pour methode AMR
   std::vector<ElementCartesian*> m_elementsChildren;      /*!< Vector d'elements enfants */

@@ -30,12 +30,12 @@
 
 #include "FaceTriangle.h"
 
-const int FaceTriangle::NOMBRENOEUDS=3;
+const int FaceTriangle::NUMBERNODES=3;
 
 //***********************************************************************
 
 FaceTriangle::FaceTriangle(const int& numNoeud1, const int& numNoeud2, const int& numNoeud3, int tri) :
-FaceNS(NOMBRENOEUDS)
+FaceNS(NUMBERNODES)
 {
   m_numNoeuds[0] = numNoeud1;
   m_numNoeuds[1] = numNoeud2;

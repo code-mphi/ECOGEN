@@ -45,8 +45,8 @@ class APUEqSurfaceTension : public APUEq
     virtual void addQuantityAddPhys(Cell* cell);
 
     virtual double computeEnergyAddPhys(QuantitiesAddPhys* QPA);
-    virtual void solveFluxAddPhys(CellInterface* cellInterface, const int& numberPhases);
-    virtual void solveFluxAddPhysBoundary(CellInterface* cellInterface, const int& numberPhases);
+    virtual void solveFluxAddPhys(CellInterface* cellInterface);
+    virtual void solveFluxAddPhysBoundary(CellInterface* cellInterface);
     //! \brief     Solve the surface-tension flux between two cells
     //! \param     velocityLeft         velocity of the left cell
     //! \param     velocityRight        velocity of the right cell
@@ -66,14 +66,14 @@ class APUEqSurfaceTension : public APUEq
     void solveFluxSurfaceTensionInflow() const;
     //! \brief     Solve the surface-tension flux at a boundary with non-defined type yet
     void solveFluxSurfaceTensionOther() const;
-    virtual void addNonCons(Cell* /*cell*/, const int& /*numberPhases*/) {}; //The surface-tension effects do not involve non-conservative terms.
-    virtual void addSymmetricTermsRadialAxisOnX(Cell* cell, const int& numberPhases);
-    virtual void addSymmetricTermsRadialAxisOnY(Cell* cell, const int& numberPhases);
+    virtual void addNonCons(Cell* /*cell*/) {}; //The surface-tension effects do not involve non-conservative terms.
+    virtual void addSymmetricTermsRadialAxisOnX(Cell* cell);
+    virtual void addSymmetricTermsRadialAxisOnY(Cell* cell);
 
     virtual void reinitializeColorFunction(std::vector<Cell*>* cellsLvl, const int& lvl);
     virtual bool reinitializationActivated() { return m_reinitializationActivated; };
 
-    virtual void communicationsAddPhys(const int& /*numberPhases*/, const int& dim, const int& lvl);
+    virtual void communicationsAddPhys(const int& dim, const int& lvl);
     virtual const int& getNumTransportAssociated() const { return m_numTransportAssociated; };
 
   protected:

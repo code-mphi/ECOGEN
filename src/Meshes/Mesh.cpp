@@ -43,7 +43,7 @@ Mesh::~Mesh() {}
 
 //***********************************************************************
 
-void Mesh::ecritSolutionGnuplot(std::vector<Cell*>* cellsLvl, std::ofstream &fileStream, GeometricObject *objet) const
+void Mesh::writeResultsGnuplot(std::vector<Cell*>* cellsLvl, std::ofstream &fileStream, GeometricObject *objet) const
 {
   for (unsigned int c = 0; c < cellsLvl[0].size(); c++) {
     if (cellsLvl[0][c]->printGnuplotAMR(fileStream, m_geometrie, objet)) break;
@@ -54,22 +54,20 @@ void Mesh::ecritSolutionGnuplot(std::vector<Cell*>* cellsLvl, std::ofstream &fil
 //****************************** Parallele ***********************************
 //****************************************************************************
 
-void Mesh::initializePersistentCommunications(const int numberPhases, const int numberTransports, const TypeMeshContainer<Cell*>& cells, std::string ordreCalcul)
+void Mesh::initializePersistentCommunications(const TypeMeshContainer<Cell*>& cells, std::string ordreCalcul)
 {
-	m_numberPhases = numberPhases;
-	m_numberTransports = numberTransports;
 	int numberVariablesPhaseATransmettre = cells[0]->getPhase(0)->numberOfTransmittedVariables();
-	numberVariablesPhaseATransmettre *= m_numberPhases;
+	numberVariablesPhaseATransmettre *= numberPhases;
 	int numberVariablesMixtureATransmettre = cells[0]->getMixture()->numberOfTransmittedVariables();
-	int m_numberPrimitiveVariables = numberVariablesPhaseATransmettre + numberVariablesMixtureATransmettre + m_numberTransports;
+	int m_numberPrimitiveVariables = numberVariablesPhaseATransmettre + numberVariablesMixtureATransmettre + numberTransports;
   int m_numberSlopeVariables(0);
   if (ordreCalcul == "SECONDORDER") {
     int numberSlopesPhaseATransmettre = cells[0]->getPhase(0)->numberOfTransmittedSlopes();
-    numberSlopesPhaseATransmettre *= m_numberPhases;
+    numberSlopesPhaseATransmettre *= numberPhases;
     int numberSlopesMixtureATransmettre = cells[0]->getMixture()->numberOfTransmittedSlopes();
-    m_numberSlopeVariables = numberSlopesPhaseATransmettre + numberSlopesMixtureATransmettre + m_numberTransports + 1 + 1; //+1 for the interface detection + 1 for slope index
+    m_numberSlopeVariables = numberSlopesPhaseATransmettre + numberSlopesMixtureATransmettre + numberTransports + 1 + 1; //+1 for the interface detection + 1 for slope index
   }
-	parallel.initializePersistentCommunications(m_numberPrimitiveVariables, m_numberSlopeVariables, m_numberTransports, m_geometrie);
+	parallel.initializePersistentCommunications(m_numberPrimitiveVariables, m_numberSlopeVariables, numberTransports, m_geometrie);
 }
 
 //***********************************************************************

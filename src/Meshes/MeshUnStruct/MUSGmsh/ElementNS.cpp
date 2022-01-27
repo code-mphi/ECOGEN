@@ -58,14 +58,14 @@ ElementNS::~ElementNS()
 
 //***********************************************************************
 
-void ElementNS::construitElement(const int* numNoeuds, const Coord* noeuds, const int numberEntitePhysique, const int numberEntiteGeometrique, int& indexElement)
+void ElementNS::construitElement(const int* numNoeuds, const Coord* nodes, const int numberEntitePhysique, const int numberEntiteGeometrique, int& indexElement)
 {
   m_index = indexElement;
   //Attribution des number de noeud vis a vis du tableau de noeud global et compute position du Centre de l'element
   m_position = 0.;
   for (int i = 0; i < m_numberNoeuds; i++){
     m_numNoeuds[i] = numNoeuds[i];
-    m_position += noeuds[i];
+    m_position += nodes[i];
   }
   m_position /= static_cast<double>(m_numberNoeuds);
 
@@ -73,16 +73,16 @@ void ElementNS::construitElement(const int* numNoeuds, const Coord* noeuds, cons
   m_appartenanceGeometrique = numberEntiteGeometrique;
 
   //Calculs des proprietes de l'element
-  this->computeVolume(noeuds);
-  this->computeLCFL(noeuds);
+  this->computeVolume(nodes);
+  this->computeLCFL(nodes);
 }
 
 //***********************************************************************
 
-void ElementNS::construitElementParallele(const Coord* noeuds)
+void ElementNS::construitElementParallele(const Coord* nodes)
 {
   Coord* noeudslocal = new Coord[m_numberNoeuds];
-  for (int i = 0; i < m_numberNoeuds; i++){ noeudslocal[i] = noeuds[m_numNoeuds[i]]; }
+  for (int i = 0; i < m_numberNoeuds; i++){ noeudslocal[i] = nodes[m_numNoeuds[i]]; }
 
   //Attribution des number de noeud vis a vis du tableau de noeud global et compute position du Centre de l'element
   for (int i = 0; i < m_numberNoeuds; i++)

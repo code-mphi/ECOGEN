@@ -41,13 +41,13 @@ class APUEqConductivity : public APUEq
 {
   public:
     APUEqConductivity();
-    APUEqConductivity(int& numberQPA, Eos** eos, const int& numberPhases);
+    APUEqConductivity(int& numberQPA, Eos** eos, const int& numbPhases);
     virtual ~APUEqConductivity();
 
     virtual void addQuantityAddPhys(Cell* cell);
 
-    virtual void solveFluxAddPhys(CellInterface* cellInterface, const int& numberPhases);
-    virtual void solveFluxAddPhysBoundary(CellInterface* cellInterface, const int& numberPhases);
+    virtual void solveFluxAddPhys(CellInterface* cellInterface);
+    virtual void solveFluxAddPhysBoundary(CellInterface* cellInterface);
     //! \brief     Solve the conductivity flux between two cells
     //! \param     gradTkLeft           temperature gradient of phase k of the left cell
     //! \param     gradTkRight          temperature gradient of phase k of the right cell
@@ -68,9 +68,9 @@ class APUEqConductivity : public APUEq
     void solveFluxConductivityInflow() const;
     //! \brief     Solve the conductivity flux at a boundary with non-defined type yet
     void solveFluxConductivityOther() const;
-    virtual void addNonCons(Cell* /*cell*/, const int& /*numberPhases*/) {}; //The conductivity does not involve non-conservative terms.
+    virtual void addNonCons(Cell* /*cell*/) {}; //The conductivity does not involve non-conservative terms.
 
-    virtual void communicationsAddPhys(const int& numberPhases, const int& dim, const int& lvl);
+    virtual void communicationsAddPhys(const int& dim, const int& lvl);
 
   protected:
 

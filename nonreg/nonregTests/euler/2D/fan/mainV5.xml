@@ -7,4 +7,7 @@
 		<physicalTime totalTime="0.04" timeFreq="0.01"/>
 	</timeControlMode>
 	<computationControl CFL="0.8"/>
+	<gradient>
+		<method>green-gauss</method>
+	</gradient>
 </computationParam>

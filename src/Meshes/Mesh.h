@@ -33,8 +33,6 @@
 
 #include <ctime>
 #include <fstream>
-#include <vector>
-#include <list>
 #include "../libTierces/tinyxml2.h"
 #include "../Order1/CellGhost.h"
 #include "../Order1/CellInterface.h"
@@ -79,7 +77,7 @@ public:
 
   //Printing
   //--------
-  void ecritSolutionGnuplot(std::vector<Cell*>* cellsLvl, std::ofstream& fileStream, GeometricObject* objet = 0) const;
+  void writeResultsGnuplot(std::vector<Cell*>* cellsLvl, std::ofstream& fileStream, GeometricObject* objet = 0) const;
   virtual void ecritHeaderPiece(std::ofstream& /*fileStream*/, std::vector<Cell*>* /*cellsLvl*/) const { Errors::errorMessage("ecritHeaderPiece non prevu pour mesh considere"); };
   virtual std::string recupereChaineExtent(bool /*global*/ = false) const { Errors::errorMessage("recupereChaineExtent non prevu pour mesh considere"); return 0; };
   virtual void recupereCoord(std::vector<double>& /*jeuDonnees*/, Axis /*axis*/) const { Errors::errorMessage("recupereCoord non prevu pour mesh considere"); };
@@ -101,7 +99,7 @@ public:
   //! \param     phase            number of requested phase (-1 for mixture, -2 for transport, -3 for xi, -4 for gradient density mixture)
   //! \param     jeuDonnees       double vector containing the extracted data
   virtual void setDataSet(std::vector<double>& /*jeuDonnees*/, std::vector<Cell*>* /*cellsLvl*/, const int /*var*/, int /*phase*/) const { Errors::errorMessage("setDataSet not available for requested mesh"); };
-  virtual void refineCellAndCellInterfaces(Cell* /*cell*/, const std::vector<AddPhys*>& /*addPhys*/, Model* /*model*/, int& /*nbCellsTotalAMR*/) { Errors::errorMessage("refineCellAndCellInterfaces not available for requested mesh"); };
+  virtual void refineCellAndCellInterfaces(Cell* /*cell*/, const std::vector<AddPhys*>& /*addPhys*/, int& /*nbCellsTotalAMR*/) { Errors::errorMessage("refineCellAndCellInterfaces not available for requested mesh"); };
   //! \brief     Extracting absolute velocity for specific Moving Reference Frame computations
   //! \param     cellsLvl         data structure containing pointer to cells
   //! \param     sourceMRF        pointer to the corresponding MRF source
@@ -112,18 +110,19 @@ public:
   
   //Specific to AMR method
   //----------------------
-  virtual void procedureRaffinementInitialization(std::vector<Cell*>* /*cellsLvl*/, TypeMeshContainer<Cell*>* /*cellsLvlGhost*/, std::vector<CellInterface*>* /*cellInterfacesLvl*/,
-    const std::vector<AddPhys*>& /*addPhys*/, Model* /*model*/, int& nbCellsTotalAMR, std::vector<GeometricalDomain*>& /*domains*/, Eos** /*eos*/, const int& /*restartSimulation*/, std::string /*ordreCalcul*/,
-    const int& /*numberPhases*/, const int& /*numberTransports*/) { nbCellsTotalAMR = m_numberCellsCalcul; };
+  virtual void procedureRaffinementInitialization(std::vector<Cell*>* /*cellsLvl*/, TypeMeshContainer<Cell*>* /*cellsLvlGhost*/,
+    std::vector<CellInterface*>* /*cellInterfacesLvl*/, const std::vector<AddPhys*>& /*addPhys*/, int& nbCellsTotalAMR,
+    std::vector<GeometricalDomain*>& /*domains*/, Eos** /*eos*/, const int& /*restartSimulation*/, std::string /*ordreCalcul*/) { nbCellsTotalAMR = m_numberCellsCalcul; };
   virtual void procedureRaffinement(std::vector<Cell*>* /*cellsLvl*/, TypeMeshContainer<Cell*>* /*cellsLvlGhost*/, std::vector<CellInterface*>* /*cellInterfacesLvl*/, const int& /*lvl*/,
-    const std::vector<AddPhys*>& /*addPhys*/, Model* /*model*/, int& /*nbCellsTotalAMR*/, Eos** /*eos*/) {};
+    const std::vector<AddPhys*>& /*addPhys*/, int& /*nbCellsTotalAMR*/, Eos** /*eos*/) {};
 
 	//Specific for parallel
   //---------------------
-	virtual void initializePersistentCommunications(const int numberPhases, const int numberTransports, const TypeMeshContainer<Cell*>& cells, std::string ordreCalcul);
+	virtual void initializePersistentCommunications(const TypeMeshContainer<Cell*>& cells, std::string ordreCalcul);
 	virtual void finalizeParallele(const int& lvlMax);
-  virtual void parallelLoadBalancingAMR(std::vector<Cell*>* /*cellsLvl*/, TypeMeshContainer<Cell*>* /*cellsLvlGhost*/, std::vector<CellInterface*>* /*cellInterfacesLvl*/, std::string /*ordreCalcul*/,
-    const int& /*numberPhases*/, const int& /*numberTransports*/, const std::vector<AddPhys*>& /*addPhys*/, Model* /*model*/, Eos** /*eos*/, int& /*nbCellsTotalAMR*/, bool /*init*/ = false) {};
+  virtual void parallelLoadBalancingAMR(std::vector<Cell*>* /*cellsLvl*/, TypeMeshContainer<Cell*>* /*cellsLvlGhost*/,
+    std::vector<CellInterface*>* /*cellInterfacesLvl*/, std::string /*ordreCalcul*/,
+    const std::vector<AddPhys*>& /*addPhys*/, Eos** /*eos*/, int& /*nbCellsTotalAMR*/, bool /*init*/ = false) {};
 
   
 protected:
@@ -136,8 +135,5 @@ protected:
 	int m_numberCellsTotal;                  /*Cells de compute internes + cells fantomes dediees aux communications parallele*/
 
   TypeM m_type;
-
-	int m_numberPhases;
-	int m_numberTransports;
 };
 #endif // MESH_H

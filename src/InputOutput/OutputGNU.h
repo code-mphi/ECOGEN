@@ -35,21 +35,35 @@
 class OutputGNU : public Output
 {
 public:
+  
+  //! \brief   Default constructor for specific output without specific needs
   OutputGNU();
+  
+  //! \brief   Main constructor for datasets
+  //! \param   casTest   Test case name (defined in "main.xml")  
+  //! \param   nameRun   Folder to store results
+  //! \param   element   XML outputMode element
+  //! \param   fileName  Full path to mainVX.xml of current test case
+  //! \param   entree    Input pointer to access run pointer and its information
   OutputGNU(std::string casTest, std::string run, tinyxml2::XMLElement* element, std::string fileName, Input *entree);
+  
+  //! \brief   Constructor for specific derived GNU outputs (boundary, probe, cut)
+  //! \param   element   XML GNU output element to get stream precision
+  OutputGNU(tinyxml2::XMLElement* element);
+  
   virtual ~OutputGNU();
 
-  virtual void prepareSortieSpecifique() {};  // Nothing to do for this output
-  virtual void prepareSortieSpecifique(std::vector<CellInterface*>* /*cellInterfacesLvl*/) {}; // Nothing to do for this output
-  virtual void ecritSolution(Mesh *mesh, std::vector<Cell*>* cellsLvl);
-  virtual void ecritSolution(std::vector<CellInterface*>* /*cellInterfacesLvl*/) { try { throw ErrorECOGEN("ecritSolution not available for requested output format"); } catch (ErrorECOGEN&) { throw; } };
+  virtual void initializeSpecificOutput() {};  // Nothing to do for this output
+  virtual void initializeSpecificOutput(std::vector<CellInterface*>* /*cellInterfacesLvl*/) {}; // Nothing to do for this output
+  virtual void writeResults(Mesh *mesh, std::vector<Cell*>* cellsLvl);
+  virtual void writeResults(std::vector<CellInterface*>* /*cellInterfacesLvl*/) { try { throw ErrorECOGEN("writeResults not available for requested output format"); } catch (ErrorECOGEN&) { throw; } };
 
 protected:
 
   void ecritScriptGnuplot(const int& dim);
   void ecritScriptGnuplot(const std::string& varName);
 
-  std::string creationNameFichierGNU(const char* name, int lvl = -1, int proc = -1, int numFichier = -1, std::string nameVariable = "defaut") const;
+  std::string createFilenameGNU(const char* name, int lvl = -1, int proc = -1, int numFichier = -1, std::string nameVariable = "defaut") const;
   void printBlocGnuplot(std::ofstream& fileStream, int& index, const int& dim);
 
   std::string m_fileNameVisu;

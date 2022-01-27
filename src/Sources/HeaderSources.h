@@ -31,9 +31,10 @@
 #ifndef HEADERSOURCES_H
 #define HEADERSOURCES_H
 
-#include "SourceGravity.h"
-#include "SourceHeating.h"
-#include "SourceMRF.h"
+#include "SourceNumGravity.h"
+#include "SourceNumHeating.h"
+#include "SourceNumMRF.h"
+#include "SourceExactEulerKorteweg.h"
 
 //Add new sources here
 

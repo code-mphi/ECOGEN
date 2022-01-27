@@ -62,7 +62,7 @@ SymCylindrical::~SymCylindrical() {}
 
 //***********************************************************************
 
-void SymCylindrical::addSymmetricTerms(Cell* cell, const int& numberPhases, Prim type)
+void SymCylindrical::addSymmetricTerms(Cell* cell, Prim type)
 {
   double r(0.), v(0.);
   if (numberPhases > 1) { // Multiphase models
@@ -75,22 +75,22 @@ void SymCylindrical::addSymmetricTerms(Cell* cell, const int& numberPhases, Prim
   }
   else { // Euler monophasic model
 	  switch (m_radialAxis) {
-		case X: r = cell->getPosition().getX(); v = cell->getPhase(0)->getU(); break;
-		case Y: r = cell->getPosition().getY(); v = cell->getPhase(0)->getV(); break;
-		case Z: r = cell->getPosition().getZ(); v = cell->getPhase(0)->getW(); break;
+		case X: r = cell->getPosition().getX(); v = cell->getPhase(0, type)->getU(); break;
+		case Y: r = cell->getPosition().getY(); v = cell->getPhase(0, type)->getV(); break;
+		case Z: r = cell->getPosition().getZ(); v = cell->getPhase(0, type)->getW(); break;
 		default: Errors::errorMessage("Name of the axis is unknown in SymCylindrical::addSymmetricTerms");
 	  }
   }
-  cell->getCons()->addSymmetricTerms(cell->getPhases(type), cell->getMixture(type), numberPhases, r, v);
+  cell->getCons()->addSymmetricTerms(cell->getPhases(type), cell->getMixture(type), r, v);
 }
 
 //***********************************************************************
 
-void SymCylindrical::addSymmetricTermsAddPhys(Cell* cell, const int& numberPhases, AddPhys &addPhys)
+void SymCylindrical::addSymmetricTermsAddPhys(Cell* cell, AddPhys &addPhys)
 {
   switch (m_radialAxis) {
-  case X: addPhys.addSymmetricTermsRadialAxisOnX(cell, numberPhases); break;
-  case Y: addPhys.addSymmetricTermsRadialAxisOnY(cell, numberPhases); break;
+  case X: addPhys.addSymmetricTermsRadialAxisOnX(cell); break;
+  case Y: addPhys.addSymmetricTermsRadialAxisOnY(cell); break;
   default: Errors::errorMessage("Name of the axis is unknown in SymCylindrical::addSymmetricTermsAddPhys");
   }
 }

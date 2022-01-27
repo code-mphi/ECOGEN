@@ -90,7 +90,7 @@ The last ECOGEN version |version| can be downloaded from GitHub. The source file
 The package includes:
 
 * ECOGEN/src/ folder including C++ source files.
-* ECOGEN/libMeshes/ folder including examples of unstructured meshes in *.geo* format (gmsh files version 2). See section :ref:`Sec:tuto:generatingMeshes` for details.
+* ECOGEN/libMeshes/ folder including examples of unstructured meshes in *.geo* format (Gmsh files version 2). See section :ref:`Sec:tuto:generatingMeshes` for details.
 * ECOGEN/libEOS/ folder including some possible parameters for the equation-of-states in XML files. See section :ref:`Sec:IO:materials` for details.
 * ECOGEN/libTests folder including:
 

@@ -3,76 +3,111 @@
 
   <!-- Logo ECOGEN -->
   <!-- ----------- -->
-  <!-- <testCase>./libTests/logoECOGEN/ECOGEN/</testCase> -->
-  <!-- <testCase>./libTests/logoECOGEN/ECOGENFluide/</testCase> -->
+  <!-- <testCase>libTests/logoECOGEN/ECOGEN/</testCase> -->
+  <!-- <testCase>libTests/logoECOGEN/ECOGENFluide/</testCase> -->
 
   <!-- Euler reference test cases -->
   <!-- -------------------------- -->
-  <!-- <testCase>./libTests/referenceTestCases/euler/1D/transport/positiveVelocity/</testCase> -->
-  <!-- <testCase>./libTests/referenceTestCases/euler/1D/transport/negativeVelocity/</testCase> -->
-  <!-- <testCase>./libTests/referenceTestCases/euler/1D/shockTubes/HPLeft/</testCase> -->
-  <!-- <testCase>./libTests/referenceTestCases/euler/1D/shockTubes/HPRight/</testCase> -->
-  <!-- <testCase>./libTests/referenceTestCases/euler/1D/shockTubes/spherical/</testCase> -->
-  <!-- <testCase>./libTests/referenceTestCases/euler/2D/transports/rectangleDiagonal/</testCase> -->
-  <!-- <testCase>./libTests/referenceTestCases/euler/2D/HPCenter/</testCase> -->
-  <!-- <testCase>./libTests/referenceTestCases/euler/2D/HPUnstructured/</testCase> -->
-  <!-- <testCase>./libTests/referenceTestCases/euler/2D/nozzles/tankWithShock/</testCase> -->
-  <!-- <testCase>./libTests/referenceTestCases/euler/2D/nozzles/supersonicInjection/</testCase> --> <!-- Something is wrong with the results of this test case (certainly coming from injection boundary condition), maybe something missing in initialConditionsV4.xml -->
-  <!-- <testCase>./libTests/referenceTestCases/euler/2D/nozzles/subsonicInjection/</testCase> -->
-  <!-- <testCase>./libTests/referenceTestCases/euler/2D/shockTubes/cylindrical/</testCase> -->
-  <!-- <testCase>./libTests/referenceTestCases/euler/3D/LPCenter/</testCase> -->
+  <!-- <testCase>libTests/referenceTestCases/euler/1D/transport/positiveVelocity/</testCase> -->
+  <!-- <testCase>libTests/referenceTestCases/euler/1D/transport/negativeVelocity/</testCase> -->
+  <!-- <testCase>libTests/referenceTestCases/euler/1D/shockTubes/HPLeft/</testCase> -->
+  <!-- <testCase>libTests/referenceTestCases/euler/1D/shockTubes/HPRight/</testCase> -->
+  <!-- <testCase>libTests/referenceTestCases/euler/1D/shockTubes/spherical/</testCase> -->
+  <!-- <testCase>libTests/referenceTestCases/euler/2D/transports/rectangleDiagonal/</testCase> -->
+  <!-- <testCase>libTests/referenceTestCases/euler/2D/HPCenter/</testCase> -->
+  <!-- <testCase>libTests/referenceTestCases/euler/2D/HPUnstructured/</testCase> -->
+  <!-- <testCase>libTests/referenceTestCases/euler/2D/nozzles/tankWithShock/</testCase> -->
+  <!-- <testCase>libTests/referenceTestCases/euler/2D/nozzles/supersonicInjection/</testCase> --> <!-- Something is wrong with the results of this test case (certainly coming from injection boundary condition), maybe something missing in initialConditionsV4.xml -->
+  <!-- <testCase>libTests/referenceTestCases/euler/2D/nozzles/subsonicInjection/</testCase> -->
+  <!-- <testCase>libTests/referenceTestCases/euler/2D/nozzles/lowMachSmoothCrossSection/</testCase> -->
+  <!-- <testCase>libTests/referenceTestCases/euler/2D/shockTubes/cylindrical/</testCase> -->
+  <!-- <testCase>libTests/referenceTestCases/euler/2D/Blasius/BlasiusLaminar/</testCase> -->
+  <!-- <testCase>libTests/referenceTestCases/euler/2D/Blasius/BlasiusTurbulent/</testCase> -->
+  <!-- <testCase>libTests/referenceTestCases/euler/2D/Blasius/BlasiusLEIS/</testCase> -->
+  <!-- <testCase>libTests/referenceTestCases/euler/2D/RayleighTaylor/</testCase> -->
+  <!-- <testCase>libTests/referenceTestCases/euler/3D/LPCenter/</testCase> -->
 
   <!-- Pressure- and velocity-equilibrium-model reference test cases -->
   <!-- ------------------------------------------------------------- -->
-  <!-- <testCase>./libTests/referenceTestCases/PUEq/1D/transports/interfaceWaterAir/</testCase> -->
-  <!-- <testCase>./libTests/referenceTestCases/PUEq/1D/shockTubes/interfaceWaterAir/</testCase> -->
-  <!-- <testCase>./libTests/referenceTestCases/PUEq/1D/shockTubes/interfaceWaterAirNASG/</testCase> -->
-  <!-- <testCase>./libTests/referenceTestCases/PUEq/1D/shockTubes/epoxySpinel/</testCase> -->
-  <!-- <testCase>./libTests/referenceTestCases/PUEq/1D/cavitation/</testCase> -->
-  <!-- <testCase>./libTests/referenceTestCases/PUEq/1D/sphericalCollapse/Pratio1427/</testCase> -->
-  <!-- <testCase>./libTests/referenceTestCases/PUEq/2D/transportWaterSquareInAir/</testCase> -->
-  <!-- <testCase>./libTests/referenceTestCases/PUEq/2D/squareWaterExplosion/</testCase> -->
-  <!-- <testCase>./libTests/referenceTestCases/PUEq/2D/shockBubble/heliumAir/</testCase> -->
-  <!-- <testCase>./libTests/referenceTestCases/PUEq/2D/richtmyerMeshkov/</testCase> -->
-  <!-- <testCase>./libTests/referenceTestCases/PUEq/2D/sphericalCollapse/Pratio1427/</testCase> -->
-  <!-- <testCase>./libTests/referenceTestCases/PUEq/2D/nozzles/tank/</testCase> -->
-  <!-- <testCase>./libTests/referenceTestCases/PUEq/2D/nozzles/injection/</testCase> --> <!-- Something is wrong with the results of this test case (certainly coming from injection boundary condition), maybe something missing in initialConditionsV4.xml -->
-  <!-- <testCase>./libTests/referenceTestCases/PUEq/2D/testUnstructured/</testCase> -->
-  <!-- <testCase>./libTests/referenceTestCases/PUEq/2D/shockTubeFreeSurface/</testCase> --> <!-- Works but initial conditions (mesh) might not be the best ones -->
-  <!-- <testCase>./libTests/referenceTestCases/PUEq/AddPhysicalEffects/evap/evapShockTube/</testCase> -->
-  <!-- <testCase>./libTests/referenceTestCases/PUEq/AddPhysicalEffects/surfaceTension/squareToCircle/</testCase> -->
-  <!-- <testCase>./libTests/referenceTestCases/PUEq/AddPhysicalEffects/surfaceTension/squareToCircleSymmetry/</testCase> -->
-  <!-- <testCase>./libTests/referenceTestCases/PUEq/AddPhysicalEffects/surfaceTension/waterCylinderInAir/</testCase> -->
-  <!-- <testCase>./libTests/referenceTestCases/PUEq/AddPhysicalEffects/surfaceTension/waterDropletInAir/</testCase> -->
-  <!-- <testCase>./libTests/referenceTestCases/PUEq/AddPhysicalEffects/surfaceTension/waterDropletInAir_axisym/</testCase> -->
-  <!-- <testCase>./libTests/referenceTestCases/PUEq/AddPhysicalEffects/surfaceTension/dropletImpact/</testCase> -->
-  <!-- <testCase>./libTests/referenceTestCases/PUEq/AddPhysicalEffects/surfaceTension/dropletImpact_restart/</testCase> -->
-  <!-- <testCase>./libTests/referenceTestCases/PUEq/AddPhysicalEffects/gravity/</testCase> -->
-  <!-- <testCase>./libTests/referenceTestCases/PUEq/3D/shockBubble/heliumAir/</testCase> -->
-  <!-- <testCase>./libTests/referenceTestCases/PUEq/3D/sphericalCollapse/Pratio1427/</testCase> -->
-  <!-- <testCase>./libTests/referenceTestCases/PUEq/3D/unstructured/</testCase> --> <!-- Not working, once corrected, to add to nonreg -->
+  <!-- <testCase>libTests/referenceTestCases/PUEq/1D/transports/interfaceWaterAir/</testCase> -->
+  <!-- <testCase>libTests/referenceTestCases/PUEq/1D/shockTubes/interfaceWaterAir/</testCase> -->
+  <!-- <testCase>libTests/referenceTestCases/PUEq/1D/shockTubes/interfaceWaterAirNASG/</testCase> -->
+  <!-- <testCase>libTests/referenceTestCases/PUEq/1D/shockTubes/epoxySpinel/</testCase> -->
+  <!-- <testCase>libTests/referenceTestCases/PUEq/1D/cavitation/</testCase> -->
+  <!-- <testCase>libTests/referenceTestCases/PUEq/1D/sphericalCollapse/Pratio1427/</testCase> -->
+  <!-- <testCase>libTests/referenceTestCases/PUEq/2D/transportWaterSquareInAir/</testCase> -->
+  <!-- <testCase>libTests/referenceTestCases/PUEq/2D/squareWaterExplosion/</testCase> -->
+  <!-- <testCase>libTests/referenceTestCases/PUEq/2D/shockBubble/heliumAir/</testCase> -->
+  <!-- <testCase>libTests/referenceTestCases/PUEq/2D/RichtmyerMeshkov/</testCase> -->
+  <!-- <testCase>libTests/referenceTestCases/PUEq/2D/RayleighTaylor/sameDynamicViscosity/</testCase> -->
+  <!-- <testCase>libTests/referenceTestCases/PUEq/2D/RayleighTaylor/sameKinematicViscosity/</testCase> -->
+  <!-- <testCase>libTests/referenceTestCases/PUEq/2D/sphericalCollapse/Pratio1427/</testCase> -->
+  <!-- <testCase>libTests/referenceTestCases/PUEq/2D/nozzles/tank/</testCase> -->
+  <!-- <testCase>libTests/referenceTestCases/PUEq/2D/nozzles/injection/</testCase> --> <!-- Something is wrong with the results of this test case (certainly coming from injection boundary condition), maybe something missing in initialConditionsV4.xml -->
+  <!-- <testCase>libTests/referenceTestCases/PUEq/2D/nozzles/lowMachSmoothCrossSection/</testCase> -->
+  <!-- <testCase>libTests/referenceTestCases/PUEq/2D/testUnstructured/</testCase> -->
+  <!-- <testCase>libTests/referenceTestCases/PUEq/2D/shockTubeFreeSurface/</testCase> --> <!-- Works but initial conditions (mesh) might not be the best ones -->
+  <!-- <testCase>libTests/referenceTestCases/PUEq/2D/foil/noCavitation/</testCase> -->
+  <!-- <testCase>libTests/referenceTestCases/PUEq/2D/foil/cavitation/</testCase> -->
+  <!-- <testCase>libTests/referenceTestCases/PUEq/AddPhysicalEffects/evap/evapShockTube/</testCase> -->
+  <!-- <testCase>libTests/referenceTestCases/PUEq/AddPhysicalEffects/surfaceTension/squareToCircle/</testCase> -->
+  <!-- <testCase>libTests/referenceTestCases/PUEq/AddPhysicalEffects/surfaceTension/squareToCircleSymmetry/</testCase> -->
+  <!-- <testCase>libTests/referenceTestCases/PUEq/AddPhysicalEffects/surfaceTension/waterCylinderInAir/</testCase> -->
+  <!-- <testCase>libTests/referenceTestCases/PUEq/AddPhysicalEffects/surfaceTension/waterDropletInAir/</testCase> -->
+  <!-- <testCase>libTests/referenceTestCases/PUEq/AddPhysicalEffects/surfaceTension/waterDropletInAir_axisym/</testCase> -->
+  <!-- <testCase>libTests/referenceTestCases/PUEq/AddPhysicalEffects/surfaceTension/dropletImpact/</testCase> -->
+  <!-- <testCase>libTests/referenceTestCases/PUEq/AddPhysicalEffects/surfaceTension/dropletImpact_restart/</testCase> -->
+  <!-- <testCase>libTests/referenceTestCases/PUEq/AddPhysicalEffects/gravity/</testCase> -->
+  <!-- <testCase>libTests/referenceTestCases/PUEq/3D/shockBubble/heliumAir/</testCase> -->
+  <!-- <testCase>libTests/referenceTestCases/PUEq/3D/sphericalCollapse/Pratio1427/</testCase> -->
+  <!-- <testCase>libTests/referenceTestCases/PUEq/3D/unstructured/</testCase> -->
 
   <!-- Temperature-, pressure- and velocity-equilibrium-model reference test cases -->
   <!-- --------------------------------------------------------------------------- -->
-  <!-- <testCase>./libTests/referenceTestCases/PTUEq/transports/interfaceAirHelium/</testCase> -->
-  <!-- <testCase>./libTests/referenceTestCases/PTUEq/shockTubes/interfaceWaterAir/</testCase> -->
-  <!-- <testCase>./libTests/referenceTestCases/PTUEq/shockTubes/interfaceDodecane/</testCase> -->
+  <!-- <testCase>libTests/referenceTestCases/PTUEq/transports/interfaceAirHelium/</testCase> -->
+  <!-- <testCase>libTests/referenceTestCases/PTUEq/shockTubes/interfaceWaterAir/</testCase> -->
+  <!-- <testCase>libTests/referenceTestCases/PTUEq/shockTubes/interfaceDodecane/</testCase> -->
 
   <!-- Homogeneous-Euler reference test cases -->
   <!-- -------------------------------------- -->
-  <!-- <testCase>./libTests/referenceTestCases/eulerHomogeneous/shockTubes/</testCase> -->
+  <!-- <testCase>libTests/referenceTestCases/eulerHomogeneous/shockTubes/</testCase> -->
 
   <!-- Velocity-equilibrium-model reference test cases -->
   <!-- ----------------------------------------------- -->
-  <!-- <testCase>./libTests/referenceTestCases/UEq/1D/transports/interfaceWaterAir/</testCase> -->
-  <!-- <testCase>./libTests/referenceTestCases/UEq/1D/shockTubes/interfaceAirHelium/</testCase> -->
-  <!-- <testCase>./libTests/referenceTestCases/UEq/1D/shockTubes/interfaceWaterAir/</testCase> -->
-  <!-- <testCase>./libTests/referenceTestCases/UEq/1D/shockTubes/epoxySpinel/</testCase> -->
-  <!-- <testCase>./libTests/referenceTestCases/UEq/1D/cavitation/</testCase> -->  
+  <!-- <testCase>libTests/referenceTestCases/UEq/1D/transports/interfaceWaterAir/</testCase> -->
+  <!-- <testCase>libTests/referenceTestCases/UEq/1D/shockTubes/interfaceAirHelium/</testCase> -->
+  <!-- <testCase>libTests/referenceTestCases/UEq/1D/shockTubes/interfaceWaterAir/</testCase> -->
+  <!-- <testCase>libTests/referenceTestCases/UEq/1D/shockTubes/interfaceWaterAirNASG/</testCase> -->
+  <!-- <testCase>libTests/referenceTestCases/UEq/1D/shockTubes/epoxySpinel/</testCase> -->
+  <!-- <testCase>libTests/referenceTestCases/UEq/1D/shockTubes/mixtures/</testCase> -->
+  <!-- <testCase>libTests/referenceTestCases/UEq/1D/mixture/waterAir/</testCase> -->
+  <!-- <testCase>libTests/referenceTestCases/UEq/1D/shockOnInterface/sharpInterfaceWaterAir/</testCase> -->
+  <!-- <testCase>libTests/referenceTestCases/UEq/1D/shockOnInterface/diffusedInterfaceWaterAir/</testCase> -->
+  <!-- <testCase>libTests/referenceTestCases/UEq/1D/cavitation/</testCase> -->
+  <!-- <testCase>libTests/referenceTestCases/UEq/1D/sphericalCollapse/Pratio1427/</testCase> -->
+  <!-- <testCase>libTests/referenceTestCases/UEq/2D/nonSphericalCollapseNearWall/</testCase> -->
+  <!-- <testCase>libTests/referenceTestCases/UEq/2D/squareToCircleSymmetry/</testCase> -->
+
+  <!-- Velocity-equilibrium-model with total energy reference test cases -->
+  <!-- ----------------------------------------------------------------- -->
+  <!-- <testCase>libTests/referenceTestCases/UEqTotEnergy/1D/transports/interfaceWaterAir/</testCase> -->
+  <!-- <testCase>libTests/referenceTestCases/UEqTotEnergy/1D/shockTubes/interfaceAirHelium/</testCase> -->
+  <!-- <testCase>libTests/referenceTestCases/UEqTotEnergy/1D/shockTubes/interfaceWaterAir/</testCase> -->
+  <!-- <testCase>libTests/referenceTestCases/UEqTotEnergy/1D/shockTubes/epoxySpinel/</testCase> -->
+  <!-- <testCase>libTests/referenceTestCases/UEqTotEnergy/1D/shockOnInterface/interfaceWaterAir/</testCase> -->
+
+  <!-- Non-linear-Schrodinger reference test cases -->
+  <!-- ------------------------------------------- -->
+  <!-- <testCase>libTests/referenceTestCases/nonLinearSchrodinger/1D/shockTube/</testCase> -->
+
+  <!-- Euler-Korteweg reference test cases -->
+  <!-- ------------------------------------------- -->
+  <!-- <testCase>./libTests/referenceTestCases/eulerKorteweg/1D/shockTubes/VanDerWaals/</testCase> -->
+  <!-- <testCase>./libTests/referenceTestCases/eulerKorteweg/1D/shockTubes/polynomialEOS/</testCase> -->
 
   <!-- Error test cases -->
   <!-- ---------------- -->
-  <!-- <testCase>./libTests/referenceTestCases/errors/errorXMLElement/</testCase> -->
-  <!-- <testCase>./libTests/referenceTestCases/errors/errorXMLAttribute/</testCase> -->
+  <!-- <testCase>libTests/referenceTestCases/errors/errorXMLElement/</testCase> -->
+  <!-- <testCase>libTests/referenceTestCases/errors/errorXMLAttribute/</testCase> -->
 
 </ecogen>

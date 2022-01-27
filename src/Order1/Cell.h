@@ -31,7 +31,6 @@
 #ifndef CELL_H
 #define CELL_H
 
-#include <vector>
 #include <fstream>
 #include "../Models/Phase.h"
 #include "../Maths/Coord.h"
@@ -46,6 +45,7 @@ class Cell; //Predeclaration of class to include following .h
 #include "../AdditionalPhysics/QuantitiesAddPhys.h"
 #include "CellInterface.h"
 #include "../Models/Model.h"
+#include "../Gradients/Gradient.h"
 #include "../Models/Flux.h"
 #include "../Meshes/Element.h"
 #include "../Geometries/GeometricalDomain.h"
@@ -70,32 +70,34 @@ class Cell
         //!  \param    cellInterface   pointer to deleted cell interface
         void deleteCellInterface(CellInterface* cellInterface);
 
+        //!  \brief    Associate external variables
+        //!  \param    mod       pointer to model
+        //!  \param    grad      pointer to gradient method
+        void associateExtVar(Model* mod, Gradient* grad);
         //!  \brief    Memory allocation of cell attributes
-        //!  \param    numberPhases       number of phases
-        //!  \param    numberTransports   number of additional transport equations 
         //!  \param    addPhys            vector of additional physics
-        //!  \param    model             hydrodynamical model used for memory allocation of the cell
-        virtual void allocate(const int& numberPhases, const int& numberTransports, const std::vector<AddPhys*>& addPhys, Model* model);
-        void allocateEos(const int& numberPhases, Model* model);
+        virtual void allocate(const std::vector<AddPhys*>& addPhys);
+        void allocateEos();
         //!  \brief    Filling cell properties using a physical domain
         //!  \param    domains           domain used for filling
         void fill(std::vector<GeometricalDomain*>& domains, const int& /*lvlMax*/);
         virtual void copyPhase(const int& phaseNumber, Phase* phase);
         void copyMixture(Mixture* mixture);
-        void setToZeroCons(const int& numberPhases, const int& numberTransports);
-        void setToZeroConsGlobal(const int& numberPhases, const int& numberTransports);
-        void setToZeroBufferFlux(const int& numberPhases);
-        void timeEvolution(const double& dt, const int& numberPhases, const int& numberTransports, Symmetry* symmetry, Prim type = vecPhases);
-        void timeEvolutionAddPhys(const double& dt, const int& numberPhases);
-        void buildPrim(const int& numberPhases);
-        void buildCons(const int& numberPhases);
-        void correctionEnergy(const int& numberPhases);
-        void sourceTermIntegration(const double& /*dt*/, const int& /*numberPhases*/) {};
-        void printPhasesMixture(const int& numberPhases, const int& numberTransports, std::ofstream& fileStream) const;
-        virtual void completeFulfillState(Prim type = vecPhases);
-        virtual void fulfillState(Prim type = vecPhases);
-        void localProjection(const Coord& normal, const Coord& tangent, const Coord& binormal, const int& numberPhases, Prim /*type*/ = vecPhases);
-        virtual void reverseProjection(const Coord& normal, const Coord& tangent, const Coord& binormal, const int& numberPhases);
+        void setToZeroCons();
+        void setToZeroConsGlobal();
+        void setToZeroBufferFlux();
+        void timeEvolution(const double& dt, Symmetry* symmetry);
+        void timeEvolutionAddPhys(const double& dt);
+        void buildPrim();
+        void buildCons();
+        void correctionEnergy();
+        void sourceTermIntegration(const double& /*dt*/) {};
+        void printPhasesMixture(std::ofstream& fileStream) const;
+        virtual void completeFulfillState();
+        virtual void fulfillState(Prim /*type*/ = vecPhases);
+        void fulfillStateRestart();
+        void localProjection(const Coord& normal, const Coord& tangent, const Coord& binormal, Prim /*type*/ = vecPhases);
+        virtual void reverseProjection(const Coord& normal, const Coord& tangent, const Coord& binormal);
         virtual void copyInCell(Cell& /*cellSource*/) const { Errors::errorMessage("methode copie non dispo pour cell"); };
         void copyVec(Phase** vecPhases, Mixture* mixture, Transport* vecTransports);
         //void printCut1Dde2D(std::ofstream& fileStream, std::string variableConstanteCut, const double& valueCut, const double& dL);    /*!< Ecriture de la cut 1D de la simulation 2D  */
@@ -108,15 +110,19 @@ class Cell
         void setScalar(Variable nameVariable, const double& value, int num = 0);
         Coord selectVector(Variable nameVector, int num = 0, int subscript = -1) const;
         void setVector(Variable nameVector, const Coord& value, int num = 0, int subscript = -1);
-        
-        Coord computeGradient(Variable nameVariable, int num = -1);
+
+        Coord computeGradient(Variable nameVariable, int numPhase = -1);
+        //! \brief  Compute gradients (temperature, velocity, density) of a cell following the Green-Gauss method
+        //! \param  grads          Array of desired gradients, e.g. for temperature each component represents phase temperature and for velocity each component represents the gradient of a velocity component (grad(u), grad(v), grad(w))
+        //! \param  nameVariables  Name of the variable for which the gradient is calculated
+        //! \param  numPhases      Phases number's
         void computeGradient(std::vector<Coord>& grads, std::vector<Variable>& nameVariables, std::vector<int>& numPhases);
-       
+
         const QuantitiesAddPhys* getQPA(int& numQPA) const { return m_vecQuantitiesAddPhys[numQPA]; }; //!< Allow to recover an additional physical quantity
 
         const Coord& getGradTk(int& numPhase, int& numAddPhys) const;
         void setGradTk(int& numPhase, int& numAddPhys, double* buffer, int& counter);
-        void addNonConsAddPhys(const int& numberPhases, AddPhys& addPhys, Symmetry* symmetry);
+        void addNonConsAddPhys(AddPhys& addPhys, Symmetry* symmetry);
 
         void reinitializeColorFunction(const int& numTransport, const int& numPhase); //!< Re-initialize the color function (transport) with alpha
         
@@ -142,8 +148,8 @@ class Cell
         Transport* getConsTransport(const int& numTransport) const;
         void setConsTransport(double value, const int& numTransport);
         std::vector<QuantitiesAddPhys*>& getVecQuantitiesAddPhys();
-        const int& getNumberPhases() const { return m_numberPhases; };
-        const int& getNumberTransports() const { return m_numberTransports; };
+        const int& getNumberPhases() const;
+        const int& getNumberTransports() const;
         double getDensityGradient();
         Model* getModel();
         Coord& getVelocity();
@@ -151,19 +157,18 @@ class Cell
 
         //Not used for first order cells
         //------------------------------
-        virtual void computeLocalSlopes(const int& /*numberPhases*/, const int& /*numberTransports*/, CellInterface& /*cellInterface*/,
-            Limiter& /*globalLimiter*/, Limiter& /*interfaceLimiter*/, Limiter& /*globalVolumeFractionLimiter*/, Limiter& /*interfaceVolumeFractionLimiter*/,
-            double& /*alphaCellAfterOppositeSide*/, double& /*alphaCell*/, double& /*alphaCellOtherInterfaceSide*/, double& /*epsInterface*/) {};           /*!< Does nothing for first order cells */
-        virtual void computeLocalSlopesLimite(const int& /*numberPhases*/, const int& /*numberTransports*/, CellInterface& /*cellInterface*/,
-            Limiter& /*globalLimiter*/, Limiter& /*interfaceLimiter*/, Limiter& /*globalVolumeFractionLimiter*/, Limiter& /*interfaceVolumeFractionLimiter*/,
-            double& /*epsInterface*/) {};                                                                                                       /*!< Does nothing for first order cells */
-        virtual Phase* getSlopes(const int& /*phaseNumber*/) const { return 0; };                                                               /*!< Does nothing for first order cells */
-        virtual Transport* getSlopesTransport(const int& /*numberTransport*/) const { return 0; };                                              /*!< Does nothing for first order cells */
-        virtual void saveCons(const int& /*numberPhases*/, const int& /*numberTransports*/) {};                                                     /*!< Does nothing for first order cells */
-        virtual void recuperationCons(const int& /*numberPhases*/, const int& /*numberTransports*/) {};                                             /*!< Does nothing for first order cells */
-        virtual void predictionOrdre2(const double& /*dt*/, const int& /*numberPhases*/, const int& /*numberTransports*/, Symmetry* /*symmetry*/) {};       /*!< Does nothing for first order cells */
-
-        //CellInterface* getCellInterface(); //FP//TODO// A FAIRE...
+        virtual void computeLocalSlopes(CellInterface& /*cellInterface*/, Limiter& /*globalLimiter*/, Limiter& /*interfaceLimiter*/,
+            Limiter& /*globalVolumeFractionLimiter*/, Limiter& /*interfaceVolumeFractionLimiter*/,
+            double& /*alphaCellAfterOppositeSide*/, double& /*alphaCell*/, double& /*alphaCellOtherInterfaceSide*/,
+            double& /*epsInterface*/) {};                                               /*!< Does nothing for first order cells */
+        virtual void computeLocalSlopesLimite(CellInterface& /*cellInterface*/, Limiter& /*globalLimiter*/,
+            Limiter& /*interfaceLimiter*/, Limiter& /*globalVolumeFractionLimiter*/, Limiter& /*interfaceVolumeFractionLimiter*/,
+            double& /*epsInterface*/) {};                                               /*!< Does nothing for first order cells */
+        virtual Phase* getSlopes() const { return 0; };                                 /*!< Does nothing for first order cells */
+        virtual Transport* getSlopesTransport() const { return 0; };                    /*!< Does nothing for first order cells */
+        virtual void saveCons() {};                                                     /*!< Does nothing for first order cells */
+        virtual void recuperationCons() {};                                             /*!< Does nothing for first order cells */
+        virtual void predictionOrdre2(const double& /*dt*/, Symmetry* /*symmetry*/) {}; /*!< Does nothing for first order cells */
 
         void printInfo() const;
 
@@ -195,9 +200,9 @@ class Cell
         void setToZeroConsXi();                                          /*!< set m_consXi to zero */
         void timeEvolutionXi();                                          /*!< time evolution of Xi for smoothing */
         void chooseRefine(const double& xiSplit, const int& nbCellsY, const int& nbCellsZ,
-          const std::vector<AddPhys*>& addPhys, Model* model, int& nbCellsTotalAMR); /*!< Choice for refinement of parent cell */
+          const std::vector<AddPhys*>& addPhys, int& nbCellsTotalAMR);   /*!< Choice for refinement of parent cell */
         void chooseUnrefine(const double& xiJoin, int& nbCellsTotalAMR); /*!< Choice for unrefinement of parent cell */
-        void refineCellAndCellInterfaces(const int& nbCellsY, const int& nbCellsZ, const std::vector<AddPhys*>& addPhys, Model* model, const bool& refineExternalCellInterfaces);           /*!< Refine parent cell by creation of children cells */
+        void refineCellAndCellInterfaces(const int& nbCellsY, const int& nbCellsZ, const std::vector<AddPhys*>& addPhys, const bool& refineExternalCellInterfaces);  /*!< Refine parent cell by creation of children cells */
         virtual void createChildCell(const int& lvl);                    /*!< Create a child cell (not initialized) */
         void unrefineCellAndCellInterfaces();                            /*!< Unrefine parent cell by destruction of children cells */
         void averageChildrenInParent();                                  /*!< Average variables of children cells in the parent cell, needed for computation of xi. */
@@ -232,9 +237,9 @@ class Cell
 
         //For parallel AMR computing
         //--------------------------
-        void chooseRefineDeraffineGhost(const int& nbCellsY, const int& nbCellsZ, const std::vector<AddPhys*>& addPhys, Model* model, std::vector<Cell*>* cellsLvlGhost); /*!< Choice for refinement, unrefinement of the ghost parent cell + Update of ghost cell vector for lvl+1 */
-        void refineCellAndCellInterfacesGhost(const int& nbCellsY, const int& nbCellsZ, const std::vector<AddPhys*>& addPhys, Model* model);                               /*!< Refinement of parent ghost cell by creation of children ghost cells */
-        void unrefineCellAndCellInterfacesGhost();                                                                                      /*!< Unrefinement of parent ghost cell by destruction of children ghost cells */
+        void chooseRefineDeraffineGhost(const int& nbCellsY, const int& nbCellsZ, const std::vector<AddPhys*>& addPhys, std::vector<Cell*>* cellsLvlGhost); /*!< Choice for refinement, unrefinement of the ghost parent cell + Update of ghost cell vector for lvl+1 */
+        void refineCellAndCellInterfacesGhost(const int& nbCellsY, const int& nbCellsZ, const std::vector<AddPhys*>& addPhys);                              /*!< Refinement of parent ghost cell by creation of children ghost cells */
+        void unrefineCellAndCellInterfacesGhost();                                                                                                          /*!< Unrefinement of parent ghost cell by destruction of children ghost cells */
         void fillBufferXi(double* buffer, int& counter, const int& lvl, const int& neighbour) const;
         void getBufferXi(double* buffer, int& counter, const int& lvl);
         void fillBufferSplit(bool* buffer, int& counter, const int& lvl, const int& neighbour) const;
@@ -242,7 +247,7 @@ class Cell
         void fillNumberElementsToSendToNeighbour(int& numberElementsToSendToNeighbor, int& numberSlopesToSendToNeighbor, const int& lvl, const int& neighbour, int numberNeighboursOfCPUneighbour);
         void fillDataToSend(std::vector<double>& dataToSend, std::vector<int>& dataSplitToSend, const int& lvl) const;
         void getDataToReceiveAndRefine(std::vector<double>& dataToReceive, std::vector<int>& dataSplitToReceive, const int& lvl, Eos** eos, int& counter, int& counterSplit,
-            const int& nbCellsY, const int& nbCellsZ, const std::vector<AddPhys*>& addPhys, Model* model);
+            const int& nbCellsY, const int& nbCellsZ, const std::vector<AddPhys*>& addPhys);
         void computeLoad(double& load, int lvl) const;
         void computeLvlMax(int& lvlMax) const;
         void clearExternalCellInterfaces(const int& nbCellsY, const int& nbCellsZ);
@@ -250,8 +255,6 @@ class Cell
         void updateNbCellsTotalAMR(int& nbCellsTotalAMR);
 
     protected:
-      int m_numberPhases;
-      int m_numberTransports;
       Phase** m_vecPhases;
       Mixture* m_mixture;
       Transport* m_vecTransports;                                 /*!< Array of passive variables advected in the flow */
@@ -260,17 +263,19 @@ class Cell
       Element *m_element;                                         /*!< Pointer to corresponding geometrical mesh element */
       std::vector<CellInterface*> m_cellInterfaces;               /*!< Vector of cell-interface pointers */
       std::vector<QuantitiesAddPhys*> m_vecQuantitiesAddPhys;     /*!< Vector of pointers to the Quantities of Additional Physics of the cell */
-      Model* m_model;                                             /*!< Pointer to hydrodynamic model */
      
       //Attributs pour methode AMR
       int m_lvl;                                                  /*!< Cell AMR level in the AMR tree */
       double m_xi;                                                /*!< Criteria for refine/unrefine cell */
       double m_consXi;                                            /*!< Buffer variable for Xi fluxes */
-	  bool m_split;                                               /*!< Indicator for splitted cell (Do I possess children ?) */
+      bool m_split;                                               /*!< Indicator for splitted cell (Do I possess children ?) */
       std::vector<Cell*> m_childrenCells;                         /*!< Vector of children cells pointers */
       std::vector<CellInterface*> m_childrenInternalCellInterfaces; /*!< Vector of Internal children cell-interface pointers of the cell */
 
     private:
 };
+
+extern Model* model;                                      /*!< Pointer to model */
+extern Gradient* gradient;                                /*!< Pointer to gradient method */
 
 #endif // CELL_H

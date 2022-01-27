@@ -29,12 +29,10 @@
 //  If not, see <http://www.gnu.org/licenses/>.
 
 #include "QAPConductivity.h"
-#include <iostream>
 
 //***********************************************************************
 
-QAPConductivity::QAPConductivity(AddPhys* addPhys, const int& numberPhases) : QuantitiesAddPhys(addPhys),
-	m_gradTk(numberPhases)
+QAPConductivity::QAPConductivity(AddPhys* addPhys) : QuantitiesAddPhys(addPhys), m_gradTk(numberPhases)
 {
   variableNamesCond.resize(numberPhases);
   numPhasesCond.resize(numberPhases);

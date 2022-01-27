@@ -44,7 +44,13 @@ OutputGNU::OutputGNU(std::string casTest, std::string run, XMLElement* element, 
 {
   m_fileNameVisu = "visualization.gnu";
   m_folderScriptGnuplot = "./datasets/";
+  m_type = TypeOutput::GNU;
 }
+
+//***********************************************************************
+
+OutputGNU::OutputGNU(tinyxml2::XMLElement* element) : Output(element)
+{}
 
 //***********************************************************************
 
@@ -52,14 +58,15 @@ OutputGNU::~OutputGNU(){}
 
 //***********************************************************************
 
-void OutputGNU::ecritSolution(Mesh *mesh, std::vector<Cell*>* cellsLvl)
+void OutputGNU::writeResults(Mesh *mesh, std::vector<Cell*>* cellsLvl)
 {
   try {
     std::ofstream fileStream;
-    std::string file = m_folderDatasets + creationNameFichierGNU(m_fileNameResults.c_str(), -1, rankCpu, m_numFichier);
+    std::string file = m_folderDatasets + createFilenameGNU(m_fileNameResults.c_str(), -1, rankCpu, m_numFichier);
     fileStream.open(file.c_str());
     if (!fileStream) { throw ErrorECOGEN("Impossible d ouvrir le file " + file, __FILE__, __LINE__); }
-    mesh->ecritSolutionGnuplot(cellsLvl, fileStream);
+    if (m_precision != 0) fileStream.precision(m_precision);
+    mesh->writeResultsGnuplot(cellsLvl, fileStream);
     fileStream << std::endl;
     fileStream.close();
 
@@ -110,12 +117,16 @@ void OutputGNU::ecritScriptGnuplot(const int& dim)
     {
       //Variables scalars
       for (int var = 1; var <= m_cellRef.getPhase(phase)->getNumberScalars(); var++) {
-        fileStream << "set title '" << m_cellRef.getPhase(phase)->returnNameScalar(var) << "_" << m_cellRef.getPhase(phase)->getEos()->getName() << "'" << std::endl;
+        fileStream << "set title '" << m_cellRef.getPhase(phase)->returnNameScalar(var);
+        if (m_cellRef.getPhase(phase)->getEos() != nullptr) { fileStream << "_" << m_cellRef.getPhase(phase)->getEos()->getName(); }
+        fileStream << "'" << std::endl;
         printBlocGnuplot(fileStream, index, dim);
       } //Fin var scalar
       //Variables vectorielles (u)
       for (int var = 1; var <= m_cellRef.getPhase(phase)->getNumberVectors(); var++) {
-        fileStream << "set title '" << m_cellRef.getPhase(phase)->returnNameVector(var) << "_" << m_cellRef.getPhase(phase)->getEos()->getName() << "'" << std::endl;
+        fileStream << "set title '" << m_cellRef.getPhase(phase)->returnNameVector(var);
+        if (m_cellRef.getPhase(phase)->getEos() != nullptr) { fileStream << "_" << m_cellRef.getPhase(phase)->getEos()->getName(); }
+        fileStream << "'" << std::endl;
         printBlocGnuplot(fileStream, index, dim);
       } //Fin var vectorielle
     } //Fin phase
@@ -189,8 +200,8 @@ void OutputGNU::printBlocGnuplot(std::ofstream &fileStream, int& index, const in
     for (int t = 0; t <= m_numFichier; t++) {
       for (int p = 0; p < Ncpu; p++) {
         fileStream << " \"";
-        if(dim==0){ fileStream << m_folderScriptGnuplot + creationNameFichierGNU(m_fileNameResults.c_str(), -1, -1, -1); }
-        else { fileStream << m_folderScriptGnuplot + creationNameFichierGNU(m_fileNameResults.c_str(), -1, p, t); }
+        if(dim==0){ fileStream << m_folderScriptGnuplot + createFilenameGNU(m_fileNameResults.c_str(), -1, -1, -1); }
+        else { fileStream << m_folderScriptGnuplot + createFilenameGNU(m_fileNameResults.c_str(), -1, p, t); }
         fileStream << "\"";
         if (dim <= 1) { fileStream << " u 1:" << index; }
         else { fileStream << " u 1:2:" << index; }
@@ -210,23 +221,23 @@ void OutputGNU::printBlocGnuplot(std::ofstream &fileStream, int& index, const in
 
 //***********************************************************************
 
-std::string OutputGNU::creationNameFichierGNU(const char* name, int lvl, int proc, int numFichier, std::string nameVariable) const
+std::string OutputGNU::createFilenameGNU(const char* name, int lvl, int proc, int numFichier, std::string nameVariable) const
 {
   try {
     std::stringstream num;
 
-    if (m_donneesSeparees) {
-      throw ErrorECOGEN("OutputGNU::creationNameFichierGNU : donnees Separees non prevu", __FILE__, __LINE__);
+    if (m_splitData) {
+      throw ErrorECOGEN("OutputGNU::createFilenameGNU : donnees Separees non prevu", __FILE__, __LINE__);
       return 0;
     }
     num << name;
     //Gestion nameVariable
     if (nameVariable != "defaut") num << "_" << nameVariable << "_";
     //Gestion binary
-    if (m_ecritBinaire)
+    if (m_writeBinary)
     {
       //num << "B64";
-      throw ErrorECOGEN("OutputGNU::creationNameFichierGNU : donnees binaires non prevu", __FILE__, __LINE__);
+      throw ErrorECOGEN("OutputGNU::createFilenameGNU : donnees binaires non prevu", __FILE__, __LINE__);
       return 0;
     }
     //Gestion cpu
@@ -235,7 +246,7 @@ std::string OutputGNU::creationNameFichierGNU(const char* name, int lvl, int pro
     if (lvl != -1)
     {
       //num << "_AMR" << lvl;
-      throw ErrorECOGEN("OutputGNU::creationNameFichierGNU : donnees AMR par niveau non prevu", __FILE__, __LINE__);
+      throw ErrorECOGEN("OutputGNU::createFilenameGNU : donnees AMR par niveau non prevu", __FILE__, __LINE__);
       return 0;
     }
     //Gestion number de file resultat

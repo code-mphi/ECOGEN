@@ -40,15 +40,19 @@ class ElementPyramid : public ElementNS
 public:
   ElementPyramid();
   virtual ~ElementPyramid();
-  virtual void construitFaces(const Coord* noeuds, FaceNS** faces, int& indexMaxFaces, int** /*facesTemp*/, int* /*sommeNoeudsTemp*/);
+  virtual void construitFaces(const Coord* noeuds, FaceNS** faces, int& indexMaxFaces, int** facesBuff, int* sumNodesBuff);
+  virtual void construitFacesSimplifie(int& iMax, int** facesBuff, int* sumNodesBuff);
+  virtual void attributFaceCommunicante(FaceNS** faces, const int& indexMaxFaces, const int& numberNoeudsInternes);
+  virtual int compteFaceCommunicante(std::vector<int*>& faces, std::vector<int>& sumNodesBuff);
+  virtual int compteFaceCommunicante(int& iMax, int** faces, int* sumNodesBuff);
 
 private:
   virtual void computeVolume(const Coord* noeuds);
   virtual void computeLCFL(const Coord* noeuds);
 
   static const int TYPEGMSH;
-  static const int NOMBRENOEUDS;
-  static const int NOMBREFACES; /* ici il s'agit d'1 quadrangle et de 4 triangles*/
+  static const int NUMBERNODES;
+  static const int NUMBERFACES; /* Here there are 1 quadrangle and 4 triangles*/
   static const int TYPEVTK;
 };
 

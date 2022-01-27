@@ -38,12 +38,12 @@
 class BoundCondSubInj : public BoundCond
 {
 public:
-  BoundCondSubInj(int numPhysique, tinyxml2::XMLElement* element, int& numberPhases, std::string fileName = "Unknown file");
+  BoundCondSubInj(int numPhysique, tinyxml2::XMLElement* element, const int& numbPhases, std::string fileName = "Unknown file");
   BoundCondSubInj(const BoundCondSubInj& Source, const int& lvl = 0); // Copy ctor (useful for AMR)
   ~BoundCondSubInj();
 
   virtual void createBoundary(TypeMeshContainer<CellInterface*>& cellInterfaces);
-  virtual void solveRiemannBoundary(Cell& cellLeft, const int& numberPhases, const double& dxLeft, double& dtMax);
+  virtual void solveRiemannBoundary(Cell& cellLeft, const double& dxLeft, double& dtMax);
 
   virtual int whoAmI() const { return SUBINJ; };
   virtual void printInfo();
@@ -52,8 +52,9 @@ public:
   virtual void creerCellInterfaceChild();  /*!< Create a child cell interface (uninitialized) */
 
 private:
-  double m_m0; //!< Inflow specific massflow
-  double m_T0; //!< Inflow temperature
+  double m_m0;   //!< Inflow specific massflow
+  double* m_Tk0; //!< Inflow temperature
+  double* m_ak0; //!< Inflow volume fraction
 };
 
 #endif

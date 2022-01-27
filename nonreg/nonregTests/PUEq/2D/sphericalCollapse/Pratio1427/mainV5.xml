@@ -3,7 +3,7 @@
 	<run>pressureVelocityEq2DsphericalCollapse_Pratio1427_100cellsPerD</run>
 	<outputMode format="XML" binary="false"/>
 	<timeControlMode iterations="true">
-<iterations number="5" iterFreq="5"/>
+	<iterations number="5" iterFreq="5"/>
 		<physicalTime totalTime="2.e-6" timeFreq="2.e-9"/>
 	</timeControlMode>
 	<computationControl CFL="0.4"/>

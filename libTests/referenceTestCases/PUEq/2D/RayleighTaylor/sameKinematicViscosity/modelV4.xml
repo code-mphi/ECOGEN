@@ -1,0 +1,10 @@
+<?xml version = "1.0" encoding = "UTF-8" standalone = "yes"?>
+<model>
+	<flowModel name="PressureVelocityEq" numberPhases="2" numberTransports="0" alphaNull="true"/>
+    <EOS name="IG_heavyGas.xml"/>
+	<EOS name="IG_lightGas.xml"/>
+	<additionalPhysic type="viscosity"/>
+	<sourceTerms type="gravity" order="EULER">
+		<gravity x="0." y="-9.81" z="0."/>
+	</sourceTerms>
+</model>

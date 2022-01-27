@@ -28,19 +28,18 @@
 //  along with ECOGEN (file LICENSE).  
 //  If not, see <http://www.gnu.org/licenses/>.
 
-#include <cmath>
 #include "MixPTUEq.h"
 
 using namespace tinyxml2;
 
 //***************************************************************************
 
-MixPTUEq::MixPTUEq() :m_density(0.), m_pressure(0.), m_velocity(0), m_energie(0.), m_totalEnergy(0.), m_PTUEqSoundSpeed(0.) {}
+MixPTUEq::MixPTUEq() :m_density(0.), m_pressure(0.), m_velocity(0), m_energy(0.), m_totalEnergy(0.), m_PTUEqSoundSpeed(0.) {}
 
 //***************************************************************************
 
 MixPTUEq::MixPTUEq(XMLElement* state, std::string fileName) :
-  m_density(0.), m_pressure(0.), m_energie(0.), m_totalEnergy(0.), m_PTUEqSoundSpeed(0.)
+  m_density(0.), m_pressure(0.), m_energy(0.), m_totalEnergy(0.), m_PTUEqSoundSpeed(0.)
 {
   XMLElement* sousElement(state->FirstChildElement("mixture"));
   if (sousElement == NULL) throw ErrorXMLElement("mixture", fileName, __FILE__, __LINE__);
@@ -88,14 +87,14 @@ void MixPTUEq::copyMixture(Mixture &mixture)
   m_pressure = mixture.getPressure();
   m_temperature = mixture.getTemperature();
   m_velocity = mixture.getVelocity();
-  m_energie = mixture.getEnergy();
+  m_energy = mixture.getEnergy();
   m_totalEnergy = mixture.getTotalEnergy();
   m_PTUEqSoundSpeed = mixture.getMixSoundSpeed();
 }
 
 //***************************************************************************
 
-double MixPTUEq::computeDensity(const double* alphak, const double* rhok, const int& numberPhases)
+double MixPTUEq::computeDensity(const double* alphak, const double* rhok)
 {
   double rho(0.);
   for(int k=0;k<numberPhases;k++)
@@ -107,7 +106,7 @@ double MixPTUEq::computeDensity(const double* alphak, const double* rhok, const 
 
 //***************************************************************************
 
-double MixPTUEq::computePressure(const double* alphak, const double* pk, const int& numberPhases)
+double MixPTUEq::computePressure(const double* alphak, const double* pk)
 {
   double p(0.);
   for(int k=0;k<numberPhases;k++)
@@ -119,12 +118,12 @@ double MixPTUEq::computePressure(const double* alphak, const double* pk, const i
 
 //***************************************************************************
 
-double MixPTUEq::computePressure(double* masses, const double& mixInternalEnerg, Phase** phases, const int& numberPhases)
+double MixPTUEq::computePressure(double* masses, const double& mixInternalEnerg, Phase** phases)
 {
   //Restrictions //FP//TODO// to improve
   if (numberPhases > 2) Errors::errorMessage("more than two phases not permitted in thermal equilibrium model : MixPTUEq::computePressure");
   for (int k = 0; k < numberPhases; k++) {
-    if (phases[k]->getEos()->getType() != "IG" && phases[k]->getEos()->getType() != "SG") { Errors::errorMessage("Only IG and SG permitted in thermal equilibrium model : MixPTUEq::computePressure"+ phases[k]->getEos()->getType()); }
+    if (phases[k]->getEos()->getType() != TypeEOS::IG && phases[k]->getEos()->getType() != TypeEOS::SG) { Errors::errorMessage("Only IG and SG permitted in thermal equilibrium model: MixPTUEq::computePressure"); }
   }
 
   double rhoMel(0.);
@@ -158,11 +157,11 @@ double MixPTUEq::computePressure(double* masses, const double& mixInternalEnerg,
 
 //***************************************************************************
 
-double MixPTUEq::computeTemperature(double* masses, const double& pressure, Phase** phases, const int& numberPhases)
+double MixPTUEq::computeTemperature(double* masses, const double& pressure, Phase** phases)
 {
   //Restrictions //FP//TODO// to improve
   for (int k = 0; k < numberPhases; k++) {
-    if (phases[k]->getEos()->getType() != "IG" && phases[k]->getEos()->getType() != "SG") { Errors::errorMessage("Only IG and SG permitted in thermal equilibrium model : MixPTUEq::computePressure"); }
+    if (phases[k]->getEos()->getType() != TypeEOS::IG && phases[k]->getEos()->getType() != TypeEOS::SG) { Errors::errorMessage("Only IG and SG permitted in thermal equilibrium model: MixPTUEq::computePressure"); }
   }
 
   double rhoMel(0.);
@@ -187,7 +186,7 @@ double MixPTUEq::computeTemperature(double* masses, const double& pressure, Phas
 
 //***************************************************************************
 
-double MixPTUEq::computeInternalEnergy(const double* Yk, const double* ek, const int& numberPhases)
+double MixPTUEq::computeInternalEnergy(const double* Yk, const double* ek)
 {
   double e(0.);
   for(int k=0;k<numberPhases;k++)
@@ -199,7 +198,7 @@ double MixPTUEq::computeInternalEnergy(const double* Yk, const double* ek, const
 
 //***************************************************************************
 
-double MixPTUEq::computeFrozenSoundSpeed(const double* Yk, const double* ck, const int& numberPhases)
+double MixPTUEq::computeFrozenSoundSpeed(const double* Yk, const double* ck)
 {
   double cF(0.);
   for(int k=0;k<numberPhases;k++)
@@ -211,12 +210,12 @@ double MixPTUEq::computeFrozenSoundSpeed(const double* Yk, const double* ck, con
 
 //***************************************************************************
 
-double MixPTUEq::computeTemperatureIsentrope(const double* Yk, const double& p0, const double& T0, const double& p, const int& numberPhases, double* dTdp)
+double MixPTUEq::computeTemperatureIsentrope(const double* Yk, const double& p0, const double& T0, const double& p, double* dTdp)
 {
   //Restrictions //FP//TODO// to improve
   if (numberPhases > 2) Errors::errorMessage("more than two phases not permitted in thermal equilibrium model : MixPTUEq::computeTemperatureIsentrope");
   for (int k = 0; k < numberPhases; k++) {
-    if (TB->eos[k]->getType() != "IG" && TB->eos[k]->getType() != "SG") { Errors::errorMessage("Only IG and SG permitted in thermal equilibrium model : MixPTUEq::computeTemperatureIsentrope" + TB->eos[k]->getType()); }
+    if (TB->eos[k]->getType() != TypeEOS::IG && TB->eos[k]->getType() != TypeEOS::SG) { Errors::errorMessage("Only IG and SG permitted in thermal equilibrium model: MixPTUEq::computeTemperatureIsentrope"); }
   }
 
   //Formulae for phases goverened by SG EOS
@@ -239,15 +238,15 @@ double MixPTUEq::computeTemperatureIsentrope(const double* Yk, const double& p0,
 
 //***************************************************************************
 
-double MixPTUEq::computeEnthalpyIsentrope(const double* Yk, const double& p0, const double& T0, const double& p, const int& numberPhases, double* dhdp)
+double MixPTUEq::computeEnthalpyIsentrope(const double* Yk, const double& p0, const double& T0, const double& p, double* dhdp)
 {
   //Restrictions //FP//TODO// to improve
   for (int k = 0; k < numberPhases; k++) {
-    if (TB->eos[k]->getType() != "IG" && TB->eos[k]->getType() != "SG") { Errors::errorMessage("Only IG and SG permitted in thermal equilibrium model : MixPTUEq::computeEnthalpyIsentrope" + TB->eos[k]->getType()); }
+    if (TB->eos[k]->getType() != TypeEOS::IG && TB->eos[k]->getType() != TypeEOS::SG) { Errors::errorMessage("Only IG and SG permitted in thermal equilibrium model: MixPTUEq::computeEnthalpyIsentrope"); }
   }
 
   double dTdp(0.);
-  double T = this->computeTemperatureIsentrope(Yk, p0, T0, p, numberPhases, &dTdp);
+  double T = this->computeTemperatureIsentrope(Yk, p0, T0, p, &dTdp);
   //Formulae for phases goverened by SG EOS
   double h(0.);
   if (dhdp != NULL) *dhdp = 0.;
@@ -261,15 +260,15 @@ double MixPTUEq::computeEnthalpyIsentrope(const double* Yk, const double& p0, co
 
 //***************************************************************************
 
-double MixPTUEq::computeVolumeIsentrope(const double* Yk, const double& p0, const double& T0, const double& p, const int& numberPhases, double* dvdp)
+double MixPTUEq::computeVolumeIsentrope(const double* Yk, const double& p0, const double& T0, const double& p, double* dvdp)
 {
   //Restrictions //FP//TODO// to improve
   for (int k = 0; k < numberPhases; k++) {
-    if (TB->eos[k]->getType() != "IG" && TB->eos[k]->getType() != "SG") { Errors::errorMessage("Only IG and SG permitted in thermal equilibrium model : MixPTUEq::computeVolumeIsentrope" + TB->eos[k]->getType()); }
+    if (TB->eos[k]->getType() != TypeEOS::IG && TB->eos[k]->getType() != TypeEOS::SG) { Errors::errorMessage("Only IG and SG permitted in thermal equilibrium model: MixPTUEq::computeVolumeIsentrope"); }
   }
 
   double dTdp(0.);
-  double T = this->computeTemperatureIsentrope(Yk, p0, T0, p, numberPhases, &dTdp);
+  double T = this->computeTemperatureIsentrope(Yk, p0, T0, p, &dTdp);
   //Formulae for phases goverened by SG EOS
   double v(0.), vk(0.), dvk(0.); 
   if (dvdp != NULL) *dvdp = 0.;
@@ -285,7 +284,7 @@ double MixPTUEq::computeVolumeIsentrope(const double* Yk, const double& p0, cons
 
 //***************************************************************************
 
-void MixPTUEq::computeMixtureVariables(Phase** vecPhase, const int& numberPhases)
+void MixPTUEq::computeMixtureVariables(Phase** vecPhase)
 {
   //mixture density and pressure
   m_density = 0.;
@@ -297,10 +296,10 @@ void MixPTUEq::computeMixtureVariables(Phase** vecPhase, const int& numberPhases
     TB->Yk[k] = vecPhase[k]->getAlpha()*vecPhase[k]->getDensity() / m_density;
   }
   //Specific internal energy, speed of sound (frozen for now //FP//TODO//CHANGE sound speed)
-  m_energie = 0.;
+  m_energy = 0.;
   m_PTUEqSoundSpeed = 0.;
   for (int k = 0; k < numberPhases; k++) {
-    m_energie += TB->Yk[k] * vecPhase[k]->getEnergy();
+    m_energy += TB->Yk[k] * vecPhase[k]->getEnergy();
     m_PTUEqSoundSpeed += TB->Yk[k] * vecPhase[k]->getSoundSpeed()*vecPhase[k]->getSoundSpeed();
   }
   m_PTUEqSoundSpeed = sqrt(m_PTUEqSoundSpeed);  
@@ -311,7 +310,7 @@ void MixPTUEq::computeMixtureVariables(Phase** vecPhase, const int& numberPhases
 
 void MixPTUEq::internalEnergyToTotalEnergy(std::vector<QuantitiesAddPhys*>& vecGPA)
 {
-  m_totalEnergy = m_energie + 0.5*m_velocity.squaredNorm();
+  m_totalEnergy = m_energy + 0.5*m_velocity.squaredNorm();
   for (unsigned int pa = 0; pa < vecGPA.size(); pa++) {
     m_totalEnergy += vecGPA[pa]->computeEnergyAddPhys()/m_density; //Caution /m_density important
   }
@@ -321,9 +320,9 @@ void MixPTUEq::internalEnergyToTotalEnergy(std::vector<QuantitiesAddPhys*>& vecG
 
 void MixPTUEq::totalEnergyToInternalEnergy(std::vector<QuantitiesAddPhys*>& vecGPA)
 {
-  m_energie = m_totalEnergy - 0.5*m_velocity.squaredNorm();
+  m_energy = m_totalEnergy - 0.5*m_velocity.squaredNorm();
   for (unsigned int pa = 0; pa < vecGPA.size(); pa++) {
-    m_energie -= vecGPA[pa]->computeEnergyAddPhys()/m_density; //Caution /m_density important
+    m_energy -= vecGPA[pa]->computeEnergyAddPhys()/m_density; //Caution /m_density important
   }
 }
 

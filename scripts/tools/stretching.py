@@ -2,20 +2,23 @@
 #       OBJECTIVE
 # ----------------------
 
-# Compute number of mesh cells (using stretching) along a direction 
-# to get half or twice length of a 1st cell given mesh
+# Compute the number of mesh cells to use when stretching along a direction
+# and given the length of the domain, the geometric ratio and the length
+# of the first cell.
+# Also compute the number of mesh cells to use for a refined or coarse mesh
+# where the length of the first cell is half or twice of the one of the
+# previous mesh.
 
 # Example:
-# 1D mesh has Nx cells with a geometric progression 'q' along x-direction.
-# The length of 1st cell is dx0. 
-# One would like to run a simulation with half length of 1st cell (dx0/2) using
-# the same geometric progression. How to choose the new Nx? 
+# A 1D mesh has Nx cells with a geometric progression 'q' along x-direction.
+# The length of first cell is dx0.
+# One would like to run a simulation with half length of first cell (dx0/2)
+# using the same geometric progression. How to choose the new Nx?
 
 # Recall:
-# Geometric sequence is defined by: 
-#  u_n+1 = u_n * q
-#  u_n = u_0 * q^n
-
+#  Geometric sequence is defined by:
+#   u_n+1 = u_n * q
+#   u_n = u_0 * q^n
 #  The sum is given by: sum_{k = 0}^{n} u_k = u_0 (1 - q^n) / (1 - q)
 
 # ----------------------
@@ -26,13 +29,11 @@ import math
 # ----------------------
 #       PARAMETERS
 # ----------------------
-
-# Blasius 
 h = 0.3    # Length of the domain in the stretching direction
 q = 1.045  # Geometric ratio
-N_mesh1 = int(120)
-dx0_mesh1 = 6.9e-05         # Length of 1st cell of given mesh
-dx0_mesh2 = 0.5 * dx0_mesh1 # Length of 1st cell of wanted mesh
+dx0_initialMesh = 6.9e-05               # Length of 1st cell of initial mesh
+dx0_refinedMesh = 0.5 * dx0_initialMesh # Length of 1st cell of refined mesh
+dx0_coarseMesh = 2. * dx0_initialMesh   # Length of 1st cell of coarse mesh
 
 # ----------------------
 #       COMPUTATION
@@ -40,25 +41,42 @@ dx0_mesh2 = 0.5 * dx0_mesh1 # Length of 1st cell of wanted mesh
 
 # Geometric progression
 # ---------------------
-#  Given mesh
-#  ----------
-#  x_Ng = x0g * q^Ng
-#  Ng: number of cells of given mesh
-#  x0g: length of 1st cell of given mesh
+#  Initial mesh
+#  ------------
+#  x_Ni = x0i * q^Ni
+#  Ni: number of cells of initial mesh
+#  x0i: length of 1st cell of initial mesh
 
-# Wanted mesh
+Ni = round(math.log( 1. - (h / dx0_initialMesh + 1.) * (1. - q) ) / math.log(q) )
+
+# Refined mesh
+# ------------
+#  x_Nr = x0r * q^Nr
+#       = 0.5 * x0i * q^Nr
+#  Nr: number of cells of refined mesh (to find)
+#  x0r: length of 1st cell of refined mesh
+
+# Nr = round(math.log( 1. -  h / dx0_refinedMesh       * (1. - q) ) / math.log(q) )
+Nr = round(math.log( 1. - (h / dx0_refinedMesh + 1.) * (1. - q) ) / math.log(q) )
+
+# Coarse mesh
 # -----------
-#  x_N2 = x0w * q^Nw 
-#       = 0.5 * x0g * q^Nw
-#  Nw: number of cells of wanted mesh (to find)
-#  x0w: length of 1st cell of wanted mesh
+#  x_Nc = x0c * q^Nc
+#       = 2. * x0i * q^Nc
+#  Nc: number of cells of coarse mesh (to find)
+#  x0c: length of 1st cell of coarse mesh
 
-# N = round( math.log( 1. - h / dx0_mesh2 * (1. - q) ) / math.log(q) )
-N = round(math.log( 1. - (h / dx0_mesh2 + 1.) * (1. - q) ) / math.log(q) )
+Nc = round(math.log( 1. - (h / dx0_coarseMesh + 1.) * (1. - q) ) / math.log(q) )
 
 # ----------------------
 #         OUTPUT
 # ----------------------
-
-print('New first cell length dx = {}'.format(dx0_mesh2))
-print('Number of cells to use N = {}'.format(N))
+print('------------ Initial mesh ------------')
+print('First cell length dx = {}'.format(dx0_initialMesh))
+print('Number of cells to use N = {}'.format(Ni))
+print('------------ Refined mesh ------------')
+print('New first cell length dx = {}'.format(dx0_refinedMesh))
+print('Number of cells to use N = {}'.format(Nr))
+print('------------ Coarse mesh -------------')
+print('New first cell length dx = {}'.format(dx0_coarseMesh))
+print('Number of cells to use N = {}'.format(Nc))

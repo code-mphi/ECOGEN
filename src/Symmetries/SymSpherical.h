@@ -42,8 +42,8 @@ public:
   SymSpherical(tinyxml2::XMLElement* element, std::string nameFile = "Unknown file");
   virtual ~SymSpherical();
 
-  virtual void addSymmetricTerms(Cell* cell, const int& numberPhases, Prim type = vecPhases);
-  virtual void addSymmetricTermsAddPhys(Cell* /*cell*/, const int& /*numberPhases*/, AddPhys& /*addPhys*/) { Errors::errorMessage("addSymmetricTermsAddPhys not implemented for spherical symmetry with additional physics"); };
+  virtual void addSymmetricTerms(Cell* cell, Prim type = vecPhases);
+  virtual void addSymmetricTermsAddPhys(Cell* /*cell*/, AddPhys& /*addPhys*/) { Errors::errorMessage("addSymmetricTermsAddPhys not implemented for spherical symmetry with additional physics"); };
 };
 
 #endif //SYMSPHERICAL_H

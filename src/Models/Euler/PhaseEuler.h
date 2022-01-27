@@ -47,6 +47,7 @@ class PhaseEuler : public Phase
     //!                  <velocity x = "1000." y = "1000." z = "0." / >
     //!                </dataFluid>
     //! \param     material           XML element to read for phase data
+    //! \param     eos                EOS pointer to compute thermodynamic variables
     //! \param     fileName           string name of readed XML file
     PhaseEuler(tinyxml2::XMLElement* material, Eos* eos, std::string fileName);
     virtual ~PhaseEuler();
@@ -97,10 +98,13 @@ class PhaseEuler : public Phase
     //-------------
     virtual void verifyPhase(const std::string& message = "") const;
     virtual void verifyAndCorrectPhase();
+    virtual void verifyAndCorrectDensityMax(const double& /*mass*/);
+    virtual void verifyAndCorrectDensityMax();
 
     //Accessors
     //---------
     virtual const double& getAlpha() const { return Errors::defaultDouble; };
+    virtual const double& getMassFraction() const { return Errors::defaultDouble; };
     virtual const double& getDensity() const { return m_density; };
     virtual const double& getPressure() const { return m_pressure; };
     virtual const double& getU() const { return m_velocity.getX(); };
@@ -109,7 +113,7 @@ class PhaseEuler : public Phase
     virtual Coord& getVelocity() { return m_velocity; };
     virtual const Coord& getVelocity() const { return m_velocity; };
     virtual Eos* getEos() const { return m_eos; };
-    virtual const double& getEnergy() const { return m_energie; };
+    virtual const double& getEnergy() const { return m_energy; };
     virtual const double& getSoundSpeed() const { return m_soundSpeed; };
     virtual const double& getTotalEnergy() const { return m_totalEnergy; };
     virtual double getTemperature() const { return m_eos->computeTemperature(m_density, m_pressure); };
@@ -123,7 +127,7 @@ class PhaseEuler : public Phase
     virtual void setV(const double& v);
     virtual void setW(const double& w);
     virtual void setEos(Eos* eos);
-    virtual void setEnergy(double energie);
+    virtual void setEnergy(double energy);
     virtual void setSoundSpeed(double soundSpeed);
     virtual void setTotalEnergy(double totalEnergy);
     virtual void setTemperature(double temperature);
@@ -140,7 +144,7 @@ class PhaseEuler : public Phase
     double m_temperature;      //!< temperature
     Coord m_velocity;          //!< velocity
     Eos* m_eos;                //!< pointer to equation of state
-    double m_energie;          //!< internal energy
+    double m_energy;           //!< internal energy
     double m_totalEnergy;      //!< total energy
     double m_soundSpeed;       //!< speed of sound
   private:

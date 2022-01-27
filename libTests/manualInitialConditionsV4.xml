@@ -95,47 +95,66 @@ Contains the list of needed boundary conditions.
 </boundaryConditions>
 %%%%%%%%%%%%%%%%%% << copy between these lines
 Default value of BC are non-reflecting.
-a) For a Cartesian mesh, boundary conditions order and names are imposed :
-CLXm : condition limite en X moins
-CLXp : condition limite en X plus
-CLYm : condition limite en Y moins
-CLYp : condition limite en Y plus
-CLZm : condition limite en Z moins
-CLZp : condition limite en Z plus
+a) For a Cartesian mesh, boundary conditions order and names are imposed:
+CLXm: boundary condition on X minus side
+CLXp: boundary condition on X plus side
+CLYm: boundary condition on Y minus side
+CLYp: boundary condition on Y plus side
+CLZm: boundary condition on Z minus side
+CLZp: boundary condition on Z plus side
 b) For unStrucutred meshes, the number is important and should be in agreement with physical conditions determined in the mesh file comming from GMSH.
 
-Available boundary conditions are: nonReflecting, wall, symmetry, injection, tank, outflow. Some of them needs to refer to a material state.
+Available boundary conditions are: nonReflecting, wall, symmetry, injection, tank, outflow, nullFlux, subInj. Some of them needs to refer to a material state.
 <!-- nonReflecting -->
-<boundCond name="exit" type="nonReflecting" number="1" />
+<boundCond name="outflow" type="nonReflecting" number="1" />
 <!-- symmetry -->
 <boundCond name="symmetry" type="symmetry" number="2" />
 <!-- wall -->
 <boundCond name="wall" type="wall" number="3" />
 <!-- injection -->
-<boundCond name="entrance" type="injection" number="1">
+<boundCond name="inflow" type="injection" number="1">
     <dataInjection m0="2.413092"/>
     <dataFluid EOS="IG_air.xml" density="4.04e-3" pressure="2.57404e2" alpha="0.1"/>
     <dataFluid EOS="SG_water.xml" density="1000." pressure="2.57404e2" alpha="0.9"/>
 </boundCond>
-<!--outflow  -->
+<!-- outflow -->
 <boundCond name="exit" type="outflow" number="5">
   <dataOutflow p0="1.e5">
     <transport name="color" value="1.e-6"/>
   </dataOutflow>
 </boundCond>
 <!-- tank -->
-<boundCond name="entrance" type="tank" number="3">
+<boundCond name="inflow" type="tank" number="3">
   <dataTank p0="4.e6" T0="93.3"/>
   <fluidsProp>
     <dataFluid EOS="IG_oxyVap.xml" alpha="0.0001"/>
     <dataFluid EOS="SG_oxyLiq.xml" alpha="0.9999"/>
   </fluidsProp>
 </boundCond>
+<!-- nullFlux -->
+<boundCond name="wall" type="nullFlux" number="1"/> <!-- Useful for 1D geometry with smooth varying cross-section (see geometry option of modelVX.xml)-->
+<!-- subInj -->
+<boundCond name="inflow" type="subInjection" number="1">
+    <dataInjection m0="6500."/>
+    <dataFluid EOS="SG_water.xml" temperature="300." alpha="0.9999"/>
+    <dataFluid EOS="IG_air.xml" temperature="300." alpha="0.0001"/>
+</boundCond>
 ******************
-One could use wall boundary condition with specific heat boundary condition such as imposed temperature, imposed flux or adiabatic (default). This option requires the conductivity additionnal physic (defined modelVX.xml).
+One could use wall boundary condition with specific heat boundary condition such as imposed temperature, imposed flux or adiabatic (default). This option requires the conductivity additionnal physics (defined in modelVX.xml).
 Example:
 <boundCond name="CLXp" type="wall" number="2">
-    <dataWall heatCondition="temperature" temperature="250."/>
+  <dataWall>
+    <dataWallHeatTransfer heatCondition="temperature" temperature="250."/>
+  </dataWall>
+</boundCond> 
+For Moving Reference Frame computation with viscous additionnal physics it is possible to set a specific wall rotational velocity. 
+The wall velocity is defined in the rotating frame. In case the wall is static in the absolute frame, the wall rotational velocity in the reference frame should be the opposite of the one given in the MRF source term.
+Be aware that this option requires the MRF source term and the viscosity additionnal physics (see modelVX.xml) with Green-Gauss gradient method (see mainVX.xml).
+Example:
+<boundCond name="carter" type="wall" number="2">
+  <dataWall>
+    <dataWallMRF omegaX="0." omegaY="0." omegaZ="-100."/>
+  </dataWall>
 </boundCond> 
 
 3) Materials states list
@@ -171,7 +190,21 @@ Volume fractions, densities (or temperatures), pressure and velocity components.
   <velocity x="0." y="0." z="0."/>
 </mixture>
 %%%%%%%%%%%%%%%%%% << copy between these lines
-b) For single-phase model of Euler
+b) For velocity-equilibrium multiphase model (either with internal- or total-energy formulation)
+------------------------------------------------------------------------------------------------
+Volume fractions, densities (or temperatures), pressure and velocity components. Caution, velocity data are linked to the mixture.
+%%%%%%%%%%%%%%%%%% << copy between these lines
+<material type="fluid" EOS="IG_air.xml">
+  <dataFluid alpha="0.5" density="1.0" pressure = "1.e5"/>  
+</material>
+<material type="fluid" EOS="SG_water.xml">
+  <dataFluid alpha="0.5" density="1000.0" pressure = "1.e5"/>   
+</material>
+<mixture>
+  <velocity x="0." y="0." z="0."/>
+</mixture>
+%%%%%%%%%%%%%%%%%% << copy between these lines
+c) For single-phase model of Euler
 ----------------------------------
 Density or temperature, pressure and velocity components.
 %%%%%%%%%%%%%%%%%% << copy between these lines
@@ -181,7 +214,7 @@ Density or temperature, pressure and velocity components.
   </dataFluid>
 </material>
 %%%%%%%%%%%%%%%%%% << copy between these lines
-c) For temperature-pressure-velocity-equilibrium multiphase model
+d) For temperature-pressure-velocity-equilibrium multiphase model
 -----------------------------------------------------------------
 Volume fractions, temperature, pressure and velocity components. Caution, pressure, temperature and velocity data are linked to the mixture.
 %%%%%%%%%%%%%%%%%% << copy between these lines
@@ -196,7 +229,7 @@ Volume fractions, temperature, pressure and velocity components. Caution, pressu
   <velocity x="0." y="0." z="0."/>
 </mixture>
 %%%%%%%%%%%%%%%%%% << copy between these lines
-d) For homogeneous Euler equations
+e) For homogeneous Euler equations
 ----------------------------------
 Volume fractions, pressure and velocity components. Caution, pressure and velocity data are linked to the mixture.
 %%%%%%%%%%%%%%%%%% << copy between these lines
@@ -211,7 +244,7 @@ Volume fractions, pressure and velocity components. Caution, pressure and veloci
   <velocity x="0." y="0." z="0."/>
 </mixture>
 %%%%%%%%%%%%%%%%%% << copy between these lines
-e) For velocity-equilibrium multiphase model
+f) For velocity-equilibrium multiphase model
 --------------------------------------------
 Volume fractions, densities (or temperatures), pressure and velocity components. Caution, velocity data are linked to the mixture.
 %%%%%%%%%%%%%%%%%% << copy between these lines
@@ -224,3 +257,4 @@ Volume fractions, densities (or temperatures), pressure and velocity components.
 <mixture>
   <velocity x="0." y="0." z="0."/>
 </mixture>
+%%%%%%%%%%%%%%%%%% << copy between these lines
