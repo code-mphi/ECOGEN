@@ -1,7 +1,7 @@
 @charset "UTF-8";
 *, *::before, *::after { -webkit-box-sizing: border-box; -moz-box-sizing: border-box; box-sizing: border-box; }
 
-#accueil { display: flex; flex-direction: column; justify-content: center; align-items: center; background: #E4E4E4; background-image: url("/ECOGEN/assets/images/Background.png"); height: 50vh; -moz-box-shadow: none; -webkit-box-shadow: none; box-shadow: none; }
+#accueil { display: flex; flex-direction: column; justify-content: center; align-items: center; background: #E4E4E4; background-image: url("/ECOGEN/assets/images/Background.png"); height: 40vh; -moz-box-shadow: none; -webkit-box-shadow: none; box-shadow: none; }
 
 #ECOGEN img { width: 500px; height: auto; }
 
@@ -57,7 +57,13 @@ time { color: #898989; }
 /********/
 /*Footer*/
 /********/
-footer { text-align: center; padding: 10px; background: #E4E4E4; /*display: flex;*/ justify-content: center; align-items: center; font-size: 0.8em; }
+footer { text-align: center; padding: 10px; background: #E4E4E4; justify-content: center; align-items: center; font-size: 0.8em; }
+
+.flexZone { display: flex; flex-direction: row; flex-wrap: wrap; justify-content: center; align-items: center; }
+
+.design { justify-content: center; align-items: center; text-align: justify; }
+
+footer img { width: 70px; margin: 0; padding: 0; margin-left: 5px; }
 
 /******************************************/
 /*  réglages paragraphe */
@@ -95,6 +101,8 @@ aside { border-right-style: solid; border-right-color: grey; border-right-width:
 #logos { display: flex; flex-direction: row; /*flex-wrap: wrap;*/ justify-content: center; align-items: center; }
 
 .imgLogos { width: 20%; height: 20%; /*padding :20px;*/ }
+
+.imgLogos2 { width: 15%; height: 15%; /*padding :20px;*/ }
 
 img { width: 100%; height: 100%; padding: 20px; }
 

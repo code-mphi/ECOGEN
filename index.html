@@ -41,11 +41,11 @@
 	  
 	  	<li><a href="/ECOGEN/gallery/">Gallery</a></li>
 	  
+	  	<li><a href="/ECOGEN/releases/">Releases</a></li>
+	  
 	  	<li><a href="/ECOGEN/ressources/">Ressources</a></li>
 	  
 	  	<li><a href="/ECOGEN/publications/">Publications</a></li>
-	  
-	  	<li><a href="/ECOGEN/partners/">Partners</a></li>
 	  
 	  	<li><a href="/ECOGEN/services/">Services</a></li>
 	  
@@ -71,78 +71,102 @@
     <main>
       <div id="subtitle">An open-source CFD platform for numerical simulation of multiphase compressible flows </div>
 
-      <hr />
+      <h2>
+		News
+</h2>
+
+<hr />
 
 <article>
-	<h1> New release ECOGEN_v3.1 </h1>
+	<h1> Modelling interactions of waves with diffused interfaces </h1>
+	<p class="date">2022-08-22, <a href="https://www.math.uzh.ch/multimat2022/index.php?id=89" target="_blank">MultiMat 2022</a>, Zurich, Switzerland</p>
+	<div>
+		<p> K. Schmidmayer is presenting his work on interactions of waves-interfaces in the diffuse interface approach. He highlights the issue coming from the appearance of a wave-trapping phenomenon. Then he presents a thermodynamically-consistent pressure-disequilibrium model with finite pressure-relaxation rate to overcome the difficulties inherent in the computation of these interactions.	</p>
+		<img src="/ECOGEN/assets/images/news/MultiMat.png" alt="cavitation" />
+	</div>
+</article>
+
+<hr />
+
+<article>
+	<h1> Modeling and simulation of a turbopump flow: a multiphase approach </h1>
+	<p class="date">2022-06-12, <a href="https://event.asme.org/Turbo-Expo" target="_blank">ASME Turbo Expo 2022</a>, Rotterdam, Netherlands</p>
+	<div class="flex">
+		<p>J. Cazé is presenting his work on cavitation in turbopumps. He explains how the modelling approach developped in ECOGEN in collaboration with CNES enables to catch the pressure drop observed when a cryogenic fluid is pumped in cavitation regime.</p>
+		<img src="/ECOGEN/assets/images/news/yv_5ms.png" alt="cavitation" />
+	</div>
+</article>
+
+<h2>
+		Last release
+</h2>
+
+<hr />
+
+<article>
+	<h1> ECOGEN_v3.1 </h1>
 	<p class="date">2022-01-27</p>
-	<p>A new release, ECOGEN_v3.1, is available on GitHub. It includes new features and fixes bugs.
-	<h2>Major points: </h2>
-		<ul>	
-			<li> Add velocity-equilibrium model. Read the following paper for more information: K. Schmidmayer, J. Cazé, F. Petitpas, E. Daniel, N. Favrie. "Modelling interactions between waves and diffused interfaces". 2021. </li>
-			<li> Add velocity-equilibrium model based on total-energy equations. Read the previous paper for more information. </li>
-			<li> Possibility to use another gradient method (Green-Gauss) which is compatible with unstructured meshes. Previously, finite differences were the only available. </li>
-			<li> Possibility to use low-Mach preconditioning technique for Euler &amp; pressure-velocity-equilibrium models. </li>
-			<li> Option to use 1D with smooth cross-section-variation scheme (useful for nozzles). </li>
-			<li> Add models augmented Euler-Korteweg and defocusing non-linear Schrödinger as well as Van der Waals equation of state. Mainly experimental work. </li>
-		</ul>
-	<h2>Minor points: </h2>
-		<ul>
-			<li> Possibility to reduce output variable number for UEq and PUEq models. </li>
-			<li> Restarting computation possible for all models for XML format output. </li>
-			<li> Possibility to record flux on boundary (massflow, total enthalpy) and/or flow quantities (density, pressure, velocity) in agreement with Moving Reference Frame method. </li>
-			<li> Possibility to set precision for specific outputs (probes, cuts, global quantities, boundary flux/quantities). </li>
-			<li> Possibility to run test cases from a different folder. </li>
-			<li> Minor modification of axi-symmetric computations for second-order simulations. </li>
-			<li> Better handling of pressure relaxations when Newton-Raphson method does not converge. </li>
-			<li> Update of documentation regarding test cases. </li>
-		</ul>
-	<h2>Fixes: </h2>
-		<ul>
-			<li> Fix recording of probes with computational restart. </li>
-			<li> Fix bug on unstructured meshes using hexaedron and prisms. </li>
-			<li> Correction on NASG EOS to allow null volume fractions. </li>
-			<li> Fix bug GNU dataset output precision. </li>
-			<li> Fix bug AMR parallel when large domains were used </li>
-			<li> Fix bug AMR parallel on printing of load. </li>
-		</ul>
-	</p>
-	<img src="/ECOGEN/assets/images/smoothInterface.png" alt="Shock interacting with a smooth interface." />
+	<p> A new release, <a href="https://github.com/code-mphi/ECOGEN/releases/tag/v3.1" target="_blank">ECOGEN_v3.1</a>, is available on GitHub. More information <a href="/ECOGEN/releases/">here</a>. </p>
 </article>
+
+<h2>
+		Partners
+</h2>
 <hr />
 
 <article>
-	<h1> New release ECOGEN_v3.0 </h1>
-	<p class="date">2021-03-10</p>
-	<p>A new release, ECOGEN_v3.0, is available on GitHub. It includes new features and fixes bugs:
-		<ul>		
-			<li> General restructuration and cleaning. </li>
-			<li> Correction of several bugs (viscous terms, etc.). </li>
-			<li> Additionnal reference test cases. </li>
-			<li> Non-regression test database and tool added. </li>
-		</ul>	
-	</p>
+<!-- 	<h1> Partners </h1>
+	<p> They support or have supported ECOGEN development. </p> -->
 </article>
+<div id="logos">
+	<div class="imgLogos">
+		<a href="https://www.univ-amu.fr/" target="_blank">  <img src="/ECOGEN/assets/images/amu.png" alt="Aix Marseille Universite" /> </a>
+	</div>
+	<div class="imgLogos">
+		<a href="https://www.inria.fr/en/" target="_blank">  <img src="/ECOGEN/assets/images/Inria.png" alt="Inria" /> </a>
+	</div>
+	<div class="imgLogos">
+		<a href="http://www.caltech.edu/" target="_blank">  <img src="/ECOGEN/assets/images/Caltech.png" alt="Caltech" /> </a>
+	</div>
+	<div class="imgLogos">
+		<a href="https://cnes.fr/" target="_blank">  <img src="/ECOGEN/assets/images/is_logo_2017_logo_triangulaire_bleu.png" alt="CNES" /> </a>
+	</div>
+	<div class="imgLogos">
+		<a href="http://iusti.cnrs.fr/en/" target="_blank">  <img src="/ECOGEN/assets/images/iusti.png" alt="IUSTI" /> </a>
+	</div>
+	</div>
+<div id="logos">
+	<div class="imgLogos2">
+	<a href="https://www.defense.gouv.fr/dga" target="_blank">  <img src="/ECOGEN/assets/images/DGA.png" alt="dga" /> </a>
+	</div>
+	<div class="imgLogos">
+	<a href="https://www.onr.navy.mil/" target="_blank">  <img src="/ECOGEN/assets/images/ONR.png" alt="Office of Naval Research" /> </a>
+	</div>
+<!-- </div>
+<div id="logos"> -->
+	<div class="imgLogos2">
+		<a href="http://www.cnrs.fr/" target="_blank">  <img src="/ECOGEN/assets/images/CNRS.jpg" alt="CNRS" /> </a>
+	</div>
+	<div class="imgLogos2">
+	<a href="https://code-mphi.fr/" target="_blank">  <img src="/ECOGEN/assets/images/myfrogVert_OR.jpg" alt="code-mphi" /> </a>
+	</div>
+</div>
 <hr />
 
-<article>
-	<h1> New release ECOGEN_v2.0 </h1>
-	<p class="date">2020-05-11</p>
-	<p>A new release, ECOGEN_v2.0, is available on GitHub. It includes new features and fixes bugs:
-		<ul>		
-			<li> AMR multicore computations are now efficiently load balanced. </li>
-			<li> New equation of state implemented: Noble-Abel Stiffened-Gas EOS.</li>
-		</ul>	
-	</p>
-		<img src="/ECOGEN/assets/images/BubbleHelium.gif" alt="Load balancing on a bubble-shock interaction." />
-</article>
 
 
     </main>
     <footer>
 	<div> ECOGEN is developped by <a href="https://code-mphi.fr/" target="_blank" > Code-m&Phi; </a> members </div>
-	
 	<div><span class="copy-left">©</span> ECOGEN</div>
+	<div class="flexZone">
+		<div class="design">
+			<p>Design web:</p>
+		</div> 
+		<div class="design">
+			<a href="mailto:productiondulama@gmail.com" target="_blank" > <img src="/ECOGEN/assets/images/productionduLama.png" alt="production du Lama" /> </a> 
+		</div>
+	</div>
 </footer>
   </body>
 </html>
