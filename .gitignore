@@ -1,0 +1,32 @@
+# IDE configuration
+.vscode/
+
+# System
+*.DS_Store
+
+# Compilation 
+ECOGEN
+*.o
+
+# Non-reg & code analysis
+/results/
+/results_save/
+coverage_and_profile/coverage.info
+coverage_and_profile/html
+coverage_and_profile/profile_gprof2dot*.png
+/nonreg/reports/
+
+# Python virtual environments
+venv
+
+# Text files
+*.txt
+*.out
+*.bak
+
+# Others
+*.opensdf
+*.sdf
+*.v12.suo
+*.ods
+error_*
