@@ -289,7 +289,7 @@ bool Parallel::verifyStateCPUs()
   //Gathering of errors
   int nbErr_temp(0);
   int nbErr(errors.size());
-  MPI_Allreduce(&nbErr, &nbErr_temp, 1, MPI_INTEGER, MPI_SUM, MPI_COMM_WORLD);
+  MPI_Allreduce(&nbErr, &nbErr_temp, 1, MPI_INT, MPI_SUM, MPI_COMM_WORLD);
   //Stop if error on one CPU
   if (nbErr_temp) {
     return true;
