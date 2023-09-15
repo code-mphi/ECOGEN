@@ -37,6 +37,15 @@ double mu;                       //!< Relaxation coefficient. Herein, the relaxa
 
 //***********************************************************************
 
+RelaxationPFinite::RelaxationPFinite()
+{
+  m_LSODA = false;
+  m_muFactor = 0.;
+  mu = 0.;
+}
+
+//***********************************************************************
+
 RelaxationPFinite::RelaxationPFinite(XMLElement* element, std::string fileName)
 {
   //Read the relaxation-coefficient factor
@@ -61,13 +70,27 @@ RelaxationPFinite::~RelaxationPFinite(){}
 
 void RelaxationPFinite::relaxation(Cell* cell, const double& dt, Prim type)
 {
+  if (dt < 1.e-20) return; //Check if dt = 0 (for AMR)
+
   //Note that the relaxation coefficients are herein considered as identical for each phase_k--phase_j combination
 
+  //--------------------------------------------------------------------------------
+  //---------------------------------- Parameters ----------------------------------
+  //--------------------------------------------------------------------------------
+  double epsilon(1.e-15);                      //To avoid division by 0
+  double thresholdAlpha(1.e-8);                //Threshold on volume fraction for option alpha = 0 and for the computation of rhoCSquareMix
+  double criterionRelaxedPressures(1.e-5);     //Criterion for considering relative pressures as relaxed
+  int iterMax(100);                            //Maximum number of iteration for the pressure relaxation
+
+  //--------------------------------------------------------------------------------
+  //---------------------------------- Integration ---------------------------------
+  //--------------------------------------------------------------------------------
+
   //Is the pressure-relaxation procedure necessary?
+  //-----------------------------------------------
   //If alpha = 0 is activated, a test is done to know if the relaxation procedure is necessary or not
   //Else, i.e. alpha = 0 is desactivated (alpha != 0), the relaxation procedure is always done (relax = true)
-  bool relax(true), pressuresRelaxed(true);
-  double thresholdAlpha(1.e-8), eps(1.e-10);
+  bool relax(true);
   if (epsilonAlphaNull > 1.e-20) { // alpha = 0 is activated
     for (int k = 0; k < numberPhases; k++) {
       if (cell->getPhase(k, type)->getAlpha() > (1. - thresholdAlpha)) relax = false; //KS//TODO: Should be dynamic ; Shouldn't there be a smart way to choose this alpha threshold?
@@ -75,6 +98,7 @@ void RelaxationPFinite::relaxation(Cell* cell, const double& dt, Prim type)
   }
 
   if (relax) {
+    bool pressuresRelaxed(true);
 
     //Save initial state
     //------------------
@@ -84,6 +108,8 @@ void RelaxationPFinite::relaxation(Cell* cell, const double& dt, Prim type)
       TB->ak[k] = phase->getAlpha();
       TB->rhok[k] = phase->getDensity();
       TB->pk[k] = phase->getPressure();
+      if (TB->ak[k] < thresholdAlpha) TB->alphaNull[k] = true;
+      else TB->alphaNull[k] = false;
     }
 
     //--------------------------------------------------------------------------------
@@ -93,99 +119,101 @@ void RelaxationPFinite::relaxation(Cell* cell, const double& dt, Prim type)
     if (!m_LSODA) {
 
       bool alphaSmall(false);
-      double dtlocal(dt), tlocal(0.), dtmax(0.), pI(0.), sumZk(0.), sumZj(0.), sourceAlpha(0.), rhoCSquareMix(0.), alphak0(0.), epsilon(1.e-15);
+      double dtlocal(dt), tlocal(0.), dtmax(0.), dtnew(0.), pI(0.), pMixture(0.), sourceAlpha(0.), sourcePressure(0.), alphak0(0.);
       int iter = 0;
       while ((dt - tlocal) > 1.e-15) {
+        iter++;
 
         //Initial local time-step
         //-----------------------
         dtlocal = dt - tlocal;
 
-        //Pressure differences
-        //--------------------
-        //Deltapk = sum_j (p_k - p_j) ; where N is the number of phases and j is different from k
+        //Mixture pressure
+        //----------------
+        pMixture = 0.;
         for (int k = 0; k < numberPhases; k++) {
-          TB->Deltapk[k] = 0.;
-          for (int j = 0; j < numberPhases; j++) {
-            if (j != k) TB->Deltapk[k] += cell->getPhase(k, type)->getPressure() - cell->getPhase(j, type)->getPressure();
-          }
+          pMixture += cell->getPhase(k, type)->getAlpha() * cell->getPhase(k, type)->getPressure();
         }
 
         //Determine if pressures are already relaxed
         //------------------------------------------
         pressuresRelaxed = true;
         for (int k = 0; k < numberPhases; k++) {
-          if (std::fabs(TB->Deltapk[k] / cell->getPhase(k, type)->getPressure()) > eps) pressuresRelaxed = false;
+          if (std::fabs((cell->getPhase(k, type)->getPressure() - pMixture) / cell->getPhase(k, type)->getPressure()) > criterionRelaxedPressures) pressuresRelaxed = false;
         }
 
         if (!pressuresRelaxed) {
 
+          //Pressure differences
+          //--------------------
+          computePressureDifferences(cell, type);
+
           //Interface pressure
           //------------------
-          //pI = sum_k (p_k sum_j Z_j) / sum_k (Z_k) ; where j is different from k
+          pI = computeInterfacePressure(cell, type);
           for (int k = 0; k < numberPhases; k++) {
-            TB->zk[k] = cell->getPhase(k, type)->getDensity() * cell->getPhase(k, type)->getSoundSpeed();
+            cell->getPhase(k, type)->getEos()->verifyAndModifyPressure(pI);
           }
-          pI = 0.;
-          sumZk = 0.;
-          for (int k = 0; k < numberPhases; k++) {
-            sumZk += TB->zk[k];
-            sumZj = 0.;
-            for (int j = 0; j < numberPhases; j++) {
-              if (j != k) sumZj += TB->zk[j];
-            }
-            pI += sumZj * cell->getPhase(k, type)->getPressure();
-          }
-          pI /= sumZk;
 
           //Local relaxation-coefficient determination
           //------------------------------------------
-//Only a few minor tests
-// double deltaPmax(1.);
-// for (int k = 0; k < numberPhases; k++) {
-// if (std::fabs(TB->Deltapk[k]) > deltaPmax) deltaPmax = std::fabs(TB->Deltapk[k]);
-// }
-// mu = m_muFactor / sqrt(deltaPmax);
-// mu = m_muFactor / deltaPmax;
-// mu = cell->getPhase(0, type)->getAlpha() * cell->getPhase(1, type)->getAlpha() * m_muFactor / deltaPmax;
-// mu = (2.65e-2 * cell->getPhase(0, type)->getAlpha() + 5.55e-3 * cell->getPhase(1, type)->getAlpha()) / sqrt(deltaPmax);
-// mu = (3.74e-3 * cell->getPhase(0, type)->getAlpha() + 5.55e-3 * cell->getPhase(1, type)->getAlpha()) / sqrt(deltaPmax);
-// mu = (1.18 * cell->getPhase(0, type)->getAlpha() + 5.55 * cell->getPhase(1, type)->getAlpha()) / deltaPmax;
-// mu = cell->getPhase(0, type)->getAlpha() * cell->getPhase(1, type)->getAlpha() * m_muFactor / sqrt(deltaPmax);
+          //Only a few minor tests
+          // double deltaPmax(1.);
+          // for (int k = 0; k < numberPhases; k++) {
+          // if (std::fabs(TB->Deltapk[k]) > deltaPmax) deltaPmax = std::fabs(TB->Deltapk[k]);
+          // }
+          // mu = m_muFactor / sqrt(deltaPmax);
+          // mu = m_muFactor / deltaPmax;
+          // mu = cell->getPhase(0, type)->getAlpha() * cell->getPhase(1, type)->getAlpha() * m_muFactor / deltaPmax;
+          // mu = (2.65e-2 * cell->getPhase(0, type)->getAlpha() + 5.55e-3 * cell->getPhase(1, type)->getAlpha()) / sqrt(deltaPmax);
+          // mu = (3.74e-3 * cell->getPhase(0, type)->getAlpha() + 5.55e-3 * cell->getPhase(1, type)->getAlpha()) / sqrt(deltaPmax);
+          // mu = (1.18 * cell->getPhase(0, type)->getAlpha() + 5.55 * cell->getPhase(1, type)->getAlpha()) / deltaPmax;
+          // mu = cell->getPhase(0, type)->getAlpha() * cell->getPhase(1, type)->getAlpha() * m_muFactor / sqrt(deltaPmax);
 
           //Local time-step determination
           //-----------------------------
-          //Find local time-step based on volume-fraction restrictions
-          dtmax = 1.e10;
-          for (int k = 0; k < numberPhases; k++) {
-            sourceAlpha = mu * TB->Deltapk[k];
-            if      (sourceAlpha >  eps) dtmax = std::fmin(dtmax, (1. - cell->getPhase(k, type)->getAlpha()) / sourceAlpha);
-            else if (sourceAlpha < -eps) dtmax = std::fmin(dtmax,     - cell->getPhase(k, type)->getAlpha()  / sourceAlpha);
-          }
-          //Find local time-step based on pressure restrictions
-          rhoCSquareMix = 0.;
-          for (int k = 0; k < numberPhases; k++) {
-            phase = cell->getPhase(k, type);
-            TB->rho_cIksquare[k] = phase->getEos()->computeDensityTimesInterfaceSoundSpeedSquare(phase->getDensity(), pI, phase->getPressure());
-            if (phase->getAlpha() > thresholdAlpha) {
-              rhoCSquareMix += TB->rho_cIksquare[k] / phase->getAlpha();
+          if (mu > 1.e-20) {
+            dtmax = 1.e10;
+            //Find local time-step based on volume-fraction restrictions
+            for (int k = 0; k < numberPhases; k++) {
+              sourceAlpha = mu * TB->Deltapk[k];
+              if      (sourceAlpha >  epsilon) dtmax = std::fmin(dtmax, (1. - cell->getPhase(k, type)->getAlpha()) / sourceAlpha);
+              else if (sourceAlpha < -epsilon) dtmax = std::fmin(dtmax,     - cell->getPhase(k, type)->getAlpha()  / sourceAlpha);
             }
+            //Find local time-step based on pressure restrictions
+            for (int k = 0; k < numberPhases; k++) {
+              phase = cell->getPhase(k, type);
+              TB->rho_cIksquare[k] = phase->getEos()->computeDensityTimesInterfaceSoundSpeedSquare(phase->getDensity(), pI, phase->getPressure());
+            }
+            for (int k = 0; k < numberPhases; k++) {
+              phase = cell->getPhase(k, type);
+              if (phase->getAlpha() > thresholdAlpha) {
+                sourcePressure = - TB->rho_cIksquare[k] * TB->Deltapk[k] / phase->getAlpha();
+                for (int j = 0; j < numberPhases; j++) {
+                  sourcePressure -= (cell->getPhase(j, type)->getPressure() - TB->rho_cIksquare[j]) * TB->Deltapk[j];
+                }
+                dtnew = (pMixture - phase->getPressure()) / mu / sourcePressure;
+                if (dtnew > 0.) dtmax = std::fmin(dtmax, dtnew);
+              }
+            }
+            dtmax *= 0.5;
+            if (dtmax < dtlocal) dtlocal = dtmax;
           }
-          if (mu > eps) dtmax = std::fmin(dtmax, 1. / mu / rhoCSquareMix);
-          dtmax *= 0.5;
-          if (dtmax < dtlocal) dtlocal = dtmax;
-          
+
           //Local relaxation and complete necessary variables for the next local time step
           //------------------------------------------------------------------------------
           //Relaxation on phase volume-fraction and pressure equations
           for (int k = 0; k < numberPhases; k++) {
-            phase = cell->getPhase(k, type);
-            alphak0 = phase->getAlpha();
-            phase->setPressure(phase->getPressure() - dtlocal * mu * TB->Deltapk[k] * TB->rho_cIksquare[k] / std::max(alphak0, epsilon));
-            phase->setAlpha(alphak0 + dtlocal * mu * TB->Deltapk[k]);
-            phase->setDensity(alphak0 * phase->getDensity() / std::max(phase->getAlpha(), epsilon));
-            phase->verifyAndCorrectPhase();
-            phase->extendedCalculusPhase(cell->getMixture(type)->getVelocity());
+            if (!TB->alphaNull[k]) {
+              phase = cell->getPhase(k, type);
+              alphak0 = phase->getAlpha();
+              phase->setEnergy(phase->getEnergy() - dtlocal * mu * pI * TB->Deltapk[k] / std::max(alphak0 * phase->getDensity(), epsilon));
+              phase->setAlpha(alphak0 + dtlocal * mu * TB->Deltapk[k]);
+              phase->setDensity(alphak0 * phase->getDensity() / std::max(phase->getAlpha(), epsilon));
+              phase->setPressure(phase->getEos()->computePressure(phase->getDensity(), phase->getEnergy()));
+              phase->verifyAndCorrectPhase();
+              phase->extendedCalculusPhase(cell->getMixture(type)->getVelocity());
+            }
           }
         }
         else {
@@ -199,13 +227,14 @@ void RelaxationPFinite::relaxation(Cell* cell, const double& dt, Prim type)
 
         //Stop the relaxation procedure if a volume fraction is almost equal to 1 or if the number of iterations reaches a threshold
         //--------------------------------------------------------------------------------------------------------------------------
-        for (int k = 0; k < numberPhases; k++) {
-          if (cell->getPhase(k, type)->getAlpha() > (1. - thresholdAlpha)) alphaSmall = true;
+        if (epsilonAlphaNull > 1.e-20) { // alpha = 0 is activated
+          for (int k = 0; k < numberPhases; k++) {
+            if (cell->getPhase(k, type)->getAlpha() > (1. - thresholdAlpha)) alphaSmall = true;
+          }
+          if (alphaSmall) break;
         }
-        if (alphaSmall) break;
 
-        iter++;
-        if (iter == 10) {
+        if (iter == iterMax) {
           pressuresRelaxed = true;
           break;
         }
@@ -237,22 +266,7 @@ void RelaxationPFinite::relaxation(Cell* cell, const double& dt, Prim type)
         }
         //Else cell is updated with interface pressure obtained with values from previous convergence with Euler method
         else {
-          //pI = sum_k (p_k sum_j Z_j) / sum_k (Z_k) ; where j is different from k
-          for (int k = 0; k < numberPhases; k++) {
-            TB->zk[k] = cell->getPhase(k, type)->getDensity() * cell->getPhase(k, type)->getSoundSpeed();
-          }
-          pI = 0.;
-          sumZk = 0.;
-          for (int k = 0; k < numberPhases; k++) {
-            sumZk += TB->zk[k];
-            sumZj = 0.;
-            for (int j = 0; j < numberPhases; j++) {
-              if (j != k) sumZj += TB->zk[j];
-            }
-            pI += sumZj * cell->getPhase(k, type)->getPressure();
-          }
-          pI /= sumZk;
-
+          pI = computeInterfacePressure(cell, type);
           for (int k = 0; k < numberPhases; k++) { TB->eos[k]->verifyAndModifyPressure(pI); } //Physical pressure?
 
           for (int k = 0; k < numberPhases; k++) {
@@ -272,33 +286,27 @@ void RelaxationPFinite::relaxation(Cell* cell, const double& dt, Prim type)
     //--------------------------------------------------------------------------------
     else {
 
-      //Pressure differences
-      //--------------------
-      //Deltapk = sum_j (p_k - p_j) ; where N is the number of phases and j is different from k
-      for (int k = 0; k < numberPhases; k++) {
-        TB->Deltapk[k] = 0.;
-        for (int j = 0; j < numberPhases; j++) {
-          if (j != k) TB->Deltapk[k] += cell->getPhase(k, type)->getPressure() - cell->getPhase(j, type)->getPressure();
-        }
-      }
-
       //Determine if pressures are already relaxed
       //------------------------------------------
       pressuresRelaxed = true;
       for (int k = 0; k < numberPhases; k++) {
-        if (std::fabs(TB->Deltapk[k] / cell->getPhase(k, type)->getPressure()) > eps) pressuresRelaxed = false;
+        if (std::fabs((cell->getPhase(k, type)->getPressure() - cell->getMixture(type)->getPressure()) / cell->getPhase(k, type)->getPressure()) > criterionRelaxedPressures) pressuresRelaxed = false;
       }
+
       if (!pressuresRelaxed) {
+
+        //Pressure differences
+        //--------------------
+        computePressureDifferences(cell, type);
 
         //LSODA relaxation
         //----------------
         double t0(0.);
-        int neq(3 * numberPhases);
+        int neq(2 * numberPhases);
         std::vector<double> y(neq + 1);
         std::vector<double>::iterator it(y.begin());
         for (int k = 0; k < numberPhases; k++) {
           *(++it) = TB->ak[k];
-          *(++it) = TB->rhok[k];
           *(++it) = TB->pk[k];
         }
         int istate = 1;
@@ -311,7 +319,7 @@ void RelaxationPFinite::relaxation(Cell* cell, const double& dt, Prim type)
         for (int k = 0; k < numberPhases; k++) {
           phase = cell->getPhase(k, type);
           phase->setAlpha(*(++it));
-          phase->setDensity(*(++it));
+          phase->setDensity(TB->ak[k] * TB->rhok[k] / std::max(phase->getAlpha(), epsilon));
           phase->setPressure(*(++it));
           phase->verifyAndCorrectPhase();
           phase->extendedCalculusPhase(cell->getMixture(type)->getVelocity());
@@ -344,23 +352,8 @@ void RelaxationPFinite::relaxation(Cell* cell, const double& dt, Prim type)
           }
           //Else cell is updated with interface pressure obtained with values from previous convergence with LSODA method
           else {
-            //pI = sum_k (p_k sum_j Z_j) / sum_k (Z_k) ; where j is different from k
-            double pI(0.), sumZk(0.), sumZj(0.);
-            for (int k = 0; k < numberPhases; k++) {
-              TB->zk[k] = cell->getPhase(k, type)->getDensity() * cell->getPhase(k, type)->getSoundSpeed();
-            }
-            pI = 0.;
-            sumZk = 0.;
-            for (int k = 0; k < numberPhases; k++) {
-              sumZk += TB->zk[k];
-              sumZj = 0.;
-              for (int j = 0; j < numberPhases; j++) {
-                if (j != k) sumZj += TB->zk[j];
-              }
-              pI += sumZj * cell->getPhase(k, type)->getPressure();
-            }
-            pI /= sumZk;
-
+            double pI(0.);
+            pI = computeInterfacePressure(cell, type);
             for (int k = 0; k < numberPhases; k++) { TB->eos[k]->verifyAndModifyPressure(pI); } //Physical pressure?
 
             for (int k = 0; k < numberPhases; k++) {
@@ -380,6 +373,25 @@ void RelaxationPFinite::relaxation(Cell* cell, const double& dt, Prim type)
 
 //***********************************************************************
 
+void RelaxationPFinite::computePressureDifferences(Cell* cell, Prim type)
+{
+  //Deltapk = alpha_k sum_j alpha_j (p_k - p_j) ; where N is the number of phases, j is different from k and where p_k also considers solid terms
+  for (int k = 0; k < numberPhases; k++) {
+    TB->Deltapk[k] = 0.;
+    if (!TB->alphaNull[k]) {
+      for (int j = 0; j < numberPhases; j++) {
+        if (!TB->alphaNull[j]) {
+          if (j != k) TB->Deltapk[k] += cell->getPhase(j, type)->getAlpha() * (cell->getPhase(k, type)->getPressure() - TB->compactionPk[k]
+                                                                             - cell->getPhase(j, type)->getPressure() + TB->compactionPk[j]);
+        }
+      }
+      TB->Deltapk[k] *= cell->getPhase(k, type)->getAlpha();
+    }
+  }
+}
+
+//***********************************************************************
+
 void RelaxationPFinite::system_relaxation(double /*t*/, double* y, double* ydot, void* /*data*/)
 {
   double epsilon(1.e-15), pI(0.), sumZk(0.), sumZj(0.);
@@ -391,24 +403,29 @@ void RelaxationPFinite::system_relaxation(double /*t*/, double* y, double* ydot,
   for (int k = 0; k < numberPhases; k++) {
     phase = bufferCellLeft->getPhase(k);
     phase->setAlpha(y[i++]);
-    phase->setDensity(y[i++]);
+    phase->setDensity(TB->ak[k] * TB->rhok[k] / std::max(phase->getAlpha(), epsilon));
     phase->setPressure(y[i++]);
     phase->verifyAndCorrectPhase();
   }
 
   //Pressure differences
   //--------------------
-  //Deltapk = sum_j (p_k - p_j) ; where N is the number of phases and j is different from k
+  //Deltapk = alpha_k sum_j alpha_j (p_k - p_j) ; where N is the number of phases and j is different from k
   for (int k = 0; k < numberPhases; k++) {
     TB->Deltapk[k] = 0.;
-    for (int j = 0; j < numberPhases; j++) {
-      if (j != k) TB->Deltapk[k] += bufferCellLeft->getPhase(k)->getPressure() - bufferCellLeft->getPhase(j)->getPressure();
+    if (!TB->alphaNull[k]) {
+      for (int j = 0; j < numberPhases; j++) {
+        if (!TB->alphaNull[j]) {
+          if (j != k) TB->Deltapk[k] += bufferCellLeft->getPhase(j)->getAlpha() * (bufferCellLeft->getPhase(k)->getPressure() - bufferCellLeft->getPhase(j)->getPressure());
+        }
+      }
+      TB->Deltapk[k] *= bufferCellLeft->getPhase(k)->getAlpha();
     }
   }
 
   //Interface pressure
   //------------------
-  //pI = sum_k (p_k sum_j Z_j) / sum_k (Z_k) ; where j is different from k
+  //pI = sum_k (p_k sum_j Z_j) / (N - 1) sum_k (Z_k) ; where j is different from k
   for (int k = 0; k < numberPhases; k++) {
     phase = bufferCellLeft->getPhase(k);
     TB->zk[k] = phase->getEos()->computeAcousticImpedance(phase->getDensity(), phase->getPressure());
@@ -423,7 +440,7 @@ void RelaxationPFinite::system_relaxation(double /*t*/, double* y, double* ydot,
     }
     pI += sumZj * bufferCellLeft->getPhase(k)->getPressure();
   }
-  pI /= sumZk;
+  pI /= sumZk * (numberPhases - 1);
 
   //System of equations
   //-------------------
@@ -431,7 +448,6 @@ void RelaxationPFinite::system_relaxation(double /*t*/, double* y, double* ydot,
   for (int k = 0; k < numberPhases; k++) {
     phase = bufferCellLeft->getPhase(k);
     ydot[i++] = mu * TB->Deltapk[k];
-    ydot[i++] = - phase->getDensity() / std::max(phase->getAlpha(), epsilon) * mu * TB->Deltapk[k];
     ydot[i++] = - phase->getEos()->computeDensityTimesInterfaceSoundSpeedSquare(phase->getDensity(), pI, phase->getPressure()) / std::max(phase->getAlpha(), epsilon) * mu * TB->Deltapk[k];
   }
 }

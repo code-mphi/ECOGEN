@@ -39,6 +39,6 @@
 #include "ElementHexahedron.h"
 #include "ElementPrism.h"
 #include "ElementPyramid.h"
-//Ajouter ici les entetes des elements du mesh
+//Add here headers of new elements
 
 #endif // HEADERELEMENTS_H

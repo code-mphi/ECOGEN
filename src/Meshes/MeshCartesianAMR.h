@@ -49,19 +49,19 @@ public:
   void createCellInterfacesFacesAndGhostCells(TypeMeshContainer<Cell*>& cells, TypeMeshContainer<Cell*>& cellsGhost, TypeMeshContainer<CellInterface*>& cellInterfaces, std::string ordreCalcul);
   virtual void procedureRaffinementInitialization(TypeMeshContainer<Cell*>* cellsLvl, TypeMeshContainer<Cell*>* cellsLvlGhost, TypeMeshContainer<CellInterface*>* cellInterfacesLvl,
 		const std::vector<AddPhys*>& addPhys, int& nbCellsTotalAMR, std::vector<GeometricalDomain*>& domains,
-		Eos** eos, const int& restartSimulation, std::string ordreCalcul);
+		Eos** eos, const int& restartSimulation, std::string ordreCalcul, std::vector<GeometricalDomain*>& solidDomains);
   virtual void procedureRaffinement(TypeMeshContainer<Cell*>* cellsLvl, TypeMeshContainer<Cell*>* cellsLvlGhost, TypeMeshContainer<CellInterface*>* cellInterfacesLvl, const int& lvl,
     const std::vector<AddPhys*>& addPhys, int& nbCellsTotalAMR, Eos** eos);
   virtual std::string whoAmI() const;
 
   //Printing / Reading
-  virtual void ecritHeaderPiece(std::ofstream& fileStream, TypeMeshContainer<Cell*>* cellsLvl) const;
-  virtual void recupereNoeuds(std::vector<double>& jeuDonnees, std::vector<Cell*>* cellsLvl) const;
-  virtual void recupereConnectivite(std::vector<double>& jeuDonnees, std::vector<Cell*>* cellsLvl) const;
-  virtual void recupereOffsets(std::vector<double>& jeuDonnees, std::vector<Cell*>* cellsLvl) const;
-  virtual void recupereTypeCell(std::vector<double>& jeuDonnees, std::vector<Cell*>* cellsLvl) const;
-  virtual void recupereDonnees(TypeMeshContainer<Cell*>* cellsLvl, std::vector<double>& jeuDonnees, const int var, int phase) const;
-  virtual void setDataSet(std::vector<double>& jeuDonnees, TypeMeshContainer<Cell*>* cellsLvl, const int var, int phase) const;
+  virtual void writeHeaderPiece(std::ofstream& fileStream, TypeMeshContainer<Cell*>* cellsLvl) const;
+  virtual void getNodes(std::vector<double>& dataset, std::vector<Cell*>* cellsLvl) const;
+  virtual void getConnectivity(std::vector<double>& dataset, std::vector<Cell*>* cellsLvl) const;
+  virtual void getOffsets(std::vector<double>& dataset, std::vector<Cell*>* cellsLvl) const;
+  virtual void getTypeCell(std::vector<double>& dataset, std::vector<Cell*>* cellsLvl) const;
+  virtual void getData(TypeMeshContainer<Cell*>* cellsLvl, std::vector<double>& dataset, const int var, int phase) const;
+  virtual void setDataSet(std::vector<double>& dataset, TypeMeshContainer<Cell*>* cellsLvl, const int var, int phase) const;
   virtual void refineCellAndCellInterfaces(Cell* cell, const std::vector<AddPhys*>& addPhys, int& nbCellsTotalAMR);
   virtual void printDomainDecomposition(std::ofstream& fileStream);
   virtual void readDomainDecomposition(std::ifstream& fileStream);
@@ -74,7 +74,7 @@ public:
   virtual void finalizeParallele(const int& lvlMax);
   virtual void parallelLoadBalancingAMR(TypeMeshContainer<Cell*>* cellsLvl, TypeMeshContainer<Cell*>* cellsLvlGhost,
     TypeMeshContainer<CellInterface*>* cellInterfacesLvl, std::string ordreCalcul,
-    const std::vector<AddPhys*>& addPhys, Eos** eos, int& nbCellsTotalAMR, bool init = false);
+    const std::vector<AddPhys*>& addPhys, Eos** eos, int& nbCellsTotalAMR, std::vector<GeometricalDomain*>& solidDomains, bool init = false);
   virtual void computePotentialBalancing(TypeMeshContainer<Cell*>* cellsLvl, bool init, int lvl, bool& balance,
     std::vector<typename decomposition::Key<3>::value_type>& indicesSendStartGlobal, std::vector<typename decomposition::Key<3>::value_type>& indicesSendEndGlobal,
     std::vector<typename decomposition::Key<3>::value_type>& indicesReceiveStartGlobal, std::vector<typename decomposition::Key<3>::value_type>& indicesReceiveEndGlobal);
@@ -82,13 +82,14 @@ public:
     TypeMeshContainer<CellInterface*>* cellInterfacesLvl, std::string ordreCalcul,
     const std::vector<AddPhys*>& addPhys, Eos** eos, int& nbCellsTotalAMR,
     std::vector<typename decomposition::Key<3>::value_type>& indicesSendStartGlobal, std::vector<typename decomposition::Key<3>::value_type>& indicesSendEndGlobal,
-    std::vector<typename decomposition::Key<3>::value_type>& indicesReceiveStartGlobal, std::vector<typename decomposition::Key<3>::value_type>& indicesReceiveEndGlobal);
+    std::vector<typename decomposition::Key<3>::value_type>& indicesReceiveStartGlobal, std::vector<typename decomposition::Key<3>::value_type>& indicesReceiveEndGlobal,
+    std::vector<GeometricalDomain*>& solidDomains);
 
 private:
   int m_lvlMax;                               //!<Niveau maximal sur l arbre AMR (si m_lvlMax = 0, pas d AMR)
-	double m_criteriaVar;                       //!<Valeur du criteria a depasser sur la variation d'une variable pour le (de)raffinement (met xi=1.)
-	bool m_varRho, m_varP, m_varU, m_varAlpha;  //!<Choix sur quelle variation on (de)raffine
-	double m_xiSplit, m_xiJoin;                 //!<Valeur de xi pour split ou join les mailles
+	double m_criteriaVar;                       //!<Value of criteria to not pass on the variation of a variable for coarsening or refining (put xi=1.)
+	bool m_varRho, m_varP, m_varU, m_varAlpha;  //!<Choice on which variation we coarsen or refine
+	double m_xiSplit, m_xiJoin;                 //!<Value of xi to split or join the cells
   decomposition::Decomposition m_decomp;      //!<Parallel domain decomposition based on keys
 
 };

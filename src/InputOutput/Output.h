@@ -57,12 +57,18 @@ class Output
     Output();
 
     //! \brief   Main constructor for datasets used for OutputXML and OutputGNU according to outputMode
-    //! \param   casTest   Test case name (defined in "main.xml")  
+    //! \param   casTest   Test case name (folder containing input xml files (main, mesh etc.)
     //! \param   nameRun   Folder to store results
     //! \param   element   XML outputMode element
-    //! \param   fileName  Full path to mainVX.xml of current test case
+    //! \param   fileName  Full path to main.xml of current test case
     //! \param   entree    Input pointer to access run pointer and its information
     Output(std::string casTest, std::string nameRun, tinyxml2::XMLElement* element, std::string fileName, Input* entree);
+
+    //! \brief   Constructor for datasets used for OutputXML when mesh mapping restart option is activated
+    //! \param   nameRun                       Folder to store results
+    //! \param   fileNumberRestartMeshMapping  Result file number of mapped mesh to be restarted from
+    //! \param   input                         Input pointer to access run pointer and its information
+    Output(std::string nameRun, int fileNumberRestartMeshMapping, Input *input);
 
     //! \brief   Constructor for specific derived GNU outputs (boundary, probe, cut)
     //! \param   element   XML GNU output element to get stream precision
@@ -73,26 +79,43 @@ class Output
     virtual void locateProbeInMesh(const TypeMeshContainer<Cell*>& /*cells*/, const int& /*nbCells*/, bool /*localSeeking*/ = false) { try { throw ErrorECOGEN("locateProbeInMesh not available for requested output format"); } catch (ErrorECOGEN&) { throw; } };
     virtual Cell* locateProbeInAMRSubMesh(std::vector<Cell*>* /*cells*/, const int& /*nbCells*/) { try { throw ErrorECOGEN("locateProbeInMesh not available for requested output format"); } catch (ErrorECOGEN&) { throw; } return 0; };
 
+    void copyInputFiles() const;
     void initializeOutput(const Cell& cell);
-    void initializeOutput(std::vector<CellInterface*>* cellInterfacesLvl); //!< Currently only used for OutputBoundaryMassflowGNU
+    void initializeOutput(std::vector<CellInterface*>* cellInterfacesLvl); //!<To initialize OutputBoundaryMassflowGNU
+    void initializeOutputMeshMapping(const Cell& cell); //!<To initialize output for Mesh Mapping Restart
     virtual void initializeOutputInfos();
     virtual void writeResults(Mesh* /*mesh*/, std::vector<Cell*>* /*cellsLvl*/) { try { throw ErrorECOGEN("writeResults not available for requested output format"); } catch (ErrorECOGEN&) { throw; }};
     virtual void writeResults(std::vector<CellInterface*>* /*cellInterfacesLvl*/) { try { throw ErrorECOGEN("writeResults not available for requested output format"); } catch (ErrorECOGEN&) { throw; } };
     void printTree(Mesh* mesh, std::vector<Cell*>* cellsLvl, int m_restartAMRsaveFreq);
     virtual void writeInfos();
-    void saveInfosMailles() const;
+    virtual void writeProgress();
+    void saveInfoCells() const;
 
     virtual void initializeSpecificOutput() { try { throw ErrorECOGEN("initializeSpecificOutput not available for requested output format"); } catch (ErrorECOGEN&) { throw; } };
     virtual void initializeSpecificOutput(std::vector<CellInterface*>* /*cellInterfacesLvl*/) { try { throw ErrorECOGEN("initializeSpecificOutput not available for requested output format"); } catch (ErrorECOGEN&) { throw; } }; //!< Currently only used for OutputBoundaryMassflowGNU
 
+    //! \brief   Read the informations related to a previous simulation (number of cpu, time, file number, etc.) using infoCalcul file
+    //! \details Only the content since the file number to be restarted is kept (as the next files will overwrite the later content)
     void readInfos();
-    virtual void readResults(Mesh* /*mesh*/, std::vector<Cell*>* /*cellsLvl*/) { try { throw ErrorECOGEN("readResutls not available for requested output format"); } catch (ErrorECOGEN&) { throw; } };
+    //! \brief   Read and return the number of cpu from the infoCalcul file of a performed simulation
+    int readNbCpu();
+    //! \brief   Read results of a previous simulation to restart from it 
+    //! \details Available for all mesh types if the same number of cpus is used between both simulations
+    //! \param   mesh     Mesh object of the current simulation
+    //! \param   cellsLvl Computationnal cells to be filled with results of previous simulation
+    virtual void readResults(Mesh* /*mesh*/, std::vector<Cell*>* /*cellsLvl*/) { try { throw ErrorECOGEN("readResults not available for requested output format"); } catch (ErrorECOGEN&) { throw; } };
+    //! \brief   Read results of a single partition of a previous simulation to restart from it 
+    //! \details Available for GmshV2 only but allow the use of mesh mapping and/or use of a different number of cpu than the previous simulation
+    //! \param   mesh     Mesh object of a single partition of the previous simulation (either the same one as current or older one in case of mapping)
+    //! \param   cellsLvl Computationnal cells to be filled with results of previous simulation
+    //! \param   cpu      Cpu number of the partition to be read
+    virtual void readResultsCpu(Mesh* /*mesh*/, std::vector<Cell*>* /*cellsLvl*/, int /*cpu*/) { try { throw ErrorECOGEN("readResultsCpu not available for requested output format"); } catch (ErrorECOGEN&) { throw; } };
     void readDomainDecompostion(Mesh* mesh);
     void readTree(Mesh *mesh, TypeMeshContainer<Cell*>* cellsLvl, TypeMeshContainer<Cell*>* cellsLvlGhost, TypeMeshContainer<CellInterface*>* cellInterfacesLvl,
         const std::vector<AddPhys*>& addPhys, int& nbCellsTotalAMR);
 
     //Accessor
-    int getNumSortie() const { return m_numFichier; };
+    int getNumFile() const { return m_numFichier; };
     virtual double getNextTime() { try { throw ErrorECOGEN("getNextTime not available for requested output format"); } catch (ErrorECOGEN&) { throw; } return 0.; }
     virtual bool possesses() { try { throw ErrorECOGEN("possesses not available for requested output format"); } catch (ErrorECOGEN&) { throw; } return false; };
     const std::string& getFolderOutput(){ return m_folderOutput;}
@@ -102,12 +125,12 @@ class Output
   protected:
 
     //General data
-    void afficheInfoEcriture() const;
+    void printWritingInfo() const;
     void saveInfos() const;
     std::string createFilename(const char* name, int lvl = -1, int proc = -1, int numFichier = -1) const;
 
-    void writeDataset(std::vector<double> jeuDonnees, std::ofstream& fileStream, TypeData typeData);
-    void getDataset(std::istringstream& data, std::vector<double>& jeuDonnees);
+    void writeDataset(std::vector<double> dataset, std::ofstream& fileStream, TypeData typeData);
+    void getDataset(std::istringstream& data, std::vector<double>& dataset);
 
     Input* m_input;                                     //!<Pointer to input
     Run* m_run;                                         //!<Pointer to run
@@ -136,12 +159,13 @@ class Output
      
     //Attributes of print parameters
     bool m_writeBinary;                                 //!<Choice to write binary/ASCII
-    bool m_splitData;                                   //!<Choix print donnees dans des fichiers separes
+    bool m_splitData;                                   //!<Choice print data in separate files
     int m_precision;                                    //!<Output files precision (number of digits) //default: 0
     bool m_reducedOutput;                               //!<Choice of reduced number of output variables when possible (depends on the model)
 
     int m_numFichier; 
     std::string m_endianMode;
+    int m_nbCpusRestarted;                              //!<Number of CPUs of the simulation to be restarted
     
     //Useful to print cell data
     Cell m_cellRef;                                     //!<Reference cell to extract variables name

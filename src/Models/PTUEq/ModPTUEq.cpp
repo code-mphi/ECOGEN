@@ -30,6 +30,8 @@
 
 #include "ModPTUEq.h"
 #include "PhasePTUEq.h"
+#include "GradPhasePTUEq.h"
+#include "GradMixPTUEq.h"
 
 const std::string ModPTUEq::NAME = "TEMPERATUREPRESSUREVELOCITYEQ";
 
@@ -74,6 +76,20 @@ void ModPTUEq::allocatePhase(Phase** phase)
 void ModPTUEq::allocateMixture(Mixture** mixture)
 {
   *mixture = new MixPTUEq;
+}
+
+//***********************************************************************
+
+void ModPTUEq::allocatePhaseGradient(GradPhase** phase)
+{
+  *phase = new GradPhasePTUEq;
+}
+
+//***********************************************************************
+
+void ModPTUEq::allocateMixtureGradient(GradMixture** mixture)
+{
+  *mixture = new GradMixPTUEq;
 }
 
 //***********************************************************************
@@ -252,7 +268,7 @@ void ModPTUEq::solveRiemannWall(Cell& cellLeft, const double& dxLeft, double& dt
 
 //****************************************************************************
 
-void ModPTUEq::solveRiemannTank(Cell& cellLeft, const double& dxLeft, double& dtMax, const double* ak0, const double* rhok0, const double& p0, const double& T0, std::vector<double> &boundData) const
+void ModPTUEq::solveRiemannInletTank(Cell& cellLeft, const double& dxLeft, double& dtMax, const double* ak0, const double* rhok0, const double& p0, const double& T0, std::vector<double> &boundData) const
 {
   double sL, zL, sM, vmv0, mL;
   double pStar(0.), uStar(0.), rhoStar(0.), uyStar(0.), uzStar(0.), EStar(0.), vStar(0.);
@@ -323,7 +339,7 @@ void ModPTUEq::solveRiemannTank(Cell& cellLeft, const double& dxLeft, double& dt
     double vStarL(0.), dvStarL(0.);
     do {
       p -= f / df; iteration++;
-      if (iteration > 50) Errors::errorMessage("solveRiemannTank not converged in ModPTUEq");
+      if (iteration > 50) Errors::errorMessage("solveRiemannInletTank not converged in ModPTUEq");
       //Physical pressure ?
       for (int k = 0; k < numberPhases; k++) { TB->eos[k]->verifyAndModifyPressure(p); }
       if (p > p0) { p = p0 - 1e-6; }
@@ -388,7 +404,7 @@ void ModPTUEq::solveRiemannTank(Cell& cellLeft, const double& dxLeft, double& dt
 
 //****************************************************************************
 
-void ModPTUEq::solveRiemannOutflow(Cell& cellLeft, const double& dxLeft, double& dtMax, const double p0, std::vector<double> &boundData) const
+void ModPTUEq::solveRiemannOutletPressure(Cell& cellLeft, const double& dxLeft, double& dtMax, const double p0, std::vector<double> &boundData) const
 {
   double sL, zL;
   double pStar(p0);
@@ -446,6 +462,46 @@ void ModPTUEq::solveRiemannOutflow(Cell& cellLeft, const double& dxLeft, double&
 }
 
 //****************************************************************************
+//******************************* Accessors **********************************
+//****************************************************************************
+
+double ModPTUEq::selectScalar(Phase** phases, Mixture* mixture, Transport* transports, Variable nameVariable, int num) const
+{
+  switch (nameVariable) {
+    case Variable::pressure:
+      return mixture->getPressure();
+      break;
+    case Variable::temperature:
+      return mixture->getTemperature();
+      break;
+    case Variable::alpha:
+      return phases[num]->getAlpha();
+      break;
+    case Variable::velocityU:
+      return mixture->getVelocity().getX();
+      break;
+    case Variable::velocityV:
+      return mixture->getVelocity().getY();
+      break;
+    case Variable::velocityW:
+      return mixture->getVelocity().getZ();
+      break;
+    case Variable::velocityMag:
+      return mixture->getVelocity().norm();
+      break;
+    case Variable::transport:
+      return transports[num].getValue();
+      break;
+    case Variable::density:
+      return mixture->getDensity();
+      break;
+    default:
+      Errors::errorMessage("nameVariable unknown in selectScalar"); return 0;
+      break;
+  }
+}
+
+//****************************************************************************
 
 const double& ModPTUEq::getSM()
 {
@@ -458,11 +514,7 @@ const double& ModPTUEq::getSM()
 
 void ModPTUEq::reverseProjection(const Coord normal, const Coord tangent, const Coord binormal) const
 {
-  Coord fluxProjected;
-  fluxProjected.setX(normal.getX()*static_cast<FluxPTUEq*> (fluxBuff)->m_momentum.getX() + tangent.getX()*static_cast<FluxPTUEq*> (fluxBuff)->m_momentum.getY() + binormal.getX()*static_cast<FluxPTUEq*> (fluxBuff)->m_momentum.getZ());
-  fluxProjected.setY(normal.getY()*static_cast<FluxPTUEq*> (fluxBuff)->m_momentum.getX() + tangent.getY()*static_cast<FluxPTUEq*> (fluxBuff)->m_momentum.getY() + binormal.getY()*static_cast<FluxPTUEq*> (fluxBuff)->m_momentum.getZ());
-  fluxProjected.setZ(normal.getZ()*static_cast<FluxPTUEq*> (fluxBuff)->m_momentum.getX() + tangent.getZ()*static_cast<FluxPTUEq*> (fluxBuff)->m_momentum.getY() + binormal.getZ()*static_cast<FluxPTUEq*> (fluxBuff)->m_momentum.getZ());
-  static_cast<FluxPTUEq*> (fluxBuff)->m_momentum.setXYZ(fluxProjected.getX(), fluxProjected.getY(), fluxProjected.getZ());
+  static_cast<FluxPTUEq*> (fluxBuff)->m_momentum.reverseProjection(normal, tangent, binormal);
 }
 
 //****************************************************************************

@@ -34,7 +34,7 @@
 
 GradientGreenGauss::GradientGreenGauss() 
 {
-  m_type = GG;
+  m_type = TypeGrad::GG;
 }
 
 //****************************************************************************
@@ -48,7 +48,6 @@ void GradientGreenGauss::addGradInterface(Coord &grad, CellInterface &cellInterf
   // Since face normal is constructed through mesh vertex there is no indication of outward direction.
   // Outward normal direction is defined according to cell center. 
 
-  Coord vFaceToElt(0.);
   vFaceToElt.setFromSubtractedVectors(cellInterface.getFace()->getPos(), cell.getElement()->getPosition());
 
   double scalarProduct(Coord::scalarProduct(cellInterface.getFace()->getNormal(), vFaceToElt));
@@ -67,88 +66,7 @@ void GradientGreenGauss::addGradInterface(Coord &grad, CellInterface &cellInterf
 
 //****************************************************************************
 
-Coord GradientGreenGauss::computeGradient(Cell* cell, Variable nameVariable, int numPhase)
-{
-// Compute gradient of cell using Green-Gauss method
-  int typeCellInterface(0);
-  double wl(0.), wr(0.), wf(0.);
-  double dl(0.), dr(0.);
-  Coord grad(0.);
-
-  for (int b = 0; b < cell->getCellInterfacesSize(); b++) {
-    if (!cell->getCellInterface(b)->getSplit()) 
-    {
-      typeCellInterface = cell->getCellInterface(b)->whoAmI();
-      if (typeCellInterface == 0) // Inner interface (O1 or O2)
-      {
-        // Distances
-        dl = cell->getCellInterface(b)->distance(cell->getCellInterface(b)->getCellGauche());
-        dr = cell->getCellInterface(b)->distance(cell->getCellInterface(b)->getCellDroite());
-
-        // Extracting left and right variables values
-        wl = cell->getCellInterface(b)->getCellGauche()->selectScalar(nameVariable, numPhase);
-        wr = cell->getCellInterface(b)->getCellDroite()->selectScalar(nameVariable, numPhase);
-
-        // Interpolation on face using barycenter
-        wf = (wl * dr + wr * dl) / (dl + dr);
-
-        // Build gradient of the face
-        this->addGradInterface(grad, *cell->getCellInterface(b), *cell, wf);
-      }
-      else // Boundary
-      {
-        // Extracting left variable value
-        wl = cell->getCellInterface(b)->getCellGauche()->selectScalar(nameVariable, numPhase);
-
-        // For gradients other than velocity the face value is equals to the cell value 
-        // Hence the gradient between the face and the center of the cell is null leading to adiatic condition for temperature for example.
-        // For velocity it is assumed that the flow is viscous leading to null value on a wall boundary for all components.
-
-        if (nameVariable == velocityU || nameVariable == velocityV || nameVariable == velocityW) 
-        {
-          switch (typeCellInterface) 
-          {
-            case SYMMETRY:
-              // Multiplication of the gradient by the normal direction to guarantee symmetry
-              if (nameVariable == velocityU) { wf = wl * (1. - std::fabs(cell->getCellInterface(b)->getFace()->getNormal().getX())); }
-              if (nameVariable == velocityV) { wf = wl * (1. - std::fabs(cell->getCellInterface(b)->getFace()->getNormal().getY())); }
-              if (nameVariable == velocityW) { wf = wl * (1. - std::fabs(cell->getCellInterface(b)->getFace()->getNormal().getZ())); }
-              break;
-
-            case WALL:
-                if (!cell->getCellInterface(b)->isMRFWall()) wf = 0.;
-                else {
-                  Coord velocityWall(0.);
-                  velocityWall = cell->getCellInterface(b)->getWallRotationalVelocityMRF().cross(cell->getCellInterface(b)->getFace()->getPos());
-                  if (nameVariable == velocityU) { wf = velocityWall.getX(); }
-                  if (nameVariable == velocityV) { wf = velocityWall.getY(); }
-                  if (nameVariable == velocityW) { wf = velocityWall.getZ(); }
-                }
-                break;
-
-            default:
-              wf = wl; // Null gradient on this interface
-          }
-        }
-        else {
-          wf = wl; // Null gradient on this interface
-        }
-
-        // Build gradient of the face
-        this->addGradInterface(grad, *cell->getCellInterface(b), *cell, wf);
-      }
-    }
-  }
-  
-  // Cell gradient average
-  grad /= cell->getElement()->getVolume();
-
-  return grad;
-}
-
-//****************************************************************************
-
-void GradientGreenGauss::computeGradient(Cell* cell, std::vector<Coord>& grads, std::vector<Variable>& nameVariables, std::vector<int>& numPhases)
+void GradientGreenGauss::computeGradients(Cell* cell, std::vector<Coord>& grads, const std::vector<Variable>& nameVariables, const std::vector<int>& numPhases)
 {
   // Compute gradient of cell using Green-Gauss method
   int typeCellInterface(0);
@@ -163,14 +81,14 @@ void GradientGreenGauss::computeGradient(Cell* cell, std::vector<Coord>& grads, 
       if (typeCellInterface == 0) // Inner interface (O1 or O2)
       {
         // Distances
-        dl = cell->getCellInterface(b)->distance(cell->getCellInterface(b)->getCellGauche());
-        dr = cell->getCellInterface(b)->distance(cell->getCellInterface(b)->getCellDroite());
+        dl = cell->getCellInterface(b)->distance(cell->getCellInterface(b)->getCellLeft());
+        dr = cell->getCellInterface(b)->distance(cell->getCellInterface(b)->getCellRight());
 
         for (unsigned int g = 0; g < grads.size(); g++) 
         {
           // Extracting left and right variables values
-          wl = cell->getCellInterface(b)->getCellGauche()->selectScalar(nameVariables[g], numPhases[g]);
-          wr = cell->getCellInterface(b)->getCellDroite()->selectScalar(nameVariables[g], numPhases[g]);
+          wl = cell->getCellInterface(b)->getCellLeft()->selectScalar(nameVariables[g], numPhases[g]);
+          wr = cell->getCellInterface(b)->getCellRight()->selectScalar(nameVariables[g], numPhases[g]);
 
           // Interpolation on face using barycenter
           wf = (wl * dr + wr * dl) / (dl + dr);
@@ -182,35 +100,51 @@ void GradientGreenGauss::computeGradient(Cell* cell, std::vector<Coord>& grads, 
       else // Boundary
       {
         for (unsigned int g = 0; g < grads.size(); g++) 
-        { 
+        {
           // Extracting left variable value
-          wl = cell->getCellInterface(b)->getCellGauche()->selectScalar(nameVariables[g], numPhases[g]);
+          wl = cell->getCellInterface(b)->getCellLeft()->selectScalar(nameVariables[g], numPhases[g]);
 
           // For gradients other than velocity the face value is equals to the cell value 
           // Hence the gradient between the face and the center of the cell is null leading to adiatic condition for temperature for example.
           // For velocity it is assumed that the flow is viscous leading to null value on a wall boundary for all components.
 
-          if (nameVariables[g] == velocityU || nameVariables[g] == velocityV || nameVariables[g] == velocityW) 
+          if (nameVariables[g] == Variable::velocityU || nameVariables[g] == Variable::velocityV || nameVariables[g] == Variable::velocityW) 
           {
             switch (typeCellInterface) 
             {
               case SYMMETRY:
-                // Multiplication of the gradient by the normal direction to guarantee symmetry
-                if (nameVariables[g] == velocityU) { wf = wl * (1. - std::fabs(cell->getCellInterface(b)->getFace()->getNormal().getX())); }
-                if (nameVariables[g] == velocityV) { wf = wl * (1. - std::fabs(cell->getCellInterface(b)->getFace()->getNormal().getY())); }
-                if (nameVariables[g] == velocityW) { wf = wl * (1. - std::fabs(cell->getCellInterface(b)->getFace()->getNormal().getZ())); }
+              {
+                // Project the velocity vector on the symmetry, set symmetry constraints (u_x = 0), and reverse
+                velocity.setXYZ(cell->getCellInterface(b)->getCellLeft()->selectScalar(Variable::velocityU, numPhases[g]),
+                                cell->getCellInterface(b)->getCellLeft()->selectScalar(Variable::velocityV, numPhases[g]),
+                                cell->getCellInterface(b)->getCellLeft()->selectScalar(Variable::velocityW, numPhases[g]));
+                velocity.localProjection(cell->getCellInterface(b)->getFace()->getNormal(),
+                                         cell->getCellInterface(b)->getFace()->getTangent(),
+                                         cell->getCellInterface(b)->getFace()->getBinormal());
+
+                velocity.setX(0.);
+                velocity.reverseProjection(cell->getCellInterface(b)->getFace()->getNormal(),
+                                           cell->getCellInterface(b)->getFace()->getTangent(),
+                                           cell->getCellInterface(b)->getFace()->getBinormal());
+
+                if (nameVariables[g] == Variable::velocityU) { wf = velocity.getX(); }
+                if (nameVariables[g] == Variable::velocityV) { wf = velocity.getY(); }
+                if (nameVariables[g] == Variable::velocityW) { wf = velocity.getZ(); }
                 break;
+              }
 
               case WALL:
+              {
                 if (!cell->getCellInterface(b)->isMRFWall()) wf = 0.;
                 else {
-                  Coord velocityWall(0.);
-                  velocityWall = cell->getCellInterface(b)->getWallRotationalVelocityMRF().cross(cell->getCellInterface(b)->getFace()->getPos());
-                  if (nameVariables[g] == velocityU) { wf = velocityWall.getX(); }
-                  if (nameVariables[g] == velocityV) { wf = velocityWall.getY(); }
-                  if (nameVariables[g] == velocityW) { wf = velocityWall.getZ(); }
+                  // velocity here is the wall velocity
+                  velocity = cell->getCellInterface(b)->getWallRotationalVelocityMRF().cross(cell->getCellInterface(b)->getFace()->getPos());
+                  if (nameVariables[g] == Variable::velocityU) { wf = velocity.getX(); }
+                  if (nameVariables[g] == Variable::velocityV) { wf = velocity.getY(); }
+                  if (nameVariables[g] == Variable::velocityW) { wf = velocity.getZ(); }
                 }
                 break;
+              }
 
               default:
                 wf = wl; // Null gradient on this interface

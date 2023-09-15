@@ -43,10 +43,10 @@ Mesh::~Mesh() {}
 
 //***********************************************************************
 
-void Mesh::writeResultsGnuplot(std::vector<Cell*>* cellsLvl, std::ofstream &fileStream, GeometricObject *objet) const
+void Mesh::writeResultsGnuplot(std::vector<Cell*>* cellsLvl, std::ofstream &fileStream, GeometricObject *objet, bool recordPsat) const
 {
   for (unsigned int c = 0; c < cellsLvl[0].size(); c++) {
-    if (cellsLvl[0][c]->printGnuplotAMR(fileStream, m_geometrie, objet)) break;
+    if (cellsLvl[0][c]->printGnuplotAMR(fileStream, m_problemDimension, objet, recordPsat)) break;
   }
 }
 
@@ -56,18 +56,39 @@ void Mesh::writeResultsGnuplot(std::vector<Cell*>* cellsLvl, std::ofstream &file
 
 void Mesh::initializePersistentCommunications(const TypeMeshContainer<Cell*>& cells, std::string ordreCalcul)
 {
-	int numberVariablesPhaseATransmettre = cells[0]->getPhase(0)->numberOfTransmittedVariables();
-	numberVariablesPhaseATransmettre *= numberPhases;
-	int numberVariablesMixtureATransmettre = cells[0]->getMixture()->numberOfTransmittedVariables();
-	int m_numberPrimitiveVariables = numberVariablesPhaseATransmettre + numberVariablesMixtureATransmettre + numberTransports;
+	int numberVariablesPhaseToSend(0);
+  for (int k = 0; k < numberPhases; k++) {
+    numberVariablesPhaseToSend += cells[0]->getPhase(k)->numberOfTransmittedVariables();
+  }
+  int numberVariablesMixtureToSend = cells[0]->getMixture()->numberOfTransmittedVariables();
+  int m_numberPrimitiveVariables = numberVariablesPhaseToSend + numberVariablesMixtureToSend + numberTransports;
   int m_numberSlopeVariables(0);
   if (ordreCalcul == "SECONDORDER") {
-    int numberSlopesPhaseATransmettre = cells[0]->getPhase(0)->numberOfTransmittedSlopes();
-    numberSlopesPhaseATransmettre *= numberPhases;
-    int numberSlopesMixtureATransmettre = cells[0]->getMixture()->numberOfTransmittedSlopes();
-    m_numberSlopeVariables = numberSlopesPhaseATransmettre + numberSlopesMixtureATransmettre + numberTransports + 1 + 1; //+1 for the interface detection + 1 for slope index
+    
+    int numberSlopesPhaseToSend(0);
+    int numberSlopesMixtureToSend(0);
+    int numberSlopesTransportToSend(0);
+
+    if (this->getType() != TypeM::UNS) {
+      for (int k = 0; k < numberPhases; k++) {
+        numberSlopesPhaseToSend += cells[0]->getPhase(k)->numberOfTransmittedSlopes();
+      }
+      numberSlopesMixtureToSend = cells[0]->getMixture()->numberOfTransmittedSlopes();
+      m_numberSlopeVariables = 1 + 1; //+1 for the interface detection + 1 for slope index
+      numberSlopesTransportToSend = numberTransports;
+    }
+    else {
+      for (int k = 0; k < numberPhases; k++) {
+        numberSlopesPhaseToSend += cells[0]->getGradPhase(k)->numberOfTransmittedGradients();
+      }
+      numberSlopesMixtureToSend = cells[0]->getGradMixture()->numberOfTransmittedGradients();
+      for (int t = 0; t < numberTransports; t++) {
+        numberSlopesTransportToSend += cells[0]->getGradTransport(t)->numberOfTransmittedGradients();
+      }
+    }
+    m_numberSlopeVariables += numberSlopesPhaseToSend + numberSlopesMixtureToSend + numberSlopesTransportToSend;
   }
-	parallel.initializePersistentCommunications(m_numberPrimitiveVariables, m_numberSlopeVariables, numberTransports, m_geometrie);
+	parallel.initializePersistentCommunications(m_numberPrimitiveVariables, m_numberSlopeVariables, numberTransports, m_problemDimension);
 }
 
 //***********************************************************************

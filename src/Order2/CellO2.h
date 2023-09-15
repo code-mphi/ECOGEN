@@ -42,18 +42,12 @@ class CellO2 : public Cell
         virtual ~CellO2();
         virtual void allocate(const std::vector<AddPhys*>& addPhys);
         virtual void copyPhase(const int& phaseNumber, Phase* phase);
-        virtual void computeLocalSlopes(CellInterface& cellInterfaceRef, Limiter& globalLimiter, Limiter& interfaceLimiter,
-            Limiter& globalVolumeFractionLimiter, Limiter& interfaceVolumeFractionLimiter,
-            double& alphaCellAfterOppositeSide, double& alphaCell, double& alphaCellOtherInterfaceSide, double& epsInterface);
-        virtual void computeLocalSlopesLimite(CellInterface& cellInterfaceRef, Limiter& globalLimiter,
-            Limiter& interfaceLimiter, Limiter& globalVolumeFractionLimiter, Limiter& interfaceVolumeFractionLimiter,
-            double& epsInterface);
         virtual void saveCons();
-        virtual void recuperationCons();
+        virtual void getBackCons();
         virtual void predictionOrdre2(const double& dt, Symmetry* symmetry);
         virtual void fulfillState(Prim type = vecPhases);
 
-        //Accesseurs
+        //Set/Get
         virtual Phase* getPhase(const int& phaseNumber, Prim type = vecPhases) const;
         virtual Phase** getPhases(Prim type = vecPhases) const;
         virtual Mixture* getMixture(Prim type = vecPhases) const;
@@ -61,18 +55,38 @@ class CellO2 : public Cell
         virtual Transport* getTransports(Prim type = vecPhases) const;
         virtual void setTransport(double value, int& numTransport, Prim type = vecPhases);
 
-        //Pour methode AMR
-        virtual void createChildCell(const int& lvl);                                              /*!< Creer une cell enfant (non initializee) */
+        // For 2nd order with parallel
+        virtual void getBufferSlopes(double* /*buffer*/, int& /*counter*/, const int& /*lvl*/) { Errors::errorMessage("getBufferSlopes not available for CellO2"); };
+        virtual void fillBufferSlopes(double* /*buffer*/, int& /*counter*/, const int& /*lvl*/, const int& /*neighbour*/) const { Errors::errorMessage("fillBufferSlopes not available for CellO2"); };
 
-        //Pour methodes ordre 2 parallele
-        virtual void fillBufferSlopes(double* buffer, int& counter, const int& lvl, const int& neighbour) const;
+        // -- Cartesian --
+        virtual void computeLocalSlopes(CellInterface& /*cellInterfaceRef*/, Limiter& /*globalLimiter*/, Limiter& /*interfaceLimiter*/,
+            Limiter& /*globalVolumeFractionLimiter*/, Limiter& /*interfaceVolumeFractionLimiter*/,
+            double& /*alphaCellAfterOppositeSide*/, double& /*alphaCell*/, double& /*alphaCellOtherInterfaceSide*/, double& /*epsInterface*/) {};
+        
+        virtual void computeLocalSlopesLimite(CellInterface& /*cellInterfaceRef*/, Limiter& /*globalLimiter*/,
+            Limiter& /*interfaceLimiter*/, Limiter& /*globalVolumeFractionLimiter*/, Limiter& /*interfaceVolumeFractionLimiter*/,
+            double& /*epsInterface*/) {};
+
+        //Pour methode AMR
+        virtual void createChildCell(const int& /*lvl*/) {}; /*!< Create a child cell (non initialized) */
+
+        // -- NS --
+        virtual GradPhase* getGradPhase(const int& /*phaseNumber*/) const { Errors::errorMessage("getGradPhase not available for Cell"); return nullptr; };
+        virtual GradMixture* getGradMixture() const { Errors::errorMessage("getGradMixture not available for Cell"); return nullptr; };
+        virtual GradTransport* getGradTransport(const int& /*transportNumber*/) const { Errors::errorMessage("getGradTransport not available for Cell"); return nullptr; };
+        virtual void allocateSecondOrderBuffersAndGradientVectors(Phase** /*phases*/, Mixture* /*mixture*/) {};
+        virtual void computeGradientsO2() {};
+        virtual void limitGradientsO2(Limiter& /*globalLimiter*/) {};
+
+        virtual void computeLocalSlopes(CellInterface& /*cellInterfaceRef*/) {};
 
     protected:
         Phase** m_vecPhasesO2;                  /*!< pour stocker les values predites a l ordre 2 */
         Mixture* m_mixtureO2;                   /*!< pour stocker les values predites a l ordre 2 */
-        Transport* m_vecTransportsO2;		        /*!< pour stocker les values predites a l ordre 2 */
-        Flux* m_consSauvegarde;                 /*!< Vector de save des variables conservatives. De type flux car recueille la somme des flux sur l objet cell */
-        Transport* m_consTransportsSauvegarde;  /*!< Vector de saugevarde des grandeurs passives permettant de recueillir la somme des flux des grandeurs transportees */
+        Transport* m_vecTransportsO2;		    /*!< pour stocker les values predites a l ordre 2 */
+        Flux* m_consSauvegarde;                 /*!< Vector de save des variables conservatives. De type flux car recueille la sum des flux sur l objet cell */
+        Transport* m_consTransportsSauvegarde;  /*!< Vector de saugevarde des grandeurs passives permettant de recueillir la sum des flux des grandeurs transportees */
 
     private:
 };

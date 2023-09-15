@@ -86,10 +86,10 @@ void ElementPyramid::construitFaces(const Coord* nodes, FaceNS** faces, int& iMa
   // Building quadrangle as basis of pyramid
   // ---------------------------------------
   int currentFaceNodes[4]; // Buffer array of node used to create current face (nodes ordering matters for quadrangle's face)
-  currentFaceNodes[0] = m_numNoeuds[0];
-  currentFaceNodes[1] = m_numNoeuds[1];
-  currentFaceNodes[2] = m_numNoeuds[2];
-  currentFaceNodes[3] = m_numNoeuds[3];
+  currentFaceNodes[0] = m_numNodes[0];
+  currentFaceNodes[1] = m_numNodes[1];
+  currentFaceNodes[2] = m_numNodes[2];
+  currentFaceNodes[3] = m_numNodes[3];
   otherNode = 4;
 
   for(int n=0; n<4; n++){ facesBuff[iMax][n] = currentFaceNodes[n]; } // Filling facesBuff array before sorting
@@ -101,12 +101,12 @@ void ElementPyramid::construitFaces(const Coord* nodes, FaceNS** faces, int& iMa
   if (indexFaceExiste==-1) // faces and facesBuff arrays are filled simultaneously
   {
     faces[iMax] = new FaceQuadrangle(currentFaceNodes[0], currentFaceNodes[1], currentFaceNodes[2], currentFaceNodes[3], 1); // Nodes ordering of quadrangle matters
-    faces[iMax]->construitFace(nodes, m_numNoeuds[otherNode], this);
+    faces[iMax]->construitFace(nodes, m_numNodes[otherNode], this);
     iMax++;
   }
   else
   {
-    faces[indexFaceExiste]->ajouteElementVoisin(this);
+    faces[indexFaceExiste]->addElementNeighbor(this);
   }
 
   // Building the 4 triangular faces
@@ -115,10 +115,10 @@ void ElementPyramid::construitFaces(const Coord* nodes, FaceNS** faces, int& iMa
   {
     switch (i)
     {
-      case 1: facesBuff[iMax][0] = m_numNoeuds[0]; facesBuff[iMax][1] = m_numNoeuds[1]; facesBuff[iMax][2] = m_numNoeuds[4]; otherNode = 2; break;
-      case 2: facesBuff[iMax][0] = m_numNoeuds[1]; facesBuff[iMax][1] = m_numNoeuds[2]; facesBuff[iMax][2] = m_numNoeuds[4]; otherNode = 3; break;
-      case 3: facesBuff[iMax][0] = m_numNoeuds[2]; facesBuff[iMax][1] = m_numNoeuds[3]; facesBuff[iMax][2] = m_numNoeuds[4]; otherNode = 0; break;
-      case 4: facesBuff[iMax][0] = m_numNoeuds[3]; facesBuff[iMax][1] = m_numNoeuds[0]; facesBuff[iMax][2] = m_numNoeuds[4]; otherNode = 1; break;
+      case 1: facesBuff[iMax][0] = m_numNodes[0]; facesBuff[iMax][1] = m_numNodes[1]; facesBuff[iMax][2] = m_numNodes[4]; otherNode = 2; break;
+      case 2: facesBuff[iMax][0] = m_numNodes[1]; facesBuff[iMax][1] = m_numNodes[2]; facesBuff[iMax][2] = m_numNodes[4]; otherNode = 3; break;
+      case 3: facesBuff[iMax][0] = m_numNodes[2]; facesBuff[iMax][1] = m_numNodes[3]; facesBuff[iMax][2] = m_numNodes[4]; otherNode = 0; break;
+      case 4: facesBuff[iMax][0] = m_numNodes[3]; facesBuff[iMax][1] = m_numNodes[0]; facesBuff[iMax][2] = m_numNodes[4]; otherNode = 1; break;
     }
     sumNodesBuff[iMax] = facesBuff[iMax][0] + facesBuff[iMax][1] + facesBuff[iMax][2];
     std::sort(facesBuff[iMax],facesBuff[iMax]+3); // Nodes ordering
@@ -128,12 +128,12 @@ void ElementPyramid::construitFaces(const Coord* nodes, FaceNS** faces, int& iMa
     if (indexFaceExiste==-1)
     {
       faces[iMax] = new FaceTriangle(facesBuff[iMax][0], facesBuff[iMax][1], facesBuff[iMax][2], 0); // No need to sort nodes to build triangle's face
-      faces[iMax]->construitFace(nodes, m_numNoeuds[otherNode], this);
+      faces[iMax]->construitFace(nodes, m_numNodes[otherNode], this);
       iMax++;
     }
     else
     {
-      faces[indexFaceExiste]->ajouteElementVoisin(this);
+      faces[indexFaceExiste]->addElementNeighbor(this);
     }
   }
 
@@ -148,10 +148,10 @@ void ElementPyramid::construitFacesSimplifie(int& iMax, int** facesBuff, int* su
 
   // Building quadrangle as basis of pyramid
   // ---------------------------------------
-  facesBuff[iMax][0] = m_numNoeuds[0];
-  facesBuff[iMax][1] = m_numNoeuds[1];
-  facesBuff[iMax][2] = m_numNoeuds[2];
-  facesBuff[iMax][3] = m_numNoeuds[3];
+  facesBuff[iMax][0] = m_numNodes[0];
+  facesBuff[iMax][1] = m_numNodes[1];
+  facesBuff[iMax][2] = m_numNodes[2];
+  facesBuff[iMax][3] = m_numNodes[3];
   sumNodesBuff[iMax] = facesBuff[iMax][0] + facesBuff[iMax][1] + facesBuff[iMax][2] + facesBuff[iMax][3];
   std::sort(facesBuff[iMax],facesBuff[iMax]+4); // Nodes ordering
   // Checking face existence
@@ -168,10 +168,10 @@ void ElementPyramid::construitFacesSimplifie(int& iMax, int** facesBuff, int* su
   {
     switch (i)
     {
-      case 1: facesBuff[iMax][0] = m_numNoeuds[0]; facesBuff[iMax][1] = m_numNoeuds[1]; facesBuff[iMax][2] = m_numNoeuds[4]; break;
-      case 2: facesBuff[iMax][0] = m_numNoeuds[1]; facesBuff[iMax][1] = m_numNoeuds[2]; facesBuff[iMax][2] = m_numNoeuds[4]; break;
-      case 3: facesBuff[iMax][0] = m_numNoeuds[2]; facesBuff[iMax][1] = m_numNoeuds[3]; facesBuff[iMax][2] = m_numNoeuds[4]; break;
-      case 4: facesBuff[iMax][0] = m_numNoeuds[3]; facesBuff[iMax][1] = m_numNoeuds[0]; facesBuff[iMax][2] = m_numNoeuds[4]; break;
+      case 1: facesBuff[iMax][0] = m_numNodes[0]; facesBuff[iMax][1] = m_numNodes[1]; facesBuff[iMax][2] = m_numNodes[4]; break;
+      case 2: facesBuff[iMax][0] = m_numNodes[1]; facesBuff[iMax][1] = m_numNodes[2]; facesBuff[iMax][2] = m_numNodes[4]; break;
+      case 3: facesBuff[iMax][0] = m_numNodes[2]; facesBuff[iMax][1] = m_numNodes[3]; facesBuff[iMax][2] = m_numNodes[4]; break;
+      case 4: facesBuff[iMax][0] = m_numNodes[3]; facesBuff[iMax][1] = m_numNodes[0]; facesBuff[iMax][2] = m_numNodes[4]; break;
     }
     sumNodesBuff[iMax] = facesBuff[iMax][0] + facesBuff[iMax][1] + facesBuff[iMax][2];
     std::sort(facesBuff[iMax],facesBuff[iMax]+3); // Nodes ordering
@@ -187,56 +187,56 @@ void ElementPyramid::construitFacesSimplifie(int& iMax, int** facesBuff, int* su
 
 //***********************************************************************
 
-void ElementPyramid::attributFaceCommunicante(FaceNS** faces, const int& indexMaxFaces, const int& numberNoeudsInternes)
+void ElementPyramid::attributFaceCommunicante(FaceNS** faces, const int& indexMaxFaces, const int& numberNodesInternal)
 {
   int indexFaceExiste(0);
   // Verification face Quadrangle:
-  if (m_numNoeuds[0] < numberNoeudsInternes && m_numNoeuds[1] < numberNoeudsInternes && m_numNoeuds[2] < numberNoeudsInternes && m_numNoeuds[3] < numberNoeudsInternes)
+  if (m_numNodes[0] < numberNodesInternal && m_numNodes[1] < numberNodesInternal && m_numNodes[2] < numberNodesInternal && m_numNodes[3] < numberNodesInternal)
   {
-    FaceQuadrangle face(m_numNoeuds[0], m_numNoeuds[1], m_numNoeuds[2], m_numNoeuds[3]);
+    FaceQuadrangle face(m_numNodes[0], m_numNodes[1], m_numNodes[2], m_numNodes[3]);
     if (face.faceExists(faces, indexMaxFaces, indexFaceExiste))
     {
-      faces[indexFaceExiste]->ajouteElementVoisinLimite(this);
+      faces[indexFaceExiste]->addElementNeighborLimite(this);
       faces[indexFaceExiste]->setEstComm(true);
     }
   }
   // Verification face Triangle 1:
-  if (m_numNoeuds[0] < numberNoeudsInternes && m_numNoeuds[1] < numberNoeudsInternes && m_numNoeuds[4] < numberNoeudsInternes)
+  if (m_numNodes[0] < numberNodesInternal && m_numNodes[1] < numberNodesInternal && m_numNodes[4] < numberNodesInternal)
   {
-    FaceTriangle face(m_numNoeuds[0], m_numNoeuds[1], m_numNoeuds[4]);
+    FaceTriangle face(m_numNodes[0], m_numNodes[1], m_numNodes[4]);
     if (face.faceExists(faces, indexMaxFaces, indexFaceExiste))
     {
-      faces[indexFaceExiste]->ajouteElementVoisinLimite(this);
+      faces[indexFaceExiste]->addElementNeighborLimite(this);
       faces[indexFaceExiste]->setEstComm(true);
     }
   }
   // Verification face Triangle 2:
-  if (m_numNoeuds[1] < numberNoeudsInternes && m_numNoeuds[2] < numberNoeudsInternes && m_numNoeuds[4] < numberNoeudsInternes)
+  if (m_numNodes[1] < numberNodesInternal && m_numNodes[2] < numberNodesInternal && m_numNodes[4] < numberNodesInternal)
   {
-    FaceTriangle face(m_numNoeuds[1], m_numNoeuds[2], m_numNoeuds[4]);
+    FaceTriangle face(m_numNodes[1], m_numNodes[2], m_numNodes[4]);
     if (face.faceExists(faces, indexMaxFaces, indexFaceExiste))
     {
-      faces[indexFaceExiste]->ajouteElementVoisinLimite(this);
+      faces[indexFaceExiste]->addElementNeighborLimite(this);
       faces[indexFaceExiste]->setEstComm(true);
     }
   }
   // Verification face Triangle 3:
-  if (m_numNoeuds[2] < numberNoeudsInternes && m_numNoeuds[3] < numberNoeudsInternes && m_numNoeuds[4] < numberNoeudsInternes)
+  if (m_numNodes[2] < numberNodesInternal && m_numNodes[3] < numberNodesInternal && m_numNodes[4] < numberNodesInternal)
   {
-    FaceTriangle face(m_numNoeuds[2], m_numNoeuds[3], m_numNoeuds[4]);
+    FaceTriangle face(m_numNodes[2], m_numNodes[3], m_numNodes[4]);
     if (face.faceExists(faces, indexMaxFaces, indexFaceExiste))
     {
-      faces[indexFaceExiste]->ajouteElementVoisinLimite(this);
+      faces[indexFaceExiste]->addElementNeighborLimite(this);
       faces[indexFaceExiste]->setEstComm(true);
     }
   }
   // Verification face Triangle 4:
-  if (m_numNoeuds[3] < numberNoeudsInternes && m_numNoeuds[0] < numberNoeudsInternes && m_numNoeuds[4] < numberNoeudsInternes)
+  if (m_numNodes[3] < numberNodesInternal && m_numNodes[0] < numberNodesInternal && m_numNodes[4] < numberNodesInternal)
   {
-    FaceTriangle face(m_numNoeuds[3], m_numNoeuds[0], m_numNoeuds[4]);
+    FaceTriangle face(m_numNodes[3], m_numNodes[0], m_numNodes[4]);
     if (face.faceExists(faces, indexMaxFaces, indexFaceExiste))
     {
-      faces[indexFaceExiste]->ajouteElementVoisinLimite(this);
+      faces[indexFaceExiste]->addElementNeighborLimite(this);
       faces[indexFaceExiste]->setEstComm(true);
     }
   }    
@@ -251,10 +251,10 @@ int ElementPyramid::compteFaceCommunicante(std::vector<int*>& facesBuff, std::ve
   int face[4], sumNodes, iMax;
 
   // 1 quadrangular face
-  face[0] = m_numNoeuds[0]; 
-  face[1] = m_numNoeuds[1]; 
-  face[2] = m_numNoeuds[2]; 
-  face[3] = m_numNoeuds[3];
+  face[0] = m_numNodes[0]; 
+  face[1] = m_numNodes[1]; 
+  face[2] = m_numNodes[2]; 
+  face[3] = m_numNodes[3];
   iMax = sumNodesBuff.size();
   sumNodes = face[0] + face[1] + face[2] + face[3];
   std::sort(face, face + 4);
@@ -270,10 +270,10 @@ int ElementPyramid::compteFaceCommunicante(std::vector<int*>& facesBuff, std::ve
   {
     switch (i)
     {
-      case 1: face[0] = m_numNoeuds[0]; face[1] = m_numNoeuds[1]; face[2] = m_numNoeuds[4]; break;
-      case 2: face[0] = m_numNoeuds[1]; face[1] = m_numNoeuds[2]; face[2] = m_numNoeuds[4]; break;
-      case 3: face[0] = m_numNoeuds[2]; face[1] = m_numNoeuds[3]; face[2] = m_numNoeuds[4]; break;     
-      case 4: face[0] = m_numNoeuds[3]; face[1] = m_numNoeuds[0]; face[2] = m_numNoeuds[4]; break;     
+      case 1: face[0] = m_numNodes[0]; face[1] = m_numNodes[1]; face[2] = m_numNodes[4]; break;
+      case 2: face[0] = m_numNodes[1]; face[1] = m_numNodes[2]; face[2] = m_numNodes[4]; break;
+      case 3: face[0] = m_numNodes[2]; face[1] = m_numNodes[3]; face[2] = m_numNodes[4]; break;     
+      case 4: face[0] = m_numNodes[3]; face[1] = m_numNodes[0]; face[2] = m_numNodes[4]; break;     
     }
     iMax = sumNodesBuff.size();
     sumNodes = face[0]+face[1]+face[2];
@@ -296,10 +296,10 @@ int ElementPyramid::compteFaceCommunicante(int& iMax, int** facesBuff, int* sumN
   int face[4], sumNodes;
 
   //1 quadrangle face
-  face[0] = m_numNoeuds[0]; 
-  face[1] = m_numNoeuds[1]; 
-  face[2] = m_numNoeuds[2]; 
-  face[3] = m_numNoeuds[3];
+  face[0] = m_numNodes[0]; 
+  face[1] = m_numNodes[1]; 
+  face[2] = m_numNodes[2]; 
+  face[3] = m_numNodes[3];
   sumNodes = face[0] + face[1] + face[2] + face[3];
   std::sort(face, face + 4);
   // Checking face existence
@@ -314,10 +314,10 @@ int ElementPyramid::compteFaceCommunicante(int& iMax, int** facesBuff, int* sumN
   {
     switch (i)
     {
-      case 1: face[0] = m_numNoeuds[0]; face[1] = m_numNoeuds[1]; face[2] = m_numNoeuds[4]; break;
-      case 2: face[0] = m_numNoeuds[1]; face[1] = m_numNoeuds[2]; face[2] = m_numNoeuds[4]; break;
-      case 3: face[0] = m_numNoeuds[2]; face[1] = m_numNoeuds[3]; face[2] = m_numNoeuds[4]; break;     
-      case 4: face[0] = m_numNoeuds[3]; face[1] = m_numNoeuds[0]; face[2] = m_numNoeuds[4]; break;     
+      case 1: face[0] = m_numNodes[0]; face[1] = m_numNodes[1]; face[2] = m_numNodes[4]; break;
+      case 2: face[0] = m_numNodes[1]; face[1] = m_numNodes[2]; face[2] = m_numNodes[4]; break;
+      case 3: face[0] = m_numNodes[2]; face[1] = m_numNodes[3]; face[2] = m_numNodes[4]; break;     
+      case 4: face[0] = m_numNodes[3]; face[1] = m_numNodes[0]; face[2] = m_numNodes[4]; break;     
     }
     sumNodes = face[0]+face[1]+face[2];
     std::sort(face, face+3);

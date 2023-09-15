@@ -45,13 +45,15 @@ class FluxEuler : public Flux
     virtual void addFlux(double coefA);
     virtual void addFlux(Flux* flux);
     virtual void subtractFlux(double coefA);
+    virtual void addFluxRotatingRegion(double coefA);
+    virtual void subtractFluxRotatingRegion(double coefA);
     virtual void multiply(double scalar);
     virtual void setBufferFlux(Cell& cell);
     virtual void buildCons(Phase** phase, Mixture* /*mixture*/);
     virtual void buildPrim(Phase** phase, Mixture* /*mixture*/);
     virtual void setToZero();
-    virtual void addNonCons(double /*coefA*/, const Cell* /*cell*/) {};
-    virtual void subtractNonCons(double /*coefA*/, const Cell* /*cell*/) {};
+    virtual void addNonCons(double /*coefA*/, const Cell* /*cell*/, const Coord& /*normal*/, const Coord& /*tangent*/, const Coord& /*binormal*/) {};
+    virtual void subtractNonCons(double /*coefA*/, const Cell* /*cell*/, const Coord& /*normal*/, const Coord& /*tangent*/, const Coord& /*binormal*/) {};
     
     virtual void addFluxSmooth1D(double coefA, const Coord& normal, Cell* cell);
     virtual void substractFluxSmooth1D(double coefA, const Coord& normal, Cell* cell);
@@ -60,6 +62,9 @@ class FluxEuler : public Flux
     virtual void prepSourceTermsGravity(const Coord& g);
     virtual void prepSourceTermsHeating(const double& q);
     virtual void prepSourceTermsMRF(Cell* cell, const Coord& omega);
+
+    //Moving Reference Frame
+    virtual void addNonConsMrfFlux(Phase** /*phases*/){};
 
     // Accessors
     //----------

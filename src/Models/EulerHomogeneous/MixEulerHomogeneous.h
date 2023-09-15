@@ -60,7 +60,7 @@ public:
   virtual double computePressure(double mass, const double& internalEnergy, Phase** phases, Mixture* mixture, const int& liq, const int& vap);
 
   virtual void computeMixtureVariables(Phase** vecPhase);
-  virtual void internalEnergyToTotalEnergy(std::vector<QuantitiesAddPhys*>& vecGPA);
+  virtual void computeTotalEnergy(std::vector<QuantitiesAddPhys*>& vecGPA);
   virtual void totalEnergyToInternalEnergy(std::vector<QuantitiesAddPhys*>& vecGPA);
 
   virtual void localProjection(const Coord& normal, const Coord& tangent, const Coord& binormal);
@@ -83,14 +83,20 @@ public:
   //---------------------------------------
   virtual int numberOfTransmittedVariables() const;
   virtual void fillBuffer(double* buffer, int& counter) const;
+  virtual void fillBuffer(std::vector<double>& dataToSend) const;
   virtual void getBuffer(double* buffer, int& counter);
+  virtual void getBuffer(std::vector<double>& dataToReceive, int& counter);
 
   //Specific methods for second order
   //---------------------------------
   virtual void computeSlopesMixture(const Mixture &sLeft, const Mixture &sRight, const double& distance);
   virtual void setToZero();
+  virtual void setToMax();
   virtual void extrapolate(const Mixture &slope, const double& distance);
   virtual void limitSlopes(const Mixture &slopeGauche, const Mixture &slopeDroite, Limiter& globalLimiter);
+  virtual void setMin(const Mixture& mixture1, const Mixture& mixture2);
+  virtual void setMax(const Mixture& mixture1, const Mixture& mixture2);
+  virtual void computeGradientLimiter(const Limiter& globalLimiter, const Mixture& mixture, const Mixture& mixtureMin, const Mixture& mixtureMax, const Mixture& slope);
 
   //Specific methods for parallele computing at second order
   //--------------------------------------------------------

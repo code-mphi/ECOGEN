@@ -80,7 +80,7 @@ void OutputGlobalGNU::initializeSpecificOutput()
     fileStream.close();
 
     // Gnuplot script printing for visualization
-    ecritScriptGnuplot(m_fileNameResults);
+    writeScriptGnuplot(m_fileNameResults);
   }
   catch (ErrorECOGEN&) { throw; }
 }

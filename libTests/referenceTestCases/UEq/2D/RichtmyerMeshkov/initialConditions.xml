@@ -1,0 +1,60 @@
+<?xml version='1.0' encoding='UTF-8' standalone='yes'?>
+<CI>
+    <!-- LIST OF GEOMETRICAL DOMAINS  -->
+    <physicalDomains>
+        <domain state="liquid" name="base" type="entireDomain"/>
+        <domain state="gaz" name="zoneGaz" type="disc">
+            <dataDisc axis1="x" radius="0.6" axis2="y">
+                <center x="1.2" z="0." y="0."/>
+            </dataDisc>
+        </domain>
+        <domain state="gaz2" name="zoneGaz2" type="halfSpace">
+            <dataHalfSpace origin="1.5" axis="x" direction="positive"/>
+        </domain>
+    </physicalDomains>
+
+    <!-- LIST OF BOUNDARY CONDITIONS -->
+    <boundaryConditions>
+        <boundCond number="1" name="CLXm" type="wall"/>
+        <boundCond number="2" name="CLXp" type="nonReflecting"/>
+        <boundCond number="3" name="CLYm" type="symmetry"/>
+        <boundCond number="4" name="CLYp" type="wall"/>
+    </boundaryConditions>
+
+    <!--  LIST OF STATES  -->
+    <state name="liquid">
+        <material EOS="SG_water.xml" type="fluid">
+            <dataFluid alpha="0.999999" density="1000." pressure="1.e5"/>
+        </material>
+        <material EOS="IG_gaz1.xml" type="fluid">
+            <dataFluid alpha="0.000001" density="100." pressure="1.e5"/>
+        </material>
+        <mixture>
+            <velocity x="-200." z="0." y="0."/>
+        </mixture>
+    </state>
+
+    <state name="gaz">
+        <material EOS="SG_water.xml" type="fluid">
+            <dataFluid alpha="0.000001" density="1000." pressure="1.e5"/>
+        </material>
+        <material EOS="IG_gaz1.xml" type="fluid">
+            <dataFluid alpha="0.999999" density="100." pressure="1.e5"/>
+        </material>
+        <mixture>
+            <velocity x="-200." z="0." y="0."/>
+        </mixture>
+    </state>
+
+    <state name="gaz2">
+        <material EOS="SG_water.xml" type="fluid">
+            <dataFluid alpha="0.000001" density="1000." pressure="1.e5"/>
+        </material>
+        <material EOS="IG_gaz1.xml" type="fluid">
+            <dataFluid alpha="0.999999" density="100." pressure="1.e5"/>
+        </material>
+        <mixture>
+            <velocity x="-200." z="0." y="0."/>
+        </mixture>
+    </state>
+</CI>

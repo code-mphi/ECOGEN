@@ -1,0 +1,18 @@
+<?xml version = "1.0" encoding = "UTF-8" standalone = "yes"?>
+<parametersEOS>
+
+<!-- Parameters from the Table 2 of paper "Modelling phase transition in metastable liquids: 
+  application to cavitating and flashing flows", Saurel et al. (2008) -->
+
+	<EOS type="IG"/>
+	<parameters
+		gamma="1.025"
+		cv="1956."
+		energyRef="-237.e3"
+		entropyRef="-24.e3">
+	</parameters>
+	<physicalParameters
+		mu="1.e-3"
+		lambda="0.6">
+	</physicalParameters>		
+</parametersEOS>

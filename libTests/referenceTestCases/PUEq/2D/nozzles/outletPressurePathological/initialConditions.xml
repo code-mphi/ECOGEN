@@ -1,0 +1,38 @@
+<?xml version = "1.0" encoding = "UTF-8" standalone = "yes"?>
+<CI>
+	<!-- LIST OF GEOMETRICAL DOMAINS  -->
+	<physicalDomains>	
+		<domain name="base" state="around" type="entireDomain"/>
+	</physicalDomains>	
+
+	<!-- LIST OF BOUNDARY CONDITIONS -->
+	<boundaryConditions>
+		<boundCond name="axis" type="nullFlux" number="1"/>
+		<boundCond name="wall" type="nullFlux" number="2"/>
+		<boundCond name="inlet" type="inletTank" number="3">
+			<dataInletTank p0="5e5" T0="400."/>
+			<fluidsProp>
+				<dataFluid EOS="IG_air.xml" alpha="0.5"/>
+				<dataFluid EOS="IG_helium.xml" alpha="0.5"/>
+			</fluidsProp>
+		</boundCond>
+		<boundCond name="outlet" type="outletPressure" number="4">
+			<dataOutletPressure p0="1.e5"/>
+		</boundCond>	
+	</boundaryConditions>
+
+	
+	<!--  LIST OF STATES  -->
+	<state name="around">
+		<material type="fluid" EOS="IG_air.xml">
+			<dataFluid alpha="0.5" density="1.0"/>
+		</material>
+		<material type="fluid" EOS="IG_helium.xml">
+			<dataFluid alpha="0.5" density="1.0"/>
+		</material>
+		<mixture>
+			<dataMix pressure = "1.e5"/>
+            <velocity x="0." y="0." z="0."/>
+        </mixture>
+	</state>
+</CI>

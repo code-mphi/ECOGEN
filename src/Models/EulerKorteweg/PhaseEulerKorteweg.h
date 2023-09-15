@@ -98,6 +98,7 @@ class PhaseEulerKorteweg : public Phase
     //-------------
     virtual void verifyPhase(const std::string& message = "") const;
     virtual void verifyAndCorrectPhase();
+    virtual void verifyAndCorrectDensityMax();
 
     //Accessors
     //---------

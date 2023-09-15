@@ -57,13 +57,13 @@ class Input
     Input(Run *run);
     virtual ~Input();
 
-    void readInputXML(std::vector<GeometricalDomain*>& domains, std::vector<BoundCond*>& boundCond);
+    void readInputXML(std::vector<GeometricalDomain*>& domains, std::vector<BoundCond*>& boundCond, std::vector<GeometricalDomain*>& solidDomains);
 
     void inputMain(std::string testCase);
     void inputMesh(std::string testCase);
     void inputModel(std::string testCase);
     Eos* inputEOS(std::string EOS, int& numberEOS);
-    void inputInitialConditions(std::string testCase, std::vector<GeometricalDomain*>& domains, std::vector<BoundCond*>& boundCond);
+    void inputInitialConditions(std::string testCase, std::vector<GeometricalDomain*>& domains, std::vector<BoundCond*>& boundCond, std::vector<GeometricalDomain*>& solidDomains);
     void verifyCompatibilityInput(std::string testCase);
 
 	//Accesseur
@@ -74,17 +74,12 @@ class Input
   Run *getRun() const { return m_run; }
 
 private:
-  Run *m_run;    //pointeur vers run
+  Run *m_run; // Pointer to run
 
-	int m_vMain;		//!< Number de version file entree main
-	int m_vMesh;    //!< Number de version file entree mesh
-	int m_vCI;          //!< Number de version file entree initialConditions
-	int m_vModel;      //!< Number de version file entree model
-
-	std::string m_nameMain;		//!< Name du file main
-	std::string m_nameMesh;   //!< Name du file mesh
-	std::string m_nameCI;         //!< Name du file initialConditions
-	std::string m_nameModel;     //!< Name du file model
+	std::string m_nameMain;   //!< Name of main file
+	std::string m_nameMesh;   //!< Name of mesh file
+	std::string m_nameCI;     //!< Name of initialConditions file
+	std::string m_nameModel;  //!< Name of model file
 };
 
 #endif // INPUT_H

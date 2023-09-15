@@ -1,0 +1,44 @@
+<?xml version = "1.0" encoding = "UTF-8" standalone = "yes"?>
+<CI>
+    <!-- LIST OF GEOMETRICAL DOMAINS  -->
+    <physicalDomains> 
+        <domain name="base" state="chamber" type="entireDomainWithParticularities"/>
+        <domain name="bubble"  state="airBubble" type="halfSpace">
+            <dataHalfSpace axis="x" origin="1.e-4" direction="negative"/>
+        </domain>
+    </physicalDomains>
+
+    <!-- LIST OF BOUNDARY CONDITIONS -->
+    <boundaryConditions>
+        <boundCond name="CLXm" type="symmetry" number="1"/>
+        <boundCond name="CLXp" type="nonReflecting" number="2"/>
+    </boundaryConditions>
+    
+    <!--  LIST OF STATES  -->
+    <state name="chamber">
+        <material type="fluid" EOS="SG_water_cavitation.xml">
+            <dataFluid alpha="1." density="1000."/>
+        </material>
+        <material type="fluid" EOS="IG_air.xml">
+            <dataFluid alpha="0." density="1."/>
+        </material>
+        <mixture>
+            <dataMix pressure = "353.e5"/>
+            <velocity x="0." y="0." z="0."/>
+        </mixture>
+    </state>
+
+    <state name="airBubble">
+        <material type="fluid" EOS="SG_water_cavitation.xml">
+            <dataFluid alpha="0." density="1000."/>
+        </material>
+        <material type="fluid" EOS="IG_air.xml">
+            <dataFluid alpha="1." density="1."/>
+        </material>
+        <mixture>
+            <dataMix pressure = "1.e5"/>
+            <velocity x="0." y="0." z="0."/>
+        </mixture>
+    </state>
+
+</CI>

@@ -111,12 +111,12 @@ void ModEulerKorteweg::initializeAugmentedVariables(Cell* cell)
   //Eta
   phase->setEta(phase->getDensity());
   //Omega
-  Coord gradRho(cell->computeGradient(density, 0));
+  cell->computeGradients(gradRho, variableDensity, numeratorDefault);
   double omega(0.); //This variable may need to be manually initialized
-  omega = phase->getVelocity().norm() * gradRho.norm();
+  omega = phase->getVelocity().norm() * gradRho[0].norm();
   phase->setOmega(omega);
   //VectorP
-  phase->setVectorP(gradRho);
+  phase->setVectorP(gradRho[0]);
   //Pressure (not for NLS)
   if (phase->getEos() != nullptr) phase->setPressure(phase->getEos()->computePressure(phase->getDensity(), temperatureEK));
 }
@@ -184,16 +184,8 @@ void ModEulerKorteweg::solveRiemannIntern(Cell& cellLeft, Cell& cellRight, const
 
 void ModEulerKorteweg::reverseProjection(const Coord normal, const Coord tangent, const Coord binormal) const
 {
-  Coord fluxProjete;
-  fluxProjete.setX(normal.getX()*static_cast<FluxEulerKorteweg*> (fluxBuff)->m_momentum.getX() + tangent.getX()*static_cast<FluxEulerKorteweg*> (fluxBuff)->m_momentum.getY() + binormal.getX()*static_cast<FluxEulerKorteweg*> (fluxBuff)->m_momentum.getZ());
-  fluxProjete.setY(normal.getY()*static_cast<FluxEulerKorteweg*> (fluxBuff)->m_momentum.getX() + tangent.getY()*static_cast<FluxEulerKorteweg*> (fluxBuff)->m_momentum.getY() + binormal.getY()*static_cast<FluxEulerKorteweg*> (fluxBuff)->m_momentum.getZ());
-  fluxProjete.setZ(normal.getZ()*static_cast<FluxEulerKorteweg*> (fluxBuff)->m_momentum.getX() + tangent.getZ()*static_cast<FluxEulerKorteweg*> (fluxBuff)->m_momentum.getY() + binormal.getZ()*static_cast<FluxEulerKorteweg*> (fluxBuff)->m_momentum.getZ());
-  static_cast<FluxEulerKorteweg*> (fluxBuff)->m_momentum.setXYZ(fluxProjete.getX(), fluxProjete.getY(), fluxProjete.getZ());
-
-  fluxProjete.setX(normal.getX()*static_cast<FluxEulerKorteweg*> (fluxBuff)->m_eqVectorP.getX() + tangent.getX()*static_cast<FluxEulerKorteweg*> (fluxBuff)->m_eqVectorP.getY() + binormal.getX()*static_cast<FluxEulerKorteweg*> (fluxBuff)->m_eqVectorP.getZ());
-  fluxProjete.setY(normal.getY()*static_cast<FluxEulerKorteweg*> (fluxBuff)->m_eqVectorP.getX() + tangent.getY()*static_cast<FluxEulerKorteweg*> (fluxBuff)->m_eqVectorP.getY() + binormal.getY()*static_cast<FluxEulerKorteweg*> (fluxBuff)->m_eqVectorP.getZ());
-  fluxProjete.setZ(normal.getZ()*static_cast<FluxEulerKorteweg*> (fluxBuff)->m_eqVectorP.getX() + tangent.getZ()*static_cast<FluxEulerKorteweg*> (fluxBuff)->m_eqVectorP.getY() + binormal.getZ()*static_cast<FluxEulerKorteweg*> (fluxBuff)->m_eqVectorP.getZ());
-  static_cast<FluxEulerKorteweg*> (fluxBuff)->m_eqVectorP.setXYZ(fluxProjete.getX(), fluxProjete.getY(), fluxProjete.getZ());
+  static_cast<FluxEulerKorteweg*> (fluxBuff)->m_momentum.reverseProjection(normal, tangent, binormal);
+  static_cast<FluxEulerKorteweg*> (fluxBuff)->m_eqVectorP.reverseProjection(normal, tangent, binormal);
 }
 
 //****************************************************************************
@@ -254,6 +246,40 @@ double ModEulerKorteweg::computeMaxWaveSpeed(Cell& cellLeft, Cell& cellRight, co
   //Max wave speed
   double S = std::max(std::abs(uL), std::abs(uR)) + std::max(soundSpeedMaxL, soundSpeedMaxR);
   return S;
+}
+
+//****************************************************************************
+//******************************* Accessors **********************************
+//****************************************************************************
+
+double ModEulerKorteweg::selectScalar(Phase** phases, Mixture* /*mixture*/, Transport* transports, Variable nameVariable, int num) const
+{
+  switch (nameVariable) {
+    case Variable::pressure:
+      return phases[0]->getPressure();
+      break;
+    case Variable::density:
+      return phases[0]->getDensity();
+      break;
+    case Variable::velocityU:
+      return phases[0]->getU();
+      break;
+    case Variable::velocityV:
+      return phases[0]->getV();
+      break;
+    case Variable::velocityW:
+      return phases[0]->getW();
+      break;
+    case Variable::velocityMag:
+      return phases[0]->getVelocity().norm();
+      break;
+    case Variable::transport:
+      return transports[num].getValue();
+      break;
+    default:
+      Errors::errorMessage("nameVariable unknown in selectScalar"); return 0;
+      break;
+  }
 }
 
 //****************************************************************************

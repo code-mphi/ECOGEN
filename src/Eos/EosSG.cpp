@@ -164,7 +164,7 @@ double EosSG::computeDensityPfinal(const double& initialPressure, const double& 
 {
   double num((m_gamma)*(finalPressure + m_pInf));
   double denom(num + initialPressure - finalPressure);
-  double finalDensity(initialDensity*num/std::max(denom, epsilonAlphaNull));
+  double finalDensity(initialDensity*num / TB->returnNonZeroValue(denom));
   if (drhodp != NULL) *drhodp = initialDensity*m_gamma*(initialPressure + m_pInf) / std::max((denom*denom), epsilonAlphaNull);
   return finalDensity;
 }

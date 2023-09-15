@@ -45,8 +45,8 @@ class FluxPUEq : public FluxUEq
     FluxPUEq(const int& numbPhases);
     virtual ~FluxPUEq();
 
-    virtual void addNonCons(double coefA, const Cell* cell);
-    virtual void subtractNonCons(double coefA, const Cell* cell);
+    virtual void addNonCons(double coefA, const Cell* cell, const Coord& /*normal*/, const Coord& /*tangent*/, const Coord& /*binormal*/);
+    virtual void subtractNonCons(double coefA, const Cell* cell, const Coord& /*normal*/, const Coord& /*tangent*/, const Coord& /*binormal*/);
     virtual void schemeCorrection(Cell& /*cell*/) const {};
     virtual void correctionEnergy(Cell* cell, Prim type = vecPhases) const;
 

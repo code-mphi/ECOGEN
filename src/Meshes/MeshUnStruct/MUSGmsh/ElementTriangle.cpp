@@ -83,14 +83,14 @@ void ElementTriangle::construitFaces(const Coord* nodes, FaceNS** faces, int& iM
 {
   //3 faces a traiter de type segment
   int indexFaceExiste(-1);
-  int noeudAutre;
+  int nodeAutre;
   for (int i = 0; i < NUMBERFACES; i++)
   {
     switch (i)
     {
-      case 0: facesBuff[iMax][0] = m_numNoeuds[0]; facesBuff[iMax][1] = m_numNoeuds[1]; noeudAutre = 2; break;
-      case 1: facesBuff[iMax][0] = m_numNoeuds[1]; facesBuff[iMax][1] = m_numNoeuds[2]; noeudAutre = 0; break;      
-      case 2: facesBuff[iMax][0] = m_numNoeuds[2]; facesBuff[iMax][1] = m_numNoeuds[0]; noeudAutre = 1; break;      
+      case 0: facesBuff[iMax][0] = m_numNodes[0]; facesBuff[iMax][1] = m_numNodes[1]; nodeAutre = 2; break;
+      case 1: facesBuff[iMax][0] = m_numNodes[1]; facesBuff[iMax][1] = m_numNodes[2]; nodeAutre = 0; break;      
+      case 2: facesBuff[iMax][0] = m_numNodes[2]; facesBuff[iMax][1] = m_numNodes[0]; nodeAutre = 1; break;      
     }
     sumNodesBuff[iMax] = facesBuff[iMax][0] + facesBuff[iMax][1];
     std::sort(facesBuff[iMax],facesBuff[iMax]+2);  //Tri des nodes
@@ -100,12 +100,12 @@ void ElementTriangle::construitFaces(const Coord* nodes, FaceNS** faces, int& iM
     if (indexFaceExiste==-1)
     {
       faces[iMax] = new FaceSegment(facesBuff[iMax][0], facesBuff[iMax][1], 0); //pas besoin du tri ici
-      faces[iMax]->construitFace(nodes, m_numNoeuds[noeudAutre], this);
+      faces[iMax]->construitFace(nodes, m_numNodes[nodeAutre], this);
       iMax++;
     }
     else
     {
-      faces[indexFaceExiste]->ajouteElementVoisin(this);
+      faces[indexFaceExiste]->addElementNeighbor(this);
     }
   }
 }
@@ -120,9 +120,9 @@ void ElementTriangle::construitFacesSimplifie(int& iMax, int** facesBuff, int* s
   {
     switch (i)
     {
-      case 0: facesBuff[iMax][0] = m_numNoeuds[0]; facesBuff[iMax][1] = m_numNoeuds[1]; break;
-      case 1: facesBuff[iMax][0] = m_numNoeuds[1]; facesBuff[iMax][1] = m_numNoeuds[2]; break;      
-      case 2: facesBuff[iMax][0] = m_numNoeuds[2]; facesBuff[iMax][1] = m_numNoeuds[0]; break;      
+      case 0: facesBuff[iMax][0] = m_numNodes[0]; facesBuff[iMax][1] = m_numNodes[1]; break;
+      case 1: facesBuff[iMax][0] = m_numNodes[1]; facesBuff[iMax][1] = m_numNodes[2]; break;      
+      case 2: facesBuff[iMax][0] = m_numNodes[2]; facesBuff[iMax][1] = m_numNodes[0]; break;      
     }
     sumNodesBuff[iMax] = facesBuff[iMax][0] + facesBuff[iMax][1];
     std::sort(facesBuff[iMax],facesBuff[iMax]+2);  //Tri des nodes
@@ -141,10 +141,10 @@ void ElementTriangle::construitFacesSimplifie(int& iMax, int** facesBuff, int* s
 void ElementTriangle::attributFaceLimite(FaceNS** faces, const int& indexMaxFaces)
 {
   int indexFaceExiste(0);
-  FaceTriangle face(m_numNoeuds[0], m_numNoeuds[1], m_numNoeuds[2]);
+  FaceTriangle face(m_numNodes[0], m_numNodes[1], m_numNodes[2]);
   if (face.faceExists(faces, indexMaxFaces, indexFaceExiste))
   {
-    faces[indexFaceExiste]->ajouteElementVoisinLimite(this);
+    faces[indexFaceExiste]->addElementNeighborLimite(this);
   }
   else
   {
@@ -154,36 +154,36 @@ void ElementTriangle::attributFaceLimite(FaceNS** faces, const int& indexMaxFace
 
 //***********************************************************************
 
-void ElementTriangle::attributFaceCommunicante(FaceNS** faces, const int& indexMaxFaces, const int& numberNoeudsInternes)
+void ElementTriangle::attributFaceCommunicante(FaceNS** faces, const int& indexMaxFaces, const int& numberNodesInternal)
 {
   int indexFaceExiste(0);
   //Verification face 1 :
-  if (m_numNoeuds[0] < numberNoeudsInternes && m_numNoeuds[1] < numberNoeudsInternes)
+  if (m_numNodes[0] < numberNodesInternal && m_numNodes[1] < numberNodesInternal)
   {
-    FaceSegment face(m_numNoeuds[0], m_numNoeuds[1]);
+    FaceSegment face(m_numNodes[0], m_numNodes[1]);
     if (face.faceExists(faces, indexMaxFaces, indexFaceExiste))
     {
-      faces[indexFaceExiste]->ajouteElementVoisinLimite(this);
+      faces[indexFaceExiste]->addElementNeighborLimite(this);
       faces[indexFaceExiste]->setEstComm(true);
     }
   }
   //Verification face 2 :
-  if (m_numNoeuds[1] < numberNoeudsInternes && m_numNoeuds[2] < numberNoeudsInternes)
+  if (m_numNodes[1] < numberNodesInternal && m_numNodes[2] < numberNodesInternal)
   {
-    FaceSegment face(m_numNoeuds[1], m_numNoeuds[2]);
+    FaceSegment face(m_numNodes[1], m_numNodes[2]);
     if (face.faceExists(faces, indexMaxFaces, indexFaceExiste))
     {
-      faces[indexFaceExiste]->ajouteElementVoisinLimite(this);
+      faces[indexFaceExiste]->addElementNeighborLimite(this);
       faces[indexFaceExiste]->setEstComm(true);
     }
   }
   //Verification face 3 :
-  if (m_numNoeuds[2] < numberNoeudsInternes && m_numNoeuds[0] < numberNoeudsInternes)
+  if (m_numNodes[2] < numberNodesInternal && m_numNodes[0] < numberNodesInternal)
   {
-    FaceSegment face(m_numNoeuds[2], m_numNoeuds[0]);
+    FaceSegment face(m_numNodes[2], m_numNodes[0]);
     if (face.faceExists(faces, indexMaxFaces, indexFaceExiste))
     {
-      faces[indexFaceExiste]->ajouteElementVoisinLimite(this);
+      faces[indexFaceExiste]->addElementNeighborLimite(this);
       faces[indexFaceExiste]->setEstComm(true);
     }
   }
@@ -200,9 +200,9 @@ int ElementTriangle::compteFaceCommunicante(std::vector<int*>& facesBuff, std::v
   {
     switch (i)
     {
-      case 0: face[0] = m_numNoeuds[0]; face[1] = m_numNoeuds[1]; break;
-      case 1: face[0] = m_numNoeuds[1]; face[1] = m_numNoeuds[2]; break;
-      case 2: face[0] = m_numNoeuds[2]; face[1] = m_numNoeuds[0]; break;     
+      case 0: face[0] = m_numNodes[0]; face[1] = m_numNodes[1]; break;
+      case 1: face[0] = m_numNodes[1]; face[1] = m_numNodes[2]; break;
+      case 2: face[0] = m_numNodes[2]; face[1] = m_numNodes[0]; break;     
     }
     int iMax = sumNodesBuff.size();
     sumNodes = face[0]+face[1];
@@ -228,9 +228,9 @@ int ElementTriangle::compteFaceCommunicante(int& iMax, int** facesBuff, int* sum
   {
     switch (i)
     {
-      case 0: face[0] = m_numNoeuds[0]; face[1] = m_numNoeuds[1]; break;
-      case 1: face[0] = m_numNoeuds[1]; face[1] = m_numNoeuds[2]; break;
-      case 2: face[0] = m_numNoeuds[2]; face[1] = m_numNoeuds[0]; break;       
+      case 0: face[0] = m_numNodes[0]; face[1] = m_numNodes[1]; break;
+      case 1: face[0] = m_numNodes[1]; face[1] = m_numNodes[2]; break;
+      case 2: face[0] = m_numNodes[2]; face[1] = m_numNodes[0]; break;       
     }
     sumNodes = face[0]+face[1];
     std::sort(face, face+2);

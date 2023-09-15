@@ -32,7 +32,10 @@
 
 //***********************************************************************
 
-LimiterSuperBee::LimiterSuperBee(){}
+LimiterSuperBee::LimiterSuperBee() : Limiter() 
+{
+  m_limType = LimiterType::SUPERBEE;
+}
 
 //***********************************************************************
 

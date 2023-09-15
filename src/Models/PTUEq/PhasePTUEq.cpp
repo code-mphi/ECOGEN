@@ -153,10 +153,26 @@ void PhasePTUEq::fillBuffer(double* buffer, int& counter) const
 
 //***************************************************************************
 
+void PhasePTUEq::fillBuffer(std::vector<double>& dataToSend) const
+{
+  dataToSend.push_back(m_alpha);
+  dataToSend.push_back(static_cast<double>(m_eos->getNumber()));
+}
+
+//***************************************************************************
+
 void PhasePTUEq::getBuffer(double* buffer, int& counter, Eos** eos)
 {
   m_alpha = buffer[++counter];
   m_eos = eos[static_cast<int>(buffer[++counter])];
+}
+
+//***************************************************************************
+
+void PhasePTUEq::getBuffer(std::vector<double>& dataToReceive, int& counter, Eos** eos)
+{
+  m_alpha = dataToReceive[counter++];
+  m_eos = eos[static_cast<int>(std::round(dataToReceive[counter++]))];
 }
 
 //****************************************************************************
@@ -177,6 +193,13 @@ void PhasePTUEq::setToZero()
 
 //***************************************************************************
 
+void PhasePTUEq::setToMax()
+{
+  m_alpha = 1.e15;
+}
+
+//***************************************************************************
+
 void PhasePTUEq::extrapolate(const Phase &slope, const double& distance)
 {
   m_alpha += slope.getAlpha() * distance;
@@ -187,6 +210,27 @@ void PhasePTUEq::extrapolate(const Phase &slope, const double& distance)
 void PhasePTUEq::limitSlopes(const Phase& slopeGauche, const Phase& slopeDroite, Limiter& /*globalLimiter*/, Limiter& volumeFractionLimiter)
 {
   m_alpha = volumeFractionLimiter.limiteSlope(slopeGauche.getAlpha(), slopeDroite.getAlpha());
+}
+
+//***************************************************************************
+
+void PhasePTUEq::setMin(const Phase& phase1, const Phase& phase2)
+{
+  m_alpha = std::min(phase1.getAlpha(), phase2.getAlpha());
+}
+
+//****************************************************************************
+
+void PhasePTUEq::setMax(const Phase& phase1, const Phase& phase2)
+{
+  m_alpha = std::max(phase1.getAlpha(), phase2.getAlpha());
+}
+
+//****************************************************************************
+
+void PhasePTUEq::computeGradientLimiter(const Limiter& globalLimiter, const Phase& phase, const Phase& phaseMin, const Phase& phaseMax, const Phase& slope)
+{
+  m_alpha = std::min(m_alpha, globalLimiter.computeGradientLimiter(phase.getAlpha(), phaseMin.getAlpha(), phaseMax.getAlpha(), slope.getAlpha()));
 }
 
 //****************************************************************************

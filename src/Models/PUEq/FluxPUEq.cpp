@@ -41,7 +41,7 @@ FluxPUEq::~FluxPUEq(){}
 
 //***********************************************************************
 
-void FluxPUEq::addNonCons(double coefA, const Cell* cell)
+void FluxPUEq::addNonCons(double coefA, const Cell* cell, const Coord& /*normal*/, const Coord& /*tangent*/, const Coord& /*binormal*/)
 {
   Phase* phase;
   for(int k=0;k<numberPhases;k++){
@@ -53,7 +53,7 @@ void FluxPUEq::addNonCons(double coefA, const Cell* cell)
 
 //***********************************************************************
 
-void FluxPUEq::subtractNonCons(double coefA, const Cell* cell)
+void FluxPUEq::subtractNonCons(double coefA, const Cell* cell, const Coord& /*normal*/, const Coord& /*tangent*/, const Coord& /*binormal*/)
 {
   Phase* phase;
   for(int k=0;k<numberPhases;k++){

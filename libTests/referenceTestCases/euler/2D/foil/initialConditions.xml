@@ -1,0 +1,32 @@
+<?xml version = "1.0" encoding = "UTF-8" standalone = "yes"?>
+<CI>
+	<!-- LIST OF GEOMETRICAL DOMAINS  -->
+	<physicalDomains>	
+		<domain name="base" state="init" type="entireDomain" physicalEntity="10"/>
+	</physicalDomains>
+
+	<!-- LIST OF BOUNDARY CONDITIONS -->
+	<boundaryConditions>
+		<boundCond name="inlet" type="inletInjTemp" number="1">
+		    <dataInletInj m0="4985."/>
+		    <dataFluid temperature="298."/>
+		</boundCond>
+
+		<boundCond name="outlet" type="outletPressure" number="2">
+			<dataOutletPressure p0="1.e5"/>
+		</boundCond>	    
+    
+		<boundCond name="walls" type="wall" number="3"/>
+		<boundCond name="foil" type="wall" number="4"/>
+	</boundaryConditions>
+	
+	<!--  LIST OF STATES  -->
+	<state name="init">
+		<material type="fluid" EOS="SG_waterLiq_278_318K.xml">
+			<dataFluid density="997." pressure="1.e5">
+        <velocity x="5." y="0." z="0."/>
+      </dataFluid>
+		</material>
+	</state>
+
+</CI>

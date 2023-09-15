@@ -1,0 +1,15 @@
+<?xml version = "1.0" encoding = "UTF-8" standalone = "yes"?>
+<parametersEOS>
+	<EOS type="SG"/>
+	<parameters
+		gamma="3.05"
+		pInf="7.76e8"
+		cv="1231.2"
+		energyRef="0."
+		entropyRef="0.">
+	</parameters>
+	<physicalParameters
+		mu="1.e-3"
+		lambda="0.6">
+	</physicalParameters>		
+</parametersEOS>

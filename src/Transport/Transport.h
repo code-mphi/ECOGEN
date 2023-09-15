@@ -56,21 +56,30 @@ class Transport
    	void solveRiemann(double transportLeft, double transportRight, double sM);
     //! \brief     Wall half Riemann solver for the corresponding transport equation
     void solveRiemannWall();
-    //! \brief     Inflow (injection) half Riemann solver for the corresponding transport equation
+    //! \brief     Piston half Riemann solver for the corresponding transport equation
+    //! \param     transportLeft          left value of transport variable
+    //! \param     uPiston                piston velocity for intercell interfaces
+    void solveRiemannPiston(double transportLeft, double uPiston);
+    //! \brief     Inlet injection using stagnation state half Riemann solver for the corresponding transport equation
     //! \param     transportLeft          left value of transport variable
     //! \param     sM                     fluid velocity for intercell interfaces
     //! \param     valueTransport         injection value of transport variable
-    void solveRiemannInflow(double transportLeft, double sM, double valueTransport);
-    //! \brief     Tank half Riemann solver for the corresponding transport equation
+    void solveRiemannInletInjStagState(double transportLeft, double sM, double valueTransport);
+    //! \brief     Inlet injection using temperature half Riemann solver for the corresponding transport equation
+    //! \param     transportLeft          left value of transport variable
+    //! \param     sM                     fluid velocity for intercell interfaces
+    //! \param     valueTransport         injection value of transport variable
+    void solveRiemannInletInjTemp(double transportLeft, double sM, double valueTransport);
+    //! \brief     Inlet tank half Riemann solver for the corresponding transport equation
     //! \param     transportLeft          left value of transport variable
     //! \param     sM                     fluid velocity for intercell interfaces
     //! \param     valueTransport         tank value of transport variable
-    void solveRiemannTank(double transportLeft, double sM, double valueTransport);
-    //! \brief     Outflow half Riemann solver for the corresponding transport equation
+    void solveRiemannInletTank(double transportLeft, double sM, double valueTransport);
+    //! \brief     Outlet at imposed pressure half Riemann solver for the corresponding transport equation
     //! \param     transportLeft          left value of transport variable
     //! \param     sM                     fluid velocity for intercell interfaces
     //! \param     valueTransport         outflow value of transport variable
-    void solveRiemannOutflow(double transportLeft, double sM, double valueTransport);
+    void solveRiemannOutletPressure(double transportLeft, double sM, double valueTransport);
     //! \brief     Add flux to the corresponding transport buffer flux
     //! \param     coefA                  possibility to multiply the flux before adding (set 1.d0 if not needed)
     //! \param     num                    number of the corresponding transport equation
@@ -98,16 +107,17 @@ class Transport
     //! \brief     Change the sign of the corresponding transport value
     void changeSign();
     
-    //Specifique secondOrder
+    //Second order
+    //! \brief     Extrapolate the value of the corresponding transport equation from the center of the cell to its edge
+    //! \param     slope                  value of the slope
+    //! \param     distance               distance between the center and the corresponding edge of the cell
+    void extrapolate(const double& slope, const double& distance);
+    //Second order on cartesian grids
     //! \brief     Compute the slope at the edge of a cell
     //! \param     valueLeft              transport value of the left cell
     //! \param     valueRight             transport value of the right cell
     //! \param     distance               distance between the left and right cell centers
     void computeSlopeTransport(const double valueLeft, const double valueRight, const double& distance);
-    //! \brief     Extrapolate the value of the corresponding transport equation from the center of the cell to its edge
-    //! \param     slope                  value of the slope
-    //! \param     distance               distance between the center and the corresponding edge of the cell
-    void extrapolate(const double& slope, const double& distance);
 
   private:
     double m_value;     //! Value of the corresponding transport variable

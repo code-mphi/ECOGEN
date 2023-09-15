@@ -38,6 +38,6 @@
 #include "LimiterMC.h"
 #include "LimiterTHINC.h"
 
-//Ajouter ici entetes des nouveaux limiters
+//Add here headers of new limiters
 
 #endif // HEADERLIMITER_H

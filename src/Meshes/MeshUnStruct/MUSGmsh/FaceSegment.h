@@ -36,12 +36,12 @@
 class FaceSegment : public FaceNS
 {
 public:
-  FaceSegment(const int& numNoeud1, const int& numNoeud2, int tri=1);
+  FaceSegment(const int& numNode1, const int& numNode2, int tri=1);
   virtual ~FaceSegment();
 
 private:
-  virtual void computeSurface(const Coord* noeuds);
-  virtual void computeRepere(const Coord* noeuds, const int& numNoeudAutre, ElementNS *elementVoisin);
+  virtual void computeSurface(const Coord* nodes);
+  virtual void computeRepere(const Coord* nodes, const int& numNodeOther, ElementNS *elementNeighbor);
 
   static const int NUMBERNODES;
 };

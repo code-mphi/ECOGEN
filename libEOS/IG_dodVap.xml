@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='UTF-8' standalone='yes'?>
 <parametersEOS>
-  <EOS type="IG" fichier="IG_dodVap.xml"/>
+  <EOS type="IG"/>
   <parameters cv="1077." gamma="1.025" energyRef="-237.e3" entropyRef="0"/>
   <physicalParameters lambda="0.6" mu="1.e-3"/>
 </parametersEOS>

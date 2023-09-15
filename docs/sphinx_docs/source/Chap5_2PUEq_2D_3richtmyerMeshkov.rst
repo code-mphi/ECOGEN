@@ -43,7 +43,7 @@ The initial characteristics of the run are:
 
 Results are shown in :numref:`Fig:testCases:PUEq:richtmyerMeshkovAnim`.
 Both GIFs are animations which represents on the one hand (upper half) the evolution of the mesh (AMR), that is to say its refinement for the computation of the simulation.
-For example, when the density variations are low or non-existent, the mesh will be as coarse as possible (within the conditions given in meshV5.xml).
+For example, when the density variations are low or non-existent, the mesh will be as coarse as possible (within the conditions given in mesh.xml).
 On the contrary when the variations become significant, the mesh will become refined.
 
 .. _Fig:testCases:PUEq:richtmyerMeshkovAnim:

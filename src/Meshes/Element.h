@@ -68,12 +68,12 @@ public:
   virtual void setSize(const double& /*sizeX*/, const double& /*sizeY*/, const double& /*sizeZ*/) { Errors::errorMessage("setSize not available for requested element"); };
   virtual void setSize(const Coord& /*size*/) { Errors::errorMessage("setSize not available for requested element"); };
   
-  void ecritPos(std::ofstream& fileStream, Axis axis);
+  void writePos(std::ofstream& fileStream, Axis axis);
 
   virtual void printInfo() const{ Errors::errorMessage("AfficheInfos not available for requested element"); };
   
-  Coord vecteur(const Element* e); /*!< Cree un vecteur a partir des centers d elements */
-  Coord vecteur(const Face* f);    /*!< Cree un vecteur entre center element et center d une face */
+  Coord vector(const Element* e); /*!< Cree un vector a partir des centers d elements */
+  Coord vector(const Face* f);    /*!< Cree un vector entre center element et center d une face */
 
   double distance(const Element* e);  /*!< Calcul de la distance entre center et center d un autre element */
   double distanceX(const Element* e); /*!< Calcul de la distance selon x entre center et center d un autre element */

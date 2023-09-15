@@ -44,6 +44,6 @@
 #include "OutputBoundaryFluxGNU.h"
 #include "OutputBoundaryAllGNU.h"
 
-//Ajouter ici entetes des nouvelles entrees sorties
+//Add here headers of new outputs
 
 #endif // HEADERINPUTOUTPUT_H

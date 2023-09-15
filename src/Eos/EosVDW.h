@@ -84,6 +84,10 @@ class EosVDW : public Eos
     //! \details   with  dedrhoSecond : \f$ \frac{\partial^2 \epsilon}{\partial \rho^2} (\rho, T) = \frac{r T (1 - 2 \rho b)}{\rho^2 (1 - \rho b)^2} \f$ //KS//To update
     virtual double dedrhoSecond(const double& density, const double& /*temperature*/) const;
 
+    //Checking
+    //! \brief   Do nothing for VDW
+    virtual void verifyAndCorrectDensityMax(double& density) const;
+
     //Get 
     //! \brief  Get the type that is to say the reduced name of the EOS in ECOGEN
     //! \return \f$ \ "VDW" \f$

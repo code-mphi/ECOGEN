@@ -36,12 +36,12 @@
 class FaceTriangle : public FaceNS
 {
 public:
-  FaceTriangle(const int& numNoeud1, const int& numNoeud2, const int& numNoeud3, int tri=1);
+  FaceTriangle(const int& numNode1, const int& numNode2, const int& numNode3, int tri=1);
   virtual ~FaceTriangle();
 
 private:
-  virtual void computeSurface(const Coord* noeuds);
-  virtual void computeRepere(const Coord* noeuds, const int& numNoeudAutre, ElementNS *elementVoisin);
+  virtual void computeSurface(const Coord* nodes);
+  virtual void computeRepere(const Coord* nodes, const int& numNodeOther, ElementNS *elementNeighbor);
 
   static const int NUMBERNODES;
 };

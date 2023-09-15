@@ -6,19 +6,19 @@ refY = 0;
 refZ = 0;
 
 // --- Mesh parameters ---
-NrExt = 10;  // Nb of cell along the radius on external zone
-NrInt = 10;  // Nb of cell along the radius on internal zone
-Ntheta = 5;  // Nb of cells along the azimuth
+NrExt = 15;  // Nb of cell along the radius on external zone
+NrInt = 25;  // Nb of cell along the radius on internal zone
+Ntheta = 10;  // Nb of cells along the azimuth
 
 // --- Design parameters ---
 rExt = 0.2;      // External radius of the disc
-rInt = rExt/3.;  // Internal radius for fluid domain interface
+rInt = rExt/1.5;  // Internal radius for fluid domain interface
 rMin = rInt/10.; // Minimum radius for O-grid construction
 
 // --- Boundary conditions ---
 boundCondWalls = 1;
-fluidInt = 10;
-fluidExt = 11;
+fluidInt = 11;
+fluidExt = 10;
 
 // --- Geometry ---
 

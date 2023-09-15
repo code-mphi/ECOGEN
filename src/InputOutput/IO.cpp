@@ -88,22 +88,21 @@ std::ostream& IO::writeb64Chaine(std::ostream& fluxSortie, char* chaine, int& ta
 
 //***********************************************************************
 
-void IO::copieFichier(std::string file, std::string dossierSource, std::string dossierDestination)
+void IO::copyFile(std::string file, std::string srcFolder, std::string destFolder)
 {
   try {
-    std::ifstream fichierSource;
-    std::ofstream fichierDestination;
+    std::ifstream srcFile;
+    std::ofstream destFile;
 
-    fichierSource.open((dossierSource + file).c_str());
-    fichierDestination.open((dossierDestination + file).c_str());
-    //std::cout << "copie : " << dossierSource + file << " -> " << dossierDestination + file << std::endl;
-    if (!fichierSource) throw ErrorECOGEN("IO::copieFichier : file non trouve \"" + dossierSource + file + "\"", __FILE__, __LINE__);
-    if (!fichierDestination) throw ErrorECOGEN("IO::copieFichier : dossier non trouve \"" + dossierDestination + "\"", __FILE__, __LINE__);
+    srcFile.open((srcFolder + file).c_str());
+    destFile.open((destFolder + file).c_str());
+    if (!srcFile) throw ErrorInput("file not found \"" + srcFolder + file + "\"", __FILE__, __LINE__);
+    if (!destFile) throw ErrorInput("folder not found \"" + destFolder + "\"", __FILE__, __LINE__);
 
-    std::string ligne;
-    while (getline(fichierSource, ligne)) { fichierDestination << ligne << std::endl; }
+    std::string line;
+    while (getline(srcFile, line)) { destFile << line << std::endl; }
   }
-  catch (ErrorECOGEN &) { throw; }
+  catch (ErrorInput &) { throw; }
 }
 
 //***********************************************************************

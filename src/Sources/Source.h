@@ -65,7 +65,10 @@ class Source
     //! \param     position        position vector in the fixed coordinate system
     virtual Coord computeAbsVelocity(const Coord& /*relVelocity*/, const Coord& /*position*/) { Errors::errorMessage("computeAbsVelocity not available for required source"); return 0.; };
 
-    int getPhysicalEntity() { return m_physicalEntity; }
+    virtual Coord getOmega() { Errors::errorMessage("getOmega not available for required source"); return Coord::defaultCoord; }
+    virtual bool getRiemannCoupling() { Errors::errorMessage("getRiemannCoupling not available for required source"); return false;}
+    
+    virtual int getPhysicalEntity() { return m_physicalEntity; }
 
   protected:
     int m_physicalEntity;

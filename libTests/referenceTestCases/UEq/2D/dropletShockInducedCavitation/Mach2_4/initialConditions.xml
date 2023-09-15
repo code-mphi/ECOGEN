@@ -1,0 +1,64 @@
+<?xml version = "1.0" encoding = "UTF-8" standalone = "yes"?>
+<CI>
+    <!-- LISTE DES DOMAINES GEOMETRIQUES  -->
+    <physicalDomains> 
+        <domain name="base" state="air" type="entireDomain"/>
+        <domain name="shock"  state="shockedstate" type="halfSpace">
+            <dataHalfSpace axis="x" origin="20.e-3" direction="negative"/>
+        </domain>
+        <domain name="droplet"  state="water" type="Disc">
+            <dataDisc axis1="x" axis2="y" radius="11.e-3">
+                <center x="33.e-3" y="0." z="0."/>
+            </dataDisc>
+        </domain>
+    </physicalDomains>
+
+    <!-- LISTE DES CONDITIONS AUX LIMITES -->
+    <boundaryConditions>
+        <boundCond name="CLXm" type="nonReflecting" number="1"/>
+        <boundCond name="CLXp" type="nonReflecting" number="2"/>
+        <boundCond name="CLYm" type="symmetry" number="3"/>
+        <boundCond name="CLYp" type="nonReflecting" number="4"/>
+    </boundaryConditions>
+    
+    <!--  LISTE DES ETATS UTILISES  -->
+    <state name="air">
+        <material type="fluid" EOS="SG_water_cavitation.xml">
+            <dataFluid alpha="1.e-6" density="1028." pressure = "1.01325e5"/>
+        </material>
+        <material type="fluid" EOS="IG_air.xml">
+            <dataFluid alpha="0.999999" density="1.204" pressure = "1.01325e5"/>
+        </material>
+        <mixture>
+            <velocity x="0." y="0." z="0."/>
+        </mixture>
+        <transport name="color" value="1."/>
+    </state>
+
+    <state name="shockedstate">
+        <material type="fluid" EOS="SG_water_cavitation.xml">
+            <dataFluid alpha="1.e-6" density="1028." pressure = "6.6389e5"/>
+        </material>
+        <material type="fluid" EOS="IG_air.xml">
+            <dataFluid alpha="0.999999" density="3.9346" pressure = "6.6389e5"/>
+        </material>
+        <mixture>
+            <velocity x="570.2083" y="0." z="0."/>
+        </mixture>
+        <transport name="color" value="1."/>
+    </state>
+
+    <state name="water">
+        <material type="fluid" EOS="SG_water_cavitation.xml">
+            <dataFluid alpha="0.999999" density="1028." pressure = "1.01325e5"/>
+        </material>
+        <material type="fluid" EOS="IG_air.xml">
+            <dataFluid alpha="1.e-6" density="1.204" pressure = "1.01325e5"/>
+        </material>
+        <mixture>
+            <velocity x="0." y="0." z="0."/>
+        </mixture>
+        <transport name="color" value="0."/>
+    </state>
+
+</CI>

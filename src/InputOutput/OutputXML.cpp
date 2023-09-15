@@ -43,6 +43,14 @@ OutputXML::OutputXML(std::string casTest, std::string run, XMLElement* element, 
 
 //***********************************************************************
 
+OutputXML::OutputXML(std::string run, int fileNumberRestartMeshMapping, Input *input) :
+  Output(run, fileNumberRestartMeshMapping, input)
+{
+  m_type = TypeOutput::XML;
+}
+
+//***********************************************************************
+
 OutputXML::~OutputXML(){}
 
 //***********************************************************************
@@ -79,10 +87,10 @@ void OutputXML::initializeSpecificOutput()
 void OutputXML::writeResults(Mesh* mesh, std::vector<Cell*>* cellsLvl)
 {
   try {
-    //Ecriture des fichiers de sortie au format XML
+    //Write output files with XML format
     writeResultsXML(mesh, cellsLvl);
-    //Ajout du file Collection pour grouper les niveaux, les temps, les CPU, etc.
-    if (rankCpu == 0) { ecritCollectionXML(mesh); }
+    //Add du file Collection pour grouper les niveaux, les temps, les CPU, etc.
+    if (rankCpu == 0) { writeCollectionXML(mesh); }
   }
   catch (ErrorECOGEN &) { throw; } // Renvoi au niveau suivant
   m_numFichier++;
@@ -129,15 +137,61 @@ void OutputXML::readResults(Mesh *mesh, std::vector<Cell*>* cellsLvl)
 
     //3) Reading fluid data
     //---------------------
-    ReadDonneesPhysiquesXML(mesh, cellsLvl, nodeCellData, fileName.str());
+    ReadPhysicalDataXML(mesh, cellsLvl, nodeCellData, fileName.str());
     m_numFichier++;
-  } //Fin try
+  } //End try
   catch (ErrorECOGEN &) { throw; }
 }
 
 //***********************************************************************
 
-void OutputXML::ReadDonneesPhysiquesXML(Mesh *mesh, std::vector<Cell*>* cellsLvl, XMLElement* nodeCellData, std::string fileName)
+void OutputXML::readResultsCpu(Mesh *mesh, std::vector<Cell*>* cellsLvl, int cpu)
+{
+  try {
+    //1) Parsing XML file
+    //-------------------
+    std::stringstream fileName(m_folderDatasets + createFilenameXML(m_fileNameResults.c_str(), mesh, cpu, m_numFichier));
+    XMLDocument xmlMain;
+    XMLError error(xmlMain.LoadFile(fileName.str().c_str())); //Le file est parse ici
+    if (error != XML_SUCCESS) throw ErrorXML(fileName.str(), __FILE__, __LINE__);
+    
+    //2) Entering XML file according to mesh
+    //--------------------------------------
+    XMLElement* nodeVTK, *nodeGrid, *nodePiece, *nodeCellData;
+    nodeVTK = xmlMain.FirstChildElement("VTKFile");
+    if (nodeVTK == NULL) throw ErrorXMLRacine("VTKFile", fileName.str(), __FILE__, __LINE__);
+    //Depend on mesh
+    switch (mesh->getType()) {
+    case REC:
+      nodeGrid = nodeVTK->FirstChildElement("RectilinearGrid");
+      if (nodeGrid == NULL) throw ErrorXMLRacine("RectilinearGrid", fileName.str(), __FILE__, __LINE__);
+      break;
+    case UNS:
+      nodeGrid = nodeVTK->FirstChildElement("UnstructuredGrid");
+      if (nodeGrid == NULL) throw ErrorXMLRacine("UnstructuredGrid", fileName.str(), __FILE__, __LINE__);
+      break;
+    case AMR:
+      nodeGrid = nodeVTK->FirstChildElement("UnstructuredGrid");
+      if (nodeGrid == NULL) throw ErrorXMLRacine("UnstructuredGrid", fileName.str(), __FILE__, __LINE__);
+      break;
+    default:
+      throw ErrorECOGEN("Output::readResults: unknown mesh type", __FILE__, __LINE__); break;
+    }
+    nodePiece = nodeGrid->FirstChildElement("Piece");
+    if (nodePiece == NULL) throw ErrorXMLRacine("Piece", fileName.str(), __FILE__, __LINE__);
+    nodeCellData = nodePiece->FirstChildElement("CellData");
+    if (nodeCellData == NULL) throw ErrorXMLRacine("CellData", fileName.str(), __FILE__, __LINE__);
+
+    //3) Reading fluid data
+    //---------------------
+    ReadPhysicalDataXML(mesh, cellsLvl, nodeCellData, fileName.str());
+  } //End try
+  catch (ErrorECOGEN &) { throw; }
+}
+
+//***********************************************************************
+
+void OutputXML::ReadPhysicalDataXML(Mesh *mesh, std::vector<Cell*>* cellsLvl, XMLElement* nodeCellData, std::string fileName)
 {
   int totalCellsLvlSize(0);
   for (int lvl = 0; lvl <= mesh->getLvlMax(); lvl++) {
@@ -170,7 +224,7 @@ void OutputXML::ReadDonneesPhysiquesXML(Mesh *mesh, std::vector<Cell*>* cellsLvl
         mesh->setDataSet(vectorDataSet, cellsLvl, -var, phase);
         nodeData = nodeData->NextSiblingElement("DataArray");
       }
-    } //Fin phase
+    } //End phase
 
     //2) Reading mixture data
     //-----------------------
@@ -190,7 +244,7 @@ void OutputXML::ReadDonneesPhysiquesXML(Mesh *mesh, std::vector<Cell*>* cellsLvl
         mesh->setDataSet(vectorDataSet, cellsLvl, -var, mixture);
         nodeData = nodeData->NextSiblingElement("DataArray");
       }
-    } //Fin mixture
+    } //End mixture
     
     //3) Transported data
     //-------------------
@@ -211,7 +265,7 @@ void OutputXML::ReadDonneesPhysiquesXML(Mesh *mesh, std::vector<Cell*>* cellsLvl
       mesh->setDataSet(scalarDataSet, cellsLvl, 1, xi);
       nodeData = nodeData->NextSiblingElement("DataArray");
     }
-  } //Fin try
+  } //End try
   catch (ErrorECOGEN &) { throw; }
 }
 
@@ -226,7 +280,7 @@ std::string OutputXML::createFilenameXML(const char* name, Mesh *mesh, int proc,
 
   try {
     //FP//TODO Donnees separees a faire...
-    if (m_splitData) { throw ErrorECOGEN("OutputXML::createFilenameXML : donnees Separees non prevu", __FILE__, __LINE__); }
+    if (m_splitData) { throw ErrorECOGEN("OutputXML::createFilenameXML : separated data not done", __FILE__, __LINE__); }
     num << name;
     //Gestion nameVariable
     if ((nameVariable != "defaut") && (nameVariable != "visit")) num << "_" << nameVariable << "_";
@@ -252,7 +306,7 @@ std::string OutputXML::createFilenameXML(const char* name, Mesh *mesh, int proc,
         num << "vtu"; break;
         //num << "vtp"; break;
       default:
-        throw ErrorECOGEN("OutputXML::createFilenameXML : type mesh inconnu", __FILE__, __LINE__);
+        throw ErrorECOGEN("OutputXML::createFilenameXML : type mesh unknown", __FILE__, __LINE__);
       }
     }
   }
@@ -269,52 +323,52 @@ void OutputXML::writeResultsXML(Mesh* mesh, std::vector<Cell*>* cellsLvl)
 
   try {
       
-      //1) Ouverture / creation file
+      //1) Opening and creation of file
       //-------------------------------
       std::string file = m_folderDatasets + createFilenameXML(m_fileNameResults.c_str(), mesh, rankCpu, m_numFichier);
       fileStream.open(file.c_str(), std::ios::trunc);
       if (!fileStream) { throw ErrorECOGEN("Impossible d ouvrir le file " + file, __FILE__, __LINE__); }
       fileStream << "<?xml version=\"1.0\"?>" << std::endl;
       
-      //2) Ecriture du mesh
-      //-----------------------
+      //2) Write mesh
+      //-------------
       switch (mesh->getType()) {
       case REC:
-        ecritMeshRectilinearXML(mesh, fileStream); break;
+        writeMeshRectilinearXML(mesh, fileStream); break;
       case UNS:
-        ecritMeshUnstructuredXML(mesh, cellsLvl, fileStream); break;
+        writeMeshUnstructuredXML(mesh, cellsLvl, fileStream); break;
       case AMR:
-        ecritMeshUnstructuredXML(mesh, cellsLvl, fileStream); break;
+        writeMeshUnstructuredXML(mesh, cellsLvl, fileStream); break;
       default:
-        throw ErrorECOGEN("Output::writeResultsXML : type mesh inconnu", __FILE__, __LINE__); break;
+        throw ErrorECOGEN("Output::writeResultsXML : type mesh unknown", __FILE__, __LINE__); break;
       }
       
-      //3) Ecriture des donnees phases fluids
-      //-------------------------------------
-      ecritDonneesPhysiquesXML(mesh, cellsLvl, fileStream);
+      //3) Write fluid phase data
+      //-------------------------
+      writePhysicalDataXML(mesh, cellsLvl, fileStream);
       
-      //4) Finalisation file
-      //-----------------------
+      //4) Finalyse file
+      //----------------
       switch (mesh->getType()) {
       case REC:
-        ecritFinFichierRectilinearXML(fileStream); break;
+        writeFinFichierRectilinearXML(fileStream); break;
       case UNS:
-        ecritFinFichierUnstructuredXML(fileStream); break;
+        writeFinFichierUnstructuredXML(fileStream); break;
       case AMR:
-        ecritFinFichierUnstructuredXML(fileStream); break;
-        //ecritFinFichierPolyDataXML(fileStream); break;
+        writeFinFichierUnstructuredXML(fileStream); break;
+        //writeFinFichierPolyDataXML(fileStream); break;
       default:
-        throw ErrorECOGEN("Output::writeResultsXML : type mesh inconnu", __FILE__, __LINE__); break;
+        throw ErrorECOGEN("Output::writeResultsXML : type mesh unknown", __FILE__, __LINE__); break;
       }
       fileStream.close();
 
-  } //Fin try
+  } //End try
   catch (ErrorECOGEN &) { throw; }
 }
 
 //***********************************************************************
 
-void OutputXML::ecritCollectionXML(Mesh *mesh)
+void OutputXML::writeCollectionXML(Mesh *mesh)
 {
   try {
     std::ofstream fileStream;
@@ -361,9 +415,9 @@ void OutputXML::ecritCollectionXML(Mesh *mesh)
 
 //***********************************************************************
 
-void OutputXML::ecritDonneesPhysiquesXML(Mesh *mesh, std::vector<Cell*>* cellsLvl, std::ofstream &fileStream, bool parallel)
+void OutputXML::writePhysicalDataXML(Mesh *mesh, std::vector<Cell*>* cellsLvl, std::ofstream &fileStream, bool parallel)
 {
-  std::vector<double> jeuDonnees;
+  std::vector<double> dataset;
 
   std::string prefix;
   if (parallel) { prefix = "P"; }
@@ -374,8 +428,8 @@ void OutputXML::ecritDonneesPhysiquesXML(Mesh *mesh, std::vector<Cell*>* cellsLv
 
   fileStream << "      <" << prefix << "CellData>" << std::endl;
 
-  //1) Ecriture des variables des phases
-  //------------------------------------
+  //1) Write des variables des phases
+  //---------------------------------
   for (int phase = 0; phase < m_run->getNumberPhases(); phase++) //For complete output
   //for (int phase = 0; phase < 1; phase++) //For reduced output
   {
@@ -384,21 +438,21 @@ void OutputXML::ecritDonneesPhysiquesXML(Mesh *mesh, std::vector<Cell*>* cellsLv
       eosName = m_cellRef.getPhase(phase)->getEos()->getName();
       eosName.erase(eosName.end()-4, eosName.end());
     }
-    //Ecriture des variables scalars
+    //Write des variables scalars
     for (int var = 1; var <= m_cellRef.getPhase(phase)->getNumberScalars(); var++) {
       fileStream << "        <" << prefix << "DataArray type=\"Float64\" Name=\"F" << phase << "_" << m_cellRef.getPhase(phase)->returnNameScalar(var);
       if (m_cellRef.getPhase(phase)->getEos() != nullptr) { fileStream << "_" << eosName; }
       fileStream << "\"";
       if (!parallel) {
         fileStream << " format=\"" << format << "\">" << std::endl;
-        mesh->recupereDonnees(cellsLvl, jeuDonnees, var, phase);
-        this->writeDataset(jeuDonnees, fileStream, DOUBLE);
+        mesh->getData(cellsLvl, dataset, var, phase);
+        this->writeDataset(dataset, fileStream, DOUBLE);
         fileStream << std::endl;
         fileStream << "        </" << prefix << "DataArray>" << std::endl;
       }
       else { fileStream << "\"/>" << std::endl; }
     }
-    //Ecriture des variables vectorielles
+    //Write des variables vectorielles
     for (int var = 1; var <= m_cellRef.getPhase(phase)->getNumberVectors(); var++)
     {
       fileStream << "        <" << prefix << "DataArray type=\"Float64\" Name=\"F" << phase << "_" << m_cellRef.getPhase(phase)->returnNameVector(var);
@@ -406,87 +460,87 @@ void OutputXML::ecritDonneesPhysiquesXML(Mesh *mesh, std::vector<Cell*>* cellsLv
       fileStream << "\" NumberOfComponents=\"3\"";
       if (!parallel) {
         fileStream << " format=\"" << format << "\">" << std::endl;
-        mesh->recupereDonnees(cellsLvl, jeuDonnees, -var, phase);
-        this->writeDataset(jeuDonnees, fileStream, DOUBLE);
+        mesh->getData(cellsLvl, dataset, -var, phase);
+        this->writeDataset(dataset, fileStream, DOUBLE);
         fileStream << std::endl;
         fileStream << "        </" << prefix << "DataArray>" << std::endl;
       }
       else { fileStream << "\"/>" << std::endl; }
     }
-  } //Fin phase
+  } //End phase
 
-  //2) Ecriture des donnees mixture
-  //-------------------------------
+  //2) Write mixture data
+  //---------------------
   if (m_run->m_numberPhases > 1)
   {
     int mixture = -1;
-    //Ecriture des variables scalars du mixture
+    //Write des variables scalars du mixture
     for (int var = 1; var <= m_cellRef.getMixture()->getNumberScalars(); var++)
     {
       fileStream << "        <" << prefix << "DataArray type=\"Float64\" Name=\"" << m_cellRef.getMixture()->returnNameScalar(var) << "\"";
       if (!parallel) {
         fileStream << " format=\"" << format << "\">" << std::endl;
-        mesh->recupereDonnees(cellsLvl, jeuDonnees, var, mixture);
-        this->writeDataset(jeuDonnees, fileStream, DOUBLE);
+        mesh->getData(cellsLvl, dataset, var, mixture);
+        this->writeDataset(dataset, fileStream, DOUBLE);
         fileStream << std::endl;
         fileStream << "        </" << prefix << "DataArray>" << std::endl;
       }
       else { fileStream << "\"/>" << std::endl; }
     }
-    //Ecriture des variables vectorielles du mixture
+    //Write des variables vectorielles du mixture
     for (int var = 1; var <= m_cellRef.getMixture()->getNumberVectors(); var++)
     {
       fileStream << "        <" << prefix << "DataArray type=\"Float64\" Name=\"" << m_cellRef.getMixture()->returnNameVector(var) << "\" NumberOfComponents=\"3\"";
       if (!parallel) {
         fileStream << " format=\"" << format << "\">" << std::endl;
-        mesh->recupereDonnees(cellsLvl, jeuDonnees, -var, mixture);
-        this->writeDataset(jeuDonnees, fileStream, DOUBLE);
+        mesh->getData(cellsLvl, dataset, -var, mixture);
+        this->writeDataset(dataset, fileStream, DOUBLE);
         fileStream << std::endl;
         fileStream << "        </" << prefix << "DataArray>" << std::endl;
       }
       else { fileStream << "\"/>" << std::endl; }
     }
-  } //Fin mixture
+  } //End mixture
 
-  //3) Ecriture des transports et autres...
-  //---------------------------------------
+  //3) Write of transports and others...
+  //------------------------------------
   int transport = -2; //For complete output
   for (int var = 1; var <= m_run->m_numberTransports; var++)
   {
     fileStream << "        <" << prefix << "DataArray type=\"Float64\" Name=\"T" << var << "\"";
     if (!parallel) {
       fileStream << " format=\"" << format << "\">" << std::endl;
-      mesh->recupereDonnees(cellsLvl, jeuDonnees, var, transport);
-      this->writeDataset(jeuDonnees, fileStream, DOUBLE);
+      mesh->getData(cellsLvl, dataset, var, transport);
+      this->writeDataset(dataset, fileStream, DOUBLE);
       fileStream << std::endl;
       fileStream << "        </" << prefix << "DataArray>" << std::endl;
     }
     else { fileStream << "\"/>" << std::endl; }
   }
 
-  //4) Ecriture indicateur xi
-  //-------------------------
+  //4) Write indicateur xi
+  //----------------------
   if (mesh->getType() == AMR) { //For complete output
     int xi = -3;
     fileStream << "        <" << prefix << "DataArray type=\"Float64\" Name=\"Xi\"";
     if (!parallel) {
       fileStream << " format=\"" << format << "\">" << std::endl;
-      mesh->recupereDonnees(cellsLvl, jeuDonnees, 1, xi);
-      this->writeDataset(jeuDonnees, fileStream, DOUBLE);
+      mesh->getData(cellsLvl, dataset, 1, xi);
+      this->writeDataset(dataset, fileStream, DOUBLE);
       fileStream << std::endl;
       fileStream << "        </" << prefix << "DataArray>" << std::endl;
     }
     else { fileStream << "\"/>" << std::endl; }
   }
 
-  //5) Ecriture gradient rho
-  //------------------------
+  //5) Write gradient rho
+  //---------------------
   int gradRho = -4;
   fileStream << "        <" << prefix << "DataArray type=\"Float64\" Name=\"gradRho\"";
   if (!parallel) {
     fileStream << " format=\"" << format << "\">" << std::endl;
-    mesh->recupereDonnees(cellsLvl, jeuDonnees, 1, gradRho);
-    this->writeDataset(jeuDonnees, fileStream, DOUBLE);
+    mesh->getData(cellsLvl, dataset, 1, gradRho);
+    this->writeDataset(dataset, fileStream, DOUBLE);
     fileStream << std::endl;
     fileStream << "        </" << prefix << "DataArray>" << std::endl;
   }
@@ -498,43 +552,71 @@ void OutputXML::ecritDonneesPhysiquesXML(Mesh *mesh, std::vector<Cell*>* cellsLv
     fileStream << "        <" << prefix << "DataArray type=\"Float64\" Name=\"absoluteVelocityMRF\" NumberOfComponents=\"3\"";
     if (!parallel) {
       fileStream << " format=\"" << format << "\">" << std::endl;
-      mesh->extractAbsVelocityMRF(cellsLvl, jeuDonnees, m_run->m_sources[m_run->m_MRF]);
-      this->writeDataset(jeuDonnees, fileStream, DOUBLE);
+      mesh->extractAbsVelocityMRF(cellsLvl, dataset, m_run->m_sources[m_run->m_MRF]);
+      this->writeDataset(dataset, fileStream, DOUBLE);
       fileStream << std::endl;
       fileStream << "        </" << prefix << "DataArray>" << std::endl;
     }
     else { fileStream << "\"/>" << std::endl; }
   }
 
-  //7) CPU rank
+  //7) Cells' reference length
+  //--------------------------
+  if (m_run->m_extractRefLength) {
+    fileStream << "        <" << prefix << "DataArray type=\"Float64\" Name=\"Reference_length\"";
+    if (!parallel) {
+      fileStream << " format=\"" << format << "\">" << std::endl;
+      mesh->extractReferenceLength(cellsLvl, dataset);
+      this->writeDataset(dataset, fileStream, DOUBLE);
+      fileStream << std::endl;
+      fileStream << "        </" << prefix << "DataArray>" << std::endl;
+    }
+    else { fileStream << "\"/>" << std::endl; }
+  }
+
+  //8) CPU rank
   //-----------
   // if (mesh->getType() == AMR) { //For complete output
   //   int CPUrank = -5;
   //   fileStream << "        <" << prefix << "DataArray type=\"Int32\" Name=\"CPUrank\"";
   //   if (!parallel) {
   //     fileStream << " format=\"" << format << "\">" << std::endl;
-  //     mesh->recupereDonnees(cellsLvl, jeuDonnees, 1, CPUrank);
-  //     this->writeDataset(jeuDonnees, fileStream, INT);
+  //     mesh->getData(cellsLvl, dataset, 1, CPUrank);
+  //     this->writeDataset(dataset, fileStream, INT);
   //     fileStream << std::endl;
   //     fileStream << "        </" << prefix << "DataArray>" << std::endl;
   //   }
   //   else { fileStream << "\"/>" << std::endl; }
   // }
 
-  //8) Morton index
+  //9) Morton index
   //---------------
   // if (mesh->getType() == AMR) { //For complete output
   //   int MortonIndex = -6;
   //   fileStream << "        <" << prefix << "DataArray type=\"Int32\" Name=\"MortonIndex\"";
   //   if (!parallel) {
   //     fileStream << " format=\"" << format << "\">" << std::endl;
-  //     mesh->recupereDonnees(cellsLvl, jeuDonnees, 1, MortonIndex);
-  //     this->writeDataset(jeuDonnees, fileStream, INT);
+  //     mesh->getData(cellsLvl, dataset, 1, MortonIndex);
+  //     this->writeDataset(dataset, fileStream, INT);
   //     fileStream << std::endl;
   //     fileStream << "        </" << prefix << "DataArray>" << std::endl;
   //   }
   //   else { fileStream << "\"/>" << std::endl; }
   // }
+
+  //9) Writing saturation pressure (specific recording)
+  //---------------------------------------------------
+  if (m_run->m_recordPsat) {
+  fileStream << "        <" << prefix << "DataArray type=\"Float64\" Name=\"Psat\"";
+      if (!parallel) {
+        fileStream << " format=\"" << format << "\">" << std::endl;
+        mesh->getData(cellsLvl, dataset, 1, -7);
+        this->writeDataset(dataset, fileStream, DOUBLE);
+        fileStream << std::endl;
+        fileStream << "        </" << prefix << "DataArray>" << std::endl;
+      }
+      else { fileStream << "\"/>" << std::endl; }
+  }
 
   //Fin
   fileStream << "      </" << prefix << "CellData>" << std::endl;
@@ -542,9 +624,9 @@ void OutputXML::ecritDonneesPhysiquesXML(Mesh *mesh, std::vector<Cell*>* cellsLv
 
 //***********************************************************************
 
-void OutputXML::ecritMeshRectilinearXML(Mesh* mesh, std::ofstream& fileStream, bool parallel)
+void OutputXML::writeMeshRectilinearXML(Mesh* mesh, std::ofstream& fileStream, bool parallel)
 {
-  std::vector<double> jeuDonnees;
+  std::vector<double> dataset;
 
   std::string prefix;
   if (parallel) { prefix = "P"; }
@@ -556,48 +638,48 @@ void OutputXML::ecritMeshRectilinearXML(Mesh* mesh, std::ofstream& fileStream, b
   if (!m_writeBinary) fileStream << "LittleEndian\">" << std::endl;
   else fileStream << m_endianMode.c_str() << "\">" << std::endl;
   if (!parallel) {
-    fileStream << "  <RectilinearGrid WholeExtent=\"" << mesh->recupereChaineExtent() << "\">" << std::endl;
-    fileStream << "    <Piece Extent=\"" << mesh->recupereChaineExtent() << "\">" << std::endl;
+    fileStream << "  <RectilinearGrid WholeExtent=\"" << mesh->getStringExtent() << "\">" << std::endl;
+    fileStream << "    <Piece Extent=\"" << mesh->getStringExtent() << "\">" << std::endl;
   }
   else {
-    fileStream << "  <PRectilinearGrid WholeExtent = \"" << mesh->recupereChaineExtent(true) << "\" GhostLevel=\"0\">" << std::endl;
+    fileStream << "  <PRectilinearGrid WholeExtent = \"" << mesh->getStringExtent(true) << "\" GhostLevel=\"0\">" << std::endl;
   }
   
-  //1) Ecriture des Coordonnees des noeuds
-  //--------------------------------------
+  //1) Write node coordinates
+  //-------------------------
   fileStream << "      <" << prefix << "Coordinates>" << std::endl;
-  //Coordonnees en X
+  //Coordinate in X
   fileStream << "        <" << prefix << "DataArray type=\"Float64\" ";
   if (!parallel) {
     if (!m_writeBinary) { fileStream << "format=\"ascii\">" << std::endl << "          "; }
     else { fileStream << "format=\"binary\">" << std::endl; }
-    jeuDonnees.clear();
-    mesh->recupereCoord(jeuDonnees, X);
-    writeDataset(jeuDonnees, fileStream, DOUBLE);
+    dataset.clear();
+    mesh->getCoord(dataset, X);
+    writeDataset(dataset, fileStream, DOUBLE);
     fileStream << std::endl;
     fileStream << "        </" << prefix << "DataArray>" << std::endl;
   }
   else { fileStream << "/>" << std::endl; }
-  //Coordonnees en Y
+  //Coordinate in Y
   fileStream << "        <" << prefix << "DataArray type=\"Float64\" ";
   if (!parallel) {
     if (!m_writeBinary) { fileStream << "format=\"ascii\">" << std::endl << "          "; }
     else { fileStream << "format=\"binary\">" << std::endl; }
-    jeuDonnees.clear();
-    mesh->recupereCoord(jeuDonnees, Y);
-    writeDataset(jeuDonnees, fileStream, DOUBLE);
+    dataset.clear();
+    mesh->getCoord(dataset, Y);
+    writeDataset(dataset, fileStream, DOUBLE);
     fileStream << std::endl;
     fileStream << "        </" << prefix << "DataArray>" << std::endl;
   }
   else { fileStream << "/>" << std::endl; }
-  //Coordonnees en Z
+  //Coordinate in Z
   fileStream << "        <" << prefix << "DataArray type=\"Float64\" ";
   if (!parallel) {
     if (!m_writeBinary) { fileStream << "format=\"ascii\">" << std::endl << "          "; }
     else { fileStream << "format=\"binary\">" << std::endl; }
-    jeuDonnees.clear();
-    mesh->recupereCoord(jeuDonnees, Z);
-    writeDataset(jeuDonnees, fileStream, DOUBLE);
+    dataset.clear();
+    mesh->getCoord(dataset, Z);
+    writeDataset(dataset, fileStream, DOUBLE);
     fileStream << std::endl;
     fileStream << "        </" << prefix << "DataArray>" << std::endl;
   }
@@ -607,9 +689,9 @@ void OutputXML::ecritMeshRectilinearXML(Mesh* mesh, std::ofstream& fileStream, b
 
 //***********************************************************************
 
-void OutputXML::ecritMeshUnstructuredXML(Mesh *mesh, std::vector<Cell*>* cellsLvl, std::ofstream &fileStream, bool parallel)
+void OutputXML::writeMeshUnstructuredXML(Mesh *mesh, std::vector<Cell*>* cellsLvl, std::ofstream &fileStream, bool parallel)
 {
-  std::vector<double> jeuDonnees;
+  std::vector<double> dataset;
 
   std::string prefix;
   if (parallel) { prefix = "P"; }
@@ -626,36 +708,36 @@ void OutputXML::ecritMeshUnstructuredXML(Mesh *mesh, std::vector<Cell*>* cellsLv
   }
   else {
     fileStream << "  <UnstructuredGrid>" << std::endl;
-    mesh->ecritHeaderPiece(fileStream, cellsLvl);
+    mesh->writeHeaderPiece(fileStream, cellsLvl);
   }
   
-  //1) Ecriture des Noeuds
-  //----------------------
+  //1) Write of nodes
+  //-----------------
   fileStream << "      <" << prefix << "Points>" << std::endl;
   fileStream << "        <" << prefix << "DataArray type=\"Float64\" NumberOfComponents=\"3\" ";
   if (!parallel) {
     if (!m_writeBinary) { fileStream << "format=\"ascii\">" << std::endl << "          "; }
     else { fileStream << "format=\"binary\">" << std::endl; }
-    jeuDonnees.clear();
-    mesh->recupereNoeuds(jeuDonnees, cellsLvl);
-    writeDataset(jeuDonnees, fileStream, DOUBLE);
+    dataset.clear();
+    mesh->getNodes(dataset, cellsLvl);
+    writeDataset(dataset, fileStream, DOUBLE);
     fileStream << std::endl;
     fileStream << "        </" << prefix << "DataArray>" << std::endl;
   }
   else { fileStream << "/>" << std::endl; }
   fileStream << "      </" << prefix << "Points>" << std::endl;
 
-  //2) Ecriture des Cells
-  //------------------------
+  //2) Write des Cells
+  //------------------
   fileStream << "      <" << prefix << "Cells>" << std::endl;
   //Connectivite
   fileStream << "        <" << prefix << "DataArray type=\"Int32\" Name=\"connectivity\" ";
   if (!parallel) {
     if (!m_writeBinary) { fileStream << "format=\"ascii\">" << std::endl << "          "; }
     else { fileStream << "format=\"binary\">" << std::endl; }
-    jeuDonnees.clear();
-    mesh->recupereConnectivite(jeuDonnees, cellsLvl);
-    writeDataset(jeuDonnees, fileStream, INT);
+    dataset.clear();
+    mesh->getConnectivity(dataset, cellsLvl);
+    writeDataset(dataset, fileStream, INT);
     fileStream << std::endl;
     fileStream << "        </" << prefix << "DataArray>" << std::endl;
   }
@@ -665,9 +747,9 @@ void OutputXML::ecritMeshUnstructuredXML(Mesh *mesh, std::vector<Cell*>* cellsLv
   if (!parallel) {
     if (!m_writeBinary) { fileStream << "format=\"ascii\">" << std::endl << "          "; }
     else { fileStream << "format=\"binary\">" << std::endl; }
-    jeuDonnees.clear();
-    mesh->recupereOffsets(jeuDonnees, cellsLvl);
-    writeDataset(jeuDonnees, fileStream, INT);
+    dataset.clear();
+    mesh->getOffsets(dataset, cellsLvl);
+    writeDataset(dataset, fileStream, INT);
     fileStream << std::endl;
     fileStream << "        </" << prefix << "DataArray>" << std::endl;
   }
@@ -677,9 +759,9 @@ void OutputXML::ecritMeshUnstructuredXML(Mesh *mesh, std::vector<Cell*>* cellsLv
   if (!parallel) {
     if (!m_writeBinary) { fileStream << "format=\"ascii\">" << std::endl << "          "; }
     else { fileStream << "format=\"binary\">" << std::endl; }
-    jeuDonnees.clear();
-    mesh->recupereTypeCell(jeuDonnees, cellsLvl);
-    writeDataset(jeuDonnees, fileStream, CHAR);
+    dataset.clear();
+    mesh->getTypeCell(dataset, cellsLvl);
+    writeDataset(dataset, fileStream, CHAR);
     fileStream << std::endl;
     fileStream << "        </" << prefix << "DataArray>" << std::endl;
   }
@@ -689,7 +771,7 @@ void OutputXML::ecritMeshUnstructuredXML(Mesh *mesh, std::vector<Cell*>* cellsLv
 
 //***********************************************************************
 
-void OutputXML::ecritFinFichierRectilinearXML(std::ofstream &fileStream, bool parallel)
+void OutputXML::writeFinFichierRectilinearXML(std::ofstream &fileStream, bool parallel)
 {
   std::string prefix;
   if (parallel) { prefix = "P"; }
@@ -702,7 +784,7 @@ void OutputXML::ecritFinFichierRectilinearXML(std::ofstream &fileStream, bool pa
 
 //***********************************************************************
 
-void OutputXML::ecritFinFichierUnstructuredXML(std::ofstream &fileStream, bool parallel)
+void OutputXML::writeFinFichierUnstructuredXML(std::ofstream &fileStream, bool parallel)
 {
   std::string prefix;
   if (parallel) { prefix = "P"; }
@@ -712,197 +794,5 @@ void OutputXML::ecritFinFichierUnstructuredXML(std::ofstream &fileStream, bool p
   fileStream << "  </" << prefix << "UnstructuredGrid>" << std::endl;
   fileStream << "</VTKFile>" << std::endl;
 }
-
-//***********************************************************************
-
-//Old
-
-//***********************************************************************
-
-// void OutputXML::ecritMeshPolyDataXML(Mesh *mesh, vector<Cell*>* cellsLvl, std::ofstream &fileStream, const int& lvl, bool parallel)
-// {
-//   vector<double> jeuDonnees;
-
-//   string prefix;
-//   if (parallel) { prefix = "P"; }
-//   else { prefix = ""; }
-
-//   //0) Header
-//   //---------
-//   fileStream << "<VTKFile type=\"" << prefix << "PolyData\" version=\"0.1\" byte_order=\"";
-//   if (!m_writeBinary) fileStream << "LittleEndian\">" << endl;
-//   else fileStream << m_endianMode.c_str() << "\">" << endl;
-
-//   if (parallel) {
-//     fileStream << "  <PPolyData GhostLevel=\"0\">" << endl;
-//   }
-//   else {
-//     fileStream << "  <PolyData>" << endl;
-//     mesh->ecritHeaderPiece(fileStream, cellsLvl, lvl);
-//   }
-
-//   //1) Ecriture des Noeuds
-//   //----------------------
-//   fileStream << "      <" << prefix << "Points>" << endl;
-//   fileStream << "        <" << prefix << "DataArray type=\"Float64\" NumberOfComponents=\"3\" ";
-//   if (!parallel) {
-//     if (!m_writeBinary) { fileStream << "format=\"ascii\">" << endl << "          "; }
-//     else { fileStream << "format=\"binary\">" << endl; }
-//     jeuDonnees.clear();
-//     mesh->recupereNoeuds(jeuDonnees, cellsLvl);
-//     writeDataset(jeuDonnees, fileStream, DOUBLE);
-//     fileStream << endl;
-//     fileStream << "        </" << prefix << "DataArray>" << endl;
-//   }
-//   else { fileStream << "/>" << endl; }
-//   fileStream << "      </" << prefix << "Points>" << endl;
-
-//   //2) Ecriture des Polys
-//   //---------------------
-//   fileStream << "      <" << prefix << "Polys>" << endl;
-//   //Connectivite
-//   fileStream << "        <" << prefix << "DataArray type=\"Int32\" Name=\"connectivity\" ";
-//   if (!parallel) {
-//     if (!m_writeBinary) { fileStream << "format=\"ascii\">" << endl << "          "; }
-//     else { fileStream << "format=\"binary\">" << endl; }
-//     jeuDonnees.clear();
-//     mesh->recupereConnectivite(jeuDonnees, lvl);
-//     writeDataset(jeuDonnees, fileStream, INT);
-//     fileStream << endl;
-//     fileStream << "        </" << prefix << "DataArray>" << endl;
-//   }
-//   else { fileStream << "/>" << endl; }
-//   //Offsets
-//   fileStream << "        <" << prefix << "DataArray type=\"Int32\" Name=\"offsets\" ";
-//   if (!parallel) {
-//     if (!m_writeBinary) { fileStream << "format=\"ascii\">" << endl << "          "; }
-//     else { fileStream << "format=\"binary\">" << endl; }
-//     jeuDonnees.clear();
-//     mesh->recupereOffsets(jeuDonnees, lvl);
-//     writeDataset(jeuDonnees, fileStream, INT);
-//     fileStream << endl;
-//     fileStream << "        </" << prefix << "DataArray>" << endl;
-//   }
-//   else { fileStream << "/>" << endl; }
-//   fileStream << "      </" << prefix << "Polys>" << endl;
-// }
-
-// //***********************************************************************
-
-// void OutputXML::ecritFinFichierPolyDataXML(std::ofstream &fileStream, bool parallel)
-// {
-//   string prefix;
-//   if (parallel) { prefix = "P"; }
-//   else { prefix = ""; }
-
-//   if (!parallel) fileStream << "    </Piece>" << endl;
-//   fileStream << "  </" << prefix << "PolyData>" << endl;
-//   fileStream << "</VTKFile>" << endl;
-// }
-
-// //***********************************************************************
-
-// void OutputXML::ecritFichierParallelXML(Mesh *mesh, vector<Cell*>* cellsLvl)
-// {
-//   ofstream fileStream;
-//   stringstream num;
-
-//   bool parallel(true);
-
-//   try {
-//     //Preparation AMR
-//     for (int lvl = 0; lvl <= mesh->getLvlMax(); lvl++) {
-
-//       //1) Ouverture / creation file
-//       //-------------------------------
-//       if (!m_splitData) {
-//         if (!m_writeBinary) { num << m_folderDatasets << "/result_" << m_numFichier; }
-//         else { num << m_folderDatasets << "/resultB64_" << m_numFichier; }
-//         num << "_lvl" << lvl;
-//       }
-//       else { throw ErrorECOGEN("Output::ecritFichierParallelXML : donnees Separees non prevu", __FILE__, __LINE__); }
-//       switch (mesh->getType()) {
-//       case REC:
-//         num << ".pvtr"; break;
-//       case UNS:
-//         num << ".pvtu"; break;
-//       case AMR:
-//         num << ".pvtu"; break;
-//         //num << ".pvtp"; break;
-//       default:
-//         throw ErrorECOGEN("Output::ecritFichierParallelXML : type mesh inconnu", __FILE__, __LINE__); break;
-//       }
-
-//       fileStream.open((num.str()).c_str(), ios::trunc);
-//       if (!fileStream) { throw ErrorECOGEN("Impossible d ouvrir le file " + num.str(), __FILE__, __LINE__); }
-//       fileStream << "<?xml version=\"1.0\"?>" << endl;
-
-//       //2) Ecriture des infos mesh
-//       //------------------------------
-//       switch (mesh->getType()) {
-//       case REC:
-//         ecritMeshRectilinearXML(mesh, fileStream, parallel); break;
-//       case UNS:
-//         ecritMeshUnstructuredXML(mesh, cellsLvl, fileStream, lvl, parallel); break;
-//       case AMR:
-//         ecritMeshUnstructuredXML(mesh, cellsLvl, fileStream, lvl, parallel); break;
-//         //ecritMeshPolyDataXML(mesh, cellsLvl, fileStream, lvl, parallel); break;
-//       default:
-//         throw ErrorECOGEN("Output::writeResultsXML : type mesh inconnu", __FILE__, __LINE__); break;
-//       }
-
-//       //3) Ecriture des donnees phases fluids
-//       //-------------------------------------
-//       ecritDonneesPhysiquesXML(mesh, cellsLvl, fileStream, lvl, parallel);
-
-//       //4) Ecriture des name des fichiers
-//       //--------------------------------
-//       for (int p = 0; p < Ncpu; p++)
-//       {
-//         stringstream fichTemp;
-//         if (m_writeBinary) { fichTemp << "resultB64_"; }
-//         else { fichTemp << "result_"; }
-//         //fichTemp << m_numFichier << "_lvl" << lvl << "_CPU" << rank;
-//         fichTemp << "CPU" << rankCpu << "_lvl" << lvl << "_" << m_numFichier;
-
-//         switch (mesh->getType()) {
-//         case REC:
-//           fichTemp << ".vtr";
-//           fileStream << "    <Piece Extent=\"" << mesh->recupereChaineExtent() << "\" Source=\"" << fichTemp.str() << "\"/>" << endl;
-//           break;
-//         case UNS:
-//           fichTemp << ".vtu";
-//           fileStream << "    <Piece Source=\"" << fichTemp.str() << "\"/>" << endl;
-//           break;
-//         case AMR:
-//           fichTemp << ".vtu";
-//           //fichTemp << ".vtp";
-//           fileStream << "    <Piece Source=\"" << fichTemp.str() << "\"/>" << endl;
-//           break;
-//         default:
-//           throw ErrorECOGEN("Output::writeResultsXML : type mesh inconnu", __FILE__, __LINE__); break;
-//         }
-//       }
-
-//       //5) Finalisation file
-//       //-----------------------
-//       switch (mesh->getType()) {
-//       case REC:
-//         ecritFinFichierRectilinearXML(fileStream, parallel); break;
-//       case UNS:
-//         ecritFinFichierUnstructuredXML(fileStream, parallel); break;
-//       case AMR:
-//         ecritFinFichierUnstructuredXML(fileStream, parallel); break;
-//         //ecritFinFichierPolyDataXML(fileStream, parallel); break;
-//       default:
-//         throw ErrorECOGEN("Output::writeResultsXML : type mesh inconnu", __FILE__, __LINE__); break;
-//       }
-//       fileStream.close();
-
-//     }
-
-//   } //Fin try
-//   catch (ErrorECOGEN &) { throw; }
-// }
 
 //***********************************************************************

@@ -1,0 +1,6 @@
+<?xml version = "1.0" encoding = "UTF-8" standalone = "yes"?>
+<model>
+	<flowModel name="Euler" numberTransports="1"/>
+	<EOS name="IG_air.xml"/>
+	<transport name="transport"/>
+</model>

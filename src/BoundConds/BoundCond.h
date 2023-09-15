@@ -32,7 +32,7 @@
 #define BOUNDCOND_H
 
 #include "../Order1/CellInterface.h"
-#include "../Order2/CellInterfaceO2.h" //Ajouter pour l'AMR, a priori ne pose pas de probleme
+#include "../Order2/CellInterfaceO2Cartesian.h" //Add for AMR, a priori does not pose a problem
 #include "../libTierces/tinyxml2.h"
 #include "../Errors.h"
 #include "../Tools.h"
@@ -63,6 +63,8 @@ class BoundCond : public CellInterface
     virtual const int& getNumPhys() const { return m_numPhysique; };
     virtual double getBoundData(VarBoundary var) const;
     virtual double getBoundaryHeatQuantity() const { Errors::errorMessage("getBoundaryHeatQuantity not available for boundary used"); return 0.; }
+
+    virtual void checkMrfInterface(Source* /*sourceMRF*/) {};
 
     //Pour methode AMR
     virtual void computeXi(const double& /*criteriaVar*/, const bool& /*varRho*/, const bool& /*varP*/, const bool& /*varU*/, const bool& /*varAlpha*/) {};

@@ -58,8 +58,8 @@ void APEConductivity::solveFluxAddPhys(CellInterface* cellInterface)
   m_binormal = cellInterface->getFace()->getBinormal();
 
   // Copy and projection on orientation axis attached to the edge of gradients of left and right cells
-  m_gradTLeft = cellInterface->getCellGauche()->getQPA(m_numQPA)->getGrad(0);
-  m_gradTRight = cellInterface->getCellDroite()->getQPA(m_numQPA)->getGrad(0);
+  m_gradTLeft = cellInterface->getCellLeft()->getQPA(m_numQPA)->getGrad(0);
+  m_gradTRight = cellInterface->getCellRight()->getQPA(m_numQPA)->getGrad(0);
 
   m_gradTLeft.localProjection(m_normal, m_tangent, m_binormal);
   m_gradTRight.localProjection(m_normal, m_tangent, m_binormal);
@@ -79,7 +79,7 @@ void APEConductivity::solveFluxAddPhysBoundary(CellInterface* cellInterface)
   m_binormal = cellInterface->getFace()->getBinormal();
 
   // Copy and projection on orientation axes attached to the edge of gradients of left and right cells
-  m_gradTLeft = cellInterface->getCellGauche()->getQPA(m_numQPA)->getGrad(0);
+  m_gradTLeft = cellInterface->getCellLeft()->getQPA(m_numQPA)->getGrad(0);
   m_gradTLeft.localProjection(m_normal, m_tangent, m_binormal);
 
   int typeCellInterface(cellInterface->whoAmI());
@@ -133,11 +133,11 @@ void APEConductivity::solveFluxConductivityNonReflecting(const Coord& gradTLeft)
 void APEConductivity::solveFluxConductivityWallImposedTemp(CellInterface *cellInterface)
 {
   // Retrieve local temperatures
-  double temperatureLeft(cellInterface->getCellGauche()->getPhase(0)->getTemperature());
+  double temperatureLeft(cellInterface->getCellLeft()->getPhase(0)->getTemperature());
   double tempWall(cellInterface->getBoundaryHeatQuantity());
 
   // Distances cell center/cell interface
-  double distLeft(cellInterface->getCellGauche()->distance(cellInterface));
+  double distLeft(cellInterface->getCellLeft()->distance(cellInterface));
 
   // Compute the temperature gradient locally
   double dTdx((tempWall - temperatureLeft) / distLeft);
@@ -175,7 +175,7 @@ void APEConductivity::solveFluxConductivityOther() const
 
 void APEConductivity::communicationsAddPhys(const int& dim, const int& lvl)
 {
-  parallel.communicationsVector(QPA, dim, lvl, m_numQPA, 0); //m_gradT
+  parallel.communicationsVector(Variable::QPA, dim, lvl, m_numQPA, 0); //m_gradT
 }
 
 //***********************************************************************

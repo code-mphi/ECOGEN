@@ -40,7 +40,7 @@ Face::~Face(){}
 
 //***********************************************************************
 
-Coord Face::vecteur(Element *e)
+Coord Face::vector(Element *e)
 {
   Coord vec;
   vec.setFromSubtractedVectors(m_position, e->getPosition());

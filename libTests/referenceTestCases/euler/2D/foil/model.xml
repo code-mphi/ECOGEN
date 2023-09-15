@@ -1,0 +1,7 @@
+<?xml version = "1.0" encoding = "UTF-8" standalone = "yes"?>
+<model>
+  <flowModel name="Euler"/>
+  <lowMach state="false"/>
+  <EOS name="SG_waterLiq_278_318K.xml"/>
+  <additionalPhysic type="viscosity"/>
+</model>

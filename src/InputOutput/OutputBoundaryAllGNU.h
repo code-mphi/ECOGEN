@@ -39,8 +39,6 @@ public:
   OutputBoundaryAllGNU(std::string casTest, std::string run, tinyxml2::XMLElement* element, std::string fileName, Input* entree);
   virtual ~OutputBoundaryAllGNU();
 
-  void computeOutwardNormal(CellInterface* bound, double &nx, double &ny, double &nz);
-
   // Virtual methods
   virtual void initializeSpecificOutputBound();
   virtual void writeResults(std::vector<CellInterface*>* cellInterfacesLvl);

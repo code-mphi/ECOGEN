@@ -53,8 +53,8 @@ enum TypeData { FLOAT, DOUBLE, INT, CHAR };
 //! \brief     Enumeration for the type of geometric object (VERTEX, LINE, PLAN)
 enum TypeGO { VERTEX, LINE, PLAN };
 
-//! \brief     Enumeration for the type of boundary (INJ, NONREFLECTING, OUTFLOW, SUBINJ, SYMMETRY, TANK, WALL, NULLFLUX)
-enum TypeBC { INJ = 4, NONREFLECTING = 1, OUTFLOW = 3, SUBINJ = 7, SYMMETRY = 6, TANK = 5, WALL = 2, NULLFLUX = 8 };
+//! \brief     Enumeration for the type of boundary
+enum TypeBC { NONREFLECTING = 1, WALL = 2, OUTLETPRESSURE = 3, INLETINJSTAGSTATE = 4, INLETTANK = 5, SYMMETRY = 6, INLETINJTEMP = 7, NULLFLUX = 8, OUTLETMASSFLOW = 9, PISTON = 10 };
 
 //! \brief     Enumeration for the variable to extract on a boundary
 enum VarBoundary { p, rho, velU, velV, velW, SIZE = (velW+1) };
@@ -67,6 +67,16 @@ enum TypeRelax { P = 1, PT = 2, PTMU = 3 };
 
 //! \brief     Enumeration for the gradient method (Finite-Difference (FD), Green-Gauss (GG))
 enum TypeGrad { FD, GG };
+
+//! \brief     Enumeration for the phase index of a liquid/vapor couple
+enum PhaseType { LIQ = 0, VAP = 1 };
+
+//! \brief     Enumeration for the type of second order limiter (NS only)
+enum LimiterType { NONE = 0, MINMOD = 1, SUPERBEE = 2 };
+
+//! \brief     Enumeration for the flow variables
+enum class Variable { transport, pressure, density, alpha, velocityMag, velocityU, velocityV, velocityW, temperature, QPA, lambda,
+                      cobaseXX, cobaseXY, cobaseXZ, cobaseYX, cobaseYY, cobaseYZ, cobaseZX, cobaseZY, cobaseZZ };
 
 //! \brief     Template for the type of the mesh container (std::list for now, but may change to something else if wanted)
 template<class Type>
@@ -84,8 +94,9 @@ class Tools
   public:
     //! \brief     Generic model constructor
     //! \param     numbPhases         number of phases
+    //! \param     numbSolids         number of solid phases
     //! \param     numberTransports   number of additional transport equations
-    Tools(const int& numbPhases, const int& numbTransports);
+    Tools(const int& numbPhases, const int& numbSolids, const int& numbTransports);
     ~Tools();
 
     //! \brief     Modify the string of characters to uppercase it
@@ -124,12 +135,19 @@ class Tools
     Eos** eos;
     double* Hk0;
     double* Yk0;
+    double* compactionPk;      //!< Compaction pressure, one for each phase
+    double* dlambda;           //!< Plastic compaction term, one for each phase
+    Tensor* dplast;            //!< Plastic shear term, one for each phase
+    bool* alphaNull;           //!< Parameter to know if we consider the volume fraction as null or not
+    bool* relaxSolidPlast;     //!< Parameter to know if we need the solid plastic relaxation
 
     static double uselessDouble;
+    double physicalTime;       //!< Current physical time
 };
 
 extern Tools *TB;
 extern int numberPhases;
+extern int numberSolids;
 extern int numberTransports;
 
 

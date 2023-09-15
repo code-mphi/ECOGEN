@@ -52,7 +52,7 @@ public:
   const Coord& getPos() const { return m_position; };
 
   virtual void setSurface(const double& /*surface*/){ Errors::errorMessage("setSurface not available for requested face"); };
-  virtual void initializeAutres(const double& /*surface*/, const Coord& /*normal*/, const Coord& /*tangent*/, const Coord& /*binormal*/){ Errors::errorMessage("initializeAutres not available for requested face"); }
+  virtual void initializeOthers(const double& /*surface*/, const Coord& /*normal*/, const Coord& /*tangent*/, const Coord& /*binormal*/){ Errors::errorMessage("initializeOthers not available for requested face"); }
   virtual void setPos(const double& /*X*/, const double& /*Y*/, const double& /*Z*/) { Errors::errorMessage("setPos not available for requested face"); };
   virtual void setNormal(const double& /*X*/, const double& /*Y*/, const double& /*Z*/) { Errors::errorMessage("setNormal not available for requested face"); };
   virtual void setTangent(const double& /*X*/, const double& /*Y*/, const double& /*Z*/) { Errors::errorMessage("setTangent not available for requested face"); };
@@ -60,7 +60,7 @@ public:
   virtual void setSize(const double& /*sizeX*/, const double& /*sizeY*/, const double& /*sizeZ*/) { Errors::errorMessage("setSize not available for requested face"); };
   virtual void setSize(const Coord& /*size*/) { Errors::errorMessage("setSize not available for requested face"); };
 
-  Coord vecteur(Element* e);   /*!< Cree vecteur entre center face et center d un element */
+  Coord vector(Element* e);   /*!< Cree vector entre center face et center d un element */
   double distance(Element* e); /*!< Calcul de la distance a un center d element */
 
   virtual void printInfo() const{ Errors::errorMessage("AfficheInfos not available for requested face"); };

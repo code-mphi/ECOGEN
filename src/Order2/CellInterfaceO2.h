@@ -33,77 +33,29 @@
 
 #include "../Order1/CellInterface.h"
 
-//class CellInterfaceO2; //Predeclaration de la classe CellInterfaceO2 pour pouvoir inclure CellO2.h
-//
-//#include "CellO2.h"
-
 class CellInterfaceO2 : public CellInterface
 {
   public:
-    /** Default constructor */
     CellInterfaceO2();
     CellInterfaceO2(int lvl); //Pour AMR
-    /** Default destructor */
     virtual ~CellInterfaceO2();
 
     virtual void allocateSlopes(int& allocateSlopeLocal);
-    virtual void computeSlopes(Prim type = vecPhases);
     virtual void computeFlux(double& dtMax, Limiter& globalLimiter, Limiter& interfaceLimiter, Limiter& globalVolumeFractionLimiter, Limiter& interfaceVolumeFractionLimiter, Prim type = vecPhases);
-    void solveRiemann(double& ondeMax, Limiter& globalLimiter, Limiter& interfaceLimiter, Limiter& globalVolumeFractionLimiter, Limiter& interfaceVolumeFractionLimiter, Prim type = vecPhases); /*!< probleme de Riemann special ordre 2 */
+    /*!< Specific Riemann problem for 2nd order */
+    virtual void solveRiemann(double& /*dtMax*/, Limiter& /*globalLimiter*/, Limiter& /*interfaceLimiter*/, Limiter& /*globalVolumeFractionLimiter*/, Limiter& /*interfaceVolumeFractionLimiter*/, Prim /*type*/ = vecPhases) = 0;
 
-    //Accesseurs
-    virtual Phase* getSlopesPhase(const int& phaseNumber) const;
-    virtual Mixture* getSlopesMixture() const;
-    virtual Transport* getSlopesTransport(const int& numberTransport) const;
-    //virtual Cell* getB(BO2 B) const;
-    //virtual double getBeta(betaO2 beta) const;
-    //virtual double getDistanceH(distanceHO2 dist) const;
-    //virtual void setB(BO2 B, Cell* cell);
-    //void setBeta(betaO2 beta, double& value);
-    //virtual void setDistanceH(distanceHO2 dist, double& value);
+    // -- Cartesian --
+    virtual void computeSlopes(Prim /*type*/ = vecPhases) {};
 
-    //Pour methode AMR
-    virtual void creerCellInterfaceChild();                                                                        /*!< Creer un child cell interface (non initialize) */
-    virtual void creerCellInterfaceChildInterne(const int& lvl, std::vector<CellInterface*>* childrenInternalCellInterfaces); /*!< Creer un intern child cell interface (non initialize) */
+    //Accessors
+    virtual Phase* getSlopesPhase(const int& /*phaseNumber*/) const { return nullptr; };
+    virtual Mixture* getSlopesMixture() const { return nullptr; };
+    virtual Transport* getSlopesTransport(const int& /*numberTransport*/) const { return nullptr; };
 
-   protected:
-     Phase** m_vecPhasesSlopes;         /*!< vecteur des slopes des phases */
-     Mixture* m_mixtureSlopes;          /*!< vecteur des slopes de mixture */
-     Transport* m_vecTransportsSlopes;	/*!< vecteur des slopes des transports */
-
-     //Stockage methode multislopes
-     //Cell* m_BG1M; /*!< pointeurs vers cells Arrieres a gauche pour secondOrder  */
-     //Cell* m_BG2M;
-     //Cell* m_BG3M;
-     //Cell* m_BG1P; /*!< pointeurs vers cells Avants a gauche pour secondOrder  */
-     //Cell* m_BG2P;
-     //Cell* m_BG3P;
-     //Cell* m_BD1M; /*!< pointeurs vers cells Arrieres a droite pour secondOrder  */
-     //Cell* m_BD2M;
-     //Cell* m_BD3M;
-     //Cell* m_BD1P; /*!< pointeurs vers cells Avants a droite pour secondOrder  */
-     //Cell* m_BD2P;
-     //Cell* m_BD3P;
-
-     //double m_betaG1M;  /*!< ponderations pour secondOrder */
-     //double m_betaG2M;
-     //double m_betaG3M;
-     //double m_betaG1P;
-     //double m_betaG2P;
-     //double m_betaG3P;
-     //double m_betaD1M;
-     //double m_betaD2M;
-     //double m_betaD3M;
-     //double m_betaD1P;
-     //double m_betaD2P;
-     //double m_betaD3P;
-
-     //double m_distanceHGM;  /*!< distances au vertex geometrique pour le compute des slopes */
-     //double m_distanceHGP;
-     //double m_distanceHDM;
-     //double m_distanceHDP;
-
-   private:
+    //For AMR method
+    virtual void creerCellInterfaceChild() {}; /*!< Creer un child cell interface (non initialize) */
+    virtual void creerCellInterfaceChildInterne(const int& /*lvl*/, std::vector<CellInterface*>* /*childrenInternalCellInterfaces*/) {}; /*!< Creer un intern child cell interface (non initialize) */
 };
 
 extern Phase** slopesPhasesLocal1;

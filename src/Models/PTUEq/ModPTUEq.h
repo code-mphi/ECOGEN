@@ -50,6 +50,8 @@ class ModPTUEq : public Model
     virtual void allocateCons(Flux** cons);
     virtual void allocatePhase(Phase** phase);
     virtual void allocateMixture(Mixture** mixture);
+    virtual void allocatePhaseGradient(GradPhase** phase);
+    virtual void allocateMixtureGradient(GradMixture** mixture);
 
     virtual void fulfillState(Phase** phases, Mixture* mixture);
 
@@ -63,13 +65,20 @@ class ModPTUEq : public Model
     //----------------------------
     virtual void solveRiemannIntern(Cell& cellLeft, Cell& cellRight, const double& dxLeft, const double& dxRight, double& dtMax, std::vector<double> &boundData = DEFAULT_VEC_INTERFACE_DATA) const; // Riemann between two computed cells
     virtual void solveRiemannWall(Cell& cellLeft, const double& dxLeft, double& dtMax, std::vector<double>& boundData) const; // Riemann between left cell and wall
-    virtual void solveRiemannTank(Cell& cellLeft, const double& dxLeft, double& dtMax, const double* ak0, const double* rhok0, const double& p0, const double& T0, std::vector<double> &boundData) const; // Riemann for tank
-    virtual void solveRiemannOutflow(Cell& cellLeft, const double& dxLeft, double& dtMax, const double p0, std::vector<double> &boundData) const; // Riemann for outflow with imposed pressure
+    virtual void solveRiemannInletTank(Cell& cellLeft, const double& dxLeft, double& dtMax, const double* ak0, const double* rhok0, const double& p0, const double& T0, std::vector<double> &boundData) const; // Riemann for tank
+    virtual void solveRiemannOutletPressure(Cell& cellLeft, const double& dxLeft, double& dtMax, const double p0, std::vector<double> &boundData) const; // Riemann for outflow with imposed pressure
 
     virtual void reverseProjection(const Coord normal, const Coord tangent, const Coord binormal) const;
 
     //Accessors
     //---------
+    //! \brief  Select a specific scalar variable
+    //! \param  phases         phases array variables
+    //! \param  mixture        mixture variables
+    //! \param  vecTransports  vector of transport variables
+    //! \param  nameVariables  Name of the variable to select
+    //! \param  numPhases      Phases number's
+    virtual double selectScalar(Phase** phases, Mixture* mixture, Transport* transports, Variable nameVariable, int num = 0) const;
     virtual const double& getSM();
     virtual const Coord& getVelocity(const Cell* cell) const { return cell->getMixture()->getVelocity(); };
     virtual Coord& getVelocity(Cell* cell) { return cell->getMixture()->getVelocity(); };

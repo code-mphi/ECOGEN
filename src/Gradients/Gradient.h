@@ -45,22 +45,13 @@ class Gradient
 
     Gradient();
     virtual ~Gradient();
-    
-    //! \brief  Compute gradient coord (only used to compute density gradient)
-    //! \param  cell           Cell whose gradient must be calculated
-    //! \param  nameVariables  Name of the variable for which the gradient is calculated
-    //! \param  numPhase       Phase number
-    virtual Coord computeGradient(Cell* /*cell*/, Variable /*nameVariable*/, int /*numPhase*/ = -1) { 
-      Errors::errorMessage("computeGradient not available for required gradient method");
-      return Coord::defaultCoord;
-    };
 
-    //! \brief  Compute gradients (temperature, velocity, density) of a cell
+    //! \brief  Compute gradients of a cell
     //! \param  cell           Cell whose gradient must be calculated
     //! \param  grads          Array of desired gradients, e.g. for temperature each component represents phase temperature and for velocity each component represents the gradient of a velocity component (grad(u), grad(v), grad(w))
     //! \param  nameVariables  Name of the variable for which the gradient is calculated
     //! \param  numPhases      Phase numbers
-    virtual void computeGradient(Cell* /*cell*/, std::vector<Coord>& /*grads*/, std::vector<Variable>& /*nameVariables*/, std::vector<int>& /*numPhases*/) { 
+    virtual void computeGradients(Cell* /*cell*/, std::vector<Coord>& /*grads*/, const std::vector<Variable>& /*nameVariables*/, const std::vector<int>& /*numPhases*/) { 
       Errors::errorMessage("computeGradient not available for required gradient method"); 
     };
 

@@ -95,7 +95,7 @@ void OutputProbeGNU::locateProbeInMesh(const TypeMeshContainer<Cell*>& cells, co
   double minimumDistance(1.e12), distance;
   for (int i = 0; i < nbCells; i++) {
     distance = m_objet->distancePoint(cells[i]->getPosition());
-    if (distance < minimumDistance) {
+    if (distance < minimumDistance && !cells[i]->getWall()) {
       minimumDistance = distance;
       m_cell = cells[i];
       if (distance <= cells[i]->getElement()->getLCFL()) break;
@@ -153,7 +153,7 @@ Cell* OutputProbeGNU::locateProbeInAMRSubMesh(std::vector<Cell*>* cells, const i
 void OutputProbeGNU::initializeSpecificOutput()
 {
   //settings
-  m_nextAcq = 0.;
+  m_nextAcq = m_run->m_physicalTime;
 
   //Locate probe in mesh
   locateProbeInMesh(m_run->m_cellsLvl[0], m_run->m_mesh->getNumberCells());
@@ -173,7 +173,7 @@ void OutputProbeGNU::initializeSpecificOutput()
       fileStream.close();
 
       //Gnuplot script printing for visualization
-      ecritScriptGnuplot(0);
+      writeScriptGnuplot(0);
     }
   }
   catch (ErrorECOGEN &) { throw; }

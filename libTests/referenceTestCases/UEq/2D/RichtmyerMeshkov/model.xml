@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='UTF-8' standalone='yes'?>
+<model>
+    <flowModel name="VelocityEq" numberPhases="2" alphaNull="false"/>
+    <EOS name="SG_water.xml"/>
+    <EOS name="IG_gaz1.xml"/>
+    <relaxation type="P" speed="finite" rate="1.e-2" solver="euler"/>
+</model>

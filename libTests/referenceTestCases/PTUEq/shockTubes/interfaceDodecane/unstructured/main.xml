@@ -1,0 +1,16 @@
+<?xml version = "1.0" encoding = "UTF-8" standalone = "yes"?>
+<computationParam>
+	<run>temperaturePressureVelocityEq1DShockTubeInterfaceDodecaneUnstructured</run>
+	<outputMode format="XML" binary="false"/>
+	<timeControlMode iterations="false">
+		<iterations number="100" iterFreq="10"/>
+		<physicalTime totalTime="4.e-4" timeFreq="4.e-4"/>
+	</timeControlMode>
+	<computationControl CFL="0.8"/>
+	<!-- <secondOrder>
+		<globalLimiter>minmod</globalLimiter>
+	</secondOrder> -->
+  <gradient>
+  <method>green-gauss</method>
+</gradient>
+</computationParam>

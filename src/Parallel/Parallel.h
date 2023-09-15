@@ -48,6 +48,8 @@ public:
   void addElementToReceive(int neighbour, Cell* cell);
   void addSlopesToSend(int neighbour);
   void addSlopesToReceive(int neighbour);
+  void deleteSlopesToSend(int neighbour);
+  void deleteSlopesToReceive(int neighbour);
   void clearElementsAndSlopesToSendAndReceivePLusNeighbour();
   TypeMeshContainer<Cell*>& getElementsToSend(int neighbour);
   TypeMeshContainer<Cell*>& getElementsToReceive(int neighbour);
@@ -78,7 +80,7 @@ public:
   void finalizePersistentCommunicationsVector(const int& lvlMax);
   void communicationsVector(Variable nameVector, const int& dim, int lvl, int num = 0, int index = -1);
 
-  //Methodes pour toutes les variables primitives
+  //Methodes pour toutes les variables transports
   void initializePersistentCommunicationsTransports();
   void finalizePersistentCommunicationsTransports(const int& lvlMax);
   void communicationsTransports(int lvl);

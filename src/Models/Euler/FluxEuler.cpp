@@ -85,6 +85,24 @@ void FluxEuler::multiply(double scalar)
 
 //***********************************************************************
 
+void FluxEuler::addFluxRotatingRegion(double coefA)
+{
+  m_mass += coefA*static_cast<FluxEuler*> (fluxBuffMRF)->m_mass;
+  m_momentum += coefA*static_cast<FluxEuler*> (fluxBuffMRF)->m_momentum;
+  m_energ += coefA*static_cast<FluxEuler*> (fluxBuffMRF)->m_energ;
+}
+
+//***********************************************************************
+
+void FluxEuler::subtractFluxRotatingRegion(double coefA)
+{
+  m_mass -= coefA*static_cast<FluxEuler*> (fluxBuffMRF)->m_mass;
+  m_momentum -= coefA*static_cast<FluxEuler*> (fluxBuffMRF)->m_momentum;
+  m_energ -= coefA*static_cast<FluxEuler*> (fluxBuffMRF)->m_energ;
+}
+
+//***********************************************************************
+
 void FluxEuler::setBufferFlux(Cell& cell)
 {
   static_cast<FluxEuler*> (fluxBuff)->buildCons(cell.getPhases(), cell.getMixture());

@@ -58,19 +58,19 @@ void MUSGmshV2::initGeometryMonoCPU(TypeMeshContainer<Cell*>& cells, TypeMeshCon
     {
       m_numberCellsCalcul = m_numberElements1D;
       m_numberBoundFaces = m_numberElements0D;
-      m_geometrie = 1;
+      m_problemDimension = 1;
     }
     else if (m_numberElements3D == 0) // 2D case
     {
       m_numberCellsCalcul = m_numberElements2D;
       m_numberBoundFaces = m_numberElements1D;
-      m_geometrie = 2;
+      m_problemDimension = 2;
     }
     else // 3D case
     {
       m_numberCellsCalcul = m_numberElements3D;
       m_numberBoundFaces = m_numberElements2D;
-      m_geometrie = 3;
+      m_problemDimension = 3;
     }
     m_numberCellsTotal = m_numberCellsCalcul;
 
@@ -95,7 +95,7 @@ void MUSGmshV2::initGeometryMonoCPU(TypeMeshContainer<Cell*>& cells, TypeMeshCon
     for (int i = 0; i < m_numberCellsCalcul; i++)
     {
       if (computeOrder == "FIRSTORDER") { cells.push_back(new Cell); }
-      else { cells.push_back(new CellO2); }
+      else { cells.push_back(new CellO2NS); }
       cells[i]->setElement(m_elements[i + m_numberBoundFaces], i);
       m_numberInnerFaces += m_elements[i + m_numberBoundFaces]->getNumberFaces();
     }
@@ -109,22 +109,22 @@ void MUSGmshV2::initGeometryMonoCPU(TypeMeshContainer<Cell*>& cells, TypeMeshCon
       //std::cout << "el " << i + m_numberBoundFaces << " : " ;
       //std::vector<ElementNS *> neighbors; // Temporary vector of neighbors
       //1) Building vector of neighbors
-      for (int n = 0; n < e->getNumberNoeuds(); n++) { // Node loop of element e
-        int numNoeud = e->getNumNoeud(n);
-        for (unsigned int v = 0; v < neighborNodes[numNoeud].size(); v++) { // Loop neighborNodes of node n
+      for (int n = 0; n < e->getNumberNodes(); n++) { // Node loop of element e
+        int numNode = e->getNumNode(n);
+        for (unsigned int v = 0; v < neighborNodes[numNode].size(); v++) { // Loop neighborNodes of node n
           bool add(true);
-          if (neighborNodes[numNoeud][v]->getIndex() == e->getIndex()) add = false;
-          //else if(neighborNodes[numNoeud][v]->getIndex() < m_numberBoundFaces) add = false;
+          if (neighborNodes[numNode][v]->getIndex() == e->getIndex()) add = false;
+          //else if(neighborNodes[numNode][v]->getIndex() < m_numberBoundFaces) add = false;
           else {
             for (unsigned int vo = 0; vo < neighbors[i].size(); vo++) {
-              if (neighborNodes[numNoeud][v]->getIndex() == neighbors[i][vo]->getIndex()) {
+              if (neighborNodes[numNode][v]->getIndex() == neighbors[i][vo]->getIndex()) {
                 add = false; break;
               }
             }
           }
           if (add) {
-            neighbors[i].push_back(neighborNodes[numNoeud][v]);
-            //std::cout << neighborNodes[numNoeud][v]->getIndex() << " ";
+            neighbors[i].push_back(neighborNodes[numNode][v]);
+            //std::cout << neighborNodes[numNode][v]->getIndex() << " ";
           }
         }
       }
@@ -198,7 +198,7 @@ void MUSGmshV2::initGeometryMonoCPU(TypeMeshContainer<Cell*>& cells, TypeMeshCon
     // Link Geometry/cellInterfaces of compute
     std::cout << "  3/Linking Geometries -> Physics ..." << std::endl;
     tTemp = clock();
-    int iMailleG, iMailleD;
+    int iCellL, iCellR;
     for (int i = 0; i < m_numberFacesTotal; i++)
     {
       if (m_faces[i]->getEstLimite()) // Physical boundary faces
@@ -207,377 +207,22 @@ void MUSGmshV2::initGeometryMonoCPU(TypeMeshContainer<Cell*>& cells, TypeMeshCon
         if (appPhys >= static_cast<int>(m_bound.size()) || appPhys < 0) { Errors::errorMessage("Number of boundary conditions not suited"); }
         m_bound[appPhys]->createBoundary(cellInterfaces);
         cellInterfaces[i]->setFace(m_faces[i]);
-        iMailleG = m_faces[i]->getElementGauche()->getIndex() - m_numberBoundFaces;
-        iMailleD = iMailleG;
-        cells[iMailleG]->addCellInterface(cellInterfaces[i]);
+        iCellL = m_faces[i]->getElementGauche()->getIndex() - m_numberBoundFaces;
+        iCellR = iCellL;
+        cells[iCellL]->addCellInterface(cellInterfaces[i]);
       }
       // Inner faces of domain
       else
       {
         if (computeOrder == "FIRSTORDER") { cellInterfaces.push_back(new CellInterface); }
-        else { cellInterfaces.push_back(new CellInterfaceO2); }
+        else { cellInterfaces.push_back(new CellInterfaceO2NS); }
         cellInterfaces[i]->setFace(m_faces[i]);
-        iMailleG = m_faces[i]->getElementGauche()->getIndex() - m_numberBoundFaces;
-        iMailleD = m_faces[i]->getElementDroite()->getIndex() - m_numberBoundFaces;
-        cells[iMailleG]->addCellInterface(cellInterfaces[i]);
-        cells[iMailleD]->addCellInterface(cellInterfaces[i]);
+        iCellL = m_faces[i]->getElementGauche()->getIndex() - m_numberBoundFaces;
+        iCellR = m_faces[i]->getElementDroite()->getIndex() - m_numberBoundFaces;
+        cells[iCellL]->addCellInterface(cellInterfaces[i]);
+        cells[iCellR]->addCellInterface(cellInterfaces[i]);
       }
-      cellInterfaces[i]->initialize(cells[iMailleG], cells[iMailleD]);
-
-      //-------------Ici il faut trouver les mailles voisines pour le compute ordre 2 multislopes ------------
-      if (computeOrder != "FIRSTORDER") {
-
-        //GAUCHE) Recherche des mailles a gauche
-        //**************************************
-        //ElementNS *eG(m_faces[i]->getElementGauche()); //Element a gauche
-        //int index(eG->getIndex() - m_numberBoundFaces);
-
-
-        //MeshUnStruct::rechercheElementsArrieres(eG,m_faces[i], cellInterfaces[i], neighbors[index], *cells);
-        //MeshUnStruct::rechercheElementsAvants(eG, m_faces[i], cellInterfaces[i], neighbors[index], *cells);
-        //
-        //
-        ////A enlever a terme...
-        //double cos(0.),a,b,beta1,beta2;
-        //ElementNS *eT;
-        //Coord vG = eG->vecteur(m_faces[i]);
-        //Coord MB1, MB2, MB;
-
-
-
-        //Coord vG = eG->vecteur(m_faces[i]);
-        //ElementNS *eT; //Element a tester
-        ////1) Recherche du premier element arriere gauche BG1M
-        ////---------------------------------------------------
-        //double cos(0.);
-        //for (unsigned int v = 0; v < neighbors[index].size(); v++) {
-        //  eT = neighbors[index][v];
-        //  Coord vT = eT->vecteur(eG);
-        //  double cosTemp(Coord::cos(vT, vG));
-        //  if (cosTemp >= cos) {
-        //    cos = cosTemp;
-        //    if (eT->getIndex() < m_numberBoundFaces) { //Si c est une limite on remet BG1M a NULL
-        //      cellInterfaces[i]->setB(BG1M, 0);
-        //    }
-        //    else { //Sinon on met a jour avec la maille la plus loin
-        //      Cell* c(cells[eT->getNumCellAssociee()]);
-        //      cellInterfaces[i]->setB(BG1M, c);
-        //    }
-        //  }
-        //}
-        ////2) Recherche du second element arriere gauche BG2M
-        ////---------------------------------------------------
-        //cos = 0.;
-        //if (cellInterfaces[i]->getB(BG1M) != 0) {  //Cas non cellInterface
-        //  Element *e1(cellInterfaces[i]->getB(BG1M)->getElement());
-        //  Coord v1 = e1->vecteur(eG);
-        //  Coord sin1(Coord::sin(v1, vG));
-        //  if (std::fabs(sin1.norm()) <= 1e-8) {
-        //    cellInterfaces[i]->setB(BG2M, cellInterfaces[i]->getB(BG1M)); // Si le cos est nul, meme cell pour B1 et B2
-        //  }
-        //  else {
-        //    for (unsigned int v = 0; v < neighbors[index].size(); v++) {
-        //      eT = neighbors[index][v];
-        //      if (eT == e1) continue; // voisin suivant si voisin deja utilise 
-        //      Coord vT = eT->vecteur(eG);
-        //      Coord sinTemp(Coord::sin(vT, vG));
-
-        //      if (sinTemp.scalar(sin1) <= 0.) {
-        //        double cosTemp(Coord::cos(vT, vG));
-        //        if (cosTemp >= cos) {
-        //          cos = cosTemp;
-        //          if (eT->getIndex() < m_numberBoundFaces) { //Si c est une limite on remet BG1M a NULL
-        //            cellInterfaces[i]->setB(BG2M, 0);
-        //          }
-        //          else {  //Sinon on met a jour avec la 2 eme maille la plus loin
-        //            Cell* c(cells[eT->getNumCellAssociee()]);
-        //            cellInterfaces[i]->setB(BG2M, c);
-        //          }
-        //        }
-        //      } //fin sin*sin <0
-        //    }  //fin boucle neighbors
-        //  } //fin if 
-        //} //Fin if cellInterface
-
-        ////Determination des ponderations arrieres
-        //Coord MB1; if (cellInterfaces[i]->getB(BG1M) != 0) { MB1.setFromSubtractedVectors(m_faces[i]->getPos(), cellInterfaces[i]->getB(BG1M)->getPosition()); }
-        //Coord MB2; if (cellInterfaces[i]->getB(BG2M) != 0) { MB2.setFromSubtractedVectors(m_faces[i]->getPos(), cellInterfaces[i]->getB(BG2M)->getPosition()); }
-        //Coord MB; MB.setFromSubtractedVectors(m_faces[i]->getPos(), eG->getPosition());
-        //double a, b, beta1(1.), beta2(0.);
-        //a = (MB1.vectoriel(MB)).norm() / MB.norm();
-        //b = (MB2.vectoriel(MB)).norm() / MB.norm();
-        //if (std::fabs(a + b) > 1e-8) { beta1 = b / (a + b); beta2 = 1. - beta1; }
-        //cellInterfaces[i]->setBeta(betaG1M, beta1);
-        //cellInterfaces[i]->setBeta(betaG2M, beta2);
-        ////Calcul de la distance du vertex M (cellInterface de maille) au vertex H (barycenter)
-        //if (cellInterfaces[i]->getB(BG1M) != 0) {
-        //  cos = Coord::cos(MB, MB1);
-        //  double d, e, c;
-        //  d = cos*MB1.norm();
-        //  Coord B1B2; B1B2 = MB1 - MB2;
-        //  e = B1B2.norm()*beta1;
-        //  c = sqrt(e*e - a*a);
-        //  d += c;
-        //  cellInterfaces[i]->setDistanceH(distanceHGM, d);
-        //}
-        ////cout << eG->getIndex() << " : " << endl;
-        ////if (cellInterfaces[i]->getB(BG1M) != 0) cout << "BG1M = " << cellInterfaces[i]->getB(BG1M)->getElement()->getIndex() << " " << cellInterfaces[i]->getDistanceH(distanceHGM) << endl;
-        ////if (cellInterfaces[i]->getB(BG2M) != 0) cout << "BG2M = " << cellInterfaces[i]->getB(BG2M)->getElement()->getIndex() << " " << cellInterfaces[i]->getDistanceH(distanceHGM) << endl;
-
-        ////3) Recherche du premier element avant gauche BG1P
-        ////-------------------------------------------------
-        //cos = 0.;
-        //for (unsigned int v = 0; v < neighbors[index].size(); v++) {
-        //  eT = neighbors[index][v];
-        //  Coord vT = eT->vecteur(eG);
-        //  double cosTemp(Coord::cos(vT, vG));
-        //  if (cosTemp <= cos) {
-        //    cos = cosTemp;
-        //    if (eT->getIndex() < m_numberBoundFaces) { //Si c est une limite on remet BG1P a NULL
-        //      cellInterfaces[i]->setB(BG1P, 0);
-        //    }
-        //    else { //Sinon on met a jour avec la maille la plus loin
-        //      Cell* c(cells[eT->getNumCellAssociee()]);
-        //      cellInterfaces[i]->setB(BG1P, c);
-        //    }
-        //  }
-        //}
-        ////4) Recherche du second element avant gauche BG2P
-        ////------------------------------------------------
-        //cos = 0.;
-        //if (cellInterfaces[i]->getB(BG1P) != 0) {  //Cas non cellInterface
-        //  Element *e1(cellInterfaces[i]->getB(BG1P)->getElement());
-        //  Coord v1 = e1->vecteur(eG);
-        //  Coord sin1(Coord::sin(v1, vG));
-        //  if (std::fabs(sin1.norm()) <= 1e-8) {
-        //    cellInterfaces[i]->setB(BG2P, cellInterfaces[i]->getB(BG1P)); // Si le cos est nul, meme cell pour B1 et B2
-        //  }
-        //  else {
-        //    for (unsigned int v = 0; v < neighbors[index].size(); v++) {
-        //      eT = neighbors[index][v];
-        //      if (eT == e1) continue; // voisin suivant si voisin deja utilise 
-        //      Coord vT = eT->vecteur(eG);
-        //      Coord sinTemp(Coord::sin(vT, vG));
-
-        //      if (sinTemp.scalar(sin1) <= 0.) {
-        //        double cosTemp(Coord::cos(vT, vG));
-        //        if (cosTemp <= cos) {
-        //          cos = cosTemp;
-        //          if (eT->getIndex() < m_numberBoundFaces) { //Si c est une limite on remet BG2P a NULL
-        //            cellInterfaces[i]->setB(BG2P, 0);
-        //          }
-        //          else {  //Sinon on met a jour avec la 2 eme maille la plus loin
-        //            Cell* c(cells[eT->getNumCellAssociee()]);
-        //            cellInterfaces[i]->setB(BG2P, c);
-        //          }
-        //        }
-        //      } //fin sin*sin <0
-        //    }  //fin boucle neighbors
-        //  } //fin if 
-        //} //Fin if cellInterface
-
-        ////Determination des ponderations avant
-        //MB1 = 0.; if (cellInterfaces[i]->getB(BG1P) != 0) { MB1.setFromSubtractedVectors(cellInterfaces[i]->getB(BG1P)->getPosition(), m_faces[i]->getPos()); }
-        //MB2 = 0.; if (cellInterfaces[i]->getB(BG2P) != 0) { MB2.setFromSubtractedVectors(cellInterfaces[i]->getB(BG2P)->getPosition(), m_faces[i]->getPos()); }
-        //MB.setFromSubtractedVectors(eG->getPosition(), m_faces[i]->getPos());
-        //beta1 = 1., beta2 = 0.;
-        //a = (MB1.vectoriel(MB)).norm() / MB.norm();
-        //b = (MB2.vectoriel(MB)).norm() / MB.norm();
-        //if (std::fabs(a + b) > 1e-8) { beta1 = b / (a + b); beta2 = 1. - beta1; }
-        //cellInterfaces[i]->setBeta(betaG1P, beta1);
-        //cellInterfaces[i]->setBeta(betaG2P, beta2);
-        ////Calcul de la distance du vertex M (cellInterface de maille) au vertex H (barycenter)
-        //if (cellInterfaces[i]->getB(BG1P) != 0) {
-        //  cos = Coord::cos(MB, -1.*MB1);
-        //  double d, e, c;
-        //  d = cos*MB1.norm();
-        //  Coord B1B2; B1B2 = MB1 - MB2;
-        //  e = B1B2.norm()*beta1;
-        //  c = sqrt(e*e - a*a);
-        //  d += c;
-        //  cellInterfaces[i]->setDistanceH(distanceHGP, d);
-        //}
-        ////cout << eG->getIndex() << " : " << endl;
-        ////if (cellInterfaces[i]->getB(BG1P) != 0) cout << "BG1P = " << cellInterfaces[i]->getB(BG1P)->getElement()->getIndex() << " " << cellInterfaces[i]->getDistanceH(distanceHGP) << endl;
-        ////if (cellInterfaces[i]->getB(BG2P) != 0) cout << "BG2P = " << cellInterfaces[i]->getB(BG2P)->getElement()->getIndex() << " " << cellInterfaces[i]->getDistanceH(distanceHGP) << endl;
-
-
-        ////DROITE) Recherche des mailles a droite
-        ////**************************************
-        //ElementNS *eD(m_faces[i]->getElementDroite()); //Element a droite
-        //index = eD->getIndex() - m_numberBoundFaces;
-        //if (index >= 0) {
-        //  Coord vD = eD->vecteur(m_faces[i]);
-        //  //1) Recherche du premier element arriere droite BD1M
-        //  //---------------------------------------------------
-        //  cos = 0.;
-        //  for (unsigned int v = 0; v < neighbors[index].size(); v++) {
-        //    eT = neighbors[index][v];
-        //    Coord vT = eT->vecteur(eD);
-        //    double cosTemp(Coord::cos(vT, vD));
-        //    if (cosTemp >= cos) {
-        //      cos = cosTemp;
-        //      if (eT->getIndex() < m_numberBoundFaces) { //Si c est une limite on remet BG1M a NULL
-        //        cellInterfaces[i]->setB(BD1M, 0);
-        //      }
-        //      else { //Sinon on met a jour avec la maille la plus loin
-        //        Cell* c(cells[eT->getNumCellAssociee()]);
-        //        cellInterfaces[i]->setB(BD1M, c);
-        //      }
-        //    }
-        //  }
-        //  //2) Recherche du second element arriere droite BD2M
-        //  //---------------------------------------------------
-        //  cos = 0.;
-        //  if (cellInterfaces[i]->getB(BD1M) != 0) {  //Cas non cellInterface
-        //    Element *e1(cellInterfaces[i]->getB(BD1M)->getElement());
-        //    Coord v1 = e1->vecteur(eD);
-        //    Coord sin1(Coord::sin(v1, vD));
-        //    if (std::fabs(sin1.norm()) <= 1e-8) {
-        //      cellInterfaces[i]->setB(BD2M, cellInterfaces[i]->getB(BD1M)); // Si le cos est nul, meme cell pour B1 et B2
-        //    }
-        //    else {
-        //      for (unsigned int v = 0; v < neighbors[index].size(); v++) {
-        //        eT = neighbors[index][v];
-        //        if (eT == e1) continue; // voisin suivant si voisin deja utilise 
-        //        Coord vT = eT->vecteur(eD);
-        //        Coord sinTemp(Coord::sin(vT, vD));
-
-        //        if (sinTemp.scalar(sin1) <= 0.) {
-        //          double cosTemp(Coord::cos(vT, vD));
-        //          if (cosTemp >= cos) {
-        //            cos = cosTemp;
-        //            if (eT->getIndex() < m_numberBoundFaces) { //Si c est une limite on remet BG1M a NULL
-        //              cellInterfaces[i]->setB(BD2M, 0);
-        //            }
-        //            else {  //Sinon on met a jour avec la 2 eme maille la plus loin
-        //              Cell* c(cells[eT->getNumCellAssociee()]);
-        //              cellInterfaces[i]->setB(BD2M, c);
-        //            }
-        //          }
-        //        } //fin sin*sin <0
-        //      }  //fin boucle neighbors
-        //    } //fin if 
-        //  } //Fin if cellInterface
-
-        //  //Determination des ponderations arrieres
-        //  MB1 = 0.; if (cellInterfaces[i]->getB(BD1M) != 0) { MB1.setFromSubtractedVectors(m_faces[i]->getPos(), cellInterfaces[i]->getB(BD1M)->getPosition()); }
-        //  MB2 = 0.; if (cellInterfaces[i]->getB(BD2M) != 0) { MB2.setFromSubtractedVectors(m_faces[i]->getPos(), cellInterfaces[i]->getB(BD2M)->getPosition()); }
-        //  MB.setFromSubtractedVectors(m_faces[i]->getPos(), eD->getPosition());
-        //  beta1 = 1.; beta2 = 0.;
-        //  a = (MB1.vectoriel(MB)).norm() / MB.norm();
-        //  b = (MB2.vectoriel(MB)).norm() / MB.norm();
-        //  if (std::fabs(a + b) > 1e-8) { beta1 = b / (a + b); beta2 = 1. - beta1; }
-        //  cellInterfaces[i]->setBeta(betaD1M, beta1);
-        //  cellInterfaces[i]->setBeta(betaD2M, beta2);
-        //  //Calcul de la distance du vertex M (cellInterface de maille) au vertex H (barycenter)
-        //  if (cellInterfaces[i]->getB(BD1M) != 0) {
-        //    cos = Coord::cos(MB, MB1);
-        //    double d, e, c;
-        //    d = cos*MB1.norm();
-        //    Coord B1B2; B1B2 = MB1 - MB2;
-        //    e = B1B2.norm()*beta1;
-        //    c = sqrt(e*e - a*a);
-        //    d += c;
-        //    cellInterfaces[i]->setDistanceH(distanceHDM, d);
-        //  }
-        //  //cout << eD->getIndex() << " : " << endl;
-        //  //if (cellInterfaces[i]->getB(BD1M) != 0) cout << "BD1M = " << cellInterfaces[i]->getB(BD1M)->getElement()->getIndex() << " " << cellInterfaces[i]->getDistanceH(distanceHDM) << endl;
-        //  //if (cellInterfaces[i]->getB(BD2M) != 0) cout << "BD2M = " << cellInterfaces[i]->getB(BD2M)->getElement()->getIndex() << " " << cellInterfaces[i]->getDistanceH(distanceHDM) << endl;
-
-        //  //3) Recherche du premier element avant droite BD1P
-        //  //-------------------------------------------------
-        //  cos = 0.;
-        //  for (unsigned int v = 0; v < neighbors[index].size(); v++) {
-        //    eT = neighbors[index][v];
-        //    Coord vT = eT->vecteur(eD);
-        //    double cosTemp(Coord::cos(vT, vD));
-        //    if (cosTemp <= cos) {
-        //      cos = cosTemp;
-        //      if (eT->getIndex() < m_numberBoundFaces) { //Si c est une limite on remet BG1M a NULL
-        //        cellInterfaces[i]->setB(BD1P, 0);
-        //      }
-        //      else { //Sinon on met a jour avec la maille la plus loin
-        //        Cell* c(cells[eT->getNumCellAssociee()]);
-        //        cellInterfaces[i]->setB(BD1P, c);
-        //      }
-        //    }
-        //  }
-        //  //4) Recherche du second element avant droite BD2P
-        //  //------------------------------------------------
-        //  cos = 0.;
-        //  if (cellInterfaces[i]->getB(BD1P) != 0) {  //Cas non cellInterface
-        //    Element *e1(cellInterfaces[i]->getB(BD1P)->getElement());
-        //    Coord v1 = e1->vecteur(eD);
-        //    Coord sin1(Coord::sin(v1, vD));
-        //    if (std::fabs(sin1.norm()) <= 1e-8) {
-        //      cellInterfaces[i]->setB(BD2P, cellInterfaces[i]->getB(BD1P)); // Si le cos est nul, meme cell pour B1 et B2
-        //    }
-        //    else {
-        //      for (unsigned int v = 0; v < neighbors[index].size(); v++) {
-        //        eT = neighbors[index][v];
-        //        if (eT == e1) continue; // voisin suivant si voisin deja utilise 
-        //        Coord vT = eT->vecteur(eD);
-        //        Coord sinTemp(Coord::sin(vT, vD));
-
-        //        if (sinTemp.scalar(sin1) <= 0.) {
-        //          double cosTemp(Coord::cos(vT, vD));
-        //          if (cosTemp <= cos) {
-        //            cos = cosTemp;
-        //            if (eT->getIndex() < m_numberBoundFaces) { //Si c est une limite on remet BG1M a NULL
-        //              cellInterfaces[i]->setB(BD2P, 0);
-        //            }
-        //            else {  //Sinon on met a jour avec la 2 eme maille la plus loin
-        //              Cell* c(cells[eT->getNumCellAssociee()]);
-        //              cellInterfaces[i]->setB(BD2P, c);
-        //            }
-        //          }
-        //        } //fin sin*sin <0
-        //      }  //fin boucle neighbors
-        //    } //fin if 
-        //  } //Fin if cellInterface
-        //} //Fin si limite
-
-        ////Determination des ponderations avant
-        //MB1 = 0.; if (cellInterfaces[i]->getB(BD1P) != 0) { MB1.setFromSubtractedVectors(cellInterfaces[i]->getB(BD1P)->getPosition(), m_faces[i]->getPos()); }
-        //MB2 = 0.; if (cellInterfaces[i]->getB(BD2P) != 0) { MB2.setFromSubtractedVectors(cellInterfaces[i]->getB(BD2P)->getPosition(), m_faces[i]->getPos()); }
-        //MB.setFromSubtractedVectors(eD->getPosition(), m_faces[i]->getPos());
-        //beta1 = 1., beta2 = 0.;
-        //a = (MB1.vectoriel(MB)).norm() / MB.norm();
-        //b = (MB2.vectoriel(MB)).norm() / MB.norm();
-        //if (std::fabs(a + b) > 1e-8) { beta1 = b / (a + b); beta2 = 1. - beta1; }
-        //cellInterfaces[i]->setBeta(betaD1P, beta1);
-        //cellInterfaces[i]->setBeta(betaD2P, beta2);
-        ////Calcul de la distance du vertex M (cellInterface de maille) au vertex H (barycenter)
-        //if (cellInterfaces[i]->getB(BD1P) != 0) {
-        //  cos = Coord::cos(MB, -1.*MB1);
-        //  double d, e, c;
-        //  d = cos*MB1.norm();
-        //  Coord B1B2; B1B2 = MB1 - MB2;
-        //  e = B1B2.norm()*beta1;
-        //  c = sqrt(e*e - a*a);
-        //  d += c;
-        //  cellInterfaces[i]->setDistanceH(distanceHDP, d);
-        //}
-        //cout << eD->getIndex() << " : " << endl;
-        //if (cellInterfaces[i]->getB(BD1P) != 0) cout << "BD1P = " << cellInterfaces[i]->getB(BD1P)->getElement()->getIndex() << " " << cellInterfaces[i]->getDistanceH(distanceHDP) << endl;
-        //if (cellInterfaces[i]->getB(BD2P) != 0) cout << "BD2P = " << cellInterfaces[i]->getB(BD2P)->getElement()->getIndex() << " " << cellInterfaces[i]->getDistanceH(distanceHDP) << endl;
-
-
-
-        //cout << "******" << endl;
-        //cout << eG->getIndex() << " " << eD->getIndex() << " : " << endl;
-        //if (cellInterfaces[i]->getB(BG1M) != 0) cout << "BG1M = " << cellInterfaces[i]->getB(BG1M)->getElement()->getIndex() << endl;
-        //if (cellInterfaces[i]->getB(BG2M) != 0) cout << "BG2M = " << cellInterfaces[i]->getB(BG2M)->getElement()->getIndex() << endl;
-        //if (cellInterfaces[i]->getB(BG1P) != 0) cout << "BG1P = " << cellInterfaces[i]->getB(BG1P)->getElement()->getIndex() << endl;
-        //if (cellInterfaces[i]->getB(BG2P) != 0) cout << "BG2P = " << cellInterfaces[i]->getB(BG2P)->getElement()->getIndex() << endl;
-        //if (cellInterfaces[i]->getB(BD1M) != 0) cout << "BD1M = " << cellInterfaces[i]->getB(BD1M)->getElement()->getIndex() << endl;
-        //if (cellInterfaces[i]->getB(BD2M) != 0) cout << "BD2M = " << cellInterfaces[i]->getB(BD2M)->getElement()->getIndex() << endl;
-        //if (cellInterfaces[i]->getB(BD1P) != 0) cout << "BD1P = " << cellInterfaces[i]->getB(BD1P)->getElement()->getIndex() << endl;
-        //if (cellInterfaces[i]->getB(BD2P) != 0) cout << "BD2P = " << cellInterfaces[i]->getB(BD2P)->getElement()->getIndex() << endl;
-
-      } //Fin preparation neighbors ordre 2
-      //---------------------------------------------------------------------------------------
+      cellInterfaces[i]->initialize(cells[iCellL], cells[iCellR]);
 
     } // End face
     tTemp = clock() - tTemp; t1 = static_cast<double>(tTemp) / CLOCKS_PER_SEC;
@@ -588,7 +233,7 @@ void MUSGmshV2::initGeometryMonoCPU(TypeMeshContainer<Cell*>& cells, TypeMeshCon
     delete[] neighbors;
     delete[] neighborNodes;
   }
-  catch (ErrorECOGEN &) { throw; }
+  catch (ErrorMeshNS &) { throw; }
 }
 
 //***********************************************************************
@@ -602,15 +247,21 @@ void MUSGmshV2::readMeshMonoCPU(std::vector<ElementNS*>** neighborNodes)
     std::cout << "------------------------------------------------------" << std::endl;
     std::cout << " C) READING MESH FILE " + m_meshFile + " IN PROGRESS ..." << std::endl;
     std::ifstream meshFile(m_meshFile.c_str(), std::ios::in);
-    if (!meshFile){ throw ErrorECOGEN("mesh file not found : " + m_meshFile, __FILE__, __LINE__); }
+    if (!meshFile){ throw ErrorMeshNS("mesh file not found : " + m_meshFile, __FILE__, __LINE__); }
     std::string currentLine;
 
     // Skiping Gmsh version + go to nodes
     // -----------------------------------
-    getline(meshFile, currentLine);
-    getline(meshFile, currentLine);
-    getline(meshFile, currentLine);
-    getline(meshFile, currentLine);
+    currentLine = "";
+    while(currentLine != "$Nodes") {
+      std::stringstream lineToTreat;
+      getline(meshFile, currentLine);
+      lineToTreat << currentLine;
+      lineToTreat >> currentLine; //To exclude the newline caracter 
+      if (meshFile.eof()) {
+        throw ErrorMeshNS("mesh file format is not compatible, see mesh file: " + m_meshFile, __FILE__, __LINE__);
+      }
+    }
 
     // 2) Filling m_nodes array
     // ------------------------
@@ -626,8 +277,17 @@ void MUSGmshV2::readMeshMonoCPU(std::vector<ElementNS*>** neighborNodes)
       m_nodes[i].setXYZ(x, y, z);
     }
     meshFile.ignore(10, '\n');
-    getline(meshFile, currentLine); // Skip keyword $EndNodes
-    getline(meshFile, currentLine); // Skip keyword $Elements
+    // Skip keyword $EndNodes $Elements and others if necessary
+    currentLine = ""; 
+    while(currentLine != "$Elements") {
+      std::stringstream lineToTreat;
+      getline(meshFile, currentLine);
+      lineToTreat << currentLine;
+      lineToTreat >> currentLine; //To exclude the newline caracter 
+      if (meshFile.eof()) {
+        throw ErrorMeshNS("mesh file format is not compatible, see mesh file: " + m_meshFile, __FILE__, __LINE__);
+      }
+    }
     std::cout << "OK" << std::endl;
 
     // 3) 1D/2D/3D elements are stored in m_elements array / counting
@@ -647,10 +307,10 @@ void MUSGmshV2::readMeshMonoCPU(std::vector<ElementNS*>** neighborNodes)
       else if (m_elements[i]->getTypeGmsh() == 1) { m_numberElements1D++; }
       else if (m_elements[i]->getTypeGmsh() <= 3) { m_numberElements2D++; m_totalSurface += m_elements[i]->getVolume(); }
       else if (m_elements[i]->getTypeGmsh() <= 7) { m_numberElements3D++; m_totalVolume += m_elements[i]->getVolume(); }
-      else { throw ErrorECOGEN("Element type of .msh not handled by ECOGEN", __FILE__, __LINE__); }
+      else { throw ErrorMeshNS("Element type of .msh not handled by ECOGEN", __FILE__, __LINE__); }
       // Assignment element i neighbor for concerned nodes (2nd order muiltislopes)
-      for (int n = 0; n < m_elements[i]->getNumberNoeuds(); n++) {
-        nodeG = m_elements[i]->getNumNoeud(n);
+      for (int n = 0; n < m_elements[i]->getNumberNodes(); n++) {
+        nodeG = m_elements[i]->getNumNode(n);
         (*neighborNodes)[nodeG].push_back(m_elements[i]);
       }
     }
@@ -663,14 +323,221 @@ void MUSGmshV2::readMeshMonoCPU(std::vector<ElementNS*>** neighborNodes)
     //  std::cout << std::endl;
     //}
   }
-  catch (ErrorECOGEN &) { throw; }
+  catch (ErrorMeshNS &) { throw; }
+}
+
+//***********************************************************************
+
+void MUSGmshV2::initCpuMeshSequential(TypeMeshContainer<Cell*>& cells, std::string &computeOrder)
+{
+  try {
+    // 1) Opening cpu mesh file
+    // ------------------------
+    std::ifstream meshFile(m_meshFile.c_str(), std::ios::in);
+    if (!meshFile) { throw ErrorMeshNS("Mesh file not found: " + m_meshFile, __FILE__, __LINE__); }
+    std::string currentLine;
+
+    // Skiping Gmsh version + go to nodes
+    // -----------------------------------
+    currentLine = "";
+    while(currentLine != "$Nodes") {
+      std::stringstream lineToTreat;
+      getline(meshFile, currentLine);
+      lineToTreat << currentLine;
+      lineToTreat >> currentLine; //To exclude the newline caracter 
+      if (meshFile.eof()) {
+        throw ErrorMeshNS("mesh file format is not compatible, see mesh file: " + m_meshFile, __FILE__, __LINE__);
+      }
+    }
+
+    // 2) Filling m_nodes array
+    // ------------------------
+    meshFile >> m_numberNodes;
+    meshFile.ignore(10, '\n');
+    m_nodes = new Coord[m_numberNodes];
+    int useless(0); double x, y, z;
+    for (int i = 0; i < m_numberNodes; i++)
+    {
+      meshFile >> useless >> x >> y >> z;
+      m_nodes[i].setXYZ(x, y, z);
+    }
+    meshFile.ignore(10, '\n');
+    // Skip keyword $EndNodes $Elements and others if necessary
+    currentLine = ""; 
+    while(currentLine != "$Elements") {
+      std::stringstream lineToTreat;
+      getline(meshFile, currentLine);
+      lineToTreat << currentLine;
+      lineToTreat >> currentLine; //To exclude the newline caracter 
+      if (meshFile.eof()) {
+        throw ErrorMeshNS("mesh file format is not compatible, see mesh file: " + m_meshFile, __FILE__, __LINE__);
+      }
+    }
+
+    // 3) 1D/2D/3D elements are stored in m_elements array / counting
+    // --------------------------------------------------------------
+    meshFile >> m_numberElements;
+    meshFile.ignore(10, '\n');
+    // Allocation array of elements
+    m_elements = new ElementNS*[m_numberElements];
+    // Reading elements and assigning geometric properties 
+    m_numberElements1D = 0, m_numberElements2D = 0, m_numberElements3D = 0;
+    for (int i = 0; i < m_numberElements; i++) {
+      this->readElement(m_nodes, meshFile, &m_elements[i]);
+      if (m_elements[i]->getTypeGmsh() == 15) { m_numberElements0D++; }
+      else if (m_elements[i]->getTypeGmsh() == 1) { m_numberElements1D++; }
+      else if (m_elements[i]->getTypeGmsh() <= 3) { m_numberElements2D++; m_totalSurface += m_elements[i]->getVolume(); }
+      else if (m_elements[i]->getTypeGmsh() <= 7) { m_numberElements3D++; m_totalVolume += m_elements[i]->getVolume(); }
+      else { throw ErrorMeshNS("Element type of .msh not handled by ECOGEN", __FILE__, __LINE__); }
+    }
+    m_numberInnerElements = m_numberElements;
+
+    // 4) Cells and boundary counting
+    // ------------------------------
+    if (m_numberElements3D == 0 && m_numberElements2D == 0) // 1D case
+    {
+      m_numberCellsCalcul = m_numberElements1D;
+      m_numberBoundFaces = m_numberElements0D;
+      m_problemDimension = 1;
+    }
+    else if (m_numberElements3D == 0) // 2D case
+    {
+      m_numberCellsCalcul = m_numberElements2D;
+      m_numberBoundFaces = m_numberElements1D;
+      m_problemDimension = 2;
+    }
+    else // 3D case
+    {
+      m_numberCellsCalcul = m_numberElements3D;
+      m_numberBoundFaces = m_numberElements2D;
+      m_problemDimension = 3;
+    }
+    m_numberCellsTotal = m_numberCellsCalcul;
+
+    // 5) Set elements to cells
+    // ------------------------
+    for (int i = 0; i < m_numberCellsCalcul; i++)
+    {
+      if (computeOrder == "FIRSTORDER") { cells.push_back(new Cell); }
+      else { cells.push_back(new CellO2NS); }
+      cells[i]->setElement(m_elements[i + m_numberBoundFaces], i);
+    }
+  }
+  catch (ErrorMeshNS &) { throw; }
+}
+
+//***********************************************************************
+
+void MUSGmshV2::initCpuMeshParallel(TypeMeshContainer<Cell*>& cells, std::string &computeOrder, int cpu)
+{
+  try {
+    // 1) Opening cpu mesh file
+    // ------------------------
+    std::ifstream meshFile(m_meshFile.c_str(), std::ios::in);
+    if (!meshFile) { throw ErrorMeshNS("Mesh file not found: " + m_meshFile, __FILE__, __LINE__); }
+    std::string currentLine;
+
+    // Skiping Gmsh version + go to nodes
+    // ----------------------------------
+    currentLine = ""; 
+    while(currentLine != "$Nodes") {
+      std::stringstream lineToTreat;
+      getline(meshFile, currentLine);
+      lineToTreat << currentLine;
+      lineToTreat >> currentLine; //To exclude the newline caracter 
+      if (meshFile.eof()) {
+        throw ErrorMeshNS("mesh file format is not compatible, see mesh file: " + m_meshFile, __FILE__, __LINE__);
+      }
+    }
+
+    // 2) Filling m_nodes array
+    // ------------------------
+    meshFile >> m_numberNodes;
+    meshFile.ignore(10, '\n');
+    m_nodes = new Coord[m_numberNodes];
+    int useless(0); double x, y, z;
+    for (int i = 0; i < m_numberNodes; i++)
+    {
+      meshFile >> useless >> x >> y >> z;
+      m_nodes[i].setXYZ(x, y, z);
+    }
+    meshFile.ignore(10, '\n');
+    // Skip keyword $EndNodes $Elements and others if necessary
+    currentLine = ""; 
+    while(currentLine != "$Elements") {
+      std::stringstream lineToTreat;
+      getline(meshFile, currentLine);
+      lineToTreat << currentLine;
+      lineToTreat >> currentLine; //To exclude the newline caracter 
+      if (meshFile.eof()) {
+        throw ErrorMeshNS("mesh file format is not compatible, see mesh file: " + m_meshFile, __FILE__, __LINE__);
+      }
+    }
+
+    // 3) 1D/2D/3D elements are stored in m_elements array / counting
+    // --------------------------------------------------------------
+    meshFile >> m_numberElements;
+    meshFile.ignore(10, '\n');
+    // Allocation array of elements
+    m_elements = new ElementNS*[m_numberElements];
+    // Reading elements and assigning geometric properties 
+    m_numberElements1D = 0, m_numberElements2D = 0, m_numberElements3D = 0;
+    for (int i = 0; i < m_numberElements; i++)
+    {
+      this->readElement(m_nodes, meshFile, &m_elements[i]);
+      if (m_elements[i]->getCPU() == cpu)
+      {
+        if (m_elements[i]->getTypeGmsh() == 1) { m_numberElements1D++; }
+        else if (m_elements[i]->getTypeGmsh() <= 3) { m_numberElements2D++; m_totalSurface += m_elements[i]->getVolume(); }
+        else if (m_elements[i]->getTypeGmsh() <= 7) { m_numberElements3D++; m_totalVolume += m_elements[i]->getVolume(); }
+        else { throw ErrorMeshNS("Element type of .msh not handled by ECOGEN", __FILE__, __LINE__); }
+      }
+      else { m_numberGhostElements++; }
+    }
+    // Calculation of the number of elements belonging to the CPU
+    m_numberInnerElements = m_numberElements - m_numberGhostElements;
+    
+    // 4) Cells and boundary counting
+    // ------------------------------
+    if (m_numberElements3D == 0 && m_numberElements2D == 0) // 1D case
+    {
+      m_numberCellsCalcul = m_numberElements1D;
+      m_numberBoundFaces = m_numberElements0D;
+      m_problemDimension = 1;
+    }
+    else if (m_numberElements3D == 0) // 2D case
+    {
+      m_numberCellsCalcul = m_numberElements2D;
+      m_numberBoundFaces = m_numberElements1D;
+      m_problemDimension = 2;
+    }
+    else // 3D case
+    {
+      m_numberCellsCalcul = m_numberElements3D;
+      m_numberBoundFaces = m_numberElements2D;
+      m_problemDimension = 3;
+    }
+    // Sizing array of cells
+    m_numberCellsTotal = m_numberCellsCalcul + m_numberGhostElements;
+    
+    // 5) Set elements to cells
+    // ------------------------
+    for (int i = 0; i < m_numberCellsTotal; i++)
+    {
+      if (computeOrder == "FIRSTORDER") { cells.push_back(new Cell); }
+      else { cells.push_back(new CellO2NS); }
+      cells[i]->setElement(m_elements[i + m_numberBoundFaces], i);
+    }
+    // Update of cellsGhost
+    cells.erase(cells.begin()+m_numberCellsCalcul, cells.end());
+  }
+  catch (ErrorMeshNS &) { throw; }
 }
 
 //***********************************************************************
 
 void MUSGmshV2::initGeometryParallel(TypeMeshContainer<Cell*>& cells, TypeMeshContainer<Cell*>& cellsGhost, TypeMeshContainer<CellInterface*>& cellInterfaces, std::string computeOrder)
 {
-  //KS//FP//DEV// Distinction between cells and cellsGhost not done here. To do in the future.
   clock_t totalTime(clock());
   try {
     // 1) Reading nodes and elements
@@ -689,19 +556,19 @@ void MUSGmshV2::initGeometryParallel(TypeMeshContainer<Cell*>& cells, TypeMeshCo
     {
       m_numberCellsCalcul = m_numberElements1D;
       m_numberBoundFaces = m_numberElements0D;
-      m_geometrie = 1;
+      m_problemDimension = 1;
     }
     else if (m_numberElements3D == 0) // 2D case
     {
       m_numberCellsCalcul = m_numberElements2D;
       m_numberBoundFaces = m_numberElements1D;
-      m_geometrie = 2;
+      m_problemDimension = 2;
     }
     else // 3D case
     {
       m_numberCellsCalcul = m_numberElements3D;
       m_numberBoundFaces = m_numberElements2D;
-      m_geometrie = 3;
+      m_problemDimension = 3;
     }
 
     // Sizing array of cells
@@ -719,13 +586,20 @@ void MUSGmshV2::initGeometryParallel(TypeMeshContainer<Cell*>& cells, TypeMeshCo
 
     // Assignment of cells to elements and counting inner faces
     m_numberInnerFaces = 0;
-    for (int i = 0; i < m_numberCellsTotal; i++)
+    for (int i = 0; i < m_numberCellsCalcul; i++)
     {
       if (computeOrder == "FIRSTORDER") { cells.push_back(new Cell); }
-      else { cells.push_back(new CellO2); }
+      else { cells.push_back(new CellO2NS); }
       cells[i]->setElement(m_elements[i + m_numberBoundFaces], i);
       if (i < m_numberCellsCalcul) { m_numberInnerFaces += m_elements[i + m_numberBoundFaces]->getNumberFaces(); }
     }
+    for (int i = m_numberCellsCalcul; i < m_numberCellsTotal; i++)
+    {
+      if (computeOrder == "FIRSTORDER") { cells.push_back(new CellGhost); }
+      else { cells.push_back(new CellO2GhostNS); }
+      cells[i]->setElement(m_elements[i + m_numberBoundFaces], i);
+    }
+
     m_numberInnerFaces -= m_numberBoundFaces + m_numberFacesParallel; // We remove the boundaries and communicating faces
     m_numberInnerFaces /= 2; // The internal faces are all counted twice => we restore the truth
     m_numberFacesTotal = m_numberInnerFaces + m_numberBoundFaces + m_numberFacesParallel;
@@ -744,7 +618,10 @@ void MUSGmshV2::initGeometryParallel(TypeMeshContainer<Cell*>& cells, TypeMeshCo
     {
       if (m_numberQuadrangles != 0) { sizeFace = 4; }
       else if (m_numberTriangles != 0) { sizeFace = 3; }
-      else { Errors::errorMessage("Issue in initGeometryMonoCPU for initialization of facesBuff array"); }
+      // else { Errors::errorMessage("Issue in initGeometryParallel for initialization of facesBuff array"); }
+      //JC//REMARK When a mesh file is partionned on an important number of CPUs it is highly possible that
+      // a given CPU has no boundary and therefore only 3D elements. In this case, the loop on boundaries is
+      // not executed and is not a problem.
     }
     else if (m_numberElements2D != 0) { sizeFace = 2; }
     for (int i = 0; i < m_numberFacesTotal + 1; i++) // +1 is used for the search for the existence of faces
@@ -833,7 +710,7 @@ void MUSGmshV2::initGeometryParallel(TypeMeshContainer<Cell*>& cells, TypeMeshCo
       std::cout << "  4/Linking Geometries -> Physics ..." << std::endl;
       printFrequency = std::max(m_numberFacesTotal / 10, 1);
     }
-    int iMailleG, iMailleD;
+    int iCellL, iCellR;
 
     for (int i = 0; i < m_numberFacesTotal; i++)
     {
@@ -845,37 +722,37 @@ void MUSGmshV2::initGeometryParallel(TypeMeshContainer<Cell*>& cells, TypeMeshCo
         if (m_faces[i]->getEstComm())
         {
           if (computeOrder == "FIRSTORDER") { cellInterfaces.push_back(new CellInterface); }
-          else { cellInterfaces.push_back(new CellInterfaceO2); }
+          else { cellInterfaces.push_back(new CellInterfaceO2NS); }
           cellInterfaces[i]->setFace(m_faces[i]);
-          iMailleG = m_faces[i]->getElementGauche()->getNumCellAssociee();
-          iMailleD = m_faces[i]->getElementDroite()->getNumCellAssociee();
-          cells[iMailleG]->addCellInterface(cellInterfaces[i]);
-          cells[iMailleD]->addCellInterface(cellInterfaces[i]);
+          iCellL = m_faces[i]->getElementGauche()->getNumCellAssociee();
+          iCellR = m_faces[i]->getElementDroite()->getNumCellAssociee();
+          cells[iCellL]->addCellInterface(cellInterfaces[i]);
+          cells[iCellR]->addCellInterface(cellInterfaces[i]);
         }
         // Physical boundary
         else
         {
           int appPhys(m_faces[i]->getElementDroite()->getAppartenancePhysique() - 1); // (appartenance - 1) for array starting at zero
-          if (appPhys >= static_cast<int>(m_bound.size()) || appPhys < 0) { throw ErrorECOGEN("Number of boundary conditions not suited", __FILE__, __LINE__); }
+          if (appPhys >= static_cast<int>(m_bound.size()) || appPhys < 0) { throw ErrorMeshNS("Number of boundary conditions not suited", __FILE__, __LINE__); }
           m_bound[appPhys]->createBoundary(cellInterfaces);
           cellInterfaces[i]->setFace(m_faces[i]);
-          iMailleG = m_faces[i]->getElementGauche()->getNumCellAssociee();
-          iMailleD = iMailleG;
-          cells[iMailleG]->addCellInterface(cellInterfaces[i]);
+          iCellL = m_faces[i]->getElementGauche()->getNumCellAssociee();
+          iCellR = iCellL;
+          cells[iCellL]->addCellInterface(cellInterfaces[i]);
         }
       }
       // Inner faces of domain
       else
       {
         if (computeOrder == "FIRSTORDER") { cellInterfaces.push_back(new CellInterface); }
-        else { cellInterfaces.push_back(new CellInterfaceO2); }
+        else { cellInterfaces.push_back(new CellInterfaceO2NS); }
         cellInterfaces[i]->setFace(m_faces[i]);
-        iMailleG = m_faces[i]->getElementGauche()->getNumCellAssociee();
-        iMailleD = m_faces[i]->getElementDroite()->getNumCellAssociee();
-        cells[iMailleG]->addCellInterface(cellInterfaces[i]);
-        cells[iMailleD]->addCellInterface(cellInterfaces[i]);
+        iCellL = m_faces[i]->getElementGauche()->getNumCellAssociee();
+        iCellR = m_faces[i]->getElementDroite()->getNumCellAssociee();
+        cells[iCellL]->addCellInterface(cellInterfaces[i]);
+        cells[iCellR]->addCellInterface(cellInterfaces[i]);
       }
-      cellInterfaces[i]->initialize(cells[iMailleG], cells[iMailleD]);
+      cellInterfaces[i]->initialize(cells[iCellL], cells[iCellR]);
     }
     MPI_Barrier(MPI_COMM_WORLD);
     if (rankCpu == 0)
@@ -903,7 +780,7 @@ void MUSGmshV2::initGeometryParallel(TypeMeshContainer<Cell*>& cells, TypeMeshCo
 
     for (int i = m_numberBoundFaces; i < m_numberElements; i++)
     {
-      int numberOtherCPUs = m_elements[i]->getNumberAutresCPU();
+      int numberOtherCPUs = m_elements[i]->getNumberOthersCPU();
       if (numberOtherCPUs != 0) // Elements that communicate
       {
         if (m_elements[i]->getCPU() == rankCpu) // The element belongs to the CPU
@@ -930,12 +807,14 @@ void MUSGmshV2::initGeometryParallel(TypeMeshContainer<Cell*>& cells, TypeMeshCo
       for(int i=0;i<numberElementsToSend[v];++i)
       {
           const auto buffer = elementsToSend[v][i] - m_numberBoundFaces;
-          parallel.addElementToSend(v,cells[buffer]);
+          parallel.addElementToSend(v, cells[buffer]);
+          parallel.addSlopesToSend(v);
       }
       for (int i = 0; i < numberElementsToReceive[v]; i++) { 
-          const auto buffer= elementsToReceive[v][i] - m_numberBoundFaces;
+          const auto buffer = elementsToReceive[v][i] - m_numberBoundFaces;
           parallel.addElementToReceive(v, cells[buffer]);
-       }
+          parallel.addSlopesToReceive(v);
+      }
     }
     MPI_Barrier(MPI_COMM_WORLD);
     if (rankCpu == 0)
@@ -956,7 +835,7 @@ void MUSGmshV2::initGeometryParallel(TypeMeshContainer<Cell*>& cells, TypeMeshCo
     cellsGhost.insert(cellsGhost.begin(), cells.begin()+m_numberCellsCalcul, cells.end());
     cells.erase(cells.begin()+m_numberCellsCalcul, cells.end());
   }
-  catch (ErrorECOGEN &) { throw; }
+  catch (ErrorMeshNS &) { throw; }
 }
 
 //***********************************************************************
@@ -976,15 +855,21 @@ void MUSGmshV2::readMeshParallel()
     flux << rankCpu;
     m_meshFile = m_nameMesh + "_CPU" + flux.str() + ".msh";
     std::ifstream meshFile(m_meshFile.c_str(), std::ios::in);
-    if (!meshFile) { throw ErrorECOGEN("file mesh absent :" + m_meshFile, __FILE__, __LINE__); }
+    if (!meshFile) { throw ErrorMeshNS("file mesh absent :" + m_meshFile, __FILE__, __LINE__); }
     std::string currentLine;
 
     // Skiping Gmsh version + go to nodes
     // ----------------------------------
-    getline(meshFile, currentLine);
-    getline(meshFile, currentLine);
-    getline(meshFile, currentLine);
-    getline(meshFile, currentLine);
+    currentLine = ""; 
+    while(currentLine != "$Nodes") {
+      std::stringstream lineToTreat;
+      getline(meshFile, currentLine);
+      lineToTreat << currentLine;
+      lineToTreat >> currentLine; //To exclude the newline caracter 
+      if (meshFile.eof()) {
+        throw ErrorMeshNS("mesh file format is not compatible, see mesh file: " + m_meshFile, __FILE__, __LINE__);
+      }
+    }
 
     // 2) Filling m_nodes array
     // ------------------------
@@ -1000,8 +885,17 @@ void MUSGmshV2::readMeshParallel()
       m_nodes[i].setXYZ(x, y, z);
     }
     meshFile.ignore(10, '\n');
-    getline(meshFile, currentLine); // Skip keyword $EndNodes
-    getline(meshFile, currentLine); // Skip keyword $Elements
+    // Skip keyword $EndNodes $Elements and others if necessary
+    currentLine = ""; 
+    while(currentLine != "$Elements") {
+      std::stringstream lineToTreat;
+      getline(meshFile, currentLine);
+      lineToTreat << currentLine;
+      lineToTreat >> currentLine; //To exclude the newline caracter 
+      if (meshFile.eof()) {
+        throw ErrorMeshNS("mesh file format is not compatible, see mesh file: " + m_meshFile, __FILE__, __LINE__);
+      }
+    }
     if (rankCpu == 0) { std::cout << "OK" << std::endl; }
 
     // 3) 1D/2D/3D elements are stored in m_elements array / counting
@@ -1023,7 +917,7 @@ void MUSGmshV2::readMeshParallel()
         if (m_elements[i]->getTypeGmsh() == 1) { m_numberElements1D++; }
         else if (m_elements[i]->getTypeGmsh() <= 3) { m_numberElements2D++; m_totalSurface += m_elements[i]->getVolume(); }
         else if (m_elements[i]->getTypeGmsh() <= 7) { m_numberElements3D++; m_totalVolume += m_elements[i]->getVolume(); }
-        else { throw ErrorECOGEN("Element type of .msh not handled by ECOGEN", __FILE__, __LINE__); }
+        else { throw ErrorMeshNS("Element type of .msh not handled by ECOGEN", __FILE__, __LINE__); }
       }
       else { m_numberGhostElements++; }
     }
@@ -1040,7 +934,7 @@ void MUSGmshV2::readMeshParallel()
     m_numberInnerElements = m_numberElements - m_numberGhostElements;
     if (rankCpu == 0) { std::cout << "OK" << std::endl; }
   }
-  catch (ErrorECOGEN &) { throw; }
+  catch (ErrorMeshNS &) { throw; }
 }
 
 //***********************************************************************
@@ -1060,15 +954,21 @@ void MUSGmshV2::preProcessMeshFileForParallel()
     std::cout << " C0) MESH FILE PRETRAITEMENT " + m_meshFile + " IN PROGRESS ..." << std::endl;
     clock_t totalTime(clock());
     std::ifstream meshFile(m_meshFile.c_str(), std::ios::in);
-    if (!meshFile) { throw ErrorECOGEN("mesh file not found :" + m_meshFile, __FILE__, __LINE__); }
+    if (!meshFile) { throw ErrorMeshNS("mesh file not found :" + m_meshFile, __FILE__, __LINE__); }
     std::string currentLine;
 
     // Skiping Gmsh version + go to nodes
     // ----------------------------------
-    getline(meshFile, currentLine);
-    getline(meshFile, currentLine);
-    getline(meshFile, currentLine);
-    getline(meshFile, currentLine);
+    currentLine = ""; 
+    while(currentLine != "$Nodes") {
+      std::stringstream lineToTreat;
+      getline(meshFile, currentLine);
+      lineToTreat << currentLine;
+      lineToTreat >> currentLine; //To exclude the newline caracter 
+      if (meshFile.eof()) {
+        throw ErrorMeshNS("mesh file format is not compatible, see mesh file: " + m_meshFile, __FILE__, __LINE__);
+      }
+    }
 
     // 1) Storing the vertex grid in a temporary array of nodes
     // --------------------------------------------------------
@@ -1083,8 +983,17 @@ void MUSGmshV2::preProcessMeshFileForParallel()
       nodesGlobal[i].setXYZ(x, y, z);
     }
     meshFile.ignore(10, '\n');
-    getline(meshFile, currentLine);
-    getline(meshFile, currentLine);
+    // Skip keyword $EndNodes $Elements and others if necessary
+    currentLine = ""; 
+    while(currentLine != "$Elements") {
+      std::stringstream lineToTreat;
+      getline(meshFile, currentLine);
+      lineToTreat << currentLine;
+      lineToTreat >> currentLine; //To exclude the newline caracter 
+      if (meshFile.eof()) {
+        throw ErrorMeshNS("mesh file format is not compatible, see mesh file: " + m_meshFile, __FILE__, __LINE__);
+      }
+    }
     std::cout << "OK" << std::endl;
 
     // 2) 1D/2D/3D elements are stored in temporary elements array / counting
@@ -1146,9 +1055,9 @@ void MUSGmshV2::preProcessMeshFileForParallel()
       numCPU = elementsGlobal[i]->getCPU();
       if (numCPU > numCPUMax) numCPUMax = numCPU;
       elementsCPU[numCPU].push_back(i); // Filling number of CPU-specific elements
-      for (int n = 0; n < elementsGlobal[i]->getNumberNoeuds(); n++)
+      for (int n = 0; n < elementsGlobal[i]->getNumberNodes(); n++)
       {
-        nodeCurrent = elementsGlobal[i]->getNumNoeud(n);
+        nodeCurrent = elementsGlobal[i]->getNumNode(n);
         nodeExist = false;
         for (unsigned int j = 0; j < nodesCPU[numCPU].size(); j++)
         {
@@ -1165,7 +1074,7 @@ void MUSGmshV2::preProcessMeshFileForParallel()
     tTemp = clock() - tTemp; t1 = static_cast<double>(tTemp) / CLOCKS_PER_SEC;
     std::cout << "    OK in " << t1 << " seconds" << std::endl;
     // Checking if mesh matches with CPUs used
-    if (numCPUMax != Ncpu - 1) throw ErrorECOGEN("mesh file .msh not suited with the number of CPUs used - Generate the mesh and restard the test case", __FILE__, __LINE__);
+    if (numCPUMax != Ncpu - 1) throw ErrorMeshNS("mesh file .msh not suited with the number of CPUs used - Generate the mesh and restard the test case", __FILE__, __LINE__);
     
     // 4) Creating array of faces
     // --------------------------
@@ -1214,25 +1123,25 @@ void MUSGmshV2::preProcessMeshFileForParallel()
     for (int i = 0; i < numberElementsGlobal; i++)
     {
       if (i%printFrequency == 0) { std::cout << "    " << (100 * i / numberElementsGlobal) << "% ... " << std::endl; }
-      if (elementsGlobal[i]->getNumberAutresCPU() != 0)
+      if (elementsGlobal[i]->getNumberOthersCPU() != 0)
       {
-        std::vector<int> CPUAEnlever;
-        for (int p = 0; p < elementsGlobal[i]->getNumberAutresCPU(); p++)
+        std::vector<int> CPUToRemove;
+        for (int p = 0; p < elementsGlobal[i]->getNumberOthersCPU(); p++)
         {
           int numCPU(elementsGlobal[i]->getAutreCPU(p));
           // Checking if the element is communicating from a face
           // ****************************************************
-          int numberNoeuds(elementsGlobal[i]->getNumberNoeuds());
-          bool *isNoeudInterne = new bool[numberNoeuds];
-          for (int n = 0; n < numberNoeuds; n++)
+          int numberNodes(elementsGlobal[i]->getNumberNodes());
+          bool *isNodeInternal = new bool[numberNodes];
+          for (int n = 0; n < numberNodes; n++)
           {
-            isNoeudInterne[n] = false;
-            nodeCurrent = elementsGlobal[i]->getNumNoeud(n);
+            isNodeInternal[n] = false;
+            nodeCurrent = elementsGlobal[i]->getNumNode(n);
             for (int j = 0; j < numberInnerNodes[numCPU]; j++)
             {
               if (nodesCPU[numCPU][j] == nodeCurrent)
               {
-                isNoeudInterne[n] = true;
+                isNodeInternal[n] = true;
                 break;
               }
             }
@@ -1245,20 +1154,20 @@ void MUSGmshV2::preProcessMeshFileForParallel()
           {
             // The element is communicating, we add it as well as his nodes
             elementsCPU[numCPU].push_back(i);
-            for (int n = 0; n < numberNoeuds; n++)
+            for (int n = 0; n < numberNodes; n++)
             {
-              if (!isNoeudInterne[n]) { nodesCPU[numCPU].push_back(elementsGlobal[i]->getNumNoeud(n)); }
+              if (!isNodeInternal[n]) { nodesCPU[numCPU].push_back(elementsGlobal[i]->getNumNode(n)); }
             }
             numberFacesCommunicatingCPU[numCPU] += numberFacesCommunicating;
           }
           else
           {
-            CPUAEnlever.push_back(p);
+            CPUToRemove.push_back(p);
           }
-          delete[] isNoeudInterne;
+          delete[] isNodeInternal;
 
         } // End CPU
-        elementsGlobal[i]->enleveCPUAutres(CPUAEnlever);
+        elementsGlobal[i]->removeCPUOthers(CPUToRemove);
       }
     }
     tTemp = clock() - tTemp; t1 = static_cast<double>(tTemp) / CLOCKS_PER_SEC;
@@ -1289,7 +1198,7 @@ void MUSGmshV2::preProcessMeshFileForParallel()
       fileStream << "2.2 0 8" << std::endl;
       fileStream << "$EndMeshFormat" << std::endl;
       fileStream << "$Nodes" << std::endl;
-      //Reordonne les noeuds
+      //Reordonne les nodes
       //sort(nodesCPU[p].begin(), nodesCPU[p].end());
       fileStream << nodesCPU[p].size() << std::endl;
       for (unsigned int i = 0; i < nodesCPU[p].size(); i++)
@@ -1303,19 +1212,19 @@ void MUSGmshV2::preProcessMeshFileForParallel()
       {
         int e(elementsCPU[p][i]);
         fileStream << i + 1 << " " << elementsGlobal[e]->getTypeGmsh();
-        fileStream << " " << 2 + 1 + 1 + elementsGlobal[e]->getNumberAutresCPU();
+        fileStream << " " << 2 + 1 + 1 + elementsGlobal[e]->getNumberOthersCPU();
         fileStream << " " << elementsGlobal[e]->getAppartenancePhysique();
         fileStream << " " << elementsGlobal[e]->getAppartenanceGeometrique();
-        fileStream << " " << elementsGlobal[e]->getNumberAutresCPU() + 1;
+        fileStream << " " << elementsGlobal[e]->getNumberOthersCPU() + 1;
         fileStream << " " << elementsGlobal[e]->getCPU() + 1;
-        for (int cpuAutre = 0; cpuAutre < elementsGlobal[e]->getNumberAutresCPU(); cpuAutre++)
+        for (int cpuAutre = 0; cpuAutre < elementsGlobal[e]->getNumberOthersCPU(); cpuAutre++)
         {
           fileStream << " " << -(elementsGlobal[e]->getAutreCPU(cpuAutre) + 1);
         }
-        for (int n = 0; n < elementsGlobal[e]->getNumberNoeuds(); n++)
+        for (int n = 0; n < elementsGlobal[e]->getNumberNodes(); n++)
         {
           // Renumbering locale
-          nodeCurrent = elementsGlobal[e]->getNumNoeud(n);
+          nodeCurrent = elementsGlobal[e]->getNumNode(n);
           for (int j = 0; j < static_cast<int>(nodesCPU[p].size()); j++)
           {
             if (nodesCPU[p][j] == nodeCurrent)
@@ -1352,7 +1261,7 @@ void MUSGmshV2::preProcessMeshFileForParallel()
     delete[] numberFacesCommunicatingCPU;
 
   }
-  catch (ErrorECOGEN &) { throw; }
+  catch (ErrorMeshNS &) { throw; }
 }
 
 //***********************************************************************
@@ -1422,9 +1331,9 @@ void MUSGmshV2::readElement(const Coord* nodesTable, std::ifstream &meshFile, El
   // 3) Building the element and its properties
   // ------------------------------------------
   int currentNode;
-  int* numNode = new int[(*element)->getNumberNoeuds()];
-  Coord* node = new Coord[(*element)->getNumberNoeuds()];
-  for (int i = 0; i < (*element)->getNumberNoeuds(); i++)
+  int* numNode = new int[(*element)->getNumberNodes()];
+  Coord* node = new Coord[(*element)->getNumberNodes()];
+  for (int i = 0; i < (*element)->getNumberNodes(); i++)
   {
     meshFile >> currentNode;
     numNode[i] = currentNode - 1; // Offset because array start at 0
@@ -1445,3 +1354,4 @@ void MUSGmshV2::readElement(const Coord* nodesTable, std::ifstream &meshFile, El
   delete[] numNode;
 }
 
+//***********************************************************************

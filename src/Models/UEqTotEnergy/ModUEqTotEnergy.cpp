@@ -243,6 +243,56 @@ void ModUEqTotEnergy::solveRiemannIntern(Cell& cellLeft, Cell& cellRight, const 
 }
 
 //****************************************************************************
+//******************************* Accessors **********************************
+//****************************************************************************
+
+double ModUEqTotEnergy::selectScalar(Phase** phases, Mixture* mixture, Transport* transports, Variable nameVariable, int num) const
+{
+  switch (nameVariable) {
+    case Variable::pressure:
+      if (num < 0) {
+        return mixture->getPressure();
+      }
+      else {
+        return phases[num]->getPressure();
+      }
+      break;
+    case Variable::density:
+      if (num < 0) {
+        return mixture->getDensity();
+      }
+      else {
+        return phases[num]->getDensity();
+      }
+      break;
+    case Variable::alpha:
+      return phases[num]->getAlpha();
+      break;
+    case Variable::velocityU:
+      return mixture->getVelocity().getX();
+      break;
+    case Variable::velocityV:
+      return mixture->getVelocity().getY();
+      break;
+    case Variable::velocityW:
+      return mixture->getVelocity().getZ();
+      break;
+    case Variable::velocityMag:
+      return mixture->getVelocity().norm();
+      break;
+    case Variable::transport:
+      return transports[num].getValue();
+      break;
+    case Variable::temperature:
+      return phases[num]->getTemperature();
+      break;
+    default:
+      Errors::errorMessage("nameVariable unknown in selectScalar"); return 0;
+      break;
+  }
+}
+
+//****************************************************************************
 
 const double& ModUEqTotEnergy::getSM()
 {
@@ -255,11 +305,7 @@ const double& ModUEqTotEnergy::getSM()
 
 void ModUEqTotEnergy::reverseProjection(const Coord normal, const Coord tangent, const Coord binormal) const
 {
-  Coord fluxProjected;
-  fluxProjected.setX(normal.getX()*static_cast<FluxUEqTotEnergy*> (fluxBuff)->m_momentum.getX() + tangent.getX()*static_cast<FluxUEqTotEnergy*> (fluxBuff)->m_momentum.getY() + binormal.getX()*static_cast<FluxUEqTotEnergy*> (fluxBuff)->m_momentum.getZ());
-  fluxProjected.setY(normal.getY()*static_cast<FluxUEqTotEnergy*> (fluxBuff)->m_momentum.getX() + tangent.getY()*static_cast<FluxUEqTotEnergy*> (fluxBuff)->m_momentum.getY() + binormal.getY()*static_cast<FluxUEqTotEnergy*> (fluxBuff)->m_momentum.getZ());
-  fluxProjected.setZ(normal.getZ()*static_cast<FluxUEqTotEnergy*> (fluxBuff)->m_momentum.getX() + tangent.getZ()*static_cast<FluxUEqTotEnergy*> (fluxBuff)->m_momentum.getY() + binormal.getZ()*static_cast<FluxUEqTotEnergy*> (fluxBuff)->m_momentum.getZ());
-  static_cast<FluxUEqTotEnergy*> (fluxBuff)->m_momentum.setXYZ(fluxProjected.getX(), fluxProjected.getY(), fluxProjected.getZ());
+  static_cast<FluxUEqTotEnergy*> (fluxBuff)->m_momentum.reverseProjection(normal, tangent, binormal);
 }
 
 //****************************************************************************

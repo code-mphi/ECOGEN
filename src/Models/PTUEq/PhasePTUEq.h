@@ -73,14 +73,20 @@ class PhasePTUEq : public Phase
     //---------------------------------------
     virtual int numberOfTransmittedVariables() const;
     virtual void fillBuffer(double* buffer, int& counter) const;
+    virtual void fillBuffer(std::vector<double>& dataToSend) const;
     virtual void getBuffer(double* buffer, int& counter, Eos** eos);
+    virtual void getBuffer(std::vector<double>& dataToReceive, int& counter, Eos** eos);
 
     //Specific methods for second order
     //---------------------------------
     virtual void computeSlopesPhase(const Phase& sLeft, const Phase& sRight, const double& distance);
     virtual void setToZero();
+    virtual void setToMax();
     virtual void extrapolate(const Phase& slope, const double& distance);
     virtual void limitSlopes(const Phase& slopeGauche, const Phase& slopeDroite, Limiter& /*globalLimiter*/, Limiter& volumeFractionLimiter);
+    virtual void setMin(const Phase& phase1, const Phase& phase2);
+    virtual void setMax(const Phase& phase1, const Phase& phase2);
+    virtual void computeGradientLimiter(const Limiter& globalLimiter, const Phase& phase, const Phase& phaseMin, const Phase& phaseMax, const Phase& slope);
 
     //Specific methods for parallele computing at second order
     //--------------------------------------------------------

@@ -59,6 +59,14 @@ SourceNumMRF::SourceNumMRF(XMLElement* element, int order, int physicalEntity, s
     error = sousElement->QueryDoubleAttribute("tf", &m_tf);
     m_incr = 0.;
   }
+
+  //Riemann coupling for MRF option (default = false)
+  //Note that the source must be applied only to a physical entity and not the whole domain (SRF)
+  sousElement = element->FirstChildElement("riemannCoupling");
+  if (sousElement != NULL) {
+    error = sousElement->QueryBoolAttribute("state", &m_riemannCoupling);
+    if (error != XML_NO_ERROR) throw ErrorXMLAttribut("riemannCoupling", fileName, __FILE__, __LINE__);
+  }
 }
 
 //***********************************************************************

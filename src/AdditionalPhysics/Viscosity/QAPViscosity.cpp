@@ -40,9 +40,9 @@ QAPViscosity::QAPViscosity(AddPhys* addPhys) : QuantitiesAddPhys(addPhys), m_gra
     m_grads[i] = 0.;
     numPhasesVisc[i] = 0;
   }
-  variableNamesVisc[0] = velocityU;
-  variableNamesVisc[1] = velocityV;
-  variableNamesVisc[2] = velocityW;
+  variableNamesVisc[0] = Variable::velocityU;
+  variableNamesVisc[1] = Variable::velocityV;
+  variableNamesVisc[2] = Variable::velocityW;
 }
 
 //***********************************************************************
@@ -53,7 +53,7 @@ QAPViscosity::~QAPViscosity(){}
 
 void QAPViscosity::computeQuantities(Cell* cell)
 {
-  cell->computeGradient(m_grads, variableNamesVisc, numPhasesVisc);
+  cell->computeGradients(m_grads, variableNamesVisc, numPhasesVisc);
 }
 
 //***********************************************************************

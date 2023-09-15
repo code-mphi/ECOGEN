@@ -35,6 +35,9 @@
 #include "ElementCartesian.h"
 #include "FaceCartesian.h"
 #include "stretchZone.h"
+#include "../Order2/CellInterfaceO2Cartesian.h"
+#include "../Order2/CellO2Cartesian.h"
+#include "../Order2/CellO2GhostCartesian.h"
 #include "../Parallel/decomposition.hpp"
 
 class MeshCartesian : public Mesh
@@ -44,8 +47,8 @@ public:
     std::vector<stretchZone> stretchX, std::vector<stretchZone> stretchY, std::vector<stretchZone> stretchZ);
   virtual ~MeshCartesian();
 
-  virtual void attributLimites(std::vector<BoundCond*>& boundCond);
-  void recupereIJK(const int& index, int& i, int& j, int& k) const;
+  virtual void assignLimits(std::vector<BoundCond*>& boundCond);
+  void getIJK(const int& index, int& i, int& j, int& k) const;
   void construitIGlobal(const int& i, const int& j, const int& k, int& index) const;
   virtual int initializeGeometrie(TypeMeshContainer<Cell*>& cells, TypeMeshContainer<Cell*>& cellsGhost, TypeMeshContainer<CellInterface*>& cellInterfaces,
     const int& /*restartSimulation*/, bool /*pretraitementParallele*/, std::string ordreCalcul);
@@ -54,6 +57,7 @@ public:
   void initializeGeometrieParallele(TypeMeshContainer<Cell*>& cells, TypeMeshContainer<Cell*>& cellsGhost, TypeMeshContainer<CellInterface*>& cellInterfaces, std::string ordreCalcul);
   void decoupageParallele(std::string ordreCalcul, TypeMeshContainer<Cell*>& cells);
   virtual std::string whoAmI() const;
+  virtual void setImmersedBoundaries(TypeMeshContainer<CellInterface*>* cellInterfacesLvl, std::string ordreCalcul) const;
 
   //Accessors
   //---------
@@ -62,10 +66,10 @@ public:
 
   //Printing / Reading
   //------------------
-  virtual std::string recupereChaineExtent(bool global = false) const;
-  virtual void recupereCoord(std::vector<double>& jeuDonnees, Axis axis) const;
-  virtual void recupereDonnees(TypeMeshContainer<Cell*>* cellsLvl, std::vector<double>& jeuDonnees, const int var, int phase) const;
-  virtual void setDataSet(std::vector<double>& jeuDonnees, TypeMeshContainer<Cell*>* cellsLvl, const int var, int phase) const;
+  virtual std::string getStringExtent(bool global = false) const;
+  virtual void getCoord(std::vector<double>& dataset, Axis axis) const;
+  virtual void getData(TypeMeshContainer<Cell*>* cellsLvl, std::vector<double>& dataset, const int var, int phase) const;
+  virtual void setDataSet(std::vector<double>& dataset, TypeMeshContainer<Cell*>* cellsLvl, const int var, int phase) const;
 
 protected:
   TypeMeshContainer<Element*> m_elements; //!<Vector of element objects: Contains geometrical attributes

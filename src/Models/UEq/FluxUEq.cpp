@@ -97,6 +97,32 @@ void FluxUEq::subtractFlux(double coefA)
 
 //***********************************************************************
 
+void FluxUEq::addFluxRotatingRegion(double coefA)
+{
+  for (int k = 0; k < numberPhases; k++) {
+    m_alpha[k] += coefA*static_cast<FluxUEq*> (fluxBuffMRF)->m_alpha[k];
+    m_mass[k] += coefA*static_cast<FluxUEq*> (fluxBuffMRF)->m_mass[k];
+    m_energ[k] += coefA*static_cast<FluxUEq*> (fluxBuffMRF)->m_energ[k];
+  }
+  m_momentum += coefA*static_cast<FluxUEq*> (fluxBuffMRF)->m_momentum;
+  m_energMixture += coefA*static_cast<FluxUEq*> (fluxBuffMRF)->m_energMixture;
+}
+
+//***********************************************************************
+
+void FluxUEq::subtractFluxRotatingRegion(double coefA)
+{
+  for (int k = 0; k < numberPhases; k++) {
+    m_alpha[k] -= coefA*static_cast<FluxUEq*> (fluxBuffMRF)->m_alpha[k];
+    m_mass[k] -= coefA*static_cast<FluxUEq*> (fluxBuffMRF)->m_mass[k];
+    m_energ[k] -= coefA*static_cast<FluxUEq*> (fluxBuffMRF)->m_energ[k];
+  }
+  m_momentum -= coefA*static_cast<FluxUEq*> (fluxBuffMRF)->m_momentum;
+  m_energMixture -= coefA*static_cast<FluxUEq*> (fluxBuffMRF)->m_energMixture;
+}
+
+//***********************************************************************
+
 void FluxUEq::multiply(double scalar)
 {
     for(int k=0;k<numberPhases;k++)
@@ -195,21 +221,7 @@ void FluxUEq::setToZero()
 
 //***********************************************************************
 
-void FluxUEq::setToZeroBufferFlux()
-{
-  for (int k = 0; k<numberPhases; k++) {
-    static_cast<FluxUEq*> (fluxBuff)->m_alpha[k] = 0.;
-    static_cast<FluxUEq*> (fluxBuff)->m_mass[k] = 0.;
-    static_cast<FluxUEq*> (fluxBuff)->m_energ[k] = 0.;
-  }
-  static_cast<FluxUEq*> (fluxBuff)->m_momentum = 0.;
-  static_cast<FluxUEq*> (fluxBuff)->m_energMixture = 0.;
-  static_cast<FluxUEq*> (fluxBuff)->m_sM = 0.; 
-}
-
-//***********************************************************************
-
-void FluxUEq::addNonCons(double coefA, const Cell* cell)
+void FluxUEq::addNonCons(double coefA, const Cell* cell, const Coord& /*normal*/, const Coord& /*tangent*/, const Coord& /*binormal*/)
 {
   Phase* phase;
   for(int k=0;k<numberPhases;k++){
@@ -221,7 +233,7 @@ void FluxUEq::addNonCons(double coefA, const Cell* cell)
 
 //***********************************************************************
 
-void FluxUEq::subtractNonCons(double coefA, const Cell* cell)
+void FluxUEq::subtractNonCons(double coefA, const Cell* cell, const Coord& /*normal*/, const Coord& /*tangent*/, const Coord& /*binormal*/)
 {
   Phase* phase;
   for(int k=0;k<numberPhases;k++){
@@ -235,20 +247,21 @@ void FluxUEq::subtractNonCons(double coefA, const Cell* cell)
 
 void FluxUEq::schemeCorrection(Cell& cell) const
 {
+  //Un is in fluxBuff and fluxes are in m_cons (this object)
   double rhoN(0.), rhoNp1(0.), sumDeltaAlphaRhoInternalEnergy_k(0.);
+  double DeltaRhoU2(0.), DeltaRhoInternalEnergy(0.), errorOnEnergy(0.);
+  Coord momentumNp1;
+
   rhoN = cell.getMixture()->getDensity();
   for (int k = 0; k < numberPhases; k++) {
-    rhoNp1 += m_mass[k] + static_cast<FluxUEq*> (fluxBuff)->getMass(k);
+    rhoNp1 += m_mass[k] + static_cast<FluxUEq*> (fluxBuff)->getMass(k);  //Sum of (alpha_k * rho_k)^(n+1)
     sumDeltaAlphaRhoInternalEnergy_k += m_energ[k];
   }
 
-  double DeltaRhoU2(0.), DeltaRhoInternalEnergy(0.);
-  Coord momentumNp1;
   momentumNp1 = m_momentum + static_cast<FluxUEq*> (fluxBuff)->getMomentum();
   DeltaRhoU2 = momentumNp1.squaredNorm() / rhoNp1 - static_cast<FluxUEq*> (fluxBuff)->getMomentum().squaredNorm() / rhoN;
   DeltaRhoInternalEnergy = m_energMixture - 0.5*DeltaRhoU2; //Note that here the delta from the surface-tension energy is considered as negligible (0.)
 
-  double errorOnEnergy(0.);
   errorOnEnergy = DeltaRhoInternalEnergy - sumDeltaAlphaRhoInternalEnergy_k;
   for (int k = 0; k < numberPhases; k++) {
     m_energ[k] += cell.getPhase(k)->getAlpha() * errorOnEnergy;
@@ -341,7 +354,7 @@ void FluxUEq::prepSourceTermsHeating(const double& q)
 	  m_mass[k] = 0.;
   }
 
-  //JC//Dev To generalize
+  //FP//Dev To generalize
   ////Version 2 directly on PUEq (Kapila) model
   //double p0 = cell->getMixture()->getPressure();
   //double v = 1./cell->getMixture()->getDensity();
@@ -433,6 +446,16 @@ void FluxUEq::setCons(const Flux* cons)
   }
   m_momentum = cons->getMomentum();
   m_energMixture = cons->getEnergyMix();
+}
+
+//***********************************************************************
+
+void FluxUEq::addNonConsMrfFlux(Phase** phase)
+{
+  for(int k=0; k<numberPhases; k++){
+    m_alpha[k] -= phase[k]->getAlpha() * m_uStar; 
+    m_energ[k] += phase[k]->getAlpha() * phase[k]->getPressure() * m_uStar;
+  }
 }
 
 //***********************************************************************

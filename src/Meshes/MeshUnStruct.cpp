@@ -41,9 +41,12 @@ MeshUnStruct::MeshUnStruct(const std::string& meshFile, const std::string& meshE
   m_nameMesh(meshFile),
   m_numberNodes(0),
   m_numberInnerNodes(0),
+  m_nodes(nullptr),
   m_numberInnerElements(0),
   m_numberGhostElements(0),
   m_numberCommunicatingElements(0),
+  m_elements(nullptr),
+  m_faces(nullptr),
   m_numberFacesParallel(0),
   m_numberGhostCells(0),
   m_numberElements0D(0),
@@ -64,6 +67,7 @@ MeshUnStruct::MeshUnStruct(const std::string& meshFile, const std::string& meshE
   m_nameMesh.resize(m_nameMesh.size() - meshExtension.size() - 1); // Remove mesh file extension
   m_type = UNS;
 
+  //JC//WARNING this message will be displayed even during the reading of the rough mesh
   if (rankCpu == 0) {
 	  std::cout << "------------------------------------------------------" << std::endl;
 	  std::cout << " B) SEARCHING MESH FILE " + m_meshFile << std::endl;
@@ -76,9 +80,9 @@ MeshUnStruct::MeshUnStruct(const std::string& meshFile, const std::string& meshE
 //***********************************************************************
 
 MeshUnStruct::~MeshUnStruct(){
-  delete[] m_faces;
-  delete[] m_elements;
-  delete[] m_nodes;
+  if (m_faces != nullptr) delete[] m_faces;
+  if (m_elements != nullptr) delete[] m_elements;
+  if (m_nodes != nullptr) delete[] m_nodes;
   for (unsigned int l = 0; l < m_bound.size(); l++) { delete m_bound[l]; }
 }
 
@@ -96,7 +100,7 @@ std::string MeshUnStruct::readMeshFileExtension(const std::string& meshFile)
 
 //***********************************************************************
 
-void MeshUnStruct::attributLimites(std::vector<BoundCond*>& boundCond)
+void MeshUnStruct::assignLimits(std::vector<BoundCond*>& boundCond)
 {
   // Look for highest boundary physic number
   int maxNumLim(0); 
@@ -133,7 +137,7 @@ int MeshUnStruct::initializeGeometrie(TypeMeshContainer<Cell*>& cells, TypeMeshC
       }
       this->initGeometryParallel(cells, cellsGhost, cellInterfaces, ordreCalcul);
     }
-    return m_geometrie;
+    return m_problemDimension;
   }
   catch (ErrorECOGEN &) { throw; }
 }
@@ -197,37 +201,37 @@ void MeshUnStruct::writeMeshInfoData() const
 }
 
 //**************************************************************************
-//******************************** ECRITURE ********************************
+//******************************** WRITING *********************************
 //**************************************************************************
 
-void MeshUnStruct::ecritHeaderPiece(std::ofstream& fileStream, TypeMeshContainer<Cell*>* /*cellsLvl*/) const
+void MeshUnStruct::writeHeaderPiece(std::ofstream& fileStream, TypeMeshContainer<Cell*>* /*cellsLvl*/) const
 {
   fileStream << "    <Piece NumberOfPoints=\"" << m_numberNodes << "\" NumberOfCells=\"" << m_numberCellsCalcul - m_numberGhostCells << "\">" << std::endl;
 }
 
 //****************************************************************************
 
-void MeshUnStruct::recupereNoeuds(std::vector<double>& jeuDonnees, std::vector<Cell*>* /*cellsLvl*/) const
+void MeshUnStruct::getNodes(std::vector<double>& dataset, std::vector<Cell*>* /*cellsLvl*/) const
 {
-  for (int noeud = 0; noeud < m_numberNodes; noeud++)
+  for (int node = 0; node < m_numberNodes; node++)
   {
-    jeuDonnees.push_back(m_nodes[noeud].getX());
-    jeuDonnees.push_back(m_nodes[noeud].getY());
-    jeuDonnees.push_back(m_nodes[noeud].getZ());
+    dataset.push_back(m_nodes[node].getX());
+    dataset.push_back(m_nodes[node].getY());
+    dataset.push_back(m_nodes[node].getZ());
   }
 }
 
 //****************************************************************************
 
-void MeshUnStruct::recupereConnectivite(std::vector<double>& jeuDonnees, std::vector<Cell*>* /*cellsLvl*/) const
+void MeshUnStruct::getConnectivity(std::vector<double>& dataset, std::vector<Cell*>* /*cellsLvl*/) const
 {
   for (int i = m_numberBoundFaces; i < m_numberInnerElements; i++)
   {
     if (!m_elements[i]->isFantome())
     {
-      for (int noeud = 0; noeud < m_elements[i]->getNumberNoeuds(); noeud++)
+      for (int node = 0; node < m_elements[i]->getNumberNodes(); node++)
       {
-        jeuDonnees.push_back(m_elements[i]->getNumNoeud(noeud));
+        dataset.push_back(m_elements[i]->getNumNode(node));
       }
     }
   }
@@ -235,37 +239,37 @@ void MeshUnStruct::recupereConnectivite(std::vector<double>& jeuDonnees, std::ve
 
 //****************************************************************************
 
-void MeshUnStruct::recupereOffsets(std::vector<double>& jeuDonnees, std::vector<Cell*>* /*cellsLvl*/) const
+void MeshUnStruct::getOffsets(std::vector<double>& dataset, std::vector<Cell*>* /*cellsLvl*/) const
 {
   int offset(0);
   for (int i = m_numberBoundFaces; i < m_numberInnerElements; i++)
   {
     if (!m_elements[i]->isFantome())
     {
-      offset += m_elements[i]->getNumberNoeuds();
-      jeuDonnees.push_back(offset);
+      offset += m_elements[i]->getNumberNodes();
+      dataset.push_back(offset);
     }
   }
 }
 
 //****************************************************************************
 
-void MeshUnStruct::recupereTypeCell(std::vector<double>& jeuDonnees, std::vector<Cell*>* /*cellsLvl*/) const
+void MeshUnStruct::getTypeCell(std::vector<double>& dataset, std::vector<Cell*>* /*cellsLvl*/) const
 {
   for (int i = m_numberBoundFaces; i < m_numberInnerElements; i++)
   {
     if (!m_elements[i]->isFantome())
     {
-      jeuDonnees.push_back(m_elements[i]->getTypeVTK());
+      dataset.push_back(m_elements[i]->getTypeVTK());
     }
   }
 }
 
 //****************************************************************************
 
-void MeshUnStruct::recupereDonnees(TypeMeshContainer<Cell*>* cellsLvl, std::vector<double>& jeuDonnees, const int var, int phase) const
+void MeshUnStruct::getData(TypeMeshContainer<Cell*>* cellsLvl, std::vector<double>& dataset, const int var, int phase) const
 {
-  jeuDonnees.clear();
+  dataset.clear();
   int numCell;
   double transport(0.);
   for (int i = m_numberBoundFaces; i < m_numberInnerElements; i++)
@@ -273,38 +277,41 @@ void MeshUnStruct::recupereDonnees(TypeMeshContainer<Cell*>* cellsLvl, std::vect
     if (!m_elements[i]->isFantome())
     {
       numCell = m_elements[i]->getNumCellAssociee();
-      if (var > 0) { //On veut recuperer les donnees scalars
-        if (phase >= 0) { jeuDonnees.push_back(cellsLvl[0][numCell]->getPhase(phase)->returnScalar(var)); }      //Donnees de phases
-        else if (phase == -1) { jeuDonnees.push_back(cellsLvl[0][numCell]->getMixture()->returnScalar(var)); }   //Donnees de mixture
+      if (var > 0) { //We want to get the scalar data
+        if (phase >= 0) { dataset.push_back(cellsLvl[0][numCell]->getPhase(phase)->returnScalar(var)); }      //data de phases
+        else if (phase == -1) { dataset.push_back(cellsLvl[0][numCell]->getMixture()->returnScalar(var)); }   //data de mixture
         else if (phase == -2) {
           transport = cellsLvl[0][numCell]->getTransport(var-1).getValue();
           if (transport < 1.e-20) { transport = 0.; }
-          jeuDonnees.push_back(transport);
+          dataset.push_back(transport);
         }
-        else if (phase == -3) { jeuDonnees.push_back(cellsLvl[0][numCell]->getXi()); }
-        else if (phase == -4) { jeuDonnees.push_back(cellsLvl[0][numCell]->getDensityGradient()); }
-        else { Errors::errorMessage("MeshUnStruct::recupereDonnees: unknown number of phase: ", phase); }
+        else if (phase == -3) { dataset.push_back(cellsLvl[0][numCell]->getXi()); }
+        else if (phase == -4) { dataset.push_back(cellsLvl[0][numCell]->getDensityGradient()); }
+        else if (phase == -7) { // Saturation pressure
+          dataset.push_back(cellsLvl[0][numCell]->getPsat());
+        }
+        else { Errors::errorMessage("MeshUnStruct::getData: unknown number of phase: ", phase); }
       }
-      else { //On veut recuperer les donnees vectorielles
+      else { //We want to get the vector data
         if (phase >= 0) { //Phases data
-          jeuDonnees.push_back(cellsLvl[0][numCell]->getPhase(phase)->returnVector(-var).getX());
-          jeuDonnees.push_back(cellsLvl[0][numCell]->getPhase(phase)->returnVector(-var).getY());
-          jeuDonnees.push_back(cellsLvl[0][numCell]->getPhase(phase)->returnVector(-var).getZ());
+          dataset.push_back(cellsLvl[0][numCell]->getPhase(phase)->returnVector(-var).getX());
+          dataset.push_back(cellsLvl[0][numCell]->getPhase(phase)->returnVector(-var).getY());
+          dataset.push_back(cellsLvl[0][numCell]->getPhase(phase)->returnVector(-var).getZ());
         }
         else if(phase == -1){  //Mixture data
-          jeuDonnees.push_back(cellsLvl[0][numCell]->getMixture()->returnVector(-var).getX());
-          jeuDonnees.push_back(cellsLvl[0][numCell]->getMixture()->returnVector(-var).getY());
-          jeuDonnees.push_back(cellsLvl[0][numCell]->getMixture()->returnVector(-var).getZ());
+          dataset.push_back(cellsLvl[0][numCell]->getMixture()->returnVector(-var).getX());
+          dataset.push_back(cellsLvl[0][numCell]->getMixture()->returnVector(-var).getY());
+          dataset.push_back(cellsLvl[0][numCell]->getMixture()->returnVector(-var).getZ());
         }
-        else { Errors::errorMessage("MeshUnStruct::recupereDonnees: unknown number of phase: ", phase); }
-      } //Fin vecteur
+        else { Errors::errorMessage("MeshUnStruct::getData: unknown number of phase: ", phase); }
+      } //End vector
     }
   }
 }
 
 //****************************************************************************
 
-void MeshUnStruct::setDataSet(std::vector<double>& jeuDonnees, TypeMeshContainer<Cell*>* cellsLvl, const int var, int phase) const
+void MeshUnStruct::setDataSet(std::vector<double>& dataset, TypeMeshContainer<Cell*>* cellsLvl, const int var, int phase) const
 {
   int iterDataSet(0);
   int numCell;
@@ -315,33 +322,33 @@ void MeshUnStruct::setDataSet(std::vector<double>& jeuDonnees, TypeMeshContainer
     {
       numCell = m_elements[i]->getNumCellAssociee();
       if (var > 0) { //Scalars data are first set
-        if (phase >= 0) { cellsLvl[0][numCell]->getPhase(phase)->setScalar(var, jeuDonnees[iterDataSet++]); } //phases data
-        else if (phase == -1) { cellsLvl[0][numCell]->getMixture()->setScalar(var, jeuDonnees[iterDataSet++]); }  //mixture data
-        else if (phase == -2) { cellsLvl[0][numCell]->getTransport(var - 1).setValue(jeuDonnees[iterDataSet++]); } //transport data
+        if (phase >= 0) { cellsLvl[0][numCell]->getPhase(phase)->setScalar(var, dataset[iterDataSet++]); } //phases data
+        else if (phase == -1) { cellsLvl[0][numCell]->getMixture()->setScalar(var, dataset[iterDataSet++]); }  //mixture data
+        else if (phase == -2) { cellsLvl[0][numCell]->getTransport(var - 1).setValue(dataset[iterDataSet++]); } //transport data
         else { Errors::errorMessage("MeshUnStruct::setDataSet: unknown phase number: ", phase); }
       }
-      else { //On veut recuperer les donnees vectorielles
+      else { //We want to get the vector data
         if (phase >= 0) { //Phases data
-          vec.setXYZ(jeuDonnees[iterDataSet], jeuDonnees[iterDataSet+1], jeuDonnees[iterDataSet+2]);
+          vec.setXYZ(dataset[iterDataSet], dataset[iterDataSet+1], dataset[iterDataSet+2]);
           cellsLvl[0][numCell]->getPhase(phase)->setVector(-var, vec);
           iterDataSet += 3;
         }
         else if (phase == -1) {  //Mixture data
-          vec.setXYZ(jeuDonnees[iterDataSet], jeuDonnees[iterDataSet+1], jeuDonnees[iterDataSet+2]);
+          vec.setXYZ(dataset[iterDataSet], dataset[iterDataSet+1], dataset[iterDataSet+2]);
           cellsLvl[0][numCell]->getMixture()->setVector(-var, vec);
           iterDataSet += 3;
         }
         else { Errors::errorMessage("MeshUnStruct::setDataSet: unknown phase number: ", phase); }
-      } //Fin vecteur
+      } //End vector
     }
   }
 }
 
 //****************************************************************************
 
-void MeshUnStruct::extractAbsVelocityMRF(TypeMeshContainer<Cell*>* cellsLvl, std::vector<double>& jeuDonnees, Source *sourceMRF) const
+void MeshUnStruct::extractAbsVelocityMRF(TypeMeshContainer<Cell*>* cellsLvl, std::vector<double>& dataset, Source *sourceMRF) const
 {
-  jeuDonnees.clear();
+  dataset.clear();
   int numCell;
   for (int i = m_numberBoundFaces; i < m_numberInnerElements; i++)
   {
@@ -351,15 +358,15 @@ void MeshUnStruct::extractAbsVelocityMRF(TypeMeshContainer<Cell*>* cellsLvl, std
       // Absolute velocity is built on the specific region rotating or when whole geometry is rotating.
       if (sourceMRF->getPhysicalEntity() == cellsLvl[0][numCell]->getElement()->getAppartenancePhysique() || sourceMRF->getPhysicalEntity() == 0) {
         Coord absoluteVelocity = sourceMRF->computeAbsVelocity(cellsLvl[0][numCell]->getVelocity(), cellsLvl[0][numCell]->getPosition());
-        jeuDonnees.push_back(absoluteVelocity.getX());
-        jeuDonnees.push_back(absoluteVelocity.getY());
-        jeuDonnees.push_back(absoluteVelocity.getZ());
+        dataset.push_back(absoluteVelocity.getX());
+        dataset.push_back(absoluteVelocity.getY());
+        dataset.push_back(absoluteVelocity.getZ());
       }
       // If the region is not rotating absolute velocity = relative velocity
       else {
-        jeuDonnees.push_back(cellsLvl[0][numCell]->getVelocity().getX());
-        jeuDonnees.push_back(cellsLvl[0][numCell]->getVelocity().getY());
-        jeuDonnees.push_back(cellsLvl[0][numCell]->getVelocity().getZ());
+        dataset.push_back(cellsLvl[0][numCell]->getVelocity().getX());
+        dataset.push_back(cellsLvl[0][numCell]->getVelocity().getY());
+        dataset.push_back(cellsLvl[0][numCell]->getVelocity().getZ());
       }
     }
   }
@@ -367,172 +374,18 @@ void MeshUnStruct::extractAbsVelocityMRF(TypeMeshContainer<Cell*>* cellsLvl, std
 
 //***********************************************************************
 
-// void MeshUnStruct::rechercheElementsArrieres(ElementNS *element, FaceNS *face, CellInterface* cellInterface, std::vector<ElementNS *> voisins, Cell** cells) const
-// {
-//   //int index(element->getIndex() - m_numberBoundFaces);
-//   //Coord vG = element->vecteur(face);
-//   //ElementNS *eT; //Element a tester
-//   ////1) Recherche du premier element arriere gauche BG1M
-//   ////---------------------------------------------------
-//   //double cos(0.);
-//   //for (unsigned int v = 0; v < voisins.size(); v++) {
-//   //  eT = voisins[v];
-//   //  Coord vT = eT->vecteur(element);
-//   //  double cosTemp(Coord::cos(vT, vG));
-//   //  if (cosTemp >= cos) {
-//   //    cos = cosTemp;
-//   //    if (eT->getIndex() < m_numberBoundFaces) { //Si c est une limite on remet BG1M a NULL
-//   //      cellInterface->setB(BG1M, 0);
-//   //    }
-//   //    else { //Sinon on met a jour avec la maille la plus loin
-//   //      Cell* c(cells[eT->getNumCellAssociee()]);
-//   //      cellInterface->setB(BG1M, c);
-//   //    }
-//   //  }
-//   //}
-//   ////2) Recherche du second element arriere gauche BG2M
-//   ////---------------------------------------------------
-//   //cos = 0.;
-//   //if (cellInterface->getB(BG1M) != 0) {  //Cas non cellInterface
-//   //  Element *e1(cellInterface->getB(BG1M)->getElement());
-//   //  Coord v1 = e1->vecteur(element);
-//   //  Coord sin1(Coord::sin(v1, vG));
-//   //  if (std::fabs(sin1.norm()) <= 1e-8) {
-//   //    cellInterface->setB(BG2M, cellInterface->getB(BG1M)); // Si le cos est nul, meme cell pour B1 et B2
-//   //  }
-//   //  else {
-//   //    for (unsigned int v = 0; v < voisins.size(); v++) {
-//   //      eT = voisins[v];
-//   //      if (eT == e1) continue; // voisin suivant si voisin deja utilise 
-//   //      Coord vT = eT->vecteur(element);
-//   //      Coord sinTemp(Coord::sin(vT, vG));
-
-//   //      if (sinTemp.scalar(sin1) <= 0.) {
-//   //        double cosTemp(Coord::cos(vT, vG));
-//   //        if (cosTemp >= cos) {
-//   //          cos = cosTemp;
-//   //          if (eT->getIndex() < m_numberBoundFaces) { //Si c est une limite on remet BG1M a NULL
-//   //            cellInterface->setB(BG2M, 0);
-//   //          }
-//   //          else {  //Sinon on met a jour avec la 2 eme maille la plus loin
-//   //            Cell* c(cells[eT->getNumCellAssociee()]);
-//   //            cellInterface->setB(BG2M, c);
-//   //          }
-//   //        }
-//   //      } //fin sin*sin <0
-//   //    }  //fin boucle voisins
-//   //  } //fin if 
-//   //} //Fin if cellInterface
-
-//   //  //Determination des ponderations arrieres
-//   //Coord MB1; if (cellInterface->getB(BG1M) != 0) { MB1.setFromSubtractedVectors(face->getPos(), cellInterface->getB(BG1M)->getPosition()); }
-//   //Coord MB2; if (cellInterface->getB(BG2M) != 0) { MB2.setFromSubtractedVectors(face->getPos(), cellInterface->getB(BG2M)->getPosition()); }
-//   //Coord MB; MB.setFromSubtractedVectors(face->getPos(), element->getPosition());
-//   //double a, b, beta1(1.), beta2(0.);
-//   //a = (MB1.vectoriel(MB)).norm() / MB.norm();
-//   //b = (MB2.vectoriel(MB)).norm() / MB.norm();
-//   //if (std::fabs(a + b) > 1e-8) { beta1 = b / (a + b); beta2 = 1. - beta1; }
-//   //cellInterface->setBeta(betaG1M, beta1);
-//   //cellInterface->setBeta(betaG2M, beta2);
-//   ////Calcul de la distance du vertex M (cell interface) au vertex H (barycenter)
-//   //if (cellInterface->getB(BG1M) != 0) {
-//   //  cos = Coord::cos(MB, MB1);
-//   //  double d, e, c;
-//   //  d = cos*MB1.norm();
-//   //  Coord B1B2; B1B2 = MB1 - MB2;
-//   //  e = B1B2.norm()*beta1;
-//   //  c = sqrt(e*e - a*a);
-//   //  d += c;
-//   //  cellInterface->setDistanceH(distanceHGM, d);
-//   //}
-//   //cout << eG->getIndex() << " : " << endl;
-//   //if (cellInterfaces[i]->getB(BG1M) != 0) cout << "BG1M = " << cellInterfaces[i]->getB(BG1M)->getElement()->getIndex() << " " << cellInterfaces[i]->getDistanceH(distanceHGM) << endl;
-//   //if (cellInterfaces[i]->getB(BG2M) != 0) cout << "BG2M = " << cellInterfaces[i]->getB(BG2M)->getElement()->getIndex() << " " << cellInterfaces[i]->getDistanceH(distanceHGM) << endl;
-// }
-
-//***********************************************************************
-
-// void MeshUnStruct::rechercheElementsAvants(ElementNS *element, FaceNS *face, CellInterface* cellInterface, std::vector<ElementNS *> voisins, Cell** cells) const
-// {
-//   int index(element->getIndex() - m_numberBoundFaces);
-//   Coord vG = element->vecteur(face);
-//   //ElementNS *eT; //Element a tester
-//   ////1) Recherche du premier element arriere gauche BG1P
-//   ////---------------------------------------------------
-//   //double cos(0.);
-//   //for (unsigned int v = 0; v < voisins.size(); v++) {
-//   //  eT = voisins[v];
-//   //  Coord vT = eT->vecteur(element);
-//   //  double cosTemp(Coord::cos(vT, vG));
-//   //  if (cosTemp <= cos) {
-//   //    cos = cosTemp;
-//   //    if (eT->getIndex() < m_numberBoundFaces) { //Si c est une limite on remet BG1P a NULL
-//   //      cellInterface->setB(BG1P, 0);
-//   //    }
-//   //    else { //Sinon on met a jour avec la maille la plus loin
-//   //      Cell* c(cells[eT->getNumCellAssociee()]);
-//   //      cellInterface->setB(BG1P, c);
-//   //    }
-//   //  }
-//   //}
-//   ////2) Recherche du second element arriere gauche BG2P
-//   ////---------------------------------------------------
-//   //cos = 0.;
-//   //if (cellInterface->getB(BG1P) != 0) {  //Cas non cellInterface
-//   //  Element *e1(cellInterface->getB(BG1P)->getElement());
-//   //  Coord v1 = e1->vecteur(element);
-//   //  Coord sin1(Coord::sin(v1, vG));
-//   //  if (std::fabs(sin1.norm()) <= 1e-8) {
-//   //    cellInterface->setB(BG2P, cellInterface->getB(BG1P)); // Si le cos est nul, meme cell pour B1 et B2
-//   //  }
-//   //  else {
-//   //    for (unsigned int v = 0; v < voisins.size(); v++) {
-//   //      eT = voisins[v];
-//   //      if (eT == e1) continue; // voisin suivant si voisin deja utilise 
-//   //      Coord vT = eT->vecteur(element);
-//   //      Coord sinTemp(Coord::sin(vT, vG));
-
-//   //      if (sinTemp.scalar(sin1) <= 0.) {
-//   //        double cosTemp(Coord::cos(vT, vG));
-//   //        if (cosTemp <= cos) {
-//   //          cos = cosTemp;
-//   //          if (eT->getIndex() < m_numberBoundFaces) { //Si c est une limite on remet BG2P a NULL
-//   //            cellInterface->setB(BG2P, 0);
-//   //          }
-//   //          else {  //Sinon on met a jour avec la 2 eme maille la plus loin
-//   //            Cell* c(cells[eT->getNumCellAssociee()]);
-//   //            cellInterface->setB(BG2P, c);
-//   //          }
-//   //        }
-//   //      } //fin sin*sin <0
-//   //    }  //fin boucle voisins
-//   //  } //fin if 
-//   //} //Fin if cellInterface
-
-//   //  //Determination des ponderations arrieres
-//   //Coord MB1; if (cellInterface->getB(BG1P) != 0) { MB1.setFromSubtractedVectors(face->getPos(), cellInterface->getB(BG1P)->getPosition()); }
-//   //Coord MB2; if (cellInterface->getB(BG2P) != 0) { MB2.setFromSubtractedVectors(face->getPos(), cellInterface->getB(BG1P)->getPosition()); }
-//   //Coord MB; MB.setFromSubtractedVectors(face->getPos(), element->getPosition());
-//   //double a, b, beta1(1.), beta2(0.);
-//   //a = (MB1.vectoriel(MB)).norm() / MB.norm();
-//   //b = (MB2.vectoriel(MB)).norm() / MB.norm();
-//   //if (std::fabs(a + b) > 1e-8) { beta1 = b / (a + b); beta2 = 1. - beta1; }
-//   //cellInterface->setBeta(betaG1P, beta1);
-//   //cellInterface->setBeta(betaG2P, beta2);
-//   ////Calcul de la distance du vertex M (cellInterface de maille) au vertex H (barycenter)
-//   //if (cellInterface->getB(BG1P) != 0) {
-//   //  cos = Coord::cos(MB, -1.*MB1);
-//   //  double d, e, c;
-//   //  d = cos*MB1.norm();
-//   //  Coord B1B2; B1B2 = MB1 - MB2;
-//   //  e = B1B2.norm()*beta1;
-//   //  c = sqrt(e*e - a*a);
-//   //  d += c;
-//   //  cellInterface->setDistanceH(distanceHGP, d);
-//   //}
-//   //cout << eG->getIndex() << " : " << endl;
-//   //if (cellInterfaces[i]->getB(BG1P) != 0) cout << "BG1P = " << cellInterfaces[i]->getB(BG1P)->getElement()->getIndex() << " " << cellInterfaces[i]->getDistanceH(distanceHGP) << endl;
-//   //if (cellInterfaces[i]->getB(BG2P) != 0) cout << "BG2P = " << cellInterfaces[i]->getB(BG2P)->getElement()->getIndex() << " " << cellInterfaces[i]->getDistanceH(distanceHGP) << endl;
-// }
+void MeshUnStruct::extractReferenceLength(std::vector<Cell*>* cellsLvl, std::vector<double>& dataset) const
+{
+  dataset.clear();
+  int numCell;
+  for (int i = m_numberBoundFaces; i < m_numberInnerElements; i++)
+  {
+    if (!m_elements[i]->isFantome())
+    {
+      numCell = m_elements[i]->getNumCellAssociee();
+      dataset.push_back(cellsLvl[0][numCell]->getElement()->getLCFL());
+    }
+  }
+}
 
 //***********************************************************************

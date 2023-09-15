@@ -1,0 +1,9 @@
+<?xml version = "1.0" encoding = "UTF-8" standalone = "yes"?>
+<model>
+	<flowModel name="TemperaturePressureVelocityEq" numberPhases="2" alphaNull="true"/>
+	<EOS name="IG_waterVap.xml"/>
+	<EOS name="IG_air.xml"/>
+	<sourceTerms type="heating" order="EULER">
+		<dataHeating volumeHeatPower="2.e8"/>
+	</sourceTerms>
+</model>

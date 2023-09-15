@@ -47,31 +47,31 @@ ElementSegment::~ElementSegment(){}
 
 //***********************************************************************
 
-void ElementSegment::computeVolume(const Coord* noeuds)
+void ElementSegment::computeVolume(const Coord* nodes)
 {
-   m_volume = (noeuds[1] - noeuds[0]).norm(); //longueur du segment
+   m_volume = (nodes[1] - nodes[0]).norm(); //longueur du segment
 }
 
 //***********************************************************************
 
-void ElementSegment::computeLCFL(const Coord* noeuds)
+void ElementSegment::computeLCFL(const Coord* nodes)
 {
-  m_lCFL = (noeuds[1] - noeuds[0]).norm()/2.0; //demi longueur du segment
+  m_lCFL = (nodes[1] - nodes[0]).norm()/2.0; //demi longueur du segment
 }
 
 //***********************************************************************
 
-void ElementSegment::construitFaces(const Coord* noeuds, FaceNS** faces, int& iMax, int** facesBuff, int* sumNodesBuff)
+void ElementSegment::construitFaces(const Coord* nodes, FaceNS** faces, int& iMax, int** facesBuff, int* sumNodesBuff)
 {
   //2 faces a traiter de type vertex
   int indexFaceExiste(-1);
-  int noeudAutre;
+  int nodeAutre;
   for (int i = 0; i < NUMBERFACES; i++)
   {
     switch (i)
     {
-      case 0: facesBuff[iMax][0] = m_numNoeuds[0]; noeudAutre = 1; break;
-      case 1: facesBuff[iMax][0] = m_numNoeuds[1]; noeudAutre = 0; break;      
+      case 0: facesBuff[iMax][0] = m_numNodes[0]; nodeAutre = 1; break;
+      case 1: facesBuff[iMax][0] = m_numNodes[1]; nodeAutre = 0; break;      
     }
     sumNodesBuff[iMax] = facesBuff[iMax][0];
     // Checking face existence
@@ -80,12 +80,12 @@ void ElementSegment::construitFaces(const Coord* noeuds, FaceNS** faces, int& iM
     if (indexFaceExiste==-1)
     {
       faces[iMax] = new FacePoint(facesBuff[iMax][0]); //pas besoin du tri ici
-      faces[iMax]->construitFace(noeuds, m_numNoeuds[noeudAutre], this);
+      faces[iMax]->construitFace(nodes, m_numNodes[nodeAutre], this);
       iMax++;
     }
     else
     {
-      faces[indexFaceExiste]->ajouteElementVoisin(this);
+      faces[indexFaceExiste]->addElementNeighbor(this);
     }
   }
 }
@@ -100,8 +100,8 @@ void ElementSegment::construitFacesSimplifie(int& iMax, int** facesBuff, int* su
   {
     switch (i)
     {
-      case 0: facesBuff[iMax][0] = m_numNoeuds[0]; break;
-      case 1: facesBuff[iMax][0] = m_numNoeuds[1]; break;
+      case 0: facesBuff[iMax][0] = m_numNodes[0]; break;
+      case 1: facesBuff[iMax][0] = m_numNodes[1]; break;
     }
     sumNodesBuff[iMax] = facesBuff[iMax][0];
     // Checking face existence
@@ -119,10 +119,10 @@ void ElementSegment::construitFacesSimplifie(int& iMax, int** facesBuff, int* su
 void ElementSegment::attributFaceLimite(FaceNS** faces, const int& indexMaxFaces)
 {
   int indexFaceExiste(0);
-  FaceSegment face(m_numNoeuds[0], m_numNoeuds[1]);
+  FaceSegment face(m_numNodes[0], m_numNodes[1]);
   if (face.faceExists(faces, indexMaxFaces, indexFaceExiste))
   {
-    faces[indexFaceExiste]->ajouteElementVoisinLimite(this);
+    faces[indexFaceExiste]->addElementNeighborLimite(this);
   }
   else
   {
@@ -132,26 +132,26 @@ void ElementSegment::attributFaceLimite(FaceNS** faces, const int& indexMaxFaces
 
 //***********************************************************************
 
-void ElementSegment::attributFaceCommunicante(FaceNS** faces, const int& indexMaxFaces, const int& numberNoeudsInternes)
+void ElementSegment::attributFaceCommunicante(FaceNS** faces, const int& indexMaxFaces, const int& numberNodesInternal)
 {
   int indexFaceExiste(0);
   //Verification face 1 :
-  if (m_numNoeuds[0] < numberNoeudsInternes)
+  if (m_numNodes[0] < numberNodesInternal)
   {
-    FacePoint face(m_numNoeuds[0]);
+    FacePoint face(m_numNodes[0]);
     if (face.faceExists(faces, indexMaxFaces, indexFaceExiste))
     {
-      faces[indexFaceExiste]->ajouteElementVoisinLimite(this);
+      faces[indexFaceExiste]->addElementNeighborLimite(this);
       faces[indexFaceExiste]->setEstComm(true);
     }
   }
   //Verification face 2 :
-  if (m_numNoeuds[1] < numberNoeudsInternes)
+  if (m_numNodes[1] < numberNodesInternal)
   {
-    FacePoint face(m_numNoeuds[1]);
+    FacePoint face(m_numNodes[1]);
     if (face.faceExists(faces, indexMaxFaces, indexFaceExiste))
     {
-      faces[indexFaceExiste]->ajouteElementVoisinLimite(this);
+      faces[indexFaceExiste]->addElementNeighborLimite(this);
       faces[indexFaceExiste]->setEstComm(true);
     }
   }
@@ -168,8 +168,8 @@ int ElementSegment::compteFaceCommunicante(std::vector<int*>& facesBuff, std::ve
   {
     switch (i)
     {
-      case 0: vertex = m_numNoeuds[0]; break;
-      case 1: vertex = m_numNoeuds[1]; break;
+      case 0: vertex = m_numNodes[0]; break;
+      case 1: vertex = m_numNodes[1]; break;
     }
     int iMax = sumNodesBuff.size();
     //Recherche existance faces
@@ -193,8 +193,8 @@ int ElementSegment::compteFaceCommunicante(int& iMax, int** facesBuff, int* sumN
   {
     switch (i)
     {
-      case 0: vertex = m_numNoeuds[0]; break;
-      case 1: vertex = m_numNoeuds[1]; break;
+      case 0: vertex = m_numNodes[0]; break;
+      case 1: vertex = m_numNodes[1]; break;
     }
     //Recherche existance faces
     indexFaceExiste = FaceNS::searchFace(&vertex, vertex, facesBuff, sumNodesBuff, 1, iMax);

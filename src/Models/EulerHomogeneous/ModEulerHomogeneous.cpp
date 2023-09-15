@@ -30,6 +30,8 @@
 
 #include "ModEulerHomogeneous.h"
 #include "PhaseEulerHomogeneous.h"
+#include "GradPhaseEulerHomogeneous.h"
+#include "GradMixEulerHomogeneous.h"
 
 const std::string ModEulerHomogeneous::NAME = "EULERHOMOGENEOUS";
 
@@ -67,6 +69,20 @@ void ModEulerHomogeneous::allocatePhase(Phase** phase)
 void ModEulerHomogeneous::allocateMixture(Mixture** mixture)
 {
   *mixture = new MixEulerHomogeneous;
+}
+
+//***********************************************************************
+
+void ModEulerHomogeneous::allocatePhaseGradient(GradPhase** phase)
+{
+  *phase = new GradPhaseEulerHomogeneous;
+}
+
+//***********************************************************************
+
+void ModEulerHomogeneous::allocateMixtureGradient(GradMixture** mixture)
+{
+  *mixture = new GradMixEulerHomogeneous;
 }
 
 //***********************************************************************
@@ -206,11 +222,7 @@ const double& ModEulerHomogeneous::getSM()
 
 void ModEulerHomogeneous::reverseProjection(const Coord normal, const Coord tangent, const Coord binormal) const
 {
-  Coord fluxProjete;
-  fluxProjete.setX(normal.getX()*static_cast<FluxEulerHomogeneous*> (fluxBuff)->m_momentum.getX() + tangent.getX()*static_cast<FluxEulerHomogeneous*> (fluxBuff)->m_momentum.getY() + binormal.getX()*static_cast<FluxEulerHomogeneous*> (fluxBuff)->m_momentum.getZ());
-  fluxProjete.setY(normal.getY()*static_cast<FluxEulerHomogeneous*> (fluxBuff)->m_momentum.getX() + tangent.getY()*static_cast<FluxEulerHomogeneous*> (fluxBuff)->m_momentum.getY() + binormal.getY()*static_cast<FluxEulerHomogeneous*> (fluxBuff)->m_momentum.getZ());
-  fluxProjete.setZ(normal.getZ()*static_cast<FluxEulerHomogeneous*> (fluxBuff)->m_momentum.getX() + tangent.getZ()*static_cast<FluxEulerHomogeneous*> (fluxBuff)->m_momentum.getY() + binormal.getZ()*static_cast<FluxEulerHomogeneous*> (fluxBuff)->m_momentum.getZ());
-  static_cast<FluxEulerHomogeneous*> (fluxBuff)->m_momentum.setXYZ(fluxProjete.getX(), fluxProjete.getY(), fluxProjete.getZ());
+  static_cast<FluxEulerHomogeneous*> (fluxBuff)->m_momentum.reverseProjection(normal, tangent, binormal);
 }
 
 //****************************************************************************
@@ -228,3 +240,43 @@ int ModEulerHomogeneous::getVap()
 }
 
 //****************************************************************************
+//******************************* Accessors **********************************
+//****************************************************************************
+
+double ModEulerHomogeneous::selectScalar(Phase** phases, Mixture* mixture, Transport* transports, Variable nameVariable, int num) const
+{
+  switch (nameVariable) {
+    case Variable::pressure:
+      return mixture->getPressure();
+      break;
+    case Variable::alpha:
+      return phases[num]->getAlpha();
+      break;
+    case Variable::velocityU:
+      return mixture->getVelocity().getX();
+      break;
+    case Variable::velocityV:
+      return mixture->getVelocity().getY();
+      break;
+    case Variable::velocityW:
+      return mixture->getVelocity().getZ();
+      break;
+    case Variable::velocityMag:
+      return mixture->getVelocity().norm();
+      break;
+    case Variable::density:
+      return mixture->getDensity();
+      break;
+    case Variable::transport:
+      return transports[num].getValue();
+      break;
+    case Variable::temperature:
+      return mixture->getTemperature();
+      break;
+    default:
+      Errors::errorMessage("nameVariable unknown in selectScalar"); return 0;
+      break;
+  }
+}
+
+//***********************************************************************

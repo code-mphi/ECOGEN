@@ -1,0 +1,18 @@
+<?xml version = "1.0" encoding = "UTF-8" standalone = "yes"?>
+<computationParam>
+	<run>euler2DshockTubeCartesian</run>
+	<outputMode format="XML" binary="false" precision="15"/>
+	<timeControlMode iterations="false">
+		<iterations number="100" iterFreq="10"/>
+		<physicalTime totalTime="4.e-3" timeFreq="1.e-4"/>
+	</timeControlMode>
+	<computationControl CFL="0.4"/>
+  <secondOrder>
+    <globalLimiter>minmod</globalLimiter>
+  </secondOrder>
+
+	<gradient> 
+  		<method>green-gauss</method> 
+	</gradient>
+
+</computationParam>

@@ -75,6 +75,7 @@ class Run
     void finalize();
     
     void restartSimulation();
+    void restartSimulationMeshMapping(std::vector<GeometricalDomain*> &domains, Mesh* mesh);
 
     //Accessors
     const int& getNumberPhases() const { return m_numberPhases; };
@@ -95,22 +96,26 @@ class Run
 
     //Input attributes
     std::string m_simulationName;              //!<Name of the simulation
-    bool m_controleIterations;                 //!Choice for time control mode (iteration or physical time)
+    bool m_timeControlIterations;              //!<Choice for time control mode (iteration or physical time)
     int m_nbIte, m_freq;                       //!<Requested number of final time iteration and frequency
     double m_finalPhysicalTime, m_timeFreq;    //!<Requested final physical time of the simulation and time frequency for output printing
     double m_cfl;                              //!<CFL criteria (between 0 and 1)
     int m_numberPhases;                        //!<Number of phases
+    int m_numberSolids;                        //!<Number of solid phases
     int m_numberEos;                           //!<Number of equations of states
     int m_numberTransports;                    //!<Number of additional transport variables
     int m_numberAddPhys;                       //!<Number of additional physical effects
     int m_numberSources;                       //!<Number of additional source terms
-    int m_dimension;                           //!<dimension 1, 2 ou 3
+    int m_dimension;                           //!<dimension 1, 2 or 3
     int m_MRF;                                 //!<source term for Moving Reference Frame computation index(in the list of source term)
+    bool m_viscous;                            //!<Viscous flow additionnal physic option required to set proper wall boundary condition (false by default)
     std::string m_order;                       //!<Precision scheme order (firstorder or secondOrder)
+    bool m_extractRefLength;                   //!<Option to extract cells' reference length
+    std::vector<GeometricalDomain*> m_solidDomains; //!<Solid domains (immersed boundaries)
 
     //Specific to AMR method
     int m_lvlMax;                              //!<Maximum AMR level (if 0, then no AMR)
-    int m_nbCellsTotalAMR;                     //!<Number de mailles total maximum durant la simulation
+    int m_nbCellsTotalAMR;                     //!<Number of total cells during the simulation
 
     //Geometrical attributes
     bool m_parallelPreTreatment;               //!<Choice for mesh parallel pre-treatment  (needed for first simulation on a new parallel unstructured geometry)
@@ -153,6 +158,12 @@ class Run
     double* m_pMaxWall;                              //!<Coordinate of the maximal pressure found between each written output (only for few test cases)
     double m_volumePhaseK;                           //!<Volume of phase k. Output with purpose to track the radius of a bubble over time
     double m_massWanted, m_alphaWanted;              //!<Mass and corresponding volume fraction for special output (only for few test cases)
+    bool m_recordPsat;                               //!<Add recording of saturation pressure (valid for a liquid/vapor couple and predominant phase should be first)
+
+    //Mesh mapping restart
+    bool m_restartMeshMapping;                       //!<Option to set the mesh mapping restart option
+    Output* m_outputMeshMapping;                     //!<Output object containing info from simulation to be mapped (usually the rough mesh)
+    std::string m_meshFileMapped;                    //!<Filename of the mesh to be mapped
 
     friend class Input;
     friend class Output;

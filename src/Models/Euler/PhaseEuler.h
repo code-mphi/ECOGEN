@@ -85,8 +85,12 @@ class PhaseEuler : public Phase
     //---------------------------------
     virtual void computeSlopesPhase(const Phase& sLeft, const Phase& sRight, const double& distance);
     virtual void setToZero();
+    virtual void setToMax();
     virtual void extrapolate(const Phase& slope, const double& distance);
     virtual void limitSlopes(const Phase& slopeGauche, const Phase& slopeDroite, Limiter& globalLimiter, Limiter& /*volumeFractionLimiter*/);
+    virtual void setMin(const Phase& phase1, const Phase& phase2);
+    virtual void setMax(const Phase& phase1, const Phase& phase2);
+    virtual void computeGradientLimiter(const Limiter& globalLimiter, const Phase& phase, const Phase& phaseMin, const Phase& phaseMax, const Phase& slope);
 
     //Specific methods for parallele computing at second order
     //--------------------------------------------------------

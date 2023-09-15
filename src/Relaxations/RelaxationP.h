@@ -37,17 +37,25 @@
 //! \brief     Pressure relaxation
 class RelaxationP : public Relaxation
 {
-public:
-  RelaxationP();
-  virtual ~RelaxationP();
+  public:
+    RelaxationP();
+    virtual ~RelaxationP();
 
-  //! \brief     Return the pressure-relaxation type
-  virtual int getType() const { return P; }
-  //! \brief     Newton-Raphson method for the infinite pressure relaxation
-  //! \details   Call of this method computes the totally relaxed pressure in a given cell.
-  //! \param     pStar          initial and final pressure value
-  //! \param     iteration      number of iterations for convergence of the method
-  virtual void NewtonRaphson(double& pStar, int& iteration);
+    //! \brief     Return the pressure-relaxation type
+    virtual int getType() const { return P; }
+
+    //! \brief     Newton-Raphson method for the infinite pressure relaxation
+    //! \details   Call of this method computes the totally relaxed pressure in a given cell.
+    //! \param     pStar          initial and final pressure value
+    //! \param     iteration      number of iterations for convergence of the method
+    void NewtonRaphson(double& pStar, int& iteration);
+
+    //! \brief     Compute interface pressure
+    //! \details   Call for this method computes the interface pressure in a cell.
+    //! \param     cell           cell
+    //! \param     type           enumeration allowing to relax either state in the cell or second order half time step state
+    //! \return    interface pressure
+    double computeInterfacePressure(Cell* cell, Prim type = vecPhases);
 };
 
 #endif // RELAXATIONP_H

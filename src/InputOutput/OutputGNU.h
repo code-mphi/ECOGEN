@@ -43,7 +43,7 @@ public:
   //! \param   casTest   Test case name (defined in "main.xml")  
   //! \param   nameRun   Folder to store results
   //! \param   element   XML outputMode element
-  //! \param   fileName  Full path to mainVX.xml of current test case
+  //! \param   fileName  Full path to main.xml of current test case
   //! \param   entree    Input pointer to access run pointer and its information
   OutputGNU(std::string casTest, std::string run, tinyxml2::XMLElement* element, std::string fileName, Input *entree);
   
@@ -60,11 +60,13 @@ public:
 
 protected:
 
-  void ecritScriptGnuplot(const int& dim);
-  void ecritScriptGnuplot(const std::string& varName);
+  void writeScriptGnuplot(const int& dim);
+  void writeScriptGnuplot(const std::string& varName);
 
   std::string createFilenameGNU(const char* name, int lvl = -1, int proc = -1, int numFichier = -1, std::string nameVariable = "defaut") const;
   void printBlocGnuplot(std::ofstream& fileStream, int& index, const int& dim);
+
+  std::string formatVarNameStyle(std::string const& strToFormat) const;
 
   std::string m_fileNameVisu;
   std::string m_folderScriptGnuplot;

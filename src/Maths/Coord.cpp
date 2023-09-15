@@ -31,6 +31,8 @@
 #include "Coord.h"
 
 Coord coordBuff;
+Coord velocity;
+Coord vFaceToElt;
 
 //*********************************************************************
 
@@ -104,6 +106,16 @@ Coord Coord::abs() const
 double Coord::scalar(const Coord& a) const
 {
   return m_x*a.m_x + m_y*a.m_y + m_z*a.m_z;
+}
+
+//*********************************************************************
+
+Coord Coord::scalar(const Tensor& t) const
+{
+  coordBuff.m_x = m_x * t.getXX() + m_y * t.getYX() + m_z * t.getZX();
+  coordBuff.m_y = m_x * t.getXY() + m_y * t.getYY() + m_z * t.getZY();
+  coordBuff.m_z = m_x * t.getXZ() + m_y * t.getYZ() + m_z * t.getZZ();
+  return coordBuff;
 }
 
 //*********************************************************************
@@ -185,8 +197,8 @@ void Coord::normalized()
 double Coord::determinant(const Coord& v1, const Coord& v2, const Coord& v3)
 {
   double det(0.); 
-  det =  (v1.getX()*v2.getY()*v3.getZ()) + (v1.getY()*v2.getZ()*v3.getX()) + (v1.getZ()*v2.getX()*v3.getY());
-  det -= (v3.getX()*v2.getY()*v1.getZ()) + (v3.getY()*v2.getZ()*v1.getX()) + (v3.getZ()*v2.getX()*v1.getY());
+  det =  (v1.m_x*v2.m_y*v3.m_z) + (v1.m_y*v2.m_z*v3.m_x) + (v1.m_z*v2.m_x*v3.m_y);
+  det -= (v3.m_x*v2.m_y*v1.m_z) + (v3.m_y*v2.m_z*v1.m_x) + (v3.m_z*v2.m_x*v1.m_y);
   return det;
 }
 
@@ -212,6 +224,18 @@ Coord Coord::sin(const Coord& v1, const Coord& v2)
 
 //*********************************************************************
 
+void Coord::buildRelativeVelForRiemannMRF(const Coord &omega, const Coord& normal, const Coord& tangent, const Coord& binormal, const Coord& position)
+{
+  // Absolute velocity projection into the global frame
+  this->reverseProjection(normal, tangent, binormal);
+  // Define relative velocity
+  *this = *this - omega.cross(position);
+  // Reprojection of relative velocity in the face frame
+  this->localProjection(normal, tangent, binormal);
+}
+
+//***********************************************************************
+
 void Coord::printInfo() const
 {
   std::cout << " X = " << m_x << " Y = " << m_y << " Z = " << m_z << std::endl;
@@ -224,6 +248,26 @@ Coord& Coord::operator=(const double& scalar)
   m_x = scalar;
   m_y = scalar;
   m_z = scalar;
+  return *this;
+}
+
+//*********************************************************************
+
+Coord& Coord::operator+= (const double& scalar)
+{
+  m_x += scalar;
+  m_y += scalar;
+  m_z += scalar;
+  return *this;
+}
+
+//*********************************************************************
+
+Coord& Coord::operator-= (const double& scalar)
+{
+  m_x -= scalar;
+  m_y -= scalar;
+  m_z -= scalar;
   return *this;
 }
 
@@ -256,7 +300,6 @@ Coord Coord::operator* (const double& scalar) const
   return copie;
 }
 
-
 //*********************************************************************
 
 Coord Coord::operator/ (const double& scalar) const
@@ -267,7 +310,6 @@ Coord Coord::operator/ (const double& scalar) const
 }
 
 //*********************************************************************
-
 
 Coord& Coord::operator+= (const Coord& a)
 {
@@ -292,21 +334,27 @@ Coord& Coord::operator-= (const Coord& a)
 
 Coord operator* (const double& scalar, const Coord& a)
 {
-  Coord copie(a);
-  copie *= scalar;
-  return copie;
+  Coord copy(a);
+  copy *= scalar;
+  return copy;
 }
+
+//*********************************************************************
 
 Coord operator+ (const Coord& a, const Coord& b)
 {
-  Coord copie(a);
-  copie += b;
-  return copie;
+  Coord copy(a);
+  copy += b;
+  return copy;
 }
+
+//*********************************************************************
 
 Coord operator- (const Coord& a, const Coord& b)
 {
-  Coord copie(a);
-  copie -= b;
-  return copie;
+  Coord copy(a);
+  copy -= b;
+  return copy;
 }
+
+//*********************************************************************

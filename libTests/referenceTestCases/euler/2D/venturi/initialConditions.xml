@@ -1,0 +1,38 @@
+<?xml version = "1.0" encoding = "UTF-8" standalone = "yes"?>
+<CI>
+	<!-- LIST OF GEOMETRICAL DOMAINS  -->
+	<physicalDomains>	
+		<domain name="base" state="init" type="entireDomain" physicalEntity="10"/>
+	</physicalDomains>
+
+	<!-- LIST OF BOUNDARY CONDITIONS -->
+	<boundaryConditions>
+		
+		<!-- <boundCond name="inlet" type="inletInjStagState" number="1">
+		    <dataInletInj m0="7514.917"/>
+			<dataFluid EOS="SG_waterLiq_venturi.xml" density="1016.164" pressure="51825."/>
+		</boundCond> -->
+
+		<boundCond name="inlet" type="inletInjTemp" number="1">
+		    <dataInletInj m0="7514.917"/>
+			<dataFluid temperature="293."/>
+		</boundCond>
+
+		<boundCond name="outlet" type="outletPressure" number="2">
+			<dataOutletPressure p0="72025."/>
+		</boundCond>
+
+		<boundCond name="walls" type="wall" number="3"/>
+	</boundaryConditions>
+	
+	<!--  LIST OF STATES  -->
+	<state name="init">
+		<material type="fluid" EOS="SG_waterLiq_venturi.xml">
+			<dataFluid density="1016.164" pressure="72025.">
+		    	<velocity x="0." y="0." z="0."/>
+	  		    <!-- <velocity x="7.395" y="0." z="0."/> -->
+			</dataFluid>
+		</material>
+	</state>
+
+</CI>

@@ -34,14 +34,14 @@ const int FaceTriangle::NUMBERNODES=3;
 
 //***********************************************************************
 
-FaceTriangle::FaceTriangle(const int& numNoeud1, const int& numNoeud2, const int& numNoeud3, int tri) :
+FaceTriangle::FaceTriangle(const int& numNode1, const int& numNode2, const int& numNode3, int tri) :
 FaceNS(NUMBERNODES)
 {
-  m_numNoeuds[0] = numNoeud1;
-  m_numNoeuds[1] = numNoeud2;
-  m_numNoeuds[2] = numNoeud3;
-  if(tri) std::sort(m_numNoeuds, m_numNoeuds+3);
-  m_sommeNumNoeuds = m_numNoeuds[0] + m_numNoeuds[1] + m_numNoeuds[2];
+  m_numNodes[0] = numNode1;
+  m_numNodes[1] = numNode2;
+  m_numNodes[2] = numNode3;
+  if(tri) std::sort(m_numNodes, m_numNodes+3);
+  m_sumNumNodes = m_numNodes[0] + m_numNodes[1] + m_numNodes[2];
 }
 
 //***********************************************************************
@@ -50,11 +50,11 @@ FaceTriangle::~FaceTriangle(){}
 
 //***********************************************************************
 
-void FaceTriangle::computeSurface(const Coord* noeuds)
+void FaceTriangle::computeSurface(const Coord* nodes)
 {
-  Coord v1(noeuds[m_numNoeuds[1]] - noeuds[m_numNoeuds[0]]);
-  Coord v2(noeuds[m_numNoeuds[2]] - noeuds[m_numNoeuds[1]]);
-  Coord v3(noeuds[m_numNoeuds[0]] - noeuds[m_numNoeuds[2]]);
+  Coord v1(nodes[m_numNodes[1]] - nodes[m_numNodes[0]]);
+  Coord v2(nodes[m_numNodes[2]] - nodes[m_numNodes[1]]);
+  Coord v3(nodes[m_numNodes[0]] - nodes[m_numNodes[2]]);
   double a(v1.norm()), b(v2.norm()), c(v3.norm());
   double dp = 0.5*(a + b + c);
   m_surface = sqrt(dp*(dp - a)*(dp - b)*(dp - c));
@@ -62,25 +62,25 @@ void FaceTriangle::computeSurface(const Coord* noeuds)
 
 //***********************************************************************
 
-void FaceTriangle::computeRepere(const Coord* noeuds, const int& numNoeudAutre, ElementNS *elementVoisin)
+void FaceTriangle::computeRepere(const Coord* nodes, const int& numNodeOther, ElementNS *elementNeighbor)
 {
-  Coord v1; v1.setFromSubtractedVectors(noeuds[m_numNoeuds[0]], noeuds[m_numNoeuds[1]]);
-  Coord v2; v2.setFromSubtractedVectors(noeuds[m_numNoeuds[0]], noeuds[m_numNoeuds[2]]);
+  Coord v1; v1.setFromSubtractedVectors(nodes[m_numNodes[0]], nodes[m_numNodes[1]]);
+  Coord v2; v2.setFromSubtractedVectors(nodes[m_numNodes[0]], nodes[m_numNodes[2]]);
 
   m_tangent = v1 / v1.norm();
   Coord v1v2; v1v2 = Coord::crossProduct(v1, v2);
   m_normal = v1v2 / v1v2.norm();
   m_binormal = Coord::crossProduct(m_normal, m_tangent);
   
-  Coord v3; v3.setFromSubtractedVectors(noeuds[m_numNoeuds[0]], noeuds[numNoeudAutre]);
+  Coord v3; v3.setFromSubtractedVectors(nodes[m_numNodes[0]], nodes[numNodeOther]);
   if (v3.scalar(m_normal) > 0.)
   {
-    m_elementDroite = elementVoisin;
+    m_elementDroite = elementNeighbor;
     m_elementGauche = 0;
   }
   else
   {
-    m_elementGauche = elementVoisin;
+    m_elementGauche = elementNeighbor;
     m_elementDroite = 0;
   }
 }

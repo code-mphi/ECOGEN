@@ -1,0 +1,43 @@
+<?xml version = "1.0" encoding = "UTF-8" standalone = "yes"?>
+<CI>
+    <!-- LIST OF GEOMETRICAL DOMAINS  -->
+    <physicalDomains> 
+        <domain name="rightChamber" state="rightChamber" type="entireDomain" physicalEntity="11"/>
+        <domain name="leftChamber" state="leftChamber" type="entireDomain" physicalEntity="10"/>
+    </physicalDomains>    
+
+    <!-- LIST OF BOUNDARY CONDITIONS -->
+    <boundaryConditions>
+        <boundCond name="leftRight" type="nonReflecting" number="1"/>
+        <boundCond name="topBottom" type="nonReflecting" number="2"/>
+    </boundaryConditions>
+    
+    <!--  LIST OF STATES  -->
+
+    <state name="rightChamber">
+        <material type="fluid" EOS="SG_waterLiq.xml">
+            <dataFluid alpha="0.01"/>  
+        </material>
+        <material type="fluid" EOS="IG_waterVap.xml">
+            <dataFluid alpha="0.99"/>   
+        </material>
+        <mixture>
+            <dataMix pressure = "1.e5"/>
+            <velocity x="0." y="0." z="0."/>
+        </mixture>
+    </state>
+
+    <state name="leftChamber">
+        <material type="fluid" EOS="SG_waterLiq.xml">
+            <dataFluid alpha="0.99"/>  
+        </material>
+        <material type="fluid" EOS="IG_waterVap.xml">
+            <dataFluid alpha="0.01"/>   
+        </material>
+        <mixture>
+            <dataMix pressure = "1.e6"/>
+            <velocity x="0." y="0." z="0."/>
+        </mixture>
+    </state>
+
+</CI>

@@ -66,12 +66,12 @@ void OutputGNU::writeResults(Mesh *mesh, std::vector<Cell*>* cellsLvl)
     fileStream.open(file.c_str());
     if (!fileStream) { throw ErrorECOGEN("Impossible d ouvrir le file " + file, __FILE__, __LINE__); }
     if (m_precision != 0) fileStream.precision(m_precision);
-    mesh->writeResultsGnuplot(cellsLvl, fileStream);
+    mesh->writeResultsGnuplot(cellsLvl, fileStream, nullptr, m_run->m_recordPsat);
     fileStream << std::endl;
     fileStream.close();
 
     //Creation du file gnuplot pour visualization des resultats
-    if (rankCpu == 0) ecritScriptGnuplot(mesh->getGeometrie());
+    if (rankCpu == 0) writeScriptGnuplot(mesh->getProblemDimension());
   }
   catch (ErrorECOGEN &) { throw; }
   m_numFichier++;
@@ -79,7 +79,7 @@ void OutputGNU::writeResults(Mesh *mesh, std::vector<Cell*>* cellsLvl)
 
 //*********************************************************************** 
 
-void OutputGNU::ecritScriptGnuplot(const int& dim)
+void OutputGNU::writeScriptGnuplot(const int& dim)
 {
   try {
     std::ofstream fileStream;
@@ -109,7 +109,7 @@ void OutputGNU::ecritScriptGnuplot(const int& dim)
       fileStream << "show contour" << std::endl;
       //fileStream << "set view 180,180,1,1" << endl;
     }
-    else if (dim == 3) { throw ErrorECOGEN("OutputGNU::ecritScriptGnuplot : print script gnuplot non prevu en 3D", __FILE__, __LINE__); }
+    else if (dim == 3) { throw ErrorECOGEN("OutputGNU::writeScriptGnuplot : print script gnuplot non prevu en 3D", __FILE__, __LINE__); }
 
     //1) Variables des phases
     //-----------------------
@@ -117,49 +117,56 @@ void OutputGNU::ecritScriptGnuplot(const int& dim)
     {
       //Variables scalars
       for (int var = 1; var <= m_cellRef.getPhase(phase)->getNumberScalars(); var++) {
-        fileStream << "set title '" << m_cellRef.getPhase(phase)->returnNameScalar(var);
-        if (m_cellRef.getPhase(phase)->getEos() != nullptr) { fileStream << "_" << m_cellRef.getPhase(phase)->getEos()->getName(); }
+        fileStream << "set title '" << formatVarNameStyle(m_cellRef.getPhase(phase)->returnNameScalar(var));
+        if (m_cellRef.getPhase(phase)->getEos() != nullptr) { fileStream << "\\_" << formatVarNameStyle(m_cellRef.getPhase(phase)->getEos()->getName()); }
         fileStream << "'" << std::endl;
         printBlocGnuplot(fileStream, index, dim);
-      } //Fin var scalar
+      } //End var scalar
       //Variables vectorielles (u)
       for (int var = 1; var <= m_cellRef.getPhase(phase)->getNumberVectors(); var++) {
-        fileStream << "set title '" << m_cellRef.getPhase(phase)->returnNameVector(var);
-        if (m_cellRef.getPhase(phase)->getEos() != nullptr) { fileStream << "_" << m_cellRef.getPhase(phase)->getEos()->getName(); }
+        fileStream << "set title '" << formatVarNameStyle(m_cellRef.getPhase(phase)->returnNameVector(var));
+        if (m_cellRef.getPhase(phase)->getEos() != nullptr) { fileStream << "\\_" << formatVarNameStyle(m_cellRef.getPhase(phase)->getEos()->getName()); }
         fileStream << "'" << std::endl;
         printBlocGnuplot(fileStream, index, dim);
-      } //Fin var vectorielle
-    } //Fin phase
+      } //End var vectorielle
+    } //End phase
 
    //2) Variables mixture
    //--------------------
    //Variables scalars
     for (int var = 1; var <= m_cellRef.getMixture()->getNumberScalars(); var++) {
-      fileStream << "set title '" << m_cellRef.getMixture()->returnNameScalar(var) << "'" << std::endl;
+      fileStream << "set title '" << formatVarNameStyle(m_cellRef.getMixture()->returnNameScalar(var)) << "'" << std::endl;
       printBlocGnuplot(fileStream, index, dim);
-    } //Fin var scalar
+    } //End var scalar
     //Variables vectorielle
     for (int var = 1; var <= m_cellRef.getMixture()->getNumberVectors(); var++) {
-      fileStream << "set title '" << m_cellRef.getMixture()->returnNameVector(var) << "'" << std::endl;
+      fileStream << "set title '" << formatVarNameStyle(m_cellRef.getMixture()->returnNameVector(var)) << "'" << std::endl;
       printBlocGnuplot(fileStream, index, dim);
-    } //Fin var vectorielle
+    } //End var vectorielle
 
     //3) Variables transports
     //-----------------------
     for (int var = 1; var <= m_cellRef.getNumberTransports(); var++) {
-      fileStream << "set title 'Transport" << var << "'" << std::endl;
+      fileStream << "set title 'Transport\\_" << var << "'" << std::endl;
       printBlocGnuplot(fileStream, index, dim);
-    } //Fin var scalar
+    } //End var scalar
 
-    //4) Ecriture niveaux AMR
-    //-----------------------
-    fileStream << "set title 'Niveau AMR'" << std::endl;
+    //4) Write AMR levels
+    //-------------------
+    fileStream << "set title 'AMR level'" << std::endl;
     printBlocGnuplot(fileStream, index, dim);
 
-    //5) Ecriture variable detection gradients
-    //----------------------------------------
+    //5) Write variable detection gradients
+    //-------------------------------------
     fileStream << "set title 'Xi'" << std::endl;
     printBlocGnuplot(fileStream, index, dim);
+
+    //6) Writing saturation pressure (specific recording)
+    //---------------------------------------------------
+    if (m_run->m_recordPsat) {
+      fileStream << "set title 'Psat'" << std::endl;
+      printBlocGnuplot(fileStream, index, dim);
+    }
 
     fileStream.close();
 
@@ -169,7 +176,7 @@ void OutputGNU::ecritScriptGnuplot(const int& dim)
 
 //***********************************************************************
 
-void OutputGNU::ecritScriptGnuplot(const std::string& varName)
+void OutputGNU::writeScriptGnuplot(const std::string& varName)
 {
   try {
     std::ofstream fileStream;
@@ -181,7 +188,7 @@ void OutputGNU::ecritScriptGnuplot(const std::string& varName)
     fileStream << std::endl;
 
     fileStream << "set xlabel 't (s)'" << std::endl;
-    fileStream << "set title '" << varName << "'" << std::endl;
+    fileStream << "set title '" << formatVarNameStyle(varName) << "'" << std::endl;
 
     int index(2);
     int dim(0);
@@ -227,7 +234,7 @@ std::string OutputGNU::createFilenameGNU(const char* name, int lvl, int proc, in
     std::stringstream num;
 
     if (m_splitData) {
-      throw ErrorECOGEN("OutputGNU::createFilenameGNU : donnees Separees non prevu", __FILE__, __LINE__);
+      throw ErrorECOGEN("OutputGNU::createFilenameGNU : separated data not planned", __FILE__, __LINE__);
       return 0;
     }
     num << name;
@@ -237,7 +244,7 @@ std::string OutputGNU::createFilenameGNU(const char* name, int lvl, int proc, in
     if (m_writeBinary)
     {
       //num << "B64";
-      throw ErrorECOGEN("OutputGNU::createFilenameGNU : donnees binaires non prevu", __FILE__, __LINE__);
+      throw ErrorECOGEN("OutputGNU::createFilenameGNU : binary data not planned", __FILE__, __LINE__);
       return 0;
     }
     //Gestion cpu
@@ -246,7 +253,7 @@ std::string OutputGNU::createFilenameGNU(const char* name, int lvl, int proc, in
     if (lvl != -1)
     {
       //num << "_AMR" << lvl;
-      throw ErrorECOGEN("OutputGNU::createFilenameGNU : donnees AMR par niveau non prevu", __FILE__, __LINE__);
+      throw ErrorECOGEN("OutputGNU::createFilenameGNU : AMR data by level not planned", __FILE__, __LINE__);
       return 0;
     }
     //Gestion number de file resultat
@@ -256,6 +263,24 @@ std::string OutputGNU::createFilenameGNU(const char* name, int lvl, int proc, in
     return num.str();
   }
   catch (ErrorECOGEN &) { throw; }
+}
+
+//***********************************************************************
+
+std::string OutputGNU::formatVarNameStyle(std::string const& varNameToFormat) const
+{
+  // Replace all occurrences of an underscore character in a given string with a backslash followed by an underscore
+  std::string str = varNameToFormat;
+  size_t pos = 0;
+  while ((pos = str.find("_", pos)) != std::string::npos) {
+      str.replace(pos, 1, "\\_");
+      pos += 2;  // Move past the replaced "\\_"
+  }
+  // Remove extension ".xml" for EOS file
+  if (str.length() >= 4 && str.substr(str.length() - 4) == ".xml") {
+    str = str.substr(0, str.length() - 4);  // Remove the extension ".xml"
+  }
+  return str;
 }
 
 //***********************************************************************

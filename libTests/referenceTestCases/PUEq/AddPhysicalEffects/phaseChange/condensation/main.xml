@@ -1,0 +1,19 @@
+<?xml version = "1.0" encoding = "UTF-8" standalone = "yes"?>
+<computationParam>
+	<run>pressureVelocityEq1Dcondensation</run>
+	<outputMode format="XML" binary="false" precision="10"/>
+	<timeControlMode iterations="false">
+		<iterations number="200" iterFreq="1"/>
+		<physicalTime totalTime="0.1" timeFreq="-1"/>
+	</timeControlMode>
+	<computationControl CFL="0.5"/>
+  <!-- <restartSimulation restartFileNumber="209" AMRsaveFreq="0"/> -->
+
+	<!-- <secondOrder>
+		<globalLimiter>vanleer</globalLimiter>
+		<globalVolumeFractionLimiter>mc</globalVolumeFractionLimiter>
+    	<interfaceVolumeFractionLimiter>mc</interfaceVolumeFractionLimiter>
+	</secondOrder> -->
+
+  <psat record="true"/>
+</computationParam>

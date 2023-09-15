@@ -51,10 +51,14 @@ public:
 
   virtual Coord computeAbsVelocity(const Coord& relVelocity, const Coord& position);
 
+  virtual Coord getOmega() { return m_omega; }
+  virtual bool getRiemannCoupling() { return m_riemannCoupling; }
+
 private:
-  Coord m_omega;    //!Angular velocity
-  double m_tf;      //!Optional final time to increase linearly omega
-  double m_incr;    //!To increment angular velocity from zero to omega
+  Coord m_omega;          //!Angular velocity
+  double m_tf;            //!Optional final time to increase linearly omega
+  double m_incr;          //!To increment angular velocity from zero to omega
+  bool m_riemannCoupling; //!Option to set Riemann problem coupling between static and rotating region
 };
 
 #endif //SOURCENUMMRF_H

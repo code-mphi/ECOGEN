@@ -83,17 +83,17 @@ void ElementPrism::construitFaces(const Coord* nodes, FaceNS** faces, int& iMax,
 {
   // 3 faces are quadrangles and 2 faces are triangles
   int indexFaceExists(-1);
-  int noeudAutre;
+  int nodeAutre;
   int currentFaceNodes[4]; // Buffer array of nodes used to create current face
   for (int i = 0; i < NUMBERFACES; i++)
   {
     switch (i)
     {
-      case 0: facesBuff[iMax][0] = m_numNoeuds[0]; facesBuff[iMax][1] = m_numNoeuds[1]; facesBuff[iMax][2] = m_numNoeuds[4]; facesBuff[iMax][3] = m_numNoeuds[3]; noeudAutre = 2; break;
-      case 1: facesBuff[iMax][0] = m_numNoeuds[0]; facesBuff[iMax][1] = m_numNoeuds[2]; facesBuff[iMax][2] = m_numNoeuds[5]; facesBuff[iMax][3] = m_numNoeuds[3]; noeudAutre = 1; break;      
-      case 2: facesBuff[iMax][0] = m_numNoeuds[1]; facesBuff[iMax][1] = m_numNoeuds[2]; facesBuff[iMax][2] = m_numNoeuds[5]; facesBuff[iMax][3] = m_numNoeuds[4]; noeudAutre = 0; break;      
-      case 3: facesBuff[iMax][0] = m_numNoeuds[0]; facesBuff[iMax][1] = m_numNoeuds[1]; facesBuff[iMax][2] = m_numNoeuds[2]; noeudAutre = 3; break;      
-      case 4: facesBuff[iMax][0] = m_numNoeuds[3]; facesBuff[iMax][1] = m_numNoeuds[4]; facesBuff[iMax][2] = m_numNoeuds[5]; noeudAutre = 0; break;      
+      case 0: facesBuff[iMax][0] = m_numNodes[0]; facesBuff[iMax][1] = m_numNodes[1]; facesBuff[iMax][2] = m_numNodes[4]; facesBuff[iMax][3] = m_numNodes[3]; nodeAutre = 2; break;
+      case 1: facesBuff[iMax][0] = m_numNodes[0]; facesBuff[iMax][1] = m_numNodes[2]; facesBuff[iMax][2] = m_numNodes[5]; facesBuff[iMax][3] = m_numNodes[3]; nodeAutre = 1; break;      
+      case 2: facesBuff[iMax][0] = m_numNodes[1]; facesBuff[iMax][1] = m_numNodes[2]; facesBuff[iMax][2] = m_numNodes[5]; facesBuff[iMax][3] = m_numNodes[4]; nodeAutre = 0; break;      
+      case 3: facesBuff[iMax][0] = m_numNodes[0]; facesBuff[iMax][1] = m_numNodes[1]; facesBuff[iMax][2] = m_numNodes[2]; nodeAutre = 3; break;      
+      case 4: facesBuff[iMax][0] = m_numNodes[3]; facesBuff[iMax][1] = m_numNodes[4]; facesBuff[iMax][2] = m_numNodes[5]; nodeAutre = 0; break;      
     }
     if (i < 3) // Faces Quadrangles
     {
@@ -106,12 +106,12 @@ void ElementPrism::construitFaces(const Coord* nodes, FaceNS** faces, int& iMax,
       if (indexFaceExists==-1) // faces and facesBuff arrays are filled simultaneously
       {
         faces[iMax] = new FaceQuadrangle(currentFaceNodes[0], currentFaceNodes[1], currentFaceNodes[2], currentFaceNodes[3], 1); // Nodes ordering of quadrangle matters
-        faces[iMax]->construitFace(nodes, m_numNoeuds[noeudAutre], this);
+        faces[iMax]->construitFace(nodes, m_numNodes[nodeAutre], this);
         iMax++;
       }
       else
       {
-        faces[indexFaceExists]->ajouteElementVoisin(this);
+        faces[indexFaceExists]->addElementNeighbor(this);
       }
     }
     else // Faces triangles
@@ -124,12 +124,12 @@ void ElementPrism::construitFaces(const Coord* nodes, FaceNS** faces, int& iMax,
       if (indexFaceExists==-1)
       {
         faces[iMax] = new FaceTriangle(facesBuff[iMax][0], facesBuff[iMax][1], facesBuff[iMax][2], 0); // Nodes ordering does not matter for triangle
-        faces[iMax]->construitFace(nodes, m_numNoeuds[noeudAutre], this);
+        faces[iMax]->construitFace(nodes, m_numNodes[nodeAutre], this);
         iMax++;
       }
       else
       {
-        faces[indexFaceExists]->ajouteElementVoisin(this);
+        faces[indexFaceExists]->addElementNeighbor(this);
       }
     } // End if
   } // End loop faces
@@ -145,11 +145,11 @@ void ElementPrism::construitFacesSimplifie(int& iMax, int** facesBuff, int* sumN
   {
     switch (i)
     {
-      case 0: facesBuff[iMax][0] = m_numNoeuds[0]; facesBuff[iMax][1] = m_numNoeuds[1]; facesBuff[iMax][2] = m_numNoeuds[4]; facesBuff[iMax][3] = m_numNoeuds[3]; break;
-      case 1: facesBuff[iMax][0] = m_numNoeuds[0]; facesBuff[iMax][1] = m_numNoeuds[2]; facesBuff[iMax][2] = m_numNoeuds[5]; facesBuff[iMax][3] = m_numNoeuds[3]; break;      
-      case 2: facesBuff[iMax][0] = m_numNoeuds[1]; facesBuff[iMax][1] = m_numNoeuds[2]; facesBuff[iMax][2] = m_numNoeuds[5]; facesBuff[iMax][3] = m_numNoeuds[4]; break;      
-      case 3: facesBuff[iMax][0] = m_numNoeuds[0]; facesBuff[iMax][1] = m_numNoeuds[1]; facesBuff[iMax][2] = m_numNoeuds[2]; break;      
-      case 4: facesBuff[iMax][0] = m_numNoeuds[3]; facesBuff[iMax][1] = m_numNoeuds[4]; facesBuff[iMax][2] = m_numNoeuds[5]; break;      
+      case 0: facesBuff[iMax][0] = m_numNodes[0]; facesBuff[iMax][1] = m_numNodes[1]; facesBuff[iMax][2] = m_numNodes[4]; facesBuff[iMax][3] = m_numNodes[3]; break;
+      case 1: facesBuff[iMax][0] = m_numNodes[0]; facesBuff[iMax][1] = m_numNodes[2]; facesBuff[iMax][2] = m_numNodes[5]; facesBuff[iMax][3] = m_numNodes[3]; break;      
+      case 2: facesBuff[iMax][0] = m_numNodes[1]; facesBuff[iMax][1] = m_numNodes[2]; facesBuff[iMax][2] = m_numNodes[5]; facesBuff[iMax][3] = m_numNodes[4]; break;      
+      case 3: facesBuff[iMax][0] = m_numNodes[0]; facesBuff[iMax][1] = m_numNodes[1]; facesBuff[iMax][2] = m_numNodes[2]; break;      
+      case 4: facesBuff[iMax][0] = m_numNodes[3]; facesBuff[iMax][1] = m_numNodes[4]; facesBuff[iMax][2] = m_numNodes[5]; break;      
     }
     if(i<3)
     {
@@ -165,7 +165,7 @@ void ElementPrism::construitFacesSimplifie(int& iMax, int** facesBuff, int* sumN
       std::sort(facesBuff[iMax],facesBuff[iMax]+3);  //Tri des nodes
       // Checking face existence
       indexFaceExists = FaceNS::searchFace(facesBuff[iMax],sumNodesBuff[iMax],facesBuff,sumNodesBuff,3,iMax);
-    } //Fin if
+    } //End if
     if (indexFaceExists == -1)
     {
       iMax++;
@@ -175,56 +175,56 @@ void ElementPrism::construitFacesSimplifie(int& iMax, int** facesBuff, int* sumN
 
 //***********************************************************************
 
-void ElementPrism::attributFaceCommunicante(FaceNS** faces, const int& indexMaxFaces, const int& numberNoeudsInternes)
+void ElementPrism::attributFaceCommunicante(FaceNS** faces, const int& indexMaxFaces, const int& numberNodesInternal)
 {
   int indexFaceExists(0);
   //Verification face 1 :
-  if (m_numNoeuds[0] < numberNoeudsInternes && m_numNoeuds[1] < numberNoeudsInternes && m_numNoeuds[4] < numberNoeudsInternes && m_numNoeuds[3] < numberNoeudsInternes)
+  if (m_numNodes[0] < numberNodesInternal && m_numNodes[1] < numberNodesInternal && m_numNodes[4] < numberNodesInternal && m_numNodes[3] < numberNodesInternal)
   {
-    FaceQuadrangle face(m_numNoeuds[0], m_numNoeuds[1], m_numNoeuds[4], m_numNoeuds[3]);
+    FaceQuadrangle face(m_numNodes[0], m_numNodes[1], m_numNodes[4], m_numNodes[3]);
     if (face.faceExists(faces, indexMaxFaces, indexFaceExists))
     {
-      faces[indexFaceExists]->ajouteElementVoisinLimite(this);
+      faces[indexFaceExists]->addElementNeighborLimite(this);
       faces[indexFaceExists]->setEstComm(true);
     }
   }
   //Verification face 2 :
-  if (m_numNoeuds[0] < numberNoeudsInternes && m_numNoeuds[2] < numberNoeudsInternes && m_numNoeuds[5] < numberNoeudsInternes && m_numNoeuds[3] < numberNoeudsInternes)
+  if (m_numNodes[0] < numberNodesInternal && m_numNodes[2] < numberNodesInternal && m_numNodes[5] < numberNodesInternal && m_numNodes[3] < numberNodesInternal)
   {
-    FaceQuadrangle face(m_numNoeuds[0], m_numNoeuds[2], m_numNoeuds[5], m_numNoeuds[3]);
+    FaceQuadrangle face(m_numNodes[0], m_numNodes[2], m_numNodes[5], m_numNodes[3]);
     if (face.faceExists(faces, indexMaxFaces, indexFaceExists))
     {
-      faces[indexFaceExists]->ajouteElementVoisinLimite(this);
+      faces[indexFaceExists]->addElementNeighborLimite(this);
       faces[indexFaceExists]->setEstComm(true);
     }
   }
   //Verification face 3 :
-  if (m_numNoeuds[1] < numberNoeudsInternes && m_numNoeuds[2] < numberNoeudsInternes && m_numNoeuds[5] < numberNoeudsInternes && m_numNoeuds[4] < numberNoeudsInternes)
+  if (m_numNodes[1] < numberNodesInternal && m_numNodes[2] < numberNodesInternal && m_numNodes[5] < numberNodesInternal && m_numNodes[4] < numberNodesInternal)
   {
-    FaceQuadrangle face(m_numNoeuds[1], m_numNoeuds[2], m_numNoeuds[5], m_numNoeuds[4]);
+    FaceQuadrangle face(m_numNodes[1], m_numNodes[2], m_numNodes[5], m_numNodes[4]);
     if (face.faceExists(faces, indexMaxFaces, indexFaceExists))
     {
-      faces[indexFaceExists]->ajouteElementVoisinLimite(this);
+      faces[indexFaceExists]->addElementNeighborLimite(this);
       faces[indexFaceExists]->setEstComm(true);
     }
   }
   //Verification face 4 :
-  if (m_numNoeuds[0] < numberNoeudsInternes && m_numNoeuds[1] < numberNoeudsInternes && m_numNoeuds[2] < numberNoeudsInternes)
+  if (m_numNodes[0] < numberNodesInternal && m_numNodes[1] < numberNodesInternal && m_numNodes[2] < numberNodesInternal)
   {
-    FaceTriangle face(m_numNoeuds[0], m_numNoeuds[1], m_numNoeuds[2]);
+    FaceTriangle face(m_numNodes[0], m_numNodes[1], m_numNodes[2]);
     if (face.faceExists(faces, indexMaxFaces, indexFaceExists))
     {
-      faces[indexFaceExists]->ajouteElementVoisinLimite(this);
+      faces[indexFaceExists]->addElementNeighborLimite(this);
       faces[indexFaceExists]->setEstComm(true);
     }
   }
   //Verification face 5 :
-  if (m_numNoeuds[3] < numberNoeudsInternes && m_numNoeuds[4] < numberNoeudsInternes && m_numNoeuds[5] < numberNoeudsInternes)
+  if (m_numNodes[3] < numberNodesInternal && m_numNodes[4] < numberNodesInternal && m_numNodes[5] < numberNodesInternal)
   {
-    FaceTriangle face(m_numNoeuds[3], m_numNoeuds[4], m_numNoeuds[5]);
+    FaceTriangle face(m_numNodes[3], m_numNodes[4], m_numNodes[5]);
     if (face.faceExists(faces, indexMaxFaces, indexFaceExists))
     {
-      faces[indexFaceExists]->ajouteElementVoisinLimite(this);
+      faces[indexFaceExists]->addElementNeighborLimite(this);
       faces[indexFaceExists]->setEstComm(true);
     }
   }
@@ -241,11 +241,11 @@ int ElementPrism::compteFaceCommunicante(std::vector<int*>& facesBuff, std::vect
   {
     switch (i)
     {
-      case 0: face[0] = m_numNoeuds[0]; face[1] = m_numNoeuds[1]; face[2] = m_numNoeuds[4]; face[3] = m_numNoeuds[3]; break;
-      case 1: face[0] = m_numNoeuds[0]; face[1] = m_numNoeuds[2]; face[2] = m_numNoeuds[5]; face[3] = m_numNoeuds[3]; break;
-      case 2: face[0] = m_numNoeuds[1]; face[1] = m_numNoeuds[2]; face[2] = m_numNoeuds[5]; face[3] = m_numNoeuds[4]; break;     
-      case 3: face[0] = m_numNoeuds[0]; face[1] = m_numNoeuds[1]; face[2] = m_numNoeuds[2]; break;
-      case 4: face[0] = m_numNoeuds[3]; face[1] = m_numNoeuds[4]; face[2] = m_numNoeuds[5]; break;
+      case 0: face[0] = m_numNodes[0]; face[1] = m_numNodes[1]; face[2] = m_numNodes[4]; face[3] = m_numNodes[3]; break;
+      case 1: face[0] = m_numNodes[0]; face[1] = m_numNodes[2]; face[2] = m_numNodes[5]; face[3] = m_numNodes[3]; break;
+      case 2: face[0] = m_numNodes[1]; face[1] = m_numNodes[2]; face[2] = m_numNodes[5]; face[3] = m_numNodes[4]; break;     
+      case 3: face[0] = m_numNodes[0]; face[1] = m_numNodes[1]; face[2] = m_numNodes[2]; break;
+      case 4: face[0] = m_numNodes[3]; face[1] = m_numNodes[4]; face[2] = m_numNodes[5]; break;
     }
     int iMax = sumNodesBuff.size();
     if(i<3)
@@ -281,11 +281,11 @@ int ElementPrism::compteFaceCommunicante(int& iMax, int** facesBuff, int* sumNod
   {
     switch (i)
     {
-      case 0: face[0] = m_numNoeuds[0]; face[1] = m_numNoeuds[1]; face[2] = m_numNoeuds[4]; face[3] = m_numNoeuds[3]; break;
-      case 1: face[0] = m_numNoeuds[0]; face[1] = m_numNoeuds[2]; face[2] = m_numNoeuds[5]; face[3] = m_numNoeuds[3]; break;
-      case 2: face[0] = m_numNoeuds[1]; face[1] = m_numNoeuds[2]; face[2] = m_numNoeuds[5]; face[3] = m_numNoeuds[4]; break;     
-      case 3: face[0] = m_numNoeuds[0]; face[1] = m_numNoeuds[1]; face[2] = m_numNoeuds[2]; break;
-      case 4: face[0] = m_numNoeuds[3]; face[1] = m_numNoeuds[4]; face[2] = m_numNoeuds[5]; break;
+      case 0: face[0] = m_numNodes[0]; face[1] = m_numNodes[1]; face[2] = m_numNodes[4]; face[3] = m_numNodes[3]; break;
+      case 1: face[0] = m_numNodes[0]; face[1] = m_numNodes[2]; face[2] = m_numNodes[5]; face[3] = m_numNodes[3]; break;
+      case 2: face[0] = m_numNodes[1]; face[1] = m_numNodes[2]; face[2] = m_numNodes[5]; face[3] = m_numNodes[4]; break;     
+      case 3: face[0] = m_numNodes[0]; face[1] = m_numNodes[1]; face[2] = m_numNodes[2]; break;
+      case 4: face[0] = m_numNodes[3]; face[1] = m_numNodes[4]; face[2] = m_numNodes[5]; break;
     }
     if(i<3)
     {

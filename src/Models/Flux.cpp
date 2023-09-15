@@ -32,6 +32,7 @@
 
 std::vector<Flux*> sourceCons;
 Flux* fluxBuff;
+Flux* fluxBuffMRF;
 
 //****************************************************************************
 

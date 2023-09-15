@@ -10,8 +10,8 @@ Nozzles are pipes or tubes of variable cross sections. It can control the direct
 Here, tests are divided into 3 categories: 
 
 - Tank with shock.
-- Supersonic injection.
-- Subsonic injection.
+- Injection at imposed temperature.
+- Low-mach subsonic flow.
 
 Tank with shock
 ---------------
@@ -30,19 +30,19 @@ It means that there is a shock in the tank which is placed before the nozzle. In
 
   Initial helium conditions before the nozzle.
 
-+-----------------------------+-------------------------------+
-| Characteristic              | Value                         |
-+=============================+===============================+
-| Dimension                   | L=1m, Øa=0.20m, Ømin=0.17m    |
-+-----------------------------+-------------------------------+
-| Initial mesh structure :    | unstructured                  |
-+-----------------------------+-------------------------------+
-| Boundary conditions         | tank, wall, outflow, wall     |
-+-----------------------------+-------------------------------+
-| Final solution time         | 1.44e-2 s                     |
-+-----------------------------+-------------------------------+
-| Solution printing frequency | 7.2e-4 s                      |
-+-----------------------------+-------------------------------+
++-----------------------------+----------------------------------------+
+| Characteristic              | Value                                  |
++=============================+========================================+
+| Dimension                   | L=1m, Øa=0.20m, Ømin=0.17m             |
++-----------------------------+----------------------------------------+
+| Initial mesh structure      | unstructured                           |
++-----------------------------+----------------------------------------+
+| Boundary conditions         | inletTank, wall, outletPressure, wall  |
++-----------------------------+----------------------------------------+
+| Final solution time         | 1.44e-2 s                              |
++-----------------------------+----------------------------------------+
+| Solution printing frequency | 7.2e-4 s                               |
++-----------------------------+----------------------------------------+
 
 Results are shown in :numref:`Fig:testCases:Euler:TankwithShockAnim`.
 When helium arrives in the minimal section, there is a sonic flow. So, at the divergent section, one observes a shock wave, and then, pressure becomes stationary.
@@ -79,41 +79,34 @@ Pressure differences are shown in :numref:`Fig:testCases:Euler:TankwithShockE`.
 
 Maximum pressure differences are located at the ends of the nozzle and the minimum pressure difference is located at the minimum section.
 
-
-Supersonic injection
---------------------
-
-Before the nozzle, one injects helium with Mach > 1. Therefore, helium flow is supersonic and will cross the nozzle. This test is referenced in *./libTests/referenceTestCases/euler/2D/nozzles/supersonicInjection/*. The corresponding uncommented line in *ECOGEN.xml* is:
-
-.. code-block:: xml
-
-  <testCase>./libTests/referenceTestCases/euler/2D/nozzles/supersonicInjection/</testCase>
-
-........
-
-
-Subsonic injection
-------------------
+Injection at imposed temperature
+--------------------------------
 
 Before the nozzle, one injects air with Mach < 1. Therefore, air flow is subsonic and will cross the nozzle. Initial conditions are described on figures :numref:`Fig:testCases:Euler:subsonicIni` and :numref:`Fig:testCases:Euler:subsupersonicIni`. This test is referenced in *./libTests/referenceTestCases/euler/2D/nozzles/subsonicInjection/*. The corresponding uncommented line in *ECOGEN.xml* is: 
 
 .. code-block:: xml
 
-  <testCase>./libTests/referenceTestCases/euler/2D/nozzles/subsonicInjection/</testCase>
+  <testCase>./libTests/referenceTestCases/euler/2D/nozzles/injectionTemp/</testCase>
 
-+-----------------------------+---------------------------------+
-| Characteristic              | Value                           |
-+=============================+=================================+
-| Dimension                   | L=1m, Øa=0.2m, Ømin=0.17m       |
-+-----------------------------+---------------------------------+
-| Initial mesh structure :    | unstructured                    |
-+-----------------------------+---------------------------------+
-| Boundary conditions         |subinjection, wall, outflow, wall|
-+-----------------------------+---------------------------------+
-| Final solution time         | 1s                              |
-+-----------------------------+---------------------------------+
-| Solution printing frequency | 0.25s                           |
-+-----------------------------+---------------------------------+
+Note that a variation of this test case is available where the inlet boundary is defined using a stagnation state, see test case:
+
+.. code-block:: xml
+
+  <testCase>libTests/referenceTestCases/euler/2D/nozzles/injectionStagState/</testCase>
+
++-----------------------------+------------------------------------------+
+| Characteristic              | Value                                    |
++=============================+==========================================+
+| Dimension                   | L=1m, Øa=0.2m, Ømin=0.17m                |
++-----------------------------+------------------------------------------+
+| Initial mesh structure      | unstructured                             |
++-----------------------------+------------------------------------------+
+| Boundary conditions         | inletInjTemp, wall, outletPressure, wall |
++-----------------------------+------------------------------------------+
+| Final solution time         | 1s                                       |
++-----------------------------+------------------------------------------+
+| Solution printing frequency | 0.25s                                    |
++-----------------------------+------------------------------------------+
 
 .. _Fig:testCases:Euler:subsonicIni:
 
@@ -166,6 +159,56 @@ This is the other case, when the flow is subsonic at the exit (:numref:`Fig:test
   :align: center
 
 Because of a subsonic flow over the whole nozzle, it is not primed at the throat. Thus, one notices that the fluid accelerates when the section is reduced, then slows down when the section is enlarged. This is due to the conservation of the mass flow. 
+
+.. _Sec:tests:euler:2d:nozzleLowMach:
+
+Low-Mach subsonic flow
+----------------------
+
+In the test case provided below, a subsonic flow at really low speeds is studied:
+
+.. code-block:: xml
+
+  <testCase>libTests/referenceTestCases/euler/2D/nozzles/lowMachSmoothCrossSection/</testCase>
+
+In this configuration, liquid water flows through a smooth varying cross section nozzle.
+Due to the considered velocity range, the flow is nearly incompressible. 
+To guarantee the convergence of the compressible solver to the exact solution, a low-Mach preconditionning technique is used. 
+Section variation is modeled using a 1D scheme with smooth varying cross section.
+With this scheme, upper and lower boundary conditions are directly taken into consideration.
+For that reason, *nullFlux* boundary condition must be set at these boundaries (otherwise wall effects are counted twice).
+
++-----------------------------+---------------------------------------------+
+| Characteristic              | Value                                       |
++=============================+=============================================+
+| Dimension                   | L=1m, Øa=0.14657m, Ømin=0.06406m            |
++-----------------------------+---------------------------------------------+
+| Initial mesh structure      | unstructured                                |
++-----------------------------+---------------------------------------------+
+| Boundary conditions         | inletInjStagState, nullFlux, outletPressure |
++-----------------------------+---------------------------------------------+
+| Final solution time         | 2s                                          |
++-----------------------------+---------------------------------------------+
+| Solution printing frequency | 0.1s                                        |
++-----------------------------+---------------------------------------------+
+
+Pressure and velocity fields in the nozzle are presented below.
+One can notice that the low-Mach preconditionning technique (called *Mref* or *local Mref*) is required for the solution to convergence to the exact solution.
+Be aware that, to address a wider range of applications, *local Mref* is the only preconditionning method available in ECOGEN. 
+
+.. figure:: ./_static/testCases/Euler/Nozzles/pLowMach.png
+  :scale: 40%
+  :align: center
+
+  Pressure field in the nozzle at steady state.
+
+.. figure:: ./_static/testCases/Euler/Nozzles/pLowMach.png
+  :scale: 40%
+  :align: center
+
+  Velocity field in the nozzle at steady state.
+
+For more information on this test case and the numerical procedure, see the reference :cite:`lemartelot2013lowmach`.
 
 .. _Paraview: https://www.paraview.org/
 .. _gnuplot: http://www.gnuplot.info/

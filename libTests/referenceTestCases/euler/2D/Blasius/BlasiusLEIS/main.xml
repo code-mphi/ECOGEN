@@ -1,0 +1,33 @@
+<?xml version = "1.0" encoding = "UTF-8" standalone = "yes"?>
+<computationParam>
+  <run>EulerBlasiusLEIS</run>
+  <outputMode format="XML" binary="false" precision="10"/>
+  
+  <timeControlMode iterations="false">
+    <iterations number="1" iterFreq="1"/>
+    <physicalTime totalTime="2.e-2" timeFreq="1.e-4"/>
+  </timeControlMode>
+	
+  <computationControl CFL="0.4"/>
+
+  <!-- <secondOrder>
+    <globalLimiter>minmod</globalLimiter>
+  </secondOrder> -->
+
+  <gradient> 
+    <method>green-gauss</method>
+  </gradient>
+
+  <boundary record="flux">
+    <boundaryID number="1" name="massflow-inflow"/>
+    <timeControl acqFreq="1.e-5"/>
+    <flux type="massflow"/>
+  </boundary>
+
+  <boundary record="flux">
+    <boundaryID number="2" name="massflow-outflow"/>
+    <timeControl acqFreq="1.e-5"/>
+    <flux type="massflow"/>
+  </boundary>
+
+</computationParam>

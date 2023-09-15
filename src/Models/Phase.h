@@ -35,6 +35,7 @@
 #include "../Errors.h"
 #include "../Eos/Eos.h"
 #include "../Maths/Coord.h"
+#include "../Maths/Tensor.h"
 #include "../libTierces/tinyxml2.h"
 #include "../Order2/HeaderLimiter.h"
 #include "../Tools.h"
@@ -92,14 +93,22 @@ class Phase
     //---------------------------------
     virtual void computeSlopesPhase(const Phase& /*sLeft*/, const Phase& /*sRight*/, const double& /*distance*/) { Errors::errorMessage("computeSlopesPhase not available for requested phase type"); };
     virtual void setToZero() { Errors::errorMessage("setToZero not available for requested phase type"); };
+    virtual void setToMax() { Errors::errorMessage("setToMax not available for requested phase type"); };
     virtual void extrapolate(const Phase& /*slope*/, const double& /*distance*/) { Errors::errorMessage("extrapolate not available for requested phase type"); };
     virtual void limitSlopes(const Phase& /*slopeGauche*/, const Phase& /*slopeDroite*/, Limiter& /*globalLimiter*/, Limiter& /*volumeFractionLimiter*/) { Errors::errorMessage("limitSlopes not available for requested phase type"); };
+    virtual void setMin(const Phase& /*phase1*/, const Phase& /*phase2*/) { Errors::errorMessage("setMin not available for requested phase type"); };
+    virtual void setMax(const Phase& /*phase1*/, const Phase& /*phase2*/) { Errors::errorMessage("setMax not available for requested phase type"); };
+    virtual void computeGradientLimiter(const Limiter& /*globalLimiter*/, const Phase& /*phase*/, const Phase& /*phaseMin*/, const Phase& /*phaseMax*/, const Phase& /*slope*/) { Errors::errorMessage("computeGradientLimiter not available for requested phase type"); };
 
     //Specific methods for parallele computing at second order
     //--------------------------------------------------------
     virtual int numberOfTransmittedSlopes() const { Errors::errorMessage("numberOfTransmittedSlopes not available for requested phase type"); return 0; };
     virtual void fillBufferSlopes(double* /*buffer*/, int& /*counter*/) const { Errors::errorMessage("fillBufferSlopes not available for requested phase type"); };
     virtual void getBufferSlopes(double* /*buffer*/, int& /*counter*/) { Errors::errorMessage("getBufferSlopes not available for requested phase type"); };
+
+    //Specific methods for solids
+    //---------------------------
+    virtual double getSquareLongitudinalWaveSpeed() const { Errors::errorMessage("getSquareLongitudinalWaveSpeed not available for requested phase type"); return Errors::defaultDouble; };
 
     //Verifications
     //-------------
@@ -132,6 +141,13 @@ class Phase
     virtual const double& getSoundSpeed() const { Errors::errorMessage("getSoundSpeed impossible avec type de phase demande"); return Errors::defaultDouble; };
     virtual const double& getTotalEnergy() const { Errors::errorMessage("getTotalEnergy impossible avec type de phase demande"); return Errors::defaultDouble; };
     virtual double getTemperature() const { Errors::errorMessage("getT impossible avec type de phase demande"); return 0.; };
+    virtual const double& getLambda() const { Errors::errorMessage("getLambda not available for requested phase type"); return Errors::defaultDouble; };
+    virtual const double& getEnergyCompaction() const { Errors::errorMessage("getEnergyCompaction not available for requested phase type"); return Errors::defaultDouble; };
+    virtual const Tensor& getCobase() const { Errors::errorMessage("getCobase not available for requested phase type"); return Tensor::defaultTensor; };
+    virtual Tensor& getCobase() { Errors::errorMessage("getCobase not available for requested phase type"); return Tensor::defaultTensorNonConst; };
+    virtual const double& getEnergyElastic() const { Errors::errorMessage("getEnergyElastic not available for requested phase type"); return Errors::defaultDouble; };
+    virtual const Tensor& getStressTensor() const { Errors::errorMessage("getStressTensor not available for requested phase type"); return Tensor::defaultTensor; };
+    virtual Tensor& getStressTensor() { Errors::errorMessage("getStressTensor not available for requested phase type"); return Tensor::defaultTensorNonConst; };
 
     virtual void setAlpha(double /*alpha*/) { Errors::errorMessage("setAlpha not available for requested phase type"); };
     virtual void setDensity(double /*density*/) { Errors::errorMessage("setDensity not available for requested phase type"); };
@@ -154,6 +170,11 @@ class Phase
     virtual void setTotalEnergy(double /*totalEnergy*/) { Errors::errorMessage("setTotalEnergy not available for requested phase type"); };
     virtual void setTotalEnergy(const double & /*energy*/, const Coord& /*vel*/) { Errors::errorMessage("setTotalEnergy not available for requested phase type"); };
     virtual void setTemperature(double /*temperature*/) { Errors::errorMessage("setTemperature not available for requested phase type"); };
+    virtual void setLambda(double /*lambda*/) { Errors::errorMessage("setLambda not available for requested phase type"); };
+    virtual void setEnergyCompaction(double /*energyCompaction*/) { Errors::errorMessage("setEnergyCompaction not available for requested phase type"); };
+    virtual void setCobase(const Tensor& /*cobase*/) { Errors::errorMessage("setCobase not available for requested phase type"); };
+    virtual void setEnergyElastic(double /*energyElastic*/) { Errors::errorMessage("setEnergyElastic not available for requested phase type"); };
+    virtual void setStressTensor(const Tensor& /*stressTensor*/) { Errors::errorMessage("setStressTensor not available for requested phase type"); };
 
     //Operators
     //---------

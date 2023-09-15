@@ -73,7 +73,7 @@ void OutputBoundaryFluxGNU::initializeSpecificOutputBound()
     fs.close();
 
     // Gnuplot script printing for visualization
-    ecritScriptGnuplot(m_fileNameResults);
+    writeScriptGnuplot(m_fileNameResults);
   }
   catch (ErrorECOGEN&) { throw; }
 }
@@ -121,7 +121,7 @@ double OutputBoundaryFluxGNU::extractEnthalpyFlux(std::vector<CellInterface*>* c
     for (unsigned int c = 0; c < m_cellInterfaceIndexes.size(); c++) {
       // Absolute velocity is built on the specific region rotating or when whole geometry is rotating.
       if (m_run->m_sources[m_run->m_MRF]->getPhysicalEntity() 
-        == cellInterfacesLvl[0][m_cellInterfaceIndexes[c]]->getCellGauche()->getElement()->getAppartenancePhysique()
+        == cellInterfacesLvl[0][m_cellInterfaceIndexes[c]]->getCellLeft()->getElement()->getAppartenancePhysique()
         || m_run->m_sources[m_run->m_MRF]->getPhysicalEntity() == 0)
       {
         m_flux += this->computeTotalEnthalpyFluxFaceMRF(cellInterfacesLvl[0][m_cellInterfaceIndexes[c]]);
@@ -192,7 +192,7 @@ double OutputBoundaryFluxGNU::computeTotalEnthalpyFluxFaceMRF(CellInterface *bou
     bound->getFace()->getTangent(), 
     bound->getFace()->getBinormal());
 
-  absVel = m_run->m_sources[m_run->m_MRF]->computeAbsVelocity(absVel, bound->getCellGauche()->getPosition());
+  absVel = m_run->m_sources[m_run->m_MRF]->computeAbsVelocity(absVel, bound->getCellLeft()->getPosition());
 
   buff *= TB->eos[0]->computeTotalEnthalpy(bound->getBoundData(VarBoundary::rho), 
         bound->getBoundData(VarBoundary::p), 

@@ -34,11 +34,11 @@ const int FacePoint::NUMBERNODES = 1;
 
 //***********************************************************************
 
-FacePoint::FacePoint(const int& numNoeud1) :
+FacePoint::FacePoint(const int& numNode1) :
 FaceNS(NUMBERNODES)
 {
-  m_numNoeuds[0] = numNoeud1;
-  m_sommeNumNoeuds = m_numNoeuds[0];
+  m_numNodes[0] = numNode1;
+  m_sumNumNodes = m_numNodes[0];
 }
 
 //***********************************************************************
@@ -47,21 +47,21 @@ FacePoint::~FacePoint(){}
 
 //***********************************************************************
 
-void FacePoint::computeSurface(const Coord* /*noeuds*/)
+void FacePoint::computeSurface(const Coord* /*nodes*/)
 {
   m_surface = 1.0; //unite
 }
 
 //***********************************************************************
 
-void FacePoint::computeRepere(const Coord* noeuds, const int& numNoeudAutre, ElementNS *elementVoisin)
+void FacePoint::computeRepere(const Coord* nodes, const int& numNodeOther, ElementNS *elementNeighbor)
 {
-  Coord v1; v1.setFromSubtractedVectors(noeuds[m_numNoeuds[0]], noeuds[numNoeudAutre]);
+  Coord v1; v1.setFromSubtractedVectors(nodes[m_numNodes[0]], nodes[numNodeOther]);
   m_normal = v1 / v1.norm();
   m_binormal.setXYZ(0., 0., 1.);
   m_tangent = Coord::crossProduct(m_binormal, m_normal);
 
-  m_elementDroite = elementVoisin;
+  m_elementDroite = elementNeighbor;
   m_elementGauche = 0;
 }
 

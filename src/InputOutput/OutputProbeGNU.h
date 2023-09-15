@@ -48,7 +48,7 @@ public:
   //!                   <timeControl acqFreq = "1e-5." / >       <!-- if negative or nul, recording at each time step-->
   //!                 </probe>
   //! \param     casTest           Folder name of test case input files
-  //! \param     run               Resutls folder name (defined in 'mainVX.xml')
+  //! \param     run               Resutls folder name (defined in 'main.xml')
   //! \param     element           XML element to read for probe data
   //! \param     fileName          string name of readed XML file
   //! \param     entree            Pointer to corresponding run entry object
@@ -73,7 +73,7 @@ private:
   double m_nextAcq;           //!< Next acquisition time
   Cell* m_cell;               //!< Pointer to the level 0 cell containing the probe
   GeometricObject *m_objet;   //!< To store position
-  bool* m_possessesProbe;      //!< True if the CPU possesses probe
+  bool* m_possessesProbe;     //!< True if the CPU possesses probe
 };
 
 #endif //OUTPUTPROBEGNU_H

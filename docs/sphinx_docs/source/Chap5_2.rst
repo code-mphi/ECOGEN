@@ -22,7 +22,11 @@ Other tests are provided with ECOGEN package and may be described in details lat
 
 .. code-block:: xml
 
-  <testCase>./libTests/referenceTestCases/PUEq/AddPhysicalEffects/evap/evapShockTube/</testCase>
+  <testCase>libTests/referenceTestCases/PUEq/2D/foil/noCavitation/</testCase>
+  <testCase>libTests/referenceTestCases/PUEq/2D/foil/cavitation/</testCase>
+  <testCase>libTests/referenceTestCases/PUEq/AddPhysicalEffects/phaseChange/evapExpansionTubeEquilibrium/</testCase>
+  <testCase>libTests/referenceTestCases/PUEq/AddPhysicalEffects/phaseChange/condensation/</testCase>
+  <testCase>libTests/referenceTestCases/PUEq/AddPhysicalEffects/phaseChange/evaporation/</testCase>
   <testCase>./libTests/referenceTestCases/PUEq/AddPhysicalEffects/surfaceTension/waterCylinderInAir/</testCase>
   <testCase>./libTests/referenceTestCases/PUEq/AddPhysicalEffects/surfaceTension/waterDropletInAir/</testCase>
   <testCase>./libTests/referenceTestCases/PUEq/AddPhysicalEffects/surfaceTension/waterDropletInAir_axisym/</testCase>

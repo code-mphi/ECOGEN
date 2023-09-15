@@ -34,7 +34,7 @@ Tools *TB;
 
 //***********************************************************************
 
-Tools::Tools(const int& numbPhases, const int& numbTransports)
+Tools::Tools(const int& numbPhases, const int& numbSolids, const int& numbTransports)
 {
   ak = new double[numbPhases];
   Yk = new double[numbPhases];
@@ -56,8 +56,22 @@ Tools::Tools(const int& numbPhases, const int& numbTransports)
   eos = new Eos*[numbPhases];
   Hk0 = new double[numbPhases];
   Yk0 = new double[numbPhases];
+  compactionPk = new double[numbPhases];
+  dlambda = new double[numbPhases];
+  dplast = new Tensor[numbPhases];
+  alphaNull = new bool[numbPhases];
+  relaxSolidPlast = new bool[numbPhases];
+
+  for (int k = 0; k < numbPhases; k++) {
+    compactionPk[k] = 0.;
+    alphaNull[k] = false;
+    relaxSolidPlast[k] = false;
+  }
+
+  physicalTime = 0.;
 
   numberPhases = numbPhases;
+  numberSolids = numbSolids;
   numberTransports = numbTransports;
 }
 
@@ -65,7 +79,7 @@ Tools::Tools(const int& numbPhases, const int& numbTransports)
 
 Tools::~Tools()
 {
-  if (ak!=0) delete[] ak;
+  if (ak != 0) delete[] ak;
   if (Yk != 0) delete[] Yk;
   if (rhok != 0) delete[] rhok;
   if (pk != 0) delete[] pk;
@@ -83,9 +97,13 @@ Tools::~Tools()
   if (zk != 0) delete[] zk;
   if (rho_cIksquare != 0) delete[] rho_cIksquare;
   if (eos != 0) delete[] eos;
-
   if (Hk0 != 0) delete[] Hk0;
   if (Yk0 != 0) delete[] Yk0;
+  if (compactionPk != 0) delete[] compactionPk;
+  if (dlambda != 0) delete[] dlambda;
+  if (dplast != 0) delete[] dplast;
+  if (alphaNull != 0) delete[] alphaNull;
+  if (relaxSolidPlast != 0) delete[] relaxSolidPlast;
 }
 
 //***********************************************************************

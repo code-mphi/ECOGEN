@@ -1,0 +1,14 @@
+<?xml version = "1.0" encoding = "UTF-8" standalone = "yes"?>
+<computationParam>
+	<run>pressureVelocityEq1DevapExpansionTubeEquilibrium</run>
+	<outputMode format="GNU" binary="false" precision="10"/>
+	<timeControlMode iterations="false">
+		<iterations number="2000" iterFreq="1000"/>
+		<physicalTime totalTime="1.e-3" timeFreq="1.e-3"/>
+	</timeControlMode>
+	<computationControl CFL="0.5"/>
+	<!-- <secondOrder>
+		<globalLimiter>vanleer</globalLimiter>
+	</secondOrder> -->
+  <psat record="true"/>
+</computationParam>

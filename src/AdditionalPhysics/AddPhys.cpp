@@ -44,11 +44,11 @@ void AddPhys::computeFluxAddPhys(CellInterface* cellInterface)
 {
   this->solveFluxAddPhys(cellInterface);
 
-  if (cellInterface->getCellGauche()->getLvl() == cellInterface->getCellDroite()->getLvl()) {     //CoefAMR = 1 for the two
+  if (cellInterface->getCellLeft()->getLvl() == cellInterface->getCellRight()->getLvl()) {     //CoefAMR = 1 for the two
     this->addFluxAddPhys(cellInterface, 1.);                                        //Add flux on the right cell
     this->subtractFluxAddPhys(cellInterface, 1.);                                   //Subtract flux on the left cell
   }
-  else if (cellInterface->getCellGauche()->getLvl() > cellInterface->getCellDroite()->getLvl()) { //CoefAMR = 1 for the left and 0.5 for the right
+  else if (cellInterface->getCellLeft()->getLvl() > cellInterface->getCellRight()->getLvl()) { //CoefAMR = 1 for the left and 0.5 for the right
     this->addFluxAddPhys(cellInterface, 0.5);                                       //Add flux on the right cell
     this->subtractFluxAddPhys(cellInterface, 1.);                                   //Subtract flux on the left cell
   }
@@ -71,8 +71,8 @@ void AddPhys::computeFluxAddPhysBoundary(CellInterface* cellInterface)
 void AddPhys::addFluxAddPhys(CellInterface* cellInterface, const double& coefAMR)
 {
   //No "time step"
-  double coefA = cellInterface->getFace()->getSurface() / cellInterface->getCellDroite()->getElement()->getVolume() * coefAMR;
-  cellInterface->getCellDroite()->getCons()->addFlux(coefA);
+  double coefA = cellInterface->getFace()->getSurface() / cellInterface->getCellRight()->getElement()->getVolume() * coefAMR;
+  cellInterface->getCellRight()->getCons()->addFlux(coefA);
 }
 
 //***********************************************************************
@@ -80,8 +80,8 @@ void AddPhys::addFluxAddPhys(CellInterface* cellInterface, const double& coefAMR
 void AddPhys::subtractFluxAddPhys(CellInterface* cellInterface, const double& coefAMR)
 {
   //No "time step"
-  double coefA = cellInterface->getFace()->getSurface() / cellInterface->getCellGauche()->getElement()->getVolume() * coefAMR;
-  cellInterface->getCellGauche()->getCons()->subtractFlux(coefA);
+  double coefA = cellInterface->getFace()->getSurface() / cellInterface->getCellLeft()->getElement()->getVolume() * coefAMR;
+  cellInterface->getCellLeft()->getCons()->subtractFlux(coefA);
 }
 
 //***********************************************************************

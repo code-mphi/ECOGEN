@@ -70,6 +70,10 @@ class EosPolynomial : public Eos
     //! \details   with  dedrhoSecond : \f$ \frac{\partial^2 \epsilon}{\partial \rho^2} (\rho) = \frac{1}{\rho^2} \frac{\partial p}{\partial \rho} - \frac{2}{\rho} \frac{\partial \epsilon}{\partial \rho} \f$
     virtual double dedrhoSecond(const double& density, const double& temperature) const;
 
+    //Checking
+    //! \brief   Do nothing for Polynomial
+    virtual void verifyAndCorrectDensityMax(double& /*density*/) const {};
+
     //Get 
     //! \brief  Get the type that is to say the reduced name of the EOS in ECOGEN
     //! \return \f$ \ "Polynomial" \f$

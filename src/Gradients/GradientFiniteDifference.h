@@ -43,16 +43,11 @@ class GradientFiniteDifference : public Gradient
     GradientFiniteDifference();
     virtual ~GradientFiniteDifference();
 
-    //! \brief  Compute gradient coord (only used to compute density gradient)
-    //! \param  nameVariables  Name of the variable for which the gradient is calculated
-    //! \param  numPhase       Phase number
-    Coord computeGradient(Cell* cell, Variable nameVariable, int numPhase = -1);
-
     //! \brief  Compute gradients (temperature, velocity, density) of a cell
     //! \param  grads          Array of desired gradients, e.g. for temperature each component represents phase temperature and for velocity each component represents the gradient of a velocity component (grad(u), grad(v), grad(w))
     //! \param  nameVariables  Name of the variable for which the gradient is calculated
     //! \param  numPhases      Phases numbers
-    void computeGradient(Cell* cell, std::vector<Coord>& grads, std::vector<Variable>& nameVariables, std::vector<int>& numPhases);
+    void computeGradients(Cell* cell, std::vector<Coord>& grads, const std::vector<Variable>& nameVariables, const std::vector<int>& numPhases);
 
   protected:
 };

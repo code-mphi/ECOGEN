@@ -32,6 +32,7 @@
 #define EOS_H
 
 #include "../Maths/Coord.h"
+#include "../Maths/Tensor.h"
 #include "../Errors.h"
 #include "../libTierces/tinyxml2.h"
 
@@ -64,7 +65,8 @@ class Eos
     const int& getNumber() const { return m_number; };
 
     //! \brief Read physical parameters (viscosity, thermal conductivity....)
-    void readPhysicalParameter(tinyxml2::XMLNode *element);
+    //! \param    element         node element of XML file
+    void readPhysicalParameters(tinyxml2::XMLNode *element);
 
     //! \brief    Compute the enthalpy of the phase
     //! \param    density         density (\f$\rho \f$)
@@ -85,7 +87,7 @@ class Eos
     //! \return   this -> hTotal
     //! \details  hTotal is computed as :\f$H_{total} =  \epsilon (\rho, p)  +  \frac{p}{\rho}  +  \frac{1}{2}\bm{u}^2 \f$. 
     double computeTotalEnthalpy(const double& density, const double& pressure, const Coord& velocity) const;
-    //! \brief  Return the dynamic viscosity of the fluid  
+    //! \brief  Return the dynamic viscosity of the fluid
     //!return    \f$ \mu \f$ (Unit: Pa.s).
     const double& getMu() const { return m_mu; };
     //! \brief  get the thermal conductivity of the fluid

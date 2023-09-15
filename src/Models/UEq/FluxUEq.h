@@ -49,14 +49,15 @@ class FluxUEq : public Flux
     virtual void addFlux(double coefA);
     virtual void addFlux(Flux* flux);
     virtual void subtractFlux(double coefA);
+    virtual void addFluxRotatingRegion(double coefA);
+    virtual void subtractFluxRotatingRegion(double coefA);
     virtual void multiply(double scalar);
     virtual void setBufferFlux(Cell& cell);
     virtual void buildCons(Phase** phases, Mixture* mixture);
     virtual void buildPrim(Phase** phases, Mixture* mixture);
     virtual void setToZero();
-    virtual void setToZeroBufferFlux();
-    virtual void addNonCons(double coefA, const Cell* cell);
-    virtual void subtractNonCons(double coefA, const Cell* cell);
+    virtual void addNonCons(double coefA, const Cell* cell, const Coord& /*normal*/, const Coord& /*tangent*/, const Coord& /*binormal*/);
+    virtual void subtractNonCons(double coefA, const Cell* cell, const Coord& /*normal*/, const Coord& /*tangent*/, const Coord& /*binormal*/);
     virtual void schemeCorrection(Cell& cell) const;
 
     virtual void addFluxSmooth1D(double coefA, const Coord& normal, Cell* cell);
@@ -66,6 +67,9 @@ class FluxUEq : public Flux
     virtual void prepSourceTermsGravity(const Coord& g);
     virtual void prepSourceTermsHeating(const double& q);
     virtual void prepSourceTermsMRF(Cell* cell, const Coord& omega);
+
+    //Moving Reference Frame
+    virtual void addNonConsMrfFlux(Phase** phases);
 
     // Accessors
     //----------
@@ -79,7 +83,7 @@ class FluxUEq : public Flux
   protected:
     double* m_alpha;          //!< volume fraction array
     double* m_mass;           //!< mass array
-    double* m_energ;          //!< specific internal energy array
+    double* m_energ;          //!< specific internal energy array (may contain compaction energy for UEqSolid model)
     Coord m_momentum;         //!< momentum array
     double m_energMixture;    //!< mixture energy
 

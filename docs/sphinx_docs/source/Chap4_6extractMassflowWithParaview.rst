@@ -31,6 +31,8 @@ Generate .msh file
 
 * Finally, still on the :xml:`Mesh` tab, click on :xml:`Save`. The .msh files will be in the *./libMeshes* folder.
 
+In case you are using latest version of **Gmsh**, you might need to export your mesh file to the previous mesh file format, for more information see the tutorial :ref:`Sec:tuto:exportGmshFile`.
+
 Cylinder Test case
 ==================
 
@@ -151,7 +153,7 @@ ParaView
 Comparison with gnuplot
 =======================
 
-* To make sure these values are correct, we can compare them with other ones. In *mainV5.xml*, one can record the mass flow at both boundaries with the lines:
+* To make sure these values are correct, we can compare them with other ones. In *main.xml*, one can record the mass flow at both boundaries with the lines:
 
 
 .. code-block:: console

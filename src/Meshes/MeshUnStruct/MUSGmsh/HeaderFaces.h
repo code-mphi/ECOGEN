@@ -35,6 +35,6 @@
 #include "FaceSegment.h"
 #include "FaceTriangle.h"
 #include "FaceQuadrangle.h"
-//Ajouter ici les entetes des faces du mesh
+//Add here headers of new faces
 
 #endif // HEADERFACES_H

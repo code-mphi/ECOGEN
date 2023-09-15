@@ -1,6 +1,6 @@
 <?xml version = "1.0" encoding = "UTF-8" standalone = "yes"?>
 <parametersEOS>
-	<EOS fichier="SG_water_cavitation.xml" type="SG"/>
+	<EOS type="SG"/>
 	<parameters
 		gamma="2.35"
 		pInf="1.e9"

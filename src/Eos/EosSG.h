@@ -192,7 +192,6 @@ class EosSG : public Eos
     //! \return  specific volume (volume per mass unit) :  \f$ v= (h - \epsilon_{ref})\frac{(\gamma-1)}{\gamma (p+p_{\infty})} \f$ from the definition of enthalpy \f$ h=\epsilon +pv \f$ 
     virtual double vfpfh(const double& pressure, const double& enthalpy) const;
 
-
     //Partial derivatives
     //! \brief   Compute the partial derivative of the specific volume versus pressure at constant enthalpy
     //! \param   pressure    pressure (p)  

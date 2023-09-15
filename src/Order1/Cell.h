@@ -36,8 +36,7 @@
 #include "../Maths/Coord.h"
 #include "../Maths/Tensor.h"
 #include "../Transport/Transport.h"
-
-enum Variable { transport, pressure, density, alpha, velocityMag, velocityU, velocityV, velocityW, temperature, QPA };
+#include "../Transport/GradTransport.h"
 
 class Cell; //Predeclaration of class to include following .h
 
@@ -50,6 +49,9 @@ class Cell; //Predeclaration of class to include following .h
 #include "../Meshes/Element.h"
 #include "../Geometries/GeometricalDomain.h"
 #include "../Symmetries/Symmetry.h"
+
+class GradPhase;
+class GradMixture;
 
 //! \class     Cell
 //! \brief     Base class for a mesh cell
@@ -85,7 +87,6 @@ class Cell
         void copyMixture(Mixture* mixture);
         void setToZeroCons();
         void setToZeroConsGlobal();
-        void setToZeroBufferFlux();
         void timeEvolution(const double& dt, Symmetry* symmetry);
         void timeEvolutionAddPhys(const double& dt);
         void buildPrim();
@@ -100,23 +101,15 @@ class Cell
         virtual void reverseProjection(const Coord& normal, const Coord& tangent, const Coord& binormal);
         virtual void copyInCell(Cell& /*cellSource*/) const { Errors::errorMessage("methode copie non dispo pour cell"); };
         void copyVec(Phase** vecPhases, Mixture* mixture, Transport* vecTransports);
-        //void printCut1Dde2D(std::ofstream& fileStream, std::string variableConstanteCut, const double& valueCut, const double& dL);    /*!< Ecriture de la cut 1D de la simulation 2D  */
-        //void printCut1Dde3D(std::ofstream& fileStream, std::string variableConstanteCut1, std::string variableConstanteCut2, const double& valueCut1, const double& valueCut2, const double& dL1, const double& dL2);                                            /*!< Ecriture de la cut 1D de la simulation 3D  */
+        //void printCut1Dde2D(std::ofstream& fileStream, std::string variableConstanteCut, const double& valueCut, const double& dL);    /*!< Write de la cut 1D de la simulation 2D  */
+        //void printCut1Dde3D(std::ofstream& fileStream, std::string variableConstanteCut1, std::string variableConstanteCut2, const double& valueCut1, const double& valueCut2, const double& dL1, const double& dL2);                                            /*!< Write de la cut 1D de la simulation 3D  */
+        void deleteInterface(const int &b);
 
         //For additional physics
         //----------------------
         void prepareAddPhys();
-        double selectScalar(Variable nameVariable, int num = 0) const;
-        void setScalar(Variable nameVariable, const double& value, int num = 0);
         Coord selectVector(Variable nameVector, int num = 0, int subscript = -1) const;
         void setVector(Variable nameVector, const Coord& value, int num = 0, int subscript = -1);
-
-        Coord computeGradient(Variable nameVariable, int numPhase = -1);
-        //! \brief  Compute gradients (temperature, velocity, density) of a cell following the Green-Gauss method
-        //! \param  grads          Array of desired gradients, e.g. for temperature each component represents phase temperature and for velocity each component represents the gradient of a velocity component (grad(u), grad(v), grad(w))
-        //! \param  nameVariables  Name of the variable for which the gradient is calculated
-        //! \param  numPhases      Phases number's
-        void computeGradient(std::vector<Coord>& grads, std::vector<Variable>& nameVariables, std::vector<int>& numPhases);
 
         const QuantitiesAddPhys* getQPA(int& numQPA) const { return m_vecQuantitiesAddPhys[numQPA]; }; //!< Allow to recover an additional physical quantity
 
@@ -125,11 +118,20 @@ class Cell
         void addNonConsAddPhys(AddPhys& addPhys, Symmetry* symmetry);
 
         void reinitializeColorFunction(const int& numTransport, const int& numPhase); //!< Re-initialize the color function (transport) with alpha
+
+        //Gradients
+        //---------
+        //! \brief  Compute gradients (temperature, velocity, density) of a cell
+        //! \param  grads          Array of desired gradients, e.g. for temperature each component represents phase temperature and for velocity each component represents the gradient of a velocity component (grad(u), grad(v), grad(w))
+        //! \param  nameVariables  Name of the variable for which the gradient is calculated
+        //! \param  numPhases      Phases number's
+        void computeGradients(std::vector<Coord>& grads, std::vector<Variable>& nameVariables, std::vector<int>& numPhases);
         
         //Accessors
         //---------
         int getCellInterfacesSize() const;
         CellInterface* getCellInterface(const int& b);
+        void setCellInterface(const int& b, CellInterface* cellInterface);
         virtual Phase* getPhase(const int& phaseNumber, Prim /*type*/ = vecPhases) const;
         virtual Phase** getPhases(Prim /*type*/ = vecPhases) const;
         virtual Mixture* getMixture(Prim /*type*/ = vecPhases) const;
@@ -154,9 +156,24 @@ class Cell
         Model* getModel();
         Coord& getVelocity();
         const Coord& getVelocity() const;
+        void setWall(bool wall);
+        bool getWall() const { return m_wall; };
+        //! \brief  Select a specific scalar variable
+        //! \param  nameVariables  Name of the variable to select
+        //! \param  numPhases      Phases number's
+        double selectScalar(Variable nameVariable, int num = 0) const;
 
-        //Not used for first order cells
-        //------------------------------
+        //Second order (not used for first-order cells)
+        //---------------------------------------------
+        //! \brief  Compute global variable buffers (min, max, etc.) and initialize speficic gradient vectors for 2nd-order scheme on unstructured mesh
+        virtual void allocateSecondOrderBuffersAndGradientVectors(Phase** /*phases*/, Mixture* /*mixture*/) {};
+
+        //! \brief  Compute gradients for 2nd-order scheme on unstructured mesh
+        virtual void computeGradientsO2() {};
+        virtual void limitGradientsO2(Limiter& /*globalLimiter*/) {};
+
+        //! \brief  Compute slopes for 2nd-order scheme on unstructured mesh
+        virtual void computeLocalSlopes(CellInterface& /*cellInterfaceRef*/) {};
         virtual void computeLocalSlopes(CellInterface& /*cellInterface*/, Limiter& /*globalLimiter*/, Limiter& /*interfaceLimiter*/,
             Limiter& /*globalVolumeFractionLimiter*/, Limiter& /*interfaceVolumeFractionLimiter*/,
             double& /*alphaCellAfterOppositeSide*/, double& /*alphaCell*/, double& /*alphaCellOtherInterfaceSide*/,
@@ -167,12 +184,10 @@ class Cell
         virtual Phase* getSlopes() const { return 0; };                                 /*!< Does nothing for first order cells */
         virtual Transport* getSlopesTransport() const { return 0; };                    /*!< Does nothing for first order cells */
         virtual void saveCons() {};                                                     /*!< Does nothing for first order cells */
-        virtual void recuperationCons() {};                                             /*!< Does nothing for first order cells */
+        virtual void getBackCons() {};                                             /*!< Does nothing for first order cells */
         virtual void predictionOrdre2(const double& /*dt*/, Symmetry* /*symmetry*/) {}; /*!< Does nothing for first order cells */
 
-        void printInfo() const;
-
-        //methods for distance to an other object (Cell or CellInterface)
+        //Methods for distance to an other object (Cell or CellInterface)
         //---------------------------------------------------------------
         double distance(Cell* c);            /*!< Distance totale  */
         double distanceX(Cell* c);           /*!< Distance selon x */
@@ -187,7 +202,10 @@ class Cell
 
         //Printing
         //--------
-        bool printGnuplotAMR(std::ofstream& fileStream, const int& dim, GeometricObject* objet = 0);
+        void printInfo() const;
+        //! \brief  Compute saturation pressure for a liquid/vapor fluid mixture (first phase is considered predominant -> not generalized be careful)
+        double getPsat();
+        bool printGnuplotAMR(std::ofstream& fileStream, const int& dim, GeometricObject* objet = 0, bool recordPsat = false);
         void computeVolumePhaseK(double& integration, const int& numPhase);
         void computeMass(double& mass, double& alphaRef);
         void computeTotalMass(double& mass);
@@ -216,24 +234,28 @@ class Cell
         void addFluxXi(double value);                                    /*!< Add xi cell flux */
         int getNumberCellsChildren();                                    /*!< Return the number of children cells */
         Cell* getCellChild(const int& num);                              /*!< Return pointer to the corresponding child cell number */
-        std::vector<Cell*>* getChildVector();                           /*!< Return pointer to child vector */
+        std::vector<Cell*>* getChildVector();                            /*!< Return pointer to child vector */
 
         //For parallel computing (no AMR)
         //-------------------------------
         virtual void pushBackSlope() {};                                 /*!< Does nothing for non-ghost O2 cells */
+        virtual void popBackSlope() {};                                  /*!< Does nothing for non-ghost O2 cells */
         virtual int getRankOfNeighborCPU() const { return -1; };
-        virtual void setRankOfNeighborCPU(int /*rank*/) {};                  /*!< Does nothing for non-ghost cells */
+        virtual void setRankOfNeighborCPU(int /*rank*/) {};              /*!< Does nothing for non-ghost cells */
         void fillBufferPrimitives(double* buffer, int& counter, const int& lvl, const int& neighbour, Prim type = vecPhases) const;
         void getBufferPrimitives(double* buffer, int& counter, const int& lvl, Eos** eos, Prim type = vecPhases);
         void fillBufferVector(double* buffer, int& counter, const int& lvl, const int& neighbour, const int& dim, Variable nameVector, int num = 0, int index = -1) const;
         void getBufferVector(double* buffer, int& counter, const int& lvl, const int& dim, Variable nameVector, int num = 0, int index = -1);
         void fillBufferTransports(double* buffer, int& counter, const int& lvl, const int& neighbour) const;
         void getBufferTransports(double* buffer, int& counter, const int& lvl);
-        virtual void fillBufferSlopes(double* /*buffer*/, int& /*counter*/, const int& /*lvl*/, const int& /*neighbour*/) const {}; /*!< Does nothing for first order cells */
-        virtual void getBufferSlopes(double* /*buffer*/, int& /*counter*/, const int& /*lvl*/) {};                              /*!< Does nothing for first order cells */
+        virtual void fillBufferSlopes(double* /*buffer*/, int& /*counter*/, const int& /*lvl*/, const int& /*neighbour*/) const { Errors::errorMessage("fillBufferSlopes not available for Cell"); }; /*!< Does nothing for first order cells */
+        virtual void getBufferSlopes(double* /*buffer*/, int& /*counter*/, const int& /*lvl*/) { Errors::errorMessage("getBufferSlopes not available for Cell"); };                                  /*!< Does nothing for first order cells */
         virtual bool isCellGhost() const { return false; };
         bool hasNeighboringGhostCellOfCPUneighbour(const int& neighbour) const;                      /*!< Return a bool that is true if the cell has a neighboring ghost cell corresponding to CPU "neighbour" */
         int numberOfNeighboringGhostCellsOfCPUneighbour(const int& neighbour) const;                 /*!< Return the number of neighboring ghost cells corresponding to CPU "neighbour" this cell has */
+        virtual GradPhase* getGradPhase(const int& /*phaseNumber*/) const { Errors::errorMessage("getGradPhase not available for Cell"); return nullptr; };
+        virtual GradMixture* getGradMixture() const { Errors::errorMessage("getGradMixture not available for Cell"); return nullptr; };
+        virtual GradTransport* getGradTransport(const int& /*transportNumber*/) const { Errors::errorMessage("getGradTransport not available for Cell"); return nullptr; };
 
         //For parallel AMR computing
         //--------------------------
@@ -255,8 +277,9 @@ class Cell
         void updateNbCellsTotalAMR(int& nbCellsTotalAMR);
 
     protected:
-      Phase** m_vecPhases;
-      Mixture* m_mixture;
+      bool m_wall;                                                /*!< Bool indicating if the cell is a solid boundary (for immersed boundaries) */
+      Phase** m_vecPhases;                                        /*!< Array of phases */
+      Mixture* m_mixture;                                         /*!< Mixture */
       Transport* m_vecTransports;                                 /*!< Array of passive variables advected in the flow */
       Flux* m_cons;                                               /*!< Conservative variables */
       Transport* m_consTransports;                                /*!< Array of fluxes for advected variables */
@@ -277,5 +300,8 @@ class Cell
 
 extern Model* model;                                      /*!< Pointer to model */
 extern Gradient* gradient;                                /*!< Pointer to gradient method */
+extern std::vector<Coord> gradRho;                        /*!< Gradient of density */
+extern std::vector<Variable> variableDensity;             /*!< Variable name for density gradients */
+extern std::vector<int> numeratorDefault;                 /*!< Default numerator (used for density gradients) */
 
 #endif // CELL_H

@@ -100,3 +100,66 @@ double Mixture::computeTsat(const Eos* eosLiq, const Eos* eosVap, const double& 
 }
 
 //***************************************************************************
+
+double Mixture::computePsat(const Eos* eosLiq, const Eos* eosVap, const double& temp)
+{
+  if (eosLiq->getType() != TypeEOS::IG && eosLiq->getType() != TypeEOS::SG) { Errors::errorMessage("Only IG and SG permitted saturation pressure computation"); }
+  if (eosVap->getType() != TypeEOS::IG && eosVap->getType() != TypeEOS::SG) { Errors::errorMessage("Only IG and SG permitted saturation pressure computation"); }
+
+  double gammaL = eosLiq->getGamma();
+  double pInfL = eosLiq->getPInf();
+  double cvL = eosLiq->getCv();
+  double e0L = eosLiq->getERef();
+  double s0L = eosLiq->getSRef();
+
+  double gammaV = eosVap->getGamma();
+  double pInfV = eosVap->getPInf();
+  double cvV = eosVap->getCv();
+  double e0V = eosVap->getERef();
+  double s0V = eosVap->getSRef();
+
+  double A, B, C, D;
+  A = (gammaL*cvL - gammaV*cvV + s0V - s0L) / (gammaV*cvV - cvV);
+  B = (e0L - e0V) / (gammaV*cvV - cvV);
+  C = (gammaV*cvV - gammaL*cvL) / (gammaV*cvV - cvV);
+  D = (gammaL*cvL - cvL) / (gammaV*cvV - cvV);
+
+  //iterative process to catch saturation pressure
+  int iteration(0);
+  double psat(2.e5);
+  double f(0.), df(1.);
+  do {
+    psat -= f / df; iteration++;
+    if (iteration > 50) {
+      errors.push_back(Errors("Newton-Raphson has not converged in Mixture::computePsat", __FILE__, __LINE__));
+      break;
+    }
+    f = psat + pInfV - exp( A + B / temp + C * log(temp) ) * std::pow(psat + pInfL, D);
+    df = 1. - exp( A + B / temp + C * log(temp)) * D * std::pow(psat + pInfL, D - 1.);
+  } while (std::fabs(f) > 1.e-8);
+
+  return psat;
+}
+
+//***************************************************************************
+
+double Mixture::computeCriticalPressure(const Eos* eosLiq, const Eos* eosVap)
+{
+  double pCrit(0.);
+
+  double gammaL = eosLiq->getGamma();
+  double pInfL = eosLiq->getPInf();
+  double cvL = eosLiq->getCv();
+
+  double gammaV = eosVap->getGamma();
+  double pInfV = eosVap->getPInf();
+  double cvV = eosVap->getCv();
+
+  // vVsat = vLsat at critical point
+  pCrit = pInfL * (gammaV - 1.) * cvV - pInfV * (gammaL - 1.) * cvL;
+  pCrit /= (gammaL - 1.) * cvL - (gammaV - 1.) * cvV;
+
+  return pCrit;
+}
+
+//***************************************************************************

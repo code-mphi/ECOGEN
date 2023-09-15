@@ -74,15 +74,15 @@ void ElementTetrahedron::construitFaces(const Coord* nodes, FaceNS** faces, int&
 {
   //4 faces a traiter de type triangle
   int indexFaceExiste(-1);
-  int noeudAutre;
+  int nodeAutre;
   for (int i = 0; i < NUMBERFACES; i++)
   {
     switch (i)
     {
-      case 0: facesBuff[iMax][0] = m_numNoeuds[0]; facesBuff[iMax][1] = m_numNoeuds[1]; facesBuff[iMax][2] = m_numNoeuds[2]; noeudAutre = 3; break;
-      case 1: facesBuff[iMax][0] = m_numNoeuds[1]; facesBuff[iMax][1] = m_numNoeuds[2]; facesBuff[iMax][2] = m_numNoeuds[3]; noeudAutre = 0; break;      
-      case 2: facesBuff[iMax][0] = m_numNoeuds[2]; facesBuff[iMax][1] = m_numNoeuds[3]; facesBuff[iMax][2] = m_numNoeuds[0]; noeudAutre = 1; break;      
-      case 3: facesBuff[iMax][0] = m_numNoeuds[3]; facesBuff[iMax][1] = m_numNoeuds[0]; facesBuff[iMax][2] = m_numNoeuds[1]; noeudAutre = 2; break;      
+      case 0: facesBuff[iMax][0] = m_numNodes[0]; facesBuff[iMax][1] = m_numNodes[1]; facesBuff[iMax][2] = m_numNodes[2]; nodeAutre = 3; break;
+      case 1: facesBuff[iMax][0] = m_numNodes[1]; facesBuff[iMax][1] = m_numNodes[2]; facesBuff[iMax][2] = m_numNodes[3]; nodeAutre = 0; break;      
+      case 2: facesBuff[iMax][0] = m_numNodes[2]; facesBuff[iMax][1] = m_numNodes[3]; facesBuff[iMax][2] = m_numNodes[0]; nodeAutre = 1; break;      
+      case 3: facesBuff[iMax][0] = m_numNodes[3]; facesBuff[iMax][1] = m_numNodes[0]; facesBuff[iMax][2] = m_numNodes[1]; nodeAutre = 2; break;      
     }
     sumNodesBuff[iMax] = facesBuff[iMax][0] + facesBuff[iMax][1] + facesBuff[iMax][2];
     std::sort(facesBuff[iMax],facesBuff[iMax]+3);  //Tri des nodes
@@ -92,12 +92,12 @@ void ElementTetrahedron::construitFaces(const Coord* nodes, FaceNS** faces, int&
     if (indexFaceExiste==-1)
     {
       faces[iMax] = new FaceTriangle(facesBuff[iMax][0], facesBuff[iMax][1], facesBuff[iMax][2], 0); //pas besoin du tri ici
-      faces[iMax]->construitFace(nodes, m_numNoeuds[noeudAutre], this);
+      faces[iMax]->construitFace(nodes, m_numNodes[nodeAutre], this);
       iMax++;
     }
     else
     {
-      faces[indexFaceExiste]->ajouteElementVoisin(this);
+      faces[indexFaceExiste]->addElementNeighbor(this);
     }
   }
 }
@@ -112,10 +112,10 @@ void ElementTetrahedron::construitFacesSimplifie(int& iMax, int** facesBuff, int
   {
     switch (i)
     {
-      case 0: facesBuff[iMax][0] = m_numNoeuds[0]; facesBuff[iMax][1] = m_numNoeuds[1]; facesBuff[iMax][2] = m_numNoeuds[2]; break;
-      case 1: facesBuff[iMax][0] = m_numNoeuds[1]; facesBuff[iMax][1] = m_numNoeuds[2]; facesBuff[iMax][2] = m_numNoeuds[3]; break;      
-      case 2: facesBuff[iMax][0] = m_numNoeuds[2]; facesBuff[iMax][1] = m_numNoeuds[3]; facesBuff[iMax][2] = m_numNoeuds[0]; break;      
-      case 3: facesBuff[iMax][0] = m_numNoeuds[3]; facesBuff[iMax][1] = m_numNoeuds[0]; facesBuff[iMax][2] = m_numNoeuds[1]; break;      
+      case 0: facesBuff[iMax][0] = m_numNodes[0]; facesBuff[iMax][1] = m_numNodes[1]; facesBuff[iMax][2] = m_numNodes[2]; break;
+      case 1: facesBuff[iMax][0] = m_numNodes[1]; facesBuff[iMax][1] = m_numNodes[2]; facesBuff[iMax][2] = m_numNodes[3]; break;      
+      case 2: facesBuff[iMax][0] = m_numNodes[2]; facesBuff[iMax][1] = m_numNodes[3]; facesBuff[iMax][2] = m_numNodes[0]; break;      
+      case 3: facesBuff[iMax][0] = m_numNodes[3]; facesBuff[iMax][1] = m_numNodes[0]; facesBuff[iMax][2] = m_numNodes[1]; break;      
     }
     sumNodesBuff[iMax] = facesBuff[iMax][0] + facesBuff[iMax][1] + facesBuff[iMax][2];
     std::sort(facesBuff[iMax],facesBuff[iMax]+3);  //Tri des nodes
@@ -131,46 +131,46 @@ void ElementTetrahedron::construitFacesSimplifie(int& iMax, int** facesBuff, int
 
 //***********************************************************************
 
-void ElementTetrahedron::attributFaceCommunicante(FaceNS** faces, const int& indexMaxFaces, const int& numberNoeudsInternes)
+void ElementTetrahedron::attributFaceCommunicante(FaceNS** faces, const int& indexMaxFaces, const int& numberNodesInternal)
 {
   int indexFaceExiste(0);
   //Verification face 1 :
-  if (m_numNoeuds[0] < numberNoeudsInternes && m_numNoeuds[1] < numberNoeudsInternes && m_numNoeuds[2] < numberNoeudsInternes)
+  if (m_numNodes[0] < numberNodesInternal && m_numNodes[1] < numberNodesInternal && m_numNodes[2] < numberNodesInternal)
   {
-    FaceTriangle face(m_numNoeuds[0], m_numNoeuds[1], m_numNoeuds[2]);
+    FaceTriangle face(m_numNodes[0], m_numNodes[1], m_numNodes[2]);
     if (face.faceExists(faces, indexMaxFaces, indexFaceExiste))
     {
-      faces[indexFaceExiste]->ajouteElementVoisinLimite(this);
+      faces[indexFaceExiste]->addElementNeighborLimite(this);
       faces[indexFaceExiste]->setEstComm(true);
     }
   }
   //Verification face 2 :
-  if (m_numNoeuds[1] < numberNoeudsInternes && m_numNoeuds[2] < numberNoeudsInternes && m_numNoeuds[3] < numberNoeudsInternes)
+  if (m_numNodes[1] < numberNodesInternal && m_numNodes[2] < numberNodesInternal && m_numNodes[3] < numberNodesInternal)
   {
-    FaceTriangle face(m_numNoeuds[1], m_numNoeuds[2], m_numNoeuds[3]);
+    FaceTriangle face(m_numNodes[1], m_numNodes[2], m_numNodes[3]);
     if (face.faceExists(faces, indexMaxFaces, indexFaceExiste))
     {
-      faces[indexFaceExiste]->ajouteElementVoisinLimite(this);
+      faces[indexFaceExiste]->addElementNeighborLimite(this);
       faces[indexFaceExiste]->setEstComm(true);
     }
   }
   //Verification face 3 :
-  if (m_numNoeuds[2] < numberNoeudsInternes && m_numNoeuds[3] < numberNoeudsInternes && m_numNoeuds[0] < numberNoeudsInternes)
+  if (m_numNodes[2] < numberNodesInternal && m_numNodes[3] < numberNodesInternal && m_numNodes[0] < numberNodesInternal)
   {
-    FaceTriangle face(m_numNoeuds[2], m_numNoeuds[3], m_numNoeuds[0]);
+    FaceTriangle face(m_numNodes[2], m_numNodes[3], m_numNodes[0]);
     if (face.faceExists(faces, indexMaxFaces, indexFaceExiste))
     {
-      faces[indexFaceExiste]->ajouteElementVoisinLimite(this);
+      faces[indexFaceExiste]->addElementNeighborLimite(this);
       faces[indexFaceExiste]->setEstComm(true);
     }
   }
   //Verification face 4 :
-  if (m_numNoeuds[3] < numberNoeudsInternes && m_numNoeuds[0] < numberNoeudsInternes && m_numNoeuds[1] < numberNoeudsInternes)
+  if (m_numNodes[3] < numberNodesInternal && m_numNodes[0] < numberNodesInternal && m_numNodes[1] < numberNodesInternal)
   {
-    FaceTriangle face(m_numNoeuds[3], m_numNoeuds[0], m_numNoeuds[1]);
+    FaceTriangle face(m_numNodes[3], m_numNodes[0], m_numNodes[1]);
     if (face.faceExists(faces, indexMaxFaces, indexFaceExiste))
     {
-      faces[indexFaceExiste]->ajouteElementVoisinLimite(this);
+      faces[indexFaceExiste]->addElementNeighborLimite(this);
       faces[indexFaceExiste]->setEstComm(true);
     }
   }
@@ -187,10 +187,10 @@ int ElementTetrahedron::compteFaceCommunicante(std::vector<int*>& facesBuff, std
   {
     switch (i)
     {
-      case 0: face[0] = m_numNoeuds[0]; face[1] = m_numNoeuds[1]; face[2] = m_numNoeuds[2]; break;
-      case 1: face[0] = m_numNoeuds[1]; face[1] = m_numNoeuds[2]; face[2] = m_numNoeuds[3]; break;
-      case 2: face[0] = m_numNoeuds[2]; face[1] = m_numNoeuds[3]; face[2] = m_numNoeuds[0]; break;     
-      case 3: face[0] = m_numNoeuds[3]; face[1] = m_numNoeuds[0]; face[2] = m_numNoeuds[1]; break;     
+      case 0: face[0] = m_numNodes[0]; face[1] = m_numNodes[1]; face[2] = m_numNodes[2]; break;
+      case 1: face[0] = m_numNodes[1]; face[1] = m_numNodes[2]; face[2] = m_numNodes[3]; break;
+      case 2: face[0] = m_numNodes[2]; face[1] = m_numNodes[3]; face[2] = m_numNodes[0]; break;     
+      case 3: face[0] = m_numNodes[3]; face[1] = m_numNodes[0]; face[2] = m_numNodes[1]; break;     
     }
     int iMax = sumNodesBuff.size();
     sumNodes = face[0]+face[1]+face[2];
@@ -216,10 +216,10 @@ int ElementTetrahedron::compteFaceCommunicante(int& iMax, int** facesBuff, int* 
   {
     switch (i)
     {
-      case 0: face[0] = m_numNoeuds[0]; face[1] = m_numNoeuds[1]; face[2] = m_numNoeuds[2]; break;
-      case 1: face[0] = m_numNoeuds[1]; face[1] = m_numNoeuds[2]; face[2] = m_numNoeuds[3]; break;
-      case 2: face[0] = m_numNoeuds[2]; face[1] = m_numNoeuds[3]; face[2] = m_numNoeuds[0]; break;     
-      case 3: face[0] = m_numNoeuds[3]; face[1] = m_numNoeuds[0]; face[2] = m_numNoeuds[1]; break;     
+      case 0: face[0] = m_numNodes[0]; face[1] = m_numNodes[1]; face[2] = m_numNodes[2]; break;
+      case 1: face[0] = m_numNodes[1]; face[1] = m_numNodes[2]; face[2] = m_numNodes[3]; break;
+      case 2: face[0] = m_numNodes[2]; face[1] = m_numNodes[3]; face[2] = m_numNodes[0]; break;     
+      case 3: face[0] = m_numNodes[3]; face[1] = m_numNodes[0]; face[2] = m_numNodes[1]; break;     
     }
     sumNodes = face[0]+face[1]+face[2];
     std::sort(face, face+3);

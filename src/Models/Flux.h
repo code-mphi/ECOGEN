@@ -56,6 +56,12 @@ class Flux
     //! \brief     Subtract flux to the corresponding model buffer flux
     //! \param     coefA          possibility to multiply the flux before subtraction (set 1.d0 if not needed)
     virtual void subtractFlux(double /*coefA*/){ Errors::errorMessage("subtractFlux not available for required model"); };
+    //! \brief     Add flux to the rotating region in MRF context
+    //! \param     coefA          possibility to multiply the flux before adding (set 1.d0 if not needed)
+    virtual void addFluxRotatingRegion(double /*coefA*/){ Errors::errorMessage("addFluxRotatingRegion not available for required model"); };
+    //! \brief     Subtract flux to the rotating region in MRF context
+    //! \param     coefA          possibility to multiply the flux before subtraction (set 1.d0 if not needed)
+    virtual void subtractFluxRotatingRegion(double /*coefA*/){ Errors::errorMessage("subtractFluxRotatingRegion not available for required model"); };
     //! \brief     multiply the flux of the corresponding model by a constant
     //! \param     scalar       constant
     virtual void multiply(double /*scalar*/){ Errors::errorMessage("multiply not available for required model"); };
@@ -73,17 +79,21 @@ class Flux
     virtual void buildPrim(Phase** /*phases*/, Mixture* /*mixture*/) { Errors::errorMessage("buildPrim not available for required model"); };
     //! \brief     set each attribute of the flux to zero
     virtual void setToZero(){ Errors::errorMessage("setToZero not available for required model"); };
-    //! \brief     set each attribute of the corresponding buffer flux to zero
-    virtual void setToZeroBufferFlux() { Errors::errorMessage("setToZero not available for required model"); };
     
     //! \brief     Add non conservative term to the flux
     //! \param     coefA          possibility to multiply the non conservative term before adding (set 1.d0 if not needed)
     //! \param     cell           reference cell used to approximate the non conservative term
-    virtual void addNonCons(double /*coefA*/, const Cell* /*cell*/){ Errors::errorMessage("addNonCons not available for required model"); };
+    //! \param     normal         normal vector of the treated face
+    //! \param     tangent        tangent vector of the treated face
+    //! \param     binormal       binormal vector of the treated face
+    virtual void addNonCons(double /*coefA*/, const Cell* /*cell*/, const Coord& /*normal*/, const Coord& /*tangent*/, const Coord& /*binormal*/){ Errors::errorMessage("addNonCons not available for required model"); };
     //! \brief     Subtract non conservative term to the flux
     //! \param     coefA          possibility to multiply the non conservative term before subtraction (set 1.d0 if not needed)
     //! \param     cell           reference cell used to approximate the non conservative term
-    virtual void subtractNonCons(double /*coefA*/, const Cell* /*cell*/){ Errors::errorMessage("subtractNonCons not available for required model"); };
+    //! \param     normal         normal vector of the treated face
+    //! \param     tangent        tangent vector of the treated face
+    //! \param     binormal       binormal vector of the treated face
+    virtual void subtractNonCons(double /*coefA*/, const Cell* /*cell*/, const Coord& /*normal*/, const Coord& /*tangent*/, const Coord& /*binormal*/){ Errors::errorMessage("subtractNonCons not available for required model"); };
     //! \brief     Method to correct energy in non conservative models using total energy conservation
     //! \param     cell           cell to correct
     //! \param     type           enumeration allowing to correct either state in the cell or second order half time step state
@@ -107,6 +117,9 @@ class Flux
     virtual void addFluxSmooth1D(double /*coefA*/, const Coord& /*normal*/, Cell* /*cell*/) { Errors::errorMessage("addFluxSmooth1D not available for required model"); };
     //! \brief   Compute additionnal flux for 1D geometry with smooth varying cross section
     virtual void substractFluxSmooth1D(double /*coefA*/, const Coord& /*normal*/, Cell* /*cell*/) { Errors::errorMessage("substractFluxSmooth1D not available for required model"); };
+
+    //Moving Reference Frame
+    virtual void addNonConsMrfFlux(Phase** /*phases*/) { Errors::errorMessage("addNonConsMrfFlux not available for required model"); };
     
     // Accessors
     //----------
@@ -118,18 +131,21 @@ class Flux
     virtual const double& getEqEta() const { Errors::errorMessage("getEqEta not available for required model"); return Errors::defaultDouble; };
     virtual const double& getEnergy(const int& /*numPhase*/) const { Errors::errorMessage("getEnergy not available for required model"); return Errors::defaultDouble; };
     virtual const double& getTotEnergy(const int& /*numPhase*/) const { Errors::errorMessage("getTotEnergy not available for required model"); return Errors::defaultDouble; };
+    virtual const double& getLambda(const int& /*numPhase*/) const { Errors::errorMessage("getLambda not available for required model"); return Errors::defaultDouble; };
+    virtual const Tensor& getCobase(const int& /*numPhase*/) const { Errors::errorMessage("getCobase not available for required model"); return Tensor::defaultTensor; };
     virtual const Coord& getMomentum() const { Errors::errorMessage("getMomentum not available for required model"); return Coord::defaultCoord; };
     virtual const Coord& getEqVectorP() const { Errors::errorMessage("getEqVectorP not available for required model"); return Coord::defaultCoord; };
     
     virtual void setCons(const Flux* /*cons*/) { Errors::errorMessage("setCons not available for required model"); };
 
   protected:
-    double  m_sM;     //!< Fluid velocity for intercell interfaces
+    double  m_sM;      //!< Fluid velocity for intercell interfaces
     double  m_uStar;   //!< Velocity solution of the Riemann problem !VERY IMPORTANT! DO NOT ERASE!
   private:
 };
 
 extern std::vector<Flux*> sourceCons;
 extern Flux* fluxBuff;
+extern Flux* fluxBuffMRF;
 
 #endif // FLUX_H

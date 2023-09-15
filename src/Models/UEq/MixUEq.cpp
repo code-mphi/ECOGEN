@@ -162,7 +162,7 @@ void MixUEq::computeMixtureVariables(Phase** vecPhase)
 
 //***************************************************************************
 
-void MixUEq::internalEnergyToTotalEnergy(std::vector<QuantitiesAddPhys*>& vecGPA)
+void MixUEq::computeTotalEnergy(std::vector<QuantitiesAddPhys*>& vecGPA)
 {
   m_totalEnergy = m_energy + 0.5*m_velocity.squaredNorm();
   for (unsigned int pa = 0; pa < vecGPA.size(); pa++) {
@@ -358,6 +358,13 @@ void MixUEq::setToZero()
 
 //***************************************************************************
 
+void MixUEq::setToMax()
+{
+  m_velocity.setX(1.e15); m_velocity.setY(1.e15); m_velocity.setZ(1.e15);
+}
+
+//***************************************************************************
+
 void MixUEq::extrapolate(const Mixture &slope, const double& distance)
 {
   m_velocity.setX(m_velocity.getX() + slope.getVelocity().getX() * distance);
@@ -372,6 +379,33 @@ void MixUEq::limitSlopes(const Mixture &slopeGauche, const Mixture &slopeDroite,
   m_velocity.setX(globalLimiter.limiteSlope(slopeGauche.getVelocity().getX(), slopeDroite.getVelocity().getX()));
   m_velocity.setY(globalLimiter.limiteSlope(slopeGauche.getVelocity().getY(), slopeDroite.getVelocity().getY()));
   m_velocity.setZ(globalLimiter.limiteSlope(slopeGauche.getVelocity().getZ(), slopeDroite.getVelocity().getZ()));
+}
+
+//****************************************************************************
+
+void MixUEq::setMin(const Mixture& mixture1, const Mixture& mixture2)
+{
+  m_velocity.setX(std::min(mixture1.getVelocity().getX(), mixture2.getVelocity().getX()));
+  m_velocity.setY(std::min(mixture1.getVelocity().getY(), mixture2.getVelocity().getY()));
+  m_velocity.setZ(std::min(mixture1.getVelocity().getZ(), mixture2.getVelocity().getZ()));
+}
+
+//****************************************************************************
+
+void MixUEq::setMax(const Mixture& mixture1, const Mixture& mixture2)
+{  
+  m_velocity.setX(std::max(mixture1.getVelocity().getX(), mixture2.getVelocity().getX()));
+  m_velocity.setY(std::max(mixture1.getVelocity().getY(), mixture2.getVelocity().getY()));
+  m_velocity.setZ(std::max(mixture1.getVelocity().getZ(), mixture2.getVelocity().getZ()));
+}
+
+//****************************************************************************
+
+void MixUEq::computeGradientLimiter(const Limiter& globalLimiter, const Mixture &mixture, const Mixture &mixtureMin, const Mixture &mixtureMax, const Mixture& slope)
+{
+  m_velocity.setX(std::min(m_velocity.getX(), globalLimiter.computeGradientLimiter(mixture.getVelocity().getX(), mixtureMin.getVelocity().getX(), mixtureMax.getVelocity().getX(), slope.getVelocity().getX())));
+  m_velocity.setY(std::min(m_velocity.getY(), globalLimiter.computeGradientLimiter(mixture.getVelocity().getY(), mixtureMin.getVelocity().getY(), mixtureMax.getVelocity().getY(), slope.getVelocity().getY())));
+  m_velocity.setZ(std::min(m_velocity.getZ(), globalLimiter.computeGradientLimiter(mixture.getVelocity().getZ(), mixtureMin.getVelocity().getZ(), mixtureMax.getVelocity().getZ(), slope.getVelocity().getZ())));
 }
 
 //****************************************************************************

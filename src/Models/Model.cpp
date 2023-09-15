@@ -33,7 +33,7 @@
 //***********************************************************************
 
 Model::Model(const std::string& name, const int& numbTransports) :
- m_name(name), m_lowMach(false), m_smoothCrossSection1d(false)
+ m_name(name), m_lowMach(false), m_machRefMin(1.e-2), m_smoothCrossSection1d(false)
 {
   fluxBufferTransport = 0;
   if (numbTransports > 0) { fluxBufferTransport = new Transport[numbTransports]; }
@@ -54,6 +54,15 @@ Model::~Model()
 void Model::allocateEos(Cell& cell) const
 {
   for (int k = 0; k < numberPhases; k++) { TB->eos[k] = cell.getPhase(k)->getEos(); }
+}
+
+//***********************************************************************
+
+void Model::initializeRelaxation(Cell* cell) const
+{
+  for (unsigned int r = 0; r < m_relaxations.size(); r++) {
+		m_relaxations[r]->initializeCriticalPressure(cell);
+	}
 }
 
 //***********************************************************************

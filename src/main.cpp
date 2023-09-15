@@ -109,9 +109,9 @@ int main(int argc, char* argv[])
         delete run;
       }
     
-      //Gestion of the exceptions
-      //-------------------------
-      catch (ErrorXML &e) {
+      //Input exceptions (XML + mesh file)
+      //----------------------------------
+      catch (ErrorInput &e) {
         errorCode = e.getErrorCode();
         if (rankCpu == 0) std::cout << e.infoError() << std::endl;
         if (run) {
@@ -119,6 +119,8 @@ int main(int argc, char* argv[])
           delete run;
         }
       }
+      //General or runtime exceptions
+      //-----------------------------
       catch (ErrorECOGEN &e) {
         errorCode = e.getErrorCode();
        // if(rankCpu==0) std::cerr << "T" << numTestCase << " | " << e.infoError() << std::endl;

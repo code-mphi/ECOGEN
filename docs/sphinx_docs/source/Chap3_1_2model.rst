@@ -3,10 +3,10 @@
 
 .. _Sec:input:model:
 
-ModelV4.xml
+Model.xml
 ===========
 
-Fluid mechanics models used in the computation are specified in the *modelv4.xml* file. It is **mandatory** located in the folder of the current case. A typical form of this file is:
+Fluid mechanics models used in the computation are specified in the *model.xml* file. It is **mandatory** located in the folder of the current case. A typical form of this file is:
 
 .. code-block:: xml
 
@@ -61,7 +61,7 @@ Equations of state (EOS)
 
 	<EOS name="IG_air.xml"/>
 
-The *modelV4.xml* input file **must contain** as many :xml:`<EOS>` markups as number of phases specified in the :ref:`Sec:input:FlowModel` markup. Each phase is described thanks to relations and parameters. The values of these parameters are specified in a separate file: The attribute name contains the name of this file that must be placed in the folder **ECOGEN/libEOS/**. Some fluid files are already present in the ECOGEN package.
+The *model.xml* input file **must contain** as many :xml:`<EOS>` markups as number of phases specified in the :ref:`Sec:input:FlowModel` markup. Each phase is described thanks to relations and parameters (see Section :ref:`Sec:IO:materials` for more details). The values of these parameters are specified in a separate file: the name attribute contains the name of this file which must be placed in the **ECOGEN/libEOS/** folder. Some fluid files are already present in the ECOGEN package.
 
 .. _Sec:input:Transport:
 
@@ -72,7 +72,7 @@ Advected additional variables
 
 	<transport name="color"/>
 
-The *modelV4.xml* input fle **must contain** as many :xml:`<transport>` markups as number of transports specified in the :ref:`Sec:input:FlowModel` markup. Each transported variable is described by its name. The default number of advected variable is 0.
+The *model.xml* input fle **must contain** as many :xml:`<transport>` markups as number of transports specified in the :ref:`Sec:input:FlowModel` markup. Each transported variable is described by its name. The default number of advected variable is 0.
 
 Relaxation procedures
 ---------------------
@@ -161,8 +161,10 @@ Both cylindrical (2D) and spherical (1D) symmetries are implemented. The additio
 	  <dataSymSpher radialAxis="X"/>
 	</symmetryTerm>
 
-Additional physics (dev)
-------------------------
+.. _Sec:input:additionalPhysic:
+
+Additional physics
+------------------
 
 Depending on the model chosen in section :ref:`Sec:input:FlowModel`, additional physical effects can be added. This is the case for surface tension, viscosity and conductive heat transfers. These additional physical effects are obtained thanks to the additional markup :xml:`additionalPhysics` with the attribute :xml:`type` that can take different value according to the chosen effect.
 
@@ -191,3 +193,35 @@ Others
 ~~~~~~
 
 In dev...
+
+Low-Mach preconditioning
+------------------------
+
+In case of low-speed flows, a low-Mach preconditioning can be applied to the selected flow model.
+The method is detailed in :cite:`lemartelot2013lowmach`.
+Currently this option is compatible with the flow models: Euler, UEq and PUEq.
+
+.. code-block:: xml
+
+  <lowMach state="true"/>
+
+Note that the minimum reference Mach number can be chosen if required (default is 0.01).
+When the local Mach number of the flow is lower than this threshold, it is replaced by the threshold value in order to keep a reasonable computation time.
+
+.. code-block:: xml
+  
+  <lowMach state="true" machRefMin="5.e-2"/>
+
+For an example of use, see the test case presented in the Section :ref:`Sec:tests:euler:2d:nozzleLowMach`.
+
+1D geometry with smooth cross section variation
+-----------------------------------------------
+In case of a 2D geometry with smooth cross section variation, it is possible to use a 1D geometry and reproduce 2D effects with this attribute as detailed in the first appendix of :cite:`lemartelot2013lowmach`.
+This option is only compatible with unstructured meshes defined with flow direction along the X-axis.
+Boundary condition contributions in other directions than the X-axis should use *nullFlux* boundary condition (see :ref:`Sec:input:InitialConditions`).
+Note that this option is available for the flow models: Euler, UEq, PUEq and EulerHomogeneous.
+For an example of use, see the test case presented in the Section :ref:`Sec:tests:euler:2d:nozzleLowMach`.
+
+.. code-block:: xml
+
+  <geometry smoothCrossSection1d="true"/>

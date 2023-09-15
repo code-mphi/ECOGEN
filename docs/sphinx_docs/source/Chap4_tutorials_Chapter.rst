@@ -16,3 +16,5 @@ Here are presented a collection of tutorials to help you use ECOGEN efficiently.
    Chap4_5paraviewServer
    Chap4_6extractMassflowWithParaview
    Chap4_7runningATestInAnotherFolder
+   Chap4_8restartMeshMapping
+   Chap4_9exportGmshFile

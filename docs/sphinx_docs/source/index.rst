@@ -31,6 +31,7 @@ Interested developers are encouraged to contribute in the project using the "pul
    Chap5_testCases_Chapter
    Chap6_developersGuide_Chapter
    Chap7_license
+   Chap8_GUI
    zBibliography
 
 

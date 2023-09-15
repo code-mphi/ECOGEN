@@ -1,0 +1,38 @@
+<?xml version = "1.0" encoding = "UTF-8" standalone = "yes"?>
+<CI>
+    <!-- LIST OF GEOMETRICAL DOMAINS  -->
+    <physicalDomains>	
+      <domain name="base" state="leftChamber" type="entireDomain"/>
+      <domain name="LP" state="rightChamber" type="halfSpace">
+        <dataHalfSpace axis="x" origin="0.5" direction="positive"/>
+      </domain>
+	  </physicalDomains>	
+
+    <!-- LIST OF BOUNDARY CONDITIONS -->
+    <boundaryConditions>
+      <boundCond name="CLXm" type="wall" number="1" />
+      <boundCond name="CLXp" type="wall" number="2" />
+      <boundCond name="CLYm" type="nonReflecting" number="3" />
+      <boundCond name="CLYp" type="nonReflecting" number="4" />
+	</boundaryConditions>
+    
+    <!--  LIST OF STATES  -->
+    <state name="leftChamber">
+        <material type="fluid" EOS="IG_air.xml">
+            <dataFluid density="10.0" pressure="1.e6">
+                <velocity x="0." y="0." z="0."/>
+            </dataFluid>
+        </material>
+        <transport name="transport" value="1."/>
+    </state>
+
+    <state name="rightChamber">
+        <material type="fluid" EOS="IG_air.xml">
+            <dataFluid density="1.0" pressure="1.e5">
+                <velocity x="0." y="0." z="0."/>
+            </dataFluid>
+        </material>
+        <transport name="transport" value="0."/>
+    </state>
+
+</CI>

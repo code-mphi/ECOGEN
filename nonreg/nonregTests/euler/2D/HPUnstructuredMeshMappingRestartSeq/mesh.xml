@@ -1,0 +1,13 @@
+<?xml version = "1.0" encoding = "UTF-8" standalone = "yes"?>
+<mesh>
+	<type structure="unStructured"/>
+	<unstructuredMesh>
+		<file name="libMeshes/square/squareRefinedPart.msh"/>
+    <parallel GMSHPretraitement="true"/>
+    <meshMappingRestart 
+      resultFolder="euler2DHPUnstructured" 
+      restartFileNumber="1" 
+      meshFile="libMeshes/square/squarePart.msh"
+    />
+	</unstructuredMesh>
+</mesh>

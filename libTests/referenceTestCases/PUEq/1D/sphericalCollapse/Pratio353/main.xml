@@ -1,0 +1,16 @@
+<?xml version = "1.0" encoding = "UTF-8" standalone = "yes"?>
+<computationParam>
+	<!-- <run>pressureVelocityEq1DsphericalCollapse_Pratio353_100cellsPerD</run> -->
+	<run>pressureVelocityEq1DsphericalCollapse_Pratio353_50cellsPerD</run>
+	<outputMode format="XML" binary="false"/>
+	<timeControlMode iterations="false">
+		<iterations number="300" iterFreq="30"/>
+		<physicalTime totalTime="1.e-6" timeFreq="1.e-9"/>
+	</timeControlMode>
+	<computationControl CFL="0.4"/>
+	<secondOrder>
+		<globalLimiter>mc</globalLimiter>
+		<globalVolumeFractionLimiter>thinc</globalVolumeFractionLimiter>
+    	<interfaceVolumeFractionLimiter>thinc</interfaceVolumeFractionLimiter>
+	</secondOrder>
+</computationParam>

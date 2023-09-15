@@ -57,6 +57,16 @@ class ModPUEq : public ModUEq
     //! \details    Complete pressures when restarting a simulation
     virtual void fulfillStateRestart(Phase** phases, Mixture* mixture);
 
+    //Accessors
+    //---------
+    //! \brief  Select a specific scalar variable
+    //! \param  phases         phases array variables
+    //! \param  mixture        mixture variables
+    //! \param  vecTransports  vector of transport variables
+    //! \param  nameVariables  Name of the variable to select
+    //! \param  numPhases      Phases number's
+    virtual double selectScalar(Phase** phases, Mixture* mixture, Transport* transports, Variable nameVariable, int num = 0) const;
+
   private:
     static const std::string NAME;
 

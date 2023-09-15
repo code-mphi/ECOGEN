@@ -308,7 +308,7 @@ void MixPTUEq::computeMixtureVariables(Phase** vecPhase)
 
 //***************************************************************************
 
-void MixPTUEq::internalEnergyToTotalEnergy(std::vector<QuantitiesAddPhys*>& vecGPA)
+void MixPTUEq::computeTotalEnergy(std::vector<QuantitiesAddPhys*>& vecGPA)
 {
   m_totalEnergy = m_energy + 0.5*m_velocity.squaredNorm();
   for (unsigned int pa = 0; pa < vecGPA.size(); pa++) {
@@ -458,6 +458,18 @@ void MixPTUEq::fillBuffer(double* buffer, int& counter) const
 
 //***************************************************************************
 
+void MixPTUEq::fillBuffer(std::vector<double>& dataToSend) const
+{
+  dataToSend.push_back(m_pressure);
+  dataToSend.push_back(m_temperature);
+  dataToSend.push_back(m_velocity.getX());
+  dataToSend.push_back(m_velocity.getY());
+  dataToSend.push_back(m_velocity.getZ());
+  dataToSend.push_back(m_totalEnergy);
+}
+
+//***************************************************************************
+
 void MixPTUEq::getBuffer(double* buffer, int& counter)
 {
   m_pressure = buffer[++counter];
@@ -466,6 +478,18 @@ void MixPTUEq::getBuffer(double* buffer, int& counter)
   m_velocity.setY(buffer[++counter]);
   m_velocity.setZ(buffer[++counter]);
   m_totalEnergy = buffer[++counter];
+}
+
+//***************************************************************************
+
+void MixPTUEq::getBuffer(std::vector<double>& dataToReceive, int& counter)
+{
+  m_pressure = dataToReceive[counter++];
+  m_temperature = dataToReceive[counter++];
+  m_velocity.setX(dataToReceive[counter++]);
+  m_velocity.setY(dataToReceive[counter++]);
+  m_velocity.setZ(dataToReceive[counter++]);
+  m_totalEnergy = dataToReceive[counter++];
 }
 
 //****************************************************************************
@@ -491,6 +515,14 @@ void MixPTUEq::setToZero()
 
 //***************************************************************************
 
+void MixPTUEq::setToMax()
+{
+  m_pressure = 1.e15; m_temperature = 1.e15;
+  m_velocity.setX(1.e15); m_velocity.setY(1.e15); m_velocity.setZ(1.e15);
+}
+
+//***************************************************************************
+
 void MixPTUEq::extrapolate(const Mixture &slope, const double& distance)
 {
   m_pressure += slope.getPressure()*distance;
@@ -509,6 +541,39 @@ void MixPTUEq::limitSlopes(const Mixture &slopeGauche, const Mixture &slopeDroit
   m_velocity.setX(globalLimiter.limiteSlope(slopeGauche.getVelocity().getX(), slopeDroite.getVelocity().getX()));
   m_velocity.setY(globalLimiter.limiteSlope(slopeGauche.getVelocity().getY(), slopeDroite.getVelocity().getY()));
   m_velocity.setZ(globalLimiter.limiteSlope(slopeGauche.getVelocity().getZ(), slopeDroite.getVelocity().getZ()));
+}
+
+//****************************************************************************
+
+void MixPTUEq::setMin(const Mixture& mixture1, const Mixture& mixture2)
+{
+  m_pressure = std::min(mixture1.getPressure(), mixture2.getPressure());
+  m_temperature = std::min(mixture1.getTemperature(), mixture2.getTemperature());
+  m_velocity.setX(std::min(mixture1.getVelocity().getX(), mixture2.getVelocity().getX()));
+  m_velocity.setY(std::min(mixture1.getVelocity().getY(), mixture2.getVelocity().getY()));
+  m_velocity.setZ(std::min(mixture1.getVelocity().getZ(), mixture2.getVelocity().getZ()));
+}
+
+//****************************************************************************
+
+void MixPTUEq::setMax(const Mixture& mixture1, const Mixture& mixture2)
+{
+  m_pressure = std::max(mixture1.getPressure(), mixture2.getPressure());
+  m_temperature = std::max(mixture1.getTemperature(), mixture2.getTemperature());
+  m_velocity.setX(std::max(mixture1.getVelocity().getX(), mixture2.getVelocity().getX()));
+  m_velocity.setY(std::max(mixture1.getVelocity().getY(), mixture2.getVelocity().getY()));
+  m_velocity.setZ(std::max(mixture1.getVelocity().getZ(), mixture2.getVelocity().getZ()));
+}
+
+//****************************************************************************
+
+void MixPTUEq::computeGradientLimiter(const Limiter& globalLimiter, const Mixture &mixture, const Mixture &mixtureMin, const Mixture &mixtureMax, const Mixture& slope)
+{
+  m_pressure = std::min(m_pressure, globalLimiter.computeGradientLimiter(mixture.getPressure(), mixtureMin.getPressure(), mixtureMax.getPressure(), slope.getPressure()));
+  m_temperature = std::min(m_temperature, globalLimiter.computeGradientLimiter(mixture.getTemperature(), mixtureMin.getTemperature(), mixtureMax.getTemperature(), slope.getTemperature()));
+  m_velocity.setX(std::min(m_velocity.getX(), globalLimiter.computeGradientLimiter(mixture.getVelocity().getX(), mixtureMin.getVelocity().getX(), mixtureMax.getVelocity().getX(), slope.getVelocity().getX())));
+  m_velocity.setY(std::min(m_velocity.getY(), globalLimiter.computeGradientLimiter(mixture.getVelocity().getY(), mixtureMin.getVelocity().getY(), mixtureMax.getVelocity().getY(), slope.getVelocity().getY())));
+  m_velocity.setZ(std::min(m_velocity.getZ(), globalLimiter.computeGradientLimiter(mixture.getVelocity().getZ(), mixtureMin.getVelocity().getZ(), mixtureMax.getVelocity().getZ(), slope.getVelocity().getZ())));
 }
 
 //****************************************************************************
@@ -573,6 +638,13 @@ void MixPTUEq::setW(const double& w) { m_velocity.setZ(w); }
 void MixPTUEq::setTotalEnergy(double& totalEnergy)
 {
   m_totalEnergy = totalEnergy;
+}
+
+//***************************************************************************
+
+void MixPTUEq::setTemperature(const double& T)
+{
+  m_temperature = T;
 }
 
 //****************************************************************************

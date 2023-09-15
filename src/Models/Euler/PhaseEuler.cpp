@@ -29,13 +29,12 @@
 //  If not, see <http://www.gnu.org/licenses/>.
 
 #include "PhaseEuler.h"
-#include "../../Eos/Eos.h"
 
 using namespace tinyxml2;
 
 //***************************************************************************
 
-PhaseEuler::PhaseEuler() :m_density(0.), m_pressure(0.), m_eos(0), m_energy(0.), m_totalEnergy(0.), m_soundSpeed(0.)
+PhaseEuler::PhaseEuler() : m_density(0.), m_pressure(0.), m_eos(0), m_energy(0.), m_totalEnergy(0.), m_soundSpeed(0.)
 {
   m_velocity.setXYZ(0., 0., 0.);
 }
@@ -300,6 +299,14 @@ void PhaseEuler::setToZero()
 
 //***************************************************************************
 
+void PhaseEuler::setToMax()
+{
+  m_density = 1.e15; m_pressure = 1.e15;
+  m_velocity.setX(1.e15); m_velocity.setY(1.e15); m_velocity.setZ(1.e15);
+}
+
+//***************************************************************************
+
 void PhaseEuler::extrapolate(const Phase &slope, const double& distance)
 {
   m_density += slope.getDensity() * distance;
@@ -318,6 +325,42 @@ void PhaseEuler::limitSlopes(const Phase& slopeGauche, const Phase& slopeDroite,
   m_velocity.setX(globalLimiter.limiteSlope(slopeGauche.getVelocity().getX(), slopeDroite.getVelocity().getX()));
   m_velocity.setY(globalLimiter.limiteSlope(slopeGauche.getVelocity().getY(), slopeDroite.getVelocity().getY()));
   m_velocity.setZ(globalLimiter.limiteSlope(slopeGauche.getVelocity().getZ(), slopeDroite.getVelocity().getZ()));
+}
+
+//****************************************************************************
+
+void PhaseEuler::setMin(const Phase& phase1, const Phase& phase2)
+{
+  m_density = std::min(phase1.getDensity(), phase2.getDensity());
+  m_pressure = std::min(phase1.getPressure(), phase2.getPressure());
+  
+  m_velocity.setX(std::min(phase1.getVelocity().getX(), phase2.getVelocity().getX()));
+  m_velocity.setY(std::min(phase1.getVelocity().getY(), phase2.getVelocity().getY()));
+  m_velocity.setZ(std::min(phase1.getVelocity().getZ(), phase2.getVelocity().getZ()));
+}
+
+//****************************************************************************
+
+void PhaseEuler::setMax(const Phase& phase1, const Phase& phase2)
+{
+  m_density = std::max(phase1.getDensity(), phase2.getDensity());
+  m_pressure = std::max(phase1.getPressure(), phase2.getPressure());
+  
+  m_velocity.setX(std::max(phase1.getVelocity().getX(), phase2.getVelocity().getX()));
+  m_velocity.setY(std::max(phase1.getVelocity().getY(), phase2.getVelocity().getY()));
+  m_velocity.setZ(std::max(phase1.getVelocity().getZ(), phase2.getVelocity().getZ()));
+}
+
+//****************************************************************************
+
+void PhaseEuler::computeGradientLimiter(const Limiter& globalLimiter, const Phase& phase, const Phase& phaseMin, const Phase& phaseMax, const Phase& slope)
+{
+  m_density = std::min(m_density, globalLimiter.computeGradientLimiter(phase.getDensity(), phaseMin.getDensity(), phaseMax.getDensity(), slope.getDensity()));
+  m_pressure = std::min(m_pressure, globalLimiter.computeGradientLimiter(phase.getPressure(), phaseMin.getPressure(), phaseMax.getPressure(), slope.getPressure()));
+
+  m_velocity.setX(std::min(m_velocity.getX(), globalLimiter.computeGradientLimiter(phase.getVelocity().getX(), phaseMin.getVelocity().getX(), phaseMax.getVelocity().getX(), slope.getVelocity().getX())));
+  m_velocity.setY(std::min(m_velocity.getY(), globalLimiter.computeGradientLimiter(phase.getVelocity().getY(), phaseMin.getVelocity().getY(), phaseMax.getVelocity().getY(), slope.getVelocity().getY())));
+  m_velocity.setZ(std::min(m_velocity.getZ(), globalLimiter.computeGradientLimiter(phase.getVelocity().getZ(), phaseMin.getVelocity().getZ(), phaseMax.getVelocity().getZ(), slope.getVelocity().getZ())));
 }
 
 //****************************************************************************

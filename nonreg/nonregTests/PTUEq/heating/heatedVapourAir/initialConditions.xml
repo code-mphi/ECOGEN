@@ -1,0 +1,35 @@
+<?xml version = "1.0" encoding = "UTF-8" standalone = "yes"?>
+<CI>
+    <!-- LIST OF GEOMETRICAL DOMAINS  -->
+    <physicalDomains> 
+        <domain name="base" state="pipe" type="entireDomain"/>
+    </physicalDomains>
+
+    <!-- LIST OF BOUNDARY CONDITIONS -->
+    <boundaryConditions>
+		<boundCond name="inlet" type="inletTank" number="3">
+			<dataInletTank p0="3e5" T0="384."/>
+			<fluidsProp>
+				<dataFluid EOS="IG_waterVap.xml" alpha="0.2"/>
+				<dataFluid EOS="IG_air.xml" alpha="0.8"/>
+			</fluidsProp>
+		</boundCond>
+		<boundCond name="outlet" type="outletPressure" number="4">
+			<dataOutletPressure p0="1.e5"/>
+		</boundCond>	
+	</boundaryConditions>
+    
+    <!--  LIST OF STATES  -->
+    <state name="pipe">
+        <material type="fluid" EOS="IG_waterVap.xml">
+            <dataFluid alpha="0.8" density="1.0"/>
+        </material>
+        <material type="fluid" EOS="IG_air.xml">
+            <dataFluid alpha="0.2" density="1.0"/>
+        </material>
+        <mixture>
+            <dataMix pressure = "1.e5" temperature = "300"/>
+            <velocity x="0." y="0." z="0."/>
+        </mixture>
+    </state>
+</CI>

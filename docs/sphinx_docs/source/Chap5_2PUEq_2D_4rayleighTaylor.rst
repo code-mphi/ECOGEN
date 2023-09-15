@@ -103,7 +103,7 @@ One remarks that initially the interface between the two fluids is slightly curv
 
   RT instabilities ; mixture density (left) and density gradient (right) over time. Visualization using Paraview_ software. 
 
-When the density variations are low or non-existent, the mesh is as coarse as possible (within the conditions given in meshV5.xml) as shown in :numref:`Fig:testCases:PUEq:rayleighTaylorAnim2`. On the contrary, when the variations become significant, the mesh is refined. 
+When the density variations are low or non-existent, the mesh is as coarse as possible (within the conditions given in mesh.xml) as shown in :numref:`Fig:testCases:PUEq:rayleighTaylorAnim2`. On the contrary, when the variations become significant, the mesh is refined. 
 
 .. _Fig:testCases:PUEq:rayleighTaylorAnim2:
 

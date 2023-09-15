@@ -34,14 +34,25 @@ using namespace tinyxml2;
 
 //***********************************************************************
 
-RelaxationPTMu::RelaxationPTMu(XMLElement* element, std::string fileName)
+RelaxationPTMu::RelaxationPTMu(XMLElement* element, std::vector<std::string> const& nameEOS, std::string fileName)
 {
-	XMLElement* sousElement(element->FirstChildElement("dataPTMu"));
-	if (sousElement == NULL) throw ErrorXMLElement("dataPTMu", fileName, __FILE__, __LINE__);
-	//Collecting attributes
-	//---------------------
-	m_liq = 0;
-	m_vap = 1;
+  XMLElement* subElement(element->FirstChildElement("dataPTMu"));
+  if (subElement == NULL) throw ErrorXMLElement("dataPTMu", fileName, __FILE__, __LINE__);
+  
+  //Collecting attributes
+  //---------------------
+  std::string liqEosName(subElement->Attribute("liquid"));
+  if (liqEosName == "") throw ErrorXMLAttribut("liquid", fileName, __FILE__, __LINE__);
+  std::string vapEosName(subElement->Attribute("vapor"));
+  if (vapEosName == "") throw ErrorXMLAttribut("vapor", fileName, __FILE__, __LINE__);
+
+  if (nameEOS.size() > 2) throw ErrorXMLMessage("Only two phases can be used with PTMu relaxation", fileName, __FILE__, __LINE__);
+
+  for (unsigned int k = 0; k < nameEOS.size(); k++) {
+    if (nameEOS[k] == liqEosName) { m_liq = k; }
+    else if (nameEOS[k] == vapEosName) { m_vap = k; }
+    else { throw ErrorXMLElement("dataPTMu", fileName, __FILE__, __LINE__); }
+  }
 }
 
 //***********************************************************************
@@ -50,98 +61,140 @@ RelaxationPTMu::~RelaxationPTMu(){}
 
 //***********************************************************************
 
+void RelaxationPTMu::initializeCriticalPressure(Cell *cell)
+{
+  m_pcrit = cell->getMixture()->computeCriticalPressure(
+    cell->getPhase(m_liq)->getEos(), cell->getPhase(m_vap)->getEos()
+  );
+}
+
+//***********************************************************************
+
 void RelaxationPTMu::relaxation(Cell* cell, const double& /*dt*/, Prim type)
 {
- 	Phase* phase(0);
+  Phase* phase(0);
 
-	if (numberPhases > 2) errors.push_back(Errors("More than 2-phase calculation with evaporation not implemented in RelaxationPTMu::relaxation", __FILE__, __LINE__));
+  if (numberPhases > 2) {
+    errors.push_back(Errors("More than 2-phase calculation with evaporation not implemented in RelaxationPTMu::relaxation", __FILE__, __LINE__));
+  }
 
-	//Initial state
-	double pStar(0.), Tsat;
-	for (int k = 0; k < numberPhases; k++)
-	{
-		phase = cell->getPhase(k, type);
-		TB->ak[k] = phase->getAlpha();
-		TB->pk[k] = phase->getPressure();
-		TB->rhok[k] = phase->getDensity();
-		pStar += TB->ak[k] * TB->pk[k];
-		//phase->verifyPhase();
-	}
-	//cell->extendedCalculus();
-	double rho = cell->getMixture()->getDensity();
-	double rhoe = rho * cell->getMixture()->getEnergy();
+  //Initial state
+  double pStar(0.), Tsat;
+  for (int k = 0; k < numberPhases; k++)
+  {
+    phase = cell->getPhase(k, type);
+    TB->ak[k] = phase->getAlpha();
+    TB->Yk[k] = phase->getMassFraction();
+    TB->pk[k] = phase->getPressure();
+    TB->rhok[k] = phase->getDensity();
+    pStar += TB->ak[k] * TB->pk[k];
+    //phase->verifyPhase();
+  }
+  if (pStar > m_pcrit) {
+    warnings.push_back(Errors("Pressure higher than critical pressure in relaxPTMu", __FILE__, __LINE__));
+    return;
+  }
+  //cell->extendedCalculus(numberPhases);
+  double rho = cell->getMixture(type)->getDensity();
+  double rhoe = rho * cell->getMixture(type)->getEnergy();
+  double dTsat(0.);
 
-	//Saturation temperature determination
-	double dTsat(0.);
-	Tsat = cell->getMixture()->computeTsat(cell->getPhase(m_liq)->getEos(), cell->getPhase(m_vap)->getEos(), pStar, &dTsat);
+  // Pure vapor hypothesis
+  double rhov, ev, pv, Tv;
+  rhov = cell->getMixture(type)->getDensity();
+  ev = cell->getMixture(type)->getEnergy();
+  pv = cell->getPhase(m_vap, type)->getEos()->computePressure(rhov, ev);
+  Tv = cell->getPhase(m_vap, type)->getEos()->computeTemperature(rhov, pv);
 
-	//evap or not?
-	double TL = TB->eos[m_liq]->computeTemperature(TB->rhok[m_liq], pStar);
-	double TV = TB->eos[m_vap]->computeTemperature(TB->rhok[m_vap], pStar);
-	//if (TB->ak[m_liq] < 1.e-6) return;
-	//if (TB->ak[m_vap] < 1.e-6) return;
-	//if (TL < Tsat) return;
+  if (pv > 0) {
+    Tsat = cell->getMixture(type)->computeTsat(cell->getPhase(m_liq, type)->getEos(), cell->getPhase(m_vap, type)->getEos(), pv, &dTsat);
+    if (Tv >= Tsat) {
+      // Hypothesis verified
+      cell->getPhase(m_vap, type)->setAlpha(1.);
+      cell->getPhase(m_liq, type)->setAlpha(0.);
+      cell->getPhase(m_vap, type)->setDensity(rhov);
 
-	//Iterative process for relaxed pressure determination
-	double rhoLSat, rhoVSat, drhoLSat, drhoVSat;
-	double aLSat, aVSat, daLSat, daVSat;
-	double rhoeLSat, rhoeVSat, drhoeLSat, drhoeVSat;
-	int iteration(0);
-	double f(0.), df(1.);
-	do {
-		pStar -= f / df; iteration++;
-		if (iteration > 50) {
-			errors.push_back(Errors("Number of iterations too large in relaxPTMu", __FILE__, __LINE__));
-			std::cout << "info cell problematic" << std::endl;
-			std::cout << "Liq " << TL << " " << TB->rhok[m_liq] << " " << cell->getMixture()->getPressure() << std::endl;
-			std::cout << "Vap " << TV << " " << TB->rhok[m_vap] << " " << cell->getMixture()->getPressure() << std::endl;
-			std::cout << Tsat << " " << pStar << std::endl;
-			break;
-		}
-		//Physical pressure?
-		for (int k = 0; k < numberPhases; k++) { TB->eos[k]->verifyAndModifyPressure(pStar); }
-		//Liquid-vapor densities calculus
-		Tsat = cell->getMixture()->computeTsat(cell->getPhase(m_liq)->getEos(), cell->getPhase(m_vap)->getEos(), pStar, &dTsat);
-		rhoLSat = TB->eos[m_liq]->computeDensitySaturation(pStar, Tsat, dTsat, &drhoLSat);
-		rhoVSat = TB->eos[m_vap]->computeDensitySaturation(pStar, Tsat, dTsat, &drhoVSat);
-		//limit values
-		if (rhoLSat <= rho) {
-			rhoLSat = rho + 1e-6;
-			drhoLSat = 0.;
-		}
-		if (rhoVSat >= rho) {
-			rhoVSat = rho - 1e-6;
-			drhoVSat = 0.;
-		}
-		//Liquid-vapor volume fraction calculus
-		aLSat = (rho - rhoVSat) / (rhoLSat - rhoVSat);
-		daLSat = (-drhoVSat * (rhoLSat - rhoVSat) - (rho - rhoVSat)*(drhoLSat - drhoVSat)) / ((rhoLSat - rhoVSat)*(rhoLSat - rhoVSat));
-		//limit values
-		if (aLSat <= 0.) aLSat = 1e-8;
-		if (aLSat >= 1.) aLSat = 1. - 1e-8;
-		aVSat = 1. - aLSat;
-		daVSat = -daLSat;
+      cell->getPhase(m_vap, type)->setEnergy(ev);
+      cell->getPhase(m_vap, type)->setPressure(pv);
+      cell->fulfillState(type);
+      return;
+    }
+  }
 
-		f = rhoe; df = 0.;
-		//Liquid-vapor couple only
-		rhoeLSat = TB->eos[m_liq]->computeDensityEnergySaturation(pStar, rhoLSat, drhoLSat, &drhoeLSat);
-		rhoeVSat = TB->eos[m_vap]->computeDensityEnergySaturation(pStar, rhoVSat, drhoVSat, &drhoeVSat);
-		f -= (aLSat*rhoeLSat + aVSat * rhoeVSat);
-		df -= (daLSat*rhoeLSat + aLSat * drhoeLSat + daVSat * rhoeVSat + aVSat * drhoeVSat);
-		f /= rhoe;
-		df /= rhoe;
-	} while (std::fabs(f) > 1e-10);
+  // Pure liquid hypothesis
+  double rhol, el, pl, Tl;
+  rhol = cell->getMixture(type)->getDensity();
+  el = cell->getMixture(type)->getEnergy();
+  pl = cell->getPhase(m_liq, type)->getEos()->computePressure(rhol, el);
+  Tl = cell->getPhase(m_liq, type)->getEos()->computeTemperature(rhol, pl);
 
-	//Cell update
-	phase = cell->getPhase(m_liq);
-	phase->setAlpha(aLSat);
-	phase->setDensity(rhoLSat);
-	phase->setPressure(pStar);
+  if (pl > 0.) {
+    Tsat = cell->getMixture(type)->computeTsat(cell->getPhase(m_liq, type)->getEos(), cell->getPhase(m_vap, type)->getEos(), pl, &dTsat);
+    if (Tl <= Tsat) {
+      // Hypothesis verified
+      cell->getPhase(m_liq, type)->setAlpha(1.);
+      cell->getPhase(m_vap, type)->setAlpha(0.);
+      cell->getPhase(m_liq, type)->setDensity(rhol);
 
-	phase = cell->getPhase(m_vap);
-	phase->setAlpha(aVSat);
-	phase->setDensity(rhoVSat);
-	phase->setPressure(pStar);
+      cell->getPhase(m_liq, type)->setEnergy(el);
+      cell->getPhase(m_liq, type)->setPressure(pl);
+      cell->fulfillState(type);
+      return;
+    }
+  }
 
-	cell->fulfillState();
+  //Iterative process for relaxed state determination
+  double rhoLSat, rhoVSat, drhoLSat, drhoVSat;
+  double aLSat, aVSat, daLSat, daVSat;
+  double rhoeLSat, rhoeVSat, drhoeLSat, drhoeVSat;
+  int iteration(0);
+  double f(0.), df(1.);
+  do {
+    pStar -= f / df; iteration++;
+    
+    if (iteration > 50) {
+      errors.push_back(Errors("Number of iterations too large in relaxPTMu", __FILE__, __LINE__));
+      break;
+    }
+    
+    //Physical pressure?
+    for (int k = 0; k < numberPhases; k++) { TB->eos[k]->verifyAndModifyPressure(pStar); }
+    
+    //Liquid-vapor densities calculus using phases' EOS
+    Tsat = cell->getMixture(type)->computeTsat(cell->getPhase(m_liq, type)->getEos(), cell->getPhase(m_vap, type)->getEos(), pStar, &dTsat);
+    rhoLSat = TB->eos[m_liq]->computeDensitySaturation(pStar, Tsat, dTsat, &drhoLSat);
+    rhoVSat = TB->eos[m_vap]->computeDensitySaturation(pStar, Tsat, dTsat, &drhoVSat);
+    
+    //Liquid-vapor volume fraction calculus using mass conservation within a cell
+    aLSat = (rho - rhoVSat) / (rhoLSat - rhoVSat);
+    daLSat = (-drhoVSat * (rhoLSat - rhoVSat) - (rho - rhoVSat)*(drhoLSat - drhoVSat)) / ((rhoLSat - rhoVSat)*(rhoLSat - rhoVSat));
+    aVSat = 1. - aLSat;
+    daVSat = -daLSat;
+
+    f = rhoe; df = 0.;
+    rhoeLSat = TB->eos[m_liq]->computeDensityEnergySaturation(pStar, rhoLSat, drhoLSat, &drhoeLSat);
+    rhoeVSat = TB->eos[m_vap]->computeDensityEnergySaturation(pStar, rhoVSat, drhoVSat, &drhoeVSat);
+    
+    // Iterative process based on energy conservation within a cell
+    f -= (aLSat*rhoeLSat + aVSat * rhoeVSat);
+    df -= (daLSat*rhoeLSat + aLSat * drhoeLSat + daVSat * rhoeVSat + aVSat * drhoeVSat);
+    f /= rhoe;
+    df /= rhoe;
+  } while (std::fabs(f) > 1e-10);
+
+  //Cell update
+  phase = cell->getPhase(m_liq, type);
+  phase->setAlpha(aLSat);
+  phase->setDensity(rhoLSat);
+  phase->setPressure(pStar);
+
+  phase = cell->getPhase(m_vap, type);
+  phase->setAlpha(aVSat);
+  phase->setDensity(rhoVSat);
+  phase->setPressure(pStar);
+
+  cell->fulfillState(type);
 }
+
+//***********************************************************************
+

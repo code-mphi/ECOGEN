@@ -43,8 +43,18 @@ public:
 	// --- MeshUnStruct virtual member functions --- 
 	virtual void initGeometryMonoCPU(TypeMeshContainer<Cell*>& cells, TypeMeshContainer<CellInterface*>& cellInterfaces, std::string computeOrder = "FIRSTORDER");
 	//TODO// Reading partitioned mesh file for parallel computation
-	virtual void initGeometryParallel(TypeMeshContainer<Cell*>& /*cells*/, TypeMeshContainer<Cell*>& /*cellsGhost*/, TypeMeshContainer<CellInterface*>& /*cellInterfaces*/, std::string /*computeOrder*/ = "FIRSTORDER") { Errors::errorMessage("reading partitioned Gmsh v4.x mesh file for parallel computation not avalaible in ECOGEN"); };
+	virtual void initGeometryParallel(TypeMeshContainer<Cell*>& /*cells*/, 
+    TypeMeshContainer<Cell*>& /*cellsGhost*/, TypeMeshContainer<CellInterface*>& /*cellInterfaces*/, 
+    std::string /*computeOrder*/ = "FIRSTORDER") { 
+      Errors::errorMessage("reading partitioned Gmsh v4.x mesh file for parallel computation not avalaible in ECOGEN"); 
+  };
 	virtual void preProcessMeshFileForParallel() { Errors::errorMessage("reading partitioned Gmsh v4.x mesh file for parallel computation not avalaible in ECOGEN"); };
+  virtual void initCpuMeshSequential(TypeMeshContainer<Cell*>& /*cells*/, std::string& /*computeOrder*/) { 
+    Errors::errorMessage("initCpuMeshSequential not available for requested mesh"); 
+  }
+  virtual void initCpuMeshParallel(TypeMeshContainer<Cell*>& /*cells*/, std::string& /*computeOrder*/, int /*cpu*/) { 
+    Errors::errorMessage("initCpuMeshParallel not available for requested mesh"); 
+  }
 
 private:
 	// --- Member functions ---

@@ -1,0 +1,22 @@
+<?xml version = "1.0" encoding = "UTF-8" standalone = "yes"?>
+<mesh>
+  <type structure="unstructured"/>
+  
+  <!-- <cartesianMesh>
+    <dimensions x="1.1" y="0.7" z="1."/>
+
+    <numberCells x="110" y="120" z="1"/>
+
+    <meshStretching>
+      <YStretching>
+        <stretch startAt="0." endAt="0.7" factor="1.045" numberCells="120"/>
+      </YStretching>
+    </meshStretching>
+
+  </cartesianMesh> -->
+
+  <unstructuredMesh>
+    <file name="libMeshes/Blasius/BlasiusLEIS.msh"/>
+    <parallel GMSHPretraitement="true"/>
+  </unstructuredMesh>
+</mesh>

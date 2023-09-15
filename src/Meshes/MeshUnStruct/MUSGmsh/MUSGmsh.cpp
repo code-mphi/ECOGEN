@@ -47,19 +47,30 @@ std::string MUSGmsh::readVersion(const std::string& meshFile)
 		std::string pathMeshFile(meshFile);
 		std::string currentLine;
 		std::ifstream mesh(pathMeshFile.c_str(), std::ios::in);
-		if (!mesh) { throw ErrorXML("mesh file not found : " + pathMeshFile, __FILE__, __LINE__); }
-
-		getline(mesh, currentLine); // read $MeshFormat
-
-		std::stringstream lineToTreat;
+		if (!mesh) { throw ErrorMeshNS("mesh file not found : " + pathMeshFile, __FILE__, __LINE__); }
+    
+    // Exclusion of unwanted sections
 		std::string fileVersion;
-		getline(mesh, currentLine);
-		lineToTreat << currentLine;
-		lineToTreat >> fileVersion;
+    while(currentLine != "$MeshFormat") {
+      std::stringstream lineToTreat;
+      getline(mesh, currentLine);
+      lineToTreat << currentLine;
+      lineToTreat >> currentLine; //To exclude the newline caracter 
+      if (mesh.eof()) {
+        throw ErrorMeshNS("mesh file format is not compatible, see mesh file: " + meshFile, __FILE__, __LINE__);
+      }
+    }
+    
+    // Get file version
+    std::stringstream lineToTreat;
+    mesh >> currentLine;
+    lineToTreat << currentLine;
+    lineToTreat >> fileVersion; //To exclude the newline caracter 
+
 		mesh.close();
 		return fileVersion;
 	}
-	catch (ErrorXML&) { throw; }
+	catch (ErrorMeshNS&) { throw; }
 }
 
 //***********************************************************************

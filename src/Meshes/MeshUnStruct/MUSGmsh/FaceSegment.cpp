@@ -34,13 +34,13 @@ const int FaceSegment::NUMBERNODES = 2;
 
 //***********************************************************************
 
-FaceSegment::FaceSegment(const int& numNoeud1, const int& numNoeud2, int tri) :
+FaceSegment::FaceSegment(const int& numNode1, const int& numNode2, int tri) :
 FaceNS(NUMBERNODES)
 {
-  m_numNoeuds[0] = numNoeud1;
-  m_numNoeuds[1] = numNoeud2;
-  if(tri) std::sort(m_numNoeuds, m_numNoeuds+2);
-  m_sommeNumNoeuds = m_numNoeuds[0] + m_numNoeuds[1];
+  m_numNodes[0] = numNode1;
+  m_numNodes[1] = numNode2;
+  if(tri) std::sort(m_numNodes, m_numNodes+2);
+  m_sumNumNodes = m_numNodes[0] + m_numNodes[1];
 }
 
 //***********************************************************************
@@ -49,29 +49,29 @@ FaceSegment::~FaceSegment(){}
 
 //***********************************************************************
 
-void FaceSegment::computeSurface(const Coord* noeuds)
+void FaceSegment::computeSurface(const Coord* nodes)
 {
-  m_surface = (noeuds[m_numNoeuds[1]] - noeuds[m_numNoeuds[0]]).norm(); //Longeur du segment
+  m_surface = (nodes[m_numNodes[1]] - nodes[m_numNodes[0]]).norm(); //Longeur du segment
 }
 
 //***********************************************************************
 
-void FaceSegment::computeRepere(const Coord* noeuds, const int& numNoeudAutre, ElementNS *elementVoisin)
+void FaceSegment::computeRepere(const Coord* nodes, const int& numNodeOther, ElementNS *elementNeighbor)
 {
-  Coord v1; v1.setFromSubtractedVectors(noeuds[m_numNoeuds[0]], noeuds[m_numNoeuds[1]]);
+  Coord v1; v1.setFromSubtractedVectors(nodes[m_numNodes[0]], nodes[m_numNodes[1]]);
   m_tangent = v1 / v1.norm();
   m_binormal.setXYZ(0., 0., 1.);
   m_normal = Coord::crossProduct(m_tangent, m_binormal);
 
-  Coord v2; v2.setFromSubtractedVectors(noeuds[m_numNoeuds[0]], noeuds[numNoeudAutre]);
+  Coord v2; v2.setFromSubtractedVectors(nodes[m_numNodes[0]], nodes[numNodeOther]);
   if (v2.scalar(m_normal) > 0.)
   {
-    m_elementDroite = elementVoisin;
+    m_elementDroite = elementNeighbor;
     m_elementGauche = 0;
   }
   else
   {
-    m_elementGauche = elementVoisin;
+    m_elementGauche = elementNeighbor;
     m_elementDroite = 0;
   }
 }

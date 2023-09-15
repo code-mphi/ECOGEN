@@ -64,10 +64,10 @@ void ElementPoint::computeLCFL(const Coord* /*nodes*/)
 void ElementPoint::attributFaceLimite(FaceNS** faces, const int& indexMaxFaces)
 {
   int indexFaceExiste(0);
-  FacePoint face(m_numNoeuds[0]);
+  FacePoint face(m_numNodes[0]);
   if (face.faceExists(faces, indexMaxFaces, indexFaceExiste))
   {
-    faces[indexFaceExiste]->ajouteElementVoisinLimite(this);
+    faces[indexFaceExiste]->addElementNeighborLimite(this);
   }
   else
   {

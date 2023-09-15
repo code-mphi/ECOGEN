@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='UTF-8' standalone='yes'?>
 <parametersEOS>
-  <EOS type="IG" fichier="IG_waterVap_298_474.xml"/>
+  <EOS type="IG"/>
   <parameters cv="970.276" gamma="1.47447" energyRef="2134170" entropyRef="0"/>
   <physicalParameters lambda="0.6" mu="1.e-3"/>
 </parametersEOS>

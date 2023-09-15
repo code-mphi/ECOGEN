@@ -41,6 +41,9 @@ class CellInterface; //Predeclaration de la classe CellInterface pour pouvoir in
 #include "../Meshes/FaceCartesian.h"
 #include "../AdditionalPhysics/AddPhys.h"
 
+class Source; //Predeclaration to include following file
+#include "../Sources/Source.h"
+
 enum BO2 { BG1M, BG2M, BG3M, BG1P, BG2P, BG3P, BD1M, BD2M, BD3M, BD1P, BD2P, BD3P };
 enum betaO2 { betaG1M, betaG2M, betaG3M, betaG1P, betaG2P, betaG3P, betaD1M, betaD2M, betaD3M, betaD1P, betaD2P, betaD3P };
 enum distanceHO2 { distanceHGM, distanceHGP, distanceHDM, distanceHDP };
@@ -58,17 +61,22 @@ class CellInterface
 
     virtual void computeFlux(double& dtMax, Limiter& globalLimiter, Limiter& interfaceLimiter, Limiter& globalVolumeFractionLimiter, Limiter& interfaceVolumeFractionLimiter, Prim type = vecPhases);
     virtual void computeFluxAddPhys(AddPhys& addPhys);
-    virtual void solveRiemann(double& ondeMax, Limiter& /*globalLimiter*/, Limiter& /*interfaceLimiter*/, Limiter& /*globalVolumeFractionLimiter*/, Limiter& /*interfaceVolumeFractionLimiter*/, Prim /*type*/ = vecPhases);
+    virtual void solveRiemann(double& dtMax, Limiter& /*globalLimiter*/, Limiter& /*interfaceLimiter*/, Limiter& /*globalVolumeFractionLimiter*/, Limiter& /*interfaceVolumeFractionLimiter*/, Prim /*type*/ = vecPhases);
     virtual void initialize(Cell* cellLeft, Cell* cellRight);
     void initializeGauche(Cell* cellLeft);
     virtual void initializeDroite(Cell* cellRight);
     virtual void addFlux(const double& coefAMR);
     void subtractFlux(const double& coefAMR);
+    void addFluxRotatingRegion();
+    void substractFluxRotatingRegion();
     double distance(Cell* c);
 
     virtual int whoAmI() const { return 0; };
     virtual int whoAmIHeat() const { return ADIABATIC; }; //!< Returns heat boundary type for wall (see BoundCondWall.h)
     virtual bool isMRFWall() const { return false; }
+
+    virtual void checkMrfInterface(Source* sourceMRF);
+    void solveRiemannMRF(double& dtMax);
 
     //Inutilise pour cell interfaces ordre 1
     virtual void allocateSlopes(int& /*allocateSlopeLocal*/) {};   /*!< Ne fait rien pour des cell interfaces ordre 1 */
@@ -87,8 +95,8 @@ class CellInterface
     //Accesseurs
     Face *getFace();                                            /*!< Attention, getFace() non const */
     Model* getMod() const;
-    Cell* getCellGauche() const;
-    Cell* getCellDroite() const;
+    Cell* getCellLeft() const;
+    Cell* getCellRight() const;
     virtual const int& getNumPhys() const { return Errors::defaultIntNeg; };
     virtual double getBoundData(VarBoundary /*var*/) const { Errors::errorMessage("getBoundData not available for CellInterface"); return 0.; }
     virtual double getBoundaryHeatQuantity() const { return Errors::defaultDouble; }; //!< Returns imposed heat quantity on the wall, could be temperature or flux density (see BounCondWall.h)
@@ -104,7 +112,7 @@ class CellInterface
     virtual void raffineCellInterfaceExterne(const int& nbCellsY, const int& nbCellsZ, const double& dXParent, const double& dYParent, const double& dZParent, Cell* cellRef, const int& dim);      /*!< Raffinement du extern cell interface en creant si besoin des children cell interfaces + liaisons cells/cell interfaces */
     virtual void deraffineCellInterfaceExterne(Cell* cellRef);         /*!< Deraffinement du extern cell interface en supprimant si besoin ses children cell interfaces + liaisons cells/cell interfaces */
     void deraffineCellInterfacesChildren();                            /*!< Supprime les children cell interfaces */
-    void constructionTableauCellInterfacesExternesLvl(std::vector<CellInterface*>* cellInterfacesLvl); /*!< Construction du nouveau tableau de cell interfaces du niveau (lvl + 1), cell interfaces externes ajoutes ici */
+    void constructionArrayExternalCellInterfacesLvl(std::vector<CellInterface*>* cellInterfacesLvl); /*!< Construction of new array of cell interfaces of the level (lvl + 1), external cell interfaces added here */
     bool getSplit() const;                                             /*!< Renvoie si oui ou non le cell interface est splitte */
     const int& getLvl() const { return m_lvl; };                       /*!< Renvoie le niveau du cell interface */
     int getNumberCellInterfacesChildren() const;                       /*!< Renvoie le number de children cell interfaces de ce cell interface*/
@@ -119,7 +127,12 @@ class CellInterface
     
     //Attributs pour methode AMR
     int m_lvl;                                             /*!< Niveau dans l arbre AMR du cell interface */
-    std::vector<CellInterface*> m_cellInterfacesChildren;  /*!< Tableau de children cell interfaces (taille : 1 en 1D, 2 en 2D et 4 en 3D) */
+    std::vector<CellInterface*> m_cellInterfacesChildren;  /*!< Array of children cell interfaces (taille : 1 en 1D, 2 en 2D et 4 en 3D) */
+
+    //Atributes MRF
+    bool m_mrfInterface;
+    bool m_mrfStaticRegionIsLeft;
+    Coord m_omega; 
 
   private:
 };

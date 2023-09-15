@@ -1,0 +1,15 @@
+<?xml version = "1.0" encoding = "UTF-8" standalone = "yes"?>
+<computationParam>
+	<run>euler2DHPUnstructuredMeshMappingRestart</run>
+	<outputMode format="XML" binary="false" precision="15"/>
+	<timeControlMode iterations="false">
+		<iterations number="1" iterFreq="1"/>
+		<physicalTime totalTime="1.e-2" timeFreq="5.e-5"/>
+	</timeControlMode>
+	<computationControl CFL="0.8"/>
+
+	<gradient> 
+  		<method>green-gauss</method> 
+	</gradient>
+
+</computationParam>

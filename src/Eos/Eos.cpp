@@ -48,13 +48,13 @@ Eos::~Eos(){}
 
 //***********************************************************************
 
-void Eos::readPhysicalParameter(XMLNode *element)
+void Eos::readPhysicalParameters(XMLNode *element)
 {
   XMLError error;
 
   XMLElement* sousElement(element->FirstChildElement("physicalParameters"));
   if (sousElement != NULL) {
-    //Recuperation des donnees
+    //Gathering data
     error = sousElement->QueryDoubleAttribute("mu", &m_mu);
     if (error != XML_NO_ERROR) m_mu = -1.;
     error = sousElement->QueryDoubleAttribute("lambda", &m_lambda);

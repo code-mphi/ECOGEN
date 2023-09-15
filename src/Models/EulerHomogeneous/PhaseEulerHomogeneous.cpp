@@ -168,12 +168,32 @@ void PhaseEulerHomogeneous::fillBuffer(double* buffer, int& counter) const
 
 //***************************************************************************
 
+void PhaseEulerHomogeneous::fillBuffer(std::vector<double>& dataToSend) const
+{
+  dataToSend.push_back(m_alpha);
+  dataToSend.push_back(m_density);
+  dataToSend.push_back(m_pressure);
+  dataToSend.push_back(static_cast<double>(m_eos->getNumber()));
+}
+
+//***************************************************************************
+
 void PhaseEulerHomogeneous::getBuffer(double* buffer, int& counter, Eos** eos)
 {
   m_alpha = buffer[++counter];
   m_density = buffer[++counter];
   m_pressure = buffer[++counter];
   m_eos = eos[static_cast<int>(buffer[++counter])];
+}
+
+//***************************************************************************
+
+void PhaseEulerHomogeneous::getBuffer(std::vector<double>& dataToReceive, int& counter, Eos** eos)
+{
+  m_alpha = dataToReceive[counter++];
+  m_density = dataToReceive[counter++];
+  m_pressure = dataToReceive[counter++];
+  m_eos = eos[static_cast<int>(std::round(dataToReceive[counter++]))];
 }
 
 //****************************************************************************
@@ -194,6 +214,13 @@ void PhaseEulerHomogeneous::setToZero()
 
 //***************************************************************************
 
+void PhaseEulerHomogeneous::setToMax()
+{
+  m_alpha = 1.e15;
+}
+
+//***************************************************************************
+
 void PhaseEulerHomogeneous::extrapolate(const Phase &slope, const double& distance)
 {
   m_alpha += slope.getAlpha() * distance;
@@ -204,6 +231,27 @@ void PhaseEulerHomogeneous::extrapolate(const Phase &slope, const double& distan
 void PhaseEulerHomogeneous::limitSlopes(const Phase& slopeGauche, const Phase& slopeDroite, Limiter& /*globalLimiter*/, Limiter& volumeFractionLimiter)
 {
   m_alpha = volumeFractionLimiter.limiteSlope(slopeGauche.getAlpha(), slopeDroite.getAlpha());
+}
+
+//****************************************************************************
+
+void PhaseEulerHomogeneous::setMin(const Phase& phase1, const Phase& phase2)
+{
+  m_alpha = std::min(phase1.getAlpha(), phase2.getAlpha());
+}
+
+//****************************************************************************
+
+void PhaseEulerHomogeneous::setMax(const Phase& phase1, const Phase& phase2)
+{
+  m_alpha = std::max(phase1.getAlpha(), phase2.getAlpha());
+}
+
+//****************************************************************************
+
+void PhaseEulerHomogeneous::computeGradientLimiter(const Limiter& globalLimiter, const Phase& phase, const Phase& phaseMin, const Phase& phaseMax, const Phase& slope)
+{
+  m_alpha = std::min(m_alpha, globalLimiter.computeGradientLimiter(phase.getAlpha(), phaseMin.getAlpha(), phaseMax.getAlpha(), slope.getAlpha()));
 }
 
 //****************************************************************************

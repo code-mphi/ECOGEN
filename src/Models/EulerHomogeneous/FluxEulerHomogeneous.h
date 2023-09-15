@@ -54,8 +54,8 @@ class FluxEulerHomogeneous : public Flux
     virtual void buildCons(Phase** phase, Mixture* mixture);
     virtual void buildPrim(Phase** phase, Mixture* mixture);
     virtual void setToZero();
-    virtual void addNonCons(double /*coefA*/, const Cell* /*cell*/) {};
-    virtual void subtractNonCons(double /*coefA*/, const Cell* /*cell*/) {};
+    virtual void addNonCons(double /*coefA*/, const Cell* /*cell*/, const Coord& /*normal*/, const Coord& /*tangent*/, const Coord& /*binormal*/) {};
+    virtual void subtractNonCons(double /*coefA*/, const Cell* /*cell*/, const Coord& /*normal*/, const Coord& /*tangent*/, const Coord& /*binormal*/) {};
     
     virtual void addFluxSmooth1D(double coefA, const Coord& normal, Cell* cell);
     virtual void substractFluxSmooth1D(double coefA, const Coord& normal, Cell* cell);

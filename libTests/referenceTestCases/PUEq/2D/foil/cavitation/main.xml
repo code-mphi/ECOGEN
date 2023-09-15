@@ -1,0 +1,30 @@
+<?xml version = "1.0" encoding = "UTF-8" standalone = "yes"?>
+<computationParam>
+	<run>pressureVelocityEq2DfoilCavitation</run>
+	<outputMode format="XML" binary="false"/>
+	<timeControlMode iterations="false">
+		<iterations number="100" iterFreq="10"/>
+		<physicalTime totalTime="2.5" timeFreq="0.025"/>
+	</timeControlMode>
+	<computationControl CFL="0.6"/>
+	<gradient>
+		<method>green-gauss</method>
+	</gradient>
+
+  <boundary record="all" precision="10">
+    <boundaryID number="4" name="foil"/>
+    <timeControl acqFreq="0.01"/>
+  </boundary>
+
+  <boundary record="flux" precision="10">
+    <boundaryID number="1" name="inflow-massflow"/>
+    <timeControl acqFreq="0.01"/>
+    <flux type="massflow"/>
+  </boundary>
+
+  <boundary record="flux" precision="10">
+    <boundaryID number="2" name="outflow-massflow"/>
+    <timeControl acqFreq="0.01"/>
+    <flux type="massflow"/>
+  </boundary>
+</computationParam>

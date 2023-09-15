@@ -1,0 +1,24 @@
+<?xml version = "1.0" encoding = "UTF-8" standalone = "yes"?>
+<CI>
+	<!-- LIST OF GEOMETRICAL DOMAINS  -->
+	<physicalDomains>	
+		<domain name="base" state="init" type="entireDomain" physicalEntity="10"/>
+    <domain name="base" state="init" type="entireDomain" physicalEntity="11"/>
+	</physicalDomains>	
+
+	<!-- LIST OF BOUNDARY CONDITIONS -->
+	<boundaryConditions>
+		<boundCond name="wall" type="wall" number="1" />
+		<boundCond name="blades" type="wall" number="2" />
+	</boundaryConditions>
+
+	<!--  LIST OF STATES  -->
+	<state name="init">
+		<material type="fluid" EOS="SG_water.xml">
+		    <dataFluid density="1.e3" pressure="1.e5">
+		        <velocity x="0." y="0." z="0."/>
+		    </dataFluid>
+		</material>
+	</state>
+
+</CI>

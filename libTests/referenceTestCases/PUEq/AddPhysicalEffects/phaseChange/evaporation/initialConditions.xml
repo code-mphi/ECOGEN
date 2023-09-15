@@ -1,0 +1,44 @@
+<?xml version = "1.0" encoding = "UTF-8" standalone = "yes"?>
+<CI>
+    <!-- LIST OF GEOMETRICAL DOMAINS  -->
+    <physicalDomains> 
+        <domain name="leftSide" state="leftSide" type="entireDomain"/>
+        <domain name="rightSide" state="rightSide" type="halfSpace">
+            <dataHalfSpace axis="x" origin="0.5" direction="positive"/>
+        </domain>
+    </physicalDomains>
+
+    <!-- LIST OF BOUNDARY CONDITIONS -->
+    <boundaryConditions>
+        <boundCond name="CLXm" type="wall" number="1"/>
+        <boundCond name="CLXp" type="wall" number="2"/>
+    </boundaryConditions>
+    
+    <!--  LIST OF STATES  -->
+    <state name="leftSide">
+        <material type="fluid" EOS="SG_waterLiq_cavitation.xml">
+            <dataFluid alpha="1." temperature="450."/>
+        </material>
+        <material type="fluid" EOS="IG_waterVap_cavitation.xml">
+            <dataFluid alpha="0." temperature="450."/>
+        </material>
+        <mixture>
+            <dataMix pressure="12.e5"/>
+            <velocity x="0." y="0." z="0."/>
+        </mixture>
+    </state>
+
+    <state name="rightSide">
+        <material type="fluid" EOS="SG_waterLiq_cavitation.xml">
+            <dataFluid alpha="1." temperature="450."/>
+        </material>
+        <material type="fluid" EOS="IG_waterVap_cavitation.xml">
+            <dataFluid alpha="0." temperature="450."/>
+        </material>
+        <mixture>
+            <dataMix pressure="12.e5"/>
+            <velocity x="0." y="0." z="0."/>
+        </mixture>
+    </state>
+
+</CI>

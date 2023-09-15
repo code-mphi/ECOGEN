@@ -1,0 +1,13 @@
+<?xml version = "1.0" encoding = "UTF-8" standalone = "yes"?>
+<computationParam>
+	<run>euler2DImmersedBoundaries</run>
+	<outputMode format="XML" binary="false"/>
+	<timeControlMode iterations="false">
+		<iterations number="200" iterFreq="100"/>
+		<physicalTime totalTime="2.e-3" timeFreq="2.e-4"/>
+	</timeControlMode>
+	<computationControl CFL="0.8"/>
+	<secondOrder>
+		<globalLimiter>mc</globalLimiter>
+	</secondOrder>
+</computationParam>

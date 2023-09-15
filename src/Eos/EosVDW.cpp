@@ -102,3 +102,12 @@ double EosVDW::dedrhoSecond(const double& density, const double& temperature) co
 }
 
 //***********************************************************************
+
+void EosVDW::verifyAndCorrectDensityMax(double& density) const
+{
+  if (density > 1. / m_b - 1.e-10) {
+    density = 1. / m_b - 1.e-10;
+  }
+}
+
+//***********************************************************************

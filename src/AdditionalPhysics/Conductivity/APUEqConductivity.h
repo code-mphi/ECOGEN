@@ -62,10 +62,10 @@ class APUEqConductivity : public APUEq
     void solveFluxConductivityNonReflecting(const Coord& gradTkLeft, const double& alphakL, const int& numPhase) const;
     //! \brief     Solve the conductivity flux at a boundary with an wall type
     void solveFluxConductivityWall() const;
-    //! \brief     Solve the conductivity flux at a boundary with an outflow type
-    void solveFluxConductivityOutflow() const;
-    //! \brief     Solve the conductivity flux at a boundary with an inflow type
-    void solveFluxConductivityInflow() const;
+    //! \brief     Solve the conductivity flux at a boundary with an inlet injection using stagnation state type
+    void solveFluxConductivityInletInjStagState() const;
+    //! \brief     Solve the conductivity flux at a boundary with an outlet at imposed pressure type
+    void solveFluxConductivityOutletPressure() const;
     //! \brief     Solve the conductivity flux at a boundary with non-defined type yet
     void solveFluxConductivityOther() const;
     virtual void addNonCons(Cell* /*cell*/) {}; //The conductivity does not involve non-conservative terms.

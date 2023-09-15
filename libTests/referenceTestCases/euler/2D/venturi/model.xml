@@ -1,0 +1,6 @@
+<?xml version = "1.0" encoding = "UTF-8" standalone = "yes"?>
+<model>
+  <flowModel name="Euler"/>
+  <EOS name="SG_waterLiq_venturi.xml"/>
+  <lowMach state="false"/>
+</model>

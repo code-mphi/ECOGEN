@@ -22,10 +22,10 @@ ECOGEN package includes a sample of test cases. Each of them is independent, rea
 In this file, the :xml:`<testCase>` markup indicates the folder containing the test case to be run. It is then possible to run successively several cases by adding as many :xml:`<testCase>` markups as necessary.
 Each folder indicated in a :xml:`<testCase>` markup must contain 4 input files:
 
-- *mainV5.xml*
-- *meshV5.xml*
-- *modelV4.xml*
-- *initialConditionsV4.xml*
+- *main.xml*
+- *mesh.xml*
+- *model.xml*
+- *initialConditions.xml*
 
 Additional input files depending on the test case are necessary. They are placed in the following folders:
 
@@ -34,10 +34,10 @@ Additional input files depending on the test case are necessary. They are placed
 
 In this section, the structure of each input file is detailed. This information is also provided in a condensed form in the "handbook" files at the root folder of the test-case library **ECOGEN/libTests/**. These files constitute quick-reference manuals and are named as follow:
 
-- *manualMainV5.xml*
-- *manualMeshV5.xml*
-- *manualModelV4.xml*
-- *manualInitialConditionsV4.xml*
+- *manualMain.xml*
+- *manualMesh.xml*
+- *manualModel.xml*
+- *manualInitialConditions.xml*
 
 
 .. _`TinyXML-2`: http://www.grinninglizard.com/tinyxml2/

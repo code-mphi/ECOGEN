@@ -1,0 +1,29 @@
+<?xml version = "1.0" encoding = "UTF-8" standalone = "yes"?>
+<computationParam>
+  <run>velocityEq2DdropletShockInducedCavitation_Mach2_4_mu3_5</run>
+  <outputMode format="XML" binary="true" precision="12"/>
+  <timeControlMode iterations="false">
+    <iterations number="100" iterFreq="10"/>
+    <physicalTime totalTime="50e-6" timeFreq="0.5e-6"/>
+  </timeControlMode>
+  <computationControl CFL="0.6"/>
+  <secondOrder>
+    <globalLimiter>mc</globalLimiter>
+  </secondOrder>
+  <probe name="sensor1">
+    <vertex x="33.e-3" y="1.e-10" z="0.0001"/>
+    <timeControl acqFreq="-1."/>       <!-- if negative or nul, recording at each time step -->
+  </probe>
+  <probe name="sensor2">
+    <vertex x="33.e-3" y="2.75e-3" z="0.0001"/>
+    <timeControl acqFreq="-1."/>       <!-- if negative or nul, recording at each time step -->
+  </probe>
+  <probe name="sensor3">
+    <vertex x="33.e-3" y="5.5e-3" z="0.0001"/>
+    <timeControl acqFreq="-1."/>       <!-- if negative or nul, recording at each time step -->
+  </probe>
+  <probe name="sensor4">
+    <vertex x="33.e-3" y="8.25e-3" z="0.0001"/>
+    <timeControl acqFreq="-1."/>       <!-- if negative or nul, recording at each time step -->
+  </probe>
+</computationParam>

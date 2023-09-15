@@ -32,14 +32,17 @@
 #define HEADERBOUNDCOND_H
 
 #include "BoundCondNonReflecting.h"
-#include "BoundCondInj.h"
-#include "BoundCondSubInj.h"
-#include "BoundCondTank.h"
+#include "BoundCondInletTank.h"
+#include "BoundCondInletInjStagState.h"
+#include "BoundCondInletInjTemp.h"
 #include "BoundCondWall.h"
-#include "BoundCondWallO2.h"
+#include "BoundCondWallO2Cartesian.h"
+#include "BoundCondWallO2NS.h"
 #include "BoundCondSymmetry.h"
-#include "BoundCondSymmetryO2.h"
-#include "BoundCondOutflow.h"
+#include "BoundCondSymmetryO2Cartesian.h"
+#include "BoundCondSymmetryO2NS.h"
+#include "BoundCondOutletPressure.h"
+#include "BoundCondOutletMassflow.h"
 #include "BoundCondNullFlux.h"
 
 //Add here header of new boundary conditions

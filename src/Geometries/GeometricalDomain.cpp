@@ -78,5 +78,7 @@ void GeometricalDomain::fillIn(Cell* cell) const
     for (int k = 0; k < numberPhases; k++) { cell->copyPhase(k, m_vecPhases[k]); }
     cell->copyMixture(m_mixture);
     for (int k = 0; k < numberTransports; k++) { cell->setTransport(m_vecTransports[k].getValue(), k); }
+    if(m_physicalEntity == -1){ cell->setWall(true); }
+    else{ cell->setWall(false); }
   }
 }

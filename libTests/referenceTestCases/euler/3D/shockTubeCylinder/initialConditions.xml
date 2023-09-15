@@ -1,0 +1,35 @@
+<?xml version = "1.0" encoding = "UTF-8" standalone = "yes"?>
+<CI>
+    <!-- LIST OF GEOMETRICAL DOMAINS  -->
+    <physicalDomains> 
+        <domain name="HP" state="leftChamber" type="entireDomain"/>
+        <domain name="LP" state="rightChamber" type="halfSpace">
+          <dataHalfSpace axis="z" origin="0.5" direction="positive"/>  
+        </domain>
+    </physicalDomains>
+
+    <!-- LIST OF BOUNDARY CONDITIONS -->
+    <boundaryConditions>
+        <boundCond name="leftWall" type="wall" number="1"/>
+        <boundCond name="rightWall" type="wall" number="2"/>
+        <boundCond name="tubeWall" type="wall" number="3"/>
+    </boundaryConditions>
+    
+    <!--  LIST OF STATES  -->
+    <state name="leftChamber">
+        <material type="fluid" EOS="IG_air.xml">
+            <dataFluid density="1.2" pressure="1.e6">
+                <velocity x="0." y="0." z="0."/>
+            </dataFluid>
+        </material>
+    </state>
+
+    <state name="rightChamber">
+        <material type="fluid" EOS="IG_air.xml">
+            <dataFluid density="1.2" pressure="1.e5">
+                <velocity x="0." y="0." z="0."/>
+            </dataFluid>
+        </material>
+    </state>
+
+</CI>

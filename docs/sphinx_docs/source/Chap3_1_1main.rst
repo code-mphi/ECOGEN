@@ -3,10 +3,10 @@
 
 .. _Sec:input:main:
 
-MainV5.xml
+Main.xml
 ==========
 
-*mainV5.xml* is the main input file needed to define the test case. It **must be** in the current test case folder. Its minimal structure is:
+*main.xml* is the main input file needed to define the test case. It **must be** in the current test case folder. Its minimal structure is:
 
 .. code-block:: xml
 
@@ -99,7 +99,15 @@ The :xml:`<computationControl>` markup is mandatory. It specifies the value of t
 
 Global accuracy order of the numerical scheme
 ---------------------------------------------
-When it is possible, according to the mesh or to the flow model, ECOGEN can use a second-order scheme (based on MUSCL approach with a TVD slope limiter; see :cite:`schmidmayer2020ecogen` for details). In this case, the optional markup :xml:`<secondOrder>` can be inserted in the *mainV5.xml* input file as in the following example:
+
+By default, the numerical scheme of the hydrodynamic solver is first order in time and space.
+ECOGEN can use a second-order scheme in time and space using the MUSCL method with TVD limiters (see :cite:`toro2013riemann` for example for an overview of the method).
+Depending on whether the mesh is **Cartesian** (with/without AMR) or **unstructured**, the MUSCL method used and its parameters are different.
+
+Cartesian mesh (with/without AMR)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+For a cartesian mesh (with/without AMR), second-order scheme is based on a TVD slope limiter; see :cite:`schmidmayer2020ecogen` for details.
+In this case, the optional markup :xml:`<secondOrder>` can be inserted in the *main.xml* input file as in the following example:
 
 .. code-block:: xml
 
@@ -117,9 +125,34 @@ The :xml:`<secondOrder>` markup must contain the node :xml:`<globalLimiter>`. Th
 - :xml:`<globalVolumeFractionLimiter>`: Applied everywhere but only on the volume-fraction and transport equations (THINC is only applied on the volume fraction) unless it is overwritten by the interface volume-fraction limiter. By default is equal to the global limiter.
 - :xml:`<interfaceVolumeFractionLimiter>`: Applied only at the interface location and on the volume-fraction and transport equations (THINC is only applied on the volume fraction). By default is equal to the interface limiter.
 
+Unstructured mesh
+~~~~~~~~~~~~~~~~~
+The second-order method for unstructured meshes is not yet released because of known bugs.
+
+Gradient method
+---------------
+
+In ECOGEN, to compute gradients, it is possible to use:
+
+- finite-difference-like gradient on **cartesian** mesh (with/without AMR) (:xml:`<method>finite-difference</method>`)
+- Green-Gauss gradient on **cartesian** and **unstructured** mesh (:xml:`<method>green-gauss</method>`).
+
+By default (without the XML markup :xml:`<gradient>`), the gradients will be computed using the finite-difference scheme.
+To define explicitly the gradient method, one can use:
+
+.. code-block:: xml
+
+  <gradient>
+    <method>finite-difference</method> <!-- For finite difference like gradient scheme -->
+  </gradient>
+
+.. note::
+
+  On unstructured meshes, in case second-order scheme is set and/or additional physics are used (see Section :ref:`Sec:input:additionalPhysic`), the gradient method must be set to Green-Gauss.
+
 Probes
 ------
-It is possible to record over time flow variables at given locations in the computational domain. This is done by including to the *mainV5.xml* input file the optional :xml:`<probe>` markup.
+It is possible to record over time flow variables at given locations in the computational domain. This is done by including to the *main.xml* input file the optional :xml:`<probe>` markup.
  
 .. code-block:: xml
 
@@ -137,7 +170,7 @@ Probe output-result files will be placed in the specific subfolder **ECOGEN/resu
 **Remarks:**
 
 1. Recording probes with a high frequency could have a significant impact on computation performances due to the computer memory time access. To prevent that, one should fix a reasonable acquisition frequency.
-2. Several probes can be added simultaneously. For that, place as many as wanted :xml:`<probe>` markups in the *mainV5.xml* input files.
+2. Several probes can be added simultaneously. For that, place as many as wanted :xml:`<probe>` markups in the *main.xml* input files.
 
 Simulation restart option
 -------------------------

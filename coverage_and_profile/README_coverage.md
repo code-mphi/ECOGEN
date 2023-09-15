@@ -11,12 +11,12 @@ Here is described how to compute a code coverage for ECOGEN.
    ./scripts/run.sh ./nonreg/ECOGEN_nonReg_full.list
    This will generate .gcda files in the sources.
 
-5. Install lcov if not already done and execute the following command to interprete the gcda files. Note that the "--capture" option may be "--coverage" on some systems.
-   lcov --capture --directory . --output-file coverage/coverage.info
+5. Install lcov if not already done and execute the following command to interprete the gcda files. Note that the "--capture" option may be "--coverage" on some systems. You may also add the following options "--ignore-errors inconsistent,inconsistent,gcov,gcov --filter range".
+   lcov --capture --directory . --output-file coverage_and_profile/coverage.info
 
-6. Execute the following command to generate html files from the previous coverage files.
-   genhtml coverage/coverage.info --output-directory coverage/html
+6. Execute the following command to generate html files from the previous coverage files. You may also add the following options "--ignore-errors inconsistent".
+   genhtml coverage_and_profile/coverage.info --output-directory coverage_and_profile/html
 
-7. Open coverage/html/index.html with your browser to have a look at the report.
+7. Open coverage_and_profile/html/index.html with your browser to have a look at the report.
 
 Note that the .gcno and .gcda files are voluntarily not added in the .gitignore to remind you to delete them after the analysis (and obviously if you do not want to keep them).

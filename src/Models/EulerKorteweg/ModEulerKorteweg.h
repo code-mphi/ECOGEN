@@ -83,6 +83,13 @@ class ModEulerKorteweg : public Model
 
     //Accessors
     //---------
+    //! \brief  Select a specific scalar variable
+    //! \param  phases         phases array variables
+    //! \param  mixture        mixture variables
+    //! \param  vecTransports  vector of transport variables
+    //! \param  nameVariables  Name of the variable to select
+    //! \param  numPhases      Phases number's
+    virtual double selectScalar(Phase** phases, Mixture* /*mixture*/, Transport* transports, Variable nameVariable, int num = 0) const;
     virtual const double& getSM() { Errors::errorMessage("getSM not available for required model"); return Errors::defaultDouble; };
     virtual const Coord& getVelocity(const Cell* cell) const { return cell->getPhase(0)->getVelocity(); };
     virtual Coord& getVelocity(Cell* cell) { return cell->getPhase(0)->getVelocity(); };

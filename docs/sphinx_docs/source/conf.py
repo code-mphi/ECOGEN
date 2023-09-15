@@ -23,13 +23,13 @@ from sphinx.builders.html import StandaloneHTMLBuilder
 # -- Project information -----------------------------------------------------
 
 project = 'ECOGEN'
-copyright = '2022, code-mphi'
+copyright = '2023, code-mphi'
 author = 'code-mphi'
 
 # The short X.Y version
-version = '3.1'
+version = '4.0'
 # The full version, including alpha/beta/rc tags
-release = '3.1'
+release = '4.0'
 
 
 # -- General configuration ---------------------------------------------------
@@ -81,7 +81,7 @@ master_doc = 'index'
 #
 # This is also used if you do content translation via gettext catalogs.
 # Usually you set "language" from the command line for these cases.
-language = None
+language = 'en'
 
 # List of patterns, relative to source directory, that match files and
 # directories to ignore when looking for source files.

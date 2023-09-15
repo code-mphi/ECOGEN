@@ -179,6 +179,20 @@ void Parallel::addSlopesToReceive(int neighbour)
 
 //***********************************************************************
 
+void Parallel::deleteSlopesToSend(int neighbour)
+{
+  m_numberSlopesToSendToNeighbour[neighbour] -= 1;
+}
+
+//***********************************************************************
+
+void Parallel::deleteSlopesToReceive(int neighbour)
+{
+  m_numberSlopesToReceiveFromNeighbour[neighbour] -= 1;
+}
+
+//***********************************************************************
+
 void Parallel::clearElementsAndSlopesToSendAndReceivePLusNeighbour()
 {
   for (int neighbour = 0; neighbour < Ncpu; neighbour++) {
@@ -442,7 +456,7 @@ void Parallel::communicationsSlopes(int lvl)
 {
   int count(0);
   MPI_Status status;
-  
+
   for (int neighbour = 0; neighbour < Ncpu; neighbour++) {
     if (m_isNeighbour[neighbour]) {
       //Prepation of sendings

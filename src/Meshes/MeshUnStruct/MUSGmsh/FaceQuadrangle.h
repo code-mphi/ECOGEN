@@ -36,15 +36,15 @@
 class FaceQuadrangle : public FaceNS
 {
 public:
-  FaceQuadrangle(const int& numNoeud1, const int& numNoeud2, const int& numNoeud3, const int& numNoeud4, int tri=1);
+  FaceQuadrangle(const int& numNode1, const int& numNode2, const int& numNode3, const int& numNode4, int tri=1);
   virtual ~FaceQuadrangle();
 
 private:
-  virtual void computeSurface(const Coord* noeuds);
-  virtual void computeRepere(const Coord* noeuds, const int& numNoeudAutre, ElementNS *elementVoisin);
+  virtual void computeSurface(const Coord* nodes);
+  virtual void computeRepere(const Coord* nodes, const int& numNodeOther, ElementNS *elementNeighbor);
 
   static const int NUMBERNODES;
-  int* m_numNoeudsOrigine;
+  int* m_numNodesOrigine;
 };
 
 #endif // FACEQUADRANGLE_H

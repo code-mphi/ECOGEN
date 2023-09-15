@@ -1,0 +1,27 @@
+<?xml version = "1.0" encoding = "UTF-8" standalone = "yes"?>
+<computationParam>
+	<run>pressureVelocityEq1DConduction</run>
+	<outputMode format="GNU" binary="false"/>
+	<timeControlMode iterations="true">
+		<iterations number="10" iterFreq="10"/>
+		<physicalTime totalTime="0.01" timeFreq="0.005"/>
+	</timeControlMode>
+	<computationControl CFL="0.6"/>
+	<secondOrder>
+		<globalLimiter>vanleer</globalLimiter>
+	</secondOrder>
+
+	<probe name="sensor1">
+		<vertex x="0.5" y="0.05" z="0.05"/>
+		<timeControl acqFreq="1e-4."/>       <!-- if negative or nul, recording at each time step -->
+	</probe>
+	<probe name="sensor2">
+		<vertex x="0.3" y="0.05" z="0.05"/>
+		<timeControl acqFreq="1e-4."/>       <!-- if negative or nul, recording at each time step -->
+	</probe>
+	<probe name="sensor3">
+		<vertex x="0.7" y="0.05" z="0.05"/>
+		<timeControl acqFreq="1e-4."/>       <!-- if negative or nul, recording at each time step -->
+	</probe>
+
+</computationParam>

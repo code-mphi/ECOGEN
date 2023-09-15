@@ -39,7 +39,7 @@ public:
   virtual ~FaceCartesian();
 
   virtual void setSurface(const double& surface);
-  virtual void initializeAutres(const double& surface, const Coord& normal, const Coord& tangent, const Coord& binormal);
+  virtual void initializeOthers(const double& surface, const Coord& normal, const Coord& tangent, const Coord& binormal);
   virtual void setPos(const double& X, const double& Y, const double& Z);
   virtual void setNormal(const double& X, const double& Y, const double& Z);
   virtual void setTangent(const double& X, const double& Y, const double& Z);

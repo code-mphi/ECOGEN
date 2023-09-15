@@ -36,12 +36,12 @@
 class FacePoint : public FaceNS
 {
 public:
-  FacePoint(const int& numNoeud1);
+  FacePoint(const int& numNode1);
   virtual ~FacePoint();
 
 private:
-  virtual void computeSurface(const Coord* /*noeuds*/);
-  virtual void computeRepere(const Coord* noeuds, const int& numNoeudAutre, ElementNS* elementVoisin);
+  virtual void computeSurface(const Coord* /*nodes*/);
+  virtual void computeRepere(const Coord* nodes, const int& numNodeOther, ElementNS* elementNeighbor);
 
   static const int NUMBERNODES;
 };

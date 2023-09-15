@@ -1,0 +1,10 @@
+<?xml version = "1.0" encoding = "UTF-8" standalone = "yes"?>
+<computationParam>
+	<run>pressureVelocityEq1DheatedVapourAir</run>
+	<outputMode format="GNU" binary="false"/>
+	<timeControlMode iterations="false">
+		<iterations number="10000" iterFreq="2000"/>
+		<physicalTime totalTime="0.05" timeFreq="0.05"/>
+	</timeControlMode>
+	<computationControl CFL="0.9"/>
+</computationParam>

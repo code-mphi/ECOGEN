@@ -58,15 +58,15 @@ void APEViscosity::addQuantityAddPhys(Cell* cell)
 void APEViscosity::solveFluxAddPhys(CellInterface* cellInterface)
 {
   // Copy velocities and gradients of left and right cells
-  m_velocityLeft = cellInterface->getCellGauche()->getPhase(0)->getVelocity();
-  m_velocityRight = cellInterface->getCellDroite()->getPhase(0)->getVelocity();
+  m_velocityLeft = cellInterface->getCellLeft()->getPhase(0)->getVelocity();
+  m_velocityRight = cellInterface->getCellRight()->getPhase(0)->getVelocity();
 
-  m_gradULeft = cellInterface->getCellGauche()->getQPA(m_numQPA)->getGrad(1);
-  m_gradURight = cellInterface->getCellDroite()->getQPA(m_numQPA)->getGrad(1);
-  m_gradVLeft = cellInterface->getCellGauche()->getQPA(m_numQPA)->getGrad(2);
-  m_gradVRight = cellInterface->getCellDroite()->getQPA(m_numQPA)->getGrad(2);
-  m_gradWLeft = cellInterface->getCellGauche()->getQPA(m_numQPA)->getGrad(3);
-  m_gradWRight = cellInterface->getCellDroite()->getQPA(m_numQPA)->getGrad(3);
+  m_gradULeft = cellInterface->getCellLeft()->getQPA(m_numQPA)->getGrad(1);
+  m_gradURight = cellInterface->getCellRight()->getQPA(m_numQPA)->getGrad(1);
+  m_gradVLeft = cellInterface->getCellLeft()->getQPA(m_numQPA)->getGrad(2);
+  m_gradVRight = cellInterface->getCellRight()->getQPA(m_numQPA)->getGrad(2);
+  m_gradWLeft = cellInterface->getCellLeft()->getQPA(m_numQPA)->getGrad(3);
+  m_gradWRight = cellInterface->getCellRight()->getQPA(m_numQPA)->getGrad(3);
 
   m_normal = cellInterface->getFace()->getNormal();
   m_tangent = cellInterface->getFace()->getTangent();
@@ -75,15 +75,9 @@ void APEViscosity::solveFluxAddPhys(CellInterface* cellInterface)
   // Projection on orientation axes attached to the edge of velocities and gradients
   m_velocityLeft.localProjection(m_normal, m_tangent, m_binormal);
   m_velocityRight.localProjection(m_normal, m_tangent, m_binormal);
-  m_gradULeft.localProjection(m_normal, m_tangent, m_binormal);
-  m_gradURight.localProjection(m_normal, m_tangent, m_binormal);
-  m_gradVLeft.localProjection(m_normal, m_tangent, m_binormal);
-  m_gradVRight.localProjection(m_normal, m_tangent, m_binormal);
-  m_gradWLeft.localProjection(m_normal, m_tangent, m_binormal);
-  m_gradWRight.localProjection(m_normal, m_tangent, m_binormal);
   
-  m_tensorLeft.setTensorByColumns(m_gradULeft, m_gradVLeft, m_gradWLeft);
-  m_tensorRight.setTensorByColumns(m_gradURight, m_gradVRight, m_gradWRight);
+  m_tensorLeft.setTensorByLines(m_gradULeft, m_gradVLeft, m_gradWLeft);
+  m_tensorRight.setTensorByLines(m_gradURight, m_gradVRight, m_gradWRight);
   m_tensorLeft.localProjection(m_normal, m_tangent, m_binormal);
   m_tensorRight.localProjection(m_normal, m_tangent, m_binormal);
   m_tensorLeft.tensorToCoords(m_gradULeft, m_gradVLeft, m_gradWLeft);
@@ -103,10 +97,10 @@ void APEViscosity::solveFluxAddPhysBoundary(CellInterface* cellInterface)
   //DEV// BC Injection, Tank, Outflow to do
 
   // Copy velocities and gradients of left and right cells
-  m_velocityLeft = cellInterface->getCellGauche()->getPhase(0)->getVelocity();
-  m_gradULeft = cellInterface->getCellGauche()->getQPA(m_numQPA)->getGrad(1);
-  m_gradVLeft = cellInterface->getCellGauche()->getQPA(m_numQPA)->getGrad(2);
-  m_gradWLeft = cellInterface->getCellGauche()->getQPA(m_numQPA)->getGrad(3);
+  m_velocityLeft = cellInterface->getCellLeft()->getPhase(0)->getVelocity();
+  m_gradULeft = cellInterface->getCellLeft()->getQPA(m_numQPA)->getGrad(1);
+  m_gradVLeft = cellInterface->getCellLeft()->getQPA(m_numQPA)->getGrad(2);
+  m_gradWLeft = cellInterface->getCellLeft()->getQPA(m_numQPA)->getGrad(3);
 
   m_normal = cellInterface->getFace()->getNormal();
   m_tangent = cellInterface->getFace()->getTangent();
@@ -114,19 +108,16 @@ void APEViscosity::solveFluxAddPhysBoundary(CellInterface* cellInterface)
 
   // Projection on orientation axes attached to the edge of velocities and gradients
   m_velocityLeft.localProjection(m_normal, m_tangent, m_binormal);
-  m_gradULeft.localProjection(m_normal, m_tangent, m_binormal);
-  m_gradVLeft.localProjection(m_normal, m_tangent, m_binormal);
-  m_gradWLeft.localProjection(m_normal, m_tangent, m_binormal);
 
-  m_tensorLeft.setTensorByColumns(m_gradULeft, m_gradVLeft, m_gradWLeft);
+  m_tensorLeft.setTensorByLines(m_gradULeft, m_gradVLeft, m_gradWLeft);
   m_tensorLeft.localProjection(m_normal, m_tangent, m_binormal);
   m_tensorLeft.tensorToCoords(m_gradULeft, m_gradVLeft, m_gradWLeft);
 
   // Distances cells/cell interfaces for weighting on the flux
-  double distLeft = cellInterface->getCellGauche()->distance(cellInterface);
+  double distLeft = cellInterface->getCellLeft()->distance(cellInterface);
 
   int typeCellInterface = cellInterface->whoAmI();
-  if (typeCellInterface == NONREFLECTING || typeCellInterface == OUTFLOW || typeCellInterface == INJ || typeCellInterface == TANK || typeCellInterface == SUBINJ) {
+  if (typeCellInterface == NONREFLECTING || typeCellInterface == OUTLETPRESSURE || typeCellInterface == INLETINJSTAGSTATE || typeCellInterface == INLETTANK || typeCellInterface == INLETINJTEMP) {
     this->solveFluxViscosityNonReflecting(m_velocityLeft, m_gradULeft, m_gradVLeft, m_gradWLeft, m_mu);
   }
   else if (typeCellInterface == WALL) {
@@ -273,9 +264,9 @@ void APEViscosity::solveFluxViscosityOther() const
 
 void APEViscosity::communicationsAddPhys(const int& dim, const int& lvl)
 {
-  parallel.communicationsVector(QPA, dim, lvl, m_numQPA, 1); //m_gradU
-  parallel.communicationsVector(QPA, dim, lvl, m_numQPA, 2); //m_gradV
-  parallel.communicationsVector(QPA, dim, lvl, m_numQPA, 3); //m_gradW
+  parallel.communicationsVector(Variable::QPA, dim, lvl, m_numQPA, 1); //m_gradU
+  parallel.communicationsVector(Variable::QPA, dim, lvl, m_numQPA, 2); //m_gradV
+  parallel.communicationsVector(Variable::QPA, dim, lvl, m_numQPA, 3); //m_gradW
 }
 
 //***********************************************************************

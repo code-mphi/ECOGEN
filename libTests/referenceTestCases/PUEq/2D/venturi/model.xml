@@ -1,0 +1,12 @@
+<?xml version = "1.0" encoding = "UTF-8" standalone = "yes"?>
+<model>
+  <flowModel name="PressureVelocityEq" numberPhases="2" alphaNull="true"/>
+  <EOS name="SG_waterLiq_venturi.xml"/>
+  <EOS name="IG_waterVap_venturi.xml"/>
+  
+  <lowMach state="false"/>
+  
+  <relaxation type="PTMu">
+    <dataPTMu liquid="SG_waterLiq_venturi.xml" vapor="IG_waterVap_venturi.xml"/>
+  </relaxation>
+</model>

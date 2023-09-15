@@ -1,6 +1,0 @@
-<?xml version='1.0' encoding='UTF-8' standalone='yes'?>
-<model>
-  <flowModel alphaNull="false" name="PressureVelocityEq" numberPhases="2"/>
-  <EOS name="SG_water.xml"/>
-  <EOS name="IG_gaz1.xml"/>
-</model>

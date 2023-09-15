@@ -1,0 +1,10 @@
+<?xml version = "1.0" encoding = "UTF-8" standalone = "yes"?>
+<model>
+	<flowModel name="PressureVelocityEq" numberPhases="2" alphaNull="false"/>
+	<EOS name="IG_air.xml"/>
+	<EOS name="IG_helium.xml"/>
+	<geometry smoothCrossSection1d="true"/>
+	<symmetryTerm type="cylindrical">
+  		<dataSymCyl radialAxis="Y"/>
+	</symmetryTerm>
+</model>

@@ -63,33 +63,19 @@ void OutputBoundaryAllGNU::initializeSpecificOutputBound()
   }
   catch (ErrorECOGEN&) { throw; }
 }
-
-//***************************************************************
-
-void OutputBoundaryAllGNU::computeOutwardNormal(CellInterface* bound, double &nx, double &ny, double &nz)
-{
-  Coord vFaceToElt(0.);
-  vFaceToElt.setFromSubtractedVectors(bound->getFace()->getPos(), bound->getCellGauche()->getElement()->getPosition());
-  double scalarProduct(Coord::scalarProduct(bound->getFace()->getNormal(), vFaceToElt));
-
-  // Switch normal if not in outward direction
-  if (scalarProduct > 0) { 
-    nx = - nx;
-    ny = - ny;
-    nz = - nz;
-  }
-}
   
 //***************************************************************
 
 void OutputBoundaryAllGNU::writeResults(std::vector<CellInterface*>* cellInterfacesLvl)
 {
-  double rho, p, S, nx, ny, nz;
+  double rho, p, S, nx, ny, nz, mu;
   // Velocity extracted in the Riemann solver is defined in the face frame
   // and corresponds to the relative velocity in case of MRF.
   // The relative velocity is projected in the global frame to allow the reconstruction
   // of the absolute velocity with the rotationnal velocity if MRF is on.
-  Coord absVel;
+  // The boundary variables are defined as the primitive variables solution of
+  // the Riemann problem.
+  Coord absVel, shearStress;
   CellInterface *bound;
 
   // Avoid to create empty file for CPUs which have not any boundary faces
@@ -105,30 +91,65 @@ void OutputBoundaryAllGNU::writeResults(std::vector<CellInterface*>* cellInterfa
 
       absVel.setXYZ(bound->getBoundData(VarBoundary::velU), 
                     bound->getBoundData(VarBoundary::velV),
-                    bound->getBoundData(VarBoundary::velW));
+                    bound->getBoundData(VarBoundary::velW)
+      );
 
       if (m_run->m_MRF != -1) {
         absVel.reverseProjection(bound->getFace()->getNormal(), 
           bound->getFace()->getTangent(), 
-          bound->getFace()->getBinormal());
-        
-        absVel = m_run->m_sources[m_run->m_MRF]->computeAbsVelocity(absVel, bound->getCellGauche()->getPosition());
-        
+          bound->getFace()->getBinormal()
+        );
+        absVel = m_run->m_sources[m_run->m_MRF]->computeAbsVelocity(absVel, bound->getFace()->getPos());
         absVel.localProjection(bound->getFace()->getNormal(), bound->getFace()->getTangent(), bound->getFace()->getBinormal());
       }
 
-      p = bound->getBoundData(VarBoundary::p);
-      S = bound->getFace()->getSurface();
+      // Face center position
+      double posX, posY, posZ;
+      posX = bound->getFace()->getPos().getX();
+      posY = bound->getFace()->getPos().getY();
+      posZ = bound->getFace()->getPos().getZ();
+
+      // Shear stress
+      mu = 0.;
+      if (numberPhases > 1) {
+        for (int k = 0; k < numberPhases; k++) {
+          mu += bound->getCellLeft()->getPhase(k)->getAlpha() * bound->getCellLeft()->getPhase(k)->getEos()->getMu();
+        }
+      }
+      else {
+        mu = bound->getCellLeft()->getPhase(0)->getEos()->getMu();
+      }
+      shearStress = bound->getCellLeft()->getVelocity();
+      shearStress.localProjection(bound->getFace()->getNormal(), bound->getFace()->getTangent(), bound->getFace()->getBinormal());
+      double distCellBound(bound->getFace()->distance(bound->getCellLeft()->getElement()));
+      shearStress.setXYZ(
+        mu / 3. * 4. * shearStress.getX() / distCellBound,
+        mu * shearStress.getY() / distCellBound,
+        mu * shearStress.getZ() / distCellBound
+      ); // It is assumed that the boundary is not moving
+      shearStress.reverseProjection(bound->getFace()->getNormal(), bound->getFace()->getTangent(), bound->getFace()->getBinormal());
+      shearStress *= bound->getFace()->getSurface();
 
       // Normal 
       nx = bound->getFace()->getNormal().getX();
       ny = bound->getFace()->getNormal().getY();
       nz = bound->getFace()->getNormal().getZ();
-      this->computeOutwardNormal(bound, nx, ny, nz);
 
-      fs << rho << " " 
+      // Pressure force
+      p = bound->getBoundData(VarBoundary::p);
+      S = bound->getFace()->getSurface();
+      double fpx, fpy, fpz;
+      fpx = p*S*nx;
+      fpy = p*S*ny;
+      fpz = p*S*nz;
+
+      // Writing
+      fs << posX << " " << posY << " " << posZ << " "
+        << rho << " " 
         << absVel.getX() << " " << absVel.getY() << " " << absVel.getZ() << " " 
-        << p << " " << S << " " 
+        << p << " " << S << " "
+        << fpx << " " << fpy << " " << fpz << " "
+        << shearStress.getX() << " " << shearStress.getY() << " " << shearStress.getZ() << " " 
         << nx << " " << ny << " " << nz << std::endl;
     }
 

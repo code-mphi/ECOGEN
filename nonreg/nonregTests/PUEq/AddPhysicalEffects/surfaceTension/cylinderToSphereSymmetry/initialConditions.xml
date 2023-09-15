@@ -1,0 +1,62 @@
+<?xml version = "1.0" encoding = "UTF-8" standalone = "yes"?>
+<CI>
+    <!-- LIST OF GEOMETRICAL DOMAINS  -->
+    <physicalDomains> 
+        <domain name="base" state="air" type="entireDomain"/>
+        <domain name="square"  state="square" type="cuboid">
+            <dataCuboid lAxisX="0.2" lAxisY="0.1" lAxisZ="1.">
+                <posInferiorVertex x="0.275" y="0." z="0."/>
+            </dataCuboid>
+        </domain>
+    </physicalDomains>
+
+    <!-- LIST OF BOUNDARY CONDITIONS -->
+    <boundaryConditions>
+        <boundCond name="CLXm" type="outletPressure" number="1">
+            <dataOutletPressure p0="1.e5">
+                <transport name="color" value="1.e-6"/>
+            </dataOutletPressure>
+        </boundCond>
+        <boundCond name="CLXp" type="outletPressure" number="2">
+            <dataOutletPressure p0="1.e5">
+                <transport name="color" value="1.e-6"/>
+            </dataOutletPressure>
+        </boundCond>
+        <boundCond name="CLYm" type="symmetry" number="3"/>
+        <boundCond name="CLYp" type="outletPressure" number="4">
+            <dataOutletPressure p0="1.e5">
+                <transport name="color" value="1.e-6"/>
+            </dataOutletPressure>
+        </boundCond>
+    </boundaryConditions>
+    
+    <!--  LIST OF STATES  -->
+    <state name="air">
+        <material type="fluid" EOS="IG_air.xml">
+            <dataFluid alpha="0.999999" density="1.0"/>
+        </material>
+        <material type="fluid" EOS="SG_liquidForSurfaceTensionCases.xml">
+            <dataFluid alpha="0.000001" density="1000.0"/>
+        </material>
+        <mixture>
+            <dataMix pressure = "1.e5"/>
+            <velocity x="0." y="0." z="0."/>
+        </mixture>
+        <transport name="color" value="1.e-6"/>
+    </state>
+
+    <state name="square">
+        <material type="fluid" EOS="IG_air.xml">
+            <dataFluid alpha="0.000001" density="1.0"/>
+        </material>
+        <material type="fluid" EOS="SG_liquidForSurfaceTensionCases.xml">
+            <dataFluid alpha="0.999999" density="1000.0"/>
+        </material>
+        <mixture>
+            <dataMix pressure = "1.e5"/>
+            <velocity x="0." y="0." z="0."/>
+        </mixture>
+        <transport name="color" value="1."/>
+    </state>
+
+</CI>

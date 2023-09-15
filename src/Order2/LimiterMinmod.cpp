@@ -32,7 +32,10 @@
 
 //***********************************************************************
 
-LimiterMinmod::LimiterMinmod(){}
+LimiterMinmod::LimiterMinmod() : Limiter() 
+{
+  m_limType = LimiterType::MINMOD;
+}
 
 //***********************************************************************
 

@@ -1,0 +1,30 @@
+<?xml version = "1.0" encoding = "UTF-8" standalone = "yes"?>
+<computationParam>
+	<run>euler2Dfoil</run>
+	<outputMode format="XML" binary="false"/>
+	<timeControlMode iterations="true">
+		<iterations number="10" iterFreq="10"/>
+		<physicalTime totalTime="2.4" timeFreq="0.05"/>
+	</timeControlMode>
+	<computationControl CFL="0.6"/>
+	<gradient>
+		<method>green-gauss</method>
+	</gradient>
+
+  <boundary record="all">
+    <boundaryID number="4" name="foil"/>
+    <timeControl acqFreq="-1"/>
+  </boundary>
+
+  <boundary record="flux" precision="10">
+      <boundaryID number="1" name="inflow-power"/>
+      <timeControl acqFreq="-1"/>
+      <flux type="powerflux"/>
+  </boundary>
+
+  <boundary record="flux" precision="10">
+    <boundaryID number="2" name="outflow-power"/>
+    <timeControl acqFreq="-1"/>
+    <flux type="powerflux"/>
+  </boundary>
+</computationParam>

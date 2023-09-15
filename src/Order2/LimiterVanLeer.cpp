@@ -43,7 +43,7 @@ LimiterVanLeer::~LimiterVanLeer(){}
 double LimiterVanLeer::limiteSlope(const double& slope1, const double& slope2) 
 {
 	double zero(1e-6);
-	double slope(0.), produit(slope1*slope2), somme(slope1+slope2);
-	if ((std::fabs(somme)>zero) && (produit > zero)) { slope = 2.*produit / somme; }
+	double slope(0.), produit(slope1*slope2), sum(slope1+slope2);
+	if ((std::fabs(sum)>zero) && (produit > zero)) { slope = 2.*produit / sum; }
 	return slope;
 }

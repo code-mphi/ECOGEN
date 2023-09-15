@@ -37,33 +37,35 @@ class OutputXML :  public Output
 {
 public:
   OutputXML(std::string casTest, std::string run, tinyxml2::XMLElement* element, std::string fileName, Input *entree);
+  OutputXML(std::string nameRun, int fileNumberRestartMeshMapping, Input *input);
   virtual ~OutputXML();
 
   virtual void initializeSpecificOutput();
   virtual void writeResults(Mesh *mesh, std::vector<Cell*>* cellsLvl);
 
   virtual void readResults(Mesh *mesh, std::vector<Cell*>* cellsLvl);
+  virtual void readResultsCpu(Mesh *mesh, std::vector<Cell*>* cellsLvl, int cpu);
 
 protected:
 
-  void ReadDonneesPhysiquesXML(Mesh *mesh, std::vector<Cell*>* cellsLvl, tinyxml2::XMLElement* nodeCellData, std::string fileName = "Unknown file");
+  void ReadPhysicalDataXML(Mesh *mesh, std::vector<Cell*>* cellsLvl, tinyxml2::XMLElement* nodeCellData, std::string fileName = "Unknown file");
 
   std::string createFilenameXML(const char* name, Mesh *mesh=0, int proc=-1, int numFichier=-1, std::string nameVariable ="defaut");
 
   void writeResultsXML(Mesh *mesh, std::vector<Cell*>* cellsLvl);
-  void ecritCollectionXML(Mesh *mesh);
-  void ecritDonneesPhysiquesXML(Mesh *mesh, std::vector<Cell*>* cellsLvl, std::ofstream &fileStream, bool parallel = false);
+  void writeCollectionXML(Mesh *mesh);
+  void writePhysicalDataXML(Mesh *mesh, std::vector<Cell*>* cellsLvl, std::ofstream &fileStream, bool parallel = false);
 
   //Dependant du type de mesh
-  void ecritMeshRectilinearXML(Mesh *mesh, std::ofstream &fileStream, bool parallel = false);
-  void ecritMeshUnstructuredXML(Mesh *mesh, std::vector<Cell*>* cellsLvl, std::ofstream &fileStream, bool parallel = false);
-  void ecritFinFichierRectilinearXML(std::ofstream &fileStream, bool parallel = false);
-  void ecritFinFichierUnstructuredXML(std::ofstream &fileStream, bool parallel = false);
+  void writeMeshRectilinearXML(Mesh *mesh, std::ofstream &fileStream, bool parallel = false);
+  void writeMeshUnstructuredXML(Mesh *mesh, std::vector<Cell*>* cellsLvl, std::ofstream &fileStream, bool parallel = false);
+  void writeFinFichierRectilinearXML(std::ofstream &fileStream, bool parallel = false);
+  void writeFinFichierUnstructuredXML(std::ofstream &fileStream, bool parallel = false);
 
   //Non used / old
-  // void ecritFichierParallelXML(Mesh *mesh, std::vector<Cell*>* cellsLvl);
-  // void ecritFinFichierPolyDataXML(std::ofstream &fileStream, bool parallel = false);
-  // void ecritMeshPolyDataXML(Mesh *mesh, std::vector<Cell*>* cellsLvl, std::ofstream &fileStream, const int& lvl, bool parallel = false);
+  // void writeFichierParallelXML(Mesh *mesh, std::vector<Cell*>* cellsLvl);
+  // void writeFinFichierPolyDataXML(std::ofstream &fileStream, bool parallel = false);
+  // void writeMeshPolyDataXML(Mesh *mesh, std::vector<Cell*>* cellsLvl, std::ofstream &fileStream, const int& lvl, bool parallel = false);
 };
 
 #endif //OUTPUTXML_H

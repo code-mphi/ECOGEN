@@ -11,7 +11,7 @@ MAIN_OUTPUT="mainOutput.out"
 REPORT_FILE="report.out"
 REFERENCE_BRANCH=origin/devel
 #REFERENCE_BRANCH="devel"
-if [ -z $CI ] 
+if [ -z "$CI" ] 
 then
 	VALIDATION_BRANCH=$(git symbolic-ref HEAD --short)
 else
@@ -34,6 +34,17 @@ mv -v results results_save
 if [ $? != 0 ]
 then
 	exit 1
+fi
+
+#Check if Gmsh is installed
+#--------------------------
+gmsh --version &> /dev/null
+#On Ubuntu Gmsh redirects to stdout while on MacOS 
+#it redirects to stderr (even if success)
+if [ $? != 0 ]
+then
+  echo "WARNING: Gmsh is not installed or not avalaible in your PATH."
+  echo "All unstructured nonreg test cases will not tested."
 fi
 
 echo "************************************************************************"
@@ -95,10 +106,18 @@ echo "Computing differences between reference and validation branches..."
 diff -x $MAIN_OUTPUT -qr -x 'infoCalcul.out' -x '.DS_Store' $reportFolderName/results_reference $reportFolderName/results_validation > $reportFolderName/diff_nonreg.out || true
 if [ -s $reportFolderName/diff_nonreg.out ]
 then
-	echo "Differences exist: Details available in $reportFolderName/diff_nonreg.out file."
+	echo "Differences exist: details available in $reportFolderName/diff_nonreg.out file."
+	if [ -n "$CI" ] #If continuous integration
+	then
+		echo "Differences exist: details available in attached file" | mutt -s "ECOGEN: Non regression failed" -a $reportFolderName/diff_nonreg.out -- $GITLAB_USER_EMAIL
+	fi
 	error=1
 else
-	echo "Non-regression tests complete: Results present no difference!"
+	echo "Non-regression tests complete: results present no difference!"
+	if [ -n "$CI" ] #If continuous integration
+	then
+		echo "Non-regression tests complete: results present no difference! Ready to merge" | mutt -s "ECOGEN: Non regression succeeded" $GITLAB_USER_EMAIL
+	fi
 fi
 
 #Sending error code if something went wrong

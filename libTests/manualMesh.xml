@@ -1,0 +1,79 @@
+-----------------------------------
+Typical example for mesh input file
+-----------------------------------
+
+<?xml version="1.0" encoding="UTF-8" standalone = "yes"?>
+<mesh>
+  <type structure="cartesian"/>
+  <cartesianMesh>
+    <dimensions x="1.e-1" y="5.e-2" z="1."/>
+    <numberCells x="50" y ="25" z="1"/>
+  </cartesianMesh>
+</mesh>
+
+----------------------------------
+REQUIRED computational parameters
+----------------------------------
+
+1) Mesh type
+************
+Mesh can be: Cartesian or unStructured
+%%%%%%%%%%%%%%%%%% << copy between these lines
+<type structure="cartesian"/>
+%%%%%%%%%%%%%%%%%% << copy between these lines
+
+2) Data for mesh structure
+**************************
+a) Cartesian mesh
+-----------------
+ECOGEN generates its own Cartesian meshes. Dimensions, cells number and optionnal AMR and stretching must be precised.
+Stretching can be set in each directions. For each stretched direction, the sum of stretched zones should exactly recover the entire domain without overlaping.
+The total cell number in a given axis replace those specified in <numberCells> node.
+%%%%%%%%%%%%%%%%%% << copy between these lines
+<cartesianMesh>
+  <dimensions x="1.e-1" y="5.e-2" z="1."/>
+  <numberCells x="50" y ="25" z="1"/>
+  <AMR lvlMax="2" criteriaVar="0.2" varRho="true" varP="true" varU="false" varAlpha="false" xiSplit="0.11" xiJoin="0.11"/> <!-- Optionnal node -->
+  <meshStretching>    <!-- Optionnal node -->
+      <XStretching>
+        <stretch startAt="0." endAt="0.5" factor="0.9" numberCells="20"/>
+        <stretch startAt="0.5" endAt="1." factor="1.1" numberCells="10"/>
+      </XStretching>
+  </meshStretching>
+</cartesianMesh>
+%%%%%%%%%%%%%%%%%% << copy between these lines
+b) Unstructured mesh
+--------------------
+Mesh file name should be precised here. The corresponding mesh file must be lacate in the "ECOGEN/libMesh/" folder.
+ECOGEN can read from single or multi-CPU mesh files coming from GMSH software (*.msh)
+%%%%%%%%%%%%%%%%%% << copy between these lines
+<unstructuredMesh>
+  <file name="libMeshes/unstructured2D/testUS.msh"/>
+  <parallel GMSHPretraitement="true"/>  <!-- Optionnal node if multiCPU -->
+</unstructuredMesh>
+%%%%%%%%%%%%%%%%%% << copy between these lines
+Caution: The optionnal node <parallel> must be present if the multiCPU mesh file has not been used yet. Attribute GMSHPretraitement generates separated meshes accordingly to the CPU number from the global specified multiCPU mesh file.
+
+It is possible to record each cell reference length used in the CFL criteria to troubleshoot poor mesh quality (unstructured mesh only). 
+To do so the optionnal node <extractReferenceLength> must be set accordingly. 
+Obviously this option is not of interest during the course of the simulation to avoid unnecessary computations.
+%%%%%%%%%%%%%%%%%% << copy between these lines
+<unstructuredMesh>
+  <file name="libMeshes/unstructured2D/testUS.msh"/>
+  <extractReferenceLength state="true"/>  
+</unstructuredMesh>
+%%%%%%%%%%%%%%%%%% << copy between these lines
+
+ECOGEN offers the possibility to initialize a simulation with the result of a previous simulation performed on a different mesh and/or a different number of cpu.
+One of the most common use case would be to run a simulation on a rough mesh until steady state is reached and use the result to initialize the flow field on a fine mesh to fasten the convergence to steady state.
+Assuming a previous simulation with a rough mesh under the name "euler2DHPUnstructuredRough" has been previously run, the simulation with the fine mesh must have <meshMappingRestart> node as follows
+%%%%%%%%%%%%%%%%%% << copy between these lines
+<unstructuredMesh>
+  <file name="libMeshes/square/squareRefined.msh"/>
+  <meshMappingRestart 
+    resultFolder="euler2DHPUnstructuredRough" 
+    restartFileNumber="200" 
+    meshFile="libMeshes/square/square.msh"
+  />
+</unstructuredMesh>
+%%%%%%%%%%%%%%%%%% << copy between these lines

@@ -8,17 +8,26 @@ chord = 150.e-3; // Length from leading edge to trailing edge
 lx = 1.95;       // Lenght of the domain
 ly = 192.e-3;    // Height of the domain
 
-// dx1 = 0.0025; // 3k4
-// dx2 = 0.025;
+dx1 = 0.0025; // 3k4
+dx2 = 0.025;
 
-dx1 = 0.0015; // 8k9
-dx2 = 0.015;
+// dx1 = 0.0015; // 8k9
+// dx2 = 0.015;
 
 // dx1 = 0.00125; // 12k
 // dx2 = 0.0125;
 
 // dx1 = 0.001; // 19k
 // dx2 = 0.01;
+
+// dx1 = 0.0004; // 30k
+// dx2 = 0.01;
+
+// dx1 = 0.0001; // 70k + 277k with refine by splitting
+// dx2 = 0.012;
+
+// dx1 = 0.000075; // 140k
+// dx2 = 0.008;
 
 // --- Boundary conditions ---
 boundCondInflow = 1;

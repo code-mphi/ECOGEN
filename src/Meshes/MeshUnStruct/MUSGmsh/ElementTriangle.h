@@ -44,7 +44,7 @@ public:
   virtual void construitFaces(const Coord* nodes, FaceNS** faces, int& indexMaxFaces, int** facesBuff, int* sumNodesBuff); 
   virtual void construitFacesSimplifie(int& iMax, int** facesBuff, int* sumNodesBuff);
   virtual void attributFaceLimite(FaceNS** faces, const int& indexMaxFaces);
-  virtual void attributFaceCommunicante(FaceNS** faces, const int& indexMaxFaces, const int& numberNoeudsInternes);
+  virtual void attributFaceCommunicante(FaceNS** faces, const int& indexMaxFaces, const int& numberNodesInternal);
   virtual int compteFaceCommunicante(std::vector<int*>& faces, std::vector<int>& sumNodesBuff);
   virtual int compteFaceCommunicante(int& iMax, int** faces, int* sumNodesBuff);
 

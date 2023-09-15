@@ -1,0 +1,44 @@
+<?xml version = "1.0" encoding = "UTF-8" standalone = "yes"?>
+<CI>
+    <!-- LIST OF GEOMETRICAL DOMAINS  -->
+    <physicalDomains> 
+        <domain name="base" state="leftChamber" type="entireDomain" physicalEntity="10"/>
+        <domain name="LP" state="rightChamber" type="entireDomain" physicalEntity="11"/>
+    </physicalDomains>
+
+    <!-- LIST OF BOUNDARY CONDITIONS -->
+    <boundaryConditions>
+        <boundCond name="leftRightWalls" type="nonReflecting" number="1"/>
+        <boundCond name="upperLowerWalls" type="symmetry" number="2"/>
+    </boundaryConditions>
+
+    <!--  LIST OF STATES  -->
+    <state name="leftChamber">
+      <material type="fluid" EOS="SG_water.xml">
+          <dataFluid alpha="0.999999" density="1000."/>
+      </material>
+      <material type="fluid" EOS="IG_air.xml">
+          <dataFluid alpha="0.000001" density="10."/>
+      </material>
+      <mixture>
+          <dataMix pressure = "1.e9"/>
+          <velocity x="0." y="0." z="0."/>
+      </mixture>
+      <transport name="transport" value="1."/>
+    </state>
+
+    <state name="rightChamber">
+      <material type="fluid" EOS="SG_water.xml">
+          <dataFluid alpha="0.000001" density="1000."/>
+      </material>
+      <material type="fluid" EOS="IG_air.xml">
+          <dataFluid alpha="0.999999" density="10."/>
+      </material>
+      <mixture>
+          <dataMix pressure = "1.e5"/>
+          <velocity x="0." y="0." z="0."/>
+      </mixture>
+      <transport name="transport" value="0."/>
+    </state>
+
+</CI>

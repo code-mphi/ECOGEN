@@ -44,7 +44,7 @@ OutputCutGNU::OutputCutGNU(std::string casTest, std::string run, XMLElement* ele
     m_simulationName = casTest;
     if (type == LINE) { m_fileNameResults = "cut1D"; }
     else if (type == PLAN) { m_fileNameResults = "cut2D"; }
-    else { throw ErrorECOGEN("OutputCutGNU::OutputCutGNU : type de cut inconnu", __FILE__, __LINE__); }
+    else { throw ErrorECOGEN("OutputCutGNU::OutputCutGNU : type de cut unknown", __FILE__, __LINE__); }
     m_fileNameVisu = "plot_" + m_fileNameResults + ".gnu";
     m_folderOutput = config.getWorkFolder() + "results/" + run + "/cuts/";
     m_splitData = 0;
@@ -56,9 +56,9 @@ OutputCutGNU::OutputCutGNU(std::string casTest, std::string run, XMLElement* ele
     XMLError error;
 
     double donnee;
-    Coord vertex, vecteur;
+    Coord vertex, vector;
 
-    //Recuperation donnees de cut 1D
+    //Get data of 1D cut
     sousElement = element->FirstChildElement("vertex");
     if (sousElement == NULL) throw ErrorXMLElement("vertex", fileName, __FILE__, __LINE__);
     error = sousElement->QueryDoubleAttribute("x", &donnee); vertex.setX(donnee);
@@ -69,18 +69,18 @@ OutputCutGNU::OutputCutGNU(std::string casTest, std::string run, XMLElement* ele
     if (error != XML_NO_ERROR) throw ErrorXMLAttribut("z", fileName, __FILE__, __LINE__);
     if (type == LINE) sousElement = element->FirstChildElement("vecDir");
     else if (type == PLAN) { sousElement = element->FirstChildElement("vecNormal"); }
-    else { throw ErrorECOGEN("OutputCutGNU::OutputCutGNU : type de cut inconnu", __FILE__, __LINE__); }
+    else { throw ErrorECOGEN("OutputCutGNU::OutputCutGNU : type de cut unknown", __FILE__, __LINE__); }
     if (sousElement == NULL) throw ErrorXMLElement("vecDir ou vecNormal", fileName, __FILE__, __LINE__);
-    error = sousElement->QueryDoubleAttribute("x", &donnee); vecteur.setX(donnee);
+    error = sousElement->QueryDoubleAttribute("x", &donnee); vector.setX(donnee);
     if (error != XML_NO_ERROR) throw ErrorXMLAttribut("x", fileName, __FILE__, __LINE__);
-    error = sousElement->QueryDoubleAttribute("y", &donnee); vecteur.setY(donnee);
+    error = sousElement->QueryDoubleAttribute("y", &donnee); vector.setY(donnee);
     if (error != XML_NO_ERROR) throw ErrorXMLAttribut("y", fileName, __FILE__, __LINE__);
-    error = sousElement->QueryDoubleAttribute("z", &donnee); vecteur.setZ(donnee);
+    error = sousElement->QueryDoubleAttribute("z", &donnee); vector.setZ(donnee);
     if (error != XML_NO_ERROR) throw ErrorXMLAttribut("z", fileName, __FILE__, __LINE__);
 
-    if (type == LINE) { m_objet = new GOLine(vertex, vecteur); }
-    else if (type == PLAN) { m_objet = new GOPlan(vertex, vecteur); }
-    else { throw ErrorECOGEN("OutputCutGNU::OutputCutGNU : type de cut inconnu", __FILE__, __LINE__); }
+    if (type == LINE) { m_objet = new GOLine(vertex, vector); }
+    else if (type == PLAN) { m_objet = new GOPlan(vertex, vector); }
+    else { throw ErrorECOGEN("OutputCutGNU::OutputCutGNU : type de cut unknown", __FILE__, __LINE__); }
 
   }
   catch (ErrorECOGEN &) { throw; }
@@ -108,9 +108,9 @@ void OutputCutGNU::writeResults(Mesh *mesh, std::vector<Cell*>* cellsLvl)
   try {
     //Create Gnuplot file to plot results
     if (rankCpu == 0) {
-      if (m_objet->getType() == LINE) { ecritScriptGnuplot(1); }
-      else if (m_objet->getType() == PLAN) { ecritScriptGnuplot(2); }
-      else { throw ErrorECOGEN("OutputCutGNU::writeResultsSpecifique : type de cut inconnu", __FILE__, __LINE__); }
+      if (m_objet->getType() == LINE) { writeScriptGnuplot(1); }
+      else if (m_objet->getType() == PLAN) { writeScriptGnuplot(2); }
+      else { throw ErrorECOGEN("OutputCutGNU::writeResultsSpecifique : type de cut unknown", __FILE__, __LINE__); }
     }
   }
   catch (ErrorECOGEN &) { throw; }

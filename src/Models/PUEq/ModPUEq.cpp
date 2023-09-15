@@ -39,6 +39,7 @@ const std::string ModPUEq::NAME = "PRESSUREVELOCITYEQ";
 ModPUEq::ModPUEq(const int& numbTransports, const int& numbPhases) : ModUEq(NAME, numbTransports)
 {
   fluxBuff = new FluxPUEq(numbPhases);
+  fluxBuffMRF = new FluxPUEq(numbPhases);
   m_relaxations.push_back(new RelaxationPInfinite); //Pressure relaxation imposed in this model
   for (int i = 0; i < 4; i++) {
     sourceCons.push_back(new FluxPUEq(numbPhases));
@@ -74,7 +75,58 @@ void ModPUEq::allocateMixture(Mixture** mixture)
 
 void ModPUEq::fulfillStateRestart(Phase** phases, Mixture* mixture)
 {
-  for (int k = 0; k < numberPhases; k++) { phases[k]->setPressure(mixture->getPressure()); }
+  for (int k = 0; k < numberPhases; k++) { 
+    phases[k]->setPressure(mixture->getPressure());
+    phases[k]->verifyAndCorrectPhase();
+  }
+}
+
+//****************************************************************************
+//******************************* Accessors **********************************
+//****************************************************************************
+
+double ModPUEq::selectScalar(Phase** phases, Mixture* mixture, Transport* transports, Variable nameVariable, int num) const
+{
+  switch (nameVariable) {
+    case Variable::pressure:
+      return mixture->getPressure();
+      break;
+    case Variable::density:
+      if (num < 0) {
+        return mixture->getDensity();
+      }
+      else {
+        return phases[num]->getDensity();
+      }
+      break;
+    case Variable::alpha:
+      return phases[num]->getAlpha();
+      break;
+    case Variable::velocityU:
+      return mixture->getVelocity().getX();
+      break;
+    case Variable::velocityV:
+      return mixture->getVelocity().getY();
+      break;
+    case Variable::velocityW:
+      return mixture->getVelocity().getZ();
+      break;
+    case Variable::velocityMag:
+      return mixture->getVelocity().norm();
+      break;
+    case Variable::transport:
+      return transports[num].getValue();
+      //double psi(0.), coeff(0.75);
+      //psi = std::pow(transports[num].getValue(), coeff) / (std::pow(transports[num].getValue(), coeff) + std::pow((1 - transports[num].getValue()), coeff));
+      //return psi;
+      break;
+    case Variable::temperature:
+      return phases[num]->getTemperature();
+      break;
+    default:
+      Errors::errorMessage("nameVariable unknown in selectScalar"); return 0;
+      break;
+  }
 }
 
 //***********************************************************************

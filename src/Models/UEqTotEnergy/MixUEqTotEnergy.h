@@ -58,7 +58,7 @@ class MixUEqTotEnergy : public Mixture
     virtual double computeFrozenSoundSpeed(const double* Yk, const double* ck);
     
     virtual void computeMixtureVariables(Phase** vecPhase);
-    virtual void internalEnergyToTotalEnergy(std::vector<QuantitiesAddPhys*>& /*vecGPA*/) {};
+    virtual void computeTotalEnergy(std::vector<QuantitiesAddPhys*>& /*vecGPA*/) {};
     virtual void totalEnergyToInternalEnergy(std::vector<QuantitiesAddPhys*>& /*vecGPA*/) {};
 
     virtual void localProjection(const Coord& normal, const Coord& tangent, const Coord& binormal);

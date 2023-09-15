@@ -41,7 +41,7 @@ Output::Output(){}
 //***************************************************************
 
 Output::Output(std::string casTest, std::string nameRun, XMLElement* element, std::string fileName, Input *entree) :
-  m_input(entree), m_simulationName(casTest), m_folderOutput(nameRun), m_splitData(0), m_numFichier(0)
+  m_input(entree), m_simulationName(casTest), m_folderOutput(nameRun), m_splitData(0), m_numFichier(0), m_nbCpusRestarted(0)
 {
   //Affectation pointeur run
   m_run = m_input->getRun();
@@ -75,7 +75,7 @@ Output::Output(std::string casTest, std::string nameRun, XMLElement* element, st
   //Get if reduced output is on or off
   if (element->QueryBoolAttribute("reducedOutput", &m_reducedOutput) != XML_NO_ERROR) m_reducedOutput = false;
 
-  //Recuperation mode Ecriture
+  //Get writing mode
   error = element->QueryBoolAttribute("binary", &m_writeBinary);
   if (error != XML_NO_ERROR) throw ErrorXMLAttribut("binary", fileName, __FILE__, __LINE__);
 
@@ -106,14 +106,6 @@ Output::Output(std::string casTest, std::string nameRun, XMLElement* element, st
       mkdir(m_folderBoundaries.c_str(), S_IRWXU);
       mkdir(m_folderErrorsAndWarnings.c_str(), S_IRWXU);
     #endif
-    try {
-      //Sauvegarde des fichiers d entrees
-      IO::copieFichier(m_input->getMain(), m_simulationName, m_folderSavesInput);
-      IO::copieFichier(m_input->getMesh(), m_simulationName, m_folderSavesInput);
-      IO::copieFichier(m_input->getCI(), m_simulationName, m_folderSavesInput);
-      IO::copieFichier(m_input->getModel(), m_simulationName, m_folderSavesInput);
-    }
-    catch (ErrorECOGEN &) { throw; }
   }
   MPI_Barrier(MPI_COMM_WORLD);
 
@@ -127,6 +119,35 @@ Output::Output(std::string casTest, std::string nameRun, XMLElement* element, st
 
 //***********************************************************************
 
+Output::Output(std::string nameRun, int fileNumberRestartMeshMapping, Input *input) :
+  m_folderOutput(nameRun), m_writeBinary(false), m_splitData(0), m_numFichier(fileNumberRestartMeshMapping)
+{
+  m_input = input;
+  m_run = m_input->getRun();
+
+  //Names communs
+  //------------
+  m_infoCalcul = "infoCalcul.out";
+  m_infoMesh = "infoMesh";
+  m_treeStructure = "treeStructure";
+  m_domainDecomposition = "domainDecomposition";
+  m_fileNameResults = "result";
+  m_filenameCollectionParaview = "collectionParaview";
+  m_filenameCollectionVisIt = "collectionVisIt";
+
+  m_folderOutput = config.getWorkFolder() + "results/" + m_folderOutput + "/";
+  m_folderSavesInput = m_folderOutput + "savesInput/";
+  m_folderDatasets = m_folderOutput + "datasets/";
+  m_folderInfoMesh = m_folderOutput + "infoMesh/";
+  m_folderCuts = m_folderOutput + "cuts/";
+  m_folderProbes = m_folderOutput + "probes/";
+  m_folderGlobalQuantities = m_folderOutput + "globalQuantities/";
+  m_folderBoundaries = m_folderOutput + "boundaries/";
+  m_folderErrorsAndWarnings = m_folderOutput + "errorsAndWarnings/";
+}
+
+//***********************************************************************
+
 Output::Output(XMLElement* element)
 {
   //Printing precision (digits number)
@@ -136,6 +157,19 @@ Output::Output(XMLElement* element)
 //***********************************************************************
 
 Output::~Output(){}
+
+//***********************************************************************
+
+void Output::copyInputFiles() const
+{
+  try {
+    IO::copyFile(m_input->getMain(), m_simulationName, m_folderSavesInput);
+    IO::copyFile(m_input->getMesh(), m_simulationName, m_folderSavesInput);
+    IO::copyFile(m_input->getCI(), m_simulationName, m_folderSavesInput);
+    IO::copyFile(m_input->getModel(), m_simulationName, m_folderSavesInput);
+  }
+  catch (ErrorInput &) { throw; }
+}
 
 //***********************************************************************
 
@@ -170,6 +204,20 @@ void Output::initializeOutput(std::vector<CellInterface*>* cellInterfacesLvl)
     this->initializeSpecificOutput(cellInterfacesLvl);
   }
   catch (ErrorECOGEN&) { throw; }
+}
+
+//***********************************************************************
+
+void Output::initializeOutputMeshMapping(const Cell& cell)
+{
+  //Initialize reference cell
+  m_cellRef.allocate(m_run->m_addPhys);
+  for (int k = 0; k < m_run->m_numberPhases; k++) { m_cellRef.copyPhase(k, cell.getPhase(k)); }
+  m_cellRef.copyMixture(cell.getMixture());
+  for (int k = 0; k < m_run->m_numberTransports; k++) { m_cellRef.setTransport(cell.getTransport(k).getValue(), k); }
+  
+  //Note that initializeSpecificOutput is not called to avoid to delete the content 
+  //of the collection file of the mapped mesh. 
 }
 
 //***********************************************************************
@@ -265,14 +313,14 @@ void Output::readTree(Mesh* mesh, TypeMeshContainer<Cell*>* cellsLvl, TypeMeshCo
 
           //Update of persistent communications of cells lvl + 1
           parallel.communicationsNumberGhostCells(lvl + 1);
-          parallel.updatePersistentCommunicationsLvlAMR(lvl + 1, mesh->getGeometrie());
+          parallel.updatePersistentCommunicationsLvlAMR(lvl + 1, mesh->getProblemDimension());
         }
 
         //Reconstruction of the arrays of cells and cell interfaces of lvl + 1
         cellsLvl[lvl + 1].clear();
         cellInterfacesLvl[lvl + 1].clear();
         for (unsigned int i = 0; i < cellsLvl[lvl].size(); i++) { cellsLvl[lvl][i]->buildLvlCellsAndLvlInternalCellInterfacesArrays(cellsLvl, cellInterfacesLvl); }
-        for (unsigned int i = 0; i < cellInterfacesLvl[lvl].size(); i++) { cellInterfacesLvl[lvl][i]->constructionTableauCellInterfacesExternesLvl(cellInterfacesLvl); }
+        for (unsigned int i = 0; i < cellInterfacesLvl[lvl].size(); i++) { cellInterfacesLvl[lvl][i]->constructionArrayExternalCellInterfacesLvl(cellInterfacesLvl); }
       }
     }
     nbCellsTotalAMR = 0;
@@ -287,7 +335,7 @@ void Output::readTree(Mesh* mesh, TypeMeshContainer<Cell*>* cellsLvl, TypeMeshCo
 void Output::writeInfos()
 {
   if (m_run->m_iteration > 0) {
-    afficheInfoEcriture();
+    printWritingInfo();
   }
   saveInfos();
   std::cout << "T" << m_run->m_numTest << " | Printing file number: " << m_numFichier << "... ";
@@ -295,7 +343,19 @@ void Output::writeInfos()
 
 //***********************************************************************
 
-void Output::saveInfosMailles() const
+void Output::writeProgress()
+{
+  double progress; 
+  if (!m_run->m_timeControlIterations) progress = m_run->m_physicalTime / m_run->m_finalPhysicalTime * 100.;
+  else {
+    progress = double(m_run->m_iteration) / double(m_run->m_nbIte) * 100.;
+  }
+  std::cout << "T" << m_run->m_numTest << " | Iteration " << m_run->m_iteration << " / Timestep " << m_run->m_dt << " / Progress " << progress << "%" << std::endl;
+}
+
+//***********************************************************************
+
+void Output::saveInfoCells() const
 {
   try {
     std::ofstream fileStream;
@@ -309,50 +369,50 @@ void Output::saveInfosMailles() const
 
 //***********************************************************************
 
-void Output::writeDataset(std::vector<double> jeuDonnees, std::ofstream &fileStream, TypeData typeData)
+void Output::writeDataset(std::vector<double> dataset, std::ofstream &fileStream, TypeData typeData)
 {
   if (m_precision != 0) fileStream.precision(m_precision);
   if (!m_writeBinary) {
-    for (unsigned int k = 0; k < jeuDonnees.size(); k++) { fileStream << jeuDonnees[k] << " "; }
+    for (unsigned int k = 0; k < dataset.size(); k++) { fileStream << dataset[k] << " "; }
   }
   else {
     int donneeInt; float donneeFloat; double donneeDouble; char donneeChar;
     int taille;
     switch (typeData) {
     case DOUBLE:
-      taille = jeuDonnees.size()*sizeof(double); break;
+      taille = dataset.size()*sizeof(double); break;
     case FLOAT:
-      taille = jeuDonnees.size()*sizeof(float); break;
+      taille = dataset.size()*sizeof(float); break;
     case INT:
-      taille = jeuDonnees.size()*sizeof(int); break;
+      taille = dataset.size()*sizeof(int); break;
     case CHAR:
-      taille = jeuDonnees.size()*sizeof(char); break;
+      taille = dataset.size()*sizeof(char); break;
     }
     IO::writeb64(fileStream, taille);
     char* chaineTampon = new char[taille]; int index = 0;
     switch (typeData) {
     case DOUBLE:
-      for (unsigned int k = 0; k < jeuDonnees.size(); k++) {
-        donneeDouble = static_cast<double>(jeuDonnees[k]);
-        IO::ajouteAlaChaine(chaineTampon, index, donneeDouble);
+      for (unsigned int k = 0; k < dataset.size(); k++) {
+        donneeDouble = static_cast<double>(dataset[k]);
+        IO::addToTheString(chaineTampon, index, donneeDouble);
       }
       break;
     case FLOAT:
-      for (unsigned int k = 0; k < jeuDonnees.size(); k++) {
-        donneeFloat = static_cast<float>(jeuDonnees[k]);
-        IO::ajouteAlaChaine(chaineTampon, index, donneeFloat);
+      for (unsigned int k = 0; k < dataset.size(); k++) {
+        donneeFloat = static_cast<float>(dataset[k]);
+        IO::addToTheString(chaineTampon, index, donneeFloat);
       }
       break;
     case INT:
-      for (unsigned int k = 0; k < jeuDonnees.size(); k++) {
-        donneeInt = static_cast<int>(std::round(jeuDonnees[k]));
-        IO::ajouteAlaChaine(chaineTampon, index, donneeInt);
+      for (unsigned int k = 0; k < dataset.size(); k++) {
+        donneeInt = static_cast<int>(std::round(dataset[k]));
+        IO::addToTheString(chaineTampon, index, donneeInt);
       }
       break;
     case CHAR:
-      for (unsigned int k = 0; k < jeuDonnees.size(); k++) {
-        donneeChar = static_cast<char>(jeuDonnees[k]);
-        IO::ajouteAlaChaine(chaineTampon, index, donneeChar);
+      for (unsigned int k = 0; k < dataset.size(); k++) {
+        donneeChar = static_cast<char>(dataset[k]);
+        IO::addToTheString(chaineTampon, index, donneeChar);
       }
       break;
     }
@@ -363,10 +423,10 @@ void Output::writeDataset(std::vector<double> jeuDonnees, std::ofstream &fileStr
 
 //***********************************************************************
 
-void Output::getDataset(std::istringstream &data, std::vector<double>& jeuDonnees)
+void Output::getDataset(std::istringstream &data, std::vector<double>& dataset)
 {
   if (!m_writeBinary) {
-    for (unsigned int k = 0; k < jeuDonnees.size(); k++) { data >> jeuDonnees[k]; }
+    for (unsigned int k = 0; k < dataset.size(); k++) { data >> dataset[k]; }
   }
   else {
     Errors::errorMessage("resuming on binary results file not available");
@@ -374,39 +434,39 @@ void Output::getDataset(std::istringstream &data, std::vector<double>& jeuDonnee
     //int taille;
     //switch (typeData) {
     //case DOUBLE:
-    //  taille = jeuDonnees.size() * sizeof(double); break;
+    //  taille = dataset.size() * sizeof(double); break;
     //case FLOAT:
-    //  taille = jeuDonnees.size() * sizeof(float); break;
+    //  taille = dataset.size() * sizeof(float); break;
     //case INT:
-    //  taille = jeuDonnees.size() * sizeof(int); break;
+    //  taille = dataset.size() * sizeof(int); break;
     //case CHAR:
-    //  taille = jeuDonnees.size() * sizeof(char); break;
+    //  taille = dataset.size() * sizeof(char); break;
     //}
     //IO::writeb64(fileStream, taille);
     //char* chaineTampon = new char[taille]; int index = 0;
     //switch (typeData) {
     //case DOUBLE:
-    //  for (unsigned int k = 0; k < jeuDonnees.size(); k++) {
-    //    donneeDouble = static_cast<double>(jeuDonnees[k]);
-    //    IO::ajouteAlaChaine(chaineTampon, index, donneeDouble);
+    //  for (unsigned int k = 0; k < dataset.size(); k++) {
+    //    donneeDouble = static_cast<double>(dataset[k]);
+    //    IO::addToTheString(chaineTampon, index, donneeDouble);
     //  }
     //  break;
     //case FLOAT:
-    //  for (unsigned int k = 0; k < jeuDonnees.size(); k++) {
-    //    donneeFloat = static_cast<float>(jeuDonnees[k]);
-    //    IO::ajouteAlaChaine(chaineTampon, index, donneeFloat);
+    //  for (unsigned int k = 0; k < dataset.size(); k++) {
+    //    donneeFloat = static_cast<float>(dataset[k]);
+    //    IO::addToTheString(chaineTampon, index, donneeFloat);
     //  }
     //  break;
     //case INT:
-    //  for (unsigned int k = 0; k < jeuDonnees.size(); k++) {
-    //    donneeInt = static_cast<int>(jeuDonnees[k]);
-    //    IO::ajouteAlaChaine(chaineTampon, index, donneeInt);
+    //  for (unsigned int k = 0; k < dataset.size(); k++) {
+    //    donneeInt = static_cast<int>(dataset[k]);
+    //    IO::addToTheString(chaineTampon, index, donneeInt);
     //  }
     //  break;
     //case CHAR:
-    //  for (unsigned int k = 0; k < jeuDonnees.size(); k++) {
-    //    donneeChar = static_cast<char>(jeuDonnees[k]);
-    //    IO::ajouteAlaChaine(chaineTampon, index, donneeChar);
+    //  for (unsigned int k = 0; k < dataset.size(); k++) {
+    //    donneeChar = static_cast<char>(dataset[k]);
+    //    IO::addToTheString(chaineTampon, index, donneeChar);
     //  }
     //  break;
     //}
@@ -417,7 +477,7 @@ void Output::getDataset(std::istringstream &data, std::vector<double>& jeuDonnee
 
 //***********************************************************************
 
-void Output::afficheInfoEcriture() const
+void Output::printWritingInfo() const
 {
   std::cout << "T" << m_run->m_numTest << " | -------------------------------------------" << std::endl;
   std::cout << "T" << m_run->m_numTest << " | RESULTS FILE NUMBER: " << m_numFichier << ", ITERATION " << m_run->m_iteration << std::endl;
@@ -506,6 +566,21 @@ void Output::readInfos()
   clock_t AMRTime(secondAMRTime * CLOCKS_PER_SEC);
   clock_t comTime(secondComTime * CLOCKS_PER_SEC);
   m_run->m_stat.setCompTime(compTime, AMRTime, comTime);
+}
+
+//***********************************************************************
+
+int Output::readNbCpu()
+{
+  std::fstream fileStream;
+  std::string nbCpusRestarted("0");
+  try {
+    fileStream.open((m_folderOutput + m_infoCalcul).c_str(), std::ios::in); //Opening in reading mode
+    //Get number of CPU
+    std::getline(fileStream, nbCpusRestarted);
+  }
+  catch (ErrorECOGEN &) { fileStream.close(); throw; }
+  return std::stoi(nbCpusRestarted);
 }
 
 //***********************************************************************

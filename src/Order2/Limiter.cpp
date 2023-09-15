@@ -32,10 +32,33 @@
 
 //***********************************************************************
 
-Limiter::Limiter(){}
+Limiter::Limiter() : m_limType(LimiterType::NONE) {}
 
 //***********************************************************************
 
 Limiter::~Limiter(){}
+
+//***********************************************************************
+
+double Limiter::computeGradientLimiter(double val, double min, double max, double slope) const
+{
+  double eps(1.e-6);
+  double phi(1.);
+
+  if (slope > eps * val) {
+    phi = (max - val) * 0.5 / slope;
+  }
+  else if (slope < - eps * val) {
+    phi = (min - val) * 0.5 / slope;
+  }
+
+  double buff1(0.), buff2(0.);
+  buff1 = std::min(double(m_limType) * phi, 1.);
+  buff2 = std::min(phi, double(m_limType));
+  double theta(0.);
+  theta = std::max(theta, buff1);
+  theta = std::max(theta, buff2);
+  return theta;
+}
 
 //***********************************************************************

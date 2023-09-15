@@ -169,17 +169,6 @@ void FluxPTUEq::setToZero()
 
 //***********************************************************************
 
-void FluxPTUEq::setToZeroBufferFlux()
-{
-  for (int k = 0; k<numberPhases; k++) {
-    static_cast<FluxPTUEq*> (fluxBuff)->m_mass[k] = 0.;
-  }
-  static_cast<FluxPTUEq*> (fluxBuff)->m_momentum = 0.;
-  static_cast<FluxPTUEq*> (fluxBuff)->m_energMixture = 0.;
-}
-
-//***********************************************************************
-
 void FluxPTUEq::prepSourceTermsHeating(const double& q)
 {
   m_energMixture = q;

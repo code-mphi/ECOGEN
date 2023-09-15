@@ -55,7 +55,12 @@ class PhasePUEq : public PhaseUEq
 
     //Specific methods for data printing
     //----------------------------------
-    virtual int getNumberScalars() const { return numberScalarsPhase; };
+    virtual double returnScalar(const int& numVar) const;
+    virtual std::string returnNameScalar(const int& numVar) const;
+
+    //Specific method for reading from file
+    //-------------------------------------
+    virtual void setScalar(const int& numVar, const double& value);
 };
 
 #endif // PHASEPUEQ_H

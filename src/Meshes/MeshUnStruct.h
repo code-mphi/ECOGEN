@@ -33,6 +33,8 @@
 
 #include "Mesh.h"
 #include "MeshUnStruct/MUSGmsh/HeaderElements.h"
+#include "../Order2/CellInterfaceO2NS.h"
+#include "../Order2/CellO2NS.h"
 #include "../InputOutput/IO.h"
 
 class MeshUnStruct : public Mesh
@@ -44,7 +46,7 @@ public:
   static std::string readMeshFileExtension(const std::string& meshFile);
 
   // --- Mesh virtual member functions ---
-  virtual void attributLimites(std::vector<BoundCond*>& boundCond);
+  virtual void assignLimits(std::vector<BoundCond*>& boundCond);
   virtual int initializeGeometrie(TypeMeshContainer<Cell*>& cells, TypeMeshContainer<Cell*>& cellsGhost, TypeMeshContainer<CellInterface*>& cellInterfaces,
     const int& /*restartSimulation*/, bool pretraitementParallele = true, std::string ordreCalcul = "FIRSTORDER");
   virtual std::string whoAmI() const { return 0; };
@@ -62,18 +64,21 @@ public:
   virtual void initGeometryParallel(TypeMeshContainer<Cell*>& cells, TypeMeshContainer<Cell*>& cellsGhost, TypeMeshContainer<CellInterface*>& cellInterfaces, std::string computeOrder = "FIRSTORDER") = 0;
   //! \brief     split original mesh file for computation on several CPUs
   virtual void preProcessMeshFileForParallel() = 0;
+  virtual void initCpuMeshSequential(TypeMeshContainer<Cell*>& cells, std::string &computeOrder) = 0;
+  virtual void initCpuMeshParallel(TypeMeshContainer<Cell*>& cells, std::string &computeOrder, int cpu) = 0;
 
   // Printing / Reading
   //! \brief    write monocpu mesh information
   void writeMeshInfoData() const;
-  virtual void ecritHeaderPiece(std::ofstream& fileStream, TypeMeshContainer<Cell*>* /*cellsLvl*/) const;
-  virtual void recupereNoeuds(std::vector<double>& jeuDonnees, std::vector<Cell*>* /*cellsLvl*/) const;
-  virtual void recupereConnectivite(std::vector<double>& jeuDonnees, std::vector<Cell*>* /*cellsLvl*/) const;
-  virtual void recupereOffsets(std::vector<double>& jeuDonnees, std::vector<Cell*>* /*cellsLvl*/) const;
-  virtual void recupereTypeCell(std::vector<double>& jeuDonnees, std::vector<Cell*>* /*cellsLvl*/) const;
-  virtual void recupereDonnees(TypeMeshContainer<Cell*>* cellsLvl, std::vector<double>& jeuDonnees, const int var, int phase) const;
-  virtual void setDataSet(std::vector<double>& jeuDonnees, TypeMeshContainer<Cell*>* cellsLvl, const int var, int phase) const;
-  virtual void extractAbsVelocityMRF(TypeMeshContainer<Cell*>* cellsLvl, std::vector<double>& jeuDonnees, Source* sourceMRF) const;
+  virtual void writeHeaderPiece(std::ofstream& fileStream, TypeMeshContainer<Cell*>* /*cellsLvl*/) const;
+  virtual void getNodes(std::vector<double>& dataset, std::vector<Cell*>* /*cellsLvl*/) const;
+  virtual void getConnectivity(std::vector<double>& dataset, std::vector<Cell*>* /*cellsLvl*/) const;
+  virtual void getOffsets(std::vector<double>& dataset, std::vector<Cell*>* /*cellsLvl*/) const;
+  virtual void getTypeCell(std::vector<double>& dataset, std::vector<Cell*>* /*cellsLvl*/) const;
+  virtual void getData(TypeMeshContainer<Cell*>* cellsLvl, std::vector<double>& dataset, const int var, int phase) const;
+  virtual void setDataSet(std::vector<double>& dataset, TypeMeshContainer<Cell*>* cellsLvl, const int var, int phase) const;
+  virtual void extractAbsVelocityMRF(TypeMeshContainer<Cell*>* cellsLvl, std::vector<double>& dataset, Source* sourceMRF) const;
+  virtual void extractReferenceLength(std::vector<Cell*>* cellsLvl, std::vector<double>& dataset) const;
 
 protected:
   std::string m_meshFile;  //!< Name of the mesh file read

@@ -1,0 +1,13 @@
+<?xml version = "1.0" encoding = "UTF-8" standalone = "yes"?>
+<computationParam>
+	<run>euler2Ddisc</run>
+	<outputMode format="XML" binary="false"/>
+	<timeControlMode iterations="false">
+		<iterations number="10" iterFreq="1"/>
+		<physicalTime totalTime="0.15" timeFreq="0.01"/>
+	</timeControlMode>
+	<computationControl CFL="0.8"/>
+	<gradient>
+		<method>green-gauss</method>
+	</gradient>
+</computationParam>

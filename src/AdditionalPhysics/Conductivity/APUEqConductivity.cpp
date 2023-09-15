@@ -75,14 +75,14 @@ void APUEqConductivity::solveFluxAddPhys(CellInterface* cellInterface)
 
   for (int numPhase = 0; numPhase < numberPhases; numPhase++) {
     // Copy and projection on orientation axis attached to the edge of gradients of left and right cells
-    m_gradTkLeft = cellInterface->getCellGauche()->getQPA(m_numQPA)->getGrad(numPhase);
-    m_gradTkRight = cellInterface->getCellDroite()->getQPA(m_numQPA)->getGrad(numPhase);
+    m_gradTkLeft = cellInterface->getCellLeft()->getQPA(m_numQPA)->getGrad(numPhase);
+    m_gradTkRight = cellInterface->getCellRight()->getQPA(m_numQPA)->getGrad(numPhase);
     m_gradTkLeft.localProjection(m_normal, m_tangent, m_binormal);
     m_gradTkRight.localProjection(m_normal, m_tangent, m_binormal);
 
     // Extraction of alphak
-    double alphakLeft = cellInterface->getCellGauche()->getPhase(numPhase)->getAlpha();
-    double alphakRight = cellInterface->getCellDroite()->getPhase(numPhase)->getAlpha();
+    double alphakLeft = cellInterface->getCellLeft()->getPhase(numPhase)->getAlpha();
+    double alphakRight = cellInterface->getCellRight()->getPhase(numPhase)->getAlpha();
 
     this->solveFluxConductivityInner(m_gradTkLeft, m_gradTkRight, alphakLeft, alphakRight, numPhase);
   }
@@ -112,17 +112,17 @@ void APUEqConductivity::solveFluxAddPhysBoundary(CellInterface* cellInterface)
 
   for (int numPhase = 0; numPhase < numberPhases; numPhase++) {
     // Copy and projection on orientation axes attached to the edge of gradients of left and right cells
-    m_gradTkLeft = cellInterface->getCellGauche()->getQPA(m_numQPA)->getGrad(numPhase);
+    m_gradTkLeft = cellInterface->getCellLeft()->getQPA(m_numQPA)->getGrad(numPhase);
     m_gradTkLeft.localProjection(m_normal, m_tangent, m_binormal);
 
     // Extraction of alphak
-    double alphakLeft = cellInterface->getCellGauche()->getPhase(numPhase)->getAlpha();
+    double alphakLeft = cellInterface->getCellLeft()->getPhase(numPhase)->getAlpha();
 
     int typeCellInterface = cellInterface->whoAmI();
     if (typeCellInterface == NONREFLECTING) { this->solveFluxConductivityNonReflecting(m_gradTkLeft, alphakLeft, numPhase); }
     else if (typeCellInterface == WALL || typeCellInterface == SYMMETRY) { this->solveFluxConductivityWall(); }
-    else if (typeCellInterface == OUTFLOW) { this->solveFluxConductivityOutflow(); }
-    else if (typeCellInterface == INJ) { this->solveFluxConductivityInflow(); }
+    else if (typeCellInterface == OUTLETPRESSURE) { this->solveFluxConductivityOutletPressure(); }
+    else if (typeCellInterface == INLETINJSTAGSTATE) { this->solveFluxConductivityInletInjStagState(); }
     else { this->solveFluxConductivityOther(); }
     // etc... Boundaries not taken into account yet for conductivity, pay attention
   }
@@ -168,7 +168,7 @@ void APUEqConductivity::solveFluxConductivityWall() const
 
 //***********************************************************************
 
-void APUEqConductivity::solveFluxConductivityOutflow() const
+void APUEqConductivity::solveFluxConductivityOutletPressure() const
 {
   //Not manage at the moment, just an example
 
@@ -181,7 +181,7 @@ void APUEqConductivity::solveFluxConductivityOutflow() const
 
 //***********************************************************************
 
-void APUEqConductivity::solveFluxConductivityInflow() const
+void APUEqConductivity::solveFluxConductivityInletInjStagState() const
 {
   //Not manage at the moment, just an example
 
@@ -211,7 +211,7 @@ void APUEqConductivity::solveFluxConductivityOther() const
 void APUEqConductivity::communicationsAddPhys(const int& dim, const int& lvl)
 {
   for (int k = 0; k < numberPhases; k++) {
-		parallel.communicationsVector(QPA, dim, lvl, m_numQPA, k);
+		parallel.communicationsVector(Variable::QPA, dim, lvl, m_numQPA, k);
 	}
 }
 

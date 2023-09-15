@@ -59,19 +59,19 @@ void MUSGmshV4::initGeometryMonoCPU(TypeMeshContainer<Cell*>& cells, TypeMeshCon
 		{
 			m_numberCellsCalcul = m_numberElements1D;
 			m_numberBoundFaces = m_numberElements0D;
-			m_geometrie = 1;
+			m_problemDimension = 1;
 		}
 		else if (m_numberElements3D == 0) // 2D case
 		{
 			m_numberCellsCalcul = m_numberElements2D;
 			m_numberBoundFaces = m_numberElements1D;
-			m_geometrie = 2;
+			m_problemDimension = 2;
 		}
 		else // 3D case
 		{
 			m_numberCellsCalcul = m_numberElements3D;
 			m_numberBoundFaces = m_numberElements2D;
-			m_geometrie = 3;
+			m_problemDimension = 3;
 		}
 		m_numberCellsTotal = m_numberCellsCalcul;
 
@@ -96,7 +96,7 @@ void MUSGmshV4::initGeometryMonoCPU(TypeMeshContainer<Cell*>& cells, TypeMeshCon
 		for (int i = 0; i < m_numberCellsCalcul; i++)
 		{
 			if (computeOrder == "FIRSTORDER") { cells.push_back(new Cell); }
-			else { cells.push_back(new CellO2); }
+			else { cells.push_back(new CellO2NS); }
 			cells[i]->setElement(m_elements[i + m_numberBoundFaces], i);
 			m_numberInnerFaces += m_elements[i + m_numberBoundFaces]->getNumberFaces();
 		}
@@ -168,7 +168,7 @@ void MUSGmshV4::initGeometryMonoCPU(TypeMeshContainer<Cell*>& cells, TypeMeshCon
 		// Link Geometry/cellInterfaces of compute
 		std::cout << "  3/Linking Geometries -> Physics ..." << std::endl;
 		tTemp = clock();
-		int iMailleG, iMailleD;
+		int iCellL, iCellR;
 		for (int i = 0; i < m_numberFacesTotal; i++)
 		{
 			if (m_faces[i]->getEstLimite()) // Physical boundary faces
@@ -177,21 +177,21 @@ void MUSGmshV4::initGeometryMonoCPU(TypeMeshContainer<Cell*>& cells, TypeMeshCon
 				if (appPhys >= static_cast<int>(m_bound.size()) || appPhys < 0) { Errors::errorMessage("Number of boundary conditions not suited"); }
 				m_bound[appPhys]->createBoundary(cellInterfaces);
 				cellInterfaces[i]->setFace(m_faces[i]);
-				iMailleG = m_faces[i]->getElementGauche()->getIndex() - m_numberBoundFaces;
-				iMailleD = iMailleG;
+				iCellL = m_faces[i]->getElementGauche()->getIndex() - m_numberBoundFaces;
+				iCellR = iCellL;
 			}
 			// Inner faces of domain
 			else
 			{
 				if (computeOrder == "FIRSTORDER") { cellInterfaces.push_back(new CellInterface); }
-				else { cellInterfaces.push_back(new CellInterfaceO2); }
+				else { cellInterfaces.push_back(new CellInterfaceO2NS); }
 				cellInterfaces[i]->setFace(m_faces[i]);
-				iMailleG = m_faces[i]->getElementGauche()->getIndex() - m_numberBoundFaces;
-				iMailleD = m_faces[i]->getElementDroite()->getIndex() - m_numberBoundFaces;
+				iCellL = m_faces[i]->getElementGauche()->getIndex() - m_numberBoundFaces;
+				iCellR = m_faces[i]->getElementDroite()->getIndex() - m_numberBoundFaces;
 			}
-			cellInterfaces[i]->initialize(cells[iMailleG], cells[iMailleD]);
-			cells[iMailleG]->addCellInterface(cellInterfaces[i]);
-			cells[iMailleD]->addCellInterface(cellInterfaces[i]);
+			cellInterfaces[i]->initialize(cells[iCellL], cells[iCellR]);
+			cells[iCellL]->addCellInterface(cellInterfaces[i]);
+			cells[iCellR]->addCellInterface(cellInterfaces[i]);
 
 		} // End face
 		tTemp = clock() - tTemp; t1 = static_cast<float>(tTemp) / CLOCKS_PER_SEC;
@@ -204,6 +204,7 @@ void MUSGmshV4::initGeometryMonoCPU(TypeMeshContainer<Cell*>& cells, TypeMeshCon
 
 //***********************************************************************
 
+//JC//COMMENT The code below is not working and require more investigation
 //void MUSGmshV4::preProcessMeshFileForParallel()
 //{
 //	ElementNS** elementsGlobal;
@@ -662,9 +663,9 @@ void MUSGmshV4::readElement(const Coord* nodesTable, std::ifstream& meshFile, El
 	// 3) Building the element and its properties
 	// ------------------------------------------
 	int currentNode(0);
-	int* numNode = new int[(*element)->getNumberNoeuds()];
-	Coord* node = new Coord[(*element)->getNumberNoeuds()];
-	for (int i = 0; i < (*element)->getNumberNoeuds(); i++)
+	int* numNode = new int[(*element)->getNumberNodes()];
+	Coord* node = new Coord[(*element)->getNumberNodes()];
+	for (int i = 0; i < (*element)->getNumberNodes(); i++)
 	{
 		meshFile >> currentNode;
 		numNode[i] = currentNode - 1; // Offset because array start at 0
@@ -676,3 +677,5 @@ void MUSGmshV4::readElement(const Coord* nodesTable, std::ifstream& meshFile, El
 	delete[] node;
 	delete[] numNode;
 }
+
+//***********************************************************************

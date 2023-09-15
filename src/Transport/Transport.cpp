@@ -67,7 +67,14 @@ void Transport::solveRiemannWall()
 
 //***********************************************************************
 
-void Transport::solveRiemannInflow(double transportLeft, double sM, double valueTransport)
+void Transport::solveRiemannPiston(double transportLeft, double uPiston)
+{
+	m_value = transportLeft * uPiston;
+}
+
+//***********************************************************************
+
+void Transport::solveRiemannInletInjStagState(double transportLeft, double sM, double valueTransport)
 {
   if (sM > 0.) { m_value = transportLeft*sM; }
   else { m_value = valueTransport*sM; }
@@ -75,7 +82,7 @@ void Transport::solveRiemannInflow(double transportLeft, double sM, double value
 
 //***********************************************************************
 
-void Transport::solveRiemannTank(double transportLeft, double sM, double valueTransport)
+void Transport::solveRiemannInletInjTemp(double transportLeft, double sM, double valueTransport)
 {
   if (sM > 0.) { m_value = transportLeft*sM; }
   else { m_value = valueTransport*sM; }
@@ -83,7 +90,15 @@ void Transport::solveRiemannTank(double transportLeft, double sM, double valueTr
 
 //***********************************************************************
 
-void Transport::solveRiemannOutflow(double transportLeft, double sM, double valueTransport)
+void Transport::solveRiemannInletTank(double transportLeft, double sM, double valueTransport)
+{
+  if (sM > 0.) { m_value = transportLeft*sM; }
+  else { m_value = valueTransport*sM; }
+}
+
+//***********************************************************************
+
+void Transport::solveRiemannOutletPressure(double transportLeft, double sM, double valueTransport)
 {
 	if (sM > 0.) { m_value = transportLeft*sM; }
   else { m_value = valueTransport*sM; }

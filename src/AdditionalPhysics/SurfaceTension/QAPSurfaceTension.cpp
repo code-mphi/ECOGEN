@@ -37,7 +37,7 @@ QAPSurfaceTension::QAPSurfaceTension(AddPhys* addPhys) : QuantitiesAddPhys(addPh
   m_gradC[0] = 0.;
   variableNameSurfTens.resize(1);
   numPhaseSurfTens.resize(1);
-  variableNameSurfTens[0] = transport;
+  variableNameSurfTens[0] = Variable::transport;
   numPhaseSurfTens[0] = m_addPhys->getNumTransportAssociated();
 }
 
@@ -49,7 +49,7 @@ QAPSurfaceTension::~QAPSurfaceTension(){}
 
 void QAPSurfaceTension::computeQuantities(Cell* cell)
 {
-  cell->computeGradient(m_gradC, variableNameSurfTens, numPhaseSurfTens);
+  cell->computeGradients(m_gradC, variableNameSurfTens, numPhaseSurfTens);
 }
 
 //***********************************************************************

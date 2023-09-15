@@ -1,0 +1,34 @@
+<?xml version = "1.0" encoding = "UTF-8" standalone = "yes"?>
+<CI>
+	<!-- LIST OF GEOMETRICAL DOMAINS  -->
+	<physicalDomains>	
+		<domain name="base" state="init" type="entireDomain" physicalEntity="10"/>
+	</physicalDomains>	
+
+	<!-- LIST OF BOUNDARY CONDITIONS -->
+	<boundaryConditions>
+    
+		<boundCond name="inlet" type="inletInjStagState" number="1">
+        <dataInletInj m0="7000."/>
+		    <dataFluid EOS="SG_water.xml" density="1.e3" pressure="1.e5"/>
+		</boundCond>
+		
+    <boundCond name="outlet" type="outletPressure" number="2">
+			<dataOutletPressure p0="1.e5"/>
+		</boundCond>	
+
+    <!-- No flux used here boundary already taken into account with smooth 1D cross section flux -->
+    <boundCond name="wall" type="nullFlux" number="3"/>
+    
+	</boundaryConditions>
+	
+	<!--  LIST OF STATES  -->
+	<state name="init">
+		<material type="fluid" EOS="SG_water.xml">
+			<dataFluid density="1.e3" pressure="1.e5">
+				<velocity x="0." y="0." z="0."/>
+			</dataFluid>
+		</material>
+	</state>
+
+</CI>

@@ -47,7 +47,7 @@ void FaceCartesian::setSurface(const double& surface)
 
 //***********************************************************************
 
-void FaceCartesian::initializeAutres(const double& surface, const Coord& normal, const Coord& tangent, const Coord& binormal)
+void FaceCartesian::initializeOthers(const double& surface, const Coord& normal, const Coord& tangent, const Coord& binormal)
 {
   m_surface = surface;
   m_normal = normal;

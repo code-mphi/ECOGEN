@@ -1,0 +1,11 @@
+<?xml version='1.0' encoding='UTF-8' standalone='yes'?>
+<model>
+  <flowModel name="PressureVelocityEq" numberPhases="2" alphaNull="false"/>
+  <EOS name="SG_water.xml"/>
+  <EOS name="SG_water.xml"/>
+
+  <sourceTerms order="EULER" type="MRF" physicalEntity="11">
+    <omega x="0." y="0." z="-500."/>
+    <riemannCoupling state="true"/>
+  </sourceTerms>
+</model>

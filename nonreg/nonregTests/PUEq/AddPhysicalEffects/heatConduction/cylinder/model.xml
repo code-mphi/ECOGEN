@@ -1,0 +1,7 @@
+<?xml version = "1.0" encoding = "UTF-8" standalone = "yes"?>
+<model>
+	<flowModel name="PressureVelocityEq" numberPhases="2" alphaNull="false"/>
+	<EOS name="IG_air.xml"/>
+	<EOS name="SG_water.xml"/>
+	<additionalPhysic type="conductivity"/>
+</model>

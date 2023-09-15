@@ -32,6 +32,7 @@
 #define LIMITER_H
 
 #include "../Errors.h"
+#include "../Tools.h"
 
 class Limiter
 {
@@ -42,6 +43,12 @@ class Limiter
     virtual double limiteSlope(const double& /*slope1*/, const double& /*slope2*/) { Errors::errorMessage("Unknown limiter"); return 0.; };
     virtual bool AmITHINC() { return false; }
 
+    virtual double computeGradientLimiter(double val, double min, double max, double slope) const;
+
+    virtual LimiterType getType() { return m_limType; }
+
+  protected:
+    LimiterType m_limType; //!< Type of second-order limiter (NS only)
 };
 
 #endif // LIMITER_H

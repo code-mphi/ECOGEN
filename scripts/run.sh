@@ -45,6 +45,23 @@ touch $mainOutput
 rm -f $reportFile
 touch $reportFile
 
+#Set Gmsh options according to its version
+#-----------------------------------------
+#By default Gmsh version >4 produces mesh file
+#not compatible with ECOGEN. Specific options are set 
+# to make the mesh file compliant. 
+gmshOptions=""
+gmsh --version &> "gmsh.txt"
+if [ $? == 0 ] 
+then
+  gmshVersion=$(cat "gmsh.txt" | cut -d"." -f1)
+  if [ "$gmshVersion" -ge "4" ]
+  then
+    gmshOptions="-part_ghosts -format msh22"
+  fi
+fi
+rm "gmsh.txt"
+
 #Looping on test cases
 #---------------------
 testNum=0
@@ -57,11 +74,12 @@ do
 
 	#Running gmsh if necessary
 	#*************************
-	meshType=$(sed -n 's/<type structure="//p' ${testsList[$k]}meshV5.xml | sed -n 's/"\/>//p' | sed '{s/\t//g};{s/ //g}')
-	if [ $meshType == "unStructured" ]
+	meshType=$(sed -n 's/<type structure="//p' ${testsList[$k]}mesh.xml | sed -n 's/"\/>//p' | tr -d '[:space:]')
+	meshType=$(echo "$meshType" | tr '[:upper:]' '[:lower:]') # Convert to lowercase
+	if [ $meshType == "unstructured" ]
 	then
-		geoFile=$(sed '{s/\t//g};{s/ //g}' ${testsList[$k]}meshV5.xml | sed -n 's/^<filename="//p' | sed 's/\".*//' | sed 's/msh/geo/')
-		gmsh -3 -part ${ncpu[$k]} $geoFile >> $mainOutput 2>&1
+		geoFile=$(sed 's/\t//g' ${testsList[$k]}mesh.xml | sed 's/ //g' | sed -n 's/^<filename="//p' | sed 's/\".*//' | sed 's/msh/geo/')
+		eval gmsh -3 -part ${ncpu[$k]} $geoFile $gmshOptions >> $mainOutput 2>&1
 		if [ $? != 0 ]
 		then
 			status="failed: mesh generation failed"

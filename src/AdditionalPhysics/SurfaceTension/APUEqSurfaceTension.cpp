@@ -109,14 +109,14 @@ void APUEqSurfaceTension::solveFluxAddPhys(CellInterface* cellInterface)
   m_binormal = cellInterface->getFace()->getBinormal();
 
   // Copy and projection on orientation axes attached to the edge of velocities of left and right cells
-  m_velocityLeft = cellInterface->getCellGauche()->getMixture()->getVelocity();
-  m_velocityRight = cellInterface->getCellDroite()->getMixture()->getVelocity();
+  m_velocityLeft = cellInterface->getCellLeft()->getMixture()->getVelocity();
+  m_velocityRight = cellInterface->getCellRight()->getMixture()->getVelocity();
   m_velocityLeft.localProjection(m_normal, m_tangent, m_binormal);
   m_velocityRight.localProjection(m_normal, m_tangent, m_binormal);
 
   // Copy and projection on orientation axes attached to the edge of gradients of left and right cells
-  m_gradCLeft = cellInterface->getCellGauche()->getQPA(m_numQPAGradC)->getGrad();
-  m_gradCRight = cellInterface->getCellDroite()->getQPA(m_numQPAGradC)->getGrad();
+  m_gradCLeft = cellInterface->getCellLeft()->getQPA(m_numQPAGradC)->getGrad();
+  m_gradCRight = cellInterface->getCellRight()->getQPA(m_numQPAGradC)->getGrad();
   m_gradCLeft.localProjection(m_normal, m_tangent, m_binormal);
   m_gradCRight.localProjection(m_normal, m_tangent, m_binormal);
 
@@ -140,11 +140,11 @@ void APUEqSurfaceTension::solveFluxAddPhysBoundary(CellInterface* cellInterface)
   m_binormal = cellInterface->getFace()->getBinormal();
 
   // Copy and projection on orientation axes attached to the edge of velocities of left and right cells
-  m_velocityLeft = cellInterface->getCellGauche()->getMixture()->getVelocity();
+  m_velocityLeft = cellInterface->getCellLeft()->getMixture()->getVelocity();
   m_velocityLeft.localProjection(m_normal, m_tangent, m_binormal);
   
   // Copy and projection on orientation axes attached to the edge of gradients of left and right cells
-  m_gradCLeft = cellInterface->getCellGauche()->getQPA(m_numQPAGradC)->getGrad();
+  m_gradCLeft = cellInterface->getCellLeft()->getQPA(m_numQPAGradC)->getGrad();
   m_gradCLeft.localProjection(m_normal, m_tangent, m_binormal);
 
   // Reset of fluxBuffUEq (allow to then do the sum of surface-tension effects for the different phases combinations)
@@ -153,8 +153,8 @@ void APUEqSurfaceTension::solveFluxAddPhysBoundary(CellInterface* cellInterface)
   int typeCellInterface = cellInterface->whoAmI();
   if (typeCellInterface == NONREFLECTING) { this->solveFluxSurfaceTensionNonReflecting(m_velocityLeft, m_gradCLeft); }
   else if (typeCellInterface == WALL || typeCellInterface == SYMMETRY) { this->solveFluxSurfaceTensionWall(m_gradCLeft); }
-  else if (typeCellInterface == OUTFLOW) { this->solveFluxSurfaceTensionOutflow(); }
-  else if (typeCellInterface == INJ) { this->solveFluxSurfaceTensionInflow(); }
+  else if (typeCellInterface == OUTLETPRESSURE) { this->solveFluxSurfaceTensionOutletPressure(); }
+  else if (typeCellInterface == INLETINJSTAGSTATE) { this->solveFluxSurfaceTensionInletInjStagState(); }
   else { this->solveFluxSurfaceTensionOther(); } //Else
   // etc... Boundaries not taken into account yet for surface tension, pay attention
 
@@ -230,7 +230,7 @@ void APUEqSurfaceTension::solveFluxSurfaceTensionWall(const Coord& gradCLeft) co
 
 //***********************************************************************
 
-void APUEqSurfaceTension::solveFluxSurfaceTensionOutflow() const
+void APUEqSurfaceTension::solveFluxSurfaceTensionOutletPressure() const
 {
   //Not manage at the moment, just an example
 
@@ -243,7 +243,7 @@ void APUEqSurfaceTension::solveFluxSurfaceTensionOutflow() const
 
 //***********************************************************************
 
-void APUEqSurfaceTension::solveFluxSurfaceTensionInflow() const
+void APUEqSurfaceTension::solveFluxSurfaceTensionInletInjStagState() const
 {
   //Not manage at the moment, just an example
 
@@ -341,7 +341,7 @@ void APUEqSurfaceTension::reinitializeColorFunction(std::vector<Cell*>* cellsLvl
 
 void APUEqSurfaceTension::communicationsAddPhys(const int& dim, const int& lvl)
 {
-	parallel.communicationsVector(QPA, dim, lvl, m_numQPAGradC);
+	parallel.communicationsVector(Variable::QPA, dim, lvl, m_numQPAGradC);
 }
 
 //***********************************************************************

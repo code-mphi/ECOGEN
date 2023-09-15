@@ -64,6 +64,7 @@ public:
   virtual void fillIn(Cell* cell) const;
 
   const std::string& getName() { return m_name; };
+  const int& getPhysicalEntity() { return m_physicalEntity; };
 
 protected:
   std::string m_name;           //!< Geometrical domain name

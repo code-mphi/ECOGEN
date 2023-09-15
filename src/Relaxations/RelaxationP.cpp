@@ -43,7 +43,7 @@ RelaxationP::~RelaxationP(){}
 void RelaxationP::NewtonRaphson(double& pStar, int& iteration)
 {
   //Iterative process for relaxed pressure determination
-  double f(0.), df(1.), drho(0.), dalpha(0.);
+  double f(0.), df(1.), drhodp(0.), dalpha(0.);
   do {
     iteration++;
     pStar -= f / df;
@@ -51,22 +51,44 @@ void RelaxationP::NewtonRaphson(double& pStar, int& iteration)
     for (int k = 0; k < numberPhases; k++) { TB->eos[k]->verifyAndModifyPressure(pStar); }
     f = -1.; df = 0.;
     for (int k = 0; k < numberPhases; k++) {
-      TB->rhokS[k] = TB->eos[k]->computeDensityPfinal(TB->pk[k], TB->rhok[k], pStar, &drho);
+      TB->rhokS[k] = TB->eos[k]->computeDensityPfinal(TB->pk[k], TB->rhok[k], pStar, &drhodp);
       TB->akS[k] = TB->ak[k] * TB->rhok[k] / TB->rhokS[k];
-      dalpha = TB->ak[k] * TB->rhok[k] * drho / (TB->rhokS[k] * TB->rhokS[k]);
+      dalpha = TB->ak[k] * TB->rhok[k] * drhodp / (TB->rhokS[k] * TB->rhokS[k]);
       f += TB->akS[k];
       df -= dalpha;
     }
   } while (std::fabs(f)>1e-10 && iteration < 100);
 
-  if (iteration == 100) {
-    // std::cout<<"alpha0 "<<TB->ak[0]<<" "<<TB->akS[0]<<std::endl;
-    // std::cout<<"alpha1 "<<TB->ak[1]<<" "<<TB->akS[1]<<std::endl;
-    // std::cout<<"sumAlpha "<<TB->ak[0]+TB->ak[1]<<" "<<TB->akS[0]+TB->akS[1]<<std::endl;
-    // std::cout << "pStar=" << pStar << " f=" << f << " df=" << df << std::endl;
+  if (iteration == 100 && std::fabs(pStar) > 1.e-7) {
     std::stringstream warningMessage;
     warningMessage << "Not converged in RelaxationP::NewtonRaphson.";
     warningMessage << "Convergence error = " << std::fabs(f);
     warnings.push_back(Errors(warningMessage.str().c_str(), __FILE__, __LINE__));
   }
 }
+
+//***********************************************************************
+
+double RelaxationP::computeInterfacePressure(Cell* cell, Prim type)
+{
+  //pI = sum_k (p_k sum_j Z_j) / (N - 1) sum_k (Z_k) ; where j is different from k and where p_k also considers solid terms
+  double pI(0.), sumZk(0.), sumZj(0.);
+  for (int k = 0; k < numberPhases; k++) {
+    TB->zk[k] = cell->getPhase(k, type)->getDensity() * cell->getPhase(k, type)->getSoundSpeed();
+  }
+  for (int k = 0; k < numberPhases; k++) {
+    if (!TB->alphaNull[k]) {
+      sumZk += TB->zk[k];
+      sumZj = 0.;
+      for (int j = 0; j < numberPhases; j++) {
+        if (!TB->alphaNull[j]) {
+          if (j != k) sumZj += TB->zk[j];
+        }
+      }
+      pI += sumZj * (cell->getPhase(k, type)->getPressure() - TB->compactionPk[k]);
+    }
+  }
+  return pI /= sumZk * (numberPhases - 1);
+}
+
+//***********************************************************************

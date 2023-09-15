@@ -34,44 +34,44 @@ const int FaceQuadrangle::NUMBERNODES = 4;
 
 //***********************************************************************
 
-FaceQuadrangle::FaceQuadrangle(const int& numNoeud1, const int& numNoeud2, const int& numNoeud3, const int& numNoeud4, int tri) :
+FaceQuadrangle::FaceQuadrangle(const int& numNode1, const int& numNode2, const int& numNode3, const int& numNode4, int tri) :
 FaceNS(NUMBERNODES)
 {
   //Sauvegarde ordre initial
-  m_numNoeudsOrigine = new int[4];
-  m_numNoeudsOrigine[0] = numNoeud1;
-  m_numNoeudsOrigine[1] = numNoeud2;
-  m_numNoeudsOrigine[2] = numNoeud3;
-  m_numNoeudsOrigine[3] = numNoeud4;
+  m_numNodesOrigine = new int[4];
+  m_numNodesOrigine[0] = numNode1;
+  m_numNodesOrigine[1] = numNode2;
+  m_numNodesOrigine[2] = numNode3;
+  m_numNodesOrigine[3] = numNode4;
 
-  m_numNoeuds[0] = numNoeud1;
-  m_numNoeuds[1] = numNoeud2;
-  m_numNoeuds[2] = numNoeud3;
-  m_numNoeuds[3] = numNoeud4;
-  if(tri) std::sort(m_numNoeuds, m_numNoeuds+4);
-  m_sommeNumNoeuds = m_numNoeuds[0] + m_numNoeuds[1] + m_numNoeuds[2] + m_numNoeuds[3];
+  m_numNodes[0] = numNode1;
+  m_numNodes[1] = numNode2;
+  m_numNodes[2] = numNode3;
+  m_numNodes[3] = numNode4;
+  if(tri) std::sort(m_numNodes, m_numNodes+4);
+  m_sumNumNodes = m_numNodes[0] + m_numNodes[1] + m_numNodes[2] + m_numNodes[3];
 }
 
 //***********************************************************************
 
 FaceQuadrangle::~FaceQuadrangle()
 {
-  delete[] m_numNoeudsOrigine;
+  delete[] m_numNodesOrigine;
 }
 
 //***********************************************************************
 
-void FaceQuadrangle::computeSurface(const Coord* noeuds)
+void FaceQuadrangle::computeSurface(const Coord* nodes)
 {
-  //Atention utilisation des numbering de noeud d origin pour assurer le compute des surfaces
+  //Atention utilisation des numbering de node d origin pour assurer le compute des surfaces
   //une diagonale :
-  Coord v0(noeuds[m_numNoeudsOrigine[2]] - noeuds[m_numNoeudsOrigine[0]]);
+  Coord v0(nodes[m_numNodesOrigine[2]] - nodes[m_numNodesOrigine[0]]);
   double diagonale(v0.norm());
   //Les 4 cotes :
-  Coord v1(noeuds[m_numNoeudsOrigine[1]] - noeuds[m_numNoeudsOrigine[0]]);
-  Coord v2(noeuds[m_numNoeudsOrigine[2]] - noeuds[m_numNoeudsOrigine[1]]);
-  Coord v3(noeuds[m_numNoeudsOrigine[3]] - noeuds[m_numNoeudsOrigine[2]]);
-  Coord v4(noeuds[m_numNoeudsOrigine[0]] - noeuds[m_numNoeudsOrigine[3]]);
+  Coord v1(nodes[m_numNodesOrigine[1]] - nodes[m_numNodesOrigine[0]]);
+  Coord v2(nodes[m_numNodesOrigine[2]] - nodes[m_numNodesOrigine[1]]);
+  Coord v3(nodes[m_numNodesOrigine[3]] - nodes[m_numNodesOrigine[2]]);
+  Coord v4(nodes[m_numNodesOrigine[0]] - nodes[m_numNodesOrigine[3]]);
   double a(v1.norm()); double b(v2.norm()); double c(v3.norm()); double d(v4.norm());
   //Aire premier triangle
   double dp1 = 0.5*(a + b + diagonale); 
@@ -85,25 +85,25 @@ void FaceQuadrangle::computeSurface(const Coord* noeuds)
 
 //***********************************************************************
 
-void FaceQuadrangle::computeRepere(const Coord* noeuds, const int& numNoeudAutre, ElementNS *elementVoisin)
+void FaceQuadrangle::computeRepere(const Coord* nodes, const int& numNodeOther, ElementNS *elementNeighbor)
 {
-  Coord v1; v1.setFromSubtractedVectors(noeuds[m_numNoeuds[0]], noeuds[m_numNoeuds[1]]);
-  Coord v2; v2.setFromSubtractedVectors(noeuds[m_numNoeuds[0]], noeuds[m_numNoeuds[2]]);
+  Coord v1; v1.setFromSubtractedVectors(nodes[m_numNodes[0]], nodes[m_numNodes[1]]);
+  Coord v2; v2.setFromSubtractedVectors(nodes[m_numNodes[0]], nodes[m_numNodes[2]]);
 
   m_tangent = v1 / v1.norm();
   Coord v1v2; v1v2 = Coord::crossProduct(v1, v2);
   m_normal = v1v2 / v1v2.norm();
   m_binormal = Coord::crossProduct(m_normal, m_tangent);
 
-  Coord v3; v3.setFromSubtractedVectors(noeuds[m_numNoeuds[0]], noeuds[numNoeudAutre]);
+  Coord v3; v3.setFromSubtractedVectors(nodes[m_numNodes[0]], nodes[numNodeOther]);
   if (v3.scalar(m_normal) > 0.)
   {
-    m_elementDroite = elementVoisin;
+    m_elementDroite = elementNeighbor;
     m_elementGauche = 0;
   }
   else
   {
-    m_elementGauche = elementVoisin;
+    m_elementGauche = elementNeighbor;
     m_elementDroite = 0;
   }
 }

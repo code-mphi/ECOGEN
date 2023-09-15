@@ -33,7 +33,6 @@
 
 #include "../Phase.h"
 #include "../../Eos/Eos.h"
-#include <fstream>
 
 //! \class     PhaseUEq
 //! \brief     Phase variables for the velocity-equilibrium system of equations
@@ -60,7 +59,7 @@ class PhaseUEq : public Phase
 
     //Specific methods for data printing
     //----------------------------------
-    virtual int getNumberScalars() const { return 5; };
+    virtual int getNumberScalars() const { return numberScalarsPhase; };
     virtual int getNumberVectors() const { return 0; };
     virtual double returnScalar(const int& numVar) const;
     virtual Coord returnVector(const int& /*numVar*/) const { return 0; };
@@ -83,8 +82,12 @@ class PhaseUEq : public Phase
     //---------------------------------
     virtual void computeSlopesPhase(const Phase& sLeft, const Phase& sRight, const double& distance);
     virtual void setToZero();
+    virtual void setToMax();
     virtual void extrapolate(const Phase& slope, const double& distance);
     virtual void limitSlopes(const Phase& slopeGauche, const Phase& slopeDroite, Limiter& globalLimiter, Limiter& volumeFractionLimiter);
+    virtual void setMin(const Phase& phase1, const Phase& phase2);
+    virtual void setMax(const Phase& phase1, const Phase& phase2);
+    virtual void computeGradientLimiter(const Limiter& globalLimiter, const Phase& phase, const Phase& phaseMin, const Phase& phaseMax, const Phase& slope);
 
     //Specific methods for parallele computing at second order
     //--------------------------------------------------------
@@ -114,7 +117,7 @@ class PhaseUEq : public Phase
     virtual Eos* getEos() const { return m_eos; };
     virtual const double& getEnergy() const { return m_energy; };
     virtual const double& getSoundSpeed() const { return m_soundSpeed; };
-    virtual double getTemperature() const { return m_eos->computeTemperature(m_density, m_pressure); }; //KS//Modify with m_temperature directly?
+    virtual double getTemperature() const { return m_temperature; };
 
     virtual void setAlpha(double alpha);
     virtual void setDensity(double density);

@@ -40,39 +40,39 @@ class ElementNS : public Element
 {
 public:
   ElementNS();
-  ElementNS(const int& typeGmsh, const int& numberNoeuds, const int& numberFaces, const int& typeVTK);
+  ElementNS(const int& typeGmsh, const int& numberNodes, const int& numberFaces, const int& typeVTK);
   virtual ~ElementNS();
 
-  void construitElement(const int* numNoeuds, const Coord* nodes, const int numberEntitePhysique, const int numberEntiteGeometrique, int& indexElement); /*Calcul des proprietes de l element*/
+  void construitElement(const int* numNodes, const Coord* nodes, const int numberEntitePhysique, const int numberEntiteGeometrique, int& indexElement); /*Calcul des proprietes de l element*/
   void construitElementParallele(const Coord* nodes); /*Calcul des proprietes de l element*/
   virtual void attributFaceLimite(FaceNS** /*faces*/, const int& /*indexMaxFaces*/) { Errors::errorMessage("attributFaceLimite non prevu pour le type d element demande"); };
-  virtual void attributFaceCommunicante(FaceNS** /*faces*/, const int& /*indexMaxFaces*/, const int& /*numberNoeudsInternes*/) { Errors::errorMessage("attributFaceCommunicante non prevu pour le type d element demande"); };
+  virtual void attributFaceCommunicante(FaceNS** /*faces*/, const int& /*indexMaxFaces*/, const int& /*numberNodesInternal*/) { Errors::errorMessage("attributFaceCommunicante non prevu pour le type d element demande"); };
   virtual void construitFaces(const Coord* /*nodes*/, FaceNS** /*faces*/, int& /*indexMaxFaces*/, int** /*facesBuff*/, int* /*sumNodesBuff*/) { Errors::errorMessage("construitFaces non prevu pour le type d element demande"); }; //Pour tests
   virtual void construitFacesSimplifie(int& /*iMax*/, int** /*facesBuff*/, int* /*sumNodesBuff*/) { Errors::errorMessage("construitFacesSimplifie non prevu pour le type d element demande"); };
   virtual int compteFaceCommunicante(std::vector<int*>& /*faces*/, std::vector<int>& /*sumNodesBuff*/) { Errors::errorMessage("compteFaceCommunicante non prevu pour le type d element demande"); return 0; };
   virtual int compteFaceCommunicante(int& /*iMax*/, int** /*faces*/, int* /*sumNodesBuff*/) { Errors::errorMessage("compteFaceCommunicante non prevu pour le type d element demande"); return 0; };
-  /*  void enleveCPUAutres(const int& numCPU);*/
-  void enleveCPUAutres(std::vector<int>& numCPU);
+  /*  void removeCPUOthers(const int& numCPU);*/
+  void removeCPUOthers(std::vector<int>& numCPU);
 
   //Accesseurs
   void setIndex(int& index);
   void setAppartenancePhysique(int& appartenancePhysique);
-  void setNumNoeud(int* numNoeuds);
-  void setNumNoeud(int& noeud, int& numNoeud);
+  void setNumNode(int* numNodes);
+  void setNumNode(int& node, int& numNode);
   void setIsFantome(bool isFantome);
   void setIsCommunicant(bool isCommunicant);
   void setAppartenanceCPU(const int* numCPU, const int& numberCPU);
 
   virtual const int& getIndex() const { return m_index; };
-  const int& getNumberNoeuds() const { return m_numberNoeuds; };
+  const int& getNumberNodes() const { return m_numberNodes; };
   const int& getNumberFaces() const { return m_numberFaces; };
   const int& getTypeGmsh() const { return m_typeGmsh; };
   const int& getTypeVTK() const { return m_typeVTK; };
-  const int& getNumNoeud(int& noeud) const { return m_numNoeuds[noeud]; };
+  const int& getNumNode(int& node) const { return m_numNodes[node]; };
   virtual const int& getAppartenancePhysique() const { return m_appartenancePhysique; };
   const int& getAppartenanceGeometrique() const { return m_appartenanceGeometrique; };
   const int& getCPU() const { return m_CPU; };
-  const int& getNumberAutresCPU() const { return m_numberautresCPU; };
+  const int& getNumberOthersCPU() const { return m_numberOtherCPU; };
   const int& getAutreCPU(const int& autreCPU) const;
   void printInfo() const;
 
@@ -87,16 +87,16 @@ protected:
 
   int m_typeGmsh;
   int m_typeVTK;
-  int m_numberNoeuds;
+  int m_numberNodes;
   int m_numberFaces;
   int m_appartenancePhysique;
   int m_appartenanceGeometrique;
   bool m_isFantome;
   bool m_isCommunicant;
   int m_CPU;              /*Number du CPU sur lequel l'element est present physiquement*/
-  int m_numberautresCPU;
-  int* m_autresCPU;       /*Number des CPU sur lesquels l'element est present en tant que fantome*/
-  int* m_numNoeuds;       /*Correspondance avec le tableau de nodes du mesh*/
+  int m_numberOtherCPU;
+  int* m_otherCPU;       /*Number des CPU sur lesquels l'element est present en tant que fantome*/
+  int* m_numNodes;       /*Correspondance avec le array de nodes du mesh*/
 
 };
 

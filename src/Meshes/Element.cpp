@@ -40,7 +40,7 @@ Element::~Element(){}
 
 //***********************************************************************
 
-void Element::ecritPos(std::ofstream &fileStream, Axis axis)
+void Element::writePos(std::ofstream &fileStream, Axis axis)
 {
   switch (axis) {
   case X:
@@ -50,13 +50,13 @@ void Element::ecritPos(std::ofstream &fileStream, Axis axis)
   case Z:
     fileStream << m_position.getZ() << " "; break;
   default:
-    Errors::errorMessage("Element::ecritPos : Axis unknown"); break;
+    Errors::errorMessage("Element::writePos : Axis unknown"); break;
   }
 }
 
 //***********************************************************************
 
-Coord Element::vecteur(const Element *e)
+Coord Element::vector(const Element *e)
 {
   Coord vec;
   vec.setFromSubtractedVectors(m_position, e->m_position);
@@ -65,7 +65,7 @@ Coord Element::vecteur(const Element *e)
 
 //***********************************************************************
 
-Coord Element::vecteur(const Face *f)
+Coord Element::vector(const Face *f)
 {
   Coord vec;
   vec.setFromSubtractedVectors(m_position, f->getPos());

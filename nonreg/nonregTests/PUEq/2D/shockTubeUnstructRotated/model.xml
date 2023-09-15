@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='UTF-8' standalone='yes'?>
+<model>
+  <flowModel numberPhases="2" name="PressureVelocityEq" alphaNull="false" numberTransports="1"/>
+  <EOS name="SG_water.xml"/>
+  <EOS name="IG_air.xml"/>
+  <transport name="transport"/>
+</model>

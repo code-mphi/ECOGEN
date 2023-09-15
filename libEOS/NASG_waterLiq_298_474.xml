@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='UTF-8' standalone='yes'?>
 <parametersEOS>
-  <EOS type="NASG" fichier="NASG_waterLiq_298_474.xml"/>
+  <EOS type="NASG"/>
   <parameters cv="3712.46" b="0.000721886" gamma="1.14601" energyRef="-1166790" pInf="613161000" entropyRef="-17095.2"/>
   <physicalParameters lambda="0.6" mu="1.e-3"/>
 </parametersEOS>

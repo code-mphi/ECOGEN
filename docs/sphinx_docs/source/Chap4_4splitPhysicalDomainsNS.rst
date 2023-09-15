@@ -68,7 +68,7 @@ The complete geometry configuration file (*.geo*) is the following:
 Setup of the test case
 ======================
 
-Let's start with the *mainV5.xml* file. We use an *XML* output mode with time control set to *iterations* and a *CFL* number of *0.8*: 
+Let's start with the *main.xml* file. We use an *XML* output mode with time control set to *iterations* and a *CFL* number of *0.8*: 
 
 .. code-block:: xml
 
@@ -83,7 +83,7 @@ Let's start with the *mainV5.xml* file. We use an *XML* output mode with time co
 		<computationControl CFL="0.8"/>
 	</computationParam>
 
-To solve this flow we use the model *Euler* with air considered as ideal gas. Thus, the *modelV4.xml* file is:
+To solve this flow we use the model *Euler* with air considered as ideal gas. Thus, the *model.xml* file is:
 
 .. code-block:: xml
 
@@ -93,7 +93,7 @@ To solve this flow we use the model *Euler* with air considered as ideal gas. Th
 		<EOS name="IG_air.xml"/>
 	</model>
 
-Reading of the unstructured mesh is done throught the *meshV5.xml* file:
+Reading of the unstructured mesh is done throught the *mesh.xml* file:
 
 .. code-block:: xml
 
@@ -105,7 +105,7 @@ Reading of the unstructured mesh is done throught the *meshV5.xml* file:
 		</unstructuredMesh>
 	</mesh>
 
-All that remains to be done is to initialize the chambers with the corresponding fluid states. To this end, we define two :xml:`physicalDomains` of type *entireDomain*, one for each chamber. The link between the physical domains of the geometry file *.geo* and ECOGEN is made by the attribute :xml:`physicalEntity`. As given above on the *.geo* file, the left chamber has the physical entity number 2 and the right chamber has the number 3. Therefore, the *initialConditionsV4.xml* file is:
+All that remains to be done is to initialize the chambers with the corresponding fluid states. To this end, we define two :xml:`physicalDomains` of type *entireDomain*, one for each chamber. The link between the physical domains of the geometry file *.geo* and ECOGEN is made by the attribute :xml:`physicalEntity`. As given above on the *.geo* file, the left chamber has the physical entity number 2 and the right chamber has the number 3. Therefore, the *initialConditions.xml* file is:
 
 .. code-block:: xml
 
@@ -151,7 +151,7 @@ Run the test case simulation with **XX** cores:
 
 .. important::
 
-	Be aware to partition the mesh file with the corresponding number of cores used for the simulation if parallel computation is desired. Gmsh pre-treatment attribute :xml:`GMSHPretraitement` of the *meshV5.xml* file might be set to *true* in this case.
+	Be aware to partition the mesh file with the corresponding number of cores used for the simulation if parallel computation is desired. Gmsh pre-treatment attribute :xml:`GMSHPretraitement` of the *mesh.xml* file might be set to *true* in this case.
 
 Results
 =======
@@ -172,7 +172,7 @@ It is clearly visible that the addition of the line along the interface makes it
 
   Pressure visualization at the initial time. Visualization using Paraview_ software.
 
-Of course, for this test case configuration, it is possible to obtain an equivalent result without declaring two physical domains in the geometry file. By keeping the middle line of the geometry file, the straight separation is ensured and it is therefore possible to define in the *initialConditionsV4.xml* file an :xml:`entireDomain` domain for the left chamber and a :xml:`halfSpace` domain located at :math:`x = 0.5 \, m` with a positive direction for the right chamber.
+Of course, for this test case configuration, it is possible to obtain an equivalent result without declaring two physical domains in the geometry file. By keeping the middle line of the geometry file, the straight separation is ensured and it is therefore possible to define in the *initialConditions.xml* file an :xml:`entireDomain` domain for the left chamber and a :xml:`halfSpace` domain located at :math:`x = 0.5 \, m` with a positive direction for the right chamber.
 
 However, it can be particularly interesting to use an initialization of the fluid states with the definition of the physical domains from the geometry, in case the fluid regions are too complex to define with the predefined ECOGEN domains.
 

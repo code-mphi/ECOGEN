@@ -37,12 +37,14 @@ Cell* bufferCellRight;
 
 //***********************************************************************
 
-CellInterface::CellInterface() : m_cellLeft(0), m_cellRight(0), m_face(0), m_lvl(0), m_cellInterfacesChildren(0)
+CellInterface::CellInterface() : m_cellLeft(0), m_cellRight(0), m_face(0), m_lvl(0), m_cellInterfacesChildren(0), 
+  m_mrfInterface(false), m_mrfStaticRegionIsLeft(false), m_omega(0.)
 {}
 
 //***********************************************************************
 
-CellInterface::CellInterface(const int& lvl) : m_cellLeft(0), m_cellRight(0), m_face(0), m_lvl(lvl), m_cellInterfacesChildren(0)
+CellInterface::CellInterface(const int& lvl) : m_cellLeft(0), m_cellRight(0), m_face(0), m_lvl(lvl), m_cellInterfacesChildren(0),
+  m_mrfInterface(false), m_mrfStaticRegionIsLeft(false), m_omega(0.)
 {}
 
 //***********************************************************************
@@ -87,22 +89,56 @@ void CellInterface::setFace(Face *face)
 
 //***********************************************************************
 
+void CellInterface::checkMrfInterface(Source* sourceMRF)
+{
+  int rotatingRegion(sourceMRF->getPhysicalEntity());
+  if (m_cellLeft->getElement()->getAppartenancePhysique() != rotatingRegion && 
+    m_cellRight->getElement()->getAppartenancePhysique() == rotatingRegion) 
+  {
+    m_mrfInterface = true;
+    m_mrfStaticRegionIsLeft = true;
+    m_omega = sourceMRF->getOmega();
+  }
+  else if (m_cellLeft->getElement()->getAppartenancePhysique() == rotatingRegion && 
+    m_cellRight->getElement()->getAppartenancePhysique() != rotatingRegion) 
+  {
+    m_mrfInterface = true;
+    m_mrfStaticRegionIsLeft = false;
+    m_omega = sourceMRF->getOmega();
+  }
+  else { m_mrfInterface = false; } // SRF
+}
+
+//***********************************************************************
+
 void CellInterface::computeFlux(double& dtMax, Limiter& globalLimiter, Limiter& interfaceLimiter,
   Limiter& globalVolumeFractionLimiter, Limiter& interfaceVolumeFractionLimiter, Prim type)
 {
-  this->solveRiemann(dtMax, globalLimiter, interfaceLimiter, globalVolumeFractionLimiter, interfaceVolumeFractionLimiter, type);
-
-  if (m_cellLeft->getLvl() == m_cellRight->getLvl()) {      //CoefAMR = 1 pour les deux
-    this->addFlux(1.);       //Ajout du flux sur maille droite
-    this->subtractFlux(1.);  //Retrait du flux sur maille gauche
+  if (!m_mrfInterface) { // No MRF or not MRF interface
+    this->solveRiemann(dtMax, globalLimiter, interfaceLimiter, globalVolumeFractionLimiter, interfaceVolumeFractionLimiter, type);
+    if (m_cellLeft->getLvl() == m_cellRight->getLvl()) {      //CoefAMR = 1 pour les deux
+      this->addFlux(1.);      //Add of flux on right cell
+      this->subtractFlux(1.); //Subtract of flux on left cell
+    }
+    else if (m_cellLeft->getLvl() > m_cellRight->getLvl()) {  //CoefAMR = 1 pour la gauche et 0.5 pour la droite
+      this->addFlux(0.5);     //Add of flux on right cell
+      this->subtractFlux(1.); //Subtract of flux on left cell
+    }
+    else {                                                     //CoefAMR = 0.5 pour la gauche et 1 pour la droite
+      this->addFlux(1.);       //Add of flux on right cell
+      this->subtractFlux(0.5); //Subtract of flux on left cell
+    }
   }
-  else if (m_cellLeft->getLvl() > m_cellRight->getLvl()) {  //CoefAMR = 1 pour la gauche et 0.5 pour la droite
-    this->addFlux(0.5);      //Ajout du flux sur maille droite
-    this->subtractFlux(1.);  //Retrait du flux sur maille gauche
-  }
-  else {                                                     //CoefAMR = 0.5 pour la gauche et 1 pour la droite
-    this->addFlux(1.);       //Ajout du flux sur maille droite
-    this->subtractFlux(0.5); //Retrait du flux sur maille gauche
+  else { // MRF activated 
+    this->solveRiemannMRF(dtMax);
+    if (m_mrfStaticRegionIsLeft) {
+      this->addFluxRotatingRegion();
+      this->subtractFlux(1.);  
+    }
+    else {
+      this->addFlux(1.);
+      this->substractFluxRotatingRegion();
+    }
   }
 }
 
@@ -118,11 +154,11 @@ void CellInterface::computeFluxAddPhys(AddPhys &addPhys)
 void CellInterface::solveRiemann(double& dtMax, Limiter& /*globalLimiter*/, Limiter& /*interfaceLimiter*/,
   Limiter& /*globalVolumeFractionLimiter*/, Limiter& /*interfaceVolumeFractionLimiter*/, Prim /*type*/)
 {
-  //Projection des velocities sur repere attache a la face
+  //Vector and tensor projections on geometric reference frame of the face
   m_cellLeft->localProjection(m_face->getNormal(), m_face->getTangent(), m_face->getBinormal());
   m_cellRight->localProjection(m_face->getNormal(), m_face->getTangent(), m_face->getBinormal());
 
-  //Probleme de Riemann
+  //Riemann problem
   double dxLeft(m_cellLeft->getElement()->getLCFL());
   double dxRight(m_cellRight->getElement()->getLCFL());
   dxLeft = dxLeft*std::pow(2., (double)m_lvl);
@@ -131,10 +167,99 @@ void CellInterface::solveRiemann(double& dtMax, Limiter& /*globalLimiter*/, Limi
   //Handling of transport functions (m_Sm known: need to be called after Riemann solver)
   if (numberTransports > 0) { model->solveRiemannTransportIntern(*m_cellLeft, *m_cellRight); }
 
-  //Projection du flux sur le repere absolu
+  //Flux projection on absolute reference frame
   model->reverseProjection(m_face->getNormal(), m_face->getTangent(), m_face->getBinormal());
   m_cellLeft->reverseProjection(m_face->getNormal(), m_face->getTangent(), m_face->getBinormal());
   m_cellRight->reverseProjection(m_face->getNormal(), m_face->getTangent(), m_face->getBinormal());
+}
+
+//***********************************************************************
+
+void CellInterface::solveRiemannMRF(double& dtMax)
+{
+  // This routine allows to compute two fluxes: 
+  // - an absolute flux for the static region,
+  // - a relative flux for the rotating region.
+  // The absolute flux is computed by projection of the velocity of the rotating region into the static one
+  // and the relative flux is built from the RP primitive vector solution after the relative velocity reconstruction.
+  // For both fluxes the Riemann problem uses an absolute velocity.
+  
+  Coord buffVel; // Same variable is used for two purpose (1: build abs. vel. of rotating region, 2: re-build rel. vel. of rot. region)
+  Cell *rotatingCell(nullptr);
+
+  // Build absolute velocity in the rotating region
+  if (m_mrfStaticRegionIsLeft) { rotatingCell = m_cellRight; }
+  else { rotatingCell = m_cellLeft; }
+
+  if (numberPhases > 1) {
+    buffVel.setXYZ(
+      rotatingCell->getMixture()->getVelocity().getX(),
+      rotatingCell->getMixture()->getVelocity().getY(),
+      rotatingCell->getMixture()->getVelocity().getZ()
+    );
+    rotatingCell->getMixture()->setVelocity(
+      buffVel + m_omega.cross(this->getFace()->getPos())
+    );
+  }
+  else {
+    buffVel.setXYZ(
+      rotatingCell->getPhase(0)->getVelocity().getX(),
+      rotatingCell->getPhase(0)->getVelocity().getY(),
+      rotatingCell->getPhase(0)->getVelocity().getZ()
+    );
+    rotatingCell->getPhase(0)->setVelocity(
+      buffVel + m_omega.cross(this->getFace()->getPos())
+    );
+  }
+  rotatingCell->fulfillState(); // Required to compute total energy
+  
+  // Vector and tensor projections on geometric reference frame of the face
+  m_cellLeft->localProjection(m_face->getNormal(), m_face->getTangent(), m_face->getBinormal());
+  m_cellRight->localProjection(m_face->getNormal(), m_face->getTangent(), m_face->getBinormal());
+
+  // Riemann problem to build relative and absolute fluxes
+  double dxLeft(m_cellLeft->getElement()->getLCFL());
+  double dxRight(m_cellRight->getElement()->getLCFL());
+  dxLeft = dxLeft*std::pow(2., (double)m_lvl);
+  dxRight = dxRight*std::pow(2., (double)m_lvl);
+  std::vector<double> primStar(VarBoundary::SIZE, 0); // Vector of intermediate state primitive variables from RP
+  model->solveRiemannInternMRF(*m_cellLeft, *m_cellRight, dxLeft, dxRight, dtMax, m_omega, m_face->getNormal(), m_face->getTangent(), m_face->getBinormal(), m_face->getPos());
+  
+  // Finish build of relative flux for rotating region
+  model->addNonConsMrfFlux(rotatingCell->getPhases());
+  model->reverseProjectionMrfFlux(m_face->getNormal(), m_face->getTangent(), m_face->getBinormal());
+
+  // Handling of transport functions (m_Sm known: need to be called after Riemann solver)
+  if (numberTransports > 0) { model->solveRiemannTransportIntern(*m_cellLeft, *m_cellRight); }
+
+  // Absolute flux is projected into global frame
+  model->reverseProjection(m_face->getNormal(), m_face->getTangent(), m_face->getBinormal());
+  m_cellLeft->reverseProjection(m_face->getNormal(), m_face->getTangent(), m_face->getBinormal());
+  m_cellRight->reverseProjection(m_face->getNormal(), m_face->getTangent(), m_face->getBinormal());
+
+  // Reset velocity of the rotating region to relative one for Godunov scheme
+  if (numberPhases > 1) {
+    buffVel.setXYZ(
+      rotatingCell->getMixture()->getVelocity().getX(),
+      rotatingCell->getMixture()->getVelocity().getY(),
+      rotatingCell->getMixture()->getVelocity().getZ()
+    );
+    rotatingCell->getMixture()->setVelocity(
+      buffVel - m_omega.cross(this->getFace()->getPos())
+    );
+  }
+  else {
+    buffVel.setXYZ(
+      rotatingCell->getPhase(0)->getVelocity().getX(),
+      rotatingCell->getPhase(0)->getVelocity().getY(),
+      rotatingCell->getPhase(0)->getVelocity().getZ()
+    );
+    rotatingCell->getPhase(0)->setVelocity(
+      buffVel - m_omega.cross(this->getFace()->getPos())
+    );
+  }
+  rotatingCell->fulfillState(); // Required to compute total energy
+  rotatingCell = nullptr;
 }
 
 //***********************************************************************
@@ -144,7 +269,7 @@ void CellInterface::addFlux(const double& coefAMR)
   //No "time step"
   double coefA = m_face->getSurface() / m_cellRight->getElement()->getVolume() * coefAMR;
   m_cellRight->getCons()->addFlux(coefA);
-  m_cellRight->getCons()->addNonCons(coefA, m_cellRight);
+  m_cellRight->getCons()->addNonCons(coefA, m_cellRight, m_face->getNormal(), m_face->getTangent(), m_face->getBinormal());
   for (int k = 0; k < numberTransports; k++) {
     m_cellRight->getConsTransport(k)->addFlux(coefA, k);
     m_cellRight->getConsTransport(k)->addNonCons(coefA, m_cellRight->getTransport(k).getValue(), model->getSM());
@@ -161,7 +286,7 @@ void CellInterface::subtractFlux(const double& coefAMR)
   //No "time step"
   double coefA = m_face->getSurface() / m_cellLeft->getElement()->getVolume() * coefAMR;
   m_cellLeft->getCons()->subtractFlux(coefA);
-  m_cellLeft->getCons()->subtractNonCons(coefA, m_cellLeft);
+  m_cellLeft->getCons()->subtractNonCons(coefA, m_cellLeft, m_face->getNormal(), m_face->getTangent(), m_face->getBinormal());
   for (int k = 0; k < numberTransports; k++) {
     m_cellLeft->getConsTransport(k)->subtractFlux(coefA, k);
     m_cellLeft->getConsTransport(k)->subtractNonCons(coefA, m_cellLeft->getTransport(k).getValue(), model->getSM());
@@ -169,6 +294,24 @@ void CellInterface::subtractFlux(const double& coefAMR)
   if (model->isSmoothCrossSection1d()) { 
     m_cellLeft->getCons()->substractFluxSmooth1D(coefA, m_face->getNormal(), m_cellLeft);
   }
+}
+
+//***********************************************************************
+
+void CellInterface::addFluxRotatingRegion()
+{
+  //No "time step"
+  double coefA = m_face->getSurface() / m_cellRight->getElement()->getVolume();
+  m_cellRight->getCons()->addFluxRotatingRegion(coefA);
+}
+
+//***********************************************************************
+
+void CellInterface::substractFluxRotatingRegion()
+{
+  //No "time step"
+  double coefA = m_face->getSurface() / m_cellLeft->getElement()->getVolume();
+  m_cellLeft->getCons()->subtractFluxRotatingRegion(coefA);
 }
 
 //***********************************************************************
@@ -194,14 +337,14 @@ Model* CellInterface::getMod() const
 
 //***********************************************************************
 
-Cell* CellInterface::getCellGauche() const
+Cell* CellInterface::getCellLeft() const
 {
   return m_cellLeft;
 }
 
 //***********************************************************************
 
-Cell* CellInterface::getCellDroite() const
+Cell* CellInterface::getCellRight() const
 {
   return m_cellRight;
 }
@@ -212,15 +355,21 @@ Cell* CellInterface::getCellDroite() const
 
 void CellInterface::computeXi(const double& criteriaVar, const bool &varRho, const bool &varP, const bool &varU, const bool &varAlpha)
 {
-  if (varRho) { this->computeCritereAMR(criteriaVar, density); }
+  if (varRho) { this->computeCritereAMR(criteriaVar, Variable::density, -1); }
   if (varP) {
-    if (m_cellLeft->getXi() < 0.99 || m_cellRight->getXi() < 0.99) { this->computeCritereAMR(criteriaVar, pressure); }
+    if (m_cellLeft->getXi() < 0.99 || m_cellRight->getXi() < 0.99) {
+      this->computeCritereAMR(criteriaVar, Variable::pressure, -1);
+    }
   }
   if (varU) {
-    if (m_cellLeft->getXi() < 0.99 || m_cellRight->getXi() < 0.99) { this->computeCritereAMR(criteriaVar, velocityMag); }
+    if (m_cellLeft->getXi() < 0.99 || m_cellRight->getXi() < 0.99) { this->computeCritereAMR(criteriaVar, Variable::velocityMag); }
   }
   if (varAlpha) {
-    if (m_cellLeft->getXi() < 0.99 || m_cellRight->getXi() < 0.99) { this->computeCritereAMR(criteriaVar, alpha, 1); }
+    if (m_cellLeft->getXi() < 0.99 || m_cellRight->getXi() < 0.99) {
+      for (int k = 0; k < numberPhases; k++) {
+        this->computeCritereAMR(criteriaVar, Variable::alpha, k);
+      }
+    }
   }
 }
 
@@ -229,14 +378,14 @@ void CellInterface::computeXi(const double& criteriaVar, const bool &varRho, con
 void CellInterface::computeCritereAMR(const double& criteriaVar, Variable nameVariable, int num)
 {
   double valueMin, variation, cd, cg;
-  // Recuperation des values de la variable en question a gauche et a droite
+  // Get des values de la variable en question a gauche et a droite
   cg = m_cellLeft->selectScalar(nameVariable, num);
   cd = m_cellRight->selectScalar(nameVariable, num);
 
   // Valeur de la variation
   valueMin = std::min(std::fabs(cd), std::fabs(cg));
   if (valueMin < 1.e-2) { //Utile pour alpha (quasi-seulement) ou velocity
-    if (nameVariable == velocityMag) { valueMin = 0.1; }
+    if (nameVariable == Variable::velocityMag) { valueMin = 0.1; }
     else {                             valueMin = 1.e-2; }
   }
   variation = std::fabs(cd - cg) / valueMin;
@@ -317,7 +466,7 @@ void CellInterface::raffineCellInterfaceExterne(const int& nbCellsY, const int& 
 
         this->creerCellInterfaceChild();
         m_cellInterfacesChildren[0]->m_face = m_face->creerNouvelleFace();
-        m_cellInterfacesChildren[0]->m_face->initializeAutres(surfaceChild, m_face->getNormal(), m_face->getTangent(), m_face->getBinormal());
+        m_cellInterfacesChildren[0]->m_face->initializeOthers(surfaceChild, m_face->getNormal(), m_face->getTangent(), m_face->getBinormal());
         m_cellInterfacesChildren[0]->m_face->setPos(m_face->getPos().getX(), m_face->getPos().getY(), m_face->getPos().getZ());
         m_cellInterfacesChildren[0]->m_face->setSize(m_face->getSize());
         if (m_face->getPos().getX() < cellRef->getElement()->getPosition().getX()) {
@@ -366,7 +515,7 @@ void CellInterface::raffineCellInterfaceExterne(const int& nbCellsY, const int& 
         for (int i = 0; i < 2; i++) {
           this->creerCellInterfaceChild();
           m_cellInterfacesChildren[i]->m_face = m_face->creerNouvelleFace();
-          m_cellInterfacesChildren[i]->m_face->initializeAutres(surfaceChild, m_face->getNormal(), m_face->getTangent(), m_face->getBinormal());
+          m_cellInterfacesChildren[i]->m_face->initializeOthers(surfaceChild, m_face->getNormal(), m_face->getTangent(), m_face->getBinormal());
         }
 
         //Face selon X
@@ -558,7 +707,7 @@ void CellInterface::raffineCellInterfaceExterne(const int& nbCellsY, const int& 
       for (int i = 0; i < 4; i++) {
         this->creerCellInterfaceChild();
         m_cellInterfacesChildren[i]->m_face = m_face->creerNouvelleFace();
-        m_cellInterfacesChildren[i]->m_face->initializeAutres(surfaceChild, m_face->getNormal(), m_face->getTangent(), m_face->getBinormal());
+        m_cellInterfacesChildren[i]->m_face->initializeOthers(surfaceChild, m_face->getNormal(), m_face->getTangent(), m_face->getBinormal());
         m_cellInterfacesChildren[i]->m_face->setSize(0.5*m_face->getSize());
       }
 
@@ -998,7 +1147,7 @@ void CellInterface::deraffineCellInterfaceExterne(Cell* cellRef)
   //On parcourt seulement les parent cell interfaces pour regarder si la cell voisine de celle de reference a des enfants,
   //si oui (enfants), on ne peut pas deraffiner le cell interface, on reaffecte donc les liaisons cells/cell interfaces des children cell interfaces,
   //si non (pas enfants), on peut deraffiner le cell interface et mettre a jour les neighbouring cells.
-  //Plus, si je suis un parent cell interface, qui a donc des enfants, mais que la cell de reference ne les connait pas encore, on les ajoute a ses cell interfaces.
+  //Plus, si je suis un parent cell interface, qui a donc des enfants, mais que la cell de reference ne les connait pas encore, on les adde a ses cell interfaces.
 
   //Parcours les parent cell interfaces
   if (cellRef->getLvl() == m_lvl) {
@@ -1012,7 +1161,7 @@ void CellInterface::deraffineCellInterfaceExterne(Cell* cellRef)
       }
       //La cell voisine (droite) n'a pas d'enfants, on deraffine le cell interface et met a jour les neighbouring cells
       else {
-        //Il faut aussi enlever ses children cell interfaces des cell interfaces de la cell droite et de mes cell interfaces
+        //Il faut aussi remove ses children cell interfaces des cell interfaces de la cell droite et de mes cell interfaces
         for (unsigned int cellInterfaceChild = 0; cellInterfaceChild < m_cellInterfacesChildren.size(); cellInterfaceChild++) {
           m_cellRight->deleteCellInterface(m_cellInterfacesChildren[cellInterfaceChild]);
           cellRef->deleteCellInterface(m_cellInterfacesChildren[cellInterfaceChild]);
@@ -1030,7 +1179,7 @@ void CellInterface::deraffineCellInterfaceExterne(Cell* cellRef)
       }
       //La cell voisine (gauche) n'a pas d'enfants, on deraffine le cell interface et met a jour les neighbouring cells
       else {
-        //Il faut aussi enlever ses children cell interfaces des cell interfaces de la cell gauche et de mes cell interfaces
+        //Il faut aussi remove ses children cell interfaces des cell interfaces de la cell gauche et de mes cell interfaces
         for (unsigned int cellInterfaceChild = 0; cellInterfaceChild < m_cellInterfacesChildren.size(); cellInterfaceChild++) {
           m_cellLeft->deleteCellInterface(m_cellInterfacesChildren[cellInterfaceChild]);
           cellRef->deleteCellInterface(m_cellInterfacesChildren[cellInterfaceChild]);
@@ -1039,13 +1188,13 @@ void CellInterface::deraffineCellInterfaceExterne(Cell* cellRef)
       }
     }
 
-    //Si je suis un cell interface parent, qui a donc des enfants, mais que la cell de reference ne les connait pas encore, on les ajoute a ses cell interfaces.
+    //Si je suis un cell interface parent, qui a donc des enfants, mais que la cell de reference ne les connait pas encore, on les adde a ses cell interfaces.
     for (unsigned int cellInterfaceChild = 0; cellInterfaceChild < m_cellInterfacesChildren.size(); cellInterfaceChild++) {
-      bool ajoutChildAuxCellInterfacesCellRef(true);
+      bool addChildToCellInterfacesCellRef(true);
       for (int i = 0; i < cellRef->getCellInterfacesSize(); i++) {
-        if (cellRef->getCellInterface(i) == m_cellInterfacesChildren[cellInterfaceChild]) { ajoutChildAuxCellInterfacesCellRef = false; break; }
+        if (cellRef->getCellInterface(i) == m_cellInterfacesChildren[cellInterfaceChild]) { addChildToCellInterfacesCellRef = false; break; }
       }
-      if (ajoutChildAuxCellInterfacesCellRef) { cellRef->addCellInterface(m_cellInterfacesChildren[cellInterfaceChild]); }
+      if (addChildToCellInterfacesCellRef) { cellRef->addCellInterface(m_cellInterfacesChildren[cellInterfaceChild]); }
     }
   }
 }
@@ -1062,7 +1211,7 @@ void CellInterface::deraffineCellInterfacesChildren()
 
 //***********************************************************************
 
-void CellInterface::constructionTableauCellInterfacesExternesLvl(std::vector<CellInterface*>* cellInterfacesLvl)
+void CellInterface::constructionArrayExternalCellInterfacesLvl(std::vector<CellInterface*>* cellInterfacesLvl)
 {
   for (unsigned int i = 0; i < m_cellInterfacesChildren.size(); i++) {
     cellInterfacesLvl[m_lvl + 1].push_back(m_cellInterfacesChildren[i]);

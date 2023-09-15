@@ -1,0 +1,14 @@
+<?xml version = "1.0" encoding = "UTF-8" standalone = "yes"?>
+<parametersEOS>
+  <EOS type="IG"/>
+  <parameters
+    gamma="1.1"
+    cv="800" cv_save="717.46"
+    energyRef="0."
+    entropyRef="0.">
+  </parameters>
+  <physicalParameters
+    mu="1.85e-5"     
+    lambda="2.62">
+  </physicalParameters> 
+</parametersEOS>

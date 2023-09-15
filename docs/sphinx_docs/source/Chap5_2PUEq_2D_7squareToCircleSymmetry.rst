@@ -44,7 +44,7 @@ The initial characteristics of the run are:
 
 Results are shown in :numref:`Fig:testCases:PUEq:squareToCircleSymmetryAnim`. When the interface between the blue and the white regions disapears, because of surface tension, the region that was initially square is deformed and tends to become circular with time. Note that it is necessary to have a stationary solution to obtain this circle and this requires a relatively long final solution time.
 
-One can observe the distribution of computation on the CPUs (here 12) divided into different regions, according to AMR evolution. When the density variations are low or non-existent, the mesh is as coarse as possible (within the conditions given in meshV5.xml). On the contrary when the variations become significant, the mesh is refined. So, to distribute the work equally between the CPUs, highly refined regions are relatively small compared to coarse regions.
+One can observe the distribution of computation on the CPUs (here 12) divided into different regions, according to AMR evolution. When the density variations are low or non-existent, the mesh is as coarse as possible (within the conditions given in mesh.xml). On the contrary when the variations become significant, the mesh is refined. So, to distribute the work equally between the CPUs, highly refined regions are relatively small compared to coarse regions.
 
 .. _Fig:testCases:PUEq:squareToCircleSymmetryAnim:
 

@@ -154,21 +154,22 @@ private:
   std::string m_infoError;
 };
 
+//---------------------------------------------------------------
 
-//Exception handling on input XML files
-//-------------------------------------
+//Exception handling on input files (XML, mesh)
+//---------------------------------------------
 
-class ErrorXML : public ErrorECOGEN
+class ErrorInput : public ErrorECOGEN
 {
 public:
   //***************
-  ErrorXML(std::string fileXML = "", const char* sourceFile = "", int lineNumber = -1, int errorCode = 2) :
-    ErrorECOGEN(), m_errorCode(errorCode), m_lineNumber(lineNumber), m_sourceFile(sourceFile), m_fileXML(fileXML){}
-  virtual ~ErrorXML() throw(){}
+  ErrorInput(std::string fileInput = "", const char* sourceFile = "", int lineNumber = -1, int errorCode = 2) :
+    ErrorECOGEN(), m_errorCode(errorCode), m_lineNumber(lineNumber), m_sourceFile(sourceFile), m_fileInput(fileInput){}
+  virtual ~ErrorInput() throw(){}
   //***************
   virtual const char* what(void) const throw()
   {
-    return "Exception during reading XML file: file not found or incorrect structure";
+    return "Exception during reading input file";
   }
   //***************
   std::string infoError(void) const throw()
@@ -177,10 +178,10 @@ public:
     message << "--------------------------------------------------" << std::endl;
     message << this->what() << std::endl;
     message << "****************************************" << std::endl;
-    if (m_fileXML != "") { message << " XML file concerned: '" << m_fileXML << "'" << std::endl; }
+    if (m_fileInput != "") { message << " Input file concerned: '" << m_fileInput << "'" << std::endl; }
     if (m_sourceFile != "")
     {
-      message << " infos on exception in code source :" << std::endl;
+      message << " Infos on exception in source code:" << std::endl;
       message << "  file: '" << m_sourceFile << "'" << std::endl;
       if (m_lineNumber != -1) message << "  line: " << m_lineNumber << std::endl;
     }
@@ -200,11 +201,84 @@ public:
   //***************
   int getErrorCode() { return m_errorCode; }
   //***************
-private:
+protected:
   int m_errorCode;
   int m_lineNumber;
   std::string m_sourceFile;
-  std::string m_fileXML;
+  std::string m_fileInput;
+};
+
+//---------------------------------------------------------------
+
+//Exception handling on unstructured mesh file 
+//--------------------------------------------
+class ErrorMeshNS : public ErrorInput
+{
+public:
+  //***************
+  ErrorMeshNS(std::string fileMesh = "", const char* sourceFile = "", int lineNumber = -1, int errorCode = 2) :
+    ErrorInput(fileMesh, sourceFile, lineNumber, errorCode) {}
+  virtual ~ErrorMeshNS() throw(){}
+  //***************
+  virtual const char* what(void) const throw()
+  {
+    return "Exception during reading unstructured mesh file: file not found or incorrect structure";
+  }
+  //***************
+  std::string infoError(void) const throw()
+  {
+    std::stringstream message;
+    message << "--------------------------------------------------" << std::endl;
+    message << this->what() << std::endl;
+    message << "****************************************" << std::endl;
+    if (m_fileInput != "") { message << " mesh file concerned: '" << m_fileInput << "'" << std::endl; }
+    if (m_sourceFile != "")
+    {
+      message << " infos on exception in code source :" << std::endl;
+      message << "  file: '" << m_sourceFile << "'" << std::endl;
+      if (m_lineNumber != -1) message << "  line: " << m_lineNumber << std::endl;
+    }
+    message << this->additionalInfo();
+    message << "--------------------------------------------------" << std::endl;
+    return message.str();
+  }
+};
+
+//---------------------------------------------------------------
+
+//Exception handling on input XML files
+//-------------------------------------
+
+class ErrorXML : public ErrorInput
+{
+public:
+  //***************
+  ErrorXML(std::string fileXML = "", const char* sourceFile = "", int lineNumber = -1, int errorCode = 2) :
+    ErrorInput(fileXML, sourceFile, lineNumber, errorCode) {}
+  virtual ~ErrorXML() throw(){}
+  //***************
+  virtual const char* what(void) const throw()
+  {
+    return "Exception during reading XML file: file not found or incorrect structure";
+  }
+  //***************
+  std::string infoError(void) const throw()
+  {
+    std::stringstream message;
+    message << "--------------------------------------------------" << std::endl;
+    message << this->what() << std::endl;
+    message << "****************************************" << std::endl;
+    if (m_fileInput != "") { message << " XML file concerned: '" << m_fileInput << "'" << std::endl; }
+    if (m_sourceFile != "")
+    {
+      message << " infos on exception in code source :" << std::endl;
+      message << "  file: '" << m_sourceFile << "'" << std::endl;
+      if (m_lineNumber != -1) message << "  line: " << m_lineNumber << std::endl;
+    }
+    message << this->additionalInfo();
+    message << "--------------------------------------------------" << std::endl;
+    return message.str();
+  }
 };
 
 //---------------------------------------------------------------
@@ -393,13 +467,13 @@ private:
 
 //---------------------------------------------------------------
 
-class ErrorXMLEOSInconnue : public ErrorXML
+class ErrorXMLEOSUnknown : public ErrorXML
 {
 public:
   //***************
-  ErrorXMLEOSInconnue(std::string typeEOS = "", std::string fileXML = "", const char* sourceFile = "", int lineNumber = -1) :
+  ErrorXMLEOSUnknown(std::string typeEOS = "", std::string fileXML = "", const char* sourceFile = "", int lineNumber = -1) :
     ErrorXML(fileXML, sourceFile, lineNumber), m_typeEOS(typeEOS){}
-  virtual ~ErrorXMLEOSInconnue() throw(){}
+  virtual ~ErrorXMLEOSUnknown() throw(){}
   //***************
   virtual const char* what(void) const throw()
   {
@@ -419,13 +493,13 @@ private:
 
 //---------------------------------------------------------------
 
-class ErrorXMLDomaineInconnu : public ErrorXML
+class ErrorXMLDomaineUnknown : public ErrorXML
 {
 public:
   //***************
-  ErrorXMLDomaineInconnu(std::string typeDomain = "", std::string fileXML = "", const char* sourceFile = "", int lineNumber = -1) :
+  ErrorXMLDomaineUnknown(std::string typeDomain = "", std::string fileXML = "", const char* sourceFile = "", int lineNumber = -1) :
     ErrorXML(fileXML, sourceFile, lineNumber), m_typeDomain(typeDomain){}
-  virtual ~ErrorXMLDomaineInconnu() throw(){}
+  virtual ~ErrorXMLDomaineUnknown() throw(){}
   //***************
   virtual const char* what(void) const throw()
   {
@@ -445,13 +519,13 @@ private:
 
 //---------------------------------------------------------------
 
-class ErrorXMLBoundCondInconnue : public ErrorXML
+class ErrorXMLBoundCondUnknown : public ErrorXML
 {
 public:
   //***************
-  ErrorXMLBoundCondInconnue(std::string typeBoundCond = "", std::string fileXML = "", const char* sourceFile = "", int lineNumber = -1) :
+  ErrorXMLBoundCondUnknown(std::string typeBoundCond = "", std::string fileXML = "", const char* sourceFile = "", int lineNumber = -1) :
     ErrorXML(fileXML, sourceFile, lineNumber), m_typeBoundCond(typeBoundCond) {}
-  virtual ~ErrorXMLBoundCondInconnue() throw() {}
+  virtual ~ErrorXMLBoundCondUnknown() throw() {}
   //***************
   virtual const char* what(void) const throw()
   {
@@ -497,13 +571,13 @@ private:
 
 //---------------------------------------------------------------
 
-class ErrorXMLMateriauInconnu : public ErrorXML
+class ErrorXMLMaterialUnknown : public ErrorXML
 {
 public:
   //***************
-  ErrorXMLMateriauInconnu(std::string nameMateriau = "", std::string fileXML = "", const char* sourceFile = "", int lineNumber = -1) :
+  ErrorXMLMaterialUnknown(std::string nameMateriau = "", std::string fileXML = "", const char* sourceFile = "", int lineNumber = -1) :
     ErrorXML(fileXML, sourceFile, lineNumber), m_nameMateriau(nameMateriau){}
-  virtual ~ErrorXMLMateriauInconnu() throw(){}
+  virtual ~ErrorXMLMaterialUnknown() throw(){}
   //***************
   virtual const char* what(void) const throw()
   {

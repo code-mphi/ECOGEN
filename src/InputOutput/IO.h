@@ -72,7 +72,7 @@ public:
     return fluxSortie.write(reinterpret_cast<char*>(&value), sizeof(T));
   }
 
-  // //Definition de template pour lecture au format binary
+  // //Definition de template pour read au format binary
   // template <typename T>
   // static std::istream& read(std::istream &fluxEntree, T& value)
   // {
@@ -85,9 +85,9 @@ public:
   //Templates Format Binaire Base64 pour le XML VTK
   //-----------------------------------------------
 
-  //Template pour ajouter n importe quelle type de donnee a une chaine de caractere
+  //Template to add any type of data to a string
   template <typename T>
-  static void ajouteAlaChaine(char* chaine, int& taille, T& value)
+  static void addToTheString(char* chaine, int& taille, T& value)
   {
     char* conversionChaine = reinterpret_cast<char*>(&value);
     for (unsigned int octet = 0; octet < sizeof(value); octet++)
@@ -106,8 +106,8 @@ public:
     return IO::writeb64Chaine(fluxSortie, chaine, tailleChaine);
   }
 
-  // //ATTENTION !!!!!!!!!!!Lecture non Fonctionnelle !!!!!!!!!!!!!!
-  // //Definition de template pour lecture au format binary base64
+  // //ATTENTION !!!!!!!!!!!Read non Fonctionnelle !!!!!!!!!!!!!!
+  // //Definition de template pour read au format binary base64
   // template <typename T>
   // static std::istream& readb64(std::istream &fluxEntree, T& value)
   // {
@@ -115,11 +115,11 @@ public:
   //   //Swap Little <-> Big endian eventuel
   //   IO::endswap(&value);
   // };
-  // //ATTENTION !!!!!!!!!!!Lecture non Fonctionnelle !!!!!!!!!!!!!!
+  // //ATTENTION !!!!!!!!!!!Read non Fonctionnelle !!!!!!!!!!!!!!
 
   static std::ostream& writeb64Chaine(std::ostream& fluxSortie, char* chaineAEncoder, int& taille);
 
-  static void copieFichier(std::string file, std::string dossierSource, std::string dossierDestination);
+  static void copyFile(std::string file, std::string srcFolder, std::string destFolder);
 
 private:
 

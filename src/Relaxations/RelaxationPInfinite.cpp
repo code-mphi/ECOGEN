@@ -81,27 +81,12 @@ void RelaxationPInfinite::relaxation(Cell* cell, const double& /*dt*/, Prim type
     }
     //Else cell is updated with interface pressure obtained with values from initial state
     else {
-      //pI = sum_k (p_k sum_j Z_j) / sum_k (Z_k) ; where j is different from k
-      double pI(0.), sumZk(0.), sumZj(0.), drho(0.);
-      for (int k = 0; k < numberPhases; k++) {
-        TB->zk[k] = cell->getPhase(k, type)->getDensity() * cell->getPhase(k, type)->getSoundSpeed();
-      }
-      pI = 0.;
-      sumZk = 0.;
-      for (int k = 0; k < numberPhases; k++) {
-        sumZk += TB->zk[k];
-        sumZj = 0.;
-        for (int j = 0; j < numberPhases; j++) {
-          if (j != k) sumZj += TB->zk[j];
-        }
-        pI += sumZj * cell->getPhase(k, type)->getPressure();
-      }
-      pI /= sumZk;
-
+      double pI(0.), drhodp(0.);
+      pI = computeInterfacePressure(cell, type);
       for (int k = 0; k < numberPhases; k++) { TB->eos[k]->verifyAndModifyPressure(pI); } //Physical pressure?
 
       for (int k = 0; k < numberPhases; k++) {
-        TB->rhokS[k] = TB->eos[k]->computeDensityPfinal(TB->pk[k], TB->rhok[k], pI, &drho);
+        TB->rhokS[k] = TB->eos[k]->computeDensityPfinal(TB->pk[k], TB->rhok[k], pI, &drhodp);
         TB->akS[k] = TB->ak[k] * TB->rhok[k] / TB->rhokS[k];
         phase = cell->getPhase(k, type);
         phase->setAlpha(TB->akS[k]);

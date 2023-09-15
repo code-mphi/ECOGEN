@@ -1,0 +1,8 @@
+<?xml version = "1.0" encoding = "UTF-8" standalone = "yes"?>
+<mesh>
+	<type structure="unStructured"/>
+	<unstructuredMesh>
+		<file name="libMeshes/nozzles/nozzle2D_longThroat_seq.msh"/>
+		<parallel GMSHPretraitement="true"/>
+	</unstructuredMesh>
+</mesh>

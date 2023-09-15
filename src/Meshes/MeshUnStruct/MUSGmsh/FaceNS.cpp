@@ -36,22 +36,22 @@ FaceNS::FaceNS(){}
 
 //***********************************************************************
 
-FaceNS::FaceNS(const int& numberNoeuds) :
+FaceNS::FaceNS(const int& numberNodes) :
 Face(),
-m_numberNoeuds(numberNoeuds),
+m_numberNodes(numberNodes),
 m_limite(false),
 m_comm(false),
 m_elementGauche(0),
 m_elementDroite(0)
 {
-  m_numNoeuds = new int[numberNoeuds];
+  m_numNodes = new int[numberNodes];
 }
 
 //***********************************************************************
 
 FaceNS::~FaceNS()
 {
-  delete[] m_numNoeuds;
+  delete[] m_numNodes;
 }
 
 //***********************************************************************
@@ -70,16 +70,16 @@ ElementNS *FaceNS::getElementDroite() const
 
 //***********************************************************************
 
-void FaceNS::construitFace(const Coord* noeuds, const int& numNoeudAutre, ElementNS *elementVoisin)
+void FaceNS::construitFace(const Coord* nodes, const int& numNodeOther, ElementNS *elementNeighbor)
 {
 
   //Calcul position du center de face
   m_position = 0.;
-  for (int i = 0; i < m_numberNoeuds; i++){ m_position += noeuds[m_numNoeuds[i]]; }
-  m_position /= static_cast<double>(m_numberNoeuds);
+  for (int i = 0; i < m_numberNodes; i++){ m_position += nodes[m_numNodes[i]]; }
+  m_position /= static_cast<double>(m_numberNodes);
   //Calculs des proprietes de la face
-  this->computeSurface(noeuds);
-  this->computeRepere(noeuds, numNoeudAutre, elementVoisin);
+  this->computeSurface(nodes);
+  this->computeRepere(nodes, numNodeOther, elementNeighbor);
 }
 
 //***********************************************************************
@@ -92,12 +92,12 @@ bool FaceNS::faceExists(FaceNS** faces, const int& indexMaxFaces, int& indexFace
   {
     //1) Sans passer par operateur de comparaison
     //-------------------------------------------
-    if (faces[i]->m_sommeNumNoeuds != m_sommeNumNoeuds){continue;};
-    //Verification noeud par noeud
+    if (faces[i]->m_sumNumNodes != m_sumNumNodes){continue;};
+    //Verification node par node
     faceTrouvee = 1;
-    for (int n = 0; n < m_numberNoeuds; n++)
+    for (int n = 0; n < m_numberNodes; n++)
     {
-      if (m_numNoeuds[n] != faces[i]->getNumNoeud(n)){ faceTrouvee = 0; break; }
+      if (m_numNodes[n] != faces[i]->getNumNode(n)){ faceTrouvee = 0; break; }
     }
     if(faceTrouvee)
     {
@@ -114,21 +114,21 @@ bool FaceNS::faceExists(FaceNS** faces, const int& indexMaxFaces, int& indexFace
 
 //***********************************************************************
 
-void FaceNS::ajouteElementVoisin(ElementNS *elementVoisin)
+void FaceNS::addElementNeighbor(ElementNS *elementNeighbor)
 {
   if (m_elementGauche == 0)
   {
-    m_elementGauche = elementVoisin;
+    m_elementGauche = elementNeighbor;
   }
   else
   {
-    m_elementDroite = elementVoisin;
+    m_elementDroite = elementNeighbor;
   }
 }
 
 //***********************************************************************
 
-void FaceNS::ajouteElementVoisinLimite(ElementNS *elementVoisin)
+void FaceNS::addElementNeighborLimite(ElementNS *elementNeighbor)
 {
   if (m_elementGauche == 0)
   {
@@ -137,7 +137,7 @@ void FaceNS::ajouteElementVoisinLimite(ElementNS *elementVoisin)
     m_normal.changeSign();
     m_binormal = Coord::crossProduct(m_normal, m_tangent);
   }
-  m_elementDroite = elementVoisin;
+  m_elementDroite = elementNeighbor;
   m_limite = true;
 }
 
@@ -157,13 +157,13 @@ void FaceNS::setEstComm(const bool &estComm)
 
 //***********************************************************************
 
-void FaceNS::getInfoNoeuds(int* numNoeuds, int& sommeNumNoeuds) const
+void FaceNS::getInfoNodes(int* numNodes, int& sumNumNodes) const
 {
-  for(int i=0; i<m_numberNoeuds; i++)
+  for(int i=0; i<m_numberNodes; i++)
   {
-    numNoeuds[i] = m_numNoeuds[i];
+    numNodes[i] = m_numNodes[i];
   }
-  sommeNumNoeuds = m_sommeNumNoeuds;
+  sumNumNodes = m_sumNumNodes;
 }
 
 //***********************************************************************
@@ -171,10 +171,10 @@ void FaceNS::getInfoNoeuds(int* numNoeuds, int& sommeNumNoeuds) const
 void FaceNS::printInfo() const
 {
   std::cout << "----------------" << std::endl;
-  //cout << "Face" << endl << " Noeuds : ";
-  //for (int i = 0; i < m_numberNoeuds; i++)
+  //cout << "Face" << endl << " Nodes : ";
+  //for (int i = 0; i < m_numberNodes; i++)
   //{
-  //  cout << m_numNoeuds[i] << " ";
+  //  cout << m_numNodes[i] << " ";
   //}
   //cout << endl;
   std::cout << "center : " << m_position.getX() << " " << m_position.getY() << " " << m_position.getZ() << std::endl;
@@ -196,29 +196,29 @@ void FaceNS::printInfo() const
 
 //***********************************************************************
 
-void FaceNS::afficheNoeuds() const
+void FaceNS::printNodes() const
 {
-  std::cout << "Face" << " Noeuds : ";
-  for (int i = 0; i < m_numberNoeuds; i++)
+  std::cout << "Face" << " Nodes : ";
+  for (int i = 0; i < m_numberNodes; i++)
   {
-    std::cout << m_numNoeuds[i] << " ";
+    std::cout << m_numNodes[i] << " ";
   }
   std::cout << std::endl;
 }
 
 //*********************************************************************
 
-int FaceNS::searchFace(int* face, int& sumNodes, int** tableauFaces, int* tableauSommeNoeuds, int numberNoeuds, int& indexMaxFaces)
+int FaceNS::searchFace(int* face, int& sumNodes, int** arrayFaces, int* arraySumNodes, int numberNodes, int& indexMaxFaces)
 {
     for (int i = indexMaxFaces-1; i>=0; i--)
     {
       int existe = 1;
-      //On utilise la somme des number des noeuds pour faire un premier tri : permet d accelerer la recherche
-      if (tableauSommeNoeuds[i] != sumNodes){ continue; };
-      //Verification noeud par noeud
-      for (int n=0; n<numberNoeuds; n++)
+      //On utilise la sum des number des nodes pour faire un premier tri : permet d accelerer la recherche
+      if (arraySumNodes[i] != sumNodes){ continue; };
+      //Verification node par node
+      for (int n=0; n<numberNodes; n++)
       {
-        if (face[n] != tableauFaces[i][n]){ existe = 0; break; }
+        if (face[n] != arrayFaces[i][n]){ existe = 0; break; }
       }
       if (existe) return i; //Face trouvee, on renvoi son number
     }
@@ -227,17 +227,17 @@ int FaceNS::searchFace(int* face, int& sumNodes, int** tableauFaces, int* tablea
 
 //*********************************************************************
 
-int FaceNS::searchFace(int* face, int& sumNodes, std::vector<int*> tableauFaces, std::vector<int> tableauSommeNoeuds, int numberNoeuds, int& indexMaxFaces)
+int FaceNS::searchFace(int* face, int& sumNodes, std::vector<int*> arrayFaces, std::vector<int> arraySumNodes, int numberNodes, int& indexMaxFaces)
 {
     for (int i = indexMaxFaces-1; i>=0; i--)
     {
       int existe = 1;
-      //On utilise la somme des number des noeuds pour faire un premier tri : permet d accelerer la recherche
-      if (tableauSommeNoeuds[i] != sumNodes){ continue; };
-      //Verification noeud par noeud
-      for (int n=0; n<numberNoeuds; n++)
+      //On utilise la sum des number des nodes pour faire un premier tri : permet d accelerer la recherche
+      if (arraySumNodes[i] != sumNodes){ continue; };
+      //Verification node par node
+      for (int n=0; n<numberNodes; n++)
       {
-        if (face[n] != tableauFaces[i][n]){ existe = 0; break; }
+        if (face[n] != arrayFaces[i][n]){ existe = 0; break; }
       }
       if (existe) return i; //Face trouvee, on renvoi son number
     }
@@ -250,14 +250,14 @@ int FaceNS::searchFace(int* face, int& sumNodes, std::vector<int*> tableauFaces,
 
 bool operator==(const FaceNS &a, const FaceNS &b)
 {
-  //Sortie directe si m_sommeNumNoeuds differents
-  if (a.getSommeNumNoeuds() != b.getSommeNumNoeuds()){ return false; }
-  //Sortie directe si number noeuds differents
-  if (a.getNumberNoeuds() != b.getNumberNoeuds()){ return false; }
-  //Verification noeud par noeud
-  for (int i = 0; i < a.getNumberNoeuds(); i++)
+  //Sortie directe si m_sumNumNodes differents
+  if (a.getSumNumNodes() != b.getSumNumNodes()){ return false; }
+  //Sortie directe si number nodes differents
+  if (a.getNumberNodes() != b.getNumberNodes()){ return false; }
+  //Verification node par node
+  for (int i = 0; i < a.getNumberNodes(); i++)
   {
-    if (a.getNumNoeud(i) != b.getNumNoeud(i)){ return false; }
+    if (a.getNumNode(i) != b.getNumNode(i)){ return false; }
   }
   //Par defaut : il sont identiques
   return true;

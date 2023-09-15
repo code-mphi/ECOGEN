@@ -113,7 +113,7 @@ class PhaseUEqTotEnergy : public Phase
     virtual Eos* getEos() const { return m_eos; };
     virtual const double& getTotalEnergy() const { return m_totEnergy; };
     virtual const double& getSoundSpeed() const { return m_soundSpeed; };
-    virtual double getTemperature() const { return m_eos->computeTemperature(m_density, m_pressure); }; //KS//Modify with m_temperature directly?
+    virtual double getTemperature() const { return m_temperature; };
 
     virtual void setAlpha(double alpha);
     virtual void setDensity(double density);

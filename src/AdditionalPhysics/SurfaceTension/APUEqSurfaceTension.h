@@ -60,10 +60,10 @@ class APUEqSurfaceTension : public APUEq
     //! \brief     Solve the surface-tension flux at a boundary with a wall type
     //! \param     gradCLeft            color function gradient of the left cell
     void solveFluxSurfaceTensionWall(const Coord& gradCLeft) const;
-    //! \brief     Solve the surface-tension flux at a boundary with an outflow type
-    void solveFluxSurfaceTensionOutflow() const;
-    //! \brief     Solve the surface-tension flux at a boundary with an inflow (injection) type
-    void solveFluxSurfaceTensionInflow() const;
+    //! \brief     Solve the surface-tension flux at a boundary with an inlet injection using stagnation state type
+    void solveFluxSurfaceTensionInletInjStagState() const;
+    //! \brief     Solve the surface-tension flux at a boundary with an outlet at imposed pressure type
+    void solveFluxSurfaceTensionOutletPressure() const;
     //! \brief     Solve the surface-tension flux at a boundary with non-defined type yet
     void solveFluxSurfaceTensionOther() const;
     virtual void addNonCons(Cell* /*cell*/) {}; //The surface-tension effects do not involve non-conservative terms.

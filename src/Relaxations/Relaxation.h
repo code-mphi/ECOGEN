@@ -37,6 +37,7 @@ class Relaxation; //Predeclaration of class Relaxation to include Cell.h
 #include "../Errors.h"
 #include "../Tools.h"
 #include "../Order1/Cell.h"
+#include "../libTierces/svd.h"
 
 //! \class     Relaxation
 //! \brief     Abstract class for Relaxations
@@ -46,14 +47,20 @@ public:
   Relaxation();
   virtual ~Relaxation();
 
+  //! \brief     Return the type of the corresponding relaxation method
+  virtual int getType() const { Errors::errorMessage("getType not available for required relaxation"); return 0; }
+
   //! \brief     Stiff relaxation methods
   //! \details   Call for this method computes the one of the stiff relaxation methods.
   //! \param     cell           cell to relax
+  //! \param     dt             time step
   //! \param     type           enumeration allowing to relax either state in the cell or second order half time step state
   virtual void relaxation(Cell* /*cell*/, const double& /*dt*/, Prim /*type*/ = vecPhases) { Errors::errorMessage("relaxation not available for required relaxation"); };
 
-  //! \brief     Return the type of the corresponding relaxation method
-  virtual int getType() const { Errors::errorMessage("getType not available for required relaxation"); return 0; }
+  //! \brief     Initialize the theoritical critical pressure of the fluid (only required for PTMu relax)
+  //! \param     cell           cell to get the eos
+  //! \param     numberPhases   number of phases
+  virtual void initializeCriticalPressure(Cell* /*cell*/) {};
 
 private:
 };

@@ -78,8 +78,8 @@ OutputBoundaryGNU::~OutputBoundaryGNU() {}
 void OutputBoundaryGNU::initializeSpecificOutput(std::vector<CellInterface*>* cellInterfacesLvl)
 {
   try {
-    // Set time
-    m_nextAcq = 0.;
+    // Set time (zero if initial run and restart if restart activated)
+    m_nextAcq = m_run->m_physicalTime;
 
     // cellInterfaceNumbers keeps indexes of cellInterfaces 
     // which are on the recorded boundary (avoid to loop on all

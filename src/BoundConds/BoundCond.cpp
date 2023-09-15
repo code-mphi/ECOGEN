@@ -77,10 +77,11 @@ void BoundCond::computeFluxAddPhys(AddPhys &addPhys)
 void BoundCond::solveRiemann(double& dtMax, Limiter& /*globalLimiter*/, Limiter& /*interfaceLimiter*/, Limiter& /*globalVolumeFractionLimiter*/, Limiter& /*interfaceVolumeFractionLimiter*/, Prim type)
 {
   bufferCellLeft->copyVec(m_cellLeft->getPhases(type), m_cellLeft->getMixture(type), m_cellLeft->getTransports(type));
-  //Velocity projection on geometric reference frame of the face
-  bufferCellLeft->localProjection(m_face->getNormal(), m_face->getTangent(), m_face->getBinormal());
   //Computation of extended variables (Phases, Mixture, AddPhys)
   bufferCellLeft->fulfillState();
+
+  //Vector and tensor projections on geometric reference frame of the face
+  bufferCellLeft->localProjection(m_face->getNormal(), m_face->getTangent(), m_face->getBinormal());
 
   //Riemann problem
   double dxLeft(m_cellLeft->getElement()->getLCFL());
@@ -131,7 +132,7 @@ void BoundCond::raffineCellInterfaceExterne(const int& nbCellsY, const int& nbCe
 
       this->creerCellInterfaceChild();
       m_cellInterfacesChildren[0]->creerFaceChild(this);
-      m_cellInterfacesChildren[0]->getFace()->initializeAutres(surfaceChild, m_face->getNormal(), m_face->getTangent(), m_face->getBinormal());
+      m_cellInterfacesChildren[0]->getFace()->initializeOthers(surfaceChild, m_face->getNormal(), m_face->getTangent(), m_face->getBinormal());
       m_cellInterfacesChildren[0]->getFace()->setPos(m_face->getPos().getX(), m_face->getPos().getY(), m_face->getPos().getZ());
       m_cellInterfacesChildren[0]->getFace()->setSize(m_face->getSize());
       if (m_face->getPos().getX() < cellRef->getElement()->getPosition().getX()) {
@@ -157,7 +158,7 @@ void BoundCond::raffineCellInterfaceExterne(const int& nbCellsY, const int& nbCe
       for (int i = 0; i < 2; i++) {
         this->creerCellInterfaceChild();
         m_cellInterfacesChildren[i]->creerFaceChild(this);
-        m_cellInterfacesChildren[i]->getFace()->initializeAutres(surfaceChild, m_face->getNormal(), m_face->getTangent(), m_face->getBinormal());
+        m_cellInterfacesChildren[i]->getFace()->initializeOthers(surfaceChild, m_face->getNormal(), m_face->getTangent(), m_face->getBinormal());
       }
 
       //Face selon X
@@ -261,7 +262,7 @@ void BoundCond::raffineCellInterfaceExterne(const int& nbCellsY, const int& nbCe
     for (int i = 0; i < 4; i++) {
       this->creerCellInterfaceChild();
       m_cellInterfacesChildren[i]->creerFaceChild(this);
-      m_cellInterfacesChildren[i]->getFace()->initializeAutres(surfaceChild, m_face->getNormal(), m_face->getTangent(), m_face->getBinormal());
+      m_cellInterfacesChildren[i]->getFace()->initializeOthers(surfaceChild, m_face->getNormal(), m_face->getTangent(), m_face->getBinormal());
       m_cellInterfacesChildren[i]->getFace()->setSize(0.5*m_face->getSize());
     }
 

@@ -1,0 +1,6 @@
+<?xml version = "1.0" encoding = "UTF-8" standalone = "yes"?>
+<model>
+	<flowModel name="TemperaturePressureVelocityEq" numberPhases="2"/>
+	<EOS name="SG_dodLiq.xml"/>
+	<EOS name="IG_dodVap.xml"/>
+</model>

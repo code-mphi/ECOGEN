@@ -201,19 +201,7 @@ void FluxUEqTotEnergy::setToZero()
 
 //***********************************************************************
 
-void FluxUEqTotEnergy::setToZeroBufferFlux()
-{
-  for (int k = 0; k<numberPhases; k++) {
-    static_cast<FluxUEqTotEnergy*> (fluxBuff)->m_alpha[k] = 0.;
-    static_cast<FluxUEqTotEnergy*> (fluxBuff)->m_mass[k] = 0.;
-    static_cast<FluxUEqTotEnergy*> (fluxBuff)->m_totEnerg[k] = 0.;
-  }
-  static_cast<FluxUEqTotEnergy*> (fluxBuff)->m_momentum = 0.;
-}
-
-//***********************************************************************
-
-void FluxUEqTotEnergy::addNonCons(double coefA, const Cell* cell)
+void FluxUEqTotEnergy::addNonCons(double coefA, const Cell* cell, const Coord& /*normal*/, const Coord& /*tangent*/, const Coord& /*binormal*/)
 {
   Phase* phase;
   double uStar(static_cast<FluxUEqTotEnergy*> (fluxBuff)->m_uStar);
@@ -236,7 +224,7 @@ void FluxUEqTotEnergy::addNonCons(double coefA, const Cell* cell)
 
 //***********************************************************************
 
-void FluxUEqTotEnergy::subtractNonCons(double coefA, const Cell* cell)
+void FluxUEqTotEnergy::subtractNonCons(double coefA, const Cell* cell, const Coord& /*normal*/, const Coord& /*tangent*/, const Coord& /*binormal*/)
 {
   Phase* phase;
   double uStar(static_cast<FluxUEqTotEnergy*> (fluxBuff)->m_uStar);

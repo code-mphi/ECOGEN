@@ -49,7 +49,7 @@ class MixEuler : public Mixture
       virtual double computeFrozenSoundSpeed(const double* /*Yk*/, const double* /*ck*/) { return 0.; };
       
       virtual void computeMixtureVariables(Phase** /*vecPhase*/) {};
-      virtual void internalEnergyToTotalEnergy(std::vector<QuantitiesAddPhys*>& /*vecGPA*/) {};
+      virtual void computeTotalEnergy(std::vector<QuantitiesAddPhys*>& /*vecGPA*/) {};
       virtual void totalEnergyToInternalEnergy(std::vector<QuantitiesAddPhys*>& /*vecGPA*/) {};
 
       virtual void localProjection(const Coord& /*normal*/, const Coord& /*tangent*/, const Coord& /*binormal*/) {};
@@ -76,8 +76,12 @@ class MixEuler : public Mixture
       //---------------------------------
       virtual void computeSlopesMixture(const Mixture& /*sLeft*/, const Mixture& /*sRight*/, const double& /*distance*/) {};
       virtual void setToZero() {};
+      virtual void setToMax() {};
       virtual void extrapolate(const Mixture& /*slope*/, const double& /*distance*/) {};
       virtual void limitSlopes(const Mixture& /*slopeGauche*/, const Mixture& /*slopeDroite*/, Limiter& /*globalLimiter*/) {};
+      virtual void setMin(const Mixture& /*mixture1*/, const Mixture& /*mixture2*/) {};
+      virtual void setMax(const Mixture& /*mixture1*/, const Mixture& /*mixture2*/) {};
+      virtual void computeGradientLimiter(const Limiter& /*globalLimiter*/, const Mixture& /*mixture*/, const Mixture& /*mixtureMin*/, const Mixture& /*mixtureMax*/, const Mixture& /*slope*/) {};
 
       //Specific methods for parallele computing at second order
       //--------------------------------------------------------

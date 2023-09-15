@@ -1,0 +1,57 @@
+<?xml version = "1.0" encoding = "UTF-8" standalone = "yes"?>
+<CI>
+    <!-- LIST OF GEOMETRICAL DOMAINS  -->
+    <physicalDomains> 
+        <domain name="base" state="chamberLP" type="entireDomain"/>
+        <domain name="HP"  state="chamberHP" type="halfSpace">
+            <dataHalfSpace axis="x" origin="0.4" direction="negative"/>
+        </domain>
+        <domain name="HP"  state="air" type="halfSpace">
+            <dataHalfSpace axis="x" origin="0.5" direction="positive"/>
+        </domain>
+    </physicalDomains>
+
+    <!-- LIST OF BOUNDARY CONDITIONS -->
+    <boundaryConditions>
+        <boundCond name="CLXm" type="nonReflecting" number="1"/>
+        <boundCond name="CLXp" type="nonReflecting" number="2"/>
+    </boundaryConditions>
+    
+    <!--  LIST OF STATES  -->
+    <state name="chamberLP">
+        <material type="fluid" EOS="IG_air.xml">
+            <dataFluid alpha="0." density="1." pressure="1.e5"/>
+        </material>
+        <material type="fluid" EOS="SG_water.xml">
+            <dataFluid alpha="1." density="1000.0" pressure="1.e5"/>
+        </material>
+        <mixture>
+            <velocity x="100." y="0." z="0."/>
+        </mixture>
+    </state>
+
+    <state name="chamberHP">
+        <material type="fluid" EOS="IG_air.xml">
+            <dataFluid alpha="0." density="1." pressure="1.e7"/>
+        </material>
+        <material type="fluid" EOS="SG_water.xml">
+            <dataFluid alpha="1." density="1000.0" pressure="1.e7"/>
+        </material>
+        <mixture>
+            <velocity x="100." y="0." z="0."/>
+        </mixture>
+    </state>
+
+    <state name="air">
+        <material type="fluid" EOS="IG_air.xml">
+            <dataFluid alpha="1." density="1." pressure="1.e5"/>
+        </material>
+        <material type="fluid" EOS="SG_water.xml">
+            <dataFluid alpha="0." density="1000.0" pressure="1.e5"/>
+        </material>
+        <mixture>
+            <velocity x="100." y="0." z="0."/>
+        </mixture>
+    </state>
+
+</CI>

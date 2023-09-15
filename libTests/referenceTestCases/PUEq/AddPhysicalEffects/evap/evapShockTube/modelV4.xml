@@ -1,9 +1,0 @@
-<?xml version = "1.0" encoding = "UTF-8" standalone = "yes"?>
-<model>
-	<flowModel name="PressureVelocityEq" numberPhases="2" alphaNull="false"/>
-	<EOS name="SG_waterLiq.xml"/>
-	<EOS name="IG_waterVap.xml"/>
-	<relaxation type="PTMu">
-		<dataPTMu liquid="SG_waterLiq.xml" vapor="IG_waterVap.xml"/>
-	</relaxation>
-</model>

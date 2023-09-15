@@ -72,6 +72,10 @@ bool GDEntireDomainWithParticularities::belong(Coord& /*posElement*/, const int&
   //5. Rayleigh-Taylor instability
   //------------------------------
   // return true; //always belong to entire domain
+
+  //6. Blast-wave equation
+  //----------------------
+  // return true; //always belong to entire domain
 }
 
 //******************************************************************
@@ -93,25 +97,29 @@ void GDEntireDomainWithParticularities::fillIn(Cell* cell) const
     for (int k = 0; k < numberPhases; k++) { cell->copyPhase(k, m_vecPhases[k]); }
     cell->copyMixture(m_mixture);
     for (int k = 0; k < numberTransports; k++) { cell->setTransport(m_vecTransports[k].getValue(), k); }
+    if(m_physicalEntity == -1){ cell->setWall(true); }
+    else{ cell->setWall(false); }
 
     //Particularities
     //1. Laplace pressure initialization
     //----------------------------------
     // if (cell->getElement() != 0) {
-    //  double pressure(0.);
-    //  Coord posElement(cell->getPosition());
-    //  double radius;
-    //  //radius = posElement.getX(); //1D
-    //  //radius = std::pow(std::pow(posElement.getX(), 2.) + std::pow(posElement.getY(), 2.), 0.5); //2D
-    //  radius = std::pow(std::pow(posElement.getX() - 0.75e-3, 2.) + std::pow(posElement.getY(), 2.), 0.5); //2D
-    //  //radius = std::pow(std::pow(posElement.getX(), 2.) + std::pow(posElement.getY(), 2.) + std::pow(posElement.getZ(), 2.), 0.5); //3D
-    //  //radius = std::pow(std::pow(posElement.getX() - 153.6e-3, 2.) + std::pow(posElement.getY(), 2.) + std::pow(posElement.getZ(), 2.), 0.5); //3D
-    //  //pressure = 1.e5 + 1.e-3 / radius * (1.e4 - 1.e5);
-    //  //pressure = 1.e5 + 1.e-3 / radius * (4.e3 - 1.e5);
-    //  //pressure = 1.e5 + 1.e-3 / radius * (1.e3 - 1.e5);
-    //  pressure = 50.6625e5 + 0.5e-3 / radius * (3.55e3 - 50.6625e5);
-    //  for (int k = 0; k < numberPhases; k++) { cell->getPhase(k)->setPressure(pressure); }
-    //  cell->getMixture()->setPressure(pressure);
+    //   double pressure(0.);
+    //   Coord posElement(cell->getPosition());
+    //   double radius;
+    //   //radius = posElement.getX(); //1D
+    //   //radius = std::pow(std::pow(posElement.getX(), 2.) + std::pow(posElement.getY(), 2.), 0.5); //2D
+    //   //radius = std::pow(std::pow(posElement.getX() - 0.75e-3, 2.) + std::pow(posElement.getY(), 2.), 0.5); //2D
+    //   radius = std::pow(std::pow(posElement.getX() - 2.e-4, 2.) + std::pow(posElement.getY(), 2.), 0.5); //2D
+    //   //radius = std::pow(std::pow(posElement.getX(), 2.) + std::pow(posElement.getY(), 2.) + std::pow(posElement.getZ(), 2.), 0.5); //3D
+    //   //radius = std::pow(std::pow(posElement.getX() - 153.6e-3, 2.) + std::pow(posElement.getY(), 2.) + std::pow(posElement.getZ(), 2.), 0.5); //3D
+    //   //pressure = 1.e5 + 1.e-3 / radius * (1.e4 - 1.e5);
+    //   //pressure = 1.e5 + 1.e-3 / radius * (4.e3 - 1.e5);
+    //   //pressure = 1.e5 + 1.e-3 / radius * (1.e3 - 1.e5);
+    //   //pressure = 353.e5 + 1.e-4 / radius * (1.e5 - 353.e5);
+    //   pressure = 50.6625e5 + 1.e-4 / radius * (3.55e3 - 50.6625e5);
+    //   for (int k = 0; k < numberPhases; k++) { cell->getPhase(k)->setPressure(pressure); }
+    //   cell->getMixture()->setPressure(pressure);
     // }
 
     //2. Respecting special coordinates
@@ -133,11 +141,13 @@ void GDEntireDomainWithParticularities::fillIn(Cell* cell) const
 
     //4. Random velocity perturbations: O(1e−4 u_s)
     //---------------------------------------------
+    // if (cell->getElement() != 0) {
     // Coord perturbedVelocity(cell->getMixture()->getVelocity());
     // perturbedVelocity.setX(static_cast<double>(rand() % 2001 - 1000)/1.e3 * 1.e-3*151.821433232719 + perturbedVelocity.getX());
     // perturbedVelocity.setY(static_cast<double>(rand() % 2001 - 1000)/1.e3 * 1.e-3*151.821433232719 + perturbedVelocity.getY());
     // perturbedVelocity.setZ(static_cast<double>(rand() % 2001 - 1000)/1.e3 * 1.e-3*151.821433232719 + perturbedVelocity.getZ());
     // cell->getMixture()->setVelocity(perturbedVelocity);
+    // }
 
     //5. Rayleigh-Taylor instability
     //------------------------------
@@ -206,6 +216,32 @@ void GDEntireDomainWithParticularities::fillIn(Cell* cell) const
     //     cell->getPhase(k)->setPressure(pressure);
     //   }
     //   cell->getMixture()->setPressure(pressure);
+    // }
+
+    //6. Blast-wave equation
+    //----------------------
+    //p(t) = p0 + 2 p_s exp(−αt) * cos(ωt + π/3)
+    //p(x) = p0 + 2 p_s exp(-αr/c) * cos(ωr/c + π/3)
+    // if (cell->getElement() != 0) {
+    //   double pressure(0.), velocity(0.), pk(0.);
+    //   double beta(1.48e6), omega(1.21e6); //beta here is the alpha variable of the equation
+    //   double posX(cell->getPosition().getX());
+    //   double p0(1.01325e5), pS(35e6), soundSpeed(1625.), density(1000.);
+    //   double shockFront(7.5e-3);
+
+    //   if (posX < shockFront) {
+    //     double r = posX - shockFront;
+    //     pressure = p0 + 2 * pS * exp(beta * r / soundSpeed) * std::cos(- omega * r / soundSpeed + M_PI / 3.);
+    //     velocity = (pressure - p0) / (density * soundSpeed);
+
+    //     for (int k = 0; k < numberPhases; k++) {
+    //       pk = pressure;
+    //       cell->getPhase(k)->getEos()->verifyAndModifyPressure(pk);
+    //       cell->getPhase(k)->setPressure(pk);
+    //     }
+    //     cell->getMixture()->setPressure(pressure);
+    //     cell->getMixture()->setU(velocity);
+    //   }
     // }
   }
 }

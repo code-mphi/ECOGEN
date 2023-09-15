@@ -20,7 +20,7 @@ Setup of the test case
 
 For the purpose of this tutorial we have to do some slight modifications of the test case presented above. We advise you to make a copy of the test case **./libTests/referenceTestCases/euler/1D/shockTubes/HPLeft/** into a new path such as **./libTests/myTests/restartRun/**.
 
-For the sake of simplicity, we edit the *mainV5.xml* file as following:
+For the sake of simplicity, we edit the *main.xml* file as following:
 
 .. code-block:: xml
 
@@ -41,7 +41,7 @@ For the sake of simplicity, we edit the *mainV5.xml* file as following:
 
 We removed the probe section and changed the time control mode to iterations with a printing of data each 50 iterations for a total of 500 iterations.
 
-Following the same idea of simpler test case we edit the file *meshV5.xml* by commenting the AMR feature and add more cells:
+Following the same idea of simpler test case we edit the file *mesh.xml* by commenting the AMR feature and add more cells:
 
 .. code-block:: xml
 
@@ -79,14 +79,14 @@ Once started, the output on the console looks like:
 
   Console screenshot of the initial run.
 
-Once the simulation is done, we can check in the result folder **./results/restartRun/datasets/** the total number of iterations extracted. The last file has the name *results_CPUxx_TIME10.vtr* which indicates that the number of extracted files is indeed 10 as specified in the *mainV5.xml* file (500 physical iterations, results printed every 50 interations giving a total of 500/50 = 10 output files). This number corresponds to the *restartFileNumber* of the the block :xml:`<restartSimulation>`.
+Once the simulation is done, we can check in the result folder **./results/restartRun/datasets/** the total number of iterations extracted. The last file has the name *results_CPUxx_TIME10.vtr* which indicates that the number of extracted files is indeed 10 as specified in the *main.xml* file (500 physical iterations, results printed every 50 interations giving a total of 500/50 = 10 output files). This number corresponds to the *restartFileNumber* of the the block :xml:`<restartSimulation>`.
 
 Obviously, in this case we know the total number of time iterations extracted because we waited the end of the simulation. However, it could be useful to get this number if the simulation stopped suddenly, or if the time control mode used was time.
 
 Resume run
 ==========
 
-Now that we know the last time iteration, we can resume this simulation to add 500 additionnal time iterations. To this end, we modify the block :xml:`<restartSimulation>` of the *mainV5.xml* file to specify the last file number:
+Now that we know the last time iteration, we can resume this simulation to add 500 additionnal time iterations. To this end, we modify the block :xml:`<restartSimulation>` of the *main.xml* file to specify the last file number:
 
 .. code-block:: xml
 

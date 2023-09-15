@@ -1,0 +1,37 @@
+<?xml version = "1.0" encoding = "UTF-8" standalone = "yes"?>
+<CI>
+    <!-- LIST OF GEOMETRICAL DOMAINS  -->
+    <physicalDomains> 
+        <domain name="base" state="air" type="entireDomain"/>
+    </physicalDomains>
+
+    <!-- LIST OF BOUNDARY CONDITIONS -->
+    <boundaryConditions>
+        <!-- Requires hard-coded symmetry boundary condition before the flat plate, see MeshCartesian.cpp -->
+        <boundCond name="CLXm" type="inletInjStagState" number="1">
+            <dataInletInj m0="1."/>
+            <dataFluid density="1." pressure="100."/>
+        </boundCond>
+
+        <boundCond name="CLXp" type="outletPressure" number="2">
+            <dataOutletPressure p0="100."/>
+        </boundCond>
+
+        <boundCond name="CLYm" type="wall" number="3"/>
+
+        <boundCond name="CLYp" type="outletPressure" number="4">
+            <dataOutletPressure p0="100."/>
+        </boundCond>
+
+    </boundaryConditions>
+    
+    <!--  LIST OF STATES  -->
+    <state name="air">
+        <material type="fluid" EOS="IG_airBlasiusLaminar.xml">
+            <dataFluid density="1." pressure="100.">
+                <velocity x="0." y="0." z="0."/>
+            </dataFluid>
+        </material>
+    </state>
+
+</CI>

@@ -47,6 +47,10 @@ public:
   virtual void initGeometryMonoCPU(TypeMeshContainer<Cell*>& cells, TypeMeshContainer<CellInterface*>& cellInterfaces, std::string computeOrder = "FIRSTORDER") = 0;
   virtual void initGeometryParallel(TypeMeshContainer<Cell*>& cells, TypeMeshContainer<Cell*>& cellsGhost, TypeMeshContainer<CellInterface*>& cellInterfaces, std::string computeOrder = "FIRSTORDER") = 0;
   virtual void preProcessMeshFileForParallel() = 0;
+  virtual void initCpuMeshSequential(TypeMeshContainer<Cell*>& cells, std::string& computeOrder) = 0;
+  virtual void initCpuMeshParallel(TypeMeshContainer<Cell*>& cells, std::string& computeOrder, int cpu) = 0;
+  
+  virtual std::string getMeshExtension() const { return "msh"; };
 
 private:
 };

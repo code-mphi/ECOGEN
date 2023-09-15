@@ -3,10 +3,10 @@
 
 .. _Sec:input:mesh:
 
-MeshV5.xml
+Mesh.xml
 ==========
 
-Input file *meshV5.xml* is necessary to specify the geometrical characteristics of the computational domain and the type of mesh used. This file is **mandatory** and must be present in the folder of the current case. The minimalist content of this file is:
+Input file *mesh.xml* is necessary to specify the geometrical characteristics of the computational domain and the type of mesh used. This file is **mandatory** and must be present in the folder of the current case. The minimalist content of this file is:
 
 .. code-block:: xml
 
@@ -73,7 +73,7 @@ Optional AMR
 
 	<AMR lvlMax="2" criteriaVar="0.2" varRho="true" varP="true" varU="false" varAlpha="false" xiSplit="0.11" xiJoin="0.11"/> <!-- Optionnal node -->
 
-An efficient Adaptive Mesh refinement (AMR) technology is embedded in ECOGEN :cite:`schmidmayer2019adaptive`. To use it, the *meshV5.xml* file must contain the optional node :xml:`<AMR>` of the :xml:`<cartesianMesh>` markup and define the following attributes:
+An efficient Adaptive Mesh refinement (AMR) technology is embedded in ECOGEN :cite:`schmidmayer2019adaptive`. To use it, the *mesh.xml* file must contain the optional node :xml:`<AMR>` of the :xml:`<cartesianMesh>` markup and define the following attributes:
 
 - :xml:`lvlMax`: Integer to define the maximal number of refinements (levels).
 - :xml:`criteriaVar`: Real number controlling the detection of gradients for the locations of refinement.
@@ -96,10 +96,10 @@ Unstructured mesh
 	  <parallel GMSHPretraitement="true"/>  <!-- Optionnal node if multi-core -->
 	</unstructuredMesh>
 
-When dealing with unstructured meshes, the :xml:`<unstructuredMesh>` markup **must be** present in the *meshV5.xml* input file and it contains the following nodes:
+When dealing with unstructured meshes, the :xml:`<unstructuredMesh>` markup **must be** present in the *mesh.xml* input file and it contains the following nodes:
 
 - :xml:`<file>`: This **mandatory** node specifies the path of the mesh file via the attribute :xml:`name`. The file must be located in the folder **ECOGEN/libMeshes/**.
-- :xml:`<modeParallele>`: This node is required only if the mesh file is a multi-core file. The attribute :xml:`GMSHPretraitement` can take the following values:
+- :xml:`<parallel>`: This node is required only if the mesh file is a multi-core file. The attribute :xml:`GMSHPretraitement` can take the following values:
 		
 	- *true*: ECOGEN automatically splits the given mesh file in as many as necessary files according to the number of available cores.
 	- *false*: Do not redo the split of the given mesh (which has already been split in a previous simulation).
@@ -107,8 +107,28 @@ When dealing with unstructured meshes, the :xml:`<unstructuredMesh>` markup **mu
 **Remarks:**
 
 1. The attribute :xml:`GMSHPretraitement` must be set as *true* if this is the first run with the given mesh file.
-2. In the current version |version| of ECOGEN, only mesh files generated with the opensource Gmsh_ software :cite:`geuzaine2009gmsh` under file format *version 2* can be used.
+2. In the current version |version| of ECOGEN, only mesh files generated with the open-source Gmsh_ software :cite:`geuzaine2009gmsh` under file format *version 2* can be used. To export your mesh file to this version, see the tutorial :ref:`Sec:tuto:exportGmshFile`.
 
 Please refer to the section :ref:`Sec:tuto:generatingMeshes` to learn how to generate a mesh adapted for ECOGEN.
 
 .. _Gmsh: http://gmsh.info/
+
+Optionnal restart with mesh mapping
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+ECOGEN offers the possibility to initialize a simulation with the result of a previous simulation performed on a different mesh and/or a different number of CPU.
+One of the most common use case would be to run a simulation on a rough mesh until steady state is reached and use the result to initialize the flow field on a fine mesh to fasten the convergence to steady state.
+Assuming a previous simulation with a rough mesh under the name *euler2DHPUnstructuredRough* has been previously run, the simulation with the fine mesh must have :xml:`<meshMappingRestart>` node as follows:
+
+.. code-block:: xml
+
+  <unstructuredMesh>
+    <file name="libMeshes/square/squareRefined.msh"/>
+    <meshMappingRestart 
+      resultFolder="euler2DHPUnstructuredRough" 
+      restartFileNumber="200" 
+      meshFile="libMeshes/square/square.msh"
+    />
+  </unstructuredMesh>
+
+For more details on how to use this feature, refer to the tutorial :ref:`Sec:tuto:restartMeshMapping`.

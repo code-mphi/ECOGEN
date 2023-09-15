@@ -419,6 +419,13 @@ void PhaseEulerKorteweg::verifyAndCorrectPhase()
   if (m_density < 1.e-10) m_density = 1.e-10;
 }
 
+//***************************************************************************
+
+void PhaseEulerKorteweg::verifyAndCorrectDensityMax()
+{
+  m_eos->verifyAndCorrectDensityMax(m_density);
+}
+
 //****************************************************************************
 //**************************** DATA ACCESSORS ********************************
 //****************************************************************************
