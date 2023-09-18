@@ -1,92 +1,52 @@
-
-
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8">
-  
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  
-  <title>Gmsh example and extraction of mass-flow rate &mdash; ECOGEN 3.1 documentation</title>
-  
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-  
-  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
-  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-
-  
-  
-  
-  
-
-  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Gmsh example and extraction of mass-flow rate &mdash; ECOGEN 4.0 documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
   <!--[if lt IE 9]>
     <script src="_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-    
-      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
-        <script src="_static/jquery.js"></script>
-        <script src="_static/underscore.js"></script>
-        <script src="_static/doctools.js"></script>
-        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    
-    <script type="text/javascript" src="_static/js/theme.js"></script>
-
-    
+        <script src="_static/jquery.js?v=5d32c60e"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="_static/documentation_options.js?v=9f5556dd"></script>
+        <script src="_static/doctools.js?v=888ff710"></script>
+        <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="Running a test case in another folder" href="Chap4_7runningATestInAnotherFolder.html" />
     <link rel="prev" title="ParaView server" href="Chap4_5paraviewServer.html" /> 
 </head>
 
-<body class="wy-body-for-nav">
-
-   
+<body class="wy-body-for-nav"> 
   <div class="wy-grid-for-nav">
-    
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-          
 
           
-            <a href="index.html" class="icon icon-home" alt="Documentation Home"> ECOGEN
           
-
-          
+          <a href="index.html" class="icon icon-home">
+            ECOGEN
           </a>
-
-          
-            
-            
               <div class="version">
-                3.1
+                4.0
               </div>
-            
-          
-
-          
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
 </div>
-
-          
-        </div>
-
-        
-        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
-          
-            
-            
-              
-            
-            
-              <p class="caption"><span class="caption-text">Contents:</span></p>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="Chap1_introduction.html">Introduction</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Chap2_installation_Chapter.html">Installation instructions</a></li>
@@ -105,6 +65,8 @@
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="Chap4_7runningATestInAnotherFolder.html">Running a test case in another folder</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Chap4_8restartMeshMapping.html">Restart a simulation with mesh mapping</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Chap4_9exportGmshFile.html">Export Gmsh mesh to version 2 file format</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="Chap5_testCases_Chapter.html">Test cases</a></li>
@@ -113,106 +75,67 @@
 <li class="toctree-l1"><a class="reference internal" href="zBibliography.html">Bibliography</a></li>
 </ul>
 
-            
-          
         </div>
-        
       </div>
     </nav>
 
-    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
-
-      
-      <nav class="wy-nav-top" aria-label="top navigation">
-        
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
           <a href="index.html">ECOGEN</a>
-        
       </nav>
 
-
       <div class="wy-nav-content">
-        
         <div class="rst-content">
-        
-          
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<div role="navigation" aria-label="breadcrumbs navigation">
-
+          <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-    
-      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
-        
-          <li><a href="Chap4_tutorials_Chapter.html">Tutorials</a> &raquo;</li>
-        
-      <li>Gmsh example and extraction of mass-flow rate</li>
-    
-    
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="Chap4_tutorials_Chapter.html">Tutorials</a></li>
+      <li class="breadcrumb-item active">Gmsh example and extraction of mass-flow rate</li>
       <li class="wy-breadcrumbs-aside">
-        
-            
             <a href="_sources/Chap4_6extractMassflowWithParaview.rst.txt" rel="nofollow"> View page source</a>
-          
-        
       </li>
-    
   </ul>
-
-  
   <hr/>
 </div>
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
-            
-  <div class="section" id="gmsh-example-and-extraction-of-mass-flow-rate">
-<span id="sec-tuto-extractmassflow"></span><h1>Gmsh example and extraction of mass-flow rate<a class="headerlink" href="#gmsh-example-and-extraction-of-mass-flow-rate" title="Permalink to this headline">¶</a></h1>
+             
+  <section id="gmsh-example-and-extraction-of-mass-flow-rate">
+<span id="sec-tuto-extractmassflow"></span><h1>Gmsh example and extraction of mass-flow rate<a class="headerlink" href="#gmsh-example-and-extraction-of-mass-flow-rate" title="Link to this heading"></a></h1>
 <p>One might needs to extract the mass-flow rate throught a specific surface/boundary. Some CFD tools such as OpenFOAM or SimFlow allows to select a specific boundary in the properties field of your dataset and work directly from there.
 However, in ECOGEN the output data is generated as a multi-block dataset: a block for each core. Thus, it is required to extract the boundary in <a class="reference external" href="https://www.paraview.org/">ParaView</a> as described below. By this example we will also show how to use <a class="reference external" href="http://gmsh.info/">Gmsh</a>.</p>
-<div class="section" id="generate-msh-file">
-<h2>Generate .msh file<a class="headerlink" href="#generate-msh-file" title="Permalink to this headline">¶</a></h2>
+<section id="generate-msh-file">
+<h2>Generate .msh file<a class="headerlink" href="#generate-msh-file" title="Link to this heading"></a></h2>
 <ul class="simple">
 <li><p>To generate msh files, one needs to use <strong>Gmsh</strong> with the <em>.geo</em> file that can be found on <em>./libMeshes</em>. Here, we will use <em>cylinderUnstructured.geo</em>.</p></li>
 </ul>
-<div class="figure align-center" id="id2">
+<figure class="align-center" id="id2">
 <a class="reference internal image-reference" href="_images/gmsh1.png"><img alt="_images/gmsh1.png" src="_images/gmsh1.png" style="width: 483.9px; height: 306.9px;" /></a>
-<p class="caption"><span class="caption-number">Fig. 21 </span><span class="caption-text">Screenshot of the geometry.</span><a class="headerlink" href="#id2" title="Permalink to this image">¶</a></p>
-</div>
+<figcaption>
+<p><span class="caption-number">Fig. 22 </span><span class="caption-text">Screenshot of the geometry.</span><a class="headerlink" href="#id2" title="Link to this image"></a></p>
+</figcaption>
+</figure>
 <ul class="simple">
-<li><p>Now, as it is a 3D geometry, one has to click on 3D in the <code class="code xml docutils literal notranslate"><span class="pre">Mesh</span></code> tab, and partition to select how many cores will be used, and then click on partition before closing this window.</p></li>
+<li><p>Now, as it is a 3D geometry, one has to click on 3D in the <code class="code highlight xml docutils literal highlight-xml">Mesh</code> tab, and partition to select how many cores will be used, and then click on partition before closing this window.</p></li>
 </ul>
-<div class="figure align-center" id="id3">
+<figure class="align-center" id="id3">
 <a class="reference internal image-reference" href="_images/gmsh2.png"><img alt="_images/gmsh2.png" src="_images/gmsh2.png" style="width: 483.29999999999995px; height: 298.5px;" /></a>
-<p class="caption"><span class="caption-number">Fig. 22 </span><span class="caption-text">Partition menu.</span><a class="headerlink" href="#id3" title="Permalink to this image">¶</a></p>
-</div>
+<figcaption>
+<p><span class="caption-number">Fig. 23 </span><span class="caption-text">Partition menu.</span><a class="headerlink" href="#id3" title="Link to this image"></a></p>
+</figcaption>
+</figure>
 <ul class="simple">
-<li><p>Finally, still on the <code class="code xml docutils literal notranslate"><span class="pre">Mesh</span></code> tab, click on <code class="code xml docutils literal notranslate"><span class="pre">Save</span></code>. The .msh files will be in the <em>./libMeshes</em> folder.</p></li>
+<li><p>Finally, still on the <code class="code highlight xml docutils literal highlight-xml">Mesh</code> tab, click on <code class="code highlight xml docutils literal highlight-xml">Save</code>. The .msh files will be in the <em>./libMeshes</em> folder.</p></li>
 </ul>
-</div>
-<div class="section" id="cylinder-test-case">
-<h2>Cylinder Test case<a class="headerlink" href="#cylinder-test-case" title="Permalink to this headline">¶</a></h2>
+<p>In case you are using latest version of <strong>Gmsh</strong>, you might need to export your mesh file to the previous mesh file format, for more information see the tutorial <a class="reference internal" href="Chap4_9exportGmshFile.html#sec-tuto-exportgmshfile"><span class="std std-ref">Export Gmsh mesh to version 2 file format</span></a>.</p>
+</section>
+<section id="cylinder-test-case">
+<h2>Cylinder Test case<a class="headerlink" href="#cylinder-test-case" title="Link to this heading"></a></h2>
 <ul class="simple">
 <li><p>The test used here will be a water flow through a cylinder in 3D. One side has an injection condition with a surface mass flow of 3000 kg/m/s² and a temperature of 300K. The other side has an outflow condition with a pressure of 1 bar. The fluid used here is water.</p></li>
 </ul>
 <p>The initial characteristics of the run are:</p>
 <table class="docutils align-default">
-<colgroup>
-<col style="width: 57%" />
-<col style="width: 43%" />
-</colgroup>
 <thead>
 <tr class="row-odd"><th class="head"><p>Characteristic</p></th>
 <th class="head"><p>Value</p></th>
@@ -239,91 +162,109 @@ However, in ECOGEN the output data is generated as a multi-block dataset: a bloc
 </tr>
 </tbody>
 </table>
-</div>
-<div class="section" id="paraview">
-<h2>ParaView<a class="headerlink" href="#paraview" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="paraview">
+<h2>ParaView<a class="headerlink" href="#paraview" title="Link to this heading"></a></h2>
 <ul class="simple">
-<li><p>Once your data is loaded in <strong>ParaView</strong>, display your geometry with <code class="code xml docutils literal notranslate"><span class="pre">Solid</span> <span class="pre">Color</span></code> and <code class="code xml docutils literal notranslate"><span class="pre">Surface</span> <span class="pre">With</span> <span class="pre">Edges</span></code> to see the cells.</p></li>
+<li><p>Once your data is loaded in <strong>ParaView</strong>, display your geometry with <code class="code highlight xml docutils literal highlight-xml">Solid<span class="w"> </span>Color</code> and <code class="code highlight xml docutils literal highlight-xml">Surface<span class="w"> </span>With<span class="w"> </span>Edges</code> to see the cells.</p></li>
 </ul>
-<div class="figure align-center" id="id4">
+<figure class="align-center" id="id4">
 <a class="reference internal image-reference" href="_images/1.png"><img alt="_images/1.png" src="_images/1.png" style="width: 483.59999999999997px; height: 307.8px;" /></a>
-<p class="caption"><span class="caption-number">Fig. 23 </span><span class="caption-text">Loading data.</span><a class="headerlink" href="#id4" title="Permalink to this image">¶</a></p>
-</div>
+<figcaption>
+<p><span class="caption-number">Fig. 24 </span><span class="caption-text">Loading data.</span><a class="headerlink" href="#id4" title="Link to this image"></a></p>
+</figcaption>
+</figure>
 <ul class="simple">
 <li><p>Change the view to see the boundary of interest.</p></li>
 </ul>
-<div class="figure align-center" id="id5">
+<figure class="align-center" id="id5">
 <a class="reference internal image-reference" href="_images/2.png"><img alt="_images/2.png" src="_images/2.png" style="width: 484.5px; height: 307.8px;" /></a>
-<p class="caption"><span class="caption-number">Fig. 24 </span><span class="caption-text">Set the view focused on the boundary of interest.</span><a class="headerlink" href="#id5" title="Permalink to this image">¶</a></p>
-</div>
+<figcaption>
+<p><span class="caption-number">Fig. 25 </span><span class="caption-text">Set the view focused on the boundary of interest.</span><a class="headerlink" href="#id5" title="Link to this image"></a></p>
+</figcaption>
+</figure>
 <ul class="simple">
-<li><p>On the layout window click on <code class="code xml docutils literal notranslate"><span class="pre">Select</span> <span class="pre">Cells</span> <span class="pre">On</span></code> and select the cells located on the boundary.</p></li>
+<li><p>On the layout window click on <code class="code highlight xml docutils literal highlight-xml">Select<span class="w"> </span>Cells<span class="w"> </span>On</code> and select the cells located on the boundary.</p></li>
 </ul>
-<div class="figure align-center" id="id6">
+<figure class="align-center" id="id6">
 <a class="reference internal image-reference" href="_images/3.png"><img alt="_images/3.png" src="_images/3.png" style="width: 483.0px; height: 307.8px;" /></a>
-<p class="caption"><span class="caption-number">Fig. 25 </span><span class="caption-text">Selection of the cells on the boundary.</span><a class="headerlink" href="#id6" title="Permalink to this image">¶</a></p>
-</div>
+<figcaption>
+<p><span class="caption-number">Fig. 26 </span><span class="caption-text">Selection of the cells on the boundary.</span><a class="headerlink" href="#id6" title="Link to this image"></a></p>
+</figcaption>
+</figure>
 <ul class="simple">
-<li><p>Apply the Filter <code class="code xml docutils literal notranslate"><span class="pre">Extract</span> <span class="pre">Selection</span></code> to keep only these cells.</p></li>
-<li><p>Again, it is recommended to use <code class="code xml docutils literal notranslate"><span class="pre">Solid</span> <span class="pre">Color</span></code> view with <code class="code xml docutils literal notranslate"><span class="pre">Surface</span> <span class="pre">With</span> <span class="pre">Edges</span></code> to correctly see the cells that we are working on. It is possible to rotate the view to observe the shape of the cells.</p></li>
+<li><p>Apply the Filter <code class="code highlight xml docutils literal highlight-xml">Extract<span class="w"> </span>Selection</code> to keep only these cells.</p></li>
+<li><p>Again, it is recommended to use <code class="code highlight xml docutils literal highlight-xml">Solid<span class="w"> </span>Color</code> view with <code class="code highlight xml docutils literal highlight-xml">Surface<span class="w"> </span>With<span class="w"> </span>Edges</code> to correctly see the cells that we are working on. It is possible to rotate the view to observe the shape of the cells.</p></li>
 </ul>
-<div class="figure align-center" id="id7">
+<figure class="align-center" id="id7">
 <a class="reference internal image-reference" href="_images/4.png"><img alt="_images/4.png" src="_images/4.png" style="width: 483.59999999999997px; height: 307.8px;" /></a>
-<p class="caption"><span class="caption-number">Fig. 26 </span><span class="caption-text">View of the cells extracted.</span><a class="headerlink" href="#id7" title="Permalink to this image">¶</a></p>
-</div>
+<figcaption>
+<p><span class="caption-number">Fig. 27 </span><span class="caption-text">View of the cells extracted.</span><a class="headerlink" href="#id7" title="Link to this image"></a></p>
+</figcaption>
+</figure>
 <ul class="simple">
-<li><p>Extract all the surfaces of the cells using filter <code class="code xml docutils literal notranslate"><span class="pre">Extract</span> <span class="pre">Surface</span></code>.</p></li>
+<li><p>Extract all the surfaces of the cells using filter <code class="code highlight xml docutils literal highlight-xml">Extract<span class="w"> </span>Surface</code>.</p></li>
 </ul>
-<div class="figure align-center" id="id8">
+<figure class="align-center" id="id8">
 <a class="reference internal image-reference" href="_images/5.png"><img alt="_images/5.png" src="_images/5.png" style="width: 483.9px; height: 307.8px;" /></a>
-<p class="caption"><span class="caption-number">Fig. 27 </span><span class="caption-text">Extraction of surfaces of the cells.</span><a class="headerlink" href="#id8" title="Permalink to this image">¶</a></p>
-</div>
+<figcaption>
+<p><span class="caption-number">Fig. 28 </span><span class="caption-text">Extraction of surfaces of the cells.</span><a class="headerlink" href="#id8" title="Link to this image"></a></p>
+</figcaption>
+</figure>
 <ul class="simple">
-<li><p>Apply the filter <code class="code xml docutils literal notranslate"><span class="pre">Cell</span> <span class="pre">Size</span></code> to obtain the area of each surface. Area of surface can be seen in spreadsheet view as below.</p></li>
+<li><p>Apply the filter <code class="code highlight xml docutils literal highlight-xml">Cell<span class="w"> </span>Size</code> to obtain the area of each surface. Area of surface can be seen in spreadsheet view as below.</p></li>
 </ul>
 <div class="admonition important">
 <p class="admonition-title">Important</p>
-<p>There is a known bug of <strong>ParaView</strong> version 5.7 for the filter <code class="code xml docutils literal notranslate"><span class="pre">Cell</span> <span class="pre">Size</span></code> which leads to a crash. To prevent this, use 5.8 or higher version.</p>
+<p>There is a known bug of <strong>ParaView</strong> version 5.7 for the filter <code class="code highlight xml docutils literal highlight-xml">Cell<span class="w"> </span>Size</code> which leads to a crash. To prevent this, use 5.8 or higher version.</p>
 </div>
 <ul class="simple">
-<li><p>Select surfaces of cells on the boundary and apply the <code class="code xml docutils literal notranslate"><span class="pre">Extract</span> <span class="pre">Selection</span></code> filter to keep only those surfaces.</p></li>
+<li><p>Select surfaces of cells on the boundary and apply the <code class="code highlight xml docutils literal highlight-xml">Extract<span class="w"> </span>Selection</code> filter to keep only those surfaces.</p></li>
 </ul>
-<div class="figure align-center" id="id9">
+<figure class="align-center" id="id9">
 <a class="reference internal image-reference" href="_images/6.png"><img alt="_images/6.png" src="_images/6.png" style="width: 483.59999999999997px; height: 306.9px;" /></a>
-<p class="caption"><span class="caption-number">Fig. 28 </span><span class="caption-text">Extraction of boundary surfaces.</span><a class="headerlink" href="#id9" title="Permalink to this image">¶</a></p>
-</div>
+<figcaption>
+<p><span class="caption-number">Fig. 29 </span><span class="caption-text">Extraction of boundary surfaces.</span><a class="headerlink" href="#id9" title="Link to this image"></a></p>
+</figcaption>
+</figure>
 <ul class="simple">
-<li><p>Use the <code class="code xml docutils literal notranslate"><span class="pre">Calculator</span></code> filter to compute the specific mass flow (kg/m/s²) given by the product of density and the normal velocity component (here z) of the boundary. The output result is named <code class="code xml docutils literal notranslate"><span class="pre">massflow</span></code> and can be seen in the spreadsheet. Thus we have the specific mass flow of each surface of the boundary and now we need to take into account the surface area.</p></li>
+<li><p>Use the <code class="code highlight xml docutils literal highlight-xml">Calculator</code> filter to compute the specific mass flow (kg/m/s²) given by the product of density and the normal velocity component (here z) of the boundary. The output result is named <code class="code highlight xml docutils literal highlight-xml">massflow</code> and can be seen in the spreadsheet. Thus we have the specific mass flow of each surface of the boundary and now we need to take into account the surface area.</p></li>
 </ul>
 <div class="admonition important">
 <p class="admonition-title">Important</p>
 <p>Obviously if the boundary normal and one of the velocity component are not colinear you can’t reproduce directly the dot product and you will need to perform some additionnal steps not described here.</p>
 </div>
-<div class="figure align-center" id="id10">
+<figure class="align-center" id="id10">
 <a class="reference internal image-reference" href="_images/7.png"><img alt="_images/7.png" src="_images/7.png" style="width: 483.9px; height: 306.9px;" /></a>
-<p class="caption"><span class="caption-number">Fig. 29 </span><span class="caption-text">Calculator filter used to compute specific mass-flow rate through each surface of boundary.</span><a class="headerlink" href="#id10" title="Permalink to this image">¶</a></p>
-</div>
+<figcaption>
+<p><span class="caption-number">Fig. 30 </span><span class="caption-text">Calculator filter used to compute specific mass-flow rate through each surface of boundary.</span><a class="headerlink" href="#id10" title="Link to this image"></a></p>
+</figcaption>
+</figure>
 <ul class="simple">
-<li><p>The <code class="code xml docutils literal notranslate"><span class="pre">Integrate</span> <span class="pre">Variables</span></code> filter allows to compute the sum of each specific mass flow times the corresponding surface as following:</p></li>
+<li><p>The <code class="code highlight xml docutils literal highlight-xml">Integrate<span class="w"> </span>Variables</code> filter allows to compute the sum of each specific mass flow times the corresponding surface as following:</p></li>
 </ul>
 <div class="math notranslate nohighlight">
 \[\dot{m} = \sum_{i} \rho_i u_i S_i\]</div>
-<div class="figure align-center" id="id11">
+<figure class="align-center" id="id11">
 <a class="reference internal image-reference" href="_images/8.png"><img alt="_images/8.png" src="_images/8.png" style="width: 483.9px; height: 306.9px;" /></a>
-<p class="caption"><span class="caption-number">Fig. 30 </span><span class="caption-text">Integrate filter.</span><a class="headerlink" href="#id11" title="Permalink to this image">¶</a></p>
-</div>
+<figcaption>
+<p><span class="caption-number">Fig. 31 </span><span class="caption-text">Integrate filter.</span><a class="headerlink" href="#id11" title="Link to this image"></a></p>
+</figcaption>
+</figure>
 <ul class="simple">
-<li><p>The filter <code class="code xml docutils literal notranslate"><span class="pre">Plot</span> <span class="pre">Data</span> <span class="pre">Over</span> <span class="pre">Time</span></code> will give the mass flow over time.</p></li>
+<li><p>The filter <code class="code highlight xml docutils literal highlight-xml">Plot<span class="w"> </span>Data<span class="w"> </span>Over<span class="w"> </span>Time</code> will give the mass flow over time.</p></li>
 </ul>
-<div class="figure align-center" id="id12">
+<figure class="align-center" id="id12">
 <a class="reference internal image-reference" href="_images/9.png"><img alt="_images/9.png" src="_images/9.png" style="width: 483.9px; height: 306.9px;" /></a>
-<p class="caption"><span class="caption-number">Fig. 31 </span><span class="caption-text">Resulting plot of mass-flow rate through the outflow boundary over time.</span><a class="headerlink" href="#id12" title="Permalink to this image">¶</a></p>
-</div>
-</div>
-<div class="section" id="comparison-with-gnuplot">
-<h2>Comparison with gnuplot<a class="headerlink" href="#comparison-with-gnuplot" title="Permalink to this headline">¶</a></h2>
+<figcaption>
+<p><span class="caption-number">Fig. 32 </span><span class="caption-text">Resulting plot of mass-flow rate through the outflow boundary over time.</span><a class="headerlink" href="#id12" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+</section>
+<section id="comparison-with-gnuplot">
+<h2>Comparison with gnuplot<a class="headerlink" href="#comparison-with-gnuplot" title="Link to this heading"></a></h2>
 <ul class="simple">
-<li><p>To make sure these values are correct, we can compare them with other ones. In <em>mainV5.xml</em>, one can record the mass flow at both boundaries with the lines:</p></li>
+<li><p>To make sure these values are correct, we can compare them with other ones. In <em>main.xml</em>, one can record the mass flow at both boundaries with the lines:</p></li>
 </ul>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">  &lt;recordBoundaryFlux name=&quot;outflow&quot;&gt;</span>
 <span class="go">&lt;boundary number=&quot;3&quot; flux=&quot;massflow&quot;/&gt;</span>
@@ -343,71 +284,48 @@ However, in ECOGEN the output data is generated as a multi-block dataset: a bloc
 <p class="admonition-title">Note</p>
 <p>As the normal vector of the inflow boundary is not oriented to the flow direction, values will be negatives. One has to put 1:(abs($2)) instead of 1:2 in the <em>visualisation_inflow.gnu</em></p>
 </div>
-<p>On <strong>ParaView</strong>, one can extract mass flow values with <code class="code xml docutils literal notranslate"><span class="pre">Save</span> <span class="pre">Data</span></code>.</p>
+<p>On <strong>ParaView</strong>, one can extract mass flow values with <code class="code highlight xml docutils literal highlight-xml">Save<span class="w"> </span>Data</code>.</p>
 <p>The results can be drawn by loading in the <a class="reference external" href="http://www.gnuplot.info/">gnuplot</a> software the 3 files: <em>visualization_inflow.gnu</em>, <em>visualization_outflow.gnu</em> and the one from <strong>ParaView</strong> to see if they overlay.</p>
-<div class="figure align-center" id="id13">
+<figure class="align-center" id="id13">
 <img alt="_images/10.png" src="_images/10.png" />
-<p class="caption"><span class="caption-number">Fig. 32 </span><span class="caption-text">Resulting plot of mass flow with <strong>gnuplot</strong>.</span><a class="headerlink" href="#id13" title="Permalink to this image">¶</a></p>
+<figcaption>
+<p><span class="caption-number">Fig. 33 </span><span class="caption-text">Resulting plot of mass flow with <strong>gnuplot</strong>.</span><a class="headerlink" href="#id13" title="Link to this image"></a></p>
 <div class="legend">
 </div>
-</div>
-</div>
-</div>
+</figcaption>
+</figure>
+</section>
+</section>
 
 
            </div>
-           
           </div>
-          <footer>
-  
-    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
-      
-        <a href="Chap4_7runningATestInAnotherFolder.html" class="btn btn-neutral float-right" title="Running a test case in another folder" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
-      
-      
-        <a href="Chap4_5paraviewServer.html" class="btn btn-neutral float-left" title="ParaView server" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
-      
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="Chap4_5paraviewServer.html" class="btn btn-neutral float-left" title="ParaView server" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="Chap4_7runningATestInAnotherFolder.html" class="btn btn-neutral float-right" title="Running a test case in another folder" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
-  
 
   <hr/>
 
   <div role="contentinfo">
-    <p>
-        
-        &copy; Copyright 2022, code-mphi
-
-    </p>
+    <p>&#169; Copyright 2023, code-mphi.</p>
   </div>
-    
-    
-    
-    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
-    
-    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
-    
-    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
 
 </footer>
-
         </div>
       </div>
-
     </section>
-
   </div>
-  
-
-  <script type="text/javascript">
+  <script>
       jQuery(function () {
           SphinxRtdTheme.Navigation.enable(true);
       });
-  </script>
-
-  
-  
-    
-   
+  </script> 
 
 </body>
 </html>

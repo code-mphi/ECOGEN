@@ -3,7 +3,7 @@
 Output Files
 ============
 
-Writing the result files is done according to the user’s choice in *mainV5.xml* input file of the current test (see section :ref:`Sec:input:main`). For each run, the results are recorded in the specified folder **ECOGEN/results/XXX/** where XXX is the test case *name*.
+Writing the result files is done according to the user’s choice in *main.xml* input file of the current test (see section :ref:`Sec:input:main`). For each run, the results are recorded in the specified folder **ECOGEN/results/XXX/** where XXX is the test case *name*.
 One can select the following format: 
 
 - *GNU*: Format in ASCII, results are given in column.
@@ -43,7 +43,7 @@ All the output files linked to the probes and cuts of the simulation are placed 
 
 Mesh information
 ----------------
-When using AMR, mesh information is saved at a frequency specified in the *mainV5.xml* file to allow a restart of the simulation and the corresponding files are placed within the subfolders **ECOGEN/results/XXX/infoMesh/**.
+When using AMR, mesh information is saved at a frequency specified in the *main.xml* file to allow a restart of the simulation and the corresponding files are placed within the subfolders **ECOGEN/results/XXX/infoMesh/**.
 
 Screen output
 -------------

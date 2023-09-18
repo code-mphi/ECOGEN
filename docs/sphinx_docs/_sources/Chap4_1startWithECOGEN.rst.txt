@@ -135,7 +135,7 @@ Input files for this test case are located in the following folder: *./libTests/
 
 Computation parameters are easily modified according to the input file description of section :ref:`Chap:input`.
 
-For example, one can prefer to visualize results under *gnu* file format. For that, simply turn the *XML* option in the XML file *\libTests\referenceTestCases\euler\1D\transport\positiveVelocity\mainV5.xml* into *gnu* and re-run the test case:
+For example, one can prefer to visualize results under *gnu* file format. For that, simply turn the *XML* option in the XML file *\libTests\referenceTestCases\euler\1D\transport\positiveVelocity\main.xml* into *gnu* and re-run the test case:
 
 .. code-block:: xml
 

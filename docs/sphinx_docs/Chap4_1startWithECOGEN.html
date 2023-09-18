@@ -1,92 +1,51 @@
-
-
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8">
-  
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  
-  <title>Start with ECOGEN &mdash; ECOGEN 3.1 documentation</title>
-  
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-  
-  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
-  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-
-  
-  
-  
-  
-
-  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Start with ECOGEN &mdash; ECOGEN 4.0 documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
   <!--[if lt IE 9]>
     <script src="_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-    
-      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
-        <script src="_static/jquery.js"></script>
-        <script src="_static/underscore.js"></script>
-        <script src="_static/doctools.js"></script>
-        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    
-    <script type="text/javascript" src="_static/js/theme.js"></script>
-
-    
+        <script src="_static/jquery.js?v=5d32c60e"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="_static/documentation_options.js?v=9f5556dd"></script>
+        <script src="_static/doctools.js?v=888ff710"></script>
+        <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="Generating Meshes" href="Chap4_2generatingMeshes.html" />
     <link rel="prev" title="Tutorials" href="Chap4_tutorials_Chapter.html" /> 
 </head>
 
-<body class="wy-body-for-nav">
-
-   
+<body class="wy-body-for-nav"> 
   <div class="wy-grid-for-nav">
-    
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-          
 
           
-            <a href="index.html" class="icon icon-home" alt="Documentation Home"> ECOGEN
           
-
-          
+          <a href="index.html" class="icon icon-home">
+            ECOGEN
           </a>
-
-          
-            
-            
               <div class="version">
-                3.1
+                4.0
               </div>
-            
-          
-
-          
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
 </div>
-
-          
-        </div>
-
-        
-        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
-          
-            
-            
-              
-            
-            
-              <p class="caption"><span class="caption-text">Contents:</span></p>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="Chap1_introduction.html">Introduction</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Chap2_installation_Chapter.html">Installation instructions</a></li>
@@ -106,6 +65,8 @@
 <li class="toctree-l2"><a class="reference internal" href="Chap4_5paraviewServer.html">ParaView server</a></li>
 <li class="toctree-l2"><a class="reference internal" href="Chap4_6extractMassflowWithParaview.html">Gmsh example and extraction of mass-flow rate</a></li>
 <li class="toctree-l2"><a class="reference internal" href="Chap4_7runningATestInAnotherFolder.html">Running a test case in another folder</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Chap4_8restartMeshMapping.html">Restart a simulation with mesh mapping</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Chap4_9exportGmshFile.html">Export Gmsh mesh to version 2 file format</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="Chap5_testCases_Chapter.html">Test cases</a></li>
@@ -114,108 +75,66 @@
 <li class="toctree-l1"><a class="reference internal" href="zBibliography.html">Bibliography</a></li>
 </ul>
 
-            
-          
         </div>
-        
       </div>
     </nav>
 
-    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
-
-      
-      <nav class="wy-nav-top" aria-label="top navigation">
-        
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
           <a href="index.html">ECOGEN</a>
-        
       </nav>
 
-
       <div class="wy-nav-content">
-        
         <div class="rst-content">
-        
-          
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<div role="navigation" aria-label="breadcrumbs navigation">
-
+          <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-    
-      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
-        
-          <li><a href="Chap4_tutorials_Chapter.html">Tutorials</a> &raquo;</li>
-        
-      <li>Start with ECOGEN</li>
-    
-    
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="Chap4_tutorials_Chapter.html">Tutorials</a></li>
+      <li class="breadcrumb-item active">Start with ECOGEN</li>
       <li class="wy-breadcrumbs-aside">
-        
-            
             <a href="_sources/Chap4_1startWithECOGEN.rst.txt" rel="nofollow"> View page source</a>
-          
-        
       </li>
-    
   </ul>
-
-  
   <hr/>
 </div>
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
-            
-  <div class="section" id="start-with-ecogen">
-<span id="sec-tuto-begin"></span><h1>Start with ECOGEN<a class="headerlink" href="#start-with-ecogen" title="Permalink to this headline">¶</a></h1>
+             
+  <section id="start-with-ecogen">
+<span id="sec-tuto-begin"></span><h1>Start with ECOGEN<a class="headerlink" href="#start-with-ecogen" title="Link to this heading"></a></h1>
 <p>Here is described your first use of ECOGEN: Running the <em>default test case</em>. This is what user should observe without any change in the downloaded ECOGEN package.</p>
 <div class="admonition important">
 <p class="admonition-title">Important</p>
 <p>Before starting with ECOGEN, you should have passed all steps of installation instructions of section <a class="reference internal" href="Chap2_installation_Chapter.html#chap-start"><span class="std std-ref">Installation instructions</span></a>.</p>
 </div>
-<div class="section" id="the-main-input-file">
-<span id="sec-tuto-mainxml"></span><h2>The main input file<a class="headerlink" href="#the-main-input-file" title="Permalink to this headline">¶</a></h2>
+<section id="the-main-input-file">
+<span id="sec-tuto-mainxml"></span><h2>The main input file<a class="headerlink" href="#the-main-input-file" title="Link to this heading"></a></h2>
 <p>ECOGEN is mainly controled thanks to the input file named <em>ECOGEN.xml</em>. This file looks like :</p>
 <div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="cp">&lt;?xml version = &quot;1.0&quot; encoding = &quot;UTF-8&quot; standalone = &quot;yes&quot;?&gt;</span>
 <span class="nt">&lt;ecogen&gt;</span>
-  <span class="c">&lt;!-- Euler reference test cases --&gt;</span>
-  <span class="c">&lt;!-- -------------------------- --&gt;</span>
-  <span class="nt">&lt;testCase&gt;</span>./libTests/referenceTestCases/euler/1D/transport/positiveVelocity/<span class="nt">&lt;/testCase&gt;</span>
-  <span class="c">&lt;!-- &lt;testCase&gt;./libTests/referenceTestCases/euler/1D/transport/negativeVelocity/&lt;/testCase&gt; --&gt;</span>
-  <span class="c">&lt;!-- &lt;testCase&gt;./libTests/referenceTestCases/euler/1D/shockTubes/HPLeft/&lt;/testCase&gt; --&gt;</span>
+<span class="w">  </span><span class="cm">&lt;!-- Euler reference test cases --&gt;</span>
+<span class="w">  </span><span class="cm">&lt;!-- -------------------------- --&gt;</span>
+<span class="w">  </span><span class="nt">&lt;testCase&gt;</span>./libTests/referenceTestCases/euler/1D/transport/positiveVelocity/<span class="nt">&lt;/testCase&gt;</span>
+<span class="w">  </span><span class="cm">&lt;!-- &lt;testCase&gt;./libTests/referenceTestCases/euler/1D/transport/negativeVelocity/&lt;/testCase&gt; --&gt;</span>
+<span class="w">  </span><span class="cm">&lt;!-- &lt;testCase&gt;./libTests/referenceTestCases/euler/1D/shockTubes/HPLeft/&lt;/testCase&gt; --&gt;</span>
 <span class="nt">&lt;/ecogen&gt;</span>
 </pre></div>
 </div>
-<p>Each test case corresponds to specific input files organised in different folders and associated to a markup <code class="code xml docutils literal notranslate"><span class="name tag"><span class="pre">&lt;testCase&gt;</span></span></code>.</p>
-<p>When executing ECOGEN, it runs sequentially each test case corresponding to the uncommented lines present in the markup <code class="code xml docutils literal notranslate"><span class="name tag"><span class="pre">&lt;ecogen&gt;</span></span></code>.</p>
+<p>Each test case corresponds to specific input files organised in different folders and associated to a markup <code class="code highlight xml docutils literal highlight-xml"><span class="nt">&lt;testCase&gt;</span></code>.</p>
+<p>When executing ECOGEN, it runs sequentially each test case corresponding to the uncommented lines present in the markup <code class="code highlight xml docutils literal highlight-xml"><span class="nt">&lt;ecogen&gt;</span></code>.</p>
 <p>A unique line is uncommented in the original file and corresponds to the <em>default test case</em>. One should modify the <em>ECOGEN.xml</em> input file to run other provided test by uncommenting/commenting lines in this file. New lines can also be added when creating new test cases.</p>
-</div>
-<div class="section" id="running-the-default-test-case">
-<span id="sec-tuto-default"></span><h2>Running the default test case<a class="headerlink" href="#running-the-default-test-case" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="running-the-default-test-case">
+<span id="sec-tuto-default"></span><h2>Running the default test case<a class="headerlink" href="#running-the-default-test-case" title="Link to this heading"></a></h2>
 <p>The default test case provided with ECOGEN package is a single-phase flow test which simply advect a density discontinuity with a positive velocity in 1D. Input files for this test case are present in the folder <em>./libTests/referenceTestCases/euler/1D/transport/positiveVelocity/</em>.</p>
-<div class="figure align-center" id="id1">
+<figure class="align-center" id="id1">
 <span id="fig-tutos-default-ci"></span><a class="reference internal image-reference" href="_images/CI.jpg"><img alt="_images/CI.jpg" src="_images/CI.jpg" style="width: 613.9px; height: 138.6px;" /></a>
-<p class="caption"><span class="caption-number">Fig. 4 </span><span class="caption-text">Initial condition for 1D, single-phase transport test case.</span><a class="headerlink" href="#id1" title="Permalink to this image">¶</a></p>
-</div>
+<figcaption>
+<p><span class="caption-number">Fig. 5 </span><span class="caption-text">Initial condition for 1D, single-phase transport test case.</span><a class="headerlink" href="#id1" title="Link to this image"></a></p>
+</figcaption>
+</figure>
 <p>The initial characteristics of the run are:</p>
 <table class="docutils align-default">
-<colgroup>
-<col style="width: 67%" />
-<col style="width: 33%" />
-</colgroup>
 <thead>
 <tr class="row-odd"><th class="head"><p>Characteristic</p></th>
 <th class="head"><p>value</p></th>
@@ -266,15 +185,19 @@
 </dd>
 </dl>
 <p><em>euler1DTransportPositiveVelocity</em> is the name of the default run.</p>
-<div class="figure align-center" id="id2">
+<figure class="align-center" id="id2">
 <a class="reference internal image-reference" href="_images/RunECOGEN_Logo.png"><img alt="_images/RunECOGEN_Logo.png" src="_images/RunECOGEN_Logo.png" style="width: 759.0px; height: 468.0px;" /></a>
-<p class="caption"><span class="caption-number">Fig. 5 </span><span class="caption-text">Screenshot of the top of ECOGEN’s default run console. In this particular run, 8 cores have been used.</span><a class="headerlink" href="#id2" title="Permalink to this image">¶</a></p>
-</div>
+<figcaption>
+<p><span class="caption-number">Fig. 6 </span><span class="caption-text">Screenshot of the top of ECOGEN’s default run console. In this particular run, 8 cores have been used.</span><a class="headerlink" href="#id2" title="Link to this image"></a></p>
+</figcaption>
+</figure>
 <p>The run ends and the following information comes:</p>
-<div class="figure align-center" id="id3">
+<figure class="align-center" id="id3">
 <a class="reference internal image-reference" href="_images/RunECOGEN_NormalEnding.png"><img alt="_images/RunECOGEN_NormalEnding.png" src="_images/RunECOGEN_NormalEnding.png" style="width: 445.0px; height: 317.0px;" /></a>
-<p class="caption"><span class="caption-number">Fig. 6 </span><span class="caption-text">Screenshot of the end of ECOGEN’s default run console with 8 cores used.</span><a class="headerlink" href="#id3" title="Permalink to this image">¶</a></p>
-</div>
+<figcaption>
+<p><span class="caption-number">Fig. 7 </span><span class="caption-text">Screenshot of the end of ECOGEN’s default run console with 8 cores used.</span><a class="headerlink" href="#id3" title="Link to this image"></a></p>
+</figcaption>
+</figure>
 <p>A new folder <em>results</em> is created at the first run. This folder contains a folder named <em>euler1DTransportPositiveVelocity</em> containing output files of our test case:</p>
 <blockquote>
 <div><ul class="simple">
@@ -288,82 +211,61 @@
 </ul>
 </div></blockquote>
 <p>By default, output files are recorder in VTK XML format in separate files for each core and TIME. A way to post-treat this output files is to open the <em>collectionParaview.pvd</em> or <em>collectionVisIt.visit</em> file using <a class="reference external" href="https://www.paraview.org/">Paraview</a> or <a class="reference external" href="https://wci.llnl.gov/simulation/computer-codes/visit/">VisIt</a> software.</p>
-<div class="figure align-center" id="id4">
+<figure class="align-center" id="id4">
 <span id="fig-tutos-default-results"></span><a class="reference internal image-reference" href="_images/transport.gif"><img alt="_images/transport.gif" src="_images/transport.gif" style="width: 595.5px; height: 300.0px;" /></a>
-<p class="caption"><span class="caption-number">Fig. 7 </span><span class="caption-text">Results for the single-phase transport test.</span><a class="headerlink" href="#id4" title="Permalink to this image">¶</a></p>
-</div>
+<figcaption>
+<p><span class="caption-number">Fig. 8 </span><span class="caption-text">Results for the single-phase transport test.</span><a class="headerlink" href="#id4" title="Link to this image"></a></p>
+</figcaption>
+</figure>
 <p>This basic test shows advection of a contact discontinuity while preserving pressure and velocity uniform.</p>
-<div class="section" id="editing-input-files">
-<h3>Editing input files<a class="headerlink" href="#editing-input-files" title="Permalink to this headline">¶</a></h3>
+<section id="editing-input-files">
+<h3>Editing input files<a class="headerlink" href="#editing-input-files" title="Link to this heading"></a></h3>
 <p>Input files for this test case are located in the following folder: <em>./libTests/referenceTestCases/euler/1D/transport/positiveVelocity/</em>.</p>
 <p>Computation parameters are easily modified according to the input file description of section <a class="reference internal" href="Chap3_1inputFiles.html#chap-input"><span class="std std-ref">Input Files</span></a>.</p>
-<p>For example, one can prefer to visualize results under <em>gnu</em> file format. For that, simply turn the <em>XML</em> option in the XML file <em>libTestsreferenceTestCaseseuler1DtransportpositiveVelocitymainV5.xml</em> into <em>gnu</em> and re-run the test case:</p>
-<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;outputMode</span> <span class="na">format=</span><span class="s">&quot;GNU&quot;</span> <span class="na">binary=</span><span class="s">&quot;false&quot;</span> <span class="na">precision=</span><span class="s">&quot;10&quot;</span><span class="nt">/&gt;</span>
+<p>For example, one can prefer to visualize results under <em>gnu</em> file format. For that, simply turn the <em>XML</em> option in the XML file <em>libTestsreferenceTestCaseseuler1DtransportpositiveVelocitymain.xml</em> into <em>gnu</em> and re-run the test case:</p>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;outputMode</span><span class="w"> </span><span class="na">format=</span><span class="s">&quot;GNU&quot;</span><span class="w"> </span><span class="na">binary=</span><span class="s">&quot;false&quot;</span><span class="w"> </span><span class="na">precision=</span><span class="s">&quot;10&quot;</span><span class="nt">/&gt;</span>
 </pre></div>
 </div>
 <p>The results can be drawn by loading in the <strong>gnuplot</strong> software the file <em>visualization.gnu</em>.</p>
-<div class="figure align-center" id="id5">
+<figure class="align-center" id="id5">
 <a class="reference internal image-reference" href="_images/GnuplotScreenshotDefaultUse.png"><img alt="_images/GnuplotScreenshotDefaultUse.png" src="_images/GnuplotScreenshotDefaultUse.png" style="width: 498.75px; height: 456.0px;" /></a>
-<p class="caption"><span class="caption-number">Fig. 8 </span><span class="caption-text">Screenshot of results in <strong>gnuplot</strong>.</span><a class="headerlink" href="#id5" title="Permalink to this image">¶</a></p>
-</div>
-</div>
-</div>
-</div>
+<figcaption>
+<p><span class="caption-number">Fig. 9 </span><span class="caption-text">Screenshot of results in <strong>gnuplot</strong>.</span><a class="headerlink" href="#id5" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+</section>
+</section>
+</section>
 
 
            </div>
-           
           </div>
-          <footer>
-  
-    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
-      
-        <a href="Chap4_2generatingMeshes.html" class="btn btn-neutral float-right" title="Generating Meshes" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
-      
-      
-        <a href="Chap4_tutorials_Chapter.html" class="btn btn-neutral float-left" title="Tutorials" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
-      
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="Chap4_tutorials_Chapter.html" class="btn btn-neutral float-left" title="Tutorials" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="Chap4_2generatingMeshes.html" class="btn btn-neutral float-right" title="Generating Meshes" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
-  
 
   <hr/>
 
   <div role="contentinfo">
-    <p>
-        
-        &copy; Copyright 2022, code-mphi
-
-    </p>
+    <p>&#169; Copyright 2023, code-mphi.</p>
   </div>
-    
-    
-    
-    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
-    
-    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
-    
-    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
 
 </footer>
-
         </div>
       </div>
-
     </section>
-
   </div>
-  
-
-  <script type="text/javascript">
+  <script>
       jQuery(function () {
           SphinxRtdTheme.Navigation.enable(true);
       });
-  </script>
-
-  
-  
-    
-   
+  </script> 
 
 </body>
 </html>

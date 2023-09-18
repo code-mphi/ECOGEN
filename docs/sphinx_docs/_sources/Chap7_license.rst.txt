@@ -5,14 +5,16 @@ License
 
 |License|
 
-ECOGEN is the legal property of its developers, whose names are listed in the copyright file included with the source distribution. Contributors’ names for version |version| are listed below:
+ECOGEN is the legal property of its developers, whose names are listed in the copyright file included with the source distribution. Contributors’ names for version |version| are listed below (from first to last to join):
 
-	- Sébastien Le Martelot,
 	- Fabien Petitpas,
+	- Sébastien Le Martelot,
 	- Kevin Schmidmayer,
 	- Eric Daniel,
 	- Benedikt Dorschner,
 	- Joris Caze,
+	- Fatima Gadiri,
+	- Solène Schropff.
 
 ECOGEN is a free software: You can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
 ECOGEN is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details available at the following address: http://www.gnu.org/licenses.
@@ -45,7 +47,7 @@ Aknowledgments
 
 A special thanks is also adressed to Tim Colonius and Nicolas Favrie for their advising and fundings.
 
-They helped to improve ECOGEN software through their valuable feedbacks: Luc Biasiori-Poulanges, Spencer Bryngelson, Theresa Trummler, Mathieu Brasseur.
+They helped to improve ECOGEN software through their valuable feedbacks: Luc Biasiori-Poulanges, Spencer Bryngelson, Theresa Trummler, Mathieu Brasseur, Guillaume Bokman, Vincent Perrier.
 
 They also contributed to the evolution of ECOGEN software through their scholar internships:
-Paul Jeanney, Adrien Besse, Estefani Cardoso Aires, Guillaume Chavet.
+Pierre Cottigny, Titouan Bonnaure, Paul Jeanney, Adrien Besse, Estefani Cardoso Aires, Guillaume Chavet.

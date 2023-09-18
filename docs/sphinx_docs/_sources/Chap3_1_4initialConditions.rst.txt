@@ -3,10 +3,10 @@
 
 .. _Sec:input:InitialConditions:
 
-InitialConditionsV4.xml
+InitialConditions.xml
 =======================
 
- The *initialConditionsV4.xml* input file includes the initial conditions and the boundary conditions of the flow simulation. It is **mandatory** located in the folder of the current case. The typical structure of this file is:
+ The *initialConditions.xml* input file includes the initial conditions and the boundary conditions of the flow simulation. It is **mandatory** located in the folder of the current case. The typical structure of this file is:
 
  .. code-block:: xml
 
@@ -220,12 +220,34 @@ In this example, the entire computation domain will be initialized accordingly t
 
 .. _Sec:input:boundaryConditions:
 
+Initializing immersed boundaries
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+When dealing with Cartesian meshes, it is possible to intialize a domain as immersed boundaries by setting the :xml:`physicalIdentity` number to -1 value.
+
+Example:
+
+.. code-block:: xml
+
+  <domain name="HP"  state="rightChamber" type="rectangle" physicalEntity="-1">
+    <dataRectangle axis1="x" axis2="y" lAxis1="0.2" lAxis2="0.2">
+      <posInferiorVertex x="0.3" y="0.15" z="0."/>
+    </dataRectangle>
+  </domain>
+
+In this typical example, a square is considered as walls for the air flow.
+
+.. figure:: ./_static/IO/immBound.gif
+  :scale: 30%
+  :align: center
+
+  Example with immersed boundaries.
+
 Boundary conditions
 -------------------
 The :xml:`<boundaryConditions>` markup is mandatory. The boundary conditions are specified at the boundary of the computational domain. This markup must contain as many nodes :xml:`<boundCond>` as necessary to cover the entire boundary. Each :xml:`<boundCond>` node contains the following attributes:
 
 - :xml:`name`: A name for the boundary condition. This name has no influence on the choices remaining in this file.
-- :xml:`type`:  The type of boundary condition, to choose among :ref:`Sec:input:NonReflecting`, :ref:`Sec:input:Symmetry`, :ref:`Sec:input:Wall`, :ref:`Sec:input:Injection`, :ref:`Sec:input:Outflow` and :ref:`Sec:input:Tank`.
+- :xml:`type`:  The type of boundary condition, to choose among :ref:`Sec:input:NonReflecting`, :ref:`Sec:input:Symmetry`, :ref:`Sec:input:Wall`, :ref:`Sec:input:InletTank`, :ref:`Sec:input:InletInjStagState`, :ref:`Sec:input:InletInjTemp` and :ref:`Sec:input:OutletPressure`.
 - :xml:`number`: Integer corresponding to the identifier of the boundary.
 
 Depending on the :xml:`<type>`, additional information is required through the use of the following nodes.
@@ -238,7 +260,7 @@ The numerical treatment corresponds to an in- or out-going flow without any wave
 
 .. code-block:: xml
 
-	<boundCond name="exit" type="nonReflecting" number="1" />
+	<boundCond name="outlet" type="nonReflecting" number="1" />
 
 .. _Sec:input:Symmetry:
 
@@ -260,71 +282,92 @@ The numerical treatment corresponds to a wall boundary condition. No more inform
 
 	<boundCond name="wall" type="wall" number="3" />
 
-.. _Sec:input:Injection:
+.. _Sec:input:InletTank:
 
-Injection
-~~~~~~~~~
-The numerical treatment corresponds to the link between the boundary with a inflow. The inflow is characterized by an incoming mass-flow rate at a given thermodynamical state. :xml:`injection` requires the :xml:`<dataInjection>` node with the following attributes:
-
-- :xml:`m0`: Incoming mass-flow rate, real number (unit: kg/s.m-2 (SI)).
-- Node :xml:`<dataFluid>` for each phase: It must contain as many nodes :xml:`<dataFluid>` as the number of phases in the flow simulation and each contains the attributes:
-
-	- :xml:`EOS`: The name of the file corresponding to the choice of the EOS for the phase in the tank. This file must correspond to the one specified in *modelV4.xml* input file for every fluid.
-	- :xml:`density`: The density of the fluid incoming, real number (unit: kg/m3 (SI)).
-	- :xml:`pressure`: The pressure of the fluid incoming, real number (unit: Pa (SI)).
-	- :xml:`alpha`: The volume fraction of the fluid incoming, real number in the range ]0.,1.[.
-
-.. code-block:: xml
-
-	<boundCond name="entrance" type="injection" number="1">
-	  <dataInjection m0="2.413092"/>
-	  <dataFluid EOS="IG_air.xml" density="4.04e-3" pressure="2.57404e2" alpha="0.1"/>
-	  <dataFluid EOS="SG_water.xml" density="1000." pressure="2.57404e2" alpha="0.9"/>
-	</boundCond>
-
-.. _Sec:input:Outflow:
-
-Outflow
-~~~~~~~
-In the case of a subsonic flow, the pressure is set equal to the ambient (distant) pressure at the boundary. The additional :xml:`<dataOutflow>` node is required with the attributes:
-
-- :xml:`p0`: Outside pressure, real number (unit: Pa (SI)).
-- Node :xml:`<transport>`: This node is also required for each transport equation used.
-
-.. code-block:: xml
-
-	<boundCond name="exit" type="outflow" number="5">
-	  <dataOutflow p0="1.e5">
-	    <transport name="color" value="1.e-6"/>
-	  </dataOutflow>
-	</boundCond>
-
-.. _Sec:input:Tank:
-
-Tank
-~~~~
-The numerical treatment corresponds to the link between the boundary with an infinite tank. An infinite tank is characterized by a null velocity while pressure and temperature are constant. :xml:`tank` requires the :xml:`<dataTank>` node with the following attributes:
+Inlet tank
+~~~~~~~~~~
+The numerical treatment corresponds to the link between the boundary with an infinite tank. An infinite tank is characterized by a null velocity while pressure and temperature are constant. :xml:`tank` requires the :xml:`<dataInletTank>` node with the following attributes:
 
 - :xml:`p0`: Stagnation pressure, real number (unit: Pa (SI)).
 - :xml:`T0`: Stagnation temperature, real number (unit: K (SI)).
 - Node :xml:`<fluidsProp>`: Necessary to define the presence of each phase in the tank. It must contain as many nodes :xml:`<dataFluid>` as the number of phases in the flow simulation and each contains the attributes:
 
-	- :xml:`EOS`: The name of the file corresponding to the choice of the EOS for the phase in the tank. This file must correspond to the one specified in *modelV4.xml* input file for every fluid.
+	- :xml:`EOS`: The name of the file corresponding to the choice of the EOS for the phase in the tank. This file must correspond to the one specified in *model.xml* input file for every fluid.
 	- :xml:`alpha`: The volume fraction of the fluid in the tank, real number in the range ]0.,1.[.
 
 .. code-block:: xml
 
-	<boundCond name="entrance" type="tank" number="3">
-	  <dataTank p0="4.e6" T0="93.3"/>
+	<boundCond name="inlet" type="inletTank" number="3">
+	  <dataInletTank p0="4.e6" T0="93.3"/>
 	  <fluidsProp>
 	    <dataFluid EOS="IG_oxyVap.xml" alpha="0.0001"/>
 	    <dataFluid EOS="SG_oxyLiq.xml" alpha="0.9999"/>
 	  </fluidsProp>
 	</boundCond>
 
+.. _Sec:input:InletInjStagState:
+
+Inlet injection using stagnation state
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+The numerical treatment corresponds to the link between the boundary with an injection defined using a stagnation state. The injection is characterized by an incoming mass-flow rate at a given thermodynamical state. :xml:`injection` requires the :xml:`<dataInletInj>` node with the following attributes:
+
+- :xml:`m0`: Incoming mass-flow rate, real number (unit: kg/s.m-2 (SI)).
+- Node :xml:`<dataFluid>` for each phase: It must contain as many nodes :xml:`<dataFluid>` as the number of phases in the flow simulation and each contains the attributes:
+
+	- :xml:`EOS`: The name of the file corresponding to the choice of the EOS for the phase in the tank. This file must correspond to the one specified in *model.xml* input file for every fluid.
+	- :xml:`density`: The density of the fluid incoming, real number (unit: kg/m3 (SI)).
+	- :xml:`pressure`: The pressure of the fluid incoming, real number (unit: Pa (SI)).
+	- :xml:`alpha`: The volume fraction of the fluid incoming, real number in the range ]0.,1.[.
+
+.. code-block:: xml
+
+	<boundCond name="inlet" type="inletInjStagState" number="1">
+	  <dataInletInj m0="2.413092"/>
+	  <dataFluid EOS="IG_air.xml" density="4.04e-3" pressure="2.57404e2" alpha="0.1"/>
+	  <dataFluid EOS="SG_water.xml" density="1000." pressure="2.57404e2" alpha="0.9"/>
+	</boundCond>
+
+.. _Sec:input:InletInjTemp:
+
+Inlet injection using temperature
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+The numerical treatment corresponds to the link between the boundary with an injection defined using temperature. The injection is characterized by an incoming mass-flow rate at a given thermodynamical state. :xml:`injection` requires the :xml:`<dataInletInj>` node with the following attributes:
+
+- :xml:`m0`: Incoming mass-flow rate, real number (unit: kg/s.m-2 (SI)).
+- Node :xml:`<dataFluid>` for each phase: It must contain as many nodes :xml:`<dataFluid>` as the number of phases in the flow simulation and each contains the attributes:
+
+	- :xml:`EOS`: The name of the file corresponding to the choice of the EOS for the phase in the tank. This file must correspond to the one specified in *model.xml* input file for every fluid.
+	- :xml:`temperature`: The temperature of the fluid incoming, real number (unit: Pa (SI)).
+	- :xml:`alpha`: The volume fraction of the fluid incoming, real number in the range ]0.,1.[.
+
+.. code-block:: xml
+
+	<boundCond name="inlet" type="inletInjTemp" number="1">
+	  <dataInletInj m0="6500."/>
+    <dataFluid EOS="SG_water.xml" temperature="300." alpha="0.9999"/>
+    <dataFluid EOS="IG_air.xml" temperature="300." alpha="0.0001"/>
+	</boundCond>
+
+.. _Sec:input:OutletPressure:
+
+Outlet at imposed pressure
+~~~~~~~~~~~~~~~~~~~~~~~~~~
+In the case of a subsonic flow, the pressure is set equal to the ambient (distant) pressure at the boundary. The additional :xml:`<dataOutletPressure>` node is required with the attributes:
+
+- :xml:`p0`: Outside pressure, real number (unit: Pa (SI)).
+- Node :xml:`<transport>`: This node is also required for each transport equation used.
+
+.. code-block:: xml
+
+	<boundCond name="outlet" type="outletPressure" number="5">
+	  <dataOutletPressure p0="1.e5">
+	    <transport name="color" value="1.e-6"/>
+	  </dataOutletPressure>
+	</boundCond>
+
 **Important remark**
 
-The choice of the boundary-condition number is made according to the type of mesh given in *meshV5.xml* input file and it follows the rules:
+The choice of the boundary-condition number is made according to the type of mesh given in *mesh.xml* input file and it follows the rules:
 
 - Cartesian: The boundaries are ordered and labeled from 1 to 6 (in 3D) according to:
 
@@ -339,7 +382,7 @@ The choice of the boundary-condition number is made according to the type of mes
  
 **Remark**
 
-The boundary conditions are dependent on the flow model specified in *modelV4.xml* input file. Some boundary conditions may be not available for the flow model considered.
+The boundary conditions are dependent on the flow model specified in *model.xml* input file. Some boundary conditions may be not available for the flow model considered.
 
 
 Mechanical and thermodynamical states of the fluid
@@ -352,7 +395,7 @@ For each physical domain in the :xml:`<physicalDomains>` markup, a fluid state m
 Each :xml:`<material>` node corresponds to a phase and contains the following attributes or nodes:
 
 - Attribute :xml:`type`: Only the value *fluid* is available in the current ECOGEN version.
-- Attribute :xml:`EOS`: The name of the file corresponding to the fluid equation-of-state parameters. This file must correspond to the one specified in *modelV4.xml* input file for each phase (see section :ref:`Sec:input:FlowModel`).
+- Attribute :xml:`EOS`: The name of the file corresponding to the fluid equation-of-state parameters. This file must correspond to the one specified in *model.xml* input file for each phase (see section :ref:`Sec:input:FlowModel`).
 - Node :xml:`<dataFluid>`: Contain data related to the considered state of the fluid in the current phase. 
 
 This last node :xml:`<dataFluid>` as well as the :xml:`<mixture>` node are dependent on the flow model according to:
@@ -382,7 +425,7 @@ UEq (previously named MultiP) or UEqTotE
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 Multiphase flow at velocity equilibrium (same velocity for every phase within each cell). Each :xml:`<dataFluid>` node corresponds to a phase with the following attributes:
 
-- :xml:`alpha`: Volume fraction of the phase, real number in the range ]0.,1.[. The range can be increased to [0.;1.] if the option *alphaNull* is turned on (*true*) in the *modelV4.xml* input file.
+- :xml:`alpha`: Volume fraction of the phase, real number in the range ]0.,1.[. The range can be increased to [0.;1.] if the option *alphaNull* is turned on (*true*) in the *model.xml* input file.
 - :xml:`density` or :xml:`temperature`: Initial density or temperature of the fluid, real number (unit: kg/m3 or K (SI)), respectively.
 - :xml:`pressure`: Initial pressure of the fluid, real number (unit: Pa (SI)).
 
@@ -408,7 +451,7 @@ PUEq (previously named Kapila)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 Multiphase flow at pressure and velocity equilibrium (same velocity and pressure for every phase within each cell). Each :xml:`<dataFluid>` node corresponds to a phase with the following attributes:
 
-- :xml:`alpha`: Volume fraction of the phase, real number in the range ]0.,1.[. The range can be increased to [0.;1.] if the option *alphaNull* is turned on (*true*) in the *modelV4.xml* input file.
+- :xml:`alpha`: Volume fraction of the phase, real number in the range ]0.,1.[. The range can be increased to [0.;1.] if the option *alphaNull* is turned on (*true*) in the *model.xml* input file.
 - :xml:`density` or :xml:`temperature`: Initial density or temperature of the fluid, real number (unit: kg/m3 or K (SI)), respectively.
 
 Moreover, in this case, the :xml:`<mixture>` node contains:

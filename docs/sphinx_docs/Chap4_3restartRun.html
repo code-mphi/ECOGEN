@@ -1,92 +1,51 @@
-
-
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8">
-  
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  
-  <title>Restart a run &mdash; ECOGEN 3.1 documentation</title>
-  
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-  
-  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
-  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-
-  
-  
-  
-  
-
-  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Restart a run &mdash; ECOGEN 4.0 documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
   <!--[if lt IE 9]>
     <script src="_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-    
-      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
-        <script src="_static/jquery.js"></script>
-        <script src="_static/underscore.js"></script>
-        <script src="_static/doctools.js"></script>
-        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    
-    <script type="text/javascript" src="_static/js/theme.js"></script>
-
-    
+        <script src="_static/jquery.js?v=5d32c60e"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="_static/documentation_options.js?v=9f5556dd"></script>
+        <script src="_static/doctools.js?v=888ff710"></script>
+        <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="Split physical domains for unstructured meshes" href="Chap4_4splitPhysicalDomainsNS.html" />
     <link rel="prev" title="Generating Meshes" href="Chap4_2generatingMeshes.html" /> 
 </head>
 
-<body class="wy-body-for-nav">
-
-   
+<body class="wy-body-for-nav"> 
   <div class="wy-grid-for-nav">
-    
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-          
 
           
-            <a href="index.html" class="icon icon-home" alt="Documentation Home"> ECOGEN
           
-
-          
+          <a href="index.html" class="icon icon-home">
+            ECOGEN
           </a>
-
-          
-            
-            
               <div class="version">
-                3.1
+                4.0
               </div>
-            
-          
-
-          
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
 </div>
-
-          
-        </div>
-
-        
-        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
-          
-            
-            
-              
-            
-            
-              <p class="caption"><span class="caption-text">Contents:</span></p>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="Chap1_introduction.html">Introduction</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Chap2_installation_Chapter.html">Installation instructions</a></li>
@@ -105,6 +64,8 @@
 <li class="toctree-l2"><a class="reference internal" href="Chap4_5paraviewServer.html">ParaView server</a></li>
 <li class="toctree-l2"><a class="reference internal" href="Chap4_6extractMassflowWithParaview.html">Gmsh example and extraction of mass-flow rate</a></li>
 <li class="toctree-l2"><a class="reference internal" href="Chap4_7runningATestInAnotherFolder.html">Running a test case in another folder</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Chap4_8restartMeshMapping.html">Restart a simulation with mesh mapping</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Chap4_9exportGmshFile.html">Export Gmsh mesh to version 2 file format</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="Chap5_testCases_Chapter.html">Test cases</a></li>
@@ -113,140 +74,102 @@
 <li class="toctree-l1"><a class="reference internal" href="zBibliography.html">Bibliography</a></li>
 </ul>
 
-            
-          
         </div>
-        
       </div>
     </nav>
 
-    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
-
-      
-      <nav class="wy-nav-top" aria-label="top navigation">
-        
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
           <a href="index.html">ECOGEN</a>
-        
       </nav>
 
-
       <div class="wy-nav-content">
-        
         <div class="rst-content">
-        
-          
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<div role="navigation" aria-label="breadcrumbs navigation">
-
+          <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-    
-      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
-        
-          <li><a href="Chap4_tutorials_Chapter.html">Tutorials</a> &raquo;</li>
-        
-      <li>Restart a run</li>
-    
-    
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="Chap4_tutorials_Chapter.html">Tutorials</a></li>
+      <li class="breadcrumb-item active">Restart a run</li>
       <li class="wy-breadcrumbs-aside">
-        
-            
             <a href="_sources/Chap4_3restartRun.rst.txt" rel="nofollow"> View page source</a>
-          
-        
       </li>
-    
   </ul>
-
-  
   <hr/>
 </div>
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
-            
-  <div class="section" id="restart-a-run">
-<span id="sec-tuto-restart"></span><h1>Restart a run<a class="headerlink" href="#restart-a-run" title="Permalink to this headline">¶</a></h1>
+             
+  <section id="restart-a-run">
+<span id="sec-tuto-restart"></span><h1>Restart a run<a class="headerlink" href="#restart-a-run" title="Link to this heading"></a></h1>
 <p>ECOGEN is able to restart a finished computation from given result files. This feature is particularly interesting if a simulation stopped due to computer failure (power cut, unexpected update…) or if the user wants to extent the duration of simulation without restarting from the beginning.</p>
 <p>To illustrate this tutorial, we will use a common test case, based on the shock-tube problem available at <a class="reference internal" href="Chap5_testCases_Chapter.html#chap-testcases"><span class="std std-ref">Test cases</span></a>:</p>
 <div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;testCase&gt;</span>./libTests/referenceTestCases/euler/1D/shockTubes/HPLeft/<span class="nt">&lt;/testCase&gt;</span>
 </pre></div>
 </div>
-<div class="section" id="setup-of-the-test-case">
-<h2>Setup of the test case<a class="headerlink" href="#setup-of-the-test-case" title="Permalink to this headline">¶</a></h2>
+<section id="setup-of-the-test-case">
+<h2>Setup of the test case<a class="headerlink" href="#setup-of-the-test-case" title="Link to this heading"></a></h2>
 <p>For the purpose of this tutorial we have to do some slight modifications of the test case presented above. We advise you to make a copy of the test case <strong>./libTests/referenceTestCases/euler/1D/shockTubes/HPLeft/</strong> into a new path such as <strong>./libTests/myTests/restartRun/</strong>.</p>
-<p>For the sake of simplicity, we edit the <em>mainV5.xml</em> file as following:</p>
+<p>For the sake of simplicity, we edit the <em>main.xml</em> file as following:</p>
 <div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="cp">&lt;?xml version = &quot;1.0&quot; encoding = &quot;UTF-8&quot; standalone = &quot;yes&quot;?&gt;</span>
 <span class="nt">&lt;computationParam&gt;</span>
-        <span class="nt">&lt;run&gt;</span>restartRun<span class="nt">&lt;/run&gt;</span>
-        <span class="nt">&lt;outputMode</span> <span class="na">format=</span><span class="s">&quot;XML&quot;</span> <span class="na">binary=</span><span class="s">&quot;false&quot;</span> <span class="na">precision=</span><span class="s">&quot;10&quot;</span><span class="nt">/&gt;</span>
-        <span class="nt">&lt;timeControlMode</span> <span class="na">iterations=</span><span class="s">&quot;false&quot;</span><span class="nt">&gt;</span>
-                <span class="nt">&lt;iterations</span> <span class="na">number=</span><span class="s">&quot;500&quot;</span> <span class="na">iterFreq=</span><span class="s">&quot;50&quot;</span><span class="nt">/&gt;</span>
-                <span class="nt">&lt;physicalTime</span> <span class="na">totalTime=</span><span class="s">&quot;6.e-4&quot;</span> <span class="na">timeFreq=</span><span class="s">&quot;6e-5&quot;</span><span class="nt">/&gt;</span>
-        <span class="nt">&lt;/timeControlMode&gt;</span>
-        <span class="nt">&lt;computationControl</span> <span class="na">CFL=</span><span class="s">&quot;0.5&quot;</span><span class="nt">/&gt;</span>
-        <span class="nt">&lt;secondOrder&gt;</span>
-                <span class="nt">&lt;globalLimiter&gt;</span>vanleer<span class="nt">&lt;/globalLimiter&gt;</span>
-        <span class="nt">&lt;/secondOrder&gt;</span>
-        <span class="nt">&lt;restartSimulation</span> <span class="na">restartFileNumber=</span><span class="s">&quot;0&quot;</span> <span class="na">AMRsaveFreq=</span><span class="s">&quot;0&quot;</span><span class="nt">/&gt;</span>
+<span class="w">        </span><span class="nt">&lt;run&gt;</span>restartRun<span class="nt">&lt;/run&gt;</span>
+<span class="w">        </span><span class="nt">&lt;outputMode</span><span class="w"> </span><span class="na">format=</span><span class="s">&quot;XML&quot;</span><span class="w"> </span><span class="na">binary=</span><span class="s">&quot;false&quot;</span><span class="w"> </span><span class="na">precision=</span><span class="s">&quot;10&quot;</span><span class="nt">/&gt;</span>
+<span class="w">        </span><span class="nt">&lt;timeControlMode</span><span class="w"> </span><span class="na">iterations=</span><span class="s">&quot;false&quot;</span><span class="nt">&gt;</span>
+<span class="w">                </span><span class="nt">&lt;iterations</span><span class="w"> </span><span class="na">number=</span><span class="s">&quot;500&quot;</span><span class="w"> </span><span class="na">iterFreq=</span><span class="s">&quot;50&quot;</span><span class="nt">/&gt;</span>
+<span class="w">                </span><span class="nt">&lt;physicalTime</span><span class="w"> </span><span class="na">totalTime=</span><span class="s">&quot;6.e-4&quot;</span><span class="w"> </span><span class="na">timeFreq=</span><span class="s">&quot;6e-5&quot;</span><span class="nt">/&gt;</span>
+<span class="w">        </span><span class="nt">&lt;/timeControlMode&gt;</span>
+<span class="w">        </span><span class="nt">&lt;computationControl</span><span class="w"> </span><span class="na">CFL=</span><span class="s">&quot;0.5&quot;</span><span class="nt">/&gt;</span>
+<span class="w">        </span><span class="nt">&lt;secondOrder&gt;</span>
+<span class="w">                </span><span class="nt">&lt;globalLimiter&gt;</span>vanleer<span class="nt">&lt;/globalLimiter&gt;</span>
+<span class="w">        </span><span class="nt">&lt;/secondOrder&gt;</span>
+<span class="w">        </span><span class="nt">&lt;restartSimulation</span><span class="w"> </span><span class="na">restartFileNumber=</span><span class="s">&quot;0&quot;</span><span class="w"> </span><span class="na">AMRsaveFreq=</span><span class="s">&quot;0&quot;</span><span class="nt">/&gt;</span>
 <span class="nt">&lt;/computationParam&gt;</span>
 </pre></div>
 </div>
 <p>We removed the probe section and changed the time control mode to iterations with a printing of data each 50 iterations for a total of 500 iterations.</p>
-<p>Following the same idea of simpler test case we edit the file <em>meshV5.xml</em> by commenting the AMR feature and add more cells:</p>
+<p>Following the same idea of simpler test case we edit the file <em>mesh.xml</em> by commenting the AMR feature and add more cells:</p>
 <div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span>
 <span class="nt">&lt;mesh&gt;</span>
-        <span class="nt">&lt;type</span> <span class="na">structure=</span><span class="s">&quot;cartesian&quot;</span><span class="nt">/&gt;</span>
-        <span class="nt">&lt;cartesianMesh&gt;</span>
-                <span class="nt">&lt;dimensions</span> <span class="na">x=</span><span class="s">&quot;1.0&quot;</span> <span class="na">y=</span><span class="s">&quot;0.1&quot;</span> <span class="na">z=</span><span class="s">&quot;0.1&quot;</span><span class="nt">/&gt;</span>
-                <span class="nt">&lt;numberCells</span> <span class="na">x=</span><span class="s">&quot;200&quot;</span> <span class="na">y =</span><span class="s">&quot;1&quot;</span> <span class="na">z=</span><span class="s">&quot;1&quot;</span><span class="nt">/&gt;</span>
-                <span class="c">&lt;!-- &lt;AMR lvlMax=&quot;3&quot; criteriaVar=&quot;0.1&quot; varRho=&quot;true&quot; varP=&quot;true&quot; varU=&quot;false&quot; varAlpha=&quot;false&quot; xiSplit=&quot;0.11&quot; xiJoin=&quot;0.11&quot;/&gt; --&gt;</span>
-        <span class="nt">&lt;/cartesianMesh&gt;</span>
+<span class="w">        </span><span class="nt">&lt;type</span><span class="w"> </span><span class="na">structure=</span><span class="s">&quot;cartesian&quot;</span><span class="nt">/&gt;</span>
+<span class="w">        </span><span class="nt">&lt;cartesianMesh&gt;</span>
+<span class="w">                </span><span class="nt">&lt;dimensions</span><span class="w"> </span><span class="na">x=</span><span class="s">&quot;1.0&quot;</span><span class="w"> </span><span class="na">y=</span><span class="s">&quot;0.1&quot;</span><span class="w"> </span><span class="na">z=</span><span class="s">&quot;0.1&quot;</span><span class="nt">/&gt;</span>
+<span class="w">                </span><span class="nt">&lt;numberCells</span><span class="w"> </span><span class="na">x=</span><span class="s">&quot;200&quot;</span><span class="w"> </span><span class="na">y =</span><span class="s">&quot;1&quot;</span><span class="w"> </span><span class="na">z=</span><span class="s">&quot;1&quot;</span><span class="nt">/&gt;</span>
+<span class="w">                </span><span class="cm">&lt;!-- &lt;AMR lvlMax=&quot;3&quot; criteriaVar=&quot;0.1&quot; varRho=&quot;true&quot; varP=&quot;true&quot; varU=&quot;false&quot; varAlpha=&quot;false&quot; xiSplit=&quot;0.11&quot; xiJoin=&quot;0.11&quot;/&gt; --&gt;</span>
+<span class="w">        </span><span class="nt">&lt;/cartesianMesh&gt;</span>
 <span class="nt">&lt;/mesh&gt;</span>
 </pre></div>
 </div>
 <p>Now everything is all set, we will run this test case a first time and after that, we will extend the duration of the simulation to 1000 iterations.</p>
 <div class="admonition important">
 <p class="admonition-title">Important</p>
-<p>To run this simulation, it is required to update the main input file named <em>ECOGEN.xml</em> (see <a class="reference internal" href="Chap4_1startWithECOGEN.html#sec-tuto-begin"><span class="std std-ref">Start with ECOGEN</span></a>). To add your new run you can add the line <code class="code xml docutils literal notranslate"><span class="name tag"><span class="pre">&lt;testCase&gt;</span></span><span class="pre">./libTests/myTests/restartRun/</span><span class="name tag"><span class="pre">&lt;/testCase&gt;</span></span></code> to the end of this file. Be aware to check if other test cases are uncommented to avoid other simulations.</p>
+<p>To run this simulation, it is required to update the main input file named <em>ECOGEN.xml</em> (see <a class="reference internal" href="Chap4_1startWithECOGEN.html#sec-tuto-begin"><span class="std std-ref">Start with ECOGEN</span></a>). To add your new run you can add the line <code class="code highlight xml docutils literal highlight-xml"><span class="nt">&lt;testCase&gt;</span>./libTests/myTests/restartRun/<span class="nt">&lt;/testCase&gt;</span></code> to the end of this file. Be aware to check if other test cases are uncommented to avoid other simulations.</p>
 </div>
-</div>
-<div class="section" id="initial-run">
-<h2>Initial run<a class="headerlink" href="#initial-run" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="initial-run">
+<h2>Initial run<a class="headerlink" href="#initial-run" title="Link to this heading"></a></h2>
 <p>Run the simulation with <strong>XX</strong> cores:</p>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">./ECOGEN</span>
 <span class="go">mpirun -np XX ECOGEN</span>
 </pre></div>
 </div>
 <p>Once started, the output on the console looks like:</p>
-<div class="figure align-center" id="id1">
+<figure class="align-center" id="id1">
 <a class="reference internal image-reference" href="_images/runInit.png"><img alt="_images/runInit.png" src="_images/runInit.png" style="width: 374.25px; height: 493.5px;" /></a>
-<p class="caption"><span class="caption-number">Fig. 10 </span><span class="caption-text">Console screenshot of the initial run.</span><a class="headerlink" href="#id1" title="Permalink to this image">¶</a></p>
-</div>
-<p>Once the simulation is done, we can check in the result folder <strong>./results/restartRun/datasets/</strong> the total number of iterations extracted. The last file has the name <em>results_CPUxx_TIME10.vtr</em> which indicates that the number of extracted files is indeed 10 as specified in the <em>mainV5.xml</em> file (500 physical iterations, results printed every 50 interations giving a total of 500/50 = 10 output files). This number corresponds to the <em>restartFileNumber</em> of the the block <code class="code xml docutils literal notranslate"><span class="name tag"><span class="pre">&lt;restartSimulation&gt;</span></span></code>.</p>
+<figcaption>
+<p><span class="caption-number">Fig. 11 </span><span class="caption-text">Console screenshot of the initial run.</span><a class="headerlink" href="#id1" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p>Once the simulation is done, we can check in the result folder <strong>./results/restartRun/datasets/</strong> the total number of iterations extracted. The last file has the name <em>results_CPUxx_TIME10.vtr</em> which indicates that the number of extracted files is indeed 10 as specified in the <em>main.xml</em> file (500 physical iterations, results printed every 50 interations giving a total of 500/50 = 10 output files). This number corresponds to the <em>restartFileNumber</em> of the the block <code class="code highlight xml docutils literal highlight-xml"><span class="nt">&lt;restartSimulation&gt;</span></code>.</p>
 <p>Obviously, in this case we know the total number of time iterations extracted because we waited the end of the simulation. However, it could be useful to get this number if the simulation stopped suddenly, or if the time control mode used was time.</p>
-</div>
-<div class="section" id="resume-run">
-<h2>Resume run<a class="headerlink" href="#resume-run" title="Permalink to this headline">¶</a></h2>
-<p>Now that we know the last time iteration, we can resume this simulation to add 500 additionnal time iterations. To this end, we modify the block <code class="code xml docutils literal notranslate"><span class="name tag"><span class="pre">&lt;restartSimulation&gt;</span></span></code> of the <em>mainV5.xml</em> file to specify the last file number:</p>
-<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;restartSimulation</span> <span class="na">restartFileNumber=</span><span class="s">&quot;10&quot;</span> <span class="na">AMRsaveFreq=</span><span class="s">&quot;0&quot;</span><span class="nt">/&gt;</span>
+</section>
+<section id="resume-run">
+<h2>Resume run<a class="headerlink" href="#resume-run" title="Link to this heading"></a></h2>
+<p>Now that we know the last time iteration, we can resume this simulation to add 500 additionnal time iterations. To this end, we modify the block <code class="code highlight xml docutils literal highlight-xml"><span class="nt">&lt;restartSimulation&gt;</span></code> of the <em>main.xml</em> file to specify the last file number:</p>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;restartSimulation</span><span class="w"> </span><span class="na">restartFileNumber=</span><span class="s">&quot;10&quot;</span><span class="w"> </span><span class="na">AMRsaveFreq=</span><span class="s">&quot;0&quot;</span><span class="nt">/&gt;</span>
 </pre></div>
 </div>
 <p>Accordingly we add the additionnal time iterations:</p>
-<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;iterations</span> <span class="na">number=</span><span class="s">&quot;1000&quot;</span> <span class="na">iterFreq=</span><span class="s">&quot;50&quot;</span><span class="nt">/&gt;</span>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;iterations</span><span class="w"> </span><span class="na">number=</span><span class="s">&quot;1000&quot;</span><span class="w"> </span><span class="na">iterFreq=</span><span class="s">&quot;50&quot;</span><span class="nt">/&gt;</span>
 </pre></div>
 </div>
 <p>All is left to do is to run again the simulation.</p>
@@ -255,80 +178,59 @@
 <p>When you choose to resume a simulation you have to use the same number of cores as before.</p>
 </div>
 <p>It is possible to notice on the console output that the simulation is well resumed:</p>
-<div class="figure align-center" id="id2">
+<figure class="align-center" id="id2">
 <a class="reference internal image-reference" href="_images/restartRun.png"><img alt="_images/restartRun.png" src="_images/restartRun.png" style="width: 368.25px; height: 503.25px;" /></a>
-<p class="caption"><span class="caption-number">Fig. 11 </span><span class="caption-text">Console screenshot of the run restarted.</span><a class="headerlink" href="#id2" title="Permalink to this image">¶</a></p>
-</div>
+<figcaption>
+<p><span class="caption-number">Fig. 12 </span><span class="caption-text">Console screenshot of the run restarted.</span><a class="headerlink" href="#id2" title="Link to this image"></a></p>
+</figcaption>
+</figure>
 <p>Once the simulation completed, it is possible to compare the initial run with the resumed one:</p>
-<div class="figure align-center" id="id3">
+<figure class="align-center" id="id3">
 <a class="reference internal image-reference" href="_images/compareRun.png"><img alt="_images/compareRun.png" src="_images/compareRun.png" style="width: 910.1999999999999px; height: 324.0px;" /></a>
-<p class="caption"><span class="caption-number">Fig. 12 </span><span class="caption-text">Pressure visualization for the restarted and initial runs with a maximal number of extracted files of 20 (left) and 10 (right), respectively.</span><a class="headerlink" href="#id3" title="Permalink to this image">¶</a></p>
-</div>
+<figcaption>
+<p><span class="caption-number">Fig. 13 </span><span class="caption-text">Pressure visualization for the restarted and initial runs with a maximal number of extracted files of 20 (left) and 10 (right), respectively.</span><a class="headerlink" href="#id3" title="Link to this image"></a></p>
+</figcaption>
+</figure>
 <p>We can clearly see that at 1000 iterations the expansion fan left the tube on the left side whereas at 500 iterations the initial left state is still present.</p>
-</div>
-<div class="section" id="additionnal-remarks">
-<h2>Additionnal remarks<a class="headerlink" href="#additionnal-remarks" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="additionnal-remarks">
+<h2>Additionnal remarks<a class="headerlink" href="#additionnal-remarks" title="Link to this heading"></a></h2>
 <ul class="simple">
 <li><p>It is essential that the result folder of the initial simulation keeps the same name for the restarted run.</p></li>
-<li><p>For AMR simulations, one also needs to specify the frequency <code class="code xml docutils literal notranslate"><span class="pre">AMRsaveFreq</span></code> at which necessary restart files are saved (default is 0).</p></li>
+<li><p>For AMR simulations, one also needs to specify the frequency <code class="code highlight xml docutils literal highlight-xml">AMRsaveFreq</code> at which necessary restart files are saved (default is 0).</p></li>
 </ul>
-</div>
-</div>
+</section>
+</section>
 
 
            </div>
-           
           </div>
-          <footer>
-  
-    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
-      
-        <a href="Chap4_4splitPhysicalDomainsNS.html" class="btn btn-neutral float-right" title="Split physical domains for unstructured meshes" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
-      
-      
-        <a href="Chap4_2generatingMeshes.html" class="btn btn-neutral float-left" title="Generating Meshes" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
-      
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="Chap4_2generatingMeshes.html" class="btn btn-neutral float-left" title="Generating Meshes" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="Chap4_4splitPhysicalDomainsNS.html" class="btn btn-neutral float-right" title="Split physical domains for unstructured meshes" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
-  
 
   <hr/>
 
   <div role="contentinfo">
-    <p>
-        
-        &copy; Copyright 2022, code-mphi
-
-    </p>
+    <p>&#169; Copyright 2023, code-mphi.</p>
   </div>
-    
-    
-    
-    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
-    
-    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
-    
-    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
 
 </footer>
-
         </div>
       </div>
-
     </section>
-
   </div>
-  
-
-  <script type="text/javascript">
+  <script>
       jQuery(function () {
           SphinxRtdTheme.Navigation.enable(true);
       });
-  </script>
-
-  
-  
-    
-   
+  </script> 
 
 </body>
 </html>

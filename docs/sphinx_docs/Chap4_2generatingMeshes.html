@@ -1,92 +1,51 @@
-
-
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8">
-  
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  
-  <title>Generating Meshes &mdash; ECOGEN 3.1 documentation</title>
-  
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-  
-  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
-  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-
-  
-  
-  
-  
-
-  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Generating Meshes &mdash; ECOGEN 4.0 documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
   <!--[if lt IE 9]>
     <script src="_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-    
-      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
-        <script src="_static/jquery.js"></script>
-        <script src="_static/underscore.js"></script>
-        <script src="_static/doctools.js"></script>
-        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    
-    <script type="text/javascript" src="_static/js/theme.js"></script>
-
-    
+        <script src="_static/jquery.js?v=5d32c60e"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="_static/documentation_options.js?v=9f5556dd"></script>
+        <script src="_static/doctools.js?v=888ff710"></script>
+        <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="Restart a run" href="Chap4_3restartRun.html" />
     <link rel="prev" title="Start with ECOGEN" href="Chap4_1startWithECOGEN.html" /> 
 </head>
 
-<body class="wy-body-for-nav">
-
-   
+<body class="wy-body-for-nav"> 
   <div class="wy-grid-for-nav">
-    
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-          
 
           
-            <a href="index.html" class="icon icon-home" alt="Documentation Home"> ECOGEN
           
-
-          
+          <a href="index.html" class="icon icon-home">
+            ECOGEN
           </a>
-
-          
-            
-            
               <div class="version">
-                3.1
+                4.0
               </div>
-            
-          
-
-          
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
 </div>
-
-          
-        </div>
-
-        
-        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
-          
-            
-            
-              
-            
-            
-              <p class="caption"><span class="caption-text">Contents:</span></p>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="Chap1_introduction.html">Introduction</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Chap2_installation_Chapter.html">Installation instructions</a></li>
@@ -105,6 +64,8 @@
 <li class="toctree-l2"><a class="reference internal" href="Chap4_5paraviewServer.html">ParaView server</a></li>
 <li class="toctree-l2"><a class="reference internal" href="Chap4_6extractMassflowWithParaview.html">Gmsh example and extraction of mass-flow rate</a></li>
 <li class="toctree-l2"><a class="reference internal" href="Chap4_7runningATestInAnotherFolder.html">Running a test case in another folder</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Chap4_8restartMeshMapping.html">Restart a simulation with mesh mapping</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Chap4_9exportGmshFile.html">Export Gmsh mesh to version 2 file format</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="Chap5_testCases_Chapter.html">Test cases</a></li>
@@ -113,172 +74,113 @@
 <li class="toctree-l1"><a class="reference internal" href="zBibliography.html">Bibliography</a></li>
 </ul>
 
-            
-          
         </div>
-        
       </div>
     </nav>
 
-    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
-
-      
-      <nav class="wy-nav-top" aria-label="top navigation">
-        
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
           <a href="index.html">ECOGEN</a>
-        
       </nav>
 
-
       <div class="wy-nav-content">
-        
         <div class="rst-content">
-        
-          
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<div role="navigation" aria-label="breadcrumbs navigation">
-
+          <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-    
-      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
-        
-          <li><a href="Chap4_tutorials_Chapter.html">Tutorials</a> &raquo;</li>
-        
-      <li>Generating Meshes</li>
-    
-    
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="Chap4_tutorials_Chapter.html">Tutorials</a></li>
+      <li class="breadcrumb-item active">Generating Meshes</li>
       <li class="wy-breadcrumbs-aside">
-        
-            
             <a href="_sources/Chap4_2generatingMeshes.rst.txt" rel="nofollow"> View page source</a>
-          
-        
       </li>
-    
   </ul>
-
-  
   <hr/>
 </div>
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
-            
-  <div class="section" id="generating-meshes">
-<span id="sec-tuto-generatingmeshes"></span><h1>Generating Meshes<a class="headerlink" href="#generating-meshes" title="Permalink to this headline">¶</a></h1>
+             
+  <section id="generating-meshes">
+<span id="sec-tuto-generatingmeshes"></span><h1>Generating Meshes<a class="headerlink" href="#generating-meshes" title="Link to this heading"></a></h1>
 <p>ECOGEN is able to generate its own Cartesian meshes (see section <a class="reference internal" href="Chap3_1_3mesh.html#sec-input-cartesian"><span class="std std-ref">Cartesian mesh</span></a>), but for structured non Cartesian or unstructured meshes, as seen in section <a class="reference internal" href="Chap3_1_3mesh.html#sec-input-unstructured"><span class="std std-ref">Unstructured mesh</span></a>, an external mesh software is required to generate mesh files.</p>
-<div class="section" id="mesh-files-with-gmsh">
-<h2>Mesh files with Gmsh<a class="headerlink" href="#mesh-files-with-gmsh" title="Permalink to this headline">¶</a></h2>
-<p>ECOGEN can use mesh files for single- or multi-core computations generated with the open-source <a class="reference external" href="http://gmsh.info/">Gmsh</a> software <span id="id1">[<a class="reference internal" href="zBibliography.html#id93"><span>GR09</span></a>]</span> with some specific precautions when editing the geometry file (<em>.geo</em>). Only the <a class="reference external" href="http://gmsh.info/doc/texinfo/gmsh.html#MSH-file-format-version-2-_0028Legacy_0029">MSH file format version 2</a> can be used in the current released version 3.1 of ECOGEN.</p>
-<p>Download binaries of Gmsh in version 3.0.6 or lower : <a class="reference external" href="http://gmsh.info/bin/">http://gmsh.info/bin/</a>.</p>
+<section id="mesh-files-with-gmsh">
+<h2>Mesh files with Gmsh<a class="headerlink" href="#mesh-files-with-gmsh" title="Link to this heading"></a></h2>
+<p>ECOGEN can use mesh files for single- or multi-core computations generated with the open-source <a class="reference external" href="http://gmsh.info/">Gmsh</a> software <span id="id1">[<a class="reference internal" href="zBibliography.html#id94" title="C. Geuzaine and J.-F. Remacle. Gmsh: A 3-D finite element mesh generator with built-in pre-and post-processing facilities. International Journal for Numerical Methods in Engineering, 79(11):1309–1331, 2009.">GR09</a>]</span> with some specific precautions when editing the geometry file (<em>.geo</em>). Only the <a class="reference external" href="http://gmsh.info/doc/texinfo/gmsh.html#MSH-file-format-version-2-_0028Legacy_0029">MSH file format version 2</a> can be used in the current released version 4.0 of ECOGEN.</p>
+<p>To export your mesh to the version 2, either:</p>
+<ul class="simple">
+<li><p>Download older <a class="reference external" href="http://gmsh.info/">Gmsh</a> binaries before the new mesh file format was introduced, such as version 3.0.6 or lower: <a class="reference external" href="http://gmsh.info/bin/">http://gmsh.info/bin/</a>.</p></li>
+<li><p>Use latest version of Gmsh but export your mesh file to the version 2, for more information see the tutorial <a class="reference internal" href="Chap4_9exportGmshFile.html#sec-tuto-exportgmshfile"><span class="std std-ref">Export Gmsh mesh to version 2 file format</span></a>.</p></li>
+</ul>
 <p>Here are the restrictions that should be used when generating a geometry with <a class="reference external" href="http://gmsh.info/">Gmsh</a>:</p>
 <ul class="simple">
 <li><p>Each part of the domain occupied by the fluid should correspond to a physical surface or a physical volume which is attributed to the value <em>10</em>.</p></li>
-<li><p>Each boundary condition must correspond to a physical line or a physical surface. The values are successively taken from <em>1</em> to maximum <em>9</em>. This is an important point that will be used to define boundary conditions with physical treatment in the <em>initialConditionsV4.xml</em> input file described in section <a class="reference internal" href="Chap3_1_4initialConditions.html#sec-input-initialconditions"><span class="std std-ref">InitialConditionsV4.xml</span></a>.</p></li>
+<li><p>Each boundary condition must correspond to a physical line or a physical surface. The values are successively taken from <em>1</em> to maximum <em>9</em>. This is an important point that will be used to define boundary conditions with physical treatment in the <em>initialConditions.xml</em> input file described in section <a class="reference internal" href="Chap3_1_4initialConditions.html#sec-input-initialconditions"><span class="std std-ref">InitialConditions.xml</span></a>.</p></li>
 </ul>
 <p>Below is presented an example.</p>
-<div class="section" id="generating-a-nozzle-unstructured-mesh">
-<h3>Generating a nozzle unstructured mesh<a class="headerlink" href="#generating-a-nozzle-unstructured-mesh" title="Permalink to this headline">¶</a></h3>
+<section id="generating-a-nozzle-unstructured-mesh">
+<h3>Generating a nozzle unstructured mesh<a class="headerlink" href="#generating-a-nozzle-unstructured-mesh" title="Link to this heading"></a></h3>
 <p>Consider the geometry file of a simple nozzle depicted below:</p>
-<div class="figure align-default" id="id2">
+<figure class="align-default" id="id2">
 <span id="fig-tutorials-nozzle-simple"></span><img alt="_images/simpleNozzle.png" src="_images/simpleNozzle.png" />
-<p class="caption"><span class="caption-number">Fig. 9 </span><span class="caption-text">Example of geometrical data file – nozzle2D_simple2.geo –- for generating a mesh file with <em>.msh</em> format using Gmsh software and usable with ECOGEN.</span><a class="headerlink" href="#id2" title="Permalink to this image">¶</a></p>
-</div>
-<p>This correponds to the geometry file available in <a class="reference external" href="https://github.com/code-mphi/ECOGEN/blob/master/libMeshes/nozzles/nozzle2D_simple2.geo">ECOGEN/libMeshes/nozzles/nozzle2D_simple2.geo</a>.</p>
+<figcaption>
+<p><span class="caption-number">Fig. 10 </span><span class="caption-text">Example of geometrical data file – nozzle2D_example.geo –- for generating a mesh file with <em>.msh</em> format using Gmsh software and usable with ECOGEN.</span><a class="headerlink" href="#id2" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p>This correponds to the geometry file available in <a class="reference external" href="https://github.com/code-mphi/ECOGEN/blob/master/libMeshes/nozzles/nozzle2D_example.geo">ECOGEN/libMeshes/nozzles/nozzle2D_example.geo</a>.</p>
 <p>The computational domain is a nozzle, the mesh is unstructured with quadrangles. In that case, one should take care that the fluid surface is defined by the value <em>10</em> and that 4 boundary conditions are set with the following numbering:</p>
 <ul class="simple">
-<li><p>Symmetrical axis:  1 (<em>condLimAxe = 1</em>)</p></li>
-<li><p>Wall:                          2 (<em>condLimParoi = 2</em>)</p></li>
-<li><p>Inflow:                        3 (<em>condLimEntree = 3</em>)</p></li>
-<li><p>Outflow:                       4 (<em>condLimSortie = 4</em>)</p></li>
+<li><p>Symmetrical axis:  1 (<em>boundAxis = 1</em>)</p></li>
+<li><p>Wall: 2 (<em>boundWall = 2</em>)</p></li>
+<li><p>Injection using stagnation state: 3 (<em>boundInlet = 3</em>)</p></li>
+<li><p>Imposed pressure: 4 (<em>boundOutlet = 4</em>)</p></li>
 </ul>
-<p>The corresponding <em>initialConditionV4.xml</em> file should then contains for example the following markups:</p>
-<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="c">&lt;!-- LIST OF BOUNDARY CONDITIONS --&gt;</span>
+<p>The corresponding <em>initialCondition.xml</em> file should then contains for example the following markups:</p>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="cm">&lt;!-- LIST OF BOUNDARY CONDITIONS --&gt;</span>
 <span class="nt">&lt;boundaryConditions&gt;</span>
-        <span class="nt">&lt;boundCond</span> <span class="na">name=</span><span class="s">&quot;axis&quot;</span> <span class="na">type=</span><span class="s">&quot;symmetry&quot;</span> <span class="na">number=</span><span class="s">&quot;1&quot;</span> <span class="nt">/&gt;</span>
-        <span class="nt">&lt;boundCond</span> <span class="na">name=</span><span class="s">&quot;wall&quot;</span> <span class="na">type=</span><span class="s">&quot;wall&quot;</span> <span class="na">number=</span><span class="s">&quot;2&quot;</span> <span class="nt">/&gt;</span>
-        <span class="nt">&lt;boundCond</span> <span class="na">name=</span><span class="s">&quot;entrance&quot;</span> <span class="na">type=</span><span class="s">&quot;tank&quot;</span> <span class="na">number=</span><span class="s">&quot;3&quot;</span><span class="nt">&gt;</span>
-                <span class="nt">&lt;dataTank</span> <span class="na">p0=</span><span class="s">&quot;2.e5&quot;</span> <span class="na">T0=</span><span class="s">&quot;187.5&quot;</span><span class="nt">/&gt;</span>
-        <span class="nt">&lt;/boundCond&gt;</span>
-        <span class="nt">&lt;boundCond</span> <span class="na">name=</span><span class="s">&quot;exit&quot;</span> <span class="na">type=</span><span class="s">&quot;outflow&quot;</span> <span class="na">number=</span><span class="s">&quot;4&quot;</span><span class="nt">&gt;</span>
-                <span class="nt">&lt;dataOutflow</span> <span class="na">p0=</span><span class="s">&quot;1.e5&quot;</span><span class="nt">/&gt;</span>
-        <span class="nt">&lt;/boundCond&gt;</span>
+<span class="w">        </span><span class="nt">&lt;boundCond</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;axis&quot;</span><span class="w"> </span><span class="na">type=</span><span class="s">&quot;symmetry&quot;</span><span class="w"> </span><span class="na">number=</span><span class="s">&quot;1&quot;</span><span class="w"> </span><span class="nt">/&gt;</span>
+<span class="w">        </span><span class="nt">&lt;boundCond</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;wall&quot;</span><span class="w"> </span><span class="na">type=</span><span class="s">&quot;wall&quot;</span><span class="w"> </span><span class="na">number=</span><span class="s">&quot;2&quot;</span><span class="w"> </span><span class="nt">/&gt;</span>
+<span class="w">        </span><span class="nt">&lt;boundCond</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;inlet&quot;</span><span class="w"> </span><span class="na">type=</span><span class="s">&quot;inletTank&quot;</span><span class="w"> </span><span class="na">number=</span><span class="s">&quot;3&quot;</span><span class="nt">&gt;</span>
+<span class="w">                </span><span class="nt">&lt;dataInletTank</span><span class="w"> </span><span class="na">p0=</span><span class="s">&quot;2.e5&quot;</span><span class="w"> </span><span class="na">T0=</span><span class="s">&quot;187.5&quot;</span><span class="nt">/&gt;</span>
+<span class="w">        </span><span class="nt">&lt;/boundCond&gt;</span>
+<span class="w">        </span><span class="nt">&lt;boundCond</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;outlet&quot;</span><span class="w"> </span><span class="na">type=</span><span class="s">&quot;outletPressure&quot;</span><span class="w"> </span><span class="na">number=</span><span class="s">&quot;4&quot;</span><span class="nt">&gt;</span>
+<span class="w">                </span><span class="nt">&lt;dataOutletPressure</span><span class="w"> </span><span class="na">p0=</span><span class="s">&quot;1.e5&quot;</span><span class="nt">/&gt;</span>
+<span class="w">        </span><span class="nt">&lt;/boundCond&gt;</span>
 <span class="nt">&lt;/boundaryConditions&gt;</span>
 </pre></div>
 </div>
 <p>This correponds to initialization of a nozzle connected to a tank on the left and to an outflow at imposed pressure to the right.</p>
-</div>
-</div>
-</div>
+</section>
+</section>
+</section>
 
 
            </div>
-           
           </div>
-          <footer>
-  
-    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
-      
-        <a href="Chap4_3restartRun.html" class="btn btn-neutral float-right" title="Restart a run" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
-      
-      
-        <a href="Chap4_1startWithECOGEN.html" class="btn btn-neutral float-left" title="Start with ECOGEN" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
-      
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="Chap4_1startWithECOGEN.html" class="btn btn-neutral float-left" title="Start with ECOGEN" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="Chap4_3restartRun.html" class="btn btn-neutral float-right" title="Restart a run" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
-  
 
   <hr/>
 
   <div role="contentinfo">
-    <p>
-        
-        &copy; Copyright 2022, code-mphi
-
-    </p>
+    <p>&#169; Copyright 2023, code-mphi.</p>
   </div>
-    
-    
-    
-    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
-    
-    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
-    
-    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
 
 </footer>
-
         </div>
       </div>
-
     </section>
-
   </div>
-  
-
-  <script type="text/javascript">
+  <script>
       jQuery(function () {
           SphinxRtdTheme.Navigation.enable(true);
       });
-  </script>
-
-  
-  
-    
-   
+  </script> 
 
 </body>
 </html>

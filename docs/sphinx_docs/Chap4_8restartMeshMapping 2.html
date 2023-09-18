@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Restart a simulation with mesh mapping &mdash; ECOGEN 4.0 documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="_static/jquery.js?v=5d32c60e"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="_static/documentation_options.js?v=9f5556dd"></script>
+        <script src="_static/doctools.js?v=888ff710"></script>
+        <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Export Gmsh mesh to version 2 file format" href="Chap4_9exportGmshFile.html" />
+    <link rel="prev" title="Running a test case in another folder" href="Chap4_7runningATestInAnotherFolder.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            ECOGEN
+          </a>
+              <div class="version">
+                4.0
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="Chap1_introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Chap2_installation_Chapter.html">Installation instructions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Chap3_IO_Chapter.html">I/O descriptions</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="Chap4_tutorials_Chapter.html">Tutorials</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="Chap4_1startWithECOGEN.html">Start with ECOGEN</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Chap4_2generatingMeshes.html">Generating Meshes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Chap4_3restartRun.html">Restart a run</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Chap4_4splitPhysicalDomainsNS.html">Split physical domains for unstructured meshes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Chap4_5paraviewServer.html">ParaView server</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Chap4_6extractMassflowWithParaview.html">Gmsh example and extraction of mass-flow rate</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Chap4_7runningATestInAnotherFolder.html">Running a test case in another folder</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Restart a simulation with mesh mapping</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#overview">Overview</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#run-a-simulation-on-a-coarse-mesh">Run a simulation on a coarse mesh</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#setup-the-restart-with-mesh-mapping">Setup the restart with mesh mapping</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#results">Results</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="Chap4_9exportGmshFile.html">Export Gmsh mesh to version 2 file format</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="Chap5_testCases_Chapter.html">Test cases</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Chap6_developersGuide_Chapter.html">Developers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Chap7_license.html">License</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Chap8_GUI.html">Graphical User Interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="zBibliography.html">Bibliography</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">ECOGEN</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="Chap4_tutorials_Chapter.html">Tutorials</a></li>
+      <li class="breadcrumb-item active">Restart a simulation with mesh mapping</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/Chap4_8restartMeshMapping.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="restart-a-simulation-with-mesh-mapping">
+<span id="sec-tuto-restartmeshmapping"></span><h1>Restart a simulation with mesh mapping<a class="headerlink" href="#restart-a-simulation-with-mesh-mapping" title="Link to this heading"></a></h1>
+<p>In ECOGEN it is possible to initialize a simulation with the result of a previous simulation performed on a different mesh and/or a different number of cores.
+The main use case is to accelerate the convergence to the steady state by using a previous simulation performed on a coarse mesh, but it can also be used to restart a simulation on a different number of cores.</p>
+<section id="overview">
+<h2>Overview<a class="headerlink" href="#overview" title="Link to this heading"></a></h2>
+<p>In this tutorial, this mesh mapping method is used to fasten convergence towards steady state of a subsonic flow in a convergent-divergent nozzle.
+To build our test case, we consider the following reference test case in the <em>ECOGEN.xml</em> file:</p>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;testCase&gt;</span>libTests/referenceTestCases/euler/2D/nozzles/lowMachSmoothCrossSection/<span class="nt">&lt;/testCase&gt;</span>
+</pre></div>
+</div>
+<p>In this test case, originally from <span id="id1">[<a class="reference internal" href="zBibliography.html#id210" title="S. Le Martelot, B. Nkonga, and R. Saurel. Liquid and liquid–gas flows at all speeds. Journal of Computational Physics, 255:53–82, 2013.">LMNS13</a>]</span>, a subsonic flow of liquid water is injected into the nozzle as shown in <a class="reference internal" href="#fig-tutos-restartmeshmapping-nozzle"><span class="std std-numref">Fig. 35</span></a>.
+At the inlet, the mass flow rate is imposed as well as the total stagnation enthalpy using the pressure and density.
+At the outlet, the pressure is fixed. These boundary conditions lead to a subsonic flow in the whole nozzle.</p>
+<figure class="align-center" id="id4">
+<span id="fig-tutos-restartmeshmapping-nozzle"></span><a class="reference internal image-reference" href="_images/nozzle.png"><img alt="_images/nozzle.png" src="_images/nozzle.png" style="width: 629.3px; height: 255.49999999999997px;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 35 </span><span class="caption-text">Setup for the subsonic flow within the convergent-divergent nozzle.</span><a class="headerlink" href="#id4" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p>Since the cross-section variation along the nozzle is smooth, a 1D mesh is considered and the numerical scheme is adapted to include the impact on the flow of the upper and lower walls of the nozzle using the method described in <span id="id2">[<a class="reference internal" href="zBibliography.html#id210" title="S. Le Martelot, B. Nkonga, and R. Saurel. Liquid and liquid–gas flows at all speeds. Journal of Computational Physics, 255:53–82, 2013.">LMNS13</a>]</span>.</p>
+<p>This can be done by adding the following node to the <em>model.xml</em> file:</p>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;geometry</span><span class="w"> </span><span class="na">smoothCrossSection1d=</span><span class="s">&quot;true&quot;</span><span class="nt">/&gt;</span>
+</pre></div>
+</div>
+<p>Note that by default a low-Mach preconditioning technique (see <span id="id3">[<a class="reference internal" href="zBibliography.html#id210" title="S. Le Martelot, B. Nkonga, and R. Saurel. Liquid and liquid–gas flows at all speeds. Journal of Computational Physics, 255:53–82, 2013.">LMNS13</a>]</span>) is defined in this test case to properly capture the flow at the throat.
+Since the same effect can be obtained with a very fine mesh and our goal is to provide a configuration demonstrating the interest of the mesh mapping, this option is disabled:</p>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;lowMach</span><span class="w"> </span><span class="na">state=</span><span class="s">&quot;false&quot;</span><span class="nt">/&gt;</span>
+</pre></div>
+</div>
+<p>In this tutorial, we will first run a simulation on a coarse mesh until the steady state is reached.
+Then, this simulation will be used to initialize another simulation on a finer mesh.
+The proper behavior of the mesh mapping will be checked and a discussion of the time saved with the mapping is provided.</p>
+</section>
+<section id="run-a-simulation-on-a-coarse-mesh">
+<h2>Run a simulation on a coarse mesh<a class="headerlink" href="#run-a-simulation-on-a-coarse-mesh" title="Link to this heading"></a></h2>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>In the following, in order to demonstrate that steady state solution obtained with the mesh mapping method corresponds to the exact solution, a coarse mesh of <em>Nx = 1 000</em> and a fine one of <em>Nx = 10 000</em> cells are used.
+Simulations with these meshes can be quite long, therefore for testing purpose the reader is advised to test with <em>Nx = 100</em> and <em>Nx = 1 000</em> cells.</p>
+</div>
+<p>To run the simulation on two cores, use:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">mpirun -np 2 ECOGEN</span>
+</pre></div>
+</div>
+<p>To check that steady state is reached, flow quantities can be checked using a visualization software such as Paraview.
+Note that it might be useful to compare the massflow between the inlet and outlet of the nozzle to make sure steady state is reached.
+Massflow rate can be recorded with the <code class="code highlight xml docutils literal highlight-xml"><span class="nt">&lt;recordBoundaryFlux&gt;</span></code> node in the <em>main.xml</em> file, for more information about this, see the tutorial <a class="reference internal" href="Chap4_6extractMassflowWithParaview.html#sec-tuto-extractmassflow"><span class="std std-ref">Gmsh example and extraction of mass-flow rate</span></a>.</p>
+</section>
+<section id="setup-the-restart-with-mesh-mapping">
+<h2>Setup the restart with mesh mapping<a class="headerlink" href="#setup-the-restart-with-mesh-mapping" title="Link to this heading"></a></h2>
+<p>Now that we have a steady state result obtained on a coarse mesh, we will use it to initialize our simulation on a fine mesh of about <em>Nx = 10 000</em> cells.
+First, make sure to change the name of the result folder to avoid erasing the simulation on the coarse mesh.
+This can be done by changing the following line in <em>main.xml</em>:</p>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;run&gt;</span>euler2DnozzleLowMachSmoothCrossSection_fine<span class="nt">&lt;/run&gt;</span>
+</pre></div>
+</div>
+<p>Now we need to change the mesh to the fine one and add the mesh mapping option with the adequate parameters.
+It needs to be provided with the results folder of the previous coarse mesh simulation, the file to restart to and the mesh file used before.
+Taking into consideration these remarks, the <em>mesh.xml</em> file is modified as follow:</p>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span>
+<span class="nt">&lt;mesh&gt;</span>
+<span class="nt">&lt;type</span><span class="w"> </span><span class="na">structure=</span><span class="s">&quot;unStructured&quot;</span><span class="nt">/&gt;</span>
+
+<span class="w">  </span><span class="nt">&lt;unstructuredMesh&gt;</span>
+<span class="w">    </span><span class="nt">&lt;file</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;libMeshes/nozzles/smoothNozzle2DforLowMach_Nx10000_10cpu.msh&quot;</span><span class="nt">/&gt;</span>
+<span class="w">    </span><span class="nt">&lt;parallel</span><span class="w"> </span><span class="na">GMSHPretraitement=</span><span class="s">&quot;true&quot;</span><span class="nt">/&gt;</span>
+
+<span class="w">    </span><span class="nt">&lt;meshMappingRestart</span>
+<span class="w">      </span><span class="na">resultFolder=</span><span class="s">&quot;euler2DnozzleLowMachSmoothCrossSection_coarse&quot;</span>
+<span class="w">      </span><span class="na">restartFileNumber=</span><span class="s">&quot;1000&quot;</span>
+<span class="w">      </span><span class="na">meshFile=</span><span class="s">&quot;libMeshes/nozzles/smoothNozzle2DforLowMach_Nx1000_2cpu.msh&quot;</span>
+<span class="w">    </span><span class="nt">/&gt;</span>
+
+<span class="w">  </span><span class="nt">&lt;/unstructuredMesh&gt;</span>
+<span class="nt">&lt;/mesh&gt;</span>
+</pre></div>
+</div>
+<p>The simulation is ready to be run, in this case the mesh is partitionned on 10 cores.
+Therefore ECOGEN must be executed using:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">mpirun -np 10 ECOGEN</span>
+</pre></div>
+</div>
+</section>
+<section id="results">
+<h2>Results<a class="headerlink" href="#results" title="Link to this heading"></a></h2>
+<p>To determine how much time is saved thanks to the mesh mapping, one can also run the simulation on the fine mesh <em>Nx = 10 000</em> using basic initial conditions, this run corresponds to test number 3 in the table below.
+The initial run on the coarse mesh corresponds to test number 1 and the run with the mesh mapping is the run number 2.</p>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Test</p></th>
+<th class="head"><p>Description</p></th>
+<th class="head"><p>Mesh (Nx)</p></th>
+<th class="head"><p>Nb of CPUs</p></th>
+<th class="head"><p>Simulation time (h:m:s)</p></th>
+<th class="head"><p>Cumulative time (h:m:s)</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>1</p></td>
+<td><p>Direct run</p></td>
+<td><p>1000</p></td>
+<td><p>1</p></td>
+<td><p>0:36:29</p></td>
+<td><p>0:36:29</p></td>
+</tr>
+<tr class="row-odd"><td><p>2</p></td>
+<td><p>Mapping on test 1</p></td>
+<td><p>10000</p></td>
+<td><p>10</p></td>
+<td><p>4:54:15</p></td>
+<td><p>5:30:44</p></td>
+</tr>
+<tr class="row-even"><td><p>3</p></td>
+<td><p>Direct run</p></td>
+<td><p>10000</p></td>
+<td><p>10</p></td>
+<td><p>9:23:36</p></td>
+<td><p>9:23:36</p></td>
+</tr>
+</tbody>
+</table>
+<p>In <a class="reference internal" href="#fig-tutos-restartmeshmapping-p"><span class="std std-numref">Fig. 36</span></a> and <a class="reference internal" href="#fig-tutos-restartmeshmapping-ux"><span class="std std-numref">Fig. 37</span></a>, we can clearly see that that the same steady state is reached whether the mesh mapping is used or not (see Test 2 and 3) and that an excellent agreement with the exact solution is observed.
+From the cumulative simulation time reported in table above, it can be noticed that the mesh mapping method reduces the simulation time to steady state by more than 50% compared to the direct run when no mesh mapping is used (Test 3) and this even if the initial solution obtained on the coarse mesh is still far from the exact solution.</p>
+<figure class="align-center" id="id5">
+<span id="fig-tutos-restartmeshmapping-p"></span><a class="reference internal image-reference" href="_images/p.png"><img alt="_images/p.png" src="_images/p.png" style="width: 320.0px; height: 240.0px;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 36 </span><span class="caption-text">Pressure distribution along the nozzle length</span><a class="headerlink" href="#id5" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<figure class="align-center" id="id6">
+<span id="fig-tutos-restartmeshmapping-ux"></span><a class="reference internal image-reference" href="_images/ux.png"><img alt="_images/ux.png" src="_images/ux.png" style="width: 320.0px; height: 240.0px;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 37 </span><span class="caption-text">Velocity distribution along the nozzle length</span><a class="headerlink" href="#id6" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="Chap4_7runningATestInAnotherFolder.html" class="btn btn-neutral float-left" title="Running a test case in another folder" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="Chap4_9exportGmshFile.html" class="btn btn-neutral float-right" title="Export Gmsh mesh to version 2 file format" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, code-mphi.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

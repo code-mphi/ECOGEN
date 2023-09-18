@@ -1,92 +1,51 @@
-
-
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8">
-  
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  
-  <title>ParaView server &mdash; ECOGEN 3.1 documentation</title>
-  
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-  
-  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
-  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-
-  
-  
-  
-  
-
-  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ParaView server &mdash; ECOGEN 4.0 documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
   <!--[if lt IE 9]>
     <script src="_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-    
-      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
-        <script src="_static/jquery.js"></script>
-        <script src="_static/underscore.js"></script>
-        <script src="_static/doctools.js"></script>
-        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    
-    <script type="text/javascript" src="_static/js/theme.js"></script>
-
-    
+        <script src="_static/jquery.js?v=5d32c60e"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="_static/documentation_options.js?v=9f5556dd"></script>
+        <script src="_static/doctools.js?v=888ff710"></script>
+        <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="Gmsh example and extraction of mass-flow rate" href="Chap4_6extractMassflowWithParaview.html" />
     <link rel="prev" title="Split physical domains for unstructured meshes" href="Chap4_4splitPhysicalDomainsNS.html" /> 
 </head>
 
-<body class="wy-body-for-nav">
-
-   
+<body class="wy-body-for-nav"> 
   <div class="wy-grid-for-nav">
-    
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-          
 
           
-            <a href="index.html" class="icon icon-home" alt="Documentation Home"> ECOGEN
           
-
-          
+          <a href="index.html" class="icon icon-home">
+            ECOGEN
           </a>
-
-          
-            
-            
               <div class="version">
-                3.1
+                4.0
               </div>
-            
-          
-
-          
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
 </div>
-
-          
-        </div>
-
-        
-        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
-          
-            
-            
-              
-            
-            
-              <p class="caption"><span class="caption-text">Contents:</span></p>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="Chap1_introduction.html">Introduction</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Chap2_installation_Chapter.html">Installation instructions</a></li>
@@ -108,6 +67,8 @@
 </li>
 <li class="toctree-l2"><a class="reference internal" href="Chap4_6extractMassflowWithParaview.html">Gmsh example and extraction of mass-flow rate</a></li>
 <li class="toctree-l2"><a class="reference internal" href="Chap4_7runningATestInAnotherFolder.html">Running a test case in another folder</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Chap4_8restartMeshMapping.html">Restart a simulation with mesh mapping</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Chap4_9exportGmshFile.html">Export Gmsh mesh to version 2 file format</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="Chap5_testCases_Chapter.html">Test cases</a></li>
@@ -116,99 +77,59 @@
 <li class="toctree-l1"><a class="reference internal" href="zBibliography.html">Bibliography</a></li>
 </ul>
 
-            
-          
         </div>
-        
       </div>
     </nav>
 
-    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
-
-      
-      <nav class="wy-nav-top" aria-label="top navigation">
-        
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
           <a href="index.html">ECOGEN</a>
-        
       </nav>
 
-
       <div class="wy-nav-content">
-        
         <div class="rst-content">
-        
-          
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<div role="navigation" aria-label="breadcrumbs navigation">
-
+          <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-    
-      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
-        
-          <li><a href="Chap4_tutorials_Chapter.html">Tutorials</a> &raquo;</li>
-        
-      <li>ParaView server</li>
-    
-    
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="Chap4_tutorials_Chapter.html">Tutorials</a></li>
+      <li class="breadcrumb-item active">ParaView server</li>
       <li class="wy-breadcrumbs-aside">
-        
-            
             <a href="_sources/Chap4_5paraviewServer.rst.txt" rel="nofollow"> View page source</a>
-          
-        
       </li>
-    
   </ul>
-
-  
   <hr/>
 </div>
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
-            
-  <div class="section" id="paraview-server">
-<span id="sec-tuto-paraviewserver"></span><h1>ParaView server<a class="headerlink" href="#paraview-server" title="Permalink to this headline">¶</a></h1>
+             
+  <section id="paraview-server">
+<span id="sec-tuto-paraviewserver"></span><h1>ParaView server<a class="headerlink" href="#paraview-server" title="Link to this heading"></a></h1>
 <p>When computations have been performed on a cluster or require significant graphic resources, it may be interesting to post-process the results on a visualization server. In this tutorial the configuration of a ParaView visualization server and the procedure to connect to it is presented.</p>
-<div class="section" id="install-paraview">
-<h2>Install ParaView<a class="headerlink" href="#install-paraview" title="Permalink to this headline">¶</a></h2>
+<section id="install-paraview">
+<h2>Install ParaView<a class="headerlink" href="#install-paraview" title="Link to this heading"></a></h2>
 <p>To install Paraview on your server directly go to the official <a class="reference external" href="https://www.paraview.org/">ParaView website</a>.
 Under Linux section you can find either full suite of ParaView tools including ParaView GUI client or the headless version if don’t plan to render with an X server.
 For the example we will download the complete version and unzip it:</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$</span> wget -O ParaView-5.8.1-MPI-Linux-Python3.7-64bit.tar.gz <span class="s2">&quot;https://www.paraview.org/paraview-downloads/download.php?submit=Download&amp;version=v5.8&amp;type=binary&amp;os=Linux&amp;downloadFile=ParaView-5.8.1-MPI-Linux-Python3.7-64bit.tar.gz&quot;</span>
-<span class="gp">$</span> tar -xvf ParaView-5.8.1-MPI-Linux-Python3.7-64bit.tar.gz
-<span class="gp">$</span> rm ParaView-5.8.1-MPI-Linux-Python3.7-64bit.tar.gz
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>wget<span class="w"> </span>-O<span class="w"> </span>ParaView-5.8.1-MPI-Linux-Python3.7-64bit.tar.gz<span class="w"> </span><span class="s2">&quot;https://www.paraview.org/paraview-downloads/download.php?submit=Download&amp;version=v5.8&amp;type=binary&amp;os=Linux&amp;downloadFile=ParaView-5.8.1-MPI-Linux-Python3.7-64bit.tar.gz&quot;</span>
+<span class="gp">$ </span>tar<span class="w"> </span>-xvf<span class="w"> </span>ParaView-5.8.1-MPI-Linux-Python3.7-64bit.tar.gz
+<span class="gp">$ </span>rm<span class="w"> </span>ParaView-5.8.1-MPI-Linux-Python3.7-64bit.tar.gz
 </pre></div>
 </div>
 <div class="admonition important">
 <p class="admonition-title">Important</p>
 <p>Note that it is strongly recommended to use the same ParaView version on the client side to avoid incompatibility problems.</p>
 </div>
-</div>
-<div class="section" id="setup-paraview-server">
-<h2>Setup ParaView server<a class="headerlink" href="#setup-paraview-server" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="setup-paraview-server">
+<h2>Setup ParaView server<a class="headerlink" href="#setup-paraview-server" title="Link to this heading"></a></h2>
 <p>In order to easily run ParaView executables we will add its bin folder to the <code class="code docutils literal notranslate"><span class="pre">PATH</span></code> environment variable.
 Assuming ParaView has been installed into the folder <em>/home/userName/Softwares/</em> we can edit the path as:</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$</span> sudo <span class="nb">echo</span> <span class="s1">&#39;export PATH=/home/userName/Softwares/ParaView-5.8.1-MPI-Linux-Python3.7-64bit/bin:$PATH&#39;</span> &gt;&gt; /home/userName/.bashrc
-<span class="gp">$</span> <span class="nb">source</span> /home/userName/.bashrc
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>sudo<span class="w"> </span><span class="nb">echo</span><span class="w"> </span><span class="s1">&#39;export PATH=/home/userName/Softwares/ParaView-5.8.1-MPI-Linux-Python3.7-64bit/bin:$PATH&#39;</span><span class="w"> </span>&gt;&gt;<span class="w"> </span>/home/userName/.bashrc
+<span class="gp">$ </span><span class="nb">source</span><span class="w"> </span>/home/userName/.bashrc
 </pre></div>
 </div>
 <p>To start ParaView server run the <code class="code docutils literal notranslate"><span class="pre">pvserver</span></code> executable with the MPI executable provided by ParaView (<code class="code docutils literal notranslate"><span class="pre">-np</span> <span class="pre">1</span></code> for sequential use):</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$</span> mpiexec -np <span class="m">1</span> pvserver --force-offscreen-rendering
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>mpiexec<span class="w"> </span>-np<span class="w"> </span><span class="m">1</span><span class="w"> </span>pvserver<span class="w"> </span>--force-offscreen-rendering
 <span class="go">Waiting for client...</span>
 <span class="go">Connection URL: cs://serverName:11111</span>
 <span class="go">Accepting connection(s): serverName:11111</span>
@@ -220,9 +141,9 @@ If one would like to change the default port, one can add the option <code class
 <p class="admonition-title">Note</p>
 <p>The script <code class="code docutils literal notranslate"><span class="pre">run-pvserver.sh</span></code> available in the script folder of ECOGEN allows to easily set the path to ParaView (and avoid setting manually the <code class="code docutils literal notranslate"><span class="pre">PATH</span></code> variable) and start a server as described above.
 Here is an example to set the path and start the server for the 1st time:</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$</span> ./run-pvserver.sh --path /opt/ParaView-5.8.0-MPI-Linux-Python3.7-64bit/bin/
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>./run-pvserver.sh<span class="w"> </span>--path<span class="w"> </span>/opt/ParaView-5.8.0-MPI-Linux-Python3.7-64bit/bin/
 <span class="go">Path has been set to /opt/ParaView-5.8.0-MPI-Linux-Python3.7-64bit/bin/.</span>
-<span class="gp">$</span> ./run-pvserver <span class="c1"># Using default number of core, i.e. single core</span>
+<span class="gp">$ </span>./run-pvserver<span class="w"> </span><span class="c1"># Using default number of core, i.e. single core</span>
 <span class="go">Waiting for client...</span>
 <span class="go">Connection URL: cs://cid:11111</span>
 <span class="go">Accepting connection(s): cid:11111</span>
@@ -230,111 +151,94 @@ Here is an example to set the path and start the server for the 1st time:</p>
 </div>
 <p>More information is given in the help menu of the script: <code class="code docutils literal notranslate"><span class="pre">./run-pvserver.sh</span> <span class="pre">--help</span></code></p>
 </div>
-</div>
-<div class="section" id="connect-to-paraview-server-with-client">
-<h2>Connect to ParaView server with client<a class="headerlink" href="#connect-to-paraview-server-with-client" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="prerequisites">
-<h3>Prerequisites<a class="headerlink" href="#prerequisites" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="connect-to-paraview-server-with-client">
+<h2>Connect to ParaView server with client<a class="headerlink" href="#connect-to-paraview-server-with-client" title="Link to this heading"></a></h2>
+<section id="prerequisites">
+<h3>Prerequisites<a class="headerlink" href="#prerequisites" title="Link to this heading"></a></h3>
 <p>To access to the ParaView server we need to forward a port from the client machine (<code class="code docutils literal notranslate"><span class="pre">localhost</span></code> here) to the server machine (<code class="code docutils literal notranslate"><span class="pre">serverName</span></code>).
 As stated in the reference below it will allow the ssh client to listen for connections on a given port, once a connection is received the ssh client will tunnel to the ssh server.
 Lastly, the ssh server connects to an another destination given port, i.e. the one used by the ParaView server.
 This procedure is called local forwading and is configured with the <code class="code docutils literal notranslate"><span class="pre">-L</span></code> option. On the client machine one can use:</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$</span> ssh -X -N -L localhost:11111:serverName:11111 user@serverName
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>ssh<span class="w"> </span>-X<span class="w"> </span>-N<span class="w"> </span>-L<span class="w"> </span>localhost:11111:serverName:11111<span class="w"> </span>user@serverName
 </pre></div>
 </div>
 <p>Here it has been added options <code class="code docutils literal notranslate"><span class="pre">-X</span></code> to enable X11 forwading (to export application display) and <code class="code docutils literal notranslate"><span class="pre">-N</span></code> to specify that it is not necessary to execute a remote command (stick only to port forwarding).</p>
 <p>Be aware that the previous command will not give any output and will stay up until you would like to end-up the connection. If you would like to set this command to background add the <code class="code docutils literal notranslate"><span class="pre">-f</span></code> flag.</p>
 <p>To avoid to remember the previous ssh command an alias can be added:</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$</span> vim ~/.bash_aliases
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>vim<span class="w"> </span>~/.bash_aliases
 <span class="go">alias ssh-port=&#39;ssh -X -f -N -L localhost:11111:serverName:11111 user@serverName&#39;</span>
 </pre></div>
 </div>
 <p>Now to do to port forwarding run:</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$</span> ssh-port
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>ssh-port
 </pre></div>
 </div>
 <p>Reference: <a class="reference external" href="https://www.ssh.com/ssh/tunneling/example">ssh tunneling</a></p>
-</div>
-<div class="section" id="paraview-client-usage">
-<h3>ParaView client usage<a class="headerlink" href="#paraview-client-usage" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="paraview-client-usage">
+<h3>ParaView client usage<a class="headerlink" href="#paraview-client-usage" title="Link to this heading"></a></h3>
 <p>The final step is to connect to the ParaView server directly from your ParaView client.
 To proceed, open the ParaView client GUI and click on the <em>Connect</em> button:</p>
-<div class="figure align-center" id="id1">
+<figure class="align-center" id="id1">
 <a class="reference internal image-reference" href="_images/gui.png"><img alt="_images/gui.png" src="_images/gui.png" style="width: 960.0px; height: 390.0px;" /></a>
-<p class="caption"><span class="caption-number">Fig. 17 </span><span class="caption-text">Connect button on ParaView GUI.</span><a class="headerlink" href="#id1" title="Permalink to this image">¶</a></p>
-</div>
+<figcaption>
+<p><span class="caption-number">Fig. 18 </span><span class="caption-text">Connect button on ParaView GUI.</span><a class="headerlink" href="#id1" title="Link to this image"></a></p>
+</figcaption>
+</figure>
 <p>Add your server as described below (keep manual configuration and save):</p>
-<div class="figure align-center" id="id2">
+<figure class="align-center" id="id2">
 <a class="reference internal image-reference" href="_images/initialServerList.png"><img alt="_images/initialServerList.png" src="_images/initialServerList.png" style="width: 398.25px; height: 311.25px;" /></a>
-<p class="caption"><span class="caption-number">Fig. 18 </span><span class="caption-text">Initial server list.</span><a class="headerlink" href="#id2" title="Permalink to this image">¶</a></p>
-</div>
-<div class="figure align-center" id="id3">
+<figcaption>
+<p><span class="caption-number">Fig. 19 </span><span class="caption-text">Initial server list.</span><a class="headerlink" href="#id2" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<figure class="align-center" id="id3">
 <a class="reference internal image-reference" href="_images/serverConfig.png"><img alt="_images/serverConfig.png" src="_images/serverConfig.png" style="width: 398.25px; height: 311.25px;" /></a>
-<p class="caption"><span class="caption-number">Fig. 19 </span><span class="caption-text">Server configuration.</span><a class="headerlink" href="#id3" title="Permalink to this image">¶</a></p>
-</div>
+<figcaption>
+<p><span class="caption-number">Fig. 20 </span><span class="caption-text">Server configuration.</span><a class="headerlink" href="#id3" title="Link to this image"></a></p>
+</figcaption>
+</figure>
 <p>Connect to your server:</p>
-<div class="figure align-center" id="id4">
+<figure class="align-center" id="id4">
 <a class="reference internal image-reference" href="_images/finalServerList.png"><img alt="_images/finalServerList.png" src="_images/finalServerList.png" style="width: 398.25px; height: 311.25px;" /></a>
-<p class="caption"><span class="caption-number">Fig. 20 </span><span class="caption-text">Final server list.</span><a class="headerlink" href="#id4" title="Permalink to this image">¶</a></p>
-</div>
-</div>
-</div>
-</div>
+<figcaption>
+<p><span class="caption-number">Fig. 21 </span><span class="caption-text">Final server list.</span><a class="headerlink" href="#id4" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+</section>
+</section>
+</section>
 
 
            </div>
-           
           </div>
-          <footer>
-  
-    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
-      
-        <a href="Chap4_6extractMassflowWithParaview.html" class="btn btn-neutral float-right" title="Gmsh example and extraction of mass-flow rate" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
-      
-      
-        <a href="Chap4_4splitPhysicalDomainsNS.html" class="btn btn-neutral float-left" title="Split physical domains for unstructured meshes" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
-      
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="Chap4_4splitPhysicalDomainsNS.html" class="btn btn-neutral float-left" title="Split physical domains for unstructured meshes" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="Chap4_6extractMassflowWithParaview.html" class="btn btn-neutral float-right" title="Gmsh example and extraction of mass-flow rate" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
-  
 
   <hr/>
 
   <div role="contentinfo">
-    <p>
-        
-        &copy; Copyright 2022, code-mphi
-
-    </p>
+    <p>&#169; Copyright 2023, code-mphi.</p>
   </div>
-    
-    
-    
-    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
-    
-    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
-    
-    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
 
 </footer>
-
         </div>
       </div>
-
     </section>
-
   </div>
-  
-
-  <script type="text/javascript">
+  <script>
       jQuery(function () {
           SphinxRtdTheme.Navigation.enable(true);
       });
-  </script>
-
-  
-  
-    
-   
+  </script> 
 
 </body>
 </html>

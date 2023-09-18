@@ -1,92 +1,52 @@
-
-
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8">
-  
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  
-  <title>Split physical domains for unstructured meshes &mdash; ECOGEN 3.1 documentation</title>
-  
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-  
-  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
-  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-
-  
-  
-  
-  
-
-  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Split physical domains for unstructured meshes &mdash; ECOGEN 4.0 documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
   <!--[if lt IE 9]>
     <script src="_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-    
-      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
-        <script src="_static/jquery.js"></script>
-        <script src="_static/underscore.js"></script>
-        <script src="_static/doctools.js"></script>
-        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    
-    <script type="text/javascript" src="_static/js/theme.js"></script>
-
-    
+        <script src="_static/jquery.js?v=5d32c60e"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="_static/documentation_options.js?v=9f5556dd"></script>
+        <script src="_static/doctools.js?v=888ff710"></script>
+        <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="ParaView server" href="Chap4_5paraviewServer.html" />
     <link rel="prev" title="Restart a run" href="Chap4_3restartRun.html" /> 
 </head>
 
-<body class="wy-body-for-nav">
-
-   
+<body class="wy-body-for-nav"> 
   <div class="wy-grid-for-nav">
-    
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-          
 
           
-            <a href="index.html" class="icon icon-home" alt="Documentation Home"> ECOGEN
           
-
-          
+          <a href="index.html" class="icon icon-home">
+            ECOGEN
           </a>
-
-          
-            
-            
               <div class="version">
-                3.1
+                4.0
               </div>
-            
-          
-
-          
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
 </div>
-
-          
-        </div>
-
-        
-        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
-          
-            
-            
-              
-            
-            
-              <p class="caption"><span class="caption-text">Contents:</span></p>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="Chap1_introduction.html">Introduction</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Chap2_installation_Chapter.html">Installation instructions</a></li>
@@ -104,6 +64,8 @@
 <li class="toctree-l2"><a class="reference internal" href="Chap4_5paraviewServer.html">ParaView server</a></li>
 <li class="toctree-l2"><a class="reference internal" href="Chap4_6extractMassflowWithParaview.html">Gmsh example and extraction of mass-flow rate</a></li>
 <li class="toctree-l2"><a class="reference internal" href="Chap4_7runningATestInAnotherFolder.html">Running a test case in another folder</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Chap4_8restartMeshMapping.html">Restart a simulation with mesh mapping</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Chap4_9exportGmshFile.html">Export Gmsh mesh to version 2 file format</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="Chap5_testCases_Chapter.html">Test cases</a></li>
@@ -112,82 +74,44 @@
 <li class="toctree-l1"><a class="reference internal" href="zBibliography.html">Bibliography</a></li>
 </ul>
 
-            
-          
         </div>
-        
       </div>
     </nav>
 
-    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
-
-      
-      <nav class="wy-nav-top" aria-label="top navigation">
-        
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
           <a href="index.html">ECOGEN</a>
-        
       </nav>
 
-
       <div class="wy-nav-content">
-        
         <div class="rst-content">
-        
-          
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<div role="navigation" aria-label="breadcrumbs navigation">
-
+          <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-    
-      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
-        
-          <li><a href="Chap4_tutorials_Chapter.html">Tutorials</a> &raquo;</li>
-        
-      <li>Split physical domains for unstructured meshes</li>
-    
-    
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="Chap4_tutorials_Chapter.html">Tutorials</a></li>
+      <li class="breadcrumb-item active">Split physical domains for unstructured meshes</li>
       <li class="wy-breadcrumbs-aside">
-        
-            
             <a href="_sources/Chap4_4splitPhysicalDomainsNS.rst.txt" rel="nofollow"> View page source</a>
-          
-        
       </li>
-    
   </ul>
-
-  
   <hr/>
 </div>
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
-            
-  <div class="section" id="split-physical-domains-for-unstructured-meshes">
-<span id="sec-tuto-splitdomains"></span><h1>Split physical domains for unstructured meshes<a class="headerlink" href="#split-physical-domains-for-unstructured-meshes" title="Permalink to this headline">¶</a></h1>
-<p>ECOGEN is able to initialize fluid domains according to geometrical physical domains for <a class="reference external" href="http://gmsh.info/">Gmsh</a> unstructured mesh (see <a class="reference internal" href="Chap4_2generatingMeshes.html#sec-tuto-generatingmeshes"><span class="std std-ref">Generating Meshes</span></a>). Of course, it is also possible to initialize the computational domain with predefined type domain as described in the section <a class="reference internal" href="Chap3_1_4initialConditions.html#sec-input-initialconditions"><span class="std std-ref">InitialConditionsV4.xml</span></a>. However, in this tutorial, we will focus on how to initialize fluid physical domains in ECOGEN according to geometrical domains defined in the geometry file of Gmsh <em>.geo</em>.</p>
+             
+  <section id="split-physical-domains-for-unstructured-meshes">
+<span id="sec-tuto-splitdomains"></span><h1>Split physical domains for unstructured meshes<a class="headerlink" href="#split-physical-domains-for-unstructured-meshes" title="Link to this heading"></a></h1>
+<p>ECOGEN is able to initialize fluid domains according to geometrical physical domains for <a class="reference external" href="http://gmsh.info/">Gmsh</a> unstructured mesh (see <a class="reference internal" href="Chap4_2generatingMeshes.html#sec-tuto-generatingmeshes"><span class="std std-ref">Generating Meshes</span></a>). Of course, it is also possible to initialize the computational domain with predefined type domain as described in the section <a class="reference internal" href="Chap3_1_4initialConditions.html#sec-input-initialconditions"><span class="std std-ref">InitialConditions.xml</span></a>. However, in this tutorial, we will focus on how to initialize fluid physical domains in ECOGEN according to geometrical domains defined in the geometry file of Gmsh <em>.geo</em>.</p>
 <p>For the purpose of this tutorial, we will use a 2D single-phase shock tube of 1m length and 1m height (more information about this setup can be found at <a class="reference internal" href="Chap5_testCases_Chapter.html#chap-testcases"><span class="std std-ref">Test cases</span></a>). The tube is filled with air (<span class="math notranslate nohighlight">\(\rho = 1.225 \, kg /m^3\)</span>) initially at rest, the left chamber pressure is <span class="math notranslate nohighlight">\(P_L = 5 \, bar\)</span> and the right chamber pressure is fixed at <span class="math notranslate nohighlight">\(P_R = 1 \, bar\)</span>.</p>
-<div class="section" id="geometry-and-mesh">
-<h2>Geometry and mesh<a class="headerlink" href="#geometry-and-mesh" title="Permalink to this headline">¶</a></h2>
+<section id="geometry-and-mesh">
+<h2>Geometry and mesh<a class="headerlink" href="#geometry-and-mesh" title="Link to this heading"></a></h2>
 <p>The 2D tube is defined by a 1x1 square. To design the initial interface between the left and right chamber we create two points on the upper and lower part (<strong>Point(5)</strong> and <strong>Point(6)</strong>) of the domain, that are connected by <strong>Line(7)</strong>:</p>
-<div class="figure align-center" id="id1">
+<figure class="align-center" id="id1">
 <a class="reference internal image-reference" href="_images/meshTube.png"><img alt="_images/meshTube.png" src="_images/meshTube.png" style="width: 482.09999999999997px; height: 370.5px;" /></a>
-<p class="caption"><span class="caption-number">Fig. 13 </span><span class="caption-text">Geometry and mesh (triangular elements) of the 2D shock tube on <a class="reference external" href="http://gmsh.info/">Gmsh</a> software.</span><a class="headerlink" href="#id1" title="Permalink to this image">¶</a></p>
-</div>
+<figcaption>
+<p><span class="caption-number">Fig. 14 </span><span class="caption-text">Geometry and mesh (triangular elements) of the 2D shock tube on <a class="reference external" href="http://gmsh.info/">Gmsh</a> software.</span><a class="headerlink" href="#id1" title="Link to this image"></a></p>
+</figcaption>
+</figure>
 <p>The complete geometry configuration file (<em>.geo</em>) is the following:</p>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>//Mesh size
 dx = 0.05;
@@ -228,74 +152,74 @@ Plane Surface(11) = {10};
 Physical Surface(rightChamber) = {11};
 </pre></div>
 </div>
-</div>
-<div class="section" id="setup-of-the-test-case">
-<h2>Setup of the test case<a class="headerlink" href="#setup-of-the-test-case" title="Permalink to this headline">¶</a></h2>
-<p>Let’s start with the <em>mainV5.xml</em> file. We use an <em>XML</em> output mode with time control set to <em>iterations</em> and a <em>CFL</em> number of <em>0.8</em>:</p>
+</section>
+<section id="setup-of-the-test-case">
+<h2>Setup of the test case<a class="headerlink" href="#setup-of-the-test-case" title="Link to this heading"></a></h2>
+<p>Let’s start with the <em>main.xml</em> file. We use an <em>XML</em> output mode with time control set to <em>iterations</em> and a <em>CFL</em> number of <em>0.8</em>:</p>
 <div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="cp">&lt;?xml version = &quot;1.0&quot; encoding = &quot;UTF-8&quot; standalone = &quot;yes&quot;?&gt;</span>
 <span class="nt">&lt;computationParam&gt;</span>
-        <span class="nt">&lt;run&gt;</span>shockTubeUnstructured<span class="nt">&lt;/run&gt;</span>
-        <span class="nt">&lt;outputMode</span> <span class="na">format=</span><span class="s">&quot;XML&quot;</span> <span class="na">binary=</span><span class="s">&quot;false&quot;</span> <span class="na">precision=</span><span class="s">&quot;15&quot;</span><span class="nt">/&gt;</span>
-        <span class="nt">&lt;timeControlMode</span> <span class="na">iterations=</span><span class="s">&quot;true&quot;</span><span class="nt">&gt;</span>
-                <span class="nt">&lt;iterations</span> <span class="na">number=</span><span class="s">&quot;100&quot;</span> <span class="na">iterFreq=</span><span class="s">&quot;10&quot;</span><span class="nt">/&gt;</span>
-                <span class="nt">&lt;physicalTime</span> <span class="na">totalTime=</span><span class="s">&quot;1e-3&quot;</span> <span class="na">timeFreq=</span><span class="s">&quot;5.e-5&quot;</span><span class="nt">/&gt;</span>
-        <span class="nt">&lt;/timeControlMode&gt;</span>
-        <span class="nt">&lt;computationControl</span> <span class="na">CFL=</span><span class="s">&quot;0.8&quot;</span><span class="nt">/&gt;</span>
+<span class="w">        </span><span class="nt">&lt;run&gt;</span>shockTubeUnstructured<span class="nt">&lt;/run&gt;</span>
+<span class="w">        </span><span class="nt">&lt;outputMode</span><span class="w"> </span><span class="na">format=</span><span class="s">&quot;XML&quot;</span><span class="w"> </span><span class="na">binary=</span><span class="s">&quot;false&quot;</span><span class="w"> </span><span class="na">precision=</span><span class="s">&quot;15&quot;</span><span class="nt">/&gt;</span>
+<span class="w">        </span><span class="nt">&lt;timeControlMode</span><span class="w"> </span><span class="na">iterations=</span><span class="s">&quot;true&quot;</span><span class="nt">&gt;</span>
+<span class="w">                </span><span class="nt">&lt;iterations</span><span class="w"> </span><span class="na">number=</span><span class="s">&quot;100&quot;</span><span class="w"> </span><span class="na">iterFreq=</span><span class="s">&quot;10&quot;</span><span class="nt">/&gt;</span>
+<span class="w">                </span><span class="nt">&lt;physicalTime</span><span class="w"> </span><span class="na">totalTime=</span><span class="s">&quot;1e-3&quot;</span><span class="w"> </span><span class="na">timeFreq=</span><span class="s">&quot;5.e-5&quot;</span><span class="nt">/&gt;</span>
+<span class="w">        </span><span class="nt">&lt;/timeControlMode&gt;</span>
+<span class="w">        </span><span class="nt">&lt;computationControl</span><span class="w"> </span><span class="na">CFL=</span><span class="s">&quot;0.8&quot;</span><span class="nt">/&gt;</span>
 <span class="nt">&lt;/computationParam&gt;</span>
 </pre></div>
 </div>
-<p>To solve this flow we use the model <em>Euler</em> with air considered as ideal gas. Thus, the <em>modelV4.xml</em> file is:</p>
+<p>To solve this flow we use the model <em>Euler</em> with air considered as ideal gas. Thus, the <em>model.xml</em> file is:</p>
 <div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="cp">&lt;?xml version = &quot;1.0&quot; encoding = &quot;UTF-8&quot; standalone = &quot;yes&quot;?&gt;</span>
 <span class="nt">&lt;model&gt;</span>
-        <span class="nt">&lt;flowModel</span> <span class="na">name=</span><span class="s">&quot;Euler&quot;</span><span class="nt">/&gt;</span>
-        <span class="nt">&lt;EOS</span> <span class="na">name=</span><span class="s">&quot;IG_air.xml&quot;</span><span class="nt">/&gt;</span>
+<span class="w">        </span><span class="nt">&lt;flowModel</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;Euler&quot;</span><span class="nt">/&gt;</span>
+<span class="w">        </span><span class="nt">&lt;EOS</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;IG_air.xml&quot;</span><span class="nt">/&gt;</span>
 <span class="nt">&lt;/model&gt;</span>
 </pre></div>
 </div>
-<p>Reading of the unstructured mesh is done throught the <em>meshV5.xml</em> file:</p>
+<p>Reading of the unstructured mesh is done throught the <em>mesh.xml</em> file:</p>
 <div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="cp">&lt;?xml version = &quot;1.0&quot; encoding = &quot;UTF-8&quot; standalone = &quot;yes&quot;?&gt;</span>
 <span class="nt">&lt;mesh&gt;</span>
-        <span class="nt">&lt;type</span> <span class="na">structure=</span><span class="s">&quot;unStructured&quot;</span><span class="nt">/&gt;</span>
-        <span class="nt">&lt;unstructuredMesh&gt;</span>
-                <span class="nt">&lt;file</span> <span class="na">name=</span><span class="s">&quot;libMeshes/myMeshFolder/tube2d.msh&quot;</span><span class="nt">/&gt;</span>
-        <span class="nt">&lt;/unstructuredMesh&gt;</span>
+<span class="w">        </span><span class="nt">&lt;type</span><span class="w"> </span><span class="na">structure=</span><span class="s">&quot;unStructured&quot;</span><span class="nt">/&gt;</span>
+<span class="w">        </span><span class="nt">&lt;unstructuredMesh&gt;</span>
+<span class="w">                </span><span class="nt">&lt;file</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;libMeshes/myMeshFolder/tube2d.msh&quot;</span><span class="nt">/&gt;</span>
+<span class="w">        </span><span class="nt">&lt;/unstructuredMesh&gt;</span>
 <span class="nt">&lt;/mesh&gt;</span>
 </pre></div>
 </div>
-<p>All that remains to be done is to initialize the chambers with the corresponding fluid states. To this end, we define two <code class="code xml docutils literal notranslate"><span class="pre">physicalDomains</span></code> of type <em>entireDomain</em>, one for each chamber. The link between the physical domains of the geometry file <em>.geo</em> and ECOGEN is made by the attribute <code class="code xml docutils literal notranslate"><span class="pre">physicalEntity</span></code>. As given above on the <em>.geo</em> file, the left chamber has the physical entity number 2 and the right chamber has the number 3. Therefore, the <em>initialConditionsV4.xml</em> file is:</p>
+<p>All that remains to be done is to initialize the chambers with the corresponding fluid states. To this end, we define two <code class="code highlight xml docutils literal highlight-xml">physicalDomains</code> of type <em>entireDomain</em>, one for each chamber. The link between the physical domains of the geometry file <em>.geo</em> and ECOGEN is made by the attribute <code class="code highlight xml docutils literal highlight-xml">physicalEntity</code>. As given above on the <em>.geo</em> file, the left chamber has the physical entity number 2 and the right chamber has the number 3. Therefore, the <em>initialConditions.xml</em> file is:</p>
 <div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="cp">&lt;?xml version = &quot;1.0&quot; encoding = &quot;UTF-8&quot; standalone = &quot;yes&quot;?&gt;</span>
 <span class="nt">&lt;CI&gt;</span>
-    <span class="c">&lt;!-- LIST OF GEOMETRICAL DOMAINS  --&gt;</span>
-    <span class="nt">&lt;physicalDomains&gt;</span>
-        <span class="nt">&lt;domain</span> <span class="na">name=</span><span class="s">&quot;leftChamber&quot;</span> <span class="na">state=</span><span class="s">&quot;leftChamber&quot;</span> <span class="na">type=</span><span class="s">&quot;entireDomain&quot;</span> <span class="na">physicalEntity=</span><span class="s">&quot;2&quot;</span><span class="nt">/&gt;</span>
-        <span class="nt">&lt;domain</span> <span class="na">name=</span><span class="s">&quot;rightChamber&quot;</span> <span class="na">state=</span><span class="s">&quot;rightChamber&quot;</span> <span class="na">type=</span><span class="s">&quot;entireDomain&quot;</span> <span class="na">physicalEntity=</span><span class="s">&quot;3&quot;</span><span class="nt">/&gt;</span>
-    <span class="nt">&lt;/physicalDomains&gt;</span>
+<span class="w">    </span><span class="cm">&lt;!-- LIST OF GEOMETRICAL DOMAINS  --&gt;</span>
+<span class="w">    </span><span class="nt">&lt;physicalDomains&gt;</span>
+<span class="w">        </span><span class="nt">&lt;domain</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;leftChamber&quot;</span><span class="w"> </span><span class="na">state=</span><span class="s">&quot;leftChamber&quot;</span><span class="w"> </span><span class="na">type=</span><span class="s">&quot;entireDomain&quot;</span><span class="w"> </span><span class="na">physicalEntity=</span><span class="s">&quot;2&quot;</span><span class="nt">/&gt;</span>
+<span class="w">        </span><span class="nt">&lt;domain</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;rightChamber&quot;</span><span class="w"> </span><span class="na">state=</span><span class="s">&quot;rightChamber&quot;</span><span class="w"> </span><span class="na">type=</span><span class="s">&quot;entireDomain&quot;</span><span class="w"> </span><span class="na">physicalEntity=</span><span class="s">&quot;3&quot;</span><span class="nt">/&gt;</span>
+<span class="w">    </span><span class="nt">&lt;/physicalDomains&gt;</span>
 
-    <span class="c">&lt;!-- LIST OF BOUNDARY CONDITIONS --&gt;</span>
-    <span class="nt">&lt;boundaryConditions&gt;</span>
-        <span class="nt">&lt;boundCond</span> <span class="na">name=</span><span class="s">&quot;walls&quot;</span> <span class="na">type=</span><span class="s">&quot;wall&quot;</span> <span class="na">number=</span><span class="s">&quot;1&quot;</span> <span class="nt">/&gt;</span>
-    <span class="nt">&lt;/boundaryConditions&gt;</span>
+<span class="w">    </span><span class="cm">&lt;!-- LIST OF BOUNDARY CONDITIONS --&gt;</span>
+<span class="w">    </span><span class="nt">&lt;boundaryConditions&gt;</span>
+<span class="w">        </span><span class="nt">&lt;boundCond</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;walls&quot;</span><span class="w"> </span><span class="na">type=</span><span class="s">&quot;wall&quot;</span><span class="w"> </span><span class="na">number=</span><span class="s">&quot;1&quot;</span><span class="w"> </span><span class="nt">/&gt;</span>
+<span class="w">    </span><span class="nt">&lt;/boundaryConditions&gt;</span>
 
-    <span class="c">&lt;!--  LIST OF STATES  --&gt;</span>
-    <span class="nt">&lt;state</span> <span class="na">name=</span><span class="s">&quot;leftChamber&quot;</span><span class="nt">&gt;</span>
-        <span class="nt">&lt;material</span> <span class="na">type=</span><span class="s">&quot;fluid&quot;</span> <span class="na">EOS=</span><span class="s">&quot;IG_air.xml&quot;</span><span class="nt">&gt;</span>
-            <span class="nt">&lt;dataFluid</span> <span class="na">density=</span><span class="s">&quot;1.225&quot;</span> <span class="na">pressure=</span><span class="s">&quot;5.e5&quot;</span><span class="nt">&gt;</span>
-                <span class="nt">&lt;velocity</span> <span class="na">x=</span><span class="s">&quot;0.&quot;</span> <span class="na">y=</span><span class="s">&quot;0.&quot;</span> <span class="na">z=</span><span class="s">&quot;0.&quot;</span><span class="nt">/&gt;</span>
-            <span class="nt">&lt;/dataFluid&gt;</span>
-        <span class="nt">&lt;/material&gt;</span>
-    <span class="nt">&lt;/state&gt;</span>
+<span class="w">    </span><span class="cm">&lt;!--  LIST OF STATES  --&gt;</span>
+<span class="w">    </span><span class="nt">&lt;state</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;leftChamber&quot;</span><span class="nt">&gt;</span>
+<span class="w">        </span><span class="nt">&lt;material</span><span class="w"> </span><span class="na">type=</span><span class="s">&quot;fluid&quot;</span><span class="w"> </span><span class="na">EOS=</span><span class="s">&quot;IG_air.xml&quot;</span><span class="nt">&gt;</span>
+<span class="w">            </span><span class="nt">&lt;dataFluid</span><span class="w"> </span><span class="na">density=</span><span class="s">&quot;1.225&quot;</span><span class="w"> </span><span class="na">pressure=</span><span class="s">&quot;5.e5&quot;</span><span class="nt">&gt;</span>
+<span class="w">                </span><span class="nt">&lt;velocity</span><span class="w"> </span><span class="na">x=</span><span class="s">&quot;0.&quot;</span><span class="w"> </span><span class="na">y=</span><span class="s">&quot;0.&quot;</span><span class="w"> </span><span class="na">z=</span><span class="s">&quot;0.&quot;</span><span class="nt">/&gt;</span>
+<span class="w">            </span><span class="nt">&lt;/dataFluid&gt;</span>
+<span class="w">        </span><span class="nt">&lt;/material&gt;</span>
+<span class="w">    </span><span class="nt">&lt;/state&gt;</span>
 
-    <span class="nt">&lt;state</span> <span class="na">name=</span><span class="s">&quot;rightChamber&quot;</span><span class="nt">&gt;</span>
-        <span class="nt">&lt;material</span> <span class="na">type=</span><span class="s">&quot;fluid&quot;</span> <span class="na">EOS=</span><span class="s">&quot;IG_air.xml&quot;</span><span class="nt">&gt;</span>
-            <span class="nt">&lt;dataFluid</span> <span class="na">density=</span><span class="s">&quot;1.225&quot;</span> <span class="na">pressure=</span><span class="s">&quot;1.e5&quot;</span><span class="nt">&gt;</span>
-                <span class="nt">&lt;velocity</span> <span class="na">x=</span><span class="s">&quot;0.&quot;</span> <span class="na">y=</span><span class="s">&quot;0.&quot;</span> <span class="na">z=</span><span class="s">&quot;0.&quot;</span><span class="nt">/&gt;</span>
-            <span class="nt">&lt;/dataFluid&gt;</span>
-        <span class="nt">&lt;/material&gt;</span>
-    <span class="nt">&lt;/state&gt;</span>
+<span class="w">    </span><span class="nt">&lt;state</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;rightChamber&quot;</span><span class="nt">&gt;</span>
+<span class="w">        </span><span class="nt">&lt;material</span><span class="w"> </span><span class="na">type=</span><span class="s">&quot;fluid&quot;</span><span class="w"> </span><span class="na">EOS=</span><span class="s">&quot;IG_air.xml&quot;</span><span class="nt">&gt;</span>
+<span class="w">            </span><span class="nt">&lt;dataFluid</span><span class="w"> </span><span class="na">density=</span><span class="s">&quot;1.225&quot;</span><span class="w"> </span><span class="na">pressure=</span><span class="s">&quot;1.e5&quot;</span><span class="nt">&gt;</span>
+<span class="w">                </span><span class="nt">&lt;velocity</span><span class="w"> </span><span class="na">x=</span><span class="s">&quot;0.&quot;</span><span class="w"> </span><span class="na">y=</span><span class="s">&quot;0.&quot;</span><span class="w"> </span><span class="na">z=</span><span class="s">&quot;0.&quot;</span><span class="nt">/&gt;</span>
+<span class="w">            </span><span class="nt">&lt;/dataFluid&gt;</span>
+<span class="w">        </span><span class="nt">&lt;/material&gt;</span>
+<span class="w">    </span><span class="nt">&lt;/state&gt;</span>
 <span class="nt">&lt;/CI&gt;</span>
 </pre></div>
 </div>
-<p>Add the new test case to the main input file <em>ECOGEN.xml</em>: <code class="code xml docutils literal notranslate"><span class="name tag"><span class="pre">&lt;testCase&gt;</span></span><span class="pre">./libTests/myTest/</span><span class="name tag"><span class="pre">&lt;/testCase&gt;</span></span></code>.</p>
+<p>Add the new test case to the main input file <em>ECOGEN.xml</em>: <code class="code highlight xml docutils literal highlight-xml"><span class="nt">&lt;testCase&gt;</span>./libTests/myTest/<span class="nt">&lt;/testCase&gt;</span></code>.</p>
 <p>Run the test case simulation with <strong>XX</strong> cores:</p>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">./ECOGEN</span>
 <span class="go">mpirun -np XX ECOGEN</span>
@@ -303,85 +227,66 @@ Physical Surface(rightChamber) = {11};
 </div>
 <div class="admonition important">
 <p class="admonition-title">Important</p>
-<p>Be aware to partition the mesh file with the corresponding number of cores used for the simulation if parallel computation is desired. Gmsh pre-treatment attribute <code class="code xml docutils literal notranslate"><span class="pre">GMSHPretraitement</span></code> of the <em>meshV5.xml</em> file might be set to <em>true</em> in this case.</p>
+<p>Be aware to partition the mesh file with the corresponding number of cores used for the simulation if parallel computation is desired. Gmsh pre-treatment attribute <code class="code highlight xml docutils literal highlight-xml">GMSHPretraitement</code> of the <em>mesh.xml</em> file might be set to <em>true</em> in this case.</p>
 </div>
-</div>
-<div class="section" id="results">
-<h2>Results<a class="headerlink" href="#results" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="results">
+<h2>Results<a class="headerlink" href="#results" title="Link to this heading"></a></h2>
 <p>Initially, the configuration of the shock tube is as follows:</p>
-<div class="figure align-center" id="id2">
+<figure class="align-center" id="id2">
 <a class="reference internal image-reference" href="_images/postProcessInit.png"><img alt="_images/postProcessInit.png" src="_images/postProcessInit.png" style="width: 590.4px; height: 326.09999999999997px;" /></a>
-<p class="caption"><span class="caption-number">Fig. 14 </span><span class="caption-text">Pressure visualization (left) and 1D plot of pressure and velocity along the length of the tube (right) at the initial time. Visualization using <a class="reference external" href="https://www.paraview.org/">Paraview</a> software.</span><a class="headerlink" href="#id2" title="Permalink to this image">¶</a></p>
-</div>
-<p>It is clearly visible that the addition of the line along the interface makes it possible to obtain a mesh with a straight separation at this location. In the absence of this line, the initialization of the fluid states using a <code class="code xml docutils literal notranslate"><span class="pre">halfSpace</span></code> leads to an initial interface deformed by the cells position:</p>
-<div class="figure align-center" id="id3">
+<figcaption>
+<p><span class="caption-number">Fig. 15 </span><span class="caption-text">Pressure visualization (left) and 1D plot of pressure and velocity along the length of the tube (right) at the initial time. Visualization using <a class="reference external" href="https://www.paraview.org/">Paraview</a> software.</span><a class="headerlink" href="#id2" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p>It is clearly visible that the addition of the line along the interface makes it possible to obtain a mesh with a straight separation at this location. In the absence of this line, the initialization of the fluid states using a <code class="code highlight xml docutils literal highlight-xml">halfSpace</code> leads to an initial interface deformed by the cells position:</p>
+<figure class="align-center" id="id3">
 <a class="reference internal image-reference" href="_images/halfSpaceInit.png"><img alt="_images/halfSpaceInit.png" src="_images/halfSpaceInit.png" style="width: 610.4px; height: 299.6px;" /></a>
-<p class="caption"><span class="caption-number">Fig. 15 </span><span class="caption-text">Pressure visualization at the initial time. Visualization using <a class="reference external" href="https://www.paraview.org/">Paraview</a> software.</span><a class="headerlink" href="#id3" title="Permalink to this image">¶</a></p>
-</div>
-<p>Of course, for this test case configuration, it is possible to obtain an equivalent result without declaring two physical domains in the geometry file. By keeping the middle line of the geometry file, the straight separation is ensured and it is therefore possible to define in the <em>initialConditionsV4.xml</em> file an <code class="code xml docutils literal notranslate"><span class="pre">entireDomain</span></code> domain for the left chamber and a <code class="code xml docutils literal notranslate"><span class="pre">halfSpace</span></code> domain located at <span class="math notranslate nohighlight">\(x = 0.5 \, m\)</span> with a positive direction for the right chamber.</p>
+<figcaption>
+<p><span class="caption-number">Fig. 16 </span><span class="caption-text">Pressure visualization at the initial time. Visualization using <a class="reference external" href="https://www.paraview.org/">Paraview</a> software.</span><a class="headerlink" href="#id3" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p>Of course, for this test case configuration, it is possible to obtain an equivalent result without declaring two physical domains in the geometry file. By keeping the middle line of the geometry file, the straight separation is ensured and it is therefore possible to define in the <em>initialConditions.xml</em> file an <code class="code highlight xml docutils literal highlight-xml">entireDomain</code> domain for the left chamber and a <code class="code highlight xml docutils literal highlight-xml">halfSpace</code> domain located at <span class="math notranslate nohighlight">\(x = 0.5 \, m\)</span> with a positive direction for the right chamber.</p>
 <p>However, it can be particularly interesting to use an initialization of the fluid states with the definition of the physical domains from the geometry, in case the fluid regions are too complex to define with the predefined ECOGEN domains.</p>
 <p>After few timesteps, the flow is the following:</p>
-<div class="figure align-center" id="id4">
+<figure class="align-center" id="id4">
 <a class="reference internal image-reference" href="_images/postProcess.png"><img alt="_images/postProcess.png" src="_images/postProcess.png" style="width: 590.4px; height: 326.09999999999997px;" /></a>
-<p class="caption"><span class="caption-number">Fig. 16 </span><span class="caption-text">Pressure visualization (left) and 1D plot of pressure and velocity along the length of the tube (right) after few timesteps. Visualization using <a class="reference external" href="https://www.paraview.org/">Paraview</a> software.</span><a class="headerlink" href="#id4" title="Permalink to this image">¶</a></p>
-</div>
-</div>
-</div>
+<figcaption>
+<p><span class="caption-number">Fig. 17 </span><span class="caption-text">Pressure visualization (left) and 1D plot of pressure and velocity along the length of the tube (right) after few timesteps. Visualization using <a class="reference external" href="https://www.paraview.org/">Paraview</a> software.</span><a class="headerlink" href="#id4" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+</section>
+</section>
 
 
            </div>
-           
           </div>
-          <footer>
-  
-    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
-      
-        <a href="Chap4_5paraviewServer.html" class="btn btn-neutral float-right" title="ParaView server" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
-      
-      
-        <a href="Chap4_3restartRun.html" class="btn btn-neutral float-left" title="Restart a run" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
-      
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="Chap4_3restartRun.html" class="btn btn-neutral float-left" title="Restart a run" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="Chap4_5paraviewServer.html" class="btn btn-neutral float-right" title="ParaView server" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
-  
 
   <hr/>
 
   <div role="contentinfo">
-    <p>
-        
-        &copy; Copyright 2022, code-mphi
-
-    </p>
+    <p>&#169; Copyright 2023, code-mphi.</p>
   </div>
-    
-    
-    
-    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
-    
-    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
-    
-    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
 
 </footer>
-
         </div>
       </div>
-
     </section>
-
   </div>
-  
-
-  <script type="text/javascript">
+  <script>
       jQuery(function () {
           SphinxRtdTheme.Navigation.enable(true);
       });
-  </script>
-
-  
-  
-    
-   
+  </script> 
 
 </body>
 </html>
