@@ -12,7 +12,7 @@ var classAddPhys =
     [ "computeEnergyAddPhys", "classAddPhys.html#a1127813e2ec98f31dd2664f7a5b2b4c7", null ],
     [ "computeFluxAddPhys", "classAddPhys.html#af7b64716ee631ef5e61b3e11a660fee0", null ],
     [ "computeFluxAddPhysBoundary", "classAddPhys.html#afafbee0538e35c1cab18305e3fe094ea", null ],
-    [ "getNumTransportAssociated", "classAddPhys.html#a97097e86bbe4428951f59b3b712f2352", null ],
+    [ "getNumTransportAssociated", "classAddPhys.html#a7ea1d72134f5f61fd37de3c766cdc2e2", null ],
     [ "reinitializationActivated", "classAddPhys.html#aabb79ab430a4f8830870d37e31536bb6", null ],
     [ "reinitializeColorFunction", "classAddPhys.html#ac2421c5bb6f990091ad7a7116c35e238", null ],
     [ "solveFluxAddPhys", "classAddPhys.html#a053c4510d18c56d27075bb765bd0bea2", null ],

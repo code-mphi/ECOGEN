@@ -9,6 +9,7 @@ var classEosVDW =
     [ "dedrho", "classEosVDW.html#ac22a45a5ceb8bac91796e891b0ffece7", null ],
     [ "dedrhoSecond", "classEosVDW.html#afe95dee3354bfc2d9596c4dea5e53fdf", null ],
     [ "getType", "classEosVDW.html#a86af377361ef9ffdd2a2c0de2462e7d4", null ],
+    [ "verifyAndCorrectDensityMax", "classEosVDW.html#ad6c23394bafc404bdce107763d785dbe", null ],
     [ "m_a", "classEosVDW.html#a3e5d72a5b801c2f8b6558dd126bf2622", null ],
     [ "m_b", "classEosVDW.html#ae46c034516737081d734d5780fd2f7e7", null ],
     [ "m_gamma", "classEosVDW.html#a3d535b4bb0ccb96d197fcd1ece1cd2f5", null ],

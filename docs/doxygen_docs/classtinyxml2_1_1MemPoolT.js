@@ -2,11 +2,10 @@ var classtinyxml2_1_1MemPoolT =
 [
     [ "Block", "structtinyxml2_1_1MemPoolT_1_1Block.html", "structtinyxml2_1_1MemPoolT_1_1Block" ],
     [ "Chunk", "uniontinyxml2_1_1MemPoolT_1_1Chunk.html", "uniontinyxml2_1_1MemPoolT_1_1Chunk" ],
-    [ "COUNT", "classtinyxml2_1_1MemPoolT.html#a04cf45156e6f913f93972869ff8a1d94a4eeedbaa09fc9968120af6190e9e0988", null ],
     [ "MemPoolT", "classtinyxml2_1_1MemPoolT.html#a8a69a269ea72e292dde65309528ef64b", null ],
     [ "~MemPoolT", "classtinyxml2_1_1MemPoolT.html#ad6bb8346ad5b9a34f8f0051da5e3ed3f", null ],
     [ "MemPoolT", "classtinyxml2_1_1MemPoolT.html#af29791e12c82dacd385dde3695119ee2", null ],
-    [ "Alloc", "classtinyxml2_1_1MemPoolT.html#aa9d785a48ffe6ea1be679bab13464486", null ],
+    [ "Alloc", "classtinyxml2_1_1MemPoolT.html#ad6874714a4eca6dcc558c0e9e9321858", null ],
     [ "Clear", "classtinyxml2_1_1MemPoolT.html#a469d55e82be97d5ffeff82dd001a7029", null ],
     [ "CurrentAllocs", "classtinyxml2_1_1MemPoolT.html#acafff0b90381d30902bbae54eb1c0b28", null ],
     [ "Free", "classtinyxml2_1_1MemPoolT.html#a4f1a0c434e9e3d7391e5c16ed4ee8c70", null ],

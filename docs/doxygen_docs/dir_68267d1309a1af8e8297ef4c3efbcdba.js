@@ -23,13 +23,9 @@ var dir_68267d1309a1af8e8297ef4c3efbcdba =
     [ "Errors.h", "Errors_8h.html", "Errors_8h" ],
     [ "main.cpp", "main_8cpp.html", "main_8cpp" ],
     [ "Run.cpp", "Run_8cpp.html", null ],
-    [ "Run.h", "Run_8h.html", [
-      [ "Run", "classRun.html", "classRun" ]
-    ] ],
+    [ "Run.h", "Run_8h.html", "Run_8h" ],
     [ "timeStats.cpp", "timeStats_8cpp.html", null ],
-    [ "timeStats.h", "timeStats_8h.html", [
-      [ "timeStats", "classtimeStats.html", "classtimeStats" ]
-    ] ],
+    [ "timeStats.h", "timeStats_8h.html", "timeStats_8h" ],
     [ "Tools.cpp", "Tools_8cpp.html", "Tools_8cpp" ],
     [ "Tools.h", "Tools_8h.html", "Tools_8h" ]
 ];

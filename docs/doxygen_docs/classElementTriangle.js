@@ -2,7 +2,7 @@ var classElementTriangle =
 [
     [ "ElementTriangle", "classElementTriangle.html#a617373425bc370393cccd88d5805c729", null ],
     [ "~ElementTriangle", "classElementTriangle.html#a9dd4f46116b815b331255f3e183d5edc", null ],
-    [ "attributFaceCommunicante", "classElementTriangle.html#ae970ebd03d45484975ef7fffbe08cad4", null ],
+    [ "attributFaceCommunicante", "classElementTriangle.html#ae97854862e53c3f078c0921618241da5", null ],
     [ "attributFaceLimite", "classElementTriangle.html#a1dec63c3efdea0207b04dcb9f0516e37", null ],
     [ "compteFaceCommunicante", "classElementTriangle.html#af07c155f40ca01f9837b6e753919beda", null ],
     [ "compteFaceCommunicante", "classElementTriangle.html#a745d14d865bb33cb5c489b6b0dab0344", null ],

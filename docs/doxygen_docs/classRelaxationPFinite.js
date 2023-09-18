@@ -1,7 +1,9 @@
 var classRelaxationPFinite =
 [
+    [ "RelaxationPFinite", "classRelaxationPFinite.html#a6f7bb8943a7b531f64567682f53e0f4a", null ],
     [ "RelaxationPFinite", "classRelaxationPFinite.html#abf2a258dd266ee8eb5bae1d7a0813891", null ],
     [ "~RelaxationPFinite", "classRelaxationPFinite.html#aca1a46f3b1436078f640ec11976a8378", null ],
+    [ "computePressureDifferences", "classRelaxationPFinite.html#aeb7b455beee54d1d7de2b02615871b80", null ],
     [ "relaxation", "classRelaxationPFinite.html#af697d6266eeae6e1bf8e57c7d43ec8ed", null ],
     [ "system_relaxation", "classRelaxationPFinite.html#a336ff796145db489e80500a61a568058", null ],
     [ "m_LSODA", "classRelaxationPFinite.html#aa7f40d250fba8a03c434361565b75be7", null ],

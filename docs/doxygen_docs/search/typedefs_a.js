@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['value_5ftype_5057',['value_type',['../structdecomposition_1_1Key.html#a6236127a8f805252c566c89aa5e818c2',1,'decomposition::Key::value_type()'],['../classmath_1_1vector.html#a2a2b1a7c9b33a147958bbcf2f1a87cf1',1,'math::vector::value_type()']]],
-  ['vector_5ftype_5058',['vector_type',['../structdecomposition_1_1Key.html#aebe9c8682d52bc67bea0ab1b0e2b9747',1,'decomposition::Key']]]
+  ['scalar_5fcoordinate_5ftype_0',['scalar_coordinate_type',['../structdecomposition_1_1Key.html#a3a8c6c0a6eec362eebd7f8f53a591fa1',1,'decomposition::Key']]],
+  ['size_5ftype_1',['size_type',['../classmath_1_1vector.html#a330e7f442fcf397d270d1335b9d48594',1,'math::vector']]]
 ];

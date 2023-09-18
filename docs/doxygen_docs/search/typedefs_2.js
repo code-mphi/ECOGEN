@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['float_5ftype_5046',['float_type',['../structdecomposition_1_1Key.html#a0ab521126ccaef584b2553989ebdc2d9',1,'decomposition::Key']]]
+  ['data_5ftype_0',['data_type',['../classmath_1_1vector.html#acaaaa3e727ccee9229433b2b3244d25f',1,'math::vector']]],
+  ['difference_5ftype_1',['difference_type',['../classmath_1_1vector.html#afe1afc1bb2630195ffb3c0002d0d216a',1,'math::vector']]]
 ];

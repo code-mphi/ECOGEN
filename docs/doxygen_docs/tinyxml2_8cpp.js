@@ -1,7 +1,7 @@
 var tinyxml2_8cpp =
 [
-    [ "Entity", "structtinyxml2_1_1Entity.html", "structtinyxml2_1_1Entity" ],
-    [ "callfopen", "tinyxml2_8cpp.html#a3634a81ca725ead6204f08cbaa5ad58f", null ],
+    [ "tinyxml2::Entity", "structtinyxml2_1_1Entity.html", "structtinyxml2_1_1Entity" ],
+    [ "callfopen", "tinyxml2_8cpp.html#a7b54ef71c8fd3276585aeb150c9913bd", null ],
     [ "CARRIAGE_RETURN", "tinyxml2_8cpp.html#add686989707d784afa885cbb90910113", null ],
     [ "CR", "tinyxml2_8cpp.html#ad3136d2f1f34e592c66e09ba8a852812", null ],
     [ "DOUBLE_QUOTE", "tinyxml2_8cpp.html#a2e3bbd17c0f4134dbd5bd8cfc5d0c3b2", null ],

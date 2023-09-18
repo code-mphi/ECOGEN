@@ -1,6 +1,6 @@
 var classGDEllipse =
 [
-    [ "GDEllipse", "classGDEllipse.html#a05d816c431ddf7f1b9b428468c494306", null ],
+    [ "GDEllipse", "classGDEllipse.html#a080e270682ab4d2bc429548ab403d8a2", null ],
     [ "~GDEllipse", "classGDEllipse.html#aeccdc2e377738b60c1327563b870e5f3", null ],
     [ "belong", "classGDEllipse.html#afdcd543cd194506f5af23dd8429ca19a", null ],
     [ "m_axis1", "classGDEllipse.html#a2486e4ea2bac6d85e78a588cbb708323", null ],

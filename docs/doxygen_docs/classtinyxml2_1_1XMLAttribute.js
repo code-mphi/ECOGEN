@@ -1,6 +1,5 @@
 var classtinyxml2_1_1XMLAttribute =
 [
-    [ "BUF_SIZE", "classtinyxml2_1_1XMLAttribute.html#a1543d5687af193553e0803804c01f377a5c77cc230dc9e6f9011ba6baa5cf6aaa", null ],
     [ "XMLAttribute", "classtinyxml2_1_1XMLAttribute.html#ae001da9e4e0f727c44f2aadbfb325a7a", null ],
     [ "~XMLAttribute", "classtinyxml2_1_1XMLAttribute.html#a09f3de63524b73b846af8d8656b90d6c", null ],
     [ "XMLAttribute", "classtinyxml2_1_1XMLAttribute.html#a423410d8fb1b94f4514e34abf5432457", null ],
@@ -9,7 +8,7 @@ var classtinyxml2_1_1XMLAttribute =
     [ "FloatValue", "classtinyxml2_1_1XMLAttribute.html#a27797b45d21c981257720db94f5f8801", null ],
     [ "IntValue", "classtinyxml2_1_1XMLAttribute.html#adfa2433f0fdafd5c3880936de9affa80", null ],
     [ "Name", "classtinyxml2_1_1XMLAttribute.html#a5a5c135d24cce7abda6f17301c6274d8", null ],
-    [ "Next", "classtinyxml2_1_1XMLAttribute.html#aee53571b21e7ce5421eb929523a8bbe6", null ],
+    [ "Next", "classtinyxml2_1_1XMLAttribute.html#aa8c7cf4c94a636ae75046658e551614e", null ],
     [ "operator=", "classtinyxml2_1_1XMLAttribute.html#a38e1d174a975bab27a70b4032e39a257", null ],
     [ "ParseDeep", "classtinyxml2_1_1XMLAttribute.html#a3e18cb290baf280fbb1bc90cffd469d3", null ],
     [ "QueryBoolValue", "classtinyxml2_1_1XMLAttribute.html#a5f32e038954256f61c21ff20fd13a09c", null ],

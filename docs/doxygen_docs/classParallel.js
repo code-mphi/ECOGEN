@@ -18,6 +18,8 @@ var classParallel =
     [ "computeDt", "classParallel.html#ad0b5d068646f56f098bfb6f81eae1b2a", null ],
     [ "computePMax", "classParallel.html#a4923dd321d89c74d5950223db70f1d87", null ],
     [ "computeSum", "classParallel.html#a85180028782f0bbfc02e5ee7e57dd5a3", null ],
+    [ "deleteSlopesToReceive", "classParallel.html#ad0df10835c4ae3c0f5e165e4f3888082", null ],
+    [ "deleteSlopesToSend", "classParallel.html#acb4e7e67a1d974aecebf76dd1ffc8ccf", null ],
     [ "finalize", "classParallel.html#abaf6943e16c46d184923e5cdd4b1c112", null ],
     [ "finalizeAMR", "classParallel.html#aa4d0612e407d3cefbdde5f104b00b742", null ],
     [ "finalizePersistentCommunicationsNumberGhostCells", "classParallel.html#a7429f8bb9ee368e65cf273a79061bde0", null ],

@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['pointer_5050',['pointer',['../classmath_1_1vector.html#a2c161f225cb2735c6f1bce0c616e2319',1,'math::vector']]]
+  ['lsoda_5fode_5fsystem_5ftype_0',['LSODA_ODE_SYSTEM_TYPE',['../LSODA_8h.html#a751b47547eb47818353cee05ca499fac',1,'LSODA.h']]]
 ];

@@ -1,13 +1,11 @@
 var classtinyxml2_1_1XMLPrinter =
 [
-    [ "ENTITY_RANGE", "classtinyxml2_1_1XMLPrinter.html#abd08e8da55b22d059d0484c53db1fae8a2ddc02813235fe451809606959166db5", null ],
-    [ "BUF_SIZE", "classtinyxml2_1_1XMLPrinter.html#abd08e8da55b22d059d0484c53db1fae8a1f747a8fb39ceb2e711c3798058fb632", null ],
     [ "XMLPrinter", "classtinyxml2_1_1XMLPrinter.html#aa6d3841c069085f5b8a27bc7103c04f7", null ],
     [ "~XMLPrinter", "classtinyxml2_1_1XMLPrinter.html#af4caefa48ea6436898fb1807de8d14c0", null ],
     [ "ClearBuffer", "classtinyxml2_1_1XMLPrinter.html#a216157765b7267bf389975b1cbf9a909", null ],
     [ "CloseElement", "classtinyxml2_1_1XMLPrinter.html#af1fb439e5d800999646f333fa2f0699a", null ],
     [ "CompactMode", "classtinyxml2_1_1XMLPrinter.html#a38e1ed5a779bdf63eda9e808f7a6de66", null ],
-    [ "CStr", "classtinyxml2_1_1XMLPrinter.html#a180671d73844f159f2d4aafbc11d106e", null ],
+    [ "CStr", "classtinyxml2_1_1XMLPrinter.html#abfa772366c44a17cdeb8aea294d57f78", null ],
     [ "CStrSize", "classtinyxml2_1_1XMLPrinter.html#a3256cf3523d4898b91abb18b924be04c", null ],
     [ "OpenElement", "classtinyxml2_1_1XMLPrinter.html#a20fb06c83bd13e5140d7dd13af06c010", null ],
     [ "Print", "classtinyxml2_1_1XMLPrinter.html#ab30210a7f32e45634e7a45137bf6fdf6", null ],

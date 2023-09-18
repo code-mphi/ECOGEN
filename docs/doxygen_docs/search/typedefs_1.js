@@ -1,5 +1,8 @@
 var searchData=
 [
-  ['data_5ftype_5044',['data_type',['../classmath_1_1vector.html#acaaaa3e727ccee9229433b2b3244d25f',1,'math::vector']]],
-  ['difference_5ftype_5045',['difference_type',['../classmath_1_1vector.html#afe1afc1bb2630195ffb3c0002d0d216a',1,'math::vector']]]
+  ['const_5fiterator_0',['const_iterator',['../classmath_1_1vector.html#a3c309f6c37931b989600cfe92307e8bd',1,'math::vector']]],
+  ['const_5fpointer_1',['const_pointer',['../classmath_1_1vector.html#ac5b2f6b5d4327586149dd55e8b7e78f9',1,'math::vector']]],
+  ['const_5freference_2',['const_reference',['../classmath_1_1vector.html#ae6c2efa323c5dba2097a954cea398d19',1,'math::vector']]],
+  ['const_5freverse_5fiterator_3',['const_reverse_iterator',['../classmath_1_1vector.html#a6e2a6cb1e6a036a54ee39f4589c2d5c5',1,'math::vector']]],
+  ['coordinate_5ftype_4',['coordinate_type',['../structdecomposition_1_1Key.html#a26e0b3dc0d282a6b50cb57b3d9ce95e7',1,'decomposition::Key']]]
 ];

@@ -7,7 +7,7 @@ var classBoundCondWall =
     [ "createBoundary", "classBoundCondWall.html#a3aef88a07fae1079a9b7cd876bd3f296", null ],
     [ "creerCellInterfaceChild", "classBoundCondWall.html#a18743bea215d01ac4b5b0c9c2bada1e6", null ],
     [ "getBoundaryHeatQuantity", "classBoundCondWall.html#a416a68c10a01948c1cefee476bc7982a", null ],
-    [ "getWallRotationalVelocityMRF", "classBoundCondWall.html#a0837b35a63c535f7ec3fea6853dfd22e", null ],
+    [ "getWallRotationalVelocityMRF", "classBoundCondWall.html#a20131d45d1a362674f0747bbf92b73a5", null ],
     [ "isMRFWall", "classBoundCondWall.html#a603371b2e2bd33b96ea9b21f8f4a5b4b", null ],
     [ "solveRiemannBoundary", "classBoundCondWall.html#a3f7e97bd718b029a6f09d33f040557b2", null ],
     [ "solveRiemannTransportBoundary", "classBoundCondWall.html#a330fcd8861a61e4479fe6fd4028b9a47", null ],

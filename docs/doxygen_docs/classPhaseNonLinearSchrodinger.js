@@ -9,5 +9,6 @@ var classPhaseNonLinearSchrodinger =
     [ "getBuffer", "classPhaseNonLinearSchrodinger.html#af6f0fe61bc3bc22f23b776556c955178", null ],
     [ "getBuffer", "classPhaseNonLinearSchrodinger.html#a705471c83c2baa9b5192fd6f77cd26ae", null ],
     [ "getNumberScalars", "classPhaseNonLinearSchrodinger.html#a6fbb3c1aed758349df27fab54a6ac65f", null ],
-    [ "numberOfTransmittedVariables", "classPhaseNonLinearSchrodinger.html#ab8c28f86727b7667069e1806a5172a70", null ]
+    [ "numberOfTransmittedVariables", "classPhaseNonLinearSchrodinger.html#ab8c28f86727b7667069e1806a5172a70", null ],
+    [ "verifyAndCorrectDensityMax", "classPhaseNonLinearSchrodinger.html#a8688276b4d7a48907659e1db79c04519", null ]
 ];

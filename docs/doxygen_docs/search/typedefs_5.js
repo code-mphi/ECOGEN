@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['lsoda_5fode_5fsystem_5ftype_5049',['LSODA_ODE_SYSTEM_TYPE',['../LSODA_8h.html#a751b47547eb47818353cee05ca499fac',1,'LSODA.h']]]
+  ['key_5ftype_0',['key_type',['../classdecomposition_1_1Decomposition.html#adf1f1c0016e479665ba50debf5e174f5',1,'decomposition::Decomposition']]]
 ];

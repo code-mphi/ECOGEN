@@ -1,6 +1,6 @@
 var classGDEllipsoid =
 [
-    [ "GDEllipsoid", "classGDEllipsoid.html#a15b9a69d5c46521f50da1f7aaa47c391", null ],
+    [ "GDEllipsoid", "classGDEllipsoid.html#abee51c896552fe04b8ee3d2cbbe69bf7", null ],
     [ "~GDEllipsoid", "classGDEllipsoid.html#a1ac4d60f6b84e9245e2225295bd4cbc4", null ],
     [ "belong", "classGDEllipsoid.html#a708b846659a1b0bce6e7247d9b8e25db", null ],
     [ "m_axis1", "classGDEllipsoid.html#a61021bc38a2973bf4516a11ee8b60d92", null ],

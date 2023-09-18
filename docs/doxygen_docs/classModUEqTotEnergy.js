@@ -9,12 +9,13 @@ var classModUEqTotEnergy =
     [ "fulfillState", "classModUEqTotEnergy.html#a4852ccf35e879344c1c19007bca03ca3", null ],
     [ "fulfillStateRestart", "classModUEqTotEnergy.html#a990bce236e46033683bd0d4ce8a2ba63", null ],
     [ "getSM", "classModUEqTotEnergy.html#ac4fea458854a8cbe364b0501d4401bd8", null ],
-    [ "getVelocity", "classModUEqTotEnergy.html#ae71c5d6bd01fc9b2e06053db1210974f", null ],
-    [ "getVelocity", "classModUEqTotEnergy.html#a3061049dbf04d9e648148b2e22dc6073", null ],
+    [ "getVelocity", "classModUEqTotEnergy.html#a1c32dad12db9192ba1751868a70b91e2", null ],
+    [ "getVelocity", "classModUEqTotEnergy.html#af719309904afcad1c9cadbe2f633864e", null ],
     [ "initializeAugmentedVariables", "classModUEqTotEnergy.html#a431131219debc09d3b7371ac92e9b060", null ],
     [ "reverseProjection", "classModUEqTotEnergy.html#a429441f039a471fe434790cb59b29129", null ],
+    [ "selectScalar", "classModUEqTotEnergy.html#a38e43f8a20a3cfafb8287a0bf6c60145", null ],
     [ "solveRiemannIntern", "classModUEqTotEnergy.html#af48b91278ed6be3a37ec309369d0af96", null ],
-    [ "whoAmI", "classModUEqTotEnergy.html#a14cc10d24f314392841174c085bb032d", null ],
+    [ "whoAmI", "classModUEqTotEnergy.html#af89c3fabe597c344700ed85c2edd02a1", null ],
     [ "FluxUEqTotEnergy", "classModUEqTotEnergy.html#a1537a30406e3f28885da1e5cae35b785", null ],
     [ "NAME", "classModUEqTotEnergy.html#af4f774a4e0ee526dc28454b38046bf86", null ]
 ];

@@ -1,5 +1,8 @@
 var hierarchy =
 [
+    [ "_axis", "struct__axis.html", null ],
+    [ "_matrix", "struct__matrix.html", null ],
+    [ "_vector", "struct__vector.html", null ],
     [ "AddPhys", "classAddPhys.html", [
       [ "APEuler", "classAPEuler.html", [
         [ "APEConductivity", "classAPEConductivity.html", null ],
@@ -16,25 +19,37 @@ var hierarchy =
     [ "Cell", "classCell.html", [
       [ "CellGhost", "classCellGhost.html", null ],
       [ "CellO2", "classCellO2.html", [
-        [ "CellO2Ghost", "classCellO2Ghost.html", null ]
+        [ "CellO2Cartesian", "classCellO2Cartesian.html", [
+          [ "CellO2GhostCartesian", "classCellO2GhostCartesian.html", null ]
+        ] ],
+        [ "CellO2NS", "classCellO2NS.html", [
+          [ "CellO2GhostNS", "classCellO2GhostNS.html", null ]
+        ] ]
       ] ]
     ] ],
     [ "CellInterface", "classCellInterface.html", [
       [ "BoundCond", "classBoundCond.html", [
-        [ "BoundCondInj", "classBoundCondInj.html", null ],
+        [ "BoundCondInletInjStagState", "classBoundCondInletInjStagState.html", null ],
+        [ "BoundCondInletInjTemp", "classBoundCondInletInjTemp.html", null ],
+        [ "BoundCondInletTank", "classBoundCondInletTank.html", null ],
         [ "BoundCondNonReflecting", "classBoundCondNonReflecting.html", null ],
         [ "BoundCondNullflux", "classBoundCondNullflux.html", null ],
-        [ "BoundCondOutflow", "classBoundCondOutflow.html", null ],
-        [ "BoundCondSubInj", "classBoundCondSubInj.html", null ],
-        [ "BoundCondTank", "classBoundCondTank.html", null ],
+        [ "BoundCondOutletMassflow", "classBoundCondOutletMassflow.html", null ],
+        [ "BoundCondOutletPressure", "classBoundCondOutletPressure.html", null ],
         [ "BoundCondWall", "classBoundCondWall.html", [
           [ "BoundCondSymmetry", "classBoundCondSymmetry.html", null ],
-          [ "BoundCondWallO2", "classBoundCondWallO2.html", [
-            [ "BoundCondSymmetryO2", "classBoundCondSymmetryO2.html", null ]
+          [ "BoundCondWallO2Cartesian", "classBoundCondWallO2Cartesian.html", [
+            [ "BoundCondSymmetryO2Cartesian", "classBoundCondSymmetryO2Cartesian.html", null ]
+          ] ],
+          [ "BoundCondWallO2NS", "classBoundCondWallO2NS.html", [
+            [ "BoundCondSymmetryO2NS", "classBoundCondSymmetryO2NS.html", null ]
           ] ]
         ] ]
       ] ],
-      [ "CellInterfaceO2", "classCellInterfaceO2.html", null ]
+      [ "CellInterfaceO2", "classCellInterfaceO2.html", [
+        [ "CellInterfaceO2Cartesian", "classCellInterfaceO2Cartesian.html", null ],
+        [ "CellInterfaceO2NS", "classCellInterfaceO2NS.html", null ]
+      ] ]
     ] ],
     [ "tinyxml2::MemPoolT< SIZE >::Chunk", "uniontinyxml2_1_1MemPoolT_1_1Chunk.html", null ],
     [ "Config", "classConfig.html", null ],
@@ -66,24 +81,27 @@ var hierarchy =
       [ "EosVDW", "classEosVDW.html", null ]
     ] ],
     [ "Errors", "classErrors.html", null ],
-    [ "exception", null, [
+    [ "std::exception", null, [
       [ "ErrorECOGEN", "classErrorECOGEN.html", [
-        [ "ErrorXML", "classErrorXML.html", [
-          [ "ErrorXMLAttribut", "classErrorXMLAttribut.html", null ],
-          [ "ErrorXMLBoundCondInconnue", "classErrorXMLBoundCondInconnue.html", null ],
-          [ "ErrorXMLDev", "classErrorXMLDev.html", null ],
-          [ "ErrorXMLDomaineInconnu", "classErrorXMLDomaineInconnu.html", null ],
-          [ "ErrorXMLElement", "classErrorXMLElement.html", null ],
-          [ "ErrorXMLEOS", "classErrorXMLEOS.html", null ],
-          [ "ErrorXMLEOSInconnue", "classErrorXMLEOSInconnue.html", null ],
-          [ "ErrorXMLEtat", "classErrorXMLEtat.html", null ],
-          [ "ErrorXMLLimite", "classErrorXMLLimite.html", null ],
-          [ "ErrorXMLMateriauInconnu", "classErrorXMLMateriauInconnu.html", null ],
-          [ "ErrorXMLMessage", "classErrorXMLMessage.html", null ],
-          [ "ErrorXMLRacine", "classErrorXMLRacine.html", null ],
-          [ "ErrorXMLRelaxation", "classErrorXMLRelaxation.html", null ],
-          [ "ErrorXMLStretching", "classErrorXMLStretching.html", null ],
-          [ "ErrorXMLTermeSource", "classErrorXMLTermeSource.html", null ]
+        [ "ErrorInput", "classErrorInput.html", [
+          [ "ErrorMeshNS", "classErrorMeshNS.html", null ],
+          [ "ErrorXML", "classErrorXML.html", [
+            [ "ErrorXMLAttribut", "classErrorXMLAttribut.html", null ],
+            [ "ErrorXMLBoundCondUnknown", "classErrorXMLBoundCondUnknown.html", null ],
+            [ "ErrorXMLDev", "classErrorXMLDev.html", null ],
+            [ "ErrorXMLDomaineUnknown", "classErrorXMLDomaineUnknown.html", null ],
+            [ "ErrorXMLEOS", "classErrorXMLEOS.html", null ],
+            [ "ErrorXMLEOSUnknown", "classErrorXMLEOSUnknown.html", null ],
+            [ "ErrorXMLElement", "classErrorXMLElement.html", null ],
+            [ "ErrorXMLEtat", "classErrorXMLEtat.html", null ],
+            [ "ErrorXMLLimite", "classErrorXMLLimite.html", null ],
+            [ "ErrorXMLMaterialUnknown", "classErrorXMLMaterialUnknown.html", null ],
+            [ "ErrorXMLMessage", "classErrorXMLMessage.html", null ],
+            [ "ErrorXMLRacine", "classErrorXMLRacine.html", null ],
+            [ "ErrorXMLRelaxation", "classErrorXMLRelaxation.html", null ],
+            [ "ErrorXMLStretching", "classErrorXMLStretching.html", null ],
+            [ "ErrorXMLTermeSource", "classErrorXMLTermeSource.html", null ]
+          ] ]
         ] ]
       ] ]
     ] ],
@@ -129,6 +147,19 @@ var hierarchy =
       [ "GradientFiniteDifference", "classGradientFiniteDifference.html", null ],
       [ "GradientGreenGauss", "classGradientGreenGauss.html", null ]
     ] ],
+    [ "GradMixture", "classGradMixture.html", [
+      [ "GradMixEuler", "classGradMixEuler.html", null ],
+      [ "GradMixEulerHomogeneous", "classGradMixEulerHomogeneous.html", null ],
+      [ "GradMixPTUEq", "classGradMixPTUEq.html", null ],
+      [ "GradMixUEq", "classGradMixUEq.html", null ]
+    ] ],
+    [ "GradPhase", "classGradPhase.html", [
+      [ "GradPhaseEuler", "classGradPhaseEuler.html", null ],
+      [ "GradPhaseEulerHomogeneous", "classGradPhaseEulerHomogeneous.html", null ],
+      [ "GradPhasePTUEq", "classGradPhasePTUEq.html", null ],
+      [ "GradPhaseUEq", "classGradPhaseUEq.html", null ]
+    ] ],
+    [ "GradTransport", "classGradTransport.html", null ],
     [ "decomposition::Key< Dim >::hash_functor", "structdecomposition_1_1Key_1_1hash__functor.html", null ],
     [ "Input", "classInput.html", null ],
     [ "IO", "classIO.html", null ],
@@ -144,10 +175,10 @@ var hierarchy =
     ] ],
     [ "LSODA", "classLSODA.html", null ],
     [ "tinyxml2::MemPool", "classtinyxml2_1_1MemPool.html", [
-      [ "tinyxml2::MemPoolT< sizeof(tinyxml2::XMLAttribute) >", "classtinyxml2_1_1MemPoolT.html", null ],
-      [ "tinyxml2::MemPoolT< sizeof(tinyxml2::XMLComment) >", "classtinyxml2_1_1MemPoolT.html", null ],
       [ "tinyxml2::MemPoolT< sizeof(tinyxml2::XMLElement) >", "classtinyxml2_1_1MemPoolT.html", null ],
+      [ "tinyxml2::MemPoolT< sizeof(tinyxml2::XMLAttribute) >", "classtinyxml2_1_1MemPoolT.html", null ],
       [ "tinyxml2::MemPoolT< sizeof(tinyxml2::XMLText) >", "classtinyxml2_1_1MemPoolT.html", null ],
+      [ "tinyxml2::MemPoolT< sizeof(tinyxml2::XMLComment) >", "classtinyxml2_1_1MemPoolT.html", null ],
       [ "tinyxml2::MemPoolT< SIZE >", "classtinyxml2_1_1MemPoolT.html", null ]
     ] ],
     [ "Mesh", "classMesh.html", [

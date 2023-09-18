@@ -1,15 +1,16 @@
 var searchData=
 [
-  ['vdw_5171',['VDW',['../Eos_8h.html#abb3c925d0b79616ace2ff6a3b48d9d30a6d8ae3d7212ee8e74fb9f9d7b7ade87e',1,'Eos.h']]],
-  ['vecphases_5172',['vecPhases',['../Tools_8h.html#a2c815f6ae654fe19b3985d14c9c8d74ea2270f1269fdfbdfd9044eaa8af19750d',1,'Tools.h']]],
-  ['vecphaseso2_5173',['vecPhasesO2',['../Tools_8h.html#a2c815f6ae654fe19b3985d14c9c8d74eab86891f43023231753e9fcce7df7a7a3',1,'Tools.h']]],
-  ['vecslopes_5174',['vecSlopes',['../Tools_8h.html#a2c815f6ae654fe19b3985d14c9c8d74ea92a454a31affc0f1e34d4a65242174f8',1,'Tools.h']]],
-  ['velocitymag_5175',['velocityMag',['../Cell_8h.html#acca207de98b59d1c41e3975008706d61afe9672b956fd93df436140296f0f6884',1,'Cell.h']]],
-  ['velocityu_5176',['velocityU',['../Cell_8h.html#acca207de98b59d1c41e3975008706d61a1f52f320e6d1ac8ac8cad43ddd768d57',1,'Cell.h']]],
-  ['velocityv_5177',['velocityV',['../Cell_8h.html#acca207de98b59d1c41e3975008706d61a7070271fa8a317598e2705927ed5cb8f',1,'Cell.h']]],
-  ['velocityw_5178',['velocityW',['../Cell_8h.html#acca207de98b59d1c41e3975008706d61aa7805ed0a0aaf6f5ec59e04563ecc52e',1,'Cell.h']]],
-  ['velu_5179',['velU',['../Tools_8h.html#aa879dfbd633ab63abf34a3e833e06787a04472c365cbea4b68e3493434369ef69',1,'Tools.h']]],
-  ['velv_5180',['velV',['../Tools_8h.html#aa879dfbd633ab63abf34a3e833e06787ac3bf48e7309a9f9d565f68d7913e6225',1,'Tools.h']]],
-  ['velw_5181',['velW',['../Tools_8h.html#aa879dfbd633ab63abf34a3e833e06787a2ca09ade78ad1a206004b23024dd8f6a',1,'Tools.h']]],
-  ['vertex_5182',['VERTEX',['../Tools_8h.html#a5946f8fd806542d86ae4019735369057a2e4d5495bd9d476f78962cebe074ebbd',1,'Tools.h']]]
+  ['vap_0',['VAP',['../Tools_8h.html#af00a42ecad444bbda75cde1b64bd7e72a457bca7567889affb205245a74b0f59c',1,'Tools.h']]],
+  ['vdw_1',['VDW',['../Eos_8h.html#abb3c925d0b79616ace2ff6a3b48d9d30a6d8ae3d7212ee8e74fb9f9d7b7ade87e',1,'Eos.h']]],
+  ['vecphases_2',['vecPhases',['../Tools_8h.html#a2c815f6ae654fe19b3985d14c9c8d74ea2270f1269fdfbdfd9044eaa8af19750d',1,'Tools.h']]],
+  ['vecphaseso2_3',['vecPhasesO2',['../Tools_8h.html#a2c815f6ae654fe19b3985d14c9c8d74eab86891f43023231753e9fcce7df7a7a3',1,'Tools.h']]],
+  ['vecslopes_4',['vecSlopes',['../Tools_8h.html#a2c815f6ae654fe19b3985d14c9c8d74ea92a454a31affc0f1e34d4a65242174f8',1,'Tools.h']]],
+  ['velocitymag_5',['velocityMag',['../Tools_8h.html#acca207de98b59d1c41e3975008706d61afe12f8880523ba6f9cd4127d743cc2b4',1,'Tools.h']]],
+  ['velocityu_6',['velocityu',['../classGradPhaseEuler.html#a07d8d300f90828413d8e9f953f253388ad307e48c216bbaf709d380992941cf61',1,'GradPhaseEuler::velocityU'],['../classGradMixPTUEq.html#a7ca956882e743c9a03d2f8a1f059ddd3a66ab3c39c1d3ff0ab91f331a44bccb05',1,'GradMixPTUEq::velocityU'],['../Tools_8h.html#acca207de98b59d1c41e3975008706d61ab28ca7380acef767b6b68d7b2803ad84',1,'velocityU:&#160;Tools.h'],['../classGradMixEulerHomogeneous.html#a2c812178aaf7c97882093a6f05167f0eaad95dea0195143cf5c1deb4cfd7e3caa',1,'GradMixEulerHomogeneous::velocityU'],['../classGradMixUEq.html#a432c553e8198a087e3403c67d5b7c6b0aacc030b777ea69adffb1730fc38822d1',1,'GradMixUEq::velocityU']]],
+  ['velocityv_7',['velocityv',['../classGradMixUEq.html#a432c553e8198a087e3403c67d5b7c6b0a7d5a7fa197c41c7f0772ce6226acbd80',1,'GradMixUEq::velocityV'],['../classGradMixPTUEq.html#a7ca956882e743c9a03d2f8a1f059ddd3a6ae8e9ceeb01a69c10c4c0d1390a3534',1,'GradMixPTUEq::velocityV'],['../classGradMixEulerHomogeneous.html#a2c812178aaf7c97882093a6f05167f0eaa9a047fd50b05682c93cd4628c9de743',1,'GradMixEulerHomogeneous::velocityV'],['../classGradPhaseEuler.html#a07d8d300f90828413d8e9f953f253388a2ed03d9f013abf0045ffbedebb6aa5d3',1,'GradPhaseEuler::velocityV'],['../Tools_8h.html#acca207de98b59d1c41e3975008706d61a13119a07b531043d53237c8afcf551fc',1,'velocityV:&#160;Tools.h']]],
+  ['velocityw_8',['velocityw',['../classGradMixUEq.html#a432c553e8198a087e3403c67d5b7c6b0a84cf9de95fdabf4bf98405b2941faea5',1,'GradMixUEq::velocityW'],['../classGradMixEulerHomogeneous.html#a2c812178aaf7c97882093a6f05167f0eac06662b7f315be94881ec90487b697d4',1,'GradMixEulerHomogeneous::velocityW'],['../classGradPhaseEuler.html#a07d8d300f90828413d8e9f953f253388a64bf047214bc9f5c2ac6dc5795a6c09c',1,'GradPhaseEuler::velocityW'],['../classGradMixPTUEq.html#a7ca956882e743c9a03d2f8a1f059ddd3ab3441bf608c8983e4d1488a1d157b256',1,'GradMixPTUEq::velocityW'],['../Tools_8h.html#acca207de98b59d1c41e3975008706d61a7827c945e20e7c90a7f6e47485048fb2',1,'velocityW:&#160;Tools.h']]],
+  ['velu_9',['velU',['../Tools_8h.html#aa879dfbd633ab63abf34a3e833e06787a04472c365cbea4b68e3493434369ef69',1,'Tools.h']]],
+  ['velv_10',['velV',['../Tools_8h.html#aa879dfbd633ab63abf34a3e833e06787ac3bf48e7309a9f9d565f68d7913e6225',1,'Tools.h']]],
+  ['velw_11',['velW',['../Tools_8h.html#aa879dfbd633ab63abf34a3e833e06787a2ca09ade78ad1a206004b23024dd8f6a',1,'Tools.h']]],
+  ['vertex_12',['VERTEX',['../Tools_8h.html#a5946f8fd806542d86ae4019735369057a2e4d5495bd9d476f78962cebe074ebbd',1,'Tools.h']]]
 ];

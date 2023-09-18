@@ -2,7 +2,7 @@ var classElementTetrahedron =
 [
     [ "ElementTetrahedron", "classElementTetrahedron.html#acc50c668accf912acdd5caaca787cfc2", null ],
     [ "~ElementTetrahedron", "classElementTetrahedron.html#ab1c08fb03e303ba04130cf697aa00c86", null ],
-    [ "attributFaceCommunicante", "classElementTetrahedron.html#a2c8ac1504ff6d367f7b8da322ebfc01c", null ],
+    [ "attributFaceCommunicante", "classElementTetrahedron.html#a9cc56afd6b2215a4fc304944dc138979", null ],
     [ "compteFaceCommunicante", "classElementTetrahedron.html#aad744bc089d6146ddb4394b7f2ded15c", null ],
     [ "compteFaceCommunicante", "classElementTetrahedron.html#a8d51f1bcfc05ae4f8ef6ef5632b5e4b6", null ],
     [ "computeLCFL", "classElementTetrahedron.html#aeb8f997a043956d281478fccb9d34dcd", null ],

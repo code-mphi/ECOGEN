@@ -1,6 +1,6 @@
 var classGDHalfSpace =
 [
-    [ "GDHalfSpace", "classGDHalfSpace.html#ad83bd90480f20b6cf4156dd8b18e376f", null ],
+    [ "GDHalfSpace", "classGDHalfSpace.html#a1aa535cd33a5d4aa220248c3fd7093fe", null ],
     [ "~GDHalfSpace", "classGDHalfSpace.html#a9f83196cdb85e7e4c74dd00b3141a1be", null ],
     [ "belong", "classGDHalfSpace.html#aaa06005136a7b369e8eb57301e00e6fb", null ],
     [ "fillIn", "classGDHalfSpace.html#a824551a5aa22be8ab4d9c5684fb81b86", null ],
