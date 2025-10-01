@@ -1,0 +1,68 @@
+<map id="Face::getBinormal" name="Face::getBinormal">
+<area shape="rect" id="Node000001" title=" " alt="" coords="1048,673,1187,699"/>
+<area shape="rect" id="Node000002" href="$classCellInterface.html#a96a0427bef10a7ca6e0102998e06b6ce" title=" " alt="" coords="787,104,952,129"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="1112,660,1101,547,1080,391,1065,312,1046,240,1024,181,1011,159,998,143,977,128,951,120,953,115,979,123,1002,139,1016,156,1029,179,1051,238,1070,311,1085,390,1107,547,1117,659"/>
+<area shape="rect" id="Node000005" href="$classGradientGreenGauss.html#af8805deac13bbedc558d41a81957d292" title="Compute gradients (temperature, velocity, density) of a cell." alt="" coords="791,253,948,293"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="1114,660,1110,589,1094,494,1080,443,1059,393,1033,347,998,307,975,291,947,281,949,276,977,286,1002,303,1037,344,1064,391,1085,441,1099,493,1115,589,1119,660"/>
+<area shape="rect" id="Node000006" href="$classOutputBoundaryFluxGNU.html#acbf898f60e056715b70a2272ca5a48bb" title="Compute the enthalpy flux contribution of a single cell interface when MRF is activated." alt="" coords="739,317,1000,357"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="1112,660,1104,600,1086,521,1071,480,1052,440,1028,403,998,371,982,359,985,355,1002,367,1032,400,1056,437,1076,478,1091,520,1109,599,1117,659"/>
+<area shape="rect" id="Node000010" href="$classCellInterface.html#a8172713eb70ab29af50714cfa0f8c236" title=" " alt="" coords="779,381,959,421"/>
+<area shape="poly" id="edge9_Node000001_Node000010" title=" " alt="" coords="1109,660,1098,612,1077,550,1044,488,1023,459,998,435,980,423,959,414,961,409,982,418,1002,431,1027,456,1049,485,1082,548,1103,610,1114,659"/>
+<area shape="rect" id="Node000011" href="$classBoundCond.html#a1d9b940357a104b7de141df275a54523" title=" " alt="" coords="755,445,984,485"/>
+<area shape="poly" id="edge10_Node000001_Node000011" title=" " alt="" coords="1105,661,1090,624,1067,580,1037,536,998,499,979,487,981,483,1002,495,1041,532,1072,577,1095,622,1110,659"/>
+<area shape="rect" id="Node000012" href="$classAPEConductivity.html#a4a3d5b0350c8dfe2072e4b4edb830f3b" title="Solve the additional physic flux between two cells." alt="" coords="770,509,969,549"/>
+<area shape="poly" id="edge11_Node000001_Node000012" title=" " alt="" coords="1098,663,1057,612,1029,585,999,563,968,549,970,544,1001,558,1033,581,1061,608,1102,660"/>
+<area shape="rect" id="Node000013" href="$classAPUEqConductivity.html#a60acc6a82fb97d75de5ae5b3718acc85" title="Solve the additional physic flux between two cells." alt="" coords="792,573,947,613"/>
+<area shape="poly" id="edge12_Node000001_Node000013" title=" " alt="" coords="1082,669,1043,647,999,627,946,611,948,606,1001,622,1046,642,1085,664"/>
+<area shape="rect" id="Node000014" href="$classAPUEqSurfaceTension.html#a307e685fd9d5a391f5df628aed7bc4cf" title="Solve the additional physic flux between two cells." alt="" coords="788,637,951,677"/>
+<area shape="poly" id="edge13_Node000001_Node000014" title=" " alt="" coords="1034,679,950,669,951,664,1035,674"/>
+<area shape="rect" id="Node000015" href="$classAPEViscosity.html#a383bc7762140cc1397fbc9294f808f2e" title="Solve the additional physic flux between two cells." alt="" coords="753,701,985,727"/>
+<area shape="poly" id="edge14_Node000001_Node000015" title=" " alt="" coords="1034,698,982,704,982,699,1034,693"/>
+<area shape="rect" id="Node000016" href="$classAPUEqViscosity.html#a159d010c53fc65fc63d636e6b6e87faf" title="Solve the additional physic flux between two cells." alt="" coords="772,751,967,791"/>
+<area shape="poly" id="edge15_Node000001_Node000016" title=" " alt="" coords="1080,707,1001,742,962,754,960,749,999,737,1078,703"/>
+<area shape="rect" id="Node000017" href="$classAPEConductivity.html#ac5b559e4423c06ad91cad5379d2f96ac" title="Solve the additional physic flux at a domain boundary." alt="" coords="770,815,969,855"/>
+<area shape="poly" id="edge16_Node000001_Node000017" title=" " alt="" coords="1101,711,1060,759,1032,785,1001,806,970,820,968,815,999,801,1029,780,1056,756,1097,708"/>
+<area shape="rect" id="Node000018" href="$classAPUEqConductivity.html#a048bf125839212c864838f0d54f6d69e" title="Solve the additional physic flux at a domain boundary." alt="" coords="768,879,971,919"/>
+<area shape="poly" id="edge17_Node000001_Node000018" title=" " alt="" coords="1109,713,1094,748,1071,791,1040,834,1002,870,972,885,970,880,998,865,1036,830,1066,788,1089,746,1104,711"/>
+<area shape="rect" id="Node000019" href="$classAPUEqSurfaceTension.html#af76c8f8ae36e4c9a4d19ef37a00e7c89" title="Solve the additional physic flux at a domain boundary." alt="" coords="764,943,975,983"/>
+<area shape="poly" id="edge18_Node000001_Node000019" title=" " alt="" coords="1114,713,1102,761,1080,821,1048,881,1027,909,1002,933,976,949,974,944,998,929,1023,906,1043,879,1076,818,1097,759,1109,712"/>
+<area shape="rect" id="Node000020" href="$classAPEViscosity.html#acb096c5d7d27dbe15d79c919dc14162a" title="Solve the additional physic flux at a domain boundary." alt="" coords="769,1007,970,1047"/>
+<area shape="poly" id="edge19_Node000001_Node000020" title=" " alt="" coords="1117,713,1109,772,1090,848,1075,889,1056,929,1031,965,1002,997,972,1016,969,1011,998,993,1027,962,1051,926,1070,887,1085,847,1103,771,1111,712"/>
+<area shape="rect" id="Node000021" href="$classAPUEqViscosity.html#aed3e60b546e6b8b5cb141ca88fe238e1" title="Solve the additional physic flux at a domain boundary." alt="" coords="772,1071,967,1111"/>
+<area shape="poly" id="edge20_Node000001_Node000021" title=" " alt="" coords="1119,712,1114,782,1098,876,1084,926,1063,975,1036,1021,1002,1061,986,1073,968,1082,966,1077,983,1069,998,1057,1032,1018,1058,973,1079,924,1093,875,1109,781,1113,712"/>
+<area shape="rect" id="Node000022" href="$classBoundCond.html#a0fc63df6e07a7e6197cd5d0075c25442" title=" " alt="" coords="771,203,968,228"/>
+<area shape="poly" id="edge21_Node000001_Node000022" title=" " alt="" coords="1110,660,1097,566,1073,440,1058,377,1040,320,1020,273,998,243,984,232,967,224,969,220,987,227,1002,239,1025,271,1045,318,1063,375,1078,439,1102,565,1115,659"/>
+<area shape="rect" id="Node000024" href="$classBoundCondWallO2NS.html#a5780c50b5260eaf755c59e6277b89a4d" title=" " alt="" coords="785,1135,953,1175"/>
+<area shape="poly" id="edge23_Node000001_Node000024" title=" " alt="" coords="1115,712,1101,804,1077,928,1062,990,1044,1047,1024,1093,1002,1125,980,1141,955,1151,953,1146,977,1136,998,1121,1019,1091,1039,1045,1056,989,1072,927,1096,803,1110,712"/>
+<area shape="rect" id="Node000025" href="$classCellInterfaceO2NS.html#a3ffa6d43376b894e5db96308b73c062c" title=" " alt="" coords="795,1199,944,1239"/>
+<area shape="poly" id="edge24_Node000001_Node000025" title=" " alt="" coords="1116,713,1104,817,1081,960,1066,1032,1048,1098,1026,1152,1002,1189,975,1208,945,1218,943,1213,973,1203,998,1185,1022,1150,1043,1096,1061,1031,1076,959,1099,816,1111,712"/>
+<area shape="rect" id="Node000026" href="$classCellInterface.html#a33554f8c3e03860621b75843a72d6ee3" title=" " alt="" coords="766,5,973,31"/>
+<area shape="poly" id="edge25_Node000001_Node000026" title=" " alt="" coords="1112,660,1105,530,1087,344,1072,248,1052,162,1028,91,1014,64,998,44,971,27,974,22,1002,40,1018,61,1033,89,1057,160,1077,247,1092,343,1111,529,1118,660"/>
+<area shape="rect" id="Node000027" href="$classBoundCondWallO2Cartesian.html#a8f90d9083bef9f68e9815cf201d3a7b1" title=" " alt="" coords="767,1263,971,1303"/>
+<area shape="poly" id="edge27_Node000001_Node000027" title=" " alt="" coords="1117,712,1107,828,1086,990,1070,1073,1052,1148,1029,1211,1016,1235,1002,1253,973,1273,970,1269,998,1249,1012,1232,1024,1208,1046,1147,1065,1072,1080,989,1101,827,1112,712"/>
+<area shape="rect" id="Node000028" href="$classCellInterfaceO2Cartesian.html#ac6814eabc189e20595fa40df01b5ad8a" title=" " alt="" coords="777,1327,962,1367"/>
+<area shape="poly" id="edge28_Node000001_Node000028" title=" " alt="" coords="1117,713,1109,840,1090,1022,1075,1115,1055,1199,1031,1269,1017,1296,1002,1317,984,1332,963,1341,961,1336,981,1327,998,1313,1013,1294,1026,1267,1050,1198,1069,1114,1084,1021,1104,840,1112,713"/>
+<area shape="rect" id="Node000029" href="$classCellInterface.html#a67801cc22b9e3280da40588bb4ad9263" title=" " alt="" coords="752,55,987,80"/>
+<area shape="poly" id="edge29_Node000001_Node000029" title=" " alt="" coords="1112,659,1103,538,1083,367,1068,280,1049,200,1026,136,1013,111,998,93,984,82,987,78,1002,89,1017,109,1031,134,1054,199,1074,279,1089,366,1109,537,1117,659"/>
+<area shape="rect" id="Node000030" href="$classCellInterface.html#a483ee91df480febc2a82201b39905cc3" title=" " alt="" coords="772,153,967,179"/>
+<area shape="poly" id="edge31_Node000001_Node000030" title=" " alt="" coords="1111,660,1099,557,1077,415,1061,344,1043,279,1022,227,998,192,983,181,966,173,968,168,986,176,1002,188,1027,224,1048,277,1067,342,1082,414,1104,556,1116,659"/>
+<area shape="rect" id="Node000031" href="$classOutputBoundaryAllGNU.html#aac5f9f8c4121e333f6ea6537d2352a8e" title=" " alt="" coords="782,1391,957,1431"/>
+<area shape="poly" id="edge35_Node000001_Node000031" title=" " alt="" coords="1118,712,1112,851,1094,1051,1079,1155,1059,1250,1034,1328,1019,1358,1002,1381,982,1397,958,1407,956,1402,979,1392,998,1377,1014,1355,1029,1326,1054,1248,1074,1154,1088,1051,1106,850,1113,712"/>
+<area shape="rect" id="Node000003" href="$classCellInterface.html#acc96276cbae58430f8e9145321607bff" title=" " alt="" coords="483,68,682,93"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="773,107,682,96,682,90,774,102"/>
+<area shape="rect" id="Node000004" href="$classCellInterfaceO2.html#ab050bdf2b0736109b6f3aa6281585de3" title=" " alt="" coords="475,141,691,167"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="774,132,681,144,680,139,773,126"/>
+<area shape="rect" id="Node000007" href="$classOutputBoundaryFluxGNU.html#af9cbb615a15ddc44d036a7e357f5eb4d" title="Extract enthalpy flux throught the whole boundary surface." alt="" coords="489,317,676,357"/>
+<area shape="poly" id="edge6_Node000006_Node000007" title=" " alt="" coords="725,339,676,339,676,334,725,334"/>
+<area shape="rect" id="Node000008" href="$classOutputBoundaryFluxGNU.html#abcd46e0916b8fe73dea18850bfa89c69" title="Get flux either massflow or enthalpy through the boundary." alt="" coords="240,317,427,357"/>
+<area shape="poly" id="edge7_Node000007_Node000008" title=" " alt="" coords="476,339,427,339,427,334,476,334"/>
+<area shape="rect" id="Node000009" href="$classOutputBoundaryFluxGNU.html#ac7e2ea38f103fe0434f6b62d3608437c" title=" " alt="" coords="5,317,192,357"/>
+<area shape="poly" id="edge8_Node000008_Node000009" title=" " alt="" coords="227,339,192,339,192,334,227,334"/>
+<area shape="rect" id="Node000023" href="$classBoundCond.html#a5f63d38480e6f872e612591f539fdd5f" title=" " alt="" coords="488,197,677,223"/>
+<area shape="poly" id="edge22_Node000022_Node000023" title=" " alt="" coords="757,216,677,214,677,209,757,211"/>
+<area shape="poly" id="edge26_Node000026_Node000003" title=" " alt="" coords="783,36,739,45,632,71,631,65,738,39,782,31"/>
+<area shape="poly" id="edge30_Node000029_Node000003" title=" " alt="" coords="738,76,682,79,682,73,738,71"/>
+<area shape="poly" id="edge32_Node000030_Node000003" title=" " alt="" coords="777,153,738,143,669,120,612,96,614,91,671,115,739,138,779,148"/>
+<area shape="poly" id="edge34_Node000030_Node000004" title=" " alt="" coords="758,164,691,161,691,156,758,159"/>
+<area shape="poly" id="edge33_Node000030_Node000023" title=" " alt="" coords="773,183,667,200,666,195,772,178"/>
+</map>

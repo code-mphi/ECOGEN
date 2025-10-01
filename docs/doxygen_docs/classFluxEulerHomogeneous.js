@@ -1,0 +1,26 @@
+var classFluxEulerHomogeneous =
+[
+    [ "FluxEulerHomogeneous", "classFluxEulerHomogeneous.html#ab243ce410b41307d25c8475e56e77cb8", null ],
+    [ "~FluxEulerHomogeneous", "classFluxEulerHomogeneous.html#a2d3eb356fceb695a548b44eb67d4f4fa", null ],
+    [ "addFlux", "classFluxEulerHomogeneous.html#ab5111a8f881d5c6d5240ce8f821dcf41", null ],
+    [ "addFlux", "classFluxEulerHomogeneous.html#aee6906e10b776d76f3676c5a2e823f0f", null ],
+    [ "addFluxSmooth1D", "classFluxEulerHomogeneous.html#a7242c1cb6cc75fdd7acc0515db55da91", null ],
+    [ "addNonCons", "classFluxEulerHomogeneous.html#a3eb96f0a9a2580ca7c1257d3fc2b29de", null ],
+    [ "buildCons", "classFluxEulerHomogeneous.html#af0fb689937c833bde0187d4751159153", null ],
+    [ "buildPrim", "classFluxEulerHomogeneous.html#a9dfe2ce022fdd8eff55f8632e254cdf2", null ],
+    [ "getEnergyMix", "classFluxEulerHomogeneous.html#a79d66c0e00b75713a698980edd17818a", null ],
+    [ "getMassMix", "classFluxEulerHomogeneous.html#aa3b396f944af30021621840da583418c", null ],
+    [ "getMomentum", "classFluxEulerHomogeneous.html#a1c4d7ea8b46de655b64fa67241dd1cdf", null ],
+    [ "multiply", "classFluxEulerHomogeneous.html#adbd7d9d19f77dc5ee1f32aa211d9458e", null ],
+    [ "printFlux", "classFluxEulerHomogeneous.html#ad8273b1984ea50d0cfd442eba40bedbf", null ],
+    [ "setBufferFlux", "classFluxEulerHomogeneous.html#ae526d41df695db4690486e7fce147b66", null ],
+    [ "setCons", "classFluxEulerHomogeneous.html#ab754359915dcadb4dfd61e02f5f86782", null ],
+    [ "setToZero", "classFluxEulerHomogeneous.html#ac274a9d6451082a2076d860dca951ced", null ],
+    [ "substractFluxSmooth1D", "classFluxEulerHomogeneous.html#ab83940ed84ec7aa63a1fe0729ceb15b4", null ],
+    [ "subtractFlux", "classFluxEulerHomogeneous.html#a6970eca687c1bbeb9a246bf4456140df", null ],
+    [ "subtractNonCons", "classFluxEulerHomogeneous.html#ac8e8c52399425c063acce908c4ccd6df", null ],
+    [ "ModEulerHomogeneous", "classFluxEulerHomogeneous.html#a261f816364ec6d5b183606afbea0ed7c", null ],
+    [ "m_energ", "classFluxEulerHomogeneous.html#acbcb96a32f1b4666bf3af03d0be7ce2d", null ],
+    [ "m_mass", "classFluxEulerHomogeneous.html#a3025f6968a8d9ae96bb1c5d03419d874", null ],
+    [ "m_momentum", "classFluxEulerHomogeneous.html#a777543fb8195c6734cfb8f79b9ed5c0b", null ]
+];

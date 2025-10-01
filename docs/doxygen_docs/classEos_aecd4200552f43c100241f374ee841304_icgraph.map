@@ -1,0 +1,29 @@
+<map id="Eos::getType" name="Eos::getType">
+<area shape="rect" id="Node000001" title="See derived classes." alt="" coords="968,127,1072,153"/>
+<area shape="rect" id="Node000002" href="$classRelaxationPT.html#a3e54b07b9bfac5849c799570fdf6b9ac" title="Pressure determination with analytical formulae for 2 phases governed by SG or IG EOS." alt="" coords="741,5,920,45"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="992,120,958,93,919,66,882,48,885,43,921,62,961,89,995,116"/>
+<area shape="rect" id="Node000003" href="$classRelaxationPT.html#af732e508ebf612a869b22aabc7515390" title="Stiff Pressure&#45;Temperature relaxation method." alt="" coords="501,70,683,95"/>
+<area shape="poly" id="edge14_Node000001_Node000003" title=" " alt="" coords="972,125,919,111,796,94,683,87,683,81,797,88,921,105,974,120"/>
+<area shape="rect" id="Node000004" href="$classRelaxationPT.html#a5b17298c018bd1d7439d044797b9388c" title="Temperature calculus with analytical formulae for N phases governed by SG or IG EOS." alt="" coords="741,120,920,160"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="954,143,920,143,920,137,954,137"/>
+<area shape="rect" id="Node000005" href="$classMixture.html#a4868565a3f107e3cbddfae1f161702f6" title="Compute saturation pressure for a liq/vapor couple of fluid at given pressure." alt="" coords="748,185,913,210"/>
+<area shape="poly" id="edge5_Node000001_Node000005" title=" " alt="" coords="968,160,921,175,878,187,877,182,919,169,967,154"/>
+<area shape="rect" id="Node000009" href="$classMixture.html#a7ca8882c4fd979a284c6f1d024cbb09e" title="Compute saturation temperature for a liq/vapor couple of fluid at given pressure." alt="" coords="749,273,912,298"/>
+<area shape="poly" id="edge9_Node000001_Node000009" title=" " alt="" coords="995,164,922,225,852,275,849,270,918,221,992,160"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="734,51,646,73,645,67,733,46"/>
+<area shape="poly" id="edge4_Node000004_Node000003" title=" " alt="" coords="733,119,645,98,646,93,734,114"/>
+<area shape="rect" id="Node000006" href="$classCell.html#a8481452a6a0571f7c240ec5190c93e64" title="Compute saturation pressure for a liquid/vapor fluid mixture (first phase is considered predominant &#45;..." alt="" coords="540,151,644,177"/>
+<area shape="poly" id="edge6_Node000005_Node000006" title=" " alt="" coords="734,187,644,174,645,169,734,181"/>
+<area shape="rect" id="Node000007" href="$classCell.html#ade40c3c3817944a75026a2fa5f8c149e" title=" " alt="" coords="276,151,443,177"/>
+<area shape="poly" id="edge7_Node000006_Node000007" title=" " alt="" coords="526,167,443,167,443,161,526,161"/>
+<area shape="rect" id="Node000008" href="$classOutputProbeGNU.html#af31dd2dd1b99bc6f3bb2213b86959827" title=" " alt="" coords="5,151,228,177"/>
+<area shape="poly" id="edge8_Node000007_Node000008" title=" " alt="" coords="262,167,228,167,228,161,262,161"/>
+<area shape="rect" id="Node000010" href="$classFluxEulerHomogeneous.html#a9dfe2ce022fdd8eff55f8632e254cdf2" title="Build the primitive variables for a given cell from conservative one." alt="" coords="503,201,681,241"/>
+<area shape="poly" id="edge10_Node000009_Node000010" title=" " alt="" coords="768,272,667,244,668,239,770,266"/>
+<area shape="rect" id="Node000011" href="$classMixEulerHomogeneous.html#a0ac6b65b0a87437a9d053747fabf38e7" title=" " alt="" coords="505,265,679,305"/>
+<area shape="poly" id="edge11_Node000009_Node000011" title=" " alt="" coords="735,288,679,288,679,283,735,283"/>
+<area shape="rect" id="Node000012" href="$classModEulerHomogeneous.html#a8835ffa3f5afcf37a2481ba42c1e9c75" title="Complete a thermodynamics state frome minimum variables depending on the model." alt="" coords="503,329,681,369"/>
+<area shape="poly" id="edge12_Node000009_Node000012" title=" " alt="" coords="770,304,668,332,667,327,768,299"/>
+<area shape="rect" id="Node000013" href="$classRelaxationPTMu.html#a942e19d92434d4c0a073a32f28137995" title="Stiff Thermo&#45;Chemical relaxation method." alt="" coords="491,394,693,419"/>
+<area shape="poly" id="edge13_Node000009_Node000013" title=" " alt="" coords="806,309,757,347,694,384,659,396,657,391,692,379,754,343,803,305"/>
+</map>

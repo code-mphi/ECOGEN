@@ -1,0 +1,21 @@
+<map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
+<area shape="rect" id="Node000000" href="$classSource.html" title="Abstract class for source terms." alt="" coords="5,80,72,105"/>
+<area shape="rect" id="Node000001" href="$classSourceExact.html" title="Abstract class for source terms solved by an exact solution." alt="" coords="120,31,223,56"/>
+<area shape="poly" id="edge137_Node000000_Node000001" title=" " alt="" coords="84,73,135,54,137,59,86,78"/>
+<area shape="rect" id="Node000003" href="$classSourceNum.html" title="Abstract class for source terms solved by a numerical scheme." alt="" coords="123,104,220,129"/>
+<area shape="poly" id="edge139_Node000000_Node000003" title=" " alt="" coords="86,98,123,105,122,111,85,104"/>
+<area shape="rect" id="Node000002" href="$classSourceExactEulerKorteweg.html" title="Class for Euler–Korteweg source terms." alt="" coords="271,5,467,31"/>
+<area shape="poly" id="edge138_Node000001_Node000002" title=" " alt="" coords="236,32,270,28,271,33,237,38"/>
+<area shape="rect" id="Node000004" href="$classSourceNumAcousticWave.html" title="Class for acoustic&#45;wave source terms." alt="" coords="275,55,463,80"/>
+<area shape="poly" id="edge140_Node000003_Node000004" title=" " alt="" coords="233,98,270,89,315,77,316,83,271,94,234,103"/>
+<area shape="rect" id="Node000007" href="$classSourceNumGravity.html" title=" " alt="" coords="296,104,441,129"/>
+<area shape="poly" id="edge143_Node000003_Node000007" title=" " alt="" coords="234,114,296,114,296,119,234,119"/>
+<area shape="rect" id="Node000008" href="$classSourceNumHeating.html" title="Class for heating source terms." alt="" coords="295,153,443,179"/>
+<area shape="poly" id="edge144_Node000003_Node000008" title=" " alt="" coords="234,129,318,151,316,156,233,135"/>
+<area shape="rect" id="Node000009" href="$classSourceNumMRF.html" title="Moving Reference Frame method for rotating flows." alt="" coords="305,203,432,228"/>
+<area shape="poly" id="edge145_Node000003_Node000009" title=" " alt="" coords="198,137,231,164,272,189,306,201,304,206,270,194,228,169,194,141"/>
+<area shape="rect" id="Node000005" href="$classSourceNumAcousticWavePlaneGaussianPulse.html" title="Subclass of SourceNumAcousticWave for a plane Gaussian function." alt="" coords="515,15,739,55"/>
+<area shape="poly" id="edge141_Node000004_Node000005" title=" " alt="" coords="476,51,514,47,515,52,477,57"/>
+<area shape="rect" id="Node000006" href="$classSourceNumAcousticWavePlaneSinusoidalPulse.html" title="SubClass of SourceNumAcousticWave for a plane sinusoidal function." alt="" coords="515,79,739,119"/>
+<area shape="poly" id="edge142_Node000004_Node000006" title=" " alt="" coords="477,78,515,83,514,88,476,83"/>
+</map>

@@ -1,0 +1,25 @@
+<map id="APUEqViscosity::addNonCons" name="APUEqViscosity::addNonCons">
+<area shape="rect" id="Node000001" title="Add the non&#45;conservative terms of the corresponding additional physic in a cell." alt="" coords="5,219,219,244"/>
+<area shape="rect" id="Node000002" href="$classFlux.html#aac25bdaa5ffd6bf68855b07e4420e077" title="Add flux passed in parameter to the correspond model flux." alt="" coords="288,5,399,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="118,217,138,182,171,134,214,84,265,40,275,34,277,39,268,44,218,88,175,138,143,185,122,220"/>
+<area shape="rect" id="Node000004" href="$classPhase.html#a4e4cd8c6afd1e1a8f7304ad7d7c3ee2f" title=" " alt="" coords="280,55,407,80"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="122,217,179,156,220,120,265,89,278,83,280,87,268,94,223,125,183,160,126,220"/>
+<area shape="rect" id="Node000005" href="$classCell.html#a0d92eb572fc85da4b37bf2ad4b760621" title=" " alt="" coords="289,104,397,129"/>
+<area shape="poly" id="edge5_Node000001_Node000005" title=" " alt="" coords="131,216,190,180,266,140,285,131,287,136,268,144,193,184,134,221"/>
+<area shape="rect" id="Node000006" href="$classQuantitiesAddPhys.html#a5180d8bd10716c52226cde5e251fe3e5" title="Get the additional&#45;physic gradient." alt="" coords="267,154,420,194"/>
+<area shape="poly" id="edge6_Node000001_Node000006" title=" " alt="" coords="163,216,253,194,254,199,165,221"/>
+<area shape="rect" id="Node000007" href="$classCell.html#af2d48073a332d621b69fb257eeb6de6c" title=" " alt="" coords="286,219,401,244"/>
+<area shape="poly" id="edge8_Node000001_Node000007" title=" " alt="" coords="219,229,272,229,272,234,219,234"/>
+<area shape="rect" id="Node000008" href="$classCell.html#ac4369dad370cfbabf83f895668fe9813" title=" " alt="" coords="292,268,395,293"/>
+<area shape="poly" id="edge9_Node000001_Node000008" title=" " alt="" coords="173,241,279,264,278,270,172,247"/>
+<area shape="rect" id="Node000009" href="$classCoord.html#a04d74e2f155904844fb90cf8aac3579f" title="Return the value in the x&#45;direction of the Coord object." alt="" coords="294,317,393,343"/>
+<area shape="poly" id="edge10_Node000001_Node000009" title=" " alt="" coords="139,242,197,271,268,302,289,310,287,315,266,307,195,276,137,247"/>
+<area shape="rect" id="Node000010" href="$classCoord.html#a11fc116d47c56756eab2081beca0a702" title="Return the value in the y&#45;direction of the Coord object." alt="" coords="295,367,392,392"/>
+<area shape="poly" id="edge11_Node000001_Node000010" title=" " alt="" coords="128,242,186,294,225,325,268,352,284,359,281,364,265,356,222,329,182,299,124,246"/>
+<area shape="rect" id="Node000011" href="$classCoord.html#a9d218af09beeed332daba65312b8abad" title="Return the value in the z&#45;direction of the Coord object." alt="" coords="294,416,393,441"/>
+<area shape="poly" id="edge12_Node000001_Node000011" title=" " alt="" coords="123,243,178,317,220,362,268,401,282,409,280,414,265,406,216,366,174,320,119,246"/>
+<area shape="rect" id="Node000003" href="$classErrors.html#a78eeb532e12787fee07b78aa5ef6a0c6" title=" " alt="" coords="468,55,625,80"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="397,28,481,49,480,54,396,33"/>
+<area shape="poly" id="edge4_Node000004_Node000003" title=" " alt="" coords="407,65,454,65,454,70,407,70"/>
+<area shape="poly" id="edge7_Node000006_Node000003" title=" " alt="" coords="391,151,419,138,512,85,515,90,421,143,394,156"/>
+</map>

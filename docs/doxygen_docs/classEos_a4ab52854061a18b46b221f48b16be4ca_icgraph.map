@@ -1,0 +1,21 @@
+<map id="Eos::getSRef" name="Eos::getSRef">
+<area shape="rect" id="Node000001" title="See derived classes." alt="" coords="955,103,1059,128"/>
+<area shape="rect" id="Node000002" href="$classMixture.html#a4868565a3f107e3cbddfae1f161702f6" title="Compute saturation pressure for a liq/vapor couple of fluid at given pressure." alt="" coords="741,41,907,67"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="954,101,862,69,863,64,956,96"/>
+<area shape="rect" id="Node000006" href="$classMixture.html#a7ca8882c4fd979a284c6f1d024cbb09e" title="Compute saturation temperature for a liq/vapor couple of fluid at given pressure." alt="" coords="743,127,905,152"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="941,127,906,131,905,126,940,121"/>
+<area shape="rect" id="Node000003" href="$classCell.html#a8481452a6a0571f7c240ec5190c93e64" title="Compute saturation pressure for a liquid/vapor fluid mixture (first phase is considered predominant &#45;..." alt="" coords="540,5,644,31"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="728,42,644,29,645,23,729,37"/>
+<area shape="rect" id="Node000004" href="$classCell.html#ade40c3c3817944a75026a2fa5f8c149e" title=" " alt="" coords="276,5,443,31"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="526,21,443,21,443,15,526,15"/>
+<area shape="rect" id="Node000005" href="$classOutputProbeGNU.html#af31dd2dd1b99bc6f3bb2213b86959827" title=" " alt="" coords="5,5,228,31"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="262,21,228,21,228,15,262,15"/>
+<area shape="rect" id="Node000007" href="$classFluxEulerHomogeneous.html#a9dfe2ce022fdd8eff55f8632e254cdf2" title="Build the primitive variables for a given cell from conservative one." alt="" coords="503,55,681,95"/>
+<area shape="poly" id="edge6_Node000006_Node000007" title=" " alt="" coords="763,126,665,98,666,93,765,120"/>
+<area shape="rect" id="Node000008" href="$classMixEulerHomogeneous.html#a0ac6b65b0a87437a9d053747fabf38e7" title=" " alt="" coords="505,119,679,159"/>
+<area shape="poly" id="edge7_Node000006_Node000008" title=" " alt="" coords="729,142,679,142,679,137,729,137"/>
+<area shape="rect" id="Node000009" href="$classModEulerHomogeneous.html#a8835ffa3f5afcf37a2481ba42c1e9c75" title="Complete a thermodynamics state frome minimum variables depending on the model." alt="" coords="503,183,681,223"/>
+<area shape="poly" id="edge8_Node000006_Node000009" title=" " alt="" coords="765,158,666,186,665,181,763,153"/>
+<area shape="rect" id="Node000010" href="$classRelaxationPTMu.html#a942e19d92434d4c0a073a32f28137995" title="Stiff Thermo&#45;Chemical relaxation method." alt="" coords="491,248,693,273"/>
+<area shape="poly" id="edge9_Node000006_Node000010" title=" " alt="" coords="801,164,754,202,694,238,660,250,658,245,692,233,751,197,797,159"/>
+</map>

@@ -1,0 +1,17 @@
+<map id="OutputBoundaryFluxGNU::computeMassflowFace" name="OutputBoundaryFluxGNU::computeMassflowFace">
+<area shape="rect" id="Node000001" title="Compute the massflow contribution of a single cell interface." alt="" coords="1019,69,1205,109"/>
+<area shape="rect" id="Node000002" href="$classOutputBoundaryFluxGNU.html#a89a2d9a15398d663d1a117ea6becd33d" title="Compute the enthalpy flux contribution of a single cell interface." alt="" coords="724,5,956,45"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="1013,69,925,48,926,43,1014,64"/>
+<area shape="rect" id="Node000006" href="$classOutputBoundaryFluxGNU.html#acbf898f60e056715b70a2272ca5a48bb" title="Compute the enthalpy flux contribution of a single cell interface when MRF is activated." alt="" coords="709,69,971,109"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="1005,92,971,92,971,87,1005,87"/>
+<area shape="rect" id="Node000007" href="$classOutputBoundaryFluxGNU.html#ad41c1169c4dd41a6c989ec1787d33a66" title="Extract massflow throught the whole boundary surface." alt="" coords="475,127,661,167"/>
+<area shape="poly" id="edge7_Node000001_Node000007" title=" " alt="" coords="1020,115,971,124,807,141,662,148,661,142,807,135,970,119,1019,110"/>
+<area shape="rect" id="Node000003" href="$classOutputBoundaryFluxGNU.html#af9cbb615a15ddc44d036a7e357f5eb4d" title="Extract enthalpy flux throught the whole boundary surface." alt="" coords="475,63,661,103"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="732,51,662,66,661,60,731,46"/>
+<area shape="rect" id="Node000004" href="$classOutputBoundaryFluxGNU.html#abcd46e0916b8fe73dea18850bfa89c69" title="Get flux either massflow or enthalpy through the boundary." alt="" coords="240,95,427,135"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="462,100,427,105,427,99,461,95"/>
+<area shape="rect" id="Node000005" href="$classOutputBoundaryFluxGNU.html#ac7e2ea38f103fe0434f6b62d3608437c" title=" " alt="" coords="5,95,192,135"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="227,117,192,117,192,112,227,112"/>
+<area shape="poly" id="edge6_Node000006_Node000003" title=" " alt="" coords="696,88,662,88,662,82,696,83"/>
+<area shape="poly" id="edge8_Node000007_Node000004" title=" " alt="" coords="461,135,427,130,427,125,462,129"/>
+</map>

@@ -1,0 +1,13 @@
+<map id="SourceNum::integrationRK4" name="SourceNum::integrationRK4">
+<area shape="rect" id="Node000001" title="Runge&#45;Kutta integration (order 4)" alt="" coords="5,29,208,55"/>
+<area shape="rect" id="Node000002" href="$classCell.html#a0d92eb572fc85da4b37bf2ad4b760621" title=" " alt="" coords="568,5,676,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="168,27,256,14,416,8,554,12,554,17,416,14,256,19,169,32"/>
+<area shape="rect" id="Node000003" href="$classSourceNum.html#a82b921349e030cdc4d4cc67ae6f69888" title="Euler explicite integration (order 1)" alt="" coords="256,29,465,55"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="208,39,242,39,242,45,208,45"/>
+<area shape="rect" id="Node000004" href="$classSourceNum.html#a57bcba888367a59f74c8e143b9e5dde0" title="Source terms preparation for integration." alt="" coords="513,55,731,80"/>
+<area shape="poly" id="edge6_Node000001_Node000004" title=" " alt="" coords="169,52,256,65,382,70,500,70,500,75,382,76,256,70,168,57"/>
+<area shape="poly" id="edge3_Node000003_Node000002" title=" " alt="" coords="465,30,554,21,555,27,466,35"/>
+<area shape="poly" id="edge4_Node000003_Node000004" title=" " alt="" coords="466,49,500,53,500,58,465,55"/>
+<area shape="rect" id="Node000005" href="$classErrors.html#a78eeb532e12787fee07b78aa5ef6a0c6" title=" " alt="" coords="779,55,936,80"/>
+<area shape="poly" id="edge5_Node000004_Node000005" title=" " alt="" coords="731,65,765,65,765,70,731,70"/>
+</map>

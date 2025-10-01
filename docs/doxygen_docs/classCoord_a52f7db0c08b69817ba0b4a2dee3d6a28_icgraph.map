@@ -1,0 +1,45 @@
+<map id="Coord::localProjection" name="Coord::localProjection">
+<area shape="rect" id="Node000001" title="Projection in the local coordinate system which is defined by the transmitted normal,..." alt="" coords="591,549,755,575"/>
+<area shape="rect" id="Node000002" href="$classCoord.html#a977bbaf042782fe2b15353ef6f44f81a" title="Build relative velocity from absolute one (relevant with MRF only)" alt="" coords="326,22,521,62"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="665,536,650,435,623,296,606,226,586,163,564,111,541,76,519,61,523,56,545,72,569,108,591,161,611,225,628,295,655,434,670,535"/>
+<area shape="rect" id="Node000005" href="$classGradientGreenGauss.html#af8805deac13bbedc558d41a81957d292" title="Compute gradients (temperature, velocity, density) of a cell." alt="" coords="345,86,502,126"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="669,536,664,458,647,352,631,295,608,239,579,187,541,141,523,128,501,119,503,114,525,123,544,137,583,184,613,237,636,294,652,351,670,458,674,535"/>
+<area shape="rect" id="Node000006" href="$classPhaseEuler.html#aac2ee63f19cbedf128c49871449dc865" title=" " alt="" coords="324,151,523,176"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="668,536,661,466,642,372,626,322,604,274,576,229,541,191,521,178,524,173,544,187,580,226,609,271,631,320,648,371,667,465,673,535"/>
+<area shape="rect" id="Node000007" href="$classMixEulerHomogeneous.html#aaad77769f88b5a93a5e52be767bf287b" title="velocity vector projection in a local Cartesian coordinate system" alt="" coords="337,201,510,241"/>
+<area shape="poly" id="edge6_Node000001_Node000007" title=" " alt="" coords="666,536,655,478,633,401,616,361,596,322,571,286,541,255,509,236,511,231,544,251,575,283,600,320,621,359,638,400,660,476,671,535"/>
+<area shape="rect" id="Node000008" href="$classPhaseEulerKorteweg.html#a9229363d875a422c7aee87a48b386347" title=" " alt="" coords="346,265,501,305"/>
+<area shape="poly" id="edge7_Node000001_Node000008" title=" " alt="" coords="662,537,648,490,623,431,588,371,566,344,541,320,522,308,500,299,502,294,524,303,544,316,570,340,593,368,628,429,653,488,668,535"/>
+<area shape="rect" id="Node000009" href="$classMixPTUEq.html#a7226af2d2ac3daf424f0367020f6988b" title="velocity vector projection in a local Cartesian coordinate system" alt="" coords="327,329,519,355"/>
+<area shape="poly" id="edge8_Node000001_Node000009" title=" " alt="" coords="659,538,643,499,617,453,583,408,541,370,517,357,520,353,544,365,587,404,622,451,647,497,664,535"/>
+<area shape="rect" id="Node000010" href="$classMixUEq.html#ace05f054889673a18f32ecc99799eeb7" title="velocity vector projection in a local Cartesian coordinate system" alt="" coords="335,379,511,404"/>
+<area shape="poly" id="edge9_Node000001_Node000010" title=" " alt="" coords="655,539,609,478,577,446,541,419,510,406,513,401,544,414,581,442,613,474,659,536"/>
+<area shape="rect" id="Node000011" href="$classMixUEqTotEnergy.html#a949c5e5c40701afc8d8a600179ee7eba" title="velocity vector projection in a local Cartesian coordinate system" alt="" coords="304,428,543,453"/>
+<area shape="poly" id="edge10_Node000001_Node000011" title=" " alt="" coords="647,542,600,504,542,468,505,456,507,451,544,464,603,499,650,538"/>
+<area shape="rect" id="Node000012" href="$classAPEConductivity.html#a4a3d5b0350c8dfe2072e4b4edb830f3b" title="Solve the additional physic flux between two cells." alt="" coords="324,478,523,518"/>
+<area shape="poly" id="edge11_Node000001_Node000012" title=" " alt="" coords="608,548,501,521,503,516,610,543"/>
+<area shape="rect" id="Node000013" href="$classAPUEqConductivity.html#a60acc6a82fb97d75de5ae5b3718acc85" title="Solve the additional physic flux between two cells." alt="" coords="346,542,501,582"/>
+<area shape="poly" id="edge12_Node000001_Node000013" title=" " alt="" coords="577,565,501,565,501,559,577,559"/>
+<area shape="rect" id="Node000014" href="$classAPUEqSurfaceTension.html#a307e685fd9d5a391f5df628aed7bc4cf" title="Solve the additional physic flux between two cells." alt="" coords="342,606,505,646"/>
+<area shape="poly" id="edge13_Node000001_Node000014" title=" " alt="" coords="610,581,503,608,501,603,608,576"/>
+<area shape="rect" id="Node000015" href="$classAPEViscosity.html#a383bc7762140cc1397fbc9294f808f2e" title="Solve the additional physic flux between two cells." alt="" coords="307,671,539,696"/>
+<area shape="poly" id="edge14_Node000001_Node000015" title=" " alt="" coords="650,586,603,625,544,660,507,673,505,668,542,656,600,620,647,582"/>
+<area shape="rect" id="Node000016" href="$classAPUEqViscosity.html#a159d010c53fc65fc63d636e6b6e87faf" title="Solve the additional physic flux between two cells." alt="" coords="326,721,521,761"/>
+<area shape="poly" id="edge15_Node000001_Node000016" title=" " alt="" coords="659,588,613,650,581,683,544,711,520,723,518,718,541,706,577,679,609,646,654,585"/>
+<area shape="rect" id="Node000017" href="$classAPEConductivity.html#ac5b559e4423c06ad91cad5379d2f96ac" title="Solve the additional physic flux at a domain boundary." alt="" coords="324,785,523,825"/>
+<area shape="poly" id="edge16_Node000001_Node000017" title=" " alt="" coords="665,588,649,629,623,680,589,731,568,754,544,775,524,787,521,782,541,771,564,751,585,728,619,677,644,627,660,586"/>
+<area shape="rect" id="Node000018" href="$classAPUEqConductivity.html#a048bf125839212c864838f0d54f6d69e" title="Solve the additional physic flux at a domain boundary." alt="" coords="322,849,525,889"/>
+<area shape="poly" id="edge17_Node000001_Node000018" title=" " alt="" coords="669,589,656,642,633,709,596,779,572,811,544,839,527,851,524,846,541,835,568,807,592,776,628,707,651,640,664,588"/>
+<area shape="rect" id="Node000019" href="$classAPUEqSurfaceTension.html#af76c8f8ae36e4c9a4d19ef37a00e7c89" title="Solve the additional physic flux at a domain boundary." alt="" coords="318,913,529,953"/>
+<area shape="poly" id="edge18_Node000001_Node000019" title=" " alt="" coords="672,589,663,652,642,737,625,782,604,826,577,867,544,903,528,915,524,910,541,899,573,864,599,823,620,780,637,735,657,651,667,588"/>
+<area shape="rect" id="Node000020" href="$classAPEViscosity.html#acb096c5d7d27dbe15d79c919dc14162a" title="Solve the additional physic flux at a domain boundary." alt="" coords="323,977,524,1017"/>
+<area shape="poly" id="edge19_Node000001_Node000020" title=" " alt="" coords="674,588,668,663,650,764,634,819,611,873,582,923,544,967,526,980,523,976,541,963,578,920,607,870,629,817,645,763,663,662,668,588"/>
+<area shape="rect" id="Node000021" href="$classAPUEqViscosity.html#aed3e60b546e6b8b5cb141ca88fe238e1" title="Solve the additional physic flux at a domain boundary." alt="" coords="326,1041,521,1081"/>
+<area shape="poly" id="edge20_Node000001_Node000021" title=" " alt="" coords="670,589,654,686,627,819,609,886,590,946,568,996,545,1031,522,1046,519,1042,541,1027,564,994,585,945,604,884,622,817,649,685,665,588"/>
+<area shape="rect" id="Node000022" href="$classOutputBoundaryAllGNU.html#aac5f9f8c4121e333f6ea6537d2352a8e" title=" " alt="" coords="336,1105,511,1145"/>
+<area shape="poly" id="edge21_Node000001_Node000022" title=" " alt="" coords="671,589,657,698,631,849,614,927,594,997,571,1055,545,1094,530,1107,512,1115,510,1111,527,1102,541,1091,566,1052,589,995,609,925,626,848,652,697,666,588"/>
+<area shape="rect" id="Node000003" href="$classModEuler.html#a1ca5876126b8a53b89c02b1dd69eb44f" title="Cell to cell Riemann solver + compute fluxBuffMRF for MRF interface." alt="" coords="5,5,256,31"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="312,36,256,31,257,26,312,30"/>
+<area shape="rect" id="Node000004" href="$classModUEq.html#a90c14231f3e32e52ab89c3fea6f3b103" title="Cell to cell Riemann solver + compute fluxBuffMRF for MRF interface." alt="" coords="9,55,253,80"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="313,54,253,59,252,54,312,49"/>
+</map>

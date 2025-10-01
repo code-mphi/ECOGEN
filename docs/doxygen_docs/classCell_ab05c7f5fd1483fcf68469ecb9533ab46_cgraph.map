@@ -1,0 +1,28 @@
+<map id="Cell::unrefineCellAndCellInterfaces" name="Cell::unrefineCellAndCellInterfaces">
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,246,188,286"/>
+<area shape="rect" id="Node000002" href="$classCell.html#ab69dcb89f8217141c67b6b9e95c25377" title=" " alt="" coords="236,179,451,204"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="163,243,287,205,288,211,164,249"/>
+<area shape="rect" id="Node000011" href="$classElement.html#aebdebdc8ece0def5404ac7a4e6206cf2" title=" " alt="" coords="247,274,439,314"/>
+<area shape="poly" id="edge14_Node000001_Node000011" title=" " alt="" coords="188,274,234,279,234,284,188,279"/>
+<area shape="rect" id="Node000003" href="$classFlux.html#aac25bdaa5ffd6bf68855b07e4420e077" title="Add flux passed in parameter to the correspond model flux." alt="" coords="517,5,627,31"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="352,177,409,112,451,74,497,40,509,34,511,38,500,44,454,78,413,116,356,180"/>
+<area shape="rect" id="Node000005" href="$classFlux.html#a18ead5a4940b4978cb9ef517f9e27b21" title="Build the primitive variables for a given cell from conservative one." alt="" coords="512,55,632,80"/>
+<area shape="poly" id="edge4_Node000002_Node000005" title=" " alt="" coords="360,176,419,134,497,89,513,82,515,87,500,94,422,139,363,181"/>
+<area shape="rect" id="Node000006" href="$classFlux.html#a6ff61c3487035a90e80b4fd4c39c8617" title="multiply the flux of the corresponding model by a constant" alt="" coords="516,104,628,129"/>
+<area shape="poly" id="edge6_Node000002_Node000006" title=" " alt="" coords="383,176,519,131,520,136,384,181"/>
+<area shape="rect" id="Node000007" href="$classModel.html#a0251346425166ed507634b7111bf6d2b" title="Run all the relaxations." alt="" coords="501,153,643,179"/>
+<area shape="poly" id="edge8_Node000002_Node000007" title=" " alt="" coords="451,177,487,173,487,178,451,182"/>
+<area shape="rect" id="Node000008" href="$classFlux.html#a54ed221ddaafbbc85805a6d8af0c61aa" title="Temporary store the conservative variables of a given cell." alt="" coords="499,203,645,228"/>
+<area shape="poly" id="edge9_Node000002_Node000008" title=" " alt="" coords="451,200,486,204,485,209,451,205"/>
+<area shape="rect" id="Node000009" href="$classFlux.html#a78b3d87caaf410e3598b0ce01966b058" title="set each attribute of the flux to zero" alt="" coords="511,252,633,277"/>
+<area shape="poly" id="edge11_Node000002_Node000009" title=" " alt="" coords="385,202,519,245,518,250,383,207"/>
+<area shape="rect" id="Node000010" href="$classTransport.html#a1ac0ea1929d40518fc6a75eb378b0757" title="Set the value of the corresponding transport variable." alt="" coords="499,301,645,327"/>
+<area shape="poly" id="edge13_Node000002_Node000010" title=" " alt="" coords="365,202,435,248,500,286,518,294,516,299,497,291,433,252,362,206"/>
+<area shape="rect" id="Node000004" href="$classErrors.html#a78eeb532e12787fee07b78aa5ef6a0c6" title=" " alt="" coords="693,153,851,179"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="623,28,647,40,679,63,709,90,755,141,751,144,705,94,676,67,644,44,621,33"/>
+<area shape="poly" id="edge5_Node000005_Node000004" title=" " alt="" coords="618,78,646,89,698,116,743,144,740,148,695,121,644,94,616,83"/>
+<area shape="poly" id="edge7_Node000006_Node000004" title=" " alt="" coords="625,127,707,147,706,153,624,132"/>
+<area shape="poly" id="edge10_Node000008_Node000004" title=" " alt="" coords="624,200,706,179,707,185,625,205"/>
+<area shape="poly" id="edge12_Node000009_Node000004" title=" " alt="" coords="613,249,644,237,694,211,738,184,741,189,697,215,646,242,615,254"/>
+<area shape="poly" id="edge15_Node000011_Node000004" title=" " alt="" coords="385,312,439,333,506,351,541,355,577,355,611,349,644,337,666,323,685,307,718,267,742,226,759,190,764,192,747,228,722,270,689,311,669,328,647,342,613,355,577,360,541,360,505,356,437,338,383,317"/>
+</map>

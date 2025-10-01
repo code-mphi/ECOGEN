@@ -1,0 +1,75 @@
+<map id="CellInterfaceO2::computeFlux" name="CellInterfaceO2::computeFlux">
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,647,221,672"/>
+<area shape="rect" id="Node000002" href="$classCellInterface.html#a96a0427bef10a7ca6e0102998e06b6ce" title=" " alt="" coords="299,425,464,451"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="128,644,352,458,356,462,132,649"/>
+<area shape="rect" id="Node000021" href="$classCell.html#a4f484781d8e4ba3b0c537d8a351d2fed" title=" " alt="" coords="334,671,429,696"/>
+<area shape="poly" id="edge23_Node000001_Node000021" title=" " alt="" coords="222,666,321,675,320,681,221,672"/>
+<area shape="rect" id="Node000022" href="$classCellInterfaceO2.html#aff0401f261bd84e41bbc7e494001dd79" title=" " alt="" coords="269,720,493,745"/>
+<area shape="poly" id="edge24_Node000001_Node000022" title=" " alt="" coords="154,670,270,705,308,714,307,719,269,710,152,675"/>
+<area shape="rect" id="Node000023" href="$classCellInterface.html#a483ee91df480febc2a82201b39905cc3" title=" " alt="" coords="284,621,479,647"/>
+<area shape="poly" id="edge25_Node000001_Node000023" title=" " alt="" coords="221,646,270,642,271,647,222,652"/>
+<area shape="rect" id="Node000003" href="$classTransport.html#a812b73deac22cd0da43050ec3abcef95" title="Add flux to the corresponding transport buffer flux." alt="" coords="585,153,728,179"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="384,424,402,379,433,314,479,245,508,214,540,188,571,173,573,178,543,192,511,218,483,249,438,317,407,381,389,426"/>
+<area shape="rect" id="Node000004" href="$classFlux.html#aac25bdaa5ffd6bf68855b07e4420e077" title="Add flux passed in parameter to the correspond model flux." alt="" coords="601,203,712,228"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="386,424,407,387,440,335,485,282,511,258,540,237,563,226,587,219,588,224,565,231,543,242,515,262,489,286,444,339,411,389,391,427"/>
+<area shape="rect" id="Node000006" href="$classFlux.html#aaec35cf4feaaf95044f46a7e9ad6b499" title="Compute additionnal flux for 1D geometry with smooth varying cross sectionFlux)." alt="" coords="567,5,746,31"/>
+<area shape="poly" id="edge5_Node000002_Node000006" title=" " alt="" coords="381,425,390,356,414,252,435,194,462,138,496,85,540,40,553,31,556,35,543,44,501,88,466,140,440,196,419,253,395,357,386,426"/>
+<area shape="rect" id="Node000007" href="$classTransport.html#ac01e2057c724255fb5d0bed69c50ffb9" title="Add non conservative transport term to the flux." alt="" coords="571,104,743,129"/>
+<area shape="poly" id="edge7_Node000002_Node000007" title=" " alt="" coords="383,424,398,370,427,293,448,250,474,209,504,171,540,139,556,129,559,133,543,143,508,175,478,212,453,253,432,295,403,372,388,425"/>
+<area shape="rect" id="Node000008" href="$classFlux.html#a6dd0230649032c72769412ebf973ab5c" title="Add non conservative term to the flux." alt="" coords="587,55,727,80"/>
+<area shape="poly" id="edge8_Node000002_Node000008" title=" " alt="" coords="382,425,394,363,420,272,441,222,468,173,500,128,540,89,572,73,574,77,543,93,504,131,472,176,446,225,425,274,399,365,387,426"/>
+<area shape="rect" id="Node000009" href="$classFace.html#a2ae676e7576a92b93d0caa8cd5cd00a8" title=" " alt="" coords="587,252,726,277"/>
+<area shape="poly" id="edge10_Node000002_Node000009" title=" " alt="" coords="390,423,448,357,491,319,540,286,573,274,575,279,543,291,494,323,452,361,394,427"/>
+<area shape="rect" id="Node000010" href="$classCell.html#a0d92eb572fc85da4b37bf2ad4b760621" title=" " alt="" coords="603,351,711,376"/>
+<area shape="poly" id="edge11_Node000002_Node000010" title=" " alt="" coords="418,423,541,385,588,374,589,379,542,390,420,428"/>
+<area shape="rect" id="Node000011" href="$classCell.html#a79aa5ca0440f1c68bd9bc7e7cf336783" title=" " alt="" coords="573,400,741,425"/>
+<area shape="poly" id="edge12_Node000002_Node000011" title=" " alt="" coords="464,428,559,419,559,424,464,433"/>
+<area shape="rect" id="Node000012" href="$classCell.html#a222238b424bf20588ec06c647a190c0a" title=" " alt="" coords="591,449,722,475"/>
+<area shape="poly" id="edge13_Node000002_Node000012" title=" " alt="" coords="464,443,578,452,577,458,464,448"/>
+<area shape="rect" id="Node000013" href="$classFace.html#ad51432bc490b6b3e8cfe2dcde9232716" title=" " alt="" coords="593,499,721,524"/>
+<area shape="poly" id="edge14_Node000002_Node000013" title=" " alt="" coords="423,448,542,483,582,493,580,498,541,489,421,453"/>
+<area shape="rect" id="Node000014" href="$classModel.html#ad273ab1c564315ca3ccb5d9bc5b993da" title="Return the local fluid velocity." alt="" coords="601,301,712,327"/>
+<area shape="poly" id="edge15_Node000002_Node000014" title=" " alt="" coords="397,423,458,380,498,356,540,336,587,322,588,327,542,340,500,361,461,384,400,427"/>
+<area shape="rect" id="Node000015" href="$classFace.html#afb0df2ee2b760695be90150d3e0033d4" title=" " alt="" coords="592,548,721,573"/>
+<area shape="poly" id="edge17_Node000002_Node000015" title=" " alt="" coords="401,449,461,490,501,513,542,533,579,545,578,550,540,538,498,518,458,495,398,453"/>
+<area shape="rect" id="Node000016" href="$classFace.html#a5bc243884273fd8eb4398aed1aca23c6" title=" " alt="" coords="591,597,722,623"/>
+<area shape="poly" id="edge18_Node000002_Node000016" title=" " alt="" coords="395,449,452,514,495,551,543,582,579,596,577,601,540,587,492,555,449,518,391,453"/>
+<area shape="rect" id="Node000017" href="$classCell.html#abf9c3ccb4a639371c537038348d7d101" title=" " alt="" coords="589,647,725,672"/>
+<area shape="poly" id="edge19_Node000002_Node000017" title=" " alt="" coords="391,450,412,487,445,536,489,588,515,612,543,632,577,646,574,651,540,636,512,616,486,592,441,539,408,489,387,452"/>
+<area shape="rect" id="Node000018" href="$classTransport.html#a5fd6aa4418b539c8471412416fe745c3" title="Return the value of the corresponding transport variable." alt="" coords="583,696,730,721"/>
+<area shape="poly" id="edge20_Node000002_Node000018" title=" " alt="" coords="393,449,496,607,516,649,525,665,543,681,571,695,569,700,540,686,521,668,511,651,491,610,389,452"/>
+<area shape="rect" id="Node000019" href="$classElement.html#a65eeb90dcb62974be8d19fbc13d78061" title=" " alt="" coords="579,745,734,771"/>
+<area shape="poly" id="edge21_Node000002_Node000019" title=" " alt="" coords="394,449,441,515,496,608,508,644,513,675,521,703,530,717,543,731,568,745,565,750,540,735,525,720,516,706,508,677,503,645,491,610,436,518,390,452"/>
+<area shape="rect" id="Node000020" href="$classModel.html#a1657f6e02327364afce64acfed23dd2d" title=" " alt="" coords="541,795,772,820"/>
+<area shape="poly" id="edge22_Node000002_Node000020" title=" " alt="" coords="395,449,443,515,471,560,496,608,505,634,509,658,511,702,517,741,526,760,543,780,549,785,546,789,539,784,522,763,511,743,505,702,504,659,500,635,491,610,466,562,438,518,391,452"/>
+<area shape="rect" id="Node000005" href="$classErrors.html#a78eeb532e12787fee07b78aa5ef6a0c6" title=" " alt="" coords="820,301,977,327"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="713,220,773,237,826,263,870,291,868,296,823,268,771,242,712,226"/>
+<area shape="poly" id="edge6_Node000006_Node000005" title=" " alt="" coords="748,25,774,40,802,67,826,98,845,132,861,167,884,235,896,287,891,288,879,236,856,169,841,135,821,101,798,70,770,44,745,30"/>
+<area shape="poly" id="edge9_Node000008_Node000005" title=" " alt="" coords="728,70,752,77,774,89,798,110,819,135,854,189,878,243,893,287,888,288,873,245,849,192,815,138,794,114,770,94,750,82,726,75"/>
+<area shape="poly" id="edge16_Node000014_Node000005" title=" " alt="" coords="712,311,806,311,806,317,712,317"/>
+<area shape="poly" id="edge26_Node000023_Node000009" title=" " alt="" coords="391,619,438,554,466,509,491,461,500,435,504,412,505,368,511,328,522,307,540,287,555,275,573,268,575,273,558,280,543,291,526,310,516,329,510,369,509,412,505,437,496,463,471,511,443,557,395,623"/>
+<area shape="poly" id="edge27_Node000023_Node000010" title=" " alt="" coords="389,620,491,461,511,419,521,402,540,385,563,373,589,366,590,371,565,378,543,390,525,405,516,422,496,463,393,622"/>
+<area shape="poly" id="edge28_Node000023_Node000011" title=" " alt="" coords="387,620,407,582,441,532,485,479,511,455,540,434,559,425,561,430,543,439,515,459,489,482,445,535,412,585,391,622"/>
+<area shape="poly" id="edge29_Node000023_Node000012" title=" " alt="" coords="390,620,448,554,491,516,540,484,577,470,579,475,543,488,494,520,452,558,394,623"/>
+<area shape="poly" id="edge30_Node000023_Node000013" title=" " alt="" coords="397,619,458,577,498,553,540,533,579,521,580,526,542,538,500,558,461,581,400,623"/>
+<area shape="poly" id="edge31_Node000023_Node000014" title=" " alt="" coords="390,620,436,553,491,461,503,425,508,394,516,365,525,350,540,336,562,322,587,314,589,320,564,327,543,340,530,354,521,367,513,395,508,426,496,463,441,556,394,623"/>
+<area shape="poly" id="edge32_Node000023_Node000015" title=" " alt="" coords="419,619,541,582,578,573,579,578,542,587,421,624"/>
+<area shape="poly" id="edge33_Node000023_Node000016" title=" " alt="" coords="479,623,578,614,578,619,479,628"/>
+<area shape="poly" id="edge34_Node000023_Node000017" title=" " alt="" coords="479,640,575,649,575,655,479,646"/>
+<area shape="poly" id="edge35_Node000023_Node000018" title=" " alt="" coords="456,644,494,656,519,668,542,681,572,690,570,695,540,686,516,673,492,660,454,649"/>
+<area shape="poly" id="edge36_Node000023_Node000019" title=" " alt="" coords="474,644,495,656,512,675,520,694,527,713,543,731,567,743,565,748,540,735,522,716,515,696,508,677,492,660,471,649"/>
+<area shape="poly" id="edge37_Node000023_Node000020" title=" " alt="" coords="477,645,495,656,509,671,516,687,520,720,524,751,530,766,543,780,550,786,547,790,540,784,526,769,519,752,515,720,511,689,504,674,492,660,475,649"/>
+<area shape="rect" id="Node000024" href="$classFlux.html#adfdb1f061e52ca8b84e96a5bf9cbae79" title="Compute additionnal flux for 1D geometry with smooth varying cross section." alt="" coords="549,1041,764,1067"/>
+<area shape="poly" id="edge38_Node000023_Node000024" title=" " alt="" coords="480,644,495,656,513,680,526,703,533,727,535,751,531,798,520,845,509,891,505,937,507,960,514,983,526,1006,543,1028,546,1031,543,1035,539,1032,521,1008,509,985,502,961,499,938,504,890,515,844,526,797,530,751,527,728,521,705,509,683,491,660,477,648"/>
+<area shape="rect" id="Node000025" href="$classTransport.html#a48d9deb5f4c1ebbc91b587e183083bbb" title="Subtract flux to the corresponding transport buffer flux." alt="" coords="571,893,742,919"/>
+<area shape="poly" id="edge40_Node000023_Node000025" title=" " alt="" coords="480,645,495,656,515,684,524,713,524,741,520,770,516,798,516,825,524,852,543,879,560,891,557,895,539,883,519,855,511,826,511,797,515,769,518,741,518,713,511,686,491,660,477,649"/>
+<area shape="rect" id="Node000026" href="$classFlux.html#a94fdfae723d6b33088f4cd4276c2be01" title="Subtract flux to the corresponding model buffer flux." alt="" coords="587,844,726,869"/>
+<area shape="poly" id="edge41_Node000023_Node000026" title=" " alt="" coords="479,645,495,656,512,678,520,700,520,745,520,788,527,809,543,829,558,840,575,847,573,852,555,845,539,833,523,812,515,789,515,745,515,701,507,680,491,660,476,649"/>
+<area shape="rect" id="Node000027" href="$classTransport.html#ac1a480ab59236dcca1be515338c208bf" title="Subtract non conservative transport term to the flux." alt="" coords="556,943,757,968"/>
+<area shape="poly" id="edge43_Node000023_Node000027" title=" " alt="" coords="481,645,495,656,519,690,527,725,526,760,520,794,514,829,513,862,521,895,543,928,548,933,545,937,539,932,516,898,507,863,509,828,515,793,521,759,522,726,514,693,491,660,477,649"/>
+<area shape="rect" id="Node000028" href="$classFlux.html#a4cdadb0cc81574a29ce5c7d9c28f47d6" title="Subtract non conservative term to the flux." alt="" coords="572,992,741,1017"/>
+<area shape="poly" id="edge44_Node000023_Node000028" title=" " alt="" coords="480,644,495,656,511,676,522,697,531,738,529,778,520,819,512,859,509,899,518,939,528,958,543,977,561,991,558,995,539,981,523,961,513,940,504,900,506,859,515,818,523,778,526,738,517,699,507,679,491,660,477,649"/>
+<area shape="poly" id="edge39_Node000024_Node000005" title=" " alt="" coords="756,1039,770,1028,787,1005,803,975,830,895,851,798,867,691,886,484,894,341,899,341,892,484,872,692,856,799,835,897,808,977,792,1008,774,1032,759,1043"/>
+<area shape="poly" id="edge42_Node000026_Node000005" title=" " alt="" coords="725,851,750,843,770,829,795,793,817,738,837,670,854,595,878,448,892,341,897,341,884,449,859,596,842,671,822,739,800,795,774,833,752,848,727,857"/>
+<area shape="poly" id="edge45_Node000028_Node000005" title=" " alt="" coords="741,996,757,988,770,977,786,956,801,928,826,855,847,765,863,666,884,474,893,340,899,341,890,474,869,667,852,766,832,856,806,931,791,959,774,981,759,993,743,1000"/>
+</map>

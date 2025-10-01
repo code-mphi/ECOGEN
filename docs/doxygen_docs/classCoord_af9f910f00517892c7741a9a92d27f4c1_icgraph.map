@@ -1,0 +1,59 @@
+<map id="Coord::squaredNorm" name="Coord::squaredNorm">
+<area shape="rect" id="Node000001" title="Return the value of the squared norm of the Coord object." alt="" coords="588,726,744,751"/>
+<area shape="rect" id="Node000002" href="$classFluxEulerHomogeneous.html#af0fb689937c833bde0187d4751159153" title="Build the conservative variables for a given cell from primitive one." alt="" coords="325,5,503,45"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="661,712,652,576,631,380,615,279,594,187,569,111,554,82,538,61,521,47,502,38,504,33,524,43,542,57,559,80,574,109,599,186,620,278,636,379,657,576,666,712"/>
+<area shape="rect" id="Node000004" href="$classFluxUEqTotEnergy.html#ab50c921767df1d61d47bd620cd7da72b" title="Build the conservative variables for a given cell from primitive one." alt="" coords="309,70,519,95"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="661,712,651,584,629,402,613,309,592,225,568,156,553,129,538,110,518,96,521,91,542,106,558,127,572,153,598,223,618,308,634,401,656,583,666,711"/>
+<area shape="rect" id="Node000006" href="$classFluxEuler.html#a5267a54d69731c74528727f8fd8565c9" title="Build the primitive variables for a given cell from conservative one." alt="" coords="337,119,491,145"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="660,712,649,593,626,426,610,341,590,264,566,201,552,177,538,159,516,144,490,136,491,131,518,139,542,155,557,174,571,199,595,262,615,340,631,425,654,592,665,712"/>
+<area shape="rect" id="Node000007" href="$classFluxEulerHomogeneous.html#a9dfe2ce022fdd8eff55f8632e254cdf2" title="Build the primitive variables for a given cell from conservative one." alt="" coords="325,169,503,209"/>
+<area shape="poly" id="edge6_Node000001_Node000007" title=" " alt="" coords="659,712,645,606,620,459,604,384,585,317,563,262,538,224,521,212,502,202,504,197,524,207,542,221,567,259,590,315,609,383,626,458,651,605,664,712"/>
+<area shape="rect" id="Node000008" href="$classFluxUEqTotEnergy.html#a897b84cffe330521c9815d563504f647" title="Build the primitive variables for a given cell from conservative one." alt="" coords="309,234,519,259"/>
+<area shape="poly" id="edge7_Node000001_Node000008" title=" " alt="" coords="659,713,644,615,618,483,602,416,583,355,561,306,538,274,517,260,520,255,542,270,566,304,588,354,607,415,624,482,649,615,664,712"/>
+<area shape="rect" id="Node000009" href="$classMixEulerHomogeneous.html#af83c49f360ea9616a3f8cd2016db33e2" title="Compute mixture total specific energy from internal one taking account for energies associated to ext..." alt="" coords="327,284,501,324"/>
+<area shape="poly" id="edge8_Node000001_Node000009" title=" " alt="" coords="662,713,657,639,640,538,625,484,603,431,575,382,538,339,521,326,500,317,502,312,523,322,542,335,579,379,608,429,630,483,645,537,663,638,667,712"/>
+<area shape="rect" id="Node000010" href="$classMixPTUEq.html#ac8448777e978baa5df3cb7bad8ebedb3" title="Compute mixture total specific energy from internal one taking account for energies associated to ext..." alt="" coords="299,349,529,374"/>
+<area shape="poly" id="edge9_Node000001_Node000010" title=" " alt="" coords="661,713,654,646,635,558,620,512,599,466,572,425,538,389,519,376,522,372,542,385,576,421,603,464,625,510,641,557,659,645,666,712"/>
+<area shape="rect" id="Node000011" href="$classMixUEq.html#a237f64d10f949379d3ea9ca463d206fa" title="Compute mixture total specific energy from internal one taking account for energies associated to ext..." alt="" coords="307,398,521,423"/>
+<area shape="poly" id="edge10_Node000001_Node000011" title=" " alt="" coords="659,713,650,655,629,580,613,541,593,503,568,468,538,438,518,426,521,421,542,434,572,465,597,500,618,539,634,578,655,654,665,712"/>
+<area shape="rect" id="Node000012" href="$classEos.html#a7b0d840ec953122c70bb11e70aae4b8f" title="Compute the total enthalpy of the phase." alt="" coords="315,447,513,473"/>
+<area shape="poly" id="edge11_Node000001_Node000012" title=" " alt="" coords="657,713,644,664,622,602,587,540,564,512,538,487,512,473,515,469,542,483,568,508,591,537,626,600,649,662,662,712"/>
+<area shape="rect" id="Node000013" href="$classPhaseEuler.html#a2b1f226a2c0c0fff88a314373b2445a5" title="Compute extra thermodynammical variables." alt="" coords="305,497,523,537"/>
+<area shape="poly" id="edge12_Node000001_Node000013" title=" " alt="" coords="653,714,636,677,611,633,579,589,538,551,518,540,521,535,542,547,583,585,616,630,641,675,657,712"/>
+<area shape="rect" id="Node000014" href="$classPhaseEulerHomogeneous.html#a16908d69776509f13365ff898abc8221" title="Compute extra thermodynammical variables." alt="" coords="320,561,508,601"/>
+<area shape="poly" id="edge13_Node000001_Node000014" title=" " alt="" coords="645,717,601,665,571,638,539,616,507,602,509,597,541,611,575,634,605,661,649,713"/>
+<area shape="rect" id="Node000015" href="$classPhasePTUEq.html#a9d808e8aade636e3e74b60416327edd1" title="Compute extra thermodynammical variables." alt="" coords="301,625,527,665"/>
+<area shape="poly" id="edge14_Node000001_Node000015" title=" " alt="" coords="629,722,587,700,539,680,502,668,504,663,541,675,589,695,632,717"/>
+<area shape="rect" id="Node000016" href="$classPhaseUEqTotEnergy.html#a5aa4eac70a0c3c3fae4085986f133e6b" title="Compute extra thermodynammical variables." alt="" coords="325,689,503,729"/>
+<area shape="poly" id="edge15_Node000001_Node000016" title=" " alt="" coords="574,731,503,722,503,717,575,725"/>
+<area shape="rect" id="Node000017" href="$classFluxUEq.html#a50cdb64651176d12a7f825bfb2452749" title=" " alt="" coords="313,754,515,779"/>
+<area shape="poly" id="edge16_Node000001_Node000017" title=" " alt="" coords="574,751,516,758,515,753,574,746"/>
+<area shape="rect" id="Node000018" href="$classPhaseUEqTotEnergy.html#a0c3ab464e7b6d8b25afde278d69d372e" title=" " alt="" coords="335,804,493,844"/>
+<area shape="poly" id="edge17_Node000001_Node000018" title=" " alt="" coords="627,760,541,795,494,808,493,803,539,789,625,755"/>
+<area shape="rect" id="Node000019" href="$classModPTUEq.html#aa0ac2c4758d753d3102f2be36748187c" title="Inlet tank half Riemann solver." alt="" coords="288,869,540,894"/>
+<area shape="poly" id="edge18_Node000001_Node000019" title=" " alt="" coords="649,764,604,813,574,838,541,858,509,871,507,866,539,854,571,833,600,809,645,760"/>
+<area shape="rect" id="Node000020" href="$classModEulerKorteweg.html#a9cd41d317942d2d424a1935e8b8573ee" title="Cell to cell Riemann solver." alt="" coords="291,919,537,959"/>
+<area shape="poly" id="edge19_Node000001_Node000020" title=" " alt="" coords="655,765,638,798,612,837,580,876,542,909,519,921,517,916,538,904,576,872,608,834,633,795,651,762"/>
+<area shape="rect" id="Node000021" href="$classModEulerHomogeneous.html#a65755d3b94dea41e68252634283010df" title="Cell to cell Riemann solver." alt="" coords="325,983,503,1023"/>
+<area shape="poly" id="edge20_Node000001_Node000021" title=" " alt="" coords="661,765,646,811,622,867,588,924,566,950,542,973,504,992,502,988,538,968,562,946,584,921,618,864,641,809,656,764"/>
+<area shape="rect" id="Node000022" href="$classModPTUEq.html#ad9dbc105b674a7fdf5f4ff9cf828b1f2" title="Cell to cell Riemann solver." alt="" coords="299,1047,529,1073"/>
+<area shape="poly" id="edge21_Node000001_Node000022" title=" " alt="" coords="664,766,654,823,633,896,617,935,596,972,572,1007,542,1037,521,1049,518,1045,538,1033,568,1004,592,970,612,933,628,894,649,821,659,765"/>
+<area shape="rect" id="Node000023" href="$classModUEq.html#a387ca7a1a697c3bdef4cc12a8266e6aa" title="Cell to cell Riemann solver." alt="" coords="307,1097,521,1122"/>
+<area shape="poly" id="edge22_Node000001_Node000023" title=" " alt="" coords="666,765,659,831,640,919,624,965,603,1010,576,1052,542,1087,523,1099,520,1095,538,1083,572,1048,598,1007,619,963,635,917,654,830,661,765"/>
+<area shape="rect" id="Node000024" href="$classModEuler.html#a1ca5876126b8a53b89c02b1dd69eb44f" title="Cell to cell Riemann solver + compute fluxBuffMRF for MRF interface." alt="" coords="289,1146,539,1171"/>
+<area shape="poly" id="edge23_Node000001_Node000024" title=" " alt="" coords="668,765,664,839,647,940,631,994,609,1046,580,1095,542,1137,525,1148,522,1144,538,1133,575,1092,604,1044,626,992,642,939,658,839,662,765"/>
+<area shape="rect" id="Node000025" href="$classModUEq.html#a90c14231f3e32e52ab89c3fea6f3b103" title="Cell to cell Riemann solver + compute fluxBuffMRF for MRF interface." alt="" coords="292,1195,536,1221"/>
+<area shape="poly" id="edge24_Node000001_Node000025" title=" " alt="" coords="664,766,648,860,622,986,605,1050,586,1107,565,1154,542,1186,526,1197,523,1193,538,1182,561,1151,581,1105,600,1048,617,985,643,859,658,765"/>
+<area shape="rect" id="Node000026" href="$classModPTUEq.html#a125a9ee8170ca1b8ee9c4ed0ce1ebf3d" title="Outlet at imposed pressure half Riemann solver." alt="" coords="297,1245,531,1285"/>
+<area shape="poly" id="edge25_Node000001_Node000026" title=" " alt="" coords="664,765,650,868,625,1009,608,1080,589,1145,567,1199,542,1235,526,1247,523,1243,538,1232,562,1196,583,1144,603,1079,619,1008,645,867,659,765"/>
+<area shape="rect" id="Node000027" href="$classMixEulerHomogeneous.html#a23add015cbfe245c6b0ce9f89e623605" title="Compute mixture internal specific energy from total one taking account for energies associated to ext..." alt="" coords="307,1309,521,1349"/>
+<area shape="poly" id="edge26_Node000001_Node000027" title=" " alt="" coords="665,765,653,880,629,1040,612,1122,592,1196,569,1257,542,1299,523,1314,520,1309,538,1296,564,1255,587,1194,607,1120,624,1039,647,879,660,765"/>
+<area shape="rect" id="Node000028" href="$classMixPTUEq.html#a9326e78c44f15359b6bfa41171c2b69d" title="Compute mixture internal specific energy from total one taking account for energies associated to ext..." alt="" coords="297,1373,531,1413"/>
+<area shape="poly" id="edge27_Node000001_Node000028" title=" " alt="" coords="666,765,655,892,633,1071,616,1163,596,1247,572,1316,557,1343,542,1363,527,1375,524,1371,538,1359,553,1340,567,1314,591,1245,611,1162,628,1070,650,891,660,765"/>
+<area shape="rect" id="Node000029" href="$classMixUEq.html#a666a23398368e34e37fcb20a66f1248c" title="Compute mixture internal specific energy from total one taking account for energies associated to ext..." alt="" coords="305,1437,523,1477"/>
+<area shape="poly" id="edge28_Node000001_Node000029" title=" " alt="" coords="666,766,658,903,637,1102,621,1204,600,1297,574,1374,559,1404,542,1427,525,1441,522,1437,538,1423,554,1402,569,1372,595,1296,615,1203,632,1101,652,903,661,765"/>
+<area shape="rect" id="Node000003" href="$classFluxEulerHomogeneous.html#ae526d41df695db4690486e7fce147b66" title="Temporary store the conservative variables of a given cell." alt="" coords="34,5,211,45"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="312,28,212,28,212,23,312,23"/>
+<area shape="rect" id="Node000005" href="$classFluxUEqTotEnergy.html#aa678bcbdbfb48fed969c730999e5ff8b" title="Temporary store the conservative variables of a given cell." alt="" coords="5,70,240,95"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="295,85,240,85,240,80,295,80"/>
+</map>

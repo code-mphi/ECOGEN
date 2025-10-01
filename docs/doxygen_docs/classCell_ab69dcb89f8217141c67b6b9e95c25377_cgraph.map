@@ -1,0 +1,23 @@
+<map id="Cell::averageChildrenInParent" name="Cell::averageChildrenInParent">
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,153,220,179"/>
+<area shape="rect" id="Node000002" href="$classFlux.html#aac25bdaa5ffd6bf68855b07e4420e077" title="Add flux passed in parameter to the correspond model flux." alt="" coords="286,5,397,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="125,151,183,98,223,67,267,40,280,33,282,38,269,44,226,72,186,102,128,155"/>
+<area shape="rect" id="Node000004" href="$classFlux.html#a18ead5a4940b4978cb9ef517f9e27b21" title="Build the primitive variables for a given cell from conservative one." alt="" coords="281,55,401,80"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="137,151,195,121,267,89,285,82,287,87,269,94,198,126,139,155"/>
+<area shape="rect" id="Node000005" href="$classFlux.html#a6ff61c3487035a90e80b4fd4c39c8617" title="multiply the flux of the corresponding model by a constant" alt="" coords="285,104,397,129"/>
+<area shape="poly" id="edge5_Node000001_Node000005" title=" " alt="" coords="172,151,271,129,272,134,173,156"/>
+<area shape="rect" id="Node000006" href="$classModel.html#a0251346425166ed507634b7111bf6d2b" title="Run all the relaxations." alt="" coords="270,153,413,179"/>
+<area shape="poly" id="edge7_Node000001_Node000006" title=" " alt="" coords="220,163,256,163,256,169,220,169"/>
+<area shape="rect" id="Node000007" href="$classFlux.html#a54ed221ddaafbbc85805a6d8af0c61aa" title="Temporary store the conservative variables of a given cell." alt="" coords="269,203,414,228"/>
+<area shape="poly" id="edge8_Node000001_Node000007" title=" " alt="" coords="173,176,269,197,268,202,172,181"/>
+<area shape="rect" id="Node000008" href="$classFlux.html#a78b3d87caaf410e3598b0ce01966b058" title="set each attribute of the flux to zero" alt="" coords="280,252,403,277"/>
+<area shape="poly" id="edge10_Node000001_Node000008" title=" " alt="" coords="140,176,269,237,289,245,287,250,267,242,138,181"/>
+<area shape="rect" id="Node000009" href="$classTransport.html#a1ac0ea1929d40518fc6a75eb378b0757" title="Set the value of the corresponding transport variable." alt="" coords="268,301,415,327"/>
+<area shape="poly" id="edge12_Node000001_Node000009" title=" " alt="" coords="129,177,187,229,227,259,269,286,285,294,283,299,267,291,224,264,184,233,125,181"/>
+<area shape="rect" id="Node000003" href="$classErrors.html#a78eeb532e12787fee07b78aa5ef6a0c6" title=" " alt="" coords="463,104,620,129"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="387,28,416,40,467,67,512,94,509,99,465,71,414,44,385,33"/>
+<area shape="poly" id="edge4_Node000004_Node000003" title=" " alt="" coords="394,77,477,98,475,103,393,83"/>
+<area shape="poly" id="edge6_Node000005_Node000003" title=" " alt="" coords="398,114,449,114,449,119,398,119"/>
+<area shape="poly" id="edge9_Node000007_Node000003" title=" " alt="" coords="382,200,414,188,464,161,508,135,510,139,466,166,416,192,384,205"/>
+<area shape="poly" id="edge11_Node000008_Node000003" title=" " alt="" coords="387,249,413,237,445,214,474,188,520,138,523,142,478,192,448,218,416,242,390,254"/>
+</map>

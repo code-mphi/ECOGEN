@@ -1,0 +1,33 @@
+<map id="Cell::getQPA" name="Cell::getQPA">
+<area shape="rect" id="Node000001" title=" " alt="" coords="313,447,416,472"/>
+<area shape="rect" id="Node000002" href="$classAPUEqViscosity.html#a87d6a33df3f42befacd8019b10ffc3e3" title="Add the non&#45;conservative terms of the corresponding additional physic in a cell." alt="" coords="29,5,242,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="358,433,348,345,329,228,316,170,301,117,283,74,263,45,241,30,244,26,267,41,288,71,306,115,321,168,334,227,353,345,363,433"/>
+<area shape="rect" id="Node000003" href="$classAPUEqSurfaceTension.html#a89d60064b5f8eac6159c7b5127f73a20" title="Add the symmetrical terms of the corresponding additional physic in a cell (when radial axis is on X)" alt="" coords="5,55,265,95"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="362,433,360,367,347,280,335,234,318,188,294,146,263,109,248,98,252,93,267,105,298,143,323,186,340,232,353,279,365,367,367,433"/>
+<area shape="rect" id="Node000004" href="$classAPUEqViscosity.html#a58ba460889981836a97972804e98d8f0" title="Add the symmetrical terms of the corresponding additional physic in a cell (when radial axis is on X)" alt="" coords="22,119,249,159"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="360,433,354,378,339,308,326,271,310,235,289,202,264,173,248,162,251,157,267,169,294,199,315,233,331,269,344,306,359,377,365,432"/>
+<area shape="rect" id="Node000005" href="$classAPUEqSurfaceTension.html#a8f53baaafa00b9a4d7709e1539c71dbc" title="Add the symmetrical terms of the corresponding additional physic in a cell (when radial axis is on Y)" alt="" coords="6,183,265,223"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="357,434,347,390,330,337,303,283,285,259,264,237,246,226,249,221,267,233,289,255,307,280,335,335,353,389,362,432"/>
+<area shape="rect" id="Node000006" href="$classAPUEqViscosity.html#ac552a0c177b6e02a5b4df71bd2e107f7" title="Add the symmetrical terms of the corresponding additional physic in a cell (when radial axis is on Y)" alt="" coords="22,247,249,287"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="352,435,339,404,320,367,295,332,264,301,244,290,246,285,267,297,299,328,325,365,344,401,357,433"/>
+<area shape="rect" id="Node000007" href="$classAPEConductivity.html#a4a3d5b0350c8dfe2072e4b4edb830f3b" title="Solve the additional physic flux between two cells." alt="" coords="36,311,235,351"/>
+<area shape="poly" id="edge6_Node000001_Node000007" title=" " alt="" coords="343,437,309,400,264,366,234,352,236,347,267,361,313,396,347,434"/>
+<area shape="rect" id="Node000008" href="$classAPUEqConductivity.html#a60acc6a82fb97d75de5ae5b3718acc85" title="Solve the additional physic flux between two cells." alt="" coords="58,375,213,415"/>
+<area shape="poly" id="edge7_Node000001_Node000008" title=" " alt="" coords="313,445,265,430,212,416,213,411,266,425,314,440"/>
+<area shape="rect" id="Node000009" href="$classAPUEqSurfaceTension.html#a307e685fd9d5a391f5df628aed7bc4cf" title="Solve the additional physic flux between two cells." alt="" coords="54,439,217,479"/>
+<area shape="poly" id="edge8_Node000001_Node000009" title=" " alt="" coords="300,462,217,462,217,457,300,457"/>
+<area shape="rect" id="Node000010" href="$classAPEViscosity.html#a383bc7762140cc1397fbc9294f808f2e" title="Solve the additional physic flux between two cells." alt="" coords="19,504,251,529"/>
+<area shape="poly" id="edge9_Node000001_Node000010" title=" " alt="" coords="316,479,266,494,210,507,209,501,265,489,314,474"/>
+<area shape="rect" id="Node000011" href="$classAPUEqViscosity.html#a159d010c53fc65fc63d636e6b6e87faf" title="Solve the additional physic flux between two cells." alt="" coords="38,554,233,594"/>
+<area shape="poly" id="edge10_Node000001_Node000011" title=" " alt="" coords="343,484,309,515,267,543,234,557,232,552,264,538,306,511,340,480"/>
+<area shape="rect" id="Node000012" href="$classAPEConductivity.html#ac5b559e4423c06ad91cad5379d2f96ac" title="Solve the additional physic flux at a domain boundary." alt="" coords="36,618,235,658"/>
+<area shape="poly" id="edge11_Node000001_Node000012" title=" " alt="" coords="356,486,323,548,298,581,267,608,236,624,234,619,264,604,294,577,318,545,351,484"/>
+<area shape="rect" id="Node000013" href="$classAPUEqConductivity.html#a048bf125839212c864838f0d54f6d69e" title="Solve the additional physic flux at a domain boundary." alt="" coords="34,682,237,722"/>
+<area shape="poly" id="edge12_Node000001_Node000013" title=" " alt="" coords="361,486,351,527,333,577,306,628,288,652,267,672,239,689,236,684,264,668,284,648,301,626,328,575,346,525,356,485"/>
+<area shape="rect" id="Node000014" href="$classAPUEqSurfaceTension.html#af76c8f8ae36e4c9a4d19ef37a00e7c89" title="Solve the additional physic flux at a domain boundary." alt="" coords="30,746,241,786"/>
+<area shape="poly" id="edge13_Node000001_Node000014" title=" " alt="" coords="365,486,358,539,342,606,330,642,313,676,293,708,267,736,243,752,240,748,264,732,288,705,309,674,325,640,337,605,353,538,359,486"/>
+<area shape="rect" id="Node000015" href="$classAPEViscosity.html#acb096c5d7d27dbe15d79c919dc14162a" title="Solve the additional physic flux at a domain boundary." alt="" coords="35,810,236,850"/>
+<area shape="poly" id="edge14_Node000001_Node000015" title=" " alt="" coords="367,486,364,549,351,634,338,679,321,723,297,764,267,800,238,819,235,814,264,796,293,761,316,721,333,677,346,633,359,549,361,485"/>
+<area shape="rect" id="Node000016" href="$classAPUEqViscosity.html#aed3e60b546e6b8b5cb141ca88fe238e1" title="Solve the additional physic flux at a domain boundary." alt="" coords="38,874,233,914"/>
+<area shape="poly" id="edge15_Node000001_Node000016" title=" " alt="" coords="363,486,352,571,332,684,304,793,287,835,267,864,252,876,234,885,232,880,249,872,263,860,282,832,299,791,327,683,347,571,358,485"/>
+</map>

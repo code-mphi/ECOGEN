@@ -1,0 +1,27 @@
+var classFluxUEqTotEnergy =
+[
+    [ "FluxUEqTotEnergy", "classFluxUEqTotEnergy.html#af5181af44a642ae4677e5728bc3ccd32", null ],
+    [ "~FluxUEqTotEnergy", "classFluxUEqTotEnergy.html#a38055c20418d705aaf51e4c4a9e6dc1a", null ],
+    [ "addFlux", "classFluxUEqTotEnergy.html#af1a9aafce779e555838ace53930557c5", null ],
+    [ "addFlux", "classFluxUEqTotEnergy.html#ab5136e5b1c78b2dbbca0c04e6a8a969c", null ],
+    [ "addNonCons", "classFluxUEqTotEnergy.html#a0e4408a3455a8b41e561eb3afab3e30d", null ],
+    [ "buildCons", "classFluxUEqTotEnergy.html#ab50c921767df1d61d47bd620cd7da72b", null ],
+    [ "buildPrim", "classFluxUEqTotEnergy.html#a897b84cffe330521c9815d563504f647", null ],
+    [ "getAlpha", "classFluxUEqTotEnergy.html#a6a8270052decc63a69ca59ee0a71c145", null ],
+    [ "getMass", "classFluxUEqTotEnergy.html#a660b25d3de27c8c29c3f200684309af0", null ],
+    [ "getMomentum", "classFluxUEqTotEnergy.html#a0ac516e3367c430ff1698488edab77af", null ],
+    [ "getTotEnergy", "classFluxUEqTotEnergy.html#a7b232519c88bfb07e11210203334b5bb", null ],
+    [ "multiply", "classFluxUEqTotEnergy.html#a4f652b5480f5e06bd00da3410a47c428", null ],
+    [ "printFlux", "classFluxUEqTotEnergy.html#af588746b688b670426b51b46a4efb7e7", null ],
+    [ "setBufferFlux", "classFluxUEqTotEnergy.html#aa678bcbdbfb48fed969c730999e5ff8b", null ],
+    [ "setCons", "classFluxUEqTotEnergy.html#a637b828eeada41de1ed229a1c4d03a83", null ],
+    [ "setToZero", "classFluxUEqTotEnergy.html#a2510e99759315ab5377a876e038501f6", null ],
+    [ "subtractFlux", "classFluxUEqTotEnergy.html#abb97c9dbaf163c665458de5ce4e4876c", null ],
+    [ "subtractNonCons", "classFluxUEqTotEnergy.html#ace16d0cd56cda7a64b23fce9df0334dd", null ],
+    [ "ModUEqTotEnergy", "classFluxUEqTotEnergy.html#af1d81b40f6f5dee5d56db6d61e11eb88", null ],
+    [ "m_alpha", "classFluxUEqTotEnergy.html#a0f14fce2a289ecc039281a034bd08de2", null ],
+    [ "m_alphap", "classFluxUEqTotEnergy.html#af3a86d35b9a94f18d88a0dc4091bb31d", null ],
+    [ "m_mass", "classFluxUEqTotEnergy.html#afcbc9c1c0d26099c4d166e81da680e60", null ],
+    [ "m_momentum", "classFluxUEqTotEnergy.html#ab7a65cb46e4eb52f10af0207bfab4af2", null ],
+    [ "m_totEnerg", "classFluxUEqTotEnergy.html#ac4944cb681a446655e7bf7ca40f07bfd", null ]
+];

@@ -1,0 +1,19 @@
+<map id="AddPhys::addFluxAddPhys" name="AddPhys::addFluxAddPhys">
+<area shape="rect" id="Node000001" title="Add the additional physic flux between two cells at the corresponding cell." alt="" coords="5,153,200,179"/>
+<area shape="rect" id="Node000002" href="$classFlux.html#aac25bdaa5ffd6bf68855b07e4420e077" title="Add flux passed in parameter to the correspond model flux." alt="" coords="289,5,400,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="113,151,167,97,205,66,247,40,275,28,277,33,249,44,208,71,170,101,117,155"/>
+<area shape="rect" id="Node000004" href="$classCellInterface.html#af24bd9825984c330e260d43b846a4176" title=" " alt="" coords="248,55,441,80"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="123,151,178,120,247,89,270,81,272,86,249,94,181,125,126,156"/>
+<area shape="rect" id="Node000005" href="$classCell.html#a0d92eb572fc85da4b37bf2ad4b760621" title=" " alt="" coords="291,104,399,129"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="165,151,276,128,278,133,166,156"/>
+<area shape="rect" id="Node000006" href="$classCell.html#a222238b424bf20588ec06c647a190c0a" title=" " alt="" coords="279,153,410,179"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="200,163,266,163,266,169,200,169"/>
+<area shape="rect" id="Node000007" href="$classCellInterface.html#a6427c77e8246803b4e940cda6c596555" title=" " alt="" coords="263,203,426,228"/>
+<area shape="poly" id="edge6_Node000001_Node000007" title=" " alt="" coords="166,176,269,197,268,202,165,181"/>
+<area shape="rect" id="Node000008" href="$classFace.html#afb0df2ee2b760695be90150d3e0033d4" title=" " alt="" coords="280,252,409,277"/>
+<area shape="poly" id="edge7_Node000001_Node000008" title=" " alt="" coords="127,177,182,206,249,237,275,246,273,251,247,242,179,211,125,181"/>
+<area shape="rect" id="Node000009" href="$classElement.html#a65eeb90dcb62974be8d19fbc13d78061" title=" " alt="" coords="267,301,422,327"/>
+<area shape="poly" id="edge8_Node000001_Node000009" title=" " alt="" coords="117,177,171,230,208,260,249,286,267,294,265,299,247,291,205,265,167,234,113,181"/>
+<area shape="rect" id="Node000003" href="$classErrors.html#a78eeb532e12787fee07b78aa5ef6a0c6" title=" " alt="" coords="489,5,647,31"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="401,15,475,15,475,21,401,21"/>
+</map>

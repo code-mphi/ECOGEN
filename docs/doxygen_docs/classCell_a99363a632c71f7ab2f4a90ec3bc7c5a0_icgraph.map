@@ -1,0 +1,41 @@
+<map id="Cell::getPhases" name="Cell::getPhases">
+<area shape="rect" id="Node000001" title=" " alt="" coords="535,453,657,478"/>
+<area shape="rect" id="Node000002" href="$classSymCylindrical.html#add159b596f57f98c0588be10e0741a40" title="Add the symmetric terms for the cylindrical or spherical symmetry assumption." alt="" coords="258,5,481,45"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="588,439,575,353,553,239,522,130,504,88,485,59,470,47,473,43,489,56,509,85,527,128,558,237,580,352,594,438"/>
+<area shape="rect" id="Node000003" href="$classSymSpherical.html#afd08802c2dd12c17ca4cfe473d5f7700" title="Add the symmetric terms for the cylindrical or spherical symmetry assumption." alt="" coords="262,69,477,109"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="592,439,587,375,572,290,558,245,539,200,515,159,485,123,470,112,473,107,488,119,520,156,544,198,563,243,577,288,592,374,597,439"/>
+<area shape="rect" id="Node000004" href="$classRun.html#ae6cad323ebc33d27782dbc95fc6339a9" title="Initialization of the simulation." alt="" coords="314,134,425,159"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="590,439,583,383,566,311,552,273,535,237,512,203,485,174,456,158,424,150,425,145,458,153,488,170,517,200,539,234,557,271,571,310,589,382,596,439"/>
+<area shape="rect" id="Node000006" href="$classRelaxationPFinite.html#aa4f46a0b4ca70047bb49d68a463f9104" title="Finite Pressure relaxation method." alt="" coords="297,184,441,224"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="587,440,576,396,556,341,526,285,507,260,485,238,464,225,441,216,443,211,467,220,488,234,511,257,531,282,561,339,581,394,592,439"/>
+<area shape="rect" id="Node000007" href="$classFluxEuler.html#ab89c2c109bc4d520efe28d456decf611" title="Temporary store the conservative variables of a given cell." alt="" coords="280,249,459,274"/>
+<area shape="poly" id="edge6_Node000001_Node000007" title=" " alt="" coords="584,441,570,406,549,364,521,323,485,289,458,275,460,270,488,284,525,320,554,362,575,404,589,439"/>
+<area shape="rect" id="Node000008" href="$classFluxEulerHomogeneous.html#ae526d41df695db4690486e7fce147b66" title="Temporary store the conservative variables of a given cell." alt="" coords="281,299,458,339"/>
+<area shape="poly" id="edge7_Node000001_Node000008" title=" " alt="" coords="576,443,538,397,513,373,485,353,457,340,459,335,488,348,516,369,542,393,580,440"/>
+<area shape="rect" id="Node000009" href="$classFluxEulerKorteweg.html#a74ad77e4ade5b27672a49e753e4f2a82" title="Temporary store the conservative variables of a given cell." alt="" coords="293,363,445,403"/>
+<area shape="poly" id="edge8_Node000001_Node000009" title=" " alt="" coords="558,449,486,417,445,404,446,399,488,412,560,444"/>
+<area shape="rect" id="Node000010" href="$classFluxPTUEq.html#aa4319e8b8f10d6728fbd1ae7ca85f1bc" title="Temporary store the conservative variables of a given cell." alt="" coords="276,427,463,453"/>
+<area shape="poly" id="edge9_Node000001_Node000010" title=" " alt="" coords="521,460,463,453,463,448,522,454"/>
+<area shape="rect" id="Node000011" href="$classFluxUEq.html#a86cb5802831c26f95e32c12767c3532a" title="Temporary store the conservative variables of a given cell." alt="" coords="284,477,455,502"/>
+<area shape="poly" id="edge10_Node000001_Node000011" title=" " alt="" coords="521,476,455,483,455,478,521,471"/>
+<area shape="rect" id="Node000012" href="$classFluxUEqTotEnergy.html#aa678bcbdbfb48fed969c730999e5ff8b" title="Temporary store the conservative variables of a given cell." alt="" coords="252,526,487,551"/>
+<area shape="poly" id="edge11_Node000001_Node000012" title=" " alt="" coords="558,487,488,516,441,529,439,523,486,511,556,482"/>
+<area shape="rect" id="Node000013" href="$classBoundCond.html#a0fc63df6e07a7e6197cd5d0075c25442" title=" " alt="" coords="271,575,468,601"/>
+<area shape="poly" id="edge12_Node000001_Node000013" title=" " alt="" coords="577,491,539,529,514,549,488,565,455,578,453,573,485,560,511,544,535,525,573,487"/>
+<area shape="rect" id="Node000015" href="$classBoundCondWallO2NS.html#a5780c50b5260eaf755c59e6277b89a4d" title=" " alt="" coords="285,625,453,665"/>
+<area shape="poly" id="edge14_Node000001_Node000015" title=" " alt="" coords="585,492,548,553,521,586,488,614,455,631,452,626,485,610,517,582,543,550,581,489"/>
+<area shape="rect" id="Node000016" href="$classCellInterfaceO2NS.html#a3ffa6d43376b894e5db96308b73c062c" title=" " alt="" coords="295,689,444,729"/>
+<area shape="poly" id="edge15_Node000001_Node000016" title=" " alt="" coords="591,492,579,533,558,584,529,635,510,659,488,679,468,692,445,701,443,696,465,688,485,675,506,655,524,632,554,582,574,532,586,491"/>
+<area shape="rect" id="Node000017" href="$classBoundCondWallO2Cartesian.html#a8f90d9083bef9f68e9815cf201d3a7b1" title=" " alt="" coords="267,753,471,793"/>
+<area shape="poly" id="edge16_Node000001_Node000017" title=" " alt="" coords="595,493,586,545,567,613,554,648,536,683,515,715,488,743,471,755,468,751,485,739,510,712,532,680,549,646,562,611,581,544,589,492"/>
+<area shape="rect" id="Node000018" href="$classCellInterfaceO2Cartesian.html#ac6814eabc189e20595fa40df01b5ad8a" title=" " alt="" coords="277,817,462,857"/>
+<area shape="poly" id="edge17_Node000001_Node000018" title=" " alt="" coords="597,492,592,555,576,640,563,685,544,730,519,771,488,807,464,824,461,820,485,803,515,768,539,727,558,684,571,639,587,555,592,491"/>
+<area shape="rect" id="Node000019" href="$classCellInterface.html#a67801cc22b9e3280da40588bb4ad9263" title=" " alt="" coords="252,882,487,907"/>
+<area shape="poly" id="edge18_Node000001_Node000019" title=" " alt="" coords="594,492,581,578,558,692,527,800,509,842,489,871,471,884,468,880,485,867,504,840,522,798,553,691,575,577,589,492"/>
+<area shape="rect" id="Node000005" href="$main_8cpp.html#a0ddf1224851353fc92bfbff6f499fa97" title=" " alt="" coords="77,134,132,159"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="300,149,132,149,132,144,300,144"/>
+<area shape="rect" id="Node000014" href="$classBoundCond.html#a5f63d38480e6f872e612591f539fdd5f" title=" " alt="" coords="10,575,199,601"/>
+<area shape="poly" id="edge13_Node000013_Node000014" title=" " alt="" coords="257,591,200,591,200,585,257,585"/>
+<area shape="rect" id="Node000020" href="$classCellInterface.html#acc96276cbae58430f8e9145321607bff" title=" " alt="" coords="5,882,204,907"/>
+<area shape="poly" id="edge19_Node000019_Node000020" title=" " alt="" coords="238,897,204,897,204,892,238,892"/>
+</map>

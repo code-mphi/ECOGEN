@@ -1,0 +1,47 @@
+<map id="MUSGmshV2::initGeometryParallel" name="MUSGmshV2::initGeometryParallel">
+<area shape="rect" id="Node000001" title="initialize the geometry for multi CPUs computation" alt="" coords="5,381,255,407"/>
+<area shape="rect" id="Node000002" href="$classParallel.html#a453da74cd929de00d5db6b85e8796ba8" title=" " alt="" coords="314,5,537,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="131,381,144,319,174,226,197,175,225,125,260,79,301,40,308,35,311,39,304,44,264,83,230,128,202,177,179,228,150,320,136,382"/>
+<area shape="rect" id="Node000003" href="$classParallel.html#a8665c1b12e706dc73c5db6827343f105" title=" " alt="" coords="324,55,527,80"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="132,380,148,326,181,246,203,203,231,161,263,122,301,89,310,83,313,88,304,93,267,126,235,164,208,206,186,248,153,328,137,382"/>
+<area shape="rect" id="Node000004" href="$classParallel.html#a308829576a2f46b2b8f7ef71597171bd" title=" " alt="" coords="320,104,531,129"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="134,380,153,333,188,267,237,197,267,165,301,138,311,133,314,137,304,143,271,169,241,200,192,270,158,335,138,382"/>
+<area shape="rect" id="Node000005" href="$classParallel.html#ac52e3eb9d42614ec61683f1fa205774c" title=" " alt="" coords="330,153,521,179"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="136,380,160,343,197,293,244,241,272,217,301,196,334,181,336,185,304,200,275,221,248,244,201,297,164,346,141,383"/>
+<area shape="rect" id="Node000006" href="$classElementNS.html#a422803a19f21f87381a280010c621d10" title=" " alt="" coords="596,205,875,231"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="146,379,212,334,255,309,302,289,372,267,444,249,582,227,583,233,445,255,373,272,304,294,258,314,215,339,149,383"/>
+<area shape="rect" id="Node000008" href="$classElementNS.html#a5b1cd4703ac114d6901d63f331f37c24" title=" " alt="" coords="625,256,845,281"/>
+<area shape="poly" id="edge7_Node000001_Node000008" title=" " alt="" coords="159,379,224,353,302,329,462,297,611,277,612,282,463,302,303,334,226,358,161,384"/>
+<area shape="rect" id="Node000009" href="$classElementNS.html#ace194accf5280f5880f6975785e82aed" title=" " alt="" coords="638,305,833,331"/>
+<area shape="poly" id="edge9_Node000001_Node000009" title=" " alt="" coords="195,379,302,361,471,340,624,325,624,330,472,345,303,366,196,384"/>
+<area shape="rect" id="Node000010" href="$classElementNS.html#a2e35e866bb75fcf534b6b1f9db0a2617" title=" " alt="" coords="643,356,828,381"/>
+<area shape="poly" id="edge11_Node000001_Node000010" title=" " alt="" coords="255,386,628,370,629,376,255,391"/>
+<area shape="rect" id="Node000011" href="$classElementNS.html#a7b52e199be44156aec73e4d9285f7786" title=" " alt="" coords="350,407,501,432"/>
+<area shape="poly" id="edge13_Node000001_Node000011" title=" " alt="" coords="255,402,337,409,336,414,255,407"/>
+<area shape="rect" id="Node000012" href="$classFaceNS.html#a3cfe610bd7833e39c2290f35c83e3f83" title=" " alt="" coords="329,456,521,481"/>
+<area shape="poly" id="edge14_Node000001_Node000012" title=" " alt="" coords="173,404,303,441,346,450,344,456,302,446,172,409"/>
+<area shape="rect" id="Node000013" href="$classFaceNS.html#af734f6d432f6f4755e8e27e68505972f" title=" " alt="" coords="325,505,526,531"/>
+<area shape="poly" id="edge15_Node000001_Node000013" title=" " alt="" coords="151,405,216,447,259,470,304,490,332,499,331,504,302,495,257,475,214,452,148,409"/>
+<area shape="rect" id="Node000014" href="$classElementNS.html#ab3caa839dbfb9ad475dc7623a37f7564" title=" " alt="" coords="320,555,531,580"/>
+<area shape="poly" id="edge16_Node000001_Node000014" title=" " alt="" coords="144,405,207,470,253,508,304,540,324,548,322,553,301,544,250,512,203,474,140,409"/>
+<area shape="rect" id="Node000015" href="$classElementNS.html#a768e03ddfc95f27bc706149100c1fa51" title=" " alt="" coords="303,604,548,629"/>
+<area shape="poly" id="edge17_Node000001_Node000015" title=" " alt="" coords="141,406,164,443,200,493,247,546,275,569,304,589,319,597,317,601,301,594,271,573,244,549,196,497,159,446,136,409"/>
+<area shape="rect" id="Node000016" href="$classElement.html#aa6d4b53dd249a628e5cd5709d7ab3751" title=" " alt="" coords="316,653,535,679"/>
+<area shape="poly" id="edge18_Node000001_Node000016" title=" " alt="" coords="139,406,158,451,193,515,242,582,271,613,304,638,317,645,314,650,301,643,268,617,238,586,188,518,154,453,134,408"/>
+<area shape="rect" id="Node000017" href="$classMUSGmshV2.html#a28d422210b733d34e214fdb6ff9f5577" title=" " alt="" coords="312,703,539,728"/>
+<area shape="poly" id="edge19_Node000001_Node000017" title=" " alt="" coords="137,406,154,460,187,537,209,578,236,619,268,656,304,688,315,694,312,699,301,692,264,660,232,622,205,581,182,539,149,462,132,408"/>
+<area shape="rect" id="Node000021" href="$classParallel.html#ad1c963c9ab237cd6e4ef0574eb3287e8" title=" " alt="" coords="343,752,508,777"/>
+<area shape="poly" id="edge24_Node000001_Node000021" title=" " alt="" coords="136,406,150,467,180,557,203,607,231,655,264,699,304,737,331,752,328,756,301,741,260,703,226,658,198,609,175,559,145,468,131,407"/>
+<area shape="rect" id="Node000007" href="$classErrors.html#a78eeb532e12787fee07b78aa5ef6a0c6" title=" " alt="" coords="923,305,1080,331"/>
+<area shape="poly" id="edge6_Node000006_Node000007" title=" " alt="" coords="832,228,876,241,929,267,974,295,971,300,926,271,874,246,830,233"/>
+<area shape="poly" id="edge8_Node000008_Node000007" title=" " alt="" coords="812,279,875,290,926,300,925,305,874,295,811,284"/>
+<area shape="poly" id="edge10_Node000009_Node000007" title=" " alt="" coords="833,315,909,315,909,321,833,321"/>
+<area shape="poly" id="edge12_Node000010_Node000007" title=" " alt="" coords="802,353,920,331,921,336,803,359"/>
+<area shape="rect" id="Node000018" href="$classElement.html#a65eeb90dcb62974be8d19fbc13d78061" title=" " alt="" coords="658,628,813,653"/>
+<area shape="poly" id="edge20_Node000017_Node000018" title=" " alt="" coords="503,700,547,688,571,675,595,662,644,649,645,655,597,667,573,680,549,692,505,705"/>
+<area shape="rect" id="Node000019" href="$classMUSGmshV2.html#af6870f63d79700367512f1ed565bf09f" title=" " alt="" coords="636,677,835,703"/>
+<area shape="poly" id="edge21_Node000017_Node000019" title=" " alt="" coords="539,703,622,697,622,702,539,709"/>
+<area shape="rect" id="Node000020" href="$classCoord.html#af96ea861b2a73538910c508d414b33a4" title="Set the values of the Coord object." alt="" coords="678,727,793,752"/>
+<area shape="poly" id="edge23_Node000017_Node000020" title=" " alt="" coords="539,721,664,731,664,737,539,727"/>
+<area shape="poly" id="edge22_Node000019_Node000007" title=" " alt="" coords="834,683,855,675,873,663,906,628,933,587,954,543,970,497,989,410,996,344,1002,345,994,411,975,498,959,545,938,590,911,631,876,667,857,679,836,688"/>
+</map>

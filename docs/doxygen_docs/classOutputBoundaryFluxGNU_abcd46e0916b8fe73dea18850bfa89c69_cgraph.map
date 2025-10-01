@@ -1,0 +1,43 @@
+<map id="OutputBoundaryFluxGNU::getFlux" name="OutputBoundaryFluxGNU::getFlux">
+<area shape="rect" id="Node000001" title="Get flux either massflow or enthalpy through the boundary." alt="" coords="5,110,192,150"/>
+<area shape="rect" id="Node000002" href="$classOutputBoundaryFluxGNU.html#af9cbb615a15ddc44d036a7e357f5eb4d" title="Extract enthalpy flux throught the whole boundary surface." alt="" coords="240,142,427,182"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="192,140,227,145,226,150,192,145"/>
+<area shape="rect" id="Node000018" href="$classOutputBoundaryFluxGNU.html#ad41c1169c4dd41a6c989ec1787d33a66" title="Extract massflow throught the whole boundary surface." alt="" coords="240,78,427,118"/>
+<area shape="poly" id="edge21_Node000001_Node000018" title=" " alt="" coords="192,115,226,110,227,115,192,120"/>
+<area shape="rect" id="Node000003" href="$classParallel.html#a85180028782f0bbfc02e5ee7e57dd5a3" title=" " alt="" coords="523,92,687,117"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="420,139,474,127,523,117,524,123,475,132,421,144"/>
+<area shape="rect" id="Node000004" href="$classOutputBoundaryFluxGNU.html#a89a2d9a15398d663d1a117ea6becd33d" title="Compute the enthalpy flux contribution of a single cell interface." alt="" coords="489,142,721,182"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="427,159,475,159,475,165,427,165"/>
+<area shape="rect" id="Node000010" href="$classOutputBoundaryFluxGNU.html#acbf898f60e056715b70a2272ca5a48bb" title="Compute the enthalpy flux contribution of a single cell interface when MRF is activated." alt="" coords="475,223,736,263"/>
+<area shape="poly" id="edge10_Node000002_Node000010" title=" " alt="" coords="402,179,525,217,524,222,400,184"/>
+<area shape="rect" id="Node000005" href="$classOutputBoundaryFluxGNU.html#aca8b14afc7059fa8abfac620c56f60f2" title="Compute the massflow contribution of a single cell interface." alt="" coords="784,50,971,90"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="691,139,735,126,814,93,817,98,737,131,692,144"/>
+<area shape="rect" id="Node000006" href="$classCellInterface.html#aad808f6790124fc637d4289470681540" title=" " alt="" coords="1019,33,1225,59"/>
+<area shape="poly" id="edge9_Node000004_Node000006" title=" " alt="" coords="713,140,734,126,745,116,751,105,756,81,763,57,770,46,783,36,818,19,856,8,895,4,935,3,1010,12,1072,27,1070,32,1009,17,935,9,896,9,857,14,820,24,785,40,774,49,767,59,761,82,756,107,749,119,738,131,716,144"/>
+<area shape="poly" id="edge5_Node000005_Node000006" title=" " alt="" coords="971,58,1005,55,1005,60,971,63"/>
+<area shape="rect" id="Node000008" href="$classCellInterface.html#a6427c77e8246803b4e940cda6c596555" title=" " alt="" coords="1041,248,1203,273"/>
+<area shape="poly" id="edge7_Node000005_Node000008" title=" " alt="" coords="906,88,1095,237,1092,241,902,92"/>
+<area shape="rect" id="Node000009" href="$classFace.html#afb0df2ee2b760695be90150d3e0033d4" title=" " alt="" coords="1057,83,1187,108"/>
+<area shape="poly" id="edge8_Node000005_Node000009" title=" " alt="" coords="971,77,1044,85,1044,90,971,82"/>
+<area shape="rect" id="Node000007" href="$classErrors.html#a78eeb532e12787fee07b78aa5ef6a0c6" title=" " alt="" coords="1273,33,1431,59"/>
+<area shape="poly" id="edge6_Node000006_Node000007" title=" " alt="" coords="1226,43,1260,43,1260,49,1226,49"/>
+<area shape="poly" id="edge11_Node000010_Node000005" title=" " alt="" coords="684,221,711,208,734,192,750,171,758,151,765,129,782,107,799,94,802,99,786,110,770,131,763,152,755,174,738,196,713,213,686,226"/>
+<area shape="poly" id="edge13_Node000010_Node000006" title=" " alt="" coords="671,221,735,192,758,171,768,161,783,150,833,130,876,123,919,117,969,99,993,84,1017,67,1037,60,1039,65,1020,72,996,88,972,104,920,122,877,128,835,135,785,155,771,165,762,175,737,196,674,226"/>
+<area shape="poly" id="edge15_Node000010_Node000008" title=" " alt="" coords="632,261,698,308,740,330,785,347,836,360,877,364,919,360,970,347,1005,334,1039,317,1094,279,1097,284,1042,321,1007,339,971,352,919,365,877,369,835,365,783,352,738,335,695,312,629,266"/>
+<area shape="rect" id="Node000011" href="$classFace.html#a2ae676e7576a92b93d0caa8cd5cd00a8" title=" " alt="" coords="808,464,947,489"/>
+<area shape="poly" id="edge12_Node000010_Node000011" title=" " alt="" coords="620,262,645,302,682,353,730,406,785,450,796,456,794,461,783,455,726,410,678,357,641,305,616,265"/>
+<area shape="rect" id="Node000012" href="$classCellInterface.html#a307a9959bf3088ad94b1b63efd696bc2" title=" " alt="" coords="786,165,969,191"/>
+<area shape="poly" id="edge14_Node000010_Node000012" title=" " alt="" coords="689,221,810,191,811,196,690,226"/>
+<area shape="rect" id="Node000013" href="$classFace.html#ad51432bc490b6b3e8cfe2dcde9232716" title=" " alt="" coords="813,215,941,240"/>
+<area shape="poly" id="edge16_Node000010_Node000013" title=" " alt="" coords="736,233,800,229,800,234,736,238"/>
+<area shape="rect" id="Node000014" href="$classCell.html#a9bacd416af165d5e3d3a0216e85667b5" title=" " alt="" coords="813,415,941,440"/>
+<area shape="poly" id="edge17_Node000010_Node000014" title=" " alt="" coords="627,262,694,326,738,361,785,393,817,408,815,412,783,398,735,366,690,330,624,266"/>
+<area shape="rect" id="Node000016" href="$classFace.html#a5bc243884273fd8eb4398aed1aca23c6" title=" " alt="" coords="812,264,943,289"/>
+<area shape="poly" id="edge19_Node000010_Node000016" title=" " alt="" coords="737,257,798,264,798,270,736,262"/>
+<area shape="rect" id="Node000017" href="$classCoord.html#a1b381e27cb37da6657a3852cbbd8b564" title="Reverse projection in the absolute Cartesian coordinate system." alt="" coords="786,313,969,339"/>
+<area shape="poly" id="edge20_Node000010_Node000017" title=" " alt="" coords="667,261,785,298,816,307,814,312,783,303,666,266"/>
+<area shape="rect" id="Node000015" href="$classElement.html#afd0c738f0671feeb7ef4fe7b0a346f5c" title=" " alt="" coords="1043,415,1201,440"/>
+<area shape="poly" id="edge18_Node000014_Node000015" title=" " alt="" coords="942,425,1029,425,1029,430,942,430"/>
+<area shape="poly" id="edge23_Node000018_Node000003" title=" " alt="" coords="427,97,510,100,510,105,427,103"/>
+<area shape="poly" id="edge22_Node000018_Node000005" title=" " alt="" coords="426,81,474,77,629,69,770,67,770,72,630,74,475,82,427,87"/>
+</map>

@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <meta charset="utf-8" />
+  <meta http-equiv="x-ua-compatible" content="ie=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <title>Overview</title>
+
+  <link rel="stylesheet" href="/ECOGEN/assets/css/styles.css">
+  <link rel="shortcut icon" type="image/png" href="/ECOGEN/assets/images/favicon.png">
+  <link
+    rel="canonical"
+    href="https://code-mphi.github.io/ECOGEN/overview/"
+  />
+  <link
+    href="https://fonts.googleapis.com/css?family=Open+Sans:400,300,700,800,600"
+    rel="stylesheet"
+    type="text/css"
+  />
+  <link
+    href="https://fonts.googleapis.com/css?family=Muli:400,300"
+    rel="stylesheet"
+    type="text/css"
+  />
+
+</head>
+
+  <body>
+    <header>
+	<div id="bandeau">
+		<div id="logo">
+			<a href="/ECOGEN/" >  
+				<img src="/ECOGEN/assets/images/favicon.png" alt="logo ECOGEN" />
+			</a>
+		</div>
+		<nav>
+	<ul>
+	  
+	  	<li><a href="/ECOGEN/overview/">Overview</a></li>
+	  
+	  	<li><a href="/ECOGEN/gallery/">Gallery</a></li>
+	  
+	  	<li><a href="/ECOGEN/releases/">Releases</a></li>
+	  
+	  	<li><a href="/ECOGEN/ressources/">Ressources</a></li>
+	  
+	  	<li><a href="/ECOGEN/publications/">Publications</a></li>
+	  
+	  	<li><a href="/ECOGEN/services/">Services</a></li>
+	  
+	  	<li><a href="/ECOGEN/help/">Help</a></li>
+	  
+	  <!-- <li><a href="/ECOGEN/blog">Blog</a></li> -->
+	</ul>
+</nav>
+	</div>
+</header>
+
+
+
+    <main>
+		<h1>Overview</h1>
+		<div class="colonne">
+	<aside>
+		<h2> Sharing knowledge </h2>
+			<p>ECOGEN is a CFD platform dedicated to numerical simulation of compressible multiphase flows. It has the vocation to share academic research in the multiphase flow field with other academics but also with industrials and students.
+			<ul>  
+				<li> Multi-models (single phase, multiphase with or without equilibrium). </li>
+				<li> Multi-physics (thermal transfers, viscosity, surface tension, mass transfers). </li>
+				<li> Multi-meshes (Cartesian, unstructured, AMR). </li>
+				<li> HPC. </li>
+			</ul>
+			</p>
+		<h2> Features </h2>
+		<ul>		
+			<li> Solves interface problems between pure or multicomponent fluids and mixtures of multiphase flows. </li>
+			<li> Treats surface tension, heat and mass transfers for cavitation and evaporating and condensing flows. </li>
+			<li> Computes wave propagation in strongly unsteady situations using a specific Adaptive Mesh Refinement. </li>
+			<li> Finite volume method. </li>
+			<li> C++ object oriented programming language. </li>
+			<li> Computes unstructured grids to simulate complex geometries. </li>
+			<li> Parallel computing using open MPI libraries. </li>			
+		</ul>	
+	</aside>
+	<div>
+		<article>
+			<h3> <span class="lettre">E</span>COGEN is Evolutive </h3>
+			<p>Academic research results never represent achievements but rather step forwards. This is all the more noticeable in the young discipline of numerical sciences where models and methods are in constant evolution to better represent physical phenomena. In the structure of ECOGEN, the modular aspect of C++ programming language has been used to help developing future evolutions. </p>
+			<img src="/ECOGEN/assets/images/mainClasses.png" alt="general ECOGEN structure" />
+			<p>Thanks to that, it becomes easy for developers to add a new equation of state or a flow model. </p>
+		</article>
+		<article>
+			<h3> E<span class="lettre">C</span>OGEN is designed for Compressible flows </h3>
+			<p>Compressible information is transmitted thanks to wave propagation. Mathematical systems of equations modeling compressible flows present hyperbolic formulations that should be specifically treated numerically. </p>
+			<div class="flex">
+				<img src="/ECOGEN/assets/images/shocks.png" alt="shock waves" />
+				<p>ECOGEN is designed for such compressible flows. </p>
+			</div>
+		</article>
+		<article>
+			<h3> EC<span class="lettre">O</span>GEN is Open Source </h3>
+			<p>ECOGEN is an open-source project distributed under <a href="https://www.gnu.org/licenses/gpl-3.0.en.html" target="_blank"> GNU GPLv3 License </a> and available on <a href="https://github.com/code-mphi/ECOGEN" target="_blank"> GitHub</a>. Interested developers are encouraged to contribute in the project. </p>
+		</article>
+		<article>
+			<h3> ECO<span class="lettre">G</span>EN is Genuine </h3>
+			<div class="flex">
+				<p>Existing CFD codes can treat multiphase flows, but ECOGEN is the first to use the diffuse-interface theory to dynamically capture the complex shapes of multiphase flows on structured or unstructured grids. Moreover, it includes an Adaptive Mesh Refinement (AMR) method for Cartesian grids specifically developed and optimized for such multiphase flows and now equiped with efficient load balancing for multicore computations. </p>
+				<img src="/ECOGEN/assets/images/maillage.png" alt="mesh" />
+			</div>
+		</article>
+		<article>
+			<h3> ECOG<span class="lettre">E</span>N is Easy </h3>
+			<p>All you need is a C++ compiler running with Message Passing Interface (MPI) library to use ECOGEN. The standard VTK file format used for results makes the post-treatment flexible. Just follow the tutorials and compute! </p>
+		</article>	
+		<article>
+			<h3> ECOGE<span class="lettre">N</span> is N-phase </h3>
+			<p>Even if ECOGEN is able to solve single-phase gas or compressible liquid dynamics, it reveals its power when a flow is composed with an arbitrary number of phases. If you can now simulate a liquid phase with its vapor, there is no difficulty to add one or several inert phases in the flow. </p>
+		</article>
+	</div>
+</div>
+
+    </main>
+    <footer>
+	<div> ECOGEN is developped by <a href="https://code-mphi.fr/" target="_blank" > Code-m&Phi; </a> members </div>
+	<div><span class="copy-left">©</span> ECOGEN</div>
+	<div class="flexZone">
+		<div class="design">
+			<p>Design web:</p>
+		</div> 
+		<div class="design">
+			<a href="mailto:productiondulama@gmail.com" target="_blank" > <img src="/ECOGEN/assets/images/productionduLama.png" alt="production du Lama" /> </a> 
+		</div>
+	</div>
+</footer>
+  </body>
+</html>
+

@@ -1,0 +1,25 @@
+var classFluxPTUEq =
+[
+    [ "FluxPTUEq", "classFluxPTUEq.html#a37bd16471fcd6dacf102323c8db7ce8c", null ],
+    [ "~FluxPTUEq", "classFluxPTUEq.html#a99d92fe192dad9560c3b6f9407866a60", null ],
+    [ "addFlux", "classFluxPTUEq.html#af4c1c3e8ec0a812cf7ed4f4ba096c790", null ],
+    [ "addFlux", "classFluxPTUEq.html#a6fb01db27ffc46e05927470e3a9ef44a", null ],
+    [ "addNonCons", "classFluxPTUEq.html#a571b03e8a84c9e950e2742a9780671d4", null ],
+    [ "buildCons", "classFluxPTUEq.html#ac4bac5d882178b5b1faaa61b338d45de", null ],
+    [ "buildPrim", "classFluxPTUEq.html#a56b4822f3b4ca96c1d7658df57894228", null ],
+    [ "getEnergyMix", "classFluxPTUEq.html#a0d294ccb2b42d18513ca872549f5b5b2", null ],
+    [ "getMass", "classFluxPTUEq.html#a3afb1d48644cde26097fb0a869bb62e4", null ],
+    [ "getMomentum", "classFluxPTUEq.html#a0478133dbfca50d5ab42ba4c56ce1c67", null ],
+    [ "multiply", "classFluxPTUEq.html#ab40e0416ef156489fcc78a82006a48e1", null ],
+    [ "prepSourceTermsHeating", "classFluxPTUEq.html#ad32675acb2a504d26816d18f5ed7db93", null ],
+    [ "printFlux", "classFluxPTUEq.html#a5f948de404001f6fb24e57dbff6e98d7", null ],
+    [ "setBufferFlux", "classFluxPTUEq.html#aa4319e8b8f10d6728fbd1ae7ca85f1bc", null ],
+    [ "setCons", "classFluxPTUEq.html#ac0e5efb3ab49224554be4ab053ba839c", null ],
+    [ "setToZero", "classFluxPTUEq.html#a5f251de2150dd03fff6e06bd71817f89", null ],
+    [ "subtractFlux", "classFluxPTUEq.html#a942996956e48d07ff5b697b042683275", null ],
+    [ "subtractNonCons", "classFluxPTUEq.html#a631d71e83d2bb414f3099075f2d310f0", null ],
+    [ "ModPTUEq", "classFluxPTUEq.html#abd14ba035d30d7664539fadede898c07", null ],
+    [ "m_energMixture", "classFluxPTUEq.html#afc66bc8423bf9a25d9d59402597301d2", null ],
+    [ "m_mass", "classFluxPTUEq.html#a438338f94e8202c38dc5e9e697c51e78", null ],
+    [ "m_momentum", "classFluxPTUEq.html#a80efe5e711536e9a7dc5ef68a37e2460", null ]
+];

@@ -1,0 +1,21 @@
+<map id="Flux::subtractFlux" name="Flux::subtractFlux">
+<area shape="rect" id="Node000001" title="Subtract flux to the corresponding model buffer flux." alt="" coords="844,129,983,155"/>
+<area shape="rect" id="Node000002" href="$classCellInterface.html#a483ee91df480febc2a82201b39905cc3" title=" " alt="" coords="587,80,782,105"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="840,129,744,108,745,103,841,124"/>
+<area shape="rect" id="Node000006" href="$classAddPhys.html#aec27150cc7188ee51ac1e9e2c7588d97" title="Subtract the additional physic flux between two cells at the corresponding cell." alt="" coords="573,153,796,179"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="830,153,797,157,796,152,830,148"/>
+<area shape="rect" id="Node000003" href="$classCellInterface.html#acc96276cbae58430f8e9145321607bff" title=" " alt="" coords="313,5,511,31"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="634,78,525,45,478,33,479,28,526,39,635,73"/>
+<area shape="rect" id="Node000004" href="$classBoundCond.html#a5f63d38480e6f872e612591f539fdd5f" title=" " alt="" coords="317,55,507,80"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="573,85,507,79,507,73,574,80"/>
+<area shape="rect" id="Node000005" href="$classCellInterfaceO2.html#ab050bdf2b0736109b6f3aa6281585de3" title=" " alt="" coords="304,104,520,129"/>
+<area shape="poly" id="edge4_Node000002_Node000005" title=" " alt="" coords="574,105,520,110,520,105,573,100"/>
+<area shape="rect" id="Node000007" href="$classAddPhys.html#af7b64716ee631ef5e61b3e11a660fee0" title="Compute the additional physic flux between two cells." alt="" coords="299,153,525,179"/>
+<area shape="poly" id="edge6_Node000006_Node000007" title=" " alt="" coords="560,169,525,169,525,163,560,163"/>
+<area shape="rect" id="Node000009" href="$classAddPhys.html#afafbee0538e35c1cab18305e3fe094ea" title="Compute the additional physic flux at a domain boundary." alt="" coords="299,203,525,243"/>
+<area shape="poly" id="edge8_Node000006_Node000009" title=" " alt="" coords="611,184,508,206,507,201,610,179"/>
+<area shape="rect" id="Node000008" href="$classCellInterface.html#af5640a494bde517e96a7526283cc9e36" title=" " alt="" coords="29,146,227,186"/>
+<area shape="poly" id="edge7_Node000007_Node000008" title=" " alt="" coords="284,169,227,169,227,163,284,163"/>
+<area shape="rect" id="Node000010" href="$classBoundCond.html#a253381219ff6338519f3f68e3ab6a489" title=" " alt="" coords="5,211,251,236"/>
+<area shape="poly" id="edge9_Node000009_Node000010" title=" " alt="" coords="285,226,251,226,251,221,285,221"/>
+</map>

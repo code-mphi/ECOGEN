@@ -1,0 +1,100 @@
+<map id="Coord::norm" name="Coord::norm">
+<area shape="rect" id="Node000001" title="Return the value of the norm of the Coord object." alt="" coords="1109,1033,1212,1058"/>
+<area shape="rect" id="Node000002" href="$classAPUEqSurfaceTension.html#a89d60064b5f8eac6159c7b5127f73a20" title="Add the symmetrical terms of the corresponding additional physic in a cell (when radial axis is on X)" alt="" coords="801,5,1061,45"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="1156,1019,1148,816,1130,510,1117,355,1101,219,1081,115,1071,80,1059,59,1046,47,1050,43,1063,56,1076,78,1086,113,1106,218,1122,355,1135,510,1153,816,1161,1019"/>
+<area shape="rect" id="Node000003" href="$classAPUEqSurfaceTension.html#a8f53baaafa00b9a4d7709e1539c71dbc" title="Add the symmetrical terms of the corresponding additional physic in a cell (when radial axis is on Y)" alt="" coords="802,69,1061,109"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="1156,1019,1147,828,1128,542,1114,398,1099,271,1080,175,1070,142,1059,123,1046,111,1050,107,1063,120,1075,140,1085,173,1104,270,1120,398,1133,542,1152,827,1161,1019"/>
+<area shape="rect" id="Node000004" href="$classElementHexahedron.html#a7b919da5dbb3dd9f03e18c38bfafa6cf" title=" " alt="" coords="850,133,1013,173"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="1155,1019,1145,840,1126,575,1112,441,1097,324,1079,235,1069,205,1059,187,1038,170,1012,160,1014,155,1041,166,1063,184,1074,203,1084,233,1102,323,1118,441,1131,574,1151,840,1161,1019"/>
+<area shape="rect" id="Node000005" href="$classElementPrism.html#a195b7c84fec8bf59450269fc00467339" title=" " alt="" coords="827,198,1036,223"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="1155,1019,1145,848,1125,599,1112,474,1096,364,1078,280,1069,253,1059,236,1035,220,1038,215,1063,233,1074,251,1084,279,1101,363,1117,473,1130,598,1150,848,1161,1019"/>
+<area shape="rect" id="Node000006" href="$classElementPyramid.html#abcaa4677e366ffcf18a6353e17a48cc6" title=" " alt="" coords="818,247,1045,273"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="1157,1019,1157,869,1147,648,1135,534,1118,430,1093,344,1077,312,1059,287,1043,274,1047,270,1063,283,1082,309,1097,342,1123,428,1141,533,1152,648,1162,869,1163,1019"/>
+<area shape="rect" id="Node000007" href="$classElementTetrahedron.html#a051bcd399fb71785fa353050e78268ca" title=" " alt="" coords="855,297,1008,337"/>
+<area shape="poly" id="edge6_Node000001_Node000007" title=" " alt="" coords="1157,1019,1154,880,1142,679,1130,576,1113,481,1089,403,1075,374,1059,351,1036,334,1007,324,1009,319,1038,329,1063,347,1080,371,1094,402,1118,480,1135,575,1147,679,1159,880,1162,1019"/>
+<area shape="rect" id="Node000008" href="$classElementTriangle.html#a855b945934b54a01e489a16034573c77" title=" " alt="" coords="820,362,1043,387"/>
+<area shape="poly" id="edge7_Node000001_Node000008" title=" " alt="" coords="1157,1019,1153,889,1140,702,1128,607,1111,520,1088,449,1074,422,1059,402,1041,388,1045,384,1063,398,1079,419,1093,447,1116,519,1133,606,1145,702,1158,888,1162,1019"/>
+<area shape="rect" id="Node000009" href="$classCellO2GhostCartesian.html#a4e3ce536498e90e00c487db29e6f37dd" title=" " alt="" coords="849,412,1014,452"/>
+<area shape="poly" id="edge8_Node000001_Node000009" title=" " alt="" coords="1156,1019,1150,900,1135,734,1122,649,1106,572,1085,508,1073,484,1059,466,1038,450,1013,440,1015,435,1041,445,1063,462,1077,481,1090,506,1111,570,1127,648,1140,733,1155,900,1161,1018"/>
+<area shape="rect" id="Node000010" href="$classFacePoint.html#aacb894b509661fccc7b83ca29b95b973" title=" " alt="" coords="834,477,1029,502"/>
+<area shape="poly" id="edge9_Node000001_Node000010" title=" " alt="" coords="1156,1019,1149,909,1133,757,1120,680,1104,610,1084,553,1072,531,1059,515,1045,504,1028,496,1030,491,1048,500,1063,511,1077,528,1089,551,1109,609,1125,679,1138,756,1154,909,1161,1019"/>
+<area shape="rect" id="Node000011" href="$classFaceQuadrangle.html#a0ea70da807189890a7957359a1b8deb1" title=" " alt="" coords="813,526,1050,551"/>
+<area shape="poly" id="edge10_Node000001_Node000011" title=" " alt="" coords="1155,1019,1147,919,1129,781,1117,712,1101,649,1082,598,1059,564,1045,554,1048,549,1063,561,1087,596,1106,648,1122,711,1135,781,1152,918,1160,1019"/>
+<area shape="rect" id="Node000012" href="$classFaceSegment.html#a5c57b86dcd6204ed183aa997d9b387a2" title=" " alt="" coords="821,575,1041,601"/>
+<area shape="poly" id="edge11_Node000001_Node000012" title=" " alt="" coords="1154,1019,1145,928,1126,806,1113,744,1098,689,1080,644,1059,614,1040,600,1043,596,1063,610,1085,641,1103,687,1118,743,1131,805,1150,927,1160,1019"/>
+<area shape="rect" id="Node000013" href="$classFaceTriangle.html#a04400c3b41c8d131903a3862685aad0f" title=" " alt="" coords="825,625,1038,650"/>
+<area shape="poly" id="edge12_Node000001_Node000013" title=" " alt="" coords="1154,1019,1142,937,1123,830,1095,728,1078,689,1059,663,1037,648,1040,644,1063,659,1083,686,1100,726,1128,829,1147,937,1159,1019"/>
+<area shape="rect" id="Node000014" href="$classFaceQuadrangle.html#ac592c507daf86ff1589df6b33212be01" title=" " alt="" coords="811,674,1051,699"/>
+<area shape="poly" id="edge13_Node000001_Node000014" title=" " alt="" coords="1158,1019,1155,956,1143,873,1130,829,1113,786,1090,747,1060,713,1044,702,1047,697,1063,709,1094,743,1118,784,1135,827,1148,871,1160,955,1163,1019"/>
+<area shape="rect" id="Node000015" href="$classFaceTriangle.html#ac6e82d6844c779c3acbf8f59675c309d" title=" " alt="" coords="823,723,1039,749"/>
+<area shape="poly" id="edge14_Node000001_Node000015" title=" " alt="" coords="1156,1019,1150,964,1135,895,1123,859,1107,823,1086,791,1060,763,1038,750,1041,745,1063,759,1090,788,1111,821,1128,857,1140,893,1156,964,1161,1018"/>
+<area shape="rect" id="Node000016" href="$classElementQuadrangle.html#a4742811dcbbcb8c5b5af24d11be4cb71" title=" " alt="" coords="852,773,1011,813"/>
+<area shape="poly" id="edge15_Node000001_Node000016" title=" " alt="" coords="1153,1019,1143,977,1125,925,1098,872,1080,848,1060,827,1036,813,1010,803,1012,798,1039,808,1063,823,1084,845,1103,869,1130,923,1148,975,1158,1018"/>
+<area shape="rect" id="Node000017" href="$classElementTriangle.html#a24c545e4c8d68efeb7f048b973e60acd" title=" " alt="" coords="835,837,1027,877"/>
+<area shape="poly" id="edge16_Node000001_Node000017" title=" " alt="" coords="1148,1021,1116,955,1091,921,1060,892,1027,874,1029,870,1063,887,1095,917,1120,953,1153,1019"/>
+<area shape="rect" id="Node000018" href="$classCoord.html#a6c1fd1ce08474e089298abc7f426b912" title="Compute some sort of cosinus between two vectors." alt="" coords="886,926,977,951"/>
+<area shape="poly" id="edge17_Node000001_Node000018" title=" " alt="" coords="1137,1024,1103,993,1060,965,1018,951,976,944,977,939,1019,946,1062,960,1106,989,1140,1020"/>
+<area shape="rect" id="Node000019" href="$classGOVertex.html#a69448ebd4310188b0c71a839b9c7d116" title="Compute the distance between a vertex and the corresponding geometric object." alt="" coords="841,975,1021,1001"/>
+<area shape="poly" id="edge19_Node000001_Node000019" title=" " alt="" coords="1110,1031,1061,1016,1005,1003,1006,998,1062,1011,1112,1026"/>
+<area shape="rect" id="Node000020" href="$classCellO2Cartesian.html#a9529913015879381970c1fc01e34545c" title=" " alt="" coords="836,1025,1027,1065"/>
+<area shape="poly" id="edge20_Node000001_Node000020" title=" " alt="" coords="1096,1048,1027,1048,1027,1043,1096,1043"/>
+<area shape="rect" id="Node000021" href="$classGOLine.html#aa9af492d9205417dac4142744cf1f3db" title=" " alt="" coords="582,1147,706,1173"/>
+<area shape="poly" id="edge21_Node000001_Node000021" title=" " alt="" coords="1140,1070,1105,1099,1062,1124,1016,1139,968,1151,871,1165,780,1169,706,1167,706,1162,780,1164,870,1160,967,1146,1015,1134,1060,1119,1102,1095,1136,1066"/>
+<area shape="rect" id="Node000022" href="$classGOPlan.html#a19b5b17a146e66882f2c9f32f29fa37a" title=" " alt="" coords="318,1205,445,1230"/>
+<area shape="poly" id="edge22_Node000001_Node000022" title=" " alt="" coords="1114,1065,1062,1080,982,1094,914,1100,796,1101,739,1101,680,1106,613,1117,535,1137,497,1152,460,1171,402,1207,399,1202,457,1166,495,1147,534,1132,612,1111,679,1100,739,1096,796,1096,913,1095,981,1088,1061,1075,1113,1060"/>
+<area shape="rect" id="Node000023" href="$classModEulerKorteweg.html#aa84464a570842e368a669e4307d91fa3" title="Complete the augmented variables (such as the ones of Euler&#45;Korteweg model)" alt="" coords="827,1191,1035,1231"/>
+<area shape="poly" id="edge23_Node000001_Node000023" title=" " alt="" coords="1149,1071,1115,1123,1091,1151,1063,1174,1026,1193,1024,1188,1060,1170,1087,1147,1110,1120,1144,1069"/>
+<area shape="rect" id="Node000024" href="$classCoord.html#a7375b11e6056628709b50625c19ec562" title="Divide the present vector by its norm." alt="" coords="861,1255,1002,1281"/>
+<area shape="poly" id="edge24_Node000001_Node000024" title=" " alt="" coords="1157,1073,1146,1111,1128,1158,1100,1205,1083,1227,1063,1245,1034,1260,1003,1268,1002,1263,1032,1255,1060,1240,1079,1223,1096,1202,1123,1156,1141,1110,1151,1071"/>
+<area shape="rect" id="Node000026" href="$classMixture.html#a02acb15ef15bad18e6c01142f27e7d44" title="Print mixture variables in file stream." alt="" coords="851,1305,1011,1330"/>
+<area shape="poly" id="edge29_Node000001_Node000026" title=" " alt="" coords="1160,1073,1152,1121,1135,1181,1107,1242,1087,1270,1063,1294,1039,1309,1012,1317,1011,1312,1037,1304,1060,1290,1083,1267,1102,1240,1130,1179,1146,1120,1154,1072"/>
+<area shape="rect" id="Node000030" href="$classPhase.html#a53725f05ad382013b311bad1f906fa3b" title="Print phase variables in file stream." alt="" coords="862,1354,1001,1379"/>
+<area shape="poly" id="edge33_Node000001_Node000030" title=" " alt="" coords="1162,1072,1157,1129,1142,1203,1130,1241,1113,1279,1091,1313,1063,1343,1034,1361,1001,1369,1000,1364,1032,1356,1060,1339,1087,1310,1108,1276,1125,1239,1137,1201,1151,1128,1156,1072"/>
+<area shape="rect" id="Node000031" href="$classCell.html#a19118e67a903a9ec9b869416a40cbd79" title=" " alt="" coords="815,1404,1047,1444"/>
+<area shape="poly" id="edge35_Node000001_Node000031" title=" " alt="" coords="1163,1072,1160,1136,1148,1222,1135,1268,1118,1314,1094,1356,1063,1393,1045,1406,1042,1402,1059,1389,1089,1353,1113,1311,1130,1267,1142,1221,1155,1136,1157,1071"/>
+<area shape="rect" id="Node000033" href="$classModEuler.html#ae49859059512848c5c61b6d6a52c242a" title="Select a specific scalar variable." alt="" coords="846,1469,1017,1494"/>
+<area shape="poly" id="edge37_Node000001_Node000033" title=" " alt="" coords="1159,1072,1149,1159,1129,1275,1101,1386,1084,1429,1063,1458,1042,1473,1018,1481,1016,1476,1039,1468,1059,1454,1079,1426,1096,1384,1124,1274,1143,1159,1154,1072"/>
+<area shape="rect" id="Node000034" href="$classModEulerKorteweg.html#a3c54a011be9c17b72c8232162fe710eb" title="Select a specific scalar variable." alt="" coords="836,1519,1027,1559"/>
+<area shape="poly" id="edge38_Node000001_Node000034" title=" " alt="" coords="1160,1072,1150,1168,1132,1298,1119,1364,1103,1424,1085,1473,1063,1507,1047,1520,1028,1530,1026,1525,1044,1516,1059,1504,1080,1471,1098,1422,1114,1363,1127,1298,1145,1168,1155,1072"/>
+<area shape="rect" id="Node000035" href="$classModEulerHomogeneous.html#aeecd24b282e484253d82ee4bbf796420" title="Select a specific scalar variable." alt="" coords="843,1583,1020,1623"/>
+<area shape="poly" id="edge39_Node000001_Node000035" title=" " alt="" coords="1161,1072,1153,1180,1136,1330,1124,1406,1108,1476,1088,1533,1063,1572,1044,1588,1021,1598,1019,1593,1041,1583,1059,1569,1083,1531,1102,1475,1118,1405,1131,1329,1148,1180,1155,1072"/>
+<area shape="rect" id="Node000036" href="$classModPTUEq.html#a75b32a793c62a6bda56a592bd0b78486" title="Select a specific scalar variable." alt="" coords="842,1647,1021,1673"/>
+<area shape="poly" id="edge40_Node000001_Node000036" title=" " alt="" coords="1161,1072,1156,1192,1142,1362,1129,1448,1112,1527,1091,1592,1078,1617,1063,1637,1044,1651,1022,1660,1020,1655,1041,1646,1059,1633,1073,1615,1086,1590,1107,1526,1124,1448,1136,1361,1151,1192,1156,1072"/>
+<area shape="rect" id="Node000037" href="$classModPUEq.html#a0094691b0769e269cf0394b26fc0cecf" title="Select a specific scalar variable." alt="" coords="846,1697,1017,1722"/>
+<area shape="poly" id="edge41_Node000001_Node000037" title=" " alt="" coords="1162,1072,1158,1201,1145,1386,1132,1480,1115,1567,1093,1637,1079,1665,1063,1686,1042,1701,1018,1710,1016,1705,1040,1697,1059,1682,1074,1662,1088,1635,1110,1565,1127,1479,1139,1385,1153,1201,1156,1072"/>
+<area shape="rect" id="Node000038" href="$classModUEq.html#a3cafb1f8493ba48fe3b6e350fe80db39" title="Select a specific scalar variable." alt="" coords="850,1746,1013,1771"/>
+<area shape="poly" id="edge42_Node000001_Node000038" title=" " alt="" coords="1162,1072,1160,1210,1148,1410,1136,1512,1118,1606,1095,1683,1080,1712,1063,1735,1040,1752,1014,1761,1012,1756,1038,1747,1059,1731,1075,1710,1090,1681,1113,1604,1130,1511,1142,1409,1155,1210,1157,1072"/>
+<area shape="rect" id="Node000039" href="$classModUEqTotEnergy.html#a2caba8667b4563de3be75de64583ca1a" title="Select a specific scalar variable." alt="" coords="818,1795,1045,1821"/>
+<area shape="poly" id="edge43_Node000001_Node000039" title=" " alt="" coords="1162,1072,1162,1218,1151,1433,1139,1543,1121,1644,1097,1728,1081,1760,1063,1785,1047,1798,1043,1794,1059,1781,1076,1757,1092,1726,1116,1643,1134,1542,1146,1432,1156,1218,1157,1072"/>
+<area shape="rect" id="Node000040" href="$classCoord.html#aad208a545910755ca100af63a9f8a721" title="Compute some sort of sinus between two vectors." alt="" coords="888,1869,975,1894"/>
+<area shape="poly" id="edge44_Node000001_Node000040" title=" " alt="" coords="1162,1072,1161,1226,1149,1453,1137,1571,1120,1680,1095,1770,1081,1806,1063,1834,1045,1851,1022,1864,976,1879,974,1874,1020,1859,1042,1847,1059,1830,1076,1804,1090,1769,1114,1679,1132,1570,1144,1452,1155,1226,1157,1072"/>
+<area shape="rect" id="Node000041" href="$classAPUEqSurfaceTension.html#a440819d9a598b902c6df96c9a9a84a5c" title="Solve the surface&#45;tension flux between two cells." alt="" coords="819,1919,1043,1959"/>
+<area shape="poly" id="edge46_Node000001_Node000041" title=" " alt="" coords="1161,1072,1151,1251,1131,1516,1118,1650,1102,1768,1084,1857,1074,1888,1063,1907,1045,1922,1042,1918,1059,1904,1069,1886,1079,1856,1097,1767,1112,1649,1126,1516,1145,1251,1155,1072"/>
+<area shape="rect" id="Node000045" href="$classAPUEqSurfaceTension.html#a706f0c441aa85f0c57e7f56529ff6d50" title="Solve the surface&#45;tension flux at a boundary with a wall type." alt="" coords="535,1983,753,2023"/>
+<area shape="poly" id="edge50_Node000001_Node000045" title=" " alt="" coords="1161,1072,1153,1264,1136,1551,1123,1696,1106,1824,1087,1920,1076,1953,1063,1973,1042,1987,1011,1997,932,2010,841,2014,753,2012,753,2007,841,2008,932,2004,1010,1992,1039,1982,1059,1969,1071,1950,1082,1919,1101,1823,1117,1696,1130,1551,1148,1264,1156,1071"/>
+<area shape="rect" id="Node000046" href="$classModUEq.html#a5ed736f5e8b53ecf4dbb2590f8585374" title="Inlet tank half Riemann solver." alt="" coords="813,2034,1049,2059"/>
+<area shape="poly" id="edge52_Node000001_Node000046" title=" " alt="" coords="1161,1072,1153,1271,1134,1571,1121,1723,1105,1858,1086,1960,1075,1995,1063,2016,1037,2036,1034,2032,1059,2013,1070,1993,1081,1959,1100,1857,1116,1723,1129,1571,1147,1271,1156,1072"/>
+<area shape="poly" id="edge18_Node000018_Node000018" title=" " alt="" coords="973,917,962,908,931,905,907,907,894,912,891,917,898,924,894,928,886,918,890,908,906,902,931,899,964,903,976,913"/>
+<area shape="poly" id="edge27_Node000024_Node000021" title=" " alt="" coords="846,1262,800,1245,784,1233,775,1219,766,1206,752,1194,706,1175,708,1170,755,1190,770,1203,779,1216,788,1229,803,1240,848,1257"/>
+<area shape="poly" id="edge28_Node000024_Node000022" title=" " alt="" coords="847,1267,701,1259,534,1244,445,1231,445,1226,535,1239,701,1253,847,1262"/>
+<area shape="rect" id="Node000025" href="$classGOPlan.html#a9d8d9e75ca27725fc3368a67c9e4e632" title="Binormal vector of the plan." alt="" coords="569,1205,719,1230"/>
+<area shape="poly" id="edge25_Node000024_Node000025" title=" " alt="" coords="846,1256,716,1233,717,1227,847,1251"/>
+<area shape="poly" id="edge26_Node000025_Node000022" title=" " alt="" coords="555,1220,445,1220,445,1215,555,1215"/>
+<area shape="rect" id="Node000027" href="$classCell.html#a1ac62ee4d6954b16d2c14813ce283c34" title=" " alt="" coords="553,1330,735,1355"/>
+<area shape="poly" id="edge30_Node000026_Node000027" title=" " alt="" coords="838,1328,735,1337,735,1332,837,1323"/>
+<area shape="rect" id="Node000028" href="$classCell.html#ade40c3c3817944a75026a2fa5f8c149e" title=" " alt="" coords="298,1330,465,1355"/>
+<area shape="poly" id="edge31_Node000027_Node000028" title=" " alt="" coords="540,1345,465,1345,465,1340,540,1340"/>
+<area shape="rect" id="Node000029" href="$classOutputProbeGNU.html#af31dd2dd1b99bc6f3bb2213b86959827" title=" " alt="" coords="5,1330,228,1355"/>
+<area shape="poly" id="edge32_Node000028_Node000029" title=" " alt="" coords="284,1345,228,1345,228,1340,284,1340"/>
+<area shape="poly" id="edge34_Node000030_Node000027" title=" " alt="" coords="848,1362,735,1353,735,1348,848,1357"/>
+<area shape="rect" id="Node000032" href="$classCell.html#aa9b7f1bd34496d6c46d591cc4e467ca1" title=" " alt="" coords="543,1404,745,1444"/>
+<area shape="poly" id="edge36_Node000031_Node000032" title=" " alt="" coords="801,1427,746,1427,746,1421,801,1421"/>
+<area shape="poly" id="edge45_Node000040_Node000040" title=" " alt="" coords="973,1860,962,1851,931,1847,907,1849,894,1854,891,1860,898,1867,894,1870,886,1860,890,1850,906,1844,931,1842,964,1846,976,1855"/>
+<area shape="rect" id="Node000042" href="$classAPUEqSurfaceTension.html#a307e685fd9d5a391f5df628aed7bc4cf" title="Solve the additional physic flux between two cells." alt="" coords="563,1919,725,1959"/>
+<area shape="poly" id="edge47_Node000041_Node000042" title=" " alt="" coords="805,1941,726,1941,726,1936,805,1936"/>
+<area shape="rect" id="Node000043" href="$classAPUEqSurfaceTension.html#ae4e9758e55ffbf865719d917a49ad65a" title="Solve the surface&#45;tension flux at a boundary with an non&#45;reflecting type." alt="" coords="535,1839,753,1894"/>
+<area shape="poly" id="edge48_Node000041_Node000043" title=" " alt="" coords="837,1918,752,1896,754,1891,838,1913"/>
+<area shape="rect" id="Node000044" href="$classAPUEqSurfaceTension.html#af76c8f8ae36e4c9a4d19ef37a00e7c89" title="Solve the additional physic flux at a domain boundary." alt="" coords="276,1915,487,1955"/>
+<area shape="poly" id="edge49_Node000043_Node000044" title=" " alt="" coords="526,1900,460,1917,459,1912,524,1895"/>
+<area shape="poly" id="edge51_Node000045_Node000044" title=" " alt="" coords="552,1982,458,1957,460,1952,553,1977"/>
+</map>

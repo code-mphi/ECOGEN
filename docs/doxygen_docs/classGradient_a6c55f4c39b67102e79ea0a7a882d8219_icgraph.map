@@ -1,0 +1,25 @@
+<map id="Gradient::computeGradients" name="Gradient::computeGradients">
+<area shape="rect" id="Node000001" title="Compute gradients of a cell." alt="" coords="800,187,1007,212"/>
+<area shape="rect" id="Node000002" href="$classCell.html#af3a8f117f48af4ee1f6e65c15042bfa0" title="Compute gradients (temperature, velocity, density) of a cell." alt="" coords="573,161,748,187"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="786,190,748,186,748,180,787,184"/>
+<area shape="rect" id="Node000011" href="$classCell.html#a072b895161e1831388239e6b2885f571" title=" " alt="" coords="569,211,752,236"/>
+<area shape="poly" id="edge12_Node000001_Node000011" title=" " alt="" coords="787,214,753,217,752,212,786,208"/>
+<area shape="rect" id="Node000003" href="$classGradTransport.html#abe791c8dd09c3f5f97b167bcf7ae5e81" title=" " alt="" coords="285,5,519,31"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="640,152,590,97,557,68,520,44,492,33,494,28,523,40,560,64,594,93,644,148"/>
+<area shape="rect" id="Node000005" href="$classGradMixture.html#a4a8130b2b54a7b080de42876b81df92c" title=" " alt="" coords="287,55,517,80"/>
+<area shape="poly" id="edge4_Node000002_Node000005" title=" " alt="" coords="630,156,580,123,520,94,484,83,485,77,522,89,583,119,633,151"/>
+<area shape="rect" id="Node000006" href="$classGradPhase.html#a8f461ca1887530f871733efeec76219d" title=" " alt="" coords="292,104,512,129"/>
+<area shape="poly" id="edge6_Node000002_Node000006" title=" " alt="" coords="591,161,521,145,463,132,464,127,522,139,592,155"/>
+<area shape="rect" id="Node000007" href="$classQAPConductivity.html#a9a141831a9b70a824236023390c57a1e" title="Compute the needed quantities for the additional physic." alt="" coords="305,154,499,194"/>
+<area shape="poly" id="edge8_Node000002_Node000007" title=" " alt="" coords="560,177,499,177,499,171,560,171"/>
+<area shape="rect" id="Node000008" href="$classQAPSurfaceTension.html#a8df1154da24f902c048d6d0d4fc09e48" title="Compute the needed quantities for the additional physic." alt="" coords="325,218,479,258"/>
+<area shape="poly" id="edge9_Node000002_Node000008" title=" " alt="" coords="596,193,480,221,479,216,595,187"/>
+<area shape="rect" id="Node000009" href="$classQAPViscosity.html#a58c94055464b99b43c9c6d3b5d471172" title="Compute the needed quantities for the additional physic." alt="" coords="283,283,521,308"/>
+<area shape="poly" id="edge10_Node000002_Node000009" title=" " alt="" coords="579,195,571,200,555,217,548,235,540,254,523,272,498,285,495,280,520,268,536,251,543,233,551,214,568,196,577,190"/>
+<area shape="rect" id="Node000010" href="$classModEulerKorteweg.html#aa84464a570842e368a669e4307d91fa3" title="Complete the augmented variables (such as the ones of Euler&#45;Korteweg model)" alt="" coords="298,333,506,373"/>
+<area shape="poly" id="edge11_Node000002_Node000010" title=" " alt="" coords="576,196,571,200,559,214,552,229,548,259,543,290,536,306,523,321,504,335,501,330,520,317,532,303,538,289,543,258,547,227,554,211,567,196,573,192"/>
+<area shape="rect" id="Node000004" href="$classCellO2NS.html#a7e3cf687e7f3503f39efda7e0a7fc258" title="Compute gradients for 2nd&#45;order scheme on unstructured mesh." alt="" coords="5,55,235,80"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="316,36,194,57,193,52,315,30"/>
+<area shape="poly" id="edge5_Node000005_Node000004" title=" " alt="" coords="273,70,235,70,235,65,273,65"/>
+<area shape="poly" id="edge7_Node000006_Node000004" title=" " alt="" coords="315,104,193,83,194,77,316,99"/>
+</map>

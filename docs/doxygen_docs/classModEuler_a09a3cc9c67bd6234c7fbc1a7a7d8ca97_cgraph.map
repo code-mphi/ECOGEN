@@ -1,0 +1,38 @@
+<map id="ModEuler::solveRiemannOutletMassflow" name="ModEuler::solveRiemannOutletMassflow">
+<area shape="rect" id="Node000001" title="Outlet at imposed massflow half Riemann solver." alt="" coords="5,270,229,310"/>
+<area shape="rect" id="Node000002" href="$classEos.html#a069dde8ab3ba4411e17506fc4a34da67" title="See derived classes." alt="" coords="283,5,501,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="123,269,142,221,174,159,218,94,245,65,276,40,285,34,288,39,279,44,249,69,222,97,178,161,147,223,128,271"/>
+<area shape="rect" id="Node000004" href="$classEos.html#a4fd76d58c6463b3a6c94fcadfdf07e1a" title="See derived classes." alt="" coords="315,55,469,80"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="126,269,148,230,181,181,224,131,249,108,276,89,300,78,302,83,279,94,252,112,228,135,185,184,153,233,131,271"/>
+<area shape="rect" id="Node000005" href="$classPhase.html#a482f6875d98b0fa8184720e6dfe89c48" title=" " alt="" coords="322,104,462,129"/>
+<area shape="poly" id="edge5_Node000001_Node000005" title=" " alt="" coords="132,268,190,203,231,168,276,138,307,126,309,131,279,143,234,172,194,207,136,272"/>
+<area shape="rect" id="Node000006" href="$classPhase.html#aeb72ca0fa38e4fe35643d38f4833e688" title=" " alt="" coords="335,153,449,179"/>
+<area shape="poly" id="edge7_Node000001_Node000006" title=" " alt="" coords="143,268,202,227,238,206,276,188,321,174,323,179,278,192,241,210,204,231,146,272"/>
+<area shape="rect" id="Node000007" href="$classCell.html#af2d48073a332d621b69fb257eeb6de6c" title=" " alt="" coords="335,203,449,228"/>
+<area shape="poly" id="edge9_Node000001_Node000007" title=" " alt="" coords="176,267,277,237,321,226,322,231,278,242,177,272"/>
+<area shape="rect" id="Node000008" href="$classPhase.html#a2beeaa383c32c5866ea59a1b20a44662" title=" " alt="" coords="319,252,465,277"/>
+<area shape="poly" id="edge10_Node000001_Node000008" title=" " alt="" coords="229,277,305,270,305,275,230,282"/>
+<area shape="rect" id="Node000009" href="$classPhase.html#ab70f7c5ac46f4231e602ff2f356d591d" title=" " alt="" coords="307,301,477,327"/>
+<area shape="poly" id="edge12_Node000001_Node000009" title=" " alt="" coords="230,297,294,303,293,308,229,302"/>
+<area shape="rect" id="Node000010" href="$classPhase.html#ac232fce34c3196feb98019145062bf04" title=" " alt="" coords="342,351,442,376"/>
+<area shape="poly" id="edge14_Node000001_Node000010" title=" " alt="" coords="182,308,278,335,329,348,328,353,277,341,181,313"/>
+<area shape="rect" id="Node000011" href="$classPhase.html#a40e4e2993cc3ad5d98f58dd502b19d86" title=" " alt="" coords="343,400,441,425"/>
+<area shape="poly" id="edge16_Node000001_Node000011" title=" " alt="" coords="147,308,205,347,278,385,330,400,328,405,276,390,203,352,144,312"/>
+<area shape="rect" id="Node000012" href="$classPhase.html#a83feb3a12d36d24785b5f92b2aa267f2" title=" " alt="" coords="341,449,443,475"/>
+<area shape="poly" id="edge18_Node000001_Node000012" title=" " alt="" coords="136,308,194,371,234,406,279,434,328,451,326,456,276,439,231,410,191,375,132,312"/>
+<area shape="rect" id="Node000013" href="$classModEuler.html#ad4c78fd9636202913466892cd1df0fd2" title=" " alt="" coords="277,499,507,524"/>
+<area shape="poly" id="edge20_Node000001_Node000013" title=" " alt="" coords="131,309,153,347,186,395,228,443,279,484,293,491,291,496,276,488,225,447,182,398,149,350,127,312"/>
+<area shape="rect" id="Node000014" href="$classEos.html#a7fc1c2c751d99874632f8598269d41a5" title="See derived classes." alt="" coords="285,548,499,573"/>
+<area shape="poly" id="edge21_Node000001_Node000014" title=" " alt="" coords="128,309,147,356,179,417,223,480,249,509,279,533,291,540,288,545,276,538,246,513,219,484,174,420,142,358,123,311"/>
+<area shape="rect" id="Node000003" href="$classErrors.html#a78eeb532e12787fee07b78aa5ef6a0c6" title=" " alt="" coords="555,277,712,303"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="489,28,508,40,535,64,557,92,593,154,616,215,629,263,624,265,611,217,588,156,553,95,531,68,505,44,486,33"/>
+<area shape="poly" id="edge4_Node000004_Node000003" title=" " alt="" coords="470,72,508,89,531,108,551,129,585,177,610,224,626,263,621,266,605,227,580,180,547,133,527,112,505,94,468,77"/>
+<area shape="poly" id="edge6_Node000005_Node000003" title=" " alt="" coords="463,121,486,128,508,138,545,166,576,200,621,264,616,267,572,204,541,170,505,143,484,133,461,126"/>
+<area shape="poly" id="edge8_Node000006_Node000003" title=" " alt="" coords="450,170,479,177,508,188,538,205,567,225,612,266,609,270,564,230,536,209,506,192,478,182,449,175"/>
+<area shape="poly" id="edge11_Node000008_Node000003" title=" " alt="" coords="466,270,542,278,541,283,465,275"/>
+<area shape="poly" id="edge13_Node000009_Node000003" title=" " alt="" coords="477,303,541,296,541,302,478,308"/>
+<area shape="poly" id="edge15_Node000010_Node000003" title=" " alt="" coords="442,351,506,335,589,305,591,310,507,341,443,357"/>
+<area shape="poly" id="edge17_Node000011_Node000003" title=" " alt="" coords="441,404,474,397,505,385,563,349,608,310,611,314,566,353,508,390,475,402,442,409"/>
+<area shape="poly" id="edge19_Node000012_Node000003" title=" " alt="" coords="443,455,475,448,505,434,541,407,572,375,616,313,620,316,576,378,544,411,508,439,477,453,445,460"/>
+<area shape="poly" id="edge22_Node000014_Node000003" title=" " alt="" coords="484,545,505,533,530,510,552,483,587,422,610,363,624,316,629,317,615,365,592,425,557,486,534,514,508,537,486,550"/>
+</map>

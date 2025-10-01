@@ -1,0 +1,41 @@
+<map id="MeshCartesianAMR::initializeGeometrie" name="MeshCartesianAMR::initializeGeometrie">
+<area shape="rect" id="Node000001" title="renvoi le number de dimensions (1,2 ou 3)" alt="" coords="5,343,219,383"/>
+<area shape="rect" id="Node000002" href="$classMeshCartesianAMR.html#af8d9291c2c12bb474fbcd3d078076847" title=" " alt="" coords="275,314,488,354"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="218,349,261,344,261,350,219,354"/>
+<area shape="rect" id="Node000020" href="$classMeshCartesian.html#a6a07ce67949a32ddc816b2365e4205d5" title=" " alt="" coords="267,379,496,404"/>
+<area shape="poly" id="edge19_Node000001_Node000020" title=" " alt="" coords="219,372,253,375,253,381,218,377"/>
+<area shape="rect" id="Node000003" href="$classMeshCartesianAMR.html#ab0359477d72740b05cf7f3f9ef9c6ede" title=" " alt="" coords="566,218,765,258"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="428,311,543,267,570,259,571,264,545,273,430,316"/>
+<area shape="rect" id="Node000004" href="$classMeshCartesianAMR.html#ab3c9d86007c929c52ac2ccaa3676ee9e" title=" " alt="" coords="544,282,787,322"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="488,319,530,315,531,320,489,325"/>
+<area shape="rect" id="Node000017" href="$classdecomposition_1_1Decomposition.html#ac5a766f539fc615b26e6ea37735fb92f" title=" " alt="" coords="553,346,777,386"/>
+<area shape="poly" id="edge16_Node000002_Node000017" title=" " alt="" coords="489,343,540,349,539,354,488,349"/>
+<area shape="rect" id="Node000019" href="$classdecomposition_1_1Decomposition.html#acf740d18c04795e0a8a7be36a71242a0" title=" " alt="" coords="553,410,777,450"/>
+<area shape="poly" id="edge18_Node000002_Node000019" title=" " alt="" coords="463,352,497,365,521,381,545,396,564,403,562,408,543,400,519,385,495,370,461,357"/>
+<area shape="rect" id="Node000005" href="$classParallel.html#a453da74cd929de00d5db6b85e8796ba8" title=" " alt="" coords="837,5,1059,31"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="771,280,785,268,804,241,811,213,811,184,807,156,803,127,804,98,812,69,833,40,836,37,840,41,837,44,817,71,809,98,809,126,813,155,817,184,817,213,809,243,789,272,774,284"/>
+<area shape="rect" id="Node000006" href="$classParallel.html#a8665c1b12e706dc73c5db6827343f105" title=" " alt="" coords="847,55,1049,80"/>
+<area shape="poly" id="edge5_Node000004_Node000006" title=" " alt="" coords="770,280,785,268,801,247,808,225,807,180,806,157,808,134,816,112,833,90,837,86,840,90,837,93,820,114,813,136,811,157,813,180,813,226,805,249,789,272,773,284"/>
+<area shape="rect" id="Node000007" href="$classParallel.html#a308829576a2f46b2b8f7ef71597171bd" title=" " alt="" coords="843,104,1053,129"/>
+<area shape="poly" id="edge6_Node000004_Node000007" title=" " alt="" coords="769,280,785,268,798,253,804,237,808,205,811,171,819,155,833,139,839,134,842,138,836,143,823,157,817,173,813,205,809,239,802,256,788,272,772,284"/>
+<area shape="rect" id="Node000008" href="$classParallel.html#ac52e3eb9d42614ec61683f1fa205774c" title=" " alt="" coords="853,153,1043,179"/>
+<area shape="poly" id="edge7_Node000004_Node000008" title=" " alt="" coords="766,279,785,268,801,249,808,229,815,208,833,188,841,183,844,187,836,192,820,211,813,231,806,252,788,272,768,284"/>
+<area shape="rect" id="Node000009" href="$classBoundCond.html#acab1c9b595bd153f82004efac670deb1" title=" " alt="" coords="845,203,1051,228"/>
+<area shape="poly" id="edge8_Node000004_Node000009" title=" " alt="" coords="753,279,786,268,809,253,834,238,860,229,862,234,836,243,812,257,788,272,755,284"/>
+<area shape="rect" id="Node000011" href="$classdecomposition_1_1Decomposition.html#adec3733f5fef4da0431cdaf3c4820740" title=" " alt="" coords="836,253,1060,293"/>
+<area shape="poly" id="edge10_Node000004_Node000011" title=" " alt="" coords="787,287,822,283,822,288,787,292"/>
+<area shape="rect" id="Node000012" href="$classParallel.html#ae921793060e9e2a9ca75e049af3301fd" title=" " alt="" coords="835,317,1061,343"/>
+<area shape="poly" id="edge11_Node000004_Node000012" title=" " alt="" coords="787,311,821,315,820,320,787,317"/>
+<area shape="rect" id="Node000013" href="$classParallel.html#a082c136b60fff93a6410253bcea5ecc7" title=" " alt="" coords="845,367,1051,392"/>
+<area shape="poly" id="edge12_Node000004_Node000013" title=" " alt="" coords="750,320,788,332,836,353,864,361,862,366,834,358,786,336,748,325"/>
+<area shape="rect" id="Node000014" href="$classdecomposition_1_1Decomposition.html#a5cf0b2f1c91008152499e11d5fb0ce3c" title=" " alt="" coords="836,417,1060,457"/>
+<area shape="poly" id="edge13_Node000004_Node000014" title=" " alt="" coords="767,320,788,332,805,350,813,368,821,386,836,403,845,408,842,413,833,407,816,389,808,370,801,353,785,336,764,324"/>
+<area shape="rect" id="Node000015" href="$classParallel.html#ad1c963c9ab237cd6e4ef0574eb3287e8" title=" " alt="" coords="865,481,1031,507"/>
+<area shape="poly" id="edge14_Node000004_Node000015" title=" " alt="" coords="772,320,788,332,802,349,810,367,813,401,816,435,823,451,836,467,854,478,851,483,833,471,819,454,811,437,808,402,805,368,798,352,785,336,769,324"/>
+<area shape="rect" id="Node000016" href="$classCoord.html#af96ea861b2a73538910c508d414b33a4" title="Set the values of the Coord object." alt="" coords="891,531,1005,556"/>
+<area shape="poly" id="edge15_Node000004_Node000016" title=" " alt="" coords="773,320,789,332,806,356,813,380,815,404,813,427,811,451,812,474,820,496,836,517,856,530,878,538,876,543,853,535,833,521,815,498,807,475,806,451,807,427,809,404,808,381,801,358,785,336,770,324"/>
+<area shape="rect" id="Node000010" href="$classErrors.html#a78eeb532e12787fee07b78aa5ef6a0c6" title=" " alt="" coords="1109,203,1267,228"/>
+<area shape="poly" id="edge9_Node000009_Node000010" title=" " alt="" coords="1051,213,1095,213,1095,218,1051,218"/>
+<area shape="rect" id="Node000018" href="$classdecomposition_1_1Decomposition.html#a74393228a3972b6cfa431d40bd1fe44e" title=" " alt="" coords="836,581,1060,621"/>
+<area shape="poly" id="edge17_Node000017_Node000018" title=" " alt="" coords="773,384,789,396,805,418,813,440,814,483,814,526,821,546,837,567,841,571,837,575,833,570,817,549,809,527,808,483,807,441,800,420,785,400,770,388"/>
+</map>

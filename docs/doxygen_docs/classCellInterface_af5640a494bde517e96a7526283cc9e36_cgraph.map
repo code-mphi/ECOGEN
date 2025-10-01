@@ -1,0 +1,42 @@
+<map id="CellInterface::computeFluxAddPhys" name="CellInterface::computeFluxAddPhys">
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,203,204,243"/>
+<area shape="rect" id="Node000002" href="$classAddPhys.html#af7b64716ee631ef5e61b3e11a660fee0" title="Compute the additional physic flux between two cells." alt="" coords="252,210,479,235"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="204,220,238,220,238,225,204,225"/>
+<area shape="rect" id="Node000003" href="$classAddPhys.html#abdabd90ce3f3927dc682ac99240dad68" title="Add the additional physic flux between two cells at the corresponding cell." alt="" coords="541,185,735,210"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="479,210,526,205,527,210,479,215"/>
+<area shape="rect" id="Node000006" href="$classCellInterface.html#af24bd9825984c330e260d43b846a4176" title=" " alt="" coords="797,37,991,62"/>
+<area shape="poly" id="edge12_Node000002_Node000006" title=" " alt="" coords="399,207,569,146,797,71,824,63,826,68,798,76,571,151,401,212"/>
+<area shape="rect" id="Node000012" href="$classCellInterface.html#a307a9959bf3088ad94b1b63efd696bc2" title=" " alt="" coords="803,431,985,457"/>
+<area shape="poly" id="edge11_Node000002_Node000012" title=" " alt="" coords="386,233,448,274,528,319,601,353,660,375,798,418,825,425,824,430,797,423,658,380,599,358,525,324,445,278,383,238"/>
+<area shape="rect" id="Node000013" href="$classCell.html#a4f484781d8e4ba3b0c537d8a351d2fed" title=" " alt="" coords="591,234,685,259"/>
+<area shape="poly" id="edge13_Node000002_Node000013" title=" " alt="" coords="479,230,577,239,577,244,479,235"/>
+<area shape="rect" id="Node000014" href="$classAddPhys.html#a053c4510d18c56d27075bb765bd0bea2" title="Solve the additional physic flux between two cells." alt="" coords="535,11,741,37"/>
+<area shape="poly" id="edge14_Node000002_Node000014" title=" " alt="" coords="377,208,438,148,480,112,525,78,593,40,595,45,528,82,483,116,442,152,381,212"/>
+<area shape="rect" id="Node000015" href="$classAddPhys.html#aec27150cc7188ee51ac1e9e2c7588d97" title="Subtract the additional physic flux between two cells at the corresponding cell." alt="" coords="527,283,749,309"/>
+<area shape="poly" id="edge16_Node000002_Node000015" title=" " alt="" coords="407,233,527,268,566,278,564,283,526,273,406,238"/>
+<area shape="rect" id="Node000004" href="$classFlux.html#aac25bdaa5ffd6bf68855b07e4420e077" title="Add flux passed in parameter to the correspond model flux." alt="" coords="839,86,949,111"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="662,182,722,152,796,120,824,112,825,117,798,125,724,157,664,187"/>
+<area shape="poly" id="edge5_Node000003_Node000006" title=" " alt="" coords="657,183,748,115,770,92,796,71,811,64,813,69,799,76,774,96,751,119,660,187"/>
+<area shape="rect" id="Node000007" href="$classCell.html#a0d92eb572fc85da4b37bf2ad4b760621" title=" " alt="" coords="840,185,948,210"/>
+<area shape="poly" id="edge6_Node000003_Node000007" title=" " alt="" coords="735,195,826,195,826,200,735,200"/>
+<area shape="rect" id="Node000008" href="$classCell.html#a222238b424bf20588ec06c647a190c0a" title=" " alt="" coords="829,234,959,259"/>
+<area shape="poly" id="edge7_Node000003_Node000008" title=" " alt="" coords="705,207,816,229,815,234,704,213"/>
+<area shape="rect" id="Node000009" href="$classCellInterface.html#a6427c77e8246803b4e940cda6c596555" title=" " alt="" coords="813,283,975,309"/>
+<area shape="poly" id="edge8_Node000003_Node000009" title=" " alt="" coords="724,208,751,219,766,231,776,244,784,257,799,268,815,276,812,281,796,273,781,260,771,247,762,235,748,224,722,213"/>
+<area shape="rect" id="Node000010" href="$classFace.html#afb0df2ee2b760695be90150d3e0033d4" title=" " alt="" coords="829,333,959,358"/>
+<area shape="poly" id="edge9_Node000003_Node000010" title=" " alt="" coords="732,208,751,219,763,232,770,245,776,271,782,296,788,308,799,319,818,331,815,335,796,323,784,311,777,298,771,272,765,246,759,235,748,223,729,212"/>
+<area shape="rect" id="Node000011" href="$classElement.html#a65eeb90dcb62974be8d19fbc13d78061" title=" " alt="" coords="817,135,971,161"/>
+<area shape="poly" id="edge10_Node000003_Node000011" title=" " alt="" coords="704,182,814,161,815,166,705,187"/>
+<area shape="rect" id="Node000005" href="$classErrors.html#a78eeb532e12787fee07b78aa5ef6a0c6" title=" " alt="" coords="1039,86,1196,111"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="950,96,1025,96,1025,101,950,101"/>
+<area shape="poly" id="edge15_Node000014_Node000005" title=" " alt="" coords="726,9,786,4,853,3,923,8,991,21,1020,32,1047,46,1091,75,1089,80,1044,50,1018,37,990,27,922,14,853,9,786,9,727,14"/>
+<area shape="poly" id="edge18_Node000015_Node000007" title=" " alt="" coords="718,281,748,268,762,257,771,245,780,232,796,219,826,206,828,211,799,224,784,235,776,248,766,261,751,273,721,286"/>
+<area shape="poly" id="edge19_Node000015_Node000008" title=" " alt="" coords="704,281,815,259,816,264,705,286"/>
+<area shape="poly" id="edge20_Node000015_Node000009" title=" " alt="" coords="749,293,799,293,799,299,749,299"/>
+<area shape="poly" id="edge21_Node000015_Node000010" title=" " alt="" coords="705,306,816,328,815,333,704,311"/>
+<area shape="poly" id="edge22_Node000015_Node000011" title=" " alt="" coords="727,281,748,269,759,257,765,246,771,221,777,195,784,182,796,170,802,165,806,169,799,174,788,185,782,197,776,222,770,248,763,261,751,273,729,286"/>
+<area shape="poly" id="edge17_Node000015_Node000012" title=" " alt="" coords="660,307,751,374,774,398,799,418,813,424,811,429,796,422,770,402,748,378,657,311"/>
+<area shape="rect" id="Node000016" href="$classFlux.html#a94fdfae723d6b33088f4cd4276c2be01" title="Subtract flux to the corresponding model buffer flux." alt="" coords="825,382,963,407"/>
+<area shape="poly" id="edge23_Node000015_Node000016" title=" " alt="" coords="664,307,724,337,798,368,823,376,821,381,796,373,722,342,662,311"/>
+<area shape="poly" id="edge24_Node000016_Node000005" title=" " alt="" coords="962,383,989,369,1016,342,1039,311,1074,243,1097,177,1109,125,1114,126,1102,178,1079,245,1044,314,1020,345,992,373,965,388"/>
+</map>

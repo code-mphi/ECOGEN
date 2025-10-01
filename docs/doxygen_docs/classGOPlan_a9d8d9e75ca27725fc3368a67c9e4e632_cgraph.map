@@ -1,0 +1,25 @@
+<map id="GOPlan::createBase" name="GOPlan::createBase">
+<area shape="rect" id="Node000001" title="Binormal vector of the plan." alt="" coords="5,228,156,253"/>
+<area shape="rect" id="Node000002" href="$classCoord.html#a3db8185b64c9b148bc3cf836fa06b4ef" title="Return the cross product bewteen two vectors." alt="" coords="224,5,375,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="84,227,98,190,122,139,157,85,178,61,202,40,211,35,213,39,206,44,182,65,161,89,126,141,102,192,89,229"/>
+<area shape="rect" id="Node000003" href="$classErrors.html#a78eeb532e12787fee07b78aa5ef6a0c6" title=" " alt="" coords="221,55,378,80"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="86,227,129,161,162,122,203,89,214,83,216,88,205,94,166,126,133,164,91,229"/>
+<area shape="rect" id="Node000004" href="$classCoord.html#a04d74e2f155904844fb90cf8aac3579f" title="Return the value in the x&#45;direction of the Coord object." alt="" coords="250,104,349,129"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="92,226,138,183,169,159,203,138,236,126,238,131,205,143,172,163,141,187,96,230"/>
+<area shape="rect" id="Node000005" href="$classCoord.html#a11fc116d47c56756eab2081beca0a702" title="Return the value in the y&#45;direction of the Coord object." alt="" coords="251,153,348,179"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="109,225,203,187,236,178,238,183,205,193,111,230"/>
+<area shape="rect" id="Node000006" href="$classCoord.html#a9d218af09beeed332daba65312b8abad" title="Return the value in the z&#45;direction of the Coord object." alt="" coords="250,203,349,228"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="156,229,236,220,237,225,157,235"/>
+<area shape="rect" id="Node000007" href="$classCoord.html#a7375b11e6056628709b50625c19ec562" title="Divide the present vector by its norm." alt="" coords="229,252,370,277"/>
+<area shape="poly" id="edge6_Node000001_Node000007" title=" " alt="" coords="157,246,215,253,215,258,156,252"/>
+<area shape="rect" id="Node000009" href="$classCoord.html#a5ab5b6d90f6bc14773a0de7a91fded10" title="Set a vector from the result of the substraction of the vector a from the vector b." alt="" coords="204,302,395,342"/>
+<area shape="poly" id="edge8_Node000001_Node000009" title=" " alt="" coords="114,251,205,286,228,295,226,300,203,291,113,256"/>
+<area shape="rect" id="Node000010" href="$classCoord.html#a380746a7501edbeef25d07f6d53735ce" title="Set the value in the x&#45;direction of the Coord object." alt="" coords="251,367,348,392"/>
+<area shape="poly" id="edge9_Node000001_Node000010" title=" " alt="" coords="94,252,139,301,171,328,205,352,239,365,236,370,203,356,167,332,135,305,90,256"/>
+<area shape="rect" id="Node000011" href="$classCoord.html#a2c29700095174e18164ae425ccc03878" title="Set the value in the y&#45;direction of the Coord object." alt="" coords="251,416,347,441"/>
+<area shape="poly" id="edge10_Node000001_Node000011" title=" " alt="" coords="90,252,106,283,131,323,165,365,205,401,239,416,237,421,203,406,161,369,127,326,102,286,86,255"/>
+<area shape="rect" id="Node000012" href="$classCoord.html#a3a02e4f7e456831394238d5e204da2d0" title="Set the value in the z&#45;direction of the Coord object." alt="" coords="251,465,348,491"/>
+<area shape="poly" id="edge11_Node000001_Node000012" title=" " alt="" coords="88,253,101,292,125,345,159,402,181,428,206,450,238,467,236,471,202,455,177,432,155,405,120,348,96,294,83,254"/>
+<area shape="rect" id="Node000008" href="$classCoord.html#a0dfec7834161f82d6d2928bf78ffcb42" title="Return the value of the norm of the Coord object." alt="" coords="443,252,545,277"/>
+<area shape="poly" id="edge7_Node000007_Node000008" title=" " alt="" coords="371,262,429,262,429,267,371,267"/>
+</map>

@@ -1,0 +1,61 @@
+<map id="Cell::getCons" name="Cell::getCons">
+<area shape="rect" id="Node000001" title=" " alt="" coords="881,453,989,478"/>
+<area shape="rect" id="Node000002" href="$classCellInterface.html#a96a0427bef10a7ca6e0102998e06b6ce" title=" " alt="" coords="621,134,786,159"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="931,439,925,382,910,310,898,272,881,235,859,202,832,173,810,159,785,151,787,146,812,154,835,169,863,198,885,233,902,270,915,309,931,382,936,438"/>
+<area shape="rect" id="Node000005" href="$classAddPhys.html#abdabd90ce3f3927dc682ac99240dad68" title="Add the additional physic flux between two cells at the corresponding cell." alt="" coords="606,233,801,258"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="926,440,915,401,896,355,869,309,851,289,832,272,800,255,802,251,835,267,855,285,873,306,901,353,920,399,931,438"/>
+<area shape="rect" id="Node000008" href="$classCellInterface.html#a55e29cbcbf4a69c97edfbb2651809ed5" title=" " alt="" coords="593,69,813,109"/>
+<area shape="poly" id="edge7_Node000001_Node000008" title=" " alt="" coords="932,439,929,375,916,290,903,244,885,200,862,159,832,123,812,109,815,105,835,119,866,156,890,198,908,243,921,289,934,374,937,439"/>
+<area shape="rect" id="Node000009" href="$classAPUEqViscosity.html#a87d6a33df3f42befacd8019b10ffc3e3" title="Add the non&#45;conservative terms of the corresponding additional physic in a cell." alt="" coords="597,331,810,357"/>
+<area shape="poly" id="edge9_Node000001_Node000009" title=" " alt="" coords="914,444,879,406,856,387,832,372,800,359,802,354,835,367,860,383,882,402,918,440"/>
+<area shape="rect" id="Node000010" href="$classSymCylindrical.html#add159b596f57f98c0588be10e0741a40" title="Add the symmetric terms for the cylindrical or spherical symmetry assumption." alt="" coords="592,381,815,421"/>
+<area shape="poly" id="edge10_Node000001_Node000010" title=" " alt="" coords="882,451,833,436,788,424,789,419,834,431,884,446"/>
+<area shape="rect" id="Node000011" href="$classSymSpherical.html#afd08802c2dd12c17ca4cfe473d5f7700" title="Add the symmetric terms for the cylindrical or spherical symmetry assumption." alt="" coords="596,445,811,485"/>
+<area shape="poly" id="edge11_Node000001_Node000011" title=" " alt="" coords="867,468,811,468,811,463,867,463"/>
+<area shape="rect" id="Node000012" href="$classAPUEqSurfaceTension.html#a89d60064b5f8eac6159c7b5127f73a20" title="Add the symmetrical terms of the corresponding additional physic in a cell (when radial axis is on X)" alt="" coords="573,509,833,549"/>
+<area shape="poly" id="edge12_Node000001_Node000012" title=" " alt="" coords="884,485,834,500,789,512,788,507,833,495,882,480"/>
+<area shape="rect" id="Node000013" href="$classAPUEqViscosity.html#a58ba460889981836a97972804e98d8f0" title="Add the symmetrical terms of the corresponding additional physic in a cell (when radial axis is on X)" alt="" coords="590,573,817,613"/>
+<area shape="poly" id="edge13_Node000001_Node000013" title=" " alt="" coords="918,490,882,528,835,564,808,576,806,571,832,559,878,524,914,487"/>
+<area shape="rect" id="Node000014" href="$classAPUEqSurfaceTension.html#a8f53baaafa00b9a4d7709e1539c71dbc" title="Add the symmetrical terms of the corresponding additional physic in a cell (when radial axis is on Y)" alt="" coords="574,637,833,677"/>
+<area shape="poly" id="edge14_Node000001_Node000014" title=" " alt="" coords="928,492,914,523,894,560,868,597,835,627,814,640,811,635,832,623,864,593,890,557,909,521,923,490"/>
+<area shape="rect" id="Node000015" href="$classAPUEqViscosity.html#ac552a0c177b6e02a5b4df71bd2e107f7" title="Add the symmetrical terms of the corresponding additional physic in a cell (when radial axis is on Y)" alt="" coords="590,701,817,741"/>
+<area shape="poly" id="edge15_Node000001_Node000015" title=" " alt="" coords="932,492,922,536,904,590,876,645,857,670,835,691,817,703,814,699,832,687,853,666,871,642,899,588,917,534,927,491"/>
+<area shape="rect" id="Node000016" href="$classSourceNum.html#ac74e47e385d1c0036425a6d1ce7c8a9e" title="Source terms integration on conservative quantities." alt="" coords="24,835,232,875"/>
+<area shape="poly" id="edge16_Node000001_Node000016" title=" " alt="" coords="936,492,931,549,916,621,903,658,886,695,863,728,835,755,814,768,789,778,727,792,654,798,575,800,418,799,352,801,299,807,241,821,187,837,185,832,240,815,298,801,351,796,418,794,575,795,654,793,726,786,787,773,812,763,832,751,859,724,881,692,898,656,911,619,926,548,931,492"/>
+<area shape="rect" id="Node000017" href="$classSourceNum.html#a82b921349e030cdc4d4cc67ae6f69888" title="Euler explicite integration (order 1)" alt="" coords="599,867,808,893"/>
+<area shape="poly" id="edge17_Node000001_Node000017" title=" " alt="" coords="933,492,921,573,900,680,871,783,854,823,835,850,805,869,803,865,831,846,850,820,866,781,895,679,916,572,928,491"/>
+<area shape="rect" id="Node000018" href="$classSourceNum.html#afa10c3060572452be2e97c2cdf64b97d" title="Runge&#45;Kutta integration (order 2)" alt="" coords="311,918,513,943"/>
+<area shape="poly" id="edge23_Node000001_Node000018" title=" " alt="" coords="935,492,925,585,907,710,893,773,877,830,858,876,835,906,791,935,742,954,690,965,637,968,586,967,537,961,458,946,459,941,538,956,586,961,637,963,689,959,741,949,789,930,832,902,853,873,872,828,888,772,901,709,920,585,929,491"/>
+<area shape="rect" id="Node000019" href="$classSourceNum.html#abd73b5e08a17a809ec6d4c462377c7ff" title="Runge&#45;Kutta integration (order 4)" alt="" coords="311,817,513,842"/>
+<area shape="poly" id="edge24_Node000001_Node000019" title=" " alt="" coords="938,492,936,556,923,640,910,685,892,727,867,766,835,799,811,812,779,822,697,834,603,838,514,837,514,832,603,833,696,829,778,817,809,808,832,795,863,763,887,725,905,683,918,639,930,555,932,492"/>
+<area shape="rect" id="Node000020" href="$classCellInterface.html#ac603c010d33d59d55925b3003bf6f1d3" title=" " alt="" coords="617,5,790,45"/>
+<area shape="poly" id="edge25_Node000001_Node000020" title=" " alt="" coords="928,439,917,353,897,239,868,130,851,87,831,59,812,45,789,35,791,31,815,40,835,55,855,85,873,128,902,238,922,352,934,439"/>
+<area shape="rect" id="Node000021" href="$classCellInterface.html#a483ee91df480febc2a82201b39905cc3" title=" " alt="" coords="606,183,801,209"/>
+<area shape="poly" id="edge27_Node000001_Node000021" title=" " alt="" coords="929,439,920,391,903,332,874,272,855,245,832,222,800,205,802,200,835,218,859,242,879,269,908,330,925,390,934,438"/>
+<area shape="rect" id="Node000023" href="$classAddPhys.html#aec27150cc7188ee51ac1e9e2c7588d97" title="Subtract the additional physic flux between two cells at the corresponding cell." alt="" coords="592,282,815,307"/>
+<area shape="poly" id="edge31_Node000001_Node000023" title=" " alt="" coords="922,441,888,379,863,347,832,321,810,310,812,305,835,316,867,344,892,376,926,439"/>
+<area shape="rect" id="Node000003" href="$classCellInterface.html#acc96276cbae58430f8e9145321607bff" title=" " alt="" coords="313,81,511,106"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="620,134,482,109,483,103,621,129"/>
+<area shape="rect" id="Node000004" href="$classCellInterfaceO2.html#ab050bdf2b0736109b6f3aa6281585de3" title=" " alt="" coords="304,134,520,159"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="607,149,520,149,520,144,607,144"/>
+<area shape="rect" id="Node000006" href="$classAddPhys.html#af7b64716ee631ef5e61b3e11a660fee0" title="Compute the additional physic flux between two cells." alt="" coords="299,233,525,258"/>
+<area shape="poly" id="edge5_Node000005_Node000006" title=" " alt="" coords="592,248,526,248,526,243,592,243"/>
+<area shape="rect" id="Node000007" href="$classCellInterface.html#af5640a494bde517e96a7526283cc9e36" title=" " alt="" coords="29,225,227,265"/>
+<area shape="poly" id="edge6_Node000006_Node000007" title=" " alt="" coords="284,248,227,248,227,243,284,243"/>
+<area shape="poly" id="edge8_Node000008_Node000003" title=" " alt="" coords="580,94,512,95,511,89,580,88"/>
+<area shape="poly" id="edge18_Node000017_Node000016" title=" " alt="" coords="585,877,232,862,232,857,585,872"/>
+<area shape="poly" id="edge19_Node000017_Node000018" title=" " alt="" coords="617,898,486,921,485,915,616,892"/>
+<area shape="poly" id="edge21_Node000017_Node000019" title=" " alt="" coords="616,868,485,845,486,839,617,862"/>
+<area shape="poly" id="edge20_Node000018_Node000016" title=" " alt="" coords="350,917,203,877,204,872,351,912"/>
+<area shape="poly" id="edge22_Node000019_Node000016" title=" " alt="" coords="297,842,232,848,232,843,296,837"/>
+<area shape="poly" id="edge26_Node000020_Node000003" title=" " alt="" coords="604,51,468,83,467,78,603,46"/>
+<area shape="poly" id="edge28_Node000021_Node000003" title=" " alt="" coords="592,182,572,173,556,161,547,148,538,135,524,124,488,109,490,104,527,119,542,132,551,145,560,157,575,168,594,177"/>
+<area shape="poly" id="edge30_Node000021_Node000004" title=" " alt="" coords="614,184,487,162,488,157,615,178"/>
+<area shape="rect" id="Node000022" href="$classBoundCond.html#a5f63d38480e6f872e612591f539fdd5f" title=" " alt="" coords="317,183,507,209"/>
+<area shape="poly" id="edge29_Node000021_Node000022" title=" " alt="" coords="592,199,507,199,507,193,592,193"/>
+<area shape="poly" id="edge32_Node000023_Node000006" title=" " alt="" coords="614,282,487,261,488,255,615,277"/>
+<area shape="rect" id="Node000024" href="$classAddPhys.html#afafbee0538e35c1cab18305e3fe094ea" title="Compute the additional physic flux at a domain boundary." alt="" coords="299,283,525,323"/>
+<area shape="poly" id="edge33_Node000023_Node000024" title=" " alt="" coords="578,301,526,302,525,297,578,295"/>
+<area shape="rect" id="Node000025" href="$classBoundCond.html#a253381219ff6338519f3f68e3ab6a489" title=" " alt="" coords="5,290,251,315"/>
+<area shape="poly" id="edge34_Node000024_Node000025" title=" " alt="" coords="285,305,251,305,251,300,285,300"/>
+</map>

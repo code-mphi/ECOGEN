@@ -1,0 +1,11 @@
+<map id="Mixture::computeTsat" name="Mixture::computeTsat">
+<area shape="rect" id="Node000001" title="Compute saturation temperature for a liq/vapor couple of fluid at given pressure." alt="" coords="256,109,419,134"/>
+<area shape="rect" id="Node000002" href="$classFluxEulerHomogeneous.html#a9dfe2ce022fdd8eff55f8632e254cdf2" title="Build the primitive variables for a given cell from conservative one." alt="" coords="18,5,195,45"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="300,104,207,60,175,48,177,43,209,55,302,100"/>
+<area shape="rect" id="Node000003" href="$classMixEulerHomogeneous.html#a0ac6b65b0a87437a9d053747fabf38e7" title=" " alt="" coords="20,69,193,109"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="242,111,193,104,194,99,243,106"/>
+<area shape="rect" id="Node000004" href="$classModEulerHomogeneous.html#a8835ffa3f5afcf37a2481ba42c1e9c75" title="Complete a thermodynamics state frome minimum variables depending on the model." alt="" coords="18,133,195,173"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="243,137,196,144,195,138,242,132"/>
+<area shape="rect" id="Node000005" href="$classRelaxationPTMu.html#a942e19d92434d4c0a073a32f28137995" title="Stiff Thermo&#45;Chemical relaxation method." alt="" coords="5,198,208,223"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="303,143,259,166,209,188,168,200,167,195,207,183,257,161,301,138"/>
+</map>

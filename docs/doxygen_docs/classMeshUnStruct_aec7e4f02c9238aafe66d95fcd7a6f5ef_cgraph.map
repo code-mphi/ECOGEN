@@ -1,0 +1,9 @@
+<map id="MeshUnStruct::initializeGeometrie" name="MeshUnStruct::initializeGeometrie">
+<area shape="rect" id="Node000001" title="renvoi le number de dimensions (1,2 ou 3)" alt="" coords="5,69,183,109"/>
+<area shape="rect" id="Node000002" href="$classMeshUnStruct.html#ac5a0cb240d2f25c9df626f7d7bc2d2f8" title="initialize the geometry for single CPU computation" alt="" coords="231,5,437,45"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="169,67,245,46,246,51,170,72"/>
+<area shape="rect" id="Node000003" href="$classMeshUnStruct.html#ad7205183054103ebdb4af328a610e14f" title="initialize the geometry for multi CPUs computation" alt="" coords="231,69,437,109"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="183,87,217,87,217,92,183,92"/>
+<area shape="rect" id="Node000004" href="$classMeshUnStruct.html#a60860759033bf4636060fd8672e301ce" title="split original mesh file for computation on several CPUs" alt="" coords="238,133,430,173"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="170,107,246,127,245,132,169,112"/>
+</map>

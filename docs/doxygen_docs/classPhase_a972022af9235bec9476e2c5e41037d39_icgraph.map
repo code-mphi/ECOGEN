@@ -1,0 +1,39 @@
+<map id="Phase::getEnergy" name="Phase::getEnergy">
+<area shape="rect" id="Node000001" title=" " alt="" coords="304,476,439,501"/>
+<area shape="rect" id="Node000002" href="$classFluxUEq.html#a1585841e049f5218057fc40e82af9236" title="Add symetric terms." alt="" coords="21,5,240,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="364,463,351,369,328,243,313,180,295,122,276,76,254,45,237,33,240,29,258,41,280,73,300,121,318,178,333,242,356,368,370,462"/>
+<area shape="rect" id="Node000003" href="$classMixEulerHomogeneous.html#afdc736a4f12882a1ff4cc5d7921bbf49" title="Fills some mixture attributes from a phase array." alt="" coords="32,55,229,95"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="368,463,364,392,349,297,335,246,315,196,288,150,254,109,228,92,231,88,258,105,293,147,320,194,340,244,354,296,369,391,373,462"/>
+<area shape="rect" id="Node000004" href="$classMixPTUEq.html#aa04486d2c05ee0cd6d23c179bfff2167" title="Fills some mixture attributes from a phase array." alt="" coords="29,119,232,159"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="366,462,358,402,340,324,326,283,307,243,283,206,254,173,231,158,233,153,258,169,288,202,312,240,331,281,346,323,364,402,371,462"/>
+<area shape="rect" id="Node000005" href="$classMixUEq.html#ac9795eebc5e1575f01505727cd417ada" title="Fills some mixture attributes from a phase array." alt="" coords="7,184,254,209"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="364,463,355,411,335,345,321,311,303,279,281,248,254,223,237,212,240,207,258,219,285,245,307,276,325,309,340,343,360,410,370,462"/>
+<area shape="rect" id="Node000006" href="$classPhaseUEq.html#a8dc0b97a942248c4ed99aaac89fb90c6" title="Copy phase in phase attributes." alt="" coords="48,233,213,259"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="362,463,349,421,328,368,297,316,277,292,254,272,235,261,213,254,215,249,237,256,258,268,281,288,301,313,333,366,354,419,367,462"/>
+<area shape="rect" id="Node000007" href="$classPhaseEuler.html#a42891b4039bd3e0ee7318b20a56e16f9" title="Copy phase in phase attributes." alt="" coords="45,283,217,308"/>
+<area shape="poly" id="edge6_Node000001_Node000007" title=" " alt="" coords="358,464,342,431,320,392,290,354,255,323,216,306,218,301,257,318,294,351,324,389,347,429,362,462"/>
+<area shape="rect" id="Node000008" href="$classPhaseEulerHomogeneous.html#a90ab857c54b6ae97be8c7e264589d39d" title="Copy phase in phase attributes." alt="" coords="37,333,225,373"/>
+<area shape="poly" id="edge7_Node000001_Node000008" title=" " alt="" coords="349,467,308,426,282,405,255,387,224,374,226,369,257,382,286,401,312,422,353,464"/>
+<area shape="rect" id="Node000009" href="$classPhasePTUEq.html#ab6ac732a119c2193e4f06343cd309f81" title="Copy phase in phase attributes." alt="" coords="40,397,221,423"/>
+<area shape="poly" id="edge8_Node000001_Node000009" title=" " alt="" coords="334,472,297,453,255,437,213,425,214,420,257,431,299,448,337,467"/>
+<area shape="rect" id="Node000010" href="$classRelaxationU.html#a167f6464966335146730018426d11dd3" title="Stiff velocity relaxation methods." alt="" coords="43,447,219,472"/>
+<area shape="poly" id="edge9_Node000001_Node000010" title=" " alt="" coords="290,482,219,473,219,467,291,476"/>
+<area shape="rect" id="Node000011" href="$classRelaxationPFinite.html#aa4f46a0b4ca70047bb49d68a463f9104" title="Finite Pressure relaxation method." alt="" coords="59,497,203,537"/>
+<area shape="poly" id="edge10_Node000001_Node000011" title=" " alt="" coords="290,501,203,511,203,506,290,495"/>
+<area shape="rect" id="Node000012" href="$classModUEq.html#a1b08411ca4aed4b36c4dd7a5c5fd90a9" title="Inlet injection using stagnation state half Riemann solver." alt="" coords="27,561,234,601"/>
+<area shape="poly" id="edge11_Node000001_Node000012" title=" " alt="" coords="338,511,300,532,257,551,221,563,219,558,255,546,298,527,336,506"/>
+<area shape="rect" id="Node000013" href="$classModUEq.html#abf43432f9a7399f31c40de91355c07f1" title="Inlet injection using temperature half Riemann solver." alt="" coords="27,625,234,665"/>
+<area shape="poly" id="edge12_Node000001_Node000013" title=" " alt="" coords="357,514,316,565,288,592,257,615,233,627,230,622,255,610,285,588,312,562,352,511"/>
+<area shape="rect" id="Node000014" href="$classModUEq.html#a5ed736f5e8b53ecf4dbb2590f8585374" title="Inlet tank half Riemann solver." alt="" coords="13,689,249,715"/>
+<area shape="poly" id="edge13_Node000001_Node000014" title=" " alt="" coords="364,516,350,553,328,597,297,642,258,679,234,691,231,687,254,674,293,638,323,594,345,550,359,514"/>
+<area shape="rect" id="Node000015" href="$classModUEq.html#a387ca7a1a697c3bdef4cc12a8266e6aa" title="Cell to cell Riemann solver." alt="" coords="23,739,238,764"/>
+<area shape="poly" id="edge14_Node000001_Node000015" title=" " alt="" coords="368,515,356,562,335,620,303,679,282,705,258,728,236,741,234,736,254,724,278,702,299,676,330,618,351,560,363,514"/>
+<area shape="rect" id="Node000016" href="$classModEuler.html#a1ca5876126b8a53b89c02b1dd69eb44f" title="Cell to cell Riemann solver + compute fluxBuffMRF for MRF interface." alt="" coords="5,788,256,813"/>
+<area shape="poly" id="edge15_Node000001_Node000016" title=" " alt="" coords="370,515,362,571,343,642,328,679,309,715,286,749,258,777,237,790,234,786,254,773,282,745,305,712,323,677,338,640,356,570,365,515"/>
+<area shape="rect" id="Node000017" href="$classModUEq.html#a90c14231f3e32e52ab89c3fea6f3b103" title="Cell to cell Riemann solver + compute fluxBuffMRF for MRF interface." alt="" coords="9,837,253,863"/>
+<area shape="poly" id="edge16_Node000001_Node000017" title=" " alt="" coords="372,515,366,579,349,663,335,708,315,752,290,792,258,827,238,840,235,835,254,823,286,789,311,749,330,706,344,662,361,578,367,515"/>
+<area shape="rect" id="Node000018" href="$classModUEq.html#ad0527c6fa09d03f453911fd1cbef2f0f" title="Outlet at imposed massflow half Riemann solver." alt="" coords="22,887,239,927"/>
+<area shape="poly" id="edge17_Node000001_Node000018" title=" " alt="" coords="373,515,370,587,354,683,340,735,320,786,293,834,258,876,240,889,237,885,254,872,288,831,315,784,335,734,349,682,364,586,368,515"/>
+<area shape="rect" id="Node000019" href="$classModUEq.html#ab04966a0c3e3d574596af31502862f20" title="Outlet at imposed pressure half Riemann solver." alt="" coords="22,951,239,991"/>
+<area shape="poly" id="edge18_Node000001_Node000019" title=" " alt="" coords="369,516,356,610,333,738,318,802,300,860,280,908,258,941,241,954,238,950,254,938,276,906,295,859,312,801,328,737,351,609,364,515"/>
+</map>

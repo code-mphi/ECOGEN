@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <meta charset="utf-8" />
+  <meta http-equiv="x-ua-compatible" content="ie=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <title>Releases</title>
+
+  <link rel="stylesheet" href="/ECOGEN/assets/css/styles.css">
+  <link rel="shortcut icon" type="image/png" href="/ECOGEN/assets/images/favicon.png">
+  <link
+    rel="canonical"
+    href="https://code-mphi.github.io/ECOGEN/releases/"
+  />
+  <link
+    href="https://fonts.googleapis.com/css?family=Open+Sans:400,300,700,800,600"
+    rel="stylesheet"
+    type="text/css"
+  />
+  <link
+    href="https://fonts.googleapis.com/css?family=Muli:400,300"
+    rel="stylesheet"
+    type="text/css"
+  />
+
+</head>
+
+  <body>
+    <header>
+	<div id="bandeau">
+		<div id="logo">
+			<a href="/ECOGEN/" >  
+				<img src="/ECOGEN/assets/images/favicon.png" alt="logo ECOGEN" />
+			</a>
+		</div>
+		<nav>
+	<ul>
+	  
+	  	<li><a href="/ECOGEN/overview/">Overview</a></li>
+	  
+	  	<li><a href="/ECOGEN/gallery/">Gallery</a></li>
+	  
+	  	<li><a href="/ECOGEN/releases/">Releases</a></li>
+	  
+	  	<li><a href="/ECOGEN/ressources/">Ressources</a></li>
+	  
+	  	<li><a href="/ECOGEN/publications/">Publications</a></li>
+	  
+	  	<li><a href="/ECOGEN/services/">Services</a></li>
+	  
+	  	<li><a href="/ECOGEN/help/">Help</a></li>
+	  
+	  <!-- <li><a href="/ECOGEN/blog">Blog</a></li> -->
+	</ul>
+</nav>
+	</div>
+</header>
+
+
+
+    <main>
+		<h1>Releases</h1>
+		<hr />
+
+<article>
+	<h1> ECOGEN_v5.0 </h1>
+	<p class="date">2025-09-30</p>
+	<p> A new release, <a href="https://github.com/code-mphi/ECOGEN/releases/tag/v5.0" target="_blank">ECOGEN_v5.0</a>, is available on GitHub. It includes new features and fixes bugs.
+	<h2> Major points: </h2>
+		<ul>
+			<li> Possibility to use second-order numerical scheme on unstructured meshes. Although still in beta. </li>
+			<li> Acoustic waves can now be modelled through source terms (sinusoidal or Gaussian pulses). This follows the work of Maeda &amp; Colonius (2017) for single-phase flows and has been extended here for multiphase systems of equations. <a class="badge" href="https://doi.org/10.1016/j.wavemoti.2017.08.004" target="_blank"><img src="https://img.shields.io/badge/DOI-10.1016/j.wavemoti.2017.08.004-green.svg" alt="DOI link" /></a> </li>
+			<li> For developers: Improvement of the CI now including code coverage, clang-formatting, better artefact management, use of address sanitizer and pre-commit.  </li>
+			<li> Clang-format applied to the whole code. </li>
+		</ul>
+	<h2> Minor points: </h2>
+		<ul>
+			<li> Gnuplot scripts added for pdf generation of results with GNU output format </li>
+			<li> Add velocity in x-direction to the 1D output using Gnuplot. </li>
+			<li> Correction of translation: restart -&gt; resume. </li>
+			<li> The CFL length estimation has been improved for quadrangle elements. </li>
+			<li> Possibility to add record frequency for cuts. </li>
+			<li> Correction of memory errors (deallocations). </li>
+			<li> Possibility to compile the code using `cmake` instead of `makefile` (for advanced users). </li>
+			<li> Update of documentation and test cases, as usual. </li>
+			<li> Use `VTK` key instead of `XML` one for `outputMode` tag of `main.xml` file. </li>
+			<li> Modify the deepness of all 1D and 2D test cases to unity. This was made to avoid possible issues during the visualisation of the results with tools such as Paraview. </li>
+		</ul>
+	<h2> Fixes: </h2>
+		<ul>
+			<li> Update names of manuals to be coherent with input files from the test cases. </li>
+			<li> Update Cv from air EOS. </li>
+			<li> Fix bug and variables names update on `ModUEq::solveRIemannInletInjTemp`. </li>
+			<li> Fix EOS assignment in boundary conditions and add that the EOS key must be present in `dataFluid` tag of boundary conditions (must be consistent with model EOS). </li>
+			<li> Fix `Euler` test cases missing EOS key in `dataFluid` tag of boundary conditions. </li>
+			<li> Fix memory errors during termination of the execution when EOS is missing. </li>
+			<li> Fix unstructured-mesh file parsing using msh v4 format (working now, although only for serial simulations). </li>
+			<li> Fix wrong elapsed time from simulations (was using CPU time, now uses wall time). </li>
+		</ul>
+	</p>
+</article>
+<hr />
+
+<article>
+	<h1> ECOGEN_v4.0 </h1>
+	<p class="date">2023-09-18</p>
+	<img src="/ECOGEN/assets/images/image_v4_0.png" alt="Cavitation in turbopump." />
+	<p> A new release, <a href="https://github.com/code-mphi/ECOGEN/releases/tag/v4.0" target="_blank">ECOGEN_v4.0</a>, is available on GitHub. It includes new features and fixes bugs.
+	<h2> Major points: </h2>
+		<ul>
+			<li> Removed the version numbers of the input file names (break compatibility with previous version). </li>
+			<li> Possibility to use finite pressure relaxation on UEq model for more than two phases. More information in: Schmidmayer et al. (2023) <a class="badge" href="https://doi.org/10.1002/fld.5142" target="_blank"><img src="https://img.shields.io/badge/DOI-10.1002/fld.5142-green.svg" alt="DOI link" /></a> </li>
+			<li> Possibility to initialize an unstructured simulation with the result of a previous simulation performed on a similar mesh and/or a different number of CPUs. This feature is particularly useful to fasten steady state convergence on a fine mesh using coarse mesh results. More information in: Cazé et al. (2024). Modelling and simulation of the cavitation phenomenon in space-engine turbopumps. <a class="badge" href="https://doi.org/10.1016/j.jcp.2024.112817" target="_blank"><img src="https://img.shields.io/badge/DOI-10.1016/j.jcp.2024.112817-green.svg" alt="DOI link" /></a> </li>
+			<li> PUEq phase-change model (handled through PTMu relaxation) does not require mass fraction threshold anymore to trigger mass transfer. Also more information in: Cazé et al. (2024). <a class="badge" href="https://doi.org/10.1016/j.jcp.2024.112817" target="_blank"><img src="https://img.shields.io/badge/DOI-10.1016/j.jcp.2024.112817-green.svg" alt="DOI link" /></a> </li>
+			<li> Add Moving Reference Frame coupling of a rotating region with a static one. Also more information in: Cazé et al. (2024). <a class="badge" href="https://doi.org/10.1016/j.jcp.2024.112817" target="_blank"><img src="https://img.shields.io/badge/DOI-10.1016/j.jcp.2024.112817-green.svg" alt="DOI link" /></a> </li>
+			<li> Renamed boundary condition names (break compatibility with previous version). </li>
+			<li> Immersed boundaries can be added in a Cartesian mesh domain (physicalEntity = -1). Similarly to: Trummler et al. <a class="badge" href="https://doi.org/10.1017/jfm.2020.432" target="_blank"><img src="https://img.shields.io/badge/DOI-10.1017/jfm.2020.432-green.svg" alt="DOI link" /></a> </li>
+		</ul>
+	<h2> Minor points: </h2>
+		<ul>
+			<li> Option to record boundary quantities such as pressure forces and shear stress (useful for aerodynamic coefficient computation). </li>
+			<li> Possibility to display cells' reference length on XML output with unstructured mesh. </li>
+			<li> Add a tutorial on mesh mapping and low-Mach preconditionning options. </li>
+			<li> Add scripts related to droplet shock-induced cavitation. More information in: Biasiori-Poulanges &amp; Schmidmayer (2023) and Schmidmayer &amp; Biasiori-Poulanges (2023). <a class="badge" href="https://doi.org/10.1063/5.0127105" target="_blank"><img src="https://img.shields.io/badge/DOI-10.1063/5.0127105-green.svg" alt="DOI link" /></a> <a class="badge" href="https://doi.org/10.1063/5.0151404" target="_blank"><img src="https://img.shields.io/badge/DOI-10.1063/5.0151404-green.svg" alt="DOI link" /></a> </li>
+			<li> Improve variable name style for Gnuplot output. </li>
+			<li> Increase code coverage by nonreg. </li>
+			<li> Updated AMR refinement criteria to match the different modelling. </li>
+			<li> Always a little more source code translation from French to English. </li>
+			<li> A wall is now considered as a symmetry BC if viscosity is ignored. </li>
+			<li> Update of documentation. </li>
+		</ul>
+	<h2> Fixes: </h2>
+		<ul>
+			<li> Fix the getTemperature() and copyPhase() methods for multiphase models. </li>
+			<li> Fix restart bug when using alphaNull on PUEq model. </li>
+			<li> Fix bug on simulation progress when using iteration control mode. </li>
+			<li> Fix a MPI data type that caused a crash during MPI_Allreduce on some compilers. </li>
+			<li> Minor fix for Euler-Korteweg model. </li>
+			<li> Correction on UEq BC for volume fraction flux, using sM instead of uStar to respect transport equation. </li>
+			<li> Update non-regression scripts to make them compatible with OS X. </li>
+			<li> Correction for phase change with a second-order method. </li>
+		</ul>
+	</p>
+</article>
+<hr />
+
+<article>
+	<h1> ECOGEN_v3.1 </h1>
+	<p class="date">2022-01-27</p>
+	<img src="/ECOGEN/assets/images/smoothInterface.png" alt="Shock interacting with a smooth interface." />
+	<p> <a href="https://github.com/code-mphi/ECOGEN/releases/tag/v3.1" target="_blank">ECOGEN_v3.1</a> is available on GitHub. It includes new features and fixes bugs.
+	<h2> Major points: </h2>
+		<ul>
+			<li> Add velocity-equilibrium model. Read the following paper for more information: K. Schmidmayer, J. Cazé, F. Petitpas, E. Daniel, N. Favrie. "Modelling interactions between waves and diffused interfaces". 2021. </li>
+			<li> Add velocity-equilibrium model based on total-energy equations. Read the previous paper for more information. </li>
+			<li> Possibility to use another gradient method (Green-Gauss) which is compatible with unstructured meshes. Previously, finite differences were the only available. </li>
+			<li> Possibility to use low-Mach preconditioning technique for Euler &amp; pressure-velocity-equilibrium models. </li>
+			<li> Option to use 1D with smooth cross-section-variation scheme (useful for nozzles). </li>
+			<li> Add models augmented Euler-Korteweg and defocusing non-linear Schrödinger as well as Van der Waals equation of state. Mainly experimental work. </li>
+		</ul>
+	<h2> Minor points: </h2>
+		<ul>
+			<li> Possibility to reduce output variable number for UEq and PUEq models. </li>
+			<li> Restarting computation possible for all models for XML format output. </li>
+			<li> Possibility to record flux on boundary (massflow, total enthalpy) and/or flow quantities (density, pressure, velocity) in agreement with Moving Reference Frame method. </li>
+			<li> Possibility to set precision for specific outputs (probes, cuts, global quantities, boundary flux/quantities). </li>
+			<li> Possibility to run test cases from a different folder. </li>
+			<li> Minor modification of axi-symmetric computations for second-order simulations. </li>
+			<li> Better handling of pressure relaxations when Newton-Raphson method does not converge. </li>
+			<li> Update of documentation regarding test cases. </li>
+		</ul>
+	<h2> Fixes: </h2>
+		<ul>
+			<li> Fix recording of probes with computational restart. </li>
+			<li> Fix bug on unstructured meshes using hexaedron and prisms. </li>
+			<li> Correction on NASG EOS to allow null volume fractions. </li>
+			<li> Fix bug GNU dataset output precision. </li>
+			<li> Fix bug AMR parallel when large domains were used </li>
+			<li> Fix bug AMR parallel on printing of load. </li>
+		</ul>
+	</p>
+</article>
+<hr />
+
+<article>
+	<h1> ECOGEN_v3.0 </h1>
+	<p class="date">2021-03-10</p>
+	<p> <a href="https://github.com/code-mphi/ECOGEN/releases/tag/v3.0" target="_blank">ECOGEN_v3.0</a> is available on GitHub. It includes new features and fixes bugs:
+		<ul>		
+			<li> General restructuration and cleaning. </li>
+			<li> Correction of several bugs (viscous terms, etc.). </li>
+			<li> Additionnal reference test cases. </li>
+			<li> Non-regression test database and tool added. </li>
+		</ul>	
+	</p>
+</article>
+<hr />
+
+<article>
+	<h1> ECOGEN_v2.0 </h1>
+	<p class="date">2020-05-11</p>
+	<img src="/ECOGEN/assets/images/BubbleHelium.gif" alt="Load balancing on a bubble-shock interaction." />
+	<p> <a href="https://github.com/code-mphi/ECOGEN/releases/tag/v2.0" target="_blank">ECOGEN_v2.0</a> is available on GitHub. It includes new features and fixes bugs:
+		<ul>		
+			<li> AMR multicore computations are now efficiently load balanced. </li>
+			<li> New equation of state implemented: Noble-Abel Stiffened-Gas EOS.</li>
+		</ul>	
+	</p>
+</article>
+<hr />
+
+<article>
+	<h1> ECOGEN_v1.0 </h1>
+	<p class="date">2020-04-29</p>
+	<p> <a href="https://github.com/code-mphi/ECOGEN/releases/tag/v1.0" target="_blank">ECOGEN_v1.0</a> is available on GitHub. It includes new features and fixes bugs. </p>
+</article>
+<hr />
+
+<article>
+	<h1> ECOGEN_v0.0 </h1>
+	<p class="date">2017-11-27</p>
+	<p> First version of ECOGEN, <a href="https://github.com/Matshishkapeu/ECOGEN/releases/tag/v0.0" target="_blank">ECOGEN_v0.0</a>, available on GitHub. </p>
+</article>
+
+    </main>
+    <footer>
+	<div> ECOGEN is developped by <a href="https://code-mphi.fr/" target="_blank" > Code-m&Phi; </a> members </div>
+	<div><span class="copy-left">©</span> ECOGEN</div>
+	<div class="flexZone">
+		<div class="design">
+			<p>Design web:</p>
+		</div> 
+		<div class="design">
+			<a href="mailto:productiondulama@gmail.com" target="_blank" > <img src="/ECOGEN/assets/images/productionduLama.png" alt="production du Lama" /> </a> 
+		</div>
+	</div>
+</footer>
+  </body>
+</html>
+

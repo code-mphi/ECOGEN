@@ -1,0 +1,38 @@
+<map id="Cell::chooseUnrefine" name="Cell::chooseUnrefine">
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,124,161,149"/>
+<area shape="rect" id="Node000002" href="$classCell.html#aac72fe8b0117013d4586405faef34629" title=" " alt="" coords="209,75,424,100"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="144,121,242,100,243,106,145,127"/>
+<area shape="rect" id="Node000003" href="$classCell.html#a8d9e68cc57e789e4455f5bf343dfc71b" title=" " alt="" coords="225,124,408,149"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="161,134,212,134,212,139,161,139"/>
+<area shape="rect" id="Node000006" href="$classCell.html#ab05c7f5fd1483fcf68469ecb9533ab46" title=" " alt="" coords="225,174,408,214"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="137,147,222,168,221,173,135,152"/>
+<area shape="rect" id="Node000004" href="$classCell.html#a4f484781d8e4ba3b0c537d8a351d2fed" title=" " alt="" coords="532,76,627,101"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="386,121,518,97,519,102,387,127"/>
+<area shape="rect" id="Node000005" href="$classCell.html#abdc7902deffe79f84b069da59eb2a35a" title=" " alt="" coords="527,125,632,151"/>
+<area shape="poly" id="edge4_Node000003_Node000005" title=" " alt="" coords="408,134,513,135,513,140,408,140"/>
+<area shape="rect" id="Node000007" href="$classCell.html#ab69dcb89f8217141c67b6b9e95c25377" title=" " alt="" coords="472,179,687,204"/>
+<area shape="poly" id="edge6_Node000006_Node000007" title=" " alt="" coords="408,190,458,190,458,195,408,196"/>
+<area shape="rect" id="Node000016" href="$classElement.html#aebdebdc8ece0def5404ac7a4e6206cf2" title=" " alt="" coords="483,274,675,314"/>
+<area shape="poly" id="edge19_Node000006_Node000016" title=" " alt="" coords="372,212,514,267,512,272,370,217"/>
+<area shape="rect" id="Node000008" href="$classFlux.html#aac25bdaa5ffd6bf68855b07e4420e077" title="Add flux passed in parameter to the correspond model flux." alt="" coords="753,5,863,31"/>
+<area shape="poly" id="edge7_Node000007_Node000008" title=" " alt="" coords="658,176,685,160,697,146,704,132,708,102,713,71,720,55,733,40,739,35,743,39,737,44,725,58,718,73,714,103,709,133,702,149,688,164,660,181"/>
+<area shape="rect" id="Node000010" href="$classFlux.html#a18ead5a4940b4978cb9ef517f9e27b21" title="Build the primitive variables for a given cell from conservative one." alt="" coords="748,55,868,80"/>
+<area shape="poly" id="edge9_Node000007_Node000010" title=" " alt="" coords="652,176,685,160,701,143,708,126,716,107,733,89,741,84,744,88,736,93,721,110,713,128,705,146,688,164,655,181"/>
+<area shape="rect" id="Node000011" href="$classFlux.html#a6ff61c3487035a90e80b4fd4c39c8617" title="multiply the flux of the corresponding model by a constant" alt="" coords="752,104,864,129"/>
+<area shape="poly" id="edge11_Node000007_Node000011" title=" " alt="" coords="632,176,686,160,734,138,752,131,754,136,736,143,688,164,634,181"/>
+<area shape="rect" id="Node000012" href="$classModel.html#a0251346425166ed507634b7111bf6d2b" title="Run all the relaxations." alt="" coords="737,153,879,179"/>
+<area shape="poly" id="edge13_Node000007_Node000012" title=" " alt="" coords="687,177,723,173,723,178,687,182"/>
+<area shape="rect" id="Node000013" href="$classFlux.html#a54ed221ddaafbbc85805a6d8af0c61aa" title="Temporary store the conservative variables of a given cell." alt="" coords="735,203,881,228"/>
+<area shape="poly" id="edge14_Node000007_Node000013" title=" " alt="" coords="687,200,722,204,721,209,687,205"/>
+<area shape="rect" id="Node000014" href="$classFlux.html#a78b3d87caaf410e3598b0ce01966b058" title="set each attribute of the flux to zero" alt="" coords="747,252,869,277"/>
+<area shape="poly" id="edge16_Node000007_Node000014" title=" " alt="" coords="621,202,755,245,754,250,619,207"/>
+<area shape="rect" id="Node000015" href="$classTransport.html#a1ac0ea1929d40518fc6a75eb378b0757" title="Set the value of the corresponding transport variable." alt="" coords="735,301,881,327"/>
+<area shape="poly" id="edge18_Node000007_Node000015" title=" " alt="" coords="601,202,671,248,736,286,754,294,752,299,733,291,669,252,598,206"/>
+<area shape="rect" id="Node000009" href="$classErrors.html#a78eeb532e12787fee07b78aa5ef6a0c6" title=" " alt="" coords="929,153,1087,179"/>
+<area shape="poly" id="edge8_Node000008_Node000009" title=" " alt="" coords="859,28,883,40,915,63,945,90,991,141,987,144,941,94,912,67,880,44,857,33"/>
+<area shape="poly" id="edge10_Node000010_Node000009" title=" " alt="" coords="854,78,882,89,934,116,979,144,976,148,931,121,880,94,852,83"/>
+<area shape="poly" id="edge12_Node000011_Node000009" title=" " alt="" coords="861,127,943,147,942,153,860,132"/>
+<area shape="poly" id="edge15_Node000013_Node000009" title=" " alt="" coords="860,200,942,179,943,185,861,205"/>
+<area shape="poly" id="edge17_Node000014_Node000009" title=" " alt="" coords="849,249,880,237,930,211,974,184,977,189,933,215,882,242,851,254"/>
+<area shape="poly" id="edge20_Node000016_Node000009" title=" " alt="" coords="621,312,675,333,742,351,777,355,813,355,847,349,880,337,902,323,921,307,954,267,978,226,995,190,1000,192,983,228,958,270,925,311,905,328,883,342,849,355,813,360,777,360,741,356,673,338,619,317"/>
+</map>

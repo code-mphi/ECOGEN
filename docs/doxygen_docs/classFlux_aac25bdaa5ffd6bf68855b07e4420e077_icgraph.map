@@ -1,0 +1,39 @@
+<map id="Flux::addFlux" name="Flux::addFlux">
+<area shape="rect" id="Node000001" title="Add flux passed in parameter to the correspond model flux." alt="" coords="835,371,945,396"/>
+<area shape="rect" id="Node000002" href="$classCellInterface.html#a96a0427bef10a7ca6e0102998e06b6ce" title=" " alt="" coords="574,55,739,80"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="885,357,879,301,864,229,851,192,834,155,812,122,785,93,763,80,739,72,740,67,766,75,788,89,816,119,839,153,856,190,869,228,885,300,890,357"/>
+<area shape="rect" id="Node000005" href="$classAddPhys.html#abdabd90ce3f3927dc682ac99240dad68" title="Add the additional physic flux between two cells at the corresponding cell." alt="" coords="559,104,754,129"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="883,357,874,310,857,251,828,192,808,166,785,143,753,126,755,121,788,139,812,162,832,189,862,249,879,309,888,356"/>
+<area shape="rect" id="Node000008" href="$classAPUEqViscosity.html#a87d6a33df3f42befacd8019b10ffc3e3" title="Add the non&#45;conservative terms of the corresponding additional physic in a cell." alt="" coords="550,153,763,179"/>
+<area shape="poly" id="edge7_Node000001_Node000008" title=" " alt="" coords="880,358,868,321,849,276,822,231,805,211,785,194,763,181,765,176,788,189,808,207,826,227,854,273,873,319,885,357"/>
+<area shape="rect" id="Node000009" href="$classAPUEqSurfaceTension.html#a89d60064b5f8eac6159c7b5127f73a20" title="Add the symmetrical terms of the corresponding additional physic in a cell (when radial axis is on X)" alt="" coords="527,203,787,243"/>
+<area shape="poly" id="edge8_Node000001_Node000009" title=" " alt="" coords="873,360,838,307,814,280,785,258,762,246,765,241,788,253,817,276,842,304,878,357"/>
+<area shape="rect" id="Node000010" href="$classAPUEqViscosity.html#a58ba460889981836a97972804e98d8f0" title="Add the symmetrical terms of the corresponding additional physic in a cell (when radial axis is on X)" alt="" coords="543,267,770,307"/>
+<area shape="poly" id="edge9_Node000001_Node000010" title=" " alt="" coords="859,365,825,342,786,322,752,310,754,305,788,317,828,338,862,360"/>
+<area shape="rect" id="Node000011" href="$classAPUEqSurfaceTension.html#a8f53baaafa00b9a4d7709e1539c71dbc" title="Add the symmetrical terms of the corresponding additional physic in a cell (when radial axis is on Y)" alt="" coords="527,331,786,371"/>
+<area shape="poly" id="edge10_Node000001_Node000011" title=" " alt="" coords="821,377,786,372,786,366,822,371"/>
+<area shape="rect" id="Node000012" href="$classAPUEqViscosity.html#ac552a0c177b6e02a5b4df71bd2e107f7" title="Add the symmetrical terms of the corresponding additional physic in a cell (when radial axis is on Y)" alt="" coords="543,395,770,435"/>
+<area shape="poly" id="edge11_Node000001_Node000012" title=" " alt="" coords="821,395,771,402,770,397,821,390"/>
+<area shape="rect" id="Node000013" href="$classCell.html#ab69dcb89f8217141c67b6b9e95c25377" title=" " alt="" coords="549,460,764,485"/>
+<area shape="poly" id="edge12_Node000001_Node000013" title=" " alt="" coords="863,407,828,430,788,450,746,463,745,457,786,445,825,425,860,402"/>
+<area shape="rect" id="Node000016" href="$classSourceNum.html#ac74e47e385d1c0036425a6d1ce7c8a9e" title="Source terms integration on conservative quantities." alt="" coords="553,510,761,550"/>
+<area shape="poly" id="edge15_Node000001_Node000016" title=" " alt="" coords="876,409,840,456,815,480,788,500,762,513,760,508,785,496,812,476,836,452,872,406"/>
+<area shape="rect" id="Node000017" href="$classCellO2.html#a6877387940b241c8ca07cea7fc0d13c9" title=" " alt="" coords="565,575,748,600"/>
+<area shape="poly" id="edge16_Node000001_Node000017" title=" " alt="" coords="884,410,871,445,852,487,824,529,788,564,749,582,747,577,785,560,820,526,847,485,867,443,879,408"/>
+<area shape="rect" id="Node000018" href="$classCell.html#a0d779d58bf6f618ab3aab16c33c0bed0" title=" " alt="" coords="583,624,730,649"/>
+<area shape="poly" id="edge17_Node000001_Node000018" title=" " alt="" coords="888,411,878,456,860,511,831,567,811,593,788,615,761,630,731,638,730,633,759,625,785,611,807,589,826,565,855,509,873,454,882,409"/>
+<area shape="rect" id="Node000019" href="$classCell.html#a65e810a5eaf06e8ae0327a958a8f9b23" title=" " alt="" coords="555,673,758,699"/>
+<area shape="poly" id="edge18_Node000001_Node000019" title=" " alt="" coords="890,410,883,464,867,533,854,569,837,604,815,636,788,664,760,680,757,676,785,660,811,633,832,601,849,567,862,531,878,463,885,409"/>
+<area shape="rect" id="Node000003" href="$classCellInterface.html#acc96276cbae58430f8e9145321607bff" title=" " alt="" coords="266,5,465,31"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="567,55,441,33,442,28,568,50"/>
+<area shape="rect" id="Node000004" href="$classCellInterfaceO2.html#ab050bdf2b0736109b6f3aa6281585de3" title=" " alt="" coords="257,55,473,80"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="560,70,473,70,473,65,560,65"/>
+<area shape="rect" id="Node000006" href="$classAddPhys.html#af7b64716ee631ef5e61b3e11a660fee0" title="Compute the additional physic flux between two cells." alt="" coords="252,104,479,129"/>
+<area shape="poly" id="edge5_Node000005_Node000006" title=" " alt="" coords="546,119,479,119,479,114,546,114"/>
+<area shape="rect" id="Node000007" href="$classCellInterface.html#af5640a494bde517e96a7526283cc9e36" title=" " alt="" coords="5,97,204,137"/>
+<area shape="poly" id="edge6_Node000006_Node000007" title=" " alt="" coords="238,119,204,119,204,114,238,114"/>
+<area shape="rect" id="Node000014" href="$classCell.html#ab05c7f5fd1483fcf68469ecb9533ab46" title=" " alt="" coords="274,453,457,493"/>
+<area shape="poly" id="edge13_Node000013_Node000014" title=" " alt="" coords="535,475,457,475,457,470,535,470"/>
+<area shape="rect" id="Node000015" href="$classCell.html#a1f8f32869bc7ab864dd0fae7ba8f4d57" title=" " alt="" coords="27,460,183,485"/>
+<area shape="poly" id="edge14_Node000014_Node000015" title=" " alt="" coords="260,475,183,475,183,470,260,470"/>
+</map>

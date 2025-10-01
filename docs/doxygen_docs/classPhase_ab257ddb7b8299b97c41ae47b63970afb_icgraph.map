@@ -1,0 +1,23 @@
+<map id="Phase::extendedCalculusPhase" name="Phase::extendedCalculusPhase">
+<area shape="rect" id="Node000001" title="Compute extra thermodynammical variables." alt="" coords="263,247,487,273"/>
+<area shape="rect" id="Node000002" href="$classFluxEulerHomogeneous.html#a9dfe2ce022fdd8eff55f8632e254cdf2" title="Build the primitive variables for a given cell from conservative one." alt="" coords="21,5,199,45"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="358,236,335,197,302,149,261,101,213,60,192,48,194,43,216,55,265,97,307,146,340,194,363,233"/>
+<area shape="rect" id="Node000003" href="$classFluxPTUEq.html#a56b4822f3b4ca96c1d7658df57894228" title="Build the primitive variables for a given cell from conservative one." alt="" coords="29,70,191,95"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="354,238,296,173,257,138,213,109,187,98,189,93,216,104,260,134,300,169,358,234"/>
+<area shape="rect" id="Node000004" href="$classFluxUEq.html#a951795fa6ea264745ec92b6655c834c8" title="Build the primitive variables for a given cell from conservative one." alt="" coords="37,119,183,145"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="345,241,287,199,251,177,214,158,180,147,182,142,216,154,254,172,290,194,348,236"/>
+<area shape="rect" id="Node000005" href="$classFluxUEqTotEnergy.html#a897b84cffe330521c9815d563504f647" title="Build the primitive variables for a given cell from conservative one." alt="" coords="5,169,215,194"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="326,245,214,208,170,197,172,192,215,203,328,240"/>
+<area shape="rect" id="Node000006" href="$classModEuler.html#a58168474824c350b680346c36c8ba7d8" title=" " alt="" coords="31,218,189,243"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="249,249,189,242,190,237,250,243"/>
+<area shape="rect" id="Node000007" href="$classModEulerHomogeneous.html#a8835ffa3f5afcf37a2481ba42c1e9c75" title="Complete a thermodynamics state frome minimum variables depending on the model." alt="" coords="21,268,199,308"/>
+<area shape="poly" id="edge6_Node000001_Node000007" title=" " alt="" coords="249,276,199,281,199,276,249,271"/>
+<area shape="rect" id="Node000008" href="$classModPTUEq.html#a295d0996ad74507bbbd71fa94e97905b" title="Complete a thermodynamics state frome minimum variables depending on the model." alt="" coords="27,333,193,358"/>
+<area shape="poly" id="edge7_Node000001_Node000008" title=" " alt="" coords="331,281,215,323,169,335,168,330,214,317,329,276"/>
+<area shape="rect" id="Node000009" href="$classModUEq.html#ae379e5ca5f1c8cb82d275506a9f8b474" title=" " alt="" coords="35,382,185,407"/>
+<area shape="poly" id="edge8_Node000001_Node000009" title=" " alt="" coords="350,284,291,328,254,352,216,372,180,384,178,379,214,367,252,347,288,324,347,279"/>
+<area shape="rect" id="Node000010" href="$classModUEqTotEnergy.html#a1425ac320431bea77e66f2485092ba14" title=" " alt="" coords="20,432,200,472"/>
+<area shape="poly" id="edge9_Node000001_Node000010" title=" " alt="" coords="358,285,300,352,260,389,216,421,189,434,186,430,213,416,257,385,296,348,354,282"/>
+<area shape="rect" id="Node000011" href="$classRelaxationPFinite.html#aa4f46a0b4ca70047bb49d68a463f9104" title="Finite Pressure relaxation method." alt="" coords="38,496,182,536"/>
+<area shape="poly" id="edge10_Node000001_Node000011" title=" " alt="" coords="365,287,343,330,310,384,268,439,216,486,183,503,181,499,213,482,264,435,306,381,338,327,360,284"/>
+</map>

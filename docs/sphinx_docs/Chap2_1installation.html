@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Prerequisites &mdash; ECOGEN 5.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/sphinx_highlight.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="I/O descriptions" href="Chap3_IO_Chapter.html" />
+    <link rel="prev" title="Installation instructions" href="Chap2_installation_Chapter.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            ECOGEN
+          </a>
+              <div class="version">
+                5.0
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="Chap1_introduction.html">Introduction</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="Chap2_installation_Chapter.html">Installation instructions</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Prerequisites</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#installing-prerequisites-on-ubuntu-system">Installing prerequisites on Ubuntu system</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#installing-c-compiler">Installing C++ compiler</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#installing-openmpi">Installing openMPI</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#download">Download</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#compilation-execution-on-bash-using-the-provided-makefile">Compilation/Execution on bash using the provided Makefile</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#compilation-execution-on-bash-using-cmake-tool">Compilation/Execution on bash using CMake tool</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#prerequisite">Prerequisite</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#usage">Usage</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#testing">Testing</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="Chap3_IO_Chapter.html">I/O descriptions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Chap4_tutorials_Chapter.html">Tutorials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Chap5_testCases_Chapter.html">Test cases</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Chap6_developersGuide_Chapter.html">Developers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Chap7_license.html">License</a></li>
+<li class="toctree-l1"><a class="reference internal" href="zBibliography.html">Bibliography</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">ECOGEN</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="Chap2_installation_Chapter.html">Installation instructions</a></li>
+      <li class="breadcrumb-item active">Prerequisites</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/Chap2_1installation.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="prerequisites">
+<h1>Prerequisites<a class="headerlink" href="#prerequisites" title="Permalink to this heading"></a></h1>
+<p>ECOGEN must be compiled with C++. It also requires a functional system implementation of MPI library (not provided in this package). Depending on your operating system, you can follow the instructions below to set a full open-source installation.</p>
+<section id="installing-prerequisites-on-ubuntu-system">
+<h2>Installing prerequisites on Ubuntu system<a class="headerlink" href="#installing-prerequisites-on-ubuntu-system" title="Permalink to this heading"></a></h2>
+<p>ECOGEN requires two mandatory components to be installed on your Ubuntu system: A C++ compiler and an effective implementation of MPI.</p>
+<section id="installing-c-compiler">
+<h3>Installing C++ compiler<a class="headerlink" href="#installing-c-compiler" title="Permalink to this heading"></a></h3>
+<p>Nothing is easier than installing C and C++ compiler on Ubuntu. In your terminal, just enter the following commands:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">sudo apt-get update</span>
+<span class="go">sudo apt-get upgrade</span>
+<span class="go">sudo apt-get install gcc</span>
+<span class="go">sudo apt-get install g++</span>
+<span class="go">sudo apt-get install build-essential</span>
+<span class="go">sudo apt-get install make</span>
+</pre></div>
+</div>
+<p>More information on the Ubuntu doc page <a class="reference external" href="https://doc.ubuntu-fr.org/gcc">https://doc.ubuntu-fr.org/gcc</a>.</p>
+</section>
+<section id="installing-openmpi">
+<h3>Installing openMPI<a class="headerlink" href="#installing-openmpi" title="Permalink to this heading"></a></h3>
+<p>Download the latest stable version of <a class="reference external" href="https://www.open-mpi.org/">openMPI</a> under compressed format. At the time this page was written, it corresponded to the compressed file: openmpi-4.0.1.tar.gz. Uncompresse and move it into the directory:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">tar -xvf openmpi-4.0.1.tar.gz</span>
+<span class="go">cd openmpi-4.0.1/</span>
+</pre></div>
+</div>
+<p>Prepare the environment to use your favorite compiler:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">export CC=gcc</span>
+<span class="go">export CXX=g++</span>
+</pre></div>
+</div>
+<p>Configure and proceed to the installation (you can choose a different directory). The “make” step should take some time (coffee time?):</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">./configure --prefix=/opt/openmpi</span>
+<span class="go">make</span>
+<span class="go">sudo make install</span>
+</pre></div>
+</div>
+<p>Cleaning</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">cd ..</span>
+<span class="go">rm -rf openmpi-4.0.1/</span>
+</pre></div>
+</div>
+<p>Add openMPI library to the environment variable PATH (might be required to be root):</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">sudo echo &#39;export PATH=/opt/openmpi/bin:$PATH&#39; &gt;&gt; /etc/bash.bashrc</span>
+</pre></div>
+</div>
+<p>Then source the file to take into consideration the modifications:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">source /etc/bash.bashrc</span>
+</pre></div>
+</div>
+<p>If the installation succeeds you should be able to use the “mpicxx” command in your terminal. Then proceed to the download step below.</p>
+</section>
+</section>
+</section>
+<section id="download">
+<h1>Download<a class="headerlink" href="#download" title="Permalink to this heading"></a></h1>
+<p>The last ECOGEN version 5.0 can be downloaded from GitHub. The source files are available at the following address: <a class="reference external" href="https://github.com/code-mphi/ECOGEN/releases">https://github.com/code-mphi/ECOGEN/releases</a>.</p>
+<p>The package includes:</p>
+<ul>
+<li><p>ECOGEN/src/ folder including C++ source files.</p></li>
+<li><p>ECOGEN/libMeshes/ folder including examples of unstructured meshes in <em>.geo</em> format (Gmsh files version 2). See section <a class="reference internal" href="Chap4_2generatingMeshes.html#sec-tuto-generatingmeshes"><span class="std std-ref">Generating Meshes</span></a> for details.</p></li>
+<li><p>ECOGEN/libEOS/ folder including some possible parameters for the equation-of-states in XML files. See section <a class="reference internal" href="Chap3_2materials.html#sec-io-materials"><span class="std std-ref">Materials</span></a> for details.</p></li>
+<li><p>ECOGEN/libTests folder including:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>ECOGEN/libTests/referenceTestCases/ folder organized as a test-case library according to the flow model (Euler-equation ECOGEN solver, pressure-velocity-equilibrium model (previously named Kapila’s model) and velocity-equilibrium model for multiphase-flow ECOGEN solver, homogeneous-Euler-equation ECOGEN solver, etc.). A detailed list of available test cases is proposed in section <a class="reference internal" href="Chap5_testCases_Chapter.html#chap-testcases"><span class="std std-ref">Test cases</span></a>.</p></li>
+<li><p>4 quick-manual XML files to create a new flow computation with ECOGEN.</p></li>
+</ul>
+</div></blockquote>
+</li>
+<li><p><em>ECOGEN.xml</em>: Main entry file to select running cases.</p></li>
+<li><p><em>Makefile</em>: For compilation in Unix environment. This file may require some adaptation to the user’s environment.</p></li>
+<li><p><em>LICENSE</em>, <em>COPYRIGHT</em> and <em>AUTHORS</em>: Information files about authors and licensing.</p></li>
+<li><p><em>README.md</em>: Information file.</p></li>
+<li><p><em>ECOGEN_V1.0_documentation.pdf</em>: The full documentation for ECOGEN.</p></li>
+</ul>
+</section>
+<section id="compilation-execution-on-bash-using-the-provided-makefile">
+<span id="sec-installation-compileandexecute"></span><h1>Compilation/Execution on bash using the provided Makefile<a class="headerlink" href="#compilation-execution-on-bash-using-the-provided-makefile" title="Permalink to this heading"></a></h1>
+<p>Use the Makefile (can be adapted if necessary) to compile ECOGEN sources directly on bash (XX is the number of cores required for compilation):</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">make -j XX</span>
+</pre></div>
+</div>
+<p>Executing ECOGEN is really easy on bash (XX is the number of cores required for execution):</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">mpirun -np XX ECOGEN</span>
+</pre></div>
+</div>
+</section>
+<section id="compilation-execution-on-bash-using-cmake-tool">
+<h1>Compilation/Execution on bash using CMake tool<a class="headerlink" href="#compilation-execution-on-bash-using-cmake-tool" title="Permalink to this heading"></a></h1>
+<p>Alternatively, more advanced users can choose to use <a class="reference external" href="https://cmake.org/">CMake</a> to build the project.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>To avoid any confusion, do not mix compilation using the provided Makefile and compilation using CMake in the same worktree.</p>
+</div>
+<section id="prerequisite">
+<h2>Prerequisite<a class="headerlink" href="#prerequisite" title="Permalink to this heading"></a></h2>
+<p>Install CMake using your usual package manager. For example on Ubuntu:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">apt install -y cmake</span>
+</pre></div>
+</div>
+</section>
+<section id="usage">
+<h2>Usage<a class="headerlink" href="#usage" title="Permalink to this heading"></a></h2>
+<ol class="arabic simple">
+<li><p>Generate the build files in the <em>build_dir</em> directory:</p></li>
+</ol>
+<blockquote>
+<div><div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">cmake -S . -B build_dir</span>
+</pre></div>
+</div>
+</div></blockquote>
+<ol class="arabic simple" start="2">
+<li><p>Build the project (XX is the number of cores required for compilation).</p></li>
+</ol>
+<blockquote>
+<div><div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">cmake --build build_dir -j XX</span>
+</pre></div>
+</div>
+</div></blockquote>
+<p>ECOGEN executable is created inside the <em>build_dir</em> directory thus, to execute ECOGEN using XX cores:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">mpirun -np XX ./build_dir/ECOGEN</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="testing">
+<h1>Testing<a class="headerlink" href="#testing" title="Permalink to this heading"></a></h1>
+<p>Once ECOGEN has been successfully compiled, the best way to test ECOGEN’s installation is to run successively the two simple following commands:</p>
+<ul>
+<li><p>if you built the project using the provided Makefile:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">./ECOGEN</span>
+<span class="go">    mpirun -np 2 ECOGEN</span>
+</pre></div>
+</div>
+</li>
+<li><p>if you built it using CMake:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">./build_dir/ECOGEN</span>
+<span class="go">    mpirun -np 2 ./build_dir/ECOGEN</span>
+</pre></div>
+</div>
+</li>
+</ul>
+<p>These will run the default test case included in the package two times:</p>
+<ul class="simple">
+<li><p>Once in sequential (single core).</p></li>
+<li><p>Once in parallel using 2 cores.</p></li>
+</ul>
+<p>These should print information in the terminal on the running default test case. If no error message appears, then your installation should be OK and you should be able to use ECOGEN for your own applications.</p>
+<p>ECOGEN is including a given number of simple prebuild test cases. Each test can be used as a basis for a new one. Visit the tutorial section <a class="reference internal" href="Chap4_tutorials_Chapter.html#chap-tutorials"><span class="std std-ref">Tutorials</span></a> for more information.</p>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="Chap2_installation_Chapter.html" class="btn btn-neutral float-left" title="Installation instructions" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="Chap3_IO_Chapter.html" class="btn btn-neutral float-right" title="I/O descriptions" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, code-mphi.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

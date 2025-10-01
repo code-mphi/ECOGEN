@@ -1,0 +1,19 @@
+<map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
+<area shape="rect" id="Node000000" href="$classPhase.html" title="Abstract class for a phase." alt="" coords="5,129,67,155"/>
+<area shape="rect" id="Node000001" href="$classPhaseEuler.html" title="Phase variables for Euler equations (single phase)" alt="" coords="161,5,256,31"/>
+<area shape="poly" id="edge120_Node000000_Node000001" title=" " alt="" coords="48,115,75,76,93,57,113,40,136,28,160,21,162,26,138,33,116,44,96,60,79,80,53,118"/>
+<area shape="rect" id="Node000002" href="$classPhaseEulerHomogeneous.html" title="Phase variables for Euler Homogeneous equations (velocity and thermodynamical equilibrium)" alt="" coords="115,55,303,80"/>
+<area shape="poly" id="edge121_Node000000_Node000002" title=" " alt="" coords="63,119,114,89,146,78,147,83,116,94,66,123"/>
+<area shape="rect" id="Node000003" href="$classPhaseEulerKorteweg.html" title="Phase variables for Augmented Euler–Korteweg equations (single phase)" alt="" coords="131,104,286,129"/>
+<area shape="poly" id="edge122_Node000000_Node000003" title=" " alt="" coords="80,133,131,125,132,131,81,138"/>
+<area shape="rect" id="Node000005" href="$classPhasePTUEq.html" title="Phase variables for pressure&#45;temperature&#45;velocity (mechanical and thermal equilibrium) system of equa..." alt="" coords="157,153,260,179"/>
+<area shape="poly" id="edge124_Node000000_Node000005" title=" " alt="" coords="81,145,157,156,157,162,80,151"/>
+<area shape="rect" id="Node000006" href="$classPhaseUEq.html" title="Phase variables for the velocity&#45;equilibrium system of equations." alt="" coords="165,203,252,228"/>
+<area shape="poly" id="edge125_Node000000_Node000006" title=" " alt="" coords="68,160,116,188,166,204,164,209,114,192,65,165"/>
+<area shape="rect" id="Node000008" href="$classPhaseUEqTotEnergy.html" title="Phase variables for the velocity&#45;equilibrium system of equations." alt="" coords="133,252,284,277"/>
+<area shape="poly" id="edge127_Node000000_Node000008" title=" " alt="" coords="53,165,79,203,97,221,116,237,141,249,139,254,113,242,93,225,75,206,49,168"/>
+<area shape="rect" id="Node000004" href="$classPhaseNonLinearSchrodinger.html" title="Phase variables for Augmented Euler–Korteweg equations (single phase)" alt="" coords="351,104,555,129"/>
+<area shape="poly" id="edge123_Node000003_Node000004" title=" " alt="" coords="300,114,350,114,350,119,300,119"/>
+<area shape="rect" id="Node000007" href="$classPhasePUEq.html" title="Phase variables for the pressure&#45;velocity&#45;equilibrium (mechanical equilibrium) system of equations (K..." alt="" coords="405,203,500,228"/>
+<area shape="poly" id="edge126_Node000006_Node000007" title=" " alt="" coords="266,213,405,213,405,218,266,218"/>
+</map>

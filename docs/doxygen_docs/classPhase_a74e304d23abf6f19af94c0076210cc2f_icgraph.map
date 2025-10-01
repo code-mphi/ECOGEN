@@ -1,0 +1,22 @@
+<map id="Phase::verifyAndCorrectPhase" name="Phase::verifyAndCorrectPhase">
+<area shape="rect" id="Node000001" title=" " alt="" coords="457,204,675,229"/>
+<area shape="rect" id="Node000002" href="$classFluxUEq.html#a951795fa6ea264745ec92b6655c834c8" title="Build the primitive variables for a given cell from conservative one." alt="" coords="230,5,377,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="548,194,525,159,493,119,453,78,408,44,376,31,378,26,411,40,457,74,497,115,529,156,552,191"/>
+<area shape="rect" id="Node000003" href="$classFluxUEqTotEnergy.html#a897b84cffe330521c9815d563504f647" title="Build the primitive variables for a given cell from conservative one." alt="" coords="199,55,408,80"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="541,196,484,144,448,117,408,94,378,83,380,78,410,89,451,112,488,140,545,192"/>
+<area shape="rect" id="Node000004" href="$classFluxPUEq.html#a3e734d6e31c8579b43269e7e477a7f72" title="Method to correct energy in non conservative models using total energy conservation." alt="" coords="202,104,405,129"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="530,200,474,171,408,143,370,132,371,127,410,138,476,166,532,195"/>
+<area shape="rect" id="Node000005" href="$classModPUEq.html#a47c184e8eb3b90fa4cd26997cc8b4d9e" title=" " alt="" coords="197,153,409,179"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="486,204,369,181,370,176,487,199"/>
+<area shape="rect" id="Node000006" href="$classRelaxationPFinite.html#aa4f46a0b4ca70047bb49d68a463f9104" title="Finite Pressure relaxation method." alt="" coords="5,322,149,362"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="444,209,385,209,322,214,259,225,198,244,168,261,140,282,97,324,93,320,136,277,165,256,196,240,258,220,322,209,385,204,444,204"/>
+<area shape="rect" id="Node000007" href="$classBoundCondWallO2NS.html#a5780c50b5260eaf755c59e6277b89a4d" title=" " alt="" coords="219,254,387,294"/>
+<area shape="poly" id="edge6_Node000001_Node000007" title=" " alt="" coords="494,235,388,258,387,253,493,230"/>
+<area shape="rect" id="Node000008" href="$classCellInterfaceO2NS.html#a3ffa6d43376b894e5db96308b73c062c" title=" " alt="" coords="229,318,378,358"/>
+<area shape="poly" id="edge7_Node000001_Node000008" title=" " alt="" coords="536,239,479,274,410,308,379,320,377,315,408,304,476,269,533,235"/>
+<area shape="rect" id="Node000009" href="$classCellInterfaceO2Cartesian.html#ac6814eabc189e20595fa40df01b5ad8a" title=" " alt="" coords="211,382,396,422"/>
+<area shape="poly" id="edge8_Node000001_Node000009" title=" " alt="" coords="549,242,492,306,454,342,411,372,386,384,384,380,408,368,450,338,488,303,545,238"/>
+<area shape="rect" id="Node000010" href="$classRelaxationPFinite.html#a336ff796145db489e80500a61a568058" title="System of equations to integrate for the LSODA solver." alt="" coords="231,446,375,486"/>
+<area shape="poly" id="edge9_Node000001_Node000010" title=" " alt="" coords="556,243,534,285,502,337,461,390,411,436,377,454,375,449,408,432,457,387,498,334,530,283,551,241"/>
+<area shape="poly" id="edge10_Node000010_Node000006" title=" " alt="" coords="217,446,196,436,141,401,98,364,101,360,145,396,199,432,219,441"/>
+</map>

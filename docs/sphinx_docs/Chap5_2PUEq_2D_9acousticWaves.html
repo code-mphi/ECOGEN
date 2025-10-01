@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Acoustic waves &mdash; ECOGEN 5.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/sphinx_highlight.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Temperature-, pressure- and velocity-equilibrium model" href="Chap5_2PTUEq.html" />
+    <link rel="prev" title="Spherical collapse" href="Chap5_2PUEq_2D_8sphericalCollapse.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            ECOGEN
+          </a>
+              <div class="version">
+                5.0
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="Chap1_introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Chap2_installation_Chapter.html">Installation instructions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Chap3_IO_Chapter.html">I/O descriptions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Chap4_tutorials_Chapter.html">Tutorials</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="Chap5_testCases_Chapter.html">Test cases</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="Chap5_1Euler.html">Single-phase test cases</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="Chap5_2.html">Multiphase test cases</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="Chap5_2UEq.html">Velocity-equilibrium model</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Chap5_2UEqTotE.html">Velocity-equilibrium model based on total energies</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Chap5_2UEqSolid.html">Velocity-equilibrium model for solids</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="Chap5_2PUEq.html">Pressure- and velocity-equilibrium model</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="Chap5_2PUEq_1D.html">1D</a></li>
+<li class="toctree-l4 current"><a class="reference internal" href="Chap5_2PUEq_2D.html">2D</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="Chap5_2PTUEq.html">Temperature-, pressure- and velocity-equilibrium model</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Chap5_2eulerHomogeneous.html">Homogeneous Euler</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Chap5_2.html#other-tests-cases">Other tests cases</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="Chap6_developersGuide_Chapter.html">Developers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Chap7_license.html">License</a></li>
+<li class="toctree-l1"><a class="reference internal" href="zBibliography.html">Bibliography</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">ECOGEN</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="Chap5_testCases_Chapter.html">Test cases</a></li>
+          <li class="breadcrumb-item"><a href="Chap5_2.html">Multiphase test cases</a></li>
+          <li class="breadcrumb-item"><a href="Chap5_2PUEq.html">Pressure- and velocity-equilibrium model</a></li>
+          <li class="breadcrumb-item"><a href="Chap5_2PUEq_2D.html">2D</a></li>
+      <li class="breadcrumb-item active">Acoustic waves</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/Chap5_2PUEq_2D_9acousticWaves.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="acoustic-waves">
+<h1>Acoustic waves<a class="headerlink" href="#acoustic-waves" title="Permalink to this heading"></a></h1>
+<p>This test case is similar to the Euler one: <a class="reference internal" href="Chap5_1Euler_2D_5acousticWaves.html"><span class="doc">Single-phase acoustic waves</span></a>. However, a bubble is added in the middle of the domain. To recall, this is a plain pressure field where a source term is used to generate one-way acoustic waves. This work constitutes an adaptation of the work of Maeda &amp; Colonius for single-phase flows <span id="id1">[<a class="reference internal" href="zBibliography.html#id6" title="K. Maeda and T. Colonius. A source term approach for generation of one-way acoustic waves in the Euler and Navier–Stokes equations. Wave Motion, 75:36–49, 2017.">MC17</a>]</span> to a multiphase system of equations. The waves here have a sinusoidal shape. 4 pulses are sent at a frequency of 300 kHz and have a pressure amplitude of 10 kPa.
+This case is a 2D Cartesian test case. The domain is only composed of water. The source term is located at 10.e-3 m in <em>x</em> and <em>y</em> directions and pulses are directed toward the <em>x</em> direction.
+This test is referenced in <em>./libTests/referenceTestCases/PUEq/2D/acousticWave/planeSinusoidalPulse/</em>. The corresponding uncommented line in <em>ECOGEN.xml</em> is:</p>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;testCase&gt;</span>./libTests/referenceTestCases/PUEq/2D/acousticWave/planeSinusoidalPulse/<span class="nt">&lt;/testCase&gt;</span>
+</pre></div>
+</div>
+<p>The initial characteristics of the run are:</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 57%" />
+<col style="width: 43%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Characteristic</p></th>
+<th class="head"><p>Value</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Dimension</p></td>
+<td><p>40.e-3 m x 20.e-3 m</p></td>
+</tr>
+<tr class="row-odd"><td><p>Initial mesh size</p></td>
+<td><p>200 x 100</p></td>
+</tr>
+<tr class="row-even"><td><p>AMR max level</p></td>
+<td><p>0</p></td>
+</tr>
+<tr class="row-odd"><td><p>Boundary conditions</p></td>
+<td><p>non-reflecting</p></td>
+</tr>
+<tr class="row-even"><td><p>Final solution time</p></td>
+<td><p>25.e-6 s</p></td>
+</tr>
+<tr class="row-odd"><td><p>Solution printing frequency</p></td>
+<td><p>5.e-7 s</p></td>
+</tr>
+<tr class="row-even"><td><p>Precision</p></td>
+<td><p>2nd order (MC)</p></td>
+</tr>
+</tbody>
+</table>
+<p>Results are shown in <a class="reference internal" href="#fig-testcases-pueq-acousticwave-anim"><span class="std std-numref">Fig. 92</span></a> where one can observe the one-way pulses from a point source, therefore spreading cylindrically (2D here) but with a main direction (<em>x</em> direction). The pulses are reflected from the interactions with the bubble (in black).</p>
+<figure class="align-center" id="id2">
+<span id="fig-testcases-pueq-acousticwave-anim"></span><a class="reference internal image-reference" href="_images/sinusPulseAnimation1.gif"><img alt="_images/sinusPulseAnimation1.gif" src="_images/sinusPulseAnimation1.gif" style="width: 709.1999999999999px; height: 356.4px;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 92 </span><span class="caption-text">One-way sinusoidal acoustic waves in water interacting with a bubble. Visualization using <a class="reference external" href="https://www.paraview.org/">Paraview</a> software.</span><a class="headerlink" href="#id2" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="Chap5_2PUEq_2D_8sphericalCollapse.html" class="btn btn-neutral float-left" title="Spherical collapse" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="Chap5_2PTUEq.html" class="btn btn-neutral float-right" title="Temperature-, pressure- and velocity-equilibrium model" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, code-mphi.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

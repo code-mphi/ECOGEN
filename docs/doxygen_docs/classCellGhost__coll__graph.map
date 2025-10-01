@@ -1,0 +1,20 @@
+<map id="CellGhost" name="CellGhost">
+<area shape="rect" id="Node000001" title="Child class for a ghost mesh cell." alt="" coords="224,275,309,300"/>
+<area shape="rect" id="Node000002" href="$classCell.html" title="Base class for a mesh cell." alt="" coords="243,200,290,225"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="269,240,269,274,264,274,264,240"/>
+<area shape="rect" id="Node000003" href="$classPhase.html" title="Abstract class for a phase." alt="" coords="5,97,67,123"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="46,134,56,156,72,174,103,187,150,196,244,207,243,212,150,202,102,192,69,178,52,159,41,137"/>
+<area shape="rect" id="Node000004" href="$classMixture.html" title="Abstract class for mixture variables." alt="" coords="124,97,196,123"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="167,135,175,156,187,174,215,193,244,204,242,209,212,198,183,178,170,158,162,137"/>
+<area shape="rect" id="Node000005" href="$classTransport.html" title="Class for additional transport equations." alt="" coords="225,97,308,123"/>
+<area shape="poly" id="edge4_Node000002_Node000005" title=" " alt="" coords="269,137,269,200,264,200,264,137"/>
+<area shape="rect" id="Node000006" href="$classFlux.html" title="Abstract class for conservative variables and fluxes." alt="" coords="393,97,444,123"/>
+<area shape="poly" id="edge5_Node000002_Node000006" title=" " alt="" coords="416,137,406,158,391,178,367,194,340,204,291,213,290,208,339,199,365,189,388,174,402,156,411,135"/>
+<area shape="rect" id="Node000007" href="$classElement.html" title=" " alt="" coords="469,97,545,123"/>
+<area shape="poly" id="edge6_Node000002_Node000007" title=" " alt="" coords="501,137,489,159,471,178,437,192,387,202,290,212,290,207,386,196,435,187,468,174,485,156,496,134"/>
+<area shape="rect" id="Node000008" href="$classCoord.html" title="Class for a coordinate system object such as coordinates of the vertex or a vector." alt="" coords="263,7,323,33"/>
+<area shape="poly" id="edge7_Node000007_Node000008" title=" " alt="" coords="335,35,480,95,478,100,333,40"/>
+<area shape="poly" id="edge8_Node000008_Node000008" title=" " alt="" coords="338,10,346,13,350,20,341,29,324,31,324,26,339,24,345,20,343,17,336,15"/>
+<area shape="rect" id="Node000009" href="$structdecomposition_1_1Key.html" title=" " alt="" coords="519,7,707,33"/>
+<area shape="poly" id="edge9_Node000007_Node000009" title=" " alt="" coords="590,44,522,99,519,95,587,39"/>
+</map>

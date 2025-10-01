@@ -1,0 +1,15 @@
+<map id="Coord::scalarProduct" name="Coord::scalarProduct">
+<area shape="rect" id="Node000001" title="Return the scalar product bewteen two vectors." alt="" coords="491,141,647,166"/>
+<area shape="rect" id="Node000002" href="$classGradientGreenGauss.html#aae74af38678eb8da737853c39e2e4543" title="Add the contribution of the interface to build the cell gradient." alt="" coords="248,5,405,45"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="543,133,498,96,441,60,404,45,406,40,444,55,501,91,546,129"/>
+<area shape="rect" id="Node000004" href="$classFluxEuler.html#a2cfe20d9b988c6472bac6d690c35e418" title="Gravity source term." alt="" coords="225,69,428,109"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="506,140,402,112,404,107,507,134"/>
+<area shape="rect" id="Node000005" href="$classFluxUEq.html#a2d5bce5ae9cf810214b66c9dc1599ca1" title="Gravity source term." alt="" coords="229,133,425,173"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="477,156,425,156,425,151,477,151"/>
+<area shape="rect" id="Node000006" href="$classFluxEuler.html#a7cc045cf60e9583159f64a886e108be0" title="MRF source term." alt="" coords="211,198,443,223"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="507,172,443,188,388,200,387,195,442,183,506,167"/>
+<area shape="rect" id="Node000007" href="$classFluxUEq.html#a8de1d535c8b7fef182b396bd0b32920f" title="MRF source term." alt="" coords="214,247,439,273"/>
+<area shape="poly" id="edge6_Node000001_Node000007" title=" " alt="" coords="543,177,498,208,444,237,405,250,403,245,442,232,495,203,540,172"/>
+<area shape="rect" id="Node000003" href="$classGradientGreenGauss.html#af8805deac13bbedc558d41a81957d292" title="Compute gradients (temperature, velocity, density) of a cell." alt="" coords="5,5,163,45"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="234,28,163,28,163,23,234,23"/>
+</map>

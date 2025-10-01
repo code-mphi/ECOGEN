@@ -1,0 +1,25 @@
+<map id="Phase::getTotalEnergy" name="Phase::getTotalEnergy">
+<area shape="rect" id="Node000001" title=" " alt="" coords="531,248,697,273"/>
+<area shape="rect" id="Node000002" href="$classFluxEuler.html#a8271c83352d129dbf085e54c2d39aafa" title="Add symetric terms." alt="" coords="245,5,470,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="602,235,587,193,562,140,527,88,505,64,481,44,461,33,464,29,484,40,509,60,531,84,566,138,592,190,607,234"/>
+<area shape="rect" id="Node000003" href="$classFluxEuler.html#a54de871c25cf440b42c607f91d0617f2" title="Build the conservative variables for a given cell from primitive one." alt="" coords="280,55,435,80"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="599,237,580,204,554,164,521,125,481,94,459,83,434,76,435,71,460,78,484,89,525,122,558,161,585,201,603,234"/>
+<area shape="rect" id="Node000005" href="$classCell.html#ae732f66a0ceadd4eb4cfb4ee22529ce8" title=" " alt="" coords="263,104,451,129"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="592,239,545,190,515,165,481,144,449,132,451,127,484,140,518,161,549,186,596,235"/>
+<area shape="rect" id="Node000006" href="$classPhaseUEqTotEnergy.html#a7504ff1842c0b9744d4a1e00977e44fb" title="Copy phase in phase attributes." alt="" coords="278,154,437,194"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="572,245,482,209,436,195,438,190,484,203,574,240"/>
+<area shape="rect" id="Node000007" href="$classPhaseEuler.html#a42891b4039bd3e0ee7318b20a56e16f9" title="Copy phase in phase attributes." alt="" coords="271,219,443,244"/>
+<area shape="poly" id="edge6_Node000001_Node000007" title=" " alt="" coords="517,252,443,244,444,238,518,247"/>
+<area shape="rect" id="Node000008" href="$classPhaseEulerHomogeneous.html#a90ab857c54b6ae97be8c7e264589d39d" title="Copy phase in phase attributes." alt="" coords="263,269,451,309"/>
+<area shape="poly" id="edge7_Node000001_Node000008" title=" " alt="" coords="517,274,452,281,451,276,516,269"/>
+<area shape="rect" id="Node000009" href="$classPhasePTUEq.html#ab6ac732a119c2193e4f06343cd309f81" title="Copy phase in phase attributes." alt="" coords="267,333,448,359"/>
+<area shape="poly" id="edge8_Node000001_Node000009" title=" " alt="" coords="578,282,534,303,483,323,436,336,435,331,482,318,532,299,576,277"/>
+<area shape="rect" id="Node000010" href="$classModEuler.html#a83a2310126bb8067f68a5302f47c18c2" title="Cell to cell Riemann solver." alt="" coords="246,383,469,408"/>
+<area shape="poly" id="edge9_Node000001_Node000010" title=" " alt="" coords="594,286,547,330,517,353,484,372,449,385,448,380,482,368,514,349,543,326,590,282"/>
+<area shape="rect" id="Node000011" href="$classModUEqTotEnergy.html#aa8b08cce2a171ffe008343a723d506ae" title="Cell to cell Riemann solver." alt="" coords="237,433,477,473"/>
+<area shape="poly" id="edge10_Node000001_Node000011" title=" " alt="" coords="601,287,555,354,522,391,484,422,458,435,455,430,481,417,519,387,551,351,597,284"/>
+<area shape="rect" id="Node000012" href="$classModEuler.html#a1ca5876126b8a53b89c02b1dd69eb44f" title="Cell to cell Riemann solver + compute fluxBuffMRF for MRF interface." alt="" coords="232,497,483,523"/>
+<area shape="poly" id="edge11_Node000001_Node000012" title=" " alt="" coords="608,288,592,332,567,386,531,441,509,466,484,487,461,500,458,495,481,482,506,462,527,438,562,383,587,330,603,286"/>
+<area shape="rect" id="Node000004" href="$classFluxEuler.html#ab89c2c109bc4d520efe28d456decf611" title="Temporary store the conservative variables of a given cell." alt="" coords="5,55,184,80"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="266,70,184,70,184,65,266,65"/>
+</map>

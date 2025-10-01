@@ -1,0 +1,9 @@
+<map id="APEConductivity::solveFluxConductivityInner" name="APEConductivity::solveFluxConductivityInner">
+<area shape="rect" id="Node000001" title="Solve the conductivity flux between two cells." alt="" coords="499,37,697,77"/>
+<area shape="rect" id="Node000002" href="$classAPEConductivity.html#a4a3d5b0350c8dfe2072e4b4edb830f3b" title="Solve the additional physic flux between two cells." alt="" coords="252,5,451,45"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="485,45,451,41,451,36,486,40"/>
+<area shape="rect" id="Node000003" href="$classAPEConductivity.html#a15ee7d04463d5803bf3f6f294851f677" title="Solve the conductivity flux at a boundary with an non&#45;reflecting type." alt="" coords="252,69,451,109"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="486,75,451,79,451,74,485,69"/>
+<area shape="rect" id="Node000004" href="$classAPEConductivity.html#ac5b559e4423c06ad91cad5379d2f96ac" title="Solve the additional physic flux at a domain boundary." alt="" coords="5,69,204,109"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="238,92,204,92,204,87,238,87"/>
+</map>

@@ -1,0 +1,19 @@
+<map id="ModUEq::lowMachSoundSpeed" name="ModUEq::lowMachSoundSpeed">
+<area shape="rect" id="Node000001" title=" " alt="" coords="297,209,520,234"/>
+<area shape="rect" id="Node000002" href="$classModUEq.html#a1b08411ca4aed4b36c4dd7a5c5fd90a9" title="Inlet injection using stagnation state half Riemann solver." alt="" coords="24,5,231,45"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="389,199,332,129,292,92,248,60,223,48,225,43,251,55,296,87,335,126,393,195"/>
+<area shape="rect" id="Node000003" href="$classModUEq.html#abf43432f9a7399f31c40de91355c07f1" title="Inlet injection using temperature half Riemann solver." alt="" coords="24,69,231,109"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="378,202,320,163,248,124,216,112,218,107,250,119,323,158,381,198"/>
+<area shape="rect" id="Node000004" href="$classModUEq.html#a5ed736f5e8b53ecf4dbb2590f8585374" title="Inlet tank half Riemann solver." alt="" coords="9,134,245,159"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="358,207,249,173,199,162,200,157,250,168,359,202"/>
+<area shape="rect" id="Node000005" href="$classModUEq.html#a387ca7a1a697c3bdef4cc12a8266e6aa" title="Cell to cell Riemann solver." alt="" coords="20,183,235,209"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="283,213,235,208,235,203,284,207"/>
+<area shape="rect" id="Node000006" href="$classModUEq.html#a90c14231f3e32e52ab89c3fea6f3b103" title="Cell to cell Riemann solver + compute fluxBuffMRF for MRF interface." alt="" coords="5,233,249,258"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="284,235,250,238,249,232,284,229"/>
+<area shape="rect" id="Node000007" href="$classModUEq.html#ad0527c6fa09d03f453911fd1cbef2f0f" title="Outlet at imposed massflow half Riemann solver." alt="" coords="19,283,236,323"/>
+<area shape="poly" id="edge6_Node000001_Node000007" title=" " alt="" coords="354,241,250,272,204,285,202,280,249,267,353,235"/>
+<area shape="rect" id="Node000008" href="$classModUEq.html#ab04966a0c3e3d574596af31502862f20" title="Outlet at imposed pressure half Riemann solver." alt="" coords="19,347,236,387"/>
+<area shape="poly" id="edge7_Node000001_Node000008" title=" " alt="" coords="385,245,326,291,289,316,250,337,220,349,218,344,248,332,287,311,323,287,381,241"/>
+<area shape="rect" id="Node000009" href="$classModUEq.html#a3667276443afdd61a33e71187b51075f" title="Wall half Riemann solver." alt="" coords="25,411,230,437"/>
+<area shape="poly" id="edge8_Node000001_Node000009" title=" " alt="" coords="395,247,372,282,339,324,298,366,251,401,222,414,220,409,248,396,294,362,335,321,367,279,391,244"/>
+</map>

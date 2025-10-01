@@ -1,0 +1,29 @@
+<map id="Phase::getW" name="Phase::getW">
+<area shape="rect" id="Node000001" title=" " alt="" coords="304,370,407,395"/>
+<area shape="rect" id="Node000002" href="$classSymCylindrical.html#add159b596f57f98c0588be10e0741a40" title="Add the symmetric terms for the cylindrical or spherical symmetry assumption." alt="" coords="19,5,242,45"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="352,356,348,295,334,215,322,173,305,131,283,93,254,59,239,48,242,44,258,55,287,90,310,129,327,171,340,214,353,295,357,356"/>
+<area shape="rect" id="Node000003" href="$classSymSpherical.html#afd08802c2dd12c17ca4cfe473d5f7700" title="Add the symmetric terms for the cylindrical or spherical symmetry assumption." alt="" coords="23,69,238,109"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="349,357,342,307,326,243,298,179,278,149,254,123,237,111,240,107,258,119,282,146,302,176,331,242,347,306,355,356"/>
+<area shape="rect" id="Node000004" href="$classFluxEuler.html#a5267a54d69731c74528727f8fd8565c9" title="Build the primitive variables for a given cell from conservative one." alt="" coords="54,134,207,159"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="347,357,337,316,319,266,292,216,275,193,254,174,232,161,207,153,208,148,234,156,258,170,279,190,297,213,324,264,342,314,352,356"/>
+<area shape="rect" id="Node000005" href="$classFluxEulerKorteweg.html#a2c9b23352889d9470396815752bfa797" title="Build the primitive variables for a given cell from conservative one." alt="" coords="55,184,207,224"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="342,358,309,297,284,265,254,238,231,225,206,217,208,211,233,220,258,234,288,262,313,294,346,356"/>
+<area shape="rect" id="Node000006" href="$classModEuler.html#ae49859059512848c5c61b6d6a52c242a" title="Select a specific scalar variable." alt="" coords="45,249,216,274"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="335,361,300,323,279,304,255,289,215,274,217,269,257,284,282,300,304,319,339,357"/>
+<area shape="rect" id="Node000007" href="$classModEulerKorteweg.html#a3c54a011be9c17b72c8232162fe710eb" title="Select a specific scalar variable." alt="" coords="35,299,226,339"/>
+<area shape="poly" id="edge6_Node000001_Node000007" title=" " alt="" coords="303,368,255,353,212,341,214,336,257,348,305,363"/>
+<area shape="rect" id="Node000008" href="$classModEuler.html#a8ee4e19516853548b6d31a982cddc4d9" title="Inlet injection using stagnation state half Riemann solver." alt="" coords="24,363,237,403"/>
+<area shape="poly" id="edge7_Node000001_Node000008" title=" " alt="" coords="290,385,237,385,237,380,290,380"/>
+<area shape="rect" id="Node000009" href="$classModEuler.html#ae4920a7fb04102098a76276408d463cf" title="Inlet injection using temperature half Riemann solver." alt="" coords="24,427,237,467"/>
+<area shape="poly" id="edge8_Node000001_Node000009" title=" " alt="" coords="305,402,257,417,214,429,212,424,255,412,303,397"/>
+<area shape="rect" id="Node000010" href="$classModEuler.html#a719035a85f12075c4c5ce3543e4e4de9" title="Inlet tank half Riemann solver." alt="" coords="9,491,252,517"/>
+<area shape="poly" id="edge9_Node000001_Node000010" title=" " alt="" coords="339,408,304,446,282,465,257,481,226,494,224,489,255,476,279,461,300,442,335,404"/>
+<area shape="rect" id="Node000011" href="$classModEuler.html#a83a2310126bb8067f68a5302f47c18c2" title="Cell to cell Riemann solver." alt="" coords="19,541,242,566"/>
+<area shape="poly" id="edge10_Node000001_Node000011" title=" " alt="" coords="346,409,314,471,288,503,257,530,232,543,230,538,255,526,284,500,309,468,342,407"/>
+<area shape="rect" id="Node000012" href="$classModEuler.html#a1ca5876126b8a53b89c02b1dd69eb44f" title="Cell to cell Riemann solver + compute fluxBuffMRF for MRF interface." alt="" coords="5,590,256,615"/>
+<area shape="poly" id="edge11_Node000001_Node000012" title=" " alt="" coords="351,409,340,448,322,494,295,540,278,561,258,579,236,592,233,588,254,575,274,558,290,537,317,492,335,446,346,408"/>
+<area shape="rect" id="Node000013" href="$classModEuler.html#a09a3cc9c67bd6234c7fbc1a7a7d8ca97" title="Outlet at imposed massflow half Riemann solver." alt="" coords="19,640,243,680"/>
+<area shape="poly" id="edge12_Node000001_Node000013" title=" " alt="" coords="354,410,345,457,328,516,300,576,281,604,258,629,238,642,235,638,254,625,277,601,295,574,323,514,340,455,348,409"/>
+<area shape="rect" id="Node000014" href="$classModEuler.html#aca61db9b38135b9079fd8148a59f2a37" title="Outlet at imposed pressure half Riemann solver." alt="" coords="19,704,243,744"/>
+<area shape="poly" id="edge13_Node000001_Node000014" title=" " alt="" coords="356,409,352,468,337,544,325,585,308,625,286,662,258,694,242,706,238,702,254,690,282,658,303,622,320,583,332,543,346,467,351,409"/>
+</map>

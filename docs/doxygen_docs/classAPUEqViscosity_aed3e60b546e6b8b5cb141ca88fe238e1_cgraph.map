@@ -1,0 +1,82 @@
+<map id="APUEqViscosity::solveFluxAddPhysBoundary" name="APUEqViscosity::solveFluxAddPhysBoundary">
+<area shape="rect" id="Node000001" title="Solve the additional physic flux at a domain boundary." alt="" coords="5,581,200,621"/>
+<area shape="rect" id="Node000002" href="$classCell.html#a1b96a70b37d23edffe3fa482f5146ca3" title=" " alt="" coords="290,29,401,55"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="104,580,120,473,151,318,170,238,193,165,218,105,246,64,260,54,275,47,278,52,263,58,250,68,223,107,198,167,175,239,156,319,126,474,109,581"/>
+<area shape="rect" id="Node000005" href="$classPhase.html#a4e4cd8c6afd1e1a8f7304ad7d7c3ee2f" title=" " alt="" coords="282,128,409,153"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="102,580,107,503,115,449,128,391,146,330,171,269,204,213,246,164,267,150,270,155,250,168,208,216,176,272,151,331,133,392,120,450,113,503,107,580"/>
+<area shape="rect" id="Node000007" href="$classFace.html#a2ae676e7576a92b93d0caa8cd5cd00a8" title=" " alt="" coords="276,292,415,317"/>
+<area shape="poly" id="edge6_Node000001_Node000007" title=" " alt="" coords="106,580,121,529,148,460,167,423,189,388,216,355,246,327,261,317,264,322,250,331,220,359,194,391,172,426,153,462,126,530,111,581"/>
+<area shape="rect" id="Node000008" href="$classCellInterface.html#a307a9959bf3088ad94b1b63efd696bc2" title=" " alt="" coords="254,341,437,367"/>
+<area shape="poly" id="edge7_Node000001_Node000008" title=" " alt="" coords="109,579,127,537,156,481,195,424,220,398,246,376,255,370,258,375,250,380,223,402,200,428,160,484,131,539,114,581"/>
+<area shape="rect" id="Node000009" href="$classCellInterface.html#a6427c77e8246803b4e940cda6c596555" title=" " alt="" coords="264,391,427,416"/>
+<area shape="poly" id="edge8_Node000001_Node000009" title=" " alt="" coords="113,579,133,545,163,503,202,461,247,425,258,419,260,424,249,430,205,465,168,507,138,548,117,582"/>
+<area shape="rect" id="Node000010" href="$classQuantitiesAddPhys.html#a5180d8bd10716c52226cde5e251fe3e5" title="Get the additional&#45;physic gradient." alt="" coords="269,178,422,218"/>
+<area shape="poly" id="edge9_Node000001_Node000010" title=" " alt="" coords="103,580,114,513,137,419,156,368,180,317,210,270,246,228,255,221,259,225,250,232,214,273,184,320,161,370,142,421,119,514,109,581"/>
+<area shape="rect" id="Node000011" href="$classCell.html#a48e263f3b639cb569cfb67d4d318e196" title=" " alt="" coords="282,440,409,465"/>
+<area shape="poly" id="edge11_Node000001_Node000011" title=" " alt="" coords="120,578,173,526,208,498,247,474,268,465,270,470,249,479,212,502,177,530,124,582"/>
+<area shape="rect" id="Node000012" href="$classCellInterface.html#a50640fa2f0b6d5d10ee8a64ab02c2e83" title=" " alt="" coords="264,489,427,515"/>
+<area shape="poly" id="edge12_Node000001_Node000012" title=" " alt="" coords="136,578,187,550,247,524,270,516,272,521,249,528,190,555,139,583"/>
+<area shape="rect" id="Node000013" href="$classFace.html#ad51432bc490b6b3e8cfe2dcde9232716" title=" " alt="" coords="281,539,409,564"/>
+<area shape="poly" id="edge13_Node000001_Node000013" title=" " alt="" coords="200,578,268,564,270,569,201,583"/>
+<area shape="rect" id="Node000014" href="$classCell.html#af2d48073a332d621b69fb257eeb6de6c" title=" " alt="" coords="288,588,403,613"/>
+<area shape="poly" id="edge14_Node000001_Node000014" title=" " alt="" coords="200,598,274,598,274,603,200,603"/>
+<area shape="rect" id="Node000015" href="$classCell.html#ac4369dad370cfbabf83f895668fe9813" title=" " alt="" coords="294,637,397,663"/>
+<area shape="poly" id="edge15_Node000001_Node000015" title=" " alt="" coords="201,618,281,634,280,640,200,623"/>
+<area shape="rect" id="Node000016" href="$classFace.html#a5bc243884273fd8eb4398aed1aca23c6" title=" " alt="" coords="280,687,411,712"/>
+<area shape="poly" id="edge16_Node000001_Node000016" title=" " alt="" coords="140,619,191,646,249,672,275,680,274,685,247,676,188,650,137,623"/>
+<area shape="rect" id="Node000017" href="$classMixture.html#ac9ff19d8846c5f1ae72d79d1b8c1739c" title=" " alt="" coords="269,243,422,268"/>
+<area shape="poly" id="edge17_Node000001_Node000017" title=" " alt="" coords="104,580,116,520,142,438,160,395,184,352,212,312,246,277,255,271,258,275,250,281,216,315,188,354,165,397,147,440,122,522,109,581"/>
+<area shape="rect" id="Node000018" href="$classCoord.html#a52f7db0c08b69817ba0b4a2dee3d6a28" title="Projection in the local coordinate system which is defined by the transmitted normal,..." alt="" coords="263,736,427,761"/>
+<area shape="poly" id="edge19_Node000001_Node000018" title=" " alt="" coords="124,619,177,670,212,698,249,721,268,729,266,734,247,726,209,702,173,674,120,623"/>
+<area shape="rect" id="Node000020" href="$classTensor.html#a7d12f87639e6a6d1d6122813495b6048" title="Projection in the local coordinate system which is defined by the transmitted normal,..." alt="" coords="504,787,672,812"/>
+<area shape="poly" id="edge21_Node000001_Node000020" title=" " alt="" coords="116,620,136,654,166,696,204,738,249,770,308,793,371,805,433,809,490,808,491,814,433,815,370,810,307,798,247,775,200,742,161,700,132,657,112,622"/>
+<area shape="rect" id="Node000024" href="$classModel.html#ad01f134cd00962de45a10a9ef1632abe" title="Flux reverse projection in the absolute Cartesian coordinate system." alt="" coords="253,79,437,104"/>
+<area shape="poly" id="edge25_Node000001_Node000024" title=" " alt="" coords="101,580,104,495,110,435,121,369,139,300,164,232,200,169,246,113,251,109,254,113,250,117,204,172,169,235,144,302,126,370,115,436,109,495,106,581"/>
+<area shape="rect" id="Node000025" href="$classTensor.html#a9c94ad549b974edc96dd3c0e0ab5e4fe" title=" " alt="" coords="495,836,681,861"/>
+<area shape="poly" id="edge27_Node000001_Node000025" title=" " alt="" coords="113,620,130,663,158,717,198,772,222,796,249,816,305,840,365,854,425,860,482,859,482,864,425,865,364,860,303,846,247,820,219,800,194,776,154,720,125,665,108,622"/>
+<area shape="rect" id="Node000026" href="$classAPUEqViscosity.html#a7ccb06fb741ccb1a7151d5d6efc4a742" title="Solve the viscosity flux at a boundary with a non&#45;reflecting type." alt="" coords="248,887,443,927"/>
+<area shape="poly" id="edge31_Node000001_Node000026" title=" " alt="" coords="112,620,129,669,157,735,197,805,222,838,250,867,266,879,263,883,246,871,218,841,192,808,152,737,124,671,107,622"/>
+<area shape="rect" id="Node000028" href="$classAPUEqViscosity.html#aee994b89b1d60689f34435e0378d2c7f" title="Solve the viscosity flux at a boundary with non&#45;defined type yet." alt="" coords="248,1053,443,1093"/>
+<area shape="poly" id="edge36_Node000001_Node000028" title=" " alt="" coords="108,621,115,696,137,806,155,866,179,925,211,982,250,1032,263,1043,259,1047,246,1036,206,985,175,928,150,867,132,807,110,697,102,621"/>
+<area shape="rect" id="Node000029" href="$classAPUEqViscosity.html#a7dea2eb38e19641e15792a8103217282" title="Solve the viscosity flux at a boundary with a symmetry type." alt="" coords="491,950,685,990"/>
+<area shape="poly" id="edge37_Node000001_Node000029" title=" " alt="" coords="108,621,118,685,141,772,159,819,183,863,213,904,250,937,275,953,302,965,361,980,420,986,477,985,477,990,420,991,360,986,300,970,272,958,246,941,209,907,178,866,154,821,136,774,113,686,103,621"/>
+<area shape="rect" id="Node000030" href="$classAPUEqViscosity.html#a893370e2657424ffc175a166ad85573d" title="Solve the viscosity flux at a boundary with a wall type." alt="" coords="491,1014,685,1054"/>
+<area shape="poly" id="edge41_Node000001_Node000030" title=" " alt="" coords="107,620,113,693,121,742,134,795,152,850,177,903,209,951,250,992,265,1001,287,1009,344,1020,410,1027,477,1031,477,1036,410,1032,343,1025,286,1014,263,1006,246,996,205,955,172,905,147,852,129,796,116,743,108,694,102,621"/>
+<area shape="rect" id="Node000031" href="$classTensor.html#aac7698101766de6e32181ff2297ebc21" title="Transform the Tensor into Coords (vectors)" alt="" coords="259,1117,431,1143"/>
+<area shape="poly" id="edge45_Node000001_Node000031" title=" " alt="" coords="106,621,108,709,113,770,124,839,142,910,168,980,203,1046,225,1075,250,1103,256,1108,252,1112,246,1107,221,1079,199,1048,163,982,137,911,119,840,108,771,102,709,101,621"/>
+<area shape="rect" id="Node000033" href="$classCellInterface.html#a6bf698f8aabff63c0575fffb517db5c0" title=" " alt="" coords="262,1167,429,1192"/>
+<area shape="poly" id="edge47_Node000001_Node000033" title=" " alt="" coords="109,620,125,731,154,892,174,975,197,1051,222,1112,236,1136,250,1154,254,1157,250,1161,246,1157,231,1139,217,1115,192,1052,169,976,149,893,120,732,104,621"/>
+<area shape="rect" id="Node000003" href="$classElement.html#ab4a696830f2caff5279069e6a1d96484" title=" " alt="" coords="519,5,657,31"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="401,34,505,24,505,29,401,39"/>
+<area shape="rect" id="Node000004" href="$classCell.html#a222238b424bf20588ec06c647a190c0a" title=" " alt="" coords="523,55,653,80"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="401,45,509,56,509,62,401,50"/>
+<area shape="rect" id="Node000006" href="$classErrors.html#a78eeb532e12787fee07b78aa5ef6a0c6" title=" " alt="" coords="509,157,667,183"/>
+<area shape="poly" id="edge5_Node000005_Node000006" title=" " alt="" coords="409,146,496,156,495,162,409,151"/>
+<area shape="poly" id="edge10_Node000010_Node000006" title=" " alt="" coords="422,186,495,178,496,183,423,192"/>
+<area shape="poly" id="edge18_Node000017_Node000006" title=" " alt="" coords="400,240,442,227,546,186,548,191,444,233,401,245"/>
+<area shape="rect" id="Node000019" href="$classCoord.html#a96c803308eff1b84806d42f789deac80" title="Scalar product between the present vector and vector a." alt="" coords="535,736,641,761"/>
+<area shape="poly" id="edge20_Node000018_Node000019" title=" " alt="" coords="428,746,521,746,521,751,428,751"/>
+<area shape="rect" id="Node000021" href="$classCoord.html#a04d74e2f155904844fb90cf8aac3579f" title="Return the value in the x&#45;direction of the Coord object." alt="" coords="733,844,832,869"/>
+<area shape="poly" id="edge22_Node000020_Node000021" title=" " alt="" coords="645,810,686,821,735,837,733,842,685,826,643,815"/>
+<area shape="rect" id="Node000022" href="$classCoord.html#a11fc116d47c56756eab2081beca0a702" title="Return the value in the y&#45;direction of the Coord object." alt="" coords="734,893,831,919"/>
+<area shape="poly" id="edge23_Node000020_Node000022" title=" " alt="" coords="663,810,687,821,703,835,712,849,721,864,735,879,742,884,739,888,732,883,717,867,708,852,699,839,684,826,660,814"/>
+<area shape="rect" id="Node000023" href="$classCoord.html#a9d218af09beeed332daba65312b8abad" title="Return the value in the z&#45;direction of the Coord object." alt="" coords="733,943,832,968"/>
+<area shape="poly" id="edge24_Node000020_Node000023" title=" " alt="" coords="669,810,687,821,700,835,707,848,713,875,719,902,725,916,735,930,739,933,735,937,731,933,720,919,714,904,708,876,702,850,695,838,684,825,666,814"/>
+<area shape="poly" id="edge26_Node000024_Node000006" title=" " alt="" coords="403,101,443,113,544,150,543,155,442,118,402,107"/>
+<area shape="poly" id="edge28_Node000025_Node000021" title=" " alt="" coords="681,850,719,851,719,857,681,855"/>
+<area shape="poly" id="edge29_Node000025_Node000022" title=" " alt="" coords="641,859,686,871,733,886,732,892,685,877,639,864"/>
+<area shape="poly" id="edge30_Node000025_Node000023" title=" " alt="" coords="660,859,687,872,703,886,712,900,721,915,735,929,741,933,737,938,732,933,717,918,708,903,699,889,684,876,658,864"/>
+<area shape="rect" id="Node000027" href="$classAPUEqViscosity.html#a125deaa8feb817d57155837cea5b14e4" title="Solve the viscosity flux between two cells." alt="" coords="491,886,685,926"/>
+<area shape="poly" id="edge32_Node000026_Node000027" title=" " alt="" coords="443,904,477,904,477,909,443,909"/>
+<area shape="poly" id="edge33_Node000027_Node000021" title=" " alt="" coords="667,883,719,870,721,875,668,889"/>
+<area shape="poly" id="edge34_Node000027_Node000022" title=" " alt="" coords="686,903,720,903,720,909,686,909"/>
+<area shape="poly" id="edge35_Node000027_Node000023" title=" " alt="" coords="668,923,721,937,719,942,667,929"/>
+<area shape="poly" id="edge38_Node000029_Node000021" title=" " alt="" coords="662,948,684,936,699,922,708,909,717,894,732,879,737,874,741,879,735,883,721,897,712,911,703,926,687,940,665,952"/>
+<area shape="poly" id="edge39_Node000029_Node000022" title=" " alt="" coords="649,947,729,920,731,926,650,952"/>
+<area shape="poly" id="edge40_Node000029_Node000023" title=" " alt="" coords="686,960,720,957,720,963,686,965"/>
+<area shape="poly" id="edge42_Node000030_Node000021" title=" " alt="" coords="667,1012,684,1000,696,986,703,971,708,942,713,911,719,895,731,879,735,876,738,879,735,882,724,898,718,913,713,943,708,973,700,989,687,1004,671,1016"/>
+<area shape="poly" id="edge43_Node000030_Node000022" title=" " alt="" coords="664,1012,684,1000,699,983,708,966,716,948,731,929,738,924,741,928,735,933,720,951,712,969,704,986,687,1004,667,1016"/>
+<area shape="poly" id="edge44_Node000030_Node000023" title=" " alt="" coords="652,1011,684,1000,744,972,746,977,686,1004,654,1016"/>
+<area shape="rect" id="Node000032" href="$classCoord.html#af96ea861b2a73538910c508d414b33a4" title="Set the values of the Coord object." alt="" coords="531,1117,645,1143"/>
+<area shape="poly" id="edge46_Node000031_Node000032" title=" " alt="" coords="432,1127,517,1127,517,1133,432,1133"/>
+</map>

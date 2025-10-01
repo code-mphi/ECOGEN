@@ -1,0 +1,19 @@
+<map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
+<area shape="rect" id="Node000000" href="$classFlux.html" title="Abstract class for conservative variables and fluxes." alt="" coords="5,129,56,155"/>
+<area shape="rect" id="Node000001" href="$classFluxEuler.html" title="Model class for Euler Flux (single phase)" alt="" coords="151,5,234,31"/>
+<area shape="poly" id="edge53_Node000000_Node000001" title=" " alt="" coords="41,116,66,77,83,57,103,40,126,28,150,21,152,26,128,33,105,44,87,60,70,80,46,118"/>
+<area shape="rect" id="Node000002" href="$classFluxEulerHomogeneous.html" title="Model class for Homogeneous Euler Flux (liquid&#45;vapor in thermodynamical equilibrium)" alt="" coords="104,55,281,80"/>
+<area shape="poly" id="edge54_Node000000_Node000002" title=" " alt="" coords="56,118,103,89,133,78,135,83,105,94,59,123"/>
+<area shape="rect" id="Node000003" href="$classFluxEulerKorteweg.html" title="Model class for Augmented Euler–Korteweg Flux (single phase)" alt="" coords="121,104,265,129"/>
+<area shape="poly" id="edge55_Node000000_Node000003" title=" " alt="" coords="69,133,120,125,121,131,70,139"/>
+<area shape="rect" id="Node000005" href="$classFluxPTUEq.html" title="Flux class for pressure&#45;temperature&#45;velocity (mechanical and thermal equilibrium) system of equations..." alt="" coords="147,153,239,179"/>
+<area shape="poly" id="edge57_Node000000_Node000005" title=" " alt="" coords="70,145,147,157,146,162,69,150"/>
+<area shape="rect" id="Node000006" href="$classFluxUEq.html" title="Flux class for the velocity&#45;equilibrium system of equations." alt="" coords="155,203,231,228"/>
+<area shape="poly" id="edge58_Node000000_Node000006" title=" " alt="" coords="61,161,105,188,155,205,153,210,103,192,58,165"/>
+<area shape="rect" id="Node000008" href="$classFluxUEqTotEnergy.html" title="Flux class for the velocity&#45;equilibrium system of equations." alt="" coords="123,252,263,277"/>
+<area shape="poly" id="edge60_Node000000_Node000008" title=" " alt="" coords="47,166,71,203,87,221,105,237,130,249,127,254,103,242,83,225,67,206,42,169"/>
+<area shape="rect" id="Node000004" href="$classFluxNonLinearSchrodinger.html" title="Model class for Non&#45;Linear Schrodinger Flux (single phase)" alt="" coords="329,104,523,129"/>
+<area shape="poly" id="edge56_Node000003_Node000004" title=" " alt="" coords="279,114,329,114,329,119,279,119"/>
+<area shape="rect" id="Node000007" href="$classFluxPUEq.html" title="Flux class for the pressure&#45;velocity&#45;equilibrium (mechanical equilibrium) system of equations (Kapila..." alt="" coords="384,203,468,228"/>
+<area shape="poly" id="edge59_Node000006_Node000007" title=" " alt="" coords="245,213,384,213,384,218,245,218"/>
+</map>

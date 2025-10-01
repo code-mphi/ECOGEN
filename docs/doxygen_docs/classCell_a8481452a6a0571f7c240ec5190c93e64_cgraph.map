@@ -1,0 +1,22 @@
+<map id="Cell::getPsat" name="Cell::getPsat">
+<area shape="rect" id="Node000001" title="Compute saturation pressure for a liquid/vapor fluid mixture (first phase is considered predominant &#45;..." alt="" coords="5,80,109,105"/>
+<area shape="rect" id="Node000002" href="$classMixture.html#a4868565a3f107e3cbddfae1f161702f6" title="Compute saturation pressure for a liq/vapor couple of fluid at given pressure." alt="" coords="161,129,326,155"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="107,103,182,123,180,128,105,108"/>
+<area shape="rect" id="Node000010" href="$classPhase.html#adc710547c11dfe923759130e1bb4c48c" title=" " alt="" coords="157,31,329,56"/>
+<area shape="poly" id="edge9_Node000001_Node000010" title=" " alt="" coords="105,77,180,57,182,62,107,83"/>
+<area shape="rect" id="Node000003" href="$classErrors.html#a78eeb532e12787fee07b78aa5ef6a0c6" title=" " alt="" coords="377,5,535,31"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="257,127,307,85,340,61,376,40,391,33,393,38,379,44,343,65,310,89,260,131"/>
+<area shape="rect" id="Node000004" href="$classEos.html#a25a89b7f3006d46e211208fc9fd1a967" title="See derived classes." alt="" coords="411,55,501,80"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="276,127,376,89,398,82,400,87,378,94,278,132"/>
+<area shape="rect" id="Node000005" href="$classEos.html#a9147817e05812b6f97817d1559cd47b4" title="See derived classes." alt="" coords="404,104,508,129"/>
+<area shape="poly" id="edge4_Node000002_Node000005" title=" " alt="" coords="326,129,390,122,391,127,327,135"/>
+<area shape="rect" id="Node000006" href="$classEos.html#a56c8d9f25a54276395164bf6cd989cca" title="See derived classes." alt="" coords="393,153,519,179"/>
+<area shape="poly" id="edge5_Node000002_Node000006" title=" " alt="" coords="327,149,379,155,379,160,326,154"/>
+<area shape="rect" id="Node000007" href="$classEos.html#a208dba3dc39dadf9de3cd1c589a884db" title="See derived classes." alt="" coords="407,203,505,228"/>
+<area shape="poly" id="edge6_Node000002_Node000007" title=" " alt="" coords="278,152,378,189,400,196,398,201,376,194,276,157"/>
+<area shape="rect" id="Node000008" href="$classEos.html#a4ab52854061a18b46b221f48b16be4ca" title="See derived classes." alt="" coords="404,252,508,277"/>
+<area shape="poly" id="edge7_Node000002_Node000008" title=" " alt="" coords="260,153,310,194,343,218,379,238,393,245,391,250,376,243,340,222,307,198,257,157"/>
+<area shape="rect" id="Node000009" href="$classEos.html#aecd4200552f43c100241f374ee841304" title="See derived classes." alt="" coords="404,301,508,327"/>
+<area shape="poly" id="edge8_Node000002_Node000009" title=" " alt="" coords="255,153,302,217,338,255,379,288,393,295,390,300,376,292,334,259,298,221,250,156"/>
+<area shape="poly" id="edge10_Node000010_Node000003" title=" " alt="" coords="329,30,363,26,364,32,330,36"/>
+</map>

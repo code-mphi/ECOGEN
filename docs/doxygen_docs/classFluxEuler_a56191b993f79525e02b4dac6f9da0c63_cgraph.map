@@ -1,0 +1,17 @@
+<map id="FluxEuler::substractFluxSmooth1D" name="FluxEuler::substractFluxSmooth1D">
+<area shape="rect" id="Node000001" title="Compute additionnal flux for 1D geometry with smooth varying cross section." alt="" coords="5,122,184,162"/>
+<area shape="rect" id="Node000002" href="$classCell.html#af2d48073a332d621b69fb257eeb6de6c" title=" " alt="" coords="248,5,363,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="117,120,167,80,231,40,245,33,247,38,233,44,170,84,120,124"/>
+<area shape="rect" id="Node000003" href="$classPhase.html#a2beeaa383c32c5866ea59a1b20a44662" title=" " alt="" coords="232,55,379,80"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="148,119,231,89,251,82,253,87,233,94,150,124"/>
+<area shape="rect" id="Node000005" href="$classCoord.html#a04d74e2f155904844fb90cf8aac3579f" title="Return the value in the x&#45;direction of the Coord object." alt="" coords="256,104,355,129"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="184,129,242,122,243,127,185,134"/>
+<area shape="rect" id="Node000006" href="$classCoord.html#a11fc116d47c56756eab2081beca0a702" title="Return the value in the y&#45;direction of the Coord object." alt="" coords="257,153,354,179"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="185,150,243,156,243,162,184,155"/>
+<area shape="rect" id="Node000007" href="$classCoord.html#a9d218af09beeed332daba65312b8abad" title="Return the value in the z&#45;direction of the Coord object." alt="" coords="256,203,355,228"/>
+<area shape="poly" id="edge6_Node000001_Node000007" title=" " alt="" coords="154,160,233,187,256,196,254,201,231,193,152,165"/>
+<area shape="rect" id="Node000008" href="$classCoord.html#a380746a7501edbeef25d07f6d53735ce" title="Set the value in the x&#45;direction of the Coord object." alt="" coords="257,252,354,277"/>
+<area shape="poly" id="edge7_Node000001_Node000008" title=" " alt="" coords="121,160,171,198,233,237,250,245,248,249,231,242,168,203,118,164"/>
+<area shape="rect" id="Node000004" href="$classErrors.html#a78eeb532e12787fee07b78aa5ef6a0c6" title=" " alt="" coords="427,55,584,80"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="379,65,413,65,413,70,379,70"/>
+</map>

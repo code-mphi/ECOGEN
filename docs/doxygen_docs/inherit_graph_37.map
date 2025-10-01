@@ -1,0 +1,15 @@
+<map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
+<area shape="rect" id="Node000000" href="$classRelaxation.html" title="Abstract class for Relaxations." alt="" coords="5,104,97,129"/>
+<area shape="rect" id="Node000001" href="$classRelaxationP.html" title="Pressure relaxation." alt="" coords="159,29,259,55"/>
+<area shape="poly" id="edge131_Node000000_Node000001" title=" " alt="" coords="85,95,144,64,171,52,173,57,146,68,87,100"/>
+<area shape="rect" id="Node000004" href="$classRelaxationPT.html" title="Pressure&#45;Temperature relaxation." alt="" coords="155,79,263,104"/>
+<area shape="poly" id="edge134_Node000000_Node000004" title=" " alt="" coords="111,105,155,97,155,103,111,110"/>
+<area shape="rect" id="Node000005" href="$classRelaxationPTMu.html" title="Pressure&#45;Temperature&#45;Chemical Potential relaxation / Phase change." alt="" coords="145,128,273,153"/>
+<area shape="poly" id="edge135_Node000000_Node000005" title=" " alt="" coords="111,123,146,128,145,134,111,128"/>
+<area shape="rect" id="Node000006" href="$classRelaxationU.html" title="Velocity relaxation." alt="" coords="158,177,261,203"/>
+<area shape="poly" id="edge136_Node000000_Node000006" title=" " alt="" coords="89,134,146,162,176,175,174,180,144,167,87,138"/>
+<area shape="rect" id="Node000002" href="$classRelaxationPFinite.html" title="Finite pressure relaxation." alt="" coords="326,5,462,31"/>
+<area shape="poly" id="edge132_Node000001_Node000002" title=" " alt="" coords="272,31,326,24,326,29,273,36"/>
+<area shape="rect" id="Node000003" href="$classRelaxationPInfinite.html" title="Stiff (infinite) pressure relaxation." alt="" coords="321,55,467,80"/>
+<area shape="poly" id="edge133_Node000001_Node000003" title=" " alt="" coords="273,48,322,55,321,60,272,53"/>
+</map>
