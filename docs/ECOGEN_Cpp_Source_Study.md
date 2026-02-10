@@ -127,11 +127,11 @@ ECOGEN 是一个面向可压缩多相流的 CFD 平台，采用 C++ 面向对象
 建议在 `Run.cpp` 中重点关注以下几类函数：
 - **初始化链路**：对应 `Run::initialize()`，观察它如何调用 `Input` 读取并构建 `Mesh`、`Model`、`Eos`、`Cell` 等对象。【F:src/Run.h†L54-L121】
 - **时间推进链路**：`Run::solver()` 触发实际的时间步推进，进一步分解为双曲项、源项、附加物理、松弛等子步骤（`solveHyperbolic`、`solveSourceTerms` 等）。【F:src/Run.h†L70-L92】
-- **数据组织方式**：`m_cellsLvl` / `m_cellInterfacesLvl` 以层级（AMR level）方式管理 cell 与 interface，读取这些成员可帮助理解空间离散的数据布局。【F:src/Run.h†L106-L112】
+- **数据组织方式**：`m_cellsLvl` / `m_cellInterfacesLvl` 以层级（AMR level）方式管理 cell 与 interface，读取这些成员可帮助理解空间离散的数据布局。【F:src/Run.h†L127-L130】
 
 ### 9.2 `Cell` 与 `CellInterface`：数值状态承载体
 `Cell`/`CellInterface` 是数值计算的核心承载单元，典型阅读方式：
-1. 先从 `Order1/` 目录中找到 `Cell.h` / `Cell.cpp`，理解**状态量存储结构**（相变量、混合量、守恒量/原始量等）。【F:src/Run.h†L106-L112】
+1. 先从 `Order1/` 目录中找到 `Cell.h` / `Cell.cpp`，理解**状态量存储结构**（相变量、混合量、守恒量/原始量等）。【F:src/Run.h†L127-L130】
 2. 关注与 `Model` 的协作接口：例如从 `Model` 获取通量、更新状态、重构变量等。
 3. 若开启二阶方案，`Order2/` 中的 `Limiter` 和 `Gradient` 会对 `Cell` 的梯度重构进行修改（见下节）。
 
