@@ -32,22 +32,22 @@ ECOGEN 是一个面向可压缩多相流的 CFD 平台，采用 C++ 面向对象
 
 ## 3. 核心调度类：`Run`
 
-`Run` 是一次模拟的中心对象，聚合了**网格、物理模型、流体状态、IO、时间推进、额外物理、源项、并行通信**等关键组件。【F:src/Run.h†L54-L176】
+`Run` 是一次模拟的中心对象，聚合了**网格、物理模型、流体状态、IO、时间推进、额外物理、源项、并行通信**等关键组件。【F:src/Run.h】
 
 ### 3.1 `Run` 的职责
 - **初始化**：读入输入文件、创建网格与物理模型、初始化状态等。
-- **求解**：包含双曲项、额外物理、源项、松弛等过程（由内部函数分层调用）。【F:src/Run.h†L54-L92】
+- **求解**：包含双曲项、额外物理、源项、松弛等过程（由内部函数分层调用）。【F:src/Run.h】
 - **收尾**：释放资源、整理输出。
 
 ### 3.2 `Run` 关联的关键对象（学习重点）
 `Run` 内部持有的重要指针/成员，指明了系统的核心协作关系：
-- **Mesh**：`m_mesh`（网格对象，包含几何信息）。【F:src/Run.h†L102-L105】
-- **Model**：`m_model`（物理模型与状态演化逻辑）。【F:src/Run.h†L104-L108】
-- **Gradient/Limiter**：梯度与限制器用于高阶空间离散。【F:src/Run.h†L105-L131】
-- **Cells & Interfaces**：`Cell`/`CellInterface` 是网格上的物理状态承载体。【F:src/Run.h†L106-L112】
-- **EoS / AddPhys / Sources / Relaxations**：方程状态、附加物理、源项、松弛机制。【F:src/Run.h†L112-L126】
-- **Input/Output**：输入解析与输出文件管理。【F:src/Run.h†L137-L146】
-- **Parallel**：并行通信由 `Parallel` 实例负责（见下文）。【F:src/Run.h†L42-L49】【F:src/Parallel/Parallel.h†L1-L120】
+- **Mesh**：`m_mesh`（网格对象，包含几何信息）。【F:src/Run.h】
+- **Model**：`m_model`（物理模型与状态演化逻辑）。【F:src/Run.h】
+- **Gradient/Limiter**：梯度与限制器用于高阶空间离散。【F:src/Run.h】
+- **Cells & Interfaces**：`Cell`/`CellInterface` 是网格上的物理状态承载体。【F:src/Run.h】
+- **EoS / AddPhys / Sources / Relaxations**：方程状态、附加物理、源项、松弛机制。【F:src/Run.h】
+- **Input/Output**：输入解析与输出文件管理。【F:src/Run.h】
+- **Parallel**：并行通信由 `Parallel` 实例负责（见下文）。【F:src/Run.h】【F:src/Parallel/Parallel.h†L1-L120】
 
 > 阅读建议：先从 `Run` 的构造/初始化实现（`Run.cpp`）入手，理解每个模块如何被创建与串联，再深入模块内部。
 
