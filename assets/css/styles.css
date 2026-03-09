@@ -100,6 +100,8 @@ aside { border-right-style: solid; border-right-color: grey; border-right-width:
 /******************************************/
 #logos { display: flex; flex-direction: row; /*flex-wrap: wrap;*/ justify-content: center; align-items: center; }
 
+.imgLogos0 { width: 50%; height: 50%; /*padding :20px;*/ }
+
 .imgLogos1 { width: 30%; height: 30%; /*padding :20px;*/ }
 
 .imgLogos2 { width: 27.5%; height: 27.5%; /*padding :20px;*/ }
@@ -116,7 +118,7 @@ aside { border-right-style: solid; border-right-color: grey; border-right-width:
 
 .imgLogos8 { width: 12.5%; height: 12.5%; /*padding :20px;*/ }
 
-img { width: 100%; height: 100%; padding: 20px; }
+img { width: 100%; height: 100%; padding: 10px; }
 
 /******************************************/
 /*Gestion video*/
