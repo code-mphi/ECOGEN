@@ -155,6 +155,7 @@ enum class Variable
   transport,
   pressure,
   density,
+  height,
   alpha,
   velocityMag,
   velocityU,

@@ -28,19 +28,37 @@
 //  along with ECOGEN (file LICENSE).
 //  If not, see <http://www.gnu.org/licenses/>.
 
-#ifndef HEADERMODELE_H
-#define HEADERMODELE_H
+#ifndef GRADPHASESHALLOWWATER_H
+#define GRADPHASESHALLOWWATER_H
 
-#include "Euler/ModEuler.h"
-#include "ShallowWater/ModShallowWater.h"
-#include "PUEq/ModPUEq.h"
-#include "EulerHomogeneous/ModEulerHomogeneous.h"
-#include "PTUEq/ModPTUEq.h"
-#include "UEq/ModUEq.h"
-#include "UEqTotEnergy/ModUEqTotEnergy.h"
-#include "EulerKorteweg/ModEulerKorteweg.h"
-#include "NonLinearSchrodinger/ModNonLinearSchrodinger.h"
+#include "../GradPhase.h"
+#include "PhaseShallowWater.h"
 
-//Add new models here
+class Phase;
 
-#endif // HEADERMODELE_H
+//! \class     GradPhaseShallowWater
+//! \brief     Phase variable gradients for ShallowWater model. Stored for 2nd-order computation on unstructured mesh (O2 NS)
+class GradPhaseShallowWater : public GradPhase
+{
+  public:
+    GradPhaseShallowWater();
+    ~GradPhaseShallowWater() override;
+
+    void initializeGradientVectors() override;
+
+    void computeDistanceGradientScalarProduct(Coord const& distance, Phase* phase) const override;
+    void limitGradients(const Phase& gradientLimiter) override;
+
+    int numberOfTransmittedGradients() const override;
+
+  protected:
+    //! \brief     Enumeration for the phase flow variables, specific to ShallowWater
+    enum VarLocal
+    {
+      height,
+      velocityU,
+      velocityV
+    };
+};
+
+#endif

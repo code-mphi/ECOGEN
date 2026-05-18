@@ -32,6 +32,7 @@
 #define HEADEREQUATIONOFSTATE_H
 
 #include "EosIG.h"
+#include "EosSW.h"
 #include "EosSG.h"
 #include "EosNASG.h"
 #include "EosVDW.h"

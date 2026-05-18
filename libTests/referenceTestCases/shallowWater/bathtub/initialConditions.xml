@@ -1,0 +1,41 @@
+<?xml version = "1.0" encoding = "UTF-8" standalone = "yes"?>
+<CI>
+	<!-- LIST OF GEOMETRICAL DOMAINS  -->
+	<physicalDomains>
+		<!-- complete domain -->
+		<domain name="base" state="base" type="entireDomain"/>
+
+		<!-- square area with higher water height -->
+		<domain name="square"  state="square" type="rectangle">
+			<dataRectangle axis1="x" axis2="y" lAxis1="0.2" lAxis2="0.2">
+				<posInferiorVertex x="0.2" y="0.2" z="0."/>
+			</dataRectangle>
+		</domain>
+	</physicalDomains>
+
+	<!-- LIST OF BOUNDARY CONDITIONS -->
+	<boundaryConditions>
+		<boundCond name="BC_Xmin" type="wall" number="1" />
+		<boundCond name="BC_Xmax" type="wall" number="2" />
+		<boundCond name="BC_Ymin" type="wall" number="3" />
+		<boundCond name="BC_Ymax" type="wall" number="4" />
+	</boundaryConditions>
+
+	<!--  LIST OF STATES  -->
+  <state name="base">
+		<material type="fluid" EOS="SW_earth.xml">
+			<dataFluid height="1.0">
+				<velocity x="0." y="0."/>
+			</dataFluid>
+		</material>
+	</state>
+
+	<state name="square">
+		<material type="fluid" EOS="SW_earth.xml">
+			<dataFluid height="3.">
+				<velocity x="0." y="0."/>
+			</dataFluid>
+		</material>
+	</state>
+
+</CI>

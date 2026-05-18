@@ -28,19 +28,41 @@
 //  along with ECOGEN (file LICENSE).
 //  If not, see <http://www.gnu.org/licenses/>.
 
-#ifndef HEADERMODELE_H
-#define HEADERMODELE_H
+#ifndef EOSSW_H
+#define EOSSW_H
 
-#include "Euler/ModEuler.h"
-#include "ShallowWater/ModShallowWater.h"
-#include "PUEq/ModPUEq.h"
-#include "EulerHomogeneous/ModEulerHomogeneous.h"
-#include "PTUEq/ModPTUEq.h"
-#include "UEq/ModUEq.h"
-#include "UEqTotEnergy/ModUEqTotEnergy.h"
-#include "EulerKorteweg/ModEulerKorteweg.h"
-#include "NonLinearSchrodinger/ModNonLinearSchrodinger.h"
+#include "Eos.h"
 
-//Add new models here
+//! \class     EosSW
+//! \brief     Class describing an ideal gas equation of state
+class EosSW : public Eos
+{
+  public:
+    EosSW(std::vector<std::string>& nameParameterEos, int& number);
+    ~EosSW() override;
 
-#endif // HEADERMODELE_H
+    //! \brief     Assign the values of the attributes for EosSW from data defined in the code
+    //! \param     name             string that contains the reduced name (sould be SW)
+    //! \param     parametersEos    vector (size depending on the Eos, 2 for SW)
+    //! \details   Assign 'name' and 'g' attributes. If the size of parameterEos \f$ \neq 1\f$  then the code aborts.
+    void assignParametersEos(std::string name, std::vector<double> parametersEos) override;
+
+    //! \brief     Compute pressure
+    //! \param     height   phase height (h)
+    //! \return    pressure
+    //! \details   with  pressure : \f$  p(h)  = 0.5 g h^2 \f$
+    double computePressure(const double& height) const override;
+
+    //! \brief     Compute sound speed
+    //! \param     height     phase height (h)
+    //! \return    soundSpeed
+    //! \details   with  soundSpeed : \f$  c(h)  = \sqrt{ g h } \f$
+    double computeSoundSpeed(const double& height) const override;
+
+    //Getters
+
+  private:
+    double m_gravity; //!< Gravity
+};
+
+#endif // EOSSW_H

@@ -670,6 +670,13 @@ void Input::inputModel(std::string casTest)
         numberScalarsPhase = 3; // Density, pression and temperature
       }
     }
+    else if (model == "SHALLOWWATER") {
+      // Creation of the shallow water model. Even if we will not have additional transport equations,
+      // 'm_run->m_numberTransports' argument is required because 'ModShallowWater' class derives from the 'Model'
+      // class and the constructor of this latter uses this variable.
+      m_run->m_model        = new ModShallowWater(m_run->m_numberTransports);
+      m_run->m_numberPhases = 1; // Shallow Water model has a single phase.
+    }
     else if (model == "EULERHOMOGENEOUS") {
       int liquid, vapor;
       error                 = element->QueryIntAttribute("liquid", &liquid);
@@ -1059,6 +1066,9 @@ Eos* Input::inputEOS(std::string EOS, int& numberEOS)
     if (typeEOS == "IG") {
       eos = new EosIG(NamesParametresEos, numberEOS);
     }
+    else if (typeEOS == "SW") {
+      eos = new EosSW(NamesParametresEos, numberEOS);
+    }
     else if (typeEOS == "SG") {
       eos = new EosSG(NamesParametresEos, numberEOS);
     }
@@ -1156,6 +1166,10 @@ void Input::inputInitialConditions(std::string casTest,
       if (m_run->m_model->whoAmI() == "EULER") {
         stateMixture = new MixEuler();
       }
+      else if (m_run->m_model->whoAmI() == "SHALLOWWATER") {
+        // Even if we don't have mixture, it is necessary (for genericity) to instanciate a mixture object.
+        stateMixture = new MixShallowWater();
+      }
       else if (m_run->m_model->whoAmI() == "PRESSUREVELOCITYEQ") {
         stateMixture = new MixPUEq(state, fileName.str());
       }
@@ -1220,6 +1234,9 @@ void Input::inputInitialConditions(std::string casTest,
           if (typeMateriau == "FLUID") {
             if (m_run->m_model->whoAmI() == "EULER") {
               statesPhases.push_back(new PhaseEuler(material, m_run->m_eos[e], fileName.str()));
+            }
+            else if (m_run->m_model->whoAmI() == "SHALLOWWATER") {
+              statesPhases.push_back(new PhaseShallowWater(material, m_run->m_eos[e], fileName.str()));
             }
             else if (m_run->m_model->whoAmI() == "PRESSUREVELOCITYEQ") {
               statesPhases.push_back(new PhasePUEq(material, m_run->m_eos[e], stateMixture->getPressure(), fileName.str()));

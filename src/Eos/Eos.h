@@ -40,6 +40,7 @@
 enum TypeEOS
 {
   IG,
+  SW,
   SG,
   NASG,
   VDW,
@@ -129,6 +130,12 @@ class Eos
       return 0.;
     };
     //! \brief See derived classes
+    virtual double computePressure(const double& /*height*/) const
+    {
+      Errors::errorMessage("computePressure not yet programmed for EOS : " + m_name);
+      return 0.;
+    };
+    //! \brief See derived classes
     virtual double computeDensity(const double& /*pressure*/, const double& /*temperature*/) const
     {
       Errors::errorMessage("computeDensity not yet programmed for EOS : " + m_name);
@@ -136,6 +143,12 @@ class Eos
     };
     //! \brief See derived classes
     virtual double computeSoundSpeed(const double& /*density*/, const double& /*pressure*/) const
+    {
+      Errors::errorMessage("computeSoundSpeed not yet programmed for EOS : " + m_name);
+      return 0.;
+    };
+    //! \brief See derived classes
+    virtual double computeSoundSpeed(const double& /*height*/) const
     {
       Errors::errorMessage("computeSoundSpeed not yet programmed for EOS : " + m_name);
       return 0.;
@@ -295,6 +308,8 @@ class Eos
     };
 
     //Get
+    //! \brief See derived classes
+    virtual const double& getGravity() const { return Errors::defaultDouble; };
     //! \brief See derived classes
     virtual const double& getGamma() const { return Errors::defaultDouble; };
     //! \brief See derived classes
