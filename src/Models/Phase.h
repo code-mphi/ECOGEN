@@ -223,6 +223,11 @@ class Phase
       Errors::errorMessage("getDensity not available for requested phase type");
       return Errors::defaultDouble;
     };
+    virtual const double& getHeight() const
+    {
+      Errors::errorMessage("getHeight not available for requested phase type");
+      return Errors::defaultDouble;
+    };
     virtual const double& getOmega() const
     {
       Errors::errorMessage("getOmega not available for requested phase type");
@@ -356,6 +361,7 @@ class Phase
 
     virtual void setAlpha(double /*alpha*/) { Errors::errorMessage("setAlpha not available for requested phase type"); };
     virtual void setDensity(double /*density*/) { Errors::errorMessage("setDensity not available for requested phase type"); };
+    virtual void setHeight(const double& /*height*/) { Errors::errorMessage("setHeight not available for requested phase type"); };
     virtual void setOmega(const double& /*omega*/) { Errors::errorMessage("setOmega not available for requested phase type"); };
     virtual void setEta(const double& /*eta*/) { Errors::errorMessage("setEta not available for requested phase type"); };
     virtual void setPressure(double /*pressure*/) { Errors::errorMessage("setPressure not available for requested phase type"); };

@@ -590,16 +590,18 @@ void OutputVTK::writePhysicalDataVTK(Mesh* mesh, std::vector<Cell*>* cellsLvl, s
 
   //5) Write gradient rho
   //---------------------
-  int gradRho = -4;
-  fileStream << "        <" << prefix << "DataArray type=\"Float64\" Name=\"gradRho\"";
-  if (!parallel) {
-    fileStream << " format=\"" << format << "\">" << std::endl;
-    mesh->getData(cellsLvl, dataset, 1, gradRho);
-    this->writeDataset(dataset, fileStream, DOUBLE);
-    fileStream << std::endl;
-    fileStream << "        </" << prefix << "DataArray>" << std::endl;
+  if (cellsLvl[0][0]->getModel()->whoAmI() != "SHALLOWWATER") { // Commented because getData fails on non-existing density variable
+    int gradRho = -4;
+    fileStream << "        <" << prefix << "DataArray type=\"Float64\" Name=\"gradRho\"";
+    if (!parallel) {
+      fileStream << " format=\"" << format << "\">" << std::endl;
+      mesh->getData(cellsLvl, dataset, 1, gradRho);
+      this->writeDataset(dataset, fileStream, DOUBLE);
+      fileStream << std::endl;
+      fileStream << "        </" << prefix << "DataArray>" << std::endl;
+    }
+    else fileStream << "\"/>" << std::endl;
   }
-  else fileStream << "\"/>" << std::endl;
 
   //6) Absolute velocity printing for Moving Reference Frame computations
   //---------------------------------------------------------------------

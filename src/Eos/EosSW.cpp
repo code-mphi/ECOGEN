@@ -28,19 +28,53 @@
 //  along with ECOGEN (file LICENSE).
 //  If not, see <http://www.gnu.org/licenses/>.
 
-#ifndef HEADERMODELE_H
-#define HEADERMODELE_H
+#include "EosSW.h"
 
-#include "Euler/ModEuler.h"
-#include "ShallowWater/ModShallowWater.h"
-#include "PUEq/ModPUEq.h"
-#include "EulerHomogeneous/ModEulerHomogeneous.h"
-#include "PTUEq/ModPTUEq.h"
-#include "UEq/ModUEq.h"
-#include "UEqTotEnergy/ModUEqTotEnergy.h"
-#include "EulerKorteweg/ModEulerKorteweg.h"
-#include "NonLinearSchrodinger/ModNonLinearSchrodinger.h"
+//***********************************************************************
 
-//Add new models here
+EosSW::EosSW(std::vector<std::string>& nameParameterEos, int& number) : Eos(number) { nameParameterEos.push_back("gravity"); }
 
-#endif // HEADERMODELE_H
+//***********************************************************************
+
+EosSW::~EosSW() {}
+
+//***********************************************************************
+
+void EosSW::assignParametersEos(std::string name, std::vector<double> parametersEos)
+{
+  assert(parametersEos.size() == 1);
+
+  m_name    = name;
+  m_gravity = parametersEos[0];
+}
+
+//***********************************************************************
+
+//Constant methods
+//****************
+
+double EosSW::computePressure(const double& height) const
+{
+  double p_;
+
+  // TO FILL
+  // Compute pressure p
+  assert(0 && "implement pressure computation");
+  //p_ =
+  return p_;
+}
+
+//***********************************************************************
+
+double EosSW::computeSoundSpeed(const double& height) const
+{
+  double c_;
+
+  // TO FILL
+  // Compute sound speed c
+  assert(0 && "implement sound speed computation");
+  //c_ =
+  return c_;
+}
+
+//***********************************************************************

@@ -32,6 +32,7 @@
 #define HEADERPHASE_H
 
 #include "Euler/PhaseEuler.h"
+#include "ShallowWater/PhaseShallowWater.h"
 #include "PUEq/PhasePUEq.h"
 #include "EulerHomogeneous/PhaseEulerHomogeneous.h"
 #include "PTUEq/PhasePTUEq.h"

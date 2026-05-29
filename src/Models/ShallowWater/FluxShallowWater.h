@@ -28,19 +28,40 @@
 //  along with ECOGEN (file LICENSE).
 //  If not, see <http://www.gnu.org/licenses/>.
 
-#ifndef HEADERMODELE_H
-#define HEADERMODELE_H
+#ifndef FLUXSHALLOWWATER_H
+#define FLUXSHALLOWWATER_H
 
-#include "Euler/ModEuler.h"
-#include "ShallowWater/ModShallowWater.h"
-#include "PUEq/ModPUEq.h"
-#include "EulerHomogeneous/ModEulerHomogeneous.h"
-#include "PTUEq/ModPTUEq.h"
-#include "UEq/ModUEq.h"
-#include "UEqTotEnergy/ModUEqTotEnergy.h"
-#include "EulerKorteweg/ModEulerKorteweg.h"
-#include "NonLinearSchrodinger/ModNonLinearSchrodinger.h"
+#include "../Flux.h"
 
-//Add new models here
+//! \class     FluxShallowWater
+//! \brief     Model class for ShallowWater Flux (single phase)
+class FluxShallowWater : public Flux
+{
+  public:
+    FluxShallowWater();
+    ~FluxShallowWater() override;
 
-#endif // HEADERMODELE_H
+    void addFlux(double coefA) override;
+    void addFlux(Flux* flux) override;
+    void subtractFlux(double coefA) override;
+    void multiply(double scalar) override;
+    void setBufferFlux(Cell& cell) override;
+    void buildCons(Phase** phase, Mixture* /*mixture*/) override;
+    void buildPrim(Phase** phase, Mixture* /*mixture*/) override;
+    void setToZero() override;
+    void addNonCons(double /*coefA*/, const Cell* /*cell*/, const Coord& /*normal*/, const Coord& /*tangent*/, const Coord& /*binormal*/) override {};
+    void
+    subtractNonCons(double /*coefA*/, const Cell* /*cell*/, const Coord& /*normal*/, const Coord& /*tangent*/, const Coord& /*binormal*/) override {};
+
+  protected:
+    double m_mass;    //!< mass -> height
+    Coord m_momentum; //!< momentum -> (u*height, v*height, 0)
+
+    double m_hL; //!< phase height in left cell
+    double m_hR; //!< phase height in right cell
+
+  private:
+    friend class ModShallowWater;
+};
+
+#endif // FLUXSHALLOWWATER_H

@@ -7,7 +7,7 @@ EXECUTABLE = ECOGEN
 CXX = mpicxx
 
 
-CXXFLAGS = -std=c++11 -Wall -Wextra -Wpedantic $(MYCXXFLAGS)
+CXXFLAGS = -std=c++11 -Wall -Wextra -Wpedantic -Wno-nonnull $(MYCXXFLAGS)
 
 release: CXXFLAGS += -O3
 
