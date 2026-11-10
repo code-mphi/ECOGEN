@@ -50,7 +50,7 @@ Find the complete list of authors and acknowledgments here: https://code-mphi.gi
 
 When using one of the latest ECOGEN version, please cite both following references to acknowledge the work of all contributors:
 
-Schmidmayer K., Petitpas F., Daniel E., Cazé J., Froehly A., Dorschner B., Le Martelot S., Favrie N., Gadiri F. Z., Schropff S., Ade-Onojobi A. (2025). ECOGEN. *HAL*. [![HAL](https://img.shields.io/badge/HAL-05023172-green.svg)](https://hal.science/hal-05023172)
+Schmidmayer K., Petitpas F., Froehly A., Cazé J., Daniel E., Favrie N., Dorschner B., Taglialatela, F. E., Martin de Fourchambault, L., Didierlaurent, Q., Ade-Onojobi, A., Le Martelot S., Gadiri F. Z., Schropff S., (2026). ECOGEN. *HAL*. [![HAL](https://img.shields.io/badge/HAL-05023172-green.svg)](https://hal.science/hal-05023172)
 
 Schmidmayer, K., Petitpas, F., Le Martelot, S. & Daniel, E. (2020). ECOGEN, an open-source tool dedicated to multiphase compressible multiphysics flows. *Computer Physics Communications*. [![DOI](https://img.shields.io/badge/DOI-10.1016/j.cpc.2019.107093-green.svg)](https://doi.org/10.1016/j.cpc.2019.107093)
 

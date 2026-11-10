@@ -3,7 +3,7 @@
 Citation
 ========
 
-When using one of the latest ECOGEN version, please cite both following references to acknowledge the work of all contributors :cite:`schmidmayer2020ecogen` |DOI:ecogen| :cite:`schmidmayer2025ecogen` |HAL:ecogen|
+When using one of the latest ECOGEN version, please cite both following references to acknowledge the work of all contributors :cite:`schmidmayer2020ecogen` |DOI:ecogen| :cite:`schmidmayer2026ecogen` |HAL:ecogen|
 
 .. code-block:: none
 
