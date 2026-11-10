@@ -64,6 +64,50 @@
 		<hr />
 
 <article>
+	<h1> ECOGEN_v6.0 </h1>
+	<p class="date">2026-11-10</p>
+	<p> A new release, <a href="https://github.com/code-mphi/ECOGEN/releases/tag/v6.0" target="_blank">ECOGEN_v6.0</a>, is available on GitHub. It includes new features and fixes bugs.
+	<p> From now on, when using one of the latest ECOGEN version, please <b>cite not only the original paper</b> but as well the HAL reference to acknowledge the work of all contributors (see <a href="/ECOGEN/help/">Citation</a>). <a class="badge" href="https://hal.science/hal-05023172" target="_blank"><img src="https://img.shields.io/badge/HAL-05023172-green.svg" alt="HAL link" /></a> </p>
+	<h2> Major points: </h2>
+		<ul>
+			<li> New model for total non-equilibrium flow (<code>NEq</code> and <code>NEqDEM</code>) added. <code>NEqDEM</code> uses the Discrete Equation Method based on the work of Abgrall &amp; Saurel (2003) <a class="badge" href="https://doi.org/10.1016/S0021-9991(03)00011-1" target="_blank"><img src="https://img.shields.io/badge/DOI-10.1016/S0021--9991(03)00011--1-green.svg" alt="DOI link" /></a> and <code>NEq</code> uses either the HLLAC Riemann solver of Lochon et al. (2016) <a class="badge" href="https://doi.org/10.1016/j.jcp.2016.09.015" target="_blank"><img src="https://img.shields.io/badge/DOI-10.1016/j.jcp.2016.09.015-green.svg" alt="DOI link" /></a>, the HLLC-type Riemann solver of Furfaro &amp; Saurel (2015) <a class="badge" href="https://doi.org/10.1016/j.compfluid.2015.01.016" target="_blank"><img src="https://img.shields.io/badge/DOI-10.1016/j.compfluid.2015.01.016-green.svg" alt="DOI link" /></a>, or the HLL/Rusanov Riemann solver of Saurel &amp; Abgrall (1999) <a class="badge" href="https://doi.org/10.1006/jcph.1999.6187" target="_blank"><img src="https://img.shields.io/badge/DOI-10.1006/jcph.1999.6187-green.svg" alt="DOI link" /></a> with different closure laws. The DEM can be used for IG, SG and NASG EOS with a HLLC Riemann-problem solver. An exact Riemann-problem solver can also be used but only for IG and SG EOS, and for non-reflecting boundary conditions. Infinite relaxations of velocities and pressures, as well as axi-symmetry terms are implemented. The DEM can work for <i>N</i> phases using either Paula et al. (2023) <a class="badge" href="https://doi.org/10.1016/j.jcp.2023.112371" target="_blank"><img src="https://img.shields.io/badge/DOI-10.1016/j.jcp.2023.112371-green.svg" alt="DOI link" /></a> or Chinnayya (2002) <a href="https://theses.fr/2002AIX11066" target="_blank">(PhD thesis)</a> algorithm. The DEM can work with a second-order scheme, for now only for Cartesian <i>N</i> phases without interface interaction with any boundary conditions. </li>
+			<li> New 1D model added: extended Navier-Stokes-Korteweg model (<code>ExtendedNavierStokesKorteweg1D</code>). This model allows to consider compressible flows with capillarity and liquid-vapour phase transition: Didierlaurent et al. (2026) "Numerical investigation of a Navier-Stokes-Korteweg system through an extended Lagrangian formulation: nonclassical waves and phase transition problems" and Didierlaurent et al. (2025) <a class="badge" href="https://doi.org/10.1111/sapm.70005" target="_blank"><img src="https://img.shields.io/badge/DOI-10.1111/sapm.70005-green.svg" alt="DOI link" /></a>. From this generic model, one can choose different equations of state to obtain particular models lying in different fields. For example, the hydrodynamic form of the Defocusing Nonlinear Schrödinger (NLS) equation, Dhaouadi et al. (2019) <a class="badge" href="https://doi.org/10.1111/sapm.12238" target="_blank"><img src="https://img.shields.io/badge/DOI-10.1111/sapm.12238-green.svg" alt="DOI link" /></a>, or to describe the dynamics of a bistable tape spring, Bourgeois et al. <a class="badge" href="https://doi.org/10.1016/j.ijsolstr.2020.09.031" target="_blank"><img src="https://img.shields.io/badge/DOI-10.1016/j.ijsolstr.2020.09.031-green.svg" alt="DOI link" /></a>, by choosing polynomial EOS, or finally to describe the dynamics of phase transition by considering the van der Waals EOS (Didierlaurent et al., 2026). 3 EOS were therefore added to complement this model. </li>
+			<li> Turbulence static Smagorinsky model in the context of Large Eddy Simulations (LES). This model is currently implemented on the Euler model with viscosity, corresponding to the Navier-Stokes equations, and validated using a homogeneous isotropic decaying turbulence simulation. </li>
+			<li> New output format based on HDF5 (<code>VTKHDF</code>) for high performance computations using high number of MPI processes. An <code>xdmf</code> file is used as well for optimised Cartesian outputs. </li>
+			<li> Adds periodic boundary conditions for Cartesian meshes (no AMR, yet). </li>
+			<li> Adds non-slip moving wall boundary conditions following an oscillatory behaviour (sinus) for all meshes. One can model a constant piston velocity if frequency is null and offset is pi/2. </li>
+		</ul>
+	<h2> Minor points: </h2>
+		<ul>
+			<li> Second-order and gradient XML elements (tags) from <code>main.xml</code> files have been moved to <code>model.xml</code> files. This change therefore induces an <b>incompatibility of the input files with the previous version</b>. A warning message is shown when one of the elements is mentioned in the <code>main.xml</code> file of your running test case. </li>
+			<li> Clear distinction now between slip and non-slip walls. A slip wall is modelled as a <code>symmetry</code> while a non-slip wall is modelled as a <code>wall</code>. </li>
+			<li> ECOGEN can now be used as a shared library, e.g. for easy linkage with C or python codes. </li>
+			<li> Add a volume-fraction threshold value for activating or not the infinite pressure relaxation when null volume fractions are allowed in the simulation. Default is what it was before (1.e-5). </li>
+			<li> Default gradient computation set to Green-Gauss. </li>
+			<li> Adds <code>Koren</code> limiter, Vreugdenhil &amp; Koren (1993) Numerical Methods for Advection-diffusion Problems, for MUSCL scheme. </li>
+			<li> Remove useless mesh-info files from results and use centralised AMR tree-structure outputs when using VTKHDF output file format (useful for high performance computations using high number of MPI processes). </li>
+			<li> Remove useless errors and warning files that were always created. Now they are created only if errors or warnings occur. In the case of VTKHDF output file format, centralised parallel writing is done. </li>
+			<li> Adds a coloured warning message if at least one MPI process raised a warning and colours the already printed error message in case of error. One can disable coloured outputs if needed. </li>
+			<li> Improve mesh stretching setup and documentation. Now, instead of providing the number of cells in the mesh stretching areas, the user has to provide: the size of the reference cell (<code>refCellSize</code> tag), and the position of the reference cell (<code>refCellPos</code> tag). The number of cells is computed from these data with the mesh stretching factor being applied from the reference cell position to the other extremity of the region. The stretching factor provided by the user may be modified in order to end up with an exact number of cells covering the stretch region. Furthermore, eventual warnings are printed at execution when needed. Note that this change induces an <b>incompatibility of the mesh input file with the previous version</b> (for Cartesian meshes using mesh stretching). </li>
+			<li> Add new compile flags <code>-Wundef -Wshadow -Wuninitialized</code> (in addition to existing <code>-Wall -Wextra -Wpedantic</code>) to help guaranteeing a clean code is produced. </li>
+			<li> Improve time recording during simulations and add information about output writing time. </li>
+		</ul>
+	<h2> Fixes: </h2>
+		<ul>
+			<li> Correct compilation warnings on some of the latest compiler versions. </li>
+			<li> Correct error on run-time information when resuming a simulation. </li>
+			<li> Correction of a bug that happened when a second-order parallel simulation was having very small cell sizes. </li>
+			<li> Correct a bug with C++ MPI headers on linux. </li>
+			<li> Correct a terminal printing bug when showing progress percentage of the construction of unstructured meshes for large number of cells. </li>
+			<li> Correct a segfault error for parallel runs with missing input files. </li>
+			<li> Add missing description of <code>infoCalcul.out</code> file in the documentation. </li>
+			<li> Remove unused SVD tierce library. </li>
+		</ul>
+	</p>
+</article>
+<hr />
+
+<article>
 	<h1> ECOGEN_v5.0 </h1>
 	<p class="date">2025-09-30</p>
 	<p> A new release, <a href="https://github.com/code-mphi/ECOGEN/releases/tag/v5.0" target="_blank">ECOGEN_v5.0</a>, is available on GitHub. It includes new features and fixes bugs.
