@@ -34,31 +34,31 @@ using namespace tinyxml2;
 
 //****************************************************************************
 
-BoundCondNullflux::BoundCondNullflux(const BoundCondNullflux& Source, const int& lvl) : BoundCond(Source, lvl) {}
+BoundCondNullFlux::BoundCondNullFlux(const BoundCondNullFlux& Source, const int& lvl) : BoundCond(Source, lvl) {}
 
 //****************************************************************************
 
-BoundCondNullflux::BoundCondNullflux(int numPhysique) : BoundCond(numPhysique) {}
+BoundCondNullFlux::BoundCondNullFlux(int numPhysique) : BoundCond(numPhysique) {}
 
 //****************************************************************************
 
-BoundCondNullflux::~BoundCondNullflux() {}
+BoundCondNullFlux::~BoundCondNullFlux() {}
 
 //****************************************************************************
 
-void BoundCondNullflux::createBoundary(TypeMeshContainer<CellInterface*>& cellInterfaces)
+void BoundCondNullFlux::createBoundary(TypeMeshContainer<CellInterface*>& cellInterfaces)
 {
-  cellInterfaces.push_back(new BoundCondNullflux(*(this)));
+  cellInterfaces.push_back(new BoundCondNullFlux(*(this)));
 }
 
 //****************************************************************************
 
-void BoundCondNullflux::solveRiemannBoundary(Cell& /*cellLeft*/, const double& /*dxLeft*/, double& /*dtMax*/) { model->solveRiemannNullFlux(); }
+void BoundCondNullFlux::solveRiemannBoundary(Cell& /*cellLeft*/, const double& /*dxLeft*/, double& /*dtMax*/) { model->solveRiemannNullFlux(); }
 
 //****************************************************************************
 //******************************AMR Method***********************************
 //****************************************************************************
 
-void BoundCondNullflux::creerCellInterfaceChild() { m_cellInterfacesChildren.push_back(new BoundCondNullflux(*this, m_lvl + 1)); }
+void BoundCondNullFlux::creerCellInterfaceChild() { m_cellInterfacesChildren.push_back(new BoundCondNullFlux(*this, m_lvl + 1)); }
 
 //****************************************************************************

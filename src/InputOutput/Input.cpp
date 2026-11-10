@@ -725,6 +725,22 @@ void Input::inputModel(std::string casTest)
         numberScalarsPhase = 5; //Volume fraction, density, pressure, temperature and mass fraction
       }
     }
+    else if (modelName == "VELOCITYEQSOLID") {
+      error = element->QueryIntAttribute("numberPhases", &m_run->m_numberPhases);
+      if (error != XML_NO_ERROR) throw ErrorXMLAttribut("numberPhases", fileName.str(), __FILE__, __LINE__);
+      error          = element->QueryIntAttribute("numberSolids", &m_run->m_numberSolids);
+      m_run->m_model = new ModUEqSolid(m_run->m_numberTransports, m_run->m_numberPhases, m_run->m_numberSolids);
+      error          = element->QueryBoolAttribute("alphaNull", &alphaNull);
+      if (error != XML_NO_ERROR) throw ErrorXMLAttribut("alphaNull", fileName.str(), __FILE__, __LINE__);
+      if (m_run->m_outPut->getReducedOutput()) {
+        numberScalarsMixture = 2; //Density and pressure
+      }
+      else {
+        if (m_run->m_mesh->getProblemDimension() == 1)
+          numberScalarsMixture = 7;    //Density, pressure, total energy, sigma_11, sigma_12 and velocity in x- and y-directions
+        else numberScalarsMixture = 5; //Density, pressure, total energy, sigma_11 and sigma_12
+      }
+    }
     else if (modelName == "VELOCITYEQTOTENERGY") {
       error = element->QueryIntAttribute("numberPhases", &m_run->m_numberPhases);
       if (error != XML_NO_ERROR) throw ErrorXMLAttribut("numberPhases", fileName.str(), __FILE__, __LINE__);
@@ -820,7 +836,7 @@ void Input::inputModel(std::string casTest)
       //switch based on the type of the additional physics
       if (typeAddPhys == "SURFACETENSION") {
         //switch based on flow model
-        if (modelName == "PRESSUREVELOCITYEQ" || modelName == "VELOCITYEQ") {
+        if (modelName == "PRESSUREVELOCITYEQ" || modelName == "VELOCITYEQ" || modelName == "VELOCITYEQSOLID") {
           m_run->m_addPhys.push_back(new APUEqSurfaceTension(element, numberQPA, m_run->m_nameGTR, nameEOS, fileName.str()));
         }
         else {
@@ -829,7 +845,7 @@ void Input::inputModel(std::string casTest)
       }
       else if (typeAddPhys == "VISCOSITY") {
         //switch based on flow model
-        if (modelName == "PRESSUREVELOCITYEQ" || modelName == "VELOCITYEQ") {
+        if (modelName == "PRESSUREVELOCITYEQ" || modelName == "VELOCITYEQ" || modelName == "VELOCITYEQSOLID") {
           m_run->m_addPhys.push_back(new APUEqViscosity(numberQPA, m_run->m_eos, m_run->m_numberPhases));
         }
         else if (modelName == "EULER") {
@@ -842,7 +858,7 @@ void Input::inputModel(std::string casTest)
       }
       else if (typeAddPhys == "CONDUCTIVITY") {
         //switch based on flow model
-        if (modelName == "PRESSUREVELOCITYEQ" || modelName == "VELOCITYEQ") {
+        if (modelName == "PRESSUREVELOCITYEQ" || modelName == "VELOCITYEQ" || modelName == "VELOCITYEQSOLID") {
           m_run->m_addPhys.push_back(new APUEqConductivity(numberQPA, m_run->m_eos, m_run->m_numberPhases));
         }
         else if (modelName == "EULER") {
@@ -856,7 +872,7 @@ void Input::inputModel(std::string casTest)
         turbulenceActivated = true;
         turbulenceNumQPA    = numberQPA;
         //switch based on flow model
-        if (modelName == "PRESSUREVELOCITYEQ" || modelName == "VELOCITYEQ") {
+        if (modelName == "PRESSUREVELOCITYEQ" || modelName == "VELOCITYEQ" || modelName == "VELOCITYEQSOLID") {
           throw ErrorXMLDev(fileName.str(), __FILE__, __LINE__);
         }
         else if (modelName == "EULER") {
@@ -885,6 +901,68 @@ void Input::inputModel(std::string casTest)
       element = element->NextSiblingElement("additionalPhysics");
     }
     m_run->m_numberAddPhys = physiqueAddTrouvee;
+
+    //Reading of compaction
+    if (modelName == "VELOCITYEQSOLID") {
+      int compactionFound(0);
+      std::string namePhaseAssociated;
+      XMLElement* elementCompaction(xmlNode->FirstChildElement("compaction"));
+      while (elementCompaction != NULL) {
+        //Name of the associated phase
+        namePhaseAssociated = elementCompaction->Attribute("phase");
+        if (namePhaseAssociated == "") throw ErrorXMLAttribut("phase", fileName.str(), __FILE__, __LINE__);
+        //Find the corresponding phase number
+        unsigned int p(0);
+        for (p = 0; p < nameEOS.size(); p++) {
+          if (namePhaseAssociated == nameEOS[p]) {
+            break;
+          }
+        }
+        if (p != nameEOS.size()) {
+          //Read and associate the parameters to the corresponding phase
+          m_run->m_model->readCompactionParameters(elementCompaction, fileName.str(), p);
+        }
+        else {
+          Errors::errorMessage("Phase not found for compaction");
+        }
+        //Looking for next compaction element
+        compactionFound++;
+        elementCompaction = elementCompaction->NextSiblingElement("compaction");
+      }
+      //Verifications
+      if (compactionFound > m_run->m_numberPhases) throw ErrorXML(fileName.str(), __FILE__, __LINE__);
+    }
+
+    //Reading of solid variables
+    if (modelName == "VELOCITYEQSOLID") {
+      int solidFound(0);
+      std::string namePhaseAssociated;
+      XMLElement* elementSolid(xmlNode->FirstChildElement("solid"));
+      while (elementSolid != NULL) {
+        //Name of the associated phase
+        namePhaseAssociated = elementSolid->Attribute("phase");
+        if (namePhaseAssociated == "") throw ErrorXMLAttribut("phase", fileName.str(), __FILE__, __LINE__);
+        //Find the corresponding phase number
+        unsigned int p(0);
+        for (p = 0; p < nameEOS.size(); p++) {
+          if (namePhaseAssociated == nameEOS[p]) {
+            break;
+          }
+        }
+        if (p != nameEOS.size()) {
+          //Read and associate the parameters to the corresponding phase
+          m_run->m_model->readSolidParameters(elementSolid, fileName.str(), p);
+        }
+        else {
+          Errors::errorMessage("Phase not found for solid");
+        }
+        //Looking for next solid element
+        solidFound++;
+        elementSolid = elementSolid->NextSiblingElement("solid");
+      }
+      //Verifications
+      if (solidFound != m_run->m_numberSolids) throw ErrorXML(fileName.str(), __FILE__, __LINE__);
+    }
 
     //Symmetry terms reading
     element = xmlNode->FirstChildElement("symmetryTerm");
@@ -997,6 +1075,7 @@ void Input::inputModel(std::string casTest)
 
     //Relaxations reading
     element = xmlNode->FirstChildElement("relaxation");
+    bool relaxationFoundForUEqSolid(false);
     while (element != NULL) {
       //Read source
       std::string typeRelax(element->Attribute("type"));
@@ -1031,24 +1110,35 @@ void Input::inputModel(std::string casTest)
         std::string speedRelax(element->Attribute("speed"));
         Tools::uppercase(speedRelax);
         if (speedRelax == "FINITE") {
-          m_run->m_model->getRelaxations()->push_back(new RelaxationPFinite(element, fileName.str()));
+          if (modelName == "VELOCITYEQSOLID") {
+            m_run->m_model->getRelaxations()->push_back(new RelaxationPFiniteSolid(element, fileName.str()));
+            relaxationFoundForUEqSolid = true;
+          }
+          else {
+            m_run->m_model->getRelaxations()->push_back(new RelaxationPFinite(element, fileName.str()));
+          }
         }
-        else {                             //Infinite
-          double thresholdPressure(1.e-5); //Default value
-          std::string thresholdAvailable = element->Attribute("threshold") ? element->Attribute("threshold") : "";
-          if (thresholdAvailable != "") {
-            thresholdPressure = 0.;
-            error             = element->QueryDoubleAttribute("threshold", &thresholdPressure);
-            if (error != XML_NO_ERROR) throw ErrorXMLAttribut("threshold", fileName.str(), __FILE__, __LINE__);
-            if (thresholdPressure <= 0.0 || thresholdPressure >= 1.0) {
-              throw ErrorXMLRelaxation("Invalid threshold value, must be in ]0;1[", fileName.str(), __FILE__, __LINE__);
+        else { //Infinite
+          if (modelName == "VELOCITYEQSOLID") {
+            throw ErrorXMLRelaxation(typeRelax, fileName.str(), __FILE__, __LINE__);
+          }
+          else {
+            double thresholdPressure(1.e-5); //Default value
+            std::string thresholdAvailable = element->Attribute("threshold") ? element->Attribute("threshold") : "";
+            if (thresholdAvailable != "") {
+              thresholdPressure = 0.;
+              error             = element->QueryDoubleAttribute("threshold", &thresholdPressure);
+              if (error != XML_NO_ERROR) throw ErrorXMLAttribut("threshold", fileName.str(), __FILE__, __LINE__);
+              if (thresholdPressure <= 0.0 || thresholdPressure >= 1.0) {
+                throw ErrorXMLRelaxation("Invalid threshold value, must be in ]0;1[", fileName.str(), __FILE__, __LINE__);
+              }
+              else {
+                m_run->m_model->getRelaxations()->push_back(new RelaxationPInfinite(thresholdPressure));
+              }
             }
             else {
               m_run->m_model->getRelaxations()->push_back(new RelaxationPInfinite(thresholdPressure));
             }
-          }
-          else {
-            m_run->m_model->getRelaxations()->push_back(new RelaxationPInfinite(thresholdPressure));
           }
         }
       }
@@ -1065,6 +1155,16 @@ void Input::inputModel(std::string casTest)
         throw ErrorXMLRelaxation(typeRelax, fileName.str(), __FILE__, __LINE__);
       }
       element = element->NextSiblingElement("relaxation");
+    }
+    //Add relaxation for UEqSolid model when plasticity of a solid is specified and pressure relaxation isn'
+    if (!relaxationFoundForUEqSolid) { //No pressure relaxation for UEqSolid
+      bool plasticityFound(false);
+      for (int k = 0; k < m_run->m_numberSolids; k++) {
+        plasticityFound = m_run->m_model->getLawPlas(k)->plasticity();
+      }
+      if (plasticityFound) { //Plasticity specified for at least one solid
+        m_run->m_model->getRelaxations()->push_back(new RelaxationPFiniteSolid());
+      }
     }
 
     // Read second order
@@ -1385,6 +1485,9 @@ void Input::inputInitialConditions(std::string casTest,
       else if (m_run->m_model->whoAmI() == "NONEQ") {
         stateMixture = new MixNEq();
       }
+      else if (m_run->m_model->whoAmI() == "VELOCITYEQSOLID") {
+        stateMixture = new MixUEqSolid(state, fileName.str());
+      }
       else if (m_run->m_model->whoAmI() == "VELOCITYEQTOTENERGY") {
         stateMixture = new MixUEqTotEnergy(state, fileName.str());
       }
@@ -1407,12 +1510,24 @@ void Input::inputInitialConditions(std::string casTest,
       std::string nameEOS;
       XMLElement* material(state->FirstChildElement("material"));
       int nbMateriauxState(0);
+      int nbSolidState(0);
       while (material != NULL) {
         typeMateriau = material->Attribute("type");
         Tools::uppercase(typeMateriau);
 
-        //READING FLUID
-        if (typeMateriau == "FLUID") {
+        //Verifying that solids are setup first
+        if (nbSolidState < m_run->m_numberSolids) {
+          if (typeMateriau != "SOLID") {
+            for (unsigned int k = 0; k < statesPhases.size(); k++) {
+              destroy(statesPhases[k]);
+            }
+            destroy(stateMixture);
+            throw ErrorXMLEtat("Solid materials should be setup first", fileName.str(), __FILE__, __LINE__);
+          }
+        }
+
+        //READING FLUID AND SOLID
+        if (typeMateriau == "FLUID" || typeMateriau == "SOLID") {
           nbMateriauxState++;
           //Find EOS
           nameEOS = material->Attribute("EOS");
@@ -1450,6 +1565,9 @@ void Input::inputInitialConditions(std::string casTest,
             else if (m_run->m_model->whoAmI() == "NONEQ") {
               statesPhases.push_back(new PhaseNEq(material, m_run->m_eos[e], fileName.str()));
             }
+            else if (m_run->m_model->whoAmI() == "VELOCITYEQSOLID") {
+              statesPhases.push_back(new PhaseFluidUEqSolid(material, m_run->m_eos[e], fileName.str(), m_run->m_model));
+            }
             else if (m_run->m_model->whoAmI() == "VELOCITYEQTOTENERGY") {
               statesPhases.push_back(new PhaseUEqTotEnergy(material, m_run->m_eos[e], fileName.str()));
             }
@@ -1470,8 +1588,22 @@ void Input::inputInitialConditions(std::string casTest,
               throw ErrorXMLElement("Not valid Model-Fluid coupling", fileName.str(), __FILE__, __LINE__);
             }
           }
+          //Solid phase
+          else {
+            nbSolidState++;
+            if (m_run->m_model->whoAmI() == "VELOCITYEQSOLID") {
+              statesPhases.push_back(new PhaseSolidUEqSolid(material, m_run->m_eos[e], fileName.str(), m_run->m_model));
+            }
+            else {
+              for (unsigned int k = 0; k < statesPhases.size(); k++) {
+                destroy(statesPhases[k]);
+              }
+              destroy(stateMixture);
+              throw ErrorXMLElement("Not valid Model-Solid coupling", fileName.str(), __FILE__, __LINE__);
+            }
+          }
         }
-        //READING "NONE" (not a fluid)
+        //READING "NONE" (not a fluid or solid)
         else if (typeMateriau == "NONE") {
           nbMateriauxState++;
         }
@@ -1483,6 +1615,7 @@ void Input::inputInitialConditions(std::string casTest,
         material = material->NextSiblingElement("material");
       }
       if (nbMateriauxState != m_run->m_numberPhases) throw ErrorXMLEtat(stateDomaine, fileName.str(), __FILE__, __LINE__);
+      if (nbSolidState != m_run->m_numberSolids) throw ErrorXMLEtat(stateDomaine, fileName.str(), __FILE__, __LINE__);
 
       //Read transported variables for found state
       std::vector<Transport> statesTransport(m_run->m_numberTransports);
@@ -1691,7 +1824,7 @@ void Input::inputInitialConditions(std::string casTest,
         boundCond.push_back(new BoundCondOutletMassflow(numBoundCond, element, fileName.str()));
       }
       else if (typeBoundCond == "NULLFLUX") {
-        boundCond.push_back(new BoundCondNullflux(numBoundCond));
+        boundCond.push_back(new BoundCondNullFlux(numBoundCond));
       }
       else if (typeBoundCond == "PERIODIC") {
         if (m_run->m_mesh->getType() == TypeM::UNS || m_run->m_mesh->getType() == TypeM::AMR) { // Unstructured or AMR

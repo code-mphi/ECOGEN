@@ -35,12 +35,12 @@
 
 //! \class     BoundCondNullFlux
 //! \brief     Specific boundary condition which sets null fluxes (useful for 1D geometry with smooth varying cross-section)
-class BoundCondNullflux : public BoundCond
+class BoundCondNullFlux : public BoundCond
 {
   public:
-    BoundCondNullflux(const BoundCondNullflux& Source, const int& lvl = 0); //Copy ctor (useful for AMR)
-    BoundCondNullflux(int numPhysique);
-    ~BoundCondNullflux() override;
+    BoundCondNullFlux(const BoundCondNullFlux& Source, const int& lvl = 0); //Copy ctor (useful for AMR)
+    BoundCondNullFlux(int numPhysique);
+    ~BoundCondNullFlux() override;
 
     void createBoundary(TypeMeshContainer<CellInterface*>& cellInterfaces) override;
     void solveRiemannBoundary(Cell& /*cellLeft*/, const double& /*dxLeft*/, double& /*dtMax*/) override;
