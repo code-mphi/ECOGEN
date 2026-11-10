@@ -10,6 +10,7 @@ var classTensor =
     [ "determinant", "classTensor.html#a4209e3d319f9f37529eab2663a93094e", null ],
     [ "eigen", "classTensor.html#a8326bcfbd0326129342ca73c26254b00", null ],
     [ "exponentialPade", "classTensor.html#aa9d7b418dd9637f4e1d565a8edfed893", null ],
+    [ "frobeniusNorm", "classTensor.html#acdb852bf617cece289b1cfe9109ba001", null ],
     [ "getElement", "classTensor.html#a79930dd16248260eb21b016a6d6af6b4", null ],
     [ "getXX", "classTensor.html#ac86c425be4e74aee7bb32f5592a0f246", null ],
     [ "getXY", "classTensor.html#afa43288006edf97d74c8a9ac56033088", null ],

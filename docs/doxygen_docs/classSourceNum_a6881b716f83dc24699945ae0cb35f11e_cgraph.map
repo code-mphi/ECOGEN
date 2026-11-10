@@ -1,0 +1,35 @@
+<map id="SourceNum::integrateSourceTerms" name="SourceNum::integrateSourceTerms">
+<area shape="rect" id="Node000001" title="Source terms integration on conservative quantities." alt="" coords="5,268,213,313"/>
+<area shape="rect" id="Node000002" href="$classFlux.html#aac25bdaa5ffd6bf68855b07e4420e077" title="Add flux passed in parameter to the correspond model flux." alt="" coords="307,277,416,304"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="213,288,293,289,289,292,214,293"/>
+<area shape="rect" id="Node000005" href="$classCell.html#aa392a8080ff582fdb61b030b501422d2" title=" " alt="" coords="302,329,420,356"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="213,309,289,326,284,328,214,314"/>
+<area shape="rect" id="Node000006" href="$classCell.html#ae69c04f5abf7ce5173a9ce06abd510d0" title=" " alt="" coords="303,381,420,408"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="149,310,202,339,262,365,291,377,285,377,260,370,200,343,149,316"/>
+<area shape="rect" id="Node000007" href="$classElement.html#a67dc770746d7175dc3c4aed0d70b1b29" title=" " alt="" coords="264,432,458,477"/>
+<area shape="poly" id="edge6_Node000001_Node000007" title=" " alt="" coords="132,310,189,364,224,392,262,417,274,425,268,425,259,422,221,397,185,368,131,316"/>
+<area shape="rect" id="Node000008" href="$classCell.html#a0d92eb572fc85da4b37bf2ad4b760621" title=" " alt="" coords="821,163,928,191"/>
+<area shape="poly" id="edge7_Node000001_Node000008" title=" " alt="" coords="212,270,260,262,806,184,805,189,261,268,214,275"/>
+<area shape="rect" id="Node000009" href="$classCell.html#a222238b424bf20588ec06c647a190c0a" title=" " alt="" coords="297,501,426,528"/>
+<area shape="poly" id="edge8_Node000001_Node000009" title=" " alt="" coords="121,310,144,350,175,398,214,446,262,487,285,500,280,500,259,491,211,450,170,401,139,353,120,315"/>
+<area shape="rect" id="Node000010" href="$classSourceNum.html#a82b921349e030cdc4d4cc67ae6f69888" title="Euler explicite integration (order 1)." alt="" coords="510,74,718,102"/>
+<area shape="poly" id="edge9_Node000001_Node000010" title=" " alt="" coords="127,266,182,209,219,179,259,155,317,131,378,113,438,101,497,94,492,97,439,106,379,118,319,136,262,159,222,184,186,213,131,269"/>
+<area shape="rect" id="Node000012" href="$classSourceNum.html#afa10c3060572452be2e97c2cdf64b97d" title="Runge&#45;Kutta integration (order 2)." alt="" coords="261,169,462,196"/>
+<area shape="poly" id="edge13_Node000001_Node000012" title=" " alt="" coords="157,265,260,219,310,200,305,204,262,223,160,270"/>
+<area shape="rect" id="Node000013" href="$classSourceNum.html#abd73b5e08a17a809ec6d4c462377c7ff" title="Runge&#45;Kutta integration (order 4)." alt="" coords="261,30,462,58"/>
+<area shape="poly" id="edge17_Node000001_Node000013" title=" " alt="" coords="120,267,173,181,213,130,259,86,303,62,299,66,262,90,216,134,177,184,124,269"/>
+<area shape="rect" id="Node000003" href="$classErrors.html#a5fcdb1d77f9c74188b44ac7d0d05a453" title=" " alt="" coords="1031,226,1187,254"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="416,299,510,313,614,319,718,313,804,302,890,287,1040,257,1035,258,891,292,805,307,719,318,614,325,510,318,417,305"/>
+<area shape="rect" id="Node000004" href="$classFlux.html#a1e8f1efffccbc22015d2345e6be7fbb5" title=" " alt="" coords="572,277,657,304"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="416,288,558,289,553,291,417,293"/>
+<area shape="poly" id="edge10_Node000010_Node000008" title=" " alt="" coords="657,99,820,157,815,158,657,105"/>
+<area shape="rect" id="Node000011" href="$classSourceNum.html#a57bcba888367a59f74c8e143b9e5dde0" title="Source terms preparation for integration." alt="" coords="766,87,983,115"/>
+<area shape="poly" id="edge11_Node000010_Node000011" title=" " alt="" coords="718,90,754,94,748,95,719,96"/>
+<area shape="poly" id="edge12_Node000011_Node000003" title=" " alt="" coords="910,113,984,149,1035,182,1080,216,1074,216,1032,186,981,154,910,118"/>
+<area shape="poly" id="edge14_Node000012_Node000008" title=" " alt="" coords="462,179,807,176,803,179,463,184"/>
+<area shape="poly" id="edge15_Node000012_Node000010" title=" " alt="" coords="393,166,509,117,550,105,546,108,511,122,395,170"/>
+<area shape="poly" id="edge16_Node000012_Node000011" title=" " alt="" coords="453,165,769,116,765,119,454,170"/>
+<area shape="poly" id="edge18_Node000013_Node000008" title=" " alt="" coords="443,27,507,21,578,23,651,34,686,45,720,60,737,75,746,91,754,108,768,124,793,141,820,157,815,157,790,146,765,128,749,111,741,93,733,78,717,65,684,50,650,39,577,28,507,27,445,32"/>
+<area shape="poly" id="edge19_Node000013_Node000010" title=" " alt="" coords="444,56,518,70,513,72,446,61"/>
+<area shape="poly" id="edge20_Node000013_Node000011" title=" " alt="" coords="417,27,480,14,555,5,638,4,679,8,719,16,754,27,787,43,844,78,839,78,785,47,752,32,718,21,678,13,637,9,556,11,480,20,419,32"/>
+</map>

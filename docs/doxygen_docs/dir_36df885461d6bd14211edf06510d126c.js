@@ -2,8 +2,9 @@ var dir_36df885461d6bd14211edf06510d126c =
 [
     [ "Euler", "dir_d37cb3c5e4d5d307a35ea7fcd050bad1.html", "dir_d37cb3c5e4d5d307a35ea7fcd050bad1" ],
     [ "EulerHomogeneous", "dir_1dfd96e70a982109d90ee65f2b16ba36.html", "dir_1dfd96e70a982109d90ee65f2b16ba36" ],
-    [ "EulerKorteweg", "dir_eece168b795f62ba667a8a848de401a9.html", "dir_eece168b795f62ba667a8a848de401a9" ],
-    [ "NonLinearSchrodinger", "dir_2a70f1919e997dd61188ba8a1519ab6f.html", "dir_2a70f1919e997dd61188ba8a1519ab6f" ],
+    [ "ExtendedNavierStokesKorteweg1D", "dir_c486825622b68c115a6d3ceeb09790f7.html", "dir_c486825622b68c115a6d3ceeb09790f7" ],
+    [ "NEq", "dir_f0971eac207f5b905e32b96df0ed2dc8.html", "dir_f0971eac207f5b905e32b96df0ed2dc8" ],
+    [ "NEqDEM", "dir_80b59a708829391c5ef07d3096fa7ac9.html", "dir_80b59a708829391c5ef07d3096fa7ac9" ],
     [ "PTUEq", "dir_659c3be787da0cbcb5b29c3d3eea2638.html", "dir_659c3be787da0cbcb5b29c3d3eea2638" ],
     [ "PUEq", "dir_af793a6949e6c9114a8003892e0e79e6.html", "dir_af793a6949e6c9114a8003892e0e79e6" ],
     [ "UEq", "dir_a59ec4d16c6120af833628744347462e.html", "dir_a59ec4d16c6120af833628744347462e" ],

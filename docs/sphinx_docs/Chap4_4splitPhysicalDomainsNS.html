@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Split physical domains for unstructured meshes &mdash; ECOGEN 5.0 documentation</title>
+  <title>Split physical domains for unstructured meshes &mdash; ECOGEN 6.0 documentation</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
       <link rel="stylesheet" type="text/css" href="_static/css/theme.css" />
 
@@ -39,7 +39,7 @@
             ECOGEN
           </a>
               <div class="version">
-                5.0
+                6.0
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
@@ -73,7 +73,8 @@
 </li>
 <li class="toctree-l1"><a class="reference internal" href="Chap5_testCases_Chapter.html">Test cases</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Chap6_developersGuide_Chapter.html">Developers</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Chap7_license.html">License</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Chap7_license.html">License and authors</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Chap8_citation.html">Citation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="zBibliography.html">Bibliography</a></li>
 </ul>
 
@@ -159,63 +160,63 @@ Physical Surface(rightChamber) = {11};
 <section id="setup-of-the-test-case">
 <h2>Setup of the test case<a class="headerlink" href="#setup-of-the-test-case" title="Permalink to this heading"></a></h2>
 <p>Let’s start with the <em>main.xml</em> file. We use an <em>VTK</em> output mode with time control set to <em>iterations</em> and a <em>CFL</em> number of <em>0.8</em>:</p>
-<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="cp">&lt;?xml version = &quot;1.0&quot; encoding = &quot;UTF-8&quot; standalone = &quot;yes&quot;?&gt;</span>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="cp">&lt;?xml version = "1.0" encoding = "UTF-8" standalone = "yes"?&gt;</span>
 <span class="nt">&lt;computationParam&gt;</span>
 <span class="w">        </span><span class="nt">&lt;run&gt;</span>shockTubeUnstructured<span class="nt">&lt;/run&gt;</span>
-<span class="w">        </span><span class="nt">&lt;outputMode</span><span class="w"> </span><span class="na">format=</span><span class="s">&quot;VTK&quot;</span><span class="w"> </span><span class="na">binary=</span><span class="s">&quot;false&quot;</span><span class="w"> </span><span class="na">precision=</span><span class="s">&quot;15&quot;</span><span class="nt">/&gt;</span>
-<span class="w">        </span><span class="nt">&lt;timeControlMode</span><span class="w"> </span><span class="na">iterations=</span><span class="s">&quot;true&quot;</span><span class="nt">&gt;</span>
-<span class="w">                </span><span class="nt">&lt;iterations</span><span class="w"> </span><span class="na">number=</span><span class="s">&quot;100&quot;</span><span class="w"> </span><span class="na">iterFreq=</span><span class="s">&quot;10&quot;</span><span class="nt">/&gt;</span>
-<span class="w">                </span><span class="nt">&lt;physicalTime</span><span class="w"> </span><span class="na">totalTime=</span><span class="s">&quot;1e-3&quot;</span><span class="w"> </span><span class="na">timeFreq=</span><span class="s">&quot;5.e-5&quot;</span><span class="nt">/&gt;</span>
+<span class="w">        </span><span class="nt">&lt;outputMode</span><span class="w"> </span><span class="na">format=</span><span class="s">"VTK"</span><span class="w"> </span><span class="na">binary=</span><span class="s">"false"</span><span class="w"> </span><span class="na">precision=</span><span class="s">"15"</span><span class="nt">/&gt;</span>
+<span class="w">        </span><span class="nt">&lt;timeControlMode</span><span class="w"> </span><span class="na">iterations=</span><span class="s">"true"</span><span class="nt">&gt;</span>
+<span class="w">                </span><span class="nt">&lt;iterations</span><span class="w"> </span><span class="na">number=</span><span class="s">"100"</span><span class="w"> </span><span class="na">iterFreq=</span><span class="s">"10"</span><span class="nt">/&gt;</span>
+<span class="w">                </span><span class="nt">&lt;physicalTime</span><span class="w"> </span><span class="na">totalTime=</span><span class="s">"1e-3"</span><span class="w"> </span><span class="na">timeFreq=</span><span class="s">"5.e-5"</span><span class="nt">/&gt;</span>
 <span class="w">        </span><span class="nt">&lt;/timeControlMode&gt;</span>
-<span class="w">        </span><span class="nt">&lt;computationControl</span><span class="w"> </span><span class="na">CFL=</span><span class="s">&quot;0.8&quot;</span><span class="nt">/&gt;</span>
+<span class="w">        </span><span class="nt">&lt;computationControl</span><span class="w"> </span><span class="na">CFL=</span><span class="s">"0.8"</span><span class="nt">/&gt;</span>
 <span class="nt">&lt;/computationParam&gt;</span>
 </pre></div>
 </div>
 <p>To solve this flow we use the model <em>Euler</em> with air considered as ideal gas. Thus, the <em>model.xml</em> file is:</p>
-<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="cp">&lt;?xml version = &quot;1.0&quot; encoding = &quot;UTF-8&quot; standalone = &quot;yes&quot;?&gt;</span>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="cp">&lt;?xml version = "1.0" encoding = "UTF-8" standalone = "yes"?&gt;</span>
 <span class="nt">&lt;model&gt;</span>
-<span class="w">        </span><span class="nt">&lt;flowModel</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;Euler&quot;</span><span class="nt">/&gt;</span>
-<span class="w">        </span><span class="nt">&lt;EOS</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;IG_air.xml&quot;</span><span class="nt">/&gt;</span>
+<span class="w">        </span><span class="nt">&lt;flowModel</span><span class="w"> </span><span class="na">name=</span><span class="s">"Euler"</span><span class="nt">/&gt;</span>
+<span class="w">        </span><span class="nt">&lt;EOS</span><span class="w"> </span><span class="na">name=</span><span class="s">"IG_air.xml"</span><span class="nt">/&gt;</span>
 <span class="nt">&lt;/model&gt;</span>
 </pre></div>
 </div>
 <p>Reading of the unstructured mesh is done through the <em>mesh.xml</em> file:</p>
-<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="cp">&lt;?xml version = &quot;1.0&quot; encoding = &quot;UTF-8&quot; standalone = &quot;yes&quot;?&gt;</span>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="cp">&lt;?xml version = "1.0" encoding = "UTF-8" standalone = "yes"?&gt;</span>
 <span class="nt">&lt;mesh&gt;</span>
-<span class="w">        </span><span class="nt">&lt;type</span><span class="w"> </span><span class="na">structure=</span><span class="s">&quot;unStructured&quot;</span><span class="nt">/&gt;</span>
+<span class="w">        </span><span class="nt">&lt;type</span><span class="w"> </span><span class="na">structure=</span><span class="s">"unStructured"</span><span class="nt">/&gt;</span>
 <span class="w">        </span><span class="nt">&lt;unstructuredMesh&gt;</span>
-<span class="w">                </span><span class="nt">&lt;file</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;libMeshes/myMeshFolder/tube2d.msh&quot;</span><span class="nt">/&gt;</span>
+<span class="w">                </span><span class="nt">&lt;file</span><span class="w"> </span><span class="na">name=</span><span class="s">"libMeshes/myMeshFolder/tube2d.msh"</span><span class="nt">/&gt;</span>
 <span class="w">        </span><span class="nt">&lt;/unstructuredMesh&gt;</span>
 <span class="nt">&lt;/mesh&gt;</span>
 </pre></div>
 </div>
 <p>All that remains to be done is to initialize the chambers with the corresponding fluid states. To this end, we define two <code class="code highlight xml docutils literal highlight-xml">physicalDomains</code> of type <em>entireDomain</em>, one for each chamber. The link between the physical domains of the geometry file <em>.geo</em> and ECOGEN is made by the attribute <code class="code highlight xml docutils literal highlight-xml">physicalEntity</code>. As given above on the <em>.geo</em> file, the left chamber has the physical entity number 2 and the right chamber has the number 3. Therefore, the <em>initialConditions.xml</em> file is:</p>
-<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="cp">&lt;?xml version = &quot;1.0&quot; encoding = &quot;UTF-8&quot; standalone = &quot;yes&quot;?&gt;</span>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="cp">&lt;?xml version = "1.0" encoding = "UTF-8" standalone = "yes"?&gt;</span>
 <span class="nt">&lt;CI&gt;</span>
 <span class="w">    </span><span class="cm">&lt;!-- LIST OF GEOMETRICAL DOMAINS  --&gt;</span>
 <span class="w">    </span><span class="nt">&lt;physicalDomains&gt;</span>
-<span class="w">        </span><span class="nt">&lt;domain</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;leftChamber&quot;</span><span class="w"> </span><span class="na">state=</span><span class="s">&quot;leftChamber&quot;</span><span class="w"> </span><span class="na">type=</span><span class="s">&quot;entireDomain&quot;</span><span class="w"> </span><span class="na">physicalEntity=</span><span class="s">&quot;2&quot;</span><span class="nt">/&gt;</span>
-<span class="w">        </span><span class="nt">&lt;domain</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;rightChamber&quot;</span><span class="w"> </span><span class="na">state=</span><span class="s">&quot;rightChamber&quot;</span><span class="w"> </span><span class="na">type=</span><span class="s">&quot;entireDomain&quot;</span><span class="w"> </span><span class="na">physicalEntity=</span><span class="s">&quot;3&quot;</span><span class="nt">/&gt;</span>
+<span class="w">        </span><span class="nt">&lt;domain</span><span class="w"> </span><span class="na">name=</span><span class="s">"leftChamber"</span><span class="w"> </span><span class="na">state=</span><span class="s">"leftChamber"</span><span class="w"> </span><span class="na">type=</span><span class="s">"entireDomain"</span><span class="w"> </span><span class="na">physicalEntity=</span><span class="s">"2"</span><span class="nt">/&gt;</span>
+<span class="w">        </span><span class="nt">&lt;domain</span><span class="w"> </span><span class="na">name=</span><span class="s">"rightChamber"</span><span class="w"> </span><span class="na">state=</span><span class="s">"rightChamber"</span><span class="w"> </span><span class="na">type=</span><span class="s">"entireDomain"</span><span class="w"> </span><span class="na">physicalEntity=</span><span class="s">"3"</span><span class="nt">/&gt;</span>
 <span class="w">    </span><span class="nt">&lt;/physicalDomains&gt;</span>
 
 <span class="w">    </span><span class="cm">&lt;!-- LIST OF BOUNDARY CONDITIONS --&gt;</span>
 <span class="w">    </span><span class="nt">&lt;boundaryConditions&gt;</span>
-<span class="w">        </span><span class="nt">&lt;boundCond</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;walls&quot;</span><span class="w"> </span><span class="na">type=</span><span class="s">&quot;wall&quot;</span><span class="w"> </span><span class="na">number=</span><span class="s">&quot;1&quot;</span><span class="w"> </span><span class="nt">/&gt;</span>
+<span class="w">        </span><span class="nt">&lt;boundCond</span><span class="w"> </span><span class="na">name=</span><span class="s">"walls"</span><span class="w"> </span><span class="na">type=</span><span class="s">"wall"</span><span class="w"> </span><span class="na">number=</span><span class="s">"1"</span><span class="w"> </span><span class="nt">/&gt;</span>
 <span class="w">    </span><span class="nt">&lt;/boundaryConditions&gt;</span>
 
 <span class="w">    </span><span class="cm">&lt;!--  LIST OF STATES  --&gt;</span>
-<span class="w">    </span><span class="nt">&lt;state</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;leftChamber&quot;</span><span class="nt">&gt;</span>
-<span class="w">        </span><span class="nt">&lt;material</span><span class="w"> </span><span class="na">type=</span><span class="s">&quot;fluid&quot;</span><span class="w"> </span><span class="na">EOS=</span><span class="s">&quot;IG_air.xml&quot;</span><span class="nt">&gt;</span>
-<span class="w">            </span><span class="nt">&lt;dataFluid</span><span class="w"> </span><span class="na">density=</span><span class="s">&quot;1.225&quot;</span><span class="w"> </span><span class="na">pressure=</span><span class="s">&quot;5.e5&quot;</span><span class="nt">&gt;</span>
-<span class="w">                </span><span class="nt">&lt;velocity</span><span class="w"> </span><span class="na">x=</span><span class="s">&quot;0.&quot;</span><span class="w"> </span><span class="na">y=</span><span class="s">&quot;0.&quot;</span><span class="w"> </span><span class="na">z=</span><span class="s">&quot;0.&quot;</span><span class="nt">/&gt;</span>
+<span class="w">    </span><span class="nt">&lt;state</span><span class="w"> </span><span class="na">name=</span><span class="s">"leftChamber"</span><span class="nt">&gt;</span>
+<span class="w">        </span><span class="nt">&lt;material</span><span class="w"> </span><span class="na">type=</span><span class="s">"fluid"</span><span class="w"> </span><span class="na">EOS=</span><span class="s">"IG_air.xml"</span><span class="nt">&gt;</span>
+<span class="w">            </span><span class="nt">&lt;dataFluid</span><span class="w"> </span><span class="na">density=</span><span class="s">"1.225"</span><span class="w"> </span><span class="na">pressure=</span><span class="s">"5.e5"</span><span class="nt">&gt;</span>
+<span class="w">                </span><span class="nt">&lt;velocity</span><span class="w"> </span><span class="na">x=</span><span class="s">"0."</span><span class="w"> </span><span class="na">y=</span><span class="s">"0."</span><span class="w"> </span><span class="na">z=</span><span class="s">"0."</span><span class="nt">/&gt;</span>
 <span class="w">            </span><span class="nt">&lt;/dataFluid&gt;</span>
 <span class="w">        </span><span class="nt">&lt;/material&gt;</span>
 <span class="w">    </span><span class="nt">&lt;/state&gt;</span>
 
-<span class="w">    </span><span class="nt">&lt;state</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;rightChamber&quot;</span><span class="nt">&gt;</span>
-<span class="w">        </span><span class="nt">&lt;material</span><span class="w"> </span><span class="na">type=</span><span class="s">&quot;fluid&quot;</span><span class="w"> </span><span class="na">EOS=</span><span class="s">&quot;IG_air.xml&quot;</span><span class="nt">&gt;</span>
-<span class="w">            </span><span class="nt">&lt;dataFluid</span><span class="w"> </span><span class="na">density=</span><span class="s">&quot;1.225&quot;</span><span class="w"> </span><span class="na">pressure=</span><span class="s">&quot;1.e5&quot;</span><span class="nt">&gt;</span>
-<span class="w">                </span><span class="nt">&lt;velocity</span><span class="w"> </span><span class="na">x=</span><span class="s">&quot;0.&quot;</span><span class="w"> </span><span class="na">y=</span><span class="s">&quot;0.&quot;</span><span class="w"> </span><span class="na">z=</span><span class="s">&quot;0.&quot;</span><span class="nt">/&gt;</span>
+<span class="w">    </span><span class="nt">&lt;state</span><span class="w"> </span><span class="na">name=</span><span class="s">"rightChamber"</span><span class="nt">&gt;</span>
+<span class="w">        </span><span class="nt">&lt;material</span><span class="w"> </span><span class="na">type=</span><span class="s">"fluid"</span><span class="w"> </span><span class="na">EOS=</span><span class="s">"IG_air.xml"</span><span class="nt">&gt;</span>
+<span class="w">            </span><span class="nt">&lt;dataFluid</span><span class="w"> </span><span class="na">density=</span><span class="s">"1.225"</span><span class="w"> </span><span class="na">pressure=</span><span class="s">"1.e5"</span><span class="nt">&gt;</span>
+<span class="w">                </span><span class="nt">&lt;velocity</span><span class="w"> </span><span class="na">x=</span><span class="s">"0."</span><span class="w"> </span><span class="na">y=</span><span class="s">"0."</span><span class="w"> </span><span class="na">z=</span><span class="s">"0."</span><span class="nt">/&gt;</span>
 <span class="w">            </span><span class="nt">&lt;/dataFluid&gt;</span>
 <span class="w">        </span><span class="nt">&lt;/material&gt;</span>
 <span class="w">    </span><span class="nt">&lt;/state&gt;</span>
@@ -230,7 +231,7 @@ Physical Surface(rightChamber) = {11};
 </div>
 <div class="admonition important">
 <p class="admonition-title">Important</p>
-<p>Be aware to partition the mesh file with the corresponding number of cores used for the simulation if parallel computation is desired. Gmsh pre-treatment attribute <code class="code highlight xml docutils literal highlight-xml">GMSHPretraitement</code> of the <em>mesh.xml</em> file might be set to <em>true</em> in this case.</p>
+<p>Be aware to partition the mesh file with the corresponding number of cores used for the simulation and ghost partitions if parallel computation is desired. Gmsh pre-treatment attribute <code class="code highlight xml docutils literal highlight-xml">GMSHPretraitement</code> of the <em>mesh.xml</em> file might be set to <em>true</em> in this case.</p>
 </div>
 </section>
 <section id="results">
@@ -272,7 +273,7 @@ Physical Surface(rightChamber) = {11};
   <hr/>
 
   <div role="contentinfo">
-    <p>&#169; Copyright 2025, code-mphi.</p>
+    <p>&#169; Copyright 2026, code-mphi.</p>
   </div>
 
   Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a

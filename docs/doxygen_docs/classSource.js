@@ -6,7 +6,7 @@ var classSource =
     [ "getOmega", "classSource.html#a18c29fdcd8c17c49084f7868a64ccc52", null ],
     [ "getPhysicalEntity", "classSource.html#ab5b3e1bf3899e4020a1ab9a2e41fb6b4", null ],
     [ "getRiemannCoupling", "classSource.html#a3a36bebcbe0ca8bb4a7785abe48585a5", null ],
-    [ "integrateSourceTerms", "classSource.html#a4f9fc4f0ab281c724ddb4854dcdd4e31", null ],
+    [ "integrateSourceTerms", "classSource.html#afaa39f52355eaea19af5d8b9a29b3509", null ],
     [ "prepSourceTerms", "classSource.html#ae42987d909e61d8102a1e288ec4bbce9", null ],
     [ "sourceEvolution", "classSource.html#a8d00c14c441b5e05f4f76fa7d901642c", null ],
     [ "m_physicalEntity", "classSource.html#adbbc007aa2796dc370c7efd1a31912bd", null ]

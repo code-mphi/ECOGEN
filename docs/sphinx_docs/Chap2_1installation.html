@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Prerequisites &mdash; ECOGEN 5.0 documentation</title>
+  <title>Prerequisites &mdash; ECOGEN 6.0 documentation</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
       <link rel="stylesheet" type="text/css" href="_static/css/theme.css" />
 
@@ -38,7 +38,7 @@
             ECOGEN
           </a>
               <div class="version">
-                5.0
+                6.0
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
@@ -61,12 +61,26 @@
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#download">Download</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#compilation-execution-on-bash-using-the-provided-makefile">Compilation/Execution on bash using the provided Makefile</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#compilation-execution-on-bash-using-cmake-tool">Compilation/Execution on bash using CMake tool</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#prerequisite">Prerequisite</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#usage">Usage</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#compilation-on-bash-using-the-provided-makefile">Compilation on bash using the provided Makefile</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#compilation">Compilation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#predefined-compilation-modes">Predefined compilation modes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#adding-compilation-flags">Adding compilation flags</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#compiling-ecogen-library">Compiling ECOGEN library</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#clean-build-files">Clean build files</a></li>
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="#compilation-using-cmake-tool">Compilation using CMake tool</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#prerequisite">Prerequisite</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id1">Compilation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id2">Predefined compilation modes</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#enabling-hdf5-i-os">Enabling HDF5 I/Os</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id3">Prerequisite</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#cmake-configuration">CMake configuration</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#executing-ecogen">Executing ECOGEN</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#testing">Testing</a></li>
 </ul>
 </li>
@@ -74,7 +88,8 @@
 <li class="toctree-l1"><a class="reference internal" href="Chap4_tutorials_Chapter.html">Tutorials</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Chap5_testCases_Chapter.html">Test cases</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Chap6_developersGuide_Chapter.html">Developers</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Chap7_license.html">License</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Chap7_license.html">License and authors</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Chap8_citation.html">Citation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="zBibliography.html">Bibliography</a></li>
 </ul>
 
@@ -124,42 +139,16 @@
 </section>
 <section id="installing-openmpi">
 <h3>Installing openMPI<a class="headerlink" href="#installing-openmpi" title="Permalink to this heading"></a></h3>
-<p>Download the latest stable version of <a class="reference external" href="https://www.open-mpi.org/">openMPI</a> under compressed format. At the time this page was written, it corresponded to the compressed file: openmpi-4.0.1.tar.gz. Uncompresse and move it into the directory:</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">tar -xvf openmpi-4.0.1.tar.gz</span>
-<span class="go">cd openmpi-4.0.1/</span>
+<p>The simpliest way to install <a class="reference external" href="https://www.open-mpi.org/">openMPI</a> on Ubuntu is with the apt package manager:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">sudo apt-get install libopenmpi-dev</span>
 </pre></div>
 </div>
-<p>Prepare the environment to use your favorite compiler:</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">export CC=gcc</span>
-<span class="go">export CXX=g++</span>
-</pre></div>
-</div>
-<p>Configure and proceed to the installation (you can choose a different directory). The “make” step should take some time (coffee time?):</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">./configure --prefix=/opt/openmpi</span>
-<span class="go">make</span>
-<span class="go">sudo make install</span>
-</pre></div>
-</div>
-<p>Cleaning</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">cd ..</span>
-<span class="go">rm -rf openmpi-4.0.1/</span>
-</pre></div>
-</div>
-<p>Add openMPI library to the environment variable PATH (might be required to be root):</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">sudo echo &#39;export PATH=/opt/openmpi/bin:$PATH&#39; &gt;&gt; /etc/bash.bashrc</span>
-</pre></div>
-</div>
-<p>Then source the file to take into consideration the modifications:</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">source /etc/bash.bashrc</span>
-</pre></div>
-</div>
-<p>If the installation succeeds you should be able to use the “mpicxx” command in your terminal. Then proceed to the download step below.</p>
 </section>
 </section>
 </section>
 <section id="download">
 <h1>Download<a class="headerlink" href="#download" title="Permalink to this heading"></a></h1>
-<p>The last ECOGEN version 5.0 can be downloaded from GitHub. The source files are available at the following address: <a class="reference external" href="https://github.com/code-mphi/ECOGEN/releases">https://github.com/code-mphi/ECOGEN/releases</a>.</p>
+<p>The last ECOGEN version 6.0 can be downloaded from GitHub. The source files are available at the following address: <a class="reference external" href="https://github.com/code-mphi/ECOGEN/releases">https://github.com/code-mphi/ECOGEN/releases</a>.</p>
 <p>The package includes:</p>
 <ul>
 <li><p>ECOGEN/src/ folder including C++ source files.</p></li>
@@ -180,19 +169,56 @@
 <li><p><em>ECOGEN_V1.0_documentation.pdf</em>: The full documentation for ECOGEN.</p></li>
 </ul>
 </section>
-<section id="compilation-execution-on-bash-using-the-provided-makefile">
-<span id="sec-installation-compileandexecute"></span><h1>Compilation/Execution on bash using the provided Makefile<a class="headerlink" href="#compilation-execution-on-bash-using-the-provided-makefile" title="Permalink to this heading"></a></h1>
+<section id="compilation-on-bash-using-the-provided-makefile">
+<span id="sec-installation-compileandexecute"></span><h1>Compilation on bash using the provided Makefile<a class="headerlink" href="#compilation-on-bash-using-the-provided-makefile" title="Permalink to this heading"></a></h1>
+<section id="compilation">
+<h2>Compilation<a class="headerlink" href="#compilation" title="Permalink to this heading"></a></h2>
 <p>Use the Makefile (can be adapted if necessary) to compile ECOGEN sources directly on bash (XX is the number of cores required for compilation):</p>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">make -j XX</span>
 </pre></div>
 </div>
-<p>Executing ECOGEN is really easy on bash (XX is the number of cores required for execution):</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">mpirun -np XX ECOGEN</span>
+<p>It builds the ECOGEN application at root of the worktree. By default ECOGEN is built in <cite>release</cite> mode (<cite>-O3 -DNDEBUG</cite> compiler flags).</p>
+</section>
+<section id="predefined-compilation-modes">
+<h2>Predefined compilation modes<a class="headerlink" href="#predefined-compilation-modes" title="Permalink to this heading"></a></h2>
+<p>Other compilation modes are proposed in predefined Makefile targets:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p><cite>debug</cite> mode for <cite>-O0 -g</cite> flags,</p></li>
+<li><p><cite>coverage mode</cite> for <cite>-O3 –coverage</cite> flags,</p></li>
+<li><p><cite>profile mode</cite> for <cite>-O3 -pg</cite> flags.</p></li>
+</ul>
+</div></blockquote>
+<p>For example, to build ECOGEN with debug informations:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">make -j XX debug</span>
 </pre></div>
 </div>
 </section>
-<section id="compilation-execution-on-bash-using-cmake-tool">
-<h1>Compilation/Execution on bash using CMake tool<a class="headerlink" href="#compilation-execution-on-bash-using-cmake-tool" title="Permalink to this heading"></a></h1>
+<section id="adding-compilation-flags">
+<h2>Adding compilation flags<a class="headerlink" href="#adding-compilation-flags" title="Permalink to this heading"></a></h2>
+<p>If needed, compilation flags and linker flags can be overloaded using, respectively, <cite>CXXFLAGS</cite> and <cite>LDFLAGS</cite> variables. For example, to build ECOGEN with <cite>AddressSanitizer</cite> (a memory error detector):</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">CXXFLAGS=-fsanitize=address LDFLAGS=-fsanitize=address make -j XX</span>
+</pre></div>
+</div>
+</section>
+<section id="compiling-ecogen-library">
+<h2>Compiling ECOGEN library<a class="headerlink" href="#compiling-ecogen-library" title="Permalink to this heading"></a></h2>
+<p>If one needs to use ECOGEN as a library, the provided Makefile also defines the <cite>libECOGEN.so</cite> target that produces a shared library of ECOGEN. To build it:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">make -j XX libECOGEN.so</span>
+</pre></div>
+</div>
+<p>By default, the ECOGEN application built by calling <cite>make</cite> without providing an explicit target doesn’t use the ecogen library. The ECOGEN application that calls the <em>libECOGEN.so</em> library can be built by calling the <cite>exe_using_lib</cite> target:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">make -j XX exe_using_lib</span>
+</pre></div>
+</div>
+</section>
+<section id="clean-build-files">
+<h2>Clean build files<a class="headerlink" href="#clean-build-files" title="Permalink to this heading"></a></h2>
+<p>The <cite>clean</cite> target (<cite>make clean</cite> command) cleans temporary build files. The <cite>distclean</cite> target (<cite>make distclean</cite>) cleans all files created by the makefile (including <em>ECOGEN</em> and <em>libECOGEN.so</em> files).</p>
+</section>
+</section>
+<section id="compilation-using-cmake-tool">
+<h1>Compilation using CMake tool<a class="headerlink" href="#compilation-using-cmake-tool" title="Permalink to this heading"></a></h1>
 <p>Alternatively, more advanced users can choose to use <a class="reference external" href="https://cmake.org/">CMake</a> to build the project.</p>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
@@ -205,29 +231,84 @@
 </pre></div>
 </div>
 </section>
-<section id="usage">
-<h2>Usage<a class="headerlink" href="#usage" title="Permalink to this heading"></a></h2>
-<ol class="arabic simple">
-<li><p>Generate the build files in the <em>build_dir</em> directory:</p></li>
+<section id="id1">
+<h2>Compilation<a class="headerlink" href="#id1" title="Permalink to this heading"></a></h2>
+<ol class="arabic">
+<li><p>Configuration step</p>
+<p>Generate the build files in the <em>build_dir</em> directory:</p>
+</li>
 </ol>
 <blockquote>
 <div><div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">cmake -S . -B build_dir</span>
 </pre></div>
 </div>
 </div></blockquote>
-<ol class="arabic simple" start="2">
-<li><p>Build the project (XX is the number of cores required for compilation).</p></li>
+<ol class="arabic" start="2">
+<li><p id="cmake-compilation-step">Compilation step</p>
+<p>Build the project (XX is the number of cores required for compilation).</p>
+</li>
 </ol>
 <blockquote>
 <div><div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">cmake --build build_dir -j XX</span>
 </pre></div>
 </div>
 </div></blockquote>
-<p>ECOGEN executable is created inside the <em>build_dir</em> directory thus, to execute ECOGEN using XX cores:</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">mpirun -np XX ./build_dir/ECOGEN</span>
+<p>The ECOGEN shared library (<em>libECOGEN.so</em>) and the ECOGEN executable (<em>ECOGEN</em>) are created inside the <em>build_dir</em> directory.</p>
+<p>A static library can be built instead of the shared one by setting the <em>BUILD_SHARED_LIBS</em> CMake variable to <em>OFF</em> (<cite>cmake -DBUILD_SHARED_LIBS=OFF …</cite>).</p>
+<p>By default, the ECOGEN application doesn’t use the ecogen library. The <cite>ECOGEN_EXE_USE_LIB</cite> cmake variable can be set to ON to build an ECOGEN application that calls the ecogen library:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">cmake -S . -B build_dir -D ECOGEN_EXE_USE_LIB=ON</span>
+<span class="go">cmake --build build_dir -j XX</span>
 </pre></div>
 </div>
 </section>
+<section id="id2">
+<h2>Predefined compilation modes<a class="headerlink" href="#id2" title="Permalink to this heading"></a></h2>
+<p>CMake proposes predefined compilation modes through the setting of the <cite>CMAKE_BUILD_TYPE</cite> variable. Please refer to the <a class="reference external" href="https://cmake.org/cmake/help/latest/variable/CMAKE_BUILD_TYPE.html">official documentation</a> for more details. Typical values are <cite>Debug</cite> (<cite>-g</cite> compiler flag) at development step and <cite>Release</cite> (<cite>-O3 -DNDEBUG</cite> compiler flags) at production step:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">cmake -S . -B build_dir -D CMAKE_BUILD_TYPE=Release</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="enabling-hdf5-i-os">
+<span id="enabling-hdf5"></span><h1>Enabling HDF5 I/Os<a class="headerlink" href="#enabling-hdf5-i-os" title="Permalink to this heading"></a></h1>
+<p>If needed, user can configure and build ECOGEN with <a class="reference external" href="https://cmake.org/">HDF5 I/Os</a> capabilities using the CMake build mode previously described.</p>
+<section id="id3">
+<h2>Prerequisite<a class="headerlink" href="#id3" title="Permalink to this heading"></a></h2>
+<p>Install <strong>parallel HDF5</strong>, either from source (see <a class="reference external" href="https://support.hdfgroup.org/documentation/hdf5/latest/md_release__docs_2_r_e_a_d_m_e___h_p_c.html#autotoc_md274">HDF5 documentation</a>), or using a package manager.</p>
+<p>For example, to install parallel HDF5 on <em>Ubuntu</em> with <em>OpenMPI</em> MPI library:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">apt install -y libhdf5-openmpi-dev</span>
+</pre></div>
+</div>
+</section>
+<section id="cmake-configuration">
+<h2>CMake configuration<a class="headerlink" href="#cmake-configuration" title="Permalink to this heading"></a></h2>
+<p>If parallel HDF5 is installed on your system, CMake should detect it and enable HDF5 I/Os automatically at configuration step.
+You can force CMake trigger an error if HDF5 is missing by enabling explicitly HDF5 support:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">cmake -S . -B build_dir -DENABLE_HDF5=ON</span>
+</pre></div>
+</div>
+<p>You can then build your project as usually (see <a class="reference internal" href="#cmake-compilation-step"><span class="std std-ref">cmake compilation step</span></a>)</p>
+</section>
+</section>
+<section id="executing-ecogen">
+<h1>Executing ECOGEN<a class="headerlink" href="#executing-ecogen" title="Permalink to this heading"></a></h1>
+<p>Executing ECOGEN is really easy on bash (XX is the number of cores required for execution):</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">mpirun -np XX &lt;path-to-ecogen-binary&gt;/ECOGEN</span>
+</pre></div>
+</div>
+<p>So, if ECOGEN has been built using provided makefile:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">mpirun -np XX ./ECOGEN</span>
+</pre></div>
+</div>
+<p>If it has been built in <cite>build_dir</cite> directory using CMake:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">mpirun -np XX ./build_dir/ECOGEN</span>
+</pre></div>
+</div>
+<p>ECOGEN may used colorized outputs using ANSI color escape sequences. To avoid garbage outputs in terminals
+that doesn’t support ANSI colors, you can set the NO_COLOR environment variable to 1 to disable output colorization:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">NO_COLOR=1 mpirun -np XX &lt;path-to-ecogen-binary&gt;/ECOGEN</span>
+</pre></div>
+</div>
 </section>
 <section id="testing">
 <h1>Testing<a class="headerlink" href="#testing" title="Permalink to this heading"></a></h1>
@@ -235,13 +316,13 @@
 <ul>
 <li><p>if you built the project using the provided Makefile:</p>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">./ECOGEN</span>
-<span class="go">    mpirun -np 2 ECOGEN</span>
+<span class="go">mpirun -np 2 ECOGEN</span>
 </pre></div>
 </div>
 </li>
 <li><p>if you built it using CMake:</p>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">./build_dir/ECOGEN</span>
-<span class="go">    mpirun -np 2 ./build_dir/ECOGEN</span>
+<span class="go">mpirun -np 2 ./build_dir/ECOGEN</span>
 </pre></div>
 </div>
 </li>
@@ -266,7 +347,7 @@
   <hr/>
 
   <div role="contentinfo">
-    <p>&#169; Copyright 2025, code-mphi.</p>
+    <p>&#169; Copyright 2026, code-mphi.</p>
   </div>
 
   Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a

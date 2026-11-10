@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Gmsh example and extraction of mass-flow rate &mdash; ECOGEN 5.0 documentation</title>
+  <title>Gmsh example and extraction of mass-flow rate &mdash; ECOGEN 6.0 documentation</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
       <link rel="stylesheet" type="text/css" href="_static/css/theme.css" />
 
@@ -39,7 +39,7 @@
             ECOGEN
           </a>
               <div class="version">
-                5.0
+                6.0
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
@@ -74,7 +74,8 @@
 </li>
 <li class="toctree-l1"><a class="reference internal" href="Chap5_testCases_Chapter.html">Test cases</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Chap6_developersGuide_Chapter.html">Developers</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Chap7_license.html">License</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Chap7_license.html">License and authors</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Chap8_citation.html">Citation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="zBibliography.html">Bibliography</a></li>
 </ul>
 
@@ -273,14 +274,14 @@ However, in ECOGEN the output data is generated as a multi-block dataset: a bloc
 <ul class="simple">
 <li><p>To make sure these values are correct, we can compare them with other ones. In <em>main.xml</em>, one can record the mass flow at both boundaries with the lines:</p></li>
 </ul>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">  &lt;recordBoundaryFlux name=&quot;outflow&quot;&gt;</span>
-<span class="go">&lt;boundary number=&quot;3&quot; flux=&quot;massflow&quot;/&gt;</span>
-<span class="go">&lt;timeControl acqFreq=&quot;0.5&quot;/&gt;</span>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">  &lt;recordBoundaryFlux name="outflow"&gt;</span>
+<span class="go">&lt;boundary number="3" flux="massflow"/&gt;</span>
+<span class="go">&lt;timeControl acqFreq="0.5"/&gt;</span>
 <span class="go">  &lt;/recordBoundaryFlux&gt;</span>
 
-<span class="go">  &lt;recordBoundaryFlux name=&quot;inflow&quot;&gt;</span>
-<span class="go">&lt;boundary number=&quot;2&quot; flux=&quot;massflow&quot;/&gt;</span>
-<span class="go">&lt;timeControl acqFreq=&quot;0.5&quot;/&gt;</span>
+<span class="go">  &lt;recordBoundaryFlux name="inflow"&gt;</span>
+<span class="go">&lt;boundary number="2" flux="massflow"/&gt;</span>
+<span class="go">&lt;timeControl acqFreq="0.5"/&gt;</span>
 <span class="go">  &lt;/recordBoundaryFlux&gt;</span>
 </pre></div>
 </div>
@@ -315,7 +316,7 @@ However, in ECOGEN the output data is generated as a multi-block dataset: a bloc
   <hr/>
 
   <div role="contentinfo">
-    <p>&#169; Copyright 2025, code-mphi.</p>
+    <p>&#169; Copyright 2026, code-mphi.</p>
   </div>
 
   Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a

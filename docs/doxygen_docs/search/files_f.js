@@ -1,19 +1,13 @@
 var searchData=
 [
-  ['relaxation_2ecpp_0',['Relaxation.cpp',['../Relaxation_8cpp.html',1,'']]],
-  ['relaxation_2eh_1',['Relaxation.h',['../Relaxation_8h.html',1,'']]],
-  ['relaxationp_2ecpp_2',['RelaxationP.cpp',['../RelaxationP_8cpp.html',1,'']]],
-  ['relaxationp_2eh_3',['RelaxationP.h',['../RelaxationP_8h.html',1,'']]],
-  ['relaxationpfinite_2ecpp_4',['RelaxationPFinite.cpp',['../RelaxationPFinite_8cpp.html',1,'']]],
-  ['relaxationpfinite_2eh_5',['RelaxationPFinite.h',['../RelaxationPFinite_8h.html',1,'']]],
-  ['relaxationpinfinite_2ecpp_6',['RelaxationPInfinite.cpp',['../RelaxationPInfinite_8cpp.html',1,'']]],
-  ['relaxationpinfinite_2eh_7',['RelaxationPInfinite.h',['../RelaxationPInfinite_8h.html',1,'']]],
-  ['relaxationpt_2ecpp_8',['RelaxationPT.cpp',['../RelaxationPT_8cpp.html',1,'']]],
-  ['relaxationpt_2eh_9',['RelaxationPT.h',['../RelaxationPT_8h.html',1,'']]],
-  ['relaxationptmu_2ecpp_10',['RelaxationPTMu.cpp',['../RelaxationPTMu_8cpp.html',1,'']]],
-  ['relaxationptmu_2eh_11',['RelaxationPTMu.h',['../RelaxationPTMu_8h.html',1,'']]],
-  ['relaxationu_2ecpp_12',['RelaxationU.cpp',['../RelaxationU_8cpp.html',1,'']]],
-  ['relaxationu_2eh_13',['RelaxationU.h',['../RelaxationU_8h.html',1,'']]],
-  ['run_2ecpp_14',['Run.cpp',['../Run_8cpp.html',1,'']]],
-  ['run_2eh_15',['Run.h',['../Run_8h.html',1,'']]]
+  ['qapconductivity_2ecpp_0',['QAPConductivity.cpp',['../QAPConductivity_8cpp.html',1,'']]],
+  ['qapconductivity_2eh_1',['QAPConductivity.h',['../QAPConductivity_8h.html',1,'']]],
+  ['qapsurfacetension_2ecpp_2',['QAPSurfaceTension.cpp',['../QAPSurfaceTension_8cpp.html',1,'']]],
+  ['qapsurfacetension_2eh_3',['QAPSurfaceTension.h',['../QAPSurfaceTension_8h.html',1,'']]],
+  ['qapturbulence_2ecpp_4',['QAPTurbulence.cpp',['../QAPTurbulence_8cpp.html',1,'']]],
+  ['qapturbulence_2eh_5',['QAPTurbulence.h',['../QAPTurbulence_8h.html',1,'']]],
+  ['qapviscosity_2ecpp_6',['QAPViscosity.cpp',['../QAPViscosity_8cpp.html',1,'']]],
+  ['qapviscosity_2eh_7',['QAPViscosity.h',['../QAPViscosity_8h.html',1,'']]],
+  ['quantitiesaddphys_2ecpp_8',['QuantitiesAddPhys.cpp',['../QuantitiesAddPhys_8cpp.html',1,'']]],
+  ['quantitiesaddphys_2eh_9',['QuantitiesAddPhys.h',['../QuantitiesAddPhys_8h.html',1,'']]]
 ];

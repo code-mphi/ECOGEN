@@ -1,6 +1,6 @@
 var classErrorECOGEN =
 [
-    [ "ErrorECOGEN", "classErrorECOGEN.html#a8cdd1878ab6803882fc324c6508c2e35", null ],
+    [ "ErrorECOGEN", "classErrorECOGEN.html#ac8b7cece14e45a13302b3dd97e77e140", null ],
     [ "~ErrorECOGEN", "classErrorECOGEN.html#ad3c59c1034d45139c9f05be6b26132d8", null ],
     [ "additionalInfo", "classErrorECOGEN.html#a3743b6230ab0b3cac2b0c01e379a2ec3", null ],
     [ "getErrorCode", "classErrorECOGEN.html#a5dbb6dad349705a2f4f157288ce217d6", null ],

@@ -27,60 +27,13 @@ More information on the Ubuntu doc page https://doc.ubuntu-fr.org/gcc.
 Installing openMPI
 ~~~~~~~~~~~~~~~~~~
 
-Download the latest stable version of openMPI_ under compressed format. At the time this page was written, it corresponded to the compressed file: openmpi-4.0.1.tar.gz. Uncompresse and move it into the directory:
+The simpliest way to install openMPI_ on Ubuntu is with the apt package manager:
 
 .. highlight:: console
 
 ::
 
-	tar -xvf openmpi-4.0.1.tar.gz
-	cd openmpi-4.0.1/
-
-Prepare the environment to use your favorite compiler:
-
-.. highlight:: console
-
-::
-
-	export CC=gcc
-	export CXX=g++
-
-Configure and proceed to the installation (you can choose a different directory). The "make" step should take some time (coffee time?):
-
-.. highlight:: console
-
-::
-
-	./configure --prefix=/opt/openmpi
-	make
-	sudo make install
-
-Cleaning
-
-.. highlight:: console
-
-::
-
-	cd ..
-	rm -rf openmpi-4.0.1/
-
-Add openMPI library to the environment variable PATH (might be required to be root):
-
-.. highlight:: console
-
-::
-
-	sudo echo 'export PATH=/opt/openmpi/bin:$PATH' >> /etc/bash.bashrc
-
-Then source the file to take into consideration the modifications:
-
-.. highlight:: console
-
-::
-
-	source /etc/bash.bashrc
-
-If the installation succeeds you should be able to use the "mpicxx" command in your terminal. Then proceed to the download step below.
+  sudo apt-get install libopenmpi-dev
 
 Download
 ========
@@ -104,8 +57,11 @@ The package includes:
 
 .. _Sec:installation:compileAndExecute:
 
-Compilation/Execution on bash using the provided Makefile
-=========================================================
+Compilation on bash using the provided Makefile
+===============================================
+
+Compilation
+-----------
 
 Use the Makefile (can be adapted if necessary) to compile ECOGEN sources directly on bash (XX is the number of cores required for compilation):
 
@@ -115,16 +71,66 @@ Use the Makefile (can be adapted if necessary) to compile ECOGEN sources directl
 
 	make -j XX
 
-Executing ECOGEN is really easy on bash (XX is the number of cores required for execution):
+It builds the ECOGEN application at root of the worktree. By default ECOGEN is built in `release` mode (`-O3 -DNDEBUG` compiler flags).
+
+Predefined compilation modes
+----------------------------
+
+Other compilation modes are proposed in predefined Makefile targets:
+
+   - `debug` mode for `-O0 -g` flags,
+   - `coverage mode` for `-O3 --coverage` flags,
+   - `profile mode` for `-O3 -pg` flags.
+
+For example, to build ECOGEN with debug informations:
 
 .. highlight:: console
 
 ::
 
-	mpirun -np XX ECOGEN
+   make -j XX debug
 
-Compilation/Execution on bash using CMake tool
-==============================================
+
+Adding compilation flags
+------------------------
+
+If needed, compilation flags and linker flags can be overloaded using, respectively, `CXXFLAGS` and `LDFLAGS` variables. For example, to build ECOGEN with `AddressSanitizer` (a memory error detector):
+
+.. highlight:: console
+
+::
+
+    CXXFLAGS=-fsanitize=address LDFLAGS=-fsanitize=address make -j XX
+
+Compiling ECOGEN library
+------------------------
+
+If one needs to use ECOGEN as a library, the provided Makefile also defines the `libECOGEN.so` target that produces a shared library of ECOGEN. To build it:
+
+.. highlight:: console
+
+::
+
+    make -j XX libECOGEN.so
+
+By default, the ECOGEN application built by calling `make` without providing an explicit target doesn't use the ecogen library. The ECOGEN application that calls the *libECOGEN.so* library can be built by calling the `exe_using_lib` target:
+
+.. highlight:: console
+
+::
+
+    make -j XX exe_using_lib
+
+
+Clean build files
+-----------------
+
+The `clean` target (`make clean` command) cleans temporary build files. The `distclean` target (`make distclean`) cleans all files created by the makefile (including *ECOGEN* and *libECOGEN.so* files).
+
+
+
+Compilation using CMake tool
+============================
 
 Alternatively, more advanced users can choose to use `CMake <https://cmake.org/>`_ to build the project.
 
@@ -143,10 +149,12 @@ Install CMake using your usual package manager. For example on Ubuntu:
 
    apt install -y cmake
 
-Usage
------
+Compilation
+-----------
 
-1. Generate the build files in the *build_dir* directory:
+1. Configuration step
+
+   Generate the build files in the *build_dir* directory:
 
   .. highlight:: console
 
@@ -154,7 +162,12 @@ Usage
 
      cmake -S . -B build_dir
 
-2. Build the project (XX is the number of cores required for compilation).
+2. .. _cmake-compilation-step:
+
+   Compilation step
+
+
+   Build the project (XX is the number of cores required for compilation).
 
   .. highlight:: console
 
@@ -162,13 +175,100 @@ Usage
 
      cmake --build build_dir -j XX
 
-ECOGEN executable is created inside the *build_dir* directory thus, to execute ECOGEN using XX cores:
+The ECOGEN shared library (*libECOGEN.so*) and the ECOGEN executable (*ECOGEN*) are created inside the *build_dir* directory.
+
+A static library can be built instead of the shared one by setting the *BUILD_SHARED_LIBS* CMake variable to *OFF* (`cmake -DBUILD_SHARED_LIBS=OFF ...`).
+
+By default, the ECOGEN application doesn't use the ecogen library. The `ECOGEN_EXE_USE_LIB` cmake variable can be set to ON to build an ECOGEN application that calls the ecogen library:
+
+.. highlight:: console
+
+::
+
+  cmake -S . -B build_dir -D ECOGEN_EXE_USE_LIB=ON
+  cmake --build build_dir -j XX
+
+Predefined compilation modes
+----------------------------
+
+CMake proposes predefined compilation modes through the setting of the `CMAKE_BUILD_TYPE` variable. Please refer to the `official documentation <https://cmake.org/cmake/help/latest/variable/CMAKE_BUILD_TYPE.html>`_ for more details. Typical values are `Debug` (`-g` compiler flag) at development step and `Release` (`-O3 -DNDEBUG` compiler flags) at production step:
+
+.. highlight:: console
+
+::
+
+  cmake -S . -B build_dir -D CMAKE_BUILD_TYPE=Release
+
+.. _enabling-hdf5:
+
+Enabling HDF5 I/Os
+==================
+
+If needed, user can configure and build ECOGEN with `HDF5 I/Os <https://cmake.org/>`_ capabilities using the CMake build mode previously described.
+
+Prerequisite
+------------
+
+Install **parallel HDF5**, either from source (see `HDF5 documentation <https://support.hdfgroup.org/documentation/hdf5/latest/md_release__docs_2_r_e_a_d_m_e___h_p_c.html#autotoc_md274>`_), or using a package manager.
+
+For example, to install parallel HDF5 on *Ubuntu* with *OpenMPI* MPI library:
+
+.. highlight:: console
+
+::
+
+  apt install -y libhdf5-openmpi-dev
+
+CMake configuration
+-------------------
+
+If parallel HDF5 is installed on your system, CMake should detect it and enable HDF5 I/Os automatically at configuration step.
+You can force CMake trigger an error if HDF5 is missing by enabling explicitly HDF5 support:
+
+.. highlight:: console
+
+::
+
+  cmake -S . -B build_dir -DENABLE_HDF5=ON
+
+You can then build your project as usually (see :ref:`cmake compilation step<cmake-compilation-step>`)
+
+Executing ECOGEN
+================
+
+Executing ECOGEN is really easy on bash (XX is the number of cores required for execution):
+
+.. highlight:: console
+
+::
+
+    mpirun -np XX <path-to-ecogen-binary>/ECOGEN
+
+So, if ECOGEN has been built using provided makefile:
+
+.. highlight:: console
+
+::
+
+    mpirun -np XX ./ECOGEN
+
+If it has been built in `build_dir` directory using CMake:
 
 .. highlight:: console
 
 ::
 
   mpirun -np XX ./build_dir/ECOGEN
+
+
+ECOGEN may used colorized outputs using ANSI color escape sequences. To avoid garbage outputs in terminals
+that doesn't support ANSI colors, you can set the NO_COLOR environment variable to 1 to disable output colorization:
+
+.. highlight:: console
+
+::
+
+    NO_COLOR=1 mpirun -np XX <path-to-ecogen-binary>/ECOGEN
 
 Testing
 =======
@@ -182,7 +282,7 @@ Once ECOGEN has been successfully compiled, the best way to test ECOGEN's instal
   ::
 
     ./ECOGEN
-	mpirun -np 2 ECOGEN
+    mpirun -np 2 ECOGEN
 
 * if you built it using CMake:
 
@@ -191,7 +291,7 @@ Once ECOGEN has been successfully compiled, the best way to test ECOGEN's instal
   ::
 
     ./build_dir/ECOGEN
-	mpirun -np 2 ./build_dir/ECOGEN
+    mpirun -np 2 ./build_dir/ECOGEN
 
 These will run the default test case included in the package two times:
 

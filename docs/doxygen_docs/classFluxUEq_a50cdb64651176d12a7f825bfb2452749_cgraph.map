@@ -1,20 +1,22 @@
 <map id="FluxUEq::schemeCorrection" name="FluxUEq::schemeCorrection">
-<area shape="rect" id="Node000001" title=" " alt="" coords="5,153,208,179"/>
-<area shape="rect" id="Node000002" href="$classPhase.html#a4e4cd8c6afd1e1a8f7304ad7d7c3ee2f" title=" " alt="" coords="283,5,409,31"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="118,151,173,97,212,66,255,40,270,33,272,38,257,44,215,71,177,101,122,155"/>
-<area shape="rect" id="Node000004" href="$classMixture.html#a0c35edf137efba38c10009d0049aa887" title=" " alt="" coords="271,55,421,80"/>
-<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="129,151,185,120,255,89,277,81,278,86,257,94,187,125,131,156"/>
-<area shape="rect" id="Node000005" href="$classFluxUEq.html#a47fb1c558b6a131e5da4cf6189777e04" title=" " alt="" coords="277,104,415,129"/>
-<area shape="poly" id="edge5_Node000001_Node000005" title=" " alt="" coords="168,151,270,130,271,135,169,156"/>
-<area shape="rect" id="Node000006" href="$classCell.html#a48e263f3b639cb569cfb67d4d318e196" title=" " alt="" coords="283,153,409,179"/>
-<area shape="poly" id="edge6_Node000001_Node000006" title=" " alt="" coords="208,163,269,163,269,169,208,169"/>
-<area shape="rect" id="Node000007" href="$classFluxUEq.html#affe382debde01ce425e9e1059e276833" title=" " alt="" coords="256,203,436,228"/>
-<area shape="poly" id="edge7_Node000001_Node000007" title=" " alt="" coords="169,176,271,197,270,202,168,181"/>
-<area shape="rect" id="Node000008" href="$classCell.html#af2d48073a332d621b69fb257eeb6de6c" title=" " alt="" coords="289,252,403,277"/>
-<area shape="poly" id="edge8_Node000001_Node000008" title=" " alt="" coords="132,176,188,206,257,237,282,245,280,250,255,242,186,211,129,181"/>
-<area shape="rect" id="Node000009" href="$classCoord.html#af9f910f00517892c7741a9a92d27f4c1" title="Return the value of the squared norm of the Coord object." alt="" coords="268,301,424,327"/>
-<area shape="poly" id="edge9_Node000001_Node000009" title=" " alt="" coords="122,177,177,230,215,260,257,286,275,294,273,299,255,291,212,264,173,234,118,181"/>
-<area shape="rect" id="Node000003" href="$classErrors.html#a78eeb532e12787fee07b78aa5ef6a0c6" title=" " alt="" coords="484,31,641,56"/>
-<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="410,23,471,30,470,35,409,28"/>
-<area shape="poly" id="edge4_Node000004_Node000003" title=" " alt="" coords="421,56,470,51,471,56,422,62"/>
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,188,207,216"/>
+<area shape="rect" id="Node000002" href="$classFluxUEq.html#ae2720ee77e46d1155a0f755cc4dbe11f" title=" " alt="" coords="276,5,413,33"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="115,186,168,118,208,78,253,44,268,38,264,41,256,48,211,82,172,121,119,189"/>
+<area shape="rect" id="Node000003" href="$classPhase.html#a4e4cd8c6afd1e1a8f7304ad7d7c3ee2f" title=" " alt="" coords="281,57,408,85"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="122,186,178,142,215,117,253,95,273,89,269,92,256,100,218,122,181,146,126,189"/>
+<area shape="rect" id="Node000005" href="$classMixture.html#a0c35edf137efba38c10009d0049aa887" title=" " alt="" coords="269,109,420,137"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="145,185,254,147,281,141,277,143,256,152,148,190"/>
+<area shape="rect" id="Node000006" href="$classFluxUEq.html#a47fb1c558b6a131e5da4cf6189777e04" title=" " alt="" coords="275,161,414,189"/>
+<area shape="poly" id="edge6_Node000001_Node000006" title=" " alt="" coords="206,188,262,183,257,186,208,193"/>
+<area shape="rect" id="Node000007" href="$classCell.html#a48e263f3b639cb569cfb67d4d318e196" title=" " alt="" coords="282,213,407,241"/>
+<area shape="poly" id="edge7_Node000001_Node000007" title=" " alt="" coords="207,210,269,218,264,220,208,215"/>
+<area shape="rect" id="Node000008" href="$classFluxUEq.html#affe382debde01ce425e9e1059e276833" title=" " alt="" coords="255,265,434,293"/>
+<area shape="poly" id="edge8_Node000001_Node000008" title=" " alt="" coords="148,214,255,250,282,260,277,261,254,255,148,219"/>
+<area shape="rect" id="Node000009" href="$classCell.html#af2d48073a332d621b69fb257eeb6de6c" title=" " alt="" coords="287,317,402,345"/>
+<area shape="poly" id="edge9_Node000001_Node000009" title=" " alt="" coords="124,213,181,257,218,281,256,302,275,312,270,312,253,307,215,286,178,261,124,219"/>
+<area shape="rect" id="Node000010" href="$classCoord.html#af9f910f00517892c7741a9a92d27f4c1" title="Return the value of the squared norm of the Coord object." alt="" coords="267,369,422,397"/>
+<area shape="poly" id="edge10_Node000001_Node000010" title=" " alt="" coords="118,214,172,282,211,321,256,354,269,363,264,362,253,359,208,325,168,285,116,219"/>
+<area shape="rect" id="Node000004" href="$classErrors.html#a5fcdb1d77f9c74188b44ac7d0d05a453" title=" " alt="" coords="482,84,638,112"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="407,76,469,85,464,87,408,82"/>
+<area shape="poly" id="edge5_Node000005_Node000004" title=" " alt="" coords="419,112,469,108,464,110,420,117"/>
 </map>

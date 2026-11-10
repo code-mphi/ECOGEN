@@ -1,19 +1,27 @@
 <map id="Phase::getVectorP" name="Phase::getVectorP">
-<area shape="rect" id="Node000001" title=" " alt="" coords="499,205,637,230"/>
-<area shape="rect" id="Node000002" href="$classFluxEulerKorteweg.html#a2477156af08061656c5145b1e1f29155" title="Build the conservative variables for a given cell from primitive one." alt="" coords="252,5,404,45"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="553,194,513,126,484,90,449,60,427,48,403,39,405,34,429,43,452,55,488,86,518,123,558,191"/>
-<area shape="rect" id="Node000004" href="$classPhaseEulerKorteweg.html#a5bbffbaf94193116c7124db6c7d1b1e8" title=" " alt="" coords="243,69,413,109"/>
-<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="543,196,502,159,449,124,412,109,414,104,452,119,505,155,547,192"/>
-<area shape="rect" id="Node000005" href="$classPhaseEulerKorteweg.html#aca6702a223817c0cd6677c40ac34ec36" title="Copy phase in phase attributes." alt="" coords="251,133,405,173"/>
-<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="507,204,450,188,405,176,406,171,451,183,509,198"/>
-<area shape="rect" id="Node000006" href="$classPhaseEulerKorteweg.html#a38388a5e94d925d8189446cf8c9c5d93" title=" " alt="" coords="251,197,405,237"/>
-<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="485,220,406,220,406,215,485,215"/>
-<area shape="rect" id="Node000007" href="$classPhaseEulerKorteweg.html#a56fe5bb8a2d67948e502cffbd6e6dc16" title=" " alt="" coords="251,261,405,301"/>
-<area shape="poly" id="edge6_Node000001_Node000007" title=" " alt="" coords="509,236,451,252,406,264,405,259,450,247,507,231"/>
-<area shape="rect" id="Node000008" href="$classPhaseEulerKorteweg.html#a1b83e024a42515d50fd0f66cd675bd83" title=" " alt="" coords="251,325,405,365"/>
-<area shape="poly" id="edge7_Node000001_Node000008" title=" " alt="" coords="547,242,505,280,452,316,407,333,405,328,449,311,502,276,543,238"/>
-<area shape="rect" id="Node000009" href="$classModEulerKorteweg.html#a9cd41d317942d2d424a1935e8b8573ee" title="Cell to cell Riemann solver." alt="" coords="205,389,451,429"/>
-<area shape="poly" id="edge8_Node000001_Node000009" title=" " alt="" coords="558,244,518,312,488,348,452,380,430,391,428,387,449,375,484,345,513,309,553,241"/>
-<area shape="rect" id="Node000003" href="$classFluxEulerKorteweg.html#a74ad77e4ade5b27672a49e753e4f2a82" title="Temporary store the conservative variables of a given cell." alt="" coords="5,5,157,45"/>
-<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="238,28,158,28,158,23,238,23"/>
+<area shape="rect" id="Node000001" title=" " alt="" coords="563,360,701,388"/>
+<area shape="rect" id="Node000002" href="$classFluxExtendedNavierStokesKorteweg1D.html#ab17b61f215c02adf72712773016aa558" title="Build the conservative variables for a given cell from primitive one." alt="" coords="284,5,480,50"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="626,344,618,286,599,210,584,170,565,131,542,96,513,64,481,44,481,39,517,60,546,92,570,129,589,168,604,208,623,285,631,346"/>
+<area shape="rect" id="Node000004" href="$classFluxExtendedNavierStokesKorteweg1D.html#a8a48bfe6716413ef97a6307bc29ee02a" title="Build the primitive variables for a given cell from conservative one." alt="" coords="284,75,480,119"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="623,345,610,300,589,242,557,183,537,157,513,134,481,115,481,110,517,130,541,153,562,180,594,240,616,298,628,347"/>
+<area shape="rect" id="Node000005" href="$classPhaseExtendedNavierStokesKorteweg1D.html#afa0d97c17e92817fa9c4cc0942f89f30" title=" " alt="" coords="259,144,506,189"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="617,345,601,313,578,274,549,236,513,203,495,192,494,186,517,199,553,232,583,271,606,311,622,347"/>
+<area shape="rect" id="Node000006" href="$classPhaseExtendedNavierStokesKorteweg1D.html#ab8b6c3e4622071916509f12fb1a7c448" title="Copy phase in phase attributes." alt="" coords="279,213,486,258"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="606,349,566,310,514,273,487,260,486,255,516,268,570,306,612,349"/>
+<area shape="rect" id="Node000007" href="$classPhaseExtendedNavierStokesKorteweg1D.html#a6ff8a0f646993517ca84ee584d9cac0c" title=" " alt="" coords="279,283,486,327"/>
+<area shape="poly" id="edge6_Node000001_Node000007" title=" " alt="" coords="567,356,514,342,473,331,472,325,516,337,572,355"/>
+<area shape="rect" id="Node000008" href="$classModExtendedNavierStokesKorteweg1D.html#a0a653ccbd31925881020b57fff59701a" title="Complete the augmented variables (such as the ones of Navier&#45;Stokes&#45;Korteweg model)." alt="" coords="250,352,515,397"/>
+<area shape="poly" id="edge7_Node000001_Node000008" title=" " alt="" coords="545,375,516,377,515,372,550,373"/>
+<area shape="rect" id="Node000009" href="$classSourceExactExtendedNavierStokesKorteweg1D.html#a55f1a24559abaf373c0dd51c7f6e6a3d" title="Integration via an exact solution." alt="" coords="253,421,512,482"/>
+<area shape="poly" id="edge8_Node000001_Node000009" title=" " alt="" coords="568,395,485,423,483,418,573,392"/>
+<area shape="rect" id="Node000010" href="$classPhaseExtendedNavierStokesKorteweg1D.html#a4231f3a5feffe27b7bd3f21c9eeb5046" title=" " alt="" coords="279,507,486,551"/>
+<area shape="poly" id="edge9_Node000001_Node000010" title=" " alt="" coords="614,399,573,451,546,476,516,497,488,510,485,505,514,492,543,471,569,447,610,402"/>
+<area shape="rect" id="Node000011" href="$classPhaseExtendedNavierStokesKorteweg1D.html#ae94b0dc07dc4bef37a41db021b1166a3" title=" " alt="" coords="276,576,488,621"/>
+<area shape="poly" id="edge10_Node000001_Node000011" title=" " alt="" coords="623,401,608,441,586,485,555,529,517,566,490,581,488,576,513,562,551,525,581,482,603,439,619,405"/>
+<area shape="rect" id="Node000012" href="$classModExtendedNavierStokesKorteweg1D.html#af057da5455890a76b9ba89be479e9e96" title="Cell to cell Riemann solver." alt="" coords="250,645,515,690"/>
+<area shape="poly" id="edge11_Node000001_Node000012" title=" " alt="" coords="628,401,617,454,596,517,564,580,542,610,517,635,499,647,497,642,513,631,538,606,559,578,591,514,612,453,624,406"/>
+<area shape="rect" id="Node000013" href="$classModExtendedNavierStokesKorteweg1D.html#a01ae0d5dea63aef3e8f8086ef69bc22d" title="Wall half Riemann solver." alt="" coords="250,715,515,759"/>
+<area shape="poly" id="edge12_Node000001_Node000013" title=" " alt="" coords="631,402,624,467,606,547,591,590,572,632,547,670,517,704,500,717,498,712,513,700,543,667,567,629,586,588,601,546,619,466,628,406"/>
+<area shape="rect" id="Node000003" href="$classFluxExtendedNavierStokesKorteweg1D.html#a89abc39f0f77101796036db1b5f8d1fd" title="Temporary store the conservative variables of a given cell." alt="" coords="5,5,202,50"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="267,29,204,30,201,25,271,26"/>
 </map>

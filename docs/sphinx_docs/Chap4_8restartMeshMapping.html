@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Restart a simulation with mesh mapping &mdash; ECOGEN 5.0 documentation</title>
+  <title>Restart a simulation with mesh mapping &mdash; ECOGEN 6.0 documentation</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
       <link rel="stylesheet" type="text/css" href="_static/css/theme.css" />
 
@@ -38,7 +38,7 @@
             ECOGEN
           </a>
               <div class="version">
-                5.0
+                6.0
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
@@ -73,7 +73,8 @@
 </li>
 <li class="toctree-l1"><a class="reference internal" href="Chap5_testCases_Chapter.html">Test cases</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Chap6_developersGuide_Chapter.html">Developers</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Chap7_license.html">License</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Chap7_license.html">License and authors</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Chap8_citation.html">Citation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="zBibliography.html">Bibliography</a></li>
 </ul>
 
@@ -113,7 +114,7 @@ To build our test case, we consider the following reference test case in the <em
 <div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;testCase&gt;</span>libTests/referenceTestCases/euler/2D/nozzles/lowMachSmoothCrossSection/<span class="nt">&lt;/testCase&gt;</span>
 </pre></div>
 </div>
-<p>In this test case, originally from <span id="id1">[<a class="reference internal" href="zBibliography.html#id215" title="S. Le Martelot, B. Nkonga, and R. Saurel. Liquid and liquid–gas flows at all speeds. Journal of Computational Physics, 255:53–82, 2013.">LMNS13</a>]</span>, a subsonic flow of liquid water is injected into the nozzle as shown in <a class="reference internal" href="#fig-tutos-restartmeshmapping-nozzle"><span class="std std-numref">Fig. 35</span></a>.
+<p>In this test case, originally from <span id="id1">[<a class="reference internal" href="zBibliography.html#id227" title="S. Le Martelot, B. Nkonga, and R. Saurel. Liquid and liquid–gas flows at all speeds. Journal of Computational Physics, 255:53–82, 2013.">LMNS13</a>]</span>, a subsonic flow of liquid water is injected into the nozzle as shown in <a class="reference internal" href="#fig-tutos-restartmeshmapping-nozzle"><span class="std std-numref">Fig. 35</span></a>.
 At the inlet, the mass flow rate is imposed as well as the total stagnation enthalpy using the pressure and density.
 At the outlet, the pressure is fixed. These boundary conditions lead to a subsonic flow in the whole nozzle.</p>
 <figure class="align-center" id="id4">
@@ -122,14 +123,14 @@ At the outlet, the pressure is fixed. These boundary conditions lead to a subson
 <p><span class="caption-number">Fig. 35 </span><span class="caption-text">Setup for the subsonic flow within the convergent-divergent nozzle.</span><a class="headerlink" href="#id4" title="Permalink to this image"></a></p>
 </figcaption>
 </figure>
-<p>Since the cross-section variation along the nozzle is smooth, a 1D mesh is considered and the numerical scheme is adapted to include the impact on the flow of the upper and lower walls of the nozzle using the method described in <span id="id2">[<a class="reference internal" href="zBibliography.html#id215" title="S. Le Martelot, B. Nkonga, and R. Saurel. Liquid and liquid–gas flows at all speeds. Journal of Computational Physics, 255:53–82, 2013.">LMNS13</a>]</span>.</p>
+<p>Since the cross-section variation along the nozzle is smooth, a 1D mesh is considered and the numerical scheme is adapted to include the impact on the flow of the upper and lower walls of the nozzle using the method described in <span id="id2">[<a class="reference internal" href="zBibliography.html#id227" title="S. Le Martelot, B. Nkonga, and R. Saurel. Liquid and liquid–gas flows at all speeds. Journal of Computational Physics, 255:53–82, 2013.">LMNS13</a>]</span>.</p>
 <p>This can be done by adding the following node to the <em>model.xml</em> file:</p>
-<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;geometry</span><span class="w"> </span><span class="na">smoothCrossSection1d=</span><span class="s">&quot;true&quot;</span><span class="nt">/&gt;</span>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;geometry</span><span class="w"> </span><span class="na">smoothCrossSection1d=</span><span class="s">"true"</span><span class="nt">/&gt;</span>
 </pre></div>
 </div>
-<p>Note that by default a low-Mach preconditioning technique (see <span id="id3">[<a class="reference internal" href="zBibliography.html#id215" title="S. Le Martelot, B. Nkonga, and R. Saurel. Liquid and liquid–gas flows at all speeds. Journal of Computational Physics, 255:53–82, 2013.">LMNS13</a>]</span>) is defined in this test case to properly capture the flow at the throat.
+<p>Note that by default a low-Mach preconditioning technique (see <span id="id3">[<a class="reference internal" href="zBibliography.html#id227" title="S. Le Martelot, B. Nkonga, and R. Saurel. Liquid and liquid–gas flows at all speeds. Journal of Computational Physics, 255:53–82, 2013.">LMNS13</a>]</span>) is defined in this test case to properly capture the flow at the throat.
 Since the same effect can be obtained with a very fine mesh and our goal is to provide a configuration demonstrating the interest of the mesh mapping, this option is disabled:</p>
-<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;lowMach</span><span class="w"> </span><span class="na">state=</span><span class="s">&quot;false&quot;</span><span class="nt">/&gt;</span>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;lowMach</span><span class="w"> </span><span class="na">state=</span><span class="s">"false"</span><span class="nt">/&gt;</span>
 </pre></div>
 </div>
 <p>In this tutorial, we will first run a simulation on a coarse mesh until the steady state is reached.
@@ -162,18 +163,18 @@ This can be done by changing the following line in <em>main.xml</em>:</p>
 <p>Now we need to change the mesh to the fine one and add the mesh mapping option with the adequate parameters.
 It needs to be provided with the results folder of the previous coarse mesh simulation, the file to restart to and the mesh file used before.
 Taking into consideration these remarks, the <em>mesh.xml</em> file is modified as follow:</p>
-<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="cp">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</span>
 <span class="nt">&lt;mesh&gt;</span>
-<span class="nt">&lt;type</span><span class="w"> </span><span class="na">structure=</span><span class="s">&quot;unStructured&quot;</span><span class="nt">/&gt;</span>
+<span class="nt">&lt;type</span><span class="w"> </span><span class="na">structure=</span><span class="s">"unStructured"</span><span class="nt">/&gt;</span>
 
 <span class="w">  </span><span class="nt">&lt;unstructuredMesh&gt;</span>
-<span class="w">    </span><span class="nt">&lt;file</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;libMeshes/nozzles/smoothNozzle2DforLowMach_Nx10000_10cpu.msh&quot;</span><span class="nt">/&gt;</span>
-<span class="w">    </span><span class="nt">&lt;parallel</span><span class="w"> </span><span class="na">GMSHPretraitement=</span><span class="s">&quot;true&quot;</span><span class="nt">/&gt;</span>
+<span class="w">    </span><span class="nt">&lt;file</span><span class="w"> </span><span class="na">name=</span><span class="s">"libMeshes/nozzles/smoothNozzle2DforLowMach_Nx10000_10cpu.msh"</span><span class="nt">/&gt;</span>
+<span class="w">    </span><span class="nt">&lt;parallel</span><span class="w"> </span><span class="na">GMSHPretraitement=</span><span class="s">"true"</span><span class="nt">/&gt;</span>
 
 <span class="w">    </span><span class="nt">&lt;meshMappingRestart</span>
-<span class="w">      </span><span class="na">resultFolder=</span><span class="s">&quot;euler2DnozzleLowMachSmoothCrossSection_coarse&quot;</span>
-<span class="w">      </span><span class="na">restartFileNumber=</span><span class="s">&quot;1000&quot;</span>
-<span class="w">      </span><span class="na">meshFile=</span><span class="s">&quot;libMeshes/nozzles/smoothNozzle2DforLowMach_Nx1000_2cpu.msh&quot;</span>
+<span class="w">      </span><span class="na">resultFolder=</span><span class="s">"euler2DnozzleLowMachSmoothCrossSection_coarse"</span>
+<span class="w">      </span><span class="na">restartFileNumber=</span><span class="s">"1000"</span>
+<span class="w">      </span><span class="na">meshFile=</span><span class="s">"libMeshes/nozzles/smoothNozzle2DforLowMach_Nx1000_2cpu.msh"</span>
 <span class="w">    </span><span class="nt">/&gt;</span>
 
 <span class="w">  </span><span class="nt">&lt;/unstructuredMesh&gt;</span>
@@ -260,7 +261,7 @@ From the cumulative simulation time reported in table above, it can be noticed t
   <hr/>
 
   <div role="contentinfo">
-    <p>&#169; Copyright 2025, code-mphi.</p>
+    <p>&#169; Copyright 2026, code-mphi.</p>
   </div>
 
   Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a

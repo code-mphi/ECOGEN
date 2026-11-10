@@ -1,0 +1,45 @@
+<map id="FluxNEq::FluxNEq" name="FluxNEq::FluxNEq">
+<area shape="rect" id="Node000001" title=" " alt="" coords="562,281,699,309"/>
+<area shape="rect" id="Node000002" href="$classFluxNEq.html#a1b09a56732fda4f74730177ac6eb6cbc" title="Add flux to the corresponding model flux." alt="" coords="335,5,470,33"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="622,265,610,218,589,159,557,99,536,71,512,48,492,36,471,28,470,23,495,31,516,44,540,68,562,96,594,157,615,217,627,267"/>
+<area shape="rect" id="Node000003" href="$classFluxNEq.html#a79b67c679fcbeb0dacc2e4f1b218ae91" title="Add flux passed in parameter to the correspond model flux." alt="" coords="335,57,470,85"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="618,266,604,229,582,183,551,137,512,99,492,87,471,80,470,75,494,82,516,94,556,134,587,180,609,227,624,268"/>
+<area shape="rect" id="Node000004" href="$classFluxNEq.html#a87de5a9c92caa06e7ff0544e6d57fff8" title="Add flux to the rotating region in MRF context." alt="" coords="307,109,498,154"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="609,268,569,218,542,191,513,168,492,157,492,151,515,164,546,187,573,215,615,269"/>
+<area shape="rect" id="Node000005" href="$classFluxNEqDEM.html#a24385d33552cc9184ce458e5d7456e9a" title=" " alt="" coords="304,177,501,205"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="598,271,559,246,513,220,479,208,479,203,515,215,562,241,603,271"/>
+<area shape="rect" id="Node000008" href="$classFluxNEqHLL.html#a1a4538fe9c5970464d1bf88c2d1faad8" title=" " alt="" coords="310,229,495,257"/>
+<area shape="poly" id="edge7_Node000001_Node000008" title=" " alt="" coords="549,278,467,260,466,255,554,277"/>
+<area shape="rect" id="Node000011" href="$classFluxNEqHLLAC.html#afefd39fff5da3249ba1801a8339e75e3" title=" " alt="" coords="291,281,514,309"/>
+<area shape="poly" id="edge10_Node000001_Node000011" title=" " alt="" coords="544,296,515,298,514,293,549,294"/>
+<area shape="rect" id="Node000014" href="$classFluxNEqHLLBN.html#aef0166e59f0faa1fb6759ebf91c2b29b" title=" " alt="" coords="291,333,514,361"/>
+<area shape="poly" id="edge13_Node000001_Node000014" title=" " alt="" coords="549,314,467,335,466,330,554,312"/>
+<area shape="rect" id="Node000017" href="$classFluxNEqHLLC4Waves.html#a8010e345f28f4000bed1f11b772add9a" title=" " alt="" coords="319,385,486,430"/>
+<area shape="poly" id="edge16_Node000001_Node000017" title=" " alt="" coords="602,317,561,349,515,375,487,387,485,382,513,370,558,344,597,320"/>
+<area shape="rect" id="Node000020" href="$classFluxNEq.html#a21d18db7afff01746c8e7e116b66acfb" title="Temporary store the conservative variables of a given cell." alt="" coords="317,453,488,481"/>
+<area shape="poly" id="edge19_Node000001_Node000020" title=" " alt="" coords="617,321,577,385,549,417,515,444,489,457,487,452,513,440,545,413,573,382,613,324"/>
+<area shape="rect" id="Node000021" href="$classFluxNEq.html#a2b2fd83208b6cb21683e124d13af7f1f" title="Subtract flux to the corresponding model buffer flux." alt="" coords="320,505,484,533"/>
+<area shape="poly" id="edge20_Node000001_Node000021" title=" " alt="" coords="623,322,608,363,586,410,555,456,516,495,486,510,484,505,512,490,551,452,581,407,604,361,619,326"/>
+<area shape="rect" id="Node000022" href="$classFluxNEq.html#ad9e844ad477dd6828d00475c23dba2eb" title="Subtract flux to the rotating region in MRF context." alt="" coords="293,557,512,602"/>
+<area shape="poly" id="edge21_Node000001_Node000022" title=" " alt="" coords="626,322,614,373,593,433,561,494,540,522,516,547,498,559,496,554,512,542,536,518,556,491,588,430,609,372,622,326"/>
+<area shape="rect" id="Node000006" href="$classFluxNEqDEM.html#a333b4c3e4b5a94e23a4cb3bd6958eeb9" title="Add non conservative term to the flux." alt="" coords="26,48,222,76"/>
+<area shape="poly" id="edge5_Node000005_Node000006" title=" " alt="" coords="295,171,289,168,272,148,264,128,257,109,241,91,221,79,219,74,244,86,262,106,269,126,276,146,292,164,300,169"/>
+<area shape="rect" id="Node000007" href="$classFluxNEqDEM.html#a0ac4bab177be391775fa8bbde8187f44" title="Subtract non conservative term to the flux." alt="" coords="12,100,236,128"/>
+<area shape="poly" id="edge6_Node000005_Node000007" title=" " alt="" coords="309,174,290,168,265,156,242,143,203,131,201,126,244,138,268,151,292,163,314,172"/>
+<area shape="rect" id="Node000009" href="$classFluxNEqHLL.html#af7b5667c7b7dcd0f216d964ce1a90005" title="Add non conservative term to the flux." alt="" coords="29,152,219,180"/>
+<area shape="poly" id="edge8_Node000008_Node000009" title=" " alt="" coords="314,226,290,219,265,207,242,195,202,183,200,178,244,190,268,202,292,214,319,224"/>
+<area shape="rect" id="Node000010" href="$classFluxNEqHLL.html#a13800e0b45071874132944521d2a9fa8" title="Subtract non conservative term to the flux." alt="" coords="15,204,233,232"/>
+<area shape="poly" id="edge9_Node000008_Node000010" title=" " alt="" coords="292,235,234,230,233,225,296,232"/>
+<area shape="rect" id="Node000012" href="$classFluxNEqHLLAC.html#ac17e1416f127c331955c6850f679b04e" title="Add non conservative term to the flux." alt="" coords="20,256,228,284"/>
+<area shape="poly" id="edge11_Node000011_Node000012" title=" " alt="" coords="273,285,229,282,228,277,278,282"/>
+<area shape="rect" id="Node000013" href="$classFluxNEqHLLAC.html#a7de7d61690ec33d75ac6b53184b31881" title="Subtract non conservative term to the flux." alt="" coords="5,308,243,336"/>
+<area shape="poly" id="edge12_Node000011_Node000013" title=" " alt="" coords="273,309,244,313,242,308,277,306"/>
+<area shape="rect" id="Node000015" href="$classFluxNEqHLLBN.html#aba4c3ff98ca3fab4b33b7dfa510a63f7" title="Add non conservative term to the flux." alt="" coords="20,360,228,388"/>
+<area shape="poly" id="edge14_Node000014_Node000015" title=" " alt="" coords="273,361,229,366,227,361,277,358"/>
+<area shape="rect" id="Node000016" href="$classFluxNEqHLLBN.html#a4d09506e3b1433e6fe344efa5dfa8f1c" title="Subtract non conservative term to the flux." alt="" coords="5,412,243,440"/>
+<area shape="poly" id="edge15_Node000014_Node000016" title=" " alt="" coords="309,367,292,375,268,388,244,402,204,414,202,409,242,397,265,384,290,370,313,364"/>
+<area shape="rect" id="Node000018" href="$classFluxNEqHLLC4Waves.html#afce3d0f9b8a8204165f8ed68416fcc48" title="Add non conservative term to the flux." alt="" coords="40,464,208,508"/>
+<area shape="poly" id="edge17_Node000017_Node000018" title=" " alt="" coords="304,436,207,465,205,460,308,433"/>
+<area shape="rect" id="Node000019" href="$classFluxNEqHLLC4Waves.html#a25426b3919ae701e7e2cf1d2402e98db" title="Subtract non conservative term to the flux." alt="" coords="40,533,208,578"/>
+<area shape="poly" id="edge18_Node000017_Node000019" title=" " alt="" coords="307,431,292,444,276,463,269,482,262,503,244,523,209,542,207,537,241,518,257,500,264,480,272,460,289,440,302,434"/>
+</map>

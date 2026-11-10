@@ -43,10 +43,12 @@ Output format
 
 The :xml:`<outputMode>` markup is mandatory. The user can choose the writing output format. Attributes are:
 
-- :xml:`format`: Can take the value *GNU* (standard writing in column) or *VTK* (XML VTK format).
-- :xml:`binary`: Can take the value true or false. *Binary* (true) or *ASCII* (false) format can be chosen.
-- :xml:`precision`: Optional attribute. Precision of output files (number of digits). If not precised, set as default.
-- :xml:`reducedOutput`: Optional attribute. Reduced number of output variables when possible (depends on the model). Only available for velocity and pressure-velocity equilibrium model. Can take the value true or false. If not precised, default is false (complete output).
+- :xml:`format`: Can take the value *GNU* (standard writing in column), *VTK* (`XML VTK format <https://docs.vtk.org/en/latest/vtk_file_formats/vtkxml_file_format.html>`_) or *VTKHDF* (`HDF5 VTK format <https://docs.vtk.org/en/latest/vtk_file_formats/vtkhdf_file_format/index.html>`_, available only if ECOGEN has been built with :ref:`HDF5 support<enabling-hdf5>`)
+- :xml:`binary`: Can take the value true or false. *Binary* (true) or *ASCII* (false) format can be chosen. *GNU* format only supports *false* value. *VTKHDF* format only supports *true* value.
+- :xml:`precision`: Optional attribute. Floating-point precision in output files (number of digits). If not precised, uses the default stream precision (6). *VTKHDF* format only supports *8* (simple precision) or *16* (double precision) values and defaults to simple precision (8).
+- :xml:`reducedOutput`: Optional attribute. Reduced number of output variables when possible (depends on the model). Only available for Euler and velocity/pressure-velocity equilibrium model. In the case of the Euler model, it toggles the output of the turbulent viscosity. Can take the value true or false. If not precised, default is false (complete output).
+- :xml:`intSize`: Optional attribute. *VTKHDF* format only. Integer size to store mesh connectivity in output files (number of bits). *32* or *64* values can be chosen. If not precised, *32*-bit integers are saved.
+- :xml:`transferMode`: Optional attribute. *VTKHDF* format only. Collective or independant transfer mode during data I/O operations. *H5FD_MPIO_COLLECTIVE* or *H5FD_MPIO_INDEPENDENT* values can be chosen. If not precised, *H5FD_MPIO_COLLECTIVE* mode is used.
 
 Output result files will be placed in the folder **ECOGEN/results/** into a specific subfolder bearing the name of the run.
 
@@ -96,72 +98,6 @@ CFL criterion
 	<computationControl CFL="0.8"/>
 
 The :xml:`<computationControl>` markup is mandatory. It specifies the value of the attribute :xml:`CFL` which ensures the stability of the temporal integration scheme: The value (real number) must be less than 1.
-
-Global accuracy order of the numerical scheme
----------------------------------------------
-
-By default, the numerical scheme of the fluid-flow solver is first order in time and space.
-ECOGEN can use a second-order scheme in time and space using the MUSCL method with TVD limiters (see :cite:`toro2013riemann` for example for an overview of the method).
-Depending on whether the mesh is **Cartesian** (with/without AMR) or **unstructured**, the MUSCL method used and its parameters are different.
-
-Cartesian mesh (with/without AMR)
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-For a cartesian mesh (with/without AMR), second-order scheme is based on a TVD slope limiter; see :cite:`schmidmayer2020ecogen` for details.
-In this case, the optional markup :xml:`<secondOrder>` can be inserted in the *main.xml* input file as in the following example:
-
-.. code-block:: xml
-
-	<secondOrder>
-	  <globalLimiter>minmod</globalLimiter>
-	  <interfaceLimiter>superbee</interfaceLimiter>                            <!-- optional node -->
-	  <globalVolumeFractionLimiter>minmod</globalVolumeFractionLimiter>        <!-- optional node -->
-	  <interfaceVolumeFractionLimiter>thinc</interfaceVolumeFractionLimiter>   <!-- optional node -->
-	</secondOrder>
-
-The :xml:`<secondOrder>` markup must contain the node :xml:`<globalLimiter>`. The other nodes are optional. The slope limiters available in ECOGEN are the following: minmod :cite:`roe1986superbee`, vanleer :cite:`vanLeer1974`, vanalbada :cite:`vanAlbada1997`, mc :cite:`van1977towards`, superbee :cite:`roe1986superbee` and thinc :cite:`shyue2014thinc` (only for volume fraction at the interface location). Markup significations are:
-
-- :xml:`<globalLimiter>`: Applied everywhere and on all variables unless it is overwritten by the following optional limiters.
-- :xml:`<interfaceLimiter>`: Applied on all variables but only at the interface location. By default is equal to the global limiter.
-- :xml:`<globalVolumeFractionLimiter>`: Applied everywhere but only on the volume-fraction and transport equations (THINC is only applied on the volume fraction) unless it is overwritten by the interface volume-fraction limiter. By default is equal to the global limiter.
-- :xml:`<interfaceVolumeFractionLimiter>`: Applied only at the interface location and on the volume-fraction and transport equations (THINC is only applied on the volume fraction). By default is equal to the interface limiter.
-
-Unstructured mesh
-~~~~~~~~~~~~~~~~~
-For an unstructured mesh, second-order scheme is based on a TVD gradient limitation; see :cite:`chiapolino2017sharpening` for details.
-In this case, the chosen limiter is a global limiter applied everywhere and on all variables.
-Currently the gradient limiters are the following: minmod :cite:`roe1986superbee` and superbee :cite:`roe1986superbee`.
-The optional markup :xml:`<secondOrder>` can be inserted in the *main.xml* input file as in the following example:
-
-.. code-block:: xml
-
-  <secondOrder>
-    <globalLimiter>minmod</globalLimiter>
-  </secondOrder>
-
-.. important::
-
-  Since the MUSCL method relies on gradients computation, the gradient method chosen should be compatible with unstructured meshes (see the markup :xml:`<gradient>`).
-
-Gradient method
----------------
-
-In ECOGEN, to compute gradients, it is possible to use:
-
-- finite-difference-like gradient on **cartesian** mesh (with/without AMR) (:xml:`<method>finite-difference</method>`)
-- Green-Gauss gradient on **cartesian** and **unstructured** mesh (:xml:`<method>green-gauss</method>`).
-
-By default (without the XML markup :xml:`<gradient>`), the gradients will be computed using the finite-difference scheme.
-To define explicitly the gradient method, one can use:
-
-.. code-block:: xml
-
-  <gradient>
-    <method>finite-difference</method> <!-- For finite difference like gradient scheme -->
-  </gradient>
-
-.. note::
-
-  On unstructured meshes, in case second-order scheme is set and/or additional physics are used (see Section :ref:`Sec:input:additionalPhysic`), the gradient method must be set to Green-Gauss.
 
 Probes
 ------

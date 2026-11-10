@@ -1,0 +1,23 @@
+<map id="APETurbulenceSmagorinsky::solveFluxTurbulenceSymmetry" name="APETurbulenceSmagorinsky::solveFluxTurbulenceSymmetry">
+<area shape="rect" id="Node000001" title="Solve the turbulence flux at a boundary with a wall type in MRF case." alt="" coords="5,180,236,224"/>
+<area shape="rect" id="Node000002" href="$classTensor.html#acdb852bf617cece289b1cfe9109ba001" title="Compute the Frobenius (L2) norm of the tensor." alt="" coords="291,5,459,33"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="137,178,197,111,237,75,282,44,298,38,294,41,285,48,241,79,201,115,141,181"/>
+<area shape="rect" id="Node000003" href="$classCellInterface.html#a307a9959bf3088ad94b1b63efd696bc2" title=" " alt="" coords="284,57,466,85"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="150,177,209,136,283,95,304,89,299,92,285,100,212,141,153,181"/>
+<area shape="rect" id="Node000004" href="$classCell.html#ae6a39b88479f956d4228d0c0af230c06" title=" " alt="" coords="324,109,426,137"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="191,176,283,147,312,141,307,143,284,152,193,181"/>
+<area shape="rect" id="Node000005" href="$classCoord.html#a04d74e2f155904844fb90cf8aac3579f" title="Return the value in the x&#45;direction of the Coord object." alt="" coords="326,161,424,189"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="235,187,313,180,309,183,237,192"/>
+<area shape="rect" id="Node000006" href="$classCoord.html#a11fc116d47c56756eab2081beca0a702" title="Return the value in the y&#45;direction of the Coord object." alt="" coords="327,213,423,241"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="236,211,313,220,309,222,237,216"/>
+<area shape="rect" id="Node000007" href="$classCoord.html#a9d218af09beeed332daba65312b8abad" title="Return the value in the z&#45;direction of the Coord object." alt="" coords="326,265,424,293"/>
+<area shape="poly" id="edge6_Node000001_Node000007" title=" " alt="" coords="194,222,284,250,314,260,309,261,283,255,194,227"/>
+<area shape="rect" id="Node000008" href="$classQuantitiesAddPhys.html#a3767714d860b810a0975a19f1c4c34c3" title="Set the turbulent viscosity in the cell." alt="" coords="295,317,455,362"/>
+<area shape="poly" id="edge7_Node000001_Node000008" title=" " alt="" coords="154,222,214,262,285,302,298,310,293,310,282,307,211,266,153,227"/>
+<area shape="rect" id="Node000010" href="$classTensor.html#a2e5e859c94e46c88cb883b6ee7a259e6" title="Compute the transpose of the tensor." alt="" coords="307,385,442,413"/>
+<area shape="poly" id="edge9_Node000001_Node000010" title=" " alt="" coords="138,222,197,296,239,337,285,372,295,379,290,378,282,376,235,341,193,300,136,227"/>
+<area shape="rect" id="Node000009" href="$classErrors.html#a5fcdb1d77f9c74188b44ac7d0d05a453" title=" " alt="" coords="514,325,670,353"/>
+<area shape="poly" id="edge8_Node000008_Node000009" title=" " alt="" coords="455,337,501,339,496,339,456,342"/>
+<area shape="rect" id="Node000011" href="$classTensor.html#a4420e3cacf3811f54a0363db56d9379d" title=" " alt="" coords="536,385,649,413"/>
+<area shape="poly" id="edge10_Node000010_Node000011" title=" " alt="" coords="443,397,523,399,517,399,443,402"/>
+</map>

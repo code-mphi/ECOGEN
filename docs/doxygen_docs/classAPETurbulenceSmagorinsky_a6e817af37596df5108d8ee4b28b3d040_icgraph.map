@@ -1,0 +1,10 @@
+<map id="APETurbulenceSmagorinsky::solveFluxTurbulenceInner" name="APETurbulenceSmagorinsky::solveFluxTurbulenceInner">
+<area shape="rect" id="Node000001" title="Solve the turbulence flux between two cells." alt="" coords="565,65,765,110"/>
+<area shape="rect" id="Node000002" href="$classAPETurbulenceSmagorinsky.html#ace332da69a5170c4b1707c7490757d67" title="Solve the additional physics flux between two cells." alt="" coords="290,5,490,50"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="547,63,491,52,491,47,552,62"/>
+<area shape="rect" id="Node000003" href="$classAPETurbulenceSmagorinsky.html#a55ba60bfe723f2c95a7dd81390295b44" title="Solve the additional physics flux at a domain boundary." alt="" coords="5,96,216,141"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="549,97,216,115,216,110,550,91"/>
+<area shape="rect" id="Node000004" href="$classAPETurbulenceSmagorinsky.html#a83eec27a8877e2a1a27473f1fe080db6" title="Solve the turbulence flux at a boundary with a non&#45;reflecting type." alt="" coords="264,125,517,170"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="552,112,496,127,495,122,547,113"/>
+<area shape="poly" id="edge4_Node000004_Node000003" title=" " alt="" coords="246,133,216,132,216,127,251,133"/>
+</map>

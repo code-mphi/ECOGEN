@@ -1,8 +1,8 @@
 var namespacemath =
 [
     [ "vector", "classmath_1_1vector.html", "classmath_1_1vector" ],
-    [ "cross", "namespacemath.html#ab59f9f792563f38454e0620358fe5f4f", null ],
     [ "cross", "namespacemath.html#a6e59fa070879f4243c8a6cdeb2e813fa", null ],
+    [ "cross", "namespacemath.html#ab59f9f792563f38454e0620358fe5f4f", null ],
     [ "dot", "namespacemath.html#a6e34eb185cefe01f90277f11f7fa5a17", null ],
     [ "norm2", "namespacemath.html#adb938e8e7999d7f8683ee12a3fa231c8", null ],
     [ "norm_inf", "namespacemath.html#a23a30cd6a4e3f365a9b94abe41269546", null ],

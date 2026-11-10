@@ -1,9 +1,13 @@
 <map id="GOLine::distancePoint" name="GOLine::distancePoint">
-<area shape="rect" id="Node000001" title="Compute the distance between a vertex and the corresponding geometric object." alt="" coords="5,55,171,80"/>
-<area shape="rect" id="Node000002" href="$classCoord.html#a49aa4e5981d8bf7448b751e437d1654b" title="Cross product between the present vector and vector a." alt="" coords="263,5,365,31"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="146,52,249,29,250,35,147,57"/>
-<area shape="rect" id="Node000003" href="$classCoord.html#a96c803308eff1b84806d42f789deac80" title="Scalar product between the present vector and vector a." alt="" coords="261,55,367,80"/>
-<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="171,65,247,65,247,70,171,70"/>
-<area shape="rect" id="Node000004" href="$classCoord.html#a5ab5b6d90f6bc14773a0de7a91fded10" title="Set a vector from the result of the substraction of the vector a from the vector b." alt="" coords="219,105,409,145"/>
-<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="140,77,222,99,221,104,138,83"/>
+<area shape="rect" id="Node000001" title="Compute the distance between a vertex and the corresponding geometric object." alt="" coords="5,57,170,85"/>
+<area shape="rect" id="Node000002" href="$classCoord.html#a49aa4e5981d8bf7448b751e437d1654b" title="Cross product between the present vector and vector a." alt="" coords="262,5,364,33"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="150,54,249,33,245,36,152,59"/>
+<area shape="rect" id="Node000004" href="$classCoord.html#a96c803308eff1b84806d42f789deac80" title="Scalar product between the present vector and vector a." alt="" coords="260,57,366,85"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="170,69,247,70,242,72,170,74"/>
+<area shape="rect" id="Node000005" href="$classCoord.html#a5ab5b6d90f6bc14773a0de7a91fded10" title="Set a vector from the result of the substraction of the vector a from the vector b." alt="" coords="218,109,408,154"/>
+<area shape="poly" id="edge5_Node000001_Node000005" title=" " alt="" coords="142,83,214,103,209,105,142,88"/>
+<area shape="rect" id="Node000003" href="$classCoord.html#add896c4f3fb15b4ad762b5270855345c" title=" " alt="" coords="456,57,561,85"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="364,30,443,53,438,53,364,35"/>
+<area shape="poly" id="edge4_Node000004_Node000003" title=" " alt="" coords="366,69,443,71,438,72,367,74"/>
+<area shape="poly" id="edge6_Node000005_Node000003" title=" " alt="" coords="387,106,444,91,449,90,388,111"/>
 </map>

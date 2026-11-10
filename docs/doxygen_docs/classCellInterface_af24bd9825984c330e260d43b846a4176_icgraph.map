@@ -1,24 +1,41 @@
 <map id="CellInterface::getCellRight" name="CellInterface::getCellRight">
-<area shape="rect" id="Node000001" title=" " alt="" coords="807,241,1000,267"/>
-<area shape="rect" id="Node000002" href="$classAddPhys.html#abdabd90ce3f3927dc682ac99240dad68" title="Add the additional physic flux between two cells at the corresponding cell." alt="" coords="545,5,740,31"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="889,230,869,191,840,142,803,94,757,52,717,33,719,28,760,48,807,90,845,139,874,188,894,228"/>
-<area shape="rect" id="Node000003" href="$classAddPhys.html#af7b64716ee631ef5e61b3e11a660fee0" title="Compute the additional physic flux between two cells." alt="" coords="252,31,479,56"/>
-<area shape="poly" id="edge4_Node000001_Node000003" title=" " alt="" coords="886,231,865,199,835,162,799,125,757,96,708,80,638,67,479,52,479,47,638,62,710,75,760,92,803,121,839,158,869,196,890,228"/>
-<area shape="rect" id="Node000005" href="$classGradientFiniteDifference.html#a89eaa1130be6bf99bd3fbd300444343b" title="Compute gradients (temperature, velocity, density) of a cell." alt="" coords="552,106,733,146"/>
-<area shape="poly" id="edge5_Node000001_Node000005" title=" " alt="" coords="874,235,822,197,758,160,727,149,729,144,760,156,825,193,878,231"/>
-<area shape="rect" id="Node000006" href="$classGradientGreenGauss.html#af8805deac13bbedc558d41a81957d292" title="Compute gradients (temperature, velocity, density) of a cell." alt="" coords="564,170,721,210"/>
-<area shape="poly" id="edge6_Node000001_Node000006" title=" " alt="" coords="837,241,721,212,722,207,838,235"/>
-<area shape="rect" id="Node000007" href="$classAPEConductivity.html#a4a3d5b0350c8dfe2072e4b4edb830f3b" title="Solve the additional physic flux between two cells." alt="" coords="543,234,742,274"/>
-<area shape="poly" id="edge7_Node000001_Node000007" title=" " alt="" coords="793,257,742,257,742,251,793,251"/>
-<area shape="rect" id="Node000008" href="$classAPUEqConductivity.html#a60acc6a82fb97d75de5ae5b3718acc85" title="Solve the additional physic flux between two cells." alt="" coords="565,298,720,338"/>
-<area shape="poly" id="edge8_Node000001_Node000008" title=" " alt="" coords="838,273,721,302,720,296,837,267"/>
-<area shape="rect" id="Node000009" href="$classAPUEqSurfaceTension.html#a307e685fd9d5a391f5df628aed7bc4cf" title="Solve the additional physic flux between two cells." alt="" coords="561,362,724,402"/>
-<area shape="poly" id="edge9_Node000001_Node000009" title=" " alt="" coords="878,277,825,315,760,352,725,366,723,361,758,348,822,311,874,273"/>
-<area shape="rect" id="Node000010" href="$classAPEViscosity.html#a383bc7762140cc1397fbc9294f808f2e" title="Solve the additional physic flux between two cells." alt="" coords="527,427,759,452"/>
-<area shape="poly" id="edge10_Node000001_Node000010" title=" " alt="" coords="889,280,838,349,802,386,760,416,731,429,729,424,757,412,798,381,834,345,885,277"/>
-<area shape="rect" id="Node000011" href="$classAPUEqViscosity.html#a159d010c53fc65fc63d636e6b6e87faf" title="Solve the additional physic flux between two cells." alt="" coords="545,477,740,517"/>
-<area shape="poly" id="edge11_Node000001_Node000011" title=" " alt="" coords="894,281,874,322,845,371,807,422,760,465,737,479,734,474,757,461,803,419,841,368,870,319,889,279"/>
-<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="532,31,479,36,478,30,531,25"/>
-<area shape="rect" id="Node000004" href="$classCellInterface.html#af5640a494bde517e96a7526283cc9e36" title=" " alt="" coords="5,23,204,63"/>
-<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="238,46,204,46,204,41,238,41"/>
+<area shape="rect" id="Node000001" title=" " alt="" coords="844,423,1037,450"/>
+<area shape="rect" id="Node000002" href="$classAddPhys.html#abdabd90ce3f3927dc682ac99240dad68" title="Add the additional physics flux between two cells at the corresponding cell." alt="" coords="584,63,777,90"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="933,406,921,344,896,261,878,218,856,176,828,137,795,104,778,93,777,88,798,100,832,134,860,173,883,216,901,259,926,343,938,408"/>
+<area shape="rect" id="Node000003" href="$classAddPhys.html#af7b64716ee631ef5e61b3e11a660fee0" title="Compute the additional physics flux between two cells." alt="" coords="277,37,504,65"/>
+<area shape="poly" id="edge4_Node000001_Node000003" title=" " alt="" coords="936,406,930,332,922,284,909,233,891,182,867,133,835,89,795,53,751,30,704,16,654,9,604,9,555,13,509,21,436,39,433,35,508,15,554,8,603,3,654,4,705,10,753,25,798,49,839,86,871,130,896,180,914,232,927,283,935,332,941,408"/>
+<area shape="rect" id="Node000005" href="$classGradientFiniteDifference.html#a89eaa1130be6bf99bd3fbd300444343b" title="Compute gradients (temperature, velocity, density) of a cell." alt="" coords="590,114,771,159"/>
+<area shape="poly" id="edge5_Node000001_Node000005" title=" " alt="" coords="929,407,912,358,885,294,846,229,822,199,795,173,771,158,771,153,798,169,826,196,850,226,890,292,917,356,934,409"/>
+<area shape="rect" id="Node000006" href="$classGradientGreenGauss.html#af8805deac13bbedc558d41a81957d292" title="Compute gradients (temperature, velocity, density) of a cell." alt="" coords="602,184,759,228"/>
+<area shape="poly" id="edge6_Node000001_Node000006" title=" " alt="" coords="924,408,904,372,875,327,838,282,795,243,759,224,759,219,798,238,842,278,879,324,908,370,929,410"/>
+<area shape="rect" id="Node000007" href="$classCell.html#ace98b4433772b11cc2bb9e19b04892d5" title="Select a specific scalar variable." alt="" coords="606,252,755,280"/>
+<area shape="poly" id="edge7_Node000001_Node000007" title=" " alt="" coords="918,410,868,351,833,320,795,294,755,278,755,273,798,289,837,316,871,348,923,410"/>
+<area shape="rect" id="Node000008" href="$classAPEConductivity.html#a4a3d5b0350c8dfe2072e4b4edb830f3b" title="Solve the additional physics flux between two cells." alt="" coords="582,304,780,348"/>
+<area shape="poly" id="edge8_Node000001_Node000008" title=" " alt="" coords="896,416,795,370,749,351,749,346,797,365,901,415"/>
+<area shape="rect" id="Node000009" href="$classAPETurbulenceSmagorinsky.html#ace332da69a5170c4b1707c7490757d67" title="Solve the additional physics flux between two cells." alt="" coords="290,488,490,532"/>
+<area shape="poly" id="edge9_Node000001_Node000009" title=" " alt="" coords="868,419,805,409,728,401,646,401,605,406,566,414,525,428,486,448,423,489,419,485,483,443,523,423,564,409,604,400,646,396,728,396,806,404,873,418"/>
+<area shape="rect" id="Node000010" href="$classAPEViscosity.html#a383bc7762140cc1397fbc9294f808f2e" title="Solve the additional physics flux between two cells." alt="" coords="565,423,796,450"/>
+<area shape="poly" id="edge10_Node000001_Node000010" title=" " alt="" coords="826,437,798,439,796,434,831,436"/>
+<area shape="rect" id="Node000011" href="$classAPUEqConductivity.html#a60acc6a82fb97d75de5ae5b3718acc85" title="Solve the additional physics flux between two cells." alt="" coords="604,474,757,519"/>
+<area shape="poly" id="edge11_Node000001_Node000011" title=" " alt="" coords="860,455,759,481,757,476,865,453"/>
+<area shape="rect" id="Node000012" href="$classAPUEqSurfaceTension.html#a307e685fd9d5a391f5df628aed7bc4cf" title="Solve the additional physics flux between two cells." alt="" coords="600,544,762,588"/>
+<area shape="poly" id="edge12_Node000001_Node000012" title=" " alt="" coords="912,459,859,499,797,534,764,547,761,542,795,529,856,494,907,462"/>
+<area shape="rect" id="Node000013" href="$classAPUEqViscosity.html#a159d010c53fc65fc63d636e6b6e87faf" title="Solve the additional physics flux between two cells." alt="" coords="584,613,777,658"/>
+<area shape="poly" id="edge13_Node000001_Node000013" title=" " alt="" coords="925,462,874,534,838,571,798,603,775,615,773,610,795,598,835,567,870,530,921,465"/>
+<area shape="rect" id="Node000014" href="$classAPETurbulenceSmagorinsky.html#a55ba60bfe723f2c95a7dd81390295b44" title="Solve the additional physics flux at a domain boundary." alt="" coords="5,742,216,787"/>
+<area shape="poly" id="edge14_Node000001_Node000014" title=" " alt="" coords="942,464,940,551,934,607,922,666,904,727,879,785,844,837,822,860,798,880,758,905,715,922,670,933,624,939,577,939,529,935,436,916,347,887,266,853,198,819,148,790,149,785,201,814,268,848,348,882,437,911,530,930,577,934,624,933,669,928,713,917,755,900,795,876,819,856,839,834,874,782,899,725,917,665,928,606,935,551,939,468"/>
+<area shape="rect" id="Node000015" href="$classAPEViscosity.html#acb096c5d7d27dbe15d79c919dc14162a" title="Solve the additional physics flux at a domain boundary." alt="" coords="580,752,781,796"/>
+<area shape="poly" id="edge15_Node000001_Node000015" title=" " alt="" coords="935,463,922,524,895,598,877,637,855,675,829,710,798,741,780,753,778,749,795,737,825,707,850,672,872,634,890,596,916,522,932,467"/>
+<area shape="rect" id="Node000016" href="$classAPUEqViscosity.html#aed3e60b546e6b8b5cb141ca88fe238e1" title="Solve the additional physics flux at a domain boundary." alt="" coords="584,821,777,866"/>
+<area shape="poly" id="edge16_Node000001_Node000016" title=" " alt="" coords="938,464,928,536,905,628,886,678,863,726,834,771,798,811,779,824,776,820,795,807,829,768,858,723,881,675,899,627,923,535,935,468"/>
+<area shape="rect" id="Node000017" href="$classAPETurbulenceSmagorinsky.html#a6e817af37596df5108d8ee4b28b3d040" title="Solve the turbulence flux between two cells." alt="" coords="580,682,781,727"/>
+<area shape="poly" id="edge17_Node000001_Node000017" title=" " alt="" coords="932,463,914,511,885,566,847,623,824,649,798,672,779,684,777,679,795,668,820,645,843,620,881,564,909,508,928,466"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="566,68,505,64,503,59,571,65"/>
+<area shape="rect" id="Node000004" href="$classCellInterface.html#af5640a494bde517e96a7526283cc9e36" title=" " alt="" coords="12,29,209,74"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="259,53,211,53,208,49,263,50"/>
+<area shape="poly" id="edge18_Node000017_Node000009" title=" " alt="" coords="573,676,564,672,516,640,472,602,410,535,411,530,476,598,519,635,566,668,579,676"/>
+<area shape="poly" id="edge19_Node000017_Node000014" title=" " alt="" coords="566,731,517,742,359,758,216,765,215,760,359,752,517,737,571,730"/>
+<area shape="rect" id="Node000018" href="$classAPETurbulenceSmagorinsky.html#a83eec27a8877e2a1a27473f1fe080db6" title="Solve the turbulence flux at a boundary with a non&#45;reflecting type." alt="" coords="264,682,517,727"/>
+<area shape="poly" id="edge20_Node000017_Node000018" title=" " alt="" coords="562,705,518,707,517,702,567,704"/>
+<area shape="poly" id="edge21_Node000018_Node000014" title=" " alt="" coords="266,732,217,744,215,740,271,729"/>
 </map>

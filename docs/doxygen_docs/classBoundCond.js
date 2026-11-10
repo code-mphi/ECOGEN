@@ -11,7 +11,6 @@ var classBoundCond =
     [ "computeFluxXi", "classBoundCond.html#a30f4f1737c781069a853185facb37e46", null ],
     [ "computeXi", "classBoundCond.html#a2f279e611906de7240cb7a72dd0c97ee", null ],
     [ "createBoundary", "classBoundCond.html#acab1c9b595bd153f82004efac670deb1", null ],
-    [ "createBoundary", "classBoundCond.html#acbb3756681aec55bf9d4cca1ea4a2dcf", null ],
     [ "deraffineCellInterfaceExterne", "classBoundCond.html#aec26487d807faa4b3622e0a50012b329", null ],
     [ "getBoundaryHeatQuantity", "classBoundCond.html#a58b6a739cff4c2fd43796ca60771ff86", null ],
     [ "getBoundData", "classBoundCond.html#a5f2beb48ed6e8889a950e656c847afb0", null ],

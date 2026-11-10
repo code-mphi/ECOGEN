@@ -1,0 +1,35 @@
+<map id="FluxNEqHLLBN::subtractNonCons" name="FluxNEqHLLBN::subtractNonCons">
+<area shape="rect" id="Node000001" title="Subtract non conservative term to the flux." alt="" coords="5,240,243,268"/>
+<area shape="rect" id="Node000002" href="$classFluxNEqHLLBN.html#aef0166e59f0faa1fb6759ebf91c2b29b" title=" " alt="" coords="291,5,514,33"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="130,238,152,199,186,146,233,91,260,65,289,44,304,38,300,41,292,48,263,69,237,94,191,149,156,202,135,241"/>
+<area shape="rect" id="Node000004" href="$classPhase.html#a4e4cd8c6afd1e1a8f7304ad7d7c3ee2f" title=" " alt="" coords="339,57,466,85"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="134,238,195,169,239,129,289,95,326,83,322,86,292,100,242,134,198,173,138,241"/>
+<area shape="rect" id="Node000006" href="$classCell.html#af2d48073a332d621b69fb257eeb6de6c" title=" " alt="" coords="345,109,460,137"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="142,238,205,193,246,169,290,147,332,135,328,138,292,152,249,173,208,198,145,241"/>
+<area shape="rect" id="Node000007" href="$classPhase.html#a2beeaa383c32c5866ea59a1b20a44662" title=" " alt="" coords="330,161,475,189"/>
+<area shape="poly" id="edge6_Node000001_Node000007" title=" " alt="" coords="167,237,290,199,325,192,321,195,291,204,170,242"/>
+<area shape="rect" id="Node000008" href="$classPhase.html#aa6e67245b85fd2590d360bfaf9456817" title=" " alt="" coords="332,213,473,241"/>
+<area shape="poly" id="edge8_Node000001_Node000008" title=" " alt="" coords="242,240,319,234,314,237,244,245"/>
+<area shape="rect" id="Node000009" href="$classCoord.html#a04d74e2f155904844fb90cf8aac3579f" title="Return the value in the x&#45;direction of the Coord object." alt="" coords="354,265,451,293"/>
+<area shape="poly" id="edge10_Node000001_Node000009" title=" " alt="" coords="243,262,341,272,336,275,244,267"/>
+<area shape="rect" id="Node000010" href="$classCoord.html#a11fc116d47c56756eab2081beca0a702" title="Return the value in the y&#45;direction of the Coord object." alt="" coords="354,317,450,345"/>
+<area shape="poly" id="edge11_Node000001_Node000010" title=" " alt="" coords="170,266,291,302,341,316,336,317,290,307,170,271"/>
+<area shape="rect" id="Node000011" href="$classCoord.html#a9d218af09beeed332daba65312b8abad" title="Return the value in the z&#45;direction of the Coord object." alt="" coords="354,369,451,397"/>
+<area shape="poly" id="edge12_Node000001_Node000011" title=" " alt="" coords="144,266,209,309,249,333,292,354,341,371,336,372,290,359,247,338,206,314,144,271"/>
+<area shape="rect" id="Node000012" href="$classCoord.html#a52f7db0c08b69817ba0b4a2dee3d6a28" title="Projection in the local coordinate system which is defined by the transmitted normal,..." alt="" coords="321,421,484,449"/>
+<area shape="poly" id="edge13_Node000001_Node000012" title=" " alt="" coords="137,265,198,334,242,373,292,406,309,416,303,416,289,411,239,377,195,338,135,270"/>
+<area shape="rect" id="Node000015" href="$classCoord.html#a1b381e27cb37da6657a3852cbbd8b564" title="Reverse projection in the absolute Cartesian coordinate system." alt="" coords="562,473,743,501"/>
+<area shape="poly" id="edge17_Node000001_Node000015" title=" " alt="" coords="132,266,155,307,188,361,235,415,262,439,292,458,354,482,420,495,486,500,544,501,549,501,485,505,419,501,352,487,289,463,259,443,231,419,184,364,150,310,131,271"/>
+<area shape="rect" id="Node000003" href="$classFluxNEq.html#ad681416bb72afea525e3fc7ea470cb34" title=" " alt="" coords="584,5,721,33"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="514,17,571,18,566,20,515,22"/>
+<area shape="rect" id="Node000005" href="$classErrors.html#a5fcdb1d77f9c74188b44ac7d0d05a453" title=" " alt="" coords="574,161,731,189"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="465,80,515,95,571,122,620,153,615,153,568,127,513,100,466,86"/>
+<area shape="poly" id="edge7_Node000007_Node000005" title=" " alt="" coords="475,173,562,174,557,176,476,178"/>
+<area shape="poly" id="edge9_Node000008_Node000005" title=" " alt="" coords="472,210,570,192,565,194,474,215"/>
+<area shape="rect" id="Node000013" href="$classCoord.html#add896c4f3fb15b4ad762b5270855345c" title=" " alt="" coords="791,421,897,449"/>
+<area shape="poly" id="edge14_Node000012_Node000013" title=" " alt="" coords="478,418,562,407,653,401,744,407,784,417,779,417,743,412,653,406,562,412,479,423"/>
+<area shape="rect" id="Node000014" href="$classCoord.html#a96c803308eff1b84806d42f789deac80" title="Scalar product between the present vector and vector a." alt="" coords="600,421,706,449"/>
+<area shape="poly" id="edge15_Node000012_Node000014" title=" " alt="" coords="484,433,587,435,581,435,485,438"/>
+<area shape="poly" id="edge16_Node000014_Node000013" title=" " alt="" coords="706,433,778,435,773,435,706,438"/>
+<area shape="poly" id="edge18_Node000015_Node000013" title=" " alt="" coords="706,470,774,454,779,453,707,475"/>
+</map>

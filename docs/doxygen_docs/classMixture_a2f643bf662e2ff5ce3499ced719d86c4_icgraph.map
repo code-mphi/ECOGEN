@@ -1,0 +1,167 @@
+<map id="Mixture::Mixture" name="Mixture::Mixture">
+<area shape="rect" id="Node000001" title=" " alt="" coords="900,2066,1030,2094"/>
+<area shape="rect" id="Node000002" href="$classMixEuler.html#a31eb21be5d176b2ad909e1f6d8d75aa3" title="Copy mixture attributes in mixture." alt="" coords="624,5,820,50"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="960,2049,950,1648,928,995,912,663,894,373,873,161,862,96,850,64,836,51,821,41,819,37,839,47,855,61,867,95,878,161,899,372,917,662,933,995,955,1648,966,2050"/>
+<area shape="rect" id="Node000003" href="$classMixEulerHomogeneous.html#ac3c63046784f2355baa1159b19ba34bf" title="Copy mixture attributes in mixture." alt="" coords="627,75,816,119"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="960,2050,949,1661,927,1031,911,710,893,431,872,227,861,164,850,133,835,119,818,109,816,105,838,115,855,130,867,163,878,226,898,431,916,710,932,1031,955,1661,966,2051"/>
+<area shape="rect" id="Node000004" href="$classMixExtendedNavierStokesKorteweg1D.html#aa9a89ce7b1253b523921b0e8afec3c7a" title="Copy mixture attributes in mixture." alt="" coords="591,144,852,189"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="961,2050,962,1686,959,1404,952,1096,939,792,919,521,905,408,890,315,871,245,850,203,841,192,839,187,854,199,876,243,895,313,911,407,924,521,944,791,957,1096,964,1404,967,1686,967,2051"/>
+<area shape="rect" id="Node000005" href="$classMixNEq.html#afe08406c9743419ee195c1575a5f6bc1" title="Copy mixture attributes in mixture." alt="" coords="602,212,841,240"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="960,2050,949,1682,926,1091,910,791,892,530,872,340,861,282,850,253,840,243,839,238,855,250,866,280,877,339,898,530,916,791,931,1091,954,1682,966,2051"/>
+<area shape="rect" id="Node000006" href="$classMixPTUEq.html#a2a342c275cd38df8ba5fbce35d1f02db" title="Copy mixture attributes in mixture." alt="" coords="619,264,824,309"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="961,2050,960,1707,956,1443,949,1155,935,871,915,619,902,514,887,427,870,362,850,323,838,311,826,302,823,297,841,307,854,319,875,360,893,426,908,513,921,619,941,871,954,1155,962,1443,966,1707,966,2050"/>
+<area shape="rect" id="Node000007" href="$classMixPUEq.html#aad9cf5675539385434957cdaa46c5d47" title="Copy mixture attributes in mixture." alt="" coords="623,333,820,378"/>
+<area shape="poly" id="edge6_Node000001_Node000007" title=" " alt="" coords="961,2050,959,1720,947,1191,933,918,913,676,901,575,886,492,869,430,850,392,836,379,822,370,820,365,839,375,854,389,874,428,891,491,906,574,919,676,939,918,952,1190,965,1720,966,2051"/>
+<area shape="rect" id="Node000008" href="$classMixture.html#a8525ba0cc2b7ab1727ecbfb894657830" title="Copy mixture attributes in mixture." alt="" coords="627,403,816,447"/>
+<area shape="poly" id="edge7_Node000001_Node000008" title=" " alt="" coords="961,2050,958,1732,945,1225,931,964,911,733,899,636,885,557,868,497,850,461,835,447,818,438,816,433,838,443,854,458,873,495,890,556,904,636,917,733,936,964,950,1225,964,1732,966,2051"/>
+<area shape="rect" id="Node000021" href="$classMixUEq.html#aa526ce3d4a49edc351431535c771efc8" title="Copy mixture attributes in mixture." alt="" coords="602,471,841,499"/>
+<area shape="poly" id="edge20_Node000001_Node000021" title=" " alt="" coords="961,2050,958,1741,945,1249,931,997,912,773,899,680,885,603,869,546,850,512,840,502,839,497,854,509,874,544,890,602,905,679,917,773,937,996,950,1249,964,1741,966,2051"/>
+<area shape="rect" id="Node000022" href="$classMixUEqTotEnergy.html#aec93419702a87763ed03b11571e80fc8" title="Copy mixture attributes in mixture." alt="" coords="624,523,819,567"/>
+<area shape="poly" id="edge21_Node000001_Node000022" title=" " alt="" coords="961,2050,957,1754,941,1285,927,1045,908,832,896,743,882,669,867,614,850,581,836,568,820,559,818,554,839,564,854,578,872,612,888,668,901,742,913,831,933,1044,947,1285,962,1754,966,2051"/>
+<area shape="rect" id="Node000023" href="$classMixEuler.html#a8107a7a3514e7c41ed6a076aa0a4413d" title=" " alt="" coords="622,592,821,637"/>
+<area shape="poly" id="edge22_Node000001_Node000023" title=" " alt="" coords="961,2050,956,1765,939,1319,925,1091,906,888,894,804,881,734,866,682,850,651,837,638,823,629,821,624,840,634,854,647,871,680,886,733,900,803,911,887,930,1090,945,1319,961,1765,966,2051"/>
+<area shape="rect" id="Node000024" href="$classMixEulerHomogeneous.html#aeb3831fb1587bfa3bd936c5d0d924b4f" title=" " alt="" coords="628,661,816,706"/>
+<area shape="poly" id="edge23_Node000001_Node000024" title=" " alt="" coords="961,2050,954,1777,937,1353,923,1136,904,945,880,799,866,750,850,720,834,706,817,696,815,691,837,702,854,717,871,748,885,798,909,944,928,1136,942,1353,960,1777,966,2050"/>
+<area shape="rect" id="Node000025" href="$classMixNEq.html#a8082eda8f843ceeae1ae0fb911f2c26b" title=" " alt="" coords="602,730,841,758"/>
+<area shape="poly" id="edge24_Node000001_Node000025" title=" " alt="" coords="961,2050,955,1786,937,1378,923,1169,904,985,880,845,866,799,850,771,840,760,839,755,854,767,871,797,885,844,909,985,928,1169,943,1377,960,1786,966,2051"/>
+<area shape="rect" id="Node000026" href="$classMixPTUEq.html#a1a829411d566996153ce4d4739aeb3c6" title=" " alt="" coords="618,781,826,826"/>
+<area shape="poly" id="edge25_Node000001_Node000026" title=" " alt="" coords="960,2050,953,1799,934,1414,919,1217,900,1043,877,911,864,867,850,840,827,821,825,816,854,837,869,865,883,910,906,1043,924,1217,939,1413,958,1799,966,2051"/>
+<area shape="rect" id="Node000027" href="$classMixture.html#a00dc77c9e9f3a6ba3a9822700f1a86c5" title=" " alt="" coords="626,851,818,895"/>
+<area shape="poly" id="edge26_Node000001_Node000027" title=" " alt="" coords="960,2050,951,1811,932,1448,917,1263,898,1100,876,976,864,934,850,909,835,896,819,886,817,881,838,892,854,906,869,932,881,975,904,1099,922,1263,937,1447,957,1811,965,2050"/>
+<area shape="rect" id="Node000028" href="$classMixUEq.html#a56285e77e6eac5b3564f11ce19a82e30" title=" " alt="" coords="602,919,841,947"/>
+<area shape="poly" id="edge27_Node000001_Node000028" title=" " alt="" coords="960,2050,951,1821,931,1473,917,1297,898,1141,876,1023,864,984,850,960,840,950,839,945,854,957,868,981,881,1022,903,1140,922,1296,937,1473,957,1821,965,2051"/>
+<area shape="rect" id="Node000029" href="$classMixEulerHomogeneous.html#a0ac6b65b0a87437a9d053747fabf38e7" title=" " alt="" coords="636,971,808,1015"/>
+<area shape="poly" id="edge28_Node000001_Node000029" title=" " alt="" coords="960,2050,949,1833,928,1508,913,1344,895,1199,874,1089,862,1052,850,1029,831,1013,809,1003,807,998,834,1009,854,1026,867,1050,879,1087,900,1198,918,1343,933,1508,955,1833,965,2050"/>
+<area shape="rect" id="Node000030" href="$classMixture.html#a33d79d9955d53bc7d456da143a35a89c" title=" " alt="" coords="626,1039,818,1067"/>
+<area shape="poly" id="edge29_Node000001_Node000030" title=" " alt="" coords="960,2050,949,1842,927,1533,912,1378,894,1241,873,1137,862,1102,850,1081,835,1069,819,1061,817,1056,838,1065,854,1078,867,1100,879,1135,900,1240,918,1377,933,1533,954,1842,965,2050"/>
+<area shape="rect" id="Node000031" href="$classMixEuler.html#af0126af5ebf1e34d1c56166cfc0ad0f0" title=" " alt="" coords="604,1091,840,1119"/>
+<area shape="poly" id="edge30_Node000001_Node000031" title=" " alt="" coords="960,2050,948,1852,926,1559,911,1412,893,1282,873,1184,862,1152,850,1132,840,1122,839,1117,854,1129,866,1149,878,1183,898,1281,916,1411,931,1558,954,1851,965,2050"/>
+<area shape="rect" id="Node000032" href="$classMixEulerHomogeneous.html#a8d27d6caacfffe91206f754154906399" title=" " alt="" coords="632,1143,811,1187"/>
+<area shape="poly" id="edge31_Node000001_Node000032" title=" " alt="" coords="962,2050,961,1878,957,1755,949,1623,936,1490,916,1369,903,1316,887,1269,870,1231,850,1201,832,1186,813,1176,811,1171,835,1182,854,1198,875,1228,892,1267,908,1314,921,1368,941,1490,954,1622,962,1755,966,1878,967,2051"/>
+<area shape="rect" id="Node000033" href="$classMixExtendedNavierStokesKorteweg1D.html#a040b134499a14cd553fb3bf254f50ea9" title=" " alt="" coords="591,1212,852,1257"/>
+<area shape="poly" id="edge32_Node000001_Node000033" title=" " alt="" coords="961,2050,959,1890,945,1655,931,1534,912,1424,885,1332,869,1297,850,1271,840,1260,838,1254,854,1267,873,1295,890,1331,917,1422,936,1534,950,1655,964,1890,966,2051"/>
+<area shape="rect" id="Node000034" href="$classMixNEq.html#a088cf206082bf478faf7582b5773574b" title=" " alt="" coords="607,1280,836,1308"/>
+<area shape="poly" id="edge33_Node000001_Node000034" title=" " alt="" coords="961,2050,958,1899,943,1679,930,1566,910,1463,884,1379,868,1347,850,1323,838,1311,836,1306,854,1319,873,1344,889,1377,915,1462,935,1566,949,1679,963,1898,966,2051"/>
+<area shape="rect" id="Node000035" href="$classMixPTUEq.html#a8ccf97cb09ed22250e557d25f8637083" title=" " alt="" coords="599,1332,844,1360"/>
+<area shape="poly" id="edge34_Node000001_Node000035" title=" " alt="" coords="961,2050,956,1908,940,1704,926,1600,907,1504,882,1427,867,1397,850,1375,838,1363,836,1358,854,1371,871,1394,887,1425,912,1503,931,1599,945,1703,961,1907,966,2051"/>
+<area shape="rect" id="Node000036" href="$classMixture.html#aefbe7758c7901451965ab3549a014dc8" title=" " alt="" coords="607,1384,836,1412"/>
+<area shape="poly" id="edge35_Node000001_Node000036" title=" " alt="" coords="960,2050,954,1917,937,1729,923,1633,904,1546,880,1474,866,1447,850,1427,838,1415,836,1410,854,1423,870,1444,885,1472,909,1544,928,1632,942,1728,959,1917,966,2051"/>
+<area shape="rect" id="Node000037" href="$classMixUEq.html#a55ebcee2d430a1344126bd577fb29fef" title=" " alt="" coords="607,1436,836,1464"/>
+<area shape="poly" id="edge36_Node000001_Node000037" title=" " alt="" coords="960,2050,952,1926,934,1753,919,1666,901,1586,878,1521,865,1496,850,1478,837,1466,836,1461,854,1474,869,1493,883,1519,906,1584,925,1665,939,1753,957,1926,965,2051"/>
+<area shape="rect" id="Node000038" href="$classMixUEqTotEnergy.html#ad77efac413a2940341e1bd0356485f63" title=" " alt="" coords="622,1488,821,1533"/>
+<area shape="poly" id="edge37_Node000001_Node000038" title=" " alt="" coords="959,2050,948,1939,928,1788,913,1711,895,1642,874,1585,850,1547,836,1535,822,1526,820,1521,839,1531,854,1543,879,1583,900,1640,918,1710,933,1787,954,1939,964,2050"/>
+<area shape="rect" id="Node000039" href="$classMixEuler.html#a1662204b9d09700cbce76e4868958fd6" title="Copy mixture in mixture attributes." alt="" coords="638,1556,805,1584"/>
+<area shape="poly" id="edge38_Node000001_Node000039" title=" " alt="" coords="958,2050,947,1949,926,1812,911,1743,894,1681,873,1631,850,1598,830,1583,807,1575,805,1570,832,1578,854,1594,878,1628,899,1680,916,1742,931,1811,952,1948,964,2051"/>
+<area shape="rect" id="Node000040" href="$classMixEulerHomogeneous.html#a24d6432b488289b4ce1ba732b21190ae" title="Copy mixture in mixture attributes." alt="" coords="636,1608,808,1653"/>
+<area shape="poly" id="edge39_Node000001_Node000040" title=" " alt="" coords="957,2050,943,1963,920,1848,888,1738,870,1695,850,1667,831,1652,809,1642,807,1637,833,1648,854,1663,875,1693,893,1736,925,1846,948,1962,962,2051"/>
+<area shape="rect" id="Node000041" href="$classMixExtendedNavierStokesKorteweg1D.html#a6aaf48b23cacbb7440b27b5c078f4199" title="Copy mixture in mixture attributes." alt="" coords="591,1677,852,1722"/>
+<area shape="poly" id="edge40_Node000001_Node000041" title=" " alt="" coords="961,2050,955,1986,938,1901,924,1856,905,1812,881,1772,851,1736,838,1725,836,1720,854,1732,885,1769,910,1810,929,1854,944,1899,960,1985,966,2051"/>
+<area shape="rect" id="Node000042" href="$classMixNEq.html#afeccb9a87940f907dbd751204fadf50d" title="Copy mixture in mixture attributes." alt="" coords="642,1746,802,1774"/>
+<area shape="poly" id="edge41_Node000001_Node000042" title=" " alt="" coords="959,2050,951,1994,933,1923,919,1886,901,1850,878,1817,851,1788,828,1774,803,1766,801,1761,830,1769,854,1784,882,1813,905,1847,924,1884,938,1921,956,1993,964,2051"/>
+<area shape="rect" id="Node000043" href="$classMixPTUEq.html#a1bed2ba6388fde2e241fcf2403c7af1d" title="Copy mixture in mixture attributes." alt="" coords="634,1798,810,1826"/>
+<area shape="poly" id="edge42_Node000001_Node000043" title=" " alt="" coords="956,2050,945,2004,925,1947,894,1889,874,1863,851,1840,831,1829,811,1821,809,1816,834,1824,854,1836,878,1859,899,1886,930,1945,950,2003,962,2051"/>
+<area shape="rect" id="Node000044" href="$classMixture.html#a57cb46154de05a4264f2496709e53acc" title="Copy mixture in mixture attributes." alt="" coords="642,1850,802,1878"/>
+<area shape="poly" id="edge43_Node000001_Node000044" title=" " alt="" coords="953,2051,939,2015,917,1971,888,1928,851,1892,827,1880,803,1872,801,1867,829,1875,854,1888,892,1925,922,1969,944,2013,958,2051"/>
+<area shape="rect" id="Node000046" href="$classMixUEq.html#a8c0dc2a7d7f826709b0b10c4b4ed528c" title="Copy mixture in mixture attributes." alt="" coords="642,1902,802,1930"/>
+<area shape="poly" id="edge45_Node000001_Node000046" title=" " alt="" coords="947,2053,908,1997,882,1968,851,1945,827,1933,804,1926,801,1921,829,1928,854,1940,885,1964,913,1994,952,2052"/>
+<area shape="rect" id="Node000047" href="$classMixUEqTotEnergy.html#adf451e5c66bacff8a32fdec4481dd106" title="Copy mixture in mixture attributes." alt="" coords="610,1954,833,1982"/>
+<area shape="poly" id="edge46_Node000001_Node000047" title=" " alt="" coords="936,2056,898,2025,851,1997,819,1985,817,1980,853,1992,901,2021,941,2055"/>
+<area shape="rect" id="Node000048" href="$classMixEuler.html#a98e1a40df2927a2a01c6f1dbe1801740" title=" " alt="" coords="641,2006,802,2034"/>
+<area shape="poly" id="edge47_Node000001_Node000048" title=" " alt="" coords="905,2062,852,2048,804,2036,802,2032,853,2042,909,2060"/>
+<area shape="rect" id="Node000049" href="$classMixEulerHomogeneous.html#afe7745da27f0cd57ff107a9e77ac7cbe" title=" " alt="" coords="636,2057,808,2102"/>
+<area shape="poly" id="edge48_Node000001_Node000049" title=" " alt="" coords="882,2081,810,2082,807,2077,887,2078"/>
+<area shape="rect" id="Node000050" href="$classMixExtendedNavierStokesKorteweg1D.html#a4aae9491abd7bb78e07b5ec1c308d282" title=" " alt="" coords="591,2127,852,2171"/>
+<area shape="poly" id="edge49_Node000001_Node000050" title=" " alt="" coords="903,2100,853,2117,812,2128,809,2124,852,2112,907,2097"/>
+<area shape="rect" id="Node000051" href="$classMixNEq.html#a31f7496f107eafe9f9a102d8817079bd" title=" " alt="" coords="644,2195,799,2223"/>
+<area shape="poly" id="edge50_Node000001_Node000051" title=" " alt="" coords="942,2108,906,2149,881,2169,854,2186,827,2197,801,2203,798,2199,826,2192,851,2181,878,2165,902,2145,945,2103"/>
+<area shape="rect" id="Node000052" href="$classMixPTUEq.html#a3b33de308b42686b79150aac92112b45" title=" " alt="" coords="636,2247,807,2275"/>
+<area shape="poly" id="edge51_Node000001_Node000052" title=" " alt="" coords="950,2110,916,2174,888,2208,854,2237,832,2248,809,2255,806,2251,830,2243,851,2232,884,2205,911,2171,953,2106"/>
+<area shape="rect" id="Node000053" href="$classMixture.html#a1abbc15401dbcccf10596892d415fd05" title=" " alt="" coords="644,2299,799,2327"/>
+<area shape="poly" id="edge52_Node000001_Node000053" title=" " alt="" coords="958,2106,946,2150,925,2199,894,2248,875,2270,854,2289,828,2303,801,2311,798,2306,826,2298,851,2284,872,2266,890,2244,920,2196,941,2148,956,2111"/>
+<area shape="rect" id="Node000054" href="$classMixUEq.html#abc4c684f73625d85df6a7578cbeed1bf" title=" " alt="" coords="644,2351,799,2379"/>
+<area shape="poly" id="edge53_Node000001_Node000054" title=" " alt="" coords="961,2107,952,2160,933,2223,901,2287,879,2315,854,2340,828,2355,801,2364,798,2359,826,2351,851,2336,875,2312,896,2284,928,2221,947,2159,959,2112"/>
+<area shape="rect" id="Node000055" href="$classMixUEqTotEnergy.html#adb28666adf4c542b5798d34cb4cc441c" title=" " alt="" coords="613,2403,830,2431"/>
+<area shape="poly" id="edge54_Node000001_Node000055" title=" " alt="" coords="963,2107,958,2170,940,2246,926,2286,907,2325,883,2361,854,2392,833,2406,829,2402,851,2388,879,2358,903,2323,921,2284,935,2245,953,2169,961,2112"/>
+<area shape="rect" id="Node000056" href="$classMixEuler.html#abebb001aed21a98d65b7c9b90030cac3" title=" " alt="" coords="642,2455,801,2483"/>
+<area shape="poly" id="edge55_Node000001_Node000056" title=" " alt="" coords="965,2107,963,2178,947,2269,933,2317,914,2364,887,2407,854,2444,830,2460,803,2468,800,2464,828,2455,851,2440,883,2404,909,2361,928,2315,942,2268,957,2178,963,2112"/>
+<area shape="rect" id="Node000057" href="$classMixEulerHomogeneous.html#a9129da2402123e41cf32ae3ca0b87052" title=" " alt="" coords="636,2507,808,2551"/>
+<area shape="poly" id="edge56_Node000001_Node000057" title=" " alt="" coords="961,2106,948,2197,925,2313,893,2423,875,2467,854,2496,833,2512,810,2522,807,2518,831,2507,850,2492,870,2464,888,2422,920,2312,943,2196,959,2111"/>
+<area shape="rect" id="Node000058" href="$classMixExtendedNavierStokesKorteweg1D.html#a8844c31d7bbd4a6756029e90ec91666d" title=" " alt="" coords="591,2576,852,2621"/>
+<area shape="poly" id="edge57_Node000001_Node000058" title=" " alt="" coords="962,2106,951,2211,930,2347,915,2416,898,2479,877,2530,854,2565,840,2577,836,2574,850,2562,873,2528,892,2477,910,2415,924,2346,946,2210,960,2111"/>
+<area shape="rect" id="Node000059" href="$classMixNEq.html#acd4009940b348860b3c10b4ede18628c" title=" " alt="" coords="646,2644,798,2672"/>
+<area shape="poly" id="edge58_Node000001_Node000059" title=" " alt="" coords="963,2106,955,2224,936,2382,921,2462,903,2535,881,2594,868,2617,854,2635,828,2652,800,2660,797,2656,826,2647,851,2631,864,2614,876,2592,898,2533,916,2461,930,2381,950,2223,961,2111"/>
+<area shape="rect" id="Node000060" href="$classMixPTUEq.html#a986635d1f3c87c2214e31e3c19fcf007" title=" " alt="" coords="638,2696,806,2724"/>
+<area shape="poly" id="edge59_Node000001_Node000060" title=" " alt="" coords="963,2106,957,2233,939,2406,924,2495,906,2575,883,2641,869,2666,854,2686,832,2701,808,2710,805,2706,830,2697,850,2682,865,2663,878,2638,901,2573,919,2493,933,2406,952,2233,962,2112"/>
+<area shape="rect" id="Node000061" href="$classMixture.html#a38da5fe4924497531a47aa87922d8ed4" title=" " alt="" coords="646,2748,798,2776"/>
+<area shape="poly" id="edge60_Node000001_Node000061" title=" " alt="" coords="964,2107,959,2243,942,2432,928,2528,909,2616,885,2688,870,2716,854,2738,829,2755,800,2764,797,2760,826,2750,850,2734,866,2713,880,2686,904,2615,923,2527,937,2431,954,2243,962,2112"/>
+<area shape="rect" id="Node000062" href="$classMixUEq.html#a7cc9067780e129f522600ae0e17f605e" title=" " alt="" coords="646,2800,798,2828"/>
+<area shape="poly" id="edge61_Node000001_Node000062" title=" " alt="" coords="964,2106,961,2252,945,2456,931,2561,912,2657,887,2736,872,2766,854,2790,829,2807,800,2816,797,2812,826,2803,850,2786,867,2764,882,2734,907,2656,926,2560,940,2456,956,2252,963,2111"/>
+<area shape="rect" id="Node000063" href="$classMixUEqTotEnergy.html#a4dcd85e01ef8b68861dd0ec8417e25fb" title=" " alt="" coords="614,2852,829,2880"/>
+<area shape="poly" id="edge62_Node000001_Node000063" title=" " alt="" coords="964,2106,963,2261,949,2481,935,2595,915,2698,889,2783,873,2816,854,2842,832,2858,828,2854,850,2838,868,2814,884,2781,910,2697,930,2594,943,2481,958,2261,963,2111"/>
+<area shape="rect" id="Node000064" href="$classMixEuler.html#acd1da9d61c334c01bd4fd6e67293da1d" title=" " alt="" coords="626,2904,817,2932"/>
+<area shape="poly" id="edge63_Node000001_Node000064" title=" " alt="" coords="965,2107,965,2271,960,2384,952,2507,938,2628,918,2739,891,2831,874,2867,854,2894,838,2907,819,2915,816,2911,835,2902,850,2890,869,2864,886,2829,913,2738,933,2627,947,2506,955,2384,960,2271,963,2112"/>
+<area shape="rect" id="Node000065" href="$classMixEulerHomogeneous.html#a8e5327424aafe0675a7916c6b722bd88" title=" " alt="" coords="636,2956,808,3001"/>
+<area shape="poly" id="edge64_Node000001_Node000065" title=" " alt="" coords="965,2107,966,2279,962,2400,953,2530,940,2660,920,2779,892,2878,874,2916,854,2945,834,2962,810,2973,807,2968,831,2958,850,2942,870,2913,887,2876,915,2778,935,2659,948,2529,956,2399,960,2279,963,2112"/>
+<area shape="rect" id="Node000066" href="$classMixExtendedNavierStokesKorteweg1D.html#a1456ff069b0da13c4d9fffa9cb5d703f" title=" " alt="" coords="591,3025,852,3070"/>
+<area shape="poly" id="edge65_Node000001_Node000066" title=" " alt="" coords="963,2106,953,2304,930,2591,914,2736,897,2864,877,2961,866,2994,854,3015,841,3027,837,3023,850,3011,861,2992,872,2959,891,2863,909,2735,924,2591,947,2303,961,2111"/>
+<area shape="rect" id="Node000067" href="$classMixNEq.html#af552e6c90ec86f1c80a0db89dabf2376" title=" " alt="" coords="630,3094,813,3122"/>
+<area shape="poly" id="edge66_Node000001_Node000067" title=" " alt="" coords="963,2107,955,2318,933,2628,918,2784,900,2922,879,3027,867,3062,854,3084,836,3099,815,3107,812,3103,833,3094,850,3081,862,3060,874,3025,895,2921,912,2784,928,2628,949,2318,962,2112"/>
+<area shape="rect" id="Node000068" href="$classMixPTUEq.html#afe0c6e20422217aa48df7d9f0656b8ff" title=" " alt="" coords="622,3146,821,3174"/>
+<area shape="poly" id="edge67_Node000001_Node000068" title=" " alt="" coords="963,2107,955,2327,934,2653,919,2818,901,2964,880,3074,868,3112,854,3135,840,3147,824,3155,820,3151,837,3143,850,3131,863,3109,875,3073,896,2963,914,2818,929,2653,950,2327,962,2112"/>
+<area shape="rect" id="Node000069" href="$classMixture.html#a9f4de59b05a411578000728076b8d9da" title=" " alt="" coords="630,3198,813,3226"/>
+<area shape="poly" id="edge68_Node000001_Node000069" title=" " alt="" coords="964,2107,956,2337,936,2679,921,2853,903,3006,881,3123,868,3162,854,3187,836,3201,815,3210,812,3206,833,3197,850,3183,863,3160,876,3121,897,3005,916,2852,931,2679,951,2336,962,2112"/>
+<area shape="rect" id="Node000070" href="$classMixUEq.html#af4a4663aacfbf0d44c574a061179879f" title=" " alt="" coords="630,3250,813,3278"/>
+<area shape="poly" id="edge69_Node000001_Node000070" title=" " alt="" coords="964,2107,957,2346,938,2705,923,2888,904,3049,882,3171,869,3213,854,3239,836,3253,815,3262,812,3258,833,3249,850,3235,864,3211,877,3170,899,3048,918,2887,932,2705,952,2346,962,2112"/>
+<area shape="rect" id="Node000071" href="$classMixUEqTotEnergy.html#acfa4c3b2e1fa274de814e470f09ce1c1" title=" " alt="" coords="624,3301,820,3346"/>
+<area shape="poly" id="edge70_Node000001_Node000071" title=" " alt="" coords="964,2107,957,2355,938,2731,923,2922,905,3091,882,3219,869,3263,854,3291,839,3304,822,3314,819,3310,836,3300,850,3287,864,3261,877,3218,899,3090,918,2921,933,2730,952,2355,962,2112"/>
+<area shape="rect" id="Node000072" href="$classMixEuler.html#ad01556fa51900a66a8e2d68389dabc07" title=" " alt="" coords="654,3370,789,3398"/>
+<area shape="poly" id="edge71_Node000001_Node000072" title=" " alt="" coords="964,2107,959,2368,942,2766,927,2969,908,3149,884,3285,870,3332,854,3360,841,3372,825,3380,791,3389,788,3384,823,3375,838,3367,850,3357,865,3329,879,3284,903,3148,922,2969,936,2766,954,2368,962,2112"/>
+<area shape="rect" id="Node000073" href="$classMixEulerHomogeneous.html#ad733446bc136bbb064fa445c6abe646b" title=" " alt="" coords="636,3421,808,3466"/>
+<area shape="poly" id="edge72_Node000001_Node000073" title=" " alt="" coords="964,2106,959,2375,942,2790,927,3001,908,3189,884,3332,870,3380,854,3411,834,3428,809,3439,807,3434,831,3424,850,3407,865,3378,879,3330,903,3188,922,3001,936,2789,954,2375,962,2111"/>
+<area shape="rect" id="Node000074" href="$classMixNEq.html#aa3dfef465e1f72803c742890b5559c31" title=" " alt="" coords="658,3490,785,3518"/>
+<area shape="poly" id="edge73_Node000001_Node000074" title=" " alt="" coords="964,2106,961,2389,945,2826,931,3049,912,3247,900,3330,887,3398,872,3449,854,3480,840,3492,823,3501,787,3509,785,3504,821,3496,837,3488,850,3477,867,3447,882,3396,895,3329,907,3246,926,3049,940,2826,956,2389,963,2112"/>
+<area shape="rect" id="Node000075" href="$classMixPTUEq.html#a6ba6866c76e6f8921f7bd1a598e0d829" title=" " alt="" coords="650,3542,793,3570"/>
+<area shape="poly" id="edge74_Node000001_Node000075" title=" " alt="" coords="964,2107,962,2399,946,2852,933,3084,913,3289,901,3374,888,3445,872,3498,854,3531,827,3550,795,3559,793,3554,825,3546,850,3527,867,3496,882,3444,896,3373,908,3288,927,3083,941,2852,957,2399,963,2112"/>
+<area shape="rect" id="Node000076" href="$classMixture.html#a64c907b3aa7a826f43096fc01f7eeb05" title=" " alt="" coords="658,3594,785,3622"/>
+<area shape="poly" id="edge75_Node000001_Node000076" title=" " alt="" coords="964,2106,963,2407,948,2876,934,3117,915,3331,903,3420,889,3494,873,3549,854,3583,840,3595,823,3604,787,3612,785,3607,821,3599,837,3591,850,3579,868,3547,883,3492,897,3419,909,3330,929,3117,943,2876,957,2406,963,2111"/>
+<area shape="rect" id="Node000077" href="$classMixUEq.html#a31bccacb6c92fb167e9881c1a0d0fef5" title=" " alt="" coords="658,3646,785,3674"/>
+<area shape="poly" id="edge76_Node000001_Node000077" title=" " alt="" coords="965,2106,963,2416,950,2903,936,3152,916,3374,904,3466,890,3542,873,3600,854,3635,840,3647,823,3656,786,3665,785,3659,821,3651,837,3643,850,3631,868,3598,884,3541,899,3465,911,3373,931,3152,944,2903,958,2416,963,2112"/>
+<area shape="rect" id="Node000078" href="$classMixEuler.html#a92763da805a2c83f1bc2877237867ea1" title=" " alt="" coords="656,3698,787,3726"/>
+<area shape="poly" id="edge77_Node000001_Node000078" title=" " alt="" coords="965,2106,964,2425,951,2928,938,3187,918,3416,905,3512,891,3591,874,3650,854,3687,840,3699,824,3708,788,3716,787,3711,822,3703,837,3695,850,3683,869,3648,885,3590,900,3511,913,3415,932,3186,946,2928,959,2425,963,2111"/>
+<area shape="rect" id="Node000079" href="$classMixEulerHomogeneous.html#a2af97e1aae1e97d53f4b6bb373c7961e" title=" " alt="" coords="636,3749,808,3794"/>
+<area shape="poly" id="edge78_Node000001_Node000079" title=" " alt="" coords="965,2106,964,2434,951,2953,938,3220,918,3457,905,3557,891,3639,874,3700,854,3739,834,3756,809,3767,807,3762,831,3752,850,3735,869,3699,885,3638,900,3556,912,3457,932,3220,946,2953,959,2434,963,2111"/>
+<area shape="rect" id="Node000080" href="$classMixNEq.html#aff13035b06a2eeb44f1205c3a9387903" title=" " alt="" coords="660,3818,783,3846"/>
+<area shape="poly" id="edge79_Node000001_Node000080" title=" " alt="" coords="965,2106,966,2447,963,2706,955,2989,942,3268,922,3516,909,3619,893,3705,875,3769,854,3808,839,3821,822,3830,784,3838,783,3832,820,3825,836,3816,850,3805,870,3767,888,3704,903,3619,917,3515,937,3268,950,2989,957,2706,961,2447,963,2111"/>
+<area shape="rect" id="Node000081" href="$classMixPTUEq.html#a48630ed8eb703b67a854f72cb335243b" title=" " alt="" coords="652,3870,791,3898"/>
+<area shape="poly" id="edge80_Node000001_Node000081" title=" " alt="" coords="965,2107,967,2456,964,2723,956,3014,943,3302,923,3557,910,3664,894,3752,876,3818,854,3859,841,3870,826,3879,792,3888,791,3883,824,3874,838,3866,850,3855,871,3816,889,3751,904,3663,918,3557,938,3301,951,3014,958,2723,961,2456,963,2112"/>
+<area shape="rect" id="Node000082" href="$classMixture.html#a948e711a3f9565c67ddccf0606b7cd8f" title=" " alt="" coords="660,3922,783,3950"/>
+<area shape="poly" id="edge81_Node000001_Node000082" title=" " alt="" coords="964,2107,954,2477,931,3069,915,3369,897,3630,877,3821,866,3880,855,3911,840,3924,822,3933,784,3941,783,3936,820,3928,837,3919,850,3907,861,3879,872,3820,892,3630,910,3369,926,3068,949,2477,962,2112"/>
+<area shape="rect" id="Node000083" href="$classMixUEq.html#a298c077b989cbf6b552769214cf710d4" title=" " alt="" coords="660,3974,783,4002"/>
+<area shape="poly" id="edge82_Node000001_Node000083" title=" " alt="" coords="964,2106,955,2486,932,3095,916,3404,898,3674,878,3870,867,3931,855,3963,840,3976,822,3985,784,3993,783,3988,820,3980,837,3971,850,3959,861,3930,872,3870,893,3673,911,3404,927,3095,949,2486,962,2111"/>
+<area shape="rect" id="Node000009" href="$classCellO2NS.html#acb11905b22c6c99a2e60ce58f4ce35a8" title="Compute global variable buffers (min, max, etc.) and initialize speficic gradient vectors for 2nd&#45;ord..." alt="" coords="311,368,543,413"/>
+<area shape="poly" id="edge8_Node000008_Node000009" title=" " alt="" coords="609,414,545,406,542,402,614,410"/>
+<area shape="rect" id="Node000010" href="$classGeometricalDomain.html#ac2ab7410933fb899d5adf9ffc84448f8" title="Generic geometrical constructor." alt="" coords="347,437,507,482"/>
+<area shape="poly" id="edge9_Node000008_Node000010" title=" " alt="" coords="610,440,509,452,506,448,613,436"/>
+<area shape="rect" id="Node000011" href="$classGDCuboid.html#ae005e1ee3580c4927ae3350d07946fe0" title="Geometrical constructor from a XML format reading." alt="" coords="54,207,214,235"/>
+<area shape="poly" id="edge10_Node000010_Node000011" title=" " alt="" coords="330,442,309,427,292,404,285,381,285,335,286,313,285,291,277,270,261,250,239,235,215,226,212,222,241,230,264,246,282,268,290,290,292,313,290,335,290,380,297,402,313,423,335,440"/>
+<area shape="rect" id="Node000012" href="$classGDCylinder.html#ac3d955a7528c78e1762b0249e9d73fab" title="Geometrical constructor from a XML format reading." alt="" coords="45,259,223,287"/>
+<area shape="poly" id="edge11_Node000010_Node000012" title=" " alt="" coords="330,441,309,427,296,411,289,394,285,362,281,331,274,316,261,302,243,290,224,282,221,277,245,285,264,298,278,313,286,329,290,361,294,393,300,408,312,423,335,439"/>
+<area shape="rect" id="Node000013" href="$classGDDisc.html#a839cc8111b239a4fee19bbc5f4b88088" title="Geometrical constructor from a XML format reading." alt="" coords="71,311,197,339"/>
+<area shape="poly" id="edge12_Node000010_Node000013" title=" " alt="" coords="330,439,309,427,292,408,285,389,277,371,261,354,230,339,198,330,195,326,232,334,264,350,282,368,290,387,297,405,312,423,334,437"/>
+<area shape="rect" id="Node000014" href="$classGDEllipse.html#a080e270682ab4d2bc429548ab403d8a2" title="Geometrical constructor from a XML format reading." alt="" coords="56,363,212,391"/>
+<area shape="poly" id="edge13_Node000010_Node000014" title=" " alt="" coords="330,434,310,427,262,406,214,393,211,388,264,401,312,423,335,431"/>
+<area shape="rect" id="Node000015" href="$classGDEllipsoid.html#abee51c896552fe04b8ee3d2cbbe69bf7" title="Geometrical constructor from a XML format reading." alt="" coords="44,415,224,443"/>
+<area shape="poly" id="edge14_Node000010_Node000015" title=" " alt="" coords="329,451,226,440,223,436,333,448"/>
+<area shape="rect" id="Node000016" href="$classGDEntireDomain.html#a92e368eb0d10c98e2a056e8cb9c260e2" title="Geometrical constructor for the entire geometrical domain." alt="" coords="36,467,232,511"/>
+<area shape="poly" id="edge15_Node000010_Node000016" title=" " alt="" coords="329,471,235,481,231,477,333,467"/>
+<area shape="rect" id="Node000017" href="$classGDEntireDomainWithParticularities.html#a968c12900444a20959e1932786766758" title="Geometrical constructor for the entire geometrical domain with particularities involved." alt="" coords="5,536,263,581"/>
+<area shape="poly" id="edge16_Node000010_Node000017" title=" " alt="" coords="356,491,264,526,226,537,222,534,262,521,359,486"/>
+<area shape="rect" id="Node000018" href="$classGDHalfSpace.html#a1aa535cd33a5d4aa220248c3fd7093fe" title="Geometrical constructor from a XML format reading." alt="" coords="33,604,235,632"/>
+<area shape="poly" id="edge17_Node000010_Node000018" title=" " alt="" coords="393,496,338,548,302,574,264,595,236,606,231,602,262,591,299,569,335,543,396,491"/>
+<area shape="rect" id="Node000019" href="$classGDRectangle.html#a38702a092fd41cafd820a358b937983d" title="Geometrical constructor from a XML format reading." alt="" coords="34,656,234,684"/>
+<area shape="poly" id="edge18_Node000010_Node000019" title=" " alt="" coords="403,498,382,533,349,573,309,613,264,646,236,658,232,655,261,641,306,609,345,570,377,530,405,493"/>
+<area shape="rect" id="Node000020" href="$classGDSphere.html#a9a289bbc649e00d792778f77a310dbc3" title="Geometrical constructor from a XML format reading." alt="" coords="54,708,214,736"/>
+<area shape="poly" id="edge19_Node000010_Node000020" title=" " alt="" coords="410,499,391,544,358,599,316,653,291,677,264,698,240,710,216,717,212,714,238,705,261,693,288,673,312,649,354,596,386,542,411,494"/>
+<area shape="rect" id="Node000045" href="$classCellO2NS.html#a3db0ad3ae17d1fd75b2a2511466483de" title=" " alt="" coords="326,1850,528,1878"/>
+<area shape="poly" id="edge44_Node000044_Node000045" title=" " alt="" coords="624,1865,530,1866,526,1862,628,1862"/>
+</map>

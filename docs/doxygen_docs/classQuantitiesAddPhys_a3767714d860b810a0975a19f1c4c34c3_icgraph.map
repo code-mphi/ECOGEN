@@ -1,0 +1,15 @@
+<map id="QuantitiesAddPhys::setTurbulentViscosity" name="QuantitiesAddPhys::setTurbulentViscosity">
+<area shape="rect" id="Node000001" title="Set the turbulent viscosity in the cell." alt="" coords="843,125,1004,170"/>
+<area shape="rect" id="Node000002" href="$classAPETurbulenceSmagorinsky.html#a6e817af37596df5108d8ee4b28b3d040" title="Solve the turbulence flux between two cells." alt="" coords="580,79,780,123"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="825,129,780,123,781,118,831,129"/>
+<area shape="rect" id="Node000006" href="$classAPETurbulenceSmagorinsky.html#a76996e26f71b362be043f31b15f75f4e" title="Solve the turbulence flux at a boundary with a wall type in MRF case." alt="" coords="565,160,795,205"/>
+<area shape="poly" id="edge6_Node000001_Node000006" title=" " alt="" coords="830,161,796,169,795,163,825,162"/>
+<area shape="rect" id="Node000003" href="$classAPETurbulenceSmagorinsky.html#ace332da69a5170c4b1707c7490757d67" title="Solve the additional physics flux between two cells." alt="" coords="290,5,490,50"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="572,75,482,53,482,48,577,74"/>
+<area shape="rect" id="Node000004" href="$classAPETurbulenceSmagorinsky.html#a55ba60bfe723f2c95a7dd81390295b44" title="Solve the additional physics flux at a domain boundary." alt="" coords="5,125,216,170"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="562,99,421,103,264,116,199,127,198,122,263,110,420,98,567,98"/>
+<area shape="rect" id="Node000005" href="$classAPETurbulenceSmagorinsky.html#a83eec27a8877e2a1a27473f1fe080db6" title="Solve the turbulence flux at a boundary with a non&#45;reflecting type." alt="" coords="264,125,517,170"/>
+<area shape="poly" id="edge4_Node000002_Node000005" title=" " alt="" coords="567,119,518,130,517,125,562,120"/>
+<area shape="poly" id="edge5_Node000005_Node000004" title=" " alt="" coords="246,148,217,150,216,145,251,147"/>
+<area shape="poly" id="edge7_Node000006_Node000004" title=" " alt="" coords="547,190,411,194,263,185,197,173,197,168,264,180,411,188,552,190"/>
+</map>

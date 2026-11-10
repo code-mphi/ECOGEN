@@ -1,17 +1,15 @@
 <map id="FluxEuler::addFluxSmooth1D" name="FluxEuler::addFluxSmooth1D">
-<area shape="rect" id="Node000001" title="Compute additionnal flux for 1D geometry with smooth varying cross sectionFlux)." alt="" coords="5,129,216,155"/>
-<area shape="rect" id="Node000002" href="$classCell.html#af2d48073a332d621b69fb257eeb6de6c" title=" " alt="" coords="280,5,395,31"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="127,127,185,85,263,40,278,33,280,38,265,44,188,90,130,131"/>
-<area shape="rect" id="Node000003" href="$classPhase.html#a2beeaa383c32c5866ea59a1b20a44662" title=" " alt="" coords="264,55,411,80"/>
-<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="150,127,284,82,286,87,151,132"/>
-<area shape="rect" id="Node000005" href="$classCoord.html#a04d74e2f155904844fb90cf8aac3579f" title="Return the value in the x&#45;direction of the Coord object." alt="" coords="288,104,387,129"/>
-<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="216,128,274,121,274,126,216,133"/>
-<area shape="rect" id="Node000006" href="$classCoord.html#a11fc116d47c56756eab2081beca0a702" title="Return the value in the y&#45;direction of the Coord object." alt="" coords="289,153,386,179"/>
-<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="216,151,275,157,275,162,216,156"/>
-<area shape="rect" id="Node000007" href="$classCoord.html#a9d218af09beeed332daba65312b8abad" title="Return the value in the z&#45;direction of the Coord object." alt="" coords="288,203,387,228"/>
-<area shape="poly" id="edge6_Node000001_Node000007" title=" " alt="" coords="152,152,285,196,283,201,150,157"/>
-<area shape="rect" id="Node000008" href="$classCoord.html#a380746a7501edbeef25d07f6d53735ce" title="Set the value in the x&#45;direction of the Coord object." alt="" coords="289,252,386,277"/>
-<area shape="poly" id="edge7_Node000001_Node000008" title=" " alt="" coords="131,153,189,193,265,237,283,245,281,250,263,242,186,197,127,157"/>
-<area shape="rect" id="Node000004" href="$classErrors.html#a78eeb532e12787fee07b78aa5ef6a0c6" title=" " alt="" coords="459,55,616,80"/>
-<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="411,65,445,65,445,70,411,70"/>
+<area shape="rect" id="Node000001" title="Compute additionnal flux for 1D geometry with smooth varying cross sectionFlux)." alt="" coords="5,109,216,137"/>
+<area shape="rect" id="Node000002" href="$classCell.html#af2d48073a332d621b69fb257eeb6de6c" title=" " alt="" coords="279,5,394,33"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="136,107,263,43,282,38,277,40,265,48,139,111"/>
+<area shape="rect" id="Node000003" href="$classPhase.html#a2beeaa383c32c5866ea59a1b20a44662" title=" " alt="" coords="264,57,409,85"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="173,106,260,88,256,91,175,111"/>
+<area shape="rect" id="Node000005" href="$classCoord.html#a04d74e2f155904844fb90cf8aac3579f" title="Return the value in the x&#45;direction of the Coord object." alt="" coords="288,109,385,137"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="216,121,275,122,270,124,217,126"/>
+<area shape="rect" id="Node000006" href="$classCoord.html#a11fc116d47c56756eab2081beca0a702" title="Return the value in the y&#45;direction of the Coord object." alt="" coords="288,161,384,189"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="174,135,276,160,271,162,174,140"/>
+<area shape="rect" id="Node000007" href="$classCoord.html#a9d218af09beeed332daba65312b8abad" title="Return the value in the z&#45;direction of the Coord object." alt="" coords="288,213,385,241"/>
+<area shape="poly" id="edge6_Node000001_Node000007" title=" " alt="" coords="138,135,265,198,282,207,277,207,263,203,137,140"/>
+<area shape="rect" id="Node000004" href="$classErrors.html#a5fcdb1d77f9c74188b44ac7d0d05a453" title=" " alt="" coords="457,57,613,85"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="409,69,444,71,439,72,410,74"/>
 </map>

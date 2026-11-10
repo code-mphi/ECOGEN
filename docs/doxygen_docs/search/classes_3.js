@@ -13,5 +13,7 @@ var searchData=
   ['cello2ns_10',['CellO2NS',['../classCellO2NS.html',1,'']]],
   ['chunk_11',['Chunk',['../uniontinyxml2_1_1MemPoolT_1_1Chunk.html',1,'tinyxml2::MemPoolT']]],
   ['config_12',['Config',['../classConfig.html',1,'']]],
-  ['coord_13',['Coord',['../classCoord.html',1,'']]]
+  ['contact_13',['Contact',['../classContact.html',1,'']]],
+  ['contactareas_14',['ContactAreas',['../classContactAreas.html',1,'']]],
+  ['coord_15',['Coord',['../classCoord.html',1,'']]]
 ];

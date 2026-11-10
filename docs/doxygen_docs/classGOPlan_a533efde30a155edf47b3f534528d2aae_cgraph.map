@@ -1,7 +1,10 @@
 <map id="GOPlan::distancePoint" name="GOPlan::distancePoint">
-<area shape="rect" id="Node000001" title="Compute the distance between a vertex and the corresponding geometric object." alt="" coords="5,35,172,60"/>
-<area shape="rect" id="Node000002" href="$classCoord.html#a96c803308eff1b84806d42f789deac80" title="Scalar product between the present vector and vector a." alt="" coords="262,5,369,31"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="172,34,248,24,249,29,172,39"/>
-<area shape="rect" id="Node000003" href="$classCoord.html#a5ab5b6d90f6bc14773a0de7a91fded10" title="Set a vector from the result of the substraction of the vector a from the vector b." alt="" coords="220,55,411,95"/>
-<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="172,55,207,59,206,65,172,60"/>
+<area shape="rect" id="Node000001" title="Compute the distance between a vertex and the corresponding geometric object." alt="" coords="5,36,171,64"/>
+<area shape="rect" id="Node000002" href="$classCoord.html#a96c803308eff1b84806d42f789deac80" title="Scalar product between the present vector and vector a." alt="" coords="261,5,367,33"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="171,36,248,28,243,29,172,41"/>
+<area shape="rect" id="Node000004" href="$classCoord.html#a5ab5b6d90f6bc14773a0de7a91fded10" title="Set a vector from the result of the substraction of the vector a from the vector b." alt="" coords="219,57,409,102"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="171,58,206,65,200,65,171,63"/>
+<area shape="rect" id="Node000003" href="$classCoord.html#add896c4f3fb15b4ad762b5270855345c" title=" " alt="" coords="457,36,562,64"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="368,25,444,39,439,39,367,30"/>
+<area shape="poly" id="edge4_Node000004_Node000003" title=" " alt="" coords="409,62,439,60,445,60,410,67"/>
 </map>

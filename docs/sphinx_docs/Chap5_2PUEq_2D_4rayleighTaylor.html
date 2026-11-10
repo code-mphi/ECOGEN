@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Rayleigh–Taylor &mdash; ECOGEN 5.0 documentation</title>
+  <title>Rayleigh–Taylor &mdash; ECOGEN 6.0 documentation</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
       <link rel="stylesheet" type="text/css" href="_static/css/theme.css" />
 
@@ -39,7 +39,7 @@
             ECOGEN
           </a>
               <div class="version">
-                5.0
+                6.0
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
@@ -58,9 +58,9 @@
 <li class="toctree-l1 current"><a class="reference internal" href="Chap5_testCases_Chapter.html">Test cases</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="Chap5_1Euler.html">Single-phase test cases</a></li>
 <li class="toctree-l2 current"><a class="reference internal" href="Chap5_2.html">Multiphase test cases</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="Chap5_3NEq.html">Non-equilibrium model</a></li>
 <li class="toctree-l3"><a class="reference internal" href="Chap5_2UEq.html">Velocity-equilibrium model</a></li>
 <li class="toctree-l3"><a class="reference internal" href="Chap5_2UEqTotE.html">Velocity-equilibrium model based on total energies</a></li>
-<li class="toctree-l3"><a class="reference internal" href="Chap5_2UEqSolid.html">Velocity-equilibrium model for solids</a></li>
 <li class="toctree-l3 current"><a class="reference internal" href="Chap5_2PUEq.html">Pressure- and velocity-equilibrium model</a><ul class="current">
 <li class="toctree-l4"><a class="reference internal" href="Chap5_2PUEq_1D.html">1D</a></li>
 <li class="toctree-l4 current"><a class="reference internal" href="Chap5_2PUEq_2D.html">2D</a></li>
@@ -68,13 +68,15 @@
 </li>
 <li class="toctree-l3"><a class="reference internal" href="Chap5_2PTUEq.html">Temperature-, pressure- and velocity-equilibrium model</a></li>
 <li class="toctree-l3"><a class="reference internal" href="Chap5_2eulerHomogeneous.html">Homogeneous Euler</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Chap5_2ENSK1D.html">Extended-Navier-Stokes-Korteweg-1D model</a></li>
 <li class="toctree-l3"><a class="reference internal" href="Chap5_2.html#other-tests-cases">Other tests cases</a></li>
 </ul>
 </li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="Chap6_developersGuide_Chapter.html">Developers</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Chap7_license.html">License</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Chap7_license.html">License and authors</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Chap8_citation.html">Citation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="zBibliography.html">Bibliography</a></li>
 </ul>
 
@@ -115,7 +117,7 @@
 </ul>
 <p>but only one is presented here: same kinematic viscosity.</p>
 <p>This test case is a real two-phase test case because of the different dynamic viscosity. The proposed 2D test case is a rectangle domain with two gases of different densities. The denser of them is located at the top.
-Initial conditions of this test are shown in <a class="reference internal" href="#fig-testcases-pueq-rayleightaylorini"><span class="std std-numref">Fig. 79</span></a>.
+Initial conditions of this test are shown in <a class="reference internal" href="#fig-testcases-pueq-rayleightaylorini"><span class="std std-numref">Fig. 83</span></a>.
 Note that here a initial sinusoidal interface between the two fluids is used and is defined by:</p>
 <div class="math notranslate nohighlight">
 \begin{equation*}
@@ -127,7 +129,7 @@ y(x) = \cfrac{0.05}{k} \mathrm{sin} \left( \cfrac{2πx}{λ} + \cfrac{π}{2} \rig
 <figure class="align-center" id="id1">
 <span id="fig-testcases-pueq-rayleightaylorini"></span><a class="reference internal image-reference" href="_images/rayleighTaylorIni.png"><img alt="_images/rayleighTaylorIni.png" src="_images/rayleighTaylorIni.png" style="width: 141.0px; height: 369.0px;" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 79 </span><span class="caption-text">Initial condition before RT instabilities. Visualization using <a class="reference external" href="https://www.paraview.org/">Paraview</a> software.</span><a class="headerlink" href="#id1" title="Permalink to this image"></a></p>
+<p><span class="caption-number">Fig. 83 </span><span class="caption-text">Initial condition before RT instabilities. Visualization using <a class="reference external" href="https://www.paraview.org/">Paraview</a> software.</span><a class="headerlink" href="#id1" title="Permalink to this image"></a></p>
 </figcaption>
 </figure>
 <p>This test case is present for illustrative purposes. However, it has a strong dependency on the mesh, so it needs a refined mesh to be able to converge to the solution and thus to show correct results.</p>
@@ -184,20 +186,20 @@ At = \cfrac{\rho_h - \rho_l}{\rho_h + \rho_l}
 <p class="admonition-title">Warning</p>
 <p>Do not forget to re-comment part 5 of <em>GDEntireDomainWithParticularities.cpp</em> code when recomputing another test case.</p>
 </div>
-<p>Results are shown in <a class="reference internal" href="#fig-testcases-pueq-rayleightayloranim"><span class="std std-numref">Fig. 80</span></a>.
+<p>Results are shown in <a class="reference internal" href="#fig-testcases-pueq-rayleightayloranim"><span class="std std-numref">Fig. 84</span></a>.
 On the right, density gradient is visualized, and on the left, mixture density is visualized with AMR.
 One remarks that initially the interface between the two fluids is slightly curved when the heavier fluid results in its thrust towards the lighter fluid. Then, as the instability develops its effects, irregularities (“dimples”) propagate downwards in Rayleigh–Taylor polyps. The lighter fluid expands upwards like a mushroom.</p>
 <figure class="align-center" id="id2">
 <span id="fig-testcases-pueq-rayleightayloranim"></span><a class="reference internal image-reference" href="_images/rayleighTaylorAnim.gif"><img alt="_images/rayleighTaylorAnim.gif" src="_images/rayleighTaylorAnim.gif" style="width: 122.0px; height: 707.0px;" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 80 </span><span class="caption-text">RT instabilities ; mixture density (left) and density gradient (right) over time. Visualization using <a class="reference external" href="https://www.paraview.org/">Paraview</a> software.</span><a class="headerlink" href="#id2" title="Permalink to this image"></a></p>
+<p><span class="caption-number">Fig. 84 </span><span class="caption-text">RT instabilities ; mixture density (left) and density gradient (right) over time. Visualization using <a class="reference external" href="https://www.paraview.org/">Paraview</a> software.</span><a class="headerlink" href="#id2" title="Permalink to this image"></a></p>
 </figcaption>
 </figure>
-<p>When the density variations are low or non-existent, the mesh is as coarse as possible (within the conditions given in mesh.xml) as shown in <a class="reference internal" href="#fig-testcases-pueq-rayleightayloranim2"><span class="std std-numref">Fig. 81</span></a>. On the contrary, when the variations become significant, the mesh is refined.</p>
+<p>When the density variations are low or non-existent, the mesh is as coarse as possible (within the conditions given in mesh.xml) as shown in <a class="reference internal" href="#fig-testcases-pueq-rayleightayloranim2"><span class="std std-numref">Fig. 85</span></a>. On the contrary, when the variations become significant, the mesh is refined.</p>
 <figure class="align-center" id="id3">
 <span id="fig-testcases-pueq-rayleightayloranim2"></span><a class="reference internal image-reference" href="_images/rayleighTaylorAnim2.gif"><img alt="_images/rayleighTaylorAnim2.gif" src="_images/rayleighTaylorAnim2.gif" style="width: 442.40000000000003px; height: 426.40000000000003px;" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 81 </span><span class="caption-text">Magnified view of RT instabilities ; mixture density (left) and density gradient (right) over time. Visualization using <a class="reference external" href="https://www.paraview.org/">Paraview</a> software.</span><a class="headerlink" href="#id3" title="Permalink to this image"></a></p>
+<p><span class="caption-number">Fig. 85 </span><span class="caption-text">Magnified view of RT instabilities ; mixture density (left) and density gradient (right) over time. Visualization using <a class="reference external" href="https://www.paraview.org/">Paraview</a> software.</span><a class="headerlink" href="#id3" title="Permalink to this image"></a></p>
 </figcaption>
 </figure>
 </section>
@@ -213,7 +215,7 @@ One remarks that initially the interface between the two fluids is slightly curv
   <hr/>
 
   <div role="contentinfo">
-    <p>&#169; Copyright 2025, code-mphi.</p>
+    <p>&#169; Copyright 2026, code-mphi.</p>
   </div>
 
   Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a

@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Extended-Navier-Stokes-Korteweg-1D model &mdash; ECOGEN 6.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/sphinx_highlight.js"></script>
+        <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Developers" href="Chap6_developersGuide_Chapter.html" />
+    <link rel="prev" title="Homogeneous Euler" href="Chap5_2eulerHomogeneous.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            ECOGEN
+          </a>
+              <div class="version">
+                6.0
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="Chap1_introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Chap2_installation_Chapter.html">Installation instructions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Chap3_IO_Chapter.html">I/O descriptions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Chap4_tutorials_Chapter.html">Tutorials</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="Chap5_testCases_Chapter.html">Test cases</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="Chap5_1Euler.html">Single-phase test cases</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="Chap5_2.html">Multiphase test cases</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="Chap5_3NEq.html">Non-equilibrium model</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Chap5_2UEq.html">Velocity-equilibrium model</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Chap5_2UEqTotE.html">Velocity-equilibrium model based on total energies</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Chap5_2PUEq.html">Pressure- and velocity-equilibrium model</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Chap5_2PTUEq.html">Temperature-, pressure- and velocity-equilibrium model</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Chap5_2eulerHomogeneous.html">Homogeneous Euler</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Extended-Navier-Stokes-Korteweg-1D model</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#equations-of-state">Equations of state</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#tests-cases">Tests cases</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="Chap5_2.html#other-tests-cases">Other tests cases</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="Chap6_developersGuide_Chapter.html">Developers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Chap7_license.html">License and authors</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Chap8_citation.html">Citation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="zBibliography.html">Bibliography</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">ECOGEN</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="Chap5_testCases_Chapter.html">Test cases</a></li>
+          <li class="breadcrumb-item"><a href="Chap5_2.html">Multiphase test cases</a></li>
+      <li class="breadcrumb-item active">Extended-Navier-Stokes-Korteweg-1D model</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/Chap5_2ENSK1D.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="extended-navier-stokes-korteweg-1d-model">
+<h1>Extended-Navier-Stokes-Korteweg-1D model<a class="headerlink" href="#extended-navier-stokes-korteweg-1d-model" title="Permalink to this heading"></a></h1>
+<p>The 1D Extended-Navier-Stokes-Korteweg (ENSK) model is solved in ECOGEN. This model allows to consider compressible flows with capillarity and liquid-vapor phase transition <span id="id1">[<a class="reference internal" href="zBibliography.html#id5" title="Q. Didierlaurent, N. Favrie, and B. Lombard. Numerical investigation of a navier-stokes-korteweg system through an extended lagrangian formulation: nonclassical waves and phase transition problems. Journal of Fluid Mechanics, Submitted, 2026.">DFL26</a>]</span>. The model writes:</p>
+<div class="math notranslate nohighlight">
+\begin{equation}
+\label{system_ENSK}
+\left\{
+{\begin{array}{*{20}{l}}
+  \cfrac{\partial}{\partial t} \rho + \cfrac{\partial}{\partial x} ( \rho u ) = 0, \\
+  \cfrac{\partial}{\partial t} (\rho \, u) + \cfrac{\partial }{\partial x} ( \rho \, u^2 - \sigma_e ) = 0,\\
+  \cfrac{\partial }{\partial t} \left(\cfrac{\rho}{\eta} \right) + \cfrac{\partial }{\partial x} \left( \cfrac{\rho}{\eta} \, u \right) = - \cfrac{\rho}{\eta^2} \, \psi,\\
+  \cfrac{\partial }{\partial t} (\rho \, \psi) + \cfrac{\partial }{\partial x} \left( \rho \, \psi \, u - \varepsilon^2 \, \mathcal{K} \, \phi \right) = \cfrac{\lambda}{\beta} \left( 1 - \cfrac{\eta}{\rho} \right) - \cfrac{\tau \, \mu}{\beta \, \rho^2} \psi,\\
+  \cfrac{\partial }{\partial t} \phi + \cfrac{\partial }{\partial x} ( \phi \, u - \psi ) = 0,\\
+  \cfrac{\partial }{\partial t} (\rho \, E_e) + \cfrac{\partial }{\partial x} ( \rho \, u \, E_e - \sigma_e \, u - \varepsilon^2 \,\mathcal{K} \, \phi \, \psi) = 0,
+\end{array}} \right.\
+\end{equation}</div><p>where <span class="math notranslate nohighlight">\(\rho\)</span>, <span class="math notranslate nohighlight">\(u\)</span> and <span class="math notranslate nohighlight">\(E_e\)</span> are the density, velocity and extended total energy, respectively. The extended stress <span class="math notranslate nohighlight">\(\sigma_e\)</span> and the extended total energy are:</p>
+<div class="math notranslate nohighlight">
+\begin{align}
+  &amp;\sigma_e = - \left( p + \varepsilon^2 \, (\rho \, \mathcal{K}^{\prime} + \mathcal{K} ) \cfrac{\phi^2}{2} + \lambda \, \eta \, \left( 1 - \cfrac{\eta}{\rho} \right) \right),\\
+  &amp;E_e = \cfrac{\beta}{2} \, \psi^2 + \cfrac{1}{2} u^2 + e_h + \cfrac{\varepsilon^2}{2} \cfrac{\mathcal{K}}{\rho} \, \phi^2 + \cfrac{\lambda}{2} \left( 1 - \cfrac{\eta}{\rho} \right)^2,
+\end{align}</div><p>where <span class="math notranslate nohighlight">\(p\)</span> is the thermodynamic pressure and <span class="math notranslate nohighlight">\(e_h\)</span> the internal energy. The parameters <span class="math notranslate nohighlight">\(\varepsilon\)</span> and <span class="math notranslate nohighlight">\(\tau\)</span> control the magnitude of the capillarity and of the viscosity, respectively. The extended variables <span class="math notranslate nohighlight">\(\eta\)</span>, <span class="math notranslate nohighlight">\(\phi\)</span> and <span class="math notranslate nohighlight">\(\psi\)</span> are additional variables close to <span class="math notranslate nohighlight">\(\rho\)</span>, <span class="math notranslate nohighlight">\(\cfrac{\partial \rho }{\partial x}\)</span>, <span class="math notranslate nohighlight">\(\cfrac{d \rho }{d t}\)</span>, provided that the extended parameters <span class="math notranslate nohighlight">\((\lambda,\beta)\)</span> are well-chosen <span id="id2">[<a class="reference internal" href="zBibliography.html#id6" title="Q. Didierlaurent, N. Favrie, and B. Lombard. Solving a singular limit problem arising with euler–korteweg dispersive waves. Studies in Applied Mathematics, 154(1):e70005, 2025. doi:https://doi.org/10.1111/sapm.70005.">DFL25</a>]</span> <span id="id3">[<a class="reference internal" href="zBibliography.html#id5" title="Q. Didierlaurent, N. Favrie, and B. Lombard. Numerical investigation of a navier-stokes-korteweg system through an extended lagrangian formulation: nonclassical waves and phase transition problems. Journal of Fluid Mechanics, Submitted, 2026.">DFL26</a>]</span>. For <span class="math notranslate nohighlight">\(\lambda\)</span> sufficiently large and <span class="math notranslate nohighlight">\(\beta\)</span> sufficiently small, the ENSK model provides a good hyperbolic approximation of the Navier-Stokes-Korteweg model:</p>
+<div class="math notranslate nohighlight">
+\begin{equation}
+\label{system_NSK}
+\left\{
+{\begin{array}{*{20}{l}}
+  \cfrac{\partial }{\partial t} \rho + \cfrac{\partial }{\partial x} (\rho u) = 0, \\
+  \cfrac{\partial }{\partial t} (\rho \, u) + \cfrac{\partial }{\partial x} ( \rho \, u^2 - \sigma ) = 0,\\
+  \cfrac{\partial }{\partial t} (\rho \, E) + \cfrac{\partial }{\partial x} \left( \rho \, u \, E - \sigma \, u - \varepsilon^2 \, \mathcal{K} \, \cfrac{\partial \rho }{\partial x} \, \cfrac{d \rho }{d t} \right) = 0,
+\end{array}} \right.\
+\end{equation}</div><p>where</p>
+<div class="math notranslate nohighlight">
+\begin{align}
+  &amp;\sigma = - \left( p - \varepsilon^2 \,\left[ \cfrac{1}{2} (\rho \, \mathcal{K}^{\prime} - \mathcal{K} ) \left(\cfrac{\partial \rho }{\partial x}\right)^2 + \rho \, \mathcal{K} \, \cfrac{\partial^2 \rho }{\partial x^2} \right] - \tau \, \mu \, \cfrac{\partial u }{\partial x} \right),\\
+  &amp;E = \cfrac{1}{2} u^2 + e_h + \cfrac{\varepsilon^2}{2} \cfrac{\mathcal{K}}{\rho} \, \left(\cfrac{\partial \rho }{\partial x}\right)^2.
+\end{align}</div><section id="equations-of-state">
+<h2>Equations of state<a class="headerlink" href="#equations-of-state" title="Permalink to this heading"></a></h2>
+<p>From this generic model, one can choose different equations of state to obtain particular models lying in different fields. For example, the hydrodynamic form of the Defocusing Nonlinear Schrödinger (NLS) equation <span id="id4">[<a class="reference internal" href="zBibliography.html#id7" title="F. Dhaouadi, N. Favrie, and S. Gavrilyuk. Extended Lagrangian approach for the defocusing Non–Linear Schrodinger equation. Studies in Applied Mathematics, 142(3):336-358, 2019. doi:https://doi.org/10.1111/sapm.12238.">DFG19</a>]</span> can be obtain by choosing:</p>
+<div class="math notranslate nohighlight">
+\begin{align}
+  &amp;\textrm{Defocusing NLS EOS:} \quad e_h = \cfrac{\rho^2}{2}, \quad \mathcal{K} = \cfrac{1}{4 \, \rho}, \quad \varepsilon \quad \textrm{arbitrary}, \quad \tau = 0.\\
+\end{align}</div><p>It is also possible to describe the dynamics of a bistable tape spring <span id="id5">[<a class="reference internal" href="zBibliography.html#id8" title="S. Bourgeois, N. Favrie, and B. Lombard. Dynamics of a regularized and bistable Ericksen bar using an extended Lagrangian approach. International Journal of Solids and Structures, 207:55–69, 2020. doi:https://doi.org/10.1016/j.ijsolstr.2020.09.031.">BFL20</a>]</span> by choosing:</p>
+<div class="math notranslate nohighlight">
+\begin{align}
+  &amp;\textrm{Polynomial EOS:} \quad e_h = a \, \epsilon^4 + b \, \epsilon^3 + c \, \epsilon^2, \quad \epsilon := \cfrac{1}{\rho} - 1 \quad \mathcal{K} = \cfrac{1}{\rho^3}, \quad \varepsilon \quad \textrm{arbitrary}, \quad \tau = 0.\\
+\end{align}</div><p>Finally, one can also describe the dynamics of phase transition by considering the van der Waals EOS <span id="id6">[<a class="reference internal" href="zBibliography.html#id5" title="Q. Didierlaurent, N. Favrie, and B. Lombard. Numerical investigation of a navier-stokes-korteweg system through an extended lagrangian formulation: nonclassical waves and phase transition problems. Journal of Fluid Mechanics, Submitted, 2026.">DFL26</a>]</span>:</p>
+<div class="math notranslate nohighlight">
+\begin{align}
+  &amp;\textrm{Van der Waals EOS:} \quad e_h = C_v \, T - a \, \rho, \quad \left\{
+{\begin{array}{*{20}{l}}
+  \mathcal{K} = \cfrac{1}{4 \, \rho}, \quad (\varepsilon,\tau) \quad \textrm{arbitrary},\\
+  \mathcal{K} = C, \quad (\varepsilon,\tau) \quad \textrm{arbitrary},\\
+\end{array}} \right.\ \quad \mu = 2 \, \rho \, \sqrt{ \rho \, \mathcal{K}}.
+\end{align}</div><p>In this last EOS, <span class="math notranslate nohighlight">\(\mathcal{K}\)</span> can be considered either as a function of the density or as a constant <span class="math notranslate nohighlight">\(C\)</span>.</p>
+</section>
+<section id="tests-cases">
+<h2>Tests cases<a class="headerlink" href="#tests-cases" title="Permalink to this heading"></a></h2>
+<p>Tests are provided with ECOGEN package and may be described in details later.</p>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;testCase&gt;</span>./libTests/referenceTestCases/ExtendedNavierStokesKorteweg1D/shockTubes/nonlinearSchrodingerEos/<span class="nt">&lt;/testCase&gt;</span>
+<span class="nt">&lt;testCase&gt;</span>./libTests/referenceTestCases/ExtendedNavierStokesKorteweg1D/shockTubes/nonlinearSchrodingerEosAmr/<span class="nt">&lt;/testCase&gt;</span>
+<span class="nt">&lt;testCase&gt;</span>./libTests/referenceTestCases/ExtendedNavierStokesKorteweg1D/shockTubes/polynomialEos/<span class="nt">&lt;/testCase&gt;</span>
+<span class="nt">&lt;testCase&gt;</span>./libTests/referenceTestCases/ExtendedNavierStokesKorteweg1D/shockTubes/polynomialEosAmr/<span class="nt">&lt;/testCase&gt;</span>
+<span class="nt">&lt;testCase&gt;</span>./libTests/referenceTestCases/ExtendedNavierStokesKorteweg1D/shockTubes/vanDerWaalsTestEos/<span class="nt">&lt;/testCase&gt;</span>
+<span class="nt">&lt;testCase&gt;</span>./libTests/referenceTestCases/ExtendedNavierStokesKorteweg1D/shockTubes/vanDerWaalsDodecaneEos/<span class="nt">&lt;/testCase&gt;</span>
+<span class="nt">&lt;testCase&gt;</span>./libTests/referenceTestCases/ExtendedNavierStokesKorteweg1D/cavitations/vanDerWaalsTestEos/<span class="nt">&lt;/testCase&gt;</span>
+<span class="nt">&lt;testCase&gt;</span>./libTests/referenceTestCases/ExtendedNavierStokesKorteweg1D/impacts/vanDerWaalsTestEos/<span class="nt">&lt;/testCase&gt;</span>
+<span class="nt">&lt;testCase&gt;</span>./libTests/referenceTestCases/ExtendedNavierStokesKorteweg1D/travellingWave/vanDerWaalsTestEos/<span class="nt">&lt;/testCase&gt;</span>
+</pre></div>
+</div>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="Chap5_2eulerHomogeneous.html" class="btn btn-neutral float-left" title="Homogeneous Euler" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="Chap6_developersGuide_Chapter.html" class="btn btn-neutral float-right" title="Developers" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2026, code-mphi.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

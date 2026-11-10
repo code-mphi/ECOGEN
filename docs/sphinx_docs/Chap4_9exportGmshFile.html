@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Export Gmsh mesh to version 2 file format &mdash; ECOGEN 5.0 documentation</title>
+  <title>Export Gmsh mesh to version 2 file format &mdash; ECOGEN 6.0 documentation</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
       <link rel="stylesheet" type="text/css" href="_static/css/theme.css" />
 
@@ -38,7 +38,7 @@
             ECOGEN
           </a>
               <div class="version">
-                5.0
+                6.0
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
@@ -62,12 +62,17 @@
 <li class="toctree-l2"><a class="reference internal" href="Chap4_6extractMassflowWithParaview.html">Gmsh example and extraction of mass-flow rate</a></li>
 <li class="toctree-l2"><a class="reference internal" href="Chap4_7runningATestInAnotherFolder.html">Running a test case in another folder</a></li>
 <li class="toctree-l2"><a class="reference internal" href="Chap4_8restartMeshMapping.html">Restart a simulation with mesh mapping</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">Export Gmsh mesh to version 2 file format</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Export Gmsh mesh to version 2 file format</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#mesh-generation-using-graphical-interface">Mesh generation using graphical interface</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#mesh-generation-using-command-line-interface">Mesh generation using command line interface</a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="Chap5_testCases_Chapter.html">Test cases</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Chap6_developersGuide_Chapter.html">Developers</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Chap7_license.html">License</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Chap7_license.html">License and authors</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Chap8_citation.html">Citation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="zBibliography.html">Bibliography</a></li>
 </ul>
 
@@ -98,8 +103,10 @@
              
   <section id="export-gmsh-mesh-to-version-2-file-format">
 <span id="sec-tuto-exportgmshfile"></span><h1>Export Gmsh mesh to version 2 file format<a class="headerlink" href="#export-gmsh-mesh-to-version-2-file-format" title="Permalink to this heading"></a></h1>
-<p>Since ECOGEN mainly supports <a class="reference external" href="http://gmsh.info/">Gmsh</a> [GR09] <span id="id1">[<a class="reference internal" href="zBibliography.html#id99" title="C. Geuzaine and J.-F. Remacle. Gmsh: A 3-D finite element mesh generator with built-in pre-and post-processing facilities. International Journal for Numerical Methods in Engineering, 79(11):1309–1331, 2009.">GR09</a>]</span> <strong>version 2</strong> mesh files, and the latest Gmsh software currently uses <strong>version 4</strong> by default, we recommend exporting the mesh file to <strong>version 2</strong>.</p>
-<p>To do so, use <cite>File -&gt; Export</cite>, choose <cite>Gmsh version 2 ASCII</cite> format and make sure additional options <strong>are not</strong> checked.</p>
+<p>Since, in parallel, ECOGEN supports only <a class="reference external" href="http://gmsh.info/">Gmsh</a> <span id="id1">[<a class="reference internal" href="zBibliography.html#id107" title="C. Geuzaine and J.-F. Remacle. Gmsh: A 3-D finite element mesh generator with built-in pre-and post-processing facilities. International Journal for Numerical Methods in Engineering, 79(11):1309–1331, 2009.">GR09</a>]</span> <strong>version 2</strong> mesh files, and the latest Gmsh software currently uses <strong>version 4</strong> by default, we recommend exporting the mesh file to <strong>version 2</strong>.</p>
+<section id="mesh-generation-using-graphical-interface">
+<h2>Mesh generation using graphical interface<a class="headerlink" href="#mesh-generation-using-graphical-interface" title="Permalink to this heading"></a></h2>
+<p>To generate a mesh from Gmsh graphical interface, use <cite>File -&gt; Export</cite>, choose <cite>Gmsh version 2 ASCII</cite> format and make sure additional options <strong>are not</strong> checked.</p>
 <figure class="align-center" id="id2">
 <span id="fig-tutos-exportgmshfile-export"></span><a class="reference internal image-reference" href="_images/export.png"><img alt="_images/export.png" src="_images/export.png" style="width: 250.4px; height: 244.0px;" /></a>
 <figcaption>
@@ -114,6 +121,23 @@
 </figcaption>
 </figure>
 </section>
+<section id="mesh-generation-using-command-line-interface">
+<h2>Mesh generation using command line interface<a class="headerlink" href="#mesh-generation-using-command-line-interface" title="Permalink to this heading"></a></h2>
+<p>To generate a mesh from Gmsh command line interface, enter the following command:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">gmsh -&lt;d&gt; -format msh22 &lt;PATH_TO_FILE&gt;</span>
+</pre></div>
+</div>
+<p>where <cite>&lt;d&gt;</cite> has to be replaced by the mesh dimension (<cite>1</cite> for a 1D mesh, <cite>2</cite> for a 2D mesh and <cite>3</cite> for a 3D mesh) and <cite>&lt;PATH_TO_FILE&gt;</cite> by the path and name of the <cite>.geo</cite> file.</p>
+<p>You can partition the mesh into <cite>n</cite> partitions and ghost cells with following command:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">gmsh -&lt;d&gt; -format msh22 -part &lt;n&gt; -part_ghosts &lt;PATH_TO_FILE&gt;</span>
+</pre></div>
+</div>
+<p>You can get help on available command line option with <cite>–help</cite> argument:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">gmsh --help</span>
+</pre></div>
+</div>
+</section>
+</section>
 
 
            </div>
@@ -126,7 +150,7 @@
   <hr/>
 
   <div role="contentinfo">
-    <p>&#169; Copyright 2025, code-mphi.</p>
+    <p>&#169; Copyright 2026, code-mphi.</p>
   </div>
 
   Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a

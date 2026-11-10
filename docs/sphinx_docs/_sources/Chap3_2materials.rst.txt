@@ -3,12 +3,17 @@
 Materials
 =========
 
-For each phase, an equation of state is required. The data for a given phase are gathered in a file. Every file must be in the folder **ECOGEN/libEOS/** and must follow rules depending on the EOS. Five equations of state are implemented in ECOGEN:
+For each phase, an equation of state is required. The data for a given phase are gathered in a file. Every file must be in the folder **ECOGEN/libEOS/** and must follow rules depending on the EOS. Six equations of state are implemented in ECOGEN:
 
 - :ref:`Sec:input:IdealGas`: For gaseous phase only.
 - :ref:`Sec:input:StiffenedGas`: For condensed matter (liquid, solid) in a pressure range where the compressible assumption is reasonable.
 - :ref:`Sec:input:NobleAbelStiffenedGas`: For condensed matter (liquid, solid) subject to phase change.
-- Van der Waals and Polynomial: Experimental work on non-convex EOS therefore not detailed in the following.
+
+Only for the Extended-Navier-Stokes-Kortewed 1D model:
+
+- :ref:`Sec:input:NonlinearShrodinger`: For quantum fluids described by the Defocusing non-linear Schrödinger equation.
+- :ref:`Sec:input:Polynomial` (non-convex): For a bistable bar.
+- :ref:`Sec:input:VanDerWaals` (non-convex): For liquid and gaseous phase.
 
 .. _Sec:input:IdealGas:
 
@@ -134,3 +139,97 @@ The stiffened-gas EOS is recovered if :math:`b=0` and the ideal-gas law is recov
 			lambda="0.6">
 		</physicalParameters>
 	</parametersEOS>
+
+.. _Sec:input:NonlinearShrodinger:
+
+Defocusing non-linear Schrödinger
+---------------------------------
+
+The hydrodynamic form of the Defocusing Nonlinear Schrödinger equation :cite:`Dhaouadi2019` can be obtain by choosing:
+
+.. math::
+
+	e_h(\rho) = \cfrac{\rho^2}{2}, \quad \mathcal{K} = \cfrac{1}{4 \, \rho}.
+
+No parameters are specified for this EOS:
+
+.. code-block:: xml
+
+	<?xml version = "1.0" encoding = "UTF-8" standalone = "yes"?>
+	<parametersEOS>
+		<EOS type="NLS"/>
+		<parameters no_params="1."/>
+	</parametersEOS>
+
+
+.. _Sec:input:Polynomial:
+
+Polynomial
+----------
+
+A bistable Ericksen model is used to describe the dynamic of a bistable tape spring :cite:`Bourgeois2020`. The potential energy is:
+
+.. math::
+
+	e_h(\rho) = a \, \epsilon^4 + b \, \epsilon^3 + c \, \epsilon^2, \quad \epsilon(\rho) := \cfrac{1}{\rho} - 1, \quad \mathcal{K} = \cfrac{1}{\rho^3}.
+
+In the following example, the parameters :math:`a,b,c` are chosen from :cite:`Bourgeois2020` in order to reproduce a double well potential:
+
+.. code-block:: xml
+
+	<?xml version = "1.0" encoding = "UTF-8" standalone = "yes"?>
+	<parametersEOS>
+		<EOS type="Polynomial"/>
+		<parameters
+			a="0.14583333333333334"
+			b="-1.1666666666666667"
+			c="2.4583333333333335">
+		</parameters>
+	</parametersEOS>
+
+.. _Sec:input:VanDerWaals:
+
+Van der Waals
+-------------
+
+To describe both the liquid and the vapor through a single EOS, we can choose the van der Waals EOS :cite:`DidierlaurentInReview`:
+
+.. math::
+
+	 &p(\rho,T) = \cfrac{\rho \, r \, T}{1 - \rho \, b} - a \, \rho^2,\\
+	 &e_h(\rho,T) = C_v \, T - a \, \rho,\\[6pt]
+	 &s(\rho,T) = C_v \, \log{T} + r \, \log(1/\rho - b).
+
+The parameters :math:`a,b,C_v` are defined at the critical point of the fluid. The constants :math:`T_c,P_c,M` are given. For this EOS, one can choose :math:`\mathcal{K}` as a function of :math:`\rho` or as a constant. Here is an example:
+
+.. code-block:: xml
+
+	<?xml version = "1.0" encoding = "UTF-8" standalone = "yes"?>
+		<parametersEOS>
+		<EOS type="VDW"/>
+		<parameters
+			Tc="658.2"
+			Pc="18.2e5"
+			M="170.34"
+			c_v="3200."
+			kappa="2.7778e-6">
+		</parameters>
+	</parametersEOS>
+
+Here, a value for :math:`\mathcal{K}` has been specified. If you want :math:`\mathcal{K}` as a function of :math:`\rho`, set the value to zero:
+
+.. code-block:: xml
+
+	<?xml version = "1.0" encoding = "UTF-8" standalone = "yes"?>
+		<parametersEOS>
+		<EOS type="VDW"/>
+		<parameters
+			Tc="658.2"
+			Pc="18.2e5"
+			M="170.34"
+			c_v="3200."
+			kappa="0.">
+		</parameters>
+	</parametersEOS>
+
+By default, the choice :math:`\mathcal{K} = \cfrac{1}{4 \, \rho}` is made.

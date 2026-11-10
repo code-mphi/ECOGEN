@@ -1,7 +1,11 @@
 <map id="Phase::setTotalEnergy" name="Phase::setTotalEnergy">
-<area shape="rect" id="Node000001" title=" " alt="" coords="263,31,428,56"/>
-<area shape="rect" id="Node000002" href="$classFluxEuler.html#a5267a54d69731c74528727f8fd8565c9" title="Build the primitive variables for a given cell from conservative one." alt="" coords="33,5,187,31"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="249,36,187,29,187,24,249,30"/>
-<area shape="rect" id="Node000003" href="$classFluxUEqTotEnergy.html#a897b84cffe330521c9815d563504f647" title="Build the primitive variables for a given cell from conservative one." alt="" coords="5,55,215,80"/>
-<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="249,56,215,59,214,54,249,50"/>
+<area shape="rect" id="Node000001" title=" " alt="" coords="319,96,483,124"/>
+<area shape="rect" id="Node000002" href="$classFluxEuler.html#a5267a54d69731c74528727f8fd8565c9" title="Build the primitive variables for a given cell from conservative one." alt="" coords="62,5,214,33"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="360,88,318,67,270,47,215,33,214,27,272,42,321,63,366,88"/>
+<area shape="rect" id="Node000003" href="$classFluxExtendedNavierStokesKorteweg1D.html#a8a48bfe6716413ef97a6307bc29ee02a" title="Build the primitive variables for a given cell from conservative one." alt="" coords="40,57,236,102"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="301,99,237,93,236,88,306,98"/>
+<area shape="rect" id="Node000004" href="$classFluxUEqTotEnergy.html#a897b84cffe330521c9815d563504f647" title="Build the primitive variables for a given cell from conservative one." alt="" coords="34,125,242,153"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="301,121,243,130,242,125,306,120"/>
+<area shape="rect" id="Node000005" href="$classModExtendedNavierStokesKorteweg1D.html#a0a653ccbd31925881020b57fff59701a" title="Complete the augmented variables (such as the ones of Navier&#45;Stokes&#45;Korteweg model)." alt="" coords="5,177,271,222"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="358,130,272,167,234,179,232,174,270,162,353,131"/>
 </map>

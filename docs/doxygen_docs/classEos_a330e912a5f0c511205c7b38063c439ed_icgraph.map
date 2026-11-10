@@ -1,7 +1,9 @@
 <map id="Eos::getLambda" name="Eos::getLambda">
-<area shape="rect" id="Node000001" title="get the thermal conductivity of the fluid return &#160;(Unit: W/(m.K))." alt="" coords="296,35,423,60"/>
-<area shape="rect" id="Node000002" href="$classAPEConductivity.html#a2f8137e0108f1c4359224c4e473fd042" title=" " alt="" coords="5,5,248,31"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="282,40,227,33,228,28,282,35"/>
-<area shape="rect" id="Node000003" href="$classAPUEqConductivity.html#a53b17d42310927b9e1101bb164ac225a" title=" " alt="" coords="49,55,204,95"/>
-<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="282,59,205,69,204,63,282,54"/>
+<area shape="rect" id="Node000001" title="get the thermal conductivity of the fluid return &#160;(Unit: W/(m.K))." alt="" coords="296,65,421,93"/>
+<area shape="rect" id="Node000002" href="$classAPEConductivity.html#a2f8137e0108f1c4359224c4e473fd042" title=" " alt="" coords="5,5,248,33"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="298,61,247,47,202,36,201,31,248,42,303,60"/>
+<area shape="rect" id="Node000003" href="$classAPETurbulenceSmagorinsky.html#aa4bca9aa114000508afb721d99cc239f" title="APETurbulenceSmagorinsky constructor." alt="" coords="22,57,231,102"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="278,80,231,82,231,77,283,79"/>
+<area shape="rect" id="Node000004" href="$classAPUEqConductivity.html#a53b17d42310927b9e1101bb164ac225a" title=" " alt="" coords="50,126,203,171"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="301,98,248,116,204,130,203,124,247,111,295,99"/>
 </map>

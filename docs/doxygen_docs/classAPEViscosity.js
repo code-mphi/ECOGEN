@@ -8,6 +8,7 @@ var classAPEViscosity =
     [ "addSymmetricTermsRadialAxisOnX", "classAPEViscosity.html#a3a203b3511e6053d6f32d7fd0c1ebb94", null ],
     [ "addSymmetricTermsRadialAxisOnY", "classAPEViscosity.html#aa7af5899c9f9c30a315c004edeefc395", null ],
     [ "communicationsAddPhys", "classAPEViscosity.html#aa7431609f2a5c015852afe7d0acca783", null ],
+    [ "computeTurbulenceParameters", "classAPEViscosity.html#af131080b69d4a27e4d8455b051a8e6fd", null ],
     [ "solveFluxAddPhys", "classAPEViscosity.html#a383bc7762140cc1397fbc9294f808f2e", null ],
     [ "solveFluxAddPhysBoundary", "classAPEViscosity.html#acb096c5d7d27dbe15d79c919dc14162a", null ],
     [ "solveFluxViscosityInner", "classAPEViscosity.html#a6b79ae7c6ced851a347ae25244dc5431", null ],

@@ -1,7 +1,9 @@
 <map id="Eos::computeTotalEnthalpy" name="Eos::computeTotalEnthalpy">
-<area shape="rect" id="Node000001" title="Compute the total enthalpy of the phase." alt="" coords="296,42,495,67"/>
-<area shape="rect" id="Node000002" href="$classModEuler.html#a8ee4e19516853548b6d31a982cddc4d9" title="Inlet injection using stagnation state half Riemann solver." alt="" coords="20,5,233,45"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="282,45,233,40,234,34,283,40"/>
-<area shape="rect" id="Node000003" href="$classModEuler.html#a719035a85f12075c4c5ce3543e4e4de9" title="Inlet tank half Riemann solver." alt="" coords="5,70,248,95"/>
-<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="282,69,249,73,248,67,282,64"/>
+<area shape="rect" id="Node000001" title="Compute the total enthalpy of the phase." alt="" coords="296,65,493,93"/>
+<area shape="rect" id="Node000002" href="$classModNEqHLLAC.html#a0eae3770ab060f963fd4c0bd27b6ae55" title="HLLAC Riemann solver of Lochon et al. (2016)." alt="" coords="43,5,210,33"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="317,62,247,47,198,36,197,31,248,42,322,61"/>
+<area shape="rect" id="Node000003" href="$classModEuler.html#a8ee4e19516853548b6d31a982cddc4d9" title="Inlet injection using stagnation state half Riemann solver." alt="" coords="20,57,233,102"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="277,80,233,82,233,77,282,79"/>
+<area shape="rect" id="Node000004" href="$classModEuler.html#a719035a85f12075c4c5ce3543e4e4de9" title="Inlet tank half Riemann solver." alt="" coords="5,125,248,153"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="322,97,248,116,198,127,197,122,247,111,317,98"/>
 </map>

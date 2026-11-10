@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Velocity-equilibrium model &mdash; ECOGEN 5.0 documentation</title>
+  <title>Velocity-equilibrium model &mdash; ECOGEN 6.0 documentation</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
       <link rel="stylesheet" type="text/css" href="_static/css/theme.css" />
 
@@ -24,7 +24,7 @@
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="Velocity-equilibrium model based on total energies" href="Chap5_2UEqTotE.html" />
-    <link rel="prev" title="Multiphase test cases" href="Chap5_2.html" /> 
+    <link rel="prev" title="Under water explosion" href="Chap5_3NEq_2D_1underWaterExplosion.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -39,7 +39,7 @@
             ECOGEN
           </a>
               <div class="version">
-                5.0
+                6.0
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
@@ -58,22 +58,24 @@
 <li class="toctree-l1 current"><a class="reference internal" href="Chap5_testCases_Chapter.html">Test cases</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="Chap5_1Euler.html">Single-phase test cases</a></li>
 <li class="toctree-l2 current"><a class="reference internal" href="Chap5_2.html">Multiphase test cases</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="Chap5_3NEq.html">Non-equilibrium model</a></li>
 <li class="toctree-l3 current"><a class="current reference internal" href="#">Velocity-equilibrium model</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#tests-cases">Tests cases</a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="Chap5_2UEqTotE.html">Velocity-equilibrium model based on total energies</a></li>
-<li class="toctree-l3"><a class="reference internal" href="Chap5_2UEqSolid.html">Velocity-equilibrium model for solids</a></li>
 <li class="toctree-l3"><a class="reference internal" href="Chap5_2PUEq.html">Pressure- and velocity-equilibrium model</a></li>
 <li class="toctree-l3"><a class="reference internal" href="Chap5_2PTUEq.html">Temperature-, pressure- and velocity-equilibrium model</a></li>
 <li class="toctree-l3"><a class="reference internal" href="Chap5_2eulerHomogeneous.html">Homogeneous Euler</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Chap5_2ENSK1D.html">Extended-Navier-Stokes-Korteweg-1D model</a></li>
 <li class="toctree-l3"><a class="reference internal" href="Chap5_2.html#other-tests-cases">Other tests cases</a></li>
 </ul>
 </li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="Chap6_developersGuide_Chapter.html">Developers</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Chap7_license.html">License</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Chap7_license.html">License and authors</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Chap8_citation.html">Citation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="zBibliography.html">Bibliography</a></li>
 </ul>
 
@@ -105,7 +107,7 @@
              
   <section id="velocity-equilibrium-model">
 <h1>Velocity-equilibrium model<a class="headerlink" href="#velocity-equilibrium-model" title="Permalink to this heading"></a></h1>
-<p>Velocity-equilibrium and mechanical-equilibrium flows are solved in ECOGEN using the velocity-equilibrium model <span id="id1">[<a class="reference internal" href="zBibliography.html#id8" title="K. Schmidmayer, J. Cazé, F. Petitpas, E. Daniel, and N. Favrie. Modelling interactions between waves and diffused interfaces. International Journal for Numerical Methods in Fluids, 95(2):215–241, 2023.">SCazeP+23</a>]</span>. For <em>N</em> phases involved and without any extra physics (surface tension, viscosity…), this model reads:</p>
+<p>Velocity-equilibrium and mechanical-equilibrium flows are solved in ECOGEN using the velocity-equilibrium model <span id="id1">[<a class="reference internal" href="zBibliography.html#id15" title="K. Schmidmayer, J. Cazé, F. Petitpas, E. Daniel, and N. Favrie. Modelling interactions between waves and diffused interfaces. International Journal for Numerical Methods in Fluids, 95(2):215–241, 2023.">SCazeP+23</a>]</span>. For <em>N</em> phases involved and without any extra physics (surface tension, viscosity…), this model reads:</p>
 <div class="math notranslate nohighlight">
 \begin{equation}
 \label{system_UEq}
@@ -137,7 +139,7 @@ The mixture density and pressure are</p>
 <div class="math notranslate nohighlight">
 \begin{equation}
   \delta p_k = \sum_{j \neq k}^N \mu_{k,j} \left( p_k - p_j \right) ,
-\end{equation}</div><p>where <span class="math notranslate nohighlight">\(j\)</span> are phases different from <span class="math notranslate nohighlight">\(k\)</span> and <span class="math notranslate nohighlight">\(\mu_{k,j}\)</span> are the pressure-relaxation coefficients related to the <span class="math notranslate nohighlight">\(k\)</span>–<span class="math notranslate nohighlight">\(j\)</span> interactions <span id="id2">[<a class="reference internal" href="zBibliography.html#id4" title="L. Biasiori-Poulanges and K. Schmidmayer. A phenomenological analysis of droplet shock-induced cavitation using a multiphase modeling approach. Phys. Fluids, 35(1):013312, 2023.">BPS23</a>]</span>. Herein, the pressure-relaxation coefficient <span class="math notranslate nohighlight">\(\mu\)</span> is considered the same for each phase combination.
+\end{equation}</div><p>where <span class="math notranslate nohighlight">\(j\)</span> are phases different from <span class="math notranslate nohighlight">\(k\)</span> and <span class="math notranslate nohighlight">\(\mu_{k,j}\)</span> are the pressure-relaxation coefficients related to the <span class="math notranslate nohighlight">\(k\)</span>–<span class="math notranslate nohighlight">\(j\)</span> interactions <span id="id2">[<a class="reference internal" href="zBibliography.html#id11" title="L. Biasiori-Poulanges and K. Schmidmayer. A phenomenological analysis of droplet shock-induced cavitation using a multiphase modeling approach. Phys. Fluids, 35(1):013312, 2023.">BPS23</a>]</span>. Herein, the pressure-relaxation coefficient <span class="math notranslate nohighlight">\(\mu\)</span> is considered the same for each phase combination.
 The interfacial pressure is defined as</p>
 <div class="math notranslate nohighlight">
 \begin{equation}
@@ -148,7 +150,7 @@ The interfacial pressure is defined as</p>
 \begin{equation}
   \frac{\partial \rho E}{\partial t} + \nabla \cdot \left[ \left( \rho E + p \right) \mathbf{u} \right] = 0 .
 \end{equation}</div><p>We note that this equation is redundant when the internal energy equations are also computed. However, in practice, we include it in our computations to ensure that the total energy is numerically conserved, and thus preserve a correct treatment of shock waves.</p>
-<p>This model is solved thanks to the numerical method presented in <span id="id3">[<a class="reference internal" href="zBibliography.html#id8" title="K. Schmidmayer, J. Cazé, F. Petitpas, E. Daniel, and N. Favrie. Modelling interactions between waves and diffused interfaces. International Journal for Numerical Methods in Fluids, 95(2):215–241, 2023.">SCazeP+23</a>]</span> where infinite as well as finite pressure-relaxation rates are possible.</p>
+<p>This model is solved thanks to the numerical method presented in <span id="id3">[<a class="reference internal" href="zBibliography.html#id15" title="K. Schmidmayer, J. Cazé, F. Petitpas, E. Daniel, and N. Favrie. Modelling interactions between waves and diffused interfaces. International Journal for Numerical Methods in Fluids, 95(2):215–241, 2023.">SCazeP+23</a>]</span> where infinite as well as finite pressure-relaxation rates are possible.</p>
 <section id="tests-cases">
 <h2>Tests cases<a class="headerlink" href="#tests-cases" title="Permalink to this heading"></a></h2>
 <p>Tests are provided with ECOGEN package and may be described in details later.</p>
@@ -174,14 +176,14 @@ The interfacial pressure is defined as</p>
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="Chap5_2.html" class="btn btn-neutral float-left" title="Multiphase test cases" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="Chap5_3NEq_2D_1underWaterExplosion.html" class="btn btn-neutral float-left" title="Under water explosion" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
         <a href="Chap5_2UEqTotE.html" class="btn btn-neutral float-right" title="Velocity-equilibrium model based on total energies" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>
 
   <div role="contentinfo">
-    <p>&#169; Copyright 2025, code-mphi.</p>
+    <p>&#169; Copyright 2026, code-mphi.</p>
   </div>
 
   Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a

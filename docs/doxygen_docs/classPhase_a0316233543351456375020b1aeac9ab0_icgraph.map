@@ -1,9 +1,9 @@
 <map id="Phase::setOmega" name="Phase::setOmega">
-<area shape="rect" id="Node000001" title=" " alt="" coords="261,77,397,102"/>
-<area shape="rect" id="Node000002" href="$classFluxEulerKorteweg.html#a2c9b23352889d9470396815752bfa797" title="Build the primitive variables for a given cell from conservative one." alt="" coords="33,5,185,45"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="271,75,178,48,180,43,272,70"/>
-<area shape="rect" id="Node000003" href="$classModEulerKorteweg.html#aa84464a570842e368a669e4307d91fa3" title="Complete the augmented variables (such as the ones of Euler&#45;Korteweg model)" alt="" coords="5,69,213,109"/>
-<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="248,92,213,92,213,87,248,87"/>
-<area shape="rect" id="Node000004" href="$classSourceExactEulerKorteweg.html#a8915303fb2c0473ad9aa3fc37dedf62d" title="Integration via an exact solution." alt="" coords="11,133,207,173"/>
-<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="272,109,180,136,178,131,271,103"/>
+<area shape="rect" id="Node000001" title=" " alt="" coords="319,83,454,111"/>
+<area shape="rect" id="Node000002" href="$classFluxExtendedNavierStokesKorteweg1D.html#a8a48bfe6716413ef97a6307bc29ee02a" title="Build the primitive variables for a given cell from conservative one." alt="" coords="40,5,236,50"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="322,79,270,65,228,53,228,48,271,60,327,78"/>
+<area shape="rect" id="Node000003" href="$classModExtendedNavierStokesKorteweg1D.html#a0a653ccbd31925881020b57fff59701a" title="Complete the augmented variables (such as the ones of Navier&#45;Stokes&#45;Korteweg model)." alt="" coords="5,75,271,119"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="301,98,272,100,271,94,306,96"/>
+<area shape="rect" id="Node000004" href="$classSourceExactExtendedNavierStokesKorteweg1D.html#a55f1a24559abaf373c0dd51c7f6e6a3d" title="Integration via an exact solution." alt="" coords="9,144,267,205"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="327,115,240,145,238,140,322,117"/>
 </map>

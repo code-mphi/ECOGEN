@@ -1,9 +1,10 @@
 <map id="ModUEq::solveRiemannTransportInletInjStagState" name="ModUEq::solveRiemannTransportInletInjStagState">
-<area shape="rect" id="Node000001" title="Inlet injection using stagnation state half Riemann solver for transport equations." alt="" coords="5,47,243,87"/>
-<area shape="rect" id="Node000002" href="$classCell.html#abf9c3ccb4a639371c537038348d7d101" title=" " alt="" coords="329,5,465,31"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="235,45,315,30,316,35,236,50"/>
-<area shape="rect" id="Node000003" href="$classTransport.html#a5fd6aa4418b539c8471412416fe745c3" title="Return the value of the corresponding transport variable." alt="" coords="323,55,470,80"/>
-<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="243,65,310,65,310,70,243,70"/>
-<area shape="rect" id="Node000004" href="$classTransport.html#a1b192480753739525c5a27d13dec0661" title="Inlet injection using stagnation state half Riemann solver for the corresponding transport equation." alt="" coords="291,105,503,145"/>
-<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="220,85,288,99,287,104,219,90"/>
+<area shape="rect" id="Node000001" title="Inlet injection using stagnation state half Riemann solver for transport equations." alt="" coords="5,73,242,118"/>
+<area shape="rect" id="Node000002" href="$classModUEq.html#aabf6596c09c22832d9bfa1393f931c1e" title=" " alt="" coords="294,29,432,57"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="229,70,283,60,278,62,230,75"/>
+<area shape="rect" id="Node000003" href="$classCell.html#abf9c3ccb4a639371c537038348d7d101" title=" " alt="" coords="295,81,430,109"/>
+<area shape="poly" id="edge3_Node000001_Node000003" title=" " alt="" coords="242,93,282,95,277,96,242,98"/>
+<area shape="rect" id="Node000004" href="$classTransport.html#a5fd6aa4418b539c8471412416fe745c3" title="Return the value of the corresponding transport variable." alt="" coords="290,133,436,161"/>
+<area shape="poly" id="edge4_Node000001_Node000004" title=" " alt="" coords="230,115,283,129,278,130,229,121"/>
+<area shape="poly" id="edge2_Node000002_Node000002" title=" " alt="" coords="322,28,315,20,321,11,337,5,363,3,391,5,408,14,402,14,390,10,363,8,338,10,324,15,321,20,327,29"/>
 </map>

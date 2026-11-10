@@ -6,7 +6,8 @@ var Eos_8h =
       [ "SG", "Eos_8h.html#abb3c925d0b79616ace2ff6a3b48d9d30a8a09f4f2d7c245d0a6a4f2d48672cdc0", null ],
       [ "NASG", "Eos_8h.html#abb3c925d0b79616ace2ff6a3b48d9d30a0347a49a321cc7f43b8e6949ab032d58", null ],
       [ "VDW", "Eos_8h.html#abb3c925d0b79616ace2ff6a3b48d9d30a6d8ae3d7212ee8e74fb9f9d7b7ade87e", null ],
-      [ "Polynomial", "Eos_8h.html#abb3c925d0b79616ace2ff6a3b48d9d30a19e60d4fa96d058a207b2ac5223837ea", null ]
+      [ "Polynomial", "Eos_8h.html#abb3c925d0b79616ace2ff6a3b48d9d30a19e60d4fa96d058a207b2ac5223837ea", null ],
+      [ "NLS", "Eos_8h.html#abb3c925d0b79616ace2ff6a3b48d9d30a7ff4f6c3811ee875142b43e7fb7871b7", null ]
     ] ],
     [ "epsilonAlphaNull", "Eos_8h.html#a5566ed455bb9df96fc64782cda0438f4", null ]
 ];

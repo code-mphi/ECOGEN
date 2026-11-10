@@ -5,6 +5,7 @@ var classAPEConductivity =
     [ "addNonCons", "classAPEConductivity.html#a8f119ca9bf2b450eaa9ec2e6f52d838a", null ],
     [ "addQuantityAddPhys", "classAPEConductivity.html#a5d4cd64872bd53fa14a7e2120301f99e", null ],
     [ "communicationsAddPhys", "classAPEConductivity.html#a95d903171803ce814ab906883c134149", null ],
+    [ "computeTurbulenceParameters", "classAPEConductivity.html#a08d24d75da26c3df7f5ab796aa07d5e8", null ],
     [ "solveFluxAddPhys", "classAPEConductivity.html#a4a3d5b0350c8dfe2072e4b4edb830f3b", null ],
     [ "solveFluxAddPhysBoundary", "classAPEConductivity.html#ac5b559e4423c06ad91cad5379d2f96ac", null ],
     [ "solveFluxConductivityInner", "classAPEConductivity.html#a113a8ca259ee26efc6152fa032d72531", null ],

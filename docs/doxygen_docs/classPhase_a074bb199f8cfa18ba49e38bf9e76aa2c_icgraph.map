@@ -1,5 +1,7 @@
 <map id="Phase::getVectorPX" name="Phase::getVectorPX">
-<area shape="rect" id="Node000001" title=" " alt="" coords="299,13,447,38"/>
-<area shape="rect" id="Node000002" href="$classModEulerKorteweg.html#a9cd41d317942d2d424a1935e8b8573ee" title="Cell to cell Riemann solver." alt="" coords="5,5,251,45"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="285,28,251,28,251,23,285,23"/>
+<area shape="rect" id="Node000001" title=" " alt="" coords="319,48,466,76"/>
+<area shape="rect" id="Node000002" href="$classModExtendedNavierStokesKorteweg1D.html#af057da5455890a76b9ba89be479e9e96" title="Cell to cell Riemann solver." alt="" coords="5,5,271,50"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="301,50,271,49,271,43,306,50"/>
+<area shape="rect" id="Node000003" href="$classModExtendedNavierStokesKorteweg1D.html#a01ae0d5dea63aef3e8f8086ef69bc22d" title="Wall half Riemann solver." alt="" coords="5,75,271,119"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="301,75,272,81,271,76,306,74"/>
 </map>

@@ -3,7 +3,7 @@
 Installation instructions
 =========================
 
-This section contains base instructions for ECOGEN installation on Windows and Ubuntu operating systems.
+This section contains base instructions for ECOGEN installation on Ubuntu operating systems.
 
 .. toctree::
    :maxdepth: 1

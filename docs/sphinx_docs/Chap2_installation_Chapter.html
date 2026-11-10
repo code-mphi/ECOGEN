@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Installation instructions &mdash; ECOGEN 5.0 documentation</title>
+  <title>Installation instructions &mdash; ECOGEN 6.0 documentation</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
       <link rel="stylesheet" type="text/css" href="_static/css/theme.css" />
 
@@ -38,7 +38,7 @@
             ECOGEN
           </a>
               <div class="version">
-                5.0
+                6.0
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
@@ -54,8 +54,10 @@
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Installation instructions</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="Chap2_1installation.html">Prerequisites</a></li>
 <li class="toctree-l2"><a class="reference internal" href="Chap2_1installation.html#download">Download</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Chap2_1installation.html#compilation-execution-on-bash-using-the-provided-makefile">Compilation/Execution on bash using the provided Makefile</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Chap2_1installation.html#compilation-execution-on-bash-using-cmake-tool">Compilation/Execution on bash using CMake tool</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Chap2_1installation.html#compilation-on-bash-using-the-provided-makefile">Compilation on bash using the provided Makefile</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Chap2_1installation.html#compilation-using-cmake-tool">Compilation using CMake tool</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Chap2_1installation.html#enabling-hdf5-i-os">Enabling HDF5 I/Os</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Chap2_1installation.html#executing-ecogen">Executing ECOGEN</a></li>
 <li class="toctree-l2"><a class="reference internal" href="Chap2_1installation.html#testing">Testing</a></li>
 </ul>
 </li>
@@ -63,7 +65,8 @@
 <li class="toctree-l1"><a class="reference internal" href="Chap4_tutorials_Chapter.html">Tutorials</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Chap5_testCases_Chapter.html">Test cases</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Chap6_developersGuide_Chapter.html">Developers</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Chap7_license.html">License</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Chap7_license.html">License and authors</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Chap8_citation.html">Citation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="zBibliography.html">Bibliography</a></li>
 </ul>
 
@@ -93,14 +96,16 @@
              
   <section id="installation-instructions">
 <span id="chap-start"></span><h1>Installation instructions<a class="headerlink" href="#installation-instructions" title="Permalink to this heading"></a></h1>
-<p>This section contains base instructions for ECOGEN installation on Windows and Ubuntu operating systems.</p>
+<p>This section contains base instructions for ECOGEN installation on Ubuntu operating systems.</p>
 <div class="toctree-wrapper compound">
 <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="Chap2_1installation.html">Prerequisites</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Chap2_1installation.html#download">Download</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Chap2_1installation.html#compilation-execution-on-bash-using-the-provided-makefile">Compilation/Execution on bash using the provided Makefile</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Chap2_1installation.html#compilation-execution-on-bash-using-cmake-tool">Compilation/Execution on bash using CMake tool</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Chap2_1installation.html#compilation-on-bash-using-the-provided-makefile">Compilation on bash using the provided Makefile</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Chap2_1installation.html#compilation-using-cmake-tool">Compilation using CMake tool</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Chap2_1installation.html#enabling-hdf5-i-os">Enabling HDF5 I/Os</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Chap2_1installation.html#executing-ecogen">Executing ECOGEN</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Chap2_1installation.html#testing">Testing</a></li>
 </ul>
 </div>
@@ -117,7 +122,7 @@
   <hr/>
 
   <div role="contentinfo">
-    <p>&#169; Copyright 2025, code-mphi.</p>
+    <p>&#169; Copyright 2026, code-mphi.</p>
   </div>
 
   Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a

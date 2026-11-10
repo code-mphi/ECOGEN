@@ -31,6 +31,8 @@ var Tensor_8h =
     [ "tensorPade", "Tensor_8h.html#a2bb0ef1ce0a8db08de27967d3e0faa60", null ],
     [ "tensorPinverse", "Tensor_8h.html#afa2706551daebed724d9355c7cd73fd1", null ],
     [ "tensorQ", "Tensor_8h.html#aecbd2a04a4c9e2f08fe43bab56e84713", null ],
+    [ "tensorStrainRate", "Tensor_8h.html#aafb5f91f6b88cb88579cde59fc21ff72", null ],
+    [ "tensorStrainRateTranspose", "Tensor_8h.html#a079ac008715afe592f292490ca8c3df0", null ],
     [ "tensorU", "Tensor_8h.html#a55c5def2ba65b73a520677a983d807bd", null ],
     [ "tensorV", "Tensor_8h.html#aa8f68f595bd2663670d0cd13f20a9698", null ],
     [ "tensorX2", "Tensor_8h.html#a948c8db992908ba3150c6030552e0972", null ],

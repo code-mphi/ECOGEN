@@ -46,25 +46,29 @@ Optional Stretching
 
 .. code-block:: xml
 
-	<meshStretching>    <!-- Optional node -->
-	  <XStretching>
-	    <stretch startAt="0." endAt="0.5" factor="0.9" numberCells="20"/>
-	    <stretch startAt="0.5" endAt="1." factor="1.1" numberCells="10"/>
-	  </XStretching>
-	</meshStretching>
+  <meshStretching>    <!-- Optional node -->
+    <XStretching>
+      <stretch startAt="0." endAt="0.5" factor="1.02" refCellSize="0.02" refCellPos="end"/>
+      <stretch startAt="0.5" endAt="1." factor="1.2" refCellSize="0.02" refCellPos="start"/>
+    </XStretching>
+  </meshStretching>
 
 Stretching can be set optionally by adding the :xml:`<XStretching>` node to the :xml:`<cartesianMesh>` parent markup (in this example for stretching in the *x*-direction). It should contain one or more :xml:`<stretch>` node(s) equipped with the following attributes:
 
 - :xml:`startAt`: Real number giving the starting position of the stretched region.
 - :xml:`endAt`: Real number giving the ending position of the stretched region.
-- :xml:`factor`: Real number for the stretch factor (lower than 1 for shrinking, greater than 1 for stretching).
-- :xml:`numberCells`: Integer for the cell number attributed to the stretched region.
+- :xml:`refCellSize`: Real number giving the size of the reference cell.
+- :xml:`refCellPos`: String giving the position of the reference cell (:xml:`start` if the reference cell is at start of the stretched region, :xml:`end` if it is at end of the stretched region).
+- :xml:`factor`: Real number for the stretch factor (lower than 1 for shrinking, greater than 1 for coarsening). The stretch factor is applied from the reference cell to the other extremity of the stretched region.
 
 **Remarks:**
 
 1. Stretching can be set in each direction using :xml:`<XStretching>`, :xml:`<YStretching>` and :xml:`<ZStretching>`.
-2. For each stretched direction, the sum of stretched regions should exactly recover the entire domain without overlapping, but the number of cells can differ those specified in the :xml:`<numberCells>` initial markup.
-3. A particular attention should be paid to the link between regions which can possibly present bad quality.
+2. For each stretched direction, the sum of stretched regions should exactly recover the entire domain without overlapping.
+3. If provided, attributes of the :xml:`<numberCells>` initial markup are ignored along streched directions.
+4. A particular attention should be paid to the link between regions which can possibly present bad quality.
+5. ECOGEN computes automatically the number of cells of the stretched region from the size of the reference cell and the provided stretch factor. ECOGEN may modify the stretch factor in order to have an exact number of cells in the streched region.
+6. The computed number of cells and final stretch factor are printed in terminal to allow the user to interrupt the run (in case of a too large number of cells for example).
 
 Optional AMR
 ~~~~~~~~~~~~

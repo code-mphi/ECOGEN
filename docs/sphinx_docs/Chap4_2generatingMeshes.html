@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Generating Meshes &mdash; ECOGEN 5.0 documentation</title>
+  <title>Generating Meshes &mdash; ECOGEN 6.0 documentation</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
       <link rel="stylesheet" type="text/css" href="_static/css/theme.css" />
 
@@ -38,7 +38,7 @@
             ECOGEN
           </a>
               <div class="version">
-                5.0
+                6.0
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
@@ -73,7 +73,8 @@
 </li>
 <li class="toctree-l1"><a class="reference internal" href="Chap5_testCases_Chapter.html">Test cases</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Chap6_developersGuide_Chapter.html">Developers</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Chap7_license.html">License</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Chap7_license.html">License and authors</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Chap8_citation.html">Citation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="zBibliography.html">Bibliography</a></li>
 </ul>
 
@@ -107,7 +108,7 @@
 <p>ECOGEN is able to generate its own Cartesian meshes (see section <a class="reference internal" href="Chap3_1_3mesh.html#sec-input-cartesian"><span class="std std-ref">Cartesian mesh</span></a>), but for structured non Cartesian or unstructured meshes, as seen in section <a class="reference internal" href="Chap3_1_3mesh.html#sec-input-unstructured"><span class="std std-ref">Unstructured mesh</span></a>, an external mesh software is required to generate mesh files.</p>
 <section id="mesh-files-with-gmsh">
 <h2>Mesh files with Gmsh<a class="headerlink" href="#mesh-files-with-gmsh" title="Permalink to this heading"></a></h2>
-<p>ECOGEN can use mesh files for single- or multi-core computations generated with the open-source <a class="reference external" href="http://gmsh.info/">Gmsh</a> software <span id="id1">[<a class="reference internal" href="zBibliography.html#id99" title="C. Geuzaine and J.-F. Remacle. Gmsh: A 3-D finite element mesh generator with built-in pre-and post-processing facilities. International Journal for Numerical Methods in Engineering, 79(11):1309–1331, 2009.">GR09</a>]</span> with some specific precautions when editing the geometry file (<em>.geo</em>). Only the <a class="reference external" href="http://gmsh.info/doc/texinfo/gmsh.html#MSH-file-format-version-2-_0028Legacy_0029">MSH file format version 2</a> can be used in the current released version 5.0 of ECOGEN.</p>
+<p>ECOGEN can use mesh files for single- or multi-core computations generated with the open-source <a class="reference external" href="http://gmsh.info/">Gmsh</a> software <span id="id1">[<a class="reference internal" href="zBibliography.html#id107" title="C. Geuzaine and J.-F. Remacle. Gmsh: A 3-D finite element mesh generator with built-in pre-and post-processing facilities. International Journal for Numerical Methods in Engineering, 79(11):1309–1331, 2009.">GR09</a>]</span> with some specific precautions when editing the geometry file (<em>.geo</em>). Only the <a class="reference external" href="http://gmsh.info/doc/texinfo/gmsh.html#MSH-file-format-version-2-_0028Legacy_0029">MSH file format version 2</a> can be used in the current released version 6.0 of ECOGEN.</p>
 <p>To export your mesh to the version 2, either:</p>
 <ul class="simple">
 <li><p>Download older <a class="reference external" href="http://gmsh.info/">Gmsh</a> binaries before the new mesh file format was introduced, such as version 3.0.6 or lower: <a class="reference external" href="http://gmsh.info/bin/">http://gmsh.info/bin/</a>.</p></li>
@@ -139,13 +140,13 @@
 <p>The corresponding <em>initialCondition.xml</em> file should then contains for example the following markups:</p>
 <div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="cm">&lt;!-- LIST OF BOUNDARY CONDITIONS --&gt;</span>
 <span class="nt">&lt;boundaryConditions&gt;</span>
-<span class="w">        </span><span class="nt">&lt;boundCond</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;axis&quot;</span><span class="w"> </span><span class="na">type=</span><span class="s">&quot;symmetry&quot;</span><span class="w"> </span><span class="na">number=</span><span class="s">&quot;1&quot;</span><span class="w"> </span><span class="nt">/&gt;</span>
-<span class="w">        </span><span class="nt">&lt;boundCond</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;wall&quot;</span><span class="w"> </span><span class="na">type=</span><span class="s">&quot;wall&quot;</span><span class="w"> </span><span class="na">number=</span><span class="s">&quot;2&quot;</span><span class="w"> </span><span class="nt">/&gt;</span>
-<span class="w">        </span><span class="nt">&lt;boundCond</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;inlet&quot;</span><span class="w"> </span><span class="na">type=</span><span class="s">&quot;inletTank&quot;</span><span class="w"> </span><span class="na">number=</span><span class="s">&quot;3&quot;</span><span class="nt">&gt;</span>
-<span class="w">                </span><span class="nt">&lt;dataInletTank</span><span class="w"> </span><span class="na">p0=</span><span class="s">&quot;2.e5&quot;</span><span class="w"> </span><span class="na">T0=</span><span class="s">&quot;187.5&quot;</span><span class="nt">/&gt;</span>
+<span class="w">        </span><span class="nt">&lt;boundCond</span><span class="w"> </span><span class="na">name=</span><span class="s">"axis"</span><span class="w"> </span><span class="na">type=</span><span class="s">"symmetry"</span><span class="w"> </span><span class="na">number=</span><span class="s">"1"</span><span class="w"> </span><span class="nt">/&gt;</span>
+<span class="w">        </span><span class="nt">&lt;boundCond</span><span class="w"> </span><span class="na">name=</span><span class="s">"wall"</span><span class="w"> </span><span class="na">type=</span><span class="s">"wall"</span><span class="w"> </span><span class="na">number=</span><span class="s">"2"</span><span class="w"> </span><span class="nt">/&gt;</span>
+<span class="w">        </span><span class="nt">&lt;boundCond</span><span class="w"> </span><span class="na">name=</span><span class="s">"inlet"</span><span class="w"> </span><span class="na">type=</span><span class="s">"inletTank"</span><span class="w"> </span><span class="na">number=</span><span class="s">"3"</span><span class="nt">&gt;</span>
+<span class="w">                </span><span class="nt">&lt;dataInletTank</span><span class="w"> </span><span class="na">p0=</span><span class="s">"2.e5"</span><span class="w"> </span><span class="na">T0=</span><span class="s">"187.5"</span><span class="nt">/&gt;</span>
 <span class="w">        </span><span class="nt">&lt;/boundCond&gt;</span>
-<span class="w">        </span><span class="nt">&lt;boundCond</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;outlet&quot;</span><span class="w"> </span><span class="na">type=</span><span class="s">&quot;outletPressure&quot;</span><span class="w"> </span><span class="na">number=</span><span class="s">&quot;4&quot;</span><span class="nt">&gt;</span>
-<span class="w">                </span><span class="nt">&lt;dataOutletPressure</span><span class="w"> </span><span class="na">p0=</span><span class="s">&quot;1.e5&quot;</span><span class="nt">/&gt;</span>
+<span class="w">        </span><span class="nt">&lt;boundCond</span><span class="w"> </span><span class="na">name=</span><span class="s">"outlet"</span><span class="w"> </span><span class="na">type=</span><span class="s">"outletPressure"</span><span class="w"> </span><span class="na">number=</span><span class="s">"4"</span><span class="nt">&gt;</span>
+<span class="w">                </span><span class="nt">&lt;dataOutletPressure</span><span class="w"> </span><span class="na">p0=</span><span class="s">"1.e5"</span><span class="nt">/&gt;</span>
 <span class="w">        </span><span class="nt">&lt;/boundCond&gt;</span>
 <span class="nt">&lt;/boundaryConditions&gt;</span>
 </pre></div>
@@ -166,7 +167,7 @@
   <hr/>
 
   <div role="contentinfo">
-    <p>&#169; Copyright 2025, code-mphi.</p>
+    <p>&#169; Copyright 2026, code-mphi.</p>
   </div>
 
   Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a

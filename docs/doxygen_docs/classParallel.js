@@ -49,7 +49,6 @@ var classParallel =
     [ "stopRun", "classParallel.html#a1ba20d435a7d599f5a7be40d414a300e", null ],
     [ "updatePersistentCommunicationsAMR", "classParallel.html#aeb65a06e4b0afe65a805af5a42edaf89", null ],
     [ "updatePersistentCommunicationsLvlAMR", "classParallel.html#ab51b18ccbd5d99df0ac32ee9132c0e50", null ],
-    [ "verifyStateCPUs", "classParallel.html#a8aceadd5147f30d05552db22b193e73c", null ],
     [ "m_bufferNumberElementsToReceiveFromNeighbour", "classParallel.html#a32bdeedeee6f75ea961591e2c8e42a00", null ],
     [ "m_bufferNumberElementsToSendToNeighbor", "classParallel.html#aa442ae8180e6f70cc78979391cd0c3cc", null ],
     [ "m_bufferNumberSlopesToReceiveFromNeighbour", "classParallel.html#a033d192e7f5f432447e526c490602c84", null ],

@@ -1,0 +1,16 @@
+<map id="ModNEqDEM" name="ModNEqDEM">
+<area shape="rect" id="Node000001" title="Model class for the non&#45;equilibrium system of equations using the DEM." alt="" coords="112,226,217,254"/>
+<area shape="rect" id="Node000002" href="$classModNEq.html" title="Model class for the non&#45;equilibrium system of equations." alt="" coords="5,126,81,153"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="71,160,150,224,146,227,69,165"/>
+<area shape="rect" id="Node000003" href="$classModel.html" title="Abstract class for mathematical flow models." alt="" coords="12,15,74,43"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="44,55,46,126,40,125,42,60"/>
+<area shape="rect" id="Node000004" href="$classRiemannSolver.html" title="RiemannSolver abstract class for the non&#45;equilibrium system of equations." alt="" coords="104,126,224,153"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="166,167,167,227,162,225,162,171"/>
+<area shape="rect" id="Node000005" href="$classFluxEuler.html" title="Model class for Euler Flux (single phase)." alt="" coords="280,126,363,153"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="316,167,308,188,294,204,258,225,218,236,217,231,256,220,291,200,303,185,312,170"/>
+<area shape="rect" id="Node000006" href="$classFlux.html" title="Abstract class for conservative variables and fluxes." alt="" coords="266,15,316,43"/>
+<area shape="poly" id="edge5_Node000005_Node000006" title=" " alt="" coords="300,55,321,126,315,125,297,60"/>
+<area shape="rect" id="Node000007" href="$classCoord.html" title="Class for a coordinate system object such as coordinates of the vertex or a vector." alt="" coords="340,15,399,43"/>
+<area shape="poly" id="edge6_Node000005_Node000007" title=" " alt="" coords="360,55,329,127,325,124,356,58"/>
+<area shape="poly" id="edge7_Node000007_Node000007" title=" " alt="" coords="415,17,423,21,426,29,418,40,400,43,399,38,415,36,421,29,419,25,414,22"/>
+</map>

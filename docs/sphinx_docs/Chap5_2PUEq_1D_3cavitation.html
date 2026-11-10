@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Cavitation &mdash; ECOGEN 5.0 documentation</title>
+  <title>Cavitation &mdash; ECOGEN 6.0 documentation</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
       <link rel="stylesheet" type="text/css" href="_static/css/theme.css" />
 
@@ -38,7 +38,7 @@
             ECOGEN
           </a>
               <div class="version">
-                5.0
+                6.0
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
@@ -57,9 +57,9 @@
 <li class="toctree-l1 current"><a class="reference internal" href="Chap5_testCases_Chapter.html">Test cases</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="Chap5_1Euler.html">Single-phase test cases</a></li>
 <li class="toctree-l2 current"><a class="reference internal" href="Chap5_2.html">Multiphase test cases</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="Chap5_3NEq.html">Non-equilibrium model</a></li>
 <li class="toctree-l3"><a class="reference internal" href="Chap5_2UEq.html">Velocity-equilibrium model</a></li>
 <li class="toctree-l3"><a class="reference internal" href="Chap5_2UEqTotE.html">Velocity-equilibrium model based on total energies</a></li>
-<li class="toctree-l3"><a class="reference internal" href="Chap5_2UEqSolid.html">Velocity-equilibrium model for solids</a></li>
 <li class="toctree-l3 current"><a class="reference internal" href="Chap5_2PUEq.html">Pressure- and velocity-equilibrium model</a><ul class="current">
 <li class="toctree-l4 current"><a class="reference internal" href="Chap5_2PUEq_1D.html">1D</a></li>
 <li class="toctree-l4"><a class="reference internal" href="Chap5_2PUEq_2D.html">2D</a></li>
@@ -67,13 +67,15 @@
 </li>
 <li class="toctree-l3"><a class="reference internal" href="Chap5_2PTUEq.html">Temperature-, pressure- and velocity-equilibrium model</a></li>
 <li class="toctree-l3"><a class="reference internal" href="Chap5_2eulerHomogeneous.html">Homogeneous Euler</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Chap5_2ENSK1D.html">Extended-Navier-Stokes-Korteweg-1D model</a></li>
 <li class="toctree-l3"><a class="reference internal" href="Chap5_2.html#other-tests-cases">Other tests cases</a></li>
 </ul>
 </li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="Chap6_developersGuide_Chapter.html">Developers</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Chap7_license.html">License</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Chap7_license.html">License and authors</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Chap8_citation.html">Citation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="zBibliography.html">Bibliography</a></li>
 </ul>
 
@@ -111,7 +113,7 @@
 The bubbles increase rapidly in size. Subsequently, when the bubbles enter a zone of higher pressure, they are reduced in size as a result of condensation of the vapors that they contain.
 This process of condensation takes place fairly quickly, accompanied by local hydraulic shocks, the emission of sound, the destruction of material bonds and other undesirable phenomena.</p>
 <p>In this test case, cavitation is only mimicked (no phase change added to the model). Indeed, the model takes into account the differences in the acoustic behavior of both phases or in other words, the differences in expansion and compression of each phase in mixture regions.
-Initial conditions of this test are shown in <a class="reference internal" href="#fig-testcases-pueq-cavitation"><span class="std std-numref">Fig. 70</span></a>.
+Initial conditions of this test are shown in <a class="reference internal" href="#fig-testcases-pueq-cavitation"><span class="std std-numref">Fig. 74</span></a>.
 Input files for this test are available in <em>./libTests/referenceTestCases/PUEq/1D/cavitation/</em>. The corresponding uncommented line in <em>ECOGEN.xml</em> is:</p>
 <div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;testCase&gt;</span>./libTests/referenceTestCases/PUEq/1D/cavitation/<span class="nt">&lt;/testCase&gt;</span>
 </pre></div>
@@ -119,7 +121,7 @@ Input files for this test are available in <em>./libTests/referenceTestCases/PUE
 <figure class="align-center" id="id1">
 <span id="fig-testcases-pueq-cavitation"></span><a class="reference internal image-reference" href="_images/initialCavitation.png"><img alt="_images/initialCavitation.png" src="_images/initialCavitation.png" style="width: 841.0px; height: 96.0px;" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 70 </span><span class="caption-text">Initial condition before cavitation.</span><a class="headerlink" href="#id1" title="Permalink to this image"></a></p>
+<p><span class="caption-number">Fig. 74 </span><span class="caption-text">Initial condition before cavitation.</span><a class="headerlink" href="#id1" title="Permalink to this image"></a></p>
 </figcaption>
 </figure>
 <p>The initial characteristics of the run are:</p>
@@ -154,12 +156,12 @@ Input files for this test are available in <em>./libTests/referenceTestCases/PUE
 </tr>
 </tbody>
 </table>
-<p>Thanks to the evolution of the density (<a class="reference internal" href="#fig-testcases-pueq-cavitationanim"><span class="std std-numref">Fig. 71</span></a>), one can observe that air in the mixture quickly expands.
+<p>Thanks to the evolution of the density (<a class="reference internal" href="#fig-testcases-pueq-cavitationanim"><span class="std std-numref">Fig. 75</span></a>), one can observe that air in the mixture quickly expands.
 One can also remark a peak in the center which is purely due to the initial discontinuous conditions. An initial smearing of the velocity discontinuity would prevent such an event.</p>
 <figure class="align-center" id="id2">
 <span id="fig-testcases-pueq-cavitationanim"></span><a class="reference internal image-reference" href="_images/cavitationAnim.gif"><img alt="_images/cavitationAnim.gif" src="_images/cavitationAnim.gif" style="width: 1200.0px; height: 126.0px;" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 71 </span><span class="caption-text">Evolution of density. Visualization using <a class="reference external" href="https://www.paraview.org/">Paraview</a> software.</span><a class="headerlink" href="#id2" title="Permalink to this image"></a></p>
+<p><span class="caption-number">Fig. 75 </span><span class="caption-text">Evolution of density. Visualization using <a class="reference external" href="https://www.paraview.org/">Paraview</a> software.</span><a class="headerlink" href="#id2" title="Permalink to this image"></a></p>
 </figcaption>
 </figure>
 <figure class="align-center">
@@ -178,7 +180,7 @@ One can also remark a peak in the center which is purely due to the initial disc
   <hr/>
 
   <div role="contentinfo">
-    <p>&#169; Copyright 2025, code-mphi.</p>
+    <p>&#169; Copyright 2026, code-mphi.</p>
   </div>
 
   Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a

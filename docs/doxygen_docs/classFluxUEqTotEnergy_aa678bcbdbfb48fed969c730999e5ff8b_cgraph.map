@@ -1,30 +1,32 @@
 <map id="FluxUEqTotEnergy::setBufferFlux" name="FluxUEqTotEnergy::setBufferFlux">
-<area shape="rect" id="Node000001" title="Temporary store the conservative variables of a given cell." alt="" coords="5,203,240,228"/>
-<area shape="rect" id="Node000002" href="$classFluxUEqTotEnergy.html#ab50c921767df1d61d47bd620cd7da72b" title="Build the conservative variables for a given cell from primitive one." alt="" coords="288,153,499,179"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="193,200,309,179,310,184,193,205"/>
-<area shape="rect" id="Node000011" href="$classCell.html#a48e263f3b639cb569cfb67d4d318e196" title=" " alt="" coords="330,203,457,228"/>
-<area shape="poly" id="edge15_Node000001_Node000011" title=" " alt="" coords="240,213,316,213,316,218,240,218"/>
-<area shape="rect" id="Node000012" href="$classCell.html#a99363a632c71f7ab2f4a90ec3bc7c5a0" title=" " alt="" coords="332,252,455,277"/>
-<area shape="poly" id="edge16_Node000001_Node000012" title=" " alt="" coords="193,225,319,248,318,254,193,231"/>
-<area shape="rect" id="Node000003" href="$classEos.html#a4fd76d58c6463b3a6c94fcadfdf07e1a" title="See derived classes." alt="" coords="547,5,702,31"/>
-<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="405,151,462,98,502,67,545,40,559,33,562,38,548,44,505,71,466,102,409,155"/>
-<area shape="rect" id="Node000005" href="$classPhase.html#a4e4cd8c6afd1e1a8f7304ad7d7c3ee2f" title=" " alt="" coords="561,55,688,80"/>
-<area shape="poly" id="edge4_Node000002_Node000005" title=" " alt="" coords="417,151,475,121,546,89,565,82,567,87,548,94,477,126,419,156"/>
-<area shape="rect" id="Node000006" href="$classMixture.html#a0c35edf137efba38c10009d0049aa887" title=" " alt="" coords="549,104,700,129"/>
-<area shape="poly" id="edge6_Node000002_Node000006" title=" " alt="" coords="453,151,551,130,552,135,454,156"/>
-<area shape="rect" id="Node000007" href="$classPhase.html#a482f6875d98b0fa8184720e6dfe89c48" title=" " alt="" coords="555,153,695,179"/>
-<area shape="poly" id="edge8_Node000002_Node000007" title=" " alt="" coords="499,163,541,163,541,169,499,169"/>
-<area shape="rect" id="Node000008" href="$classPhase.html#aeb72ca0fa38e4fe35643d38f4833e688" title=" " alt="" coords="568,203,681,228"/>
-<area shape="poly" id="edge10_Node000002_Node000008" title=" " alt="" coords="454,176,555,198,554,203,453,181"/>
-<area shape="rect" id="Node000009" href="$classMixture.html#ac9ff19d8846c5f1ae72d79d1b8c1739c" title=" " alt="" coords="548,252,701,277"/>
-<area shape="poly" id="edge12_Node000002_Node000009" title=" " alt="" coords="474,176,500,188,516,200,525,213,534,225,548,237,562,244,559,249,545,242,530,229,521,216,512,204,497,192,472,181"/>
-<area shape="rect" id="Node000010" href="$classCoord.html#af9f910f00517892c7741a9a92d27f4c1" title="Return the value of the squared norm of the Coord object." alt="" coords="547,301,703,327"/>
-<area shape="poly" id="edge14_Node000002_Node000010" title=" " alt="" coords="481,177,500,188,512,200,520,213,526,238,532,263,538,275,548,287,557,293,553,297,545,291,533,278,527,265,521,239,515,215,508,203,497,192,479,181"/>
-<area shape="rect" id="Node000004" href="$classErrors.html#a78eeb532e12787fee07b78aa5ef6a0c6" title=" " alt="" coords="751,129,908,155"/>
-<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="677,28,704,40,762,78,807,118,804,122,758,82,701,44,675,33"/>
-<area shape="poly" id="edge5_Node000005_Node000004" title=" " alt="" coords="670,78,704,89,787,121,785,126,702,94,668,83"/>
-<area shape="poly" id="edge7_Node000006_Node000004" title=" " alt="" coords="700,123,738,128,737,133,700,129"/>
-<area shape="poly" id="edge9_Node000007_Node000004" title=" " alt="" coords="695,155,737,150,737,155,695,160"/>
-<area shape="poly" id="edge11_Node000008_Node000004" title=" " alt="" coords="665,200,702,187,782,157,784,162,704,193,666,205"/>
-<area shape="poly" id="edge13_Node000009_Node000004" title=" " alt="" coords="672,250,701,237,758,200,803,162,807,166,761,204,704,242,674,254"/>
+<area shape="rect" id="Node000001" title="Temporary store the conservative variables of a given cell." alt="" coords="5,252,239,280"/>
+<area shape="rect" id="Node000002" href="$classFluxUEqTotEnergy.html#ab50c921767df1d61d47bd620cd7da72b" title="Build the conservative variables for a given cell from primitive one." alt="" coords="287,161,497,189"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="154,249,215,224,286,198,313,192,308,194,287,203,217,229,157,254"/>
+<area shape="rect" id="Node000011" href="$classFluxUEqTotEnergy.html#af5181af44a642ae4677e5728bc3ccd32" title=" " alt="" coords="292,213,492,258"/>
+<area shape="poly" id="edge15_Node000001_Node000011" title=" " alt="" coords="238,250,279,248,274,249,240,255"/>
+<area shape="rect" id="Node000012" href="$classCell.html#a48e263f3b639cb569cfb67d4d318e196" title=" " alt="" coords="329,281,454,309"/>
+<area shape="poly" id="edge16_Node000001_Node000012" title=" " alt="" coords="239,276,316,286,311,287,239,281"/>
+<area shape="rect" id="Node000013" href="$classCell.html#a99363a632c71f7ab2f4a90ec3bc7c5a0" title=" " alt="" coords="331,333,452,361"/>
+<area shape="poly" id="edge17_Node000001_Node000013" title=" " alt="" coords="164,278,287,318,319,329,314,329,286,323,163,283"/>
+<area shape="rect" id="Node000003" href="$classEos.html#a4fd76d58c6463b3a6c94fcadfdf07e1a" title="See derived classes." alt="" coords="546,5,700,33"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="405,159,462,104,501,72,544,44,560,38,555,41,546,48,504,76,465,108,408,163"/>
+<area shape="rect" id="Node000005" href="$classPhase.html#a4e4cd8c6afd1e1a8f7304ad7d7c3ee2f" title=" " alt="" coords="560,57,686,85"/>
+<area shape="poly" id="edge4_Node000002_Node000005" title=" " alt="" coords="417,159,475,128,544,95,565,90,560,92,546,100,477,133,420,163"/>
+<area shape="rect" id="Node000006" href="$classMixture.html#a0c35edf137efba38c10009d0049aa887" title=" " alt="" coords="548,109,698,137"/>
+<area shape="poly" id="edge6_Node000002_Node000006" title=" " alt="" coords="456,158,545,140,540,142,458,163"/>
+<area shape="rect" id="Node000007" href="$classPhase.html#a482f6875d98b0fa8184720e6dfe89c48" title=" " alt="" coords="553,161,692,189"/>
+<area shape="poly" id="edge8_Node000002_Node000007" title=" " alt="" coords="497,173,540,175,535,176,498,178"/>
+<area shape="rect" id="Node000008" href="$classPhase.html#aeb72ca0fa38e4fe35643d38f4833e688" title=" " alt="" coords="566,213,679,241"/>
+<area shape="poly" id="edge10_Node000002_Node000008" title=" " alt="" coords="457,187,554,211,548,212,457,192"/>
+<area shape="rect" id="Node000009" href="$classMixture.html#ac9ff19d8846c5f1ae72d79d1b8c1739c" title=" " alt="" coords="546,265,699,293"/>
+<area shape="poly" id="edge12_Node000002_Node000009" title=" " alt="" coords="473,187,498,198,514,211,524,225,532,238,547,250,558,259,553,258,543,255,528,241,519,228,510,215,496,203,473,192"/>
+<area shape="rect" id="Node000010" href="$classCoord.html#af9f910f00517892c7741a9a92d27f4c1" title="Return the value of the squared norm of the Coord object." alt="" coords="545,317,700,345"/>
+<area shape="poly" id="edge14_Node000002_Node000010" title=" " alt="" coords="480,187,499,198,511,211,518,225,524,251,530,277,536,290,547,303,553,310,548,308,543,306,532,293,525,279,519,252,513,227,507,214,495,203,479,192"/>
+<area shape="rect" id="Node000004" href="$classErrors.html#a5fcdb1d77f9c74188b44ac7d0d05a453" title=" " alt="" coords="748,136,905,164"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="674,31,702,44,758,83,804,126,798,125,755,87,699,48,674,36"/>
+<area shape="poly" id="edge5_Node000005_Node000004" title=" " alt="" coords="667,83,701,95,781,129,776,130,699,100,667,88"/>
+<area shape="poly" id="edge7_Node000006_Node000004" title=" " alt="" coords="698,130,735,137,730,138,699,136"/>
+<area shape="poly" id="edge9_Node000007_Node000004" title=" " alt="" coords="692,164,735,161,730,162,693,169"/>
+<area shape="poly" id="edge11_Node000008_Node000004" title=" " alt="" coords="666,210,699,198,775,171,780,169,701,203,667,215"/>
+<area shape="poly" id="edge13_Node000009_Node000004" title=" " alt="" coords="673,262,699,250,754,212,799,175,803,173,758,216,702,255,674,267"/>
 </map>

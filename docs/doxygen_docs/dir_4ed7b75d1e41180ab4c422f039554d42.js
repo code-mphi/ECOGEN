@@ -19,6 +19,8 @@ var dir_4ed7b75d1e41180ab4c422f039554d42 =
     [ "HeaderLimiter.h", "HeaderLimiter_8h.html", null ],
     [ "Limiter.cpp", "Limiter_8cpp.html", null ],
     [ "Limiter.h", "Limiter_8h.html", "Limiter_8h" ],
+    [ "LimiterKoren.cpp", "LimiterKoren_8cpp.html", null ],
+    [ "LimiterKoren.h", "LimiterKoren_8h.html", "LimiterKoren_8h" ],
     [ "LimiterMC.cpp", "LimiterMC_8cpp.html", null ],
     [ "LimiterMC.h", "LimiterMC_8h.html", "LimiterMC_8h" ],
     [ "LimiterMinmod.cpp", "LimiterMinmod_8cpp.html", null ],

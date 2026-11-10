@@ -1,9 +1,13 @@
 <map id="Phase::setEnergy" name="Phase::setEnergy">
-<area shape="rect" id="Node000001" title=" " alt="" coords="256,55,391,80"/>
-<area shape="rect" id="Node000002" href="$classFluxEuler.html#a5267a54d69731c74528727f8fd8565c9" title="Build the primitive variables for a given cell from conservative one." alt="" coords="30,5,183,31"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="253,54,163,33,164,28,254,49"/>
-<area shape="rect" id="Node000003" href="$classRelaxationPTMu.html#a942e19d92434d4c0a073a32f28137995" title="Stiff Thermo&#45;Chemical relaxation method." alt="" coords="5,55,208,80"/>
-<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="242,70,208,70,208,65,242,65"/>
-<area shape="rect" id="Node000004" href="$classRelaxationPFinite.html#aa4f46a0b4ca70047bb49d68a463f9104" title="Finite Pressure relaxation method." alt="" coords="35,105,179,145"/>
-<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="262,86,180,108,178,103,261,81"/>
+<area shape="rect" id="Node000001" title=" " alt="" coords="312,143,445,170"/>
+<area shape="rect" id="Node000002" href="$classFluxEuler.html#a5267a54d69731c74528727f8fd8565c9" title="Build the primitive variables for a given cell from conservative one." alt="" coords="58,5,211,33"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="355,130,316,87,291,65,262,47,237,36,212,29,210,24,239,31,265,42,294,61,320,84,361,130"/>
+<area shape="rect" id="Node000003" href="$classFluxExtendedNavierStokesKorteweg1D.html#a8a48bfe6716413ef97a6307bc29ee02a" title="Build the primitive variables for a given cell from conservative one." alt="" coords="36,57,233,102"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="325,137,263,116,225,105,225,99,265,111,330,136"/>
+<area shape="rect" id="Node000004" href="$classSourceExactExtendedNavierStokesKorteweg1D.html#a55f1a24559abaf373c0dd51c7f6e6a3d" title="Integration via an exact solution." alt="" coords="5,126,264,187"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="293,157,265,159,264,154,298,156"/>
+<area shape="rect" id="Node000005" href="$classRelaxationPFinite.html#aa4f46a0b4ca70047bb49d68a463f9104" title="Finite Pressure relaxation method." alt="" coords="63,212,206,256"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="325,177,264,202,207,218,206,213,263,197,330,175"/>
+<area shape="rect" id="Node000006" href="$classRelaxationPTMu.html#a942e19d92434d4c0a073a32f28137995" title="Stiff Thermo&#45;Chemical relaxation method." alt="" coords="34,280,235,308"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="360,182,320,229,294,252,265,271,236,283,235,278,262,266,291,248,316,226,356,184"/>
 </map>

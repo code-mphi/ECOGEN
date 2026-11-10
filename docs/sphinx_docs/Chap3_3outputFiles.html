@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Output Files &mdash; ECOGEN 5.0 documentation</title>
+  <title>Output Files &mdash; ECOGEN 6.0 documentation</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
       <link rel="stylesheet" type="text/css" href="_static/css/theme.css" />
 
@@ -38,7 +38,7 @@
             ECOGEN
           </a>
               <div class="version">
-                5.0
+                6.0
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
@@ -58,10 +58,12 @@
 <li class="toctree-l2 current"><a class="current reference internal" href="#">Output Files</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#using-gnu-format">Using GNU format</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#xml-vtk-file-format">XML VTK file format</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#vtkhdf-file-format">VTKHDF file format</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#saving-input-files">Saving input files</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#probes-and-cuts">Probes and cuts</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#mesh-information">Mesh information</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#screen-output">Screen output</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#screen-output-backup-infocalcul-out-file">Screen output backup: <cite>infoCalcul.out</cite> file</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="Chap3_4featuresModels.html">Feature compatibility</a></li>
@@ -70,7 +72,8 @@
 <li class="toctree-l1"><a class="reference internal" href="Chap4_tutorials_Chapter.html">Tutorials</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Chap5_testCases_Chapter.html">Test cases</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Chap6_developersGuide_Chapter.html">Developers</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Chap7_license.html">License</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Chap7_license.html">License and authors</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Chap8_citation.html">Citation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="zBibliography.html">Bibliography</a></li>
 </ul>
 
@@ -106,17 +109,21 @@ One can select the following format:</p>
 <ul class="simple">
 <li><p><em>GNU</em>: Format in ASCII, results are given in column.</p></li>
 <li><p><em>VTK</em>: VTK file format (ASCII or binary).</p></li>
+<li><p><em>VTKHDF</em>: VTKHDF file format (binary).</p></li>
 </ul>
-<p>The result files are placed within the <strong>ECOGEN/results/XXX/datasets/</strong> subfolder and their names follow the rules:</p>
-<p>result(format)_CPU(proc)_TIME(instant).(ext)</p>
-<p>where the variables are:</p>
+<p>The result files are placed within the <strong>ECOGEN/results/XXX/datasets/</strong> subfolder.</p>
+<p><em>GNU</em> and <em>VTK</em> filenames follow the rules:</p>
+<p class="centered">
+<strong><cite>result(format)_CPU(proc)_TIME(instant).(ext)</cite></strong></p><p>where the variables are:</p>
 <ul class="simple">
 <li><p>(format): Data format (empty for ASCII, B64 for binary).</p></li>
 <li><p>(instant): Timestamp of the written result (depends on the selected frequency for writing).</p></li>
 <li><p>(proc): The core number where the results are from (in the case of a parallel simulation).</p></li>
 <li><p>(ext): Type of mesh.</p></li>
 </ul>
-<section id="using-gnu-format">
+<p><em>VTKHDF</em> filenames follow the rules:</p>
+<p class="centered">
+<strong><cite>result_TIME(instant).vtkhdf</cite></strong></p><section id="using-gnu-format">
 <h2>Using GNU format<a class="headerlink" href="#using-gnu-format" title="Permalink to this heading"></a></h2>
 <p>This format leads to result files with the <em>(ext)=out</em> extension. This format in column is very useful for a quick visualization of the results using the freeware <a class="reference external" href="http://www.gnuplot.info/">gnuplot</a> or any other tool. When this format is selected, ECOGEN automatically creates a script file <em>visualization.gnu</em> at the root of the result folder. This allows a very quick and efficient use for 1D runs.</p>
 </section>
@@ -129,6 +136,13 @@ One can select the following format:</p>
 </ul>
 <p>ECOGEN also produces files named <em>collectionParaview.pvd</em> and <em>collectionVisIt.visit</em> (or <em>collectionParaviewB64.pvd</em> and <em>collectionParaviewB64.pvd</em> for BINARY) in order to load only one pack of files when the software <a class="reference external" href="https://www.paraview.org/">ParaView</a> and <a class="reference external" href="https://wci.llnl.gov/simulation/computer-codes/visit/">VisIt</a> are used, respectively.</p>
 </section>
+<section id="vtkhdf-file-format">
+<h2>VTKHDF file format<a class="headerlink" href="#vtkhdf-file-format" title="Permalink to this heading"></a></h2>
+<p>ECOGEN can provide HDF5 outputs at VTKHDF file format. Writing files in VTKHDF file format leads to files with the <em>vtkhdf</em> extension.
+For now, all meshes, whatever their type, are saved at unstructured file format.</p>
+<p>ECOGEN also produces a file named <em>timeseriesParaview.vtkhdf.series</em> in order to directly load one pack of files in <em>Paraview</em>. For old versions of ParaView, it is required to disable the <cite>Merge Parts</cite> option (enabled by default) in the Properties section of the Paraview GUI to avoid a deadlock when visalizing the file.</p>
+<p>Note that VTKHDF outputs are less efficient than XML VTK outputs on a small number of MPI processes. They have to be used for test cases where XML VTK outputs would create more than about 10000 files in the dataset folder, thus, when the number of MPI process times the number of time steps written approaches or exceeds 10000. In this case the file system may saturates or crash due to the very large number of files to manage and VTKHDF outputs have to be prefered.</p>
+</section>
 <section id="saving-input-files">
 <h2>Saving input files<a class="headerlink" href="#saving-input-files" title="Permalink to this heading"></a></h2>
 <p>In addition to the results, a copy of the input files of the current simulation is done in the subfolder <strong>ECOGEN/results/XXX/savesInput/</strong> to ensure a safe reproduction of the results.</p>
@@ -139,13 +153,29 @@ One can select the following format:</p>
 </section>
 <section id="mesh-information">
 <h2>Mesh information<a class="headerlink" href="#mesh-information" title="Permalink to this heading"></a></h2>
-<p>When using AMR, mesh information is saved at a frequency specified in the <em>main.xml</em> file to allow a resume of the simulation and the corresponding files are placed within the subfolders <strong>ECOGEN/results/XXX/infoMesh/</strong>.</p>
+<p>When using AMR, mesh information is saved at a frequency specified in the <em>main.xml</em> file to allow a resume of the simulation and the corresponding files are placed within the subfolders <strong>ECOGEN/results/XXX/infoMesh/</strong>:</p>
+<blockquote>
+<div><ul>
+<li><p><em>domainDecomposition_TIME&lt;n&gt;.out</em> files contain informations on the parallel domain decomposition,</p></li>
+<li><p><em>treeStructure.*_TIME&lt;n&gt;.out</em> files contain the subdivision status of each cell of the mesh (0 for non splitted, 1 for splitted):</p>
+<ul class="simple">
+<li><p>when using GNU or VTK output file format, one ASCII file, named <em>treeStructure_CPU&lt;p&gt;_TIME&lt;n&gt;.out</em>, is saved per MPI process and per time step. It contains only the subdivision status of each cell of the mesh.</p></li>
+<li><p>when using VTKHDF output file format (so in context of a large number of MPI processes), only one binary file, named <em>treeStructure_TIME&lt;n&gt;.out</em>, is saved per time step. It contains, first, the cell count per mpi process in order of ascending rank, and second, the status of the cells of the mesh of each process (still in order of ascending rank). To inspect the content of this file, use:</p></li>
+</ul>
+<blockquote>
+<div><div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>od<span class="w"> </span>-i<span class="w"> </span>treeStructure_TIME&lt;n&gt;.out<span class="w"> </span>-p
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+</ul>
+</div></blockquote>
 </section>
 <section id="screen-output">
 <h2>Screen output<a class="headerlink" href="#screen-output" title="Permalink to this heading"></a></h2>
 <p>In real time, some data are available during the simulation directly at the terminal screen as soon as ECOGEN starts. Hereafter is an example of a screenshot:</p>
 <figure class="align-center" id="id1">
-<a class="reference internal image-reference" href="_images/RunECOGEN_Logo.png"><img alt="_images/RunECOGEN_Logo.png" src="_images/RunECOGEN_Logo.png" style="width: 759.0px; height: 468.0px;" /></a>
+<img alt="_images/RunECOGEN_Logo.png" src="_images/RunECOGEN_Logo.png" />
 <figcaption>
 <p><span class="caption-number">Fig. 4 </span><span class="caption-text">: Screenshot of the top of ECOGEN’s default run console.</span><a class="headerlink" href="#id1" title="Permalink to this image"></a></p>
 </figcaption>
@@ -157,7 +187,26 @@ One can select the following format:</p>
 <li><p>physical time in the simulation,</p></li>
 <li><p>value of the last timestep,</p></li>
 <li><p>CPU time since the beginning of the simulation,</p></li>
-<li><p>CPU time spent in AMR routines since the beginning of the simulation.</p></li>
+<li><p>CPU time spent in AMR routines since the beginning of the simulation,</p></li>
+<li><p>CPU time spent writing the main output files (mesh and solution fields) since the beginning of the simulation.</p></li>
+</ul>
+</section>
+<section id="screen-output-backup-infocalcul-out-file">
+<h2>Screen output backup: <cite>infoCalcul.out</cite> file<a class="headerlink" href="#screen-output-backup-infocalcul-out-file" title="Permalink to this heading"></a></h2>
+<p>The <em>infoCalcul.out</em> file is saved at root of the output directory. It is needed to resume or restart a simulation and contains the data displayed in the terminal output, so:</p>
+<ul class="simple">
+<li><p>first, the number of mpi processes that have been used to run the simulation,</p></li>
+<li><p>then, at the wanted output frequency:</p>
+<ul>
+<li><p>the number of the result files,</p></li>
+<li><p>the number of the last time step,</p></li>
+<li><p>the physical time in the simulation,</p></li>
+<li><p>the value of the last time step,</p></li>
+<li><p>the CPU time since the beginning of the simulation,</p></li>
+<li><p>the CPU time spent in AMR routines since the beginning of the simulation,</p></li>
+<li><p>the CPU time spent writing the main output files (mesh and solution fields) since the beginning of the simulation.</p></li>
+</ul>
+</li>
 </ul>
 </section>
 </section>
@@ -173,7 +222,7 @@ One can select the following format:</p>
   <hr/>
 
   <div role="contentinfo">
-    <p>&#169; Copyright 2025, code-mphi.</p>
+    <p>&#169; Copyright 2026, code-mphi.</p>
   </div>
 
   Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a

@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Non-equilibrium model &mdash; ECOGEN 6.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/sphinx_highlight.js"></script>
+        <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="1D" href="Chap5_3NEq_1D.html" />
+    <link rel="prev" title="Multiphase test cases" href="Chap5_2.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            ECOGEN
+          </a>
+              <div class="version">
+                6.0
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="Chap1_introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Chap2_installation_Chapter.html">Installation instructions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Chap3_IO_Chapter.html">I/O descriptions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Chap4_tutorials_Chapter.html">Tutorials</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="Chap5_testCases_Chapter.html">Test cases</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="Chap5_1Euler.html">Single-phase test cases</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="Chap5_2.html">Multiphase test cases</a><ul class="current">
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Non-equilibrium model</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="Chap5_3NEq_1D.html">1D</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Chap5_3NEq_2D.html">2D</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="Chap5_2UEq.html">Velocity-equilibrium model</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Chap5_2UEqTotE.html">Velocity-equilibrium model based on total energies</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Chap5_2PUEq.html">Pressure- and velocity-equilibrium model</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Chap5_2PTUEq.html">Temperature-, pressure- and velocity-equilibrium model</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Chap5_2eulerHomogeneous.html">Homogeneous Euler</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Chap5_2ENSK1D.html">Extended-Navier-Stokes-Korteweg-1D model</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Chap5_2.html#other-tests-cases">Other tests cases</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="Chap6_developersGuide_Chapter.html">Developers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Chap7_license.html">License and authors</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Chap8_citation.html">Citation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="zBibliography.html">Bibliography</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">ECOGEN</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="Chap5_testCases_Chapter.html">Test cases</a></li>
+          <li class="breadcrumb-item"><a href="Chap5_2.html">Multiphase test cases</a></li>
+      <li class="breadcrumb-item active">Non-equilibrium model</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/Chap5_3NEq.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="non-equilibrium-model">
+<span id="sec-model-noneq"></span><h1>Non-equilibrium model<a class="headerlink" href="#non-equilibrium-model" title="Permalink to this heading"></a></h1>
+<p>Total-non-equilibrium flows are solved in ECOGEN using the total-non-equilibrium model <span id="id1">[<a class="reference internal" href="zBibliography.html#id313" title="R. Saurel and R. Abgrall. A multiphase Godunov method for compressible multifluid and multiphase flows. Journal of Computational Physics, 150:425–467, 1999.">SA99</a>]</span>. For <em>N</em> phases involved and without any extra physics (surface tension, viscosity, heat flux …), this model reads:</p>
+<div class="math notranslate nohighlight">
+\begin{equation}
+\label{system_NEq}
+\left\{
+{\begin{array}{*{20}{l}}
+  \cfrac{\partial \alpha_{k}}{\partial t} + \mathbf{u}_{I} \cdot \nabla \alpha_{k} = R_{\alpha_{k}} , \\
+              \cfrac{\partial \alpha_{k} \rho_{k}}{\partial t} + \nabla \cdot \left( \alpha_{k} \rho_{k} \mathbf{u}_{k} \right) = R_{\mathrm{masse}_{k}} , \\
+              \cfrac{\partial \alpha_{k} \rho_{k} \mathbf{u}_{k}}{\partial t} + \nabla \cdot \left( \alpha_{k} \rho_{k} \mathbf{u}_{k} \otimes \mathbf{u}_{k} \right) = p_{I} \nabla \alpha_{k} + \boldsymbol{R}_{\mathrm{mvt}_{k}},  \\
+              \cfrac{\partial \alpha_{k} \rho_{k} E_{k}}{\partial t} + \nabla \cdot \left( \alpha_{k} \rho_{k} E_{k} \mathbf{u}_{k} \right) = p_{I} \mathbf{u}_{I} \cdot \nabla \alpha_{k} + R_{{E}_{k}},
+\end{array}} \right.\
+\end{equation}</div><p>where <span class="math notranslate nohighlight">\(\alpha_k\)</span>, <span class="math notranslate nohighlight">\(\rho_k\)</span>, <span class="math notranslate nohighlight">\(p_k\)</span>, <span class="math notranslate nohighlight">\(\mathbf{u_k}\)</span> and <span class="math notranslate nohighlight">\(E_k\)</span> are the volume fraction, density, pressure, velocity and total energy of each phase, respectively, and for which <span class="math notranslate nohighlight">\(k\)</span> indicates the phase index.
+The mixture density, pressure and velocity are</p>
+<div class="math notranslate nohighlight">
+\begin{equation}
+  \rho = \sum_{k=1}^N \alpha _k \rho_k  \quad \text{,} \quad p = \sum_{k=1}^N \alpha _k p_k \quad \text{and} \quad \mathbf{u} = \sum_{k=1}^N Y_k u_k,
+\end{equation}</div><p>with <span class="math notranslate nohighlight">\(Y_k\)</span> the mass fractions define as</p>
+<div class="math notranslate nohighlight">
+\begin{equation}
+  Y_k = \frac{\alpha_k \rho_k}{\rho} .
+\end{equation}</div><p>The total energy per phase is</p>
+<div class="math notranslate nohighlight">
+\begin{equation}
+  E_k = e_k + \frac{1}{2} \| \mathbf{u_k} \|^2,
+\end{equation}</div><p><span class="math notranslate nohighlight">\(e\)</span> is the mixture specific internal energy</p>
+<div class="math notranslate nohighlight">
+\begin{equation}
+  e = \sum_{k=1}^N Y_k e_k \left( \rho_k , p_k \right) .
+\end{equation}</div><p><span class="math notranslate nohighlight">\(e_k \left( \rho_k , p_k \right)\)</span> is defined via the equation of state (EOS), such as of perfect gas or stiffened gas.
+<span class="math notranslate nohighlight">\(p_{I}\)</span> and <span class="math notranslate nohighlight">\(\mathbf{u}_{I}\)</span> denote the pressure and velocity at the interfaces. Their definition depends on the Riemann solver employed to compute the flux at each cell interface. Finally, the coefficients <span class="math notranslate nohighlight">\(R\)</span> correspond to relaxation source terms.</p>
+<p>This model can be solved thanks to the Discrete Equation Method (DEM) presented in <span id="id2">[<a class="reference internal" href="zBibliography.html#id283" title="R. Abgrall and R. Saurel. Discrete equations for physical and numerical compressible multiphase mixtures. J. Comp. Phys., 186(2):361–396, 2003.">AS03</a>]</span>, or alternatively by the HLLAC solver presented in <span id="id3">[<a class="reference internal" href="zBibliography.html#id10" title="H. Lochon, F. Daude, P. Galon, and J.-M. Hérard. HLLC-type Riemann solver with approximated two-phase contact for the computation of the Baer–Nunziato two-fluid model. J. Comp. Phys., 326:733-762, 2016.">LDGH16</a>]</span>, the HLLC4waves solver presented in <span id="id4">[<a class="reference internal" href="zBibliography.html#id9" title="D. Furfaro and R. Saurel. A simple HLLC-type Riemann solver for compressible non-equilibrium two-phase flows. Computers &amp; Fluids, 111:159-178, 2015.">FS15</a>]</span>, the HLL- or Rusanov-type solvers presented in <span id="id5">[<a class="reference internal" href="zBibliography.html#id313" title="R. Saurel and R. Abgrall. A multiphase Godunov method for compressible multifluid and multiphase flows. Journal of Computational Physics, 150:425–467, 1999.">SA99</a>]</span> with different closure laws.</p>
+<dl class="simple">
+<dt><strong>Remarks:</strong></dt><dd><ul class="simple">
+<li><p>The DEM can be applied with two different Riemann-problem solvers: an HLLC and an exact solver. By default, the contact surface definition adopted is that of Paula et al. <span id="id6">[<a class="reference internal" href="zBibliography.html#id377" title="Thomas Paula, Stefan Adami, and Nikolaus A Adams. A robust high-resolution discrete-equations method for compressible multi-phase flow with accurate interface capturing. Journal of Computational Physics, 491:112371, 2023.">PAA23</a>]</span>, which is symmetric. Alternatively, the formulation proposed by Chinnayya <span id="id7">[<a class="reference internal" href="zBibliography.html#id378" title="A. Chinnayya. Construction de modèles et de méthodes numériques pour les écoulements multiphasiques à phases compressibles: application à la simulation des ondes de détonation dans les matériaux hautement énergétiques. PhD thesis, Aix-Marseille 1, 2002.">Chi02</a>]</span>, which is non-symmetric, extended to <em>N</em> phases, can be chosen.</p></li>
+<li><p>The HLLAC solvers must be used with the gas phase placed first, followed by the solid phase.</p></li>
+<li><p>The HLL/Rusanov solver can be used with symmetric (default) or Baer &amp; Nunziato (commented out) closure law. To ensure numerical stability, the CFL number must be set to 0.5 or lower.</p></li>
+</ul>
+</dd>
+</dl>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="Chap5_3NEq_1D.html">1D</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="Chap5_3NEq_1D_1transportWaterAir.html">Transport of water–air mixture</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Chap5_3NEq_1D_2shockTubes.html">Shock tubes</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="Chap5_3NEq_1D_2shockTubes.html#water-air-interface">Water–Air interface</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Chap5_3NEq_1D_2shockTubes.html#water-air-mixture-with-equal-volume-fraction">Water–Air mixture with equal volume fraction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Chap5_3NEq_1D_2shockTubes.html#water-air-mixture-with-non-equal-volume-fraction">Water–Air mixture with non-equal volume fraction</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="Chap5_3NEq_1D_3cavitation.html">Cavitation</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="Chap5_3NEq_2D.html">2D</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="Chap5_3NEq_2D_1underWaterExplosion.html">Under water explosion</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="Chap5_2.html" class="btn btn-neutral float-left" title="Multiphase test cases" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="Chap5_3NEq_1D.html" class="btn btn-neutral float-right" title="1D" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2026, code-mphi.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

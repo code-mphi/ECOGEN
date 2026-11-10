@@ -28,12 +28,14 @@ var searchData=
   ['eosig_2eh_25',['EosIG.h',['../EosIG_8h.html',1,'']]],
   ['eosnasg_2ecpp_26',['EosNASG.cpp',['../EosNASG_8cpp.html',1,'']]],
   ['eosnasg_2eh_27',['EosNASG.h',['../EosNASG_8h.html',1,'']]],
-  ['eospolynomial_2ecpp_28',['EosPolynomial.cpp',['../EosPolynomial_8cpp.html',1,'']]],
-  ['eospolynomial_2eh_29',['EosPolynomial.h',['../EosPolynomial_8h.html',1,'']]],
-  ['eossg_2ecpp_30',['EosSG.cpp',['../EosSG_8cpp.html',1,'']]],
-  ['eossg_2eh_31',['EosSG.h',['../EosSG_8h.html',1,'']]],
-  ['eosvdw_2ecpp_32',['EosVDW.cpp',['../EosVDW_8cpp.html',1,'']]],
-  ['eosvdw_2eh_33',['EosVDW.h',['../EosVDW_8h.html',1,'']]],
-  ['errors_2ecpp_34',['Errors.cpp',['../Errors_8cpp.html',1,'']]],
-  ['errors_2eh_35',['Errors.h',['../Errors_8h.html',1,'']]]
+  ['eosnls_2ecpp_28',['EosNLS.cpp',['../EosNLS_8cpp.html',1,'']]],
+  ['eosnls_2eh_29',['EosNLS.h',['../EosNLS_8h.html',1,'']]],
+  ['eospolynomial_2ecpp_30',['EosPolynomial.cpp',['../EosPolynomial_8cpp.html',1,'']]],
+  ['eospolynomial_2eh_31',['EosPolynomial.h',['../EosPolynomial_8h.html',1,'']]],
+  ['eossg_2ecpp_32',['EosSG.cpp',['../EosSG_8cpp.html',1,'']]],
+  ['eossg_2eh_33',['EosSG.h',['../EosSG_8h.html',1,'']]],
+  ['eosvdw_2ecpp_34',['EosVDW.cpp',['../EosVDW_8cpp.html',1,'']]],
+  ['eosvdw_2eh_35',['EosVDW.h',['../EosVDW_8h.html',1,'']]],
+  ['errors_2ecpp_36',['Errors.cpp',['../Errors_8cpp.html',1,'']]],
+  ['errors_2eh_37',['Errors.h',['../Errors_8h.html',1,'']]]
 ];

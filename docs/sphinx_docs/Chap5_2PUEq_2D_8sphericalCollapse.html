@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Spherical collapse &mdash; ECOGEN 5.0 documentation</title>
+  <title>Spherical collapse &mdash; ECOGEN 6.0 documentation</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
       <link rel="stylesheet" type="text/css" href="_static/css/theme.css" />
 
@@ -38,7 +38,7 @@
             ECOGEN
           </a>
               <div class="version">
-                5.0
+                6.0
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
@@ -57,9 +57,9 @@
 <li class="toctree-l1 current"><a class="reference internal" href="Chap5_testCases_Chapter.html">Test cases</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="Chap5_1Euler.html">Single-phase test cases</a></li>
 <li class="toctree-l2 current"><a class="reference internal" href="Chap5_2.html">Multiphase test cases</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="Chap5_3NEq.html">Non-equilibrium model</a></li>
 <li class="toctree-l3"><a class="reference internal" href="Chap5_2UEq.html">Velocity-equilibrium model</a></li>
 <li class="toctree-l3"><a class="reference internal" href="Chap5_2UEqTotE.html">Velocity-equilibrium model based on total energies</a></li>
-<li class="toctree-l3"><a class="reference internal" href="Chap5_2UEqSolid.html">Velocity-equilibrium model for solids</a></li>
 <li class="toctree-l3 current"><a class="reference internal" href="Chap5_2PUEq.html">Pressure- and velocity-equilibrium model</a><ul class="current">
 <li class="toctree-l4"><a class="reference internal" href="Chap5_2PUEq_1D.html">1D</a></li>
 <li class="toctree-l4 current"><a class="reference internal" href="Chap5_2PUEq_2D.html">2D</a></li>
@@ -67,13 +67,15 @@
 </li>
 <li class="toctree-l3"><a class="reference internal" href="Chap5_2PTUEq.html">Temperature-, pressure- and velocity-equilibrium model</a></li>
 <li class="toctree-l3"><a class="reference internal" href="Chap5_2eulerHomogeneous.html">Homogeneous Euler</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Chap5_2ENSK1D.html">Extended-Navier-Stokes-Korteweg-1D model</a></li>
 <li class="toctree-l3"><a class="reference internal" href="Chap5_2.html#other-tests-cases">Other tests cases</a></li>
 </ul>
 </li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="Chap6_developersGuide_Chapter.html">Developers</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Chap7_license.html">License</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Chap7_license.html">License and authors</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Chap8_citation.html">Citation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="zBibliography.html">Bibliography</a></li>
 </ul>
 
@@ -107,14 +109,14 @@
              
   <section id="spherical-collapse">
 <h1>Spherical collapse<a class="headerlink" href="#spherical-collapse" title="Permalink to this heading"></a></h1>
-<p>This case is a 2D Cartesian test case. This test case shows an air-bubble collapsing under the effect of water external pressure. There initially is a pressure gradient between the two regions. Initial conditions of this test are shown in <a class="reference internal" href="#fig-testcases-pueq-sphericalcollapseini"><span class="std std-numref">Fig. 90</span></a>. Input files for this test are available in <em>./libTests/referenceTestCases/PUEq/2D/sphericalCollapse/Pratio1427/</em>. The corresponding uncommented line in <em>ECOGEN.xml</em> is:</p>
+<p>This case is a 2D Cartesian test case. This test case shows an air-bubble collapsing under the effect of water external pressure. There initially is a pressure gradient between the two regions. Initial conditions of this test are shown in <a class="reference internal" href="#fig-testcases-pueq-sphericalcollapseini"><span class="std std-numref">Fig. 94</span></a>. Input files for this test are available in <em>./libTests/referenceTestCases/PUEq/2D/sphericalCollapse/Pratio1427/</em>. The corresponding uncommented line in <em>ECOGEN.xml</em> is:</p>
 <div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;testCase&gt;</span>./libTests/referenceTestCases/PUEq/2D/sphericalCollapse/Pratio1427/<span class="nt">&lt;/testCase&gt;</span>
 </pre></div>
 </div>
 <figure class="align-center" id="id3">
 <span id="fig-testcases-pueq-sphericalcollapseini"></span><a class="reference internal image-reference" href="_images/sphericalCollapseIni.png"><img alt="_images/sphericalCollapseIni.png" src="_images/sphericalCollapseIni.png" style="width: 600.6px; height: 310.8px;" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 90 </span><span class="caption-text">Initial conditions.</span><a class="headerlink" href="#id3" title="Permalink to this image"></a></p>
+<p><span class="caption-number">Fig. 94 </span><span class="caption-text">Initial conditions.</span><a class="headerlink" href="#id3" title="Permalink to this image"></a></p>
 </figcaption>
 </figure>
 <p>A spherical air bubble is initialized at low pressure (approximately saturated vapor pressure) in the corner of a 2D-axisymmetric domain filled with water at high pressure (here P = 50 atm).</p>
@@ -150,8 +152,8 @@
 </tr>
 </tbody>
 </table>
-<p>Note that the mesh has been modified to match a similar one than the 1D axi-symmetric spherical-collapse test case. Indeed, it uses a Cartesian mesh with uniform cell size from the origin to 0.3 mm (150 cells), then the mesh is stretched from 0.3 mm to 3 mm with a factor of 1.1 (51 cells). This in both x- and y-directions.</p>
-<p>For this test case, we want to compar the numerical solution to the semi-analytic solution of Keller–Miksis in regard of the bubble-wall radius evolution. One can find details in <span id="id1">[<a class="reference internal" href="zBibliography.html#id17" title="K. Schmidmayer, S. H. Bryngelson, and T. Colonius. An assessment of multicomponent flow models and interface capturing schemes for spherical bubble dynamics. Journal of Computational Physics, 402:109080, 2020.">SBC20</a>]</span>. To obtain such a solution with ECOGEN, we need to integrate the bubble (air) volume fraction in order to recover its volume and therefore its mean radius. To do so, few lines in the code have to be uncommented (the integration is not generalized) following the instructions given in the <a class="reference external" href="https://www.python.org/">Python</a> post-treatment script <em>sphericalCollapse_postTreatment.py</em>. Finally, by executing the script using Python 3, we obtain the following plot (<a class="reference internal" href="#fig-testcases-pueq-sphericalcollapse"><span class="std std-numref">Fig. 91</span></a>).</p>
+<p>Note that the mesh has been modified to match a similar one than the 1D axi-symmetric spherical-collapse test case. Indeed, it uses a Cartesian mesh with uniform cell size with size 0.002 from the origin to 0.3 mm (which gives a region with 150 cells), then the mesh is stretched from 0.3 mm to 3 mm with the same reference cell size and a stretching factor of 1.1 (which gives a region with 52 cells). This in both x- and y-directions.</p>
+<p>For this test case, we want to compar the numerical solution to the semi-analytic solution of Keller–Miksis in regard of the bubble-wall radius evolution. One can find details in <span id="id1">[<a class="reference internal" href="zBibliography.html#id24" title="K. Schmidmayer, S. H. Bryngelson, and T. Colonius. An assessment of multicomponent flow models and interface capturing schemes for spherical bubble dynamics. Journal of Computational Physics, 402:109080, 2020.">SBC20</a>]</span>. To obtain such a solution with ECOGEN, we need to integrate the bubble (air) volume fraction in order to recover its volume and therefore its mean radius. To do so, few lines in the code have to be uncommented (the integration is not generalized) following the instructions given in the <a class="reference external" href="https://www.python.org/">Python</a> post-treatment script <em>sphericalCollapse_postTreatment.py</em>. Finally, by executing the script using Python 3, we obtain the following plot (<a class="reference internal" href="#fig-testcases-pueq-sphericalcollapse"><span class="std std-numref">Fig. 95</span></a>).</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>Do not forget to recompile the code after uncommenting the lines and to recomment the lines and to recompile the code for other test cases.</p>
@@ -159,10 +161,10 @@
 <figure class="align-center" id="id4">
 <span id="fig-testcases-pueq-sphericalcollapse"></span><a class="reference internal image-reference" href="_images/sphericalCollapse.png"><img alt="_images/sphericalCollapse.png" src="_images/sphericalCollapse.png" style="width: 561.6px; height: 427.2px;" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 91 </span><span class="caption-text">Bubble-wall radius evolution over time from the numerical and semi-analytic solutions. Visualization using <a class="reference external" href="https://www.python.org/">Python</a>.</span><a class="headerlink" href="#id4" title="Permalink to this image"></a></p>
+<p><span class="caption-number">Fig. 95 </span><span class="caption-text">Bubble-wall radius evolution over time from the numerical and semi-analytic solutions. Visualization using <a class="reference external" href="https://www.python.org/">Python</a>.</span><a class="headerlink" href="#id4" title="Permalink to this image"></a></p>
 </figcaption>
 </figure>
-<p>One can note that the radius evolutions are in very good agreement until the final collapse point. Then the solutions vary. Indeed, for a strong collapse like this one, error could appear from both the numerical and semi-analytical solutions and should not give the same solution. One can find details on the subject and solutions for a weaker collapse in <span id="id2">[<a class="reference internal" href="zBibliography.html#id17" title="K. Schmidmayer, S. H. Bryngelson, and T. Colonius. An assessment of multicomponent flow models and interface capturing schemes for spherical bubble dynamics. Journal of Computational Physics, 402:109080, 2020.">SBC20</a>]</span>.</p>
+<p>One can note that the radius evolutions are in very good agreement until the final collapse point. Then the solutions vary. Indeed, for a strong collapse like this one, error could appear from both the numerical and semi-analytical solutions and should not give the same solution. One can find details on the subject and solutions for a weaker collapse in <span id="id2">[<a class="reference internal" href="zBibliography.html#id24" title="K. Schmidmayer, S. H. Bryngelson, and T. Colonius. An assessment of multicomponent flow models and interface capturing schemes for spherical bubble dynamics. Journal of Computational Physics, 402:109080, 2020.">SBC20</a>]</span>.</p>
 </section>
 
 
@@ -176,7 +178,7 @@
   <hr/>
 
   <div role="contentinfo">
-    <p>&#169; Copyright 2025, code-mphi.</p>
+    <p>&#169; Copyright 2026, code-mphi.</p>
   </div>
 
   Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a

@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Main.xml &mdash; ECOGEN 5.0 documentation</title>
+  <title>Main.xml &mdash; ECOGEN 6.0 documentation</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
       <link rel="stylesheet" type="text/css" href="_static/css/theme.css" />
 
@@ -38,7 +38,7 @@
             ECOGEN
           </a>
               <div class="version">
-                5.0
+                6.0
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
@@ -59,8 +59,6 @@
 <li class="toctree-l4"><a class="reference internal" href="#output-format">Output format</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#time-evolution-control">Time evolution control</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#cfl-criterion">CFL criterion</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#global-accuracy-order-of-the-numerical-scheme">Global accuracy order of the numerical scheme</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#gradient-method">Gradient method</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#probes">Probes</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#simulation-resume-option">Simulation resume option</a></li>
 </ul>
@@ -78,7 +76,8 @@
 <li class="toctree-l1"><a class="reference internal" href="Chap4_tutorials_Chapter.html">Tutorials</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Chap5_testCases_Chapter.html">Test cases</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Chap6_developersGuide_Chapter.html">Developers</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Chap7_license.html">License</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Chap7_license.html">License and authors</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Chap8_citation.html">Citation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="zBibliography.html">Bibliography</a></li>
 </ul>
 
@@ -111,15 +110,15 @@
   <section id="main-xml">
 <span id="sec-input-main"></span><h1>Main.xml<a class="headerlink" href="#main-xml" title="Permalink to this heading"></a></h1>
 <p><em>main.xml</em> is the main input file needed to define the test case. It <strong>must be</strong> in the current test case folder. Its minimal structure is:</p>
-<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="cp">&lt;?xml version = &quot;1.0&quot; encoding = &quot;UTF-8&quot; standalone = &quot;yes&quot;?&gt;</span>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="cp">&lt;?xml version = "1.0" encoding = "UTF-8" standalone = "yes"?&gt;</span>
 <span class="nt">&lt;computationParam&gt;</span>
 <span class="w">  </span><span class="nt">&lt;run&gt;</span>example<span class="nt">&lt;/run&gt;</span>
-<span class="w">  </span><span class="nt">&lt;outputMode</span><span class="w"> </span><span class="na">format=</span><span class="s">&quot;VTK&quot;</span><span class="w"> </span><span class="na">binary=</span><span class="s">&quot;false&quot;</span><span class="nt">/&gt;</span>
-<span class="w">  </span><span class="nt">&lt;timeControlMode</span><span class="w"> </span><span class="na">iterations=</span><span class="s">&quot;false&quot;</span><span class="nt">&gt;</span>
-<span class="w">    </span><span class="nt">&lt;iterations</span><span class="w"> </span><span class="na">number=</span><span class="s">&quot;3&quot;</span><span class="w"> </span><span class="na">iterFreq=</span><span class="s">&quot;1&quot;</span><span class="nt">/&gt;</span>
-<span class="w">    </span><span class="nt">&lt;physicalTime</span><span class="w"> </span><span class="na">totalTime=</span><span class="s">&quot;8.e-3&quot;</span><span class="w"> </span><span class="na">timeFreq=</span><span class="s">&quot;8.e-4&quot;</span><span class="nt">/&gt;</span>
+<span class="w">  </span><span class="nt">&lt;outputMode</span><span class="w"> </span><span class="na">format=</span><span class="s">"VTK"</span><span class="w"> </span><span class="na">binary=</span><span class="s">"false"</span><span class="nt">/&gt;</span>
+<span class="w">  </span><span class="nt">&lt;timeControlMode</span><span class="w"> </span><span class="na">iterations=</span><span class="s">"false"</span><span class="nt">&gt;</span>
+<span class="w">    </span><span class="nt">&lt;iterations</span><span class="w"> </span><span class="na">number=</span><span class="s">"3"</span><span class="w"> </span><span class="na">iterFreq=</span><span class="s">"1"</span><span class="nt">/&gt;</span>
+<span class="w">    </span><span class="nt">&lt;physicalTime</span><span class="w"> </span><span class="na">totalTime=</span><span class="s">"8.e-3"</span><span class="w"> </span><span class="na">timeFreq=</span><span class="s">"8.e-4"</span><span class="nt">/&gt;</span>
 <span class="w">  </span><span class="nt">&lt;/timeControlMode&gt;</span>
-<span class="w">  </span><span class="nt">&lt;computationControl</span><span class="w"> </span><span class="na">CFL=</span><span class="s">&quot;0.8&quot;</span><span class="nt">/&gt;</span>
+<span class="w">  </span><span class="nt">&lt;computationControl</span><span class="w"> </span><span class="na">CFL=</span><span class="s">"0.8"</span><span class="nt">/&gt;</span>
 <span class="nt">&lt;/computationParam&gt;</span>
 </pre></div>
 </div>
@@ -133,23 +132,25 @@
 </section>
 <section id="output-format">
 <h2>Output format<a class="headerlink" href="#output-format" title="Permalink to this heading"></a></h2>
-<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;outputMode</span><span class="w"> </span><span class="na">format=</span><span class="s">&quot;VTK&quot;</span><span class="w"> </span><span class="na">binary=</span><span class="s">&quot;false&quot;</span><span class="w"> </span><span class="na">precision=</span><span class="s">&quot;10&quot;</span><span class="w"> </span><span class="na">reducedOutput=</span><span class="s">&quot;true&quot;</span><span class="nt">/&gt;</span>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;outputMode</span><span class="w"> </span><span class="na">format=</span><span class="s">"VTK"</span><span class="w"> </span><span class="na">binary=</span><span class="s">"false"</span><span class="w"> </span><span class="na">precision=</span><span class="s">"10"</span><span class="w"> </span><span class="na">reducedOutput=</span><span class="s">"true"</span><span class="nt">/&gt;</span>
 </pre></div>
 </div>
 <p>The <code class="code highlight xml docutils literal highlight-xml"><span class="nt">&lt;outputMode&gt;</span></code> markup is mandatory. The user can choose the writing output format. Attributes are:</p>
 <ul class="simple">
-<li><p><code class="code highlight xml docutils literal highlight-xml">format</code>: Can take the value <em>GNU</em> (standard writing in column) or <em>VTK</em> (XML VTK format).</p></li>
-<li><p><code class="code highlight xml docutils literal highlight-xml">binary</code>: Can take the value true or false. <em>Binary</em> (true) or <em>ASCII</em> (false) format can be chosen.</p></li>
-<li><p><code class="code highlight xml docutils literal highlight-xml">precision</code>: Optional attribute. Precision of output files (number of digits). If not precised, set as default.</p></li>
-<li><p><code class="code highlight xml docutils literal highlight-xml">reducedOutput</code>: Optional attribute. Reduced number of output variables when possible (depends on the model). Only available for velocity and pressure-velocity equilibrium model. Can take the value true or false. If not precised, default is false (complete output).</p></li>
+<li><p><code class="code highlight xml docutils literal highlight-xml">format</code>: Can take the value <em>GNU</em> (standard writing in column), <em>VTK</em> (<a class="reference external" href="https://docs.vtk.org/en/latest/vtk_file_formats/vtkxml_file_format.html">XML VTK format</a>) or <em>VTKHDF</em> (<a class="reference external" href="https://docs.vtk.org/en/latest/vtk_file_formats/vtkhdf_file_format/index.html">HDF5 VTK format</a>, available only if ECOGEN has been built with <a class="reference internal" href="Chap2_1installation.html#enabling-hdf5"><span class="std std-ref">HDF5 support</span></a>)</p></li>
+<li><p><code class="code highlight xml docutils literal highlight-xml">binary</code>: Can take the value true or false. <em>Binary</em> (true) or <em>ASCII</em> (false) format can be chosen. <em>GNU</em> format only supports <em>false</em> value. <em>VTKHDF</em> format only supports <em>true</em> value.</p></li>
+<li><p><code class="code highlight xml docutils literal highlight-xml">precision</code>: Optional attribute. Floating-point precision in output files (number of digits). If not precised, uses the default stream precision (6). <em>VTKHDF</em> format only supports <em>8</em> (simple precision) or <em>16</em> (double precision) values and defaults to simple precision (8).</p></li>
+<li><p><code class="code highlight xml docutils literal highlight-xml">reducedOutput</code>: Optional attribute. Reduced number of output variables when possible (depends on the model). Only available for Euler and velocity/pressure-velocity equilibrium model. In the case of the Euler model, it toggles the output of the turbulent viscosity. Can take the value true or false. If not precised, default is false (complete output).</p></li>
+<li><p><code class="code highlight xml docutils literal highlight-xml">intSize</code>: Optional attribute. <em>VTKHDF</em> format only. Integer size to store mesh connectivity in output files (number of bits). <em>32</em> or <em>64</em> values can be chosen. If not precised, <em>32</em>-bit integers are saved.</p></li>
+<li><p><code class="code highlight xml docutils literal highlight-xml">transferMode</code>: Optional attribute. <em>VTKHDF</em> format only. Collective or independant transfer mode during data I/O operations. <em>H5FD_MPIO_COLLECTIVE</em> or <em>H5FD_MPIO_INDEPENDENT</em> values can be chosen. If not precised, <em>H5FD_MPIO_COLLECTIVE</em> mode is used.</p></li>
 </ul>
 <p>Output result files will be placed in the folder <strong>ECOGEN/results/</strong> into a specific subfolder bearing the name of the run.</p>
 </section>
 <section id="time-evolution-control">
 <h2>Time evolution control<a class="headerlink" href="#time-evolution-control" title="Permalink to this heading"></a></h2>
-<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;timeControlMode</span><span class="w"> </span><span class="na">iterations=</span><span class="s">&quot;false&quot;</span><span class="nt">&gt;</span>
-<span class="w">  </span><span class="nt">&lt;iterations</span><span class="w"> </span><span class="na">number=</span><span class="s">&quot;3&quot;</span><span class="w"> </span><span class="na">iterFreq=</span><span class="s">&quot;1&quot;</span><span class="nt">/&gt;</span>
-<span class="w">  </span><span class="nt">&lt;physicalTime</span><span class="w"> </span><span class="na">totalTime=</span><span class="s">&quot;8.e-3&quot;</span><span class="w"> </span><span class="na">timeFreq=</span><span class="s">&quot;8.e-4&quot;</span><span class="nt">/&gt;</span>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;timeControlMode</span><span class="w"> </span><span class="na">iterations=</span><span class="s">"false"</span><span class="nt">&gt;</span>
+<span class="w">  </span><span class="nt">&lt;iterations</span><span class="w"> </span><span class="na">number=</span><span class="s">"3"</span><span class="w"> </span><span class="na">iterFreq=</span><span class="s">"1"</span><span class="nt">/&gt;</span>
+<span class="w">  </span><span class="nt">&lt;physicalTime</span><span class="w"> </span><span class="na">totalTime=</span><span class="s">"8.e-3"</span><span class="w"> </span><span class="na">timeFreq=</span><span class="s">"8.e-4"</span><span class="nt">/&gt;</span>
 <span class="nt">&lt;/timeControlMode&gt;</span>
 </pre></div>
 </div>
@@ -160,7 +161,7 @@
 <li><p><em>false</em>: The time control is done thanks to the final physical time and the <code class="code highlight xml docutils literal highlight-xml"><span class="nt">&lt;physicalTime&gt;</span></code> node must be present.</p></li>
 </ul>
 <p>The <code class="code highlight xml docutils literal highlight-xml"><span class="nt">&lt;iterations&gt;</span></code> markup:</p>
-<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;iterations</span><span class="w"> </span><span class="na">number=</span><span class="s">&quot;3&quot;</span><span class="w"> </span><span class="na">iterFreq=</span><span class="s">&quot;1&quot;</span><span class="nt">/&gt;</span>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;iterations</span><span class="w"> </span><span class="na">number=</span><span class="s">"3"</span><span class="w"> </span><span class="na">iterFreq=</span><span class="s">"1"</span><span class="nt">/&gt;</span>
 </pre></div>
 </div>
 <p>ECOGEN automatically computes the timestep value thanks to a numerical stability criterion (CFL  criterion). This markup is defined with following attributes:</p>
@@ -169,7 +170,7 @@
 <li><p><code class="code highlight xml docutils literal highlight-xml">iterFreq</code>: Integer equal to the writing frequency of the results (results are written every <code class="code highlight xml docutils literal highlight-xml">iterFreq</code> timestep)</p></li>
 </ul>
 <p>The <code class="code highlight xml docutils literal highlight-xml"><span class="nt">&lt;physicalTime&gt;</span></code> markup:</p>
-<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;physicalTime</span><span class="w"> </span><span class="na">totalTime=</span><span class="s">&quot;8.e-3&quot;</span><span class="w"> </span><span class="na">timeFreq=</span><span class="s">&quot;8.e-4&quot;</span><span class="nt">/&gt;</span>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;physicalTime</span><span class="w"> </span><span class="na">totalTime=</span><span class="s">"8.e-3"</span><span class="w"> </span><span class="na">timeFreq=</span><span class="s">"8.e-4"</span><span class="nt">/&gt;</span>
 </pre></div>
 </div>
 <p>If this markup is used, ECOGEN automatically determines the total amount of timestep to compute to reach the chosen physical time. Attributes are:</p>
@@ -180,78 +181,17 @@
 </section>
 <section id="cfl-criterion">
 <h2>CFL criterion<a class="headerlink" href="#cfl-criterion" title="Permalink to this heading"></a></h2>
-<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;computationControl</span><span class="w"> </span><span class="na">CFL=</span><span class="s">&quot;0.8&quot;</span><span class="nt">/&gt;</span>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;computationControl</span><span class="w"> </span><span class="na">CFL=</span><span class="s">"0.8"</span><span class="nt">/&gt;</span>
 </pre></div>
 </div>
 <p>The <code class="code highlight xml docutils literal highlight-xml"><span class="nt">&lt;computationControl&gt;</span></code> markup is mandatory. It specifies the value of the attribute <code class="code highlight xml docutils literal highlight-xml">CFL</code> which ensures the stability of the temporal integration scheme: The value (real number) must be less than 1.</p>
 </section>
-<section id="global-accuracy-order-of-the-numerical-scheme">
-<h2>Global accuracy order of the numerical scheme<a class="headerlink" href="#global-accuracy-order-of-the-numerical-scheme" title="Permalink to this heading"></a></h2>
-<p>By default, the numerical scheme of the fluid-flow solver is first order in time and space.
-ECOGEN can use a second-order scheme in time and space using the MUSCL method with TVD limiters (see <span id="id1">[<a class="reference internal" href="zBibliography.html#id311" title="E.F. Toro. Riemann solvers and numerical methods for fluid dynamics: a practical introduction. Springer Science &amp; Business Media, 2013.">Tor13</a>]</span> for example for an overview of the method).
-Depending on whether the mesh is <strong>Cartesian</strong> (with/without AMR) or <strong>unstructured</strong>, the MUSCL method used and its parameters are different.</p>
-<section id="cartesian-mesh-with-without-amr">
-<h3>Cartesian mesh (with/without AMR)<a class="headerlink" href="#cartesian-mesh-with-without-amr" title="Permalink to this heading"></a></h3>
-<p>For a cartesian mesh (with/without AMR), second-order scheme is based on a TVD slope limiter; see <span id="id2">[<a class="reference internal" href="zBibliography.html#id16" title="K. Schmidmayer, F. Petitpas, S. Le Martelot, and E. Daniel. ECOGEN: An open-source tool for multiphase, compressible, multiphysics flows. Computer Physics Communications, 251:107093, 2020. URL: https://doi.org/10.1016/j.cpc.2019.107093, doi:10.1016/j.cpc.2019.107093.">SPLMD20</a>]</span> for details.
-In this case, the optional markup <code class="code highlight xml docutils literal highlight-xml"><span class="nt">&lt;secondOrder&gt;</span></code> can be inserted in the <em>main.xml</em> input file as in the following example:</p>
-<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;secondOrder&gt;</span>
-<span class="w">  </span><span class="nt">&lt;globalLimiter&gt;</span>minmod<span class="nt">&lt;/globalLimiter&gt;</span>
-<span class="w">  </span><span class="nt">&lt;interfaceLimiter&gt;</span>superbee<span class="nt">&lt;/interfaceLimiter&gt;</span><span class="w">                            </span><span class="cm">&lt;!-- optional node --&gt;</span>
-<span class="w">  </span><span class="nt">&lt;globalVolumeFractionLimiter&gt;</span>minmod<span class="nt">&lt;/globalVolumeFractionLimiter&gt;</span><span class="w">        </span><span class="cm">&lt;!-- optional node --&gt;</span>
-<span class="w">  </span><span class="nt">&lt;interfaceVolumeFractionLimiter&gt;</span>thinc<span class="nt">&lt;/interfaceVolumeFractionLimiter&gt;</span><span class="w">   </span><span class="cm">&lt;!-- optional node --&gt;</span>
-<span class="nt">&lt;/secondOrder&gt;</span>
-</pre></div>
-</div>
-<p>The <code class="code highlight xml docutils literal highlight-xml"><span class="nt">&lt;secondOrder&gt;</span></code> markup must contain the node <code class="code highlight xml docutils literal highlight-xml"><span class="nt">&lt;globalLimiter&gt;</span></code>. The other nodes are optional. The slope limiters available in ECOGEN are the following: minmod <span id="id3">[<a class="reference internal" href="zBibliography.html#id80" title="P. L. Roe. Characteristic-based schemes for the Euler equations. Annual review of fluid mechanics, 18(1):337–365, 1986.">Roe86</a>]</span>, vanleer <span id="id4">[<a class="reference internal" href="zBibliography.html#id79" title="B. Van Leer. Towards the ultimate conservative difference scheme. II. Monotonicity and conservation combined in a second-order scheme. Journal of Computational Physics, 14(4):361–370, 1974.">VL74</a>]</span>, vanalbada <span id="id5">[<a class="reference internal" href="zBibliography.html#id78" title="G.D. Van Albada, B. Van Leer, and W. Roberts. A comparative study of computational methods in cosmic gas dynamics. In Upwind and High-Resolution Schemes, pages 95–103. Springer, 1997.">VAVLR97</a>]</span>, mc <span id="id6">[<a class="reference internal" href="zBibliography.html#id363" title="B. Van Leer. Towards the ultimate conservative difference scheme. IV. A new approach to numerical convection. Journal of computational physics, 23(3):276–299, 1977.">VL77</a>]</span>, superbee <span id="id7">[<a class="reference internal" href="zBibliography.html#id80" title="P. L. Roe. Characteristic-based schemes for the Euler equations. Annual review of fluid mechanics, 18(1):337–365, 1986.">Roe86</a>]</span> and thinc <span id="id8">[<a class="reference internal" href="zBibliography.html#id124" title="K.M. Shyue and F. Xiao. An Eulerian interface sharpening algorithm for compressible two-phase flow: the algebraic THINC approach. Journal of Computational Physics, 268:326–354, 2014.">SX14</a>]</span> (only for volume fraction at the interface location). Markup significations are:</p>
-<ul class="simple">
-<li><p><code class="code highlight xml docutils literal highlight-xml"><span class="nt">&lt;globalLimiter&gt;</span></code>: Applied everywhere and on all variables unless it is overwritten by the following optional limiters.</p></li>
-<li><p><code class="code highlight xml docutils literal highlight-xml"><span class="nt">&lt;interfaceLimiter&gt;</span></code>: Applied on all variables but only at the interface location. By default is equal to the global limiter.</p></li>
-<li><p><code class="code highlight xml docutils literal highlight-xml"><span class="nt">&lt;globalVolumeFractionLimiter&gt;</span></code>: Applied everywhere but only on the volume-fraction and transport equations (THINC is only applied on the volume fraction) unless it is overwritten by the interface volume-fraction limiter. By default is equal to the global limiter.</p></li>
-<li><p><code class="code highlight xml docutils literal highlight-xml"><span class="nt">&lt;interfaceVolumeFractionLimiter&gt;</span></code>: Applied only at the interface location and on the volume-fraction and transport equations (THINC is only applied on the volume fraction). By default is equal to the interface limiter.</p></li>
-</ul>
-</section>
-<section id="unstructured-mesh">
-<h3>Unstructured mesh<a class="headerlink" href="#unstructured-mesh" title="Permalink to this heading"></a></h3>
-<p>For an unstructured mesh, second-order scheme is based on a TVD gradient limitation; see <span id="id9">[<a class="reference internal" href="zBibliography.html#id7" title="A. Chiapolino, R. Saurel, and B. Nkonga. Sharpening diffuse interfaces with compressible fluids on unstructured meshes. Journal of Computational Physics, 340:389–417, 2017.">CSN17</a>]</span> for details.
-In this case, the chosen limiter is a global limiter applied everywhere and on all variables.
-Currently the gradient limiters are the following: minmod <span id="id10">[<a class="reference internal" href="zBibliography.html#id80" title="P. L. Roe. Characteristic-based schemes for the Euler equations. Annual review of fluid mechanics, 18(1):337–365, 1986.">Roe86</a>]</span> and superbee <span id="id11">[<a class="reference internal" href="zBibliography.html#id80" title="P. L. Roe. Characteristic-based schemes for the Euler equations. Annual review of fluid mechanics, 18(1):337–365, 1986.">Roe86</a>]</span>.
-The optional markup <code class="code highlight xml docutils literal highlight-xml"><span class="nt">&lt;secondOrder&gt;</span></code> can be inserted in the <em>main.xml</em> input file as in the following example:</p>
-<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;secondOrder&gt;</span>
-<span class="w">  </span><span class="nt">&lt;globalLimiter&gt;</span>minmod<span class="nt">&lt;/globalLimiter&gt;</span>
-<span class="nt">&lt;/secondOrder&gt;</span>
-</pre></div>
-</div>
-<div class="admonition important">
-<p class="admonition-title">Important</p>
-<p>Since the MUSCL method relies on gradients computation, the gradient method chosen should be compatible with unstructured meshes (see the markup <code class="code highlight xml docutils literal highlight-xml"><span class="nt">&lt;gradient&gt;</span></code>).</p>
-</div>
-</section>
-</section>
-<section id="gradient-method">
-<h2>Gradient method<a class="headerlink" href="#gradient-method" title="Permalink to this heading"></a></h2>
-<p>In ECOGEN, to compute gradients, it is possible to use:</p>
-<ul class="simple">
-<li><p>finite-difference-like gradient on <strong>cartesian</strong> mesh (with/without AMR) (<code class="code highlight xml docutils literal highlight-xml"><span class="nt">&lt;method&gt;</span>finite-difference<span class="nt">&lt;/method&gt;</span></code>)</p></li>
-<li><p>Green-Gauss gradient on <strong>cartesian</strong> and <strong>unstructured</strong> mesh (<code class="code highlight xml docutils literal highlight-xml"><span class="nt">&lt;method&gt;</span>green-gauss<span class="nt">&lt;/method&gt;</span></code>).</p></li>
-</ul>
-<p>By default (without the XML markup <code class="code highlight xml docutils literal highlight-xml"><span class="nt">&lt;gradient&gt;</span></code>), the gradients will be computed using the finite-difference scheme.
-To define explicitly the gradient method, one can use:</p>
-<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;gradient&gt;</span>
-<span class="w">  </span><span class="nt">&lt;method&gt;</span>finite-difference<span class="nt">&lt;/method&gt;</span><span class="w"> </span><span class="cm">&lt;!-- For finite difference like gradient scheme --&gt;</span>
-<span class="nt">&lt;/gradient&gt;</span>
-</pre></div>
-</div>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>On unstructured meshes, in case second-order scheme is set and/or additional physics are used (see Section <a class="reference internal" href="Chap3_1_2model.html#sec-input-additionalphysic"><span class="std std-ref">Additional physics</span></a>), the gradient method must be set to Green-Gauss.</p>
-</div>
-</section>
 <section id="probes">
 <h2>Probes<a class="headerlink" href="#probes" title="Permalink to this heading"></a></h2>
 <p>It is possible to record over time flow variables at given locations in the computational domain. This is done by including to the <em>main.xml</em> input file the optional <code class="code highlight xml docutils literal highlight-xml"><span class="nt">&lt;probe&gt;</span></code> markup.</p>
-<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;probe</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;capteur1&quot;</span><span class="nt">&gt;</span>
-<span class="w">  </span><span class="nt">&lt;vertex</span><span class="w"> </span><span class="na">x=</span><span class="s">&quot;0.51&quot;</span><span class="w"> </span><span class="na">y=</span><span class="s">&quot;0.51&quot;</span><span class="w"> </span><span class="na">z=</span><span class="s">&quot;0.51&quot;</span><span class="nt">/&gt;</span>
-<span class="w">  </span><span class="nt">&lt;timeControl</span><span class="w"> </span><span class="na">acqFreq=</span><span class="s">&quot;-1.&quot;</span><span class="nt">/&gt;</span><span class="w">       </span><span class="cm">&lt;!-- if negative or nul, recording at each time step --&gt;</span>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;probe</span><span class="w"> </span><span class="na">name=</span><span class="s">"capteur1"</span><span class="nt">&gt;</span>
+<span class="w">  </span><span class="nt">&lt;vertex</span><span class="w"> </span><span class="na">x=</span><span class="s">"0.51"</span><span class="w"> </span><span class="na">y=</span><span class="s">"0.51"</span><span class="w"> </span><span class="na">z=</span><span class="s">"0.51"</span><span class="nt">/&gt;</span>
+<span class="w">  </span><span class="nt">&lt;timeControl</span><span class="w"> </span><span class="na">acqFreq=</span><span class="s">"-1."</span><span class="nt">/&gt;</span><span class="w">       </span><span class="cm">&lt;!-- if negative or nul, recording at each time step --&gt;</span>
 <span class="nt">&lt;/probe&gt;</span>
 </pre></div>
 </div>
@@ -268,7 +208,7 @@ To define explicitly the gradient method, one can use:</p>
 <section id="simulation-resume-option">
 <h2>Simulation resume option<a class="headerlink" href="#simulation-resume-option" title="Permalink to this heading"></a></h2>
 <p>ECOGEN can resume a run from previously written results. To do so, the <code class="code highlight xml docutils literal highlight-xml">resumeFileNumber</code> attribute of the <code class="code highlight xml docutils literal highlight-xml"><span class="nt">&lt;resumeSimulation&gt;</span></code> markup must be specified. Furthermore, this markup can include an <code class="code highlight xml docutils literal highlight-xml">AMRsaveFreq</code> attribute which gives the frequency at which the mesh information of an AMR simulation is saved. Therefore, an AMR simulation can only resume from a time coherent combination of result and mesh information files.</p>
-<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;resumeSimulation</span><span class="w"> </span><span class="na">resumeFileNumber=</span><span class="s">&quot;10&quot;</span><span class="w"> </span><span class="na">AMRsaveFreq=</span><span class="s">&quot;5&quot;</span><span class="nt">/&gt;</span>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;resumeSimulation</span><span class="w"> </span><span class="na">resumeFileNumber=</span><span class="s">"10"</span><span class="w"> </span><span class="na">AMRsaveFreq=</span><span class="s">"5"</span><span class="nt">/&gt;</span>
 </pre></div>
 </div>
 </section>
@@ -285,7 +225,7 @@ To define explicitly the gradient method, one can use:</p>
   <hr/>
 
   <div role="contentinfo">
-    <p>&#169; Copyright 2025, code-mphi.</p>
+    <p>&#169; Copyright 2026, code-mphi.</p>
   </div>
 
   Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a

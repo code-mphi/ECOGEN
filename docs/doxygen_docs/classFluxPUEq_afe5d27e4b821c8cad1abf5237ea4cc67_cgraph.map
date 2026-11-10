@@ -1,12 +1,16 @@
 <map id="FluxPUEq::addNonCons" name="FluxPUEq::addNonCons">
-<area shape="rect" id="Node000001" title="Add non conservative term to the flux." alt="" coords="5,55,180,80"/>
-<area shape="rect" id="Node000002" href="$classPhase.html#a4e4cd8c6afd1e1a8f7304ad7d7c3ee2f" title=" " alt="" coords="238,5,365,31"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="146,52,233,31,234,36,148,57"/>
-<area shape="rect" id="Node000004" href="$classCell.html#af2d48073a332d621b69fb257eeb6de6c" title=" " alt="" coords="244,55,359,80"/>
-<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="180,65,230,65,230,70,180,70"/>
-<area shape="rect" id="Node000005" href="$classPhase.html#a2beeaa383c32c5866ea59a1b20a44662" title=" " alt="" coords="228,104,375,129"/>
-<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="148,77,234,98,233,103,146,83"/>
-<area shape="rect" id="Node000003" href="$classErrors.html#a78eeb532e12787fee07b78aa5ef6a0c6" title=" " alt="" coords="423,55,580,80"/>
-<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="354,28,437,49,435,54,353,33"/>
-<area shape="poly" id="edge5_Node000005_Node000003" title=" " alt="" coords="353,101,435,81,437,86,354,107"/>
+<area shape="rect" id="Node000001" title="Add non conservative term to the flux." alt="" coords="5,84,179,112"/>
+<area shape="rect" id="Node000002" href="$classFluxPUEq.html#a7be13e19c83e20ac8972d57ec243df1c" title=" " alt="" coords="227,5,380,33"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="128,81,226,43,249,37,244,40,228,48,131,86"/>
+<area shape="rect" id="Node000004" href="$classPhase.html#a4e4cd8c6afd1e1a8f7304ad7d7c3ee2f" title=" " alt="" coords="240,57,366,85"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="178,84,228,80,223,82,180,89"/>
+<area shape="rect" id="Node000006" href="$classCell.html#af2d48073a332d621b69fb257eeb6de6c" title=" " alt="" coords="246,109,360,137"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="179,106,233,114,228,115,179,111"/>
+<area shape="rect" id="Node000007" href="$classPhase.html#a2beeaa383c32c5866ea59a1b20a44662" title=" " alt="" coords="231,161,376,189"/>
+<area shape="poly" id="edge6_Node000001_Node000007" title=" " alt="" coords="131,110,228,146,249,156,244,156,226,151,130,115"/>
+<area shape="rect" id="Node000003" href="$classFluxUEq.html#ae2720ee77e46d1155a0f755cc4dbe11f" title=" " alt="" coords="438,5,575,33"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="380,17,424,19,419,20,381,22"/>
+<area shape="rect" id="Node000005" href="$classErrors.html#a5fcdb1d77f9c74188b44ac7d0d05a453" title=" " alt="" coords="428,109,584,137"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="361,83,437,105,432,105,360,88"/>
+<area shape="poly" id="edge7_Node000007_Node000005" title=" " alt="" coords="360,158,432,142,437,141,361,163"/>
 </map>

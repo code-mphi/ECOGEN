@@ -1,11 +1,23 @@
 var searchData=
 [
-  ['qapconductivity_2ecpp_0',['QAPConductivity.cpp',['../QAPConductivity_8cpp.html',1,'']]],
-  ['qapconductivity_2eh_1',['QAPConductivity.h',['../QAPConductivity_8h.html',1,'']]],
-  ['qapsurfacetension_2ecpp_2',['QAPSurfaceTension.cpp',['../QAPSurfaceTension_8cpp.html',1,'']]],
-  ['qapsurfacetension_2eh_3',['QAPSurfaceTension.h',['../QAPSurfaceTension_8h.html',1,'']]],
-  ['qapviscosity_2ecpp_4',['QAPViscosity.cpp',['../QAPViscosity_8cpp.html',1,'']]],
-  ['qapviscosity_2eh_5',['QAPViscosity.h',['../QAPViscosity_8h.html',1,'']]],
-  ['quantitiesaddphys_2ecpp_6',['QuantitiesAddPhys.cpp',['../QuantitiesAddPhys_8cpp.html',1,'']]],
-  ['quantitiesaddphys_2eh_7',['QuantitiesAddPhys.h',['../QuantitiesAddPhys_8h.html',1,'']]]
+  ['parallel_2ecpp_0',['Parallel.cpp',['../Parallel_8cpp.html',1,'']]],
+  ['parallel_2eh_1',['Parallel.h',['../Parallel_8h.html',1,'']]],
+  ['phase_2ecpp_2',['Phase.cpp',['../Phase_8cpp.html',1,'']]],
+  ['phase_2eh_3',['Phase.h',['../Phase_8h.html',1,'']]],
+  ['phaseeuler_2ecpp_4',['PhaseEuler.cpp',['../PhaseEuler_8cpp.html',1,'']]],
+  ['phaseeuler_2eh_5',['PhaseEuler.h',['../PhaseEuler_8h.html',1,'']]],
+  ['phaseeulerhomogeneous_2ecpp_6',['PhaseEulerHomogeneous.cpp',['../PhaseEulerHomogeneous_8cpp.html',1,'']]],
+  ['phaseeulerhomogeneous_2eh_7',['PhaseEulerHomogeneous.h',['../PhaseEulerHomogeneous_8h.html',1,'']]],
+  ['phaseextendednavierstokeskorteweg1d_2ecpp_8',['PhaseExtendedNavierStokesKorteweg1D.cpp',['../PhaseExtendedNavierStokesKorteweg1D_8cpp.html',1,'']]],
+  ['phaseextendednavierstokeskorteweg1d_2eh_9',['PhaseExtendedNavierStokesKorteweg1D.h',['../PhaseExtendedNavierStokesKorteweg1D_8h.html',1,'']]],
+  ['phaseneq_2ecpp_10',['PhaseNEq.cpp',['../PhaseNEq_8cpp.html',1,'']]],
+  ['phaseneq_2eh_11',['PhaseNEq.h',['../PhaseNEq_8h.html',1,'']]],
+  ['phaseptueq_2ecpp_12',['PhasePTUEq.cpp',['../PhasePTUEq_8cpp.html',1,'']]],
+  ['phaseptueq_2eh_13',['PhasePTUEq.h',['../PhasePTUEq_8h.html',1,'']]],
+  ['phasepueq_2ecpp_14',['PhasePUEq.cpp',['../PhasePUEq_8cpp.html',1,'']]],
+  ['phasepueq_2eh_15',['PhasePUEq.h',['../PhasePUEq_8h.html',1,'']]],
+  ['phaseueq_2ecpp_16',['PhaseUEq.cpp',['../PhaseUEq_8cpp.html',1,'']]],
+  ['phaseueq_2eh_17',['PhaseUEq.h',['../PhaseUEq_8h.html',1,'']]],
+  ['phaseueqtotenergy_2ecpp_18',['PhaseUEqTotEnergy.cpp',['../PhaseUEqTotEnergy_8cpp.html',1,'']]],
+  ['phaseueqtotenergy_2eh_19',['PhaseUEqTotEnergy.h',['../PhaseUEqTotEnergy_8h.html',1,'']]]
 ];

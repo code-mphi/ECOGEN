@@ -7,7 +7,7 @@ var searchData=
   ['ak4_4',['ak4',['../classTools.html#adb2ab0770998f5876b4809f3bbcafd37',1,'Tools']]],
   ['ak5_5',['ak5',['../classTools.html#ad6c8a7f1b1730e7d7e5f6b0d9f02c281',1,'Tools']]],
   ['aks_6',['akS',['../classTools.html#a56e5430f9aacf2c83282e80ed0455ebb',1,'Tools']]],
-  ['alphaek_7',['alphaek',['../FluxEulerKorteweg_8cpp.html#a3e7952ba0c40a3e395b631d52fdd0d6c',1,'alphaEK:&#160;FluxEulerKorteweg.cpp'],['../FluxEulerKorteweg_8h.html#a3e7952ba0c40a3e395b631d52fdd0d6c',1,'alphaEK:&#160;FluxEulerKorteweg.cpp']]],
+  ['algorithmsaadon_7',['algorithmSaadOn',['../GDEntireDomainWithParticularities_8cpp.html#a6bd87f1d09bcabeab9b72de9dc081a62',1,'algorithmSaadOn:&#160;GDEntireDomainWithParticularities.cpp'],['../GDEntireDomainWithParticularities_8h.html#a6bd87f1d09bcabeab9b72de9dc081a62',1,'algorithmSaadOn:&#160;GDEntireDomainWithParticularities.cpp']]],
   ['alphanull_8',['alphaNull',['../classTools.html#a7c762e36e89344378f5c87e23b82d3e7',1,'Tools']]],
   ['ar_9',['ar',['../struct__matrix.html#a01b3dc2cb4eaae42142f158c9b37b182',1,'_matrix']]],
   ['atol_5f_10',['atol_',['../classLSODA.html#a1b4b2d09f1301705ad5d9060dfc0dcb2',1,'LSODA']]]

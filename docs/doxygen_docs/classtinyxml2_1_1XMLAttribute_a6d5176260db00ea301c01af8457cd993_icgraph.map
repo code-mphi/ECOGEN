@@ -1,28 +1,40 @@
 <map id="tinyxml2::XMLAttribute::QueryIntValue" name="tinyxml2::XMLAttribute::QueryIntValue">
-<area shape="rect" id="Node000001" title=" " alt="" coords="937,146,1112,186"/>
-<area shape="rect" id="Node000002" href="$classtinyxml2_1_1XMLElement.html#a8a78bc1187c1c45ad89f2690eab567b1" title=" " alt="" coords="719,146,889,186"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="924,169,889,169,889,163,924,163"/>
-<area shape="rect" id="Node000003" href="$classInput.html#adcf9fba05cc77193aad9503fbc16e6a0" title=" " alt="" coords="468,5,671,31"/>
-<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="776,137,730,89,701,65,669,44,642,33,644,28,672,40,704,60,733,85,780,133"/>
-<area shape="rect" id="Node000007" href="$classInput.html#a3449c12b43fa18175aa2a371084d76ac" title=" " alt="" coords="505,55,633,80"/>
-<area shape="poly" id="edge6_Node000002_Node000007" title=" " alt="" coords="760,141,717,116,670,94,633,82,634,77,672,89,720,112,763,136"/>
-<area shape="rect" id="Node000008" href="$classInput.html#ae447e6121efbb74c4a9a8b60dac39d68" title=" " alt="" coords="504,104,635,129"/>
-<area shape="poly" id="edge8_Node000002_Node000008" title=" " alt="" coords="705,148,630,132,631,127,706,143"/>
-<area shape="rect" id="Node000009" href="$classInput.html#ad716598459e938b3b05235f5f03163a6" title=" " alt="" coords="501,153,637,179"/>
-<area shape="poly" id="edge10_Node000002_Node000009" title=" " alt="" coords="704,169,638,169,638,163,704,163"/>
-<area shape="rect" id="Node000010" href="$classOutput.html#a1ab20f8fa7659568613ee9607aa759e2" title="Main constructor for datasets used for OutputVTK and OutputGNU according to outputMode." alt="" coords="510,203,629,228"/>
-<area shape="poly" id="edge12_Node000002_Node000010" title=" " alt="" coords="705,189,629,206,628,200,704,184"/>
-<area shape="rect" id="Node000011" href="$classOutput.html#addc8700b74e7de7f674231b09f06bc62" title="Constructor for specific derived GNU outputs (boundary, probe, cut)" alt="" coords="510,252,629,277"/>
-<area shape="poly" id="edge13_Node000002_Node000011" title=" " alt="" coords="762,195,719,220,672,242,630,255,628,250,670,237,717,215,759,191"/>
-<area shape="rect" id="Node000012" href="$classOutputBoundaryGNU.html#a3ca9dfbab24d4aa06fbdc65fdfd55f4b" title=" " alt="" coords="486,302,653,342"/>
-<area shape="poly" id="edge14_Node000002_Node000012" title=" " alt="" coords="779,198,732,246,703,270,672,291,644,304,642,300,669,286,700,266,728,242,775,195"/>
-<area shape="rect" id="Node000004" href="$classInput.html#adbc917eada08436797ba6e063fcd095a" title=" " alt="" coords="267,80,420,105"/>
-<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="496,37,469,45,373,82,371,77,467,39,494,32"/>
-<area shape="rect" id="Node000005" href="$classRun.html#ae6cad323ebc33d27782dbc95fc6339a9" title="Initialization of the simulation." alt="" coords="108,80,219,105"/>
-<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="253,95,219,95,219,90,253,90"/>
-<area shape="rect" id="Node000006" href="$main_8cpp.html#a0ddf1224851353fc92bfbff6f499fa97" title=" " alt="" coords="5,80,60,105"/>
-<area shape="poly" id="edge5_Node000005_Node000006" title=" " alt="" coords="94,95,60,95,60,90,94,90"/>
-<area shape="poly" id="edge7_Node000007_Node000004" title=" " alt="" coords="492,79,420,87,420,81,492,73"/>
-<area shape="poly" id="edge9_Node000008_Node000004" title=" " alt="" coords="489,111,420,103,420,98,490,106"/>
-<area shape="poly" id="edge11_Node000009_Node000004" title=" " alt="" coords="499,152,467,143,373,108,375,103,469,138,500,147"/>
+<area shape="rect" id="Node000001" title=" " alt="" coords="949,241,1122,286"/>
+<area shape="rect" id="Node000002" href="$classtinyxml2_1_1XMLAttribute.html#adfa2433f0fdafd5c3880936de9affa80" title=" " alt="" coords="727,206,901,251"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="931,248,902,245,901,240,936,247"/>
+<area shape="rect" id="Node000003" href="$classtinyxml2_1_1XMLElement.html#a8a78bc1187c1c45ad89f2690eab567b1" title=" " alt="" coords="729,276,899,320"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="931,280,900,287,898,282,936,279"/>
+<area shape="rect" id="Node000004" href="$classInput.html#adcf9fba05cc77193aad9503fbc16e6a0" title=" " alt="" coords="206,166,407,193"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="731,268,726,265,710,249,702,233,694,218,678,206,646,191,611,180,540,168,470,165,407,167,405,162,470,159,541,162,613,175,647,186,681,201,698,215,707,230,715,246,729,261,736,268"/>
+<area shape="rect" id="Node000006" href="$classInput.html#a3449c12b43fa18175aa2a371084d76ac" title=" " alt="" coords="243,302,370,329"/>
+<area shape="poly" id="edge5_Node000003_Node000006" title=" " alt="" coords="774,328,730,358,680,378,618,392,568,395,517,390,454,378,388,357,334,332,334,327,389,352,456,373,518,384,568,390,617,386,679,373,727,353,769,331"/>
+<area shape="rect" id="Node000007" href="$classInput.html#ae447e6121efbb74c4a9a8b60dac39d68" title=" " alt="" coords="241,114,372,141"/>
+<area shape="poly" id="edge7_Node000003_Node000007" title=" " alt="" coords="728,266,725,265,714,252,708,238,702,212,696,187,689,176,678,166,642,145,603,130,562,120,521,114,441,112,373,118,371,113,441,107,521,109,563,115,605,125,644,140,681,161,694,173,701,185,708,211,713,237,719,249,729,262,734,267"/>
+<area shape="rect" id="Node000008" href="$classInput.html#ad716598459e938b3b05235f5f03163a6" title=" " alt="" coords="239,38,374,65"/>
+<area shape="poly" id="edge9_Node000003_Node000008" title=" " alt="" coords="727,265,725,265,708,237,701,208,702,180,706,152,709,125,707,100,698,76,678,53,639,30,596,16,551,9,505,9,460,13,418,21,349,39,346,35,417,15,459,8,505,3,552,4,598,11,641,25,681,49,703,73,712,99,714,126,711,153,707,180,707,207,713,235,729,262,732,266"/>
+<area shape="rect" id="Node000009" href="$classtinyxml2_1_1XMLElement.html#acfaaeeadf0b0dbe56bb0f5ec12cb7736" title=" " alt="" coords="482,216,652,260"/>
+<area shape="poly" id="edge11_Node000003_Node000009" title=" " alt="" coords="712,274,653,261,652,256,717,273"/>
+<area shape="rect" id="Node000010" href="$classOutput.html#a1ab20f8fa7659568613ee9607aa759e2" title="Main constructor for datasets used for OutputVTK and OutputGNU according to outputMode." alt="" coords="508,284,626,312"/>
+<area shape="poly" id="edge13_Node000003_Node000010" title=" " alt="" coords="711,299,627,301,626,295,716,297"/>
+<area shape="rect" id="Node000011" href="$classOutput.html#addc8700b74e7de7f674231b09f06bc62" title="Constructor for specific derived GNU outputs (boundary, probe, cut)." alt="" coords="508,336,626,364"/>
+<area shape="poly" id="edge14_Node000003_Node000011" title=" " alt="" coords="712,320,627,340,626,335,717,318"/>
+<area shape="rect" id="Node000012" href="$classOutputBoundaryGNU.html#a3ca9dfbab24d4aa06fbdc65fdfd55f4b" title=" " alt="" coords="484,558,650,603"/>
+<area shape="poly" id="edge15_Node000003_Node000012" title=" " alt="" coords="804,334,788,385,762,441,727,499,705,525,681,548,651,566,649,561,678,544,701,521,723,496,758,439,783,383,800,337"/>
+<area shape="rect" id="Node000015" href="$classOutputVTKHDF.html#a77c545080be137a6a5057b8ab49a3928" title=" " alt="" coords="455,438,679,465"/>
+<area shape="poly" id="edge18_Node000003_Node000015" title=" " alt="" coords="786,331,739,379,711,402,681,422,638,440,636,435,678,417,708,398,736,375,781,333"/>
+<area shape="rect" id="Node000016" href="$classtinyxml2_1_1XMLElement.html#a042fc30504347b84a56cf863ad528a4f" title=" " alt="" coords="482,489,652,534"/>
+<area shape="poly" id="edge19_Node000003_Node000016" title=" " alt="" coords="797,333,751,408,718,446,681,479,653,494,651,489,678,475,715,442,747,405,793,336"/>
+<area shape="rect" id="Node000017" href="$classInput.html#aa0d5a1558acb5f0cfa5c816425bab6b0" title=" " alt="" coords="474,63,660,91"/>
+<area shape="poly" id="edge20_Node000003_Node000017" title=" " alt="" coords="727,265,725,265,711,245,704,224,702,185,699,147,692,129,678,111,653,94,653,89,681,107,696,126,704,146,707,185,709,223,716,242,729,262,732,266"/>
+<area shape="rect" id="Node000005" href="$classInput.html#adbc917eada08436797ba6e063fcd095a" title=" " alt="" coords="5,140,158,168"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="188,168,159,165,157,160,193,165"/>
+<area shape="poly" id="edge6_Node000006_Node000005" title=" " alt="" coords="271,294,102,171,102,165,276,291"/>
+<area shape="poly" id="edge8_Node000007_Node000005" title=" " alt="" coords="224,139,160,147,157,143,228,135"/>
+<area shape="poly" id="edge10_Node000008_Node000005" title=" " alt="" coords="258,75,116,142,112,138,261,70"/>
+<area shape="poly" id="edge12_Node000009_Node000004" title=" " alt="" coords="465,217,372,197,371,191,470,215"/>
+<area shape="rect" id="Node000013" href="$classOutputBoundaryAllGNU.html#a25d818a3ee9c50a5b9a9118a0c504177" title=" " alt="" coords="215,524,398,568"/>
+<area shape="poly" id="edge16_Node000012_Node000013" title=" " alt="" coords="466,568,398,561,398,555,472,568"/>
+<area shape="rect" id="Node000014" href="$classOutputBoundaryFluxGNU.html#afad0e42d9fb82052983cf73a155bab2b" title=" " alt="" coords="210,593,403,638"/>
+<area shape="poly" id="edge17_Node000012_Node000014" title=" " alt="" coords="472,593,404,605,403,600,467,594"/>
+<area shape="poly" id="edge21_Node000017_Node000007" title=" " alt="" coords="475,96,373,117,371,112,479,93"/>
 </map>

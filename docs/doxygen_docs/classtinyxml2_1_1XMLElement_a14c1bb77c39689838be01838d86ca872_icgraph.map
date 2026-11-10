@@ -1,21 +1,23 @@
 <map id="tinyxml2::XMLElement::QueryBoolAttribute" name="tinyxml2::XMLElement::QueryBoolAttribute">
-<area shape="rect" id="Node000001" title="See QueryIntAttribute()" alt="" coords="753,97,924,137"/>
-<area shape="rect" id="Node000002" href="$classInput.html#a3449c12b43fa18175aa2a371084d76ac" title=" " alt="" coords="523,5,651,31"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="796,92,753,67,704,45,650,30,652,25,706,39,755,62,798,87"/>
-<area shape="rect" id="Node000006" href="$classInput.html#ae447e6121efbb74c4a9a8b60dac39d68" title=" " alt="" coords="521,55,652,80"/>
-<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="739,100,651,83,653,77,740,95"/>
-<area shape="rect" id="Node000007" href="$classInput.html#ad716598459e938b3b05235f5f03163a6" title=" " alt="" coords="519,104,655,129"/>
-<area shape="poly" id="edge7_Node000001_Node000007" title=" " alt="" coords="740,119,655,119,655,114,740,114"/>
-<area shape="rect" id="Node000008" href="$classOutput.html#a1ab20f8fa7659568613ee9607aa759e2" title="Main constructor for datasets used for OutputVTK and OutputGNU according to outputMode." alt="" coords="527,153,646,179"/>
-<area shape="poly" id="edge9_Node000001_Node000008" title=" " alt="" coords="740,139,647,157,646,152,739,133"/>
-<area shape="rect" id="Node000009" href="$classSourceNumMRF.html#a78590f8382ca960af7ae5be692ed510e" title="SourceNumMRF constructor from a XML format reading." alt="" coords="468,203,705,228"/>
-<area shape="poly" id="edge10_Node000001_Node000009" title=" " alt="" coords="797,146,754,171,706,192,664,205,662,200,704,188,752,166,794,142"/>
-<area shape="rect" id="Node000003" href="$classInput.html#adbc917eada08436797ba6e063fcd095a" title=" " alt="" coords="267,55,420,80"/>
-<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="511,36,469,45,407,57,406,52,467,39,509,31"/>
-<area shape="rect" id="Node000004" href="$classRun.html#ae6cad323ebc33d27782dbc95fc6339a9" title="Initialization of the simulation." alt="" coords="108,55,219,80"/>
-<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="253,70,219,70,219,65,253,65"/>
-<area shape="rect" id="Node000005" href="$main_8cpp.html#a0ddf1224851353fc92bfbff6f499fa97" title=" " alt="" coords="5,55,60,80"/>
-<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="94,70,60,70,60,65,94,65"/>
-<area shape="poly" id="edge6_Node000006_Node000003" title=" " alt="" coords="507,70,420,70,420,65,507,65"/>
-<area shape="poly" id="edge8_Node000007_Node000003" title=" " alt="" coords="509,104,406,83,407,77,511,99"/>
+<area shape="rect" id="Node000001" title="See QueryIntAttribute()." alt="" coords="490,213,659,258"/>
+<area shape="rect" id="Node000002" href="$classAPETurbulenceSmagorinsky.html#aa4bca9aa114000508afb721d99cc239f" title="APETurbulenceSmagorinsky constructor." alt="" coords="220,5,428,50"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="552,199,508,131,476,95,440,65,421,53,421,48,444,60,480,91,512,128,558,200"/>
+<area shape="rect" id="Node000003" href="$classtinyxml2_1_1XMLElement.html#a07f6033f25eab7b246b57f4bff0758be" title="See IntAttribute()." alt="" coords="239,75,408,119"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="536,202,493,168,441,134,409,120,409,115,443,129,496,163,542,203"/>
+<area shape="rect" id="Node000004" href="$classInput.html#a3449c12b43fa18175aa2a371084d76ac" title=" " alt="" coords="260,143,388,171"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="504,208,441,186,388,172,388,167,443,181,510,207"/>
+<area shape="rect" id="Node000006" href="$classInput.html#ae447e6121efbb74c4a9a8b60dac39d68" title=" " alt="" coords="259,195,389,223"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="472,226,390,219,389,213,477,224"/>
+<area shape="rect" id="Node000007" href="$classInput.html#ad716598459e938b3b05235f5f03163a6" title=" " alt="" coords="256,247,392,275"/>
+<area shape="poly" id="edge7_Node000001_Node000007" title=" " alt="" coords="472,247,393,257,391,252,477,245"/>
+<area shape="rect" id="Node000008" href="$classOutput.html#a1ab20f8fa7659568613ee9607aa759e2" title="Main constructor for datasets used for OutputVTK and OutputGNU according to outputMode." alt="" coords="265,299,382,327"/>
+<area shape="poly" id="edge9_Node000001_Node000008" title=" " alt="" coords="502,265,443,289,383,304,382,299,441,284,507,263"/>
+<area shape="rect" id="Node000009" href="$classtinyxml2_1_1XMLElement.html#a9aa67feb0392ead13a66f5ea55e71f64" title=" " alt="" coords="239,351,408,395"/>
+<area shape="poly" id="edge10_Node000001_Node000009" title=" " alt="" coords="541,267,496,307,443,341,410,355,408,350,441,336,493,303,537,270"/>
+<area shape="rect" id="Node000010" href="$classSourceNumMRF.html#a78590f8382ca960af7ae5be692ed510e" title="SourceNumMRF constructor from a XML format reading." alt="" coords="206,419,442,447"/>
+<area shape="poly" id="edge11_Node000001_Node000010" title=" " alt="" coords="558,270,539,306,513,344,481,380,443,410,421,421,419,416,441,405,477,376,509,340,534,304,554,273"/>
+<area shape="rect" id="Node000005" href="$classInput.html#adbc917eada08436797ba6e063fcd095a" title=" " alt="" coords="5,195,158,223"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="243,176,151,197,148,192,247,172"/>
+<area shape="poly" id="edge6_Node000006_Node000005" title=" " alt="" coords="241,211,159,212,157,206,245,207"/>
+<area shape="poly" id="edge8_Node000007_Node000005" title=" " alt="" coords="239,245,150,226,149,221,243,242"/>
 </map>

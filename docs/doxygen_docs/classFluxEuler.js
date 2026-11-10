@@ -28,9 +28,13 @@ var classFluxEuler =
     [ "subtractFluxRotatingRegion", "classFluxEuler.html#ae0597a9f29c923e07bcc93b19add5d5b", null ],
     [ "subtractNonCons", "classFluxEuler.html#af9eb8e9c0d5f0e0a7b218a3be9ea06eb", null ],
     [ "APEConductivity", "classFluxEuler.html#aae4bcdc43f9fe8ff9ff54bd02c3679de", null ],
+    [ "APETurbulenceSmagorinsky", "classFluxEuler.html#a0ade91a75c0ec3da4447b219e9592449", null ],
     [ "APEuler", "classFluxEuler.html#a01fd240f5cc4f22c4d52b2cb278345b3", null ],
     [ "APEViscosity", "classFluxEuler.html#a028662c77cfa639b609edfd8af2fe34d", null ],
     [ "ModEuler", "classFluxEuler.html#a8bf359893189944874b606094a8832b7", null ],
+    [ "ModNEqDEM", "classFluxEuler.html#ab2810f0d0d5440445ab238e9c20c0b36", null ],
+    [ "RiemannSolverExact", "classFluxEuler.html#a7d086af02a99733863d2f530f624f4cc", null ],
+    [ "RiemannSolverHLLC", "classFluxEuler.html#a40356c5bd0965cf4bda1efe37c402b42", null ],
     [ "m_energ", "classFluxEuler.html#a9ec49ee9f61c44d3eaabe5aac3163924", null ],
     [ "m_mass", "classFluxEuler.html#a959e5a99d9d4e785d385238724ed7c54", null ],
     [ "m_momentum", "classFluxEuler.html#a1d550811070d61db285c1c833035a41e", null ]

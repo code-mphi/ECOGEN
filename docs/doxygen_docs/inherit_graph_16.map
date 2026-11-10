@@ -1,15 +1,15 @@
 <map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
-<area shape="rect" id="Node000000" href="$classFace.html" title=" " alt="" coords="5,56,56,81"/>
-<area shape="rect" id="Node000001" href="$classFaceCartesian.html" title=" " alt="" coords="104,31,217,56"/>
-<area shape="poly" id="edge47_Node000000_Node000001" title=" " alt="" coords="69,59,103,52,104,57,70,64"/>
-<area shape="rect" id="Node000002" href="$classFaceNS.html" title=" " alt="" coords="126,80,195,105"/>
-<area shape="poly" id="edge48_Node000000_Node000002" title=" " alt="" coords="70,73,126,84,125,89,69,78"/>
-<area shape="rect" id="Node000003" href="$classFacePoint.html" title=" " alt="" coords="287,5,371,31"/>
-<area shape="poly" id="edge49_Node000002_Node000003" title=" " alt="" coords="202,72,216,65,264,40,291,28,293,33,266,44,219,70,204,76"/>
-<area shape="rect" id="Node000004" href="$classFaceQuadrangle.html" title=" " alt="" coords="265,55,392,80"/>
-<area shape="poly" id="edge50_Node000002_Node000004" title=" " alt="" coords="208,83,265,74,266,79,209,88"/>
-<area shape="rect" id="Node000005" href="$classFaceSegment.html" title=" " alt="" coords="274,104,383,129"/>
-<area shape="poly" id="edge51_Node000002_Node000005" title=" " alt="" coords="209,97,274,106,273,112,208,102"/>
-<area shape="rect" id="Node000006" href="$classFaceTriangle.html" title=" " alt="" coords="277,153,380,179"/>
-<area shape="poly" id="edge52_Node000002_Node000006" title=" " alt="" coords="202,109,266,138,296,151,294,156,264,143,200,114"/>
+<area shape="rect" id="Node000000" href="$classEos.html" title="General class for Equation of State (EOS)." alt="" coords="5,136,50,164"/>
+<area shape="rect" id="Node000001" href="$classEosIG.html" title="Class describing an ideal gas equation of state." alt="" coords="127,5,186,33"/>
+<area shape="poly" id="edge49_Node000000_Node000001" title=" " alt="" coords="39,121,63,82,96,44,129,26,125,31,99,48,67,85,44,123"/>
+<area shape="rect" id="Node000002" href="$classEosNASG.html" title="Class describing a Noble&#45;Abel stiffened gas equation of state." alt="" coords="116,57,197,85"/>
+<area shape="poly" id="edge50_Node000000_Node000002" title=" " alt="" coords="56,124,96,96,123,84,119,88,99,100,60,128"/>
+<area shape="rect" id="Node000003" href="$classEosNLS.html" title="Class describing the equation of state for the Defocusing Non&#45;linear Schrodinger model." alt="" coords="122,109,191,137"/>
+<area shape="poly" id="edge51_Node000000_Node000003" title=" " alt="" coords="64,140,123,128,119,132,67,144"/>
+<area shape="rect" id="Node000004" href="$classEosPolynomial.html" title="Class describing a polynomial equation of state." alt="" coords="98,161,215,189"/>
+<area shape="poly" id="edge52_Node000000_Node000004" title=" " alt="" coords="64,155,99,162,95,165,66,160"/>
+<area shape="rect" id="Node000005" href="$classEosSG.html" title="Class describing a stiffened gas equation of state." alt="" coords="125,213,188,241"/>
+<area shape="poly" id="edge53_Node000000_Node000005" title=" " alt="" coords="58,171,99,198,127,214,122,215,96,203,58,176"/>
+<area shape="rect" id="Node000006" href="$classEosVDW.html" title="Class describing a Van Der Waals equation of state." alt="" coords="118,265,194,293"/>
+<area shape="poly" id="edge54_Node000000_Node000006" title=" " alt="" coords="43,175,67,214,99,250,121,266,115,266,96,255,63,217,41,180"/>
 </map>

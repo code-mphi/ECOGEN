@@ -22,6 +22,10 @@ var Tools_8h =
       [ "vecSlopes", "Tools_8h.html#a2c815f6ae654fe19b3985d14c9c8d74ea92a454a31affc0f1e34d4a65242174f8", null ],
       [ "resume", "Tools_8h.html#a2c815f6ae654fe19b3985d14c9c8d74eafc20a40607c02ad71b40092788d33bd2", null ]
     ] ],
+    [ "SimulationOrder", "Tools_8h.html#a75519b8538910d79856da67229ab1120", [
+      [ "first", "Tools_8h.html#a75519b8538910d79856da67229ab1120a8b04d5e3775d298e78455efc5ca404d5", null ],
+      [ "second", "Tools_8h.html#a75519b8538910d79856da67229ab1120aa9f0e61a137d86aa9db53465e0801612", null ]
+    ] ],
     [ "TypeBC", "Tools_8h.html#a36652a21e0b7ba895c97b2ab09843032", [
       [ "NONREFLECTING", "Tools_8h.html#a36652a21e0b7ba895c97b2ab09843032a4845a0677ab44d6a4e0d2f4a3b5c4f22", null ],
       [ "WALL", "Tools_8h.html#a36652a21e0b7ba895c97b2ab09843032afca2faad41310c7e71ec303ef789c53a", null ],
@@ -32,12 +36,17 @@ var Tools_8h =
       [ "INLETINJTEMP", "Tools_8h.html#a36652a21e0b7ba895c97b2ab09843032a5311eac68a451c32a485b64316ad82b7", null ],
       [ "NULLFLUX", "Tools_8h.html#a36652a21e0b7ba895c97b2ab09843032a18de2ca9d99933caa50a728c6432a7c3", null ],
       [ "OUTLETMASSFLOW", "Tools_8h.html#a36652a21e0b7ba895c97b2ab09843032a7661b23f5893dce578b38b38306fec11", null ],
-      [ "PISTON", "Tools_8h.html#a36652a21e0b7ba895c97b2ab09843032af5b6fac95dfa1398f7b4d475190cc7c5", null ]
+      [ "PERIODIC", "Tools_8h.html#a36652a21e0b7ba895c97b2ab09843032ae4379d044711537d9ce3b3b58c575c58", null ],
+      [ "MOVINGWALL", "Tools_8h.html#a36652a21e0b7ba895c97b2ab09843032a3de8b2a804d03875446ba393864528cd", null ]
     ] ],
     [ "TypeBCHeat", "Tools_8h.html#aecaade62608ca30f147f016089a60408", [
       [ "ADIABATIC", "Tools_8h.html#aecaade62608ca30f147f016089a60408affcf1ad849da6c3636ab0ee4df9f2f84", null ],
       [ "IMPOSEDTEMP", "Tools_8h.html#aecaade62608ca30f147f016089a60408a8d16c2d1d2a4fa168a1c5c6a50c8c0c4", null ],
       [ "IMPOSEDFLUX", "Tools_8h.html#aecaade62608ca30f147f016089a60408a98390390c93dbf967be0d592732c3b81", null ]
+    ] ],
+    [ "TypeContactAreas", "Tools_8h.html#a3b8ec64b4ce78e516f59a0b153c47f9e", [
+      [ "symmetric", "Tools_8h.html#a3b8ec64b4ce78e516f59a0b153c47f9eafeca3c730601be7fd57f1f0b668b4637", null ],
+      [ "nonsymmetric", "Tools_8h.html#a3b8ec64b4ce78e516f59a0b153c47f9ea8105a72f2894979f70a11a46130a7e78", null ]
     ] ],
     [ "TypeData", "Tools_8h.html#a154edc1b1ca466c17e8dd4556b664412", [
       [ "FLOAT", "Tools_8h.html#a154edc1b1ca466c17e8dd4556b664412a9cf4a0866224b0bb4a7a895da27c9c4c", null ],
@@ -61,7 +70,8 @@ var Tools_8h =
     ] ],
     [ "TypeOutput", "Tools_8h.html#a0427765ebac49e92e301090b3b54a1fe", [
       [ "GNU", "Tools_8h.html#a0427765ebac49e92e301090b3b54a1fea9b8fc419319f699c152431c9fa1aad36", null ],
-      [ "VTK", "Tools_8h.html#a0427765ebac49e92e301090b3b54a1fea37fb55ddbbe1465cec5f3d154db73e67", null ]
+      [ "VTK", "Tools_8h.html#a0427765ebac49e92e301090b3b54a1fea37fb55ddbbe1465cec5f3d154db73e67", null ],
+      [ "VTKHDF", "Tools_8h.html#a0427765ebac49e92e301090b3b54a1fea40607367f738ab6230814a82e751eb5d", null ]
     ] ],
     [ "TypeRelax", "Tools_8h.html#aa693f52569c710a53c4cd6777ba0162e", [
       [ "U", "Tools_8h.html#aa693f52569c710a53c4cd6777ba0162eac461e84f27bbb236874e1011cd66031f", null ],
@@ -102,8 +112,16 @@ var Tools_8h =
     [ "destroy", "Tools_8h.html#a0b159d9e238f344ac0987d7768f612ca", null ],
     [ "destroy_array", "Tools_8h.html#a957d4e793cdff16ba80144f9a6ce2a0a", null ],
     [ "sign", "Tools_8h.html#a6379785ff623923a5a20a5bf935d5e70", null ],
+    [ "initialConductivity", "Tools_8h.html#a90f832a033a88ad182e631d3f323c729", null ],
+    [ "initialSoundSpeed", "Tools_8h.html#acd0764f1abef3f01a4562870c8dcc4c6", null ],
+    [ "initialViscosity", "Tools_8h.html#a83f1f38af190249dc9ff758868128c38", null ],
+    [ "nCells", "Tools_8h.html#ab90a8c72b3d711429d09705a3ca3550b", null ],
     [ "numberPhases", "Tools_8h.html#aef6c990b3d608846e43d359e0db27150", null ],
     [ "numberSolids", "Tools_8h.html#a52e1e5715ef29cce7bc7cc268fe30dde", null ],
     [ "numberTransports", "Tools_8h.html#ae0973185fa0bd08e7e15a9ab0c0b5d78", null ],
-    [ "TB", "Tools_8h.html#a002144158bfd2afd83e82add7bb9a080", null ]
+    [ "simulationOrder", "Tools_8h.html#a5a1baab3d149edcc66400d1c1cf79585", null ],
+    [ "sum_u2v2w2", "Tools_8h.html#ac05b0932a6020a57ff7e30d49ece2642", null ],
+    [ "TB", "Tools_8h.html#a002144158bfd2afd83e82add7bb9a080", null ],
+    [ "turbulenceActivated", "Tools_8h.html#a65ea4130efa2dcef73952445284a7825", null ],
+    [ "turbulenceNumQPA", "Tools_8h.html#abef0332b18dff49dcefa2dadf0970daa", null ]
 ];

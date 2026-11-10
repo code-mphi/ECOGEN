@@ -10,10 +10,12 @@ var classQuantitiesAddPhys =
     [ "getGradU", "classQuantitiesAddPhys.html#a28b941156bd4d8ad689dc4c2bade7c53", null ],
     [ "getGradV", "classQuantitiesAddPhys.html#a56c44d732bce72db9e5e798d152fe223", null ],
     [ "getGradW", "classQuantitiesAddPhys.html#ad72214b8bbb51ad726ddba6c6fd3c02f", null ],
+    [ "getTurbulentViscosity", "classQuantitiesAddPhys.html#a0b10df9cf9f954508ffa3e0fabb67eca", null ],
     [ "setGrad", "classQuantitiesAddPhys.html#ad395bf164c5b468205a232730a0ed4e4", null ],
     [ "setGradTk", "classQuantitiesAddPhys.html#acd07b0f4002410203d116120968d3c43", null ],
     [ "setGradU", "classQuantitiesAddPhys.html#a43eee2889055355dbe6ca5293dc3145f", null ],
     [ "setGradV", "classQuantitiesAddPhys.html#a4bbb9db44261f83eb399c5c669523676", null ],
     [ "setGradW", "classQuantitiesAddPhys.html#a2748e9b9f3bdb62915a529a511820638", null ],
+    [ "setTurbulentViscosity", "classQuantitiesAddPhys.html#a3767714d860b810a0975a19f1c4c34c3", null ],
     [ "m_addPhys", "classQuantitiesAddPhys.html#a5f34619c6c4be6c37745b00ad64e507f", null ]
 ];

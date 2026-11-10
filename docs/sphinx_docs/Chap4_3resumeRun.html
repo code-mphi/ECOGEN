@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Resume a run &mdash; ECOGEN 5.0 documentation</title>
+  <title>Resume a run &mdash; ECOGEN 6.0 documentation</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
       <link rel="stylesheet" type="text/css" href="_static/css/theme.css" />
 
@@ -38,7 +38,7 @@
             ECOGEN
           </a>
               <div class="version">
-                5.0
+                6.0
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
@@ -73,7 +73,8 @@
 </li>
 <li class="toctree-l1"><a class="reference internal" href="Chap5_testCases_Chapter.html">Test cases</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Chap6_developersGuide_Chapter.html">Developers</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Chap7_license.html">License</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Chap7_license.html">License and authors</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Chap8_citation.html">Citation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="zBibliography.html">Bibliography</a></li>
 </ul>
 
@@ -113,31 +114,28 @@
 <h2>Setup of the test case<a class="headerlink" href="#setup-of-the-test-case" title="Permalink to this heading"></a></h2>
 <p>For the purpose of this tutorial we have to do some slight modifications of the test case presented above. We advise you to make a copy of the test case <strong>./libTests/referenceTestCases/euler/1D/shockTubes/HPLeft/</strong> into a new path such as <strong>./libTests/myTests/resumeRun/</strong>.</p>
 <p>For the sake of simplicity, we edit the <em>main.xml</em> file as following:</p>
-<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="cp">&lt;?xml version = &quot;1.0&quot; encoding = &quot;UTF-8&quot; standalone = &quot;yes&quot;?&gt;</span>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="cp">&lt;?xml version = "1.0" encoding = "UTF-8" standalone = "yes"?&gt;</span>
 <span class="nt">&lt;computationParam&gt;</span>
 <span class="w">        </span><span class="nt">&lt;run&gt;</span>resumeRun<span class="nt">&lt;/run&gt;</span>
-<span class="w">        </span><span class="nt">&lt;outputMode</span><span class="w"> </span><span class="na">format=</span><span class="s">&quot;VTK&quot;</span><span class="w"> </span><span class="na">binary=</span><span class="s">&quot;false&quot;</span><span class="w"> </span><span class="na">precision=</span><span class="s">&quot;10&quot;</span><span class="nt">/&gt;</span>
-<span class="w">        </span><span class="nt">&lt;timeControlMode</span><span class="w"> </span><span class="na">iterations=</span><span class="s">&quot;true&quot;</span><span class="nt">&gt;</span>
-<span class="w">                </span><span class="nt">&lt;iterations</span><span class="w"> </span><span class="na">number=</span><span class="s">&quot;500&quot;</span><span class="w"> </span><span class="na">iterFreq=</span><span class="s">&quot;50&quot;</span><span class="nt">/&gt;</span>
-<span class="w">                </span><span class="nt">&lt;physicalTime</span><span class="w"> </span><span class="na">totalTime=</span><span class="s">&quot;6.e-4&quot;</span><span class="w"> </span><span class="na">timeFreq=</span><span class="s">&quot;6e-5&quot;</span><span class="nt">/&gt;</span>
+<span class="w">        </span><span class="nt">&lt;outputMode</span><span class="w"> </span><span class="na">format=</span><span class="s">"VTK"</span><span class="w"> </span><span class="na">binary=</span><span class="s">"false"</span><span class="w"> </span><span class="na">precision=</span><span class="s">"10"</span><span class="nt">/&gt;</span>
+<span class="w">        </span><span class="nt">&lt;timeControlMode</span><span class="w"> </span><span class="na">iterations=</span><span class="s">"true"</span><span class="nt">&gt;</span>
+<span class="w">                </span><span class="nt">&lt;iterations</span><span class="w"> </span><span class="na">number=</span><span class="s">"500"</span><span class="w"> </span><span class="na">iterFreq=</span><span class="s">"50"</span><span class="nt">/&gt;</span>
+<span class="w">                </span><span class="nt">&lt;physicalTime</span><span class="w"> </span><span class="na">totalTime=</span><span class="s">"6.e-4"</span><span class="w"> </span><span class="na">timeFreq=</span><span class="s">"6e-5"</span><span class="nt">/&gt;</span>
 <span class="w">        </span><span class="nt">&lt;/timeControlMode&gt;</span>
-<span class="w">        </span><span class="nt">&lt;computationControl</span><span class="w"> </span><span class="na">CFL=</span><span class="s">&quot;0.5&quot;</span><span class="nt">/&gt;</span>
-<span class="w">        </span><span class="nt">&lt;secondOrder&gt;</span>
-<span class="w">                </span><span class="nt">&lt;globalLimiter&gt;</span>vanleer<span class="nt">&lt;/globalLimiter&gt;</span>
-<span class="w">        </span><span class="nt">&lt;/secondOrder&gt;</span>
-<span class="w">        </span><span class="nt">&lt;resumeSimulation</span><span class="w"> </span><span class="na">resumeFileNumber=</span><span class="s">&quot;0&quot;</span><span class="w"> </span><span class="na">AMRsaveFreq=</span><span class="s">&quot;0&quot;</span><span class="nt">/&gt;</span>
+<span class="w">        </span><span class="nt">&lt;computationControl</span><span class="w"> </span><span class="na">CFL=</span><span class="s">"0.5"</span><span class="nt">/&gt;</span>
+<span class="w">        </span><span class="nt">&lt;resumeSimulation</span><span class="w"> </span><span class="na">resumeFileNumber=</span><span class="s">"0"</span><span class="w"> </span><span class="na">AMRsaveFreq=</span><span class="s">"0"</span><span class="nt">/&gt;</span>
 <span class="nt">&lt;/computationParam&gt;</span>
 </pre></div>
 </div>
 <p>We removed the probe section and changed the time control mode to iterations with a printing of data each 50 iterations for a total of 500 iterations.</p>
 <p>Following the same idea of simpler test case we edit the file <em>mesh.xml</em> by commenting the AMR feature and add more cells:</p>
-<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="cp">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</span>
 <span class="nt">&lt;mesh&gt;</span>
-<span class="w">        </span><span class="nt">&lt;type</span><span class="w"> </span><span class="na">structure=</span><span class="s">&quot;cartesian&quot;</span><span class="nt">/&gt;</span>
+<span class="w">        </span><span class="nt">&lt;type</span><span class="w"> </span><span class="na">structure=</span><span class="s">"cartesian"</span><span class="nt">/&gt;</span>
 <span class="w">        </span><span class="nt">&lt;cartesianMesh&gt;</span>
-<span class="w">                </span><span class="nt">&lt;dimensions</span><span class="w"> </span><span class="na">x=</span><span class="s">&quot;1.0&quot;</span><span class="w"> </span><span class="na">y=</span><span class="s">&quot;0.1&quot;</span><span class="w"> </span><span class="na">z=</span><span class="s">&quot;0.1&quot;</span><span class="nt">/&gt;</span>
-<span class="w">                </span><span class="nt">&lt;numberCells</span><span class="w"> </span><span class="na">x=</span><span class="s">&quot;200&quot;</span><span class="w"> </span><span class="na">y =</span><span class="s">&quot;1&quot;</span><span class="w"> </span><span class="na">z=</span><span class="s">&quot;1&quot;</span><span class="nt">/&gt;</span>
-<span class="w">                </span><span class="cm">&lt;!-- &lt;AMR lvlMax=&quot;3&quot; criteriaVar=&quot;0.1&quot; varRho=&quot;true&quot; varP=&quot;true&quot; varU=&quot;false&quot; varAlpha=&quot;false&quot; xiSplit=&quot;0.11&quot; xiJoin=&quot;0.11&quot;/&gt; --&gt;</span>
+<span class="w">                </span><span class="nt">&lt;dimensions</span><span class="w"> </span><span class="na">x=</span><span class="s">"1.0"</span><span class="w"> </span><span class="na">y=</span><span class="s">"0.1"</span><span class="w"> </span><span class="na">z=</span><span class="s">"0.1"</span><span class="nt">/&gt;</span>
+<span class="w">                </span><span class="nt">&lt;numberCells</span><span class="w"> </span><span class="na">x=</span><span class="s">"200"</span><span class="w"> </span><span class="na">y =</span><span class="s">"1"</span><span class="w"> </span><span class="na">z=</span><span class="s">"1"</span><span class="nt">/&gt;</span>
+<span class="w">                </span><span class="cm">&lt;!-- &lt;AMR lvlMax="3" criteriaVar="0.1" varRho="true" varP="true" varU="false" varAlpha="false" xiSplit="0.11" xiJoin="0.11"/&gt; --&gt;</span>
 <span class="w">        </span><span class="nt">&lt;/cartesianMesh&gt;</span>
 <span class="nt">&lt;/mesh&gt;</span>
 </pre></div>
@@ -168,11 +166,11 @@
 <section id="resume-run">
 <h2>Resume run<a class="headerlink" href="#resume-run" title="Permalink to this heading"></a></h2>
 <p>Now that we know the last time iteration, we can resume this simulation to add 500 additional time iterations. To this end, we modify the block <code class="code highlight xml docutils literal highlight-xml"><span class="nt">&lt;resumeSimulation&gt;</span></code> of the <em>main.xml</em> file to specify the last file number:</p>
-<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;resumeSimulation</span><span class="w"> </span><span class="na">resumeFileNumber=</span><span class="s">&quot;10&quot;</span><span class="w"> </span><span class="na">AMRsaveFreq=</span><span class="s">&quot;0&quot;</span><span class="nt">/&gt;</span>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;resumeSimulation</span><span class="w"> </span><span class="na">resumeFileNumber=</span><span class="s">"10"</span><span class="w"> </span><span class="na">AMRsaveFreq=</span><span class="s">"0"</span><span class="nt">/&gt;</span>
 </pre></div>
 </div>
 <p>Accordingly we add the additional time iterations:</p>
-<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;iterations</span><span class="w"> </span><span class="na">number=</span><span class="s">&quot;1000&quot;</span><span class="w"> </span><span class="na">iterFreq=</span><span class="s">&quot;50&quot;</span><span class="nt">/&gt;</span>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;iterations</span><span class="w"> </span><span class="na">number=</span><span class="s">"1000"</span><span class="w"> </span><span class="na">iterFreq=</span><span class="s">"50"</span><span class="nt">/&gt;</span>
 </pre></div>
 </div>
 <p>All is left to do is to run again the simulation.</p>
@@ -200,7 +198,7 @@
 <h2>Additional remarks<a class="headerlink" href="#additional-remarks" title="Permalink to this heading"></a></h2>
 <ul class="simple">
 <li><p>It is essential that the result folder of the initial simulation keeps the same name for the resumed run.</p></li>
-<li><p>For AMR simulations, one also needs to specify the frequency <code class="code highlight xml docutils literal highlight-xml">AMRsaveFreq</code> at which necessary resume files are saved (default is 0).</p></li>
+<li><p>For technical reasons, the <code class="code highlight xml docutils literal highlight-xml">AMRsaveFreq</code> field has always to be provided but it is used only for AMR simulations. In this case, it specifies the frequency at which necessary resume files are saved (default is 0).</p></li>
 </ul>
 </section>
 </section>
@@ -216,7 +214,7 @@
   <hr/>
 
   <div role="contentinfo">
-    <p>&#169; Copyright 2025, code-mphi.</p>
+    <p>&#169; Copyright 2026, code-mphi.</p>
   </div>
 
   Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a

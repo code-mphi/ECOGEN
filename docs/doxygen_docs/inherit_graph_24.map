@@ -1,3 +1,13 @@
 <map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
-<area shape="rect" id="Node000000" href="$classInput.html" title=" " alt="" coords="5,5,60,31"/>
+<area shape="rect" id="Node000000" href="$classGradPhase.html" title="Phase variable gradients. Stored for 2nd&#45;order computation on unstructured mesh (O2 NS)." alt="" coords="5,109,97,137"/>
+<area shape="rect" id="Node000001" href="$classGradPhaseEuler.html" title="Phase variable gradients for Euler model. Stored for 2nd&#45;order computation on unstructured mesh (O2 N..." alt="" coords="192,5,316,33"/>
+<area shape="poly" id="edge94_Node000000_Node000001" title=" " alt="" coords="74,96,106,68,143,43,193,27,189,31,146,48,109,73,78,100"/>
+<area shape="rect" id="Node000002" href="$classGradPhaseEulerHomogeneous.html" title="Phase variable gradients for EulerHomogeneous model. Stored for 2nd&#45;order computation on unstructured..." alt="" coords="145,57,363,85"/>
+<area shape="poly" id="edge95_Node000000_Node000002" title=" " alt="" coords="110,104,144,95,195,84,191,87,145,100,113,109"/>
+<area shape="rect" id="Node000003" href="$classGradPhaseNEq.html" title="Phase variable gradients for NEq model. Stored for 2nd&#45;order computation on unstructured mesh (O2 NS)..." alt="" coords="195,109,312,137"/>
+<area shape="poly" id="edge96_Node000000_Node000003" title=" " alt="" coords="112,121,197,121,193,125,113,126"/>
+<area shape="rect" id="Node000004" href="$classGradPhasePTUEq.html" title="Phase variable gradients for PTUEq model. Stored for 2nd&#45;order computation on unstructured mesh (O2 N..." alt="" coords="187,161,320,189"/>
+<area shape="poly" id="edge97_Node000000_Node000004" title=" " alt="" coords="111,137,145,146,196,160,191,162,144,151,112,142"/>
+<area shape="rect" id="Node000005" href="$classGradPhaseUEq.html" title="Phase variable gradients for UEq model. Stored for 2nd&#45;order computation on unstructured mesh (O2 NS)..." alt="" coords="195,213,312,241"/>
+<area shape="poly" id="edge98_Node000000_Node000005" title=" " alt="" coords="77,146,109,174,146,198,197,218,192,218,143,203,106,178,75,151"/>
 </map>

@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Richtmyer–Meshkov &mdash; ECOGEN 5.0 documentation</title>
+  <title>Richtmyer–Meshkov &mdash; ECOGEN 6.0 documentation</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
       <link rel="stylesheet" type="text/css" href="_static/css/theme.css" />
 
@@ -38,7 +38,7 @@
             ECOGEN
           </a>
               <div class="version">
-                5.0
+                6.0
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
@@ -57,9 +57,9 @@
 <li class="toctree-l1 current"><a class="reference internal" href="Chap5_testCases_Chapter.html">Test cases</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="Chap5_1Euler.html">Single-phase test cases</a></li>
 <li class="toctree-l2 current"><a class="reference internal" href="Chap5_2.html">Multiphase test cases</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="Chap5_3NEq.html">Non-equilibrium model</a></li>
 <li class="toctree-l3"><a class="reference internal" href="Chap5_2UEq.html">Velocity-equilibrium model</a></li>
 <li class="toctree-l3"><a class="reference internal" href="Chap5_2UEqTotE.html">Velocity-equilibrium model based on total energies</a></li>
-<li class="toctree-l3"><a class="reference internal" href="Chap5_2UEqSolid.html">Velocity-equilibrium model for solids</a></li>
 <li class="toctree-l3 current"><a class="reference internal" href="Chap5_2PUEq.html">Pressure- and velocity-equilibrium model</a><ul class="current">
 <li class="toctree-l4"><a class="reference internal" href="Chap5_2PUEq_1D.html">1D</a></li>
 <li class="toctree-l4 current"><a class="reference internal" href="Chap5_2PUEq_2D.html">2D</a></li>
@@ -67,13 +67,15 @@
 </li>
 <li class="toctree-l3"><a class="reference internal" href="Chap5_2PTUEq.html">Temperature-, pressure- and velocity-equilibrium model</a></li>
 <li class="toctree-l3"><a class="reference internal" href="Chap5_2eulerHomogeneous.html">Homogeneous Euler</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Chap5_2ENSK1D.html">Extended-Navier-Stokes-Korteweg-1D model</a></li>
 <li class="toctree-l3"><a class="reference internal" href="Chap5_2.html#other-tests-cases">Other tests cases</a></li>
 </ul>
 </li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="Chap6_developersGuide_Chapter.html">Developers</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Chap7_license.html">License</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Chap7_license.html">License and authors</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Chap8_citation.html">Citation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="zBibliography.html">Bibliography</a></li>
 </ul>
 
@@ -108,7 +110,7 @@
   <section id="richtmyer-meshkov">
 <h1>Richtmyer–Meshkov<a class="headerlink" href="#richtmyer-meshkov" title="Permalink to this heading"></a></h1>
 <p>Richtmyer–Meshkov instabilities occur when a non-regular interface between different fluids is subjected to a sudden acceleration, such as a shock wave.</p>
-<p>Initial conditions of this test are shown in <a class="reference internal" href="#fig-testcases-pueq-richtmyermeshkovini"><span class="std std-numref">Fig. 76</span></a>.
+<p>Initial conditions of this test are shown in <a class="reference internal" href="#fig-testcases-pueq-richtmyermeshkovini"><span class="std std-numref">Fig. 80</span></a>.
 Input files for this test are available in <em>./libTests/referenceTestCases/PUEq/2D/RichtmyerMeshkov/</em>. The corresponding uncommented line in <em>ECOGEN.xml</em> is:</p>
 <div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;testCase&gt;</span>./libTests/referenceTestCases/PUEq/2D/RichtmyerMeshkov/<span class="nt">&lt;/testCase&gt;</span>
 </pre></div>
@@ -116,7 +118,7 @@ Input files for this test are available in <em>./libTests/referenceTestCases/PUE
 <figure class="align-center" id="id1">
 <span id="fig-testcases-pueq-richtmyermeshkovini"></span><a class="reference internal image-reference" href="_images/richtmyerMeshkovIni.png"><img alt="_images/richtmyerMeshkovIni.png" src="_images/richtmyerMeshkovIni.png" style="width: 739.0px; height: 179.0px;" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 76 </span><span class="caption-text">Initial condition before instabilities.</span><a class="headerlink" href="#id1" title="Permalink to this image"></a></p>
+<p><span class="caption-number">Fig. 80 </span><span class="caption-text">Initial condition before instabilities.</span><a class="headerlink" href="#id1" title="Permalink to this image"></a></p>
 </figcaption>
 </figure>
 <p>The initial characteristics of the run are:</p>
@@ -154,24 +156,24 @@ Input files for this test are available in <em>./libTests/referenceTestCases/PUE
 </tr>
 </tbody>
 </table>
-<p>Results are shown in <a class="reference internal" href="#fig-testcases-pueq-richtmyermeshkovanim"><span class="std std-numref">Fig. 77</span></a>.
+<p>Results are shown in <a class="reference internal" href="#fig-testcases-pueq-richtmyermeshkovanim"><span class="std std-numref">Fig. 81</span></a>.
 Both GIFs are animations which represents on the one hand (upper half) the evolution of the mesh (AMR), that is to say its refinement for the computation of the simulation.
 For example, when the density variations are low or non-existent, the mesh will be as coarse as possible (within the conditions given in mesh.xml).
 On the contrary when the variations become significant, the mesh will become refined.</p>
 <figure class="align-center" id="id2">
 <span id="fig-testcases-pueq-richtmyermeshkovanim"></span><a class="reference internal image-reference" href="_images/richtmyerMeshkovAnim.gif"><img alt="_images/richtmyerMeshkovAnim.gif" src="_images/richtmyerMeshkovAnim.gif" style="width: 739.1999999999999px; height: 249.89999999999998px;" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 77 </span><span class="caption-text">Visualization of RM instabilities using <a class="reference external" href="https://www.paraview.org/">Paraview</a> software.</span><a class="headerlink" href="#id2" title="Permalink to this image"></a></p>
+<p><span class="caption-number">Fig. 81 </span><span class="caption-text">Visualization of RM instabilities using <a class="reference external" href="https://www.paraview.org/">Paraview</a> software.</span><a class="headerlink" href="#id2" title="Permalink to this image"></a></p>
 </figcaption>
 </figure>
 <p>With the velocity u = -200m/s, the fluid impacts the left wall and a shock wave therefore propagates towards the right. This shock wave reacts with the interface and the instability takes place.</p>
-<p>On the other hand (lower half), the second part of <a class="reference internal" href="#fig-testcases-pueq-richtmyermeshkovanim"><span class="std std-numref">Fig. 77</span></a> represents the density variation (Schlieren visualization).
+<p>On the other hand (lower half), the second part of <a class="reference internal" href="#fig-testcases-pueq-richtmyermeshkovanim"><span class="std std-numref">Fig. 81</span></a> represents the density variation (Schlieren visualization).
 A right-moving shock wave is created and then the Richtmyer–Meshkov instability gradually appears, with its very recognizable “mushroom” head during its non-linear phase.</p>
-<p>One can note the distribution of computation on the CPUs (here 15) divided into different regions. The load between the regions migrates between all the CPUs during the simulation. This is shown in <a class="reference internal" href="#fig-testcases-pueq-richtmyermeshkovcpu"><span class="std std-numref">Fig. 78</span></a>.</p>
+<p>One can note the distribution of computation on the CPUs (here 15) divided into different regions. The load between the regions migrates between all the CPUs during the simulation. This is shown in <a class="reference internal" href="#fig-testcases-pueq-richtmyermeshkovcpu"><span class="std std-numref">Fig. 82</span></a>.</p>
 <figure class="align-center" id="id3">
 <span id="fig-testcases-pueq-richtmyermeshkovcpu"></span><a class="reference internal image-reference" href="_images/richtmyerMeshkovCPU.gif"><img alt="_images/richtmyerMeshkovCPU.gif" src="_images/richtmyerMeshkovCPU.gif" style="width: 704.8000000000001px; height: 238.4px;" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 78 </span><span class="caption-text">Visualization of RM instabilities. Upper half with CPU distribution and lower half with Schlieren using <a class="reference external" href="https://www.paraview.org/">Paraview</a> software.</span><a class="headerlink" href="#id3" title="Permalink to this image"></a></p>
+<p><span class="caption-number">Fig. 82 </span><span class="caption-text">Visualization of RM instabilities. Upper half with CPU distribution and lower half with Schlieren using <a class="reference external" href="https://www.paraview.org/">Paraview</a> software.</span><a class="headerlink" href="#id3" title="Permalink to this image"></a></p>
 </figcaption>
 </figure>
 <figure class="align-center">
@@ -191,7 +193,7 @@ A right-moving shock wave is created and then the Richtmyer–Meshkov instabilit
   <hr/>
 
   <div role="contentinfo">
-    <p>&#169; Copyright 2025, code-mphi.</p>
+    <p>&#169; Copyright 2026, code-mphi.</p>
   </div>
 
   Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a

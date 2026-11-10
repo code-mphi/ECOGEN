@@ -1,25 +1,25 @@
 <map id="MUSGmshV4" name="MUSGmshV4">
-<area shape="rect" id="Node000001" title=" " alt="" coords="113,580,219,605"/>
-<area shape="rect" id="Node000002" href="$classMUSGmsh.html" title=" " alt="" coords="121,505,211,531"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="169,545,169,580,163,580,163,545"/>
-<area shape="rect" id="Node000003" href="$classMeshUnStruct.html" title=" " alt="" coords="109,431,223,456"/>
-<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="169,470,169,505,163,505,163,470"/>
-<area shape="rect" id="Node000004" href="$classMesh.html" title="Abstract class for a mesh." alt="" coords="13,343,71,368"/>
-<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="66,375,102,404,143,428,140,433,99,409,62,379"/>
-<area shape="rect" id="Node000005" href="$classCoord.html" title="Class for a coordinate system object such as coordinates of the vertex or a vector." alt="" coords="256,7,316,33"/>
-<area shape="poly" id="edge4_Node000003_Node000005" title=" " alt="" coords="330,29,353,40,372,57,387,80,392,102,391,153,391,357,386,371,374,384,331,405,277,422,223,434,222,429,276,417,329,400,370,379,382,368,386,356,386,153,387,102,382,82,368,60,350,45,328,34"/>
-<area shape="poly" id="edge5_Node000005_Node000005" title=" " alt="" coords="331,7,339,11,343,20,334,32,317,35,316,30,332,28,337,20,335,15,329,11"/>
-<area shape="rect" id="Node000007" href="$classElement.html" title=" " alt="" coords="100,141,176,167"/>
-<area shape="poly" id="edge8_Node000007_Node000005" title=" " alt="" coords="243,31,211,42,181,61,171,75,161,97,144,142,139,140,156,95,167,72,177,57,208,37,242,26"/>
-<area shape="rect" id="Node000010" href="$classFace.html" title=" " alt="" coords="271,191,322,216"/>
-<area shape="poly" id="edge12_Node000010_Node000005" title=" " alt="" coords="288,47,290,117,298,190,292,191,285,118,283,47"/>
-<area shape="rect" id="Node000006" href="$classElementNS.html" title=" " alt="" coords="91,240,185,265"/>
-<area shape="poly" id="edge6_Node000003_Node000006" title=" " alt="" coords="135,279,131,321,134,367,146,402,161,429,156,432,141,404,129,369,125,321,130,279"/>
-<area shape="rect" id="Node000009" href="$classFaceNS.html" title=" " alt="" coords="229,343,298,368"/>
-<area shape="poly" id="edge13_Node000009_Node000006" title=" " alt="" coords="146,278,153,299,166,317,192,330,229,342,228,347,190,335,163,321,149,301,141,280"/>
-<area shape="poly" id="edge7_Node000006_Node000007" title=" " alt="" coords="141,180,141,240,135,240,135,180"/>
-<area shape="rect" id="Node000008" href="$structdecomposition_1_1Key.html" title=" " alt="" coords="5,7,193,33"/>
-<area shape="poly" id="edge9_Node000007_Node000008" title=" " alt="" coords="97,47,96,81,103,116,111,129,122,139,119,143,107,132,98,118,90,81,92,47"/>
-<area shape="poly" id="edge10_Node000003_Node000009" title=" " alt="" coords="242,379,181,432,178,428,238,375"/>
-<area shape="poly" id="edge11_Node000009_Node000010" title=" " alt="" coords="301,230,301,272,291,320,276,344,272,341,286,318,295,272,296,230"/>
+<area shape="rect" id="Node000001" title=" " alt="" coords="126,674,232,701"/>
+<area shape="rect" id="Node000002" href="$classMUSGmsh.html" title=" " alt="" coords="134,597,224,624"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="181,638,181,675,177,672,177,642"/>
+<area shape="rect" id="Node000003" href="$classMeshUnStruct.html" title=" " alt="" coords="123,520,235,547"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="180,561,181,597,177,595,178,565"/>
+<area shape="rect" id="Node000004" href="$classMesh.html" title="Abstract class for a mesh." alt="" coords="27,419,83,447"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="74,456,114,494,153,518,148,520,111,498,75,461"/>
+<area shape="rect" id="Node000005" href="$classCoord.html" title="Class for a coordinate system object such as coordinates of the vertex or a vector." alt="" coords="261,15,321,43"/>
+<area shape="poly" id="edge4_Node000003_Node000005" title=" " alt="" coords="334,41,361,55,381,75,398,108,403,137,400,205,400,434,396,459,383,480,365,497,342,509,289,526,236,533,234,528,287,521,340,505,362,492,379,477,391,458,395,434,395,205,398,137,393,109,377,78,358,59,336,46"/>
+<area shape="poly" id="edge5_Node000005_Node000005" title=" " alt="" coords="324,9,341,14,347,29,344,41,334,48,322,49,311,46,309,41,322,44,333,43,339,38,342,29,337,18,326,14"/>
+<area shape="rect" id="Node000007" href="$classElement.html" title=" " alt="" coords="112,193,187,220"/>
+<area shape="poly" id="edge8_Node000007_Node000005" title=" " alt="" coords="245,41,213,56,184,78,174,99,165,131,154,193,149,192,160,130,169,97,180,75,210,51,248,37"/>
+<area shape="rect" id="Node000010" href="$classFace.html" title=" " alt="" coords="278,244,328,272"/>
+<area shape="poly" id="edge12_Node000010_Node000005" title=" " alt="" coords="291,56,296,168,304,244,298,243,290,169,290,61"/>
+<area shape="rect" id="Node000006" href="$classElementNS.html" title=" " alt="" coords="103,296,196,324"/>
+<area shape="poly" id="edge6_Node000003_Node000006" title=" " alt="" coords="145,336,141,389,145,446,158,486,174,519,169,519,153,488,139,447,136,389,143,342"/>
+<area shape="rect" id="Node000009" href="$classFaceNS.html" title=" " alt="" coords="244,419,312,447"/>
+<area shape="poly" id="edge13_Node000009_Node000006" title=" " alt="" coords="152,337,162,367,178,393,205,407,246,422,241,424,203,412,174,397,157,369,152,342"/>
+<area shape="poly" id="edge7_Node000006_Node000007" title=" " alt="" coords="150,233,152,296,147,295,149,238"/>
+<area shape="rect" id="Node000008" href="$structdecomposition_1_1Key.html" title=" " alt="" coords="5,15,193,43"/>
+<area shape="poly" id="edge9_Node000007_Node000008" title=" " alt="" coords="93,55,90,111,93,140,102,167,112,180,126,191,121,193,108,184,98,170,88,141,85,111,92,61"/>
+<area shape="poly" id="edge10_Node000003_Node000009" title=" " alt="" coords="256,455,194,521,190,517,252,459"/>
+<area shape="poly" id="edge11_Node000009_Node000010" title=" " alt="" coords="310,285,318,338,316,367,309,396,294,420,289,417,305,394,311,367,312,338,309,290"/>
 </map>

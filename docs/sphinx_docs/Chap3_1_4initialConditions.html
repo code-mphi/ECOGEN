@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>InitialConditions.xml &mdash; ECOGEN 5.0 documentation</title>
+  <title>InitialConditions.xml &mdash; ECOGEN 6.0 documentation</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
       <link rel="stylesheet" type="text/css" href="_static/css/theme.css" />
 
@@ -38,7 +38,7 @@
             ECOGEN
           </a>
               <div class="version">
-                5.0
+                6.0
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
@@ -73,7 +73,8 @@
 <li class="toctree-l1"><a class="reference internal" href="Chap4_tutorials_Chapter.html">Tutorials</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Chap5_testCases_Chapter.html">Test cases</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Chap6_developersGuide_Chapter.html">Developers</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Chap7_license.html">License</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Chap7_license.html">License and authors</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Chap8_citation.html">Citation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="zBibliography.html">Bibliography</a></li>
 </ul>
 
@@ -107,32 +108,32 @@
 <span id="sec-input-initialconditions"></span><h1>InitialConditions.xml<a class="headerlink" href="#initialconditions-xml" title="Permalink to this heading"></a></h1>
 <blockquote>
 <div><p>The <em>initialConditions.xml</em> input file includes the initial conditions and the boundary conditions of the flow simulation. It is <strong>mandatory</strong> located in the folder of the current case. The typical structure of this file is:</p>
-<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="cp">&lt;?xml version = &quot;1.0&quot; encoding = &quot;UTF-8&quot; standalone = &quot;yes&quot;?&gt;</span>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="cp">&lt;?xml version = "1.0" encoding = "UTF-8" standalone = "yes"?&gt;</span>
 <span class="nt">&lt;CI&gt;</span>
 <span class="w">  </span><span class="cm">&lt;!-- LIST OF GEOMETRICAL DOMAINS  --&gt;</span>
 <span class="w">  </span><span class="nt">&lt;physicalDomains&gt;</span>
-<span class="w">    </span><span class="nt">&lt;domain</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;base&quot;</span><span class="w"> </span><span class="na">state=</span><span class="s">&quot;leftChamber&quot;</span><span class="w"> </span><span class="na">type=</span><span class="s">&quot;entireDomain&quot;</span><span class="nt">/&gt;</span>
+<span class="w">    </span><span class="nt">&lt;domain</span><span class="w"> </span><span class="na">name=</span><span class="s">"base"</span><span class="w"> </span><span class="na">state=</span><span class="s">"leftChamber"</span><span class="w"> </span><span class="na">type=</span><span class="s">"entireDomain"</span><span class="nt">/&gt;</span>
 <span class="w">  </span><span class="nt">&lt;/physicalDomains&gt;</span>
 
 <span class="w">  </span><span class="cm">&lt;!-- LIST OF BOUNDARY CONDITIONS --&gt;</span>
 <span class="w">  </span><span class="nt">&lt;boundaryConditions&gt;</span>
-<span class="w">    </span><span class="nt">&lt;boundCond</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;BC_Xmin&quot;</span><span class="w"> </span><span class="na">type=</span><span class="s">&quot;nonReflecting&quot;</span><span class="w"> </span><span class="na">number=</span><span class="s">&quot;1&quot;</span><span class="nt">/&gt;</span>
-<span class="w">    </span><span class="nt">&lt;boundCond</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;BC_Xmax&quot;</span><span class="w"> </span><span class="na">type=</span><span class="s">&quot;nonReflecting&quot;</span><span class="w"> </span><span class="na">number=</span><span class="s">&quot;2&quot;</span><span class="nt">/&gt;</span>
+<span class="w">    </span><span class="nt">&lt;boundCond</span><span class="w"> </span><span class="na">name=</span><span class="s">"BC_Xmin"</span><span class="w"> </span><span class="na">type=</span><span class="s">"nonReflecting"</span><span class="w"> </span><span class="na">number=</span><span class="s">"1"</span><span class="nt">/&gt;</span>
+<span class="w">    </span><span class="nt">&lt;boundCond</span><span class="w"> </span><span class="na">name=</span><span class="s">"BC_Xmax"</span><span class="w"> </span><span class="na">type=</span><span class="s">"nonReflecting"</span><span class="w"> </span><span class="na">number=</span><span class="s">"2"</span><span class="nt">/&gt;</span>
 <span class="w">  </span><span class="nt">&lt;/boundaryConditions&gt;</span>
 
 <span class="w">  </span><span class="cm">&lt;!--  LIST OF STATES  --&gt;</span>
-<span class="w">  </span><span class="nt">&lt;state</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;leftChamber&quot;</span><span class="nt">&gt;</span>
-<span class="w">    </span><span class="nt">&lt;material</span><span class="w"> </span><span class="na">type=</span><span class="s">&quot;fluid&quot;</span><span class="w"> </span><span class="na">EOS=</span><span class="s">&quot;IG_air.xml&quot;</span><span class="nt">&gt;</span>
-<span class="w">      </span><span class="nt">&lt;dataFluid</span><span class="w"> </span><span class="na">alpha=</span><span class="s">&quot;0.5&quot;</span><span class="w"> </span><span class="na">density=</span><span class="s">&quot;1.0&quot;</span><span class="nt">/&gt;</span>
+<span class="w">  </span><span class="nt">&lt;state</span><span class="w"> </span><span class="na">name=</span><span class="s">"leftChamber"</span><span class="nt">&gt;</span>
+<span class="w">    </span><span class="nt">&lt;material</span><span class="w"> </span><span class="na">type=</span><span class="s">"fluid"</span><span class="w"> </span><span class="na">EOS=</span><span class="s">"IG_air.xml"</span><span class="nt">&gt;</span>
+<span class="w">      </span><span class="nt">&lt;dataFluid</span><span class="w"> </span><span class="na">alpha=</span><span class="s">"0.5"</span><span class="w"> </span><span class="na">density=</span><span class="s">"1.0"</span><span class="nt">/&gt;</span>
 <span class="w">    </span><span class="nt">&lt;/material&gt;</span>
-<span class="w">    </span><span class="nt">&lt;material</span><span class="w"> </span><span class="na">type=</span><span class="s">&quot;fluid&quot;</span><span class="w"> </span><span class="na">EOS=</span><span class="s">&quot;SG_water.xml&quot;</span><span class="nt">&gt;</span>
-<span class="w">      </span><span class="nt">&lt;dataFluid</span><span class="w"> </span><span class="na">alpha=</span><span class="s">&quot;0.5&quot;</span><span class="w"> </span><span class="na">density=</span><span class="s">&quot;1000.0&quot;</span><span class="nt">/&gt;</span>
+<span class="w">    </span><span class="nt">&lt;material</span><span class="w"> </span><span class="na">type=</span><span class="s">"fluid"</span><span class="w"> </span><span class="na">EOS=</span><span class="s">"SG_water.xml"</span><span class="nt">&gt;</span>
+<span class="w">      </span><span class="nt">&lt;dataFluid</span><span class="w"> </span><span class="na">alpha=</span><span class="s">"0.5"</span><span class="w"> </span><span class="na">density=</span><span class="s">"1000.0"</span><span class="nt">/&gt;</span>
 <span class="w">    </span><span class="nt">&lt;/material&gt;</span>
 <span class="w">    </span><span class="nt">&lt;mixture&gt;</span>
-<span class="w">      </span><span class="nt">&lt;dataMix</span><span class="w"> </span><span class="na">pressure =</span><span class="w"> </span><span class="s">&quot;1.e5&quot;</span><span class="nt">/&gt;</span>
-<span class="w">      </span><span class="nt">&lt;velocity</span><span class="w"> </span><span class="na">x=</span><span class="s">&quot;0.&quot;</span><span class="w"> </span><span class="na">y=</span><span class="s">&quot;0.&quot;</span><span class="w"> </span><span class="na">z=</span><span class="s">&quot;0.&quot;</span><span class="nt">/&gt;</span>
+<span class="w">      </span><span class="nt">&lt;dataMix</span><span class="w"> </span><span class="na">pressure =</span><span class="w"> </span><span class="s">"1.e5"</span><span class="nt">/&gt;</span>
+<span class="w">      </span><span class="nt">&lt;velocity</span><span class="w"> </span><span class="na">x=</span><span class="s">"0."</span><span class="w"> </span><span class="na">y=</span><span class="s">"0."</span><span class="w"> </span><span class="na">z=</span><span class="s">"0."</span><span class="nt">/&gt;</span>
 <span class="w">    </span><span class="nt">&lt;/mixture&gt;</span>
-<span class="w">    </span><span class="nt">&lt;transport</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;color&quot;</span><span class="w"> </span><span class="na">value=</span><span class="s">&quot;32.&quot;</span><span class="nt">/&gt;</span>
+<span class="w">    </span><span class="nt">&lt;transport</span><span class="w"> </span><span class="na">name=</span><span class="s">"color"</span><span class="w"> </span><span class="na">value=</span><span class="s">"32."</span><span class="nt">/&gt;</span>
 <span class="w">  </span><span class="nt">&lt;/state&gt;</span>
 <span class="nt">&lt;/CI&gt;</span>
 </pre></div>
@@ -152,7 +153,7 @@
 <section id="entiredomain">
 <span id="sec-input-entiredomain"></span><h3>EntireDomain<a class="headerlink" href="#entiredomain" title="Permalink to this heading"></a></h3>
 <p>Set the initial condition on the entire domain. No more information required.</p>
-<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;domain</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;base&quot;</span><span class="w"> </span><span class="na">state=</span><span class="s">&quot;leftChamber&quot;</span><span class="w"> </span><span class="na">type=</span><span class="s">&quot;entireDomain&quot;</span><span class="nt">/&gt;</span>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;domain</span><span class="w"> </span><span class="na">name=</span><span class="s">"base"</span><span class="w"> </span><span class="na">state=</span><span class="s">"leftChamber"</span><span class="w"> </span><span class="na">type=</span><span class="s">"entireDomain"</span><span class="nt">/&gt;</span>
 </pre></div>
 </div>
 </section>
@@ -164,8 +165,8 @@
 <li><p><code class="code highlight xml docutils literal highlight-xml">origin</code>: Real number indicating the location of the edge between the two subdomains on the specified axis.</p></li>
 <li><p><code class="code highlight xml docutils literal highlight-xml">direction</code>: Can take a <em>positive</em> or <em>negative</em> value on the specified axis.</p></li>
 </ul>
-<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;domain</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;HP&quot;</span><span class="w">  </span><span class="na">state=</span><span class="s">&quot;rightChamber&quot;</span><span class="w"> </span><span class="na">type=</span><span class="s">&quot;halfSpace&quot;</span><span class="nt">&gt;</span>
-<span class="w">  </span><span class="nt">&lt;dataHalfSpace</span><span class="w"> </span><span class="na">axis=</span><span class="s">&quot;x&quot;</span><span class="w"> </span><span class="na">origin=</span><span class="s">&quot;0.5&quot;</span><span class="w"> </span><span class="na">direction=</span><span class="s">&quot;positive&quot;</span><span class="nt">/&gt;</span>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;domain</span><span class="w"> </span><span class="na">name=</span><span class="s">"HP"</span><span class="w">  </span><span class="na">state=</span><span class="s">"rightChamber"</span><span class="w"> </span><span class="na">type=</span><span class="s">"halfSpace"</span><span class="nt">&gt;</span>
+<span class="w">  </span><span class="nt">&lt;dataHalfSpace</span><span class="w"> </span><span class="na">axis=</span><span class="s">"x"</span><span class="w"> </span><span class="na">origin=</span><span class="s">"0.5"</span><span class="w"> </span><span class="na">direction=</span><span class="s">"positive"</span><span class="nt">/&gt;</span>
 <span class="nt">&lt;/domain&gt;</span>
 </pre></div>
 </div>
@@ -178,9 +179,9 @@
 <li><p><code class="code highlight xml docutils literal highlight-xml">radius</code>: Real number indicating the disc radius (unit: m (SI)).</p></li>
 <li><p>Node <code class="code highlight xml docutils literal highlight-xml"><span class="nt">&lt;center&gt;</span></code>: Require the attributes <code class="code highlight xml docutils literal highlight-xml">x</code>, <code class="code highlight xml docutils literal highlight-xml">y</code> and <code class="code highlight xml docutils literal highlight-xml">z</code>, as real numbers (unit: m (SI)), giving the location of the center of the disc in the plane (axis1, axis2).</p></li>
 </ul>
-<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;domain</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;HP&quot;</span><span class="w">  </span><span class="na">state=</span><span class="s">&quot;rightChamber&quot;</span><span class="w"> </span><span class="na">type=</span><span class="s">&quot;disc&quot;</span><span class="nt">&gt;</span>
-<span class="w">  </span><span class="nt">&lt;dataDisc</span><span class="w"> </span><span class="na">axis1=</span><span class="s">&quot;x&quot;</span><span class="w"> </span><span class="na">axis2=</span><span class="s">&quot;y&quot;</span><span class="w"> </span><span class="na">radius=</span><span class="s">&quot;0.5&quot;</span><span class="nt">&gt;</span>
-<span class="w">    </span><span class="nt">&lt;center</span><span class="w"> </span><span class="na">x=</span><span class="s">&quot;0.&quot;</span><span class="w"> </span><span class="na">y=</span><span class="s">&quot;0.&quot;</span><span class="w"> </span><span class="na">z=</span><span class="s">&quot;0.&quot;</span><span class="nt">/&gt;</span>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;domain</span><span class="w"> </span><span class="na">name=</span><span class="s">"HP"</span><span class="w">  </span><span class="na">state=</span><span class="s">"rightChamber"</span><span class="w"> </span><span class="na">type=</span><span class="s">"disc"</span><span class="nt">&gt;</span>
+<span class="w">  </span><span class="nt">&lt;dataDisc</span><span class="w"> </span><span class="na">axis1=</span><span class="s">"x"</span><span class="w"> </span><span class="na">axis2=</span><span class="s">"y"</span><span class="w"> </span><span class="na">radius=</span><span class="s">"0.5"</span><span class="nt">&gt;</span>
+<span class="w">    </span><span class="nt">&lt;center</span><span class="w"> </span><span class="na">x=</span><span class="s">"0."</span><span class="w"> </span><span class="na">y=</span><span class="s">"0."</span><span class="w"> </span><span class="na">z=</span><span class="s">"0."</span><span class="nt">/&gt;</span>
 <span class="w">  </span><span class="nt">&lt;/dataDisc&gt;</span>
 <span class="nt">&lt;/domain&gt;</span>
 </pre></div>
@@ -194,9 +195,9 @@
 <li><p><code class="code highlight xml docutils literal highlight-xml">lAxis1</code> and <code class="code highlight xml docutils literal highlight-xml">lAxis2</code>: Real number indicating the length of both sides along (axis1, axis2).</p></li>
 <li><p>Node <code class="code highlight xml docutils literal highlight-xml"><span class="nt">&lt;posInferiorVertex&gt;</span></code>: Require the attributes <code class="code highlight xml docutils literal highlight-xml">x</code>, <code class="code highlight xml docutils literal highlight-xml">y</code> and <code class="code highlight xml docutils literal highlight-xml">z</code>, as real numbers (unit: m (SI)), giving the location of the inferior corner in the plane (axis1, axis2).</p></li>
 </ul>
-<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;domain</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;HP&quot;</span><span class="w">  </span><span class="na">state=</span><span class="s">&quot;rightChamber&quot;</span><span class="w"> </span><span class="na">type=</span><span class="s">&quot;rectangle&quot;</span><span class="nt">&gt;</span>
-<span class="w">  </span><span class="nt">&lt;dataRectangle</span><span class="w"> </span><span class="na">axis1=</span><span class="s">&quot;x&quot;</span><span class="w"> </span><span class="na">axis2=</span><span class="s">&quot;y&quot;</span><span class="w"> </span><span class="na">lAxis1=</span><span class="s">&quot;0.3&quot;</span><span class="w"> </span><span class="na">lAxis2=</span><span class="s">&quot;0.2&quot;</span><span class="nt">&gt;</span>
-<span class="w">    </span><span class="nt">&lt;posInferiorVertex</span><span class="w"> </span><span class="na">x=</span><span class="s">&quot;0.4&quot;</span><span class="w"> </span><span class="na">y=</span><span class="s">&quot;0.5&quot;</span><span class="w"> </span><span class="na">z=</span><span class="s">&quot;0.&quot;</span><span class="nt">/&gt;</span>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;domain</span><span class="w"> </span><span class="na">name=</span><span class="s">"HP"</span><span class="w">  </span><span class="na">state=</span><span class="s">"rightChamber"</span><span class="w"> </span><span class="na">type=</span><span class="s">"rectangle"</span><span class="nt">&gt;</span>
+<span class="w">  </span><span class="nt">&lt;dataRectangle</span><span class="w"> </span><span class="na">axis1=</span><span class="s">"x"</span><span class="w"> </span><span class="na">axis2=</span><span class="s">"y"</span><span class="w"> </span><span class="na">lAxis1=</span><span class="s">"0.3"</span><span class="w"> </span><span class="na">lAxis2=</span><span class="s">"0.2"</span><span class="nt">&gt;</span>
+<span class="w">    </span><span class="nt">&lt;posInferiorVertex</span><span class="w"> </span><span class="na">x=</span><span class="s">"0.4"</span><span class="w"> </span><span class="na">y=</span><span class="s">"0.5"</span><span class="w"> </span><span class="na">z=</span><span class="s">"0."</span><span class="nt">/&gt;</span>
 <span class="w">  </span><span class="nt">&lt;/dataRectangle&gt;</span>
 <span class="nt">&lt;/domain&gt;</span>
 </pre></div>
@@ -210,9 +211,9 @@
 <li><p><code class="code highlight xml docutils literal highlight-xml">radius1</code> and <code class="code highlight xml docutils literal highlight-xml">radius2</code>: Real numbers indicating the ellipse radii (unit: m (SI)) along the corresponding axes.</p></li>
 <li><p>Node <code class="code highlight xml docutils literal highlight-xml"><span class="nt">&lt;center&gt;</span></code>: Require the attributes <code class="code highlight xml docutils literal highlight-xml">x</code>, <code class="code highlight xml docutils literal highlight-xml">y</code> and <code class="code highlight xml docutils literal highlight-xml">z</code>, as real numbers (unit: m (SI)), giving the location of the center of the ellipse in the plane (axis1, axis2).</p></li>
 </ul>
-<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;domain</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;HP&quot;</span><span class="w">  </span><span class="na">state=</span><span class="s">&quot;rightChamber&quot;</span><span class="w"> </span><span class="na">type=</span><span class="s">&quot;ellipse&quot;</span><span class="nt">&gt;</span>
-<span class="w">  </span><span class="nt">&lt;dataEllipse</span><span class="w"> </span><span class="na">axis1=</span><span class="s">&quot;x&quot;</span><span class="w"> </span><span class="na">axis2=</span><span class="s">&quot;y&quot;</span><span class="w"> </span><span class="na">radius1=</span><span class="s">&quot;1.&quot;</span><span class="w"> </span><span class="na">radius2=</span><span class="s">&quot;1.5&quot;</span><span class="nt">&gt;</span>
-<span class="w">    </span><span class="nt">&lt;center</span><span class="w"> </span><span class="na">x=</span><span class="s">&quot;0.&quot;</span><span class="w"> </span><span class="na">y=</span><span class="s">&quot;0.&quot;</span><span class="w"> </span><span class="na">z=</span><span class="s">&quot;0.&quot;</span><span class="nt">/&gt;</span>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;domain</span><span class="w"> </span><span class="na">name=</span><span class="s">"HP"</span><span class="w">  </span><span class="na">state=</span><span class="s">"rightChamber"</span><span class="w"> </span><span class="na">type=</span><span class="s">"ellipse"</span><span class="nt">&gt;</span>
+<span class="w">  </span><span class="nt">&lt;dataEllipse</span><span class="w"> </span><span class="na">axis1=</span><span class="s">"x"</span><span class="w"> </span><span class="na">axis2=</span><span class="s">"y"</span><span class="w"> </span><span class="na">radius1=</span><span class="s">"1."</span><span class="w"> </span><span class="na">radius2=</span><span class="s">"1.5"</span><span class="nt">&gt;</span>
+<span class="w">    </span><span class="nt">&lt;center</span><span class="w"> </span><span class="na">x=</span><span class="s">"0."</span><span class="w"> </span><span class="na">y=</span><span class="s">"0."</span><span class="w"> </span><span class="na">z=</span><span class="s">"0."</span><span class="nt">/&gt;</span>
 <span class="w">  </span><span class="nt">&lt;/dataEllipse&gt;</span>
 <span class="nt">&lt;/domain&gt;</span>
 </pre></div>
@@ -225,9 +226,9 @@
 <li><p><code class="code highlight xml docutils literal highlight-xml">lAxisX</code>, <code class="code highlight xml docutils literal highlight-xml">lAxisY</code> and <code class="code highlight xml docutils literal highlight-xml">lAxisZ</code>: Real numbers for length of each side of the cuboid along axes (unit: m (SI)).</p></li>
 <li><p>Node <code class="code highlight xml docutils literal highlight-xml"><span class="nt">&lt;posInferiorVertex&gt;</span></code>: With the attributes <code class="code highlight xml docutils literal highlight-xml">x</code>, <code class="code highlight xml docutils literal highlight-xml">y</code> and <code class="code highlight xml docutils literal highlight-xml">z</code>, real numbers corresponding to the location of the inferior corner (unit: m (SI)).</p></li>
 </ul>
-<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;domain</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;HP&quot;</span><span class="w">  </span><span class="na">state=</span><span class="s">&quot;rightChamber&quot;</span><span class="w"> </span><span class="na">type=</span><span class="s">&quot;cuboid&quot;</span><span class="nt">&gt;</span>
-<span class="w">  </span><span class="nt">&lt;dataCuboid</span><span class="w"> </span><span class="na">lAxisX=</span><span class="s">&quot;1.&quot;</span><span class="w"> </span><span class="na">lAxisY=</span><span class="s">&quot;1.&quot;</span><span class="w"> </span><span class="na">lAxisZ=</span><span class="s">&quot;0.5&quot;</span><span class="nt">&gt;</span>
-<span class="w">    </span><span class="nt">&lt;posInferiorVertex</span><span class="w"> </span><span class="na">x=</span><span class="s">&quot;1.&quot;</span><span class="w"> </span><span class="na">y=</span><span class="s">&quot;0.5&quot;</span><span class="w"> </span><span class="na">z=</span><span class="s">&quot;0.5&quot;</span><span class="nt">/&gt;</span>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;domain</span><span class="w"> </span><span class="na">name=</span><span class="s">"HP"</span><span class="w">  </span><span class="na">state=</span><span class="s">"rightChamber"</span><span class="w"> </span><span class="na">type=</span><span class="s">"cuboid"</span><span class="nt">&gt;</span>
+<span class="w">  </span><span class="nt">&lt;dataCuboid</span><span class="w"> </span><span class="na">lAxisX=</span><span class="s">"1."</span><span class="w"> </span><span class="na">lAxisY=</span><span class="s">"1."</span><span class="w"> </span><span class="na">lAxisZ=</span><span class="s">"0.5"</span><span class="nt">&gt;</span>
+<span class="w">    </span><span class="nt">&lt;posInferiorVertex</span><span class="w"> </span><span class="na">x=</span><span class="s">"1."</span><span class="w"> </span><span class="na">y=</span><span class="s">"0.5"</span><span class="w"> </span><span class="na">z=</span><span class="s">"0.5"</span><span class="nt">/&gt;</span>
 <span class="w">  </span><span class="nt">&lt;/dataCuboid&gt;</span>
 <span class="nt">&lt;/domain&gt;</span>
 </pre></div>
@@ -240,9 +241,9 @@
 <li><p><code class="code highlight xml docutils literal highlight-xml">radius</code>: Real number giving the radius of the sphere (unit: m (SI)).</p></li>
 <li><p>Node <code class="code highlight xml docutils literal highlight-xml"><span class="nt">&lt;center&gt;</span></code>: With the attributes <code class="code highlight xml docutils literal highlight-xml">x</code>, <code class="code highlight xml docutils literal highlight-xml">y</code> and <code class="code highlight xml docutils literal highlight-xml">z</code>, real numbers giving the location on the center of the sphere (unit: m (SI)).</p></li>
 </ul>
-<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;domain</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;HP&quot;</span><span class="w">  </span><span class="na">state=</span><span class="s">&quot;rightChamber&quot;</span><span class="w"> </span><span class="na">type=</span><span class="s">&quot;sphere&quot;</span><span class="nt">&gt;</span>
-<span class="w">  </span><span class="nt">&lt;dataSphere</span><span class="w"> </span><span class="na">radius=</span><span class="s">&quot;0.5&quot;</span><span class="nt">&gt;</span>
-<span class="w">    </span><span class="nt">&lt;center</span><span class="w"> </span><span class="na">x=</span><span class="s">&quot;1.&quot;</span><span class="w"> </span><span class="na">y=</span><span class="s">&quot;0.5&quot;</span><span class="w"> </span><span class="na">z=</span><span class="s">&quot;0.5&quot;</span><span class="nt">/&gt;</span>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;domain</span><span class="w"> </span><span class="na">name=</span><span class="s">"HP"</span><span class="w">  </span><span class="na">state=</span><span class="s">"rightChamber"</span><span class="w"> </span><span class="na">type=</span><span class="s">"sphere"</span><span class="nt">&gt;</span>
+<span class="w">  </span><span class="nt">&lt;dataSphere</span><span class="w"> </span><span class="na">radius=</span><span class="s">"0.5"</span><span class="nt">&gt;</span>
+<span class="w">    </span><span class="nt">&lt;center</span><span class="w"> </span><span class="na">x=</span><span class="s">"1."</span><span class="w"> </span><span class="na">y=</span><span class="s">"0.5"</span><span class="w"> </span><span class="na">z=</span><span class="s">"0.5"</span><span class="nt">/&gt;</span>
 <span class="w">  </span><span class="nt">&lt;/dataSphere&gt;</span>
 <span class="nt">&lt;/domain&gt;</span>
 </pre></div>
@@ -256,9 +257,9 @@
 <li><p><code class="code highlight xml docutils literal highlight-xml">radius1</code>, <code class="code highlight xml docutils literal highlight-xml">radius2</code> and <code class="code highlight xml docutils literal highlight-xml">radius3</code>: Real numbers indicating the ellipsoid radii (unit: m (SI)) along the corresponding axes.</p></li>
 <li><p>Node <code class="code highlight xml docutils literal highlight-xml"><span class="nt">&lt;center&gt;</span></code>: Require the attributes <code class="code highlight xml docutils literal highlight-xml">x</code>, <code class="code highlight xml docutils literal highlight-xml">y</code> and <code class="code highlight xml docutils literal highlight-xml">z</code>, as real numbers (unit: m (SI)), giving the location of the center of the ellipsoid.</p></li>
 </ul>
-<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;domain</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;HP&quot;</span><span class="w">  </span><span class="na">state=</span><span class="s">&quot;rightChamber&quot;</span><span class="w"> </span><span class="na">type=</span><span class="s">&quot;ellipsoid&quot;</span><span class="nt">&gt;</span>
-<span class="w">  </span><span class="nt">&lt;dataEllipsoid</span><span class="w"> </span><span class="na">axis1=</span><span class="s">&quot;x&quot;</span><span class="w"> </span><span class="na">axis2=</span><span class="s">&quot;y&quot;</span><span class="w"> </span><span class="na">axis3=</span><span class="s">&quot;z&quot;</span><span class="w"> </span><span class="na">radius1=</span><span class="s">&quot;1.&quot;</span><span class="w"> </span><span class="na">radius2=</span><span class="s">&quot;1.5&quot;</span><span class="w"> </span><span class="na">radius3=</span><span class="s">&quot;1.5&quot;</span><span class="nt">&gt;</span>
-<span class="w">    </span><span class="nt">&lt;center</span><span class="w"> </span><span class="na">x=</span><span class="s">&quot;0.&quot;</span><span class="w"> </span><span class="na">y=</span><span class="s">&quot;0.&quot;</span><span class="w"> </span><span class="na">z=</span><span class="s">&quot;0.&quot;</span><span class="nt">/&gt;</span>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;domain</span><span class="w"> </span><span class="na">name=</span><span class="s">"HP"</span><span class="w">  </span><span class="na">state=</span><span class="s">"rightChamber"</span><span class="w"> </span><span class="na">type=</span><span class="s">"ellipsoid"</span><span class="nt">&gt;</span>
+<span class="w">  </span><span class="nt">&lt;dataEllipsoid</span><span class="w"> </span><span class="na">axis1=</span><span class="s">"x"</span><span class="w"> </span><span class="na">axis2=</span><span class="s">"y"</span><span class="w"> </span><span class="na">axis3=</span><span class="s">"z"</span><span class="w"> </span><span class="na">radius1=</span><span class="s">"1."</span><span class="w"> </span><span class="na">radius2=</span><span class="s">"1.5"</span><span class="w"> </span><span class="na">radius3=</span><span class="s">"1.5"</span><span class="nt">&gt;</span>
+<span class="w">    </span><span class="nt">&lt;center</span><span class="w"> </span><span class="na">x=</span><span class="s">"0."</span><span class="w"> </span><span class="na">y=</span><span class="s">"0."</span><span class="w"> </span><span class="na">z=</span><span class="s">"0."</span><span class="nt">/&gt;</span>
 <span class="w">  </span><span class="nt">&lt;/dataEllipsoid&gt;</span>
 <span class="nt">&lt;/domain&gt;</span>
 </pre></div>
@@ -273,9 +274,9 @@
 <li><p><code class="code highlight xml docutils literal highlight-xml">length</code>: Real number indicating the length of the cylinder (unit: m (SI)).</p></li>
 <li><p>Node <code class="code highlight xml docutils literal highlight-xml"><span class="nt">&lt;center&gt;</span></code>: Require the attributes <code class="code highlight xml docutils literal highlight-xml">x</code>, <code class="code highlight xml docutils literal highlight-xml">y</code> and <code class="code highlight xml docutils literal highlight-xml">z</code>, as real numbers (unit: m (SI)), giving the location of the center of the cylinder.</p></li>
 </ul>
-<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;domain</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;HP&quot;</span><span class="w">  </span><span class="na">state=</span><span class="s">&quot;rightChamber&quot;</span><span class="w"> </span><span class="na">type=</span><span class="s">&quot;cylinder&quot;</span><span class="nt">&gt;</span>
-<span class="w">  </span><span class="nt">&lt;dataCylinder</span><span class="w"> </span><span class="na">axis1=</span><span class="s">&quot;x&quot;</span><span class="w"> </span><span class="na">axis2=</span><span class="s">&quot;y&quot;</span><span class="w"> </span><span class="na">radius=</span><span class="s">&quot;0.5&quot;</span><span class="w"> </span><span class="na">length=</span><span class="s">&quot;1.&quot;</span><span class="nt">&gt;</span>
-<span class="w">    </span><span class="nt">&lt;center</span><span class="w"> </span><span class="na">x=</span><span class="s">&quot;0.&quot;</span><span class="w"> </span><span class="na">y=</span><span class="s">&quot;0.&quot;</span><span class="w"> </span><span class="na">z=</span><span class="s">&quot;0.&quot;</span><span class="nt">/&gt;</span>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;domain</span><span class="w"> </span><span class="na">name=</span><span class="s">"HP"</span><span class="w">  </span><span class="na">state=</span><span class="s">"rightChamber"</span><span class="w"> </span><span class="na">type=</span><span class="s">"cylinder"</span><span class="nt">&gt;</span>
+<span class="w">  </span><span class="nt">&lt;dataCylinder</span><span class="w"> </span><span class="na">axis1=</span><span class="s">"x"</span><span class="w"> </span><span class="na">axis2=</span><span class="s">"y"</span><span class="w"> </span><span class="na">radius=</span><span class="s">"0.5"</span><span class="w"> </span><span class="na">length=</span><span class="s">"1."</span><span class="nt">&gt;</span>
+<span class="w">    </span><span class="nt">&lt;center</span><span class="w"> </span><span class="na">x=</span><span class="s">"0."</span><span class="w"> </span><span class="na">y=</span><span class="s">"0."</span><span class="w"> </span><span class="na">z=</span><span class="s">"0."</span><span class="nt">/&gt;</span>
 <span class="w">  </span><span class="nt">&lt;/dataCylinder&gt;</span>
 <span class="nt">&lt;/domain&gt;</span>
 </pre></div>
@@ -285,7 +286,7 @@
 <h3>Initializing using physical identity<a class="headerlink" href="#initializing-using-physical-identity" title="Permalink to this heading"></a></h3>
 <p>An additional possible feature for the geometric domain is to use <code class="code highlight xml docutils literal highlight-xml">physicalIdentity</code> number coming from mesh software to initialize a geometrical domain.</p>
 <p>Example:</p>
-<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;domain</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;base&quot;</span><span class="w"> </span><span class="na">state=</span><span class="s">&quot;leftChamber&quot;</span><span class="w"> </span><span class="na">type=</span><span class="s">&quot;entireDomain&quot;</span><span class="w"> </span><span class="na">physicalEntity=</span><span class="s">&quot;10&quot;</span><span class="nt">/&gt;</span>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;domain</span><span class="w"> </span><span class="na">name=</span><span class="s">"base"</span><span class="w"> </span><span class="na">state=</span><span class="s">"leftChamber"</span><span class="w"> </span><span class="na">type=</span><span class="s">"entireDomain"</span><span class="w"> </span><span class="na">physicalEntity=</span><span class="s">"10"</span><span class="nt">/&gt;</span>
 </pre></div>
 </div>
 <p>In this example, the entire computation domain will be initialized accordingly to the <code class="code highlight xml docutils literal highlight-xml">physicalIdentity</code> 10 from the mesh file.</p>
@@ -294,9 +295,9 @@
 <span id="sec-input-boundaryconditions"></span><h3>Initializing immersed boundaries<a class="headerlink" href="#initializing-immersed-boundaries" title="Permalink to this heading"></a></h3>
 <p>When dealing with Cartesian meshes, it is possible to initialize a domain as immersed boundaries by setting the <code class="code highlight xml docutils literal highlight-xml">physicalIdentity</code> number to -1 value.</p>
 <p>Example:</p>
-<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;domain</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;HP&quot;</span><span class="w">  </span><span class="na">state=</span><span class="s">&quot;rightChamber&quot;</span><span class="w"> </span><span class="na">type=</span><span class="s">&quot;rectangle&quot;</span><span class="w"> </span><span class="na">physicalEntity=</span><span class="s">&quot;-1&quot;</span><span class="nt">&gt;</span>
-<span class="w">  </span><span class="nt">&lt;dataRectangle</span><span class="w"> </span><span class="na">axis1=</span><span class="s">&quot;x&quot;</span><span class="w"> </span><span class="na">axis2=</span><span class="s">&quot;y&quot;</span><span class="w"> </span><span class="na">lAxis1=</span><span class="s">&quot;0.2&quot;</span><span class="w"> </span><span class="na">lAxis2=</span><span class="s">&quot;0.2&quot;</span><span class="nt">&gt;</span>
-<span class="w">    </span><span class="nt">&lt;posInferiorVertex</span><span class="w"> </span><span class="na">x=</span><span class="s">&quot;0.3&quot;</span><span class="w"> </span><span class="na">y=</span><span class="s">&quot;0.15&quot;</span><span class="w"> </span><span class="na">z=</span><span class="s">&quot;0.&quot;</span><span class="nt">/&gt;</span>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;domain</span><span class="w"> </span><span class="na">name=</span><span class="s">"HP"</span><span class="w">  </span><span class="na">state=</span><span class="s">"rightChamber"</span><span class="w"> </span><span class="na">type=</span><span class="s">"rectangle"</span><span class="w"> </span><span class="na">physicalEntity=</span><span class="s">"-1"</span><span class="nt">&gt;</span>
+<span class="w">  </span><span class="nt">&lt;dataRectangle</span><span class="w"> </span><span class="na">axis1=</span><span class="s">"x"</span><span class="w"> </span><span class="na">axis2=</span><span class="s">"y"</span><span class="w"> </span><span class="na">lAxis1=</span><span class="s">"0.2"</span><span class="w"> </span><span class="na">lAxis2=</span><span class="s">"0.2"</span><span class="nt">&gt;</span>
+<span class="w">    </span><span class="nt">&lt;posInferiorVertex</span><span class="w"> </span><span class="na">x=</span><span class="s">"0.3"</span><span class="w"> </span><span class="na">y=</span><span class="s">"0.15"</span><span class="w"> </span><span class="na">z=</span><span class="s">"0."</span><span class="nt">/&gt;</span>
 <span class="w">  </span><span class="nt">&lt;/dataRectangle&gt;</span>
 <span class="nt">&lt;/domain&gt;</span>
 </pre></div>
@@ -315,7 +316,7 @@
 <p>The <code class="code highlight xml docutils literal highlight-xml"><span class="nt">&lt;boundaryConditions&gt;</span></code> markup is mandatory. The boundary conditions are specified at the boundary of the computational domain. This markup must contain as many nodes <code class="code highlight xml docutils literal highlight-xml"><span class="nt">&lt;boundCond&gt;</span></code> as necessary to cover the entire boundary. Each <code class="code highlight xml docutils literal highlight-xml"><span class="nt">&lt;boundCond&gt;</span></code> node contains the following attributes:</p>
 <ul class="simple">
 <li><p><code class="code highlight xml docutils literal highlight-xml">name</code>: A name for the boundary condition. Whatever the mesh type, this name has no influence on the choices remaining in this file. It can be used to give a meaningful name to the boundary conditions.</p></li>
-<li><p><code class="code highlight xml docutils literal highlight-xml">type</code>:  The type of boundary condition, to choose among <a class="reference internal" href="#sec-input-nonreflecting"><span class="std std-ref">Non-reflecting</span></a>, <a class="reference internal" href="#sec-input-symmetry"><span class="std std-ref">Symmetry</span></a>, <a class="reference internal" href="#sec-input-wall"><span class="std std-ref">Wall</span></a>, <a class="reference internal" href="#sec-input-inlettank"><span class="std std-ref">Inlet tank</span></a>, <a class="reference internal" href="#sec-input-inletinjstagstate"><span class="std std-ref">Inlet injection using stagnation state</span></a>, <a class="reference internal" href="#sec-input-inletinjtemp"><span class="std std-ref">Inlet injection using temperature</span></a> and <a class="reference internal" href="#sec-input-outletpressure"><span class="std std-ref">Outlet at imposed pressure</span></a>.</p></li>
+<li><p><code class="code highlight xml docutils literal highlight-xml">type</code>:  The type of boundary condition, to choose among <a class="reference internal" href="#sec-input-nonreflecting"><span class="std std-ref">Non-reflecting</span></a>, <a class="reference internal" href="#sec-input-wall"><span class="std std-ref">Wall</span></a> (non-slip), <a class="reference internal" href="#sec-input-symmetry"><span class="std std-ref">Symmetry</span></a> (can as well be used for slip walls), <a class="reference internal" href="#sec-input-inlettank"><span class="std std-ref">Inlet tank</span></a>, <a class="reference internal" href="#sec-input-inletinjstagstate"><span class="std std-ref">Inlet injection using stagnation state</span></a>, <a class="reference internal" href="#sec-input-inletinjtemp"><span class="std std-ref">Inlet injection using temperature</span></a>, <a class="reference internal" href="#sec-input-outletpressure"><span class="std std-ref">Outlet at imposed pressure</span></a> and <a class="reference internal" href="#sec-input-periodic"><span class="std std-ref">Periodic</span></a>.</p></li>
 <li><p><code class="code highlight xml docutils literal highlight-xml">number</code>: Integer corresponding to the identifier of the boundary when using unstructured meshes.</p></li>
 </ul>
 <div class="admonition note">
@@ -341,22 +342,40 @@
 <section id="non-reflecting">
 <span id="sec-input-nonreflecting"></span><h3>Non-reflecting<a class="headerlink" href="#non-reflecting" title="Permalink to this heading"></a></h3>
 <p>The numerical treatment corresponds to an in- or out-going flow without any wave reflection. No more information required.</p>
-<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;boundCond</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;outlet&quot;</span><span class="w"> </span><span class="na">type=</span><span class="s">&quot;nonReflecting&quot;</span><span class="w"> </span><span class="na">number=</span><span class="s">&quot;1&quot;</span><span class="w"> </span><span class="nt">/&gt;</span>
-</pre></div>
-</div>
-</section>
-<section id="symmetry">
-<span id="sec-input-symmetry"></span><h3>Symmetry<a class="headerlink" href="#symmetry" title="Permalink to this heading"></a></h3>
-<p>The numerical treatment corresponds to a symmetry condition. No more information required.</p>
-<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;boundCond</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;symmetry&quot;</span><span class="w"> </span><span class="na">type=</span><span class="s">&quot;symmetry&quot;</span><span class="w"> </span><span class="na">number=</span><span class="s">&quot;2&quot;</span><span class="w"> </span><span class="nt">/&gt;</span>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;boundCond</span><span class="w"> </span><span class="na">name=</span><span class="s">"outlet"</span><span class="w"> </span><span class="na">type=</span><span class="s">"nonReflecting"</span><span class="w"> </span><span class="na">number=</span><span class="s">"1"</span><span class="w"> </span><span class="nt">/&gt;</span>
 </pre></div>
 </div>
 </section>
 <section id="wall">
 <span id="sec-input-wall"></span><h3>Wall<a class="headerlink" href="#wall" title="Permalink to this heading"></a></h3>
-<p>The numerical treatment corresponds to a wall boundary condition. No more information required.</p>
-<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;boundCond</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;wall&quot;</span><span class="w"> </span><span class="na">type=</span><span class="s">&quot;wall&quot;</span><span class="w"> </span><span class="na">number=</span><span class="s">&quot;3&quot;</span><span class="w"> </span><span class="nt">/&gt;</span>
+<p>The numerical treatment corresponds to a non-slip wall boundary condition. No more information required.</p>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;boundCond</span><span class="w"> </span><span class="na">name=</span><span class="s">"wall"</span><span class="w"> </span><span class="na">type=</span><span class="s">"wall"</span><span class="w"> </span><span class="na">number=</span><span class="s">"3"</span><span class="w"> </span><span class="nt">/&gt;</span>
 </pre></div>
+</div>
+</section>
+<section id="symmetry">
+<span id="sec-input-symmetry"></span><h3>Symmetry<a class="headerlink" href="#symmetry" title="Permalink to this heading"></a></h3>
+<p>The numerical treatment corresponds to a symmetry boundary condition, which can be seen as well as a slip wall. No more information required.</p>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;boundCond</span><span class="w"> </span><span class="na">name=</span><span class="s">"symmetry"</span><span class="w"> </span><span class="na">type=</span><span class="s">"symmetry"</span><span class="w"> </span><span class="na">number=</span><span class="s">"2"</span><span class="w"> </span><span class="nt">/&gt;</span>
+</pre></div>
+</div>
+</section>
+<section id="moving-wall">
+<span id="sec-input-movingwall"></span><h3>Moving wall<a class="headerlink" href="#moving-wall" title="Permalink to this heading"></a></h3>
+<p>The numerical treatment corresponds to a non-slip moving wall boundary condition following an oscillatory behaviour (sinus). The <code class="code highlight xml docutils literal highlight-xml"><span class="nt">&lt;dataMovingWall&gt;</span></code> node is required with the following attributes:</p>
+<ul class="simple">
+<li><p><code class="code highlight xml docutils literal highlight-xml">amplitude</code>: Amplitude of the moving wall [m/s]. If frequency is null and offset is pi/2 it corresponds to a constant piston velocity.</p></li>
+<li><p><code class="code highlight xml docutils literal highlight-xml">frequency</code>: Frequency of the moving wall [Hz].</p></li>
+<li><p><code class="code highlight xml docutils literal highlight-xml">frequencyOffset</code>: Frequency offset of the sinus [Hz].</p></li>
+</ul>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;boundCond</span><span class="w"> </span><span class="na">name=</span><span class="s">"movingWall"</span><span class="w"> </span><span class="na">type=</span><span class="s">"movingWall"</span><span class="w"> </span><span class="na">number=</span><span class="s">"1"</span><span class="nt">&gt;</span>
+<span class="w">  </span><span class="nt">&lt;dataMovingWall</span><span class="w"> </span><span class="na">amplitude=</span><span class="s">"-10."</span><span class="w"> </span><span class="na">frequency=</span><span class="s">"2.e3"</span><span class="w"> </span><span class="na">frequencyOffset=</span><span class="s">"0."</span><span class="nt">/&gt;</span>
+<span class="nt">&lt;/boundCond&gt;</span>
+</pre></div>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Be careful, the sign of the velocity follows the outward normal direction. So if the moving wall is on the left, bottom or back, the sign of the velocity must be the opposite.</p>
 </div>
 </section>
 <section id="inlet-tank">
@@ -374,11 +393,11 @@
 </div></blockquote>
 </li>
 </ul>
-<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;boundCond</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;inlet&quot;</span><span class="w"> </span><span class="na">type=</span><span class="s">&quot;inletTank&quot;</span><span class="w"> </span><span class="na">number=</span><span class="s">&quot;3&quot;</span><span class="nt">&gt;</span>
-<span class="w">  </span><span class="nt">&lt;dataInletTank</span><span class="w"> </span><span class="na">p0=</span><span class="s">&quot;4.e6&quot;</span><span class="w"> </span><span class="na">T0=</span><span class="s">&quot;93.3&quot;</span><span class="nt">/&gt;</span>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;boundCond</span><span class="w"> </span><span class="na">name=</span><span class="s">"inlet"</span><span class="w"> </span><span class="na">type=</span><span class="s">"inletTank"</span><span class="w"> </span><span class="na">number=</span><span class="s">"3"</span><span class="nt">&gt;</span>
+<span class="w">  </span><span class="nt">&lt;dataInletTank</span><span class="w"> </span><span class="na">p0=</span><span class="s">"4.e6"</span><span class="w"> </span><span class="na">T0=</span><span class="s">"93.3"</span><span class="nt">/&gt;</span>
 <span class="w">  </span><span class="nt">&lt;fluidsProp&gt;</span>
-<span class="w">    </span><span class="nt">&lt;dataFluid</span><span class="w"> </span><span class="na">EOS=</span><span class="s">&quot;IG_oxyVap.xml&quot;</span><span class="w"> </span><span class="na">alpha=</span><span class="s">&quot;0.0001&quot;</span><span class="nt">/&gt;</span>
-<span class="w">    </span><span class="nt">&lt;dataFluid</span><span class="w"> </span><span class="na">EOS=</span><span class="s">&quot;SG_oxyLiq.xml&quot;</span><span class="w"> </span><span class="na">alpha=</span><span class="s">&quot;0.9999&quot;</span><span class="nt">/&gt;</span>
+<span class="w">    </span><span class="nt">&lt;dataFluid</span><span class="w"> </span><span class="na">EOS=</span><span class="s">"IG_oxyVap.xml"</span><span class="w"> </span><span class="na">alpha=</span><span class="s">"0.0001"</span><span class="nt">/&gt;</span>
+<span class="w">    </span><span class="nt">&lt;dataFluid</span><span class="w"> </span><span class="na">EOS=</span><span class="s">"SG_oxyLiq.xml"</span><span class="w"> </span><span class="na">alpha=</span><span class="s">"0.9999"</span><span class="nt">/&gt;</span>
 <span class="w">  </span><span class="nt">&lt;/fluidsProp&gt;</span>
 <span class="nt">&lt;/boundCond&gt;</span>
 </pre></div>
@@ -400,10 +419,10 @@
 </div></blockquote>
 </li>
 </ul>
-<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;boundCond</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;inlet&quot;</span><span class="w"> </span><span class="na">type=</span><span class="s">&quot;inletInjStagState&quot;</span><span class="w"> </span><span class="na">number=</span><span class="s">&quot;1&quot;</span><span class="nt">&gt;</span>
-<span class="w">  </span><span class="nt">&lt;dataInletInj</span><span class="w"> </span><span class="na">m0=</span><span class="s">&quot;2.413092&quot;</span><span class="nt">/&gt;</span>
-<span class="w">  </span><span class="nt">&lt;dataFluid</span><span class="w"> </span><span class="na">EOS=</span><span class="s">&quot;IG_air.xml&quot;</span><span class="w"> </span><span class="na">density=</span><span class="s">&quot;4.04e-3&quot;</span><span class="w"> </span><span class="na">pressure=</span><span class="s">&quot;2.57404e2&quot;</span><span class="w"> </span><span class="na">alpha=</span><span class="s">&quot;0.1&quot;</span><span class="nt">/&gt;</span>
-<span class="w">  </span><span class="nt">&lt;dataFluid</span><span class="w"> </span><span class="na">EOS=</span><span class="s">&quot;SG_water.xml&quot;</span><span class="w"> </span><span class="na">density=</span><span class="s">&quot;1000.&quot;</span><span class="w"> </span><span class="na">pressure=</span><span class="s">&quot;2.57404e2&quot;</span><span class="w"> </span><span class="na">alpha=</span><span class="s">&quot;0.9&quot;</span><span class="nt">/&gt;</span>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;boundCond</span><span class="w"> </span><span class="na">name=</span><span class="s">"inlet"</span><span class="w"> </span><span class="na">type=</span><span class="s">"inletInjStagState"</span><span class="w"> </span><span class="na">number=</span><span class="s">"1"</span><span class="nt">&gt;</span>
+<span class="w">  </span><span class="nt">&lt;dataInletInj</span><span class="w"> </span><span class="na">m0=</span><span class="s">"2.413092"</span><span class="nt">/&gt;</span>
+<span class="w">  </span><span class="nt">&lt;dataFluid</span><span class="w"> </span><span class="na">EOS=</span><span class="s">"IG_air.xml"</span><span class="w"> </span><span class="na">density=</span><span class="s">"4.04e-3"</span><span class="w"> </span><span class="na">pressure=</span><span class="s">"2.57404e2"</span><span class="w"> </span><span class="na">alpha=</span><span class="s">"0.1"</span><span class="nt">/&gt;</span>
+<span class="w">  </span><span class="nt">&lt;dataFluid</span><span class="w"> </span><span class="na">EOS=</span><span class="s">"SG_water.xml"</span><span class="w"> </span><span class="na">density=</span><span class="s">"1000."</span><span class="w"> </span><span class="na">pressure=</span><span class="s">"2.57404e2"</span><span class="w"> </span><span class="na">alpha=</span><span class="s">"0.9"</span><span class="nt">/&gt;</span>
 <span class="nt">&lt;/boundCond&gt;</span>
 </pre></div>
 </div>
@@ -423,10 +442,10 @@
 </div></blockquote>
 </li>
 </ul>
-<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="w">    </span><span class="nt">&lt;boundCond</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;inlet&quot;</span><span class="w"> </span><span class="na">type=</span><span class="s">&quot;inletInjTemp&quot;</span><span class="w"> </span><span class="na">number=</span><span class="s">&quot;1&quot;</span><span class="nt">&gt;</span>
-<span class="w">      </span><span class="nt">&lt;dataInletInj</span><span class="w"> </span><span class="na">m0=</span><span class="s">&quot;6500.&quot;</span><span class="nt">/&gt;</span>
-<span class="nt">&lt;dataFluid</span><span class="w"> </span><span class="na">EOS=</span><span class="s">&quot;SG_water.xml&quot;</span><span class="w"> </span><span class="na">temperature=</span><span class="s">&quot;300.&quot;</span><span class="w"> </span><span class="na">alpha=</span><span class="s">&quot;0.9999&quot;</span><span class="nt">/&gt;</span>
-<span class="nt">&lt;dataFluid</span><span class="w"> </span><span class="na">EOS=</span><span class="s">&quot;IG_air.xml&quot;</span><span class="w"> </span><span class="na">temperature=</span><span class="s">&quot;300.&quot;</span><span class="w"> </span><span class="na">alpha=</span><span class="s">&quot;0.0001&quot;</span><span class="nt">/&gt;</span>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="w">    </span><span class="nt">&lt;boundCond</span><span class="w"> </span><span class="na">name=</span><span class="s">"inlet"</span><span class="w"> </span><span class="na">type=</span><span class="s">"inletInjTemp"</span><span class="w"> </span><span class="na">number=</span><span class="s">"1"</span><span class="nt">&gt;</span>
+<span class="w">      </span><span class="nt">&lt;dataInletInj</span><span class="w"> </span><span class="na">m0=</span><span class="s">"6500."</span><span class="nt">/&gt;</span>
+<span class="nt">&lt;dataFluid</span><span class="w"> </span><span class="na">EOS=</span><span class="s">"SG_water.xml"</span><span class="w"> </span><span class="na">temperature=</span><span class="s">"300."</span><span class="w"> </span><span class="na">alpha=</span><span class="s">"0.9999"</span><span class="nt">/&gt;</span>
+<span class="nt">&lt;dataFluid</span><span class="w"> </span><span class="na">EOS=</span><span class="s">"IG_air.xml"</span><span class="w"> </span><span class="na">temperature=</span><span class="s">"300."</span><span class="w"> </span><span class="na">alpha=</span><span class="s">"0.0001"</span><span class="nt">/&gt;</span>
 <span class="w">    </span><span class="nt">&lt;/boundCond&gt;</span>
 </pre></div>
 </div>
@@ -438,12 +457,29 @@
 <li><p><code class="code highlight xml docutils literal highlight-xml">p0</code>: Outside pressure, real number (unit: Pa (SI)).</p></li>
 <li><p>Node <code class="code highlight xml docutils literal highlight-xml"><span class="nt">&lt;transport&gt;</span></code>: This node is also required for each transport equation used.</p></li>
 </ul>
-<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;boundCond</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;outlet&quot;</span><span class="w"> </span><span class="na">type=</span><span class="s">&quot;outletPressure&quot;</span><span class="w"> </span><span class="na">number=</span><span class="s">&quot;5&quot;</span><span class="nt">&gt;</span>
-<span class="w">  </span><span class="nt">&lt;dataOutletPressure</span><span class="w"> </span><span class="na">p0=</span><span class="s">&quot;1.e5&quot;</span><span class="nt">&gt;</span>
-<span class="w">    </span><span class="nt">&lt;transport</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;color&quot;</span><span class="w"> </span><span class="na">value=</span><span class="s">&quot;1.e-6&quot;</span><span class="nt">/&gt;</span>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;boundCond</span><span class="w"> </span><span class="na">name=</span><span class="s">"outlet"</span><span class="w"> </span><span class="na">type=</span><span class="s">"outletPressure"</span><span class="w"> </span><span class="na">number=</span><span class="s">"5"</span><span class="nt">&gt;</span>
+<span class="w">  </span><span class="nt">&lt;dataOutletPressure</span><span class="w"> </span><span class="na">p0=</span><span class="s">"1.e5"</span><span class="nt">&gt;</span>
+<span class="w">    </span><span class="nt">&lt;transport</span><span class="w"> </span><span class="na">name=</span><span class="s">"color"</span><span class="w"> </span><span class="na">value=</span><span class="s">"1.e-6"</span><span class="nt">/&gt;</span>
 <span class="w">  </span><span class="nt">&lt;/dataOutletPressure&gt;</span>
 <span class="nt">&lt;/boundCond&gt;</span>
 </pre></div>
+</div>
+</section>
+<section id="periodic">
+<span id="sec-input-periodic"></span><h3>Periodic<a class="headerlink" href="#periodic" title="Permalink to this heading"></a></h3>
+<p>The numerical treatment corresponds to a physical domain in which the flow is periodic across the boundary surface.</p>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;boundCond</span><span class="w"> </span><span class="na">name=</span><span class="s">"periodic"</span><span class="w"> </span><span class="na">type=</span><span class="s">"periodic"</span><span class="w"> </span><span class="na">number=</span><span class="s">"1"</span><span class="w"> </span><span class="nt">/&gt;</span>
+</pre></div>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>This boundary condition has to be used according to the following rules:</p>
+<ul class="simple">
+<li><p>a periodic condition on one boundary requires the opposite boundary to be periodic too,</p></li>
+<li><p>only for Cartesian meshes,</p></li>
+<li><p>no AMR supported,</p></li>
+<li><p>THINC limiter might show some very small deviations from non-periodic set-ups.</p></li>
+</ul>
 </div>
 <p><strong>Remark</strong></p>
 <p>The boundary conditions are dependent on the flow model specified in <em>model.xml</em> input file. Some boundary conditions may be not available for the flow model considered.</p>
@@ -472,10 +508,35 @@
 <li><p>Attribute <code class="code highlight xml docutils literal highlight-xml">pressure</code>: Initial pressure of the fluid, real number (unit: Pa(SI)).</p></li>
 <li><p>Node <code class="code highlight xml docutils literal highlight-xml"><span class="nt">&lt;velocity&gt;</span></code>: With <code class="code highlight xml docutils literal highlight-xml">x</code>, <code class="code highlight xml docutils literal highlight-xml">y</code> and <code class="code highlight xml docutils literal highlight-xml">z</code> attributes setting the initial values for the components of the velocity vector, real numbers (unit: m/s (SI)).</p></li>
 </ul>
-<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;material</span><span class="w"> </span><span class="na">type=</span><span class="s">&quot;fluid&quot;</span><span class="w"> </span><span class="na">EOS=</span><span class="s">&quot;IG_air.xml&quot;</span><span class="nt">&gt;</span>
-<span class="w">  </span><span class="nt">&lt;dataFluid</span><span class="w"> </span><span class="na">density=</span><span class="s">&quot;10.0&quot;</span><span class="w"> </span><span class="na">pressure=</span><span class="s">&quot;1.e5&quot;</span><span class="nt">&gt;</span>
-<span class="w">    </span><span class="nt">&lt;velocity</span><span class="w"> </span><span class="na">x=</span><span class="s">&quot;1000.&quot;</span><span class="w"> </span><span class="na">y=</span><span class="s">&quot;1000.&quot;</span><span class="w"> </span><span class="na">z=</span><span class="s">&quot;0.&quot;</span><span class="nt">/&gt;</span>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;material</span><span class="w"> </span><span class="na">type=</span><span class="s">"fluid"</span><span class="w"> </span><span class="na">EOS=</span><span class="s">"IG_air.xml"</span><span class="nt">&gt;</span>
+<span class="w">  </span><span class="nt">&lt;dataFluid</span><span class="w"> </span><span class="na">density=</span><span class="s">"10.0"</span><span class="w"> </span><span class="na">pressure=</span><span class="s">"1.e5"</span><span class="nt">&gt;</span>
+<span class="w">    </span><span class="nt">&lt;velocity</span><span class="w"> </span><span class="na">x=</span><span class="s">"1000."</span><span class="w"> </span><span class="na">y=</span><span class="s">"1000."</span><span class="w"> </span><span class="na">z=</span><span class="s">"0."</span><span class="nt">/&gt;</span>
 <span class="w">  </span><span class="nt">&lt;/dataFluid&gt;</span>
+<span class="nt">&lt;/material&gt;</span>
+</pre></div>
+</div>
+</section>
+<section id="non-equilibrium">
+<span id="sec-input-neq"></span><h3>Non-equilibrium<a class="headerlink" href="#non-equilibrium" title="Permalink to this heading"></a></h3>
+<p>Multiphase non-equilibrium flow has a non-equilibrium of every thermo-mechanical variables for every phase within each cell. Each <code class="code highlight xml docutils literal highlight-xml"><span class="nt">&lt;dataFluid&gt;</span></code> node corresponds to a phase with the following attributes:</p>
+<ul class="simple">
+<li><p><code class="code highlight xml docutils literal highlight-xml">alpha</code>: Volume fraction of the phase, real number in the range ]0.,1.[. The range can be increased to [0.;1.] if the option <em>alphaNull</em> is turned on (<em>true</em>) in the <em>model.xml</em> input file.</p></li>
+<li><p><code class="code highlight xml docutils literal highlight-xml">density</code> or <code class="code highlight xml docutils literal highlight-xml">temperature</code>: Initial density or temperature of the fluid, real number (unit: kg/m3 or K (SI)), respectively.</p></li>
+<li><p><code class="code highlight xml docutils literal highlight-xml">pressure</code>: Initial pressure of the fluid, real number (unit: Pa (SI)).</p></li>
+</ul>
+<p>Moreover, in this case, the <code class="code highlight xml docutils literal highlight-xml"><span class="nt">&lt;dataFluid&gt;</span></code> node contains:</p>
+<ul class="simple">
+<li><p>Node <code class="code highlight xml docutils literal highlight-xml"><span class="nt">&lt;velocity&gt;</span></code>: With <code class="code highlight xml docutils literal highlight-xml">x</code>, <code class="code highlight xml docutils literal highlight-xml">y</code> and <code class="code highlight xml docutils literal highlight-xml">z</code> attributes setting the initial values for the components of the velocity vector, real numbers (unit: m/s (SI)).</p></li>
+</ul>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;material</span><span class="w"> </span><span class="na">type=</span><span class="s">"fluid"</span><span class="w"> </span><span class="na">EOS=</span><span class="s">"IG_air.xml"</span><span class="nt">&gt;</span>
+<span class="w">        </span><span class="nt">&lt;dataFluid</span><span class="w"> </span><span class="na">alpha=</span><span class="s">"0.5"</span><span class="w"> </span><span class="na">density=</span><span class="s">"50.0"</span><span class="w"> </span><span class="na">pressure =</span><span class="w"> </span><span class="s">"2.e8"</span><span class="nt">&gt;</span>
+<span class="w">        </span><span class="nt">&lt;velocity</span><span class="w"> </span><span class="na">x=</span><span class="s">"0."</span><span class="w"> </span><span class="na">y=</span><span class="s">"0."</span><span class="w"> </span><span class="na">z=</span><span class="s">"0."</span><span class="nt">/&gt;</span>
+<span class="w">        </span><span class="nt">&lt;/dataFluid&gt;</span>
+<span class="nt">&lt;/material&gt;</span>
+<span class="nt">&lt;material</span><span class="w"> </span><span class="na">type=</span><span class="s">"fluid"</span><span class="w"> </span><span class="na">EOS=</span><span class="s">"SG_water.xml"</span><span class="nt">&gt;</span>
+<span class="w">        </span><span class="nt">&lt;dataFluid</span><span class="w"> </span><span class="na">alpha=</span><span class="s">"0.5"</span><span class="w"> </span><span class="na">density=</span><span class="s">"1000.0"</span><span class="w"> </span><span class="na">pressure =</span><span class="w"> </span><span class="s">"2.e8"</span><span class="nt">&gt;</span>
+<span class="w">        </span><span class="nt">&lt;velocity</span><span class="w"> </span><span class="na">x=</span><span class="s">"0."</span><span class="w"> </span><span class="na">y=</span><span class="s">"0."</span><span class="w"> </span><span class="na">z=</span><span class="s">"0."</span><span class="nt">/&gt;</span>
+<span class="w">        </span><span class="nt">&lt;/dataFluid&gt;</span>
 <span class="nt">&lt;/material&gt;</span>
 </pre></div>
 </div>
@@ -492,14 +553,14 @@
 <ul class="simple">
 <li><p>Node <code class="code highlight xml docutils literal highlight-xml"><span class="nt">&lt;velocity&gt;</span></code>: With <code class="code highlight xml docutils literal highlight-xml">x</code>, <code class="code highlight xml docutils literal highlight-xml">y</code> and <code class="code highlight xml docutils literal highlight-xml">z</code> attributes setting the initial values for the components of the velocity vector, real numbers (unit: m/s (SI)).</p></li>
 </ul>
-<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;material</span><span class="w"> </span><span class="na">type=</span><span class="s">&quot;fluid&quot;</span><span class="w"> </span><span class="na">EOS=</span><span class="s">&quot;IG_air.xml&quot;</span><span class="nt">&gt;</span>
-<span class="w">  </span><span class="nt">&lt;dataFluid</span><span class="w"> </span><span class="na">alpha=</span><span class="s">&quot;1.&quot;</span><span class="w"> </span><span class="na">density=</span><span class="s">&quot;50.&quot;</span><span class="w"> </span><span class="na">pressure=</span><span class="s">&quot;1.e5&quot;</span><span class="nt">/&gt;</span>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;material</span><span class="w"> </span><span class="na">type=</span><span class="s">"fluid"</span><span class="w"> </span><span class="na">EOS=</span><span class="s">"IG_air.xml"</span><span class="nt">&gt;</span>
+<span class="w">  </span><span class="nt">&lt;dataFluid</span><span class="w"> </span><span class="na">alpha=</span><span class="s">"1."</span><span class="w"> </span><span class="na">density=</span><span class="s">"50."</span><span class="w"> </span><span class="na">pressure=</span><span class="s">"1.e5"</span><span class="nt">/&gt;</span>
 <span class="nt">&lt;/material&gt;</span>
-<span class="nt">&lt;material</span><span class="w"> </span><span class="na">type=</span><span class="s">&quot;fluid&quot;</span><span class="w"> </span><span class="na">EOS=</span><span class="s">&quot;SG_water.xml&quot;</span><span class="nt">&gt;</span>
-<span class="w">  </span><span class="nt">&lt;dataFluid</span><span class="w"> </span><span class="na">alpha=</span><span class="s">&quot;0.&quot;</span><span class="w"> </span><span class="na">density=</span><span class="s">&quot;1000.0&quot;</span><span class="w"> </span><span class="na">pressure=</span><span class="s">&quot;1.e5&quot;</span><span class="nt">/&gt;</span>
+<span class="nt">&lt;material</span><span class="w"> </span><span class="na">type=</span><span class="s">"fluid"</span><span class="w"> </span><span class="na">EOS=</span><span class="s">"SG_water.xml"</span><span class="nt">&gt;</span>
+<span class="w">  </span><span class="nt">&lt;dataFluid</span><span class="w"> </span><span class="na">alpha=</span><span class="s">"0."</span><span class="w"> </span><span class="na">density=</span><span class="s">"1000.0"</span><span class="w"> </span><span class="na">pressure=</span><span class="s">"1.e5"</span><span class="nt">/&gt;</span>
 <span class="nt">&lt;/material&gt;</span>
 <span class="nt">&lt;mixture&gt;</span>
-<span class="w">  </span><span class="nt">&lt;velocity</span><span class="w"> </span><span class="na">x=</span><span class="s">&quot;0.&quot;</span><span class="w"> </span><span class="na">y=</span><span class="s">&quot;0.&quot;</span><span class="w"> </span><span class="na">z=</span><span class="s">&quot;0.&quot;</span><span class="nt">/&gt;</span>
+<span class="w">  </span><span class="nt">&lt;velocity</span><span class="w"> </span><span class="na">x=</span><span class="s">"0."</span><span class="w"> </span><span class="na">y=</span><span class="s">"0."</span><span class="w"> </span><span class="na">z=</span><span class="s">"0."</span><span class="nt">/&gt;</span>
 <span class="nt">&lt;/mixture&gt;</span>
 </pre></div>
 </div>
@@ -516,15 +577,15 @@
 <li><p>Node <code class="code highlight xml docutils literal highlight-xml"><span class="nt">&lt;dataMix&gt;</span></code>: With <code class="code highlight xml docutils literal highlight-xml">pressure</code> attribute for initial pressure of the fluid, real number (unit: Pa (SI)).</p></li>
 <li><p>Node <code class="code highlight xml docutils literal highlight-xml"><span class="nt">&lt;velocity&gt;</span></code>: With <code class="code highlight xml docutils literal highlight-xml">x</code>, <code class="code highlight xml docutils literal highlight-xml">y</code> and <code class="code highlight xml docutils literal highlight-xml">z</code> attributes setting the initial values for the components of the velocity vector, real numbers (unit: m/s (SI)).</p></li>
 </ul>
-<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;material</span><span class="w"> </span><span class="na">type=</span><span class="s">&quot;fluid&quot;</span><span class="w"> </span><span class="na">EOS=</span><span class="s">&quot;IG_air.xml&quot;</span><span class="nt">&gt;</span>
-<span class="w">  </span><span class="nt">&lt;dataFluid</span><span class="w"> </span><span class="na">alpha=</span><span class="s">&quot;0.5&quot;</span><span class="w"> </span><span class="na">density=</span><span class="s">&quot;1.0&quot;</span><span class="nt">/&gt;</span>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;material</span><span class="w"> </span><span class="na">type=</span><span class="s">"fluid"</span><span class="w"> </span><span class="na">EOS=</span><span class="s">"IG_air.xml"</span><span class="nt">&gt;</span>
+<span class="w">  </span><span class="nt">&lt;dataFluid</span><span class="w"> </span><span class="na">alpha=</span><span class="s">"0.5"</span><span class="w"> </span><span class="na">density=</span><span class="s">"1.0"</span><span class="nt">/&gt;</span>
 <span class="nt">&lt;/material&gt;</span>
-<span class="nt">&lt;material</span><span class="w"> </span><span class="na">type=</span><span class="s">&quot;fluid&quot;</span><span class="w"> </span><span class="na">EOS=</span><span class="s">&quot;SG_water.xml&quot;</span><span class="nt">&gt;</span>
-<span class="w">  </span><span class="nt">&lt;dataFluid</span><span class="w"> </span><span class="na">alpha=</span><span class="s">&quot;0.5&quot;</span><span class="w"> </span><span class="na">density=</span><span class="s">&quot;1000.0&quot;</span><span class="nt">/&gt;</span>
+<span class="nt">&lt;material</span><span class="w"> </span><span class="na">type=</span><span class="s">"fluid"</span><span class="w"> </span><span class="na">EOS=</span><span class="s">"SG_water.xml"</span><span class="nt">&gt;</span>
+<span class="w">  </span><span class="nt">&lt;dataFluid</span><span class="w"> </span><span class="na">alpha=</span><span class="s">"0.5"</span><span class="w"> </span><span class="na">density=</span><span class="s">"1000.0"</span><span class="nt">/&gt;</span>
 <span class="nt">&lt;/material&gt;</span>
 <span class="nt">&lt;mixture&gt;</span>
-<span class="w">  </span><span class="nt">&lt;dataMix</span><span class="w"> </span><span class="na">pressure =</span><span class="w"> </span><span class="s">&quot;1.e5&quot;</span><span class="nt">/&gt;</span>
-<span class="w">  </span><span class="nt">&lt;velocity</span><span class="w"> </span><span class="na">x=</span><span class="s">&quot;0.&quot;</span><span class="w"> </span><span class="na">y=</span><span class="s">&quot;0.&quot;</span><span class="w"> </span><span class="na">z=</span><span class="s">&quot;0.&quot;</span><span class="nt">/&gt;</span>
+<span class="w">  </span><span class="nt">&lt;dataMix</span><span class="w"> </span><span class="na">pressure =</span><span class="w"> </span><span class="s">"1.e5"</span><span class="nt">/&gt;</span>
+<span class="w">  </span><span class="nt">&lt;velocity</span><span class="w"> </span><span class="na">x=</span><span class="s">"0."</span><span class="w"> </span><span class="na">y=</span><span class="s">"0."</span><span class="w"> </span><span class="na">z=</span><span class="s">"0."</span><span class="nt">/&gt;</span>
 <span class="nt">&lt;/mixture&gt;</span>
 </pre></div>
 </div>
@@ -537,15 +598,15 @@
 <li><p>Node <code class="code highlight xml docutils literal highlight-xml"><span class="nt">&lt;dataMix&gt;</span></code>: With <code class="code highlight xml docutils literal highlight-xml">temperature</code> and <code class="code highlight xml docutils literal highlight-xml">pressure</code> attributes for initial temperature and pressure of the fluid, real numbers (unit: K and Pa (SI)), respectively.</p></li>
 <li><p>Node <code class="code highlight xml docutils literal highlight-xml"><span class="nt">&lt;velocity&gt;</span></code>: With <code class="code highlight xml docutils literal highlight-xml">x</code>, <code class="code highlight xml docutils literal highlight-xml">y</code> and <code class="code highlight xml docutils literal highlight-xml">z</code> attributes setting the initial values for the components of the velocity vector of the mixture, real numbers (unit: m/s (SI)).</p></li>
 </ul>
-<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;material</span><span class="w"> </span><span class="na">type=</span><span class="s">&quot;fluid&quot;</span><span class="w"> </span><span class="na">EOS=</span><span class="s">&quot;IG_waterVap.xml&quot;</span><span class="nt">&gt;</span>
-<span class="w">  </span><span class="nt">&lt;dataFluid</span><span class="w"> </span><span class="na">alpha=</span><span class="s">&quot;0.2&quot;</span><span class="nt">/&gt;</span>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;material</span><span class="w"> </span><span class="na">type=</span><span class="s">"fluid"</span><span class="w"> </span><span class="na">EOS=</span><span class="s">"IG_waterVap.xml"</span><span class="nt">&gt;</span>
+<span class="w">  </span><span class="nt">&lt;dataFluid</span><span class="w"> </span><span class="na">alpha=</span><span class="s">"0.2"</span><span class="nt">/&gt;</span>
 <span class="nt">&lt;/material&gt;</span>
-<span class="nt">&lt;material</span><span class="w"> </span><span class="na">type=</span><span class="s">&quot;fluid&quot;</span><span class="w"> </span><span class="na">EOS=</span><span class="s">&quot;SG_waterLiq.xml&quot;</span><span class="nt">&gt;</span>
-<span class="w">  </span><span class="nt">&lt;dataFluid</span><span class="w"> </span><span class="na">alpha=</span><span class="s">&quot;0.8&quot;</span><span class="nt">/&gt;</span>
+<span class="nt">&lt;material</span><span class="w"> </span><span class="na">type=</span><span class="s">"fluid"</span><span class="w"> </span><span class="na">EOS=</span><span class="s">"SG_waterLiq.xml"</span><span class="nt">&gt;</span>
+<span class="w">  </span><span class="nt">&lt;dataFluid</span><span class="w"> </span><span class="na">alpha=</span><span class="s">"0.8"</span><span class="nt">/&gt;</span>
 <span class="nt">&lt;/material&gt;</span>
 <span class="nt">&lt;mixture&gt;</span>
-<span class="w">  </span><span class="nt">&lt;dataMix</span><span class="w"> </span><span class="na">pressure =</span><span class="w"> </span><span class="s">&quot;1.e5&quot;</span><span class="w"> </span><span class="na">temperature =</span><span class="s">&quot;300.&quot;</span><span class="nt">/&gt;</span>
-<span class="w">  </span><span class="nt">&lt;velocity</span><span class="w"> </span><span class="na">x=</span><span class="s">&quot;0.&quot;</span><span class="w"> </span><span class="na">y=</span><span class="s">&quot;0.&quot;</span><span class="w"> </span><span class="na">z=</span><span class="s">&quot;0.&quot;</span><span class="nt">/&gt;</span>
+<span class="w">  </span><span class="nt">&lt;dataMix</span><span class="w"> </span><span class="na">pressure =</span><span class="w"> </span><span class="s">"1.e5"</span><span class="w"> </span><span class="na">temperature =</span><span class="s">"300."</span><span class="nt">/&gt;</span>
+<span class="w">  </span><span class="nt">&lt;velocity</span><span class="w"> </span><span class="na">x=</span><span class="s">"0."</span><span class="w"> </span><span class="na">y=</span><span class="s">"0."</span><span class="w"> </span><span class="na">z=</span><span class="s">"0."</span><span class="nt">/&gt;</span>
 <span class="nt">&lt;/mixture&gt;</span>
 </pre></div>
 </div>
@@ -558,46 +619,61 @@
 <li><p>Node <code class="code highlight xml docutils literal highlight-xml"><span class="nt">&lt;dataMix&gt;</span></code>: With <code class="code highlight xml docutils literal highlight-xml">pressure</code> attribute for initial pressure of the mixture, real number (unit: Pa (SI)).</p></li>
 <li><p>Node <code class="code highlight xml docutils literal highlight-xml"><span class="nt">&lt;velocity&gt;</span></code>: With <code class="code highlight xml docutils literal highlight-xml">x</code>, <code class="code highlight xml docutils literal highlight-xml">y</code> and <code class="code highlight xml docutils literal highlight-xml">z</code> attributes setting the initial values for the components of the velocity vector of the mixture, real numbers (unit: m/s (SI)).</p></li>
 </ul>
-<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;material</span><span class="w"> </span><span class="na">type=</span><span class="s">&quot;fluid&quot;</span><span class="w"> </span><span class="na">EOS=</span><span class="s">&quot;SG_waterLiq.xml&quot;</span><span class="nt">&gt;</span>
-<span class="w">  </span><span class="nt">&lt;dataFluid</span><span class="w"> </span><span class="na">alpha=</span><span class="s">&quot;0.99&quot;</span><span class="nt">/&gt;</span>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;material</span><span class="w"> </span><span class="na">type=</span><span class="s">"fluid"</span><span class="w"> </span><span class="na">EOS=</span><span class="s">"SG_waterLiq.xml"</span><span class="nt">&gt;</span>
+<span class="w">  </span><span class="nt">&lt;dataFluid</span><span class="w"> </span><span class="na">alpha=</span><span class="s">"0.99"</span><span class="nt">/&gt;</span>
 <span class="nt">&lt;/material&gt;</span>
-<span class="nt">&lt;material</span><span class="w"> </span><span class="na">type=</span><span class="s">&quot;fluid&quot;</span><span class="w"> </span><span class="na">EOS=</span><span class="s">&quot;IG_waterVap.xml&quot;</span><span class="nt">&gt;</span>
-<span class="w">  </span><span class="nt">&lt;dataFluid</span><span class="w"> </span><span class="na">alpha=</span><span class="s">&quot;0.01&quot;</span><span class="nt">/&gt;</span>
+<span class="nt">&lt;material</span><span class="w"> </span><span class="na">type=</span><span class="s">"fluid"</span><span class="w"> </span><span class="na">EOS=</span><span class="s">"IG_waterVap.xml"</span><span class="nt">&gt;</span>
+<span class="w">  </span><span class="nt">&lt;dataFluid</span><span class="w"> </span><span class="na">alpha=</span><span class="s">"0.01"</span><span class="nt">/&gt;</span>
 <span class="nt">&lt;/material&gt;</span>
 <span class="nt">&lt;mixture&gt;</span>
-<span class="w">  </span><span class="nt">&lt;dataMix</span><span class="w"> </span><span class="na">pressure =</span><span class="w"> </span><span class="s">&quot;1.e6&quot;</span><span class="nt">/&gt;</span>
-<span class="w">  </span><span class="nt">&lt;velocity</span><span class="w"> </span><span class="na">x=</span><span class="s">&quot;0.&quot;</span><span class="w"> </span><span class="na">y=</span><span class="s">&quot;0.&quot;</span><span class="w"> </span><span class="na">z=</span><span class="s">&quot;0.&quot;</span><span class="nt">/&gt;</span>
+<span class="w">  </span><span class="nt">&lt;dataMix</span><span class="w"> </span><span class="na">pressure =</span><span class="w"> </span><span class="s">"1.e6"</span><span class="nt">/&gt;</span>
+<span class="w">  </span><span class="nt">&lt;velocity</span><span class="w"> </span><span class="na">x=</span><span class="s">"0."</span><span class="w"> </span><span class="na">y=</span><span class="s">"0."</span><span class="w"> </span><span class="na">z=</span><span class="s">"0."</span><span class="nt">/&gt;</span>
 <span class="nt">&lt;/mixture&gt;</span>
 </pre></div>
 </div>
 </section>
-<section id="non-linear-schrodinger">
-<span id="sec-input-nonlinearschrodinger"></span><h3>Non-linear Schrödinger<a class="headerlink" href="#non-linear-schrodinger" title="Permalink to this heading"></a></h3>
-<p>Defocusing non-linear Schrödinger equation. In this case, there isn’t any EOS, the <code class="code highlight xml docutils literal highlight-xml"><span class="nt">&lt;mixture&gt;</span></code> node is absent and the <code class="code highlight xml docutils literal highlight-xml"><span class="nt">&lt;dataFluid&gt;</span></code> node contains the following attributes or nodes:</p>
+<section id="extended-navier-stokes-korteweg-1d">
+<span id="sec-input-extendednavierstokeskorteweg1d"></span><h3>Extended Navier–Stokes–Korteweg 1D<a class="headerlink" href="#extended-navier-stokes-korteweg-1d" title="Permalink to this heading"></a></h3>
+<p>Generic single and multiphase flow model. In all the subsequent submodels, the <code class="code highlight xml docutils literal highlight-xml"><span class="nt">&lt;mixture&gt;</span></code> node is absent and the <code class="code highlight xml docutils literal highlight-xml"><span class="nt">&lt;dataFluid&gt;</span></code> node contains the following attributes or nodes depending on the EOS. For the defocusing non-linear Schrödinger EOS:</p>
 <ul class="simple">
-<li><p>Attribute <code class="code highlight xml docutils literal highlight-xml">density</code>: Initial density of the fluid, real number (unit: kg/m3 (SI)).</p></li>
-<li><p>Node <code class="code highlight xml docutils literal highlight-xml"><span class="nt">&lt;velocity&gt;</span></code>: With <code class="code highlight xml docutils literal highlight-xml">x</code>, <code class="code highlight xml docutils literal highlight-xml">y</code> and <code class="code highlight xml docutils literal highlight-xml">z</code> attributes setting the initial values for the components of the velocity vector, real numbers (unit: m/s (SI)).</p></li>
+<li><p>Attributes <code class="code highlight xml docutils literal highlight-xml">density</code>, <code class="code highlight xml docutils literal highlight-xml">pressure</code> and <code class="code highlight xml docutils literal highlight-xml">entropy</code>: Initial density, pressure and entropy of the fluid respectively. It is possible to initialize with <code class="code highlight xml docutils literal highlight-xml">density</code> and <code class="code highlight xml docutils literal highlight-xml">pressure</code> or with <code class="code highlight xml docutils literal highlight-xml">density</code> and <code class="code highlight xml docutils literal highlight-xml">entropy</code>. No unit for this numbers.</p></li>
+<li><p>Node <code class="code highlight xml docutils literal highlight-xml"><span class="nt">&lt;velocity&gt;</span></code>: With <code class="code highlight xml docutils literal highlight-xml">x</code>, <code class="code highlight xml docutils literal highlight-xml">y</code> and <code class="code highlight xml docutils literal highlight-xml">z</code> attributes setting the initial values for the components of the velocity vector. No unit for this numbers.</p></li>
 </ul>
-<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;material</span><span class="w"> </span><span class="na">type=</span><span class="s">&quot;none&quot;</span><span class="nt">&gt;</span>
-<span class="w">    </span><span class="nt">&lt;dataFluid</span><span class="w"> </span><span class="na">density=</span><span class="s">&quot;2.0&quot;</span><span class="nt">&gt;</span>
-<span class="w">        </span><span class="nt">&lt;velocity</span><span class="w"> </span><span class="na">x=</span><span class="s">&quot;0.&quot;</span><span class="w"> </span><span class="na">y=</span><span class="s">&quot;0.&quot;</span><span class="w"> </span><span class="na">z=</span><span class="s">&quot;0.&quot;</span><span class="nt">/&gt;</span>
-<span class="w">    </span><span class="nt">&lt;/dataFluid&gt;</span>
-<span class="nt">&lt;/material&gt;</span>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;state</span><span class="w"> </span><span class="na">name=</span><span class="s">"chamberHighDensity"</span><span class="nt">&gt;</span>
+<span class="w">    </span><span class="nt">&lt;material</span><span class="w"> </span><span class="na">type=</span><span class="s">"fluid"</span><span class="w"> </span><span class="na">EOS=</span><span class="s">"NLS.xml"</span><span class="nt">&gt;</span>
+<span class="w">        </span><span class="nt">&lt;dataFluid</span><span class="w"> </span><span class="na">density=</span><span class="s">"5."</span><span class="w"> </span><span class="na">pressure=</span><span class="s">"12.5"</span><span class="nt">&gt;</span>
+<span class="w">            </span><span class="nt">&lt;velocity</span><span class="w"> </span><span class="na">x=</span><span class="s">"0."</span><span class="w"> </span><span class="na">y=</span><span class="s">"0."</span><span class="w"> </span><span class="na">z=</span><span class="s">"0."</span><span class="nt">/&gt;</span>
+<span class="w">        </span><span class="nt">&lt;/dataFluid&gt;</span>
+<span class="w">    </span><span class="nt">&lt;/material&gt;</span>
+<span class="nt">&lt;/state&gt;</span>
 </pre></div>
 </div>
-</section>
-<section id="euler-korteweg">
-<span id="sec-input-eulerkorteweg"></span><h3>Euler–Korteweg<a class="headerlink" href="#euler-korteweg" title="Permalink to this heading"></a></h3>
-<p>Single-phase flow. In this case, the <code class="code highlight xml docutils literal highlight-xml"><span class="nt">&lt;mixture&gt;</span></code> node is absent and the <code class="code highlight xml docutils literal highlight-xml"><span class="nt">&lt;dataFluid&gt;</span></code> node contains the following attributes or nodes:</p>
+<p>For the regularized and bistable Ericksen bar EOS:</p>
 <ul class="simple">
-<li><p>Attribute <code class="code highlight xml docutils literal highlight-xml">density</code>: Initial density of the fluid, real number (unit: kg/m3 (SI)).</p></li>
-<li><p>Node <code class="code highlight xml docutils literal highlight-xml"><span class="nt">&lt;velocity&gt;</span></code>: With <code class="code highlight xml docutils literal highlight-xml">x</code>, <code class="code highlight xml docutils literal highlight-xml">y</code> and <code class="code highlight xml docutils literal highlight-xml">z</code> attributes setting the initial values for the components of the velocity vector, real numbers (unit: m/s (SI)).</p></li>
+<li><p>Attributes <code class="code highlight xml docutils literal highlight-xml">density</code>, <code class="code highlight xml docutils literal highlight-xml">pressure</code> and <code class="code highlight xml docutils literal highlight-xml">entropy</code>: Initial density, pressure and entropy of the fluid respectively. It is possible to initialize with <code class="code highlight xml docutils literal highlight-xml">density</code> and <code class="code highlight xml docutils literal highlight-xml">pressure</code> or with <code class="code highlight xml docutils literal highlight-xml">density</code> and <code class="code highlight xml docutils literal highlight-xml">entropy</code>. No unit for this numbers.</p></li>
+<li><p>Node <code class="code highlight xml docutils literal highlight-xml"><span class="nt">&lt;velocity&gt;</span></code>: With <code class="code highlight xml docutils literal highlight-xml">x</code>, <code class="code highlight xml docutils literal highlight-xml">y</code> and <code class="code highlight xml docutils literal highlight-xml">z</code> attributes setting the initial values for the components of the velocity vector. No unit for this numbers.</p></li>
 </ul>
-<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;material</span><span class="w"> </span><span class="na">type=</span><span class="s">&quot;fluid&quot;</span><span class="w"> </span><span class="na">EOS=</span><span class="s">&quot;Polynomial_arbitrary.xml&quot;</span><span class="nt">&gt;</span>
-<span class="w">    </span><span class="nt">&lt;dataFluid</span><span class="w"> </span><span class="na">density=</span><span class="s">&quot;0.2452&quot;</span><span class="nt">&gt;</span>
-<span class="w">        </span><span class="nt">&lt;velocity</span><span class="w"> </span><span class="na">x=</span><span class="s">&quot;0.&quot;</span><span class="w"> </span><span class="na">y=</span><span class="s">&quot;0.&quot;</span><span class="w"> </span><span class="na">z=</span><span class="s">&quot;0.&quot;</span><span class="nt">/&gt;</span>
-<span class="w">    </span><span class="nt">&lt;/dataFluid&gt;</span>
-<span class="nt">&lt;/material&gt;</span>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;state</span><span class="w"> </span><span class="na">name=</span><span class="s">"chamberHighDensity"</span><span class="nt">&gt;</span>
+<span class="w">    </span><span class="nt">&lt;material</span><span class="w"> </span><span class="na">type=</span><span class="s">"fluid"</span><span class="w"> </span><span class="na">EOS=</span><span class="s">"Polynomial_arbitrary.xml"</span><span class="nt">&gt;</span>
+<span class="w">        </span><span class="nt">&lt;dataFluid</span><span class="w"> </span><span class="na">density=</span><span class="s">"0.142857143"</span><span class="w"> </span><span class="na">pressure=</span><span class="s">"1."</span><span class="nt">&gt;</span>
+<span class="w">            </span><span class="nt">&lt;velocity</span><span class="w"> </span><span class="na">x=</span><span class="s">"0."</span><span class="w"> </span><span class="na">y=</span><span class="s">"0."</span><span class="w"> </span><span class="na">z=</span><span class="s">"0."</span><span class="nt">/&gt;</span>
+<span class="w">        </span><span class="nt">&lt;/dataFluid&gt;</span>
+<span class="w">    </span><span class="nt">&lt;/material&gt;</span>
+<span class="nt">&lt;/state&gt;</span>
+</pre></div>
+</div>
+<p>Finally, for the van der Waals EOS:</p>
+<ul class="simple">
+<li><p>Attributes <code class="code highlight xml docutils literal highlight-xml">density</code>, <code class="code highlight xml docutils literal highlight-xml">pressure</code> and <code class="code highlight xml docutils literal highlight-xml">temperature</code>: Initial density, pressure and temperature of the fluid respectively. It is possible to initialize with <code class="code highlight xml docutils literal highlight-xml">density</code> and <code class="code highlight xml docutils literal highlight-xml">pressure</code> or with <code class="code highlight xml docutils literal highlight-xml">density</code> and <code class="code highlight xml docutils literal highlight-xml">temperature</code> or with <code class="code highlight xml docutils literal highlight-xml">pressure</code> and <code class="code highlight xml docutils literal highlight-xml">temperature</code>. Depending on the fluid chosen, we can have unit for this numbers (kg/m3, Pa and Kelvin (SI)) or not.</p></li>
+<li><p>Node <code class="code highlight xml docutils literal highlight-xml"><span class="nt">&lt;velocity&gt;</span></code>: With <code class="code highlight xml docutils literal highlight-xml">x</code>, <code class="code highlight xml docutils literal highlight-xml">y</code> and <code class="code highlight xml docutils literal highlight-xml">z</code> attributes setting the initial values for the components of the velocity vector. Depending on the fluid chosen, we can have unit for this numbers (m/s (SI)) or not.</p></li>
+</ul>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;state</span><span class="w"> </span><span class="na">name=</span><span class="s">"chamberHighDensity"</span><span class="nt">&gt;</span>
+<span class="w">    </span><span class="nt">&lt;material</span><span class="w"> </span><span class="na">type=</span><span class="s">"fluid"</span><span class="w"> </span><span class="na">EOS=</span><span class="s">"VDW_dodecane.xml"</span><span class="nt">&gt;</span>
+<span class="w">        </span><span class="nt">&lt;dataFluid</span><span class="w"> </span><span class="na">temperature=</span><span class="s">"561.53"</span><span class="w"> </span><span class="na">pressure=</span><span class="s">"128.13e5"</span><span class="nt">&gt;</span>
+<span class="w">            </span><span class="nt">&lt;velocity</span><span class="w"> </span><span class="na">x=</span><span class="s">"0."</span><span class="w"> </span><span class="na">y=</span><span class="s">"0."</span><span class="w"> </span><span class="na">z=</span><span class="s">"0."</span><span class="nt">/&gt;</span>
+<span class="w">        </span><span class="nt">&lt;/dataFluid&gt;</span>
+<span class="w">    </span><span class="nt">&lt;/material&gt;</span>
+<span class="nt">&lt;/state&gt;</span>
 </pre></div>
 </div>
 <p><strong>Remark</strong></p>
@@ -617,7 +693,7 @@
   <hr/>
 
   <div role="contentinfo">
-    <p>&#169; Copyright 2025, code-mphi.</p>
+    <p>&#169; Copyright 2026, code-mphi.</p>
   </div>
 
   Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a

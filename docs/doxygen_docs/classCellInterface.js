@@ -36,6 +36,7 @@ var classCellInterface =
     [ "getSlopesTransport", "classCellInterface.html#a2953afb94fd47b4b4858604d538d7ab7", null ],
     [ "getSplit", "classCellInterface.html#ae9b1b9ddadbd38bf8eb1c1cdb05d2045", null ],
     [ "getWallRotationalVelocityMRF", "classCellInterface.html#a38ae4a5abee494478cd83c8028e4d317", null ],
+    [ "getWallVelocity", "classCellInterface.html#a95ed5c42c3084f0fef6ce5ba8d85d75b", null ],
     [ "initialize", "classCellInterface.html#a7bfb97c567f7ed108103750824afe505", null ],
     [ "initializeDroite", "classCellInterface.html#aaac047fe0128960fbbd628751126c5c7", null ],
     [ "initializeGauche", "classCellInterface.html#a8218935356f4d3daa9e7f121be852b4b", null ],

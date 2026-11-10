@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Square to circle using symmetry &mdash; ECOGEN 5.0 documentation</title>
+  <title>Square to circle using symmetry &mdash; ECOGEN 6.0 documentation</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
       <link rel="stylesheet" type="text/css" href="_static/css/theme.css" />
 
@@ -38,7 +38,7 @@
             ECOGEN
           </a>
               <div class="version">
-                5.0
+                6.0
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
@@ -57,9 +57,9 @@
 <li class="toctree-l1 current"><a class="reference internal" href="Chap5_testCases_Chapter.html">Test cases</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="Chap5_1Euler.html">Single-phase test cases</a></li>
 <li class="toctree-l2 current"><a class="reference internal" href="Chap5_2.html">Multiphase test cases</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="Chap5_3NEq.html">Non-equilibrium model</a></li>
 <li class="toctree-l3"><a class="reference internal" href="Chap5_2UEq.html">Velocity-equilibrium model</a></li>
 <li class="toctree-l3"><a class="reference internal" href="Chap5_2UEqTotE.html">Velocity-equilibrium model based on total energies</a></li>
-<li class="toctree-l3"><a class="reference internal" href="Chap5_2UEqSolid.html">Velocity-equilibrium model for solids</a></li>
 <li class="toctree-l3 current"><a class="reference internal" href="Chap5_2PUEq.html">Pressure- and velocity-equilibrium model</a><ul class="current">
 <li class="toctree-l4"><a class="reference internal" href="Chap5_2PUEq_1D.html">1D</a></li>
 <li class="toctree-l4 current"><a class="reference internal" href="Chap5_2PUEq_2D.html">2D</a></li>
@@ -67,13 +67,15 @@
 </li>
 <li class="toctree-l3"><a class="reference internal" href="Chap5_2PTUEq.html">Temperature-, pressure- and velocity-equilibrium model</a></li>
 <li class="toctree-l3"><a class="reference internal" href="Chap5_2eulerHomogeneous.html">Homogeneous Euler</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Chap5_2ENSK1D.html">Extended-Navier-Stokes-Korteweg-1D model</a></li>
 <li class="toctree-l3"><a class="reference internal" href="Chap5_2.html#other-tests-cases">Other tests cases</a></li>
 </ul>
 </li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="Chap6_developersGuide_Chapter.html">Developers</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Chap7_license.html">License</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Chap7_license.html">License and authors</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Chap8_citation.html">Citation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="zBibliography.html">Bibliography</a></li>
 </ul>
 
@@ -107,7 +109,7 @@
              
   <section id="square-to-circle-using-symmetry">
 <h1>Square to circle using symmetry<a class="headerlink" href="#square-to-circle-using-symmetry" title="Permalink to this heading"></a></h1>
-<p>This case is a 2D Cartesian test case. A square domain composed of air, with inside another square domain composed of liquid (special for few surface-tension test cases). Initial conditions of this test are shown in <a class="reference internal" href="#fig-testcases-pueq-squaretocirclesymmetryini"><span class="std std-numref">Fig. 88</span></a>.
+<p>This case is a 2D Cartesian test case. A square domain composed of air, with inside another square domain composed of liquid (special for few surface-tension test cases). Initial conditions of this test are shown in <a class="reference internal" href="#fig-testcases-pueq-squaretocirclesymmetryini"><span class="std std-numref">Fig. 92</span></a>.
 Input files for this test are available in <em>./libTests/referenceTestCases/PUEq/AddPhysicalEffects/surfaceTension/squareToCircleSymmetry/</em>. The corresponding uncommented line in <em>ECOGEN.xml</em> is:</p>
 <div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;testCase&gt;</span>./libTests/referenceTestCases/PUEq/AddPhysicalEffects/surfaceTension/squareToCircleSymmetry/<span class="nt">&lt;/testCase&gt;</span>
 </pre></div>
@@ -115,7 +117,7 @@ Input files for this test are available in <em>./libTests/referenceTestCases/PUE
 <figure class="align-center" id="id1">
 <span id="fig-testcases-pueq-squaretocirclesymmetryini"></span><a class="reference internal image-reference" href="_images/squareToCircleSymmetryIni.png"><img alt="_images/squareToCircleSymmetryIni.png" src="_images/squareToCircleSymmetryIni.png" style="width: 747.6px; height: 359.4px;" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 88 </span><span class="caption-text">Initial conditions.</span><a class="headerlink" href="#id1" title="Permalink to this image"></a></p>
+<p><span class="caption-number">Fig. 92 </span><span class="caption-text">Initial conditions.</span><a class="headerlink" href="#id1" title="Permalink to this image"></a></p>
 </figcaption>
 </figure>
 <p>Computations are performed only on half of the domain because a symmetry is applied as indicated in the title of this test case.</p>
@@ -154,12 +156,12 @@ Input files for this test are available in <em>./libTests/referenceTestCases/PUE
 </tr>
 </tbody>
 </table>
-<p>Results are shown in <a class="reference internal" href="#fig-testcases-pueq-squaretocirclesymmetryanim"><span class="std std-numref">Fig. 89</span></a>. When the interface between the blue and the white regions disappears, because of surface tension, the region that was initially square is deformed and tends to become circular with time. Note that it is necessary to have a stationary solution to obtain this circle and this requires a relatively long final solution time.</p>
+<p>Results are shown in <a class="reference internal" href="#fig-testcases-pueq-squaretocirclesymmetryanim"><span class="std std-numref">Fig. 93</span></a>. When the interface between the blue and the white regions disappears, because of surface tension, the region that was initially square is deformed and tends to become circular with time. Note that it is necessary to have a stationary solution to obtain this circle and this requires a relatively long final solution time.</p>
 <p>One can observe the distribution of computation on the CPUs (here 12) divided into different regions, according to AMR evolution. When the density variations are low or non-existent, the mesh is as coarse as possible (within the conditions given in mesh.xml). On the contrary when the variations become significant, the mesh is refined. So, to distribute the work equally between the CPUs, highly refined regions are relatively small compared to coarse regions.</p>
 <figure class="align-center" id="id2">
 <span id="fig-testcases-pueq-squaretocirclesymmetryanim"></span><a class="reference internal image-reference" href="_images/squareToCircleSymmetryAnim.gif"><img alt="_images/squareToCircleSymmetryAnim.gif" src="_images/squareToCircleSymmetryAnim.gif" style="width: 409.5px; height: 409.5px;" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 89 </span><span class="caption-text">CPU (upper half) and density (lower half) over time. Visualization using <a class="reference external" href="https://www.paraview.org/">Paraview</a> software.</span><a class="headerlink" href="#id2" title="Permalink to this image"></a></p>
+<p><span class="caption-number">Fig. 93 </span><span class="caption-text">CPU (upper half) and density (lower half) over time. Visualization using <a class="reference external" href="https://www.paraview.org/">Paraview</a> software.</span><a class="headerlink" href="#id2" title="Permalink to this image"></a></p>
 </figcaption>
 </figure>
 <figure class="align-center">
@@ -178,7 +180,7 @@ Input files for this test are available in <em>./libTests/referenceTestCases/PUE
   <hr/>
 
   <div role="contentinfo">
-    <p>&#169; Copyright 2025, code-mphi.</p>
+    <p>&#169; Copyright 2026, code-mphi.</p>
   </div>
 
   Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a

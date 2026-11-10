@@ -1,21 +1,14 @@
 var searchData=
 [
-  ['source_0',['Source',['../classSource.html',1,'']]],
-  ['sourceexact_1',['SourceExact',['../classSourceExact.html',1,'']]],
-  ['sourceexacteulerkorteweg_2',['SourceExactEulerKorteweg',['../classSourceExactEulerKorteweg.html',1,'']]],
-  ['sourcegravity_3',['SourceGravity',['../classSourceGravity.html',1,'']]],
-  ['sourcenum_4',['SourceNum',['../classSourceNum.html',1,'']]],
-  ['sourcenumacousticwave_5',['SourceNumAcousticWave',['../classSourceNumAcousticWave.html',1,'']]],
-  ['sourcenumacousticwaveplanegaussianpulse_6',['SourceNumAcousticWavePlaneGaussianPulse',['../classSourceNumAcousticWavePlaneGaussianPulse.html',1,'']]],
-  ['sourcenumacousticwaveplanesinusoidalpulse_7',['SourceNumAcousticWavePlaneSinusoidalPulse',['../classSourceNumAcousticWavePlaneSinusoidalPulse.html',1,'']]],
-  ['sourcenumgravity_8',['SourceNumGravity',['../classSourceNumGravity.html',1,'']]],
-  ['sourcenumheating_9',['SourceNumHeating',['../classSourceNumHeating.html',1,'']]],
-  ['sourcenummrf_10',['SourceNumMRF',['../classSourceNumMRF.html',1,'']]],
-  ['stretchzone_11',['stretchZone',['../classstretchZone.html',1,'']]],
-  ['strpair_12',['StrPair',['../classtinyxml2_1_1StrPair.html',1,'tinyxml2']]],
-  ['symcylindrical_13',['SymCylindrical',['../classSymCylindrical.html',1,'']]],
-  ['symmetry_14',['Symmetry',['../classSymmetry.html',1,'']]],
-  ['symmetrycylindrical_15',['SymmetryCylindrical',['../classSymmetryCylindrical.html',1,'']]],
-  ['symmetryspherical_16',['SymmetrySpherical',['../classSymmetrySpherical.html',1,'']]],
-  ['symspherical_17',['SymSpherical',['../classSymSpherical.html',1,'']]]
+  ['relaxation_0',['Relaxation',['../classRelaxation.html',1,'']]],
+  ['relaxationp_1',['RelaxationP',['../classRelaxationP.html',1,'']]],
+  ['relaxationpfinite_2',['RelaxationPFinite',['../classRelaxationPFinite.html',1,'']]],
+  ['relaxationpinfinite_3',['RelaxationPInfinite',['../classRelaxationPInfinite.html',1,'']]],
+  ['relaxationpt_4',['RelaxationPT',['../classRelaxationPT.html',1,'']]],
+  ['relaxationptmu_5',['RelaxationPTMu',['../classRelaxationPTMu.html',1,'']]],
+  ['relaxationu_6',['RelaxationU',['../classRelaxationU.html',1,'']]],
+  ['riemannsolver_7',['RiemannSolver',['../classRiemannSolver.html',1,'']]],
+  ['riemannsolverexact_8',['RiemannSolverExact',['../classRiemannSolverExact.html',1,'']]],
+  ['riemannsolverhllc_9',['RiemannSolverHLLC',['../classRiemannSolverHLLC.html',1,'']]],
+  ['run_10',['Run',['../classRun.html',1,'']]]
 ];

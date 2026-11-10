@@ -1,19 +1,23 @@
 <map id="Eos::computeDensity" name="Eos::computeDensity">
-<area shape="rect" id="Node000001" title="See derived classes." alt="" coords="267,209,427,234"/>
-<area shape="rect" id="Node000002" href="$classBoundCondInletInjStagState.html#a271d2585905dea3ed7e69d6ca1a8cb58" title=" " alt="" coords="6,5,218,45"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="330,198,286,129,254,91,217,60,196,48,199,43,220,55,258,88,290,126,335,195"/>
-<area shape="rect" id="Node000003" href="$classBoundCondInletTank.html#ae1351cf32f2137778d6c7738fc88670d" title=" " alt="" coords="31,69,193,109"/>
-<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="321,201,275,162,217,124,190,112,192,107,220,119,278,157,324,197"/>
-<area shape="rect" id="Node000004" href="$classPhaseEuler.html#a2f454ef1d6cfc40933b07708c8a8f26d" title="Phase constructor from a XML format reading." alt="" coords="25,134,199,159"/>
-<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="304,206,218,173,176,162,177,157,219,168,306,201"/>
-<area shape="rect" id="Node000005" href="$classPhasePUEq.html#a0409e42e019451674d4a7c677644267f" title="Phase constructor from a XML format reading." alt="" coords="24,183,200,209"/>
-<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="252,214,200,208,200,203,253,209"/>
-<area shape="rect" id="Node000006" href="$classPhaseUEq.html#ac4777a9b56ae1b73d1b951a4300a26d7" title="Phase constructor from a XML format reading." alt="" coords="32,233,192,258"/>
-<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="253,234,192,240,192,235,252,228"/>
-<area shape="rect" id="Node000007" href="$classPhaseUEqTotEnergy.html#a818aa4ac4ca93d3997e863f9ca7ddd43" title="Phase constructor from a XML format reading." alt="" coords="33,283,191,323"/>
-<area shape="poly" id="edge6_Node000001_Node000007" title=" " alt="" coords="301,242,220,272,180,285,178,280,218,267,300,237"/>
-<area shape="rect" id="Node000008" href="$classModEuler.html#ae4920a7fb04102098a76276408d463cf" title="Inlet injection using temperature half Riemann solver." alt="" coords="5,347,219,387"/>
-<area shape="poly" id="edge7_Node000001_Node000008" title=" " alt="" coords="327,246,281,292,252,316,220,337,194,349,192,344,217,332,249,312,278,288,323,243"/>
-<area shape="rect" id="Node000009" href="$classModUEq.html#abf43432f9a7399f31c40de91355c07f1" title="Inlet injection using temperature half Riemann solver." alt="" coords="9,411,215,451"/>
-<area shape="poly" id="edge8_Node000001_Node000009" title=" " alt="" coords="336,248,318,282,293,324,260,365,220,401,199,413,197,408,217,397,256,362,288,321,314,280,332,246"/>
+<area shape="rect" id="Node000001" title="See derived classes." alt="" coords="525,274,684,302"/>
+<area shape="rect" id="Node000002" href="$classBoundCondInletInjStagState.html#a271d2585905dea3ed7e69d6ca1a8cb58" title=" " alt="" coords="265,127,476,171"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="564,266,410,175,411,169,569,265"/>
+<area shape="rect" id="Node000006" href="$classBoundCondInletTank.html#ae1351cf32f2137778d6c7738fc88670d" title=" " alt="" coords="290,231,452,275"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="507,274,452,268,452,262,512,273"/>
+<area shape="rect" id="Node000010" href="$classModEuler.html#ae4920a7fb04102098a76276408d463cf" title="Inlet injection using temperature half Riemann solver." alt="" coords="265,300,477,345"/>
+<area shape="poly" id="edge9_Node000001_Node000010" title=" " alt="" coords="507,302,478,309,477,304,512,301"/>
+<area shape="rect" id="Node000011" href="$classModUEq.html#abf43432f9a7399f31c40de91355c07f1" title="Inlet injection using temperature half Riemann solver." alt="" coords="268,369,474,414"/>
+<area shape="poly" id="edge10_Node000001_Node000011" title=" " alt="" coords="570,309,478,359,448,371,447,366,476,355,565,311"/>
+<area shape="rect" id="Node000003" href="$classBoundCondInletInjStagState.html#a13cb535d60d012b96d33d7de6ccfe96b" title=" " alt="" coords="5,5,217,50"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="319,119,270,92,216,65,188,53,186,48,218,60,273,87,324,118"/>
+<area shape="rect" id="Node000004" href="$classBoundCondInletInjStagState.html#a6625b68a5004f0c8fd05a9c284a92977" title=" " alt="" coords="9,75,213,119"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="247,126,214,120,212,115,252,124"/>
+<area shape="rect" id="Node000005" href="$classBoundCondInletInjStagState.html#a032e74521a2184c3dc3549062d3138cc" title="Create a child cell interface (not initialized) *‍/." alt="" coords="9,144,213,189"/>
+<area shape="poly" id="edge4_Node000002_Node000005" title=" " alt="" coords="247,158,214,162,212,157,252,156"/>
+<area shape="rect" id="Node000007" href="$classBoundCondInletTank.html#ad8b7842ace354dac5d736aab42bc4939" title=" " alt="" coords="30,213,192,258"/>
+<area shape="poly" id="edge6_Node000006_Node000007" title=" " alt="" coords="272,248,193,244,192,238,276,245"/>
+<area shape="rect" id="Node000008" href="$classBoundCondInletTank.html#aebdc99f693b082a1d4c58e4fcb382deb" title=" " alt="" coords="34,283,188,327"/>
+<area shape="poly" id="edge7_Node000006_Node000008" title=" " alt="" coords="272,274,189,292,188,287,277,271"/>
+<area shape="rect" id="Node000009" href="$classBoundCondInletTank.html#a6ab2c6c9c92141d0a0eea4d6c2fa9bb0" title=" " alt="" coords="22,352,200,397"/>
+<area shape="poly" id="edge8_Node000006_Node000009" title=" " alt="" coords="278,280,266,290,252,302,243,315,234,329,218,342,196,354,193,349,215,337,230,325,238,312,248,299,263,285,273,283"/>
 </map>

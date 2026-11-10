@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Droplet impact &mdash; ECOGEN 5.0 documentation</title>
+  <title>Droplet impact &mdash; ECOGEN 6.0 documentation</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
       <link rel="stylesheet" type="text/css" href="_static/css/theme.css" />
 
@@ -38,7 +38,7 @@
             ECOGEN
           </a>
               <div class="version">
-                5.0
+                6.0
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
@@ -57,9 +57,9 @@
 <li class="toctree-l1 current"><a class="reference internal" href="Chap5_testCases_Chapter.html">Test cases</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="Chap5_1Euler.html">Single-phase test cases</a></li>
 <li class="toctree-l2 current"><a class="reference internal" href="Chap5_2.html">Multiphase test cases</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="Chap5_3NEq.html">Non-equilibrium model</a></li>
 <li class="toctree-l3"><a class="reference internal" href="Chap5_2UEq.html">Velocity-equilibrium model</a></li>
 <li class="toctree-l3"><a class="reference internal" href="Chap5_2UEqTotE.html">Velocity-equilibrium model based on total energies</a></li>
-<li class="toctree-l3"><a class="reference internal" href="Chap5_2UEqSolid.html">Velocity-equilibrium model for solids</a></li>
 <li class="toctree-l3 current"><a class="reference internal" href="Chap5_2PUEq.html">Pressure- and velocity-equilibrium model</a><ul class="current">
 <li class="toctree-l4"><a class="reference internal" href="Chap5_2PUEq_1D.html">1D</a></li>
 <li class="toctree-l4 current"><a class="reference internal" href="Chap5_2PUEq_2D.html">2D</a></li>
@@ -67,13 +67,15 @@
 </li>
 <li class="toctree-l3"><a class="reference internal" href="Chap5_2PTUEq.html">Temperature-, pressure- and velocity-equilibrium model</a></li>
 <li class="toctree-l3"><a class="reference internal" href="Chap5_2eulerHomogeneous.html">Homogeneous Euler</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Chap5_2ENSK1D.html">Extended-Navier-Stokes-Korteweg-1D model</a></li>
 <li class="toctree-l3"><a class="reference internal" href="Chap5_2.html#other-tests-cases">Other tests cases</a></li>
 </ul>
 </li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="Chap6_developersGuide_Chapter.html">Developers</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Chap7_license.html">License</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Chap7_license.html">License and authors</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Chap8_citation.html">Citation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="zBibliography.html">Bibliography</a></li>
 </ul>
 
@@ -107,7 +109,7 @@
              
   <section id="droplet-impact">
 <h1>Droplet impact<a class="headerlink" href="#droplet-impact" title="Permalink to this heading"></a></h1>
-<p>This case is a 2D Cartesian test case. A liquid droplet is moving upward in a box with solid walls and filled with air. Initial conditions of this test are shown in <a class="reference internal" href="#fig-testcases-pueq-dropletimpactini"><span class="std std-numref">Fig. 85</span></a>.
+<p>This case is a 2D Cartesian test case. A liquid droplet is moving upward in a box with solid walls and filled with air. Initial conditions of this test are shown in <a class="reference internal" href="#fig-testcases-pueq-dropletimpactini"><span class="std std-numref">Fig. 89</span></a>.
 Input files for this test are available in <em>./libTests/referenceTestCases/PUEq/AddPhysicalEffects/surfaceTension/dropletImpact/</em>. The corresponding uncommented line in <em>ECOGEN.xml</em> is:</p>
 <div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;testCase&gt;</span>./libTests/referenceTestCases/PUEq/AddPhysicalEffects/surfaceTension/dropletImpact/<span class="nt">&lt;/testCase&gt;</span>
 </pre></div>
@@ -115,7 +117,7 @@ Input files for this test are available in <em>./libTests/referenceTestCases/PUE
 <figure class="align-center" id="id1">
 <span id="fig-testcases-pueq-dropletimpactini"></span><a class="reference internal image-reference" href="_images/dropletImpactIni.png"><img alt="_images/dropletImpactIni.png" src="_images/dropletImpactIni.png" style="width: 553.1999999999999px; height: 284.4px;" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 85 </span><span class="caption-text">Initial conditions. Visualization using <a class="reference external" href="https://www.paraview.org/">Paraview</a> software.</span><a class="headerlink" href="#id1" title="Permalink to this image"></a></p>
+<p><span class="caption-number">Fig. 89 </span><span class="caption-text">Initial conditions. Visualization using <a class="reference external" href="https://www.paraview.org/">Paraview</a> software.</span><a class="headerlink" href="#id1" title="Permalink to this image"></a></p>
 </figcaption>
 </figure>
 <p>The initial characteristics of the run are:</p>
@@ -153,18 +155,18 @@ Input files for this test are available in <em>./libTests/referenceTestCases/PUE
 </tr>
 </tbody>
 </table>
-<p>Results are shown in <a class="reference internal" href="#fig-testcases-pueq-dropletimpactanim"><span class="std std-numref">Fig. 86</span></a> and <a class="reference internal" href="#fig-testcases-pueq-dropletimpactanim2"><span class="std std-numref">Fig. 87</span></a>.
+<p>Results are shown in <a class="reference internal" href="#fig-testcases-pueq-dropletimpactanim"><span class="std std-numref">Fig. 90</span></a> and <a class="reference internal" href="#fig-testcases-pueq-dropletimpactanim2"><span class="std std-numref">Fig. 91</span></a>.
 At the impact on the upper wall, the droplet is sliding and deforming, and thanks to surface tension it is then dividing in smaller droplets. Due to the gravity, some small droplets fall down while others are sliding down along the vertical wall. One can observe the rebounds of the droplets as well as the various droplet–droplet interactions leading to coalescence phenomena.</p>
 <figure class="align-center" id="id2">
 <span id="fig-testcases-pueq-dropletimpactanim"></span><a class="reference internal image-reference" href="_images/dropletImpactAnim.gif"><img alt="_images/dropletImpactAnim.gif" src="_images/dropletImpactAnim.gif" style="width: 575.0px; height: 292.0px;" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 86 </span><span class="caption-text">Mixture density of a droplet impact over time. Visualization using <a class="reference external" href="https://www.paraview.org/">Paraview</a> software.</span><a class="headerlink" href="#id2" title="Permalink to this image"></a></p>
+<p><span class="caption-number">Fig. 90 </span><span class="caption-text">Mixture density of a droplet impact over time. Visualization using <a class="reference external" href="https://www.paraview.org/">Paraview</a> software.</span><a class="headerlink" href="#id2" title="Permalink to this image"></a></p>
 </figcaption>
 </figure>
 <figure class="align-center" id="id3">
 <span id="fig-testcases-pueq-dropletimpactanim2"></span><a class="reference internal image-reference" href="_images/dropletImpactAnim2.gif"><img alt="_images/dropletImpactAnim2.gif" src="_images/dropletImpactAnim2.gif" style="width: 575.0px; height: 292.0px;" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 87 </span><span class="caption-text">AMR evolution during droplet impact. Visualization using <a class="reference external" href="https://www.paraview.org/">Paraview</a> software.</span><a class="headerlink" href="#id3" title="Permalink to this image"></a></p>
+<p><span class="caption-number">Fig. 91 </span><span class="caption-text">AMR evolution during droplet impact. Visualization using <a class="reference external" href="https://www.paraview.org/">Paraview</a> software.</span><a class="headerlink" href="#id3" title="Permalink to this image"></a></p>
 </figcaption>
 </figure>
 </section>
@@ -180,7 +182,7 @@ At the impact on the upper wall, the droplet is sliding and deforming, and thank
   <hr/>
 
   <div role="contentinfo">
-    <p>&#169; Copyright 2025, code-mphi.</p>
+    <p>&#169; Copyright 2026, code-mphi.</p>
   </div>
 
   Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a

@@ -1,7 +1,9 @@
 <map id="Flux::getEnergy" name="Flux::getEnergy">
-<area shape="rect" id="Node000001" title=" " alt="" coords="304,31,428,56"/>
-<area shape="rect" id="Node000002" href="$classFluxUEq.html#a925c006bc25750803a3f640ea7ec1ee3" title=" " alt="" coords="63,5,199,31"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="290,38,199,28,199,23,290,33"/>
-<area shape="rect" id="Node000003" href="$classModEuler.html#a1ca5876126b8a53b89c02b1dd69eb44f" title="Cell to cell Riemann solver + compute fluxBuffMRF for MRF interface." alt="" coords="5,55,256,80"/>
-<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="290,54,255,57,255,52,290,48"/>
+<area shape="rect" id="Node000001" title=" " alt="" coords="304,57,427,85"/>
+<area shape="rect" id="Node000002" href="$classFluxNEq.html#a2fc3db0f2bdfaf8f85ad4c5584ab03e9" title=" " alt="" coords="63,5,198,33"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="286,54,255,48,199,36,199,31,256,43,291,53"/>
+<area shape="rect" id="Node000003" href="$classFluxUEq.html#a925c006bc25750803a3f640ea7ec1ee3" title=" " alt="" coords="63,57,198,85"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="285,72,199,74,198,69,290,70"/>
+<area shape="rect" id="Node000004" href="$classModEuler.html#a1ca5876126b8a53b89c02b1dd69eb44f" title="Cell to cell Riemann solver + compute fluxBuffMRF for MRF interface." alt="" coords="5,109,256,137"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="291,89,256,99,201,111,199,106,255,94,286,90"/>
 </map>

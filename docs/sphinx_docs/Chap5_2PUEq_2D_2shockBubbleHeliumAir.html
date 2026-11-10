@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Air shock on helium bubble &mdash; ECOGEN 5.0 documentation</title>
+  <title>Air shock on helium bubble &mdash; ECOGEN 6.0 documentation</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
       <link rel="stylesheet" type="text/css" href="_static/css/theme.css" />
 
@@ -38,7 +38,7 @@
             ECOGEN
           </a>
               <div class="version">
-                5.0
+                6.0
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
@@ -57,9 +57,9 @@
 <li class="toctree-l1 current"><a class="reference internal" href="Chap5_testCases_Chapter.html">Test cases</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="Chap5_1Euler.html">Single-phase test cases</a></li>
 <li class="toctree-l2 current"><a class="reference internal" href="Chap5_2.html">Multiphase test cases</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="Chap5_3NEq.html">Non-equilibrium model</a></li>
 <li class="toctree-l3"><a class="reference internal" href="Chap5_2UEq.html">Velocity-equilibrium model</a></li>
 <li class="toctree-l3"><a class="reference internal" href="Chap5_2UEqTotE.html">Velocity-equilibrium model based on total energies</a></li>
-<li class="toctree-l3"><a class="reference internal" href="Chap5_2UEqSolid.html">Velocity-equilibrium model for solids</a></li>
 <li class="toctree-l3 current"><a class="reference internal" href="Chap5_2PUEq.html">Pressure- and velocity-equilibrium model</a><ul class="current">
 <li class="toctree-l4"><a class="reference internal" href="Chap5_2PUEq_1D.html">1D</a></li>
 <li class="toctree-l4 current"><a class="reference internal" href="Chap5_2PUEq_2D.html">2D</a></li>
@@ -67,13 +67,15 @@
 </li>
 <li class="toctree-l3"><a class="reference internal" href="Chap5_2PTUEq.html">Temperature-, pressure- and velocity-equilibrium model</a></li>
 <li class="toctree-l3"><a class="reference internal" href="Chap5_2eulerHomogeneous.html">Homogeneous Euler</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Chap5_2ENSK1D.html">Extended-Navier-Stokes-Korteweg-1D model</a></li>
 <li class="toctree-l3"><a class="reference internal" href="Chap5_2.html#other-tests-cases">Other tests cases</a></li>
 </ul>
 </li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="Chap6_developersGuide_Chapter.html">Developers</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Chap7_license.html">License</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Chap7_license.html">License and authors</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Chap8_citation.html">Citation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="zBibliography.html">Bibliography</a></li>
 </ul>
 
@@ -109,14 +111,14 @@
 <h1>Air shock on helium bubble<a class="headerlink" href="#air-shock-on-helium-bubble" title="Permalink to this heading"></a></h1>
 <p>This is a 2D Cartesian test case representing the interaction between an air shock and a helium bubble.
 Even before the shock, the bubble contains lighter fluid (helium) than the surrounding gas (air).
-Initial conditions are shown in <a class="reference internal" href="#fig-testcases-pueq-heliumairini"><span class="std std-numref">Fig. 74</span></a>. This test is referenced in <em>./libTests/referenceTestCases/PUEq/2D/shockBubble/heliumAir/</em>. The corresponding uncommented line in <em>ECOGEN.xml</em> is:</p>
+Initial conditions are shown in <a class="reference internal" href="#fig-testcases-pueq-heliumairini"><span class="std std-numref">Fig. 78</span></a>. This test is referenced in <em>./libTests/referenceTestCases/PUEq/2D/shockBubble/heliumAir/</em>. The corresponding uncommented line in <em>ECOGEN.xml</em> is:</p>
 <div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;testCase&gt;</span>./libTests/referenceTestCases/PUEq/2D/shockBubble/heliumAir/<span class="nt">&lt;/testCase&gt;</span>
 </pre></div>
 </div>
 <figure class="align-center" id="id1">
 <span id="fig-testcases-pueq-heliumairini"></span><a class="reference internal image-reference" href="_images/heliumAirIni.png"><img alt="_images/heliumAirIni.png" src="_images/heliumAirIni.png" style="width: 554.4px; height: 112.69999999999999px;" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 74 </span><span class="caption-text">Initial conditions.</span><a class="headerlink" href="#id1" title="Permalink to this image"></a></p>
+<p><span class="caption-number">Fig. 78 </span><span class="caption-text">Initial conditions.</span><a class="headerlink" href="#id1" title="Permalink to this image"></a></p>
 </figcaption>
 </figure>
 <p>The initial characteristics of the run are:</p>
@@ -154,7 +156,7 @@ Initial conditions are shown in <a class="reference internal" href="#fig-testcas
 </tr>
 </tbody>
 </table>
-<p>Results are shown in <a class="reference internal" href="#fig-testcases-pueq-heliumairanim"><span class="std std-numref">Fig. 75</span></a>.
+<p>Results are shown in <a class="reference internal" href="#fig-testcases-pueq-heliumairanim"><span class="std std-numref">Fig. 79</span></a>.
 At the beginning, the shock wave impacts the bubble and starts distorting it.
 After the passage of the shock, the bubble is then surrounded by a post-shock state.
 Kelvin-Helmholtz instabilities form at the bubble interface and then the bubble breaks up while moving in the same direction than the shock wave.
@@ -163,7 +165,7 @@ It somehow takes the shape of the bubble (similar to a parabola) and then it pro
 <figure class="align-center" id="id2">
 <span id="fig-testcases-pueq-heliumairanim"></span><a class="reference internal image-reference" href="_images/heliumAirAnim.gif"><img alt="_images/heliumAirAnim.gif" src="_images/heliumAirAnim.gif" style="width: 501.9px; height: 102.19999999999999px;" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 75 </span><span class="caption-text">Evolution of a helium bubble impacted by a shock wave. Visualization using <a class="reference external" href="https://www.paraview.org/">Paraview</a> software.</span><a class="headerlink" href="#id2" title="Permalink to this image"></a></p>
+<p><span class="caption-number">Fig. 79 </span><span class="caption-text">Evolution of a helium bubble impacted by a shock wave. Visualization using <a class="reference external" href="https://www.paraview.org/">Paraview</a> software.</span><a class="headerlink" href="#id2" title="Permalink to this image"></a></p>
 </figcaption>
 </figure>
 </section>
@@ -179,7 +181,7 @@ It somehow takes the shape of the bubble (similar to a parabola) and then it pro
   <hr/>
 
   <div role="contentinfo">
-    <p>&#169; Copyright 2025, code-mphi.</p>
+    <p>&#169; Copyright 2026, code-mphi.</p>
   </div>
 
   Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a

@@ -1,21 +1,21 @@
 <map id="Mixture::getTotalEnergy" name="Mixture::getTotalEnergy">
-<area shape="rect" id="Node000001" title=" " alt="" coords="507,153,684,179"/>
-<area shape="rect" id="Node000002" href="$classFluxUEq.html#a1585841e049f5218057fc40e82af9236" title="Add symetric terms." alt="" coords="240,5,459,31"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="573,144,524,93,492,67,457,44,430,33,432,28,460,40,496,62,528,89,577,141"/>
-<area shape="rect" id="Node000003" href="$classFluxPTUEq.html#ac4bac5d882178b5b1faaa61b338d45de" title="Build the conservative variables for a given cell from primitive one." alt="" coords="267,55,431,80"/>
-<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="561,148,513,121,458,95,417,83,419,78,460,90,516,116,564,143"/>
-<area shape="rect" id="Node000005" href="$classFluxUEq.html#a123de259bc6bf0381848ff9f7176ca9b" title="Build the conservative variables for a given cell from primitive one." alt="" coords="275,104,423,129"/>
-<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="518,153,413,132,414,127,519,148"/>
-<area shape="rect" id="Node000007" href="$classCell.html#ae732f66a0ceadd4eb4cfb4ee22529ce8" title=" " alt="" coords="255,153,443,179"/>
-<area shape="poly" id="edge6_Node000001_Node000007" title=" " alt="" coords="493,169,444,169,444,163,493,163"/>
-<area shape="rect" id="Node000008" href="$classMixEulerHomogeneous.html#a24d6432b488289b4ce1ba732b21190ae" title="Copy mixture in mixture attributes." alt="" coords="263,203,436,243"/>
-<area shape="poly" id="edge7_Node000001_Node000008" title=" " alt="" coords="528,184,436,206,435,201,526,179"/>
-<area shape="rect" id="Node000009" href="$classMixPTUEq.html#a1bed2ba6388fde2e241fcf2403c7af1d" title="Copy mixture in mixture attributes." alt="" coords="261,268,438,293"/>
-<area shape="poly" id="edge8_Node000001_Node000009" title=" " alt="" coords="570,189,521,224,460,258,422,271,420,265,458,253,518,220,567,185"/>
-<area shape="rect" id="Node000010" href="$classMixUEq.html#a8c0dc2a7d7f826709b0b10c4b4ed528c" title="Copy mixture in mixture attributes." alt="" coords="269,317,430,343"/>
-<area shape="poly" id="edge9_Node000001_Node000010" title=" " alt="" coords="580,192,531,251,498,282,460,308,432,320,429,315,457,304,494,278,527,247,576,188"/>
-<area shape="rect" id="Node000004" href="$classFluxPTUEq.html#aa4319e8b8f10d6728fbd1ae7ca85f1bc" title="Temporary store the conservative variables of a given cell." alt="" coords="5,55,192,80"/>
-<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="253,70,192,70,192,65,253,65"/>
-<area shape="rect" id="Node000006" href="$classFluxUEq.html#a86cb5802831c26f95e32c12767c3532a" title="Temporary store the conservative variables of a given cell." alt="" coords="13,104,184,129"/>
-<area shape="poly" id="edge5_Node000005_Node000006" title=" " alt="" coords="262,119,184,119,184,114,262,114"/>
+<area shape="rect" id="Node000001" title=" " alt="" coords="505,169,681,197"/>
+<area shape="rect" id="Node000002" href="$classFluxUEq.html#a1585841e049f5218057fc40e82af9236" title="Add symetric terms." alt="" coords="240,5,457,33"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="571,157,523,102,491,73,456,48,429,36,429,31,458,44,494,69,527,98,576,157"/>
+<area shape="rect" id="Node000003" href="$classFluxPTUEq.html#ac4bac5d882178b5b1faaa61b338d45de" title="Build the conservative variables for a given cell from primitive one." alt="" coords="267,57,430,85"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="559,160,512,130,456,100,421,88,421,83,458,95,515,126,564,160"/>
+<area shape="rect" id="Node000005" href="$classFluxUEq.html#a123de259bc6bf0381848ff9f7176ca9b" title="Build the conservative variables for a given cell from primitive one." alt="" coords="275,109,422,137"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="519,165,456,151,412,140,411,135,458,146,525,165"/>
+<area shape="rect" id="Node000007" href="$classMixEulerHomogeneous.html#a24d6432b488289b4ce1ba732b21190ae" title="Copy mixture in mixture attributes." alt="" coords="262,161,434,206"/>
+<area shape="poly" id="edge6_Node000001_Node000007" title=" " alt="" coords="487,184,435,186,435,181,492,183"/>
+<area shape="rect" id="Node000008" href="$classMixNEq.html#afeccb9a87940f907dbd751204fadf50d" title="Copy mixture in mixture attributes." alt="" coords="268,229,428,257"/>
+<area shape="poly" id="edge7_Node000001_Node000008" title=" " alt="" coords="519,202,458,220,412,231,411,226,456,215,525,201"/>
+<area shape="rect" id="Node000009" href="$classMixPTUEq.html#a1bed2ba6388fde2e241fcf2403c7af1d" title="Copy mixture in mixture attributes." alt="" coords="260,281,436,309"/>
+<area shape="poly" id="edge8_Node000001_Node000009" title=" " alt="" coords="564,205,515,241,458,271,422,283,420,278,456,266,512,236,559,207"/>
+<area shape="rect" id="Node000010" href="$classMixUEq.html#a8c0dc2a7d7f826709b0b10c4b4ed528c" title="Copy mixture in mixture attributes." alt="" coords="268,333,428,361"/>
+<area shape="poly" id="edge9_Node000001_Node000010" title=" " alt="" coords="576,208,527,268,494,298,458,323,430,335,428,330,456,318,491,294,523,264,571,211"/>
+<area shape="rect" id="Node000004" href="$classFluxPTUEq.html#aa4319e8b8f10d6728fbd1ae7ca85f1bc" title="Temporary store the conservative variables of a given cell." alt="" coords="5,57,192,85"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="249,73,193,74,191,69,253,70"/>
+<area shape="rect" id="Node000006" href="$classFluxUEq.html#a86cb5802831c26f95e32c12767c3532a" title="Temporary store the conservative variables of a given cell." alt="" coords="13,109,184,137"/>
+<area shape="poly" id="edge5_Node000005_Node000006" title=" " alt="" coords="257,125,185,126,183,121,261,122"/>
 </map>

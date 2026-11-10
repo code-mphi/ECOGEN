@@ -1,0 +1,39 @@
+<map id="Model::Model" name="Model::Model">
+<area shape="rect" id="Node000001" title="Generic model constructor." alt="" coords="618,360,727,388"/>
+<area shape="rect" id="Node000002" href="$classModEuler.html#ad8d2990e6c147d266142e4fb5edd4b66" title="Euler model constructor." alt="" coords="348,5,499,33"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="669,343,666,282,652,200,639,158,621,117,598,79,568,47,536,28,500,20,499,15,538,23,572,42,602,76,626,114,644,156,657,199,671,281,674,346"/>
+<area shape="rect" id="Node000003" href="$classModEulerHomogeneous.html#a82156859fed44ba6b2fd850ed549a7f0" title="Homogeneous Euler model constructor." alt="" coords="331,57,516,102"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="666,343,658,295,641,233,612,169,592,141,568,116,543,100,517,90,515,84,546,95,572,112,596,137,616,167,646,231,663,294,671,345"/>
+<area shape="rect" id="Node000004" href="$classModExtendedNavierStokesKorteweg1D.html#a17277db4daceae92625bfae375ed71d1" title="ExtendedNavierStokesKorteweg1D model constructor." alt="" coords="277,126,570,171"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="662,344,649,309,630,265,604,222,568,185,552,174,551,169,572,181,608,218,635,263,654,307,667,346"/>
+<area shape="rect" id="Node000005" href="$classModExtendedNavierStokesKorteweg1D.html#a29b5b94ce53f470507312e4dc13fbe94" title="ExtendedNavierStokesKorteweg1D model constructor." alt="" coords="277,196,570,240"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="653,346,619,300,595,275,569,255,547,243,547,238,571,250,599,271,623,296,659,347"/>
+<area shape="rect" id="Node000006" href="$classModExtendedNavierStokesKorteweg1D.html#a15158c68d9db29988755725ad311f52a" title="ExtendedNavierStokesKorteweg1D model constructor." alt="" coords="277,265,570,310"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="632,352,569,324,534,313,533,307,571,319,637,352"/>
+<area shape="rect" id="Node000007" href="$classModNEq.html#a12171ec04e8e715a70a1421ead168fc0" title="NEq model constructor." alt="" coords="355,333,492,361"/>
+<area shape="poly" id="edge6_Node000001_Node000007" title=" " alt="" coords="600,367,493,357,492,352,605,366"/>
+<area shape="rect" id="Node000013" href="$classModNEq.html#a247897f77ae83adf6295e520d8eef607" title="Generic model constructor (used by derived classes)." alt="" coords="355,385,492,413"/>
+<area shape="poly" id="edge12_Node000001_Node000013" title=" " alt="" coords="600,382,493,395,492,390,605,380"/>
+<area shape="rect" id="Node000014" href="$classModPTUEq.html#a838cd7961411349f884ad63baea746a0" title="Thermal equilibrium model constructor." alt="" coords="339,437,508,465"/>
+<area shape="poly" id="edge13_Node000001_Node000014" title=" " alt="" coords="632,397,571,427,509,442,507,437,569,422,637,394"/>
+<area shape="rect" id="Node000015" href="$classModUEq.html#a4efa324500a5c8cbe3248329807a902c" title="UEq model constructor." alt="" coords="355,489,492,517"/>
+<area shape="poly" id="edge14_Node000001_Node000015" title=" " alt="" coords="655,399,619,442,597,462,571,479,533,494,493,502,492,497,531,489,569,474,593,458,616,439,651,402"/>
+<area shape="rect" id="Node000017" href="$classModUEq.html#a604e6c366dbdc87efd145b8b5b2be627" title="Generic model constructor (used by derived classes)." alt="" coords="355,541,492,569"/>
+<area shape="poly" id="edge16_Node000001_Node000017" title=" " alt="" coords="663,400,649,434,630,469,604,503,571,531,533,548,493,557,492,551,532,543,569,526,600,499,625,466,645,431,659,404"/>
+<area shape="rect" id="Node000018" href="$classModUEqTotEnergy.html#a3ee92381163519e7ddc0fed6577f7412" title="UEq model constructor." alt="" coords="314,593,533,638"/>
+<area shape="poly" id="edge17_Node000001_Node000018" title=" " alt="" coords="667,401,657,444,638,492,610,541,592,563,572,583,535,603,533,598,568,578,588,560,605,538,633,490,652,442,664,404"/>
+<area shape="rect" id="Node000019" href="$classModUEqTotEnergy.html#a69534a0d8568989b0fd9bce61f0b26f1" title="Generic model constructor (used by derived classes)." alt="" coords="314,662,533,707"/>
+<area shape="poly" id="edge18_Node000001_Node000019" title=" " alt="" coords="671,401,665,457,648,524,635,559,618,593,597,624,572,652,554,664,534,674,533,669,551,660,568,648,593,621,614,590,630,557,643,522,659,456,668,405"/>
+<area shape="rect" id="Node000008" href="$classModNEqDEM.html#ae821a875399888d09fc223e144a92dc6" title="NEq model constructor." alt="" coords="18,221,216,249"/>
+<area shape="poly" id="edge7_Node000007_Node000008" title=" " alt="" coords="337,344,306,338,275,324,259,309,250,293,242,278,227,264,204,252,202,247,230,260,246,275,255,291,263,306,278,320,308,333,342,342"/>
+<area shape="rect" id="Node000009" href="$classModNEqDEM.html#a9ef09448f1de97992fcba7e865c965a2" title="Generic model constructor (used by derived classes)." alt="" coords="18,273,216,301"/>
+<area shape="poly" id="edge8_Node000007_Node000009" title=" " alt="" coords="337,335,276,324,182,304,181,299,277,319,342,332"/>
+<area shape="rect" id="Node000010" href="$classModNEqHLL.html#a4b938d0b2ae17a87ca3fe01139a93bef" title="NEq model constructor with HLL solver." alt="" coords="24,325,210,353"/>
+<area shape="poly" id="edge9_Node000007_Node000010" title=" " alt="" coords="337,347,211,344,209,339,341,343"/>
+<area shape="rect" id="Node000011" href="$classModNEqHLLAC.html#aa0a590b312b9b4756c6f44ef94066bf0" title="NEq model constructor with HLLAC solver." alt="" coords="5,377,229,405"/>
+<area shape="poly" id="edge10_Node000007_Node000011" title=" " alt="" coords="337,361,219,379,217,374,341,357"/>
+<area shape="rect" id="Node000012" href="$classModNEqHLLC4Waves.html#abcb4d2e08aef74653bdc8a1afd56ede9" title="NEq model constructor with HLLC 4 waves." alt="" coords="6,429,228,474"/>
+<area shape="poly" id="edge11_Node000007_Node000012" title=" " alt="" coords="337,356,308,365,278,376,264,386,254,396,245,408,230,419,206,430,203,426,227,414,241,404,250,393,260,382,275,371,306,360,341,353"/>
+<area shape="rect" id="Node000016" href="$classModPUEq.html#abb5dca53e451303d23bfebc8666cafb4" title="PUEq model constructor." alt="" coords="40,497,194,525"/>
+<area shape="poly" id="edge15_Node000015_Node000016" title=" " alt="" coords="337,507,194,512,193,507,341,504"/>
+</map>

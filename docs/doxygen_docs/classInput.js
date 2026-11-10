@@ -12,6 +12,7 @@ var classInput =
     [ "inputMain", "classInput.html#a3449c12b43fa18175aa2a371084d76ac", null ],
     [ "inputMesh", "classInput.html#ae447e6121efbb74c4a9a8b60dac39d68", null ],
     [ "inputModel", "classInput.html#ad716598459e938b3b05235f5f03163a6", null ],
+    [ "readAxisStretching", "classInput.html#aa0d5a1558acb5f0cfa5c816425bab6b0", null ],
     [ "readInputXML", "classInput.html#adbc917eada08436797ba6e063fcd095a", null ],
     [ "verifyCompatibilityInput", "classInput.html#ae7f8b8efb16515e79317612ddb4eb578", null ],
     [ "m_nameCI", "classInput.html#ae6770877f5bc45584f2b490bd7c1ae46", null ],

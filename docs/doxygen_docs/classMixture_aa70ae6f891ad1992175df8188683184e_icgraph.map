@@ -1,29 +1,33 @@
 <map id="Mixture::getEnergy" name="Mixture::getEnergy">
-<area shape="rect" id="Node000001" title=" " alt="" coords="535,307,681,333"/>
-<area shape="rect" id="Node000002" href="$classRelaxationPT.html#a3e54b07b9bfac5849c799570fdf6b9ac" title="Pressure determination with analytical formulae for 2 phases governed by SG or IG EOS." alt="" coords="271,5,450,45"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="600,295,588,244,567,180,533,115,511,85,485,59,449,40,452,35,488,55,515,82,537,112,572,178,593,243,605,293"/>
-<area shape="rect" id="Node000004" href="$classMixEulerHomogeneous.html#a24d6432b488289b4ce1ba732b21190ae" title="Copy mixture in mixture attributes." alt="" coords="274,69,447,109"/>
-<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="596,295,581,257,557,210,525,163,485,124,447,104,449,100,488,119,530,160,562,207,585,254,601,293"/>
-<area shape="rect" id="Node000005" href="$classMixPTUEq.html#a1bed2ba6388fde2e241fcf2403c7af1d" title="Copy mixture in mixture attributes." alt="" coords="272,134,449,159"/>
-<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="592,297,550,233,520,200,485,173,448,158,450,153,488,168,524,196,554,230,596,294"/>
-<area shape="rect" id="Node000006" href="$classMixUEq.html#a8c0dc2a7d7f826709b0b10c4b4ed528c" title="Copy mixture in mixture attributes." alt="" coords="280,183,441,209"/>
-<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="584,299,541,259,514,239,486,222,441,208,443,203,488,218,517,234,545,255,588,295"/>
-<area shape="rect" id="Node000007" href="$classFluxPUEq.html#a3e734d6e31c8579b43269e7e477a7f72" title="Method to correct energy in non conservative models using total energy conservation." alt="" coords="259,233,462,258"/>
-<area shape="poly" id="edge6_Node000001_Node000007" title=" " alt="" coords="568,304,486,272,441,261,442,256,487,267,570,299"/>
-<area shape="rect" id="Node000008" href="$classRelaxationPTMu.html#a942e19d92434d4c0a073a32f28137995" title="Stiff Thermo&#45;Chemical relaxation method." alt="" coords="259,282,462,307"/>
-<area shape="poly" id="edge7_Node000001_Node000008" title=" " alt="" coords="521,314,462,308,462,302,521,308"/>
-<area shape="rect" id="Node000009" href="$classModPTUEq.html#aa0ac2c4758d753d3102f2be36748187c" title="Inlet tank half Riemann solver." alt="" coords="235,331,487,357"/>
-<area shape="poly" id="edge8_Node000001_Node000009" title=" " alt="" coords="521,331,487,334,487,329,521,326"/>
-<area shape="rect" id="Node000010" href="$classModEulerHomogeneous.html#a65755d3b94dea41e68252634283010df" title="Cell to cell Riemann solver." alt="" coords="272,381,449,421"/>
-<area shape="poly" id="edge9_Node000001_Node000010" title=" " alt="" coords="566,341,488,371,444,384,442,379,486,365,564,336"/>
-<area shape="rect" id="Node000011" href="$classModPTUEq.html#ad9dbc105b674a7fdf5f4ff9cf828b1f2" title="Cell to cell Riemann solver." alt="" coords="245,446,476,471"/>
-<area shape="poly" id="edge10_Node000001_Node000011" title=" " alt="" coords="591,345,547,392,519,416,488,436,456,448,454,443,485,431,516,412,544,388,587,342"/>
-<area shape="rect" id="Node000012" href="$classModUEq.html#a387ca7a1a697c3bdef4cc12a8266e6aa" title="Cell to cell Riemann solver." alt="" coords="253,495,468,521"/>
-<area shape="poly" id="edge11_Node000001_Node000012" title=" " alt="" coords="598,347,581,379,556,417,526,454,488,485,462,498,460,493,485,480,522,450,552,413,576,376,593,344"/>
-<area shape="rect" id="Node000013" href="$classModUEq.html#a90c14231f3e32e52ab89c3fea6f3b103" title="Cell to cell Riemann solver + compute fluxBuffMRF for MRF interface." alt="" coords="239,545,483,570"/>
-<area shape="poly" id="edge12_Node000001_Node000013" title=" " alt="" coords="602,347,588,389,565,440,532,491,511,514,488,534,465,547,463,542,485,530,508,510,528,488,560,437,583,387,597,345"/>
-<area shape="rect" id="Node000014" href="$classModPTUEq.html#a125a9ee8170ca1b8ee9c4ed0ce1ebf3d" title="Outlet at imposed pressure half Riemann solver." alt="" coords="244,595,477,635"/>
-<area shape="poly" id="edge13_Node000001_Node000014" title=" " alt="" coords="605,347,593,398,571,461,537,527,515,557,488,583,468,597,465,592,485,579,511,554,532,524,566,459,588,396,600,346"/>
-<area shape="rect" id="Node000003" href="$classRelaxationPT.html#af732e508ebf612a869b22aabc7515390" title="Stiff Pressure&#45;Temperature relaxation method." alt="" coords="5,13,187,38"/>
-<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="257,28,187,28,187,23,257,23"/>
+<area shape="rect" id="Node000001" title=" " alt="" coords="534,378,679,406"/>
+<area shape="rect" id="Node000002" href="$classRelaxationPT.html#a3e54b07b9bfac5849c799570fdf6b9ac" title="Pressure determination with analytical formulae for 2 phases governed by SG or IG EOS." alt="" coords="271,5,449,50"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="601,361,593,301,573,220,558,178,539,136,514,98,484,64,467,52,450,43,449,38,470,47,488,60,518,95,543,134,563,176,578,218,598,300,606,363"/>
+<area shape="rect" id="Node000004" href="$classMixEulerHomogeneous.html#a24d6432b488289b4ce1ba732b21190ae" title="Copy mixture in mixture attributes." alt="" coords="274,75,446,119"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="598,362,585,313,564,251,531,188,509,159,484,134,466,121,447,112,445,107,468,117,488,130,513,155,535,185,569,249,591,312,603,363"/>
+<area shape="rect" id="Node000005" href="$classMixNEq.html#afeccb9a87940f907dbd751204fadf50d" title="Copy mixture in mixture attributes." alt="" coords="280,143,440,171"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="595,362,580,323,557,275,526,226,506,204,484,186,463,174,441,166,440,161,465,169,488,181,510,201,530,223,562,272,585,321,600,364"/>
+<area shape="rect" id="Node000006" href="$classMixPTUEq.html#a1bed2ba6388fde2e241fcf2403c7af1d" title="Copy mixture in mixture attributes." alt="" coords="272,195,448,223"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="589,363,549,300,519,266,485,238,449,222,448,217,487,233,523,262,553,297,595,364"/>
+<area shape="rect" id="Node000007" href="$classMixUEq.html#a8c0dc2a7d7f826709b0b10c4b4ed528c" title="Copy mixture in mixture attributes." alt="" coords="280,247,440,275"/>
+<area shape="poly" id="edge6_Node000001_Node000007" title=" " alt="" coords="580,366,539,327,513,307,485,290,441,274,440,269,487,285,516,302,543,323,586,366"/>
+<area shape="rect" id="Node000008" href="$classFluxPUEq.html#a3e734d6e31c8579b43269e7e477a7f72" title="Method to correct energy in non conservative models using total energy conservation." alt="" coords="259,299,460,327"/>
+<area shape="poly" id="edge7_Node000001_Node000008" title=" " alt="" coords="560,371,485,342,441,330,440,325,487,337,565,370"/>
+<area shape="rect" id="Node000009" href="$classRelaxationPTMu.html#a942e19d92434d4c0a073a32f28137995" title="Stiff Thermo&#45;Chemical relaxation method." alt="" coords="259,351,460,379"/>
+<area shape="poly" id="edge8_Node000001_Node000009" title=" " alt="" coords="516,383,462,379,460,373,521,381"/>
+<area shape="rect" id="Node000010" href="$classModPTUEq.html#aa0ac2c4758d753d3102f2be36748187c" title="Inlet tank half Riemann solver." alt="" coords="234,403,486,431"/>
+<area shape="poly" id="edge9_Node000001_Node000010" title=" " alt="" coords="516,402,487,407,485,402,521,400"/>
+<area shape="rect" id="Node000011" href="$classModEulerHomogeneous.html#a65755d3b94dea41e68252634283010df" title="Cell to cell Riemann solver." alt="" coords="272,455,448,499"/>
+<area shape="poly" id="edge10_Node000001_Node000011" title=" " alt="" coords="558,414,487,445,450,457,447,452,485,440,563,411"/>
+<area shape="rect" id="Node000012" href="$classModPTUEq.html#ad9dbc105b674a7fdf5f4ff9cf828b1f2" title="Cell to cell Riemann solver." alt="" coords="245,523,475,551"/>
+<area shape="poly" id="edge11_Node000001_Node000012" title=" " alt="" coords="589,416,546,469,518,493,487,514,462,525,459,520,485,509,515,489,542,465,585,420"/>
+<area shape="rect" id="Node000013" href="$classModUEq.html#a387ca7a1a697c3bdef4cc12a8266e6aa" title="Cell to cell Riemann solver." alt="" coords="253,575,467,603"/>
+<area shape="poly" id="edge12_Node000001_Node000013" title=" " alt="" coords="596,418,580,454,556,493,525,532,487,565,463,577,461,572,485,560,521,529,551,490,575,452,592,421"/>
+<area shape="rect" id="Node000014" href="$classModUEq.html#a90c14231f3e32e52ab89c3fea6f3b103" title="Cell to cell Riemann solver + compute fluxBuffMRF for MRF interface." alt="" coords="238,627,482,655"/>
+<area shape="poly" id="edge13_Node000001_Node000014" title=" " alt="" coords="600,418,587,465,564,518,532,571,511,596,488,616,466,629,463,624,484,612,507,592,527,568,560,515,582,463,597,422"/>
+<area shape="rect" id="Node000015" href="$classModUEq.html#ad398afb996ab8f5a2a064ef977a2ca7d" title="Moving wall half Riemann solver." alt="" coords="234,679,486,707"/>
+<area shape="poly" id="edge14_Node000001_Node000015" title=" " alt="" coords="603,419,593,475,572,542,557,577,538,610,515,641,488,668,467,681,465,676,484,664,511,638,534,607,552,574,567,540,588,473,600,423"/>
+<area shape="rect" id="Node000016" href="$classModPTUEq.html#a125a9ee8170ca1b8ee9c4ed0ce1ebf3d" title="Outlet at imposed pressure half Riemann solver." alt="" coords="244,731,476,775"/>
+<area shape="poly" id="edge15_Node000001_Node000016" title=" " alt="" coords="605,419,597,484,578,564,563,606,543,648,518,686,488,720,471,732,469,728,484,716,514,683,538,645,558,604,573,562,592,483,602,423"/>
+<area shape="rect" id="Node000003" href="$classRelaxationPT.html#af732e508ebf612a869b22aabc7515390" title="Stiff Pressure&#45;Temperature relaxation method." alt="" coords="5,14,186,42"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="253,29,187,30,185,25,257,26"/>
 </map>

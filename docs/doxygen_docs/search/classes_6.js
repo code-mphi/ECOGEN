@@ -10,10 +10,15 @@ var searchData=
   ['flux_7',['Flux',['../classFlux.html',1,'']]],
   ['fluxeuler_8',['FluxEuler',['../classFluxEuler.html',1,'']]],
   ['fluxeulerhomogeneous_9',['FluxEulerHomogeneous',['../classFluxEulerHomogeneous.html',1,'']]],
-  ['fluxeulerkorteweg_10',['FluxEulerKorteweg',['../classFluxEulerKorteweg.html',1,'']]],
-  ['fluxnonlinearschrodinger_11',['FluxNonLinearSchrodinger',['../classFluxNonLinearSchrodinger.html',1,'']]],
-  ['fluxptueq_12',['FluxPTUEq',['../classFluxPTUEq.html',1,'']]],
-  ['fluxpueq_13',['FluxPUEq',['../classFluxPUEq.html',1,'']]],
-  ['fluxueq_14',['FluxUEq',['../classFluxUEq.html',1,'']]],
-  ['fluxueqtotenergy_15',['FluxUEqTotEnergy',['../classFluxUEqTotEnergy.html',1,'']]]
+  ['fluxextendednavierstokeskorteweg1d_10',['FluxExtendedNavierStokesKorteweg1D',['../classFluxExtendedNavierStokesKorteweg1D.html',1,'']]],
+  ['fluxneq_11',['FluxNEq',['../classFluxNEq.html',1,'']]],
+  ['fluxneqdem_12',['FluxNEqDEM',['../classFluxNEqDEM.html',1,'']]],
+  ['fluxneqhll_13',['FluxNEqHLL',['../classFluxNEqHLL.html',1,'']]],
+  ['fluxneqhllac_14',['FluxNEqHLLAC',['../classFluxNEqHLLAC.html',1,'']]],
+  ['fluxneqhllbn_15',['FluxNEqHLLBN',['../classFluxNEqHLLBN.html',1,'']]],
+  ['fluxneqhllc4waves_16',['FluxNEqHLLC4Waves',['../classFluxNEqHLLC4Waves.html',1,'']]],
+  ['fluxptueq_17',['FluxPTUEq',['../classFluxPTUEq.html',1,'']]],
+  ['fluxpueq_18',['FluxPUEq',['../classFluxPUEq.html',1,'']]],
+  ['fluxueq_19',['FluxUEq',['../classFluxUEq.html',1,'']]],
+  ['fluxueqtotenergy_20',['FluxUEqTotEnergy',['../classFluxUEqTotEnergy.html',1,'']]]
 ];

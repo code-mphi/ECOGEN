@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Shock tubes &mdash; ECOGEN 6.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/sphinx_highlight.js"></script>
+        <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Cavitation" href="Chap5_3NEq_1D_3cavitation.html" />
+    <link rel="prev" title="Transport of water–air mixture" href="Chap5_3NEq_1D_1transportWaterAir.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            ECOGEN
+          </a>
+              <div class="version">
+                6.0
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="Chap1_introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Chap2_installation_Chapter.html">Installation instructions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Chap3_IO_Chapter.html">I/O descriptions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Chap4_tutorials_Chapter.html">Tutorials</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="Chap5_testCases_Chapter.html">Test cases</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="Chap5_1Euler.html">Single-phase test cases</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="Chap5_2.html">Multiphase test cases</a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="Chap5_3NEq.html">Non-equilibrium model</a><ul class="current">
+<li class="toctree-l4 current"><a class="reference internal" href="Chap5_3NEq_1D.html">1D</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Chap5_3NEq_2D.html">2D</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="Chap5_2UEq.html">Velocity-equilibrium model</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Chap5_2UEqTotE.html">Velocity-equilibrium model based on total energies</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Chap5_2PUEq.html">Pressure- and velocity-equilibrium model</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Chap5_2PTUEq.html">Temperature-, pressure- and velocity-equilibrium model</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Chap5_2eulerHomogeneous.html">Homogeneous Euler</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Chap5_2ENSK1D.html">Extended-Navier-Stokes-Korteweg-1D model</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Chap5_2.html#other-tests-cases">Other tests cases</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="Chap6_developersGuide_Chapter.html">Developers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Chap7_license.html">License and authors</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Chap8_citation.html">Citation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="zBibliography.html">Bibliography</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">ECOGEN</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="Chap5_testCases_Chapter.html">Test cases</a></li>
+          <li class="breadcrumb-item"><a href="Chap5_2.html">Multiphase test cases</a></li>
+          <li class="breadcrumb-item"><a href="Chap5_3NEq.html">Non-equilibrium model</a></li>
+          <li class="breadcrumb-item"><a href="Chap5_3NEq_1D.html">1D</a></li>
+      <li class="breadcrumb-item active">Shock tubes</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/Chap5_3NEq_1D_2shockTubes.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="shock-tubes">
+<h1>Shock tubes<a class="headerlink" href="#shock-tubes" title="Permalink to this heading"></a></h1>
+<section id="water-air-interface">
+<h2>Water–Air interface<a class="headerlink" href="#water-air-interface" title="Permalink to this heading"></a></h2>
+<p>This test case is important as it represents a limit case, realised with the Discrete Equation Method and the HLLC Riemann solver. Specifically, it is equivalent to solving the Euler equations with two pure fluids, resulting in an interface between the phases without mixture. Consequently, an exact solution exists, allowing comparison, as shown in <a class="reference internal" href="#fig-testcases-neqdem-shocktube1d-equalvolumefraction-densitymixture"><span class="std std-numref">Fig. 64</span></a>. The equation of state used is stiffened gas with <span class="math notranslate nohighlight">\(\gamma = 1.4\)</span> and <span class="math notranslate nohighlight">\(P_{\infty} = 0\)</span> for air and <span class="math notranslate nohighlight">\(\gamma = 4.4\)</span> and <span class="math notranslate nohighlight">\(P_{\infty} = 6 \times 10^{8}\)</span>. The input files for this test can be found in <em>./libTests/referenceTestCases/NEqDEM/1D/shockTubes/interfaceWaterAir/</em>. The corresponding uncommented line in <em>ECOGEN.xml</em> is:</p>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;testCase&gt;</span>./libTests/referenceTestCases/NEqDEM/1D/shockTubes/interfaceWaterAir/<span class="nt">&lt;/testCase&gt;</span>
+</pre></div>
+</div>
+<figure class="align-center" id="fig-testcases-neqdem-shocktube1d-interface-image">
+<a class="reference internal image-reference" href="_images/representation.png"><img alt="_images/representation.png" src="_images/representation.png" style="width: 416.0px; height: 142.0px;" /></a>
+</figure>
+<div class="math notranslate nohighlight">
+\[
+\begin{array}{|c|c|c|c|c|}
+    \hline
+    &amp; \text{High pressure} &amp; \text{High pressure} &amp; \text{Low pressure} &amp; \text{Low pressure} \\ \hline
+    \text{Phase} &amp; \text{Water} &amp; \text{Air} &amp; \text{Water} &amp; \text{Air} \\ \hline
+    \rho \, [\text{kg/m}^3] &amp; 1000 &amp; 50 &amp; 1000 &amp; 50 \\ \hline
+    u \, [\text{m/s}] &amp; 0 &amp; 0 &amp; 0 &amp; 0 \\ \hline
+    P \, [\text{Pa}] &amp; 10^{9} &amp; 10^{9} &amp; 10^{5} &amp; 10^{5} \\ \hline
+\end{array}
+\]
+
+Initial conditions for 1D shock tube of water-air interface.</div><p>The initial characteristics of the run are:</p>
+<div class="math notranslate nohighlight">
+\begin{array}{|l|l|}
+\hline
+\textbf{Characteristic} &amp; \textbf{Value} \\
+\hline
+\text{dimension} &amp; 1 \text{ m} \\
+\text{mesh size} &amp; 1000 \\
+\text{interface position} &amp; 0.7 \text{ m} \\
+\text{boundary conditions} &amp; \text{non-reflecting} \\
+\text{final solution time} &amp; 241 \times 10^{-6} \ \mathrm{s}  \\
+\text{solution printing frequency} &amp; 12 \times 10^{-6} \ \mathrm{s} \\
+\text{precision} &amp; \text{1st order} \\
+\hline
+\end{array}</div><figure class="align-center" id="id3">
+<span id="fig-testcases-neqdem-shocktube1d-equalvolumefraction-densitymixture"></span><a class="reference internal image-reference" href="_images/densityMixture.png"><img alt="_images/densityMixture.png" src="_images/densityMixture.png" style="width: 528.0px; height: 396.0px;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 64 </span><span class="caption-text">Mixture density comparison between exact solution and Discrete Equation Method.</span><a class="headerlink" href="#id3" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+<div class="figures-row docutils container" id="fig-testcases-neqdem-shocktube1d-interface-gif">
+<figure class="align-center">
+<a class="reference internal image-reference" href="_images/volumeFraction1.gif"><img alt="_images/volumeFraction1.gif" src="_images/volumeFraction1.gif" style="width: 75%;" /></a>
+</figure>
+<figure class="align-center">
+<a class="reference internal image-reference" href="_images/velocity1.gif"><img alt="_images/velocity1.gif" src="_images/velocity1.gif" style="width: 75%;" /></a>
+</figure>
+<figure class="align-center">
+<a class="reference internal image-reference" href="_images/pressure1.gif"><img alt="_images/pressure1.gif" src="_images/pressure1.gif" style="width: 75%;" /></a>
+</figure>
+<figure class="align-center">
+<a class="reference internal image-reference" href="_images/density1.gif"><img alt="_images/density1.gif" src="_images/density1.gif" style="width: 75%;" /></a>
+</figure>
+</div>
+</section>
+<section id="water-air-mixture-with-equal-volume-fraction">
+<h2>Water–Air mixture with equal volume fraction<a class="headerlink" href="#water-air-mixture-with-equal-volume-fraction" title="Permalink to this heading"></a></h2>
+<p>This test deals with shocks in mixture, realised with the Discrete Equation Method and the HLLC Riemann solver. Since we consider the volume fraction to be perfectly equal, this test is equivalent to solving the Euler equations twice with two pure fluids, allowing for a comparison with an exact solution. The outcome of this comparison is shown in <a class="reference internal" href="#fig-testcases-neqdem-shocktube1d-equalvolumefraction-comparison"><span class="std std-numref">Fig. 65</span></a>, along with another solver developed by Furfaro &amp; Saurel <span id="id1">[<a class="reference internal" href="zBibliography.html#id9" title="D. Furfaro and R. Saurel. A simple HLLC-type Riemann solver for compressible non-equilibrium two-phase flows. Computers &amp; Fluids, 111:159-178, 2015.">FS15</a>]</span>. The equation of state used is stiffened gas with <span class="math notranslate nohighlight">\(\gamma = 1.4\)</span> and <span class="math notranslate nohighlight">\(P_{\infty} = 0\)</span> for air and <span class="math notranslate nohighlight">\(\gamma = 4.4\)</span> and <span class="math notranslate nohighlight">\(P_{\infty} = 6 \times 10^{8}\)</span> for water. Input files for this test are available in <em>./libTests/referenceTestCases/NEqDEM/1D/shockTubes/HPLeftWaterAirAlphaEqual_1e9/</em>. The corresponding uncommented line in <em>ECOGEN.xml</em> is:</p>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;testCase&gt;</span>./libTests/referenceTestCases/NEqDEM/1D/shockTubes/HPLeftWaterAirAlphaEqual_1e9/<span class="nt">&lt;/testCase&gt;</span>
+</pre></div>
+</div>
+<figure class="align-center" id="fig-testcases-neqdem-shocktube1d-equalvolumefraction-image">
+<a class="reference internal image-reference" href="_images/shockTubeWaterAirAlphaEqual.png"><img alt="_images/shockTubeWaterAirAlphaEqual.png" src="_images/shockTubeWaterAirAlphaEqual.png" style="width: 411.0px; height: 135.0px;" /></a>
+</figure>
+<div class="math notranslate nohighlight">
+\[
+\begin{array}{|c|c|c|c|c|}
+    \hline
+    &amp; \text{High pressure} &amp; \text{High pressure} &amp; \text{Low pressure} &amp; \text{Low pressure} \\ \hline
+    \text{Phase} &amp; \text{Water} &amp; \text{Air} &amp; \text{Water} &amp; \text{Air} \\ \hline
+    \rho \, [\text{kg/m}^3] &amp; 1000 &amp; 50 &amp; 1000 &amp; 50 \\ \hline
+    u \, [\text{m/s}] &amp; 0 &amp; 0 &amp; 0 &amp; 0 \\ \hline
+    P \, [\text{Pa}] &amp; 10^{9} &amp; 10^{9} &amp; 10^{5} &amp; 10^{5} \\ \hline
+\end{array}
+\]
+Initial conditions for 1D shock tube of water-air mixture with equal volume fraction.</div><p>The initial characteristics of the run are:</p>
+<div class="math notranslate nohighlight">
+\begin{array}{|l|l|}
+\hline
+\textbf{Characteristic} &amp; \textbf{Value} \\
+\hline
+\text{dimension} &amp; 1 \text{ m} \\
+\text{mesh size} &amp; 1000 \\
+\text{interface position} &amp; 0.5 \text{ m} \\
+\text{boundary conditions} &amp; \text{non-reflecting} \\
+\text{final solution time} &amp; 80 \times 10^{-6} \ \mathrm{s}  \\
+\text{solution printing frequency} &amp; 4 \times 10^{-6} \ \mathrm{s} \\
+\text{precision} &amp; \text{1st order} \\
+\hline
+\end{array}</div><figure class="align-center" id="id4">
+<span id="fig-testcases-neqdem-shocktube1d-equalvolumefraction-comparison"></span><a class="reference internal image-reference" href="_images/densityComparison.png"><img alt="_images/densityComparison.png" src="_images/densityComparison.png" style="width: 75%;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 65 </span><span class="caption-text">Phase density comparison between exact solution, Discrete Equation Method and Furfaro &amp; Saurel solver.</span><a class="headerlink" href="#id4" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+<div class="figures-row docutils container" id="fig-testcases-neqdem-shocktube1d-equalvolumefraction-gif">
+<figure class="align-center">
+<a class="reference internal image-reference" href="_images/volumeFraction2.gif"><img alt="_images/volumeFraction2.gif" src="_images/volumeFraction2.gif" style="width: 75%;" /></a>
+</figure>
+<figure class="align-center">
+<a class="reference internal image-reference" href="_images/velocity2.gif"><img alt="_images/velocity2.gif" src="_images/velocity2.gif" style="width: 75%;" /></a>
+</figure>
+<figure class="align-center">
+<a class="reference internal image-reference" href="_images/pressure2.gif"><img alt="_images/pressure2.gif" src="_images/pressure2.gif" style="width: 75%;" /></a>
+</figure>
+<figure class="align-center">
+<a class="reference internal image-reference" href="_images/density2.gif"><img alt="_images/density2.gif" src="_images/density2.gif" style="width: 75%;" /></a>
+</figure>
+</div>
+</section>
+<section id="water-air-mixture-with-non-equal-volume-fraction">
+<h2>Water–Air mixture with non-equal volume fraction<a class="headerlink" href="#water-air-mixture-with-non-equal-volume-fraction" title="Permalink to this heading"></a></h2>
+<p>This test deals with shocks in mixture, realised with the Discrete Equation Method and the HLLC Riemann solver. The equation of state used is stiffened gas with <span class="math notranslate nohighlight">\(\gamma = 1.4\)</span> and <span class="math notranslate nohighlight">\(P_{\infty} = 0\)</span> for air and <span class="math notranslate nohighlight">\(\gamma = 4.4\)</span> and <span class="math notranslate nohighlight">\(P_{\infty} = 6 \times 10^{8}\)</span> for water. Input files for this test are available in <em>./libTests/referenceTestCases/NEqDEM/1D/shockTubes/HPLeftWaterAirAlphaDiff_2e8/</em>. The corresponding uncommented line in <em>ECOGEN.xml</em> is:</p>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;testCase&gt;</span>./libTests/referenceTestCases/NEqDEM/1D/shockTubes/HPLeftWaterAirAlphaDiff_2e8/<span class="nt">&lt;/testCase&gt;</span>
+</pre></div>
+</div>
+<figure class="align-center" id="fig-testcases-neqdem-shocktube1d-nonequalvolumefraction-image">
+<a class="reference internal image-reference" href="_images/shockTubeWaterAirAlphaDiff.png"><img alt="_images/shockTubeWaterAirAlphaDiff.png" src="_images/shockTubeWaterAirAlphaDiff.png" style="width: 414.0px; height: 133.0px;" /></a>
+</figure>
+<div class="math notranslate nohighlight">
+\[
+\begin{array}{|c|c|c|c|c|}
+    \hline
+    &amp; \text{High pressure} &amp; \text{High pressure} &amp; \text{Low pressure} &amp; \text{Low pressure} \\ \hline
+    \text{Phase} &amp; \text{Water} &amp; \text{Air} &amp; \text{Water} &amp; \text{Air} \\ \hline
+    \rho \, [\text{kg/m}^3] &amp; 1000 &amp; 50 &amp; 1000 &amp; 50 \\ \hline
+    u \, [\text{m/s}] &amp; 0 &amp; 0 &amp; 0 &amp; 0 \\ \hline
+    P \, [\text{Pa}] &amp; 2 \times 10^{8} &amp; 2 \times 10^{8} &amp; 10^{5} &amp; 10^{5} \\ \hline
+\end{array}
+\]
+Initial conditions for 1D shock tube of water-air mixture with different volume fraction.</div><p>The initial characteristics of the run are:</p>
+<div class="math notranslate nohighlight">
+\begin{array}{|l|l|}
+\hline
+\textbf{Characteristic} &amp; \textbf{Value} \\
+\hline
+\text{dimension} &amp; 1 \text{ m} \\
+\text{mesh size} &amp; 400 \\
+\text{interface position} &amp; 0.6 \text{ m} \\
+\text{boundary conditions} &amp; \text{non-reflecting} \\
+\text{final solution time} &amp; 20 \times 10^{-5} \ \mathrm{s}  \\
+\text{solution printing frequency} &amp; 2 \times 10^{-5} \ \mathrm{s} \\
+\text{precision} &amp; \text{1st order} \\
+\hline
+\end{array}</div><p><strong>Remark:</strong> The default test case is realised with adaptive mesh refinement (AMR) with a maximum level of 3.</p>
+<div class="figures-row docutils container" id="fig-testcases-neqdem-shocktube1d-nonequalvolumefraction-gif">
+<figure class="align-center">
+<a class="reference internal image-reference" href="_images/volumeFraction3.gif"><img alt="_images/volumeFraction3.gif" src="_images/volumeFraction3.gif" style="width: 75%;" /></a>
+</figure>
+<figure class="align-center">
+<a class="reference internal image-reference" href="_images/velocity3.gif"><img alt="_images/velocity3.gif" src="_images/velocity3.gif" style="width: 75%;" /></a>
+</figure>
+<figure class="align-center">
+<a class="reference internal image-reference" href="_images/pressure3.gif"><img alt="_images/pressure3.gif" src="_images/pressure3.gif" style="width: 75%;" /></a>
+</figure>
+<figure class="align-center">
+<a class="reference internal image-reference" href="_images/density3.gif"><img alt="_images/density3.gif" src="_images/density3.gif" style="width: 75%;" /></a>
+</figure>
+</div>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="Chap5_3NEq_1D_1transportWaterAir.html" class="btn btn-neutral float-left" title="Transport of water–air mixture" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="Chap5_3NEq_1D_3cavitation.html" class="btn btn-neutral float-right" title="Cavitation" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2026, code-mphi.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

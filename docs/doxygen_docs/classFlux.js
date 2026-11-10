@@ -16,7 +16,7 @@ var classFlux =
     [ "getCobase", "classFlux.html#ad9b770b0f2f742b288042d562ef2f42b", null ],
     [ "getEnergy", "classFlux.html#aa0cabe661498ab2c18f6a54e75052439", null ],
     [ "getEnergyMix", "classFlux.html#a3c1c2f6cf1f3b48700965a72a7ca411e", null ],
-    [ "getEqEta", "classFlux.html#ae115472316510f120e8042459289944b", null ],
+    [ "getEqDensitySurEta", "classFlux.html#af9e239af68a47d530f8aca642a9c571b", null ],
     [ "getEqOmega", "classFlux.html#a2aa6c1d332487c0aaad2d61ff6665d14", null ],
     [ "getEqVectorP", "classFlux.html#a67f1b134a8d3fa187ff74cfeb366dfc0", null ],
     [ "getLambda", "classFlux.html#a58b10e73c37bd6cc1fea2f6f89da5d9f", null ],

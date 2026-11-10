@@ -9,12 +9,13 @@ Test cases presented in this section are dealing with multiphase compressible pr
 
 .. toctree::
 
+   ./Chap5_3NEq.rst
    ./Chap5_2UEq.rst
    ./Chap5_2UEqTotE.rst
-   ./Chap5_2UEqSolid.rst
    ./Chap5_2PUEq.rst
    ./Chap5_2PTUEq.rst
    ./Chap5_2eulerHomogeneous.rst
+   ./Chap5_2ENSK1D.rst
 
 Other tests cases
 =================
@@ -33,6 +34,10 @@ Other tests are provided with ECOGEN package and may be described in details lat
   <testCase>libTests/referenceTestCases/PUEq/AddPhysicalEffects/surfaceTension/dropletImpact_resume/</testCase>
   <testCase>libTests/referenceTestCases/PUEq/AddPhysicalEffects/gravity/</testCase>
   <testCase>libTests/referenceTestCases/UEq/3D/shockBubble/heliumAir/</testCase>
+  <testCase>libTests/referenceTestCases/NEqDEM/1D/cavitation/waterAir1000/</testCase>
+  <testCase>libTests/referenceTestCases/NEqDEM/2D/RichtmyerMeshkov/</testCase>
+  <testCase>libTests/referenceTestCases/NEqDEM/2D/shockBubble/heliumAir/</testCase>
+  <testCase>libTests/referenceTestCases/NEqDEM/3D/shockBubble/heliumAir/</testCase>
 
 
 .. _Paraview: https://www.paraview.org/

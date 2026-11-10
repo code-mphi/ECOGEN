@@ -1,0 +1,31 @@
+<map id="RiemannSolverHLLC::solver" name="RiemannSolverHLLC::solver">
+<area shape="rect" id="Node000001" title="call the HLLC Riemann solver to solve Riemann Problem at the interface of two cells" alt="" coords="5,232,167,276"/>
+<area shape="rect" id="Node000002" href="$classPhase.html#a482f6875d98b0fa8184720e6dfe89c48" title=" " alt="" coords="230,5,369,33"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="93,230,109,190,134,140,169,88,213,44,225,38,221,42,216,48,173,92,139,143,114,193,97,232"/>
+<area shape="rect" id="Node000004" href="$classPhase.html#a2beeaa383c32c5866ea59a1b20a44662" title=" " alt="" coords="227,57,372,85"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="98,230,143,164,176,127,213,96,226,90,223,94,216,100,179,131,147,167,102,233"/>
+<area shape="rect" id="Node000005" href="$classPhase.html#ab70f7c5ac46f4231e602ff2f356d591d" title=" " alt="" coords="215,109,384,137"/>
+<area shape="poly" id="edge5_Node000001_Node000005" title=" " alt="" coords="108,229,154,188,213,148,231,141,227,145,216,152,158,192,112,233"/>
+<area shape="rect" id="Node000006" href="$classPhase.html#a48f57f616d3b392240a024c8bf61cbea" title=" " alt="" coords="217,161,382,189"/>
+<area shape="poly" id="edge7_Node000001_Node000006" title=" " alt="" coords="139,229,214,199,239,193,234,196,216,204,142,233"/>
+<area shape="rect" id="Node000007" href="$classPhase.html#ac232fce34c3196feb98019145062bf04" title=" " alt="" coords="250,213,349,241"/>
+<area shape="poly" id="edge9_Node000001_Node000007" title=" " alt="" coords="166,241,237,234,232,237,168,246"/>
+<area shape="rect" id="Node000008" href="$classPhase.html#a40e4e2993cc3ad5d98f58dd502b19d86" title=" " alt="" coords="250,265,348,293"/>
+<area shape="poly" id="edge11_Node000001_Node000008" title=" " alt="" coords="166,261,237,270,233,273,168,266"/>
+<area shape="rect" id="Node000009" href="$classPhase.html#a83feb3a12d36d24785b5f92b2aa267f2" title=" " alt="" coords="248,317,350,345"/>
+<area shape="poly" id="edge13_Node000001_Node000009" title=" " alt="" coords="142,274,216,302,239,311,234,313,214,307,142,279"/>
+<area shape="rect" id="Node000010" href="$classCoord.html#a380746a7501edbeef25d07f6d53735ce" title="Set the value in the x&#45;direction of the Coord object." alt="" coords="251,369,348,397"/>
+<area shape="poly" id="edge15_Node000001_Node000010" title=" " alt="" coords="110,274,158,315,216,354,239,366,234,367,213,359,155,319,110,279"/>
+<area shape="rect" id="Node000011" href="$classCoord.html#a2c29700095174e18164ae425ccc03878" title="Set the value in the y&#45;direction of the Coord object." alt="" coords="252,421,347,449"/>
+<area shape="poly" id="edge16_Node000001_Node000011" title=" " alt="" coords="101,274,148,340,180,376,216,406,240,420,234,420,213,411,176,380,143,344,100,279"/>
+<area shape="rect" id="Node000012" href="$classCoord.html#a3a02e4f7e456831394238d5e204da2d0" title="Set the value in the z&#45;direction of the Coord object." alt="" coords="251,473,348,501"/>
+<area shape="poly" id="edge17_Node000001_Node000012" title=" " alt="" coords="96,274,114,315,139,365,173,415,216,458,239,473,234,473,213,463,169,418,135,367,109,318,95,279"/>
+<area shape="rect" id="Node000003" href="$classErrors.html#a5fcdb1d77f9c74188b44ac7d0d05a453" title=" " alt="" coords="432,161,588,189"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="358,31,385,44,418,67,447,95,493,149,487,149,443,99,414,71,383,48,359,36"/>
+<area shape="poly" id="edge4_Node000004_Node000003" title=" " alt="" coords="352,83,385,95,435,122,479,152,474,152,432,127,383,100,353,88"/>
+<area shape="poly" id="edge6_Node000005_Node000003" title=" " alt="" coords="358,135,439,156,434,158,359,140"/>
+<area shape="poly" id="edge8_Node000006_Node000003" title=" " alt="" coords="382,173,419,174,414,176,383,178"/>
+<area shape="poly" id="edge10_Node000007_Node000003" title=" " alt="" coords="348,213,439,192,434,195,351,217"/>
+<area shape="poly" id="edge12_Node000008_Node000003" title=" " alt="" coords="348,264,383,250,432,224,474,200,479,197,435,228,385,255,350,268"/>
+<area shape="poly" id="edge14_Node000009_Node000003" title=" " alt="" coords="350,317,383,302,414,279,443,252,488,203,492,200,447,255,418,283,385,307,352,322"/>
+</map>

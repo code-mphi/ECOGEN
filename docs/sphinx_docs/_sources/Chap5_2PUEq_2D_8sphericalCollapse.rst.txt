@@ -39,7 +39,7 @@ The initial characteristics of the run are:
 | precision                    | 2nd order (MC + THINC)    |
 +------------------------------+---------------------------+
 
-Note that the mesh has been modified to match a similar one than the 1D axi-symmetric spherical-collapse test case. Indeed, it uses a Cartesian mesh with uniform cell size from the origin to 0.3 mm (150 cells), then the mesh is stretched from 0.3 mm to 3 mm with a factor of 1.1 (51 cells). This in both x- and y-directions.
+Note that the mesh has been modified to match a similar one than the 1D axi-symmetric spherical-collapse test case. Indeed, it uses a Cartesian mesh with uniform cell size with size 0.002 from the origin to 0.3 mm (which gives a region with 150 cells), then the mesh is stretched from 0.3 mm to 3 mm with the same reference cell size and a stretching factor of 1.1 (which gives a region with 52 cells). This in both x- and y-directions.
 
 For this test case, we want to compar the numerical solution to the semi-analytic solution of Keller--Miksis in regard of the bubble-wall radius evolution. One can find details in :cite:`schmidmayer2019comparativeStudy`. To obtain such a solution with ECOGEN, we need to integrate the bubble (air) volume fraction in order to recover its volume and therefore its mean radius. To do so, few lines in the code have to be uncommented (the integration is not generalized) following the instructions given in the Python_ post-treatment script *sphericalCollapse_postTreatment.py*. Finally, by executing the script using Python 3, we obtain the following plot (:numref:`Fig:testCases:PUEq:sphericalCollapse`).
 

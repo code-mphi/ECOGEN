@@ -6,6 +6,8 @@ var dir_1a5ad4ad0e54e1b4c351035b85553488 =
     [ "EosIG.h", "EosIG_8h.html", "EosIG_8h" ],
     [ "EosNASG.cpp", "EosNASG_8cpp.html", null ],
     [ "EosNASG.h", "EosNASG_8h.html", "EosNASG_8h" ],
+    [ "EosNLS.cpp", "EosNLS_8cpp.html", null ],
+    [ "EosNLS.h", "EosNLS_8h.html", "EosNLS_8h" ],
     [ "EosPolynomial.cpp", "EosPolynomial_8cpp.html", null ],
     [ "EosPolynomial.h", "EosPolynomial_8h.html", "EosPolynomial_8h" ],
     [ "EosSG.cpp", "EosSG_8cpp.html", null ],

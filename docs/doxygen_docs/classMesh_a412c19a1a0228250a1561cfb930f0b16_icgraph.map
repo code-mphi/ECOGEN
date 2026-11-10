@@ -1,12 +1,11 @@
 <map id="Mesh::getNumberCells" name="Mesh::getNumberCells">
-<area shape="rect" id="Node000001" title=" " alt="" coords="496,54,667,79"/>
-<area shape="rect" id="Node000002" href="$classOutputProbeGNU.html#a9571a9ae7ebc8d9f9a370998c360223a" title=" " alt="" coords="251,5,448,45"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="495,54,448,46,449,40,496,49"/>
-<area shape="rect" id="Node000003" href="$classRun.html#a787e92e4a5e93a885cc5be8d4b7e57ac" title=" " alt="" coords="254,94,445,119"/>
-<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="494,84,424,97,423,91,493,79"/>
-<area shape="poly" id="edge3_Node000003_Node000003" title=" " alt="" coords="383,84,374,76,349,73,329,75,318,79,316,85,322,92,318,95,311,86,314,76,328,70,349,67,376,71,387,80"/>
-<area shape="rect" id="Node000004" href="$classRun.html#a9cd649d0af29d81fb3604c906abb0c8b" title="Hyperbolic resolution + Relaxations + Source terms integration." alt="" coords="108,94,203,119"/>
-<area shape="poly" id="edge4_Node000003_Node000004" title=" " alt="" coords="240,109,203,109,203,104,240,104"/>
-<area shape="rect" id="Node000005" href="$main_8cpp.html#a0ddf1224851353fc92bfbff6f499fa97" title=" " alt="" coords="5,94,60,119"/>
-<area shape="poly" id="edge5_Node000004_Node000005" title=" " alt="" coords="95,109,60,109,60,104,95,104"/>
+<area shape="rect" id="Node000001" title=" " alt="" coords="828,36,998,64"/>
+<area shape="rect" id="Node000002" href="$classOutputVTKHDF.html#ace0c4ec65c53a7404e1f7cc0e5c6e0ad" title="Read results of a previous simulation to resume from it." alt="" coords="546,5,750,33"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="811,38,750,34,750,28,816,38"/>
+<area shape="rect" id="Node000003" href="$classOutputVTKHDF.html#a68cfff7b4f2e2c6e2a7567d1071de418" title="Write cartesian mesh at VTKHDF file format." alt="" coords="516,57,780,102"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="815,61,781,67,780,62,810,61"/>
+<area shape="rect" id="Node000004" href="$classOutputVTKHDF.html#a7e1fa42b5929e915b1564cc3635aefeb" title="Write results at VTKHDF file format for current time step." alt="" coords="261,57,468,102"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="498,79,468,82,468,77,503,79"/>
+<area shape="rect" id="Node000005" href="$classOutputVTKHDF.html#aa686e1511394135fbd57555005bc96c2" title=" " alt="" coords="5,65,213,93"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="242,79,213,82,213,77,248,79"/>
 </map>

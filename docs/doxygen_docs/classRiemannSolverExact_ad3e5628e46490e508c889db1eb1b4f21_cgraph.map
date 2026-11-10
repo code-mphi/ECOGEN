@@ -1,0 +1,41 @@
+<map id="RiemannSolverExact::solver" name="RiemannSolverExact::solver">
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,395,162,439"/>
+<area shape="rect" id="Node000002" href="$classRiemannSolverExact.html#ab26dc8d507b3df52f5120466688e1319" title=" " alt="" coords="210,5,400,50"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="84,394,92,329,112,240,128,192,149,145,175,100,208,61,214,57,211,62,212,64,179,103,153,147,133,194,117,242,97,330,89,394"/>
+<area shape="rect" id="Node000003" href="$classRiemannSolverExact.html#a4209ff36d24ef08e30f6889485e8bf1d" title=" " alt="" coords="224,75,386,119"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="86,394,98,341,121,270,156,195,180,161,208,130,215,126,212,131,212,134,184,164,161,198,125,272,103,342,91,395"/>
+<area shape="rect" id="Node000004" href="$classPhase.html#a482f6875d98b0fa8184720e6dfe89c48" title=" " alt="" coords="235,143,374,171"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="88,394,102,349,126,291,161,232,183,205,208,182,223,174,220,178,211,186,187,209,165,235,131,294,107,350,93,395"/>
+<area shape="rect" id="Node000006" href="$classPhase.html#aeb72ca0fa38e4fe35643d38f4833e688" title=" " alt="" coords="249,195,361,223"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="92,393,109,358,134,315,167,271,208,233,235,221,232,225,211,238,171,274,139,318,114,360,97,395"/>
+<area shape="rect" id="Node000007" href="$classEos.html#a9147817e05812b6f97817d1559cd47b4" title="See derived classes." alt="" coords="253,247,356,275"/>
+<area shape="poly" id="edge7_Node000001_Node000007" title=" " alt="" coords="98,393,144,339,174,310,208,285,240,273,236,277,211,290,178,314,148,342,103,396"/>
+<area shape="rect" id="Node000008" href="$classEos.html#a56c8d9f25a54276395164bf6cd989cca" title="See derived classes." alt="" coords="242,299,368,327"/>
+<area shape="poly" id="edge8_Node000001_Node000008" title=" " alt="" coords="114,392,158,364,209,337,231,330,227,334,211,342,161,368,118,396"/>
+<area shape="rect" id="Node000009" href="$classEos.html#a208dba3dc39dadf9de3cd1c589a884db" title="See derived classes." alt="" coords="256,351,354,379"/>
+<area shape="poly" id="edge9_Node000001_Node000009" title=" " alt="" coords="160,396,242,378,238,382,163,401"/>
+<area shape="rect" id="Node000010" href="$classPhase.html#a2beeaa383c32c5866ea59a1b20a44662" title=" " alt="" coords="232,403,378,431"/>
+<area shape="poly" id="edge10_Node000001_Node000010" title=" " alt="" coords="161,415,219,415,215,419,163,419"/>
+<area shape="rect" id="Node000011" href="$classPhase.html#ab70f7c5ac46f4231e602ff2f356d591d" title=" " alt="" coords="220,455,390,483"/>
+<area shape="poly" id="edge12_Node000001_Node000011" title=" " alt="" coords="161,433,230,450,226,452,163,438"/>
+<area shape="rect" id="Node000012" href="$classPhase.html#ac232fce34c3196feb98019145062bf04" title=" " alt="" coords="255,507,354,535"/>
+<area shape="poly" id="edge14_Node000001_Node000012" title=" " alt="" coords="116,437,161,466,211,492,243,505,238,507,209,497,158,470,117,443"/>
+<area shape="rect" id="Node000013" href="$classPhase.html#a40e4e2993cc3ad5d98f58dd502b19d86" title=" " alt="" coords="256,559,354,587"/>
+<area shape="poly" id="edge16_Node000001_Node000013" title=" " alt="" coords="101,437,148,492,178,520,211,544,243,559,238,561,208,549,174,524,144,495,101,442"/>
+<area shape="rect" id="Node000014" href="$classPhase.html#a83feb3a12d36d24785b5f92b2aa267f2" title=" " alt="" coords="254,611,356,639"/>
+<area shape="poly" id="edge18_Node000001_Node000014" title=" " alt="" coords="94,437,114,474,139,516,171,560,211,596,241,612,236,614,208,601,167,563,134,519,109,476,94,442"/>
+<area shape="rect" id="Node000015" href="$classCoord.html#a380746a7501edbeef25d07f6d53735ce" title="Set the value in the x&#45;direction of the Coord object." alt="" coords="257,663,353,691"/>
+<area shape="poly" id="edge20_Node000001_Node000015" title=" " alt="" coords="91,437,107,484,131,540,165,599,187,625,211,648,244,667,239,667,208,653,183,629,161,602,126,543,102,485,90,442"/>
+<area shape="rect" id="Node000016" href="$classCoord.html#a2c29700095174e18164ae425ccc03878" title="Set the value in the y&#45;direction of the Coord object." alt="" coords="257,715,352,743"/>
+<area shape="poly" id="edge21_Node000001_Node000016" title=" " alt="" coords="88,437,102,493,124,563,140,601,159,637,183,671,211,700,245,720,239,720,208,704,179,674,155,640,135,603,119,565,97,494,88,442"/>
+<area shape="rect" id="Node000017" href="$classCoord.html#a3a02e4f7e456831394238d5e204da2d0" title="Set the value in the z&#45;direction of the Coord object." alt="" coords="257,767,353,795"/>
+<area shape="poly" id="edge22_Node000001_Node000017" title=" " alt="" coords="87,437,97,502,117,586,133,631,153,675,179,716,211,752,226,763,244,773,239,772,223,767,208,756,175,720,149,678,128,633,112,588,92,503,86,442"/>
+<area shape="rect" id="Node000005" href="$classErrors.html#a5fcdb1d77f9c74188b44ac7d0d05a453" title=" " alt="" coords="448,455,604,483"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="374,166,402,182,430,210,453,243,489,315,511,384,523,441,518,439,506,386,484,317,449,246,425,214,398,186,375,171"/>
+<area shape="poly" id="edge6_Node000006_Node000005" title=" " alt="" coords="361,214,383,222,402,234,426,256,447,282,481,339,505,394,520,441,515,440,500,396,476,341,443,285,422,260,398,238,380,227,362,219"/>
+<area shape="poly" id="edge11_Node000010_Node000005" title=" " alt="" coords="367,429,452,450,447,452,368,434"/>
+<area shape="poly" id="edge13_Node000011_Node000005" title=" " alt="" coords="389,466,435,468,430,470,391,472"/>
+<area shape="poly" id="edge15_Node000012_Node000005" title=" " alt="" coords="354,507,452,486,447,488,356,512"/>
+<area shape="poly" id="edge17_Node000013_Node000005" title=" " alt="" coords="353,560,399,544,449,518,491,494,495,491,451,522,401,549,355,564"/>
+<area shape="poly" id="edge19_Node000014_Node000005" title=" " alt="" coords="355,613,399,596,431,573,460,546,504,497,508,494,463,550,434,577,401,601,357,618"/>
+</map>

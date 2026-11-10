@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Cavitation &mdash; ECOGEN 6.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/sphinx_highlight.js"></script>
+        <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="2D" href="Chap5_3NEq_2D.html" />
+    <link rel="prev" title="Shock tubes" href="Chap5_3NEq_1D_2shockTubes.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            ECOGEN
+          </a>
+              <div class="version">
+                6.0
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="Chap1_introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Chap2_installation_Chapter.html">Installation instructions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Chap3_IO_Chapter.html">I/O descriptions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Chap4_tutorials_Chapter.html">Tutorials</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="Chap5_testCases_Chapter.html">Test cases</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="Chap5_1Euler.html">Single-phase test cases</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="Chap5_2.html">Multiphase test cases</a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="Chap5_3NEq.html">Non-equilibrium model</a><ul class="current">
+<li class="toctree-l4 current"><a class="reference internal" href="Chap5_3NEq_1D.html">1D</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Chap5_3NEq_2D.html">2D</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="Chap5_2UEq.html">Velocity-equilibrium model</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Chap5_2UEqTotE.html">Velocity-equilibrium model based on total energies</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Chap5_2PUEq.html">Pressure- and velocity-equilibrium model</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Chap5_2PTUEq.html">Temperature-, pressure- and velocity-equilibrium model</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Chap5_2eulerHomogeneous.html">Homogeneous Euler</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Chap5_2ENSK1D.html">Extended-Navier-Stokes-Korteweg-1D model</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Chap5_2.html#other-tests-cases">Other tests cases</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="Chap6_developersGuide_Chapter.html">Developers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Chap7_license.html">License and authors</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Chap8_citation.html">Citation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="zBibliography.html">Bibliography</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">ECOGEN</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="Chap5_testCases_Chapter.html">Test cases</a></li>
+          <li class="breadcrumb-item"><a href="Chap5_2.html">Multiphase test cases</a></li>
+          <li class="breadcrumb-item"><a href="Chap5_3NEq.html">Non-equilibrium model</a></li>
+          <li class="breadcrumb-item"><a href="Chap5_3NEq_1D.html">1D</a></li>
+      <li class="breadcrumb-item active">Cavitation</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/Chap5_3NEq_1D_3cavitation.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="cavitation">
+<h1>Cavitation<a class="headerlink" href="#cavitation" title="Permalink to this heading"></a></h1>
+<p>The phenomena of cavitation is explained in <a class="reference internal" href="Chap5_2PUEq_1D_3cavitation.html#pueq-cavitation"><span class="std std-ref">Cavitation</span></a>.</p>
+<p>This section presents 3 different tests of cavitation, based on Baer-Nunziato model <span id="id1">[<a class="reference internal" href="zBibliography.html#id287" title="M.R. Baer and J.W. Nunziato. A two-phase mixture theory for the deflagration-to-detonation transition (\textsc DDT) in reactive granular materials. Int. J. of Multiphase Flows, 12:861–889, 1986.">BN86</a>]</span>, without relaxations, with infinite velocity relaxation and with infinite velocity and pressure relaxations,
+realised with the Discrete Equation Method and the HLLC Riemann solver.
+The equation of state used is stiffened gas with <span class="math notranslate nohighlight">\(\gamma = 1.4\)</span> and <span class="math notranslate nohighlight">\(P_{\infty} = 0\)</span> for air and <span class="math notranslate nohighlight">\(\gamma = 4.4\)</span> and <span class="math notranslate nohighlight">\(P_{\infty} = 6 \times 10^{8}\)</span>. The input files for these tests can be found in <em>./libTests/referenceTestCases/NEqDEM/1D/cavitation/waterAir/</em> folder.
+The line in <em>ECOGEN.xml</em> of the 2 tests is:</p>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;testCase&gt;</span>./libTests/referenceTestCases/NEqDEM/1D/cavitation/waterAir<span class="nt">&lt;/testCase&gt;</span>
+</pre></div>
+</div>
+<p><strong>Remark:</strong>
+If one wants to simulate cavitation phenomena without infinite relaxation procedure and with the same initial conditions, he must comment the lines relative to relaxation of the <em>model.xml</em> file.</p>
+<figure class="align-center" id="fig-testcases-neqdem-shocktube1d-interface-image">
+<a class="reference internal image-reference" href="_images/initialConditions.png"><img alt="_images/initialConditions.png" src="_images/initialConditions.png" style="width: 557.0px; height: 170.0px;" /></a>
+</figure>
+<div class="math notranslate nohighlight">
+\[
+\begin{array}{|c|c|c|c|c|}
+    \hline
+    &amp; \text{Left state} &amp; \text{Left state} &amp; \text{Right state} &amp; \text{Right state} \\ \hline
+    \text{Phase} &amp; \text{Water} &amp; \text{Air} &amp; \text{Water} &amp; \text{Air} \\ \hline
+    \rho \, [\text{kg/m}^3] &amp; 1000 &amp; 10 &amp; 1000 &amp; 10 \\ \hline
+    u \, [\text{m/s}] &amp; -100 &amp; -100 &amp; 100 &amp; 100 \\ \hline
+    P \, [\text{Pa}] &amp; 10^{5} &amp; 10^{5} &amp; 10^{5} &amp; 10^{5} \\ \hline
+\end{array}
+\]
+
+Initial conditions for 1D cavitation tests cases.</div><p>The initial characteristics of the run are:</p>
+<div class="math notranslate nohighlight">
+\begin{array}{|l|l|}
+\hline
+\textbf{Characteristic} &amp; \textbf{Value} \\
+\hline
+\text{dimension} &amp; 1 \text{ m} \\
+\text{mesh size} &amp; 1000 \\
+\text{interface position} &amp; 0.5 \text{ m} \\
+\text{boundary conditions} &amp; \text{non-reflecting} \\
+\text{final solution time} &amp; 200 \times 10^{-6} \ \mathrm{s}  \\
+\text{solution printing frequency} &amp; 10 \times 10^{-6} \ \mathrm{s} \\
+\text{precision} &amp; \text{1st order} \\
+\hline
+\end{array}</div><p>Legend of the tests is detailed below:</p>
+<div class="math notranslate nohighlight">
+\begin{array}{|llll|}
+\hline
+\textbf{Legend} &amp; \textbf{Model} &amp; \textbf{Method} &amp; \textbf{Infinite relaxations} \\
+\hline
+\textbf{DEM}    &amp; 7 \text{ equations} &amp; \text{Discrete Equation Method} &amp; \text{Without relaxations} \\
+\textbf{DEM U}  &amp; 7 \text{ equations} &amp; \text{Discrete Equation Method} &amp; \text{Velocity} \\
+\textbf{DEM UP} &amp; 7 \text{ equations} &amp; \text{Discrete Equation Method} &amp; \text{Velocity and pressure} \\
+\hline
+\end{array}</div><div class="figures-row docutils container" id="fig-testcases-neqdem-shocktube1d-interface-gif">
+<figure class="align-center">
+<a class="reference internal image-reference" href="_images/volumeFractionDEM.gif"><img alt="_images/volumeFractionDEM.gif" src="_images/volumeFractionDEM.gif" style="width: 75%;" /></a>
+</figure>
+<figure class="align-center">
+<a class="reference internal image-reference" href="_images/volumeFractionDEMUP.gif"><img alt="_images/volumeFractionDEMUP.gif" src="_images/volumeFractionDEMUP.gif" style="width: 75%;" /></a>
+</figure>
+<figure class="align-center">
+<a class="reference internal image-reference" href="_images/pressureDEM.gif"><img alt="_images/pressureDEM.gif" src="_images/pressureDEM.gif" style="width: 75%;" /></a>
+</figure>
+<figure class="align-center">
+<a class="reference internal image-reference" href="_images/pressureDEMUP.gif"><img alt="_images/pressureDEMUP.gif" src="_images/pressureDEMUP.gif" style="width: 75%;" /></a>
+</figure>
+<figure class="align-center">
+<a class="reference internal image-reference" href="_images/densityDEM.gif"><img alt="_images/densityDEM.gif" src="_images/densityDEM.gif" style="width: 75%;" /></a>
+</figure>
+<figure class="align-center">
+<a class="reference internal image-reference" href="_images/densityDEMUP.gif"><img alt="_images/densityDEMUP.gif" src="_images/densityDEMUP.gif" style="width: 75%;" /></a>
+</figure>
+<figure class="align-center">
+<a class="reference internal image-reference" href="_images/velocityDEM.gif"><img alt="_images/velocityDEM.gif" src="_images/velocityDEM.gif" style="width: 75%;" /></a>
+</figure>
+<figure class="align-center">
+<a class="reference internal image-reference" href="_images/velocityDEMUP.gif"><img alt="_images/velocityDEMUP.gif" src="_images/velocityDEMUP.gif" style="width: 75%;" /></a>
+</figure>
+</div>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="Chap5_3NEq_1D_2shockTubes.html" class="btn btn-neutral float-left" title="Shock tubes" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="Chap5_3NEq_2D.html" class="btn btn-neutral float-right" title="2D" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2026, code-mphi.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

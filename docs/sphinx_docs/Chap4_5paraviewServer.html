@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>ParaView server &mdash; ECOGEN 5.0 documentation</title>
+  <title>ParaView server &mdash; ECOGEN 6.0 documentation</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
       <link rel="stylesheet" type="text/css" href="_static/css/theme.css" />
 
@@ -38,7 +38,7 @@
             ECOGEN
           </a>
               <div class="version">
-                5.0
+                6.0
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
@@ -76,7 +76,8 @@
 </li>
 <li class="toctree-l1"><a class="reference internal" href="Chap5_testCases_Chapter.html">Test cases</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Chap6_developersGuide_Chapter.html">Developers</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Chap7_license.html">License</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Chap7_license.html">License and authors</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Chap8_citation.html">Citation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="zBibliography.html">Bibliography</a></li>
 </ul>
 
@@ -113,7 +114,7 @@
 <p>To install Paraview on your server directly go to the official <a class="reference external" href="https://www.paraview.org/">ParaView website</a>.
 Under Linux section you can find either full suite of ParaView tools including ParaView GUI client or the headless version if don’t plan to render with an X server.
 For the example we will download the complete version and unzip it:</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>wget<span class="w"> </span>-O<span class="w"> </span>ParaView-5.8.1-MPI-Linux-Python3.7-64bit.tar.gz<span class="w"> </span><span class="s2">&quot;https://www.paraview.org/paraview-downloads/download.php?submit=Download&amp;version=v5.8&amp;type=binary&amp;os=Linux&amp;downloadFile=ParaView-5.8.1-MPI-Linux-Python3.7-64bit.tar.gz&quot;</span>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>wget<span class="w"> </span>-O<span class="w"> </span>ParaView-5.8.1-MPI-Linux-Python3.7-64bit.tar.gz<span class="w"> </span><span class="s2">"https://www.paraview.org/paraview-downloads/download.php?submit=Download&amp;version=v5.8&amp;type=binary&amp;os=Linux&amp;downloadFile=ParaView-5.8.1-MPI-Linux-Python3.7-64bit.tar.gz"</span>
 <span class="gp">$ </span>tar<span class="w"> </span>-xvf<span class="w"> </span>ParaView-5.8.1-MPI-Linux-Python3.7-64bit.tar.gz
 <span class="gp">$ </span>rm<span class="w"> </span>ParaView-5.8.1-MPI-Linux-Python3.7-64bit.tar.gz
 </pre></div>
@@ -127,7 +128,7 @@ For the example we will download the complete version and unzip it:</p>
 <h2>Setup ParaView server<a class="headerlink" href="#setup-paraview-server" title="Permalink to this heading"></a></h2>
 <p>In order to easily run ParaView executables we will add its bin folder to the <code class="code docutils literal notranslate"><span class="pre">PATH</span></code> environment variable.
 Assuming ParaView has been installed into the folder <em>/home/userName/Software/</em> we can edit the path as:</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>sudo<span class="w"> </span><span class="nb">echo</span><span class="w"> </span><span class="s1">&#39;export PATH=/home/userName/Software/ParaView-5.8.1-MPI-Linux-Python3.7-64bit/bin:$PATH&#39;</span><span class="w"> </span>&gt;&gt;<span class="w"> </span>/home/userName/.bashrc
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>sudo<span class="w"> </span><span class="nb">echo</span><span class="w"> </span><span class="s1">'export PATH=/home/userName/Software/ParaView-5.8.1-MPI-Linux-Python3.7-64bit/bin:$PATH'</span><span class="w"> </span>&gt;&gt;<span class="w"> </span>/home/userName/.bashrc
 <span class="gp">$ </span><span class="nb">source</span><span class="w"> </span>/home/userName/.bashrc
 </pre></div>
 </div>
@@ -170,7 +171,7 @@ This procedure is called local forwarding and is configured with the <code class
 <p>Be aware that the previous command will not give any output and will stay up until you would like to end-up the connection. If you would like to set this command to background add the <code class="code docutils literal notranslate"><span class="pre">-f</span></code> flag.</p>
 <p>To avoid to remember the previous ssh command an alias can be added:</p>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>vim<span class="w"> </span>~/.bash_aliases
-<span class="go">alias ssh-port=&#39;ssh -X -f -N -L localhost:11111:serverName:11111 user@serverName&#39;</span>
+<span class="go">alias ssh-port='ssh -X -f -N -L localhost:11111:serverName:11111 user@serverName'</span>
 </pre></div>
 </div>
 <p>Now to do to port forwarding run:</p>
@@ -224,7 +225,7 @@ To proceed, open the ParaView client GUI and click on the <em>Connect</em> butto
   <hr/>
 
   <div role="contentinfo">
-    <p>&#169; Copyright 2025, code-mphi.</p>
+    <p>&#169; Copyright 2026, code-mphi.</p>
   </div>
 
   Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a

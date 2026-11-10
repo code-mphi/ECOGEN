@@ -1,63 +1,50 @@
 <map id="Mesh::getType" name="Mesh::getType">
-<area shape="rect" id="Node000001" title=" " alt="" coords="1061,415,1177,440"/>
-<area shape="rect" id="Node000002" href="$classOutputVTK.html#a9a7d93732a247f0731d1efd9b3d61815" title=" " alt="" coords="778,136,1005,162"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="1112,401,1102,354,1084,295,1054,234,1035,207,1012,183,979,164,981,159,1015,179,1039,204,1059,232,1089,293,1107,353,1117,400"/>
-<area shape="rect" id="Node000004" href="$classOutputVTK.html#ab37984046530b667d48aba99d9d68e2b" title="Read results of a previous simulation to resume from it." alt="" coords="521,194,698,219"/>
-<area shape="poly" id="edge26_Node000001_Node000004" title=" " alt="" coords="1111,402,1100,361,1081,313,1052,265,1033,244,1012,227,969,205,923,191,876,183,827,179,736,184,662,196,661,191,736,179,827,174,876,177,925,186,971,200,1015,223,1037,240,1056,262,1086,310,1105,360,1116,401"/>
-<area shape="rect" id="Node000005" href="$classOutputVTK.html#aa0a1d515bfcd006230b648aa7097b413" title="Read results of a single partition of a previous simulation to resume from it." alt="" coords="508,243,711,268"/>
-<area shape="poly" id="edge27_Node000001_Node000005" title=" " alt="" coords="1097,406,1060,369,1037,351,1012,335,957,316,879,299,709,271,709,266,880,294,959,311,1014,331,1040,346,1064,365,1101,403"/>
-<area shape="rect" id="Node000008" href="$classOutputVTK.html#a5ff2c6cf45dfde2cb6cfa140c6d71928" title=" " alt="" coords="506,30,713,55"/>
-<area shape="poly" id="edge38_Node000001_Node000008" title=" " alt="" coords="1112,402,1099,322,1078,219,1048,122,1031,85,1012,62,970,36,923,19,874,11,824,8,775,10,729,16,654,32,653,27,728,11,774,5,824,3,874,5,924,14,972,31,1015,58,1035,82,1053,120,1083,217,1105,321,1117,401"/>
-<area shape="rect" id="Node000009" href="$classRun.html#a4af1d2a256a16de8f496d20b77c62f3c" title="Cleaning simulation." alt="" coords="108,392,211,418"/>
-<area shape="poly" id="edge9_Node000001_Node000009" title=" " alt="" coords="1048,416,1013,412,897,402,778,396,548,393,349,398,211,404,211,399,349,392,548,388,779,390,897,396,1014,406,1048,411"/>
-<area shape="rect" id="Node000011" href="$classRun.html#ae6cad323ebc33d27782dbc95fc6339a9" title="Initialization of the simulation." alt="" coords="299,526,409,551"/>
-<area shape="poly" id="edge11_Node000001_Node000011" title=" " alt="" coords="1113,455,1100,488,1079,527,1051,565,1015,594,973,614,929,628,884,638,838,644,744,644,653,634,568,616,492,594,383,554,385,549,493,589,569,611,654,628,745,639,837,638,883,633,927,623,971,609,1012,589,1047,561,1075,524,1095,486,1108,453"/>
-<area shape="rect" id="Node000012" href="$classMesh.html#a36744b51b1b5880e8e59fe837cfd0cf4" title=" " alt="" coords="516,410,703,450"/>
-<area shape="poly" id="edge13_Node000001_Node000012" title=" " alt="" coords="1048,430,769,430,703,431,703,426,769,425,1048,425"/>
-<area shape="rect" id="Node000013" href="$classOutputBoundaryGNU.html#a243b1ec16178a34286965bc6e8e6830b" title=" " alt="" coords="805,808,977,848"/>
-<area shape="poly" id="edge15_Node000001_Node000013" title=" " alt="" coords="1121,454,1117,521,1103,611,1090,659,1071,707,1047,751,1015,791,998,804,979,814,977,810,995,800,1011,787,1042,748,1067,704,1085,657,1098,610,1112,520,1116,454"/>
-<area shape="rect" id="Node000014" href="$classInput.html#adcf9fba05cc77193aad9503fbc16e6a0" title=" " alt="" coords="790,440,993,466"/>
-<area shape="poly" id="edge16_Node000001_Node000014" title=" " alt="" coords="1048,438,993,444,993,439,1047,433"/>
-<area shape="rect" id="Node000016" href="$classRun.html#a787e92e4a5e93a885cc5be8d4b7e57ac" title=" " alt="" coords="259,682,449,707"/>
-<area shape="poly" id="edge19_Node000001_Node000016" title=" " alt="" coords="1117,455,1107,499,1088,553,1058,607,1038,631,1015,651,984,662,930,671,779,684,604,692,450,696,450,690,603,687,778,679,930,666,982,657,1012,647,1035,628,1054,604,1083,551,1102,498,1112,454"/>
-<area shape="rect" id="Node000017" href="$classRun.html#a9cd649d0af29d81fb3604c906abb0c8b" title="Hyperbolic resolution + Relaxations + Source terms integration." alt="" coords="112,682,207,707"/>
-<area shape="poly" id="edge33_Node000001_Node000017" title=" " alt="" coords="1121,454,1118,517,1104,598,1091,640,1072,681,1047,717,1015,747,985,764,949,776,908,784,861,789,758,790,647,782,534,768,427,751,258,721,206,710,207,704,259,716,428,746,535,763,647,777,758,785,861,784,907,779,948,771,983,759,1012,743,1043,714,1068,678,1086,638,1099,597,1113,516,1116,454"/>
-<area shape="rect" id="Node000018" href="$classOutputVTK.html#af61073d6f7530bff11abad9dd909ab97" title=" " alt="" coords="769,238,1013,263"/>
-<area shape="poly" id="edge23_Node000001_Node000018" title=" " alt="" coords="1104,404,1069,343,1043,311,1012,285,971,265,973,261,1015,280,1046,308,1073,340,1109,401"/>
-<area shape="rect" id="Node000019" href="$classRun.html#aee4538f7cdbbefc862da946fea8ca44a" title=" " alt="" coords="804,555,979,580"/>
-<area shape="poly" id="edge28_Node000001_Node000019" title=" " alt="" coords="1105,453,1068,500,1043,525,1015,545,980,559,978,554,1012,540,1040,520,1064,497,1101,450"/>
-<area shape="rect" id="Node000020" href="$classRun.html#a6e4e9bc028f896b1c21add2402a7319d" title=" " alt="" coords="802,707,981,732"/>
-<area shape="poly" id="edge30_Node000001_Node000020" title=" " alt="" coords="1118,455,1109,504,1091,568,1061,633,1040,663,1015,690,982,709,979,704,1012,686,1036,660,1056,631,1086,566,1104,503,1113,454"/>
-<area shape="rect" id="Node000022" href="$classInput.html#ae7f8b8efb16515e79317612ddb4eb578" title=" " alt="" coords="797,490,985,530"/>
-<area shape="poly" id="edge34_Node000001_Node000022" title=" " alt="" coords="1083,449,1014,479,974,493,972,488,1012,475,1081,444"/>
-<area shape="rect" id="Node000023" href="$classOutputVTK.html#a617eb3ec4d2a5eaa75dfa68b166c8708" title=" " alt="" coords="798,72,985,112"/>
-<area shape="poly" id="edge36_Node000001_Node000023" title=" " alt="" coords="1114,401,1108,344,1092,269,1078,230,1061,192,1039,157,1012,126,983,108,986,103,1015,122,1043,153,1066,189,1083,228,1097,268,1113,343,1120,401"/>
-<area shape="rect" id="Node000003" href="$classOutputVTK.html#a5b2db2effe67ee8226fa490d4c4fc8f5" title=" " alt="" coords="506,129,713,169"/>
-<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="764,152,713,152,713,146,764,146"/>
-<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="815,167,673,196,672,191,814,162"/>
-<area shape="poly" id="edge4_Node000002_Node000005" title=" " alt="" coords="857,171,795,202,722,233,678,245,677,240,720,228,793,197,855,166"/>
-<area shape="rect" id="Node000006" href="$classOutputVTK.html#ab8097d6af509457d88058b49b9490ba0" title=" " alt="" coords="497,79,721,104"/>
-<area shape="poly" id="edge5_Node000002_Node000006" title=" " alt="" coords="814,136,672,107,673,102,815,131"/>
-<area shape="poly" id="edge7_Node000002_Node000008" title=" " alt="" coords="783,134,768,126,752,112,743,96,735,82,720,69,696,57,698,53,723,64,739,78,748,94,756,108,771,121,786,129"/>
-<area shape="rect" id="Node000007" href="$classOutputVTK.html#af888e35eb79a62849d0813d4da63a21b" title=" " alt="" coords="263,55,445,80"/>
-<area shape="poly" id="edge6_Node000006_Node000007" title=" " alt="" coords="483,83,445,79,445,74,484,77"/>
-<area shape="poly" id="edge8_Node000008_Node000007" title=" " alt="" coords="493,57,445,61,444,56,492,51"/>
-<area shape="rect" id="Node000010" href="$main_8cpp.html#a0ddf1224851353fc92bfbff6f499fa97" title=" " alt="" coords="5,526,60,551"/>
-<area shape="poly" id="edge10_Node000009_Node000010" title=" " alt="" coords="139,430,48,527,44,524,135,426"/>
-<area shape="poly" id="edge12_Node000011_Node000010" title=" " alt="" coords="285,541,60,541,60,536,285,536"/>
-<area shape="poly" id="edge14_Node000012_Node000011" title=" " alt="" coords="550,458,386,528,384,523,547,453"/>
-<area shape="rect" id="Node000015" href="$classInput.html#adbc917eada08436797ba6e063fcd095a" title=" " alt="" coords="533,498,686,523"/>
-<area shape="poly" id="edge17_Node000014_Node000015" title=" " alt="" coords="815,471,673,500,672,495,814,466"/>
-<area shape="poly" id="edge18_Node000015_Node000011" title=" " alt="" coords="519,523,410,535,409,530,519,518"/>
-<area shape="poly" id="edge20_Node000016_Node000016" title=" " alt="" coords="389,672,379,663,354,660,333,662,322,667,320,673,326,680,322,683,315,673,319,663,332,657,354,655,381,659,392,667"/>
-<area shape="poly" id="edge21_Node000016_Node000017" title=" " alt="" coords="245,697,207,697,207,692,245,692"/>
-<area shape="poly" id="edge22_Node000017_Node000010" title=" " alt="" coords="137,673,42,553,46,550,142,669"/>
-<area shape="poly" id="edge24_Node000018_Node000004" title=" " alt="" coords="796,238,691,222,692,216,797,233"/>
-<area shape="poly" id="edge25_Node000018_Node000005" title=" " alt="" coords="755,256,711,256,711,251,755,250"/>
-<area shape="poly" id="edge29_Node000019_Node000011" title=" " alt="" coords="790,565,409,544,410,539,790,560"/>
-<area shape="rect" id="Node000021" href="$classRun.html#a32d9760f6588777cc067f3c718646332" title=" " alt="" coords="516,707,703,732"/>
-<area shape="poly" id="edge31_Node000020_Node000021" title=" " alt="" coords="788,722,703,722,703,717,788,717"/>
-<area shape="poly" id="edge32_Node000021_Node000016" title=" " alt="" coords="502,712,449,706,450,701,503,706"/>
-<area shape="poly" id="edge35_Node000022_Node000015" title=" " alt="" coords="783,513,686,513,686,508,783,508"/>
-<area shape="poly" id="edge37_Node000023_Node000008" title=" " alt="" coords="784,76,682,58,683,52,785,70"/>
+<area shape="rect" id="Node000001" title=" " alt="" coords="823,389,939,416"/>
+<area shape="rect" id="Node000002" href="$classOutputVTK.html#a9a7d93732a247f0731d1efd9b3d61815" title=" " alt="" coords="540,118,767,146"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="873,372,862,328,844,271,815,214,796,188,774,166,746,149,745,143,777,162,800,185,819,211,849,269,867,326,878,374"/>
+<area shape="rect" id="Node000004" href="$classOutputVTK.html#ac808a046214473cc2ca9acca30742cf6" title="Read results of a previous simulation to resume from it." alt="" coords="284,37,460,64"/>
+<area shape="poly" id="edge15_Node000001_Node000004" title=" " alt="" coords="873,372,859,297,838,200,809,111,792,78,774,56,731,32,685,17,635,9,586,9,537,13,491,20,418,38,415,34,490,15,536,7,585,3,636,4,686,12,734,27,777,52,796,75,814,109,843,199,865,296,878,374"/>
+<area shape="rect" id="Node000007" href="$classOutputVTK.html#a5ff2c6cf45dfde2cb6cfa140c6d71928" title=" " alt="" coords="269,209,476,236"/>
+<area shape="poly" id="edge25_Node000001_Node000007" title=" " alt="" coords="871,373,860,335,841,289,813,244,795,225,774,210,751,201,720,196,639,194,549,200,465,210,463,205,549,195,639,188,720,190,752,196,777,205,798,221,817,241,846,286,865,333,876,375"/>
+<area shape="rect" id="Node000008" href="$classMesh.html#adebf6b0f142e1e17badb7958e8952b8f" title=" " alt="" coords="561,289,746,334"/>
+<area shape="poly" id="edge8_Node000001_Node000008" title=" " alt="" coords="835,381,774,355,726,337,726,332,776,351,840,381"/>
+<area shape="rect" id="Node000009" href="$classOutputVTK.html#af61073d6f7530bff11abad9dd909ab97" title=" " alt="" coords="532,66,775,94"/>
+<area shape="poly" id="edge9_Node000001_Node000009" title=" " alt="" coords="876,372,869,317,853,245,839,207,822,171,800,137,774,108,757,97,757,92,777,104,805,134,827,168,844,205,858,243,874,316,881,374"/>
+<area shape="rect" id="Node000010" href="$classOutputVTKHDF.html#aeab0a53b26de9aa3e35ecbaab8c126ce" title="Read the list of ECOGEN physical data in a VTKHDF file with dimensions and offsets of area to read pr..." alt="" coords="547,409,760,454"/>
+<area shape="poly" id="edge11_Node000001_Node000010" title=" " alt="" coords="805,413,761,420,760,415,810,411"/>
+<area shape="rect" id="Node000011" href="$classOutputVTKHDF.html#a50f50e1b1f5a78df2e7c1cb9bea8b260" title="Read the list of ECOGEN physical data in a VTKHDF file. Dimensions of area to parse are calculated au..." alt="" coords="266,380,479,425"/>
+<area shape="poly" id="edge14_Node000001_Node000011" title=" " alt="" coords="805,399,775,400,654,398,532,400,480,401,478,396,532,394,654,393,775,394,810,398"/>
+<area shape="rect" id="Node000012" href="$classOutputVTKHDF.html#ace0c4ec65c53a7404e1f7cc0e5c6e0ad" title="Read results of a previous simulation to resume from it." alt="" coords="271,463,474,491"/>
+<area shape="poly" id="edge16_Node000001_Node000012" title=" " alt="" coords="853,425,817,451,776,469,699,486,619,493,542,494,475,491,474,486,543,489,619,488,698,480,775,464,815,446,848,427"/>
+<area shape="rect" id="Node000013" href="$classOutputVTK.html#a99ad166e9f857c4c24b70dd2d8821097" title=" " alt="" coords="560,220,747,265"/>
+<area shape="poly" id="edge17_Node000001_Node000013" title=" " alt="" coords="861,375,825,326,801,301,774,279,747,265,747,260,777,275,805,297,829,323,866,375"/>
+<area shape="rect" id="Node000014" href="$classOutputVTKHDF.html#a0a95512e555da2e2a9b6baed6fa15c2e" title="Helper to write physical data fields of rank N at VTKHDF file format in file hdf5 object." alt="" coords="547,529,760,574"/>
+<area shape="poly" id="edge19_Node000001_Node000014" title=" " alt="" coords="863,427,826,472,777,513,739,531,737,526,774,508,822,468,858,430"/>
+<area shape="rect" id="Node000015" href="$classOutputVTKHDF.html#acd80f00acd1465554e25374c2dcd61e3" title="Write physical data fields at VTKHDF file format in file hdf5 object." alt="" coords="547,724,760,769"/>
+<area shape="poly" id="edge20_Node000001_Node000015" title=" " alt="" coords="877,429,868,484,849,549,820,619,800,652,777,683,749,707,718,726,716,721,746,703,773,679,796,650,815,617,844,548,863,482,874,433"/>
+<area shape="rect" id="Node000016" href="$classOutputVTKHDF.html#a7e1fa42b5929e915b1564cc3635aefeb" title="Write results at VTKHDF file format for current time step." alt="" coords="269,653,476,698"/>
+<area shape="poly" id="edge26_Node000001_Node000016" title=" " alt="" coords="877,429,868,477,850,533,820,587,800,612,777,633,754,644,724,654,647,667,560,675,477,678,476,673,560,669,647,662,723,649,752,639,774,628,796,608,816,584,845,530,863,476,874,433"/>
+<area shape="rect" id="Node000017" href="$classOutputVTKHDF.html#aa686e1511394135fbd57555005bc96c2" title=" " alt="" coords="5,662,213,690"/>
+<area shape="poly" id="edge24_Node000001_Node000017" title=" " alt="" coords="874,429,862,469,842,512,814,554,777,589,731,609,671,621,600,629,525,633,375,636,312,638,261,644,167,664,165,659,260,638,311,633,375,631,524,628,600,624,670,616,729,603,774,584,810,551,838,509,857,467,871,433"/>
+<area shape="rect" id="Node000018" href="$classOutputVTKHDF.html#aa9df90af8aff3ed67942a5d353e231de" title="Write a XDMF file to visualize cartesian VTKHDF outputs while VTKHDF file format is not yet specified..." alt="" coords="554,793,753,820"/>
+<area shape="poly" id="edge27_Node000001_Node000018" title=" " alt="" coords="877,429,865,513,843,619,814,718,796,757,777,783,754,798,752,793,773,779,792,754,809,716,838,617,860,512,874,433"/>
+<area shape="rect" id="Node000003" href="$classOutputVTK.html#a5b2db2effe67ee8226fa490d4c4fc8f5" title=" " alt="" coords="270,88,475,133"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="523,123,476,121,474,116,527,121"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="553,114,531,107,507,93,483,78,452,67,450,62,485,73,509,88,533,103,558,112"/>
+<area shape="rect" id="Node000005" href="$classOutputVTK.html#ab8097d6af509457d88058b49b9490ba0" title=" " alt="" coords="261,157,484,184"/>
+<area shape="poly" id="edge4_Node000002_Node000005" title=" " alt="" coords="531,150,479,158,477,154,535,147"/>
+<area shape="poly" id="edge6_Node000002_Node000007" title=" " alt="" coords="566,152,533,166,510,182,485,198,451,210,447,206,483,193,507,178,531,161,570,149"/>
+<area shape="rect" id="Node000006" href="$classOutputVTK.html#af888e35eb79a62849d0813d4da63a21b" title=" " alt="" coords="19,183,199,211"/>
+<area shape="poly" id="edge5_Node000005_Node000006" title=" " alt="" coords="243,185,201,190,198,186,247,182"/>
+<area shape="poly" id="edge7_Node000007_Node000006" title=" " alt="" coords="251,213,201,208,198,203,256,209"/>
+<area shape="poly" id="edge10_Node000009_Node000004" title=" " alt="" coords="514,67,462,62,460,57,519,64"/>
+<area shape="poly" id="edge12_Node000010_Node000011" title=" " alt="" coords="529,420,480,416,479,411,534,418"/>
+<area shape="poly" id="edge13_Node000010_Node000012" title=" " alt="" coords="529,453,463,465,462,460,534,450"/>
+<area shape="poly" id="edge18_Node000013_Node000007" title=" " alt="" coords="543,236,477,232,475,227,548,233"/>
+<area shape="poly" id="edge21_Node000015_Node000015" title=" " alt="" coords="689,709,677,705,654,703,632,705,619,709,614,715,615,725,611,722,609,714,616,705,631,699,654,697,678,700,694,709"/>
+<area shape="poly" id="edge22_Node000015_Node000016" title=" " alt="" coords="545,720,464,701,464,696,550,720"/>
+<area shape="poly" id="edge23_Node000016_Node000017" title=" " alt="" coords="251,677,214,678,213,673,256,675"/>
+<area shape="poly" id="edge29_Node000018_Node000017" title=" " alt="" coords="564,789,531,784,165,693,166,688,533,778,570,789"/>
+<area shape="rect" id="Node000019" href="$classOutputVTKHDF.html#ae86b6b47754bc3117271ee18c6082af2" title=" " alt="" coords="281,784,464,829"/>
+<area shape="poly" id="edge28_Node000018_Node000019" title=" " alt="" coords="536,806,464,809,464,804,541,806"/>
 </map>

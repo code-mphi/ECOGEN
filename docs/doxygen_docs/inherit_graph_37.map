@@ -1,15 +1,19 @@
 <map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
-<area shape="rect" id="Node000000" href="$classRelaxation.html" title="Abstract class for Relaxations." alt="" coords="5,104,97,129"/>
-<area shape="rect" id="Node000001" href="$classRelaxationP.html" title="Pressure relaxation." alt="" coords="159,29,259,55"/>
-<area shape="poly" id="edge131_Node000000_Node000001" title=" " alt="" coords="85,95,144,64,171,52,173,57,146,68,87,100"/>
-<area shape="rect" id="Node000004" href="$classRelaxationPT.html" title="Pressure&#45;Temperature relaxation." alt="" coords="155,79,263,104"/>
-<area shape="poly" id="edge134_Node000000_Node000004" title=" " alt="" coords="111,105,155,97,155,103,111,110"/>
-<area shape="rect" id="Node000005" href="$classRelaxationPTMu.html" title="Pressure&#45;Temperature&#45;Chemical Potential relaxation / Phase change." alt="" coords="145,128,273,153"/>
-<area shape="poly" id="edge135_Node000000_Node000005" title=" " alt="" coords="111,123,146,128,145,134,111,128"/>
-<area shape="rect" id="Node000006" href="$classRelaxationU.html" title="Velocity relaxation." alt="" coords="158,177,261,203"/>
-<area shape="poly" id="edge136_Node000000_Node000006" title=" " alt="" coords="89,134,146,162,176,175,174,180,144,167,87,138"/>
-<area shape="rect" id="Node000002" href="$classRelaxationPFinite.html" title="Finite pressure relaxation." alt="" coords="326,5,462,31"/>
-<area shape="poly" id="edge132_Node000001_Node000002" title=" " alt="" coords="272,31,326,24,326,29,273,36"/>
-<area shape="rect" id="Node000003" href="$classRelaxationPInfinite.html" title="Stiff (infinite) pressure relaxation." alt="" coords="321,55,467,80"/>
-<area shape="poly" id="edge133_Node000001_Node000003" title=" " alt="" coords="273,48,322,55,321,60,272,53"/>
+<area shape="rect" id="Node000000" href="$classPhase.html" title="Abstract class for a phase." alt="" coords="5,177,66,205"/>
+<area shape="rect" id="Node000001" href="$classPhaseEuler.html" title="Phase variables for Euler equations (single phase)." alt="" coords="171,5,264,33"/>
+<area shape="poly" id="edge141_Node000000_Node000001" title=" " alt="" coords="42,161,66,102,86,70,112,44,140,29,172,21,168,25,142,33,115,48,90,74,71,104,47,163"/>
+<area shape="rect" id="Node000002" href="$classPhaseEulerHomogeneous.html" title="Phase variables for Euler Homogeneous equations (velocity and thermodynamical equilibrium)." alt="" coords="124,57,311,85"/>
+<area shape="poly" id="edge142_Node000000_Node000002" title=" " alt="" coords="50,163,76,127,112,94,137,84,134,88,115,99,80,130,54,165"/>
+<area shape="rect" id="Node000003" href="$classPhaseExtendedNavierStokesKorteweg1D.html" title="Phase variables for Extended Navier&#45;Stokes&#45;Korteweg equations (single phase)." alt="" coords="114,109,321,154"/>
+<area shape="poly" id="edge143_Node000000_Node000003" title=" " alt="" coords="79,174,149,152,146,156,82,179"/>
+<area shape="rect" id="Node000004" href="$classPhaseNEq.html" title="Phase variables for the non&#45;equilibrium system of equations." alt="" coords="174,177,260,205"/>
+<area shape="poly" id="edge144_Node000000_Node000004" title=" " alt="" coords="80,189,176,189,172,193,82,194"/>
+<area shape="rect" id="Node000005" href="$classPhasePTUEq.html" title="Phase variables for pressure&#45;temperature&#45;velocity (mechanical and thermal equilibrium) system of equa..." alt="" coords="166,229,268,257"/>
+<area shape="poly" id="edge145_Node000000_Node000005" title=" " alt="" coords="80,204,114,214,168,230,163,232,113,219,81,209"/>
+<area shape="rect" id="Node000006" href="$classPhaseUEq.html" title="Phase variables for the velocity&#45;equilibrium system of equations." alt="" coords="174,281,260,309"/>
+<area shape="poly" id="edge146_Node000000_Node000006" title=" " alt="" coords="57,215,84,242,115,266,144,279,176,289,171,290,142,284,112,271,80,246,56,220"/>
+<area shape="rect" id="Node000008" href="$classPhaseUEqTotEnergy.html" title="Phase variables for the velocity&#45;equilibrium system of equations." alt="" coords="142,333,292,361"/>
+<area shape="poly" id="edge148_Node000000_Node000008" title=" " alt="" coords="47,217,74,270,92,296,115,318,144,335,139,335,112,323,88,300,69,273,45,222"/>
+<area shape="rect" id="Node000007" href="$classPhasePUEq.html" title="Phase variables for the pressure&#45;velocity&#45;equilibrium (mechanical equilibrium) system of equations (K..." alt="" coords="369,281,463,309"/>
+<area shape="poly" id="edge147_Node000006_Node000007" title=" " alt="" coords="276,293,371,295,366,296,276,298"/>
 </map>

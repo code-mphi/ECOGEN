@@ -1,38 +1,40 @@
 <map id="Phase::setPressure" name="Phase::setPressure">
-<area shape="rect" id="Node000001" title=" " alt="" coords="457,447,603,472"/>
-<area shape="rect" id="Node000002" href="$classFluxEuler.html#a5267a54d69731c74528727f8fd8565c9" title="Build the primitive variables for a given cell from conservative one." alt="" coords="227,5,380,31"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="527,433,524,357,519,307,510,252,495,196,474,141,445,90,408,45,379,28,381,24,411,41,449,87,478,139,500,194,515,251,524,306,530,356,532,433"/>
-<area shape="rect" id="Node000003" href="$classFluxEulerKorteweg.html#a2c9b23352889d9470396815752bfa797" title="Build the primitive variables for a given cell from conservative one." alt="" coords="227,55,379,95"/>
-<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="525,433,518,368,500,281,485,235,465,189,439,147,408,109,378,91,381,86,411,105,444,143,469,187,490,233,505,280,523,367,530,433"/>
-<area shape="rect" id="Node000004" href="$classFluxEulerHomogeneous.html#a9dfe2ce022fdd8eff55f8632e254cdf2" title="Build the primitive variables for a given cell from conservative one." alt="" coords="215,119,392,159"/>
-<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="523,433,512,379,491,309,476,272,457,236,435,203,408,173,391,162,394,157,411,169,439,199,462,233,481,270,496,307,517,377,528,432"/>
-<area shape="rect" id="Node000005" href="$classFluxPTUEq.html#a56b4822f3b4ca96c1d7658df57894228" title="Build the primitive variables for a given cell from conservative one." alt="" coords="222,184,385,209"/>
-<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="521,434,508,388,486,330,453,272,432,245,408,223,383,209,386,205,411,219,436,242,457,269,491,328,513,386,526,432"/>
-<area shape="rect" id="Node000006" href="$classFluxUEq.html#a951795fa6ea264745ec92b6655c834c8" title="Build the primitive variables for a given cell from conservative one." alt="" coords="230,233,377,259"/>
-<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="517,434,502,397,478,353,447,309,408,272,376,257,378,252,411,268,451,306,483,350,507,395,522,432"/>
-<area shape="rect" id="Node000007" href="$classFluxUEqTotEnergy.html#a897b84cffe330521c9815d563504f647" title="Build the primitive variables for a given cell from conservative one." alt="" coords="199,283,408,308"/>
-<area shape="poly" id="edge6_Node000001_Node000007" title=" " alt="" coords="513,436,471,378,441,347,408,322,384,311,386,306,411,317,445,343,475,374,517,433"/>
-<area shape="rect" id="Node000008" href="$classFluxPUEq.html#a3e734d6e31c8579b43269e7e477a7f72" title="Method to correct energy in non conservative models using total energy conservation." alt="" coords="202,332,405,357"/>
-<area shape="poly" id="edge7_Node000001_Node000008" title=" " alt="" coords="504,440,461,405,408,372,374,360,376,355,410,368,464,400,507,435"/>
-<area shape="rect" id="Node000009" href="$classModEulerHomogeneous.html#a8835ffa3f5afcf37a2481ba42c1e9c75" title="Complete a thermodynamics state frome minimum variables depending on the model." alt="" coords="215,382,392,422"/>
-<area shape="poly" id="edge8_Node000001_Node000009" title=" " alt="" coords="465,446,382,425,384,419,467,441"/>
-<area shape="rect" id="Node000010" href="$classModPTUEq.html#a295d0996ad74507bbbd71fa94e97905b" title="Complete a thermodynamics state frome minimum variables depending on the model." alt="" coords="220,447,387,472"/>
-<area shape="poly" id="edge9_Node000001_Node000010" title=" " alt="" coords="444,462,387,462,387,457,444,457"/>
-<area shape="rect" id="Node000011" href="$classModPUEq.html#a47c184e8eb3b90fa4cd26997cc8b4d9e" title=" " alt="" coords="197,496,409,521"/>
-<area shape="poly" id="edge10_Node000001_Node000011" title=" " alt="" coords="458,478,363,499,362,493,457,472"/>
-<area shape="rect" id="Node000012" href="$classModEulerKorteweg.html#aa84464a570842e368a669e4307d91fa3" title="Complete the augmented variables (such as the ones of Euler&#45;Korteweg model)" alt="" coords="199,546,407,586"/>
-<area shape="poly" id="edge11_Node000001_Node000012" title=" " alt="" coords="501,482,459,509,410,535,377,548,375,543,408,530,456,504,498,478"/>
-<area shape="rect" id="Node000013" href="$classRelaxationPInfinite.html#a95983187f25b5a0a3e21618fd666692e" title="Stiff (infinite) Pressure relaxation method." alt="" coords="231,610,376,650"/>
-<area shape="poly" id="edge12_Node000001_Node000013" title=" " alt="" coords="516,485,474,543,444,574,411,600,378,616,375,612,408,596,441,570,470,539,512,482"/>
-<area shape="rect" id="Node000014" href="$classRelaxationPT.html#af732e508ebf612a869b22aabc7515390" title="Stiff Pressure&#45;Temperature relaxation method." alt="" coords="213,675,394,700"/>
-<area shape="poly" id="edge13_Node000001_Node000014" title=" " alt="" coords="523,486,508,526,485,574,453,623,433,645,411,664,388,677,385,672,408,660,429,641,449,620,480,571,504,524,518,484"/>
-<area shape="rect" id="Node000015" href="$classRelaxationPTMu.html#a942e19d92434d4c0a073a32f28137995" title="Stiff Thermo&#45;Chemical relaxation method." alt="" coords="202,724,405,749"/>
-<area shape="poly" id="edge14_Node000001_Node000015" title=" " alt="" coords="527,486,514,535,493,596,459,660,437,688,411,713,390,726,387,721,408,709,433,685,454,657,488,594,509,533,521,485"/>
-<area shape="rect" id="Node000016" href="$classRelaxationU.html#a167f6464966335146730018426d11dd3" title="Stiff velocity relaxation methods." alt="" coords="215,773,391,799"/>
-<area shape="poly" id="edge15_Node000001_Node000016" title=" " alt="" coords="529,486,520,544,499,619,484,658,465,696,440,732,411,763,391,776,388,771,408,759,436,728,460,694,479,656,494,617,514,543,524,486"/>
-<area shape="rect" id="Node000017" href="$classRelaxationPFinite.html#aa4f46a0b4ca70047bb49d68a463f9104" title="Finite Pressure relaxation method." alt="" coords="5,846,149,886"/>
-<area shape="poly" id="edge16_Node000001_Node000017" title=" " alt="" coords="531,486,525,553,508,641,493,688,472,734,445,776,411,812,392,824,365,834,297,849,221,859,150,865,149,860,220,854,297,844,364,829,390,819,408,808,441,773,467,731,488,686,503,640,520,552,526,486"/>
-<area shape="rect" id="Node000018" href="$classRelaxationPFinite.html#a336ff796145db489e80500a61a568058" title="System of equations to integrate for the LSODA solver." alt="" coords="231,874,375,914"/>
-<area shape="poly" id="edge17_Node000001_Node000018" title=" " alt="" coords="531,486,526,558,509,657,494,710,473,763,446,813,411,857,395,871,377,880,374,876,392,866,407,853,441,810,468,761,489,709,504,656,521,558,526,486"/>
-<area shape="poly" id="edge18_Node000018_Node000017" title=" " alt="" coords="217,886,149,878,150,872,217,881"/>
+<area shape="rect" id="Node000001" title=" " alt="" coords="503,493,647,521"/>
+<area shape="rect" id="Node000002" href="$classFluxEuler.html#a5267a54d69731c74528727f8fd8565c9" title="Build the primitive variables for a given cell from conservative one." alt="" coords="250,5,402,33"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="568,477,554,380,530,250,514,185,496,126,476,78,453,46,429,31,403,22,401,18,432,26,457,43,480,75,501,124,519,183,535,249,559,379,573,478"/>
+<area shape="rect" id="Node000003" href="$classFluxEulerHomogeneous.html#a9dfe2ce022fdd8eff55f8632e254cdf2" title="Build the primitive variables for a given cell from conservative one." alt="" coords="238,57,414,102"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="571,477,567,405,551,307,536,255,515,204,488,157,453,116,435,102,415,93,414,88,438,98,457,112,492,154,520,202,541,254,556,306,572,404,577,479"/>
+<area shape="rect" id="Node000004" href="$classFluxExtendedNavierStokesKorteweg1D.html#a8a48bfe6716413ef97a6307bc29ee02a" title="Build the primitive variables for a given cell from conservative one." alt="" coords="228,126,424,171"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="569,477,561,416,541,337,526,296,507,255,483,218,453,185,425,167,424,161,457,181,487,215,512,253,531,294,547,336,566,415,574,478"/>
+<area shape="rect" id="Node000005" href="$classFluxNEq.html#a8eeb4bef568ee6e2470dedf3177ba420" title="Build the primitive variables for a given cell from conservative one." alt="" coords="253,195,398,222"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="567,477,556,426,536,360,521,326,502,293,480,263,453,237,427,222,400,214,398,209,429,217,457,233,484,260,507,290,525,324,541,358,562,425,573,479"/>
+<area shape="rect" id="Node000006" href="$classFluxPTUEq.html#a56b4822f3b4ca96c1d7658df57894228" title="Build the primitive variables for a given cell from conservative one." alt="" coords="245,247,406,274"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="564,478,550,436,528,384,496,332,476,309,453,289,431,277,408,269,406,264,433,272,457,285,480,305,500,329,533,382,555,434,569,479"/>
+<area shape="rect" id="Node000007" href="$classFluxUEq.html#a951795fa6ea264745ec92b6655c834c8" title="Build the primitive variables for a given cell from conservative one." alt="" coords="253,299,398,326"/>
+<area shape="poly" id="edge6_Node000001_Node000007" title=" " alt="" coords="559,478,543,447,519,409,490,372,454,341,427,328,399,320,398,315,429,323,456,337,493,368,524,406,548,444,565,479"/>
+<area shape="rect" id="Node000008" href="$classFluxUEqTotEnergy.html#a897b84cffe330521c9815d563504f647" title="Build the primitive variables for a given cell from conservative one." alt="" coords="222,351,430,378"/>
+<area shape="poly" id="edge7_Node000001_Node000008" title=" " alt="" coords="552,481,510,436,483,413,454,394,426,382,425,376,456,389,487,409,514,432,557,481"/>
+<area shape="rect" id="Node000009" href="$classFluxPUEq.html#a3e734d6e31c8579b43269e7e477a7f72" title="Method to correct energy in non conservative models using total energy conservation." alt="" coords="225,403,426,430"/>
+<area shape="poly" id="edge8_Node000001_Node000009" title=" " alt="" coords="537,485,499,464,454,444,419,434,417,428,456,439,501,460,543,484"/>
+<area shape="rect" id="Node000010" href="$classModEulerHomogeneous.html#a8835ffa3f5afcf37a2481ba42c1e9c75" title="Complete a thermodynamics state frome minimum variables depending on the model." alt="" coords="238,454,414,499"/>
+<area shape="poly" id="edge9_Node000001_Node000010" title=" " alt="" coords="485,498,415,490,414,485,490,495"/>
+<area shape="rect" id="Node000011" href="$classModPTUEq.html#a295d0996ad74507bbbd71fa94e97905b" title="Complete a thermodynamics state frome minimum variables depending on the model." alt="" coords="243,523,409,550"/>
+<area shape="poly" id="edge10_Node000001_Node000011" title=" " alt="" coords="485,519,411,529,409,524,490,516"/>
+<area shape="rect" id="Node000012" href="$classModPUEq.html#a47c184e8eb3b90fa4cd26997cc8b4d9e" title=" " alt="" coords="220,575,432,602"/>
+<area shape="poly" id="edge11_Node000001_Node000012" title=" " alt="" coords="532,530,456,564,411,576,409,572,454,559,536,527"/>
+<area shape="rect" id="Node000013" href="$classSourceExactExtendedNavierStokesKorteweg1D.html#a55f1a24559abaf373c0dd51c7f6e6a3d" title="Integration via an exact solution." alt="" coords="197,627,455,689"/>
+<area shape="poly" id="edge12_Node000001_Node000013" title=" " alt="" coords="554,530,511,576,456,616,432,629,428,624,454,612,507,572,550,534"/>
+<area shape="rect" id="Node000014" href="$classRelaxationPFinite.html#aa4f46a0b4ca70047bb49d68a463f9104" title="Finite Pressure relaxation method." alt="" coords="5,846,149,891"/>
+<area shape="poly" id="edge13_Node000001_Node000014" title=" " alt="" coords="566,533,552,575,529,620,497,665,457,703,422,722,389,731,358,734,328,733,267,732,234,739,198,754,167,774,139,799,97,848,92,844,135,795,163,770,195,749,233,733,267,727,329,728,358,729,388,726,420,717,453,698,493,662,524,617,547,573,563,538"/>
+<area shape="rect" id="Node000015" href="$classRelaxationPInfinite.html#a95983187f25b5a0a3e21618fd666692e" title="Stiff (infinite) Pressure relaxation method." alt="" coords="254,764,398,808"/>
+<area shape="poly" id="edge14_Node000001_Node000015" title=" " alt="" coords="569,534,556,583,533,639,501,697,480,723,457,747,430,764,400,776,397,771,427,759,453,742,476,720,496,694,529,637,551,581,566,538"/>
+<area shape="rect" id="Node000016" href="$classRelaxationPT.html#af732e508ebf612a869b22aabc7515390" title="Stiff Pressure&#45;Temperature relaxation method." alt="" coords="236,832,416,860"/>
+<area shape="poly" id="edge15_Node000001_Node000016" title=" " alt="" coords="573,534,566,597,547,675,532,715,512,755,487,791,457,823,438,835,417,843,415,838,436,830,453,818,483,788,507,752,527,713,542,673,561,596,570,539"/>
+<area shape="rect" id="Node000017" href="$classRelaxationPTMu.html#a942e19d92434d4c0a073a32f28137995" title="Stiff Thermo&#45;Chemical relaxation method." alt="" coords="225,884,426,912"/>
+<area shape="poly" id="edge16_Node000001_Node000017" title=" " alt="" coords="575,534,571,606,554,697,538,745,518,792,491,835,457,873,428,890,426,886,453,869,487,832,513,790,533,743,548,696,566,605,572,539"/>
+<area shape="rect" id="Node000018" href="$classRelaxationU.html#a167f6464966335146730018426d11dd3" title="Stiff velocity relaxation methods." alt="" coords="238,936,414,964"/>
+<area shape="poly" id="edge17_Node000001_Node000018" title=" " alt="" coords="576,534,575,615,570,665,561,720,546,775,524,830,495,881,457,925,437,939,415,948,413,942,435,934,453,921,491,878,519,828,541,774,555,718,565,664,570,614,574,539"/>
+<area shape="rect" id="Node000019" href="$classRelaxationPFinite.html#a336ff796145db489e80500a61a568058" title="System of equations to integrate for the LSODA solver." alt="" coords="254,988,398,1032"/>
+<area shape="poly" id="edge18_Node000001_Node000019" title=" " alt="" coords="572,534,559,635,534,767,519,833,500,893,480,943,457,977,430,996,398,1007,397,1002,427,991,453,973,475,940,495,892,513,832,529,766,554,634,569,538"/>
+<area shape="poly" id="edge19_Node000019_Node000014" title=" " alt="" coords="237,993,195,978,166,958,138,936,97,894,98,888,142,932,169,954,198,973,242,993"/>
 </map>

@@ -1,9 +1,10 @@
 <map id="APUEqViscosity::solveFluxViscosityInner" name="APUEqViscosity::solveFluxViscosityInner">
-<area shape="rect" id="Node000001" title="Solve the viscosity flux between two cells." alt="" coords="491,37,685,77"/>
-<area shape="rect" id="Node000002" href="$classAPUEqViscosity.html#a159d010c53fc65fc63d636e6b6e87faf" title="Solve the additional physic flux between two cells." alt="" coords="248,5,443,45"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="477,45,443,41,443,36,477,40"/>
-<area shape="rect" id="Node000003" href="$classAPUEqViscosity.html#a7ccb06fb741ccb1a7151d5d6efc4a742" title="Solve the viscosity flux at a boundary with a non&#45;reflecting type." alt="" coords="248,69,443,109"/>
-<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="477,75,443,79,443,74,477,69"/>
-<area shape="rect" id="Node000004" href="$classAPUEqViscosity.html#aed3e60b546e6b8b5cb141ca88fe238e1" title="Solve the additional physic flux at a domain boundary." alt="" coords="5,69,200,109"/>
-<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="234,92,200,92,200,87,234,87"/>
+<area shape="rect" id="Node000001" title="Solve the viscosity flux between two cells." alt="" coords="488,65,681,110"/>
+<area shape="rect" id="Node000002" href="$classAPUEqViscosity.html#a159d010c53fc65fc63d636e6b6e87faf" title="Solve the additional physics flux between two cells." alt="" coords="247,5,440,50"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="475,61,436,53,436,48,480,61"/>
+<area shape="rect" id="Node000003" href="$classAPUEqViscosity.html#aed3e60b546e6b8b5cb141ca88fe238e1" title="Solve the additional physics flux at a domain boundary." alt="" coords="5,96,199,141"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="472,97,199,115,199,110,473,92"/>
+<area shape="rect" id="Node000004" href="$classAPUEqViscosity.html#a7ccb06fb741ccb1a7151d5d6efc4a742" title="Solve the viscosity flux at a boundary with a non&#45;reflecting type." alt="" coords="247,125,440,170"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="480,114,436,127,435,122,475,115"/>
+<area shape="poly" id="edge4_Node000004_Node000003" title=" " alt="" coords="229,134,199,133,199,127,234,134"/>
 </map>

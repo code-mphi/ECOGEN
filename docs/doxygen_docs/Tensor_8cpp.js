@@ -1,6 +1,6 @@
 var Tensor_8cpp =
 [
-    [ "operator*", "Tensor_8cpp.html#a88b1b8a60962890ae01d1ea2118582d1", null ],
+    [ "operator*", "Tensor_8cpp.html#a69d134ccacb27942fe949d34099fbe9b", null ],
     [ "operator+", "Tensor_8cpp.html#aad053b5649bb32aeb0289afd0f77ab98", null ],
     [ "operator-", "Tensor_8cpp.html#ae967f8787f96a877c328116b756356ba", null ],
     [ "tensorA", "Tensor_8cpp.html#ab5b1178cd9ee6b4bdc5db0907b1702a8", null ],
@@ -19,6 +19,8 @@ var Tensor_8cpp =
     [ "tensorPade", "Tensor_8cpp.html#a2bb0ef1ce0a8db08de27967d3e0faa60", null ],
     [ "tensorPinverse", "Tensor_8cpp.html#afa2706551daebed724d9355c7cd73fd1", null ],
     [ "tensorQ", "Tensor_8cpp.html#aecbd2a04a4c9e2f08fe43bab56e84713", null ],
+    [ "tensorStrainRate", "Tensor_8cpp.html#aafb5f91f6b88cb88579cde59fc21ff72", null ],
+    [ "tensorStrainRateTranspose", "Tensor_8cpp.html#a079ac008715afe592f292490ca8c3df0", null ],
     [ "tensorU", "Tensor_8cpp.html#a55c5def2ba65b73a520677a983d807bd", null ],
     [ "tensorV", "Tensor_8cpp.html#aa8f68f595bd2663670d0cd13f20a9698", null ],
     [ "tensorX2", "Tensor_8cpp.html#a948c8db992908ba3150c6030552e0972", null ],

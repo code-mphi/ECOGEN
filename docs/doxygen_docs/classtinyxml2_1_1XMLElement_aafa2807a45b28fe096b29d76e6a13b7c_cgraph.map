@@ -1,36 +1,49 @@
 <map id="tinyxml2::XMLElement::ShallowClone" name="tinyxml2::XMLElement::ShallowClone">
-<area shape="rect" id="Node000001" title=" " alt="" coords="5,133,176,173"/>
-<area shape="rect" id="Node000002" href="$classtinyxml2_1_1XMLElement.html#a4a7c4392658833bb8138c474d15a805a" title="Return the first attribute in the list." alt="" coords="230,5,401,45"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="114,131,162,93,223,55,236,48,239,53,225,60,165,98,117,135"/>
-<area shape="rect" id="Node000003" href="$classtinyxml2_1_1XMLDocument.html#a3c335a700a43d7c363a393142a23f234" title=" " alt="" coords="224,69,407,109"/>
-<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="161,131,231,111,232,116,162,136"/>
-<area shape="rect" id="Node000005" href="$classtinyxml2_1_1XMLAttribute.html#aa8c7cf4c94a636ae75046658e551614e" title="The next attribute in the list." alt="" coords="228,133,403,173"/>
-<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="177,151,214,151,214,156,177,156"/>
-<area shape="rect" id="Node000006" href="$classtinyxml2_1_1XMLElement.html#a11943abf2d0831548c3790dd5d9f119c" title="Sets the named attribute to value." alt="" coords="230,197,401,237"/>
-<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="162,171,232,191,231,196,161,176"/>
-<area shape="rect" id="Node000010" href="$classtinyxml2_1_1XMLNode.html#a0485e51c670e741884cfd8362274d680" title=" " alt="" coords="236,264,395,304"/>
-<area shape="poly" id="edge9_Node000001_Node000010" title=" " alt="" coords="117,171,166,209,225,247,244,256,242,261,223,252,163,213,114,176"/>
-<area shape="rect" id="Node000004" href="$classtinyxml2_1_1XMLElement.html#a97712009a530d8cb8a63bf705f02b4f1" title="Set the name of the element." alt="" coords="457,69,627,109"/>
-<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="407,87,443,87,443,92,407,92"/>
-<area shape="rect" id="Node000007" href="$classtinyxml2_1_1XMLAttribute.html#a406d2c4a13c7af99a65edb59dd9f7581" title="Set the attribute to a string value." alt="" coords="455,196,629,236"/>
-<area shape="poly" id="edge6_Node000006_Node000007" title=" " alt="" coords="401,214,441,214,441,219,401,219"/>
-<area shape="rect" id="Node000008" href="$classtinyxml2_1_1StrPair.html#a1f82ec6b5bee35ee7466d8565e43b1de" title=" " alt="" coords="685,184,824,224"/>
-<area shape="poly" id="edge7_Node000007_Node000008" title=" " alt="" coords="629,208,671,206,672,211,630,214"/>
-<area shape="rect" id="Node000009" href="$classtinyxml2_1_1StrPair.html#a80c1b3bd99bf62ae85c94a29ce537125" title=" " alt="" coords="892,183,1031,223"/>
-<area shape="poly" id="edge8_Node000008_Node000009" title=" " alt="" coords="824,201,878,201,878,206,825,206"/>
-<area shape="rect" id="Node000011" href="$classtinyxml2_1_1StrPair.html#ad87e3d11330f5e689ba1e7e54c023b57" title=" " alt="" coords="473,271,611,311"/>
-<area shape="poly" id="edge10_Node000010_Node000011" title=" " alt="" coords="395,284,459,286,459,291,395,289"/>
-<area shape="rect" id="Node000012" href="$classtinyxml2_1_1StrPair.html#ade1469025e6b4cac74397a82a7429337" title=" " alt="" coords="677,271,832,311"/>
-<area shape="poly" id="edge11_Node000011_Node000012" title=" " alt="" coords="612,288,663,288,663,293,612,293"/>
-<area shape="rect" id="Node000016" href="$classtinyxml2_1_1XMLUtil.html#a5a96e5144a8d693dc4bcd783d9964648" title=" " alt="" coords="681,336,828,376"/>
-<area shape="poly" id="edge16_Node000011_Node000016" title=" " alt="" coords="609,308,677,329,675,334,607,313"/>
-<area shape="rect" id="Node000013" href="$classtinyxml2_1_1XMLUtil.html#a357ec3af8fc433d19023a815f45e8e33" title=" " alt="" coords="1091,269,1237,309"/>
-<area shape="poly" id="edge12_Node000012_Node000013" title=" " alt="" coords="832,284,880,283,1043,283,1077,283,1077,289,1043,288,880,288,832,290"/>
-<area shape="rect" id="Node000015" href="$classtinyxml2_1_1XMLUtil.html#a14647b4bb3e21331c4668343abcf6761" title=" " alt="" coords="888,297,1035,337"/>
-<area shape="poly" id="edge14_Node000012_Node000015" title=" " alt="" coords="833,298,874,303,874,309,832,303"/>
-<area shape="rect" id="Node000014" href="$classtinyxml2_1_1XMLUtil.html#a9780b5926e30fe6222e10f0e6cf5a04a" title=" " alt="" coords="1285,269,1436,309"/>
-<area shape="poly" id="edge13_Node000013_Node000014" title=" " alt="" coords="1238,287,1271,287,1271,292,1238,292"/>
-<area shape="poly" id="edge15_Node000015_Node000013" title=" " alt="" coords="1035,305,1077,299,1078,304,1035,310"/>
-<area shape="rect" id="Node000017" href="$classtinyxml2_1_1XMLUtil.html#a31c00d5c5dfb38382de1dfcaf4be3595" title=" " alt="" coords="880,361,1043,401"/>
-<area shape="poly" id="edge17_Node000016_Node000017" title=" " alt="" coords="829,362,866,367,866,372,828,368"/>
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,253,175,298"/>
+<area shape="rect" id="Node000002" href="$classtinyxml2_1_1XMLElement.html#a4a7c4392658833bb8138c474d15a805a" title="Return the first attribute in the list." alt="" coords="229,29,398,74"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="99,252,117,216,144,171,179,125,221,84,230,80,226,84,224,88,183,128,149,174,122,218,104,254"/>
+<area shape="rect" id="Node000003" href="$classtinyxml2_1_1XMLDocument.html#a3c335a700a43d7c363a393142a23f234" title=" " alt="" coords="223,99,405,143"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="111,251,160,207,221,160,245,149,241,152,224,165,163,211,116,255"/>
+<area shape="rect" id="Node000008" href="$classtinyxml2_1_1XMLNode.html#a29868df6ca383d574f584dfdd15105b6" title=" " alt="" coords="914,159,1071,203"/>
+<area shape="poly" id="edge26_Node000001_Node000008" title=" " alt="" coords="122,251,168,225,222,204,313,184,407,170,502,161,595,157,765,159,901,170,896,172,764,165,595,163,502,167,408,175,314,189,223,209,171,229,126,255"/>
+<area shape="rect" id="Node000010" href="$classtinyxml2_1_1XMLAttribute.html#aa8c7cf4c94a636ae75046658e551614e" title="The next attribute in the list." alt="" coords="227,219,400,263"/>
+<area shape="poly" id="edge11_Node000001_Node000010" title=" " alt="" coords="174,260,214,255,210,258,176,265"/>
+<area shape="rect" id="Node000012" href="$classtinyxml2_1_1XMLElement.html#a11943abf2d0831548c3790dd5d9f119c" title="Sets the named attribute to value." alt="" coords="229,288,398,333"/>
+<area shape="poly" id="edge13_Node000001_Node000012" title=" " alt="" coords="174,286,216,294,211,296,176,291"/>
+<area shape="rect" id="Node000019" href="$classtinyxml2_1_1XMLNode.html#a0485e51c670e741884cfd8362274d680" title=" " alt="" coords="235,357,392,402"/>
+<area shape="poly" id="edge20_Node000001_Node000019" title=" " alt="" coords="132,296,224,343,239,350,234,351,222,347,132,301"/>
+<area shape="rect" id="Node000020" href="$classtinyxml2_1_1XMLElement.html#a4eee3bda60c60a30e4e8cd4ea91c4c6e" title=" " alt="" coords="460,451,629,495"/>
+<area shape="poly" id="edge21_Node000001_Node000020" title=" " alt="" coords="106,296,155,356,187,387,224,412,263,426,318,439,447,461,441,462,317,444,261,431,221,417,184,391,151,360,106,301"/>
+<area shape="rect" id="Node000021" href="$classtinyxml2_1_1XMLElement.html#a52484940e20f3734e6edc5e5c3af2dbc" title=" " alt="" coords="229,477,398,522"/>
+<area shape="poly" id="edge23_Node000001_Node000021" title=" " alt="" coords="103,296,151,373,185,417,224,456,241,470,236,469,221,460,181,421,147,376,102,301"/>
+<area shape="rect" id="Node000004" href="$classtinyxml2_1_1XMLElement.html#a97712009a530d8cb8a63bf705f02b4f1" title="Set the name of the element." alt="" coords="460,5,629,50"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="375,96,404,84,452,60,470,55,465,58,454,65,406,89,378,100"/>
+<area shape="rect" id="Node000006" href="$classtinyxml2_1_1XMLDocument.html#ac2fba9b6e452829dd892f7392c24e0eb" title=" " alt="" coords="453,99,635,143"/>
+<area shape="poly" id="edge5_Node000003_Node000006" title=" " alt="" coords="404,119,440,120,435,122,406,123"/>
+<area shape="rect" id="Node000005" href="$classtinyxml2_1_1XMLNode.html#a09dd68cf9eae137579f6e50f36487513" title=" " alt="" coords="696,5,853,50"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="628,25,683,27,678,29,630,30"/>
+<area shape="poly" id="edge10_Node000006_Node000006" title=" " alt="" coords="500,97,499,89,506,80,522,74,544,72,569,75,585,83,580,84,568,80,544,77,523,79,509,84,504,90,505,99"/>
+<area shape="rect" id="Node000007" href="$classtinyxml2_1_1XMLDocument.html#af1574f76ebb619f25ef3f09eb2ba5188" title="constructor" alt="" coords="683,99,866,143"/>
+<area shape="poly" id="edge6_Node000006_Node000007" title=" " alt="" coords="635,118,670,120,665,122,636,124"/>
+<area shape="poly" id="edge7_Node000007_Node000008" title=" " alt="" coords="858,141,901,155,896,156,858,147"/>
+<area shape="rect" id="Node000009" href="$classtinyxml2_1_1XMLNode.html#a4eee3bda60c60a30e4e8cd4ea91c4c6e" title=" " alt="" coords="1119,159,1276,203"/>
+<area shape="poly" id="edge8_Node000008_Node000009" title=" " alt="" coords="1071,178,1106,181,1101,181,1072,184"/>
+<area shape="poly" id="edge9_Node000009_Node000009" title=" " alt="" coords="1158,157,1157,149,1164,140,1177,134,1198,132,1220,134,1234,143,1229,143,1218,140,1198,137,1179,139,1167,144,1162,150,1163,159"/>
+<area shape="rect" id="Node000011" href="$classtinyxml2_1_1XMLAttribute.html#ae001da9e4e0f727c44f2aadbfb325a7a" title=" " alt="" coords="458,219,631,263"/>
+<area shape="poly" id="edge12_Node000010_Node000011" title=" " alt="" coords="400,238,444,240,439,242,401,244"/>
+<area shape="rect" id="Node000013" href="$classtinyxml2_1_1XMLElement.html#ac9d8fc849ec8acf46678217de011e896" title=" " alt="" coords="458,288,630,333"/>
+<area shape="poly" id="edge14_Node000012_Node000013" title=" " alt="" coords="398,308,445,310,440,311,399,313"/>
+<area shape="rect" id="Node000018" href="$classtinyxml2_1_1XMLAttribute.html#a406d2c4a13c7af99a65edb59dd9f7581" title="Set the attribute to a string value." alt="" coords="458,357,631,402"/>
+<area shape="poly" id="edge19_Node000012_Node000018" title=" " alt="" coords="390,331,456,352,451,353,390,336"/>
+<area shape="rect" id="Node000014" href="$classtinyxml2_1_1XMLAttribute.html#a5a5c135d24cce7abda6f17301c6274d8" title="The name of the attribute." alt="" coords="688,219,861,263"/>
+<area shape="poly" id="edge15_Node000013_Node000014" title=" " alt="" coords="620,285,686,267,681,269,622,290"/>
+<area shape="rect" id="Node000015" href="$classtinyxml2_1_1XMLAttribute.html#a469c2363600007f49e62a8048a362d57" title=" " alt="" coords="688,288,861,333"/>
+<area shape="poly" id="edge16_Node000013_Node000015" title=" " alt="" coords="630,308,675,310,670,311,631,313"/>
+<area shape="rect" id="Node000016" href="$classtinyxml2_1_1MemPool.html#ac5804dd1387b2e4de5eef710076a0db1" title=" " alt="" coords="696,357,853,402"/>
+<area shape="poly" id="edge17_Node000013_Node000016" title=" " alt="" coords="621,331,686,352,681,353,621,336"/>
+<area shape="rect" id="Node000017" href="$classtinyxml2_1_1XMLUtil.html#acfcd287cacfd2533e1bc9ea4dfb56602" title=" " alt="" coords="701,427,848,471"/>
+<area shape="poly" id="edge18_Node000013_Node000017" title=" " alt="" coords="617,331,637,343,653,361,662,379,670,395,685,412,691,419,686,418,682,416,665,398,657,381,649,364,634,347,616,336"/>
+<area shape="poly" id="edge22_Node000020_Node000020" title=" " alt="" coords="501,449,499,441,506,432,522,426,544,424,569,427,585,436,580,435,568,432,544,429,523,431,509,436,504,442,505,452"/>
+<area shape="poly" id="edge25_Node000021_Node000008" title=" " alt="" coords="392,520,496,541,556,548,620,550,685,547,748,535,809,514,864,482,893,455,918,423,937,388,953,351,974,279,986,221,989,217,980,280,958,353,942,390,922,426,897,458,867,486,811,519,750,540,685,552,620,556,556,553,495,546,392,525"/>
+<area shape="poly" id="edge24_Node000021_Node000020" title=" " alt="" coords="398,487,447,484,441,485,399,493"/>
 </map>

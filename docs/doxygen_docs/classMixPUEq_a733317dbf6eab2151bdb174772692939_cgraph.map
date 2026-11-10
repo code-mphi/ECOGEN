@@ -1,36 +1,32 @@
 <map id="MixPUEq::MixPUEq" name="MixPUEq::MixPUEq">
-<area shape="rect" id="Node000001" title="Mixture constructor from a XML format reading." alt="" coords="5,205,152,230"/>
-<area shape="rect" id="Node000002" href="$classtinyxml2_1_1XMLNode.html#a4f9c37890cc8130313af2deabc7389cb" title=" " alt="" coords="207,101,365,141"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="106,202,228,145,230,150,108,207"/>
-<area shape="rect" id="Node000006" href="$classtinyxml2_1_1XMLElement.html#a5f0964e2dbd8e2ee7fce9beab689443c" title="See QueryIntAttribute()" alt="" coords="200,197,372,237"/>
-<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="152,215,186,215,186,220,152,220"/>
-<area shape="rect" id="Node000017" href="$classCoord.html#af96ea861b2a73538910c508d414b33a4" title="Set the values of the Coord object." alt="" coords="229,262,343,287"/>
-<area shape="poly" id="edge17_Node000001_Node000017" title=" " alt="" coords="126,227,227,256,225,261,125,233"/>
-<area shape="rect" id="Node000003" href="$classtinyxml2_1_1XMLElement.html#abd36e34e4428a8eeeffbe87eab0b124d" title="Get the name of an element (which is the Value() of the node.)" alt="" coords="422,5,593,45"/>
-<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="325,99,419,55,436,48,438,53,421,60,327,104"/>
-<area shape="rect" id="Node000004" href="$classtinyxml2_1_1XMLUtil.html#acfcd287cacfd2533e1bc9ea4dfb56602" title=" " alt="" coords="434,69,581,109"/>
-<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="365,107,420,99,421,105,366,113"/>
-<area shape="rect" id="Node000005" href="$classtinyxml2_1_1XMLElement.html#abade4c59bd6f16c85caa42d3c9eb617d" title="Safely cast to an Element, or null." alt="" coords="422,133,593,173"/>
-<area shape="poly" id="edge4_Node000002_Node000005" title=" " alt="" coords="366,130,409,136,408,142,365,135"/>
-<area shape="rect" id="Node000007" href="$classtinyxml2_1_1XMLAttribute.html#a2aa6e55e8ea03af0609cf6690bff79b9" title="See QueryIntValue." alt="" coords="420,197,595,237"/>
-<area shape="poly" id="edge6_Node000006_Node000007" title=" " alt="" coords="373,215,406,215,406,220,373,220"/>
-<area shape="rect" id="Node000008" href="$classtinyxml2_1_1XMLUtil.html#ad8f75ac140fb19c1c6e164a957c4cd53" title=" " alt="" coords="657,165,803,205"/>
-<area shape="poly" id="edge7_Node000007_Node000008" title=" " alt="" coords="595,202,642,195,643,200,595,207"/>
-<area shape="rect" id="Node000009" href="$classtinyxml2_1_1XMLAttribute.html#ab1c5cd993f836a771818ca408994b14e" title="The value of the attribute." alt="" coords="643,229,817,269"/>
-<area shape="poly" id="edge8_Node000007_Node000009" title=" " alt="" coords="595,227,630,232,629,238,595,233"/>
-<area shape="rect" id="Node000010" href="$classtinyxml2_1_1StrPair.html#ad87e3d11330f5e689ba1e7e54c023b57" title=" " alt="" coords="865,229,1004,269"/>
-<area shape="poly" id="edge9_Node000009_Node000010" title=" " alt="" coords="818,247,852,247,852,252,818,252"/>
-<area shape="rect" id="Node000011" href="$classtinyxml2_1_1StrPair.html#ade1469025e6b4cac74397a82a7429337" title=" " alt="" coords="1052,197,1207,237"/>
-<area shape="poly" id="edge10_Node000010_Node000011" title=" " alt="" coords="1004,235,1038,230,1039,235,1005,241"/>
-<area shape="rect" id="Node000015" href="$classtinyxml2_1_1XMLUtil.html#a5a96e5144a8d693dc4bcd783d9964648" title=" " alt="" coords="1056,261,1203,301"/>
-<area shape="poly" id="edge15_Node000010_Node000015" title=" " alt="" coords="1005,258,1043,264,1042,270,1004,263"/>
-<area shape="rect" id="Node000012" href="$classtinyxml2_1_1XMLUtil.html#a357ec3af8fc433d19023a815f45e8e33" title=" " alt="" coords="1465,169,1612,209"/>
-<area shape="poly" id="edge11_Node000011_Node000012" title=" " alt="" coords="1195,195,1254,183,1357,177,1452,179,1451,185,1357,182,1255,188,1196,200"/>
-<area shape="rect" id="Node000014" href="$classtinyxml2_1_1XMLUtil.html#a14647b4bb3e21331c4668343abcf6761" title=" " alt="" coords="1263,197,1409,237"/>
-<area shape="poly" id="edge13_Node000011_Node000014" title=" " alt="" coords="1207,215,1249,215,1249,220,1207,220"/>
-<area shape="rect" id="Node000013" href="$classtinyxml2_1_1XMLUtil.html#a9780b5926e30fe6222e10f0e6cf5a04a" title=" " alt="" coords="1660,169,1811,209"/>
-<area shape="poly" id="edge12_Node000012_Node000013" title=" " alt="" coords="1612,187,1646,187,1646,192,1612,192"/>
-<area shape="poly" id="edge14_Node000014_Node000012" title=" " alt="" coords="1409,205,1452,199,1452,204,1410,210"/>
-<area shape="rect" id="Node000016" href="$classtinyxml2_1_1XMLUtil.html#a31c00d5c5dfb38382de1dfcaf4be3595" title=" " alt="" coords="1255,261,1417,301"/>
-<area shape="poly" id="edge16_Node000015_Node000016" title=" " alt="" coords="1203,279,1241,279,1241,284,1203,284"/>
+<area shape="rect" id="Node000001" title="Mixture constructor from a XML format reading." alt="" coords="5,236,151,264"/>
+<area shape="rect" id="Node000002" href="$classtinyxml2_1_1XMLNode.html#a4f9c37890cc8130313af2deabc7389cb" title=" " alt="" coords="206,168,363,213"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="127,234,193,216,189,219,130,238"/>
+<area shape="rect" id="Node000009" href="$classMixUEq.html#aa605d94dc0fa793d5901dd9eea6f479c" title=" " alt="" coords="220,236,349,264"/>
+<area shape="poly" id="edge10_Node000001_Node000009" title=" " alt="" coords="150,248,206,249,202,252,152,253"/>
+<area shape="rect" id="Node000010" href="$classtinyxml2_1_1XMLElement.html#a5f0964e2dbd8e2ee7fce9beab689443c" title="See QueryIntAttribute()." alt="" coords="199,288,370,333"/>
+<area shape="poly" id="edge11_Node000001_Node000010" title=" " alt="" coords="128,262,193,282,189,285,128,267"/>
+<area shape="rect" id="Node000003" href="$classtinyxml2_1_1XMLElement.html#abd36e34e4428a8eeeffbe87eab0b124d" title="Get the name of an element (which is the Value() of the node.)." alt="" coords="420,168,589,213"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="363,188,407,189,402,191,364,193"/>
+<area shape="rect" id="Node000005" href="$classtinyxml2_1_1XMLUtil.html#acfcd287cacfd2533e1bc9ea4dfb56602" title=" " alt="" coords="653,249,799,294"/>
+<area shape="poly" id="edge4_Node000002_Node000005" title=" " alt="" coords="363,209,419,222,532,243,640,260,635,261,532,248,417,228,364,215"/>
+<area shape="rect" id="Node000006" href="$classtinyxml2_1_1XMLNode.html#ac2fba9b6e452829dd892f7392c24e0eb" title=" " alt="" coords="426,29,583,74"/>
+<area shape="poly" id="edge5_Node000002_Node000006" title=" " alt="" coords="308,166,357,125,417,84,430,80,425,83,419,89,360,129,312,170"/>
+<area shape="rect" id="Node000007" href="$classtinyxml2_1_1XMLNode.html#a29868df6ca383d574f584dfdd15105b6" title=" " alt="" coords="426,99,583,143"/>
+<area shape="poly" id="edge7_Node000002_Node000007" title=" " alt="" coords="356,165,419,147,415,150,359,170"/>
+<area shape="rect" id="Node000004" href="$classtinyxml2_1_1XMLNode.html#a0485e51c670e741884cfd8362274d680" title=" " alt="" coords="647,168,805,213"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="589,188,634,190,629,191,590,193"/>
+<area shape="poly" id="edge6_Node000006_Node000006" title=" " alt="" coords="463,28,461,19,468,10,483,5,505,3,529,5,544,14,539,15,527,10,505,8,484,10,471,15,466,21,468,30"/>
+<area shape="rect" id="Node000008" href="$classtinyxml2_1_1XMLNode.html#a4eee3bda60c60a30e4e8cd4ea91c4c6e" title=" " alt="" coords="647,99,805,143"/>
+<area shape="poly" id="edge8_Node000007_Node000008" title=" " alt="" coords="583,118,634,120,629,122,584,124"/>
+<area shape="poly" id="edge9_Node000008_Node000008" title=" " alt="" coords="684,97,682,89,690,80,704,74,726,72,750,75,766,83,760,84,749,80,726,77,705,79,693,84,687,90,689,99"/>
+<area shape="rect" id="Node000011" href="$classtinyxml2_1_1XMLElement.html#a157750dac8037a316fd1af1a973dfa2c" title="Query a specific attribute in the list." alt="" coords="420,288,589,333"/>
+<area shape="poly" id="edge12_Node000010_Node000011" title=" " alt="" coords="370,308,407,310,402,311,371,313"/>
+<area shape="rect" id="Node000012" href="$classtinyxml2_1_1XMLAttribute.html#a2aa6e55e8ea03af0609cf6690bff79b9" title="See QueryIntValue." alt="" coords="418,357,591,402"/>
+<area shape="poly" id="edge14_Node000010_Node000012" title=" " alt="" coords="358,331,420,352,414,352,357,336"/>
+<area shape="poly" id="edge13_Node000011_Node000005" title=" " alt="" coords="589,293,640,286,635,288,590,298"/>
+<area shape="rect" id="Node000013" href="$classtinyxml2_1_1XMLUtil.html#ad8f75ac140fb19c1c6e164a957c4cd53" title=" " alt="" coords="653,413,799,458"/>
+<area shape="poly" id="edge15_Node000012_Node000013" title=" " alt="" coords="592,399,640,413,635,413,592,404"/>
+<area shape="rect" id="Node000014" href="$classtinyxml2_1_1XMLAttribute.html#ab1c5cd993f836a771818ca408994b14e" title="The value of the attribute." alt="" coords="639,344,813,389"/>
+<area shape="poly" id="edge16_Node000012_Node000014" title=" " alt="" coords="592,372,626,372,621,373,592,377"/>
 </map>

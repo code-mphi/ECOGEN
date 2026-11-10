@@ -1,5 +1,11 @@
 <map id="CellO2GhostCartesian::createChildCell" name="CellO2GhostCartesian::createChildCell">
-<area shape="rect" id="Node000001" title=" " alt="" coords="5,5,171,45"/>
-<area shape="rect" id="Node000002" href="$classCellO2GhostCartesian.html#adee4a98ec0975bcf41244b10d2a3743f" title=" " alt="" coords="219,5,392,45"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="171,23,205,23,205,28,171,28"/>
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,5,170,50"/>
+<area shape="rect" id="Node000002" href="$classCellO2GhostCartesian.html#adee4a98ec0975bcf41244b10d2a3743f" title=" " alt="" coords="218,5,390,50"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="170,25,205,27,199,28,170,30"/>
+<area shape="rect" id="Node000003" href="$classCellO2Cartesian.html#a2d502dacbc07b9379543c2fc061cbf3d" title=" " alt="" coords="438,14,677,42"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="390,25,425,28,420,28,391,30"/>
+<area shape="rect" id="Node000004" href="$classCellO2.html#a6e62dce876abb8ae64f2d10bccb71251" title=" " alt="" coords="725,14,841,42"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="677,25,712,28,707,28,678,30"/>
+<area shape="rect" id="Node000005" href="$classCell.html#a394510643e8664cf12b5efaf5cb99f71" title="Basic Cell constructor for a non AMR cell." alt="" coords="889,14,968,42"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="841,25,876,28,870,28,841,30"/>
 </map>

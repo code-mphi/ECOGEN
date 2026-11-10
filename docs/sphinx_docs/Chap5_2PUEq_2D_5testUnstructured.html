@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Test unstructured &mdash; ECOGEN 5.0 documentation</title>
+  <title>Test unstructured &mdash; ECOGEN 6.0 documentation</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
       <link rel="stylesheet" type="text/css" href="_static/css/theme.css" />
 
@@ -38,7 +38,7 @@
             ECOGEN
           </a>
               <div class="version">
-                5.0
+                6.0
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
@@ -57,9 +57,9 @@
 <li class="toctree-l1 current"><a class="reference internal" href="Chap5_testCases_Chapter.html">Test cases</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="Chap5_1Euler.html">Single-phase test cases</a></li>
 <li class="toctree-l2 current"><a class="reference internal" href="Chap5_2.html">Multiphase test cases</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="Chap5_3NEq.html">Non-equilibrium model</a></li>
 <li class="toctree-l3"><a class="reference internal" href="Chap5_2UEq.html">Velocity-equilibrium model</a></li>
 <li class="toctree-l3"><a class="reference internal" href="Chap5_2UEqTotE.html">Velocity-equilibrium model based on total energies</a></li>
-<li class="toctree-l3"><a class="reference internal" href="Chap5_2UEqSolid.html">Velocity-equilibrium model for solids</a></li>
 <li class="toctree-l3 current"><a class="reference internal" href="Chap5_2PUEq.html">Pressure- and velocity-equilibrium model</a><ul class="current">
 <li class="toctree-l4"><a class="reference internal" href="Chap5_2PUEq_1D.html">1D</a></li>
 <li class="toctree-l4 current"><a class="reference internal" href="Chap5_2PUEq_2D.html">2D</a></li>
@@ -67,13 +67,15 @@
 </li>
 <li class="toctree-l3"><a class="reference internal" href="Chap5_2PTUEq.html">Temperature-, pressure- and velocity-equilibrium model</a></li>
 <li class="toctree-l3"><a class="reference internal" href="Chap5_2eulerHomogeneous.html">Homogeneous Euler</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Chap5_2ENSK1D.html">Extended-Navier-Stokes-Korteweg-1D model</a></li>
 <li class="toctree-l3"><a class="reference internal" href="Chap5_2.html#other-tests-cases">Other tests cases</a></li>
 </ul>
 </li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="Chap6_developersGuide_Chapter.html">Developers</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Chap7_license.html">License</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Chap7_license.html">License and authors</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Chap8_citation.html">Citation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="zBibliography.html">Bibliography</a></li>
 </ul>
 
@@ -107,14 +109,14 @@
              
   <section id="test-unstructured">
 <h1>Test unstructured<a class="headerlink" href="#test-unstructured" title="Permalink to this heading"></a></h1>
-<p>This is a case with an unstructured mesh generated with the open-source <a class="reference external" href="http://gmsh.info/">Gmsh</a> software. Initial conditions are shown in <a class="reference internal" href="#fig-testcases-pueq-testunstructuredini"><span class="std std-numref">Fig. 82</span></a>. This test is referenced in <em>./libTests/referenceTestCases/PUEq/2D/testUnstructured/</em>. The corresponding uncommented line in <em>ECOGEN.xml</em> is:</p>
+<p>This is a case with an unstructured mesh generated with the open-source <a class="reference external" href="http://gmsh.info/">Gmsh</a> software. Initial conditions are shown in <a class="reference internal" href="#fig-testcases-pueq-testunstructuredini"><span class="std std-numref">Fig. 86</span></a>. This test is referenced in <em>./libTests/referenceTestCases/PUEq/2D/testUnstructured/</em>. The corresponding uncommented line in <em>ECOGEN.xml</em> is:</p>
 <div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;testCase&gt;</span>./libTests/referenceTestCases/PUEq/2D/testUnstructured/<span class="nt">&lt;/testCase&gt;</span>
 </pre></div>
 </div>
 <figure class="align-center" id="id1">
 <span id="fig-testcases-pueq-testunstructuredini"></span><a class="reference internal image-reference" href="_images/testUnstructuredIni.png"><img alt="_images/testUnstructuredIni.png" src="_images/testUnstructuredIni.png" style="width: 670.4000000000001px; height: 356.8px;" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 82 </span><span class="caption-text">Initial conditions. Visualization using <a class="reference external" href="https://www.paraview.org/">Paraview</a> software.</span><a class="headerlink" href="#id1" title="Permalink to this image"></a></p>
+<p><span class="caption-number">Fig. 86 </span><span class="caption-text">Initial conditions. Visualization using <a class="reference external" href="https://www.paraview.org/">Paraview</a> software.</span><a class="headerlink" href="#id1" title="Permalink to this image"></a></p>
 </figcaption>
 </figure>
 <p>The initial characteristics of the run are:</p>
@@ -143,11 +145,11 @@
 </tr>
 </tbody>
 </table>
-<p>Results are shown in <a class="reference internal" href="#fig-testcases-pueq-testunstructuredanim"><span class="std std-numref">Fig. 83</span></a> and <a class="reference internal" href="#fig-testcases-pueq-testunstructuredanim2"><span class="std std-numref">Fig. 84</span></a>. There is a pressure gradient between the two regions, high pressure at t=0s is contained in red region. When the interface between the blue and the red regions disappears, a shock wave propagates, causing an increase in pressure in the blue region, and the red region relaxes.</p>
+<p>Results are shown in <a class="reference internal" href="#fig-testcases-pueq-testunstructuredanim"><span class="std std-numref">Fig. 87</span></a> and <a class="reference internal" href="#fig-testcases-pueq-testunstructuredanim2"><span class="std std-numref">Fig. 88</span></a>. There is a pressure gradient between the two regions, high pressure at t=0s is contained in red region. When the interface between the blue and the red regions disappears, a shock wave propagates, causing an increase in pressure in the blue region, and the red region relaxes.</p>
 <figure class="align-center" id="id2">
 <span id="fig-testcases-pueq-testunstructuredanim"></span><a class="reference internal image-reference" href="_images/testUnstructuredAnim.gif"><img alt="_images/testUnstructuredAnim.gif" src="_images/testUnstructuredAnim.gif" style="width: 416.0px; height: 384.0px;" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 83 </span><span class="caption-text">Pressure evolution over time. Visualization using <a class="reference external" href="https://www.paraview.org/">Paraview</a> software.</span><a class="headerlink" href="#id2" title="Permalink to this image"></a></p>
+<p><span class="caption-number">Fig. 87 </span><span class="caption-text">Pressure evolution over time. Visualization using <a class="reference external" href="https://www.paraview.org/">Paraview</a> software.</span><a class="headerlink" href="#id2" title="Permalink to this image"></a></p>
 </figcaption>
 </figure>
 <figure class="align-center">
@@ -156,7 +158,7 @@
 <figure class="align-center" id="id3">
 <span id="fig-testcases-pueq-testunstructuredanim2"></span><a class="reference internal image-reference" href="_images/testUnstructuredAnim2.gif"><img alt="_images/testUnstructuredAnim2.gif" src="_images/testUnstructuredAnim2.gif" style="width: 416.0px; height: 384.0px;" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 84 </span><span class="caption-text">Mixture density over time. Visualization using <a class="reference external" href="https://www.paraview.org/">Paraview</a> software.</span><a class="headerlink" href="#id3" title="Permalink to this image"></a></p>
+<p><span class="caption-number">Fig. 88 </span><span class="caption-text">Mixture density over time. Visualization using <a class="reference external" href="https://www.paraview.org/">Paraview</a> software.</span><a class="headerlink" href="#id3" title="Permalink to this image"></a></p>
 </figcaption>
 </figure>
 <figure class="align-center">
@@ -175,7 +177,7 @@
   <hr/>
 
   <div role="contentinfo">
-    <p>&#169; Copyright 2025, code-mphi.</p>
+    <p>&#169; Copyright 2026, code-mphi.</p>
   </div>
 
   Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a

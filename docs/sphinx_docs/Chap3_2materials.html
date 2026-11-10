@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Materials &mdash; ECOGEN 5.0 documentation</title>
+  <title>Materials &mdash; ECOGEN 6.0 documentation</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
       <link rel="stylesheet" type="text/css" href="_static/css/theme.css" />
 
@@ -39,7 +39,7 @@
             ECOGEN
           </a>
               <div class="version">
-                5.0
+                6.0
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
@@ -59,6 +59,9 @@
 <li class="toctree-l3"><a class="reference internal" href="#sec-input-idealgas">Ideal Gas</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#stiffened-gas">Stiffened Gas</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#noble-abel-stiffened-gas">Noble-Abel Stiffened Gas</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#defocusing-non-linear-schrodinger">Defocusing non-linear Schrödinger</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#polynomial">Polynomial</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#van-der-waals">Van der Waals</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="Chap3_3outputFiles.html">Output Files</a></li>
@@ -68,7 +71,8 @@
 <li class="toctree-l1"><a class="reference internal" href="Chap4_tutorials_Chapter.html">Tutorials</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Chap5_testCases_Chapter.html">Test cases</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Chap6_developersGuide_Chapter.html">Developers</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Chap7_license.html">License</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Chap7_license.html">License and authors</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Chap8_citation.html">Citation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="zBibliography.html">Bibliography</a></li>
 </ul>
 
@@ -99,12 +103,17 @@
              
   <section id="materials">
 <span id="sec-io-materials"></span><h1>Materials<a class="headerlink" href="#materials" title="Permalink to this heading"></a></h1>
-<p>For each phase, an equation of state is required. The data for a given phase are gathered in a file. Every file must be in the folder <strong>ECOGEN/libEOS/</strong> and must follow rules depending on the EOS. Five equations of state are implemented in ECOGEN:</p>
+<p>For each phase, an equation of state is required. The data for a given phase are gathered in a file. Every file must be in the folder <strong>ECOGEN/libEOS/</strong> and must follow rules depending on the EOS. Six equations of state are implemented in ECOGEN:</p>
 <ul class="simple">
 <li><p><a class="reference internal" href="#sec-input-idealgas"><span class="std std-ref">Ideal Gas</span></a>: For gaseous phase only.</p></li>
 <li><p><a class="reference internal" href="#sec-input-stiffenedgas"><span class="std std-ref">Stiffened Gas</span></a>: For condensed matter (liquid, solid) in a pressure range where the compressible assumption is reasonable.</p></li>
 <li><p><a class="reference internal" href="#sec-input-nobleabelstiffenedgas"><span class="std std-ref">Noble-Abel Stiffened Gas</span></a>: For condensed matter (liquid, solid) subject to phase change.</p></li>
-<li><p>Van der Waals and Polynomial: Experimental work on non-convex EOS therefore not detailed in the following.</p></li>
+</ul>
+<p>Only for the Extended-Navier-Stokes-Kortewed 1D model:</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="#sec-input-nonlinearshrodinger"><span class="std std-ref">Defocusing non-linear Schrödinger</span></a>: For quantum fluids described by the Defocusing non-linear Schrödinger equation.</p></li>
+<li><p><a class="reference internal" href="#sec-input-polynomial"><span class="std std-ref">Polynomial</span></a> (non-convex): For a bistable bar.</p></li>
+<li><p><a class="reference internal" href="#sec-input-vanderwaals"><span class="std std-ref">Van der Waals</span></a> (non-convex): For liquid and gaseous phase.</p></li>
 </ul>
 <section id="sec-input-idealgas">
 <span id="ideal-gas"></span><h2>Ideal Gas<a class="headerlink" href="#sec-input-idealgas" title="Permalink to this heading"></a></h2>
@@ -118,18 +127,18 @@
 <div class="math notranslate nohighlight">
 \[s(p,T) = c_v \ln{\left(\frac{T^{\gamma}}{p^{\gamma-1}}\right)} + s_{ref}\]</div>
 <p>The following parameters are assumed constant and <span class="math notranslate nohighlight">\(\gamma\)</span>, <span class="math notranslate nohighlight">\(c_v\)</span>, <span class="math notranslate nohighlight">\(e_{ref}\)</span> and <span class="math notranslate nohighlight">\(s_{ref}\)</span> must be specified in the material file, as in the following example:</p>
-<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="cp">&lt;?xml version = &quot;1.0&quot; encoding = &quot;UTF-8&quot; standalone = &quot;yes&quot;?&gt;</span>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="cp">&lt;?xml version = "1.0" encoding = "UTF-8" standalone = "yes"?&gt;</span>
 <span class="nt">&lt;parametersEOS&gt;</span>
-<span class="w">        </span><span class="nt">&lt;EOS</span><span class="w"> </span><span class="na">fichier=</span><span class="s">&quot;IG_air.xml&quot;</span><span class="w"> </span><span class="na">type=</span><span class="s">&quot;IG&quot;</span><span class="nt">/&gt;</span>
+<span class="w">        </span><span class="nt">&lt;EOS</span><span class="w"> </span><span class="na">fichier=</span><span class="s">"IG_air.xml"</span><span class="w"> </span><span class="na">type=</span><span class="s">"IG"</span><span class="nt">/&gt;</span>
 <span class="w">        </span><span class="nt">&lt;parameters</span>
-<span class="w">                </span><span class="na">gamma=</span><span class="s">&quot;1.4&quot;</span>
-<span class="w">                </span><span class="na">cv=</span><span class="s">&quot;800&quot;</span><span class="w"> </span><span class="na">cv_save=</span><span class="s">&quot;717.46&quot;</span>
-<span class="w">                </span><span class="na">energyRef=</span><span class="s">&quot;0.&quot;</span>
-<span class="w">                </span><span class="na">entropyRef=</span><span class="s">&quot;0.&quot;</span><span class="nt">&gt;</span>
+<span class="w">                </span><span class="na">gamma=</span><span class="s">"1.4"</span>
+<span class="w">                </span><span class="na">cv=</span><span class="s">"800"</span><span class="w"> </span><span class="na">cv_save=</span><span class="s">"717.46"</span>
+<span class="w">                </span><span class="na">energyRef=</span><span class="s">"0."</span>
+<span class="w">                </span><span class="na">entropyRef=</span><span class="s">"0."</span><span class="nt">&gt;</span>
 <span class="w">        </span><span class="nt">&lt;/parameters&gt;</span>
 <span class="w">        </span><span class="nt">&lt;physicalParameters</span>
-<span class="w">                </span><span class="na">mu=</span><span class="s">&quot;1.85e-5&quot;</span>
-<span class="w">                </span><span class="na">lambda=</span><span class="s">&quot;0.0262&quot;</span><span class="nt">&gt;</span>
+<span class="w">                </span><span class="na">mu=</span><span class="s">"1.85e-5"</span>
+<span class="w">                </span><span class="na">lambda=</span><span class="s">"0.0262"</span><span class="nt">&gt;</span>
 <span class="w">        </span><span class="nt">&lt;/physicalParameters&gt;</span>
 <span class="nt">&lt;/parametersEOS&gt;</span>
 </pre></div>
@@ -137,7 +146,7 @@
 </section>
 <section id="stiffened-gas">
 <span id="sec-input-stiffenedgas"></span><h2>Stiffened Gas<a class="headerlink" href="#stiffened-gas" title="Permalink to this heading"></a></h2>
-<p>This equation of state was first presented in 1971 by Harlow &amp; Amdsen <span id="id1">[<a class="reference internal" href="zBibliography.html#id75" title="F. H. Harlow and A. A. Amsden. Numerical calculation of almost incompressible flow. Journal of Computational Physics, 3(1):80–93, 1968.">HA68</a>]</span>:</p>
+<p>This equation of state was first presented in 1971 by Harlow &amp; Amdsen <span id="id1">[<a class="reference internal" href="zBibliography.html#id82" title="F. H. Harlow and A. A. Amsden. Numerical calculation of almost incompressible flow. Journal of Computational Physics, 3(1):80–93, 1968.">HA68</a>]</span>:</p>
 <div class="math notranslate nohighlight">
 \[e = \left(\frac{p + \gamma p_{\infty}}{\gamma-1}\right) v + e_{ref}\]</div>
 <p>This EOS takes into account the molecular attraction within condensed matter. This quite simple EOS is largely used in numerical simulation based on diffuse interface methods because it is able to reproduce shock relation as well as saturation curve for a liquid–vapor mixture when the phase transition is modeled.
@@ -146,21 +155,21 @@ Hereafter, some useful relations for the specific volume, the enthalpy and the e
 \[\begin{split}v(p,T) &amp;= \frac{ (\gamma-1) c_v T}{p + p_{\infty}} \\
 h(T) &amp;= \gamma c_v T + e_{ref} \\
 s(p,T) &amp;= c_v \ln{\left(\frac{T^{\gamma}}{\left(p+p_{\infty}\right)^{\gamma-1}} \right)} + s_{ref}\end{split}\]</div>
-<p>A useful description of these relations can be found in <span id="id2">[<a class="reference internal" href="zBibliography.html#id264" title="O. Le Métayer, J. Massoni, and R. Saurel. Elaborating equations of state of a liquid and its vapor for two-phase flow models. International Journal of Thermal Sciences, 43:265–276, 2004.">LeMetayerMS04</a>]</span>.</p>
+<p>A useful description of these relations can be found in <span id="id2">[<a class="reference internal" href="zBibliography.html#id276" title="O. Le Métayer, J. Massoni, and R. Saurel. Elaborating equations of state of a liquid and its vapor for two-phase flow models. International Journal of Thermal Sciences, 43:265–276, 2004.">LeMetayerMS04</a>]</span>.</p>
 <p>The ideal-gas law is recovered if <span class="math notranslate nohighlight">\(p_{\infty}=0\)</span>. The following parameters are assumed constant <span class="math notranslate nohighlight">\(\gamma\)</span>, <span class="math notranslate nohighlight">\(p_{\infty}\)</span>, <span class="math notranslate nohighlight">\(c_v\)</span>, <span class="math notranslate nohighlight">\(e_{ref}\)</span> and <span class="math notranslate nohighlight">\(s_{ref}\)</span>. These parameters must be specified in the material file, as in the following example:</p>
-<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="cp">&lt;?xml version = &quot;1.0&quot; encoding = &quot;UTF-8&quot; standalone = &quot;yes&quot;?&gt;</span>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="cp">&lt;?xml version = "1.0" encoding = "UTF-8" standalone = "yes"?&gt;</span>
 <span class="nt">&lt;parametersEOS&gt;</span>
-<span class="w">        </span><span class="nt">&lt;EOS</span><span class="w"> </span><span class="na">fichier=</span><span class="s">&quot;SG_water.xml&quot;</span><span class="w"> </span><span class="na">type=</span><span class="s">&quot;SG&quot;</span><span class="nt">/&gt;</span>
+<span class="w">        </span><span class="nt">&lt;EOS</span><span class="w"> </span><span class="na">fichier=</span><span class="s">"SG_water.xml"</span><span class="w"> </span><span class="na">type=</span><span class="s">"SG"</span><span class="nt">/&gt;</span>
 <span class="w">        </span><span class="nt">&lt;parameters</span>
-<span class="w">                </span><span class="na">gamma=</span><span class="s">&quot;4.4&quot;</span>
-<span class="w">                </span><span class="na">pInf=</span><span class="s">&quot;6.e8&quot;</span>
-<span class="w">                </span><span class="na">cv=</span><span class="s">&quot;1000.0&quot;</span>
-<span class="w">                </span><span class="na">energyRef=</span><span class="s">&quot;0.&quot;</span>
-<span class="w">                </span><span class="na">entropyRef=</span><span class="s">&quot;0.&quot;</span><span class="nt">&gt;</span>
+<span class="w">                </span><span class="na">gamma=</span><span class="s">"4.4"</span>
+<span class="w">                </span><span class="na">pInf=</span><span class="s">"6.e8"</span>
+<span class="w">                </span><span class="na">cv=</span><span class="s">"1000.0"</span>
+<span class="w">                </span><span class="na">energyRef=</span><span class="s">"0."</span>
+<span class="w">                </span><span class="na">entropyRef=</span><span class="s">"0."</span><span class="nt">&gt;</span>
 <span class="w">        </span><span class="nt">&lt;/parameters&gt;</span>
 <span class="w">        </span><span class="nt">&lt;physicalParameters</span>
-<span class="w">                </span><span class="na">mu=</span><span class="s">&quot;1.e-3&quot;</span>
-<span class="w">                </span><span class="na">lambda=</span><span class="s">&quot;0.6&quot;</span><span class="nt">&gt;</span>
+<span class="w">                </span><span class="na">mu=</span><span class="s">"1.e-3"</span>
+<span class="w">                </span><span class="na">lambda=</span><span class="s">"0.6"</span><span class="nt">&gt;</span>
 <span class="w">        </span><span class="nt">&lt;/physicalParameters&gt;</span>
 <span class="nt">&lt;/parametersEOS&gt;</span>
 </pre></div>
@@ -168,7 +177,7 @@ s(p,T) &amp;= c_v \ln{\left(\frac{T^{\gamma}}{\left(p+p_{\infty}\right)^{\gamma-
 </section>
 <section id="noble-abel-stiffened-gas">
 <span id="sec-input-nobleabelstiffenedgas"></span><h2>Noble-Abel Stiffened Gas<a class="headerlink" href="#noble-abel-stiffened-gas" title="Permalink to this heading"></a></h2>
-<p>This equation of state is an improved version of the stiffened-gas equation of state in which a parameter of covolume <cite>b</cite> is introduced. This parameter allows to take into account the repulsive short distance effects linked to molecular motion. The Noble-Abel Stiffened-Gas (NASG) EOS was developed in 2016 by Le Métayer &amp; Saurel <span id="id3">[<a class="reference internal" href="zBibliography.html#id364" title="O. Le Métayer and R. Saurel. The Noble-Abel Stiffened-Gas equation of state. Physics of Fluids, 28(4):046102, 2016.">LMetayerS16</a>]</span> and it reads:</p>
+<p>This equation of state is an improved version of the stiffened-gas equation of state in which a parameter of covolume <cite>b</cite> is introduced. This parameter allows to take into account the repulsive short distance effects linked to molecular motion. The Noble-Abel Stiffened-Gas (NASG) EOS was developed in 2016 by Le Métayer &amp; Saurel <span id="id3">[<a class="reference internal" href="zBibliography.html#id376" title="O. Le Métayer and R. Saurel. The Noble-Abel Stiffened-Gas equation of state. Physics of Fluids, 28(4):046102, 2016.">LMetayerS16</a>]</span> and it reads:</p>
 <div class="math notranslate nohighlight">
 \[e(p,v) = \frac{p+\gamma p_{\infty}}{\gamma-1}(v-b) + e_{ref}\]</div>
 <p>As the stiffened-gas EOS, the NASG EOS is able to take into account thermal agitation and attractive effects of condensed matter. This EOS is particularly interesting when phase transition is modeled because it is able to reproduce more accurately saturation curves of a liquid–vapor mixture than the traditional stiffened-gas EOS.
@@ -177,26 +186,95 @@ Hereafter, some useful relations for the specific volume, the enthalpy and the e
 \[\begin{split}v(p,T) &amp;= \frac{ (\gamma-1) c_v T}{p + p_{\infty}} + b \\
 h(p,T) &amp;= \gamma c_v T + + b p +e_{ref} \\
 s(p,T) &amp;= c_v \ln{\left(\frac{T^{\gamma}}{\left(p+p_{\infty}\right)^{\gamma-1}} \right)} + s_{ref}\end{split}\]</div>
-<p>A complete description of the obtention of these relations is given in <span id="id4">[<a class="reference internal" href="zBibliography.html#id364" title="O. Le Métayer and R. Saurel. The Noble-Abel Stiffened-Gas equation of state. Physics of Fluids, 28(4):046102, 2016.">LMetayerS16</a>]</span>.</p>
+<p>A complete description of the obtention of these relations is given in <span id="id4">[<a class="reference internal" href="zBibliography.html#id376" title="O. Le Métayer and R. Saurel. The Noble-Abel Stiffened-Gas equation of state. Physics of Fluids, 28(4):046102, 2016.">LMetayerS16</a>]</span>.</p>
 <p>The stiffened-gas EOS is recovered if <span class="math notranslate nohighlight">\(b=0\)</span> and the ideal-gas law is recovered if <span class="math notranslate nohighlight">\(b = p_{\infty} = 0\)</span>. The parameters <span class="math notranslate nohighlight">\(\gamma\)</span>, <span class="math notranslate nohighlight">\(p_{\infty}\)</span>, <span class="math notranslate nohighlight">\(b\)</span>, <span class="math notranslate nohighlight">\(c_v\)</span>, <span class="math notranslate nohighlight">\(e_{ref}\)</span> and <span class="math notranslate nohighlight">\(s_{ref}\)</span> are assumed constant. These parameters must be specified in the material file, as in the following example:</p>
-<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="cp">&lt;?xml version = &quot;1.0&quot; encoding = &quot;UTF-8&quot; standalone = &quot;yes&quot;?&gt;</span>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="cp">&lt;?xml version = "1.0" encoding = "UTF-8" standalone = "yes"?&gt;</span>
 <span class="nt">&lt;parametersEOS&gt;</span>
-<span class="w">        </span><span class="nt">&lt;EOS</span><span class="w"> </span><span class="na">fichier=</span><span class="s">&quot;NASG_dodLiq.xml&quot;</span><span class="w"> </span><span class="na">type=</span><span class="s">&quot;NASG&quot;</span><span class="nt">/&gt;</span>
+<span class="w">        </span><span class="nt">&lt;EOS</span><span class="w"> </span><span class="na">fichier=</span><span class="s">"NASG_dodLiq.xml"</span><span class="w"> </span><span class="na">type=</span><span class="s">"NASG"</span><span class="nt">/&gt;</span>
 <span class="w">        </span><span class="nt">&lt;parameters</span>
-<span class="w">                </span><span class="na">gamma=</span><span class="s">&quot;1.09&quot;</span>
-<span class="w">                </span><span class="na">pInf=</span><span class="s">&quot;1.159e8&quot;</span>
-<span class="w">                </span><span class="na">b=</span><span class="s">&quot;7.51e-4&quot;</span>
-<span class="w">                </span><span class="na">cv=</span><span class="s">&quot;2393&quot;</span>
-<span class="w">                </span><span class="na">energyRef=</span><span class="s">&quot;-794696.&quot;</span>
-<span class="w">                </span><span class="na">entropyRef=</span><span class="s">&quot;0.&quot;</span><span class="nt">&gt;</span>
+<span class="w">                </span><span class="na">gamma=</span><span class="s">"1.09"</span>
+<span class="w">                </span><span class="na">pInf=</span><span class="s">"1.159e8"</span>
+<span class="w">                </span><span class="na">b=</span><span class="s">"7.51e-4"</span>
+<span class="w">                </span><span class="na">cv=</span><span class="s">"2393"</span>
+<span class="w">                </span><span class="na">energyRef=</span><span class="s">"-794696."</span>
+<span class="w">                </span><span class="na">entropyRef=</span><span class="s">"0."</span><span class="nt">&gt;</span>
 <span class="w">        </span><span class="nt">&lt;/parameters&gt;</span>
 <span class="w">        </span><span class="nt">&lt;physicalParameters</span>
-<span class="w">                </span><span class="na">mu=</span><span class="s">&quot;1.e-3&quot;</span>
-<span class="w">                </span><span class="na">lambda=</span><span class="s">&quot;0.6&quot;</span><span class="nt">&gt;</span>
+<span class="w">                </span><span class="na">mu=</span><span class="s">"1.e-3"</span>
+<span class="w">                </span><span class="na">lambda=</span><span class="s">"0.6"</span><span class="nt">&gt;</span>
 <span class="w">        </span><span class="nt">&lt;/physicalParameters&gt;</span>
 <span class="nt">&lt;/parametersEOS&gt;</span>
 </pre></div>
 </div>
+</section>
+<section id="defocusing-non-linear-schrodinger">
+<span id="sec-input-nonlinearshrodinger"></span><h2>Defocusing non-linear Schrödinger<a class="headerlink" href="#defocusing-non-linear-schrodinger" title="Permalink to this heading"></a></h2>
+<p>The hydrodynamic form of the Defocusing Nonlinear Schrödinger equation <span id="id5">[<a class="reference internal" href="zBibliography.html#id7" title="F. Dhaouadi, N. Favrie, and S. Gavrilyuk. Extended Lagrangian approach for the defocusing Non–Linear Schrodinger equation. Studies in Applied Mathematics, 142(3):336-358, 2019. doi:https://doi.org/10.1111/sapm.12238.">DFG19</a>]</span> can be obtain by choosing:</p>
+<div class="math notranslate nohighlight">
+\[e_h(\rho) = \cfrac{\rho^2}{2}, \quad \mathcal{K} = \cfrac{1}{4 \, \rho}.\]</div>
+<p>No parameters are specified for this EOS:</p>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="cp">&lt;?xml version = "1.0" encoding = "UTF-8" standalone = "yes"?&gt;</span>
+<span class="nt">&lt;parametersEOS&gt;</span>
+<span class="w">        </span><span class="nt">&lt;EOS</span><span class="w"> </span><span class="na">type=</span><span class="s">"NLS"</span><span class="nt">/&gt;</span>
+<span class="w">        </span><span class="nt">&lt;parameters</span><span class="w"> </span><span class="na">no_params=</span><span class="s">"1."</span><span class="nt">/&gt;</span>
+<span class="nt">&lt;/parametersEOS&gt;</span>
+</pre></div>
+</div>
+</section>
+<section id="polynomial">
+<span id="sec-input-polynomial"></span><h2>Polynomial<a class="headerlink" href="#polynomial" title="Permalink to this heading"></a></h2>
+<p>A bistable Ericksen model is used to describe the dynamic of a bistable tape spring <span id="id6">[<a class="reference internal" href="zBibliography.html#id8" title="S. Bourgeois, N. Favrie, and B. Lombard. Dynamics of a regularized and bistable Ericksen bar using an extended Lagrangian approach. International Journal of Solids and Structures, 207:55–69, 2020. doi:https://doi.org/10.1016/j.ijsolstr.2020.09.031.">BFL20</a>]</span>. The potential energy is:</p>
+<div class="math notranslate nohighlight">
+\[e_h(\rho) = a \, \epsilon^4 + b \, \epsilon^3 + c \, \epsilon^2, \quad \epsilon(\rho) := \cfrac{1}{\rho} - 1, \quad \mathcal{K} = \cfrac{1}{\rho^3}.\]</div>
+<p>In the following example, the parameters <span class="math notranslate nohighlight">\(a,b,c\)</span> are chosen from <span id="id7">[<a class="reference internal" href="zBibliography.html#id8" title="S. Bourgeois, N. Favrie, and B. Lombard. Dynamics of a regularized and bistable Ericksen bar using an extended Lagrangian approach. International Journal of Solids and Structures, 207:55–69, 2020. doi:https://doi.org/10.1016/j.ijsolstr.2020.09.031.">BFL20</a>]</span> in order to reproduce a double well potential:</p>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="cp">&lt;?xml version = "1.0" encoding = "UTF-8" standalone = "yes"?&gt;</span>
+<span class="nt">&lt;parametersEOS&gt;</span>
+<span class="w">        </span><span class="nt">&lt;EOS</span><span class="w"> </span><span class="na">type=</span><span class="s">"Polynomial"</span><span class="nt">/&gt;</span>
+<span class="w">        </span><span class="nt">&lt;parameters</span>
+<span class="w">                </span><span class="na">a=</span><span class="s">"0.14583333333333334"</span>
+<span class="w">                </span><span class="na">b=</span><span class="s">"-1.1666666666666667"</span>
+<span class="w">                </span><span class="na">c=</span><span class="s">"2.4583333333333335"</span><span class="nt">&gt;</span>
+<span class="w">        </span><span class="nt">&lt;/parameters&gt;</span>
+<span class="nt">&lt;/parametersEOS&gt;</span>
+</pre></div>
+</div>
+</section>
+<section id="van-der-waals">
+<span id="sec-input-vanderwaals"></span><h2>Van der Waals<a class="headerlink" href="#van-der-waals" title="Permalink to this heading"></a></h2>
+<p>To describe both the liquid and the vapor through a single EOS, we can choose the van der Waals EOS <span id="id8">[<a class="reference internal" href="zBibliography.html#id5" title="Q. Didierlaurent, N. Favrie, and B. Lombard. Numerical investigation of a navier-stokes-korteweg system through an extended lagrangian formulation: nonclassical waves and phase transition problems. Journal of Fluid Mechanics, Submitted, 2026.">DFL26</a>]</span>:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}&amp;p(\rho,T) = \cfrac{\rho \, r \, T}{1 - \rho \, b} - a \, \rho^2,\\
+&amp;e_h(\rho,T) = C_v \, T - a \, \rho,\\[6pt]
+&amp;s(\rho,T) = C_v \, \log{T} + r \, \log(1/\rho - b).\end{split}\]</div>
+<p>The parameters <span class="math notranslate nohighlight">\(a,b,C_v\)</span> are defined at the critical point of the fluid. The constants <span class="math notranslate nohighlight">\(T_c,P_c,M\)</span> are given. For this EOS, one can choose <span class="math notranslate nohighlight">\(\mathcal{K}\)</span> as a function of <span class="math notranslate nohighlight">\(\rho\)</span> or as a constant. Here is an example:</p>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="cp">&lt;?xml version = "1.0" encoding = "UTF-8" standalone = "yes"?&gt;</span>
+<span class="w">        </span><span class="nt">&lt;parametersEOS&gt;</span>
+<span class="w">        </span><span class="nt">&lt;EOS</span><span class="w"> </span><span class="na">type=</span><span class="s">"VDW"</span><span class="nt">/&gt;</span>
+<span class="w">        </span><span class="nt">&lt;parameters</span>
+<span class="w">                </span><span class="na">Tc=</span><span class="s">"658.2"</span>
+<span class="w">                </span><span class="na">Pc=</span><span class="s">"18.2e5"</span>
+<span class="w">                </span><span class="na">M=</span><span class="s">"170.34"</span>
+<span class="w">                </span><span class="na">c_v=</span><span class="s">"3200."</span>
+<span class="w">                </span><span class="na">kappa=</span><span class="s">"2.7778e-6"</span><span class="nt">&gt;</span>
+<span class="w">        </span><span class="nt">&lt;/parameters&gt;</span>
+<span class="nt">&lt;/parametersEOS&gt;</span>
+</pre></div>
+</div>
+<p>Here, a value for <span class="math notranslate nohighlight">\(\mathcal{K}\)</span> has been specified. If you want <span class="math notranslate nohighlight">\(\mathcal{K}\)</span> as a function of <span class="math notranslate nohighlight">\(\rho\)</span>, set the value to zero:</p>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="cp">&lt;?xml version = "1.0" encoding = "UTF-8" standalone = "yes"?&gt;</span>
+<span class="w">        </span><span class="nt">&lt;parametersEOS&gt;</span>
+<span class="w">        </span><span class="nt">&lt;EOS</span><span class="w"> </span><span class="na">type=</span><span class="s">"VDW"</span><span class="nt">/&gt;</span>
+<span class="w">        </span><span class="nt">&lt;parameters</span>
+<span class="w">                </span><span class="na">Tc=</span><span class="s">"658.2"</span>
+<span class="w">                </span><span class="na">Pc=</span><span class="s">"18.2e5"</span>
+<span class="w">                </span><span class="na">M=</span><span class="s">"170.34"</span>
+<span class="w">                </span><span class="na">c_v=</span><span class="s">"3200."</span>
+<span class="w">                </span><span class="na">kappa=</span><span class="s">"0."</span><span class="nt">&gt;</span>
+<span class="w">        </span><span class="nt">&lt;/parameters&gt;</span>
+<span class="nt">&lt;/parametersEOS&gt;</span>
+</pre></div>
+</div>
+<p>By default, the choice <span class="math notranslate nohighlight">\(\mathcal{K} = \cfrac{1}{4 \, \rho}\)</span> is made.</p>
 </section>
 </section>
 
@@ -211,7 +289,7 @@ s(p,T) &amp;= c_v \ln{\left(\frac{T^{\gamma}}{\left(p+p_{\infty}\right)^{\gamma-
   <hr/>
 
   <div role="contentinfo">
-    <p>&#169; Copyright 2025, code-mphi.</p>
+    <p>&#169; Copyright 2026, code-mphi.</p>
   </div>
 
   Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a

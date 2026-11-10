@@ -1,13 +1,15 @@
 <map id="Cell::getVecQuantitiesAddPhys" name="Cell::getVecQuantitiesAddPhys">
-<area shape="rect" id="Node000001" title=" " alt="" coords="269,141,492,166"/>
-<area shape="rect" id="Node000002" href="$classAPEConductivity.html#a5d4cd64872bd53fa14a7e2120301f99e" title="Add the quantities for the additional physic." alt="" coords="5,5,221,45"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="349,135,291,97,220,60,189,48,191,43,222,55,294,93,352,130"/>
-<area shape="rect" id="Node000003" href="$classAPUEqConductivity.html#a8723b687cd349903cdc2fa5751e0698b" title="Add the quantities for the additional physic." alt="" coords="34,69,193,109"/>
-<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="313,140,192,111,194,106,314,135"/>
-<area shape="rect" id="Node000004" href="$classAPUEqSurfaceTension.html#a7e61e301a4d81d662a9c96ca462ab430" title="Add the quantities for the additional physic." alt="" coords="30,133,197,173"/>
-<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="255,156,197,156,197,151,255,151"/>
-<area shape="rect" id="Node000005" href="$classAPEViscosity.html#a2959cb817233cf06e7505507de632231" title="Add the quantities for the additional physic." alt="" coords="17,197,210,237"/>
-<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="314,172,198,200,197,195,313,167"/>
-<area shape="rect" id="Node000006" href="$classAPUEqViscosity.html#ac1f74a731a70fa0dec51521c8d3f5b40" title="Add the quantities for the additional physic." alt="" coords="8,261,219,301"/>
-<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="352,176,294,214,222,252,191,264,189,259,220,247,291,209,349,172"/>
+<area shape="rect" id="Node000001" title=" " alt="" coords="269,187,490,215"/>
+<area shape="rect" id="Node000002" href="$classAPEConductivity.html#a5d4cd64872bd53fa14a7e2120301f99e" title="Add the quantities for the additional physics." alt="" coords="5,5,221,50"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="353,176,296,121,259,91,219,65,197,53,195,48,222,60,262,87,299,117,358,175"/>
+<area shape="rect" id="Node000003" href="$classAPETurbulenceSmagorinsky.html#a1b9145b0214b7c4c29936a9b77a370c0" title="Add the quantities for the additional physics." alt="" coords="13,75,213,119"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="331,181,220,134,188,123,187,117,222,129,336,179"/>
+<area shape="rect" id="Node000004" href="$classAPEViscosity.html#a2959cb817233cf06e7505507de632231" title="Add the quantities for the additional physics." alt="" coords="17,144,209,189"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="251,186,210,181,209,176,255,184"/>
+<area shape="rect" id="Node000005" href="$classAPUEqConductivity.html#a8723b687cd349903cdc2fa5751e0698b" title="Add the quantities for the additional physics." alt="" coords="34,213,192,258"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="251,219,193,228,191,223,255,216"/>
+<area shape="rect" id="Node000006" href="$classAPUEqSurfaceTension.html#a7e61e301a4d81d662a9c96ca462ab430" title="Add the quantities for the additional physics." alt="" coords="30,283,196,327"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="331,223,222,273,189,285,187,280,220,268,336,221"/>
+<area shape="rect" id="Node000007" href="$classAPUEqViscosity.html#ac1f74a731a70fa0dec51521c8d3f5b40" title="Add the quantities for the additional physics." alt="" coords="8,352,218,397"/>
+<area shape="poly" id="edge6_Node000001_Node000007" title=" " alt="" coords="358,225,299,285,262,315,222,342,197,354,195,349,219,337,259,311,296,281,353,228"/>
 </map>
