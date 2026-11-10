@@ -55,12 +55,12 @@ Schmidmayer K., Petitpas F., Daniel E., Cazé J., Froehly A., Dorschner B., Le M
 Schmidmayer, K., Petitpas, F., Le Martelot, S. & Daniel, E. (2020). ECOGEN, an open-source tool dedicated to multiphase compressible multiphysics flows. *Computer Physics Communications*. [![DOI](https://img.shields.io/badge/DOI-10.1016/j.cpc.2019.107093-green.svg)](https://doi.org/10.1016/j.cpc.2019.107093)
 
 ```
-@misc{schmidmayer2025ecogen,
+@misc{schmidmayer2026ecogen,
   url = {https://hal.science/hal-05023172},
   title = {{ECOGEN}},
-  author = {Schmidmayer, K. and Petitpas, F. and Daniel, E. and Cazé, J. and Froehly, A. and Dorschner, B. and Le Martelot, S. and Favrie, N. and Gadiri, F. Z. and Schropff, S. and Ade-Onojobi, A.},
+  author = {Schmidmayer, K. and Petitpas, F. and Froehly, A. and Cazé, J. and Daniel, E. and Favrie, N. and Dorschner, B. and Taglialatela, F. E. and Martin de Fourchambault, L. and Didierlaurent, Q. and Ade-Onojobi, A. and Le Martelot, S. and Gadiri, F. Z. and Schropff, S.},
   howpublished = {HAL},
-  year = {2025}
+  year = {2026}
 }
 ```
 
