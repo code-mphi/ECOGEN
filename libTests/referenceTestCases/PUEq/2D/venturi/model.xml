@@ -9,4 +9,8 @@
   <relaxation type="PTMu">
     <dataPTMu liquid="SG_waterLiq_venturi.xml" vapor="IG_waterVap_venturi.xml"/>
   </relaxation>
+
+  <gradient>
+		<method>green-gauss</method>
+	</gradient>
 </model>

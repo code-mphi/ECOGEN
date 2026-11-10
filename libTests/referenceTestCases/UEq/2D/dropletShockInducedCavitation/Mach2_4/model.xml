@@ -8,4 +8,7 @@
     <!-- <symmetryTerm type="cylindrical">
         <dataSymCyl radialAxis="Y"/>
     </symmetryTerm> -->
+  <secondOrder>
+    <globalLimiter>mc</globalLimiter>
+  </secondOrder>
 </model>

@@ -47,6 +47,7 @@ void timeStats::initialize()
   m_computationTime   = 0;
   m_AMRTime           = 0;
   m_communicationTime = 0;
+  m_IOTime            = 0;
 }
 
 //***********************************************************************
@@ -91,11 +92,28 @@ void timeStats::endCommunicationTime()
 
 //***********************************************************************
 
-void timeStats::setCompTime(const double& compTime, const double& AMRTime, const double& comTime)
+void timeStats::startIOTime()
+{
+  MPI_Barrier(MPI_COMM_WORLD);
+  m_IORefTime = MPI_Wtime();
+}
+
+//***********************************************************************
+
+void timeStats::endIOTime()
+{
+  MPI_Barrier(MPI_COMM_WORLD);
+  m_IOTime += (MPI_Wtime() - m_IORefTime);
+}
+
+//***********************************************************************
+
+void timeStats::setCompTime(const double& compTime, const double& AMRTime, const double& comTime, const double& IOTime)
 {
   m_computationTime   = compTime;
   m_AMRTime           = AMRTime;
   m_communicationTime = comTime;
+  m_IOTime            = IOTime;
 }
 
 //***********************************************************************
@@ -105,9 +123,10 @@ void timeStats::printScreenStats(const int& numTest) const
   printScreenTime(m_computationTime, "Elapsed time", numTest);
   printScreenTime(m_AMRTime, "AMR time", numTest);
   printScreenTime(m_communicationTime, "Communication time", numTest);
+  printScreenTime(m_IOTime, "Output time", numTest);
 
-  //Estimation temps restant
-  //A faire...
+  //Estimation ot remaining time
+  //To do...
   std::cout << "T" << numTest << " | -------------------------------------------" << std::endl;
 }
 

@@ -1,0 +1,37 @@
+Feature / Model,,Euler,NonEqDEM,NonEq,VelocityEq,VelocityEqTotEnergy,PressureVelocityEq,TemperaturePressureVelocityEq,EulerHomogeneous,ExtendedNavierStokesKorteweg1D
+Geometry,Cartesian mesh,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes
+,Adaptive Mesh Refinement (AMR),Yes,Yes,Yes,Yes,No,Yes,Yes,Yes,Yes
+,Unstructured mesh,Yes,Yes,No,Yes,Yes,Yes,Yes,Yes,No
+,Symmetry (cylindrical/spherical),Yes,Yes,No,Yes,No,Yes,No,No,No
+Numerical scheme,1st order,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes
+,2nd order (*),Yes,No,No,Yes,Yes (Cartesian/AMR mesh only),Yes,Yes,No,Yes (Cartesian/AMR mesh only)
+,Riemann-problem solver,HLLC,HLLC; Exact (only for IG and SG EOS),HLLC- and HLL-types,HLLC,HLLC,HLLC,HLLC,HLLC,HLLC
+Relaxation,Velocity,x,Yes,Yes,x,x,x,x,x,x
+,Pressure,x,Yes,Yes,Yes (finite and infinite),Yes (finite and infinite),Default,x,x,x
+,Pressure-Temperature,x,No,No,Yes,No,Yes,x,x,x
+,Pressure-Temperature-Chemical Potential,x,No,No,Yes,No,Yes,No,No,x
+Source,Gravity,Yes,Yes,Yes,Yes,No,Yes,No,No,No
+,Heat source,Yes,No,No,Yes,No,Yes,Yes,No,No
+,Moving Reference Frame,Yes,No,No,Yes,No,Yes,No,No,No
+,Acoustic waves,Yes,No,No,Yes,No,Yes,No,No,No
+Additional physics,Surface tension,x,No,No,No,No,Yes,No,No,Already included in base model
+,Viscosity,Yes,No,No,Yes,No,Yes,No,No,Already included in base model
+,Turbulence,Yes,No,No,No,No,No,No,No,No
+,Conduction,Yes,No,No,Yes,No,Yes,No,No,No
+Gradient,Finite difference (Cartesian mesh only),Yes,Yes,Yes,Yes,Yes,Yes,Yes,x,Yes
+,Green-Gauss,Yes,No,No,Yes,Yes,Yes,Yes,x,Yes
+Boundary condition,Non-reflecting,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes
+,Wall (non-slip),Yes,Yes (only for HLLC),Yes,Yes,No,Yes,Yes,No,Yes
+,Symmetry (slip),Yes,Yes (only for HLLC),No,Yes,No,Yes,Yes,No,No
+,Moving wall (non-slip),Yes,No,No,Yes,No,Yes,No,No,No
+,Tank,Yes,No,No,Yes,No,Yes,Yes,No,No
+,Inj,Yes,No,No,Yes,No,Yes,No,No,No
+,Outflow,Yes,No,No,Yes,No,Yes,Yes,No,No
+,SubInj,Yes,x,x,x,x,x,x,No,No
+,Periodic,"Yes (no AMR, Cartesian only)","Yes (no AMR, Cartesian only)","Yes (no AMR, Cartesian only)","Yes (no AMR, Cartesian only)","Yes (no AMR, Cartesian only)","Yes (no AMR, Cartesian only)","Yes (no AMR, Cartesian only)","Yes (no AMR, Cartesian only)","Yes (no AMR, Cartesian only)"
+Equation of state,Ideal Gas,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,x
+,Stiffened Gas,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,x
+,Noble-Abel Stiffened Gas,Yes,Yes,No,Yes,Yes,Yes,Yes,Yes,x
+,van der Waals,No,No,No,No,No,No,No,No,Yes
+,Non-linear Schrödinger,No,No,No,No,No,No,No,No,Yes
+,Polynomial,No,No,No,No,No,No,No,No,Yes

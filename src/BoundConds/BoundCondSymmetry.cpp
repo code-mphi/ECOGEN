@@ -50,6 +50,13 @@ void BoundCondSymmetry::createBoundary(TypeMeshContainer<CellInterface*>& cellIn
 }
 
 //****************************************************************************
+
+void BoundCondSymmetry::solveRiemannBoundary(Cell& cellLeft, const double& dxLeft, double& dtMax)
+{
+  model->solveRiemannSymmetry(cellLeft, dxLeft, dtMax, m_boundData);
+}
+
+//****************************************************************************
 //******************************AMR Method************************************
 //****************************************************************************
 

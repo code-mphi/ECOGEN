@@ -1,0 +1,54 @@
+<?xml version = "1.0" encoding = "UTF-8" standalone = "yes"?>
+<CI>
+	<!-- LIST OF GEOMETRICAL DOMAINS  -->
+	<physicalDomains>
+		<domain name="base" state="entireDomain" type="entireDomain"/>
+		<domain name="LP"  state="rightChamber" type="cuboid">
+      <dataCuboid lAxisX="0.75" lAxisY="0.5" lAxisZ="0.2">
+    		<posInferiorVertex x="0.25" y="0." z="0."/>
+  		</dataCuboid>
+    </domain>
+		<domain name="IB"  state="solid" type="cuboid" physicalEntity="-1">
+      <dataCuboid lAxisX="0.2" lAxisY="0.2" lAxisZ="0.2">
+    		<posInferiorVertex x="0.3" y="0.15" z="0."/>
+  		</dataCuboid>
+    </domain>
+	</physicalDomains>
+
+	<!-- LIST OF BOUNDARY CONDITIONS -->
+	<boundaryConditions>
+		<boundCond name="BC_Xmin" 	type="nonReflecting" number="1" />
+		<boundCond name="BC_Xmax" 	type="nonReflecting" number="2" />
+		<boundCond name="BC_Ymin"  	type="nonReflecting" number="3" />
+		<boundCond name="BC_Ymax" 	type="nonReflecting" number="4" />
+		<boundCond name="BC_Zmin"  	type="periodic" 		 number="5" />
+		<boundCond name="BC_Zmax" 	type="periodic" 	   number="6" />
+	</boundaryConditions>
+
+
+	<!--  LIST OF STATES  -->
+	<state name="entireDomain">
+		<material type="fluid" EOS="IG_air.xml">
+			<dataFluid density="1.0" pressure="5.e5">
+				<velocity x="0." y="0." z="0."/>
+			</dataFluid>
+		</material>
+	</state>
+
+	<state name="rightChamber">
+		<material type="fluid" EOS="IG_air.xml">
+			<dataFluid density="1.0" pressure="1.e5">
+				<velocity x="0." y="0." z="0."/>
+			</dataFluid>
+		</material>
+	</state>
+
+  <state name="solid">
+      <material type="fluid" EOS="IG_air.xml">
+          <dataFluid density="1.0" pressure="1.e5">
+              <velocity x="0." y="0." z="0."/>
+          </dataFluid>
+      </material>
+  </state>
+
+</CI>

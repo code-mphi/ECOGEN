@@ -7,12 +7,4 @@
 		<physicalTime totalTime="240.e-6" timeFreq="24.e-6"/>
 	</timeControlMode>
 	<computationControl CFL="0.5"/>
-
-	<secondOrder>
-		<globalLimiter>minmod</globalLimiter>
-	</secondOrder>
-
-	<gradient>
-		<method>green-gauss</method>
-	</gradient>
 </computationParam>

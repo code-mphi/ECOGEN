@@ -9,7 +9,7 @@
 
     <meshStretching>
       <YStretching>
-        <stretch startAt="0." endAt="0.7" factor="1.045" numberCells="120"/>
+        <stretch startAt="0." endAt="0.7" factor="1.045" refCellSize="0.00016" refCellPos="start"/>
       </YStretching>
     </meshStretching>
 

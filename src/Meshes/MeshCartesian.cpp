@@ -29,6 +29,7 @@
 //  If not, see <http://www.gnu.org/licenses/>.
 
 #include "MeshCartesian.h"
+#include <limits>
 
 //***********************************************************************
 
@@ -156,6 +157,18 @@ void MeshCartesian::assignLimits(std::vector<BoundCond*>& boundCond)
       break;
     }
   }
+  if ((m_limXm->whoAmI() == TypeBC::PERIODIC && m_limXp->whoAmI() != TypeBC::PERIODIC) ||
+      (m_limXm->whoAmI() != TypeBC::PERIODIC && m_limXp->whoAmI() == TypeBC::PERIODIC)) {
+    Errors::errorMessage("Problem of periodic boundary conditions: both X boundaries must be periodic to work");
+  }
+  else if ((m_limYm->whoAmI() == TypeBC::PERIODIC && m_limYp->whoAmI() != TypeBC::PERIODIC) ||
+           (m_limYm->whoAmI() != TypeBC::PERIODIC && m_limYp->whoAmI() == TypeBC::PERIODIC)) {
+    Errors::errorMessage("Problem of periodic boundary conditions: both Y boundaries must be periodic to work");
+  }
+  else if ((m_limZm->whoAmI() == TypeBC::PERIODIC && m_limZp->whoAmI() != TypeBC::PERIODIC) ||
+           (m_limZm->whoAmI() != TypeBC::PERIODIC && m_limZp->whoAmI() == TypeBC::PERIODIC)) {
+    Errors::errorMessage("Problem of periodic boundary conditions: both Z boundaries must be periodic to work");
+  }
 }
 
 //***********************************************************************
@@ -186,16 +199,41 @@ int MeshCartesian::initializeGeometrie(TypeMeshContainer<Cell*>& cells,
                                        TypeMeshContainer<CellInterface*>& cellInterfaces,
                                        const int& /*resumeSimulation*/,
                                        bool /*pretraitementParallele*/,
-                                       std::string ordreCalcul)
+                                       SimulationOrder schemeOrder)
 {
   this->meshStretching();
   if (Ncpu == 1) {
-    this->initializeGeometrieMonoCpu(cells, cellInterfaces, ordreCalcul);
+    this->initializeGeometrieMonoCpu(cells, cellInterfaces, schemeOrder);
   }
   else {
-    this->initializeGeometrieParallele(cells, cellsGhost, cellInterfaces, ordreCalcul);
+    this->initializeGeometrieParallele(cells, cellsGhost, cellInterfaces, schemeOrder);
   }
   return m_problemDimension;
+}
+
+//***********************************************************************
+
+void MeshCartesian::meshStretchingAlongAxis(
+  int& numberCells, const double& l, std::vector<double>& dl, std::vector<double>& pos, std::vector<stretchZone>& stretch)
+{
+  //initial value for cell sizes
+  double d = l / static_cast<double>(numberCells);
+
+  //Stretching along current axis
+  if (stretch.size() == 0) {
+    dl.resize(numberCells);
+    pos.resize(numberCells);
+    for (int i = 0; i < numberCells; i++) {
+      dl[i]  = d;
+      pos[i] = (i + 0.5) * d;
+    }
+  }
+  else {
+    numberCells = 0;
+    for (unsigned int z = 0; z < stretch.size(); z++) {
+      numberCells += stretch[z].stretching(dl, pos);
+    }
+  }
 }
 
 //***********************************************************************
@@ -204,49 +242,16 @@ void MeshCartesian::meshStretching()
 {
   //initial value for cell sizes
   m_numberCellsCalcul = m_numberCellsXGlobal * m_numberCellsYGlobal * m_numberCellsZGlobal;
-  double dX           = m_lX / static_cast<double>(m_numberCellsXGlobal);
-  double dY           = m_lY / static_cast<double>(m_numberCellsYGlobal);
-  double dZ           = m_lZ / static_cast<double>(m_numberCellsZGlobal);
 
   //Stretching on X
-  if (m_stretchX.size() == 0) {
-    for (int i = 0; i < m_numberCellsXGlobal; i++) {
-      m_dXi.push_back(dX);
-      m_posXi.push_back((i + 0.5) * dX);
-    }
-  }
-  else {
-    m_numberCellsXGlobal = 0;
-    for (unsigned int z = 0; z < m_stretchX.size(); z++) {
-      m_numberCellsXGlobal += m_stretchX[z].stretching(m_dXi, m_posXi);
-    }
-  }
+  meshStretchingAlongAxis(m_numberCellsXGlobal, m_lX, m_dXi, m_posXi, m_stretchX);
+
   //Stretching on Y
-  if (m_stretchY.size() == 0) {
-    for (int i = 0; i < m_numberCellsYGlobal; i++) {
-      m_dYj.push_back(dY);
-      m_posYj.push_back((i + 0.5) * dY);
-    }
-  }
-  else {
-    m_numberCellsYGlobal = 0;
-    for (unsigned int z = 0; z < m_stretchY.size(); z++) {
-      m_numberCellsYGlobal += m_stretchY[z].stretching(m_dYj, m_posYj);
-    }
-  }
+  meshStretchingAlongAxis(m_numberCellsYGlobal, m_lY, m_dYj, m_posYj, m_stretchY);
+
   //Stretching on Z
-  if (m_stretchZ.size() == 0) {
-    for (int i = 0; i < m_numberCellsZGlobal; i++) {
-      m_dZk.push_back(dZ);
-      m_posZk.push_back((i + 0.5) * dZ);
-    }
-  }
-  else {
-    m_numberCellsZGlobal = 0;
-    for (unsigned int z = 0; z < m_stretchZ.size(); z++) {
-      m_numberCellsZGlobal += m_stretchZ[z].stretching(m_dZk, m_posZk);
-    }
-  }
+  meshStretchingAlongAxis(m_numberCellsZGlobal, m_lZ, m_dZk, m_posZk, m_stretchZ);
+
   //Updating cells number
   m_numberCellsCalcul = m_numberCellsXGlobal * m_numberCellsYGlobal * m_numberCellsZGlobal;
 }
@@ -255,7 +260,7 @@ void MeshCartesian::meshStretching()
 
 void MeshCartesian::initializeGeometrieMonoCpu(TypeMeshContainer<Cell*>& cells,
                                                TypeMeshContainer<CellInterface*>& cellInterfaces,
-                                               std::string ordreCalcul)
+                                               SimulationOrder schemeOrder)
 {
   int ix, iy, iz;
 
@@ -267,7 +272,7 @@ void MeshCartesian::initializeGeometrieMonoCpu(TypeMeshContainer<Cell*>& cells,
   //Declaration array of elements and cells
   //---------------------------------------
   for (int i = 0; i < m_numberCellsCalcul; i++) {
-    if (ordreCalcul == "FIRSTORDER") {
+    if (schemeOrder == SimulationOrder::first) {
       cells.push_back(new Cell);
     }
     else {
@@ -337,7 +342,7 @@ void MeshCartesian::initializeGeometrieMonoCpu(TypeMeshContainer<Cell*>& cells,
   for (ix = 0; ix < m_numberCellsX - 1; ix++) {
     for (iy = 0; iy < m_numberCellsY; iy++) {
       for (iz = 0; iz < m_numberCellsZ; iz++) {
-        if (ordreCalcul == "FIRSTORDER") {
+        if (schemeOrder == SimulationOrder::first) {
           cellInterfaces.push_back(new CellInterface);
         }
         else {
@@ -379,7 +384,7 @@ void MeshCartesian::initializeGeometrieMonoCpu(TypeMeshContainer<Cell*>& cells,
   for (ix = 0; ix < m_numberCellsX; ix++) {
     for (iy = 0; iy < m_numberCellsY - 1; iy++) {
       for (iz = 0; iz < m_numberCellsZ; iz++) {
-        if (ordreCalcul == "FIRSTORDER") {
+        if (schemeOrder == SimulationOrder::first) {
           cellInterfaces.push_back(new CellInterface);
         }
         else {
@@ -421,7 +426,7 @@ void MeshCartesian::initializeGeometrieMonoCpu(TypeMeshContainer<Cell*>& cells,
   for (ix = 0; ix < m_numberCellsX; ix++) {
     for (iy = 0; iy < m_numberCellsY; iy++) {
       for (iz = 0; iz < m_numberCellsZ - 1; iz++) {
-        if (ordreCalcul == "FIRSTORDER") {
+        if (schemeOrder == SimulationOrder::first) {
           cellInterfaces.push_back(new CellInterface);
         }
         else {
@@ -471,7 +476,14 @@ void MeshCartesian::initializeGeometrieMonoCpu(TypeMeshContainer<Cell*>& cells,
         m_faces.push_back(new FaceCartesian());
         cellInterfaces[iFace]->setFace(m_faces[iFace]);
         this->construitIGlobal(ix, iy, iz, iCellL);
-        iCellR = iCellL;
+        if (cellInterfaces[iFace]->whoAmI() == TypeBC::PERIODIC) {
+          ix = m_numberCellsX - 1;
+          this->construitIGlobal(ix, iy, iz, iCellR);
+          ix = 0;
+        }
+        else {
+          iCellR = iCellL;
+        }
         cellInterfaces[iFace]->initialize(cells[iCellL], cells[iCellR]);
         cells[iCellL]->addCellInterface(cellInterfaces[iFace]);
         surface = m_dYj[iy] * m_dZk[iz];
@@ -495,7 +507,14 @@ void MeshCartesian::initializeGeometrieMonoCpu(TypeMeshContainer<Cell*>& cells,
         m_faces.push_back(new FaceCartesian());
         cellInterfaces[iFace]->setFace(m_faces[iFace]);
         this->construitIGlobal(ix, iy, iz, iCellL);
-        iCellR = iCellL;
+        if (cellInterfaces[iFace]->whoAmI() == TypeBC::PERIODIC) {
+          ix = 0;
+          this->construitIGlobal(ix, iy, iz, iCellR);
+          ix = m_numberCellsX - 1;
+        }
+        else {
+          iCellR = iCellL;
+        }
         cellInterfaces[iFace]->initialize(cells[iCellL], cells[iCellR]);
         cells[iCellL]->addCellInterface(cellInterfaces[iFace]);
         surface = m_dYj[iy] * m_dZk[iz];
@@ -520,7 +539,6 @@ void MeshCartesian::initializeGeometrieMonoCpu(TypeMeshContainer<Cell*>& cells,
     for (ix = 0; ix < m_numberCellsX; ix++) {
       for (iz = 0; iz < m_numberCellsZ; iz++) {
         this->construitIGlobal(ix, iy, iz, iCellL);
-        iCellR = iCellL;
 
         // Hard-coded boundary condition for Blasius test case
         // ---------------------------------------------------
@@ -542,6 +560,14 @@ void MeshCartesian::initializeGeometrieMonoCpu(TypeMeshContainer<Cell*>& cells,
         m_limYm->createBoundary(cellInterfaces);
         m_faces.push_back(new FaceCartesian());
         cellInterfaces[iFace]->setFace(m_faces[iFace]);
+        if (cellInterfaces[iFace]->whoAmI() == TypeBC::PERIODIC) {
+          iy = m_numberCellsY - 1;
+          this->construitIGlobal(ix, iy, iz, iCellR);
+          iy = 0;
+        }
+        else {
+          iCellR = iCellL;
+        }
         cellInterfaces[iFace]->initialize(cells[iCellL], cells[iCellR]);
         cells[iCellL]->addCellInterface(cellInterfaces[iFace]);
         surface = m_dXi[ix] * m_dZk[iz];
@@ -565,7 +591,14 @@ void MeshCartesian::initializeGeometrieMonoCpu(TypeMeshContainer<Cell*>& cells,
         m_faces.push_back(new FaceCartesian());
         cellInterfaces[iFace]->setFace(m_faces[iFace]);
         this->construitIGlobal(ix, iy, iz, iCellL);
-        iCellR = iCellL;
+        if (cellInterfaces[iFace]->whoAmI() == TypeBC::PERIODIC) {
+          iy = 0;
+          this->construitIGlobal(ix, iy, iz, iCellR);
+          iy = m_numberCellsY - 1;
+        }
+        else {
+          iCellR = iCellL;
+        }
         cellInterfaces[iFace]->initialize(cells[iCellL], cells[iCellR]);
         cells[iCellL]->addCellInterface(cellInterfaces[iFace]);
         surface = m_dXi[ix] * m_dZk[iz];
@@ -593,7 +626,14 @@ void MeshCartesian::initializeGeometrieMonoCpu(TypeMeshContainer<Cell*>& cells,
         m_faces.push_back(new FaceCartesian());
         cellInterfaces[iFace]->setFace(m_faces[iFace]);
         this->construitIGlobal(ix, iy, iz, iCellL);
-        iCellR = iCellL;
+        if (cellInterfaces[iFace]->whoAmI() == TypeBC::PERIODIC) {
+          iz = m_numberCellsZ - 1;
+          this->construitIGlobal(ix, iy, iz, iCellR);
+          iz = 0;
+        }
+        else {
+          iCellR = iCellL;
+        }
         cellInterfaces[iFace]->initialize(cells[iCellL], cells[iCellR]);
         cells[iCellL]->addCellInterface(cellInterfaces[iFace]);
         surface = m_dXi[ix] * m_dYj[iy];
@@ -617,7 +657,14 @@ void MeshCartesian::initializeGeometrieMonoCpu(TypeMeshContainer<Cell*>& cells,
         m_faces.push_back(new FaceCartesian());
         cellInterfaces[iFace]->setFace(m_faces[iFace]);
         this->construitIGlobal(ix, iy, iz, iCellL);
-        iCellR = iCellL;
+        if (cellInterfaces[iFace]->whoAmI() == TypeBC::PERIODIC) {
+          iz = 0;
+          this->construitIGlobal(ix, iy, iz, iCellR);
+          iz = m_numberCellsZ - 1;
+        }
+        else {
+          iCellR = iCellL;
+        }
         cellInterfaces[iFace]->initialize(cells[iCellL], cells[iCellR]);
         cells[iCellL]->addCellInterface(cellInterfaces[iFace]);
         surface = m_dXi[ix] * m_dYj[iy];
@@ -638,7 +685,7 @@ void MeshCartesian::initializeGeometrieMonoCpu(TypeMeshContainer<Cell*>& cells,
 void MeshCartesian::initializeGeometrieParallele(TypeMeshContainer<Cell*>& cells,
                                                  TypeMeshContainer<Cell*>& cellsGhost,
                                                  TypeMeshContainer<CellInterface*>& cellInterfaces,
-                                                 std::string ordreCalcul)
+                                                 SimulationOrder schemeOrder)
 {
   int ix, iy, iz;
   int countParallelCells(0);
@@ -650,7 +697,7 @@ void MeshCartesian::initializeGeometrieParallele(TypeMeshContainer<Cell*>& cells
   //Declaration of the cell array
   //-----------------------------
   //Parallel cutting of the geometric domain
-  this->decoupageParallele(ordreCalcul, cells);
+  this->parallelePartitioning(schemeOrder, cells);
 
   //Geometrical data settings for computational cells
   //-------------------------------------------------
@@ -712,7 +759,7 @@ void MeshCartesian::initializeGeometrieParallele(TypeMeshContainer<Cell*>& cells
   for (ix = 0; ix < m_numberCellsX - 1; ix++) {
     for (iy = 0; iy < m_numberCellsY; iy++) {
       for (iz = 0; iz < m_numberCellsZ; iz++) {
-        if (ordreCalcul == "FIRSTORDER") {
+        if (schemeOrder == SimulationOrder::first) {
           cellInterfaces.push_back(new CellInterface);
         }
         else {
@@ -743,7 +790,7 @@ void MeshCartesian::initializeGeometrieParallele(TypeMeshContainer<Cell*>& cells
   for (ix = 0; ix < m_numberCellsX; ix++) {
     for (iy = 0; iy < m_numberCellsY - 1; iy++) {
       for (iz = 0; iz < m_numberCellsZ; iz++) {
-        if (ordreCalcul == "FIRSTORDER") {
+        if (schemeOrder == SimulationOrder::first) {
           cellInterfaces.push_back(new CellInterface);
         }
         else {
@@ -774,7 +821,7 @@ void MeshCartesian::initializeGeometrieParallele(TypeMeshContainer<Cell*>& cells
   for (ix = 0; ix < m_numberCellsX; ix++) {
     for (iy = 0; iy < m_numberCellsY; iy++) {
       for (iz = 0; iz < m_numberCellsZ - 1; iz++) {
-        if (ordreCalcul == "FIRSTORDER") {
+        if (schemeOrder == SimulationOrder::first) {
           cellInterfaces.push_back(new CellInterface);
         }
         else {
@@ -809,9 +856,44 @@ void MeshCartesian::initializeGeometrieParallele(TypeMeshContainer<Cell*>& cells
     binormal.setXYZ(0., 0., 1.);
     for (iy = 0; iy < m_numberCellsY; iy++) {
       for (iz = 0; iz < m_numberCellsZ; iz++) {
-        //A) CPU neighbour limits treatment
+        //A) Periodic Boundary treatment
+        //-------------------------------
+        if (m_numberCpuX > 1 && m_limXm->whoAmI() == TypeBC::PERIODIC && m_CpuCoordX == 0) {
+          tangent.setXYZ(0., 1., 0.);
+          normal.setXYZ(1., 0., 0.); //Inversion for neighbour CPU matching
+                                     //right and Left cells catching
+          this->construitIGlobal(ix, iy, iz, iCellR);
+          iCellL = countParallelCells++; //Ghost cell number taken in order
+
+          //setting ghost cell geometry
+          cells[iCellL]->getElement()->setPos(cells[iCellR]->getElement()->getPosition());
+          cells[iCellL]->getElement()->setPosX(m_posXi[0] - 0.5 * (m_dXi[0] + m_dXi[m_numberCellsXGlobal - 1]));
+          cells[iCellL]->getElement()->setSize(m_dXi[m_numberCellsXGlobal - 1], m_dYj[m_offsetY + iy], m_dZk[m_offsetZ + iz]);
+          cells[iCellL]->getElement()->setVolume(m_dXi[m_numberCellsXGlobal - 1] * m_dYj[m_offsetY + iy] * m_dZk[m_offsetZ + iz]);
+          double lCFL(1.e10);
+          if (m_numberCellsX != 1) {
+            lCFL = std::min(lCFL, m_dXi[m_numberCellsXGlobal - 1]);
+          }
+          if (m_numberCellsY != 1) {
+            lCFL = std::min(lCFL, m_dYj[m_offsetY + iy]);
+          }
+          if (m_numberCellsZ != 1) {
+            lCFL = std::min(lCFL, m_dZk[m_offsetZ + iz]);
+          }
+          if (m_problemDimension > 1) lCFL *= 0.6;
+          cells[iCellL]->getElement()->setLCFL(lCFL);
+          //setting boundary
+          if (schemeOrder == SimulationOrder::first) {
+            cellInterfaces.push_back(new CellInterface);
+          }
+          else {
+            cellInterfaces.push_back(new CellInterfaceO2Cartesian);
+          }
+          cells[iCellR]->addCellInterface(cellInterfaces[iFace]);
+        }
+        //B) CPU neighbour limits treatment
         //---------------------------------
-        if (m_numberCpuX > 1 && m_CpuCoordX > 0) {
+        else if (m_numberCpuX > 1 && m_CpuCoordX > 0) {
           tangent.setXYZ(0., 1., 0.);
           normal.setXYZ(1., 0., 0.); //Inversion for neighbour CPU matching
                                      //right and Left cells catching
@@ -836,7 +918,7 @@ void MeshCartesian::initializeGeometrieParallele(TypeMeshContainer<Cell*>& cells
           if (m_problemDimension > 1) lCFL *= 0.6;
           cells[iCellL]->getElement()->setLCFL(lCFL);
           //setting boundary
-          if (ordreCalcul == "FIRSTORDER") {
+          if (schemeOrder == SimulationOrder::first) {
             cellInterfaces.push_back(new CellInterface);
           }
           else {
@@ -844,16 +926,23 @@ void MeshCartesian::initializeGeometrieParallele(TypeMeshContainer<Cell*>& cells
           }
           cells[iCellR]->addCellInterface(cellInterfaces[iFace]);
         }
-        //B) Physical boundary condition treatment
+        //C) Physical boundary condition treatment
         //----------------------------------------
         else {
           tangent.setXYZ(0., -1., 0.);
           normal.setXYZ(-1., 0., 0.);
-          //right and Left cells equals
           this->construitIGlobal(ix, iy, iz, iCellL);
-          iCellR = iCellL;
           //setting boundary
           m_limXm->createBoundary(cellInterfaces);
+          if (m_numberCpuX == 1 && cellInterfaces[iFace]->whoAmI() == TypeBC::PERIODIC) { //No X decomposition parallel treatment
+            ix = m_numberCellsX - 1;
+            this->construitIGlobal(ix, iy, iz, iCellR);
+            ix = 0;
+          }
+          else {
+            //right and Left cells equals
+            iCellR = iCellL;
+          }
         }
         //Common settings
         cells[iCellL]->addCellInterface(cellInterfaces[iFace]);
@@ -877,9 +966,39 @@ void MeshCartesian::initializeGeometrieParallele(TypeMeshContainer<Cell*>& cells
     for (iy = 0; iy < m_numberCellsY; iy++) {
       for (iz = 0; iz < m_numberCellsZ; iz++) {
         this->construitIGlobal(ix, iy, iz, iCellL);
-        //A) CPU neighbour limits treatment
+        //A) Periodic Boundary treatment
+        //-------------------------------
+        if (m_numberCpuX > 1 && m_limXp->whoAmI() == TypeBC::PERIODIC && m_CpuCoordX == m_numberCpuX - 1) {
+          iCellR = countParallelCells++; //Ghost cell number taken in order
+          //setting ghost cell geometry
+          cells[iCellR]->getElement()->setPos(cells[iCellL]->getElement()->getPosition());
+          cells[iCellR]->getElement()->setPosX(m_posXi[m_numberCellsXGlobal - 1] + 0.5 * (m_dXi[0] + m_dXi[m_numberCellsXGlobal - 1]));
+          cells[iCellR]->getElement()->setSize(m_dXi[0], m_dYj[m_offsetY + iy], m_dZk[m_offsetZ + iz]);
+          cells[iCellR]->getElement()->setVolume(m_dXi[0] * m_dYj[m_offsetY + iy] * m_dZk[m_offsetZ + iz]);
+          double lCFL(1.e10);
+          if (m_numberCellsX != 1) {
+            lCFL = std::min(lCFL, m_dXi[0]);
+          }
+          if (m_numberCellsY != 1) {
+            lCFL = std::min(lCFL, m_dYj[m_offsetY + iy]);
+          }
+          if (m_numberCellsZ != 1) {
+            lCFL = std::min(lCFL, m_dZk[m_offsetZ + iz]);
+          }
+          if (m_problemDimension > 1) lCFL *= 0.6;
+          cells[iCellR]->getElement()->setLCFL(lCFL);
+          //setting boundary
+          if (schemeOrder == SimulationOrder::first) {
+            cellInterfaces.push_back(new CellInterface);
+          }
+          else {
+            cellInterfaces.push_back(new CellInterfaceO2Cartesian);
+          }
+          cells[iCellR]->addCellInterface(cellInterfaces[iFace]);
+        }
+        //B) CPU neighbour limits treatment
         //---------------------------------
-        if (m_numberCpuX > 1 && m_CpuCoordX < m_numberCpuX - 1) {
+        else if (m_numberCpuX > 1 && m_CpuCoordX < m_numberCpuX - 1) {
           iCellR = countParallelCells++; //Ghost cell number taken in order
           //setting ghost cell geometry
           cells[iCellR]->getElement()->setPos(cells[iCellL]->getElement()->getPosition());
@@ -899,7 +1018,7 @@ void MeshCartesian::initializeGeometrieParallele(TypeMeshContainer<Cell*>& cells
           if (m_problemDimension > 1) lCFL *= 0.6;
           cells[iCellR]->getElement()->setLCFL(lCFL);
           //setting boundary
-          if (ordreCalcul == "FIRSTORDER") {
+          if (schemeOrder == SimulationOrder::first) {
             cellInterfaces.push_back(new CellInterface);
           }
           else {
@@ -907,11 +1026,19 @@ void MeshCartesian::initializeGeometrieParallele(TypeMeshContainer<Cell*>& cells
           }
           cells[iCellR]->addCellInterface(cellInterfaces[iFace]);
         }
-        //B) Physical boundary condition treatment
+        //C) Physical boundary condition treatment
         //----------------------------------------
         else {
           m_limXp->createBoundary(cellInterfaces);
-          iCellR = iCellL;
+          if (m_numberCpuX == 1 && cellInterfaces[iFace]->whoAmI() == TypeBC::PERIODIC) { //No X decomposition parallel treatment
+            int ix_save = ix;
+            ix          = 0;
+            this->construitIGlobal(ix, iy, iz, iCellR);
+            ix = ix_save;
+          }
+          else {
+            iCellR = iCellL;
+          }
         }
         //Common settings
         cells[iCellL]->addCellInterface(cellInterfaces[iFace]);
@@ -937,9 +1064,43 @@ void MeshCartesian::initializeGeometrieParallele(TypeMeshContainer<Cell*>& cells
     binormal.setXYZ(0., 0., 1.);
     for (ix = 0; ix < m_numberCellsX; ix++) {
       for (iz = 0; iz < m_numberCellsZ; iz++) {
-        //A) CPU neighbour limits treatment
+        //A) Periodic Boundary treatment
+        //-------------------------------
+        if (m_numberCpuY > 1 && m_limYm->whoAmI() == TypeBC::PERIODIC && m_CpuCoordY == 0) {
+          tangent.setXYZ(-1., 0., 0.);
+          normal.setXYZ(0., 1., 0.);
+          //right and Left cells catching
+          this->construitIGlobal(ix, iy, iz, iCellR);
+          iCellL = countParallelCells++; //Ghost cell number taken in order
+          //setting ghost cell geometry
+          cells[iCellL]->getElement()->setPos(cells[iCellR]->getElement()->getPosition());
+          cells[iCellL]->getElement()->setPosY(m_posYj[0] - 0.5 * (m_dYj[0] + m_dYj[m_numberCellsYGlobal - 1]));
+          cells[iCellL]->getElement()->setSize(m_dXi[m_offsetX + ix], m_dYj[m_numberCellsYGlobal - 1], m_dZk[m_offsetZ + iz]);
+          cells[iCellL]->getElement()->setVolume(m_dXi[m_offsetX + ix] * m_dYj[m_numberCellsYGlobal - 1] * m_dZk[m_offsetZ + iz]);
+          double lCFL(1.e10);
+          if (m_numberCellsX != 1) {
+            lCFL = std::min(lCFL, m_dXi[m_offsetX + ix]);
+          }
+          if (m_numberCellsY != 1) {
+            lCFL = std::min(lCFL, m_dYj[m_numberCellsYGlobal - 1]);
+          }
+          if (m_numberCellsZ != 1) {
+            lCFL = std::min(lCFL, m_dZk[m_offsetZ + iz]);
+          }
+          if (m_problemDimension > 1) lCFL *= 0.6;
+          cells[iCellL]->getElement()->setLCFL(lCFL);
+          //setting boundary
+          if (schemeOrder == SimulationOrder::first) {
+            cellInterfaces.push_back(new CellInterface);
+          }
+          else {
+            cellInterfaces.push_back(new CellInterfaceO2Cartesian);
+          }
+          cells[iCellR]->addCellInterface(cellInterfaces[iFace]);
+        }
+        //B) CPU neighbour limits treatment
         //---------------------------------
-        if (m_numberCpuY > 1 && m_CpuCoordY > 0) {
+        else if (m_numberCpuY > 1 && m_CpuCoordY > 0) {
           tangent.setXYZ(-1., 0., 0.);
           normal.setXYZ(0., 1., 0.);
           //right and Left cells catching
@@ -963,7 +1124,7 @@ void MeshCartesian::initializeGeometrieParallele(TypeMeshContainer<Cell*>& cells
           if (m_problemDimension > 1) lCFL *= 0.6;
           cells[iCellL]->getElement()->setLCFL(lCFL);
           //setting boundary
-          if (ordreCalcul == "FIRSTORDER") {
+          if (schemeOrder == SimulationOrder::first) {
             cellInterfaces.push_back(new CellInterface);
           }
           else {
@@ -971,14 +1132,11 @@ void MeshCartesian::initializeGeometrieParallele(TypeMeshContainer<Cell*>& cells
           }
           cells[iCellR]->addCellInterface(cellInterfaces[iFace]);
         }
-        //B) Physical boundary condition treatment
+        //C) Physical boundary condition treatment
         //----------------------------------------
         else {
           tangent.setXYZ(1., 0., 0.);
           normal.setXYZ(0., -1., 0.);
-          //right and Left cells equals
-          this->construitIGlobal(ix, iy, iz, iCellL);
-          iCellR = iCellL;
 
           // Hard-coded boundary condition for Blasius test case
           // ---------------------------------------------------
@@ -986,7 +1144,7 @@ void MeshCartesian::initializeGeometrieParallele(TypeMeshContainer<Cell*>& cells
           // Requires to set wall boundary condition in file initialConditions.xml
           // to define no-slip wall and slipping wall is defined thanks to a
           // symmetry before a given position.
-          // To comment if not needed and be carefull when using it.
+          // To comment if not needed and be careful when using it.
           // if (cells[iCellL]->getPosition().getX() < 0.1) {
           //   BoundCond* limBuff(new BoundCondSymmetry(4));
           //   limBuff->createBoundary(cellInterfaces);
@@ -999,6 +1157,16 @@ void MeshCartesian::initializeGeometrieParallele(TypeMeshContainer<Cell*>& cells
 
           //setting boundary
           m_limYm->createBoundary(cellInterfaces);
+          this->construitIGlobal(ix, iy, iz, iCellL);
+          if (m_numberCpuY == 1 && cellInterfaces[iFace]->whoAmI() == TypeBC::PERIODIC) { //No Y decomposition parallel treatment
+            iy = m_numberCellsY - 1;
+            this->construitIGlobal(ix, iy, iz, iCellR);
+            iy = 0;
+          }
+          else {
+            //right and Left cells equals
+            iCellR = iCellL;
+          }
         }
         //Common settings
         cells[iCellL]->addCellInterface(cellInterfaces[iFace]);
@@ -1022,9 +1190,39 @@ void MeshCartesian::initializeGeometrieParallele(TypeMeshContainer<Cell*>& cells
     for (ix = 0; ix < m_numberCellsX; ix++) {
       for (iz = 0; iz < m_numberCellsZ; iz++) {
         this->construitIGlobal(ix, iy, iz, iCellL);
-        //A) CPU neighbour limits treatment
+        //A) Periodic Boundary treatment
+        //-------------------------------
+        if (m_numberCpuY > 1 && m_limYp->whoAmI() == TypeBC::PERIODIC && m_CpuCoordY == m_numberCpuY - 1) {
+          iCellR = countParallelCells++; //Ghost cell number taken in order
+          //setting ghost cell geometry
+          cells[iCellR]->getElement()->setPos(cells[iCellL]->getElement()->getPosition());
+          cells[iCellR]->getElement()->setPosY(m_posYj[m_numberCellsYGlobal - 1] + 0.5 * (m_dYj[0] + m_dYj[m_numberCellsYGlobal - 1]));
+          cells[iCellR]->getElement()->setSize(m_dXi[m_offsetX + ix], m_dYj[0], m_dZk[m_offsetZ + iz]);
+          cells[iCellR]->getElement()->setVolume(m_dXi[m_offsetX + ix] * m_dYj[0] * m_dZk[m_offsetZ + iz]);
+          double lCFL(1.e10);
+          if (m_numberCellsX != 1) {
+            lCFL = std::min(lCFL, m_dXi[m_offsetX + ix]);
+          }
+          if (m_numberCellsY != 1) {
+            lCFL = std::min(lCFL, m_dYj[0]);
+          }
+          if (m_numberCellsZ != 1) {
+            lCFL = std::min(lCFL, m_dZk[m_offsetZ + iz]);
+          }
+          if (m_problemDimension > 1) lCFL *= 0.6;
+          cells[iCellR]->getElement()->setLCFL(lCFL);
+          //setting boundary
+          if (schemeOrder == SimulationOrder::first) {
+            cellInterfaces.push_back(new CellInterface);
+          }
+          else {
+            cellInterfaces.push_back(new CellInterfaceO2Cartesian);
+          }
+          cells[iCellR]->addCellInterface(cellInterfaces[iFace]);
+        }
+        //B) CPU neighbour limits treatment
         //---------------------------------
-        if (m_numberCpuY > 1 && m_CpuCoordY < m_numberCpuY - 1) {
+        else if (m_numberCpuY > 1 && m_CpuCoordY < m_numberCpuY - 1) {
           iCellR = countParallelCells++; //Ghost cell number taken in order
           //setting ghost cell geometry
           cells[iCellR]->getElement()->setPos(cells[iCellL]->getElement()->getPosition());
@@ -1044,7 +1242,7 @@ void MeshCartesian::initializeGeometrieParallele(TypeMeshContainer<Cell*>& cells
           if (m_problemDimension > 1) lCFL *= 0.6;
           cells[iCellR]->getElement()->setLCFL(lCFL);
           //setting boundary
-          if (ordreCalcul == "FIRSTORDER") {
+          if (schemeOrder == SimulationOrder::first) {
             cellInterfaces.push_back(new CellInterface);
           }
           else {
@@ -1052,11 +1250,19 @@ void MeshCartesian::initializeGeometrieParallele(TypeMeshContainer<Cell*>& cells
           }
           cells[iCellR]->addCellInterface(cellInterfaces[iFace]);
         }
-        //B) Physical boundary condition treatment
+        //C) Physical boundary condition treatment
         //----------------------------------------
         else {
           m_limYp->createBoundary(cellInterfaces);
-          iCellR = iCellL;
+          if (m_numberCpuY == 1 && cellInterfaces[iFace]->whoAmI() == TypeBC::PERIODIC) { //No Y decomposition parallel treatment
+            int iy_save = iy;
+            iy          = 0;
+            this->construitIGlobal(ix, iy, iz, iCellR);
+            iy = iy_save;
+          }
+          else {
+            iCellR = iCellL;
+          }
         }
         //Common settings
         cells[iCellL]->addCellInterface(cellInterfaces[iFace]);
@@ -1082,9 +1288,43 @@ void MeshCartesian::initializeGeometrieParallele(TypeMeshContainer<Cell*>& cells
     binormal.setXYZ(0., 1., 0.);
     for (ix = 0; ix < m_numberCellsX; ix++) {
       for (iy = 0; iy < m_numberCellsY; iy++) {
-        //A) CPU neighbour limits treatment
+        //A) Periodic Boundary treatment
+        //-------------------------------
+        if (m_numberCpuZ > 1 && m_limZm->whoAmI() == TypeBC::PERIODIC && m_CpuCoordZ == 0) {
+          tangent.setXYZ(1., 0., 0.);
+          normal.setXYZ(0., 0., 1.);
+          //right and Left cells catching
+          this->construitIGlobal(ix, iy, iz, iCellR);
+          iCellL = countParallelCells++; //Ghost cell number taken in order
+          //setting ghost cell geometry
+          cells[iCellL]->getElement()->setPos(cells[iCellR]->getElement()->getPosition());
+          cells[iCellL]->getElement()->setPosZ(m_posZk[0] - 0.5 * (m_dZk[0] + m_dZk[m_numberCellsZGlobal - 1]));
+          cells[iCellL]->getElement()->setSize(m_dXi[m_offsetX + ix], m_dYj[m_offsetY + iy], m_dZk[m_numberCellsZGlobal - 1]);
+          cells[iCellL]->getElement()->setVolume(m_dXi[m_offsetX + ix] * m_dYj[m_offsetY + iy] * m_dZk[m_numberCellsZGlobal - 1]);
+          double lCFL(1.e10);
+          if (m_numberCellsX != 1) {
+            lCFL = std::min(lCFL, m_dXi[m_offsetX + ix]);
+          }
+          if (m_numberCellsY != 1) {
+            lCFL = std::min(lCFL, m_dYj[m_offsetY + iy]);
+          }
+          if (m_numberCellsZ != 1) {
+            lCFL = std::min(lCFL, m_dZk[m_numberCellsZGlobal - 1]);
+          }
+          if (m_problemDimension > 1) lCFL *= 0.6;
+          cells[iCellL]->getElement()->setLCFL(lCFL);
+          //setting boundary
+          if (schemeOrder == SimulationOrder::first) {
+            cellInterfaces.push_back(new CellInterface);
+          }
+          else {
+            cellInterfaces.push_back(new CellInterfaceO2Cartesian);
+          }
+          cells[iCellR]->addCellInterface(cellInterfaces[iFace]);
+        }
+        //B)CPU neighbour limits treatment
         //---------------------------------
-        if (m_numberCpuZ > 1 && m_CpuCoordZ > 0) {
+        else if (m_numberCpuZ > 1 && m_CpuCoordZ > 0) {
           tangent.setXYZ(1., 0., 0.);
           normal.setXYZ(0., 0., 1.); //Inversion for neighbour CPU matching
           //right and Left cells catching
@@ -1108,7 +1348,7 @@ void MeshCartesian::initializeGeometrieParallele(TypeMeshContainer<Cell*>& cells
           if (m_problemDimension > 1) lCFL *= 0.6;
           cells[iCellL]->getElement()->setLCFL(lCFL);
           //setting boundary
-          if (ordreCalcul == "FIRSTORDER") {
+          if (schemeOrder == SimulationOrder::first) {
             cellInterfaces.push_back(new CellInterface);
           }
           else {
@@ -1116,16 +1356,23 @@ void MeshCartesian::initializeGeometrieParallele(TypeMeshContainer<Cell*>& cells
           }
           cells[iCellR]->addCellInterface(cellInterfaces[iFace]);
         }
-        //B) Physical boundary condition treatment
+        //C) Physical boundary condition treatment
         //----------------------------------------
         else {
           tangent.setXYZ(-1., 0., 0.);
           normal.setXYZ(0., 0., -1.);
           //right and Left cells equals
           this->construitIGlobal(ix, iy, iz, iCellL);
-          iCellR = iCellL;
           //setting boundary
           m_limZm->createBoundary(cellInterfaces);
+          if (m_numberCpuZ == 1 && cellInterfaces[iFace]->whoAmI() == TypeBC::PERIODIC) { //No Z decomposition parallel treatment
+            iz = m_numberCellsZ - 1;
+            this->construitIGlobal(ix, iy, iz, iCellR);
+            iz = 0;
+          }
+          else {
+            iCellR = iCellL;
+          }
         }
         //Common settings
         cells[iCellL]->addCellInterface(cellInterfaces[iFace]);
@@ -1149,9 +1396,39 @@ void MeshCartesian::initializeGeometrieParallele(TypeMeshContainer<Cell*>& cells
     for (ix = 0; ix < m_numberCellsX; ix++) {
       for (iy = 0; iy < m_numberCellsY; iy++) {
         this->construitIGlobal(ix, iy, iz, iCellL);
-        //A) CPU neighbour limits treatment
+        //A) Periodic Boundary treatment
+        //-------------------------------
+        if (m_numberCpuZ > 1 && m_limZp->whoAmI() == TypeBC::PERIODIC && m_CpuCoordZ == m_numberCpuZ - 1) {
+          iCellR = countParallelCells++; //Ghost cell number taken in order
+          //setting ghost cell geometry
+          cells[iCellR]->getElement()->setPos(cells[iCellL]->getElement()->getPosition());
+          cells[iCellR]->getElement()->setPosZ(m_posZk[m_numberCellsZGlobal - 1] + 0.5 * (m_dZk[0] + m_dZk[m_numberCellsZGlobal - 1]));
+          cells[iCellR]->getElement()->setSize(m_dXi[m_offsetX + ix], m_dYj[m_offsetY + iy], m_dZk[0]);
+          cells[iCellR]->getElement()->setVolume(m_dXi[m_offsetX + ix] * m_dYj[m_offsetY + iy] * m_dZk[0]);
+          double lCFL(1.e10);
+          if (m_numberCellsX != 1) {
+            lCFL = std::min(lCFL, m_dXi[m_offsetX + ix]);
+          }
+          if (m_numberCellsY != 1) {
+            lCFL = std::min(lCFL, m_dYj[m_offsetY + iy]);
+          }
+          if (m_numberCellsZ != 1) {
+            lCFL = std::min(lCFL, m_dZk[0]);
+          }
+          if (m_problemDimension > 1) lCFL *= 0.6;
+          cells[iCellR]->getElement()->setLCFL(lCFL);
+          //setting boundary
+          if (schemeOrder == SimulationOrder::first) {
+            cellInterfaces.push_back(new CellInterface);
+          }
+          else {
+            cellInterfaces.push_back(new CellInterfaceO2Cartesian);
+          }
+          cells[iCellR]->addCellInterface(cellInterfaces[iFace]);
+        }
+        //B) CPU neighbour limits treatment
         //---------------------------------
-        if (m_numberCpuZ > 1 && m_CpuCoordZ < m_numberCpuZ - 1) {
+        else if (m_numberCpuZ > 1 && m_CpuCoordZ < m_numberCpuZ - 1) {
           iCellR = countParallelCells++; //Ghost cell number taken in order
           //setting ghost cell geometry
           cells[iCellR]->getElement()->setPos(cells[iCellL]->getElement()->getPosition());
@@ -1171,7 +1448,7 @@ void MeshCartesian::initializeGeometrieParallele(TypeMeshContainer<Cell*>& cells
           if (m_problemDimension > 1) lCFL *= 0.6;
           cells[iCellR]->getElement()->setLCFL(lCFL);
           //setting boundary
-          if (ordreCalcul == "FIRSTORDER") {
+          if (schemeOrder == SimulationOrder::first) {
             cellInterfaces.push_back(new CellInterface);
           }
           else {
@@ -1179,11 +1456,19 @@ void MeshCartesian::initializeGeometrieParallele(TypeMeshContainer<Cell*>& cells
           }
           cells[iCellR]->addCellInterface(cellInterfaces[iFace]);
         }
-        //B) Physical boundary condition treatment
+        //C) Physical boundary condition treatment
         //----------------------------------------
         else {
           m_limZp->createBoundary(cellInterfaces);
-          iCellR = iCellL;
+          if (m_numberCpuZ == 1 && cellInterfaces[iFace]->whoAmI() == TypeBC::PERIODIC) { //No Z decomposition parallel treatment
+            int iz_save = iz;
+            iz          = 0;
+            this->construitIGlobal(ix, iy, iz, iCellR);
+            iz = iz_save;
+          }
+          else {
+            iCellR = iCellL;
+          }
         }
         //Common settings
         cells[iCellL]->addCellInterface(cellInterfaces[iFace]);
@@ -1208,7 +1493,7 @@ void MeshCartesian::initializeGeometrieParallele(TypeMeshContainer<Cell*>& cells
 
 //***********************************************************************
 
-void MeshCartesian::decoupageParallele(std::string ordreCalcul, TypeMeshContainer<Cell*>& cells)
+void MeshCartesian::parallelePartitioning(SimulationOrder schemeOrder, TypeMeshContainer<Cell*>& cells)
 {
   int ix, iy, iz;
   int cellPerCpu, reste, iCell, neighbour;
@@ -1246,12 +1531,17 @@ void MeshCartesian::decoupageParallele(std::string ordreCalcul, TypeMeshContaine
       m_numberCellsTotal = m_numberCellsCalcul + 2 * numberElements;
     }
     else {
-      m_numberCellsTotal = m_numberCellsCalcul + numberElements;
+      if (m_limXm->whoAmI() == TypeBC::PERIODIC) {
+        m_numberCellsTotal = m_numberCellsCalcul + 2 * numberElements;
+      }
+      else {
+        m_numberCellsTotal = m_numberCellsCalcul + numberElements;
+      }
     }
 
     //Generating cells
     for (int i = 0; i < m_numberCellsCalcul; i++) {
-      if (ordreCalcul == "FIRSTORDER") {
+      if (schemeOrder == SimulationOrder::first) {
         cells.push_back(new Cell);
       }
       else {
@@ -1261,7 +1551,7 @@ void MeshCartesian::decoupageParallele(std::string ordreCalcul, TypeMeshContaine
       cells[i]->setElement(m_elements[i], i);
     }
     for (int i = m_numberCellsCalcul; i < m_numberCellsTotal; i++) {
-      if (ordreCalcul == "FIRSTORDER") {
+      if (schemeOrder == SimulationOrder::first) {
         cells.push_back(new CellGhost);
       }
       else {
@@ -1277,8 +1567,9 @@ void MeshCartesian::decoupageParallele(std::string ordreCalcul, TypeMeshContaine
     //The number of parallel cells is located apart from of the "true" cells
     //so we start at numberCells
     countParallelCells = m_numberCellsCalcul;
-    if (rankCpu > 0) {
+    if ((m_limXm->whoAmI() == TypeBC::PERIODIC && rankCpu == 0) || rankCpu > 0) {
       neighbour = rankCpu - 1;
+      if (m_limXm->whoAmI() == TypeBC::PERIODIC && rankCpu == 0) neighbour = Ncpu - 1;
       parallel.setNeighbour(neighbour);
       ix = 0;
       for (iy = 0; iy < m_numberCellsY; iy++) {
@@ -1293,8 +1584,9 @@ void MeshCartesian::decoupageParallele(std::string ordreCalcul, TypeMeshContaine
         }
       }
     }
-    if (rankCpu < Ncpu - 1) {
+    if ((rankCpu < Ncpu - 1) || (m_limXp->whoAmI() == TypeBC::PERIODIC && rankCpu == Ncpu - 1)) {
       neighbour = rankCpu + 1;
+      if (m_limXp->whoAmI() == TypeBC::PERIODIC && rankCpu == Ncpu - 1) neighbour = 0;
       parallel.setNeighbour(neighbour);
       ix = m_numberCellsX - 1;
       for (iy = 0; iy < m_numberCellsY; iy++) {
@@ -1307,6 +1599,13 @@ void MeshCartesian::decoupageParallele(std::string ordreCalcul, TypeMeshContaine
           cells[countParallelCells]->setRankOfNeighborCPU(neighbour);
           ++countParallelCells;
         }
+      }
+    }
+    if (Ncpu == 2 && m_limXm->whoAmI() == TypeBC::PERIODIC) { // particular case
+      int neighbourPeriodic              = (rankCpu == 0 ? 1 : 0);
+      TypeMeshContainer<Cell*>& recvList = parallel.getElementsToReceive(neighbourPeriodic);
+      for (int i = 0; i < numberElements; ++i) {
+        std::swap(recvList[i], recvList[i + numberElements]);
       }
     }
   }
@@ -1384,8 +1683,8 @@ void MeshCartesian::decoupageParallele(std::string ordreCalcul, TypeMeshContaine
     m_numberCellsCalcul = m_numberCellsX * m_numberCellsY * m_numberCellsZ;
 
     //Determination of the number of elements to send/receive for each parallel boundary in each direction
-    int numberElementsX(m_numberCellsY * m_numberCellsZ);
-    int numberElementsY(m_numberCellsX * m_numberCellsZ);
+    const int numberElementsX{m_numberCellsY * m_numberCellsZ};
+    const int numberElementsY{m_numberCellsX * m_numberCellsZ};
 
     //Total number of cells taking into account the necessary cells for the parallel (ghost cells)
     m_numberCellsTotal = m_numberCellsCalcul;
@@ -1394,7 +1693,12 @@ void MeshCartesian::decoupageParallele(std::string ordreCalcul, TypeMeshContaine
         m_numberCellsTotal += 2 * numberElementsX;
       }
       else {
-        m_numberCellsTotal += numberElementsX;
+        if (m_limXm->whoAmI() == TypeBC::PERIODIC) {
+          m_numberCellsTotal += 2 * numberElementsX;
+        }
+        else {
+          m_numberCellsTotal += numberElementsX;
+        }
       }
     }
     if (m_numberCpuY > 1) {
@@ -1402,13 +1706,18 @@ void MeshCartesian::decoupageParallele(std::string ordreCalcul, TypeMeshContaine
         m_numberCellsTotal += 2 * numberElementsY;
       }
       else {
-        m_numberCellsTotal += numberElementsY;
+        if (m_limYm->whoAmI() == TypeBC::PERIODIC) {
+          m_numberCellsTotal += 2 * numberElementsY;
+        }
+        else {
+          m_numberCellsTotal += numberElementsY;
+        }
       }
     }
 
     //Generating cells
     for (int i = 0; i < m_numberCellsCalcul; i++) {
-      if (ordreCalcul == "FIRSTORDER") {
+      if (schemeOrder == SimulationOrder::first) {
         cells.push_back(new Cell);
       }
       else {
@@ -1418,7 +1727,7 @@ void MeshCartesian::decoupageParallele(std::string ordreCalcul, TypeMeshContaine
       cells[i]->setElement(m_elements[i], i);
     }
     for (int i = m_numberCellsCalcul; i < m_numberCellsTotal; i++) {
-      if (ordreCalcul == "FIRSTORDER") {
+      if (schemeOrder == SimulationOrder::first) {
         cells.push_back(new CellGhost);
       }
       else {
@@ -1434,84 +1743,114 @@ void MeshCartesian::decoupageParallele(std::string ordreCalcul, TypeMeshContaine
     countParallelCells = m_numberCellsCalcul;
     int neighbourCpuCoordX, neighbourCpuCoordY;
     //In the x-direction
-    if (m_CpuCoordX > 0) {
-      neighbourCpuCoordX  = m_CpuCoordX - 1;
-      neighbourCpuCoordY  = m_CpuCoordY;
-      neighbour           = 0;
-      neighbour          += neighbourCpuCoordX;
-      neighbour          += neighbourCpuCoordY * m_numberCpuX;
-      parallel.setNeighbour(neighbour);
-      ix = 0;
-      for (iy = 0; iy < m_numberCellsY; iy++) {
-        for (iz = 0; iz < m_numberCellsZ; iz++) {
-          this->construitIGlobal(ix, iy, iz, iCell);
-          parallel.addElementToSend(neighbour, cells[iCell]);
-          parallel.addElementToReceive(neighbour, cells[countParallelCells]);
-          parallel.addSlopesToSend(neighbour);
-          parallel.addSlopesToReceive(neighbour);
-          cells[countParallelCells]->setRankOfNeighborCPU(neighbour);
-          ++countParallelCells;
+    if (m_numberCpuX > 1) {
+      if ((m_limXm->whoAmI() == TypeBC::PERIODIC && m_CpuCoordX == 0) || m_CpuCoordX > 0) {
+        neighbourCpuCoordX = m_CpuCoordX - 1;
+        if (m_limXm->whoAmI() == TypeBC::PERIODIC && m_CpuCoordX == 0) neighbourCpuCoordX = m_numberCpuX - 1;
+        neighbourCpuCoordY  = m_CpuCoordY;
+        neighbour           = 0;
+        neighbour          += neighbourCpuCoordX;
+        neighbour          += neighbourCpuCoordY * m_numberCpuX;
+        parallel.setNeighbour(neighbour);
+        ix = 0;
+        for (iy = 0; iy < m_numberCellsY; iy++) {
+          for (iz = 0; iz < m_numberCellsZ; iz++) {
+            this->construitIGlobal(ix, iy, iz, iCell);
+            parallel.addElementToSend(neighbour, cells[iCell]);
+            parallel.addElementToReceive(neighbour, cells[countParallelCells]);
+            parallel.addSlopesToSend(neighbour);
+            parallel.addSlopesToReceive(neighbour);
+            cells[countParallelCells]->setRankOfNeighborCPU(neighbour);
+            ++countParallelCells;
+          }
         }
       }
-    }
-    if (m_CpuCoordX < m_numberCpuX - 1) {
-      neighbourCpuCoordX  = m_CpuCoordX + 1;
-      neighbourCpuCoordY  = m_CpuCoordY;
-      neighbour           = 0;
-      neighbour          += neighbourCpuCoordX;
-      neighbour          += neighbourCpuCoordY * m_numberCpuX;
-      parallel.setNeighbour(neighbour);
-      ix = m_numberCellsX - 1;
-      for (iy = 0; iy < m_numberCellsY; iy++) {
-        for (iz = 0; iz < m_numberCellsZ; iz++) {
-          this->construitIGlobal(ix, iy, iz, iCell);
-          parallel.addElementToSend(neighbour, cells[iCell]);
-          parallel.addElementToReceive(neighbour, cells[countParallelCells]);
-          parallel.addSlopesToSend(neighbour);
-          parallel.addSlopesToReceive(neighbour);
-          cells[countParallelCells]->setRankOfNeighborCPU(neighbour);
-          ++countParallelCells;
+      if ((m_CpuCoordX < m_numberCpuX - 1) || (m_limXp->whoAmI() == TypeBC::PERIODIC && m_CpuCoordX == m_numberCpuX - 1)) {
+        neighbourCpuCoordX = m_CpuCoordX + 1;
+        if (m_limXp->whoAmI() == TypeBC::PERIODIC && m_CpuCoordX == m_numberCpuX - 1) neighbourCpuCoordX = 0;
+        neighbourCpuCoordY  = m_CpuCoordY;
+        neighbour           = 0;
+        neighbour          += neighbourCpuCoordX;
+        neighbour          += neighbourCpuCoordY * m_numberCpuX;
+        parallel.setNeighbour(neighbour);
+        ix = m_numberCellsX - 1;
+        for (iy = 0; iy < m_numberCellsY; iy++) {
+          for (iz = 0; iz < m_numberCellsZ; iz++) {
+            this->construitIGlobal(ix, iy, iz, iCell);
+            parallel.addElementToSend(neighbour, cells[iCell]);
+            parallel.addElementToReceive(neighbour, cells[countParallelCells]);
+            parallel.addSlopesToSend(neighbour);
+            parallel.addSlopesToReceive(neighbour);
+            cells[countParallelCells]->setRankOfNeighborCPU(neighbour);
+            ++countParallelCells;
+          }
+        }
+      }
+      //Special case Ncpu==2
+      if (m_numberCpuX == 2 && m_limXm->whoAmI() == TypeBC::PERIODIC) {
+        neighbourCpuCoordX                  = (m_CpuCoordX == 0 ? 1 : 0);
+        neighbourCpuCoordY                  = m_CpuCoordY;
+        int neighbourPeriodicX              = neighbourCpuCoordX + neighbourCpuCoordY * m_numberCpuX;
+        TypeMeshContainer<Cell*>& recvListX = parallel.getElementsToReceive(neighbourPeriodicX);
+        assert(numberElementsX == m_numberCellsY * m_numberCellsZ);
+        for (int i = 0; i < numberElementsX; ++i) {
+          std::swap(recvListX[i], recvListX[i + numberElementsX]);
         }
       }
     }
     //In the y-direction
-    if (m_CpuCoordY > 0) {
-      neighbourCpuCoordX  = m_CpuCoordX;
-      neighbourCpuCoordY  = m_CpuCoordY - 1;
-      neighbour           = 0;
-      neighbour          += neighbourCpuCoordX;
-      neighbour          += neighbourCpuCoordY * m_numberCpuX;
-      parallel.setNeighbour(neighbour);
-      iy = 0;
-      for (ix = 0; ix < m_numberCellsX; ix++) {
-        for (iz = 0; iz < m_numberCellsZ; iz++) {
-          this->construitIGlobal(ix, iy, iz, iCell);
-          parallel.addElementToSend(neighbour, cells[iCell]);
-          parallel.addElementToReceive(neighbour, cells[countParallelCells]);
-          parallel.addSlopesToSend(neighbour);
-          parallel.addSlopesToReceive(neighbour);
-          cells[countParallelCells]->setRankOfNeighborCPU(neighbour);
-          ++countParallelCells;
+    if (m_numberCpuY > 1) {
+      if ((m_limYm->whoAmI() == TypeBC::PERIODIC && m_CpuCoordY == 0) || m_CpuCoordY > 0) {
+        neighbourCpuCoordY = m_CpuCoordY - 1;
+        if (m_limYm->whoAmI() == TypeBC::PERIODIC && m_CpuCoordY == 0) neighbourCpuCoordY = m_numberCpuY - 1;
+        neighbourCpuCoordX  = m_CpuCoordX;
+        neighbour           = 0;
+        neighbour          += neighbourCpuCoordX;
+        neighbour          += neighbourCpuCoordY * m_numberCpuX;
+        parallel.setNeighbour(neighbour);
+        iy = 0;
+        for (ix = 0; ix < m_numberCellsX; ix++) {
+          for (iz = 0; iz < m_numberCellsZ; iz++) {
+            this->construitIGlobal(ix, iy, iz, iCell);
+            parallel.addElementToSend(neighbour, cells[iCell]);
+            parallel.addElementToReceive(neighbour, cells[countParallelCells]);
+            parallel.addSlopesToSend(neighbour);
+            parallel.addSlopesToReceive(neighbour);
+            cells[countParallelCells]->setRankOfNeighborCPU(neighbour);
+            ++countParallelCells;
+          }
         }
       }
-    }
-    if (m_CpuCoordY < m_numberCpuY - 1) {
-      neighbourCpuCoordX  = m_CpuCoordX;
-      neighbourCpuCoordY  = m_CpuCoordY + 1;
-      neighbour           = 0;
-      neighbour          += neighbourCpuCoordX;
-      neighbour          += neighbourCpuCoordY * m_numberCpuX;
-      parallel.setNeighbour(neighbour);
-      iy = m_numberCellsY - 1;
-      for (ix = 0; ix < m_numberCellsX; ix++) {
-        for (iz = 0; iz < m_numberCellsZ; iz++) {
-          this->construitIGlobal(ix, iy, iz, iCell);
-          parallel.addElementToSend(neighbour, cells[iCell]);
-          parallel.addElementToReceive(neighbour, cells[countParallelCells]);
-          parallel.addSlopesToSend(neighbour);
-          parallel.addSlopesToReceive(neighbour);
-          cells[countParallelCells]->setRankOfNeighborCPU(neighbour);
-          ++countParallelCells;
+      if ((m_CpuCoordY < m_numberCpuY - 1) || (m_limYp->whoAmI() == TypeBC::PERIODIC && m_CpuCoordY == m_numberCpuY - 1)) {
+        neighbourCpuCoordY = m_CpuCoordY + 1;
+        if (m_limYp->whoAmI() == TypeBC::PERIODIC && m_CpuCoordY == m_numberCpuY - 1) neighbourCpuCoordY = 0;
+        neighbourCpuCoordX  = m_CpuCoordX;
+        neighbour           = 0;
+        neighbour          += neighbourCpuCoordX;
+        neighbour          += neighbourCpuCoordY * m_numberCpuX;
+        parallel.setNeighbour(neighbour);
+        iy = m_numberCellsY - 1;
+        for (ix = 0; ix < m_numberCellsX; ix++) {
+          for (iz = 0; iz < m_numberCellsZ; iz++) {
+            this->construitIGlobal(ix, iy, iz, iCell);
+            parallel.addElementToSend(neighbour, cells[iCell]);
+            parallel.addElementToReceive(neighbour, cells[countParallelCells]);
+            parallel.addSlopesToSend(neighbour);
+            parallel.addSlopesToReceive(neighbour);
+            cells[countParallelCells]->setRankOfNeighborCPU(neighbour);
+            ++countParallelCells;
+          }
+        }
+      }
+      //Special case Ncpu==2
+      if (m_numberCpuY == 2 && m_limYm->whoAmI() == TypeBC::PERIODIC) {
+        neighbourCpuCoordY                  = (m_CpuCoordY == 0 ? 1 : 0);
+        neighbourCpuCoordX                  = m_CpuCoordX;
+        int neighbourPeriodicY              = neighbourCpuCoordX + neighbourCpuCoordY * m_numberCpuX;
+        TypeMeshContainer<Cell*>& recvListY = parallel.getElementsToReceive(neighbourPeriodicY);
+        assert(numberElementsY == m_numberCellsX * m_numberCellsZ);
+        for (int i = 0; i < numberElementsY; ++i) {
+          std::swap(recvListY[i], recvListY[i + numberElementsY]);
         }
       }
     }
@@ -1610,9 +1949,9 @@ void MeshCartesian::decoupageParallele(std::string ordreCalcul, TypeMeshContaine
     m_numberCellsCalcul = m_numberCellsX * m_numberCellsY * m_numberCellsZ;
 
     //Determination of the number of elements to send/receive for each parallel boundary in each direction
-    int numberElementsX(m_numberCellsY * m_numberCellsZ);
-    int numberElementsY(m_numberCellsX * m_numberCellsZ);
-    int numberElementsZ(m_numberCellsX * m_numberCellsY);
+    const int numberElementsX{m_numberCellsY * m_numberCellsZ};
+    const int numberElementsY{m_numberCellsX * m_numberCellsZ};
+    const int numberElementsZ{m_numberCellsX * m_numberCellsY};
 
     //Total number of cells taking into account the necessary cells for the parallel (ghost cells)
     m_numberCellsTotal = m_numberCellsCalcul;
@@ -1621,7 +1960,12 @@ void MeshCartesian::decoupageParallele(std::string ordreCalcul, TypeMeshContaine
         m_numberCellsTotal += 2 * numberElementsX;
       }
       else {
-        m_numberCellsTotal += numberElementsX;
+        if (m_limXm->whoAmI() == TypeBC::PERIODIC) {
+          m_numberCellsTotal += 2 * numberElementsX;
+        }
+        else {
+          m_numberCellsTotal += numberElementsX;
+        }
       }
     }
     if (m_numberCpuY > 1) {
@@ -1629,7 +1973,12 @@ void MeshCartesian::decoupageParallele(std::string ordreCalcul, TypeMeshContaine
         m_numberCellsTotal += 2 * numberElementsY;
       }
       else {
-        m_numberCellsTotal += numberElementsY;
+        if (m_limYm->whoAmI() == TypeBC::PERIODIC) {
+          m_numberCellsTotal += 2 * numberElementsY;
+        }
+        else {
+          m_numberCellsTotal += numberElementsY;
+        }
       }
     }
     if (m_numberCpuZ > 1) {
@@ -1637,13 +1986,18 @@ void MeshCartesian::decoupageParallele(std::string ordreCalcul, TypeMeshContaine
         m_numberCellsTotal += 2 * numberElementsZ;
       }
       else {
-        m_numberCellsTotal += numberElementsZ;
+        if (m_limZm->whoAmI() == TypeBC::PERIODIC) {
+          m_numberCellsTotal += 2 * numberElementsZ;
+        }
+        else {
+          m_numberCellsTotal += numberElementsZ;
+        }
       }
     }
 
     //Generating cells
     for (int i = 0; i < m_numberCellsCalcul; i++) {
-      if (ordreCalcul == "FIRSTORDER") {
+      if (schemeOrder == SimulationOrder::first) {
         cells.push_back(new Cell);
       }
       else {
@@ -1653,7 +2007,7 @@ void MeshCartesian::decoupageParallele(std::string ordreCalcul, TypeMeshContaine
       cells[i]->setElement(m_elements[i], i);
     }
     for (int i = m_numberCellsCalcul; i < m_numberCellsTotal; i++) {
-      if (ordreCalcul == "FIRSTORDER") {
+      if (schemeOrder == SimulationOrder::first) {
         cells.push_back(new CellGhost);
       }
       else {
@@ -1668,138 +2022,183 @@ void MeshCartesian::decoupageParallele(std::string ordreCalcul, TypeMeshContaine
     //The number of the ghost cells is located apart from the number of "true" cells, hence start at m_numberCellsCalcul
     countParallelCells = m_numberCellsCalcul;
     int neighbourCpuCoordX, neighbourCpuCoordY, neighbourCpuCoordZ;
-    //In the x-direction
-    if (m_CpuCoordX > 0) {
-      neighbourCpuCoordX  = m_CpuCoordX - 1;
-      neighbourCpuCoordY  = m_CpuCoordY;
-      neighbourCpuCoordZ  = m_CpuCoordZ;
-      neighbour           = 0;
-      neighbour          += neighbourCpuCoordX;
-      neighbour          += neighbourCpuCoordY * m_numberCpuX;
-      neighbour          += neighbourCpuCoordZ * m_numberCpuX * m_numberCpuY;
-      parallel.setNeighbour(neighbour);
-      ix = 0;
-      for (iy = 0; iy < m_numberCellsY; iy++) {
-        for (iz = 0; iz < m_numberCellsZ; iz++) {
-          this->construitIGlobal(ix, iy, iz, iCell);
-          parallel.addElementToSend(neighbour, cells[iCell]);
-          parallel.addElementToReceive(neighbour, cells[countParallelCells]);
-          parallel.addSlopesToSend(neighbour);
-          parallel.addSlopesToReceive(neighbour);
-          cells[countParallelCells]->setRankOfNeighborCPU(neighbour);
-          ++countParallelCells;
+    if (m_numberCpuX > 1) {
+      //In the x-direction
+      if ((m_limXm->whoAmI() == TypeBC::PERIODIC && m_CpuCoordX == 0) || m_CpuCoordX > 0) {
+        neighbourCpuCoordX = m_CpuCoordX - 1;
+        if (m_limXm->whoAmI() == TypeBC::PERIODIC && m_CpuCoordX == 0) neighbourCpuCoordX = m_numberCpuX - 1;
+        neighbourCpuCoordY  = m_CpuCoordY;
+        neighbourCpuCoordZ  = m_CpuCoordZ;
+        neighbour           = 0;
+        neighbour          += neighbourCpuCoordX;
+        neighbour          += neighbourCpuCoordY * m_numberCpuX;
+        neighbour          += neighbourCpuCoordZ * m_numberCpuX * m_numberCpuY;
+        parallel.setNeighbour(neighbour);
+        ix = 0;
+        for (iy = 0; iy < m_numberCellsY; iy++) {
+          for (iz = 0; iz < m_numberCellsZ; iz++) {
+            this->construitIGlobal(ix, iy, iz, iCell);
+            parallel.addElementToSend(neighbour, cells[iCell]);
+            parallel.addElementToReceive(neighbour, cells[countParallelCells]);
+            parallel.addSlopesToSend(neighbour);
+            parallel.addSlopesToReceive(neighbour);
+            cells[countParallelCells]->setRankOfNeighborCPU(neighbour);
+            ++countParallelCells;
+          }
         }
       }
-    }
-    if (m_CpuCoordX < m_numberCpuX - 1) {
-      neighbourCpuCoordX  = m_CpuCoordX + 1;
-      neighbourCpuCoordY  = m_CpuCoordY;
-      neighbourCpuCoordZ  = m_CpuCoordZ;
-      neighbour           = 0;
-      neighbour          += neighbourCpuCoordX;
-      neighbour          += neighbourCpuCoordY * m_numberCpuX;
-      neighbour          += neighbourCpuCoordZ * m_numberCpuX * m_numberCpuY;
-      parallel.setNeighbour(neighbour);
-      ix = m_numberCellsX - 1;
-      for (iy = 0; iy < m_numberCellsY; iy++) {
-        for (iz = 0; iz < m_numberCellsZ; iz++) {
-          this->construitIGlobal(ix, iy, iz, iCell);
-          parallel.addElementToSend(neighbour, cells[iCell]);
-          parallel.addElementToReceive(neighbour, cells[countParallelCells]);
-          parallel.addSlopesToSend(neighbour);
-          parallel.addSlopesToReceive(neighbour);
-          cells[countParallelCells]->setRankOfNeighborCPU(neighbour);
-          ++countParallelCells;
+      if ((m_CpuCoordX < m_numberCpuX - 1) || (m_limXp->whoAmI() == TypeBC::PERIODIC && m_CpuCoordX == m_numberCpuX - 1)) {
+        neighbourCpuCoordX = m_CpuCoordX + 1;
+        if (m_limXp->whoAmI() == TypeBC::PERIODIC && m_CpuCoordX == m_numberCpuX - 1) neighbourCpuCoordX = 0;
+        neighbourCpuCoordY  = m_CpuCoordY;
+        neighbourCpuCoordZ  = m_CpuCoordZ;
+        neighbour           = 0;
+        neighbour          += neighbourCpuCoordX;
+        neighbour          += neighbourCpuCoordY * m_numberCpuX;
+        neighbour          += neighbourCpuCoordZ * m_numberCpuX * m_numberCpuY;
+        parallel.setNeighbour(neighbour);
+        ix = m_numberCellsX - 1;
+        for (iy = 0; iy < m_numberCellsY; iy++) {
+          for (iz = 0; iz < m_numberCellsZ; iz++) {
+            this->construitIGlobal(ix, iy, iz, iCell);
+            parallel.addElementToSend(neighbour, cells[iCell]);
+            parallel.addElementToReceive(neighbour, cells[countParallelCells]);
+            parallel.addSlopesToSend(neighbour);
+            parallel.addSlopesToReceive(neighbour);
+            cells[countParallelCells]->setRankOfNeighborCPU(neighbour);
+            ++countParallelCells;
+          }
+        }
+      }
+      if (m_numberCpuX == 2 && m_limXm->whoAmI() == TypeBC::PERIODIC) { //Special case Ncpu==2
+        neighbourCpuCoordX     = (m_CpuCoordX == 0 ? 1 : 0);
+        neighbourCpuCoordY     = m_CpuCoordY;
+        neighbourCpuCoordZ     = m_CpuCoordZ;
+        int neighbourPeriodicX = neighbourCpuCoordX + neighbourCpuCoordY * m_numberCpuX + neighbourCpuCoordZ * m_numberCpuX * m_numberCpuY;
+        TypeMeshContainer<Cell*>& recvListX = parallel.getElementsToReceive(neighbourPeriodicX);
+        assert(numberElementsX == m_numberCellsY * m_numberCellsZ);
+        for (int i = 0; i < numberElementsX; ++i) {
+          std::swap(recvListX[i], recvListX[i + numberElementsX]);
         }
       }
     }
     //In the y-direction
-    if (m_CpuCoordY > 0) {
-      neighbourCpuCoordX  = m_CpuCoordX;
-      neighbourCpuCoordY  = m_CpuCoordY - 1;
-      neighbourCpuCoordZ  = m_CpuCoordZ;
-      neighbour           = 0;
-      neighbour          += neighbourCpuCoordX;
-      neighbour          += neighbourCpuCoordY * m_numberCpuX;
-      neighbour          += neighbourCpuCoordZ * m_numberCpuX * m_numberCpuY;
-      parallel.setNeighbour(neighbour);
-      iy = 0;
-      for (ix = 0; ix < m_numberCellsX; ix++) {
-        for (iz = 0; iz < m_numberCellsZ; iz++) {
-          this->construitIGlobal(ix, iy, iz, iCell);
-          parallel.addElementToSend(neighbour, cells[iCell]);
-          parallel.addElementToReceive(neighbour, cells[countParallelCells]);
-          parallel.addSlopesToSend(neighbour);
-          parallel.addSlopesToReceive(neighbour);
-          cells[countParallelCells]->setRankOfNeighborCPU(neighbour);
-          ++countParallelCells;
+    if (m_numberCpuY > 1) {
+      if ((m_limYm->whoAmI() == TypeBC::PERIODIC && m_CpuCoordY == 0) || m_CpuCoordY > 0) {
+        neighbourCpuCoordY = m_CpuCoordY - 1;
+        if (m_limYm->whoAmI() == TypeBC::PERIODIC && m_CpuCoordY == 0) neighbourCpuCoordY = m_numberCpuY - 1;
+        neighbourCpuCoordX  = m_CpuCoordX;
+        neighbourCpuCoordZ  = m_CpuCoordZ;
+        neighbour           = 0;
+        neighbour          += neighbourCpuCoordX;
+        neighbour          += neighbourCpuCoordY * m_numberCpuX;
+        neighbour          += neighbourCpuCoordZ * m_numberCpuX * m_numberCpuY;
+        parallel.setNeighbour(neighbour);
+        iy = 0;
+        for (ix = 0; ix < m_numberCellsX; ix++) {
+          for (iz = 0; iz < m_numberCellsZ; iz++) {
+            this->construitIGlobal(ix, iy, iz, iCell);
+            parallel.addElementToSend(neighbour, cells[iCell]);
+            parallel.addElementToReceive(neighbour, cells[countParallelCells]);
+            parallel.addSlopesToSend(neighbour);
+            parallel.addSlopesToReceive(neighbour);
+            cells[countParallelCells]->setRankOfNeighborCPU(neighbour);
+            ++countParallelCells;
+          }
         }
       }
-    }
-    if (m_CpuCoordY < m_numberCpuY - 1) {
-      neighbourCpuCoordX  = m_CpuCoordX;
-      neighbourCpuCoordY  = m_CpuCoordY + 1;
-      neighbourCpuCoordZ  = m_CpuCoordZ;
-      neighbour           = 0;
-      neighbour          += neighbourCpuCoordX;
-      neighbour          += neighbourCpuCoordY * m_numberCpuX;
-      neighbour          += neighbourCpuCoordZ * m_numberCpuX * m_numberCpuY;
-      parallel.setNeighbour(neighbour);
-      iy = m_numberCellsY - 1;
-      for (ix = 0; ix < m_numberCellsX; ix++) {
-        for (iz = 0; iz < m_numberCellsZ; iz++) {
-          this->construitIGlobal(ix, iy, iz, iCell);
-          parallel.addElementToSend(neighbour, cells[iCell]);
-          parallel.addElementToReceive(neighbour, cells[countParallelCells]);
-          parallel.addSlopesToSend(neighbour);
-          parallel.addSlopesToReceive(neighbour);
-          cells[countParallelCells]->setRankOfNeighborCPU(neighbour);
-          ++countParallelCells;
+      if ((m_CpuCoordY < m_numberCpuY - 1) || (m_limYp->whoAmI() == TypeBC::PERIODIC && m_CpuCoordY == m_numberCpuY - 1)) {
+        neighbourCpuCoordY = m_CpuCoordY + 1;
+        if (m_limYp->whoAmI() == TypeBC::PERIODIC && m_CpuCoordY == m_numberCpuY - 1) neighbourCpuCoordY = 0;
+        neighbourCpuCoordX  = m_CpuCoordX;
+        neighbourCpuCoordZ  = m_CpuCoordZ;
+        neighbour           = 0;
+        neighbour          += neighbourCpuCoordX;
+        neighbour          += neighbourCpuCoordY * m_numberCpuX;
+        neighbour          += neighbourCpuCoordZ * m_numberCpuX * m_numberCpuY;
+        parallel.setNeighbour(neighbour);
+        iy = m_numberCellsY - 1;
+        for (ix = 0; ix < m_numberCellsX; ix++) {
+          for (iz = 0; iz < m_numberCellsZ; iz++) {
+            this->construitIGlobal(ix, iy, iz, iCell);
+            parallel.addElementToSend(neighbour, cells[iCell]);
+            parallel.addElementToReceive(neighbour, cells[countParallelCells]);
+            parallel.addSlopesToSend(neighbour);
+            parallel.addSlopesToReceive(neighbour);
+            cells[countParallelCells]->setRankOfNeighborCPU(neighbour);
+            ++countParallelCells;
+          }
+        }
+      }
+      if (m_numberCpuY == 2 && m_limYm->whoAmI() == TypeBC::PERIODIC) { //Special case Ncpu==2
+        neighbourCpuCoordY     = (m_CpuCoordY == 0 ? 1 : 0);
+        neighbourCpuCoordX     = m_CpuCoordX;
+        neighbourCpuCoordZ     = m_CpuCoordZ;
+        int neighbourPeriodicY = neighbourCpuCoordX + neighbourCpuCoordY * m_numberCpuX + neighbourCpuCoordZ * m_numberCpuX * m_numberCpuY;
+        TypeMeshContainer<Cell*>& recvListY = parallel.getElementsToReceive(neighbourPeriodicY);
+        assert(numberElementsY == m_numberCellsX * m_numberCellsZ);
+        for (int i = 0; i < numberElementsY; ++i) {
+          std::swap(recvListY[i], recvListY[i + numberElementsY]);
         }
       }
     }
     //In the z-direction
-    if (m_CpuCoordZ > 0) {
-      neighbourCpuCoordX  = m_CpuCoordX;
-      neighbourCpuCoordY  = m_CpuCoordY;
-      neighbourCpuCoordZ  = m_CpuCoordZ - 1;
-      neighbour           = 0;
-      neighbour          += neighbourCpuCoordX;
-      neighbour          += neighbourCpuCoordY * m_numberCpuX;
-      neighbour          += neighbourCpuCoordZ * m_numberCpuX * m_numberCpuY;
-      parallel.setNeighbour(neighbour);
-      iz = 0;
-      for (ix = 0; ix < m_numberCellsX; ix++) {
-        for (iy = 0; iy < m_numberCellsY; iy++) {
-          this->construitIGlobal(ix, iy, iz, iCell);
-          parallel.addElementToSend(neighbour, cells[iCell]);
-          parallel.addElementToReceive(neighbour, cells[countParallelCells]);
-          parallel.addSlopesToSend(neighbour);
-          parallel.addSlopesToReceive(neighbour);
-          cells[countParallelCells]->setRankOfNeighborCPU(neighbour);
-          ++countParallelCells;
+    if (m_numberCpuZ > 1) {
+      if ((m_limZm->whoAmI() == TypeBC::PERIODIC && m_CpuCoordZ == 0) || m_CpuCoordZ > 0) {
+        neighbourCpuCoordZ = m_CpuCoordZ - 1;
+        if (m_limZm->whoAmI() == TypeBC::PERIODIC && m_CpuCoordZ == 0) neighbourCpuCoordZ = m_numberCpuZ - 1;
+        neighbourCpuCoordX  = m_CpuCoordX;
+        neighbourCpuCoordY  = m_CpuCoordY;
+        neighbour           = 0;
+        neighbour          += neighbourCpuCoordX;
+        neighbour          += neighbourCpuCoordY * m_numberCpuX;
+        neighbour          += neighbourCpuCoordZ * m_numberCpuX * m_numberCpuY;
+        parallel.setNeighbour(neighbour);
+        iz = 0;
+        for (ix = 0; ix < m_numberCellsX; ix++) {
+          for (iy = 0; iy < m_numberCellsY; iy++) {
+            this->construitIGlobal(ix, iy, iz, iCell);
+            parallel.addElementToSend(neighbour, cells[iCell]);
+            parallel.addElementToReceive(neighbour, cells[countParallelCells]);
+            parallel.addSlopesToSend(neighbour);
+            parallel.addSlopesToReceive(neighbour);
+            cells[countParallelCells]->setRankOfNeighborCPU(neighbour);
+            ++countParallelCells;
+          }
         }
       }
-    }
-    if (m_CpuCoordZ < m_numberCpuZ - 1) {
-      neighbourCpuCoordX  = m_CpuCoordX;
-      neighbourCpuCoordY  = m_CpuCoordY;
-      neighbourCpuCoordZ  = m_CpuCoordZ + 1;
-      neighbour           = 0;
-      neighbour          += neighbourCpuCoordX;
-      neighbour          += neighbourCpuCoordY * m_numberCpuX;
-      neighbour          += neighbourCpuCoordZ * m_numberCpuX * m_numberCpuY;
-      parallel.setNeighbour(neighbour);
-      iz = m_numberCellsZ - 1;
-      for (ix = 0; ix < m_numberCellsX; ix++) {
-        for (iy = 0; iy < m_numberCellsY; iy++) {
-          this->construitIGlobal(ix, iy, iz, iCell);
-          parallel.addElementToSend(neighbour, cells[iCell]);
-          parallel.addElementToReceive(neighbour, cells[countParallelCells]);
-          parallel.addSlopesToSend(neighbour);
-          parallel.addSlopesToReceive(neighbour);
-          cells[countParallelCells]->setRankOfNeighborCPU(neighbour);
-          ++countParallelCells;
+      if ((m_CpuCoordZ < m_numberCpuZ - 1) || (m_limZp->whoAmI() == TypeBC::PERIODIC && m_CpuCoordZ == m_numberCpuZ - 1)) {
+        neighbourCpuCoordZ = m_CpuCoordZ + 1;
+        if (m_limZp->whoAmI() == TypeBC::PERIODIC && m_CpuCoordZ == m_numberCpuZ - 1) neighbourCpuCoordZ = 0;
+        neighbourCpuCoordX  = m_CpuCoordX;
+        neighbourCpuCoordY  = m_CpuCoordY;
+        neighbour           = 0;
+        neighbour          += neighbourCpuCoordX;
+        neighbour          += neighbourCpuCoordY * m_numberCpuX;
+        neighbour          += neighbourCpuCoordZ * m_numberCpuX * m_numberCpuY;
+        parallel.setNeighbour(neighbour);
+        iz = m_numberCellsZ - 1;
+        for (ix = 0; ix < m_numberCellsX; ix++) {
+          for (iy = 0; iy < m_numberCellsY; iy++) {
+            this->construitIGlobal(ix, iy, iz, iCell);
+            parallel.addElementToSend(neighbour, cells[iCell]);
+            parallel.addElementToReceive(neighbour, cells[countParallelCells]);
+            parallel.addSlopesToSend(neighbour);
+            parallel.addSlopesToReceive(neighbour);
+            cells[countParallelCells]->setRankOfNeighborCPU(neighbour);
+            ++countParallelCells;
+          }
+        }
+      }
+      if (m_numberCpuZ == 2 && m_limZm->whoAmI() == TypeBC::PERIODIC) { //Special case Ncpu==2
+        neighbourCpuCoordZ     = (m_CpuCoordZ == 0 ? 1 : 0);
+        neighbourCpuCoordX     = m_CpuCoordX;
+        neighbourCpuCoordY     = m_CpuCoordY;
+        int neighbourPeriodicZ = neighbourCpuCoordX + neighbourCpuCoordY * m_numberCpuX + neighbourCpuCoordZ * m_numberCpuX * m_numberCpuY;
+        TypeMeshContainer<Cell*>& recvListZ = parallel.getElementsToReceive(neighbourPeriodicZ);
+        assert(numberElementsZ == m_numberCellsX * m_numberCellsY);
+        for (int i = 0; i < numberElementsZ; ++i) {
+          std::swap(recvListZ[i], recvListZ[i + numberElementsZ]);
         }
       }
     }
@@ -1812,7 +2211,7 @@ std::string MeshCartesian::whoAmI() const { return "CARTESIAN"; }
 
 //***********************************************************************
 
-void MeshCartesian::setImmersedBoundaries(TypeMeshContainer<CellInterface*>* cellInterfacesLvl, std::string ordreCalcul) const
+void MeshCartesian::setImmersedBoundaries(TypeMeshContainer<CellInterface*>* cellInterfacesLvl, SimulationOrder schemeOrder) const
 {
   for (unsigned int i = 0; i < cellInterfacesLvl[0].size(); i++) {
     // N'est pas une CL
@@ -1877,7 +2276,7 @@ void MeshCartesian::setImmersedBoundaries(TypeMeshContainer<CellInterface*>* cel
           Face* newFace = new FaceCartesian(*(static_cast<FaceCartesian*>(cellInterfacesLvl[0][i]->getFace())));
 
           delete cellInterfacesLvl[0][i];
-          if (ordreCalcul == "FIRSTORDER") {
+          if (schemeOrder == SimulationOrder::first) {
             cellInterfacesLvl[0][i] = new BoundCondWall(-1);
           }
           else {
@@ -1922,7 +2321,7 @@ void MeshCartesian::setImmersedBoundaries(TypeMeshContainer<CellInterface*>* cel
           Face* newFace = new FaceCartesian(*(static_cast<FaceCartesian*>(cellInterfacesLvl[0][i]->getFace())));
 
           delete cellInterfacesLvl[0][i];
-          if (ordreCalcul == "FIRSTORDER") {
+          if (schemeOrder == SimulationOrder::first) {
             cellInterfacesLvl[0][i] = new BoundCondWall(-1);
           }
           else {
@@ -1996,89 +2395,248 @@ std::string MeshCartesian::getStringExtent(bool global) const
 
 //****************************************************************************
 
-void MeshCartesian::getCoord(std::vector<double>& dataset, Axis axis) const
+std::array<int, 6> MeshCartesian::getArrayGlobalExtent() const { return {0, m_numberCellsXGlobal, 0, m_numberCellsYGlobal, 0, m_numberCellsZGlobal}; }
+
+//****************************************************************************
+
+void MeshCartesian::getCoord(std::vector<double>& dataset, Axis axis, bool global) const
 {
+  int numberCells{-1};
+  int offset{0};
+  const double* pos = nullptr;
+  const double* d   = nullptr;
+
   switch (axis) {
   case X:
-    for (int i = 0; i < m_numberCellsX; i++) {
-      dataset.push_back(m_posXi[m_offsetX + i] - 0.5 * m_dXi[m_offsetX + i]);
+    if (global) {
+      numberCells = m_numberCellsXGlobal;
     }
-    dataset.push_back(m_posXi[m_offsetX + m_numberCellsX - 1] + 0.5 * m_dXi[m_offsetX + m_numberCellsX - 1]);
+    else {
+      numberCells = m_numberCellsX;
+      offset      = m_offsetX;
+    }
+    pos = m_posXi.data();
+    d   = m_dXi.data();
     break;
   case Y:
-    for (int j = 0; j < m_numberCellsY; j++) {
-      dataset.push_back(m_posYj[m_offsetY + j] - 0.5 * m_dYj[m_offsetY + j]);
+    if (global) {
+      numberCells = m_numberCellsYGlobal;
     }
-    dataset.push_back(m_posYj[m_offsetY + m_numberCellsY - 1] + 0.5 * m_dYj[m_offsetY + m_numberCellsY - 1]);
+    else {
+      numberCells = m_numberCellsY;
+      offset      = m_offsetY;
+    }
+    pos = m_posYj.data();
+    d   = m_dYj.data();
     break;
   case Z:
-    for (int k = 0; k < m_numberCellsZ; k++) {
-      dataset.push_back(m_posZk[m_offsetZ + k] - 0.5 * m_dZk[m_offsetZ + k]);
+    if (global) {
+      numberCells = m_numberCellsZGlobal;
     }
-    dataset.push_back(m_posZk[m_offsetZ + m_numberCellsZ - 1] + 0.5 * m_dZk[m_offsetZ + m_numberCellsZ - 1]);
+    else {
+      numberCells = m_numberCellsZ;
+      offset      = m_offsetZ;
+    }
+    pos = m_posZk.data();
+    d   = m_dZk.data();
     break;
   }
+
+  for (int i = 0; i < numberCells; i++) {
+    dataset.push_back(pos[offset + i] - 0.5 * d[offset + i]);
+  }
+  dataset.push_back(pos[offset + numberCells - 1] + 0.5 * d[offset + numberCells - 1]);
+}
+
+//***********************************************************************
+
+size_t MeshCartesian::getNodes(std::vector<double>& dataset, std::vector<Cell*>* /*cellsLvl*/) const
+{
+  const int ncZ = (m_numberCellsZ > 1) ? m_numberCellsZ : 0; // switch between 2D and 3D
+
+  // Check for overflow
+  if (static_cast<size_t>(m_numberCellsX + 1) >
+      SIZE_MAX / (m_numberCellsY + 1)) { // 1. check that (m_numberCellsX + 1) * (m_numberCellsY + 1) doesn't overflow a size_t
+    Errors::errorMessage("Too many nodes to call current implementation of 'getNodes' method");
+    return 0;
+  }
+
+  else if (static_cast<size_t>((m_numberCellsX + 1) * (m_numberCellsY + 1)) >
+           SIZE_MAX / (ncZ + 1)) { // 2. check that total node count doesn't overflow a size_t
+    Errors::errorMessage("Too many nodes to call current implementation of 'getNodes' method");
+    return 0;
+  }
+
+  size_t numberNodes{static_cast<size_t>((m_numberCellsX + 1) * (m_numberCellsY + 1) * (ncZ + 1))};
+
+  dataset.reserve(numberNodes);
+  for (int i = 0; i < m_numberCellsX; i++) {
+    for (int j = 0; j < m_numberCellsY; j++) {
+      for (int k = 0; k < ncZ; k++) {
+        dataset.push_back(m_posXi[m_offsetX + i] - 0.5 * m_dXi[m_offsetX + i]);
+        dataset.push_back(m_posYj[m_offsetY + j] - 0.5 * m_dYj[m_offsetY + j]);
+        dataset.push_back(m_posZk[m_offsetZ + k] - 0.5 * m_dZk[m_offsetZ + k]);
+      }
+      // Surface  [0;m_numberCellsX -1] x [0;m_numberCellsY -1] at k = m_numberCellsZ
+      dataset.push_back(m_posXi[m_offsetX + i] - 0.5 * m_dXi[m_offsetX + i]);
+      dataset.push_back(m_posYj[m_offsetY + j] - 0.5 * m_dYj[m_offsetY + j]);
+      dataset.push_back(m_posZk[m_offsetZ + m_numberCellsZ - 1] + 0.5 * m_dZk[m_offsetZ + m_numberCellsZ - 1]);
+    }
+
+    // Surface  [0;m_numberCellsX -1] x [0;m_numberCellsZ -1] at j = m_numberCellsY
+    for (int k = 0; k < ncZ; k++) {
+      dataset.push_back(m_posXi[m_offsetX + i] - 0.5 * m_dXi[m_offsetX + i]);
+      dataset.push_back(m_posYj[m_offsetY + m_numberCellsY - 1] + 0.5 * m_dYj[m_offsetY + m_numberCellsY - 1]);
+      dataset.push_back(m_posZk[m_offsetZ + k] - 0.5 * m_dZk[m_offsetZ + k]);
+    }
+
+    // Line  [0;m_numberCellsX -1] for j = m_numberCellsY and k = m_numberCellsZ
+    dataset.push_back(m_posXi[m_offsetX + i] - 0.5 * m_dXi[m_offsetX + i]);
+    dataset.push_back(m_posYj[m_offsetY + m_numberCellsY - 1] + 0.5 * m_dYj[m_offsetY + m_numberCellsY - 1]);
+    dataset.push_back(m_posZk[m_offsetZ + m_numberCellsZ - 1] + 0.5 * m_dZk[m_offsetZ + m_numberCellsZ - 1]);
+  }
+
+  for (int j = 0; j < m_numberCellsY; j++) {
+    // Surface  [0;m_numberCellsY -1] x [0;m_numberCellsZ -1] at i = m_numberCellsX
+    for (int k = 0; k < ncZ; k++) {
+      dataset.push_back(m_posXi[m_offsetX + m_numberCellsX - 1] + 0.5 * m_dXi[m_offsetX + m_numberCellsX - 1]);
+      dataset.push_back(m_posYj[m_offsetY + j] - 0.5 * m_dYj[m_offsetY + j]);
+      dataset.push_back(m_posZk[m_offsetZ + k] - 0.5 * m_dZk[m_offsetZ + k]);
+    }
+    // Line  [0;m_numberCellsY -1] for i = m_numberCellsX and k = m_numberCellsZ
+    dataset.push_back(m_posXi[m_offsetX + m_numberCellsX - 1] + 0.5 * m_dXi[m_offsetX + m_numberCellsX - 1]);
+    dataset.push_back(m_posYj[m_offsetY + j] - 0.5 * m_dYj[m_offsetY + j]);
+    dataset.push_back(m_posZk[m_offsetZ + m_numberCellsZ - 1] + 0.5 * m_dZk[m_offsetZ + m_numberCellsZ - 1]);
+  }
+
+  // Line  [0;m_numberCellsZ -1] for i = m_numberCellsX and j = m_numberCellsY
+  for (int k = 0; k < ncZ; k++) {
+    dataset.push_back(m_posXi[m_offsetX + m_numberCellsX - 1] + 0.5 * m_dXi[m_offsetX + m_numberCellsX - 1]);
+    dataset.push_back(m_posYj[m_offsetY + m_numberCellsY - 1] + 0.5 * m_dYj[m_offsetY + m_numberCellsY - 1]);
+    dataset.push_back(m_posZk[m_offsetZ + k] - 0.5 * m_dZk[m_offsetZ + k]);
+  }
+
+  // Last point
+  dataset.push_back(m_posXi[m_offsetX + m_numberCellsX - 1] + 0.5 * m_dXi[m_offsetX + m_numberCellsX - 1]);
+  dataset.push_back(m_posYj[m_offsetY + m_numberCellsY - 1] + 0.5 * m_dYj[m_offsetY + m_numberCellsY - 1]);
+  dataset.push_back(m_posZk[m_offsetZ + m_numberCellsZ - 1] + 0.5 * m_dZk[m_offsetZ + m_numberCellsZ - 1]);
+
+  assert(dataset.size() == numberNodes * 3 && "Erroneous implementation of getNodes method");
+
+  return numberNodes;
+}
+
+//***********************************************************************
+template <typename T> size_t MeshCartesian::getConnectivity_private(std::vector<T>& dataset) const
+{
+  const unsigned int numberPointsPerCell = (m_numberCellsZ > 1) ? 8 : 4;
+
+  // Check for overflows:
+  //  - As 'm_numberCellsCalcul' is a 'int', no need to check for 'size_t' overflow.
+  //  - The check that the maximal node index fits in a 'T' variable  has to be performed before calling this function.
+  // (it is easy to check this after calling the 'getNodes' function because it returns the node count)
+  size_t numberCells{static_cast<size_t>(m_numberCellsCalcul)};
+
+  dataset.reserve(numberCells * numberPointsPerCell);
+
+  T nY  = m_numberCellsY + 1;
+  T nZ  = (m_numberCellsZ > 1) ? m_numberCellsZ + 1 : 1; // switch between 2D and 3D outputs
+  T nYZ = nY * nZ;
+
+  for (int k = 0; k < m_numberCellsZ; k++) {
+    for (int j = 0; j < m_numberCellsY; j++) {
+      T jY = j * nZ;
+      for (int i = 0; i < m_numberCellsX; i++) {
+        T iX = i * nYZ;
+
+        dataset.push_back(iX + jY + k);            // (i,j,k)
+        dataset.push_back(iX + jY + nYZ + k);      // (i+1,j,k)
+        dataset.push_back(iX + jY + nYZ + nZ + k); // (i+1,j+1,k)
+        dataset.push_back(iX + jY + nZ + k);       // (i,j+1,k)
+
+        if (m_numberCellsZ > 1) {                        // 3D
+          dataset.push_back(iX + jY + k + 1);            // (i,j,k+1)
+          dataset.push_back(iX + jY + nYZ + k + 1);      // (i+1,j,k+1)
+          dataset.push_back(iX + jY + nYZ + nZ + k + 1); // (i+1,j+1,k+1)
+          dataset.push_back(iX + jY + nZ + k + 1);       // (i,j+1,k+1)
+        }
+      }
+    }
+  }
+
+  return numberCells;
+}
+
+//***********************************************************************
+size_t MeshCartesian::getConnectivity(std::vector<int64_t>& dataset, std::vector<Cell*>* /*cellsLvl*/) const
+{
+  return getConnectivity_private(dataset);
+}
+
+//***********************************************************************
+size_t MeshCartesian::getConnectivity(std::vector<int32_t>& dataset, std::vector<Cell*>* /*cellsLvl*/) const
+{
+  return getConnectivity_private(dataset);
+}
+
+//***********************************************************************
+template <typename T> void MeshCartesian::getOffsets_private(std::vector<T>& dataset) const
+{
+  const int numberPointsPerCell = (m_numberCellsZ > 1) ? 8 : 4;
+
+  // Check for overflow for the offset values: they have to fit in a 'ECOGEN_VTKHDF_intType'
+  if (static_cast<T>(m_numberCellsCalcul) > std::numeric_limits<T>::max() / numberPointsPerCell) {
+    Errors::errorMessage("Too large offset values to call current implementation of 'getOffset' method");
+    return;
+  }
+
+  for (int i = 0; i < m_numberCellsCalcul; i++) {
+    dataset.push_back((i + 1) * numberPointsPerCell);
+  }
+}
+
+//***********************************************************************
+void MeshCartesian::getOffsets(std::vector<int64_t>& dataset, std::vector<Cell*>* /*cellsLvl*/) const { return getOffsets_private(dataset); }
+
+//***********************************************************************
+void MeshCartesian::getOffsets(std::vector<int32_t>& dataset, std::vector<Cell*>* /*cellsLvl*/) const { return getOffsets_private(dataset); }
+
+//****************************************************************************
+
+void MeshCartesian::getTypeCell(std::vector<unsigned char>& dataset, std::vector<Cell*>* /*cellsLvl*/) const
+{
+  // Remark: In VTK, type of cells are 'unsigned char' but they are stored as 'int' in ECOGEN
+  const unsigned char type = (m_numberCellsZ > 1) ? 12 : 9;
+
+  dataset.resize(m_numberCellsX * m_numberCellsY * m_numberCellsZ, type);
 }
 
 //****************************************************************************
 
 void MeshCartesian::getData(TypeMeshContainer<Cell*>* cellsLvl, std::vector<double>& dataset, const int var, int phase) const
 {
+  getData_private(cellsLvl, dataset, var, phase);
+}
+
+//****************************************************************************
+
+void MeshCartesian::getData(TypeMeshContainer<Cell*>* cellsLvl, std::vector<float>& dataset, const int var, int phase) const
+{
+  getData_private(cellsLvl, dataset, var, phase);
+}
+
+//****************************************************************************
+template <typename T> void MeshCartesian::getData_private(TypeMeshContainer<Cell*>* cellsLvl, std::vector<T>& dataset, const int var, int phase) const
+{
   dataset.clear();
-  int numCell;
-  double transport(0.);
+  constexpr bool isAMR{false};
   for (int k = 0; k < m_numberCellsZ; k++) {
     for (int j = 0; j < m_numberCellsY; j++) {
       for (int i = 0; i < m_numberCellsX; i++) {
+        int numCell;
         construitIGlobal(i, j, k, numCell);
-        if (var > 0) { //We want to get the scalar data
-          if (phase >= 0) {
-            //data de phases
-            dataset.push_back(cellsLvl[0][numCell]->getPhase(phase)->returnScalar(var));
-          }
-          else if (phase == -1) {
-            //data de mixture
-            dataset.push_back(cellsLvl[0][numCell]->getMixture()->returnScalar(var));
-          }
-          else if (phase == -2) {
-            transport = cellsLvl[0][numCell]->getTransport(var - 1).getValue();
-            if (transport < 1.e-20) {
-              transport = 0.;
-            }
-            dataset.push_back(transport);
-          }
-          else if (phase == -3) {
-            dataset.push_back(cellsLvl[0][numCell]->getXi());
-          }
-          else if (phase == -4) {
-            dataset.push_back(cellsLvl[0][numCell]->getDensityGradient());
-          }
-          else if (phase == -7) {
-            // Saturation pressure
-            dataset.push_back(cellsLvl[0][numCell]->getPsat());
-          }
-          else {
-            Errors::errorMessage("MeshCartesian::getData: unknown number of phase: ", phase);
-          }
-        }
-        else {
-          //We want to get the vector data
-          if (phase >= 0) {
-            //data de phases
-            dataset.push_back(cellsLvl[0][numCell]->getPhase(phase)->returnVector(-var).getX());
-            dataset.push_back(cellsLvl[0][numCell]->getPhase(phase)->returnVector(-var).getY());
-            dataset.push_back(cellsLvl[0][numCell]->getPhase(phase)->returnVector(-var).getZ());
-          }
-          else if (phase == -1) {
-            //data de mixture
-            dataset.push_back(cellsLvl[0][numCell]->getMixture()->returnVector(-var).getX());
-            dataset.push_back(cellsLvl[0][numCell]->getMixture()->returnVector(-var).getY());
-            dataset.push_back(cellsLvl[0][numCell]->getMixture()->returnVector(-var).getZ());
-          }
-          else {
-            Errors::errorMessage("MeshCartesian::getData: unknown number of phase: ", phase);
-          }
-        } //End vector
+        Cell* cell{cellsLvl[0][numCell]};
+        getData_body(cell, dataset, var, phase, isAMR);
       } // End X
     } //End Y
   } //End Z

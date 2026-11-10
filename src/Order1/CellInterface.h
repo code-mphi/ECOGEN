@@ -97,7 +97,7 @@ class CellInterface
     //virtual void setBeta(betaO2 beta, double& value) {};                                     /*!< Ne fait rien pour des cell interfaces ordre 1 */
     //virtual void setDistanceH(distanceHO2 dist, double& value) {};                           /*!< Ne fait rien pour des cell interfaces ordre 1 */
 
-    //Accesseurs
+    //Accessors
     Face* getFace(); /*!< Attention, getFace() non const */
     Model* getMod() const;
     Cell* getCellLeft() const;
@@ -112,9 +112,15 @@ class CellInterface
     {
       return Errors::defaultDouble;
     }; //!< Returns imposed heat quantity on the wall, could be temperature or flux density (see BounCondWall.h)
-    virtual Coord& getWallRotationalVelocityMRF() { return Coord::defaultCoordNonConst; }
+    virtual Coord& getWallRotationalVelocityMRF() { return Coord::defaultCoordNonConst; };
+    //!  \brief    Returns the wall velocity of a moving wall boundary condition
+    virtual double getWallVelocity()
+    {
+      Errors::errorMessage("getWallVelocity not available for CellInterface");
+      return Errors::defaultDouble;
+    };
 
-    //Pour methode AMR
+    //For AMR method
     virtual void computeXi(const double& criteriaVar,
                            const bool& varRho,
                            const bool& varP,

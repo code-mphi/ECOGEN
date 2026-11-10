@@ -2,23 +2,25 @@
 <ecogen>
 
   <!-- Logo ECOGEN -->
-  <!-- ----------- -->
+  <!-- =========== -->
   <!-- <testCase>libTests/logoECOGEN/ECOGEN/</testCase> -->
   <!-- <testCase>libTests/logoECOGEN/ECOGENFluide/</testCase> -->
 
   <!-- Euler reference test cases -->
-  <!-- -------------------------- -->
+  <!-- ========================== -->
   <!-- <testCase>libTests/referenceTestCases/euler/1D/transport/positiveVelocity/</testCase> -->
+  <!-- <testCase>libTests/referenceTestCases/euler/1D/transport/positiveVelocityPeriodic/</testCase> -->
   <!-- <testCase>libTests/referenceTestCases/euler/1D/transport/negativeVelocity/</testCase> -->
+  <!-- <testCase>libTests/referenceTestCases/euler/1D/transport/negativeVelocityPeriodic/</testCase> -->
   <!-- <testCase>libTests/referenceTestCases/euler/1D/shockTubes/HPLeft/</testCase> -->
   <!-- <testCase>libTests/referenceTestCases/euler/1D/shockTubes/HPRight/</testCase> -->
   <!-- <testCase>libTests/referenceTestCases/euler/1D/shockTubes/spherical/</testCase> -->
   <!-- <testCase>libTests/referenceTestCases/euler/1D/pressurePulse/</testCase> -->
+  <!-- <testCase>libTests/referenceTestCases/euler/1D/movingWall/</testCase> -->
   <!-- <testCase>libTests/referenceTestCases/euler/2D/transports/rectangleDiagonal/</testCase> -->
+  <!-- <testCase>libTests/referenceTestCases/euler/2D/transports/rectangleDiagonalPeriodic/</testCase> -->
   <!-- <testCase>libTests/referenceTestCases/euler/2D/transports/rectangleDiagonalUnstruct/</testCase> -->
-  <!-- <testCase>libTests/referenceTestCases/euler/2D/transports/transport1dCartesian/</testCase> -->
   <!-- <testCase>libTests/referenceTestCases/euler/2D/HPCenter/</testCase> -->
-  <!-- <testCase>libTests/referenceTestCases/euler/2D/GreshoVortex/</testCase> -->
   <!-- <testCase>libTests/referenceTestCases/euler/2D/HPUnstructured/</testCase> -->
   <!-- <testCase>libTests/referenceTestCases/euler/2D/HPUnstructuredMeshMappingRestart/</testCase> -->
   <!-- <testCase>libTests/referenceTestCases/euler/2D/nozzles/tankWithShock/</testCase> -->
@@ -38,15 +40,20 @@
   <!-- <testCase>libTests/referenceTestCases/euler/2D/venturi/</testCase> -->
   <!-- <testCase>libTests/referenceTestCases/euler/2D/acousticWave/planeGaussianPulse/</testCase> -->
   <!-- <testCase>libTests/referenceTestCases/euler/2D/acousticWave/planeSinusoidalPulse/</testCase> -->
+  <!-- <testCase>libTests/referenceTestCases/euler/2D/sineWaveViscousDecayPeriodic/</testCase> -->
   <!-- <testCase>libTests/referenceTestCases/euler/3D/LPCenter/</testCase> -->
+  <!-- <testCase>libTests/referenceTestCases/euler/3D/boxTransportPeriodic/</testCase> -->
+  <!-- <testCase>libTests/referenceTestCases/euler/3D/cHITDecay/</testCase> -->
   <!-- <testCase>libTests/referenceTestCases/euler/3D/shockTubeCylinder/</testCase> -->
 
   <!-- Pressure- and velocity-equilibrium-model reference test cases -->
-  <!-- ------------------------------------------------------------- -->
+  <!-- ============================================================= -->
   <!-- <testCase>libTests/referenceTestCases/PUEq/1D/transports/interfaceWaterAir/</testCase> -->
   <!-- <testCase>libTests/referenceTestCases/PUEq/1D/shockTubes/interfaceWaterAir/</testCase> -->
   <!-- <testCase>libTests/referenceTestCases/PUEq/1D/shockTubes/interfaceWaterAirNASG/</testCase> -->
   <!-- <testCase>libTests/referenceTestCases/PUEq/1D/shockTubes/epoxySpinel/</testCase> -->
+  <!-- <testCase>libTests/referenceTestCases/PUEq/1D/shockTubes/DodecaneShockTubePaper/</testCase> -->
+  <!-- <testCase>libTests/referenceTestCases/PUEq/1D/shockTubes/DodecaneShockTube_T503/</testCase> -->
   <!-- <testCase>libTests/referenceTestCases/PUEq/1D/cavitation/</testCase> -->
   <!-- <testCase>libTests/referenceTestCases/PUEq/1D/heating/heatedVapourAir/</testCase> -->
   <!-- <testCase>libTests/referenceTestCases/PUEq/1D/sphericalCollapse/Pratio1427/</testCase> -->
@@ -75,6 +82,7 @@
   <!-- <testCase>libTests/referenceTestCases/PUEq/2D/injection/</testCase> -->
   <!-- <testCase>libTests/referenceTestCases/PUEq/2D/testUnstructured/</testCase> -->
   <!-- <testCase>libTests/referenceTestCases/PUEq/2D/shockTubeFreeSurface/</testCase> --> <!-- Works but initial conditions (mesh) might not be the best ones -->
+  <!-- <testCase>libTests/referenceTestCases/PUEq/2D/dropletTransportPeriodic/</testCase> -->
   <!-- <testCase>libTests/referenceTestCases/PUEq/2D/foil/noCavitation/</testCase> -->
   <!-- <testCase>libTests/referenceTestCases/PUEq/2D/foil/cavitation/</testCase> -->
   <!-- <testCase>libTests/referenceTestCases/PUEq/2D/venturi/</testCase> -->
@@ -94,7 +102,7 @@
   <!-- <testCase>libTests/referenceTestCases/PUEq/3D/unstructured/</testCase> -->
 
   <!-- Temperature-, pressure- and velocity-equilibrium-model reference test cases -->
-  <!-- --------------------------------------------------------------------------- -->
+  <!-- =========================================================================== -->
   <!-- <testCase>libTests/referenceTestCases/PTUEq/transports/interfaceAirHelium/</testCase> -->
   <!-- <testCase>libTests/referenceTestCases/PTUEq/shockTubes/interfaceWaterAir/</testCase> -->
   <!-- <testCase>libTests/referenceTestCases/PTUEq/shockTubes/interfaceDodecane/cartesian/</testCase> -->
@@ -102,12 +110,12 @@
   <!-- <testCase>libTests/referenceTestCases/PTUEq/heating/heatedVapourAir/</testCase> -->
 
   <!-- Homogeneous-Euler reference test cases -->
-  <!-- -------------------------------------- -->
+  <!-- ====================================== -->
   <!-- <testCase>libTests/referenceTestCases/eulerHomogeneous/shockTubes/cartesian/</testCase> -->
   <!-- <testCase>libTests/referenceTestCases/eulerHomogeneous/shockTubes/unstructured/</testCase> -->
 
   <!-- Velocity-equilibrium-model reference test cases -->
-  <!-- ----------------------------------------------- -->
+  <!-- =============================================== -->
   <!-- <testCase>libTests/referenceTestCases/UEq/1D/transports/interfaceWaterAir/</testCase> -->
   <!-- <testCase>libTests/referenceTestCases/UEq/1D/shockTubes/interfaceAirHelium/</testCase> -->
   <!-- <testCase>libTests/referenceTestCases/UEq/1D/shockTubes/interfaceWaterAir/</testCase> -->
@@ -119,6 +127,7 @@
   <!-- <testCase>libTests/referenceTestCases/UEq/1D/shockOnInterface/sharpInterfaceWaterAir/</testCase> -->
   <!-- <testCase>libTests/referenceTestCases/UEq/1D/shockOnInterface/diffusedInterfaceWaterAir/</testCase> -->
   <!-- <testCase>libTests/referenceTestCases/UEq/1D/cavitation/</testCase> -->
+  <!-- <testCase>libTests/referenceTestCases/UEq/1D/movingWall/</testCase> -->
   <!-- <testCase>libTests/referenceTestCases/UEq/1D/sphericalCollapse/Pratio1427/</testCase> -->
   <!-- <testCase>libTests/referenceTestCases/UEq/2D/nonSphericalCollapseNearWall/</testCase> -->
   <!-- <testCase>libTests/referenceTestCases/UEq/2D/RichtmyerMeshkov/</testCase> -->
@@ -129,26 +138,63 @@
   <!-- <testCase>libTests/referenceTestCases/UEq/2D/bubbleTandemNearTissue/</testCase> -->
   <!-- <testCase>libTests/referenceTestCases/UEq/2D/underwaterExplosion/</testCase> -->
   <!-- <testCase>libTests/referenceTestCases/UEq/3D/shockBubble/heliumAir/</testCase> -->
+  <!-- <testCase>libTests/referenceTestCases/UEq/3D/shockBubble/heliumAir_cartesian_vtkhdf/</testCase> -->
 
   <!-- Velocity-equilibrium-model with total energy reference test cases -->
-  <!-- ----------------------------------------------------------------- -->
+  <!-- ================================================================= -->
   <!-- <testCase>libTests/referenceTestCases/UEqTotEnergy/1D/transports/interfaceWaterAir/</testCase> -->
   <!-- <testCase>libTests/referenceTestCases/UEqTotEnergy/1D/shockTubes/interfaceAirHelium/</testCase> -->
   <!-- <testCase>libTests/referenceTestCases/UEqTotEnergy/1D/shockTubes/interfaceWaterAir/</testCase> -->
   <!-- <testCase>libTests/referenceTestCases/UEqTotEnergy/1D/shockTubes/epoxySpinel/</testCase> -->
   <!-- <testCase>libTests/referenceTestCases/UEqTotEnergy/1D/shockOnInterface/interfaceWaterAir/</testCase> -->
 
-  <!-- Non-linear-Schrodinger reference test cases -->
-  <!-- ------------------------------------------- -->
-  <!-- <testCase>libTests/referenceTestCases/nonLinearSchrodinger/1D/shockTube/</testCase> -->
+  <!-- Extended Navier-Stokes-Korteweg 1D reference test cases -->
+  <!-- ======================================================= -->
+  <!-- <testCase>libTests/referenceTestCases/ExtendedNavierStokesKorteweg1D/shockTubes/nonlinearSchrodingerEos/</testCase> -->
+  <!-- <testCase>libTests/referenceTestCases/ExtendedNavierStokesKorteweg1D/shockTubes/nonlinearSchrodingerEosAmr/</testCase> -->
+  <!-- <testCase>libTests/referenceTestCases/ExtendedNavierStokesKorteweg1D/shockTubes/polynomialEos/</testCase> -->
+  <!-- <testCase>libTests/referenceTestCases/ExtendedNavierStokesKorteweg1D/shockTubes/polynomialEosAmr/</testCase> -->
+  <!-- <testCase>libTests/referenceTestCases/ExtendedNavierStokesKorteweg1D/shockTubes/vanDerWaalsTestEos/</testCase> -->
+  <!-- <testCase>libTests/referenceTestCases/ExtendedNavierStokesKorteweg1D/shockTubes/vanDerWaalsDodecaneEos/</testCase> -->
+  <!-- <testCase>libTests/referenceTestCases/ExtendedNavierStokesKorteweg1D/cavitations/vanDerWaalsTestEos/</testCase> -->
+  <!-- <testCase>libTests/referenceTestCases/ExtendedNavierStokesKorteweg1D/impacts/vanDerWaalsTestEos/</testCase> -->
+  <!-- <testCase>libTests/referenceTestCases/ExtendedNavierStokesKorteweg1D/travellingWave/vanDerWaalsTestEos/</testCase> -->
 
-  <!-- Euler-Korteweg reference test cases -->
-  <!-- ------------------------------------------- -->
-  <!-- <testCase>./libTests/referenceTestCases/eulerKorteweg/1D/shockTubes/VanDerWaals/</testCase> -->
-  <!-- <testCase>./libTests/referenceTestCases/eulerKorteweg/1D/shockTubes/polynomialEOS/</testCase> -->
+  <!-- Non-equilibrium reference test cases -->
+  <!-- ==================================== -->
+  <!-- <testCase>libTests/referenceTestCases/NEq/1D/transport/waterAir/</testCase> -->
+  <!-- <testCase>libTests/referenceTestCases/NEq/1D/shockTubes/HPLeftWaterAirAlphaEqual/</testCase> -->
+  <!-- <testCase>libTests/referenceTestCases/NEq/1D/shockTubes/HPLeftAirAirAlphaDiff/</testCase> -->
+  <!-- <testCase>libTests/referenceTestCases/NEq/1D/shockTubes/interfaceWaterAir/</testCase> -->
+  <!-- <testCase>libTests/referenceTestCases/NEq/1D/cavitation/waterAir1000/</testCase> -->
+  <!-- <testCase>libTests/referenceTestCases/NEqDEM/1D/transport/airAirAlphaEqual/</testCase> -->
+  <!-- <testCase>libTests/referenceTestCases/NEqDEM/1D/transport/airAirAir/</testCase> -->
+  <!-- <testCase>libTests/referenceTestCases/NEqDEM/1D/transport/airAirAlphaDiff/</testCase> -->
+  <!-- <testCase>libTests/referenceTestCases/NEqDEM/1D/transport/waterAirAlphaEqual/</testCase> -->
+  <!-- <testCase>libTests/referenceTestCases/NEqDEM/1D/transport/waterAirAlphaDiff/</testCase> -->
+  <!-- <testCase>libTests/referenceTestCases/NEqDEM/1D/transport/interfaceWaterAir/</testCase> -->
+  <!-- <testCase>libTests/referenceTestCases/NEqDEM/1D/shockTubes/HPLeftGasAirHelium/</testCase> -->
+  <!-- <testCase>libTests/referenceTestCases/NEqDEM/1D/shockTubes/HPLeftAirAirAlphaEqual/</testCase> -->
+  <!-- <testCase>libTests/referenceTestCases/NEqDEM/1D/shockTubes/HPLeftAirAirAlphaDiff/</testCase> -->
+  <!-- <testCase>libTests/referenceTestCases/NEqDEM/1D/shockTubes/HPLeftWaterAirAlphaEqualWall/</testCase> -->
+  <!-- <testCase>libTests/referenceTestCases/NEqDEM/1D/shockTubes/HPLeftWaterAirAlphaEqual_1e9/</testCase> -->
+  <!-- <testCase>libTests/referenceTestCases/NEqDEM/1D/shockTubes/HPLeftWaterAirAlphaEqual_2e8/</testCase> -->
+  <!-- <testCase>libTests/referenceTestCases/NEqDEM/1D/shockTubes/HPLeftWaterAirAlphaDiff_2e8/</testCase> -->
+  <!-- <testCase>libTests/referenceTestCases/NEqDEM/1D/shockTubes/interfaceWaterAir/</testCase> -->
+  <!-- <testCase>libTests/referenceTestCases/NEqDEM/1D/shockTubes/diffusedInterfaceWaterAir/</testCase> -->
+  <!-- <testCase>libTests/referenceTestCases/NEqDEM/1D/shockTubes/epoxySpinel/</testCase> -->
+  <!-- <testCase>libTests/referenceTestCases/NEqDEM/1D/cavitation/waterAir1000/</testCase> -->
+  <!-- <testCase>libTests/referenceTestCases/NEqDEM/1D/cavitation/waterAir/</testCase> -->
+  <!-- <testCase>libTests/referenceTestCases/NEqDEM/1D/sphericalCollapse/Pratio1427/</testCase> -->
+  <!-- <testCase>libTests/referenceTestCases/NEqDEM/2D/underwaterExplosion/</testCase> -->
+  <!-- <testCase>libTests/referenceTestCases/NEqDEM/2D/RichtmyerMeshkov/</testCase> -->
+  <!-- <testCase>libTests/referenceTestCases/NEqDEM/2D/testUnstructured/</testCase> -->
+  <!-- <testCase>libTests/referenceTestCases/NEqDEM/2D/shockBubble/heliumAir/</testCase> -->
+  <!-- <testCase>libTests/referenceTestCases/NEqDEM/2D/sphericalCollapse/Pratio1427/</testCase> -->
+  <!-- <testCase>libTests/referenceTestCases/NEqDEM/3D/shockBubble/heliumAir/</testCase> -->
 
   <!-- Error test cases -->
-  <!-- ---------------- -->
+  <!-- ================ -->
   <!-- <testCase>libTests/referenceTestCases/errors/errorXMLElement/</testCase> -->
   <!-- <testCase>libTests/referenceTestCases/errors/errorXMLAttribute/</testCase> -->
 

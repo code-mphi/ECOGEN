@@ -121,10 +121,15 @@ class Output
         throw;
       }
     };
-    void printTree(Mesh* mesh, std::vector<Cell*>* cellsLvl, int m_resumeAMRsaveFreq);
+
+    //! \brief   Write 'meshInfo' file that stores for each cell its subdivision status (1 if subdivided, 0 if not)
+    //! \param   mesh                Mesh object of the current simulation.
+    //! \param   cellsLvl            Computationnal cells
+    //! \param   m_resumeAMRsaveFreq File output frequency
+    //! \remark  Useful only in AMR case.
+    virtual void printTree(Mesh* mesh, const std::vector<Cell*>* cellsLvl, int m_resumeAMRsaveFreq) const;
     virtual void writeInfos();
     virtual void writeProgress();
-    void saveInfoCells() const;
 
     virtual void initializeSpecificOutput()
     {
@@ -152,9 +157,11 @@ class Output
     int readNbCpu();
     //! \brief   Read results of a previous simulation to resume from it
     //! \details Available for all mesh types if the same number of cpus is used between both simulations
-    //! \param   mesh     Mesh object of the current simulation
+    //! \param   mesh     Mesh object of the current simulation in case of resume. Mesh object of a single partition of the previous simulation (either the same one as current or older one in case of mapping).
     //! \param   cellsLvl Computationnal cells to be filled with results of previous simulation
-    virtual void readResults(Mesh* /*mesh*/, std::vector<Cell*>* /*cellsLvl*/)
+    //! \param   cpu      Index of cpu file to read if provided (meshMappingRestart case), otherwise, the file associated with current
+    //! cpu rank is readed (simulation resume case)
+    virtual void readResults(Mesh* /*mesh*/, std::vector<Cell*>* /*cellsLvl*/, int /*cpu*/ = -1)
     {
       try {
         throw ErrorECOGEN("readResults not available for requested output format");
@@ -163,30 +170,43 @@ class Output
         throw;
       }
     };
-    //! \brief   Read results of a single partition of a previous simulation to resume from it
-    //! \details Available for GmshV2 only but allow the use of mesh mapping and/or use of a different number of cpu than the previous simulation
-    //! \param   mesh     Mesh object of a single partition of the previous simulation (either the same one as current or older one in case of mapping)
-    //! \param   cellsLvl Computationnal cells to be filled with results of previous simulation
-    //! \param   cpu      Cpu number of the partition to be read
-    virtual void readResultsCpu(Mesh* /*mesh*/, std::vector<Cell*>* /*cellsLvl*/, int /*cpu*/)
-    {
-      try {
-        throw ErrorECOGEN("readResultsCpu not available for requested output format");
-      }
-      catch (ErrorECOGEN&) {
-        throw;
-      }
-    };
     void readDomainDecompostion(Mesh* mesh);
-    void readTree(Mesh* mesh,
-                  TypeMeshContainer<Cell*>* cellsLvl,
-                  TypeMeshContainer<Cell*>* cellsLvlGhost,
-                  TypeMeshContainer<CellInterface*>* cellInterfacesLvl,
-                  const std::vector<AddPhys*>& addPhys,
-                  int& nbCellsTotalAMR);
+
+    //! \brief   Read 'meshInfo' file that stores for each cell its subdivision status (1 if subdivided, 0 if not)
+    //! \param   mesh              Mesh object of the current simulation.
+    //! \param   cellsLvl          Computationnal cells
+    //! \param   cellsLvlGhost     Ghost cells
+    //! \param   cellInterfacesLvl Interface cells
+    //! \param   addPhys           Vector of additional physics
+    //! \param   nbCellsTotalAMR   Cell count
+    //! \remark  Useful only in AMR case.
+    virtual void readTree(Mesh* mesh,
+                          TypeMeshContainer<Cell*>* cellsLvl,
+                          TypeMeshContainer<Cell*>* cellsLvlGhost,
+                          TypeMeshContainer<CellInterface*>* cellInterfacesLvl,
+                          const std::vector<AddPhys*>& addPhys,
+                          int& nbCellsTotalAMR);
+
+    virtual void prepareErrorFiles() const;
+    virtual void writeErrorInFile(std::vector<Errors>& v, const int& ErrorType, const int& iteration, bool& warn) const;
+
+    //! \brief   Refine ghost cells, update of persistent communications of cells lvl + 1, reconstruct arrays of cells and cell interfaces of lvl + 1
+    //! \param   mesh              Mesh object of the current simulation.
+    //! \param   cellsLvl          Computationnal cells
+    //! \param   cellsLvlGhost     Ghost cells
+    //! \param   cellInterfacesLvl Interface cells
+    //! \param   addPhys           Vector of additional physics
+    //! \param   lvl               Cells level
+    //! \remark  Useful only in AMR case.
+    void readTree_common(Mesh* mesh,
+                         TypeMeshContainer<Cell*>* cellsLvl,
+                         TypeMeshContainer<Cell*>* cellsLvlGhost,
+                         TypeMeshContainer<CellInterface*>* cellInterfacesLvl,
+                         const std::vector<AddPhys*>& addPhys,
+                         int& lvl);
 
     //Accessor
-    int getNumFile() const { return m_numFichier; };
+    int getNumFile() const { return m_numFile; };
     virtual double getNextTime()
     {
       try {
@@ -207,9 +227,26 @@ class Output
       }
       return false;
     };
+    //! \brief  Get m_transfer_mode field. For OutputVTKHDF derived class only.
+    virtual const void* getTransferMode() const
+    {
+      try {
+        throw ErrorECOGEN("getTransferMode not available for requested output format");
+      }
+      catch (ErrorECOGEN&) {
+        throw;
+      }
+      return nullptr;
+    }
+
     const std::string& getFolderOutput() { return m_folderOutput; }
     const TypeOutput& getType() const { return m_type; };
     bool getReducedOutput() const { return m_reducedOutput; };
+
+    std::string outputPhaseName(int phase, std::string phaseName, std::string& eosName) const
+    {
+      return "F" + std::to_string(phase) + "_" + phaseName + eosName;
+    }
 
   protected:
     //General data
@@ -217,8 +254,8 @@ class Output
     void saveInfos() const;
     std::string createFilename(const char* name, int lvl = -1, int proc = -1, int numFichier = -1) const;
 
-    void writeDataset(std::vector<double> dataset, std::ofstream& fileStream, TypeData typeData);
-    void getDataset(std::istringstream& data, std::vector<double>& dataset);
+    void writeDataset(std::vector<double> dataset, std::ofstream& fileStream, TypeData typeData) const;
+    void getDataset(std::istringstream& data, std::vector<double>& dataset) const;
 
     Input* m_input;    //!<Pointer to input
     Run* m_run;        //!<Pointer to run
@@ -227,12 +264,12 @@ class Output
     //Attributes names file/folder
     std::string m_simulationName;             //!<Test case name (defined in "main.xml")
     std::string m_infoCalcul;                 //!<Filename to save useful info of computation
-    std::string m_infoMesh;                   //!<Filename of mesh info file
     std::string m_treeStructure;              //!<Filename for tree structure backup
     std::string m_domainDecomposition;        //!<Filename for domain decomposition backup
     std::string m_fileNameResults;            //!<Filename of result file
     std::string m_filenameCollectionParaview; //!<Name of the collection containing the results files (for Paraview)
     std::string m_filenameCollectionVisIt;    //!<Name of the collection containing the results files (for VisIt)
+    std::string m_filenameVTKHDFTimeseries;   //!<Name of the timeseries file containing the list of result files at vtkhdf format (for Paraview)
     std::string m_folderOutput;               //!<Folder to store results
     std::string m_folderSavesInput;           //!<Folder to store a copy of input files
     std::string m_folderDatasets;             //!<Folder to save the datasets
@@ -246,12 +283,12 @@ class Output
     std::string m_folderErrorsAndWarnings;    //!<File path for errors and warnings
 
     //Attributes of print parameters
-    bool m_writeBinary;   //!<Choice to write binary/ASCII
+    bool m_writeBinary;   //!<Choice to write binary/ASCII (available for GNU and VTK outputs, GNU format only supports ASCII)
     bool m_splitData;     //!<Choice print data in separate files
-    int m_precision;      //!<Output files precision (number of digits) //default: 0
+    int m_precision;      //!<Output files precision (number of digits) for GNU and VTK outputs //default: 6
     bool m_reducedOutput; //!<Choice of reduced number of output variables when possible (depends on the model)
 
-    int m_numFichier;
+    int m_numFile;
     std::string m_endianMode;
     int m_nbCpusRestarted; //!<Number of CPUs of the simulation to be restarted
 

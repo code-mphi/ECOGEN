@@ -1,0 +1,10 @@
+<?xml version='1.0' encoding='UTF-8' standalone='yes'?>
+<computationParam>
+  <run>nonEqDEM2DtestUnstructured</run>
+  <outputMode binary="false" format="VTK" precision="11"/>
+  <timeControlMode iterations="true">
+    <iterations iterFreq="40" number="40"/>
+    <physicalTime totalTime="8.e-3" timeFreq="4.e-4"/>
+  </timeControlMode>
+  <computationControl CFL="0.5"/>
+</computationParam>

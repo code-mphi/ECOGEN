@@ -3,4 +3,7 @@
 	<flowModel name="VelocityEq" numberPhases="2" alphaNull="false"/>
 	<EOS name="IG_air.xml"/>
 	<EOS name="SG_water.xml"/>
+	<secondOrder>
+		<globalLimiter>minmod</globalLimiter>
+	</secondOrder>
 </model>

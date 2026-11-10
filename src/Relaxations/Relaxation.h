@@ -37,7 +37,6 @@ class Relaxation; //Predeclaration of class Relaxation to include Cell.h
 #include "../Errors.h"
 #include "../Tools.h"
 #include "../Order1/Cell.h"
-#include "../libTierces/svd.h"
 
 //! \class     Relaxation
 //! \brief     Abstract class for Relaxations

@@ -56,27 +56,67 @@ void EosPolynomial::assignParametersEos(std::string name, std::vector<double> pa
 
 //***********************************************************************
 
-double EosPolynomial::computePressure(const double& density, const double& /*temperature*/) const
+double EosPolynomial::computeEnergy(const double& density, const double& /*pressure*/) const
 {
   double epsilon = 1. / density - 1.;
-  return -(4. * m_a * (epsilon * epsilon * epsilon) + 3. * m_b * (epsilon * epsilon) + 2. * m_c * epsilon);
+  return epsilon * epsilon * (m_c + m_b * epsilon + m_a * epsilon * epsilon);
 }
 
 //***********************************************************************
 
-double EosPolynomial::dedrho(const double& density, const double& temperature) const
+double EosPolynomial::computePressureFromDensityAndEntropy(const double& density, const double& /*temperature*/) const
 {
-  return this->computePressure(density, temperature) / (density * density);
+  double epsilon = 1. / density - 1.;
+  return -(4. * m_a * (epsilon * epsilon) + 3. * m_b * epsilon + 2. * m_c) * epsilon;
 }
 
 //***********************************************************************
 
-double EosPolynomial::dedrhoSecond(const double& density, const double& temperature) const
+double EosPolynomial::computePressure(const double& density, const double& /*energy*/) const
 {
-  //AF//TODO precompute 1/density
   double epsilon = 1. / density - 1.;
-  double dpdrho  = (12. * m_a * (epsilon * epsilon) + 6. * m_b * epsilon + 2. * m_c) / (density * density);
-  return dpdrho / (density * density) - 2. * this->dedrho(density, temperature) / density;
+  return -(4. * m_a * (epsilon * epsilon) + 3. * m_b * epsilon + 2. * m_c) * epsilon;
 }
+
+//***********************************************************************
+
+double EosPolynomial::computeSquareSoundSpeed(const double& density, const double& /*entropy*/) const
+{
+  double epsilon = 1. / density - 1.;
+  return (12. * m_a * (epsilon * epsilon) + 6. * m_b * epsilon + 2. * m_c) / (density * density);
+}
+
+//***********************************************************************
+
+double EosPolynomial::computeEntropyFromDensityAndEnergy(const double& /*density*/, const double& /*energy*/) const
+{
+  return 1.; //This value does not matter
+}
+
+//***********************************************************************
+
+double EosPolynomial::computeEntropyFromDensityAndPressure(const double& /*density*/, const double& /*pressure*/) const
+{
+  return 1.; //This value does not matter
+}
+
+//***********************************************************************
+
+double EosPolynomial::computeTemperature(const double& /*density*/, const double& /*pressure*/) const
+{
+  return 1.; //This value does not matter
+}
+
+//***********************************************************************
+
+double EosPolynomial::kappa(const double& density) const { return 1. / (density * density * density); }
+
+//****************************************************************************
+
+double EosPolynomial::kappaPrime(const double& density) const { return -3. / (density * density * density * density); }
+
+//****************************************************************************
+
+double EosPolynomial::kappaSecond(const double& density) const { return 12. / (density * density * density * density * density); }
 
 //***********************************************************************

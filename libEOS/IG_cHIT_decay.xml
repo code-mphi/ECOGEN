@@ -1,0 +1,17 @@
+<?xml version = "1.0" encoding = "UTF-8" standalone = "yes"?>
+<!-- cv = J/(kg.K); lambda = W/(m.K) -->
+<parametersEOS>
+	<EOS type="IG"/>
+	<parameters
+		gamma="1.4"
+		cv="837.857"
+		energyRef="0."
+		entropyRef="0.">
+	</parameters>
+
+	<physicalParameters
+		mu="0.32736"
+		lambda="540.8356">
+	</physicalParameters>
+
+</parametersEOS>

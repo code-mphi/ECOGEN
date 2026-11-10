@@ -5,4 +5,7 @@
     <symmetryTerm type="spherical">
         <dataSymSpher radialAxis="X"/>
     </symmetryTerm>
+	<secondOrder>
+		<globalLimiter>vanleer</globalLimiter>
+	</secondOrder>
 </model>

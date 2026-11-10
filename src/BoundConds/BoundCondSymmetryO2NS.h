@@ -42,7 +42,7 @@ class BoundCondSymmetryO2NS : public BoundCondWallO2NS
 
     void createBoundary(TypeMeshContainer<CellInterface*>& cellInterfaces) override;
 
-    int whoAmI() const override { return SYMMETRY; };
+    int whoAmI() const override { return TypeBC::SYMMETRY; };
 
   protected:
   private:

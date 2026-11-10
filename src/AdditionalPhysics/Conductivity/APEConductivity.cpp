@@ -80,15 +80,15 @@ void APEConductivity::solveFluxAddPhysBoundary(CellInterface* cellInterface)
   m_gradTLeft.localProjection(m_normal, m_tangent, m_binormal);
 
   int typeCellInterface(cellInterface->whoAmI());
-  if (typeCellInterface == NONREFLECTING) {
+  if (typeCellInterface == TypeBC::NONREFLECTING) {
     this->solveFluxConductivityNonReflecting(m_gradTLeft);
   }
-  else if (typeCellInterface == WALL) {
+  else if (typeCellInterface == TypeBC::WALL) {
     int heatWalltype(cellInterface->whoAmIHeat());
-    if (heatWalltype == IMPOSEDTEMP) {
+    if (heatWalltype == TypeBCHeat::IMPOSEDTEMP) {
       this->solveFluxConductivityWallImposedTemp(cellInterface);
     }
-    else if (heatWalltype == IMPOSEDFLUX) {
+    else if (heatWalltype == TypeBCHeat::IMPOSEDFLUX) {
       this->solveFluxConductivityWallImposedFlux(cellInterface);
     }
     else {
@@ -109,7 +109,7 @@ void APEConductivity::solveFluxAddPhysBoundary(CellInterface* cellInterface)
 void APEConductivity::solveFluxConductivityInner(const Coord& gradTLeft, const Coord& gradTRight) const
 {
   //Data of the cell interface
-  double dTdx;
+  double dTdx(0.);
   dTdx = (gradTLeft.getX() + gradTRight.getX()) / 2.;
 
   // Compute heat fluxes

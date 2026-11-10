@@ -1,0 +1,13 @@
+<?xml version = "1.0" encoding = "UTF-8" standalone = "yes"?>
+<model>
+	<flowModel name="Euler"/>
+	<EOS name="IG_cHIT_decay.xml"/>
+	<additionalPhysics type="turbulence">
+		<turbulence model="smagorinsky">
+			<smagorinsky C_s="0.14" C_I="0.09" Pr_T="0.71" ducros="false"/>
+		</turbulence>
+	</additionalPhysics>
+	<secondOrder>
+		<globalLimiter>superbee</globalLimiter>
+	</secondOrder>
+</model>

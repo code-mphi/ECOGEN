@@ -1,0 +1,25 @@
+<?xml version = "1.0" encoding = "UTF-8" standalone = "yes"?>
+<CI>
+	<!-- LIST OF GEOMETRICAL DOMAINS  -->
+	<physicalDomains>
+		<!-- complete domain -->
+		<domain name="base" state="base" type="entireDomainWithParticularities"/>
+	</physicalDomains>
+
+	<!-- LIST OF BOUNDARY CONDITIONS -->
+	<boundaryConditions>
+		<boundCond name="BC_Xmin" type="periodic" number="1" />
+		<boundCond name="BC_Xmax" type="periodic" number="2" />
+		<boundCond name="BC_Ymin" type="periodic" number="3" />
+		<boundCond name="BC_Ymax" type="periodic" number="4" />
+	</boundaryConditions>
+
+	<!--  LIST OF STATES  -->
+	<state name="base">
+        <material type="fluid" EOS="IG_RT_dynamicViscosity.xml">
+            <dataFluid density="1.0" pressure="1.01325e5">
+            	<velocity x="0." y="0." z="0."/>
+            </dataFluid>
+        </material>
+    </state>
+</CI>

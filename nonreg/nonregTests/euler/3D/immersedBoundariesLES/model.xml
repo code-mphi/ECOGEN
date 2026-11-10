@@ -1,0 +1,17 @@
+<?xml version = "1.0" encoding = "UTF-8" standalone = "yes"?>
+<model>
+	<flowModel name="Euler"/>
+	<EOS name="IG_air.xml"/>
+	<additionalPhysics type="viscosity"/>
+	<additionalPhysics type="turbulence">
+		<turbulence model="smagorinsky">
+			<smagorinsky C_s="0.12" C_I="0.9" Pr_T="0.71" ducros="false"/>
+		</turbulence>
+	</additionalPhysics>
+	<secondOrder>
+		<globalLimiter>superbee</globalLimiter>
+	</secondOrder>
+	<gradient>
+      <method>finite-difference</method>
+    </gradient>
+</model>

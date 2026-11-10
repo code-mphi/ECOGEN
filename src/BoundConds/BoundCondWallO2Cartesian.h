@@ -51,7 +51,7 @@ class BoundCondWallO2Cartesian : public BoundCondWall
                       Limiter& interfaceVolumeFractionLimiter,
                       Prim type = vecPhases) override;
 
-    int whoAmI() const override { return WALL; };
+    int whoAmI() const override { return TypeBC::WALL; };
 
     //Accessors
     Phase* getSlopesPhase(const int& phaseNumber) const override;

@@ -48,62 +48,62 @@ class AddPhys
     AddPhys();
     virtual ~AddPhys();
 
-    //! \brief     Add the quantities for the additional physic
+    //! \brief     Add the quantities for the additional physics
     //! \param     cell                 corresponding cell
-    virtual void addQuantityAddPhys(Cell* /*cell*/) { Errors::errorMessage("addQuantityAddPhys not implemented for used additional physic"); };
+    virtual void addQuantityAddPhys(Cell* /*cell*/) { Errors::errorMessage("addQuantityAddPhys not implemented for used additional physics"); };
 
     virtual std::string whoAmI() const
     {
-      Errors::errorMessage("whoAmI not implemented for used additional physic");
-      return 0;
+      Errors::errorMessage("whoAmI not implemented for used additional physics");
+      return std::string("");
     };
 
-    //! \brief     Compute and send back mass energy linked to the physic (0 if no linked energy)
-    //! \param     QPA                  corresponding additional physic quantities
+    //! \brief     Compute and send back mass energy linked to the physics (0 if no linked energy)
+    //! \param     QPA                  corresponding additional physics quantities
     virtual double computeEnergyAddPhys(QuantitiesAddPhys* /*QPA*/) { return 0.; };
-    //! \brief     Compute the additional physic flux between two cells
+    //! \brief     Compute the additional physics flux between two cells
     //! \param     cellInterface        cell interface
     void computeFluxAddPhys(CellInterface* cellInterface);
-    //! \brief     Compute the additional physic flux at a domain boundary
+    //! \brief     Compute the additional physics flux at a domain boundary
     //! \param     cellInterface        cell interface
     void computeFluxAddPhysBoundary(CellInterface* cellInterface);
-    //! \brief     Add the non-conservative terms of the additional physic in a cell
+    //! \brief     Add the non-conservative terms of the additional physics in a cell
     //! \param     cell                 cell
     void addNonConsAddPhys(Cell* cell);
-    //! \brief     Solve the additional physic flux between two cells
+    //! \brief     Solve the additional physics flux between two cells
     //! \param     cellInterface        cell interface
     virtual void solveFluxAddPhys(CellInterface* /*cellInterface*/)
     {
-      Errors::errorMessage("solveFluxAddPhys not implemented for used additional physic");
+      Errors::errorMessage("solveFluxAddPhys not implemented for used additional physics");
     };
-    //! \brief     Solve the additional physic flux at a domain boundary
+    //! \brief     Solve the additional physics flux at a domain boundary
     //! \param     cellInterface        cell interface
     virtual void solveFluxAddPhysBoundary(CellInterface* /*cellInterface*/)
     {
-      Errors::errorMessage("solveFluxAddPhysLimite not implemented for used additional physic");
+      Errors::errorMessage("solveFluxAddPhysLimite not implemented for used additional physics");
     };
-    //! \brief     Add the additional physic flux between two cells at the corresponding cell
+    //! \brief     Add the additional physics flux between two cells at the corresponding cell
     //! \param     cellInterface        cell interface
     //! \param     coefAMR              Adaptive Mesh Refinement coefficient for numerical scheme purposes
     virtual void addFluxAddPhys(CellInterface* cellInterface, const double& coefAMR);
-    //! \brief     Subtract the additional physic flux between two cells at the corresponding cell
+    //! \brief     Subtract the additional physics flux between two cells at the corresponding cell
     //! \param     cellInterface        cell interface
     //! \param     coefAMR              Adaptive Mesh Refinement coefficient for numerical scheme purposes
     virtual void subtractFluxAddPhys(CellInterface* cellInterface, const double& coefAMR);
-    //! \brief     Add the non-conservative terms of the corresponding additional physic in a cell
+    //! \brief     Add the non-conservative terms of the corresponding additional physics in a cell
     //! \param     cell                 cell
-    virtual void addNonCons(Cell* /*cell*/) { Errors::errorMessage("addNonCons not implemented for used additional physic"); };
-    //! \brief     Add the symmetrical terms of the corresponding additional physic in a cell (when radial axis is on X)
+    virtual void addNonCons(Cell* /*cell*/) { Errors::errorMessage("addNonCons not implemented for used additional physics"); };
+    //! \brief     Add the symmetrical terms of the corresponding additional physics in a cell (when radial axis is on X)
     //! \param     cell                 cell
     virtual void addSymmetricTermsRadialAxisOnX(Cell* /*cell*/)
     {
-      Errors::errorMessage("addSymmetricTerms not implemented for used additional physic");
+      Errors::errorMessage("addSymmetricTerms not implemented for used additional physics");
     };
-    //! \brief     Add the symmetrical terms of the corresponding additional physic in a cell (when radial axis is on Y)
+    //! \brief     Add the symmetrical terms of the corresponding additional physics in a cell (when radial axis is on Y)
     //! \param     cell                 cell
     virtual void addSymmetricTermsRadialAxisOnY(Cell* /*cell*/)
     {
-      Errors::errorMessage("addSymmetricTerms not implemented for used additional physic");
+      Errors::errorMessage("addSymmetricTerms not implemented for used additional physics");
     };
 
     //! \brief     Reinitialize the color function for the surface-tension terms with the volume fraction equation
@@ -119,14 +119,20 @@ class AddPhys
     //! \param     lvl                  level
     virtual void communicationsAddPhys(const int& /*dim*/, const int& /*lvl*/)
     {
-      Errors::errorMessage("communicationsAddPhys not implemented for used additional physic");
+      Errors::errorMessage("communicationsAddPhys not implemented for used additional physics");
     };
 
     //! \brief     Return the associated number of the transport equation (only used for surface tension)
     virtual const int& getNumTransportAssociated() const
     {
-      Errors::errorMessage("getNumTransportAssociated not implemented for used additional physic");
+      Errors::errorMessage("getNumTransportAssociated not implemented for used additional physics");
       return Errors::defaultInt;
+    };
+
+    //! \brief     Print the diagnostics for turbulence decay cases
+    virtual void computeTurbulenceParameters() const
+    {
+      Errors::errorMessage("computeTurbulenceParameters not implemented for used additional physics");
     };
 
   protected:

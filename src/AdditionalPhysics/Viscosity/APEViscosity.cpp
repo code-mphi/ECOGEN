@@ -94,9 +94,10 @@ void APEViscosity::solveFluxAddPhysBoundary(CellInterface* cellInterface)
 
   // Copy velocities and gradients of left and right cells
   m_velocityLeft = cellInterface->getCellLeft()->getPhase(0)->getVelocity();
-  m_gradULeft    = cellInterface->getCellLeft()->getQPA(m_numQPA)->getGrad(1);
-  m_gradVLeft    = cellInterface->getCellLeft()->getQPA(m_numQPA)->getGrad(2);
-  m_gradWLeft    = cellInterface->getCellLeft()->getQPA(m_numQPA)->getGrad(3);
+
+  m_gradULeft = cellInterface->getCellLeft()->getQPA(m_numQPA)->getGrad(1);
+  m_gradVLeft = cellInterface->getCellLeft()->getQPA(m_numQPA)->getGrad(2);
+  m_gradWLeft = cellInterface->getCellLeft()->getQPA(m_numQPA)->getGrad(3);
 
   m_normal   = cellInterface->getFace()->getNormal();
   m_tangent  = cellInterface->getFace()->getTangent();
@@ -113,14 +114,14 @@ void APEViscosity::solveFluxAddPhysBoundary(CellInterface* cellInterface)
   double distLeft = cellInterface->getCellLeft()->distance(cellInterface);
 
   switch (cellInterface->whoAmI()) {
-  case NONREFLECTING:
-  case OUTLETPRESSURE:
-  case INLETINJSTAGSTATE:
-  case INLETTANK:
-  case INLETINJTEMP:
+  case TypeBC::NONREFLECTING:
+  case TypeBC::OUTLETPRESSURE:
+  case TypeBC::INLETINJSTAGSTATE:
+  case TypeBC::INLETTANK:
+  case TypeBC::INLETINJTEMP:
     this->solveFluxViscosityNonReflecting(m_velocityLeft, m_gradULeft, m_gradVLeft, m_gradWLeft, m_mu);
     break;
-  case WALL:
+  case TypeBC::WALL:
     if (!cellInterface->isMRFWall()) {
       this->solveFluxViscosityWall(m_velocityLeft, m_mu, distLeft);
     }
@@ -132,8 +133,22 @@ void APEViscosity::solveFluxAddPhysBoundary(CellInterface* cellInterface)
       this->solveFluxViscosityWall(m_velocityLeft, m_mu, distLeft, velocityWall);
     }
     break;
-  case SYMMETRY:
+  case TypeBC::SYMMETRY:
     this->solveFluxViscositySymmetry(m_gradULeft, m_gradVLeft, m_gradWLeft, m_mu);
+    break;
+  case TypeBC::PERIODIC:
+    m_velocityRight = cellInterface->getCellRight()->getPhase(0)->getVelocity();
+
+    m_gradURight = cellInterface->getCellRight()->getQPA(m_numQPA)->getGrad(1);
+    m_gradVRight = cellInterface->getCellRight()->getQPA(m_numQPA)->getGrad(2);
+    m_gradWRight = cellInterface->getCellRight()->getQPA(m_numQPA)->getGrad(3);
+
+    m_tensorRight.setTensorByLines(m_gradURight, m_gradVRight, m_gradWRight);
+    m_tensorRight.localProjection(m_normal, m_tangent, m_binormal);
+    m_tensorRight.tensorToCoords(m_gradURight, m_gradVRight, m_gradWRight);
+
+    this->solveFluxViscosityInner(
+      m_velocityLeft, m_velocityRight, m_gradULeft, m_gradURight, m_gradVLeft, m_gradVRight, m_gradWLeft, m_gradWRight, m_mu);
     break;
   default:
     this->solveFluxViscosityOther();
@@ -156,10 +171,10 @@ void APEViscosity::solveFluxViscosityInner(const Coord& velocityLeft,
                                            const double& mu) const
 {
   //Extraction of data
-  double uL, vL, wL, uR, vR, wR;
-  double dudxL, dudyL, dudzL, dudxR, dudyR, dudzR;
-  double dvdxL, dvdyL, dvdxR, dvdyR;
-  double dwdxL, dwdzL, dwdxR, dwdzR;
+  double uL(0.), vL(0.), wL(0.), uR(0.), vR(0.), wR(0.);
+  double dudxL(0.), dudyL(0.), dudzL(0.), dudxR(0.), dudyR(0.), dudzR(0.);
+  double dvdxL(0.), dvdyL(0.), dvdxR(0.), dvdyR(0.);
+  double dwdxL(0.), dwdzL(0.), dwdxR(0.), dwdzR(0.);
   uL = velocityLeft.getX();
   vL = velocityLeft.getY();
   wL = velocityLeft.getZ();
@@ -185,10 +200,10 @@ void APEViscosity::solveFluxViscosityInner(const Coord& velocityLeft,
   dwdzR = gradWRight.getZ();
 
   //Data of the cell interface
-  double u, v, w;
-  double dudx, dudy, dudz;
-  double dvdx, dvdy;
-  double dwdx, dwdz;
+  double u(0.), v(0.), w(0.);
+  double dudx(0.), dudy(0.), dudz(0.);
+  double dvdx(0.), dvdy(0.);
+  double dwdx(0.), dwdz(0.);
 
   u = (uL + uR) / 2.;
   v = (vL + vR) / 2.;
@@ -244,7 +259,7 @@ void APEViscosity::solveFluxViscositySymmetry(const Coord& gradULeft, const Coor
 {
   //Extraction of data
   //Note that dudy, dudz, dvdx and dwdx are nulls
-  double dudx, dvdy, dwdz;
+  double dudx(0.), dvdy(0.), dwdz(0.);
   dudx = gradULeft.getX();
   dvdy = gradVLeft.getY();
   dwdz = gradWLeft.getZ();
@@ -277,6 +292,34 @@ void APEViscosity::communicationsAddPhys(const int& dim, const int& lvl)
   parallel.communicationsVector(Variable::QPA, dim, lvl, m_numQPA, 1); //m_gradU
   parallel.communicationsVector(Variable::QPA, dim, lvl, m_numQPA, 2); //m_gradV
   parallel.communicationsVector(Variable::QPA, dim, lvl, m_numQPA, 3); //m_gradW
+}
+
+//***********************************************************************
+
+void APEViscosity::computeTurbulenceParameters() const
+{
+  double global_sum_u2v2w2(0.);
+
+  MPI_Allreduce(&sum_u2v2w2, &global_sum_u2v2w2, 1, MPI_DOUBLE, MPI_SUM, MPI_COMM_WORLD);
+
+  long l_nCells = static_cast<long>(nCells);
+  long global_nCells(0);
+  MPI_Allreduce(&l_nCells, &global_nCells, 1, MPI_LONG, MPI_SUM, MPI_COMM_WORLD);
+
+  const double mean_u2v2w2 = global_sum_u2v2w2 / static_cast<double>(global_nCells);
+  const double urms_glob   = std::sqrt(mean_u2v2w2);        //Root mean square speed
+  const double Mt_num      = urms_glob / initialSoundSpeed; // Turbulent Mach
+
+  if (rankCpu == 0) {
+    std::cout << "-------------------" << std::endl;
+    std::cout << "Initial field check" << std::endl;
+    std::cout << "  turbulent Mach         = " << Mt_num << std::endl;
+    std::cout << "  conductivity           = " << initialConductivity << std::endl;
+    std::cout << "  viscosity              = " << initialViscosity << std::endl;
+    std::cout << "  root mean square speed = " << urms_glob / std::sqrt(3.) << std::endl;
+    std::cout << "  sound speed            = " << initialSoundSpeed << std::endl;
+    std::cout << "-------------------" << std::endl;
+  }
 }
 
 //***********************************************************************

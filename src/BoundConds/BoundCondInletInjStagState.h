@@ -50,7 +50,7 @@ class BoundCondInletInjStagState : public BoundCond
     void solveRiemannBoundary(Cell& cellLeft, const double& dxLeft, double& dtMax) override;
     void solveRiemannTransportBoundary(Cell& cellLeft) const override;
 
-    int whoAmI() const override { return INLETINJSTAGSTATE; };
+    int whoAmI() const override { return TypeBC::INLETINJSTAGSTATE; };
     void printInfo() override;
 
     //For AMR method

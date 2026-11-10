@@ -56,10 +56,10 @@ class Transport
     void solveRiemann(double transportLeft, double transportRight, double sM);
     //! \brief     Wall half Riemann solver for the corresponding transport equation
     void solveRiemannWall();
-    //! \brief     Piston half Riemann solver for the corresponding transport equation
+    //! \brief     Moving wall half Riemann solver for the corresponding transport equation
     //! \param     transportLeft          left value of transport variable
-    //! \param     uPiston                piston velocity for intercell interfaces
-    void solveRiemannPiston(double transportLeft, double uPiston);
+    //! \param     wallVelocity           moving wall velocity (in its normal direction)
+    void solveRiemannMovingWall(double transportLeft, double wallVelocity);
     //! \brief     Inlet injection using stagnation state half Riemann solver for the corresponding transport equation
     //! \param     transportLeft          left value of transport variable
     //! \param     sM                     fluid velocity for intercell interfaces

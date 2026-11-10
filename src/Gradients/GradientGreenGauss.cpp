@@ -97,7 +97,7 @@ void GradientGreenGauss::computeGradients(Cell* cell,
           this->addGradInterface(grads[g], *cell->getCellInterface(b), *cell, wf);
         }
       }
-      else // Boundary
+      else // Boundaries
       {
         for (unsigned int g = 0; g < grads.size(); g++) {
           // Extracting left variable value
@@ -109,7 +109,7 @@ void GradientGreenGauss::computeGradients(Cell* cell,
 
           if (nameVariables[g] == Variable::velocityU || nameVariables[g] == Variable::velocityV || nameVariables[g] == Variable::velocityW) {
             switch (typeCellInterface) {
-            case SYMMETRY: {
+            case TypeBC::SYMMETRY: {
               // Project the velocity vector on the symmetry, set symmetry constraints (u_x = 0), and reverse
               velocity.setXYZ(cell->getCellInterface(b)->getCellLeft()->selectScalar(Variable::velocityU, numPhases[g]),
                               cell->getCellInterface(b)->getCellLeft()->selectScalar(Variable::velocityV, numPhases[g]),
@@ -126,29 +126,44 @@ void GradientGreenGauss::computeGradients(Cell* cell,
               if (nameVariables[g] == Variable::velocityU) {
                 wf = velocity.getX();
               }
-              if (nameVariables[g] == Variable::velocityV) {
+              else if (nameVariables[g] == Variable::velocityV) {
                 wf = velocity.getY();
               }
-              if (nameVariables[g] == Variable::velocityW) {
+              else { //nameVariables[g] == Variable::velocityW
                 wf = velocity.getZ();
               }
               break;
             }
 
-            case WALL: {
+            case TypeBC::WALL: {
               if (!cell->getCellInterface(b)->isMRFWall()) wf = 0.;
               else {
-                // velocity here is the wall velocity
+                // Velocity here is the wall velocity
                 velocity = cell->getCellInterface(b)->getWallRotationalVelocityMRF().cross(cell->getCellInterface(b)->getFace()->getPos());
                 if (nameVariables[g] == Variable::velocityU) {
                   wf = velocity.getX();
                 }
-                if (nameVariables[g] == Variable::velocityV) {
+                else if (nameVariables[g] == Variable::velocityV) {
                   wf = velocity.getY();
                 }
-                if (nameVariables[g] == Variable::velocityW) {
+                else { //nameVariables[g] == Variable::velocityW
                   wf = velocity.getZ();
                 }
+              }
+              break;
+            }
+
+            case TypeBC::MOVINGWALL: {
+              // Velocity here is the wall velocity
+              velocity = cell->getCellInterface(b)->getWallVelocity() * cell->getCellInterface(b)->getFace()->getNormal();
+              if (nameVariables[g] == Variable::velocityU) {
+                wf = velocity.getX();
+              }
+              else if (nameVariables[g] == Variable::velocityV) {
+                wf = velocity.getY();
+              }
+              else { //nameVariables[g] == Variable::velocityW
+                wf = velocity.getZ();
               }
               break;
             }

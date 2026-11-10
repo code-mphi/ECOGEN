@@ -121,11 +121,11 @@ void ElementNS::setNumNode(int& node, int& numNode) { m_numNodes[node] = numNode
 
 //***********************************************************************
 
-void ElementNS::setIsFantome(bool isFantome) { m_isFantome = isFantome; }
+void ElementNS::setIsFantome(bool isFantome_) { m_isFantome = isFantome_; }
 
 //***********************************************************************
 
-void ElementNS::setIsCommunicant(bool isCommunicant) { m_isCommunicant = isCommunicant; }
+void ElementNS::setIsCommunicant(bool isCommunicant_) { m_isCommunicant = isCommunicant_; }
 
 //***********************************************************************
 

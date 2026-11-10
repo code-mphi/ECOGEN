@@ -74,7 +74,9 @@ void RelaxationP::NewtonRaphson(double& pStar, int& iteration)
 
 double RelaxationP::computeInterfacePressure(Cell* cell, Prim type)
 {
-  //pI = sum_k (p_k sum_j Z_j) / (N - 1) sum_k (Z_k) ; where j is different from k and where p_k also considers solid terms
+  //pI = sum_k (-A_k sum_j Z_j) / (N - 1) sum_k (Z_k) ; where j is different from k and where p_k also considers solid terms
+  //Careful: there is a - in front of A_k in the code compared to the paper (different definition, sign change)
+  //A_k if pure fluid is -p_k
   double pI(0.), sumZk(0.), sumZj(0.);
   for (int k = 0; k < numberPhases; k++) {
     TB->zk[k] = cell->getPhase(k, type)->getDensity() * cell->getPhase(k, type)->getSoundSpeed();

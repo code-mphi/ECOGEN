@@ -9,7 +9,7 @@
     <!-- LIST OF BOUNDARY CONDITIONS -->
     <boundaryConditions>
         <boundCond name="leftRightWalls" type="wall" number="1"/>
-        <boundCond name="upperLowerWalls" type="wall" number="2"/>
+        <boundCond name="upperLowerWalls" type="symmetry" number="2"/>
     </boundaryConditions>
 
     <!--  LIST OF STATES  -->

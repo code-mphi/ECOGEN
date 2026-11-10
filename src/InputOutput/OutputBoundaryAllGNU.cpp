@@ -49,7 +49,7 @@ void OutputBoundaryAllGNU::initializeSpecificOutputBound()
     // Avoid to create empty file for CPUs which have not any boundary faces
     if (m_cellInterfaceIndexes.size() > 0) {
       std::ofstream fs;
-      std::string file = m_folderOutput + createFilenameGNU(m_fileNameResults.c_str(), -1, rankCpu, m_numFichier);
+      std::string file = m_folderOutput + createFilenameGNU(m_fileNameResults.c_str(), -1, rankCpu, m_numFile);
       if (m_run->m_resumeSimulation > 0) {
         fs.open(file.c_str(), std::ios_base::app);
       }
@@ -71,7 +71,7 @@ void OutputBoundaryAllGNU::initializeSpecificOutputBound()
 
 void OutputBoundaryAllGNU::writeResults(std::vector<CellInterface*>* cellInterfacesLvl)
 {
-  double rho, p, S, nx, ny, nz, mu;
+  double rho, p, S, nx, ny, nz, mu_;
   // Velocity extracted in the Riemann solver is defined in the face frame
   // and corresponds to the relative velocity in case of MRF.
   // The relative velocity is projected in the global frame to allow the reconstruction
@@ -84,7 +84,7 @@ void OutputBoundaryAllGNU::writeResults(std::vector<CellInterface*>* cellInterfa
   // Avoid to create empty file for CPUs which have not any boundary faces
   if (m_cellInterfaceIndexes.size() > 0) {
     std::ofstream fs;
-    std::string file = m_folderOutput + createFilenameGNU(m_fileNameResults.c_str(), -1, rankCpu, m_numFichier);
+    std::string file = m_folderOutput + createFilenameGNU(m_fileNameResults.c_str(), -1, rankCpu, m_numFile);
     fs.open(file.c_str(), std::ios_base::app);
     if (m_precision != 0) fs.precision(m_precision);
 
@@ -112,21 +112,21 @@ void OutputBoundaryAllGNU::writeResults(std::vector<CellInterface*>* cellInterfa
       posZ = bound->getFace()->getPos().getZ();
 
       // Shear stress
-      mu = 0.;
+      mu_ = 0.;
       if (numberPhases > 1) {
         for (int k = 0; k < numberPhases; k++) {
-          mu += bound->getCellLeft()->getPhase(k)->getAlpha() * bound->getCellLeft()->getPhase(k)->getEos()->getMu();
+          mu_ += bound->getCellLeft()->getPhase(k)->getAlpha() * bound->getCellLeft()->getPhase(k)->getEos()->getMu();
         }
       }
       else {
-        mu = bound->getCellLeft()->getPhase(0)->getEos()->getMu();
+        mu_ = bound->getCellLeft()->getPhase(0)->getEos()->getMu();
       }
       shearStress = bound->getCellLeft()->getVelocity();
       shearStress.localProjection(bound->getFace()->getNormal(), bound->getFace()->getTangent(), bound->getFace()->getBinormal());
       double distCellBound(bound->getFace()->distance(bound->getCellLeft()->getElement()));
-      shearStress.setXYZ(mu / 3. * 4. * shearStress.getX() / distCellBound,
-                         mu * shearStress.getY() / distCellBound,
-                         mu * shearStress.getZ() / distCellBound); // It is assumed that the boundary is not moving
+      shearStress.setXYZ(mu_ / 3. * 4. * shearStress.getX() / distCellBound,
+                         mu_ * shearStress.getY() / distCellBound,
+                         mu_ * shearStress.getZ() / distCellBound); // It is assumed that the boundary is not moving
       shearStress.reverseProjection(bound->getFace()->getNormal(), bound->getFace()->getTangent(), bound->getFace()->getBinormal());
       shearStress *= bound->getFace()->getSurface();
 
@@ -158,7 +158,7 @@ void OutputBoundaryAllGNU::writeResults(std::vector<CellInterface*>* cellInterfa
     fs.close();
   }
 
-  m_numFichier++;
+  m_numFile++;
   m_nextAcq += m_acqFreq;
 }
 

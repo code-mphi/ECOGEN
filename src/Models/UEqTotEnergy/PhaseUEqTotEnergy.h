@@ -65,7 +65,7 @@ class PhaseUEqTotEnergy : public Phase
     double returnScalar(const int& numVar) const override;
     Coord returnVector(const int& /*numVar*/) const override { return 0; };
     std::string returnNameScalar(const int& numVar) const override;
-    std::string returnNameVector(const int& /*numVar*/) const override { return 0; };
+    std::string returnNameVector(const int& /*numVar*/) const override { return Errors::defaultString; };
 
     //Specific method for reading from file
     //-------------------------------------

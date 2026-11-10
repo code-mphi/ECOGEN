@@ -4,4 +4,9 @@
 	<EOS name="IG_air.xml"/>
 	<EOS name="SG_water.xml"/>
 	<transport name="color"/>
+	<!-- <secondOrder>
+		<globalLimiter>mc</globalLimiter>
+		<globalVolumeFractionLimiter>thinc</globalVolumeFractionLimiter>
+		<interfaceVolumeFractionLimiter>thinc</interfaceVolumeFractionLimiter>
+	</secondOrder> -->
 </model>

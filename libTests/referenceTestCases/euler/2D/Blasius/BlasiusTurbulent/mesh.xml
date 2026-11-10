@@ -9,9 +9,9 @@
 
     <meshStretching>
         <YStretching>
-          <stretch startAt="0." endAt="0.3" factor="1.045" numberCells="90"/>
-          <!-- <stretch startAt="0." endAt="0.3" factor="1.045" numberCells="105"/> -->
-          <!-- <stretch startAt="0." endAt="0.3" factor="1.045" numberCells="120"/> -->
+          <stretch startAt="0." endAt="0.3" factor="1.045" refCellSize="0.00026" refCellPos="start"/>
+          <!-- <stretch startAt="0." endAt="0.3" factor="1.045" refCellSize="0.000134" refCellPos="start"/> -->
+          <!-- <stretch startAt="0." endAt="0.3" factor="1.045" refCellSize="6.9e-5" refCellPos="start"/> -->
         </YStretching>
       </meshStretching>
   </cartesianMesh>

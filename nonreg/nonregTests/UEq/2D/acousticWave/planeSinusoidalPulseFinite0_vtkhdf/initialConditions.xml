@@ -1,0 +1,47 @@
+<?xml version = "1.0" encoding = "UTF-8" standalone = "yes"?>
+<CI>
+	<!-- LIST OF GEOMETRICAL DOMAINS  -->
+	<physicalDomains>
+		<!-- complete domain -->
+		<domain name="base" state="base" type="entireDomain"/>
+		<domain name="bubble"  state="airBubble" type="disc">
+            <dataDisc axis1="x" axis2="y" radius="2.e-3">
+                <center x="20.e-3" y="10.e-3" z="0."/>
+            </dataDisc>
+        </domain>
+	</physicalDomains>
+
+	<!-- LIST OF BOUNDARY CONDITIONS -->
+	<boundaryConditions>
+		<boundCond name="BC_Xmin" type="nonReflecting" number="1" />
+		<boundCond name="BC_Xmax" type="nonReflecting" number="2" />
+		<boundCond name="BC_Ymin" type="nonReflecting" number="3" />
+		<boundCond name="BC_Ymax" type="nonReflecting" number="4" />
+	</boundaryConditions>
+
+	<!--  LIST OF STATES  -->
+	<state name="base">
+        <material type="fluid" EOS="SG_water.xml">
+            <dataFluid alpha="1." density="1000." pressure = "1.e5"/>
+        </material>
+        <material type="fluid" EOS="IG_air.xml">
+            <dataFluid alpha="0." density="1.2" pressure = "1.e5"/>
+        </material>
+        <mixture>
+            <velocity x="0." y="0." z="0."/>
+        </mixture>
+    </state>
+
+    <state name="airBubble">
+        <material type="fluid" EOS="SG_water.xml">
+            <dataFluid alpha="0." density="1000." pressure = "1.e5"/>
+        </material>
+        <material type="fluid" EOS="IG_air.xml">
+            <dataFluid alpha="1." density="1.2" pressure = "1.e5"/>
+        </material>
+        <mixture>
+            <velocity x="0." y="0." z="0."/>
+        </mixture>
+    </state>
+
+</CI>

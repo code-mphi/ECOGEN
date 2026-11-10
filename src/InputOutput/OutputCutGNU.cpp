@@ -54,7 +54,7 @@ OutputCutGNU::OutputCutGNU(std::string casTest, std::string run, XMLElement* ele
     m_fileNameVisu = "plot_" + m_fileNameResults + ".gnu";
     m_folderOutput = config.getWorkFolder() + "results/" + run + "/cuts/";
     m_splitData    = 0;
-    m_numFichier   = 0;
+    m_numFile      = 0;
     m_input        = entree;
     m_run          = m_input->getRun();
 
@@ -131,7 +131,7 @@ void OutputCutGNU::initializeSpecificOutput()
 void OutputCutGNU::writeResults(Mesh* mesh, std::vector<Cell*>* cellsLvl)
 {
   std::ofstream fileStream;
-  std::string file = m_folderOutput + createFilenameGNU(m_fileNameResults.c_str(), -1, rankCpu, m_numFichier);
+  std::string file = m_folderOutput + createFilenameGNU(m_fileNameResults.c_str(), -1, rankCpu, m_numFile);
   fileStream.open(file.c_str());
   if (m_precision != 0) fileStream.precision(m_precision);
   mesh->writeResultsGnuplot(cellsLvl, fileStream, m_objet);
@@ -155,7 +155,7 @@ void OutputCutGNU::writeResults(Mesh* mesh, std::vector<Cell*>* cellsLvl)
   catch (ErrorECOGEN&) {
     throw;
   }
-  m_numFichier++;
+  m_numFile++;
   m_nextAcq += m_acqFreq;
 }
 

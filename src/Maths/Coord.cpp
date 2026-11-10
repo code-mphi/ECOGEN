@@ -33,6 +33,7 @@
 Coord coordBuff;
 Coord velocity;
 Coord vFaceToElt;
+Coord coordIdentity;
 
 //*********************************************************************
 
@@ -227,69 +228,69 @@ void Coord::printInfo() const { std::cout << " X = " << m_x << " Y = " << m_y <<
 
 //*******************SURCHARGES OPERATEURS*****************************
 
-Coord& Coord::operator=(const double& scalar)
+Coord& Coord::operator=(const double& scalar_)
 {
-  m_x = scalar;
-  m_y = scalar;
-  m_z = scalar;
+  m_x = scalar_;
+  m_y = scalar_;
+  m_z = scalar_;
   return *this;
 }
 
 //*********************************************************************
 
-Coord& Coord::operator+=(const double& scalar)
+Coord& Coord::operator+=(const double& scalar_)
 {
-  m_x += scalar;
-  m_y += scalar;
-  m_z += scalar;
+  m_x += scalar_;
+  m_y += scalar_;
+  m_z += scalar_;
   return *this;
 }
 
 //*********************************************************************
 
-Coord& Coord::operator-=(const double& scalar)
+Coord& Coord::operator-=(const double& scalar_)
 {
-  m_x -= scalar;
-  m_y -= scalar;
-  m_z -= scalar;
+  m_x -= scalar_;
+  m_y -= scalar_;
+  m_z -= scalar_;
   return *this;
 }
 
 //*********************************************************************
 
-Coord& Coord::operator*=(const double& scalar)
+Coord& Coord::operator*=(const double& scalar_)
 {
-  m_x *= scalar;
-  m_y *= scalar;
-  m_z *= scalar;
+  m_x *= scalar_;
+  m_y *= scalar_;
+  m_z *= scalar_;
   return *this;
 }
 
 //*********************************************************************
 
-Coord& Coord::operator/=(const double& scalar)
+Coord& Coord::operator/=(const double& scalar_)
 {
-  m_x /= scalar;
-  m_y /= scalar;
-  m_z /= scalar;
+  m_x /= scalar_;
+  m_y /= scalar_;
+  m_z /= scalar_;
   return *this;
 }
 
 //*********************************************************************
 
-Coord Coord::operator*(const double& scalar) const
+Coord Coord::operator*(const double& scalar_) const
 {
   Coord copie(*this);
-  copie *= scalar;
+  copie *= scalar_;
   return copie;
 }
 
 //*********************************************************************
 
-Coord Coord::operator/(const double& scalar) const
+Coord Coord::operator/(const double& scalar_) const
 {
   Coord copie(*this);
-  copie /= scalar;
+  copie /= scalar_;
   return copie;
 }
 
@@ -316,10 +317,10 @@ Coord& Coord::operator-=(const Coord& a)
 //*********************************************************************
 //Surcharge operateur externe a la classe car prends deux arguments
 
-Coord operator*(const double& scalar, const Coord& a)
+Coord operator*(const double& scalar_, const Coord& a)
 {
   Coord copy(a);
-  copy *= scalar;
+  copy *= scalar_;
   return copy;
 }
 

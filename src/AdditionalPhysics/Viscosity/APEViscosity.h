@@ -104,9 +104,12 @@ class APEViscosity : public APEuler
 
     void communicationsAddPhys(const int& dim, const int& lvl) override;
 
+    //! \brief     Print the diagnostics for turbulence decay cases
+    virtual void computeTurbulenceParameters() const override;
+
   protected:
   private:
-    double m_mu;  //!< Dynamic viscosity (kg/m/s or Pa.s) (taken from the EOS classe) (buffer)
+    double m_mu;  //!< Dynamic viscosity (kg/m/s or Pa.s) (taken from the EOS class) (buffer)
     int m_numQPA; //!< Number of the associated variable for each cell (m_vecGrandeursAddPhys)
 
     Coord m_velocityLeft;  //!< Left velocity vector for the flux computation (buffer)

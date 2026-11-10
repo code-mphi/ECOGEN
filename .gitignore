@@ -1,12 +1,8 @@
-# IDE configuration
-.vscode/
-
-# System
-*.DS_Store
-
 # Compilation
 /ECOGEN
+/libECOGEN.so
 *.o
+*.d
 *.gcda
 *.gcno
 
@@ -18,9 +14,6 @@ coverage_and_profile/html
 coverage_and_profile/profile_gprof2dot*.png
 /nonreg/reports/
 
-# Python virtual environments
-venv
-
 # Text files
 *.txt
 *.out
@@ -29,9 +22,5 @@ venv
 !CMakeLists.txt
 
 # Others
-*.opensdf
-*.sdf
-*.v12.suo
-*.ods
 error_*
 *.msh

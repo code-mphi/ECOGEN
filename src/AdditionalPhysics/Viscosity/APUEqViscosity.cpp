@@ -103,12 +103,13 @@ void APUEqViscosity::solveFluxAddPhysBoundary(CellInterface* cellInterface)
 
   // Copy velocities and gradients of left and right cells
   m_velocityLeft = cellInterface->getCellLeft()->getMixture()->getVelocity();
-  m_gradULeft    = cellInterface->getCellLeft()->getQPA(m_numQPA)->getGrad(1);
-  m_gradVLeft    = cellInterface->getCellLeft()->getQPA(m_numQPA)->getGrad(2);
-  m_gradWLeft    = cellInterface->getCellLeft()->getQPA(m_numQPA)->getGrad(3);
+
+  m_gradULeft = cellInterface->getCellLeft()->getQPA(m_numQPA)->getGrad(1);
+  m_gradVLeft = cellInterface->getCellLeft()->getQPA(m_numQPA)->getGrad(2);
+  m_gradWLeft = cellInterface->getCellLeft()->getQPA(m_numQPA)->getGrad(3);
 
   // Compute the mixture mu on left and right
-  double muMixLeft(0.);
+  double muMixLeft(0.), muMixRight(0.);
   for (int k = 0; k < numberPhases; k++) {
     muMixLeft += cellInterface->getCellLeft()->getPhase(k)->getAlpha() * m_muk[k];
   }
@@ -128,18 +129,35 @@ void APUEqViscosity::solveFluxAddPhysBoundary(CellInterface* cellInterface)
   double distLeft = cellInterface->getCellLeft()->distance(cellInterface);
 
   switch (cellInterface->whoAmI()) {
-  case NONREFLECTING:
-  case OUTLETPRESSURE:
-  case INLETINJSTAGSTATE:
-  case INLETTANK:
-  case INLETINJTEMP:
+  case TypeBC::NONREFLECTING:
+  case TypeBC::OUTLETPRESSURE:
+  case TypeBC::INLETINJSTAGSTATE:
+  case TypeBC::INLETTANK:
+  case TypeBC::INLETINJTEMP:
     this->solveFluxViscosityNonReflecting(m_velocityLeft, m_gradULeft, m_gradVLeft, m_gradWLeft, muMixLeft);
     break;
-  case WALL:
+  case TypeBC::WALL:
     this->solveFluxViscosityWall(m_velocityLeft, muMixLeft, distLeft);
     break;
-  case SYMMETRY:
+  case TypeBC::SYMMETRY:
     this->solveFluxViscositySymmetry(m_gradULeft, m_gradVLeft, m_gradWLeft, muMixLeft);
+    break;
+  case TypeBC::PERIODIC:
+    m_velocityRight = cellInterface->getCellRight()->getMixture()->getVelocity();
+
+    m_gradURight = cellInterface->getCellRight()->getQPA(m_numQPA)->getGrad(1);
+    m_gradVRight = cellInterface->getCellRight()->getQPA(m_numQPA)->getGrad(2);
+    m_gradWRight = cellInterface->getCellRight()->getQPA(m_numQPA)->getGrad(3);
+
+    for (int k = 0; k < numberPhases; k++) {
+      muMixRight += cellInterface->getCellRight()->getPhase(k)->getAlpha() * m_muk[k];
+    }
+
+    m_tensorRight.setTensorByLines(m_gradURight, m_gradVRight, m_gradWRight);
+    m_tensorRight.localProjection(m_normal, m_tangent, m_binormal);
+    m_tensorRight.tensorToCoords(m_gradURight, m_gradVRight, m_gradWRight);
+    this->solveFluxViscosityInner(
+      m_velocityLeft, m_velocityRight, m_gradULeft, m_gradURight, m_gradVLeft, m_gradVRight, m_gradWLeft, m_gradWRight, muMixLeft, muMixRight);
     break;
   default:
     this->solveFluxViscosityOther();

@@ -3,5 +3,10 @@
 	<flowModel name="VelocityEqTotEnergy" numberPhases="2" alphaNull="false"/>
 	<EOS name="IG_air.xml"/>
 	<EOS name="SG_water.xml"/>
-  <relaxation type="P" speed="infinite"/>
+	<relaxation type="P" speed="infinite"/>
+	<secondOrder>
+		<globalLimiter>vanleer</globalLimiter>
+		<globalVolumeFractionLimiter>thinc</globalVolumeFractionLimiter>
+    	<interfaceVolumeFractionLimiter>thinc</interfaceVolumeFractionLimiter>
+	</secondOrder>
 </model>

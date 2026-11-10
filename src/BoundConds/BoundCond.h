@@ -49,10 +49,6 @@ class BoundCond : public CellInterface
     {
       Errors::errorMessage("Impossible to create the limit in createBoundary");
     };
-    virtual void createBoundary(TypeMeshContainer<CellInterface*>& /*cellInterfaces*/, std::string /*ordreCalcul*/)
-    {
-      Errors::errorMessage("Impossible to create the limit in createBoundary");
-    };
     void initialize(Cell* cellLeft, Cell* /*cellRight*/) override;
 
     void computeFlux(double& dtMax,

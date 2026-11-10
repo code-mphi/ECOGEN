@@ -1,0 +1,11 @@
+<?xml version = "1.0" encoding = "UTF-8" standalone = "yes"?>
+<computationParam>
+	<run>nonEq1DShockTubeHPLeftWaterAirAlphaEqual</run>
+	<outputMode format="GNU" binary="false" precision="10"/>
+	<timeControlMode iterations="true">
+		<iterations number="10" iterFreq="10"/>
+		<physicalTime totalTime="79.e-6" timeFreq="1.e-6"/>
+	</timeControlMode>
+	<computationControl CFL="0.5"/>
+	<!-- <resumeSimulation resumeFileNumber="0" AMRsaveFreq="0"/> -->
+</computationParam>

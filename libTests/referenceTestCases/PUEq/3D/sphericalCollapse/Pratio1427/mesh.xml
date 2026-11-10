@@ -7,31 +7,31 @@
     <!-- Mesh with 20 cells per diameter -->
     <meshStretching>
       <XStretching>
-        <stretch startAt="0." endAt="150.e-6" factor="1." numberCells="15"/>
-        <stretch startAt="150.e-6" endAt="3200.e-6" factor="1.1" numberCells="35"/>
+        <stretch startAt="0." endAt="150.e-6" factor="1." refCellPos="start" refCellSize="1e-5"/>
+        <stretch startAt="150.e-6" endAt="3200.e-6" factor="1.1" refCellPos="start" refCellSize="1.1e-5"/>
       </XStretching>
       <YStretching>
-        <stretch startAt="0." endAt="150.e-6" factor="1." numberCells="15"/>
-        <stretch startAt="150.e-6" endAt="3200.e-6" factor="1.1" numberCells="35"/>
+        <stretch startAt="0." endAt="150.e-6" factor="1." refCellPos="start" refCellSize="1e-5"/>
+        <stretch startAt="150.e-6" endAt="3200.e-6" factor="1.1" refCellPos="start" refCellSize="1.1e-5"/>
       </YStretching>
       <ZStretching>
-        <stretch startAt="0." endAt="150.e-6" factor="1." numberCells="15"/>
-        <stretch startAt="150.e-6" endAt="3200.e-6" factor="1.1" numberCells="35"/>
+        <stretch startAt="0." endAt="150.e-6" factor="1." refCellPos="start" refCellSize="1e-5"/>
+        <stretch startAt="150.e-6" endAt="3200.e-6" factor="1.1" refCellPos="start" refCellSize="1.1e-5"/>
       </ZStretching>
     </meshStretching>
     <!-- Mesh with 100 cells per diameter -->
     <!-- <meshStretching>
       <XStretching>
-        <stretch startAt="0." endAt="150.e-6" factor="1." numberCells="75"/>
-        <stretch startAt="150.e-6" endAt="3200.e-6" factor="1.1" numberCells="52"/>
+        <stretch startAt="0." endAt="150.e-6" factor="1." refCellPos="start" refCellSize="2.e-6"/>
+        <stretch startAt="150.e-6" endAt="3200.e-6" factor="1.1" refCellPos="start" refCellSize="2.e-6"/>
       </XStretching>
       <YStretching>
-        <stretch startAt="0." endAt="150.e-6" factor="1." numberCells="75"/>
-        <stretch startAt="150.e-6" endAt="3200.e-6" factor="1.1" numberCells="52"/>
+        <stretch startAt="0." endAt="150.e-6" factor="1." refCellPos="start" refCellSize="2.e-6"/>
+        <stretch startAt="150.e-6" endAt="3200.e-6" factor="1.1" refCellPos="start" refCellSize="2.e-6"/>
       </YStretching>
       <ZStretching>
-        <stretch startAt="0." endAt="150.e-6" factor="1." numberCells="75"/>
-        <stretch startAt="150.e-6" endAt="3200.e-6" factor="1.1" numberCells="52"/>
+        <stretch startAt="0." endAt="150.e-6" factor="1." refCellPos="start" refCellSize="2.e-6"/>
+        <stretch startAt="150.e-6" endAt="3200.e-6" factor="1.1" refCellPos="start" refCellSize="2.e-6"/>
       </ZStretching>
     </meshStretching> -->
     <!-- <AMR lvlMax="3" criteriaVar="0.08" varRho="true" varP="true" varU="false" varAlpha="true" xiSplit="0.02" xiJoin="0.02"/> -->

@@ -3,4 +3,9 @@
 	<flowModel name="PressureVelocityEq" numberPhases="2" alphaNull="false"/>
 	<EOS name="IG_air.xml"/>
 	<EOS name="SG_water.xml"/>
+  <secondOrder>
+    <globalLimiter>minmod</globalLimiter>
+    <globalVolumeFractionLimiter>vanalbada</globalVolumeFractionLimiter>
+    <interfaceVolumeFractionLimiter>vanalbada</interfaceVolumeFractionLimiter>
+  </secondOrder>
 </model>

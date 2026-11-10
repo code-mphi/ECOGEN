@@ -38,7 +38,7 @@
 class RelaxationPInfinite : public RelaxationP
 {
   public:
-    RelaxationPInfinite();
+    RelaxationPInfinite(const double threshold);
     ~RelaxationPInfinite() override;
 
     //! \brief     Stiff (infinite) Pressure relaxation method
@@ -47,6 +47,9 @@ class RelaxationPInfinite : public RelaxationP
     //! \param     dt             time step (not used here)
     //! \param     type           enumeration allowing to relax either state in the cell or second order half time step state
     void relaxation(Cell* cell, const double& /*dt*/, Prim type = vecPhases) override;
+
+  private:
+    double m_thresholdPressureRelaxation; // !< Threshold for convergence of Newton's algortihm
 };
 
 #endif // RELAXATIONPINFINITE_H

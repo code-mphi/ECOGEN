@@ -4,4 +4,7 @@
 	<EOS name="SG_epoxy.xml"/>
 	<EOS name="SG_spinel.xml"/>
 	<!-- <relaxation type="PT"/> -->
+	<secondOrder>
+		<globalLimiter>vanleer</globalLimiter>
+	</secondOrder>
 </model>

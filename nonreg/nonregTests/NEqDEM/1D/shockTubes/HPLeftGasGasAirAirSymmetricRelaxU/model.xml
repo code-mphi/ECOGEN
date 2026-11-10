@@ -1,0 +1,12 @@
+<?xml version = "1.0" encoding = "UTF-8" standalone = "yes"?>
+<model>
+	<flowModel name="NonEqDEM" numberPhases="4" alphaNull="false" RiemannSolver="HLLC" contactAreas="symmetric"/>
+	<EOS name="IG_gas1.xml"/>
+	<EOS name="IG_gas2.xml"/>
+	<EOS name="IG_air.xml"/>
+	<EOS name="IG_air2.xml"/>
+	<relaxation type="U" speed="infinite"/>
+	<!-- <secondOrder>
+		<globalLimiter>vanleer</globalLimiter>
+	</secondOrder> -->
+</model>

@@ -208,7 +208,7 @@ void RelaxationPFinite::relaxation(Cell* cell, const double& dt, Prim type)
 
           //Local relaxation and complete necessary variables for the next local time step
           //------------------------------------------------------------------------------
-          //Relaxation on phase volume-fraction and pressure equations
+          //Relaxation on phase volume-fraction and energy equations
           for (int k = 0; k < numberPhases; k++) {
             if (!TB->alphaNull[k]) {
               phase   = cell->getPhase(k, type);
@@ -389,7 +389,8 @@ void RelaxationPFinite::relaxation(Cell* cell, const double& dt, Prim type)
 
 void RelaxationPFinite::computePressureDifferences(Cell* cell, Prim type)
 {
-  //Deltapk = alpha_k sum_j alpha_j (p_k - p_j) ; where N is the number of phases, j is different from k and where p_k also considers solid terms
+  //Deltapk = alpha_k sum_j alpha_j (-A_k + A_j) ; where N is the number of phases, j is different from k and where p_k also considers solid terms
+  //A_k if pure fluid is -p_k
   for (int k = 0; k < numberPhases; k++) {
     TB->Deltapk[k] = 0.;
     if (!TB->alphaNull[k]) {

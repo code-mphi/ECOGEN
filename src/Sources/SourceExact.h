@@ -46,12 +46,12 @@ class SourceExact : public Source
     //! \brief     Source terms integration on conservative quantities
     //! \param     cell           cell for source term integration
     //! \param     dt             integration time step
-    void integrateSourceTerms(Cell* cell, const double& dt) override;
+    void integrateSourceTerms(Cell* cell, const double& dt, Prim type = vecPhases) override;
 
     //! \brief     Integration via an exact solution
     //! \param     cell           cell for source term integration
     //! \param     dt             explicit integration time step
-    virtual void integrationExactSolution(Cell* /*cell*/, const double& /*dt*/)
+    virtual void integrationExactSolution(Cell* /*cell*/, const double& /*dt*/, Prim /*type*/ = vecPhases)
     {
       Errors::errorMessage("integrationExactSolution not available for required source");
     };

@@ -98,6 +98,7 @@ void RelaxationPTMu::relaxation(Cell* cell, const double& /*dt*/, Prim type)
     return;
   }
   //cell->extendedCalculus(numberPhases);
+  //WARNING For the dodecane shock tube of [Saurel,Petitpas,Abgrall 2008], add this line "if(TB->ak[0] < 1.e-6 || TB->ak[1] < 1.e-6) return;" before double rho = cell->getMixture(type)...
   double rho  = cell->getMixture(type)->getDensity();
   double rhoe = rho * cell->getMixture(type)->getEnergy();
   double dTsat(0.);
@@ -109,6 +110,7 @@ void RelaxationPTMu::relaxation(Cell* cell, const double& /*dt*/, Prim type)
   pv   = cell->getPhase(m_vap, type)->getEos()->computePressure(rhov, ev);
   Tv   = cell->getPhase(m_vap, type)->getEos()->computeTemperature(rhov, pv);
 
+  //WARNING For the dodecane shock tube of [Saurel,Petitpas,Abgrall 2008], replace "if (pv > 0) {"" by "if (pv > 0 && pv < 18.e5) {"
   if (pv > 0) {
     Tsat = cell->getMixture(type)->computeTsat(cell->getPhase(m_liq, type)->getEos(), cell->getPhase(m_vap, type)->getEos(), pv, &dTsat);
     if (Tv >= Tsat) {

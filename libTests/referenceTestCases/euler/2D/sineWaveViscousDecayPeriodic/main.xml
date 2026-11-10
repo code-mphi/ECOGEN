@@ -1,0 +1,15 @@
+<?xml version = "1.0" encoding = "UTF-8" standalone = "yes"?>
+<computationParam>
+	<run>eulerSineWaveViscousDecayPeriodic</run>
+	<outputMode format="VTK" binary="false"/>
+	<cut1D>
+	    <vertex x="0" y="0.5" z="0.5"/>
+		<vecDir x="1" y="0" z="0"/>
+		<timeControl acqFreq="5e-4"/>
+	</cut1D>
+	<timeControlMode iterations="false">
+		<iterations number="1" iterFreq="1"/>
+		<physicalTime totalTime="21.e-3" timeFreq="3.e-3"/>
+	</timeControlMode>
+	<computationControl CFL="0.8"/>
+</computationParam>

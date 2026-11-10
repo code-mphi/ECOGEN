@@ -3,15 +3,15 @@
 	<type structure="cartesian"/>
 	<cartesianMesh>
 		<dimensions x="12.e-3" y="12.e-3" z="1."/>
-		<numberCells x="200" y ="200" z="1"/>
+		<numberCells y ="200" z="1"/>
     <meshStretching>
       <XStretching>
-        <stretch startAt="0." endAt="2.e-3" factor="1." numberCells="400"/>
-        <stretch startAt="2.e-3" endAt="12.e-3" factor="1.05" numberCells="95"/>
+        <stretch startAt="0." endAt="2.e-3" refCellPos="start" refCellSize="5e-06" factor="1."/>
+        <stretch startAt="2.e-3" endAt="12.e-3" refCellPos="start" refCellSize="5e-06" factor="1.05"/>
       </XStretching>
       <YStretching>
-        <stretch startAt="0." endAt="1.25e-3" factor="1." numberCells="250"/>
-        <stretch startAt="1.25e-3" endAt="12.e-3" factor="1.05" numberCells="96"/>
+        <stretch startAt="0." endAt="1.25e-3" factor="1." refCellSize="5e-06" refCellPos="start"/>
+        <stretch startAt="1.25e-3" endAt="12.e-3" factor="1.05" refCellSize="5e-06" refCellPos="start"/>
       </YStretching>
     </meshStretching>
 	</cartesianMesh>

@@ -43,7 +43,7 @@ class BoundCondInletInjTemp : public BoundCond
     void createBoundary(TypeMeshContainer<CellInterface*>& cellInterfaces) override;
     void solveRiemannBoundary(Cell& cellLeft, const double& dxLeft, double& dtMax) override;
 
-    int whoAmI() const override { return INLETINJTEMP; };
+    int whoAmI() const override { return TypeBC::INLETINJTEMP; };
     void printInfo() override;
 
     // For AMR method

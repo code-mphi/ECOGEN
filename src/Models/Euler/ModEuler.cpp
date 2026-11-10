@@ -260,7 +260,7 @@ void ModEuler::solveRiemannInternMRF(Cell& cellLeft,
   if (std::fabs(sL) > 1.e-3) dtMax = std::min(dtMax, machRefMin * dxLeft / std::fabs(sL));
   if (std::fabs(sR) > 1.e-3) dtMax = std::min(dtMax, machRefMin * dxRight / std::fabs(sR));
 
-  //compute left and right mass flow rates and sM
+  // Compute left and right mass flow rates and sM
   double mL(rhoL * (sL - uL)), mR(rhoR * (sR - uR));
   double sM((pR - pL + mL * uL - mR * uR) / (mL - mR));
   if (std::fabs(sM) < 1.e-8) sM = 0.;
@@ -415,6 +415,119 @@ void ModEuler::solveRiemannWall(Cell& cellLeft, const double& dxLeft, double& dt
   boundData[VarBoundary::velU] = 0.;
   boundData[VarBoundary::velV] = 0.;
   boundData[VarBoundary::velW] = 0.;
+}
+
+//****************************************************************************
+
+void ModEuler::solveRiemannMovingWall(Cell& cellLeft, const double& dxLeft, double& dtMax, double wallVelocity, std::vector<double>& boundData) const
+{
+  double cL, cR, sL, sR;
+  double uL, uR, vL, vR, wL, wR, pL, pR, rhoL, rhoR, EL, ER;
+
+  Phase* phaseLeft(0);
+  phaseLeft = cellLeft.getPhase(0);
+
+  uL   = phaseLeft->getU();
+  vL   = phaseLeft->getV();
+  wL   = phaseLeft->getW();
+  pL   = phaseLeft->getPressure();
+  rhoL = phaseLeft->getDensity();
+  cL   = phaseLeft->getSoundSpeed();
+  EL   = phaseLeft->getTotalEnergy();
+
+  uR   = 2. * wallVelocity - uL;
+  vR   = -vL;
+  wR   = -wL;
+  pR   = pL;
+  rhoR = rhoL;
+  cR   = cL;
+  ER   = EL + 0.5 * (-(uL * uL + vL * vL + wL * wL) + (wallVelocity * wallVelocity + vR * vR + wR * wR));
+
+  // Low-Mach preconditioning
+  double machRefMin(1.); // Default value without low-Mach preco.
+  if (m_lowMach) {
+    lowMachSoundSpeed(machRefMin, uL, cL, uR, cR);
+  }
+
+  sL = std::min(uL - cL, uR - cR);
+  sR = std::max(uR + cR, uL + cL);
+
+  // For low-Mach (for general purpose machRefMin set to 1)
+  if (std::fabs(sL) > 1.e-3) dtMax = std::min(dtMax, machRefMin * dxLeft / std::fabs(sL));
+  if (std::fabs(sR) > 1.e-3) dtMax = std::min(dtMax, machRefMin * dxLeft / std::fabs(sR));
+
+  //compute left and right mass flow rates and sM
+  double mL(rhoL * (sL - uL)), mR(rhoR * (sR - uR));
+  double sM((pR - pL + mL * uL - mR * uR) / (mL - mR));
+  if (std::fabs(sM) < 1.e-8) sM = 0.;
+
+  if (sL > 0.) {
+    static_cast<FluxEuler*>(fluxBuff)->m_mass = rhoL * uL;
+    static_cast<FluxEuler*>(fluxBuff)->m_momentum.setX(rhoL * uL * uL + pL);
+    static_cast<FluxEuler*>(fluxBuff)->m_momentum.setY(rhoL * vL * uL);
+    static_cast<FluxEuler*>(fluxBuff)->m_momentum.setZ(rhoL * wL * uL);
+    static_cast<FluxEuler*>(fluxBuff)->m_energ = (rhoL * EL + pL) * uL;
+
+    // Boundary data for output
+    boundData[VarBoundary::p]    = pL;
+    boundData[VarBoundary::rho]  = rhoL;
+    boundData[VarBoundary::velU] = uL;
+    boundData[VarBoundary::velV] = vL;
+    boundData[VarBoundary::velW] = wL;
+  }
+  else if (sR < 0.) {
+    static_cast<FluxEuler*>(fluxBuff)->m_mass = rhoR * uR;
+    static_cast<FluxEuler*>(fluxBuff)->m_momentum.setX(rhoR * uR * uR + pR);
+    static_cast<FluxEuler*>(fluxBuff)->m_momentum.setY(rhoR * vR * uR);
+    static_cast<FluxEuler*>(fluxBuff)->m_momentum.setZ(rhoR * wR * uR);
+    static_cast<FluxEuler*>(fluxBuff)->m_energ = (rhoR * ER + pR) * uR;
+
+    // Boundary data for output
+    boundData[VarBoundary::p]    = pR;
+    boundData[VarBoundary::rho]  = rhoR;
+    boundData[VarBoundary::velU] = uR;
+    boundData[VarBoundary::velV] = vR;
+    boundData[VarBoundary::velW] = wR;
+  }
+  else if (sM >= 0.) {
+    double pStar   = mL * (sM - uL) + pL;
+    double rhoStar = mL / (sL - sM);
+    double Estar   = EL + (sM - uL) * (sM + pL / mL);
+
+    static_cast<FluxEuler*>(fluxBuff)->m_mass = rhoStar * sM;
+    static_cast<FluxEuler*>(fluxBuff)->m_momentum.setX(rhoStar * sM * sM + pStar);
+    static_cast<FluxEuler*>(fluxBuff)->m_momentum.setY(rhoStar * sM * vL);
+    static_cast<FluxEuler*>(fluxBuff)->m_momentum.setZ(rhoStar * sM * wL);
+    static_cast<FluxEuler*>(fluxBuff)->m_energ = (rhoStar * Estar + pStar) * sM;
+
+    // Boundary data for output
+    boundData[VarBoundary::p]    = pStar;
+    boundData[VarBoundary::rho]  = rhoStar;
+    boundData[VarBoundary::velU] = sM;
+    boundData[VarBoundary::velV] = vL;
+    boundData[VarBoundary::velW] = wL;
+  }
+  else {
+    double pStar   = mR * (sM - uR) + pR;
+    double rhoStar = mR / (sR - sM);
+    double Estar   = ER + (sM - uR) * (sM + pR / mR);
+
+    static_cast<FluxEuler*>(fluxBuff)->m_mass = rhoStar * sM;
+    static_cast<FluxEuler*>(fluxBuff)->m_momentum.setX(rhoStar * sM * sM + pStar);
+    static_cast<FluxEuler*>(fluxBuff)->m_momentum.setY(rhoStar * sM * vR);
+    static_cast<FluxEuler*>(fluxBuff)->m_momentum.setZ(rhoStar * sM * wR);
+    static_cast<FluxEuler*>(fluxBuff)->m_energ = (rhoStar * Estar + pStar) * sM;
+
+    // Boundary data for output
+    boundData[VarBoundary::p]    = pStar;
+    boundData[VarBoundary::rho]  = rhoStar;
+    boundData[VarBoundary::velU] = sM;
+    boundData[VarBoundary::velV] = vR;
+    boundData[VarBoundary::velW] = wR;
+  }
+
+  //Contact discontinuity velocity
+  static_cast<FluxEuler*>(fluxBuff)->m_sM = sM;
 }
 
 //****************************************************************************
@@ -610,9 +723,9 @@ void ModEuler::solveRiemannInletInjStagState(Cell& cellLeft,
   // For low-Mach (for general purpose machRefMin set to 1)
   if (std::fabs(sL) > 1.e-3) dtMax = std::min(dtMax, machRefMin * dxLeft / std::fabs(sL));
 
-  u0        = m0 / rhok0[0];
-  H0        = eos->computeTotalEnthalpy(rhok0[0], pk0[0], u0);
-  double c0 = eos->computeSoundSpeed(rhok0[0], pk0[0]);
+  u0                 = m0 / rhok0[0];
+  H0                 = eos->computeTotalEnthalpy(rhok0[0], pk0[0], u0);
+  double soundSpeed0 = eos->computeSoundSpeed(rhok0[0], pk0[0]);
 
   //Null Mass flow
   //--------------
@@ -623,7 +736,7 @@ void ModEuler::solveRiemannInletInjStagState(Cell& cellLeft,
   }
   //Supersonic inflow
   //-----------------
-  else if (u0 < -c0) {
+  else if (u0 < -soundSpeed0) {
     rhoStar = rhok0[0];
     pStar   = pk0[0];
     uStar   = u0;
@@ -1008,10 +1121,10 @@ void ModEuler::solveRiemannTransportWall()
 
 //****************************************************************************
 
-void ModEuler::solveRiemannTransportPiston(Cell& cellLeft, double uPiston)
+void ModEuler::solveRiemannTransportMovingWall(Cell& cellLeft, double wallVelocity)
 {
   for (int k = 0; k < numberTransports; k++) {
-    fluxBufferTransport[k].solveRiemannPiston(cellLeft.getTransport(k).getValue(), uPiston);
+    fluxBufferTransport[k].solveRiemannMovingWall(cellLeft.getTransport(k).getValue(), wallVelocity);
   }
 }
 

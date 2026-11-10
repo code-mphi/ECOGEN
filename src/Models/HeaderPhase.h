@@ -37,8 +37,8 @@
 #include "PTUEq/PhasePTUEq.h"
 #include "UEq/PhaseUEq.h"
 #include "UEqTotEnergy/PhaseUEqTotEnergy.h"
-#include "EulerKorteweg/PhaseEulerKorteweg.h"
-#include "NonLinearSchrodinger/PhaseNonLinearSchrodinger.h"
+#include "ExtendedNavierStokesKorteweg1D/PhaseExtendedNavierStokesKorteweg1D.h"
+#include "NEq/PhaseNEq.h"
 
 //Add new phases here
 

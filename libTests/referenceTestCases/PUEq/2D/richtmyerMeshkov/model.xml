@@ -3,4 +3,7 @@
     <flowModel name="PressureVelocityEq" numberPhases="2" alphaNull="false"/>
     <EOS name="SG_water.xml"/>
     <EOS name="IG_gas1.xml"/>
+    <secondOrder>
+        <globalLimiter>vanleer</globalLimiter>
+    </secondOrder>
 </model>

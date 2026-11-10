@@ -6,12 +6,12 @@
 		<numberCells x="1500" y ="1" z="1"/>
 		<meshStretching>
     		<!-- <XStretching>
-		        <stretch startAt="0." endAt="3.e-4" factor="1." numberCells="150"/>
-		        <stretch startAt="3.e-4" endAt="30.e-4" factor="1.1" numberCells="51"/>
+		        <stretch startAt="0." endAt="3.e-4" factor="1." refCellPos="start" refCellSize="2.e-6"/>
+		        <stretch startAt="3.e-4" endAt="30.e-4" factor="1.1" refCellPos="start" refCellSize="2.e-6"/>
     		</XStretching> -->
     		<XStretching>
-		        <stretch startAt="0." endAt="3.e-4" factor="1." numberCells="75"/>
-		        <stretch startAt="3.e-4" endAt="30.e-4" factor="1.1" numberCells="44"/>
+		        <stretch startAt="0." endAt="3.e-4" factor="1." refCellPos="start" refCellSize="4.e-6"/>
+		        <stretch startAt="3.e-4" endAt="30.e-4" factor="1.1" refCellPos="start" refCellSize="4.e-6"/>
     		</XStretching>
 		</meshStretching>
 	</cartesianMesh>

@@ -84,7 +84,7 @@ class FluxUEq : public Flux
   protected:
     double* m_alpha;       //!< volume fraction array
     double* m_mass;        //!< mass array
-    double* m_energ;       //!< specific internal energy array (may contain compaction energy for UEqSolid model)
+    double* m_energ;       //!< specific internal energy array
     Coord m_momentum;      //!< momentum array
     double m_energMixture; //!< mixture energy
 

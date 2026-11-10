@@ -4,4 +4,7 @@
   <EOS name="IG_air.xml"/>
   <EOS name="SG_water.xml"/>
   <transport name="color"/>
+  <gradient>
+    <method>green-gauss</method>
+  </gradient>
 </model>

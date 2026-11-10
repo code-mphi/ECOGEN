@@ -119,7 +119,7 @@ void SourceNum::integrationRK4(Cell* cell, const double& dt)
 
 //***********************************************************************
 
-void SourceNum::integrateSourceTerms(Cell* cell, const double& dt)
+void SourceNum::integrateSourceTerms(Cell* cell, const double& dt, Prim /*type*/)
 {
   if (cell->getElement()->getAppartenancePhysique() == m_physicalEntity || m_physicalEntity == 0) {
     // For unstructured mesh if source term is not applied on specific physicalEntity all cells include it.

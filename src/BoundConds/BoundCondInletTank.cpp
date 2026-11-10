@@ -170,10 +170,6 @@ BoundCondInletTank::BoundCondInletTank(int numPhysique,
   //---------------------
   m_valueTransport = new double[numbTransports];
   if (numbTransports) {
-    XMLElement* sousElement(element->FirstChildElement("dataInletTank"));
-    if (sousElement == NULL) throw ErrorXMLElement("dataInletTank", fileName, __FILE__, __LINE__);
-    XMLError error;
-
     int foundColors(0);
     XMLElement* elementTransport(sousElement->FirstChildElement("transport"));
     std::string nameTransport;

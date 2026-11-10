@@ -46,6 +46,11 @@ OutputGNU::OutputGNU(std::string casTest, std::string run, XMLElement* element, 
   m_fileNamePDF         = "generatePDF.gnu";
   m_folderScriptGnuplot = "./datasets/";
   m_type                = TypeOutput::GNU;
+
+  if (m_writeBinary) {
+    throw ErrorXMLMessage("GNU file format only compatible with ASCII outputs.\n"
+                          "          Please, modify the 'binary' attribute of your input file.");
+  }
 }
 
 //***********************************************************************
@@ -62,7 +67,7 @@ void OutputGNU::writeResults(Mesh* mesh, std::vector<Cell*>* cellsLvl)
 {
   try {
     std::ofstream fileStream;
-    std::string file = m_folderDatasets + createFilenameGNU(m_fileNameResults.c_str(), -1, rankCpu, m_numFichier);
+    std::string file = m_folderDatasets + createFilenameGNU(m_fileNameResults.c_str(), -1, rankCpu, m_numFile);
     fileStream.open(file.c_str());
     if (!fileStream) {
       throw ErrorECOGEN(file + " cannot be opened", __FILE__, __LINE__);
@@ -81,7 +86,7 @@ void OutputGNU::writeResults(Mesh* mesh, std::vector<Cell*>* cellsLvl)
   catch (ErrorECOGEN&) {
     throw;
   }
-  m_numFichier++;
+  m_numFile++;
 }
 
 //***********************************************************************
@@ -341,7 +346,7 @@ void OutputGNU::printBlocGnuplot(std::ofstream& fileStream, int& index, const in
     else {
       fileStream << "splot";
     }
-    for (int t = 0; t <= m_numFichier; t++) {
+    for (int t = 0; t <= m_numFile; t++) {
       for (int p = 0; p < Ncpu; p++) {
         fileStream << " \"";
         if (dim == 0) {
@@ -361,7 +366,7 @@ void OutputGNU::printBlocGnuplot(std::ofstream& fileStream, int& index, const in
           fileStream << std::endl;
           break;
         }
-        if (p < Ncpu - 1 || t != m_numFichier) fileStream << ",\\";
+        if (p < Ncpu - 1 || t != m_numFile) fileStream << ",\\";
         fileStream << std::endl;
       }
     }

@@ -3,4 +3,8 @@
   <flowModel name="PressureVelocityEq" alphaNull="false" numberPhases="2"/>
   <EOS name="IG_air.xml"/>
   <EOS name="IG_helium.xml"/>
+  <secondOrder>
+    <globalLimiter>vanleer</globalLimiter>
+    <interfaceVolumeFractionLimiter>thinc</interfaceVolumeFractionLimiter>
+  </secondOrder>
 </model>

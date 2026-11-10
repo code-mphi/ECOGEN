@@ -1,0 +1,21 @@
+<?xml version = "1.0" encoding = "UTF-8" standalone = "yes"?>
+<model>
+	<flowModel name="VelocityEq" numberPhases="2" alphaNull="true"/>
+	<relaxation type="P" speed="finite" rate="0." solver="Euler"/>
+	<EOS name="SG_water.xml"/>
+	<EOS name="IG_air.xml"/>
+	<sourceTerms type="acousticWave" order="EULER">
+		<typeAcousticWave type="planeSinusoidalPulse">
+			<dataPlaneSinusoidalPulse pressureAmplitude="10000." delayedTime="5.e-7" numberOfPulse="4." frequency="3.e5">
+				<sourceLocation x="10.e-3" y="10.e-3" z="0.5"/>
+				<pulseDirection x="1." y="0." z="0."/>
+			</dataPlaneSinusoidalPulse>
+		</typeAcousticWave>
+	</sourceTerms>
+	<!-- <symmetryTerm type="spherical">
+		<dataSymSpher radialAxis="Y"/>
+	</symmetryTerm> -->
+	<secondOrder>
+		<globalLimiter>mc</globalLimiter>
+	</secondOrder>
+</model>

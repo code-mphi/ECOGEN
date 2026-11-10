@@ -7,8 +7,5 @@
 		<physicalTime totalTime="1.e-3" timeFreq="1.e-3"/>
 	</timeControlMode>
 	<computationControl CFL="0.5"/>
-	<!-- <secondOrder>
-		<globalLimiter>vanleer</globalLimiter>
-	</secondOrder> -->
-  <psat record="true"/>
+	<psat record="true"/>
 </computationParam>

@@ -89,7 +89,8 @@ class Run
     void solveAdditionalPhysics(double& dt, int& lvl);
     void solveSourceTerms(double& dt, int& lvl);
     void solveRelaxations(double& dt, int& lvl);
-    void verifyErrors() const;
+    void verifyErrors();
+    void saveInfosLES(std::vector<Cell*>* cellsLvl);
 
     // clang-format off
     int m_numTest;                             //!<Number of the simulation
@@ -109,7 +110,7 @@ class Run
     int m_dimension;                           //!<dimension 1, 2 or 3
     int m_MRF;                                 //!<source term for Moving Reference Frame computation index(in the list of source term)
     bool m_viscous;                            //!<Viscous flow additionnal physic option required to set proper wall boundary condition (false by default)
-    std::string m_order;                       //!<Precision scheme order (firstorder or secondOrder)
+    bool m_StrangSplitting;                    //!<Splitting boolean for secondOrder scheme (Godunov splitting or Strang splitting)
     bool m_extractRefLength;                   //!<Option to extract cells' reference length
     std::vector<GeometricalDomain*> m_solidDomains; //!<Solid domains (immersed boundaries)
 
@@ -167,11 +168,27 @@ class Run
     bool m_restartMeshMapping;                 //!<Option to set the mesh mapping restart option
     Output* m_outputMeshMapping;               //!<Output object containing info from simulation to be mapped (usually the rough mesh)
     std::string m_meshFileMapped;              //!<Filename of the mesh to be mapped
+
+    //LES statistics (used by Output::saveInfos)
+    double m_globalVolume;                     //!<Volume of the entire domain
+    double m_globalUiui;                       //!<Volume-weighted uiui (numerator only)
+    double m_globalEnstrophy;                  //!<Volume-weighted enstrophy (numerator only)
+    double m_globalTT;                         //!<Volume-weighted of temperature squared (numerator only)
+    double m_globalT;                          //!<Volume-weighted temperature (numerator only)
+    double m_globalThetaTheta;                 //!<Volume-weighted dilatation (numerator only)
+    double m_meanTemp;                         //!<Volume-weighted temperature of the domain
+
+    //Print message in case of warning
+    bool m_warn;                               //!<1 if at least one MPI process writes a warning file
+
     // clang-format on
 
     friend class Input;
     friend class Output;
     friend class OutputVTK;
+#ifdef ENABLE_HDF5
+    friend class OutputVTKHDF;
+#endif
     friend class OutputGNU;
     friend class OutputProbeGNU;
     friend class OutputCutGNU;

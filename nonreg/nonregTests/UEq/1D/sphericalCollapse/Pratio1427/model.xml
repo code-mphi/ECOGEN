@@ -7,4 +7,9 @@
 	<symmetryTerm type="spherical">
 		<dataSymSpher radialAxis="X"/>
 	</symmetryTerm>
+	<secondOrder>
+		<globalLimiter>mc</globalLimiter>
+		<globalVolumeFractionLimiter>thinc</globalVolumeFractionLimiter>
+    	<interfaceVolumeFractionLimiter>thinc</interfaceVolumeFractionLimiter>
+	</secondOrder>
 </model>

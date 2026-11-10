@@ -2,4 +2,7 @@
 <model>
 	<flowModel name="Euler"/>
 	<EOS name="IG_air.xml"/>
+	<secondOrder>
+		<globalLimiter>mc</globalLimiter>
+	</secondOrder>
 </model>

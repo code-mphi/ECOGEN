@@ -47,7 +47,8 @@ class ModPUEq : public ModUEq
     //! \brief     PUEq model constructor
     //! \param     numbTransports    number of additional transport equations
     //! \param     numbPhases        number of phases
-    ModPUEq(const int& numbTransports, const int& numbPhases);
+    //! \param     thresholdPressure threshold for pressure relaxation
+    ModPUEq(const int& numbTransports, const int& numbPhases, const double& thresholdPressure);
     ~ModPUEq() override;
 
     void allocateCons(Flux** cons) override;

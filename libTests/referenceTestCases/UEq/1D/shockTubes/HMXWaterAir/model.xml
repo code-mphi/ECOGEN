@@ -5,4 +5,7 @@
 	<EOS name="SG_HMX.xml"/>
 	<EOS name="SG_water.xml"/>
 	<relaxation type="P" speed="finite" rate="1." solver="Euler"/>
+	<secondOrder>
+		<globalLimiter>vanleer</globalLimiter>
+	</secondOrder>
 </model>

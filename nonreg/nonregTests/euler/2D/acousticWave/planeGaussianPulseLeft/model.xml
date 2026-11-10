@@ -10,4 +10,7 @@
 			</dataPlaneGaussianPulse>
 		</typeAcousticWave>
 	</sourceTerms>
+	<secondOrder>
+		<globalLimiter>mc</globalLimiter>
+	</secondOrder>
 </model>

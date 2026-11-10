@@ -77,11 +77,11 @@ void PhaseEulerHomogeneous::copyPhase(Phase& phase)
 
 //***************************************************************************
 
-void PhaseEulerHomogeneous::extendedCalculusPhase(const Coord& velocity)
+void PhaseEulerHomogeneous::extendedCalculusPhase(const Coord& mixtureVelocity)
 {
   m_energy      = m_eos->computeEnergy(m_density, m_pressure);
   m_soundSpeed  = m_eos->computeSoundSpeed(m_density, m_pressure);
-  m_totalEnergy = m_energy + 0.5 * velocity.squaredNorm();
+  m_totalEnergy = m_energy + 0.5 * mixtureVelocity.squaredNorm();
 }
 
 //****************************************************************************

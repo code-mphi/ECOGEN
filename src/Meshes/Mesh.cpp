@@ -32,7 +32,7 @@
 
 //***********************************************************************
 
-Mesh::Mesh() : m_numFichier(0), m_problemDimension(0) {}
+Mesh::Mesh() : m_numFile(0), m_problemDimension(0) {}
 
 //***********************************************************************
 
@@ -51,7 +51,7 @@ void Mesh::writeResultsGnuplot(std::vector<Cell*>* cellsLvl, std::ofstream& file
 //****************************** Parallele ***********************************
 //****************************************************************************
 
-void Mesh::initializePersistentCommunications(const TypeMeshContainer<Cell*>& cells, std::string ordreCalcul)
+void Mesh::initializePersistentCommunications(const TypeMeshContainer<Cell*>& cells, SimulationOrder schemeOrder)
 {
   int numberVariablesPhaseToSend(0);
   for (int k = 0; k < numberPhases; k++) {
@@ -60,7 +60,7 @@ void Mesh::initializePersistentCommunications(const TypeMeshContainer<Cell*>& ce
   int numberVariablesMixtureToSend = cells[0]->getMixture()->numberOfTransmittedVariables();
   int m_numberPrimitiveVariables   = numberVariablesPhaseToSend + numberVariablesMixtureToSend + numberTransports;
   int m_numberSlopeVariables(0);
-  if (ordreCalcul == "SECONDORDER") {
+  if (schemeOrder == SimulationOrder::second) {
 
     int numberSlopesPhaseToSend(0);
     int numberSlopesMixtureToSend(0);
@@ -91,5 +91,81 @@ void Mesh::initializePersistentCommunications(const TypeMeshContainer<Cell*>& ce
 //***********************************************************************
 
 void Mesh::finalizeParallele(const int& lvlMax) { parallel.finalize(lvlMax); }
+
+//***********************************************************************
+
+template <typename T> void Mesh::getData_body(Cell* cell, std::vector<T>& dataset, const int var, const int phase, const bool isAMR) const
+{
+  constexpr T eps20{1.e-20};
+
+  if (var > 0) { //We want to get the scalar data
+    if (phase >= 0) {
+      //phases data
+      dataset.push_back(static_cast<T>(cell->getPhase(phase)->returnScalar(var)));
+    }
+    else if (phase == -1) {
+      //mixture data
+      dataset.push_back(static_cast<T>(cell->getMixture()->returnScalar(var)));
+    }
+    else if (phase == -2) {
+      T transport = static_cast<T>(cell->getTransport(var - 1).getValue());
+      if (transport < eps20) {
+        transport = 0.;
+      }
+      dataset.push_back(static_cast<T>(transport));
+    }
+    else if (phase == -3) {
+      dataset.push_back(static_cast<T>(cell->getXi()));
+    }
+    else if (phase == -4) {
+      dataset.push_back(static_cast<T>(cell->getDensityGradient()));
+    }
+    else if (phase == -5 && isAMR) {
+      dataset.push_back(static_cast<T>(rankCpu));
+    }
+    else if (phase == -6 && isAMR) {
+      dataset.push_back(static_cast<T>(cell->getElement()->getKey().getIndex()));
+    }
+    else if (phase == -7) {
+      // Saturation pressure
+      dataset.push_back(static_cast<T>(cell->getPsat()));
+    }
+    else if (phase == -8) {
+      // Turbulent viscosity (nu_T)
+      dataset.push_back(static_cast<T>(cell->getQPA(turbulenceNumQPA)->getTurbulentViscosity()));
+    }
+    else {
+      Errors::errorMessage("getData: unknown number of phase: ", phase);
+    }
+  }
+  else {
+    //We want to get the vector data
+    if (phase >= 0) {
+      //Phases data
+      dataset.push_back(static_cast<T>(cell->getPhase(phase)->returnVector(-var).getX()));
+      dataset.push_back(static_cast<T>(cell->getPhase(phase)->returnVector(-var).getY()));
+      dataset.push_back(static_cast<T>(cell->getPhase(phase)->returnVector(-var).getZ()));
+    }
+    else if (phase == -1) {
+      //Mixture data
+      dataset.push_back(static_cast<T>(cell->getMixture()->returnVector(-var).getX()));
+      dataset.push_back(static_cast<T>(cell->getMixture()->returnVector(-var).getY()));
+      dataset.push_back(static_cast<T>(cell->getMixture()->returnVector(-var).getZ()));
+    }
+    else {
+      Errors::errorMessage("getData: unknown number of phase: ", phase);
+    }
+  } //End vector
+}
+
+//***********************************************************************
+
+//! \brief Instanciation of previous function with double type to force compilation of the function body and avoid link error
+template void Mesh::getData_body<double>(Cell*, std::vector<double>&, const int, const int, const bool) const;
+
+//***********************************************************************
+
+//! \brief Instanciation of previous function with float type to force compilation of the function body and avoid link error
+template void Mesh::getData_body<float>(Cell*, std::vector<float>&, const int, const int, const bool) const;
 
 //***********************************************************************

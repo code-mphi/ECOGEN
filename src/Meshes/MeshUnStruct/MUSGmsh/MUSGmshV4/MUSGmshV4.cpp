@@ -47,7 +47,7 @@ MUSGmshV4::~MUSGmshV4()
 }
 //***********************************************************************
 
-void MUSGmshV4::initGeometryMonoCPU(TypeMeshContainer<Cell*>& cells, TypeMeshContainer<CellInterface*>& cellInterfaces, std::string computeOrder)
+void MUSGmshV4::initGeometryMonoCPU(TypeMeshContainer<Cell*>& cells, TypeMeshContainer<CellInterface*>& cellInterfaces, SimulationOrder schemeOrder)
 {
   try {
     // 1) Reading nodes and elements
@@ -100,7 +100,7 @@ void MUSGmshV4::initGeometryMonoCPU(TypeMeshContainer<Cell*>& cells, TypeMeshCon
     // Assignment of cells to elements and counting inner faces
     m_numberInnerFaces = 0;
     for (int i = 0; i < m_numberCellsCalcul; i++) {
-      if (computeOrder == "FIRSTORDER") {
+      if (schemeOrder == SimulationOrder::first) {
         cells.push_back(new Cell);
       }
       else {
@@ -110,83 +110,11 @@ void MUSGmshV4::initGeometryMonoCPU(TypeMeshContainer<Cell*>& cells, TypeMeshCon
       m_numberInnerFaces += m_elements[i + m_numberBoundFaces]->getNumberFaces();
     }
 
-    m_numberInnerFaces -= m_numberBoundFaces; // We remove the boundaries
-    m_numberInnerFaces /= 2;                  // The internal faces are all counted twice => we restore the truth
-    m_numberFacesTotal  = m_numberInnerFaces + m_numberBoundFaces;
-
-    double volTot(0.);
-    for (int i = 0; i < m_numberCellsCalcul; i++) {
-      volTot += cells[i]->getElement()->getVolume();
-    }
-    std::cout << "Total volume : " << volTot << std::endl;
-
-    // 3) Building connectivity table
-    // -------------------------------
-    // Sizing faces array
-    m_faces = new FaceNS*[m_numberFacesTotal];
-    int** facesBuff;
-    int* sumNodesBuff; // We build a temporary array of faces to speed up the search process
-    facesBuff    = new int*[m_numberFacesTotal + 1];
-    sumNodesBuff = new int[m_numberFacesTotal + 1];
-    // Determination of the maximum number of nodes for the faces
-    int sizeFace(1); // Will be initialize at maximale size
-    if (m_numberElements3D != 0) {
-      if (m_numberQuadrangles != 0) {
-        sizeFace = 4;
-      }
-      else if (m_numberTriangles != 0) {
-        sizeFace = 3;
-      }
-      else {
-        Errors::errorMessage("Issue in initGeometryMonoCPU for initialization of facesBuff array");
-      }
-    }
-    else if (m_numberElements2D != 0) {
-      sizeFace = 2;
-    }
-    for (int i = 0; i < m_numberFacesTotal + 1; i++) {
-      facesBuff[i] = new int[sizeFace];
-    }
-
-    // Inner faces
-    int indexMaxFaces(0);
-    clock_t tTemp(clock());
-    double t1(0.);
-    std::cout << "  1/Building faces ..." << std::endl;
-    int printFrequency(std::max((m_numberElements - m_numberBoundFaces) / 10, 1));
-    for (int i = m_numberBoundFaces; i < m_numberElements; i++) {
-      if ((i - m_numberBoundFaces) % printFrequency == 0) {
-        std::cout << "    " << (100 * (i - m_numberBoundFaces) / (m_numberElements - m_numberBoundFaces)) << "% ... " << std::endl;
-      }
-      m_elements[i]->construitFaces(m_nodes, m_faces, indexMaxFaces, facesBuff, sumNodesBuff);
-    }
-    for (int i = 0; i < m_numberFacesTotal + 1; i++) {
-      delete[] facesBuff[i];
-    }
-    delete[] facesBuff;
-    delete[] sumNodesBuff;
-    tTemp = clock() - tTemp;
-    t1    = static_cast<double>(tTemp) / CLOCKS_PER_SEC;
-    std::cout << "    OK in " << t1 << " seconds" << std::endl;
-
-    // Boundaries
-    std::cout << "  2/Boundary elements attribution to boundary faces ..." << std::endl;
-    tTemp          = clock();
-    printFrequency = std::max(m_numberBoundFaces / 10, 1);
-    for (int i = 0; i < m_numberBoundFaces; i++) {
-      if (i % printFrequency == 0) {
-        std::cout << "    " << (100 * i / m_numberBoundFaces) << "% ... " << std::endl;
-      }
-      // Assigning the boundary
-      m_elements[i]->attributFaceLimite(m_faces, indexMaxFaces);
-    }
-    tTemp = clock() - tTemp;
-    t1    = static_cast<double>(tTemp) / CLOCKS_PER_SEC;
-    std::cout << "    OK in " << t1 << " seconds" << std::endl;
+    this->initGeometryMonoCPU_common(cells);
 
     // Link Geometry/cellInterfaces of compute
     std::cout << "  3/Linking Geometries -> Physics ..." << std::endl;
-    tTemp = clock();
+    double tTemp{MPI_Wtime()};
     int iCellL, iCellR;
     for (int i = 0; i < m_numberFacesTotal; i++) {
       if (m_faces[i]->getEstLimite()) // Physical boundary faces
@@ -202,7 +130,7 @@ void MUSGmshV4::initGeometryMonoCPU(TypeMeshContainer<Cell*>& cells, TypeMeshCon
       }
       // Inner faces of domain
       else {
-        if (computeOrder == "FIRSTORDER") {
+        if (schemeOrder == SimulationOrder::first) {
           cellInterfaces.push_back(new CellInterface);
         }
         else {
@@ -217,9 +145,8 @@ void MUSGmshV4::initGeometryMonoCPU(TypeMeshContainer<Cell*>& cells, TypeMeshCon
       cells[iCellR]->addCellInterface(cellInterfaces[i]);
 
     } // End face
-    tTemp = clock() - tTemp;
-    t1    = static_cast<float>(tTemp) / CLOCKS_PER_SEC;
-    std::cout << "    OK in " << t1 << " seconds" << std::endl;
+    tTemp = MPI_Wtime() - tTemp;
+    std::cout << "    OK in " << tTemp << " seconds" << std::endl;
     std::cout << "... BUILDING GEOMETRY COMPLETE " << std::endl;
     std::cout << "------------------------------------------------------" << std::endl;
   }
@@ -244,7 +171,7 @@ void MUSGmshV4::initGeometryMonoCPU(TypeMeshContainer<Cell*>& cells, TypeMeshCon
 //		// -----------------
 //		std::cout << "------------------------------------------------------" << std::endl;
 //		std::cout << " C0) MESH FILE PRETRAITEMENT " + m_meshFile + " IN PROGRESS ..." << std::endl;
-//		clock_t totalTime(clock());
+//		double totalTime(MPI_Wtime());
 //		std::ifstream meshFile(m_meshFile.c_str(), std::ios::in);
 //		if (!meshFile) { throw ErrorMeshNS("mesh file not found :" + m_meshFile, __FILE__, __LINE__); }
 //		std::string currentLine;

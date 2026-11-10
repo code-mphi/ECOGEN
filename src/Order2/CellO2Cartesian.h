@@ -59,6 +59,16 @@ class CellO2Cartesian : public CellO2
                                   Limiter& interfaceVolumeFractionLimiter,
                                   double& epsInterface) override;
 
+    void computeLocalSlopesPeriodic(CellInterface& cellInterfaceRef,
+                                    Limiter& globalLimiter,
+                                    Limiter& interfaceLimiter,
+                                    Limiter& globalVolumeFractionLimiter,
+                                    Limiter& interfaceVolumeFractionLimiter,
+                                    double& alphaCellAfterOppositeSide,
+                                    double& alphaCell,
+                                    double& alphaCellOtherInterfaceSide,
+                                    double& epsInterface) override;
+
     //Pour methode AMR
     void createChildCell(const int& lvl) override; /*!< Creer une cell enfant (non initializee) */
 

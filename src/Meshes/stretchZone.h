@@ -40,19 +40,37 @@
 class stretchZone
 {
   public:
-    //! \brief     improved stretched zone constructor
-    stretchZone(double startAt, double endtAt, double factor, int numberCells);
+    //! \brief  Stretched zone constructor
+    //
+    //! Stretched zone constructor: compute number of cells from mesh stretching area size,
+    //          size of reference cell and progression factor applied to reference cell.
+    //          Store data needed to apply stretching later.
+    //! \param  startAt       position of beginning of mesh stretching area
+    //! \param  endAt         position of end of mesh stretching area
+    //! \param  factor        mesh stretching factor: 1. means no stretching, value lower than 1. means mesh shrinking
+    //                        and value greater than 1. mesh coarsening.
+    //! \param  refCellSize   size of reference cell to which mesh stretching factor is applied
+    //! \param  refCellPos    position of the reference cell ('end' or 'start')
+    stretchZone(double startAt, double endtAt, double factor, double refCellSize, std::string refCellPos);
     virtual ~stretchZone();
 
     int stretching(std::vector<double>& dX, std::vector<double>& posX);
 
     static int verifyStretching(std::vector<stretchZone>& tabStretch, const double l, std::string fileName = "");
 
+    // Accessors
+    const int& getNumberCells() const { return m_numberCells; };
+
   private:
-    double m_startAt;  //!< zone starting position along corresponding axis
-    double m_endAt;    //!< zone ending position along corresponding axis
-    double m_factor;   //!< stretching factor (1. is no stretching)
-    int m_numberCells; //!< number of cells in the stretched zone
+    double m_startAt;         //!< zone starting position along corresponding axis
+    double m_endAt;           //!< zone ending position along corresponding axis
+    double m_factor;          //!< stretching factor (1. is no stretching)
+    double m_refCellSize;     //!< size of reference cell
+    int m_numberCells;        //!< number of cells in the stretched zone
+    std::string m_refCellPos; //!< position of reference cell (start or end)
+
+    int32_t safe_round_to_int32(double x) const;
+    void factorCorrection(double l);
 };
 
 #endif // STRETCHZONE_H

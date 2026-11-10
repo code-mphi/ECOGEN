@@ -58,7 +58,7 @@ OutputBoundaryGNU::OutputBoundaryGNU(std::string casTest, std::string run, tinyx
     m_folderOutput        = config.getWorkFolder() + "results/" + run + "/boundaries/";
     m_folderScriptGnuplot = "";
     m_splitData           = false;
-    m_numFichier          = 0;
+    m_numFile             = 0;
     m_input               = entree;
     m_run                 = m_input->getRun();
 

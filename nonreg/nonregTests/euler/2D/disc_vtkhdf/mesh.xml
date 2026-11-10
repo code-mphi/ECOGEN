@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" standalone = "yes"?>
+<mesh>
+  <type structure="unStructured"/>
+  <unstructuredMesh>
+    <!-- <file name="libMeshes/disc/discStructTwoRegions.msh"/> -->
+    <file name="libMeshes/disc/discUnstructTwoRegions.msh"/>
+    <extractReferenceLength state="true"/>
+    <parallel GMSHPretraitement="true"/>
+  </unstructuredMesh>
+</mesh>

@@ -7,13 +7,6 @@
 		<physicalTime totalTime="0.1" timeFreq="0.1"/>
 	</timeControlMode>
 	<computationControl CFL="0.5"/>
-  <!-- <resumeSimulation resumeFileNumber="1000" AMRsaveFreq="0"/> -->
-
-	<!-- <secondOrder>
-		<globalLimiter>vanleer</globalLimiter>
-		<globalVolumeFractionLimiter>mc</globalVolumeFractionLimiter>
-    	<interfaceVolumeFractionLimiter>mc</interfaceVolumeFractionLimiter>
-	</secondOrder> -->
-
-  <psat record="true"/>
+	<!-- <resumeSimulation resumeFileNumber="1000" AMRsaveFreq="0"/> -->
+	<psat record="true"/>
 </computationParam>

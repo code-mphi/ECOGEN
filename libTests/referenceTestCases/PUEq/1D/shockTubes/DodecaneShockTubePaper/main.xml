@@ -1,0 +1,12 @@
+<?xml version = "1.0" encoding = "UTF-8" standalone = "yes"?>
+<computationParam>
+	<run>pressureVelocityEq1Devaporation_5Ondes_Papier2008</run>
+	<outputMode format="GNU" binary="false" precision="10"/>
+	<timeControlMode iterations="false">
+		<iterations number="200" iterFreq="1"/>
+		<physicalTime totalTime="473e-6" timeFreq="473e-6"/>
+	</timeControlMode>
+	<computationControl CFL="0.5"/>
+  <!-- <resumeSimulation resumeFileNumber="98" AMRsaveFreq="0"/> -->
+	<psat record="true"/>
+</computationParam>

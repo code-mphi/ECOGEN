@@ -79,9 +79,10 @@ void CellInterfaceO2Cartesian::computeSlopes(Prim type)
 {
   if (m_cellInterfacesChildren.size() == 0) {
     //Distance between the two cells in contact
-    double distance(m_cellLeft->distance(m_cellRight));
-    //Attribution gauche/droite
-    //Si la cell gauche ou droite est de niveau inferieur a "lvl", on ne prend pas "type" mais vecPhases (ca evite de prendre vecPhaseO2 alors qu'on ne l'a pas).
+    double distance_(m_cellLeft->distance(m_cellRight));
+
+    //Attribution left/right
+    //If the left or the right cell is of level inferior to "lvl", we do not take "type" but vecPhases (this voids taking vecPhasesO2 when we don't have it).
     Prim typeGauche = type;
     Prim typeDroite = type;
     if (m_cellLeft->getLvl() < m_lvl) {
@@ -92,13 +93,13 @@ void CellInterfaceO2Cartesian::computeSlopes(Prim type)
     }
 
     for (int k = 0; k < numberPhases; k++) {
-      m_vecPhasesSlopes[k]->computeSlopesPhase(*m_cellLeft->getPhase(k, typeGauche), *m_cellRight->getPhase(k, typeDroite), distance);
+      m_vecPhasesSlopes[k]->computeSlopesPhase(*m_cellLeft->getPhase(k, typeGauche), *m_cellRight->getPhase(k, typeDroite), distance_);
     }
-    m_mixtureSlopes->computeSlopesMixture(*m_cellLeft->getMixture(typeGauche), *m_cellRight->getMixture(typeDroite), distance);
+    m_mixtureSlopes->computeSlopesMixture(*m_cellLeft->getMixture(typeGauche), *m_cellRight->getMixture(typeDroite), distance_);
     for (int k = 0; k < numberTransports; k++) {
       m_vecTransportsSlopes[k].computeSlopeTransport(m_cellLeft->getTransport(k, typeGauche).getValue(),
                                                      m_cellRight->getTransport(k, typeDroite).getValue(),
-                                                     distance);
+                                                     distance_);
     }
   }
 }
@@ -112,7 +113,7 @@ void CellInterfaceO2Cartesian::solveRiemann(double& dtMax,
                                             Limiter& interfaceVolumeFractionLimiter,
                                             Prim type)
 {
-  //Si la cell gauche ou droite est de niveau inferieur a "lvl", on ne prend pas "type" mais vecPhases (ca evite de prendre vecPhaseO2 alors qu'on ne l'a pas).
+  //If the left or the right cell is of level inferior to "lvl", we do not take "type" but vecPhases (this voids taking vecPhasesO2 when we don't have it).
   if (m_cellLeft->getLvl() == m_lvl) {
     bufferCellLeft->copyVec(m_cellLeft->getPhases(type), m_cellLeft->getMixture(type), m_cellLeft->getTransports(type));
   }
@@ -127,7 +128,7 @@ void CellInterfaceO2Cartesian::solveRiemann(double& dtMax,
     bufferCellRight->copyVec(m_cellRight->getPhases(vecPhases), m_cellRight->getMixture(vecPhases), m_cellRight->getTransports(vecPhases));
   }
 
-  //Calcul des distances cell interface <-> cells pour l extrapolation
+  //Computation of distances cell interface <-> cells for the extrapolation
   double distanceGauche(this->distance(m_cellLeft));
   double distanceDroite(this->distance(m_cellRight));
 
@@ -138,7 +139,7 @@ void CellInterfaceO2Cartesian::solveRiemann(double& dtMax,
   alphaCellLeft  = bufferCellLeft->getPhase(phase0)->getAlpha();
   alphaCellRight = bufferCellRight->getPhase(phase0)->getAlpha();
 
-  //Extrapolation gauche
+  //Extrapolation left
   m_cellLeft->computeLocalSlopes(*this,
                                  globalLimiter,
                                  interfaceLimiter,
@@ -152,7 +153,9 @@ void CellInterfaceO2Cartesian::solveRiemann(double& dtMax,
     bufferCellLeft->getPhase(k)->extrapolate(*slopesPhasesLocal1[k], distanceGauche);
     bufferCellLeft->getPhase(k)->verifyAndCorrectPhase();
     bufferCellLeft->getPhase(k)->verifyAndCorrectDensityMax();
+    model->setPhaseSlope(*slopesPhasesLocal1[k], k); // NEqDEM specificity for in-cell Lagrangian term
   }
+  model->setSlopeDistance(2. * distanceGauche); // NEqDEM in-cell term to span the full cell
   bufferCellLeft->getMixture()->extrapolate(*slopesMixtureLocal1, distanceGauche);
   for (int k = 0; k < numberTransports; k++) {
     bufferCellLeft->getTransport(k).extrapolate(slopesTransportLocal1[k], distanceGauche);
@@ -184,7 +187,7 @@ void CellInterfaceO2Cartesian::solveRiemann(double& dtMax,
     }
   }
 
-  //Extrapolation droite
+  //Extrapolation right
   m_cellRight->computeLocalSlopes(*this,
                                   globalLimiter,
                                   interfaceLimiter,
@@ -241,7 +244,7 @@ void CellInterfaceO2Cartesian::solveRiemann(double& dtMax,
   bufferCellLeft->localProjection(m_face->getNormal(), m_face->getTangent(), m_face->getBinormal());
   bufferCellRight->localProjection(m_face->getNormal(), m_face->getTangent(), m_face->getBinormal());
 
-  //Probleme de Riemann
+  //Riemann problem
   double dxLeft(m_cellLeft->getElement()->getLCFL());
   double dxRight(m_cellRight->getElement()->getLCFL());
   dxLeft  = dxLeft * std::pow(2., (double)m_lvl);
@@ -252,7 +255,7 @@ void CellInterfaceO2Cartesian::solveRiemann(double& dtMax,
     model->solveRiemannTransportIntern(*bufferCellLeft, *bufferCellRight);
   }
 
-  //Projection du flux sur le repere absolu
+  //Projection of flux on the absolu coordinate system
   model->reverseProjection(m_face->getNormal(), m_face->getTangent(), m_face->getBinormal());
 }
 

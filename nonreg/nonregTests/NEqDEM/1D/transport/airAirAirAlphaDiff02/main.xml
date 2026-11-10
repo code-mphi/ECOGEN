@@ -1,0 +1,11 @@
+<?xml version = "1.0" encoding = "UTF-8" standalone = "yes"?>
+<computationParam>
+	<run>nonEqDEM1DTransportAirAirAir02</run>
+	<outputMode format="GNU" binary="false" precision="10"/>
+	<timeControlMode iterations="true">
+		<iterations number="10" iterFreq="10"/>
+		<physicalTime totalTime="1.e-2" timeFreq="1.e-3"/>
+	</timeControlMode>
+	<computationControl CFL="0.8"/>
+	<!-- <resumeSimulation resumeFileNumber="0" AMRsaveFreq="0"/> -->
+</computationParam>

@@ -81,7 +81,49 @@ void GradientFiniteDifference::computeGradients(Cell* cell,
                           grads[g].getZ() + cell->getCellInterface(b)->getFace()->getNormal().getZ() * gradCellInterface * distanceZ);
         }
       }
-      else {
+      else if (typeCellInterface == TypeBC::PERIODIC) // Periodic treatment
+      {
+        double coeff(0.);
+        // Sum for each cell interface with ponderation using distance in each direction
+        // then the cell gradient is normalized by sum of distances.
+        for (int r = 0; r < cell->getCellInterface(b)->getCellRight()->getCellInterfacesSize(); r++) {
+          // Loop on right cellInterfaces until the interface with parallel normal is found
+          coeff = std::fabs(cell->getCellInterface(b)->getFace()->getNormal().scalar(
+            cell->getCellInterface(b)->getCellRight()->getCellInterface(r)->getFace()->getNormal()));
+
+          if (coeff > 0.5) {
+            distanceX = std::fabs(cell->getCellInterface(b)->getCellLeft()->distanceX(cell->getCellInterface(b))) +
+                        std::fabs(
+                          cell->getCellInterface(b)->getCellRight()->distanceX(cell->getCellInterface(b)->getCellRight()->getCellInterface(r)));
+            distanceY = std::fabs(cell->getCellInterface(b)->getCellLeft()->distanceY(cell->getCellInterface(b))) +
+                        std::fabs(
+                          cell->getCellInterface(b)->getCellRight()->distanceY(cell->getCellInterface(b)->getCellRight()->getCellInterface(r)));
+            distanceZ = std::fabs(cell->getCellInterface(b)->getCellLeft()->distanceZ(cell->getCellInterface(b))) +
+                        std::fabs(
+                          cell->getCellInterface(b)->getCellRight()->distanceZ(cell->getCellInterface(b)->getCellRight()->getCellInterface(r)));
+            break;
+          }
+        }
+
+        sumDistanceX += distanceX;
+        sumDistanceY += distanceY;
+        sumDistanceZ += distanceZ;
+        distance      = std::sqrt(distanceX * distanceX + distanceY * distanceY + distanceZ * distanceZ);
+
+        // Extracting left and right variables values for each cell interface
+        // and calculus of the gradients normal to the face
+        for (unsigned int g = 0; g < grads.size(); g++) {
+          cg                = cell->getCellInterface(b)->getCellLeft()->selectScalar(nameVariables[g], numPhases[g]);
+          cd                = cell->getCellInterface(b)->getCellRight()->selectScalar(nameVariables[g], numPhases[g]);
+          gradCellInterface = (cd - cg) / distance;
+
+          // Projection in the absolute system of coordinate
+          grads[g].setXYZ(grads[g].getX() + cell->getCellInterface(b)->getFace()->getNormal().getX() * gradCellInterface * distanceX,
+                          grads[g].getY() + cell->getCellInterface(b)->getFace()->getNormal().getY() * gradCellInterface * distanceY,
+                          grads[g].getZ() + cell->getCellInterface(b)->getFace()->getNormal().getZ() * gradCellInterface * distanceZ);
+        }
+      }
+      else { //Every other boundary conditions
         distanceX     = std::fabs(cell->distanceX(cell->getCellInterface(b))) * 2.;
         distanceY     = std::fabs(cell->distanceY(cell->getCellInterface(b))) * 2.;
         distanceZ     = std::fabs(cell->distanceZ(cell->getCellInterface(b))) * 2.;
@@ -97,15 +139,15 @@ void GradientFiniteDifference::computeGradients(Cell* cell,
             cg                = cell->getCellInterface(b)->getCellLeft()->selectScalar(nameVariables[g], numPhases[g]);
             gradCellInterface = -cg / distance;
 
-            if (typeCellInterface == SYMMETRY) {
+            if (typeCellInterface == TypeBC::SYMMETRY) {
               // Multiplication of the gradient by the normal direction to guarantee symmetry
               if (nameVariables[g] == Variable::velocityU) {
                 gradCellInterface = gradCellInterface * std::fabs(cell->getCellInterface(b)->getFace()->getNormal().getX());
               }
-              if (nameVariables[g] == Variable::velocityV) {
+              else if (nameVariables[g] == Variable::velocityV) {
                 gradCellInterface = gradCellInterface * std::fabs(cell->getCellInterface(b)->getFace()->getNormal().getY());
               }
-              if (nameVariables[g] == Variable::velocityW) {
+              else { //nameVariables[g] == Variable::velocityW
                 gradCellInterface = gradCellInterface * std::fabs(cell->getCellInterface(b)->getFace()->getNormal().getZ());
               }
 
@@ -114,7 +156,31 @@ void GradientFiniteDifference::computeGradients(Cell* cell,
                               grads[g].getY() + cell->getCellInterface(b)->getFace()->getNormal().getY() * gradCellInterface * distanceY,
                               grads[g].getZ() + cell->getCellInterface(b)->getFace()->getNormal().getZ() * gradCellInterface * distanceZ);
             }
-            else if (typeCellInterface == WALL) {
+            else if (typeCellInterface == TypeBC::WALL) {
+              // Projection in the absolute system of coordinate
+              grads[g].setXYZ(grads[g].getX() + cell->getCellInterface(b)->getFace()->getNormal().getX() * gradCellInterface * distanceX,
+                              grads[g].getY() + cell->getCellInterface(b)->getFace()->getNormal().getY() * gradCellInterface * distanceY,
+                              grads[g].getZ() + cell->getCellInterface(b)->getFace()->getNormal().getZ() * gradCellInterface * distanceZ);
+            }
+            else if (typeCellInterface == TypeBC::MOVINGWALL) {
+              // Add the moving wall velocity component only in its normal direction
+              double wallVelocity = cell->getCellInterface(b)->getWallVelocity();
+              if (nameVariables[g] == Variable::velocityU) {
+                if (std::fabs(cell->getCellInterface(b)->getFace()->getNormal().getX()) > 0.5) {
+                  gradCellInterface += wallVelocity / distance;
+                }
+              }
+              else if (nameVariables[g] == Variable::velocityV) {
+                if (std::fabs(cell->getCellInterface(b)->getFace()->getNormal().getY()) > 0.5) {
+                  gradCellInterface += wallVelocity / distance;
+                }
+              }
+              else { //nameVariables[g] == Variable::velocityW
+                if (std::fabs(cell->getCellInterface(b)->getFace()->getNormal().getZ()) > 0.5) {
+                  gradCellInterface += wallVelocity / distance;
+                }
+              }
+
               // Projection in the absolute system of coordinate
               grads[g].setXYZ(grads[g].getX() + cell->getCellInterface(b)->getFace()->getNormal().getX() * gradCellInterface * distanceX,
                               grads[g].getY() + cell->getCellInterface(b)->getFace()->getNormal().getY() * gradCellInterface * distanceY,

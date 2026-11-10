@@ -51,6 +51,8 @@ Tensor tensorX6;
 Tensor tensorU;
 Tensor tensorV;
 Tensor tensorQ;
+Tensor tensorStrainRate;
+Tensor tensorStrainRateTranspose;
 
 Tensor::Tensor()
 {
@@ -457,6 +459,17 @@ double Tensor::infinityNorm() const
 
 //*********************************************************************
 
+double Tensor::frobeniusNorm() const
+{
+  double sumSq(0.);
+  for (int i = 0; i < 9; ++i) {
+    sumSq += m_array[i] * m_array[i];
+  }
+  return std::sqrt(sumSq);
+}
+
+//*********************************************************************
+
 void Tensor::exponentialPade(Tensor& tensorExpPade)
 {
   double normA(this->infinityNorm());
@@ -561,10 +574,10 @@ void Tensor::eigen(Tensor& eigenvalues, Tensor& eigenvectors) const
 
 //*******************SURCHARGES OPERATEURS*****************************
 
-Tensor& Tensor::operator=(const double& scalar)
+Tensor& Tensor::operator=(const double& scalar_)
 {
   for (int i = 0; i < 9; i++) {
-    m_array[i] = scalar;
+    m_array[i] = scalar_;
   }
   return *this;
 }
@@ -581,39 +594,39 @@ Tensor& Tensor::operator=(const Tensor& a)
 
 //*********************************************************************
 
-Tensor& Tensor::operator*=(const double& scalar)
+Tensor& Tensor::operator*=(const double& scalar_)
 {
   for (int i = 0; i < 9; i++) {
-    m_array[i] *= scalar;
+    m_array[i] *= scalar_;
   }
   return *this;
 }
 
 //*********************************************************************
 
-Tensor& Tensor::operator/=(const double& scalar)
+Tensor& Tensor::operator/=(const double& scalar_)
 {
   for (int i = 0; i < 9; i++) {
-    m_array[i] /= scalar;
+    m_array[i] /= scalar_;
   }
   return *this;
 }
 
 //*********************************************************************
 
-Tensor Tensor::operator*(const double& scalar) const
+Tensor Tensor::operator*(const double& scalar_) const
 {
   Tensor copie(*this);
-  copie *= scalar;
+  copie *= scalar_;
   return copie;
 }
 
 //*********************************************************************
 
-Tensor Tensor::operator/(const double& scalar) const
+Tensor Tensor::operator/(const double& scalar_) const
 {
   Tensor copie(*this);
-  copie /= scalar;
+  copie /= scalar_;
   return copie;
 }
 
@@ -640,10 +653,10 @@ Tensor& Tensor::operator-=(const Tensor& a)
 //*********************************************************************
 //Surcharge operateur externe a la classe car prends deux arguments
 
-Tensor operator*(const double& scalar, const Tensor& a)
+Tensor operator*(const double& scalar_, const Tensor& a)
 {
   Tensor copy(a);
-  copy *= scalar;
+  copy *= scalar_;
   return copy;
 }
 

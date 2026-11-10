@@ -44,7 +44,11 @@
 #include "BoundCondOutletPressure.h"
 #include "BoundCondOutletMassflow.h"
 #include "BoundCondNullFlux.h"
-#include "BoundCondPiston.h"
+#include "BoundCondPeriodic.h"
+#include "BoundCondPeriodicO2Cartesian.h"
+#include "BoundCondMovingWall.h"
+#include "BoundCondMovingWallO2Cartesian.h"
+#include "BoundCondMovingWallO2NS.h"
 
 //Add here header of new boundary conditions
 

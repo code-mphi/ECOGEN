@@ -1,0 +1,12 @@
+# arm64 Darwin 24.3.0
+leak:libopen-pal.*
+leak:libmpi.*
+leak:libsystem_pthread.*
+leak:libsystem_c.*
+leak:dyld4::API*
+
+# x86_64 Debian 5.10
+leak:__interceptor_strdup
+leak:__interceptor_malloc
+leak:__interceptor_calloc
+leak:__interceptor_realloc

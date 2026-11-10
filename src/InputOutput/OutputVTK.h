@@ -42,9 +42,7 @@ class OutputVTK : public Output
 
     void initializeSpecificOutput() override;
     void writeResults(Mesh* mesh, std::vector<Cell*>* cellsLvl) override;
-
-    void readResults(Mesh* mesh, std::vector<Cell*>* cellsLvl) override;
-    void readResultsCpu(Mesh* mesh, std::vector<Cell*>* cellsLvl, int cpu) override;
+    void readResults(Mesh* mesh, std::vector<Cell*>* cellsLvl, int cpu = -1) override;
 
   protected:
     void ReadPhysicalDataVTK(Mesh* mesh, std::vector<Cell*>* cellsLvl, tinyxml2::XMLElement* nodeCellData, std::string fileName = "Unknown file");
@@ -53,18 +51,13 @@ class OutputVTK : public Output
 
     void writeResultsVTK(Mesh* mesh, std::vector<Cell*>* cellsLvl);
     void writeCollectionVTK(Mesh* mesh);
-    void writePhysicalDataVTK(Mesh* mesh, std::vector<Cell*>* cellsLvl, std::ofstream& fileStream, bool parallel = false);
+    void writePhysicalDataVTK(Mesh* mesh, std::vector<Cell*>* cellsLvl, std::ofstream& fileStream);
 
     //Dependant du type de mesh
-    void writeMeshRectilinearVTK(Mesh* mesh, std::ofstream& fileStream, bool parallel = false);
-    void writeMeshUnstructuredVTK(Mesh* mesh, std::vector<Cell*>* cellsLvl, std::ofstream& fileStream, bool parallel = false);
-    void writeFinFichierRectilinearVTK(std::ofstream& fileStream, bool parallel = false);
-    void writeFinFichierUnstructuredVTK(std::ofstream& fileStream, bool parallel = false);
-
-    //Non used / old
-    // void writeFichierParallelXML(Mesh *mesh, std::vector<Cell*>* cellsLvl);
-    // void writeFinFichierPolyDataXML(std::ofstream &fileStream, bool parallel = false);
-    // void writeMeshPolyDataXML(Mesh *mesh, std::vector<Cell*>* cellsLvl, std::ofstream &fileStream, const int& lvl, bool parallel = false);
+    void writeMeshRectilinearVTK(Mesh* mesh, std::ofstream& fileStream);
+    void writeMeshUnstructuredVTK(Mesh* mesh, std::vector<Cell*>* cellsLvl, std::ofstream& fileStream);
+    void writeRectilinearVTKFileEnd(std::ofstream& fileStream);
+    void writeUnstructuredVTKFileEnd(std::ofstream& fileStream);
 };
 
 #endif //OUTPUTVTK_H

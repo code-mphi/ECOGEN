@@ -7,9 +7,6 @@
     <physicalTime totalTime="50e-6" timeFreq="0.5e-6"/>
   </timeControlMode>
   <computationControl CFL="0.6"/>
-  <secondOrder>
-    <globalLimiter>mc</globalLimiter>
-  </secondOrder>
   <probe name="sensor1">
     <vertex x="33.e-3" y="1.e-10" z="0.0001"/>
     <timeControl acqFreq="-1."/>       <!-- if negative or nul, recording at each time step -->

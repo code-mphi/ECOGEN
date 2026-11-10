@@ -83,6 +83,8 @@ class ModEuler : public Model
                                const Coord& binormal,
                                const Coord& position) const override;
     void solveRiemannWall(Cell& cellLeft, const double& dxLeft, double& dtMax, std::vector<double>& boundData) const override;
+    void
+    solveRiemannMovingWall(Cell& cellLeft, const double& dxLeft, double& dtMax, double wallVelocity, std::vector<double>& boundData) const override;
     void solveRiemannInletTank(Cell& cellLeft,
                                const double& dxLeft,
                                double& dtMax,
@@ -116,7 +118,7 @@ class ModEuler : public Model
     //--------------------------
     void solveRiemannTransportIntern(Cell& cellLeft, Cell& cellRight) override;
     void solveRiemannTransportWall() override;
-    void solveRiemannTransportPiston(Cell& cellLeft, double uPiston) override;
+    void solveRiemannTransportMovingWall(Cell& cellLeft, double wallVelocity) override;
     void solveRiemannTransportInletTank(Cell& cellLeft, double* valueTransports) override;
     void solveRiemannTransportInletInjStagState(Cell& cellLeft, double* valueTransports) override;
     void solveRiemannTransportOutletPressure(Cell& cellLeft, double* valueTransport) override;

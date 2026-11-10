@@ -49,7 +49,7 @@ class BoundCondWallO2NS : public BoundCondWall
                       Limiter& /*interfaceVolumeFractionLimiter*/,
                       Prim type = vecPhases) override;
 
-    int whoAmI() const override { return WALL; };
+    int whoAmI() const override { return TypeBC::WALL; };
 };
 
 #endif // BOUNDCONDWALLO2NS_H

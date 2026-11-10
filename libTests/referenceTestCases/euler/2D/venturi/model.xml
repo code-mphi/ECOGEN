@@ -3,4 +3,8 @@
   <flowModel name="Euler"/>
   <EOS name="SG_waterLiq_venturi.xml"/>
   <lowMach state="false"/>
+
+  <gradient>
+		<method>green-gauss</method>
+	</gradient>
 </model>

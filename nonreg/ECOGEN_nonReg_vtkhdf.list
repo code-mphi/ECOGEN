@@ -1,0 +1,34 @@
+#
+# -------- List of test cases to test VTKHDF I/Os
+#
+# 1D cases
+# Cartesian
+./nonreg/nonregTests/PUEq/1D/evapExpansionTubeEquilibrium_vtkhdf/ 1
+# AMR
+./nonreg/nonregTests/euler/1D/shockTubes/HPLeft_vtkhdf/ 2
+
+# 2D cases
+# Unstructured
+./nonreg/nonregTests/euler/2D/HPUnstructured_vtkhdf/ 2
+./nonreg/nonregTests/euler/2D/HPUnstructuredMeshMappingRestartPar_vtkhdf/ 3
+./nonreg/nonregTests/euler/2D/disc_vtkhdf/ 3
+# Cartesian
+./nonreg/nonregTests/UEq/2D/acousticWave/planeSinusoidalPulseFinite0_vtkhdf/ 7
+# AMR
+./nonreg/nonregTests/PUEq/AddPhysicalEffects/surfaceTension/dropletImpact_vtkhdf/ 7
+./nonreg/nonregTests/PUEq/AddPhysicalEffects/surfaceTension/dropletImpact_resume_vtkhdf/ 7
+
+# 3D cases
+# Unstructured
+./nonreg/nonregTests/PUEq/3D/unstructured_vtkhdf/ 7
+# Cartesian
+./nonreg/nonregTests/UEq/3D/shockBubble/heliumAir_cartesian_vtkhdf/ 7
+./nonreg/nonregTests/UEq/3D/shockBubble/heliumAir_cartesian_resume_vtkhdf/ 7
+# AMR
+./nonreg/nonregTests/PUEq/3D/shockBubble/heliumAir_vtkhdf/ 7
+
+# Wrong attributes
+## Precision
+./nonreg/nonregTests/euler/1D/shockTubes/HPLeft_vtkhdf_precisionError/ 2 2
+## Binary
+./nonreg/nonregTests/euler/1D/shockTubes/HPLeft_vtkhdf_binaryError/ 2 2

@@ -11,4 +11,10 @@
     <dataHeating volumeHeatPower="-5.e7"/>
   </sourceTerms>
 
+	<!-- <secondOrder>
+		<globalLimiter>vanleer</globalLimiter>
+		<globalVolumeFractionLimiter>mc</globalVolumeFractionLimiter>
+    	<interfaceVolumeFractionLimiter>mc</interfaceVolumeFractionLimiter>
+	</secondOrder> -->
+
 </model>

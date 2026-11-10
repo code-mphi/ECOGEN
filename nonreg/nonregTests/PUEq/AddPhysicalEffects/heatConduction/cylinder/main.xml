@@ -7,7 +7,4 @@
 		<physicalTime totalTime="0.01" timeFreq="0.005"/>
 	</timeControlMode>
 	<computationControl CFL="0.2"/>
-	<secondOrder>
-		<globalLimiter>vanleer</globalLimiter>
-	</secondOrder>
 </computationParam>

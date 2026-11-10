@@ -1,0 +1,12 @@
+<?xml version = "1.0" encoding = "UTF-8" standalone = "yes"?>
+<model>
+	<flowModel name="ExtendedNavierStokesKorteweg1D" lambda="5e2." beta="1e-3" tau="0." eps="3."/>
+	<EOS name="NLS.xml"/>
+	<!-- <splitting type="strang"/> -->
+	<secondOrder>
+		<globalLimiter>minmod</globalLimiter>
+	</secondOrder>
+	<gradient>
+		<method>finite-difference</method>
+	</gradient>
+</model>

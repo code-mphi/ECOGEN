@@ -1,0 +1,11 @@
+<?xml version = "1.0" encoding = "UTF-8" standalone = "yes"?>
+<model>
+    <flowModel name="NonEqDEM" numberPhases="2" alphaNull="true" RiemannSolver="HLLC" contactAreas="symmetric"/>
+	<EOS name="SG_water_cavitation.xml"/>
+	<EOS name="IG_air.xml"/>
+	 <relaxation type="U" speed="infinite"/>
+	<relaxation type="P" speed="infinite"/>
+	<symmetryTerm type="cylindrical">
+		<dataSymCyl radialAxis="Y"/>
+	</symmetryTerm>
+</model>

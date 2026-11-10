@@ -51,15 +51,19 @@ class timeStats
     void startCommunicationTime();
     void endCommunicationTime();
 
-    void setCompTime(const double& compTime, const double& AMRTime, const double& comTime);
+    void startIOTime();
+    void endIOTime();
+
+    void setCompTime(const double& compTime, const double& AMRTime, const double& comTime, const double& IOTime);
     double getComputationTime() const { return m_computationTime; };
     double getAMRTime() const { return m_AMRTime; };
     double getCommunicationTime() const { return m_communicationTime; };
+    double getIOTime() const { return m_IOTime; };
     void printScreenStats(const int& numTest) const;
     void printScreenTime(const double& time, std::string chaine, const int& numTest) const;
 
   private:
-    //Time analysis - Attributes are stored in miliseconds (to be divided by CLOCKS_PER_SEC)
+    //Time analysis - Attributes are stored in seconds
     // clang-format off
     double m_InitialTime;
     double m_computationTime;   //!<Computational time
@@ -69,6 +73,10 @@ class timeStats
 
     double m_communicationRefTime;
     double m_communicationTime; //!<Communication time among computational time
+
+    double m_IORefTime;
+    double m_IOTime;            //!<IO time among compuational time
+
     // clang-format on
 };
 

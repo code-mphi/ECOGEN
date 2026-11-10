@@ -370,6 +370,84 @@ void CellO2Cartesian::computeLocalSlopesLimite(CellInterface& cellInterfaceRef,
   }
 }
 
+//***********************************************************************
+
+void CellO2Cartesian::computeLocalSlopesPeriodic(CellInterface& cellInterfaceRef,
+                                                 Limiter& globalLimiter,
+                                                 Limiter& interfaceLimiter,
+                                                 Limiter& globalVolumeFractionLimiter,
+                                                 Limiter& interfaceVolumeFractionLimiter,
+                                                 double& alphaCellAfterOppositeSide,
+                                                 double& alphaCell,
+                                                 double& alphaCellOtherInterfaceSide,
+                                                 double& epsInterface)
+{
+  //Mise a zero des slopes locales
+  //------------------------------
+  double coeff(0.);
+  for (int k = 0; k < numberPhases; k++) {
+    slopesPhasesLocal1[k]->setToZero();
+    slopesPhasesLocal2[k]->setToZero();
+  }
+  slopesMixtureLocal1->setToZero();
+  slopesMixtureLocal2->setToZero();
+  for (int k = 0; k < numberTransports; k++) {
+    slopesTransportLocal1[k] = 0.;
+    slopesTransportLocal2[k] = 0.;
+  }
+
+  //Slope 1
+  //-------
+  for (int k = 0; k < numberPhases; k++) {
+    slopesPhasesLocal1[k]->multiplyAndAdd(*cellInterfaceRef.getSlopesPhase(k), 1.);
+  }
+  slopesMixtureLocal1->multiplyAndAdd(*cellInterfaceRef.getSlopesMixture(), 1.);
+  for (int k = 0; k < numberTransports; k++) {
+    slopesTransportLocal1[k] += cellInterfaceRef.getSlopesTransport(k)->getValue();
+  }
+
+  //Loop on the cell interfaces for the determination of the slope 2
+  //----------------------------------------------------------------
+  for (unsigned int b = 0; b < m_cellInterfaces.size(); b++) {
+    if (m_cellInterfaces[b]->whoAmI() != TypeBC::PERIODIC) {
+      coeff = std::fabs(m_cellInterfaces[b]->getFace()->getNormal().scalar(cellInterfaceRef.getFace()->getNormal()));
+      if (coeff > 1.e-6) {
+        //Side cellInterfaceRef
+        for (int k = 0; k < numberPhases; k++) {
+          slopesPhasesLocal2[k]->multiplyAndAdd(*m_cellInterfaces[b]->getSlopesPhase(k), coeff);
+        }
+        slopesMixtureLocal2->multiplyAndAdd(*m_cellInterfaces[b]->getSlopesMixture(), coeff);
+        for (int k = 0; k < numberTransports; k++) {
+          slopesTransportLocal2[k] += coeff * (m_cellInterfaces[b]->getSlopesTransport(k)->getValue());
+        }
+      }
+    }
+  } //End loop on cell interfaces
+
+  //Limitations des slopes
+  //----------------------
+  //Detection of the interface location
+  if ((alphaCell >= epsInterface) && (alphaCell <= 1. - epsInterface) &&
+      ((alphaCellOtherInterfaceSide - alphaCell) * (alphaCell - alphaCellAfterOppositeSide) >= 1.e-8)) {
+    for (int k = 0; k < numberPhases; k++) {
+      slopesPhasesLocal1[k]->limitSlopes(*slopesPhasesLocal1[k], *slopesPhasesLocal2[k], interfaceLimiter, interfaceVolumeFractionLimiter);
+    }
+    slopesMixtureLocal1->limitSlopes(*slopesMixtureLocal1, *slopesMixtureLocal2, interfaceLimiter);
+    for (int k = 0; k < numberTransports; k++) {
+      slopesTransportLocal1[k] = interfaceVolumeFractionLimiter.limiteSlope(slopesTransportLocal1[k], slopesTransportLocal2[k]);
+    }
+  }
+  else {
+    for (int k = 0; k < numberPhases; k++) {
+      slopesPhasesLocal1[k]->limitSlopes(*slopesPhasesLocal1[k], *slopesPhasesLocal2[k], globalLimiter, globalVolumeFractionLimiter);
+    }
+    slopesMixtureLocal1->limitSlopes(*slopesMixtureLocal1, *slopesMixtureLocal2, globalLimiter);
+    for (int k = 0; k < numberTransports; k++) {
+      slopesTransportLocal1[k] = globalVolumeFractionLimiter.limiteSlope(slopesTransportLocal1[k], slopesTransportLocal2[k]);
+    }
+  }
+}
+
 //****************************************************************************
 //***************************** Methode AMR **********************************
 //****************************************************************************

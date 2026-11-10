@@ -7,8 +7,5 @@
     <physicalTime totalTime="3.6e-4" timeFreq="3.6e-5"/>
   </timeControlMode>
   <computationControl CFL="0.8"/>
-  <!-- 	<secondOrder>
-		<globalLimiter>superbee</globalLimiter>
-	</secondOrder> -->
   <resumeSimulation AMRsaveFreq="0" resumeFileNumber="0"/>
 </computationParam>

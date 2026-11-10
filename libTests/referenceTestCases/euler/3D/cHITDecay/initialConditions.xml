@@ -1,0 +1,27 @@
+<?xml version = "1.0" encoding = "UTF-8" standalone = "yes"?>
+<CI>
+	<!-- LIST OF GEOMETRICAL DOMAINS  -->
+	<physicalDomains>
+		<!-- complete domain -->
+		<domain name="base" state="whole" type="entireDomainWithParticularities"/>
+	</physicalDomains>
+
+	<!-- LIST OF BOUNDARY CONDITIONS -->
+	<boundaryConditions>
+		<boundCond name="BC_Xmin" type="periodic" number="1" />
+		<boundCond name="BC_Xmax" type="periodic" number="2" />
+		<boundCond name="BC_Ymin" type="periodic" number="3" />
+		<boundCond name="BC_Ymax" type="periodic" number="4" />
+		<boundCond name="BC_Zmin" type="periodic" number="5" />
+		<boundCond name="BC_Zmax" type="periodic" number="6" />
+	</boundaryConditions>
+
+	<!--  LIST OF STATES  -->
+	<state name="whole">
+		<material type="fluid" EOS="IG_cHIT_decay.xml">
+			<dataFluid temperature="1200" pressure="1.01300e5">
+				<velocity x="0." y="0." z="0"/>
+			</dataFluid>
+		</material>
+	</state>
+</CI>

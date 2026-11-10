@@ -34,7 +34,7 @@
 #include "SourceNumGravity.h"
 #include "SourceNumHeating.h"
 #include "SourceNumMRF.h"
-#include "SourceExactEulerKorteweg.h"
+#include "SourceExactExtendedNavierStokesKorteweg1D.h"
 #include "SourceNumAcousticWavePlaneGaussianPulse.h"
 #include "SourceNumAcousticWavePlaneSinusoidalPulse.h"
 

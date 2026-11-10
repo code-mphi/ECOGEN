@@ -47,7 +47,7 @@ BoundCondInletInjStagState::BoundCondInletInjStagState(int numPhysique,
   m_rhok0 = new double[numbPhases];
   m_pk0   = new double[numbPhases];
 
-  //Reading injection surface-mass-flow condition (kg/s/m�)
+  //Reading injection surface-mass-flow condition (kg/s/m2)
   //-------------------------------------------------------
   XMLElement* sousElement(element->FirstChildElement("dataInletInj"));
   if (sousElement == NULL) throw ErrorXMLElement("dataInletInj", fileName, __FILE__, __LINE__);
@@ -142,10 +142,6 @@ BoundCondInletInjStagState::BoundCondInletInjStagState(int numPhysique,
   //---------------------
   m_valueTransport = new double[numbTransports];
   if (numbTransports) {
-    XMLElement* sousElement(element->FirstChildElement("dataInletInj"));
-    if (sousElement == NULL) throw ErrorXMLElement("dataInletInj", fileName, __FILE__, __LINE__);
-    XMLError error;
-
     int foundColors(0);
     XMLElement* elementTransport(sousElement->FirstChildElement("transport"));
     std::string nameTransport;

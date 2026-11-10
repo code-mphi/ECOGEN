@@ -99,7 +99,7 @@ class Cell
     void fulfillStateResume();
     void localProjection(const Coord& normal, const Coord& tangent, const Coord& binormal, Prim /*type*/ = vecPhases);
     virtual void reverseProjection(const Coord& normal, const Coord& tangent, const Coord& binormal);
-    virtual void copyInCell(Cell& /*cellSource*/) const { Errors::errorMessage("methode copie non dispo pour cell"); };
+    virtual void copyInCell(Cell& /*cellSource*/) const { Errors::errorMessage("copyInCell not available for Cell"); };
     void copyVec(Phase** vecPhases, Mixture* mixture, Transport* vecTransports);
     //void printCut1Dde2D(std::ofstream& fileStream, std::string variableConstanteCut, const double& valueCut, const double& dL);    /*!< Write de la cut 1D de la simulation 2D  */
     //void printCut1Dde3D(std::ofstream& fileStream, std::string variableConstanteCut1, std::string variableConstanteCut2, const double& valueCut1, const double& valueCut2, const double& dL1, const double& dL2); /*!< Write de la cut 1D de la simulation 3D  */
@@ -111,16 +111,23 @@ class Cell
     Coord selectVector(Variable nameVector, int num = 0, int subscript = -1) const;
     void setVector(Variable nameVector, const Coord& value, int num = 0, int subscript = -1);
 
-    const QuantitiesAddPhys* getQPA(int& numQPA) const
+    const QuantitiesAddPhys* getQPA(const int& numQPA) const
     {
       return m_vecQuantitiesAddPhys[numQPA];
     }; //!< Allow to recover an additional physical quantity
+    QuantitiesAddPhys* getQPA(const int& numQPA) { return m_vecQuantitiesAddPhys[numQPA]; }; //!< Allow to recover an additional physical quantity
 
     const Coord& getGradTk(int& numPhase, int& numAddPhys) const;
     void setGradTk(int& numPhase, int& numAddPhys, double* buffer, int& counter);
     void addNonConsAddPhys(AddPhys& addPhys, Symmetry* symmetry);
 
     void reinitializeColorFunction(const int& numTransport, const int& numPhase); //!< Re-initialize the color function (transport) with alpha
+
+    //! \brief  Select a specific scalar variable
+    //! \param  nameVariables  Name of the scalar variable to filter
+    //! \param  num      Phases number's needed by selectScalar
+    //! \return Filtered value of the scalar variable on current cell and adjacent ones
+    double hatFilterScalar(Variable nameVariable, int num = 0);
 
     //Gradients
     //---------
@@ -191,7 +198,16 @@ class Cell
                                           Limiter& /*interfaceLimiter*/,
                                           Limiter& /*globalVolumeFractionLimiter*/,
                                           Limiter& /*interfaceVolumeFractionLimiter*/,
-                                          double& /*epsInterface*/) {};             /*!< Does nothing for first order cells */
+                                          double& /*epsInterface*/) {}; /*!< Does nothing for first order cells */
+    virtual void computeLocalSlopesPeriodic(CellInterface& /*cellInterface*/,
+                                            Limiter& /*globalLimiter*/,
+                                            Limiter& /*interfaceLimiter*/,
+                                            Limiter& /*globalVolumeFractionLimiter*/,
+                                            Limiter& /*interfaceVolumeFractionLimiter*/,
+                                            double& /*alphaCellAfterOppositeSide*/,
+                                            double& /*alphaCell*/,
+                                            double& /*alphaCellOtherInterfaceSide*/,
+                                            double& /*epsInterface*/) {};           /*!< Does nothing for first order cells */
     virtual Phase* getSlopes() const { return 0; };                                 /*!< Does nothing for first order cells */
     virtual Transport* getSlopesTransport() const { return 0; };                    /*!< Does nothing for first order cells */
     virtual void saveCons() {};                                                     /*!< Does nothing for first order cells */
@@ -359,10 +375,12 @@ class Cell
   private:
 };
 
-extern Model* model;                          /*!< Pointer to model */
-extern Gradient* gradient;                    /*!< Pointer to gradient method */
-extern std::vector<Coord> gradRho;            /*!< Gradient of density */
-extern std::vector<Variable> variableDensity; /*!< Variable name for density gradients */
-extern std::vector<int> numeratorDefault;     /*!< Default numerator (used for density gradients) */
+extern Model* model;                           /*!< Pointer to model */
+extern Gradient* gradient;                     /*!< Pointer to gradient method */
+extern std::vector<Coord> gradRho;             /*!< Gradient of density */
+extern std::vector<Variable> variableDensity;  /*!< Variable name for density gradients */
+extern std::vector<Coord> gradVelocityX;       /*!< Gradient of velocity */
+extern std::vector<Variable> variableVelocity; /*!< Variable name for velocity gradients */
+extern std::vector<int> numeratorDefault;      /*!< Default numerator (used for gradients) */
 
 #endif // CELL_H

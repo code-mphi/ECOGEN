@@ -1,7 +1,12 @@
 <?xml version = "1.0" encoding = "UTF-8" standalone = "yes"?>
 <model>
-	<flowModel name="PressureVelocityEq" numberPhases="2" numberTransports="1" alphaNull="false"/>
+	<flowModel name="PressureVelocityEq" numberPhases="2" numberTransports="1" alphaNull="false" threshold="1.e-6"/>
 	<EOS name="IG_air.xml"/>
 	<EOS name="SG_water.xml"/>
 	<transport name="color"/>
+<!-- 	<secondOrder>
+		<globalLimiter>mc</globalLimiter>
+		<globalVolumeFractionLimiter>thinc</globalVolumeFractionLimiter>
+		<interfaceVolumeFractionLimiter>thinc</interfaceVolumeFractionLimiter>
+	</secondOrder> -->
 </model>

@@ -2,7 +2,7 @@
 Contribute to ECOGEN
 ********************
 
-Before contributing, please read the section :ref:`Sec:Licence` information.
+Before contributing, please read the section :ref:`Sec:License and authors` information.
 
 API documentation
 =================

@@ -46,6 +46,8 @@
 #include "../Maths/GeometricObject.h"
 #include "../Sources/HeaderSources.h"
 
+#include "../InputOutput/IntTypes.h" // Use same integer types than those used to write output files
+
 //! \class     Mesh
 //! \brief     Abstract class for a mesh
 //! \details   Can not be instanciated, depend on the mesh properties
@@ -55,19 +57,19 @@ class Mesh
     Mesh();
     virtual ~Mesh();
 
-    virtual void assignLimits(std::vector<BoundCond*>& boundCond)           = 0;
+    virtual void assignLimits(std::vector<BoundCond*>& boundCond)                         = 0;
     virtual int initializeGeometrie(TypeMeshContainer<Cell*>& cells,
                                     TypeMeshContainer<Cell*>& cellsGhost,
                                     TypeMeshContainer<CellInterface*>& cellInterfaces,
                                     const int& resumeSimulation,
                                     bool pretraitementParallele = true,
-                                    std::string ordreCalcul     = "FIRSTORDER") = 0; //!< renvoi le number de dimensions (1,2 ou 3)
+                                    SimulationOrder schemeOrder = SimulationOrder::first) = 0; //!< renvoi le number de dimensions (1,2 ou 3)
     virtual std::string whoAmI() const
     {
       Errors::errorMessage("whoAmI not available for considered mesh");
-      return 0;
+      return std::string("");
     };
-    virtual void setImmersedBoundaries(TypeMeshContainer<CellInterface*>* /*cellInterfacesLvl*/, std::string /*ordreCalcul*/) const {};
+    virtual void setImmersedBoundaries(TypeMeshContainer<CellInterface*>* /*cellInterfacesLvl*/, SimulationOrder /*schemeOrder*/) const {};
 
     //Accessors
     //---------
@@ -75,13 +77,21 @@ class Mesh
     const int& getNumberCells() const { return m_numberCellsCalcul; };
     const int& getNumberCellsTotal() const { return m_numberCellsTotal; };
     const int& getNumberFaces() const { return m_numberFacesTotal; };
-    const int& getNumFichier() const { return m_numFichier; };
-    virtual double getdX() const { return 0; };
-    virtual double getdY() const { return 0; };
-    virtual double getdZ() const { return 0; };
+    const int& getNumFichier() const { return m_numFile; };
     const TypeM& getType() const { return m_type; };
-    virtual int getNumberCellsY() { return 0; };
-    virtual int getNumberCellsZ() { return 0; };
+    virtual int getNumberCellsX() const { return 0; };
+    virtual int getNumberCellsY() const { return 0; };
+    virtual int getNumberCellsZ() const { return 0; };
+    virtual int getNumberCellsXGlobal() const { return 0; };
+    virtual int getNumberCellsYGlobal() const { return 0; };
+    virtual int getNumberCellsZGlobal() const { return 0; };
+    virtual int getOffsetX() const { return 0; };
+    virtual int getOffsetY() const { return 0; };
+    virtual int getOffsetZ() const { return 0; };
+    virtual int getNumberCpuX() const { return 0; };
+    virtual int getNumberCpuY() const { return 0; };
+    virtual int getNumberCpuZ() const { return 0; };
+
     virtual int getLvlMax() const { return 0; };
 
     //Printing
@@ -94,44 +104,110 @@ class Mesh
     virtual std::string getStringExtent(bool /*global*/ = false) const
     {
       Errors::errorMessage("getStringExtent not available for considered mesh");
-      return 0;
+      return std::string("");
     };
-    virtual void getCoord(std::vector<double>& /*dataset*/, Axis /*axis*/) const
+    //! \brief For structured grid, get global grid extent under the form of an array
+    virtual std::array<int, 6> getArrayGlobalExtent() const
     {
+      Errors::errorMessage("getArrayGlobalExtent not available for considered mesh");
+      return {0, 0, 0, 0, 0, 0};
+    };
+
+    //! \brief For structured grid, get coordinates along a given axis
+    virtual void getCoord(std::vector<double>& /*dataset*/, Axis /*axis*/, bool global = false) const
+    {
+      (void)global; // Parameter is intentionally unused: suppresses warning
       Errors::errorMessage("getCoord not available for considered mesh");
     };
-    virtual void getNodes(std::vector<double>& /*dataset*/, std::vector<Cell*>* /*cellsLvl*/) const
+    //! \brief Store coordinates of mesh nodes in a flat vector
+    //! \return Node count if success, 0 in case of overflow
+    //! \note Check that the node count doesn't overflow the maximal value representable by a 'size_t'
+    virtual size_t getNodes(std::vector<double>& /*dataset*/, std::vector<Cell*>* /*cellsLvl*/) const
     {
       Errors::errorMessage("getNodes not available for considered mesh");
+      return 0;
     };
-    virtual void getConnectivity(std::vector<double>& /*dataset*/, std::vector<Cell*>* /*cellsLvl*/) const
+    //! \brief Store connectivities of mesh cells in a flat vector of double
+    //! \return Cell count if success, 0 in case of overflow
+    //! \note Check that the cell count doesn't overflow the maximal value representable by a 'size_t'.
+    //! Don't check that the connectivity values fit in 'double' variables.
+    //!
+    //! \remark Method has been kept to not break legacy I/Os but avoiding casts is probably better
+    virtual size_t getConnectivity(std::vector<double>& /*dataset*/, std::vector<Cell*>* /*cellsLvl*/) const
     {
       Errors::errorMessage("getConnectivity not available for considered mesh");
+      return 0;
     };
+    //! \brief Store connectivities of mesh cells in a flat vector of 'ECOGEN_VTKHDF_intType' integers.
+    //! \return Cell count if success, 0 in case of overflow
+    //! \note Check that the cell count doesn't overflow the maximal value representable by a 'size_t'.
+    //! Don't check that the connectivity values fit the vector type.
+    virtual size_t getConnectivity(std::vector<int64_t>& /*dataset*/, std::vector<Cell*>* /*cellsLvl*/) const
+    {
+      Errors::errorMessage("getConnectivity not available for considered mesh and storage in 'int' vector");
+      return 0;
+    };
+    //! \brief Store connectivities of mesh cells in a flat vector of 'ECOGEN_VTKHDF_intType' integers.
+    //! \return Cell count if success, 0 in case of overflow
+    //! \note Check that the cell count doesn't overflow the maximal value representable by a 'size_t'.
+    //! Don't check that the connectivity values fit the vector type.
+    virtual size_t getConnectivity(std::vector<int32_t>& /*dataset*/, std::vector<Cell*>* /*cellsLvl*/) const
+    {
+      Errors::errorMessage("getConnectivity not available for considered mesh and storage in 'int' vector");
+      return 0;
+    };
+
+    //! \brief Store offsets in connectivity array of mesh cells
+    //! \note Check that the max offset doesn't overflow the maximal integer exactly representable by a 'double'.
+    //!
+    //! \remark Method has been kept to not break legacy I/Os but avoiding casts is probably better
     virtual void getOffsets(std::vector<double>& /*dataset*/, std::vector<Cell*>* /*cellsLvl*/) const
     {
       Errors::errorMessage("getOffsets not available for considered mesh");
     };
+    //! \brief Store offsets in connectivity array of mesh cells
+    //! \note Check that the max offset doesn't overflow the maximal value representable by a int64_t variable.
+    virtual void getOffsets(std::vector<int64_t>& /*dataset*/, std::vector<Cell*>* /*cellsLvl*/) const
+    {
+      Errors::errorMessage("getOffsets not available for considered mesh and storage in 'int64_t' vector");
+    };
+    //! \brief Store offsets in connectivity array of mesh cells
+    //! \note Check that the max offset doesn't overflow the maximal value representable by a int32_t variable.
+    virtual void getOffsets(std::vector<int32_t>& /*dataset*/, std::vector<Cell*>* /*cellsLvl*/) const
+    {
+      Errors::errorMessage("getOffsets not available for considered mesh and storage in 'int32_t' vector");
+    };
+
     virtual void getTypeCell(std::vector<double>& /*dataset*/, std::vector<Cell*>* /*cellsLvl*/) const
     {
       Errors::errorMessage("getTypeCell not available for considered mesh");
     };
+    virtual void getTypeCell(std::vector<unsigned char>& /*dataset*/, std::vector<Cell*>* /*cellsLvl*/) const
+    {
+      Errors::errorMessage("'getTypeCell' not available for considered mesh and storage in 'unsigned char' vector");
+    };
+
     //! \brief     Extracting data for printing results
     //! \details   This method enable to extract a set of data for mixture or phase, scalar or vetor
-    //! \param     cellsLvl         data structure containing pointer to cells
-    //! \param     var              number of requested varaible to extract (>0 for scalar, <0 for vector)
-    //! \param     phase            number of requested phase (-1 for mixture, -2 for transport, -3 for xi, -4 for gradient density mixture)
+    //! \param     cellsLvl      data structure containing pointer to cells
     //! \param     dataset       double vector containing the extracted data
+    //! \param     var           number of requested varaible to extract (>0 for scalar, <0 for vector)
+    //! \param     phase         number of requested phase (-1 for mixture, -2 for transport, -3 for xi, -4 for gradient density mixture)
     virtual void getData(std::vector<Cell*>* /*cellsLvl*/, std::vector<double>& /*dataset*/, const int /*var*/, int /*phase*/) const
     {
       Errors::errorMessage("getData not available for considered mesh");
     };
+    virtual void getData(std::vector<Cell*>* /*cellsLvl*/, std::vector<float>& /*dataset*/, const int /*var*/, int /*phase*/) const
+    {
+      Errors::errorMessage("getData not available for considered mesh");
+    };
+
     //! \brief     Extracting data for printing results
     //! \details   This method enable to extract a set of data for mixture or phase, scalar or vetor
-    //! \param     cellsLvl         data structure containing pointer to cells
-    //! \param     var              number of requested varaible to extract (>0 for scalar, <0 for vector)
-    //! \param     phase            number of requested phase (-1 for mixture, -2 for transport, -3 for xi, -4 for gradient density mixture)
+    //! \param     cellsLvl      data structure containing pointer to cells
     //! \param     dataset       double vector containing the extracted data
+    //! \param     var           number of requested varaible to extract (>0 for scalar, <0 for vector)
+    //! \param     phase         number of requested phase (-1 for mixture, -2 for transport, -3 for xi, -4 for gradient density mixture)
     virtual void setDataSet(std::vector<double>& /*dataset*/, std::vector<Cell*>* /*cellsLvl*/, const int /*var*/, int /*phase*/) const
     {
       Errors::errorMessage("setDataSet not available for requested mesh");
@@ -148,10 +224,20 @@ class Mesh
     {
       Errors::errorMessage("extractAbsVeloxityMRF not available for considered mesh");
     };
+    virtual void extractAbsVelocityMRF(std::vector<Cell*>* /*cellsLvl*/, std::vector<float>& /*dataset*/, Source* /*sourceMRF*/) const
+    {
+      Errors::errorMessage("extractAbsVeloxityMRF not available for considered mesh");
+    };
+
     virtual void extractReferenceLength(std::vector<Cell*>* /*cellsLvl*/, std::vector<double>& /*dataset*/) const
     {
       Errors::errorMessage("extractReferenceLength not available for considered mesh");
     };
+    virtual void extractReferenceLength(std::vector<Cell*>* /*cellsLvl*/, std::vector<float>& /*dataset*/) const
+    {
+      Errors::errorMessage("extractReferenceLength not available for considered mesh");
+    };
+
     virtual void printDomainDecomposition(std::ofstream& /*fileStream*/) {};
     virtual void readDomainDecomposition(std::ifstream& /*fileStream*/) {};
 
@@ -165,7 +251,7 @@ class Mesh
                                                     std::vector<GeometricalDomain*>& /*domains*/,
                                                     Eos** /*eos*/,
                                                     const int& /*resumeSimulation*/,
-                                                    std::string /*ordreCalcul*/,
+                                                    SimulationOrder /*schemeOrder*/,
                                                     std::vector<GeometricalDomain*>& /*solidDomains*/)
     {
       nbCellsTotalAMR = m_numberCellsCalcul;
@@ -180,12 +266,12 @@ class Mesh
 
     //Specific for parallel
     //---------------------
-    virtual void initializePersistentCommunications(const TypeMeshContainer<Cell*>& cells, std::string ordreCalcul);
+    virtual void initializePersistentCommunications(const TypeMeshContainer<Cell*>& cells, SimulationOrder schemeOrder);
     virtual void finalizeParallele(const int& lvlMax);
     virtual void parallelLoadBalancingAMR(std::vector<Cell*>* /*cellsLvl*/,
                                           TypeMeshContainer<Cell*>* /*cellsLvlGhost*/,
                                           std::vector<CellInterface*>* /*cellInterfacesLvl*/,
-                                          std::string /*ordreCalcul*/,
+                                          SimulationOrder /*schemeOrder*/,
                                           const std::vector<AddPhys*>& /*addPhys*/,
                                           Eos** /*eos*/,
                                           int& /*nbCellsTotalAMR*/,
@@ -197,30 +283,39 @@ class Mesh
     virtual std::string getMeshExtension() const
     {
       Errors::errorMessage("getMeshExtension not available for requested mesh");
-      return 0;
+      return std::string("");
     };
     //! \brief     Initialize mesh of a single partition for restart with mesh mapping option
     //! \details   This mesh object has only the elements and nodes filled
-    virtual void initCpuMeshSequential(TypeMeshContainer<Cell*>& /*cells*/, std::string& /*computeOrder*/)
+    virtual void initCpuMeshSequential(TypeMeshContainer<Cell*>& /*cells*/, SimulationOrder& /*schemeOrder*/)
     {
       Errors::errorMessage("initCpuMeshSequential not available for requested mesh");
     }
     //! \brief     Initialize mesh of a single partition of a partionned mesh for restart with mesh mapping option
     //! \details   This mesh object has only the elements and nodes filled
-    virtual void initCpuMeshParallel(TypeMeshContainer<Cell*>& /*cells*/, std::string& /*computeOrder*/, int /*cpu*/)
+    virtual void initCpuMeshParallel(TypeMeshContainer<Cell*>& /*cells*/, SimulationOrder& /*schemeOrder*/, int /*cpu*/)
     {
       Errors::errorMessage("initCpuMeshParallel not available for requested mesh");
     }
 
   protected:
-    mutable int m_numFichier;
+    mutable int m_numFile;
 
     int m_problemDimension; /*indicator 1D/2D/3D*/
-    int m_numberElements; /*Number d'elements au total (cells de computes internes de dimension n + elements limites de dimension n-1 + ghost cells de dimensions n)*/
-    int m_numberFacesTotal;  /*Number de faces entre deux cells ou entre une cell et une limite*/
-    int m_numberCellsCalcul; /*Number de cells de compute internes au domain*/
-    int m_numberCellsTotal;  /*Cells de compute internes + cells fantomes dediees aux communications parallele*/
+    int m_numberElements; /*Total element count (internal computing cells of dimension n + boundary elements of dimension n-1 + ghost cells of dimension n)*/
+    int m_numberFacesTotal;  /*Count of faces at cells interfaces or between cells and boundaries */
+    int m_numberCellsCalcul; /*Count of computing cells (domain-internal cells) at level 0*/
+    int m_numberCellsTotal;  /*Count of internal + ghosts cells (for parallel communications) at level 0*/
 
     TypeM m_type;
+
+    //! \brief Access data of cell \a cell and append the wanted variable \a cell in \a dataset vector.
+    //! \tparam T Type of dataset vector.
+    //! \param cellsLvl Cell array.
+    //! \param dataset Vector to fill with cell array variable.
+    //! \param var parameter to choose to get scalar (if strictly positive) or vector (in lower or ewal to 0) variable.
+    //! \param phase identifier of variable to store.
+    //! \param isAMR true if called from AMR.
+    template <typename T> void getData_body(Cell* cell, std::vector<T>& dataset, const int var, const int phase, const bool isAMR) const;
 };
 #endif // MESH_H

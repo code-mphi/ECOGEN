@@ -31,6 +31,7 @@
 #include "Output.h"
 #include "../Run.h"
 #include "../Config.h"
+#include "../Colors.h"
 
 using namespace tinyxml2;
 
@@ -41,7 +42,7 @@ Output::Output() {}
 //***************************************************************
 
 Output::Output(std::string casTest, std::string nameRun, XMLElement* element, std::string fileName, Input* entree) :
-  m_input(entree), m_simulationName(casTest), m_folderOutput(nameRun), m_splitData(0), m_numFichier(0), m_nbCpusRestarted(0)
+  m_input(entree), m_simulationName(casTest), m_folderOutput(nameRun), m_splitData(0), m_numFile(0), m_nbCpusRestarted(0)
 {
   //Affectation pointeur run
   m_run = m_input->getRun();
@@ -49,12 +50,12 @@ Output::Output(std::string casTest, std::string nameRun, XMLElement* element, st
   //Names communs
   //------------
   m_infoCalcul                 = "infoCalcul.out";
-  m_infoMesh                   = "infoMesh";
   m_treeStructure              = "treeStructure";
   m_domainDecomposition        = "domainDecomposition";
   m_fileNameResults            = "result";
   m_filenameCollectionParaview = "collectionParaview";
   m_filenameCollectionVisIt    = "collectionVisIt";
+  m_filenameVTKHDFTimeseries   = "timeseriesParaview";
 
   m_folderOutput            = config.getWorkFolder() + "results/" + m_folderOutput + "/";
   m_folderSavesInput        = m_folderOutput + "savesInput/";
@@ -122,7 +123,7 @@ Output::Output(std::string casTest, std::string nameRun, XMLElement* element, st
 //***********************************************************************
 
 Output::Output(std::string nameRun, int fileNumberRestartMeshMapping, Input* input) :
-  m_folderOutput(nameRun), m_writeBinary(false), m_splitData(0), m_numFichier(fileNumberRestartMeshMapping)
+  m_folderOutput(nameRun), m_writeBinary(false), m_splitData(0), m_numFile(fileNumberRestartMeshMapping)
 {
   m_input = input;
   m_run   = m_input->getRun();
@@ -130,12 +131,12 @@ Output::Output(std::string nameRun, int fileNumberRestartMeshMapping, Input* inp
   //Names communs
   //------------
   m_infoCalcul                 = "infoCalcul.out";
-  m_infoMesh                   = "infoMesh";
   m_treeStructure              = "treeStructure";
   m_domainDecomposition        = "domainDecomposition";
   m_fileNameResults            = "result";
   m_filenameCollectionParaview = "collectionParaview";
   m_filenameCollectionVisIt    = "collectionVisIt";
+  m_filenameVTKHDFTimeseries   = "timeseriesParaview.vtkhdf.series";
 
   m_folderOutput            = config.getWorkFolder() + "results/" + m_folderOutput + "/";
   m_folderSavesInput        = m_folderOutput + "savesInput/";
@@ -165,10 +166,12 @@ Output::~Output() {}
 void Output::copyInputFiles() const
 {
   try {
-    IO::copyFile(m_input->getMain(), m_simulationName, m_folderSavesInput);
-    IO::copyFile(m_input->getMesh(), m_simulationName, m_folderSavesInput);
-    IO::copyFile(m_input->getCI(), m_simulationName, m_folderSavesInput);
-    IO::copyFile(m_input->getModel(), m_simulationName, m_folderSavesInput);
+    if (rankCpu == 0) {
+      IO::copyFile(m_input->getMain(), m_simulationName, m_folderSavesInput);
+      IO::copyFile(m_input->getMesh(), m_simulationName, m_folderSavesInput);
+      IO::copyFile(m_input->getCI(), m_simulationName, m_folderSavesInput);
+      IO::copyFile(m_input->getModel(), m_simulationName, m_folderSavesInput);
+    }
   }
   catch (ErrorInput&) {
     throw;
@@ -247,10 +250,6 @@ void Output::initializeOutputInfos()
       fileStream.open((m_folderOutput + m_infoCalcul).c_str(), std::ios::trunc);
       fileStream.close();
     }
-    //Fichiers infosMeshes
-    std::string file = m_folderInfoMesh + createFilename(m_infoMesh.c_str(), -1, rankCpu);
-    fileStream.open(file.c_str(), std::ios::trunc);
-    fileStream.close();
   }
   catch (ErrorECOGEN&) {
     throw;
@@ -259,22 +258,22 @@ void Output::initializeOutputInfos()
 
 //***********************************************************************
 
-void Output::printTree(Mesh* mesh, std::vector<Cell*>* cellsLvl, int resumeAMRsaveFreq)
+void Output::printTree(Mesh* mesh, const std::vector<Cell*>* cellsLvl, int resumeAMRsaveFreq) const
 {
   if (resumeAMRsaveFreq != 0) {
-    if ((m_numFichier % resumeAMRsaveFreq) == 0) {
+    if ((m_numFile % resumeAMRsaveFreq) == 0) {
       try {
         std::ofstream fileStream;
         std::string file;
         //Print domain decomposition
         if (rankCpu == 0) {
-          file = m_folderInfoMesh + createFilename(m_domainDecomposition.c_str(), -1, -1, m_numFichier);
+          file = m_folderInfoMesh + createFilename(m_domainDecomposition.c_str(), -1, -1, m_numFile);
           fileStream.open(file.c_str());
           mesh->printDomainDecomposition(fileStream);
           fileStream.close();
         }
         //Print cell tree
-        file = m_folderInfoMesh + createFilename(m_treeStructure.c_str(), -1, rankCpu, m_numFichier);
+        file = m_folderInfoMesh + createFilename(m_treeStructure.c_str(), -1, rankCpu, m_numFile);
         fileStream.open(file.c_str());
         for (int lvl = 0; lvl <= mesh->getLvlMax(); lvl++) {
           for (unsigned int c = 0; c < cellsLvl[lvl].size(); c++) {
@@ -297,7 +296,7 @@ void Output::readDomainDecompostion(Mesh* mesh)
   try {
     std::ifstream fileStream;
     std::string file;
-    file = m_folderInfoMesh + createFilename(m_domainDecomposition.c_str(), -1, -1, m_numFichier);
+    file = m_folderInfoMesh + createFilename(m_domainDecomposition.c_str(), -1, -1, m_numFile);
     fileStream.open(file.c_str());
     mesh->readDomainDecomposition(fileStream);
     fileStream.close();
@@ -319,8 +318,7 @@ void Output::readTree(Mesh* mesh,
   try {
     std::ifstream fileStream;
     int splitCell(0);
-    std::string chaine;
-    std::string file = m_folderInfoMesh + createFilename(m_treeStructure.c_str(), -1, rankCpu, m_numFichier);
+    std::string file = m_folderInfoMesh + createFilename(m_treeStructure.c_str(), -1, rankCpu, m_numFile);
     fileStream.open(file.c_str(), std::ios::in);
     if (!fileStream.is_open()) {
       // Avoid segfault if file doesn't exist
@@ -334,34 +332,8 @@ void Output::readTree(Mesh* mesh,
         if (splitCell) mesh->refineCellAndCellInterfaces(cellsLvl[lvl][c], addPhys, nbCellsTotalAMR);
       }
 
-      if (lvl < mesh->getLvlMax()) {
-        if (Ncpu > 1) {
-          //Refine ghost cells
-          parallel.communicationsSplit(lvl);
-          cellsLvlGhost[lvl + 1].clear();
-          for (unsigned int i = 0; i < cellsLvlGhost[lvl].size(); i++) {
-            cellsLvlGhost[lvl][i]->chooseRefineDeraffineGhost(mesh->getNumberCellsY(), mesh->getNumberCellsZ(), addPhys, cellsLvlGhost);
-          }
-
-          //Update of persistent communications of cells lvl + 1
-          parallel.communicationsNumberGhostCells(lvl + 1);
-          parallel.updatePersistentCommunicationsLvlAMR(lvl + 1, mesh->getProblemDimension());
-        }
-
-        //Reconstruction of the arrays of cells and cell interfaces of lvl + 1
-        cellsLvl[lvl + 1].clear();
-        cellInterfacesLvl[lvl + 1].clear();
-        for (unsigned int i = 0; i < cellsLvl[lvl].size(); i++) {
-          cellsLvl[lvl][i]->buildLvlCellsAndLvlInternalCellInterfacesArrays(cellsLvl, cellInterfacesLvl);
-        }
-        for (unsigned int i = 0; i < cellInterfacesLvl[lvl].size(); i++) {
-          cellInterfacesLvl[lvl][i]->constructionArrayExternalCellInterfacesLvl(cellInterfacesLvl);
-        }
-      }
-    }
-    nbCellsTotalAMR = 0;
-    for (unsigned int i = 0; i < cellsLvl[0].size(); i++) {
-      cellsLvl[0][i]->updateNbCellsTotalAMR(nbCellsTotalAMR);
+      // Refine ghost cells, update of persistent communications of cells lvl + 1, reconstruct arrays of cells and cell interfaces of lvl + 1
+      readTree_common(mesh, cellsLvl, cellsLvlGhost, cellInterfacesLvl, addPhys, lvl);
     }
     fileStream.close();
   }
@@ -372,13 +344,46 @@ void Output::readTree(Mesh* mesh,
 
 //***********************************************************************
 
+void Output::readTree_common(Mesh* mesh,
+                             TypeMeshContainer<Cell*>* cellsLvl,
+                             TypeMeshContainer<Cell*>* cellsLvlGhost,
+                             TypeMeshContainer<CellInterface*>* cellInterfacesLvl,
+                             const std::vector<AddPhys*>& addPhys,
+                             int& lvl)
+{
+  if (lvl < mesh->getLvlMax()) {
+    if (Ncpu > 1) {
+      //Refine ghost cells
+      parallel.communicationsSplit(lvl);
+      cellsLvlGhost[lvl + 1].clear();
+      for (unsigned int i = 0; i < cellsLvlGhost[lvl].size(); i++) {
+        cellsLvlGhost[lvl][i]->chooseRefineDeraffineGhost(mesh->getNumberCellsY(), mesh->getNumberCellsZ(), addPhys, cellsLvlGhost);
+      }
+
+      //Update of persistent communications of cells lvl + 1
+      parallel.communicationsNumberGhostCells(lvl + 1);
+      parallel.updatePersistentCommunicationsLvlAMR(lvl + 1, mesh->getProblemDimension());
+    }
+
+    //Reconstruction of the arrays of cells and cell interfaces of lvl + 1
+    cellsLvl[lvl + 1].clear();
+    cellInterfacesLvl[lvl + 1].clear();
+    for (unsigned int i = 0; i < cellsLvl[lvl].size(); i++) {
+      cellsLvl[lvl][i]->buildLvlCellsAndLvlInternalCellInterfacesArrays(cellsLvl, cellInterfacesLvl);
+    }
+    for (unsigned int i = 0; i < cellInterfacesLvl[lvl].size(); i++) {
+      cellInterfacesLvl[lvl][i]->constructionArrayExternalCellInterfacesLvl(cellInterfacesLvl);
+    }
+  }
+}
+
+//***********************************************************************
+
 void Output::writeInfos()
 {
-  if (m_run->m_iteration > 0) {
-    printWritingInfo();
-  }
-  saveInfos();
-  std::cout << "T" << m_run->m_numTest << " | Printing file number: " << m_numFichier << "... ";
+  std::cout << " OK" << std::endl; // Output files have been written
+  printWritingInfo(); // Print timers in standard output: warning, as output files have been written, m_numFile is already incremented to next value.
+  saveInfos();        // Save infoCalcul file
 }
 
 //***********************************************************************
@@ -396,23 +401,7 @@ void Output::writeProgress()
 
 //***********************************************************************
 
-void Output::saveInfoCells() const
-{
-  try {
-    std::ofstream fileStream;
-    std::string file = m_folderInfoMesh + createFilename(m_infoMesh.c_str(), -1, rankCpu);
-    fileStream.open(file.c_str(), std::ios::app);
-    fileStream << m_run->m_nbCellsTotalAMR << std::endl;
-    fileStream.close();
-  }
-  catch (ErrorECOGEN&) {
-    throw;
-  }
-}
-
-//***********************************************************************
-
-void Output::writeDataset(std::vector<double> dataset, std::ofstream& fileStream, TypeData typeData)
+void Output::writeDataset(std::vector<double> dataset, std::ofstream& fileStream, TypeData typeData) const
 {
   if (m_precision != 0) fileStream.precision(m_precision);
   if (!m_writeBinary) {
@@ -476,7 +465,7 @@ void Output::writeDataset(std::vector<double> dataset, std::ofstream& fileStream
 
 //***********************************************************************
 
-void Output::getDataset(std::istringstream& data, std::vector<double>& dataset)
+void Output::getDataset(std::istringstream& data, std::vector<double>& dataset) const
 {
   if (!m_writeBinary) {
     for (unsigned int k = 0; k < dataset.size(); k++) {
@@ -534,11 +523,14 @@ void Output::getDataset(std::istringstream& data, std::vector<double>& dataset)
 
 void Output::printWritingInfo() const
 {
+  // Print timers in standard output: warning, if called after output files writing, m_numFile is already incremented to next value and has to be decreased.
   std::cout << "T" << m_run->m_numTest << " | -------------------------------------------" << std::endl;
-  std::cout << "T" << m_run->m_numTest << " | RESULTS FILE NUMBER: " << m_numFichier << ", ITERATION " << m_run->m_iteration << std::endl;
-  std::cout << "T" << m_run->m_numTest << " |     Physical time       = " << m_run->m_physicalTime << " s " << std::endl;
-  std::cout << "T" << m_run->m_numTest << " |     Last time step      = " << m_run->m_dt << " s " << std::endl;
-  m_run->m_stat.printScreenStats(m_run->m_numTest);
+  if (m_run->m_iteration > 0) {
+    std::cout << "T" << m_run->m_numTest << " | RESULTS FILE NUMBER: " << m_numFile - 1 << ", ITERATION " << m_run->m_iteration << std::endl;
+    std::cout << "T" << m_run->m_numTest << " |     Physical time       = " << m_run->m_physicalTime << " s " << std::endl;
+    std::cout << "T" << m_run->m_numTest << " |     Last time step      = " << m_run->m_dt << " s " << std::endl;
+    m_run->m_stat.printScreenStats(m_run->m_numTest);
+  }
 }
 
 //***********************************************************************
@@ -550,13 +542,12 @@ void Output::saveInfos() const
   if (rankCpu == 0) {
     fileStream.open((m_folderOutput + m_infoCalcul).c_str(), std::ios::app);
 
-    if (m_numFichier == 0) fileStream << Ncpu << std::endl;
+    //  Warning, if called after output files writing, m_numFile is already incremented to next value and has to be decreased.
+    if (m_numFile - 1 == 0) fileStream << Ncpu << std::endl;
 
-    double secondCompTime = static_cast<double>(m_run->m_stat.getComputationTime()) / CLOCKS_PER_SEC;
-    double secondAMRTime  = static_cast<double>(m_run->m_stat.getAMRTime()) / CLOCKS_PER_SEC;
-    double secondComTime  = static_cast<double>(m_run->m_stat.getCommunicationTime()) / CLOCKS_PER_SEC;
-    fileStream << m_numFichier << " " << m_run->m_iteration << " " << m_run->m_physicalTime << " " << m_run->m_dtNext << " " << secondCompTime << " "
-               << secondAMRTime << " " << secondComTime;
+    fileStream << m_numFile - 1 << " " << m_run->m_iteration << " " << m_run->m_physicalTime << " " << m_run->m_dtNext << " "
+               << m_run->m_stat.getComputationTime() << " " << m_run->m_stat.getAMRTime() << " " << m_run->m_stat.getCommunicationTime() << " "
+               << m_run->m_stat.getIOTime();
 
     //Additional output with purpose to track the radius of a bubble over time and the maximum pressures.
     //To comment if not needed. Be carefull when using it, integration for bubble radius and maximum pressure at the wall are not generalized.
@@ -568,6 +559,15 @@ void Output::saveInfos() const
     // fileStream << " " << m_run->m_pMaxWall[0];
     // fileStream << " " << m_run->m_alphaWanted;
     //-----
+
+    //Additional output for HIT.
+    if (algorithmSaadOn) {
+      double uiui       = m_run->m_globalUiui / m_run->m_globalVolume;
+      double enstrophy  = m_run->m_globalEnstrophy / m_run->m_globalVolume;
+      double thetaTheta = m_run->m_globalThetaTheta / m_run->m_globalVolume;
+      double varT       = (m_run->m_globalTT / m_run->m_globalVolume) - (m_run->m_meanTemp * m_run->m_meanTemp);
+      fileStream << " " << uiui << " " << enstrophy << " " << varT << " " << thetaTheta;
+    }
 
     fileStream << std::endl;
     fileStream.close();
@@ -587,6 +587,7 @@ void Output::readInfos()
   double secondCompTime;
   double secondAMRTime;
   double secondComTime;
+  double secondIOTime;
   int numberCPURead;
   int iter(0);
   try {
@@ -607,10 +608,10 @@ void Output::readInfos()
     do {
       std::getline(fileStream, chaineTemp);
       *(chaine[iter]) << chaineTemp;
-      *(chaine[iter]) >> m_numFichier >> m_run->m_iteration >> m_run->m_physicalTime >> m_run->m_dt >> secondCompTime >> secondAMRTime >>
-        secondComTime;
+      *(chaine[iter]) >> m_numFile >> m_run->m_iteration >> m_run->m_physicalTime >> m_run->m_dt >> secondCompTime >> secondAMRTime >>
+        secondComTime >> secondIOTime;
       iter++;
-    } while (m_numFichier != m_run->m_resumeSimulation && !fileStream.eof());
+    } while (m_numFile != m_run->m_resumeSimulation && !fileStream.eof());
     if (fileStream.eof()) {
       throw ErrorInput("resume simulation not possible - check file 'infosCalcul.out'");
     }
@@ -637,11 +638,7 @@ void Output::readInfos()
   for (unsigned int i = 0; i < chaine.size(); i++) {
     delete chaine[i];
   }
-
-  clock_t compTime(secondCompTime * CLOCKS_PER_SEC);
-  clock_t AMRTime(secondAMRTime * CLOCKS_PER_SEC);
-  clock_t comTime(secondComTime * CLOCKS_PER_SEC);
-  m_run->m_stat.setCompTime(compTime, AMRTime, comTime);
+  m_run->m_stat.setCompTime(secondCompTime, secondAMRTime, secondComTime, secondIOTime);
 }
 
 //***********************************************************************
@@ -682,6 +679,68 @@ std::string Output::createFilename(const char* name, int lvl, int proc, int numF
   //Gestion extension
   num << ".out";
   return num.str();
+}
+
+//***********************************************************************
+
+void Output::prepareErrorFiles() const
+{
+  std::stringstream errorStream, warningStream;
+
+  // Be careful, only files whose indices match with current MPI process ranks are deleted.
+  // So if a previous run has used more CPU than current one, old files are kept.
+  errorStream << m_folderErrorsAndWarnings << "error_CPU" << rankCpu << ".out";
+  warningStream << m_folderErrorsAndWarnings << "warning_CPU" << rankCpu << ".out";
+
+  std::remove(errorStream.str().c_str());
+  std::remove(warningStream.str().c_str());
+}
+
+//***********************************************************************
+
+void Output::writeErrorInFile(std::vector<Errors>& v, const int& ErrorType, const int& iteration, bool& warn) const
+{
+  std::string fileName;
+
+  size_t err_count{v.size()};
+  MPI_Allreduce(MPI_IN_PLACE, &err_count, 1, ECOGEN_MPI_SIZE_T, MPI_SUM, MPI_COMM_WORLD);
+
+  if (!err_count) {
+    return;
+  } // No error or warning in any MPI process. Exit.
+
+  if (ErrorType == ERROR) {
+    fileName = "error";
+  }
+  else if (ErrorType == WARNING) {
+    fileName = "warning";
+    warn     = 1;
+  }
+
+  std::string msg;
+  if (!v.empty()) { // Vector is not empty on current MPI rank: write errors/warnings in file
+    std::stringstream myStream;
+    myStream << m_folderErrorsAndWarnings << fileName << "_CPU" << rankCpu << ".out";
+
+    std::ofstream fileStream;
+
+    fileStream.open((myStream.str()).c_str(), std::ofstream::app);
+    for (size_t e = 0; e < v.size(); e++) {
+      msg += v[e].errorToString(e, ErrorType, iteration);
+    }
+    fileStream << msg;
+    fileStream.close();
+
+    // Clearing the vector is required even in case of errors because if we run several tests and don't clean
+    // the vector, it will contains old data.
+    v.clear();
+  }
+
+  if (ErrorType == ERROR) {
+    // Some MPI rank have failed due to errors.
+    std::cout << ECOGEN_color_red << msg << ECOGEN_color_reset;
+    throw ErrorECOGEN("Stop code after error... not managed");
+  }
 }
 
 //***********************************************************************

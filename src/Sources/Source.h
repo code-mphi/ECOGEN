@@ -54,7 +54,7 @@ class Source
     //! \brief     Source terms integration on conservative quantities
     //! \param     cell           cell for source term integration
     //! \param     dt             integration time step
-    virtual void integrateSourceTerms(Cell* /*cell*/, const double& /*dt*/)
+    virtual void integrateSourceTerms(Cell* /*cell*/, const double& /*dt*/, Prim /*type*/ = vecPhases)
     {
       Errors::errorMessage("integrateSourceTerms not available for required source");
     };

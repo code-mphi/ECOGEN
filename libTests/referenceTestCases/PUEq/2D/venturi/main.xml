@@ -8,10 +8,6 @@
 	</timeControlMode>
 	<computationControl CFL="0.4"/>
 
-  <gradient>
-		<method>green-gauss</method>
-	</gradient>
-
   <probe name="probe">
     <vertex x="1.228" y="-0.061225" z="0."/>
     <timeControl acqFreq="1.e-6"/>

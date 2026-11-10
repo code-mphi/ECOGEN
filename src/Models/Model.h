@@ -102,7 +102,7 @@ class Model
       Errors::errorMessage("fulfillStateResume not available for required model");
     };
 
-    //! \brief     Complete the augmented variables (such as the ones of Euler-Korteweg model)
+    //! \brief     Complete the augmented variables (such as the ones of Navier-Stokes-Korteweg model)
     //! \param     cell           cell
     virtual void initializeAugmentedVariables(Cell* /*cell*/)
     {
@@ -158,18 +158,27 @@ class Model
     //! \param     boundData         boundary dataset used for output
     virtual void solveRiemannWall(Cell& /*cellLeft*/, const double& /*dxLeft*/, double& /*dtMax*/, std::vector<double>& /*boundData*/) const
     {
-      Errors::errorMessage("solveRiemannWall not available for required model");
+      Errors::errorMessage("solveRiemannWall or solveRiemannSymmetry not available for required model");
     };
-    //! \brief     Piston half Riemann solver
+    //! \brief     Symmetry half Riemann solver
     //! \param     cellLeft          left cell
     //! \param     dxLeft            left characteristic lenght
     //! \param     dtMax             maximum explicit time step
     //! \param     boundData         boundary dataset used for output
-    //! \param     uPiston           piston velocity
-    virtual void solveRiemannPiston(
-      Cell& /*cellLeft*/, const double& /*dxLeft*/, double& /*dtMax*/, std::vector<double>& /*boundData*/, const double& /*uPiston*/) const
+    virtual void solveRiemannSymmetry(Cell& cellLeft, const double& dxLeft, double& dtMax, std::vector<double>& boundData) const
     {
-      Errors::errorMessage("solveRiemannPiston not available for required model");
+      this->solveRiemannWall(cellLeft, dxLeft, dtMax, boundData);
+    };
+    //! \brief     Moving wall half Riemann solver
+    //! \param     cellLeft          left cell
+    //! \param     dxLeft            left characteristic lenght
+    //! \param     dtMax             maximum explicit time step
+    //! \param     wallVelocity      moving wall velocity (in its normal direction)
+    //! \param     boundData         boundary dataset used for output
+    virtual void solveRiemannMovingWall(
+      Cell& /*cellLeft*/, const double& /*dxLeft*/, double& /*dtMax*/, double /*wallVelocity*/, std::vector<double>& /*boundData*/) const
+    {
+      Errors::errorMessage("solveRiemannMovingWall not available for required model");
     };
     //! \brief     Inlet tank half Riemann solver
     //! \param     cellLeft          left cell
@@ -264,12 +273,12 @@ class Model
     };
     //! \brief     Wall half Riemann solver for transport equations
     virtual void solveRiemannTransportWall() { Errors::errorMessage("solveRiemannTransportWall not available for required model"); };
-    //! \brief     Piston half Riemann solver for transport equations
+    //! \brief     Moving wall half Riemann solver for transport equations
     //! \param     cellLeft          left cell
-    //! \param     uPiston           piston velocity
-    virtual void solveRiemannTransportPiston(Cell& /*cellLeft*/, double /*uPiston*/)
+    //! \param     wallVelocity      moving wall velocity (in its normal direction)
+    virtual void solveRiemannTransportMovingWall(Cell& /*cellLeft*/, double /*wallVelocity*/)
     {
-      Errors::errorMessage("solveRiemannTransportPiston not available for required model");
+      Errors::errorMessage("solveRiemannTransportMovingWall not available for required model");
     };
     //! \brief     Inlet injection using stagnation state half Riemann solver for transport equations
     //! \param     cellLeft          left cell
@@ -553,6 +562,14 @@ class Model
     const bool& getLowMach() const { return m_lowMach; };
     void setLowMach(const bool& lowMach) { m_lowMach = lowMach; };
     virtual void setMachRefMin(const double& machRefMin) { m_machRefMin = machRefMin; };
+
+    //! \brief    Set the slope values for the extrapolation within the cell
+    //! \param    slope         slopes for a Phase
+    //! \param    k             phase index
+    virtual void setPhaseSlope(Phase& /*phaseSlope*/, int /*k*/) {};
+    //! \brief    Set the geometric distance over which the in-cell slopes extrapolate (cell width along the face normal)
+    //! \param    slopeDistance  distance from the face back to the opposite face of the cell
+    virtual void setSlopeDistance(const double& /*slopeDistance*/) {};
 
   protected:
     // clang-format off

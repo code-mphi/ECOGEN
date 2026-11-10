@@ -165,6 +165,7 @@ class Coord
 extern Coord coordBuff;
 extern Coord velocity;
 extern Coord vFaceToElt;
+extern Coord coordIdentity;
 
 //Extern operator surcharges of the class because they take two arguments
 Coord operator*(const double& scalar, const Coord& a);

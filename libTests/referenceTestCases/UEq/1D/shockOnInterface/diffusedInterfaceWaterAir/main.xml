@@ -7,9 +7,4 @@
 		<physicalTime totalTime="600.e-6" timeFreq="300.e-6"/>
 	</timeControlMode>
 	<computationControl CFL="0.6"/>
-<!-- 	<secondOrder>
-		<globalLimiter>vanleer</globalLimiter>
-		<globalVolumeFractionLimiter>thinc</globalVolumeFractionLimiter>
-    	<interfaceVolumeFractionLimiter>thinc</interfaceVolumeFractionLimiter>
-	</secondOrder> -->
 </computationParam>

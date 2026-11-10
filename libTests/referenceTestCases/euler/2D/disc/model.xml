@@ -6,4 +6,7 @@
     <omega x="0." y="0." z="-500."/>
     <riemannCoupling state="true"/>
   </sourceTerms>
+	<gradient>
+		<method>green-gauss</method>
+	</gradient>
 </model>

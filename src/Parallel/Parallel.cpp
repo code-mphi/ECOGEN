@@ -257,22 +257,6 @@ void Parallel::stopRun()
   exit(0);
 }
 
-//***********************************************************************
-
-bool Parallel::verifyStateCPUs()
-{
-  //Gathering of errors
-  int nbErr_temp(0);
-  int nbErr(errors.size());
-  MPI_Allreduce(&nbErr, &nbErr_temp, 1, MPI_INT, MPI_SUM, MPI_COMM_WORLD);
-  //Stop if error on one CPU
-  if (nbErr_temp) {
-    return true;
-    //Errors::codeShutdownAfterError(errors);
-  }
-  return false;
-}
-
 //****************************************************************************
 //**************** Methods for all the primitive variables *******************
 //****************************************************************************
@@ -314,13 +298,14 @@ void Parallel::finalizePersistentCommunicationsPrimitives(const int& lvlMax)
           delete[] m_bufferReceive[lvl][neighbour];
         }
       }
-      // next arrays are allocated iff m_isNeighbour is
-      delete[] m_reqSend[lvl];
-      delete[] m_bufferSend[lvl];
-      delete[] m_reqReceive[lvl];
-      delete[] m_bufferReceive[lvl];
     }
   }
+
+  for (auto item : m_reqSend) delete[] item;
+  for (auto item : m_bufferSend) delete[] item;
+  for (auto item : m_reqReceive) delete[] item;
+  for (auto item : m_bufferReceive) delete[] item;
+
   m_reqSend.clear();
   m_bufferSend.clear();
   m_reqReceive.clear();
@@ -353,7 +338,6 @@ void Parallel::communicationsPrimitives(Eos** eos, int lvl, Prim type)
       //Waiting
       MPI_Wait(m_reqSend[lvl][neighbour], &status);
       MPI_Wait(m_reqReceive[lvl][neighbour], &status);
-
       //Receivings
       count = -1;
       for (int i = 0; i < m_numberElementsToReceiveFromNeighbour[neighbour]; i++) {
@@ -405,13 +389,14 @@ void Parallel::finalizePersistentCommunicationsSlopes(const int& lvlMax)
           delete[] m_bufferReceiveSlopes[lvl][neighbour];
         }
       }
-      // next arrays are allocated iff m_isNeighbour is
-      delete[] m_reqSendSlopes[lvl];
-      delete[] m_bufferSendSlopes[lvl];
-      delete[] m_reqReceiveSlopes[lvl];
-      delete[] m_bufferReceiveSlopes[lvl];
     }
   }
+
+  for (auto item : m_reqSendSlopes) delete[] item;
+  for (auto item : m_bufferSendSlopes) delete[] item;
+  for (auto item : m_reqReceiveSlopes) delete[] item;
+  for (auto item : m_bufferReceiveSlopes) delete[] item;
+
   m_reqSendSlopes.clear();
   m_bufferSendSlopes.clear();
   m_reqReceiveSlopes.clear();
@@ -496,13 +481,14 @@ void Parallel::finalizePersistentCommunicationsVector(const int& lvlMax)
           delete[] m_bufferReceiveVector[lvl][neighbour];
         }
       }
-      // next arrays are allocated iff m_isNeighbour is
-      delete[] m_reqSendVector[lvl];
-      delete[] m_bufferSendVector[lvl];
-      delete[] m_reqReceiveVector[lvl];
-      delete[] m_bufferReceiveVector[lvl];
     }
   }
+
+  for (auto item : m_reqSendVector) delete[] item;
+  for (auto item : m_bufferSendVector) delete[] item;
+  for (auto item : m_reqReceiveVector) delete[] item;
+  for (auto item : m_bufferReceiveVector) delete[] item;
+
   m_reqSendVector.clear();
   m_bufferSendVector.clear();
   m_reqReceiveVector.clear();
@@ -589,13 +575,14 @@ void Parallel::finalizePersistentCommunicationsTransports(const int& lvlMax)
           delete[] m_bufferReceiveTransports[lvl][neighbour];
         }
       }
-      // next arrays are allocated iff m_isNeighbour is
-      delete[] m_reqSendTransports[lvl];
-      delete[] m_bufferSendTransports[lvl];
-      delete[] m_reqReceiveTransports[lvl];
-      delete[] m_bufferReceiveTransports[lvl];
     }
   }
+
+  for (auto item : m_reqSendTransports) delete[] item;
+  for (auto item : m_bufferSendTransports) delete[] item;
+  for (auto item : m_reqReceiveTransports) delete[] item;
+  for (auto item : m_bufferReceiveTransports) delete[] item;
+
   m_reqSendTransports.clear();
   m_bufferSendTransports.clear();
   m_reqReceiveTransports.clear();
@@ -1055,11 +1042,13 @@ void Parallel::finalizePersistentCommunicationsXi(const int& lvlMax)
         delete[] m_bufferReceiveXi[lvl][neighbour];
       }
     }
-    delete[] m_reqSendXi[lvl];
-    delete[] m_bufferSendXi[lvl];
-    delete[] m_reqReceiveXi[lvl];
-    delete[] m_bufferReceiveXi[lvl];
   }
+
+  for (auto item : m_reqSendXi) delete[] item;
+  for (auto item : m_bufferSendXi) delete[] item;
+  for (auto item : m_reqReceiveXi) delete[] item;
+  for (auto item : m_bufferReceiveXi) delete[] item;
+
   m_reqSendXi.clear();
   m_bufferSendXi.clear();
   m_reqReceiveXi.clear();
@@ -1144,11 +1133,13 @@ void Parallel::finalizePersistentCommunicationsSplit(const int& lvlMax)
         delete[] m_bufferReceiveSplit[lvl][neighbour];
       }
     }
-    delete[] m_reqSendSplit[lvl];
-    delete[] m_bufferSendSplit[lvl];
-    delete[] m_reqReceiveSplit[lvl];
-    delete[] m_bufferReceiveSplit[lvl];
   }
+
+  for (auto item : m_reqSendSplit) delete[] item;
+  for (auto item : m_bufferSendSplit) delete[] item;
+  for (auto item : m_reqReceiveSplit) delete[] item;
+  for (auto item : m_bufferReceiveSplit) delete[] item;
+
   m_reqSendSplit.clear();
   m_bufferSendSplit.clear();
   m_reqReceiveSplit.clear();
@@ -1256,14 +1247,22 @@ void Parallel::initializePersistentCommunicationsNumberGhostCells()
 void Parallel::finalizePersistentCommunicationsNumberGhostCells()
 {
   for (int neighbour = 0; neighbour < Ncpu; neighbour++) {
-    MPI_Request_free(m_reqNumberElementsToSendToNeighbor[neighbour]);
-    MPI_Request_free(m_reqNumberElementsToReceiveFromNeighbour[neighbour]);
-    MPI_Request_free(m_reqNumberSlopesToSendToNeighbor[neighbour]);
-    MPI_Request_free(m_reqNumberSlopesToReceiveFromNeighbour[neighbour]);
-    delete m_reqNumberElementsToSendToNeighbor[neighbour];
-    delete m_reqNumberElementsToReceiveFromNeighbour[neighbour];
-    delete m_reqNumberSlopesToSendToNeighbor[neighbour];
-    delete m_reqNumberSlopesToReceiveFromNeighbour[neighbour];
+    if (m_reqNumberElementsToSendToNeighbor[neighbour]) {
+      MPI_Request_free(m_reqNumberElementsToSendToNeighbor[neighbour]);
+      delete m_reqNumberElementsToSendToNeighbor[neighbour];
+    }
+    if (m_reqNumberElementsToReceiveFromNeighbour[neighbour]) {
+      MPI_Request_free(m_reqNumberElementsToReceiveFromNeighbour[neighbour]);
+      delete m_reqNumberElementsToReceiveFromNeighbour[neighbour];
+    }
+    if (m_reqNumberSlopesToSendToNeighbor[neighbour]) {
+      MPI_Request_free(m_reqNumberSlopesToSendToNeighbor[neighbour]);
+      delete m_reqNumberSlopesToSendToNeighbor[neighbour];
+    }
+    if (m_reqNumberSlopesToReceiveFromNeighbour[neighbour]) {
+      MPI_Request_free(m_reqNumberSlopesToReceiveFromNeighbour[neighbour]);
+      delete m_reqNumberSlopesToReceiveFromNeighbour[neighbour];
+    }
   }
   delete[] m_reqNumberElementsToSendToNeighbor;
   delete[] m_reqNumberElementsToReceiveFromNeighbour;

@@ -6,4 +6,7 @@
   <relaxation type="PTMu">
     <dataPTMu liquid="SG_waterLiq_278_318K.xml" vapor="IG_waterVap_278_318K.xml"/>
   </relaxation>
+	<gradient>
+		<method>green-gauss</method>
+	</gradient>
 </model>

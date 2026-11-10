@@ -36,14 +36,15 @@
 #include "../Errors.h"
 #include "../libTierces/tinyxml2.h"
 
-//! \brief     Enumeration for the type of EOS (IG: ideal gas, SG: stiffened gas, NASG: Noble-Abel stiffened gas, VDW: Van Der Waals, Polynomial)
+//! \brief     Enumeration for the type of EOS (IG: ideal gas, SG: stiffened gas, NASG: Noble-Abel stiffened gas, VDW: Van Der Waals, Polynomial, NLS: Non-linear Schödinger)
 enum TypeEOS
 {
   IG,
   SG,
   NASG,
   VDW,
-  Polynomial
+  Polynomial,
+  NLS
 };
 
 class Eos; //Predeclaration of class to include following .h
@@ -55,7 +56,7 @@ class Eos; //Predeclaration of class to include following .h
 //! \details   This is a pure virtual class: can not be instantiated.
 //! \details   This base class and its derived classes contain mainly computational functions to obtain thermodynamical values for each phase: pressure, temperature, internal energy...
 //! \details   In this ECOGEN release these are the EOS available:
-//! \details   ideal Gas (sub class EosIG), Stiffened (sub class EoSG), Noble-Abel Stiffened Gas (sub class EosNASG), Van der Waals (sub class EosVDW), polynomial (sub class EosPolynomial).
+//! \details   ideal Gas (sub class EosIG), Stiffened (sub class EoSG), Noble-Abel Stiffened Gas (sub class EosNASG), Van der Waals (sub class EosVDW), polynomial (sub class EosPolynomial), NLS (sub class EosNLS).
 //! \details   Appropriate data for EOS leads to a large choice of gas, liquid or compressible solid.
 class Eos
 {
@@ -123,6 +124,12 @@ class Eos
       return 0.;
     };
     //! \brief See derived classes
+    virtual double computeEnergyFromDensityAndTemperature(const double& /*density*/, const double& /*temperature*/) const
+    {
+      Errors::errorMessage("computeEnergyFromDensityAndTemperature not yet programmed for EOS : " + m_name);
+      return 0.;
+    };
+    //! \brief See derived classes
     virtual double computePressure(const double& /*density*/, const double& /*energy or temperature*/) const
     {
       Errors::errorMessage("computePressure not yet programmed for EOS : " + m_name);
@@ -138,6 +145,12 @@ class Eos
     virtual double computeSoundSpeed(const double& /*density*/, const double& /*pressure*/) const
     {
       Errors::errorMessage("computeSoundSpeed not yet programmed for EOS : " + m_name);
+      return 0.;
+    };
+    //! \brief See derived classes
+    virtual double computeSquareSoundSpeed(const double& /*density*/, const double& /*entropy or energy*/) const
+    {
+      Errors::errorMessage("computeSquareSoundSpeed not yet programmed for EOS : " + m_name);
       return 0.;
     };
     //! \brief See derived classes
@@ -163,6 +176,36 @@ class Eos
     virtual double computeEntropy(const double& /*temperature*/, const double& /*pressure*/) const
     {
       Errors::errorMessage("computeEntropy not yet programmed for EOS : " + m_name);
+      return 0.;
+    };
+    //! \brief See derived classes
+    virtual double computeEntropyFromDensityAndEnergy(const double& /*density*/, const double& /*energy*/) const
+    {
+      Errors::errorMessage("computeEntropyFromDensityAndEnergy not yet programmed for EOS : " + m_name);
+      return 0.;
+    };
+    //! \brief See derived classes
+    virtual double computeEntropyFromDensityAndPressure(const double& /*density*/, const double& /*pressure*/) const
+    {
+      Errors::errorMessage("computeEntropyFromDensityAndPressure not yet programmed for EOS : " + m_name);
+      return 0.;
+    };
+    //! \brief See derived classes
+    virtual double computeEntropyFromDensityAndTemperature(const double& /*density*/, const double& /*temperature*/) const
+    {
+      Errors::errorMessage("computeEntropyFromDensityAndTemperature not yet programmed for EOS : " + m_name);
+      return 0.;
+    };
+    //! \brief See derived classes
+    virtual double computePressureFromDensityAndEntropy(const double& /*density*/, const double& /*entropy*/) const
+    {
+      Errors::errorMessage("computePressureFromDensityAndEntropy not yet programmed for EOS : " + m_name);
+      return 0.;
+    };
+    //! \brief See derived classes
+    virtual double computePressureFromDensityAndTemperature(const double& /*density*/, const double& /*temperature*/) const
+    {
+      Errors::errorMessage("computePressureFromDensityAndTemperature not yet programmed for EOS : " + m_name);
       return 0.;
     };
     //! \brief See derived classes
@@ -270,6 +313,24 @@ class Eos
     virtual double dedrhoSecond(const double& /*density*/, const double& /*temperature*/) const
     {
       Errors::errorMessage("dedrhoSecond not yet programmed for EOS : " + m_name);
+      return 0.;
+    };
+    //! \brief See derived classes
+    virtual double kappa(const double& /*density*/) const
+    {
+      Errors::errorMessage("kappa not yet programmed for EOS : " + m_name);
+      return 0.;
+    };
+    //! \brief See derived classes
+    virtual double kappaPrime(const double& /*density*/) const
+    {
+      Errors::errorMessage("kappaPrime not yet programmed for EOS : " + m_name);
+      return 0.;
+    };
+    //! \brief See derived classes
+    virtual double kappaSecond(const double& /*density*/) const
+    {
+      Errors::errorMessage("kappaSecond not yet programmed for EOS : " + m_name);
       return 0.;
     };
 

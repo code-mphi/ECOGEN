@@ -179,6 +179,8 @@ class Tensor
     void inverse(Tensor& inverseTensor) const;
     //! \brief     Compute the infinity norm of the tensor
     double infinityNorm() const;
+    //! \brief     Compute the Frobenius (L2) norm of the tensor
+    double frobeniusNorm() const;
     //! \brief     Compute the exponential of the tensor using a Padé 6*6 algorithm
     //! \param     tensorExpPade        resulting tensor (exponential Padé)
     void exponentialPade(Tensor& tensorExpPade);
@@ -227,6 +229,8 @@ extern Tensor tensorX6;
 extern Tensor tensorU;
 extern Tensor tensorV;
 extern Tensor tensorQ;
+extern Tensor tensorStrainRate;          //<! S: Strain rate tensor (gradU)
+extern Tensor tensorStrainRateTranspose; //<! S^T: Transposed strain rate tensor (gradU)
 
 //Extern operator surcharges of the class because they take two arguments
 Tensor operator*(const double& scalar, const Tensor& a);

@@ -48,14 +48,14 @@ MixUEqTotEnergy::MixUEqTotEnergy(XMLElement* state, std::string fileName) :
   //------------------
   XMLError error;
   //velocity
-  XMLElement* velocity(sousElement->FirstChildElement("velocity"));
-  if (velocity == NULL) throw ErrorXMLElement("velocity", fileName, __FILE__, __LINE__);
+  XMLElement* xmlVelocity(sousElement->FirstChildElement("velocity"));
+  if (xmlVelocity == NULL) throw ErrorXMLElement("velocity", fileName, __FILE__, __LINE__);
   double velocityX(0.), velocityY(0.), velocityZ(0.);
-  error = velocity->QueryDoubleAttribute("x", &velocityX);
+  error = xmlVelocity->QueryDoubleAttribute("x", &velocityX);
   if (error != XML_NO_ERROR) throw ErrorXMLAttribut("x", fileName, __FILE__, __LINE__);
-  error = velocity->QueryDoubleAttribute("y", &velocityY);
+  error = xmlVelocity->QueryDoubleAttribute("y", &velocityY);
   if (error != XML_NO_ERROR) throw ErrorXMLAttribut("y", fileName, __FILE__, __LINE__);
-  error = velocity->QueryDoubleAttribute("z", &velocityZ);
+  error = xmlVelocity->QueryDoubleAttribute("z", &velocityZ);
   if (error != XML_NO_ERROR) throw ErrorXMLAttribut("z", fileName, __FILE__, __LINE__);
   m_velocity.setXYZ(velocityX, velocityY, velocityZ);
 }

@@ -3,4 +3,10 @@
 	<flowModel name="EulerHomogeneous" numberPhases="2" liquid="0" vapor="1"/>
 	<EOS name="SG_waterLiq.xml"/>
 	<EOS name="IG_waterVap.xml"/>
+	<!-- <secondOrder>
+		<globalLimiter>minmod</globalLimiter>
+	</secondOrder> -->
+	<gradient>
+		<method>green-gauss</method>
+	</gradient>
 </model>

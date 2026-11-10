@@ -1,0 +1,34 @@
+<?xml version = "1.0" encoding = "UTF-8" standalone = "yes"?>
+<CI>
+    <!-- LIST OF GEOMETRICAL DOMAINS  -->
+    <physicalDomains>
+        <domain name="base" state="chamberLeft" type="entireDomain"/>
+        <domain name="HP"  state="chamberRight" type="halfSpace">
+            <dataHalfSpace axis="x" origin="3." direction="positive"/>
+        </domain>
+    </physicalDomains>
+
+    <!-- LIST OF BOUNDARY CONDITIONS -->
+    <boundaryConditions>
+        <boundCond name="BC_Xmin" type="nonReflecting" number="1" />
+        <boundCond name="BC_Xmax" type="nonReflecting" number="2" />
+    </boundaryConditions>
+
+    <!--  LIST OF STATES  -->
+    <state name="chamberLeft">
+        <material type="fluid" EOS="VDW_test.xml">
+            <dataFluid density="8." pressure="1.418919">
+                <velocity x="-1." y="0." z="0."/>
+            </dataFluid>
+        </material>
+    </state>
+
+    <state name="chamberRight">
+        <material type="fluid" EOS="VDW_test.xml">
+            <dataFluid density="8." pressure="1.418919">
+                <velocity x="1." y="0." z="0."/>
+            </dataFluid>
+        </material>
+    </state>
+
+</CI>

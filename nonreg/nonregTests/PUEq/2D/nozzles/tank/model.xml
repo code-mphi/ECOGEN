@@ -3,4 +3,7 @@
 	<flowModel name="PressureVelocityEq" numberPhases="2" alphaNull="false"/>
 	<EOS name="IG_helium.xml"/>
 	<EOS name="SG_water.xml"/>
+	<gradient>
+		<method>green-gauss</method>
+	</gradient>
 </model>

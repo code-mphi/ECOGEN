@@ -45,7 +45,7 @@ class BoundCondOutletPressure : public BoundCond
     void solveRiemannBoundary(Cell& cellLeft, const double& dxLeft, double& dtMax) override;
     void solveRiemannTransportBoundary(Cell& cellLeft) const override;
 
-    int whoAmI() const override { return OUTLETPRESSURE; };
+    int whoAmI() const override { return TypeBC::OUTLETPRESSURE; };
     void printInfo() override;
 
     //For AMR method

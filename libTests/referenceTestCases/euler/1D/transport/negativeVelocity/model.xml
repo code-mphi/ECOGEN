@@ -3,4 +3,7 @@
 	<flowModel name="Euler"/>
 	<EOS name="IG_air.xml"/>
 <!-- 	<EOS name="SG_water.xml"/> -->
+	<secondOrder>
+		<globalLimiter>superbee</globalLimiter>
+	</secondOrder>
 </model>

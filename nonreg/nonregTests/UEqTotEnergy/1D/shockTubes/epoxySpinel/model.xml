@@ -4,4 +4,9 @@
 	<EOS name="SG_epoxy.xml"/>
 	<EOS name="SG_spinel.xml"/>
 	<relaxation type="P" speed="infinite"/>
+	<secondOrder>
+		<globalLimiter>vanleer</globalLimiter>
+		<globalVolumeFractionLimiter>thinc</globalVolumeFractionLimiter>
+    	<interfaceVolumeFractionLimiter>thinc</interfaceVolumeFractionLimiter>
+	</secondOrder>
 </model>

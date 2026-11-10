@@ -16,9 +16,10 @@ REQUIRED computational parameters
 1) Fluid-flow model
 *******************
 Contains model name and phase number for multiphase models.
-Available models are: Euler, VelocityEq, VelocityEqTotEnergy, PressureVelocityEq (Kapila), TemperaturePressureVelocityEq, EulerHomogeneous, EulerKorteweg, NonLinearSchrodinger.
+Available models are: Euler, NonEq, NonEqDEM, VelocityEq, VelocityEqTotEnergy, PressureVelocityEq (Kapila), TemperaturePressureVelocityEq, EulerHomogeneous, ExtendedNavierStokesKorteweg1D.
 For the pressure-velocity- (Kapila's) and velocity-equilibrium models, the volume fraction can either be null or not and this choice is determined by the parameter `alphaNull`.
 For single phase model (example: Euler), `numberPhases` is optionnal and is 1 as default.
+For the non-equilibrium model solved with the Discrete Equation Method (DEM), the additional attribute `RiemannSolver` is needed to specify the Riemann-problem solver used: "HLLC" or "Exact". When solved with `NonEq`, an additional attribute must be set: :xml:`solver` to specify the solver of the Riemann problem. The HLLAC, the HLLC4waves, the HLL- or Rusanov-type solvers can be used.
 Attribute `numberTransports` is optionnal and is set to 0 as default.
 %%%%%%%%%%%%%%%%%% << copy between these lines
 <flowModel name="PressureVelocityEq" numberPhases="2" numberTransports="1" alphaNull="false"/>
@@ -42,8 +43,52 @@ Caution: For EulerHomogeneous, the two attributes for phase number of liquid and
 %%%%%%%%%%%%%%%%%% << copy between these lines
 
 --------------------------
-OPTIONNAL model parameters
+OPTIONAL model parameters
 --------------------------
+
+*) Scheme precision order
+*************************
+Default (without this XML node), the scheme is first order in time and space.
+Possible using of a second-order scheme in time and space using MUSCL method with TVD limiters.
+a) Second order for Cartesian mesh with/without AMR
+---------------------------------------------------
+For Cartesian mesh with/without AMR the available limiters are: minmod, vanleer, vanalbada, mc, superbee, thinc (only for volume-fraction limiter).
+The choice of the limiters is divided into four parts:
+- global limiter: applied everywhere and on all variables unless it is overwrite by the following optional limiters.
+- interface limiter: applied on all variables but only at the interface location. By default is equal to the global limiter.
+- global volume-fraction limiter: applied everywhere but only on the volume-fraction and transport equations (THINC is only applied on the volume fractions) unless it is overwrite by the interface volume-fraction limiter. By default is equal to the global limiter.
+- interface volume-fraction limiter: applied only at the interface location and on the volume-fraction and transport equations (THINC is only applied on the volume fractions). By default is equal to the interface limiter.
+%%%%%%%%%%%%%%%%%% << copy between these lines
+<secondOrder>
+  <globalLimiter>minmod</globalLimiter>
+  <interfaceLimiter>superbee</interfaceLimiter>                            <!-- optionnal node -->
+  <globalVolumeFractionLimiter>minmod</globalVolumeFractionLimiter>        <!-- optionnal node -->
+  <interfaceVolumeFractionLimiter>thinc</interfaceVolumeFractionLimiter>   <!-- optionnal node -->
+</secondOrder>
+%%%%%%%%%%%%%%%%%% << copy between these lines
+b) Second order for unstructured mesh
+-------------------------------------
+For unstructured mesh the available limiters are: minmod, superbee.
+The chosen limiter is a global limiter applied everywhere and on all variables.
+Note that on unstructured mesh the MUSCL method relies on gradients computation.
+Therefore, the gradient method chosen should be compatible with unstructured mesh (see node <gradient>).
+%%%%%%%%%%%%%%%%%% << copy between these lines
+<secondOrder>
+  <globalLimiter>minmod</globalLimiter>
+</secondOrder>
+%%%%%%%%%%%%%%%%%% << copy between these lines
+
+*) Gradient method
+******************
+To compute gradients, e.g. density gradient or viscous gradient, it is possible to use finite-difference-like gradient on Cartesian mesh (also with AMR) or Green-Gauss gradient on Cartesian and unstructured mesh.
+Default (without this XML node), the gradients will be computed using the finite-difference scheme (<method>finite-difference</method>).
+In case second order scheme is set on unstructured mesh (see node <secondOrder>), the gradient method must be set to Green-Gauss.
+To define explicitly the gradient method or use the Green-Gauss one (<method>green-gauss</method>), one can use:
+%%%%%%%%%%%%%%%%%% << copy between these lines
+<gradient>
+  <method>finite-difference</method> <!-- For finite difference like gradient scheme -->
+</gradient>
+%%%%%%%%%%%%%%%%%% << copy between these lines
 
 *) Advected variable names
 **************************
@@ -82,17 +127,27 @@ a) Surface tension
 ------------------
 This physical effect needs the name of advected variable used as color function for surface-tension terms as well as surface-tension coefficient in N/m.
 %%%%%%%%%%%%%%%%%% << copy between these lines
-<additionalPhysic type="surfaceTension" >
+<additionalPhysics type="surfaceTension" >
   <dataSurfaceTension transport="color" sigma="72.e-3"/>
-</additionalPhysic>
+</additionalPhysics>
 %%%%%%%%%%%%%%%%%% << copy between these lines
 b) Viscosity
 ------------
 This physical effect needs the <physicalParameters> "mu" to be set in the EOS files.
 %%%%%%%%%%%%%%%%%% << copy between these lines
-<additionalPhysic type="viscosity"/>
+<additionalPhysics type="viscosity"/>
 %%%%%%%%%%%%%%%%%% << copy between these lines
-c) Others: In dev...
+c) Turbulence
+------------
+This physical effect needs the <smagorinsky> "C_s", "C_I" and "Pr_T" to be set in the model.xml file.
+%%%%%%%%%%%%%%%%%% << copy between these lines
+<additionalPhysics type="turbulence">
+  <turbulence model = "smagorinsky">
+    <smagorinsky C_s="0.12" C_I="0.9" Pr_T="0.71"/>
+  </turbulence>
+</additionalPhysics>
+%%%%%%%%%%%%%%%%%% << copy between these lines
+d) Others: In dev...
 
 *) Symmetry terms
 *****************
@@ -208,3 +263,22 @@ d) Velocities
 %%%%%%%%%%%%%%%%%% << copy between these lines
 <relaxation type="U" speed="infinite"/>
 %%%%%%%%%%%%%%%%%% << copy between these lines
+
+*) Splitting of operators (only for Sources and Additional physics)
+*******************************************************************
+For a system of balance laws, we separate the hyperbolic operator "H(dt)" and the source operator "S(dt)".
+Each operator is solved with an appropriate method (of any order of accuracy).
+To obtain the solution at the next step, one have to combine the solution of each operator in some ordered sequence:
+  - For a first order, in space and time, numerical scheme, we have (default) the Godunov splitting U^{n+1} = S(dt) * H(dt) * U^{n}
+  - For a second order, in space and time, numerical scheme, there are two possibilities:
+    a) the Godunov splitting,
+    b) the Strang splitting U^{n+1} = S(dt/2) * H(dt) * S(dt/2) * U^{n},
+  where H(dt) and S(dt) are solved by, at least, a second order method.
+  If operators H and S commute (H * S - S * H = 0), then the splitting a) is second order accurate in space and time.
+  Else, the splitting a) is first order and one has to choose the splitting b) to obtain second order accuracy.
+******************************
+To enable the Strang splitting
+%%%%%%%%%%%%%%%%%% << copy between these lines
+<splitting type="strang"/>
+%%%%%%%%%%%%%%%%%% << copy between these lines
+If nothing is put in model.xml, it takes the Godunov splitting by default.

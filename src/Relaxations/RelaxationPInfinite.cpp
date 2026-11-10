@@ -32,7 +32,7 @@
 
 //***********************************************************************
 
-RelaxationPInfinite::RelaxationPInfinite() {}
+RelaxationPInfinite::RelaxationPInfinite(const double threshold) : m_thresholdPressureRelaxation(threshold) {}
 
 //***********************************************************************
 
@@ -48,7 +48,7 @@ void RelaxationPInfinite::relaxation(Cell* cell, const double& /*dt*/, Prim type
   bool relax(true);
   if (epsilonAlphaNull > 1.e-20) { // alpha = 0 is activated
     for (int k = 0; k < numberPhases; k++) {
-      if (cell->getPhase(k, type)->getAlpha() > (1. - 1.e-5)) relax = false;
+      if (cell->getPhase(k, type)->getAlpha() > (1. - m_thresholdPressureRelaxation)) relax = false;
     }
   }
 

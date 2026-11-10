@@ -74,9 +74,9 @@ double Eos::computeTotalEnthalpy(const double& density, const double& pressure, 
 
 //***********************************************************************
 
-double Eos::computeTotalEnthalpy(const double& density, const double& pressure, const Coord& velocity) const
+double Eos::computeTotalEnthalpy(const double& density, const double& pressure, const Coord& velocity_) const
 {
-  return this->computeEnthalpy(density, pressure) + 0.5 * velocity.squaredNorm();
+  return this->computeEnthalpy(density, pressure) + 0.5 * velocity_.squaredNorm();
 }
 
 //***********************************************************************

@@ -116,6 +116,19 @@ class QuantitiesAddPhys
     //! \brief     Return the corresponding additional-physic class of this quantities class
     AddPhys* getAddPhys() { return m_addPhys; };
 
+    //! \brief     Return the turbulent viscosity
+    virtual double getTurbulentViscosity() const
+    {
+      Errors::errorMessage("getTurbulentViscosity not implemented for used quantities of additional physics");
+      return Errors::defaultInt;
+    };
+
+    //! \brief     Set the turbulent viscosity in the cell
+    virtual void setTurbulentViscosity(const double& /*turbulentViscosity*/)
+    {
+      Errors::errorMessage("setTurbulentViscosity not implemented for used quantities of additional physics");
+    };
+
   protected:
     AddPhys* m_addPhys; //!< Corresponding additional-physic class of this quantities class
 
@@ -128,5 +141,7 @@ extern std::vector<Variable> variableNamesVisc;    //!< Variable names of the co
 extern std::vector<int> numPhasesVisc;             //!< Number of the phase (0: for Euler compatibility and not used for multiphase models)
 extern std::vector<Variable> variableNamesCond;    //!< Variable names of the corresponding gradients
 extern std::vector<int> numPhasesCond;             //!< Number of the phase
+extern std::vector<Variable> variableNamesTurb;    //!< Variable names of the corresponding gradients
+extern std::vector<int> numPhasesTurb;             //!< Number of the phase (0: for Euler compatibility and not used for multiphase models)
 
 #endif // QUANTITIESADDPHYS_H

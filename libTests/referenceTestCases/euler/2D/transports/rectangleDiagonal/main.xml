@@ -12,7 +12,4 @@
 		<physicalTime totalTime="3.6e-4" timeFreq="3.6e-4"/>
 	</timeControlMode>
 	<computationControl CFL="0.8"/>
-	<secondOrder>
-		<globalLimiter>superbee</globalLimiter>
-	</secondOrder>
 </computationParam>

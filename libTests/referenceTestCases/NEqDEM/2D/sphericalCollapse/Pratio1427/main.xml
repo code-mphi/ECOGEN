@@ -1,0 +1,10 @@
+<?xml version = "1.0" encoding = "UTF-8" standalone = "yes"?>
+<computationParam>
+	<run>nonEqDEM2DsphericalCollapsePratio1427</run>
+	<outputMode format="VTK" binary="false"/>
+	<timeControlMode iterations="false">
+		<iterations number="300" iterFreq="30"/>
+		<physicalTime totalTime="2.e-6" timeFreq="2.e-9"/>
+	</timeControlMode>
+	<computationControl CFL="0.4"/>
+</computationParam>

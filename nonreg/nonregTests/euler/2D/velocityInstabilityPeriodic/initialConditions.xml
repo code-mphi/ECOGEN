@@ -1,0 +1,51 @@
+<?xml version = "1.0" encoding = "UTF-8" standalone = "yes"?>
+<CI>
+	<!-- LIST OF GEOMETRICAL DOMAINS  -->
+	<physicalDomains>
+		<!-- complete domain -->
+		<domain name="base" state="base" type="entireDomain"/> <!-- state A -->
+		<!-- state B initialized with a small jump to trigger the instability -->
+                <domain name="rectangle1"  state="rectangle1" type="rectangle"> <!-- state B -->
+		  <dataRectangle axis1="x" axis2="y" lAxis1="1." lAxis2="0.25">
+		    <posInferiorVertex x="0." y="0." z="0."/>
+                  </dataRectangle>
+                  </domain>
+                <domain name="rectangle2"  state="rectangle2" type="rectangle"> <!-- state B -->
+		  <dataRectangle axis1="x" axis2="y" lAxis1="1." lAxis2="0.25">
+		    <posInferiorVertex x="0." y="0.75" z="0."/>
+                  </dataRectangle>
+                </domain>
+	</physicalDomains>
+
+	<!-- LIST OF BOUNDARY CONDITIONS -->
+	<boundaryConditions>
+		<boundCond name="BC_Xmin" type="periodic" number="1" />
+		<boundCond name="BC_Xmax" type="periodic" number="2" />
+		<boundCond name="BC_Ymin" type="periodic" number="3" />
+		<boundCond name="BC_Ymax" type="periodic" number="4" />
+	</boundaryConditions>
+
+	<!--  LIST OF STATES  -->
+	<state name="base">
+		<material type="fluid" EOS="IG_air.xml"> <!-- state A -->
+			<dataFluid density="2." pressure="10.">
+				<velocity x="1." y="0." z="0."/>
+			</dataFluid>
+		</material>
+	</state>
+	<state name="rectangle1">
+		<material type="fluid" EOS="IG_air.xml"> <!-- state B -->
+			<dataFluid density="1." pressure="2.5">
+				<velocity x="-1." y="0." z="0."/>
+			</dataFluid>
+		</material>
+	</state>
+	<state name="rectangle2">
+		<material type="fluid" EOS="IG_air.xml"> <!-- state B -->
+			<dataFluid density="1." pressure="2.5">
+				<velocity x="-1." y="0." z="0."/>
+			</dataFluid>
+		</material>
+	</state>
+
+</CI>

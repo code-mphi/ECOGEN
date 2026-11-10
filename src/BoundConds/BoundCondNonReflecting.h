@@ -45,7 +45,7 @@ class BoundCondNonReflecting : public BoundCond
     void solveRiemannBoundary(Cell& cellLeft, const double& dxLeft, double& dtMax) override;
     void solveRiemannTransportBoundary(Cell& cellLeft) const override;
 
-    int whoAmI() const override { return NONREFLECTING; };
+    int whoAmI() const override { return TypeBC::NONREFLECTING; };
 
     //Pour methode AMR
     void creerCellInterfaceChild() override; /*!< Create a child cell interface (not initialized) */

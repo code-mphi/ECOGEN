@@ -37,6 +37,7 @@
 #include "LimiterSuperBee.h"
 #include "LimiterMC.h"
 #include "LimiterTHINC.h"
+#include "LimiterKoren.h"
 
 //Add here headers of new limiters
 

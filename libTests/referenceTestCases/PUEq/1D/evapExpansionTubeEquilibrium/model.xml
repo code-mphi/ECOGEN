@@ -6,4 +6,7 @@
 	<relaxation type="PTMu">
 		<dataPTMu liquid="SG_waterLiq_cavitation.xml" vapor="IG_waterVap_cavitation.xml"/>
 	</relaxation>
+	<!-- <secondOrder>
+		<globalLimiter>vanleer</globalLimiter>
+	</secondOrder> -->
 </model>

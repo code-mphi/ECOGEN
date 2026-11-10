@@ -43,12 +43,12 @@ class MUSGmshV4 : public MUSGmsh
     // --- MeshUnStruct virtual member functions ---
     void initGeometryMonoCPU(TypeMeshContainer<Cell*>& cells,
                              TypeMeshContainer<CellInterface*>& cellInterfaces,
-                             std::string computeOrder = "FIRSTORDER") override;
+                             SimulationOrder schemeOrder = SimulationOrder::first) override;
     //TODO// Reading partitioned mesh file for parallel computation
     void initGeometryParallel(TypeMeshContainer<Cell*>& /*cells*/,
                               TypeMeshContainer<Cell*>& /*cellsGhost*/,
                               TypeMeshContainer<CellInterface*>& /*cellInterfaces*/,
-                              std::string /*computeOrder*/ = "FIRSTORDER") override
+                              SimulationOrder /*schemeOrder*/ = SimulationOrder::first) override
     {
       Errors::errorMessage("reading partitioned Gmsh v4.x mesh file for parallel computation not avalaible in ECOGEN");
     };
@@ -56,11 +56,11 @@ class MUSGmshV4 : public MUSGmsh
     {
       Errors::errorMessage("reading partitioned Gmsh v4.x mesh file for parallel computation not avalaible in ECOGEN");
     };
-    void initCpuMeshSequential(TypeMeshContainer<Cell*>& /*cells*/, std::string& /*computeOrder*/) override
+    void initCpuMeshSequential(TypeMeshContainer<Cell*>& /*cells*/, SimulationOrder& /*schemeOrder*/) override
     {
       Errors::errorMessage("initCpuMeshSequential not available for requested mesh");
     }
-    void initCpuMeshParallel(TypeMeshContainer<Cell*>& /*cells*/, std::string& /*computeOrder*/, int /*cpu*/) override
+    void initCpuMeshParallel(TypeMeshContainer<Cell*>& /*cells*/, SimulationOrder& /*schemeOrder*/, int /*cpu*/) override
     {
       Errors::errorMessage("initCpuMeshParallel not available for requested mesh");
     }

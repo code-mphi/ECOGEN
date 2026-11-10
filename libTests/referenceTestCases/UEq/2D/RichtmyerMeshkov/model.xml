@@ -4,4 +4,7 @@
     <EOS name="SG_water.xml"/>
     <EOS name="IG_gas1.xml"/>
     <relaxation type="P" speed="finite" rate="1.e-2" solver="euler"/>
+    <secondOrder>
+        <globalLimiter>vanleer</globalLimiter>
+    </secondOrder>
 </model>

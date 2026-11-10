@@ -34,6 +34,7 @@
 #include "SurfaceTension/QAPSurfaceTension.h"
 #include "Viscosity/QAPViscosity.h"
 #include "Conductivity/QAPConductivity.h"
+#include "Turbulence/QAPTurbulence.h"
 
 //Add here headers of new quantitites of additional physicss
 

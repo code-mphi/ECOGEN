@@ -1,0 +1,15 @@
+<?xml version = "1.0" encoding = "UTF-8" standalone = "yes"?>
+<model>
+	<flowModel name="VelocityEq" numberPhases="2" alphaNull="true"/>
+	<EOS name="SG_water_cavitation.xml"/>
+	<EOS name="IG_air.xml"/>
+	<relaxation type="P" speed="infinite" threshold="1.e-6"/>
+	<symmetryTerm type="spherical">
+		<dataSymSpher radialAxis="X"/>
+	</symmetryTerm>
+	<secondOrder>
+		<globalLimiter>mc</globalLimiter>
+		<globalVolumeFractionLimiter>thinc</globalVolumeFractionLimiter>
+    	<interfaceVolumeFractionLimiter>thinc</interfaceVolumeFractionLimiter>
+	</secondOrder>
+</model>

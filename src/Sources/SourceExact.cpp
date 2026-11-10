@@ -40,13 +40,13 @@ SourceExact::~SourceExact() {}
 
 //***********************************************************************
 
-void SourceExact::integrateSourceTerms(Cell* cell, const double& dt)
+void SourceExact::integrateSourceTerms(Cell* cell, const double& dt, Prim type)
 {
   if (cell->getElement()->getAppartenancePhysique() == m_physicalEntity || m_physicalEntity == 0) {
     // For unstructured mesh if source term is not applied on specific physicalEntity all cells include it.
     // For Cartesian mesh, there is no physicalEntity (default value is 0) thus source is applied on all cells.
 
-    this->integrationExactSolution(cell, dt);
+    this->integrationExactSolution(cell, dt, type);
   }
 }
 

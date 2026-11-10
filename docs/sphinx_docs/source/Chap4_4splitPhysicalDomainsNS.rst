@@ -151,7 +151,7 @@ Run the test case simulation with **XX** cores:
 
 .. important::
 
-	Be aware to partition the mesh file with the corresponding number of cores used for the simulation if parallel computation is desired. Gmsh pre-treatment attribute :xml:`GMSHPretraitement` of the *mesh.xml* file might be set to *true* in this case.
+	Be aware to partition the mesh file with the corresponding number of cores used for the simulation and ghost partitions if parallel computation is desired. Gmsh pre-treatment attribute :xml:`GMSHPretraitement` of the *mesh.xml* file might be set to *true* in this case.
 
 Results
 =======

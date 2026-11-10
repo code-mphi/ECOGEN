@@ -6,4 +6,7 @@
 	<symmetryTerm type="spherical">
 		<dataSymSpher radialAxis="X"/>
 	</symmetryTerm>
+	<secondOrder>
+		<globalLimiter>minmod</globalLimiter>
+	</secondOrder>
 </model>

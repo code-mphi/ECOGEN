@@ -42,7 +42,7 @@ class BoundCondSymmetryO2Cartesian : public BoundCondWallO2Cartesian
 
     void createBoundary(TypeMeshContainer<CellInterface*>& cellInterfaces) override;
 
-    int whoAmI() const override { return SYMMETRY; };
+    int whoAmI() const override { return TypeBC::SYMMETRY; };
 
     //For AMR method
     void creerCellInterfaceChild() override; /*!< Create a child cell interface (not initialized) */

@@ -27,12 +27,20 @@ The run name correspond to the created folder name with results (in folder ECOGE
 2) Output mode
 **************
 Allow choice for output format
-Implemented format: VTK ou GNU
-Binary mode: false (ASCII) or true (binary)
-Options: precision of output files (number of digits). If not precised, set as default.
+Implemented format: GNU, VTK or VTKHDF
+Binary mode: false (ASCII) or true (binary). GNU outputs are always ASCII. VTKHDF outputs are always binary.
+Options: floating-point precision in output files (number of digits). If not precised, uses default stream precision (6). Only `8` (simple precision) and `16` (double precision) values are supported for VTKHDF outputs and it defaults to simple precision (8).
          reduced number of output variables when possible (depends on the model). Only available for velocity and pressure-velocity equilibrium model. If not precised, default is false (complete output).
 %%%%%%%%%%%%%%%%%% << copy between these lines
 <outputMode format="VTK" binary="false" precision="10" reducedOutput="true"/>
+%%%%%%%%%%%%%%%%%% << copy between these lines
+         size of integers to store the mesh connectivity in VTKHDF output files (32-bit and 64-bit integers are supported).
+%%%%%%%%%%%%%%%%%% << copy between these lines
+<outputMode format="VTKHDF" binary="true" precision="16" intSize="64"/>
+%%%%%%%%%%%%%%%%%% << copy between these lines
+         collective or independant transfer mode during data I/O operations in VTKHDF output files.
+%%%%%%%%%%%%%%%%%% << copy between these lines
+<outputMode format="VTKHDF" binary="true" precision="16" transferMode="H5FD_MPIO_COLLECTIVE"/>
 %%%%%%%%%%%%%%%%%% << copy between these lines
 
 3) Time control mode
@@ -57,50 +65,6 @@ Set a security marge accordingly to numerical scheme stability (real lower than 
 -----------------------------------
 OPTIONNAL computationnal parameters
 -----------------------------------
-
-*) Scheme precision order
-*************************
-Default (without this XML node), the scheme is first order in time and space.
-Possible using of a second-order scheme in time and space using MUSCL method with TVD limiters.
-a) Second order for Cartesian mesh with/without AMR
----------------------------------------------------
-For Cartesian mesh with/without AMR the available limiters are: minmod, vanleer, vanalbada, mc, superbee, thinc (only for volume-fraction limiter).
-The choice of the limiters is divided into four parts:
-- global limiter: applied everywhere and on all variables unless it is overwrite by the following optional limiters.
-- interface limiter: applied on all variables but only at the interface location. By default is equal to the global limiter.
-- global volume-fraction limiter: applied everywhere but only on the volume-fraction and transport equations (THINC is only applied on the volume fractions) unless it is overwrite by the interface volume-fraction limiter. By default is equal to the global limiter.
-- interface volume-fraction limiter: applied only at the interface location and on the volume-fraction and transport equations (THINC is only applied on the volume fractions). By default is equal to the interface limiter.
-%%%%%%%%%%%%%%%%%% << copy between these lines
-<secondOrder>
-  <globalLimiter>minmod</globalLimiter>
-  <interfaceLimiter>superbee</interfaceLimiter>                            <!-- optionnal node -->
-  <globalVolumeFractionLimiter>minmod</globalVolumeFractionLimiter>        <!-- optionnal node -->
-  <interfaceVolumeFractionLimiter>thinc</interfaceVolumeFractionLimiter>   <!-- optionnal node -->
-</secondOrder>
-%%%%%%%%%%%%%%%%%% << copy between these lines
-b) Second order for unstructured mesh
--------------------------------------
-For unstructured mesh the available limiters are: minmod, superbee.
-The chosen limiter is a global limiter applied everywhere and on all variables.
-Note that on unstructured mesh the MUSCL method relies on gradients computation.
-Therefore, the gradient method chosen should be compatible with unstructured mesh (see node <gradient>).
-%%%%%%%%%%%%%%%%%% << copy between these lines
-<secondOrder>
-  <globalLimiter>minmod</globalLimiter>
-</secondOrder>
-%%%%%%%%%%%%%%%%%% << copy between these lines
-
-*) Gradient method
-******************
-To compute gradients, e.g. density gradient or viscous gradient, it is possible to use finite-difference-like gradient on Cartesian mesh (also with AMR) or Green-Gauss gradient on Cartesian and unstructured mesh.
-Default (without this XML node), the gradients will be computed using the finite-difference scheme (<method>finite-difference</method>).
-In case second order scheme is set on unstructured mesh (see node <secondOrder>), the gradient method must be set to Green-Gauss.
-To define explicitly the gradient method or use the Green-Gauss one (<method>green-gauss</method>), one can use:
-%%%%%%%%%%%%%%%%%% << copy between these lines
-<gradient>
-  <method>finite-difference</method> <!-- For finite difference like gradient scheme -->
-</gradient>
-%%%%%%%%%%%%%%%%%% << copy between these lines
 
 *) Resume a simulation
 ***********************

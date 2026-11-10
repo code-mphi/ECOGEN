@@ -4,7 +4,7 @@
 	<EOS name="SG_water.xml"/>
 	<sourceTerms type="acousticWave" order="EULER">
 		<typeAcousticWave type="planeSinusoidalPulse">
-			<dataPlaneSinusoidalPulse pressureAmplitude="10000." delayedTime="5.e-7" numberOfPulse ="4." frequency="3.e5">
+			<dataPlaneSinusoidalPulse pressureAmplitude="10000." delayedTime="5.e-7" numberOfPulse="4." frequency="3.e5">
 				<sourceLocation x="10.e-3" y="10.e-3" z="0.5"/>
 				<pulseDirection x="0." y="1." z="0."/>
 			</dataPlaneSinusoidalPulse>
@@ -13,4 +13,7 @@
 	<!-- <symmetryTerm type="spherical">
 		<dataSymSpher radialAxis="Y"/>
 	</symmetryTerm> -->
+	<secondOrder>
+		<globalLimiter>mc</globalLimiter>
+	</secondOrder>
 </model>

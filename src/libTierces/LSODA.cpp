@@ -44,12 +44,12 @@ bool LSODA::abs_compare(double a, double b)
 }
 
 /* Purpose : Find largest component of double vector dx */
-size_t LSODA::idamax1( const vector<double>& dx, const size_t n, const size_t offset=0)
+size_t LSODA::idamax1( const vector<double>& dx, const size_t nitem, const size_t offset=0)
 {
 
   size_t v = 0, vmax = 0;
   size_t idmax = 1;
-  for( size_t i = 1; i <= n; i++)
+  for( size_t i = 1; i <= nitem; i++)
   {
       v = abs(dx[i+offset]);
       if( v > vmax )
@@ -76,27 +76,27 @@ void LSODA::dscal1(const double da, vector<double> &dx, const size_t /*n*/,
 
 /* Purpose : Inner product dx . dy */
 double LSODA::ddot1(const vector<double> &a, const vector<double> &b,
-                    const size_t n, const size_t offsetA = 0,
+                    const size_t nitem, const size_t offsetA = 0,
                     const size_t offsetB = 0)
 {
     double sum = 0.0;
-    for (size_t i = 1; i <= n; i++)
+    for (size_t i = 1; i <= nitem; i++)
         sum += a[i+offsetA] * b[i+offsetB];
     return sum;
 }
 
 void LSODA::daxpy1(const double da, const vector<double> &dx,
-                   vector<double> &dy, const size_t n, const size_t offsetX = 0,
+                   vector<double> &dy, const size_t nitem, const size_t offsetX = 0,
                    const size_t offsetY = 0)
 {
 
-    for (size_t i = 1; i <= n; i++)
+    for (size_t i = 1; i <= nitem; i++)
         dy[i + offsetY] = da * dx[i + offsetX] + dy[i + offsetY];
 }
 
 // See BLAS documentation. The first argument has been changed to vector.
-void LSODA::dgesl(const vector<vector<double>> &a, const size_t n,
-                  vector<int> &ipvt, vector<double> &b, const size_t job)
+void LSODA::dgesl(const vector<vector<double>> &a, const size_t nitem,
+                  vector<int> &ipvt_, vector<double> &b, const size_t job)
 {
     size_t k, j;
     double t;
@@ -109,7 +109,7 @@ void LSODA::dgesl(const vector<vector<double>> &a, const size_t n,
         /*
            First solve L * y = b.
         */
-        for (k = 1; k <= n; k++)
+        for (k = 1; k <= nitem; k++)
         {
             t = ddot1(a[k], b, k - 1);
             b[k] = (b[k] - t) / a[k][k];
@@ -117,10 +117,10 @@ void LSODA::dgesl(const vector<vector<double>> &a, const size_t n,
         /*
            Now solve U * x = y.
         */
-        for (k = n - 1; k >= 1; k--)
+        for (k = nitem - 1; k >= 1; k--)
         {
-            b[k] = b[k] + ddot1(a[k], b, n - k, k, k);
-            j = ipvt[k];
+            b[k] = b[k] + ddot1(a[k], b, nitem - k, k, k);
+            j = ipvt_[k];
             if (j != k)
             {
                 t = b[j];
@@ -135,21 +135,21 @@ void LSODA::dgesl(const vector<vector<double>> &a, const size_t n,
 
        First solve Transpose(U) * y = b.
     */
-    for (k = 1; k <= n - 1; k++)
+    for (k = 1; k <= nitem - 1; k++)
     {
-        j = ipvt[k];
+        j = ipvt_[k];
         t = b[j];
         if (j != k)
         {
             b[j] = b[k];
             b[k] = t;
         }
-        daxpy1(t, a[k], b, n - k, k, k);
+        daxpy1(t, a[k], b, nitem - k, k, k);
     }
     /*
        Now solve Transpose(L) * x = y.
     */
-    for (k = n; k >= 1; k--)
+    for (k = nitem; k >= 1; k--)
     {
         b[k] = b[k] / a[k][k];
         t = -b[k];
@@ -158,7 +158,7 @@ void LSODA::dgesl(const vector<vector<double>> &a, const size_t n,
 }
 
 // See BLAS documentation. All double* has been changed to std::vector .
-void LSODA::dgefa(vector<vector<double>> &a, const size_t n, vector<int> &ipvt,
+void LSODA::dgefa(vector<vector<double>> &a, const size_t nitem, vector<int> &ipvt_,
                   size_t *const info)
 {
     size_t j = 0, k = 0, i = 0;
@@ -167,14 +167,14 @@ void LSODA::dgefa(vector<vector<double>> &a, const size_t n, vector<int> &ipvt,
     /* Gaussian elimination with partial pivoting.   */
 
     *info = 0;
-    for (k = 1; k <= n - 1; k++)
+    for (k = 1; k <= nitem - 1; k++)
     {
         /*
            Find j = pivot index.  Note that a[k]+k-1 is the address of
            the 0-th element of the row vector whose 1st element is a[k][k].
         */
-        j = idamax1(a[k], n - k + 1, k - 1) + k - 1;
-        ipvt[k] = j;
+        j = idamax1(a[k], nitem - k + 1, k - 1) + k - 1;
+        ipvt_[k] = j;
         /*
            Zero pivot implies this row already triangularized.
         */
@@ -196,12 +196,12 @@ void LSODA::dgefa(vector<vector<double>> &a, const size_t n, vector<int> &ipvt,
            Compute multipliers.
         */
         t = -1. / a[k][k];
-        dscal1(t, a[k], n - k, k);
+        dscal1(t, a[k], nitem - k, k);
 
         /*
            Column elimination with row indexing.
         */
-        for (i = k + 1; i <= n; i++)
+        for (i = k + 1; i <= nitem; i++)
         {
             t = a[i][j];
             if (j != k)
@@ -209,13 +209,13 @@ void LSODA::dgefa(vector<vector<double>> &a, const size_t n, vector<int> &ipvt,
                 a[i][j] = a[i][k];
                 a[i][k] = t;
             }
-            daxpy1(t, a[k], a[i], n - k, k, k);
+            daxpy1(t, a[k], a[i], nitem - k, k, k);
         }
     } /* end k-loop  */
 
-    ipvt[n] = n;
-    if (a[n][n] == 0.)
-        *info = n;
+    ipvt_[nitem] = nitem;
+    if (a[nitem][nitem] == 0.)
+        *info = nitem;
 }
 
 /* Terminate lsoda due to illegal input. */
@@ -1068,7 +1068,7 @@ void LSODA::stoda(const size_t neq, vector<double> &y, LSODA_ODE_SYSTEM_TYPE f,
     assert(neq + 1 == y.size());
 
     size_t corflag = 0, orderflag = 0;
-    size_t i = 0, i1 = 0, j = 0, m = 0, ncf = 0;
+    size_t m = 0, ncf = 0;
     double del = 0.0, delp = 0.0, dsm = 0.0, dup = 0.0, exup = 0.0, r = 0.0,
            rh = 0.0, rhup = 0.0, told = 0.0;
     double pdh = 0.0, pnorm = 0.0;
@@ -1143,10 +1143,10 @@ void LSODA::stoda(const size_t neq, vector<double> &y, LSODA_ODE_SYSTEM_TYPE f,
         pdlast = 0.;
         ratio = 5.;
         cfode(2);
-        for (i = 1; i <= 5; i++)
+        for (size_t i = 1; i <= 5; i++)
             cm2[i] = tesco[i][2] * elco[i][i + 1];
         cfode(1);
-        for (i = 1; i <= 12; i++)
+        for (size_t i = 1; i <= 12; i++)
             cm1[i] = tesco[i][2] * elco[i][i + 1];
         resetcoeff();
     } /* end if ( jstart == 0 )   */
@@ -1210,7 +1210,7 @@ void LSODA::stoda(const size_t neq, vector<double> &y, LSODA_ODE_SYSTEM_TYPE f,
             tn_ += h_;
             for (size_t j = nq; j >= 1; j--)
                 for (size_t i1 = j; i1 <= nq; i1++)
-                    for (i = 1; i <= n; i++)
+                    for (size_t i = 1; i <= n; i++)
                         yh_[i1][i] += yh_[i1 + 1][i];
 
             pnorm = vmnorm(n, yh_[1], ewt);
@@ -1267,7 +1267,7 @@ void LSODA::stoda(const size_t neq, vector<double> &y, LSODA_ODE_SYSTEM_TYPE f,
             for (size_t j = 1; j <= l; j++)
             {
                 r = el[j];
-                for (i = 1; i <= n; i++)
+                for (size_t i = 1; i <= n; i++)
                     yh_[j][i] += r * acor[i];
             }
             icount--;
@@ -1292,7 +1292,7 @@ void LSODA::stoda(const size_t neq, vector<double> &y, LSODA_ODE_SYSTEM_TYPE f,
                 rhup = 0.;
                 if (l != lmax)
                 {
-                    for (i = 1; i <= n; i++)
+                    for (size_t i = 1; i <= n; i++)
                         savf[i] = acor[i] - yh_[lmax][i];
                     dup = vmnorm(n, savf, ewt) / tesco[nq][3];
                     exup = 1. / (double)(l + 1);
@@ -1357,10 +1357,10 @@ void LSODA::stoda(const size_t neq, vector<double> &y, LSODA_ODE_SYSTEM_TYPE f,
         {
             kflag--;
             tn_ = told;
-            for (j = nq; j >= 1; j--)
+            for (size_t j = nq; j >= 1; j--)
             {
-                for (i1 = j; i1 <= nq; i1++)
-                    for (i = 1; i <= n; i++)
+                for (size_t i1 = j; i1 <= nq; i1++)
+                    for (size_t i = 1; i <= n; i++)
                         yh_[i1][i] -= yh_[i1 + 1][i];
             }
             rmax = 2.;
@@ -1414,11 +1414,11 @@ void LSODA::stoda(const size_t neq, vector<double> &y, LSODA_ODE_SYSTEM_TYPE f,
                     rh = 0.1;
                     rh = max(hmin / fabs(h_), rh);
                     h_ *= rh;
-                    for (i = 1; i <= n; i++)
+                    for (size_t i = 1; i <= n; i++)
                         y[i] = yh_[1][i];
                     (*f)(tn_, &y[1], &savf[1], _data);
                     nfe++;
-                    for (i = 1; i <= n; i++)
+                    for (size_t i = 1; i <= n; i++)
                         yh_[2][i] = h_ * savf[i];
                     ipup = miter;
                     ialth = 5;
@@ -1528,43 +1528,43 @@ void LSODA::intdy(double t, int k, vector<double> &dky, int *iflag)
 
 } /* end intdy   */
 
-void LSODA::cfode(int meth_)
+void LSODA::cfode(int meth)
 {
-    int i, nq, nqm1, nqp1;
+    int i, nq_, nqm1, nqp1;
     double agamq, fnq, fnqm1, pc[13], pint, ragq, rqfac, rq1fac, tsign, xpin;
     /*
        cfode is called by the integrator routine to set coefficients
        needed there.  The coefficients for the current method, as
-       given by the value of meth_, are set for all orders and saved.
-       The maximum order assumed here is 12 if meth_ = 1 and 5 if meth_ = 2.
+       given by the value of meth, are set for all orders and saved.
+       The maximum order assumed here is 12 if meth = 1 and 5 if meth = 2.
        ( A smaller value of the maximum order is also allowed. )
        cfode is called once at the beginning of the problem, and
-       is not called again unless and until meth_ is changed.
+       is not called again unless and until meth is changed.
 
        The elco array contains the basic method coefficients.
-       The coefficients el[i], 1 < i < nq+1, for the method of
-       order nq are stored in elco[nq][i].  They are given by a generating
+       The coefficients el[i], 1 < i < nq_+1, for the method of
+       order nq_ are stored in elco[nq_][i].  They are given by a generating
        polynomial, i.e.,
 
-          l(x) = el[1] + el[2]*x + ... + el[nq+1]*x^nq.
+          l(x) = el[1] + el[2]*x + ... + el[nq_+1]*x^nq_.
 
        For the implicit Adams method, l(x) is given by
 
-          dl/dx = (x+1)*(x+2)*...*(x+nq-1)/factorial(nq-1),   l(-1) = 0.
+          dl/dx = (x+1)*(x+2)*...*(x+nq_-1)/factorial(nq_-1),   l(-1) = 0.
 
        For the bdf methods, l(x) is given by
 
-          l(x) = (x+1)*(x+2)*...*(x+nq)/k,
+          l(x) = (x+1)*(x+2)*...*(x+nq_)/k,
 
-       where   k = factorial(nq)*(1+1/2+...+1/nq).
+       where   k = factorial(nq_)*(1+1/2+...+1/nq_).
 
        The tesco array contains test constants used for the
        local error test and the selection of step size and/or order.
-       At order nq, tesco[nq][k] is used for the selection of step
-       size at order nq-1 if k = 1, at order nq if k = 2, and at order
-       nq+1 if k = 3.
+       At order nq_, tesco[nq_][k] is used for the selection of step
+       size at order nq_-1 if k = 1, at order nq_ if k = 2, and at order
+       nq_+1 if k = 3.
     */
-    if (meth_ == 1)
+    if (meth == 1)
     {
         elco[1][1] = 1.;
         elco[1][2] = 1.;
@@ -1574,25 +1574,25 @@ void LSODA::cfode(int meth_)
         tesco[12][3] = 0.;
         pc[1] = 1.;
         rqfac = 1.;
-        for (nq = 2; nq <= 12; nq++)
+        for (nq_ = 2; nq_ <= 12; nq_++)
         {
             /*
                The pc array will contain the coefficients of the polynomial
 
-                  p(x) = (x+1)*(x+2)*...*(x+nq-1).
+                  p(x) = (x+1)*(x+2)*...*(x+nq_-1).
 
                Initially, p(x) = 1.
             */
             rq1fac = rqfac;
-            rqfac = rqfac / (double)nq;
-            nqm1 = nq - 1;
+            rqfac = rqfac / (double)nq_;
+            nqm1 = nq_ - 1;
             fnqm1 = (double)nqm1;
-            nqp1 = nq + 1;
+            nqp1 = nq_ + 1;
             /*
-               Form coefficients of p(x)*(x+nq-1).
+               Form coefficients of p(x)*(x+nq_-1).
             */
-            pc[nq] = 0.;
-            for (i = nq; i >= 2; i--)
+            pc[nq_] = 0.;
+            for (i = nq_; i >= 2; i--)
                 pc[i] = pc[i - 1] + fnqm1 * pc[i];
             pc[1] = fnqm1 * pc[1];
             /*
@@ -1601,7 +1601,7 @@ void LSODA::cfode(int meth_)
             pint = pc[1];
             xpin = pc[1] / 2.;
             tsign = 1.;
-            for (i = 2; i <= nq; i++)
+            for (i = 2; i <= nq_; i++)
             {
                 tsign = -tsign;
                 pint += tsign * pc[i] / (double)i;
@@ -1610,49 +1610,49 @@ void LSODA::cfode(int meth_)
             /*
                Store coefficients in elco and tesco.
             */
-            elco[nq][1] = pint * rq1fac;
-            elco[nq][2] = 1.;
-            for (i = 2; i <= nq; i++)
-                elco[nq][i + 1] = rq1fac * pc[i] / (double)i;
+            elco[nq_][1] = pint * rq1fac;
+            elco[nq_][2] = 1.;
+            for (i = 2; i <= nq_; i++)
+                elco[nq_][i + 1] = rq1fac * pc[i] / (double)i;
             agamq = rqfac * xpin;
             ragq = 1. / agamq;
-            tesco[nq][2] = ragq;
-            if (nq < 12)
+            tesco[nq_][2] = ragq;
+            if (nq_ < 12)
                 tesco[nqp1][1] = ragq * rqfac / (double)nqp1;
             tesco[nqm1][3] = ragq;
         } /* end for   */
         return;
-    } /* end if ( meth_ == 1 )   */
+    } /* end if ( meth == 1 )   */
 
-    /* meth_ = 2. */
+    /* meth = 2. */
     pc[1] = 1.;
     rq1fac = 1.;
 
     /*
        The pc array will contain the coefficients of the polynomial
-          p(x) = (x+1)*(x+2)*...*(x+nq).
+          p(x) = (x+1)*(x+2)*...*(x+nq_).
        Initially, p(x) = 1.
     */
-    for (nq = 1; nq <= 5; nq++)
+    for (nq_ = 1; nq_ <= 5; nq_++)
     {
-        fnq = (double)nq;
-        nqp1 = nq + 1;
+        fnq = (double)nq_;
+        nqp1 = nq_ + 1;
         /*
-           Form coefficients of p(x)*(x+nq).
+           Form coefficients of p(x)*(x+nq_).
         */
         pc[nqp1] = 0.;
-        for (i = nq + 1; i >= 2; i--)
+        for (i = nq_ + 1; i >= 2; i--)
             pc[i] = pc[i - 1] + fnq * pc[i];
         pc[1] *= fnq;
         /*
            Store coefficients in elco and tesco.
         */
         for (i = 1; i <= nqp1; i++)
-            elco[nq][i] = pc[i] / pc[2];
-        elco[nq][2] = 1.;
-        tesco[nq][1] = rq1fac;
-        tesco[nq][2] = ((double)nqp1) / elco[nq][1];
-        tesco[nq][3] = ((double)(nq + 2)) / elco[nq][1];
+            elco[nq_][i] = pc[i] / pc[2];
+        elco[nq_][2] = 1.;
+        tesco[nq_][1] = rq1fac;
+        tesco[nq_][2] = ((double)nqp1) / elco[nq_][1];
+        tesco[nq_][3] = ((double)(nq_ + 2)) / elco[nq_][1];
         rq1fac /= fnq;
     }
     return;
@@ -1770,16 +1770,16 @@ void LSODA::prja(const size_t /*neq*/, vector<double> &y, LSODA_ODE_SYSTEM_TYPE 
 
    vmnorm = max( i = 1, ..., n ) fabs( v[i] ) * w[i].
 */
-double LSODA::vmnorm(const size_t n, const vector<double> &v,
+double LSODA::vmnorm(const size_t nitem, const vector<double> &v,
                      const vector<double> &w)
 {
     double vm = 0.;
-    for (size_t i = 1; i <= n; i++)
+    for (size_t i = 1; i <= nitem; i++)
         vm = max(vm, fabs(v[i]) * w[i]);
     return vm;
 }
 
-double LSODA::fnorm(int n, const vector<vector<double>> &a,
+double LSODA::fnorm(int nitem, const vector<vector<double>> &a,
                     const vector<double> &w)
 
 /*
@@ -1793,10 +1793,10 @@ double LSODA::fnorm(int n, const vector<vector<double>> &a,
 {
     double an = 0, sum = 0;
 
-    for (size_t i = 1; i <= (size_t)n; i++)
+    for (size_t i = 1; i <= (size_t)nitem; i++)
     {
         sum = 0.;
-        for (size_t j = 1; j <= (size_t)n; j++)
+        for (size_t j = 1; j <= (size_t)nitem; j++)
             sum += fabs(a[i][j]) / w[j];
         an = max(an, sum * w[i]);
     }

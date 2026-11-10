@@ -7,15 +7,15 @@
 		<AMR lvlMax="2" criteriaVar="0.08" varRho="false" varP="false" varU="false" varAlpha="true" xiSplit="0.11" xiJoin="0.11"/>
 		<meshStretching>
 			<XStretching>
-				<stretch startAt="0." endAt="0.375" factor="0.9803921568627451" numberCells="10"/>
-			 	<stretch startAt="0.375" endAt="0.75" factor="1.02" numberCells="10"/>
+				<stretch startAt="0." endAt="0.375" factor="1.02" refCellPos="end" refCellSize="0.034"/>
+			 	<stretch startAt="0.375" endAt="0.75" factor="1.02" refCellPos="start" refCellSize="0.034"/>
 			</XStretching>
 			<YStretching>
-				<stretch startAt="0." endAt="0.375" factor="0.9803921568627451" numberCells="10"/>
-			 	<stretch startAt="0.375" endAt="0.75" factor="1.02" numberCells="10"/>
+				<stretch startAt="0." endAt="0.375" factor="1.02" refCellPos="end" refCellSize="0.034"/>
+			 	<stretch startAt="0.375" endAt="0.75" factor="1.02" refCellPos="start" refCellSize="0.034"/>
 			</YStretching>
 			<ZStretching>
-				<stretch startAt="0." endAt="0.75" factor="1." numberCells="1"/>
+				<stretch startAt="0." endAt="1." factor="1." refCellPos="start" refCellSize="1."/>
 			</ZStretching>
 		</meshStretching>
 	</cartesianMesh>

@@ -247,7 +247,7 @@ Boundary conditions
 The :xml:`<boundaryConditions>` markup is mandatory. The boundary conditions are specified at the boundary of the computational domain. This markup must contain as many nodes :xml:`<boundCond>` as necessary to cover the entire boundary. Each :xml:`<boundCond>` node contains the following attributes:
 
 - :xml:`name`: A name for the boundary condition. Whatever the mesh type, this name has no influence on the choices remaining in this file. It can be used to give a meaningful name to the boundary conditions.
-- :xml:`type`:  The type of boundary condition, to choose among :ref:`Sec:input:NonReflecting`, :ref:`Sec:input:Symmetry`, :ref:`Sec:input:Wall`, :ref:`Sec:input:InletTank`, :ref:`Sec:input:InletInjStagState`, :ref:`Sec:input:InletInjTemp` and :ref:`Sec:input:OutletPressure`.
+- :xml:`type`:  The type of boundary condition, to choose among :ref:`Sec:input:NonReflecting`, :ref:`Sec:input:Wall` (non-slip), :ref:`Sec:input:Symmetry` (can as well be used for slip walls), :ref:`Sec:input:InletTank`, :ref:`Sec:input:InletInjStagState`, :ref:`Sec:input:InletInjTemp`, :ref:`Sec:input:OutletPressure` and :ref:`Sec:input:Periodic`.
 - :xml:`number`: Integer corresponding to the identifier of the boundary when using unstructured meshes.
 
 .. note::
@@ -277,25 +277,45 @@ The numerical treatment corresponds to an in- or out-going flow without any wave
 
 	<boundCond name="outlet" type="nonReflecting" number="1" />
 
+.. _Sec:input:Wall:
+
+Wall
+~~~~
+The numerical treatment corresponds to a non-slip wall boundary condition. No more information required.
+
+.. code-block:: xml
+
+	<boundCond name="wall" type="wall" number="3" />
+
 .. _Sec:input:Symmetry:
 
 Symmetry
 ~~~~~~~~
-The numerical treatment corresponds to a symmetry condition. No more information required.
+The numerical treatment corresponds to a symmetry boundary condition, which can be seen as well as a slip wall. No more information required.
 
 .. code-block:: xml
 
 	<boundCond name="symmetry" type="symmetry" number="2" />
 
-.. _Sec:input:Wall:
+.. _Sec:input:MovingWall:
 
-Wall
-~~~~
-The numerical treatment corresponds to a wall boundary condition. No more information required.
+Moving wall
+~~~~~~~~~~~
+The numerical treatment corresponds to a non-slip moving wall boundary condition following an oscillatory behaviour (sinus). The :xml:`<dataMovingWall>` node is required with the following attributes:
+
+- :xml:`amplitude`: Amplitude of the moving wall [m/s]. If frequency is null and offset is pi/2 it corresponds to a constant piston velocity.
+- :xml:`frequency`: Frequency of the moving wall [Hz].
+- :xml:`frequencyOffset`: Frequency offset of the sinus [Hz].
 
 .. code-block:: xml
 
-	<boundCond name="wall" type="wall" number="3" />
+	<boundCond name="movingWall" type="movingWall" number="1">
+	  <dataMovingWall amplitude="-10." frequency="2.e3" frequencyOffset="0."/>
+	</boundCond>
+
+.. warning::
+
+	Be careful, the sign of the velocity follows the outward normal direction. So if the moving wall is on the left, bottom or back, the sign of the velocity must be the opposite.
 
 .. _Sec:input:InletTank:
 
@@ -380,6 +400,25 @@ In the case of a subsonic flow, the pressure is set equal to the ambient (distan
 	  </dataOutletPressure>
 	</boundCond>
 
+.. _Sec:input:Periodic:
+
+Periodic
+~~~~~~~~
+The numerical treatment corresponds to a physical domain in which the flow is periodic across the boundary surface.
+
+.. code-block:: xml
+
+	<boundCond name="periodic" type="periodic" number="1" />
+
+.. warning::
+
+  This boundary condition has to be used according to the following rules:
+
+  - a periodic condition on one boundary requires the opposite boundary to be periodic too,
+  - only for Cartesian meshes,
+  - no AMR supported,
+  - THINC limiter might show some very small deviations from non-periodic set-ups.
+
 **Remark**
 
 The boundary conditions are dependent on the flow model specified in *model.xml* input file. Some boundary conditions may be not available for the flow model considered.
@@ -419,6 +458,33 @@ Single-phase flow. In this case, the :xml:`<mixture>` node is absent and the :xm
 	  </dataFluid>
 	</material>
 
+
+.. _Sec:input:NEq:
+
+Non-equilibrium
+~~~~~~~~~~~~~~~~
+Multiphase non-equilibrium flow has a non-equilibrium of every thermo-mechanical variables for every phase within each cell. Each :xml:`<dataFluid>` node corresponds to a phase with the following attributes:
+
+- :xml:`alpha`: Volume fraction of the phase, real number in the range ]0.,1.[. The range can be increased to [0.;1.] if the option *alphaNull* is turned on (*true*) in the *model.xml* input file.
+- :xml:`density` or :xml:`temperature`: Initial density or temperature of the fluid, real number (unit: kg/m3 or K (SI)), respectively.
+- :xml:`pressure`: Initial pressure of the fluid, real number (unit: Pa (SI)).
+
+Moreover, in this case, the :xml:`<dataFluid>` node contains:
+
+- Node :xml:`<velocity>`: With :xml:`x`, :xml:`y` and :xml:`z` attributes setting the initial values for the components of the velocity vector, real numbers (unit: m/s (SI)).
+
+.. code-block:: xml
+
+	<material type="fluid" EOS="IG_air.xml">
+		<dataFluid alpha="0.5" density="50.0" pressure = "2.e8">
+		<velocity x="0." y="0." z="0."/>
+		</dataFluid>
+	</material>
+	<material type="fluid" EOS="SG_water.xml">
+		<dataFluid alpha="0.5" density="1000.0" pressure = "2.e8">
+		<velocity x="0." y="0." z="0."/>
+		</dataFluid>
+	</material>
 
 .. _Sec:input:UEq:
 
@@ -521,41 +587,54 @@ Moreover, in this case, the :xml:`<mixture>` contains the following attributes a
 	  <velocity x="0." y="0." z="0."/>
 	</mixture>
 
-.. _Sec:input:NonLinearSchrodinger:
+.. _Sec:input:ExtendedNavierStokesKorteweg1D:
 
-Non-linear Schrödinger
-~~~~~~~~~~~~~~~~~~~~~~
-Defocusing non-linear Schrödinger equation. In this case, there isn't any EOS, the :xml:`<mixture>` node is absent and the :xml:`<dataFluid>` node contains the following attributes or nodes:
+Extended Navier--Stokes--Korteweg 1D
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Generic single and multiphase flow model. In all the subsequent submodels, the :xml:`<mixture>` node is absent and the :xml:`<dataFluid>` node contains the following attributes or nodes depending on the EOS. For the defocusing non-linear Schrödinger EOS:
 
-- Attribute :xml:`density`: Initial density of the fluid, real number (unit: kg/m3 (SI)).
-- Node :xml:`<velocity>`: With :xml:`x`, :xml:`y` and :xml:`z` attributes setting the initial values for the components of the velocity vector, real numbers (unit: m/s (SI)).
-
-.. code-block:: xml
-
-    <material type="none">
-        <dataFluid density="2.0">
-            <velocity x="0." y="0." z="0."/>
-        </dataFluid>
-    </material>
-
-
-.. _Sec:input:EulerKorteweg:
-
-Euler--Korteweg
-~~~~~~~~~~~~~~~
-Single-phase flow. In this case, the :xml:`<mixture>` node is absent and the :xml:`<dataFluid>` node contains the following attributes or nodes:
-
-- Attribute :xml:`density`: Initial density of the fluid, real number (unit: kg/m3 (SI)).
-- Node :xml:`<velocity>`: With :xml:`x`, :xml:`y` and :xml:`z` attributes setting the initial values for the components of the velocity vector, real numbers (unit: m/s (SI)).
+- Attributes :xml:`density`, :xml:`pressure` and :xml:`entropy`: Initial density, pressure and entropy of the fluid respectively. It is possible to initialize with :xml:`density` and :xml:`pressure` or with :xml:`density` and :xml:`entropy`. No unit for this numbers.
+- Node :xml:`<velocity>`: With :xml:`x`, :xml:`y` and :xml:`z` attributes setting the initial values for the components of the velocity vector. No unit for this numbers.
 
 .. code-block:: xml
 
-    <material type="fluid" EOS="Polynomial_arbitrary.xml">
-        <dataFluid density="0.2452">
-            <velocity x="0." y="0." z="0."/>
-        </dataFluid>
-    </material>
+    <state name="chamberHighDensity">
+        <material type="fluid" EOS="NLS.xml">
+            <dataFluid density="5." pressure="12.5">
+                <velocity x="0." y="0." z="0."/>
+            </dataFluid>
+        </material>
+    </state>
 
+For the regularized and bistable Ericksen bar EOS:
+
+- Attributes :xml:`density`, :xml:`pressure` and :xml:`entropy`: Initial density, pressure and entropy of the fluid respectively. It is possible to initialize with :xml:`density` and :xml:`pressure` or with :xml:`density` and :xml:`entropy`. No unit for this numbers.
+- Node :xml:`<velocity>`: With :xml:`x`, :xml:`y` and :xml:`z` attributes setting the initial values for the components of the velocity vector. No unit for this numbers.
+
+.. code-block:: xml
+
+    <state name="chamberHighDensity">
+        <material type="fluid" EOS="Polynomial_arbitrary.xml">
+            <dataFluid density="0.142857143" pressure="1.">
+                <velocity x="0." y="0." z="0."/>
+            </dataFluid>
+        </material>
+    </state>
+
+Finally, for the van der Waals EOS:
+
+- Attributes :xml:`density`, :xml:`pressure` and :xml:`temperature`: Initial density, pressure and temperature of the fluid respectively. It is possible to initialize with :xml:`density` and :xml:`pressure` or with :xml:`density` and :xml:`temperature` or with :xml:`pressure` and :xml:`temperature`. Depending on the fluid chosen, we can have unit for this numbers (kg/m3, Pa and Kelvin (SI)) or not.
+- Node :xml:`<velocity>`: With :xml:`x`, :xml:`y` and :xml:`z` attributes setting the initial values for the components of the velocity vector. Depending on the fluid chosen, we can have unit for this numbers (m/s (SI)) or not.
+
+.. code-block:: xml
+
+    <state name="chamberHighDensity">
+        <material type="fluid" EOS="VDW_dodecane.xml">
+            <dataFluid temperature="561.53" pressure="128.13e5">
+                <velocity x="0." y="0." z="0."/>
+            </dataFluid>
+        </material>
+    </state>
 
 **Remark**
 

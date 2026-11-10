@@ -52,11 +52,12 @@ enum Axis
   Z
 };
 
-//! \brief     Enumeration for the type of output (GNU, VTK)
+//! \brief     Enumeration for the type of output (GNU, VTK, VTKDF)
 enum TypeOutput
 {
   GNU,
-  VTK
+  VTK,
+  VTKHDF
 };
 
 //! \brief     Enumeration for the type of mesh (REC: rectilinear, UNS: unstructured, AMR: adaptative mesh refinement)
@@ -96,7 +97,8 @@ enum TypeBC
   INLETINJTEMP      = 7,
   NULLFLUX          = 8,
   OUTLETMASSFLOW    = 9,
-  PISTON            = 10
+  PERIODIC          = 10,
+  MOVINGWALL        = 11,
 };
 
 //! \brief     Enumeration for the variable to extract on a boundary
@@ -141,6 +143,13 @@ enum PhaseType
   VAP = 1
 };
 
+//! \brief     Enumeration for the scheme order of the simulation
+enum class SimulationOrder
+{
+  first,
+  second
+};
+
 //! \brief     Enumeration for the type of second order limiter (NS only)
 enum LimiterType
 {
@@ -172,6 +181,13 @@ enum class Variable
   cobaseZX,
   cobaseZY,
   cobaseZZ
+};
+
+//! \brief     Enumeration for the type of contact areas for the DEM
+enum class TypeContactAreas
+{
+  symmetric,
+  nonsymmetric
 };
 
 //! \brief     Template for the type of the mesh container (std::list for now, but may change to something else if wanted)
@@ -210,6 +226,7 @@ class Tools
     //! \brief     Modify the string of characters to uppercase it
     //! \param     string               string of characters
     static void uppercase(std::string& string);
+
     //! \brief     Modify the string of characters to lowercase it
     //! \param     string               string of characters
     static void lowercase(std::string& string);
@@ -291,8 +308,16 @@ class Tools
 };
 
 extern Tools* TB;
+extern SimulationOrder simulationOrder; //!<Precision of the scheme (first order or second order)
 extern int numberPhases;
 extern int numberSolids;
 extern int numberTransports;
+extern bool turbulenceActivated;
+extern int turbulenceNumQPA;
+extern double sum_u2v2w2;
+extern long nCells;
+extern double initialSoundSpeed;
+extern double initialConductivity;
+extern double initialViscosity;
 
 #endif // TOOLS_H

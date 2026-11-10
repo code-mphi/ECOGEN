@@ -1,0 +1,63 @@
+<?xml version='1.0' encoding='UTF-8' standalone='yes'?>
+<CI>
+  <!-- LIST OF GEOMETRICAL DOMAINS  -->
+  <physicalDomains>
+    <domain type="entireDomain" name="base" state="chamberLP"/>
+    <domain type="halfSpace" name="HP" state="shockedState">
+      <dataHalfSpace direction="positive" axis="x" origin="0.27"/>
+    </domain>
+    <domain type="sphere" name="bubble" state="heliumBubble">
+      <dataSphere radius="0.02">
+        <center x="0.23" y="0." z="0."/>
+      </dataSphere>
+    </domain>
+  </physicalDomains>
+
+  <!-- LIST OF BOUNDARY CONDITIONS -->
+  <boundaryConditions>
+    <boundCond type="nonReflecting" name="BC_Xmin" number="1"/>
+    <boundCond type="nonReflecting" name="BC_Xmax" number="2"/>
+    <boundCond type="symmetry" name="BC_Ymin" number="3"/>
+    <boundCond type="nonReflecting" name="BC_Ymax" number="4"/>
+    <boundCond type="symmetry" name="BC_Zmin" number="5"/>
+    <boundCond type="nonReflecting" name="BC_Zmax" number="6"/>
+  </boundaryConditions>
+
+  <!--  LIST OF STATES  -->
+  <state name="chamberLP">
+    <material type="fluid" EOS="IG_air.xml">
+      <dataFluid density="1.29" alpha="0.999999"/>
+    </material>
+    <material type="fluid" EOS="IG_helium.xml">
+      <dataFluid density="0.167" alpha="0.000001"/>
+    </material>
+    <mixture>
+      <dataMix pressure="101325."/>
+      <velocity x="0." z="0." y="0."/>
+    </mixture>
+  </state>
+  <state name="shockedState">
+    <material type="fluid" EOS="IG_air.xml">
+      <dataFluid density="2.4" alpha="0.999999"/>
+    </material>
+    <material type="fluid" EOS="IG_helium.xml">
+      <dataFluid density="0.167" alpha="0.000001"/>
+    </material>
+    <mixture>
+      <dataMix pressure="248758.567"/>
+      <velocity x="-230." z="0." y="0."/>
+    </mixture>
+  </state>
+  <state name="heliumBubble">
+    <material type="fluid" EOS="IG_air.xml">
+      <dataFluid density="1.29" alpha="0.000001"/>
+    </material>
+    <material type="fluid" EOS="IG_helium.xml">
+      <dataFluid density="0.167" alpha="0.999999"/>
+    </material>
+    <mixture>
+      <dataMix pressure="101325."/>
+      <velocity x="0." z="0." y="0."/>
+    </mixture>
+  </state>
+</CI>

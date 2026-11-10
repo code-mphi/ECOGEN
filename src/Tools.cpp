@@ -32,6 +32,15 @@
 
 Tools* TB;
 
+SimulationOrder simulationOrder = SimulationOrder::first;
+bool turbulenceActivated        = false;
+int turbulenceNumQPA            = 0;
+double sum_u2v2w2               = 0.;
+long nCells                     = 0.;
+double initialSoundSpeed        = 0.;
+double initialConductivity      = 0.;
+double initialViscosity         = 0.;
+
 //***********************************************************************
 
 Tools::Tools(const int& numbPhases, const int& numbSolids, const int& numbTransports)

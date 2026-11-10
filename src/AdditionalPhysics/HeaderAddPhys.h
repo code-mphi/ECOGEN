@@ -35,6 +35,7 @@
 #include "APEuler.h"
 #include "Viscosity/APEViscosity.h"
 #include "Conductivity/APEConductivity.h"
+#include "Turbulence/APETurbulenceSmagorinsky.h"
 
 //Additional physics for the velocity-equilibrium system of equations
 #include "APUEq.h"

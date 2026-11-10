@@ -36,11 +36,11 @@ const std::string ModPUEq::NAME = "PRESSUREVELOCITYEQ";
 
 //***********************************************************************
 
-ModPUEq::ModPUEq(const int& numbTransports, const int& numbPhases) : ModUEq(NAME, numbTransports)
+ModPUEq::ModPUEq(const int& numbTransports, const int& numbPhases, const double& thresholdPressure) : ModUEq(NAME, numbTransports)
 {
   fluxBuff    = new FluxPUEq(numbPhases);
   fluxBuffMRF = new FluxPUEq(numbPhases);
-  m_relaxations.push_back(new RelaxationPInfinite); //Pressure relaxation imposed in this model
+  m_relaxations.push_back(new RelaxationPInfinite(thresholdPressure)); //Pressure relaxation imposed in this model
   for (int i = 0; i < 4; i++) {
     sourceCons.push_back(new FluxPUEq(numbPhases));
   }

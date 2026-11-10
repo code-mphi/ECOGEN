@@ -67,8 +67,11 @@ class APEConductivity : public APEuler
     void addNonCons(Cell* /*cell*/) override {}; //The conductivity does not involve non-conservative terms.
     void communicationsAddPhys(const int& dim, const int& lvl) override;
 
+    //! \brief     Print the diagnostics for turbulence decay cases
+    virtual void computeTurbulenceParameters() const override {}; // To avoid errors when not managed or with 2+ addPhys selected
+
   private:
-    double m_lambda; //!< Thermal conductivity (W/(m.K)) of phase (taken from the EOS classe) (buffer)
+    double m_lambda; //!< Thermal conductivity (W/(m.K)) of phase (taken from the EOS class) (buffer)
     int m_numQPA;    //!< Number of the associated variable for each cell (m_vecGrandeursAddPhys)
 
     Coord m_gradTLeft;  //!< Left gradient of the phase temperature for the flux computation (buffer)

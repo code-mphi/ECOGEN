@@ -50,7 +50,7 @@ class BoundCondInletTank : public BoundCond
     void solveRiemannBoundary(Cell& cellLeft, const double& dxLeft, double& dtMax) override;
     void solveRiemannTransportBoundary(Cell& cellLeft) const override;
 
-    int whoAmI() const override { return INLETTANK; };
+    int whoAmI() const override { return TypeBC::INLETTANK; };
     void printInfo() override;
 
     //For AMR method

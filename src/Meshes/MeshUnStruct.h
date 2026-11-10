@@ -52,42 +52,52 @@ class MeshUnStruct : public Mesh
                             TypeMeshContainer<CellInterface*>& cellInterfaces,
                             const int& /*resumeSimulation*/,
                             bool pretraitementParallele = true,
-                            std::string ordreCalcul     = "FIRSTORDER") override;
-    std::string whoAmI() const override { return 0; };
+                            SimulationOrder schemeOrder = SimulationOrder::first) override;
+    std::string whoAmI() const override { return Errors::defaultString; };
 
     // --- MeshUnStruct virtual member functions ---
     //! \brief     initialize the geometry for single CPU computation
     //! \param     cells
     //! \param     cellInterfaces
-    //! \param     computeOrder     scheme order (currently only first order working)
+    //! \param     schemeOrder     scheme order (currently only first order working)
     virtual void initGeometryMonoCPU(TypeMeshContainer<Cell*>& cells,
                                      TypeMeshContainer<CellInterface*>& cellInterfaces,
-                                     std::string computeOrder = "FIRSTORDER") = 0;
+                                     SimulationOrder schemeOrder = SimulationOrder::first) = 0;
     //! \brief     initialize the geometry for multi CPUs computation
     //! \param     cells
     //! \param     cellInterfaces
-    //! \param     computeOrder     scheme order (currently only first order working)
+    //! \param     schemeOrder     scheme order (currently only first order working)
     virtual void initGeometryParallel(TypeMeshContainer<Cell*>& cells,
                                       TypeMeshContainer<Cell*>& cellsGhost,
                                       TypeMeshContainer<CellInterface*>& cellInterfaces,
-                                      std::string computeOrder = "FIRSTORDER") = 0;
+                                      SimulationOrder schemeOrder = SimulationOrder::first) = 0;
     //! \brief     split original mesh file for computation on several CPUs
-    virtual void preProcessMeshFileForParallel()                                                           = 0;
-    void initCpuMeshSequential(TypeMeshContainer<Cell*>& cells, std::string& computeOrder) override        = 0;
-    void initCpuMeshParallel(TypeMeshContainer<Cell*>& cells, std::string& computeOrder, int cpu) override = 0;
+    virtual void preProcessMeshFileForParallel()                                                              = 0;
+    void initCpuMeshSequential(TypeMeshContainer<Cell*>& cells, SimulationOrder& schemeOrder) override        = 0;
+    void initCpuMeshParallel(TypeMeshContainer<Cell*>& cells, SimulationOrder& schemeOrder, int cpu) override = 0;
 
     // Printing / Reading
     //! \brief    write monocpu mesh information
     void writeMeshInfoData() const;
     void writeHeaderPiece(std::ofstream& fileStream, TypeMeshContainer<Cell*>* /*cellsLvl*/) const override;
-    void getNodes(std::vector<double>& dataset, std::vector<Cell*>* /*cellsLvl*/) const override;
-    void getConnectivity(std::vector<double>& dataset, std::vector<Cell*>* /*cellsLvl*/) const override;
+    size_t getNodes(std::vector<double>& dataset, std::vector<Cell*>* /*cellsLvl*/) const override;
+    size_t getConnectivity(std::vector<double>& dataset, std::vector<Cell*>* /*cellsLvl*/) const override;
+    size_t getConnectivity(std::vector<int64_t>& dataset, std::vector<Cell*>* /*cellsLvl*/) const override;
+    size_t getConnectivity(std::vector<int32_t>& dataset, std::vector<Cell*>* /*cellsLvl*/) const override;
     void getOffsets(std::vector<double>& dataset, std::vector<Cell*>* /*cellsLvl*/) const override;
+    void getOffsets(std::vector<int64_t>& dataset, std::vector<Cell*>* /*cellsLvl*/) const override;
+    void getOffsets(std::vector<int32_t>& dataset, std::vector<Cell*>* /*cellsLvl*/) const override;
     void getTypeCell(std::vector<double>& dataset, std::vector<Cell*>* /*cellsLvl*/) const override;
+    void getTypeCell(std::vector<unsigned char>& dataset, std::vector<Cell*>* /*cellsLvl*/) const override;
     void getData(TypeMeshContainer<Cell*>* cellsLvl, std::vector<double>& dataset, const int var, int phase) const override;
+    void getData(TypeMeshContainer<Cell*>* cellsLvl, std::vector<float>& dataset, const int var, int phase) const override;
+
+    //void getData(TypeMeshContainer<Cell*>* cellsLvl, std::vector<double>& dataset, const int var, int phase) const override;
     void setDataSet(std::vector<double>& dataset, TypeMeshContainer<Cell*>* cellsLvl, const int var, int phase) const override;
     void extractAbsVelocityMRF(TypeMeshContainer<Cell*>* cellsLvl, std::vector<double>& dataset, Source* sourceMRF) const override;
+    void extractAbsVelocityMRF(TypeMeshContainer<Cell*>* cellsLvl, std::vector<float>& dataset, Source* sourceMRF) const override;
     void extractReferenceLength(std::vector<Cell*>* cellsLvl, std::vector<double>& dataset) const override;
+    void extractReferenceLength(std::vector<Cell*>* cellsLvl, std::vector<float>& dataset) const override;
 
   protected:
     std::string m_meshFile; //!< Name of the mesh file read
@@ -124,6 +134,14 @@ class MeshUnStruct : public Mesh
     //statistics
     double m_totalSurface; //!< Sum of 2D element surfaces
     double m_totalVolume;  //!< Sum of 3D element volumes
+
+  private:
+    template <typename T> size_t getConnectivity_private(std::vector<T>& dataset) const;
+    template <typename T> void getOffsets_private(std::vector<T>& dataset) const;
+    template <typename T> void getTypeCell_private(std::vector<T>& dataset) const;
+    template <typename T> void getData_private(TypeMeshContainer<Cell*>* cellsLvl, std::vector<T>& dataset, const int var, int phase) const;
+    template <typename T> void extractAbsVelocityMRF_private(TypeMeshContainer<Cell*>* cellsLvl, std::vector<T>& dataset, Source* sourceMRF) const;
+    template <typename T> void extractReferenceLength_private(std::vector<Cell*>* cellsLvl, std::vector<T>& dataset) const;
 };
 
 #endif // MESHUNSTRUCT_H

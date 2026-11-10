@@ -7,9 +7,6 @@
 		<physicalTime totalTime="2.4" timeFreq="0.05"/>
 	</timeControlMode>
 	<computationControl CFL="0.6"/>
-	<gradient>
-		<method>green-gauss</method>
-	</gradient>
 
   <boundary record="all">
     <boundaryID number="4" name="foil"/>

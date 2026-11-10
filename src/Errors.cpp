@@ -30,6 +30,7 @@
 
 #include "Errors.h"
 #include "Run.h"
+#include <mpi.h>
 
 std::vector<Errors> errors;
 std::vector<Errors> warnings;
@@ -65,6 +66,21 @@ void Errors::errorMessage(const std::string& message)
 
 //***********************************************************************
 
+void Errors::errorMessage(const std::string& message, const char* sourceFile, int lineNumber)
+{
+  std::stringstream numCPU;
+  numCPU << rankCpu;
+
+  std::cout << std::endl << "-------------------------------------------------------" << std::endl;
+  std::cout << "ERROR on CPU " + numCPU.str() << std::endl;
+  std::cout << " - file: " << sourceFile << " line : " << lineNumber << std::endl;
+  std::cout << " - message: " << message.c_str() << std::endl;
+  std::cout << "=> Fix error and restart run" << std::endl;
+  std::cout << "-------------------------------------------------------" << std::endl;
+}
+
+//***********************************************************************
+
 void Errors::errorMessage(const std::string& message, double value)
 {
   std::stringstream numCPU;
@@ -74,27 +90,6 @@ void Errors::errorMessage(const std::string& message, double value)
   std::cout << "ERROR on CPU " + numCPU.str() + " : " << message.c_str() << " " << value << std::endl;
   std::cout << "=> Fix error and restart run" << std::endl;
   std::cout << "-------------------------------------------------------" << std::endl;
-}
-
-//***********************************************************************
-
-void Errors::prepareErrorFiles(const std::string& folder)
-{
-  std::ofstream fileStream;
-  std::stringstream myStream;
-  std::string fileName;
-
-  fileName = "error";
-  myStream << folder << "errorsAndWarnings/" << fileName << "_CPU" << rankCpu << ".out";
-  fileStream.open((myStream.str()).c_str());
-  fileStream.close();
-
-  myStream.str("");
-  myStream.clear();
-  fileName = "warning";
-  myStream << folder << "errorsAndWarnings/" << fileName << "_CPU" << rankCpu << ".out";
-  fileStream.open((myStream.str()).c_str());
-  fileStream.close();
 }
 
 //***********************************************************************
@@ -121,49 +116,40 @@ void Errors::setError(const std::string& message, const double value)
 int Errors::getState() { return m_state; }
 
 //***********************************************************************
-
-void Errors::displayError(const int& num)
+std::string Errors::errorToString(const int& num, const int& ErrorType, const int iteration) const
 {
-  std::cout << std::endl << "-------------------------------------------------------" << std::endl;
-  std::cout << "        ERROR " << num << " REQUIRING PROGRAM SHUTDOWN" << std::endl;
-  std::cout << " - CPU number: " << rankCpu << std::endl;
-  std::cout << " - file: " << m_file.c_str() << " line : " << m_line << std::endl;
-  std::cout << " - message: " << m_message.c_str() << std::endl;
-  std::cout << "=> Fix error and restart run" << std::endl;
-  std::cout << "-------------------------------------------------------" << std::endl;
+
+  std::string errormsg;
+  std::string msg = "\n-------------------------------------------------------\n";
+
+  if (ErrorType == ERROR) {
+    msg      += "        ERROR " + std::to_string(num) + " REQUIRING PROGRAM SHUTDOWN\n";
+    errormsg  = "=> Fix error and restart run\n";
+  }
+  else if (ErrorType == WARNING) {
+    msg      += "        WARNING " + std::to_string(num) + " REQUIRING ATTENTION\n";
+    errormsg  = "";
+  }
+
+  if (iteration != -1) {
+    msg += " - iteration: " + std::to_string(iteration) + "\n";
+  }
+
+  msg += " - CPU number: " + std::to_string(rankCpu) + "\n";
+  msg += " - file: " + m_file + " line: " + std::to_string(m_line) + "\n";
+  msg += " - message: " + m_message + "\n";
+  msg += errormsg;
+  msg += "-------------------------------------------------------\n";
+
+  return msg;
 }
 
 //***********************************************************************
 
-void Errors::writeErrorInFile(const int& num, const std::string& folder, const int& ErrorType)
+void Errors::displayError(const int& num) const
 {
-  std::ofstream fileStream;
-  std::stringstream myStream;
-
-  std::string fileName;
-  if (ErrorType == ERROR) {
-    fileName = "error";
-  }
-  else if (ErrorType == WARNING) {
-    fileName = "warning";
-  }
-  myStream << folder << "errorsAndWarnings/" << fileName << "_CPU" << rankCpu << ".out";
-  fileStream.open((myStream.str()).c_str(), std::ofstream::app);
-  fileStream << "-------------------------------------------------------" << std::endl;
-  if (ErrorType == ERROR) {
-    fileStream << "        ERROR " << num << " REQUIRING PROGRAM SHUTDOWN" << std::endl;
-  }
-  else if (ErrorType == WARNING) {
-    fileStream << "        WARNING " << num << " REQUIRING ATTENTION" << std::endl;
-  }
-  fileStream << " - CPU number: " << rankCpu << std::endl;
-  fileStream << " - file: " << m_file.c_str() << " line: " << m_line << std::endl;
-  fileStream << " - message: " << m_message.c_str() << std::endl;
-  if (ErrorType == ERROR) {
-    fileStream << "=> Fix error and restart run" << std::endl;
-  }
-  fileStream << "-------------------------------------------------------" << std::endl;
-  fileStream.close();
+  std::string msg{errorToString(num, ERROR)};
+  std::cout << msg;
 }
 
 //***********************************************************************

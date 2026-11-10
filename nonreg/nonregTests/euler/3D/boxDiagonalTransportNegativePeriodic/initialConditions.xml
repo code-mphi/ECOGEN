@@ -1,0 +1,41 @@
+<?xml version = "1.0" encoding = "UTF-8" standalone = "yes"?>
+<CI>
+	<!-- LIST OF GEOMETRICAL DOMAINS  -->
+	<physicalDomains>
+		<!-- complete domain -->
+		<domain name="base" state="around" type="entireDomain"/>
+		<!-- chamber high pressure -->
+		<domain name="rectangle"  state="rectangle" type="cuboid">
+  			<dataCuboid lAxisX="0.133" lAxisY="0.133" lAxisZ="0.133">
+    			<posInferiorVertex x="0.1" y="133.e-3" z="0.1"/>
+  			</dataCuboid>
+		</domain>
+	</physicalDomains>
+
+	<!-- LIST OF BOUNDARY CONDITIONS -->
+	<boundaryConditions>
+		<boundCond name="BC_Xmin" type="periodic" number="1" />
+		<boundCond name="BC_Xmax" type="periodic" number="2" />
+		<boundCond name="BC_Ymin" type="periodic" number="3" />
+		<boundCond name="BC_Ymax" type="periodic" number="4" />
+		<boundCond name="BC_Zmin" type="periodic" number="5" />
+		<boundCond name="BC_Zmax" type="periodic" number="6" />
+	</boundaryConditions>
+
+	<!--  LIST OF STATES  -->
+	<state name="rectangle">
+		<material type="fluid" EOS="IG_air.xml">
+			<dataFluid density="10.0" pressure="1.e5">
+				<velocity x="-10000." y="0." z="-10000."/>
+			</dataFluid>
+		</material>
+	</state>
+	<state name="around">
+		<material type="fluid" EOS="IG_air.xml">
+			<dataFluid density="1.0" pressure="1.e5">
+				<velocity x="-10000." y="0." z="-10000."/>
+			</dataFluid>
+		</material>
+	</state>
+
+</CI>

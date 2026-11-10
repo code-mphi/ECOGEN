@@ -1,0 +1,17 @@
+<?xml version='1.0' encoding='UTF-8' standalone='yes'?>
+<mesh>
+  <type structure="unStructured"/>
+  <unstructuredMesh>
+    <file name="libMeshes/unstructured2D/testUS.msh"/>
+    <parallel GMSHPretraitement="true"/>
+  </unstructuredMesh>
+<!--   <unstructuredMesh>
+    <file name="libMeshes/unstructured2D/testUSRefinedPart.msh"/>
+    <parallel GMSHPretraitement="true"/>
+    <meshMappingRestart
+      resultFolder="nonEqDEM2DtestUnstructured"
+      restartFileNumber="1"
+      meshFile="libMeshes/unstructured2D/testUS.msh"
+    />
+  </unstructuredMesh> -->
+</mesh>

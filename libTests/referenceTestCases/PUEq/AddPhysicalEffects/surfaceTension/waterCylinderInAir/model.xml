@@ -4,11 +4,14 @@
 	<EOS name="IG_air.xml"/>
 	<EOS name="SG_liquidForSurfaceTensionCases.xml"/>
 	<transport name="color"/>
-	<additionalPhysic type="surfaceTension" >
+	<additionalPhysics type="surfaceTension">
 		<dataSurfaceTension transport="color" sigma="800."/>
 		<reinitializationTransport phase="SG_liquidForSurfaceTensionCases.xml"/>
-	</additionalPhysic>
+	</additionalPhysics>
   <!-- <symmetryTerm type="cylindrical">
     <dataSymCyl radialAxis="Y"/>
   </symmetryTerm> -->
+	<secondOrder>
+		<globalLimiter>minmod</globalLimiter>
+	</secondOrder>
 </model>

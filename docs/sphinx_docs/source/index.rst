@@ -5,7 +5,7 @@ Here is described the documentation of the ECOGEN_ open-source plateform dedicat
 
 ECOGEN is an open-source project distributed under `GNU GPLv3 License`_ and available on `GitHub`_.
 
-It is developed by code-mphi members in partnership with AMU_, Caltech_ and CNES_.
+It is developed by code-mphi members in partnership with AMU_, Inria_, Caltech_ and CNES_.
 
 In this document, ECOGEN's user will find all necessary information to use the software.
 
@@ -16,6 +16,7 @@ Interested developers are encouraged to contribute in the project using the "pul
 .. _ECOGEN: https://code-mphi.github.io/ECOGEN/
 .. _`GNU GPLv3 License`: http://www.gnu.org/licenses
 .. _AMU: https://www.univ-amu.fr/
+.. _Inria: https://www.inria.fr/en
 .. _Caltech: http://www.mce.caltech.edu/
 .. _CNES: https://cnes.fr/fr
 .. _Doxygen: https://code-mphi.github.io/ECOGEN/docs/doxygen_docs/index.html
@@ -31,6 +32,7 @@ Interested developers are encouraged to contribute in the project using the "pul
    Chap5_testCases_Chapter
    Chap6_developersGuide_Chapter
    Chap7_license
+   Chap8_citation
    zBibliography
 
 

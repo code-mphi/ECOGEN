@@ -4,4 +4,9 @@
 	<EOS name="IG_air.xml"/>
 	<EOS name="IG_helium.xml"/>
 	<relaxation type="P" speed="infinite"/>
+<!-- 	<secondOrder>
+		<globalLimiter>vanleer</globalLimiter>
+		<globalVolumeFractionLimiter>thinc</globalVolumeFractionLimiter>
+    	<interfaceVolumeFractionLimiter>thinc</interfaceVolumeFractionLimiter>
+	</secondOrder> -->
 </model>

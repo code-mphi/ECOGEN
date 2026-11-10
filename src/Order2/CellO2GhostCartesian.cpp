@@ -139,19 +139,53 @@ void CellO2GhostCartesian::computeLocalSlopes(CellInterface& cellInterfaceRef,
   //Find the corresponding slopes store inside this ghost cell
   //----------------------------------------------------------
   int s(-1);
-  int refIndex = -1;
-  double epsilon(1.e-08), scalarDiff(0.);
-  Coord coordBuffer(0.);
-  scalarDiff = m_element->getPosition().scalar(cellInterfaceRef.getFace()->getNormal()) -
-               cellInterfaceRef.getFace()->getPos().scalar(cellInterfaceRef.getFace()->getNormal());
-  coordBuffer = scalarDiff * cellInterfaceRef.getFace()->getNormal();
-  if (coordBuffer.getX() < -epsilon) refIndex = 0;
-  else if (coordBuffer.getX() > epsilon) refIndex = 1;
-  else if (coordBuffer.getY() < -epsilon) refIndex = 2;
-  else if (coordBuffer.getY() > epsilon) refIndex = 3;
-  else if (coordBuffer.getZ() < -epsilon) refIndex = 4;
-  else if (coordBuffer.getZ() > epsilon) refIndex = 5;
+  int refIndex{-1}, ref_left{-1}, ref_right{-1};
+  double cell_pos{0.}, interface_pos{0.};
 
+  // Determine interface position inside the cell (right=0, left=1, top=2, bottom=3, front=4, back=5);
+  // As we work on a cartesian mesh, we have only one direction to check, the direction given by the normalized normal at interface.
+  //
+  // By convention, only normals at physical interfaces (so boundary conditions) can be negative (if
+  // boundary is along the left, bottom or back side of the mesh). Moreover, we are on a Ghost cell
+  // so CellInterfaceRef is a parallel interface and this interface cannot be a physical interface
+  // so the normal at interface should be positive
+  if (cellInterfaceRef.getFace()->getNormal().getX() > 0.9) {
+    assert(cellInterfaceRef.getFace()->getNormal().getY() == 0 && cellInterfaceRef.getFace()->getNormal().getZ() == 0);
+    cell_pos      = m_element->getPosition().getX();
+    interface_pos = cellInterfaceRef.getFace()->getPos().getX();
+    ref_right     = 0;
+    ref_left      = 1;
+  }
+  else if (cellInterfaceRef.getFace()->getNormal().getY() > 0.9) {
+    assert(cellInterfaceRef.getFace()->getNormal().getX() == 0 && cellInterfaceRef.getFace()->getNormal().getZ() == 0);
+    cell_pos      = m_element->getPosition().getY();
+    interface_pos = cellInterfaceRef.getFace()->getPos().getY();
+    ref_right     = 2;
+    ref_left      = 3;
+  }
+  else if (cellInterfaceRef.getFace()->getNormal().getZ() > 0.9) {
+    assert(cellInterfaceRef.getFace()->getNormal().getX() == 0 && cellInterfaceRef.getFace()->getNormal().getY() == 0);
+    cell_pos      = m_element->getPosition().getZ();
+    interface_pos = cellInterfaceRef.getFace()->getPos().getZ();
+    ref_right     = 4;
+    ref_left      = 5;
+  }
+  else {
+    // Unexpected: Wrong implementation - maybe a wrong understanding of normal setting ?
+    throw ErrorECOGEN("Unexpected normal value: probable erroneous implementation, please contact ECOGEN's developers.", __FILE__, __LINE__);
+  }
+
+  if (cell_pos < interface_pos) {
+    refIndex = ref_right;
+  }
+  else if (interface_pos < cell_pos) {
+    refIndex = ref_left;
+  }
+  else {
+    assert(0 && "Unexpected test case: cell and interface are at same position");
+  }
+
+  // Find the position of interface 'refIndex' in m_indexCellInterface vector
   for (unsigned int b = 0; b < m_indexCellInterface.size(); b++) {
     if (m_indexCellInterface[b] == refIndex) {
       s = b;
@@ -159,10 +193,10 @@ void CellO2GhostCartesian::computeLocalSlopes(CellInterface& cellInterfaceRef,
     }
   }
 
+  // Interface not found
   if (s == -1) {
-    refIndex = -1;
     for (unsigned int b = 0; b < m_indexCellInterface.size(); b++) {
-      if (m_indexCellInterface[b] == refIndex) {
+      if (m_indexCellInterface[b] == -1) {
         s = b;
         break;
       }
@@ -182,7 +216,8 @@ void CellO2GhostCartesian::computeLocalSlopes(CellInterface& cellInterfaceRef,
 
   //Loop on the cell interfaces for the determination of the slopes on the side of cellInterfaceRef
   //-----------------------------------------------------------------------------------------------
-  coordBuffer = 0.;
+  Coord coordBuffer{0.};
+  double epsilon{1.e-08};
   for (unsigned int b = 0; b < m_cellInterfaces.size(); b++) {
     if (!m_cellInterfaces[b]->getSplit()) {
       coordBuffer = m_cellInterfaces[b]->getFace()->getNormal().abs() - cellInterfaceRef.getFace()->getNormal();
@@ -213,6 +248,7 @@ void CellO2GhostCartesian::computeLocalSlopes(CellInterface& cellInterfaceRef,
 
   //Limitations des slopes
   //----------------------
+  assert((s >= 0 && static_cast<size_t>(s) < m_indexCellInterface.size()) && "Invalid index: check assignement of variable 's'");
   if (m_indexCellInterface[s] != -1) { //Slope stores in ghost cell is from a cell interface of type cellInterfaceO2 or BoundCondWallO2
     alphaCellAfterOppositeSide = m_alphaCellAfterOppositeSide[s]; //Detection of the interface and THINC method are simplified in parallel
   }

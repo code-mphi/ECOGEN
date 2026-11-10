@@ -5,4 +5,7 @@
     <EOS name="SG_water_cavitation.xml"/>
     <EOS name="IG_air.xml"/>
     <transport name="color"/>
+  <secondOrder>
+    <globalLimiter>mc</globalLimiter>
+  </secondOrder>
 </model>

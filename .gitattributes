@@ -1,0 +1,24 @@
+# References:
+# - https://adaptivepatchwork.com/2012/03/01/mind-the-end-of-your-line/
+# - https://docs.github.com/en/github/using-git/configuring-git-to-handle-line-endings
+
+# Reminder: For compatibility, Git convention default line endings for object database must be LF.
+
+# Detect all text files and convert CRLF to LF when writing to object database.
+* text=auto
+
+# By default core.eol is set to native and should not be changed (to check if changed the command 'git config --global core.eol' should return nothing).
+# It means that writing out to the working dir. is done according to your platform (CRLF for Windows and LF for Unix/OS X).
+# So if you're on Windows and you use an operation like git clone/git checkout, you'll have CRLF line endings into your working dir.
+# But if you want some files to keep LF line endings you have to make an exception.
+# Here shell files are written out to the working dir. with LF no matter what the platform is.
+*.sh text eol=lf
+*.txt text eol=lf
+
+# Denote all files that are truly binary and should not be modified.
+*.png binary
+*.jpg binary
+
+# Set MIME type for html files
+*.html html
+*.htm html

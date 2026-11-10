@@ -30,6 +30,7 @@
 
 #include <unordered_map> //For hash
 //#include <map> //For ordered map
+#include <limits>
 
 #include "MeshCartesianAMR.h"
 
@@ -76,10 +77,10 @@ int MeshCartesianAMR::initializeGeometrie(TypeMeshContainer<Cell*>& cells,
                                           TypeMeshContainer<CellInterface*>& cellInterfaces,
                                           const int& resumeSimulation,
                                           bool /*pretraitementParallele*/,
-                                          std::string ordreCalcul)
+                                          SimulationOrder schemeOrder)
 {
   this->meshStretching();
-  this->initializeGeometrieAMR(cells, cellsGhost, cellInterfaces, resumeSimulation, ordreCalcul);
+  this->initializeGeometrieAMR(cells, cellsGhost, cellInterfaces, resumeSimulation, schemeOrder);
   return m_problemDimension;
 }
 
@@ -89,7 +90,7 @@ void MeshCartesianAMR::initializeGeometrieAMR(TypeMeshContainer<Cell*>& cells,
                                               TypeMeshContainer<Cell*>& cellsGhost,
                                               TypeMeshContainer<CellInterface*>& cellInterfaces,
                                               const int& resumeSimulation,
-                                              std::string ordreCalcul)
+                                              SimulationOrder schemeOrder)
 {
   m_numberCellsX = m_numberCellsXGlobal;
   m_numberCellsY = m_numberCellsYGlobal;
@@ -109,7 +110,7 @@ void MeshCartesianAMR::initializeGeometrieAMR(TypeMeshContainer<Cell*>& cells,
   //Create cells and elements
   //-------------------------
   for (unsigned int i = 0; i < keys.size(); ++i) {
-    if (ordreCalcul == "FIRSTORDER") {
+    if (schemeOrder == SimulationOrder::first) {
       cells.push_back(new Cell);
     }
     else {
@@ -125,7 +126,7 @@ void MeshCartesianAMR::initializeGeometrieAMR(TypeMeshContainer<Cell*>& cells,
   //Create cell interfaces, faces and ghost cells
   //---------------------------------------------
   m_numberCellsCalcul = cells.size();
-  createCellInterfacesFacesAndGhostCells(cells, cellsGhost, cellInterfaces, ordreCalcul);
+  createCellInterfacesFacesAndGhostCells(cells, cellsGhost, cellInterfaces, schemeOrder);
   m_numberCellsTotal = cells.size() + cellsGhost.size();
   m_numberFacesTotal = cellInterfaces.size();
   // std::cout<<"cpu "<<rankCpu
@@ -168,12 +169,72 @@ void MeshCartesianAMR::assignElementProperties(TypeMeshContainer<Cell*>& cells, 
   }
 }
 
+void MeshCartesianAMR::createGhostCell(const TypeMeshContainer<Cell*>& cells,
+                                       TypeMeshContainer<Cell*>& cellsGhost,
+                                       const SimulationOrder schemeOrder,
+                                       const decomposition::Key<3> nKey,
+                                       const int neighbour,
+                                       const int cell_idx)
+{
+  //Create ghost cell and update cell interface
+  if (schemeOrder == SimulationOrder::first) {
+    cellsGhost.push_back(new CellGhost);
+  }
+  else {
+    cellsGhost.push_back(new CellO2GhostCartesian);
+  }
+  m_elements.push_back(new ElementCartesian());
+  m_elements.back()->setKey(nKey);
+  cellsGhost.back()->setElement(m_elements.back(), cellsGhost.size() - 1);
+  cellsGhost.back()->pushBackSlope();
+  parallel.addSlopesToSend(neighbour);
+  parallel.addSlopesToReceive(neighbour);
+
+  //Update parallel communications
+  parallel.setNeighbour(neighbour);
+
+  //Try to find the current cell into the already added cells to send
+  auto cKey = cells[cell_idx]->getElement()->getKey();
+  auto it3  = std::find_if(parallel.getElementsToSend(neighbour).begin(), parallel.getElementsToSend(neighbour).end(), [&cKey](Cell* _k0) {
+    return _k0->getElement()->getKey() == cKey;
+  });
+
+  if (it3 == parallel.getElementsToSend(neighbour).end()) //Current cell not added in send vector
+  {
+    parallel.addElementToSend(neighbour, cells[cell_idx]);
+  }
+  parallel.addElementToReceive(neighbour, cellsGhost.back());
+  cellsGhost.back()->setRankOfNeighborCPU(neighbour);
+
+  const auto coord = nKey.coordinate();
+  const auto nix = coord.x(), niy = coord.y(), niz = coord.z();
+
+  const double volume = m_dXi[nix] * m_dYj[niy] * m_dZk[niz];
+  cellsGhost.back()->getElement()->setVolume(volume);
+
+  double lCFL(1.e10);
+  if (m_numberCellsX != 1) {
+    lCFL = std::min(lCFL, m_dXi[nix]);
+  }
+  if (m_numberCellsY != 1) {
+    lCFL = std::min(lCFL, m_dYj[niy]);
+  }
+  if (m_numberCellsZ != 1) {
+    lCFL = std::min(lCFL, m_dZk[niz]);
+  }
+  if (m_problemDimension > 1) lCFL *= 0.6;
+
+  cellsGhost.back()->getElement()->setLCFL(lCFL);
+  cellsGhost.back()->getElement()->setPos(m_posXi[nix], m_posYj[niy], m_posZk[niz]);
+  cellsGhost.back()->getElement()->setSize(m_dXi[nix], m_dYj[niy], m_dZk[niz]);
+}
+
 //***********************************************************************
 
 void MeshCartesianAMR::createCellInterfacesFacesAndGhostCells(TypeMeshContainer<Cell*>& cells,
                                                               TypeMeshContainer<Cell*>& cellsGhost,
                                                               TypeMeshContainer<CellInterface*>& cellInterfaces,
-                                                              std::string ordreCalcul)
+                                                              SimulationOrder schemeOrder)
 {
   double posX = 0, posY = 0., posZ = 0.;
   using key_type        = decomposition::Key<3>;
@@ -193,7 +254,7 @@ void MeshCartesianAMR::createCellInterfacesFacesAndGhostCells(TypeMeshContainer<
   }
 
   for (unsigned int i = 0; i < cells.size(); ++i) {
-    const auto coord = cells[i]->getElement()->getKey().coordinate();
+    auto coord    = cells[i]->getElement()->getKey().coordinate();
     const auto ix = coord.x(), iy = coord.y(), iz = coord.z();
     for (int idx = 0; idx < 2 * m_problemDimension; idx++) {
       const auto offset = offsets[idx];
@@ -280,7 +341,7 @@ void MeshCartesianAMR::createCellInterfacesFacesAndGhostCells(TypeMeshContainer<
         if (offset[0] > 0 || offset[1] > 0 || offset[2] > 0) //Positive offset
         {
           //Create cell interface
-          if (ordreCalcul == "FIRSTORDER") {
+          if (schemeOrder == SimulationOrder::first) {
             cellInterfaces.push_back(new CellInterface);
           }
           else {
@@ -323,57 +384,8 @@ void MeshCartesianAMR::createCellInterfacesFacesAndGhostCells(TypeMeshContainer<
 
             if (it2 == cellsGhost.end()) //Ghost cell does not exist
             {
-              //Create ghost cell and update cell interface
-              if (ordreCalcul == "FIRSTORDER") {
-                cellsGhost.push_back(new CellGhost);
-              }
-              else {
-                cellsGhost.push_back(new CellO2GhostCartesian);
-              }
-              m_elements.push_back(new ElementCartesian());
-              m_elements.back()->setKey(nKey);
-              cellsGhost.back()->setElement(m_elements.back(), cellsGhost.size() - 1);
-              cellsGhost.back()->pushBackSlope();
-              parallel.addSlopesToSend(neighbour);
-              parallel.addSlopesToReceive(neighbour);
-
-              //Update parallel communications
-              parallel.setNeighbour(neighbour);
-
-              //Try to find the current cell into the already added cells to send
-              auto cKey = cells[i]->getElement()->getKey();
-              auto it3 = std::find_if(parallel.getElementsToSend(neighbour).begin(), parallel.getElementsToSend(neighbour).end(), [&cKey](Cell* _k0) {
-                return _k0->getElement()->getKey() == cKey;
-              });
-
-              if (it3 == parallel.getElementsToSend(neighbour).end()) //Current cell not added in send vector
-              {
-                parallel.addElementToSend(neighbour, cells[i]);
-              }
-              parallel.addElementToReceive(neighbour, cellsGhost.back());
-              cellsGhost.back()->setRankOfNeighborCPU(neighbour);
-
-              const auto coord = nKey.coordinate();
-              const auto nix = coord.x(), niy = coord.y(), niz = coord.z();
-
-              const double volume = m_dXi[nix] * m_dYj[niy] * m_dZk[niz];
-              cellsGhost.back()->getElement()->setVolume(volume);
-
-              double lCFL(1.e10);
-              if (m_numberCellsX != 1) {
-                lCFL = std::min(lCFL, m_dXi[nix]);
-              }
-              if (m_numberCellsY != 1) {
-                lCFL = std::min(lCFL, m_dYj[niy]);
-              }
-              if (m_numberCellsZ != 1) {
-                lCFL = std::min(lCFL, m_dZk[niz]);
-              }
-              if (m_problemDimension > 1) lCFL *= 0.6;
-
-              cellsGhost.back()->getElement()->setLCFL(lCFL);
-              cellsGhost.back()->getElement()->setPos(m_posXi[nix], m_posYj[niy], m_posZk[niz]);
-              cellsGhost.back()->getElement()->setSize(m_dXi[nix], m_dYj[niy], m_dZk[niz]);
+              //Create ghost cell
+              this->createGhostCell(cells, cellsGhost, schemeOrder, nKey, neighbour, i);
 
               //Update pointers cells <-> cell interfaces
               cellInterfaces.back()->initialize(cells[i], cellsGhost.back());
@@ -410,7 +422,7 @@ void MeshCartesianAMR::createCellInterfacesFacesAndGhostCells(TypeMeshContainer<
           if (it_pair == cell_map.end()) //Neighbor cell is a ghost cell
           {
             //Create cell interface related to the ghost cell
-            if (ordreCalcul == "FIRSTORDER") {
+            if (schemeOrder == SimulationOrder::first) {
               cellInterfaces.push_back(new CellInterface);
             }
             else {
@@ -449,62 +461,14 @@ void MeshCartesianAMR::createCellInterfacesFacesAndGhostCells(TypeMeshContainer<
             if (it2 == cellsGhost.end()) //Ghost cell does not exist
             {
               //Create ghost cell
-              if (ordreCalcul == "FIRSTORDER") {
-                cellsGhost.push_back(new CellGhost);
-              }
-              else {
-                cellsGhost.push_back(new CellO2GhostCartesian);
-              }
-              m_elements.push_back(new ElementCartesian());
-              m_elements.back()->setKey(nKey);
-              cellsGhost.back()->setElement(m_elements.back(), cellsGhost.size() - 1);
-              cellsGhost.back()->pushBackSlope();
-              parallel.addSlopesToSend(neighbour);
-              parallel.addSlopesToReceive(neighbour);
-
-              //Update parallel communications
-              parallel.setNeighbour(neighbour);
-              //Try to find the current cell into the already added cells to send
-              auto cKey = cells[i]->getElement()->getKey();
-              auto it3 = std::find_if(parallel.getElementsToSend(neighbour).begin(), parallel.getElementsToSend(neighbour).end(), [&cKey](Cell* _k0) {
-                return _k0->getElement()->getKey() == cKey;
-              });
-              if (it3 == parallel.getElementsToSend(neighbour).end()) //Current cell not added in send vector
-              {
-                parallel.addElementToSend(neighbour, cells[i]);
-              }
-              parallel.addElementToReceive(neighbour, cellsGhost.back());
-              cellsGhost.back()->setRankOfNeighborCPU(neighbour);
-
-              const auto coord = nKey.coordinate();
-              const auto nix = coord.x(), niy = coord.y(), niz = coord.z();
-
-              const double volume = m_dXi[nix] * m_dYj[niy] * m_dZk[niz];
-              cellsGhost.back()->getElement()->setVolume(volume);
-
-              double lCFL(1.e10);
-              if (m_numberCellsX != 1) {
-                lCFL = std::min(lCFL, m_dXi[nix]);
-              }
-              if (m_numberCellsY != 1) {
-                lCFL = std::min(lCFL, m_dYj[niy]);
-              }
-              if (m_numberCellsZ != 1) {
-                lCFL = std::min(lCFL, m_dZk[niz]);
-              }
-              if (m_problemDimension > 1) lCFL *= 0.6;
-
-              cellsGhost.back()->getElement()->setLCFL(lCFL);
-              cellsGhost.back()->getElement()->setPos(m_posXi[nix], m_posYj[niy], m_posZk[niz]);
-              cellsGhost.back()->getElement()->setSize(m_dXi[nix], m_dYj[niy], m_dZk[niz]);
+              this->createGhostCell(cells, cellsGhost, schemeOrder, nKey, neighbour, i);
 
               //Update pointers cells <-> cell interfaces
               cellInterfaces.back()->initialize(cellsGhost.back(), cells[i]);
               cells[i]->addCellInterface(cellInterfaces.back());
               cellsGhost.back()->addCellInterface(cellInterfaces.back());
             }
-            else //Ghost cell exists
-            {
+            else { //Ghost cell exists
               //Update parallel communications
               //Try to find the current cell into the already added cells to send
               auto cKey = cells[i]->getElement()->getKey();
@@ -553,7 +517,7 @@ void MeshCartesianAMR::procedureRaffinementInitialization(TypeMeshContainer<Cell
                                                           std::vector<GeometricalDomain*>& domains,
                                                           Eos** eos,
                                                           const int& resumeSimulation,
-                                                          std::string ordreCalcul,
+                                                          SimulationOrder schemeOrder,
                                                           std::vector<GeometricalDomain*>& solidDomains)
 {
   nbCellsTotalAMR = m_numberCellsCalcul;
@@ -587,7 +551,7 @@ void MeshCartesianAMR::procedureRaffinementInitialization(TypeMeshContainer<Cell
       }
     }
     if (Ncpu > 1) {
-      this->parallelLoadBalancingAMR(cellsLvl, cellsLvlGhost, cellInterfacesLvl, ordreCalcul, addPhys, eos, nbCellsTotalAMR, solidDomains, true);
+      this->parallelLoadBalancingAMR(cellsLvl, cellsLvlGhost, cellInterfacesLvl, schemeOrder, addPhys, eos, nbCellsTotalAMR, solidDomains, true);
     }
   }
 }
@@ -729,17 +693,22 @@ void MeshCartesianAMR::writeHeaderPiece(std::ofstream& fileStream, TypeMeshConta
 
 //***********************************************************************
 
-void MeshCartesianAMR::getNodes(std::vector<double>& dataset, std::vector<Cell*>* cellsLvl) const
+size_t MeshCartesianAMR::getNodes(std::vector<double>& dataset, std::vector<Cell*>* cellsLvl) const
 {
-  int dimZ = 0;
-  if (m_numberCellsZ > 1) dimZ = 1;
+  size_t numberNodes{0}; // to count the number of nodes appened in the vector:
+  // as initial grid size is stored in an integer for each dimension, maximal level of subdivision is an 'int' too
+  // and we will store 4 or 8 node per cell, it is possible to overflow INT32_MAX. In other methods of this class, the loop over
+  // the cells of a level is done using 'unsigned int', which means that we can overflow the 'UINT32_MAX' too and we have to use
+  // a 'size_t' for both the node count and nodes indices
+
+  const bool dimZ{(m_numberCellsZ > 1) ? true : false};
 
   double dXsur2(0.), dYsur2(0.), dZsur2(0.);
   for (int lvl = 0; lvl <= m_lvlMax; lvl++) {
     dXsur2 = 0.;
     dYsur2 = 0.;
     dZsur2 = 0.;
-    for (unsigned int i = 0; i < cellsLvl[lvl].size(); i++) {
+    for (size_t i = 0; i < cellsLvl[lvl].size(); i++) {
       if (!cellsLvl[lvl][i]->getSplit()) {
         dXsur2 = 0.5 * cellsLvl[lvl][i]->getSizeX();
         dYsur2 = 0.5 * cellsLvl[lvl][i]->getSizeY();
@@ -761,7 +730,9 @@ void MeshCartesianAMR::getNodes(std::vector<double>& dataset, std::vector<Cell*>
         dataset.push_back(cellsLvl[lvl][i]->getPosition().getY() + dYsur2);
         dataset.push_back(cellsLvl[lvl][i]->getPosition().getZ() - dZsur2 * dimZ);
 
-        if (dimZ > 0.99) {
+        numberNodes += 4;
+
+        if (dimZ) {
           //Point 4
           dataset.push_back(cellsLvl[lvl][i]->getPosition().getX() - dXsur2);
           dataset.push_back(cellsLvl[lvl][i]->getPosition().getY() - dYsur2);
@@ -778,68 +749,79 @@ void MeshCartesianAMR::getNodes(std::vector<double>& dataset, std::vector<Cell*>
           dataset.push_back(cellsLvl[lvl][i]->getPosition().getX() - dXsur2);
           dataset.push_back(cellsLvl[lvl][i]->getPosition().getY() + dYsur2);
           dataset.push_back(cellsLvl[lvl][i]->getPosition().getZ() + dZsur2);
+
+          numberNodes += 4;
         }
       } //End cell non split
     } //End Cells
   } //End Levels
+
+  return numberNodes;
 }
 
 //***********************************************************************
-
-void MeshCartesianAMR::getConnectivity(std::vector<double>& dataset, std::vector<Cell*>* cellsLvl) const
+template <typename T> size_t MeshCartesianAMR::getConnectivity_private(std::vector<T>& dataset, std::vector<Cell*>* cellsLvl) const
 {
-  int dimZ(0);
-  int numberPointsPerCell(4);
-  if (m_numberCellsZ > 1) {
-    dimZ                = 1;
-    numberPointsPerCell = 8;
-  }
+  const unsigned int numberPointsPerCell = (m_numberCellsZ > 1) ? 8 : 4;
 
-  if (dimZ < 0.99) {
-    int numCell(0);
-    for (int lvl = 0; lvl <= m_lvlMax; lvl++) {
-      for (unsigned int i = 0; i < cellsLvl[lvl].size(); i++) {
-        if (!cellsLvl[lvl][i]->getSplit()) {
-          dataset.push_back(numCell * numberPointsPerCell);
-          dataset.push_back(numCell * numberPointsPerCell + 1);
-          dataset.push_back(numCell * numberPointsPerCell + 2);
-          dataset.push_back(numCell * numberPointsPerCell + 3);
-          numCell++;
-        }
-      }
-    }
-  }
-  else {
-    int numCell(0);
-    for (int lvl = 0; lvl <= m_lvlMax; lvl++) {
-      for (unsigned int i = 0; i < cellsLvl[lvl].size(); i++) {
-        if (!cellsLvl[lvl][i]->getSplit()) {
-          dataset.push_back(numCell * numberPointsPerCell);
-          dataset.push_back(numCell * numberPointsPerCell + 1);
-          dataset.push_back(numCell * numberPointsPerCell + 2);
-          dataset.push_back(numCell * numberPointsPerCell + 3);
-          dataset.push_back(numCell * numberPointsPerCell + 4);
-          dataset.push_back(numCell * numberPointsPerCell + 5);
-          dataset.push_back(numCell * numberPointsPerCell + 6);
-          dataset.push_back(numCell * numberPointsPerCell + 7);
-          numCell++;
-        }
-      }
-    }
-  }
-}
-
-//***********************************************************************
-
-void MeshCartesianAMR::getOffsets(std::vector<double>& dataset, std::vector<Cell*>* cellsLvl) const
-{
-  int numberPointsPerCell(4);
-  if (m_numberCellsZ > 1) {
-    numberPointsPerCell = 8;
-  }
-  int numCell(0);
+  size_t numCell{0};
   for (int lvl = 0; lvl <= m_lvlMax; lvl++) {
-    for (unsigned int i = 0; i < cellsLvl[lvl].size(); i++) {
+    // Check for integer overflow for the cell count: 'numCell + cellsLvl[lvl].size()' has to fit in a 'size_t'
+    if (numCell > SIZE_MAX - cellsLvl[lvl].size()) {
+      Errors::errorMessage("Too many cells to call current implementation of 'getConnectivity' method");
+      return 0;
+    }
+
+    for (size_t i = 0; i < cellsLvl[lvl].size(); i++) {
+      if (!cellsLvl[lvl][i]->getSplit()) {
+        for (unsigned int j = 0; j < numberPointsPerCell; ++j) {
+          // The check that the maximal node index fit in a 'T' integer has to be performed before calling this function
+          // (it is easy to check this after calling the 'getNodes' function because it returns the node count)
+          dataset.push_back(numCell * numberPointsPerCell + j);
+        }
+        numCell++;
+      }
+    }
+  }
+  return numCell;
+}
+
+//***********************************************************************
+size_t MeshCartesianAMR::getConnectivity(std::vector<double>& dataset, std::vector<Cell*>* cellsLvl) const
+{
+  // Store connectivity
+  return getConnectivity_private(dataset, cellsLvl);
+}
+
+//***********************************************************************
+size_t MeshCartesianAMR::getConnectivity(std::vector<int32_t>& dataset, std::vector<Cell*>* cellsLvl) const
+{
+  // Store connectivity
+  return getConnectivity_private(dataset, cellsLvl);
+}
+
+//***********************************************************************
+size_t MeshCartesianAMR::getConnectivity(std::vector<int64_t>& dataset, std::vector<Cell*>* cellsLvl) const
+{
+  // Store connectivity
+  return getConnectivity_private(dataset, cellsLvl);
+}
+
+//***********************************************************************
+template <typename T> void MeshCartesianAMR::getOffsets_private(std::vector<T>& dataset, std::vector<Cell*>* cellsLvl, uint64_t maxVal) const
+{
+  const T numberPointsPerCell = (m_numberCellsZ > 1) ? 8 : 4;
+
+  unsigned int numCell{0};
+  for (int lvl = 0; lvl <= m_lvlMax; lvl++) {
+    // Check overflow for data that we push: '(numCell + cellsLvl[lvl].size()) * numberPointsPerCell' has to stay below a threshold that
+    // depends on the type of 'dataset' and that is provided in 'maxVal' argument.
+    if (numCell > maxVal / numberPointsPerCell - cellsLvl[lvl].size()) {
+      Errors::errorMessage("Too large offset value to call current implementation of 'getOffsets' method");
+      return;
+    }
+
+    for (size_t i = 0; i < cellsLvl[lvl].size(); i++) {
       if (!cellsLvl[lvl][i]->getSplit()) {
         dataset.push_back((numCell + 1) * numberPointsPerCell);
         numCell++;
@@ -848,16 +830,36 @@ void MeshCartesianAMR::getOffsets(std::vector<double>& dataset, std::vector<Cell
   }
 }
 
-//****************************************************************************
-
-void MeshCartesianAMR::getTypeCell(std::vector<double>& dataset, std::vector<Cell*>* cellsLvl) const
+//***********************************************************************
+void MeshCartesianAMR::getOffsets(std::vector<double>& dataset, std::vector<Cell*>* cellsLvl) const
 {
-  int type(9);
-  if (m_numberCellsZ > 1) {
-    type = 12;
-  }
+  // Store offsets while checking for overflow: the maximal unsigned integer exactly representable as a double is (2^53-1)
+  // (due to the mantissa size for IEEE754 standard) so we have to ensure that offset index will stay below this value
+  getOffsets_private(dataset, cellsLvl, MAX_SAFE_INTEGER);
+}
+
+//***********************************************************************
+void MeshCartesianAMR::getOffsets(std::vector<int32_t>& dataset, std::vector<Cell*>* cellsLvl) const
+{
+  // Store offsets while checking for overflow
+  getOffsets_private(dataset, cellsLvl, std::numeric_limits<int32_t>::max());
+}
+
+//***********************************************************************
+void MeshCartesianAMR::getOffsets(std::vector<int64_t>& dataset, std::vector<Cell*>* cellsLvl) const
+{
+  // Store offsets while checking for overflow
+  getOffsets_private(dataset, cellsLvl, std::numeric_limits<int64_t>::max());
+}
+
+//***********************************************************************
+template <typename T> void MeshCartesianAMR::getTypeCell_private(std::vector<T>& dataset, std::vector<Cell*>* cellsLvl) const
+{
+  // Remark: In VTK, type of cells are 'unsigned char' but they are stored as 'int' in ECOGEN
+  const T type = (m_numberCellsZ > 1) ? 12 : 9;
+
   for (int lvl = 0; lvl <= m_lvlMax; lvl++) {
-    for (unsigned int i = 0; i < cellsLvl[lvl].size(); i++) {
+    for (size_t i = 0; i < cellsLvl[lvl].size(); i++) {
       if (!cellsLvl[lvl][i]->getSplit()) {
         dataset.push_back(type);
       }
@@ -865,67 +867,43 @@ void MeshCartesianAMR::getTypeCell(std::vector<double>& dataset, std::vector<Cel
   }
 }
 
-//***********************************************************************
+//****************************************************************************
+
+void MeshCartesianAMR::getTypeCell(std::vector<unsigned char>& dataset, std::vector<Cell*>* cellsLvl) const
+{
+  getTypeCell_private(dataset, cellsLvl);
+}
+
+//****************************************************************************
+
+void MeshCartesianAMR::getTypeCell(std::vector<double>& dataset, std::vector<Cell*>* cellsLvl) const { getTypeCell_private(dataset, cellsLvl); }
+
+//****************************************************************************
 
 void MeshCartesianAMR::getData(TypeMeshContainer<Cell*>* cellsLvl, std::vector<double>& dataset, const int var, int phase) const
 {
-  dataset.clear();
-  double transport(0.);
-  for (int lvl = 0; lvl <= m_lvlMax; lvl++) {
-    for (unsigned int i = 0; i < cellsLvl[lvl].size(); i++) {
-      if (!cellsLvl[lvl][i]->getSplit()) {
-        if (var > 0) { //We want to get the scalar data
-          if (phase >= 0) {
-            //data de phases
-            dataset.push_back(cellsLvl[lvl][i]->getPhase(phase)->returnScalar(var));
-          }
-          else if (phase == -1) {
-            //data de mixture
-            dataset.push_back(cellsLvl[lvl][i]->getMixture()->returnScalar(var));
-          }
-          else if (phase == -2) {
-            transport = cellsLvl[lvl][i]->getTransport(var - 1).getValue();
-            if (transport < 1.e-20) {
-              transport = 0.;
-            }
-            dataset.push_back(transport);
-          }
-          else if (phase == -3) {
-            dataset.push_back(cellsLvl[lvl][i]->getXi());
-          }
-          else if (phase == -4) {
-            dataset.push_back(cellsLvl[lvl][i]->getDensityGradient());
-          }
-          else if (phase == -5) {
-            dataset.push_back(static_cast<double>(rankCpu));
-          }
-          else if (phase == -6) {
-            dataset.push_back(static_cast<double>(cellsLvl[lvl][i]->getElement()->getKey().getIndex()));
-          }
-          else if (phase == -7) {
-            // Saturation pressure
-            dataset.push_back(cellsLvl[lvl][i]->getPsat());
-          }
-          else {
-            Errors::errorMessage("MeshCartesianAMR::getData: unknown number of phase: ", phase);
-          }
-        }
-        else { //We want to get the vector data
+  getData_private(cellsLvl, dataset, var, phase);
+}
 
-          if (phase >= 0) { //data de phases
-            dataset.push_back(cellsLvl[lvl][i]->getPhase(phase)->returnVector(-var).getX());
-            dataset.push_back(cellsLvl[lvl][i]->getPhase(phase)->returnVector(-var).getY());
-            dataset.push_back(cellsLvl[lvl][i]->getPhase(phase)->returnVector(-var).getZ());
-          }
-          else if (phase == -1) { //data de mixture
-            dataset.push_back(cellsLvl[lvl][i]->getMixture()->returnVector(-var).getX());
-            dataset.push_back(cellsLvl[lvl][i]->getMixture()->returnVector(-var).getY());
-            dataset.push_back(cellsLvl[lvl][i]->getMixture()->returnVector(-var).getZ());
-          }
-          else {
-            Errors::errorMessage("MeshCartesianAMR::getData: unknown number of phase: ", phase);
-          }
-        } //End vector
+//****************************************************************************
+
+void MeshCartesianAMR::getData(TypeMeshContainer<Cell*>* cellsLvl, std::vector<float>& dataset, const int var, int phase) const
+{
+  getData_private(cellsLvl, dataset, var, phase);
+}
+
+//****************************************************************************
+
+template <typename T>
+void MeshCartesianAMR::getData_private(TypeMeshContainer<Cell*>* cellsLvl, std::vector<T>& dataset, const int var, int phase) const
+{
+  dataset.clear();
+  constexpr bool isAMR{true};
+
+  for (int lvl = 0; lvl <= m_lvlMax; lvl++) {
+    for (auto cell : cellsLvl[lvl]) {
+      if (!cell->getSplit()) {
+        getData_body(cell, dataset, var, phase, isAMR);
       } //End split
     } //End lvl
   } //End levels
@@ -1008,7 +986,7 @@ void MeshCartesianAMR::readDomainDecomposition(std::ifstream& fileStream)
 //****************************** Parallele ***********************************
 //****************************************************************************
 
-void MeshCartesianAMR::initializePersistentCommunications(const TypeMeshContainer<Cell*>& cells, std::string ordreCalcul)
+void MeshCartesianAMR::initializePersistentCommunications(const TypeMeshContainer<Cell*>& cells, SimulationOrder schemeOrder)
 {
   int numberVariablesPhaseToSend(0);
   for (int k = 0; k < numberPhases; k++) {
@@ -1017,7 +995,7 @@ void MeshCartesianAMR::initializePersistentCommunications(const TypeMeshContaine
   int numberVariablesMixtureToSend = cells[0]->getMixture()->numberOfTransmittedVariables();
   int m_numberPrimitiveVariables   = numberVariablesPhaseToSend + numberVariablesMixtureToSend + numberTransports;
   int m_numberSlopeVariables(0);
-  if (ordreCalcul == "SECONDORDER") {
+  if (schemeOrder == SimulationOrder::second) {
     int numberSlopesPhaseToSend(0);
     for (int k = 0; k < numberPhases; k++) {
       numberSlopesPhaseToSend += cells[0]->getPhase(k)->numberOfTransmittedSlopes();
@@ -1038,16 +1016,16 @@ void MeshCartesianAMR::finalizeParallele(const int& lvlMax) { parallel.finalizeA
 void MeshCartesianAMR::parallelLoadBalancingAMR(TypeMeshContainer<Cell*>* cellsLvl,
                                                 TypeMeshContainer<Cell*>* cellsLvlGhost,
                                                 TypeMeshContainer<CellInterface*>* cellInterfacesLvl,
-                                                std::string ordreCalcul,
+                                                SimulationOrder schemeOrder,
                                                 const std::vector<AddPhys*>& addPhys,
                                                 Eos** eos,
                                                 int& nbCellsTotalAMR,
                                                 std::vector<GeometricalDomain*>& solidDomains,
                                                 bool init)
 {
-  bool balance(false);
+  bool balance_(false);
   do {
-    balance = false;
+    balance_ = false;
     std::vector<typename decomposition::Key<3>::value_type> indicesSendStartGlobal;
     std::vector<typename decomposition::Key<3>::value_type> indicesSendEndGlobal;
     std::vector<typename decomposition::Key<3>::value_type> indicesReceiveStartGlobal;
@@ -1055,14 +1033,14 @@ void MeshCartesianAMR::parallelLoadBalancingAMR(TypeMeshContainer<Cell*>* cellsL
     //for (int lvl = 0; lvl <= m_lvlMax; ++lvl) { //For levelwise balancing
     int lvl(0); //For global balancing
     this->computePotentialBalancing(
-      cellsLvl, init, lvl, balance, indicesSendStartGlobal, indicesSendEndGlobal, indicesReceiveStartGlobal, indicesReceiveEndGlobal);
+      cellsLvl, init, lvl, balance_, indicesSendStartGlobal, indicesSendEndGlobal, indicesReceiveStartGlobal, indicesReceiveEndGlobal);
     //} //For levelwise balancing
 
-    if (balance) {
+    if (balance_) {
       this->balance(cellsLvl,
                     cellsLvlGhost,
                     cellInterfacesLvl,
-                    ordreCalcul,
+                    schemeOrder,
                     addPhys,
                     eos,
                     nbCellsTotalAMR,
@@ -1072,7 +1050,7 @@ void MeshCartesianAMR::parallelLoadBalancingAMR(TypeMeshContainer<Cell*>* cellsL
                     indicesReceiveEndGlobal,
                     solidDomains);
     }
-  } while (balance);
+  } while (balance_);
 
   //Update gradients for level max only (others are updated within the recursive time-stepping loop)
   for (unsigned int i = 0; i < cellsLvl[m_lvlMax].size(); i++) {
@@ -1090,7 +1068,7 @@ void MeshCartesianAMR::parallelLoadBalancingAMR(TypeMeshContainer<Cell*>* cellsL
 void MeshCartesianAMR::computePotentialBalancing(TypeMeshContainer<Cell*>* cellsLvl,
                                                  bool init,
                                                  int lvl,
-                                                 bool& balance,
+                                                 bool& balance_,
                                                  std::vector<typename decomposition::Key<3>::value_type>& indicesSendStartGlobal,
                                                  std::vector<typename decomposition::Key<3>::value_type>& indicesSendEndGlobal,
                                                  std::vector<typename decomposition::Key<3>::value_type>& indicesReceiveStartGlobal,
@@ -1254,16 +1232,16 @@ void MeshCartesianAMR::computePotentialBalancing(TypeMeshContainer<Cell*>* cells
 
   if (init) {
     if (relativePossibleLoadShiftMax > 1.e-10) {
-      balance = true;
+      balance_ = true;
     }
   }
   else {
     if (relativePossibleLoadShiftMax > 0.05) {
-      balance = true;
+      balance_ = true;
     }
   }
 
-  if (!balance) return;
+  if (!balance_) return;
 
   //5) Send/Receive indices of base cell keys (lvl = 0) and partially update the domain decomposition with new starts and ends
   //--------------------------------------------------------------------------------------------------------------------------
@@ -1325,7 +1303,7 @@ void MeshCartesianAMR::computePotentialBalancing(TypeMeshContainer<Cell*>* cells
 void MeshCartesianAMR::balance(TypeMeshContainer<Cell*>* cellsLvl,
                                TypeMeshContainer<Cell*>* cellsLvlGhost,
                                TypeMeshContainer<CellInterface*>* cellInterfacesLvl,
-                               std::string ordreCalcul,
+                               SimulationOrder schemeOrder,
                                const std::vector<AddPhys*>& addPhys,
                                Eos** eos,
                                int& nbCellsTotalAMR,
@@ -1361,7 +1339,7 @@ void MeshCartesianAMR::balance(TypeMeshContainer<Cell*>* cellsLvl,
   std::vector<decomposition::Key<3>> keysReceiveEnd(numberOfCellsToReceiveEndGlobal);
   m_elements.clear();
   for (unsigned int i = 0; i < numberOfCellsToReceiveStartGlobal; ++i) {
-    if (ordreCalcul == "FIRSTORDER") {
+    if (schemeOrder == SimulationOrder::first) {
       bufferReceiveCellsStart[i] = new Cell;
     }
     else {
@@ -1373,7 +1351,7 @@ void MeshCartesianAMR::balance(TypeMeshContainer<Cell*>* cellsLvl,
     bufferReceiveCellsStart[i]->setElement(m_elements.back(), i);
   }
   for (unsigned int i = 0; i < numberOfCellsToReceiveEndGlobal; ++i) {
-    if (ordreCalcul == "FIRSTORDER") {
+    if (schemeOrder == SimulationOrder::first) {
       bufferReceiveCellsEnd[i] = new Cell;
     }
     else {
@@ -1473,7 +1451,7 @@ void MeshCartesianAMR::balance(TypeMeshContainer<Cell*>* cellsLvl,
   cellsLvlGhost[0].clear();
   parallel.clearElementsAndSlopesToSendAndReceivePLusNeighbour();
   m_numberCellsCalcul = cellsLvl[0].size();
-  createCellInterfacesFacesAndGhostCells(cellsLvl[0], cellsLvlGhost[0], cellInterfacesLvl[0], ordreCalcul);
+  createCellInterfacesFacesAndGhostCells(cellsLvl[0], cellsLvlGhost[0], cellInterfacesLvl[0], schemeOrder);
   m_numberCellsTotal = cellsLvl[0].size() + cellsLvlGhost[0].size();
   m_numberFacesTotal = cellInterfacesLvl[0].size();
   //   std::cout<<"cpu "<<rankCpu
@@ -1504,7 +1482,7 @@ void MeshCartesianAMR::balance(TypeMeshContainer<Cell*>* cellsLvl,
   for (unsigned int i = 0; i < cellsLvlGhost[0].size(); i++) {
     cellsLvlGhost[0][i]->fill(solidDomains, m_lvlMax);
   }
-  this->setImmersedBoundaries(cellInterfacesLvl, ordreCalcul);
+  this->setImmersedBoundaries(cellInterfacesLvl, schemeOrder);
   m_numberFacesTotal = cellInterfacesLvl[0].size();
 
   //7) Send/Receive physical values of cells lvl >= 0 and create new cells and new internal cell interfaces of lvl > 0

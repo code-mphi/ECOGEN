@@ -62,27 +62,51 @@ class MeshCartesian : public Mesh
                             TypeMeshContainer<CellInterface*>& cellInterfaces,
                             const int& /*resumeSimulation*/,
                             bool /*pretraitementParallele*/,
-                            std::string ordreCalcul) override;
+                            SimulationOrder schemeOrder) override;
     void meshStretching();
-    void initializeGeometrieMonoCpu(TypeMeshContainer<Cell*>& cells, TypeMeshContainer<CellInterface*>& cellInterfaces, std::string ordreCalcul);
+    void initializeGeometrieMonoCpu(TypeMeshContainer<Cell*>& cells, TypeMeshContainer<CellInterface*>& cellInterfaces, SimulationOrder schemeOrder);
     void initializeGeometrieParallele(TypeMeshContainer<Cell*>& cells,
                                       TypeMeshContainer<Cell*>& cellsGhost,
                                       TypeMeshContainer<CellInterface*>& cellInterfaces,
-                                      std::string ordreCalcul);
-    void decoupageParallele(std::string ordreCalcul, TypeMeshContainer<Cell*>& cells);
+                                      SimulationOrder schemeOrder);
+    void parallelePartitioning(SimulationOrder schemeOrder, TypeMeshContainer<Cell*>& cells);
     std::string whoAmI() const override;
-    void setImmersedBoundaries(TypeMeshContainer<CellInterface*>* cellInterfacesLvl, std::string ordreCalcul) const override;
+    void setImmersedBoundaries(TypeMeshContainer<CellInterface*>* cellInterfacesLvl, SimulationOrder schemeOrder) const override;
 
     //Accessors
     //---------
-    int getNumberCellsY() override { return m_numberCellsY; };
-    int getNumberCellsZ() override { return m_numberCellsZ; };
+    int getNumberCellsX() const override { return m_numberCellsX; };
+    int getNumberCellsY() const override { return m_numberCellsY; };
+    int getNumberCellsZ() const override { return m_numberCellsZ; };
+    int getNumberCellsXGlobal() const override { return m_numberCellsXGlobal; };
+    int getNumberCellsYGlobal() const override { return m_numberCellsYGlobal; };
+    int getNumberCellsZGlobal() const override { return m_numberCellsZGlobal; };
+    int getOffsetX() const override { return m_offsetX; };
+    int getOffsetY() const override { return m_offsetY; };
+    int getOffsetZ() const override { return m_offsetZ; };
+    int getNumberCpuX() const override { return m_numberCpuX; };
+    int getNumberCpuY() const override { return m_numberCpuY; };
+    int getNumberCpuZ() const override { return m_numberCpuZ; };
 
     //Printing / Reading
     //------------------
     std::string getStringExtent(bool global = false) const override;
-    void getCoord(std::vector<double>& dataset, Axis axis) const override;
+
+    //! \brief Return whole extent of global cartesian mesh under the form of an array
+    std::array<int, 6> getArrayGlobalExtent() const override;
+
+    void getCoord(std::vector<double>& dataset, Axis axis, bool global = false) const override;
+
+    // To delete if we choose to use 'writeMeshRectilinearVTKHDF'.
+    size_t getNodes(std::vector<double>& dataset, std::vector<Cell*>* /*cellsLvl*/) const override;
+    size_t getConnectivity(std::vector<int64_t>& dataset, std::vector<Cell*>* /*cellsLvl*/) const override;
+    size_t getConnectivity(std::vector<int32_t>& dataset, std::vector<Cell*>* /*cellsLvl*/) const override;
+    void getOffsets(std::vector<int64_t>& dataset, std::vector<Cell*>* /*cellsLvl*/) const override;
+    void getOffsets(std::vector<int32_t>& dataset, std::vector<Cell*>* /*cellsLvl*/) const override;
+    void getTypeCell(std::vector<unsigned char>& dataset, std::vector<Cell*>* /*cellsLvl*/) const override;
+    // End of part to delete
     void getData(TypeMeshContainer<Cell*>* cellsLvl, std::vector<double>& dataset, const int var, int phase) const override;
+    void getData(TypeMeshContainer<Cell*>* cellsLvl, std::vector<float>& dataset, const int var, int phase) const override;
     void setDataSet(std::vector<double>& dataset, TypeMeshContainer<Cell*>* cellsLvl, const int var, int phase) const override;
 
   protected:
@@ -124,6 +148,13 @@ class MeshCartesian : public Mesh
     BoundCond* m_limYp;
     BoundCond* m_limZm;
     BoundCond* m_limZp;
+
+  private:
+    static void
+    meshStretchingAlongAxis(int& numberCells, const double& l, std::vector<double>& dl, std::vector<double>& pos, std::vector<stretchZone>& stretch);
+    template <typename T> size_t getConnectivity_private(std::vector<T>& dataset) const;
+    template <typename T> void getOffsets_private(std::vector<T>& dataset) const;
+    template <typename T> void getData_private(TypeMeshContainer<Cell*>* cellsLvl, std::vector<T>& dataset, const int var, int phase) const;
 };
 
 #endif // MESHCARTESIAN_H

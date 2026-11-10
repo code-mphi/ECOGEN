@@ -104,12 +104,12 @@ class Phase
     virtual std::string returnNameScalar(const int& /*numVar*/) const
     {
       Errors::errorMessage("returnNameScalar not available for requested phase type");
-      return 0;
+      return std::string("");
     };
     virtual std::string returnNameVector(const int& /*numVar*/) const
     {
       Errors::errorMessage("returnNameVector not available for requested phase type");
-      return 0;
+      return std::string("");
     };
 
     //Specific method for reading from file
@@ -228,9 +228,9 @@ class Phase
       Errors::errorMessage("getOmega not available for requested phase type");
       return Errors::defaultDouble;
     };
-    virtual const double& getEta() const
+    virtual const double& getDensitySurEta() const
     {
-      Errors::errorMessage("getEta not available for requested phase type");
+      Errors::errorMessage("getDensitySurEta not available for requested phase type");
       return Errors::defaultDouble;
     };
     virtual const double& getPressure() const
@@ -303,9 +303,19 @@ class Phase
       Errors::errorMessage("getEnergy impossible avec type de phase demande");
       return Errors::defaultDouble;
     };
+    virtual const double& getEntropy() const
+    {
+      Errors::errorMessage("getEntropy impossible avec type de phase demande");
+      return Errors::defaultDouble;
+    };
     virtual const double& getSoundSpeed() const
     {
       Errors::errorMessage("getSoundSpeed impossible avec type de phase demande");
+      return Errors::defaultDouble;
+    };
+    virtual const double& getSquareSoundSpeed() const
+    {
+      Errors::errorMessage("getSquareSoundSpeed impossible avec type de phase demande");
       return Errors::defaultDouble;
     };
     virtual const double& getTotalEnergy() const
@@ -357,7 +367,10 @@ class Phase
     virtual void setAlpha(double /*alpha*/) { Errors::errorMessage("setAlpha not available for requested phase type"); };
     virtual void setDensity(double /*density*/) { Errors::errorMessage("setDensity not available for requested phase type"); };
     virtual void setOmega(const double& /*omega*/) { Errors::errorMessage("setOmega not available for requested phase type"); };
-    virtual void setEta(const double& /*eta*/) { Errors::errorMessage("setEta not available for requested phase type"); };
+    virtual void setDensitySurEta(const double& /*densitySurEta*/)
+    {
+      Errors::errorMessage("setDensitySurEta not available for requested phase type");
+    };
     virtual void setPressure(double /*pressure*/) { Errors::errorMessage("setPressure not available for requested phase type"); };
     virtual void setVelocity(const double& /*u*/, const double& /*v*/, const double& /*w*/)
     {
@@ -377,7 +390,12 @@ class Phase
     virtual void setZ(const double& /*z*/) { Errors::errorMessage("setZ not available for requested phase type"); };
     virtual void setEos(Eos* /*eos*/) { Errors::errorMessage("impossible to associate EOS to the requested phase type"); };
     virtual void setEnergy(double /*energy*/) { Errors::errorMessage("setEnergy not available for requested phase type"); };
+    virtual void setEntropy(double /*entropy*/) { Errors::errorMessage("setEntropy not available for requested phase type"); };
     virtual void setSoundSpeed(double /*soundSpeed*/) { Errors::errorMessage("setSoundSpeed not available for requested phase type"); };
+    virtual void setSquareSoundSpeed(double /*squareSoundSpeed*/)
+    {
+      Errors::errorMessage("setSquareSoundSpeed not available for requested phase type");
+    };
     virtual void setTotalEnergy(double /*totalEnergy*/) { Errors::errorMessage("setTotalEnergy not available for requested phase type"); };
     virtual void setTotalEnergy(const double& /*energy*/, const Coord& /*vel*/)
     {

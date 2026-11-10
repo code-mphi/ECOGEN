@@ -8,10 +8,4 @@
 	</timeControlMode>
 	<resumeSimulation resumeFileNumber="0" AMRsaveFreq="2"/>
 	<computationControl CFL="0.8"/>
-    <secondOrder>
-        <globalLimiter>mc</globalLimiter>
-        <!-- <interfaceLimiter>minmod</interfaceLimiter> -->
-        <!-- <globalVolumeFractionLimiter>minmod</globalVolumeFractionLimiter> -->
-        <!-- <interfaceVolumeFractionLimiter>thinc</interfaceVolumeFractionLimiter> -->
-    </secondOrder>
 </computationParam>

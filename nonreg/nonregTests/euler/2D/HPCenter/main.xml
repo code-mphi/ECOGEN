@@ -12,8 +12,5 @@
 		<physicalTime totalTime="1.2e-3" timeFreq="2.4e-4"/>
 	</timeControlMode>
 	<computationControl CFL="0.8"/>
-	<secondOrder>
-		<globalLimiter>mc</globalLimiter>
-	</secondOrder>
 	<resumeSimulation resumeFileNumber="0" AMRsaveFreq="1"/>
 </computationParam>

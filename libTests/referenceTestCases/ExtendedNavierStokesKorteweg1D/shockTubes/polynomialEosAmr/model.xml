@@ -1,0 +1,12 @@
+<?xml version = "1.0" encoding = "UTF-8" standalone = "yes"?>
+<model>
+	<flowModel name="ExtendedNavierStokesKorteweg1D" lambda="2000.e1" beta="3.86e-5" tau="0." eps="0.0316227766"/>
+	<EOS name="Polynomial_arbitrary.xml"/>
+	<!-- <splitting type="strang"/> -->
+	<secondOrder>
+		<globalLimiter>minmod</globalLimiter>
+	</secondOrder>
+	<!-- <gradient>
+		<method>finite-difference</method>
+	</gradient> -->
+</model>

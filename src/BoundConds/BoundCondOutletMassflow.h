@@ -43,7 +43,7 @@ class BoundCondOutletMassflow : public BoundCond
     void createBoundary(TypeMeshContainer<CellInterface*>& cellInterfaces) override;
     void solveRiemannBoundary(Cell& cellLeft, const double& dxLeft, double& dtMax) override;
 
-    int whoAmI() const override { return OUTLETMASSFLOW; };
+    int whoAmI() const override { return TypeBC::OUTLETMASSFLOW; };
     void printInfo() override;
 
     //For AMR method

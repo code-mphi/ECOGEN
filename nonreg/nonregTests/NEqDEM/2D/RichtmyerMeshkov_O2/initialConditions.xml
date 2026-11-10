@@ -1,0 +1,63 @@
+<?xml version='1.0' encoding='UTF-8' standalone='yes'?>
+<CI>
+    <!-- LIST OF GEOMETRICAL DOMAINS  -->
+    <physicalDomains>
+        <domain state="liquid" name="base" type="entireDomain"/>
+        <domain state="gas" name="zoneGas" type="disc">
+            <dataDisc axis1="x" radius="0.6" axis2="y">
+                <center x="1.2" z="0." y="0."/>
+            </dataDisc>
+        </domain>
+        <domain state="gas2" name="zoneGas2" type="halfSpace">
+            <dataHalfSpace origin="1.5" axis="x" direction="positive"/>
+        </domain>
+    </physicalDomains>
+
+    <!-- LIST OF BOUNDARY CONDITIONS -->
+    <boundaryConditions>
+        <boundCond number="1" name="BC_Xmin" type="wall"/>
+        <boundCond number="2" name="BC_Xmax" type="nonReflecting"/>
+        <boundCond number="3" name="BC_Ymin" type="symmetry"/>
+        <boundCond number="4" name="BC_Ymax" type="wall"/>
+    </boundaryConditions>
+
+    <!--  LIST OF STATES  -->
+    <state name="liquid">
+        <material EOS="SG_water.xml" type="fluid">
+            <dataFluid alpha="0.999999" density="1000." pressure="1.e5">
+                <velocity x="-200." z="0." y="0."/>
+            </dataFluid>
+        </material>
+        <material EOS="IG_gas1.xml" type="fluid">
+            <dataFluid alpha="0.000001" density="100." pressure="1.e5">
+                <velocity x="-200." z="0." y="0."/>
+            </dataFluid>
+        </material>
+    </state>
+
+    <state name="gas">
+        <material EOS="SG_water.xml" type="fluid">
+            <dataFluid alpha="0.000001" density="1000." pressure="1.e5">
+                <velocity x="-200." z="0." y="0."/>
+            </dataFluid>
+        </material>
+        <material EOS="IG_gas1.xml" type="fluid">
+            <dataFluid alpha="0.999999" density="100." pressure="1.e5">
+                <velocity x="-200." z="0." y="0."/>
+            </dataFluid>
+        </material>
+    </state>
+
+    <state name="gas2">
+        <material EOS="SG_water.xml" type="fluid">
+            <dataFluid alpha="0.000001" density="1000." pressure="1.e5">
+                <velocity x="-200." z="0." y="0."/>
+            </dataFluid>
+        </material>
+        <material EOS="IG_gas1.xml" type="fluid">
+            <dataFluid alpha="0.999999" density="100." pressure="1.e5">
+                <velocity x="-200." z="0." y="0."/>
+            </dataFluid>
+        </material>
+    </state>
+</CI>

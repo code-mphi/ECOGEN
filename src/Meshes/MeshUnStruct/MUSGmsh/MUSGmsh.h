@@ -42,18 +42,19 @@ class MUSGmsh : public MeshUnStruct
     ~MUSGmsh() override;
 
     static std::string readVersion(const std::string& meshFile);
+    void initGeometryMonoCPU_common(TypeMeshContainer<Cell*>& cells);
 
     // --- MeshUnStruct virtual member functions ---
     void initGeometryMonoCPU(TypeMeshContainer<Cell*>& cells,
                              TypeMeshContainer<CellInterface*>& cellInterfaces,
-                             std::string computeOrder = "FIRSTORDER") override                             = 0;
+                             SimulationOrder schemeOrder = SimulationOrder::first) override                   = 0;
     void initGeometryParallel(TypeMeshContainer<Cell*>& cells,
                               TypeMeshContainer<Cell*>& cellsGhost,
                               TypeMeshContainer<CellInterface*>& cellInterfaces,
-                              std::string computeOrder = "FIRSTORDER") override                            = 0;
-    void preProcessMeshFileForParallel() override                                                          = 0;
-    void initCpuMeshSequential(TypeMeshContainer<Cell*>& cells, std::string& computeOrder) override        = 0;
-    void initCpuMeshParallel(TypeMeshContainer<Cell*>& cells, std::string& computeOrder, int cpu) override = 0;
+                              SimulationOrder schemeOrder = SimulationOrder::first) override                  = 0;
+    void preProcessMeshFileForParallel() override                                                             = 0;
+    void initCpuMeshSequential(TypeMeshContainer<Cell*>& cells, SimulationOrder& schemeOrder) override        = 0;
+    void initCpuMeshParallel(TypeMeshContainer<Cell*>& cells, SimulationOrder& schemeOrder, int cpu) override = 0;
 
     std::string getMeshExtension() const override { return "msh"; };
 

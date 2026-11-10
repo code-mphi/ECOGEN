@@ -28,23 +28,33 @@ a) Cartesian mesh
 -----------------
 ECOGEN generates its own Cartesian meshes. Dimensions, cells number and optionnal AMR and stretching must be precised.
 Stretching can be set in each directions. For each stretched direction, the sum of stretched zones should exactly recover the entire domain without overlaping.
-The total cell number in a given axis replace those specified in <numberCells> node.
+When mesh stretching is provided along a given axis, the total cell number eventually specified in <numberCells> node is ignored. Mesh stretching area is defined from the size of the reference cell, its position (at start or at end of the area) and the progression factor to apply from the reference cell position to the other extremity of the area. This factor is 1 for constant cell sizes, lower than 1 for cell shrinking and greater than 1 for cell coarsening.
 %%%%%%%%%%%%%%%%%% << copy between these lines
 <cartesianMesh>
-  <dimensions x="1.e-1" y="5.e-2" z="1."/>
+  <dimensions x="1." y="5.e-1" z="1."/>
   <numberCells x="50" y ="25" z="1"/>
   <AMR lvlMax="2" criteriaVar="0.2" varRho="true" varP="true" varU="false" varAlpha="false" xiSplit="0.11" xiJoin="0.11"/> <!-- Optionnal node -->
   <meshStretching>    <!-- Optionnal node -->
       <XStretching>
-        <stretch startAt="0." endAt="0.5" factor="0.9" numberCells="20"/>
-        <stretch startAt="0.5" endAt="1." factor="1.1" numberCells="10"/>
+        <stretch startAt="0." endAt="0.5" factor="1.02" refCellSize="0.02" refCellPos="end"/>
+        <stretch startAt="0.5" endAt="1." factor="1.2" refCellSize="0.02" refCellPos="start"/>
       </XStretching>
   </meshStretching>
 </cartesianMesh>
 %%%%%%%%%%%%%%%%%% << copy between these lines
 b) Unstructured mesh
 --------------------
-Mesh file name should be precised here. The corresponding mesh file must be lacate in the "ECOGEN/libMesh/" folder.
+Mesh file name should be precised here. The corresponding mesh file must be located in the "ECOGEN/libMesh/" folder.
+Meshes can be generated from ".geo" files using "Gmsh" software. To generate a mesh for a serial run of ECOGEN, use the following command line:
+%%%%%%%%%%%%%%%%%% << copy between these lines
+gmsh -<d> -format msh22 <PATH_TO_FILE>
+%%%%%%%%%%%%%%%%%% << copy between these lines
+where "<d>" has to be replaced by the mesh dimension (1, 2 or 3) and <PATH_TO_FILE> by the path and name of the .geo file.
+To generate a mesh for a parallel run of ECOGEN using <n> MPI processes, use the following command line:
+%%%%%%%%%%%%%%%%%% << copy between these lines
+gmsh -<d> -format msh22 -part <n> -part_ghosts <PATH_TO_FILE>
+%%%%%%%%%%%%%%%%%% << copy between these lines
+
 ECOGEN can read from single or multi-CPU mesh files coming from GMSH software (*.msh)
 %%%%%%%%%%%%%%%%%% << copy between these lines
 <unstructuredMesh>

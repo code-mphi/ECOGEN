@@ -64,7 +64,7 @@ void Transport::solveRiemannWall() { m_value = 0.; }
 
 //***********************************************************************
 
-void Transport::solveRiemannPiston(double transportLeft, double uPiston) { m_value = transportLeft * uPiston; }
+void Transport::solveRiemannMovingWall(double transportLeft, double wallVelocity) { m_value = transportLeft * wallVelocity; }
 
 //***********************************************************************
 

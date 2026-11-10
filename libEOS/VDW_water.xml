@@ -1,5 +1,5 @@
 <?xml version = "1.0" encoding = "UTF-8" standalone = "yes"?>
 <parametersEOS>
 	<EOS type="VDW"/>
-	<parameters Tc="647.3" Pc="22.12e6" r="462." gamma="1.25" p0="1.e5" rho0="1.7"/>
+	<parameters Tc="647.3" Pc="22.12e6" M="18.0153" c_v="7000."/>
 </parametersEOS>

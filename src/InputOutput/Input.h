@@ -60,6 +60,12 @@ class Input
     void readInputXML(std::vector<GeometricalDomain*>& domains, std::vector<BoundCond*>& boundCond, std::vector<GeometricalDomain*>& solidDomains);
 
     void inputMain(std::string testCase);
+    //! \return 0 if there is not stretching area along axis, sum of computed cell numbers of all stretching area along axis otherwise.
+    bool readAxisStretching(tinyxml2::XMLError& error,
+                            tinyxml2::XMLElement* sousElement,
+                            const std::stringstream& fileName,
+                            std::vector<stretchZone>& stretch,
+                            int& numberCells) const;
     void inputMesh(std::string testCase);
     void inputModel(std::string testCase);
     Eos* inputEOS(std::string EOS, int& numberEOS);

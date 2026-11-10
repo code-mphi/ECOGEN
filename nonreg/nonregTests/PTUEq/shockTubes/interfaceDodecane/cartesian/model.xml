@@ -3,4 +3,7 @@
 	<flowModel name="TemperaturePressureVelocityEq" numberPhases="2"/>
 	<EOS name="SG_dodLiq.xml"/>
 	<EOS name="IG_dodVap.xml"/>
+	<secondOrder>
+		<globalLimiter>vanleer</globalLimiter>
+	</secondOrder>
 </model>

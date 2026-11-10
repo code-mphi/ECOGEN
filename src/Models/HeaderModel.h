@@ -37,8 +37,12 @@
 #include "PTUEq/ModPTUEq.h"
 #include "UEq/ModUEq.h"
 #include "UEqTotEnergy/ModUEqTotEnergy.h"
-#include "EulerKorteweg/ModEulerKorteweg.h"
-#include "NonLinearSchrodinger/ModNonLinearSchrodinger.h"
+#include "ExtendedNavierStokesKorteweg1D/ModExtendedNavierStokesKorteweg1D.h"
+#include "NEq/ModNEq/ModNEq.h"
+#include "NEq/ModNEq/ModNEqHLLAC.h"
+#include "NEq/ModNEq/ModNEqHLLC4Waves.h"
+#include "NEq/ModNEq/ModNEqHLL.h"
+#include "NEqDEM/ModNEqDEM.h"
 
 //Add new models here
 

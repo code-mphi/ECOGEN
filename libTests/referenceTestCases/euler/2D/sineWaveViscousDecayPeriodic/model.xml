@@ -1,0 +1,13 @@
+<?xml version = "1.0" encoding = "UTF-8" standalone = "yes"?>
+<model>
+	<flowModel name="Euler"/>
+	<lowMach state="false"/>
+	<EOS name="IG_RT_dynamicViscosity.xml"/>
+	<additionalPhysics type="viscosity"/>
+	<secondOrder>
+		<globalLimiter>vanLeer</globalLimiter>
+	</secondOrder>
+	<gradient>
+    	<method>finite-difference</method>
+  	</gradient>
+</model>

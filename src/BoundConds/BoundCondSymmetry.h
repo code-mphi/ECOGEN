@@ -42,7 +42,9 @@ class BoundCondSymmetry : public BoundCondWall
 
     void createBoundary(TypeMeshContainer<CellInterface*>& cellInterfaces) override;
 
-    int whoAmI() const override { return SYMMETRY; };
+    void solveRiemannBoundary(Cell& cellLeft, const double& dxLeft, double& dtMax) override;
+
+    int whoAmI() const override { return TypeBC::SYMMETRY; };
 
     //For AMR method
     void creerCellInterfaceChild() override; /*!< Create a child cell interface (not initialized) */

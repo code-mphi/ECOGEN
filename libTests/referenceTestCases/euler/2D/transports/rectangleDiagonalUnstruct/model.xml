@@ -2,4 +2,10 @@
 <model>
 	<flowModel name="Euler"/>
 	<EOS name="IG_air.xml"/>
+	<secondOrder>
+		<globalLimiter>minmod</globalLimiter>
+	</secondOrder>
+	<gradient>
+  		<method>green-gauss</method>
+	</gradient>
 </model>

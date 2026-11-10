@@ -42,14 +42,14 @@ class MUSGmshV2 : public MUSGmsh
     // --- MeshUnStruct virtual member functions ---
     void initGeometryMonoCPU(TypeMeshContainer<Cell*>& cells,
                              TypeMeshContainer<CellInterface*>& cellInterfaces,
-                             std::string computeOrder = "FIRSTORDER") override;
+                             SimulationOrder schemeOrder = SimulationOrder::first) override;
     void initGeometryParallel(TypeMeshContainer<Cell*>& cells,
                               TypeMeshContainer<Cell*>& cellsGhost,
                               TypeMeshContainer<CellInterface*>& cellInterfaces,
-                              std::string computeOrder = "FIRSTORDER") override;
+                              SimulationOrder schemeOrder = SimulationOrder::first) override;
     void preProcessMeshFileForParallel() override;
-    void initCpuMeshSequential(TypeMeshContainer<Cell*>& cells, std::string& computeOrder) override;
-    void initCpuMeshParallel(TypeMeshContainer<Cell*>& cells, std::string& computeOrder, int cpu) override;
+    void initCpuMeshSequential(TypeMeshContainer<Cell*>& cells, SimulationOrder& schemeOrder) override;
+    void initCpuMeshParallel(TypeMeshContainer<Cell*>& cells, SimulationOrder& schemeOrder, int cpu) override;
 
   private:
     // --- Gmsh v2 related member functions ---

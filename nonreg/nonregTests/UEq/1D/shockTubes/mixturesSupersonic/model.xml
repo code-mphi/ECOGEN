@@ -4,9 +4,7 @@
 	<EOS name="SG_mixtureShockTube.xml"/>
 	<EOS name="IG_air.xml"/>
 	<!-- <relaxation type="P" speed="finite" rate="4." solver="euler"/> -->
+	<secondOrder>
+		<globalLimiter>vanleer</globalLimiter>
+	</secondOrder>
 </model>
-<!-- <model>
-	<flowModel name="pressureVelocityEq" numberPhases="2" alphaNull="false"/>
-	<EOS name="SG_mixtureShockTube.xml"/>
-	<EOS name="IG_air.xml"/>
-</model> -->

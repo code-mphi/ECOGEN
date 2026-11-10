@@ -44,6 +44,10 @@
 #include "OutputBoundaryFluxGNU.h"
 #include "OutputBoundaryAllGNU.h"
 
+#ifdef ENABLE_HDF5
+  #include "OutputVTKHDF.h"
+#endif
+
 //Add here headers of new outputs
 
 #endif // HEADERINPUTOUTPUT_H

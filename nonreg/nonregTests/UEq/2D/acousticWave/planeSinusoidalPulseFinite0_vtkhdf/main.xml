@@ -1,0 +1,10 @@
+<?xml version = "1.0" encoding = "UTF-8" standalone = "yes"?>
+<computationParam>
+	<run>velocityEq2DacousticWavePlaneSinusoidalPulseFinite0_vtkhdf</run>
+	<outputMode format="VTKHDF" binary="true"/>
+	<timeControlMode iterations="false">
+		<iterations number="100" iterFreq="10"/>
+		<physicalTime totalTime="10.e-6" timeFreq="10.e-6"/>
+	</timeControlMode>
+	<computationControl CFL="0.8"/>
+</computationParam>

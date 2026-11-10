@@ -7,10 +7,5 @@
 		<physicalTime totalTime="700.e-6" timeFreq="700.e-7"/>
 	</timeControlMode>
 	<computationControl CFL="0.8"/>
-	<secondOrder>
-		<globalLimiter>mc</globalLimiter>
-		<globalVolumeFractionLimiter>thinc</globalVolumeFractionLimiter>
-    	<interfaceVolumeFractionLimiter>thinc</interfaceVolumeFractionLimiter>
-	</secondOrder>
 	<resumeSimulation resumeFileNumber="0" AMRsaveFreq="5"/>
 </computationParam>

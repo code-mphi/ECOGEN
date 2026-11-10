@@ -240,12 +240,12 @@ class Mixture
     virtual std::string returnNameScalar(const int& /*numVar*/) const
     {
       Errors::errorMessage("returnNameScalar not available for requested mixture");
-      return 0;
+      return std::string("");
     };
     virtual std::string returnNameVector(const int& /*numVar*/) const
     {
       Errors::errorMessage("returnNameVector not available for requested mixture");
-      return 0;
+      return std::string("");
     };
 
     //Specific method for reading from file

@@ -1,0 +1,25 @@
+<?xml version='1.0' encoding='UTF-8' standalone='yes'?>
+<CI>
+  <!-- LIST OF GEOMETRICAL DOMAINS  -->
+  <physicalDomains>
+    <!-- complete domain -->
+    <domain type="entireDomain" name="base" state="lowDensity"/>
+  </physicalDomains>
+  <!-- LIST OF BOUNDARY CONDITIONS -->
+  <boundaryConditions>
+    <boundCond type="movingWall" number="1" name="BC_Xmin">
+      <dataMovingWall amplitude="-10." frequency="2.e3" frequencyOffset="0."/>
+    </boundCond>
+    <boundCond type="movingWall" number="2" name="BC_Xmax">
+      <dataMovingWall amplitude="-10." frequency="1.e3" frequencyOffset="1.57079632679489661923132169163975144"/>
+    </boundCond>
+  </boundaryConditions>
+  <!--  LIST OF STATES  -->
+  <state name="lowDensity">
+    <material type="fluid" EOS="IG_air.xml">
+      <dataFluid density="1." pressure="1.e5">
+        <velocity x="0." z="0." y="0."/>
+      </dataFluid>
+    </material>
+  </state>
+</CI>

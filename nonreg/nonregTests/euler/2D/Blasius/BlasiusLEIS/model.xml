@@ -2,6 +2,14 @@
 <model>
   <flowModel name="Euler"/>
   <EOS name="IG_airBlasiusLEIS.xml"/>
-  <additionalPhysic type="viscosity"/>
-  <additionalPhysic type="conductivity"/>
+  <additionalPhysics type="viscosity"/>
+  <additionalPhysics type="conductivity"/>
+
+  <secondOrder>
+    <globalLimiter>minmod</globalLimiter>
+  </secondOrder>
+
+  <gradient>
+    <method>green-gauss</method>
+  </gradient>
 </model>

@@ -2,5 +2,8 @@
 <model>
 	<flowModel name="Euler"/>
 	<EOS name="IG_airBlasiusTurbulent.xml"/>
-	<additionalPhysic type="viscosity"/>
+	<additionalPhysics type="viscosity"/>
+	<secondOrder>
+		<globalLimiter>vanleer</globalLimiter>
+	</secondOrder>
 </model>

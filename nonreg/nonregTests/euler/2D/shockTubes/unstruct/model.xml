@@ -3,4 +3,10 @@
 	<flowModel name="Euler" numberTransports="1"/>
 	<EOS name="IG_air.xml"/>
 	<transport name="transport"/>
+  <secondOrder>
+    <globalLimiter>minmod</globalLimiter>
+  </secondOrder>
+  <gradient>
+  		<method>green-gauss</method>
+	</gradient>
 </model>

@@ -174,9 +174,9 @@ class Flux
       Errors::errorMessage("getEqOmega not available for required model");
       return Errors::defaultDouble;
     };
-    virtual const double& getEqEta() const
+    virtual const double& getEqDensitySurEta() const
     {
-      Errors::errorMessage("getEqEta not available for required model");
+      Errors::errorMessage("getEqDensitySurEta not available for required model");
       return Errors::defaultDouble;
     };
     virtual const double& getEnergy(const int& /*numPhase*/) const

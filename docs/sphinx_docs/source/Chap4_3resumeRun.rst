@@ -33,9 +33,6 @@ For the sake of simplicity, we edit the *main.xml* file as following:
 			<physicalTime totalTime="6.e-4" timeFreq="6e-5"/>
 		</timeControlMode>
 		<computationControl CFL="0.5"/>
-		<secondOrder>
-			<globalLimiter>vanleer</globalLimiter>
-		</secondOrder>
 		<resumeSimulation resumeFileNumber="0" AMRsaveFreq="0"/>
 	</computationParam>
 
@@ -126,4 +123,4 @@ Additional remarks
 ===================
 
 * It is essential that the result folder of the initial simulation keeps the same name for the resumed run.
-* For AMR simulations, one also needs to specify the frequency :xml:`AMRsaveFreq` at which necessary resume files are saved (default is 0).
+* For technical reasons, the :xml:`AMRsaveFreq` field has always to be provided but it is used only for AMR simulations. In this case, it specifies the frequency at which necessary resume files are saved (default is 0).

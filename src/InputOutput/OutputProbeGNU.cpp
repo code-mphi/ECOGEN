@@ -47,7 +47,7 @@ OutputProbeGNU::OutputProbeGNU(std::string casTest, std::string run, XMLElement*
     m_folderOutput        = config.getWorkFolder() + "results/" + run + "/probes/";
     m_folderScriptGnuplot = "";
     m_splitData           = 0;
-    m_numFichier          = 0;
+    m_numFile             = 0;
     m_input               = entree;
     m_run                 = m_input->getRun();
     m_possessesProbe      = new bool[Ncpu];

@@ -60,17 +60,23 @@ class MeshCartesianAMR : public MeshCartesian
                             TypeMeshContainer<CellInterface*>& cellInterfaces,
                             const int& resumeSimulation,
                             bool /*pretraitementParallele*/,
-                            std::string ordreCalcul) override;
+                            SimulationOrder schemeOrder) override;
     void initializeGeometrieAMR(TypeMeshContainer<Cell*>& cells,
                                 TypeMeshContainer<Cell*>& cellsGhost,
                                 TypeMeshContainer<CellInterface*>& cellInterfaces,
                                 const int& resumeSimulation,
-                                std::string ordreCalcul);
+                                SimulationOrder schemeOrder);
     void assignElementProperties(TypeMeshContainer<Cell*>& cells, std::vector<decomposition::Key<3>>& keys);
     void createCellInterfacesFacesAndGhostCells(TypeMeshContainer<Cell*>& cells,
                                                 TypeMeshContainer<Cell*>& cellsGhost,
                                                 TypeMeshContainer<CellInterface*>& cellInterfaces,
-                                                std::string ordreCalcul);
+                                                SimulationOrder schemeOrder);
+    void createGhostCell(const TypeMeshContainer<Cell*>& cells,
+                         TypeMeshContainer<Cell*>& cellsGhost,
+                         const SimulationOrder schemeOrder,
+                         const decomposition::Key<3> nKey,
+                         const int neighbour,
+                         const int cell_idx);
     void procedureRaffinementInitialization(TypeMeshContainer<Cell*>* cellsLvl,
                                             TypeMeshContainer<Cell*>* cellsLvlGhost,
                                             TypeMeshContainer<CellInterface*>* cellInterfacesLvl,
@@ -79,7 +85,7 @@ class MeshCartesianAMR : public MeshCartesian
                                             std::vector<GeometricalDomain*>& domains,
                                             Eos** eos,
                                             const int& resumeSimulation,
-                                            std::string ordreCalcul,
+                                            SimulationOrder schemeOrder,
                                             std::vector<GeometricalDomain*>& solidDomains) override;
     void procedureRaffinement(TypeMeshContainer<Cell*>* cellsLvl,
                               TypeMeshContainer<Cell*>* cellsLvlGhost,
@@ -92,11 +98,17 @@ class MeshCartesianAMR : public MeshCartesian
 
     //Printing / Reading
     void writeHeaderPiece(std::ofstream& fileStream, TypeMeshContainer<Cell*>* cellsLvl) const override;
-    void getNodes(std::vector<double>& dataset, std::vector<Cell*>* cellsLvl) const override;
-    void getConnectivity(std::vector<double>& dataset, std::vector<Cell*>* cellsLvl) const override;
+    size_t getNodes(std::vector<double>& dataset, std::vector<Cell*>* cellsLvl) const override;
+    size_t getConnectivity(std::vector<double>& dataset, std::vector<Cell*>* cellsLvl) const override;
+    size_t getConnectivity(std::vector<int64_t>& dataset, std::vector<Cell*>* /*cellsLvl*/) const override;
+    size_t getConnectivity(std::vector<int32_t>& dataset, std::vector<Cell*>* /*cellsLvl*/) const override;
     void getOffsets(std::vector<double>& dataset, std::vector<Cell*>* cellsLvl) const override;
+    void getOffsets(std::vector<int64_t>& dataset, std::vector<Cell*>* /*cellsLvl*/) const override;
+    void getOffsets(std::vector<int32_t>& dataset, std::vector<Cell*>* /*cellsLvl*/) const override;
     void getTypeCell(std::vector<double>& dataset, std::vector<Cell*>* cellsLvl) const override;
+    void getTypeCell(std::vector<unsigned char>& dataset, std::vector<Cell*>* cellsLvl) const override;
     void getData(TypeMeshContainer<Cell*>* cellsLvl, std::vector<double>& dataset, const int var, int phase) const override;
+    void getData(TypeMeshContainer<Cell*>* cellsLvl, std::vector<float>& dataset, const int var, int phase) const override;
     void setDataSet(std::vector<double>& dataset, TypeMeshContainer<Cell*>* cellsLvl, const int var, int phase) const override;
     void refineCellAndCellInterfaces(Cell* cell, const std::vector<AddPhys*>& addPhys, int& nbCellsTotalAMR) override;
     void printDomainDecomposition(std::ofstream& fileStream) override;
@@ -106,12 +118,12 @@ class MeshCartesianAMR : public MeshCartesian
     int getLvlMax() const override { return m_lvlMax; };
 
     //Pour parallele
-    void initializePersistentCommunications(const TypeMeshContainer<Cell*>& cells, std::string ordreCalcul) override;
+    void initializePersistentCommunications(const TypeMeshContainer<Cell*>& cells, SimulationOrder schemeOrder) override;
     void finalizeParallele(const int& lvlMax) override;
     void parallelLoadBalancingAMR(TypeMeshContainer<Cell*>* cellsLvl,
                                   TypeMeshContainer<Cell*>* cellsLvlGhost,
                                   TypeMeshContainer<CellInterface*>* cellInterfacesLvl,
-                                  std::string ordreCalcul,
+                                  SimulationOrder schemeOrder,
                                   const std::vector<AddPhys*>& addPhys,
                                   Eos** eos,
                                   int& nbCellsTotalAMR,
@@ -128,7 +140,7 @@ class MeshCartesianAMR : public MeshCartesian
     virtual void balance(TypeMeshContainer<Cell*>* cellsLvl,
                          TypeMeshContainer<Cell*>* cellsLvlGhost,
                          TypeMeshContainer<CellInterface*>* cellInterfacesLvl,
-                         std::string ordreCalcul,
+                         SimulationOrder schemeOrder,
                          const std::vector<AddPhys*>& addPhys,
                          Eos** eos,
                          int& nbCellsTotalAMR,
@@ -139,6 +151,11 @@ class MeshCartesianAMR : public MeshCartesian
                          std::vector<GeometricalDomain*>& solidDomains);
 
   private:
+    template <typename T> size_t getConnectivity_private(std::vector<T>& dataset, std::vector<Cell*>* cellsLvl) const;
+    template <typename T> void getOffsets_private(std::vector<T>& dataset, std::vector<Cell*>* cellsLvl, uint64_t maxVal) const;
+    template <typename T> void getTypeCell_private(std::vector<T>& dataset, std::vector<Cell*>* cellsLvl) const;
+    template <typename T> void getData_private(TypeMeshContainer<Cell*>* cellsLvl, std::vector<T>& dataset, const int var, int phase) const;
+
     int m_lvlMax;                              //!<Niveau maximal sur l arbre AMR (si m_lvlMax = 0, pas d AMR)
     double m_criteriaVar;                      //!<Value of criteria to not pass on the variation of a variable for coarsening or refining (put xi=1.)
     bool m_varRho, m_varP, m_varU, m_varAlpha; //!<Choice on which variation we coarsen or refine

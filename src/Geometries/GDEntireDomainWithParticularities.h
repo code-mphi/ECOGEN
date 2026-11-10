@@ -51,4 +51,6 @@ class GDEntireDomainWithParticularities : public GeometricalDomain
     void fillIn(Cell* cell) const override;
 };
 
+extern bool algorithmSaadOn;
+
 #endif //GDENTIREDOMAINWITHPARTICULARITIES_H

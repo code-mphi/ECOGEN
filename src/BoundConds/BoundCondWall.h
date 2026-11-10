@@ -45,7 +45,7 @@ class BoundCondWall : public BoundCond
     void solveRiemannBoundary(Cell& cellLeft, const double& dxLeft, double& dtMax) override;
     void solveRiemannTransportBoundary(Cell& /*cellLeft*/) const override;
 
-    int whoAmI() const override { return WALL; };
+    int whoAmI() const override { return TypeBC::WALL; };
     int whoAmIHeat() const override { return m_heatCondition; }
     bool isMRFWall() const override { return m_isMRFWall; }
 

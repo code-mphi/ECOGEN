@@ -204,6 +204,8 @@ void ModEulerHomogeneous::solveRiemannIntern(
 //Not implemented yet
 
 //****************************************************************************
+//******************************* Accessors **********************************
+//****************************************************************************
 
 const double& ModEulerHomogeneous::getSM() { return static_cast<FluxEulerHomogeneous*>(fluxBuff)->m_sM; }
 

@@ -1,0 +1,12 @@
+<?xml version = "1.0" encoding = "UTF-8" standalone = "yes"?>
+<model>
+	<flowModel name="PressureVelocityEq" numberPhases="2" alphaNull="true"/>
+	<EOS name="IG_dodVap_papier2008.xml"/>
+	<EOS name="SG_dodLiq_papier2008.xml"/>
+	<relaxation type="PTMu">
+	  <dataPTMu liquid="SG_dodLiq_papier2008.xml" vapor="IG_dodVap_papier2008.xml"/>
+	</relaxation>
+	<!-- <sourceTerms type="heating" order="EULER">
+  		<dataHeating volumeHeatPower="1.e9"/>
+	</sourceTerms> -->
+</model>

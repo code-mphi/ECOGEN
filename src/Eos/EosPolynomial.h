@@ -49,26 +49,65 @@ class EosPolynomial : public Eos
 
     //Constant methods (virtual because inherited from class Eos)
 
+    //! \brief     Compute internal energy
+    //! \param     density             density (\f$\rho\f$)
+    //! \param     pressure            pressure (\f$p\f$)
+    //! \return    internal energy
+    //! \details   with  internal energy : \f$ e (\rho, p)
+    double computeEnergy(const double& density, const double& /*pressure*/) const override;
+
+    //! \brief     Compute Entropy from density and internal energy
+    //! \param     density             density (\f$\rho\f$)
+    //! \param     energy              energy (\f$e\f$)
+    //! \return    entropy
+    double computeEntropyFromDensityAndEnergy(const double& density, const double& /*energy*/) const override;
+
+    //! \brief     Compute Entropy from density and pressure
+    //! \param     density             density (\f$\rho\f$)
+    //! \param     pressure            pressure (\f$p\f$)
+    //! \return    entropy
+    double computeEntropyFromDensityAndPressure(const double& density, const double& /*pressure*/) const override;
+
     //! \brief     Compute pressure
     //! \param     density             density (\f$\rho\f$)
-    //! \param     temperature         temperature (T)
+    //! \param     entropy             entropy (\f$s\f$)
     //! \return    pressure
-    //! \details   with  pressure : \f$ p (\epsilon = \frac{1}{\rho} - 1) = 4 a \epsilon^3 + 3 b \epsilon^2 + 2 c \epsilon \f$
-    double computePressure(const double& density, const double& /*temperature*/) const override;
+    //! \details   with  pressure : \f$ p (\rho, s)
+    double computePressureFromDensityAndEntropy(const double& density, const double& /*entropy*/) const override;
 
-    //Partial derivatives
-    //! \brief     Compute partial derivative dedrho
+    //! \brief     Compute pressure
     //! \param     density             density (\f$\rho\f$)
-    //! \param     temperature         temperature (T)
-    //! \return    dedrho
-    //! \details   with  dedrho : \f$ \frac{\partial \epsilon}{\partial \rho} (\rho) = \frac{p}{\rho^2} \f$
-    double dedrho(const double& density, const double& temperature) const override;
-    //! \brief     Compute partial derivative dedrhoSecond
+    //! \param     energy              energy (\f$e\f$)
+    //! \return    pressure
+    //! \details   with  pressure : \f$ p (\rho, e)
+    double computePressure(const double& density, const double& /*energy*/) const override;
+
+    //! \brief     Compute temperature
     //! \param     density             density (\f$\rho\f$)
-    //! \param     temperature         temperature (T)
-    //! \return    dedrhoSecond
-    //! \details   with  dedrhoSecond : \f$ \frac{\partial^2 \epsilon}{\partial \rho^2} (\rho) = \frac{1}{\rho^2} \frac{\partial p}{\partial \rho} - \frac{2}{\rho} \frac{\partial \epsilon}{\partial \rho} \f$
-    double dedrhoSecond(const double& density, const double& temperature) const override;
+    //! \param     pressure            pressure (\f$p\f$)
+    //! \return    temperature
+    double computeTemperature(const double& density, const double& pressure) const override;
+
+    //! \brief     Compute SquareSoundSpeed
+    //! \param     density             density (\f$\rho\f$)
+    //! \param     entropy             entropy (\f$s\f$)
+    //! \return    Square Sound Speed
+    double computeSquareSoundSpeed(const double& density, const double& entropy) const override;
+
+    //! \brief     Compute the Cappilary coefficient (kappa) from density
+    //! \param     density             density (\f$\rho\f$)
+    //! \return    kappa
+    double kappa(const double& density) const override;
+
+    //! \brief     Compute the First derivative of the Cappilary coefficient (kappa) with respect to the density
+    //! \param     density             density (\f$\rho\f$)
+    //! \return    kappaPrime
+    double kappaPrime(const double& density) const override;
+
+    //! \brief     Compute the Second derivative of the Cappilary coefficient (kappa) with respect to the density
+    //! \param     density             density (\f$\rho\f$)
+    //! \return    kappaSecond
+    double kappaSecond(const double& density) const override;
 
     //Checking
     //! \brief   Do nothing for Polynomial

@@ -28,6 +28,8 @@
 //  along with ECOGEN (file LICENSE).
 //  If not, see <http://www.gnu.org/licenses/>.
 
+#include <limits>
+
 #include "MeshUnStruct.h"
 #include "../Errors.h"
 
@@ -136,11 +138,11 @@ int MeshUnStruct::initializeGeometrie(TypeMeshContainer<Cell*>& cells,
                                       TypeMeshContainer<CellInterface*>& cellInterfaces,
                                       const int& /*resumeSimulation*/,
                                       bool pretraitementParallele,
-                                      std::string ordreCalcul)
+                                      SimulationOrder schemeOrder)
 {
   try {
     if (Ncpu == 1) {
-      this->initGeometryMonoCPU(cells, cellInterfaces, ordreCalcul);
+      this->initGeometryMonoCPU(cells, cellInterfaces, schemeOrder);
     }
     else {
       // Preprocessing of mesh file with CPU 0
@@ -150,7 +152,7 @@ int MeshUnStruct::initializeGeometrie(TypeMeshContainer<Cell*>& cells,
         }
         MPI_Barrier(MPI_COMM_WORLD);
       }
-      this->initGeometryParallel(cells, cellsGhost, cellInterfaces, ordreCalcul);
+      this->initGeometryParallel(cells, cellsGhost, cellInterfaces, schemeOrder);
     }
     return m_problemDimension;
   }
@@ -239,33 +241,90 @@ void MeshUnStruct::writeHeaderPiece(std::ofstream& fileStream, TypeMeshContainer
 
 //****************************************************************************
 
-void MeshUnStruct::getNodes(std::vector<double>& dataset, std::vector<Cell*>* /*cellsLvl*/) const
+size_t MeshUnStruct::getNodes(std::vector<double>& dataset, std::vector<Cell*>* /*cellsLvl*/) const
 {
+  // m_numberNodes is stored in an integer so using an int as iterator is ok.
+  // Result is stored in a size_t for prototype compatibility with the 'cartesianAMR' method.
   for (int node = 0; node < m_numberNodes; node++) {
     dataset.push_back(m_nodes[node].getX());
     dataset.push_back(m_nodes[node].getY());
     dataset.push_back(m_nodes[node].getZ());
   }
+  return m_numberNodes;
 }
 
 //****************************************************************************
-
-void MeshUnStruct::getConnectivity(std::vector<double>& dataset, std::vector<Cell*>* /*cellsLvl*/) const
+template <typename T> size_t MeshUnStruct::getConnectivity_private(std::vector<T>& dataset) const
 {
+  size_t numberElements{0};
+  // 'm_numberInnerElements' is stored in an integer so using an 'int' as iterator is ok.
+  // Result is stored in a 'size_t' for prototype compatibility with the 'cartesianAMR' method.
   for (int i = m_numberBoundFaces; i < m_numberInnerElements; i++) {
     if (!m_elements[i]->isFantome()) {
       for (int node = 0; node < m_elements[i]->getNumberNodes(); node++) {
+        // As getNumNodes returns a positive 'int', the exact conversion into a double as well as the exact conversion into
+        // any type of integer aliased by T type is ensured
         dataset.push_back(m_elements[i]->getNumNode(node));
       }
+      ++numberElements;
+    }
+  }
+  return numberElements;
+}
+
+//****************************************************************************
+size_t MeshUnStruct::getConnectivity(std::vector<int64_t>& dataset, std::vector<Cell*>* /*cellsLvl*/) const
+{
+  return getConnectivity_private(dataset);
+}
+
+//****************************************************************************
+size_t MeshUnStruct::getConnectivity(std::vector<int32_t>& dataset, std::vector<Cell*>* /*cellsLvl*/) const
+{
+  return getConnectivity_private(dataset);
+}
+
+//****************************************************************************
+size_t MeshUnStruct::getConnectivity(std::vector<double>& dataset, std::vector<Cell*>* /*cellsLvl*/) const
+{
+  return getConnectivity_private(dataset);
+}
+
+//****************************************************************************
+template <typename T> void MeshUnStruct::getOffsets_private(std::vector<T>& dataset) const
+{
+  T offset{0};
+  for (int i = m_numberBoundFaces; i < m_numberInnerElements; i++) {
+    if (!m_elements[i]->isFantome()) {
+      int numberNodes = m_elements[i]->getNumberNodes();
+
+      // Check for integer overflow
+      if (offset > std::numeric_limits<T>::max() - numberNodes) {
+        Errors::errorMessage("Too many nodes to call current implementation of '" + (std::string) __func__ +
+                             "' method.\n"
+                             "Consider changing the 'intSize' input parameter to 64 value or reducing the mesh size.");
+        return;
+      }
+
+      offset += m_elements[i]->getNumberNodes();
+      dataset.push_back(offset);
     }
   }
 }
 
 //****************************************************************************
+void MeshUnStruct::getOffsets(std::vector<int64_t>& dataset, std::vector<Cell*>* /*cellsLvl*/) const { getOffsets_private(dataset); }
 
+//****************************************************************************
+void MeshUnStruct::getOffsets(std::vector<int32_t>& dataset, std::vector<Cell*>* /*cellsLvl*/) const { getOffsets_private(dataset); }
+
+//****************************************************************************
 void MeshUnStruct::getOffsets(std::vector<double>& dataset, std::vector<Cell*>* /*cellsLvl*/) const
 {
-  int offset(0);
+  // As 'm_numberInnerElements' is a positive 'int32' and maximal number of node per element is 8 (for an hexahedron)
+  // we are sure that the maximal value of offset is smaller than 2^53-1 which is the maximal integer value exactly
+  // convertible into a double.
+  size_t offset{0};
   for (int i = m_numberBoundFaces; i < m_numberInnerElements; i++) {
     if (!m_elements[i]->isFantome()) {
       offset += m_elements[i]->getNumberNodes();
@@ -275,9 +334,10 @@ void MeshUnStruct::getOffsets(std::vector<double>& dataset, std::vector<Cell*>* 
 }
 
 //****************************************************************************
-
-void MeshUnStruct::getTypeCell(std::vector<double>& dataset, std::vector<Cell*>* /*cellsLvl*/) const
+template <typename T> void MeshUnStruct::getTypeCell_private(std::vector<T>& dataset) const
 {
+  // Remark: In VTK, type cells are stored as 'unsigned chars' but they are stored as 'int' in ecogen
+  // as type cells are small integers, the exact conversion is ensured
   for (int i = m_numberBoundFaces; i < m_numberInnerElements; i++) {
     if (!m_elements[i]->isFantome()) {
       dataset.push_back(m_elements[i]->getTypeVTK());
@@ -287,60 +347,36 @@ void MeshUnStruct::getTypeCell(std::vector<double>& dataset, std::vector<Cell*>*
 
 //****************************************************************************
 
+void MeshUnStruct::getTypeCell(std::vector<double>& dataset, std::vector<Cell*>* /*cellsLvl*/) const { getTypeCell_private(dataset); }
+
+//****************************************************************************
+
+void MeshUnStruct::getTypeCell(std::vector<unsigned char>& dataset, std::vector<Cell*>* /*cellsLvl*/) const { getTypeCell_private(dataset); }
+
+//****************************************************************************
+
 void MeshUnStruct::getData(TypeMeshContainer<Cell*>* cellsLvl, std::vector<double>& dataset, const int var, int phase) const
 {
+  getData_private(cellsLvl, dataset, var, phase);
+}
+
+//****************************************************************************
+
+void MeshUnStruct::getData(TypeMeshContainer<Cell*>* cellsLvl, std::vector<float>& dataset, const int var, int phase) const
+{
+  getData_private(cellsLvl, dataset, var, phase);
+}
+
+//****************************************************************************
+
+template <typename T> void MeshUnStruct::getData_private(TypeMeshContainer<Cell*>* cellsLvl, std::vector<T>& dataset, const int var, int phase) const
+{
   dataset.clear();
-  int numCell;
-  double transport(0.);
+  constexpr bool isAMR{false};
   for (int i = m_numberBoundFaces; i < m_numberInnerElements; i++) {
     if (!m_elements[i]->isFantome()) {
-      numCell = m_elements[i]->getNumCellAssociee();
-      if (var > 0) { //We want to get the scalar data
-        if (phase >= 0) {
-          //phases data
-          dataset.push_back(cellsLvl[0][numCell]->getPhase(phase)->returnScalar(var));
-        }
-        else if (phase == -1) {
-          //mixture data
-          dataset.push_back(cellsLvl[0][numCell]->getMixture()->returnScalar(var));
-        }
-        else if (phase == -2) {
-          transport = cellsLvl[0][numCell]->getTransport(var - 1).getValue();
-          if (transport < 1.e-20) {
-            transport = 0.;
-          }
-          dataset.push_back(transport);
-        }
-        else if (phase == -3) {
-          dataset.push_back(cellsLvl[0][numCell]->getXi());
-        }
-        else if (phase == -4) {
-          dataset.push_back(cellsLvl[0][numCell]->getDensityGradient());
-        }
-        else if (phase == -7) { // Saturation pressure
-          dataset.push_back(cellsLvl[0][numCell]->getPsat());
-        }
-        else {
-          Errors::errorMessage("MeshUnStruct::getData: unknown number of phase: ", phase);
-        }
-      }
-      else {
-        //We want to get the vector data
-        if (phase >= 0) { //Phases data
-          dataset.push_back(cellsLvl[0][numCell]->getPhase(phase)->returnVector(-var).getX());
-          dataset.push_back(cellsLvl[0][numCell]->getPhase(phase)->returnVector(-var).getY());
-          dataset.push_back(cellsLvl[0][numCell]->getPhase(phase)->returnVector(-var).getZ());
-        }
-        else if (phase == -1) {
-          //Mixture data
-          dataset.push_back(cellsLvl[0][numCell]->getMixture()->returnVector(-var).getX());
-          dataset.push_back(cellsLvl[0][numCell]->getMixture()->returnVector(-var).getY());
-          dataset.push_back(cellsLvl[0][numCell]->getMixture()->returnVector(-var).getZ());
-        }
-        else {
-          Errors::errorMessage("MeshUnStruct::getData: unknown number of phase: ", phase);
-        }
-      } //End vector
+      Cell* cell{cellsLvl[0][m_elements[i]->getNumCellAssociee()]};
+      getData_body(cell, dataset, var, phase, isAMR);
     }
   }
 }
@@ -398,6 +434,21 @@ void MeshUnStruct::setDataSet(std::vector<double>& dataset, TypeMeshContainer<Ce
 
 void MeshUnStruct::extractAbsVelocityMRF(TypeMeshContainer<Cell*>* cellsLvl, std::vector<double>& dataset, Source* sourceMRF) const
 {
+  extractAbsVelocityMRF_private(cellsLvl, dataset, sourceMRF);
+}
+
+//****************************************************************************
+
+void MeshUnStruct::extractAbsVelocityMRF(TypeMeshContainer<Cell*>* cellsLvl, std::vector<float>& dataset, Source* sourceMRF) const
+{
+  extractAbsVelocityMRF_private(cellsLvl, dataset, sourceMRF);
+}
+
+//****************************************************************************
+
+template <typename T>
+void MeshUnStruct::extractAbsVelocityMRF_private(TypeMeshContainer<Cell*>* cellsLvl, std::vector<T>& dataset, Source* sourceMRF) const
+{
   dataset.clear();
   int numCell;
   for (int i = m_numberBoundFaces; i < m_numberInnerElements; i++) {
@@ -406,15 +457,15 @@ void MeshUnStruct::extractAbsVelocityMRF(TypeMeshContainer<Cell*>* cellsLvl, std
       // Absolute velocity is built on the specific region rotating or when whole geometry is rotating.
       if (sourceMRF->getPhysicalEntity() == cellsLvl[0][numCell]->getElement()->getAppartenancePhysique() || sourceMRF->getPhysicalEntity() == 0) {
         Coord absoluteVelocity = sourceMRF->computeAbsVelocity(cellsLvl[0][numCell]->getVelocity(), cellsLvl[0][numCell]->getPosition());
-        dataset.push_back(absoluteVelocity.getX());
-        dataset.push_back(absoluteVelocity.getY());
-        dataset.push_back(absoluteVelocity.getZ());
+        dataset.push_back(static_cast<T>(absoluteVelocity.getX()));
+        dataset.push_back(static_cast<T>(absoluteVelocity.getY()));
+        dataset.push_back(static_cast<T>(absoluteVelocity.getZ()));
       }
       // If the region is not rotating absolute velocity = relative velocity
       else {
-        dataset.push_back(cellsLvl[0][numCell]->getVelocity().getX());
-        dataset.push_back(cellsLvl[0][numCell]->getVelocity().getY());
-        dataset.push_back(cellsLvl[0][numCell]->getVelocity().getZ());
+        dataset.push_back(static_cast<T>(cellsLvl[0][numCell]->getVelocity().getX()));
+        dataset.push_back(static_cast<T>(cellsLvl[0][numCell]->getVelocity().getY()));
+        dataset.push_back(static_cast<T>(cellsLvl[0][numCell]->getVelocity().getZ()));
       }
     }
   }
@@ -424,12 +475,26 @@ void MeshUnStruct::extractAbsVelocityMRF(TypeMeshContainer<Cell*>* cellsLvl, std
 
 void MeshUnStruct::extractReferenceLength(std::vector<Cell*>* cellsLvl, std::vector<double>& dataset) const
 {
+  extractReferenceLength_private(cellsLvl, dataset);
+}
+
+//***********************************************************************
+
+void MeshUnStruct::extractReferenceLength(std::vector<Cell*>* cellsLvl, std::vector<float>& dataset) const
+{
+  extractReferenceLength_private(cellsLvl, dataset);
+}
+
+//***********************************************************************
+
+template <typename T> void MeshUnStruct::extractReferenceLength_private(std::vector<Cell*>* cellsLvl, std::vector<T>& dataset) const
+{
   dataset.clear();
   int numCell;
   for (int i = m_numberBoundFaces; i < m_numberInnerElements; i++) {
     if (!m_elements[i]->isFantome()) {
       numCell = m_elements[i]->getNumCellAssociee();
-      dataset.push_back(cellsLvl[0][numCell]->getElement()->getLCFL());
+      dataset.push_back(static_cast<T>(cellsLvl[0][numCell]->getElement()->getLCFL()));
     }
   }
 }

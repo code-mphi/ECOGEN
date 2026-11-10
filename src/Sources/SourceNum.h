@@ -54,7 +54,7 @@ class SourceNum : public Source
     //! \brief     Source terms integration on conservative quantities
     //! \param     cell           cell for source term integration
     //! \param     dt             integration time step
-    void integrateSourceTerms(Cell* cell, const double& dt) override;
+    void integrateSourceTerms(Cell* cell, const double& dt, Prim /*type*/ = vecPhases) override;
 
     //! \brief     Euler explicite integration (order 1)
     //! \param     cell           cell for source term integration

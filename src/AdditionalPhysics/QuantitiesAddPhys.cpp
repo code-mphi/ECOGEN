@@ -36,6 +36,8 @@ std::vector<Variable> variableNamesVisc;
 std::vector<int> numPhasesVisc;
 std::vector<Variable> variableNamesCond;
 std::vector<int> numPhasesCond;
+std::vector<Variable> variableNamesTurb;
+std::vector<int> numPhasesTurb;
 
 //***********************************************************************
 

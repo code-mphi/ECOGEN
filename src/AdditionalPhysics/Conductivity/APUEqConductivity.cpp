@@ -116,16 +116,16 @@ void APUEqConductivity::solveFluxAddPhysBoundary(CellInterface* cellInterface)
     double alphakLeft = cellInterface->getCellLeft()->getPhase(numPhase)->getAlpha();
 
     int typeCellInterface = cellInterface->whoAmI();
-    if (typeCellInterface == NONREFLECTING) {
+    if (typeCellInterface == TypeBC::NONREFLECTING) {
       this->solveFluxConductivityNonReflecting(m_gradTkLeft, alphakLeft, numPhase);
     }
-    else if (typeCellInterface == WALL || typeCellInterface == SYMMETRY) {
+    else if (typeCellInterface == TypeBC::WALL || typeCellInterface == TypeBC::SYMMETRY) {
       this->solveFluxConductivityWall();
     }
-    else if (typeCellInterface == OUTLETPRESSURE) {
+    else if (typeCellInterface == TypeBC::OUTLETPRESSURE) {
       this->solveFluxConductivityOutletPressure();
     }
-    else if (typeCellInterface == INLETINJSTAGSTATE) {
+    else if (typeCellInterface == TypeBC::INLETINJSTAGSTATE) {
       this->solveFluxConductivityInletInjStagState();
     }
     else {
@@ -144,7 +144,7 @@ void APUEqConductivity::solveFluxConductivityInner(
   const Coord& gradTkLeft, const Coord& gradTkRight, const double& alphakL, const double& alphakR, const int& numPhase) const
 {
   //Data of the cell interface
-  double dTkdx, alphak;
+  double dTkdx(0.), alphak(0.);
   dTkdx  = (gradTkLeft.getX() + gradTkRight.getX()) / 2.;
   alphak = (alphakL + alphakR) / 2.;
 

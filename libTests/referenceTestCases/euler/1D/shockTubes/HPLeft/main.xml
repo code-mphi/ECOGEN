@@ -4,14 +4,9 @@
 	<outputMode format="GNU" binary="false" precision="10"/>
 	<timeControlMode iterations="false">
 		<iterations number="10" iterFreq="1"/>
-		<physicalTime totalTime="1.e-2" timeFreq="1e-4"/>
+		<physicalTime totalTime="3.e-4" timeFreq="3.e-5"/>
 	</timeControlMode>
 	<computationControl CFL="0.5"/>
-<!-- 	<secondOrder>
-		<globalLimiter>vanleer</globalLimiter>
-	</secondOrder>
-	<resumeSimulation resumeFileNumber="0" AMRsaveFreq="0"/> -->
-
 <!-- 	<probe name="sensor1">
 		<vertex x="0.3" y="0.05" z="0.05"/>
 		<timeControl acqFreq="1e-5."/>
@@ -24,5 +19,5 @@
 		<vertex x="0.8" y="0.05" z="0.05"/>
 		<timeControl acqFreq="1e-5."/>
 	</probe> -->
-
+	<!-- <resumeSimulation resumeFileNumber="0" AMRsaveFreq="0"/> -->
 </computationParam>

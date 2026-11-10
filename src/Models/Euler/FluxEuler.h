@@ -86,6 +86,10 @@ class FluxEuler : public Flux
     friend class APEuler;
     friend class APEViscosity;
     friend class APEConductivity;
+    friend class APETurbulenceSmagorinsky;
+    friend class ModNEqDEM; //!< Because a variable of type FluxEuler is used in ModNEqDEM to store local fluxes and we need a write acces to FluxEuler members
+    friend class RiemannSolverHLLC; //!< Because a variable of type FluxEuler is used in RiemannSolverHLLC to store local fluxes and we need a write acces to FluxEuler members
+    friend class RiemannSolverExact; //!< Because a variable of type FluxEuler is used in RiemannSolverExact to store local fluxes and we need a write acces to FluxEuler members
 };
 
 #endif // FLUXEULER_H

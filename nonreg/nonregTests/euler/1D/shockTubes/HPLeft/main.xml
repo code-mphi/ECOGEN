@@ -7,9 +7,6 @@
 		<physicalTime totalTime="6.e-4" timeFreq="6e-5"/>
 	</timeControlMode>
 	<computationControl CFL="0.5"/>
-	<secondOrder>
-		<globalLimiter>vanleer</globalLimiter>
-	</secondOrder>
 	<resumeSimulation resumeFileNumber="0" AMRsaveFreq="0"/>
 
 	<probe name="sensor1">

@@ -6,4 +6,7 @@
     <omega z="1000" y="0." x="0."/>
     <!-- <timeToOmega tf="2.e-2"/> -->
   </sourceTerms>
+	<gradient>
+		<method>green-gauss</method>
+	</gradient>
 </model>

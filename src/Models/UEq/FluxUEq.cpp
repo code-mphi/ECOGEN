@@ -223,7 +223,7 @@ void FluxUEq::addNonCons(double coefA, const Cell* cell, const Coord& /*normal*/
   for (int k = 0; k < numberPhases; k++) {
     phase       = cell->getPhase(k);
     m_alpha[k] += -coefA * phase->getAlpha() * static_cast<FluxUEq*>(fluxBuff)->m_sM;
-    //m_energ[k] += coefA*phase->getAlpha()*phase->getPressure()*static_cast<FluxUEq*> (fluxBuff)->m_uStar; //Better results when not computed
+    //m_energ[k] += coefA * phase->getAlpha() * phase->getPressure() * static_cast<FluxUEq*>(fluxBuff)->m_uStar; //Better results when not computed
   }
 }
 
@@ -235,7 +235,7 @@ void FluxUEq::subtractNonCons(double coefA, const Cell* cell, const Coord& /*nor
   for (int k = 0; k < numberPhases; k++) {
     phase       = cell->getPhase(k);
     m_alpha[k] -= -coefA * phase->getAlpha() * static_cast<FluxUEq*>(fluxBuff)->m_sM;
-    //m_energ[k] -= coefA*phase->getAlpha()*phase->getPressure()*static_cast<FluxUEq*> (fluxBuff)->m_uStar; //Better results when not computed
+    //m_energ[k] -= coefA * phase->getAlpha() * phase->getPressure() * static_cast<FluxUEq*>(fluxBuff)->m_uStar; //Better results when not computed
   }
 }
 

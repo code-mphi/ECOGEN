@@ -52,23 +52,25 @@ The default test case provided with ECOGEN package is a single-phase flow test w
 
 The initial characteristics of the run are:
 
-+-----------------------------+--------------+
-| Characteristic              | value        |
-+=============================+==============+
-| dimension                   | 1 m          |
-+-----------------------------+--------------+
-| mesh size                   | 100          |
-+-----------------------------+--------------+
-| AMR max level               | 3            |
-+-----------------------------+--------------+
-| discontinuity position      | 0,5 m        |
-+-----------------------------+--------------+
-| boundary conditions         | transmittive |
-+-----------------------------+--------------+
-| final solution time         | 0.36 ms      |
-+-----------------------------+--------------+
-| solution printing frequency | 0.036 ms     |
-+-----------------------------+--------------+
++------------------------------------+--------------+
+| Characteristic                     | value        |
++====================================+==============+
+| dimension                          | 1 m          |
++------------------------------------+--------------+
+| mesh size                          | 100          |
++------------------------------------+--------------+
+| AMR max level                      | 3            |
++------------------------------------+--------------+
+| discontinuity position             | 0,5 m        |
++------------------------------------+--------------+
+| boundary conditions                | transmittive |
++------------------------------------+--------------+
+| time control mode using iterations | true         |
++------------------------------------+--------------+
+| iterations number                  |  100         |
++------------------------------------+--------------+
+| solution printing frequency        |  10          |
++------------------------------------+--------------+
 
 This test can be executed on a single core or on XX cores by one of the commands:
 
@@ -93,7 +95,6 @@ The code is running and at the top of the console output one can read:
 *euler1DTransportPositiveVelocity* is the name of the default run.
 
 .. figure:: ./_static/tutos/default/RunECOGEN_Logo.png
-  :scale: 100%
   :align: center
 
   Screenshot of the top of ECOGEN's default run console. In this particular run, 8 cores have been used.
@@ -102,7 +103,7 @@ The run ends and the following information comes:
 
 
 .. figure:: ./_static/tutos/default/RunECOGEN_NormalEnding.png
-  :scale: 100%
+  :scale: 75%
   :align: center
 
   Screenshot of the end of ECOGEN's default run console with 8 cores used.

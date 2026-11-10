@@ -1,0 +1,11 @@
+<?xml version = "1.0" encoding = "UTF-8" standalone = "yes"?>
+<computationParam>
+	<run>nonEqDEM1DShockTubeOnDiffusedInterfaceWaterAir</run>
+	<outputMode format="GNU" binary="false" precision="10"/>
+	<timeControlMode iterations="false">
+		<iterations number="10" iterFreq="10"/>
+		<physicalTime totalTime="300.e-6" timeFreq="300.e-6"/>
+	</timeControlMode>
+	<computationControl CFL="0.6"/>
+	<!-- <resumeSimulation resumeFileNumber="0" AMRsaveFreq="0"/> -->
+</computationParam>

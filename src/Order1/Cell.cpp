@@ -35,7 +35,9 @@ int numberSolids;
 int numberTransports;
 Gradient* gradient;
 std::vector<Coord> gradRho;
+std::vector<Coord> gradVelocityX;
 std::vector<Variable> variableDensity;
+std::vector<Variable> variableVelocity;
 std::vector<int> numeratorDefault;
 
 //***********************************************************************
@@ -106,11 +108,19 @@ void Cell::associateExtVar(Model* mod, Gradient* grad)
 {
   model    = mod;
   gradient = grad;
+
   gradRho.resize(1);
   variableDensity.resize(1);
   variableDensity[0] = Variable::density;
+
+  gradVelocityX.resize(1);
+  variableVelocity.resize(1);
+  variableVelocity[0] = Variable::velocityU;
+
   numeratorDefault.resize(1);
   numeratorDefault[0] = -1;
+  coordIdentity.setXYZ(1., 1., 1.);
+  tensorIdentity.identity();
 }
 
 //***********************************************************************
@@ -119,12 +129,16 @@ void Cell::allocate(const std::vector<AddPhys*>& addPhys)
 {
   m_vecPhases = new Phase*[numberPhases];
   for (int k = 0; k < numberSolids; k++) {
+    // Create empty 'Phase' objects of suitable type for current model
     model->allocatePhaseSolid(&m_vecPhases[k]);
   }
   for (int k = numberSolids; k < numberPhases; k++) {
+    // Create empty 'Phase' objects of suitable type for current model
     model->allocatePhase(&m_vecPhases[k]);
   }
+  // Create empty 'Mixture' object of suitable type for current model
   model->allocateMixture(&m_mixture);
+  /* ... */
   model->allocateCons(&m_cons);
   if (numberTransports > 0) {
     m_vecTransports  = new Transport[numberTransports];
@@ -143,40 +157,12 @@ void Cell::allocateEos() { model->allocateEos(*this); }
 
 void Cell::fill(std::vector<GeometricalDomain*>& domains, const int& /*lvlMax*/)
 {
-  Coord coordinates;
-  coordinates = m_element->getPosition();
   for (unsigned int geom = 0; geom < domains.size(); geom++) {
     domains[geom]->fillIn(this);
   }
 
-  // // GRESHO TEST EULER
-  // //
-  // double radius;
-  // double rho(1.), gamma(1.4), M(0.001);
-  // double p0 = rho/gamma*M*M; double uR(0.);
-  // double x = coordinates.getX()-0.5;
-  // double y = coordinates.getY()-0.5;
-  // double theta(std::acos(-1));
-  // radius = std::pow(std::pow(x, 2.) + std::pow(y, 2.), 0.5); //2D
-  // //if(std::abs(y) > 1.e-4 || x > 0.) theta = 2*std::atan(y/(x+std::pow(x*x+y*y, 0.5)));
-  // theta = std::atan2(y,x);
-
-  // m_vecPhases[0]->setDensity(1.);
-  // if(radius<0.2){
-  //   m_vecPhases[0]->setPressure(p0 + 12.5*radius*radius);
-  //   uR = 5.*radius;
-  // }
-  // else if(radius<0.4){
-  //   m_vecPhases[0]->setPressure(p0 + 12.5*radius*radius + 4*(1-5*radius-log(0.2)+log(radius)));
-  //   uR = 2. - 5.*radius;
-  // }
-  // else{
-  //   m_vecPhases[0]->setPressure(p0 - 2 + 4*log(2));
-  //   uR = 0.;
-  // }
-  // m_vecPhases[0]->setVelocity(-uR*std::sin(theta),uR*std::cos(theta),0.);
-
-  // //END GRESHO TEST EULER
+  // Coord coordinates;
+  // coordinates = m_element->getPosition();
 
   // BEGO - 2 SIMULATION
   // Feb-Mar 2025
@@ -408,7 +394,8 @@ void Cell::fill(std::vector<GeometricalDomain*>& domains, const int& /*lvlMax*/)
   // double coordX;
   // coordX = std::pow(std::pow(coordinates.getX(), 2.), 0.5); //1D
   // double variation(0.);
-  // double h(1./500./std::pow(2., (double)lvlMax));
+  // //double h(1./500./std::pow(2., (double)lvlMax));
+  // double h(1./500.);
   // variation = 1. / 2.*(1. - tanh((coordX - 0.7)/1.5/h));
   // double alphaWater(variation*1. + (1.-variation)*0.);
   // double alphaAir(1. - alphaWater);
@@ -416,22 +403,162 @@ void Cell::fill(std::vector<GeometricalDomain*>& domains, const int& /*lvlMax*/)
   // m_vecPhases[1]->setAlpha(alphaWater);
 
   // Initial smearing for 1D non-linear Schrodinger test case. Uncomment only when needed.
+  //EOS file : NLS.xml
+  //Comments : //QD//  To obtain results similar to [SAM 2025] (Didierlaurent,Favrie,lombard), you need to set \mathcal{K} = 1 / 4 / \rho and all the related derivatives
+  //                   The EosNLS give the energy and pressure of the Defocusing Non linear Schrodinger equation. In the computations, since there is no entropy nor temperature
+  //                   for this Eos, the equation on the total energy evolves on his side without influencing other equations. The parameters, $\lambda,\beta,\eps$ of the
+  //                   EulerKorteweg model are the same as in the paper [SAM 2025].
   // double coordX;
   // coordX = std::pow(std::pow(coordinates.getX(), 2.), 0.5); //1D
   // double variation(0.);
-  // double h(1./10./std::pow(2., (double)lvlMax));
-  // variation = 1. / 2.*(1. - tanh((coordX - 40.)/h));
-  // double rho(variation*2. + (1.-variation)*1.);
+  // // double h(1./10./std::pow(2., (double)lvlMax));
+  // double h(1. / 1.);
+  // double rho_L = 5.;
+  // double rho_R = 1.;
+  // double u_L   = 0.;
+  // double u_R   = 0.;
+  // variation    = 1. / 2. * (1. - tanh((coordX - 250.) / h));
+  // //variation    = 0.5 + 0.5 * h / (1./6.) * (log( (cosh( (250. - coordX + 1./12.)/h ))/(cosh( (250. - coordX - 1./12.)/h )) ));
+  // double rho(variation * rho_L + (1. - variation) * rho_R);
+  // double u(variation * u_L + (1. - variation) * u_R);
   // m_vecPhases[0]->setDensity(rho);
+  // m_vecPhases[0]->setVelocity(u, 0., 0.);
 
-  // Initial smearing for 1D Van der Waals test case. Uncomment only when needed.
+  //Initial smearing for 1D Eriksen bar model test case : Polynomial EOS. Uncomment only when needed.
+  //EOS file : Polynomial_arbitrary.xml
+  //Comments : //QD//  To obtain results similar to [IJSS 2020] (Bourgeois,Favrie,Lombard), you need to set \mathcal{K} = 1 / \rho^3 and all the related derivatives
+  //                   Moreover, epsEK = \sqrt{ \alpha } and from the paper \alpha = 10^{-3} which leads to epsEK \approx 0.0316227766. The parameters a_2, a_3, a_4
+  //                   are already set in the .xml file. To plot the deformation "epsilon", change m_density with (1./m_density - 1) in the data printing section of
+  //                   the PhaseEulerKorteweg.cpp file. The present test reproduces the test shown in Figure 8 (b) of [IJSS 2020]. One major difference between the
+  //                   solutions is magnitude of the sound speed in the "liquid" part (\approx 1150). Therefore the time of the simulation has been reduced to 0.12
+  //                   so that the solution stay in a domain of size [0;6]. The resulting entropy, temperature and total energy of the simulation have no meaning
+  //                   since an equation on the entropy is missing the EOS.
+  // double coordX;
+  // coordX = std::pow(std::pow(coordinates.getX(), 2.), 0.5); //1D
+  // double variation(0.);
+  // double h(1. / 10.);
+  // double eps_L = 6.;
+  // double eps_R = 0.;
+  // double u_L   = 0.;
+  // double u_R   = 0.;
+  // variation    = 1. / 2. * (1. - tanh((coordX - 5.) / h));
+  // double epsilon(variation * eps_L + (1. - variation) * eps_R);
+  // double u(variation * u_L + (1. - variation) * u_R);
+  // m_vecPhases[0]->setDensity(1. / (1. + epsilon));
+  // m_vecPhases[0]->setVelocity(u, 0., 0.);
+
+  //Initial smearing for 1D Van der Waals test case : SHOCK TUBE TEST. Uncomment only when needed.
+  //EOS file : VDW_test.xml
+  // double coordX;
+  // coordX = std::pow(std::pow(coordinates.getX(), 2.), 0.5); //1D
+  // double variation(0.);
+  // double h(0.012);
+  // variation = 1. / 2.*(1. - tanh((coordX - 3.)/h));
+  // double rho_L = 8.;
+  // double rho_R = 0.25;
+  // double u_L   = 0.;
+  // double u_R   = 0.;
+  // double s_L = 1.25;
+  // double s_R = 1.459;
+  // double rho(variation * rho_L + (1. - variation) * rho_R);
+  // double u(variation * u_L + (1. - variation) * u_R);
+  // double s(variation* s_L + (1. - variation)* s_R);
+  // m_vecPhases[0]->setDensity(rho);
+  // m_vecPhases[0]->setVelocity(u, 0., 0.);
+  // m_vecPhases[0]->setEntropy(s);
+
+  //Initial smearing for 1D Van der Waals test case : CAVITATION TEST. Uncomment only when needed.
+  //EOS file : VDW_test.xml
+  // double coordX;
+  // coordX = std::pow(std::pow(coordinates.getX(), 2.), 0.5); //1D
+  // double variation(0.);
+  // double h(0.012);
+  // variation = 1. / 2.*(1. - tanh((coordX - 3.)/h));
+  // double rho_L = 8.;
+  // double rho_R = 8.;
+  // double u_L   = -1.;
+  // double u_R   = 1.;
+  // double s_L = 1.25;
+  // double s_R = 1.25;
+  // double rho(variation * rho_L + (1. - variation) * rho_R);
+  // double u(variation * u_L + (1. - variation) * u_R);
+  // double s(variation* s_L + (1. - variation)* s_R);
+  // m_vecPhases[0]->setDensity(rho);
+  // m_vecPhases[0]->setVelocity(u, 0., 0.);
+  // m_vecPhases[0]->setEntropy(s);
+
+  //Initial smearing for 1D Van der Waals test case : IMPACT TEST. Uncomment only when needed.
+  //EOS file : VDW_test.xml
   // double coordX;
   // coordX = std::pow(std::pow(coordinates.getX(), 2.), 0.5); //1D
   // double variation(0.);
   // double h(1./150.);
   // variation = 1. / 2.*(1. - tanh((coordX - 0.5)/h));
-  // double rho(variation*333. + (1.-variation)*10.);
+  // double rho_L = 1.;
+  // double rho_R = 1.;
+  // double u_L   = 1.;
+  // double u_R   = -1.;
+  // double s_L = 1.;
+  // double s_R = 1.;
+  // double rho(variation * rho_L + (1. - variation) * rho_R);
+  // double u(variation * u_L + (1. - variation) * u_R);
+  // double s(variation* s_L + (1. - variation)* s_R);
   // m_vecPhases[0]->setDensity(rho);
+  // m_vecPhases[0]->setVelocity(u, 0., 0.);
+  // m_vecPhases[0]->setEntropy(s);
+
+  //Initial travelling wave 1D Van der Waals test case
+  //EOS file : VDW_test.xml
+  //the initializeAugmentedVariables should be ignored in this test since the extended variable are suitably initialized (comment line model->initializeAugmentedVariables(this); in Cell::completeFulfillState())
+  //The lenght of the medium is from -0.25 to 0 (or 0 to 0.25) and N_x = 2000
+  // double coordX;
+  // coordX = std::pow(std::pow(coordinates.getX(), 2.), 0.5); //1D
+  // std::string path_lec_file = "/home/number2/Documents/thesis";
+  // std::ifstream fic_4(path_lec_file+"/exact_solutions_500.txt");
+  // fic_4.precision(15);
+  // double x,rho,u,eta,psi,phi,s;
+  // bool find_it = false;
+  // if (fic_4)
+  // {
+  //   while ((fic_4 >> x >> rho >> u >> eta >> psi >> phi >> s) || find_it == false){
+  //     if ( fabs(coordX - x) < 0.0005*1e-4 ){
+  //       //std::cout << coordX << " ; " << x << " ; " << s << std::endl;
+  //       m_vecPhases[0]->setDensity(rho);
+  //       m_vecPhases[0]->setVelocity(u, 0., 0.);
+  //       m_vecPhases[0]->setDensitySurEta(rho / eta);
+  //       m_vecPhases[0]->setOmega(psi);
+  //       m_vecPhases[0]->setVectorP(phi, 0., 0.);
+  //       m_vecPhases[0]->setEntropy(s);
+
+  //       find_it = true;
+  //     }
+  //   }
+  // }
+  // fic_4.close();
+
+  //Initial smearing for 1D Van der Waals test case :  DODECANE SHOCK TUBE. Uncomment only when needed.
+  //EOS file : VDW_dedecane.xml
+  // double coordX;
+  // coordX = std::pow(std::pow(coordinates.getX(), 2.), 0.5); //1D
+  // double variation(0.);
+  // double h(1./2500.);
+  // variation = 1. / 2. * (1. - tanh((coordX - 0.03)/h));
+  // double u_L   = 0.;
+  // double u_R   = 0.;
+  // double press_L = 128.13e5;
+  // double press_R = 1.25045e5;
+  // double T_L = 561.53;
+  // double T_R = 530.976;
+  // double rho_L = m_vecPhases[0]->getEos()->computeDensity(press_L,T_L);
+  // double rho_R = m_vecPhases[0]->getEos()->computeDensity(press_R,T_R);
+  // double s_L = m_vecPhases[0]->getEos()->computeEntropyFromDensityAndPressure(rho_L,press_L);
+  // double s_R = m_vecPhases[0]->getEos()->computeEntropyFromDensityAndPressure(rho_R,press_R);
+  // double rho(variation * rho_L + (1. - variation) * rho_R);
+  // double u(variation * u_L + (1. - variation) * u_R);
+  // double s(variation * s_L + (1. - variation) * s_R);
+  // m_vecPhases[0]->setDensity(rho);
+  // m_vecPhases[0]->setVelocity(u, 0., 0.);
+  // m_vecPhases[0]->setEntropy(s);
 
   //Initial smearing for 1D shear test case. Uncomment only when needed.
   // double coordX;
@@ -553,7 +680,8 @@ void Cell::completeFulfillState()
   //Extended energies depending on additional physics
   this->prepareAddPhys();
   m_mixture->computeTotalEnergy(m_vecQuantitiesAddPhys);
-  //Complete augmented variables (such as the ones of Euler-Korteweg model)
+  //Complete augmented variables (such as the ones of Navier-Stokes-Korteweg model)
+  //WARNING Comment this line for the travelling wave test case or for ResumeSimulation relative to the Navier-Stokes-Korteweg model
   model->initializeAugmentedVariables(this);
 }
 
@@ -687,6 +815,59 @@ void Cell::addNonConsAddPhys(AddPhys& addPhys, Symmetry* symmetry)
 void Cell::reinitializeColorFunction(const int& numTransport, const int& numPhase)
 {
   m_vecTransports[numTransport].setValue(m_vecPhases[numPhase]->getAlpha());
+}
+
+//***********************************************************************
+
+double Cell::hatFilterScalar(Variable nameVariable, int num)
+{
+  double volumeCell = m_element->getVolume();
+  double sumWeighted(0.);
+  double sumVolume(0.);
+
+  sumWeighted += volumeCell * this->selectScalar(nameVariable, num);
+  sumVolume   += volumeCell;
+
+  std::vector<const Cell*> vecNeighbours; // to avoid counting the same interface twice
+
+  for (int b = 0; b < this->getCellInterfacesSize(); b++) {
+    if (!this->getCellInterface(b)) continue;
+
+    Cell* cellLeft  = this->getCellInterface(b)->getCellLeft();
+    Cell* cellRight = this->getCellInterface(b)->getCellRight();
+
+    Cell* neighbour = 0;
+    if (cellLeft == this) {
+      neighbour = cellRight;
+    }
+    else if (cellRight == this) {
+      neighbour = cellLeft;
+    }
+
+    if (!neighbour) continue;
+
+    bool alreadyCounted = false;
+    for (unsigned i = 0; i < vecNeighbours.size(); i++) {
+      if (vecNeighbours[i] == neighbour) {
+        alreadyCounted = true;
+        break;
+      }
+    }
+    if (alreadyCounted) continue;
+
+    const double volumeNeighbour = neighbour->getElement()->getVolume();
+
+    sumWeighted += volumeNeighbour * neighbour->selectScalar(nameVariable, num);
+    sumVolume   += volumeNeighbour;
+
+    vecNeighbours.push_back(neighbour);
+  }
+
+  if (sumVolume <= 0.) {
+    return 0.;
+  }
+
+  return sumWeighted / sumVolume;
 }
 
 //****************************************************************************

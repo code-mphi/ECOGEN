@@ -62,7 +62,6 @@ class Parallel
     void computeSum(double& var);
     void finalize(const int& lvlMax);
     void stopRun();
-    bool verifyStateCPUs();
 
     //Methodes pour toutes les variables primitives
     void initializePersistentCommunicationsPrimitives();

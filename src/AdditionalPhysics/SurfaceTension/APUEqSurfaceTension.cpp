@@ -161,17 +161,17 @@ void APUEqSurfaceTension::solveFluxAddPhysBoundary(CellInterface* cellInterface)
   static_cast<FluxUEq*>(fluxBuff)->setToZero();
 
   switch (cellInterface->whoAmI()) {
-  case NONREFLECTING:
+  case TypeBC::NONREFLECTING:
     this->solveFluxSurfaceTensionNonReflecting(m_velocityLeft, m_gradCLeft);
     break;
-  case WALL:
-  case SYMMETRY:
+  case TypeBC::WALL:
+  case TypeBC::SYMMETRY:
     this->solveFluxSurfaceTensionWall(m_gradCLeft);
     break;
-  case OUTLETPRESSURE:
+  case TypeBC::OUTLETPRESSURE:
     this->solveFluxSurfaceTensionOutletPressure();
     break;
-  case INLETINJSTAGSTATE:
+  case TypeBC::INLETINJSTAGSTATE:
     this->solveFluxSurfaceTensionInletInjStagState();
     break;
   default:
@@ -191,8 +191,8 @@ void APUEqSurfaceTension::solveFluxSurfaceTensionInner(const Coord& velocityLeft
                                                        const Coord& gradCRight) const
 {
   //Extraction of data
-  double uL, vL, wL, uR, vR, wR;
-  double w1L, w2L, w3L, normWL, w1R, w2R, w3R, normWR;
+  double uL(0.), vL(0.), wL(0.), uR(0.), vR(0.), wR(0.);
+  double w1L(0.), w2L(0.), w3L(0.), normWL(0.), w1R(0.), w2R(0.), w3R(0.), normWR(0.);
   uL     = velocityLeft.getX();
   vL     = velocityLeft.getY();
   wL     = velocityLeft.getZ();
@@ -209,7 +209,7 @@ void APUEqSurfaceTension::solveFluxSurfaceTensionInner(const Coord& velocityLeft
   normWR = gradCRight.norm();
 
   //Data of the cell interface
-  double u, v, w, w1, w2, w3, normW;
+  double u(0.), v(0.), w(0.), w1(0.), w2(0.), w3(0.), normW(0.);
   //AF//TODO// *0.5 instead of /2.
   u     = (uL + uR) / 2.;
   v     = (vL + vR) / 2.;
@@ -243,7 +243,7 @@ void APUEqSurfaceTension::solveFluxSurfaceTensionWall(const Coord& gradCLeft) co
   //Considered as a symmetry and not as a wall with a triple vertex yet
 
   //Data of the cell interface
-  double normW, w2, w3;
+  double normW(0.), w2(0.), w3(0.);
   normW = gradCLeft.norm();
   w2    = gradCLeft.getY();
   w3    = gradCLeft.getZ();
@@ -299,7 +299,7 @@ void APUEqSurfaceTension::solveFluxSurfaceTensionOther() const
 void APUEqSurfaceTension::addSymmetricTermsRadialAxisOnX(Cell* cell)
 {
   //Extraction of data
-  double r, w1, w2, normW;
+  double r(0.), w1(0.), w2(0.), normW(0.);
   r     = cell->getPosition().getX();
   w1    = cell->getQPA(m_numQPAGradC)->getGrad().getX();
   w2    = cell->getQPA(m_numQPAGradC)->getGrad().getY();
@@ -330,7 +330,7 @@ void APUEqSurfaceTension::addSymmetricTermsRadialAxisOnX(Cell* cell)
 void APUEqSurfaceTension::addSymmetricTermsRadialAxisOnY(Cell* cell)
 {
   //Extraction of data
-  double r, w1, w2, normW;
+  double r(0.), w1(0.), w2(0.), normW(0.);
   r     = cell->getPosition().getY();
   w1    = cell->getQPA(m_numQPAGradC)->getGrad().getX();
   w2    = cell->getQPA(m_numQPAGradC)->getGrad().getY();

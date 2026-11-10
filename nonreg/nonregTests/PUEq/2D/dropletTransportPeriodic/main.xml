@@ -1,0 +1,11 @@
+<?xml version='1.0' encoding='UTF-8' standalone='yes'?>
+<computationParam>
+  <run>pressureVelocityEq2DDropletTransportPeriodic</run>
+  <outputMode format="VTK" binary="false"/>
+  <timeControlMode iterations="true">
+    <iterations iterFreq="30" number="30"/>
+    <physicalTime timeFreq="21.e-6" totalTime="21.e-5"/>
+  </timeControlMode>
+  <computationControl CFL="0.8"/>
+  <resumeSimulation resumeFileNumber="0" AMRsaveFreq="5"/>
+</computationParam>

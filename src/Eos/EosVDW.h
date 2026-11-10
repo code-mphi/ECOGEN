@@ -51,38 +51,91 @@ class EosVDW : public Eos
 
     //! \brief     Compute internal energy
     //! \param     density             density (\f$\rho\f$)
+    //! \param     pressure            pressure (p)
+    //! \return    internal energy
+    //! \details   with  internal energy : \f$ e (\rho, p)
+    double computeEnergy(const double& density, const double& pressure) const override;
+
+    //! \brief     Compute internal energy from density and temperature
+    //! \param     density             density (\f$\rho\f$)
     //! \param     temperature         temperature (T)
     //! \return    internal energy
-    //! \details   with  internal energy : \f$ \epsilon (\rho, T) = - (r T log(\frac{1}{\rho} - b)) - \rho a \f$
-    double computeEnergy(const double& density, const double& /*temperature*/) const override;
+    //! \details   with  internal energy : \f$ e (\rho, T)
+    double computeEnergyFromDensityAndTemperature(const double& density, const double& temperature) const override;
 
     //! \brief     Compute pressure
     //! \param     density             density (\f$\rho\f$)
-    //! \param     temperature         temperature (T)
+    //! \param     energy              energy (e)
     //! \return    pressure
-    //! \details   with  pressure : \f$ p (\rho, T) = \frac{\rho r T}{1 - \rho b} - \rho^2 a \f$ //KS//To update
-    double computePressure(const double& density, const double& /*temperature*/) const override;
+    //! \details   with  pressure : \f$ p (\rho, e)
+    double computePressure(const double& density, const double& energy) const override;
+
+    //! \brief     Compute density
+    //! \param     pressure            pressure (\f$p\f$)
+    //! \param     temperature         temperature (K)
+    //! \return    density
+    //! \details   with  density : \f$ \rho (p, T)
+    double computeDensity(const double& pressure, const double& temperature) const override;
+
+    //! \brief     Compute pressure
+    //! \param     density             density (\f$\rho\f$)
+    //! \param     entropy             entropy (s)
+    //! \return    pressure
+    //! \details   with  pressure : \f$ p (\rho, s)
+    double computePressureFromDensityAndEntropy(const double& density, const double& entropy) const override;
+
+    //! \brief     Compute pressure
+    //! \param     density             density (\f$\rho\f$)
+    //! \param     temperature         temperature (\f$T\f$)
+    //! \return    pressure
+    //! \details   with  pressure : \f$ p (\rho, T)
+    double computePressureFromDensityAndTemperature(const double& density, const double& temperature) const override;
 
     //! \brief     Compute temperature
     //! \param     density             density (\f$\rho\f$)
-    //! \param     energy              energy (\f$\epsilon\f$)
+    //! \param     pressure            pressure (\f$p\f$)
     //! \return    temperature
-    //! \details   with  temperature : \f$ T (\rho, \epsilon) = \frac{e + \rho a}{-r log(\frac{1}{\rho} - b})} \f$
-    double computeTemperature(const double& density, const double& /*energy*/) const override;
+    //! \details   with  temperature : \f$ T (\rho, p) = \frac{ (p + a * \rho^2) * ( 1 / \rho - b) }{ r } \f$
+    double computeTemperature(const double& density, const double& pressure) const override;
 
-    //Partial derivatives
-    //! \brief     Compute partial derivative dedrho
+    //! \brief     Compute squareSoundSpeed
     //! \param     density             density (\f$\rho\f$)
-    //! \param     temperature         temperature (T)
-    //! \return    dedrho
-    //! \details   with  dedrho : \f$ \frac{\partial \epsilon}{\partial \rho} (\rho, T) = \frac{r T}{\rho (1 - \rho b)} - a \f$ //KS//To update
-    double dedrho(const double& density, const double& /*temperature*/) const override;
-    //! \brief     Compute partial derivative dedrhoSecond
+    //! \param     entropy             entropy (s)
+    //! \return    squareSoundSpeed
+    double computeSquareSoundSpeed(const double& density, const double& energy) const override;
+
+    //! \brief     Compute Entropy from density and internal energy
+    //! \param     density             density
+    //! \param     energy              energy
+    //! \return    entropy
+    double computeEntropyFromDensityAndEnergy(const double& density, const double& energy) const override;
+
+    //! \brief     Compute Entropy from density and pressure
+    //! \param     density             density
+    //! \param     pressure            pressure
+    //! \return    entropy
+    double computeEntropyFromDensityAndPressure(const double& density, const double& pressure) const override;
+
+    //! \brief     Compute Entropy from density and temperature
+    //! \param     density             density
+    //! \param     pressure            pressure
+    //! \return    entropy
+    double computeEntropyFromDensityAndTemperature(const double& density, const double& pressure) const override;
+
+    //! \brief     Compute the Cappilary coefficient (kappa) from density
     //! \param     density             density (\f$\rho\f$)
-    //! \param     temperature         temperature (T)
-    //! \return    dedrhoSecond
-    //! \details   with  dedrhoSecond : \f$ \frac{\partial^2 \epsilon}{\partial \rho^2} (\rho, T) = \frac{r T (1 - 2 \rho b)}{\rho^2 (1 - \rho b)^2} \f$ //KS//To update
-    double dedrhoSecond(const double& density, const double& /*temperature*/) const override;
+    //! \return    kappa
+    double kappa(const double& density) const override;
+
+    //! \brief     Compute the First derivative of the Cappilary coefficient (kappa) with respect to the density
+    //! \param     density             density (\f$\rho\f$)
+    //! \return    kappaPrime
+    double kappaPrime(const double& density) const override;
+
+    //! \brief     Compute the Second derivative of the Cappilary coefficient (kappa) with respect to the density
+    //! \param     density             density (\f$\rho\f$)
+    //! \return    kappaSecond
+    double kappaSecond(const double& density) const override;
 
     //Checking
     //! \brief   Do nothing for VDW
@@ -94,12 +147,13 @@ class EosVDW : public Eos
     TypeEOS getType() const override { return TypeEOS::VDW; };
 
   private:
-    double m_r;     //!< Universal constant of the fluid
-    double m_a;     //!< Constant parameter of VDW EOS
-    double m_b;     //!< Constant parameter of VDW EOS
-    double m_gamma; //!< Polytropic constant
-    double m_p0;    //!< Reference pressure
-    double m_rho0;  //!< Reference density
+    double m_r;          //!< Universal constant of the fluid
+    double m_a;          //!< Constant parameter of VDW EOS
+    double m_b;          //!< Constant parameter of VDW EOS
+    double m_gamma;      //!< Not the polytropic constant !
+    double m_cv;         //!< Capacité calorifique à volume constant
+    double m_kappa;      //!< Capillarity coefficient
+    bool m_IsKappaConst; //!< Is the capillarity coefficient constant ?
 };
 
 #endif // EOSVDW_H

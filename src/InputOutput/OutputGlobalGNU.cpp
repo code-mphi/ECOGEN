@@ -49,7 +49,7 @@ OutputGlobalGNU::OutputGlobalGNU(std::string casTest, std::string run, tinyxml2:
     m_folderOutput        = config.getWorkFolder() + "results/" + run + "/globalQuantities/";
     m_folderScriptGnuplot = "";
     m_splitData           = 0;
-    m_numFichier          = 0;
+    m_numFile             = 0;
     m_input               = entree;
     m_run                 = m_input->getRun();
     m_quantity            = 0.;

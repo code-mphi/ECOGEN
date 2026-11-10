@@ -1,0 +1,39 @@
+<?xml version='1.0' encoding='UTF-8' standalone='yes'?>
+<CI>
+  <!-- LIST OF GEOMETRICAL DOMAINS  -->
+  <physicalDomains>
+    <!-- complete domain -->
+    <domain type="entireDomain" name="base" state="lowDensity"/>
+    <!-- chamber high pressure -->
+    <domain name="hat"  state="highDensity" type="rectangle">
+      <dataRectangle axis1="x" axis2="y" lAxis1="0.4" lAxis2="1.">
+      <posInferiorVertex x="0.2" y="0." z="0."/>
+      </dataRectangle>
+    </domain>
+    <!-- <domain name="hat2"  state="highDensity" type="rectangle">
+      <dataRectangle axis1="x" axis2="y" lAxis1="0.2" lAxis2="1.">
+      <posInferiorVertex x="0.8" y="0." z="0."/>
+      </dataRectangle>
+    </domain> -->
+  </physicalDomains>
+  <!-- LIST OF BOUNDARY CONDITIONS -->
+  <boundaryConditions>
+    <boundCond name="BC_Xmin" type="periodic" number="1"/>
+    <boundCond name="BC_Xmax" type="periodic" number="2"/>
+  </boundaryConditions>
+  <!--  LIST OF STATES  -->
+  <state name="lowDensity">
+    <material type="fluid" EOS="IG_air.xml">
+      <dataFluid density="1" pressure="100000">
+        <velocity x="-1000" z="0" y="0"/>
+      </dataFluid>
+    </material>
+  </state>
+  <state name="highDensity">
+    <material type="fluid" EOS="IG_air.xml">
+      <dataFluid density="10" pressure="100000">
+        <velocity x="-1000" z="0" y="0"/>
+      </dataFluid>
+    </material>
+  </state>
+</CI>

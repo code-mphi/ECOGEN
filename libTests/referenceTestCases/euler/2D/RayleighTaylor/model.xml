@@ -2,8 +2,11 @@
 <model>
 	<flowModel name="Euler"/>
 	<EOS name="IG_heavyGas.xml"/>
-	<additionalPhysic type="viscosity"/>
+	<additionalPhysics type="viscosity"/>
     <sourceTerms type="gravity" order="EULER">
         <gravity x="0." y="-9.81" z="0."/>
     </sourceTerms>
+    <secondOrder>
+        <globalLimiter>mc</globalLimiter>
+    </secondOrder>
 </model>

@@ -2,10 +2,10 @@
   <flowModel name="PressureVelocityEq" numberPhases="2" numberTransports="1" alphaNull="false"/>
   <EOS name="SG_dodLiq.xml"/>
   <transport name="color"/>
-  <additionalPhysic type="surfaceTension" >
+  <additionalPhysics type="surfaceTension" >
 	<!-- <dataSurfaceTension transport="color" sigma="350.5"/> -->
 	<dataSurfaceTension transport="color" sigma="0.35050"/>
 	<reinitializationTransport phase="SG_dodLiq.xml"/>
-  </additionalPhysic>
+  </additionalPhysics>
   <EOS name="IG_air.xml"/>
 </model>

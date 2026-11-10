@@ -45,7 +45,7 @@ class BoundCondNullflux : public BoundCond
     void createBoundary(TypeMeshContainer<CellInterface*>& cellInterfaces) override;
     void solveRiemannBoundary(Cell& /*cellLeft*/, const double& /*dxLeft*/, double& /*dtMax*/) override;
 
-    int whoAmI() const override { return NULLFLUX; };
+    int whoAmI() const override { return TypeBC::NULLFLUX; };
 
     //For AMR method
     void creerCellInterfaceChild() override; /*!< Create a child cell interface (not initialized) */

@@ -1,0 +1,11 @@
+<?xml version='1.0' encoding='UTF-8' standalone='yes'?>
+<model>
+  <flowModel name="NonEqDEM" alphaNull="false" numberPhases="2" RiemannSolver="HLLC" contactAreas="symmetric"/>
+  <EOS name="IG_air.xml"/>
+  <EOS name="IG_helium.xml"/>
+	<!-- <secondOrder>
+		<globalLimiter>mc</globalLimiter>
+		<globalVolumeFractionLimiter>thinc</globalVolumeFractionLimiter>
+		<interfaceVolumeFractionLimiter>thinc</interfaceVolumeFractionLimiter>
+	</secondOrder> -->
+</model>

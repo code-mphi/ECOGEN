@@ -1,5 +1,8 @@
 <?xml version = "1.0" encoding = "UTF-8" standalone = "yes"?>
 <model>
-	<flowModel name="Euler" />
+	<flowModel name="Euler"/>
 	<EOS name="IG_helium.xml"/>
+	<gradient>
+		<method>green-gauss</method>
+	</gradient>
 </model>

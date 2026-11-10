@@ -85,7 +85,7 @@ void BoundCondWallO2Cartesian::allocateSlopes(int& /*allocateSlopeLocal*/)
   m_cellLeft->getMixture()->allocateAndCopyMixture(&m_mixtureSlopes);
   m_mixtureSlopes->setToZero();
 
-  //Allocation des slopes sur transports
+  //Allocation of slopes on transports
   m_vecTransportsSlopes = new Transport[numberTransports];
   for (int k = 0; k < numberTransports; k++) {
     m_vecTransportsSlopes[k].setValue(0.);
@@ -96,24 +96,24 @@ void BoundCondWallO2Cartesian::allocateSlopes(int& /*allocateSlopeLocal*/)
 
 void BoundCondWallO2Cartesian::computeSlopes(Prim type)
 {
-  //Slopes des velocities normals aux limites
+  //Slopes of velocities normal to the BC
   double distanceX, distanceY, distanceZ;
   distanceX = m_cellLeft->getElement()->distanceX(m_face);
   distanceY = m_cellLeft->getElement()->distanceY(m_face);
   distanceZ = m_cellLeft->getElement()->distanceZ(m_face);
-  if (std::fabs(distanceX) > 1.e-8) {
+  if (std::fabs(distanceX) > 1.e-12) {
     for (int k = 0; k < numberPhases; k++) {
       m_vecPhasesSlopes[k]->setU(m_cellLeft->getPhase(k, type)->getVelocity().getX() / distanceX);
     }
     m_mixtureSlopes->setU(m_cellLeft->getMixture(type)->getVelocity().getX() / distanceX);
   }
-  if (std::fabs(distanceY) > 1.e-8) {
+  if (std::fabs(distanceY) > 1.e-12) {
     for (int k = 0; k < numberPhases; k++) {
       m_vecPhasesSlopes[k]->setV(m_cellLeft->getPhase(k, type)->getVelocity().getY() / distanceY);
     }
     m_mixtureSlopes->setV(m_cellLeft->getMixture(type)->getVelocity().getY() / distanceY);
   }
-  if (std::fabs(distanceZ) > 1.e-8) {
+  if (std::fabs(distanceZ) > 1.e-12) {
     for (int k = 0; k < numberPhases; k++) {
       m_vecPhasesSlopes[k]->setW(m_cellLeft->getPhase(k, type)->getVelocity().getZ() / distanceZ);
     }
@@ -132,7 +132,7 @@ void BoundCondWallO2Cartesian::solveRiemann(double& dtMax,
 {
   bufferCellLeft->copyVec(m_cellLeft->getPhases(type), m_cellLeft->getMixture(type), m_cellLeft->getTransports(type));
 
-  //Calcul des distances cell interfaces <-> cells pour l extrapolation
+  //Computation of distance cell interface <-> cell for the extrapolation
   double distanceGauche(this->distance(m_cellLeft));
   if (m_face->getNormal().getX() < 0. || m_face->getNormal().getY() < 0. || m_face->getNormal().getZ() < 0.) {
     distanceGauche = -distanceGauche;

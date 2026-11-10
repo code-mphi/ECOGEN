@@ -4,4 +4,7 @@
   <lowMach state="false"/>
   <EOS name="SG_waterLiq_278_318K.xml"/>
   <EOS name="IG_waterVap_278_318K.xml"/>
+	<gradient>
+		<method>green-gauss</method>
+	</gradient>
 </model>

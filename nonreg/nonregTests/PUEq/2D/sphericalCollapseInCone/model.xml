@@ -6,4 +6,10 @@
     <symmetryTerm type="cylindrical">
         <dataSymCyl radialAxis="Y"/>
     </symmetryTerm>
+	<secondOrder>
+		<globalLimiter>minmod</globalLimiter>
+	</secondOrder>
+	<gradient>
+		<method>green-gauss</method>
+	</gradient>
 </model>

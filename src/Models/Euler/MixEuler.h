@@ -60,8 +60,8 @@ class MixEuler : public Mixture
     int getNumberVectors() const override { return 0; };
     double returnScalar(const int& /*numVar*/) const override { return 0.; };
     Coord returnVector(const int& /*numVar*/) const override { return 0; };
-    std::string returnNameScalar(const int& /*numVar*/) const override { return 0; };
-    std::string returnNameVector(const int& /*numVar*/) const override { return 0; };
+    std::string returnNameScalar(const int& /*numVar*/) const override { return Errors::defaultString; };
+    std::string returnNameVector(const int& /*numVar*/) const override { return Errors::defaultString; };
 
     //Specific methods for parallel computing
     //---------------------------------------

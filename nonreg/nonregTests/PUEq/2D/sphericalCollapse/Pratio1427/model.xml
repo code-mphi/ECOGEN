@@ -6,4 +6,9 @@
 	<symmetryTerm type="cylindrical">
 		<dataSymCyl radialAxis="Y"/>
 	</symmetryTerm>
+	<secondOrder>
+		<globalLimiter>mc</globalLimiter>
+		<globalVolumeFractionLimiter>thinc</globalVolumeFractionLimiter>
+    	<interfaceVolumeFractionLimiter>thinc</interfaceVolumeFractionLimiter>
+	</secondOrder>
 </model>
