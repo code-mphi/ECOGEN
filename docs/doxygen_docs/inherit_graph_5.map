@@ -1,3 +1,15 @@
 <map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
-<area shape="rect" id="Node000000" href="$classBoundCondNullFlux.html" title="Specific boundary condition which sets null fluxes (useful for 1D geometry with smooth varying cross&#45;..." alt="" coords="5,5,155,33"/>
+<area shape="rect" id="Node000000" href="$classCell.html" title="Base class for a mesh cell." alt="" coords="5,32,52,60"/>
+<area shape="rect" id="Node000001" href="$classCellGhost.html" title="Child class for a ghost mesh cell." alt="" coords="100,5,184,33"/>
+<area shape="poly" id="edge9_Node000000_Node000001" title=" " alt="" coords="66,34,101,27,97,31,68,39"/>
+<area shape="rect" id="Node000002" href="$classCellO2.html" title=" " alt="" coords="110,57,174,85"/>
+<area shape="poly" id="edge10_Node000000_Node000002" title=" " alt="" coords="67,52,112,63,107,65,67,57"/>
+<area shape="rect" id="Node000003" href="$classCellO2Cartesian.html" title=" " alt="" coords="232,31,358,58"/>
+<area shape="poly" id="edge11_Node000002_Node000003" title=" " alt="" coords="189,60,234,55,229,56,190,66"/>
+<area shape="rect" id="Node000005" href="$classCellO2NS.html" title=" " alt="" coords="254,83,336,110"/>
+<area shape="poly" id="edge13_Node000002_Node000005" title=" " alt="" coords="189,76,256,89,251,90,189,82"/>
+<area shape="rect" id="Node000004" href="$classCellO2GhostCartesian.html" title=" " alt="" coords="406,31,571,58"/>
+<area shape="poly" id="edge12_Node000003_Node000004" title=" " alt="" coords="374,42,409,44,403,45,374,47"/>
+<area shape="rect" id="Node000006" href="$classCellO2GhostNS.html" title=" " alt="" coords="428,83,549,110"/>
+<area shape="poly" id="edge14_Node000005_Node000006" title=" " alt="" coords="352,94,431,96,425,97,352,99"/>
 </map>

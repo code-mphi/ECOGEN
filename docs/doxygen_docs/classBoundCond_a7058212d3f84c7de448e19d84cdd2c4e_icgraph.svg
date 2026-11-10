@@ -190,10 +190,10 @@
 <!-- Node17 -->
 <g id="Node000017" class="node">
 <title>Node17</title>
-<g id="a_Node000017"><a xlink:href="classBoundCondNullflux.html#acab4911daf16c950b3f8c9ce0d09ac8b" target="_top" xlink:title=" ">
-<polygon fill="white" stroke="#666666" points="811.75,-1108.5 696.75,-1108.5 696.75,-1075 811.75,-1075 811.75,-1108.5"/>
-<text xml:space="preserve" text-anchor="start" x="704.75" y="-1095" font-family="Helvetica,sans-Serif" font-size="10.00">BoundCondNullflux::</text>
-<text xml:space="preserve" text-anchor="middle" x="754.25" y="-1082.25" font-family="Helvetica,sans-Serif" font-size="10.00">BoundCondNullflux</text>
+<g id="a_Node000017"><a xlink:href="classBoundCondNullFlux.html#af91d8cafcb9ec4f9fe52f70f3c8cbb18" target="_top" xlink:title=" ">
+<polygon fill="white" stroke="#666666" points="813.25,-1108.5 695.25,-1108.5 695.25,-1075 813.25,-1075 813.25,-1108.5"/>
+<text xml:space="preserve" text-anchor="start" x="703.25" y="-1095" font-family="Helvetica,sans-Serif" font-size="10.00">BoundCondNullFlux::</text>
+<text xml:space="preserve" text-anchor="middle" x="754.25" y="-1082.25" font-family="Helvetica,sans-Serif" font-size="10.00">BoundCondNullFlux</text>
 </a>
 </g>
 </g>
@@ -201,7 +201,7 @@
 <g id="edge19_Node000001_Node000017" class="edge">
 <title>Node1&#45;&gt;Node17</title>
 <g id="a_edge19_Node000001_Node000017"><a xlink:title=" ">
-<path fill="none" stroke="#63b8ff" d="M866.1,-1076.42C848.07,-1078.91 829.18,-1081.53 812.21,-1083.87"/>
+<path fill="none" stroke="#63b8ff" d="M866.33,-1076.39C848.67,-1078.83 830.17,-1081.39 813.44,-1083.7"/>
 <polygon fill="#63b8ff" stroke="#63b8ff" points="866.57,-1079.89 876,-1075.05 865.61,-1072.95 866.57,-1079.89"/>
 </a>
 </g>
@@ -209,10 +209,10 @@
 <!-- Node20 -->
 <g id="Node000020" class="node">
 <title>Node20</title>
-<g id="a_Node000020"><a xlink:href="classBoundCondNullflux.html#a063939d3a2fbff70fbd11245e922c364" target="_top" xlink:title=" ">
-<polygon fill="white" stroke="#666666" points="811.75,-1056.5 696.75,-1056.5 696.75,-1023 811.75,-1023 811.75,-1056.5"/>
-<text xml:space="preserve" text-anchor="start" x="704.75" y="-1043" font-family="Helvetica,sans-Serif" font-size="10.00">BoundCondNullflux::</text>
-<text xml:space="preserve" text-anchor="middle" x="754.25" y="-1030.25" font-family="Helvetica,sans-Serif" font-size="10.00">BoundCondNullflux</text>
+<g id="a_Node000020"><a xlink:href="classBoundCondNullFlux.html#aceca49095b4ea3d4e781ab565f0818ff" target="_top" xlink:title=" ">
+<polygon fill="white" stroke="#666666" points="813.25,-1056.5 695.25,-1056.5 695.25,-1023 813.25,-1023 813.25,-1056.5"/>
+<text xml:space="preserve" text-anchor="start" x="703.25" y="-1043" font-family="Helvetica,sans-Serif" font-size="10.00">BoundCondNullFlux::</text>
+<text xml:space="preserve" text-anchor="middle" x="754.25" y="-1030.25" font-family="Helvetica,sans-Serif" font-size="10.00">BoundCondNullFlux</text>
 </a>
 </g>
 </g>
@@ -220,7 +220,7 @@
 <g id="edge23_Node000001_Node000020" class="edge">
 <title>Node1&#45;&gt;Node20</title>
 <g id="a_edge23_Node000001_Node000020"><a xlink:title=" ">
-<path fill="none" stroke="#63b8ff" d="M866.1,-1055.08C848.07,-1052.59 829.18,-1049.97 812.21,-1047.63"/>
+<path fill="none" stroke="#63b8ff" d="M866.33,-1055.11C848.67,-1052.67 830.17,-1050.11 813.44,-1047.8"/>
 <polygon fill="#63b8ff" stroke="#63b8ff" points="865.61,-1058.55 876,-1056.45 866.57,-1051.61 865.61,-1058.55"/>
 </a>
 </g>
@@ -546,9 +546,9 @@
 <!-- Node18 -->
 <g id="Node000018" class="node">
 <title>Node18</title>
-<g id="a_Node000018"><a xlink:href="classBoundCondNullflux.html#aef3cf02d9a577e952083b1e6ba885794" target="_top" xlink:title=" ">
-<polygon fill="white" stroke="#666666" points="600.38,-1148.5 485.38,-1148.5 485.38,-1115 600.38,-1115 600.38,-1148.5"/>
-<text xml:space="preserve" text-anchor="start" x="493.38" y="-1135" font-family="Helvetica,sans-Serif" font-size="10.00">BoundCondNullflux::</text>
+<g id="a_Node000018"><a xlink:href="classBoundCondNullFlux.html#a9d30f8d66264851a773d5263a5fced91" target="_top" xlink:title=" ">
+<polygon fill="white" stroke="#666666" points="601.88,-1148.5 483.88,-1148.5 483.88,-1115 601.88,-1115 601.88,-1148.5"/>
+<text xml:space="preserve" text-anchor="start" x="491.88" y="-1135" font-family="Helvetica,sans-Serif" font-size="10.00">BoundCondNullFlux::</text>
 <text xml:space="preserve" text-anchor="middle" x="542.88" y="-1122.25" font-family="Helvetica,sans-Serif" font-size="10.00">createBoundary</text>
 </a>
 </g>
@@ -557,17 +557,17 @@
 <g id="edge21_Node000017_Node000018" class="edge">
 <title>Node17&#45;&gt;Node18</title>
 <g id="a_edge21_Node000017_Node000018"><a xlink:title=" ">
-<path fill="none" stroke="#63b8ff" d="M685.27,-1104.74C657.98,-1109.95 626.87,-1115.89 600.8,-1120.87"/>
-<polygon fill="#63b8ff" stroke="#63b8ff" points="685.66,-1108.23 694.83,-1102.91 684.35,-1101.35 685.66,-1108.23"/>
+<path fill="none" stroke="#63b8ff" d="M683.83,-1105.01C657.39,-1110.06 627.56,-1115.76 602.25,-1120.6"/>
+<polygon fill="#63b8ff" stroke="#63b8ff" points="684.28,-1108.49 693.44,-1103.18 682.96,-1101.62 684.28,-1108.49"/>
 </a>
 </g>
 </g>
 <!-- Node19 -->
 <g id="Node000019" class="node">
 <title>Node19</title>
-<g id="a_Node000019"><a xlink:href="classBoundCondNullflux.html#a5c47fb7f5e8baaffdf1c080ad44876ce" target="_top" xlink:title=" ">
+<g id="a_Node000019"><a xlink:href="classBoundCondNullFlux.html#ab2f04607a1c4b2cc107d32e5dc7d17c4" target="_top" xlink:title=" ">
 <polygon fill="white" stroke="#666666" points="606.75,-1096.5 479,-1096.5 479,-1063 606.75,-1063 606.75,-1096.5"/>
-<text xml:space="preserve" text-anchor="start" x="487" y="-1083" font-family="Helvetica,sans-Serif" font-size="10.00">BoundCondNullflux::</text>
+<text xml:space="preserve" text-anchor="start" x="487" y="-1083" font-family="Helvetica,sans-Serif" font-size="10.00">BoundCondNullFlux::</text>
 <text xml:space="preserve" text-anchor="middle" x="542.88" y="-1070.25" font-family="Helvetica,sans-Serif" font-size="10.00">creerCellInterfaceChild</text>
 </a>
 </g>
@@ -576,8 +576,8 @@
 <g id="edge22_Node000017_Node000019" class="edge">
 <title>Node17&#45;&gt;Node19</title>
 <g id="a_edge22_Node000017_Node000019"><a xlink:title=" ">
-<path fill="none" stroke="#63b8ff" d="M685.04,-1087.84C659.96,-1086.4 631.68,-1084.78 607.06,-1083.37"/>
-<polygon fill="#63b8ff" stroke="#63b8ff" points="684.62,-1091.32 694.8,-1088.4 685.02,-1084.33 684.62,-1091.32"/>
+<path fill="none" stroke="#63b8ff" d="M683.44,-1087.75C658.75,-1086.33 631.13,-1084.75 607.02,-1083.37"/>
+<polygon fill="#63b8ff" stroke="#63b8ff" points="683.23,-1091.24 693.42,-1088.32 683.63,-1084.25 683.23,-1091.24"/>
 </a>
 </g>
 </g>

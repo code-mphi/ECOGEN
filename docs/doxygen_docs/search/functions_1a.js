@@ -17,7 +17,7 @@ var searchData=
   ['_7eboundcondmovingwallo2cartesian_14',['~BoundCondMovingWallO2Cartesian',['../classBoundCondMovingWallO2Cartesian.html#a9d4e35e91ca884223ccd9281febd8772',1,'BoundCondMovingWallO2Cartesian']]],
   ['_7eboundcondmovingwallo2ns_15',['~BoundCondMovingWallO2NS',['../classBoundCondMovingWallO2NS.html#a3eb12a0842413b097c928c15a5c937ac',1,'BoundCondMovingWallO2NS']]],
   ['_7eboundcondnonreflecting_16',['~BoundCondNonReflecting',['../classBoundCondNonReflecting.html#aec7d8efaef8263a739de78e7db35f8d7',1,'BoundCondNonReflecting']]],
-  ['_7eboundcondnullflux_17',['~BoundCondNullflux',['../classBoundCondNullflux.html#ab94d4f874651e76808829cbfc7eb543f',1,'BoundCondNullflux']]],
+  ['_7eboundcondnullflux_17',['~BoundCondNullFlux',['../classBoundCondNullFlux.html#a7ad1e49cb7cb9ebd4eb09b3abb723927',1,'BoundCondNullFlux']]],
   ['_7eboundcondoutletmassflow_18',['~BoundCondOutletMassflow',['../classBoundCondOutletMassflow.html#a97528574ae5c828200329702e4fed33f',1,'BoundCondOutletMassflow']]],
   ['_7eboundcondoutletpressure_19',['~BoundCondOutletPressure',['../classBoundCondOutletPressure.html#ad7fb66703a93025caa4cd2668f957134',1,'BoundCondOutletPressure']]],
   ['_7eboundcondperiodic_20',['~BoundCondPeriodic',['../classBoundCondPeriodic.html#a570b2426a57de07893cf6cb0d339837c',1,'BoundCondPeriodic']]],

@@ -1,3 +1,41 @@
 <map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
-<area shape="rect" id="Node000000" href="$classSourceGravity.html" title="Class for gravity source terms." alt="" coords="5,5,119,33"/>
+<area shape="rect" id="Node000000" title=" " alt="" coords="5,319,119,346"/>
+<area shape="rect" id="Node000001" href="$classErrorECOGEN.html" title=" " alt="" coords="167,319,274,346"/>
+<area shape="poly" id="edge170_Node000000_Node000001" title=" " alt="" coords="133,330,168,331,164,334,136,335"/>
+<area shape="rect" id="Node000002" href="$classErrorInput.html" title=" " alt="" coords="322,319,407,346"/>
+<area shape="poly" id="edge171_Node000001_Node000002" title=" " alt="" coords="289,330,324,331,319,334,291,335"/>
+<area shape="rect" id="Node000003" href="$classErrorMeshNS.html" title=" " alt="" coords="455,292,561,320"/>
+<area shape="poly" id="edge172_Node000002_Node000003" title=" " alt="" coords="422,319,457,314,452,317,424,324"/>
+<area shape="rect" id="Node000004" href="$classErrorXML.html" title=" " alt="" coords="468,344,548,372"/>
+<area shape="poly" id="edge173_Node000002_Node000004" title=" " alt="" coords="422,340,470,350,465,352,423,345"/>
+<area shape="rect" id="Node000005" href="$classErrorXMLAttribut.html" title=" " alt="" coords="651,5,782,33"/>
+<area shape="poly" id="edge174_Node000004_Node000005" title=" " alt="" coords="557,332,558,330,578,292,585,256,583,220,578,185,572,150,572,115,582,80,607,44,627,29,653,22,649,25,629,34,611,48,587,82,578,116,578,150,583,185,589,220,590,256,583,294,563,333,560,336"/>
+<area shape="rect" id="Node000006" href="$classErrorXMLBoundCondUnknown.html" title=" " alt="" coords="609,57,824,85"/>
+<area shape="poly" id="edge175_Node000004_Node000006" title=" " alt="" coords="557,332,558,330,576,299,582,270,582,241,578,212,575,183,577,154,586,125,607,96,627,84,623,87,611,100,591,128,582,155,581,183,584,211,587,240,587,270,581,301,563,333,560,336"/>
+<area shape="rect" id="Node000007" href="$classErrorXMLDev.html" title=" " alt="" coords="663,109,770,137"/>
+<area shape="poly" id="edge176_Node000004_Node000007" title=" " alt="" coords="556,332,559,330,573,306,579,283,579,238,578,216,581,193,589,170,607,148,633,131,665,124,660,127,635,136,610,152,594,173,586,194,584,216,585,238,584,284,578,308,563,333,560,336"/>
+<area shape="rect" id="Node000008" href="$classErrorXMLDomaineUnknown.html" title=" " alt="" coords="616,161,816,189"/>
+<area shape="poly" id="edge177_Node000004_Node000008" title=" " alt="" coords="556,333,559,329,570,313,576,297,580,264,585,232,593,216,607,200,629,188,625,191,610,204,597,219,590,234,585,265,581,298,575,315,563,333,559,337"/>
+<area shape="rect" id="Node000009" href="$classErrorXMLEOS.html" title=" " alt="" coords="663,213,770,241"/>
+<area shape="poly" id="edge178_Node000004_Node000009" title=" " alt="" coords="554,333,559,329,574,310,581,290,589,271,607,252,634,238,665,231,660,233,636,243,610,256,594,274,586,292,578,312,563,333,557,338"/>
+<area shape="rect" id="Node000010" href="$classErrorXMLEOSUnknown.html" title=" " alt="" coords="633,265,800,293"/>
+<area shape="poly" id="edge179_Node000004_Node000010" title=" " alt="" coords="549,334,559,329,583,315,608,303,650,292,645,295,610,308,585,320,562,334,552,339"/>
+<area shape="rect" id="Node000011" href="$classErrorXMLElement.html" title=" " alt="" coords="649,317,784,345"/>
+<area shape="poly" id="edge180_Node000004_Node000011" title=" " alt="" coords="563,348,651,339,646,341,564,353"/>
+<area shape="rect" id="Node000012" href="$classErrorXMLEtat.html" title=" " alt="" coords="663,369,770,397"/>
+<area shape="poly" id="edge181_Node000004_Node000012" title=" " alt="" coords="563,362,665,376,660,377,564,367"/>
+<area shape="rect" id="Node000013" href="$classErrorXMLLimite.html" title=" " alt="" coords="656,421,777,449"/>
+<area shape="poly" id="edge182_Node000004_Node000013" title=" " alt="" coords="547,377,610,406,658,422,653,423,608,411,546,382"/>
+<area shape="rect" id="Node000014" href="$classErrorXMLMaterialUnknown.html" title=" " alt="" coords="619,473,814,501"/>
+<area shape="poly" id="edge183_Node000004_Node000014" title=" " alt="" coords="528,381,564,422,586,442,610,458,639,473,634,473,607,463,583,446,561,426,527,387"/>
+<area shape="rect" id="Node000015" href="$classErrorXMLMessage.html" title=" " alt="" coords="647,525,786,553"/>
+<area shape="poly" id="edge184_Node000004_Node000015" title=" " alt="" coords="521,384,555,449,580,482,610,510,650,530,644,530,607,515,576,486,551,452,519,389"/>
+<area shape="rect" id="Node000017" href="$classErrorXMLRacine.html" title=" " alt="" coords="654,577,778,605"/>
+<area shape="poly" id="edge186_Node000004_Node000017" title=" " alt="" coords="516,384,529,426,547,474,574,522,591,544,610,562,631,575,657,585,651,585,629,580,607,567,587,547,569,525,542,476,523,428,514,389"/>
+<area shape="rect" id="Node000018" href="$classErrorXMLRelaxation.html" title=" " alt="" coords="641,629,792,657"/>
+<area shape="poly" id="edge187_Node000004_Node000018" title=" " alt="" coords="513,385,523,437,539,498,568,561,587,590,610,614,643,635,638,634,607,619,583,593,563,564,534,500,517,438,511,390"/>
+<area shape="rect" id="Node000019" href="$classErrorXMLTermeSource.html" title=" " alt="" coords="635,681,798,709"/>
+<area shape="poly" id="edge188_Node000004_Node000019" title=" " alt="" coords="511,385,517,446,532,522,545,561,562,600,583,635,610,666,637,685,632,684,607,671,579,639,557,602,540,563,527,523,512,447,508,389"/>
+<area shape="rect" id="Node000016" href="$classErrorXMLStretching.html" title=" " alt="" coords="872,525,1018,553"/>
+<area shape="poly" id="edge185_Node000015_Node000016" title=" " alt="" coords="801,537,874,539,869,539,801,542"/>
 </map>

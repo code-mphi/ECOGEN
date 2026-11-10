@@ -17,7 +17,6 @@ var hierarchy =
     ] ],
     [ "APUEqTurbulence", "classAPUEqTurbulence.html", null ],
     [ "tinyxml2::MemPoolT&lt; SIZE &gt;::Block", "structtinyxml2_1_1MemPoolT_1_1Block.html", null ],
-    [ "BoundCondNullFlux", "classBoundCondNullFlux.html", null ],
     [ "Cell", "classCell.html", [
       [ "CellGhost", "classCellGhost.html", null ],
       [ "CellO2", "classCellO2.html", [
@@ -35,7 +34,7 @@ var hierarchy =
         [ "BoundCondInletInjTemp", "classBoundCondInletInjTemp.html", null ],
         [ "BoundCondInletTank", "classBoundCondInletTank.html", null ],
         [ "BoundCondNonReflecting", "classBoundCondNonReflecting.html", null ],
-        [ "BoundCondNullflux", "classBoundCondNullflux.html", null ],
+        [ "BoundCondNullFlux", "classBoundCondNullFlux.html", null ],
         [ "BoundCondOutletMassflow", "classBoundCondOutletMassflow.html", null ],
         [ "BoundCondOutletPressure", "classBoundCondOutletPressure.html", null ],
         [ "BoundCondPeriodic", "classBoundCondPeriodic.html", [

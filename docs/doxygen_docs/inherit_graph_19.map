@@ -1,29 +1,23 @@
 <map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
-<area shape="rect" id="Node000000" href="$classFlux.html" title="Abstract class for conservative variables and fluxes." alt="" coords="5,177,55,205"/>
-<area shape="rect" id="Node000001" href="$classFluxEuler.html" title="Model class for Euler Flux (single phase)." alt="" coords="160,5,242,33"/>
-<area shape="poly" id="edge61_Node000000_Node000001" title=" " alt="" coords="35,161,58,102,76,70,101,44,129,28,161,21,157,24,131,33,104,48,81,74,63,104,41,163"/>
-<area shape="rect" id="Node000002" href="$classFluxEulerHomogeneous.html" title="Model class for Homogeneous Euler Flux (liquid&#45;vapor in thermodynamical equilibrium)." alt="" coords="113,57,289,85"/>
-<area shape="poly" id="edge62_Node000000_Node000002" title=" " alt="" coords="43,162,67,127,101,94,126,84,122,88,104,99,71,130,48,165"/>
-<area shape="rect" id="Node000003" href="$classFluxExtendedNavierStokesKorteweg1D.html" title="Model class for Extended Navier&#45;Stokes&#45;Korteweg Flux (single phase)." alt="" coords="103,109,299,154"/>
-<area shape="poly" id="edge63_Node000000_Node000003" title=" " alt="" coords="68,175,137,152,134,156,71,180"/>
-<area shape="rect" id="Node000004" href="$classFluxNEq.html" title="Flux class for the non&#45;equilibrium system of equations." alt="" coords="163,177,238,205"/>
-<area shape="poly" id="edge64_Node000000_Node000004" title=" " alt="" coords="69,189,165,189,161,193,71,194"/>
-<area shape="rect" id="Node000010" href="$classFluxPTUEq.html" title="Flux class for pressure&#45;temperature&#45;velocity (mechanical and thermal equilibrium) system of equations..." alt="" coords="155,229,246,257"/>
-<area shape="poly" id="edge70_Node000000_Node000010" title=" " alt="" coords="69,203,103,214,157,230,153,233,102,219,70,208"/>
-<area shape="rect" id="Node000011" href="$classFluxUEq.html" title="Flux class for the velocity&#45;equilibrium system of equations." alt="" coords="163,281,238,309"/>
-<area shape="poly" id="edge71_Node000000_Node000011" title=" " alt="" coords="49,215,75,242,104,266,133,279,165,289,160,291,131,284,101,271,71,246,49,220"/>
-<area shape="rect" id="Node000013" href="$classFluxUEqTotEnergy.html" title="Flux class for the velocity&#45;equilibrium system of equations." alt="" coords="131,333,270,361"/>
-<area shape="poly" id="edge73_Node000000_Node000013" title=" " alt="" coords="41,218,65,271,83,296,104,318,133,335,128,336,101,323,78,300,61,273,39,223"/>
-<area shape="rect" id="Node000005" href="$classFluxNEqDEM.html" title="Flux class for the non&#45;equilibrium system of equations using the DEM." alt="" coords="374,48,479,76"/>
-<area shape="poly" id="edge65_Node000004_Node000005" title=" " alt="" coords="253,183,276,175,297,164,314,146,321,127,328,106,345,86,376,72,371,75,349,91,333,109,326,129,318,149,301,168,278,180,255,188"/>
-<area shape="rect" id="Node000006" href="$classFluxNEqHLL.html" title="Flux class for the non&#45;equilibrium system of equations using HLL." alt="" coords="377,100,476,128"/>
-<area shape="poly" id="edge66_Node000004_Node000006" title=" " alt="" coords="253,178,298,163,322,151,346,138,381,127,377,130,348,143,324,156,300,168,255,182"/>
-<area shape="rect" id="Node000007" href="$classFluxNEqHLLAC.html" title="Flux class for the non&#45;equilibrium system of equations using HLLAC solver (Lochon et al...." alt="" coords="368,152,486,180"/>
-<area shape="poly" id="edge67_Node000004_Node000007" title=" " alt="" coords="254,183,369,171,365,174,255,188"/>
-<area shape="rect" id="Node000008" href="$classFluxNEqHLLBN.html" title="Flux class for the non&#45;equilibrium system of equations using HLLBN solver (Lochon et al...." alt="" coords="368,204,486,232"/>
-<area shape="poly" id="edge68_Node000004_Node000008" title=" " alt="" coords="254,195,369,210,365,212,254,200"/>
-<area shape="rect" id="Node000009" href="$classFluxNEqHLLC4Waves.html" title="Flux class for the non&#45;equilibrium system of equations using HLLC 4&#45;Waves solver (Furfaro &amp; Saurel,..." alt="" coords="347,256,506,284"/>
-<area shape="poly" id="edge69_Node000004_Node000009" title=" " alt="" coords="254,201,300,215,348,241,382,255,376,255,346,246,298,220,254,206"/>
-<area shape="rect" id="Node000012" href="$classFluxPUEq.html" title="Flux class for the pressure&#45;velocity&#45;equilibrium (mechanical equilibrium) system of equations (Kapila..." alt="" coords="385,308,468,336"/>
-<area shape="poly" id="edge72_Node000011_Node000012" title=" " alt="" coords="254,299,387,316,382,318,254,304"/>
+<area shape="rect" id="Node000000" href="$classGeometricalDomain.html" title="General class for geometrical domain." alt="" coords="5,240,158,268"/>
+<area shape="rect" id="Node000001" href="$classGDCuboid.html" title="Class describing a cuboid geometrical domain." alt="" coords="287,5,374,33"/>
+<area shape="poly" id="edge74_Node000000_Node000001" title=" " alt="" coords="89,224,104,183,128,134,161,85,181,63,204,44,224,33,245,25,289,18,285,22,246,30,226,37,207,48,185,67,165,88,133,137,109,186,94,226"/>
+<area shape="rect" id="Node000002" href="$classGDCylinder.html" title="Class describing a cylinder geometrical domain." alt="" coords="283,57,378,85"/>
+<area shape="poly" id="edge75_Node000000_Node000002" title=" " alt="" coords="95,225,137,159,168,124,204,96,243,79,284,72,280,75,244,84,207,100,172,128,142,162,99,227"/>
+<area shape="rect" id="Node000003" href="$classGDDisc.html" title="Class describing a disc geometrical domain." alt="" coords="296,109,365,137"/>
+<area shape="poly" id="edge76_Node000000_Node000003" title=" " alt="" coords="103,227,147,186,175,165,205,147,251,131,297,124,293,128,252,136,207,152,178,169,151,190,107,230"/>
+<area shape="rect" id="Node000004" href="$classGDEllipse.html" title="Class describing a 2D ellipse geometrical domain." alt="" coords="288,161,372,189"/>
+<area shape="poly" id="edge77_Node000000_Node000004" title=" " alt="" coords="125,231,205,199,290,180,286,184,206,204,128,235"/>
+<area shape="rect" id="Node000005" href="$classGDEllipsoid.html" title="Class describing a 3D ellipsoid geometrical domain." alt="" coords="282,213,378,241"/>
+<area shape="poly" id="edge78_Node000000_Node000005" title=" " alt="" coords="172,242,284,231,280,234,174,247"/>
+<area shape="rect" id="Node000006" href="$classGDEntireDomain.html" title="Class describing geometrical domain for the entire geometry." alt="" coords="265,265,396,293"/>
+<area shape="poly" id="edge79_Node000000_Node000006" title=" " alt="" coords="173,261,267,271,262,274,174,266"/>
+<area shape="rect" id="Node000007" href="$classGDEntireDomainWithParticularities.html" title="Class describing geometrical domain for the entire geometry with particularities involved...." alt="" coords="206,317,455,345"/>
+<area shape="poly" id="edge80_Node000000_Node000007" title=" " alt="" coords="127,272,206,302,255,316,250,318,205,307,127,277"/>
+<area shape="rect" id="Node000008" href="$classGDHalfSpace.html" title="Class describing a half space geometrical domain." alt="" coords="277,369,384,397"/>
+<area shape="poly" id="edge81_Node000000_Node000008" title=" " alt="" coords="106,276,151,317,178,337,207,354,241,367,279,377,274,378,240,372,205,359,175,342,148,321,106,282"/>
+<area shape="rect" id="Node000009" href="$classGDRectangle.html" title="Class describing a rectangle geometrical domain." alt="" coords="277,421,384,449"/>
+<area shape="poly" id="edge82_Node000000_Node000009" title=" " alt="" coords="98,279,142,345,172,378,207,406,241,421,279,432,274,432,240,426,204,411,168,382,137,348,96,284"/>
+<area shape="rect" id="Node000010" href="$classGDSphere.html" title="Class describing a sphere geometrical domain." alt="" coords="287,473,374,501"/>
+<area shape="poly" id="edge83_Node000000_Node000010" title=" " alt="" coords="92,280,109,322,133,370,166,418,185,440,207,458,226,469,246,476,289,486,284,486,245,481,224,474,204,463,182,444,161,422,128,373,104,324,91,285"/>
 </map>

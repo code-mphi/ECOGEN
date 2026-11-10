@@ -1,9 +1,7 @@
 <map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
-<area shape="rect" id="Node000000" href="$classGeometricObject.html" title="Abstract class for geometric object." alt="" coords="5,57,137,85"/>
-<area shape="rect" id="Node000001" href="$classGOLine.html" title="Class for a line geometric object." alt="" coords="192,5,260,33"/>
-<area shape="poly" id="edge84_Node000000_Node000001" title=" " alt="" coords="128,49,194,29,190,32,130,54"/>
-<area shape="rect" id="Node000002" href="$classGOPlan.html" title="Class for a plan geometric object." alt="" coords="192,57,261,85"/>
-<area shape="poly" id="edge85_Node000000_Node000002" title=" " alt="" coords="152,69,194,70,189,72,152,74"/>
-<area shape="rect" id="Node000003" href="$classGOVertex.html" title="Class for a vertex geometric object." alt="" coords="185,109,268,137"/>
-<area shape="poly" id="edge86_Node000000_Node000003" title=" " alt="" coords="130,88,187,109,182,110,129,93"/>
+<area shape="rect" id="Node000000" href="$classGradient.html" title="Base class for the gradient method." alt="" coords="5,32,83,60"/>
+<area shape="rect" id="Node000001" href="$classGradientFiniteDifference.html" title="Class for the finite difference like gradient method (only working on Cartesian mesh with/without AMR..." alt="" coords="131,5,311,33"/>
+<area shape="poly" id="edge87_Node000000_Node000001" title=" " alt="" coords="97,35,133,32,128,34,99,40"/>
+<area shape="rect" id="Node000002" href="$classGradientGreenGauss.html" title="Class for the Green&#45;Gauss gradient method working on all mesh types." alt="" coords="143,57,299,85"/>
+<area shape="poly" id="edge88_Node000000_Node000002" title=" " alt="" coords="98,51,145,59,139,61,98,56"/>
 </map>

@@ -1,4 +1,4 @@
 var BoundCondNullFlux_8h =
 [
-    [ "BoundCondNullflux", "classBoundCondNullflux.html", "classBoundCondNullflux" ]
+    [ "BoundCondNullFlux", "classBoundCondNullFlux.html", "classBoundCondNullFlux" ]
 ];

@@ -1,27 +1,3 @@
 <map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
-<area shape="rect" id="Node000000" href="$classModel.html" title="Abstract class for mathematical flow models." alt="" coords="5,161,67,189"/>
-<area shape="rect" id="Node000001" href="$classModEuler.html" title="Model class for Euler mathematical system of equations (single phase)." alt="" coords="211,5,294,33"/>
-<area shape="poly" id="edge120_Node000000_Node000001" title=" " alt="" coords="44,145,69,93,89,66,113,44,136,31,162,23,213,17,209,20,163,28,138,36,116,48,93,69,74,95,49,147"/>
-<area shape="rect" id="Node000002" href="$classModEulerHomogeneous.html" title="Model class for Homogeneous Euler mathematical system of equations (velocity and thermodynamical equi..." alt="" coords="164,57,340,85"/>
-<area shape="poly" id="edge121_Node000000_Node000002" title=" " alt="" coords="54,148,80,120,113,95,165,78,162,82,116,100,84,124,58,151"/>
-<area shape="rect" id="Node000003" href="$classModExtendedNavierStokesKorteweg1D.html" title="Model class for Extended Navier&#45;Stokes&#45;Korteweg mathematical system of equations (single phase)." alt="" coords="115,109,390,137"/>
-<area shape="poly" id="edge122_Node000000_Node000003" title=" " alt="" coords="80,157,114,147,170,136,166,139,115,152,83,162"/>
-<area shape="rect" id="Node000004" href="$classModNEq.html" title="Model class for the non&#45;equilibrium system of equations." alt="" coords="215,161,290,189"/>
-<area shape="poly" id="edge123_Node000000_Node000004" title=" " alt="" coords="82,173,216,173,212,177,83,178"/>
-<area shape="rect" id="Node000009" href="$classModPTUEq.html" title="Model class for pressure&#45;temperature&#45;velocity (mechanical and thermal equilibrium) system of equation..." alt="" coords="207,213,298,241"/>
-<area shape="poly" id="edge128_Node000000_Node000009" title=" " alt="" coords="81,188,115,198,209,218,204,221,114,203,82,193"/>
-<area shape="rect" id="Node000010" href="$classModUEq.html" title="Model class for the velocity&#45;equilibrium system of equations." alt="" coords="215,265,290,293"/>
-<area shape="poly" id="edge129_Node000000_Node000010" title=" " alt="" coords="56,198,84,226,116,250,166,268,217,277,212,278,165,273,113,255,80,230,56,203"/>
-<area shape="rect" id="Node000012" href="$classModUEqTotEnergy.html" title=" " alt="" coords="183,317,322,345"/>
-<area shape="poly" id="edge131_Node000000_Node000012" title=" " alt="" coords="48,201,74,255,93,281,116,302,148,318,185,329,179,329,146,323,113,307,89,284,69,258,46,206"/>
-<area shape="rect" id="Node000005" href="$classModNEqDEM.html" title="Model class for the non&#45;equilibrium system of equations using the DEM." alt="" coords="465,57,570,85"/>
-<area shape="poly" id="edge124_Node000004_Node000005" title=" " alt="" coords="305,170,347,162,389,146,403,135,412,122,421,109,437,96,467,84,462,86,439,100,425,112,417,125,407,138,391,151,349,167,306,175"/>
-<area shape="rect" id="Node000006" href="$classModNEqHLL.html" title="Model class for the non&#45;equilibrium system of equations using the HLL." alt="" coords="468,109,567,137"/>
-<area shape="poly" id="edge125_Node000004_Node000006" title=" " alt="" coords="304,163,389,146,470,132,465,134,391,151,306,168"/>
-<area shape="rect" id="Node000007" href="$classModNEqHLLAC.html" title="Model class for the non&#45;equilibrium system of equations using the HLLAC (Lochon et al...." alt="" coords="458,161,577,189"/>
-<area shape="poly" id="edge126_Node000004_Node000007" title=" " alt="" coords="305,173,460,174,455,176,306,178"/>
-<area shape="rect" id="Node000008" href="$classModNEqHLLC4Waves.html" title="Model class for the non&#45;equilibrium system of equations using the HLLC with 4 waves (Furfaro &amp; Saurel..." alt="" coords="438,213,597,241"/>
-<area shape="poly" id="edge127_Node000004_Node000008" title=" " alt="" coords="305,183,391,199,448,212,442,213,389,204,305,188"/>
-<area shape="rect" id="Node000011" href="$classModPUEq.html" title="Model class for the pressure&#45;velocity&#45;equilibrium (mechanical equilibrium) system of equations (Kapil..." alt="" coords="476,265,559,293"/>
-<area shape="poly" id="edge130_Node000010_Node000011" title=" " alt="" coords="305,277,478,279,473,280,306,282"/>
+<area shape="rect" id="Node000000" href="$classModUEqTotEnergyTotEnergy.html" title="Model class for the velocity&#45;equilibrium system of equations." alt="" coords="5,5,209,33"/>
 </map>

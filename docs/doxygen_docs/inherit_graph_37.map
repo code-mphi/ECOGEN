@@ -1,19 +1,11 @@
 <map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
-<area shape="rect" id="Node000000" href="$classPhase.html" title="Abstract class for a phase." alt="" coords="5,177,66,205"/>
-<area shape="rect" id="Node000001" href="$classPhaseEuler.html" title="Phase variables for Euler equations (single phase)." alt="" coords="171,5,264,33"/>
-<area shape="poly" id="edge141_Node000000_Node000001" title=" " alt="" coords="42,161,66,102,86,70,112,44,140,29,172,21,168,25,142,33,115,48,90,74,71,104,47,163"/>
-<area shape="rect" id="Node000002" href="$classPhaseEulerHomogeneous.html" title="Phase variables for Euler Homogeneous equations (velocity and thermodynamical equilibrium)." alt="" coords="124,57,311,85"/>
-<area shape="poly" id="edge142_Node000000_Node000002" title=" " alt="" coords="50,163,76,127,112,94,137,84,134,88,115,99,80,130,54,165"/>
-<area shape="rect" id="Node000003" href="$classPhaseExtendedNavierStokesKorteweg1D.html" title="Phase variables for Extended Navier&#45;Stokes&#45;Korteweg equations (single phase)." alt="" coords="114,109,321,154"/>
-<area shape="poly" id="edge143_Node000000_Node000003" title=" " alt="" coords="79,174,149,152,146,156,82,179"/>
-<area shape="rect" id="Node000004" href="$classPhaseNEq.html" title="Phase variables for the non&#45;equilibrium system of equations." alt="" coords="174,177,260,205"/>
-<area shape="poly" id="edge144_Node000000_Node000004" title=" " alt="" coords="80,189,176,189,172,193,82,194"/>
-<area shape="rect" id="Node000005" href="$classPhasePTUEq.html" title="Phase variables for pressure&#45;temperature&#45;velocity (mechanical and thermal equilibrium) system of equa..." alt="" coords="166,229,268,257"/>
-<area shape="poly" id="edge145_Node000000_Node000005" title=" " alt="" coords="80,204,114,214,168,230,163,232,113,219,81,209"/>
-<area shape="rect" id="Node000006" href="$classPhaseUEq.html" title="Phase variables for the velocity&#45;equilibrium system of equations." alt="" coords="174,281,260,309"/>
-<area shape="poly" id="edge146_Node000000_Node000006" title=" " alt="" coords="57,215,84,242,115,266,144,279,176,289,171,290,142,284,112,271,80,246,56,220"/>
-<area shape="rect" id="Node000008" href="$classPhaseUEqTotEnergy.html" title="Phase variables for the velocity&#45;equilibrium system of equations." alt="" coords="142,333,292,361"/>
-<area shape="poly" id="edge148_Node000000_Node000008" title=" " alt="" coords="47,217,74,270,92,296,115,318,144,335,139,335,112,323,88,300,69,273,45,222"/>
-<area shape="rect" id="Node000007" href="$classPhasePUEq.html" title="Phase variables for the pressure&#45;velocity&#45;equilibrium (mechanical equilibrium) system of equations (K..." alt="" coords="369,281,463,309"/>
-<area shape="poly" id="edge147_Node000006_Node000007" title=" " alt="" coords="276,293,371,295,366,296,276,298"/>
+<area shape="rect" id="Node000000" href="$classQuantitiesAddPhys.html" title="General class for additional&#45;physics quantities." alt="" coords="5,84,150,112"/>
+<area shape="rect" id="Node000001" href="$classQAPConductivity.html" title="General class for thermal conductive quantities." alt="" coords="206,5,336,33"/>
+<area shape="poly" id="edge149_Node000000_Node000001" title=" " alt="" coords="123,75,197,43,232,32,227,35,199,48,125,80"/>
+<area shape="rect" id="Node000002" href="$classQAPSurfaceTension.html" title="General class for surface&#45;tension quantities." alt="" coords="198,57,344,85"/>
+<area shape="poly" id="edge150_Node000000_Node000002" title=" " alt="" coords="164,83,200,80,195,82,166,88"/>
+<area shape="rect" id="Node000003" href="$classQAPTurbulence.html" title="General class for turbulent quantities." alt="" coords="212,109,330,137"/>
+<area shape="poly" id="edge151_Node000000_Node000003" title=" " alt="" coords="165,107,214,115,209,116,165,112"/>
+<area shape="rect" id="Node000004" href="$classQAPViscosity.html" title="General class for viscous quantities." alt="" coords="217,161,324,189"/>
+<area shape="poly" id="edge152_Node000000_Node000004" title=" " alt="" coords="126,116,199,146,232,161,227,161,197,151,125,121"/>
 </map>

@@ -1,6 +1,5 @@
 var NAVTREEINDEX28 =
 {
-"functions_c.html":[1,3,0,3],
 "functions_d.html":[1,3,0,4],
 "functions_e.html":[1,3,0,5],
 "functions_enum.html":[1,3,4],
@@ -249,5 +248,6 @@ var NAVTREEINDEX28 =
 "namespacetinyxml2.html#a1fbf88509c3ac88c09117b1947414e08a0cecc816939d9155d33b8a88fd50e4c1":[0,0,2,19,17],
 "namespacetinyxml2.html#a1fbf88509c3ac88c09117b1947414e08a1a0478cf44f0a733aa6f21bdf0db80b5":[0,0,2,19,16],
 "namespacetinyxml2.html#a1fbf88509c3ac88c09117b1947414e08a1fe1262fdb5ac05dd9cc4631f8c8e00d":[0,0,2,19,0],
-"namespacetinyxml2.html#a1fbf88509c3ac88c09117b1947414e08a37759723c0c5e954597654e4eccb4f4d":[0,0,2,19,7]
+"namespacetinyxml2.html#a1fbf88509c3ac88c09117b1947414e08a37759723c0c5e954597654e4eccb4f4d":[0,0,2,19,7],
+"namespacetinyxml2.html#a1fbf88509c3ac88c09117b1947414e08a380fd8846799b88773321efae83d26a3":[0,0,2,19,9]
 };
