@@ -32,22 +32,27 @@ jobs:
 
    steps:
      - name: Checkout doc sources
-       uses: actions/checkout@v5
+       uses: actions/checkout@v7
        with:
          path: doc_sources
 
      - name: Checkout website
-       uses: actions/checkout@v5
+       uses: actions/checkout@v7
        with:
          fetch-depth: 0
          ref: gh-pages
          path: website
 
-     - name: Set up Python
+     - name: Get wanted Python version
+       uses: actions/setup-python@v7 # to use a python version not installed on image and not available in apt
+       with:
+          python-version-file: 'doc_sources/docs/sphinx_docs/.python-version'
+
+     - name: Install Python requirements for sphinx documentation
        run: |
           pip install -r doc_sources/docs/sphinx_docs/requirements.req
 
-     - name: Install APT dependencies (doxygen, graphviz, TeX)
+     - name: Install Doxygen dependencies (doxygen, graphviz, TeX)
        run: |
          sudo apt-get update
          sudo apt-get install -y \
@@ -57,6 +62,7 @@ jobs:
 
      - name: Sphinx build
        run: |
+          python --version
           cd doc_sources/docs/sphinx_docs && make html
 
      - name: Doxygen build
