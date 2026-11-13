@@ -1,232 +1,156 @@
-<!DOCTYPE html>
-<html>
-  <head>
-  <meta charset="utf-8" />
-  <meta http-equiv="x-ua-compatible" content="ie=edge" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-
-  <title>Three-day spring school on compressible multiphase flow modelling with the open-source code ECOGEN</title>
-
-  <link rel="stylesheet" href="/ECOGEN/assets/css/styles.css">
-  <link rel="shortcut icon" type="image/png" href="/ECOGEN/assets/images/favicon.png">
-  <link
-    rel="canonical"
-    href="https://code-mphi.github.io/ECOGEN/course/"
-  />
-  <link
-    href="https://fonts.googleapis.com/css?family=Open+Sans:400,300,700,800,600"
-    rel="stylesheet"
-    type="text/css"
-  />
-  <link
-    href="https://fonts.googleapis.com/css?family=Muli:400,300"
-    rel="stylesheet"
-    type="text/css"
-  />
-
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Spring school on compressible multiphase flow modelling with ECOGEN · ECOGEN</title>
+  <meta name="description" content="An open-source CFD platform for numerical simulation of multiphase compressible flows.">
+  <link rel="canonical" href="https://code-mphi.github.io/ECOGEN/course/">
+  <link rel="icon" type="image/png" sizes="64x64" href="/ECOGEN/assets/images/favicon-64.png">
+  <meta property="og:title" content="Spring school on compressible multiphase flow modelling with ECOGEN · ECOGEN">
+  <meta property="og:description" content="An open-source CFD platform for numerical simulation of multiphase compressible flows.">
+  <meta property="og:image" content="https://code-mphi.github.io/ECOGEN/assets/images/LOGO-SIMPLE-ECOGEN-Bleu.png">
+  <link rel="stylesheet" href="/ECOGEN/css/site.css">
+  <script src="/ECOGEN/js/site.js" defer></script>
 </head>
-
-  <body>
-    <header>
-	<div id="bandeau">
-		<div id="logo">
-			<a href="/ECOGEN/" >  
-				<img src="/ECOGEN/assets/images/favicon.png" alt="logo ECOGEN" />
-			</a>
-		</div>
-		<nav>
-	<ul>
-	  
-	  	<li><a href="/ECOGEN/overview/">Overview</a></li>
-	  
-	  	<li><a href="/ECOGEN/gallery/">Gallery</a></li>
-	  
-	  	<li><a href="/ECOGEN/releases/">Releases</a></li>
-	  
-	  	<li><a href="/ECOGEN/ressources/">Ressources</a></li>
-	  
-	  	<li><a href="/ECOGEN/publications/">Publications</a></li>
-	  
-	  	<li><a href="/ECOGEN/services/">Services</a></li>
-	  
-	  	<li><a href="/ECOGEN/help/">Help</a></li>
-	  
-	  <!-- <li><a href="/ECOGEN/blog">Blog</a></li> -->
-	</ul>
-</nav>
-	</div>
+<body class="inner" data-docs="https://code-mphi.github.io/ECOGEN/docs/">
+  <a class="skip" href="#main">Skip to content</a>
+  <header class="site-header">
+  <div class="bar">
+    <a class="brand" href="/ECOGEN/" aria-label="ECOGEN home">
+      <img src="/ECOGEN/assets/images/LOGO-SIMPLE-ECOGEN-Bleu.png" alt="ECOGEN" width="120" height="31">
+    </a>
+    <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="site-nav">
+      <span class="menu-icon" aria-hidden="true"></span><span class="sr">Menu</span>
+    </button>
+    <nav id="site-nav" class="site-nav" aria-label="Main">
+      <ul>
+        <li><a href="/ECOGEN/overview/">Overview</a></li>
+        <li><a href="/ECOGEN/gallery/">Gallery</a></li>
+        <li><a href="/ECOGEN/ressources/">Download</a></li>
+        <li><a href="/ECOGEN/releases/">Releases</a></li>
+        <li><a href="/ECOGEN/publications/">Publications</a></li>
+        <li><a href="/ECOGEN/services/">Services</a></li>
+        <li><a href="/ECOGEN/help/">Help</a></li>
+      </ul>
+      <div class="nav-actions">
+        <a class="btn btn-primary" href="https://code-mphi.github.io/ECOGEN/docs/sphinx_docs/index.html"><svg class="icon" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 19.5V5a2 2 0 0 1 2-2h13v16H6a2 2 0 0 0-2 2zm0 0A2 2 0 0 0 6 22h13"/></svg>Documentation</a>
+        <a class="btn btn-ghost" href="https://github.com/code-mphi/ECOGEN"><svg class="icon" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 19c-4.3 1.4-4.3-2.5-6-3m12 5v-3.5c0-1 .1-1.4-.5-2 2.8-.3 5.5-1.4 5.5-6a4.6 4.6 0 0 0-1.3-3.2 4.2 4.2 0 0 0-.1-3.2s-1.1-.3-3.5 1.3a12.3 12.3 0 0 0-6.2 0C6.5 2.8 5.4 3.1 5.4 3.1a4.2 4.2 0 0 0-.1 3.2A4.6 4.6 0 0 0 4 9.5c0 4.6 2.7 5.7 5.5 6-.6.6-.6 1.2-.5 2V21"/></svg>GitHub</a>
+      </div>
+    </nav>
+  </div>
 </header>
 
+  <main id="main">
+    
+<div class="wrap page course">
+  <h1 class="page-title">Spring school on compressible multiphase flow modelling with ECOGEN</h1>
+  <p class="lead">An introduction to the modelling and numerical simulation of compressible multiphase flows using the open-source simulation framework ECOGEN.</p>
+  <p class="notice">This spring school took place on May 27–29, 2026. Registrations are closed. To hear about future sessions, <a href="/ECOGEN/services/">contact the development team</a>.</p>
 
+  <dl class="facts">
+    <div><dt>Dates</dt><dd>May 27–29, 2026 (3 days, 18 hours)</dd></div>
+    <div><dt>Location</dt><dd>IUSTI, UMR CNRS 7343, 5 rue Enrico Fermi, 13013 Marseille, France</dd></div>
+    <div><dt>Registration deadline</dt><dd>April 30, 2026</dd></div>
+    <div><dt>Fees</dt><dd>Free (AMU) · €200 · €500</dd></div>
+  </dl>
+  <figure class="figure course-figure">
+    <img src="/ECOGEN/assets/images/droplet_fragmentation.png" alt="Fragmentation of a droplet in a high-speed flow">
+    <figcaption>Fragmentation of a droplet in a high-speed flow performed with ECOGEN (Dorschner et al., 2020).</figcaption>
+  </figure>
 
-    <main>
-		<h1>Three-day spring school on compressible multiphase flow modelling with the open-source code ECOGEN</h1>
-		<hr />
+  <h2 id="summary">Summary</h2>
+<p>This spring school provides an in-depth introduction to the use of the open-source code ECOGEN, dedicated to advanced numerical simulations in fluid mechanics and compressible media physics. Developed notably at <strong>IUSTI</strong> and <strong>Inria</strong>, ECOGEN enables the study of complex phenomena involving multiphase flows, phase transitions, fluid–structure interactions, and reactive processes. Over three days (<strong>18 hours</strong>), participants will discover the physical and numerical foundations underlying the code. They will learn how to install and run ECOGEN, perform simulations, and analyse the resulting data. The spring school will also include practical sessions in which participants will create test cases, explore various physical models, and gain insight into extending the code.</p>
+<h2 id="school-content">School content</h2>
+<p>The school combines theoretical lectures and hands-on sessions to provide a comprehensive introduction to the ECOGEN simulation framework. Participants will first be introduced to the physical and mathematical models used to describe compressible multiphase flows, including equilibrium and non-equilibrium approaches, phase transition modelling, and solid–fluid interactions. The numerical methods implemented in ECOGEN, such as finite-volume schemes for hyperbolic multiphase systems and relaxation techniques, will also be presented.</p>
+<p>Practical sessions will guide participants through the installation, configuration, and execution of simulations, as well as the analysis of results. Attendees will learn how to prepare input files, set up and run test cases, and analyse simulation outputs. In particular, they will learn how to configure simulations on different types of computational meshes, including Cartesian grids, Adaptive Mesh Refinement (AMR) meshes, and unstructured meshes. Participants will also explore different physical models through practical examples and perform basic post-processing of the results.</p>
+<p>The detailed agenda is given <a href="#agenda">below</a>.</p>
+<h2 id="target-audience">Target audience</h2>
+<p>This school is intended for PhD students, researchers, and engineers interested in the numerical simulation of compressible multiphase flows, particularly those wishing to use ECOGEN in their research and industrial settings, or to develop advanced numerical models on high-performance computing (HPC) environments.</p>
+<p><em>A basic knowledge of fluid mechanics and scientific computing is recommended.</em></p>
+<h2 id="lecturers">Lecturers</h2>
+<p>S. Gavrilyuk (AMU), N. Favrie (AMU), F. Petitpas (AMU), K. Schmidmayer (Inria), A. Froehly (Inria).</p>
+<h2 id="location-and-access">Location and access</h2>
+<p>The school will take place in Marseille, a major city in the south of France located on the Mediterranean coast. Marseille is the second largest city in France and offers a vibrant scientific and cultural environment. The region is well known for its exceptional natural setting, including the Calanques National Park, and benefits from a mild Mediterranean climate.</p>
+<p>The spring school will be hosted at the Institut Universitaire des Systèmes Thermiques Industriels (IUSTI), part of Aix-Marseille University, located in the Château-Gombert Technopole. Marseille can be easily reached via Marseille Provence Airport, which provides regular shuttle connections to Marseille city centre, or via Marseille Saint-Charles railway station, served by high-speed TGV trains from major French and European cities. From the city centre, the campus can be reached using metro and bus connections.</p>
+<p><em>Detailed travel information will be provided to registered participants.</em></p>
+<h2 id="registration-fees">Registration fees</h2>
+<ul>
+<li>Free for Aix-Marseille University (AMU) participants.</li>
+<li>Students and postdoctoral researchers (external to AMU): €200.</li>
+<li>Senior academics and industry participants: €500.</li>
+</ul>
+<p><em>The fee covers lectures, practical sessions, course materials, coffee breaks and lunches.</em></p>
+<h2 id="prerequisites-and-required-equipment">Prerequisites and required equipment</h2>
+<p>Participants are expected to bring their own laptop to follow the practical sessions, and should ensure that they are able to compile and run a simple MPI C++ program before the school. The following setup is required:</p>
+<ul>
+<li>a laptop running Linux (recommended) or macOS;</li>
+<li>a working C++ development environment, including a compiler such as gcc/g++;</li>
+<li>a functional MPI implementation (required) such as OpenMPI, since ECOGEN relies on MPI for compilation and parallel execution.</li>
+</ul>
+<p>Participants should also install the following open-source software prior to the school:</p>
+<ul>
+<li>Gmsh, for mesh generation;</li>
+<li>Gnuplot, for visualisation and post-processing of one-dimensional simulation results;</li>
+<li>ParaView, for visualisation and post-processing of multi-dimensional simulation results.</li>
+</ul>
+<p><em>Detailed installation instructions will be provided to registered participants before the school sessions.</em></p>
+<h2 id="registration">Registration</h2>
+<p>Participants interested in attending the school are invited to register by sending an email to the organisers (<a href="mailto:ecogen@code-mphi.fr">ecogen@code-mphi.fr</a>). The registration request should include:</p>
+<ul>
+<li>full name;</li>
+<li>affiliation (university, research institute, or company);</li>
+<li>position (PhD student, postdoctoral researcher, researcher, engineer, etc.);</li>
+<li>a short description of the intended use of ECOGEN.</li>
+</ul>
+<p>Due to the hands-on nature of the school, the number of participants is limited. Registrations will be accepted on a first-come, first-served basis, with priority given to participants whose research or industrial activities are closely related to the topics of the school.</p>
+<p>Registration <strong>deadline: April 30, 2026</strong>. After confirmation of registration, participants will receive practical information regarding software installation, access to the venue, and accommodation suggestions in Marseille.</p>
 
-<article>
-	<div id="logos">
-		<div class="imgLogos0">
-			<a href="https://institut-imi.univ-amu.fr/" target="_blank">  <img src="/ECOGEN/assets/images/partners/AMU_IMI.png" alt="Aix Marseille Universite Institut mécanique et ingenierie" /> </a>
-		</div>
-		<div class="imgLogos1">
-			<a href="https://www.inria.fr/en/" target="_blank">  <img src="/ECOGEN/assets/images/partners/Inria.png" alt="Inria" /> </a>
-		</div>
-		<div class="imgLogos5">
-			<a href="https://code-mphi.github.io/ECOGEN/" target="_blank">  <img src="/ECOGEN/assets/images/favicon.png" alt="ECOGEN" /> </a>
-		</div>
-	</div>
-	<div id="logos">
-		<div class="imgLogos6">
-			<a href="http://iusti.cnrs.fr/en/" target="_blank">  <img src="/ECOGEN/assets/images/partners/IUSTI.png" alt="IUSTI" /> </a>
-		</div>
-		<div class="imgLogos7">
-			<a href="https://ecole-doctorale-353.univ-amu.fr/" target="_blank">  <img src="/ECOGEN/assets/images/partners/ED_353.png" alt="ED 353" /> </a>
-		</div>
-		<div class="imgLogos0">
-			<a href="https://institut-imi.univ-amu.fr/" target="_blank">  <img src="/ECOGEN/assets/images/partners/amidex.png" alt="Aix Marseille Universite Institut mécanique et ingenierie" /> </a>
-		</div>
-	</div>
-</article>
+  <h2 id="agenda">Agenda</h2>
+  <a class="agenda" href="/ECOGEN/assets/images/news/course_agenda.png"><img src="/ECOGEN/assets/images/news/course_agenda.png" alt="Agenda of the spring school" loading="lazy"></a>
+  <p class="muted">Click the agenda to open it full size.</p>
+  <h2>Organisers and supporters</h2>
+  <ul class="partners course-partners">
+    <li><a href="https://institut-imi.univ-amu.fr/" title="Aix-Marseille Université, Institut Mécanique et Ingénierie"><img src="/ECOGEN/assets/images/partners/AMU_IMI.png" alt="Aix-Marseille Université, Institut Mécanique et Ingénierie" loading="lazy"></a></li>
+    <li><a href="https://www.inria.fr/en/" title="Inria"><img src="/ECOGEN/assets/images/partners/Inria.png" alt="Inria" loading="lazy"></a></li>
+    <li><a href="https://iusti.cnrs.fr/" title="IUSTI"><img src="/ECOGEN/assets/images/partners/IUSTI.png" alt="IUSTI" loading="lazy"></a></li>
+    <li><a href="https://ecole-doctorale-353.univ-amu.fr/" title="Doctoral school ED 353"><img src="/ECOGEN/assets/images/partners/ED_353.png" alt="Doctoral school ED 353" loading="lazy"></a></li>
+    <li><span title="A*MIDEX"><img src="/ECOGEN/assets/images/partners/amidex.png" alt="A*MIDEX" loading="lazy"></span></li>
+  </ul>
+</div>
 
-<hr />
-
-<article>
-	<i>An introduction to the modelling and numerical simulation of compressible multiphase flows using the open-source simulation framework ECOGEN.</i>
-</article>
-
-<article>
-	<img src="/ECOGEN/assets/images/droplet_fragmentation.png" alt="Droplet fragmentation" />
-	<figcaption>Fragmentation of a droplet in a high-speed flow performed with ECOGEN software (Dorschner et al., 2020).</figcaption>
-	<h1> Dates: May 27-29, 2026. </h1>
-	<h1> Location: IUSTI, UMR CNRS 7343 - 5, rue Enrico Fermi - 13013 Marseille, France. </h1>
-	<h1> Registration deadline: April 30, 2026. </h1>
-	<h1> Fees: 0€ / 200€ / 500€. </h1>
-</article>
-
-<hr />
-
-<article>
-	<h3> Summary </h3>
-	<p> This spring school provides an in-depth introduction to the use of the open-source code <a href="https://code-mphi.github.io/ECOGEN/" target="_blank">ECOGEN</a>, dedicated to advanced numerical simulations in fluid mechanics and compressible media physics. Developed notably at <span style="font-weight:bold">IUSTI</span> and <span style="font-weight:bold">Inria</span>, ECOGEN enables the study of complex phenomena involving multiphase flows, phase transitions, fluid–structure interactions, and reactive processes. Over three days (<span style="font-weight:bold">18 hours</span>), participants will discover the physical and numerical foundations underlying the code. They will learn how to install and run ECOGEN, perform simulations, and analyse the resulting data. The spring school will also include practical sessions in which participants will create test cases, explore various physical models, and gain insight into extending the code.
-	</p>
-	<h3> School content </h3>
-	<p> The school combines theoretical lectures and hands-on sessions to provide a comprehensive introduction to the ECOGEN simulation framework. Participants will first be introduced to the physical and mathematical models used to describe compressible multiphase flows, including equilibrium and non-equilibrium approaches, phase transition modelling, and solid–fluid interactions. The numerical methods implemented in ECOGEN, such as finite-volume schemes for hyperbolic multiphase systems and relaxation techniques, will also be presented.
-	</p>
-	<p> Practical sessions will guide participants through the installation, configuration, and execution of simulations, as well as the analysis of results. Attendees will learn how to prepare input files, set up and run test cases, and analyse simulation outputs. In particular, they will learn how to configure simulations on different types of computational meshes, including Cartesian grids, Adaptive Mesh Refinement (AMR) meshes, and unstructured meshes. Participants will also explore different physical models through practical examples and perform basic post-processing of the results.
-	</p>
-	<p> <i>Details of the agenda given below.</i>
-	</p>
-	<h3> Target audience </h3>
-	<p> This school is intended for PhD students, researchers, and engineers interested in the numerical simula-tion of compressible multiphase flows, particularly those wishing to use ECOGEN in their research and industrial settings, or to develop advanced numerical models on high-performance computing (HPC) environments.
-	</p>
-	<p> <i>A basic knowledge of fluid mechanics and scientific computing is recommended.</i>
-	</p>
-	<h3> Lecturers </h3>
-	<p> S. Gavrilyuk (AMU), N. Favrie (AMU), F. Petitpas (AMU), K. Schmidmayer (Inria), A. Froehly (Inria)
-	</p>
-	<h3> Location and access </h3>
-	<p> The school will take place in Marseille, a major city in the south of France located on the Mediterranean coast. Marseille is the second largest city in France and offers a vibrant scientific and cultural environment. The region is well known for its exceptional natural setting, including the Calanques National Park, and benefits from a mild Mediterranean climate.
-	</p>
-	<p> The spring school will be hosted at the Institut Universitaire des Systèmes Thermiques Industriels (IUSTI), part of Aix-Marseille University, located in the Château-Gombert Technopole. Marseille can be easily reached via Marseille Provence Airport, which provides regular shuttle connections to Marseille city centre, or via Marseille Saint-Charles railway station, served by high-speed TGV trains from major French and European cities. From the city centre, the campus can be reached using metro and bus connections.
-	</p>
-	<p> <i>Detailed travel information will be provided to registered participants.</i>
-	</p>
-	<h3> Registration fees </h3>
-	<ul>
-		<li> Free for Aix-Marseille University (AMU) participants. </li>
-		<li> Students and postdoctoral researchers (external to AMU): 200€. </li>
-		<li> Senior academics and industry participants: 500€. </li>
-	</ul>
-	<p> <i>The fee covers lectures, practical sessions, course materials, coffee breaks and lunches.</i>
-	</p>
-	<h3> Prerequisites and required equipment </h3>
-	<p> Participants are expected to bring their own laptop to follow the practical sessions. Participants should ensure that they are able to compile and run a simple MPI C++ program before the school. Thus, the following setup is required:
-	</p>
-	<ul>
-		<li> A laptop running Linux (recommended) or macOS. </li>
-		<li> A working C++ development environment, including a compiler such as gcc/g++. </li>
-		<li> A functional MPI implementation (required) such as OpenMPI, since ECOGEN relies on MPI for com-pilation and parallel execution. </li>
-	</ul>
-	<p> Participants should also install the following open-source software prior to the school:
-	</p>
-	<ul>
-		<li> Gmsh – for mesh generation. </li>
-		<li> Gnuplot - for visualisation and post-processing of one-dimensional simulation results. </li>
-		<li> ParaView – for visualisation and post-processing of multi-dimensional simulation results. </li>
-	</ul>
-	<p> <i>Detailed installation instructions will be provided to registered participants before the school sessions.</i>
-	</p>
-	<h3> Registration </h3>
-	<p> Participants interested in attending the school are invited to register by sending an email to the organisers (<a href="mailto:ecogen@code-mphi.fr">ecogen@code-mphi.fr</a>). The registration request should include:
-	</p>
-	<ul>
-		<li> Full name. </li>
-		<li> Affiliation (university, research institute, or company). </li>
-		<li> Position (PhD student, postdoctoral researcher, researcher, engineer, etc.). </li>
-		<li> A short description of the intended use of ECOGEN. </li>
-	</ul>
-	<p> Due to the hands-on nature of the school, the number of participants is limited. Registrations will be accepted on a first-come, first-served basis, with priority given to participants whose research or industrial activities are closely related to the topics of the school.
-	</p>
-	<p> Registration <span style="font-weight:bold">deadline: April 30, 2026.</span>
-	</p>
-	<p> After confirmation of registration, participants will receive practical information regarding:
-	</p>
-	<ul>
-		<li> Software installation instructions. </li>
-		<li> Access to the venue. </li>
-		<li> Accommodation suggestions in Marseille.  </li>
-	</ul>
-</article>
-
-<hr />
-
-<article>
-	<img src="/ECOGEN/assets/images/news/course_agenda.png" alt="Spring school agenda" />
-</article>
-
-<hr />
-
-<article>
-	<div id="logos">
-		<div class="imgLogos0">
-			<a href="https://institut-imi.univ-amu.fr/" target="_blank">  <img src="/ECOGEN/assets/images/partners/AMU_IMI.png" alt="Aix Marseille Universite Institut mécanique et ingenierie" /> </a>
-		</div>
-		<div class="imgLogos1">
-			<a href="https://www.inria.fr/en/" target="_blank">  <img src="/ECOGEN/assets/images/partners/Inria.png" alt="Inria" /> </a>
-		</div>
-		<div class="imgLogos5">
-			<a href="https://code-mphi.github.io/ECOGEN/" target="_blank">  <img src="/ECOGEN/assets/images/favicon.png" alt="ECOGEN" /> </a>
-		</div>
-	</div>
-	<div id="logos">
-		<div class="imgLogos6">
-			<a href="http://iusti.cnrs.fr/en/" target="_blank">  <img src="/ECOGEN/assets/images/partners/IUSTI.png" alt="IUSTI" /> </a>
-		</div>
-		<div class="imgLogos7">
-			<a href="https://ecole-doctorale-353.univ-amu.fr/" target="_blank">  <img src="/ECOGEN/assets/images/partners/ED_353.png" alt="ED 353" /> </a>
-		</div>
-		<div class="imgLogos0">
-			<a href="https://institut-imi.univ-amu.fr/" target="_blank">  <img src="/ECOGEN/assets/images/partners/amidex.png" alt="Aix Marseille Universite Institut mécanique et ingenierie" /> </a>
-		</div>
-	</div>
-</article>
-
-<hr />
-
-
-    </main>
-    <footer>
-	<div> ECOGEN is developped by <a href="https://code-mphi.fr/" target="_blank" > Code-m&Phi; </a> members </div>
-	<div><span class="copy-left">©</span> ECOGEN</div>
-	<div class="flexZone">
-		<div class="design">
-			<p>Design web:</p>
-		</div> 
-		<div class="design">
-			<a href="mailto:productiondulama@gmail.com" target="_blank" > <img src="/ECOGEN/assets/images/productionduLama.png" alt="production du Lama" /> </a> 
-		</div>
-	</div>
+  </main>
+  <footer class="site-footer">
+  <div class="wrap footer-grid">
+    <div>
+      <img class="footer-logo" src="/ECOGEN/assets/images/LOGO-SIMPLE-ECOGEN-Bleu.png" alt="ECOGEN" width="120" height="31">
+      <p>An open-source CFD platform for numerical simulation of multiphase compressible flows.</p>
+      <p>Developed by <a href="https://code-mphi.fr/">Code-mΦ</a> members. Distributed under the <a href="https://www.gnu.org/licenses/gpl-3.0">GNU GPL v3</a>.</p>
+    </div>
+    <div>
+      <h2>Documentation</h2>
+      <ul>
+        <li><a href="https://code-mphi.github.io/ECOGEN/docs/sphinx_docs/index.html">User documentation</a></li>
+        <li><a href="https://code-mphi.github.io/ECOGEN/docs/sphinx_docs/Chap2_installation_Chapter.html">Installation guide</a></li>
+        <li><a href="https://code-mphi.github.io/ECOGEN/docs/sphinx_docs/Chap4_tutorials_Chapter.html">Tutorials</a></li>
+        <li><a href="https://code-mphi.github.io/ECOGEN/docs/doxygen_docs/index.html">Code reference (Doxygen)</a></li>
+      </ul>
+    </div>
+    <div>
+      <h2>Project</h2>
+      <ul>
+        <li><a href="https://github.com/code-mphi/ECOGEN">Source code on GitHub</a></li>
+        <li><a href="/ECOGEN/ressources/">Download</a></li>
+        <li><a href="/ECOGEN/publications/">How to cite ECOGEN</a></li>
+        <li><a href="/ECOGEN/help/">Help and contributions</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="wrap credits">
+    <span>Original design:</span>
+    <a class="lama" href="mailto:productiondulama@gmail.com" title="Production du Lama"><img src="/ECOGEN/assets/images/productionduLama-small.png" alt="Production du Lama" width="42" height="36"></a>
+  </div>
 </footer>
-  </body>
-</html>
 
+</body>
+</html>

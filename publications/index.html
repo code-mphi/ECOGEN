@@ -1,280 +1,519 @@
-<!DOCTYPE html>
-<html>
-  <head>
-  <meta charset="utf-8" />
-  <meta http-equiv="x-ua-compatible" content="ie=edge" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-
-  <title>Publications</title>
-
-  <link rel="stylesheet" href="/ECOGEN/assets/css/styles.css">
-  <link rel="shortcut icon" type="image/png" href="/ECOGEN/assets/images/favicon.png">
-  <link
-    rel="canonical"
-    href="https://code-mphi.github.io/ECOGEN/publications/"
-  />
-  <link
-    href="https://fonts.googleapis.com/css?family=Open+Sans:400,300,700,800,600"
-    rel="stylesheet"
-    type="text/css"
-  />
-  <link
-    href="https://fonts.googleapis.com/css?family=Muli:400,300"
-    rel="stylesheet"
-    type="text/css"
-  />
-
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Publications · ECOGEN</title>
+  <meta name="description" content="An open-source CFD platform for numerical simulation of multiphase compressible flows.">
+  <link rel="canonical" href="https://code-mphi.github.io/ECOGEN/publications/">
+  <link rel="icon" type="image/png" sizes="64x64" href="/ECOGEN/assets/images/favicon-64.png">
+  <meta property="og:title" content="Publications · ECOGEN">
+  <meta property="og:description" content="An open-source CFD platform for numerical simulation of multiphase compressible flows.">
+  <meta property="og:image" content="https://code-mphi.github.io/ECOGEN/assets/images/LOGO-SIMPLE-ECOGEN-Bleu.png">
+  <link rel="stylesheet" href="/ECOGEN/css/site.css">
+  <script src="/ECOGEN/js/site.js" defer></script>
 </head>
-
-  <body>
-    <header>
-	<div id="bandeau">
-		<div id="logo">
-			<a href="/ECOGEN/" >  
-				<img src="/ECOGEN/assets/images/favicon.png" alt="logo ECOGEN" />
-			</a>
-		</div>
-		<nav>
-	<ul>
-	  
-	  	<li><a href="/ECOGEN/overview/">Overview</a></li>
-	  
-	  	<li><a href="/ECOGEN/gallery/">Gallery</a></li>
-	  
-	  	<li><a href="/ECOGEN/releases/">Releases</a></li>
-	  
-	  	<li><a href="/ECOGEN/ressources/">Ressources</a></li>
-	  
-	  	<li><a href="/ECOGEN/publications/">Publications</a></li>
-	  
-	  	<li><a href="/ECOGEN/services/">Services</a></li>
-	  
-	  	<li><a href="/ECOGEN/help/">Help</a></li>
-	  
-	  <!-- <li><a href="/ECOGEN/blog">Blog</a></li> -->
-	</ul>
-</nav>
-	</div>
+<body class="inner" data-docs="https://code-mphi.github.io/ECOGEN/docs/">
+  <a class="skip" href="#main">Skip to content</a>
+  <header class="site-header">
+  <div class="bar">
+    <a class="brand" href="/ECOGEN/" aria-label="ECOGEN home">
+      <img src="/ECOGEN/assets/images/LOGO-SIMPLE-ECOGEN-Bleu.png" alt="ECOGEN" width="120" height="31">
+    </a>
+    <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="site-nav">
+      <span class="menu-icon" aria-hidden="true"></span><span class="sr">Menu</span>
+    </button>
+    <nav id="site-nav" class="site-nav" aria-label="Main">
+      <ul>
+        <li><a href="/ECOGEN/overview/">Overview</a></li>
+        <li><a href="/ECOGEN/gallery/">Gallery</a></li>
+        <li><a href="/ECOGEN/ressources/">Download</a></li>
+        <li><a href="/ECOGEN/releases/">Releases</a></li>
+        <li><a href="/ECOGEN/publications/" aria-current="page">Publications</a></li>
+        <li><a href="/ECOGEN/services/">Services</a></li>
+        <li><a href="/ECOGEN/help/">Help</a></li>
+      </ul>
+      <div class="nav-actions">
+        <a class="btn btn-primary" href="https://code-mphi.github.io/ECOGEN/docs/sphinx_docs/index.html"><svg class="icon" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 19.5V5a2 2 0 0 1 2-2h13v16H6a2 2 0 0 0-2 2zm0 0A2 2 0 0 0 6 22h13"/></svg>Documentation</a>
+        <a class="btn btn-ghost" href="https://github.com/code-mphi/ECOGEN"><svg class="icon" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 19c-4.3 1.4-4.3-2.5-6-3m12 5v-3.5c0-1 .1-1.4-.5-2 2.8-.3 5.5-1.4 5.5-6a4.6 4.6 0 0 0-1.3-3.2 4.2 4.2 0 0 0-.1-3.2s-1.1-.3-3.5 1.3a12.3 12.3 0 0 0-6.2 0C6.5 2.8 5.4 3.1 5.4 3.1a4.2 4.2 0 0 0-.1 3.2A4.6 4.6 0 0 0 4 9.5c0 4.6 2.7 5.7 5.5 6-.6.6-.6 1.2-.5 2V21"/></svg>GitHub</a>
+      </div>
+    </nav>
+  </div>
 </header>
 
+  <main id="main">
+    
+<div class="wrap page pubs">
+  <h1 class="page-title">Publications</h1>
+  <p>Each part and specificity of ECOGEN has been validated and the results are published in international journals after a reviewing process: work in progress must pass this stage before being included in ECOGEN. Below are the known journal articles, PhD theses, conferences and preprints <strong>describing, improving or using ECOGEN</strong> (not simply citing it), most recent first.</p>
+<!-- To add a publication, edit data/publications.yaml (not this file). -->
 
 
-    <main>
-		<h1>Publications</h1>
-		<article>
-	<p> Each part and specificity of ECOGEN has been validated and the results are published in international journals after a reviewing process. Work in progress must pass this stage before to be included in ECOGEN! Below are lists of known journal articles, PhD theses and conferences <b>describing, improving or using ECOGEN</b> (not simply citing, sorted by date from the most recent). </p>
-</article>
+  <section class="cite" id="cite">
+  <h2>How to cite ECOGEN</h2>
+  <p>When using one of the latest ECOGEN versions, please <strong>cite both references</strong>, to acknowledge the work of all contributors.</p>
+  <ul class="pub-list">
+    <li class="pub" data-year="2026">
+  <span class="pub-authors">Schmidmayer K., Petitpas F., Froehly A., Cazé J., Daniel E., Favrie N., Dorschner B., Taglialatela F. E., Martin de Fourchambault L., Didierlaurent Q., Ade-Onojobi A., Le Martelot S., Gadiri F. Z., Schropff S.</span> (2026).
+  <span class="pub-title">ECOGEN</span>. <em>HAL</em>. <a class="tag tag-ref" href="https://hal.science/hal-05023172"><span class="tag-key">HAL</span><span class="tag-val">hal-05023172</span></a>
+</li>
 
-<article>
-	<h1> Latest Software Reference and Main Journal Article </h1>
-	Please <b>cite both references</b> when using one of the latest ECOGEN version to acknowledge the work of all contributors.
-	<ul>
-		<li> Schmidmayer, K., Petitpas, F., Froehly, A., Cazé, J., Daniel, E., Favrie, N., Dorschner, B., Taglialatela, F. E., Martin de Fourchambault, L., Didierlaurent, Q., Ade-Onojobi, A., Le Martelot, S., Gadiri, F. Z., Schropff, S. (2026). ECOGEN. <i>HAL</i>. <a class="badge" href="https://hal.science/hal-05023172" target="_blank"><img src="https://img.shields.io/badge/HAL-05023172-green.svg" alt="HAL link" /></a>
-		</li>
-		<li> Schmidmayer K., Petitpas F., Le Martelot S., Daniel E. (2020). ECOGEN: An open-source tool for multiphase, compressible, multiphysics flows. <i>Computer Physics Communications</i>, 251, 107093. <a class="badge" href="https://doi.org/10.1016/j.cpc.2019.107093" target="_blank"><img src="https://img.shields.io/badge/DOI-10.1016/j.cpc.2019.107093-green.svg" alt="DOI link" /></a>
-		</li>
-	</ul>
-</article>
+    <li class="bibtex">
+      <details>
+        <summary>BibTeX</summary>
+        <div class="bibtex-box">
+          <button class="copy" type="button" data-copy="bib-0">Copy</button>
+          <pre id="bib-0"><code>@misc{schmidmayer2026ecogen,
+  url = {https://hal.science/hal-05023172},
+  title = { {ECOGEN} },
+  author = {Schmidmayer, K. and Petitpas, F. and Froehly, A. and Cazé, J. and Daniel, E. and Favrie, N. and Dorschner, B. and Taglialatela, F. E. and Martin de Fourchambault, L. and Didierlaurent, Q. and Ade-Onojobi, A. and Le Martelot, S. and Gadiri, F. Z. and Schropff, S.},
+  howpublished = {HAL},
+  year = {2026}
+}</code></pre>
+        </div>
+      </details>
+    </li>
+    <li class="pub" data-year="2020">
+  <span class="pub-authors">Schmidmayer K., Petitpas F., Le Martelot S., Daniel E.</span> (2020).
+  <span class="pub-title">ECOGEN: An open-source tool for multiphase, compressible, multiphysics flows</span>. <em>Computer Physics Communications</em>, 251, 107093. <a class="tag tag-ref" href="https://doi.org/10.1016/j.cpc.2019.107093"><span class="tag-key">DOI</span><span class="tag-val">10.1016/j.cpc.2019.107093</span></a>
+</li>
 
-<article>
-	<h1> Journal Articles </h1>
-	<ol reversed="">
-		<li> Fiorini S., Bokman G. T., Prasanna A., Nikolaou S., Ichihara S., Lukić B., Rack A., Tagawa Y., Supponen O. (2026). Cavitation by phase shift of focused shock waves inside a droplet. <a class="badge" href="https://doi.org/10.48550/arXiv.2603.19990" target="_blank"><img src="https://img.shields.io/badge/DOI-10.48550/arXiv.2603.19990-green.svg" alt="DOI link" /></a>
-		</li>
-		<li> Han W., Wu Y., Zhu B., Zhang W. (2026). Acoustic diffraction and pressure-amplituderecovery behind an air bubble subjectedto a collapse-induced pulse. <i>Physics of Fluids</i>, 38 (10), 106121. <a class="badge" href="https://doi.org/10.1063/5.0348564" target="_blank"><img src="https://img.shields.io/badge/DOI-10.1063/5.0348564-green.svg" alt="DOI link" /></a>
-		</li>
-		<li> Tripathi M., Redding J., Khare P. (2026). Effect of droplet spacing on the interactions between shocks and tandem droplets. <i>Transport Phenomena</i>, 1 (3), 20260076. <a class="badge" href="https://doi.org/10.1515/tp-2026-0076" target="_blank"><img src="https://img.shields.io/badge/DOI-10.1515/tp.2026.0076-green.svg" alt="DOI link" /></a>
-		</li>
-		<li> Yang Y., Smith T. A. (2026). Interaction of near-wall bubble arrays with acoustic waves induced by an oscillating rigid wall. <i>The Journal of the Acoustical Society of America</i>, 160 (1), 310-320. <a class="badge" href="https://doi.org/10.1121/10.0044330" target="_blank"><img src="https://img.shields.io/badge/DOI-10.1121/10.0044330-green.svg" alt="DOI link" /></a>
-		</li>
-		<li> Ichihara S., Fiorini S., Tagawa Y., Supponen O. (2026). Measurement of traveling pressure waves inside a droplet. <i>Experimental Thermal and Fluid Science</i>, 111800. <a class="badge" href="https://doi.org/10.1016/j.expthermflusci.2026.111800" target="_blank"><img src="https://img.shields.io/badge/DOI-10.1016/j.expthermflusci.2026.111800-green.svg" alt="DOI link" /></a>
-		</li>
-		<li> Singh A. P., Rao D. C. K., Rahlves M., Vogel A., Basu S. (2026). Predicting and controlling laser-induced breakup and multidirectional propulsion of liquid droplets. <i>Proceedings of the National Academy of Sciences</i>, 123 (15), e2526933123. <a class="badge" href="https://doi.org/10.1073/pnas.2526933123" target="_blank"><img src="https://img.shields.io/badge/DOI-10.1073/pnas.2526933123-green.svg" alt="DOI link" /></a>
-		</li>
-		<li> Favrie N., Schmidmayer K. (2026). A multiphase compressible flow model including elasto-viscoplastic solids with irreversible compaction. <i>Computer Methods in Applied Mechanics and Engineering</i>, 455, 118880. <a class="badge" href="https://doi.org/10.1016/j.cma.2026.118880" target="_blank"><img src="https://img.shields.io/badge/DOI-10.1016/j.cma.2026.118880-green.svg" alt="DOI link" /></a>
-		</li>
-		<li> Lu H., Min Q., He C., He S., Wu Y., Cao S., Su M. (2026). Numerical investigation of laser pre-pulse effects on tin microdroplet targets and extreme ultraviolet emission. <i>AIP Advances</i>, 16 (3), 035027. <a class="badge" href="https://doi.org/10.1063/5.0320685" target="_blank"><img src="https://img.shields.io/badge/DOI-10.1063/5.0320685-green.svg" alt="DOI link" /></a>
-		</li>
-		<li> Woods M. (2025). An eigenvalue-based method for computing the relaxed pressure in compressible multiphase flow with N phases. <i>Physics of Fluids</i>, 37 (12), 123356. <a class="badge" href="https://doi.org/10.1063/5.0303854" target="_blank"><img src="https://img.shields.io/badge/DOI-10.1063/5.0303854-green.svg" alt="DOI link" /></a>
-		</li>
-		<li> Prasanna A., Bokman G. T., Fiorini S., Sieber A., Lukić B., Foster D., Supponen O. (2025). Shock compression-based equation of state for perfluorohexane. <i>Physical Review E</i>, 112 (6), 065101. <a class="badge" href="https://doi.org/10.1103/999d-nk9z" target="_blank"><img src="https://img.shields.io/badge/DOI-10.1103/999d-nk9z-green.svg" alt="DOI link" /></a>
-		</li>
-		<li> Min Q., He C., Lu H., Liu X., Su M., Dong C. (2025). Laser prepulse-induced deformation dynamics in tin microdroplets for extreme ultraviolet light source applications. <i>Physical Review Research</i>, 7 (4), 043155. <a class="badge" href="https://doi.org/10.1103/3v34-2f14" target="_blank"><img src="https://img.shields.io/badge/DOI-10.1103/3v34-2f14-green.svg" alt="DOI link" /></a>
-		</li>
-		<li> Fan E., Zhang T., Hao J., Wen C. Y., Shi L. (2025). Fire: an open-source adaptive mesh refinement solver for supersonic reacting flows. <i>Computer Physics Communications</i>, 3109881. <a class="badge" href="https://doi.org/10.1016/j.cpc.2025.109881" target="_blank"><img src="https://img.shields.io/badge/DOI-10.1016/j.cpc.2025.109881-green.svg" alt="DOI link" /></a>
-		</li>
-		<li> Taglialatela F. E., De Stefano G. (2025). Numerical study of cavitation effects in shock-induced tandem droplet breakup. <i>Physics of Fluids</i>, 37, 092129. <a class="badge" href="https://doi.org/10.1063/5.0295562" target="_blank"><img src="https://img.shields.io/badge/DOI-10.1063/5.0295562-green.svg" alt="DOI link" /></a>
-		</li>
-		<li> Wei P., Feng Q., Yang X., Miao R., Liang W., Sun S. (2025). Shock waves induced by bubble collapse near a sphere. <i>Physics of Fluids</i>, 37, 093373. <a class="badge" href="https://doi.org/10.1063/5.0293484" target="_blank"><img src="https://img.shields.io/badge/DOI-10.1063/5.0293484-green.svg" alt="DOI link" /></a>
-		</li>
-		<li> Le Boursicaud M., Zhao S., Consalvi J. L., Boivin P. (2025). Modeling self-ignition of high-pressure hydrogen leaks in confined space. <i>Combustion and Flame</i>, 280, 114386. <a class="badge" href="https://doi.org/10.1016/j.combustflame.2025.114386" target="_blank"><img src="https://img.shields.io/badge/DOI-10.1016/j.combustflame.2025.114386-green.svg" alt="DOI link" /></a>
-		</li>
-		<li> Bokman G. T., Fiorini S., Strucka J., Lukić B., Bland S. N., Mughal K., Liu S., Rack A. Supponen O. (2025). Planar shock-induced bubble collapse and jetting in water captured via x-ray phase contrast imaging. <i>Applied Physics Letters</i>, 127, 014102. <a class="badge" href="https://doi.org/10.1063/5.0272963" target="_blank"><img src="https://img.shields.io/badge/DOI-10.1063/5.0272963-green.svg" alt="DOI link" /></a>
-		</li>
-		<li> Han W., Zhu B., Zhang H., Zhang W. (2025). Evolution characteristics of bubble collapse near a wall and modeling of induced peak pressure. <i>Physics of Fluids</i>, 37, 046106. <a class="badge" href="https://doi.org/10.1063/5.0265900" target="_blank"><img src="https://img.shields.io/badge/DOI-10.1063/5.0265900-green.svg" alt="DOI link" /></a>
-		</li>
-		<li> Le Boursicaud M., Zhao S., Consalvi J.-L., Boivin P. (2025). A reduced order numerical model for high-pressure hydrogen leak self-ignition. <i>Combustion and Flame</i>, 274, 114003. <a class="badge" href="https://doi.org/10.1016/j.combustflame.2025.114003" target="_blank"><img src="https://img.shields.io/badge/DOI-10.1016/j.combustflame.2025.114003-green.svg" alt="DOI link" /></a>
-		</li>
-		<li> Brasseur M., Jourdan G., Mariani C., Barros D. C., Vandenboomgaerde M., Souffland D. (2025). Experimental study of the Richtmyer-Meshkov instability in spherical geometry. <i>Physical Review Fluids</i>, 10 (1), 014001. <a class="badge" href="https://doi.org/10.1103/PhysRevFluids.10.014001" target="_blank"><img src="https://img.shields.io/badge/DOI-10.1103/PhysRevFluids.10.014001-green.svg" alt="DOI link" /></a>
-		</li>
-		<li> Sun S., Zhao M., Zhang X., Zheng J., Li T. (2025). Suppression effect on implosion of ceramic pressure hull through porous protection based on flow control. <i>Physics of Fluids</i>, 37 (1), 016141. <a class="badge" href="https://doi.org/10.1063/5.0250858" target="_blank"><img src="https://img.shields.io/badge/DOI-10.1063/5.0250858-green.svg" alt="DOI link" /></a>
-		</li>
-		<li> Bokman G. T., Biasiori-Poulanges L., Lukić B., Schmidmayer K., Bourquard C., Baumann E., Rack A., Olson B. J., Supponen O. (2024). Impulse-driven release of gas-encapsulated drops. <i>Journal of Fluid Mechanics</i>, 1001, A51. <a class="badge" href="https://doi.org/10.1017/jfm.2024.1124" target="_blank"><img src="https://img.shields.io/badge/DOI-10.1017/jfm.2024.1124-green.svg" alt="DOI link" /></a>
-		</li>
-		<li> Zheng D., Guo X., Zhai Z., Luo X. (2024). Simulations on perturbation growth and mixing of a shocked light fluid layer with two different interfaces. <i>Physics of Fluids</i>, 36 (12), 124103. <a class="badge" href="https://doi.org/10.1063/5.0243145" target="_blank"><img src="https://img.shields.io/badge/DOI-10.1063/5.0243145-green.svg" alt="DOI link" /></a>
- 		</li>
-		<li> Hong Z.-Y., Song Y., Wang R., Ma Z.-Q., Ma D.-J., Wang P. (2024). Deformation and mutual influence of two cylindrical water columns in tandem subjected to shock wave. <i>Chinese Physics B</i>. <a class="badge" href="https://doi.org/10.1088/1674-1056/ad5273" target="_blank"><img src="https://img.shields.io/badge/DOI-10.1088/1674-1056/ad5273-green.svg" alt="DOI link" /></a>
- 		</li>
-		<li> Schropff S., Petitpas F., Daniel E. (2024). Reference solutions for compressible single-phase flows in heated and cooled ducts. <i>Physics of Fluids</i>, 36 (5), 056126. <a class="badge" href="https://doi.org/10.1063/5.0209500" target="_blank"><img src="https://img.shields.io/badge/DOI-10.1063/5.0209500-green.svg" alt="DOI link" /></a>
- 		</li>
- 		<li> Zhao J., Wang J., Cao S. (2024). Dynamics of tandem bubble interaction near tissue. <i>Physics of Fluids</i>, 36 (5), 053324. <a class="badge" href="https://doi.org/10.1063/5.0201811" target="_blank"><img src="https://img.shields.io/badge/DOI-10.1063/5.0201811-green.svg" alt="DOI link" /></a>
- 		</li>
-		<li> Feng K., Eshraghi J., Vlachos P. P., Gomez H. (2024). Simulation of bubble oscillations in cavitation-induced acoustic fields. <i>Physics of Fluids</i>, 36 (5), 053305. <a class="badge" href="https://doi.org/10.1063/5.0194341" target="_blank"><img src="https://img.shields.io/badge/DOI-10.1063/5.0194341-green.svg" alt="DOI link" /></a>
- 		</li>
-		<li> Cazé J., Petitpas F., Daniel E., Queguineur M., Le Martelot S. (2024). Modeling and simulation of the cavitation phenomenon in turbopumps. <i>Journal of Computational Physics</i>, 112817. <a class="badge" href="https://doi.org/10.1016/j.jcp.2024.112817" target="_blank"><img src="https://img.shields.io/badge/DOI-10.1016/j.jcp.2024.112817-green.svg" alt="DOI link" /></a>
- 		</li>
-		<li> Sun S., Zhao M., Jiang Y. (2024). Numerical study of chain-reaction implosions in a spatial array of ceramic pressure hulls in the deep sea using a compressible multiphase flow model. <i>Physics of Fluids</i>, 36, 016112. <a class="badge" href="https://doi.org/10.1063/5.0184654" target="_blank"><img src="https://img.shields.io/badge/DOI-10.1063/5.0184654-green.svg" alt="DOI link" /></a>
-		</li>
- 		<li> Bokman G. T., Biasiori-Poulanges L., Meyer D. W., Supponen O. (2023). Scaling laws for bubble collapse driven by an impulsive shock wave. <i>Journal of Fluid Mechanics</i>, 967, A33. <a class="badge" href="https://doi.org/10.1017/jfm.2023.514" target="_blank"><img src="https://img.shields.io/badge/DOI-10.1017/jfm.2023.514-green.svg" alt="DOI link" /></a>
- 		</li>
- 		<li> Schmidmayer K., Biasiori-Poulanges L. (2023). Geometry effects on the droplet shock-induced cavitation. <i>Physics of Fluids</i>, 35 (6), 063315. <a class="badge" href="https://doi.org/10.1063/5.0151404" target="_blank"><img src="https://img.shields.io/badge/DOI-10.1063/5.0151404-green.svg" alt="DOI link" /></a>
- 		</li>
- 		<li> Sun S., Zhao M. (2023). Numerical simulation and analysis of the chain-reaction implosions of multi-spherical hollow ceramic pressure hulls in the deep-sea environment. <i>Ocean Engineering</i>, 277, 114247. <a class="badge" href="https://doi.org/10.1016/j.oceaneng.2023.114247" target="_blank"><img src="https://img.shields.io/badge/DOI-10.1016/j.oceaneng.2023.114247-green.svg" alt="DOI link" /></a>
-		</li>
-		<li> Biasiori-Poulanges L., Schmidmayer K. (2023). A phenomenological analysis of droplet shock-induced cavitation using a multiphase modelling approach. <i>Physics of Fluids</i>, 35 (1), 013312. <a class="badge" href="https://doi.org/10.1063/5.0127105" target="_blank"><img src="https://img.shields.io/badge/DOI-10.1063/5.0127105-green.svg" alt="DOI link" /></a>
-		</li>
-		<li> Schmidmayer K., Cazé J., Petitpas F., Daniel E., Favrie N. (2023). Modelling interactions between waves and diffused interfaces. <i>International Journal for Numerical Methods in Fluids</i>, 95 (2), 215-241. <a class="badge" href="https://doi.org/10.1002/fld.5142" target="_blank"><img src="https://img.shields.io/badge/DOI-10.1002/fld.5142.2022-green.svg" alt="DOI link" /></a>
-		</li>
-		<li> Biasiori-Poulanges L., Bokman G. T., Baumann E., Supponen O. (2022). Dynamics of a shocked bubble-encapsulated droplet. <i>Applied Physics Letters</i>, 120 (26), 260601. <a class="badge" href="https://doi.org/10.1063/5.0102009" target="_blank"><img src="https://img.shields.io/badge/DOI-10.1063/5.0102009-green.svg" alt="DOI link" /></a>
-		</li>
-		<li> Tripathi M., Ganti H., Khare P. (2022). Interactions between shock waves and liquid droplet clusters: Interfacial physics. <i>Journal of Fluids Engineering</i>, 144 (10), 101401. <a class="badge" href="https://doi.org/10.1115/1.4054181" target="_blank"><img src="https://img.shields.io/badge/DOI-10.1115/1.4054181-green.svg" alt="DOI link" /></a>
-		</li>
-		<li> Fan E., Hao J., Guan B., Wen C. Y., Shi L. (2022). Numerical investigation on reacting shock-bubble interaction at a low Mach limit. <i>Combustion and Flame</i>, 241, 112085. <a class="badge" href="https://doi.org/10.1016/j.combustflame.2022.112085" target="_blank"><img src="https://img.shields.io/badge/DOI-10.1016/j.combustflame.2022.112085-green.svg" alt="DOI link" /></a>
-		</li>
-		<li> Sun S., Chen F., Zhao M. (2022). Numerical simulation and analysis of the underwater implosion of spherical hollow ceramic pressure hulls in 11000m depth. <i>Journal of Ocean Engineering and Science</i>. <a class="badge" href="https://doi.org/10.1016/j.joes.2022.01.002" target="_blank"><img src="https://img.shields.io/badge/DOI-10.1016/j.joes.2022.01.002-green.svg" alt="DOI link" /></a>
-		</li>
-		<li> Redding J. P., Khare P. (2022). A computational study on shock induced deformation, fragmentation and vaporization of volatile liquid fuel droplets. <i>International Journal of Heat and Mass Transfer</i>, 184, 122345. <a class="badge" href="https://doi.org/10.1016/j.ijheatmasstransfer.2021.122345" target="_blank"><img src="https://img.shields.io/badge/DOI-10.1016/j.ijheatmasstransfer.2021.122345-green.svg" alt="DOI link" /></a>
-		</li>
-		<li> Biasiori-Poulanges L., El-Rabii H. (2021). Shock-induced cavitation and wavefront analysis inside a water droplet. <i>Physics of Fluids</i>, 33 (9), 097104. <a class="badge" href="https://doi.org/10.1063/5.0063827" target="_blank"><img src="https://img.shields.io/badge/DOI-10.1063/5.0063827-green.svg" alt="DOI link" /></a>
-		</li>
-		<li> Dorschner B., Biasiori-Poulanges L., Schmidmayer K., El-Rabii H., Colonius T. (2020). On the formation and recurrent shedding of ligaments in droplet aerobreakup. <i>Journal of Fluid Mechanics</i>, 904, A20. <a class="badge" href="https://doi.org/10.1017/jfm.2020.699" target="_blank"><img src="https://img.shields.io/badge/DOI-10.1017/jfm.2020.699-green.svg" alt="DOI link" /></a>
-		</li>
-		<li> Trummler T., Bryngelson S. H., Schmidmayer K., Schmidt S. J., Colonius T., Adams N. A. (2020). Near-surface dynamics of a gas bubble collapsing above a crevice. <i>Journal of Fluid Mechanics</i>, 899, A16. <a class="badge" href="https://doi.org/10.1017/jfm.2020.432" target="_blank"><img src="https://img.shields.io/badge/DOI-10.1017/jfm.2020.432-green.svg" alt="DOI link" /></a>
-		</li>
-		<li> Schmidmayer K., Bryngelson S. H., Colonius T. (2020). An assessment of multicomponent flow models and interface capturing schemes for spherical bubble dynamics. <i>Journal of Computational Physics</i>, 402, 109080. <a class="badge" href="https://doi.org/10.1016/j.jcp.2019.109080" target="_blank"><img src="https://img.shields.io/badge/DOI-10.1016/j.jcp.2019.109080-green.svg" alt="DOI link" /></a>
-		</li>
-		<li> Pishchalnikov Y. A., Behnke-Parks W. M., Schmidmayer K., Maeda K., Colonius T., Kenny T. W., Laser D. J. (2019). High-speed video microscopy and numerical modeling of bubble dynamics near a surface of urinary stone. <i>The Journal of the Acoustical Society of America</i>, 146, 516-531. <a class="badge" href="https://doi.org/10.1121/1.5116693" target="_blank"><img src="https://img.shields.io/badge/DOI-10.1121/1.5116693-green.svg" alt="DOI link" /></a>
-		</li>
-		<li> Marty A., Daniel E., Massoni J., Biamino L., Houas L., Leriche D., Jourdan G. (2019). Experimental and numerical investigations of shock wave propagation through a bifurcation. <i>Shock Waves</i>, 29, 285-296. <a class="badge" href="https://doi.org/10.1007/s00193-017-0797-6" target="_blank"><img src="https://img.shields.io/badge/DOI-10.1007/s00193--017--0797--6-green.svg" alt="DOI link" /></a>
-		</li>
-		<li> Schmidmayer K., Petitpas F., Daniel E. (2019). Adaptive Mesh Refinement algorithm based on dual trees for cells and faces for multiphase compressible flows. <i>Journal of Computational Physics</i>, 388, 252-278. <a class="badge" href="https://dx.doi.org/10.1016/j.jcp.2019.03.011" target="_blank"><img src="https://img.shields.io/badge/DOI-10.1016/j.jcp.2019.03.011-green.svg" alt="DOI link" /></a>
-		</li>
-		<li> Schmidmayer K., Petitpas F., Daniel E., Favrie N., Gavrilyuk S. L. (2017). A model and numerical method for compressible flows with capillary effects. <i>Journal of Computational Physics</i>, 334, 468-496. <a class="badge" href="https://doi.org/10.1016/j.jcp.2017.01.001" target="_blank"><img src="https://img.shields.io/badge/DOI-10.1016/j.jcp.2017.01.001-green.svg" alt="DOI link" /></a>
-		</li>
-	</ol>
-</article>
+    <li class="bibtex">
+      <details>
+        <summary>BibTeX</summary>
+        <div class="bibtex-box">
+          <button class="copy" type="button" data-copy="bib-1">Copy</button>
+          <pre id="bib-1"><code>@article{schmidmayer2020ecogen,
+  doi = {10.1016/j.cpc.2019.107093},
+  url = {https://doi.org/10.1016/j.cpc.2019.107093},
+  title = { {ECOGEN}: {A}n open-source tool for multiphase, compressible, multiphysics flows},
+  author = {Schmidmayer, Kevin and Petitpas, Fabien and Le Martelot, S{\&#39;e}bastien and Daniel, {\&#39;E}ric},
+  journal = {Computer Physics Communications},
+  volume = {251},
+  pages = {107093},
+  year = {2020}
+}</code></pre>
+        </div>
+      </details>
+    </li>
+  </ul>
+</section>
 
-<article>
-	<h1> PhD Theses </h1>
-	<ol reversed="">
-		<li> Bokman G. T. (2025). Shock wave-driven bubble dynamics. <i>ETH Zürich</i>. <a href="https://www.research-collection.ethz.ch/bitstream/handle/20.500.11850/736165/1/Bokman_Guillaume_ETHZ_Thesis_Shock_Bubble_Final.pdf" target="_blank">Download on www.research-collection.ethz.ch</a>
-		</li>
-		<li> Schropff S. (2025). Effets de la compressibilité sur les écoulements non adiabatiques en conduite : solutions analytiques et méthodes numériques. <i>Aix-Marseille Université</i>. <a href="https://theses.fr/s373339" target="_blank">Download on www.theses.fr</a>
-		</li>
-		<li> Cazé J. (2022). Modeling and simulation of the cavitation phenomenon in space engine turbopumps. <i>Aix-Marseille Université</i>. <a href="https://theses.fr/2022AIXM0360" target="_blank">Download on www.theses.fr</a>
-		</li>
-		<li> Brasseur M. (2022). Experimental study of the Richtmyer-Meshkov instability in spherical geometry. <i>Aix-Marseille Université</i>. <a href="https://theses.fr/2022AIXM0383" target="_blank">Download on www.theses.fr</a>
-		</li>
-		<li> Biasiori-Poulanges L. (2021). Shock-induced aerodynamic fragmentation of a liquid droplet. <i>Université de Poitiers</i>. <a href="https://www.theses.fr/2021ESMA0002" target="_blank">Download on www.theses.fr</a>
-		</li>
-		<li> Trummler T. (2020). Numerical investigations of cavitation phenomena. <i>Technishe Universität München</i>. <a href="https://mediatum.ub.tum.de/doc/1543746/1543746.pdf" target="_blank">Download on mediatum.ub.tum.de</a>
-		</li>
-		<li> Veilleux J.-C. (2019). Pressure and Stress Transients in Autoinjector Devices. <i>California Institute of Technology</i>. <a class="badge" href="http://dx.doi.org/10.7907/VJSH-TF65" target="_blank"><img src="https://img.shields.io/badge/DOI-10.7907/VJSH--TF65-green.svg" alt="DOI link" /></a>
-		</li>
-		<li> Marty A. (2018). Propagation d'une onde de choc dans un système de canaux à géométrie complexe : expériences et simulations. <i>Aix-Marseille Université</i>. <a href="https://www.theses.fr/2018AIXM0678" target="_blank">Information on www.theses.fr</a>
-		</li>
-		<li> Schmidmayer K. (2017). Simulation de l'atomisation d'une goutte par un écoulement à grande vitesse. <i>Aix-Marseille Université</i>. <a href="https://www.theses.fr/2017AIXM0339" target="_blank">Download on www.theses.fr</a>
-		</li>
-	</ol>
-</article>
 
-<article>
-	<h1> Conferences </h1>
-	<ol reversed="">
-		<li> Favrie N., Schmidmayer K. (2026). A unified diffuse-interface model for compressible multiphase flows with elasto-viscoplastic solids and irreversible compaction. <i>MultiMat 2026, 12th International Conference on Numerical Methods for Multi-Material Fluid Flow</i>, Biarritz, France. <a class="badge" href="https://inria.hal.science/hal-05749778" target="_blank"><img src="https://img.shields.io/badge/HAL-05749778-green.svg" alt="HAL link" /></a>
-		</li>
-		<li> Martin de Fourchambault L., Schmidmayer K., Petitpas F. (2026). Assessing numerical schemes for multi-velocity multiphase compressible flows. <i>MultiMat 2026, 12th International Conference on Numerical Methods for Multi-Material Fluid Flow</i>, Biarritz, France. <a class="badge" href="https://inria.hal.science/hal-05749544" target="_blank"><img src="https://img.shields.io/badge/HAL-05749544-green.svg" alt="HAL link" /></a>
-		</li>
-		<li> Favrie N., Schmidmayer K. (2026). A multiphase compressible flow model including elasto-viscoplastic solids with irreversible compaction. <i>17th World Congress on Computational Mechanics (WCCM), 10th European Congress on Computational Methods in Applied Sciences and Engineering (ECCOMAS), Munich, Germany</i>. <a class="badge" href="https://inria.hal.science/hal-05705558" target="_blank"><img src="https://img.shields.io/badge/HAL-05705558-green.svg" alt="HAL link" /></a>
-		</li>
-		<li> Saini M., Denner F., Schmidmayer K. (2026). A pressure non-equilibrium two-phase model for simulating bubble clusters in heterogeneous cavitation. <i>17th World Congress on Computational Mechanics (WCCM), 10th European Congress on Computational Methods in Applied Sciences and Engineering (ECCOMAS), Munich, Germany</i>. <a class="badge" href="https://inria.hal.science/hal-05705512" target="_blank"><img src="https://img.shields.io/badge/HAL-05705512-green.svg" alt="HAL link" /></a>
-		</li>
-		<li> Handa F., Favrie N., Renaud A., Heuzé T. (2026). Hyperbolic Eulerian gradient damage modeling of dynamic brittle fracture at finite strain. <i>17th World Congress on Computational Mechanics (WCCM), 10th European Congress on Computational Methods in Applied Sciences and Engineering (ECCOMAS), Munich, Germany</i>.
-		</li>
-		<li> Ade-Onojobi A., Bokman G. T., Sieber A., Brewer C., Lukić B., Shakya G., Belau M., Kühl A., Schlötter M., Supponen O., Schmidmayer K. (2026). Investigating kidney-stone erosion induced by dual-bubble dynamics: experiments and simulations. <i>17th World Congress on Computational Mechanics (WCCM), 10th European Congress on Computational Methods in Applied Sciences and Engineering (ECCOMAS), Munich, Germany</i>. <a class="badge" href="https://inria.hal.science/hal-05705538" target="_blank"><img src="https://img.shields.io/badge/HAL-05705538-green.svg" alt="HAL link" /></a>
-		</li>
-		<li> Sieber A., Brewer C., Lukić B., Shakya G., Bokman G. T., Belau M., Kühl A., Schlötter M., Schmidmayer K., Supponen O. (2026). Linking dynamics to damage in human kidney stone fragmentation: synchrotron high-speed X-ray imaging and tomography. <i>25th Annual International Symposium on Therapeutic Ultrasound, ISTU 26, Trondheim, Norway</i>. <a class="badge" href="https://inria.hal.science/hal-05705496" target="_blank"><img src="https://img.shields.io/badge/HAL-05705496-green.svg" alt="HAL link" /></a>
-		</li>
-		<li> Saini M., Denner F., Schmidmayer K. (2026). Subgrid cavitation model based on a pressure disequilibrium formulation. <i>Proceedings of the Canadian Society for Mechanical Engineering International Congress, 33rd Annual Conference of the Computational Fluid Dynamics Society of Canada, Vancouver, British Columbia, Canada</i>. <a class="badge" href="https://inria.hal.science/hal-05642729" target="_blank"><img src="https://img.shields.io/badge/HAL-05642729-green.svg" alt="HAL link" /></a>
-		</li>
-		<li> Taglialatela F. E., De Stefano G., Schmidmayer K. (2026). Towards LES of multiphase compressible flows. <i>DLES15, The 15th ERCOFTAC workshop on Direct and Large Eddy Simulation, Delft, Netherlands</i>. <a class="badge" href="https://inria.hal.science/hal-05642671" target="_blank"><img src="https://img.shields.io/badge/HAL-05642671-green.svg" alt="HAL link" /></a>
-		</li>
-		<li> Saini M., Denner F., Schmidmayer K. (2026). A pressure non-equilibrium two-phase model for simulating bubble clusters in heterogeneous cavitation. <i>Rencontre du Non-Linéaire 2026, Paris, France</i>. <a class="badge" href="https://hal.science/hal-05579646" target="_blank"><img src="https://img.shields.io/badge/HAL-05579646-green.svg" alt="HAL link" /></a>
-		</li>
-		<li> Tripathi M., Khare P. (2026). Shock-induced atomization and vaporization of liquid fuel droplet clouds. <i>AIAA SCITECH 2026 Forum, Orlando, Florida, USA</i>. <a class="badge" href="https://doi.org/10.2514/6.2026-1734" target="_blank"><img src="https://img.shields.io/badge/DOI-10.2514/6.2026-1734-green.svg" alt="DOI link" /></a>
-		</li>
-		<li> Taglialatela F. E., De Stefano G. (2025). CFD prediction of tandem water columns aerobreakup using open-source codes. <i>ICCSA 2025 - International Conference on Computational Science and Its Applications, Istanbul, Turquey</i>. <a class="badge" href="https://doi.org/10.1007/978-3-031-97000-9_3" target="_blank"><img src="https://img.shields.io/badge/DOI-10.1007/978-3-031-97000-9_3-green.svg" alt="DOI link" /></a>
-		</li>
-		<li> Schmidmayer K., Petitpas F., Favrie N. (2025). ECOGEN: An open-source software for simulation of cavitation bubble dynamics. <i>Workshop on Bubbles in Complex Media and Confinements, Monte Verità, Switzerland.</i>
-		</li>
-		<li> Schmidmayer K., Bokman G. T., Sieber A., Ade-Onojobi A., Lukić B., Shakya G., Kühl A., Schlötter M., Belau M., Supponen O. (2025). Exploring the interplay of stone-attached and distant cavitation bubbles during extracorporeal shock wave lithotripsy. <i>12th International Conference on Multiphase Flow, ICMF 2025, Toulouse, France.</i>
-		</li>
-		<li> Fiorini S., Bokman G. T., Prasanna A., Shakya G., Nikolaou S., Lukić B., Rack A., Supponen O. (2025). Shock focusing and vapor nucleation in perfluorocarbon droplets. <i>12th International Conference on Multiphase Flow, ICMF 2025, Toulouse, France.</i>
-		</li>
-		<li> Zheng J., He Y., Zhao M. (2023). Numerical study of underwater implosion of spherical pressure hull on deep-sea submersibles. <i>ASME 2023 42nd International Conference on Ocean, Offshore and Arctic Engineering, Melbourne, Australia</i>.
-		</li>
-		<li> Shengxia S., Zhao M. (2023). Numerical simulation of chain-reaction implosions and analysis of different implosion beginning positions. <i>ASME 2023 42nd International Conference on Ocean, Offshore and Arctic Engineering, Melbourne, Australia</i>.
-		</li>
-		<li> Schmidmayer K., Biasiori-Poulanges L. (2023). On bubble cloud growth in shock-droplet interaction. <i>11th International Conference on Multiphase Flow, ICMF 2023, Kobe, Japan</i>.
-		</li>
-		<li> Feng K., Eshraghi J., Vlachos P., Gomez H. (2022). Computational modeling of air bubble oscillations in a cavitation-induced acoustic field using multi-phase multicomponent model. <i>Bulletin of the American Physical Society, 75th Annual Meeting of the Division of Fluid Dynamics, V. 67, N. 19, Indianapolis, USA</i>.
-		</li>
-		<li> Schmidmayer K., Cazé J., Petitpas F., Daniel E., Favrie N. (2022). Modelling interactions of waves with diffused interfaces. <i>10th International Conference on Numerical Methods for Multi-Material Fluid Flow, MultiMat 2022, Zürich, Switzerland</i>.
-		</li>
-		<li> Cazé J., Petitpas F., Daniel E., Le Martelot S., Queguineur M. (2022). Modeling and simulation of a turbopump flow: a multiphase approach. <i>ASME Turbo Expo 2022 - Turbomachinery Technical Conference and Exposition, Rotterdam, Netherlands</i>. <a class="badge" href="https://doi.org/10.1115/GT2022-78025" target="_blank"><img src="https://img.shields.io/badge/DOI-10.1115/GT2022--78025-green.svg" alt="DOI link" /></a>
-		</li>
-		<li> Schmidmayer K. (2022). Modeling and simulation of bubble dynamics in the diffuse-interface framework. <i>Workshop on cavitation, bubble dynamics and mass transfer, Strasbourg, France</i>.
-		</li>
-		<li> Dorschner B., Schmidmayer K., Biasiori-Poulanges L., El-Rabii H., Colonius T. (2019). Shock-induced atomization of water droplets. <i>72nd Annual Meeting of the APS Division of Fluid Dynamics, Seattle, USA</i>.
-		</li>
-		<li> Schmidmayer K., Colonius T. (2019). A comparative study on interface-capturing models and schemes to solve bubble dynamics and cavitation. <i>10th International Conference on Multiphase Flow, ICMF 2019, Rio de Janeiro, Brazil</i>.
-		</li>
-		<li> Marty A., Jourdan G., Houas L., Mariani C., Daniel E., Biamino L., Leriche D. (2019). Shock wave mitigation propagating through a cavity. <i>32nd International Symposium on Shock Waves, ISSW32, Singapore</i>.
-		</li>
-		<li> Schmidmayer K., Colonius T. (2018). Simulation of the collapse of a vapor bubble near or attached to a rigid surface. <i>71st Annual Meeting of the APS Division of Fluid Dynamics, Atlanta, USA</i>.
-		</li>
-		<li> Schmidmayer K., Marty A., Petitpas F., Daniel E. (2018). ECOGEN, an open-source tool dedicated to multiphase compressible multiphysics flows. <i>53rd 3AF International Conference on applied Aerodynamics, Salon-de-Provence, France</i>. <a class="badge" href="https://doi.org/10.48550/arXiv.1805.01363" target="_blank"><img src="https://img.shields.io/badge/DOI-10.48550/arXiv.1805.01363-green.svg" alt="arXiv link" /></a>
-		</li>
-		<li> Schmidmayer K., Petitpas F., Daniel E. (2018). Simulation of the atomization of a droplet by a high-speed flow. <i>Bulletin of the American Physical Society, APS March Meeting 2018, Los Angeles, USA</i>.
-		</li>
-		<li> Schmidmayer K., Petitpas F., Daniel E. (2016). A model and numerical method for high speed flows with capillary, viscous and heat conduction effects. <i>46th AIAA Fluid Dynamics Conference, Washington, USA</i>.
-		</li>
-	</ol>
-</article>
+  <div class="pub-tools">
+    <label class="search"><svg class="icon" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/></svg><span class="sr">Filter publications</span>
+      <input id="pub-filter" type="search" placeholder="Filter by author, title, journal, year…" autocomplete="off">
+    </label>
+    <nav class="pub-jump" aria-label="Sections">
+      <a href="#journals">Journal articles <span class="count">47</span></a>
+      <a href="#theses">PhD theses <span class="count">9</span></a>
+      <a href="#conferences">Conferences <span class="count">30</span></a>
+      <a href="#preprints">Preprints <span class="count">1</span></a>
+    </nav>
+  </div>
+  <p id="pub-none" class="muted" hidden>No publication matches this filter.</p>
+  <section class="pub-section" id="journals">
+    <h2>Journal articles</h2>
+    <ol class="pub-list" reversed><li class="pub" data-year="2026">
+  <span class="pub-authors">Han W., Wu Y., Zhu B., Zhang W.</span> (2026).
+  <span class="pub-title">Acoustic diffraction and pressure-amplitude recovery behind an air bubble subjected to a collapse-induced pulse</span>. <em>Physics of Fluids</em>, 38 (10), 106121. <a class="tag tag-ref" href="https://doi.org/10.1063/5.0348564"><span class="tag-key">DOI</span><span class="tag-val">10.1063/5.0348564</span></a>
+</li>
+<li class="pub" data-year="2026">
+  <span class="pub-authors">Tripathi M., Redding J., Khare P.</span> (2026).
+  <span class="pub-title">Effect of droplet spacing on the interactions between shocks and tandem droplets</span>. <em>Transport Phenomena</em>, 1 (3), 20260076. <a class="tag tag-ref" href="https://doi.org/10.1515/tp-2026-0076"><span class="tag-key">DOI</span><span class="tag-val">10.1515/tp-2026-0076</span></a>
+</li>
+<li class="pub" data-year="2026">
+  <span class="pub-authors">Yang Y., Smith T. A.</span> (2026).
+  <span class="pub-title">Interaction of near-wall bubble arrays with acoustic waves induced by an oscillating rigid wall</span>. <em>The Journal of the Acoustical Society of America</em>, 160 (1), 310–320. <a class="tag tag-ref" href="https://doi.org/10.1121/10.0044330"><span class="tag-key">DOI</span><span class="tag-val">10.1121/10.0044330</span></a>
+</li>
+<li class="pub" data-year="2026">
+  <span class="pub-authors">Ichihara S., Fiorini S., Tagawa Y., Supponen O.</span> (2026).
+  <span class="pub-title">Measurement of traveling pressure waves inside a droplet</span>. <em>Experimental Thermal and Fluid Science</em>, 178, 111800. <a class="tag tag-ref" href="https://doi.org/10.1016/j.expthermflusci.2026.111800"><span class="tag-key">DOI</span><span class="tag-val">10.1016/j.expthermflusci.2026.111800</span></a>
+</li>
+<li class="pub" data-year="2026">
+  <span class="pub-authors">Singh A. P., Rao D. C. K., Rahlves M., Vogel A., Basu S.</span> (2026).
+  <span class="pub-title">Predicting and controlling laser-induced breakup and multidirectional propulsion of liquid droplets</span>. <em>Proceedings of the National Academy of Sciences</em>, 123 (15), e2526933123. <a class="tag tag-ref" href="https://doi.org/10.1073/pnas.2526933123"><span class="tag-key">DOI</span><span class="tag-val">10.1073/pnas.2526933123</span></a>
+</li>
+<li class="pub" data-year="2026">
+  <span class="pub-authors">Favrie N., Schmidmayer K.</span> (2026).
+  <span class="pub-title">A multiphase compressible flow model including elasto-viscoplastic solids with irreversible compaction</span>. <em>Computer Methods in Applied Mechanics and Engineering</em>, 455, 118880. <a class="tag tag-ref" href="https://doi.org/10.1016/j.cma.2026.118880"><span class="tag-key">DOI</span><span class="tag-val">10.1016/j.cma.2026.118880</span></a>
+</li>
+<li class="pub" data-year="2026">
+  <span class="pub-authors">Lu H., Min Q., He C., He S., Wu Y., Cao S., Su M.</span> (2026).
+  <span class="pub-title">Numerical investigation of laser pre-pulse effects on tin microdroplet targets and extreme ultraviolet emission</span>. <em>AIP Advances</em>, 16 (3), 035027. <a class="tag tag-ref" href="https://doi.org/10.1063/5.0320685"><span class="tag-key">DOI</span><span class="tag-val">10.1063/5.0320685</span></a>
+</li>
+<li class="pub" data-year="2026">
+  <span class="pub-authors">Schropff S., Petitpas F., Daniel E.</span> (2026).
+  <span class="pub-title">Semi-implicit method for two-phase flows in pressure disequilibrium</span>. <em>Journal of Computational Physics</em>, 547, 114545. <a class="tag tag-ref" href="https://doi.org/10.1016/j.jcp.2025.114545"><span class="tag-key">DOI</span><span class="tag-val">10.1016/j.jcp.2025.114545</span></a>
+</li>
+<li class="pub" data-year="2025">
+  <span class="pub-authors">Woods M.</span> (2025).
+  <span class="pub-title">An eigenvalue-based method for computing the relaxed pressure in compressible multiphase flow with $N$ phases</span>. <em>Physics of Fluids</em>, 37 (12), 123356. <a class="tag tag-ref" href="https://doi.org/10.1063/5.0303854"><span class="tag-key">DOI</span><span class="tag-val">10.1063/5.0303854</span></a>
+</li>
+<li class="pub" data-year="2025">
+  <span class="pub-authors">Prasanna A., Bokman G. T., Fiorini S., Sieber A., Lukić B., Foster D., Supponen O.</span> (2025).
+  <span class="pub-title">Shock-compression-based equation of state for perfluorohexane</span>. <em>Physical Review E</em>, 112 (6), 065101. <a class="tag tag-ref" href="https://doi.org/10.1103/999d-nk9z"><span class="tag-key">DOI</span><span class="tag-val">10.1103/999d-nk9z</span></a>
+</li>
+<li class="pub" data-year="2025">
+  <span class="pub-authors">Min Q., He C., Lu H., Liu X., Su M., Dong C.</span> (2025).
+  <span class="pub-title">Laser prepulse-induced deformation dynamics in tin microdroplets for extreme ultraviolet light source applications</span>. <em>Physical Review Research</em>, 7 (4), 043155. <a class="tag tag-ref" href="https://doi.org/10.1103/3v34-2f14"><span class="tag-key">DOI</span><span class="tag-val">10.1103/3v34-2f14</span></a>
+</li>
+<li class="pub" data-year="2025">
+  <span class="pub-authors">Fan E., Zhang T., Hao J., Wen C.-Y., Shi L.</span> (2025).
+  <span class="pub-title">Fire: An open-source adaptive mesh refinement solver for supersonic reacting flows</span>. <em>Computer Physics Communications</em>, 318, 109881. <a class="tag tag-ref" href="https://doi.org/10.1016/j.cpc.2025.109881"><span class="tag-key">DOI</span><span class="tag-val">10.1016/j.cpc.2025.109881</span></a>
+</li>
+<li class="pub" data-year="2025">
+  <span class="pub-authors">Taglialatela F. E., De Stefano G.</span> (2025).
+  <span class="pub-title">Numerical study of cavitation effects in shock-induced tandem droplet breakup</span>. <em>Physics of Fluids</em>, 37 (9), 092129. <a class="tag tag-ref" href="https://doi.org/10.1063/5.0295562"><span class="tag-key">DOI</span><span class="tag-val">10.1063/5.0295562</span></a>
+</li>
+<li class="pub" data-year="2025">
+  <span class="pub-authors">Wei P., Feng Q., Yang X., Miao R., Liang W., Sun S.</span> (2025).
+  <span class="pub-title">Shock waves induced by bubble collapse near a sphere</span>. <em>Physics of Fluids</em>, 37 (9), 093373. <a class="tag tag-ref" href="https://doi.org/10.1063/5.0293484"><span class="tag-key">DOI</span><span class="tag-val">10.1063/5.0293484</span></a>
+</li>
+<li class="pub" data-year="2025">
+  <span class="pub-authors">Le Boursicaud M., Zhao S., Consalvi J.-L., Boivin P.</span> (2025).
+  <span class="pub-title">Modeling self-ignition of high-pressure hydrogen leaks in confined space</span>. <em>Combustion and Flame</em>, 280, 114386. <a class="tag tag-ref" href="https://doi.org/10.1016/j.combustflame.2025.114386"><span class="tag-key">DOI</span><span class="tag-val">10.1016/j.combustflame.2025.114386</span></a>
+</li>
+<li class="pub" data-year="2025">
+  <span class="pub-authors">Bokman G. T., Fiorini S., Strucka J., Lukić B., Bland S. N., Mughal K., Liu S., Rack A., Supponen O.</span> (2025).
+  <span class="pub-title">Planar shock-induced bubble collapse and jetting in water captured via x-ray phase contrast imaging</span>. <em>Applied Physics Letters</em>, 127 (1), 014102. <a class="tag tag-ref" href="https://doi.org/10.1063/5.0272963"><span class="tag-key">DOI</span><span class="tag-val">10.1063/5.0272963</span></a>
+</li>
+<li class="pub" data-year="2025">
+  <span class="pub-authors">Han W., Zhu B., Zhang H., Zhang W.</span> (2025).
+  <span class="pub-title">Evolution characteristics of bubble collapse near a wall and modeling of induced peak pressure</span>. <em>Physics of Fluids</em>, 37 (4), 046106. <a class="tag tag-ref" href="https://doi.org/10.1063/5.0265900"><span class="tag-key">DOI</span><span class="tag-val">10.1063/5.0265900</span></a>
+</li>
+<li class="pub" data-year="2025">
+  <span class="pub-authors">Le Boursicaud M., Zhao S., Consalvi J.-L., Boivin P.</span> (2025).
+  <span class="pub-title">A reduced order numerical model for high-pressure hydrogen leak self-ignition</span>. <em>Combustion and Flame</em>, 274, 114003. <a class="tag tag-ref" href="https://doi.org/10.1016/j.combustflame.2025.114003"><span class="tag-key">DOI</span><span class="tag-val">10.1016/j.combustflame.2025.114003</span></a>
+</li>
+<li class="pub" data-year="2025">
+  <span class="pub-authors">Brasseur M., Jourdan G., Mariani C., Barros D. C., Vandenboomgaerde M., Souffland D.</span> (2025).
+  <span class="pub-title">Experimental study of the Richtmyer-Meshkov instability in spherical geometry</span>. <em>Physical Review Fluids</em>, 10 (1), 014001. <a class="tag tag-ref" href="https://doi.org/10.1103/PhysRevFluids.10.014001"><span class="tag-key">DOI</span><span class="tag-val">10.1103/PhysRevFluids.10.014001</span></a>
+</li>
+<li class="pub" data-year="2025">
+  <span class="pub-authors">Sun S., Zhao M., Zhang X., Zheng J., Li T.</span> (2025).
+  <span class="pub-title">Suppression effect on implosion of ceramic pressure hull through porous protection based on flow control</span>. <em>Physics of Fluids</em>, 37 (1), 016141. <a class="tag tag-ref" href="https://doi.org/10.1063/5.0250858"><span class="tag-key">DOI</span><span class="tag-val">10.1063/5.0250858</span></a>
+</li>
+<li class="pub" data-year="2024">
+  <span class="pub-authors">Bokman G. T., Biasiori-Poulanges L., Lukić B., Schmidmayer K., Bourquard C., Baumann E., Rack A., Olson B. J., Supponen O.</span> (2024).
+  <span class="pub-title">Impulse-driven release of gas-encapsulated drops</span>. <em>Journal of Fluid Mechanics</em>, 1001, A51. <a class="tag tag-ref" href="https://doi.org/10.1017/jfm.2024.1124"><span class="tag-key">DOI</span><span class="tag-val">10.1017/jfm.2024.1124</span></a>
+</li>
+<li class="pub" data-year="2024">
+  <span class="pub-authors">Zheng D., Guo X., Zhai Z., Luo X.</span> (2024).
+  <span class="pub-title">Simulations on perturbation growth and mixing of a shocked light fluid layer with two different interfaces</span>. <em>Physics of Fluids</em>, 36 (12), 124103. <a class="tag tag-ref" href="https://doi.org/10.1063/5.0243145"><span class="tag-key">DOI</span><span class="tag-val">10.1063/5.0243145</span></a>
+</li>
+<li class="pub" data-year="2024">
+  <span class="pub-authors">Hong Z.-Y., Song Y., Wang R., Ma Z.-Q., Ma D.-J., Wang P.</span> (2024).
+  <span class="pub-title">Deformation and mutual influence of two cylindrical water columns in tandem subjected to shock wave</span>. <em>Chinese Physics B</em>, 33 (8), 084702. <a class="tag tag-ref" href="https://doi.org/10.1088/1674-1056/ad5273"><span class="tag-key">DOI</span><span class="tag-val">10.1088/1674-1056/ad5273</span></a>
+</li>
+<li class="pub" data-year="2024">
+  <span class="pub-authors">Schropff S., Petitpas F., Daniel E.</span> (2024).
+  <span class="pub-title">Reference solutions for compressible single-phase flows in heated and cooled ducts</span>. <em>Physics of Fluids</em>, 36 (5), 056126. <a class="tag tag-ref" href="https://doi.org/10.1063/5.0209500"><span class="tag-key">DOI</span><span class="tag-val">10.1063/5.0209500</span></a>
+</li>
+<li class="pub" data-year="2024">
+  <span class="pub-authors">Zhao J., Wang J., Cao S.</span> (2024).
+  <span class="pub-title">Dynamics of tandem bubble interaction near tissue</span>. <em>Physics of Fluids</em>, 36 (5), 053324. <a class="tag tag-ref" href="https://doi.org/10.1063/5.0201811"><span class="tag-key">DOI</span><span class="tag-val">10.1063/5.0201811</span></a>
+</li>
+<li class="pub" data-year="2024">
+  <span class="pub-authors">Feng K., Eshraghi J., Vlachos P. P., Gomez H.</span> (2024).
+  <span class="pub-title">Simulation of bubble oscillations in cavitation-induced acoustic fields</span>. <em>Physics of Fluids</em>, 36 (5), 053305. <a class="tag tag-ref" href="https://doi.org/10.1063/5.0194341"><span class="tag-key">DOI</span><span class="tag-val">10.1063/5.0194341</span></a>
+</li>
+<li class="pub" data-year="2024">
+  <span class="pub-authors">Cazé J., Petitpas F., Daniel E., Queguineur M., Le Martelot S.</span> (2024).
+  <span class="pub-title">Modeling and simulation of the cavitation phenomenon in turbopumps</span>. <em>Journal of Computational Physics</em>, 502, 112817. <a class="tag tag-ref" href="https://doi.org/10.1016/j.jcp.2024.112817"><span class="tag-key">DOI</span><span class="tag-val">10.1016/j.jcp.2024.112817</span></a>
+</li>
+<li class="pub" data-year="2024">
+  <span class="pub-authors">Sun S., Zhao M., Jiang Y.</span> (2024).
+  <span class="pub-title">Numerical study of chain-reaction implosions in a spatial array of ceramic pressure hulls in the deep sea using a compressible multiphase flow model</span>. <em>Physics of Fluids</em>, 36 (1), 016112. <a class="tag tag-ref" href="https://doi.org/10.1063/5.0184654"><span class="tag-key">DOI</span><span class="tag-val">10.1063/5.0184654</span></a>
+</li>
+<li class="pub" data-year="2023">
+  <span class="pub-authors">Bokman G. T., Biasiori-Poulanges L., Meyer D. W., Supponen O.</span> (2023).
+  <span class="pub-title">Scaling laws for bubble collapse driven by an impulsive shock wave</span>. <em>Journal of Fluid Mechanics</em>, 967, A33. <a class="tag tag-ref" href="https://doi.org/10.1017/jfm.2023.514"><span class="tag-key">DOI</span><span class="tag-val">10.1017/jfm.2023.514</span></a>
+</li>
+<li class="pub" data-year="2023">
+  <span class="pub-authors">Schmidmayer K., Biasiori-Poulanges L.</span> (2023).
+  <span class="pub-title">Geometry effects on the droplet shock-induced cavitation</span>. <em>Physics of Fluids</em>, 35 (6), 063315. <a class="tag tag-ref" href="https://doi.org/10.1063/5.0151404"><span class="tag-key">DOI</span><span class="tag-val">10.1063/5.0151404</span></a>
+</li>
+<li class="pub" data-year="2023">
+  <span class="pub-authors">Sun S., Zhao M.</span> (2023).
+  <span class="pub-title">Numerical simulation and analysis of the chain-reaction implosions of multi-spherical hollow ceramic pressure hulls in deep-sea environment</span>. <em>Ocean Engineering</em>, 277, 114247. <a class="tag tag-ref" href="https://doi.org/10.1016/j.oceaneng.2023.114247"><span class="tag-key">DOI</span><span class="tag-val">10.1016/j.oceaneng.2023.114247</span></a>
+</li>
+<li class="pub" data-year="2023">
+  <span class="pub-authors">Biasiori-Poulanges L., Schmidmayer K.</span> (2023).
+  <span class="pub-title">A phenomenological analysis of droplet shock-induced cavitation using a multiphase modeling approach</span>. <em>Physics of Fluids</em>, 35 (1), 013312. <a class="tag tag-ref" href="https://doi.org/10.1063/5.0127105"><span class="tag-key">DOI</span><span class="tag-val">10.1063/5.0127105</span></a>
+</li>
+<li class="pub" data-year="2023">
+  <span class="pub-authors">Schmidmayer K., Cazé J., Petitpas F., Daniel É., Favrie N.</span> (2023).
+  <span class="pub-title">Modelling interactions between waves and diffused interfaces</span>. <em>International Journal for Numerical Methods in Fluids</em>, 95 (2), 215–241. <a class="tag tag-ref" href="https://doi.org/10.1002/fld.5142"><span class="tag-key">DOI</span><span class="tag-val">10.1002/fld.5142</span></a>
+</li>
+<li class="pub" data-year="2022">
+  <span class="pub-authors">Biasiori-Poulanges L., Bokman G. T., Baumann E., Supponen O.</span> (2022).
+  <span class="pub-title">Dynamics of a shocked bubble-encapsulated droplet</span>. <em>Applied Physics Letters</em>, 120 (26), 260601. <a class="tag tag-ref" href="https://doi.org/10.1063/5.0102009"><span class="tag-key">DOI</span><span class="tag-val">10.1063/5.0102009</span></a>
+</li>
+<li class="pub" data-year="2022">
+  <span class="pub-authors">Tripathi M., Ganti H., Khare P.</span> (2022).
+  <span class="pub-title">Interactions Between Shock Waves and Liquid Droplet Clusters: Interfacial Physics</span>. <em>Journal of Fluids Engineering</em>, 144 (10), 101401. <a class="tag tag-ref" href="https://doi.org/10.1115/1.4054181"><span class="tag-key">DOI</span><span class="tag-val">10.1115/1.4054181</span></a>
+</li>
+<li class="pub" data-year="2022">
+  <span class="pub-authors">Fan E., Hao J., Guan B., Wen C.-Y., Shi L.</span> (2022).
+  <span class="pub-title">Numerical investigation on reacting shock-bubble interaction at a low Mach limit</span>. <em>Combustion and Flame</em>, 241, 112085. <a class="tag tag-ref" href="https://doi.org/10.1016/j.combustflame.2022.112085"><span class="tag-key">DOI</span><span class="tag-val">10.1016/j.combustflame.2022.112085</span></a>
+</li>
+<li class="pub" data-year="2022">
+  <span class="pub-authors">Sun S., Chen F., Zhao M.</span> (2022).
+  <span class="pub-title">Numerical simulation and analysis of the underwater implosion of spherical hollow ceramic pressure hulls in 11000 m depth</span>. <em>Journal of Ocean Engineering and Science</em>, 8 (2), 181–195. <a class="tag tag-ref" href="https://doi.org/10.1016/j.joes.2022.01.002"><span class="tag-key">DOI</span><span class="tag-val">10.1016/j.joes.2022.01.002</span></a>
+</li>
+<li class="pub" data-year="2022">
+  <span class="pub-authors">Redding J. P., Khare P.</span> (2022).
+  <span class="pub-title">A computational study on shock induced deformation, fragmentation and vaporization of volatile liquid fuel droplets</span>. <em>International Journal of Heat and Mass Transfer</em>, 184, 122345. <a class="tag tag-ref" href="https://doi.org/10.1016/j.ijheatmasstransfer.2021.122345"><span class="tag-key">DOI</span><span class="tag-val">10.1016/j.ijheatmasstransfer.2021.122345</span></a>
+</li>
+<li class="pub" data-year="2021">
+  <span class="pub-authors">Biasiori-Poulanges L., El-Rabii H.</span> (2021).
+  <span class="pub-title">Shock-induced cavitation and wavefront analysis inside a water droplet</span>. <em>Physics of Fluids</em>, 33 (9), 097104. <a class="tag tag-ref" href="https://doi.org/10.1063/5.0063827"><span class="tag-key">DOI</span><span class="tag-val">10.1063/5.0063827</span></a>
+</li>
+<li class="pub" data-year="2020">
+  <span class="pub-authors">Schmidmayer K., Petitpas F., Le Martelot S., Daniel É.</span> (2020).
+  <span class="pub-title">ECOGEN: An open-source tool for multiphase, compressible, multiphysics flows</span>. <em>Computer Physics Communications</em>, 251, 107093. <a class="tag tag-ref" href="https://doi.org/10.1016/j.cpc.2019.107093"><span class="tag-key">DOI</span><span class="tag-val">10.1016/j.cpc.2019.107093</span></a>
+</li>
+<li class="pub" data-year="2020">
+  <span class="pub-authors">Dorschner B., Biasiori-Poulanges L., Schmidmayer K., El-Rabii H., Colonius T.</span> (2020).
+  <span class="pub-title">On the formation and recurrent shedding of ligaments in droplet aerobreakup</span>. <em>Journal of Fluid Mechanics</em>, 904, A20. <a class="tag tag-ref" href="https://doi.org/10.1017/jfm.2020.699"><span class="tag-key">DOI</span><span class="tag-val">10.1017/jfm.2020.699</span></a>
+</li>
+<li class="pub" data-year="2020">
+  <span class="pub-authors">Trummler T., Bryngelson S. H., Schmidmayer K., Schmidt S. J., Colonius T., Adams N. A.</span> (2020).
+  <span class="pub-title">Near-surface dynamics of a gas bubble collapsing above a crevice</span>. <em>Journal of Fluid Mechanics</em>, 899, A16. <a class="tag tag-ref" href="https://doi.org/10.1017/jfm.2020.432"><span class="tag-key">DOI</span><span class="tag-val">10.1017/jfm.2020.432</span></a>
+</li>
+<li class="pub" data-year="2020">
+  <span class="pub-authors">Schmidmayer K., Bryngelson S. H., Colonius T.</span> (2020).
+  <span class="pub-title">An assessment of multicomponent flow models and interface capturing schemes for spherical bubble dynamics</span>. <em>Journal of Computational Physics</em>, 402, 109080. <a class="tag tag-ref" href="https://doi.org/10.1016/j.jcp.2019.109080"><span class="tag-key">DOI</span><span class="tag-val">10.1016/j.jcp.2019.109080</span></a>
+</li>
+<li class="pub" data-year="2019">
+  <span class="pub-authors">Pishchalnikov Y. A., Behnke-Parks W. M., Schmidmayer K., Maeda K., Colonius T., Kenny T. W., Laser D. J.</span> (2019).
+  <span class="pub-title">High-speed video microscopy and numerical modeling of bubble dynamics near a surface of urinary stone</span>. <em>The Journal of the Acoustical Society of America</em>, 146 (1), 516–531. <a class="tag tag-ref" href="https://doi.org/10.1121/1.5116693"><span class="tag-key">DOI</span><span class="tag-val">10.1121/1.5116693</span></a>
+</li>
+<li class="pub" data-year="2019">
+  <span class="pub-authors">Marty A., Daniel E., Massoni J., Biamino L., Houas L., Leriche D., Jourdan G.</span> (2019).
+  <span class="pub-title">Experimental and numerical investigations of shock wave propagation through a bifurcation</span>. <em>Shock Waves</em>, 29 (2), 285–296. <a class="tag tag-ref" href="https://doi.org/10.1007/s00193-017-0797-6"><span class="tag-key">DOI</span><span class="tag-val">10.1007/s00193-017-0797-6</span></a>
+</li>
+<li class="pub" data-year="2019">
+  <span class="pub-authors">Schmidmayer K., Petitpas F., Daniel E.</span> (2019).
+  <span class="pub-title">Adaptive Mesh Refinement algorithm based on dual trees for cells and faces for multiphase compressible flows</span>. <em>Journal of Computational Physics</em>, 388, 252–278. <a class="tag tag-ref" href="https://doi.org/10.1016/j.jcp.2019.03.011"><span class="tag-key">DOI</span><span class="tag-val">10.1016/j.jcp.2019.03.011</span></a>
+</li>
+<li class="pub" data-year="2017">
+  <span class="pub-authors">Schmidmayer K., Petitpas F., Daniel E., Favrie N., Gavrilyuk S.</span> (2017).
+  <span class="pub-title">A model and numerical method for compressible flows with capillary effects</span>. <em>Journal of Computational Physics</em>, 334, 468–496. <a class="tag tag-ref" href="https://doi.org/10.1016/j.jcp.2017.01.001"><span class="tag-key">DOI</span><span class="tag-val">10.1016/j.jcp.2017.01.001</span></a>
+</li>
 
-    </main>
-    <footer>
-	<div> ECOGEN is developped by <a href="https://code-mphi.fr/" target="_blank" > Code-m&Phi; </a> members </div>
-	<div><span class="copy-left">©</span> ECOGEN</div>
-	<div class="flexZone">
-		<div class="design">
-			<p>Design web:</p>
-		</div> 
-		<div class="design">
-			<a href="mailto:productiondulama@gmail.com" target="_blank" > <img src="/ECOGEN/assets/images/productionduLama.png" alt="production du Lama" /> </a> 
-		</div>
-	</div>
+    </ol>
+  </section>
+  <section class="pub-section" id="theses">
+    <h2>PhD theses</h2>
+    <ol class="pub-list" reversed><li class="pub" data-year="2025">
+  <span class="pub-authors">Bokman G. T.</span> (2025).
+  <span class="pub-title">Shock wave-driven bubble dynamics</span>. <em>ETH Zürich</em>. <a class="tag" href="https://www.research-collection.ethz.ch/bitstream/handle/20.500.11850/736165/1/Bokman_Guillaume_ETHZ_Thesis_Shock_Bubble_Final.pdf">PDF</a>
+</li>
+<li class="pub" data-year="2025">
+  <span class="pub-authors">Schropff S.</span> (2025).
+  <span class="pub-title">Effets de la compressibilité sur les écoulements non adiabatiques en conduite : solutions analytiques et méthodes numériques</span>. <em>Aix-Marseille Université</em>.
+</li>
+<li class="pub" data-year="2022">
+  <span class="pub-authors">Cazé J.</span> (2022).
+  <span class="pub-title">Modeling and simulation of the cavitation phenomenon in space engine turbopumps</span>. <em>Aix-Marseille Université</em>. <a class="tag tag-ref" href="https://www.theses.fr/s230377"><span class="tag-key">theses.fr</span><span class="tag-val">s230377</span></a>
+</li>
+<li class="pub" data-year="2022">
+  <span class="pub-authors">Brasseur M.</span> (2022).
+  <span class="pub-title">Experimental study of the Richtmyer-Meshkov instability in spherical geometry</span>. <em>Aix-Marseille Université</em>. <a class="tag tag-ref" href="https://www.theses.fr/s226927"><span class="tag-key">theses.fr</span><span class="tag-val">s226927</span></a>
+</li>
+<li class="pub" data-year="2021">
+  <span class="pub-authors">Biasiori-Poulanges L.</span> (2021).
+  <span class="pub-title">Shock-induced aerodynamic fragmentation of a liquid droplet</span>. <em>Université de Poitiers</em>. <a class="tag tag-ref" href="https://www.theses.fr/2021ESMA0002"><span class="tag-key">theses.fr</span><span class="tag-val">2021ESMA0002</span></a>
+</li>
+<li class="pub" data-year="2020">
+  <span class="pub-authors">Trummler T.</span> (2020).
+  <span class="pub-title">Numerical investigations of cavitation phenomena</span>. <em>Technische Universität München</em>. <a class="tag" href="https://mediatum.ub.tum.de/doc/1543746/1543746.pdf">PDF</a>
+</li>
+<li class="pub" data-year="2019">
+  <span class="pub-authors">Veilleux J.-C.</span> (2019).
+  <span class="pub-title">Pressure and Stress Transients in Autoinjector Devices</span>. <em>California Institute of Technology</em>. <a class="tag tag-ref" href="https://doi.org/10.7907/VJSH-TF65"><span class="tag-key">DOI</span><span class="tag-val">10.7907/VJSH-TF65</span></a>
+</li>
+<li class="pub" data-year="2018">
+  <span class="pub-authors">Marty A.</span> (2018).
+  <span class="pub-title">Propagation d&#39;une onde de choc dans un système de canaux à géométrie complexe : expériences et simulations</span>. <em>Aix-Marseille Université</em>. <a class="tag tag-ref" href="https://www.theses.fr/2018AIXM0678"><span class="tag-key">theses.fr</span><span class="tag-val">2018AIXM0678</span></a>
+</li>
+<li class="pub" data-year="2017">
+  <span class="pub-authors">Schmidmayer K.</span> (2017).
+  <span class="pub-title">Simulation de l&#39;atomisation d&#39;une goutte par un écoulement à grande vitesse</span>. <em>Aix-Marseille Université</em>. <a class="tag tag-ref" href="https://www.theses.fr/2017AIXM0339"><span class="tag-key">theses.fr</span><span class="tag-val">2017AIXM0339</span></a>
+</li>
+
+    </ol>
+  </section>
+  <section class="pub-section" id="conferences">
+    <h2>Conferences</h2>
+    <ol class="pub-list" reversed><li class="pub" data-year="2026">
+  <span class="pub-authors">Favrie N., Schmidmayer K.</span> (2026).
+  <span class="pub-title">A unified diffuse-interface model for compressible multiphase flows with elasto-viscoplastic solids and irreversible compaction</span>. <em>MultiMat 2026, 12th International Conference on Numerical Methods for Multi-Material Fluid Flow, Biarritz, France</em>. <a class="tag tag-ref" href="https://inria.hal.science/hal-05749778"><span class="tag-key">HAL</span><span class="tag-val">hal-05749778</span></a>
+</li>
+<li class="pub" data-year="2026">
+  <span class="pub-authors">Martin de Fourchambault L., Schmidmayer K., Petitpas F.</span> (2026).
+  <span class="pub-title">Assessing numerical schemes for multi-velocity multiphase compressible flows</span>. <em>MultiMat 2026, 12th International Conference on Numerical Methods for Multi-Material Fluid Flow, Biarritz, France</em>. <a class="tag tag-ref" href="https://inria.hal.science/hal-05749544"><span class="tag-key">HAL</span><span class="tag-val">hal-05749544</span></a>
+</li>
+<li class="pub" data-year="2026">
+  <span class="pub-authors">Favrie N., Schmidmayer K.</span> (2026).
+  <span class="pub-title">A multiphase compressible flow model including elasto-viscoplastic solids with irreversible compaction</span>. <em>17th World Congress on Computational Mechanics (WCCM), 10th European Congress on Computational Methods in Applied Sciences and Engineering (ECCOMAS), Munich, Germany</em>. <a class="tag tag-ref" href="https://inria.hal.science/hal-05705558"><span class="tag-key">HAL</span><span class="tag-val">hal-05705558</span></a>
+</li>
+<li class="pub" data-year="2026">
+  <span class="pub-authors">Saini M., Denner F., Schmidmayer K.</span> (2026).
+  <span class="pub-title">A pressure non-equilibrium two-phase model for simulating bubble clusters in heterogeneous cavitation</span>. <em>17th World Congress on Computational Mechanics (WCCM), 10th European Congress on Computational Methods in Applied Sciences and Engineering (ECCOMAS), Munich, Germany</em>. <a class="tag tag-ref" href="https://inria.hal.science/hal-05705512"><span class="tag-key">HAL</span><span class="tag-val">hal-05705512</span></a>
+</li>
+<li class="pub" data-year="2026">
+  <span class="pub-authors">Handa F., Favrie N., Renaud A., Heuzé T.</span> (2026).
+  <span class="pub-title">Hyperbolic Eulerian gradient damage modeling of dynamic brittle fracture at finite strain</span>. <em>17th World Congress on Computational Mechanics (WCCM), 10th European Congress on Computational Methods in Applied Sciences and Engineering (ECCOMAS), Munich, Germany</em>.
+</li>
+<li class="pub" data-year="2026">
+  <span class="pub-authors">Ade-Onojobi A., Bokman G. T., Sieber A., Brewer C., Lukić B., Shakya G., Belau M., Kühl A., Schlötter M., Supponen O., Schmidmayer K.</span> (2026).
+  <span class="pub-title">Investigating kidney-stone erosion induced by dual-bubble dynamics: experiments and simulations</span>. <em>17th World Congress on Computational Mechanics (WCCM), 10th European Congress on Computational Methods in Applied Sciences and Engineering (ECCOMAS), Munich, Germany</em>. <a class="tag tag-ref" href="https://inria.hal.science/hal-05705538"><span class="tag-key">HAL</span><span class="tag-val">hal-05705538</span></a>
+</li>
+<li class="pub" data-year="2026">
+  <span class="pub-authors">Sieber A., Brewer C., Lukić B., Shakya G., Bokman G. T., Belau M., Kühl A., Schlötter M., Schmidmayer K., Supponen O.</span> (2026).
+  <span class="pub-title">Linking dynamics to damage in human kidney stone fragmentation: synchrotron high-speed X-ray imaging and tomography</span>. <em>25th Annual International Symposium on Therapeutic Ultrasound, ISTU 26, Trondheim, Norway</em>. <a class="tag tag-ref" href="https://inria.hal.science/hal-05705496"><span class="tag-key">HAL</span><span class="tag-val">hal-05705496</span></a>
+</li>
+<li class="pub" data-year="2026">
+  <span class="pub-authors">Saini M., Denner F., Schmidmayer K.</span> (2026).
+  <span class="pub-title">Subgrid cavitation model based on a pressure disequilibrium formulation</span>. <em>Proceedings of the Canadian Society for Mechanical Engineering International Congress, 33rd Annual Conference of the Computational Fluid Dynamics Society of Canada, Vancouver, Canada</em>. <a class="tag tag-ref" href="https://inria.hal.science/hal-05642729"><span class="tag-key">HAL</span><span class="tag-val">hal-05642729</span></a>
+</li>
+<li class="pub" data-year="2026">
+  <span class="pub-authors">Taglialatela F. E., De Stefano G., Schmidmayer K.</span> (2026).
+  <span class="pub-title">Towards LES of multiphase compressible flows</span>. <em>DLES15, The 15th ERCOFTAC workshop on Direct and Large Eddy Simulation, Delft, Netherlands</em>. <a class="tag tag-ref" href="https://inria.hal.science/hal-05642671"><span class="tag-key">HAL</span><span class="tag-val">hal-05642671</span></a>
+</li>
+<li class="pub" data-year="2026">
+  <span class="pub-authors">Saini M., Denner F., Schmidmayer K.</span> (2026).
+  <span class="pub-title">A pressure non-equilibrium two-phase model for simulating bubble clusters in heterogeneous cavitation</span>. <em>Rencontre du Non-Linéaire 2026, Paris, France</em>. <a class="tag tag-ref" href="https://hal.science/hal-05579646"><span class="tag-key">HAL</span><span class="tag-val">hal-05579646</span></a>
+</li>
+<li class="pub" data-year="2026">
+  <span class="pub-authors">Tripathi M., Khare P.</span> (2026).
+  <span class="pub-title">Shock-Induced Atomization and Vaporization of Liquid Fuel Droplet Clouds</span>. <em>AIAA SCITECH 2026 Forum, Orlando, USA</em>. <a class="tag tag-ref" href="https://doi.org/10.2514/6.2026-1734"><span class="tag-key">DOI</span><span class="tag-val">10.2514/6.2026-1734</span></a>
+</li>
+<li class="pub" data-year="2025">
+  <span class="pub-authors">Taglialatela F. E., De Stefano G.</span> (2025).
+  <span class="pub-title">CFD Prediction of Tandem Water Columns Aerobreakup Using Open-Source Codes</span>. <em>ICCSA 2025 - International Conference on Computational Science and Its Applications, Istanbul, Turkey</em>. <a class="tag tag-ref" href="https://doi.org/10.1007/978-3-031-97000-9_3"><span class="tag-key">DOI</span><span class="tag-val">10.1007/978-3-031-97000-9_3</span></a>
+</li>
+<li class="pub" data-year="2025">
+  <span class="pub-authors">Schmidmayer K., Petitpas F., Favrie N.</span> (2025).
+  <span class="pub-title">ECOGEN: An open-source software for simulation of cavitation bubble dynamics</span>. <em>Workshop on Bubbles in Complex Media and Confinements, Monte Verità, Switzerland</em>.
+</li>
+<li class="pub" data-year="2025">
+  <span class="pub-authors">Schmidmayer K., Bokman G. T., Sieber A., Ade-Onojobi A., Lukić B., Shakya G., Kühl A., Schlötter M., Belau M., Supponen O.</span> (2025).
+  <span class="pub-title">Exploring the interplay of stone-attached and distant cavitation bubbles during extracorporeal shock wave lithotripsy</span>. <em>12th International Conference on Multiphase Flow, ICMF 2025, Toulouse, France</em>.
+</li>
+<li class="pub" data-year="2025">
+  <span class="pub-authors">Fiorini S., Bokman G. T., Prasanna A., Shakya G., Nikolaou S., Lukić B., Rack A., Supponen O.</span> (2025).
+  <span class="pub-title">Shock focusing and vapor nucleation in perfluorocarbon droplets</span>. <em>12th International Conference on Multiphase Flow, ICMF 2025, Toulouse, France</em>.
+</li>
+<li class="pub" data-year="2023">
+  <span class="pub-authors">Zheng J., He Y., Zhao M.</span> (2023).
+  <span class="pub-title">Numerical study of underwater implosion of spherical pressure hull on deep-sea submersibles</span>. <em>ASME 2023 42nd International Conference on Ocean, Offshore and Arctic Engineering, Melbourne, Australia</em>.
+</li>
+<li class="pub" data-year="2023">
+  <span class="pub-authors">Sun S., Zhao M.</span> (2023).
+  <span class="pub-title">Numerical simulation of chain-reaction implosions and analysis of different implosion beginning positions</span>. <em>ASME 2023 42nd International Conference on Ocean, Offshore and Arctic Engineering, Melbourne, Australia</em>.
+</li>
+<li class="pub" data-year="2023">
+  <span class="pub-authors">Schmidmayer K., Biasiori-Poulanges L.</span> (2023).
+  <span class="pub-title">On bubble cloud growth in shock-droplet interaction</span>. <em>11th International Conference on Multiphase Flow, ICMF 2023, Kobe, Japan</em>.
+</li>
+<li class="pub" data-year="2023">
+  <span class="pub-authors">Daniel E., Jourdan G., Mariani C., Petitpas F.</span> (2023).
+  <span class="pub-title">Residual overpressure in a cavity – experimental and numerical results</span>. <em>34th International Symposium on Shock Waves, ISSW34, Daegu, Korea</em>.
+</li>
+<li class="pub" data-year="2022">
+  <span class="pub-authors">Feng K., Eshraghi J., Vlachos P., Gomez H.</span> (2022).
+  <span class="pub-title">Computational modeling of air bubble oscillations in a cavitation-induced acoustic field using multi-phase multicomponent model</span>. <em>75th Annual Meeting of the APS Division of Fluid Dynamics, Bulletin of the American Physical Society 67(19), Indianapolis, USA</em>.
+</li>
+<li class="pub" data-year="2022">
+  <span class="pub-authors">Schmidmayer K., Cazé J., Petitpas F., Daniel E., Favrie N.</span> (2022).
+  <span class="pub-title">Modelling interactions of waves with diffused interfaces</span>. <em>10th International Conference on Numerical Methods for Multi-Material Fluid Flow, MultiMat 2022, Zürich, Switzerland</em>.
+</li>
+<li class="pub" data-year="2022">
+  <span class="pub-authors">Cazé J., Petitpas F., Daniel E., Le Martelot S., Queguineur M.</span> (2022).
+  <span class="pub-title">Modeling and Simulation of the Cavitation Phenomenon in a Turbopump: A Multiphase Approach</span>. <em>ASME Turbo Expo 2022 - Turbomachinery Technical Conference and Exposition, Rotterdam, Netherlands</em>. <a class="tag tag-ref" href="https://doi.org/10.1115/GT2022-78025"><span class="tag-key">DOI</span><span class="tag-val">10.1115/GT2022-78025</span></a>
+</li>
+<li class="pub" data-year="2022">
+  <span class="pub-authors">Schmidmayer K.</span> (2022).
+  <span class="pub-title">Modeling and simulation of bubble dynamics in the diffuse-interface framework</span>. <em>Workshop on cavitation, bubble dynamics and mass transfer, Strasbourg, France</em>.
+</li>
+<li class="pub" data-year="2019">
+  <span class="pub-authors">Dorschner B., Schmidmayer K., Biasiori-Poulanges L., El-Rabii H., Colonius T.</span> (2019).
+  <span class="pub-title">Shock-induced atomization of water droplets</span>. <em>72nd Annual Meeting of the APS Division of Fluid Dynamics, Seattle, USA</em>.
+</li>
+<li class="pub" data-year="2019">
+  <span class="pub-authors">Schmidmayer K., Colonius T.</span> (2019).
+  <span class="pub-title">A comparative study on interface-capturing models and schemes to solve bubble dynamics and cavitation</span>. <em>10th International Conference on Multiphase Flow, ICMF 2019, Rio de Janeiro, Brazil</em>.
+</li>
+<li class="pub" data-year="2019">
+  <span class="pub-authors">Marty A., Jourdan G., Houas L., Mariani C., Daniel E., Biamino L., Leriche D.</span> (2019).
+  <span class="pub-title">Shock wave mitigation propagating through a cavity</span>. <em>32nd International Symposium on Shock Waves, ISSW32, Singapore</em>.
+</li>
+<li class="pub" data-year="2018">
+  <span class="pub-authors">Schmidmayer K., Colonius T.</span> (2018).
+  <span class="pub-title">Simulation of the collapse of a vapor bubble near or attached to a rigid surface</span>. <em>71st Annual Meeting of the APS Division of Fluid Dynamics, Atlanta, USA</em>.
+</li>
+<li class="pub" data-year="2018">
+  <span class="pub-authors">Schmidmayer K., Marty A., Petitpas F., Daniel E.</span> (2018).
+  <span class="pub-title">ECOGEN, an open-source tool dedicated to multiphase compressible multiphysics flows</span>. <em>53rd 3AF International Conference on applied Aerodynamics, Salon-de-Provence, France</em>. <a class="tag tag-ref" href="https://doi.org/10.48550/arXiv.1805.01363"><span class="tag-key">DOI</span><span class="tag-val">10.48550/arXiv.1805.01363</span></a>
+</li>
+<li class="pub" data-year="2018">
+  <span class="pub-authors">Schmidmayer K., Petitpas F., Daniel E.</span> (2018).
+  <span class="pub-title">Simulation of the atomization of a droplet by a high-speed flow</span>. <em>Bulletin of the American Physical Society, APS March Meeting 2018, Los Angeles, USA</em>.
+</li>
+<li class="pub" data-year="2016">
+  <span class="pub-authors">Schmidmayer K., Petitpas F., Daniel E.</span> (2016).
+  <span class="pub-title">A model and numerical method for high speed flows with capillary, viscous and heat conduction effects</span>. <em>46th AIAA Fluid Dynamics Conference, Washington, USA</em>.
+</li>
+
+    </ol>
+  </section>
+  <section class="pub-section" id="preprints">
+    <h2>Preprints</h2>
+    <ol class="pub-list" reversed><li class="pub" data-year="2026">
+  <span class="pub-authors">Fiorini S., Bokman G. T., Prasanna A., Nikolaou S., Ichihara S., Lukić B., Rack A., Tagawa Y., Supponen O.</span> (2026).
+  <span class="pub-title">Cavitation by phase shift of focused shock waves inside a droplet</span>. <em>arXiv:2603.19990</em>. <a class="tag tag-ref" href="https://doi.org/10.48550/arXiv.2603.19990"><span class="tag-key">DOI</span><span class="tag-val">10.48550/arXiv.2603.19990</span></a>
+</li>
+
+    </ol>
+  </section>
+</div>
+
+  </main>
+  <footer class="site-footer">
+  <div class="wrap footer-grid">
+    <div>
+      <img class="footer-logo" src="/ECOGEN/assets/images/LOGO-SIMPLE-ECOGEN-Bleu.png" alt="ECOGEN" width="120" height="31">
+      <p>An open-source CFD platform for numerical simulation of multiphase compressible flows.</p>
+      <p>Developed by <a href="https://code-mphi.fr/">Code-mΦ</a> members. Distributed under the <a href="https://www.gnu.org/licenses/gpl-3.0">GNU GPL v3</a>.</p>
+    </div>
+    <div>
+      <h2>Documentation</h2>
+      <ul>
+        <li><a href="https://code-mphi.github.io/ECOGEN/docs/sphinx_docs/index.html">User documentation</a></li>
+        <li><a href="https://code-mphi.github.io/ECOGEN/docs/sphinx_docs/Chap2_installation_Chapter.html">Installation guide</a></li>
+        <li><a href="https://code-mphi.github.io/ECOGEN/docs/sphinx_docs/Chap4_tutorials_Chapter.html">Tutorials</a></li>
+        <li><a href="https://code-mphi.github.io/ECOGEN/docs/doxygen_docs/index.html">Code reference (Doxygen)</a></li>
+      </ul>
+    </div>
+    <div>
+      <h2>Project</h2>
+      <ul>
+        <li><a href="https://github.com/code-mphi/ECOGEN">Source code on GitHub</a></li>
+        <li><a href="/ECOGEN/ressources/">Download</a></li>
+        <li><a href="/ECOGEN/publications/">How to cite ECOGEN</a></li>
+        <li><a href="/ECOGEN/help/">Help and contributions</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="wrap credits">
+    <span>Original design:</span>
+    <a class="lama" href="mailto:productiondulama@gmail.com" title="Production du Lama"><img src="/ECOGEN/assets/images/productionduLama-small.png" alt="Production du Lama" width="42" height="36"></a>
+  </div>
 </footer>
-  </body>
-</html>
 
+</body>
+</html>
