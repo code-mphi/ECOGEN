@@ -176,9 +176,8 @@ pre { background: var(--bg-soft); border: 1px solid var(--line); border-radius: 
 
 /* Inner pages */
 .page { padding-top: 32px; padding-bottom: 64px; max-width: 900px; }
-/* Gallery: full width for the media beside their text; running text keeps the 860px measure. */
-.page.gallery-page { max-width: var(--wrap); }
-.gallery-page > p, .gallery-section > p { max-width: 860px; }
+/* Gallery: same width as the other pages; the introduction figure is centred. */
+.gallery-page > .figure { margin: 24px auto; }
 .page-title { font-size: clamp(1.9rem, 5vw, 2.8rem); margin: 0 0 16px; }
 
 /* Publications */
@@ -296,7 +295,7 @@ pre { background: var(--bg-soft); border: 1px solid var(--line); border-radius: 
 .letter-block.has-image .letter-text { flex: 1 1 auto; }
 .letter-block.has-image img { flex: 0 0 auto; max-width: 30%; max-height: 220px; width: auto; height: auto; border-radius: 6px; }
 .letter-block.wide .letter-body { display: block; }
-.letter-block.wide img { max-width: min(100%, 720px); max-height: none; margin-top: 8px; border: 1px solid var(--line); }
+.letter-block.wide img { display: block; max-width: min(100%, 720px); max-height: none; margin: 8px auto 0; border: 1px solid var(--line); }
 @media (max-width: 640px) {
   .letter-block.has-image .letter-body { flex-direction: column; }
   .letter-block.has-image:not(.wide) img { max-width: 70%; align-self: center; }
